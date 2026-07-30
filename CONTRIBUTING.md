@@ -43,7 +43,7 @@ subagent 基于文档骨架模板填充内容：
 | 反向文件索引 | [scripts/output/file-index.md](scripts/output/file-index.md) | 文件 → W### ID 列表 | subagent 添加文件条目 |
 | 目录索引 | [docs/INDEX.md](docs/INDEX.md) | 目录 → 文件列表 | 执行 `python scripts/docs_index.py` 自动生成 |
 
-W### ID 是双索引的锚点：CHANGELOG 按 W### 顺序记录变更，file-index 按文件记录被哪些 W### 修改过。详细规范见 [双索引可追溯改造](docs/10-方法论沉淀/双索引可追溯改造.md)。
+W### ID 是双索引的锚点：CHANGELOG 按 W### 顺序记录变更，file-index 按文件记录被哪些 W### 修改过。
 
 ---
 
@@ -64,4 +64,3 @@ W### ID 是双索引的锚点：CHANGELOG 按 W### 顺序记录变更，file-ind
 - [CHANGELOG.md](CHANGELOG.md)：变更日志（正向时间线）
 - [scripts/output/file-index.md](scripts/output/file-index.md)：反向文件索引
 - [docs/00-导读/项目说明.md](docs/00-导读/项目说明.md)：项目说明与协作流程
-- [docs/10-方法论沉淀/双索引可追溯改造.md](docs/10-方法论沉淀/双索引可追溯改造.md)：双索引方法论
