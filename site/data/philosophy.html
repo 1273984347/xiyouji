@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哲学与心性 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+        }
+        table.data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 8px;
+            padding: 22px 24px;
+            margin-top: 14px;
+        }
+        .insight-box .box-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed var(--accent-soft);
+        }
+        .insight-box .box-content {
+            font-size: 0.95rem;
+            color: var(--ink);
+            line-height: 1.85;
+        }
+        .insight-box .box-content strong { color: var(--accent); }
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .map-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .map-card.alt { border-left-color: var(--accent-4); }
+        .map-card.alt2 { border-left-color: var(--accent-3); }
+        .map-card.alt3 { border-left-color: var(--accent); }
+        .map-card .map-label {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .map-card.alt .map-label { color: var(--accent-4); }
+        .map-card.alt2 .map-label { color: var(--accent-3); }
+        .map-card.alt3 .map-label { color: var(--accent); }
+        .map-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .map-card .map-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .map-card .map-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 16px;
+            grid-column: 1 / -1;
+        }
+        .summary-card .map-label {
+            color: var(--accent);
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .summary-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--ink);
+        }
+        .summary-card .map-row {
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 280px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 24px;
+        }
+        .footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 6px;
+        }
+        .footer a:hover { text-decoration: underline; }
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        .narrative {
+            font-size: 0.92rem;
+            line-height: 1.85;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .narrative strong { color: var(--ink); font-weight: 600; }
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        /* heatmap cell */
+        .heat-cell {
+            transition: opacity 0.15s;
+            cursor: pointer;
+        }
+        .heat-cell:hover { opacity: 0.7; }
+        @media (max-width: 720px) {
+            .hero h1 { font-size: 1.6rem; }
+            .hero .subtitle { font-size: 0.78rem; letter-spacing: 0.15em; }
+            .section { padding: 18px; }
+            .kpi-card .value { font-size: 1.5rem; }
+            .map-grid { grid-template-columns: 1fr; }
+            table.data-table { font-size: 0.78rem; }
+            table.data-table th, table.data-table td { padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            .hero { padding: 36px 16px 28px; }
+            .hero h1 { font-size: 1.4rem; }
+            .container { padding: 0 12px; }
+            .section { padding: 14px; }
+            .chart-block { padding: 12px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>哲学与心性 · 心猿意马的修心寓言</h1>
+        <div class="subtitle">PHILOSOPHY &amp; MIND CULTIVATION OF XIYOUJI</div>
+        <div class="tagline">纵→压→悟→觉——一部降伏心猿意马的修心寓言。</div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../dashboard.html">仪表盘</a>
+            <span class="sep">/</span>
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <span class="current">哲学与心性</span>
+        </nav>
+
+        <div class="notice">
+            本页基于 G 类「哲学与心性」脚本生成，包含 3 份 JSON 数据：心猿心性曲线、修心寓言图、整体统计。所有图表支持 hover tooltip。
+        </div>
+
+        <!-- 导言 -->
+        <section class="section">
+            <h2 class="section-title">导言 · 西游的修心寓言本质</h2>
+            <div class="section-sub">INTRODUCTION · Xiyouji as a Cultivation Allegory</div>
+            <p style="font-size:0.95rem;line-height:1.8;color:var(--ink);margin-bottom:14px;">
+                《西游记》不仅是神魔冒险小说·更是一部完整的<strong>修心寓言</strong>。本页从两个维度剖析其哲学本质：
+                <strong style="color:var(--accent);">心猿心性曲线</strong>（悟空 6 阶段心性演变）与
+                <strong style="color:var(--accent-2);">修心寓言图</strong>（八十一难对应佛教 8 种心性考验）。
+                核心命题：所谓取经·其实是<strong style="color:var(--accent-4);">降伏心猿意马</strong>的过程。
+            </p>
+
+            <p class="narrative">
+                <strong>核心立论：</strong>《西游记》的真正主角不是唐僧·而是<strong>悟空的"心"</strong>。
+                所谓"心猿"·即佛教术语中躁动不安的心——悟空的 6 阶段心性演变（纵→压→悟→觉）
+                完整呈现了一个凡夫从放纵到觉悟的修心过程。
+                而八十一难并非外部劫难·而是<strong>内心障碍的外化</strong>——
+                每一个妖怪对应一种内心障碍（贪/嗔/痴/慢/疑/色/名/死）·每一次降妖都是一次心性破执。
+            </p>
+
+            <p class="narrative">
+                <strong>双重视角：</strong>本页通过两个互补维度呈现这一修心寓言：
+                <strong style="color:var(--accent);">微观视角</strong>——悟空个人的 5 维度心性演变（嗔/慢/贪/智/律）；
+                <strong style="color:var(--accent-2);">宏观视角</strong>——八十一难对应 8 种心性考验的整体映射。
+                两者通过<strong style="color:var(--accent-3);">第 19 回的心经</strong>建立思想主线——
+                心经讲"空性"·八十一难讲"破执"·"色不异空"即破执归真。
+            </p>
+
+            <div style="margin-bottom:18px;">
+                <span class="data-badge">3 份 JSON 数据</span>
+                <span class="data-badge">6 心性阶段</span>
+                <span class="data-badge">8 寓言类别</span>
+                <span class="data-badge">81 难映射</span>
+                <span class="data-badge">5 心性维度</span>
+                <span class="data-badge">19 回心经传授</span>
+                <span class="data-badge">4 张图表</span>
+                <span class="data-badge">D3.js v7</span>
+                <span class="data-badge">fetch + EMBEDDED fallback</span>
+            </div>
+
+            <div class="map-grid">
+                <div class="map-card alt3">
+                    <div class="map-label">CONCEPT 1</div>
+                    <div class="map-title">心猿心性曲线 · Mind Monkey Curve</div>
+                    <div class="map-row">悟空 6 阶段心性演变（出世→大闹→服从→平衡→觉悟→成佛）·5 维度：嗔/慢/贪/智/律。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label">CONCEPT 2</div>
+                    <div class="map-title">修心寓言图 · Cultivation Allegory</div>
+                    <div class="map-row">八十一难对应佛教 8 种心性考验（贪/嗔/痴/慢/疑/色/名/死）·每难皆是一次心性破执。</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label">CORE INSIGHT</div>
+                    <div class="map-title">心性修炼 · 非冒险故事</div>
+                    <div class="map-row">八十一难对应《多心经》八十一种相·心经（第 19 回传授）是全书思想主线·非冒险故事。</div>
+                </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+                数据来源：scripts/G_哲学与心性/ 目录生成的 3 份 JSON 输出，本页 fetch 失败时自动回退到内嵌 EMBEDDED 数据，支持 file:// 协议双击打开。
+            </p>
+        </section>
+
+        <!-- KPI 卡片 -->
+        <div class="kpi-row" id="kpiRow">
+            <div class="kpi-card">
+                <div class="label">MIND PHASES · 心性阶段</div>
+                <div class="value">6 阶段</div>
+                <div class="desc">心猿演变：出世→大闹→服从→平衡→觉悟→成佛</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">ALLEGORY · 寓言类别</div>
+                <div class="value">8 类</div>
+                <div class="desc">八十一难对应佛教 8 种心性考验（贪/嗔/痴/慢/疑/色/名/死）</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">HARDSHIPS · 八十一难</div>
+                <div class="value">81 难</div>
+                <div class="desc">心性考验总数·嗔怒最多（15 次）·名利最少（7 次）</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">HEART SUTRA · 心经章节</div>
+                <div class="value">第 19 回</div>
+                <div class="desc">乌巢禅师传授心经·是取经团队的指导思想主线</div>
+            </div>
+        </div>
+
+        <p class="narrative" style="background:#fdfaf4;border-left:4px solid var(--accent-soft);padding:14px 18px;border-radius:0 6px 6px 0;margin-bottom:24px;">
+            <strong>KPI 概览说明：</strong>
+            <strong style="color:var(--accent);">6 心性阶段</strong>——悟空从"石猴出世"到"成佛·斗战胜佛"的完整修心轨迹·
+            每阶段对应不同的心性状态（嗔/慢/贪/智/律的 5 维度评分）；
+            <strong style="color:var(--accent-2);">8 寓言类别</strong>——八十一难按佛教心性考验分为 8 类·
+            对应三毒（贪/嗔/痴）+ 五盖（慢/疑）+ 五欲（色/名）+ 生死；
+            <strong style="color:var(--accent-4);">81 难</strong>——心性考验总数·
+            与《多心经》的"八十一种相"对应·非偶然数字；
+            <strong style="color:var(--accent-3);">第 19 回心经</strong>——乌巢禅师传授·
+            是全书思想主线·"色不异空·空不异色"即破执归真。
+        </p>
+
+        <!-- Section 1: 心猿心性曲线 -->
+        <section class="section">
+            <h2 class="section-title">壹 · 心猿心性曲线</h2>
+            <div class="section-sub">MIND MONKEY CURVE · 悟空 6 阶段心性演变（5 维度）</div>
+            <div class="definition" id="def-monkey">
+                <strong>概念定义：</strong>心猿意马——佛教术语·指躁动不安的心·悟空"心猿"的演变是全书核心修心过程。心性曲线呈"纵→压→悟→觉"四阶段·非简单线性·而是螺旋上升。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>5 维度评分体系：</strong>anger_level（嗔怒·0-10）/ pride_level（傲慢·0-10）/ greed_level（贪欲·0-10）/
+                wisdom_level（智慧·0-10）/ restraint_level（自律·0-10）。
+                关键转折：<strong style="color:var(--accent);">六耳猕猴事件（第 58 回）</strong>是真假美猴王=降伏二心·是全书心性转折点。
+                悟空从"齐天大圣"到"斗战胜佛"·是从<strong style="color:var(--accent-2);">"我执"到"无我"</strong>的修心过程。
+            </p>
+
+            <p class="narrative">
+                <strong>四阶段解读：</strong>
+                <strong style="color:var(--accent);">纵</strong>（出世+大闹天宫）——天然真心因放纵而走向嗔怒峰值（anger 9）·需五行山镇压；
+                <strong style="color:var(--accent-3);">压</strong>（取经前期·服从期）——紧箍咒驯化·外力约束心猿·但常爆发嗔怒（anger 7）；
+                <strong style="color:var(--accent-2);">悟</strong>（取经中期·平衡期）——六耳猕猴事件降伏二心·智慧开始增长（wisdom 7）；
+                <strong style="color:var(--accent-4);">觉</strong>（觉悟期+成佛）——心猿归一·从外力约束转为内力自觉·最终紧箍自褪·成佛。
+            </p>
+
+            <p class="narrative">
+                <strong>非简单线性·而是螺旋上升：</strong>心性曲线的核心特征是<strong>螺旋上升</strong>而非线性下降——
+                大闹天宫时 wisdom_level 反而下降到 4（放纵导致智慧蒙蔽）·取经前期 restraint_level 仅 4（外力强压而非内化）·
+                直到六耳猕猴事件后·wisdom 与 restraint 同步跃升（7→9·7→9）——这是"降伏二心"后的内在转化·
+                而非外部约束的延续。最终成佛时 anger=0·wisdom=10·restraint=10·达到心性的终极平衡。
+            </p>
+
+            <p class="narrative">
+                <strong>关键转折点 · 六耳猕猴事件（第 58 回）：</strong>
+                真假美猴王=降伏二心·是全书心性转折点。在此之前·悟空的修行是被动的（外力紧箍咒驯化·restraint 仅 1→4）；
+                在此之后·悟空开始<strong>主动内化</strong>执行控制（restraint 跃升 4→7→9→10）。
+                这一转折揭示了修心的本质——<strong style="color:var(--accent);">真正的觉悟始于"降伏二心"</strong>·
+                即不再有内在的矛盾与分裂·心猿归一·从外力约束转为内力自觉。
+                这正是"心猿彻底降伏"的开始·而非终点。
+            </p>
+
+            <!-- 图表 1：5 维度折线图 -->
+            <div class="chart-block">
+                <div class="chart-title">心猿心性 6 阶段 · 5 维度演变折线图</div>
+                <div class="chart-caption">X 轴：6 心性阶段 / Y 轴：0-10 / 5 条折线：嗔怒 anger / 傲慢 pride / 贪欲 greed / 智慧 wisdom / 自律 restraint</div>
+                <svg id="chart-monkey-line" class="chart-svg" width="100%" height="420"></svg>
+                <div class="legend-row" id="line-legend">
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent);"></span>anger_level 嗔怒</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-3);"></span>pride_level 傲慢</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-2);"></span>greed_level 贪欲</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-4);"></span>wisdom_level 智慧</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--ink-soft);"></span>restraint_level 自律</span>
+                </div>
+            </div>
+
+            <!-- 图表 3：心性维度热力图 -->
+            <div class="chart-block">
+                <div class="chart-title">心性维度演变热力图（6 阶段 × 5 维度）</div>
+                <div class="chart-caption">行：6 心性阶段 / 列：5 维度 / 颜色深浅表示数值（深色=高·浅色=低）· hover 查看精确数值</div>
+                <svg id="chart-monkey-heat" class="chart-svg" width="100%" height="340"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:#fdfaf4;"></span>0-2 低</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;opacity:0.5;"></span>3-4 中低</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;"></span>5-6 中</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#c8463a;opacity:0.7;"></span>7-8 中高</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#c8463a;"></span>9-10 高</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">6 阶段心性详表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="phase-table">
+                    <thead>
+                        <tr>
+                            <th>阶段</th>
+                            <th>章节</th>
+                            <th>心性状态</th>
+                            <th>嗔怒</th>
+                            <th>傲慢</th>
+                            <th>贪欲</th>
+                            <th>智慧</th>
+                            <th>自律</th>
+                            <th>关键事件</th>
+                            <th>寓言象征</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">心性曲线分析</h3>
+            <ol class="insights-list" id="monkey-insights-list"></ol>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">哲学洞察（六则）</h3>
+            <ol class="insights-list" id="philosophical-insights-list"></ol>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">现代对应 · 心性修炼的现代映射</h3>
+            <div class="map-grid" id="modern-grid">
+                <div class="map-card alt3">
+                    <div class="map-label">ANGER MANAGEMENT</div>
+                    <div class="map-title">现代情绪管理</div>
+                    <div class="map-row">从冲动到克制的训练过程——对应悟空 anger_pattern 2→9→7→5→3→0 的下降轨迹。</div>
+                    <div class="map-row"><strong>对应阶段：</strong>大闹天宫→取经前期→成佛</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label">EGO DISSOLUTION</div>
+                    <div class="map-title">禅修/正念</div>
+                    <div class="map-row">从"我执"到"无我"的觉察训练——对应 pride_pattern 3→10→8→6→4→1 的稳定下降。</div>
+                    <div class="map-row"><strong>核心：</strong>从"齐天大圣"到"斗战胜佛"</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label">EXTERNAL → INTERNAL</div>
+                    <div class="map-title">纪律内化</div>
+                    <div class="map-row">从外部规则约束到内在自觉的转变——对应 restraint_pattern 1→1→4→7→9→10 的螺旋上升。</div>
+                    <div class="map-row"><strong>标志：</strong>紧箍自褪=完全内化</div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="box-title">关键洞察 · 心猿修心的螺旋上升</div>
+                <div class="box-content" id="monkey-insight-box">
+                    <p>心性曲线下降的不是<strong>"能力"</strong>而是<strong>"嗔怒"</strong>——悟空成佛后能力反而更强。</p>
+                    <p style="margin-top:8px;">修心不是消灭欲望·而是<strong>转化欲望</strong>：嗔怒→勇气·傲慢→自信·贪欲→愿力。这是"心猿归一·从外力约束转为内力自觉"的螺旋上升过程。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 修心寓言图 -->
+        <section class="section">
+            <h2 class="section-title alt-2">贰 · 修心寓言图</h2>
+            <div class="section-sub">CULTIVATION ALLEGORY · 八十一难对应佛教 8 种心性考验</div>
+            <div class="definition" id="def-allegory">
+                <strong>概念定义：</strong>八十一难并非单纯劫难·而是心性修炼的 81 种考验·对应《多心经》的修心次第。整本书是"降伏心猿意马"的修心寓言·非简单冒险故事。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>8 大寓言类别：</strong>贪欲考验（12）/ 嗔怒考验（15）/ 愚痴考验（10）/ 傲慢考验（8）/
+                猜忌考验（9）/ 情欲考验（11）/ 名利考验（7）/ 生死考验（9）·合计 <strong style="color:var(--accent);">81 难</strong>。
+                悟空主修<strong style="color:var(--accent);">嗔怒</strong>（15 难）·八戒主修<strong style="color:var(--accent-3);">情欲</strong>（11 难）·
+                唐僧主修<strong style="color:var(--accent-2);">愚痴</strong>（10 难）——每个人物对应不同的心性考验。
+            </p>
+
+            <p class="narrative">
+                <strong>8 类寓言的佛教对应：</strong>
+                <strong style="color:var(--accent);">三毒</strong>（贪/嗔/痴·共 37 难）——佛教三毒之首·是最根本的心性障碍·对应凡夫最基本的执着；
+                <strong style="color:var(--accent-3);">五盖</strong>（慢/疑·共 17 难）——佛教五盖之一·覆盖真心·阻碍觉悟；
+                <strong style="color:var(--accent-2);">五欲</strong>（色/名·共 18 难）——佛教五欲之一·对外物的执着；
+                <strong style="color:var(--accent-4);">生死</strong>（9 难）——佛教生死事大·是对生死的畏惧与执着。
+            </p>
+
+            <p class="narrative">
+                <strong>主修分工的逻辑：</strong>每个人物的心性短板决定其主修考验——
+                悟空生性<strong style="color:var(--accent);">嗔怒</strong>（ anger_pattern 峰值 9）·故遇嗔怒考验最多（15 难·占比 18.5%）；
+                八戒生性<strong style="color:var(--accent-3);">好色贪欲</strong>·故遇情欲考验最多（11 难·占比 13.6%）；
+                唐僧生性<strong style="color:var(--accent-2);">不明真相</strong>·故遇愚痴考验最多（10 难·占比 12.3%）。
+                这种分工揭示了修心寓言的<strong>个性化设计</strong>——每个角色的劫难都是为其量身定制的心性考验。
+            </p>
+
+            <p class="narrative">
+                <strong>难数分布的非对称性：</strong>八十一难的难数分布呈非对称形——
+                嗔怒考验最多（15 难·18.5%）·名利考验最少（7 难·8.6%）·两者相差 2.1 倍。
+                这种非对称揭示了<strong>取经团队的心性短板分布</strong>：
+                嗔怒是悟空的主修·故考验最多；名利是取经团队本已淡泊的部分·故考验最少。
+                三毒（贪/嗔/痴）合计 37 难·占 45.7%——印证佛教"三毒为根本烦恼"的教义·
+                也是西游以"破三毒"为核心的修心寓言设计的体现。
+            </p>
+
+            <div class="map-grid">
+                <div class="map-card alt3">
+                    <div class="map-label">HEART SUTRA</div>
+                    <div class="map-title">般若波罗蜜多心经</div>
+                    <div class="map-row"><strong>章节：</strong>第 19 回·乌巢禅师传授</div>
+                    <div class="map-row"><strong>作用：</strong>取经团队的"指导思想"·唐僧日诵心经</div>
+                    <div class="map-row"><strong>核心：</strong>"色不异空·空不异色·色即是空·空即是色"</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label">ALLEGORY PATTERN</div>
+                    <div class="map-title">心经与八十一难的对应</div>
+                    <div class="map-row"><strong>心经：</strong>讲"空性"</div>
+                    <div class="map-row"><strong>八十一难：</strong>讲"破执"</div>
+                    <div class="map-row"><strong>含义：</strong>破除对色（外物）的执着·回归空性（真心）</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label">CORE FINDINGS</div>
+                    <div class="map-title">主修心性分布</div>
+                    <div class="map-row"><strong>悟空：</strong>嗔怒考验 15 次（最多）</div>
+                    <div class="map-row"><strong>八戒：</strong>情欲考验 11 次</div>
+                    <div class="map-row"><strong>唐僧：</strong>愚痴考验 10 次·常因不明真相被骗</div>
+                </div>
+            </div>
+
+            <!-- 图表 2：8 类别条形图 -->
+            <div class="chart-block">
+                <div class="chart-title">修心寓言 8 类别 · 难数条形图（带心性障碍标签）</div>
+                <div class="chart-caption">X 轴：8 类别（贪/嗔/痴/慢/疑/色/名/死）/ Y 轴：难数 / 颜色按心性障碍类型 / bar 上方标注心性障碍标签</div>
+                <svg id="chart-allegory-bar" class="chart-svg" width="100%" height="420"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>三毒（贪/嗔/痴）</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-3);"></span>五盖（慢/疑）</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>五欲（色/名）</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>生死</span>
+                </div>
+            </div>
+
+            <!-- 图表 4：八十一难按类别饼图 -->
+            <div class="chart-block">
+                <div class="chart-title">八十一难按寓言类别占比 · 环形饼图</div>
+                <div class="chart-caption">8 类别占比·总数 81 难·hover 查看每类难数与心性障碍</div>
+                <svg id="chart-allegory-pie" class="chart-svg" width="100%" height="420"></svg>
+                <div class="legend-row" id="pie-legend"></div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8 类寓言详表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="allegory-table">
+                    <thead>
+                        <tr>
+                            <th>类别</th>
+                            <th>英文名</th>
+                            <th>难数</th>
+                            <th>心性障碍</th>
+                            <th>佛教对应</th>
+                            <th>修炼目标</th>
+                            <th>代表劫难</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">修心寓言核心发现</h3>
+            <ol class="insights-list" id="allegory-insights-list"></ol>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">心经与八十一难的对应关系</h3>
+            <div class="definition" style="border-left-color:var(--accent-2);background:#f0f6fa;">
+                <strong style="color:var(--accent-2);">般若波罗蜜多心经 · 第 19 回·乌巢禅师传授</strong><br>
+                <em style="color:var(--ink-soft);">"色不异空·空不异色·色即是空·空即是色"</em>
+            </div>
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:14px;line-height:1.8;">
+                心经是取经团队的<strong>"指导思想"</strong>·唐僧日诵心经。心经讲<strong style="color:var(--accent-2);">"空性"</strong>·
+                八十一难讲<strong style="color:var(--accent);">"破执"</strong>——两者构成对应关系。
+                心经的<strong>"八十一种相"</strong>对应八十一难·心经的<strong>"破执归真"</strong>对应修心次第。
+                每一次劫难都是一次对"色（外物）的执着"的破除·回归空性（真心）。
+            </p>
+
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label">SUTRA NAME</div>
+                    <div class="map-title">般若波罗蜜多心经</div>
+                    <div class="map-row"><strong>梵文：</strong>Prajñāpāramitā Hṛdaya</div>
+                    <div class="map-row"><strong>地位：</strong>大乘佛教最短经典·260 字</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label">SUTRA CHAPTER</div>
+                    <div class="map-title">第 19 回 · 乌巢禅师传授</div>
+                    <div class="map-row"><strong>传授者：</strong>乌巢禅师</div>
+                    <div class="map-row"><strong>受法者：</strong>唐三藏</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label">SUTRA ROLE</div>
+                    <div class="map-title">指导思想主线</div>
+                    <div class="map-row"><strong>作用：</strong>取经团队日诵心经</div>
+                    <div class="map-row"><strong>意义：</strong>西游的思想主线·非冒险故事</div>
+                </div>
+                <div class="summary-card">
+                    <div class="map-label">ALLEGORY MEANING</div>
+                    <div class="map-title">破执归真 · 从色到空</div>
+                    <div class="map-row">
+                        心经讲<strong>"空性"</strong>（一切法无自性）·八十一难讲<strong>"破执"</strong>（破除对外物的执着）——
+                        两者通过"色（外物）→ 空（真心）"的转化构成对应。
+                        八十一难是<strong style="color:var(--accent);">"色不异空"</strong>的实修次第——
+                        每一难破一执·每一难归一真·最终成佛（彻底归空）。
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="box-title">关键洞察 · 八十一难 = 修心次第</div>
+                <div class="box-content" id="allegory-insight-box">
+                    <p>八十一难的"难数"与《多心经》的<strong>"八十一种相"</strong>对应·非偶然数字。</p>
+                    <p style="margin-top:8px;">整部西游<strong>不是冒险故事</strong>·而是一部"降伏心猿意马"的修心寓言——每一次劫难对应一次心性破执·每一个妖怪对应一种内心障碍。</p>
+                    <p style="margin-top:8px;">心经（第 19 回）是<strong>思想主线</strong>·八十一难是<strong>实修次第</strong>·两者共同构成"色即是空·破执归真"的修心体系。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 综合结论 -->
+        <section class="section">
+            <h2 class="section-title alt-3">叁 · 综合结论 · 西游的哲学本质</h2>
+            <div class="section-sub">SYNTHESIS · The Philosophical Essence of Xiyouji</div>
+
+            <p style="font-size:0.95rem;line-height:1.85;color:var(--ink);margin-bottom:18px;">
+                从两个维度交叉观察·《西游记》的哲学本质是<strong>"心性修炼"</strong>——通过八十一难破除贪嗔痴慢疑·回归本心。
+                心猿曲线揭示悟空的心性演变（纵→压→悟→觉）·修心寓言图揭示八十一难与佛教心性考验的对应关系。
+                两者共同指向一个深层命题：<strong style="color:var(--accent);">所谓取经·其实是降伏心猿意马的过程</strong>。
+            </p>
+
+            <p class="narrative">
+                <strong>交叉验证：</strong>心猿曲线的<strong>微观视角</strong>与修心寓言图的<strong>宏观视角</strong>相互印证——
+                悟空的 anger_pattern（2→9→7→5→3→0）与八十一难中嗔怒考验占比最高（15 难·18.5%）形成对应·
+                印证悟空主修嗔怒；唐僧的"不明真相"与愚痴考验（10 难·12.3%）形成对应·印证唐僧主修愚痴。
+                这种微观与宏观的对应不是巧合·而是<strong>修心寓言的精心设计</strong>。
+            </p>
+
+            <p class="narrative">
+                <strong>心经作为思想主线：</strong>第 19 回乌巢禅师传授心经·是全书的思想主线。
+                心经讲<strong style="color:var(--accent-2);">"空性"</strong>（一切法无自性）·八十一难讲<strong style="color:var(--accent);">"破执"</strong>（破除对外物的执着）——
+                两者构成"色（外物）→ 空（真心）"的转化路径。
+                八十一难的"难数"与《多心经》的"八十一种相"对应·印证"修心次第"的精心编排。
+                最终成佛=彻底归空=紧箍自褪=心猿降伏——这是<strong>心性修炼的终极目标</strong>。
+            </p>
+
+            <p class="narrative">
+                <strong>修心 = 转化欲望·非消灭欲望：</strong>这是西游最深的哲学命题。
+                心性曲线下降的不是"能力"而是"嗔怒"——悟空成佛后能力反而更强（wisdom 10·restraint 10）。
+                修心不是消灭欲望·而是<strong>转化欲望</strong>：嗔怒→勇气·傲慢→自信·贪欲→愿力。
+                紧箍咒是外力·真正的解脱是紧箍自褪（成佛）——从外部纪律到内在自觉的转变·
+                这构成了"降伏心猿 = 转化心猿·而非消灭心猿"的核心命题。
+            </p>
+
+            <p class="narrative">
+                <strong>三层意义结构：</strong>本页揭示的西游哲学本质可归纳为三层——
+                <strong style="color:var(--accent);">表层</strong>：神魔冒险故事（取经团队西天取经·降妖除魔）；
+                <strong style="color:var(--accent-2);">中层</strong>：心性修炼寓言（八十一难 = 修心次第·每个妖怪 = 一种内心障碍）；
+                <strong style="color:var(--accent-4);">深层</strong>：心经思想演绎（"色不异空·空不异色" = 破执归真 = 降伏心猿）。
+                三层结构共同构成了《西游记》作为"修心寓言"的完整哲学体系。
+            </p>
+
+            <div class="map-grid">
+                <div class="map-card alt3">
+                    <div class="map-label" style="color:var(--accent);">FINDING 1 · 心性曲线</div>
+                    <div class="map-title">纵→压→悟·四阶段螺旋上升</div>
+                    <div class="map-row">anger_pattern 2→9→7→5→3→0·wisdom_pattern 5→4→6→7→9→10·大闹天宫是嗔怒峰值·成佛归零。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">FINDING 2 · 寓言映射</div>
+                    <div class="map-title">八十一难 = 修心次第</div>
+                    <div class="map-row">8 大心性考验（贪嗔痴慢疑色名死）合计 81 难·对应《多心经》八十一种相·非偶然数字。</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">FINDING 3 · 主修分工</div>
+                    <div class="map-title">三人各修一种心性</div>
+                    <div class="map-row">悟空主修嗔怒（15 难）·八戒主修情欲（11 难）·唐僧主修愚痴（10 难）·每人对应不同的心性破执。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-3);">FINDING 4 · 内化路径</div>
+                    <div class="map-title">从外力约束到内力自觉</div>
+                    <div class="map-row">restraint_pattern 1→1→4→7→9→10·紧箍咒是外力·真正的解脱是紧箍自褪（成佛）——从外部纪律到内在自觉的转变。</div>
+                </div>
+                <div class="summary-card">
+                    <div class="map-label">META INSIGHT</div>
+                    <div class="map-title">修心 = 转化欲望·非消灭欲望</div>
+                    <div class="map-row">
+                        心性曲线下降的不是<strong>"能力"</strong>而是<strong>"嗔怒"</strong>——悟空成佛后能力反而更强。
+                        修心不是消灭欲望·而是<strong>转化欲望</strong>：嗔怒→勇气·傲慢→自信·贪欲→愿力。
+                        这是西游最深的哲学命题：<strong style="color:var(--accent);">降伏心猿 = 转化心猿·而非消灭心猿</strong>。
+                        八十一难是这一转化过程的<strong>实修次第</strong>·心经则是<strong>指导思想</strong>。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 哲学核心命题 -->
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">哲学核心命题 · 整体统计</h3>
+            <div class="map-grid">
+                <div class="map-card alt3">
+                    <div class="map-label">PHILOSOPHICAL CORE</div>
+                    <div class="map-title">心性修炼 · 回归本心</div>
+                    <div class="map-row">西游的哲学本质是<strong>"心性修炼"</strong>——通过八十一难破除贪嗔痴慢疑·回归本心。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label">DATA POINTS</div>
+                    <div class="map-title">14 个数据点 · 2 个核心概念</div>
+                    <div class="map-row"><strong>概念 1：</strong>心猿心性曲线（6 阶段·5 维度）</div>
+                    <div class="map-row"><strong>概念 2：</strong>修心寓言图（8 类·81 难）</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label">KEY FINDINGS</div>
+                    <div class="map-title">4 项关键发现</div>
+                    <div class="map-row"><strong>1：</strong>心猿曲线 6 阶段：纵→压→悟·六耳猕猴是关键转折点</div>
+                    <div class="map-row"><strong>2：</strong>八十一难对应佛教 8 种心性考验·嗔怒最多（15 次）</div>
+                    <div class="map-row"><strong>3：</strong>修心寓言图揭示西游是"心性修炼寓言"·非冒险故事</div>
+                    <div class="map-row"><strong>4：</strong>心经（第 19 回传授）是全书思想主线</div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="box-title">综合结论 · 西游 = 修心寓言</div>
+                <div class="box-content">
+                    <p>《西游记》不是神魔冒险小说·而是一部完整的<strong>修心寓言</strong>。</p>
+                    <p style="margin-top:8px;"><strong>心猿心性曲线</strong>揭示了悟空从"齐天大圣"到"斗战胜佛"的<strong>纵→压→悟→觉</strong>四阶段螺旋上升·其本质是从"我执"到"无我"的修心过程。</p>
+                    <p style="margin-top:8px;"><strong>修心寓言图</strong>揭示了八十一难对应佛教 8 种心性考验（贪/嗔/痴/慢/疑/色/名/死）·每难皆是一次心性破执。</p>
+                    <p style="margin-top:8px;">两者共同指向一个深层命题：<strong style="color:var(--accent);">所谓取经·其实是降伏心猿意马的过程</strong>——所谓成佛·其实是<strong style="color:var(--accent-2);">紧箍自褪</strong>的内在自觉。</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div>
+            <a href="../dashboard.html">返回仪表盘</a> ·
+            <a href="../index.html">返回首页</a>
+        </div>
+        <div class="source-list">
+            数据源：scripts/G_哲学与心性/ · output/data/mind_monkey_curve.json · cultivation_allegory.json · philosophy_summary.json
+        </div>
+        <div class="source-list" style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7;">
+            <strong style="color:var(--accent-3);">数据结构摘要：</strong><br>
+            · <code>mind_monkey_curve.json</code>：six_phases[6] × {anger/pride/greed/wisdom/restraint} · curve_analysis · philosophical_insights[6] · modern_parallel{3}<br>
+            · <code>cultivation_allegory.json</code>：allegory_categories[8] × {count/mind_obstacle/representative_hardships} · allegory_summary · heart_sutra_connection<br>
+            · <code>philosophy_summary.json</code>：total_concepts=2 · total_data_points=14 · key_findings[4] · philosophical_core<br>
+            <strong style="color:var(--accent-3);">渲染机制：</strong>fetch + EMBEDDED fallback · 支持 file:// 双击打开 · D3.js v7 · 古典宣纸风 CSS 变量配色 · Noto Serif SC 字体栈
+        </div>
+        <div class="source-list" style="margin-top:14px;font-size:0.74rem;color:var(--ink-soft);">
+            页面结构：Hero · KPI 卡片 × 4 · 导言 · Section 1（折线图 + 热力图 + 6 阶段表 + 心性曲线分析 + 洞察盒） · Section 2（3 概念卡 + 条形图 + 饼图 + 8 类详表 + 核心发现 + 洞察盒） · Section 3（综合结论 + 5 发现） · Footer
+        </div>
+        <div class="source-list" style="margin-top:8px;font-size:0.74rem;color:var(--ink-soft);font-style:italic;">
+            © 详解西游记 · G 类「哲学与心性」可视化 · 共 3 份 JSON 数据源 · 4 张图表 · 2 张表格 · 12 张卡片
+        </div>
+        <div class="source-list" style="margin-top:6px;font-size:0.72rem;color:var(--ink-soft);">
+            哲学命题：纵→压→悟·四阶段螺旋上升 · 八十一难 = 修心次第 · 心经 = 思想主线 · 修心 = 转化欲望·非消灭欲望
+        </div>
+        <div class="source-list" style="margin-top:6px;font-size:0.72rem;color:var(--ink-soft);">
+            关键转折点：六耳猕猴事件（第 58 回）·真假美猴王 = 降伏二心·从外力约束转为内力自觉
+        </div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/04-文化与历史背景/佛道思想.md">佛道思想</a></div>
+    </footer>
+
+    <!-- ===== EMBEDDED FALLBACK DATA ===== -->
+    <!--
+        本页所有 JSON 数据均嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback。
+        在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据。
+        在 http(s):// 协议下打开时，优先 fetch ../../scripts/output/data/*.json。
+        数据源：scripts/G_哲学与心性/ 生成的 3 份 JSON。
+    -->
+    <script>
+    const EMBEDDED = {
+        mind_monkey: {
+            "concept_name": "心猿心性曲线",
+            "english_name": "Mind Monkey Curve",
+            "definition": "心猿意马：佛教术语·指躁动不安的心·悟空'心猿'的演变是全书核心修心过程",
+            "six_phases": [
+                {"phase": "1. 石猴出世", "chapter": "第 1 回", "mind_state": "天真·无嗔·无贪", "anger_level": 2, "pride_level": 3, "greed_level": 2, "wisdom_level": 5, "restraint_level": 1, "key_event": "出世称王·寻仙访道", "allegory_symbol": "未雕琢的璞玉·天然真心"},
+                {"phase": "2. 大闹天宫", "chapter": "第 2-7 回", "mind_state": "嗔怒炽盛·傲慢至极", "anger_level": 9, "pride_level": 10, "greed_level": 7, "wisdom_level": 4, "restraint_level": 1, "key_event": "偷仙丹·偷蟠桃·大打天宫·自封齐天大圣", "allegory_symbol": "心猿放纵·需五行山镇压"},
+                {"phase": "3. 取经前期·服从期", "chapter": "第 8-27 回", "mind_state": "被迫服从·常爆发嗔怒", "anger_level": 7, "pride_level": 8, "greed_level": 4, "wisdom_level": 6, "restraint_level": 4, "key_event": "三打白骨精被赶走·心生怨恨", "allegory_symbol": "紧箍咒驯化·外力约束心猿"},
+                {"phase": "4. 取经中期·平衡期", "chapter": "第 28-58 回", "mind_state": "学会克制·但仍有爆发", "anger_level": 5, "pride_level": 6, "greed_level": 3, "wisdom_level": 7, "restraint_level": 7, "key_event": "六耳猕猴事件·心猿内战", "allegory_symbol": "真假美猴王·降伏二心"},
+                {"phase": "5. 取经后期·觉悟期", "chapter": "第 59-99 回", "mind_state": "嗔怒消退·智慧增长", "anger_level": 3, "pride_level": 4, "greed_level": 2, "wisdom_level": 9, "restraint_level": 9, "key_event": "玉华州授徒·天竺国悟道", "allegory_symbol": "心猿归一·从外力约束转为内力自觉"},
+                {"phase": "6. 成佛·斗战胜佛", "chapter": "第 100 回", "mind_state": "完全降伏心猿·成就佛果", "anger_level": 0, "pride_level": 1, "greed_level": 0, "wisdom_level": 10, "restraint_level": 10, "key_event": "封为斗战胜佛·紧箍自褪", "allegory_symbol": "心猿彻底降伏·修心完成"}
+            ],
+            "curve_analysis": {
+                "total_phases": 6,
+                "anger_pattern": "2→9→7→5→3→0：U 型下降·大闹天宫是嗔怒峰值·成佛归零",
+                "pride_pattern": "3→10→8→6→4→1：稳定下降·傲慢是悟空最大的'我执'",
+                "wisdom_pattern": "5→4→6→7→9→10：大闹天宫智慧下降·取经路上稳步增长",
+                "restraint_pattern": "1→1→4→7→9→10：从外力约束到内力自觉的转化",
+                "turning_point": "六耳猕猴事件（第 58 回）：真假美猴王=降伏二心·是全书心性转折点",
+                "core_insight": "心猿曲线是'纵→压→悟→觉'四阶段·非简单线性·而是螺旋上升"
+            },
+            "philosophical_insights": [
+                "心猿（嗔）+意马（贪）=凡夫心·降伏二者=成佛",
+                "紧箍咒是外力·真正的解脱是紧箍自褪（成佛）",
+                "六耳猕猴是悟空的二心·打死六耳=降伏自己的二心",
+                "悟空从'齐天大圣'到'斗战胜佛'·是从'我执'到'无我'的修心过程",
+                "心性曲线下降的不是'能力'而是'嗔怒'·悟空成佛后能力反而更强",
+                "修心不是消灭欲望·而是转化欲望：嗔怒→勇气·傲慢→自信·贪欲→愿力"
+            ],
+            "modern_parallel": {
+                "anger_management": "现代情绪管理：从冲动到克制的训练过程",
+                "ego_dissolution": "禅修/正念：从'我执'到'无我'的觉察训练",
+                "external_to_internal": "纪律内化：从外部规则约束到内在自觉的转变"
+            }
+        },
+        cultivation: {
+            "concept_name": "修心寓言图",
+            "english_name": "Cultivation Allegory Map",
+            "definition": "八十一难并非单纯劫难·而是心性修炼的 81 种考验·对应《多心经》的修心次第",
+            "allegory_categories": [
+                {"category": "贪欲考验", "english_name": "Greed Test", "count": 12, "representative_hardships": ["四圣试禅心", "五庄观偷果", "金鱼精", "老鼠精"], "mind_obstacle": "贪（贪欲·贪婪）", "buddhist_counterpart": "贪毒·三毒之首", "cultivation_goal": "戒贪·知足"},
+                {"category": "嗔怒考验", "english_name": "Anger Test", "count": 15, "representative_hardships": ["三打白骨精", "红孩儿", "六耳猕猴", "黄袍怪"], "mind_obstacle": "嗔（嗔怒·愤怒）", "buddhist_counterpart": "嗔毒·三毒之二", "cultivation_goal": "戒嗔·慈悲"},
+                {"category": "愚痴考验", "english_name": "Ignorance Test", "count": 10, "representative_hardships": ["乌鸡国王", "车迟国斗法", "比丘国", "灭法国"], "mind_obstacle": "痴（愚痴·无明）", "buddhist_counterpart": "痴毒·三毒之三", "cultivation_goal": "破痴·智慧"},
+                {"category": "傲慢考验", "english_name": "Pride Test", "count": 8, "representative_hardships": ["大闹天宫（前传）", "金兜山青牛精", "狮驼岭", "九灵元圣"], "mind_obstacle": "慢（傲慢·我执）", "buddhist_counterpart": "慢·五盖之一", "cultivation_goal": "戒慢·谦卑"},
+                {"category": "猜忌考验", "english_name": "Suspicion Test", "count": 9, "representative_hardships": ["三打白骨精后赶走悟空", "黄袍怪回花果山", "六耳猕猴"], "mind_obstacle": "疑（猜忌·怀疑）", "buddhist_counterpart": "疑·五盖之一", "cultivation_goal": "断疑·正信"},
+                {"category": "情欲考验", "english_name": "Lust Test", "count": 11, "representative_hardships": ["女儿国", "盘丝洞", "无底洞", "玉兔精"], "mind_obstacle": "色（情欲·色欲）", "buddhist_counterpart": "色欲·五欲之一", "cultivation_goal": "戒色·清净"},
+                {"category": "名利考验", "english_name": "Fame Test", "count": 7, "representative_hardships": ["车迟国求雨", "朱紫国行医", "玉华州授徒"], "mind_obstacle": "名（名利·名声）", "buddhist_counterpart": "名闻利养", "cultivation_goal": "戒名·淡泊"},
+                {"category": "生死考验", "english_name": "Life-Death Test", "count": 9, "representative_hardships": ["通天河", "火焰山", "狮驼国", "无底洞"], "mind_obstacle": "死（怕死·畏惧）", "buddhist_counterpart": "生死事大", "cultivation_goal": "了脱生死"}
+            ],
+            "allegory_summary": {
+                "total_categories": 8,
+                "total_hardships_mapped": 81,
+                "most_frequent_test": "嗔怒考验（15 次）·对应悟空的主修心性",
+                "least_frequent_test": "名利考验（7 次）·对应取经团队本已淡泊",
+                "core_findings": [
+                    "八十一难的'难数'与《多心经》的'八十一种相'对应",
+                    "悟空的主修是嗔怒（15 难）·八戒的主修是情欲（11 难）",
+                    "唐僧的主修是愚痴（10 难）·常因不明真相而被骗",
+                    "整本书是'降伏心猿意马'的修心寓言·非简单冒险故事"
+                ]
+            },
+            "heart_sutra_connection": {
+                "sutra_name": "般若波罗蜜多心经",
+                "sutra_chapter": "第 19 回·乌巢禅师传授",
+                "sutra_role": "心经是取经团队的'指导思想'·唐僧日诵心经",
+                "allegory_pattern": "心经讲'空性'·八十一难讲'破执'·两者对应",
+                "key_quote": "色不异空·空不异色·色即是空·空即是色",
+                "allegory_meaning": "破除对色（外物）的执着·回归空性（真心）"
+            }
+        },
+        summary: {
+            "concept_name": "哲学与心性整体统计",
+            "total_concepts": 2,
+            "concept_list": ["心猿心性曲线", "修心寓言图"],
+            "total_data_points": 14,
+            "key_findings": [
+                "心猿曲线 6 阶段：纵→压→悟·六耳猕猴是关键转折点",
+                "八十一难对应佛教 8 种心性考验·嗔怒最多（15 次）",
+                "修心寓言图揭示西游是'心性修炼寓言'·非冒险故事",
+                "心经（第 19 回传授）是全书思想主线"
+            ],
+            "philosophical_core": "西游的哲学本质是'心性修炼'·通过八十一难破除贪嗔痴慢疑·回归本心"
+        }
+    };
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('[fallback] ' + path + ' → embedded data:', e.message);
+            return fallback;
+        }
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== Main render =====
+    async function main() {
+        const baseUrl = '../../scripts/output/data/';
+        const [mindMonkey, cultivation, summary] = await Promise.all([
+            loadJson(baseUrl + 'mind_monkey_curve.json', EMBEDDED.mind_monkey),
+            loadJson(baseUrl + 'cultivation_allegory.json', EMBEDDED.cultivation),
+            loadJson(baseUrl + 'philosophy_summary.json', EMBEDDED.summary)
+        ]);
+        window.__lastData = { mindMonkey, cultivation, summary };
+
+        renderMonkeyLine(mindMonkey);
+        renderMonkeyHeat(mindMonkey);
+        renderPhaseTable(mindMonkey);
+        renderMonkeyInsights(mindMonkey);
+        renderPhilosophicalInsights(mindMonkey);
+        renderAllegoryBar(cultivation);
+        renderAllegoryPie(cultivation);
+        renderAllegoryTable(cultivation);
+        renderAllegoryInsights(cultivation);
+    }
+
+    // ===== Chart 1: 心猿心性 5 维度折线图 =====
+    function renderMonkeyLine(data) {
+        const svg = d3.select('#chart-monkey-line');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 420;
+        const m = {top: 30, right: 30, bottom: 80, left: 50};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const phases = data.six_phases;
+
+        const dims = [
+            {key: 'anger_level', label: '嗔怒', color: '#c8463a'},
+            {key: 'pride_level', label: '傲慢', color: '#7a5230'},
+            {key: 'greed_level', label: '贪欲', color: '#3a6b8c'},
+            {key: 'wisdom_level', label: '智慧', color: '#5a7a3a'},
+            {key: 'restraint_level', label: '自律', color: '#6b5e4d'}
+        ];
+
+        const x = d3.scalePoint().domain(phases.map(d => d.phase)).range([0, w]).padding(0.4);
+        const y = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
+            .selectAll('text')
+            .style('font-size', '10px')
+            .attr('transform', 'rotate(-15)')
+            .style('text-anchor', 'end');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5));
+
+        // axis label
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -36)
+            .attr('text-anchor', 'middle')
+            .text('心性维度分数 (0-10)');
+
+        // 一个 dim 一条线
+        dims.forEach(dim => {
+            // line generator for current dim
+            const lineGen = d3.line()
+                .x(d => x(d.phase))
+                .y(d => y(d[dim.key]))
+                .curve(d3.curveMonotoneX);
+
+            g.append('path').datum(phases)
+                .attr('fill', 'none')
+                .attr('stroke', dim.color)
+                .attr('stroke-width', 2.5)
+                .attr('d', lineGen);
+
+            g.selectAll('.pt-' + dim.key)
+                .data(phases).enter().append('circle')
+                .attr('class', 'pt-' + dim.key)
+                .attr('cx', d => x(d.phase))
+                .attr('cy', d => y(d[dim.key]))
+                .attr('r', 5)
+                .attr('fill', dim.color)
+                .attr('stroke', '#fff')
+                .attr('stroke-width', 1.5)
+                .style('cursor', 'pointer')
+                .on('mouseover', (e, d) => {
+                    tooltip.show(
+                        `<strong style="color:${dim.color}">${dim.label} · ${dim.key}</strong><br>` +
+                        `阶段：${d.phase}<br>` +
+                        `章节：${d.chapter}<br>` +
+                        `心性状态：${d.mind_state}<br>` +
+                        `分数：<strong>${d[dim.key]} / 10</strong><br>` +
+                        `关键事件：${d.key_event}<br>` +
+                        `<em>${d.allegory_symbol}</em>`, e);
+                })
+                .on('mouseout', tooltip.hide);
+
+            // 末点数值标签
+            const last = phases[phases.length - 1];
+            g.append('text')
+                .attr('x', x(last.phase) + 8)
+                .attr('y', y(last[dim.key]) + 3)
+                .style('font-size', '10px')
+                .style('font-weight', '600')
+                .attr('fill', dim.color)
+                .text(last[dim.key]);
+        });
+
+        // 六耳猕猴转折点标注 (第 4 阶段·平衡期)
+        const turningPhase = phases[3];
+        if (turningPhase) {
+            const tx = x(turningPhase.phase);
+            g.append('rect')
+                .attr('x', tx - 30).attr('y', -8)
+                .attr('width', 60).attr('height', h + 16)
+                .attr('fill', '#e9b885').attr('opacity', 0.2);
+            g.append('text')
+                .attr('x', tx).attr('y', -14)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#7a5230')
+                .style('font-size', '10px').style('font-weight', '600')
+                .text('▼ 六耳猕猴转折');
+        }
+    }
+
+    // ===== Chart 3: 心性维度热力图 =====
+    function renderMonkeyHeat(data) {
+        const svg = d3.select('#chart-monkey-heat');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 340;
+        const m = {top: 30, right: 30, bottom: 50, left: 130};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const phases = data.six_phases;
+
+        const dims = [
+            {key: 'anger_level', label: 'anger 嗔怒'},
+            {key: 'pride_level', label: 'pride 傲慢'},
+            {key: 'greed_level', label: 'greed 贪欲'},
+            {key: 'wisdom_level', label: 'wisdom 智慧'},
+            {key: 'restraint_level', label: 'restraint 自律'}
+        ];
+
+        const x = d3.scaleBand().domain(phases.map(d => d.phase)).range([0, w]).padding(0.08);
+        const y = d3.scaleBand().domain(dims.map(d => d.label)).range([0, h]).padding(0.08);
+
+        // 颜色比例 - 低=浅·高=深
+        const colorScale = d3.scaleLinear()
+            .domain([0, 2, 4, 6, 8, 10])
+            .range(['#fdfaf4', '#f0e0c0', '#e9b885', '#d99560', '#c8463a', '#7a1f12'])
+            .clamp(true);
+
+        // X 轴
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
+            .selectAll('text')
+            .style('font-size', '10px')
+            .attr('transform', 'rotate(-12)')
+            .style('text-anchor', 'end');
+
+        // Y 轴
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).tickSize(0).tickPadding(8))
+            .selectAll('text')
+            .style('font-size', '11px');
+
+        // 画 cells
+        const cellData = [];
+        phases.forEach(phase => {
+            dims.forEach(dim => {
+                cellData.push({
+                    phase: phase.phase,
+                    chapter: phase.chapter,
+                    dimLabel: dim.label,
+                    dimKey: dim.key,
+                    value: phase[dim.key],
+                    mind_state: phase.mind_state,
+                    key_event: phase.key_event
+                });
+            });
+        });
+
+        g.selectAll('.heat-cell')
+            .data(cellData).enter().append('rect')
+            .attr('class', 'heat-cell')
+            .attr('x', d => x(d.phase))
+            .attr('y', d => y(d.dimLabel))
+            .attr('width', x.bandwidth())
+            .attr('height', y.bandwidth())
+            .attr('fill', d => colorScale(d.value))
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 1.5)
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>${d.dimLabel}</strong><br>` +
+                    `阶段：${d.phase}<br>` +
+                    `章节：${d.chapter}<br>` +
+                    `分数：<strong style="color:${colorScale(d.value)}">${d.value} / 10</strong><br>` +
+                    `心性状态：${d.mind_state}<br>` +
+                    `关键事件：${d.key_event}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 单元格内数值
+        g.selectAll('.heat-val')
+            .data(cellData).enter().append('text')
+            .attr('class', 'heat-val')
+            .attr('x', d => x(d.phase) + x.bandwidth() / 2)
+            .attr('y', d => y(d.dimLabel) + y.bandwidth() / 2 + 4)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '12px')
+            .style('font-weight', '700')
+            .attr('fill', d => d.value >= 6 ? '#fff' : '#2c2418')
+            .style('pointer-events', 'none')
+            .text(d => d.value);
+
+        // axis label
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 44)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '11px')
+            .text('心性阶段（1 → 6 修心进程）');
+    }
+
+    function renderPhaseTable(data) {
+        const tbody = d3.select('#phase-table tbody');
+        const rows = tbody.selectAll('tr').data(data.six_phases).enter().append('tr');
+        rows.append('td').html(d => '<strong>' + d.phase + '</strong>');
+        rows.append('td').text(d => d.chapter);
+        rows.append('td').text(d => d.mind_state);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.anger_level + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-3);">' + d.pride_level + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-2);">' + d.greed_level + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-4);">' + d.wisdom_level + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--ink-soft);">' + d.restraint_level + '</strong>');
+        rows.append('td').text(d => d.key_event);
+        rows.append('td').html(d => '<em>' + d.allegory_symbol + '</em>');
+    }
+
+    function renderMonkeyInsights(data) {
+        const list = d3.select('#monkey-insights-list');
+        const items = [
+            `anger_pattern ${data.curve_analysis.anger_pattern}`,
+            `pride_pattern ${data.curve_analysis.pride_pattern}`,
+            `wisdom_pattern ${data.curve_analysis.wisdom_pattern}`,
+            `restraint_pattern ${data.curve_analysis.restraint_pattern}`,
+            `转折点：${data.curve_analysis.turning_point}`,
+            `核心洞察：${data.curve_analysis.core_insight}`
+        ];
+        list.selectAll('li').data(items).enter().append('li').text(d => d);
+    }
+
+    // 哲学洞察（六则）渲染
+    function renderPhilosophicalInsights(data) {
+        const list = d3.select('#philosophical-insights-list');
+        list.selectAll('li').data(data.philosophical_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Chart 2: 修心寓言 8 类别条形图 =====
+    function renderAllegoryBar(data) {
+        const svg = d3.select('#chart-allegory-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 420;
+        const m = {top: 30, right: 60, bottom: 60, left: 100};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const cats = data.allegory_categories;
+
+        // 颜色映射 by 心性障碍类型
+        const colorMap = {
+            '贪': '#c8463a', '嗔': '#c8463a', '痴': '#c8463a',  // 三毒 - 红
+            '慢': '#7a5230', '疑': '#7a5230',  // 五盖 - 棕
+            '色': '#3a6b8c', '名': '#3a6b8c',  // 五欲 - 蓝
+            '死': '#5a7a3a'  // 生死 - 绿
+        };
+        const colorOf = (obstacle) => {
+            const first = obstacle.charAt(0);
+            return colorMap[first] || '#7a5230';
+        };
+
+        const x = d3.scaleLinear().domain([0, d3.max(cats, d => d.count) + 2]).range([0, w]);
+        const y = d3.scaleBand().domain(cats.map(d => d.category)).range([0, h]).padding(0.2);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(x.ticks(6))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', d => x(d)).attr('x2', d => x(d))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).tickSize(0).tickPadding(8))
+            .selectAll('text').style('font-size', '11px');
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(6));
+
+        // axis label
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 44)
+            .attr('text-anchor', 'middle')
+            .text('难数 (count)');
+
+        // bars
+        g.selectAll('.bar')
+            .data(cats).enter().append('rect')
+            .attr('class', 'bar')
+            .attr('x', 0)
+            .attr('y', d => y(d.category))
+            .attr('width', d => x(d.count))
+            .attr('height', y.bandwidth())
+            .attr('fill', d => colorOf(d.mind_obstacle))
+            .attr('stroke', '#fff').attr('stroke-width', 1)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong style="color:${colorOf(d.mind_obstacle)}">${d.category}</strong> · ${d.english_name}<br>` +
+                    `难数：<strong>${d.count}</strong> / 81<br>` +
+                    `心性障碍：${d.mind_obstacle}<br>` +
+                    `佛教对应：${d.buddhist_counterpart}<br>` +
+                    `修炼目标：${d.cultivation_goal}<br>` +
+                    `代表劫难：${d.representative_hardships.join(' · ')}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 数值 + 心性障碍标签
+        g.selectAll('.bar-val')
+            .data(cats).enter().append('text')
+            .attr('class', 'bar-val')
+            .attr('x', d => x(d.count) + 6)
+            .attr('y', d => y(d.category) + y.bandwidth() / 2 + 1)
+            .attr('dominant-baseline', 'middle')
+            .style('font-size', '11px')
+            .style('font-weight', '600')
+            .attr('fill', '#2c2418')
+            .text(d => d.count + ' · ' + d.mind_obstacle);
+    }
+
+    // ===== Chart 4: 八十一难按类别饼图 =====
+    function renderAllegoryPie(data) {
+        const svg = d3.select('#chart-allegory-pie');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 420;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const cats = data.allegory_categories;
+        const total = d3.sum(cats, d => d.count);
+
+        const colorMap = {
+            '贪': '#c8463a', '嗔': '#a8362e', '痴': '#7a1f12',
+            '慢': '#7a5230', '疑': '#9a7250',
+            '色': '#3a6b8c', '名': '#5a8bac',
+            '死': '#5a7a3a'
+        };
+        const colorOf = (obstacle) => {
+            const first = obstacle.charAt(0);
+            return colorMap[first] || '#7a5230';
+        };
+
+        const cx = W / 2 - 60, cy = H / 2;
+        const radius = Math.max(0, Math.min(W, H) / 2 - 40);
+        const innerR = radius * 0.55;
+
+        const pie = d3.pie().value(d => d.count).sort(null);
+        const arcGen = d3.arc().innerRadius(innerR).outerRadius(radius).padAngle(0.012).cornerRadius(3);
+        const arcHover = d3.arc().innerRadius(innerR).outerRadius(radius + 8).padAngle(0.012).cornerRadius(3);
+
+        const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+        const arcs = pie(cats);
+
+        // slices
+        g.selectAll('.slice')
+            .data(arcs).enter().append('path')
+            .attr('class', 'slice')
+            .attr('d', arcGen)
+            .attr('fill', d => colorOf(d.data.mind_obstacle))
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(e, d) {
+                d3.select(this).transition().duration(120).attr('d', arcHover);
+                const pct = (d.data.count / total * 100).toFixed(1);
+                tooltip.show(
+                    `<strong style="color:${colorOf(d.data.mind_obstacle)}">${d.data.category}</strong> · ${d.data.english_name}<br>` +
+                    `难数：<strong>${d.data.count}</strong> / ${total}（${pct}%）<br>` +
+                    `心性障碍：${d.data.mind_obstacle}<br>` +
+                    `修炼目标：${d.data.cultivation_goal}<br>` +
+                    `代表劫难：${d.data.representative_hardships.join(' · ')}`, e);
+            })
+            .on('mouseout', function() {
+                d3.select(this).transition().duration(120).attr('d', arcGen);
+                tooltip.hide();
+            });
+
+        // 中心文字
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', -8)
+            .style('font-size', '14px')
+            .style('fill', '#6b5e4d')
+            .text('八十一难');
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', 18)
+            .style('font-size', '24px')
+            .style('font-weight', '700')
+            .style('fill', '#c8463a')
+            .text('81');
+
+        // slice 标签
+        const labelArc = d3.arc().innerRadius(radius + 14).outerRadius(radius + 14);
+        g.selectAll('.slice-label')
+            .data(arcs).enter().append('text')
+            .attr('class', 'slice-label')
+            .attr('transform', d => {
+                const pos = labelArc.centroid(d);
+                return `translate(${pos[0]},${pos[1]})`;
+            })
+            .attr('text-anchor', d => {
+                const mid = (d.startAngle + d.endAngle) / 2;
+                return mid < Math.PI ? 'start' : 'end';
+            })
+            .style('font-size', '11px')
+            .style('fill', '#2c2418')
+            .text(d => d.data.count);
+
+        // 自定义 legend（右侧）
+        const legendG = svg.append('g')
+            .attr('transform', `translate(${W - 200}, 40)`);
+        const legendItems = cats.map((c, i) => ({
+            label: c.category + ' (' + c.count + ')',
+            color: colorOf(c.mind_obstacle)
+        }));
+        const itemH = 22;
+        legendG.selectAll('.leg-item')
+            .data(legendItems).enter().append('g')
+            .attr('class', 'leg-item')
+            .attr('transform', (d, i) => `translate(0, ${i * itemH})`);
+        legendG.selectAll('.leg-item').append('rect')
+            .attr('x', 0).attr('y', 0)
+            .attr('width', 14).attr('height', 14)
+            .attr('fill', d => d.color)
+            .attr('rx', 2);
+        legendG.selectAll('.leg-item').append('text')
+            .attr('x', 20).attr('y', 11)
+            .style('font-size', '11px')
+            .style('fill', '#2c2418')
+            .text(d => d.label);
+    }
+
+    function renderAllegoryTable(data) {
+        const tbody = d3.select('#allegory-table tbody');
+        const rows = tbody.selectAll('tr').data(data.allegory_categories).enter().append('tr');
+        rows.append('td').html(d => '<strong>' + d.category + '</strong>');
+        rows.append('td').text(d => d.english_name);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.count + '</strong>');
+        rows.append('td').text(d => d.mind_obstacle);
+        rows.append('td').text(d => d.buddhist_counterpart);
+        rows.append('td').text(d => d.cultivation_goal);
+        rows.append('td').html(d => d.representative_hardships.map(h => '<span class="data-badge">' + h + '</span>').join(' '));
+    }
+
+    function renderAllegoryInsights(data) {
+        const list = d3.select('#allegory-insights-list');
+        const items = data.allegory_summary.core_findings.concat([
+            `总计：${data.allegory_summary.total_categories} 类 · ${data.allegory_summary.total_hardships_mapped} 难映射`,
+            `最多考验：${data.allegory_summary.most_frequent_test}`,
+            `最少考验：${data.allegory_summary.least_frequent_test}`
+        ]);
+        list.selectAll('li').data(items).enter().append('li').text(d => d);
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商业模型 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        /* 表格 */
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+            margin-top: 8px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+        table.data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .icon-correct {
+            color: var(--accent-4);
+            font-weight: 700;
+        }
+        .icon-wrong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        /* 洞察列表 */
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        /* insight-box 关键洞察区 */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-left: 5px solid var(--accent);
+            border-radius: 6px;
+            padding: 18px 22px;
+            margin: 18px 0;
+        }
+        .insight-box.alt-2 { border-left-color: var(--accent-2); }
+        .insight-box.alt-3 { border-left-color: var(--accent-4); }
+        .insight-box .ibox-label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 6px;
+        }
+        .insight-box.alt-2 .ibox-label { color: var(--accent-2); }
+        .insight-box.alt-3 .ibox-label { color: var(--accent-4); }
+        .insight-box .ibox-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        .insight-box .ibox-body {
+            font-size: 0.9rem;
+            color: var(--ink);
+            line-height: 1.8;
+        }
+        .insight-box .ibox-body strong { color: var(--accent); font-weight: 600; }
+        /* 神经科学 / 现代对应 卡片 */
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .map-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .map-card.alt { border-left-color: var(--accent-4); }
+        .map-card.alt2 { border-left-color: var(--accent-3); }
+        .map-card .map-label {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .map-card.alt .map-label { color: var(--accent-4); }
+        .map-card.alt2 .map-label { color: var(--accent-3); }
+        .map-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .map-card .map-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .map-card .map-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 16px;
+            grid-column: 1 / -1;
+        }
+        .summary-card .map-label {
+            color: var(--accent);
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .summary-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--ink);
+        }
+        .summary-card .map-row {
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+        /* tooltip */
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 280px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 24px;
+        }
+        .footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 6px;
+        }
+        .footer a:hover { text-decoration: underline; }
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        /* axis 文字 */
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        /* code 样式 */
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        /* 叙事段落 */
+        .narrative {
+            font-size: 0.92rem;
+            line-height: 1.85;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .narrative strong { color: var(--ink); font-weight: 600; }
+        /* 数据来源徽章 */
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        /* 妖怪公司卡片 */
+        .monster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .monster-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .monster-card.m-pansi { border-top-color: var(--accent-soft); }
+        .monster-card.m-bottomless { border-top-color: var(--accent-2); }
+        .monster-card.m-flaming { border-top-color: var(--accent); }
+        .monster-card.m-blackwind { border-top-color: var(--accent-4); }
+        .monster-card .monster-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .monster-card .monster-ticker {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 8px;
+        }
+        .monster-card .monster-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .monster-card .monster-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .monster-card .ipo-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.72rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-top: 4px;
+        }
+        .ipo-badge.failed { background: #f8e3df; color: var(--accent); border: 1px solid var(--accent); }
+        @media (max-width: 720px) {
+            .hero h1 { font-size: 1.6rem; }
+            .hero .subtitle { font-size: 0.78rem; letter-spacing: 0.15em; }
+            .section { padding: 18px; }
+            .kpi-card .value { font-size: 1.5rem; }
+            .map-grid { grid-template-columns: 1fr; }
+            .monster-grid { grid-template-columns: 1fr; }
+            table.data-table { font-size: 0.76rem; }
+            table.data-table th, table.data-table td { padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            .hero { padding: 36px 16px 28px; }
+            .hero h1 { font-size: 1.4rem; }
+            .container { padding: 0 12px; }
+            .section { padding: 14px; }
+            .chart-block { padding: 12px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>商业模型 · 西游世界的组织经济学</h1>
+        <div class="subtitle">DATA-DRIVEN BUSINESS MODEL OF XIYOUJI</div>
+        <div class="tagline">从天庭国企到灵山民企，从悟空职业曲线到妖怪创业公司——一部西游商业模型图谱。</div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../dashboard.html">仪表盘</a>
+            <span class="sep">/</span>
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <span class="current">商业模型</span>
+        </nav>
+
+        <div class="notice">
+            本页基于 L 类「商业模型」脚本生成，包含 4 份 JSON 数据：组织对比 / 悟空职业转型 / 妖怪创业公司 / 整体统计。所有图表支持 hover tooltip。
+        </div>
+
+        <!-- 研究方法论 -->
+        <section class="section">
+            <h2 class="section-title">导言 · 西游商业模型的三维透镜</h2>
+            <div class="section-sub">INTRODUCTION · Three-Dimensional Business Lens on Xiyouji</div>
+            <p style="font-size:0.95rem;line-height:1.8;color:var(--ink);margin-bottom:14px;">
+                《西游记》不仅是神魔小说，更是一部活生生的<strong>商业模型教材</strong>。本页从三个维度剖析西游世界的组织经济学：
+                <strong style="color:var(--accent);">天庭 vs 灵山组织对比</strong>（国企 vs 民企的治理差异）、
+                <strong style="color:var(--accent-2);">悟空 6 阶段职业转型</strong>（从创业者到合伙人的职业曲线）、
+                <strong style="color:var(--accent-4);">妖怪创业公司图谱</strong>（5 大集团的 IPO 失败学）。
+            </p>
+
+            <div style="margin-bottom:18px;">
+                <span class="data-badge">4 份 JSON 数据</span>
+                <span class="data-badge">2 大组织对比</span>
+                <span class="data-badge">13 维度评分</span>
+                <span class="data-badge">6 职业阶段</span>
+                <span class="data-badge">5 妖怪公司</span>
+                <span class="data-badge">IPO 失败率 100%</span>
+                <span class="data-badge">D3.js v7</span>
+                <span class="data-badge">fetch + EMBEDDED fallback</span>
+            </div>
+
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">DIMENSION 1</div>
+                    <div class="map-title">组织对比 · Heaven vs Vulture Peak</div>
+                    <div class="map-row">天庭（存量维持型国企）vs 灵山（增量扩张型民企），13 维度对比揭示灵山在效率/创新/文化上的全面领先。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">DIMENSION 2</div>
+                    <div class="map-title">悟空职业转型 · Career Transition</div>
+                    <div class="map-row">石猴王(L0)→弼马温(L1)→齐天大圣(L2)→取行者(L3)→斗战胜佛(L9)→退休(L10)，满意度呈 U 型曲线。</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">DIMENSION 3</div>
+                    <div class="map-title">妖怪创业公司 · Monster Startups</div>
+                    <div class="map-row">5 大妖怪集团 100% 被收购·无一独立 IPO·揭示西游"妖怪经济"的依附性本质与监管陷阱。</div>
+                </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+                数据来源：scripts/AD_商业模型/business_model.py · 共生成 4 份 JSON 输出，本页 fetch 失败时自动回退到内嵌 EMBEDDED 数据，支持 file:// 协议双击打开。
+            </p>
+        </section>
+
+        <!-- KPI 卡片 -->
+        <div class="kpi-row" id="kpiRow">
+            <div class="kpi-card">
+                <div class="label">ORG · 组织对比</div>
+                <div class="value">2 大组织</div>
+                <div class="desc">天庭（存量维持型）vs 灵山（增量扩张型）·13 维度对比</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">CAREER · 悟空职业</div>
+                <div class="value">6 阶段</div>
+                <div class="desc">石猴王→弼马温→齐天大圣→取行者→斗战胜佛→退休（L0→L10）</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">MONSTER · 妖怪公司</div>
+                <div class="value">5 集团</div>
+                <div class="desc">狮驼岭 / 盘丝洞 / 无底洞 / 火焰山 / 黑风山</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">IPO · 失败率</div>
+                <div class="value">100%</div>
+                <div class="desc">5/5 妖怪集团被收购·无一独立 IPO·收购方均为佛/天庭</div>
+            </div>
+        </div>
+
+        <!-- Section 1: 天庭 vs 灵山组织对比 -->
+        <section class="section">
+            <h2 class="section-title">壹 · 天庭 vs 灵山组织对比</h2>
+            <div class="section-sub">ORGANIZATION COMPARISON · 国企 vs 民企的治理差异</div>
+            <div class="definition" id="def-org">
+                <strong>商业定义：</strong>天庭与灵山是西游世界两大统治组织·名义上天庭高于灵山·实际灵山主导取经项目·两者在治理模式/文化/效率上差异显著。天庭是"存量维持型"组织·灵山是"增量扩张型"组织。
+            </div>
+
+            <p class="narrative">
+                <strong>核心对比：</strong>天庭以<strong style="color:var(--accent);">蟠桃垄断</strong>维持组织稳定，金字塔科层制导致创新近零；
+                灵山以<strong style="color:var(--accent-2);">功德激励</strong>驱动扩张，扁平+矩阵结构让菩萨有高度自主权。
+                取经项目本质是天庭默许、灵山主导的"联合项目"——天庭出借资源（李天王/哪吒），灵山获取战略成果（收编妖怪/传播佛法）。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">天庭 vs 灵山 13 维度评分对比（分组条形图·双柱并排）</div>
+                <div class="chart-caption">X 轴：13 个维度 / Y 轴：0-10 评分 / 红柱=天庭 · 蓝柱=灵山（基于文本描述的量化评分）</div>
+                <svg id="chart-org-bar" class="chart-svg" width="100%" height="460"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>天庭 Heavenly Court</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>灵山 Vulture Peak</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">13 维度对照表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="org-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>维度</th>
+                            <th>天庭</th>
+                            <th>灵山</th>
+                            <th>胜出方</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="insight-box">
+                <div class="ibox-label">KEY INSIGHT · 组织对比</div>
+                <div class="ibox-title">灵山胜在效率与创新·天庭败在官僚与集权</div>
+                <div class="ibox-body">
+                    天庭是<strong>"存量维持型"</strong>组织（蟠桃垄断+科层制+不惹事文化），灵山是<strong>"增量扩张型"</strong>组织（功德激励+分权执行+目标导向）。
+                    灵山在 13 维度中的 11 项领先天庭，仅在"员工规模"和"营收垄断度"上略逊。天庭的失败本质是<strong>不能培养人才</strong>——悟空弼马温事件暴露晋升通道堵塞。
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">组织对比洞察</h3>
+            <ol class="insights-list" id="org-insights-list"></ol>
+        </section>
+
+        <!-- Section 2: 悟空职业转型 -->
+        <section class="section">
+            <h2 class="section-title alt-2">贰 · 悟空 6 阶段职业转型</h2>
+            <div class="section-sub">CAREER TRANSITION · 从创业者到合伙人的职业曲线</div>
+            <div class="definition" id="def-career">
+                <strong>商业定义：</strong>孙悟空从石猴到斗战胜佛·历经 6 个职业阶段·每阶段的雇主/薪酬/职级/满意度/离职原因反映了从"野路子"到"体制内"再到"退出江湖"的职业曲线。
+            </div>
+
+            <p class="narrative">
+                <strong>职业曲线：</strong>悟空的职业路径是标准的
+                <strong style="color:var(--accent);">"创业 → 被招安 → 受挫 → 再创业 → 被收购 → 合伙人 → 退休"</strong>路径。
+                弼马温事件（满意度 2 分·最低谷）是西游世界的"35 岁危机"——基层晋升通道堵塞导致反弹。
+                取经项目是<strong style="color:var(--accent-2);">"股权激励"</strong>的典型，用未来期权（成佛）换取当下低薪劳动。
+                紧箍咒则是<strong>"竞业协议"</strong>，防止跳槽或反叛，项目完成后自褪。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">悟空 6 职业阶段满意度折线图（带 career_level 标注）</div>
+                <div class="chart-caption">X 轴：6 阶段 / Y 轴：satisfaction 0-10 / 折线+点 / 每点标注 career_level（L0/L1/L2/L3/L9/L10）</div>
+                <svg id="chart-career-line" class="chart-svg" width="100%" height="380"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-2);"></span>satisfaction 满意度</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>career_level 标注</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);opacity:0.6;"></span>U 型曲线谷底</span>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">6 阶段 career_level 阶梯图（L0→L10·阶梯式上升）</div>
+                <div class="chart-caption">X 轴：6 阶段 / Y 轴：career_level 0-10 / 阶梯式上升（curveStep）/ 注意 L3→L9 的大跳跃（取经项目兑现期权）</div>
+                <svg id="chart-career-stair" class="chart-svg" width="100%" height="380"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent);"></span>career_level 职级</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>L3→L9 期权兑现跳跃</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">6 职业阶段详表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="career-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>阶段</th>
+                            <th>头衔</th>
+                            <th>雇主</th>
+                            <th>薪酬</th>
+                            <th>职级</th>
+                            <th>满意度</th>
+                            <th>离职原因</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="insight-box alt-2">
+                <div class="ibox-label">KEY INSIGHT · 职业转型</div>
+                <div class="ibox-title">单打独斗失败·团队协作成功</div>
+                <div class="ibox-body">
+                    悟空满意度呈<strong>U 型曲线</strong>：石猴王(10)→弼马温(2)→齐天大圣(4)→取行者(6)→斗战胜佛(9)→退休(10)。
+                    谷底是弼马温（L1·未入流），峰值是石猴王与退休（均为 10）。
+                    <strong>最大教训</strong>：闹天宫（单打独斗）失败，取经（团队协作）成功。取经项目是"股权激励"的典型——用未来期权（成佛）换取当下低薪劳动。
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">职业转型洞察</h3>
+            <ol class="insights-list" id="career-insights-list"></ol>
+        </section>
+
+        <!-- Section 3: 妖怪创业公司 -->
+        <section class="section">
+            <h2 class="section-title alt-3">叁 · 妖怪创业公司图谱</h2>
+            <div class="section-sub">MONSTER STARTUPS · 5 大集团的 IPO 失败学</div>
+            <div class="definition" id="def-monster">
+                <strong>商业定义：</strong>5 大妖怪集团以创业公司视角分析：CEO/CTO/CMO 三驾马车·商业模式/营收/员工/融资轮次/IPO 状态/风险因素。5 大集团 100% 被收购·无一独立 IPO。
+            </div>
+
+            <p class="narrative">
+                <strong>IPO 失败学：</strong>5 大妖怪集团无一独立 IPO，全部被上游势力（佛/天庭）收购。
+                CEO 背景决定退出路径：有佛仙背景的（狮驼三魔）<strong style="color:var(--accent-4);">保命</strong>，无背景的（盘丝洞）<strong style="color:var(--accent);">全员阵亡</strong>。
+                商业模式决定价值：火焰山靠稀缺资源（芭蕉扇）估值最高，黑风山靠知识溢价。
+                妖怪 IPO 失败的根本原因：<strong>监管方（天庭+灵山）即是竞争对手又是收购方</strong>。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">5 妖怪公司 IPO 失败原因饼图（按 ipo_status 分组）</div>
+                <div class="chart-caption">按 ipo_status 分组：Pre-IPO 被收购(2) / 未上市被收购(2) / 未上市被清场(1) · 100% 失败率</div>
+                <svg id="chart-ipo-pie" class="chart-svg" width="100%" height="380"></svg>
+                <div class="legend-row" id="pie-legend">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>Pre-IPO 被收购 (2)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>未上市被收购 (2)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>未上市被清场 (1)</span>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">5 妖怪公司营收对比柱状图（revenue 评分）</div>
+                <div class="chart-caption">X 轴：5 妖怪公司 / Y 轴：营收评分 0-10（基于 revenue 文本量化）/ 狮驼岭最高·无底洞/黑风山零营收</div>
+                <svg id="chart-revenue-bar" class="chart-svg" width="100%" height="380"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>revenue 营收评分</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">5 妖怪公司卡片</h3>
+            <div class="monster-grid" id="monster-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">5 妖怪公司详表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="monster-table">
+                    <thead>
+                        <tr>
+                            <th>公司</th>
+                            <th>代码</th>
+                            <th>CEO</th>
+                            <th>商业模式</th>
+                            <th>营收</th>
+                            <th>员工</th>
+                            <th>IPO 状态</th>
+                            <th>估值</th>
+                            <th>章节</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="insight-box alt-3">
+                <div class="ibox-label">KEY INSIGHT · 妖怪创业</div>
+                <div class="ibox-title">监管方即是竞争对手又是收购方</div>
+                <div class="ibox-body">
+                    5 大妖怪集团<strong>100% 被收购</strong>·无一独立 IPO·揭示西游"妖怪经济"依附性本质。
+                    CEO 背景决定退出路径：有佛仙背景的（狮驼三魔·大鹏雕是如来舅舅）保命转编，无背景的（盘丝洞七蜘蛛精）全员阵亡。
+                    核心模式：<strong>妖怪集团本质是"已被收购的子公司"</strong>·表面独立实则依附。业务模式（吃人/劫掠）违法天庭刑法·合规风险是致命伤。
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">妖怪创业洞察</h3>
+            <ol class="insights-list" id="monster-insights-list"></ol>
+        </section>
+
+        <!-- 综合结论 -->
+        <section class="section">
+            <h2 class="section-title">肆 · 综合结论 · 西游商业模型图谱</h2>
+            <div class="section-sub">SYNTHESIS · The Business Model Atlas of Xiyouji</div>
+
+            <p class="narrative">
+                从三个维度交叉观察，《西游记》呈现了一幅完整的<strong>商业模型图谱</strong>：
+                天庭是僵化国企（蟠桃垄断+科层制），灵山是高效民企（功德激励+分权执行），
+                妖怪是依附性创业公司（100% 被收购），悟空是从创业者到合伙人的转型样本。
+                三者共同揭示西游世界的<strong>"体制内/外"二元结构</strong>。
+            </p>
+
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">FINDING 1 · 组织效率</div>
+                    <div class="map-title">扁平+分权 &gt; 金字塔+集权</div>
+                    <div class="map-row">灵山（4800 人·14 年完成取经）vs 天庭（10000 人·围剿花果山动用十万天兵未果）。效率差距源于决策机制：分权 vs 集权。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">FINDING 2 · 职业曲线</div>
+                    <div class="map-title">单打独斗失败·团队协作成功</div>
+                    <div class="map-row">悟空闹天宫（单干）失败被压 500 年，取经（团队）成功封佛。U 型满意度曲线证明：体制内受挫→体制外成长→回归体制高层。</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">FINDING 3 · 创业陷阱</div>
+                    <div class="map-title">依附性业务无法独立 IPO</div>
+                    <div class="map-row">5 妖怪集团 100% 被收购·监管方即是竞争对手又是收购方。无背景的盘丝洞全员阵亡，有背景的狮驼岭转编灵山。</div>
+                </div>
+                <div class="summary-card">
+                    <div class="map-label">META INSIGHT</div>
+                    <div class="map-title">西游商业模型的二元结构 · 体制内 vs 体制外</div>
+                    <div class="map-row">
+                        三个维度共同指向一个深层主题：<strong>体制内/外的二元结构</strong>。
+                        天庭是僵化国企（存量维持），灵山是高效民企（增量扩张），妖怪是依附性创业公司（无法独立 IPO），
+                        悟空是从创业者（石猴王）到合伙人（斗战胜佛）的转型样本。
+                        <strong>核心商业教训</strong>：组织效率源于分权·职业成功源于团队·创业陷阱源于依附·激励设计源于期权·合规风险源于违法。
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div>
+            <a href="../dashboard.html">返回仪表盘</a> ·
+            <a href="../index.html">返回首页</a>
+        </div>
+        <div class="source-list">
+            数据源：scripts/AD_商业模型/business_model.py · output/data/organization_comparison.json · wukong_career.json · monster_business.json · business_model_summary.json
+        </div>
+        <div class="source-list" style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7;">
+            <strong style="color:var(--accent-3);">数据结构摘要：</strong><br>
+            · <code>organization_comparison.json</code>：comparison_dimensions[13] · organizations[2] · comparison_matrix{7} · key_insights[6]<br>
+            · <code>wukong_career.json</code>：career_stages[6] · career_stats{8} · career_insights[7]<br>
+            · <code>monster_business.json</code>：monster_companies[5] · ipo_matrix{7} · monster_business_insights[7]<br>
+            · <code>business_model_summary.json</code>：total_concepts=3 · total_data_points=13 · key_findings[5] · business_lessons[5]
+            <strong style="color:var(--accent-3);">渲染机制：</strong>fetch + EMBEDDED fallback · 支持 file:// 双击打开 · D3.js v7 · 古典宣纸风 CSS 变量配色
+        </div>
+        <div class="source-list" style="margin-top:14px;font-size:0.74rem;color:var(--ink-soft);">
+            页面结构：Hero · KPI 卡片 × 4 · 导言 · Section 1（分组条形图 + 13 维度表 + insight-box + 6 洞察） · Section 2（折线图 + 阶梯图 + 6 阶段表 + insight-box + 7 洞察） · Section 3（饼图 + 柱状图 + 5 卡片 + 5 公司表 + insight-box + 7 洞察） · Section 4（综合结论 + 4 发现） · Footer
+        </div>
+        <div class="source-list" style="margin-top:8px;font-size:0.74rem;color:var(--ink-soft);font-style:italic;">
+            © 详解西游记 · L 类「商业模型」可视化 · 共 4 份 JSON 数据源 · 5 张图表 · 3 张表格 · 17 张卡片
+        </div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/07-学以致用/领导力.md">领导力</a></div>
+    </footer>
+
+    <!-- ===== EMBEDDED FALLBACK DATA ===== -->
+    <!--
+        本页所有 JSON 数据均嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback。
+        在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据。
+        在 http(s):// 协议下打开时，优先 fetch ../../scripts/output/data/*.json。
+        数据源：scripts/AD_商业模型/business_model.py 生成的 4 份 JSON。
+    -->
+    <script>
+    const EMBEDDED = {
+        organization: {
+            "concept_name": "天庭 vs 灵山组织对比",
+            "english_name": "Heavenly Court vs Vulture Peak Organization Comparison",
+            "definition": "天庭与灵山是西游世界两大统治组织·名义上天庭高于灵山·实际灵山主导取经项目·两者在治理模式/文化/效率上差异显著",
+            "comparison_dimensions": [
+                "vision", "leadership", "org_structure", "employee_count", "core_business",
+                "kpi", "revenue_model", "culture", "decision_making", "innovation",
+                "employee_benefits", "transparency", "efficiency"
+            ],
+            "organizations": [
+                {
+                    "name": "天庭",
+                    "english_name": "Heavenly Court",
+                    "vision": "维持三界秩序·永续天朝统治·以'太平无事'为最高目标",
+                    "leadership": "玉皇大帝（CEO·名义独裁·实际受三清元老掣肘）",
+                    "org_structure": "金字塔科层制：玉帝-王母-三清四御-五方五老-六部-星宿神将·层级森严",
+                    "employee_count": "约 10000 名正式编制（含天兵天将）·外加临时征召",
+                    "core_business": "三界治安维护·天象调度·生死簿管理·仙丹炼制·蟠桃种植",
+                    "kpi": "无妖孽作乱·按时辰降雨·生死簿不乱·蟠桃会按期举办",
+                    "revenue_model": "贡品抽成（人间香火）+ 蟠桃垄断（独家产源）+ 仙丹独家炼制·无现金流转",
+                    "culture": "官僚主义·论资排辈·以'不惹事'为荣·以'出格'为耻·宁可不做不可做错",
+                    "decision_making": "集中决策·玉帝拍板·但常被元老（三清）或外部（灵山）影响·流程冗长",
+                    "innovation": "近零创新·500 年体制不变·法宝皆太古传下·无新技术研发",
+                    "employee_benefits": "蟠桃分桃（按品级）+ 仙丹分配 + 长生不老 + 天宫住房·等级差异极大",
+                    "transparency": "极低·决策黑箱·悟空闹天宫前不知蟠桃会名单·弼马温不知自己官阶",
+                    "efficiency": "低·围剿花果山动用十万天兵未果·多次靠外聘（二郎神/如来）救场"
+                },
+                {
+                    "name": "灵山",
+                    "english_name": "Vulture Peak",
+                    "vision": "普度众生·弘扬佛法·东土传经·扩大佛法影响力至南赡部洲",
+                    "leadership": "如来佛祖（CEO·实际独裁·但通过菩萨分权执行）",
+                    "org_structure": "扁平+矩阵：如来-菩萨/罗汉-执行僧·菩萨有高度自主权·跨部门协作多",
+                    "employee_count": "约 4800 名（佛·菩萨·罗汉·护法）·精英化编制",
+                    "core_business": "佛法弘扬·取经项目运营·功德积累·收服妖怪转编·信众扩展",
+                    "kpi": "取经项目完成度·81 难数量·收编妖怪数·信众增长·佛法传播范围",
+                    "revenue_model": "功德+香火+信众布施·非盈利导向·但有'人事费'（阿难迦叶索人事）",
+                    "culture": "目标导向·允许试错·重视长期主义·以'功德'为核心激励·鼓励跨部门协作",
+                    "decision_making": "分权决策·菩萨有自主裁量权（观音可独立决定收红孩儿/黑熊精）·效率高",
+                    "innovation": "中高·金箍咒三件是定制化产品·取经项目本身就是组织创新·81 难设计",
+                    "employee_benefits": "佛果位晋升·莲花座·功德积累·长生不老·相对平等·无品级分桃",
+                    "transparency": "中·项目目标透明（取经）·但预算/编制不公开·阿难迦叶索贿暴露暗面",
+                    "efficiency": "高·取经 14 年完成·菩萨快速响应·多次直接干预解决问题"
+                }
+            ],
+            "comparison_matrix": {
+                "more_bureaucratic": "天庭",
+                "more_efficient": "灵山",
+                "more_innovative": "灵山",
+                "more_transparent": "灵山（相对）",
+                "larger_scale": "天庭（人数多 2 倍）",
+                "stronger_leadership": "灵山（如来直接操盘）",
+                "better_culture": "灵山（目标导向 vs 不惹事导向）"
+            },
+            "key_insights": [
+                "天庭是'存量维持型'组织·灵山是'增量扩张型'组织",
+                "天庭的蟠桃垄断是其组织稳定的根本·失去蟠桃则天庭解体",
+                "灵山通过'收编妖怪'实现组织扩张·红孩儿/黑熊精/守山大神皆是收编成果",
+                "取经项目是天庭默许·灵山主导的'联合项目'·天庭出借资源（李天王/哪吒等）",
+                "天庭的失败是'不能培养人才'·悟空弼马温事件暴露晋升通道堵塞",
+                "灵山成功的关键是'清晰目标+分权执行+功德激励'三位一体"
+            ]
+        },
+        career: {
+            "concept_name": "悟空职业转型",
+            "english_name": "Wukong Career Transition",
+            "definition": "孙悟空从石猴到斗战胜佛·历经 6 个职业阶段·每阶段的雇主/薪酬/职级/满意度/离职原因反映了从'野路子'到'体制内'再到'退出江湖'的职业曲线",
+            "career_stages": [
+                {
+                    "stage": 1, "name": "石猴王", "english_name": "Stone Monkey King",
+                    "title": "花果山美猴王", "employer": "花果山自治集团（创业型组织）",
+                    "salary": "无薪酬·花果山收益 100% 自留·按需取用",
+                    "career_level": "L0·创业者/CEO", "satisfaction": 10,
+                    "achievements": ["建国花果山·统领 47000 只猴子", "拜师菩提祖师·获得长生不老术·七十二变", "强销生死簿·脱离地府管辖", "龙宫借宝·获得定海神针（金箍棒）"],
+                    "leaving_reason": "对天庭编制的向往·被太白金星招安诱入体制"
+                },
+                {
+                    "stage": 2, "name": "弼马温", "english_name": "Bimawen (Keeper of Horses)",
+                    "title": "御马监正堂弼马温", "employer": "天庭集团（中央国企）",
+                    "salary": "无明确薪酬·包吃住·有'未入流'官职",
+                    "career_level": "L1·基层管理·天庭最低级官职（未入流）", "satisfaction": 2,
+                    "achievements": ["天马繁育率提升·马匹肥壮", "完成天庭最小单元业务（养马）"],
+                    "leaving_reason": "得知'弼马温'是天庭最低级官职（未入流）·自尊受挫·反下天庭"
+                },
+                {
+                    "stage": 3, "name": "齐天大圣", "english_name": "Great Sage Equal to Heaven",
+                    "title": "齐天大圣（空名号无实权）", "employer": "天庭集团（虚衔顾问）",
+                    "salary": "无薪酬·无实权·仅'有官无禄'·只给名号",
+                    "career_level": "L2·虚衔顾问·有名无实", "satisfaction": 4,
+                    "achievements": ["获得'齐天大圣'空名号", "代管蟠桃园（实为看大门+偷蟠桃）", "搅乱蟠桃会·偷太上老君仙丹", "大闹天宫·打败十万天兵天将"],
+                    "leaving_reason": "蟠桃会未邀请暴露虚衔本质·玉帝毁约·被如来压五行山下 500 年"
+                },
+                {
+                    "stage": 4, "name": "取行者", "english_name": "Pilgrim Sun",
+                    "title": "唐三藏大徒弟·行者", "employer": "灵山集团（取经项目外包团队）",
+                    "salary": "无薪酬·包食宿（化缘）·期权（成佛承诺）",
+                    "career_level": "L3·项目经理·执行主力", "satisfaction": 6,
+                    "achievements": ["护送唐僧西天取经 108000 里", "降妖除魔 40 余次", "搬救兵 15 次构建人脉网络", "完成 81 难·到达灵山"],
+                    "leaving_reason": "项目完成·取经成功·获得期权兑现（成佛）"
+                },
+                {
+                    "stage": 5, "name": "斗战胜佛", "english_name": "Victorious Fighting Buddha",
+                    "title": "斗战胜佛", "employer": "灵山集团（佛级合伙人）",
+                    "salary": "佛果位·香火供奉·功德积累·永享尊荣",
+                    "career_level": "L9·佛级高管·合伙人级", "satisfaction": 9,
+                    "achievements": ["完成取经项目·封号斗战胜佛", "紧箍咒自褪·解除束缚", "位列灵山诸佛之列", "成就正果·超脱轮回"],
+                    "leaving_reason": "无离职·功德圆满·正式归位灵山"
+                },
+                {
+                    "stage": 6, "name": "退休", "english_name": "Retirement",
+                    "title": "退休佛（虚构推断）", "employer": "无雇主·自由身·云游四海",
+                    "salary": "佛果位年金·花果山信托收益·自给自足",
+                    "career_level": "L10·退休·资深顾问", "satisfaction": 10,
+                    "achievements": ["回归花果山·与猴孙团聚", "云游三界·自由身", "佛果位永享·无任何 KPI", "与诸佛论道·传道受业"],
+                    "leaving_reason": "无离职·最终归宿"
+                }
+            ],
+            "career_stats": {
+                "total_stages": 6, "total_years_in_pilgrim": 14, "years_under_mountain": 500,
+                "avg_satisfaction": 6.8, "lowest_satisfaction": "弼马温（2 分）",
+                "highest_satisfaction": "石猴王 / 退休（10 分）",
+                "career_peak": "斗战胜佛（L9）", "career_trough": "弼马温（L1·未入流）"
+            },
+            "career_insights": [
+                "悟空职业曲线是'创业-被招安-受挫-再创业-被收购-合伙人-退休'的标准路径",
+                "弼马温事件是西游世界的'35 岁危机'·基层晋升通道堵塞导致反弹",
+                "齐天大圣的'有官无禄'是天庭体制陷阱·用名号安抚但不给实权",
+                "取经项目是'股权激励'的典型·用未来期权（成佛）换取当下低薪劳动",
+                "紧箍咒是'竞业协议'·防止跳槽或反叛·项目完成后自褪",
+                "斗战胜佛封号是'合伙人晋升'·从执行者变股东",
+                "悟空最大教训：单打独斗（闹天宫）失败·团队协作（取经）成功"
+            ]
+        },
+        monster: {
+            "concept_name": "妖怪创业公司",
+            "english_name": "Monster Startup Companies",
+            "definition": "5 大妖怪集团以创业公司视角分析：CEO/CTO/CMO 三驾马车·商业模式/营收/员工/融资轮次/IPO 状态/风险因素",
+            "monster_companies": [
+                {
+                    "company_name": "狮驼岭集团", "english_name": "Lion Camel Ridge Group", "ipo_ticker": "LCRG",
+                    "CEO": "大鹏雕（三弟·实际操盘·灵山背景）", "CTO": "青狮精（大哥·文殊菩萨坐骑）", "CMO": "白象精（二哥·普贤菩萨坐骑）",
+                    "business_model": "区域垄断型·狮驼岭 800 里禁地·吃人 + 收过路费·三魔分工明确",
+                    "revenue": "年营收约 96000 人命（含 500 年累计）+ 战略物资",
+                    "employees": "小妖 48000 名 + 文书后勤 10000 名·总编制约 58000",
+                    "funding_rounds": "天使轮（灵山背景）→ A 轮（文殊背书）→ B 轮（普贤背书）→ 战略投资（如来直投）",
+                    "ipo_status": "Pre-IPO 阶段·被如来直接收编·未上市即被收购",
+                    "risk_factors": ["CEO 大鹏雕是如来舅舅·政治风险极高·监管不可预测", "业务模式（吃人）违反天庭刑法·合规风险", "三位创始人均有'仙佛背景'·独立性存疑", "狮驼国已被灭国·本土市场已饱和"],
+                    "chapter": "第 74-77 回", "valuation": "高（灵山背景+战略位置）",
+                    "exit_outcome": "被如来佛祖直接收购·三妖归还原主·CEO 大鹏雕成为如来护法"
+                },
+                {
+                    "company_name": "盘丝洞集团", "english_name": "Pansi Cave Group", "ipo_ticker": "PSCG",
+                    "CEO": "蜘蛛精大姐（七姐妹创业团队）", "CTO": "蜘蛛精七妹（吐丝技术核心·黄花观蜈蚣精师兄支援）", "CMO": "蜘蛛精三姐（濯垢泉沐浴营销·色诱型转化）",
+                    "business_model": "C2C 平台·七姐妹分工·濯垢泉 SPA + 色诱劫财·客户精准定位男性",
+                    "revenue": "年劫掠客商约 200 人·累计财物 1000+ 两白银",
+                    "employees": "7 名干女儿（创始团队）+ 7 个干儿子（义兄蜈蚣精团队）+ 50 小妖",
+                    "funding_rounds": "自筹起家·无外部融资·靠蜈蚣精师兄战略结盟",
+                    "ipo_status": "未上市·被悟空团队清场·CEO 全员阵亡",
+                    "risk_factors": ["业务模式违法·侵犯人身安全", "团队规模小·抗风险能力弱", "依赖濯垢泉资源（七仙女曾用）·产权争议", "蜈蚣精师兄支援不稳定"],
+                    "chapter": "第 72-73 回", "valuation": "低（小作坊式）",
+                    "exit_outcome": "被悟空+黎山老母清场·7 蜘蛛精被杀·蜈蚣精被毗蓝婆菩萨收走"
+                },
+                {
+                    "company_name": "无底洞集团", "english_name": "Bottomless Cave Group", "ipo_ticker": "BCG",
+                    "CEO": "金鼻白毛老鼠精（自称半截观音）", "CTO": "无明确技术合伙人·自研土遁+陷空山迷宫", "CMO": "无·靠劫持唐僧+逼婚制造 PR 效应",
+                    "business_model": "绑架型 SaaS·逼婚 + 劫持·获取'唐僧肉'稀缺资源",
+                    "revenue": "无营收·纯战略投资·目标获取长生不老",
+                    "employees": "小妖 200+ 名·陷空山无底洞纵深防御",
+                    "funding_rounds": "天使轮（托塔天王义女身份）·无后续融资",
+                    "ipo_status": "未上市·被托塔天王+哪吒直接收购",
+                    "risk_factors": ["CEO 是托塔天王义女·身份造假（已认亲）", "业务模式单一·过度依赖'唐僧肉'", "无底洞防御虽深但终被攻破", "无独立技术合伙人·创新不足"],
+                    "chapter": "第 80-83 回", "valuation": "中（背景深厚）",
+                    "exit_outcome": "被托塔天王+哪吒认领收回·CEO 被带回天庭处置"
+                },
+                {
+                    "company_name": "火焰山集团", "english_name": "Flaming Mountain Group", "ipo_ticker": "FMG",
+                    "CEO": "牛魔王（家族企业·平天大圣）", "CTO": "铁扇公主（芭蕉扇技术垄断·降温+灭火核心技术）", "CMO": "红孩儿（圣婴大王·三昧真火·独立运营+品牌建设）",
+                    "business_model": "稀缺资源垄断型·芭蕉扇灭火服务·收过路费+灭火费",
+                    "revenue": "年灭火服务费 100+ 次·每次 10 年供奉·累计现金流极强",
+                    "employees": "家族企业·牛魔王+铁扇公主+红孩儿+玉面狐狸（小妾）+ 各洞小妖 500+",
+                    "funding_rounds": "自筹起家·无外部融资·靠家族资源",
+                    "ipo_status": "Pre-IPO 阶段·家族企业被多方收购·CEO 牛魔王被诸神围剿收编",
+                    "risk_factors": ["CEO 牛魔王重婚（铁扇公主+玉面狐狸）·治理结构混乱", "CMO 红孩儿独立运营·与观音菩萨冲突后被收编", "核心技术（芭蕉扇）依赖单一资源·不可复制", "家族企业继承问题严重·夫妻分居导致战略分裂"],
+                    "chapter": "第 40-42 回 + 第 59-61 回", "valuation": "高（核心技术垄断）",
+                    "exit_outcome": "家族分崩离析·红孩儿被观音收编·牛魔王被围剿归顺佛家·铁扇公主修成正果"
+                },
+                {
+                    "company_name": "黑风山集团", "english_name": "Black Wind Mountain Group", "ipo_ticker": "BWMG",
+                    "CEO": "黑熊精（自学成才型创业者）", "CTO": "自研·无技术合伙人·靠自身修炼获得'屏蔽火光'能力", "CMO": "无·靠盗取袈裟制造话题营销·无心插柳",
+                    "business_model": "知识付费型·自学佛法+道术·靠'佛衣会'品牌活动引流",
+                    "revenue": "无营收·纯学术型组织·靠化缘维持",
+                    "employees": "黑熊精 + 蛇精（财务总监）+ 苍狼精（运营）+ 小妖 30+",
+                    "funding_rounds": "自筹起家·后被观音菩萨战略投资收编",
+                    "ipo_status": "未上市·被观音菩萨直接收购·CEO 转任守山大神",
+                    "risk_factors": ["团队规模小·抗风险能力弱", "业务模式不清晰·无明确营收", "盗取袈裟引发监管注意·风险事件", "无外部融资·资金链脆弱"],
+                    "chapter": "第 16-17 回", "valuation": "中（佛学素养溢价）",
+                    "exit_outcome": "被观音菩萨收编·CEO 黑熊精转任落伽山守山大神·成功'被收购'"
+                }
+            ],
+            "ipo_matrix": {
+                "total_companies": 5, "successfully_ipo": 0, "acquired_before_ipo": 5, "acquisition_rate": 1.0,
+                "acquirers": {"如来佛祖": 1, "观音菩萨": 1, "托塔天王": 1, "诸神联合（含佛家）": 1, "黎山老母+毗蓝婆": 1},
+                "ipo_failure_root_cause": "妖怪集团 100% 被上游势力（佛/天庭）收购·无一独立 IPO",
+                "key_pattern": "西游妖怪集团本质是'已被收购的子公司'·表面独立实则依附"
+            },
+            "monster_business_insights": [
+                "5 大妖怪集团 100% 被收购·无一独立 IPO·揭示西游'妖怪经济'依附性本质",
+                "CEO 背景决定退出路径：有佛仙背景的（狮驼三魔）保命·无背景的（盘丝洞）全员阵亡",
+                "技术合伙人（CTO）决定生存力：狮驼三魔技术齐全·盘丝洞技术单一",
+                "商业模式决定价值：火焰山靠稀缺资源（芭蕉扇）估值最高·黑风山靠知识溢价",
+                "家族企业（火焰山）治理混乱导致分裂·职业化团队（狮驼岭）效率更高",
+                "妖怪集团的'风险因素'本质都是合规问题·业务模式（吃人/劫掠）违法天庭刑法",
+                "妖怪 IPO 失败的根本原因：监管方（天庭+灵山）即是竞争对手又是收购方"
+            ]
+        },
+        summary: {
+            "concept_name": "商业模型整体统计",
+            "english_name": "Business Model Summary",
+            "total_concepts": 3,
+            "concept_list": ["组织对比", "悟空职业转型", "妖怪创业公司"],
+            "total_data_points": 13,
+            "key_findings": [
+                "天庭 vs 灵山：天庭是存量维持型·灵山是增量扩张型·灵山胜在效率与创新",
+                "悟空 6 个职业阶段：从石猴王（L0）到斗战胜佛（L9）再到退休（L10）·满意度呈 U 型",
+                "5 大妖怪集团 100% 被收购·无一独立 IPO·揭示妖怪经济依附性",
+                "弼马温是天庭最低级官职（未入流）·齐天大圣是有官无禄的空名号",
+                "取经项目本质是'股权激励'·用未来期权（成佛）换取当下低薪劳动"
+            ],
+            "cross_concept_insight": "西游商业模型揭示'体制内/外'二元结构：天庭是僵化国企·灵山是高效民企·妖怪是创业公司·悟空是从创业者到合伙人的转型样本",
+            "business_lessons": [
+                "组织效率：扁平+分权 > 金字塔+集权（灵山 vs 天庭）",
+                "职业曲线：单打独斗失败·团队协作成功（悟空职业转型）",
+                "创业陷阱：依附性业务无法独立 IPO（妖怪集团）",
+                "激励机制：股权/期权 > 固定薪酬（取经项目设计）",
+                "合规风险：违法业务模式必然招致监管清场（妖怪吃人）"
+            ],
+            "data_files": {
+                "organization_comparison": "organization_comparison.json",
+                "wukong_career": "wukong_career.json",
+                "monster_business": "monster_business.json",
+                "summary": "business_model_summary.json"
+            }
+        }
+    };
+
+    // ===== 13 维度评分映射（基于组织文本描述的量化评分 0-10）=====
+    const ORG_SCORES = {
+        // [天庭, 灵山]
+        "vision":          [5, 9],
+        "leadership":      [6, 9],
+        "org_structure":   [4, 8],
+        "employee_count":  [9, 6],
+        "core_business":   [6, 8],
+        "kpi":             [5, 8],
+        "revenue_model":   [7, 6],
+        "culture":         [3, 8],
+        "decision_making": [4, 8],
+        "innovation":      [2, 8],
+        "employee_benefits":[6, 7],
+        "transparency":    [2, 5],
+        "efficiency":      [3, 9]
+    };
+    const DIM_CN = {
+        "vision": "愿景", "leadership": "领导力", "org_structure": "组织结构",
+        "employee_count": "员工规模", "core_business": "核心业务", "kpi": "KPI",
+        "revenue_model": "营收模式", "culture": "文化", "decision_making": "决策机制",
+        "innovation": "创新能力", "employee_benefits": "员工福利",
+        "transparency": "透明度", "efficiency": "效率"
+    };
+
+    // ===== 妖怪营收评分映射（基于 revenue 文本量化 0-10）=====
+    const MONSTER_REVENUE_SCORE = {
+        "狮驼岭集团": 10,
+        "盘丝洞集团": 3,
+        "无底洞集团": 0,
+        "火焰山集团": 8,
+        "黑风山集团": 1
+    };
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('[fallback] ' + path + ' → embedded data:', e.message);
+            return fallback;
+        }
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== Main render =====
+    async function main() {
+        const baseUrl = '../../scripts/output/data/';
+        const [org, career, monster, summary] = await Promise.all([
+            loadJson(baseUrl + 'organization_comparison.json', EMBEDDED.organization),
+            loadJson(baseUrl + 'wukong_career.json', EMBEDDED.career),
+            loadJson(baseUrl + 'monster_business.json', EMBEDDED.monster),
+            loadJson(baseUrl + 'business_model_summary.json', EMBEDDED.summary)
+        ]);
+        window.__lastData = { org, career, monster, summary };
+
+        renderOrgBar(org);
+        renderOrgTable(org);
+        renderOrgInsights(org);
+        renderCareerLine(career);
+        renderCareerStair(career);
+        renderCareerTable(career);
+        renderCareerInsights(career);
+        renderIpoPie(monster);
+        renderRevenueBar(monster);
+        renderMonsterCards(monster);
+        renderMonsterTable(monster);
+        renderMonsterInsights(monster);
+    }
+
+    // ===== Section 1: 天庭 vs 灵山 13 维度分组条形图 =====
+    function renderOrgBar(data) {
+        const svg = d3.select('#chart-org-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 800), H = 460;
+        const m = {top: 30, right: 30, bottom: 90, left: 50};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const dims = data.comparison_dimensions;
+        const orgs = data.organizations.map(o => o.name); // ['天庭', '灵山']
+
+        const x0 = d3.scaleBand().domain(dims.map(d => DIM_CN[d] || d)).range([0, w]).padding(0.2);
+        const x1 = d3.scaleBand().domain(orgs).range([0, x0.bandwidth()]).padding(0.05);
+        const y = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x0).tickSize(0).tickPadding(10))
+            .selectAll('text').style('font-size', '11px')
+            .attr('transform', 'rotate(-30)')
+            .style('text-anchor', 'end');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 78)
+            .attr('text-anchor', 'middle')
+            .text('对比维度（13 维）');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -36)
+            .attr('text-anchor', 'middle')
+            .text('评分 (0-10)');
+
+        const colors = {'天庭': '#c8463a', '灵山': '#3a6b8c'};
+
+        const groups = g.selectAll('.dim-group')
+            .data(dims).enter().append('g')
+            .attr('class', 'dim-group')
+            .attr('transform', d => `translate(${x0(DIM_CN[d] || d)},0)`);
+
+        groups.selectAll('rect')
+            .data(d => orgs.map(o => ({dim: d, org: o, value: ORG_SCORES[d][o === '天庭' ? 0 : 1]})))
+            .enter().append('rect')
+            .attr('x', d => x1(d.org))
+            .attr('y', d => y(d.value))
+            .attr('width', x1.bandwidth())
+            .attr('height', d => h - y(d.value))
+            .attr('fill', d => colors[d.org])
+            .attr('stroke', '#fff').attr('stroke-width', 1)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                const orgObj = data.organizations.find(o => o.name === d.org);
+                tooltip.show(
+                    `<strong style="color:${colors[d.org]}">${d.org}</strong> · ${DIM_CN[d.dim]}<br>` +
+                    `评分：<strong>${d.value}</strong> / 10<br>` +
+                    `<em>${orgObj[d.dim]}</em>`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 柱顶数值
+        groups.selectAll('.bar-val')
+            .data(d => orgs.map(o => ({dim: d, org: o, value: ORG_SCORES[d][o === '天庭' ? 0 : 1]})))
+            .enter().append('text')
+            .attr('class', 'bar-val')
+            .attr('x', d => x1(d.org) + x1.bandwidth() / 2)
+            .attr('y', d => y(d.value) - 4)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10px')
+            .style('fill', '#2c2418')
+            .style('font-weight', '600')
+            .text(d => d.value);
+    }
+
+    function renderOrgTable(data) {
+        const tbody = d3.select('#org-table tbody');
+        const dims = data.comparison_dimensions;
+        const rows = tbody.selectAll('tr').data(dims).enter().append('tr');
+        rows.append('td').text((d, i) => i + 1);
+        rows.append('td').html(d => '<strong>' + (DIM_CN[d] || d) + '</strong>');
+        rows.append('td').text(d => data.organizations[0][d]);
+        rows.append('td').text(d => data.organizations[1][d]);
+        rows.append('td').html(d => {
+            const [t, l] = ORG_SCORES[d];
+            if (l > t) return '<span class="icon-correct">灵山</span> (' + l + ' vs ' + t + ')';
+            if (t > l) return '<span class="icon-wrong">天庭</span> (' + t + ' vs ' + l + ')';
+            return '<span style="color:var(--ink-soft);">平手</span> (' + t + ' vs ' + l + ')';
+        });
+    }
+
+    function renderOrgInsights(data) {
+        const list = d3.select('#org-insights-list');
+        list.selectAll('li').data(data.key_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 2: 悟空满意度折线图 =====
+    function renderCareerLine(data) {
+        const svg = d3.select('#chart-career-line');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 380;
+        const m = {top: 40, right: 50, bottom: 70, left: 50};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const stages = data.career_stages;
+        const labels = stages.map(d => d.name);
+
+        const x = d3.scalePoint().domain(labels).range([0, w]).padding(0.5);
+        const y = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
+            .selectAll('text').style('font-size', '11px');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 50)
+            .attr('text-anchor', 'middle')
+            .text('职业阶段');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -36)
+            .attr('text-anchor', 'middle')
+            .text('satisfaction 满意度 (0-10)');
+
+        // U 型谷底阴影（弼马温）
+        const trough = stages[1];
+        const tx = x(trough.name);
+        g.append('rect')
+            .attr('x', tx - 35).attr('y', -10)
+            .attr('width', 70).attr('height', h + 20)
+            .attr('fill', '#e9b885').attr('opacity', 0.2);
+        g.append('text')
+            .attr('x', tx).attr('y', -16)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#7a5230')
+            .style('font-size', '11px').style('font-weight', '600')
+            .text('▼ U 型谷底');
+
+        // 折线
+        const line = d3.line().x(d => x(d.name)).y(d => y(d.satisfaction)).curve(d3.curveMonotoneX);
+        g.append('path').datum(stages)
+            .attr('fill', 'none')
+            .attr('stroke', '#3a6b8c')
+            .attr('stroke-width', 2.5)
+            .attr('d', line);
+
+        // 点 + tooltip + career_level 标注
+        g.selectAll('.pt-career')
+            .data(stages).enter().append('circle')
+            .attr('class', 'pt-career')
+            .attr('cx', d => x(d.name)).attr('cy', d => y(d.satisfaction))
+            .attr('r', 7).attr('fill', '#3a6b8c').attr('stroke', '#fff').attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>${d.stage}. ${d.name}</strong> · ${d.title}<br>` +
+                    `雇主：${d.employer}<br>` +
+                    `职级：<strong style="color:#c8463a">${d.career_level}</strong><br>` +
+                    `满意度：<strong>${d.satisfaction}</strong> / 10<br>` +
+                    `薪酬：${d.salary}<br>` +
+                    `<em>离职：${d.leaving_reason}</em>`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // career_level 标注
+        g.selectAll('.lvl-label')
+            .data(stages).enter().append('text')
+            .attr('class', 'lvl-label')
+            .attr('x', d => x(d.name))
+            .attr('y', d => y(d.satisfaction) - 16)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10px')
+            .style('font-weight', '600')
+            .attr('fill', '#c8463a')
+            .text(d => d.career_level.split('·')[0]);
+
+        // satisfaction 数值
+        g.selectAll('.sat-label')
+            .data(stages).enter().append('text')
+            .attr('class', 'sat-label')
+            .attr('x', d => x(d.name))
+            .attr('y', d => y(d.satisfaction) + 22)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '11px')
+            .style('font-weight', '600')
+            .attr('fill', '#3a6b8c')
+            .text(d => d.satisfaction);
+    }
+
+    // ===== Section 2: career_level 阶梯图 =====
+    function renderCareerStair(data) {
+        const svg = d3.select('#chart-career-stair');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 380;
+        const m = {top: 30, right: 50, bottom: 70, left: 50};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const stages = data.career_stages;
+        const labels = stages.map(d => d.name);
+        // 提取 career_level 数字
+        const levels = stages.map(d => parseInt(d.career_level.match(/L(\d+)/)[1]));
+
+        const x = d3.scalePoint().domain(labels).range([0, w]).padding(0.5);
+        const y = d3.scaleLinear().domain([0, 11]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(6))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
+            .selectAll('text').style('font-size', '11px');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(6).tickFormat(d => 'L' + d));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 50)
+            .attr('text-anchor', 'middle')
+            .text('职业阶段');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -36)
+            .attr('text-anchor', 'middle')
+            .text('career_level 职级 (L0-L10)');
+
+        // L3→L9 跳跃阴影
+        const jumpStart = x(labels[3]);
+        const jumpEnd = x(labels[4]);
+        g.append('rect')
+            .attr('x', jumpStart).attr('y', 0)
+            .attr('width', jumpEnd - jumpStart).attr('height', h)
+            .attr('fill', '#e9b885').attr('opacity', 0.18);
+        g.append('text')
+            .attr('x', (jumpStart + jumpEnd) / 2).attr('y', 16)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#7a5230')
+            .style('font-size', '11px').style('font-weight', '600')
+            .text('◀ 期权兑现跳跃 L3→L9 ▶');
+
+        // 阶梯线（curveStep）
+        const line = d3.line()
+            .x((d, i) => x(labels[i]))
+            .y((d, i) => y(levels[i]))
+            .curve(d3.curveStepAfter);
+        g.append('path').datum(stages)
+            .attr('fill', 'none')
+            .attr('stroke', '#c8463a')
+            .attr('stroke-width', 3)
+            .attr('d', line);
+
+        // 点 + tooltip
+        g.selectAll('.pt-stair')
+            .data(stages).enter().append('circle')
+            .attr('class', 'pt-stair')
+            .attr('cx', (d, i) => x(labels[i]))
+            .attr('cy', (d, i) => y(levels[i]))
+            .attr('r', 7).attr('fill', '#c8463a').attr('stroke', '#fff').attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                const lvl = parseInt(d.career_level.match(/L(\d+)/)[1]);
+                tooltip.show(
+                    `<strong>${d.stage}. ${d.name}</strong><br>` +
+                    `职级：<strong style="color:#c8463a">${d.career_level}</strong><br>` +
+                    `L${lvl} 数字等级<br>` +
+                    `满意度：${d.satisfaction} / 10<br>` +
+                    `雇主：${d.employer}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // level 数值标注
+        g.selectAll('.lvl-stair-label')
+            .data(stages).enter().append('text')
+            .attr('class', 'lvl-stair-label')
+            .attr('x', (d, i) => x(labels[i]))
+            .attr('y', (d, i) => y(levels[i]) - 14)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '12px')
+            .style('font-weight', '700')
+            .attr('fill', '#c8463a')
+            .text((d, i) => 'L' + levels[i]);
+    }
+
+    function renderCareerTable(data) {
+        const tbody = d3.select('#career-table tbody');
+        const rows = tbody.selectAll('tr').data(data.career_stages).enter().append('tr');
+        rows.append('td').text(d => d.stage);
+        rows.append('td').html(d => '<strong>' + d.name + '</strong>');
+        rows.append('td').text(d => d.title);
+        rows.append('td').text(d => d.employer);
+        rows.append('td').text(d => d.salary);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.career_level + '</strong>');
+        rows.append('td').html(d => {
+            const sat = d.satisfaction;
+            const color = sat >= 8 ? 'var(--accent-4)' : (sat >= 5 ? 'var(--accent-2)' : 'var(--accent)');
+            return '<strong style="color:' + color + ';">' + sat + ' / 10</strong>';
+        });
+        rows.append('td').text(d => d.leaving_reason);
+    }
+
+    function renderCareerInsights(data) {
+        const list = d3.select('#career-insights-list');
+        list.selectAll('li').data(data.career_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 3: IPO 失败饼图 =====
+    function renderIpoPie(data) {
+        const svg = d3.select('#chart-ipo-pie');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 700;
+        const W = Math.max(containerW, 500), H = 380;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const cx = W / 2, cy = H / 2;
+        const radius = Math.max(0, Math.min(W, H) / 2 - 60);
+
+        // 按 ipo_status 分组
+        const groups = {};
+        data.monster_companies.forEach(c => {
+            let key;
+            if (c.ipo_status.indexOf('Pre-IPO') >= 0) {
+                key = 'Pre-IPO 被收购';
+            } else if (c.ipo_status.indexOf('清场') >= 0) {
+                key = '未上市被清场';
+            } else {
+                key = '未上市被收购';
+            }
+            if (!groups[key]) groups[key] = [];
+            groups[key].push(c);
+        });
+
+        const pieData = Object.keys(groups).map(k => ({
+            key: k,
+            value: groups[k].length,
+            companies: groups[k]
+        }));
+
+        const colorMap = {
+            'Pre-IPO 被收购': '#c8463a',
+            '未上市被收购': '#3a6b8c',
+            '未上市被清场': '#5a7a3a'
+        };
+
+        const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+        const pie = d3.pie().value(d => d.value).sort(null);
+        const arc = d3.arc().innerRadius(0).outerRadius(radius);
+        const arcHover = d3.arc().innerRadius(0).outerRadius(radius + 8);
+        const labelArc = d3.arc().innerRadius(radius + 20).outerRadius(radius + 20);
+
+        const arcs = g.selectAll('.arc')
+            .data(pie(pieData)).enter().append('g')
+            .attr('class', 'arc');
+
+        arcs.append('path')
+            .attr('d', arc)
+            .attr('fill', d => colorMap[d.data.key])
+            .attr('stroke', '#fff').attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(e, d) {
+                d3.select(this).transition().duration(150).attr('d', arcHover);
+                const companyList = d.data.companies.map(c => '· ' + c.company_name + '（' + c.ipo_ticker + '）').join('<br>');
+                tooltip.show(
+                    `<strong style="color:${colorMap[d.data.key]}">${d.data.key}</strong><br>` +
+                    `数量：<strong>${d.data.value}</strong> / 5 家（${(d.data.value/5*100).toFixed(0)}%）<br>` +
+                    `<em>公司列表：</em><br>${companyList}`, e);
+            })
+            .on('mouseout', function() {
+                d3.select(this).transition().duration(150).attr('d', arc);
+                tooltip.hide();
+            });
+
+        // 扇区内文字
+        arcs.append('text')
+            .attr('transform', d => `translate(${arc.centroid(d)})`)
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
+            .style('font-size', '14px')
+            .style('font-weight', '700')
+            .attr('fill', '#fff')
+            .text(d => d.data.value + ' 家');
+
+        // 引线标签
+        arcs.append('text')
+            .attr('transform', d => {
+                const pos = labelArc.centroid(d);
+                return `translate(${pos})`;
+            })
+            .attr('text-anchor', d => (d.endAngle + d.startAngle) / 2 > Math.PI ? 'end' : 'start')
+            .style('font-size', '11px')
+            .style('font-weight', '600')
+            .attr('fill', '#2c2418')
+            .text(d => d.data.key);
+
+        // 中心文字
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('dy', -8)
+            .style('font-size', '22px')
+            .style('font-weight', '700')
+            .attr('fill', '#c8463a')
+            .text('100%');
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('dy', 16)
+            .style('font-size', '12px')
+            .attr('fill', '#6b5e4d')
+            .text('IPO 失败率');
+    }
+
+    // ===== Section 3: 营收对比柱状图 =====
+    function renderRevenueBar(data) {
+        const svg = d3.select('#chart-revenue-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 380;
+        const m = {top: 30, right: 30, bottom: 80, left: 50};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const companies = data.monster_companies;
+        const labels = companies.map(c => c.company_name.replace('集团', ''));
+
+        const x = d3.scaleBand().domain(labels).range([0, w]).padding(0.25);
+        const y = d3.scaleLinear().domain([0, 11]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
+            .selectAll('text').style('font-size', '11px');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 55)
+            .attr('text-anchor', 'middle')
+            .text('妖怪公司');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -36)
+            .attr('text-anchor', 'middle')
+            .text('营收评分 (0-10)');
+
+        const colors = ['#c8463a', '#e9b885', '#3a6b8c', '#c8463a', '#5a7a3a'];
+
+        g.selectAll('.rev-bar')
+            .data(companies).enter().append('rect')
+            .attr('class', 'rev-bar')
+            .attr('x', (d, i) => x(labels[i]))
+            .attr('y', d => y(MONSTER_REVENUE_SCORE[d.company_name]))
+            .attr('width', x.bandwidth())
+            .attr('height', d => h - y(MONSTER_REVENUE_SCORE[d.company_name]))
+            .attr('fill', (d, i) => colors[i])
+            .attr('stroke', '#fff').attr('stroke-width', 1)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                const score = MONSTER_REVENUE_SCORE[d.company_name];
+                tooltip.show(
+                    `<strong>${d.company_name}</strong>（${d.ipo_ticker}）<br>` +
+                    `营收评分：<strong>${score}</strong> / 10<br>` +
+                    `<em>原始营收：${d.revenue}</em><br>` +
+                    `商业模式：${d.business_model}<br>` +
+                    `估值：${d.valuation}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 柱顶数值
+        g.selectAll('.rev-val')
+            .data(companies).enter().append('text')
+            .attr('class', 'rev-val')
+            .attr('x', (d, i) => x(labels[i]) + x.bandwidth() / 2)
+            .attr('y', d => y(MONSTER_REVENUE_SCORE[d.company_name]) - 6)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '13px')
+            .style('font-weight', '700')
+            .attr('fill', '#2c2418')
+            .text(d => MONSTER_REVENUE_SCORE[d.company_name]);
+    }
+
+    function renderMonsterCards(data) {
+        const colorClass = {
+            '狮驼岭集团': '', '盘丝洞集团': 'm-pansi', '无底洞集团': 'm-bottomless',
+            '火焰山集团': 'm-flaming', '黑风山集团': 'm-blackwind'
+        };
+        const grid = d3.select('#monster-grid');
+        const cards = grid.selectAll('.monster-card')
+            .data(data.monster_companies).enter()
+            .append('div')
+            .attr('class', d => 'monster-card ' + (colorClass[d.company_name] || ''));
+        cards.append('div').attr('class', 'monster-name').text(d => d.company_name);
+        cards.append('div').attr('class', 'monster-ticker').text(d => d.ipo_ticker + ' · ' + d.chapter);
+        cards.append('div').attr('class', 'monster-row').html(d => '<strong>CEO：</strong>' + d.CEO);
+        cards.append('div').attr('class', 'monster-row').html(d => '<strong>CTO：</strong>' + d.CTO);
+        cards.append('div').attr('class', 'monster-row').html(d => '<strong>商业模式：</strong>' + d.business_model);
+        cards.append('div').attr('class', 'monster-row').html(d => '<strong>营收：</strong>' + d.revenue);
+        cards.append('div').attr('class', 'monster-row').html(d => '<strong>估值：</strong>' + d.valuation);
+        cards.append('div').attr('class', 'ipo-badge failed').text(d => '✗ ' + d.ipo_status);
+    }
+
+    function renderMonsterTable(data) {
+        const tbody = d3.select('#monster-table tbody');
+        const rows = tbody.selectAll('tr').data(data.monster_companies).enter().append('tr');
+        rows.append('td').html(d => '<strong>' + d.company_name + '</strong>');
+        rows.append('td').text(d => d.ipo_ticker);
+        rows.append('td').text(d => d.CEO);
+        rows.append('td').text(d => d.business_model);
+        rows.append('td').text(d => d.revenue);
+        rows.append('td').text(d => d.employees);
+        rows.append('td').html(d => '<span class="icon-wrong">✗</span> ' + d.ipo_status);
+        rows.append('td').text(d => d.valuation);
+        rows.append('td').text(d => d.chapter);
+    }
+
+    function renderMonsterInsights(data) {
+        const list = d3.select('#monster-insights-list');
+        list.selectAll('li').data(data.monster_business_insights).enter().append('li').text(d => d);
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

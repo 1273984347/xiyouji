@@ -1,0 +1,26 @@
+[project]
+name = "xiyouji-mcp"
+version = "0.1.0"
+description = "《详解西游记》项目工程化工具 MCP Server"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=0.1.0",
+]
+
+[project.scripts]
+xiyouji-mcp = "xiyouji_mcp:mcp.run"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["xiyouji_mcp"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = ["E501"]  # 行长由 line-length 控制

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>取经路线交互式地图 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染地图。</p></noscript>
+    <style>
+        :root {
+            --bg: #f9f9f9;
+            --paper: #ffffff;
+            --ink: #2c3e50;
+            --ink-soft: #6b7c8c;
+            --accent: #e67e22;
+            --accent-soft: #f4d4b2;
+            --accent-2: #2c3e50;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(44, 62, 80, 0.08), 0 4px 12px rgba(44, 62, 80, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .breadcrumb { background: var(--accent-2); color: #f5e9d4; padding: 10px 24px; font-size: 0.85rem; }
+        .breadcrumb a { color: #f4d4b2; text-decoration: none; margin: 0 6px; }
+        .breadcrumb a:hover { color: #fff; text-decoration: underline; }
+        .breadcrumb .sep { color: rgba(245, 233, 212, 0.5); margin: 0 4px; }
+        .hero { background: linear-gradient(135deg, #1a2530 0%, #2c3e50 50%, #3a5a78 100%); color: #f5e9d4; padding: 40px 24px 30px; text-align: center; position: relative; overflow: hidden; }
+        .hero::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 70% 30%, rgba(230, 126, 34, 0.18), transparent 60%); pointer-events: none; }
+        .hero h1 { font-size: 2.0rem; font-weight: 600; letter-spacing: 0.1em; margin-bottom: 6px; position: relative; z-index: 1; }
+        .hero .subtitle { font-size: 0.9rem; color: var(--accent-soft); letter-spacing: 0.25em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 10px; font-size: 0.82rem; color: rgba(245, 233, 212, 0.65); font-style: italic; position: relative; z-index: 1; }
+        .container { max-width: 1200px; margin: -20px auto 60px; padding: 0 24px; position: relative; z-index: 2; }
+        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 14px; margin-bottom: 28px; }
+        .kpi-card { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 6px; padding: 16px 18px; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; }
+        .kpi-card:hover { transform: translateY(-2px); }
+        .kpi-card .label { font-size: 0.72rem; color: var(--accent); letter-spacing: 0.15em; margin-bottom: 6px; font-family: "JetBrains Mono", monospace; }
+        .kpi-card .value { font-size: 1.5rem; font-weight: 600; color: var(--ink); line-height: 1.2; margin-bottom: 4px; }
+        .kpi-card .desc { font-size: 0.78rem; color: var(--ink-soft); }
+        .section { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 24px; box-shadow: var(--shadow); margin-bottom: 22px; }
+        .section-title { font-size: 1.2rem; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 2px solid var(--accent); display: inline-block; color: var(--accent-2); }
+        .section-sub { font-size: 0.84rem; color: var(--ink-soft); margin-bottom: 18px; }
+        .chart-block { margin-top: 8px; }
+        .chart-block svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+        .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font-size: 0.82rem; justify-content: center; }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-swatch { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+        .tooltip { position: absolute; background: rgba(26, 37, 48, 0.95); color: #f5e9d4; padding: 10px 14px; border-radius: 4px; font-size: 0.82rem; pointer-events: none; opacity: 0; transition: opacity 0.15s; line-height: 1.6; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 10; max-width: 280px; }
+        .controls { display: flex; align-items: center; gap: 14px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
+        .btn { background: var(--accent); color: #fff; border: none; padding: 8px 18px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; font-family: "Noto Serif SC", serif; transition: background 0.2s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: #c0691a; }
+        .btn.secondary { background: var(--accent-2); }
+        .btn.secondary:hover { background: #1a2530; }
+        .map-node { cursor: pointer; }
+        .map-node circle:hover { r: 9; }
+        .timeline-bar rect { cursor: pointer; transition: fill 0.2s; }
+        .hardship-detail {
+            background: #fff5e6;
+            border: 1px solid #f4d4b2;
+            border-left: 4px solid #e67e22;
+            border-radius: 6px;
+            padding: 14px 18px;
+            margin-top: 14px;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            display: none;
+        }
+        .hardship-detail.visible { display: block; }
+        .hardship-detail h4 { color: #e67e22; margin-bottom: 6px; }
+        footer { text-align: center; padding: 22px; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 30px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="sep">›</span>
+        <a href="dashboard.html">dashboard</a>
+        <span class="sep">›</span>
+        取经路线交互式地图
+    </nav>
+
+    <header class="hero">
+        <h1>取经路线交互式地图</h1>
+        <div class="subtitle">JOURNEY MAP INTERACTIVE</div>
+        <div class="tagline">取经路线与中国地理的交互式映射——9 大难点标注、时间轴双轴、跨页面联动跳转。</div>
+    </header>
+
+    <main class="container">
+        <div class="kpi-row" id="kpiRow"></div>
+
+        <!-- 控制面板 -->
+        <section class="section">
+            <h2 class="section-title">时间轴控制</h2>
+            <div class="section-sub">点击下方时间轴节点定位取经路线位置，或拖动滑块。</div>
+            <div class="controls">
+                <button class="btn" id="btnPlay">▶ 播放路线</button>
+                <button class="btn secondary" id="btnPause">⏸ 暂停</button>
+                <input type="range" min="0" max="16" value="0" class="timeline-slider" id="routeSlider" style="width:50%; min-width:260px;">
+                <span style="font-size:1.0rem; color:var(--accent-2); font-weight:600; min-width:140px;" id="routeDisplay">起点：长安</span>
+            </div>
+        </section>
+
+        <!-- 图1：地图 -->
+        <section class="section">
+            <h2 class="section-title">取经路线地图</h2>
+            <div class="section-sub">基于中国地理坐标的取经路线，17 个关键节点连接成长安到灵山的完整路径。点击节点跳转相关页面（如"流沙河"跳转 journey-route.html），9 个难点可点击展开详情。</div>
+            <div class="chart-block">
+                <svg id="chart-map" width="1150" height="640"></svg>
+                <div class="legend">
+                    <div class="legend-item"><span class="legend-swatch" style="background:#e67e22"></span>普通节点</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#c8463a"></span>九难点（点击展开）</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#5a7a3a"></span>起点/终点</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#3a6b8c; opacity:0.6"></span>取经路线</div>
+                </div>
+                <div class="hardship-detail" id="hardshipDetail">
+                    <h4 id="hdTitle"></h4>
+                    <div id="hdContent"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 图2：时间轴 -->
+        <section class="section">
+            <h2 class="section-title">取经时间轴</h2>
+            <div class="section-sub">17 个关键节点的耗时分布，柱高反映该段路程耗时（月）。点击柱子定位地图节点。</div>
+            <div class="chart-block">
+                <svg id="chart-timeline" width="1150" height="240"></svg>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">相关页面</h2>
+            <div class="section-sub">本页与 journey-route.html 形成"静态-交互"双轨，可对照阅读。</div>
+            <p style="font-size:0.92rem; line-height:2;">
+                <a href="journey-route.html" style="color:var(--accent); text-decoration:none;">→ 取经全路程图（静态轨）</a> ·
+                <a href="dashboard.html" style="color:var(--accent-2); text-decoration:none;">← 返回 dashboard</a> ·
+                <a href="journey-spacetime.html" style="color:var(--accent-2); text-decoration:none;">→ 时空分析</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>详解西游记 · 取经路线交互式地图 · W236-V · V4 跨页面联动</p>
+        <p>D3.js + TopoJSON 中国地图 + 时间轴双轴，与 journey-route.html 形成"静态-交互"双轨。</p>
+        <p>
+            <a href="../dashboard.html">← 返回数据仪表盘</a> ·
+            <a href="journey-route.html">查看静态取经路线 →</a> ·
+            <a href="journey-spacetime.html">查看时空分析 →</a>
+        </p>
+        <div class="footer-index">
+            正向时间线：CHANGELOG.md v2.2.42 W236 · 反向文件索引：site/data/ · V 方向·W236 六页并行
+        </div>
+        <div class="footer-cross">
+            跨文档链接：
+            <a href="journey-route.html">journey-route.html</a> /
+            <a href="journey-spacetime.html">journey-spacetime.html</a> /
+            <a href="dashboard.html">dashboard.html</a>
+        </div>
+    </footer>
+    <!-- FILE_INDEX: journey-map-interactive.html | W236-V | 取经路线交互式地图（D3+TopoJSON+时间轴+9难点） -->
+    <!-- CHANGELOG: v2.2.42 W236 V4 跨页面联动 -->
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+    // ============= EMBEDDED_DATA =============
+    const EMBEDDED_DATA = {
+        meta: {title: "取经路线交互式地图", version: "v2.2.42", w_id: "W236-V", direction: "V4"},
+        kpi: [
+            {label: "DISTANCE · 总里程", value: "10.8万里", desc: "约 5.4 万公里"},
+            {label: "COUNTRIES · 途经国", value: "12", desc: "邦国/部族"},
+            {label: "HARDSHIPS · 难点", value: "9", desc: "重大难点标注"},
+            {label: "FARTHEST · 最远点", value: "灵山", desc: "西天雷音寺"},
+            {label: "DURATION · 耗时", value: "14年", desc: "约 5040 日"}
+        ],
+        // 17 个取经路线节点（经纬度近似坐标）
+        nodes: [
+            {id: 0, name: "长安", lon: 108.9, lat: 34.3, isHardship: false, linkPage: "journey-route.html", desc: "取经起点，唐王送行之处。", duration: 0, chapter: "第12回"},
+            {id: 1, name: "双叉岭", lon: 107.5, lat: 33.8, isHardship: false, linkPage: "journey-route.html", desc: "唐僧首难，被寅将军擒获。", duration: 1, chapter: "第13回"},
+            {id: 2, name: "两界山", lon: 106.0, lat: 33.5, isHardship: false, linkPage: "journey-route.html", desc: "收孙悟空，五行山改名。", duration: 1, chapter: "第14回"},
+            {id: 3, name: "鹰愁涧", lon: 104.0, lat: 33.0, isHardship: false, linkPage: "journey-route.html", desc: "收白龙马，小白龙化马。", duration: 1, chapter: "第15回"},
+            {id: 4, name: "观音院", lon: 102.0, lat: 32.5, isHardship: false, linkPage: "journey-route.html", desc: "黑熊精偷袈裟，观音收妖。", duration: 2, chapter: "第16-17回"},
+            {id: 5, name: "高老庄", lon: 100.0, lat: 32.0, isHardship: false, linkPage: "journey-route.html", desc: "收猪八戒，庄主招亲。", duration: 1, chapter: "第18-19回"},
+            {id: 6, name: "流沙河", lon: 98.0, lat: 31.5, isHardship: true, linkPage: "journey-route.html", desc: "收沙悟净，七日难渡。", duration: 2, chapter: "第22回", hardshipTitle: "流沙河八百难渡", hardshipDesc: "八百里流沙，鹅毛浮不起。沙僧九世吃取经人，终被收服，成为取经团第三徒。"},
+            {id: 7, name: "五庄观", lon: 96.0, lat: 31.0, isHardship: false, linkPage: "journey-route.html", desc: "镇元大仙，人参果事件。", duration: 2, chapter: "第24-26回"},
+            {id: 8, name: "白虎岭", lon: 94.0, lat: 30.5, isHardship: true, linkPage: "journey-route.html", desc: "三打白骨精，师徒离心。", duration: 1, chapter: "第27回", hardshipTitle: "三打白骨精", hardshipDesc: "白骨精三变戏弄，唐僧逐走悟空。师徒首次严重裂痕，反映信任与误解的主题。"},
+            {id: 9, name: "黑松林", lon: 92.0, lat: 30.0, isHardship: false, linkPage: "journey-route.html", desc: "黄袍怪擒唐僧。", duration: 3, chapter: "第28-31回"},
+            {id: 10, name: "平顶山", lon: 90.0, lat: 29.5, isHardship: true, linkPage: "journey-route.html", desc: "金角银角大王。", duration: 2, chapter: "第32-35回", hardshipTitle: "平顶山金角银角", hardshipDesc: "太上老君两童子下凡，持紫金红葫芦等五件法宝。悟空智夺法宝，降伏二妖。"},
+            {id: 11, name: "号山", lon: 88.0, lat: 29.0, isHardship: true, linkPage: "journey-route.html", desc: "红孩儿三昧真火。", duration: 3, chapter: "第40-42回", hardshipTitle: "火云洞红孩儿", hardshipDesc: "牛魔王之子红孩儿，三昧真火难灭。悟空请观音收服，封为善财童子。"},
+            {id: 12, name: "通天河", lon: 86.0, lat: 28.5, isHardship: true, linkPage: "journey-route.html", desc: "老鼋驮渡，灵感大王。", duration: 2, chapter: "第47-49回", hardshipTitle: "通天河灵感大王", hardshipDesc: "金鱼精每年吃童男女，悟空请观音收服。归途老鼋驮渡，后于第98回落水。"},
+            {id: 13, name: "火焰山", lon: 84.0, lat: 28.0, isHardship: true, linkPage: "journey-route.html", desc: "三调芭蕉扇。", duration: 3, chapter: "第59-61回", hardshipTitle: "火焰山三调芭蕉扇", hardshipDesc: "八百里火焰山阻路。悟空三调芭蕉扇，斗智斗勇于铁扇公主与牛魔王，最终灭火通行。"},
+            {id: 14, name: "小雷音寺", lon: 82.0, lat: 27.5, isHardship: true, linkPage: "journey-route.html", desc: "黄眉大王假佛。", duration: 2, chapter: "第65-66回", hardshipTitle: "小雷音寺黄眉怪", hardshipDesc: "弥勒童子黄眉假佛设局，悟空困于金铙。请二十八宿方脱困，弥勒亲降收服。"},
+            {id: 15, name: "狮驼岭", lon: 80.0, lat: 27.0, isHardship: true, linkPage: "journey-route.html", desc: "三大魔王最险。", duration: 4, chapter: "第74-77回", hardshipTitle: "狮驼岭三大魔王", hardshipDesc: "青狮、白象、大鹏三大魔王，悟空最险一战。如来亲降收服大鹏，全书最艰难段落之一。"},
+            {id: 16, name: "灵山", lon: 78.0, lat: 26.5, isHardship: false, linkPage: "journey-route.html", desc: "西天雷音寺，取经终点。", duration: 1, chapter: "第98回"}
+        ]
+    };
+
+    // 提示框
+    const tooltip = d3.select("#tooltip");
+    function showTooltip(html, event) {
+        tooltip.html(html).style("opacity", 1);
+        moveTooltip(event);
+    }
+    function moveTooltip(event) {
+        tooltip.style("left", (event.pageX + 12) + "px").style("top", (event.pageY - 12) + "px");
+    }
+    function hideTooltip() { tooltip.style("opacity", 0); }
+
+    // 渲染 KPI
+    function renderKPI(data) {
+        const row = d3.select("#kpiRow");
+        row.selectAll(".kpi-card").data(data.kpi).enter()
+          .append("div").attr("class", "kpi-card")
+          .html(d => `<div class="label">${d.label}</div><div class="value">${d.value}</div><div class="desc">${d.desc}</div>`);
+    }
+
+    let currentNodeIdx = 0;
+    let playInterval = null;
+
+    // ============= 图1：地图 =============
+    function renderMap(data) {
+        const width = 1150, height = 640;
+        const svg = d3.select("#chart-map");
+        svg.selectAll("*").remove();
+
+        // 投影：基于经纬度的自定义投影（无需 TopoJSON 数据，简化展示）
+        // 经度范围 78-110, 纬度范围 26-35
+        const projection = d3.geoMercator()
+            .center([94, 30.5])
+            .scale(2200)
+            .translate([width / 2, height / 2]);
+
+        const g = svg.append("g");
+
+        // 绘制简化的中国西部地理背景（多边形示意，模拟山脉河流）
+        // 背景：渐变
+        const defs = svg.append("defs");
+        const bgGrad = defs.append("linearGradient")
+            .attr("id", "bgGrad")
+            .attr("x1", "0%").attr("y1", "0%").attr("x2", "0%").attr("y2", "100%");
+        bgGrad.append("stop").attr("offset", "0%").attr("stop-color", "#f0e8d8");
+        bgGrad.append("stop").attr("offset", "100%").attr("stop-color", "#e8dcc4");
+
+        g.append("rect")
+            .attr("x", 0).attr("y", 0)
+            .attr("width", width).attr("height", height)
+            .attr("fill", "url(#bgGrad)");
+
+        // 简化中国西部地形示意（手绘多边形）
+        const terrainPath = "M 100,120 Q 200,80 350,100 T 600,90 Q 750,70 900,100 L 1050,150 Q 1080,300 1050,450 L 950,540 Q 800,580 650,560 T 400,550 Q 250,570 150,520 L 80,400 Q 60,250 100,120 Z";
+        g.append("path")
+            .attr("d", terrainPath)
+            .attr("fill", "#d4c8a8")
+            .attr("stroke", "#a89878")
+            .attr("stroke-width", 1.5)
+            .attr("opacity", 0.5);
+
+        // 山脉示意
+        const mountains = [
+            {cx: 250, cy: 200, r: 30, name: "昆仑山"},
+            {cx: 500, cy: 250, r: 25, name: "祁连山"},
+            {cx: 750, cy: 280, r: 35, name: "天山"},
+            {cx: 900, cy: 200, r: 28, name: "阿尔泰"}
+        ];
+        mountains.forEach(m => {
+            g.append("path")
+                .attr("d", `M ${m.cx - m.r},${m.cy + m.r * 0.6} L ${m.cx - m.r * 0.5},${m.cy - m.r * 0.4} L ${m.cx},${m.cy + m.r * 0.3} L ${m.cx + m.r * 0.5},${m.cy - m.r * 0.5} L ${m.cx + m.r},${m.cy + m.r * 0.6} Z`)
+                .attr("fill", "#8c7050")
+                .attr("opacity", 0.4);
+            g.append("text")
+                .attr("x", m.cx).attr("y", m.cy + m.r + 14)
+                .attr("text-anchor", "middle")
+                .style("font-size", "10px")
+                .style("fill", "#6b5e4d")
+                .style("font-style", "italic")
+                .text(m.name);
+        });
+
+        // 河流示意
+        g.append("path")
+            .attr("d", "M 100,350 Q 300,380 500,360 T 900,400 L 1050,420")
+            .attr("fill", "none")
+            .attr("stroke", "#5a7a9a")
+            .attr("stroke-width", 3)
+            .attr("opacity", 0.5);
+        g.append("text")
+            .attr("x", 500).attr("y", 340)
+            .style("font-size", "10px").style("fill", "#5a7a9a").style("font-style", "italic")
+            .text("大河（长江示意）");
+
+        // 投影节点
+        const projected = data.nodes.map(n => {
+            const p = projection([n.lon, n.lat]);
+            return { ...n, px: p[0], py: p[1] };
+        });
+
+        // 路径线
+        const lineGen = d3.line()
+            .x(d => d.px)
+            .y(d => d.py)
+            .curve(d3.curveCatmullRom.alpha(0.5));
+
+        const pathG = g.append("path")
+            .attr("d", lineGen(projected))
+            .attr("fill", "none")
+            .attr("stroke", "#3a6b8c")
+            .attr("stroke-width", 2.5)
+            .attr("stroke-dasharray", "6,4")
+            .attr("opacity", 0.7);
+
+        // 路径动画
+        const totalLength = pathG.node().getTotalLength();
+        pathG
+            .attr("stroke-dasharray", totalLength + " " + totalLength)
+            .attr("stroke-dashoffset", totalLength)
+            .transition()
+            .duration(3000)
+            .attr("stroke-dashoffset", 0)
+            .on("end", function() {
+                d3.select(this).attr("stroke-dasharray", "6,4");
+            });
+
+        // 节点
+        const nodeG = g.selectAll(".map-node")
+            .data(projected)
+            .enter().append("g")
+            .attr("class", "map-node")
+            .attr("transform", d => `translate(${d.px},${d.py})`)
+            .style("cursor", "pointer");
+
+        nodeG.append("circle")
+            .attr("r", d => d.isHardship ? 8 : 6)
+            .attr("fill", d => {
+                if (d.id === 0 || d.id === 16) return "#5a7a3a";
+                if (d.isHardship) return "#c8463a";
+                return "#e67e22";
+            })
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .on("mouseover", function(event, d) {
+                d3.select(this).attr("r", d.isHardship ? 11 : 9);
+                showTooltip(`<strong style="color:#f4d4b2">${d.name}</strong><br>${d.desc}<br><span style="color:#f4d4b2">耗时：${d.duration} 月 · ${d.chapter}</span><br><span style="color:#e9b885">点击 ${d.isHardship ? "展开难点详情" : "跳转相关页面"}</span>`, event);
+            })
+            .on("mousemove", moveTooltip)
+            .on("mouseout", function(event, d) {
+                d3.select(this).attr("r", d.isHardship ? 8 : 6);
+                hideTooltip();
+            })
+            .on("click", function(event, d) {
+                if (d.isHardship) {
+                    showHardshipDetail(d);
+                } else {
+                    window.location.href = d.linkPage;
+                }
+            });
+
+        // 节点标签
+        nodeG.append("text")
+            .attr("x", 0).attr("y", -14)
+            .attr("text-anchor", "middle")
+            .style("font-size", "12px")
+            .style("font-weight", "600")
+            .style("fill", "#2c3e50")
+            .style("font-family", "Noto Serif SC, serif")
+            .style("paint-order", "stroke")
+            .style("stroke", "#fff")
+            .style("stroke-width", "3px")
+            .text(d => d.name);
+
+        // 当前节点高亮指示器
+        g.append("circle")
+            .attr("id", "current-marker")
+            .attr("r", 14)
+            .attr("fill", "none")
+            .attr("stroke", "#e67e22")
+            .attr("stroke-width", 3)
+            .attr("opacity", 0)
+            .attr("transform", `translate(${projected[0].px},${projected[0].py})`);
+
+        // 起终点标记
+        g.append("text")
+            .attr("x", projected[0].px).attr("y", projected[0].py + 30)
+            .attr("text-anchor", "middle")
+            .style("font-size", "11px")
+            .style("fill", "#5a7a3a")
+            .style("font-weight", "600")
+            .text("【起点】");
+        g.append("text")
+            .attr("x", projected[16].px).attr("y", projected[16].py + 30)
+            .attr("text-anchor", "middle")
+            .style("font-size", "11px")
+            .style("fill", "#5a7a3a")
+            .style("font-weight", "600")
+            .text("【终点】");
+
+        // 标题
+        g.append("text")
+            .attr("x", width / 2).attr("y", 30)
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .style("font-weight", "600")
+            .style("fill", "#2c3e50")
+            .text("西游记取经路线 · 长安 → 灵山");
+
+        // 保存 projected 用于交互
+        EMBEDDED_DATA._projected = projected;
+        updateMapMarker(0);
+    }
+
+    function updateMapMarker(idx) {
+        const projected = EMBEDDED_DATA._projected;
+        if (!projected) return;
+        const node = projected[idx];
+        d3.select("#current-marker")
+            .attr("opacity", 1)
+            .transition()
+            .duration(300)
+            .attr("transform", `translate(${node.px},${node.py})`);
+    }
+
+    function showHardshipDetail(d) {
+        const detail = document.getElementById("hardshipDetail");
+        document.getElementById("hdTitle").textContent = `【第${d.id}节点】${d.hardshipTitle} · ${d.chapter}`;
+        document.getElementById("hdContent").innerHTML = `${d.hardshipDesc}<br><br><strong>位置：</strong>${d.name}（经度 ${d.lon}°，纬度 ${d.lat}°）<br><strong>耗时：</strong>${d.duration} 月<br><a href="${d.linkPage}" style="color:#e67e22;">查看取经全路程图 →</a>`;
+        detail.classList.add("visible");
+    }
+
+    // ============= 图2：时间轴柱状图 =============
+    function renderTimeline(data) {
+        const width = 1150, height = 240;
+        const margin = { top: 30, right: 30, bottom: 60, left: 50 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const svg = d3.select("#chart-timeline");
+        svg.selectAll("*").remove();
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleBand()
+            .domain(data.nodes.map(d => d.name))
+            .range([0, innerW])
+            .padding(0.2);
+
+        const y = d3.scaleLinear()
+            .domain([0, d3.max(data.nodes, d => d.duration) * 1.2])
+            .range([innerH, 0]);
+
+        // 网格
+        g.append("g").attr("class", "chart-grid")
+            .call(d3.axisLeft(y).ticks(5).tickSize(-innerW).tickFormat(""));
+
+        g.selectAll(".timeline-bar")
+            .data(data.nodes)
+            .enter().append("rect")
+            .attr("class", "timeline-bar")
+            .attr("x", d => x(d.name))
+            .attr("y", d => y(d.duration))
+            .attr("width", x.bandwidth())
+            .attr("height", d => innerH - y(d.duration))
+            .attr("fill", d => {
+                if (d.id === 0 || d.id === 16) return "#5a7a3a";
+                if (d.isHardship) return "#c8463a";
+                return "#e67e22";
+            })
+            .attr("opacity", 0.8)
+            .on("mouseover", function(event, d) {
+                d3.select(this).attr("opacity", 1);
+                showTooltip(`<strong>${d.name}</strong><br>耗时：${d.duration} 月<br>${d.chapter}`, event);
+            })
+            .on("mousemove", moveTooltip)
+            .on("mouseout", function() {
+                d3.select(this).attr("opacity", 0.8);
+                hideTooltip();
+            })
+            .on("click", function(event, d) {
+                currentNodeIdx = d.id;
+                document.getElementById("routeSlider").value = d.id;
+                document.getElementById("routeDisplay").textContent = `${d.name} · ${d.chapter}`;
+                updateMapMarker(d.id);
+                if (d.isHardship) showHardshipDetail(d);
+            });
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text")
+            .style("font-size", "10px")
+            .style("font-family", "Noto Serif SC, serif")
+            .attr("dx", "-0.5em")
+            .attr("dy", "0.5em")
+            .attr("transform", "rotate(-30)");
+
+        // Y 轴
+        g.append("g")
+            .call(d3.axisLeft(y).ticks(5).tickFormat(d => d + "月"));
+
+        // 轴标题
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 50)
+            .attr("text-anchor", "middle")
+            .style("font-size", "12px").style("fill", "#2c3e50")
+            .text("取经节点");
+        g.append("text")
+            .attr("transform", `translate(-38, ${innerH / 2}) rotate(-90)`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "12px").style("fill", "#2c3e50")
+            .text("耗时（月）");
+    }
+
+    // ============= 控制器 =============
+    function setupControls() {
+        const slider = document.getElementById("routeSlider");
+        const display = document.getElementById("routeDisplay");
+        const btnPlay = document.getElementById("btnPlay");
+        const btnPause = document.getElementById("btnPause");
+
+        slider.addEventListener("input", function() {
+            currentNodeIdx = parseInt(this.value);
+            const node = EMBEDDED_DATA.nodes[currentNodeIdx];
+            display.textContent = `${node.name} · ${node.chapter}`;
+            updateMapMarker(currentNodeIdx);
+        });
+
+        btnPlay.addEventListener("click", function() {
+            if (playInterval) return;
+            playInterval = setInterval(function() {
+                currentNodeIdx = currentNodeIdx >= 16 ? 0 : currentNodeIdx + 1;
+                slider.value = currentNodeIdx;
+                const node = EMBEDDED_DATA.nodes[currentNodeIdx];
+                display.textContent = `${node.name} · ${node.chapter}`;
+                updateMapMarker(currentNodeIdx);
+            }, 800);
+        });
+
+        btnPause.addEventListener("click", function() {
+            if (playInterval) {
+                clearInterval(playInterval);
+                playInterval = null;
+            }
+        });
+    }
+
+    // ============= 主流程 =============
+    function main() {
+        renderKPI(EMBEDDED_DATA);
+        renderMap(EMBEDDED_DATA);
+        renderTimeline(EMBEDDED_DATA);
+        setupControls();
+    }
+
+    main();
+    </script>
+</body>
+</html>

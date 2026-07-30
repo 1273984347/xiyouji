@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文化错位与误读地图 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --accent-5: #9c5fbf;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            margin: 0 6px;
+            color: var(--ink-soft);
+            opacity: 0.6;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 720px) {
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+        }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: rgba(200, 70, 58, 0.08);
+            padding: 1px 6px;
+            border-radius: 3px;
+            color: var(--accent);
+            font-size: 0.85em;
+        }
+        /* Bias table */
+        .table-wrap {
+            overflow-x: auto;
+            max-height: 720px;
+            overflow-y: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        .table-wrap::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .table-wrap::-webkit-scrollbar-thumb {
+            background: var(--accent-soft);
+            border-radius: 4px;
+        }
+        #bias-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+        #bias-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 10px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        #bias-table tbody tr {
+            border-bottom: 1px solid var(--line);
+        }
+        #bias-table tbody tr:nth-child(even) {
+            background: var(--bg);
+        }
+        #bias-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        #bias-table td {
+            padding: 10px 12px;
+            vertical-align: top;
+        }
+        #bias-table td.term {
+            font-weight: 600;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+        #bias-table td.pinyin {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--ink-soft);
+            font-size: 0.82rem;
+        }
+        #bias-table td.eng {
+            color: var(--accent-2);
+            font-style: italic;
+        }
+        #bias-table td.connotation {
+            color: var(--ink);
+            max-width: 280px;
+        }
+        #bias-table td.image {
+            color: var(--ink-soft);
+            max-width: 240px;
+        }
+        #bias-table td.loss {
+            color: var(--accent-3);
+            font-size: 0.84rem;
+            max-width: 260px;
+        }
+        #bias-table td.gap-cell {
+            text-align: center;
+            vertical-align: middle;
+        }
+        .gap-block {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 28px;
+            border-radius: 4px;
+            color: #fff;
+            font-weight: 600;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.9rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+        }
+        /* Bar chart */
+        #bar-chart {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .bar-label {
+            font-size: 0.85rem;
+            fill: var(--ink);
+            font-family: "Noto Serif SC", serif;
+        }
+        .bar-value {
+            font-size: 0.78rem;
+            fill: var(--ink);
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+        }
+        .bar-axis text {
+            font-size: 0.72rem;
+            fill: var(--ink-soft);
+        }
+        .bar-axis line, .bar-axis path {
+            stroke: var(--line);
+        }
+        /* Heatmap */
+        .heatmap-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 8px;
+            background: var(--bg);
+        }
+        .heatmap-wrap::-webkit-scrollbar {
+            height: 8px;
+        }
+        .heatmap-wrap::-webkit-scrollbar-thumb {
+            background: var(--accent-soft);
+            border-radius: 4px;
+        }
+        #heatmap {
+            display: block;
+            margin: 0 auto;
+        }
+        .heat-cell rect {
+            stroke: #fff;
+            stroke-width: 1.5;
+            cursor: pointer;
+            transition: stroke-width 0.15s;
+        }
+        .heat-cell rect:hover {
+            stroke-width: 3;
+            stroke: var(--ink);
+        }
+        .heat-cell text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            fill: var(--ink);
+            pointer-events: none;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .heat-cell text.on-dark {
+            fill: #fff;
+        }
+        .heat-row-label, .heat-col-label {
+            font-size: 0.78rem;
+            fill: var(--ink-soft);
+            font-family: "Noto Serif SC", serif;
+        }
+        .heat-col-label {
+            text-anchor: start;
+        }
+        .heat-empty rect {
+            fill: #f3eee2;
+            stroke: #fff;
+            stroke-width: 1.5;
+        }
+        /* Conclusion card */
+        .conclusion-card {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 32px 36px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .conclusion-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .conclusion-card .quote-mark {
+            font-size: 4rem;
+            color: var(--accent-soft);
+            line-height: 1;
+            opacity: 0.5;
+            margin-bottom: -20px;
+            font-family: "Songti SC", serif;
+        }
+        .conclusion-card .conclusion-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #f5e9d4;
+            position: relative;
+            z-index: 1;
+        }
+        .conclusion-card .conclusion-tags {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .conclusion-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(232, 184, 133, 0.2);
+            border: 1px solid var(--accent-soft);
+            border-radius: 12px;
+            font-size: 0.82rem;
+            color: var(--accent-soft);
+        }
+        .tooltip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            max-width: 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.15s;
+            line-height: 1.5;
+        }
+        .tooltip strong {
+            color: var(--accent-soft);
+            display: block;
+            margin-bottom: 4px;
+        }
+        .tooltip .tip-meta {
+            color: rgba(245, 233, 212, 0.7);
+            font-size: 0.76rem;
+            margin-top: 4px;
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        footer .gen-time {
+            margin-top: 8px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.78rem;
+            opacity: 0.7;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>文化错位与误读地图</h1>
+        <div class="subtitle">CULTURAL MISREADING MAP</div>
+        <div class="tagline">当"筋斗云"变成 Somersault Cloud，"心猿意马"变成 Monkey Mind——英文读者脑中的画面与中文读者有何不同？</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span class="sep">›</span>
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">›</span>
+            <span>文化错位与误读</span>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">BIAS · 翻译偏差</div>
+                <div class="value">12</div>
+                <div class="desc">12 个核心术语的翻译认知偏差</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">HIGH GAP · 高文化鸿沟</div>
+                <div class="value">5</div>
+                <div class="desc">文化鸿沟级别 ≥ 9 的术语</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">AMPLIFIED · 放大元素</div>
+                <div class="value">12</div>
+                <div class="desc">6 国本土化放大元素</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">COUNTRIES · 国家</div>
+                <div class="value">6</div>
+                <div class="desc">中日韩越美澳六国</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：翻译认知偏差对比表 -->
+        <section class="section">
+            <h2 class="section-title">翻译认知偏差对比表</h2>
+            <div class="section-sub">12 个核心术语的中文内涵、英文读者脑中画面、语义流失与文化鸿沟级别（1-10），按级别降序排列。</div>
+            <div class="table-wrap">
+                <table id="bias-table">
+                    <thead>
+                        <tr>
+                            <th>中文术语</th>
+                            <th>拼音</th>
+                            <th>常见英文译法</th>
+                            <th>中文内涵</th>
+                            <th>英文读者脑中画面</th>
+                            <th>语义流失</th>
+                            <th>鸿沟级别</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bias-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 图表 2：文化鸿沟级别柱状图 -->
+        <section class="section">
+            <h2 class="section-title">文化鸿沟级别柱状图</h2>
+            <div class="section-sub">12 术语按 cultural_gap_level 降序排列，颜色从浅黄(1)渐变至深红(10)。</div>
+            <svg id="bar-chart" viewBox="0 0 900 540"></svg>
+            <div class="legend" id="bar-legend"></div>
+        </section>
+
+        <!-- 图表 3：东亚放大元素热力图 -->
+        <section class="section">
+            <h2 class="section-title">东亚及西方放大元素热力图</h2>
+            <div class="section-sub">6 国 × 10 元素矩阵，颜色深浅对应 intensity(1-10)，悬停查看代表作品与特征。</div>
+            <div class="heatmap-wrap">
+                <svg id="heatmap"></svg>
+            </div>
+            <div class="legend" id="heat-legend"></div>
+        </section>
+
+        <!-- 图表 4：国家分布饼图 -->
+        <section class="section">
+            <h2 class="section-title">国家分布饼图</h2>
+            <div class="section-sub">6 国作品数占比，反映各地区对西游记的本土化改编密度。</div>
+            <div class="chart-row">
+                <div class="chart-block">
+                    <svg id="pie-chart" viewBox="0 0 420 420"></svg>
+                    <div class="legend" id="pie-legend"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 图表 5：核心结论 -->
+        <section class="section">
+            <h2 class="section-title">核心结论</h2>
+            <div class="section-sub">综合翻译认知偏差与东亚放大元素的总结性判断。</div>
+            <div class="conclusion-card" id="conclusion-card">
+                <div class="quote-mark">"</div>
+                <div class="conclusion-text" id="conclusion-text"></div>
+                <div class="conclusion-tags" id="conclusion-tags"></div>
+            </div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">返回仪表盘</a> ·
+        <a href="../index.html">返回首页</a>
+        <div class="gen-time">数据生成时间：<span id="gen-time">—</span></div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/04-文化与历史背景/成书背景.md">成书背景</a></div>
+    </footer>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+    // ========== 嵌入式 fallback 数据 ==========
+    const EMBEDDED_TRANSLATION_BIAS = [
+        {
+            "chinese": "筋斗云", "pinyin": "Jindou Yun",
+            "english_common": "Somersault Cloud",
+            "alt_translations": ["Cloud-Somersault", "Somersault-Cloud", "Cloud Leap"],
+            "chinese_connotation": "筋斗·翻转·武艺动作·'一筋斗十万八千里'兼具武术与浪漫",
+            "english_reader_image": "一团云上翻跟头·滑稽·马戏团感",
+            "semantic_loss": "高·'筋斗'的武术美学与道家腾云的庄严感皆失",
+            "cultural_gap_level": 8, "chapter_first": 2
+        },
+        {
+            "chinese": "美猴王", "pinyin": "Mei Hou Wang",
+            "english_common": "Monkey King / Handsome Monkey King",
+            "alt_translations": ["Beautiful Monkey King", "Handsome Monkey King"],
+            "chinese_connotation": "美·英俊·美男子化·'美'在中文中是赞美外表·亦兼'精美'",
+            "english_reader_image": "一只穿王冠的卡通猴子·迪斯尼感·'King'略削弱'美'的矛盾感",
+            "semantic_loss": "中·'美'与'猴'的张力在英文中被简化为'王'的属性",
+            "cultural_gap_level": 6, "chapter_first": 4
+        },
+        {
+            "chinese": "斗战胜佛", "pinyin": "Douzhan Sheng Fo",
+            "english_common": "Buddha of Meritorious Service / Victorious Fighting Buddha",
+            "alt_translations": ["Victorious Struggle Buddha", "Buddha Who Wins in Battle"],
+            "chinese_connotation": "斗战·战斗+胜利·佛果·佛门武勋·修行圆满",
+            "english_reader_image": "一个会打仗的佛·不太像传统'慈悲佛'形象·略冲突",
+            "semantic_loss": "高·'斗战胜'在中文里是'武力修行圆满'·英文读者难以理解'武斗'与'佛'的统一",
+            "cultural_gap_level": 9, "chapter_first": 100
+        },
+        {
+            "chinese": "齐天大圣", "pinyin": "Qi Tian Da Sheng",
+            "english_common": "Great Sage Equal to Heaven",
+            "alt_translations": ["Great Sage, Equal to Heaven", "Sage Equaling Heaven"],
+            "chinese_connotation": "齐天·与天同高·'大圣'是儒家封号·反抗天庭的自封王号",
+            "english_reader_image": "一个'与天平起平坐的圣人'·略平淡·反抗感弱化",
+            "semantic_loss": "中·'齐天'的反抗张力被字面直译稀释·英文读者难以感受'自封'的傲气",
+            "cultural_gap_level": 7, "chapter_first": 4
+        },
+        {
+            "chinese": "心猿意马", "pinyin": "Xin Yuan Yi Ma",
+            "english_common": "Mind-Monkey and Will-Horse",
+            "alt_translations": ["Monkey Mind and Horse Will", "Restless Mind"],
+            "chinese_connotation": "佛道术语·心猿=躁动的心·意马=驰骋的意念·悟空与白龙马的隐喻根源",
+            "english_reader_image": "抽象佛教术语·难以与小说角色联系",
+            "semantic_loss": "极高·'心猿'与'悟空'的修行隐喻完全失去",
+            "cultural_gap_level": 10, "chapter_first": 14
+        },
+        {
+            "chinese": "九九八十一难", "pinyin": "Jiu Jiu Ba Shi Yi Nan",
+            "english_common": "Eighty-One Tribulations",
+            "alt_translations": ["81 Calamities", "Nine Times Nine Tribulations"],
+            "chinese_connotation": "九九·阳数之极·道教数理·八十一为最大阳数·圆满之意",
+            "english_reader_image": "一个具体数字·81个考验·缺乏'九九'的数理庄严感",
+            "semantic_loss": "中·'九九'在中文中是数理符号·英文仅视为数字",
+            "cultural_gap_level": 7, "chapter_first": 99
+        },
+        {
+            "chinese": "三藏", "pinyin": "San Zang",
+            "english_common": "Tripitaka",
+            "alt_translations": ["Tripitaka", "Three Baskets"],
+            "chinese_connotation": "三藏·佛经律论三藏·唐僧法号·法师的尊称",
+            "english_reader_image": "一个梵语音译词·难以理解含义",
+            "semantic_loss": "高·'三藏'在中文中是法师的荣誉·英文读者难以感知",
+            "cultural_gap_level": 8, "chapter_first": 12
+        },
+        {
+            "chinese": "孙悟空", "pinyin": "Sun Wukong",
+            "english_common": "Sun Wukong / Monkey",
+            "alt_translations": ["Sun Wukong", "Monkey", "Sun, Aware of Emptiness"],
+            "chinese_connotation": "孙·狲猴的'狲'去犬旁·悟空·悟得'空'·佛门法号·空性觉悟",
+            "english_reader_image": "一个东方名字·'Aware of Emptiness'过于哲学化",
+            "semantic_loss": "极高·'悟空'的佛门法号含义在直译中完全失去·仅剩音译",
+            "cultural_gap_level": 9, "chapter_first": 1
+        },
+        {
+            "chinese": "猪八戒", "pinyin": "Zhu Ba Jie",
+            "english_common": "Pigsy / Zhu Bajie",
+            "alt_translations": ["Pigsy", "Zhu Bajie", "Pig of Eight Precepts"],
+            "chinese_connotation": "猪·八戒（佛门八戒）·名号讽刺·贪吃者却受'八戒'之名",
+            "english_reader_image": "一只叫Pigsy的猪·通俗化·失去'八戒'的佛教反讽",
+            "semantic_loss": "高·'八戒'的佛门反讽在英文中完全失去·仅剩'猪'的卡通感",
+            "cultural_gap_level": 9, "chapter_first": 18
+        },
+        {
+            "chinese": "沙悟净", "pinyin": "Sha Wu Jing",
+            "english_common": "Sandy / Sha Wujing",
+            "alt_translations": ["Sandy", "Sha Wujing", "Sand, Awakened to Purity"],
+            "chinese_connotation": "沙·流沙河·悟净·悟得'净'·佛门法号·净性觉悟",
+            "english_reader_image": "一个叫Sandy的角色·通俗化·失去'悟净'的佛门含义",
+            "semantic_loss": "高·与悟空同理·'悟净'的含义失去",
+            "cultural_gap_level": 8, "chapter_first": 22
+        },
+        {
+            "chinese": "金箍棒", "pinyin": "Jin Gu Bang",
+            "english_common": "Golden Cudgel / Monkey King's Staff",
+            "alt_translations": ["Golden Cudgel", "Ruyi Jingu Bang", "As-You-Will Gold-Banded Cudgel"],
+            "chinese_connotation": "金箍·金环装饰的棒·'如意'大小随心·东海定海神针",
+            "english_reader_image": "一根金色棒·武器属性强·'如意'的随心变化难传达",
+            "semantic_loss": "中·'如意'的'随心所欲'哲学含义在直译中失去",
+            "cultural_gap_level": 6, "chapter_first": 3
+        },
+        {
+            "chinese": "三昧真火", "pinyin": "San Mei Zhen Huo",
+            "english_common": "True Fire of Samadhi",
+            "alt_translations": ["Samadhi True Fire", "True Fire of Three Meditations"],
+            "chinese_connotation": "三昧·佛门正定·真火·先天真火·精气神合一之火",
+            "english_reader_image": "一种'三昧'的火·难以理解佛教术语",
+            "semantic_loss": "极高·'三昧'的佛教含义完全失去·仅剩'真火'的物理感",
+            "cultural_gap_level": 10, "chapter_first": 41
+        }
+    ];
+
+    const EMBEDDED_AMPLIFICATION = [
+        {"country": "日本", "element": "美少年化", "intensity": 10, "representative_work": "《最游记》", "feature": "将师徒四人全部美少年化·BL耽美风·现代都市背景"},
+        {"country": "日本", "element": "热血战斗", "intensity": 10, "representative_work": "《龙珠》", "feature": "完全宇宙化热血·战斗力数值化·影响全球"},
+        {"country": "日本", "element": "暗黑解构", "intensity": 7, "representative_work": "《大猿王》", "feature": "成人向·情色暴力·日本成人化西游"},
+        {"country": "韩国", "element": "爱情化", "intensity": 9, "representative_work": "《花游记》", "feature": "现代都市爱情·悟空与女三藏的爱情线"},
+        {"country": "韩国", "element": "教育化", "intensity": 8, "representative_work": "《魔法千字文》", "feature": "儿童汉字学习·以西游为框架"},
+        {"country": "越南", "element": "本土化幽默", "intensity": 7, "representative_work": "越南本土戏剧", "feature": "融入越南民俗·幽默化·本土戏曲改编"},
+        {"country": "中国", "element": "暗黑解构", "intensity": 8, "representative_work": "《黑神话：悟空》《西游·降魔篇》", "feature": "近年最严肃暗黑的本土解构"},
+        {"country": "中国", "element": "网络文学热血", "intensity": 9, "representative_work": "《悟空传》《大猿王》", "feature": "网络文学反西游·热血玄幻"},
+        {"country": "中国", "element": "忠于原著", "intensity": 10, "representative_work": "央视1986版", "feature": "最忠于原著·影响几代华人认知"},
+        {"country": "美国", "element": "简化叙事", "intensity": 8, "representative_work": "Netflix《美猴王传奇》", "feature": "面向英语主流·美式动画简化叙事"},
+        {"country": "美国", "element": "西方视角重构", "intensity": 7, "representative_work": "AMC《荒原》", "feature": "后启示录·借名不借魂·西方武打"},
+        {"country": "澳大利亚", "element": "本土化幽默", "intensity": 6, "representative_work": "ABC《猴》", "feature": "英语·幽默化·影响澳洲英语圈"}
+    ];
+
+    const EMBEDDED_SUMMARY = {
+        "total_translation_bias": 12,
+        "total_amplifications": 12,
+        "countries": ["越南", "中国", "澳大利亚", "韩国", "日本", "美国"],
+        "amplification_elements": ["本土化幽默", "西方视角重构", "爱情化", "简化叙事", "教育化", "忠于原著", "热血战斗", "暗黑解构", "美少年化", "网络文学热血"],
+        "high_cultural_gap_terms": ["斗战胜佛", "心猿意马", "孙悟空", "猪八戒", "三昧真火"],
+        "core_conclusion": "翻译的最大认知偏差在'心猿意马'、'三昧真火'、'斗战胜佛'等佛道术语，英文读者难以感知'悟空/悟净'法号的修行隐喻。东亚各国放大元素各异：日本偏美少年+热血，韩国偏爱情+教育，中国本土化最忠于原著但近年暗黑风兴起。"
+    };
+
+    // ========== 配色 ==========
+    // 文化鸿沟颜色：浅黄(1) → 深红(10)
+    const gapColor = d3.scaleSequential(d3.interpolateYlOrRd).domain([1, 10]);
+
+    // 国家配色（六国独立色，区分度优先）
+    const COUNTRY_COLORS = {
+        "中国": "#c8463a",
+        "日本": "#7a5230",
+        "韩国": "#3a6b8c",
+        "越南": "#5a7a3a",
+        "美国": "#9c5fbf",
+        "澳大利亚": "#e9b885"
+    };
+
+    // 国家顺序：东亚 → 西方
+    const COUNTRY_ORDER = ["中国", "日本", "韩国", "越南", "美国", "澳大利亚"];
+
+    // ========== 渲染：翻译认知偏差对比表 ==========
+    function renderBiasTable(data) {
+        const sorted = [...data].sort((a, b) => b.cultural_gap_level - a.cultural_gap_level);
+        const tbody = d3.select("#bias-tbody");
+        tbody.selectAll("*").remove();
+
+        sorted.forEach(d => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "term").text(d.chinese);
+            tr.append("td").attr("class", "pinyin").text(d.pinyin);
+            tr.append("td").attr("class", "eng").text(d.english_common);
+            tr.append("td").attr("class", "connotation").text(d.chinese_connotation);
+            tr.append("td").attr("class", "image").text(d.english_reader_image);
+            tr.append("td").attr("class", "loss").text(d.semantic_loss);
+            const gapTd = tr.append("td").attr("class", "gap-cell");
+            gapTd.append("div")
+                .attr("class", "gap-block")
+                .style("background", gapColor(d.cultural_gap_level))
+                .text(d.cultural_gap_level);
+        });
+    }
+
+    // ========== 渲染：文化鸿沟级别柱状图 ==========
+    function renderBarChart(data) {
+        const svg = d3.select("#bar-chart");
+        svg.selectAll("*").remove();
+
+        const width = 900, height = 540;
+        const margin = { top: 30, right: 80, bottom: 50, left: 130 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const sorted = [...data].sort((a, b) => b.cultural_gap_level - a.cultural_gap_level);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        const x = d3.scaleLinear()
+            .domain([0, 10])
+            .range([0, innerW]);
+
+        const y = d3.scaleBand()
+            .domain(sorted.map(d => d.chinese))
+            .range([0, innerH])
+            .padding(0.28);
+
+        // X 轴
+        const xAxis = d3.axisBottom(x)
+            .ticks(10)
+            .tickSize(-innerH)
+            .tickFormat(d => d);
+
+        g.append("g")
+            .attr("class", "bar-axis")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(xAxis)
+            .call(g => g.select(".domain").remove())
+            .call(g => g.selectAll(".tick line").attr("stroke", "#e6dcc5").attr("stroke-dasharray", "2,3"));
+
+        // Y 轴
+        g.append("g")
+            .attr("class", "bar-axis")
+            .call(d3.axisLeft(y).tickSize(0).tickPadding(8))
+            .call(g => g.select(".domain").remove())
+            .selectAll("text")
+            .attr("class", "bar-label");
+
+        // 渐变背景区域（高鸿沟区）
+        g.append("rect")
+            .attr("x", x(9))
+            .attr("y", 0)
+            .attr("width",Math.max(0, x(10) - x(9)))
+            .attr("height", innerH)
+            .attr("fill", "rgba(200, 70, 58, 0.05)");
+
+        g.append("text")
+            .attr("x", x(9.5))
+            .attr("y", -10)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.72rem")
+            .style("fill", "var(--accent)")
+            .style("letter-spacing", "0.1em")
+            .text("HIGH GAP");
+
+        // 柱
+        const bars = g.selectAll(".bar")
+            .data(sorted)
+            .enter()
+            .append("g")
+            .attr("class", "bar");
+
+        bars.append("rect")
+            .attr("x", 0)
+            .attr("y", d => y(d.chinese))
+            .attr("width",0)
+            .attr("height", y.bandwidth())
+            .attr("fill", d => gapColor(d.cultural_gap_level))
+            .attr("rx", 3)
+            .attr("ry", 3)
+            .style("filter", "drop-shadow(0 1px 2px rgba(0,0,0,0.1))")
+            .transition()
+            .duration(900)
+            .delay((d, i) => i * 60)
+            .attr("width",d => Math.max(0, x(d.cultural_gap_level)));
+
+        // 数值标签
+        bars.append("text")
+            .attr("class", "bar-value")
+            .attr("x", d => x(d.cultural_gap_level) + 8)
+            .attr("y", d => y(d.chinese) + y.bandwidth() / 2 + 4)
+            .style("opacity", 0)
+            .text(d => d.cultural_gap_level)
+            .transition()
+            .duration(900)
+            .delay((d, i) => i * 60 + 600)
+            .style("opacity", 1);
+
+        // 标题
+        svg.append("text")
+            .attr("x", width / 2)
+            .attr("y", 18)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "var(--ink-soft)")
+            .style("letter-spacing", "0.1em")
+            .text("CULTURAL GAP LEVEL · 1 (LOW) → 10 (HIGH)");
+
+        // 图例
+        const legend = d3.select("#bar-legend");
+        legend.selectAll("*").remove();
+        const legendData = [
+            { label: "低 (1-3)", color: gapColor(2) },
+            { label: "中 (4-7)", color: gapColor(5) },
+            { label: "高 (8-9)", color: gapColor(9) },
+            { label: "极高 (10)", color: gapColor(10) }
+        ];
+        legend.selectAll(".legend-item")
+            .data(legendData)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `<span class="legend-swatch" style="background:${d.color}"></span><span>${d.label}</span>`);
+    }
+
+    // ========== 渲染：东亚放大元素热力图 ==========
+    function renderHeatmap(data) {
+        const svg = d3.select("#heatmap");
+        svg.selectAll("*").remove();
+
+        // 元素列顺序：保留 summary 中给出的次序
+        const elements = EMBEDDED_SUMMARY.amplification_elements;
+        const countries = COUNTRY_ORDER;
+
+        // 构建 country × element 索引
+        const lookup = {};
+        data.forEach(d => {
+            const key = `${d.country}|${d.element}`;
+            lookup[key] = d;
+        });
+
+        const cellW = 95;
+        const cellH = 50;
+        const labelW = 80;   // 左侧国家标签宽度
+        const headerH = 110; // 顶部元素标签高度（旋转）
+        const padding = 4;
+        const totalW = labelW + elements.length * (cellW + padding) + 20;
+        const totalH = headerH + countries.length * (cellH + padding) + 20;
+
+        svg.attr("viewBox", `0 0 ${totalW} ${totalH}`)
+           .attr("width",Math.max(0, totalW))
+           .attr("height", totalH);
+
+        const g = svg.append("g").attr("transform", "translate(0, 0)");
+
+        // 顶部元素标签（旋转 -35°）
+        elements.forEach((el, j) => {
+            const cx = labelW + j * (cellW + padding) + cellW / 2;
+            g.append("text")
+                .attr("class", "heat-col-label")
+                .attr("x", cx)
+                .attr("y", headerH - 6)
+                .attr("transform", `rotate(-35, ${cx}, ${headerH - 6})`)
+                .text(el);
+        });
+
+        // 左侧国家标签
+        countries.forEach((c, i) => {
+            const cy = headerH + i * (cellH + padding) + cellH / 2;
+            g.append("text")
+                .attr("class", "heat-row-label")
+                .attr("x", labelW - 10)
+                .attr("y", cy + 4)
+                .attr("text-anchor", "end")
+                .style("fill", COUNTRY_COLORS[c])
+                .style("font-weight", "600")
+                .text(c);
+        });
+
+        // 单元格
+        const tooltip = d3.select("#tooltip");
+        countries.forEach((c, i) => {
+            elements.forEach((el, j) => {
+                const cx = labelW + j * (cellW + padding);
+                const cy = headerH + i * (cellH + padding);
+                const key = `${c}|${el}`;
+                const d = lookup[key];
+
+                const cellG = g.append("g")
+                    .attr("class", d ? "heat-cell" : "heat-empty")
+                    .attr("transform", `translate(${cx}, ${cy})`);
+
+                if (d) {
+                    cellG.append("rect")
+                        .attr("width",Math.max(0, cellW))
+                        .attr("height", cellH)
+                        .attr("rx", 4)
+                        .attr("ry", 4)
+                        .attr("fill", gapColor(d.intensity));
+
+                    const textColor = d.intensity >= 7 ? "#fff" : "#2c2418";
+                    cellG.append("text")
+                        .attr("class", d.intensity >= 7 ? "on-dark" : "")
+                        .attr("x", cellW / 2)
+                        .attr("y", cellH / 2 + 5)
+                        .attr("text-anchor", "middle")
+                        .text(d.intensity);
+
+                    cellG.on("mousemove", function(event) {
+                        tooltip.style("opacity", 1)
+                            .style("left", (event.pageX + 14) + "px")
+                            .style("top", (event.pageY + 14) + "px")
+                            .html(`
+                                <strong>${d.country} · ${d.element}</strong>
+                                强度：${d.intensity}/10
+                                <div class="tip-meta">代表：${d.representative_work}</div>
+                                <div class="tip-meta">${d.feature}</div>
+                            `);
+                    }).on("mouseleave", function() {
+                        tooltip.style("opacity", 0);
+                    });
+                } else {
+                    cellG.append("rect")
+                        .attr("width",Math.max(0, cellW))
+                        .attr("height", cellH)
+                        .attr("rx", 4)
+                        .attr("ry", 4);
+                    cellG.append("text")
+                        .attr("x", cellW / 2)
+                        .attr("y", cellH / 2 + 5)
+                        .attr("text-anchor", "middle")
+                        .style("fill", "#c9bea8")
+                        .style("font-size", "1rem")
+                        .text("—");
+                }
+            });
+        });
+
+        // 图例
+        const legend = d3.select("#heat-legend");
+        legend.selectAll("*").remove();
+        const legendItems = [];
+        for (let i = 1; i <= 10; i++) {
+            legendItems.push({ label: i, color: gapColor(i) });
+        }
+        legend.selectAll(".legend-item")
+            .data(legendItems)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `<span class="legend-swatch" style="background:${d.color}"></span><span>${d.label}</span>`);
+    }
+
+    // ========== 渲染：国家分布饼图 ==========
+    function renderPie(data) {
+        const svg = d3.select("#pie-chart");
+        svg.selectAll("*").remove();
+
+        const width = 420, height = 420;
+        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+        // 按国家计数
+        const counts = {};
+        data.forEach(d => { counts[d.country] = (counts[d.country] || 0) + 1; });
+        const ordered = COUNTRY_ORDER
+            .filter(c => counts[c])
+            .map(c => ({ country: c, count: counts[c] }));
+        const total = d3.sum(ordered.map(d => d.count));
+
+        const pie = d3.pie()
+            .value(d => d.count)
+            .sort(null);
+
+        const arc = d3.arc()
+            .innerRadius(radius * 0.58)
+            .outerRadius(radius)
+            .cornerRadius(3);
+
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.82)
+            .outerRadius(radius * 0.82);
+
+        const arcs = pie(ordered);
+
+        // 切片
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => COUNTRY_COLORS[d.data.country] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 100)
+            .style("opacity", 1);
+
+        // 中心数字
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "0.35em")
+            .style("font-size", "2rem")
+            .style("font-weight", "600")
+            .style("fill", "#2c2418")
+            .text(total);
+
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "2em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6b5e4d")
+            .text("总作品数");
+
+        // 切片标签
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem")
+            .style("font-weight", "600")
+            .style("fill", "#fff")
+            .text(d => `${d.data.count}`);
+
+        // 图例
+        const legend = d3.select("#pie-legend");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(ordered)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `
+                <span class="legend-swatch" style="background:${COUNTRY_COLORS[d.country] || '#999'}"></span>
+                <span>${d.country}：${d.count} 部（${(d.count / total * 100).toFixed(1)}%）</span>
+            `);
+    }
+
+    // ========== 渲染：核心结论 ==========
+    function renderConclusion(summary) {
+        const text = summary.core_conclusion || "";
+        const tags = summary.high_cultural_gap_terms || [];
+
+        d3.select("#conclusion-text").text(text);
+
+        const tagsBox = d3.select("#conclusion-tags");
+        tagsBox.selectAll("*").remove();
+        // 高鸿沟术语作为标签
+        tags.forEach(t => {
+            tagsBox.append("span")
+                .attr("class", "conclusion-tag")
+                .text(`#${t}`);
+        });
+        // 国家标签
+        (summary.countries || []).forEach(c => {
+            tagsBox.append("span")
+                .attr("class", "conclusion-tag")
+                .style("color", COUNTRY_COLORS[c])
+                .style("border-color", COUNTRY_COLORS[c])
+                .text(`#${c}`);
+        });
+    }
+
+    // ========== 渲染：关键洞察 ==========
+    function renderInsights() {
+        const insights = [
+            `翻译的最大认知偏差在<strong>'心猿意马'、'三昧真火'、'斗战胜佛'</strong>等佛道术语——这些词承载的修行隐喻与道教数理，在英文译文中几乎完全消失。`,
+            `英文读者难以感知<strong>'悟空/悟净'法号的修行隐喻</strong>——'悟得空性'与'悟得净性'的佛门法号含义在直译中仅剩音译，法号反讽荡然无存。`,
+            `日本偏<strong>美少年+热血</strong>（《最游记》《龙珠》），韩国偏<strong>爱情+教育</strong>（《花游记》《魔法千字文》），中国本土化<strong>最忠于原著</strong>但近年暗黑风兴起（《黑神话：悟空》）。`,
+            `美国倾向<strong>'简化叙事'</strong>（Netflix《美猴王传奇》）与<strong>'西方视角重构'</strong>（AMC《荒原》），丢失东方哲学的'心性'与'修行'维度。`,
+            `<strong>'美猴王'与'齐天大圣'</strong>的文化鸿沟级别仅为 6-7——表面直译尚可，但'美'与'齐天'的内在张力仍被稀释。`,
+            `12 项放大元素中，<strong>intensity ≥ 9</strong> 的有 5 项：日本美少年化、日本热血战斗、韩国爱情化、中国网络文学热血、中国忠于原著——本土化强度最高的两端。`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => ul.append("li").html(text));
+    }
+
+    // ========== 数据加载 ==========
+    async function fetchJson(path, fallback) {
+        try {
+            const response = await fetch(path);
+            if (!response.ok) throw new Error('fetch failed: ' + path);
+            return await response.json();
+        } catch (e) {
+            console.warn('[INFO] 使用嵌入数据：', e.message);
+            return fallback;
+        }
+    }
+
+    async function loadData() {
+        const [bias, amp, summary] = await Promise.all([
+            fetchJson('../../scripts/output/data/translation_bias.json', EMBEDDED_TRANSLATION_BIAS),
+            fetchJson('../../scripts/output/data/east_asia_amplification.json', EMBEDDED_AMPLIFICATION),
+            fetchJson('../../scripts/output/data/cultural_misreading_summary.json', EMBEDDED_SUMMARY)
+        ]);
+
+        // 检测是否成功从服务器加载（任意一个返回数组且长度匹配说明服务器响应）
+        const isLive = Array.isArray(bias) && bias.length === EMBEDDED_TRANSLATION_BIAS.length
+            && (typeof window !== 'undefined' && window.location.protocol.startsWith('http'));
+        if (isLive) {
+            document.getElementById('dataSource').innerHTML =
+                '数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）';
+        }
+        return { bias, amp, summary };
+    }
+
+    // ========== 生成时间 ==========
+    function setGenTime() {
+        const now = new Date();
+        const pad = n => String(n).padStart(2, "0");
+        const stamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())} ` +
+            `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+        document.getElementById("gen-time").textContent = stamp;
+    }
+
+    // ========== 主流程 ==========
+    async function main() {
+        const { bias, amp, summary } = await loadData();
+        window.__lastData = { bias, amp, summary };
+
+        renderBiasTable(bias);
+        renderBarChart(bias);
+        renderHeatmap(amp);
+        renderPie(amp);
+        renderConclusion(summary);
+        renderInsights();
+        setGenTime();
+    }
+
+    // 窗口尺寸变化时重绘热力图（保持响应式）
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderHeatmap(window.__lastData.amp);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

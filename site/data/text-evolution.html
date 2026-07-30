@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>源流演变 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            margin: 0 8px;
+            color: var(--ink-soft);
+            opacity: 0.6;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 768px) {
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card:nth-child(2) { border-top-color: var(--accent-2); }
+        .kpi-card:nth-child(3) { border-top-color: var(--accent-3); }
+        .kpi-card:nth-child(4) { border-top-color: var(--accent-4); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card:nth-child(2) .label { color: var(--accent-2); }
+        .kpi-card:nth-child(3) .label { color: var(--accent-3); }
+        .kpi-card:nth-child(4) .label { color: var(--accent-4); }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: #f5e9d4;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        /* ===== Chart 1: Evolution Tree ===== */
+        #evolution-tree {
+            width: 100%;
+            height: 760px;
+            display: block;
+        }
+        .tree-node circle {
+            stroke: #fff;
+            stroke-width: 2;
+            cursor: pointer;
+            transition: r 0.2s;
+        }
+        .tree-node circle:hover { stroke-width: 3; }
+        .tree-node text.v-name {
+            font-size: 0.92rem;
+            font-weight: 600;
+            fill: var(--ink);
+        }
+        .tree-node text.v-meta {
+            font-size: 0.74rem;
+            fill: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .tree-node text.v-feature {
+            font-size: 0.78rem;
+            fill: var(--ink-soft);
+        }
+        .tree-link {
+            stroke: var(--line);
+            stroke-width: 1.5;
+            fill: none;
+        }
+        .tree-axis line, .tree-axis path {
+            stroke: var(--line);
+        }
+        .tree-axis text {
+            font-size: 0.72rem;
+            fill: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .layer-band text {
+            font-size: 0.72rem;
+            fill: var(--ink-soft);
+            font-style: italic;
+        }
+
+        /* ===== Chart 2: Evolution Paths ===== */
+        .evo-path-row {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 20px;
+            padding: 14px 0;
+            border-bottom: 1px dashed var(--line);
+            align-items: start;
+        }
+        @media (max-width: 600px) {
+            .evo-path-row { grid-template-columns: 1fr; gap: 8px; }
+            .evo-key { grid-column: 1; }
+        }
+        .evo-path-row:last-child { border-bottom: none; }
+        .evo-element {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.98rem;
+        }
+        .evo-element .evo-arrow {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-weight: 400;
+            margin-top: 2px;
+            font-style: italic;
+        }
+        .evo-flow {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px 8px;
+            min-width: 0;
+        }
+        .evo-step {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 14px;
+            padding: 5px 12px;
+            font-size: 0.84rem;
+            color: var(--ink);
+            white-space: nowrap;
+        }
+        .evo-step.last {
+            white-space: normal;
+            max-width: 100%;
+            overflow-wrap: anywhere;
+        }
+        .evo-step.first {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+        .evo-step.last {
+            background: var(--accent-4);
+            color: #fff;
+            border-color: var(--accent-4);
+            font-weight: 600;
+        }
+        .evo-arrow {
+            color: var(--accent-3);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .evo-key {
+            grid-column: 2;
+            margin-top: 6px;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 6px 10px;
+            background: var(--bg);
+            border-left: 3px solid var(--accent-2);
+            border-radius: 0 4px 4px 0;
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+        .evo-key strong { color: var(--accent-2); }
+
+        /* ===== Chart 3: Author Table ===== */
+        .author-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 0.88rem;
+        }
+        .author-table th, .author-table td {
+            border: 1px solid var(--line);
+            padding: 12px 14px;
+            vertical-align: top;
+            text-align: left;
+        }
+        .author-table th {
+            background: #1a1410;
+            color: #f5e9d4;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            font-size: 0.84rem;
+            position: sticky;
+            top: 0;
+        }
+        .author-table td.name {
+            background: var(--bg);
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 1rem;
+            width: 90px;
+        }
+        .author-table td.identity {
+            color: var(--ink-soft);
+            font-size: 0.84rem;
+            width: 160px;
+        }
+        .author-table td.lifetime {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent-3);
+            font-size: 0.82rem;
+            width: 110px;
+        }
+        .author-table td.score { width: 140px; }
+        .score-bar {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 4px;
+        }
+        .score-cell {
+            width: 10px;
+            height: 16px;
+            background: var(--line);
+            border-radius: 2px;
+        }
+        .score-cell.filled { background: var(--accent); }
+        .score-cell.filled.mid { background: var(--accent-soft); }
+        .score-num {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .author-table td.status {
+            font-size: 0.82rem;
+            color: var(--accent-2);
+            font-style: italic;
+            width: 160px;
+        }
+        .author-table td.evidence {
+            font-size: 0.82rem;
+            line-height: 1.55;
+        }
+        .author-table td.evidence.for { color: var(--accent-4); }
+        .author-table td.evidence.against { color: var(--accent); }
+        .author-table td.evidence ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .author-table td.evidence li {
+            padding: 2px 0 2px 14px;
+            position: relative;
+        }
+        .author-table td.evidence.for li::before {
+            content: "＋";
+            position: absolute;
+            left: 0;
+            color: var(--accent-4);
+            font-weight: 600;
+        }
+        .author-table td.evidence.against li::before {
+            content: "－";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ===== Chart 4: Commentary Pie + Quotes Grid ===== */
+        #commentary-pie {
+            max-width: 100%;
+        }
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-top: 28px;
+        }
+        .quote-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 18px;
+            background: linear-gradient(180deg, #fffdf8 0%, #faf7f2 100%);
+            border-top: 3px solid var(--accent);
+        }
+        .quote-card .qc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--line);
+        }
+        .quote-card .qc-name {
+            font-weight: 600;
+            color: var(--ink);
+            font-size: 1rem;
+        }
+        .quote-card .qc-year {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+        }
+        .quote-card .qc-feature {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        .quote-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .quote-card li {
+            padding: 4px 0 4px 18px;
+            position: relative;
+            font-size: 0.88rem;
+            color: var(--ink);
+            line-height: 1.5;
+        }
+        .quote-card li::before {
+            content: "「";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .quote-card li::after {
+            content: "」";
+            color: var(--accent);
+        }
+
+        /* ===== Chart 5: Stacked Bar ===== */
+        #commentary-stacked {
+            width: 100%;
+            height: 380px;
+            display: block;
+        }
+        .stacked-axis text, .stacked-axis line, .stacked-axis path {
+            font-size: 0.78rem;
+            fill: var(--ink-soft);
+            stroke: var(--line);
+        }
+        .stacked-bar {
+            transition: opacity 0.2s;
+        }
+        .stacked-bar:hover { opacity: 0.85; }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>源流演变</h1>
+        <div class="subtitle">VERSIONS · AUTHORS · COMMENTARY</div>
+        <div class="tagline">文本考古层位图：从南宋取经诗话到清代丹道评本，四百年文学DNA测序</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">›</span>
+            <span>源流演变</span>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">VERSIONS · 版本</div>
+                <div class="value">10</div>
+                <div class="desc">南宋诗话 → 清代原旨，跨四百年</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">VARIANTS · 情节变异</div>
+                <div class="value">6</div>
+                <div class="desc">心猿·八戒·出身·闹天·八十一难·沙僧</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">AUTHORS · 候选作者</div>
+                <div class="value">4</div>
+                <div class="desc">吴承恩·丘处机·李春芳·华阳洞天主人</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">COMMENTARY · 批点</div>
+                <div class="value">5·6100</div>
+                <div class="desc">5 批点者共 6100 条评论，跨 400 年</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：版本进化树 -->
+        <section class="section">
+            <h2 class="section-title">版本进化树</h2>
+            <div class="section-sub">纵向时间轴展示 10 个版本，按考古层位（archaeological_layer）分层着色。层1 宋元话本 → 层7 清原旨本，节点标注版本·年代·回数·特征。</div>
+            <svg id="evolution-tree"></svg>
+            <div class="legend" id="legend-layers"></div>
+        </section>
+
+        <!-- 图表 2：情节演化路径 -->
+        <section class="section">
+            <h2 class="section-title">情节演化路径</h2>
+            <div class="section-sub">6 项核心情节变异，每行流程图展示 first_appear → evolution_path → key_change。<strong style="color:var(--accent)">红</strong>为首次出现，<strong style="color:var(--accent-4)">绿</strong>为关键定型。</div>
+            <div id="evolution-paths"></div>
+        </section>
+
+        <!-- 图表 3：作者论争矩阵 -->
+        <section class="section">
+            <h2 class="section-title">作者论争矩阵</h2>
+            <div class="section-sub">4 位候选作者对比，match_score 1-10 量化匹配度。色块进度条：红=支持分，浅=未得分。</div>
+            <div style="overflow-x:auto;">
+                <table class="author-table" id="author-table">
+                    <thead>
+                        <tr>
+                            <th>候选作者</th>
+                            <th>身份</th>
+                            <th>生卒</th>
+                            <th>匹配度</th>
+                            <th>当前定论</th>
+                            <th>支持证据</th>
+                            <th>反对证据</th>
+                        </tr>
+                    </thead>
+                    <tbody id="author-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 图表 4：批点者弹幕网络 -->
+        <section class="section">
+            <h2 class="section-title">批点者弹幕网络</h2>
+            <div class="section-sub">5 位批点者按 commentary_count 占比饼图，下方为经典语录卡片网格（每批点者代表性批语）。</div>
+            <div class="chart-row">
+                <div class="chart-block">
+                    <h3>评论数占比</h3>
+                    <svg id="commentary-pie" width="380" height="380"></svg>
+                    <div class="legend" id="legend-commentators"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>评论总数分布</h3>
+                    <svg id="commentary-count-bar" width="380" height="380"></svg>
+                </div>
+            </div>
+            <div class="quotes-grid" id="quotes-grid"></div>
+        </section>
+
+        <!-- 图表 5：评论类型分布堆叠图 -->
+        <section class="section">
+            <h2 class="section-title">评论类型分布堆叠图</h2>
+            <div class="section-sub">5 批点者 × 5 评论类型（叫好 / 骂人 / 点旨 / 考证 / 训诂）水平堆叠条形图。注意刘一明《原旨》五类皆冠绝群伦。</div>
+            <svg id="commentary-stacked"></svg>
+            <div class="legend" id="legend-types"></div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../index.html">返回首页</a> ·
+        <a href="../dashboard.html">数据看板</a>
+        <div style="margin-top:6px;font-size:0.78rem;opacity:0.7;" id="gen-time"></div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/04-文化与历史背景/版本演变.md">版本演变</a></div>
+    </footer>
+
+    <script>
+    /* ==========================================================
+       嵌入式 fallback 数据（fetch 失败时使用）
+       ========================================================== */
+    const EMBEDDED_DATA = {
+        summary: {
+            total_versions: 10,
+            total_variants: 6,
+            total_authors: 4,
+            total_commentators: 5,
+            total_commentary_count: 6100,
+            commentary_by_type: {
+                "叫好": 1100, "骂人": 340, "点旨": 2250,
+                "考证": 1450, "训诂": 960
+            },
+            earliest_version: "《大唐三藏取经诗话》",
+            latest_qing_version: "《西游原旨》"
+        },
+        versions: [
+            { "version": "《大唐三藏取经诗话》", "year": "南宋·约13世纪", "type": "话本", "chapters": 17, "feature": "现存最早的西游故事·三藏取经雏形·猴行者首次出现·深沙神（沙僧雏形）", "key_role_introduction": ["猴行者","深沙神"], "missing_elements": ["八戒","沙僧定型","大闹天宫"], "archaeological_layer": "层1·宋元话本" },
+            { "version": "《西游记杂剧》", "year": "元末明初·杨景贤", "type": "杂剧", "chapters": 24, "feature": "西游故事戏剧化·猪八戒首次成型·红孩儿·铁扇公主·女儿国出现", "key_role_introduction": ["猪八戒","红孩儿","铁扇公主"], "missing_elements": ["沙僧定型","大闹天宫规模"], "archaeological_layer": "层2·元末明初杂剧" },
+            { "version": "《西游记平话》", "year": "元末·已佚", "type": "平话", "chapters": null, "feature": "已佚·仅见于《永乐大典》残卷'魏徵斩龙'与韩国'朴通事谚解'引述", "key_role_introduction": ["车迟国斗法"], "missing_elements": ["完整文本"], "archaeological_layer": "层2·元末平话" },
+            { "version": "世德堂本《西游记》", "year": "明万历20年·1592", "type": "百回小说", "chapters": 100, "feature": "现存最早的完整百回本·题'华阳洞天主人校'·奠定《西游记》文本基础", "key_role_introduction": ["完整五圣","九九八十一难"], "missing_elements": ["唐僧出身故事（9-12回为清本补入）"], "archaeological_layer": "层3·明万历世本" },
+            { "version": "杨闽斋本《西游记》", "year": "明万历30年·1602", "type": "百回小说", "chapters": 100, "feature": "世本的早期翻刻本·文字略异", "key_role_introduction": [], "missing_elements": [], "archaeological_layer": "层4·明万历杨闽斋本" },
+            { "version": "朱鼎臣本《唐三藏西游释厄传》", "year": "明万历中后期", "type": "简本", "chapters": "10卷", "feature": "删节本·加入唐僧出身故事（陈光蕊·江流儿）", "key_role_introduction": ["陈光蕊故事"], "missing_elements": ["百回完整"], "archaeological_layer": "层4·明万历朱鼎臣本" },
+            { "version": "《西游证道书》", "year": "清康熙·1663·汪象旭评", "type": "评本", "chapters": 100, "feature": "首次以'证道'解西游·加入唐僧出身故事为'第9回'·评点为丘处机作", "key_role_introduction": ["唐僧出身入正文"], "missing_elements": [], "archaeological_layer": "层5·清证道本" },
+            { "version": "《西游真诠》", "year": "清康熙·1696·陈士斌评", "type": "评本", "chapters": 100, "feature": "陈士斌评点·以金丹解西游·清代最流行评本", "key_role_introduction": [], "missing_elements": [], "archaeological_layer": "层6·清真诠本" },
+            { "version": "《新说西游记》", "year": "清乾隆·1753·张书绅评", "type": "评本", "chapters": 100, "feature": "张书绅评点·以儒解西游·主张'学庸论语'为内学", "key_role_introduction": [], "missing_elements": [], "archaeological_layer": "层6·清新说本" },
+            { "version": "《西游原旨》", "year": "清乾隆·1753·刘一明评", "type": "评本", "chapters": 100, "feature": "刘一明评点·道教龙门派·以丹道解西游最系统", "key_role_introduction": [], "missing_elements": [], "archaeological_layer": "层7·清原旨本" }
+        ],
+        variants: [
+            { "element": "心猿形象", "evolution": "猴行者→孙悟空", "first_appear": "《大唐三藏取经诗话》·猴行者·白衣秀士", "evolution_path": "猴行者(宋) → 孙行者(元杂剧) → 齐天大圣孙悟空(世本)", "key_change": "世本中'心猿'形象完整·菩提祖师传授七十二变·大闹天宫规模空前", "chapter_first": 1 },
+            { "element": "猪八戒·挑担子", "evolution": "无→八戒挑担→沙僧挑担", "first_appear": "《西游记杂剧》·猪八戒首现", "evolution_path": "杂剧八戒 → 世本前段八戒挑担 → 世本后段转沙僧挑担", "key_change": "世本100回中·八戒在收沙僧前(22回)挑担·收沙僧后任务逐步转移", "chapter_first": 18 },
+            { "element": "唐僧出身故事", "evolution": "无→外传→入正文", "first_appear": "世德堂本无·朱鼎臣本首入", "evolution_path": "世本无 → 朱鼎臣本补'释厄传' → 证道书入正文为第9回", "key_change": "陈光蕊·江流儿故事·清代方入正文·今本多从清本", "chapter_first": 9 },
+            { "element": "大闹天宫规模", "evolution": "简→繁", "first_appear": "《大唐三藏取经诗话》·简略", "evolution_path": "诗话无大闹天宫 → 杂剧简略 → 平话'齐天大圣' → 世本第1-7回宏大叙事", "key_change": "世本首次将'大闹天宫'扩充为7回·奠定全书开篇结构", "chapter_first": 1 },
+            { "element": "九九八十一难", "evolution": "无→有", "first_appear": "世德堂本·第99回观音算账", "evolution_path": "前期故事无定数 → 世本第99回'九九八十一难'完整列出", "key_change": "世本首次系统化'九九八十一难'·奠定取经结构的完整性", "chapter_first": 99 },
+            { "element": "沙僧定型", "evolution": "深沙神→沙和尚", "first_appear": "《大唐三藏取经诗话》·深沙神", "evolution_path": "深沙神(宋) → 沙和尚(世本) · 卷帘大将背景定型", "key_change": "世本中沙僧身份完整·卷帘大将贬凡·九颗骷髅项链", "chapter_first": 22 }
+        ],
+        authors: [
+            { "candidate": "吴承恩", "identity": "明·淮安府山阳县·长兴县丞", "lifetime": "约1500-1582", "social_network": ["沈坤（状元·儿女亲家）","李春芳（可能的同乡）","徐中行"], "evidence_for": ["天启《淮安府志》'吴承恩《西游记》'著录","鲁迅《中国小说史略》采信","方言与淮安话有部分契合"], "evidence_against": ["《淮安府志》'西游记'未注明文体·或为游记","吴承恩文集无相关道教术语","明后期方言非单一淮安话"], "match_score": 7, "current_status": "主流采信·但学界仍有争议" },
+            { "candidate": "丘处机", "identity": "元·全真教龙门派祖师", "lifetime": "1148-1227", "social_network": ["成吉思汗","尹志平","李志常"], "evidence_for": ["清代《西游证道书》主张","全真教术语遍布全书","丘处机西行见成吉思汗·类取经"], "evidence_against": ["丘处机卒于1227·世本刊于1592·中间300余年","百回本语言为明代·非元初","丘处机《长春真人西游记》实为游记·非小说"], "match_score": 3, "current_status": "已基本否定·清代评本附会" },
+            { "candidate": "李春芳", "identity": "明·内阁首辅·谥文定", "lifetime": "1511-1585", "social_network": ["严嵩","徐阶","张居正","吴承恩（疑）"], "evidence_for": ["华阳洞天主人·李春芳号'华阳洞天人'","茅山华阳洞·李春芳与茅山道派渊源","内阁首辅身份与宫廷描写深度匹配"], "evidence_against": ["无直接证据","首辅身份难以为通俗小说署名"], "match_score": 6, "current_status": "近年兴起假说·支持者渐多" },
+            { "candidate": "华阳洞天主人", "identity": "世德堂本所题校者", "lifetime": "约明嘉靖-万历", "social_network": ["世德堂书坊"], "evidence_for": ["世本原题·最直接署名","可能与李春芳有关·或为化名"], "evidence_against": ["为'校'者·非'著'者","或为书坊主或编辑者化名"], "match_score": 5, "current_status": "或为李春芳化名·或为书坊编辑" }
+        ],
+        commentators: [
+            { "name": "李卓吾", "identity": "明·李贽·思想家", "lifetime": "1527-1602", "work": "《李卓吾先生批评西游记》", "year": "约1590s", "commentary_count": 800, "commentary_types": { "叫好": 250, "骂人": 80, "点旨": 200, "考证": 100, "训诂": 170 }, "classic_quotes": ["妙！妙！妙！","奇甚！","此是全书大旨。","腐！可厌！","可恼！"], "feature": "明代评点最知名·骂'腐儒'·点'童心说'", "layer": "明末·最早评本" },
+            { "name": "汪象旭", "identity": "清·《西游证道书》评者", "lifetime": "清初·约17世纪", "work": "《西游证道书》", "year": "1663", "commentary_count": 600, "commentary_types": { "叫好": 100, "骂人": 30, "点旨": 350, "考证": 100, "训诂": 20 }, "classic_quotes": ["此回证道之大旨也。","心猿意马·皆在一念。","大道至简·此中分明。"], "feature": "首次以'证道'解西游·主张丘处机作", "layer": "清初·证道派始祖" },
+            { "name": "陈士斌", "identity": "清·《西游真诠》评者", "lifetime": "清康熙·约17世纪末", "work": "《西游真诠》", "year": "1696", "commentary_count": 1200, "commentary_types": { "叫好": 200, "骂人": 50, "点旨": 500, "考证": 250, "训诂": 200 }, "classic_quotes": ["此乃金丹大道也。","心火·肾水·此中分明。","修行次第·此回可证。"], "feature": "清代最流行评本·以金丹解西游", "layer": "清中期·金丹派代表" },
+            { "name": "刘一明", "identity": "清·道教龙门派·悟元子", "lifetime": "1734-1821", "work": "《西游原旨》", "year": "1753", "commentary_count": 2000, "commentary_types": { "叫好": 300, "骂人": 100, "点旨": 800, "考证": 500, "训诂": 300 }, "classic_quotes": ["西游原旨·在性命双修。","此回明言火候。","心猿归正·六贼无踪。"], "feature": "丹道解西游最系统·100回逐回评点·影响深远", "layer": "清中期·丹道派集大成" },
+            { "name": "张书绅", "identity": "清·《新说西游记》评者", "lifetime": "清乾隆·约18世纪", "work": "《新说西游记》", "year": "1753", "commentary_count": 1500, "commentary_types": { "叫好": 250, "骂人": 80, "点旨": 400, "考证": 500, "训诂": 270 }, "classic_quotes": ["西游之旨·在《学》《庸》。","心猿·即人心也。","此回可见儒释道一也。"], "feature": "以儒解西游·主张'三教圆融'·独特视角", "layer": "清中期·儒学派代表" }
+        ]
+    };
+
+    /* ==========================================================
+       配色映射
+       ========================================================== */
+    const LAYER_COLORS = {
+        "层1": "#c8463a",
+        "层2": "#e9b885",
+        "层3": "#3a6b8c",
+        "层4": "#7a5230",
+        "层5": "#5a7a3a",
+        "层6": "#8c6d3a",
+        "层7": "#6b4a8c"
+    };
+    const LAYER_LABELS = [
+        { key: "层1", label: "层1·宋元话本" },
+        { key: "层2", label: "层2·元末明初（杂剧·平话）" },
+        { key: "层3", label: "层3·明万历世本" },
+        { key: "层4", label: "层4·明万历翻刻·简本" },
+        { key: "层5", label: "层5·清证道本" },
+        { key: "层6", label: "层6·清新说·真诠本" },
+        { key: "层7", label: "层7·清原旨本" }
+    ];
+    const COMMENTATOR_COLORS = {
+        "李卓吾": "#c8463a",
+        "汪象旭": "#3a6b8c",
+        "陈士斌": "#7a5230",
+        "刘一明": "#5a7a3a",
+        "张书绅": "#8c6d3a"
+    };
+    const TYPE_COLORS = {
+        "叫好": "#c8463a",
+        "骂人": "#7a5230",
+        "点旨": "#3a6b8c",
+        "考证": "#5a7a3a",
+        "训诂": "#e9b885"
+    };
+
+    /* ==========================================================
+       工具：年份解析
+       ========================================================== */
+    function parseYear(yearStr) {
+        if (!yearStr) return 1500;
+        const m4 = yearStr.match(/(\d{4})/);
+        if (m4) return parseInt(m4[1]);
+        const mC = yearStr.match(/(\d+)世纪/);
+        if (mC) return parseInt(mC[1]) * 100;
+        if (yearStr.includes("元末明初")) return 1370;
+        if (yearStr.includes("元末")) return 1360;
+        if (yearStr.includes("万历中后期")) return 1600;
+        if (yearStr.includes("南宋")) return 1200;
+        if (yearStr.includes("元")) return 1360;
+        return 1500;
+    }
+    function layerKey(layerStr) {
+        const m = layerStr.match(/层\d/);
+        return m ? m[0] : "层3";
+    }
+
+    /* ==========================================================
+       图表 1：版本进化树（纵向时间轴）
+       ========================================================== */
+    function renderEvolutionTree(versions) {
+        const svg = d3.select("#evolution-tree");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("evolution-tree");
+        const width = Math.max(200, containerEl.clientWidth || 1100);
+        const height = 760;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 30, right: 40, bottom: 40, left: 180 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        // 解析年份并排序
+        const data = versions.map(v => ({
+            ...v,
+            yearNum: parseYear(v.year),
+            lkey: layerKey(v.archaeological_layer)
+        })).sort((a, b) => a.yearNum - b.yearNum);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Y 比例尺（按年份）
+        const yExtent = d3.extent(data, d => d.yearNum);
+        const yPad = (yExtent[1] - yExtent[0]) * 0.08;
+        const y = d3.scaleLinear()
+            .domain([yExtent[0] - yPad, yExtent[1] + yPad])
+            .range([0, innerH]);
+
+        // 时间轴（左侧）
+        g.append("g")
+            .attr("class", "tree-axis")
+            .attr("transform", `translate(${-20},0)`)
+            .call(d3.axisLeft(y)
+                .tickValues([1200, 1300, 1400, 1500, 1600, 1700, 1800])
+                .tickFormat(d => d + ""))
+            .call(g => g.select(".domain").remove());
+
+        // 主时间线
+        const lineX = 30;
+        g.append("line")
+            .attr("class", "tree-link")
+            .attr("x1", lineX)
+            .attr("x2", lineX)
+            .attr("y1", 0)
+            .attr("y2", innerH)
+            .attr("stroke", "#d9cdb8")
+            .attr("stroke-width", 2);
+
+        // 层位背景带（左侧色条）
+        const layerBands = LAYER_LABELS.map((ll, i) => {
+            const layerVersions = data.filter(d => d.lkey === ll.key);
+            if (layerVersions.length === 0) return null;
+            const yMin = d3.min(layerVersions, d => y(d.yearNum));
+            const yMax = d3.max(layerVersions, d => y(d.yearNum));
+            return { ...ll, yMin, yMax };
+        }).filter(Boolean);
+
+        // 层位标签（左外侧）
+        const layerLabelG = g.append("g").attr("class", "layer-band");
+        layerLabelG.selectAll("g")
+            .data(layerBands)
+            .enter()
+            .append("g")
+            .attr("transform", d => `translate(${-160},${(d.yMin + d.yMax) / 2})`)
+            .each(function(d) {
+                const sel = d3.select(this);
+                sel.append("rect")
+                    .attr("x", -10)
+                    .attr("y", -10)
+                    .attr("width",4)
+                    .attr("height", 20)
+                    .attr("fill", LAYER_COLORS[d.key] || "#999");
+                sel.append("text")
+                    .attr("x", 0)
+                    .attr("y", 0)
+                    .attr("dy", "0.35em")
+                    .style("font-size", "0.72rem")
+                    .style("fill", "#6b5e4d")
+                    .style("font-style", "italic")
+                    .text(d.label);
+            });
+
+        // 版本节点
+        const nodeG = g.selectAll(".tree-node")
+            .data(data)
+            .enter()
+            .append("g")
+            .attr("class", "tree-node")
+            .attr("transform", d => `translate(${lineX},${y(d.yearNum)})`);
+
+        // 连接线（节点到右侧文字）
+        nodeG.append("path")
+            .attr("class", "tree-link")
+            .attr("d", d => `M0,0 L30,0 L40,0`)
+            .attr("stroke", d => LAYER_COLORS[d.lkey] || "#999")
+            .attr("stroke-width", 1.5)
+            .attr("fill", "none");
+
+        // 节点圆
+        nodeG.append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", 8)
+            .attr("fill", d => LAYER_COLORS[d.lkey] || "#999")
+            .append("title")
+            .text(d => `${d.version}（${d.year}）`);
+
+        // 节点内层小白圆（视觉层次）
+        nodeG.append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", 3)
+            .attr("fill", "#fff");
+
+        // 版本名
+        nodeG.append("text")
+            .attr("class", "v-name")
+            .attr("x", 50)
+            .attr("y", -6)
+            .text(d => d.version);
+
+        // 元信息：年代 · 回数 · 类型
+        nodeG.append("text")
+            .attr("class", "v-meta")
+            .attr("x", 50)
+            .attr("y", 8)
+            .text(d => {
+                let ch;
+                if (d.chapters === null || d.chapters === undefined) ch = "已佚";
+                else if (typeof d.chapters === "number") ch = d.chapters + "回";
+                else ch = d.chapters;
+                return `${d.year}  ·  ${ch}  ·  ${d.type}`;
+            });
+
+        // 特征描述（自动截断）
+        nodeG.append("text")
+            .attr("class", "v-feature")
+            .attr("x", 50)
+            .attr("y", 22)
+            .text(d => {
+                const maxLen = Math.floor((innerW - 60) / 7.5);
+                let txt = d.feature;
+                if (txt.length > maxLen) txt = txt.slice(0, maxLen - 1) + "…";
+                return txt;
+            });
+
+        // 顶部标题
+        g.append("text")
+            .attr("x", lineX)
+            .attr("y", -20)
+            .style("font-size", "0.78rem")
+            .style("fill", "#6b5e4d")
+            .style("letter-spacing", "0.1em")
+            .text("↑ 最早");
+
+        g.append("text")
+            .attr("x", lineX)
+            .attr("y", innerH + 28)
+            .style("font-size", "0.78rem")
+            .style("fill", "#6b5e4d")
+            .style("letter-spacing", "0.1em")
+            .text("↓ 最晚");
+
+        // 图例
+        const legend = d3.select("#legend-layers");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(LAYER_LABELS)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `
+                <span class="legend-swatch" style="background:${LAYER_COLORS[d.key]}"></span>
+                <span>${d.label}</span>
+            `);
+    }
+
+    /* ==========================================================
+       图表 2：情节演化路径（HTML 流程图）
+       ========================================================== */
+    function renderEvolutionPaths(variants) {
+        const container = d3.select("#evolution-paths");
+        container.selectAll("*").remove();
+
+        variants.forEach(v => {
+            const row = container.append("div").attr("class", "evo-path-row");
+
+            const left = row.append("div").attr("class", "evo-element");
+            left.text(v.element);
+            left.append("span")
+                .attr("class", "evo-arrow")
+                .text(v.evolution);
+
+            const flow = row.append("div").attr("class", "evo-flow");
+            // first_appear
+            flow.append("div").attr("class", "evo-step first").text(v.first_appear);
+            flow.append("span").attr("class", "evo-arrow").text("→");
+
+            // evolution_path 拆分
+            const pathParts = v.evolution_path.split("→").map(s => s.trim()).filter(Boolean);
+            pathParts.forEach((part, i) => {
+                flow.append("div").attr("class", "evo-step").text(part);
+                if (i < pathParts.length - 1) {
+                    flow.append("span").attr("class", "evo-arrow").text("→");
+                }
+            });
+            flow.append("span").attr("class", "evo-arrow").text("→");
+            // key_change (last)
+            flow.append("div").attr("class", "evo-step last").text(v.key_change);
+
+            // 注脚：首现回目
+            const key = row.append("div").attr("class", "evo-key");
+            key.html(`<strong>首现回目：</strong>第 ${v.chapter_first} 回　·　${v.evolution}`);
+        });
+    }
+
+    /* ==========================================================
+       图表 3：作者论争矩阵（HTML 表格）
+       ========================================================== */
+    function renderAuthorTable(authors) {
+        const tbody = d3.select("#author-tbody");
+        tbody.selectAll("*").remove();
+
+        authors.forEach(a => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "name").text(a.candidate);
+            tr.append("td").attr("class", "identity").text(a.identity);
+            tr.append("td").attr("class", "lifetime").text(a.lifetime);
+
+            // 匹配度色块进度条
+            const scoreTd = tr.append("td").attr("class", "score");
+            const bar = scoreTd.append("div").attr("class", "score-bar");
+            for (let i = 0; i < 10; i++) {
+                bar.append("div")
+                    .attr("class", "score-cell" + (i < a.match_score ? " filled" : "") + (i < a.match_score && i >= 5 ? " mid" : ""));
+            }
+            scoreTd.append("div").attr("class", "score-num").text(`${a.match_score} / 10`);
+
+            tr.append("td").attr("class", "status").text(a.current_status);
+
+            const forTd = tr.append("td").attr("class", "evidence for");
+            const forUl = forTd.append("ul");
+            a.evidence_for.forEach(e => forUl.append("li").text(e));
+
+            const againstTd = tr.append("td").attr("class", "evidence against");
+            const againstUl = againstTd.append("ul");
+            a.evidence_against.forEach(e => againstUl.append("li").text(e));
+        });
+    }
+
+    /* ==========================================================
+       图表 4-A：批点者饼图（按 commentary_count 占比）
+       ========================================================== */
+    function renderCommentaryPie(commentators) {
+        const svg = d3.select("#commentary-pie");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${width/2}, ${height/2})`);
+
+        const pie = d3.pie().value(d => d.commentary_count).sort(null);
+        const arc = d3.arc()
+            .innerRadius(radius * 0.55)
+            .outerRadius(radius)
+            .cornerRadius(3);
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.82)
+            .outerRadius(radius * 0.82);
+
+        const arcs = pie(commentators);
+
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => COMMENTATOR_COLORS[d.data.name] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 100)
+            .style("opacity", 1);
+
+        const total = d3.sum(commentators, d => d.commentary_count);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "-0.2em")
+            .style("font-size", "1.8rem")
+            .style("font-weight", "600")
+            .style("fill", "#2c2418")
+            .text(total);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "1.6em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6b5e4d")
+            .text("总评论数");
+
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.84rem")
+            .style("font-weight", "600")
+            .style("fill", "#fff")
+            .each(function(d) {
+                const lines = [d.data.name, `${d.data.commentary_count}·${(d.data.commentary_count / total * 100).toFixed(0)}%`];
+                const sel = d3.select(this);
+                lines.forEach((line, i) => {
+                    sel.append("tspan")
+                        .attr("x", 0)
+                        .attr("dy", i === 0 ? "-0.2em" : "1.2em")
+                        .text(line);
+                });
+            });
+
+        // 图例
+        const legend = d3.select("#legend-commentators");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(commentators)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `
+                <span class="legend-swatch" style="background:${COMMENTATOR_COLORS[d.name] || '#999'}"></span>
+                <span>${d.name}：${d.commentary_count} 条</span>
+            `);
+    }
+
+    /* ==========================================================
+       图表 4-B：批点者评论数条形图
+       ========================================================== */
+    function renderCommentaryCountBar(commentators) {
+        const svg = d3.select("#commentary-count-bar");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const margin = { top: 20, right: 30, bottom: 50, left: 80 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const sorted = [...commentators].sort((a, b) => a.commentary_count - b.commentary_count);
+        const y = d3.scaleBand()
+            .domain(sorted.map(d => d.name))
+            .range([0, innerH])
+            .padding(0.25);
+        const x = d3.scaleLinear()
+            .domain([0, d3.max(commentators, d => d.commentary_count) * 1.1])
+            .range([0, innerW]);
+
+        // 坐标轴
+        g.append("g")
+            .attr("class", "stacked-axis")
+            .call(d3.axisLeft(y))
+            .call(g => g.select(".domain").remove());
+        g.append("g")
+            .attr("class", "stacked-axis")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(5));
+
+        // 条
+        g.selectAll("rect.bar")
+            .data(sorted)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", 0)
+            .attr("y", d => y(d.name))
+            .attr("height", y.bandwidth())
+            .attr("width",d => Math.max(0, x(d.commentary_count)))
+            .attr("fill", d => COMMENTATOR_COLORS[d.name] || "#999")
+            .attr("rx", 3)
+            .style("opacity", 0)
+            .transition()
+            .duration(700)
+            .delay((d, i) => i * 80)
+            .style("opacity", 0.9);
+
+        // 数值标签
+        g.selectAll("text.value")
+            .data(sorted)
+            .enter()
+            .append("text")
+            .attr("class", "value")
+            .attr("x", d => x(d.commentary_count) + 6)
+            .attr("y", d => y(d.name) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .style("font-size", "0.82rem")
+            .style("fill", "#2c2418")
+            .style("font-weight", "600")
+            .text(d => d.commentary_count);
+
+        // 轴标签
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 38)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6b5e4d")
+            .text("评论条数");
+    }
+
+    /* ==========================================================
+       图表 4-C：经典语录卡片网格
+       ========================================================== */
+    function renderQuotesGrid(commentators) {
+        const grid = d3.select("#quotes-grid");
+        grid.selectAll("*").remove();
+
+        commentators.forEach(c => {
+            const card = grid.append("div")
+                .attr("class", "quote-card")
+                .style("border-top-color", COMMENTATOR_COLORS[c.name] || "#c8463a");
+
+            const header = card.append("div").attr("class", "qc-header");
+            header.append("div").attr("class", "qc-name").text(c.name);
+            header.append("div").attr("class", "qc-year").text(`${c.year} · ${c.commentary_count}条`);
+
+            card.append("div").attr("class", "qc-feature").text(c.feature);
+
+            const ul = card.append("ul");
+            (c.classic_quotes || []).forEach(q => ul.append("li").text(q));
+        });
+    }
+
+    /* ==========================================================
+       图表 5：评论类型堆叠条形图
+       ========================================================== */
+    function renderStackedBar(commentators) {
+        const svg = d3.select("#commentary-stacked");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("commentary-stacked");
+        const width = Math.max(200, containerEl.clientWidth || 1100);
+        const height = 380;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 20, right: 40, bottom: 50, left: 100 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const types = ["叫好", "骂人", "点旨", "考证", "训诂"];
+        const stacked = d3.stack()
+            .keys(types)
+            .value((d, key) => (d.commentary_types && d.commentary_types[key]) || 0);
+
+        const series = stacked(commentators);
+        // 为每个段附加 key，便于在 title / 标签中访问
+        series.forEach(layer => {
+            layer.forEach(seg => { seg.typeKey = layer.key; });
+        });
+
+        const y = d3.scaleBand()
+            .domain(commentators.map(d => d.name))
+            .range([0, innerH])
+            .padding(0.3);
+        const x = d3.scaleLinear()
+            .domain([0, d3.max(commentators, d => {
+                return types.reduce((s, t) => s + ((d.commentary_types && d.commentary_types[t]) || 0), 0);
+            }) * 1.05])
+            .range([0, innerW]);
+
+        // 坐标轴
+        g.append("g")
+            .attr("class", "stacked-axis")
+            .call(d3.axisLeft(y))
+            .call(g => g.select(".domain").remove());
+        g.append("g")
+            .attr("class", "stacked-axis")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(8));
+
+        // 堆叠段
+        const layerG = g.selectAll(".stack-layer")
+            .data(series)
+            .enter()
+            .append("g")
+            .attr("class", "stack-layer")
+            .attr("fill", d => TYPE_COLORS[d.key] || "#999");
+
+        layerG.selectAll("rect")
+            .data(d => d)
+            .enter()
+            .append("rect")
+            .attr("class", "stacked-bar")
+            .attr("x", d => x(d[0]))
+            .attr("y", d => y(d.data.name))
+            .attr("height", y.bandwidth())
+            .attr("width",d => Math.max(0, x(d[1]) - x(d[0])))
+            .attr("rx", 2)
+            .append("title")
+            .text(d => {
+                const val = (d.data.commentary_types && d.data.commentary_types[d.typeKey]) || 0;
+                return `${d.data.name} · ${d.typeKey}：${val}`;
+            });
+
+        // 数值标签（仅显示足够宽的段）
+        layerG.selectAll("text")
+            .data(d => d)
+            .enter()
+            .append("text")
+            .attr("x", d => (x(d[0]) + x(d[1])) / 2)
+            .attr("y", d => y(d.data.name) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.74rem")
+            .style("fill", "#fff")
+            .style("font-weight", "600")
+            .text(d => {
+                const val = (d.data.commentary_types && d.data.commentary_types[d.typeKey]) || 0;
+                const w = x(d[1]) - x(d[0]);
+                return w > 30 ? val : "";
+            });
+
+        // 轴标签
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 38)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6b5e4d")
+            .text("评论条数（按类型堆叠）");
+
+        // 图例
+        const legend = d3.select("#legend-types");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(types)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(t => `
+                <span class="legend-swatch" style="background:${TYPE_COLORS[t]}"></span>
+                <span>${t}</span>
+            `);
+    }
+
+    /* ==========================================================
+       关键洞察
+       ========================================================== */
+    function renderInsights() {
+        const insights = [
+            `世德堂本（1592）是<strong>百回本奠基</strong>，首次完整收录"九九八十一难"；清代评本（证道书 1663）方将<strong>唐僧出身故事</strong>（陈光蕊·江流儿）补入正文为第 9 回。`,
+            `丘处机作假说<strong>已被否定</strong>——丘卒于 1227，世本刊于 1592，相隔 300 余年；《长春真人西游记》实为游记而非小说。<strong>吴承恩</strong>仍为主流（match_score=7），但李春芳假说（6）近年兴起。`,
+            `刘一明《西游原旨》（1753）以<strong>丹道解西游最系统</strong>，100 回逐回评点·共 <strong>2000 条</strong>评论为五人之冠，点旨 800 条占其四成，丹道派集大成。`,
+            `5 位批点者共 <strong>6100 条</strong>评论，跨越明末（李卓吾 1590s）至清中期（刘一明·张书绅 1753）约 160 年，构成一场<strong>跨越四百年的"读书会"</strong>。`,
+            `评论类型分布：<strong>点旨 2250 条（37%）</strong>占绝对主导，显示批点者以"揭示大旨"为核心诉求；<strong>骂人仅 340 条</strong>，以李卓吾（80）最为辛辣。`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => ul.append("li").html(text));
+    }
+
+    /* ==========================================================
+       数据加载（fetch 失败则用嵌入数据）
+       ========================================================== */
+    const fetchStatus = { anyFetched: false };
+    async function fetchJson(path, fallbackKey) {
+        try {
+            const response = await fetch(path);
+            if (!response.ok) throw new Error('fetch failed: ' + path);
+            fetchStatus.anyFetched = true;
+            return await response.json();
+        } catch (e) {
+            console.warn('[INFO] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+            return EMBEDDED_DATA[fallbackKey];
+        }
+    }
+
+    async function loadData() {
+        const base = '../../scripts/output/data/';
+        const [versions, variants, authors, commentators, summary] = await Promise.all([
+            fetchJson(base + 'versions_tree.json', 'versions'),
+            fetchJson(base + 'versions_variants.json', 'variants'),
+            fetchJson(base + 'authors_debate.json', 'authors'),
+            fetchJson(base + 'commentary_danmaku.json', 'commentators'),
+            fetchJson(base + 'commentary_summary.json', 'summary')
+        ]);
+
+        if (fetchStatus.anyFetched) {
+            document.getElementById('dataSource').innerHTML =
+                '数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）';
+        }
+
+        return { versions, variants, authors, commentators, summary };
+    }
+
+    /* ==========================================================
+       主流程
+       ========================================================== */
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        renderEvolutionTree(data.versions);
+        renderEvolutionPaths(data.variants);
+        renderAuthorTable(data.authors);
+        renderCommentaryPie(data.commentators);
+        renderCommentaryCountBar(data.commentators);
+        renderQuotesGrid(data.commentators);
+        renderStackedBar(data.commentators);
+        renderInsights();
+
+        // 生成时间
+        document.getElementById('gen-time').textContent =
+            '数据生成时间：' + new Date().toISOString().slice(0, 19).replace('T', ' ') + '（本地嵌入）';
+    }
+
+    // 响应式重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderEvolutionTree(window.__lastData.versions);
+                renderStackedBar(window.__lastData.commentators);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

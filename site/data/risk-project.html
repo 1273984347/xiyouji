@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>风险评估与项目管理 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        /* 表格 */
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+        }
+        table.data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.76rem;
+            font-weight: 600;
+        }
+        .pill-high { background: #f8d8d2; color: var(--accent); }
+        .pill-mid  { background: #fce8c8; color: var(--accent-3); }
+        .pill-low  { background: #d8e8d2; color: var(--accent-4); }
+        .pill-info { background: #d4e2ec; color: var(--accent-2); }
+        .icon-correct {
+            color: var(--accent-4);
+            font-weight: 700;
+        }
+        .icon-mid {
+            color: var(--accent-3);
+            font-weight: 700;
+        }
+        .icon-info {
+            color: var(--accent-2);
+            font-weight: 700;
+        }
+        /* 洞察列表 */
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 16px 18px;
+            margin: 16px 0;
+            font-size: 0.92rem;
+            color: var(--ink);
+            line-height: 1.85;
+        }
+        .insight-box .ib-label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .insight-box strong { color: var(--ink); font-weight: 600; }
+        /* 角色卡片 */
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .char-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .char-card.c-tang { border-top-color: var(--accent); }
+        .char-card.c-wukong { border-top-color: var(--accent-2); }
+        .char-card.c-bajie { border-top-color: var(--accent-soft); }
+        .char-card.c-sha { border-top-color: var(--accent-4); }
+        .char-card.c-long { border-top-color: var(--accent-3); }
+        .char-card.c-guanyin { border-top-color: #a04060; }
+        .char-card.c-buddha { border-top-color: #4a3a6b; }
+        .char-card.c-jade { border-top-color: #8a7a3a; }
+        .char-card .char-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .char-card .char-mbti {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .char-card .char-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .char-card .char-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        /* 维度卡片 */
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .map-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .map-card.alt { border-left-color: var(--accent-4); }
+        .map-card.alt2 { border-left-color: var(--accent-3); }
+        .map-card .map-label {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .map-card.alt .map-label { color: var(--accent-4); }
+        .map-card.alt2 .map-label { color: var(--accent-3); }
+        .map-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .map-card .map-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .map-card .map-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 16px;
+            grid-column: 1 / -1;
+        }
+        .summary-card .map-label {
+            color: var(--accent);
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .summary-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--ink);
+        }
+        .summary-card .map-row {
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+        /* tooltip */
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 280px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 24px;
+        }
+        .footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 6px;
+        }
+        .footer a:hover { text-decoration: underline; }
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        /* axis 文字 */
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        .narrative {
+            font-size: 0.92rem;
+            line-height: 1.85;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .narrative strong { color: var(--ink); font-weight: 600; }
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        /* milestone list */
+        .milestone-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 12px;
+        }
+        .milestone-list li {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.9rem;
+        }
+        .milestone-list li:last-child { border-bottom: none; }
+        .milestone-list .ms-year {
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-weight: 600;
+        }
+        .milestone-list .ms-text strong { color: var(--ink); }
+        .milestone-list .ms-text .ms-chap {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin-top: 2px;
+        }
+        @media (max-width: 720px) {
+            .hero h1 { font-size: 1.6rem; }
+            .hero .subtitle { font-size: 0.78rem; letter-spacing: 0.15em; }
+            .section { padding: 18px; }
+            .kpi-card .value { font-size: 1.5rem; }
+            .map-grid { grid-template-columns: 1fr; }
+            .char-grid { grid-template-columns: 1fr; }
+            table.data-table { font-size: 0.78rem; }
+            table.data-table th, table.data-table td { padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            .hero { padding: 36px 16px 28px; }
+            .hero h1 { font-size: 1.4rem; }
+            .container { padding: 0 12px; }
+            .section { padding: 14px; }
+            .chart-block { padding: 12px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>风险评估与项目管理 · 详解西游记</h1>
+        <div class="subtitle">DATA-DRIVEN RISK ASSESSMENT &amp; PROJECT MANAGEMENT OF XIYOUJI</div>
+        <div class="tagline">从 81 难到 5048 卷——一部项目管理与风险治理的活教材。</div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../dashboard.html">仪表盘</a>
+            <span class="sep">/</span>
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <span class="current">风险评估与项目管理</span>
+        </nav>
+
+        <div class="notice">
+            本页基于 H 类「风险评估与项目管理」脚本生成，加载 4 份 JSON 数据：风险评估 / KPI 与里程碑 / MBTI 人格 / 整体统计。所有图表支持 hover tooltip。
+        </div>
+
+        <!-- 研究方法论 -->
+        <section class="section">
+            <h2 class="section-title">导言 · 项目风险的三维透镜</h2>
+            <div class="section-sub">INTRODUCTION · Three-Dimensional Risk Lens on the 14-Year Pilgrimage Project</div>
+            <p style="font-size:0.95rem;line-height:1.8;color:var(--ink);margin-bottom:14px;">
+                《西游记》的取经之路可视为一个为期 <strong>14 年</strong>、跨越 <strong>108000 里</strong>、历经 <strong>81 难</strong> 的长期项目。
+                本页从三个维度剖析这一神魔叙事背后的<strong>项目管理科学</strong>：
+                <strong style="color:var(--accent);">PMBOK 风险评估</strong>（5 类风险 × 10 大危机）、
+                <strong style="color:var(--accent-2);">KPI 与里程碑</strong>（7 项 KPI 全部达成 · 8 大里程碑）、
+                <strong style="color:var(--accent-4);">MBTI 团队画像</strong>（8 角色 × 4 维度人格适配）。
+            </p>
+
+            <div style="margin-bottom:18px;">
+                <span class="data-badge">4 份 JSON 数据</span>
+                <span class="data-badge">5 大风险类别</span>
+                <span class="data-badge">10 大单点风险</span>
+                <span class="data-badge">7 项 KPI</span>
+                <span class="data-badge">8 个里程碑</span>
+                <span class="data-badge">8 角色 MBTI</span>
+                <span class="data-badge">14 年项目周期</span>
+                <span class="data-badge">D3.js v7</span>
+                <span class="data-badge">fetch + EMBEDDED fallback</span>
+            </div>
+
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">DIMENSION 1</div>
+                    <div class="map-title">风险评估 · Risk Assessment</div>
+                    <div class="map-row">5 类风险 · 妖怪袭击占 58%（47/81 难）·10 大单点危机·综合风险评分 7.2 / 10·中等偏高。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">DIMENSION 2</div>
+                    <div class="map-title">KPI 与里程碑 · KPIs &amp; Milestones</div>
+                    <div class="map-row">7 项 KPI 全部达成（5 达成 / 1 中等 / 1 信息）·8 个里程碑横跨 14 年·项目按期按预算按范围完成。</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">DIMENSION 3</div>
+                    <div class="map-title">MBTI 人格 · Personality Atlas</div>
+                    <div class="map-row">8 角色覆盖 8 种 MBTI 类型·平均适配度 8.25·团队缺 INTP/ENTJ·互补性强但缺批判思维。</div>
+                </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+                数据来源：scripts/AD_H_风险评估与项目管理/ 目录下的 4 份 JSON 输出，本页 fetch 失败时自动回退到内嵌 EMBEDDED 数据，支持 file:// 协议双击打开。
+            </p>
+        </section>
+
+        <!-- KPI 卡片 -->
+        <div class="kpi-row" id="kpiRow">
+            <div class="kpi-card">
+                <div class="label">RISK · 5 风险类别</div>
+                <div class="value">5 类</div>
+                <div class="desc">妖怪袭击（58%）/ 自然 / 政治 / 诱惑 / 团队内部</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">KPI · 7 项指标</div>
+                <div class="value">7 / 7 达成</div>
+                <div class="desc">5 达成 · 1 中等（搬救兵 13 次）· 1 信息（化缘 1200 次）</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">MILESTONE · 8 里程碑</div>
+                <div class="value">14 年</div>
+                <div class="desc">贞观 13 年出发 → 27 年返回·8 个关键里程碑节点</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">MBTI · 8 角色</div>
+                <div class="value">avg 8.25</div>
+                <div class="desc">8 种 MBTI 类型·5 角色满分 9 分·玉帝最低 6 分</div>
+            </div>
+        </div>
+
+        <!-- Section 1: 风险评估 -->
+        <section class="section">
+            <h2 class="section-title">壹 · 风险评估 · 81 难的项目风险图谱</h2>
+            <div class="section-sub">RISK ASSESSMENT · PMBOK Framework on 81 Tribulations</div>
+            <div class="definition" id="def-risk">
+                <strong>评估定义：</strong>按 PMBOK 风险管理框架，将取经 81 难纳入项目风险：
+                <strong>风险识别</strong>（5 类别）·<strong>概率评估</strong>（高/中/低）·
+                <strong>影响评估</strong>（严重/中等/极严重）·<strong>应对策略</strong>（减轻/接受/规避）。
+                综合风险评分 7.2 / 10·中等偏高·但通过搬救兵策略有效化解。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>核心结论：</strong>妖怪袭击是主要风险（占 58%）·但通过搬救兵可降低至可控；
+                团队内部风险概率最低（6%）但影响极严重（赶走悟空·项目停摆）；
+                诱惑风险虽少（10%）但破坏性强·<strong style="color:var(--accent);">一次失败即项目终止</strong>；
+                政治风险源于文化冲突·通过文牒通关解决；自然环境风险不可控但影响中等·直接通过。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">图 1 · 10 大单点风险：概率 × 影响散点图</div>
+                <div class="chart-caption">X 轴：probability 概率 (0-10) · Y 轴：impact 影响 (0-10) · 气泡大小 = score (prob×impact) · 颜色 = √(prob×impact) 由浅至深</div>
+                <svg id="chart-risk-scatter" class="chart-svg" width="100%" height="440"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;"></span>低风险 √score &lt; 5</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#c8463a;"></span>中风险 5-7</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#7a1a1a;"></span>高风险 &gt; 7</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent);"></span>风险阈值线 score=50</span>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">图 2 · 5 大风险类别：数量 / 平均概率 / 平均影响 分组条形图</div>
+                <div class="chart-caption">X 轴：5 个风险类别 · Y 轴左：count 数量 · Y 轴右：avg_probability / avg_impact (%) · 三组柱并列</div>
+                <svg id="chart-category-bar" class="chart-svg" width="100%" height="420"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>count 难数</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>avg_probability 平均概率 (%)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>avg_impact 平均影响 (0-10 标准化)</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">5 风险类别详表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="risk-cat-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>类别</th>
+                            <th>English</th>
+                            <th>数量</th>
+                            <th>概率</th>
+                            <th>影响</th>
+                            <th>应对策略</th>
+                            <th>代表案例</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="insight-box">
+                <span class="ib-label">RISK INSIGHT · 关键洞察</span>
+                <strong>风险类别分布的不均衡性</strong>揭示了项目风险的本质：
+                <strong style="color:var(--accent);">妖怪袭击</strong>虽占 58% 但属"可减轻"类（搬救兵可化解）；
+                <strong style="color:var(--accent-2);">团队内部风险</strong>概率仅 6% 但影响"极严重"——
+                这是<strong>低概率高影响</strong>的典型黑天鹅事件（如三打白骨精赶走悟空·六耳猕猴）；
+                <strong style="color:var(--accent-3);">诱惑风险</strong>则是<strong>"一票否决"</strong>型风险·
+                一次失败即终止项目（女儿国/盘丝洞）。三类风险的应对策略迥异：
+                <strong>减轻</strong>（妖怪）·<strong>规避</strong>（诱惑）·<strong>接受</strong>（自然）。
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">风险评估洞察</h3>
+            <ol class="insights-list" id="risk-insights-list"></ol>
+        </section>
+
+        <!-- Section 2: KPI 与里程碑 -->
+        <section class="section">
+            <h2 class="section-title alt-2">贰 · KPI 与里程碑 · 14 年项目的成功度量</h2>
+            <div class="section-sub">KPIs &amp; MILESTONES · Project Success Metrics</div>
+            <div class="definition" id="def-kpi">
+                <strong>评估定义：</strong>按 PMBOK 项目管理：14 年取经项目的关键绩效指标（KPI）与里程碑（Milestone）。
+                <strong>项目范围</strong>：长安到灵山 108000 里 · 81 难 · 5048 卷经书。
+                <strong>项目发起</strong>：如来佛祖（Sponsor）· 观音菩萨（执行总监）· 唐僧（项目经理）。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>项目基本面：</strong>项目经理唐僧·技术负责人悟空·外围八戒·后勤沙僧·交通白龙马·
+                预算为零（化缘 + 施主）·工期 14 年（贞观 13-27 年）。
+                <strong style="color:var(--accent-2);">7 项 KPI 全部达成</strong>·按期·按预算·按范围完成。
+                关键成功因素：<strong>观音 13 次救援</strong>·<strong>紧箍咒约束悟空</strong>。
+                最大已实现风险：三打白骨精赶走悟空·但成功化解。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">图 3 · 14 年里程碑时间线（8 个关键节点）</div>
+                <div class="chart-caption">X 轴：project year 1-14 年 · Y 轴：里程碑序号 · 节点大小 = 重要性 · 红色 = 危机里程碑·蓝色 = 团队组建·绿色 = 项目推进</div>
+                <svg id="chart-milestone-timeline" class="chart-svg" width="100%" height="380"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>危机里程碑（团队风险）</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>团队组建节点</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>项目推进节点</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-3);"></span>项目完成</span>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">图 4 · 7 项 KPI 完成状态饼图</div>
+                <div class="chart-caption">达成（5 项 · 71.4%）vs 中等（1 项 · 14.3%）vs 信息（1 项 · 14.3%）· 中心显示总达成率</div>
+                <svg id="chart-kpi-pie" class="chart-svg" width="100%" height="380"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>✓ 达成（5 项）</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>△ 中等（1 项 · 搬救兵）</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>— 信息（1 项 · 化缘）</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">7 KPI 状态表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="kpi-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>KPI</th>
+                            <th>目标</th>
+                            <th>实际</th>
+                            <th>状态</th>
+                            <th>关联里程碑</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">8 个里程碑详情</h3>
+            <ul class="milestone-list" id="milestone-list"></ul>
+
+            <div class="insight-box">
+                <span class="ib-label">KPI INSIGHT · 关键洞察</span>
+                <strong>项目成功的关键不在硬指标·而在软实力。</strong>
+                7 项 KPI 中有 6 项硬指标（进度/劫难/经卷/存活率/工期/搬救兵）全部达成·
+                但<strong style="color:var(--accent);">关键成功因素</strong>是"<strong>观音的及时救援</strong>"（13 次）
+                与"<strong>紧箍咒对悟空的约束</strong>"——
+                前者是<strong>外部资源调度</strong>能力·后者是<strong>核心人才管理</strong>能力。
+                这揭示了一个项目管理悖论：<strong>预算为零的团队·靠资源调度与人才管理完成了 14 年巨型项目</strong>。
+                最大风险"<strong style="color:var(--accent-2);">三打白骨精赶走悟空</strong>"虽已实现·但成功化解·
+                这一事件成为<strong>团队建设的转折点</strong>·
+                lessons learned 写明："团队建设需前期磨合·核心技术（悟空）不可替代·外部求助是重要资源"。
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">KPI 与里程碑洞察</h3>
+            <ol class="insights-list" id="kpi-insights-list"></ol>
+        </section>
+
+        <!-- Section 3: MBTI 人格图鉴 -->
+        <section class="section">
+            <h2 class="section-title alt-3">叁 · MBTI 人格图鉴 · 8 角色团队画像</h2>
+            <div class="section-sub">MBTI PERSONALITY ATLAS · Team Composition &amp; Personality Fit</div>
+            <div class="definition" id="def-mbti">
+                <strong>评估定义：</strong>MBTI（迈尔斯-布里格斯类型指标）：4 维度 8 偏好组合成 16 型人格。
+                <strong>E/I</strong>（外向/内向）·<strong>S/N</strong>（实感/直觉）·
+                <strong>T/F</strong>（思考/情感）·<strong>J/P</strong>（判断/感知）。
+                8 角色覆盖 8 种 MBTI 类型·平均适配度 8.25·5 角色 9 分·玉帝最低 6 分。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>团队画像：</strong>5 取经成员 = INFJ（唐僧）+ ENTP（悟空）+ ESFP（八戒）+ ISFJ（沙僧）+ ISTP（白龙马）·
+                覆盖 5 种类型·<strong style="color:var(--accent-4);">互补性强</strong>。
+                外部 3 监管者 = ENFJ（观音）+ INTJ（如来）+ ESTJ（玉帝）·
+                形成"<strong style="color:var(--accent);">理想主义愿景</strong> + <strong>技术创新</strong> + <strong>执行保障</strong>"的三角。
+                团队缺 INTP（逻辑学家）/ ENTJ（指挥官）·<strong style="color:var(--accent-2);">缺战略+批判思维</strong>——
+                这解释了为何决策屡屡失误（如三打白骨精赶走悟空）。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">图 5 · 8 角色 MBTI 适配度雷达图（4 维度 · 8 人重叠）</div>
+                <div class="chart-caption">4 轴：E（外向）/ N（直觉）/ F（情感）/ P（感知）·数值 0-10·8 角色多边形重叠·形状越饱满越外向直觉</div>
+                <svg id="chart-mbti-radar" class="chart-svg" width="100%" height="540"></svg>
+                <div class="legend-row" id="mbti-legend">
+                    <span class="legend-item"><span class="legend-swatch" style="background:#c8463a;"></span>唐僧 INFJ</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#3a6b8c;"></span>悟空 ENTP</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;"></span>八戒 ESFP</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#5a7a3a;"></span>沙僧 ISFJ</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#7a5230;"></span>白龙马 ISTP</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#a04060;"></span>观音 ENFJ</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#4a3a6b;"></span>如来 INTJ</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#8a7a3a;"></span>玉帝 ESTJ</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8 角色 MBTI 详表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="mbti-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>角色</th>
+                            <th>MBTI</th>
+                            <th>类型名</th>
+                            <th>适配度</th>
+                            <th>E</th>
+                            <th>I</th>
+                            <th>S</th>
+                            <th>N</th>
+                            <th>T</th>
+                            <th>F</th>
+                            <th>J</th>
+                            <th>P</th>
+                            <th>团队优势</th>
+                            <th>短板</th>
+                            <th>职业适配</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8 角色人格卡片</h3>
+            <div class="char-grid" id="mbti-char-grid"></div>
+
+            <div class="insight-box">
+                <span class="ib-label">MBTI INSIGHT · 关键洞察</span>
+                <strong>团队互补性的两面性。</strong>
+                8 角色覆盖 8 种 MBTI 类型·看似多样性极高·实则<strong style="color:var(--accent);">结构性缺位</strong>：
+                <strong>缺 INTP（逻辑学家）</strong>——团队无人能做纯粹理性批判·导致决策屡屡受情绪干扰；
+                <strong>缺 ENTJ（指挥官）</strong>——团队无强势战略指挥·唐僧虽是项目经理（INFJ）但缺乏指挥气质·
+                悟空（ENTP）虽灵活但反权威·不愿担指挥责。
+                这两个缺位的MBTI类型·<strong style="color:var(--accent-2);">正是项目决策失误的认知根源</strong>——
+                "三打白骨精赶走悟空"在 INTJ 视角下本可避免·
+                "女儿国逼婚"在 INTP 视角下应直接规避。团队的"<strong>互补</strong>"反而成为了
+                "<strong>结构性盲区</strong>"。
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">MBTI 人格洞察</h3>
+            <ol class="insights-list" id="mbti-insights-list"></ol>
+        </section>
+
+        <!-- 综合结论 -->
+        <section class="section">
+            <h2 class="section-title">肆 · 综合结论 · 项目成功的认知结构</h2>
+            <div class="section-sub">SYNTHESIS · The Cognitive Architecture of Project Success</div>
+
+            <p style="font-size:0.95rem;line-height:1.85;color:var(--ink);margin-bottom:18px;">
+                从三个维度交叉观察·《西游记》的取经项目呈现了一个<strong>反常识的成功模型</strong>：
+                风险综合评分 7.2（中等偏高）·7 项 KPI 全部达成·14 年按期完成·5 人全部成佛。
+                这一成功的认知结构由<strong>三重互补机制</strong>支撑：
+                <strong style="color:var(--accent);">风险减轻机制</strong>（搬救兵策略）·
+                <strong style="color:var(--accent-2);">人才约束机制</strong>（紧箍咒）·
+                <strong style="color:var(--accent-4);">人格互补机制</strong>（5 类 MBTI 协作）。
+                但同时存在<strong>结构性盲区</strong>——缺 INTP/ENTJ 导致决策失误频发·
+                这一点由"<strong>三打白骨精赶走悟空</strong>"（最大风险已实现）所印证。
+            </p>
+
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">FINDING 1 · 风险结构</div>
+                    <div class="map-title">妖怪袭击频发 · 但属可减轻类</div>
+                    <div class="map-row">47/81 难为妖怪袭击·占 58%·但通过搬救兵策略（观音 13 次救援）有效化解。真正的黑天鹅是 6% 概率的团队内部风险。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">FINDING 2 · 项目成功</div>
+                    <div class="map-title">零预算 · 14 年 · 全 KPI 达成</div>
+                    <div class="map-row">无现金预算·靠化缘 1200 次 + 施主供养·14 年按期完成·7 项 KPI 全达成。关键在资源调度（观音）与核心人才管理（紧箍咒约束悟空）。</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">FINDING 3 · 团队画像</div>
+                    <div class="map-title">8 MBTI 类型互补 · 但缺 INTP/ENTJ</div>
+                    <div class="map-row">8 角色覆盖 8 种 MBTI·avg 适配 8.25·5 人满分。但缺战略指挥（ENTJ）与逻辑批判（INTP）·这是决策失误的认知根源。</div>
+                </div>
+                <div class="summary-card">
+                    <div class="map-label">META INSIGHT</div>
+                    <div class="map-title">项目管理的本质：风险治理 × 人才治理 × 认知治理</div>
+                    <div class="map-row">
+                        三个维度共同指向一个深层结论：《西游记》项目的成功·不在<strong>消除风险</strong>·
+                        而在<strong style="color:var(--accent);">治理风险</strong>——
+                        妖怪袭击通过搬救兵减轻（risk mitigation）·
+                        团队分裂通过紧箍咒约束（talent governance）·
+                        决策失误通过 5 类 MBTI 互补（cognitive diversity）。
+                        但同时·"<strong>缺 INTP/ENTJ</strong>"揭示了<strong style="color:var(--accent-2);">认知互补的边界</strong>——
+                        互补不等于无盲区·多样性不等于无短板。这正是《西游记》作为项目管理活教材的最深启示。
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">项目整体洞察（4 大发现）</h3>
+            <ol class="insights-list" id="overall-insights-list"></ol>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div>
+            <a href="../dashboard.html">返回仪表盘</a> ·
+            <a href="../index.html">返回首页</a>
+        </div>
+        <div class="source-list">
+            数据源：scripts/AD_H_风险评估与项目管理/ · output/data/risk_assessment.json · kpi_milestones.json · mbti_personality.json · risk_project_summary.json
+        </div>
+        <div class="source-list" style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7;">
+            <strong style="color:var(--accent-3);">数据结构摘要：</strong><br>
+            · <code>risk_assessment.json</code>：risk_categories[5] · top_risks[10] · risk_matrix{4 象限 + overall_score 7.2} · risk_insights[5]<br>
+            · <code>kpi_milestones.json</code>：project_basics{14 年 / 108000 里 / 81 难} · kpis[7] · milestones[8] · project_summary{成功 + lessons_learned}<br>
+            · <code>mbti_personality.json</code>：mbti_dimensions[4] · character_mbti[8] × dimensions{8 字母} · mbti_stats{avg 8.25 / 5 满分 / 缺 INTP+ENTJ}<br>
+            · <code>risk_project_summary.json</code>：3 concepts · 20 data points · 4 key_findings
+        </div>
+        <div class="source-list" style="margin-top:14px;font-size:0.74rem;color:var(--ink-soft);">
+            页面结构：Hero · KPI 卡片 × 4 · 导言 · Section 1（散点图 + 分组条形图 + 5 风险类别表 + 洞察） · Section 2（时间线 + 饼图 + 7 KPI 表 + 8 里程碑列表 + 洞察） · Section 3（雷达图 + 8 MBTI 表 + 8 卡片 + 洞察） · Section 4（综合结论 + 4 发现） · Footer
+        </div>
+        <div class="source-list" style="margin-top:8px;font-size:0.74rem;color:var(--ink-soft);font-style:italic;">
+            © 详解西游记 · AD 类 H「风险评估与项目管理」可视化 · 共 4 份 JSON 数据源 · 5 张图表 · 3 张表格 · 1 个里程碑列表 · 19 张卡片
+        </div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/07-学以致用/危机应对.md">危机应对</a></div>
+    </footer>
+
+    <!-- ===== EMBEDDED FALLBACK DATA ===== -->
+    <!--
+        本页所有 JSON 数据均嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback。
+        在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据。
+        在 http(s):// 协议下打开时，优先 fetch ../../scripts/output/data/*.json。
+        数据源：scripts/AD_H_风险评估与项目管理/ 生成的 4 份 JSON。
+    -->
+    <script>
+    const EMBEDDED = {
+        risk: {
+            "concept_name": "取经风险评估表",
+            "english_name": "Pilgrimage Risk Assessment",
+            "definition": "按 PMBOK 风险管理框架：风险识别/概率评估/影响评估/应对策略·将 81 难纳入项目风险",
+            "risk_categories": [
+                {"category": "妖怪袭击风险", "english_name": "Monster Attack Risk", "count": 47, "probability": "高（58% 的难）", "impact": "严重（团队分散/唐僧被擒）", "response_strategy": "减轻：悟空战斗+搬救兵", "representative_cases": ["白骨精", "红孩儿", "黄袍怪", "金角银角"]},
+                {"category": "自然环境风险", "english_name": "Environmental Risk", "count": 9, "probability": "中（11%）", "impact": "中等（行程延误/资源消耗）", "response_strategy": "接受：直接通过或绕道", "representative_cases": ["火焰山", "通天河", "流沙河", "荆棘岭"]},
+                {"category": "政治/外交风险", "english_name": "Political Risk", "count": 12, "probability": "中（15%）", "impact": "严重（被国王误解/被诛杀）", "response_strategy": "减轻：文牒通关+变化伪装", "representative_cases": ["车迟国", "比丘国", "灭法国", "玉华州"]},
+                {"category": "诱惑/道德风险", "english_name": "Temptation Risk", "count": 8, "probability": "中（10%）", "impact": "极严重（破坏取经承诺）", "response_strategy": "规避：直接拒绝或绕道", "representative_cases": ["女儿国", "盘丝洞", "无底洞", "四圣试禅心"]},
+                {"category": "团队内部风险", "english_name": "Internal Team Risk", "count": 5, "probability": "低（6%）", "impact": "极严重（团队分裂）", "response_strategy": "减轻：观音调停+紧箍咒约束", "representative_cases": ["三打白骨精赶走悟空", "六耳猕猴", "真假唐僧"]}
+            ],
+            "top_risks": [
+                {"rank": 1, "risk": "三打白骨精赶走悟空", "probability": 8, "impact": 10, "score": 80},
+                {"rank": 2, "risk": "六耳猕猴团队分裂", "probability": 4, "impact": 10, "score": 40},
+                {"rank": 3, "risk": "狮驼岭三魔围剿", "probability": 6, "impact": 9, "score": 54},
+                {"rank": 4, "risk": "女儿国女王逼婚", "probability": 7, "impact": 8, "score": 56},
+                {"rank": 5, "risk": "火焰山无芭蕉扇", "probability": 6, "impact": 8, "score": 48},
+                {"rank": 6, "risk": "红孩儿三昧真火", "probability": 7, "impact": 8, "score": 56},
+                {"rank": 7, "risk": "黄袍怪变化捉唐僧", "probability": 6, "impact": 9, "score": 54},
+                {"rank": 8, "risk": "黄眉怪小雷音寺", "probability": 5, "impact": 9, "score": 45},
+                {"rank": 9, "risk": "金兜山金刚琢套兵器", "probability": 6, "impact": 7, "score": 42},
+                {"rank": 10, "risk": "通天河淹死", "probability": 4, "impact": 9, "score": 36}
+            ],
+            "risk_matrix": {
+                "high_probability_high_impact": ["三打白骨精赶走悟空", "红孩儿三昧真火"],
+                "high_probability_low_impact": ["通天河淹死", "荆棘岭迷路"],
+                "low_probability_high_impact": ["六耳猕猴", "女儿国逼婚"],
+                "low_probability_low_impact": ["minor 小妖怪"],
+                "overall_risk_score": 7.2,
+                "risk_management_verdict": "中等偏高·但通过搬救兵策略有效化解·项目最终成功"
+            },
+            "risk_insights": [
+                "妖怪袭击是主要风险（58%）·但通过搬救兵可降低至可控",
+                "团队内部风险概率最低但影响最严重（赶走悟空）",
+                "诱惑风险虽少但破坏性强·一次失败即项目终止",
+                "政治风险多源于文化冲突·通过文牒通关解决",
+                "自然环境风险不可控但影响中等·直接通过"
+            ]
+        },
+        kpi: {
+            "concept_name": "取经 KPI 与里程碑",
+            "english_name": "KPIs and Milestones",
+            "definition": "按 PMBOK 项目管理：14 年取经项目的关键绩效指标与里程碑",
+            "project_basics": {
+                "project_name": "西天取经战略项目",
+                "project_sponsor": "如来佛祖（发起方）+ 观音菩萨（执行总监）",
+                "project_manager": "唐僧（项目经理）",
+                "project_team": "悟空（技术负责人）+ 八戒（外围）+ 沙僧（后勤）+ 白龙马（交通）",
+                "project_duration": "14 年",
+                "project_budget": "无现金预算·靠化缘+施主",
+                "project_scope": "从长安到灵山·108000 里·81 难"
+            },
+            "kpis": [
+                {"kpi_name": "完成进度", "target": "100%", "actual": "100%", "status": "✓ 达成", "milestone": "第 100 回·灵山取经·封佛号"},
+                {"kpi_name": "劫难数量", "target": "81 难", "actual": "81 难", "status": "✓ 达成", "milestone": "通天河落水补足第 81 难"},
+                {"kpi_name": "经卷数量", "target": "5048 卷", "actual": "5048 卷", "status": "✓ 达成", "milestone": "灵山藏经阁取经·阿傩迦叶索贿（人事贿赂风险）"},
+                {"kpi_name": "团队存活率", "target": "100%", "actual": "100%", "status": "✓ 达成", "milestone": "5 人全部成佛/封号"},
+                {"kpi_name": "工期", "target": "14 年", "actual": "14 年", "status": "✓ 达成", "milestone": "贞观 13 年出发·贞观 27 年返回"},
+                {"kpi_name": "化缘次数", "target": "未设定", "actual": "约 1200 次", "status": "— 信息", "milestone": "每日 1-2 餐·沿途化缘"},
+                {"kpi_name": "搬救兵次数", "target": "未设定", "actual": "13 次（外部求助）", "status": "△ 中等", "milestone": "主要求助对象：观音菩萨（3 次）"}
+            ],
+            "milestones": [
+                {"year": "1", "milestone": "出发·贞观 13 年", "chapter": "第 12 回"},
+                {"year": "2", "milestone": "收悟空·收白龙马", "chapter": "第 14/15 回"},
+                {"year": "3", "milestone": "收八戒·收沙僧", "chapter": "第 18/22 回"},
+                {"year": "5", "milestone": "三打白骨精·团队首次危机", "chapter": "第 27 回"},
+                {"year": "7", "milestone": "火焰山·项目过半", "chapter": "第 59-61 回"},
+                {"year": "10", "milestone": "狮驼岭·最难关", "chapter": "第 74-77 回"},
+                {"year": "13", "milestone": "抵达灵山·取经", "chapter": "第 98 回"},
+                {"year": "14", "milestone": "返回长安·封佛号·项目完成", "chapter": "第 100 回"}
+            ],
+            "project_summary": {
+                "overall_status": "✓ 成功完成",
+                "on_time": true,
+                "on_budget": true,
+                "on_scope": true,
+                "key_success_factor": "观音菩萨的及时救援（13 次）·紧箍咒对悟空的约束",
+                "key_risk_realized": "三打白骨精赶走悟空（最大风险）·但成功化解",
+                "lessons_learned": "团队建设需前期磨合·核心技术（悟空）不可替代·外部求助是重要资源"
+            }
+        },
+        mbti: {
+            "concept_name": "MBTI 人格图鉴",
+            "english_name": "MBTI Personality Atlas",
+            "definition": "MBTI（迈尔斯-布里格斯类型指标）：4 维度 8 偏好组合成 16 型人格",
+            "mbti_dimensions": [
+                {"dimension": "E/I", "full": "外向/内向", "description": "能量来源：外部世界 vs 内心世界"},
+                {"dimension": "S/N", "full": "实感/直觉", "description": "信息收集：具体细节 vs 抽象可能"},
+                {"dimension": "T/F", "full": "思考/情感", "description": "决策方式：逻辑分析 vs 价值情感"},
+                {"dimension": "J/P", "full": "判断/感知", "description": "生活方式：计划决断 vs 灵活开放"}
+            ],
+            "character_mbti": [
+                {"character": "唐僧", "mbti_type": "INFJ", "type_name": "提倡者", "fit_score": 9, "dimensions": {"E": 3, "I": 7, "S": 4, "N": 6, "T": 3, "F": 7, "J": 8, "P": 2}, "core_traits": ["理想主义", "信念坚定", "内耗严重", "慈悲心"], "strength_in_team": "项目愿景守护者", "weakness": "过度信任·易被妖骗", "career_fit": "宗教领袖/教育家/心理咨询师"},
+                {"character": "孙悟空", "mbti_type": "ENTP", "type_name": "辩论家", "fit_score": 9, "dimensions": {"E": 7, "I": 3, "S": 3, "N": 7, "T": 7, "F": 3, "J": 2, "P": 8}, "core_traits": ["智力超群", "挑战权威", "反官僚", "灵活应变"], "strength_in_team": "技术核心·问题解决者", "weakness": "易怒·反约束·需紧箍咒约束", "career_fit": "创业者/技术创新者/律师"},
+                {"character": "猪八戒", "mbti_type": "ESFP", "type_name": "表演者", "fit_score": 8, "dimensions": {"E": 8, "I": 2, "S": 7, "N": 3, "T": 2, "F": 8, "J": 2, "P": 8}, "core_traits": ["活在当下", "气氛组", "吃喝玩乐", "易散伙"], "strength_in_team": "团队润滑剂·外部联络", "weakness": "执行力差·贪欲重·易被诱惑", "career_fit": "娱乐业/销售/直播主播"},
+                {"character": "沙僧", "mbti_type": "ISFJ", "type_name": "守卫者", "fit_score": 9, "dimensions": {"E": 2, "I": 8, "S": 8, "N": 2, "T": 4, "F": 6, "J": 8, "P": 2}, "core_traits": ["忠诚可靠", "默默执行", "后勤保障", "不善表达"], "strength_in_team": "完美完成者·稳定军心", "weakness": "缺乏创新·被动响应", "career_fit": "行政/护士/教师/后勤"},
+                {"character": "白龙马", "mbti_type": "ISTP", "type_name": "鉴赏家", "fit_score": 7, "dimensions": {"E": 2, "I": 8, "S": 7, "N": 3, "T": 7, "F": 3, "J": 3, "P": 7}, "core_traits": ["沉默实干", "关键时刻出手", "动手能力强", "低调"], "strength_in_team": "沉默专家·关键时刻救场", "weakness": "贡献度低·容易被忽略", "career_fit": "工程师/机械师/特工"},
+                {"character": "观音菩萨", "mbti_type": "ENFJ", "type_name": "主人公", "fit_score": 9, "dimensions": {"E": 7, "I": 3, "S": 4, "N": 6, "T": 3, "F": 7, "J": 7, "P": 3}, "core_traits": ["理想主义+领导力", "善于感化", "项目执行总监"], "strength_in_team": "外部协调者·关键救援", "weakness": "过度包容（如红孩儿）", "career_fit": "公益组织领袖/外交官"},
+                {"character": "如来佛祖", "mbti_type": "INTJ", "type_name": "建筑师", "fit_score": 9, "dimensions": {"E": 2, "I": 8, "S": 2, "N": 8, "T": 8, "F": 2, "J": 9, "P": 1}, "core_traits": ["战略思维", "全局把控", "项目发起者", "高冷"], "strength_in_team": "战略制定者·资源调度", "weakness": "过于超然·不直接介入", "career_fit": "企业战略官/科学家/哲学家"},
+                {"character": "玉皇大帝", "mbti_type": "ESTJ", "type_name": "总经理", "fit_score": 6, "dimensions": {"E": 6, "I": 4, "S": 7, "N": 3, "T": 6, "F": 4, "J": 9, "P": 1}, "core_traits": ["秩序维护", "传统主义", "权威主义", "保守"], "strength_in_team": "名义监管者", "weakness": "缺乏战略视野·被动应对", "career_fit": "传统企业 CEO/政府官员"}
+            ],
+            "mbti_stats": {
+                "total_characters": 8,
+                "avg_fit_score": 8.25,
+                "best_fit": "唐僧 INFJ / 悟空 ENTP / 沙僧 ISFJ / 观音 ENFJ / 如来 INTJ（均 9 分）",
+                "worst_fit": "玉帝 ESTJ（6 分·过于保守）",
+                "team_composition": "INFJ + ENTP + ESFP + ISFJ + ISTP·覆盖 5 类型·互补性强",
+                "missing_types": "INTP（逻辑学家）/ ENTJ（指挥官）·团队缺战略+批判思维"
+            }
+        },
+        summary: {
+            "concept_name": "风险与项目整体统计",
+            "total_concepts": 3,
+            "concept_list": ["风险评估", "KPI 与里程碑", "MBTI 人格图鉴"],
+            "total_data_points": 20,
+            "key_findings": [
+                "5 大风险类别·妖怪袭击占 58%·但通过搬救兵可降低至可控",
+                "7 大 KPI 全部达成·14 年项目成功完成",
+                "8 大角色 MBTI 适配度 avg 8.25·团队缺 INTP/ENTJ",
+                "项目管理本质：通过观音救援+紧箍咒约束·化解项目风险"
+            ]
+        }
+    };
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('[fallback] ' + path + ' → embedded data:', e.message);
+            return fallback;
+        }
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== Helpers =====
+    // 解析概率字符串中的百分比
+    function parseProb(s) {
+        const m = String(s).match(/(\d+)%/);
+        return m ? parseInt(m[1]) : 0;
+    }
+    // 解析影响等级为 0-10 数值
+    function parseImpact(s) {
+        if (s.indexOf('极严重') >= 0) return 10;
+        if (s.indexOf('严重') >= 0) return 8;
+        if (s.indexOf('中等') >= 0) return 5;
+        if (s.indexOf('低') >= 0) return 3;
+        return 5;
+    }
+    function statusPill(status) {
+        if (status.indexOf('达成') >= 0) return '<span class="pill pill-high">' + status + '</span>';
+        if (status.indexOf('中等') >= 0) return '<span class="pill pill-mid">' + status + '</span>';
+        if (status.indexOf('信息') >= 0) return '<span class="pill pill-info">' + status + '</span>';
+        return '<span class="pill">' + status + '</span>';
+    }
+
+    // ===== Main render =====
+    async function main() {
+        const baseUrl = '../../scripts/output/data/';
+        const [risk, kpi, mbti, summary] = await Promise.all([
+            loadJson(baseUrl + 'risk_assessment.json', EMBEDDED.risk),
+            loadJson(baseUrl + 'kpi_milestones.json', EMBEDDED.kpi),
+            loadJson(baseUrl + 'mbti_personality.json', EMBEDDED.mbti),
+            loadJson(baseUrl + 'risk_project_summary.json', EMBEDDED.summary)
+        ]);
+        window.__lastData = { risk, kpi, mbti, summary };
+
+        // Section 1: 风险评估
+        renderRiskScatter(risk);
+        renderCategoryBar(risk);
+        renderRiskCatTable(risk);
+        renderRiskInsights(risk);
+
+        // Section 2: KPI 与里程碑
+        renderMilestoneTimeline(kpi);
+        renderKpiPie(kpi);
+        renderKpiTable(kpi);
+        renderMilestoneList(kpi);
+        renderKpiInsights(kpi);
+
+        // Section 3: MBTI 人格图鉴
+        renderMbtiRadar(mbti);
+        renderMbtiTable(mbti);
+        renderMbtiCharCards(mbti);
+        renderMbtiInsights(mbti);
+
+        // Section 4: 综合结论
+        renderOverallInsights(summary);
+    }
+
+    // ===== Section 1.1: 风险概率×影响散点图 =====
+    function renderRiskScatter(data) {
+        const svg = d3.select('#chart-risk-scatter');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 440;
+        const m = {top: 40, right: 40, bottom: 60, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const risks = data.top_risks;
+
+        const x = d3.scaleLinear().domain([0, 10]).range([0, w]);
+        const y = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // 颜色 = sqrt(prob × impact)
+        const maxSqrt = d3.max(risks, d => Math.sqrt(d.probability * d.impact));
+        const colorScale = d3.scaleLinear()
+            .domain([0, maxSqrt / 2, maxSqrt])
+            .range(['#e9b885', '#c8463a', '#7a1a1a']);
+        const rScale = d3.scaleSqrt().domain([0, 80]).range([0, 26]);
+
+        // 网格
+        g.append('g').selectAll('line.grid')
+            .data(x.ticks(10))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', d => x(d)).attr('x2', d => x(d))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '2,3');
+        g.append('g').selectAll('line.gridy')
+            .data(y.ticks(10))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '2,3');
+
+        // 风险阈值线 score = 50 (即 prob*impact = 50, y = 50/x)
+        const thresholdData = d3.range(0.5, 10.5, 0.1).map(px => ({px, py: 50 / px}));
+        const line = d3.line()
+            .x(d => x(d.px))
+            .y(d => y(d.py))
+            .curve(d3.curveMonotoneX);
+        g.append('path')
+            .datum(thresholdData)
+            .attr('fill', 'none')
+            .attr('stroke', '#c8463a')
+            .attr('stroke-width', 1.5)
+            .attr('stroke-dasharray', '6,4')
+            .attr('opacity', 0.7)
+            .attr('d', line);
+        g.append('text')
+            .attr('x', x(9.5)).attr('y', y(50 / 9.5) - 8)
+            .attr('text-anchor', 'end')
+            .style('font-size', '10px')
+            .style('fill', '#c8463a')
+            .style('font-weight', '600')
+            .text('风险阈值 score=50');
+
+        // 坐标轴
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(10));
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(10));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 44)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#c8463a')
+            .text('probability 概率 (0-10)');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#c8463a')
+            .text('impact 影响 (0-10)');
+
+        // 散点
+        g.selectAll('.risk-dot')
+            .data(risks).enter().append('circle')
+            .attr('class', 'risk-dot')
+            .attr('cx', d => x(d.probability))
+            .attr('cy', d => y(d.impact))
+            .attr('r', d => rScale(d.score))
+            .attr('fill', d => colorScale(Math.sqrt(d.probability * d.impact)))
+            .attr('fill-opacity', 0.7)
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>#${d.rank} · ${d.risk}</strong><br>` +
+                    `概率：${d.probability} / 10<br>` +
+                    `影响：${d.impact} / 10<br>` +
+                    `风险评分：${d.score}（prob × impact）<br>` +
+                    `√score：${Math.sqrt(d.score).toFixed(2)}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 标签（rank + 名称简短）
+        g.selectAll('.risk-label')
+            .data(risks).enter().append('text')
+            .attr('class', 'risk-label')
+            .attr('x', d => x(d.probability))
+            .attr('y', d => y(d.impact) - rScale(d.score) - 4)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10px')
+            .style('font-weight', '600')
+            .style('fill', '#2c2418')
+            .text(d => '#' + d.rank);
+    }
+
+    // ===== Section 1.2: 5 类别分组条形图 =====
+    function renderCategoryBar(data) {
+        const svg = d3.select('#chart-category-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 420;
+        const m = {top: 40, right: 60, bottom: 80, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const cats = data.risk_categories.map(c => ({
+            name: c.category,
+            count: c.count,
+            prob: parseProb(c.probability),
+            impact: parseImpact(c.impact)
+        }));
+
+        const x0 = d3.scaleBand().domain(cats.map(d => d.name)).range([0, w]).padding(0.25);
+        const x1 = d3.scaleBand().domain(['count', 'prob', 'impact']).range([0, x0.bandwidth()]).padding(0.08);
+        const yL = d3.scaleLinear().domain([0, d3.max(cats, d => d.count) * 1.15]).range([h, 0]);
+        const yR = d3.scaleLinear().domain([0, 100]).range([h, 0]);
+
+        // 网格
+        g.append('g').selectAll('line.grid')
+            .data(yL.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => yL(d)).attr('y2', d => yL(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // 坐标轴
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x0).tickSize(0).tickPadding(10))
+            .selectAll('text')
+            .style('font-size', '11px')
+            .call(wrapText, 12);
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(yL).ticks(5));
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(${w},0)`)
+            .call(d3.axisRight(yR).ticks(5).tickFormat(d => d + '%'));
+
+        // 轴标签
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#c8463a')
+            .text('count 难数');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', w + 52)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#3a6b8c')
+            .text('avg_probability / avg_impact (%)');
+
+        const colors = {
+            'count': '#c8463a',
+            'prob': '#3a6b8c',
+            'impact': '#5a7a3a'
+        };
+        const labels = {
+            'count': '数量',
+            'prob': '平均概率',
+            'impact': '平均影响'
+        };
+        const yMaps = {
+            'count': yL,
+            'prob': yR,
+            'impact': d => yR(d * 10)  // impact 0-10 → 0-100%
+        };
+
+        const groups = g.selectAll('.cat-group')
+            .data(cats).enter().append('g')
+            .attr('class', 'cat-group')
+            .attr('transform', d => `translate(${x0(d.name)},0)`);
+
+        groups.selectAll('rect')
+            .data(d => ['count', 'prob', 'impact'].map(k => ({
+                key: k, value: d[k], cat: d
+            })))
+            .enter().append('rect')
+            .attr('x', d => x1(d.key))
+            .attr('y', d => yMaps[d.key](d.value))
+            .attr('width', x1.bandwidth())
+            .attr('height', d => h - yMaps[d.key](d.value))
+            .attr('fill', d => colors[d.key])
+            .attr('stroke', '#fff').attr('stroke-width', 1)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                const display = d.key === 'count' ? d.value + ' 难'
+                    : (d.key === 'prob' ? d.value + '%' : d.value + ' / 10');
+                tooltip.show(
+                    `<strong>${d.cat.name}</strong><br>` +
+                    `${labels[d.key]}：<strong>${display}</strong><br>` +
+                    `原始数量：${d.cat.count} / 81 难`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 柱顶数值
+        groups.selectAll('.bar-val')
+            .data(d => ['count', 'prob', 'impact'].map(k => ({
+                key: k, value: d[k]
+            })))
+            .enter().append('text')
+            .attr('class', 'bar-val')
+            .attr('x', d => x1(d.key) + x1.bandwidth() / 2)
+            .attr('y', d => yMaps[d.key](d.value) - 4)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10px')
+            .style('fill', '#2c2418')
+            .style('font-weight', '600')
+            .text(d => d.key === 'count' ? d.value : (d.key === 'prob' ? d.value + '%' : d.value));
+    }
+
+    // wrap text helper
+    function wrapText(selection, maxLen) {
+        selection.each(function() {
+            const t = d3.select(this);
+            const text = t.text();
+            if (text.length > maxLen) {
+                t.text(text.substring(0, maxLen) + '…');
+            }
+        });
+    }
+
+    function renderRiskCatTable(data) {
+        const tbody = d3.select('#risk-cat-table tbody');
+        const rows = tbody.selectAll('tr').data(data.risk_categories).enter().append('tr');
+        rows.append('td').text((d, i) => i + 1);
+        rows.append('td').html(d => '<strong>' + d.category + '</strong>');
+        rows.append('td').text(d => d.english_name);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.count + '</strong>');
+        rows.append('td').html(d => {
+            const lvl = d.probability.indexOf('高') >= 0 ? 'pill-high' : (d.probability.indexOf('低') >= 0 ? 'pill-low' : 'pill-mid');
+            return '<span class="pill ' + lvl + '">' + d.probability + '</span>';
+        });
+        rows.append('td').html(d => {
+            const lvl = d.impact.indexOf('极严重') >= 0 ? 'pill-high' : (d.impact.indexOf('严重') >= 0 ? 'pill-mid' : 'pill-low');
+            return '<span class="pill ' + lvl + '">' + d.impact + '</span>';
+        });
+        rows.append('td').text(d => d.response_strategy);
+        rows.append('td').text(d => d.representative_cases.join(' · '));
+    }
+
+    function renderRiskInsights(data) {
+        const list = d3.select('#risk-insights-list');
+        list.selectAll('li').data(data.risk_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 2.1: 里程碑时间线 =====
+    function renderMilestoneTimeline(data) {
+        const svg = d3.select('#chart-milestone-timeline');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 380;
+        const m = {top: 50, right: 40, bottom: 70, left: 50};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const ms = data.milestones.map(d => ({
+            year: +d.year,
+            label: d.milestone,
+            chapter: d.chapter
+        }));
+
+        const x = d3.scaleLinear().domain([0, 15]).range([0, w]);
+        const y = d3.scaleLinear().domain([0, 9]).range([h, 0]);
+
+        // 类型分类
+        const typeOf = (label) => {
+            if (label.indexOf('危机') >= 0 || label.indexOf('赶走') >= 0) return 'crisis';
+            if (label.indexOf('收') >= 0) return 'team';
+            if (label.indexOf('完成') >= 0 || label.indexOf('抵达') >= 0) return 'finish';
+            return 'progress';
+        };
+        const colorMap = {
+            'crisis': '#c8463a',
+            'team': '#3a6b8c',
+            'progress': '#5a7a3a',
+            'finish': '#7a5230'
+        };
+        const sizeMap = { 'crisis': 12, 'team': 9, 'progress': 8, 'finish': 13 };
+
+        // 网格
+        g.append('g').selectAll('line.gridx')
+            .data(d3.range(1, 15))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', d => x(d)).attr('x2', d => x(d))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '2,3');
+
+        // 时间线主轴
+        g.append('line')
+            .attr('x1', x(1)).attr('x2', x(14))
+            .attr('y1', y(5)).attr('y2', y(5))
+            .attr('stroke', '#7a5230')
+            .attr('stroke-width', 3)
+            .attr('stroke-linecap', 'round');
+
+        // 坐标轴
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(14).tickFormat(d => 'Y' + d));
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(0).tickSize(0));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 44)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#7a5230')
+            .text('project year 项目年份（贞观 13-27 年）');
+
+        // 节点：奇数索引向上·偶数向下·避免重叠
+        ms.forEach((d, i) => {
+            const upDown = i % 2 === 0 ? -1 : 1;
+            const yPos = y(5) + upDown * 40;
+            const t = typeOf(d.label);
+            const c = colorMap[t];
+            const r = sizeMap[t];
+
+            // 连接线
+            g.append('line')
+                .attr('x1', x(d.year)).attr('x2', x(d.year))
+                .attr('y1', y(5)).attr('y2', yPos)
+                .attr('stroke', c)
+                .attr('stroke-width', 1.5)
+                .attr('stroke-dasharray', '3,3');
+
+            // 节点圆
+            g.append('circle')
+                .attr('cx', x(d.year))
+                .attr('cy', yPos)
+                .attr('r', r)
+                .attr('fill', c)
+                .attr('stroke', '#fff')
+                .attr('stroke-width', 2)
+                .style('cursor', 'pointer')
+                .on('mouseover', (e) => {
+                    tooltip.show(
+                        `<strong>Y${d.year} · ${d.label}</strong><br>` +
+                        `章节：${d.chapter}<br>` +
+                        `类型：${t === 'crisis' ? '危机里程碑' : (t === 'team' ? '团队组建' : (t === 'finish' ? '项目完成' : '项目推进'))}`, e);
+                })
+                .on('mouseout', tooltip.hide);
+
+            // 标签
+            g.append('text')
+                .attr('x', x(d.year))
+                .attr('y', yPos + upDown * (r + 4) * (upDown < 0 ? -1 : 1))
+                .attr('text-anchor', 'middle')
+                .attr('dominant-baseline', upDown < 0 ? 'auto' : 'hanging')
+                .style('font-size', '10px')
+                .style('font-weight', '600')
+                .style('fill', c)
+                .text(d.label);
+        });
+
+        // 项目过半标注
+        g.append('line')
+            .attr('x1', x(7)).attr('x2', x(7))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#c8463a')
+            .attr('stroke-width', 1)
+            .attr('stroke-dasharray', '4,4')
+            .attr('opacity', 0.5);
+        g.append('text')
+            .attr('x', x(7) + 4)
+            .attr('y', 12)
+            .style('font-size', '10px')
+            .style('fill', '#c8463a')
+            .style('font-weight', '600')
+            .text('项目过半 Y7');
+    }
+
+    // ===== Section 2.2: KPI 饼图 =====
+    function renderKpiPie(data) {
+        const svg = d3.select('#chart-kpi-pie');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 700;
+        const W = Math.max(containerW, 500), H = 380;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${W / 2},${H / 2})`);
+
+        // 分类
+        const kpis = data.kpis;
+        const achieved = kpis.filter(k => k.status.indexOf('达成') >= 0).length;
+        const mid = kpis.filter(k => k.status.indexOf('中等') >= 0).length;
+        const info = kpis.filter(k => k.status.indexOf('信息') >= 0).length;
+        const pieData = [
+            {label: '✓ 达成', value: achieved, color: '#c8463a'},
+            {label: '△ 中等', value: mid, color: '#e9b885'},
+            {label: '— 信息', value: info, color: '#3a6b8c'}
+        ];
+
+        const radius = Math.max(0, Math.min(W, H) / 2 - 60);
+        const arc = d3.arc().innerRadius(radius * 0.55).outerRadius(radius);
+        const labelArc = d3.arc().innerRadius(radius * 0.9).outerRadius(radius * 0.9);
+        const pie = d3.pie().value(d => d.value).sort(null);
+
+        const arcs = g.selectAll('.arc')
+            .data(pie(pieData)).enter().append('g')
+            .attr('class', 'arc');
+
+        arcs.append('path')
+            .attr('d', arc)
+            .attr('fill', d => d.data.color)
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 3)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>${d.data.label}</strong><br>` +
+                    `数量：${d.data.value} / ${kpis.length} 项<br>` +
+                    `占比：${(d.data.value / kpis.length * 100).toFixed(1)}%<br>` +
+                    `代表 KPI：${kpis.filter(k => (d.data.label.indexOf('达成') >= 0 ? k.status.indexOf('达成') >= 0 : (d.data.label.indexOf('中等') >= 0 ? k.status.indexOf('中等') >= 0 : k.status.indexOf('信息') >= 0))).map(k => k.kpi_name).join(' · ')}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 外部标签
+        arcs.append('text')
+            .attr('transform', d => `translate(${labelArc.centroid(d)})`)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '12px')
+            .style('font-weight', '600')
+            .style('fill', '#2c2418')
+            .text(d => d.data.label + ' ' + d.data.value);
+
+        // 中心文字
+        const achieveRate = (achieved / kpis.length * 100).toFixed(1);
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('dy', '-8')
+            .style('font-size', '28px')
+            .style('font-weight', '700')
+            .style('fill', '#c8463a')
+            .text(achieveRate + '%');
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('dy', '18')
+            .style('font-size', '12px')
+            .style('fill', '#6b5e4d')
+            .text('达成率 · ' + achieved + '/' + kpis.length + ' KPI');
+    }
+
+    function renderKpiTable(data) {
+        const tbody = d3.select('#kpi-table tbody');
+        const rows = tbody.selectAll('tr').data(data.kpis).enter().append('tr');
+        rows.append('td').text((d, i) => i + 1);
+        rows.append('td').html(d => '<strong>' + d.kpi_name + '</strong>');
+        rows.append('td').text(d => d.target);
+        rows.append('td').text(d => d.actual);
+        rows.append('td').html(d => statusPill(d.status));
+        rows.append('td').text(d => d.milestone);
+    }
+
+    function renderMilestoneList(data) {
+        const list = d3.select('#milestone-list');
+        const items = list.selectAll('li')
+            .data(data.milestones)
+            .enter().append('li');
+        items.append('div')
+            .attr('class', 'ms-year')
+            .text(d => 'Y' + d.year);
+        items.append('div')
+            .attr('class', 'ms-text')
+            .html(d => '<strong>' + d.milestone + '</strong><span class="ms-chap">' + d.chapter + '</span>');
+    }
+
+    function renderKpiInsights(data) {
+        const insights = [
+            `7 项 KPI 中 ${data.kpis.filter(k => k.status.indexOf('达成') >= 0).length} 项达成·按期 14 年·按预算（零现金预算）·按范围（108000 里）完成`,
+            `最大已实现风险：${data.project_summary.key_risk_realized}·但成功化解·成为团队建设转折点`,
+            `关键成功因素：${data.project_summary.key_success_factor}`,
+            `项目 lessons learned：${data.project_summary.lessons_learned}`,
+            `搬救兵 13 次（外部求助）是项目成功的关键外部资源·主要求助对象为观音菩萨 3 次`
+        ];
+        const list = d3.select('#kpi-insights-list');
+        list.selectAll('li').data(insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 3.1: MBTI 雷达图 =====
+    function renderMbtiRadar(data) {
+        const svg = d3.select('#chart-mbti-radar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 700;
+        const W = Math.max(containerW, 600), H = 540;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const cx = W / 2, cy = H / 2 + 10;
+        const radius = Math.max(0, Math.min(W, H) / 2 - 80);
+        const levels = 5;
+        // 4 轴：E / N / F / P（外向/直觉/情感/感知）
+        const dims = ['E', 'N', 'F', 'P'];
+        const dimLabels = ['E 外向', 'N 直觉', 'F 情感', 'P 感知'];
+        const nDims = dims.length;
+
+        const colorMap = {
+            '唐僧': '#c8463a',
+            '孙悟空': '#3a6b8c',
+            '猪八戒': '#e9b885',
+            '沙僧': '#5a7a3a',
+            '白龙马': '#7a5230',
+            '观音菩萨': '#a04060',
+            '如来佛祖': '#4a3a6b',
+            '玉皇大帝': '#8a7a3a'
+        };
+
+        const angle = (i) => (i * 2 * Math.PI / nDims) - Math.PI / 2;
+
+        // 网格
+        const gridG = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+        for (let lv = 1; lv <= levels; lv++) {
+            const r = radius * lv / levels;
+            const pts = dims.map((_, i) => [r * Math.cos(angle(i)), r * Math.sin(angle(i))]);
+            gridG.append('polygon')
+                .attr('points', pts.map(p => p.join(',')).join(' '))
+                .attr('fill', 'none')
+                .attr('stroke', '#d9cdb8')
+                .attr('stroke-dasharray', lv === levels ? '0' : '3,3');
+        }
+        // 刻度
+        for (let lv = 1; lv <= levels; lv++) {
+            const r = radius * lv / levels;
+            gridG.append('text')
+                .attr('x', 4).attr('y', -r + 3)
+                .style('font-size', '10px')
+                .attr('fill', '#6b5e4d')
+                .text((lv * 2).toString());
+        }
+
+        // 轴线 + 轴标签
+        dims.forEach((d, i) => {
+            const x2 = radius * Math.cos(angle(i));
+            const y2 = radius * Math.sin(angle(i));
+            gridG.append('line')
+                .attr('x1', 0).attr('y1', 0)
+                .attr('x2', x2).attr('y2', y2)
+                .attr('stroke', '#d9cdb8');
+            const lx = (radius + 36) * Math.cos(angle(i));
+            const ly = (radius + 36) * Math.sin(angle(i));
+            gridG.append('text')
+                .attr('x', lx).attr('y', ly)
+                .attr('text-anchor', 'middle')
+                .attr('dominant-baseline', 'middle')
+                .style('font-size', '13px')
+                .style('font-weight', '600')
+                .attr('fill', '#2c2418')
+                .text(dimLabels[i]);
+        });
+
+        // 数据多边形
+        const rScale = d3.scaleLinear().domain([0, 10]).range([0, radius]);
+
+        data.character_mbti.forEach(member => {
+            const pts = dims.map((d, i) => {
+                const v = member.dimensions[d];
+                return [rScale(v) * Math.cos(angle(i)), rScale(v) * Math.sin(angle(i))];
+            });
+            const poly = gridG.append('polygon')
+                .attr('points', pts.map(p => p.join(',')).join(' '))
+                .attr('fill', colorMap[member.character])
+                .attr('fill-opacity', 0.10)
+                .attr('stroke', colorMap[member.character])
+                .attr('stroke-width', 2)
+                .style('cursor', 'pointer');
+            poly.on('mouseover', (e) => {
+                poly.attr('fill-opacity', 0.35);
+                const dimList = dims.map(d => `${d}: ${member.dimensions[d]}`).join(' / ');
+                tooltip.show(
+                    `<strong style="color:${colorMap[member.character]}">${member.character}</strong> · ${member.mbti_type} · ${member.type_name}<br>` +
+                    `适配度：${member.fit_score} / 10<br>` +
+                    `<em>${member.strength_in_team}</em><br>` +
+                    dimList, e);
+            }).on('mouseout', () => {
+                poly.attr('fill-opacity', 0.10);
+                tooltip.hide();
+            });
+            // 顶点
+            pts.forEach((p, i) => {
+                gridG.append('circle')
+                    .attr('cx', p[0]).attr('cy', p[1])
+                    .attr('r', 3)
+                    .attr('fill', colorMap[member.character])
+                    .attr('stroke', '#fff').attr('stroke-width', 1)
+                    .style('pointer-events', 'none');
+            });
+        });
+
+        // 平均适配度圆
+        const avgR = rScale(data.mbti_stats.avg_fit_score);
+        gridG.append('circle')
+            .attr('cx', 0).attr('cy', 0)
+            .attr('r', avgR)
+            .attr('fill', 'none')
+            .attr('stroke', '#6b5e4d')
+            .attr('stroke-dasharray', '6,4')
+            .attr('stroke-width', 1.5);
+        gridG.append('text')
+            .attr('x', avgR * Math.SQRT1_2 + 4)
+            .attr('y', -avgR * Math.SQRT1_2 - 4)
+            .style('font-size', '10px').style('fill', '#6b5e4d')
+            .text(`avg fit ${data.mbti_stats.avg_fit_score}`);
+    }
+
+    function renderMbtiTable(data) {
+        const tbody = d3.select('#mbti-table tbody');
+        const rows = tbody.selectAll('tr').data(data.character_mbti).enter().append('tr');
+        rows.append('td').text((d, i) => i + 1);
+        rows.append('td').html(d => '<strong>' + d.character + '</strong>');
+        rows.append('td').html(d => '<code>' + d.mbti_type + '</code>');
+        rows.append('td').text(d => d.type_name);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.fit_score + '</strong>');
+        rows.append('td').text(d => d.dimensions.E);
+        rows.append('td').text(d => d.dimensions.I);
+        rows.append('td').text(d => d.dimensions.S);
+        rows.append('td').text(d => d.dimensions.N);
+        rows.append('td').text(d => d.dimensions.T);
+        rows.append('td').text(d => d.dimensions.F);
+        rows.append('td').text(d => d.dimensions.J);
+        rows.append('td').text(d => d.dimensions.P);
+        rows.append('td').text(d => d.strength_in_team);
+        rows.append('td').text(d => d.weakness);
+        rows.append('td').text(d => d.career_fit);
+    }
+
+    function renderMbtiCharCards(data) {
+        const colorClass = {
+            '唐僧': 'c-tang', '孙悟空': 'c-wukong', '猪八戒': 'c-bajie',
+            '沙僧': 'c-sha', '白龙马': 'c-long',
+            '观音菩萨': 'c-guanyin', '如来佛祖': 'c-buddha', '玉皇大帝': 'c-jade'
+        };
+        const grid = d3.select('#mbti-char-grid');
+        const cards = grid.selectAll('.char-card')
+            .data(data.character_mbti).enter()
+            .append('div')
+            .attr('class', d => 'char-card ' + (colorClass[d.character] || ''));
+        cards.append('div').attr('class', 'char-name').text(d => d.character);
+        cards.append('div').attr('class', 'char-mbti').text(d => d.mbti_type + ' · ' + d.type_name + ' · 适配 ' + d.fit_score + ' / 10');
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>核心特质：</strong>' + d.core_traits.join(' · '));
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>团队优势：</strong>' + d.strength_in_team);
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>短板：</strong>' + d.weakness);
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>职业适配：</strong>' + d.career_fit);
+    }
+
+    function renderMbtiInsights(data) {
+        const stats = data.mbti_stats;
+        const insights = [
+            `8 角色平均适配度 ${stats.avg_fit_score} / 10·5 角色获 9 分满分`,
+            `最佳适配：${stats.best_fit}`,
+            `最低适配：${stats.worst_fit}`,
+            `团队构成：${stats.team_composition}`,
+            `结构性缺位：${stats.missing_types}——这是决策失误的认知根源`
+        ];
+        const list = d3.select('#mbti-insights-list');
+        list.selectAll('li').data(insights).enter().append('li').text(d => d);
+    }
+
+    function renderOverallInsights(summary) {
+        const list = d3.select('#overall-insights-list');
+        list.selectAll('li').data(summary.key_findings).enter().append('li').text(d => d);
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

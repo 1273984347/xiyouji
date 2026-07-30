@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美学时尚演变 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 720px) {
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--accent);
+        }
+        .kpi-card:nth-child(2)::before { background: var(--accent-2); }
+        .kpi-card:nth-child(3)::before { background: var(--accent-3); }
+        .kpi-card:nth-child(4)::before { background: var(--accent-4); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card:nth-child(2) .label { color: var(--accent-2); }
+        .kpi-card:nth-child(3) .label { color: var(--accent-3); }
+        .kpi-card:nth-child(4) .label { color: var(--accent-4); }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            background: rgba(200, 70, 58, 0.08);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.85em;
+        }
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: rgba(26, 20, 16, 0.94);
+            color: #f5e9d4;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            max-width: 260px;
+            line-height: 1.5;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+        .tooltip strong {
+            color: var(--accent-soft);
+            display: block;
+            margin-bottom: 2px;
+        }
+        .tooltip .row {
+            color: rgba(245, 233, 212, 0.78);
+            font-size: 0.78rem;
+        }
+        /* Color spectrum grid */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 14px;
+            text-align: left;
+        }
+        .color-card {
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--bg);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .color-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        .color-swatch {
+            height: 60px;
+            display: flex;
+            align-items: flex-end;
+            padding: 6px 10px;
+        }
+        .color-swatch .hex {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.72rem;
+            color: #fff;
+            background: rgba(0,0,0,0.35);
+            padding: 2px 6px;
+            border-radius: 3px;
+            letter-spacing: 0.05em;
+        }
+        .color-swatch.light .hex {
+            color: var(--ink);
+            background: rgba(255,255,255,0.65);
+        }
+        .color-body {
+            padding: 10px 12px 12px;
+        }
+        .color-body .name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+        .color-body .cat {
+            display: inline-block;
+            font-size: 0.72rem;
+            padding: 1px 7px;
+            border-radius: 8px;
+            background: var(--accent-soft);
+            color: var(--accent-3);
+            margin-bottom: 6px;
+        }
+        .color-body .meaning {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+        .color-body .reps {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            line-height: 1.5;
+        }
+        .color-body .reps-label {
+            color: var(--ink-soft);
+            font-weight: 600;
+        }
+        /* Heatmap */
+        .heatmap-wrap {
+            overflow-x: auto;
+            padding-bottom: 6px;
+        }
+        /* Pie center label */
+        .pie-center {
+            font-size: 0.82rem;
+            fill: var(--ink-soft);
+            text-anchor: middle;
+        }
+        .pie-center-val {
+            font-size: 1.4rem;
+            font-weight: 600;
+            fill: var(--ink);
+            text-anchor: middle;
+        }
+        /* Character stage grid */
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 18px;
+            text-align: left;
+        }
+        .char-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--bg);
+        }
+        .char-head {
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 100%);
+            color: #f5e9d4;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        .char-head .name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .char-head .count {
+            font-size: 0.78rem;
+            color: var(--accent-soft);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .stage-list {
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .stage-item {
+            display: grid;
+            grid-template-columns: 6px 1fr auto;
+            gap: 10px;
+            align-items: center;
+            padding: 8px 10px;
+            background: var(--paper);
+            border-radius: 4px;
+            border-left: 4px solid var(--accent-soft);
+            transition: background 0.15s;
+        }
+        .stage-item:hover {
+            background: #fff8ec;
+        }
+        .stage-color-bar {
+            width: 6px;
+            height: 100%;
+            min-height: 38px;
+            border-radius: 2px;
+        }
+        .stage-info .stage-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+        .stage-info .stage-look {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            line-height: 1.45;
+        }
+        .stage-info .stage-color-text {
+            font-size: 0.72rem;
+            color: var(--accent-3);
+            margin-top: 2px;
+            font-style: italic;
+        }
+        .stage-level {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 36px;
+        }
+        .stage-level .num {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-family: "JetBrains Mono", monospace;
+            line-height: 1;
+        }
+        .stage-level .lbl {
+            font-size: 0.6rem;
+            color: var(--ink-soft);
+            letter-spacing: 0.1em;
+            margin-top: 2px;
+        }
+        /* Heatmap row */
+        .heatmap-row {
+            display: grid;
+            grid-template-columns: 30px 1fr 60px 60px;
+            gap: 8px;
+            align-items: center;
+            padding: 5px 8px;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.85rem;
+        }
+        .heatmap-row:last-child { border-bottom: none; }
+        .heatmap-row .level-num {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 700;
+            color: var(--accent);
+            text-align: center;
+        }
+        .heatmap-row .scene-bar {
+            position: relative;
+            height: 28px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.85rem;
+            overflow: hidden;
+        }
+        .heatmap-row .scene-bar.light { color: var(--ink); }
+        .heatmap-row .scene-meta {
+            font-size: 0.75rem;
+            color: var(--ink-soft);
+            text-align: right;
+        }
+        .heatmap-row .scene-chapter {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>美学时尚演变</h1>
+        <div class="subtitle">AESTHETICS &amp; FASHION EVOLUTION</div>
+        <div class="tagline">金甲宝相庄严色，虎皮裙下野性王——五圣服饰的修证轨迹</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">返回首页</a>
+            <span class="sep">›</span>
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">›</span>
+            <span>美学时尚演变</span>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">CHARACTERS · 角色</div>
+                <div class="value">10</div>
+                <div class="desc">五圣 + 神佛 + 妖后公主 · 共 10 位</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">AVG FASHION · 平均时尚</div>
+                <div class="value">6.96</div>
+                <div class="desc">/ 10，整体偏庄严</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">COLORS · 色彩谱系</div>
+                <div class="value">12</div>
+                <div class="desc">佛金·朱红·玄黑·翠青…</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">SCENES · 重要场景</div>
+                <div class="value">14</div>
+                <div class="desc">天界·佛国·妖洞·人间</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：角色时尚变迁折线图 -->
+        <section class="section">
+            <h2 class="section-title">壹 · 角色时尚变迁折线</h2>
+            <div class="section-sub">五圣取经主角的 fashion_level（1-10）随人生阶段变化。横轴为阶段序号，纵轴为时尚等级——可见悟空"U 型曲线"：从石猴(1)→齐天大圣(9)→虎皮裙(4)→斗战胜佛(10)。</div>
+            <div class="chart-block">
+                <svg id="chart-line" width="960" height="420"></svg>
+                <div class="legend" id="legend-line"></div>
+            </div>
+        </section>
+
+        <!-- 图表 2：色彩谱系 -->
+        <section class="section">
+            <h2 class="section-title">贰 · 十二色彩谱系</h2>
+            <div class="section-sub">按 category 分组：佛教金 + 皇家朱红 = 庄严主色；玄黑通天界与妖邪；翠青、黛绿表道法与山野；白骨、虎皮黄独表恐怖与行者。</div>
+            <div class="color-grid" id="color-grid"></div>
+        </section>
+
+        <!-- 图表 3：场景美学评级热力图 -->
+        <section class="section">
+            <h2 class="section-title">叁 · 场景美学评级热力</h2>
+            <div class="section-sub">14 重要场景按 level（1-10）排序，色块深浅对应等级。天界·佛界 level 10，妖洞 level 1-2，美学两极分化显著。</div>
+            <div class="heatmap-wrap" id="heatmap"></div>
+        </section>
+
+        <!-- 图表 4：风格流派饼图 -->
+        <section class="section">
+            <h2 class="section-title">肆 · 风格流派占比</h2>
+            <div class="section-sub">7 种风格流派按 scenes_count 占比。凡俗·朴实占 12 场景居首，恐怖·妖邪 8 场景次之，庄严·至高 5 场景——人间烟火与妖魔怖畏共同压过神佛庄严。</div>
+            <div class="chart-block">
+                <svg id="chart-pie" width="520" height="420"></svg>
+                <div class="legend" id="legend-pie"></div>
+            </div>
+        </section>
+
+        <!-- 图表 5：角色阶段卡片网格 -->
+        <section class="section">
+            <h2 class="section-title">伍 · 角色阶段卡片</h2>
+            <div class="section-sub">10 角色 × 各人生阶段。每张卡片左竖条用对应主色，右侧数字为 fashion_level。从天将到妖魔再到佛相，五圣服色的修证轨迹一目了然。</div>
+            <div class="char-grid" id="char-grid"></div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <h4>五点观察</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">返回数据看板</a> ·
+        <a href="../index.html">返回首页</a>
+        <div style="margin-top:6px;font-size:0.78rem;">数据生成时间：2026-07-21 · 数据源：scripts/output/data/aesthetics_*.json</div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/04-文化与历史背景/明代隐喻.md">明代社会隐喻</a></div>
+    </footer>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+    // ============================================================
+    // 嵌入式 fallback 数据（fetch 失败时使用，与 JSON 文件一致）
+    // ============================================================
+    const EMBEDDED = {
+        summary: {
+            total_characters: 10,
+            total_stages: 24,
+            avg_fashion_level: 6.96,
+            total_colors: 12,
+            total_scenes: 14,
+            total_schools: 7
+        },
+        characters: [
+            {character:"孙悟空",stages:[
+                {stage:"石猴出世",chapter:1,look:"赤裸石猴，目运金光，射冲斗府",color:"石青色·金光",fashion_level:1,style:"原始·野性"},
+                {stage:"拜师学艺",chapter:2,look:"采柴穿衣，学人礼节",color:"粗布褐衣",fashion_level:2,style:"凡俗·学童"},
+                {stage:"齐天大圣",chapter:4,look:"金冠·金甲·步云履·紫金袍",color:"金黄·赤红",fashion_level:9,style:"豪华·王者"},
+                {stage:"取经途中",chapter:14,look:"虎皮裙·直裰·铁箍",color:"虎皮黄·黑色",fashion_level:4,style:"野性·行者"},
+                {stage:"斗战胜佛",chapter:100,look:"佛家宝相·庄严金身",color:"佛金·宝相纹",fashion_level:10,style:"庄严·佛相"}
+            ]},
+            {character:"唐僧",stages:[
+                {stage:"水陆大会",chapter:12,look:"锦襕袈裟·九环锡杖",color:"锦襕金丝·朱红",fashion_level:9,style:"皇赐·庄严"},
+                {stage:"取经途中",chapter:14,look:"僧帽直裰·袈裟·锡杖",color:"灰褐·朱红",fashion_level:6,style:"行脚僧·朴素"},
+                {stage:"旃檀功德佛",chapter:100,look:"佛家宝相·旃檀之香",color:"佛金·宝相",fashion_level:10,style:"佛相·庄严"}
+            ]},
+            {character:"猪八戒",stages:[
+                {stage:"天蓬元帅",chapter:"前传",look:"金甲神将·天宫仪容",color:"金光·玄色",fashion_level:8,style:"天将·威武"},
+                {stage:"高老庄",chapter:18,look:"黑脸短毛·长喙大耳·一领直裰",color:"黑·灰褐",fashion_level:3,style:"妖怪·怪诞"},
+                {stage:"取经途中",chapter:19,look:"皂色直裰·九齿钉耙",color:"黑·灰",fashion_level:4,style:"行脚·朴拙"},
+                {stage:"净坛使者",chapter:100,look:"佛家使者相·净坛庄严",color:"佛金·朱红",fashion_level:8,style:"佛相·饱满"}
+            ]},
+            {character:"沙僧",stages:[
+                {stage:"卷帘大将",chapter:"前传",look:"金甲·锦衣·威仪",color:"金·蓝",fashion_level:7,style:"天将·庄严"},
+                {stage:"流沙河",chapter:22,look:"红发蓝脸·颈悬九颗骷髅",color:"红发·蓝·白骨",fashion_level:2,style:"妖怪·恐怖"},
+                {stage:"取经途中",chapter:22,look:"皂色直裰·宝杖·挑担",color:"黑·灰",fashion_level:4,style:"行脚·朴实"},
+                {stage:"金身罗汉",chapter:100,look:"罗汉金身·庄严宝相",color:"佛金·朱红",fashion_level:9,style:"罗汉相·庄严"}
+            ]},
+            {character:"白龙马",stages:[
+                {stage:"西海龙王三太子",chapter:"前传",look:"龙子·玉鳞·珠光宝气",color:"银白·珠光",fashion_level:9,style:"龙族·华贵"},
+                {stage:"取经途中",chapter:15,look:"白马无鞍·驮唐僧",color:"纯白",fashion_level:5,style:"马匹·朴素"},
+                {stage:"八部天龙马",chapter:100,look:"天龙·盘绕山门华表",color:"天龙金",fashion_level:10,style:"天龙·庄严"}
+            ]},
+            {character:"观音菩萨",stages:[
+                {stage:"寻访取经人",chapter:8,look:"素衣净瓶·杨柳枝·赤足",color:"白·翠绿·金",fashion_level:10,style:"菩萨·悲悯庄严"}
+            ]},
+            {character:"玉帝",stages:[
+                {stage:"天宫朝会",chapter:4,look:"龙袍·冲天冠·七星剑",color:"金黄·玄黑",fashion_level:10,style:"帝王·至高"}
+            ]},
+            {character:"如来佛祖",stages:[
+                {stage:"灵山说法",chapter:7,look:"金身·袈裟·莲座·佛光",color:"佛金·宝相",fashion_level:10,style:"佛祖·至高庄严"}
+            ]},
+            {character:"铁扇公主",stages:[
+                {stage:"芭蕉洞",chapter:59,look:"罗刹女妆·凤冠霞帔·红裙",color:"赤红·金",fashion_level:8,style:"妖后·华丽"}
+            ]},
+            {character:"玉兔精",stages:[
+                {stage:"天竺公主",chapter:95,look:"宫装·珠翠·捣药杵",color:"粉白·珠光",fashion_level:9,style:"公主·华美"}
+            ]}
+        ],
+        colors: [
+            {color:"佛金",hex:"#d4a857",category:"佛教",meaning:"庄严·觉者·不灭",representatives:["如来","唐僧成佛","观音净瓶"]},
+            {color:"朱红",hex:"#c8463a",category:"皇家/法宝",meaning:"权威·威严·贵重",representatives:["玉帝龙袍","锦襕袈裟","紫金红葫芦"]},
+            {color:"玄黑",hex:"#1a1410",category:"天界/妖邪",meaning:"深邃·威严·神秘",representatives:["天宫夜空","妖魔洞府","八戒皂色直裰"]},
+            {color:"翠青",hex:"#3a6b8c",category:"道教",meaning:"清修·道法·自然",representatives:["道士法袍","菩提祖师","观音杨柳"]},
+            {color:"土黄",hex:"#a87838",category:"人间",meaning:"凡俗·朴实·尘世",representatives:["人间土路","唐僧灰褐直裰","百姓"]},
+            {color:"虎皮黄",hex:"#8c6a3a",category:"行者",meaning:"野性·归顺·身份",representatives:["悟空虎皮裙"]},
+            {color:"虎皮斑",hex:"#3a2820",category:"妖王",meaning:"野性·霸道·未驯",representatives:["虎力大仙","黄袍怪"]},
+            {color:"白骨",hex:"#d9cdb8",category:"恐怖",meaning:"死亡·阴气·警告",representatives:["白骨精","沙僧骷髅","白虎岭"]},
+            {color:"黛绿",hex:"#5a7a3a",category:"山野",meaning:"草莽·隐逸·幽深",representatives:["花果山","盘丝岭","五庄观"]},
+            {color:"宝相紫",hex:"#7a3a5a",category:"灵山",meaning:"佛宝·智慧·祥瑞",representatives:["紫金钵盂","紫金红葫芦","灵山宝相"]},
+            {color:"金光",hex:"#e9b885",category:"神通",meaning:"法力·神光·出世",representatives:["悟空火眼","金箍棒","金甲神光"]},
+            {color:"碧水",hex:"#5a8c8c",category:"水族",meaning:"江河·流动·阴柔",representatives:["龙宫","通天河","碧波潭"]}
+        ],
+        scenes: [
+            {scene:"花果山水帘洞",chapter:1,style:"写意·野性",colors:["黛绿","金光","玄黑"],level:8,feature:"天生地长·野性蓬勃·洞天福地"},
+            {scene:"天宫凌霄宝殿",chapter:4,style:"庄严·至高",colors:["佛金","朱红","玄黑"],level:10,feature:"金碧辉煌·帝王威仪·宝盖如云"},
+            {scene:"蟠桃园",chapter:5,style:"仙境·灵园",colors:["翠青","佛金","粉白"],level:10,feature:"桃花灼灼·灵气盎然·长生果园"},
+            {scene:"太上老君兜率宫",chapter:5,style:"道家·炼丹",colors:["玄黑","金光","朱红"],level:10,feature:"八卦炉火·金丹瑞气·道祖清修"},
+            {scene:"五行山",chapter:7,style:"恐怖·镇压",colors:["土黄","玄黑","白骨"],level:3,feature:"五指成山·镇压大圣·苍凉悲壮"},
+            {scene:"流沙河",chapter:22,style:"恐怖·险恶",colors:["碧水","白骨","玄黑"],level:2,feature:"浑波千丈·骷髅悬浮·妖气森森"},
+            {scene:"白虎岭",chapter:27,style:"恐怖·阴森",colors:["白骨","玄黑","黛绿"],level:2,feature:"白骨夫人·三打变化·阴气满山"},
+            {scene:"火焰山",chapter:59,style:"炽烈·焰红",colors:["朱红","玄黑","金光"],level:4,feature:"八百里火焰·寸草不生·芭蕉扇可解"},
+            {scene:"小雷音寺",chapter:65,style:"庄严·伪饰",colors:["佛金","宝相紫","玄黑"],level:8,feature:"伪雷音寺·宝殿庄严·实为妖窟"},
+            {scene:"狮驼岭",chapter:74,style:"恐怖·血腥",colors:["白骨","朱红","玄黑"],level:1,feature:"骷髅若岭·人骨如柴·最大妖窟"},
+            {scene:"女儿国",chapter:54,style:"市井·绮丽",colors:["粉白","朱红","翠青"],level:7,feature:"无男之国·王宫华美·情欲考验"},
+            {scene:"天竺皇宫",chapter:95,style:"异域·华美",colors:["佛金","宝相紫","粉白"],level:9,feature:"天竺公主·玉兔化形·异域风情"},
+            {scene:"灵山雷音寺",chapter:98,style:"庄严·佛国",colors:["佛金","宝相紫","翠青"],level:10,feature:"真雷音寺·佛祖说法·万佛朝宗"},
+            {scene:"凌云渡",chapter:98,style:"脱胎·超凡",colors:["碧水","佛金","白骨"],level:9,feature:"独木桥·无底船·脱胎换骨"}
+        ],
+        styles: [
+            {school:"写意·野性",description:"花果山·水帘洞·石猴出世",scenes_count:4,color:"#5a7a3a",feature:"野性蓬勃·自然天成"},
+            {school:"庄严·至高",description:"天宫·灵山·玉帝·如来",scenes_count:5,color:"#d4a857",feature:"金碧辉煌·宝相庄严"},
+            {school:"恐怖·妖邪",description:"狮驼岭·白虎岭·流沙河·妖洞",scenes_count:8,color:"#1a1410",feature:"骷髅白骨·阴气森森"},
+            {school:"凡俗·朴实",description:"人间·行脚僧·百姓家",scenes_count:12,color:"#a87838",feature:"土黄朴素·尘世烟火"},
+            {school:"市井·绮丽",description:"女儿国·天竺·皇宫",scenes_count:3,color:"#c8463a",feature:"华美宫闱·情欲色彩"},
+            {school:"道家·清修",description:"兜率宫·五庄观·菩提洞",scenes_count:4,color:"#3a6b8c",feature:"清虚宁静·道法自然"},
+            {school:"脱胎·超凡",description:"凌云渡·凌云仙洞·灵山",scenes_count:2,color:"#5a8c8c",feature:"超脱尘俗·佛相庄严"}
+        ]
+    };
+
+    // 五圣主角（用于折线图）
+    const MAIN_CHARS = ["孙悟空","唐僧","猪八戒","沙僧","白龙马"];
+    const CHAR_COLORS = {
+        "孙悟空": "#c8463a",
+        "唐僧":   "#d4a857",
+        "猪八戒": "#3a2820",
+        "沙僧":   "#3a6b8c",
+        "白龙马": "#5a8c8c"
+    };
+
+    // ============================================================
+    // 数据加载：先尝试 fetch，失败用 EMBEDDED
+    // ============================================================
+    const DATA_DIR = "../../scripts/output/data/";
+    const FILES = {
+        summary:    "aesthetics_summary.json",
+        characters: "aesthetics_characters.json",
+        colors:     "aesthetics_colors.json",
+        scenes:     "aesthetics_scenes.json",
+        styles:     "aesthetics_styles.json"
+    };
+
+    function loadData() {
+        return Promise.all(
+            Object.entries(FILES).map(([k, f]) =>
+                fetch(DATA_DIR + f).then(r => {
+                    if (!r.ok) throw new Error("HTTP " + r.status);
+                    return r.json();
+                }).then(d => [k, d])
+            )
+        ).then(entries => {
+            const obj = {};
+            entries.forEach(([k, v]) => obj[k] = v);
+            document.getElementById("dataSource").innerHTML =
+                "数据源：已加载最新 <code>" + Object.values(FILES).join(", ") + "</code>";
+            return obj;
+        }).catch(err => {
+            console.warn("[aesthetics] fetch 失败，使用嵌入数据：", err.message);
+            return EMBEDDED;
+        });
+    }
+
+    // ============================================================
+    // 工具：判断浅色
+    // ============================================================
+    function isLightColor(hex) {
+        const c = hex.replace("#","");
+        const r = parseInt(c.substr(0,2),16);
+        const g = parseInt(c.substr(2,2),16);
+        const b = parseInt(c.substr(4,2),16);
+        const lum = (0.299*r + 0.587*g + 0.114*b) / 255;
+        return lum > 0.7;
+    }
+
+    // ============================================================
+    // 图表 1：折线图
+    // ============================================================
+    function renderLineChart(characters) {
+        const svg = d3.select("#chart-line");
+        const W = +svg.attr("width");
+        const H = +svg.attr("height");
+        const m = {top: 30, right: 130, bottom: 50, left: 50};
+        const w = W - m.left - m.right;
+        const h = H - m.top - m.bottom;
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+
+        // 5 主角数据
+        const series = MAIN_CHARS.map(name => {
+            const c = characters.find(c => c.character === name);
+            return { name, stages: c ? c.stages : [] };
+        }).filter(s => s.stages.length > 0);
+
+        const maxStages = d3.max(series, s => s.stages.length);
+        const x = d3.scaleLinear().domain([0, maxStages - 1]).range([0, w]);
+        const y = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(maxStages - 1).tickFormat(d => "阶段 " + (+d + 1)))
+            .selectAll("text")
+            .style("font-family", "inherit")
+            .style("fill", "var(--ink-soft)");
+
+        // Y 轴
+        g.append("g")
+            .call(d3.axisLeft(y).ticks(10))
+            .selectAll("text")
+            .style("font-family", "inherit")
+            .style("fill", "var(--ink-soft)");
+
+        // 网格
+        g.append("g")
+            .attr("class", "grid")
+            .selectAll("line")
+            .data(y.ticks(10))
+            .enter().append("line")
+            .attr("x1", 0).attr("x2", w)
+            .attr("y1", d => y(d)).attr("y2", d => y(d))
+            .attr("stroke", "#e8dfd0")
+            .attr("stroke-dasharray", "2,3");
+
+        // 轴标签
+        g.append("text")
+            .attr("x", w / 2).attr("y", h + 40)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem")
+            .style("fill", "var(--ink-soft)")
+            .text("人生阶段序号");
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -h / 2).attr("y", -38)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem")
+            .style("fill", "var(--ink-soft)")
+            .text("fashion_level (1-10)");
+
+        const line = d3.line()
+            .x((d, i) => x(i))
+            .y(d => y(d.fashion_level))
+            .curve(d3.curveMonotoneX);
+
+        const tooltip = d3.select("#tooltip");
+
+        series.forEach(s => {
+            const color = CHAR_COLORS[s.name];
+
+            // 折线
+            g.append("path")
+                .datum(s.stages)
+                .attr("fill", "none")
+                .attr("stroke", color)
+                .attr("stroke-width", 2.5)
+                .attr("stroke-linejoin", "round")
+                .attr("stroke-linecap", "round")
+                .attr("d", line);
+
+            // 数据点
+            g.selectAll(".dot-" + s.name)
+                .data(s.stages)
+                .enter().append("circle")
+                .attr("cx", (d, i) => x(i))
+                .attr("cy", d => y(d.fashion_level))
+                .attr("r", 5)
+                .attr("fill", color)
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 1.5)
+                .style("cursor", "pointer")
+                .on("mouseover", function(ev, d) {
+                    d3.select(this).attr("r", 7);
+                    tooltip.style("opacity", 1)
+                        .html(`<strong>${s.name} · ${d.stage}</strong>
+                            <div class="row">回目：第 ${d.chapter} 回</div>
+                            <div class="row">服饰：${d.look}</div>
+                            <div class="row">色彩：${d.color}</div>
+                            <div class="row">风格：${d.style}</div>
+                            <div class="row">时尚等级：<strong style="color:#e9b885">${d.fashion_level}/10</strong></div>`);
+                })
+                .on("mousemove", function(ev) {
+                    tooltip
+                        .style("left", (ev.pageX + 14) + "px")
+                        .style("top", (ev.pageY - 10) + "px");
+                })
+                .on("mouseout", function() {
+                    d3.select(this).attr("r", 5);
+                    tooltip.style("opacity", 0);
+                });
+
+            // 直接标签：终点
+            const last = s.stages[s.stages.length - 1];
+            g.append("text")
+                .attr("x", x(s.stages.length - 1) + 8)
+                .attr("y", y(last.fashion_level))
+                .attr("dy", "0.32em")
+                .style("font-size", "0.85rem")
+                .style("font-weight", "600")
+                .style("fill", color)
+                .text(s.name);
+        });
+
+        // 图例
+        const legend = d3.select("#legend-line");
+        legend.selectAll("*").remove();
+        MAIN_CHARS.forEach(name => {
+            const item = legend.append("div").attr("class", "legend-item");
+            item.append("span").attr("class", "legend-swatch").style("background", CHAR_COLORS[name]);
+            item.append("span").text(name);
+        });
+    }
+
+    // ============================================================
+    // 图表 2：色彩谱系
+    // ============================================================
+    function renderColorGrid(colors) {
+        const wrap = d3.select("#color-grid");
+        wrap.selectAll("*").remove();
+
+        // 按 category 排序
+        const sorted = colors.slice().sort((a, b) =>
+            a.category.localeCompare(b.category, "zh-CN")
+        );
+
+        sorted.forEach(c => {
+            const light = isLightColor(c.hex);
+            const card = wrap.append("div").attr("class", "color-card");
+            const sw = card.append("div").attr("class", "color-swatch" + (light ? " light" : ""))
+                           .style("background", c.hex);
+            sw.append("span").attr("class", "hex").text(c.hex.toUpperCase());
+            const body = card.append("div").attr("class", "color-body");
+            body.append("div").attr("class", "name").text(c.color);
+            body.append("div").attr("class", "cat").text(c.category);
+            body.append("div").attr("class", "meaning").text("「" + c.meaning + "」");
+            const reps = body.append("div").attr("class", "reps");
+            reps.append("span").attr("class", "reps-label").text("代表：");
+            reps.append("span").text(c.representatives.join("、"));
+        });
+    }
+
+    // ============================================================
+    // 图表 3：场景热力图（按 level 排序）
+    // ============================================================
+    function renderHeatmap(scenes, colors) {
+        const wrap = d3.select("#heatmap");
+        wrap.selectAll("*").remove();
+
+        const colorMap = {};
+        colors.forEach(c => colorMap[c.color] = c.hex);
+
+        const sorted = scenes.slice().sort((a, b) => b.level - a.level);
+
+        // 标题行
+        const header = wrap.append("div").attr("class", "heatmap-row")
+            .style("border-bottom", "2px solid var(--accent)")
+            .style("font-weight", "600")
+            .style("color", "var(--accent-3)")
+            .style("background", "#fff8ec");
+        header.append("div").text("LVL");
+        header.append("div").text("场景（色块深浅 = level）");
+        header.append("div").text("风格");
+        header.append("div").text("回目");
+
+        // level 颜色 scale: 1 → 浅米, 10 → 朱红
+        const levelColor = d3.scaleSequential()
+            .domain([1, 10])
+            .interpolator(d3.interpolateRgb("#f5e9d4", "#c8463a"));
+
+        const tooltip = d3.select("#tooltip");
+
+        sorted.forEach(s => {
+            const row = wrap.append("div").attr("class", "heatmap-row");
+            row.append("div").attr("class", "level-num").text(s.level);
+
+            const bar = row.append("div").attr("class", "scene-bar")
+                .style("background", levelColor(s.level))
+                .classed("light", s.level <= 3);
+            bar.text(s.scene);
+            bar.style("cursor", "pointer")
+                .on("mouseover", function(ev) {
+                    tooltip.style("opacity", 1)
+                        .html(`<strong>${s.scene}</strong>
+                            <div class="row">回目：第 ${s.chapter} 回</div>
+                            <div class="row">风格：${s.style}</div>
+                            <div class="row">色彩：${s.colors.join(" · ")}</div>
+                            <div class="row">特征：${s.feature}</div>
+                            <div class="row">美学等级：<strong style="color:#e9b885">${s.level}/10</strong></div>`);
+                })
+                .on("mousemove", function(ev) {
+                    tooltip.style("left", (ev.pageX + 14) + "px")
+                           .style("top", (ev.pageY - 10) + "px");
+                })
+                .on("mouseout", function() { tooltip.style("opacity", 0); });
+
+            row.append("div").attr("class", "scene-meta").text(s.style);
+            row.append("div").attr("class", "scene-chapter").text("第" + s.chapter + "回");
+        });
+    }
+
+    // ============================================================
+    // 图表 4：风格流派饼图
+    // ============================================================
+    function renderPie(styles) {
+        const svg = d3.select("#chart-pie");
+        const W = +svg.attr("width");
+        const H = +svg.attr("height");
+        const radius = Math.max(0, Math.min(W, H) / 2 - 30);
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g").attr("transform", `translate(${W/2},${H/2})`);
+
+        const total = d3.sum(styles, d => d.scenes_count);
+
+        const pie = d3.pie()
+            .value(d => d.scenes_count)
+            .sort((a, b) => b.scenes_count - a.scenes_count);
+
+        const arc = d3.arc()
+            .innerRadius(radius * 0.55)
+            .outerRadius(radius)
+            .cornerRadius(3)
+            .padAngle(0.015);
+
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.82)
+            .outerRadius(radius * 0.82);
+
+        const arcs = pie(styles);
+        const tooltip = d3.select("#tooltip");
+
+        g.selectAll("path")
+            .data(arcs)
+            .enter().append("path")
+            .attr("fill", d => d.data.color)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1.5)
+            .attr("d", arc)
+            .style("cursor", "pointer")
+            .on("mouseover", function(ev, d) {
+                d3.select(this).attr("opacity", 0.85);
+                const pct = (d.data.scenes_count / total * 100).toFixed(1);
+                tooltip.style("opacity", 1)
+                    .html(`<strong>${d.data.school}</strong>
+                        <div class="row">${d.data.description}</div>
+                        <div class="row">特征：${d.data.feature}</div>
+                        <div class="row">场景数：<strong style="color:#e9b885">${d.data.scenes_count}</strong>（${pct}%）</div>`);
+            })
+            .on("mousemove", function(ev) {
+                tooltip.style("left", (ev.pageX + 14) + "px")
+                       .style("top", (ev.pageY - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("opacity", 1);
+                tooltip.style("opacity", 0);
+            });
+
+        // 中心数字
+        g.append("text").attr("class", "pie-center-val").text(total);
+        g.append("text").attr("class", "pie-center").attr("dy", "1.6em").text("场景总数");
+
+        // 外部标签
+        g.selectAll(".pie-label")
+            .data(arcs)
+            .enter().append("text")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", d => (d.startAngle + d.endAngle) / 2 > Math.PI ? "end" : "start")
+            .style("font-size", "0.78rem")
+            .style("fill", "var(--ink)")
+            .style("font-weight", "600")
+            .text(d => `${d.data.school.split("·")[0]} ${d.data.scenes_count}`);
+
+        // 图例
+        const legend = d3.select("#legend-pie");
+        legend.selectAll("*").remove();
+        const sortedLegend = styles.slice().sort((a, b) => b.scenes_count - a.scenes_count);
+        sortedLegend.forEach(s => {
+            const item = legend.append("div").attr("class", "legend-item");
+            item.append("span").attr("class", "legend-swatch").style("background", s.color);
+            item.append("span").text(`${s.school} (${s.scenes_count})`);
+        });
+    }
+
+    // ============================================================
+    // 图表 5：角色阶段卡片网格
+    // ============================================================
+    function renderCharGrid(characters, colors) {
+        const wrap = d3.select("#char-grid");
+        wrap.selectAll("*").remove();
+
+        // 色彩名 → hex 映射（用于卡片左竖条）
+        const colorHexByName = {};
+        colors.forEach(c => colorHexByName[c.color] = c.hex);
+
+        // fashion_level → 主色（用于无法匹配时的 fallback）
+        const levelColor = d3.scaleSequential()
+            .domain([1, 10])
+            .interpolator(d3.interpolateRgb("#a87838", "#d4a857"));
+
+        // 解析 stage.color 字段（如"虎皮黄·黑色"）尝试匹配
+        function resolveStageColor(colorText, level) {
+            if (!colorText) return levelColor(level);
+            const parts = colorText.split(/[·、\s]+/).filter(Boolean);
+            for (const p of parts) {
+                if (colorHexByName[p]) return colorHexByName[p];
+                // 模糊匹配
+                for (const k of Object.keys(colorHexByName)) {
+                    if (k.includes(p) || p.includes(k)) return colorHexByName[k];
+                }
+            }
+            return levelColor(level);
+        }
+
+        characters.forEach(c => {
+            const card = wrap.append("div").attr("class", "char-card");
+            const head = card.append("div").attr("class", "char-head");
+            head.append("span").attr("class", "name").text(c.character);
+            head.append("span").attr("class", "count").text(c.stages.length + " 阶段");
+
+            const list = card.append("div").attr("class", "stage-list");
+            c.stages.forEach(s => {
+                const item = list.append("div").attr("class", "stage-item");
+                item.append("div")
+                    .attr("class", "stage-color-bar")
+                    .style("background", resolveStageColor(s.color, s.fashion_level));
+
+                const info = item.append("div").attr("class", "stage-info");
+                info.append("div").attr("class", "stage-name").text(s.stage);
+                info.append("div").attr("class", "stage-look").text(s.look);
+                info.append("div").attr("class", "stage-color-text").text("色：" + s.color + "  ·  " + s.style);
+
+                const lvl = item.append("div").attr("class", "stage-level");
+                lvl.append("div").attr("class", "num").text(s.fashion_level);
+                lvl.append("div").attr("class", "lbl").text("/10");
+            });
+        });
+    }
+
+    // ============================================================
+    // 关键洞察
+    // ============================================================
+    function renderInsights() {
+        const insights = [
+            "<strong>美学两极分化：</strong>天界·佛界（凌霄宝殿/蟠桃园/兜率宫/灵山雷音寺）level 10，妖洞（狮驼岭 level 1，流沙河/白虎岭 level 2）level 1-2，神圣庄严与妖魔怖畏形成 9 级落差。",
+            "<strong>悟空 U 型曲线：</strong>从石猴(1)→拜师(2)→齐天大圣(9)→虎皮裙(4)→斗战胜佛(10)，时尚先扬后抑再升华，体现「野性→王者→行者→佛相」的修证轨迹。",
+            "<strong>12 色 7 类：</strong>佛教金 + 皇家朱红共同构成庄严主色；玄黑贯通天界与妖邪；翠青、黛绿分表道法与山野；白骨、虎皮黄独表恐怖与行者——色彩即身份。",
+            "<strong>狮驼岭美学最低(1)：</strong>骷髅若岭·人骨如柴·最大妖窟；凌云渡脱胎超凡(9)：独木桥·无底船·脱胎换骨——一弃一得，妖窟与超凡的对照。",
+            "<strong>凡俗·朴实占 12 场景居首：</strong>占比 31.6%，远超庄严·至高(5)与恐怖·妖邪(8)。取经路以人间烟火与妖魔怖畏为主色，神佛庄严仅为终点。"
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(t => ul.append("li").html(t));
+    }
+
+    // ============================================================
+    // 主流程
+    // ============================================================
+    async function main() {
+        try {
+            const data = await loadData();
+            window.__lastData = data;
+            renderLineChart(data.characters);
+            renderColorGrid(data.colors);
+            renderHeatmap(data.scenes, data.colors);
+            renderPie(data.styles);
+            renderCharGrid(data.characters, data.colors);
+            renderInsights();
+        } catch (err) {
+            console.warn("[aesthetics] 渲染失败：", err);
+        }
+    }
+
+    // 响应式重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderLineChart(window.__lastData.characters);
+                renderColorGrid(window.__lastData.colors);
+                renderHeatmap(window.__lastData.scenes, window.__lastData.colors);
+                renderPie(window.__lastData.styles);
+                renderCharGrid(window.__lastData.characters, window.__lastData.colors);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

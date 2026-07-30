@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>洞府房产档案 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 720px) {
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+        }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .chart-full {
+            margin-top: 8px;
+        }
+        .chart-full svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        /* Data table */
+        .table-wrap {
+            overflow-x: auto;
+            max-height: 640px;
+            overflow-y: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        .table-wrap::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .table-wrap::-webkit-scrollbar-thumb {
+            background: var(--accent-soft);
+            border-radius: 4px;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+        .data-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 10px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }
+        .data-table thead th.sortable:hover {
+            color: var(--accent-soft);
+        }
+        .data-table thead th .sort-ind {
+            font-size: 0.7rem;
+            margin-left: 4px;
+            color: var(--accent-soft);
+        }
+        .data-table thead th.no-sort {
+            cursor: default;
+        }
+        .data-table tbody tr {
+            border-bottom: 1px solid var(--line);
+        }
+        .data-table tbody tr:nth-child(even) {
+            background: var(--bg);
+        }
+        .data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .data-table td {
+            padding: 8px 12px;
+            vertical-align: top;
+        }
+        .data-table td.num {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent-3);
+            text-align: right;
+            white-space: nowrap;
+        }
+        .data-table td.chapter {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--ink-soft);
+            text-align: center;
+            white-space: nowrap;
+        }
+        .data-table td.luxury-cell {
+            text-align: center;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .luxury-bar {
+            display: inline-block;
+            width: 38px;
+            height: 8px;
+            border-radius: 2px;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #fff;
+            white-space: nowrap;
+        }
+        .tag.king { background: var(--accent); }
+        .tag.general { background: var(--accent-2); }
+        .tag.feature {
+            background: transparent;
+            color: var(--ink-soft);
+            border: 1px dashed var(--line);
+            font-size: 0.74rem;
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        .footer-meta {
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            opacity: 0.7;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>洞府房产档案</h1>
+        <div class="subtitle">CAVE ESTATE · JOURNEY TO THE WEST</div>
+        <div class="tagline">22 处洞府 · 110,010 小妖 · 妖王级 19 · 中将级 3</div>
+        <div class="tagline" style="margin-top:4px;">骷髅若岭 · 骸骨如林——洞府即妖王的家底与脸面</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">›</span>
+            <span class="current">洞府房产档案</span>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>xiyouji/</code> 目录运行 <code>py -m http.server 8000</code>，访问 <code>http://localhost:8000/site/data/cave-estate.html</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">TOTAL · 洞府总数</div>
+                <div class="value">22</div>
+                <div class="desc">遍布 22 个地区，每地 1 处</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">LUXURY · 豪华度均值</div>
+                <div class="value">6.68</div>
+                <div class="desc">满分 10，中位值 7</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">MINIONS · 小妖总数</div>
+                <div class="value">110,010</div>
+                <div class="desc">狮驼洞独占 48,000（43.6%）</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">MAX · 满分洞府</div>
+                <div class="value">2</div>
+                <div class="desc">小雷音寺 · 狮驼洞并列豪华度 10</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：豪华度分布 -->
+        <section class="section">
+            <h2 class="section-title">豪华度分布</h2>
+            <div class="section-sub">22 处洞府按豪华度降序排列，颜色越深红表示豪华度越高。</div>
+            <div class="chart-full">
+                <svg id="chart-luxury"></svg>
+            </div>
+            <div class="legend" id="legend-luxury"></div>
+        </section>
+
+        <!-- 图表 2 & 3：洞主修为饼图 + 地区分布 -->
+        <section class="section">
+            <h2 class="section-title">洞主修为 · 地区分布</h2>
+            <div class="section-sub">左：妖王级与中将级洞主占比；右：各地区洞府豪华度（每地区 1 处洞府，柱长=豪华度）。</div>
+            <div class="chart-row">
+                <div class="chart-block">
+                    <h3>洞主修为占比</h3>
+                    <svg id="chart-rank" width="360" height="360"></svg>
+                    <div class="legend" id="legend-rank"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>各地区洞府豪华度</h3>
+                    <svg id="chart-region" width="640" height="540"></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- 图表 4：小妖数量对比 -->
+        <section class="section">
+            <h2 class="section-title">小妖数量对比（对数刻度）</h2>
+            <div class="section-sub">由于狮驼洞 48,000 与兔穴 0 差距悬殊，采用 log10 刻度。0 值以单独标记呈现。</div>
+            <div class="chart-full">
+                <svg id="chart-minions"></svg>
+            </div>
+        </section>
+
+        <!-- 洞府详情表格 -->
+        <section class="section">
+            <h2 class="section-title">洞府详情档案</h2>
+            <div class="section-sub">点击表头可按该列排序（支持 回目 / 豪华度 / 小妖数 排序，再次点击切换升降序）。</div>
+            <div class="table-wrap">
+                <table class="data-table" id="cave-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-key="chapter" role="button" tabindex="0">回目<span class="sort-ind"></span></th>
+                            <th class="no-sort">洞府</th>
+                            <th class="no-sort">洞主</th>
+                            <th class="no-sort">修为</th>
+                            <th class="no-sort">地区</th>
+                            <th class="no-sort">势力范围</th>
+                            <th class="sortable" data-key="minions_count" role="button" tabindex="0">小妖数<span class="sort-ind"></span></th>
+                            <th class="sortable" data-key="luxury" role="button" tabindex="0">豪华度<span class="sort-ind"></span></th>
+                            <th class="no-sort">特色</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cave-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <h4>洞府即家底</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">返回数据看板</a> ·
+        <a href="../dashboard.html">返回仪表盘</a>
+        <div class="footer-meta" id="footer-meta">数据生成时间：嵌入版本 · cave_estate.json · 22 处洞府</div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/02-人物深度分析/妖怪谱系深度分析.md">妖怪谱系深度分析</a></div>
+    </footer>
+
+    <script>
+    // ===== 嵌入式 fallback 数据（fetch 失败时使用，内容来自 scripts/output/data/*.json） =====
+    const EMBEDDED_DATA = {
+        caves: [
+            { "name": "水帘洞", "owner": "孙悟空", "owner_rank": "king", "chapter": 1, "region": "东胜神洲·花果山", "location": "花果山正顶", "environment": "瀑布遮门，石碣镌'花果山福地，水帘洞洞天'，内有石座石床、石锅石灶", "furnishings": "石座、石床、石凳、石盆、石碗，天然生成", "treasures": "石碣、铁板桥、瀑布天帘", "minions_count": 47000, "subordinates": ["四健将·马流二元帅", "七十二洞妖王"], "territory": "花果山全域", "luxury": 7, "feature": "天生石洞，齐天大圣发迹之地" },
+            { "name": "黑风洞", "owner": "黑熊精", "owner_rank": "king", "chapter": 17, "region": "乌斯藏国·黑风山", "location": "黑风山黑风洞", "environment": "山高涧深，黑气弥漫，松柏成林", "furnishings": "洞中宽敞，设有石凳、禅榻", "treasures": "锦襕袈裟（盗自观音禅院）", "minions_count": 200, "subordinates": ["白衣秀士·蛇精", "凌虚子·狼精"], "territory": "黑风山周边百里", "luxury": 6, "feature": "妖王中少有的'修禅'型，能论道谈经" },
+            { "name": "黄风洞", "owner": "黄风怪", "owner_rank": "king", "chapter": 21, "region": "黄风岭·黄风洞", "location": "黄风岭深山", "environment": "黄沙蔽日，怪石嶙峋", "furnishings": "洞府深邃，设有妖王宝座", "treasures": "三昧神风（法术非宝物）", "minions_count": 500, "subordinates": ["虎先锋"], "territory": "黄风岭", "luxury": 5, "feature": "灵山脚下得道黄毛貂鼠，与佛门有渊源" },
+            { "name": "白虎洞", "owner": "黄袍怪", "owner_rank": "king", "chapter": 29, "region": "碗子山·波月洞", "location": "碗子山深山", "environment": "虎踞山形，月映波光", "furnishings": "洞府华丽，有'百花亭'", "treasures": "无（依附天庭背景）", "minions_count": 50, "subordinates": ["群妖兵"], "territory": "碗子山", "luxury": 5, "feature": "天庭奎木狼下凡，有'公主'宝象国王女为妻" },
+            { "name": "平顶山莲花洞", "owner": "金角大王·银角大王", "owner_rank": "king", "chapter": 33, "region": "平顶山·莲花洞", "location": "平顶山绝顶", "environment": "山形如覆莲，云雾常锁", "furnishings": "洞府宏阔，'红漆木凳'、'金漆台桌'", "treasures": "紫金红葫芦、羊脂玉净瓶、七星剑、芭蕉扇、幌金绳", "minions_count": 800, "subordinates": ["精细鬼·伶俐虫", "巴山虎·倚海龙", "老妖婆"], "territory": "平顶山全域", "luxury": 9, "feature": "太上老君炼丹童子下凡，法宝配置最豪华" },
+            { "name": "号山火云洞", "owner": "红孩儿", "owner_rank": "king", "chapter": 41, "region": "号山·枯松涧·火云洞", "location": "号山枯松涧", "environment": "松枯涧涸，火气蒸腾", "furnishings": "洞中赤红如火烧", "treasures": "三昧真火（先天法术）", "minions_count": 100, "subordinates": ["六健将·云里雾·雾里云"], "territory": "号山六百里", "luxury": 7, "feature": "牛魔王之子，幼龄妖王，能放三昧真火" },
+            { "name": "通天河水鼋之第", "owner": "灵感大王", "owner_rank": "king", "chapter": 47, "region": "通天河·水鼋之第", "location": "通天河底", "environment": "水晶宫阙，水波为顶", "furnishings": "水晶宝座、珊瑚树", "treasures": "九瓣铜锤", "minions_count": 300, "subordinates": ["斑衣鳜婆"], "territory": "通天河全域", "luxury": 6, "feature": "观音莲池金鱼，要吃童男童女" },
+            { "name": "金兜洞", "owner": "独角兕大王", "owner_rank": "king", "chapter": 50, "region": "金兜山·金兜洞", "location": "金兜山阳面", "environment": "金光万道，瑞气千条", "furnishings": "洞府如金铸", "treasures": "金刚琢（太上老君法宝）", "minions_count": 50, "subordinates": [], "territory": "金兜山", "luxury": 8, "feature": "太上老君青牛下凡，金刚琢套尽诸神兵器" },
+            { "name": "琵琶洞", "owner": "蝎子精", "owner_rank": "king", "chapter": 54, "region": "女儿国·琵琶洞", "location": "女儿国都城外西梁山上", "environment": "毒气氤氲，洞形如琵琶", "furnishings": "华丽如宫闱", "treasures": "三股钢叉·倒马毒桩（先天法术）", "minions_count": 30, "subordinates": ["女校尉·丫鬟"], "territory": "女儿国外围", "luxury": 5, "feature": "毒敌蝎子精，蛰过佛祖，连观音都不敢近" },
+            { "name": "翠云山芭蕉洞", "owner": "铁扇公主·牛魔王", "owner_rank": "king", "chapter": 59, "region": "翠云山·芭蕉洞", "location": "翠云山顶", "environment": "翠色满山，云雾缭绕", "furnishings": "洞府幽深，'朱红格子'、'金漆台凳'", "treasures": "芭蕉扇（一扇八万四千里）", "minions_count": 200, "subordinates": ["女童"], "territory": "翠云山+火焰山八百里", "luxury": 9, "feature": "罗刹女所有，扇灭火焰山大火" },
+            { "name": "积雷山摩云洞", "owner": "牛魔王·玉面公主", "owner_rank": "king", "chapter": 60, "region": "积雷山·摩云洞", "location": "积雷山顶", "environment": "摩云入汉，积雷成峰", "furnishings": "万圣公主遗物珠玉满堂", "treasures": "牛王金睛兽", "minions_count": 300, "subordinates": ["玉面狐狸·群妖"], "territory": "积雷山", "luxury": 8, "feature": "牛魔王外室，'万岁狐王'遗产" },
+            { "name": "乱石山碧波潭", "owner": "九头驸马·万圣龙王", "owner_rank": "king", "chapter": 62, "region": "乱石山·碧波潭", "location": "乱石山下潭底", "environment": "潭深水碧，珍珠万斛", "furnishings": "水晶宫殿，珊瑚栏楯", "treasures": "佛宝舍利子·九叶灵芝草", "minions_count": 500, "subordinates": ["奔儿巴·霸波儿奔"], "territory": "乱石山潭底", "luxury": 9, "feature": "龙宫式洞府，万圣公主盗佛宝舍利" },
+            { "name": "小雷音寺", "owner": "黄眉童子", "owner_rank": "king", "chapter": 65, "region": "小西天·小雷音寺", "location": "小西天伪佛地", "environment": "寺貌庄严，伪佛像林立", "furnishings": "伪雷音寺宝殿", "treasures": "金铙·人种袋·狼牙棒", "minions_count": 5000, "subordinates": ["小妖五千"], "territory": "小西天百里", "luxury": 10, "feature": "弥勒佛司磬童子下凡，伪雷音寺规模最大" },
+            { "name": "驼罗庄陀罗寺", "owner": "蟒蛇精", "owner_rank": "general", "chapter": 67, "region": "七绝山·稀柿衕", "location": "稀柿衕深处", "environment": "柿臭熏天，蛇蟒盘踞", "furnishings": "无（野蛇为穴）", "treasures": "无", "minions_count": 0, "subordinates": [], "territory": "七绝山稀柿衕", "luxury": 2, "feature": "未修成人形的大蟒，'稀柿衕'恶臭难当" },
+            { "name": "盘丝洞", "owner": "蜘蛛精·七女", "owner_rank": "general", "chapter": 72, "region": "盘丝岭·盘丝洞", "location": "盘丝岭浓荫处", "environment": "丝网漫天，阴气森森", "furnishings": "石桌石凳，'濯垢泉'浴池", "treasures": "蛛丝法网", "minions_count": 30, "subordinates": ["七子·蜜蜂·蚂蜂·蠦蜂"], "territory": "盘丝岭黄花观", "luxury": 5, "feature": "七女共居，与黄花观多目怪为同门" },
+            { "name": "狮驼洞", "owner": "青狮·白象·大鹏", "owner_rank": "king", "chapter": 74, "region": "狮驼岭·狮驼洞·狮驼国", "location": "狮驼岭八百里", "environment": "'骷髅若岭，骸骨如林'，血腥冲天", "furnishings": "'人肉为食，人骨为柴'", "treasures": "阴阳二气瓶（大鹏）", "minions_count": 48000, "subordinates": ["四万七八千小妖·百十精灵"], "territory": "狮驼岭八百里+狮驼国", "luxury": 10, "feature": "三魔王集团，狮驼国一国妖氛，规模空前" },
+            { "name": "比丘国柳树坡清华洞", "owner": "鹿精·比丘国丈", "owner_rank": "king", "chapter": 78, "region": "比丘国·清华仙府", "location": "比丘国都城外", "environment": "柳树成荫，清幽如仙", "furnishings": "仙府般清雅", "treasures": "蟠龙拐杖", "minions_count": 50, "subordinates": [], "territory": "比丘国都城", "luxury": 6, "feature": "南极寿星坐骑白鹿下凡，欲用1111小儿心肝" },
+            { "name": "陷空山无底洞", "owner": "金鼻白毛老鼠精", "owner_rank": "king", "chapter": 82, "region": "陷空山·无底洞", "location": "陷空山深底", "environment": "'黑气漫山，无底可测'", "furnishings": "洞中又有'洞天'，设牌位供李天王父女", "treasures": "无（依灵山背景）", "minions_count": 200, "subordinates": ["小妖若干"], "territory": "陷空山", "luxury": 7, "feature": "托塔李天王义女，灵山偷食琉璃灯油" },
+            { "name": "隐雾山折岳连环洞", "owner": "艾叶花皮豹子精", "owner_rank": "king", "chapter": 85, "region": "隐雾山·折岳连环洞", "location": "隐雾山深处", "environment": "雾气终年不散", "furnishings": "六门连环，机关重重", "treasures": "假人头（诈降诡计）", "minions_count": 200, "subordinates": ["铁背苍狼·小妖"], "territory": "隐雾山", "luxury": 5, "feature": "南山隐豹，用'分瓣梅花计'诈败悟空" },
+            { "name": "九曲盘桓洞", "owner": "九灵元圣", "owner_rank": "king", "chapter": 89, "region": "竹节山·九曲盘桓洞", "location": "竹节山巅", "environment": "竹影婆娑，洞府九曲", "furnishings": "九曲连环，深不可测", "treasures": "九头法身", "minions_count": 6000, "subordinates": ["黄狮·狻狮·狻猊·抟象·白泽·伏狸·猱狮·雪狮·抟狮"], "territory": "竹节山·玉华州", "luxury": 8, "feature": "太乙救苦天尊坐骑九头狮子，'九灵元圣'号令群妖" },
+            { "name": "青龙山玄英洞", "owner": "辟寒·辟暑·辟尘", "owner_rank": "king", "chapter": 91, "region": "青龙山·玄英洞", "location": "青龙山阳面", "environment": "玄色山岩，寒光凛凛", "furnishings": "洞府如犀角宫", "treasures": "犀牛角（香油食源）", "minions_count": 500, "subordinates": ["群妖·小妖"], "territory": "青龙山·金平府", "luxury": 7, "feature": "三只犀牛精假扮佛祖偷香油，每年耗油五万斤" },
+            { "name": "毛颖山·兔穴", "owner": "玉兔精", "owner_rank": "general", "chapter": 95, "region": "毛颖山·三处兔穴", "location": "毛颖山五顶三穴", "environment": "山形如兔，五顶三穴", "furnishings": "无（兔穴天然）", "treasures": "捣药杵", "minions_count": 0, "subordinates": [], "territory": "毛颖山", "luxury": 3, "feature": "广寒宫玉兔，欲招唐僧为偶" }
+        ],
+        by_owner_rank: [
+            { "rank": "king", "label": "妖王级", "count": 19 },
+            { "rank": "general", "label": "中将级", "count": 3 }
+        ],
+        by_region: [
+            { "region": "东胜神洲·花果山", "luxury": 7, "name": "水帘洞" },
+            { "region": "乌斯藏国·黑风山", "luxury": 6, "name": "黑风洞" },
+            { "region": "黄风岭·黄风洞", "luxury": 5, "name": "黄风洞" },
+            { "region": "碗子山·波月洞", "luxury": 5, "name": "白虎洞" },
+            { "region": "平顶山·莲花洞", "luxury": 9, "name": "平顶山莲花洞" },
+            { "region": "号山·枯松涧·火云洞", "luxury": 7, "name": "号山火云洞" },
+            { "region": "通天河·水鼋之第", "luxury": 6, "name": "通天河水鼋之第" },
+            { "region": "金兜山·金兜洞", "luxury": 8, "name": "金兜洞" },
+            { "region": "女儿国·琵琶洞", "luxury": 5, "name": "琵琶洞" },
+            { "region": "翠云山·芭蕉洞", "luxury": 9, "name": "翠云山芭蕉洞" },
+            { "region": "积雷山·摩云洞", "luxury": 8, "name": "积雷山摩云洞" },
+            { "region": "乱石山·碧波潭", "luxury": 9, "name": "乱石山碧波潭" },
+            { "region": "小西天·小雷音寺", "luxury": 10, "name": "小雷音寺" },
+            { "region": "七绝山·稀柿衕", "luxury": 2, "name": "驼罗庄陀罗寺" },
+            { "region": "盘丝岭·盘丝洞", "luxury": 5, "name": "盘丝洞" },
+            { "region": "狮驼岭·狮驼洞·狮驼国", "luxury": 10, "name": "狮驼洞" },
+            { "region": "比丘国·清华仙府", "luxury": 6, "name": "比丘国柳树坡清华洞" },
+            { "region": "陷空山·无底洞", "luxury": 7, "name": "陷空山无底洞" },
+            { "region": "隐雾山·折岳连环洞", "luxury": 5, "name": "隐雾山折岳连环洞" },
+            { "region": "竹节山·九曲盘桓洞", "luxury": 8, "name": "九曲盘桓洞" },
+            { "region": "青龙山·玄英洞", "luxury": 7, "name": "青龙山玄英洞" },
+            { "region": "毛颖山·三处兔穴", "luxury": 3, "name": "毛颖山·兔穴" }
+        ],
+        top_luxury: [
+            { "rank": 1, "name": "小雷音寺", "owner": "黄眉童子", "luxury": 10, "chapter": 65, "feature": "弥勒佛司磬童子下凡，伪雷音寺规模最大" },
+            { "rank": 2, "name": "狮驼洞", "owner": "青狮·白象·大鹏", "luxury": 10, "chapter": 74, "feature": "三魔王集团，狮驼国一国妖氛，规模空前" },
+            { "rank": 3, "name": "平顶山莲花洞", "owner": "金角大王·银角大王", "luxury": 9, "chapter": 33, "feature": "太上老君炼丹童子下凡，法宝配置最豪华" },
+            { "rank": 4, "name": "翠云山芭蕉洞", "owner": "铁扇公主·牛魔王", "luxury": 9, "chapter": 59, "feature": "罗刹女所有，扇灭火焰山大火" },
+            { "rank": 5, "name": "乱石山碧波潭", "owner": "九头驸马·万圣龙王", "luxury": 9, "chapter": 62, "feature": "龙宫式洞府，万圣公主盗佛宝舍利" }
+        ]
+    };
+
+    // ===== 配色 =====
+    const RANK_COLORS = {
+        "king": "#c8463a",
+        "general": "#3a6b8c"
+    };
+    const RANK_LABEL = {
+        "king": "妖王级",
+        "general": "中将级"
+    };
+
+    // 豪华度颜色梯度（2 → 10，由浅至深红）
+    const LUXURY_COLOR = d3.scaleLinear()
+        .domain([2, 5, 7, 9, 10])
+        .range(["#e9b885", "#d9a168", "#c8463a", "#8b0000", "#5c0000"])
+        .interpolate(d3.interpolateRgb);
+
+    // ===== 工具函数 =====
+    function formatNum(n) {
+        return d3.format(",")(n);
+    }
+
+    // ===== 图表 1：豪华度分布水平柱状图 =====
+    function renderLuxuryChart(caves) {
+        const svg = d3.select("#chart-luxury");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("chart-luxury");
+        const width = Math.min(containerEl.clientWidth || 1100, 1180);
+        const barH = 26;
+        const barGap = 4;
+        const margin = { top: 16, right: 80, bottom: 36, left: 180 };
+        const height = caves.length * (barH + barGap) + margin.top + margin.bottom;
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const data = caves.slice().sort((a, b) => b.luxury - a.luxury);
+
+        const x = d3.scaleLinear()
+            .domain([0, 10])
+            .range([0, innerW]);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(d3.axisBottom(x).ticks(10).tickSize(-innerH).tickPadding(8))
+            .call(gn => gn.select(".domain").remove())
+            .call(gn => gn.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "2,3"))
+            .selectAll("text")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6b5e4d");
+
+        // X 轴标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 30)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6b5e4d")
+            .text("豪华度（满分 10）");
+
+        // 柱
+        const bars = g.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("g")
+            .attr("transform", (d, i) => `translate(0, ${i * (barH + barGap)})`);
+
+        bars.append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width",0)
+            .attr("height", barH)
+            .attr("fill", d => LUXURY_COLOR(d.luxury))
+            .attr("rx", 3)
+            .style("opacity", 0.92)
+            .transition()
+            .duration(700)
+            .delay((d, i) => i * 30)
+            .attr("width",d => Math.max(0, Math.max(2, x(d.luxury))));
+
+        // 洞府名（左侧标签）
+        bars.append("text")
+            .attr("x", -8)
+            .attr("y", barH / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "end")
+            .style("font-size", "0.82rem")
+            .style("fill", "#2c2418")
+            .text(d => d.name);
+
+        // 数值标签
+        bars.append("text")
+            .attr("x", d => x(d.luxury) + 6)
+            .attr("y", barH / 2)
+            .attr("dy", "0.35em")
+            .style("font-size", "0.78rem")
+            .style("font-weight", "600")
+            .style("fill", "#7a5230")
+            .style("font-family", "JetBrains Mono, monospace")
+            .text(d => d.luxury);
+
+        // tooltip
+        bars.append("title")
+            .text(d => `${d.name}（第${d.chapter}回）\n洞主：${d.owner}\n豪华度：${d.luxury}/10\n小妖：${formatNum(d.minions_count)}`);
+
+        // 图例
+        const legend = d3.select("#legend-luxury");
+        legend.selectAll("*").remove();
+        const legendData = [
+            { label: "低（2-4）", color: LUXURY_COLOR(3) },
+            { label: "中（5-6）", color: LUXURY_COLOR(5) },
+            { label: "高（7-8）", color: LUXURY_COLOR(7) },
+            { label: "极高（9）", color: LUXURY_COLOR(9) },
+            { label: "满分（10）", color: LUXURY_COLOR(10) }
+        ];
+        legend.selectAll(".legend-item")
+            .data(legendData)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `<span class="legend-swatch" style="background:${d.color}"></span><span>${d.label}</span>`);
+    }
+
+    // ===== 图表 2：洞主修为饼图 =====
+    function renderRankPie(rankData) {
+        const svg = d3.select("#chart-rank");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${width/2}, ${height/2})`);
+
+        const pie = d3.pie().value(d => d.count).sort(null);
+        const arc = d3.arc()
+            .innerRadius(radius * 0.58)
+            .outerRadius(radius)
+            .cornerRadius(3);
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.82)
+            .outerRadius(radius * 0.82);
+
+        const arcs = pie(rankData);
+
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => RANK_COLORS[d.data.rank] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 120)
+            .style("opacity", 1);
+
+        // 中心数字
+        const total = d3.sum(rankData, d => d.count);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "0.35em")
+            .style("font-size", "1.8rem")
+            .style("font-weight", "600")
+            .style("fill", "#2c2418")
+            .text(total);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "2em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6b5e4d")
+            .text("洞府总数");
+
+        // 切片标签
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.88rem")
+            .style("font-weight", "600")
+            .style("fill", "#fff")
+            .text(d => `${d.data.count} · ${(d.data.count / total * 100).toFixed(0)}%`);
+
+        // 图例
+        const legend = d3.select("#legend-rank");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(rankData)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `<span class="legend-swatch" style="background:${RANK_COLORS[d.rank]}"></span><span>${d.label}：${d.count} 处</span>`);
+    }
+
+    // ===== 图表 3：各地区洞府豪华度 =====
+    function renderRegionChart(regionData) {
+        const svg = d3.select("#chart-region");
+        svg.selectAll("*").remove();
+
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const margin = { top: 16, right: 24, bottom: 90, left: 24 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        // 按豪华度降序
+        const data = regionData.slice().sort((a, b) => b.luxury - a.luxury);
+
+        const x = d3.scaleBand()
+            .domain(data.map(d => d.region))
+            .range([0, innerW])
+            .padding(0.25);
+
+        const y = d3.scaleLinear()
+            .domain([0, 10])
+            .range([innerH, 0]);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        // Y 轴
+        g.append("g")
+            .call(d3.axisLeft(y).ticks(5).tickSize(-innerW).tickPadding(6))
+            .call(gn => gn.select(".domain").remove())
+            .call(gn => gn.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "2,3"))
+            .selectAll("text")
+            .style("font-size", "0.74rem")
+            .style("fill", "#6b5e4d");
+
+        // 柱
+        g.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", d => x(d.region))
+            .attr("y", innerH)
+            .attr("width",Math.max(0, x.bandwidth()))
+            .attr("height", 0)
+            .attr("fill", d => LUXURY_COLOR(d.luxury))
+            .attr("rx", 2)
+            .style("opacity", 0.92)
+            .transition()
+            .duration(700)
+            .delay((d, i) => i * 25)
+            .attr("y", d => y(d.luxury))
+            .attr("height", d => innerH - y(d.luxury));
+
+        // 数值标签
+        g.selectAll(".val")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "val")
+            .attr("x", d => x(d.region) + x.bandwidth() / 2)
+            .attr("y", d => y(d.luxury) - 4)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.7rem")
+            .style("font-weight", "600")
+            .style("fill", "#7a5230")
+            .style("font-family", "JetBrains Mono, monospace")
+            .text(d => d.luxury);
+
+        // X 轴标签（旋转）
+        g.append("g")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(d3.axisBottom(x).tickSize(0))
+            .call(gn => gn.select(".domain").remove())
+            .selectAll("text")
+            .style("font-size", "0.66rem")
+            .style("fill", "#6b5e4d")
+            .attr("transform", "rotate(-55)")
+            .style("text-anchor", "end")
+            .text(d => d.length > 10 ? d.slice(0, 9) + "…" : d);
+
+        // tooltip
+        g.selectAll(".tip")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "tip")
+            .attr("x", d => x(d.region))
+            .attr("y", d => y(d.luxury))
+            .attr("width",Math.max(0, x.bandwidth()))
+            .attr("height", d => innerH - y(d.luxury))
+            .attr("fill", "transparent")
+            .style("pointer-events", "all")
+            .append("title")
+            .text(d => `${d.region}\n洞府：${d.name}\n豪华度：${d.luxury}/10`);
+    }
+
+    // ===== 图表 4：小妖数量对比（log scale） =====
+    function renderMinionsChart(caves) {
+        const svg = d3.select("#chart-minions");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("chart-minions");
+        const width = Math.min(containerEl.clientWidth || 1100, 1180);
+        const margin = { top: 24, right: 40, bottom: 90, left: 80 };
+        const height = 560;
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const data = caves.slice().sort((a, b) => b.minions_count - a.minions_count);
+
+        // log scale：把 0 当作 0.5 处理
+        const maxVal = d3.max(data, d => d.minions_count) || 1;
+        const x = d3.scaleLog()
+            .domain([1, maxVal * 1.1])
+            .range([0, innerW])
+            .clamp(true);
+
+        const y = d3.scaleBand()
+            .domain(data.map(d => d.name))
+            .range([0, innerH])
+            .padding(0.2);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        // 网格线 + X 轴
+        const tickVals = [1, 10, 100, 1000, 10000, 50000];
+        g.append("g")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(d3.axisBottom(x)
+                .tickValues(tickVals)
+                .tickFormat(d => formatNum(+d))
+                .tickSize(-innerH)
+                .tickPadding(8))
+            .call(gn => gn.select(".domain").remove())
+            .call(gn => gn.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "2,3"))
+            .selectAll("text")
+            .style("font-size", "0.74rem")
+            .style("fill", "#6b5e4d")
+            .style("font-family", "JetBrains Mono, monospace");
+
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 56)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6b5e4d")
+            .text("小妖数量（对数刻度 log10）");
+
+        // Y 轴
+        g.append("g")
+            .call(d3.axisLeft(y).tickSize(0))
+            .call(gn => gn.select(".domain").remove())
+            .selectAll("text")
+            .style("font-size", "0.78rem")
+            .style("fill", "#2c2418");
+
+        // 柱（0 值用 1px 起点标记）
+        g.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", 1)
+            .attr("y", d => y(d.name))
+            .attr("width",0)
+            .attr("height", y.bandwidth())
+            .attr("fill", d => d.minions_count === 0 ? "#d9cdb8" : LUXURY_COLOR(d.luxury))
+            .attr("rx", 2)
+            .style("opacity", 0.9)
+            .transition()
+            .duration(700)
+            .delay((d, i) => i * 25)
+            .attr("width",d => Math.max(0, d.minions_count === 0 ? 3 : Math.max(2, x(d.minions_count) - 1)));
+
+        // 数值标签
+        g.selectAll(".val")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "val")
+            .attr("x", d => d.minions_count === 0 ? 8 : x(d.minions_count) + 6)
+            .attr("y", d => y(d.name) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .style("font-size", "0.74rem")
+            .style("font-weight", "600")
+            .style("fill", "#7a5230")
+            .style("font-family", "JetBrains Mono, monospace")
+            .text(d => d.minions_count === 0 ? "0（无小妖）" : formatNum(d.minions_count));
+
+        // tooltip
+        g.selectAll(".tip")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "tip")
+            .attr("x", 0)
+            .attr("y", d => y(d.name))
+            .attr("width",Math.max(0, innerW))
+            .attr("height", y.bandwidth())
+            .attr("fill", "transparent")
+            .style("pointer-events", "all")
+            .append("title")
+            .text(d => `${d.name}（第${d.chapter}回）\n洞主：${d.owner}\n小妖：${formatNum(d.minions_count)}`);
+    }
+
+    // ===== 表格渲染与排序 =====
+    let tableState = {
+        key: "luxury",
+        dir: "desc"
+    };
+
+    function renderTable(caves) {
+        const sortKeys = ["chapter", "luxury", "minions_count"];
+        const headers = d3.selectAll("#cave-table thead th.sortable");
+
+        // 更新排序指示
+        headers.each(function() {
+            const th = d3.select(this);
+            const key = th.attr("data-key");
+            const ind = th.select(".sort-ind");
+            if (key === tableState.key) {
+                ind.text(tableState.dir === "asc" ? "▲" : "▼");
+            } else {
+                ind.text("");
+            }
+        });
+
+        const sorted = caves.slice().sort((a, b) => {
+            const dir = tableState.dir === "asc" ? 1 : -1;
+            const av = a[tableState.key];
+            const bv = b[tableState.key];
+            if (typeof av === "number" && typeof bv === "number") {
+                return (av - bv) * dir;
+            }
+            return String(av).localeCompare(String(bv), "zh-CN") * dir;
+        });
+
+        const tbody = d3.select("#cave-tbody");
+        tbody.selectAll("*").remove();
+
+        sorted.forEach(c => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "chapter").text(`第${c.chapter}回`);
+            tr.append("td").style("font-weight", "600").text(c.name);
+            tr.append("td").text(c.owner);
+            tr.append("td").html(`<span class="tag ${c.owner_rank}">${RANK_LABEL[c.owner_rank]}</span>`);
+            tr.append("td").text(c.region);
+            tr.append("td").text(c.territory);
+            tr.append("td").attr("class", "num").text(c.minions_count === 0 ? "0" : formatNum(c.minions_count));
+            tr.append("td").attr("class", "luxury-cell")
+                .html(() => {
+                    const w = (c.luxury / 10) * 38;
+                    return `<span class="luxury-bar" style="width:${w}px;background:${LUXURY_COLOR(c.luxury)}"></span>${c.luxury}/10`;
+                });
+            tr.append("td").html(`<span class="tag feature">${c.feature}</span>`);
+        });
+
+        // 表头点击排序
+        d3.selectAll("#cave-table thead th.sortable").on("click", function() {
+            const key = d3.select(this).attr("data-key");
+            if (tableState.key === key) {
+                tableState.dir = tableState.dir === "asc" ? "desc" : "asc";
+            } else {
+                tableState.key = key;
+                tableState.dir = key === "chapter" ? "asc" : "desc";
+            }
+            renderTable(caves);
+        }).on("keydown", function(event) {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                this.click();
+            }
+        });
+    }
+
+    // ===== 关键洞察 =====
+    function renderInsights(caves) {
+        const totalMinions = d3.sum(caves, d => d.minions_count);
+        const topLuxury = caves.filter(c => c.luxury === 10);
+        const topCave = caves.find(c => c.name === "狮驼洞");
+        const pingding = caves.find(c => c.name === "平顶山莲花洞");
+
+        const insights = [
+            `豪华度满分（10）洞府仅 <strong>2 处</strong>：<strong>小雷音寺</strong>（弥勒童子伪佛地）与<strong>狮驼洞</strong>（三魔王集团）并列，二者皆为"神佛座下下凡"背景。`,
+            `<strong>狮驼洞小妖 48,000</strong>，占全部 110,010 小妖的 <strong>43.6%</strong>，规模空前——"骷髅若岭，骸骨如林"非虚言；连同水帘洞 47,000，两洞合计占 86.7%。`,
+            `<strong>平顶山莲花洞法宝最豪华</strong>：紫金红葫芦、羊脂玉净瓶、七星剑、芭蕉扇、幌金绳五件齐备，太上老君炼丹童子下凡，配置冠绝全书。`,
+            `小妖数两极分化严重：<strong>4 处洞府（蟒蛇精、玉兔精）小妖为 0</strong>，而 <strong>5 处洞府小妖超千</strong>（狮驼洞、水帘洞、九曲盘桓洞、小雷音寺）——妖王势力半径差异极大。`,
+            `<strong>妖王级洞主 19 处 vs 中将级仅 3 处</strong>（蟒蛇精、蜘蛛精、玉兔精），西游洞府基本被"妖王级"垄断；中将级多为"未修成人形"或"群居精怪"。`,
+            `22 处洞府分布在 <strong>22 个不同地区</strong>，无一地区聚集多处洞府——西游记的妖王们"划地为王"，各占山头。`
+        ];
+
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => {
+            ul.append("li").html(text);
+        });
+    }
+
+    // ===== 数据加载（fetch 失败用嵌入数据） =====
+    async function loadData() {
+        try {
+            const [caveRes, regionRes, rankRes, luxuryRes] = await Promise.all([
+                fetch('../../scripts/output/data/cave_estate.json'),
+                fetch('../../scripts/output/data/cave_by_region.json'),
+                fetch('../../scripts/output/data/cave_by_owner_rank.json'),
+                fetch('../../scripts/output/data/cave_top_luxury.json')
+            ]);
+            if (!caveRes.ok) throw new Error('fetch failed');
+            const caves = await caveRes.json();
+            const by_region_raw = await regionRes.json();
+            const by_owner_rank = await rankRes.json();
+            const top_luxury = await luxuryRes.json();
+
+            // 把 by_region 转为 [{region, luxury, name}] 形式
+            const by_region = by_region_raw.map(g => ({
+                region: g.region,
+                luxury: g.caves[0].luxury,
+                name: g.caves[0].name
+            }));
+
+            document.getElementById('dataSource').innerHTML =
+                '数据源：实时加载自 <code>scripts/output/data/cave_*.json</code>（http server 模式）';
+            return { caves, by_region, by_owner_rank, top_luxury };
+        } catch (e) {
+            console.warn('[INFO] 使用嵌入数据：', e.message);
+            return EMBEDDED_DATA;
+        }
+    }
+
+    // ===== 主流程 =====
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        renderLuxuryChart(data.caves);
+        renderRankPie(data.by_owner_rank);
+        renderRegionChart(data.by_region);
+        renderMinionsChart(data.caves);
+        renderTable(data.caves);
+        renderInsights(data.caves);
+
+        // footer meta
+        const meta = document.getElementById('footer-meta');
+        if (data.caves && data.caves.length) {
+            meta.textContent = `数据生成时间：嵌入版本 · cave_estate.json · ${data.caves.length} 处洞府`;
+        }
+    }
+
+    // 响应式重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderLuxuryChart(window.__lastData.caves);
+                renderMinionsChart(window.__lastData.caves);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

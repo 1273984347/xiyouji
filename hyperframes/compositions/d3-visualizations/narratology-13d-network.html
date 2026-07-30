@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>十三维叙事学网络 · 详解西游记</title>
+    <style>
+      @font-face {
+        font-family: 'Noto Serif SC';
+        src: local('Noto Serif SC'), local('Source Han Serif SC'), local('Songti SC'), local('SimSun'), local('STSong'), local('宋体');
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: local('JetBrains Mono'), local('Consolas'), local('Courier New');
+        font-display: swap;
+      }
+
+      :root {
+        --bg: #faf7f2;
+        --paper: #ffffff;
+        --ink: #2c2418;
+        --ink-soft: #6b5e4d;
+        --accent: #c8463a;
+        --accent-soft: #e9b885;
+        --accent-2: #3a6b8c;
+        --accent-3: #7a5230;
+        --accent-4: #5a7a3a;
+        --line: #d9cdb8;
+        --hero-1: #1a1410;
+        --hero-2: #3a2820;
+        --hero-3: #5a3828;
+        --hero-ink: #f5e9d4;
+        --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: "Noto Serif SC", serif;
+        background: #000;
+        color: var(--ink);
+      }
+
+      [data-composition-id="root"] {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ===== Scene 1: 标题卡 ===== */
+      #scene-1 {
+        background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 50%, var(--hero-3) 100%);
+        color: var(--hero-ink);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 120px 160px;
+        gap: 28px;
+      }
+      #scene-1::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+        pointer-events: none;
+      }
+      .cover-eyebrow {
+        font-size: 24px;
+        letter-spacing: 0.4em;
+        color: var(--accent-soft);
+        font-family: "JetBrains Mono", monospace;
+        opacity: 0.85;
+        position: relative;
+        z-index: 2;
+      }
+      .cover-title {
+        font-size: 128px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        line-height: 1.1;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+      }
+      .cover-rule {
+        width: 220px;
+        height: 4px;
+        background: var(--accent);
+        position: relative;
+        z-index: 2;
+      }
+      .cover-subtitle {
+        font-size: 42px;
+        font-weight: 400;
+        letter-spacing: 0.2em;
+        opacity: 0.92;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* ===== Scene 2 & 3: 力导向图 ===== */
+      #scene-2, #scene-3 {
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .graph-header {
+        position: absolute;
+        top: 56px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        z-index: 2;
+      }
+      .graph-eyebrow {
+        font-size: 20px;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--accent);
+        letter-spacing: 0.3em;
+      }
+      .graph-title {
+        font-size: 44px;
+        font-weight: 700;
+        color: var(--ink);
+        margin-top: 8px;
+      }
+      .graph-svg {
+        width: 1920px;
+        height: 1080px;
+        position: absolute;
+        inset: 0;
+      }
+      .edge-line { stroke: var(--line); stroke-width: 1.5; }
+      .node-circle { fill: var(--paper); stroke: var(--accent-2); stroke-width: 2.5; }
+      .node-circle.concept { fill: var(--paper); stroke: var(--accent-3); stroke-width: 2; }
+      .node-label {
+        fill: var(--ink);
+        font-size: 20px;
+        font-family: "Noto Serif SC", serif;
+        text-anchor: middle;
+        dominant-baseline: central;
+        pointer-events: none;
+      }
+      .node-label.concept { fill: var(--ink-soft); font-size: 17px; }
+
+      /* Scene 3 非高亮节点弱化 */
+      #scene-3 .node-circle { opacity: 0.4; }
+      #scene-3 .node-label { opacity: 0.4; }
+      #scene-3 .edge-line { opacity: 0.35; }
+      .hl-circle { fill: var(--accent); stroke: var(--accent); stroke-width: 3; opacity: 1; }
+      .hl-glow { fill: none; stroke: var(--accent); stroke-width: 2; opacity: 0.3; }
+      .hl-label {
+        fill: var(--accent);
+        font-size: 24px;
+        font-weight: 700;
+        font-family: "Noto Serif SC", serif;
+        text-anchor: middle;
+        dominant-baseline: central;
+        opacity: 1;
+      }
+
+      /* ===== Scene 4: 结尾 ===== */
+      #scene-4 {
+        background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 50%, var(--hero-3) 100%);
+        color: var(--hero-ink);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 120px 160px;
+        gap: 28px;
+      }
+      #scene-4::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 70%, rgba(232, 184, 133, 0.16), transparent 60%);
+        pointer-events: none;
+      }
+      .end-mark {
+        font-size: 26px;
+        letter-spacing: 0.4em;
+        color: var(--accent-soft);
+        font-family: "JetBrains Mono", monospace;
+        position: relative;
+        z-index: 2;
+      }
+      .end-title {
+        font-size: 88px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        position: relative;
+        z-index: 2;
+      }
+      .end-rule {
+        width: 180px;
+        height: 4px;
+        background: var(--accent);
+        position: relative;
+        z-index: 2;
+      }
+      .end-meta {
+        font-size: 30px;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--accent-soft);
+        letter-spacing: 0.15em;
+        position: relative;
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-composition-id="root" data-width="1920" data-height="1080" data-start="0" data-duration="7" data-track-index="0">
+      <!-- Scene 1: 标题卡 (0-1.5s) -->
+      <div id="scene-1" class="scene clip" data-start="0" data-duration="1.6">
+        <div class="cover-eyebrow">DATA VISUALIZATION · 2026</div>
+        <h1 class="cover-title">十三维叙事学网络</h1>
+        <div class="cover-rule"></div>
+        <div class="cover-subtitle">详解西游记 · 数据可视化</div>
+      </div>
+
+      <!-- Scene 2: 力导向图入场 (1.5-4s) -->
+      <div id="scene-2" class="scene clip" data-start="1.5" data-duration="2.6">
+        <div class="graph-header">
+          <div class="graph-eyebrow">NARRATOLOGY NETWORK</div>
+          <div class="graph-title">十三维叙事学网络</div>
+        </div>
+        <svg class="graph-svg" viewBox="0 0 1920 1080" id="graph-entrance"></svg>
+      </div>
+
+      <!-- Scene 3: 关键节点高亮 (4-6s) -->
+      <div id="scene-3" class="scene clip" data-start="4" data-duration="2.1">
+        <div class="graph-header">
+          <div class="graph-eyebrow">KEY NODES</div>
+          <div class="graph-title">关键节点高亮</div>
+        </div>
+        <svg class="graph-svg" viewBox="0 0 1920 1080" id="graph-highlight"></svg>
+      </div>
+
+      <!-- Scene 4: 结尾 (6-7s) -->
+      <div id="scene-4" class="scene clip" data-start="6" data-duration="1">
+        <div class="end-mark">END · 详解西游记</div>
+        <h1 class="end-title">叙事学网络</h1>
+        <div class="end-rule"></div>
+        <div class="end-meta">v2.2.27 · 2026-07-29</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      // 节点数据：13 叙事维度（外环）+ 9 关键概念（内环）= 22 节点
+      var nodes = [
+        { x: 960, y: 180, name: '时空', type: 'dim' },
+        { x: 1109, y: 217, name: '人物', type: 'dim', hl: true },
+        { x: 1223, y: 318, name: '情节', type: 'dim' },
+        { x: 1278, y: 461, name: '主题', type: 'dim', hl: true },
+        { x: 1259, y: 613, name: '结构', type: 'dim' },
+        { x: 1172, y: 740, name: '语言', type: 'dim' },
+        { x: 1037, y: 811, name: '象征', type: 'dim' },
+        { x: 883, y: 811, name: '文化', type: 'dim' },
+        { x: 748, y: 740, name: '心理', type: 'dim' },
+        { x: 661, y: 613, name: '美学', type: 'dim' },
+        { x: 642, y: 461, name: '媒介', type: 'dim' },
+        { x: 697, y: 318, name: '哲学', type: 'dim' },
+        { x: 811, y: 217, name: '历史', type: 'dim' },
+        { x: 1008, y: 368, name: '取经五众', type: 'concept' },
+        { x: 1081, y: 430, name: '神魔谱系', type: 'concept' },
+        { x: 1098, y: 524, name: '八十一难', type: 'concept' },
+        { x: 1050, y: 607, name: '明代镜像', type: 'concept' },
+        { x: 960, y: 640, name: '诗词四层', type: 'concept' },
+        { x: 870, y: 607, name: '真假猴王', type: 'concept' },
+        { x: 822, y: 524, name: '心猿意马', type: 'concept' },
+        { x: 839, y: 430, name: '三教合一', type: 'concept' },
+        { x: 912, y: 368, name: '数字人文', type: 'concept', hl: true }
+      ];
+
+      // 连线数据：28 条（维度环 13 + 维度-概念 9 + 跨维度 6）
+      var edges = [
+        [0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,12],[12,0],
+        [1,13],[1,14],[2,15],[7,16],[5,17],[1,18],[8,19],[11,20],[10,21],
+        [0,15],[3,13],[4,15],[6,18],[9,17],[12,16]
+      ];
+
+      var SVG_NS = 'http://www.w3.org/2000/svg';
+      var CX = 960, CY = 500; // 散开中心点
+
+      // 生成力导向图 SVG 元素
+      function buildGraph(svgId, highlightMode) {
+        var svg = document.getElementById(svgId);
+        // 连线层（置于节点之下）
+        edges.forEach(function(e, i) {
+          var a = nodes[e[0]], b = nodes[e[1]];
+          var line = document.createElementNS(SVG_NS, 'line');
+          line.setAttribute('x1', a.x);
+          line.setAttribute('y1', a.y);
+          line.setAttribute('x2', b.x);
+          line.setAttribute('y2', b.y);
+          line.setAttribute('class', 'edge-line');
+          line.setAttribute('data-edge', i);
+          svg.appendChild(line);
+        });
+        // 节点层
+        nodes.forEach(function(n, i) {
+          var isHl = highlightMode && n.hl;
+          if (isHl) {
+            var glow = document.createElementNS(SVG_NS, 'circle');
+            glow.setAttribute('cx', n.x);
+            glow.setAttribute('cy', n.y);
+            glow.setAttribute('r', 48);
+            glow.setAttribute('class', 'hl-glow');
+            glow.setAttribute('data-hl-glow', i);
+            svg.appendChild(glow);
+          }
+          var circle = document.createElementNS(SVG_NS, 'circle');
+          circle.setAttribute('cx', n.x);
+          circle.setAttribute('cy', n.y);
+          circle.setAttribute('r', isHl ? 34 : (n.type === 'dim' ? 26 : 20));
+          circle.setAttribute('class', isHl ? 'hl-circle' : (n.type === 'concept' ? 'node-circle concept' : 'node-circle'));
+          circle.setAttribute('data-node', i);
+          svg.appendChild(circle);
+          var text = document.createElementNS(SVG_NS, 'text');
+          text.setAttribute('x', n.x);
+          text.setAttribute('y', n.y);
+          text.setAttribute('class', isHl ? 'hl-label' : (n.type === 'concept' ? 'node-label concept' : 'node-label'));
+          text.textContent = n.name;
+          svg.appendChild(text);
+        });
+      }
+      buildGraph('graph-entrance', false);
+      buildGraph('graph-highlight', true);
+
+      // GSAP 时间线
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      // ===== Scene 1: 标题卡 (0-1.5s) =====
+      tl.from("#scene-1 .cover-eyebrow", { y: 30, opacity: 0, duration: 0.4, ease: "power3.out" }, 0.1)
+        .from("#scene-1 .cover-title", { y: 50, opacity: 0, duration: 0.5, ease: "power3.out" }, 0.25)
+        .from("#scene-1 .cover-rule", { scaleX: 0, transformOrigin: "left center", duration: 0.35, ease: "power2.out" }, 0.65)
+        .from("#scene-1 .cover-subtitle", { y: 30, opacity: 0, duration: 0.4, ease: "expo.out" }, 0.8)
+        .to("#scene-1", { opacity: 0, duration: 0.3, ease: "power2.in" }, 1.2);
+
+      // ===== Scene 2: 力导向图入场 (1.5-4s) =====
+      tl.from("#scene-2 .graph-eyebrow", { y: 20, opacity: 0, duration: 0.3, ease: "power3.out" }, 1.6)
+        .from("#scene-2 .graph-title", { y: 30, opacity: 0, duration: 0.35, ease: "power3.out" }, 1.75)
+        .from("#scene-2 .node-circle", { attr: { cx: CX, cy: CY, r: 0 }, duration: 0.8, ease: "power3.out", stagger: 0.03 }, 1.9)
+        .from("#scene-2 .edge-line", { opacity: 0, duration: 0.35, ease: "power2.out", stagger: 0.012 }, 2.5)
+        .from("#scene-2 .node-label", { opacity: 0, duration: 0.3, ease: "power2.out", stagger: 0.02 }, 2.8)
+        .to("#scene-2", { opacity: 0, duration: 0.3, ease: "power2.in" }, 3.7);
+
+      // ===== Scene 3: 关键节点高亮 (4-6s) =====
+      tl.from("#scene-3 .graph-eyebrow", { y: 20, opacity: 0, duration: 0.3, ease: "power3.out" }, 4.1)
+        .from("#scene-3 .graph-title", { y: 30, opacity: 0, duration: 0.35, ease: "power3.out" }, 4.25)
+        .from("#scene-3 .edge-line", { opacity: 0, duration: 0.3, stagger: 0.008 }, 4.4)
+        .from("#scene-3 .node-circle", { opacity: 0, duration: 0.3, stagger: 0.02 }, 4.4)
+        .from("#scene-3 .node-label", { opacity: 0, duration: 0.3, stagger: 0.02 }, 4.5)
+        .from("#scene-3 .hl-glow", { attr: { r: 0 }, opacity: 0, duration: 0.5, ease: "back.out(1.6)", stagger: 0.12 }, 4.7)
+        .from("#scene-3 .hl-circle", { attr: { r: 0 }, duration: 0.45, ease: "back.out(1.8)", stagger: 0.12 }, 4.85)
+        .from("#scene-3 .hl-label", { opacity: 0, duration: 0.35, ease: "power3.out", stagger: 0.12 }, 5.0);
+
+      // 高亮节点脉冲动画
+      tl.to("#scene-3 .hl-circle", { attr: { r: 40 }, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, 5.2)
+        .to("#scene-3 .hl-glow", { attr: { r: 62 }, opacity: 0.1, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, 5.2)
+        .to("#scene-3", { opacity: 0, duration: 0.3, ease: "power2.in" }, 5.75);
+
+      // ===== Scene 4: 结尾 (6-7s) =====
+      tl.from("#scene-4 .end-mark", { y: 20, opacity: 0, duration: 0.3, ease: "power3.out" }, 6.1)
+        .from("#scene-4 .end-title", { y: 40, opacity: 0, duration: 0.4, ease: "power3.out" }, 6.2)
+        .from("#scene-4 .end-rule", { scaleX: 0, transformOrigin: "left center", duration: 0.3, ease: "power2.out" }, 6.5)
+        .from("#scene-4 .end-meta", { y: 20, opacity: 0, duration: 0.35, ease: "expo.out" }, 6.6);
+
+      window.__timelines["root"] = tl;
+    </script>
+  </body>
+</html>

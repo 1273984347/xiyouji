@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>互文性关系图谱 · W172</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="../static/js/d3-sankey.min.js"></script>
+<style>
+:root {
+  /* 古典宣纸风调色板（27 CSS 变量）*/
+  --bg: #f5f0e6;            /* 1 米色背景 */
+  --paper: #efe7d6;         /* 2 宣纸表面 */
+  --ink: #1a1410;           /* 3 深褐主文字 */
+  --accent: #8b4513;        /* 4 鞍棕强调 */
+  --accent-2: #5a3828;      /* 5 深木褐次强调 */
+  --accent-3: #6b4226;      /* 6 古铜辅助 */
+  --muted: #8a7a5a;         /* 7 灰褐次文字 */
+  --border: #d4c5a9;        /* 8 古卷边框 */
+  --card: #fbf6ec;          /* 9 卡片底色 */
+  --hero-bg-1: #1a1410;     /* 10 hero 起始 */
+  --hero-bg-2: #3a2820;     /* 11 hero 中段 */
+  --hero-bg-3: #5a3828;     /* 12 hero 终段 */
+  --hero-text: #f5f0e6;    /* 13 hero 文字 */
+  --hero-sub: #d4c5a9;     /* 14 hero 副标题 */
+  --hero-meta: #b8a888;     /* 15 hero meta */
+  --tooltip-bg: rgba(26,20,16,0.95); /* 16 tooltip 背景 */
+  /* 互文五类型配色（17-21）*/
+  --type-quote: #8B4513;       /* 17 引用 鞍棕 */
+  --type-allusion: #A0522D;    /* 18 暗用 赭石 */
+  --type-comment: #CD853F;     /* 19 评论 秘鲁色 */
+  --type-transform: #D2691E;   /* 20 改造 秋茄 */
+  --type-translation: #BC8F8F; /* 21 翻译 玫瑰灰 */
+  --type-theory: #5a3828;      /* 22 理论家节点 深木褐 */
+  --type-text: #6b4226;        /* 23 前置文本节点 古铜 */
+  --type-target: #8b4513;      /* 24 西游记节点 鞍棕强调 */
+  --table-stripe: #efe7d6;     /* 25 表格斑马纹 */
+  --table-header: #d4c5a9;     /* 26 表头底色 */
+  --matrix-cell: #efe7d6;      /* 27 矩阵单元格底色 */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Serif SC', 'Songti SC', serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  padding: 20px;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+
+/* Hero */
+header.hero {
+  background: linear-gradient(135deg, var(--hero-bg-1) 0%, var(--hero-bg-2) 50%, var(--hero-bg-3) 100%);
+  position: relative;
+  color: var(--hero-text);
+  padding: 52px 30px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  text-align: center;
+  border: 1px solid #2a1c14;
+  overflow: hidden;
+}
+header.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(212,197,169,0.18), transparent 60%);
+  pointer-events: none;
+}
+header.hero h1 {
+  font-size: 2.4em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--hero-text);
+  letter-spacing: 4px;
+  position: relative;
+}
+header.hero .subtitle {
+  font-size: 1.05em;
+  color: var(--hero-sub);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  position: relative;
+}
+header.hero .meta {
+  color: var(--hero-meta);
+  font-size: 0.85em;
+  margin-top: 10px;
+  position: relative;
+}
+
+/* Section */
+.section {
+  background: var(--card);
+  margin: 30px 0;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.section-title {
+  font-size: 1.6em;
+  color: var(--accent-2);
+  margin-bottom: 8px;
+  font-weight: 600;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+.section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+.section-sub {
+  color: var(--muted);
+  font-size: 0.88em;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+.definition {
+  background: var(--paper);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.94em;
+  border-radius: 2px;
+}
+
+/* KPI */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+.kpi-card {
+  background: var(--paper);
+  padding: 16px;
+  border-radius: 4px;
+  text-align: center;
+  border-top: 3px solid var(--accent);
+}
+.kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
+.kpi-label { color: var(--muted); font-size: 0.84em; margin-top: 4px; }
+
+/* 前置文本概览卡片网格 */
+.texts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 16px;
+}
+.text-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 14px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.text-card:hover, .text-card:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  outline: none;
+}
+.text-card .text-name {
+  font-size: 1.05em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.text-card .text-tag {
+  font-size: 0.8em;
+  color: var(--accent-2);
+  margin-bottom: 6px;
+}
+.text-card .text-stats {
+  font-size: 0.82em;
+  color: var(--muted);
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border);
+}
+.swatch-bar {
+  height: 4px;
+  border-radius: 2px;
+  margin: 6px auto;
+  width: 60%;
+}
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.chart-caption { color: var(--muted); font-size: 0.84em; margin-bottom: 12px; }
+.chart-svg {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.84em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: var(--tooltip-bg);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.84em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 300px;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; }
+.node-circle:hover { stroke: var(--accent); stroke-width: 2px; }
+
+/* Summary table */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 0.88em;
+  background: #fff;
+  border: 1px solid var(--border);
+}
+.summary-table th {
+  background: var(--table-header);
+  color: var(--ink);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-3);
+  cursor: pointer;
+  user-select: none;
+}
+.summary-table th:hover { background: var(--accent-3); color: #fff; }
+.summary-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.summary-table tr:nth-child(even) td { background: var(--table-stripe); }
+.summary-table tr:hover td { background: #f5efe4; }
+.summary-table .type-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.theorist-block {
+  margin-top: 18px;
+}
+.theorist-block h3 {
+  font-size: 1.1em;
+  color: var(--accent-2);
+  margin-bottom: 8px;
+  border-left: 3px solid var(--accent-3);
+  padding-left: 8px;
+}
+.theorist-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+.theorist-item {
+  background: var(--paper);
+  padding: 10px 12px;
+  border-radius: 4px;
+  border-left: 3px solid var(--border);
+  font-size: 0.86em;
+}
+.theorist-item .t-name { font-weight: 600; color: var(--ink); }
+.theorist-item .t-sense { color: var(--muted); font-size: 0.9em; margin-top: 2px; }
+.theorist-item .t-work { color: var(--accent-2); font-size: 0.85em; margin-top: 2px; }
+
+/* Matrix cell */
+.matrix-cell { cursor: pointer; }
+.matrix-cell:hover { stroke: var(--accent); stroke-width: 2px; }
+
+/* Insight */
+.insight-list { list-style: none; }
+.insight-list li {
+  background: var(--paper);
+  margin: 8px 0;
+  padding: 12px 15px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 2px;
+}
+.insight-list li strong { color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .texts-grid { grid-template-columns: repeat(2, 1fr); }
+  header.hero { padding: 32px 18px; }
+  header.hero h1 { font-size: 1.8em; letter-spacing: 2px; }
+  .section { padding: 18px; }
+  .section-title { font-size: 1.3em; }
+  .summary-table { font-size: 0.8em; }
+  .summary-table th, .summary-table td { padding: 7px 8px; }
+}
+@media (max-width: 520px) {
+  .texts-grid { grid-template-columns: 1fr; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  body { padding: 10px; }
+  header.hero h1 { font-size: 1.5em; }
+  .theorist-list { grid-template-columns: 1fr; }
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.84em;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="hero">
+  <h1>互文性关系图谱</h1>
+  <div class="subtitle">INTERTEXTUALITY NETWORK</div>
+  <div class="meta">W172 · D 方向 · 第 14 个 NLP 可视化 · 西游记与前置文本的关系网络 · 对应 W169 互文性叙事学专题</div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">前置文本数</div></div>
+  <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">互文性理论家</div></div>
+  <div class="kpi-card"><div class="kpi-value">5</div><div class="kpi-label">热奈特互文类型</div></div>
+  <div class="kpi-card"><div class="kpi-value">5</div><div class="kpi-label">互文强度维度</div></div>
+  <div class="kpi-card"><div class="kpi-value">2200+</div><div class="kpi-label">互文跨度（年）</div></div>
+  <div class="kpi-card"><div class="kpi-value">1</div><div class="kpi-label">目标文本（西游记）</div></div>
+</div>
+
+<!-- Section 1: 概览与力导向图 -->
+<section class="section" id="overview">
+  <h2 class="section-title">壹 · 互文性关系图谱总览</h2>
+  <div class="section-sub">OVERVIEW: INTERTEXTUALITY FORCE-DIRECTED GRAPH</div>
+  <div class="definition">
+    <strong>定义：</strong>互文性（Intertextuality）由克里斯蒂娃于 1966 年提出，指任何文本都是对其他文本的吸收与转化。本图谱以《西游记》为中心节点，向外辐射七部前置文本（取经诗话、大唐西域记、三藏法师传、朴通事谚解、西游记杂剧、佛典、道典），并连接四位互文性理论家（克里斯蒂娃、巴特、热奈特、里法特尔），构建「前置文本—目标文本—理论家」三元关系网络。节点颜色区分类型，边类型标注热奈特五类型之一。
+  </div>
+  <div class="texts-grid" id="texts-grid"></div>
+  <div class="chart-block" style="margin-top:24px;">
+    <div class="chart-title">互文性力导向图（中心=西游记 · 外圈=前置文本+理论家 · 边=互文关系类型）</div>
+    <div class="chart-caption">节点颜色：文本类型配色 · 节点大小=度数 · 边颜色=互文类型 · 可拖拽</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="640"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 2: 互文类型矩阵 -->
+<section class="section" id="matrix">
+  <h2 class="section-title alt">贰 · 热奈特五类型 × 前置文本矩阵</h2>
+  <div class="section-sub">MATRIX: GENETTE'S FIVE TYPES × PRECURSOR TEXTS</div>
+  <div class="definition">
+    <strong>定义：</strong>热奈特在《隐迹稿本》（Palimpsestes, 1982）中将跨文本关系分为五类型：引用（Citation）、暗用（Allusion）、评论（Commentaire）、改造（Transformation）、翻译（Traduction）。矩阵图以七部前置文本为行、五类型为列，颜色深浅表示互文强度（0-3）。取经诗话在「改造」上最强（孙悟空形象成型），佛道典在「暗用」上最强（思想主题渗透）。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">热奈特五类型 × 前置文本热力矩阵</div>
+    <div class="chart-caption">行：7 部前置文本 · 列：5 种互文类型 · 颜色深浅=强度 0-3 · hover 显示详情</div>
+    <svg id="chart-matrix" class="chart-svg" width="100%" height="500"></svg>
+    <div class="legend-row" id="matrix-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3: 互文强度雷达图 -->
+<section class="section" id="radar">
+  <h2 class="section-title alt-2">叁 · 前置文本互文强度雷达图</h2>
+  <div class="section-sub">RADAR: FIVE INTERTEXTUAL DIMENSIONS PER TEXT</div>
+  <div class="definition">
+    <strong>定义：</strong>从五个维度评估每部前置文本对《西游记》的互文强度：结构借用（叙事框架）、主题继承（思想主旨）、人物转化（角色塑造）、情节改写（故事事件）、语言引用（词句典故）。雷达面积越大，该文本对西游记的塑造作用越强。取经诗话与西游记杂剧在「人物转化」「情节改写」上最强，朴通事谚解在「语言引用」上突出。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">七前置文本互文强度雷达图（5 维度）</div>
+    <div class="chart-caption">7 文本 × 5 维度 · 数值归一化 0-100 · hover 查看详情</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="580"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4: 互文时间线 -->
+<section class="section" id="timeline">
+  <h2 class="section-title">肆 · 前置文本→西游记互文时间线</h2>
+  <div class="section-sub">TIMELINE: PRECURSOR TEXTS THROUGH THE AGES</div>
+  <div class="definition">
+    <strong>定义：</strong>按年代排列八部文本（含西游记本身），标注每部文本的成书年代与主要互文类型。时间跨度从公元前 6 世纪（道德经）到 17 世纪（朴通事谚解），覆盖 2200 余年。颜色区分文本类型，节点大小反映互文强度。揭示西游记成书前的文本谱系与互文累积过程。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">前置文本→西游记互文时间线</div>
+    <div class="chart-caption">X 轴：年代 · 节点：文本配色 · 大小=互文强度 · hover 显示互文类型</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="500"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5: 理论家视角桑基图 -->
+<section class="section" id="theorists">
+  <h2 class="section-title alt">伍 · 四理论家互文性理论桑基图</h2>
+  <div class="section-sub">SANKEY: FOUR THEORISTS × THEORY DIMENSIONS × APPLICATIONS</div>
+  <div class="definition">
+    <strong>定义：</strong>桑基图展示三层流向：四理论家 → 理论维度 → 西游记应用。克里斯蒂娃的「文本间性」对应西游与前置文本网络；巴特的「作者之死」对应吴承恩作者问题；热奈特的「五类型」对应西游的引用与改造；里法特尔的「超文本性」对应西游作为超文本。流量粗细对应理论在西游研究中的应用权重。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">理论家-理论维度-西游应用三层桑基图</div>
+    <div class="chart-caption">左起：四理论家 → 理论维度 → 西游记应用 · 流量=理论应用权重 · hover 高亮路径</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="600"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6: 汇总表 -->
+<section class="section" id="summary">
+  <h2 class="section-title alt-2">陆 · 互文关系汇总表</h2>
+  <div class="section-sub">SUMMARY: INTERTEXTUAL RELATIONS TABLE</div>
+  <div class="definition">
+    <strong>定义：</strong>汇总七部前置文本的完整数据——文本类型、成书年代、主要互文类型、五维度互文强度、综合互文指数。下方列出四位互文性理论家按学派分组清单，构成 W172 互文性关系图谱的完整知识网络。表格表头可点击排序，对应 W169 互文性叙事学专题。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">前置文本互文关系汇总表（点击表头排序）</div>
+    <div class="chart-caption">7 文本 × 9 字段 · 点击表头排序 · hover 高亮</div>
+    <div id="summary-table-wrap"></div>
+  </div>
+  <div class="theorist-block">
+    <h3>四位互文性理论家清单</h3>
+    <div id="theorist-list" class="theorist-list"></div>
+  </div>
+</section>
+
+<footer>
+  <p>W172 互文性关系图谱 · D 方向 · 第 14 个 NLP 可视化 · 基于 W169 互文性叙事学专题</p>
+  <p>古典宣纸风配色 · D3.js v7 · F6 skeleton（fetchJson → loadData → main → render×N → cache → resize）</p>
+  <p id="dataSource">数据源：嵌入数据 EMBEDDED_DATA（file:// 模式可直接打开）</p>
+</footer>
+
+</div>
+
+<script>
+// ============================================================
+// EMBEDDED DATA —— 互文性关系图谱数据（W172）
+// ============================================================
+const EMBEDDED_DATA = {
+  intertextuality: {
+    // 前置文本节点（7 部）+ 西游记（目标文本）
+    texts: [
+      { id: "dtshq", name: "大唐三藏取经诗话", 类型: "宋元话本", 年代: "约13世纪", 年份: 1250, 互文强度: 92, color: "#8B4513", 简介: "西游记最早雏形，孙悟空形象原型" },
+      { id: "dtxyj", name: "大唐西域记", 类型: "地理志", 年代: "646年", 年份: 646, 互文强度: 75, color: "#A0522D", 简介: "玄奘口述、辩机笔受，西域地理记录" },
+      { id: "dcessfzz", name: "大慈恩寺三藏法师传", 类型: "传记", 年代: "688年", 年份: 688, 互文强度: 80, color: "#CD853F", 简介: "慧立、彦悰撰，玄奘传记" },
+      { id: "ptssj", name: "朴通事谚解", 类型: "汉语教材", 年代: "约1670年", 年份: 1670, 互文强度: 65, color: "#DAA520", 简介: "朝鲜汉语教材，引西游故事注解" },
+      { id: "xyzj", name: "西游记杂剧", 类型: "元明杂剧", 年代: "约1390年", 年份: 1390, 互文强度: 88, color: "#B8860B", 简介: "杨景贤撰，元明杂剧西游故事" },
+      { id: "fod", name: "佛典", 类型: "宗教经典", 年代: "公元前5-公元3世纪", 年份: 100, 互文强度: 85, color: "#D2691E", 简介: "妙法莲华经、华严经、维摩诘经等" },
+      { id: "daod", name: "道典", 类型: "宗教经典", 年代: "公元前6-公元4世纪", 年份: -400, 互文强度: 82, color: "#BC8F8F", 简介: "道德经、庄子、抱朴子等" },
+      { id: "xyj", name: "西游记", 类型: "小说", 年代: "1592年（世德堂本）", 年份: 1592, 互文强度: 100, color: "#8b4513", 简介: "目标文本，吴承恩（？）编撰" }
+    ],
+    // 理论家节点（4 位）
+    theorists: [
+      { id: "kristeva", name: "克里斯蒂娃", 英文名: "Julia Kristeva", 国籍: "法国-保加利亚", 理论: "互文性（Intertextuality）", 代表作: "《词、对话、小说》(1966) · 《符号学》(1969)", 活跃年代: "1966-", color: "#5a3828", 学派: "后结构主义" },
+      { id: "barthes", name: "罗兰·巴特", 英文名: "Roland Barthes", 国籍: "法国", 理论: "作者之死 / 文本理论", 代表作: "《作者之死》(1968) · 《文本的快乐》(1973)", 活跃年代: "1968-1980", color: "#6b4226", 学派: "后结构主义" },
+      { id: "genette", name: "热奈特", 英文名: "Gérard Genette", 国籍: "法国", 理论: "跨文本性五类型", 代表作: "《隐迹稿本》(1982) · 《叙事话语》(1972)", 活跃年代: "1972-2004", color: "#8a7a5a", 学派: "结构主义叙事学" },
+      { id: "riffaterre", name: "里法特尔", 英文名: "Michael Riffaterre", 国籍: "法国-美国", 理论: "超文本性（Hypertextuality）", 代表作: "《文本生产》(1978) · 《超文本》(1981)", 活跃年代: "1966-1987", color: "#A0522D", 学派: "结构主义诗学" }
+    ],
+    // 节点（用于力导向图，前置文本+理论家+西游记）
+    nodes: [
+      // 西游记目标文本
+      { id: "xyj", name: "西游记", type: "target", color: "#8b4513" },
+      // 前置文本节点（7 部）
+      { id: "dtshq", name: "大唐三藏取经诗话", type: "text", subtype: "宋元话本", 年代: "约13世纪", color: "#8B4513" },
+      { id: "dtxyj", name: "大唐西域记", type: "text", subtype: "地理志", 年代: "646年", color: "#A0522D" },
+      { id: "dcessfzz", name: "大慈恩寺三藏法师传", type: "text", subtype: "传记", 年代: "688年", color: "#CD853F" },
+      { id: "ptssj", name: "朴通事谚解", type: "text", subtype: "汉语教材", 年代: "约1670年", color: "#DAA520" },
+      { id: "xyzj", name: "西游记杂剧", type: "text", subtype: "元明杂剧", 年代: "约1390年", color: "#B8860B" },
+      { id: "fod", name: "佛典", type: "text", subtype: "宗教经典", 年代: "公元前5-公元3世纪", color: "#D2691E" },
+      { id: "daod", name: "道典", type: "text", subtype: "宗教经典", 年代: "公元前6-公元4世纪", color: "#BC8F8F" },
+      // 理论家节点（4 位）
+      { id: "kristeva", name: "克里斯蒂娃", type: "theorist", color: "#5a3828" },
+      { id: "barthes", name: "罗兰·巴特", type: "theorist", color: "#6b4226" },
+      { id: "genette", name: "热奈特", type: "theorist", color: "#8a7a5a" },
+      { id: "riffaterre", name: "里法特尔", type: "theorist", color: "#A0522D" }
+    ],
+    // 边（互文关系，16 条）
+    links: [
+      // 前置文本 → 西游记（7 条，标注互文类型）
+      { source: "dtshq", target: "xyj", type: "改造", 强度: 92 },
+      { source: "dtxyj", target: "xyj", type: "引用", 强度: 75 },
+      { source: "dcessfzz", target: "xyj", type: "改造", 强度: 80 },
+      { source: "ptssj", target: "xyj", type: "引用", 强度: 65 },
+      { source: "xyzj", target: "xyj", type: "改造", 强度: 88 },
+      { source: "fod", target: "xyj", type: "暗用", 强度: 85 },
+      { source: "daod", target: "xyj", type: "暗用", 强度: 82 },
+      // 前置文本之间（4 条，文本谱系）
+      { source: "dtxyj", target: "dcessfzz", type: "评论", 强度: 70 },
+      { source: "dtshq", target: "xyzj", type: "改造", 强度: 75 },
+      { source: "xyzj", target: "ptssj", type: "引用", 强度: 60 },
+      { source: "fod", target: "dtxyj", type: "暗用", 强度: 65 },
+      // 理论家 → 西游记（4 条，理论应用）
+      { source: "kristeva", target: "xyj", type: "理论", 强度: 90 },
+      { source: "barthes", target: "xyj", type: "理论", 强度: 85 },
+      { source: "genette", target: "xyj", type: "理论", 强度: 95 },
+      { source: "riffaterre", target: "xyj", type: "理论", 强度: 80 },
+      // 理论家之间（1 条，学派关联）
+      { source: "kristeva", target: "barthes", type: "理论", 强度: 75 }
+    ],
+    // 热奈特五类型 × 前置文本矩阵（强度 0-3）
+    matrix: [
+      // 五类型：引用、暗用、评论、改造、翻译
+      { 文本: "大唐三藏取经诗话", 引用: 3, 暗用: 2, 评论: 1, 改造: 3, 翻译: 2 },
+      { 文本: "大唐西域记", 引用: 3, 暗用: 1, 评论: 2, 改造: 1, 翻译: 2 },
+      { 文本: "大慈恩寺三藏法师传", 引用: 2, 暗用: 1, 评论: 2, 改造: 3, 翻译: 2 },
+      { 文本: "朴通事谚解", 引用: 3, 暗用: 0, 评论: 1, 改造: 0, 翻译: 1 },
+      { 文本: "西游记杂剧", 引用: 2, 暗用: 2, 评论: 0, 改造: 3, 翻译: 1 },
+      { 文本: "佛典", 引用: 1, 暗用: 3, 评论: 2, 改造: 2, 翻译: 1 },
+      { 文本: "道典", 引用: 1, 暗用: 3, 评论: 1, 改造: 2, 翻译: 1 }
+    ],
+    // 雷达图数据（每个前置文本的 5 维度互文强度，0-100）
+    radar: [
+      { 文本: "大唐三藏取经诗话", 结构借用: 85, 主题继承: 90, 人物转化: 95, 情节改写: 88, 语言引用: 70 },
+      { 文本: "大唐西域记", 结构借用: 60, 主题继承: 75, 人物转化: 50, 情节改写: 40, 语言引用: 65 },
+      { 文本: "大慈恩寺三藏法师传", 结构借用: 70, 主题继承: 80, 人物转化: 85, 情节改写: 65, 语言引用: 60 },
+      { 文本: "朴通事谚解", 结构借用: 30, 主题继承: 40, 人物转化: 30, 情节改写: 25, 语言引用: 95 },
+      { 文本: "西游记杂剧", 结构借用: 80, 主题继承: 85, 人物转化: 75, 情节改写: 82, 语言引用: 60 },
+      { 文本: "佛典", 结构借用: 50, 主题继承: 90, 人物转化: 70, 情节改写: 45, 语言引用: 75 },
+      { 文本: "道典", 结构借用: 55, 主题继承: 85, 人物转化: 65, 情节改写: 50, 语言引用: 70 }
+    ],
+    // 时间线数据（8 部文本含西游记）
+    timeline: [
+      { 文本: "道典", 年代: "公元前6-公元4世纪", 年份: -500, 互文类型: "主题继承", 类型: "宗教经典", 互文强度: 82, color: "#BC8F8F" },
+      { 文本: "佛典", 年代: "公元前5-公元3世纪", 年份: -400, 互文类型: "主题继承", 类型: "宗教经典", 互文强度: 85, color: "#D2691E" },
+      { 文本: "大唐西域记", 年代: "646年", 年份: 646, 互文类型: "地理借用", 类型: "地理志", 互文强度: 75, color: "#A0522D" },
+      { 文本: "大慈恩寺三藏法师传", 年代: "688年", 年份: 688, 互文类型: "人物转化", 类型: "传记", 互文强度: 80, color: "#CD853F" },
+      { 文本: "大唐三藏取经诗话", 年代: "约13世纪", 年份: 1250, 互文类型: "情节改写", 类型: "话本", 互文强度: 92, color: "#8B4513" },
+      { 文本: "西游记杂剧", 年代: "约1390年", 年份: 1390, 互文类型: "结构继承", 类型: "戏剧", 互文强度: 88, color: "#B8860B" },
+      { 文本: "西游记", 年代: "1592年", 年份: 1592, 互文类型: "成书", 类型: "小说", 互文强度: 100, color: "#8b4513" },
+      { 文本: "朴通事谚解", 年代: "约1670年", 年份: 1670, 互文类型: "海外传播", 类型: "教材", 互文强度: 65, color: "#DAA520" }
+    ],
+    // 理论家桑基图数据：理论家 → 理论维度 → 西游记应用
+    sankey: [
+      // 理论家 → 理论维度
+      { source: "克里斯蒂娃", target: "文本间性", value: 4 },
+      { source: "克里斯蒂娃", target: "对话性", value: 3 },
+      { source: "克里斯蒂娃", target: "符号化", value: 3 },
+      { source: "巴特", target: "作者之死", value: 4 },
+      { source: "巴特", target: "文本编织", value: 4 },
+      { source: "巴特", target: "读者诞生", value: 3 },
+      { source: "热奈特", target: "引用类型", value: 3 },
+      { source: "热奈特", target: "改造类型", value: 4 },
+      { source: "热奈特", target: "翻译类型", value: 2 },
+      { source: "里法特尔", target: "超文本性", value: 4 },
+      { source: "里法特尔", target: "读者反应", value: 3 },
+      // 理论维度 → 西游记应用
+      { source: "文本间性", target: "西游-前置文本网络", value: 3 },
+      { source: "对话性", target: "师徒复调对话", value: 3 },
+      { source: "符号化", target: "西游象征系统", value: 2 },
+      { source: "作者之死", target: "吴承恩作者问题", value: 3 },
+      { source: "文本编织", target: "西游引文网络", value: 4 },
+      { source: "读者诞生", target: "读者解读西游", value: 3 },
+      { source: "引用类型", target: "西游引用佛道经典", value: 3 },
+      { source: "改造类型", target: "西游改造取经诗话", value: 4 },
+      { source: "翻译类型", target: "西游语言转译", value: 2 },
+      { source: "超文本性", target: "西游作为超文本", value: 4 },
+      { source: "读者反应", target: "读者解码西游", value: 3 }
+    ]
+  }
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W172] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const intertextuality = await fetchJson(base + 'intertextuality-network.json', 'intertextuality');
+  const it = intertextuality.intertextuality || intertextuality;
+  return {
+    texts: it.texts || EMBEDDED_DATA.intertextuality.texts,
+    theorists: it.theorists || EMBEDDED_DATA.intertextuality.theorists,
+    network: it.nodes ? { nodes: it.nodes, links: it.links } : { nodes: EMBEDDED_DATA.intertextuality.nodes, links: EMBEDDED_DATA.intertextuality.links },
+    matrix: it.matrix || EMBEDDED_DATA.intertextuality.matrix,
+    radar: it.radar || EMBEDDED_DATA.intertextuality.radar,
+    timeline: it.timeline || EMBEDDED_DATA.intertextuality.timeline,
+    sankey: it.sankey || EMBEDDED_DATA.intertextuality.sankey
+  };
+}
+
+// 互文类型颜色查表
+const TYPE_COLORS = {
+  '引用': '#8B4513',
+  '暗用': '#A0522D',
+  '评论': '#CD853F',
+  '改造': '#D2691E',
+  '翻译': '#BC8F8F',
+  '理论': '#5a3828',
+  '地理借用': '#A0522D',
+  '主题继承': '#D2691E',
+  '人物转化': '#CD853F',
+  '情节改写': '#D2691E',
+  '结构继承': '#8B4513',
+  '成书': '#8b4513',
+  '海外传播': '#DAA520'
+};
+
+function typeColor(type) {
+  return TYPE_COLORS[type] || '#8a7a5a';
+}
+
+// ============================================================
+// Section 1: 概览卡片 + 力导向图
+// ============================================================
+function renderOverview(texts) {
+  const grid = d3.select('#texts-grid');
+  grid.html('');
+  if (!texts || texts.length === 0) {
+    grid.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+  // 排除西游记本身，只展示前置文本（7 部）
+  const precursors = texts.filter(t => t.id !== 'xyj');
+  const card = grid.selectAll('.text-card')
+    .data(precursors)
+    .enter()
+    .append('div')
+    .attr('class', 'text-card')
+    .attr('role', 'button')
+    .attr('tabindex', '0')
+    .attr('aria-label', d => d.name + ' · ' + d.类型)
+    .each(function(d) { d3.select(this).style('border-top', '4px solid ' + d.color); });
+
+  card.append('div').attr('class', 'text-name').text(d => d.name);
+  card.append('div').attr('class', 'swatch-bar').each(function(d) { d3.select(this).style('background', d.color); });
+  card.append('div').attr('class', 'text-tag').text(d => d.类型 + ' · ' + d.年代);
+  card.append('div').attr('class', 'text-stats').text(d => '互文强度 ' + d.互文强度 + ' · ' + d.简介);
+
+  // 键盘 a11y
+  card.on('keydown', function(e, d) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showTextTooltip(e, d);
+    }
+  });
+  card.on('click', function(e, d) { showTextTooltip(e, d); });
+}
+
+function showTextTooltip(event, d) {
+  let tip = d3.select('.tooltip');
+  if (tip.empty()) {
+    tip = d3.select('body').append('div').attr('class', 'tooltip');
+  }
+  tip.html('')
+    .style('opacity', 0.95)
+    .style('left', (event.pageX + 10) + 'px')
+    .style('top', (event.pageY - 28) + 'px');
+  tip.append('div').html('<strong>' + d.name + '</strong>');
+  tip.append('div').text('类型：' + d.类型);
+  tip.append('div').text('年代：' + d.年代);
+  tip.append('div').text('互文强度：' + d.互文强度);
+  tip.append('div').text('简介：' + d.简介);
+  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3000);
+}
+
+function renderForce(networkData) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 320).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 640;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  // 深拷贝节点避免 mutation
+  const nodes = networkData.nodes.map(d => ({ ...d }));
+  const links = networkData.links.map(d => ({ ...d }));
+
+  function nodeRadius(d) {
+    if (d.type === 'target') return 22;
+    if (d.type === 'theorist') return 12;
+    return 15; // 前置文本节点
+  }
+  function nodeFill(d) {
+    return d.color || '#8b4513';
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id)
+      .distance(d => d.type === '理论' ? 180 : 120)
+      .strength(d => d.type === '理论' ? 0.3 : 0.5))
+    .force('charge', d3.forceManyBody().strength(d => d.type === 'target' ? -800 : (d.type === 'theorist' ? -200 : -400)))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 8));
+
+  // 互文关系边（前置文本→西游记）
+  const relLink = svg.append('g').selectAll('.rel-link')
+    .data(links.filter(l => l.type !== '理论'))
+    .enter().append('line')
+    .attr('class', 'rel-link')
+    .attr('stroke', d => typeColor(d.type))
+    .attr('stroke-width', d => 1 + (d.强度 || 50) / 50)
+    .attr('stroke-opacity', 0.55);
+
+  // 理论家连接
+  const theoryLink = svg.append('g').selectAll('.t-link')
+    .data(links.filter(l => l.type === '理论'))
+    .enter().append('line')
+    .attr('class', 't-link')
+    .attr('stroke', '#8a7a5a')
+    .attr('stroke-width', 1.2)
+    .attr('stroke-opacity', 0.5)
+    .attr('stroke-dasharray', '4,3');
+
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', nodeFill)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      if (d.type === 'target') {
+        tooltip.append('div').html('<strong>《西游记》</strong>');
+        tooltip.append('div').text('类型：目标文本');
+        tooltip.append('div').text('年代：1592年（世德堂本）');
+      } else if (d.type === 'theorist') {
+        const th = EMBEDDED_DATA.intertextuality.theorists.find(t => t.id === d.id);
+        tooltip.append('div').html('<strong>' + d.name + '</strong>');
+        tooltip.append('div').text('类型：互文性理论家');
+        if (th) {
+          tooltip.append('div').text('理论：' + th.理论);
+          tooltip.append('div').text('代表作：' + th.代表作);
+        }
+      } else {
+        const tx = EMBEDDED_DATA.intertextuality.texts.find(t => t.id === d.id);
+        tooltip.append('div').html('<strong>《' + d.name + '》</strong>');
+        tooltip.append('div').text('类型：' + (d.subtype || '前置文本'));
+        tooltip.append('div').text('年代：' + (d.年代 || ''));
+        if (tx) {
+          tooltip.append('div').text('互文强度：' + tx.互文强度);
+          tooltip.append('div').text('简介：' + tx.简介);
+        }
+      }
+      const connected = links.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('关联边数：' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 拖拽
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => d.type === 'target' ? 4 : (d.type === 'theorist' ? -18 : -22))
+    .attr('font-weight', d => d.type === 'target' ? 700 : (d.type === 'theorist' ? 600 : 500))
+    .attr('font-size', d => d.type === 'target' ? 14 : (d.type === 'theorist' ? 11 : 11))
+    .attr('fill', d => d.type === 'target' ? '#1a1410' : '#5a3828')
+    .text(d => d.name);
+
+  sim.on('tick', () => {
+    relLink.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    theoryLink.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('cx', d => d.x).attr('cy', d => d.y);
+    label.attr('x', d => d.x).attr('y', d => d.y);
+  });
+
+  // 图例
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const legendItems = [
+    { label: '西游记（目标文本）', color: '#8b4513' },
+    { label: '前置文本节点', color: '#6b4226' },
+    { label: '理论家节点', color: '#8a7a5a' },
+    { label: '互文关系边', color: '#8B4513' },
+    { label: '理论应用边（虚线）', color: '#8a7a5a', dashed: true }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch')
+      .each(function() { d3.select(this).style('background', item.color).style('border', item.dashed ? '2px dashed #8a7a5a' : 'none'); });
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 2: 热奈特五类型 × 前置文本矩阵图（热力图）
+// ============================================================
+function renderMatrix(matrixData) {
+  const svg = d3.select('#chart-matrix');
+  svg.selectAll('*').remove();
+  if (!matrixData || matrixData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 250).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 500;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 60, right: 40, bottom: 60, left: 200 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const types = ['引用', '暗用', '评论', '改造', '翻译'];
+  const texts = matrixData.map(d => d.文本);
+
+  const xScale = d3.scaleBand().domain(types).range([0, innerW]).padding(0.1);
+  const yScale = d3.scaleBand().domain(texts).range([0, innerH]).padding(0.1);
+
+  // 颜色比例尺（0-3 强度）
+  const colorScale = d3.scaleSequential()
+    .domain([0, 3])
+    .interpolator(d3.interpolateRgb('#efe7d6', '#8b4513'));
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 单元格
+  const cells = g.selectAll('.matrix-cell')
+    .data(matrixData.flatMap(row =>
+      types.map(t => ({ 文本: row.文本, 类型: t, 值: row[t] }))
+    ))
+    .enter()
+    .append('rect')
+    .attr('class', 'matrix-cell')
+    .attr('x', d => xScale(d.类型))
+    .attr('y', d => yScale(d.文本))
+    .attr('width', xScale.bandwidth())
+    .attr('height', yScale.bandwidth())
+    .attr('fill', d => colorScale(d.值))
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.文本 + ' × ' + d.类型 + '</strong>');
+      tooltip.append('div').text('互文强度：' + d.值 + ' / 3');
+      const level = d.值 === 0 ? '无' : (d.值 === 1 ? '弱' : (d.值 === 2 ? '中' : '强'));
+      tooltip.append('div').text('强度等级：' + level);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 单元格内数值
+  g.selectAll('.matrix-value')
+    .data(matrixData.flatMap(row =>
+      types.map(t => ({ 文本: row.文本, 类型: t, 值: row[t] }))
+    ))
+    .enter()
+    .append('text')
+    .attr('class', 'matrix-value')
+    .attr('x', d => xScale(d.类型) + xScale.bandwidth() / 2)
+    .attr('y', d => yScale(d.文本) + yScale.bandwidth() / 2)
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
+    .attr('font-size', '14px')
+    .attr('font-weight', '600')
+    .attr('fill', d => d.值 > 1.5 ? '#fff' : '#1a1410')
+    .text(d => d.值);
+
+  // X 轴标签（顶部）
+  g.selectAll('.x-label')
+    .data(types)
+    .enter()
+    .append('text')
+    .attr('class', 'x-label')
+    .attr('x', d => xScale(d) + xScale.bandwidth() / 2)
+    .attr('y', -12)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '13px')
+    .attr('font-weight', '600')
+    .attr('fill', '#1a1410')
+    .text(d => d);
+
+  // Y 轴标签（左侧）
+  g.selectAll('.y-label')
+    .data(texts)
+    .enter()
+    .append('text')
+    .attr('class', 'y-label')
+    .attr('x', -12)
+    .attr('y', d => yScale(d) + yScale.bandwidth() / 2)
+    .attr('text-anchor', 'end')
+    .attr('dy', '0.35em')
+    .attr('font-size', '12px')
+    .attr('fill', '#1a1410')
+    .text(d => d);
+
+  // 轴标题
+  g.append('text')
+    .attr('x', innerW / 2)
+    .attr('y', -40)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '13px')
+    .attr('font-weight', '600')
+    .attr('fill', '#5a3828')
+    .text('热奈特五类型 →');
+
+  g.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -innerH / 2)
+    .attr('y', -160)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '13px')
+    .attr('font-weight', '600')
+    .attr('fill', '#5a3828')
+    .text('← 前置文本');
+
+  // 图例（颜色梯度）
+  const legend = d3.select('#matrix-legend');
+  legend.html('');
+  const legendData = [
+    { label: '无 (0)', color: colorScale(0) },
+    { label: '弱 (1)', color: colorScale(1) },
+    { label: '中 (2)', color: colorScale(2) },
+    { label: '强 (3)', color: colorScale(3) }
+  ];
+  legendData.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', item.color); });
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: 互文强度雷达图（7 前置文本 × 5 维度）
+// ============================================================
+function renderRadar(radarData) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!radarData || radarData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 290).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 580;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const dimensions = ['结构借用', '主题继承', '人物转化', '情节改写', '语言引用'];
+  const textColors = {};
+  EMBEDDED_DATA.intertextuality.texts.forEach(t => { textColors[t.name] = t.color; });
+
+  // 归一化：每维度映射到 0-100
+  const maxes = {};
+  dimensions.forEach(dim => {
+    maxes[dim] = d3.max(radarData, d => d[dim]) || 100;
+  });
+
+  const cx = width / 2;
+  const cy = height / 2 + 10;
+  const radius = Math.min(width, height) / 2 - 110;
+  const levels = 5;
+
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  // 背景同心多边形
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // 轴线 + 标签
+  dimensions.forEach((dim, i) => {
+    const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1);
+    const labelR = radius + 32;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', '#1a1410')
+      .text(dim);
+  });
+
+  // 数值刻度
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6).attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '10px')
+      .attr('fill', '#8a7a5a')
+      .text(lvl * 20);
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 每个前置文本一个多边形
+  radarData.forEach(role => {
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      const normalized = (role[dim] / 100) * 10;
+      const rr = radius * (normalized / 10);
+      return [Math.cos(angle) * rr, Math.sin(angle) * rr];
+    });
+    const color = textColors[role.文本] || '#8b4513';
+
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.1)
+      .attr('stroke', color)
+      .attr('stroke-width', 2)
+      .style('cursor', 'pointer')
+      .on('mouseover', function(e) {
+        d3.select(this).attr('fill-opacity', 0.3);
+        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.html('');
+        tooltip.append('div').html('<strong>《' + role.文本 + '》</strong>');
+        dimensions.forEach(dim => {
+          tooltip.append('div').text(dim + '：' + role[dim]);
+        });
+      })
+      .on('mousemove', function(e) {
+        tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('fill-opacity', 0.1);
+        tooltip.transition().duration(400).style('opacity', 0);
+      });
+
+    // 顶点圆
+    points.forEach((p) => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 3.5)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 1);
+    });
+  });
+
+  // 图例
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  radarData.forEach(role => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', textColors[role.文本] || '#8b4513'); });
+    item.append('span').text(role.文本);
+  });
+}
+
+// ============================================================
+// Section 4: 互文时间线
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 250).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 500;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 50, right: 60, bottom: 90, left: 70 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  // X 轴：年份（对数处理负数，用线性+偏移）
+  const sorted = timelineData.slice().sort((a, b) => a.年份 - b.年份);
+  const yearMin = d3.min(sorted, d => d.年份);
+  const yearMax = d3.max(sorted, d => d.年份);
+  const xScale = d3.scaleLinear()
+    .domain([yearMin - 100, yearMax + 100])
+    .range([0, innerW]);
+
+  // Y 轴：互文强度
+  const yScale = d3.scaleLinear()
+    .domain([0, 110])
+    .range([innerH, 0]);
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 背景网格
+  g.append('g')
+    .attr('class', 'grid')
+    .call(d3.axisLeft(yScale).tickSize(-innerW).tickFormat('').ticks(5))
+    .selectAll('line').attr('stroke', '#d4c5a9').attr('stroke-dasharray', '3,3').attr('opacity', 0.4);
+  g.select('.grid .domain').attr('stroke', 'none');
+
+  // 主时间线（水平）
+  g.append('line')
+    .attr('x1', 0).attr('y1', innerH)
+    .attr('x2', innerW).attr('y2', innerH)
+    .attr('stroke', '#8b4513')
+    .attr('stroke-width', 2);
+
+  // 文本节点
+  g.selectAll('.text-node')
+    .data(sorted)
+    .enter()
+    .append('circle')
+    .attr('class', 'text-node')
+    .attr('cx', d => xScale(d.年份))
+    .attr('cy', d => yScale(d.互文强度))
+    .attr('r', d => 6 + d.互文强度 / 12)
+    .attr('fill', d => d.color)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2.5)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>《' + d.文本 + '》</strong>');
+      tooltip.append('div').text('年代：' + d.年代);
+      tooltip.append('div').text('类型：' + d.类型);
+      tooltip.append('div').text('互文类型：' + d.互文类型);
+      tooltip.append('div').text('互文强度：' + d.互文强度);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2.5);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 文本标签（节点上方）
+  g.selectAll('.text-label')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'text-label')
+    .attr('x', d => xScale(d.年份))
+    .attr('y', d => yScale(d.互文强度) - 18)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .attr('fill', d => d.color)
+    .text(d => d.文本);
+
+  // 年代标签（X 轴下方）
+  g.selectAll('.year-label')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'year-label')
+    .attr('x', d => xScale(d.年份))
+    .attr('y', innerH + 24)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '10px')
+    .attr('fill', '#5a3828')
+    .text(d => d.年代);
+
+  // 互文类型标签（节点下方第二行）
+  g.selectAll('.type-label')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'type-label')
+    .attr('x', d => xScale(d.年份))
+    .attr('y', innerH + 40)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '9px')
+    .attr('fill', '#8a7a5a')
+    .text(d => d.互文类型);
+
+  // X 轴
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).ticks(6).tickFormat(d => {
+      if (d < 0) return '公元前' + Math.abs(d);
+      return d + '年';
+    }))
+    .selectAll('text').attr('font-size', '10px');
+
+  // Y 轴
+  g.append('g')
+    .call(d3.axisLeft(yScale).ticks(5).tickFormat(d => d))
+    .selectAll('text').attr('font-size', '10px');
+
+  // 轴标题
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 70)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a5a')
+    .text('成书年代（公元前 6 世纪 — 公元 17 世纪）');
+  g.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -innerH / 2).attr('y', -50)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a5a')
+    .text('互文强度（0-100）');
+
+  // 图例
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  const typeGroups = {};
+  timelineData.forEach(d => { typeGroups[d.类型] = d.color; });
+  Object.entries(typeGroups).forEach(([type, color]) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', color); });
+    item.append('span').text(type);
+  });
+}
+
+// ============================================================
+// Section 5: 理论家视角桑基图
+// ============================================================
+function buildSankeyGraph(linkData) {
+  // 三层：理论家(0) / 理论维度(1) / 西游记应用(2)
+  const theoristNames = EMBEDDED_DATA.intertextuality.theorists.map(t => t.name);
+  const applicationNames = new Set(linkData.filter(l => !theoristNames.includes(l.source)).map(l => l.target));
+  const dimensionNames = new Set();
+  linkData.forEach(l => {
+    if (theoristNames.includes(l.source)) dimensionNames.add(l.target);
+  });
+  const sources = new Set(linkData.map(l => l.source));
+  const nodeMap = new Map();
+  linkData.forEach(l => {
+    if (!nodeMap.has(l.source)) {
+      const cat = theoristNames.includes(l.source) ? 0 : 1;
+      nodeMap.set(l.source, { name: l.source, cat });
+    }
+    if (!nodeMap.has(l.target)) {
+      const cat = sources.has(l.target) ? 1 : 2;
+      nodeMap.set(l.target, { name: l.target, cat });
+    }
+  });
+  return {
+    nodes: Array.from(nodeMap.values()),
+    links: linkData.map(l => ({ source: l.source, target: l.target, value: l.value }))
+  };
+}
+
+function renderSankey(sankeyLinkData) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyLinkData || sankeyLinkData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 300).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 300).attr('fill', '#8b4513')
+      .text('d3-sankey 未加载，请检查 ../static/js/d3-sankey.min.js');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 600;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+
+  const theoristColors = {};
+  EMBEDDED_DATA.intertextuality.theorists.forEach(t => { theoristColors[t.name] = t.color; });
+  const catColors = ['#5a3828', '#6b4226', '#8b4513'];
+
+  const graphData = buildSankeyGraph(sankeyLinkData);
+  // 深拷贝避免 mutation
+  const nodes = graphData.nodes.map(d => ({ ...d }));
+  const links = graphData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(16)
+    .nodePadding(10)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 链接
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => {
+      // 用源节点的类别色
+      if (d.source.cat === 0) return theoristColors[d.source.name] || catColors[0];
+      return catColors[d.source.cat] || '#8a7a5a';
+    })
+    .attr('stroke-width', d => Math.max(1, d.width))
+    .attr('stroke-opacity', 0.4)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.75);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('理论应用权重：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.4);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => Math.max(1, d.x1 - d.x0))
+    .attr('height', d => Math.max(1, d.y1 - d.y0))
+    .attr('fill', d => {
+      if (d.cat === 0) return theoristColors[d.name] || catColors[0];
+      return catColors[d.cat] || '#8a7a5a';
+    })
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      const catLabel = ['理论家', '理论维度', '西游应用'][d.cat] || '';
+      tooltip.append('div').text('层级：' + catLabel);
+      tooltip.append('div').text('流入：' + (d.targetLinks || []).length + ' · 流出：' + (d.sourceLinks || []).length);
+      tooltip.append('div').text('总流量：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点标签
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '11px')
+    .attr('fill', '#1a1410')
+    .text(d => d.name);
+
+  // 图例
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const layers = ['互文性理论家', '理论维度', '西游应用'];
+  layers.forEach((layer, i) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', catColors[i]); });
+    item.append('span').text(layer);
+  });
+}
+
+// ============================================================
+// Section 6: 汇总表 + 理论家清单
+// ============================================================
+let summarySortState = { key: null, asc: true };
+
+function renderSummary(texts, theorists, radarData) {
+  const wrap = d3.select('#summary-table-wrap');
+  wrap.html('');
+  if (!texts || texts.length === 0) {
+    wrap.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+
+  // 排除西游记本身，合并 radar 数据
+  const precursors = texts.filter(t => t.id !== 'xyj').map(t => {
+    const radar = (radarData || []).find(r => r.文本 === t.name) || {};
+    const total = (radar.结构借用 || 0) + (radar.主题继承 || 0) + (radar.人物转化 || 0) + (radar.情节改写 || 0) + (radar.语言引用 || 0);
+    return {
+      ...t,
+      结构借用: radar.结构借用 || 0,
+      主题继承: radar.主题继承 || 0,
+      人物转化: radar.人物转化 || 0,
+      情节改写: radar.情节改写 || 0,
+      语言引用: radar.语言引用 || 0,
+      综合: Math.round(total / 5)
+    };
+  });
+
+  const columns = [
+    { key: 'name', label: '前置文本' },
+    { key: '类型', label: '文本类型' },
+    { key: '年代', label: '成书年代' },
+    { key: '结构借用', label: '结构借用' },
+    { key: '主题继承', label: '主题继承' },
+    { key: '人物转化', label: '人物转化' },
+    { key: '情节改写', label: '情节改写' },
+    { key: '语言引用', label: '语言引用' },
+    { key: '综合', label: '综合互文' }
+  ];
+
+  const table = wrap.append('table').attr('class', 'summary-table');
+  const thead = table.append('thead').append('tr');
+  columns.forEach(col => {
+    thead.append('th')
+      .text(col.label)
+      .attr('role', 'button')
+      .attr('tabindex', '0')
+      .on('click', function() { sortSummary(col.key); })
+      .on('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sortSummary(col.key); }
+      });
+  });
+  const tbody = table.append('tbody');
+
+  function drawRows(data) {
+    tbody.html('');
+    const rows = tbody.selectAll('tr')
+      .data(data)
+      .enter()
+      .append('tr')
+      .attr('role', 'row')
+      .attr('tabindex', '0');
+
+    rows.each(function(d) {
+      const tr = d3.select(this);
+      const td1 = tr.append('td');
+      td1.append('span').attr('class', 'type-dot').each(function() { d3.select(this).style('background', d.color); });
+      td1.append('span').text(d.name);
+      tr.append('td').text(d.类型);
+      tr.append('td').text(d.年代);
+      tr.append('td').text(d.结构借用);
+      tr.append('td').text(d.主题继承);
+      tr.append('td').text(d.人物转化);
+      tr.append('td').text(d.情节改写);
+      tr.append('td').text(d.语言引用);
+      const tdLast = tr.append('td');
+      tdLast.append('strong').text(d.综合);
+    });
+  }
+
+  window.sortSummary = function(key) {
+    if (summarySortState.key === key) {
+      summarySortState.asc = !summarySortState.asc;
+    } else {
+      summarySortState.key = key;
+      summarySortState.asc = true;
+    }
+    const sorted = precursors.slice().sort((a, b) => {
+      const va = a[key], vb = b[key];
+      if (typeof va === 'number' && typeof vb === 'number') {
+        return summarySortState.asc ? va - vb : vb - va;
+      }
+      return summarySortState.asc
+        ? String(va).localeCompare(String(vb), 'zh-CN')
+        : String(vb).localeCompare(String(va), 'zh-CN');
+    });
+    drawRows(sorted);
+  };
+
+  drawRows(precursors);
+
+  // 理论家清单
+  const theoristList = d3.select('#theorist-list');
+  theoristList.html('');
+  if (!theorists || theorists.length === 0) {
+    theoristList.append('div').attr('class', 'empty-state').text('暂无理论家数据');
+    return;
+  }
+  const items = theoristList.selectAll('.theorist-item')
+    .data(theorists)
+    .enter()
+    .append('div')
+    .attr('class', 'theorist-item')
+    .each(function(d) {
+      d3.select(this).style('border-left-color', d.color);
+      d3.select(this).append('div').attr('class', 't-name').text(d.name + ' · ' + d.英文名);
+      d3.select(this).append('div').attr('class', 't-sense').text(d.学派 + ' · ' + d.理论);
+      d3.select(this).append('div').attr('class', 't-work').text(d.代表作);
+      d3.select(this).append('div').attr('class', 't-sense').text('活跃：' + d.活跃年代 + ' · ' + d.国籍);
+    });
+}
+
+// ============================================================
+// main：调度所有渲染函数
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      '数据源：实时加载自 <code>scripts/output/data/</code>（http server 模式）';
+  }
+
+  renderOverview(data.texts);
+  renderForce(data.network);
+  renderMatrix(data.matrix);
+  renderRadar(data.radar);
+  renderTimeline(data.timeline);
+  renderSankey(data.sankey);
+  renderSummary(data.texts, data.theorists, data.radar);
+}
+
+// 响应式重绘（debounce 250ms）
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderOverview(data.texts);
+      renderForce(data.network);
+      renderMatrix(data.matrix);
+      renderRadar(data.radar);
+      renderTimeline(data.timeline);
+      renderSankey(data.sankey);
+      renderSummary(data.texts, data.theorists, data.radar);
+    }
+  }, 250);
+});
+
+// 启动
+main();
+</script>
+</body>
+</html>

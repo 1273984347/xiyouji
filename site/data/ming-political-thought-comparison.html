@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>明代政治思想对照图谱 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。请启用浏览器 JavaScript 以查看可视化内容。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
+            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7; background: var(--bg); color: var(--ink);
+        }
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 20px 80px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232,184,133,0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 { font-size: 2.2em; margin: 0 0 10px; position: relative; z-index: 1; }
+        .hero .subtitle { color: #e9b885; font-size: 1.1em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85em; color: rgba(245,233,212,0.65); font-style: italic; position: relative; z-index: 1; }
+        .container { max-width: 1280px; margin: -30px auto 60px; padding: 0 20px; position: relative; z-index: 2; }
+        .breadcrumb { font-size: 0.85em; color: var(--ink-soft); margin-bottom: 12px; }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .cross-page-nav {
+            font-size: 0.86em; color: var(--ink-soft); margin-bottom: 20px;
+            padding: 10px 14px; background: #fff8e7; border: 1px solid var(--line);
+            border-radius: 6px; line-height: 2;
+        }
+        .cross-page-nav a {
+            color: var(--accent-2); text-decoration: none;
+            padding: 3px 8px; border-radius: 3px; transition: background 0.2s;
+        }
+        .cross-page-nav a:hover { background: var(--accent-soft); }
+        .cross-page-nav a.active { color: #fff; background: var(--accent); font-weight: 600; }
+        .notice {
+            background: #fff8e7; border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        }
+        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 14px; margin-bottom: 28px; }
+        .kpi-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 18px; box-shadow: var(--shadow); border-top: 3px solid var(--accent); }
+        .kpi-card .num { font-size: 1.9em; font-weight: bold; color: var(--accent); line-height: 1.2; }
+        .kpi-card .label { color: var(--ink-soft); font-size: 0.88em; margin-top: 4px; }
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.76em; margin-top: 4px; }
+        .section { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: var(--accent-2);
+            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 4px 0; transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+        .chart-wrap { position: relative; overflow-x: auto; }
+        svg.chart-svg { display: block; min-width: 760px; }
+        .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
+        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
+        .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 2px; }
+        .legend-row .lg-swatch.line { width: 22px; height: 3px; border-radius: 1px; }
+        .legend-row .lg-swatch.dot { border-radius: 50%; }
+        .tooltip {
+            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
+            color: #f5e9d4; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem;
+            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 320px;
+        }
+        .tooltip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
+        .tooltip .tip-row { color: #d9cdb8; line-height: 1.5; }
+        .tooltip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6b5e4d; }
+        .insight-box {
+            background: #fffdf8; border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+        }
+        .insight-box strong { color: var(--accent); font-weight: 700; }
+        .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
+        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer a { color: #e9b885; }
+        footer .footer-index { display: grid; grid-template-columns: 1fr; gap: 8px; margin: 12px auto; max-width: 900px; }
+        @media (min-width: 720px) { footer .footer-index { grid-template-columns: repeat(2, 1fr); } }
+        footer .footer-index div { padding: 8px 12px; background: rgba(245,233,212,0.06); border-radius: 4px; text-align: left; }
+        footer .footer-index .mono { color: #e9b885; }
+        @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+        @media (max-width: 480px) {
+            .hero { padding: 40px 16px 60px; }
+            .hero h1 { font-size: 1.6em; }
+            .section { padding: 16px; }
+            .cross-page-nav { font-size: 0.78em; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">跳到主内容</a>
+    <header class="hero">
+        <h1>明代政治思想对照图谱</h1>
+        <div class="subtitle">W233-1 · V3 · 与 W232 文档双轨</div>
+        <div class="tagline">—— 王阳明 / 张居正 / 海瑞 × 唐僧 / 玉帝 / 悟空 · 三组九维 · 思想史与神魔叙事互文</div>
+    </header>
+    <main class="container" id="main-content">
+        <nav class="breadcrumb" aria-label="面包屑">
+            <a href="../index.html">站点首页</a>
+            <span class="sep">›</span>
+            <a href="../dashboard.html">数据仪表盘</a>
+            <span class="sep">›</span>
+            <span>明代政治思想对照图谱</span>
+        </nav>
+        <nav class="cross-page-nav" aria-label="跨页面导航">
+            <a href="ming-political-thought-comparison.html" class="active">明代政治思想对照</a> ·
+            <a href="pilgrim-team-psychology-arc.html">取经团队心理</a> ·
+            <a href="monster-capability-radar.html">妖怪能力雷达</a> ·
+            <a href="poetry-rhythm-analysis.html">诗词韵律分析</a> ·
+            <a href="../index.html">返回 dashboard</a>
+        </nav>
+        <div class="notice" role="note">
+            <strong>三组对照说明</strong>：
+            <span class="mono">王阳明 vs 唐僧</span>（心学·心性论/实践论/境界论）·
+            <span class="mono">张居正 vs 玉帝</span>（权术·治理术/权力结构/改革守成）·
+            <span class="mono">海瑞 vs 悟空</span>（谏诤·谏诤传统/反抗精神/个人体制）。与 W232 文档双轨互证。
+        </div>
+
+        <!-- KPI 6 卡 -->
+        <section class="kpi-row" aria-label="对照概要">
+            <div class="kpi-card"><div class="num">3</div><div class="label">对照组数</div><div class="detail">心学 / 权术 / 谏诤</div></div>
+            <div class="kpi-card"><div class="num">9</div><div class="label">对照维度</div><div class="detail">每组 3 维 × 3 组</div></div>
+            <div class="kpi-card"><div class="num">3</div><div class="label">明代人物</div><div class="detail">王阳明 / 张居正 / 海瑞</div></div>
+            <div class="kpi-card"><div class="num">3</div><div class="label">西游人物</div><div class="detail">唐僧 / 玉帝 / 悟空</div></div>
+            <div class="kpi-card"><div class="num">5</div><div class="label">时间节点</div><div class="detail">1472-1592 关键事件</div></div>
+            <div class="kpi-card"><div class="num">9</div><div class="label">理论文献</div><div class="detail">传习录 / 张文忠公全集 / 海瑞集</div></div>
+        </section>
+
+        <!-- Section 1：三对照雷达图 -->
+        <section class="section" aria-labelledby="sec-radar">
+            <h2 id="sec-radar">① 三对照雷达图 · 心性 / 治理 / 谏诤三维</h2>
+            <p>三个对照组分别在"心性论 / 治理术 / 谏诤传统"三维上评分（1-10）。每组两个多边形：实线填充为明代人物，虚线为西游人物。可见王阳明-唐僧心性论双高、张居正-玉帝治理术双高、海瑞-悟空谏诤传统双高。</p>
+            <div class="chart-wrap">
+                <svg id="radar-svg" class="chart-svg" width="100%" height="420" role="img" aria-labelledby="radar-title radar-desc">
+                    <title id="radar-title">三对照雷达图</title>
+                    <desc id="radar-desc">三个对照组在心性论、治理术、谏诤传统三维上的雷达对比。</desc>
+                </svg>
+                <div class="tooltip" id="radar-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="radar-legend" aria-label="雷达图图例"></div>
+        </section>
+
+        <!-- Section 2：九对照维度矩阵热力图 -->
+        <section class="section" aria-labelledby="sec-heatmap">
+            <h2 id="sec-heatmap">② 九对照维度矩阵热力图 · 理论 / 实践 / 境界</h2>
+            <p>3 组 × 3 维度（理论 / 实践 / 境界）共 9 格矩阵，颜色深浅代表对照强度（1-10）。颜色由浅至深分四档：浅米（1-3）/ 中橙（4-6）/ 深橙（7-8）/ 朱红（9-10）。</p>
+            <div class="chart-wrap">
+                <svg id="heatmap-svg" class="chart-svg" width="100%" height="380" role="img" aria-labelledby="hm-title hm-desc">
+                    <title id="hm-title">九维度矩阵热力图</title>
+                    <desc id="hm-desc">3 组 × 3 维度共 9 格矩阵热力图。</desc>
+                </svg>
+                <div class="tooltip" id="heat-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="heat-legend" aria-label="热力图图例"></div>
+        </section>
+
+        <!-- Section 3：明代思想史时间线 -->
+        <section class="section" aria-labelledby="sec-timeline">
+            <h2 id="sec-timeline">③ 明代思想史时间线 · 1472-1592</h2>
+            <p>横轴为年份，自王阳明出生（1472）至世德堂本《西游记》刊刻（1592）。每个节点为一个关键事件，按人物着色。可见 1529 王阳明逝世后张居正崛起、1582 张居正与吴承恩同年逝世、1592 西游记成书。</p>
+            <div class="chart-wrap">
+                <svg id="timeline-svg" class="chart-svg" width="100%" height="380" role="img" aria-labelledby="tl-title tl-desc">
+                    <title id="tl-title">明代思想史时间线</title>
+                    <desc id="tl-desc">1472-1592 明代思想史关键事件时间线。</desc>
+                </svg>
+                <div class="tooltip" id="timeline-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="timeline-legend" aria-label="时间线图例"></div>
+        </section>
+
+        <!-- Section 4：文献引用桑基图 -->
+        <section class="section" aria-labelledby="sec-sankey">
+            <h2 id="sec-sankey">④ 文献引用桑基图 · 文献 → 对照组 → 维度</h2>
+            <p>左侧三文献源（传习录 / 张文忠公全集 / 海瑞集），中转三对照组，右侧三对照维度。流量值反映文献对各组各维度的支撑强度。</p>
+            <div class="chart-wrap">
+                <svg id="sankey-svg" class="chart-svg" width="100%" height="420" role="img" aria-labelledby="sk-title sk-desc">
+                    <title id="sk-title">文献引用桑基图</title>
+                    <desc id="sk-desc">三文献源经三对照组流向三对照维度的桑基图。</desc>
+                </svg>
+                <div class="tooltip" id="sankey-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="sankey-legend" aria-label="桑基图图例"></div>
+        </section>
+
+        <!-- Section 5：三对照维度极坐标图 -->
+        <section class="section" aria-labelledby="sec-polar">
+            <h2 id="sec-polar">⑤ 三对照维度极坐标图</h2>
+            <p>每组在各自三个细分维度上的强度（1-10）：王阳明组用心性论/实践论/境界论，张居正组用治理术/权力结构/改革守成，海瑞组用谏诤传统/反抗精神/个人体制。极坐标花瓣越长表示强度越高。</p>
+            <div class="chart-wrap">
+                <svg id="polar-svg" class="chart-svg" width="100%" height="420" role="img" aria-labelledby="pol-title pol-desc">
+                    <title id="pol-title">三对照维度极坐标图</title>
+                    <desc id="pol-desc">三组各自维度在极坐标下的花瓣图。</desc>
+                </svg>
+                <div class="tooltip" id="polar-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="polar-legend" aria-label="极坐标图图例"></div>
+        </section>
+
+        <!-- Section 6：跨页面导航 + footer 双索引 -->
+        <section class="section" aria-labelledby="sec-cross">
+            <h2 id="sec-cross">⑥ 跨页面导航与文档索引</h2>
+            <p>本页面与 W232 明代历史原型对照专题文档形成"文档-可视化"双轨。下方索引提供四类追溯路径：正向时间线、反向文件索引、方向索引、跨文档链接。</p>
+            <nav class="cross-page-nav" aria-label="同批四页导航">
+                <a href="ming-political-thought-comparison.html" class="active">明代政治思想对照</a> ·
+                <a href="pilgrim-team-psychology-arc.html">取经团队心理</a> ·
+                <a href="monster-capability-radar.html">妖怪能力雷达</a> ·
+                <a href="poetry-rhythm-analysis.html">诗词韵律分析</a> ·
+                <a href="../index.html">返回 dashboard</a>
+            </nav>
+            <div class="insight-box">
+                <span class="ib-tag">[双轨]</span>
+                <strong>W232 文档负责理论论证，W233-1 可视化负责图形呈现</strong>。读者应结合 W232 文本与 W233 图表同步阅读——文本回答"为什么这样对照"，可视化回答"对照强度如何"。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[互文]</span>
+                <strong>王阳明心学与唐僧心性修行的同构</strong>。两者皆以"心"为本体、以"行"为功夫、以"成圣/成佛"为境界。雷达图中心性论维度双高（9/8）印证这一互文。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[张力]</span>
+                <strong>张居正权术与玉帝治理的呼应与张力</strong>。两者治理术皆达 9 分，但张居正改革守成（6 分）逊于玉帝权力结构（9 分）——玉帝是"已稳态的权术"，张居正是"行进中的权术"。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[反抗]</span>
+                <strong>海瑞谏诤与悟空反抗的精神同源</strong>。两者谏诤传统/反抗精神皆达 9 分。差异在"个人体制"维度：海瑞 8 分（体制内死谏），悟空 7 分（体制外反抗）——同源不同路。
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>详解西游记 · 明代政治思想对照图谱 · W233-1 · V3 可视化页面</p>
+        <p>与 W232 文档（docs/02-人物深度分析/明代历史原型对照专题.md）形成"文档-可视化"双轨。</p>
+        <div class="footer-index">
+            <div><strong>正向时间线</strong>：<span class="mono">CHANGELOG.md v2.2.39 W233</span></div>
+            <div><strong>反向文件索引</strong>：<span class="mono">scripts/output/file-index.md W233-1</span></div>
+            <div><strong>方向索引</strong>：<span class="mono">site/data/ · V 方向 · V3 四页并行</span></div>
+            <div><strong>跨文档链接</strong>：<span class="mono">W232 明代历史原型对照 / W194 narratology-13d / W229 V2 三页</span></div>
+        </div>
+        <p><a href="../dashboard.html">← 返回数据仪表盘</a> · <a href="hardship-difficulty-heatmap.html">W229-1 难度热力图 →</a> · <a href="journey-spacetime.html">W229-2 时空双轴 →</a> · <a href="character-dynamic-network.html">W229-3 人物网络 →</a></p>
+    </footer>
+
+    <script>
+    // ============= EMBEDDED_DATA：明代政治思想对照数据 =============
+    const EMBEDDED_DATA = {
+        meta: {title: "明代政治思想对照图谱", version: "v2.2.39", w_id: "W233-1", direction: "V3", source_doc: "docs/02-人物深度分析/明代历史原型对照专题.md"},
+        kpi: [
+            {label: "对照组数", value: 3, unit: "组"},
+            {label: "对照维度", value: 9, unit: "维"},
+            {label: "明代人物", value: 3, unit: "位"},
+            {label: "西游人物", value: 3, unit: "位"},
+            {label: "时间节点", value: 5, unit: "个"},
+            {label: "理论文献", value: 9, unit: "篇"}
+        ],
+        radar: [
+            {group: "王阳明 vs 唐僧", axis: "心性论", value_ming: 9, value_xy: 8},
+            {group: "王阳明 vs 唐僧", axis: "治理术", value_ming: 3, value_xy: 7},
+            {group: "王阳明 vs 唐僧", axis: "谏诤传统", value_ming: 5, value_xy: 4},
+            {group: "张居正 vs 玉帝", axis: "心性论", value_ming: 4, value_xy: 6},
+            {group: "张居正 vs 玉帝", axis: "治理术", value_ming: 9, value_xy: 9},
+            {group: "张居正 vs 玉帝", axis: "谏诤传统", value_ming: 3, value_xy: 2},
+            {group: "海瑞 vs 悟空", axis: "心性论", value_ming: 6, value_xy: 7},
+            {group: "海瑞 vs 悟空", axis: "治理术", value_ming: 4, value_xy: 3},
+            {group: "海瑞 vs 悟空", axis: "谏诤传统", value_ming: 9, value_xy: 9}
+        ],
+        heatmap: [
+            {group: "王阳明 vs 唐僧", dimension: "理论", score: 9},
+            {group: "王阳明 vs 唐僧", dimension: "实践", score: 8},
+            {group: "王阳明 vs 唐僧", dimension: "境界", score: 9},
+            {group: "张居正 vs 玉帝", dimension: "理论", score: 7},
+            {group: "张居正 vs 玉帝", dimension: "实践", score: 9},
+            {group: "张居正 vs 玉帝", dimension: "境界", score: 6},
+            {group: "海瑞 vs 悟空", dimension: "理论", score: 6},
+            {group: "海瑞 vs 悟空", dimension: "实践", score: 9},
+            {group: "海瑞 vs 悟空", dimension: "境界", score: 8}
+        ],
+        timeline: [
+            {year: 1472, event: "王阳明出生", figure: "王阳明"},
+            {year: 1500, event: "吴承恩出生", figure: "吴承恩"},
+            {year: 1514, event: "海瑞出生", figure: "海瑞"},
+            {year: 1525, event: "张居正出生", figure: "张居正"},
+            {year: 1529, event: "王阳明逝世", figure: "王阳明"},
+            {year: 1582, event: "张居正逝世 / 吴承恩逝世", figure: "张居正/吴承恩"},
+            {year: 1587, event: "海瑞逝世", figure: "海瑞"},
+            {year: 1592, event: "世德堂本《西游记》刊刻", figure: "世德堂"}
+        ],
+        sankey: {
+            nodes: [
+                {name: "传习录"}, {name: "张文忠公全集"}, {name: "海瑞集"},
+                {name: "王阳明 vs 唐僧"}, {name: "张居正 vs 玉帝"}, {name: "海瑞 vs 悟空"},
+                {name: "心性论"}, {name: "治理术"}, {name: "谏诤传统"}
+            ],
+            links: [
+                {source: 0, target: 3, value: 3},
+                {source: 1, target: 4, value: 3},
+                {source: 2, target: 5, value: 3},
+                {source: 3, target: 6, value: 1},
+                {source: 3, target: 7, value: 1},
+                {source: 3, target: 8, value: 1},
+                {source: 4, target: 6, value: 1},
+                {source: 4, target: 7, value: 1},
+                {source: 4, target: 8, value: 1},
+                {source: 5, target: 6, value: 1},
+                {source: 5, target: 7, value: 1},
+                {source: 5, target: 8, value: 1}
+            ]
+        },
+        polar: [
+            {group: "王阳明 vs 唐僧", axis: "心性论", value: 9},
+            {group: "王阳明 vs 唐僧", axis: "实践论", value: 8},
+            {group: "王阳明 vs 唐僧", axis: "境界论", value: 9},
+            {group: "张居正 vs 玉帝", axis: "治理术", value: 9},
+            {group: "张居正 vs 玉帝", axis: "权力结构", value: 9},
+            {group: "张居正 vs 玉帝", axis: "改革守成", value: 6},
+            {group: "海瑞 vs 悟空", axis: "谏诤传统", value: 9},
+            {group: "海瑞 vs 悟空", axis: "反抗精神", value: 9},
+            {group: "海瑞 vs 悟空", axis: "个人体制", value: 8}
+        ]
+    };
+
+    const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DUR = REDUCE_MOTION ? 0 : 600;
+    const GROUPS = ["王阳明 vs 唐僧", "张居正 vs 玉帝", "海瑞 vs 悟空"];
+    const GROUP_COLORS = ["#c8463a", "#7a5230", "#3a6b8c"];
+    const FIGURE_COLORS = {
+        "王阳明": "#c8463a", "吴承恩": "#5a7a3a", "海瑞": "#3a6b8c",
+        "张居正": "#7a5230", "世德堂": "#b8862a", "张居正/吴承恩": "#8c2a2a"
+    };
+
+    function getWrapWidth(id) {
+        const el = document.getElementById(id);
+        return Math.max(760, el ? el.clientWidth : 980);
+    }
+
+    // ============= ① 雷达图 =============
+    function renderRadar() {
+        const svg = d3.select("#radar-svg");
+        svg.selectAll("*").remove();
+        const width = getWrapWidth("radar-svg");
+        const height = 420;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const axes = ["心性论", "治理术", "谏诤传统"];
+        const cellW = width / 3;
+        const radius = Math.min(cellW, height) / 2 - 60;
+        const colorMing = "#c8463a";
+        const colorXy = "#3a6b8c";
+
+        GROUPS.forEach((group, gi) => {
+            const cx = cellW * gi + cellW / 2;
+            const cy = height / 2 + 10;
+            const g = svg.append("g").attr("transform", `translate(${cx},${cy})`);
+
+            // 网格多边形
+            [2, 4, 6, 8, 10].forEach(r => {
+                const pts = axes.map((_, ai) => {
+                    const ang = (ai * 2 * Math.PI / axes.length) - Math.PI / 2;
+                    return [Math.cos(ang) * radius * r / 10, Math.sin(ang) * radius * r / 10];
+                });
+                g.append("polygon")
+                    .attr("points", pts.map(p => p.join(",")).join(" "))
+                    .attr("fill", "none")
+                    .attr("stroke", "#e0d6c0")
+                    .attr("stroke-width", 0.5);
+            });
+
+            // 轴线 + 标签
+            axes.forEach((ax, ai) => {
+                const ang = (ai * 2 * Math.PI / axes.length) - Math.PI / 2;
+                g.append("line")
+                    .attr("x1", 0).attr("y1", 0)
+                    .attr("x2", Math.cos(ang) * radius)
+                    .attr("y2", Math.sin(ang) * radius)
+                    .attr("stroke", "#d9cdb8")
+                    .attr("stroke-width", 1);
+                g.append("text")
+                    .attr("x", Math.cos(ang) * (radius + 18))
+                    .attr("y", Math.sin(ang) * (radius + 18))
+                    .attr("text-anchor", "middle")
+                    .attr("dy", "0.35em")
+                    .style("font-size", "0.82rem")
+                    .style("fill", "#2c2418")
+                    .style("font-weight", "600")
+                    .text(ax);
+            });
+
+            const groupData = EMBEDDED_DATA.radar.filter(d => d.group === group);
+            const tip = d3.select("#radar-tip");
+            const wrapEl = document.getElementById("radar-svg").parentElement;
+
+            // 明代人物多边形
+            const mingPts = groupData.map((d, i) => {
+                const ang = (i * 2 * Math.PI / axes.length) - Math.PI / 2;
+                const r = radius * d.value_ming / 10;
+                return [Math.cos(ang) * r, Math.sin(ang) * r];
+            });
+            g.append("polygon")
+                .attr("points", mingPts.map(p => p.join(",")).join(" "))
+                .attr("fill", colorMing)
+                .attr("fill-opacity", 0.22)
+                .attr("stroke", colorMing)
+                .attr("stroke-width", 2);
+
+            // 西游人物多边形（虚线）
+            const xyPts = groupData.map((d, i) => {
+                const ang = (i * 2 * Math.PI / axes.length) - Math.PI / 2;
+                const r = radius * d.value_xy / 10;
+                return [Math.cos(ang) * r, Math.sin(ang) * r];
+            });
+            g.append("polygon")
+                .attr("points", xyPts.map(p => p.join(",")).join(" "))
+                .attr("fill", "none")
+                .attr("stroke", colorXy)
+                .attr("stroke-width", 2)
+                .attr("stroke-dasharray", "5,3");
+
+            // 顶点 + tooltip
+            groupData.forEach((d, i) => {
+                const ang = (i * 2 * Math.PI / axes.length) - Math.PI / 2;
+                const rM = radius * d.value_ming / 10;
+                const rX = radius * d.value_xy / 10;
+                [[rM, colorMing, "明代"], [rX, colorXy, "西游"]].forEach(([r, col, kind]) => {
+                    g.append("circle")
+                        .attr("cx", Math.cos(ang) * r)
+                        .attr("cy", Math.sin(ang) * r)
+                        .attr("r", 4)
+                        .attr("fill", col)
+                        .attr("stroke", "#fff")
+                        .attr("stroke-width", 1.5)
+                        .style("cursor", "pointer")
+                        .on("mouseover", function(event) {
+                            d3.select(this).attr("r", 6);
+                            const val = kind === "明代" ? d.value_ming : d.value_xy;
+                            tip.style("opacity", 1)
+                                .html(`<div class="tip-title">${group} · ${d.axis}</div>
+                                    <div class="tip-row">${kind}人物评分：<strong style="color:#e9b885">${val} / 10</strong></div>
+                                    <div class="tip-meta">雷达图 · 第 ${gi + 1} 组 · 维度 ${i + 1}/${axes.length}</div>`);
+                        })
+                        .on("mousemove", function(event) {
+                            const rect = wrapEl.getBoundingClientRect();
+                            tip.style("left", (event.clientX - rect.left + 14) + "px")
+                                .style("top", (event.clientY - rect.top + 14) + "px");
+                        })
+                        .on("mouseout", function() {
+                            d3.select(this).attr("r", 4);
+                            tip.style("opacity", 0);
+                        });
+                });
+            });
+
+            // 组标题
+            g.append("text")
+                .attr("x", 0).attr("y", -height / 2 + 24)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.95rem")
+                .style("font-weight", "700")
+                .style("fill", GROUP_COLORS[gi])
+                .text(group);
+        });
+
+        // 图例
+        const legend = d3.select("#radar-legend");
+        legend.selectAll("*").remove();
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#c8463a;opacity:0.6;"></span><span>明代人物（实线填充）</span>');
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch line" style="background:#3a6b8c;"></span><span>西游人物（虚线）</span>');
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#e0d6c0;border:1px solid #d9cdb8;"></span><span>评分网格（2/4/6/8/10）</span>');
+    }
+
+    // ============= ② 矩阵热力图 =============
+    function renderHeatmap() {
+        const svg = d3.select("#heatmap-svg");
+        svg.selectAll("*").remove();
+        const width = getWrapWidth("heatmap-svg");
+        const height = 380;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 50, right: 40, bottom: 60, left: 150 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const dims = ["理论", "实践", "境界"];
+        const x = d3.scaleBand().domain(dims).range([0, innerW]).padding(0.12);
+        const y = d3.scaleBand().domain(GROUPS).range([0, innerH]).padding(0.12);
+
+        const colorScale = d => {
+            if (d <= 3) return "#f5e1c0";
+            if (d <= 6) return "#e9b885";
+            if (d <= 8) return "#d98060";
+            return "#c8463a";
+        };
+
+        // 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text").style("font-size", "0.9rem").style("fill", "#2c2418").style("font-weight", "600");
+        g.append("g")
+            .call(d3.axisLeft(y))
+            .selectAll("text").style("font-size", "0.88rem").style("fill", "#2c2418").style("font-weight", "600");
+
+        // 轴标题
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .text("对照维度");
+        g.append("text")
+            .attr("x", -innerH / 2).attr("y", -110)
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .text("对照组");
+
+        const tip = d3.select("#heat-tip");
+        const wrapEl = document.getElementById("heatmap-svg").parentElement;
+
+        EMBEDDED_DATA.heatmap.forEach(d => {
+            const delay = (GROUPS.indexOf(d.group) * 3 + dims.indexOf(d.dimension)) * 80;
+            g.append("rect")
+                .attr("x", x(d.dimension))
+                .attr("y", y(d.group))
+                .attr("width", x.bandwidth())
+                .attr("height", y.bandwidth())
+                .attr("fill", colorScale(d.score))
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 2)
+                .style("opacity", 0)
+                .on("mouseover", function(event) {
+                    d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2.5);
+                    tip.style("opacity", 1)
+                        .html(`<div class="tip-title">${d.group} · ${d.dimension}</div>
+                            <div class="tip-row">对照强度：<strong style="color:#e9b885">${d.score} / 10</strong></div>
+                            <div class="tip-row">档位：<strong style="color:#e9b885">${d.score <= 3 ? "浅" : d.score <= 6 ? "中" : d.score <= 8 ? "深" : "极深"}</strong></div>
+                            <div class="tip-meta">3 组 × 3 维度矩阵 · 第 ${GROUPS.indexOf(d.group) + 1} 组第 ${dims.indexOf(d.dimension) + 1} 维</div>`);
+                })
+                .on("mousemove", function(event) {
+                    const rect = wrapEl.getBoundingClientRect();
+                    tip.style("left", (event.clientX - rect.left + 14) + "px")
+                        .style("top", (event.clientY - rect.top + 14) + "px");
+                })
+                .on("mouseout", function() {
+                    d3.select(this).attr("stroke", "#fff").attr("stroke-width", 2);
+                    tip.style("opacity", 0);
+                })
+                .transition().duration(DUR).delay(delay)
+                .style("opacity", 1);
+
+            g.append("text")
+                .attr("x", x(d.dimension) + x.bandwidth() / 2)
+                .attr("y", y(d.group) + y.bandwidth() / 2)
+                .attr("text-anchor", "middle")
+                .attr("dy", "0.35em")
+                .style("font-size", "1.5rem")
+                .style("font-weight", "700")
+                .style("fill", d.score <= 6 ? "#7a5230" : "#fff")
+                .style("opacity", 0)
+                .text(d.score)
+                .transition().duration(DUR).delay(delay + 200)
+                .style("opacity", 1);
+        });
+
+        // 图例
+        const legend = d3.select("#heat-legend");
+        legend.selectAll("*").remove();
+        [
+            { color: "#f5e1c0", label: "浅（1-3）" },
+            { color: "#e9b885", label: "中（4-6）" },
+            { color: "#d98060", label: "深（7-8）" },
+            { color: "#c8463a", label: "极深（9-10）" }
+        ].forEach(item => {
+            const li = legend.append("div").attr("class", "lg-item");
+            li.append("span").attr("class", "lg-swatch").style("background", item.color);
+            li.append("span").text(item.label);
+        });
+    }
+
+    // ============= ③ 时间线 =============
+    function renderTimeline() {
+        const svg = d3.select("#timeline-svg");
+        svg.selectAll("*").remove();
+        const width = getWrapWidth("timeline-svg");
+        const height = 380;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 40, right: 40, bottom: 60, left: 50 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear().domain([1468, 1596]).range([0, innerW]);
+
+        g.append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", innerH / 2).attr("y2", innerH / 2)
+            .attr("stroke", "#d9cdb8")
+            .attr("stroke-width", 2);
+
+        [1472, 1500, 1514, 1525, 1529, 1582, 1587, 1592].forEach(yr => {
+            g.append("line")
+                .attr("x1", x(yr)).attr("x2", x(yr))
+                .attr("y1", innerH / 2 - 6).attr("y2", innerH / 2 + 6)
+                .attr("stroke", "#7a5230").attr("stroke-width", 1);
+            g.append("text")
+                .attr("x", x(yr)).attr("y", innerH / 2 + 22)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.74rem")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "#6b5e4d")
+                .text(yr);
+        });
+
+        const tip = d3.select("#timeline-tip");
+        const wrapEl = document.getElementById("timeline-svg").parentElement;
+
+        EMBEDDED_DATA.timeline.forEach((d, i) => {
+            const col = FIGURE_COLORS[d.figure] || "#6b5e4d";
+            const offset = (i % 2 === 0 ? -1 : 1) * (50 + (i % 3) * 18);
+            const yPos = innerH / 2 + offset;
+
+            g.append("line")
+                .attr("x1", x(d.year)).attr("x2", x(d.year))
+                .attr("y1", innerH / 2).attr("y2", yPos)
+                .attr("stroke", col)
+                .attr("stroke-width", 1)
+                .attr("stroke-opacity", 0.6);
+
+            g.append("circle")
+                .attr("cx", x(d.year))
+                .attr("cy", innerH / 2)
+                .attr("r", 0)
+                .attr("fill", col)
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 2)
+                .style("cursor", "pointer")
+                .on("mouseover", function(event) {
+                    d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2.5);
+                    tip.style("opacity", 1)
+                        .html(`<div class="tip-title">${d.year} · ${d.event}</div>
+                            <div class="tip-row">人物：<strong style="color:#e9b885">${d.figure}</strong></div>
+                            <div class="tip-meta">明代思想史时间线 · 索引 ${i + 1}/${EMBEDDED_DATA.timeline.length}</div>`);
+                })
+                .on("mousemove", function(event) {
+                    const rect = wrapEl.getBoundingClientRect();
+                    tip.style("left", (event.clientX - rect.left + 14) + "px")
+                        .style("top", (event.clientY - rect.top + 14) + "px");
+                })
+                .on("mouseout", function() {
+                    d3.select(this).attr("stroke", "#fff").attr("stroke-width", 2);
+                    tip.style("opacity", 0);
+                })
+                .transition().duration(DUR).delay(i * 80)
+                .attr("r", 6);
+
+            g.append("text")
+                .attr("x", x(d.year))
+                .attr("y", yPos + (offset > 0 ? 14 : -8))
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.78rem")
+                .style("fill", col)
+                .style("font-weight", "600")
+                .style("opacity", 0)
+                .text(d.event)
+                .transition().duration(DUR).delay(i * 80 + 200)
+                .style("opacity", 1);
+        });
+
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 50)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem")
+            .style("fill", "#7a5230")
+            .text("年份（明成化八年至万历二十年）");
+
+        const legend = d3.select("#timeline-legend");
+        legend.selectAll("*").remove();
+        Object.keys(FIGURE_COLORS).forEach(f => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch dot").style("background", FIGURE_COLORS[f]);
+            item.append("span").text(f);
+        });
+    }
+
+    // ============= ④ 桑基图（手写布局） =============
+    function renderSankey() {
+        const svg = d3.select("#sankey-svg");
+        svg.selectAll("*").remove();
+        const width = getWrapWidth("sankey-svg");
+        const height = 420;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 40, right: 110, bottom: 40, left: 110 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const nodes = EMBEDDED_DATA.sankey.nodes;
+        const links = EMBEDDED_DATA.sankey.links;
+        const colX = [0, innerW / 2, innerW];
+
+        const nodeData = nodes.map((n, i) => ({
+            name: n.name, index: i,
+            col: i < 3 ? 0 : (i < 6 ? 1 : 2),
+            inFlow: 0, outFlow: 0
+        }));
+        links.forEach(l => {
+            nodeData[l.source].outFlow += l.value;
+            nodeData[l.target].inFlow += l.value;
+        });
+
+        const maxFlow = d3.max(nodeData, d => Math.max(d.inFlow, d.outFlow));
+        const gap = 16;
+        const totalGap = gap * 2;
+        const scale = (innerH - totalGap) / (maxFlow * 3);
+
+        [0, 1, 2].forEach(col => {
+            const colNodes = nodeData.filter(n => n.col === col);
+            let yCursor = 8;
+            colNodes.forEach(n => {
+                n.height = Math.max(n.inFlow, n.outFlow) * scale;
+                n.y = yCursor;
+                yCursor += n.height + gap;
+            });
+        });
+
+        const nodeColor = (i) => {
+            if (i < 3) return ["#c8463a", "#7a5230", "#3a6b8c"][i];
+            if (i < 6) return ["#e9b885", "#d98060", "#b8862a"][i - 3];
+            return ["#5a7a3a", "#3a6b8c", "#8c2a2a"][i - 6];
+        };
+
+        const tip = d3.select("#sankey-tip");
+        const wrapEl = document.getElementById("sankey-svg").parentElement;
+
+        // 流（先画，节点覆盖在上）
+        links.forEach((l, i) => {
+            const src = nodeData[l.source];
+            const tgt = nodeData[l.target];
+            const srcY = src.y + src.height / 2;
+            const tgtY = tgt.y + tgt.height / 2;
+            const x1 = colX[src.col] + 8;
+            const x2 = colX[tgt.col] - 8;
+            const mx = (x1 + x2) / 2;
+            const path = `M${x1},${srcY} C${mx},${srcY} ${mx},${tgtY} ${x2},${tgtY}`;
+            const flowW = Math.max(3, l.value * scale * 0.8);
+
+            g.append("path")
+                .attr("d", path)
+                .attr("fill", "none")
+                .attr("stroke", nodeColor(l.source))
+                .attr("stroke-width", flowW)
+                .attr("stroke-opacity", 0.32)
+                .style("cursor", "pointer")
+                .on("mouseover", function(event) {
+                    d3.select(this).attr("stroke-opacity", 0.65);
+                    tip.style("opacity", 1)
+                        .html(`<div class="tip-title">${src.name} → ${tgt.name}</div>
+                            <div class="tip-row">流量值：<strong style="color:#e9b885">${l.value}</strong></div>
+                            <div class="tip-meta">桑基流 ${i + 1}/${links.length}</div>`);
+                })
+                .on("mousemove", function(event) {
+                    const rect = wrapEl.getBoundingClientRect();
+                    tip.style("left", (event.clientX - rect.left + 14) + "px")
+                        .style("top", (event.clientY - rect.top + 14) + "px");
+                })
+                .on("mouseout", function() {
+                    d3.select(this).attr("stroke-opacity", 0.32);
+                    tip.style("opacity", 0);
+                });
+        });
+
+        // 节点
+        nodeData.forEach((n, i) => {
+            g.append("rect")
+                .attr("x", colX[n.col] - 8)
+                .attr("y", n.y)
+                .attr("width", 16)
+                .attr("height", n.height)
+                .attr("fill", nodeColor(i))
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 1);
+
+            const labelX = n.col === 0 ? -14 : (n.col === 2 ? 14 : 0);
+            const anchor = n.col === 0 ? "end" : (n.col === 2 ? "start" : "middle");
+            const labelY = n.col === 1 ? n.y - 8 : n.y + n.height / 2;
+            g.append("text")
+                .attr("x", colX[n.col] + labelX)
+                .attr("y", labelY)
+                .attr("text-anchor", anchor)
+                .attr("dy", n.col === 1 ? 0 : "0.35em")
+                .style("font-size", "0.82rem")
+                .style("fill", "#2c2418")
+                .style("font-weight", "600")
+                .text(n.name);
+        });
+
+        // 列标题
+        ["文献源", "对照组", "对照维度"].forEach((t, ci) => {
+            g.append("text")
+                .attr("x", colX[ci])
+                .attr("y", -18)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.85rem")
+                .style("fill", "#7a5230")
+                .style("font-weight", "700")
+                .text(t);
+        });
+
+        // 图例
+        const legend = d3.select("#sankey-legend");
+        legend.selectAll("*").remove();
+        [
+            { label: "文献源（传习录 / 张文忠公全集 / 海瑞集）", color: "#c8463a" },
+            { label: "对照组（王阳明vs唐僧 / 张居正vs玉帝 / 海瑞vs悟空）", color: "#e9b885" },
+            { label: "对照维度（心性论 / 治理术 / 谏诤传统）", color: "#5a7a3a" }
+        ].forEach(item => {
+            const li = legend.append("div").attr("class", "lg-item");
+            li.append("span").attr("class", "lg-swatch").style("background", item.color);
+            li.append("span").text(item.label);
+        });
+    }
+
+    // ============= ⑤ 极坐标图 =============
+    function renderPolar() {
+        const svg = d3.select("#polar-svg");
+        svg.selectAll("*").remove();
+        const width = getWrapWidth("polar-svg");
+        const height = 420;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const cellW = width / 3;
+        const radius = Math.min(cellW, height) / 2 - 60;
+        const tip = d3.select("#polar-tip");
+        const wrapEl = document.getElementById("polar-svg").parentElement;
+
+        GROUPS.forEach((group, gi) => {
+            const cx = cellW * gi + cellW / 2;
+            const cy = height / 2 + 10;
+            const g = svg.append("g").attr("transform", `translate(${cx},${cy})`);
+
+            const data = EMBEDDED_DATA.polar.filter(d => d.group === group);
+            const axes = data.map(d => d.axis);
+            const n = axes.length;
+
+            // 同心圆网格
+            [2, 4, 6, 8, 10].forEach(r => {
+                g.append("circle")
+                    .attr("r", radius * r / 10)
+                    .attr("fill", "none")
+                    .attr("stroke", "#e0d6c0")
+                    .attr("stroke-width", 0.5);
+            });
+
+            // 轴线 + 标签
+            axes.forEach((ax, ai) => {
+                const ang = (ai * 2 * Math.PI / n) - Math.PI / 2;
+                g.append("line")
+                    .attr("x1", 0).attr("y1", 0)
+                    .attr("x2", Math.cos(ang) * radius)
+                    .attr("y2", Math.sin(ang) * radius)
+                    .attr("stroke", "#d9cdb8")
+                    .attr("stroke-width", 1);
+                g.append("text")
+                    .attr("x", Math.cos(ang) * (radius + 22))
+                    .attr("y", Math.sin(ang) * (radius + 22))
+                    .attr("text-anchor", "middle")
+                    .attr("dy", "0.35em")
+                    .style("font-size", "0.78rem")
+                    .style("fill", "#2c2418")
+                    .style("font-weight", "600")
+                    .text(ax);
+            });
+
+            // 花瓣（楔形）
+            data.forEach((d, i) => {
+                const ang = (i * 2 * Math.PI / n) - Math.PI / 2;
+                const r = radius * d.value / 10;
+                const halfAng = Math.PI / n * 0.55;
+                const x1 = Math.cos(ang - halfAng) * 0;
+                const y1 = Math.sin(ang - halfAng) * 0;
+                const x2 = Math.cos(ang - halfAng) * r;
+                const y2 = Math.sin(ang - halfAng) * r;
+                const x3 = Math.cos(ang + halfAng) * r;
+                const y3 = Math.sin(ang + halfAng) * r;
+                const x4 = Math.cos(ang + halfAng) * 0;
+                const y4 = Math.sin(ang + halfAng) * 0;
+                g.append("path")
+                    .attr("d", `M${x1},${y1} L${x2},${y2} A${r},${r} 0 0,1 ${x3},${y3} L${x4},${y4} Z`)
+                    .attr("fill", GROUP_COLORS[gi])
+                    .attr("fill-opacity", 0)
+                    .attr("stroke", "#fff")
+                    .attr("stroke-width", 1.5)
+                    .style("cursor", "pointer")
+                    .on("mouseover", function(event) {
+                        d3.select(this).attr("fill-opacity", 0.75);
+                        tip.style("opacity", 1)
+                            .html(`<div class="tip-title">${group} · ${d.axis}</div>
+                                <div class="tip-row">强度：<strong style="color:#e9b885">${d.value} / 10</strong></div>
+                                <div class="tip-meta">极坐标花瓣 · 第 ${gi + 1} 组第 ${i + 1} 维</div>`);
+                    })
+                    .on("mousemove", function(event) {
+                        const rect = wrapEl.getBoundingClientRect();
+                        tip.style("left", (event.clientX - rect.left + 14) + "px")
+                            .style("top", (event.clientY - rect.top + 14) + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this).attr("fill-opacity", 0.45);
+                        tip.style("opacity", 0);
+                    })
+                    .transition().duration(DUR).delay(i * 100)
+                    .attr("fill-opacity", 0.45);
+            });
+
+            // 顶点
+            data.forEach((d, i) => {
+                const ang = (i * 2 * Math.PI / n) - Math.PI / 2;
+                const r = radius * d.value / 10;
+                g.append("circle")
+                    .attr("cx", Math.cos(ang) * r)
+                    .attr("cy", Math.sin(ang) * r)
+                    .attr("r", 4)
+                    .attr("fill", GROUP_COLORS[gi])
+                    .attr("stroke", "#fff")
+                    .attr("stroke-width", 1.5);
+            });
+
+            // 组标题
+            g.append("text")
+                .attr("x", 0).attr("y", -height / 2 + 24)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.95rem")
+                .style("font-weight", "700")
+                .style("fill", GROUP_COLORS[gi])
+                .text(group);
+        });
+
+        // 图例
+        const legend = d3.select("#polar-legend");
+        legend.selectAll("*").remove();
+        GROUPS.forEach((g, i) => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch dot").style("background", GROUP_COLORS[i]);
+            item.append("span").text(g);
+        });
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#e0d6c0;border:1px solid #d9cdb8;border-radius:50%;"></span><span>评分网格（2/4/6/8/10）</span>');
+    }
+
+    // ============= 初始化 =============
+    function renderAll() {
+        renderRadar();
+        renderHeatmap();
+        renderTimeline();
+        renderSankey();
+        renderPolar();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAll);
+    } else {
+        renderAll();
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(renderAll, 200);
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "xiyouji-hyperframes",
+  "version": "2.2.27",
+  "private": true,
+  "scripts": {
+    "lint": "npx hyperframes lint",
+    "preview": "npx hyperframes preview",
+    "render:methodology": "npx hyperframes render compositions/methodology-sharing.html --output output/methodology-sharing.mp4",
+    "render:short": "npx hyperframes render compositions/d3-visualizations/narratology-13d-network.html --output output/narratology-13d-network.mp4",
+    "render:long": "npx hyperframes render compositions/dashboard-showcase.html --output output/dashboard-showcase.mp4",
+    "render:all": "npm run render:methodology && npm run render:short && npm run render:long"
+  },
+  "devDependencies": {
+    "playwright": "^1.40.0"
+  }
+}

@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人物关系动态网络 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
+            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7; background: var(--bg); color: var(--ink);
+        }
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 20px 80px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232,184,133,0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 { font-size: 2.2em; margin: 0 0 10px; position: relative; z-index: 1; }
+        .hero .subtitle { color: #e9b885; font-size: 1.1em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85em; color: rgba(245,233,212,0.65); font-style: italic; position: relative; z-index: 1; }
+        .container { max-width: 1280px; margin: -30px auto 60px; padding: 0 20px; position: relative; z-index: 2; }
+        .breadcrumb { font-size: 0.85em; color: var(--ink-soft); margin-bottom: 16px; }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .notice {
+            background: #fff8e7; border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        }
+        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px; margin-bottom: 32px; }
+        .kpi-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 20px; box-shadow: var(--shadow); border-top: 3px solid var(--accent); }
+        .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
+        .kpi-card .label { color: var(--ink-soft); font-size: 0.9em; margin-top: 4px; }
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
+        .section { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 28px; margin-bottom: 28px; box-shadow: var(--shadow); }
+        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: var(--accent-2);
+            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 4px 0; transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        a:focus-visible, button:focus-visible, [tabindex]:focus-visible, input:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+        .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; padding: 12px 16px; background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; }
+        .control-row .ctrl-label { font-size: 0.88em; color: var(--ink-soft); font-weight: 600; }
+        .stage-btn {
+            padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.9em;
+            font-family: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .stage-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .stage-btn:hover { background: var(--accent-soft); }
+        .stage-btn.active:hover { background: var(--accent); }
+        .slider-wrap { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 240px; }
+        .slider-wrap input[type=range] {
+            flex: 1; height: 6px; -webkit-appearance: none; appearance: none;
+            background: var(--line); border-radius: 3px; outline: none;
+        }
+        .slider-wrap input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
+            cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .slider-wrap input[type=range]::-moz-range-thumb {
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
+            cursor: pointer; border: 2px solid #fff;
+        }
+        .stage-display { font-family: "JetBrains Mono", monospace; font-size: 0.9em; color: var(--accent); font-weight: 700; min-width: 110px; }
+        .chart-wrap { position: relative; }
+        #network-svg { display: block; width: 100%; min-height: 580px; background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; }
+        .node-circle { cursor: pointer; transition: stroke 0.2s; }
+        .node-circle:hover { stroke: #2c2418; stroke-width: 2.5px; }
+        .node-label { font-size: 12px; fill: var(--ink); pointer-events: none; font-weight: 600; }
+        .node-label.dim { fill: #b8a584; font-weight: 400; }
+        .network-tip {
+            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
+            color: #f5e9d4; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem;
+            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 320px;
+        }
+        .network-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
+        .network-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
+        .network-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6b5e4d; }
+        .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
+        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
+        .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 50%; }
+        .legend-row .lg-swatch.line { width: 22px; height: 3px; border-radius: 1px; }
+        .rel-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.88em; }
+        .rel-table th, .rel-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
+        .rel-table th { background: #fff8e7; color: var(--accent-3); font-weight: 600; }
+        .rel-table td.num { text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--accent); }
+        .insight-box {
+            background: #fffdf8; border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+        }
+        .insight-box strong { color: var(--accent); font-weight: 700; }
+        .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
+        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer a { color: #e9b885; }
+        @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+        @media (max-width: 480px) {
+            .hero { padding: 40px 16px 60px; }
+            .hero h1 { font-size: 1.6em; }
+            .section { padding: 18px; }
+            .stage-btn { padding: 6px 12px; font-size: 0.82em; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">跳到主内容</a>
+    <header class="hero">
+        <h1>人物关系动态网络</h1>
+        <div class="subtitle">CDN · 按回目四阶段演变的人物关系力导向图</div>
+        <div class="tagline">—— 35 节点 · 50 关系边 · 五阵营 · 时间维度动画展示关系演化</div>
+    </header>
+    <main class="container" id="main-content">
+        <nav class="breadcrumb" aria-label="面包屑">
+            <a href="../index.html">站点首页</a>
+            <span class="sep">›</span>
+            <a href="../dashboard.html">数据仪表盘</a>
+            <span class="sep">›</span>
+            <span>人物关系动态网络</span>
+        </nav>
+        <div class="notice" role="note">
+            <strong>动态网络说明</strong>：
+            <span class="mono">节点</span>（35）：取经五众 5 + 天庭神系 8 + 佛界菩萨 5 + 妖怪群体 12 + 凡人 5 ·
+            <span class="mono">边</span>（50）：师徒 / 敌对 / 帮助 / 亲属 / 收编 五类关系 ·
+            <span class="mono">阵营色</span>：取经团队=红 / 天庭=蓝 / 佛界=金棕 / 妖怪=棕 / 凡人=绿 ·
+            <span class="mono">时间阶段</span>：1-25 / 26-50 / 51-75 / 76-100 四阶段切换。
+        </div>
+
+        <!-- 板块 1：KPI 概要栏 -->
+        <section class="kpi-row" aria-label="网络概要">
+            <div class="kpi-card">
+                <div class="num">35</div>
+                <div class="label">节点数</div>
+                <div class="detail">取经 5 + 天庭 8 + 佛界 5 + 妖怪 12 + 凡人 5</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">50</div>
+                <div class="label">关系边数</div>
+                <div class="detail">师徒 4 / 敌对 22 / 帮助 14 / 亲属 5 / 收编 5</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num" id="kpi-stage">第 1 阶段</div>
+                <div class="label">当前阶段</div>
+                <div class="detail" id="kpi-stage-detail">1-25 回 · 团队组建期</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num" id="kpi-rel">师徒×收编</div>
+                <div class="label">主要关系类型</div>
+                <div class="detail" id="kpi-rel-detail">收徒 4 + 收编 2 = 6 条关系</div>
+            </div>
+        </section>
+
+        <!-- 板块 2：主动态网络图 -->
+        <section class="section" aria-labelledby="sec-network">
+            <h2 id="sec-network">① 人物关系动态力导向图</h2>
+            <p>使用 d3-force 力导向布局。节点大小=出场频次，边粗细=互动次数。点击下方按钮或拖动滑块切换四阶段，网络会重排并显示该阶段活跃的关系。hover 节点查看详情。</p>
+            <div class="control-row" role="group" aria-label="阶段切换">
+                <button class="stage-btn active" data-stage="1">阶段一（1-25 回）</button>
+                <button class="stage-btn" data-stage="2">阶段二（26-50 回）</button>
+                <button class="stage-btn" data-stage="3">阶段三（51-75 回）</button>
+                <button class="stage-btn" data-stage="4">阶段四（76-100 回）</button>
+                <div class="slider-wrap">
+                    <span class="ctrl-label">阶段滑块：</span>
+                    <input type="range" id="stage-slider" min="1" max="4" value="1" aria-label="阶段滑块" />
+                    <span class="stage-display" id="stage-display">阶段一 1-25</span>
+                </div>
+            </div>
+            <div class="chart-wrap">
+                <svg id="network-svg" width="100%" height="620" role="img" aria-labelledby="net-title net-desc">
+                    <title id="net-title">人物关系动态网络图</title>
+                    <desc id="net-desc">35 节点 50 边的力导向图，按阶段切换显示活跃关系。</desc>
+                </svg>
+                <div class="network-tip" id="network-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="network-legend" aria-label="图例"></div>
+        </section>
+
+        <!-- 板块 3：阶段关系统计 -->
+        <section class="section" aria-labelledby="sec-stat">
+            <h2 id="sec-stat">② 四阶段关系演化统计</h2>
+            <p>统计各阶段活跃的关系类型与节点数。可见阶段一以"师徒/收编"为主（团队组建），阶段二、三以"敌对/帮助"为主（取经主战场），阶段四关系数明显减少（成佛归途）。</p>
+            <table class="rel-table" aria-label="四阶段关系演化">
+                <thead>
+                    <tr><th>阶段</th><th>回目范围</th><th>活跃节点</th><th>活跃边数</th><th>师徒/收编</th><th>敌对</th><th>帮助</th><th>亲属</th><th>主导关系</th></tr>
+                </thead>
+                <tbody id="rel-table-body"></tbody>
+            </table>
+        </section>
+
+        <!-- 板块 4：演化洞察 -->
+        <section class="section" aria-labelledby="sec-insight">
+            <h2 id="sec-insight">③ 关系演化洞察</h2>
+            <div class="insight-box">
+                <span class="ib-tag">[组建]</span>
+                <strong>阶段一（1-25 回）为"团队组建期"</strong>。核心关系为师徒 4 条（三藏→悟空/八戒/沙僧/白龙马）+ 早期收编（黑熊精）。观音作为"中介节点"连接长安与取经团队，太白金星、镇元大仙作为过渡角色出现。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[扩张]</span>
+                <strong>阶段二（26-50 回）为"敌对关系扩张期"</strong>。取经团队开始大规模接触妖怪群体：白骨精/黄袍怪/金角银角/红孩儿/灵感大王/青牛精。同时"帮助"边激增——观音/灵吉菩萨/太上老君/文殊菩萨轮番出手。这是网络最密集的阶段。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[高潮]</span>
+                <strong>阶段三（51-75 回）为"关系高潮期"</strong>。火焰山牛魔王家族（亲属边集中爆发）+ 真假美猴王（如来识破六耳猕猴）+ 狮驼岭三魔（佛祖亲临）。亲属边在这一阶段达到峰值，佛界高层（如来/弥勒）开始直接介入。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[收敛]</span>
+                <strong>阶段四（76-100 回）为"关系收敛期"</strong>。敌对边骤减至个位数，妖怪多被主人收编（白鹿/老鼠精/玉兔精）。最终边集中于"成佛归途"——三藏师徒与如来/观音的"封佛"关系。网络从"多对多"收敛为"取经团队 ↔ 佛界"二元结构。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[中介]</span>
+                <strong>观音是全书的"网络中介节点"</strong>。她在四个阶段都活跃，连接取经团队、天庭、佛界、妖怪四个阵营。出场频次仅次于悟空，但"中介度"（betweenness）远高于悟空——所有跨阵营的救援几乎都经观音中转。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[家族]</span>
+                <strong>"亲属边"集中在阶段二、三的家族妖怪</strong>。牛魔王-铁扇公主-红孩儿（一家三口）、青狮-白象-大鹏（结义三魔）、金角-银角（兄弟）。家族化妖怪是网络中"子团"的核心，也是难度最高的对手。
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>详解西游记 · 人物关系动态网络 · CDN 可视化页面</p>
+        <p>数据基于原著人物出场与关系综合重构，与 character-semantic-network.html 静态语义网络互补。</p>
+        <p><a href="../dashboard.html">← 返回数据仪表盘</a> · <a href="character-semantic-network.html">查看静态语义网络 →</a> · <a href="journey-spacetime.html">查看时空双轴图 →</a></p>
+    </footer>
+
+    <script>
+    // ============= EMBEDDED DATA =============
+    // 阵营配置
+    const FACTIONS = {
+        pilgrim: { label: "取经团队", color: "#c8463a" },
+        heaven:  { label: "天庭神系", color: "#3a6b8c" },
+        buddha:  { label: "佛界菩萨", color: "#b8862a" },
+        demon:   { label: "妖怪群体", color: "#7a5230" },
+        mortal:  { label: "凡人",     color: "#5a7a3a" }
+    };
+
+    // 关系类型配置
+    const REL_TYPES = {
+        master:  { label: "师徒", color: "#c8463a" },
+        enemy:   { label: "敌对", color: "#8c2a2a" },
+        help:    { label: "帮助", color: "#3a6b8c" },
+        kin:     { label: "亲属", color: "#b8862a" },
+        recruit: { label: "收编", color: "#5a7a3a" }
+    };
+
+    // 35 个节点：id/name/faction/freq（出场频次 1-15）/stages（活跃阶段 [1,2,3,4]）
+    const NODES = [
+        // 取经团队 5
+        { id: "唐僧",     faction: "pilgrim", freq: 15, stages: [1,2,3,4] },
+        { id: "孙悟空",   faction: "pilgrim", freq: 15, stages: [1,2,3,4] },
+        { id: "猪八戒",   faction: "pilgrim", freq: 13, stages: [1,2,3,4] },
+        { id: "沙僧",     faction: "pilgrim", freq: 10, stages: [1,2,3,4] },
+        { id: "白龙马",   faction: "pilgrim", freq: 6,  stages: [1,2,3,4] },
+        // 天庭神系 8
+        { id: "玉帝",     faction: "heaven",  freq: 8,  stages: [1,2,3,4] },
+        { id: "太上老君", faction: "heaven",  freq: 6,  stages: [2,3] },
+        { id: "太白金星", faction: "heaven",  freq: 5,  stages: [1,2] },
+        { id: "二郎神",   faction: "heaven",  freq: 4,  stages: [2,3] },
+        { id: "哪吒",     faction: "heaven",  freq: 5,  stages: [2,3] },
+        { id: "托塔天王", faction: "heaven",  freq: 4,  stages: [2,3] },
+        { id: "王母娘娘", faction: "heaven",  freq: 3,  stages: [1,2] },
+        { id: "昴日星官", faction: "heaven",  freq: 2,  stages: [2] },
+        // 佛界菩萨 5
+        { id: "如来佛祖", faction: "buddha",  freq: 8,  stages: [1,2,3,4] },
+        { id: "观音菩萨", faction: "buddha",  freq: 14, stages: [1,2,3,4] },
+        { id: "文殊菩萨", faction: "buddha",  freq: 3,  stages: [2] },
+        { id: "普贤菩萨", faction: "buddha",  freq: 2,  stages: [2] },
+        { id: "弥勒佛",   faction: "buddha",  freq: 3,  stages: [3] },
+        // 妖怪群体 12
+        { id: "黑熊精",   faction: "demon",   freq: 3,  stages: [1] },
+        { id: "黄风怪",   faction: "demon",   freq: 2,  stages: [1] },
+        { id: "白骨精",   faction: "demon",   freq: 3,  stages: [2] },
+        { id: "黄袍怪",   faction: "demon",   freq: 4,  stages: [2] },
+        { id: "金角大王", faction: "demon",   freq: 4,  stages: [2] },
+        { id: "银角大王", faction: "demon",   freq: 4,  stages: [2] },
+        { id: "红孩儿",   faction: "demon",   freq: 5,  stages: [2,3] },
+        { id: "灵感大王", faction: "demon",   freq: 3,  stages: [2] },
+        { id: "青牛精",   faction: "demon",   freq: 4,  stages: [2] },
+        { id: "六耳猕猴", faction: "demon",   freq: 4,  stages: [2,3] },
+        { id: "牛魔王",   faction: "demon",   freq: 6,  stages: [2,3] },
+        { id: "铁扇公主", faction: "demon",   freq: 4,  stages: [3] },
+        // 凡人 5
+        { id: "唐太宗",   faction: "mortal",  freq: 4,  stages: [1,4] },
+        { id: "刘伯钦",   faction: "mortal",  freq: 2,  stages: [1] },
+        { id: "女儿国国王", faction: "mortal", freq: 3, stages: [2] },
+        { id: "玉华王",   faction: "mortal",  freq: 2,  stages: [3] },
+        { id: "寇员外",   faction: "mortal",  freq: 2,  stages: [4] }
+    ];
+
+    // 50 条边：source/target/type/weight（互动次数 1-10）/stages（活跃阶段）/desc
+    const EDGES = [
+        // 师徒 4
+        { source: "唐僧", target: "孙悟空", type: "master", weight: 10, stages: [1,2,3,4], desc: "师徒关系的核心" },
+        { source: "唐僧", target: "猪八戒", type: "master", weight: 8,  stages: [1,2,3,4], desc: "师徒关系" },
+        { source: "唐僧", target: "沙僧",   type: "master", weight: 6,  stages: [1,2,3,4], desc: "师徒关系" },
+        { source: "唐僧", target: "白龙马", type: "master", weight: 4,  stages: [1,2,3,4], desc: "师徒关系" },
+        // 敌对 22
+        { source: "孙悟空", target: "黑熊精",   type: "enemy", weight: 3, stages: [1], desc: "观音院失袈裟" },
+        { source: "孙悟空", target: "黄风怪",   type: "enemy", weight: 2, stages: [1], desc: "黄风岭阻路" },
+        { source: "孙悟空", target: "白骨精",   type: "enemy", weight: 3, stages: [2], desc: "三打白骨精" },
+        { source: "孙悟空", target: "黄袍怪",   type: "enemy", weight: 4, stages: [2], desc: "宝象国斗黄袍怪" },
+        { source: "孙悟空", target: "金角大王", type: "enemy", weight: 5, stages: [2], desc: "平顶山斗金角银角" },
+        { source: "孙悟空", target: "银角大王", type: "enemy", weight: 5, stages: [2], desc: "平顶山斗金角银角" },
+        { source: "孙悟空", target: "红孩儿",   type: "enemy", weight: 6, stages: [2], desc: "号山斗红孩儿" },
+        { source: "孙悟空", target: "灵感大王", type: "enemy", weight: 4, stages: [2], desc: "通天河斗灵感大王" },
+        { source: "孙悟空", target: "青牛精",   type: "enemy", weight: 6, stages: [2], desc: "金兜山斗青牛精" },
+        { source: "孙悟空", target: "六耳猕猴", type: "enemy", weight: 7, stages: [2,3], desc: "真假美猴王" },
+        { source: "孙悟空", target: "牛魔王",   type: "enemy", weight: 8, stages: [2,3], desc: "火焰山斗牛魔王" },
+        { source: "孙悟空", target: "铁扇公主", type: "enemy", weight: 5, stages: [3], desc: "三借芭蕉扇" },
+        { source: "唐僧",   target: "白骨精",   type: "enemy", weight: 2, stages: [2], desc: "白骨精迷惑三藏" },
+        { source: "唐僧",   target: "黄袍怪",   type: "enemy", weight: 3, stages: [2], desc: "三藏被化为虎" },
+        { source: "唐僧",   target: "红孩儿",   type: "enemy", weight: 3, stages: [2], desc: "红孩儿擒三藏" },
+        { source: "唐僧",   target: "灵感大王", type: "enemy", weight: 2, stages: [2], desc: "通天河三藏被擒" },
+        { source: "唐僧",   target: "六耳猕猴", type: "enemy", weight: 2, stages: [2,3], desc: "六耳猕猴打三藏" },
+        { source: "猪八戒", target: "红孩儿",   type: "enemy", weight: 2, stages: [2], desc: "八戒败于红孩儿" },
+        { source: "猪八戒", target: "牛魔王",   type: "enemy", weight: 2, stages: [3], desc: "八戒助战牛魔王" },
+        { source: "猪八戒", target: "铁扇公主", type: "enemy", weight: 1, stages: [3], desc: "八戒戏铁扇公主" },
+        { source: "沙僧",   target: "黄袍怪",   type: "enemy", weight: 1, stages: [2], desc: "沙僧败于黄袍怪" },
+        { source: "白龙马", target: "黄袍怪",   type: "enemy", weight: 1, stages: [2], desc: "白龙马化身刺杀黄袍怪" },
+        // 帮助 14
+        { source: "观音菩萨", target: "唐僧",     type: "help", weight: 8, stages: [1,2,3,4], desc: "观音多次救唐僧" },
+        { source: "观音菩萨", target: "孙悟空",   type: "help", weight: 10, stages: [1,2,3,4], desc: "观音多次助悟空" },
+        { source: "观音菩萨", target: "黑熊精",   type: "help", weight: 2, stages: [1], desc: "观音收黑熊精" },
+        { source: "观音菩萨", target: "红孩儿",   type: "help", weight: 3, stages: [2], desc: "观音收红孩儿" },
+        { source: "观音菩萨", target: "灵感大王", type: "help", weight: 2, stages: [2], desc: "观音收灵感大王" },
+        { source: "如来佛祖", target: "孙悟空",   type: "help", weight: 5, stages: [2,3,4], desc: "如来多次指点悟空" },
+        { source: "如来佛祖", target: "六耳猕猴", type: "help", weight: 2, stages: [2,3], desc: "如来识破六耳猕猴" },
+        { source: "太上老君", target: "金角大王", type: "help", weight: 2, stages: [2], desc: "老君收回金银角" },
+        { source: "太上老君", target: "青牛精",   type: "help", weight: 2, stages: [2], desc: "老君收回青牛" },
+        { source: "文殊菩萨", target: "黄袍怪",   type: "help", weight: 1, stages: [2], desc: "文殊收回青毛狮子（黄袍怪实为奎木狼）" },
+        { source: "弥勒佛",   target: "孙悟空",   type: "help", weight: 2, stages: [3], desc: "弥勒收黄眉童子" },
+        { source: "二郎神",   target: "孙悟空",   type: "help", weight: 2, stages: [2,3], desc: "二郎神助悟空斗九头虫" },
+        { source: "哪吒",     target: "孙悟空",   type: "help", weight: 2, stages: [2,3], desc: "哪吒助战牛魔王" },
+        { source: "托塔天王", target: "孙悟空",   type: "help", weight: 2, stages: [2,3], desc: "托塔天王助阵" },
+        // 亲属 5
+        { source: "牛魔王",   target: "铁扇公主", type: "kin", weight: 5, stages: [3], desc: "夫妻关系" },
+        { source: "牛魔王",   target: "红孩儿",   type: "kin", weight: 4, stages: [2,3], desc: "父子关系" },
+        { source: "铁扇公主", target: "红孩儿",   type: "kin", weight: 3, stages: [2,3], desc: "母子关系" },
+        { source: "金角大王", target: "银角大王", type: "kin", weight: 4, stages: [2], desc: "兄弟关系" },
+        { source: "唐太宗",   target: "唐僧",     type: "kin", weight: 3, stages: [1,4], desc: "结拜兄弟" },
+        // 收编 5
+        { source: "观音菩萨", target: "黑熊精",   type: "recruit", weight: 2, stages: [1], desc: "收为守山神" },
+        { source: "观音菩萨", target: "红孩儿",   type: "recruit", weight: 3, stages: [2,3], desc: "收为善财童子" },
+        { source: "观音菩萨", target: "灵感大王", type: "recruit", weight: 2, stages: [2], desc: "收回金鱼精" },
+        { source: "太上老君", target: "青牛精",   type: "recruit", weight: 2, stages: [2], desc: "收回坐骑青牛" },
+        { source: "唐僧",     target: "孙悟空",   type: "recruit", weight: 1, stages: [1], desc: "五指山下收悟空" }
+    ];
+
+    const STAGE_RANGES = {
+        1: { from: 1,  to: 25,  name: "阶段一", desc: "1-25 回 · 团队组建期" },
+        2: { from: 26, to: 50,  name: "阶段二", desc: "26-50 回 · 敌对扩张期" },
+        3: { from: 51, to: 75,  name: "阶段三", desc: "51-75 回 · 关系高潮期" },
+        4: { from: 76, to: 100, name: "阶段四", desc: "76-100 回 · 关系收敛期" }
+    };
+
+    const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let currentStage = 1;
+    let simulation = null;
+
+    // ============= 主网络图 =============
+    function renderNetwork(stage) {
+        const svg = d3.select("#network-svg");
+        svg.selectAll("*").remove();
+
+        const wrap = document.getElementById("network-svg");
+        const width = Math.max(640, wrap.clientWidth || 980);
+        const height = 620;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        // 过滤当前阶段活跃的节点与边
+        const activeNodes = NODES.filter(n => n.stages.includes(stage)).map(n => ({ ...n }));
+        const activeIds = new Set(activeNodes.map(n => n.id));
+        const activeEdges = EDGES.filter(e =>
+            e.stages.includes(stage) && activeIds.has(e.source) && activeIds.has(e.target)
+        ).map(e => ({ ...e }));
+
+        // 节点半径：按出场频次
+        const rScale = d3.scaleLinear()
+            .domain([1, 15])
+            .range([8, 24]);
+
+        // 边粗细：按互动次数
+        const wScale = d3.scaleLinear()
+            .domain([1, 10])
+            .range([1, 5]);
+
+        // 力导向
+        simulation = d3.forceSimulation(activeNodes)
+            .force("link", d3.forceLink(activeEdges).id(d => d.id)
+                .distance(d => 70 + (10 - d.weight) * 4)
+                .strength(d => 0.05 + d.weight * 0.02))
+            .force("charge", d3.forceManyBody().strength(-280))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("collide", d3.forceCollide(d => rScale(d.freq) + 4))
+            .force("x", d3.forceX(width / 2).strength(0.04))
+            .force("y", d3.forceY(height / 2).strength(0.04));
+
+        // 边
+        const link = svg.append("g")
+            .selectAll("line")
+            .data(activeEdges)
+            .enter()
+            .append("line")
+            .attr("stroke", d => REL_TYPES[d.type].color)
+            .attr("stroke-width", d => wScale(d.weight))
+            .attr("stroke-opacity", 0.65)
+            .attr("stroke-dasharray", d => d.type === "kin" ? "4,3" : "none");
+
+        // 节点
+        const tip = d3.select("#network-tip");
+        const wrapEl = wrap.parentElement;
+        const node = svg.append("g")
+            .selectAll("circle")
+            .data(activeNodes)
+            .enter()
+            .append("circle")
+            .attr("class", "node-circle")
+            .attr("r", d => rScale(d.freq))
+            .attr("fill", d => FACTIONS[d.faction].color)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .on("mouseover", function(event, d) {
+                d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2.5);
+                // 高亮关联边
+                link.attr("stroke-opacity", e =>
+                    (e.source.id || e.source) === d.id || (e.target.id || e.target) === d.id ? 0.95 : 0.15
+                ).attr("stroke-width", e =>
+                    (e.source.id || e.source) === d.id || (e.target.id || e.target) === d.id
+                    ? wScale(e.weight) + 1.5 : wScale(e.weight)
+                );
+                // 统计该节点在此阶段的关系
+                const myEdges = activeEdges.filter(e =>
+                    (e.source.id || e.source) === d.id || (e.target.id || e.target) === d.id
+                );
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${d.id}</div>
+                        <div class="tip-row">阵营：<strong style="color:#e9b885">${FACTIONS[d.faction].label}</strong></div>
+                        <div class="tip-row">出场频次：<strong style="color:#e9b885">${d.freq}</strong></div>
+                        <div class="tip-row">本阶段关系数：<strong style="color:#e9b885">${myEdges.length}</strong></div>
+                        <div class="tip-row">活跃阶段：${d.stages.map(s => "阶段" + s).join(" / ")}</div>
+                        <div class="tip-meta">${STAGE_RANGES[stage].name} · ${STAGE_RANGES[stage].desc}</div>`);
+            })
+            .on("mousemove", function(event) {
+                const rect = wrapEl.getBoundingClientRect();
+                tip.style("left", (event.clientX - rect.left + 14) + "px")
+                    .style("top", (event.clientY - rect.top + 14) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("stroke", "#fff").attr("stroke-width", 2);
+                link.attr("stroke-opacity", 0.65)
+                    .attr("stroke-width", d => wScale(d.weight));
+                tip.style("opacity", 0);
+            })
+            .call(d3.drag()
+                .on("start", (event, d) => {
+                    if (!event.active) simulation.alphaTarget(0.3).restart();
+                    d.fx = d.x; d.fy = d.y;
+                })
+                .on("drag", (event, d) => { d.fx = event.x; d.fy = event.y; })
+                .on("end", (event, d) => {
+                    if (!event.active) simulation.alphaTarget(0);
+                    d.fx = null; d.fy = null;
+                })
+            );
+
+        // 节点标签
+        const label = svg.append("g")
+            .selectAll("text")
+            .data(activeNodes)
+            .enter()
+            .append("text")
+            .attr("class", "node-label")
+            .attr("text-anchor", "middle")
+            .attr("dy", d => -rScale(d.freq) - 6)
+            .text(d => d.id);
+
+        // 仿真 tick
+        simulation.on("tick", () => {
+            // 边界约束
+            activeNodes.forEach(d => {
+                const r = rScale(d.freq);
+                d.x = Math.max(r + 2, Math.min(width - r - 2, d.x));
+                d.y = Math.max(r + 2, Math.min(height - r - 2, d.y));
+            });
+            link.attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+            node.attr("cx", d => d.x).attr("cy", d => d.y);
+            label.attr("x", d => d.x).attr("y", d => d.y);
+        });
+
+        // 更新图例
+        renderNetworkLegend();
+
+        // 更新 KPI
+        updateKPI(stage, activeNodes, activeEdges);
+    }
+
+    function renderNetworkLegend() {
+        const legend = d3.select("#network-legend");
+        legend.selectAll("*").remove();
+        // 阵营
+        Object.keys(FACTIONS).forEach(k => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch").style("background", FACTIONS[k].color);
+            item.append("span").text(FACTIONS[k].label);
+        });
+        // 关系类型
+        Object.keys(REL_TYPES).forEach(k => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch line").style("background", REL_TYPES[k].color)
+                .style("border-top", k === "kin" ? "2px dashed " + REL_TYPES[k].color : "none");
+            item.append("span").text(REL_TYPES[k].label);
+        });
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:linear-gradient(to right,#fff 0%,#888 100%);"></span><span>节点大小 = 出场频次</span>');
+    }
+
+    function updateKPI(stage, activeNodes, activeEdges) {
+        const sr = STAGE_RANGES[stage];
+        d3.select("#kpi-stage").text(sr.name);
+        d3.select("#kpi-stage-detail").text(sr.desc);
+        // 统计关系类型
+        const typeCounts = {};
+        activeEdges.forEach(e => { typeCounts[e.type] = (typeCounts[e.type] || 0) + 1; });
+        const sorted = Object.keys(typeCounts).sort((a, b) => typeCounts[b] - typeCounts[a]);
+        const top1 = sorted[0] || "master";
+        const top2 = sorted[1] || "master";
+        d3.select("#kpi-rel").text(`${REL_TYPES[top1].label}×${REL_TYPES[top2].label}`);
+        d3.select("#kpi-rel-detail").text(
+            `${REL_TYPES[top1].label} ${typeCounts[top1] || 0} + ${REL_TYPES[top2].label} ${typeCounts[top2] || 0} = ${(typeCounts[top1] || 0) + (typeCounts[top2] || 0)} 条关系`
+        );
+        d3.select("#stage-display").text(`${sr.name} ${sr.from}-${sr.to}`);
+    }
+
+    // ============= 阶段关系统计表 =============
+    function renderRelTable() {
+        const tbody = d3.select("#rel-table-body");
+        tbody.selectAll("*").remove();
+        const dominantMap = { master: "师徒", enemy: "敌对", help: "帮助", kin: "亲属", recruit: "收编" };
+        [1, 2, 3, 4].forEach(stage => {
+            const sr = STAGE_RANGES[stage];
+            const activeNodes = NODES.filter(n => n.stages.includes(stage));
+            const activeIds = new Set(activeNodes.map(n => n.id));
+            const activeEdges = EDGES.filter(e =>
+                e.stages.includes(stage) && activeIds.has(e.source) && activeIds.has(e.target)
+            );
+            const counts = { master: 0, enemy: 0, help: 0, kin: 0, recruit: 0 };
+            activeEdges.forEach(e => { counts[e.type]++; });
+            const total = activeEdges.length;
+            const masterRecruit = counts.master + counts.recruit;
+            const sorted = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+            const dominant = sorted[0];
+            const tr = tbody.append("tr");
+            tr.append("td").html(`<strong style="color:var(--accent)">${sr.name}</strong>`);
+            tr.append("td").text(sr.desc.split(" · ")[0]);
+            tr.append("td").attr("class", "num").text(activeNodes.length);
+            tr.append("td").attr("class", "num").text(total);
+            tr.append("td").attr("class", "num").text(masterRecruit);
+            tr.append("td").attr("class", "num").text(counts.enemy);
+            tr.append("td").attr("class", "num").text(counts.help);
+            tr.append("td").attr("class", "num").text(counts.kin);
+            tr.append("td").text(dominantMap[dominant] + `（${counts[dominant]} 条）`);
+        });
+    }
+
+    // ============= 控制 =============
+    function setStage(stage) {
+        currentStage = +stage;
+        // 同步按钮状态
+        document.querySelectorAll(".stage-btn").forEach(b => {
+            if (+b.dataset.stage === currentStage) {
+                b.classList.add("active");
+            } else {
+                b.classList.remove("active");
+            }
+        });
+        // 同步滑块
+        document.getElementById("stage-slider").value = currentStage;
+        // 停止旧仿真
+        if (simulation) {
+            simulation.stop();
+            simulation = null;
+        }
+        renderNetwork(currentStage);
+    }
+
+    document.querySelectorAll(".stage-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+            setStage(this.dataset.stage);
+        });
+    });
+
+    document.getElementById("stage-slider").addEventListener("input", function(e) {
+        setStage(e.target.value);
+    });
+
+    // ============= 初始化 =============
+    function renderAll() {
+        renderNetwork(currentStage);
+        renderRelTable();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAll);
+    } else {
+        renderAll();
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => renderNetwork(currentStage), 250);
+    });
+    </script>
+</body>
+</html>

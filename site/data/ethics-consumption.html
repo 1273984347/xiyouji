@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伦理消费 · 坐骑权益与妖怪 IPO · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --gold: #d4af37;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code { font-family: "JetBrains Mono", monospace; color: var(--accent); }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 980px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .kpi-row { grid-template-columns: 1fr; } }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(60, 40, 20, 0.14);
+        }
+        .kpi-card .label {
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+            font-family: "JetBrains Mono", "Noto Serif SC", monospace;
+        }
+        .kpi-card .desc { font-size: 0.82rem; color: var(--ink-soft); }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .sub-h {
+            font-size: 1rem;
+            color: var(--accent-2);
+            margin: 18px 0 10px;
+            letter-spacing: 0.05em;
+            padding-left: 8px;
+            border-left: 3px solid var(--accent-2);
+        }
+        /* 协会信息卡 */
+        .org-card {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin-bottom: 16px;
+        }
+        .org-card h3 { color: var(--accent); font-size: 1.15rem; margin-bottom: 6px; }
+        .org-card .org-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 6px 24px;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        .org-card .field { color: var(--ink-soft); }
+        .org-card .field strong { color: var(--ink); }
+        .org-card .mission {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.6);
+            border-left: 3px solid var(--accent);
+            font-size: 0.86rem;
+            font-style: italic;
+            color: var(--accent-3);
+        }
+        /* 统计小卡 */
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+            text-align: center;
+        }
+        .stat-card .k {
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 4px;
+        }
+        .stat-card .v {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--ink);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .stat-card .n {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            margin-top: 2px;
+        }
+        /* finding 卡片 */
+        .finding-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .finding-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 14px 18px;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .finding-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(60, 40, 20, 0.12);
+        }
+        .finding-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+        .finding-head .fid {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            letter-spacing: 0.08em;
+        }
+        .finding-head .ftitle {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+            flex: 1;
+        }
+        .sev-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.05em;
+        }
+        .sev-extreme { background: var(--accent); }
+        .sev-high { background: #d97706; }
+        .sev-mid { background: #b88c2a; }
+        .finding-desc {
+            font-size: 0.88rem;
+            color: var(--ink);
+            line-height: 1.65;
+            margin-bottom: 8px;
+        }
+        .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+        .chip {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+        }
+        .finding-meta {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+        }
+        /* case study */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .case-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent-2);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .case-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(60, 40, 20, 0.12);
+        }
+        .case-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+            gap: 8px;
+        }
+        .case-id {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.74rem;
+            color: var(--accent-2);
+            letter-spacing: 0.08em;
+        }
+        .case-mount {
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .case-owner {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+        }
+        .case-row {
+            font-size: 0.84rem;
+            margin-bottom: 6px;
+            line-height: 1.6;
+        }
+        .case-row .lbl {
+            color: var(--accent-3);
+            font-weight: 600;
+            margin-right: 4px;
+        }
+        .case-resolution {
+            background: var(--bg);
+            border-left: 2px solid var(--accent-soft);
+            padding: 6px 10px;
+            font-size: 0.82rem;
+            margin: 6px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .case-outcome {
+            font-size: 0.82rem;
+            color: var(--accent);
+            font-style: italic;
+            border-top: 1px dashed var(--line);
+            padding-top: 6px;
+            margin-top: 6px;
+        }
+        /* recommendations */
+        .rec-list {
+            counter-reset: rec;
+            list-style: none;
+            padding: 0;
+        }
+        .rec-list li {
+            counter-increment: rec;
+            position: relative;
+            padding: 10px 12px 10px 44px;
+            margin-bottom: 8px;
+            background: var(--bg);
+            border-left: 3px solid var(--accent-4);
+            border-radius: 0 4px 4px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .rec-list li::before {
+            content: counter(rec, decimal-leading-zero);
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.9rem;
+            color: var(--accent-4);
+            font-weight: 600;
+        }
+        /* 探店评分榜 */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+        }
+        .food-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px 16px;
+            position: relative;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .food-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(60, 40, 20, 0.12);
+        }
+        .food-card.best { border-top: 3px solid var(--gold); }
+        .food-card.zero {
+            border: 1px solid var(--accent);
+            border-left: 4px solid var(--accent);
+            background: #fff7f5;
+        }
+        .food-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
+            gap: 8px;
+        }
+        .food-loc {
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.3;
+        }
+        .food-chapter {
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            margin-top: 2px;
+        }
+        .rating-big {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1;
+            text-align: right;
+            white-space: nowrap;
+        }
+        .food-type {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--accent-soft);
+            color: var(--accent-3);
+            border-radius: 10px;
+            font-size: 0.74rem;
+            margin: 4px 0;
+        }
+        .food-dish {
+            font-size: 0.88rem;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        .food-dish .lbl {
+            color: var(--accent-3);
+            font-size: 0.76rem;
+            margin-right: 4px;
+        }
+        .food-review {
+            font-size: 0.84rem;
+            color: var(--ink);
+            font-style: italic;
+            background: var(--bg);
+            border-left: 3px solid var(--accent-soft);
+            padding: 8px 10px;
+            border-radius: 0 4px 4px 0;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        .food-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            align-items: center;
+        }
+        .veg-badge {
+            display: inline-block;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+        .veg-yes { background: var(--accent-4); color: #fff; }
+        .veg-no { background: var(--accent); color: #fff; }
+        .zero-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+        .best-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--gold);
+            color: #fff;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+        /* D3 图表 */
+        .chart-wrap {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px;
+        }
+        #food-bar-svg, #ipo-scatter-svg {
+            width: 100%;
+            display: block;
+        }
+        .chart-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            max-width: 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .chart-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        /* IPO 招股书 */
+        .ipo-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 20px 22px;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow);
+            transition: transform 0.15s, box-shadow 0.15s;
+            position: relative;
+            overflow: hidden;
+        }
+        .ipo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 18px rgba(60, 40, 20, 0.14);
+        }
+        .ipo-card.biggest {
+            border: 2px solid var(--accent-3);
+            background: linear-gradient(135deg, #fffdf8 0%, #fff8ec 100%);
+        }
+        .ipo-card.biggest::before {
+            content: "最大 IPO";
+            position: absolute;
+            top: 10px;
+            right: -32px;
+            background: var(--accent-3);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 3px 36px;
+            transform: rotate(35deg);
+            font-family: "JetBrains Mono", monospace;
+            letter-spacing: 0.05em;
+        }
+        .ipo-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .ipo-name { font-size: 1.2rem; font-weight: 600; color: var(--ink); }
+        .ipo-ticker {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.85rem;
+            color: var(--accent-2);
+            background: #f0f4f8;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .ipo-year {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+        .ipo-mgmt {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .ipo-mgmt .mi {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 0.82rem;
+        }
+        .ipo-mgmt .mi .role {
+            color: var(--accent);
+            font-size: 0.72rem;
+            font-family: "JetBrains Mono", monospace;
+            letter-spacing: 0.05em;
+        }
+        .ipo-mgmt .mi .name { color: var(--ink); font-weight: 600; }
+        .ipo-biz { font-size: 0.88rem; margin-bottom: 10px; line-height: 1.65; }
+        .ipo-biz .lbl { color: var(--accent-3); font-weight: 600; margin-right: 4px; }
+        .ipo-market {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.86rem;
+            margin-bottom: 12px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .ipo-market .lbl { color: var(--accent-soft); margin-right: 6px; }
+        .fin-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        @media (max-width: 640px) { .fin-row { grid-template-columns: repeat(2, 1fr); } }
+        .fin-cell {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 8px 10px;
+            text-align: center;
+        }
+        .fin-cell .k {
+            font-size: 0.68rem;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 2px;
+        }
+        .fin-cell .v {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--ink);
+            font-family: "JetBrains Mono", monospace;
+            line-height: 1.3;
+        }
+        .ipo-sub-h {
+            font-size: 0.82rem;
+            color: var(--accent-2);
+            margin: 10px 0 6px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .ipo-outcome {
+            background: linear-gradient(135deg, #c8463a 0%, #8c2820 100%);
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin: 14px 0 10px;
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .ipo-outcome .failed-stamp {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            background: #fff;
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 4px;
+            border: 2px dashed var(--accent);
+            white-space: nowrap;
+        }
+        .ipo-outcome .ot-text {
+            font-size: 0.88rem;
+            line-height: 1.55;
+            flex: 1;
+        }
+        .ipo-lesson {
+            background: #fff8ec;
+            border-left: 3px solid var(--accent-3);
+            padding: 8px 12px;
+            font-size: 0.84rem;
+            font-style: italic;
+            color: var(--accent-3);
+            border-radius: 0 4px 4px 0;
+            line-height: 1.6;
+        }
+        .ipo-lesson::before {
+            content: "投资人教训 · ";
+            color: var(--accent);
+            font-weight: 600;
+            font-style: normal;
+        }
+        .warn-item {
+            font-size: 0.84rem;
+            color: var(--ink);
+            padding: 3px 0 3px 22px;
+            position: relative;
+            line-height: 1.55;
+        }
+        .warn-item::before {
+            content: "⚠";
+            position: absolute;
+            left: 4px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .use-list {
+            counter-reset: use;
+            list-style: none;
+            padding: 0;
+        }
+        .use-list li {
+            counter-increment: use;
+            padding: 4px 0 4px 28px;
+            position: relative;
+            font-size: 0.84rem;
+            line-height: 1.55;
+            color: var(--ink);
+        }
+        .use-list li::before {
+            content: counter(use);
+            position: absolute;
+            left: 0;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: var(--accent-3);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+        }
+        /* 洞察栏 */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .insight-box h4 { color: var(--accent); font-size: 1rem; margin-bottom: 10px; }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong { color: var(--accent); font-weight: 600; }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        footer .gen-time {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>伦理消费 · 坐骑权益与妖怪 IPO</h1>
+        <div class="subtitle">ETHICS &amp; CONSUMPTION</div>
+        <div class="tagline">当现代伦理照进西游三界</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">/</span>
+            <span>伦理消费 · 坐骑权益与妖怪 IPO</span>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">FINDINGS · 权益发现</div>
+                <div class="value">5<span style="font-size:1rem;color:var(--ink-soft);"> 条</span></div>
+                <div class="desc">坐骑权益保护协会年度报告</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">CASES · 坐骑案例</div>
+                <div class="value">4<span style="font-size:1rem;color:var(--ink-soft);"> 例</span></div>
+                <div class="desc">青牛精·九灵元圣·金毛犼·白龙马</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">FOOD VLOG · 探店</div>
+                <div class="value">12<span style="font-size:1rem;color:var(--ink-soft);"> 家</span></div>
+                <div class="desc">唐僧 14 年取经路试吃记录</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">AVG RATING · 平均评分</div>
+                <div class="value" style="color:var(--accent-2);">5.5</div>
+                <div class="desc">满分 10 · 三家零分店拉低均值</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">MONSTER IPO · 妖怪 IPO</div>
+                <div class="value" style="color:var(--accent);">5<span style="font-size:1rem;color:var(--ink-soft);"> / 5 失败</span></div>
+                <div class="desc">妖魔经济模式不可持续</div>
+            </div>
+        </div>
+
+        <!-- 坐骑权益保护协会·年度报告 -->
+        <section class="section">
+            <h2 class="section-title">三界坐骑权益保护协会 · 年度报告</h2>
+            <div class="section-sub">贞观 27 年度·系统追踪 16 只天庭坐骑下凡情况·披露 5 项重大发现·4 起典型案例·5 条立法建议。</div>
+
+            <div class="org-card" id="org-card"></div>
+
+            <h3 class="sub-h">关键统计</h3>
+            <div class="stat-row" id="stat-row"></div>
+
+            <h3 class="sub-h">五条核心发现 · Key Findings</h3>
+            <div class="finding-grid" id="finding-grid"></div>
+
+            <h3 class="sub-h">四个典型案例 · Case Studies</h3>
+            <div class="case-grid" id="case-grid"></div>
+
+            <h3 class="sub-h">五条立法建议 · Recommendations</h3>
+            <ol class="rec-list" id="rec-list"></ol>
+        </section>
+
+        <!-- 唐僧探店 VLOG 评分榜 -->
+        <section class="section">
+            <h2 class="section-title">唐僧探店 VLOG · 12 家评分榜</h2>
+            <div class="section-sub">14 年取经路·12 家餐厅试吃记录·金色为满分店·红色边框为零分店（盘丝洞·比丘国·无底洞）。</div>
+            <div class="food-grid" id="food-grid"></div>
+        </section>
+
+        <!-- 探店评分分布图 -->
+        <section class="section">
+            <h2 class="section-title">唐僧探店评分分布 · 横向条形图</h2>
+            <div class="section-sub">12 家按评分降序排列·颜色对应评分等级（金/绿/蓝/橙/红）。</div>
+            <div class="chart-wrap" style="position:relative;">
+                <svg id="food-bar-svg"></svg>
+                <div class="chart-tip" id="food-tip"></div>
+            </div>
+        </section>
+
+        <!-- 妖怪 IPO 招股书 -->
+        <section class="section">
+            <h2 class="section-title">妖怪创业公司 IPO 招股书 · 5 家</h2>
+            <div class="section-sub">仿真实招股书风格·披露管理团队·财务摘要·风险因素·募资用途与 IPO 结局·狮驼岭集团为最大 IPO（48000 员工）。</div>
+            <div id="ipo-list"></div>
+        </section>
+
+        <!-- IPO 失败率散点图 -->
+        <section class="section">
+            <h2 class="section-title">妖怪 IPO 失败率与员工数对比 · 散点图</h2>
+            <div class="section-sub">x = 员工数（对数刻度）·y = 年营收（人命）·5 家全部失败·全部以红色标注。</div>
+            <div class="chart-wrap" style="position:relative;">
+                <svg id="ipo-scatter-svg"></svg>
+                <div class="chart-tip" id="ipo-tip"></div>
+            </div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <h4>从现代伦理视角审视西游三界</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">返回数据看板</a> ·
+        <a href="../index.html">返回首页</a>
+        <span class="gen-time" id="gen-time"></span>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/09-精神塑造/价值坐标系.md">价值坐标系</a></div>
+    </footer>
+
+    <script>
+    // ===== 嵌入式 fallback 数据（fetch 失败时使用）=====
+    const EMBEDDED = {
+        mount_rights_report: {
+            organization_name: "三界坐骑权益保护协会",
+            founded_year: "大唐贞观年间",
+            annual_report_year: "贞观 27 年",
+            ceo: "原天庭御马监正",
+            mission: "保护三界坐骑免受妖魔霸占·推动坐骑劳动权益立法",
+            key_findings: [
+                {
+                    finding_id: "F001",
+                    title: "甲级战犯当宠物养",
+                    description: "妖魔长期霸占天庭坐骑·将甲级战犯（如青牛精·九灵元圣）当宠物养·严重违反坐骑自主意愿",
+                    implicated_monsters: [
+                        "青牛精（太上老君坐骑）",
+                        "九灵元圣（太乙救苦天尊坐骑）",
+                        "黄牙老象（普贤菩萨坐骑）",
+                        "金毛犼（观音坐骑）"
+                    ],
+                    severity: "高",
+                    duration_years: "平均 3-50 年"
+                },
+                {
+                    finding_id: "F002",
+                    title: "强迫劳动与剥削",
+                    description: "坐骑被妖怪用于巡山·守门·运送掠夺物资·无休息日·无报酬·工作时间严重超标",
+                    implicated_monsters: [
+                        "白龙马（被鹰愁涧强迫驮唐僧）",
+                        "青毛狮子怪（狮驼岭）"
+                    ],
+                    severity: "高",
+                    duration_years: "全程"
+                },
+                {
+                    finding_id: "F003",
+                    title: "身份盗用",
+                    description: "妖怪冒用坐骑身份混入凡间·造成天庭坐骑名誉受损·部分坐骑被天庭追责",
+                    implicated_monsters: [
+                        "黄袍怪（二十八宿奎木狼下凡）",
+                        "金鱼精（观音莲花池逃出）"
+                    ],
+                    severity: "中",
+                    duration_years: "1-3 年"
+                },
+                {
+                    finding_id: "F004",
+                    title: "薪资与福利缺失",
+                    description: "天庭坐骑下凡后·工资停发·社保断缴·回归天庭后无法补缴·影响退休待遇",
+                    implicated_monsters: ["全部下凡坐骑"],
+                    severity: "中",
+                    duration_years: "全程"
+                },
+                {
+                    finding_id: "F005",
+                    title: "精神伤害与创伤",
+                    description: "部分坐骑被妖怪用于不正当目的（如诱拐儿童·吃人）·回归天庭后需长期心理辅导",
+                    implicated_monsters: [
+                        "青毛狮子怪（吃人）",
+                        "黄牙老象（吃人）",
+                        "大鹏金翅雕（吃人）"
+                    ],
+                    severity: "极高",
+                    duration_years: "长期不可逆"
+                }
+            ],
+            case_studies: [
+                {
+                    case_id: "C001",
+                    mount: "青牛精",
+                    original_owner: "太上老君",
+                    incident: "青牛趁童子睡着偷跑下凡·占山为王·用金刚琢收取一切兵器",
+                    duration: "约 3 年",
+                    victims: "悟空·天兵天将·多方神仙兵器",
+                    resolution: "太上老君亲临·用芭蕉扇收回",
+                    compensation_claim: "天庭应承担监管责任·补偿受害凡间百姓",
+                    outcome: "青牛回归天庭·继续当坐骑·无实质处罚"
+                },
+                {
+                    case_id: "C002",
+                    mount: "九灵元圣",
+                    original_owner: "太乙救苦天尊",
+                    incident: "九灵元圣下凡·收服六个狮孙·与玉华州发生冲突",
+                    duration: "约 1 年",
+                    victims: "玉华州百姓·悟空师徒",
+                    resolution: "太乙救苦天尊亲临收回",
+                    compensation_claim: "九灵元圣本身不吃人·但纵容狮孙作恶·应承担连带责任",
+                    outcome: "九灵元圣回归天庭·六狮被打死"
+                },
+                {
+                    case_id: "C003",
+                    mount: "金毛犼",
+                    original_owner: "观音菩萨",
+                    incident: "金毛犼下凡为妖·抢走朱紫国皇后·三年未归",
+                    duration: "3 年",
+                    victims: "朱紫国皇后·朱紫国百姓",
+                    resolution: "观音亲临收回",
+                    compensation_claim: "观音应承担管教不严责任·朱紫国应获国家赔偿",
+                    outcome: "金毛犼回归南海·继续当坐骑·无实质处罚"
+                },
+                {
+                    case_id: "C004",
+                    mount: "白龙马",
+                    original_owner: "西海龙王（之父）",
+                    incident: "西海龙王三太子因纵火烧殿上明珠被贬·化为白马驮唐僧 14 年",
+                    duration: "14 年",
+                    victims: "无（自愿赎罪）",
+                    resolution: "终成八部天龙·终归菩萨之位",
+                    compensation_claim: "白龙马是少数自愿当坐骑的案例·但 14 年无薪·应补发工资",
+                    outcome: "白龙马获封八部天龙·恢复龙身"
+                }
+            ],
+            recommendations: [
+                "天庭应建立坐骑档案系统·记录每只坐骑的下凡/回归情况",
+                "坐骑下凡需提前报备·并佩戴 GPS 定位装置",
+                "坐骑下凡期间工资照发·社保继续缴纳",
+                "妖怪冒用坐骑身份造成损害·由天庭先行赔付·再向妖怪追偿",
+                "建立坐骑心理辅导机制·回归天庭后强制进行心理评估"
+            ],
+            statistics: {
+                total_mounts_recorded: 16,
+                mounts_descended: 16,
+                mounts_returned: 16,
+                mounts_punished: 0,
+                average_descent_duration_years: 5.2,
+                total_victims_estimate: "约 12000 人",
+                compensation_paid: "0 元"
+            }
+        },
+        tang_monk_food_vlog: [
+            { location: "长安化生寺", chapter: "第 12 回", restaurant_type: "皇家斋宴", signature_dish: "金汁香菇豆腐", rating: 9.5, tang_monk_review: "皇室斋宴·食材精挑·烹饪讲究·但略显奢华·违背苦行僧本意", price_level: "¥¥¥¥¥", vegetarian_friendly: true, monks_present: 1200, tags: ["皇家","斋宴","高端","出发前"], photo_count: 12, vlog_views: "89w" },
+            { location: "双叉岭猎户家", chapter: "第 13 回", restaurant_type: "凡间民居", signature_dish: "山野菌菇汤（被迫食荤）", rating: 2.0, tang_monk_review: "猎户强劝荤食·家人们·这是斋戒破戒现场·零分", price_level: "¥", vegetarian_friendly: false, monks_present: 0, tags: ["破戒","猎户","凡间","早期"], photo_count: 3, vlog_views: "45w" },
+            { location: "五庄观", chapter: "第 24-26 回", restaurant_type: "道家仙馆", signature_dish: "人参果（草还丹）", rating: 10.0, tang_monk_review: "镇元大仙人参果宴·万年一熟·闻一闻延寿 360 岁·吃一颗 47000 岁·但贫僧不敢食", price_level: "无价", vegetarian_friendly: true, monks_present: 2, tags: ["道家","仙果","镇元子","高规格"], photo_count: 8, vlog_views: "320w" },
+            { location: "宝象国皇宫", chapter: "第 29-30 回", restaurant_type: "异国皇宫", signature_dish: "西域胡饼（素版）", rating: 7.5, tang_monk_review: "异国风味·胡饼配葡萄·别有风味·但缺乏禅意", price_level: "¥¥¥¥", vegetarian_friendly: true, monks_present: 0, tags: ["异国","皇宫","胡饼","西域"], photo_count: 5, vlog_views: "67w" },
+            { location: "高老庄", chapter: "第 18-19 回", restaurant_type: "民间婚宴", signature_dish: "高老庄红烧肉复刻（素版）", rating: 5.0, tang_monk_review: "高太公热情·但全庄都吃红烧肉·素版复刻油脂感略重·2 星", price_level: "¥¥", vegetarian_friendly: true, monks_present: 0, tags: ["民间","婚宴","素版复刻","中等"], photo_count: 4, vlog_views: "120w" },
+            { location: "盘丝洞", chapter: "第 72-73 回", restaurant_type: "妖怪餐厅", signature_dish: "蜘蛛精虫草人肉包子", rating: 0.0, tang_monk_review: "家人们·这绝对踩到了我的红线·今天这家店零分·人肉包子·还是蜘蛛精做的·彻底破戒·立刻报警", price_level: "¥¥¥", vegetarian_friendly: false, monks_present: 0, tags: ["妖怪","人肉","破戒","零分","报警"], photo_count: 0, vlog_views: "580w" },
+            { location: "比丘国", chapter: "第 78-79 回", restaurant_type: "妖魔药膳", signature_dish: "小孩心肝做药引", rating: 0.0, tang_monk_review: "家人们·这绝对踩到了我的红线·今天这家店零分·用小孩心肝做药引·毫无人性·必须取缔", price_level: "¥¥¥¥", vegetarian_friendly: false, monks_present: 0, tags: ["妖魔","药引","小孩","零分","必须取缔"], photo_count: 0, vlog_views: "890w" },
+            { location: "灭法国", chapter: "第 84 回", restaurant_type: "凡间官府", signature_dish: "灭法国宫廷素宴", rating: 7.0, tang_monk_review: "国王悔悟后设斋答谢·素宴讲究·但仍是被迫·缺乏诚意", price_level: "¥¥¥", vegetarian_friendly: true, monks_present: 0, tags: ["悔悟","宫廷素宴","凡间"], photo_count: 4, vlog_views: "34w" },
+            { location: "天竺国皇宫", chapter: "第 93-95 回", restaurant_type: "天竺皇宫", signature_dish: "天竺咖喱素菜", rating: 8.5, tang_monk_review: "接近灵山·天竺风味·咖喱素菜·香气扑鼻·终于吃到正宗素食", price_level: "¥¥¥¥", vegetarian_friendly: true, monks_present: 0, tags: ["天竺","咖喱","皇宫","近灵山"], photo_count: 7, vlog_views: "210w" },
+            { location: "灵山雷音寺", chapter: "第 98 回", restaurant_type: "佛国仙斋", signature_dish: "佛祖赐斋·盂兰盆供", rating: 10.0, tang_monk_review: "终于到灵山·佛祖亲赐盂兰盆供·14 年苦行终结·完美收官", price_level: "无价", vegetarian_friendly: true, monks_present: 500, tags: ["佛国","仙斋","圆满","灵山"], photo_count: 15, vlog_views: "1500w" },
+            { location: "无底洞", chapter: "第 80-83 回", restaurant_type: "妖魔洞府", signature_dish: "老鼠精逼婚宴", rating: 0.0, tang_monk_review: "家人们·老鼠精逼婚·这是逼婚不是吃饭·零分·且报警", price_level: "¥", vegetarian_friendly: false, monks_present: 0, tags: ["妖魔","逼婚","零分","报警"], photo_count: 0, vlog_views: "420w" },
+            { location: "朱紫国", chapter: "第 68-71 回", restaurant_type: "异国宫廷", signature_dish: "朱紫国王病后调养素羹", rating: 6.5, tang_monk_review: "国王病愈后赐素羹·清淡养胃·但宫廷素菜缺乏民间烟火气", price_level: "¥¥¥", vegetarian_friendly: true, monks_present: 0, tags: ["异国","宫廷","病愈","素羹"], photo_count: 5, vlog_views: "56w" }
+        ],
+        monster_ipo: [
+            {
+                company_name: "狮驼岭集团", ticker: "STD：LION", ipo_year: "贞观 19 年",
+                ceo: "青毛狮子怪", cto: "黄牙老象", cmo: "大鹏金翅雕（如来舅舅·背景实力雄厚）",
+                core_business: "人体加工与再分配",
+                business_model: "垄断狮驼岭 800 里区域·收过路费·人体加工·妖兵训练",
+                market_cap: "约 47000 条人命/年",
+                revenue_source: ["过路费（凡间商旅）","人体加工（吃人）","妖兵雇佣（输出至其他山头）","兵器铸造（用凡间兵器熔铸）"],
+                competitive_advantage: ["三妖联手·战斗力量顶级","大鹏金翅雕是如来舅舅·政治背景强硬","狮驼洞固若金汤·防御等级 SSS","已垄断 800 里区域·形成区域寡头"],
+                risk_factors: ["取经团队即将到达（P0 风险）","大鹏金翅雕虽为如来舅舅·但如来执法严格","人体加工业务违反天庭律法·可能被取缔","妖兵训练成本高·培训周期长"],
+                financials: { year_revenue: "47000 人命", year_profit: "30000 人命（净利润率 64%）", cash_reserve: "800 里领地", debt_ratio: "30%", employee_count: 48000, subsidiaries: ["小钻风侦察连","狮驼洞守卫营","蒸笼加工车间"] },
+                use_of_proceeds: ["扩军备战·应对取经团队","扩建蒸笼加工车间·提升日处理能力","贿赂天庭官员·寻求政治庇护","研发新型法宝·对抗悟空"],
+                ipo_outcome: "失败——被取经团队摧毁·三妖被文殊普贤如来收走·集团破产清算",
+                investor_lesson: "不要投资违反天庭律法的妖魔企业·特别是有取经团队风险的"
+            },
+            {
+                company_name: "火云洞食品", ticker: "STD：FIRE", ipo_year: "贞观 14 年",
+                ceo: "红孩儿（圣婴大王）", cto: "无", cmo: "无",
+                core_business: "三昧真火加工·火属性食品研发",
+                business_model: "用三昧真火炼丹·炼器·食品加工·辐射号山 600 里",
+                market_cap: "约 8000 条人命/年",
+                revenue_source: ["三昧真火炼丹（仙丹）","火属性兵器锻造","山神土地供奉（强制）","凡间儿童绑架勒索"],
+                competitive_advantage: ["三昧真火独家专利·不可复制","对悟空特攻·悟空怕烟","父母为牛魔王铁扇公主·家族势力雄厚"],
+                risk_factors: ["取经团队即将到达（P0）","父母关系疏远·援助不及时","三昧真火虽强·但被观音三昧真火克制","管理团队单一·CEO 红孩儿年幼（约 300 岁）"],
+                financials: { year_revenue: "8000 人命", year_profit: "6000 人命", cash_reserve: "号山 600 里", debt_ratio: "20%", employee_count: 200, subsidiaries: ["号山守卫营","炼丹车间","火云枪制造厂"] },
+                use_of_proceeds: ["扩建炼丹车间","研发新型火属性法宝","贿赂牛魔王·寻求家族庇护"],
+                ipo_outcome: "失败——红孩儿被观音收为善财童子·集团资产被清算",
+                investor_lesson: "管理团队单一且年幼的妖魔企业风险极高·不要轻信家族势力"
+            },
+            {
+                company_name: "通天河运输", ticker: "STD：RIVER", ipo_year: "贞观 17 年",
+                ceo: "灵感大王（金鱼精）", cto: "无", cmo: "无",
+                core_business: "通天河渡运·童男女祭祀贸易",
+                business_model: "垄断通天河渡运·强迫陈家庄每年供奉童男女一名",
+                market_cap: "约 200 条人命/年",
+                revenue_source: ["渡运费（凡间商旅）","童男女供奉（每年 1 对）","水族贡品（鱼虾）"],
+                competitive_advantage: ["通天河渡运垄断","观音莲花池逃出·背景强硬","水战能力强·陆战弱"],
+                risk_factors: ["取经团队即将到达（P0）","观音背景虽强·但观音执法严格","童男女贸易违反天庭律法","冬季结冰期业务停滞"],
+                financials: { year_revenue: "200 人命", year_profit: "150 人命", cash_reserve: "通天河 800 里", debt_ratio: "10%", employee_count: 50, subsidiaries: ["水族侦察连","冰封期守卫队"] },
+                use_of_proceeds: ["扩建水下洞府","研发破冰法宝","贿赂天庭水神"],
+                ipo_outcome: "失败——灵感大王被观音收走·集团破产",
+                investor_lesson: "依赖单一贸易品（童男女）的妖魔企业风险极高·不要投资季节性强的妖魔企业"
+            },
+            {
+                company_name: "无底洞地产", ticker: "STD：MOUSE", ipo_year: "贞观 22 年",
+                ceo: "金鼻白毛老鼠精（半截观音）", cto: "无", cmo: "无",
+                core_business: "无底洞地产开发·逼婚服务",
+                business_model: "垄断无底洞·诱拐唐僧逼婚·寻求长生不老",
+                market_cap: "1 个唐僧（理论上无价）",
+                revenue_source: ["无底洞地产出租","逼婚唐僧（潜在长生不老收益）","凡间儿童掠夺"],
+                competitive_advantage: ["无底洞深不可测·防御顶级","托塔李天王义女·背景强硬","诱拐能力一流"],
+                risk_factors: ["取经团队即将到达（P0）","逼婚唐僧违反天庭律法","义父托塔李天王执法严格","业务模式单一·过度依赖唐僧"],
+                financials: { year_revenue: "100 人命", year_profit: "80 人命", cash_reserve: "无底洞（深不可测）", debt_ratio: "15%", employee_count: 30, subsidiaries: ["无底洞守卫营","逼婚策划部"] },
+                use_of_proceeds: ["扩建无底洞","研发诱拐法宝","贿赂义父李天王"],
+                ipo_outcome: "失败——被托塔李天王收走·集团破产",
+                investor_lesson: "依赖单一客户（唐僧）的妖魔企业风险极高·义父背景也不可靠"
+            },
+            {
+                company_name: "火焰山能源", ticker: "STD：FLAME", ipo_year: "贞观 25 年",
+                ceo: "牛魔王（大股东）", cto: "铁扇公主（CTO·芭蕉扇持有者）", cmo: "玉面狐狸（CMO·公关）",
+                core_business: "火焰山热能开发·芭蕉扇灭火服务",
+                business_model: "垄断火焰山 800 里·提供灭火服务·收芭蕉扇租金",
+                market_cap: "800 里热能资源",
+                revenue_source: ["火焰山过路费","芭蕉扇灭火租金（每年 1 次）","铁扇公主公主府招待","牛魔王暴力业务（外派打手）"],
+                competitive_advantage: ["芭蕉扇独家持有·不可复制","牛魔王七大圣之首·战力顶级","火焰山 800 里天然屏障","夫妻档管理团队（CEO+CTO）"],
+                risk_factors: ["取经团队即将到达（P0）","夫妻关系破裂·CEO 与 CTO 内讧","牛魔王小妾玉面狐狸分散管理精力","芭蕉扇被偷风险（悟空曾骗取）"],
+                financials: { year_revenue: "5000 人命+5000 两黄金", year_profit: "4000 人命+4000 两黄金", cash_reserve: "火焰山 800 里+芭蕉扇", debt_ratio: "40%", employee_count: 500, subsidiaries: ["火焰山守卫营","芭蕉扇出租部","翠云山招待所"] },
+                use_of_proceeds: ["研发新型灭火法宝","解决夫妻内讧（并购玉面狐狸）","扩军备战"],
+                ipo_outcome: "失败——牛魔王被哪吒收服·芭蕉扇借出灭火·集团破产",
+                investor_lesson: "夫妻档管理团队内讧风险极高·不要投资依赖单一法宝的妖魔企业"
+            }
+        ],
+        ethics_consumption_summary: {
+            mount_rights_findings: 5,
+            mount_rights_cases: 4,
+            total_mounts_recorded: 16,
+            food_vlog_entries: 12,
+            avg_food_rating: 5.5,
+            best_food: "五庄观",
+            worst_food: "盘丝洞",
+            monster_ipos: 5,
+            all_ipo_failed: true,
+            biggest_ipo: "狮驼岭集团"
+        }
+    };
+
+    // ===== 评分颜色映射 =====
+    function ratingColor(r) {
+        if (r >= 10) return "#d4af37";
+        if (r >= 8) return "#5a7a3a";
+        if (r >= 6) return "#3a6b8c";
+        if (r >= 4) return "#e9b885";
+        return "#c8463a";
+    }
+    function ratingLabel(r) {
+        if (r >= 10) return "满分";
+        if (r >= 8) return "优秀";
+        if (r >= 6) return "中等";
+        if (r >= 4) return "一般";
+        return "零分/极差";
+    }
+    function sevClass(s) {
+        if (s === "极高") return "sev-extreme";
+        if (s === "高") return "sev-high";
+        return "sev-mid";
+    }
+
+    // ===== 渲染：协会信息卡 =====
+    function renderOrgCard(org) {
+        const sel = d3.select("#org-card");
+        sel.selectAll("*").remove();
+        sel.append("h3").text(org.organization_name + " · " + org.annual_report_year);
+        const meta = sel.append("div").attr("class", "org-meta");
+        const fields = [
+            { k: "成立年份", v: org.founded_year },
+            { k: "首席执行官", v: org.ceo },
+            { k: "报告年度", v: org.annual_report_year },
+            { k: "覆盖坐骑", v: org.statistics.total_mounts_recorded + " 只" }
+        ];
+        fields.forEach(f => {
+            meta.append("div").attr("class", "field")
+                .html(`<span style="color:var(--accent-3);font-size:0.78rem;">${f.k}</span><br/><strong>${f.v}</strong>`);
+        });
+        sel.append("div").attr("class", "mission").text("Mission · " + org.mission);
+    }
+
+    // ===== 渲染：统计小卡 =====
+    function renderStats(s) {
+        const sel = d3.select("#stat-row");
+        sel.selectAll("*").remove();
+        const items = [
+            { k: "TOTAL · 记录坐骑", v: s.total_mounts_recorded, n: "只" },
+            { k: "DESCENDED · 下凡数", v: s.mounts_descended, n: "只（100%）" },
+            { k: "RETURNED · 回归数", v: s.mounts_returned, n: "只（100%）" },
+            { k: "PUNISHED · 受罚数", v: s.mounts_punished, n: "只（0%）" },
+            { k: "AVG DURATION · 平均下凡", v: s.average_descent_duration_years, n: "年" },
+            { k: "VICTIMS · 受害估计", v: s.total_victims_estimate, n: "人" },
+            { k: "COMPENSATION · 赔付", v: s.compensation_paid, n: "天庭执法失灵" }
+        ];
+        items.forEach(it => {
+            const d = sel.append("div").attr("class", "stat-card");
+            d.append("div").attr("class", "k").text(it.k);
+            d.append("div").attr("class", "v").text(it.v);
+            d.append("div").attr("class", "n").text(it.n);
+        });
+    }
+
+    // ===== 渲染：5 条 findings =====
+    function renderFindings(findings) {
+        const sel = d3.select("#finding-grid");
+        sel.selectAll("*").remove();
+        findings.forEach(f => {
+            const card = sel.append("div").attr("class", "finding-card");
+            card.style("border-left-color", f.severity === "极高" ? "var(--accent)" : f.severity === "高" ? "#d97706" : "#b88c2a");
+            const head = card.append("div").attr("class", "finding-head");
+            head.append("div").attr("class", "fid").text(f.finding_id);
+            head.append("div").attr("class", "ftitle").text(f.title);
+            head.append("div").attr("class", "sev-badge " + sevClass(f.severity)).text("严重度 · " + f.severity);
+            card.append("div").attr("class", "finding-desc").text(f.description);
+            const chips = card.append("div").attr("class", "chips");
+            f.implicated_monsters.forEach(m => chips.append("span").attr("class", "chip").text(m));
+            card.append("div").attr("class", "finding-meta").text("⏱ 持续时间：" + f.duration_years);
+        });
+    }
+
+    // ===== 渲染：4 个 case studies =====
+    function renderCases(cases) {
+        const sel = d3.select("#case-grid");
+        sel.selectAll("*").remove();
+        cases.forEach(c => {
+            const card = sel.append("div").attr("class", "case-card");
+            const head = card.append("div").attr("class", "case-head");
+            head.append("div").attr("class", "case-id").text(c.case_id);
+            head.append("div").attr("class", "case-mount").text(c.mount);
+            card.append("div").attr("class", "case-owner").text("原主：" + c.original_owner);
+            card.append("div").attr("class", "case-row").html(`<span class="lbl">事件：</span>${c.incident}`);
+            card.append("div").attr("class", "case-row").html(`<span class="lbl">时长：</span>${c.duration}`);
+            card.append("div").attr("class", "case-row").html(`<span class="lbl">受害者：</span>${c.victims}`);
+            card.append("div").attr("class", "case-resolution").html(`<span class="lbl" style="color:var(--accent-2);">解决：</span>${c.resolution}`);
+            card.append("div").attr("class", "case-resolution").html(`<span class="lbl" style="color:var(--accent-3);">索赔：</span>${c.compensation_claim}`);
+            card.append("div").attr("class", "case-outcome").text("结局：" + c.outcome);
+        });
+    }
+
+    // ===== 渲染：5 条 recommendations =====
+    function renderRecs(recs) {
+        const sel = d3.select("#rec-list");
+        sel.selectAll("*").remove();
+        recs.forEach(r => sel.append("li").text(r));
+    }
+
+    // ===== 渲染：12 家探店评分榜 =====
+    function renderFoodGrid(foods) {
+        const sel = d3.select("#food-grid");
+        sel.selectAll("*").remove();
+        // 按评分降序
+        const sorted = foods.slice().sort((a, b) => b.rating - a.rating);
+        sorted.forEach(f => {
+            const isBest = f.rating >= 10;
+            const isZero = f.rating <= 0;
+            const card = sel.append("div").attr("class", "food-card" + (isBest ? " best" : "") + (isZero ? " zero" : ""));
+            const head = card.append("div").attr("class", "food-head");
+            const left = head.append("div");
+            left.append("div").attr("class", "food-loc").html(f.location + (isBest ? '<span class="best-tag">满分</span>' : '') + (isZero ? '<span class="zero-tag">家人们·零分</span>' : ''));
+            left.append("div").attr("class", "food-chapter").text(f.chapter);
+            head.append("div").attr("class", "rating-big").style("color", ratingColor(f.rating)).text(f.rating.toFixed(1));
+            card.append("div").attr("class", "food-type").text(f.restaurant_type);
+            card.append("div").attr("class", "food-dish").html(`<span class="lbl">招牌：</span>${f.signature_dish}`);
+            card.append("div").attr("class", "food-review").text('"' + f.tang_monk_review + '"');
+            const meta = card.append("div").attr("class", "food-meta");
+            meta.append("span").text("价位：" + f.price_level);
+            meta.append("span").attr("class", "veg-badge " + (f.vegetarian_friendly ? "veg-yes" : "veg-no")).text(f.vegetarian_friendly ? "素食" : "荤食");
+            meta.append("span").text("👁 " + f.vlog_views);
+            meta.append("span").text("📷 " + f.photo_count);
+            meta.append("span").text("僧侣 " + f.monks_present + " 人");
+        });
+    }
+
+    // ===== 渲染：探店评分横向条形图 =====
+    function renderFoodBar(foods) {
+        const svg = d3.select("#food-bar-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("food-bar-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const sorted = foods.slice().sort((a, b) => b.rating - a.rating);
+        const h = sorted.length * 36 + 40;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 16, right: 60, bottom: 24, left: 130 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+        const barH = 22;
+        const gap = (innerH - barH * sorted.length) / (sorted.length - 1);
+
+        const x = d3.scaleLinear().domain([0, 10]).range([0, innerW]);
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 网格线
+        [2, 4, 6, 8, 10].forEach(v => {
+            g.append("line")
+                .attr("x1", x(v)).attr("x2", x(v))
+                .attr("y1", 0).attr("y2", innerH)
+                .attr("stroke", "var(--line)")
+                .attr("stroke-dasharray", "3,3")
+                .attr("opacity", 0.6);
+            g.append("text")
+                .attr("x", x(v)).attr("y", -4)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.7rem")
+                .style("fill", "var(--ink-soft)")
+                .style("font-family", "JetBrains Mono, monospace")
+                .text(v);
+        });
+
+        const tip = d3.select("#food-tip");
+
+        sorted.forEach((f, i) => {
+            const y = i * (barH + gap);
+            const color = ratingColor(f.rating);
+
+            // 地点标签
+            g.append("text")
+                .attr("x", -10)
+                .attr("y", y + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.82rem")
+                .style("font-weight", "600")
+                .style("fill", "var(--ink)")
+                .text(f.location);
+
+            // 背景轨道
+            g.append("rect")
+                .attr("x", 0).attr("y", y)
+                .attr("width",Math.max(0, innerW)).attr("height", barH)
+                .attr("fill", "#faf7f2")
+                .attr("stroke", "var(--line)")
+                .attr("rx", 3);
+
+            // 数值条
+            g.append("rect")
+                .attr("x", 0).attr("y", y)
+                .attr("width",0).attr("height", barH)
+                .attr("fill", color)
+                .attr("rx", 3)
+                .style("cursor", "pointer")
+                .transition()
+                .delay(i * 80).duration(700)
+                .ease(d3.easeCubicOut)
+                .attr("width",Math.max(0, x(f.rating)));
+
+            // 评分数字
+            g.append("text")
+                .attr("x", x(f.rating) + 6)
+                .attr("y", y + barH / 2 + 4)
+                .style("font-size", "0.82rem")
+                .style("font-weight", "600")
+                .style("fill", color)
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("opacity", 0)
+                .text(f.rating.toFixed(1))
+                .transition().delay(i * 80 + 600).duration(300)
+                .style("opacity", 1);
+
+            // 交互层
+            g.append("rect")
+                .attr("x", 0).attr("y", y)
+                .attr("width",Math.max(0, innerW)).attr("height", barH)
+                .attr("fill", "transparent")
+                .style("cursor", "pointer")
+                .on("mouseover", function(e) {
+                    tip.style("opacity", 1)
+                        .html(`<div class="tip-title">${f.location} · ${f.chapter}</div>` +
+                              `<div>类型：${f.restaurant_type}</div>` +
+                              `<div>招牌：${f.signature_dish}</div>` +
+                              `<div>评分：<strong style="color:var(--accent-soft);">${f.rating.toFixed(1)}</strong> · ${ratingLabel(f.rating)}</div>` +
+                              `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">"${f.tang_monk_review}"</div>`);
+                })
+                .on("mousemove", function(e) {
+                    const rect = el.parentElement.getBoundingClientRect();
+                    tip.style("left", (e.clientX - rect.left + 14) + "px")
+                       .style("top", (e.clientY - rect.top - 10) + "px");
+                })
+                .on("mouseout", function() { tip.style("opacity", 0); });
+        });
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(5))
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "var(--ink-soft)");
+    }
+
+    // ===== 渲染：5 家 IPO 招股书 =====
+    function renderIpoList(ipos, biggestName) {
+        const sel = d3.select("#ipo-list");
+        sel.selectAll("*").remove();
+        ipos.forEach(ipo => {
+            const isBig = ipo.company_name === biggestName;
+            const card = sel.append("div").attr("class", "ipo-card" + (isBig ? " biggest" : ""));
+
+            // 头部
+            const head = card.append("div").attr("class", "ipo-head");
+            head.append("div").attr("class", "ipo-name").text(ipo.company_name);
+            const headRight = head.append("div");
+            headRight.append("span").attr("class", "ipo-ticker").text(ipo.ticker);
+            headRight.append("span").attr("class", "ipo-year").text(" · " + ipo.ipo_year);
+
+            // 管理团队
+            card.append("div").attr("class", "ipo-sub-h").text("管理团队 · Management");
+            const mgmt = card.append("div").attr("class", "ipo-mgmt");
+            [{ role: "CEO", name: ipo.ceo }, { role: "CTO", name: ipo.cto }, { role: "CMO", name: ipo.cmo }].forEach(m => {
+                const mi = mgmt.append("div").attr("class", "mi");
+                mi.append("div").attr("class", "role").text(m.role);
+                mi.append("div").attr("class", "name").text(m.name);
+            });
+
+            // 业务
+            card.append("div").attr("class", "ipo-biz").html(`<span class="lbl">核心业务：</span>${ipo.core_business}`);
+            card.append("div").attr("class", "ipo-biz").html(`<span class="lbl">商业模式：</span>${ipo.business_model}`);
+
+            // 市值
+            card.append("div").attr("class", "ipo-market").html(`<span class="lbl">MARKET CAP · 市值：</span>${ipo.market_cap}`);
+
+            // 财务摘要
+            card.append("div").attr("class", "ipo-sub-h").text("财务摘要 · Financials");
+            const fin = card.append("div").attr("class", "fin-row");
+            const finItems = [
+                { k: "营收", v: ipo.financials.year_revenue },
+                { k: "利润", v: ipo.financials.year_profit },
+                { k: "现金储备", v: ipo.financials.cash_reserve },
+                { k: "负债率", v: ipo.financials.debt_ratio }
+            ];
+            finItems.forEach(it => {
+                const c = fin.append("div").attr("class", "fin-cell");
+                c.append("div").attr("class", "k").text(it.k);
+                c.append("div").attr("class", "v").text(it.v);
+            });
+            card.append("div").attr("class", "ipo-biz").html(`<span class="lbl">员工数：</span>${ipo.financials.employee_count} 人 · 子公司：${ipo.financials.subsidiaries.join(" · ")}`);
+
+            // 营收来源
+            card.append("div").attr("class", "ipo-sub-h").text("营收来源 · Revenue Source");
+            const revChips = card.append("div").attr("class", "chips");
+            ipo.revenue_source.forEach(r => revChips.append("span").attr("class", "chip").text(r));
+
+            // 竞争优势
+            card.append("div").attr("class", "ipo-sub-h").text("竞争优势 · Competitive Advantage");
+            const advChips = card.append("div").attr("class", "chips");
+            ipo.competitive_advantage.forEach(a => advChips.append("span").attr("class", "chip").style("background", "#eef5e8").style("color", "var(--accent-4)").style("border-color", "var(--accent-4)").text(a));
+
+            // 风险因素
+            card.append("div").attr("class", "ipo-sub-h").text("风险因素 · Risk Factors");
+            const riskDiv = card.append("div");
+            ipo.risk_factors.forEach(r => riskDiv.append("div").attr("class", "warn-item").text(r));
+
+            // 募资用途
+            card.append("div").attr("class", "ipo-sub-h").text("募资用途 · Use of Proceeds");
+            const ul = card.append("ol").attr("class", "use-list");
+            ipo.use_of_proceeds.forEach(u => ul.append("li").text(u));
+
+            // IPO 结局
+            const out = card.append("div").attr("class", "ipo-outcome");
+            out.append("div").attr("class", "failed-stamp").text("FAILED");
+            out.append("div").attr("class", "ot-text").text(ipo.ipo_outcome);
+
+            // 投资人教训
+            card.append("div").attr("class", "ipo-lesson").text(ipo.investor_lesson);
+        });
+    }
+
+    // ===== 渲染：IPO 散点图 =====
+    function renderIpoScatter(ipos) {
+        const svg = d3.select("#ipo-scatter-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("ipo-scatter-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 460;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 30, right: 40, bottom: 60, left: 70 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+
+        // 提取数值
+        const data = ipos.map(ipo => ({
+            name: ipo.company_name,
+            ticker: ipo.ticker,
+            emp: ipo.financials.employee_count,
+            // 营收提取数字部分（人命数）
+            rev: extractRevenueNum(ipo.financials.year_revenue),
+            revText: ipo.financials.year_revenue,
+            empText: ipo.financials.employee_count + " 人",
+            outcome: ipo.ipo_outcome
+        }));
+
+        const x = d3.scaleLog().domain([20, 60000]).range([0, innerW]);
+        const y = d3.scaleLog().domain([50, 60000]).range([innerH, 0]);
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 网格
+        g.append("g")
+            .selectAll("line")
+            .data([100, 1000, 10000])
+            .enter()
+            .append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", d => y(d)).attr("y2", d => y(d))
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "3,3")
+            .attr("opacity", 0.5);
+
+        g.append("g")
+            .selectAll("line")
+            .data([100, 1000, 10000])
+            .enter()
+            .append("line")
+            .attr("x1", d => x(d)).attr("x2", d => x(d))
+            .attr("y1", 0).attr("y2", innerH)
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "3,3")
+            .attr("opacity", 0.5);
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).tickValues([30, 100, 1000, 10000, 50000]).tickFormat(d => d >= 1000 ? (d / 1000) + "k" : d))
+            .selectAll("text").style("font-size", "0.75rem").style("fill", "var(--ink-soft)");
+
+        // Y 轴
+        g.append("g")
+            .call(d3.axisLeft(y).tickValues([100, 1000, 10000, 50000]).tickFormat(d => d >= 1000 ? (d / 1000) + "k" : d))
+            .selectAll("text").style("font-size", "0.75rem").style("fill", "var(--ink-soft)");
+
+        // 轴标签
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("fill", "var(--accent-3)")
+            .text("员工数（对数刻度）");
+
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerH / 2).attr("y", -52)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("fill", "var(--accent-3)")
+            .text("年营收 / 人命（对数刻度）");
+
+        // 标题
+        svg.append("text")
+            .attr("x", w / 2).attr("y", 18)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.88rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent)")
+            .text("5 家妖怪 IPO · 全部失败（红色标注）");
+
+        const tip = d3.select("#ipo-tip");
+
+        // 散点
+        g.selectAll(".ipo-dot")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("class", "ipo-dot")
+            .attr("cx", d => x(d.emp))
+            .attr("cy", d => y(d.rev))
+            .attr("r", 0)
+            .attr("fill", "var(--accent)")
+            .attr("stroke", "#fff").attr("stroke-width", 2)
+            .style("cursor", "pointer")
+            .transition().delay((d, i) => i * 120).duration(500)
+            .ease(d3.easeBackOut)
+            .attr("r", d => d.name === "狮驼岭集团" ? 14 : 10);
+
+        // 公司名标注
+        g.selectAll(".ipo-label")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "ipo-label")
+            .attr("x", d => x(d.emp))
+            .attr("y", d => y(d.rev) - 18)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--ink)")
+            .style("opacity", 0)
+            .text(d => d.name)
+            .transition().delay((d, i) => i * 120 + 400).duration(400)
+            .style("opacity", 1);
+
+        // 重新绑定交互
+        g.selectAll(".ipo-dot")
+            .on("mouseover", function(e, d) {
+                d3.select(this).transition().duration(150).attr("r", d.name === "狮驼岭集团" ? 17 : 13);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${d.name}</div>` +
+                          `<div>代码：${d.ticker}</div>` +
+                          `<div>员工数：<strong style="color:var(--accent-soft);">${d.empText}</strong></div>` +
+                          `<div>年营收：<strong style="color:var(--accent-soft);">${d.revText}</strong></div>` +
+                          `<div style="margin-top:4px;color:#ffb;">${d.outcome}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = el.parentElement.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function(e, d) {
+                d3.select(this).transition().duration(150).attr("r", d.name === "狮驼岭集团" ? 14 : 10);
+                tip.style("opacity", 0);
+            });
+
+        // 图例
+        const legend = svg.append("g").attr("transform", `translate(${w - 200},${h - 28})`);
+        legend.append("circle")
+            .attr("cx", 8).attr("cy", 0).attr("r", 6)
+            .attr("fill", "var(--accent)")
+            .attr("stroke", "#fff").attr("stroke-width", 2);
+        legend.append("text")
+            .attr("x", 22).attr("y", 4)
+            .style("font-size", "0.78rem")
+            .style("fill", "var(--ink-soft)")
+            .text("失败 IPO（5/5 = 100%）");
+    }
+
+    // 从营收字符串中提取数字部分（人命数）
+    function extractRevenueNum(s) {
+        const m = String(s).match(/(\d+)/);
+        return m ? parseInt(m[1]) : 100;
+    }
+
+    // ===== 渲染：关键洞察 =====
+    function renderInsights() {
+        const insights = [
+            `<strong>16 只坐骑下凡·无一受罚</strong>·天庭执法选择性失明——回归率 100%·处罚率 0%。`,
+            `受害约 <strong>12000 人·赔付 0 元</strong>·天庭坐骑监管形同虚设·受害者无任何救济渠道。`,
+            `唐僧探店 0 分店全部为妖怪餐厅（<strong>盘丝洞·比丘国·无底洞</strong>）——斋戒破戒临界点·人肉/药引/逼婚皆触红线。`,
+            `<strong>5 家妖怪 IPO 全部失败</strong>·妖魔经济模式不可持续·P0 风险（取经团队）为最大杀手。`,
+            `狮驼岭集团 <strong>48000 员工最大</strong>·但因取经团队风险而破产——管理"政治风险"是妖魔企业命门。`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(t => ul.append("li").html(t));
+    }
+
+    // ===== 数据加载 =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error("fetch failed: " + path);
+            return await res.json();
+        } catch (e) {
+            console.warn("[INFO] 使用嵌入数据 for", path, ":", e.message);
+            return fallback;
+        }
+    }
+
+    async function loadAll() {
+        const [mrr, tmfv, mi, ecs] = await Promise.all([
+            loadJson("../../scripts/output/data/mount_rights_report.json", EMBEDDED.mount_rights_report),
+            loadJson("../../scripts/output/data/tang_monk_food_vlog.json", EMBEDDED.tang_monk_food_vlog),
+            loadJson("../../scripts/output/data/monster_ipo.json", EMBEDDED.monster_ipo),
+            loadJson("../../scripts/output/data/ethics_consumption_summary.json", EMBEDDED.ethics_consumption_summary)
+        ]);
+        return { mount_rights_report: mrr, tang_monk_food_vlog: tmfv, monster_ipo: mi, summary: ecs };
+    }
+
+    // ===== 主流程 =====
+    async function main() {
+        const data = await loadAll();
+        window.__data = data;
+
+        // 数据源提示
+        const usedEmbedded = (data.mount_rights_report === EMBEDDED.mount_rights_report);
+        if (!usedEmbedded) {
+            document.getElementById("dataSource").innerHTML =
+                "数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）";
+        }
+
+        renderOrgCard(data.mount_rights_report);
+        renderStats(data.mount_rights_report.statistics);
+        renderFindings(data.mount_rights_report.key_findings);
+        renderCases(data.mount_rights_report.case_studies);
+        renderRecs(data.mount_rights_report.recommendations);
+        renderFoodGrid(data.tang_monk_food_vlog);
+        renderFoodBar(data.tang_monk_food_vlog);
+        renderIpoList(data.monster_ipo, data.summary.biggest_ipo);
+        renderIpoScatter(data.monster_ipo);
+        renderInsights();
+
+        document.getElementById("gen-time").textContent =
+            "数据生成时间：" + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
+    }
+
+    // 窗口缩放重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__data) {
+                renderFoodBar(window.__data.tang_monk_food_vlog);
+                renderIpoScatter(window.__data.monster_ipo);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

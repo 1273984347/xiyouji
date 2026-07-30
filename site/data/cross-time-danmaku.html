@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨时空弹幕博物馆 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染弹幕博物馆。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --line: #d9cdb8;
+            --rebel: #8c2a2a;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 56px 24px 44px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.3rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.28em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 14px;
+            font-size: 0.86rem;
+            color: rgba(245, 233, 212, 0.68);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 8px; color: var(--ink-soft); opacity: 0.6; }
+
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: #f5e9d4;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .device {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 32px 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 28px;
+            scroll-margin-top: 20px;
+        }
+        .device-title {
+            font-size: 1.45rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+
+        /* 年龄段 tab */
+        .age-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+        .age-tab { padding: 8px 16px; border: 1px solid var(--line); border-radius: 6px;
+                   cursor: pointer; background: var(--paper); transition: all 0.2s; }
+        .age-tab.active { background: var(--accent); color: #fff8ec; border-color: var(--accent); }
+
+        /* 弹幕卡片网格 */
+        .danmaku-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+                        gap: 16px; }
+        .danmaku-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+                        padding: 16px; box-shadow: var(--shadow); transition: transform 0.18s; }
+        .danmaku-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+        .danmaku-card .celebrity { font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+        .danmaku-card .quote { font-size: 0.9rem; color: var(--ink); line-height: 1.6; margin-bottom: 8px; }
+        .danmaku-card .modern { font-size: 0.78rem; color: var(--ink-soft); font-style: italic; }
+
+        /* 嘴替大卡片 */
+        .mouthpiece-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 28px 0; }
+        @media (max-width: 768px) { .mouthpiece-row { grid-template-columns: 1fr; } }
+        .mouthpiece-card { background: linear-gradient(160deg, #fff8ec, #f5e9d4); border: 1px solid var(--accent-soft);
+                           border-radius: 10px; padding: 24px; position: relative; }
+        .mouthpiece-card .char-name { font-size: 1.3rem; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+        .mouthpiece-card .char-role { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 12px; }
+        .mouthpiece-card .quote { font-size: 1rem; color: var(--ink); line-height: 1.7; margin-bottom: 8px; }
+        .mouthpiece-card .modern { font-size: 0.82rem; color: var(--accent-3); font-style: italic; }
+
+        /* 名人看当下 */
+        .modern-commentary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 16px; }
+        .commentary-card { background: var(--paper); border: 1px solid var(--line);
+                           border-radius: 8px; padding: 18px; border-left: 3px solid var(--accent-2); }
+        .commentary-card .c-name { font-weight: 600; color: var(--accent-2); font-size: 0.95rem; }
+        .commentary-card .c-topic { font-size: 0.78rem; color: var(--ink-soft); margin: 2px 0 10px; }
+        .commentary-card .c-text { font-size: 0.88rem; color: var(--ink); line-height: 1.7; }
+        .commentary-card .c-aside { font-size: 0.78rem; color: var(--accent-3); font-style: italic; margin-top: 10px; }
+
+        /* 国际名人弹幕组 */
+        .intl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 16px; margin-bottom: 20px; }
+        .intl-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+                     padding: 18px; border-top: 3px solid var(--accent-4); }
+        .intl-card .i-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+        .intl-card .i-flag { font-size: 1.2rem; }
+        .intl-card .i-name { font-weight: 600; color: var(--accent-4); }
+        .intl-card .i-country { font-size: 0.78rem; color: var(--ink-soft); }
+        .intl-card .i-role { font-size: 0.8rem; color: var(--ink-soft); margin-bottom: 8px; }
+        .intl-card .i-view { font-size: 0.88rem; color: var(--ink); line-height: 1.7; font-style: italic; }
+        .intl-card .i-work { font-size: 0.78rem; color: var(--accent-3); margin-top: 8px; }
+        .adaptations { display: flex; flex-wrap: wrap; gap: 10px; }
+        .adaptation-chip { background: #fff8ec; border: 1px solid var(--accent-soft); border-radius: 16px;
+                           padding: 6px 14px; font-size: 0.8rem; }
+        .adaptation-chip .a-flag { margin-right: 4px; }
+
+        /* 留言博物馆 */
+        .message-museum { background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+                          padding: 24px; margin-top: 28px; }
+        .message-form { display: grid; gap: 10px; margin-bottom: 20px; }
+        .message-form textarea { width: 100%; min-height: 80px; padding: 10px; border: 1px solid var(--line);
+                                 border-radius: 6px; font-family: inherit; resize: vertical; }
+        .message-form button { padding: 8px 20px; background: var(--accent); color: #fff8ec; border: none;
+                               border-radius: 6px; cursor: pointer; justify-self: start; }
+        .message-form button:hover { background: var(--accent-3); }
+
+        /* ===== v0.9.1 创意升级：3 个 signature moments ===== */
+
+        /* 1. Hero 名人星图 */
+        .hero-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .hero-canvas .star-node { pointer-events: auto; cursor: pointer; }
+        .hero-canvas .star-label {
+            font-family: "Noto Serif SC", serif;
+            font-size: 0.82rem;
+            fill: rgba(245, 233, 212, 0.6);
+            pointer-events: none;
+            user-select: none;
+            transition: fill 0.3s;
+        }
+        .hero-canvas .star-node:hover .star-label { fill: var(--accent-soft); }
+        .hero-quote-tooltip {
+            position: absolute;
+            background: rgba(26, 20, 16, 0.94);
+            border: 1px solid var(--accent-soft);
+            border-radius: 8px;
+            padding: 12px 16px;
+            max-width: 280px;
+            font-size: 0.84rem;
+            color: #f5e9d4;
+            line-height: 1.6;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.25s;
+            z-index: 100;
+        }
+        .hero-quote-tooltip.visible { opacity: 1; }
+        .hero-quote-tooltip .t-name { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        .hero-quote-tooltip .t-quote { font-style: italic; color: rgba(245, 233, 212, 0.9); }
+        .hero-quote-tooltip .t-modern { color: var(--accent-soft); font-size: 0.78rem; margin-top: 6px; opacity: 0.75; }
+
+        /* 2. 真弹幕轨道 */
+        .danmaku-track {
+            position: relative;
+            height: 340px;
+            background: linear-gradient(180deg, #1a1410 0%, #2a1f18 100%);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+        }
+        .danmaku-track .track-label {
+            position: absolute;
+            top: 12px;
+            left: 16px;
+            color: rgba(245, 233, 212, 0.4);
+            font-size: 0.72rem;
+            letter-spacing: 0.24em;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .danmaku-track .track-hint {
+            position: absolute;
+            bottom: 12px;
+            right: 16px;
+            color: rgba(245, 233, 212, 0.3);
+            font-size: 0.72rem;
+            font-style: italic;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .danmaku-fly {
+            position: absolute;
+            white-space: nowrap;
+            color: #f5e9d4;
+            font-size: 0.9rem;
+            padding: 5px 14px;
+            border-radius: 16px;
+            background: rgba(200, 70, 58, 0.15);
+            border: 1px solid rgba(233, 184, 133, 0.25);
+            animation: danmakuFly linear forwards;
+            pointer-events: none;
+            will-change: transform;
+        }
+        .danmaku-fly.user-msg {
+            background: rgba(58, 107, 140, 0.22);
+            border-color: rgba(90, 122, 58, 0.4);
+        }
+        .danmaku-fly.ambient {
+            background: transparent;
+            border-color: transparent;
+            color: rgba(245, 233, 212, 0.55);
+            font-style: italic;
+        }
+        @keyframes danmakuFly {
+            from { transform: translateX(100%); }
+            to { transform: translateX(calc(-100vw - 100%)); }
+        }
+        .danmaku-empty {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(245, 233, 212, 0.35);
+            font-size: 0.88rem;
+            font-style: italic;
+        }
+
+        /* 3. 世界地图 */
+        .world-map {
+            position: relative;
+            height: 360px;
+            background: linear-gradient(160deg, #f5efe6 0%, #ede4d3 100%);
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .world-map svg { width: 100%; height: 100%; display: block; }
+        .map-continent { fill: rgba(122, 82, 48, 0.1); stroke: rgba(122, 82, 48, 0.22); stroke-width: 0.8; }
+        .map-dot { fill: var(--accent-4); cursor: pointer; transition: r 0.2s, fill 0.2s; }
+        .map-dot:hover { fill: var(--accent); }
+        .map-label { font-size: 11px; fill: var(--ink-soft); font-family: "Noto Serif SC", serif; text-anchor: middle; }
+        .map-line { stroke: var(--accent-4); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.35; fill: none; }
+        .map-popup {
+            position: absolute;
+            background: var(--paper);
+            border: 1px solid var(--accent-4);
+            border-radius: 8px;
+            padding: 14px 16px;
+            max-width: 260px;
+            font-size: 0.84rem;
+            color: var(--ink);
+            line-height: 1.6;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.25s, transform 0.25s;
+            pointer-events: none;
+            z-index: 5;
+        }
+        .map-popup.visible { opacity: 1; transform: translateY(0); }
+        .map-popup .p-head { font-weight: 600; color: var(--accent-4); margin-bottom: 6px; }
+        .map-popup .p-view { font-style: italic; color: var(--ink); }
+
+        /* P2-2 + P2-3: 320px 边界网格溢出修复 */
+        @media (max-width: 520px) {
+            .danmaku-grid { grid-template-columns: 1fr; }
+            .mouthpiece-row { grid-template-columns: 1fr; }
+            .modern-commentary-grid { grid-template-columns: 1fr; }
+            .intl-grid { grid-template-columns: 1fr; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+<header class="hero">
+    <svg class="hero-canvas" id="hero-canvas" aria-hidden="true"></svg>
+    <div class="hero-quote-tooltip" id="hero-tooltip" role="tooltip" aria-hidden="true"></div>
+    <h1>跨时空弹幕博物馆</h1>
+    <div class="subtitle">CROSS-TIME DANMAKU MUSEUM</div>
+    <div class="tagline">五百年批评史·全年龄共鸣·你就是批评家。</div>
+</header>
+
+<main class="container">
+    <nav class="breadcrumb"><a href="../dashboard.html">数据看板</a> → 跨时空弹幕博物馆</nav>
+
+    <!-- dataSource 提示（main() 中根据 fetchStatus 更新内容） -->
+    <div class="notice" id="dataSource">
+        数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+    </div>
+
+    <section class="device">
+        <h2 class="device-title">四层全年龄弹幕墙</h2>
+        <div class="age-tabs">
+            <div class="age-tab active" data-age="幼儿/小学" role="button" tabindex="0">👶 幼儿/小学</div>
+            <div class="age-tab" data-age="初中" role="button" tabindex="0">🎒 初中</div>
+            <div class="age-tab" data-age="高中" role="button" tabindex="0">📚 高中</div>
+            <div class="age-tab" data-age="大学" role="button" tabindex="0">🎓 大学</div>
+        </div>
+        <div id="danmaku-grid" class="danmaku-grid"></div>
+    </section>
+
+    <section class="device">
+        <h2 class="device-title">当代打工人嘴替</h2>
+        <div id="mouthpiece-row" class="mouthpiece-row"></div>
+    </section>
+
+    <section class="device">
+        <h2 class="device-title">名人看当下</h2>
+        <p style="font-size:0.85rem;color:var(--ink-soft);margin-bottom:16px;">如果批评家们活在今天·会如何用西游评点当代现象</p>
+        <div id="modern-commentary-grid" class="modern-commentary-grid"></div>
+    </section>
+
+    <section class="device">
+        <h2 class="device-title">国际名人弹幕组</h2>
+        <p style="font-size:0.85rem;color:var(--ink-soft);margin-bottom:16px;">《西游记》走向世界·跨文化共鸣</p>
+        <div class="world-map" id="world-map" aria-label="国际名人世界地图"></div>
+        <div id="intl-grid" class="intl-grid"></div>
+        <h3 style="font-size:1rem;color:var(--ink);margin:20px 0 10px;">全球改编作品</h3>
+        <div id="adaptations" class="adaptations"></div>
+    </section>
+
+    <section class="device">
+        <h2 class="device-title">留言博物馆</h2>
+        <div class="message-museum">
+            <div class="message-form">
+                <textarea id="user-message" placeholder="留下你的弹幕·成为批评史的一部分..."></textarea>
+                <button id="submit-message">发送弹幕</button>
+            </div>
+            <div class="danmaku-track" id="danmaku-track" aria-label="实时弹幕轨道">
+                <div class="track-label">LIVE 弹幕</div>
+                <div class="track-hint">名人金句与读者留言一起飘过</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer style="text-align:center;padding:24px;color:var(--ink-soft);font-size:0.85rem;border-top:1px solid var(--line);margin-top:40px;">
+    详解西游记 · v0.9 跨时空弹幕博物馆
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/06-个人随笔/现代视角解读.md">现代视角解读</a></div>
+</footer>
+
+<script>
+const EMBEDDED_DATA = {
+    celebrity_profiles: [
+        { id: "li_zhuowu", name: "李卓吾", era: "明清", role: "明代思想家·头号解读UP主",
+          quote: "读《西游记》者，不知作者宗旨，定作戏论。",
+          modern_translation: "看不懂深层意思的人·只配当乐子人",
+          suitable_age: "高中+",
+          historical_detail: "明代思想家李贽（1527-1602），号卓吾。首位将《西游记》提升到哲学高度的批评家，提出「释厄」即心性修行解脱密码。" },
+        { id: "jin_shengtan", name: "金圣叹", era: "清初", role: "清代评点家·毒舌一星差评",
+          quote: "（对西游评价不及水浒）",
+          modern_translation: "连差评区顶流都忍不住要评·说明西游火到绕不开",
+          suitable_age: "初中+",
+          historical_detail: "金圣叹（1608-1661），清初文学批评家。以评点水浒、西厢闻名，对西游评价不高但绕不开，侧面证明西游影响力。" },
+        { id: "lu_xun", name: "鲁迅", era: "民国", role: "神魔小说鼻祖·神魔皆有人情",
+          quote: "神魔皆有人情·精魅亦通世故",
+          modern_translation: "妖怪也懂人情世故",
+          suitable_age: "小学+",
+          historical_detail: "鲁迅《中国小说史略》将《西游记》定位为「神魔小说」，剥离金丹大道宗教附会，完成祛魅手术。提出「神魔皆有人情」经典论断。" },
+        { id: "hu_shi", name: "胡适", era: "民国", role: "高级童话派·反对过度解读",
+          quote: "至多不过是一部很有趣味的滑稽小说……并没有什么微妙的意思",
+          modern_translation: "就是个好玩的故事",
+          suitable_age: "初中+",
+          historical_detail: "胡适《西游记考证》花大力气考证作者与版本源流，怀疑作者非吴承恩，开启作者悬疑推理。但认为西游「并无微妙意思」，反对过度解读。" },
+        { id: "chen_yinke", name: "陈寅恪", era: "民国", role: "考据派·追溯悟空形象源流",
+          quote: "《西游记玄奘弟子故事之演变》",
+          modern_translation: "孙悟空的形象是怎么一步步演变来的",
+          suitable_age: "高中+",
+          historical_detail: "陈寅恪（1890-1969），国学大师。撰《西游记玄奘弟子故事之演变》（1930），赞同胡适哈奴曼说，对悟空、八戒、沙僧故事进行佛经溯源。" },
+        { id: "zheng_zhenduo", name: "郑振铎", era: "民国", role: "考据派·梳理故事演化层叠",
+          quote: "《西游记的演化》",
+          modern_translation: "西游故事是一层一层叠上去的",
+          suitable_age: "高中+",
+          historical_detail: "郑振铎（1898-1958），文学史家。撰《西游记的演化》，梳理西游故事从民间传说到成书的层叠演化过程。" },
+        { id: "mao_zedong", name: "毛泽东", era: "现代", role: "西游十级学者+野生代言人",
+          quote: "唐僧百折不回·悟空反权威·八戒艰苦奋斗·白龙马任劳任怨",
+          modern_translation: "项目经理天花板+整顿职场先驱+务实打工人+最强后勤",
+          suitable_age: "高中+",
+          historical_detail: "毛泽东熟读《西游记》，1945年重庆谈判时与民主党派人士聊一小时西游，大赞悟空「反权威」，表面说猴哥实际针砭蒋介石独裁——「用文化暗号谈政治」顶级案例。" },
+        { id: "lin_yutang", name: "林语堂", era: "现代", role: "人性解剖师",
+          quote: "悟空=叛逆少年·八戒=真实打工人·用荣格原型对读",
+          modern_translation: "猴哥是青春期·猪哥是打工人",
+          suitable_age: "大学+",
+          historical_detail: "林语堂（1895-1976），作家、学者。用荣格心理学原型理论对读西游角色，将悟空视为叛逆少年原型，八戒视为真实打工人原型。" },
+        { id: "qian_zhongshu", name: "钱钟书", era: "现代", role: "细节狂魔+纠错达人",
+          quote: "一口钟是无袖长衣非铜钟",
+          modern_translation: "读书仔细·连电视剧都骗不了你",
+          suitable_age: "小学+",
+          historical_detail: "钱钟书（1910-1998），学者、作家。1980年代致信央视杨洁导演指出「一口钟」应为无袖长外衣（明清俗语·类似斗篷）非庙堂之钟，导演收信后专门重拍。" },
+        { id: "guo_moruo", name: "郭沫若", era: "现代", role: "分类学家+对联高手",
+          quote: "迎风逐浪吹长叹·斩尽魔头万事休",
+          modern_translation: "将西游归为神魔小说·还题了副对联",
+          suitable_age: "全年龄",
+          historical_detail: "郭沫若（1892-1978），诗人、史学家。将《西游记》归类为「神魔小说」，题联「迎风逐浪吹长叹·斩尽魔头万事休」。" }
+    ],
+    age_groups: [
+        { age_group: "幼儿/小学", title: "名人一句话", form: "表情包墙",
+          content: [
+              { name: "鲁迅", quote: "神魔皆有人情·精魅亦通世故", modern_translation: "妖怪也懂人情世故", age_tag: "幼儿/小学" },
+              { name: "胡适", quote: "至多不过是一部很有趣味的滑稽小说", modern_translation: "就是个好玩的故事", age_tag: "幼儿/小学" },
+              { name: "毛泽东", quote: "悟空反权威·八戒艰苦奋斗", modern_translation: "猴哥敢造反·猪哥肯吃苦", age_tag: "幼儿/小学" },
+              { name: "钱钟书", quote: "一口钟是无袖长衣非铜钟", modern_translation: "读书仔细·连电视剧都骗不了你", age_tag: "幼儿/小学" }
+          ] },
+        { age_group: "初中", title: "观点PK赛", form: "辩题",
+          content: [
+              { name: "鲁迅+李卓吾", quote: "深度寓言·神魔皆有人情", modern_translation: "甲方：西游有深意", age_tag: "初中" },
+              { name: "胡适", quote: "滑稽小说·并无微妙意思", modern_translation: "乙方：西游就是好玩", age_tag: "初中" },
+              { name: "裁判（读者）", quote: "你站哪边？", modern_translation: "自己判断", age_tag: "初中" }
+          ] },
+        { age_group: "高中", title: "政治隐喻解码器", form: "修辞训练",
+          content: [
+              { name: "毛泽东·1945重庆谈判", quote: "大赞悟空反权威·表面说猴哥实际针砭蒋介石独裁", modern_translation: "用文化暗号谈政治的顶级案例", age_tag: "高中" },
+              { name: "大闹天宫", quote: "类比反帝反封建", modern_translation: "借古讽今修辞训练素材", age_tag: "高中" }
+          ] },
+        { age_group: "大学", title: "学术谱系图", form: "谱系",
+          content: [
+              { name: "明代·李卓吾", quote: "释厄密码", modern_translation: "心性修行的密码本", age_tag: "大学" },
+              { name: "清代·证道书", quote: "内丹修炼指南", modern_translation: "道家修行手册", age_tag: "大学" },
+              { name: "民国·胡适+鲁迅", quote: "考证+定型", modern_translation: "作者悬疑+神魔小说定位", age_tag: "大学" },
+              { name: "现代·毛泽东/林语堂/钱钟书", quote: "政治/人文/细读", modern_translation: "三路并行解读", age_tag: "大学" },
+              { name: "当代·跨文化研究", quote: "比较文学视野", modern_translation: "走向世界文学", age_tag: "大学" }
+          ] }
+    ],
+    mouthpiece_quotes: [
+        { character: "金圣叹", role: "反内卷先锋",
+          quote: "一部《西游》·不过教人安心做个「弼马温」·何苦非要闹天宫·争那斗战胜佛的虚名？",
+          modern_translation: "别卷了·安稳打工不香吗" },
+        { character: "猪八戒", role: "人间清醒代言人",
+          quote: "取经路远·记得先吃饱·团队散伙是常态·保住高老庄的退路才是王道。",
+          modern_translation: "保命要紧·退路第一" }
+    ],
+    modern_commentary: [
+        { celebrity: "鲁迅", era: "民国", modern_topic: "互联网大厂",
+          commentary: "我向来是不惮以最坏的恶意来推测某些公司的·然而我还不料·也不信竟会把人当成牛马来使。但《西游记》里早说过·妖魔要吃人·还得编个长生不老的理由。",
+          aside: "妖魔吃人·还得编个理由" },
+        { celebrity: "胡适", era: "民国", modern_topic: "AI 焦虑",
+          commentary: "怕什么真理无穷·进一寸有一寸的欢喜。妖怪再多·猴子还不是一棒一棒打过来的？工具只是工具·何必非要问出个微妙的意思。",
+          aside: "进一寸有一寸的欢喜" },
+        { celebrity: "林语堂", era: "现代", modern_topic: "社交媒体人设",
+          commentary: "每个人都在扮演他理想中的自己·就像那个去西天的八戒·明明心里念着高老庄·口里却要唱「我佛慈悲」——这正是人性的可爱处。",
+          aside: "心里高老庄·口里我佛慈悲" },
+        { celebrity: "钱钟书", era: "现代", modern_topic: "内卷",
+          commentary: "你们现在说的「内卷」·不就是车迟国斗法？隔板猜物而已·赢了又如何？我还是那句话·真正的幽默是自知这「一口钟」不是铜钟。",
+          aside: "车迟国斗法·赢了又如何" }
+    ],
+    international_critics: [
+        { name: "赛珍珠", country: "美国", flag: "🇺🇸", role: "诺贝尔文学奖得主",
+          work: "英译本《Monkey》",
+          viewpoint: "孙悟空是「一个自由的精灵·一个与命运抗争的反叛者」",
+          contribution: "将西游精神推介给西方世界" },
+        { name: "博尔赫斯", country: "阿根廷", flag: "🇦🇷", role: "文学大师",
+          work: "《西游记》评论",
+          viewpoint: "这部小说的魅力在于「奇幻的无限性」·每一难都像开启了另一扇门·这种结构本身蕴含对人生旅途的深刻隐喻",
+          contribution: "从结构主义视角解读西游" },
+        { name: "大江健三郎", country: "日本", flag: "🇯🇵", role: "诺贝尔文学奖得主",
+          work: "东亚文学评论",
+          viewpoint: "《西游记》对东亚少年心性的影响·「这就像我们童年的星空·一直照亮未来」",
+          contribution: "确认西游为东亚共同文化记忆" }
+    ],
+    global_adaptations: [
+        { country: "日本", flag: "🇯🇵", work: "龙珠", type: "动漫", note: "孙悟空化身超级赛亚人" },
+        { country: "韩国", flag: "🇰🇷", work: "韩国漫画改编", type: "漫画", note: "东亚流行文化再创作" },
+        { country: "美国", flag: "🇺🇸", work: "功夫之王", type: "电影", note: "成龙·李连杰主演·西游元素好莱坞化" }
+    ]
+};
+
+let currentAgeGroup = "幼儿/小学";
+
+function renderDanmakuWall(ageGroup, ageGroupsData) {
+    const group = ageGroupsData.find(g => g.age_group === ageGroup);
+    if (!group) return;
+    const cards = group.content;
+    const grid = d3.select("#danmaku-grid");
+    grid.selectAll("*").remove();
+    const card = grid.selectAll(".danmaku-card").data(cards).enter()
+        .append("div").attr("class", "danmaku-card");
+    card.append("div").attr("class", "celebrity").text(d => d.name);
+    card.append("div").attr("class", "quote").text(d => d.quote);
+    card.append("div").attr("class", "modern").text(d => "「" + d.modern_translation + "」");
+}
+
+function switchAgeTab(el) {
+    d3.selectAll(".age-tab").classed("active", false);
+    d3.select(el).classed("active", true);
+    currentAgeGroup = d3.select(el).attr("data-age");
+    if (window.__lastData) renderDanmakuWall(currentAgeGroup, window.__lastData.ageGroups);
+}
+
+d3.selectAll(".age-tab")
+    .on("click", function() { switchAgeTab(this); })
+    .on("keydown", function(event) {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            switchAgeTab(this);
+        }
+    });
+
+function renderMouthpiece(mouthpieceData) {
+    if (!mouthpieceData || mouthpieceData.length === 0) {
+        d3.select("#mouthpiece-row").append("div")
+          .text("暂无嘴替语录")
+          .style("color", "var(--ink-soft)").style("text-align", "center")
+          .style("padding", "40px 20px");
+        return;
+    }
+    const row = d3.select("#mouthpiece-row");
+    row.selectAll("*").remove();
+    const card = row.selectAll(".mouthpiece-card").data(mouthpieceData).enter()
+        .append("div").attr("class", "mouthpiece-card");
+    card.append("div").attr("class", "char-name").text(d => d.character);
+    card.append("div").attr("class", "char-role").text(d => d.role);
+    card.append("div").attr("class", "quote").text(d => "「" + d.quote + "」");
+    card.append("div").attr("class", "modern").text(d => "→ " + d.modern_translation);
+}
+
+function renderModernCommentary(commentaryData) {
+    if (!commentaryData || commentaryData.length === 0) {
+        d3.select("#modern-commentary-grid").append("div")
+          .text("暂无当代点评").style("color", "var(--ink-soft)")
+          .style("text-align", "center").style("padding", "40px 20px");
+        return;
+    }
+    const grid = d3.select("#modern-commentary-grid");
+    grid.selectAll("*").remove();
+    const card = grid.selectAll(".commentary-card").data(commentaryData).enter()
+        .append("div").attr("class", "commentary-card");
+    card.append("div").attr("class", "c-name").text(d => d.celebrity);
+    card.append("div").attr("class", "c-topic").text(d => "评 · " + d.modern_topic);
+    card.append("div").attr("class", "c-text").text(d => d.commentary);
+    card.append("div").attr("class", "c-aside").text(d => "→ " + d.aside);
+}
+
+function renderInternationalCritics(criticsData, adaptationsData) {
+    // adaptations 渲染（独立于 critics，避免 early return 架空空保护）
+    if (adaptationsData && adaptationsData.length > 0) {
+        const adapt = d3.select("#adaptations");
+        adapt.selectAll("*").remove();
+        adapt.selectAll(".adaptation-chip").data(adaptationsData).enter()
+            .append("div").attr("class", "adaptation-chip")
+            .each(function(d) {
+                const chip = d3.select(this);
+                chip.append("span").attr("class", "a-flag").text(d.flag);
+                chip.append("span").text(d.work + "（" + d.type + "）· " + d.note);
+            });
+    }
+
+    if (!criticsData || criticsData.length === 0) {
+        d3.select("#intl-grid").append("div")
+          .text("暂无国际名人点评").style("color", "var(--ink-soft)")
+          .style("text-align", "center").style("padding", "40px 20px");
+        return;
+    }
+    const grid = d3.select("#intl-grid");
+    grid.selectAll("*").remove();
+    const card = grid.selectAll(".intl-card").data(criticsData).enter()
+        .append("div").attr("class", "intl-card");
+    const head = card.append("div").attr("class", "i-head");
+    head.append("span").attr("class", "i-flag").text(d => d.flag);
+    head.append("span").attr("class", "i-name").text(d => d.name);
+    head.append("span").attr("class", "i-country").text(d => "· " + d.country);
+    card.append("div").attr("class", "i-role").text(d => d.role);
+    card.append("div").attr("class", "i-view").text(d => "「" + d.viewpoint + "」");
+    card.append("div").attr("class", "i-work").text(d => "代表作：" + d.work + " · " + d.contribution);
+}
+
+function loadMessages() {
+    try { return JSON.parse(localStorage.getItem("xiyouji_danmaku_messages") || "[]"); }
+    catch (e) { return []; }
+}
+function saveMessage(text) {
+    try {
+        const msgs = loadMessages();
+        msgs.push({ user_content: text, timestamp: new Date().toISOString(), age_group_tag: currentAgeGroup });
+        localStorage.setItem("xiyouji_danmaku_messages", JSON.stringify(msgs));
+        return true;
+    } catch (e) {
+        console.warn('[WARN] localStorage 写入失败：', e.message);
+        return false;
+    }
+}
+
+// ===== v0.9.1 创意升级：3 个 signature moments =====
+
+// 1. Hero 名人星图（D3 force simulation·10 位批评家名字漂浮·悬停弹金句）
+function renderHeroStarMap(profilesData) {
+    if (!profilesData || profilesData.length === 0) return;
+    const heroEl = document.querySelector(".hero");
+    if (!heroEl) return;
+    const svg = d3.select("#hero-canvas");
+    const tooltip = d3.select("#hero-tooltip");
+    const width = heroEl.clientWidth;
+    const height = heroEl.clientHeight;
+    if (width === 0 || height === 0) return;
+
+    if (window.__heroStarMap && window.__heroStarMap.sim) window.__heroStarMap.sim.stop();
+    svg.selectAll("*").remove();
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+    const nodes = profilesData.map(p => ({
+        id: p.id, name: p.name, quote: p.quote,
+        modern: p.modern_translation, role: p.role,
+        x: Math.random() * width, y: Math.random() * height
+    }));
+
+    const sim = d3.forceSimulation(nodes)
+        .force("charge", d3.forceManyBody().strength(-50))
+        .force("center", d3.forceCenter(width / 2, height / 2).strength(0.12))
+        .force("collide", d3.forceCollide().radius(42))
+        .alphaDecay(0.025);
+
+    const node = svg.selectAll(".star-node").data(nodes).enter()
+        .append("g").attr("class", "star-node")
+        .attr("transform", d => `translate(${d.x},${d.y})`);
+    node.append("text").attr("class", "star-label")
+        .attr("text-anchor", "middle").text(d => d.name);
+
+    function positionTooltip(event) {
+        const rect = heroEl.getBoundingClientRect();
+        const x = event.clientX - rect.left + 14;
+        const y = event.clientY - rect.top + 14;
+        const tw = tooltip.node().offsetWidth || 280;
+        const left = (x + tw > width - 16) ? Math.max(8, x - tw - 28) : x;
+        tooltip.style("left", left + "px").style("top", y + "px");
+    }
+    node.on("mouseenter", function(event, d) {
+        tooltip.classed("visible", true).attr("aria-hidden", "false");
+        tooltip.html(
+            `<div class="t-name">${d.name} · ${d.role}</div>` +
+            `<div class="t-quote">「${d.quote}」</div>` +
+            `<div class="t-modern">→ ${d.modern}</div>`
+        );
+        positionTooltip(event);
+    })
+    .on("mousemove", positionTooltip)
+    .on("mouseleave", function() {
+        tooltip.classed("visible", false).attr("aria-hidden", "true");
+    });
+
+    sim.on("tick", () => {
+        nodes.forEach(n => {
+            n.x = Math.max(40, Math.min(width - 40, n.x));
+            n.y = Math.max(20, Math.min(height - 20, n.y));
+        });
+        node.attr("transform", d => `translate(${d.x},${d.y})`);
+    });
+
+    window.__heroStarMap = { sim: sim, data: profilesData };
+}
+
+// 2. 真弹幕轨道（留言博物馆改造·黑底夜空 + CSS animation 从右往左飘）
+let danmakuTimer = null;
+function spawnDanmaku(text, type) {
+    const track = document.getElementById("danmaku-track");
+    if (!track) return;
+    const trackHeight = track.clientHeight;
+    if (trackHeight === 0) return;
+    const fly = document.createElement("div");
+    let cls = "danmaku-fly";
+    if (type === "user") cls += " user-msg";
+    else if (type === "ambient") cls += " ambient";
+    fly.className = cls;
+    fly.textContent = text;
+    const lane = Math.floor(Math.random() * 5);
+    const top = 30 + lane * ((trackHeight - 60) / 5);
+    fly.style.top = top + "px";
+    fly.style.animationDuration = (12 + Math.random() * 8) + "s";
+    fly.addEventListener("animationend", function() { fly.remove(); });
+    track.appendChild(fly);
+}
+function startDanmakuLoop() {
+    if (danmakuTimer) return;
+    const profiles = (window.__lastData && window.__lastData.profiles) || EMBEDDED_DATA.celebrity_profiles;
+    const ambient = profiles.map(function(p) { return p.name + "：「" + p.quote + "」"; });
+    let ambientIdx = 0;
+    let userIdx = 0;
+    function spawn() {
+        const userMsgs = loadMessages();
+        if (userMsgs.length > 0 && Math.random() < 0.3) {
+            const m = userMsgs[userIdx % userMsgs.length];
+            spawnDanmaku(m.user_content, "user");
+            userIdx++;
+        } else {
+            const q = ambient[ambientIdx % ambient.length];
+            spawnDanmaku(q, "ambient");
+            ambientIdx++;
+        }
+    }
+    spawn();
+    setTimeout(spawn, 600);
+    setTimeout(spawn, 1200);
+    danmakuTimer = setInterval(spawn, 2500);
+}
+function renderMessageWall() {
+    // v0.9.1 改造：留言墙 → 真弹幕轨道
+    startDanmakuLoop();
+}
+d3.select("#submit-message").on("click", function() {
+    const textarea = document.getElementById("user-message");
+    const text = textarea.value.trim();
+    if (!text) return;
+    const ok = saveMessage(text);
+    if (ok) {
+        textarea.value = "";
+        spawnDanmaku(text, "user");
+        startDanmakuLoop();
+    } else {
+        alert("留言保存失败（localStorage 可能已满或被禁用），请检查浏览器设置。");
+    }
+});
+
+// 3. 世界地图（国际名人组改造·大陆轮廓 + 连线 + 悬停弹观点）
+function renderWorldMap(criticsData) {
+    if (!criticsData || criticsData.length === 0) return;
+    const container = d3.select("#world-map");
+    container.selectAll("*").remove();
+    const W = 600, H = 360;
+    const svg = container.append("svg")
+        .attr("viewBox", `0 0 ${W} ${H}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+
+    // 简化大陆轮廓（示意性·非地理精确）
+    const continents = [
+        "M40,120 Q80,90 140,100 L180,140 L160,200 L100,210 L50,180 Z",
+        "M180,220 Q200,260 220,290 L200,320 L170,300 Z",
+        "M280,80 L350,70 L380,120 L360,160 L300,150 Z",
+        "M300,180 L380,170 L420,240 L380,290 L320,280 Z",
+        "M400,100 L520,90 L560,150 L510,200 L420,180 Z",
+        "M480,240 L540,235 L545,275 L490,278 Z"
+    ];
+    svg.selectAll(".map-continent").data(continents).enter()
+        .append("path").attr("class", "map-continent").attr("d", function(d) { return d; });
+
+    const countryCoords = { "美国": [110, 150], "阿根廷": [200, 290], "日本": [510, 130] };
+    const origin = [470, 130];
+
+    const dots = criticsData.map(function(c) {
+        const coord = countryCoords[c.country] || [300, 180];
+        return {
+            name: c.name, country: c.country, flag: c.flag,
+            role: c.role, viewpoint: c.viewpoint, work: c.work,
+            x: coord[0], y: coord[1]
+        };
+    });
+
+    svg.selectAll(".map-line").data(dots).enter()
+        .append("line").attr("class", "map-line")
+        .attr("x1", origin[0]).attr("y1", origin[1])
+        .attr("x2", function(d) { return d.x; }).attr("y2", function(d) { return d.y; });
+
+    // 原点（中国·西游发源地）
+    svg.append("circle").attr("class", "map-dot")
+        .attr("cx", origin[0]).attr("cy", origin[1]).attr("r", 5)
+        .style("fill", "var(--accent)").style("pointer-events", "none");
+    svg.append("text").attr("class", "map-label")
+        .attr("x", origin[0]).attr("y", origin[1] - 10)
+        .style("pointer-events", "none").text("西游·中国");
+
+    const dotG = svg.selectAll(".map-dot-g").data(dots).enter()
+        .append("g").attr("class", "map-dot-g").style("cursor", "pointer");
+    dotG.append("circle").attr("class", "map-dot")
+        .attr("cx", function(d) { return d.x; }).attr("cy", function(d) { return d.y; }).attr("r", 5);
+    dotG.append("text").attr("class", "map-label")
+        .attr("x", function(d) { return d.x; }).attr("y", function(d) { return d.y - 10; })
+        .text(function(d) { return d.flag + " " + d.name; });
+
+    const popup = container.append("div").attr("class", "map-popup");
+    function positionPopup(event) {
+        const rect = container.node().getBoundingClientRect();
+        const x = event.clientX - rect.left + 12;
+        const y = event.clientY - rect.top + 12;
+        popup.style("left", Math.min(x, rect.width - 280) + "px")
+             .style("top", Math.min(y, rect.height - 100) + "px");
+    }
+    dotG.on("mouseenter", function(event, d) {
+        popup.classed("visible", true).html(
+            `<div class="p-head">${d.flag} ${d.name} · ${d.country}</div>` +
+            `<div class="p-view">「${d.viewpoint}」</div>` +
+            `<div style="font-size:0.78rem;color:var(--accent-3);margin-top:6px;">代表作：${d.work}</div>`
+        );
+        positionPopup(event);
+    })
+    .on("mousemove", positionPopup)
+    .on("mouseleave", function() { popup.classed("visible", false); });
+}
+
+const fetchStatus = { anyFetched: false };
+async function fetchJson(path, fallbackKey) {
+    try {
+        const response = await fetch(path);
+        if (!response.ok) throw new Error('fetch failed: ' + path);
+        fetchStatus.anyFetched = true;
+        return await response.json();
+    } catch (e) {
+        console.warn('[INFO] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+        return EMBEDDED_DATA[fallbackKey];
+    }
+}
+async function loadData() {
+    const base = '../../scripts/output/data/';
+    const [profiles, ageGroups, mouthpiece, commentary, critics, adaptations] = await Promise.all([
+        fetchJson(base + 'v08_celebrity_profiles.json', 'celebrity_profiles'),
+        fetchJson(base + 'v08_age_groups.json', 'age_groups'),
+        fetchJson(base + 'v08_mouthpiece.json', 'mouthpiece_quotes'),
+        fetchJson(base + 'v09_modern_commentary.json', 'modern_commentary'),
+        fetchJson(base + 'v09_international_critics.json', 'international_critics'),
+        fetchJson(base + 'v09_global_adaptations.json', 'global_adaptations')
+    ]);
+    return { profiles, ageGroups, mouthpiece, commentary, critics, adaptations };
+}
+async function main() {
+    const data = await loadData();
+    window.__lastData = data;
+    if (fetchStatus.anyFetched) {
+        document.getElementById('dataSource').innerHTML =
+            '数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）';
+    }
+    renderHeroStarMap(data.profiles);
+    renderDanmakuWall(currentAgeGroup, data.ageGroups);
+    renderMouthpiece(data.mouthpiece);
+    renderModernCommentary(data.commentary);
+    renderInternationalCritics(data.critics, data.adaptations);
+    renderWorldMap(data.critics);
+    renderMessageWall();
+}
+let resizeTimer;
+window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        if (window.__lastData) {
+            renderDanmakuWall(currentAgeGroup, window.__lastData.ageGroups);
+            renderHeroStarMap(window.__lastData.profiles);
+        }
+    }, 250);
+});
+main();
+</script>
+</body>
+</html>

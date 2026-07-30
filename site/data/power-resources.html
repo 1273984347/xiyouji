@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>权力与资源 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --accent-5: #9c6b3a;
+            --accent-6: #3a8c8c;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        .legend-swatch.circle {
+            border-radius: 50%;
+        }
+        /* 表格 */
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+        }
+        table.data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .icon-correct {
+            color: var(--accent-4);
+            font-weight: 700;
+        }
+        .icon-wrong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        /* 洞察列表 */
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        /* 势力卡片 */
+        .faction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .faction-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .faction-card .faction-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .faction-card .faction-tier {
+            font-size: 0.78rem;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 8px;
+            letter-spacing: 0.08em;
+        }
+        .faction-card .faction-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .faction-card .faction-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        /* 晋升路径卡片 */
+        .path-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .path-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .path-card.alt { border-left-color: var(--accent-4); }
+        .path-card.alt2 { border-left-color: var(--accent-3); }
+        .path-card .path-label {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .path-card.alt .path-label { color: var(--accent-4); }
+        .path-card.alt2 .path-label { color: var(--accent-3); }
+        .path-card .path-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .path-card .path-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .path-card .path-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 16px;
+            grid-column: 1 / -1;
+        }
+        .summary-card .path-label {
+            color: var(--accent);
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .summary-card .path-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--ink);
+        }
+        .summary-card .path-row {
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+        /* tooltip */
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 280px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 24px;
+        }
+        .footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 6px;
+        }
+        .footer a:hover { text-decoration: underline; }
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        /* axis 文字 */
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        /* code 样式 */
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        /* 叙事段落 */
+        .narrative {
+            font-size: 0.92rem;
+            line-height: 1.85;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .narrative strong { color: var(--ink); font-weight: 600; }
+        /* 数据来源徽章 */
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        /* insight-box 关键洞察区 */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin-top: 18px;
+        }
+        .insight-box .ibox-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--accent-3);
+            margin-bottom: 10px;
+            letter-spacing: 0.05em;
+        }
+        .insight-box .ibox-row {
+            font-size: 0.9rem;
+            color: var(--ink);
+            margin-bottom: 6px;
+            line-height: 1.7;
+        }
+        .insight-box .ibox-row strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        @media (max-width: 720px) {
+            .hero h1 { font-size: 1.6rem; }
+            .hero .subtitle { font-size: 0.78rem; letter-spacing: 0.15em; }
+            .section { padding: 18px; }
+            .kpi-card .value { font-size: 1.5rem; }
+            .path-grid { grid-template-columns: 1fr; }
+            .faction-grid { grid-template-columns: 1fr; }
+            table.data-table { font-size: 0.78rem; }
+            table.data-table th, table.data-table td { padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            .hero { padding: 36px 16px 28px; }
+            .hero h1 { font-size: 1.4rem; }
+            .container { padding: 0 12px; }
+            .section { padding: 14px; }
+            .chart-block { padding: 12px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>权力与资源 · 三界权力的物质基础</h1>
+        <div class="subtitle">DATA-DRIVEN POWER &amp; RESOURCES OF XIYOUJI</div>
+        <div class="tagline">从天庭官僚到长生资源——一部权力运作的活教材。</div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../dashboard.html">仪表盘</a>
+            <span class="sep">/</span>
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <span class="current">权力与资源</span>
+        </nav>
+
+        <div class="notice">
+            本页基于 J 类「权力与资源」脚本生成，包含 4 份 JSON 数据：三界权力结构、天庭晋升通道、长生资源链、整体统计。所有图表支持 hover tooltip。
+        </div>
+
+        <!-- 研究方法论 -->
+        <section class="section">
+            <h2 class="section-title">导言 · 权力与资源的三维透镜</h2>
+            <div class="section-sub">INTRODUCTION · Three-Dimensional Power &amp; Resource Lens on Xiyouji</div>
+            <p style="font-size:0.95rem;line-height:1.8;color:var(--ink);margin-bottom:14px;">
+                《西游记》不仅是神魔小说，更是一部活生生的<strong>权力与资源教材</strong>。本页从三个维度剖析三界权力的物质基础：
+                <strong style="color:var(--accent);">三界权力结构</strong>（7 大势力的名义权 vs 实权）、
+                <strong style="color:var(--accent-2);">天庭晋升通道</strong>（8 条阶级流动路径）、
+                <strong style="color:var(--accent-4);">长生资源链</strong>（10 种稀缺资源与拥有者）。
+            </p>
+
+            <div style="margin-bottom:18px;">
+                <span class="data-badge">4 份 JSON 数据</span>
+                <span class="data-badge">7 大势力</span>
+                <span class="data-badge">8 条晋升通道</span>
+                <span class="data-badge">10 种长生资源</span>
+                <span class="data-badge">25 个数据点</span>
+                <span class="data-badge">3 tier 分层</span>
+                <span class="data-badge">D3.js v7</span>
+                <span class="data-badge">fetch + EMBEDDED fallback</span>
+            </div>
+
+            <div class="path-grid">
+                <div class="path-card">
+                    <div class="path-label" style="color:var(--accent);">DIMENSION 1</div>
+                    <div class="path-title">三界权力结构 · Power Structure</div>
+                    <div class="path-row">7 大势力分 T0/T1/T2 三层·天庭名义权 10 · 灵山实权 10 · 妖界实权 7 vs 名义权 2 逆差最大。</div>
+                </div>
+                <div class="path-card alt">
+                    <div class="path-label" style="color:var(--accent-2);">DIMENSION 2</div>
+                    <div class="path-title">天庭晋升通道 · Promotion Channels</div>
+                    <div class="path-row">8 条路径并行·立功受封成功率 60% 主流·凡人封神仅 1%·揭示'功绩+人情+出身'三轨制。</div>
+                </div>
+                <div class="path-card alt2">
+                    <div class="path-label" style="color:var(--accent-4);">DIMENSION 3</div>
+                    <div class="path-title">长生资源链 · Immortality Resources</div>
+                    <div class="path-row">10 种资源·平均稀缺度 9.0·平均效力 8.8·蟠桃最稀缺·唐僧肉是'虚假资源'·推动主线剧情。</div>
+                </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+                数据来源：scripts/J_权力与资源/ · 共生成 4 份 JSON 输出，本页 fetch 失败时自动回退到内嵌 EMBEDDED 数据，支持 file:// 协议双击打开。
+            </p>
+        </section>
+
+        <!-- KPI 卡片 -->
+        <div class="kpi-row" id="kpiRow">
+            <div class="kpi-card">
+                <div class="label">FACTIONS · 7 势力</div>
+                <div class="value">7 势力</div>
+                <div class="desc">三界 3 tier 分层（T0 双中心·T1 执行+独立·T2 世俗+分散）</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">PROMOTION · 8 通道</div>
+                <div class="value">8 通道</div>
+                <div class="desc">天庭晋升路径（立功 60% · 凡人封神 1% · 三轨并行）</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">RESOURCES · 10 长生</div>
+                <div class="value">10 资源</div>
+                <div class="desc">长生资源（稀缺度 9.0 · 效力 8.8 · 获取难度 9.5）</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">NOMINAL vs ACTUAL</div>
+                <div class="value">10 vs 10</div>
+                <div class="desc">天庭名义权最高 · 灵山实权最高 · 双中心共治格局</div>
+            </div>
+        </div>
+
+        <!-- Section 1: 7 势力权力结构 -->
+        <section class="section">
+            <h2 class="section-title">壹 · 三界权力结构图</h2>
+            <div class="section-sub">POWER STRUCTURE · 7 大势力的名义权 vs 实权</div>
+            <div class="definition" id="def-structure">
+                <strong>权力定义：</strong>西游世界 7 大势力的权力分层：名义权来自天庭册封·实权来自资源控制·影响力来自综合实力。影响力 0-10 分：10=三界顶级·8-9=区域主导·6-7=中等势力·4-5=边缘势力·0-3=弱势群体。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>核心格局：</strong>天庭与灵山并列 T0·天庭名义权 10 最高·灵山实权 10 最高·形成双中心共治。
+                <strong style="color:var(--accent);">妖界</strong>实权 7 vs 名义权 2·逆差最大（5 分）·是体制反抗的根源。
+                <strong style="color:var(--accent-2);">水族</strong>实权=名义权=5·完全顺从体制·泾河龙王被斩是天庭立威的牺牲品。
+                散仙实力强（实权 7）但名义权低（4）·菩提祖师隐居·镇元大仙结拜悟空·游离于体制之外。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">7 势力权力对比·名义权 vs 实权（水平双柱并排·按 actual_power 排序）</div>
+                <div class="chart-caption">Y 轴：7 大势力（按实权降序）/ X 轴：0-10 分 / 红柱=actual_power 实权 / 蓝柱=nominal_power 名义权</div>
+                <svg id="chart-faction-bar" class="chart-svg" width="100%" height="460"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>actual_power 实权</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>nominal_power 名义权</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);opacity:0.5;"></span>power_gap 差值标注</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">7 势力详表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="faction-table">
+                    <thead>
+                        <tr>
+                            <th>势力</th>
+                            <th>层级</th>
+                            <th>领袖</th>
+                            <th>名义权</th>
+                            <th>实权</th>
+                            <th>影响力</th>
+                            <th>资源控制</th>
+                            <th>权力逆差分析</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">7 势力卡片</h3>
+            <div class="faction-grid" id="faction-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">权力结构洞察</h3>
+            <ol class="insights-list" id="structure-insights-list"></ol>
+
+            <div class="insight-box">
+                <div class="ibox-title">KEY INSIGHT · 双中心共治与逆差反抗</div>
+                <div class="ibox-row">· <strong>双中心格局：</strong>天庭（名义权 10）与灵山（实权 10）并列 T0·影响力均 10·但权力来源不同。</div>
+                <div class="ibox-row">· <strong>最大逆差：</strong>妖界实权 7 vs 名义权 2·差 5 分·是体制反抗的物质根源·故常被天庭围剿。</div>
+                <div class="ibox-row">· <strong>完全顺从：</strong>水族实权=名义权=5·无逆差·泾河龙王被斩是立威警示·水族总体服从天庭。</div>
+                <div class="ibox-row">· <strong>超然独立：</strong>散仙实权 7 vs 名义权 4·差 3 分·实力强但不受册封·菩提/镇元游离体制外。</div>
+            </div>
+        </section>
+
+        <!-- Section 2: 8 晋升通道 -->
+        <section class="section">
+            <h2 class="section-title alt-2">贰 · 天庭晋升通道</h2>
+            <div class="section-sub">PROMOTION CHANNELS · 8 条阶级流动路径</div>
+            <div class="definition" id="def-promotion">
+                <strong>晋升定义：</strong>天庭官僚体系 8 条晋升路径·揭示西游世界的'阶级流动'机制·并非单一通道。结构洞察：天庭晋升是'功绩制+人情制+出身制'三轨并行·非单一标准。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>8 条通道：</strong>立功受封（60%·主流·悟空封齐天大圣）/ 举荐引荐（50%·潜规则·猪八戒/沙僧均靠此）/ 蟠桃延寿（30%·续命非晋升）/ 仙丹升迁（20%·顶级资源）/ 科举天试（10%·案例少）/ 修炼成仙（5%·最正统但最难）/ 坐骑转正（2%·阶级固化）/ 凡人封神（1%·极少数）。
+                <strong style="color:var(--accent-2);">立功受封+举荐引荐</strong>覆盖天庭大部分在编神仙·是主流双轨。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">8 晋升通道 success_rate 柱状图（按成功率排序·带 duration 标注）</div>
+                <div class="chart-caption">X 轴：8 条晋升通道（按 success_rate 降序）/ Y 轴：成功率 0-100% / 柱顶标注 duration 时长</div>
+                <svg id="chart-promotion-bar" class="chart-svg" width="100%" height="420"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>success_rate 成功率</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-3);"></span>duration 时长标注</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8 晋升通道详表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="promotion-table">
+                    <thead>
+                        <tr>
+                            <th>通道</th>
+                            <th>要求</th>
+                            <th>时长</th>
+                            <th>成功率</th>
+                            <th>目标 tier</th>
+                            <th>案例</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">晋升路径卡片</h3>
+            <div class="path-grid" id="path-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">晋升通道洞察</h3>
+            <ol class="insights-list" id="promotion-insights-list"></ol>
+
+            <div class="insight-box">
+                <div class="ibox-title">KEY INSIGHT · 三轨并行与阶级固化</div>
+                <div class="ibox-row">· <strong>主流双轨：</strong>立功受封（60%）+ 举荐引荐（50%）覆盖天庭大部分在编神仙·前者凭战功·后者凭人脉。</div>
+                <div class="ibox-row">· <strong>续命机制：</strong>蟠桃延寿（30%）不是晋升·是保住神籍不被'退休'·是天庭控制神仙的工具。</div>
+                <div class="ibox-row">· <strong>阶级固化：</strong>坐骑转正率最低（2%）·坐骑是'二等公民'·揭示天庭阶级固化的本质。</div>
+                <div class="ibox-row">· <strong>稀缺资源：</strong>仙丹升迁（20%）掌握在太上老君一人手中·是顶级稀缺资源·可跨 tier 跃升。</div>
+            </div>
+        </section>
+
+        <!-- Section 3: 10 长生资源 -->
+        <section class="section">
+            <h2 class="section-title alt-3">叁 · 长生资源链</h2>
+            <div class="section-sub">IMMORTALITY RESOURCES · 10 种稀缺资源与拥有者</div>
+            <div class="definition" id="def-resources">
+                <strong>资源定义：</strong>西游世界 10 种长生资源·稀缺度/效力/获取难度/拥有者·构成'长生经济'。scarcity/efficacy/access_level 均 0-10 分：10=最稀缺/最高效/最难获取。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>资源格局：</strong>10 种资源平均稀缺度 <strong style="color:var(--accent);">9.0</strong>·平均效力 <strong>8.8</strong>·平均获取难度 <strong>9.5</strong>·说明长生是极奢侈需求。
+                <strong style="color:var(--accent-2);">蟠桃 9000 年树</strong>最稀缺（10 分）·是天庭统治的物质基础。
+                <strong style="color:var(--accent);">唐僧肉</strong>稀缺度 10·但实际效力存疑·是'虚假资源'·推动主线剧情。
+                <strong style="color:var(--accent-4);">人参果</strong>3000 年一熟·镇元大仙独占·是散仙独立性的物质基础。
+                天庭控制蟠桃+仙丹·灵山控制金箍咒·散仙控制人参果·形成'三足鼎立'的长生资源格局。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">10 长生资源散点图（X=scarcity · Y=efficacy · 点大小=access_level · 颜色按 owner 分组）</div>
+                <div class="chart-caption">X 轴：稀缺度 scarcity (0-10) / Y 轴：efficacy 效力 (0-10) / 圆点半径 ∝ access_level / 颜色 = owner 所属势力</div>
+                <svg id="chart-resource-scatter" class="chart-svg" width="100%" height="480"></svg>
+                <div class="legend-row" id="scatter-legend">
+                    <span class="legend-item"><span class="legend-swatch circle" style="background:var(--accent);"></span>天庭</span>
+                    <span class="legend-item"><span class="legend-swatch circle" style="background:var(--accent-2);"></span>灵山</span>
+                    <span class="legend-item"><span class="legend-swatch circle" style="background:var(--accent-4);"></span>散仙</span>
+                    <span class="legend-item"><span class="legend-swatch circle" style="background:var(--accent-3);"></span>特殊（唐僧/太乙）</span>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">长生资源 owner 分布饼图（按 owner 所属势力分组·占比）</div>
+                <div class="chart-caption">10 种资源按 owner 所属势力分组：天庭 4 / 灵山 2 / 散仙 2 / 特殊 2</div>
+                <svg id="chart-owner-pie" class="chart-svg" width="100%" height="420"></svg>
+                <div class="legend-row" id="pie-legend">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>天庭 4 项 (40%)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>灵山 2 项 (20%)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>散仙 2 项 (20%)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-3);"></span>特殊 2 项 (20%)</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">10 长生资源详表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="resource-table">
+                    <thead>
+                        <tr>
+                            <th>资源</th>
+                            <th>稀缺度</th>
+                            <th>效力</th>
+                            <th>获取难度</th>
+                            <th>拥有者</th>
+                            <th>所属势力</th>
+                            <th>稀有原因</th>
+                            <th>效果</th>
+                            <th>章节</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">长生资源洞察</h3>
+            <ol class="insights-list" id="resource-insights-list"></ol>
+
+            <div class="insight-box">
+                <div class="ibox-title">KEY INSIGHT · 三足鼎立与虚假资源</div>
+                <div class="ibox-row">· <strong>三足鼎立：</strong>天庭（蟠桃+仙丹+九转金丹+天河水 4 项）· 灵山（紧箍咒解除+紫河车 2 项）· 散仙（人参果 2 项）· 形成长生资源格局。</div>
+                <div class="ibox-row">· <strong>统治基础：</strong>蟠桃 9000 年树最稀缺（10 分）· 控制蟠桃即控制神仙命脉· 是天庭统治的物质基础。</div>
+                <div class="ibox-row">· <strong>虚假资源：</strong>唐僧肉传说长生不老· 但实际无妖怪成功· 是'虚假资源'· 推动主线剧情的 McGuffin。</div>
+                <div class="ibox-row">· <strong>即时升仙：</strong>太上老君仙丹体系（仙丹+九转金丹）效力最高（10）· 是'即时升仙'通道· 掌握在道祖手中。</div>
+            </div>
+        </section>
+
+        <!-- 综合结论 -->
+        <section class="section">
+            <h2 class="section-title">肆 · 综合结论 · 权力与资源的双面镜</h2>
+            <div class="section-sub">SYNTHESIS · The Two-Way Mirror of Power &amp; Resources</div>
+
+            <p style="font-size:0.95rem;line-height:1.85;color:var(--ink);margin-bottom:18px;">
+                从三个维度交叉观察，《西游记》呈现了 <strong>权力与资源的双面镜</strong>：
+                权力决定资源分配·资源支撑权力基础。7 大势力的名义权与实权分布揭示了<strong>双中心共治</strong>格局；
+                8 条晋升通道揭示了 <strong>功绩+人情+出身</strong> 三轨制；10 种长生资源揭示了 <strong>三足鼎立</strong> 的资源控制格局。
+                三者共同构成西游世界权力运作的完整图景。
+            </p>
+
+            <p style="font-size:0.92rem;line-height:1.85;color:var(--ink-soft);margin-bottom:18px;">
+                <strong style="color:var(--ink);">方法论说明：</strong>本页所有数据均来自 4 份 JSON 输出文件·共 25 个数据点。
+                影响力评分遵循 0-10 分标准（10=三界顶级·8-9=区域主导·6-7=中等势力·4-5=边缘势力·0-3=弱势群体）。
+                成功率统计基于文本案例的归因分析·非精确统计·反映的是叙事中的相对概率。
+                长生资源稀缺度/效力/获取难度均为 0-10 分相对评分·非客观物理量。
+                owner 分组按所属势力归类（天庭/灵山/散仙/特殊）·便于揭示资源控制格局。
+            </p>
+
+            <p style="font-size:0.92rem;line-height:1.85;color:var(--ink-soft);margin-bottom:18px;">
+                <strong style="color:var(--ink);">跨概念洞察：</strong>权力与资源是双面镜——权力决定资源分配·资源支撑权力基础。
+                天庭靠蟠桃+仙丹维持统治·灵山靠金箍咒+功德操盘·散仙靠人参果保持独立。
+                妖界实强名弱且无长生资源·只能通过掠夺（吃唐僧肉）获取长生·这是体制反抗的物质根源。
+                取经项目本质是灵山通过'功德+金箍咒'扩张势力的工具·天庭通过'蟠桃+仙丹'维持现有秩序。
+            </p>
+
+            <div class="path-grid">
+                <div class="path-card">
+                    <div class="path-label" style="color:var(--accent);">FINDING 1 · 双中心</div>
+                    <div class="path-title">天庭与灵山·名义与实权分立</div>
+                    <div class="path-row">天庭名义权 10 · 灵山实权 10 · 影响力均 10 · 但灵山名义上接受天庭管辖· 实际自主决策取经项目。</div>
+                </div>
+                <div class="path-card alt">
+                    <div class="path-label" style="color:var(--accent-2);">FINDING 2 · 反抗源</div>
+                    <div class="path-title">妖界实强名弱·是体制反抗的根源</div>
+                    <div class="path-row">妖界实权 7 vs 名义权 2 · 逆差 5 分最大 · 故常被天庭围剿 · 牛魔王为最强妖王。</div>
+                </div>
+                <div class="path-card alt2">
+                    <div class="path-label" style="color:var(--accent-4);">FINDING 3 · 阶层固化</div>
+                    <div class="path-title">坐骑转正率 2% · 揭示天庭阶级固化</div>
+                    <div class="path-row">8 条晋升通道中坐骑转正率最低（2%）· 坐骑是'二等公民'· 即使随主修行千年也难转正。</div>
+                </div>
+                <div class="summary-card">
+                    <div class="path-label">META INSIGHT</div>
+                    <div class="path-title">权力与资源是双面镜 · 三足鼎立的长生格局</div>
+                    <div class="path-row">
+                        权力决定资源分配·资源支撑权力基础：<strong>天庭靠蟠桃+仙丹统治</strong>·
+                        <strong>灵山靠金箍咒+功德操盘</strong>·<strong>散仙靠人参果独立</strong>。
+                        妖界实强名弱无长生资源·只能掠夺（吃唐僧肉）·是体制反抗的物质根源。
+                        取经项目本质是灵山通过'功德+金箍咒'扩张势力的工具· 天庭通过'蟠桃+仙丹'维持现有秩序。
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div>
+            <a href="../dashboard.html">返回仪表盘</a> ·
+            <a href="../index.html">返回首页</a>
+        </div>
+        <div class="source-list">
+            数据源：scripts/J_权力与资源/ · output/data/power_structure.json · heavenly_promotion.json · immortality_resources.json · power_resources_summary.json
+        </div>
+        <div class="source-list" style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7;">
+            <strong style="color:var(--accent-3);">数据结构摘要：</strong><br>
+            · <code>power_structure.json</code>：factions[7] × {name, tier, leader, nominal_power, actual_power, influence, resource_control[4], power_gap, color} · structure_analysis{3} · structure_insights[6]<br>
+            · <code>heavenly_promotion.json</code>：promotion_paths[8] × {path, requirement, duration, success_rate, cases, tier_target} · promotion_stats{5} · promotion_insights[8]<br>
+            · <code>immortality_resources.json</code>：resources[10] × {name, scarcity, efficacy, access_level, owner, rarity_reason, effect, chapter} · resource_stats{6} · resource_insights[10]<br>
+            · <code>power_resources_summary.json</code>：total_concepts=3 · total_data_points=25 · key_findings[5] · tier_distribution{T0/T1/T2} · resource_owner_distribution{4 势力}
+            <br>
+            <strong style="color:var(--accent-3);">渲染机制：</strong>fetch + EMBEDDED fallback · 支持 file:// 双击打开 · D3.js v7 · 古典宣纸风 CSS 变量配色
+        </div>
+        <div class="source-list" style="margin-top:14px;font-size:0.74rem;color:var(--ink-soft);">
+            页面结构：Hero · KPI 卡片 × 4 · 导言 · Section 1（双柱水平条形图 + 7 势力表 + 7 卡片 + 6 洞察 + insight-box） · Section 2（柱状图 + 8 通道表 + 8 卡片 + 8 洞察 + insight-box） · Section 3（散点图 + 饼图 + 10 资源表 + 10 洞察 + insight-box） · Section 4（综合结论 + 3 发现 + meta insight） · Footer
+        </div>
+        <div class="source-list" style="margin-top:8px;font-size:0.74rem;color:var(--ink-soft);font-style:italic;">
+            © 详解西游记 · J 类「权力与资源」可视化 · 共 4 份 JSON 数据源 · 4 张图表 · 3 张表格 · 25 个数据点
+        </div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/02-人物深度分析/如来.md">如来深度分析</a></div>
+    </footer>
+
+    <!-- ===== EMBEDDED FALLBACK DATA ===== -->
+    <!--
+        本页所有 JSON 数据均嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback。
+        在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据。
+        在 http(s):// 协议下打开时，优先 fetch ../../scripts/output/data/*.json。
+        数据源：scripts/J_权力与资源/ 生成的 4 份 JSON。
+    -->
+    <script>
+    // ===== EMBEDDED 数据结构说明 =====
+    // structure: 7 factions × {name, tier, leader, nominal_power, actual_power, influence, resource_control[4], power_gap, color}
+    // promotion: 8 promotion_paths × {path, requirement, duration, success_rate, cases, tier_target}
+    // resources: 10 resources × {name, scarcity, efficacy, access_level, owner, rarity_reason, effect, chapter}
+    // summary: total_concepts, total_data_points, key_findings, tier_distribution, resource_owner_distribution
+    const EMBEDDED = {
+        structure: {
+            "concept_name": "三界权力结构图",
+            "english_name": "Three Realms Power Structure",
+            "definition": "西游世界 7 大势力的权力分层：名义权来自天庭册封·实权来自资源控制·影响力来自综合实力",
+            "scoring_criteria": "影响力 0-10 分：10=三界顶级·8-9=区域主导·6-7=中等势力·4-5=边缘势力·0-3=弱势群体",
+            "factions": [
+                {
+                    "name": "天庭",
+                    "english_name": "Heavenly Court",
+                    "tier": "T0-名义最高",
+                    "leader": "玉皇大帝",
+                    "actual_power": 9,
+                    "nominal_power": 10,
+                    "resource_control": ["蟠桃园（9000 年树）", "兜率宫仙丹", "天兵天将十万", "雷霆雨露"],
+                    "influence": 10,
+                    "power_gap": "名义权 10 > 实权 9·差 1 分·因为灵山实质独立·如来名义称臣实际不朝",
+                    "color": "#c8463a"
+                },
+                {
+                    "name": "灵山",
+                    "english_name": "Vulture Peak",
+                    "tier": "T0-实质最高",
+                    "leader": "如来佛祖",
+                    "actual_power": 10,
+                    "nominal_power": 8,
+                    "resource_control": ["佛经三藏", "金箍咒三件", "功德系统", "观音净瓶甘露"],
+                    "influence": 10,
+                    "power_gap": "实权 10 > 名义权 8·差 2 分·名义上接受天庭管辖·实际自主决策取经项目",
+                    "color": "#3a6b8c"
+                },
+                {
+                    "name": "地府",
+                    "english_name": "Underworld",
+                    "tier": "T1-执行机构",
+                    "leader": "十殿阎王（地藏王菩萨监管）",
+                    "actual_power": 6,
+                    "nominal_power": 7,
+                    "resource_control": ["生死簿", "十八层地狱", "六道轮回", "黄泉路"],
+                    "influence": 6,
+                    "power_gap": "名义权 7 > 实权 6·差 1 分·生死簿被悟空篡改暴露执行力短板",
+                    "color": "#5a3828"
+                },
+                {
+                    "name": "人间",
+                    "english_name": "Mortal Realm",
+                    "tier": "T2-世俗王权",
+                    "leader": "李世民（大唐）",
+                    "actual_power": 5,
+                    "nominal_power": 6,
+                    "resource_control": ["军队", "人口亿万", "土地", "贡品赋税"],
+                    "influence": 5,
+                    "power_gap": "名义权 6 > 实权 5·差 1 分·人间王权受天庭册封·但实际独立",
+                    "color": "#7a5230"
+                },
+                {
+                    "name": "妖界",
+                    "english_name": "Demon Realm",
+                    "tier": "T2-分散势力",
+                    "leader": "无统一领导（牛魔王为最强）",
+                    "actual_power": 7,
+                    "nominal_power": 2,
+                    "resource_control": ["洞府", "盗用法宝", "小妖军队", "地方割据"],
+                    "influence": 7,
+                    "power_gap": "实权 7 > 名义权 2·差 5 分·最大逆差·妖界实强名弱·故常被天庭围剿",
+                    "color": "#5a7a3a"
+                },
+                {
+                    "name": "水族",
+                    "english_name": "Aquatic Tribes",
+                    "tier": "T2-边缘势力",
+                    "leader": "四海龙王",
+                    "actual_power": 5,
+                    "nominal_power": 5,
+                    "resource_control": ["水族兵", "珍珠珊瑚", "雨水调度", "江河湖海"],
+                    "influence": 5,
+                    "power_gap": "实权=名义权=5·平衡·泾河龙王被斩是立威警示·水族总体服从天庭",
+                    "color": "#3a8c8c"
+                },
+                {
+                    "name": "散仙",
+                    "english_name": "Loose Immortals",
+                    "tier": "T1-超然独立",
+                    "leader": "无（镇元大仙为最强）",
+                    "actual_power": 7,
+                    "nominal_power": 4,
+                    "resource_control": ["人参果（3000 年一熟）", "道法传承", "独立洞天", "菩提心法"],
+                    "influence": 6,
+                    "power_gap": "实权 7 > 名义权 4·差 3 分·散仙实力强但不受册封·故游离于体制外",
+                    "color": "#9c6b3a"
+                }
+            ],
+            "structure_analysis": {
+                "total_factions": 7,
+                "t0_factions": ["天庭", "灵山"],
+                "t1_factions": ["地府", "散仙"],
+                "t2_factions": ["人间", "妖界", "水族"],
+                "balance_pattern": "天庭与灵山并列 T0·天庭名义权最高·灵山实权最高·形成双中心共治",
+                "biggest_power_gap": "妖界（实权 7 vs 名义权 2·差 5 分）·故妖界是体制反抗者",
+                "smallest_power_gap": "水族（实权=名义权=5）·完全顺从体制"
+            },
+            "structure_insights": [
+                "天庭与灵山并列第一·影响力均 10·但天庭名义权高·灵山实权高",
+                "妖界实权 7·名义权 2·逆差最大·是体制反抗的根源",
+                "散仙实力强（实权 7）但名义权低（4）·菩提祖师隐居·镇元大仙结拜悟空",
+                "地府名义权 7·实权 6·生死簿被篡改暴露治理漏洞",
+                "人间名义权 6·实权 5·大唐虽强但受天庭册封",
+                "水族完全顺从·泾河龙王被斩是天庭立威的牺牲品"
+            ]
+        },
+        promotion: {
+            "concept_name": "天庭晋升通道",
+            "english_name": "Heavenly Court Promotion Channels",
+            "definition": "天庭官僚体系 8 条晋升路径·揭示西游世界的'阶级流动'机制·并非单一通道",
+            "promotion_paths": [
+                {
+                    "path": "修炼成仙",
+                    "english_name": "Self-Cultivation",
+                    "requirement": "自身修行圆满·功德圆满·脱离凡胎",
+                    "duration": "数百年至数千年",
+                    "success_rate": 0.05,
+                    "cases": ["菩提祖师（隐世）", "镇元大仙", "乌巢禅师", "二郎神（肉身成圣）"],
+                    "tier_target": "T1-散仙或天仙"
+                },
+                {
+                    "path": "立功受封",
+                    "english_name": "Meritorious Service",
+                    "requirement": "立下大功·如降妖/征战/护法",
+                    "duration": "1-10 年",
+                    "success_rate": 0.6,
+                    "cases": ["孙悟空（封齐天大圣·后成佛）", "哪吒（封三坛海会大神）", "二郎神（封昭惠灵显王）", "李天王（封降魔大元帅）"],
+                    "tier_target": "T0-天庭正式编制"
+                },
+                {
+                    "path": "科举天试",
+                    "english_name": "Heavenly Examination",
+                    "requirement": "通过天庭科举考试·文武科目",
+                    "duration": "数年备考+一次考试",
+                    "success_rate": 0.1,
+                    "cases": ["文曲星（殿试出身）", "武曲星（武举出身）", "魁星（科举神）"],
+                    "tier_target": "T1-天庭文职/武职"
+                },
+                {
+                    "path": "举荐引荐",
+                    "english_name": "Recommendation",
+                    "requirement": "由高级神仙举荐·或师承名门",
+                    "duration": "数月至数年",
+                    "success_rate": 0.5,
+                    "cases": ["猪八戒（师父荐举·当天蓬元帅）", "沙僧（师父荐举·当卷帘大将）", "白龙马（观音举荐·入取经团队）"],
+                    "tier_target": "T0-天庭高级将领"
+                },
+                {
+                    "path": "坐骑转正",
+                    "english_name": "Mount Promotion",
+                    "requirement": "作为高级神仙坐骑·随主修行·偶得机缘转正",
+                    "duration": "数千年",
+                    "success_rate": 0.02,
+                    "cases": ["青牛精（老君坐骑·下凡为妖）", "金毛犼（观音坐骑）", "青毛狮子（文殊坐骑）", "白象（普贤坐骑）"],
+                    "tier_target": "T2-妖界（下凡）或回归坐骑身份"
+                },
+                {
+                    "path": "凡人封神",
+                    "english_name": "Mortal Deification",
+                    "requirement": "凡人行大善或大忠·死后封神·或受天庭册封",
+                    "duration": "一生+死后追封",
+                    "success_rate": 0.01,
+                    "cases": ["秦叔宝/尉迟恭（门神）", "魏征（梦中斩龙·人臣之极）", "关羽（演义体系·非西游主线）"],
+                    "tier_target": "T2-天庭基层神职"
+                },
+                {
+                    "path": "蟠桃延寿",
+                    "english_name": "Peach Longevity",
+                    "requirement": "获邀参加蟠桃会·食蟠桃延寿·保住神籍",
+                    "duration": "每年一次蟠桃会",
+                    "success_rate": 0.3,
+                    "cases": ["天庭高层（蟠桃会常客）", "孙悟空（齐天大圣时期获邀一次·后失资格）"],
+                    "tier_target": "维持现有 tier·非晋升·是续命机制"
+                },
+                {
+                    "path": "仙丹升迁",
+                    "english_name": "Elixir Promotion",
+                    "requirement": "获太上老君仙丹·提升修为或保命",
+                    "duration": "立即生效",
+                    "success_rate": 0.2,
+                    "cases": ["孙悟空（偷吃 5 壶仙丹·成就金钢不坏）", "玉帝（历经 1750 劫·每劫 129600 年·仙丹辅助）"],
+                    "tier_target": "跨 tier 跃升或保命"
+                }
+            ],
+            "promotion_stats": {
+                "total_paths": 8,
+                "highest_success_rate": "立功受封（60%）·主流晋升通道",
+                "lowest_success_rate": "凡人封神（1%）·极少数人能走通",
+                "mainstream_path": "立功受封+举荐引荐·覆盖天庭大部分在编神仙",
+                "alternative_path": "修炼成仙·自主性最强但成功率最低",
+                "structural_insight": "天庭晋升是'功绩制+人情制+出身制'三轨并行·非单一标准"
+            },
+            "promotion_insights": [
+                "立功受封是主流通道·60% 成功率·孙悟空封齐天大圣就是此路径",
+                "举荐引荐是潜规则·50% 成功率·猪八戒/沙僧均靠此入天庭高层",
+                "蟠桃延寿不是晋升·是续命机制·保住神籍不被'退休'",
+                "仙丹升迁是顶级资源·掌握在太上老君一人手中·稀缺性极高",
+                "坐骑转正率最低（2%）·揭示天庭阶级固化·坐骑是'二等公民'",
+                "凡人封神是底层上升通道·但成功率 1%·秦叔宝/尉迟恭是少数案例",
+                "科举天试存在但案例少·说明天庭更看重功绩而非考试",
+                "修炼成仙是'最正统'但最难·菩提祖师/镇元大仙等是成功者·但多数修者无果"
+            ]
+        },
+        resources: {
+            "concept_name": "长生资源链",
+            "english_name": "Immortality Resource Chain",
+            "definition": "西游世界 10 种长生资源·稀缺度/效力/获取难度/拥有者·构成'长生经济'",
+            "scoring_criteria": "scarcity/efficacy/access_level 均 0-10 分：10=最稀缺/最高效/最难获取",
+            "resources": [
+                {
+                    "name": "蟠桃（9000 年树）",
+                    "english_name": "9-Millennium Peach",
+                    "scarcity": 10,
+                    "efficacy": 10,
+                    "access_level": 10,
+                    "owner": "王母娘娘（蟠桃园·天庭）",
+                    "rarity_reason": "9000 年一熟·全树仅 9 棵·每棵结果有限·蟠桃会才分发",
+                    "effect": "与天地齐寿·日月同庚",
+                    "chapter": "第 5 回"
+                },
+                {
+                    "name": "人参果",
+                    "english_name": "Ginseng Fruit",
+                    "scarcity": 9,
+                    "efficacy": 9,
+                    "access_level": 9,
+                    "owner": "镇元大仙（五庄观）",
+                    "rarity_reason": "3000 年一熟·全树仅 30 个·闻一闻活 360 岁·吃一个活 47000 年",
+                    "effect": "47000 年寿命·但不可多食",
+                    "chapter": "第 24-26 回"
+                },
+                {
+                    "name": "太上老君仙丹",
+                    "english_name": "Laozi Elixir",
+                    "scarcity": 9,
+                    "efficacy": 10,
+                    "access_level": 10,
+                    "owner": "太上老君（兜率宫）",
+                    "rarity_reason": "老君亲炼·数量有限·分'金丹/还丹/九转金丹'多品级",
+                    "effect": "金钢不坏之身/起死回生/即时升仙",
+                    "chapter": "第 5/7/39 回"
+                },
+                {
+                    "name": "唐僧肉",
+                    "english_name": "Tang Monk Flesh",
+                    "scarcity": 10,
+                    "efficacy": 10,
+                    "access_level": 10,
+                    "owner": "唐僧（金蝉子转世·十世修行）",
+                    "rarity_reason": "十世修行·元阳未泄·阴阳合一·全西游仅此一份",
+                    "effect": "长生不老（传说·实际无人验证·妖怪皆失败）",
+                    "chapter": "全程主线·第 27 回起"
+                },
+                {
+                    "name": "紧箍咒解除",
+                    "english_name": "Golden Hoop Release",
+                    "scarcity": 10,
+                    "efficacy": 8,
+                    "access_level": 10,
+                    "owner": "如来佛祖（金箍咒三件·观音转交）",
+                    "rarity_reason": "成佛后自褪·不可外力破解·是'项目完成度'的奖励",
+                    "effect": "解除束缚·获得自由（封斗战胜佛后自褪）",
+                    "chapter": "第 8/100 回"
+                },
+                {
+                    "name": "天河水",
+                    "english_name": "Heavenly River Water",
+                    "scarcity": 6,
+                    "efficacy": 6,
+                    "access_level": 7,
+                    "owner": "天蓬元帅（猪八戒）·天河八万水军",
+                    "rarity_reason": "天河之水·量较大但需天庭授权·凡间不可见",
+                    "effect": "延寿/治病/净化·非顶级长生资源",
+                    "chapter": "第 8/47 回"
+                },
+                {
+                    "name": "镇元大仙人参果（同人参果·特指赠予）",
+                    "english_name": "Zhenyuan Gifted Ginseng Fruit",
+                    "scarcity": 10,
+                    "efficacy": 9,
+                    "access_level": 10,
+                    "owner": "镇元大仙（结拜悟空后赠予）",
+                    "rarity_reason": "3000 年一熟·30 个中赠予 2 个·需结拜关系才可获得",
+                    "effect": "47000 年寿命·且带'人情'属性·不可交易",
+                    "chapter": "第 26 回"
+                },
+                {
+                    "name": "紫河车",
+                    "english_name": "Placenta Elixir",
+                    "scarcity": 8,
+                    "efficacy": 7,
+                    "access_level": 9,
+                    "owner": "观音菩萨（紫河车法）·少数高级神仙",
+                    "rarity_reason": "需特殊炼制·材料稀有·只有少数神仙掌握配方",
+                    "effect": "延寿/补气·非顶级但稀缺",
+                    "chapter": "散见道教典籍·西游暗线"
+                },
+                {
+                    "name": "九转金丹",
+                    "english_name": "Nine-Turn Golden Elixir",
+                    "scarcity": 9,
+                    "efficacy": 10,
+                    "access_level": 10,
+                    "owner": "太上老君（兜率宫顶级品）",
+                    "rarity_reason": "九转炼制·老君最顶级丹药·数量极少·乌鸡国国王还魂用此",
+                    "effect": "起死回生/即身成仙",
+                    "chapter": "第 39 回"
+                },
+                {
+                    "name": "太乙真人莲藕化身",
+                    "english_name": "Taiyi Lotus Avatar",
+                    "scarcity": 9,
+                    "efficacy": 9,
+                    "access_level": 10,
+                    "owner": "太乙真人（哪吒师傅）",
+                    "rarity_reason": "需太乙真人亲施法术·莲藕为媒·重塑肉身·极少数案例",
+                    "effect": "重塑肉身/复活·哪吒死后化为此身",
+                    "chapter": "第 83 回（追溯哪吒身世）"
+                }
+            ],
+            "resource_stats": {
+                "total_resources": 10,
+                "avg_scarcity": 9.0,
+                "avg_efficacy": 8.8,
+                "avg_access_level": 9.5,
+                "rarest_resource": "蟠桃 9000 年树（scarcity 10·全树 9 棵·9000 年一熟）",
+                "most_efficient": "太上老君仙丹/九转金丹（efficacy 10·即时升仙/起死回生）",
+                "hardest_access": "蟠桃/唐僧肉/紧箍咒解除/九转金丹/莲藕化身（access_level 10·极难获取）",
+                "most_overhyped": "唐僧肉（传说长生不老·但实际无妖怪成功·是'虚假资源'）"
+            },
+            "resource_insights": [
+                "蟠桃 9000 年树最稀缺（10 分）·是天庭统治的物质基础·控制蟠桃即控制神仙命脉",
+                "唐僧肉 10 元阴阳合一·稀缺度 10·但实际效力存疑·是'虚假资源'·推动主线剧情",
+                "人参果 3000 年一熟·稀缺度 9·镇元大仙独占·是散仙独立性的物质基础",
+                "太上老君仙丹体系（仙丹+九转金丹）效力最高·是'即时升仙'通道·掌握在道祖手中",
+                "紧箍咒解除是'项目奖励'型资源·不可外力破解·揭示如来对悟空的控制逻辑",
+                "天河水量大但效力一般·是猪八戒的'隐秘资源'·非顶级长生品",
+                "莲藕化身是'复活'型资源·哪吒专属·揭示太乙真人的炼器能力",
+                "紫河车是暗线资源·非主线但稀缺·说明长生资源体系有'灰色地带'",
+                "10 种资源平均稀缺度 9.0·平均效力 8.8·平均获取难度 9.5·说明长生是极奢侈需求",
+                "天庭控制蟠桃+仙丹·灵山控制金箍咒·散仙控制人参果·形成'三足鼎立'的长生资源格局"
+            ]
+        },
+        summary: {
+            "concept_name": "权力与资源整体统计",
+            "total_concepts": 3,
+            "concept_list": ["三界权力结构", "天庭晋升通道", "长生资源链"],
+            "total_data_points": 25,
+            "key_findings": [
+                "7 大势力·天庭与灵山并列第一·影响力均 10·天庭名义权高·灵山实权高",
+                "8 条天庭晋升通道·立功受封成功率最高（60%）·凡人封神最低（1%）",
+                "10 种长生资源·平均稀缺度 9.0·平均效力 8.8·平均获取难度 9.5·长生是极奢侈需求",
+                "蟠桃 9000 年树最稀缺（10 分）·唐僧肉 10 元阴阳合一·人参果 3000 年一熟",
+                "妖界实权 7 vs 名义权 2·逆差最大·是体制反抗的根源"
+            ],
+            "cross_concept_insight": "权力与资源是双面镜：权力决定资源分配·资源支撑权力基础·天庭靠蟠桃+仙丹统治·灵山靠金箍咒+功德操盘·散仙靠人参果独立",
+            "tier_distribution": {
+                "T0": ["天庭", "灵山"],
+                "T1": ["地府", "散仙"],
+                "T2": ["人间", "妖界", "水族"]
+            },
+            "resource_owner_distribution": {
+                "天庭": ["蟠桃", "太上老君仙丹", "九转金丹", "天河水"],
+                "灵山": ["紧箍咒解除", "紫河车"],
+                "散仙": ["人参果", "镇元大仙人参果（赠予）"],
+                "特殊": ["唐僧肉（唐僧本人）", "太乙真人莲藕化身（太乙真人）"]
+            }
+        }
+    };
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('[fallback] ' + path + ' → embedded data:', e.message);
+            return fallback;
+        }
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== owner → faction 映射（用于散点图与饼图分组）=====
+    function ownerToFaction(owner) {
+        if (owner.includes('王母') || owner.includes('太上老君') || owner.includes('天蓬') || owner.includes('天庭')) return '天庭';
+        if (owner.includes('如来') || owner.includes('观音')) return '灵山';
+        if (owner.includes('镇元')) return '散仙';
+        return '特殊';
+    }
+    const FACTION_COLORS = {
+        '天庭': '#c8463a',
+        '灵山': '#3a6b8c',
+        '散仙': '#5a7a3a',
+        '特殊': '#7a5230'
+    };
+
+    // ===== Main render =====
+    async function main() {
+        const baseUrl = '../../scripts/output/data/';
+        const [structure, promotion, resources, summary] = await Promise.all([
+            loadJson(baseUrl + 'power_structure.json', EMBEDDED.structure),
+            loadJson(baseUrl + 'heavenly_promotion.json', EMBEDDED.promotion),
+            loadJson(baseUrl + 'immortality_resources.json', EMBEDDED.resources),
+            loadJson(baseUrl + 'power_resources_summary.json', EMBEDDED.summary)
+        ]);
+        window.__lastData = { structure, promotion, resources, summary };
+
+        renderFactionBar(structure);
+        renderFactionTable(structure);
+        renderFactionCards(structure);
+        renderStructureInsights(structure);
+
+        renderPromotionBar(promotion);
+        renderPromotionTable(promotion);
+        renderPathCards(promotion);
+        renderPromotionInsights(promotion);
+
+        renderResourceScatter(resources);
+        renderOwnerPie(resources);
+        renderResourceTable(resources);
+        renderResourceInsights(resources);
+    }
+
+    // ===== Section 1: 7 势力水平双柱条形图（按 actual_power 排序）=====
+    function renderFactionBar(data) {
+        const svg = d3.select('#chart-faction-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 960;
+        const W = Math.max(containerW, 760), H = 460;
+        const m = {top: 30, right: 60, bottom: 50, left: 90};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const factions = data.factions.slice().sort((a, b) => b.actual_power - a.actual_power);
+
+        const y0 = d3.scaleBand().domain(factions.map(d => d.name)).range([0, h]).padding(0.25);
+        const y1 = d3.scaleBand().domain(['actual_power', 'nominal_power']).range([0, y0.bandwidth()]).padding(0.08);
+        const x = d3.scaleLinear().domain([0, 10]).range([0, w]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(x.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', d => x(d)).attr('x2', d => x(d))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y0).tickSize(0).tickPadding(8))
+            .selectAll('text').style('font-size', '12px').style('font-weight', '600');
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(5));
+
+        // axis label
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 40)
+            .attr('text-anchor', 'middle')
+            .text('权力分数 (0-10)');
+
+        const colors = {
+            'actual_power': '#c8463a',
+            'nominal_power': '#3a6b8c'
+        };
+        const labels = {
+            'actual_power': '实权',
+            'nominal_power': '名义权'
+        };
+
+        const groups = g.selectAll('.faction-group')
+            .data(factions).enter().append('g')
+            .attr('class', 'faction-group')
+            .attr('transform', d => `translate(0,${y0(d.name)})`);
+
+        groups.selectAll('rect')
+            .data(d => ['actual_power', 'nominal_power'].map(k => ({
+                key: k, value: d[k], faction: d
+            })))
+            .enter().append('rect')
+            .attr('x', 0)
+            .attr('y', d => y1(d.key))
+            .attr('width', d => x(d.value))
+            .attr('height', y1.bandwidth())
+            .attr('fill', d => colors[d.key])
+            .attr('stroke', '#fff').attr('stroke-width', 1)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>${d.faction.name}</strong> · ${d.faction.tier}<br>` +
+                    `${labels[d.key]}：<strong>${d.value}</strong> / 10<br>` +
+                    `领袖：${d.faction.leader}<br>` +
+                    `影响力：${d.faction.influence} / 10<br>` +
+                    `<em>${d.faction.power_gap}</em>`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 柱末数值
+        groups.selectAll('.bar-val')
+            .data(d => ['actual_power', 'nominal_power'].map(k => ({
+                key: k, value: d[k]
+            })))
+            .enter().append('text')
+            .attr('class', 'bar-val')
+            .attr('x', d => x(d.value) + 4)
+            .attr('y', d => y1(d.key) + y1.bandwidth() / 2 + 3)
+            .style('font-size', '11px')
+            .style('font-weight', '600')
+            .attr('fill', d => colors[d.key])
+            .text(d => d.value);
+
+        // power_gap 标注（最右侧）
+        groups.append('text')
+            .attr('class', 'gap-val')
+            .attr('x', d => x(Math.max(d.actual_power, d.nominal_power)) + 32)
+            .attr('y', d => y0.bandwidth() / 2 + 3)
+            .style('font-size', '10px')
+            .attr('fill', '#7a5230')
+            .style('font-style', 'italic')
+            .text(d => '差 ' + Math.abs(d.actual_power - d.nominal_power));
+    }
+
+    function renderFactionTable(data) {
+        const tbody = d3.select('#faction-table tbody');
+        const rows = tbody.selectAll('tr').data(data.factions).enter().append('tr');
+        rows.append('td').html(d => '<strong>' + d.name + '</strong>');
+        rows.append('td').text(d => d.tier);
+        rows.append('td').text(d => d.leader);
+        rows.append('td').html(d => '<strong style="color:var(--accent-2);">' + d.nominal_power + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.actual_power + '</strong>');
+        rows.append('td').text(d => d.influence);
+        rows.append('td').text(d => d.resource_control.join(' / '));
+        rows.append('td').html(d => '<em style="color:var(--ink-soft);">' + d.power_gap + '</em>');
+    }
+
+    function renderFactionCards(data) {
+        const grid = d3.select('#faction-grid');
+        const cards = grid.selectAll('.faction-card')
+            .data(data.factions).enter()
+            .append('div')
+            .attr('class', 'faction-card')
+            .style('border-top-color', d => d.color);
+        cards.append('div').attr('class', 'faction-name').text(d => d.name);
+        cards.append('div').attr('class', 'faction-tier').text(d => d.tier + ' · ' + d.english_name);
+        cards.append('div').attr('class', 'faction-row').html(d => '<strong>领袖：</strong>' + d.leader);
+        cards.append('div').attr('class', 'faction-row').html(d => '<strong>名义权 / 实权：</strong>' + d.nominal_power + ' / ' + d.actual_power);
+        cards.append('div').attr('class', 'faction-row').html(d => '<strong>影响力：</strong>' + d.influence + ' / 10');
+        cards.append('div').attr('class', 'faction-row').html(d => '<strong>资源：</strong>' + d.resource_control.join(' / '));
+        cards.append('div').attr('class', 'faction-row').html(d => '<strong>逆差：</strong><em>' + d.power_gap + '</em>');
+    }
+
+    function renderStructureInsights(data) {
+        const list = d3.select('#structure-insights-list');
+        list.selectAll('li').data(data.structure_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 2: 8 晋升通道 success_rate 柱状图（按 success_rate 排序 + duration 标注）=====
+    function renderPromotionBar(data) {
+        const svg = d3.select('#chart-promotion-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 960;
+        const W = Math.max(containerW, 760), H = 420;
+        const m = {top: 40, right: 30, bottom: 90, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const paths = data.promotion_paths.slice().sort((a, b) => b.success_rate - a.success_rate);
+
+        const x = d3.scaleBand().domain(paths.map(d => d.path)).range([0, w]).padding(0.25);
+        const y = d3.scaleLinear().domain([0, 1]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
+            .selectAll('text')
+            .style('font-size', '11px')
+            .style('font-weight', '600')
+            .attr('transform', 'rotate(-25)')
+            .attr('text-anchor', 'end');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('.0%')));
+
+        // axis label
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -44)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#3a6b8c')
+            .text('success_rate 成功率 (0-100%)');
+
+        // 颜色：按成功率渐变（高=accent-2·低=accent-3）
+        const colorScale = d3.scaleLinear()
+            .domain([0, 0.3, 0.6])
+            .range(['#7a5230', '#9c6b3a', '#3a6b8c']);
+
+        // 柱
+        g.selectAll('.bar')
+            .data(paths).enter().append('rect')
+            .attr('class', 'bar')
+            .attr('x', d => x(d.path))
+            .attr('y', d => y(d.success_rate))
+            .attr('width', x.bandwidth())
+            .attr('height', d => h - y(d.success_rate))
+            .attr('fill', d => colorScale(d.success_rate))
+            .attr('stroke', '#fff').attr('stroke-width', 1)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>${d.path}</strong> · ${d.english_name}<br>` +
+                    `成功率：<strong>${(d.success_rate * 100).toFixed(0)}%</strong><br>` +
+                    `时长：${d.duration}<br>` +
+                    `要求：${d.requirement}<br>` +
+                    `目标 tier：${d.tier_target}<br>` +
+                    `案例：${d.cases.join(' / ')}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 柱顶成功率标注
+        g.selectAll('.val-rate')
+            .data(paths).enter().append('text')
+            .attr('class', 'val-rate')
+            .attr('x', d => x(d.path) + x.bandwidth() / 2)
+            .attr('y', d => y(d.success_rate) - 6)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '11px')
+            .style('font-weight', '600')
+            .attr('fill', '#3a6b8c')
+            .text(d => (d.success_rate * 100).toFixed(0) + '%');
+
+        // duration 标注（柱底下方）
+        g.selectAll('.val-dur')
+            .data(paths).enter().append('text')
+            .attr('class', 'val-dur')
+            .attr('x', d => x(d.path) + x.bandwidth() / 2)
+            .attr('y', d => y(d.success_rate) - 22)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '9px')
+            .style('fill', '#7a5230')
+            .style('font-style', 'italic')
+            .text(d => d.duration);
+    }
+
+    function renderPromotionTable(data) {
+        const tbody = d3.select('#promotion-table tbody');
+        const sorted = data.promotion_paths.slice().sort((a, b) => b.success_rate - a.success_rate);
+        const rows = tbody.selectAll('tr').data(sorted).enter().append('tr');
+        rows.append('td').html(d => '<strong>' + d.path + '</strong>');
+        rows.append('td').text(d => d.requirement);
+        rows.append('td').text(d => d.duration);
+        rows.append('td').html(d => '<strong style="color:var(--accent-2);">' + (d.success_rate * 100).toFixed(0) + '%</strong>');
+        rows.append('td').text(d => d.tier_target);
+        rows.append('td').text(d => d.cases.join(' / '));
+    }
+
+    function renderPathCards(data) {
+        const sorted = data.promotion_paths.slice().sort((a, b) => b.success_rate - a.success_rate);
+        const colorClass = ['', 'alt', 'alt2', '', 'alt', 'alt2', '', 'alt'];
+        const grid = d3.select('#path-grid');
+        const cards = grid.selectAll('.path-card')
+            .data(sorted).enter()
+            .append('div')
+            .attr('class', (d, i) => 'path-card ' + (colorClass[i % colorClass.length]));
+        cards.append('div').attr('class', 'path-label').text(d => 'SUCCESS ' + (d.success_rate * 100).toFixed(0) + '%');
+        cards.append('div').attr('class', 'path-title').text(d => d.path);
+        cards.append('div').attr('class', 'path-row').html(d => '<strong>要求：</strong>' + d.requirement);
+        cards.append('div').attr('class', 'path-row').html(d => '<strong>时长：</strong>' + d.duration);
+        cards.append('div').attr('class', 'path-row').html(d => '<strong>目标 tier：</strong>' + d.tier_target);
+        cards.append('div').attr('class', 'path-row').html(d => '<strong>案例：</strong>' + d.cases.join(' / '));
+    }
+
+    function renderPromotionInsights(data) {
+        const list = d3.select('#promotion-insights-list');
+        list.selectAll('li').data(data.promotion_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 3: 10 长生资源散点图（X=scarcity · Y=efficacy · 点大小=access_level · 颜色按 owner 分组）=====
+    function renderResourceScatter(data) {
+        const svg = d3.select('#chart-resource-scatter');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 960;
+        const W = Math.max(containerW, 760), H = 480;
+        const m = {top: 40, right: 40, bottom: 60, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const resources = data.resources.map(r => ({
+            ...r,
+            faction: ownerToFaction(r.owner)
+        }));
+
+        const x = d3.scaleLinear().domain([4, 11]).range([0, w]);
+        const y = d3.scaleLinear().domain([4, 11]).range([h, 0]);
+        const r = d3.scaleLinear().domain([6, 10]).range([8, 22]);
+
+        // grid
+        g.append('g').selectAll('line.gridx')
+            .data(x.ticks(7))
+            .enter().append('line')
+            .attr('class', 'gridx')
+            .attr('x1', d => x(d)).attr('x2', d => x(d))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+        g.append('g').selectAll('line.gridy')
+            .data(y.ticks(7))
+            .enter().append('line')
+            .attr('class', 'gridy')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(7));
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(7));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#c8463a')
+            .text('scarcity 稀缺度 (0-10)');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#3a6b8c')
+            .text('efficacy 效力 (0-10)');
+
+        // 点
+        g.selectAll('.dot')
+            .data(resources).enter().append('circle')
+            .attr('class', 'dot')
+            .attr('cx', d => x(d.scarcity))
+            .attr('cy', d => y(d.efficacy))
+            .attr('r', d => r(d.access_level))
+            .attr('fill', d => FACTION_COLORS[d.faction])
+            .attr('fill-opacity', 0.55)
+            .attr('stroke', d => FACTION_COLORS[d.faction])
+            .attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>${d.name}</strong> · ${d.english_name}<br>` +
+                    `稀缺度：${d.scarcity} / 10<br>` +
+                    `效力：${d.efficacy} / 10<br>` +
+                    `获取难度：${d.access_level} / 10<br>` +
+                    `拥有者：${d.owner}<br>` +
+                    `所属势力：<strong style="color:${FACTION_COLORS[d.faction]}">${d.faction}</strong><br>` +
+                    `效果：${d.effect}<br>` +
+                    `章节：${d.chapter}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 资源名标签（避免重叠·轻微偏移）
+        g.selectAll('.dot-label')
+            .data(resources).enter().append('text')
+            .attr('class', 'dot-label')
+            .attr('x', d => x(d.scarcity))
+            .attr('y', d => y(d.efficacy) - r(d.access_level) - 4)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10px')
+            .style('font-weight', '600')
+            .attr('fill', '#2c2418')
+            .text(d => d.name.length > 8 ? d.name.slice(0, 7) + '…' : d.name);
+
+        // access_level 图例（右下角小注）
+        g.append('text')
+            .attr('x', w - 8).attr('y', h - 8)
+            .attr('text-anchor', 'end')
+            .style('font-size', '10px')
+            .style('font-style', 'italic')
+            .attr('fill', '#6b5e4d')
+            .text('圆点半径 ∝ access_level 获取难度');
+    }
+
+    // ===== Section 3: owner 分布饼图（按 owner 所属势力分组）=====
+    function renderOwnerPie(data) {
+        const svg = d3.select('#chart-owner-pie');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 760;
+        const W = Math.max(containerW, 600), H = 420;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const cx = W / 2, cy = H / 2;
+        const radius = Math.max(0, Math.min(W, H) / 2 - 60);
+
+        const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+        // 按 owner 所属势力分组
+        const groups = {};
+        data.resources.forEach(r => {
+            const f = ownerToFaction(r.owner);
+            if (!groups[f]) groups[f] = [];
+            groups[f].push(r);
+        });
+        const pieData = Object.keys(groups).map(k => ({
+            faction: k,
+            count: groups[k].length,
+            resources: groups[k].map(r => r.name)
+        })).sort((a, b) => b.count - a.count);
+
+        const total = pieData.reduce((s, d) => s + d.count, 0);
+        const pie = d3.pie().value(d => d.count).sort(null);
+        const arc = d3.arc().innerRadius(radius * 0.45).outerRadius(radius).padAngle(0.02);
+        const arcHover = d3.arc().innerRadius(radius * 0.45).outerRadius(radius + 8).padAngle(0.02);
+        const labelArc = d3.arc().innerRadius(radius * 0.7).outerRadius(radius * 0.95);
+
+        const arcs = g.selectAll('.arc')
+            .data(pie(pieData)).enter().append('g')
+            .attr('class', 'arc');
+
+        arcs.append('path')
+            .attr('d', arc)
+            .attr('fill', d => FACTION_COLORS[d.data.faction])
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(e, d) {
+                d3.select(this).transition().duration(120).attr('d', arcHover);
+                tooltip.show(
+                    `<strong style="color:${FACTION_COLORS[d.data.faction]}">${d.data.faction}</strong><br>` +
+                    `资源数：<strong>${d.data.count}</strong> / ${total} 项<br>` +
+                    `占比：<strong>${(d.data.count / total * 100).toFixed(0)}%</strong><br>` +
+                    `资源：${d.data.resources.join(' / ')}`, e);
+            })
+            .on('mouseout', function() {
+                d3.select(this).transition().duration(120).attr('d', arc);
+                tooltip.hide();
+            });
+
+        // 百分比标签
+        arcs.append('text')
+            .attr('transform', d => `translate(${labelArc.centroid(d)})`)
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
+            .style('font-size', '14px')
+            .style('font-weight', '700')
+            .attr('fill', '#fff')
+            .text(d => (d.data.count / total * 100).toFixed(0) + '%');
+
+        // 势力名标签（外圈）
+        const outerArc = d3.arc().innerRadius(radius + 14).outerRadius(radius + 14);
+        arcs.append('text')
+            .attr('transform', d => {
+                const c = outerArc.centroid(d);
+                return `translate(${c})`;
+            })
+            .attr('text-anchor', d => {
+                const mid = (d.startAngle + d.endAngle) / 2;
+                return mid < Math.PI ? 'start' : 'end';
+            })
+            .attr('dominant-baseline', 'middle')
+            .style('font-size', '13px')
+            .style('font-weight', '600')
+            .attr('fill', d => FACTION_COLORS[d.data.faction])
+            .text(d => `${d.data.faction} · ${d.data.count} 项`);
+
+        // 中心总数
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('dy', -8)
+            .style('font-size', '14px')
+            .attr('fill', '#6b5e4d')
+            .text('总资源');
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('dy', 22)
+            .style('font-size', '32px')
+            .style('font-weight', '700')
+            .attr('fill', '#2c2418')
+            .text(total);
+    }
+
+    function renderResourceTable(data) {
+        const tbody = d3.select('#resource-table tbody');
+        const rows = tbody.selectAll('tr').data(data.resources).enter().append('tr');
+        rows.append('td').html(d => '<strong>' + d.name + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.scarcity + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-2);">' + d.efficacy + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-4);">' + d.access_level + '</strong>');
+        rows.append('td').text(d => d.owner);
+        rows.append('td').html(d => {
+            const f = ownerToFaction(d.owner);
+            return '<span style="color:' + FACTION_COLORS[f] + ';font-weight:600;">' + f + '</span>';
+        });
+        rows.append('td').text(d => d.rarity_reason);
+        rows.append('td').text(d => d.effect);
+        rows.append('td').text(d => d.chapter);
+    }
+
+    function renderResourceInsights(data) {
+        const list = d3.select('#resource-insights-list');
+        list.selectAll('li').data(data.resource_insights).enter().append('li').text(d => d);
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

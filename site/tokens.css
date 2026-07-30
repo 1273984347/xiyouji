@@ -1,0 +1,39 @@
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * 用途：供 site/ 下所有可视化页面复用的配色 / 字体 / 阴影 CSS 变量。
+ * 古典宣纸风配色：暖白底 + 朱砂红主调 + 青蓝 / 赭褐 / 苔绿辅色。
+ * 引用方式：<link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *           <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ */
+
+:root {
+    /* —— 背景 / 纸张 —— */
+    --bg: #faf7f2;            /* 页面整体背景：暖白宣纸色 */
+    --paper: #ffffff;         /* 卡片 / section 内容区背景：纯白纸面 */
+
+    /* —— 文字 —— */
+    --ink: #2c2418;           /* 主文字：墨褐，正文标题 */
+    --ink-soft: #6b5e4d;      /* 次级文字：浅墨褐，副标题 / 说明 */
+
+    /* —— 主辅配色（朱砂系 / 古典五色） —— */
+    --accent: #c8463a;        /* 主强调色：朱砂红，标题下划线 / KPI 顶边 / 强调词 */
+    --accent-soft: #e9b885;   /* 主强调浅色：浅赭金，徽章底 / 渐变高光 */
+    --accent-2: #3a6b8c;      /* 辅色 2：青蓝，链接 / 第二系列 */
+    --accent-3: #7a5230;      /* 辅色 3：赭褐，提示文字 / 第三系列 */
+    --accent-4: #5a7a3a;      /* 辅色 4：苔绿，正向数据 / 第四系列 */
+    --rebel: #8c2a2a;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 分隔线 —— */
+    --line: #d9cdb8;          /* 通用边框 / 分隔线：浅米褐 */
+
+    /* —— 阴影 —— */
+    --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+    /* 卡片柔和投影，两层叠加营造纸面浮起感 */
+}
+
+/*
+ * 字体说明（不在 :root 内，作为约定记录）：
+ * 正文 / 标题：font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+ * 数字 / 等宽：font-family: "JetBrains Mono", "Consolas", monospace;
+ */

@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>叙事实验 · 桌游与卡牌机制 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+            --shadow-hover: 0 8px 24px rgba(60, 40, 20, 0.18);
+            --gold: #c9a14a;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            background: #f5e9d4;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.78rem;
+        }
+        /* KPI */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 960px) { .kpi-row { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 640px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        .kpi-card .label {
+            font-size: 0.74rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .desc {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+        /* section */
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .section-h3 {
+            font-size: 1rem;
+            color: var(--accent-2);
+            margin: 18px 0 10px;
+            letter-spacing: 0.05em;
+        }
+        /* meta grid */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .meta-item {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 10px 14px;
+        }
+        .meta-item .k {
+            font-size: 0.74rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 2px;
+        }
+        .meta-item .v {
+            font-size: 0.95rem;
+            color: var(--ink);
+            font-weight: 600;
+        }
+        /* highlight paragraph */
+        .highlight-block {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 14px 18px;
+            border-radius: 4px;
+            margin-bottom: 14px;
+            font-size: 0.94rem;
+            line-height: 1.75;
+            color: var(--ink);
+        }
+        .highlight-block .lbl {
+            display: inline-block;
+            color: var(--accent);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-right: 8px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .quote-block {
+            background: var(--bg);
+            border-left: 4px solid var(--accent-2);
+            padding: 12px 18px;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-bottom: 14px;
+        }
+        /* player cards */
+        .player-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+        .player-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-top: 4px solid var(--accent);
+        }
+        .player-card:hover {
+            transform: translateY(-4px) rotate(0.5deg);
+            box-shadow: var(--shadow-hover);
+        }
+        .player-card .pc-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .player-card .pc-avatar {
+            font-size: 2.4rem;
+            line-height: 1;
+        }
+        .player-card .pc-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .player-card .pc-role {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            letter-spacing: 0.05em;
+        }
+        .player-card .pc-merit {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .player-card .pc-merit .unit {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-weight: 500;
+            margin-left: 4px;
+        }
+        .player-card .pc-row {
+            font-size: 0.84rem;
+            margin-bottom: 6px;
+            line-height: 1.65;
+        }
+        .player-card .pc-row .pk {
+            color: var(--accent-3);
+            font-size: 0.74rem;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .player-card .pc-row .pv { color: var(--ink); }
+        .player-card .pc-row.weak .pv { color: var(--accent); font-style: italic; }
+        /* phase flowchart */
+        #phase-svg {
+            width: 100%;
+            height: 220px;
+            display: block;
+        }
+        /* hardship cards */
+        .hardship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+            gap: 14px;
+        }
+        .hardship-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 4px solid var(--accent);
+        }
+        .hardship-card:hover {
+            transform: translateY(-4px) rotate(-1deg);
+            box-shadow: var(--shadow-hover);
+        }
+        .hardship-card.is-rigged {
+            border: 2px solid var(--gold);
+            background: linear-gradient(135deg, #fffbe8 0%, #fff5d6 100%);
+            box-shadow: 0 2px 6px rgba(201, 161, 74, 0.3);
+        }
+        .hardship-card .hc-rigged-tag {
+            position: absolute;
+            top: -8px;
+            right: 8px;
+            background: var(--gold);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 8px;
+            letter-spacing: 0.1em;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .hardship-card .hc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+            gap: 6px;
+        }
+        .hardship-card .hc-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .hardship-card .hc-type {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 8px;
+            background: var(--accent-soft);
+            color: var(--accent-3);
+            white-space: nowrap;
+        }
+        .hardship-card .hc-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin: 8px 0;
+        }
+        .hardship-card .hc-stat {
+            background: var(--bg);
+            border-radius: 4px;
+            padding: 6px 8px;
+        }
+        .hardship-card .hc-stat .sk {
+            font-size: 0.7rem;
+            color: var(--ink-soft);
+            letter-spacing: 0.05em;
+        }
+        .hardship-card .hc-stat .sv {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .hardship-card .hc-diff {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin: 4px 0;
+        }
+        .hardship-card .hc-diff .stars {
+            color: var(--accent);
+            letter-spacing: 1px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .hardship-card .hc-owner {
+            display: inline-block;
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        /* design eggs */
+        .eggs-list {
+            counter-reset: egg;
+        }
+        .egg-item {
+            background: var(--bg);
+            border-left: 4px solid var(--accent-3);
+            padding: 12px 16px 12px 48px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 12px;
+            position: relative;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            counter-increment: egg;
+        }
+        .egg-item::before {
+            content: counter(egg, decimal-leading-zero);
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .egg-item .egg-title {
+            font-weight: 600;
+            color: var(--accent-3);
+            margin-right: 6px;
+        }
+        /* scoring cards */
+        .scoring-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 14px;
+        }
+        .score-card {
+            background: linear-gradient(135deg, #fff8ec 0%, #faf7f2 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .score-card:hover { transform: translateY(-3px); }
+        .score-card .sc-icon { font-size: 1.8rem; margin-bottom: 6px; }
+        .score-card .sc-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+        .score-card .sc-desc {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            line-height: 1.6;
+        }
+        /* narrative cards */
+        .card-group {
+            margin-bottom: 24px;
+        }
+        .group-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--line);
+            margin-bottom: 14px;
+        }
+        .group-header .gh-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.74rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .group-header .gh-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .group-header .gh-count {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .narrative-grid {
+            display: grid;
+            gap: 12px;
+        }
+        .narrative-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+        .narrative-grid.cols-5 { grid-template-columns: repeat(5, 1fr); }
+        @media (max-width: 960px) {
+            .narrative-grid.cols-4 { grid-template-columns: repeat(3, 1fr); }
+            .narrative-grid.cols-5 { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .narrative-grid.cols-4, .narrative-grid.cols-5 { grid-template-columns: repeat(2, 1fr); }
+        }
+        .narr-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 12px;
+            position: relative;
+            transition: transform 0.25s, box-shadow 0.25s;
+            border-top: 3px solid var(--accent);
+            min-height: 140px;
+        }
+        .narr-card:hover {
+            transform: translateY(-4px) rotate(1.5deg);
+            box-shadow: var(--shadow-hover);
+        }
+        .narr-card .nc-id {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.7rem;
+            color: var(--ink-soft);
+            letter-spacing: 0.05em;
+            margin-bottom: 2px;
+        }
+        .narr-card .nc-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+        .narr-card .nc-desc {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            line-height: 1.55;
+        }
+        .narr-card .nc-desc .lab {
+            display: block;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+        }
+        /* story combinations */
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+            gap: 16px;
+        }
+        .story-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px;
+            border-left: 5px solid var(--accent);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .story-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        .story-card .sc-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+        .story-card .sc-chip {
+            font-size: 0.74rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 600;
+            font-family: "JetBrains Mono", monospace;
+            letter-spacing: 0.05em;
+        }
+        .story-card .sc-opening {
+            background: var(--bg);
+            border-left: 3px solid var(--accent);
+            padding: 10px 14px;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--ink);
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+        .story-card .sc-row {
+            font-size: 0.84rem;
+            color: var(--ink-soft);
+            margin-bottom: 6px;
+            line-height: 1.65;
+        }
+        .story-card .sc-row .lab {
+            color: var(--accent-3);
+            font-size: 0.74rem;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .story-card .sc-conflict {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 0.84rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin: 6px 0;
+        }
+        .story-card .sc-resonance {
+            background: var(--bg);
+            border-left: 3px solid var(--accent-2);
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+            margin-top: 8px;
+        }
+        .story-card .sc-cat {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+            letter-spacing: 0.05em;
+        }
+        /* generator */
+        .gen-hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            border-radius: 8px;
+            padding: 22px;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        .gen-hero .gen-name {
+            font-size: 1.1rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+        }
+        .gen-hero .gen-total {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #f5e9d4;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .gen-hero .gen-total .lab {
+            display: block;
+            font-size: 0.78rem;
+            color: rgba(245, 233, 212, 0.7);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+        .gen-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .gen-cat {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+        .gen-cat .gc-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+        .gen-cat .gc-ids {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            line-height: 1.6;
+        }
+        .gen-rules {
+            list-style: none;
+            counter-reset: rule;
+            padding: 0;
+        }
+        .gen-rules li {
+            counter-increment: rule;
+            padding: 8px 0 8px 36px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+        .gen-rules li:last-child { border-bottom: none; }
+        .gen-rules li::before {
+            content: "R" counter(rule);
+            position: absolute;
+            left: 0;
+            top: 8px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.78rem;
+            color: var(--accent);
+            font-weight: 700;
+            background: #fff8ec;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .gen-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .gen-feat {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.86rem;
+        }
+        .gen-feat .gf-num {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent);
+            font-weight: 700;
+            margin-right: 6px;
+        }
+        /* combo viz */
+        #combo-svg {
+            width: 100%;
+            height: 460px;
+            display: block;
+        }
+        .combo-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            max-width: 240px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .combo-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 18px;
+            margin-top: 14px;
+            font-size: 0.82rem;
+        }
+        .combo-legend .lg-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .combo-legend .lg-dot {
+            width: 12px; height: 12px; border-radius: 50%;
+            display: inline-block;
+        }
+        /* insights */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        footer .gen-time {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>叙事实验 · 桌游与卡牌机制</h1>
+        <div class="subtitle">NARRATIVE &amp; EXPERIMENT</div>
+        <div class="tagline">让《西游记》成为无限故事的源泉 · 而非复述</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">/</span>
+            <span>叙事实验</span>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入式 fallback 数据（file:// 协议兼容）。如需加载最新 JSON，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>。
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">PLAYERS · 玩家</div>
+                <div class="value">4<span style="font-size:1rem;color:var(--ink-soft);"> 位</span></div>
+                <div class="desc">如来·观音·老君·玉帝</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">HARDSHIP · 劫难卡</div>
+                <div class="value">10<span style="font-size:1rem;color:var(--ink-soft);"> 张</span></div>
+                <div class="desc">灵山董事会核心道具</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">NARRATIVE · 叙事卡</div>
+                <div class="value">32<span style="font-size:1rem;color:var(--ink-soft);"> 张</span></div>
+                <div class="desc">因果 12 + 法器 10 + 执念 10</div>
+            </div>
+            <div class="kpi-card" style="border-top-color: var(--accent-2);">
+                <div class="label" style="color: var(--accent-2);">COMBOS · 故事组合</div>
+                <div class="value" style="color: var(--accent-2);">1200</div>
+                <div class="desc">12 × 10 × 10 种开头</div>
+            </div>
+            <div class="kpi-card" style="border-top-color: var(--accent-4);">
+                <div class="label" style="color: var(--accent-4);">CATEGORIES · 故事分类</div>
+                <div class="value" style="color: var(--accent-4);">4<span style="font-size:1rem;color:var(--ink-soft);"> 类</span></div>
+                <div class="desc">灾难·冲突·悟道·诱惑</div>
+            </div>
+        </div>
+
+        <!-- 1. 桌游《灵山董事会》介绍 -->
+        <section class="section">
+            <h2 class="section-title">桌游《灵山董事会》</h2>
+            <div class="section-sub">AA 类「叙事实验」核心作品 · 反取经视角的角色扮演桌游 · 让玩家站在项目设计者一侧。</div>
+
+            <div class="meta-grid" id="board-meta"></div>
+
+            <div class="highlight-block">
+                <span class="lbl">CORE · 核心机制</span>
+                <span id="core-mech"></span>
+            </div>
+            <div class="highlight-block" style="border-left-color: var(--accent-3); background: linear-gradient(135deg, #fff5e8 0%, #f5e9d4 100%);">
+                <span class="lbl" style="color: var(--accent-3);">WIN · 胜利条件</span>
+                <span id="victory-cond"></span>
+            </div>
+
+            <h3 class="section-h3">四神玩家 · 角色卡</h3>
+            <div class="player-grid" id="player-grid"></div>
+        </section>
+
+        <!-- 2. 游戏阶段流程图 -->
+        <section class="section">
+            <h2 class="section-title">游戏阶段 · 三段式流程</h2>
+            <div class="section-sub">筹备期 → 执行期 → 结算期 · 每阶段含独立轮次、行动与目标。</div>
+            <div style="position:relative;">
+                <svg id="phase-svg"></svg>
+            </div>
+        </section>
+
+        <!-- 3. 劫难卡牌展示 -->
+        <section class="section">
+            <h2 class="section-title">劫难卡牌 · 10 张</h2>
+            <div class="section-sub">每张含投放成本 / 收视率回报 / 难度 / 所有者。金色边框为「内定劫难卡」。</div>
+            <div class="hardship-grid" id="hardship-grid"></div>
+        </section>
+
+        <!-- 4. 设计彩蛋 -->
+        <section class="section">
+            <h2 class="section-title">设计彩蛋 · 5 条隐藏机制</h2>
+            <div class="section-sub">桌游埋藏的反讽与元设定 · 每条都在解构「取经」叙事本身。</div>
+            <div class="eggs-list" id="eggs-list"></div>
+        </section>
+
+        <!-- 5. 评分机制 -->
+        <section class="section">
+            <h2 class="section-title">评分机制 · 4 维度</h2>
+            <div class="section-sub">功德值计算来源 · 综合评估玩家在「西天取经」项目中的投资表现。</div>
+            <div class="scoring-grid" id="scoring-grid"></div>
+        </section>
+
+        <!-- 6. 叙事卡牌系统 -->
+        <section class="section">
+            <h2 class="section-title">叙事卡牌 · 因果 法器 执念</h2>
+            <div class="section-sub">三组卡牌共 32 张 · 可生成 1200 种故事开头 · 是真正的「故事生产器」。</div>
+
+            <div class="highlight-block" style="font-size: 1.05rem; text-align: center; font-weight: 600;">
+                <span style="color: var(--accent);">这不是复述故事</span>
+                <span style="color: var(--ink-soft); font-weight: 400;"> · </span>
+                <span style="color: var(--accent-2);">而是故事的生产器</span>
+            </div>
+
+            <div class="quote-block">
+                <span id="card-innovation"></span>
+            </div>
+
+            <div class="card-group">
+                <div class="group-header">
+                    <span class="gh-tag" style="background: #c8463a;">因果卡</span>
+                    <span class="gh-title">KARMA · 故事场景</span>
+                    <span class="gh-count">12 张 · K01–K12</span>
+                </div>
+                <div class="narrative-grid cols-4" id="karma-grid"></div>
+            </div>
+
+            <div class="card-group">
+                <div class="group-header">
+                    <span class="gh-tag" style="background: #3a6b8c;">法器卡</span>
+                    <span class="gh-title">ARTIFACT · 法宝道具</span>
+                    <span class="gh-count">10 张 · F01–F10</span>
+                </div>
+                <div class="narrative-grid cols-5" id="artifact-grid"></div>
+            </div>
+
+            <div class="card-group">
+                <div class="group-header">
+                    <span class="gh-tag" style="background: #7a5230;">执念卡</span>
+                    <span class="gh-title">OBSESSION · 心境执念</span>
+                    <span class="gh-count">10 张 · Z01–Z10</span>
+                </div>
+                <div class="narrative-grid cols-5" id="obsession-grid"></div>
+            </div>
+        </section>
+
+        <!-- 7. 故事组合示例 -->
+        <section class="section">
+            <h2 class="section-title">故事组合示例 · 5 个</h2>
+            <div class="section-sub">从 1200 种组合中精选 5 个示例 · 每组（1 因果 + 1 法器 + 1 执念）生成一个故事开头。</div>
+            <div class="story-grid" id="story-grid"></div>
+        </section>
+
+        <!-- 8. 故事生成器 -->
+        <section class="section">
+            <h2 class="section-title">西游故事生成器</h2>
+            <div class="section-sub">系统化的故事生成机制 · 5 条生成规则 + 4 项生成器特性 + 4 类故事分类。</div>
+
+            <div class="gen-hero">
+                <div class="gen-name">XIYOU STORY GENERATOR</div>
+                <div class="gen-total">1200<span class="lab">TOTAL COMBINATIONS · 故事开头组合数</span></div>
+            </div>
+
+            <h3 class="section-h3">故事分类 · 4 类</h3>
+            <div class="gen-categories" id="gen-categories"></div>
+
+            <h3 class="section-h3">生成规则 · 5 条</h3>
+            <ol class="gen-rules" id="gen-rules"></ol>
+
+            <h3 class="section-h3">生成器特性 · 4 项</h3>
+            <div class="gen-features" id="gen-features"></div>
+        </section>
+
+        <!-- 9. 卡牌组合可视化（D3.js） -->
+        <section class="section">
+            <h2 class="section-title">卡牌组合可视化 · 3 组 → 1200 故事</h2>
+            <div class="section-sub">三组卡牌（因果 / 法器 / 执念）通过组合生成 1200 种故事开头 · 中心圆为故事总量。</div>
+            <div style="position:relative;">
+                <svg id="combo-svg"></svg>
+                <div class="combo-tip" id="combo-tip"></div>
+            </div>
+            <div class="combo-legend">
+                <div class="lg-item"><span class="lg-dot" style="background:#c8463a;"></span><span>因果卡 · 12 张</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:#3a6b8c;"></span><span>法器卡 · 10 张</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:#7a5230;"></span><span>执念卡 · 10 张</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:#5a7a3a;"></span><span>故事输出 · 1200 种</span></div>
+            </div>
+        </section>
+
+        <!-- 10. 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <h4>从叙事实验看西游</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">返回数据看板</a> ·
+        <a href="../index.html">返回首页</a> ·
+        <a href="workplace.html">打工人职场黑话</a> ·
+        <a href="chart-design.html">图表设计</a>
+        <span class="gen-time" id="gen-time"></span>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/08-提升认知/反事实训练.md">反事实训练</a></div>
+    </footer>
+
+    <script>
+    // ===== 嵌入式 fallback 数据（fetch 失败时使用） =====
+    const EMBEDDED = {
+        board_game: {
+            game_name: "灵山董事会",
+            subtitle: "反取经角色扮演桌游",
+            designer: "详解西游记项目组",
+            player_count: "4 人",
+            play_time: "90-120 分钟",
+            age: "12+",
+            core_mechanism: "玩家扮演如来 / 观音 / 老君 / 玉帝 · 共同投资「西天取经」真人秀项目 · 通过投放劫难博取收视率（功德值）",
+            victory_condition: "功德值最高者胜 · 或项目失败时损失最少者胜",
+            players: [
+                {
+                    name: "如来佛祖",
+                    role: "项目总设计师",
+                    avatar: "🪷",
+                    merit: 10000,
+                    color: "#c9a14a",
+                    special_ability: "五行山压顶 · 内定劫难卡（每局可指定 1 张劫难卡为「内定」·成本归零）",
+                    winning_strategy: "通过「大鹏金翅雕」内定卡博取极高收视率·稳坐功德榜首",
+                    weakness: "不能亲自下场·只能通过设计劫难间接影响剧情"
+                },
+                {
+                    name: "观音菩萨",
+                    role: "项目执行人",
+                    avatar: "🍃",
+                    merit: 8000,
+                    color: "#3a6b8c",
+                    special_ability: "暗中护持 · 可在劫难中调整难度（增减 1 档）·控制项目进度",
+                    winning_strategy: "通过「紧箍咒」控制执行器（悟空）·在关键节点调整难度博取口碑",
+                    weakness: "功德值最低·需依靠「项目成功率」加分追平"
+                },
+                {
+                    name: "太上老君",
+                    role: "道具供应商",
+                    avatar: "🔮",
+                    merit: 9000,
+                    color: "#7a5230",
+                    special_ability: "法宝出租 · 拥有金刚琢 / 芭蕉扇 / 紫金葫芦等 · 出租给妖王收取「道具费」",
+                    winning_strategy: "通过「青牛精」展示金刚琢威力·拉抬道具估值·坐收租金",
+                    weakness: "道具被悟空破解后·妖王溃败·投资血本无归"
+                },
+                {
+                    name: "玉皇大帝",
+                    role: "天庭 CEO",
+                    avatar: "👑",
+                    merit: 7000,
+                    color: "#c8463a",
+                    special_ability: "调动天兵天将 · 可派遣十万天兵「平叛」（实际战力 0·纯属广告位曝光）",
+                    winning_strategy: "通过「天兵无效」事件博取广告位曝光·拉抬天庭品牌价值",
+                    weakness: "天兵战力为零·每次出征都是「公关秀」·容易被佛系玩家边缘化"
+                }
+            ],
+            game_phases: [
+                {
+                    phase: "筹备期",
+                    rounds: "1-3 轮",
+                    actions: "分配角色 · 抽取劫难卡 · 商定投资份额",
+                    goal: "建立项目预算 · 锁定首批劫难剧本"
+                },
+                {
+                    phase: "执行期",
+                    rounds: "4-9 轮",
+                    actions: "投放劫难 · 调整难度 · 收取收视率 · 出租道具",
+                    goal: "功德值累积 · 控制项目进度避免过早崩盘"
+                },
+                {
+                    phase: "结算期",
+                    rounds: "10-12 轮",
+                    actions: "项目结算 · 评分 · 计算最终功德值",
+                    goal: "确认项目成败 · 决出最终赢家"
+                }
+            ],
+            hardship_cards: [
+                { name: "黄风怪·三昧神风", type: "自然灾害", cost: 200, rating_bonus: 600, difficulty: 3, owner: "通用", owner_color: "#6b5e4d" },
+                { name: "白骨精·三打", type: "心理战", cost: 300, rating_bonus: 900, difficulty: 4, owner: "观音", owner_color: "#3a6b8c" },
+                { name: "黄袍怪·奎木狼", type: "天庭内应", cost: 250, rating_bonus: 700, difficulty: 3, owner: "玉帝", owner_color: "#c8463a" },
+                { name: "红孩儿·三昧真火", type: "极端灾害", cost: 500, rating_bonus: 1200, difficulty: 5, owner: "观音", owner_color: "#3a6b8c" },
+                { name: "青牛精·金刚琢", type: "道具广告", cost: 350, rating_bonus: 1100, difficulty: 4, owner: "老君", owner_color: "#7a5230" },
+                { name: "六耳猕猴·真假难辨", type: "心魔副本", cost: 600, rating_bonus: 1500, difficulty: 5, owner: "通用", owner_color: "#6b5e4d" },
+                { name: "牛魔王·芭蕉洞", type: "家族内讧", cost: 400, rating_bonus: 1000, difficulty: 4, owner: "通用", owner_color: "#6b5e4d" },
+                { name: "大鹏金翅雕·狮驼岭", type: "佛门内定", cost: 50, rating_bonus: 1800, difficulty: 5, owner: "如来", owner_color: "#c9a14a", is_rigged: true },
+                { name: "黄眉怪·小雷音寺", type: "伪佛冒充", cost: 450, rating_bonus: 1300, difficulty: 5, owner: "如来", owner_color: "#c9a14a" },
+                { name: "老鼠精·无底洞", type: "天庭旧案", cost: 200, rating_bonus: 800, difficulty: 3, owner: "玉帝", owner_color: "#c8463a" }
+            ],
+            design_eggs: [
+                { title: "内定劫难卡", text: "如来专属「大鹏金翅雕」 · 成本仅 50 功德 · 收视率回报 1800 · 是佛系玩家「躺赢」的隐藏通道。" },
+                { title: "广告位", text: "每张劫难卡都可作为「道具广告位」出售 · 老君的金刚琢在青牛精一役中获得史诗级曝光。" },
+                { title: "紧箍咒", text: "观音的紧箍咒不是用来「降妖」 · 而是用来「管理执行器」 · 是项目经理的终极控制工具。" },
+                { title: "天兵无效", text: "玉帝每次派遣「十万天兵」 · 实际战力为 0 · 但可获得「广告位曝光」加分 · 纯属天庭品牌营销。" },
+                { title: "五行山保险", text: "如来提前将悟空压在五行山下 500 年 · 实为「项目储备人才冷冻机制」 · 等取经项目启动再解冻启用。" }
+            ],
+            scoring: [
+                { name: "项目成功率", icon: "✅", desc: "取经项目最终是否抵达灵山 · 成功 +5000 功德 / 失败 -3000 功德", color: "#5a7a3a" },
+                { name: "劫难收视率", icon: "📺", desc: "投放的劫难卡收视率累加 · 每张卡的 rating_bonus 计入总分", color: "#c8463a" },
+                { name: "广告位曝光", icon: "🎯", desc: "道具 / 天兵 / 法术在劫难中的品牌曝光次数 · 每次曝光 +200 功德", color: "#7a5230" },
+                { name: "投资回报率", icon: "💰", desc: "（收视率 - 投放成本）/ 投放成本 · 衡量资本运作效率", color: "#3a6b8c" }
+            ]
+        },
+        narrative_cards: {
+            system_name: "西游叙事卡牌 · 因果 法器 执念",
+            innovation: "这不是复述故事 · 而是故事的生产器 · 32 张卡牌组合可生成 1200 种故事开头 · 让《西游记》从「一部经典」变为「无限源泉」。",
+            card_groups: [
+                {
+                    name: "因果卡",
+                    name_en: "KARMA",
+                    color: "#c8463a",
+                    count: 12,
+                    cards: [
+                        { id: "K01", name: "被赶出师门", context: "菩提祖师逐悟空出师门 · 不许提师承 · 暗示修仙圈的隐规则" },
+                        { id: "K02", name: "误入魔窟", context: "误入妖王洞府 · 被识破猴王本相 · 卷入一场阴谋" },
+                        { id: "K03", name: "故人重逢", context: "前世旧识以陌生面孔相见 · 一段尘缘重新被勾起" },
+                        { id: "K04", name: "取经人遇难", context: "师父被妖王掠走 · 徒弟必须在限时内救回" },
+                        { id: "K05", name: "天降甘霖", context: "久旱逢雨 · 百姓感恩 · 但雨水来历可疑" },
+                        { id: "K06", name: "误食仙丹", context: "无意吞下仙丹 · 体内药力翻涌 · 引发异变" },
+                        { id: "K07", name: "误入轮回", context: "坠入轮回通道 · 投胎为另一身份 · 短暂失忆" },
+                        { id: "K08", name: "梦中点化", context: "神人入梦指点迷津 · 醒来半信半疑" },
+                        { id: "K09", name: "凡人执剑", context: "凡人持剑挑战取经人 · 自称替天行道" },
+                        { id: "K10", name: "天劫降临", context: "九霄雷劫劈下 · 罪人无处可逃 · 旁观者亦受波及" },
+                        { id: "K11", name: "魂归地府", context: "魂魄误入幽冥 · 见十殿阎君 · 翻看生死簿" },
+                        { id: "K12", name: "真假难辨", context: "出现与主角一模一样的赝品 · 谁真谁假无人能断" }
+                    ]
+                },
+                {
+                    name: "法器卡",
+                    name_en: "ARTIFACT",
+                    color: "#3a6b8c",
+                    count: 10,
+                    cards: [
+                        { id: "F01", name: "紧箍咒", function: "戴于头顶 · 念咒即痛 · 控制执行器（悟空）的核心工具" },
+                        { id: "F02", name: "九齿钉耙", function: "猪八戒兵器 · 重达五千零四十八斤 · 农具化兵器" },
+                        { id: "F03", name: "金箍棒", function: "定海神针 · 一万三千五百斤 · 大小如意" },
+                        { id: "F04", name: "芭蕉扇", function: "太上老君芭蕉扇 · 一扇熄火 · 二扇生风 · 三扇降雨" },
+                        { id: "F05", name: "金刚琢", function: "太上老君法宝 · 套万物不落 · 兵器克星" },
+                        { id: "F06", name: "火眼金睛", function: "八卦炉中炼成 · 识破妖物本相 · 但怕烟熏" },
+                        { id: "F07", name: "降妖宝杖", function: "沙僧兵器 · 出自月宫 · 重五千零四十八斤" },
+                        { id: "F08", name: "紫金葫芦", function: "金角大王法宝 · 呼名即入 · 化为脓血" },
+                        { id: "F09", name: "人种袋", function: "黄眉怪法宝 · 诸神皆入 · 一时无解" },
+                        { id: "F10", name: "锦襕袈裟", function: "唐僧所披 · 价值连城 · 招妖引祸" }
+                    ]
+                },
+                {
+                    name: "执念卡",
+                    name_en: "OBSESSION",
+                    color: "#7a5230",
+                    count: 10,
+                    cards: [
+                        { id: "Z01", name: "傲慢", manifestation: "自视甚高 · 蔑视凡尘 · 拒绝低头" },
+                        { id: "Z02", name: "猜忌", manifestation: "疑神疑鬼 · 不信旁人 · 独行其是" },
+                        { id: "Z03", name: "愚忠", manifestation: "盲目服从 · 不问是非 · 以命相随" },
+                        { id: "Z04", name: "贪欲", manifestation: "见宝起心 · 见色起意 · 永无餍足" },
+                        { id: "Z05", name: "嗔怒", manifestation: "一言不合 · 怒火中烧 · 失去理智" },
+                        { id: "Z06", name: "名相", manifestation: "执着名声 · 在乎虚名 · 忘却本心" },
+                        { id: "Z07", name: "长生执念", manifestation: "渴求不死 · 迷恋肉身 · 拒绝轮回" },
+                        { id: "Z08", name: "痴情", manifestation: "执迷一人 · 不顾众生 · 误了大业" },
+                        { id: "Z09", name: "嫉妒", manifestation: "见人胜己 · 心生怨毒 · 必欲毁之" },
+                        { id: "Z10", name: "逃避", manifestation: "遇事则避 · 不敢承担 · 推诿塞责" }
+                    ]
+                }
+            ],
+            example_combinations: [
+                {
+                    cards: [
+                        { id: "K02", name: "误入魔窟", color: "#c8463a" },
+                        { id: "F03", name: "金箍棒", color: "#3a6b8c" },
+                        { id: "Z02", name: "猜忌", color: "#7a5230" }
+                    ],
+                    category: "师徒冲突型",
+                    category_color: "#3a6b8c",
+                    opening: "悟空误入妖王洞府 · 凭一根金箍棒打杀而出 · 唐僧却在事后听信八戒之言 · 怒斥其滥杀无辜 · 师徒心生猜忌 · 取经团队首次出现裂痕。",
+                    continuation: "唐僧以紧箍咒相逼 · 悟空含泪离去 · 临行前留下一句「师父若遇难 · 喊我三声姓名即可」 · 妖王得知后立刻设计离间之计。",
+                    conflict: "信任危机 · 信任崩塌后金箍棒再锋利也救不回师徒情",
+                    resonance: "最大的妖魔 · 不在洞府 · 而在猜忌之心。"
+                },
+                {
+                    cards: [
+                        { id: "K03", name: "故人重逢", color: "#c8463a" },
+                        { id: "F08", name: "紫金葫芦", color: "#3a6b8c" },
+                        { id: "Z06", name: "名相", color: "#7a5230" }
+                    ],
+                    category: "悟道型",
+                    category_color: "#5a7a3a",
+                    opening: "前世的旧友以陌生面孔在路口出现 · 手持紫金葫芦轻唤悟空姓名 · 悟空应声 · 几乎被吸入葫芦之中 · 葫芦中传出一个声音：「你以齐天大圣之名行走江湖 · 却忘了本名是什么？」",
+                    continuation: "悟空被困葫芦三日 · 在虚空中听见自己所有名号回响 · 终于意识到「名」是束缚 · 一声大笑震碎葫芦 · 重获自由。",
+                    conflict: "名相之争 · 齐天大圣 vs 孙行者 vs 斗战胜佛",
+                    resonance: "放下名相 · 方见本来 · 紫金葫芦装的不是脓血 · 是执念。"
+                },
+                {
+                    cards: [
+                        { id: "K07", name: "误入轮回", color: "#c8463a" },
+                        { id: "F06", name: "火眼金睛", color: "#3a6b8c" },
+                        { id: "Z01", name: "傲慢", color: "#7a5230" }
+                    ],
+                    category: "灾难型",
+                    category_color: "#c8463a",
+                    opening: "悟空坠入轮回通道 · 投胎为一介书生 · 火眼金睛虽在 · 却被傲慢所蔽 · 见世间不平之事 · 自负才学 · 屡屡折损 · 忘了取经大业。",
+                    continuation: "唐僧路过书生书院 · 见其眉间一点金光未灭 · 认出是悟空转世 · 三次劝其归队 · 三次被拒 · 直到书生因傲慢得罪权贵 · 几乎丧命 · 才悔悟前非。",
+                    conflict: "身份迷失 · 火眼金睛也照不破傲慢之障",
+                    resonance: "傲慢 · 是轮回的开始 · 也是悟道的终点。"
+                },
+                {
+                    cards: [
+                        { id: "K10", name: "天劫降临", color: "#c8463a" },
+                        { id: "F04", name: "芭蕉扇", color: "#3a6b8c" },
+                        { id: "Z07", name: "长生执念", color: "#7a5230" }
+                    ],
+                    category: "诱惑型",
+                    category_color: "#7a5230",
+                    opening: "九霄雷劫劈下 · 罪人无处可逃 · 芭蕉扇在混乱中落地 · 一个老者拾起扇子 · 扇出阴风 · 雷劫被引向唐僧方向 · 老者大笑：「长生不老的真经就在你身上 · 给我！」",
+                    continuation: "原来老者乃百年前一位高僧 · 因长生执念堕落为妖 · 三次索要真经不得 · 最后以芭蕉扇扇出万里黄沙 · 困住取经人三天三夜。",
+                    conflict: "正法 vs 邪修 · 同求长生 · 路径不同 · 结局殊途",
+                    resonance: "执念长生者 · 反被长生所执 · 真经不在唐僧身上 · 在放下之心。"
+                },
+                {
+                    cards: [
+                        { id: "K12", name: "真假难辨", color: "#c8463a" },
+                        { id: "F05", name: "金刚琢", color: "#3a6b8c" },
+                        { id: "Z09", name: "嫉妒", color: "#7a5230" }
+                    ],
+                    category: "师徒冲突型",
+                    category_color: "#3a6b8c",
+                    opening: "出现一个与悟空一模一样的赝品 · 持金刚琢四处作恶 · 旁人皆以为是真悟空所为 · 唯有八戒暗喜 · 因嫉妒悟空多年 · 终于抓住机会向唐僧进谗。",
+                    continuation: "唐僧怒念紧箍咒 · 真悟空痛倒在地 · 赝品却毫发无伤 · 反证「真悟空」是假 · 真悟空百口莫辩 · 被逐出师门 · 紧箍咒从此失效。",
+                    conflict: "真假之辨 · 嫉妒是最锋利的金刚琢",
+                    resonance: "嫉妒之琢 · 套住的不是兵器 · 是人心 · 一旦戴上 · 无人能解。"
+                }
+            ],
+            design_philosophy: "三组卡牌 · 32 张组合 · 可生成 12 × 10 × 10 = 1200 种故事开头"
+        },
+        story_generator: {
+            generator_name: "西游故事生成器",
+            total_combinations: 1200,
+            generating_rules: [
+                "从「因果卡」中抽取 1 张 · 作为故事的场景起点（K01–K12）",
+                "从「法器卡」中抽取 1 张 · 作为故事的核心道具（F01–F10）",
+                "从「执念卡」中抽取 1 张 · 作为故事的心境主题（Z01–Z10）",
+                "三张卡的组合 · 决定故事的「开头 / 道具 / 主题」 · 由玩家自行演绎后续",
+                "同一组合可被多次演绎 · 不同玩家可生成完全不同的故事 · 这正是「生产器」的本意"
+            ],
+            generator_features: [
+                "可重复性 · 1200 种组合可无限演绎 · 每次结果不同",
+                "开放性 · 三卡只规定开头 · 后续由玩家自由发挥",
+                "主题性 · 每张执念卡自带主题 · 故事自然带「悟道」深度",
+                "可扩展性 · 可添加新卡组（人物卡 / 场景卡）无限扩展"
+            ],
+            story_categories: [
+                { name: "灾难型", color: "#c8463a", card_ids: "K02·误入魔窟 · K04·取经人遇难 · K06·误食仙丹 · K10·天劫降临", desc: "突发的灾难事件 · 主角须在极限条件下求生与抉择" },
+                { name: "师徒冲突型", color: "#3a6b8c", card_ids: "K01·被赶出师门 · K02·误入魔窟 · K09·凡人执剑 · K12·真假难辨", desc: "取经团队内部的信任危机与理念冲突" },
+                { name: "悟道型", color: "#5a7a3a", card_ids: "K03·故人重逢 · K05·天降甘霖 · K07·误入轮回 · K08·梦中点化 · K11·魂归地府", desc: "通过奇遇与点化 · 主角领悟某种佛 / 道 / 人生真理" },
+                { name: "诱惑型", color: "#7a5230", card_ids: "K06·误食仙丹 · K09·凡人执剑 · K12·真假难辨", desc: "色 / 名 / 利 / 长生等外在诱惑的考验" }
+            ],
+            design_innovation: "故事的生产器 · 而非复述"
+        },
+        narrative_experiment_summary: {
+            board_game_players: 4,
+            board_game_cards: 10,
+            board_game_phases: 3,
+            narrative_card_groups: 3,
+            narrative_card_total: 32,
+            example_combinations: 5,
+            story_combinations: 1200,
+            story_categories: 4
+        }
+    };
+
+    // ===== 配色映射 =====
+    const PHASE_COLORS = ["#c9a14a", "#c8463a", "#7a5230"];
+    const PLAYER_COLOR_BORDER = {
+        "如来佛祖": "#c9a14a",
+        "观音菩萨": "#3a6b8c",
+        "太上老君": "#7a5230",
+        "玉皇大帝": "#c8463a"
+    };
+    const CATEGORY_DEFAULT_COLOR = "#6b5e4d";
+
+    // ===== 渲染：桌游介绍 =====
+    function renderBoardMeta(bg) {
+        const sel = d3.select("#board-meta");
+        sel.selectAll("*").remove();
+        const items = [
+            { k: "GAME · 游戏名", v: bg.game_name },
+            { k: "SUBTITLE · 副标题", v: bg.subtitle },
+            { k: "DESIGNER · 设计师", v: bg.designer },
+            { k: "PLAYERS · 人数", v: bg.player_count },
+            { k: "TIME · 时长", v: bg.play_time },
+            { k: "AGE · 年龄", v: bg.age }
+        ];
+        items.forEach(it => {
+            const d = sel.append("div").attr("class", "meta-item");
+            d.append("div").attr("class", "k").text(it.k);
+            d.append("div").attr("class", "v").text(it.v);
+        });
+
+        d3.select("#core-mech").text(bg.core_mechanism);
+        d3.select("#victory-cond").text(bg.victory_condition);
+    }
+
+    function renderPlayers(players) {
+        const sel = d3.select("#player-grid");
+        sel.selectAll("*").remove();
+        players.forEach(p => {
+            const card = sel.append("div").attr("class", "player-card")
+                .style("border-top-color", p.color);
+            const head = card.append("div").attr("class", "pc-head");
+            head.append("div").attr("class", "pc-avatar").text(p.avatar);
+            const info = head.append("div");
+            info.append("div").attr("class", "pc-title").text(p.name);
+            info.append("div").attr("class", "pc-role").text(p.role);
+
+            card.append("div").attr("class", "pc-merit")
+                .html(p.merit.toLocaleString() + "<span class='unit'>起始功德</span>");
+
+            const ab = card.append("div").attr("class", "pc-row");
+            ab.append("span").attr("class", "pk").text("⚡ 特殊能力");
+            ab.append("span").attr("class", "pv").text(p.special_ability);
+
+            const ws = card.append("div").attr("class", "pc-row");
+            ws.append("span").attr("class", "pk").text("🏆 获胜策略");
+            ws.append("span").attr("class", "pv").text(p.winning_strategy);
+
+            const wk = card.append("div").attr("class", "pc-row weak");
+            wk.append("span").attr("class", "pk").text("⚠ 弱点");
+            wk.append("span").attr("class", "pv").text(p.weakness);
+        });
+    }
+
+    // ===== 渲染：游戏阶段流程图（D3） =====
+    function renderPhaseFlow(phases) {
+        const svg = d3.select("#phase-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("phase-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 220;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 40, right: 40, bottom: 40, left: 40 };
+        const innerW = w - margin.left - margin.right;
+        const cy = h / 2;
+
+        // 主轴
+        const axisG = svg.append("g");
+        axisG.append("line")
+            .attr("x1", margin.left).attr("x2", w - margin.right)
+            .attr("y1", cy).attr("y2", cy)
+            .attr("stroke", "var(--line)")
+            .attr("stroke-width", 3)
+            .attr("stroke-dasharray", "6,4");
+
+        const xStep = innerW / (phases.length - 1);
+
+        phases.forEach((p, i) => {
+            const x = margin.left + xStep * i;
+            const g = svg.append("g").attr("transform", `translate(${x},${cy})`);
+            const color = PHASE_COLORS[i];
+
+            // 节点圆
+            g.append("circle")
+                .attr("r", 16)
+                .attr("fill", color)
+                .attr("stroke", "#fff").attr("stroke-width", 3);
+            g.append("text")
+                .attr("text-anchor", "middle")
+                .attr("y", 5)
+                .style("fill", "#fff")
+                .style("font-size", "0.86rem")
+                .style("font-weight", "700")
+                .style("font-family", "JetBrains Mono, monospace")
+                .text(i + 1);
+
+            // 阶段名（上方）
+            g.append("text")
+                .attr("y", -28)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.95rem")
+                .style("font-weight", "600")
+                .style("fill", color)
+                .text(p.phase);
+
+            // 轮次（圆下方）
+            g.append("text")
+                .attr("y", 38)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.78rem")
+                .style("fill", "var(--accent-3)")
+                .style("font-family", "JetBrains Mono, monospace")
+                .text(p.rounds);
+
+            // 行动 + 目标（更下方）
+            const lines = [p.actions, p.goal];
+            lines.forEach((ln, j) => {
+                g.append("text")
+                    .attr("y", 56 + j * 14)
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "0.74rem")
+                    .style("fill", j === 0 ? "var(--ink-soft)" : "var(--accent)")
+                    .style("font-weight", j === 1 ? 600 : 400)
+                    .text(ln);
+            });
+
+            // 箭头
+            if (i < phases.length - 1) {
+                const ax = x + xStep;
+                svg.append("polygon")
+                    .attr("points", `${ax - 10},${cy - 6} ${ax - 10},${cy + 6} ${ax - 2},${cy}`)
+                    .attr("fill", "var(--accent)")
+                    .style("opacity", 0)
+                    .transition().delay(400 + i * 200).duration(400)
+                    .style("opacity", 1);
+            }
+        });
+    }
+
+    // ===== 渲染：劫难卡牌 =====
+    function renderHardship(cards) {
+        const sel = d3.select("#hardship-grid");
+        sel.selectAll("*").remove();
+        cards.forEach(c => {
+            const card = sel.append("div").attr("class", "hardship-card" + (c.is_rigged ? " is-rigged" : ""));
+            card.style("border-left-color", c.owner_color);
+
+            if (c.is_rigged) {
+                card.append("div").attr("class", "hc-rigged-tag").text("内定");
+            }
+
+            const head = card.append("div").attr("class", "hc-head");
+            head.append("div").attr("class", "hc-name").text(c.name);
+            head.append("div").attr("class", "hc-type").text(c.type);
+
+            const stats = card.append("div").attr("class", "hc-stats");
+            const s1 = stats.append("div").attr("class", "hc-stat");
+            s1.append("div").attr("class", "sk").text("💰 投放成本");
+            s1.append("div").attr("class", "sv").text(c.cost);
+            const s2 = stats.append("div").attr("class", "hc-stat");
+            s2.append("div").attr("class", "sk").text("📺 收视率回报");
+            s2.append("div").attr("class", "sv").text("+" + c.rating_bonus);
+
+            const diff = card.append("div").attr("class", "hc-diff");
+            diff.html("难度：<span class='stars'>" + "★".repeat(c.difficulty) + "☆".repeat(5 - c.difficulty) + "</span>");
+
+            card.append("span").attr("class", "hc-owner")
+                .style("background", c.owner_color)
+                .text("所有者 · " + c.owner);
+        });
+    }
+
+    // ===== 渲染：设计彩蛋 =====
+    function renderEggs(eggs) {
+        const sel = d3.select("#eggs-list");
+        sel.selectAll("*").remove();
+        eggs.forEach(e => {
+            const d = sel.append("div").attr("class", "egg-item");
+            d.append("span").attr("class", "egg-title").text(e.title + " ·");
+            d.append("span").text(e.text);
+        });
+    }
+
+    // ===== 渲染：评分机制 =====
+    function renderScoring(scoring) {
+        const sel = d3.select("#scoring-grid");
+        sel.selectAll("*").remove();
+        scoring.forEach(s => {
+            const card = sel.append("div").attr("class", "score-card");
+            card.append("div").attr("class", "sc-icon").text(s.icon);
+            card.append("div").attr("class", "sc-name").style("color", s.color).text(s.name);
+            card.append("div").attr("class", "sc-desc").text(s.desc);
+        });
+    }
+
+    // ===== 渲染：叙事卡牌系统 =====
+    function renderNarrativeCards(nc) {
+        d3.select("#card-innovation").text(nc.innovation);
+
+        const groups = nc.card_groups;
+
+        // 因果卡
+        const karma = groups[0];
+        const kSel = d3.select("#karma-grid");
+        kSel.selectAll("*").remove();
+        karma.cards.forEach(c => {
+            const card = kSel.append("div").attr("class", "narr-card")
+                .style("border-top-color", karma.color);
+            card.append("div").attr("class", "nc-id").text(c.id);
+            card.append("div").attr("class", "nc-name").text(c.name);
+            card.append("div").attr("class", "nc-desc")
+                .html("<span class='lab'>SCENE · 场景</span>" + c.context);
+        });
+
+        // 法器卡
+        const artifact = groups[1];
+        const aSel = d3.select("#artifact-grid");
+        aSel.selectAll("*").remove();
+        artifact.cards.forEach(c => {
+            const card = aSel.append("div").attr("class", "narr-card")
+                .style("border-top-color", artifact.color);
+            card.append("div").attr("class", "nc-id").text(c.id);
+            card.append("div").attr("class", "nc-name").text(c.name);
+            card.append("div").attr("class", "nc-desc")
+                .html("<span class='lab'>FUNCTION · 功能</span>" + c.function);
+        });
+
+        // 执念卡
+        const obsession = groups[2];
+        const oSel = d3.select("#obsession-grid");
+        oSel.selectAll("*").remove();
+        obsession.cards.forEach(c => {
+            const card = oSel.append("div").attr("class", "narr-card")
+                .style("border-top-color", obsession.color);
+            card.append("div").attr("class", "nc-id").text(c.id);
+            card.append("div").attr("class", "nc-name").text(c.name);
+            card.append("div").attr("class", "nc-desc")
+                .html("<span class='lab'>MANIFEST · 显现</span>" + c.manifestation);
+        });
+    }
+
+    // ===== 渲染：故事组合示例 =====
+    function renderStories(stories) {
+        const sel = d3.select("#story-grid");
+        sel.selectAll("*").remove();
+        stories.forEach((s, i) => {
+            const card = sel.append("div").attr("class", "story-card")
+                .style("border-left-color", s.category_color);
+
+            // 编号 + 分类
+            card.append("div")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("font-size", "0.74rem")
+                .style("color", "var(--ink-soft)")
+                .style("letter-spacing", "0.1em")
+                .text("STORY " + String(i + 1).padStart(2, "0"));
+
+            card.append("div").attr("class", "sc-cat")
+                .style("background", s.category_color)
+                .text(s.category);
+
+            // 三卡组合
+            const cardsDiv = card.append("div").attr("class", "sc-cards");
+            s.cards.forEach(c => {
+                cardsDiv.append("span").attr("class", "sc-chip")
+                    .style("background", c.color)
+                    .text(c.id + " · " + c.name);
+            });
+
+            // 故事开头
+            card.append("div").attr("class", "sc-opening").text("「" + s.opening + "」");
+
+            // 故事延续
+            const cont = card.append("div").attr("class", "sc-row");
+            cont.append("span").attr("class", "lab").text("CONTINUATION · 故事延续");
+            cont.append("span").text(s.continuation);
+
+            // 关键冲突
+            card.append("div").attr("class", "sc-conflict").text("⚡ " + s.conflict);
+
+            // 主题共鸣
+            const res = card.append("div").attr("class", "sc-resonance");
+            res.append("span").style("color", "var(--accent-2)").style("font-weight", "600").text("RESONANCE · 主题共鸣 · ");
+            res.append("span").text(s.resonance);
+        });
+    }
+
+    // ===== 渲染：故事生成器 =====
+    function renderGenerator(gen) {
+        // 4 分类
+        const catSel = d3.select("#gen-categories");
+        catSel.selectAll("*").remove();
+        gen.story_categories.forEach(c => {
+            const div = catSel.append("div").attr("class", "gen-cat")
+                .style("border-left-color", c.color);
+            div.append("div").attr("class", "gc-name").style("color", c.color).text(c.name);
+            div.append("div").style("font-size", "0.82rem").style("color", "var(--ink-soft)").style("margin-bottom", "4px").text(c.desc);
+            div.append("div").attr("class", "gc-ids").text(c.card_ids);
+        });
+
+        // 5 条规则
+        const rulesSel = d3.select("#gen-rules");
+        rulesSel.selectAll("*").remove();
+        gen.generating_rules.forEach(r => rulesSel.append("li").text(r));
+
+        // 4 项特性
+        const featSel = d3.select("#gen-features");
+        featSel.selectAll("*").remove();
+        gen.generator_features.forEach((f, i) => {
+            const d = featSel.append("div").attr("class", "gen-feat");
+            d.append("span").attr("class", "gf-num").text("F" + String(i + 1).padStart(2, "0"));
+            d.append("span").text(f);
+        });
+    }
+
+    // ===== 渲染：卡牌组合可视化（D3） =====
+    function renderComboViz(nc) {
+        const svg = d3.select("#combo-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("combo-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 460;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const groups = nc.card_groups;
+        const cx = w / 2;
+        const cy = h / 2;
+
+        // 中心：1200 故事
+        const centerR = 78;
+        const centerG = svg.append("g").attr("transform", `translate(${cx},${cy})`);
+
+        // 中心圆光晕
+        for (let i = 0; i < 3; i++) {
+            centerG.append("circle")
+                .attr("r", centerR + 10 + i * 8)
+                .attr("fill", "none")
+                .attr("stroke", "#5a7a3a")
+                .attr("opacity", 0.15 - i * 0.04)
+                .attr("stroke-dasharray", "2,4");
+        }
+
+        // 中心圆
+        centerG.append("circle")
+            .attr("r", centerR)
+            .attr("fill", "#5a7a3a")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 3)
+            .style("filter", "drop-shadow(0 4px 12px rgba(90, 122, 58, 0.4))");
+
+        centerG.append("text")
+            .attr("text-anchor", "middle")
+            .attr("y", -8)
+            .style("fill", "#fff")
+            .style("font-size", "0.78rem")
+            .style("letter-spacing", "0.1em")
+            .style("font-family", "JetBrains Mono, monospace")
+            .text("STORIES");
+
+        centerG.append("text")
+            .attr("text-anchor", "middle")
+            .attr("y", 22)
+            .style("fill", "#fff")
+            .style("font-size", "2.2rem")
+            .style("font-weight", "700")
+            .style("font-family", "JetBrains Mono, monospace")
+            .text("1200");
+
+        centerG.append("text")
+            .attr("text-anchor", "middle")
+            .attr("y", 42)
+            .style("fill", "rgba(255,255,255,0.75)")
+            .style("font-size", "0.7rem")
+            .text("故事开头组合数");
+
+        // 三组卡牌圆形：均匀分布在中心圆周围
+        const groupR = 60; // 卡组圆半径基准
+        const orbitR = Math.min(w, h) * 0.32; // 轨道半径
+
+        // 三个卡组位置：上方左、上方右、下方
+        const positions = [
+            { x: cx - orbitR * 0.95, y: cy - orbitR * 0.55 },  // 因果（左上）
+            { x: cx + orbitR * 0.95, y: cy - orbitR * 0.55 },  // 法器（右上）
+            { x: cx, y: cy + orbitR * 1.0 }  // 执念（下方）
+        ];
+
+        const tip = d3.select("#combo-tip");
+
+        groups.forEach((g, i) => {
+            const pos = positions[i];
+            // 卡组圆半径按数量比例（12最大，10稍小）
+            const r = groupR + (g.count / 12) * 14;
+
+            // 连线（从卡组圆到中心圆）
+            // 计算从卡组圆边缘到中心圆边缘的连线
+            const dx = cx - pos.x;
+            const dy = cy - pos.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const ux = dx / dist;
+            const uy = dy / dist;
+            const x1 = pos.x + ux * r;
+            const y1 = pos.y + uy * r;
+            const x2 = cx - ux * (centerR + 4);
+            const y2 = cy - uy * (centerR + 4);
+
+            // 连线背景（动画用）
+            svg.append("line")
+                .attr("x1", x1).attr("y1", y1)
+                .attr("x2", x1).attr("y2", y1)
+                .attr("stroke", g.color)
+                .attr("stroke-width", 2.5)
+                .attr("opacity", 0.5)
+                .attr("stroke-dasharray", "6,4")
+                .transition()
+                .delay(300 + i * 200)
+                .duration(800)
+                .attr("x2", x2)
+                .attr("y2", y2);
+
+            // 流动的小圆点（表示组合流向）
+            for (let k = 0; k < 3; k++) {
+                svg.append("circle")
+                    .attr("r", 3)
+                    .attr("fill", g.color)
+                    .attr("cx", x1)
+                    .attr("cy", y1)
+                    .style("opacity", 0)
+                    .transition()
+                    .delay(1200 + i * 200 + k * 600)
+                    .duration(1500)
+                    .ease(d3.easeCubicInOut)
+                    .style("opacity", 0.8)
+                    .attrTween("transform", function() {
+                        return function(t) {
+                            const px = x1 + (x2 - x1) * t;
+                            const py = y1 + (y2 - y1) * t;
+                            return `translate(${px - x1}, ${py - y1})`;
+                        };
+                    })
+                    .style("opacity", 0)
+                    .remove();
+            }
+
+            // 卡组圆
+            const gg = svg.append("g")
+                .attr("transform", `translate(${pos.x},${pos.y})`)
+                .style("cursor", "pointer");
+
+            // 光晕
+            gg.append("circle")
+                .attr("r", r + 8)
+                .attr("fill", g.color)
+                .attr("opacity", 0.1);
+
+            // 主圆
+            const circ = gg.append("circle")
+                .attr("r", 0)
+                .attr("fill", g.color)
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 3)
+                .style("filter", "drop-shadow(0 4px 12px rgba(60, 40, 20, 0.2))");
+
+            circ.transition()
+                .delay(i * 150)
+                .duration(700)
+                .ease(d3.easeBackOut)
+                .attr("r", r);
+
+            // 卡组名（中文）
+            gg.append("text")
+                .attr("text-anchor", "middle")
+                .attr("y", -16)
+                .style("fill", "#fff")
+                .style("font-size", "1.05rem")
+                .style("font-weight", "600")
+                .style("opacity", 0)
+                .text(g.name)
+                .transition().delay(i * 150 + 400).duration(400)
+                .style("opacity", 1);
+
+            // 卡组英文名
+            gg.append("text")
+                .attr("text-anchor", "middle")
+                .attr("y", 2)
+                .style("fill", "rgba(255,255,255,0.8)")
+                .style("font-size", "0.72rem")
+                .style("letter-spacing", "0.15em")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("opacity", 0)
+                .text(g.name_en)
+                .transition().delay(i * 150 + 500).duration(400)
+                .style("opacity", 1);
+
+            // 卡数（大字）
+            gg.append("text")
+                .attr("text-anchor", "middle")
+                .attr("y", 30)
+                .style("fill", "#fff")
+                .style("font-size", "1.6rem")
+                .style("font-weight", "700")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("opacity", 0)
+                .text(g.count)
+                .transition().delay(i * 150 + 600).duration(400)
+                .style("opacity", 1);
+
+            // 标签
+            gg.append("text")
+                .attr("text-anchor", "middle")
+                .attr("y", 48)
+                .style("fill", "rgba(255,255,255,0.7)")
+                .style("font-size", "0.7rem")
+                .style("opacity", 0)
+                .text("张卡牌")
+                .transition().delay(i * 150 + 700).duration(400)
+                .style("opacity", 1);
+
+            // 交互
+            gg.on("mouseover", function(e) {
+                d3.select(this).select("circle:nth-child(2)").transition().duration(150).attr("r", r + 6);
+                const cardList = g.cards.slice(0, 4).map(c => c.id + " " + c.name).join(" · ");
+                tip.style("opacity", 1)
+                    .html(`<div style="color:${g.color};font-weight:700;margin-bottom:4px;">${g.name} · ${g.name_en}</div>` +
+                          `<div style="font-size:0.78rem;color:#e9b885;margin-bottom:4px;">共 ${g.count} 张卡牌</div>` +
+                          `<div style="font-size:0.78rem;">${cardList} ...</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = el.parentElement.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).select("circle:nth-child(2)").transition().duration(150).attr("r", r);
+                tip.style("opacity", 0);
+            });
+        });
+
+        // 公式标注
+        const formulaG = svg.append("g").attr("transform", `translate(${cx}, ${h - 28})`);
+        formulaG.append("text")
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.9rem")
+            .style("font-family", "JetBrains Mono, monospace")
+            .style("font-weight", "700")
+            .style("fill", "var(--accent-3)")
+            .text("12 (因果) × 10 (法器) × 10 (执念) = 1200 (故事开头)");
+    }
+
+    // ===== 渲染：关键洞察 =====
+    function renderInsights() {
+        const insights = [
+            `<strong>灵山董事会</strong>是「反取经」视角的桌游 · 让玩家从取经团队之外的角度（如来/观音/老君/玉帝）体验项目设计者的乐趣 · 揭示取经背后的「真人秀」本质。`,
+            `<strong>大鹏金翅雕</strong>是如来方的「内定劫难卡」 · 投放成本仅 50 功德 · 收视率回报却高达 1800 · ROI 高达 36 倍 · 是佛系玩家「躺赢」的隐藏通道 · 揭示了灵山对取经剧本的绝对控制权。`,
+            `<strong>青牛精一役</strong>是太上老君的金刚琢广告位 · 通过让诸神兵器被套 · 成功将道具估值拉抬至天价 · 展示了「道具供应商」的商业模式 · 道教在取经项目中获利颇丰。`,
+            `<strong>32 张叙事卡</strong>可生成 1200 种故事开头 · 是真正的「故事生产器」 · 让《西游记》从「一部经典」变为「无限源泉」 · 每个玩家都能演绎出属于自己的西游故事。`,
+            `<strong>执念卡揭示</strong>：取经路上最大的敌人不是外在的妖魔 · 而是内心的执念（傲慢/猜忌/愚忠/嫉妒/逃避） · 妖魔只是执念的外在显现 · 真正的取经是降伏内心。`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(t => ul.append("li").html(t));
+    }
+
+    // ===== 数据加载 =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error("fetch failed: " + path);
+            return await res.json();
+        } catch (e) {
+            console.warn("[INFO] 使用嵌入数据 for", path, ":", e.message);
+            return fallback;
+        }
+    }
+
+    async function loadAll() {
+        const [bg, nc, sg, sm] = await Promise.all([
+            loadJson("../../scripts/output/data/board_game.json", EMBEDDED.board_game),
+            loadJson("../../scripts/output/data/narrative_cards.json", EMBEDDED.narrative_cards),
+            loadJson("../../scripts/output/data/story_generator.json", EMBEDDED.story_generator),
+            loadJson("../../scripts/output/data/narrative_experiment_summary.json", EMBEDDED.narrative_experiment_summary)
+        ]);
+        return { board_game: bg, narrative_cards: nc, story_generator: sg, summary: sm };
+    }
+
+    // ===== 主流程 =====
+    async function main() {
+        const data = await loadAll();
+        window.__data = data;
+
+        // 检测数据源
+        const usingEmbedded = (data.board_game === EMBEDDED.board_game);
+        if (!usingEmbedded) {
+            document.getElementById("dataSource").innerHTML =
+                "数据源：实时加载自 <code>scripts/output/data/</code>（http server 模式）";
+        } else {
+            document.getElementById("dataSource").innerHTML =
+                "数据源：嵌入式 fallback 数据（file:// 协议兼容 · 双击 HTML 文件可直接打开）";
+        }
+
+        renderBoardMeta(data.board_game);
+        renderPlayers(data.board_game.players);
+        renderPhaseFlow(data.board_game.game_phases);
+        renderHardship(data.board_game.hardship_cards);
+        renderEggs(data.board_game.design_eggs);
+        renderScoring(data.board_game.scoring);
+        renderNarrativeCards(data.narrative_cards);
+        renderStories(data.narrative_cards.example_combinations);
+        renderGenerator(data.story_generator);
+        renderComboViz(data.narrative_cards);
+        renderInsights();
+
+        // 生成时间
+        document.getElementById("gen-time").textContent =
+            "数据生成时间：" + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
+    }
+
+    // 窗口缩放重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__data) {
+                renderPhaseFlow(window.__data.board_game.game_phases);
+                renderComboViz(window.__data.narrative_cards);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

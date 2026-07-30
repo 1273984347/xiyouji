@@ -1,0 +1,173 @@
+name: CI
+
+# W234-E1 CI/CD 化：PR 触发三轨并行（screenshots 回归 + lighthouse 性能 + a11y 审查）
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  screenshots-regression:
+    name: Screenshots Regression (Playwright)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install Playwright
+        run: |
+          npm install playwright @playwright/test
+          npx playwright install --with-deps chromium
+
+      - name: Start static server
+        run: |
+          python -m http.server 8000 --directory site &
+          echo $! > server.pid
+          sleep 3
+          curl -sSf http://localhost:8000/dashboard.html -o /dev/null
+
+      - name: Run screenshot baseline
+        id: screenshot-baseline
+        run: node tools/screenshot-baseline.js
+        continue-on-error: true  # 工具不存在时降级为提示，不阻断 a11y/lighthouse
+
+      - name: Fallback screenshot scan (site/data/*.html)
+        if: failure() || steps.screenshot-baseline.outcome != 'success'
+        run: |
+          mkdir -p screenshots-diff
+          echo "tools/screenshot-baseline.js 未就绪，扫描 site/data/*.html 列表：" > screenshots-diff/README.txt
+          ls site/data/*.html >> screenshots-diff/README.txt || true
+
+      - name: Stop static server
+        if: always()
+        run: |
+          if [ -f server.pid ]; then kill "$(cat server.pid)" || true; fi
+
+      - name: Upload screenshots artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-${{ github.sha }}
+          path: |
+            screenshots/
+            screenshots-diff/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Upload diff images on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-diff-${{ github.sha }}
+          path: |
+            screenshots-diff/
+            **/*-diff.png
+          if-no-files-found: ignore
+          retention-days: 30
+
+  lighthouse-performance:
+    name: Lighthouse Performance (perf/a11y/bp/seo)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Start static server
+        run: |
+          python -m http.server 8000 --directory site &
+          echo $! > server.pid
+          sleep 3
+          curl -sSf http://localhost:8000/dashboard.html -o /dev/null
+
+      - name: Run Lighthouse audit
+        run: |
+          npx --yes lighthouse http://localhost:8000/dashboard.html \
+            --output=json \
+            --output=html \
+            --output-path=lighthouse-report \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --throttling-method=simulate \
+            --chrome-flags="--headless --no-sandbox"
+
+      - name: Stop static server
+        if: always()
+        run: |
+          if [ -f server.pid ]; then kill "$(cat server.pid)" || true; fi
+
+      - name: Threshold check (Performance ≥ 0.85, Accessibility ≥ 0.95)
+        id: threshold
+        run: |
+          node -e "
+          const fs = require('fs');
+          const r = JSON.parse(fs.readFileSync('lighthouse-report.report.json','utf8'));
+          const perf = r.categories.performance && r.categories.performance.score || 0;
+          const a11y = r.categories.accessibility && r.categories.accessibility.score || 0;
+          console.log('Performance=' + perf.toFixed(3) + ' (≥0.85)');
+          console.log('Accessibility=' + a11y.toFixed(3) + ' (≥0.95)');
+          if (perf < 0.85) { console.error('::error::Performance ' + perf.toFixed(3) + ' < 0.85 阈值'); process.exit(1); }
+          if (a11y < 0.95) { console.error('::error::Accessibility ' + a11y.toFixed(3) + ' < 0.95 阈值'); process.exit(1); }
+          "
+
+      - name: Upload lighthouse report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: |
+            lighthouse-report.report.json
+            lighthouse-report.report.html
+          if-no-files-found: ignore
+          retention-days: 30
+
+  a11y-audit:
+    name: A11y Audit (P0/P1 baseline)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Run a11y audit (W234-E2 5 规则脚本)
+        id: a11y
+        run: python scripts/a11y_audit.py --dir site --quiet
+
+      - name: Upload a11y report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: a11y-report
+          path: |
+            scripts/output/a11y-report.md
+            scripts/output/a11y-report.json
+          if-no-files-found: ignore
+          retention-days: 30

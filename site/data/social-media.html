@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社媒人设 · MBTI 人格图谱 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+            --shadow-hover: 0 6px 20px rgba(60, 40, 20, 0.16);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        /* ===== Hero 区 ===== */
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        /* ===== 容器与面包屑 ===== */
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: rgba(200, 70, 58, 0.08);
+            padding: 1px 5px;
+            border-radius: 3px;
+            color: var(--accent);
+        }
+        /* ===== KPI 概要栏 ===== */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 720px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc { font-size: 0.85rem; color: var(--ink-soft); }
+        /* ===== Section 通用 ===== */
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        /* ===== 社媒人设卡片网格 ===== */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+            gap: 18px;
+        }
+        .profile-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 18px 20px;
+            box-shadow: var(--shadow);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .profile-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        .pc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .pc-character {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: 0.05em;
+        }
+        .platform-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        .pc-account {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.8rem;
+            color: var(--accent-3);
+            margin-bottom: 8px;
+        }
+        .pc-followers {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1.1;
+            margin-bottom: 2px;
+        }
+        .pc-followers .unit {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-weight: 500;
+            margin-left: 4px;
+            letter-spacing: 0.1em;
+        }
+        .pc-bio {
+            font-size: 0.85rem;
+            color: var(--ink);
+            line-height: 1.6;
+            margin: 10px 0;
+            padding: 8px 10px;
+            background: var(--bg);
+            border-left: 2px solid var(--accent-soft);
+            border-radius: 0 4px 4px 0;
+        }
+        .pc-pinned {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            line-height: 1.6;
+            margin-bottom: 10px;
+            padding: 8px 10px;
+            background: #fff8ec;
+            border-radius: 4px;
+            display: flex;
+            gap: 6px;
+            align-items: flex-start;
+        }
+        .pc-pinned svg {
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .pc-pinned-text { flex: 1; }
+        .pc-pinned-text .pin-label {
+            display: block;
+            font-size: 0.72rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 2px;
+        }
+        .pc-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .pc-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.72rem;
+            background: rgba(122, 82, 48, 0.08);
+            color: var(--accent-3);
+            border: 1px solid var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .pc-feature {
+            font-size: 0.8rem;
+            color: var(--accent-3);
+            font-style: italic;
+            margin-bottom: 8px;
+            padding-top: 6px;
+            border-top: 1px dashed var(--line);
+        }
+        .pc-feature::before {
+            content: "特色 · ";
+            font-style: normal;
+            font-weight: 600;
+            color: var(--accent-4);
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+        }
+        .pc-interaction {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: auto;
+            padding-top: 8px;
+            border-top: 1px dashed var(--line);
+        }
+        .pc-interaction .ic-label {
+            font-size: 0.72rem;
+            color: var(--accent-2);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+        /* ===== MBTI 雷达图 ===== */
+        .radar-wrap {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 24px;
+            align-items: start;
+        }
+        @media (max-width: 860px) { .radar-wrap { grid-template-columns: 1fr; } }
+        #radar-svg {
+            width: 100%;
+            height: 460px;
+            display: block;
+        }
+        .radar-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+        .radar-legend h4 {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 6px;
+            letter-spacing: 0.1em;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--ink);
+            padding: 4px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .legend-item:hover { background: rgba(200, 70, 58, 0.06); }
+        .legend-item .swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            flex-shrink: 0;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .legend-item .li-mbti {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+            color: var(--accent-3);
+            font-size: 0.78rem;
+            margin-left: auto;
+        }
+        .radar-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            max-width: 260px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .radar-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        /* ===== 职场适配度条形图 ===== */
+        #fit-svg {
+            width: 100%;
+            height: 420px;
+            display: block;
+        }
+        .fit-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            max-width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .fit-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        /* ===== MBTI 强弱项对比表 ===== */
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        #mbti-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+            min-width: 720px;
+        }
+        #mbti-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 11px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        #mbti-table tbody tr { border-bottom: 1px solid var(--line); }
+        #mbti-table tbody tr:nth-child(even) { background: var(--bg); }
+        #mbti-table tbody tr:hover { background: #fff8ec; }
+        #mbti-table td { padding: 10px 12px; vertical-align: top; }
+        #mbti-table td.col-char { font-weight: 600; color: var(--ink); width: 90px; }
+        #mbti-table td.col-mbti {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 700;
+            color: var(--accent);
+            width: 110px;
+        }
+        #mbti-table td.col-mbti .mbti-label {
+            display: block;
+            font-family: "Noto Serif SC", serif;
+            font-weight: 500;
+            color: var(--ink-soft);
+            font-size: 0.78rem;
+            margin-top: 2px;
+        }
+        #mbti-table td.col-strength {
+            background: rgba(90, 122, 58, 0.08);
+            border-left: 3px solid var(--accent-4);
+        }
+        #mbti-table td.col-weakness {
+            background: rgba(200, 70, 58, 0.08);
+            border-left: 3px solid var(--accent);
+        }
+        #mbti-table td.col-note {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            font-style: italic;
+        }
+        .trait-chip {
+            display: inline-block;
+            padding: 2px 6px;
+            margin: 1px 2px;
+            font-size: 0.74rem;
+            border-radius: 4px;
+            background: #fff;
+            border: 1px solid var(--line);
+        }
+        .trait-chip.s { color: var(--accent-4); border-color: var(--accent-4); }
+        .trait-chip.w { color: var(--accent); border-color: var(--accent); }
+        /* ===== 关键洞察 ===== */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: 9px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .insight-box li > div { min-width: 0; flex: 1; overflow-wrap: anywhere; }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li .idx {
+            flex-shrink: 0;
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.85rem;
+            min-width: 24px;
+        }
+        .insight-box li strong { color: var(--accent); font-weight: 600; }
+        /* ===== Footer ===== */
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        footer .gen-time {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>社媒人设 · MBTI 人格图谱</h1>
+        <div class="subtitle">SOCIAL MEDIA &amp; MBTI</div>
+        <div class="tagline">当西游角色开通了社交账号</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">/</span>
+            <span>社媒人设 · MBTI</span>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">PROFILES · 社媒人设</div>
+                <div class="value">7<span style="font-size:1rem;color:var(--ink-soft);"> 个</span></div>
+                <div class="desc">7 角色入驻 7 个平台</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">MBTI · 人格类型</div>
+                <div class="value">8<span style="font-size:1rem;color:var(--ink-soft);"> 种</span></div>
+                <div class="desc">覆盖 8 种 MBTI 全谱</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">PLATFORMS · 平台</div>
+                <div class="value">7<span style="font-size:1rem;color:var(--ink-soft);"> 个</span></div>
+                <div class="desc">小红书/抖音/微博/公众号/深夜小号/知乎/B站</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">AVG FIT · 平均适配度</div>
+                <div class="value" style="color:var(--accent);">7.88<span style="font-size:1rem;color:var(--ink-soft);"> /10</span></div>
+                <div class="desc">最佳：如来佛祖 INTJ 10/10</div>
+            </div>
+        </div>
+
+        <!-- 板块 1：社媒人设卡片网格 -->
+        <section class="section">
+            <h2 class="section-title">社媒人设卡片网格</h2>
+            <div class="section-sub">7 位西游角色入驻 7 个平台，每张卡片左边框颜色对应该角色的平台主调。</div>
+            <div class="profile-grid" id="profile-grid"></div>
+        </section>
+
+        <!-- 板块 2：MBTI 雷达图 -->
+        <section class="section">
+            <h2 class="section-title">MBTI 八维雷达图</h2>
+            <div class="section-sub">把 MBTI 四字母拆为 8 个独立轴（E/I/S/N/T/F/J/P），每轴值为 0 或 1，叠加 8 个角色形成对比。</div>
+            <div class="radar-wrap">
+                <div style="position:relative;">
+                    <svg id="radar-svg"></svg>
+                    <div class="radar-tip" id="radar-tip"></div>
+                </div>
+                <div class="radar-legend" id="radar-legend">
+                    <h4>角色图例</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- 板块 3：职场适配度条形图 -->
+        <section class="section">
+            <h2 class="section-title">职场适配度条形图</h2>
+            <div class="section-sub">8 个角色按 workplace_fit 降序排列，I 系冷色 / E 系暖色，hover 查看角色定位与备注。</div>
+            <div style="position:relative;">
+                <svg id="fit-svg"></svg>
+                <div class="fit-tip" id="fit-tip"></div>
+            </div>
+        </section>
+
+        <!-- 板块 4：MBTI 强弱项对比表 -->
+        <section class="section">
+            <h2 class="section-title">MBTI 强弱项对比表</h2>
+            <div class="section-sub">8 行 × 5 列，优势（绿）与弱项（红）对照，附角色定位备注。</div>
+            <div class="table-wrap">
+                <table id="mbti-table">
+                    <thead>
+                        <tr>
+                            <th>角色</th>
+                            <th>MBTI</th>
+                            <th>优势（前 2 条）</th>
+                            <th>弱项（前 2 条）</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mbti-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 板块 5：关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <h4>从 MBTI 看西游团队的人格图谱</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">返回数据看板</a> ·
+        <a href="../index.html">返回首页</a> ·
+        <a href="workplace.html">查看打工人专题</a>
+        <span class="gen-time" id="gen-time"></span>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/02-人物深度分析/孙悟空.md">孙悟空深度分析</a></div>
+    </footer>
+
+    <script>
+    // ============================================================
+    // 嵌入式 fallback 数据（fetch 失败时使用）
+    // 数据源：scripts/output/data/{social_media_profiles,mbti_characters,social_media_summary}.json
+    // ============================================================
+    const EMBEDDED = {
+        social_media_profiles: [
+            {
+                character: "唐僧",
+                platform: "小红书",
+                account_name: "@御弟法师·大唐取经Vlog",
+                follower_count: "128.5w",
+                content_tags: ["禅意摄影", "素斋探店", "团队管理", "vlog"],
+                bio: "金蝉子转世·旃檀功德佛·素食主义者·14年徒步达人",
+                pinned_post: "【14年徒步vlog·终】灵山取经·凌云渡脱胎·感谢5位团队成员·真经已入长安·#取经vlog #徒步 #素食",
+                typical_posts: [
+                    "今日禅意摄影：双叉岭晨雾·#禅意 #清晨 #取经vlog",
+                    "素斋探店：高老庄红烧肉复刻（素版）·这家斋饭油脂感略重，2星",
+                    "团队管理：如何应对团队里不服管的刺头员工？收藏夹已更新",
+                    "求助：徒弟又打死了人，怎么办？在线等·急"
+                ],
+                feature: "禅意美学+团队管理+素斋探店三栖博主",
+                interaction_style: "每条必回评论·耐心感化"
+            },
+            {
+                character: "猪八戒",
+                platform: "抖音",
+                account_name: "@天蓬元帅下海创业",
+                follower_count: "568.9w",
+                content_tags: ["吃播", "土味情歌", "嫦娥", "搞笑"],
+                bio: "前天蓬元帅·现取经团队气氛组·高老庄红烧肉传人",
+                pinned_post: "【高老庄红烧肉复刻】秘诀是·加·一·点·爱·#吃播 #红烧肉 #高老庄",
+                typical_posts: [
+                    "吃播：通天河鱼宴·这条鱼精真鲜·#吃播 #海鲜",
+                    "土味情歌对嘴：'嫦娥姐姐你听我说...'·#土味情歌 #嫦娥",
+                    "与嫦娥姐姐的隔空合拍（永远被拒）·第1087次尝试",
+                    "散伙vlog：今天又被悟空欺负了·我想回高老庄"
+                ],
+                feature: "吃播+土味情歌+被拒专业户",
+                interaction_style: "评论区装可怜·骗赞骗关注"
+            },
+            {
+                character: "孙悟空",
+                platform: "微博",
+                account_name: "@齐天大圣孙悟空（认证）",
+                follower_count: "2890w",
+                content_tags: ["打假", "斗战胜佛", "花果山", "爷的青春"],
+                bio: "花果山猴王·斗战胜佛·前齐天大圣·认证账号·假号必究",
+                pinned_post: "【爷的青春】当年大闹天宫旧照·一筋斗十万八千里·#爷的青春 #大闹天宫",
+                typical_posts: [
+                    "打假：又有人冒充俺老孙·图1真·图2假·大家注意识别",
+                    "帮沙师弟新书打广告：《挑担子的艺术》· 限时8折",
+                    "转发：花果山猕猴桃丰收·自家种植·无农药·购买链接",
+                    "今日份妖怪：白骨精又来碰瓷·已处理·大家放心"
+                ],
+                feature: "打假+花果山电商+帮队友打广告",
+                interaction_style: "高冷·偶尔互动·转发必查证"
+            },
+            {
+                character: "沙僧",
+                platform: "微信公众号",
+                account_name: "沙悟净·挑担者说",
+                follower_count: "32.4w",
+                content_tags: ["挑担", "后勤", "职场", "沉默"],
+                bio: "前卷帘大将·现取经团队后勤总监·《挑担子的艺术》作者",
+                pinned_post: "【新书】《挑担子的艺术：14年挑担经验总结》·限时8折·点击购买",
+                typical_posts: [
+                    "职场：'师父被妖怪抓走了'——最简短的ISFJ工作报告",
+                    "后勤：今日挑担公里数·100里·行李完好·无遗失",
+                    "沉默的力量：为什么我不说话？因为我说话没用",
+                    "广告：花果山猕猴桃·自家师兄种植·购买链接"
+                ],
+                feature: "低调+职场干货+出书",
+                interaction_style: "很少互动·偶尔回复'嗯'"
+            },
+            {
+                character: "白龙马",
+                platform: "深夜小号（平台不详）",
+                account_name: "@（无名）",
+                follower_count: "8w",
+                content_tags: ["侧脸", "灰暗", "蹄", "深夜"],
+                bio: "（无简介）",
+                pinned_post: "（无置顶）",
+                typical_posts: [
+                    "（深夜发灰暗滤镜侧脸照）配文：蹄。",
+                    "（深夜发灰暗滤镜侧脸照）配文：蹄。。",
+                    "（深夜发灰暗滤镜侧脸照）配文：蹄。。。",
+                    "（深夜发灰暗滤镜侧脸照）配文：蹄。。。。。"
+                ],
+                feature: "深夜emo·只发侧脸·只说蹄",
+                interaction_style: "从不互动·只发蹄"
+            },
+            {
+                character: "观音菩萨",
+                platform: "知乎",
+                account_name: "@观音大士·答主",
+                follower_count: "560w",
+                content_tags: ["解惑", "取经", "佛法", "暗中护持"],
+                bio: "南海普陀·大慈大悲观世音菩萨·取经项目暗中投资人",
+                pinned_post: "【回答】如何评价唐僧师徒的取经项目？——已关注·3.2w赞同",
+                typical_posts: [
+                    "回答：如何应对团队里的刺头员工？——给紧箍咒·必念",
+                    "回答：妖怪有背景怎么办？——找主家·别硬刚",
+                    "回答：唐僧肉真的能长生不老吗？——谣传·已辟谣",
+                    "回答：为什么我每次都最后才出手？——时机·时机·时机"
+                ],
+                feature: "专业答主+取经项目投资人",
+                interaction_style: "专业严谨·最后才出手"
+            },
+            {
+                character: "如来佛祖",
+                platform: "B站",
+                account_name: "@如来·灵山UP主",
+                follower_count: "5000w",
+                content_tags: ["佛法", "宇宙", "造化", "灵山"],
+                bio: "灵山最高UP主·西天取经项目总设计师·粉丝5000w",
+                pinned_post: "【灵山说法】第1期·宇宙的本质是什么？·已关注",
+                typical_posts: [
+                    "vlog：五指山·镇压齐天大圣全纪录·#造化",
+                    "教程：如何用一只手解决一个齐天大圣",
+                    "直播：真假美猴王·我来辨一辨",
+                    "vlog：灵山雷音寺·真经交付仪式·#圆满"
+                ],
+                feature: "宇宙级UP主+造化教程",
+                interaction_style: "高冷·偶尔直播·一语定乾坤"
+            }
+        ],
+        mbti_characters: [
+            {
+                character: "唐僧", mbti: "INFJ", mbti_label: "提倡者",
+                role: "项目经理·基准值",
+                trait: "坚定的理想主义者·用信念感化团队",
+                strength: ["信念坚定", "感化力强", "目标导向", "道德标杆"],
+                weakness: ["内耗严重", "步步该灾", "识人不明", "易被表象迷惑"],
+                workplace_fit: 7,
+                note: "缺点是内耗严重，步步该灾——典型 INFJ 的'过度理想化'陷阱"
+            },
+            {
+                character: "孙悟空", mbti: "ENTP", mbti_label: "辩论家",
+                role: "技术负责人·执行器",
+                trait: "智力超群·热爱挑战·反官僚主义",
+                strength: ["智力超群", "灵活应变", "创新破局", "资源调度"],
+                weakness: ["反官僚主义", "厌恶重复", "与领导辩论", "冲动易怒"],
+                workplace_fit: 9,
+                note: "经常和领导（唐僧）辩论取经的'底层逻辑'——ENTP 的典型行为"
+            },
+            {
+                character: "猪八戒", mbti: "ESFP", mbti_label: "表演者",
+                role: "气氛组·后勤",
+                trait: "团队里的气氛组·活在当下·吃喝玩乐第一",
+                strength: ["活跃气氛", "人际润滑", "及时行乐", "抗压（散伙就散伙）"],
+                weakness: ["懒散", "贪吃", "好色", "遇挫即散伙"],
+                workplace_fit: 5,
+                note: "散伙是他对 ESFP 式'及时行乐'的终极捍卫"
+            },
+            {
+                character: "沙僧", mbti: "ISFJ", mbti_label: "守卫者",
+                role: "后勤总监·守护者",
+                trait: "忠诚可靠的守护者·默默扛起所有后勤",
+                strength: ["忠诚可靠", "默默奉献", "稳定输出", "无怨言"],
+                weakness: ["缺乏主见", "不擅表达", "存在感低", "被动跟随"],
+                workplace_fit: 8,
+                note: "经典台词'师父被妖怪抓走了'是最简短的 ISFJ 工作报告"
+            },
+            {
+                character: "白龙马", mbti: "ISTP", mbti_label: "鉴赏家",
+                role: "沉默执行者",
+                trait: "沉默的实干家·平时不说话·关键时刻动手能力极强",
+                strength: ["关键时刻行动力", "动手能力强", "冷静", "实用主义"],
+                weakness: ["不擅表达", "存在感极低", "情感内敛", "被忽视"],
+                workplace_fit: 7,
+                note: "一脚踹出团队生机——ISTP 的典型关键时刻救场"
+            },
+            {
+                character: "观音菩萨", mbti: "ENFJ", mbti_label: "主人公",
+                role: "项目投资人·导师",
+                trait: "善于引导·暗中支持·感化型领导",
+                strength: ["引导力", "识人", "资源调度", "大格局"],
+                weakness: ["过度干预", "最后才出手", "信息不透明"],
+                workplace_fit: 9,
+                note: "典型的导师型角色·暗中护持但不到万不得已不出手"
+            },
+            {
+                character: "如来佛祖", mbti: "INTJ", mbti_label: "建筑师",
+                role: "总设计师",
+                trait: "战略家·总设计师·系统思考",
+                strength: ["战略视野", "系统设计", "决断力", "权威"],
+                weakness: ["过于高冷", "不近人情", "信息垄断"],
+                workplace_fit: 10,
+                note: "九九八十一难的总设计师·INTJ 的系统思维典范"
+            },
+            {
+                character: "玉帝", mbti: "ESTJ", mbti_label: "总经理",
+                role: "天庭CEO",
+                trait: "秩序维护者·管理者·科层制代表",
+                strength: ["秩序维护", "管理", "权威", "资源分配"],
+                weakness: ["官僚主义", "用人不当", "被动应对"],
+                workplace_fit: 8,
+                note: "天庭科层制的化身·ESTJ 的典型管理者形象"
+            }
+        ],
+        social_media_summary: {
+            total_profiles: 7,
+            total_mbti: 8,
+            platforms: ["小红书", "抖音", "微博", "微信公众号", "深夜小号（平台不详）", "知乎", "B站"],
+            mbti_types: ["INFJ", "ENTP", "ESFP", "ISFJ", "ISTP", "ENFJ", "INTJ", "ESTJ"],
+            avg_workplace_fit: 7.88,
+            best_fit: "如来佛祖"
+        }
+    };
+
+    // ============================================================
+    // 配色映射
+    // ============================================================
+    // 卡片左边框色（按角色/平台）
+    const PROFILE_BORDER = {
+        "唐僧": "#c8463a",
+        "猪八戒": "#2c2418",
+        "孙悟空": "#e9b885",
+        "沙僧": "#3a6b8c",
+        "白龙马": "#6b5e4d",
+        "观音菩萨": "#7a5230",
+        "如来佛祖": "#5a7a3a"
+    };
+    // 平台徽章背景色
+    const PLATFORM_BADGE = {
+        "小红书": "#c8463a",
+        "抖音": "#2c2418",
+        "微博": "#e9b885",
+        "微信公众号": "#3a6b8c",
+        "深夜小号（平台不详）": "#6b5e4d",
+        "知乎": "#7a5230",
+        "B站": "#5a7a3a"
+    };
+    // 8 个角色雷达图配色（与卡片左边框色呼应，玉帝补一个色）
+    const MBTI_COLORS = {
+        "唐僧": "#c8463a",
+        "孙悟空": "#e9b885",
+        "猪八戒": "#5a4030",
+        "沙僧": "#3a6b8c",
+        "白龙马": "#6b5e4d",
+        "观音菩萨": "#7a5230",
+        "如来佛祖": "#5a7a3a",
+        "玉帝": "#d97706"
+    };
+    // 条形图 I 系冷色 / E 系暖色
+    function fitColor(mbti) {
+        if (!mbti) return "#7a5230";
+        return mbti.charAt(0) === "I"
+            ? "#3a6b8c"  // I 系：冷蓝
+            : "#c8463a"; // E 系：暖红
+    }
+    // 八维雷达图轴定义
+    const RADAR_AXES = ["E", "N", "F", "P", "I", "S", "T", "J"];
+    // 把 MBTI 4 字母拆成 8 轴值（命中的轴=1，其余=0）
+    function mbtiToRadar(mbti) {
+        const map = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+        for (const ch of mbti) map[ch] = 1;
+        return RADAR_AXES.map(a => map[a]);
+    }
+
+    // ============================================================
+    // 数据加载
+    // ============================================================
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error("fetch failed: " + path);
+            return await res.json();
+        } catch (e) {
+            console.warn("[INFO] 使用嵌入数据 for", path, ":", e.message);
+            return fallback;
+        }
+    }
+    async function loadAll() {
+        const [profiles, mbti, summary] = await Promise.all([
+            loadJson("../../scripts/output/data/social_media_profiles.json", EMBEDDED.social_media_profiles),
+            loadJson("../../scripts/output/data/mbti_characters.json", EMBEDDED.mbti_characters),
+            loadJson("../../scripts/output/data/social_media_summary.json", EMBEDDED.social_media_summary)
+        ]);
+        return { profiles, mbti, summary };
+    }
+
+    // ============================================================
+    // 渲染：社媒人设卡片网格
+    // ============================================================
+    function renderProfiles(profiles) {
+        const grid = d3.select("#profile-grid");
+        grid.selectAll("*").remove();
+        profiles.forEach(p => {
+            const borderColor = PROFILE_BORDER[p.character] || "var(--accent)";
+            const badgeColor = PLATFORM_BADGE[p.platform] || "var(--accent-3)";
+            const card = grid.append("div")
+                .attr("class", "profile-card")
+                .style("border-left-color", borderColor);
+
+            // 头部：角色名 + 平台徽章
+            const head = card.append("div").attr("class", "pc-head");
+            head.append("div").attr("class", "pc-character").text(p.character);
+            head.append("div")
+                .attr("class", "platform-badge")
+                .style("background", badgeColor)
+                .text(p.platform);
+
+            // 账号名
+            card.append("div").attr("class", "pc-account").text(p.account_name);
+
+            // 粉丝数
+            const fol = card.append("div").attr("class", "pc-followers");
+            fol.append("span").text(p.follower_count);
+            fol.append("span").attr("class", "unit").text("FOLLOWERS · 粉丝");
+
+            // 简介
+            card.append("div").attr("class", "pc-bio").text(p.bio);
+
+            // 置顶帖（SVG 图钉 + 文本）
+            const pin = card.append("div").attr("class", "pc-pinned");
+            pin.append(() => d3.create("svg").attr("width",14).attr("height", 14).attr("viewBox", "0 0 24 24")
+                .append("path")
+                .attr("fill", "#c8463a")
+                .attr("d", "M16 3l5 5-3 3-2-2-7 7v4l-2 2-3-3 2-2h4l7-7-2-2z").node());
+            const pinText = pin.append("div").attr("class", "pc-pinned-text");
+            pinText.append("span").attr("class", "pin-label").text("PINNED · 置顶");
+            pinText.append("span").text(p.pinned_post);
+
+            // 标签 chips
+            const tagsDiv = card.append("div").attr("class", "pc-tags");
+            p.content_tags.forEach(t => {
+                tagsDiv.append("span").attr("class", "pc-tag").text("#" + t);
+            });
+
+            // 特色
+            card.append("div").attr("class", "pc-feature").text(p.feature);
+
+            // 互动风格
+            const inter = card.append("div").attr("class", "pc-interaction");
+            inter.append("span").attr("class", "ic-label").text("INTERACTION ·");
+            inter.append("span").text(p.interaction_style);
+        });
+    }
+
+    // ============================================================
+    // 渲染：MBTI 八维雷达图
+    // ============================================================
+    function renderRadar(mbtiList) {
+        const svg = d3.select("#radar-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("radar-svg");
+        const w = el.clientWidth || 700;
+        const h = 460;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const cx = w / 2;
+        const cy = h / 2;
+        const radius = Math.max(0, Math.min(w, h) / 2 - 60);
+        const axes = RADAR_AXES;  // 8 轴
+        const n = axes.length;
+        const levels = [0.25, 0.5, 0.75, 1.0];
+
+        const angle = (i) => (i * 2 * Math.PI / n) - Math.PI / 2;
+
+        // 同心多边形网格
+        levels.forEach((lv, li) => {
+            const pts = axes.map((_, i) => {
+                const r = radius * lv;
+                return [cx + r * Math.cos(angle(i)), cy + r * Math.sin(angle(i))];
+            });
+            svg.append("polygon")
+                .attr("points", pts.map(p => p.join(",")).join(" "))
+                .attr("fill", li === levels.length - 1 ? "#faf7f2" : "none")
+                .attr("stroke", "var(--line)")
+                .attr("stroke-width", 1)
+                .attr("stroke-dasharray", li === levels.length - 1 ? "none" : "3,3")
+                .attr("opacity", 0.7);
+        });
+
+        // 轴线 + 标签
+        axes.forEach((ax, i) => {
+            const x2 = cx + radius * Math.cos(angle(i));
+            const y2 = cy + radius * Math.sin(angle(i));
+            svg.append("line")
+                .attr("x1", cx).attr("y1", cy)
+                .attr("x2", x2).attr("y2", y2)
+                .attr("stroke", "var(--line)")
+                .attr("stroke-width", 1)
+                .attr("opacity", 0.6);
+
+            // 标签
+            const labelR = radius + 24;
+            const lx = cx + labelR * Math.cos(angle(i));
+            const ly = cy + labelR * Math.sin(angle(i));
+            // 配对色：E/I 红/蓝、S/N 棕/橙、T/F 灰/绿、J/P 深浅
+            const axisColor = {
+                E: "#c8463a", I: "#3a6b8c",
+                N: "#e9b885", S: "#7a5230",
+                T: "#6b5e4d", F: "#5a7a3a",
+                J: "#2c2418", P: "#d97706"
+            };
+            svg.append("circle")
+                .attr("cx", lx).attr("cy", ly).attr("r", 11)
+                .attr("fill", axisColor[ax])
+                .attr("opacity", 0.85);
+            svg.append("text")
+                .attr("x", lx).attr("y", ly + 4)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.82rem")
+                .style("font-weight", "700")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "#fff")
+                .text(ax);
+        });
+
+        // 中心点
+        svg.append("circle")
+            .attr("cx", cx).attr("cy", cy).attr("r", 3)
+            .attr("fill", "var(--ink-soft)");
+
+        // 每个角色的多边形
+        const tip = d3.select("#radar-tip");
+        const elParent = el.parentElement;
+        mbtiList.forEach((m, idx) => {
+            const values = mbtiToRadar(m.mbti);
+            const color = MBTI_COLORS[m.character] || "#7a5230";
+            const pts = values.map((v, i) => {
+                const r = radius * v;
+                return [cx + r * Math.cos(angle(i)), cy + r * Math.sin(angle(i))];
+            });
+            // 因为值是 0/1，多边形会比较"方"——给一个最小半径让 0 也有可见点
+            const ptsVisible = values.map((v, i) => {
+                const r = radius * (v === 0 ? 0.06 : v);
+                return [cx + r * Math.cos(angle(i)), cy + r * Math.sin(angle(i))];
+            });
+
+            const poly = svg.append("polygon")
+                .attr("points", ptsVisible.map(p => p.join(",")).join(" "))
+                .attr("fill", color)
+                .attr("fill-opacity", 0.12)
+                .attr("stroke", color)
+                .attr("stroke-width", 2)
+                .style("cursor", "pointer")
+                .style("opacity", 0)
+                .attr("class", "radar-poly poly-" + idx);
+
+            poly.transition()
+                .delay(200 + idx * 120)
+                .duration(500)
+                .style("opacity", 1);
+
+            // 命中轴的顶点圆
+            values.forEach((v, i) => {
+                if (v === 1) {
+                    svg.append("circle")
+                        .attr("cx", pts[i][0])
+                        .attr("cy", pts[i][1])
+                        .attr("r", 4)
+                        .attr("fill", color)
+                        .attr("stroke", "#fff")
+                        .attr("stroke-width", 1.5)
+                        .style("opacity", 0)
+                        .transition()
+                        .delay(500 + idx * 120)
+                        .duration(300)
+                        .style("opacity", 1);
+                }
+            });
+
+            poly.on("mouseover", function(e) {
+                d3.select(this).attr("fill-opacity", 0.35).attr("stroke-width", 3);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${m.character} · ${m.mbti} · ${m.mbti_label}</div>` +
+                          `<div>定位：${m.role}</div>` +
+                          `<div style="margin-top:4px;color:#e9b885;font-size:0.78rem;">命中轴：${m.mbti.split("").join(" / ")}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = elParent.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("fill-opacity", 0.12).attr("stroke-width", 2);
+                tip.style("opacity", 0);
+            });
+        });
+
+        // 渲染图例
+        const legend = d3.select("#radar-legend");
+        legend.selectAll("*").remove();
+        legend.append("h4").text("角色图例 · 8 位");
+        mbtiList.forEach((m, idx) => {
+            const color = MBTI_COLORS[m.character] || "#7a5230";
+            const item = legend.append("div").attr("class", "legend-item")
+                .attr("tabindex", "0")
+                .on("mouseover", function() {
+                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.35).attr("stroke-width", 3);
+                })
+                .on("mouseout", function() {
+                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.12).attr("stroke-width", 2);
+                })
+                .on("focus", function() {
+                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.35).attr("stroke-width", 3);
+                })
+                .on("blur", function() {
+                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.12).attr("stroke-width", 2);
+                });
+            item.append("span").attr("class", "swatch").style("background", color);
+            item.append("span").text(m.character);
+            item.append("span").attr("class", "li-mbti").text(m.mbti);
+        });
+    }
+
+    // ============================================================
+    // 渲染：职场适配度水平条形图
+    // ============================================================
+    function renderFitChart(mbtiList) {
+        const svg = d3.select("#fit-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("fit-svg");
+        const margin = { top: 24, right: 180, bottom: 30, left: 130 };
+        const w = Math.max(el.clientWidth || 1100, margin.left + margin.right + 120);
+        const h = 420;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const sorted = mbtiList.slice().sort((a, b) => b.workplace_fit - a.workplace_fit);
+        const innerW = w - margin.left - margin.right;
+        const barH = 28;
+        const gap = 14;
+        const totalH = sorted.length * (barH + gap) - gap;
+        const innerH = Math.max(totalH, 200);
+        svg.attr("viewBox", `0 0 ${w} ${Math.max(h, innerH + margin.top + margin.bottom)}`);
+
+        const x = d3.scaleLinear().domain([0, 10]).range([0, innerW]);
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 网格线
+        g.append("g")
+            .selectAll("line")
+            .data([2, 4, 6, 8, 10])
+            .enter()
+            .append("line")
+            .attr("x1", d => x(d)).attr("x2", d => x(d))
+            .attr("y1", -4).attr("y2", innerH + 4)
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "3,3")
+            .attr("opacity", 0.5);
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH + 6})`)
+            .call(d3.axisBottom(x).ticks(10).tickFormat(d => d))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
+
+        // X 轴标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 38)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.8rem")
+            .style("fill", "var(--accent-3)")
+            .text("Workplace Fit · 职场适配度 (0-10)");
+
+        const tip = d3.select("#fit-tip");
+        const elParent = el.parentElement;
+
+        sorted.forEach((m, i) => {
+            const yPos = i * (barH + gap);
+            const val = m.workplace_fit;
+            const color = fitColor(m.mbti);
+
+            // 角色名（左侧）
+            g.append("text")
+                .attr("x", -12)
+                .attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.92rem")
+                .style("font-weight", "600")
+                .style("fill", "var(--ink)")
+                .text(m.character);
+
+            // 背景轨道
+            g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",Math.max(0, innerW)).attr("height", barH)
+                .attr("fill", "#faf7f2")
+                .attr("stroke", "var(--line)")
+                .attr("rx", 4);
+
+            // 数值条
+            const bar = g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",0).attr("height", barH)
+                .attr("fill", color)
+                .attr("rx", 4)
+                .style("cursor", "pointer")
+                .attr("class", "fit-bar");
+
+            bar.transition()
+                .delay(i * 100).duration(800)
+                .ease(d3.easeCubicOut)
+                .attr("width",Math.max(0, x(val)));
+
+            // MBTI 类型 + 数值（条内）
+            g.append("text")
+                .attr("x", x(val) - 8)
+                .attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.82rem")
+                .style("font-weight", "700")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "#fff")
+                .style("opacity", 0)
+                .text(m.mbti + " " + val + "/10")
+                .transition().delay(i * 100 + 600).duration(400)
+                .style("opacity", 1);
+
+            // role 标注（条右侧）
+            g.append("text")
+                .attr("x", x(val) + 8)
+                .attr("y", yPos + barH / 2 + 4)
+                .style("font-size", "0.78rem")
+                .style("fill", "var(--ink-soft)")
+                .style("font-style", "italic")
+                .style("opacity", 0)
+                .text(m.role)
+                .transition().delay(i * 100 + 700).duration(400)
+                .style("opacity", 1);
+
+            // 交互
+            bar.on("mouseover", function(e) {
+                d3.select(this).attr("fill", d3.color(color).darker(0.6));
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${m.character} · ${m.mbti} · ${m.mbti_label}</div>` +
+                          `<div>定位：${m.role}</div>` +
+                          `<div>适配度：<strong style="color:var(--accent-soft);">${val}/10</strong></div>` +
+                          `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">${m.note}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = elParent.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("fill", color);
+                tip.style("opacity", 0);
+            });
+        });
+
+        // 图例（I 系冷色 / E 系暖色）
+        const legendG = svg.append("g")
+            .attr("transform", `translate(${w - margin.right + 20}, ${margin.top})`);
+        legendG.append("text")
+            .attr("x", 0).attr("y", 0)
+            .style("font-size", "0.82rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent-3)")
+            .text("配色图例");
+        const legendItems = [
+            { color: "#3a6b8c", label: "I 系（内向型）" },
+            { color: "#c8463a", label: "E 系（外向型）" }
+        ];
+        legendItems.forEach((it, i) => {
+            const ly = 18 + i * 20;
+            legendG.append("rect")
+                .attr("x", 0).attr("y", ly)
+                .attr("width",14).attr("height", 14)
+                .attr("fill", it.color)
+                .attr("rx", 2);
+            legendG.append("text")
+                .attr("x", 20).attr("y", ly + 11)
+                .style("font-size", "0.78rem")
+                .style("fill", "var(--ink)")
+                .text(it.label);
+        });
+    }
+
+    // ============================================================
+    // 渲染：MBTI 强弱项对比表
+    // ============================================================
+    function renderMbtiTable(mbtiList) {
+        const tbody = d3.select("#mbti-tbody");
+        tbody.selectAll("*").remove();
+        mbtiList.forEach(m => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "col-char").text(m.character);
+            const mbtiTd = tr.append("td").attr("class", "col-mbti");
+            mbtiTd.append("span").text(m.mbti);
+            mbtiTd.append("span").attr("class", "mbti-label").text(m.mbti_label);
+
+            // 优势（前 2 条）
+            const sTd = tr.append("td").attr("class", "col-strength");
+            m.strength.slice(0, 2).forEach(s => {
+                sTd.append("span").attr("class", "trait-chip s").text(s);
+            });
+
+            // 弱项（前 2 条）
+            const wTd = tr.append("td").attr("class", "col-weakness");
+            m.weakness.slice(0, 2).forEach(s => {
+                wTd.append("span").attr("class", "trait-chip w").text(s);
+            });
+
+            tr.append("td").attr("class", "col-note").text(m.note);
+        });
+    }
+
+    // ============================================================
+    // 渲染：关键洞察
+    // ============================================================
+    function renderInsights() {
+        const insights = [
+            `<span class="idx">01</span><div><strong>如来 INTJ 适配度 10/10 满分</strong>，九九八十一难的总设计师——但 INTJ 仅占群体 2/8（25%），属稀缺型战略大脑。</div>`,
+            `<span class="idx">02</span><div><strong>八戒 ESFP 仅 5/10 全场最低</strong>，散伙是他对"及时行乐"的终极捍卫——典型 ESFP 陷阱。</div>`,
+            `<span class="idx">03</span><div>团队 E/I 平衡：<strong>3 外向（悟空/八戒/观音）+ 5 内向（唐僧/沙僧/白龙马/如来/玉帝）</strong>，内省型主导，外向型执行。</div>`,
+            `<span class="idx">04</span><div>沙僧 ISFJ 与八戒 ESFP 形成<strong>稳定/活跃的阴阳互补</strong>，一个默默挑担、一个活跃气氛，是团队黏合剂。</div>`,
+            `<span class="idx">05</span><div>师徒 MBTI 全谱：<strong>8 种类型 1:1 覆盖</strong>（INFJ/ENTP/ESFP/ISFJ/ISTP/ENFJ/INTJ/ESTJ），堪称完美团队样本。</div>`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(t => ul.append("li").html(t));
+    }
+
+    // ============================================================
+    // 主流程
+    // ============================================================
+    async function main() {
+        const data = await loadAll();
+        window.__data = data;
+
+        // 数据源提示
+        if (data.profiles === EMBEDDED.social_media_profiles) {
+            // 仍是嵌入数据
+        } else {
+            document.getElementById("dataSource").innerHTML =
+                "数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）";
+        }
+
+        renderProfiles(data.profiles);
+        renderRadar(data.mbti);
+        renderFitChart(data.mbti);
+        renderMbtiTable(data.mbti);
+        renderInsights();
+
+        // 生成时间
+        document.getElementById("gen-time").textContent =
+            "数据生成时间：" + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
+    }
+
+    // 窗口缩放重绘（仅 D3 图表）
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__data) {
+                renderRadar(window.__data.mbti);
+                renderFitChart(window.__data.mbti);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

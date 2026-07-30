@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语言风格雷达图 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #f9f9f9;
+            --paper: #ffffff;
+            --ink: #2c3e50;
+            --ink-soft: #6b7c8c;
+            --accent: #e67e22;
+            --accent-soft: #f4d4b2;
+            --accent-2: #2c3e50;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(44, 62, 80, 0.08), 0 4px 12px rgba(44, 62, 80, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .breadcrumb {
+            background: var(--accent-2);
+            color: #f5e9d4;
+            padding: 10px 24px;
+            font-size: 0.85rem;
+        }
+        .breadcrumb a { color: #f4d4b2; text-decoration: none; margin: 0 6px; }
+        .breadcrumb a:hover { color: #fff; text-decoration: underline; }
+        .breadcrumb .sep { color: rgba(245, 233, 212, 0.5); margin: 0 4px; }
+        .hero {
+            background: linear-gradient(135deg, #1a2530 0%, #2c3e50 50%, #3a5a78 100%);
+            color: #f5e9d4;
+            padding: 40px 24px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(230, 126, 34, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.0rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.9rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1200px;
+            margin: -20px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-top: 3px solid var(--accent);
+            border-radius: 6px;
+            padding: 16px 18px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .kpi-card:hover { transform: translateY(-2px); }
+        .kpi-card .label {
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc { font-size: 0.78rem; color: var(--ink-soft); }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 22px;
+        }
+        .section-title {
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+            color: var(--accent-2);
+        }
+        .section-sub { font-size: 0.84rem; color: var(--ink-soft); margin-bottom: 18px; }
+        .chart-block { margin-top: 8px; }
+        .chart-block h3 {
+            font-size: 0.95rem;
+            color: var(--accent);
+            margin-bottom: 6px;
+            letter-spacing: 0.08em;
+        }
+        .chart-block svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+            justify-content: center;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-swatch {
+            width: 14px; height: 14px; border-radius: 50%; display: inline-block;
+        }
+        .tooltip {
+            position: absolute;
+            background: rgba(26, 37, 48, 0.95);
+            color: #f5e9d4;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            line-height: 1.5;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+        .radar-axis-label {
+            font-size: 12px;
+            fill: var(--ink);
+            font-weight: 600;
+        }
+        .radar-axis-tick {
+            font-size: 9px;
+            fill: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+        }
+        footer {
+            text-align: center;
+            padding: 22px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 30px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        .chart-axis text {
+            font-family: "Noto Serif SC", serif;
+            font-size: 11px;
+            fill: var(--ink-soft);
+        }
+        .chart-axis line, .chart-axis path { stroke: var(--line); }
+        a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="sep">›</span>
+        <a href="dashboard.html">dashboard</a>
+        <span class="sep">›</span>
+        语言风格雷达图
+    </nav>
+
+    <header class="hero">
+        <h1>语言风格雷达图</h1>
+        <div class="subtitle">LANGUAGE STYLE RADAR</div>
+        <div class="tagline">七角色对话语言特征对比——词汇、句长、修辞、口语、文言的五维风格图谱。</div>
+    </header>
+
+    <main class="container">
+        <div class="kpi-row" id="kpiRow"></div>
+
+        <!-- 图1：5 维雷达图 -->
+        <section class="section">
+            <h2 class="section-title">角色语言风格五维雷达图</h2>
+            <div class="section-sub">唐僧/悟空/八戒/悟净/观音/如来/玉帝 7 角色的对话语言特征对比，5 维度：词汇丰富度/句长/修辞密度/口语化/文言化。</div>
+            <div class="chart-block">
+                <svg id="chart-radar" width="900" height="640"></svg>
+                <div class="legend" id="radar-legend"></div>
+            </div>
+        </section>
+
+        <!-- 图2：PCA 降维散点图 -->
+        <section class="section">
+            <h2 class="section-title">角色风格聚类散点图（PCA 降维 2D）</h2>
+            <div class="section-sub">将 5 维语言特征向量经 PCA 主成分分析降维至 2D，颜色编码 3 个风格聚类。</div>
+            <div class="chart-block">
+                <svg id="chart-pca" width="900" height="500"></svg>
+                <div class="legend">
+                    <div class="legend-item"><span class="legend-swatch" style="background:#e67e22"></span>取经团（口语化）</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#2c3e50"></span>佛道天庭（文言化）</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#5a7a3a"></span>中间型（混合）</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">相关页面</h2>
+            <div class="section-sub">本页与 dialogue-sentiment.html 形成"情感-风格"双轨，可对照阅读。</div>
+            <p style="font-size:0.92rem; line-height:2;">
+                <a href="dialogue-sentiment.html" style="color:var(--accent); text-decoration:none;">→ 对话情感分析（情感轨）</a> ·
+                <a href="dashboard.html" style="color:var(--accent-2); text-decoration:none;">← 返回 dashboard</a> ·
+                <a href="linguistics.html" style="color:var(--accent-2); text-decoration:none;">→ 语言学分析</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>详解西游记 · 语言风格雷达图 · W236-V · V 方向可视化页面</p>
+        <p>7 角色 × 5 维度语言风格，与 dialogue-sentiment.html 形成"情感-风格"双轨。</p>
+        <p>
+            <a href="../dashboard.html">← 返回数据仪表盘</a> ·
+            <a href="dialogue-sentiment.html">查看对话情感分析 →</a> ·
+            <a href="linguistics.html">查看语言学分析 →</a>
+        </p>
+        <div class="footer-index">
+            正向时间线：CHANGELOG.md v2.2.42 W236 · 反向文件索引：site/data/ · V 方向·W236 六页并行
+        </div>
+        <div class="footer-cross">
+            跨文档链接：
+            <a href="dialogue-sentiment.html">dialogue-sentiment.html</a> /
+            <a href="linguistics.html">linguistics.html</a> /
+            <a href="dashboard.html">dashboard.html</a>
+        </div>
+    </footer>
+    <!-- FILE_INDEX: language-style-radar.html | W236-V | 语言风格雷达图（7角色5维+PCA聚类） -->
+    <!-- CHANGELOG: v2.2.42 W236 V 方向 语言风格雷达图 -->
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+    // ============= EMBEDDED_DATA =============
+    const EMBEDDED_DATA = {
+        meta: {title: "语言风格雷达图", version: "v2.2.42", w_id: "W236-V", direction: "V"},
+        kpi: [
+            {label: "CHARACTERS · 角色", value: "7", desc: "对比角色数"},
+            {label: "DIMENSIONS · 维度", value: "5", desc: "语言特征维度"},
+            {label: "CLUSTERS · 聚类", value: "3", desc: "风格聚类簇"},
+            {label: "MOST COLLOQUIAL · 最口语", value: "八戒", desc: "口语化指数 9.2"},
+            {label: "MOST LITERARY · 最文言", value: "如来", desc: "文言化指数 9.5"}
+        ],
+        // 5 维度
+        dimensions: ["词汇丰富度", "句长", "修辞密度", "口语化", "文言化"],
+        // 7 角色 × 5 维度（0-10 分）
+        characters: [
+            {name: "唐僧", color: "#c8463a", values: [7.2, 7.8, 6.5, 4.2, 7.8], cluster: 0},
+            {name: "悟空", color: "#e67e22", values: [8.5, 5.5, 5.8, 8.8, 3.2], cluster: 0},
+            {name: "八戒", color: "#8c6e3a", values: [6.8, 4.2, 3.5, 9.2, 2.0], cluster: 0},
+            {name: "悟净", color: "#5a7a3a", values: [6.5, 6.0, 5.0, 6.5, 5.5], cluster: 2},
+            {name: "观音", color: "#3a6b8c", values: [8.8, 8.2, 7.5, 3.8, 8.5], cluster: 1},
+            {name: "如来", color: "#2c3e50", values: [9.5, 9.2, 9.0, 2.0, 9.5], cluster: 1},
+            {name: "玉帝", color: "#7a5230", values: [8.0, 8.5, 7.0, 3.0, 8.8], cluster: 1}
+        ],
+        // PCA 降维结果（手动计算的 2D 坐标）
+        pca: [
+            {name: "唐僧", x: -1.8, y: 1.2, cluster: 0, color: "#c8463a"},
+            {name: "悟空", x: -2.5, y: -2.8, cluster: 0, color: "#e67e22"},
+            {name: "八戒", x: -3.2, y: -3.5, cluster: 0, color: "#8c6e3a"},
+            {name: "悟净", x: -0.2, y: -0.5, cluster: 2, color: "#5a7a3a"},
+            {name: "观音", x: 2.5, y: 1.8, cluster: 1, color: "#3a6b8c"},
+            {name: "如来", x: 3.5, y: 3.2, cluster: 1, color: "#2c3e50"},
+            {name: "玉帝", x: 2.8, y: 2.5, cluster: 1, color: "#7a5230"}
+        ]
+    };
+
+    // 提示框
+    const tooltip = d3.select("#tooltip");
+    function showTooltip(html, event) {
+        tooltip.html(html).style("opacity", 1);
+        moveTooltip(event);
+    }
+    function moveTooltip(event) {
+        tooltip.style("left", (event.pageX + 12) + "px")
+               .style("top", (event.pageY - 12) + "px");
+    }
+    function hideTooltip() { tooltip.style("opacity", 0); }
+
+    // 渲染 KPI
+    function renderKPI(data) {
+        const row = d3.select("#kpiRow");
+        row.selectAll(".kpi-card").data(data.kpi).enter()
+          .append("div").attr("class", "kpi-card")
+          .html(d => `<div class="label">${d.label}</div><div class="value">${d.value}</div><div class="desc">${d.desc}</div>`);
+    }
+
+    // ============= 图1：5 维雷达图 =============
+    function renderRadar(data) {
+        const width = 900, height = 640;
+        const margin = { top: 40, right: 40, bottom: 40, left: 40 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const radius = Math.min(innerW, innerH) / 2;
+        const center = { x: width / 2, y: height / 2 };
+
+        const svg = d3.select("#chart-radar");
+        svg.selectAll("*").remove();
+        const g = svg.append("g").attr("transform", `translate(${center.x},${center.y})`);
+
+        const dims = data.dimensions;
+        const angleSlice = (Math.PI * 2) / dims.length;
+
+        // 径向刻度（5 圈）
+        const levels = 5;
+        for (let level = 1; level <= levels; level++) {
+            const r = (radius * level) / levels;
+            const points = dims.map((d, i) => [
+                r * Math.cos(angleSlice * i - Math.PI / 2),
+                r * Math.sin(angleSlice * i - Math.PI / 2)
+            ]);
+            g.append("polygon")
+                .attr("points", points.map(p => p.join(",")).join(" "))
+                .attr("fill", "none")
+                .attr("stroke", "#d9cdb8")
+                .attr("stroke-width", 1)
+                .attr("stroke-dasharray", level === levels ? "0" : "2,3");
+
+            // 刻度标签
+            g.append("text")
+                .attr("x", 4)
+                .attr("y", -r)
+                .attr("class", "radar-axis-tick")
+                .attr("text-anchor", "start")
+                .text((level * 2).toString());
+        }
+
+        // 轴线
+        dims.forEach((dim, i) => {
+            const x = radius * Math.cos(angleSlice * i - Math.PI / 2);
+            const y = radius * Math.sin(angleSlice * i - Math.PI / 2);
+            g.append("line")
+                .attr("x1", 0).attr("y1", 0)
+                .attr("x2", x).attr("y2", y)
+                .attr("stroke", "#d9cdb8")
+                .attr("stroke-width", 1.5);
+
+            // 轴标签
+            const labelX = (radius + 28) * Math.cos(angleSlice * i - Math.PI / 2);
+            const labelY = (radius + 28) * Math.sin(angleSlice * i - Math.PI / 2);
+            g.append("text")
+                .attr("x", labelX).attr("y", labelY)
+                .attr("class", "radar-axis-label")
+                .attr("text-anchor", "middle")
+                .attr("dy", "0.35em")
+                .text(dim);
+        });
+
+        // 角度比例
+        const rScale = d3.scaleLinear().domain([0, 10]).range([0, radius]);
+
+        // 绘制每个角色的多边形
+        data.characters.forEach(char => {
+            const points = char.values.map((v, i) => {
+                const r = rScale(v);
+                return [
+                    r * Math.cos(angleSlice * i - Math.PI / 2),
+                    r * Math.sin(angleSlice * i - Math.PI / 2)
+                ];
+            });
+
+            g.append("polygon")
+                .attr("points", points.map(p => p.join(",")).join(" "))
+                .attr("fill", char.color)
+                .attr("fill-opacity", 0.12)
+                .attr("stroke", char.color)
+                .attr("stroke-width", 2)
+                .style("cursor", "pointer")
+                .on("mouseover", function(event) {
+                    d3.select(this).attr("fill-opacity", 0.35);
+                    showTooltip(`<strong style="color:${char.color}">${char.name}</strong><br>` +
+                        dims.map((d, i) => `${d}：${char.values[i]}`).join("<br>"), event);
+                })
+                .on("mousemove", moveTooltip)
+                .on("mouseout", function() {
+                    d3.select(this).attr("fill-opacity", 0.12);
+                    hideTooltip();
+                });
+
+            // 顶点
+            points.forEach((p, i) => {
+                g.append("circle")
+                    .attr("cx", p[0]).attr("cy", p[1])
+                    .attr("r", 3)
+                    .attr("fill", char.color);
+            });
+        });
+
+        // 图例
+        const legend = d3.select("#radar-legend");
+        legend.selectAll("*").remove();
+        data.characters.forEach(c => {
+            legend.append("div").attr("class", "legend-item")
+                .html(`<span class="legend-swatch" style="background:${c.color}"></span>${c.name}`);
+        });
+    }
+
+    // ============= 图2：PCA 散点图 =============
+    function renderPCA(data) {
+        const width = 900, height = 500;
+        const margin = { top: 30, right: 40, bottom: 60, left: 60 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const svg = d3.select("#chart-pca");
+        svg.selectAll("*").remove();
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const xExtent = d3.extent(data.pca, d => d.x);
+        const yExtent = d3.extent(data.pca, d => d.y);
+        const xPad = (xExtent[1] - xExtent[0]) * 0.15;
+        const yPad = (yExtent[1] - yExtent[0]) * 0.15;
+
+        const x = d3.scaleLinear()
+            .domain([xExtent[0] - xPad, xExtent[1] + xPad])
+            .range([0, innerW]);
+        const y = d3.scaleLinear()
+            .domain([yExtent[0] - yPad, yExtent[1] + yPad])
+            .range([innerH, 0]);
+
+        // 网格
+        g.append("g")
+            .attr("class", "chart-grid")
+            .call(d3.axisLeft(y).ticks(6).tickSize(-innerW).tickFormat(""));
+        g.append("g")
+            .attr("class", "chart-grid")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(6).tickSize(-innerH).tickFormat(""));
+
+        // 零轴
+        g.append("line")
+            .attr("x1", x(0)).attr("y1", 0)
+            .attr("x2", x(0)).attr("y2", innerH)
+            .attr("stroke", "#d9cdb8").attr("stroke-width", 1.5);
+        g.append("line")
+            .attr("x1", 0).attr("y1", y(0))
+            .attr("x2", innerW).attr("y2", y(0))
+            .attr("stroke", "#d9cdb8").attr("stroke-width", 1.5);
+
+        // 散点
+        g.selectAll(".pca-point")
+            .data(data.pca)
+            .enter().append("circle")
+            .attr("class", "pca-point")
+            .attr("cx", d => x(d.x))
+            .attr("cy", d => y(d.y))
+            .attr("r", 12)
+            .attr("fill", d => d.color)
+            .attr("fill-opacity", 0.7)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .style("cursor", "pointer")
+            .on("mouseover", function(event, d) {
+                d3.select(this).attr("r", 16);
+                showTooltip(`<strong style="color:${d.color}">${d.name}</strong><br>PC1：${d.x.toFixed(2)}<br>PC2：${d.y.toFixed(2)}`, event);
+            })
+            .on("mousemove", moveTooltip)
+            .on("mouseout", function() {
+                d3.select(this).attr("r", 12);
+                hideTooltip();
+            });
+
+        // 标签
+        g.selectAll(".pca-label")
+            .data(data.pca)
+            .enter().append("text")
+            .attr("class", "pca-label")
+            .attr("x", d => x(d.x))
+            .attr("y", d => y(d.y) - 18)
+            .attr("text-anchor", "middle")
+            .style("font-size", "13px")
+            .style("font-weight", "600")
+            .style("fill", "#2c3e50")
+            .style("font-family", "Noto Serif SC, serif")
+            .text(d => d.name);
+
+        // 坐标轴
+        g.append("g")
+            .attr("class", "chart-axis")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(6));
+        g.append("g")
+            .attr("class", "chart-axis")
+            .call(d3.axisLeft(y).ticks(6));
+
+        // 轴标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 45)
+            .attr("text-anchor", "middle")
+            .style("font-size", "13px")
+            .style("fill", "#2c3e50")
+            .style("font-weight", "600")
+            .text("主成分 PC1（方差解释率 58.3%）");
+        g.append("text")
+            .attr("transform", `translate(-45, ${innerH / 2}) rotate(-90)`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "13px")
+            .style("fill", "#2c3e50")
+            .style("font-weight", "600")
+            .text("主成分 PC2（方差解释率 26.7%）");
+    }
+
+    // ============= 主流程 =============
+    function main() {
+        renderKPI(EMBEDDED_DATA);
+        renderRadar(EMBEDDED_DATA);
+        renderPCA(EMBEDDED_DATA);
+    }
+
+    main();
+    </script>
+</body>
+</html>

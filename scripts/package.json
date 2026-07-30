@@ -1,0 +1,21 @@
+{
+  "name": "xiyouji-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Utility scripts for the xiyouji visualization project",
+  "scripts": {
+    "screenshots": "node batch_screenshots.js",
+    "test:smoke": "node ../tests/e2e/test_smoke.js",
+    "test:deep": "node ../tests/e2e/test_deep.js",
+    "test:visual": "node ../tests/e2e/test_visual.js",
+    "test:visual:update": "node ../tests/e2e/test_visual.js --update-baseline",
+    "test:e2e": "node ../tests/e2e/test_smoke.js && node ../tests/e2e/test_deep.js",
+    "postinstall": "npx playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.45.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.0"
+  }
+}

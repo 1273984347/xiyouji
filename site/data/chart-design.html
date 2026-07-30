@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图表设计 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+            --shadow-hover: 0 6px 20px rgba(60, 40, 20, 0.18);
+            /* 5 条多米诺链主题色 */
+            --c1: #c8463a;   /* 红·袈裟·紧箍咒 */
+            --c2: #5a7a3a;   /* 绿·五庄观·道佛联盟 */
+            --c3: #d97706;   /* 橙·红孩儿·观音扩张 */
+            --c4: #9b59b6;   /* 紫·六耳猕猴·心魔 */
+            --c5: #3a6b8c;   /* 蓝·狮驼岭·佛道博弈 */
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 960px) { .kpi-row { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 640px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .kpi-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+        .kpi-card .label {
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .desc { font-size: 0.78rem; color: var(--ink-soft); }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .section-principle {
+            background: #fff8ec;
+            border-left: 3px solid var(--accent-soft);
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            color: var(--accent-3);
+            margin-bottom: 18px;
+            border-radius: 0 4px 4px 0;
+            font-style: italic;
+        }
+        .section-principle strong { color: var(--accent); font-style: normal; }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice.live { background: #ecf6ec; border-color: var(--accent-4); color: var(--accent-4); }
+        .notice code { font-family: "JetBrains Mono", monospace; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 3px; }
+
+        /* ========== 多米诺骨牌 ========== */
+        .domino-chain {
+            margin-bottom: 28px;
+            padding: 20px 22px;
+            background: var(--bg);
+            border-left: 4px solid var(--chain-color);
+            border-radius: 6px;
+        }
+        .domino-chain:last-child { margin-bottom: 0; }
+        .domino-chain-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .domino-chain-title {
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: var(--chain-color);
+        }
+        .domino-chain-id {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            background: var(--paper);
+            padding: 2px 8px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+        }
+        .domino-insight {
+            background: var(--paper);
+            border-left: 3px solid var(--chain-color);
+            padding: 10px 14px;
+            margin: 8px 0 18px;
+            font-style: italic;
+            font-size: 0.88rem;
+            color: var(--accent-3);
+            border-radius: 0 4px 4px 0;
+            box-shadow: var(--shadow);
+        }
+        .domino-insight::before {
+            content: "链末洞察 · ";
+            color: var(--chain-color);
+            font-weight: 600;
+            font-style: normal;
+            font-size: 0.78rem;
+            letter-spacing: 0.05em;
+        }
+        .domino-flow {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .domino-card {
+            flex: 1 1 0;
+            min-width: 200px;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-top: 3px solid var(--chain-color);
+            border-radius: 6px;
+            padding: 12px 14px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+        .domino-card:hover {
+            transform: translateY(-3px) rotate(1.2deg);
+            box-shadow: var(--shadow-hover);
+            z-index: 2;
+        }
+        .domino-arrow {
+            flex: 0 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--chain-color);
+            font-size: 1.6rem;
+            font-weight: 700;
+            font-family: "JetBrains Mono", monospace;
+            opacity: 0.7;
+        }
+        .domino-n {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--chain-color);
+            line-height: 1;
+            margin-bottom: 2px;
+            opacity: 0.85;
+        }
+        .domino-n::after { content: ""; }
+        .domino-title {
+            font-size: 0.96rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+        .domino-chapter {
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 8px;
+        }
+        .domino-hardship {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 2px 7px;
+            background: var(--chain-color);
+            color: #fff;
+            border-radius: 3px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .domino-hardship.empty { background: var(--line); color: var(--ink-soft); }
+        .domino-cause {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            line-height: 1.55;
+            margin-bottom: 8px;
+        }
+        .domino-cause::before {
+            content: "因 · ";
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.72rem;
+        }
+        .domino-effect {
+            font-size: 0.78rem;
+            color: var(--chain-color);
+            background: rgba(0,0,0,0.025);
+            padding: 7px 10px;
+            border-radius: 4px;
+            line-height: 1.55;
+            border-left: 2px solid var(--chain-color);
+        }
+        .domino-effect::before {
+            content: "果 → ";
+            color: var(--chain-color);
+            font-weight: 700;
+            font-size: 0.72rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ========== 螺旋修心 ========== */
+        .spiral-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 28px;
+            align-items: start;
+        }
+        @media (max-width: 960px) { .spiral-layout { grid-template-columns: 1fr; } }
+        #spiral-svg {
+            width: 100%;
+            height: 540px;
+            display: block;
+            background: linear-gradient(135deg, #fffdf8 0%, #faf7f2 100%);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+        }
+        .spiral-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            max-width: 260px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .spiral-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        .spiral-stages {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .spiral-stage-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--stage-color);
+            border-radius: 6px;
+            padding: 12px 14px;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .spiral-stage-card:hover { transform: translateX(3px); box-shadow: var(--shadow-hover); }
+        .spiral-stage-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 4px;
+            flex-wrap: wrap;
+        }
+        .spiral-stage-name {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: var(--stage-color);
+        }
+        .spiral-stage-chapter {
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .spiral-stage-emotions {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin-bottom: 6px;
+        }
+        .spiral-stage-emotions .wk { color: var(--accent); }
+        .spiral-stage-emotions .ts { color: var(--accent-2); }
+        .spiral-stage-events {
+            font-size: 0.78rem;
+            color: var(--ink);
+            line-height: 1.55;
+            margin-bottom: 6px;
+        }
+        .spiral-stage-events::before {
+            content: "关键事件 · ";
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.72rem;
+        }
+        .spiral-stage-summary {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            border-top: 1px dashed var(--line);
+            padding-top: 5px;
+        }
+        .spiral-stage-offsets {
+            display: flex;
+            gap: 10px;
+            margin: 5px 0;
+            font-size: 0.74rem;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .spiral-stage-offsets .off-wk { color: var(--accent); }
+        .spiral-stage-offsets .off-ts { color: var(--accent-2); }
+        .spiral-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            margin-top: 14px;
+            font-size: 0.8rem;
+            justify-content: center;
+        }
+        .spiral-legend .lg { display: flex; align-items: center; gap: 6px; }
+
+        /* ========== 妖怪日晷 ========== */
+        .sundial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+        @media (max-width: 960px) { .sundial-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .sundial-grid { grid-template-columns: 1fr; } }
+        .sundial-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .sundial-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+        .sundial-card.highlight-stress { border-top: 3px solid var(--accent); }
+        .sundial-card.highlight-ease { border-top: 3px solid var(--accent-4); }
+        .sundial-svg {
+            width: 100%;
+            height: 240px;
+            display: block;
+        }
+        .sundial-info {
+            margin-top: 8px;
+            text-align: center;
+        }
+        .sundial-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+        .sundial-cat {
+            font-size: 0.76rem;
+            color: var(--accent-3);
+            margin-bottom: 4px;
+        }
+        .sundial-bg {
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            margin-bottom: 6px;
+        }
+        .sundial-indices {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            font-size: 0.78rem;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 6px;
+        }
+        .sundial-indices .stress { color: var(--accent); font-weight: 600; }
+        .sundial-indices .ease { color: var(--accent-4); font-weight: 600; }
+        .sundial-analysis {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            line-height: 1.55;
+            font-style: italic;
+            border-top: 1px dashed var(--line);
+            padding-top: 6px;
+            text-align: left;
+        }
+        .sundial-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            max-width: 220px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .activity-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            margin-top: 18px;
+            font-size: 0.8rem;
+            justify-content: center;
+            padding: 12px;
+            background: var(--bg);
+            border-radius: 6px;
+            border: 1px solid var(--line);
+        }
+        .activity-legend .lg { display: flex; align-items: center; gap: 6px; }
+        .activity-legend .swatch {
+            width: 14px; height: 14px; border-radius: 3px; display: inline-block;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* ========== 散点图 ========== */
+        #scatter-svg {
+            width: 100%;
+            height: 460px;
+            display: block;
+        }
+        .scatter-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            max-width: 260px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .scatter-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+
+        /* ========== 创新点 ========== */
+        .innovation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+        }
+        .innovation-card {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 8px;
+            padding: 18px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .innovation-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--innov-color);
+        }
+        .innovation-card .ic-num {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.78rem;
+            color: var(--innov-color);
+            letter-spacing: 0.15em;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        .innovation-card .ic-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        .innovation-card .ic-desc {
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+            line-height: 1.65;
+        }
+        .innovation-card .ic-desc strong { color: var(--innov-color); }
+
+        /* ========== 洞察 ========== */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            position: relative;
+            padding-left: 20px;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        .insight-box li strong { color: var(--accent); font-weight: 600; }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        footer .gen-time {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>图表设计 · 因果骨牌·螺旋修心·妖怪沙盘</h1>
+        <div class="subtitle">CHART &amp; DESIGN</div>
+        <div class="tagline">让图表本身成为作品 · 让信息流变成物理联动</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">/</span>
+            <span>图表设计</span>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入式数据（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row" id="kpi-row"></div>
+
+        <!-- 图表 1：八十一难因果多米诺骨牌阵列 -->
+        <section class="section">
+            <h2 class="section-title">八十一难因果多米诺骨牌阵列</h2>
+            <div class="section-sub">5 条因果链 · 16 张骨牌 · 不按时间顺序，按蝴蝶效应串联。</div>
+            <div class="section-principle" id="domino-principle"></div>
+            <div id="domino-container"></div>
+        </section>
+
+        <!-- 图表 2：螺旋式修心进度条 -->
+        <section class="section">
+            <h2 class="section-title">螺旋式修心进度条</h2>
+            <div class="section-sub">阿基米德螺旋线 · 圆心是启程 · 外圈是成佛 · 偏移线表示心性波动。</div>
+            <div class="section-principle" id="spiral-principle"></div>
+            <div class="spiral-layout">
+                <div style="position:relative;">
+                    <svg id="spiral-svg"></svg>
+                    <div class="spiral-tip" id="spiral-tip"></div>
+                </div>
+                <div class="spiral-stages" id="spiral-stages"></div>
+            </div>
+            <div class="spiral-legend">
+                <div class="lg"><span style="width:18px;height:3px;background:var(--ink);display:inline-block;"></span><span>阿基米德螺旋线</span></div>
+                <div class="lg"><span style="width:14px;height:3px;background:var(--accent);display:inline-block;"></span><span>悟空心性偏移</span></div>
+                <div class="lg"><span style="width:14px;height:3px;background:var(--accent-2);display:inline-block;"></span><span>唐僧心性偏移</span></div>
+                <div class="lg"><span style="width:12px;height:12px;background:var(--ink);border-radius:50%;display:inline-block;"></span><span>阶段点</span></div>
+            </div>
+        </section>
+
+        <!-- 图表 3：妖怪的十二时辰沙盘 -->
+        <section class="section">
+            <h2 class="section-title">妖怪的十二时辰沙盘</h2>
+            <div class="section-sub">6 个日晷 · 12 时辰 · 用时间预算解读反派策略，揭示内卷与松弛。</div>
+            <div class="section-principle" id="monster-principle"></div>
+            <div class="sundial-grid" id="sundial-grid"></div>
+            <div class="activity-legend" id="activity-legend"></div>
+        </section>
+
+        <!-- 图表 4：妖怪压力松弛对比散点图 -->
+        <section class="section">
+            <h2 class="section-title">妖怪压力松弛对比散点图</h2>
+            <div class="section-sub">x = 压力指数 · y = 松弛指数 · 重点对比白骨精（高压力低松弛）与青牛精（低压力高松弛）。</div>
+            <div style="position:relative;">
+                <svg id="scatter-svg"></svg>
+                <div class="scatter-tip" id="scatter-tip"></div>
+            </div>
+        </section>
+
+        <!-- 图表 5：设计创新点总结 -->
+        <section class="section">
+            <h2 class="section-title">设计创新点总结</h2>
+            <div class="section-sub">三大图表的设计哲学：让图表成为装置，让信息变成物理联动。</div>
+            <div class="innovation-grid" id="innovation-grid"></div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <h4>从图表设计看取经叙事</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">返回数据看板</a> ·
+        <a href="../index.html">返回首页</a>
+        <span class="gen-time" id="gen-time"></span>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/08-提升认知/元认知地图.md">元认知地图</a></div>
+    </footer>
+
+    <script>
+    // ============================================================
+    // 嵌入式 fallback 数据（fetch 失败时使用，与 JSON 完全一致）
+    // ============================================================
+    const EMBEDDED = {
+        domino_causality: {
+            design_name: "八十一难因果多米诺骨牌阵列",
+            design_principle: "不按时间顺序排列·按蝴蝶效应串联·每一张骨牌倒下都触发下一张·形成完整因果链",
+            core_insight: "整个取经计划是一台被精密设计的'因果机器'",
+            domino_chains: [
+                {
+                    chain_id: "C1",
+                    chain_name: "袈裟事件链·金箍咒的诞生",
+                    dominos: [
+                        { n: 1, title: "金池长老贪念袈裟", hardship: "失却袈裟", chapter: "第 16 回", direct_cause: "金池长老见袈裟起贪念·放火烧禅院", domino_effect: "观音收服黑熊精·获得金箍咒的实战测试数据" },
+                        { n: 2, title: "观音收服黑熊精", hardship: "—", chapter: "第 17 回", direct_cause: "悟空求助观音·观音用金箍咒收服黑熊精", domino_effect: "为后续紧箍咒的有效控制提供依据·证明金箍咒可控制妖怪" },
+                        { n: 3, title: "紧箍咒控制悟空", hardship: "贬退心猿", chapter: "第 27 回", direct_cause: "唐僧用紧箍咒控制悟空·赶走悟空", domino_effect: "悟空被赶走后·唐僧遇黄袍怪·陷入险境" },
+                        { n: 4, title: "黄袍怪事件", hardship: "宝象国捎书·金銮殿变虎", chapter: "第 28-30 回", direct_cause: "唐僧被黄袍怪所擒·八戒去花果山请回悟空", domino_effect: "悟空归队·团队建立新的权力平衡·紧箍咒成为悟空的'契约'" }
+                    ],
+                    chain_insight: "金池长老一个贪念·最终塑造了取经团队的核心管理工具"
+                },
+                {
+                    chain_id: "C2",
+                    chain_name: "五庄观事件链·道佛联盟",
+                    dominos: [
+                        { n: 1, title: "悟空推倒人参果树", hardship: "五庄观中·难活人参", chapter: "第 24-26 回", direct_cause: "悟空受八戒挑唆·推倒人参果树", domino_effect: "镇元子扣押唐僧·悟空求助观音医树" },
+                        { n: 2, title: "观音医活人参果树", hardship: "—", chapter: "第 26 回", direct_cause: "观音用甘露水医活人参果树", domino_effect: "镇元子与悟空结为兄弟·道家与佛家建立正式联盟" },
+                        { n: 3, title: "镇元子结盟", hardship: "—", chapter: "第 26 回", direct_cause: "镇元子与悟空结为兄弟", domino_effect: "为后续道家系统对取经项目的支持奠定基础·乌鸡国事件中道家出手协助" }
+                    ],
+                    chain_insight: "一次小孩式的恶作剧·最终促成了道佛两家的战略联盟"
+                },
+                {
+                    chain_id: "C3",
+                    chain_name: "红孩儿事件链·观音势力扩张",
+                    dominos: [
+                        { n: 1, title: "红孩儿抢唐僧", hardship: "号山逢怪·心猿遭害", chapter: "第 40-42 回", direct_cause: "红孩儿听说吃唐僧肉长生不老·抓走唐僧", domino_effect: "悟空求助观音·观音收红孩儿为善财童子" },
+                        { n: 2, title: "观音收红孩儿", hardship: "—", chapter: "第 42 回", direct_cause: "观音用莲花台与金箍咒收服红孩儿", domino_effect: "观音势力扩展到火云洞·并借机扩展到号山 600 里" },
+                        { n: 3, title: "观音莲花池扩张", hardship: "—", chapter: "—", direct_cause: "红孩儿被收为善财童子·号山纳入观音势力范围", domino_effect: "为后续通天河金鱼精事件埋下伏笔（金鱼精是观音莲花池逃出的）" }
+                    ],
+                    chain_insight: "一次妖魔袭击·最终为观音的势力扩张提供了契机"
+                },
+                {
+                    chain_id: "C4",
+                    chain_name: "六耳猕猴事件链·真假之辨",
+                    dominos: [
+                        { n: 1, title: "悟空再次被赶走", hardship: "—", chapter: "第 56-58 回", direct_cause: "悟空打死强盗·唐僧再次赶走悟空", domino_effect: "悟空心生怨念·六耳猕猴趁虚而入" },
+                        { n: 2, title: "六耳猕猴出现", hardship: "—", chapter: "第 58 回", direct_cause: "六耳猕猴伪装成悟空·打伤唐僧·抢走行李", domino_effect: "真假美猴王事件·谛听难辨·最终如来识破" },
+                        { n: 3, title: "如来识破六耳", hardship: "—", chapter: "第 58 回", direct_cause: "如来识破六耳猕猴·悟空一棒打死", domino_effect: "悟空内心魔障被消除·此后再无被赶走事件·团队关系稳定" }
+                    ],
+                    chain_insight: "六耳猕猴是悟空的心魔·被打死后·取经团队进入了'心猿归正'的新阶段"
+                },
+                {
+                    chain_id: "C5",
+                    chain_name: "狮驼岭事件链·佛道博弈",
+                    dominos: [
+                        { n: 1, title: "青狮精吞悟空", hardship: "狮驼岭", chapter: "第 74-77 回", direct_cause: "青狮精曾吞悟空·悟空在肚子里作怪", domino_effect: "三妖全力围剿取经团队·悟空求助如来" },
+                        { n: 2, title: "如来亲临收妖", hardship: "—", chapter: "第 77 回", direct_cause: "大鹏金翅雕是如来舅舅·如来亲临收服", domino_effect: "文殊普贤收走青狮白象·如来收大鹏·佛派势力大胜" },
+                        { n: 3, title: "佛派势力扩张", hardship: "—", chapter: "—", direct_cause: "狮驼岭三妖被收·佛派接管狮驼岭", domino_effect: "为后续灭法国·比丘国等佛派事件埋下伏笔" }
+                    ],
+                    chain_insight: "狮驼岭一役·佛派彻底压制道派·为灵山接管西牛贺洲奠定基础"
+                }
+            ],
+            total_chains: 5,
+            total_dominos: 16,
+            design_innovation: "图表即是装置·信息流等于物理联动"
+        },
+
+        spiral_progress: {
+            design_name: "螺旋式修心进度条",
+            design_principle: "阿基米德螺旋线·圆心是启程·外圈是成佛·每一圈代表一个心性阶段·轨迹偏移表示心性波动",
+            core_insight: "将'心猿意马'的抽象概念·转化为可量化的视觉轨迹",
+            spiral_stages: [
+                {
+                    stage_id: "S1",
+                    stage_name: "启程期·心猿初动",
+                    chapter_range: "第 1-13 回",
+                    loop_number: 1,
+                    wukong_emotion: "躁动·桀骜",
+                    tang_monk_emotion: "虔诚·谨慎",
+                    wukong_offset: 0.8,
+                    tang_monk_offset: 0.2,
+                    key_events: ["五行山下·皈依佛门", "收白龙马", "收八戒沙僧"],
+                    stage_summary: "悟空刚开始收敛心性·但桀骜未改"
+                },
+                {
+                    stage_id: "S2",
+                    stage_name: "风暴期·心猿意马",
+                    chapter_range: "第 14-30 回",
+                    loop_number: 2,
+                    wukong_emotion: "怒火·傲慢",
+                    tang_monk_emotion: "失望·摇摆",
+                    wukong_offset: 1.5,
+                    tang_monk_offset: 0.4,
+                    key_events: ["三打白骨精·被赶走", "黄袍怪事件·回归"],
+                    stage_summary: "悟空被赶走·心性剧烈波动·是螺旋的最大偏移点之一"
+                },
+                {
+                    stage_id: "S3",
+                    stage_name: "规范期·心猿初定",
+                    chapter_range: "第 31-58 回",
+                    loop_number: 3,
+                    wukong_emotion: "克制·谨慎",
+                    tang_monk_emotion: "信任·稳定",
+                    wukong_offset: 0.6,
+                    tang_monk_offset: 0.3,
+                    key_events: ["红孩儿事件", "车迟国斗法", "真假美猴王"],
+                    stage_summary: "六耳猕猴被打死后·悟空心魔被消除·心性稳定"
+                },
+                {
+                    stage_id: "S4",
+                    stage_name: "成熟期·心猿归正",
+                    chapter_range: "第 59-77 回",
+                    loop_number: 4,
+                    wukong_emotion: "平和·智慧",
+                    tang_monk_emotion: "依赖·平和",
+                    wukong_offset: 0.3,
+                    tang_monk_offset: 0.2,
+                    key_events: ["火焰山借扇", "狮驼岭大战", "比丘国救小孩"],
+                    stage_summary: "悟空心性趋于平和·团队进入最佳状态"
+                },
+                {
+                    stage_id: "S5",
+                    stage_name: "表现期·心猿成佛",
+                    chapter_range: "第 78-100 回",
+                    loop_number: 5,
+                    wukong_emotion: "圆满·觉悟",
+                    tang_monk_emotion: "圆满·觉悟",
+                    wukong_offset: 0.1,
+                    tang_monk_offset: 0.1,
+                    key_events: ["无底洞老鼠精", "玉华州传艺", "凌云渡脱胎·成佛"],
+                    stage_summary: "师徒皆成正果·螺旋到达最外圈·心性归零"
+                }
+            ],
+            max_offset_wukong: 1.5,
+            max_offset_tang: 0.4,
+            design_innovation: "心电图与曼陀罗的结合·用极简黑白线条·螺旋线上点缀情节符号"
+        },
+
+        monster_clock: {
+            design_name: "妖怪的十二时辰沙盘",
+            design_principle: "圆形日晷式图表·边缘是十二时辰·内圈是妖怪日常时间分配·不同妖怪时间表各异",
+            core_insight: "用'时间预算'解读反派策略·揭示底层妖怪的'内卷'与有背景妖怪的'松弛感'",
+            twelve_hours: [
+                { hour: "子时(23-1)", activity_general: "修炼·冥想" },
+                { hour: "丑时(1-3)", activity_general: "深度修炼" },
+                { hour: "寅时(3-5)", activity_general: "晨起修炼·调息" },
+                { hour: "卯时(5-7)", activity_general: "早餐·议事" },
+                { hour: "辰时(7-9)", activity_general: "训练小妖" },
+                { hour: "巳时(9-11)", activity_general: "巡山·侦查" },
+                { hour: "午时(11-13)", activity_general: "午休·设宴" },
+                { hour: "未时(13-15)", activity_general: "议事·策划" },
+                { hour: "申时(15-17)", activity_general: "部署·布局" },
+                { hour: "酉时(17-19)", activity_general: "设宴·享乐" },
+                { hour: "戌时(19-21)", activity_general: "夜巡·守卫" },
+                { hour: "亥时(21-23)", activity_general: "被悟空破门·战斗" }
+            ],
+            monster_schedules: [
+                {
+                    monster: "白骨精",
+                    category: "野怪·底层妖怪",
+                    background: "无背景",
+                    resource: "无法宝·无小妖",
+                    schedule: {
+                        "子时": "伪装练习", "丑时": "伪装练习", "寅时": "侦查唐僧动向",
+                        "卯时": "制定伪装方案", "辰时": "等待机会", "巳时": "伪装成少女",
+                        "午时": "诱骗唐僧", "未时": "失败·撤退", "申时": "重新伪装",
+                        "酉时": "伪装成老妇", "戌时": "再次失败", "亥时": "伪装成老翁·被悟空打死"
+                    },
+                    stress_index: 9.5, ease_index: 1.0,
+                    analysis: "白骨精时间表全是侦查·伪装·等待机会·机会成本极高·是典型底层妖怪的'内卷'"
+                },
+                {
+                    monster: "青牛精",
+                    category: "坐骑下凡·有背景妖怪",
+                    background: "太上老君坐骑",
+                    resource: "金刚琢·独占",
+                    schedule: {
+                        "子时": "喝茶", "丑时": "睡觉", "寅时": "睡觉",
+                        "卯时": "晨起喝茶", "辰时": "训练小妖", "巳时": "巡山（小妖代劳）",
+                        "午时": "设宴·吃凡人", "未时": "喝茶·下棋", "申时": "向凡间收贡品",
+                        "酉时": "设宴·吃凡人", "戌时": "睡觉", "亥时": "睡觉·圈子一扔即可"
+                    },
+                    stress_index: 2.0, ease_index: 9.5,
+                    analysis: "青牛精时间表大量时间喝茶·下棋·睡觉·圈子一扔即可·是典型有背景妖怪的'松弛感'"
+                },
+                {
+                    monster: "黄袍怪",
+                    category: "天将下凡·有背景妖怪",
+                    background: "二十八宿奎木狼",
+                    resource: "天将法力·内丹",
+                    schedule: {
+                        "子时": "修炼·调息", "丑时": "修炼·调息", "寅时": "修炼·调息",
+                        "卯时": "晨起·与百花羞共度", "辰时": "训练小妖", "巳时": "巡山",
+                        "午时": "设宴·吃宫女", "未时": "议事·与小妖商讨", "申时": "布防·设关卡",
+                        "酉时": "设宴·吃宫女", "戌时": "夜巡", "亥时": "被悟空破门·战斗"
+                    },
+                    stress_index: 5.0, ease_index: 6.5,
+                    analysis: "黄袍怪是天将下凡·生活相对悠闲·但天庭关系仍在·相对松弛"
+                },
+                {
+                    monster: "红孩儿",
+                    category: "妖怪世家·有背景妖怪",
+                    background: "牛魔王与铁扇公主之子",
+                    resource: "三昧真火·火云枪",
+                    schedule: {
+                        "子时": "修炼三昧真火", "丑时": "修炼三昧真火", "寅时": "晨起·训练",
+                        "卯时": "早餐·吃凡间小孩", "辰时": "训练小妖", "巳时": "巡山·侦查唐僧",
+                        "午时": "设宴·吃小孩", "未时": "议事·制定抓唐僧计划", "申时": "实施抓捕计划",
+                        "酉时": "吃唐僧肉（失败）", "戌时": "被观音收服", "亥时": "—"
+                    },
+                    stress_index: 7.0, ease_index: 5.0,
+                    analysis: "红孩儿是妖怪世家子弟·生活相对悠闲·但因父母不在身边·需独立运营·相对紧绷"
+                },
+                {
+                    monster: "六耳猕猴",
+                    category: "心魔·无形妖怪",
+                    background: "悟空心魔化身",
+                    resource: "七十二变·伪金箍棒",
+                    schedule: {
+                        "子时": "伪装成悟空", "丑时": "伪装成悟空", "寅时": "伪装成悟空",
+                        "卯时": "打伤唐僧·抢行李", "辰时": "建立假花果山", "巳时": "招兵买马·收假小妖",
+                        "午时": "设立假取经团队", "未时": "被谛听识破·逃", "申时": "求助如来·被识破",
+                        "酉时": "被悟空打死", "戌时": "—", "亥时": "—"
+                    },
+                    stress_index: 9.0, ease_index: 2.0,
+                    analysis: "六耳猕猴时间表全是伪装·逃亡·求生·是典型'冒充型'妖怪的'内卷'"
+                },
+                {
+                    monster: "大鹏金翅雕",
+                    category: "佛派背景·有背景妖怪",
+                    background: "如来舅舅",
+                    resource: "阴阳二气瓶·佛派背景",
+                    schedule: {
+                        "子时": "议事·与青狮白象商讨", "丑时": "睡觉", "寅时": "睡觉",
+                        "卯时": "晨起·吃人", "辰时": "训练妖兵", "巳时": "巡山·侦查取经团队",
+                        "午时": "设宴·吃人", "未时": "议事", "申时": "部署·设陷阱",
+                        "酉时": "设宴·吃人", "戌时": "夜巡", "亥时": "被如来收服"
+                    },
+                    stress_index: 4.0, ease_index: 8.0,
+                    analysis: "大鹏金翅雕有如来舅舅背景·生活极其悠闲·吃人是日常·直到如来亲临"
+                }
+            ],
+            design_innovation: "用'时间预算'解读反派策略·揭示底层妖怪的'内卷'与有背景妖怪的'松弛感'"
+        },
+
+        summary: {
+            domino_chains: 5,
+            domino_total: 16,
+            spiral_stages: 5,
+            max_wukong_offset: 1.5,
+            max_tang_offset: 0.4,
+            monster_schedules: 6,
+            avg_stress: 6.08,
+            avg_ease: 5.33,
+            most_stressed: "白骨精",
+            most_ease: "青牛精"
+        }
+    };
+
+    // ============================================================
+    // 常量：颜色映射
+    // ============================================================
+    // 5 条多米诺链主题色
+    const CHAIN_COLORS = {
+        "C1": "#c8463a",  // 红·袈裟·紧箍咒
+        "C2": "#5a7a3a",  // 绿·五庄观·道佛联盟
+        "C3": "#d97706",  // 橙·红孩儿·观音扩张
+        "C4": "#9b59b6",  // 紫·六耳猕猴·心魔
+        "C5": "#3a6b8c"   // 蓝·狮驼岭·佛道博弈
+    };
+    // 5 个螺旋阶段主题色（与链色呼应但区分）
+    const STAGE_COLORS = ["#7a5230", "#c8463a", "#d97706", "#5a7a3a", "#3a6b8c"];
+    // 阶段情节符号
+    const STAGE_EMOJI = ["⛰️", "💀", "👂", "🪭", "🪷"];
+    // 6 个妖怪主题色
+    const MONSTER_COLORS = {
+        "白骨精": "#c8463a",
+        "青牛精": "#5a7a3a",
+        "黄袍怪": "#d97706",
+        "红孩儿": "#e9b885",
+        "六耳猕猴": "#9b59b6",
+        "大鹏金翅雕": "#3a6b8c"
+    };
+    // 活动类型颜色
+    const ACTIVITY_COLORS = {
+        cultivate: "#9b59b6",  // 修炼·紫
+        patrol: "#3a6b8c",     // 巡山/侦查·蓝
+        feast: "#c8463a",      // 设宴/吃·红
+        council: "#d97706",    // 议事·橙
+        rest: "#6b5e4d",       // 睡觉/休息·灰
+        battle: "#1a1410",     // 战斗/被收·黑
+        disguise: "#5a7a3a",   // 伪装/逃跑·绿
+        unknown: "#d9cdb8"     // 未知·浅灰
+    };
+    const ACTIVITY_LABELS = {
+        cultivate: "修炼",
+        patrol: "巡山/侦查",
+        feast: "设宴/吃",
+        council: "议事",
+        rest: "睡觉/休息",
+        battle: "战斗/被收",
+        disguise: "伪装/逃跑",
+        unknown: "未知"
+    };
+
+    // 活动分类函数（基于关键词）
+    function classifyActivity(text) {
+        if (!text || text === "—" || text.trim() === "") return "unknown";
+        // 战斗/被收（结局类，最优先）
+        if (/被悟空|被谛听|被观音|被如来|被打死|被.*收|战斗|失败|撤退|逃/.test(text)) return "battle";
+        // 伪装/逃跑
+        if (/伪装|诱骗|求助|建立假|等待机会/.test(text)) return "disguise";
+        // 设宴/吃
+        if (/设宴|吃|早餐/.test(text)) return "feast";
+        // 巡山/侦查
+        if (/巡山|侦查/.test(text)) return "patrol";
+        // 修炼
+        if (/修炼|调息|冥想|练习三昧真火/.test(text)) return "cultivate";
+        // 睡觉/休息/悠闲
+        if (/睡觉|休息|喝茶|下棋|共度/.test(text)) return "rest";
+        // 议事/训练/部署（默认）
+        return "council";
+    }
+
+    // ============================================================
+    // 数据加载（fetch + 嵌入式 fallback）
+    // ============================================================
+    let _allLive = true;
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error("fetch failed: " + path);
+            return await res.json();
+        } catch (e) {
+            _allLive = false;
+            console.warn("[INFO] 使用嵌入数据 for", path, ":", e.message);
+            return fallback;
+        }
+    }
+
+    async function loadAll() {
+        const [dc, sp, mc, sm] = await Promise.all([
+            loadJson("../../scripts/output/data/domino_causality.json", EMBEDDED.domino_causality),
+            loadJson("../../scripts/output/data/spiral_progress.json", EMBEDDED.spiral_progress),
+            loadJson("../../scripts/output/data/monster_clock.json", EMBEDDED.monster_clock),
+            loadJson("../../scripts/output/data/chart_design_summary.json", EMBEDDED.summary)
+        ]);
+        return { domino: dc, spiral: sp, monster: mc, summary: sm };
+    }
+
+    // ============================================================
+    // 渲染：KPI 概要栏
+    // ============================================================
+    function renderKPI(s) {
+        const sel = d3.select("#kpi-row");
+        sel.selectAll("*").remove();
+        const cards = [
+            { label: "CHAINS · 因果链", value: s.domino_chains, desc: "5 条蝴蝶效应因果链" },
+            { label: "DOMINOS · 骨牌", value: s.domino_total, desc: "16 张骨牌·因果联动" },
+            { label: "STAGES · 修心阶段", value: s.spiral_stages, desc: "启程→风暴→规范→成熟→成佛" },
+            { label: "MONSTERS · 妖怪沙盘", value: s.monster_schedules, desc: "6 个妖怪·十二时辰" },
+            { label: "STRESS / EASE · 压力/松弛", value: s.avg_stress + " / " + s.avg_ease, desc: "最紧：" + s.most_stressed + " · 最松：" + s.most_ease }
+        ];
+        cards.forEach(c => {
+            const card = sel.append("div").attr("class", "kpi-card");
+            card.append("div").attr("class", "label").text(c.label);
+            card.append("div").attr("class", "value").text(c.value);
+            card.append("div").attr("class", "desc").text(c.desc);
+        });
+    }
+
+    // ============================================================
+    // 渲染：八十一难因果多米诺骨牌阵列
+    // ============================================================
+    function renderDomino(data) {
+        // 设计原则
+        d3.select("#domino-principle").html(
+            "<strong>设计原则 · </strong>" + data.design_principle +
+            " &nbsp;|&nbsp; <strong>核心洞察 · </strong>" + data.core_insight
+        );
+
+        const container = d3.select("#domino-container");
+        container.selectAll("*").remove();
+
+        data.domino_chains.forEach(chain => {
+            const color = CHAIN_COLORS[chain.chain_id] || "var(--accent)";
+            const chainDiv = container.append("div")
+                .attr("class", "domino-chain")
+                .style("--chain-color", color);
+
+            // 链头部
+            const head = chainDiv.append("div").attr("class", "domino-chain-head");
+            head.append("div").attr("class", "domino-chain-title").text(chain.chain_name);
+            head.append("div").attr("class", "domino-chain-id").text(chain.chain_id + " · " + chain.dominos.length + " 骨牌");
+
+            // 链洞察
+            chainDiv.append("div").attr("class", "domino-insight").text(chain.chain_insight);
+
+            // 骨牌流水线
+            const flow = chainDiv.append("div").attr("class", "domino-flow");
+            chain.dominos.forEach((d, i) => {
+                if (i > 0) {
+                    flow.append("div").attr("class", "domino-arrow").html("→");
+                }
+                const card = flow.append("div").attr("class", "domino-card");
+                card.append("div").attr("class", "domino-n").text(String(d.n).padStart(2, "0"));
+                card.append("div").attr("class", "domino-title").text(d.title);
+                card.append("div").attr("class", "domino-chapter").text(d.chapter);
+
+                // 八十一难标签
+                if (d.hardship && d.hardship !== "—") {
+                    card.append("div").attr("class", "domino-hardship").text("难 · " + d.hardship);
+                } else {
+                    card.append("div").attr("class", "domino-hardship empty").text("过渡事件");
+                }
+
+                card.append("div").attr("class", "domino-cause").text(d.direct_cause);
+                card.append("div").attr("class", "domino-effect").text(d.domino_effect);
+            });
+        });
+    }
+
+    // ============================================================
+    // 渲染：螺旋式修心进度条（阿基米德螺旋线）
+    // ============================================================
+    function renderSpiral(data) {
+        d3.select("#spiral-principle").html(
+            "<strong>设计原则 · </strong>" + data.design_principle +
+            " &nbsp;|&nbsp; <strong>核心洞察 · </strong>" + data.core_insight
+        );
+
+        // 渲染阶段时间线卡片
+        const stagesSel = d3.select("#spiral-stages");
+        stagesSel.selectAll("*").remove();
+        data.spiral_stages.forEach((s, i) => {
+            const color = STAGE_COLORS[i];
+            const card = stagesSel.append("div")
+                .attr("class", "spiral-stage-card")
+                .style("--stage-color", color);
+            const head = card.append("div").attr("class", "spiral-stage-head");
+            head.append("div").attr("class", "spiral-stage-name").text(s.stage_id + " · " + s.stage_name);
+            head.append("div").attr("class", "spiral-stage-chapter").text(s.chapter_range);
+            card.append("div").attr("class", "spiral-stage-emotions").html(
+                "<span class='wk'>悟空 · " + s.wukong_emotion + "</span> &nbsp;|&nbsp; " +
+                "<span class='ts'>唐僧 · " + s.tang_monk_emotion + "</span>"
+            );
+            card.append("div").attr("class", "spiral-stage-offsets").html(
+                "<span class='off-wk'>悟空偏移 " + s.wukong_offset.toFixed(1) + "</span>" +
+                "<span class='off-ts'>唐僧偏移 " + s.tang_monk_offset.toFixed(1) + "</span>"
+            );
+            card.append("div").attr("class", "spiral-stage-events").text(s.key_events.join(" · "));
+            card.append("div").attr("class", "spiral-stage-summary").text(s.stage_summary);
+        });
+
+        // 绘制螺旋 SVG
+        const svg = d3.select("#spiral-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("spiral-svg");
+        const w = Math.max(200, el.clientWidth || 560);
+        const h = 540;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const cx = w / 2;
+        const cy = h / 2 + 10;
+        const a = 14;          // 起始半径
+        const b = 3.6;         // 螺旋常数（圈间距 = 2πb ≈ 22.6）
+        const turns = 5;       // 总圈数
+        const tMax = turns * 2 * Math.PI;
+        const offsetScale = 38; // 偏移值→像素缩放
+
+        // 计算每个阶段的 θ / r / 坐标
+        // 阶段 i 的 θ = i * 2.5π（每段间隔 1.25 圈，角度递增 90°）
+        data.spiral_stages.forEach((s, i) => {
+            const t = i * 2.5 * Math.PI;
+            const r = a + b * t;
+            s._t = t;
+            s._r = r;
+            s._x = cx + r * Math.cos(t);
+            s._y = cy + r * Math.sin(t);
+            s._color = STAGE_COLORS[i];
+            s._emoji = STAGE_EMOJI[i];
+        });
+
+        // 背景同心圆（参考网格）
+        const gridG = svg.append("g").attr("opacity", 0.25);
+        [50, 100, 150].forEach(r => {
+            gridG.append("circle")
+                .attr("cx", cx).attr("cy", cy).attr("r", r)
+                .attr("fill", "none")
+                .attr("stroke", "var(--line)")
+                .attr("stroke-dasharray", "2,3");
+        });
+
+        // 绘制阿基米德螺旋线
+        const spiralPoints = [];
+        const N = 600;
+        for (let i = 0; i <= N; i++) {
+            const t = (i / N) * tMax;
+            const r = a + b * t;
+            spiralPoints.push([cx + r * Math.cos(t), cy + r * Math.sin(t)]);
+        }
+        const lineGen = d3.line().curve(d3.curveCatmullRom.alpha(0.5));
+        const spiralPath = svg.append("path")
+            .datum(spiralPoints)
+            .attr("fill", "none")
+            .attr("stroke", "var(--ink)")
+            .attr("stroke-width", 1.8)
+            .attr("opacity", 0.85)
+            .attr("d", lineGen);
+
+        // 路径动画
+        const totalLen = spiralPath.node().getTotalLength();
+        spiralPath.attr("stroke-dasharray", totalLen)
+            .attr("stroke-dashoffset", totalLen)
+            .transition()
+            .duration(1800)
+            .ease(d3.easeCubicOut)
+            .attr("stroke-dashoffset", 0);
+
+        // 圆心标注"启程"
+        svg.append("circle")
+            .attr("cx", cx).attr("cy", cy).attr("r", 5)
+            .attr("fill", "var(--ink)")
+            .style("opacity", 0)
+            .transition().delay(1800).duration(400)
+            .style("opacity", 1);
+        svg.append("text")
+            .attr("x", cx).attr("y", cy - 12)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--ink)")
+            .style("opacity", 0)
+            .text("启程")
+            .transition().delay(1900).duration(400).style("opacity", 1);
+
+        // 最外圈标注"成佛"
+        const lastStage = data.spiral_stages[data.spiral_stages.length - 1];
+        svg.append("text")
+            .attr("x", lastStage._x)
+            .attr("y", lastStage._y - 18)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("font-weight", "600")
+            .style("fill", lastStage._color)
+            .style("opacity", 0)
+            .text("成佛")
+            .transition().delay(2000).duration(400).style("opacity", 1);
+
+        // 阶段点 + 偏移线 + 标注
+        const tip = d3.select("#spiral-tip");
+        data.spiral_stages.forEach((s, i) => {
+            const g = svg.append("g").attr("opacity", 0);
+            g.transition().delay(1500 + i * 200).duration(400).attr("opacity", 1);
+
+            // 悟空偏移线（沿径向向外·红）
+            const wkLen = s.wukong_offset * offsetScale;
+            const wkEndX = s._x + wkLen * Math.cos(s._t);
+            const wkEndY = s._y + wkLen * Math.sin(s._t);
+            g.append("line")
+                .attr("x1", s._x).attr("y1", s._y)
+                .attr("x2", wkEndX).attr("y2", wkEndY)
+                .attr("stroke", "var(--accent)")
+                .attr("stroke-width", 2.5)
+                .attr("stroke-linecap", "round");
+
+            // 唐僧偏移线（沿径向向内·蓝）
+            const tsLen = s.tang_monk_offset * offsetScale;
+            const tsEndX = s._x - tsLen * Math.cos(s._t);
+            const tsEndY = s._y - tsLen * Math.sin(s._t);
+            g.append("line")
+                .attr("x1", s._x).attr("y1", s._y)
+                .attr("x2", tsEndX).attr("y2", tsEndY)
+                .attr("stroke", "var(--accent-2)")
+                .attr("stroke-width", 2)
+                .attr("stroke-linecap", "round");
+
+            // 阶段点（圆）
+            g.append("circle")
+                .attr("cx", s._x).attr("cy", s._y).attr("r", 6)
+                .attr("fill", s._color)
+                .attr("stroke", "#fff").attr("stroke-width", 2)
+                .style("cursor", "pointer")
+                .on("mouseover", function(e) {
+                    d3.select(this).transition().duration(150).attr("r", 9);
+                    tip.style("opacity", 1).html(
+                        `<div class="tip-title">${s.stage_id} · ${s.stage_name}</div>` +
+                        `<div style="font-size:0.76rem;color:#e9b885;">${s.chapter_range} · 第 ${s.loop_number} 圈</div>` +
+                        `<div style="margin-top:4px;">悟空 · <span style="color:#e9b885;">${s.wukong_emotion}</span> · 偏移 ${s.wukong_offset.toFixed(1)}</div>` +
+                        `<div>唐僧 · <span style="color:#e9b885;">${s.tang_monk_emotion}</span> · 偏移 ${s.tang_monk_offset.toFixed(1)}</div>` +
+                        `<div style="margin-top:4px;font-size:0.76rem;color:#e9b885;">${s.stage_summary}</div>`
+                    );
+                })
+                .on("mousemove", function(e) {
+                    const rect = el.parentElement.getBoundingClientRect();
+                    tip.style("left", (e.clientX - rect.left + 14) + "px")
+                       .style("top", (e.clientY - rect.top - 10) + "px");
+                })
+                .on("mouseout", function() {
+                    d3.select(this).transition().duration(150).attr("r", 6);
+                    tip.style("opacity", 0);
+                });
+
+            // 阶段符号（emoji）
+            g.append("text")
+                .attr("x", s._x + 14 * Math.cos(s._t - 0.3))
+                .attr("y", s._y + 14 * Math.sin(s._t - 0.3))
+                .attr("text-anchor", "middle")
+                .style("font-size", "1.1rem")
+                .text(s._emoji);
+
+            // 阶段 ID 标注
+            g.append("text")
+                .attr("x", s._x + 14 * Math.cos(s._t + 0.4))
+                .attr("y", s._y + 14 * Math.sin(s._t + 0.4) + 4)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.74rem")
+                .style("font-weight", "600")
+                .style("fill", s._color)
+                .style("font-family", "JetBrains Mono, monospace")
+                .text(s.stage_id);
+        });
+    }
+
+    // ============================================================
+    // 渲染：妖怪的十二时辰沙盘（6 个日晷）
+    // ============================================================
+    function renderSundials(data) {
+        d3.select("#monster-principle").html(
+            "<strong>设计原则 · </strong>" + data.design_principle +
+            " &nbsp;|&nbsp; <strong>核心洞察 · </strong>" + data.core_insight
+        );
+
+        const grid = d3.select("#sundial-grid");
+        grid.selectAll("*").remove();
+
+        const hours = data.twelve_hours;
+        // 12 时辰中文名
+        const hourNames = hours.map(h => h.hour.split("(")[0]);
+
+        // 找出最紧/最松妖怪用于高亮
+        let maxStress = -1, maxEase = -1;
+        let stressMonster = "", easeMonster = "";
+        data.monster_schedules.forEach(m => {
+            if (m.stress_index > maxStress) { maxStress = m.stress_index; stressMonster = m.monster; }
+            if (m.ease_index > maxEase) { maxEase = m.ease_index; easeMonster = m.monster; }
+        });
+
+        data.monster_schedules.forEach((m, idx) => {
+            const isStress = m.monster === stressMonster;
+            const isEase = m.monster === easeMonster;
+            let extraClass = "";
+            if (isStress) extraClass = "highlight-stress";
+            else if (isEase) extraClass = "highlight-ease";
+
+            const card = grid.append("div")
+                .attr("class", "sundial-card " + extraClass)
+                .style("position", "relative");
+
+            const svgId = "sundial-svg-" + idx;
+            card.append("svg").attr("class", "sundial-svg").attr("id", svgId);
+
+            // 绘制日晷
+            drawSundial(svgId, m, hourNames, idx);
+
+            // 信息区
+            const info = card.append("div").attr("class", "sundial-info");
+            info.append("div").attr("class", "sundial-name").text(m.monster + (isStress ? " · 最紧" : "") + (isEase ? " · 最松" : ""));
+            info.append("div").attr("class", "sundial-cat").text(m.category);
+            info.append("div").attr("class", "sundial-bg").text("背景 · " + m.background + " | 资源 · " + m.resource);
+            const idxDiv = info.append("div").attr("class", "sundial-indices");
+            idxDiv.append("span").attr("class", "stress").text("压力 " + m.stress_index.toFixed(1));
+            idxDiv.append("span").attr("class", "ease").text("松弛 " + m.ease_index.toFixed(1));
+            info.append("div").attr("class", "sundial-analysis").text(m.analysis);
+        });
+
+        // 活动图例
+        const legendSel = d3.select("#activity-legend");
+        legendSel.selectAll("*").remove();
+        Object.keys(ACTIVITY_COLORS).forEach(k => {
+            if (k === "unknown") return;
+            const lg = legendSel.append("div").attr("class", "lg");
+            lg.append("span").attr("class", "swatch").style("background", ACTIVITY_COLORS[k]);
+            lg.append("span").text(ACTIVITY_LABELS[k]);
+        });
+    }
+
+    // 绘制单个日晷（pie + arc）
+    function drawSundial(svgId, monster, hourNames, idx) {
+        const svg = d3.select("#" + svgId);
+        svg.selectAll("*").remove();
+        const el = document.getElementById(svgId);
+        const w = el.clientWidth || 240;
+        const h = 240;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const cx = w / 2;
+        const cy = h / 2;
+        const outerR = Math.max(0, Math.min(w, h) / 2 - 22);
+        const innerR = 38;
+        const labelR = outerR + 12;
+
+        // 准备 12 时辰数据
+        const pieData = hourNames.map((hn, i) => {
+            const activity = monster.schedule[hn] || "—";
+            const cat = classifyActivity(activity);
+            return { hour: hn, activity: activity, cat: cat, color: ACTIVITY_COLORS[cat], index: i };
+        });
+
+        // pie 生成器（12 等分，从子时即顶部开始，顺时针）
+        const pie = d3.pie()
+            .value(1)
+            .sort(null)
+            .startAngle(-Math.PI / 2); // 从顶部开始
+        const arc = d3.arc()
+            .innerRadius(innerR)
+            .outerRadius(outerR)
+            .padAngle(0.015)
+            .cornerRadius(2);
+
+        const arcs = pie(pieData);
+
+        // 扇形
+        const tip = d3.select(".sundial-tip");
+        svg.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("d", arc)
+            .attr("fill", d => d.data.color)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1)
+            .style("cursor", "pointer")
+            .on("mouseover", function(e, d) {
+                d3.select(this).attr("stroke", "var(--accent)").attr("stroke-width", 2);
+                showSundialTip(e, d.data, el);
+            })
+            .on("mousemove", function(e, d) {
+                showSundialTip(e, d.data, el);
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
+                hideSundialTip();
+            });
+
+        // 时辰标签（外圈）
+        arcs.forEach((a, i) => {
+            const angle = (a.startAngle + a.endAngle) / 2;
+            const lx = cx + labelR * Math.cos(angle);
+            const ly = cy + labelR * Math.sin(angle);
+            svg.append("text")
+                .attr("x", lx).attr("y", ly)
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .style("font-size", "0.7rem")
+                .style("fill", "var(--ink-soft)")
+                .style("font-family", "JetBrains Mono, monospace")
+                .text(hourNames[i].replace("时", ""));
+        });
+
+        // 内圈妖怪名
+        svg.append("text")
+            .attr("x", cx).attr("y", cy - 4)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("font-weight", "600")
+            .style("fill", MONSTER_COLORS[monster.monster] || "var(--ink)")
+            .text(monster.monster);
+        svg.append("text")
+            .attr("x", cx).attr("y", cy + 10)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.66rem")
+            .style("fill", "var(--ink-soft)")
+            .style("font-family", "JetBrains Mono, monospace")
+            .text("压" + monster.stress_index.toFixed(1) + " · 松" + monster.ease_index.toFixed(1));
+    }
+
+    // 日晷 tooltip
+    function showSundialTip(e, data, el) {
+        let tip = d3.select(".sundial-tip");
+        if (tip.empty()) {
+            tip = d3.select("body").append("div").attr("class", "sundial-tip");
+        }
+        tip.style("opacity", 1).html(
+            `<div style="color:#e9b885;font-weight:600;margin-bottom:2px;">${data.hour}</div>` +
+            `<div>活动 · ${data.activity}</div>` +
+            `<div style="font-size:0.74rem;color:#e9b885;">分类 · ${ACTIVITY_LABELS[data.cat]}</div>`
+        );
+        tip.style("left", (e.clientX + 14) + "px")
+           .style("top", (e.clientY - 10) + "px");
+    }
+    function hideSundialTip() {
+        d3.select(".sundial-tip").style("opacity", 0);
+    }
+
+    // ============================================================
+    // 渲染：妖怪压力松弛对比散点图
+    // ============================================================
+    function renderScatter(monsters) {
+        const svg = d3.select("#scatter-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("scatter-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 460;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 40, right: 60, bottom: 60, left: 60 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+
+        const x = d3.scaleLinear().domain([0, 10]).range([0, innerW]);
+        const y = d3.scaleLinear().domain([0, 10]).range([innerH, 0]);
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 背景象限提示
+        g.append("rect")
+            .attr("x", x(5)).attr("y", y(10))
+            .attr("width",Math.max(0, x(10) - x(5))).attr("height", y(5) - y(10))
+            .attr("fill", "var(--accent-4)").attr("opacity", 0.05); // 高松弛低压力·右上
+        g.append("rect")
+            .attr("x", x(0)).attr("y", y(5))
+            .attr("width",Math.max(0, x(5) - x(0))).attr("height", y(0) - y(5))
+            .attr("fill", "var(--accent)").attr("opacity", 0.05);   // 高压力低松弛·左下
+
+        // 象限标注
+        g.append("text")
+            .attr("x", x(7.5)).attr("y", y(9.5))
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.76rem")
+            .style("fill", "var(--accent-4)")
+            .style("font-style", "italic")
+            .text("松弛区 · 有背景妖怪");
+        g.append("text")
+            .attr("x", x(2.5)).attr("y", y(0.8))
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.76rem")
+            .style("fill", "var(--accent)")
+            .style("font-style", "italic")
+            .text("内卷区 · 底层妖怪");
+
+        // 网格线
+        g.append("g")
+            .selectAll("line")
+            .data([2, 4, 6, 8])
+            .enter().append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", d => y(d)).attr("y2", d => y(d))
+            .attr("stroke", "var(--line)").attr("stroke-dasharray", "3,3").attr("opacity", 0.5);
+        g.append("g")
+            .selectAll("line")
+            .data([2, 4, 6, 8])
+            .enter().append("line")
+            .attr("y1", 0).attr("y2", innerH)
+            .attr("x1", d => x(d)).attr("x2", d => x(d))
+            .attr("stroke", "var(--line)").attr("stroke-dasharray", "3,3").attr("opacity", 0.5);
+
+        // 中位线
+        g.append("line")
+            .attr("x1", x(5)).attr("x2", x(5))
+            .attr("y1", 0).attr("y2", innerH)
+            .attr("stroke", "var(--ink-soft)").attr("stroke-dasharray", "5,4").attr("opacity", 0.6);
+        g.append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", y(5)).attr("y2", y(5))
+            .attr("stroke", "var(--ink-soft)").attr("stroke-dasharray", "5,4").attr("opacity", 0.6);
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(10))
+            .selectAll("text").style("font-size", "0.74rem").style("fill", "var(--ink-soft)");
+
+        // Y 轴
+        g.append("g")
+            .call(d3.axisLeft(y).ticks(10))
+            .selectAll("text").style("font-size", "0.74rem").style("fill", "var(--ink-soft)");
+
+        // 轴标签
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("fill", "var(--accent-3)")
+            .text("Stress Index · 压力指数（→ 越大越紧绷）");
+
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerH / 2).attr("y", -42)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("fill", "var(--accent-3)")
+            .text("Ease Index · 松弛指数（→ 越大越悠闲）");
+
+        // 散点 tooltip
+        const tip = d3.select("#scatter-tip");
+
+        // 数据点
+        const pointG = g.append("g").selectAll(".scatter-point")
+            .data(monsters)
+            .enter()
+            .append("g")
+            .attr("class", "scatter-point")
+            .style("cursor", "pointer");
+
+        // 高亮圆环（白骨精与青牛精）
+        pointG.append("circle")
+            .attr("cx", d => x(d.stress_index))
+            .attr("cy", d => y(d.ease_index))
+            .attr("r", d => (d.monster === "白骨精" || d.monster === "青牛精") ? 16 : 0)
+            .attr("fill", "none")
+            .attr("stroke", d => MONSTER_COLORS[d.monster])
+            .attr("stroke-width", 1.5)
+            .attr("stroke-dasharray", "3,2")
+            .attr("opacity", 0)
+            .transition().delay(800).duration(500)
+            .attr("opacity", 0.7);
+
+        // 主圆点
+        pointG.append("circle")
+            .attr("cx", d => x(d.stress_index))
+            .attr("cy", d => y(d.ease_index))
+            .attr("r", 0)
+            .attr("fill", d => MONSTER_COLORS[d.monster])
+            .attr("stroke", "#fff").attr("stroke-width", 2)
+            .transition().delay((d, i) => 200 + i * 120).duration(500)
+            .ease(d3.easeBackOut)
+            .attr("r", d => (d.monster === "白骨精" || d.monster === "青牛精") ? 11 : 8);
+
+        // 重新绑定事件
+        pointG
+            .on("mouseover", function(e, d) {
+                d3.select(this).select("circle:nth-child(2)").transition().duration(150).attr("r", 14);
+                tip.style("opacity", 1).html(
+                    `<div class="tip-title">${d.monster}</div>` +
+                    `<div>类别 · ${d.category}</div>` +
+                    `<div>背景 · ${d.background}</div>` +
+                    `<div style="margin-top:4px;">压力指数 · <strong style="color:#e9b885;">${d.stress_index.toFixed(1)}</strong></div>` +
+                    `<div>松弛指数 · <strong style="color:#e9b885;">${d.ease_index.toFixed(1)}</strong></div>` +
+                    `<div style="margin-top:4px;font-size:0.76rem;color:#e9b885;">${d.analysis}</div>`
+                );
+            })
+            .on("mousemove", function(e) {
+                const rect = el.parentElement.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function(e, d) {
+                d3.select(this).select("circle:nth-child(2)").transition().duration(150)
+                    .attr("r", d => (d.monster === "白骨精" || d.monster === "青牛精") ? 11 : 8);
+                tip.style("opacity", 0);
+            });
+
+        // 妖怪名标注
+        pointG.append("text")
+            .attr("x", d => x(d.stress_index) + 14)
+            .attr("y", d => y(d.ease_index) + 4)
+            .style("font-size", "0.82rem")
+            .style("font-weight", "600")
+            .style("fill", d => MONSTER_COLORS[d.monster])
+            .style("opacity", 0)
+            .text(d => d.monster)
+            .transition().delay((d, i) => 600 + i * 120).duration(400)
+            .style("opacity", 1);
+
+        // 平均线
+        const avgStress = d3.mean(monsters, d => d.stress_index);
+        const avgEase = d3.mean(monsters, d => d.ease_index);
+        g.append("circle")
+            .attr("cx", x(avgStress)).attr("cy", y(avgEase))
+            .attr("r", 5)
+            .attr("fill", "var(--accent-3)")
+            .attr("stroke", "#fff").attr("stroke-width", 1.5)
+            .style("opacity", 0)
+            .transition().delay(1200).duration(400)
+            .style("opacity", 1);
+        g.append("text")
+            .attr("x", x(avgStress) + 10).attr("y", y(avgEase) - 8)
+            .style("font-size", "0.72rem")
+            .style("fill", "var(--accent-3)")
+            .style("font-style", "italic")
+            .style("opacity", 0)
+            .text(`均值 (${avgStress.toFixed(2)}, ${avgEase.toFixed(2)})`)
+            .transition().delay(1300).duration(400)
+            .style("opacity", 1);
+    }
+
+    // ============================================================
+    // 渲染：设计创新点总结
+    // ============================================================
+    function renderInnovation(domino, spiral, monster) {
+        const sel = d3.select("#innovation-grid");
+        sel.selectAll("*").remove();
+        const cards = [
+            {
+                num: "01 · DOMINO",
+                title: "多米诺骨牌 · 图表即是装置",
+                color: "#c8463a",
+                desc: `<strong>${domino.design_innovation}</strong>。 5 条链 16 张骨牌，每张骨牌的"因"是上一张的"果"，hover 时骨牌微微倾斜+阴影加深，模拟物理联动。打破时间顺序，按蝴蝶效应串联，揭示取经计划是一台被精密设计的<strong>"因果机器"</strong>。`
+            },
+            {
+                num: "02 · SPIRAL",
+                title: "螺旋修心 · 心电图与曼陀罗",
+                color: "#9b59b6",
+                desc: `<strong>${spiral.design_innovation}</strong>。 阿基米德螺旋线 r=a+bθ，圆心是启程·外圈是成佛。5 个阶段在螺旋上等距分布，每个阶段点叠加悟空（红）与唐僧（蓝）的偏移线，将<strong>"心猿意马"</strong>的抽象概念转化为可量化的视觉轨迹。`
+            },
+            {
+                num: "03 · SUNDIAL",
+                title: "妖怪沙盘 · 时间预算解读反派",
+                color: "#5a7a3a",
+                desc: `<strong>${monster.design_innovation}</strong>。 6 个圆形日晷对应 6 妖怪，12 时辰用 d3.pie + d3.arc 等分，活动按 7 类着色。白骨精全是侦查伪装（内卷），青牛精大量喝茶睡觉（松弛），<strong>用时间预算揭示底层与有背景妖怪的生存策略差异</strong>。`
+            }
+        ];
+        cards.forEach(c => {
+            const card = sel.append("div").attr("class", "innovation-card").style("--innov-color", c.color);
+            card.append("div").attr("class", "ic-num").text(c.num);
+            card.append("div").attr("class", "ic-title").text(c.title);
+            card.append("div").attr("class", "ic-desc").html(c.desc);
+        });
+    }
+
+    // ============================================================
+    // 渲染：关键洞察
+    // ============================================================
+    function renderInsights() {
+        const insights = [
+            `整个取经计划是一台被精密设计的<strong>"因果机器"</strong>——金池长老一个贪念，最终塑造了取经团队的核心管理工具（紧箍咒）。`,
+            `金池长老一个贪念·最终塑造了取经团队的<strong>核心管理工具（紧箍咒）</strong>，骨牌效应跨越 14 回合。`,
+            `六耳猕猴被打死后·取经团队进入了<strong>"心猿归正"的新阶段</strong>（螺旋最大偏移点），此后悟空再无被赶走事件。`,
+            `白骨精时间表全是<strong>侦查·伪装·等待机会</strong>，机会成本极高，是典型底层妖怪的"内卷"。`,
+            `青牛精大量时间<strong>喝茶·下棋·睡觉</strong>，圈子一扔即可，是典型有背景妖怪的"松弛感"。`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(t => ul.append("li").html(t));
+    }
+
+    // ============================================================
+    // 主流程
+    // ============================================================
+    async function main() {
+        const data = await loadAll();
+        window.__data = data;
+
+        // 更新数据源提示
+        const noticeEl = document.getElementById("dataSource");
+        if (_allLive) {
+            noticeEl.className = "notice live";
+            noticeEl.innerHTML = "数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）";
+        } else {
+            noticeEl.innerHTML = "数据源：嵌入式数据（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）";
+        }
+
+        renderKPI(data.summary);
+        renderDomino(data.domino);
+        renderSpiral(data.spiral);
+        renderSundials(data.monster);
+        renderScatter(data.monster.monster_schedules);
+        renderInnovation(data.domino, data.spiral, data.monster);
+        renderInsights();
+
+        // 生成时间
+        document.getElementById("gen-time").textContent =
+            "数据生成时间：" + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
+    }
+
+    // 窗口缩放重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__data) {
+                renderSpiral(window.__data.spiral);
+                renderScatter(window.__data.monster.monster_schedules);
+                // 日晷重绘
+                const hours = window.__data.monster.twelve_hours;
+                const hourNames = hours.map(h => h.hour.split("(")[0]);
+                window.__data.monster.monster_schedules.forEach((m, idx) => {
+                    drawSundial("sundial-svg-" + idx, m, hourNames, idx);
+                });
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

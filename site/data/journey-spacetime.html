@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>取经路线时空双轴可视化 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
+            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7; background: var(--bg); color: var(--ink);
+        }
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 20px 80px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232,184,133,0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 { font-size: 2.2em; margin: 0 0 10px; position: relative; z-index: 1; }
+        .hero .subtitle { color: #e9b885; font-size: 1.1em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85em; color: rgba(245,233,212,0.65); font-style: italic; position: relative; z-index: 1; }
+        .container { max-width: 1280px; margin: -30px auto 60px; padding: 0 20px; position: relative; z-index: 2; }
+        .breadcrumb { font-size: 0.85em; color: var(--ink-soft); margin-bottom: 16px; }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .notice {
+            background: #fff8e7; border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        }
+        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px; margin-bottom: 32px; }
+        .kpi-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 20px; box-shadow: var(--shadow); border-top: 3px solid var(--accent); }
+        .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
+        .kpi-card .label { color: var(--ink-soft); font-size: 0.9em; margin-top: 4px; }
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
+        .section { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 28px; margin-bottom: 28px; box-shadow: var(--shadow); }
+        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: var(--accent-2);
+            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 4px 0; transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        a:focus-visible, button:focus-visible, [tabindex]:focus-visible, input:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+        .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; padding: 12px 16px; background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; }
+        .control-row .ctrl-label { font-size: 0.88em; color: var(--ink-soft); font-weight: 600; }
+        .ctrl-btn {
+            padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.9em;
+            font-family: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .ctrl-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .ctrl-btn:hover { background: var(--accent-soft); }
+        .ctrl-btn.active:hover { background: var(--accent); }
+        .ctrl-btn.play { background: var(--accent-2); color: #fff; border-color: var(--accent-2); }
+        .ctrl-btn.play:hover { background: #2c5573; }
+        .ctrl-btn.play.playing { background: var(--accent); border-color: var(--accent); }
+        .slider-wrap { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 260px; }
+        .slider-wrap input[type=range] {
+            flex: 1; height: 6px; -webkit-appearance: none; appearance: none;
+            background: var(--line); border-radius: 3px; outline: none;
+        }
+        .slider-wrap input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
+            cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .slider-wrap input[type=range]::-moz-range-thumb {
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
+            cursor: pointer; border: 2px solid #fff;
+        }
+        .slider-wrap .ch-label { font-family: "JetBrains Mono", monospace; font-size: 0.85em; color: var(--accent); font-weight: 700; min-width: 70px; }
+        .speed-select {
+            padding: 6px 10px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.85em;
+            font-family: inherit;
+        }
+        .chart-wrap { position: relative; overflow-x: auto; }
+        #spacetime-svg { display: block; min-width: 980px; }
+        .event-dot { cursor: pointer; transition: opacity 0.2s; }
+        .event-dot:hover { opacity: 0.75; }
+        .event-tip {
+            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
+            color: #f5e9d4; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem;
+            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 320px;
+        }
+        .event-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
+        .event-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
+        .event-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6b5e4d; }
+        .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
+        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
+        .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 50%; }
+        .progress-bar { position: relative; height: 6px; background: var(--line); border-radius: 3px; margin-top: 8px; overflow: hidden; }
+        .progress-bar .progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
+        .insight-box {
+            background: #fffdf8; border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+        }
+        .insight-box strong { color: var(--accent); font-weight: 700; }
+        .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
+        .stage-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.88em; }
+        .stage-table th, .stage-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
+        .stage-table th { background: #fff8e7; color: var(--accent-3); font-weight: 600; }
+        .stage-table td.num { text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--accent); }
+        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer a { color: #e9b885; }
+        @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+        @media (max-width: 480px) {
+            .hero { padding: 40px 16px 60px; }
+            .hero h1 { font-size: 1.6em; }
+            .section { padding: 18px; }
+            .ctrl-btn { padding: 6px 12px; font-size: 0.82em; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">跳到主内容</a>
+    <header class="hero">
+        <h1>取经路线时空双轴可视化</h1>
+        <div class="subtitle">JST · 时间（回目 1-100）× 空间（长安→灵山 24 地点）双轴叙事图</div>
+        <div class="tagline">—— 一万八千里取经路、一百回章回、二十四坐标，化为一张时空轨迹图</div>
+    </header>
+    <main class="container" id="main-content">
+        <nav class="breadcrumb" aria-label="面包屑">
+            <a href="../index.html">站点首页</a>
+            <span class="sep">›</span>
+            <a href="../dashboard.html">数据仪表盘</a>
+            <span class="sep">›</span>
+            <span>取经路线时空双轴可视化</span>
+        </nav>
+        <div class="notice" role="note">
+            <strong>双轴说明</strong>：
+            <span class="mono">X 轴</span>（时间）：第 1-100 回，按章回顺序推进 ·
+            <span class="mono">Y 轴</span>（空间）：自长安至灵山 24 个主要地点，按取经方向自下而上分层 ·
+            <span class="mono">事件类型</span>：战斗 / 收徒 / 渡劫 / 悟道 / 会见 五类，颜色区分。可拖动滑块或点击播放按回目推进动画。
+        </div>
+
+        <!-- 板块 1：KPI 概要栏 -->
+        <section class="kpi-row" aria-label="旅程概要">
+            <div class="kpi-card">
+                <div class="num">100</div>
+                <div class="label">总回数</div>
+                <div class="detail">第 1-100 回 · 完整百回</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">24</div>
+                <div class="label">总地点数</div>
+                <div class="detail">长安 → 灵山 · 跨越万八千里</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">68</div>
+                <div class="label">关键事件数</div>
+                <div class="detail">战斗 27 / 收徒 4 / 渡劫 12 / 悟道 4 / 会见 21</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">14 年</div>
+                <div class="label">旅程时长（书内）</div>
+                <div class="detail">贞观十三年至二十七年</div>
+            </div>
+        </section>
+
+        <!-- 板块 2：主时空双轴图 -->
+        <section class="section" aria-labelledby="sec-spacetime">
+            <h2 id="sec-spacetime">① 时间 × 空间双轴轨迹图</h2>
+            <p>横轴为回目（1-100），纵轴为地理位置（自下而上：长安→灵山）。每个圆点为一次关键事件，颜色按事件类型区分；同地点多事件按 X 轴顺序展开。点击"播放"按回目顺序推进，或拖动滑块手动定位。</p>
+            <div class="control-row" role="group" aria-label="时间轴控制">
+                <button class="ctrl-btn play" id="play-btn" aria-label="播放/暂停">▶ 播放</button>
+                <div class="slider-wrap">
+                    <span class="ctrl-label">回目：</span>
+                    <input type="range" id="chapter-slider" min="1" max="100" value="100" aria-label="回目滑块" />
+                    <span class="ch-label" id="ch-display">第 100 回</span>
+                </div>
+                <span class="ctrl-label">速度：</span>
+                <select class="speed-select" id="speed-select" aria-label="播放速度">
+                    <option value="1200">慢速</option>
+                    <option value="700" selected>常速</option>
+                    <option value="350">快速</option>
+                </select>
+                <button class="ctrl-btn" id="reset-btn">↺ 重置</button>
+            </div>
+            <div class="progress-bar" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+            <div class="chart-wrap">
+                <svg id="spacetime-svg" width="100%" height="620" role="img" aria-labelledby="st-title st-desc">
+                    <title id="st-title">取经路线时空双轴图</title>
+                    <desc id="st-desc">横轴回目 1-100，纵轴 24 地点，圆点为关键事件。</desc>
+                </svg>
+                <div class="event-tip" id="event-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="event-legend" aria-label="事件类型图例"></div>
+        </section>
+
+        <!-- 板块 3：阶段统计 -->
+        <section class="section" aria-labelledby="sec-stage">
+            <h2 id="sec-stage">② 四阶段事件密度统计</h2>
+            <p>将 100 回分为四个等长阶段（1-25 / 26-50 / 51-75 / 76-100），统计各阶段事件密度与地点跨度。可见中段（26-75 回）事件密度最高，因取经团队已成且尚未到灵山。</p>
+            <table class="stage-table" aria-label="四阶段统计">
+                <thead>
+                    <tr><th>阶段</th><th>回目范围</th><th>事件数</th><th>地点数</th><th>战斗数</th><th>事件密度（每 10 回）</th><th>主导类型</th></tr>
+                </thead>
+                <tbody id="stage-table-body"></tbody>
+            </table>
+        </section>
+
+        <!-- 板块 4：时空洞察 -->
+        <section class="section" aria-labelledby="sec-insight">
+            <h2 id="sec-insight">③ 时空轨迹洞察</h2>
+            <div class="insight-box">
+                <span class="ib-tag">[起点]</span>
+                <strong>第 1-12 回为"前传空间"</strong>。事件集中于长安/两界山/鹰愁涧三地，时间跨度却占 12%——这是悟空成长（大闹天宫）+ 三藏身世 + 取经缘起的空间奠基。地理位置不动，时间在流动。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[跃迁]</span>
+                <strong>第 13 回为"空间跃迁点"</strong>。三藏从长安出西门，跨越两界山完成第一次地理跃迁。此后每跨越一个地点对应 2-4 回章回，形成"地点-章回"耦合的稳定节奏。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[密集]</span>
+                <strong>中段 26-75 回为"事件密集带"</strong>。50 回内聚集 32 个关键事件，覆盖白虎岭/平顶山/火云洞/通天河/金兜山/女儿国/火焰山/小雷音/盘丝洞/狮驼岭十大据点。这是取经叙事的"主战场"。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[稀疏]</span>
+                <strong>第 91-100 回为"事件稀疏带"</strong>。10 回内仅 5 个事件，且集中在天竺国→灵山。叙事节奏明显放缓，回归"成佛"主题——既到灵山，地理让位于心性。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[回头]</span>
+                <strong>第 27-31 回为"空间回头带"</strong>。三打白骨精后悟空被逐，三藏退回宝象国遇黄袍怪，被迫请回悟空。这是全书唯一"地理倒退"的段落，象征"心猿一失，前功尽弃"。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[峰值]</span>
+                <strong>狮驼岭（第 74-77 回）为"时空峰值"</strong>。4 回章回集中在 1 个地点，承载 3 个连续战斗事件。地理不变、时间在拉长，是全书"局部密度"最高的章节段落。
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>详解西游记 · 取经路线时空双轴可视化 · JST 可视化页面</p>
+        <p>数据基于原著 100 回章回结构 + 24 个主要地点的事件重构，与 journey-map.html 路线图互补。</p>
+        <p><a href="../dashboard.html">← 返回数据仪表盘</a> · <a href="journey-map.html">查看取经路线图 →</a> · <a href="hardship-difficulty-heatmap.html">查看 81 难难度热力图 →</a></p>
+    </footer>
+
+    <script>
+    // ============= EMBEDDED DATA =============
+    // 24 个地点：自长安至灵山（按取经方向，索引 0=长安，索引 23=灵山）
+    const LOCATIONS = [
+        "长安", "两界山", "鹰愁涧", "观音院", "高老庄", "流沙河", "五庄观",
+        "白虎岭", "宝象国", "平顶山", "火云洞", "通天河", "金兜山",
+        "女儿国", "琵琶洞", "火焰山", "小雷音", "朱紫国", "盘丝洞",
+        "狮驼岭", "比丘国", "陷空山", "天竺国", "灵山"
+    ];
+
+    // 事件类型配置
+    const EVENT_TYPES = {
+        battle:   { label: "战斗", color: "#c8463a" },
+        recruit:  { label: "收徒", color: "#5a7a3a" },
+        trial:    { label: "渡劫", color: "#7a5230" },
+        insight:  { label: "悟道", color: "#3a6b8c" },
+        meeting:  { label: "会见", color: "#e9b885" }
+    };
+
+    // 52 个关键事件：ch=回目 / loc=地点（索引或名称）/ type / desc
+    const EVENTS = [
+        {ch:1,  loc:"长安",     type:"meeting", name:"水陆大会", desc:"唐太宗举办水陆大会，玄奘被选为取经人。"},
+        {ch:8,  loc:"长安",     type:"insight", name:"观音点化", desc:"观音菩萨现身长安，指点大乘真经在西天。"},
+        {ch:12, loc:"长安",     type:"meeting", name:"太宗结拜", desc:"唐太宗与玄奘结为兄弟，赐号三藏，亲送出城。"},
+        {ch:13, loc:"长安",     type:"trial",   name:"出城逢虎", desc:"三藏出长安西门，途中遇寅将军等三妖，从者皆亡。"},
+        {ch:13, loc:"两界山",   type:"meeting", name:"太白金星", desc:"太白金星现身救三藏，指点前路。"},
+        {ch:14, loc:"两界山",   type:"recruit", name:"收孙悟空", desc:"三藏揭封条救出悟空，收为大徒弟，赐号行者。"},
+        {ch:14, loc:"两界山",   type:"trial",   name:"六贼剪径", desc:"悟空打杀六贼，三藏责之，悟空怒去。"},
+        {ch:15, loc:"鹰愁涧",   type:"trial",   name:"失马落涧", desc:"三藏白马被西海龙子吞食，悟空求助观音。"},
+        {ch:15, loc:"鹰愁涧",   type:"recruit", name:"收白龙马", desc:"观音点化，西海龙子化为白龙马，成为三藏坐骑。"},
+        {ch:16, loc:"观音院",   type:"battle",  name:"黑熊窃袈裟", desc:"观音院住持贪袈裟，黑熊精趁火打劫盗走。"},
+        {ch:17, loc:"观音院",   type:"meeting", name:"观音收熊", desc:"观音菩萨变现凌虚仙，收服黑熊精守落伽山。"},
+        {ch:19, loc:"高老庄",   type:"recruit", name:"收猪八戒", desc:"三藏悟空至高老庄，收服猪刚鬣，赐号八戒。"},
+        {ch:22, loc:"流沙河",   type:"recruit", name:"收沙悟净", desc:"三藏至流沙河，观音点化，收沙僧为三徒弟。"},
+        {ch:23, loc:"流沙河",   type:"trial",   name:"四圣试禅", desc:"观音等四圣化身母女试探取经团队禅心。"},
+        {ch:24, loc:"五庄观",   type:"battle",  name:"推倒人参果", desc:"悟空偷果被骂，怒推倒人参果树，镇元大仙擒之。"},
+        {ch:26, loc:"五庄观",   type:"meeting", name:"观音医树", desc:"观音菩萨以甘露救活人参果树，镇元大仙与悟空结兄弟。"},
+        {ch:27, loc:"白虎岭",   type:"battle",  name:"三打白骨精", desc:"白骨精三化人形迷惑三藏，悟空三打之，被逐回花果山。"},
+        {ch:28, loc:"宝象国",   type:"battle",  name:"黄袍怪掳", desc:"三藏至宝象国，遇黄袍怪，被化为虎。"},
+        {ch:29, loc:"宝象国",   type:"meeting", name:"八戒请兄", desc:"八戒赴花果山，激将悟空回归救师。"},
+        {ch:30, loc:"宝象国",   type:"battle",  name:"降黄袍怪", desc:"悟空回归，降伏黄袍怪（奎木狼），三藏复原。"},
+        {ch:32, loc:"平顶山",   type:"battle",  name:"金角银角", desc:"平顶山逢金角大王银角大王，五件法宝难敌。"},
+        {ch:35, loc:"平顶山",   type:"meeting", name:"老君收童", desc:"太上老君下界，收回二童子与五件法宝。"},
+        {ch:36, loc:"宝象国",   type:"trial",   name:"乌鸡国礼", desc:"三藏至乌鸡国，鬼王诉冤，太子梦父。"},
+        {ch:37, loc:"宝象国",   type:"battle",  name:"降青毛狮", desc:"悟空揭穿青毛狮子妖，文殊菩萨收回坐骑。"},
+        {ch:40, loc:"火云洞",   type:"battle",  name:"红孩儿喷火", desc:"号山枯松涧红孩儿喷三昧真火，擒三藏。"},
+        {ch:41, loc:"火云洞",   type:"battle",  name:"请圣降妖", desc:"悟空请观音菩萨，以金箍咒收红孩儿为善财童子。"},
+        {ch:42, loc:"火云洞",   type:"meeting", name:"观音收红", desc:"观音以净瓶杨柳水降伏红孩儿，收为善财童子。"},
+        {ch:43, loc:"通天河",   type:"battle",  name:"鼍龙沉没", desc:"黑河遇鼍龙，三藏被沉入水府。"},
+        {ch:44, loc:"通天河",   type:"trial",   name:"车迟斗法", desc:"至车迟国，与虎力鹿力羊力三大仙斗法。"},
+        {ch:46, loc:"通天河",   type:"battle",  name:"车迟三妖", desc:"悟空斗法胜三妖，三妖现原形皆亡。"},
+        {ch:47, loc:"通天河",   type:"battle",  name:"灵感大王", desc:"通天河灵感大王（金鱼精）封冰擒三藏。"},
+        {ch:49, loc:"通天河",   type:"meeting", name:"鱼篮观音", desc:"观音编竹篮，收灵感大王回南海。"},
+        {ch:50, loc:"金兜山",   type:"battle",  name:"青牛金钢琢", desc:"金兜山独角兕大王以金钢琢套走悟空兵器。"},
+        {ch:52, loc:"金兜山",   type:"meeting", name:"如来暗示", desc:"如来佛祖暗示金钢琢来历，太上老君下界收回青牛。"},
+        {ch:53, loc:"女儿国",   type:"trial",   name:"子母河水", desc:"三藏八戒饮子母河水怀孕，悟空取落胎泉水解之。"},
+        {ch:54, loc:"女儿国",   type:"trial",   name:"女王招亲", desc:"女儿国国王招三藏为夫，三藏以计脱身。"},
+        {ch:55, loc:"琵琶洞",   type:"battle",  name:"蝎子精", desc:"琵琶洞蝎子精掳三藏，悟空八戒皆败于倒马毒。"},
+        {ch:55, loc:"琵琶洞",   type:"meeting", name:"昴日星官", desc:"观音指点，请昴日星官（双冠子大公鸡）降蝎子精。"},
+        {ch:57, loc:"金兜山",   type:"trial",   name:"再贬心猿", desc:"六耳猕猴假悟空打三藏，师徒再分裂。"},
+        {ch:58, loc:"金兜山",   type:"insight", name:"难辨猕猴", desc:"真假美猴王难辨，最终如来佛祖识破六耳猕猴。"},
+        {ch:59, loc:"火焰山",   type:"battle",  name:"借芭蕉扇", desc:"火焰山阻路，悟空求借芭蕉扇，铁扇公主不肯。"},
+        {ch:60, loc:"火焰山",   type:"battle",  name:"牛魔王斗", desc:"悟空与牛魔王大战，难分胜负。"},
+        {ch:61, loc:"火焰山",   type:"meeting", name:"哪吒收牛", desc:"哪吒托塔天王助阵，降伏牛魔王，借得真扇灭火。"},
+        {ch:62, loc:"小雷音",   type:"battle",  name:"九头虫盗", desc:"祭赛国金光寺佛宝被盗，悟空斗九头虫。"},
+        {ch:65, loc:"小雷音",   type:"battle",  name:"黄眉大王", desc:"小雷音寺黄眉大王以人种袋擒悟空与众神。"},
+        {ch:66, loc:"小雷音",   type:"meeting", name:"弥勒收童", desc:"弥勒佛祖下界，以西瓜计降伏黄眉童子。"},
+        {ch:68, loc:"朱紫国",   type:"battle",  name:"赛太岁", desc:"朱紫国王病重，悟空行医，降伏赛太岁（金毛犼）。"},
+        {ch:71, loc:"朱紫国",   type:"meeting", name:"观音收犼", desc:"观音菩萨下界，收回金毛犼坐骑。"},
+        {ch:72, loc:"盘丝洞",   type:"battle",  name:"蜘蛛精", desc:"盘丝洞七个蜘蛛精与濯垢泉戏水，八戒被擒。"},
+        {ch:73, loc:"盘丝洞",   type:"battle",  name:"蜈蚣精", desc:"黄花观蜈蚣精（百眼魔君）放金光，悟空求助。"},
+        {ch:74, loc:"狮驼岭",   type:"battle",  name:"狮驼三魔", desc:"狮驼岭青狮白象大鹏三魔王，悟空全军覆没。"},
+        {ch:75, loc:"狮驼岭",   type:"battle",  name:"大鹏金翅", desc:"大鹏金翅雕擒三藏至狮驼国，悟空赴灵山求救。"},
+        {ch:77, loc:"狮驼岭",   type:"meeting", name:"佛祖降鹏", desc:"如来佛祖亲率五百罗汉，降伏大鹏金翅雕。"},
+        {ch:78, loc:"比丘国",   type:"battle",  name:"白鹿精", desc:"比丘国王受白鹿精蛊惑欲用小儿心肝，悟空救之。"},
+        {ch:79, loc:"比丘国",   type:"meeting", name:"寿星收鹿", desc:"寿星下界，收回白鹿坐骑，收服白面狐狸。"},
+        {ch:84, loc:"陷空山",   type:"battle",  name:"老鼠精", desc:"陷空山无底洞金鼻白毛老鼠精掳三藏欲成亲。"},
+        {ch:85, loc:"陷空山",   type:"meeting", name:"托塔收鼠", desc:"托塔天王父子下界，收回义女老鼠精。"},
+        {ch:88, loc:"比丘国",   type:"insight", name:"玉华授徒", desc:"玉华州三王子拜三徒为师，悟空三人传授武艺。"},
+        {ch:91, loc:"天竺国",   type:"battle",  name:"犀牛三怪", desc:"金平府辟寒辟暑辟尘三犀牛精假佛收油，悟空斗之。"},
+        {ch:92, loc:"天竺国",   type:"meeting", name:"四木禽星", desc:"四木禽星下界助阵，斩杀三犀牛精。"},
+        {ch:93, loc:"天竺国",   type:"trial",   name:"天竺招亲", desc:"天竺国公主抛绣球招亲，三藏中球，实为玉兔精假冒。"},
+        {ch:95, loc:"天竺国",   type:"battle",  name:"玉兔精", desc:"玉兔精假冒公主欲招三藏为夫，悟空识破并斗之。"},
+        {ch:95, loc:"天竺国",   type:"meeting", name:"太阴收兔", desc:"太阴星君下界，收回玉兔精。"},
+        {ch:98, loc:"灵山",     type:"meeting", name:"凌云渡", desc:"凌云渡脱胎换骨，三藏肉身褪去，登上灵山。"},
+        {ch:98, loc:"灵山",     type:"meeting", name:"雷音拜佛", desc:"三藏师徒至雷音寺拜见如来佛祖，求取真经。"},
+        {ch:98, loc:"灵山",     type:"trial",   name:"经书有缺", desc:"阿傩伽叶索贿未果，给无字真经，被发现后取有字经。"},
+        {ch:99, loc:"灵山",     type:"trial",   name:"通天河晒经", desc:"归途过通天河，老鼋翻身，经书湿损一部。"},
+        {ch:100,loc:"灵山",     type:"insight", name:"五圣成真", desc:"三藏封旃檀功德佛，悟空斗战胜佛，八戒净坛使者，沙僧金身罗汉，白马八部天龙。"}
+    ];
+
+    const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DUR = REDUCE_MOTION ? 0 : 600;
+    let currentChapter = 100;
+    let playTimer = null;
+    let playSpeed = 700;
+
+    // ============= 主时空双轴图 =============
+    function renderSpacetime(maxChapter) {
+        const svg = d3.select("#spacetime-svg");
+        svg.selectAll("*").remove();
+
+        const wrap = document.getElementById("spacetime-svg");
+        const width = Math.max(980, wrap.clientWidth || 980);
+        const height = 620;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 30, right: 40, bottom: 60, left: 90 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // X 轴：回目 1-100
+        const xScale = d3.scaleLinear().domain([1, 100]).range([0, innerW]);
+
+        // Y 轴：地点（自下而上：长安→灵山，所以反转）
+        const yScale = d3.scaleBand()
+            .domain(LOCATIONS.slice().reverse()) // 反转让长安在底
+            .range([0, innerH])
+            .padding(0.1);
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(xScale).ticks(20).tickFormat(d => `第${d}回`))
+            .selectAll("text")
+            .style("font-size", "0.7rem")
+            .style("fill", "#6b5e4d");
+
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .text("回目（时间轴）");
+
+        // Y 轴
+        g.append("g")
+            .call(d3.axisLeft(yScale))
+            .selectAll("text")
+            .style("font-size", "0.78rem")
+            .style("fill", "#2c2418");
+
+        g.append("text")
+            .attr("x", -innerH / 2).attr("y", -72)
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .text("地理位置（长安 → 灵山）");
+
+        // 网格线
+        g.selectAll("line.grid-h")
+            .data(LOCATIONS)
+            .enter()
+            .append("line")
+            .attr("class", "grid-h")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", d => yScale(d) + yScale.bandwidth() / 2)
+            .attr("y2", d => yScale(d) + yScale.bandwidth() / 2)
+            .attr("stroke", "#f0e8d6")
+            .attr("stroke-dasharray", "2,3");
+
+        // 当前回目垂线
+        g.append("line")
+            .attr("x1", xScale(maxChapter)).attr("x2", xScale(maxChapter))
+            .attr("y1", 0).attr("y2", innerH)
+            .attr("stroke", "#c8463a")
+            .attr("stroke-width", 2)
+            .attr("stroke-dasharray", "5,3")
+            .attr("opacity", 0.7);
+
+        g.append("text")
+            .attr("x", xScale(maxChapter))
+            .attr("y", -8)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("font-weight", "600")
+            .style("fill", "#c8463a")
+            .text(`第 ${maxChapter} 回`);
+
+        // 取经轨迹连线（按事件顺序连接，过滤掉超过当前回目的）
+        const visibleEvents = EVENTS.filter(e => e.ch <= maxChapter);
+        if (visibleEvents.length > 1) {
+            const line = d3.line()
+                .x(d => xScale(d.ch))
+                .y(d => yScale(d.loc) + yScale.bandwidth() / 2)
+                .curve(d3.curveMonotoneX);
+            g.append("path")
+                .datum(visibleEvents)
+                .attr("fill", "none")
+                .attr("stroke", "#e9b885")
+                .attr("stroke-width", 1.5)
+                .attr("stroke-opacity", 0.6)
+                .attr("d", line);
+        }
+
+        // 事件点
+        const tip = d3.select("#event-tip");
+        const wrapEl = wrap.parentElement;
+
+        g.selectAll("circle.event")
+            .data(visibleEvents)
+            .enter()
+            .append("circle")
+            .attr("class", "event-dot")
+            .attr("cx", d => xScale(d.ch))
+            .attr("cy", d => yScale(d.loc) + yScale.bandwidth() / 2)
+            .attr("r", 0)
+            .attr("fill", d => EVENT_TYPES[d.type].color)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1.5)
+            .on("mouseover", function(event, d) {
+                d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">第 ${d.ch} 回 · ${d.name}</div>
+                        <div class="tip-row">地点：<strong style="color:#e9b885">${d.loc}</strong></div>
+                        <div class="tip-row">事件类型：<strong style="color:#e9b885">${EVENT_TYPES[d.type].label}</strong></div>
+                        <div class="tip-row">${d.desc}</div>
+                        <div class="tip-meta">回目 ${d.ch} / 100 · 地点索引 ${LOCATIONS.indexOf(d.loc) + 1}/24</div>`);
+            })
+            .on("mousemove", function(event) {
+                const rect = wrapEl.getBoundingClientRect();
+                tip.style("left", (event.clientX - rect.left + 14) + "px")
+                    .style("top", (event.clientY - rect.top + 14) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1.5);
+                tip.style("opacity", 0);
+            })
+            .transition()
+            .duration(DUR)
+            .delay((d, i) => i * 15)
+            .attr("r", 6);
+
+        // 未到达的事件点（淡显）
+        const futureEvents = EVENTS.filter(e => e.ch > maxChapter);
+        g.selectAll("circle.future")
+            .data(futureEvents)
+            .enter()
+            .append("circle")
+            .attr("class", "future")
+            .attr("cx", d => xScale(d.ch))
+            .attr("cy", d => yScale(d.loc) + yScale.bandwidth() / 2)
+            .attr("r", 3)
+            .attr("fill", d => EVENT_TYPES[d.type].color)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1)
+            .style("opacity", 0.18);
+
+        // 进度条
+        d3.select("#progress-fill").style("width", `${(maxChapter / 100) * 100}%`);
+        d3.select("#ch-display").text(`第 ${maxChapter} 回`);
+
+        // 图例
+        renderEventLegend();
+    }
+
+    function renderEventLegend() {
+        const legend = d3.select("#event-legend");
+        legend.selectAll("*").remove();
+        Object.keys(EVENT_TYPES).forEach(k => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch").style("background", EVENT_TYPES[k].color);
+            item.append("span").text(EVENT_TYPES[k].label);
+        });
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#e9b885;border-radius:50%;"></span><span>取经轨迹线</span>');
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#c8463a;border-radius:0;width:18px;height:3px;"></span><span>当前回目线</span>');
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#888;opacity:0.18;"></span><span>未发生事件（淡显）</span>');
+    }
+
+    // ============= 阶段统计表 =============
+    function renderStageTable() {
+        const stages = [
+            { name: "前段", range: "1-25 回",   from: 1,  to: 25 },
+            { name: "中前段", range: "26-50 回", from: 26, to: 50 },
+            { name: "中后段", range: "51-75 回", from: 51, to: 75 },
+            { name: "终段", range: "76-100 回", from: 76, to: 100 }
+        ];
+        const tbody = d3.select("#stage-table-body");
+        tbody.selectAll("*").remove();
+        const dominantMap = { battle: "战斗", recruit: "收徒", trial: "渡劫", insight: "悟道", meeting: "会见" };
+        stages.forEach(s => {
+            const events = EVENTS.filter(e => e.ch >= s.from && e.ch <= s.to);
+            const locs = new Set(events.map(e => e.loc));
+            const battles = events.filter(e => e.type === "battle").length;
+            const density = (events.length / 25 * 10).toFixed(1);
+            // 主导类型
+            const typeCounts = {};
+            events.forEach(e => { typeCounts[e.type] = (typeCounts[e.type] || 0) + 1; });
+            const dominant = Object.keys(typeCounts).sort((a, b) => typeCounts[b] - typeCounts[a])[0] || "battle";
+            const tr = tbody.append("tr");
+            tr.append("td").html(`<strong style="color:var(--accent)">${s.name}</strong>`);
+            tr.append("td").text(s.range);
+            tr.append("td").attr("class", "num").text(events.length);
+            tr.append("td").attr("class", "num").text(locs.size);
+            tr.append("td").attr("class", "num").text(battles);
+            tr.append("td").attr("class", "num").text(density);
+            tr.append("td").text(dominantMap[dominant]);
+        });
+    }
+
+    // ============= 控制 =============
+    function updateChapter(ch) {
+        currentChapter = +ch;
+        renderSpacetime(currentChapter);
+    }
+
+    function togglePlay() {
+        const btn = document.getElementById("play-btn");
+        if (playTimer) {
+            clearInterval(playTimer);
+            playTimer = null;
+            btn.textContent = "▶ 播放";
+            btn.classList.remove("playing");
+        } else {
+            if (currentChapter >= 100) currentChapter = 1;
+            btn.textContent = "⏸ 暂停";
+            btn.classList.add("playing");
+            playTimer = setInterval(() => {
+                if (currentChapter >= 100) {
+                    clearInterval(playTimer);
+                    playTimer = null;
+                    btn.textContent = "▶ 播放";
+                    btn.classList.remove("playing");
+                    return;
+                }
+                currentChapter += 1;
+                document.getElementById("chapter-slider").value = currentChapter;
+                renderSpacetime(currentChapter);
+            }, playSpeed);
+        }
+    }
+
+    document.getElementById("play-btn").addEventListener("click", togglePlay);
+    document.getElementById("reset-btn").addEventListener("click", function() {
+        if (playTimer) { clearInterval(playTimer); playTimer = null; }
+        const btn = document.getElementById("play-btn");
+        btn.textContent = "▶ 播放";
+        btn.classList.remove("playing");
+        currentChapter = 100;
+        document.getElementById("chapter-slider").value = 100;
+        renderSpacetime(100);
+    });
+    document.getElementById("chapter-slider").addEventListener("input", function(e) {
+        if (playTimer) {
+            clearInterval(playTimer);
+            playTimer = null;
+            const btn = document.getElementById("play-btn");
+            btn.textContent = "▶ 播放";
+            btn.classList.remove("playing");
+        }
+        updateChapter(e.target.value);
+    });
+    document.getElementById("speed-select").addEventListener("change", function(e) {
+        playSpeed = +e.target.value;
+        if (playTimer) {
+            clearInterval(playTimer);
+            playTimer = null;
+            togglePlay();
+        }
+    });
+
+    // ============= 初始化 =============
+    function renderAll() {
+        renderSpacetime(currentChapter);
+        renderStageTable();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAll);
+    } else {
+        renderAll();
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => renderSpacetime(currentChapter), 200);
+    });
+    </script>
+</body>
+</html>

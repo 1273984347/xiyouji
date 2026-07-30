@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<!--
+  _template.html — 西游记可视化页面起点模板
+  ==================================================
+  用途：新建可视化页面时复制本文件，修改 title / 数据 / 图表即可。
+  使用步骤：
+    1. 复制 _template.html 到 site/data/<your-page>.html
+    2. 修改 <title>、.hero 内标题 / 副标题 / tagline
+    3. 在 EMBEDDED_DATA 区块替换为页面专属数据
+    4. 在图表占位区编写 D3 渲染逻辑
+  注意：tokens.css 位于 site/ 根，data/ 子目录页面用 href="../tokens.css" 引用。
+  不修改现有 57 个 HTML 页面，本模板仅供未来新页面使用。
+-->
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面标题 · 详解西游记</title>
+    <!-- D3.js 本地引用（如改用 CDN：https://d3js.org/d3.v7.min.js） -->
+    <script src="d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <!-- 公共设计令牌：配色 / 字体 / 阴影变量 -->
+    <link rel="stylesheet" href="tokens.css">
+    <style>
+        /* ===== 页面专属样式：仅写本页特有部分，公共变量见 tokens.css ===== */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* —— Hero 顶图：深褐渐变 + 朱金光晕 —— */
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* —— 主容器：上覆 hero，居中限宽 —— */
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* —— 面包屑导航 —— */
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { color: var(--ink-soft); margin: 0 6px; }
+        .breadcrumb .current { color: var(--ink-soft); }
+
+        /* —— KPI 行：关键指标卡片网格 —— */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 720px) {
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-top: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+        }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+
+        /* —— Section：内容区块（标题 + 正文 + 图表） —— */
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+
+        /* —— 图表块：D3 SVG 容器 —— */
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* —— 图例 —— */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
+
+        /* —— 洞察盒：浅金渐变 + 朱砂左边框 —— */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 { color: var(--accent); font-size: 1rem; margin-bottom: 8px; }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong { color: var(--accent); font-weight: 600; }
+
+        /* —— 数据表格 —— */
+        .table-wrap {
+            overflow-x: auto;
+            max-height: 640px;
+            overflow-y: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        .table-wrap::-webkit-scrollbar { width: 8px; height: 8px; }
+        .table-wrap::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: 4px; }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+        .data-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 10px 12px;
+            text-align: left;
+        }
+        .data-table tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--line);
+        }
+        .data-table tbody tr:hover { background: #fff8ec; }
+
+        /* ===== 页面专属样式结束，下方可追加本页特有样式 ===== */
+    </style>
+</head>
+<body>
+
+    <!-- Hero 顶图：主标题 + 副标题 + tagline -->
+    <header class="hero">
+        <h1>页面主标题</h1>
+        <div class="subtitle">副标题 / SECTION NAME</div>
+        <div class="tagline">一句话点题，斜体浅色</div>
+    </header>
+
+    <!-- 主容器：面包屑 + KPI + 多个 section -->
+    <main class="container">
+
+        <!-- 面包屑导航：首页 > 数据 > 当前页 -->
+        <nav class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <a href="../index.html#data">数据</a>
+            <span class="sep">/</span>
+            <span class="current">当前页面</span>
+        </nav>
+
+        <!-- KPI 行：4 个关键指标卡片（按需增减） -->
+        <section class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">指标 01</div>
+                <div class="value">--</div>
+                <div class="desc">指标说明文字</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">指标 02</div>
+                <div class="value">--</div>
+                <div class="desc">指标说明文字</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">指标 03</div>
+                <div class="value">--</div>
+                <div class="desc">指标说明文字</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">指标 04</div>
+                <div class="value">--</div>
+                <div class="desc">指标说明文字</div>
+            </div>
+        </section>
+
+        <!-- Section：图表分析区（复制本块添加更多章节） -->
+        <section class="section">
+            <h2 class="section-title">章节标题</h2>
+            <div class="section-sub">章节副标题 / 数据来源说明</div>
+
+            <!-- 图表块：D3 渲染目标容器 -->
+            <div class="chart-block">
+                <h3>图表标题</h3>
+                <div id="chart-1"></div>
+                <div class="legend">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent)"></span>系列 A</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2)"></span>系列 B</span>
+                </div>
+            </div>
+
+            <!-- 洞察盒：要点列表 -->
+            <div class="insight-box">
+                <h4>洞察标题</h4>
+                <ul>
+                    <li><strong>要点一：</strong>说明文字</li>
+                    <li><strong>要点二：</strong>说明文字</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section：数据表格区（可选） -->
+        <section class="section">
+            <h2 class="section-title">数据明细</h2>
+            <div class="section-sub">完整数据表</div>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>列 A</th><th>列 B</th><th>列 C</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>--</td><td>--</td><td>--</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!--
+      脚本区：D3 渲染逻辑
+      ==================================================
+      EMBEDDED_DATA fallback 模式说明：
+        新页面默认使用页面内 <script> 中嵌入的 EMBEDDED_DATA 常量作为数据源，
+        避免运行时 fetch 本地 JSON 失败（file:// 协议下 CORS 受限）。
+        如需切换为外部 JSON，可将 fetch('../data/xxx.json') 取消注释。
+    -->
+    <script>
+        // ===== EMBEDDED_DATA：页面内嵌数据 fallback =====
+        const EMBEDDED_DATA = [
+            // { name: "...", value: 0 },
+        ];
+
+        // ===== 可选：从外部 JSON 加载（默认不启用） =====
+        // d3.json('../data/your-data.json').then(data => render(data));
+
+        // ===== D3 渲染入口 =====
+        function render(data) {
+            // 在 #chart-1 内绘制图表
+            // 示例：const svg = d3.select('#chart-1').append('svg')...
+        }
+
+        // 初始化：优先用 EMBEDDED_DATA
+        render(EMBEDDED_DATA);
+    </script>
+</body>
+</html>

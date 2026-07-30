@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>反事实推断 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        /* 场景卡片网格 */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+            gap: 18px;
+        }
+        .scenario-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 18px 18px 16px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.18s, box-shadow 0.18s;
+        }
+        .scenario-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(60, 40, 20, 0.12);
+        }
+        .scenario-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .scenario-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.35;
+        }
+        .scenario-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: flex-end;
+            flex-shrink: 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: #fff;
+            white-space: nowrap;
+            font-family: "JetBrains Mono", monospace;
+            letter-spacing: 0.04em;
+        }
+        .badge.validity-high { background: var(--accent); }
+        .badge.validity-medium { background: var(--accent-soft); color: var(--accent-3); }
+        .badge.category {
+            background: transparent;
+            color: var(--ink-soft);
+            border: 1px solid var(--line);
+            font-size: 0.7rem;
+        }
+        .scenario-row {
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            line-height: 1.55;
+        }
+        .scenario-row .row-label {
+            color: var(--accent);
+            font-weight: 600;
+            margin-right: 4px;
+            font-size: 0.78rem;
+            letter-spacing: 0.06em;
+        }
+        .scenario-row .row-text {
+            color: var(--ink);
+        }
+        .scenario-conclusion {
+            margin-top: auto;
+            padding: 10px 12px;
+            background: #fff8ec;
+            border: 1px dashed var(--accent-soft);
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--accent-3);
+            line-height: 1.55;
+        }
+        .scenario-conclusion .row-label {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 2px;
+        }
+        /* 图表通用 */
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        #chart-category {
+            width: 100%;
+            height: 400px;
+            display: block;
+        }
+        /* 核心结论 */
+        .core-conclusion-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 24px 28px;
+            border-radius: 4px;
+            position: relative;
+        }
+        .core-conclusion-box .quote-mark {
+            position: absolute;
+            top: -8px;
+            left: 16px;
+            font-size: 3.2rem;
+            color: var(--accent);
+            opacity: 0.25;
+            font-family: serif;
+            line-height: 1;
+        }
+        .core-conclusion-box .core-text {
+            font-size: 1.05rem;
+            color: var(--ink);
+            line-height: 1.8;
+            margin-top: 8px;
+        }
+        .core-conclusion-box .core-text strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .core-conclusion-box .core-tag {
+            display: inline-block;
+            margin-top: 14px;
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            letter-spacing: 0.15em;
+            font-family: "JetBrains Mono", monospace;
+        }
+        /* 关键洞察 */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            display: flex;
+            gap: 10px;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li .marker {
+            color: var(--accent);
+            font-weight: 600;
+            flex-shrink: 0;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        /* 移动端微调 */
+        @media (max-width: 640px) {
+            .kpi-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .scenario-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 { font-size: 1.7rem; }
+            .section { padding: 18px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>反事实推断 · 详解西游记</h1>
+        <div class="subtitle">WHAT IF... ?</div>
+        <div class="tagline">如果所有有背景妖怪都不下凡，八十一难会缩水多少？</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">返回首页</a>
+            <span class="sep">›</span>
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">›</span>
+            <span class="current">反事实推断</span>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">SCENARIOS · 场景</div>
+                <div class="value">10</div>
+                <div class="desc">反事实假设场景总数</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">HIGH · 高可信</div>
+                <div class="value">7</div>
+                <div class="desc">基于原著设定的强推断</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">MEDIUM · 中可信</div>
+                <div class="value">3</div>
+                <div class="desc">受多变量影响的弱推断</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">CATEGORIES · 类别</div>
+                <div class="value">6</div>
+                <div class="desc">结构性 / 监管 / 兵器 / 替换 / 控制论 / 情节</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：场景卡片网格 -->
+        <section class="section">
+            <h2 class="section-title">反事实场景详解</h2>
+            <div class="section-sub">10 个反事实假设 · 按"类别"染色边框 · 每张卡片展示 if / then / 计算 / 对取经 / 对教义 / 结论。</div>
+            <div class="scenario-grid" id="scenario-grid"></div>
+        </section>
+
+        <!-- 图表 2 & 3：可信度饼图 + 类别柱状图 -->
+        <section class="section">
+            <h2 class="section-title">可信度与类别分布</h2>
+            <div class="section-sub">左：高 / 中可信度占比；右：6 类反事实假设的场景数分布。</div>
+            <div class="chart-row">
+                <div class="chart-block">
+                    <h3>可信度分布</h3>
+                    <svg id="chart-validity" width="360" height="360"></svg>
+                    <div class="legend" id="legend-validity"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>类别分布（按场景数排序）</h3>
+                    <svg id="chart-category"></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- 图表 4：核心结论 -->
+        <section class="section">
+            <h2 class="section-title">核心结论</h2>
+            <div class="section-sub">来自 counterfactual_summary.json 的总结性判断。</div>
+            <div class="core-conclusion-box">
+                <span class="quote-mark">"</span>
+                <div class="core-text" id="core-conclusion-text"></div>
+                <span class="core-tag">CORE CONCLUSION · 综合判断</span>
+            </div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="section-sub">从 10 个反事实推断中提炼的 4 条结构性判断。</div>
+            <div class="insight-box">
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">返回数据看板</a> ·
+        <a href="../index.html">返回首页</a>
+        <div id="gen-time" style="margin-top:6px;font-size:0.78rem;color:var(--ink-soft);"></div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/08-提升认知/反事实训练.md">反事实训练</a></div>
+    </footer>
+
+    <script>
+    /* ============================================================
+       嵌入式 fallback 数据（fetch 失败时使用，与 JSON 源一致）
+       ============================================================ */
+    const EMBEDDED_SCENARIOS = [
+        {
+            scenario: "和平共处假设",
+            if: "如果所有有背景的妖怪（坐骑下凡+灵山相关）都不下凡",
+            then: "九九八十一难将缩水至约 38 难",
+            calculation: "坐骑下凡16难 + 灵山相关若干难 + 如来安排27难 ≈ 缩水43难",
+            impact_on_journey: "取经时长从14年缩短至约6年，九九八十一难之'九九'不能成立",
+            impact_on_doctrine: "如来'我西牛贺洲者，不贪不杀'宣言将动摇·灵山自承有'家事'",
+            conclusion: "如来需'安排'障碍以成就'九九之数'·有背景妖怪是取经的'必要配乐'",
+            counterfactual_validity: "high",
+            category: "结构性假设"
+        },
+        {
+            scenario: "透明化监管假设",
+            if: "如果六丁六甲·五方揭谛·日值功曹·日游神·夜游神暗中保护变明牌·全程开直播",
+            then: "妖怪将不敢进攻·取经几无难度",
+            calculation: "暗中考验 vs 公开作秀·考验性质根本不同",
+            impact_on_journey: "九九八十一难全部消解·无妖魔敢挑战天庭明牌护卫",
+            impact_on_doctrine: "考验失去意义·心性修炼无法成立·佛门'考验'本质上是'不可见的隐性监管'",
+            conclusion: "暗中考验是心性修炼的必要条件·透明化则考验无效",
+            counterfactual_validity: "medium",
+            category: "监管假设"
+        },
+        {
+            scenario: "阴阳二气瓶·终极实验",
+            if: "如果阴阳二气瓶装巅峰期孙悟空 + 二郎神",
+            then: "约需 1 时 3 刻（原著设定）化浆·二郎神可能更快",
+            calculation: "巅峰期悟空靠三根救命毫毛钻破·若无毫毛则 1 时 3 刻化浆·二郎神有天眼但无毫毛·约 1 时化浆",
+            impact_on_journey: "若大鹏用阴阳二气瓶在狮驼岭即收悟空·取经团队需要外力解救·如来必须亲降",
+            impact_on_doctrine: "顶级法宝威力可秒杀顶级仙佛·但需'因果律'触发条件",
+            conclusion: "阴阳二气瓶属宇宙级规则武器·需主家（大鹏/如来）亲降方可破",
+            counterfactual_validity: "high",
+            category: "兵器实验"
+        },
+        {
+            scenario: "替换悟空假设",
+            if: "如果悟空被换为二郎神",
+            then: "取经难度下降·但心性修炼意义改变",
+            calculation: "二郎神天眼识幻象·武力等同悟空·但缺七十二变灵活·且不戴紧箍·不受唐僧约束",
+            impact_on_journey: "三打白骨精不会发生（二郎神直接识破+杀·唐僧不能约束）·真假美猴王不会发生",
+            impact_on_doctrine: "心猿不可控·无紧箍咒约束·佛门对'天将'缺乏控制力·需换控制机制",
+            conclusion: "悟空的'妖仙'身份+紧箍咒是控制论模型的关键·换将则需重构控制",
+            counterfactual_validity: "high",
+            category: "替换假设"
+        },
+        {
+            scenario: "替换悟空·哪吒",
+            if: "如果悟空被换为哪吒",
+            then: "哪吒更受天庭直接控制·取经独立性降低",
+            calculation: "哪吒莲花化身·不受妖魔影响·但莲花身不戴紧箍·对唐僧无敬畏",
+            impact_on_journey: "降妖效率提升·但唐僧无法约束哪吒·矛盾加剧",
+            impact_on_doctrine: "天庭直接介入过深·失去'取经是民间修行'的属性",
+            conclusion: "哪吒过于'天庭化'·不适合做取经执行器",
+            counterfactual_validity: "medium",
+            category: "替换假设"
+        },
+        {
+            scenario: "无紧箍咒假设",
+            if: "如果唐僧不念紧箍咒·或紧箍咒失效",
+            then: "悟空将不受控制·可能直接打死唐僧或离队",
+            calculation: "原著中悟空被唐僧念紧箍咒3次驱逐·每次都因紧箍咒的负反馈抑制·若无紧箍咒则悟空自由行动",
+            impact_on_journey: "取经团队失去执行器·唐僧被悟空打死或弃·取经失败",
+            impact_on_doctrine: "紧箍咒是控制论模型中的'负反馈抑制信号'·不可缺",
+            conclusion: "紧箍咒是取经自动控制系统的核心稳定器",
+            counterfactual_validity: "high",
+            category: "控制论假设"
+        },
+        {
+            scenario: "白骨精不出现假设",
+            if: "如果白骨精（无背景野怪）不下凡",
+            then: "三打白骨精不发生·悟空不被逐·但后续考验调整",
+            calculation: "三打白骨精是关键的'执行器偏离基准值'事件·悟空因杀心过重被逐·此事件驱动团队心性升级",
+            impact_on_journey: "取经团队少一次心性考验·后续黄袍怪·真假美猴王可能不发生",
+            impact_on_doctrine: "失去'心猿归正'的关键转折·心性修炼不完整",
+            conclusion: "白骨精事件是'执行器自我修正'的契机·不可缺",
+            counterfactual_validity: "high",
+            category: "情节假设"
+        },
+        {
+            scenario: "如来不安排假设",
+            if: "如果如来不主动安排27难（金角银角/红孩儿/通天河等）",
+            then: "九九八十一难缩水至54难·取经时长减半",
+            calculation: "如来安排的27难多为'有背景'妖怪·这些是取经的'必经节点'",
+            impact_on_journey: "取经变得零散·无完整'九九'之数·失去佛门系统设计的庄严",
+            impact_on_doctrine: "如来'安排'是取经的核心设计·无安排则取经不成",
+            conclusion: "如来是取经的总设计师·无安排则无取经",
+            counterfactual_validity: "high",
+            category: "结构性假设"
+        },
+        {
+            scenario: "牛魔王归顺假设",
+            if: "如果牛魔王主动归顺佛门（与悟空重修旧好）",
+            then: "火焰山/芭蕉洞/积雷山三难消解·约5难缩水",
+            calculation: "牛魔王一家三口（铁扇/红孩儿/如意真仙）是火焰山系列的核心·若牛王归顺则一家皆从",
+            impact_on_journey: "火焰山系列简化·失去'三借芭蕉扇'的经典叙事",
+            impact_on_doctrine: "牛魔王代表'妖王中的旧友'·其归顺需'武力'+'道义'双重·不可简化",
+            conclusion: "牛魔王系列是'旧友考验'·不可省略",
+            counterfactual_validity: "medium",
+            category: "情节假设"
+        },
+        {
+            scenario: "金翅大鹏不下凡假设",
+            if: "如果金翅大鹏（佛母孔雀明王之弟）不下凡",
+            then: "狮驼岭系列简化·失去取经最大考验",
+            calculation: "狮驼岭是九九八十一难中最难·大鹏是最大魔王·若大鹏不下凡则青狮白象无主",
+            impact_on_journey: "狮驼岭系列可能不发生·或难度大幅下降",
+            impact_on_doctrine: "大鹏是'佛门家事'的最高考验·如来亲降收服·不可省略",
+            conclusion: "大鹏是取经的'终极考验'·如来'佛门清理门户'的关键节点",
+            counterfactual_validity: "high",
+            category: "结构性假设"
+        }
+    ];
+
+    const EMBEDDED_SUMMARY = {
+        total_scenarios: 10,
+        high_validity: 7,
+        medium_validity: 3,
+        categories: ["替换假设", "监管假设", "控制论假设", "结构性假设", "情节假设", "兵器实验"],
+        core_conclusion: "九九八十一难是如来精心设计的'考验工程'·任何单点假设都会动摇'九九之数'的完整性。有背景妖怪（坐骑/灵山相关）是'必要配乐'，无背景野怪是'心性契机'，缺一不可。"
+    };
+
+    /* ============================================================
+       配色（与 dashboard / 81-hardships 一致 + 类别扩展）
+       ============================================================ */
+    const CATEGORY_COLORS = {
+        "结构性假设": "#c8463a",
+        "监管假设":   "#3a6b8c",
+        "兵器实验":   "#7a5230",
+        "替换假设":   "#5a7a3a",
+        "控制论假设": "#e9b885",
+        "情节假设":   "#6b5e4d"
+    };
+    const VALIDITY_COLORS = {
+        "high":   "#c8463a",
+        "medium": "#e9b885"
+    };
+    const VALIDITY_LABEL = {
+        "high":   "高可信",
+        "medium": "中可信"
+    };
+
+    /* ============================================================
+       渲染 1：场景卡片网格
+       ============================================================ */
+    function renderScenarios(scenarios) {
+        const grid = d3.select("#scenario-grid");
+        grid.selectAll("*").remove();
+
+        const card = grid.selectAll(".scenario-card")
+            .data(scenarios)
+            .enter()
+            .append("div")
+            .attr("class", "scenario-card")
+            .style("border-left-color", d => CATEGORY_COLORS[d.category] || "var(--accent)");
+
+        // 头部：名称 + 徽章
+        const head = card.append("div").attr("class", "scenario-head");
+        head.append("div").attr("class", "scenario-name").text(d => d.scenario);
+        const badges = head.append("div").attr("class", "scenario-badges");
+        badges.append("span")
+            .attr("class", d => "badge validity-" + d.counterfactual_validity)
+            .text(d => VALIDITY_LABEL[d.counterfactual_validity] || d.counterfactual_validity);
+        badges.append("span")
+            .attr("class", "badge category")
+            .text(d => d.category);
+
+        // 字段
+        const fieldDefs = [
+            { key: "if",                  label: "IF" },
+            { key: "then",                label: "THEN" },
+            { key: "calculation",         label: "CALC" },
+            { key: "impact_on_journey",   label: "取经" },
+            { key: "impact_on_doctrine",  label: "教义" }
+        ];
+        fieldDefs.forEach(f => {
+            const row = card.append("div").attr("class", "scenario-row");
+            row.append("span").attr("class", "row-label").text(f.label);
+            row.append("span").attr("class", "row-text").text(d => d[f.key]);
+        });
+
+        // 结论（底部高亮）
+        const concl = card.append("div").attr("class", "scenario-conclusion");
+        concl.append("span").attr("class", "row-label").text("CONCLUSION");
+        concl.append("span").text(d => d.conclusion);
+    }
+
+    /* ============================================================
+       渲染 2：可信度饼图
+       ============================================================ */
+    function renderValidityPie(summary) {
+        const data = {
+            "高可信": summary.high_validity,
+            "中可信": summary.medium_validity
+        };
+        const colorMap = {
+            "高可信": VALIDITY_COLORS.high,
+            "中可信": VALIDITY_COLORS.medium
+        };
+
+        const svg = d3.select("#chart-validity");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${width/2}, ${height/2})`);
+
+        const pie = d3.pie().value(d => d[1]).sort(null);
+        const arc = d3.arc()
+            .innerRadius(radius * 0.58)
+            .outerRadius(radius)
+            .cornerRadius(3);
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.82)
+            .outerRadius(radius * 0.82);
+
+        const arcs = pie(Object.entries(data));
+
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => colorMap[d.data[0]] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 120)
+            .style("opacity", 1);
+
+        const total = Object.values(data).reduce((a, b) => a + b, 0);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "0.35em")
+            .style("font-size", "1.8rem")
+            .style("font-weight", "600")
+            .style("fill", "#2c2418")
+            .text(total);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "2em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6b5e4d")
+            .text("场景总数");
+
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.88rem")
+            .style("font-weight", "600")
+            .style("fill", d => d.data[0] === "高可信" ? "#fff" : "#7a5230")
+            .text(d => {
+                const pct = (d.data[1] / total * 100).toFixed(0);
+                return `${d.data[1]} · ${pct}%`;
+            });
+
+        const legend = d3.select("#legend-validity");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(Object.entries(data))
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `
+                <span class="legend-swatch" style="background:${colorMap[d[0]] || '#999'}"></span>
+                <span>${d[0]}：${d[1]} 场景</span>
+            `);
+    }
+
+    /* ============================================================
+       渲染 3：类别分布柱状图（按场景数排序）
+       ============================================================ */
+    function renderCategoryBar(scenarios) {
+        const counts = d3.rollup(scenarios, v => v.length, d => d.category);
+        const data = Array.from(counts, ([category, count]) => ({ category, count }))
+            .sort((a, b) => b.count - a.count);
+
+        const svg = d3.select("#chart-category");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("chart-category");
+        const width = containerEl.clientWidth || 720;
+        const height = 400;
+        const margin = { top: 24, right: 24, bottom: 70, left: 48 };
+        const innerW = Math.max(120, width - margin.left - margin.right);
+        const innerH = Math.max(120, height - margin.top - margin.bottom);
+
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        const x = d3.scaleBand()
+            .domain(data.map(d => d.category))
+            .range([0, innerW])
+            .padding(0.35);
+
+        const yMax = d3.max(data, d => d.count) || 1;
+        const y = d3.scaleLinear()
+            .domain([0, yMax + 1])
+            .range([innerH, 0]);
+
+        // 坐标轴
+        g.append("g")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
+            .selectAll("text")
+            .style("font-size", "0.82rem")
+            .style("fill", "#2c2418")
+            .attr("transform", "rotate(-18)")
+            .style("text-anchor", "end");
+
+        g.append("g")
+            .call(d3.axisLeft(y).ticks(Math.min(yMax + 1, 6)).tickSize(-innerW).tickPadding(6))
+            .call(g2 => g2.select(".domain").remove())
+            .call(g2 => g2.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-opacity", 0.55))
+            .selectAll("text")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6b5e4d");
+
+        // 柱
+        const bars = g.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", d => x(d.category))
+            .attr("y", innerH)
+            .attr("width",Math.max(0, x.bandwidth()))
+            .attr("height", 0)
+            .attr("fill", d => CATEGORY_COLORS[d.category] || "#999")
+            .attr("rx", 3);
+
+        bars.transition()
+            .duration(700)
+            .delay((d, i) => i * 80)
+            .attr("y", d => y(d.count))
+            .attr("height", d => innerH - y(d.count));
+
+        // 数值标签
+        g.selectAll(".bar-label")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "bar-label")
+            .attr("x", d => x(d.category) + x.bandwidth() / 2)
+            .attr("y", d => y(d.count) - 6)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem")
+            .style("font-weight", "600")
+            .style("fill", "#2c2418")
+            .text(d => d.count);
+
+        // 标题
+        svg.append("text")
+            .attr("x", width / 2)
+            .attr("y", 14)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6b5e4d")
+            .style("letter-spacing", "0.08em")
+            .text(`共 ${data.length} 类 · ${d3.sum(data, d => d.count)} 场景`);
+    }
+
+    /* ============================================================
+       渲染 4：核心结论
+       ============================================================ */
+    function renderCoreConclusion(summary) {
+        const text = summary.core_conclusion || "";
+        // 高亮关键短语
+        const highlighted = text
+            .replace(/'考验工程'/g, "<strong>'考验工程'</strong>")
+            .replace(/'九九之数'/g, "<strong>'九九之数'</strong>")
+            .replace(/'必要配乐'/g, "<strong>'必要配乐'</strong>")
+            .replace(/'心性契机'/g, "<strong>'心性契机'</strong>");
+        d3.select("#core-conclusion-text").html(highlighted);
+    }
+
+    /* ============================================================
+       渲染 5：关键洞察
+       ============================================================ */
+    function renderInsights() {
+        const insights = [
+            "九九八十一难是如来精心设计的<strong>'考验工程'</strong>，任何单点假设都会动摇<strong>'九九之数'</strong>的完整性。",
+            "<strong>紧箍咒</strong>是控制论模型的核心稳定器，无紧箍咒则取经失败。",
+            "<strong>大鹏</strong>是佛门'清理门户'的关键节点，如来亲降收服。",
+            "暗中考验是心性修炼的必要条件，<strong>透明化</strong>则考验无效。"
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach((text, i) => {
+            ul.append("li")
+                .html(`<span class="marker">${String(i + 1).padStart(2, "0")}</span><span>${text}</span>`);
+        });
+    }
+
+    /* ============================================================
+       数据加载（fetch 失败则用嵌入数据）
+       ============================================================ */
+    async function loadData() {
+        try {
+            const [r1, r2] = await Promise.all([
+                fetch('../../scripts/output/data/counterfactual_scenarios.json'),
+                fetch('../../scripts/output/data/counterfactual_summary.json')
+            ]);
+            if (!r1.ok || !r2.ok) throw new Error('fetch failed');
+            const scenarios = await r1.json();
+            const summary = await r2.json();
+            document.getElementById('dataSource').innerHTML =
+                '数据源：实时加载自 <code>scripts/output/data/counterfactual_*.json</code>（运行于 http server 模式）';
+            return { scenarios, summary };
+        } catch (e) {
+            console.warn('[INFO] 使用嵌入数据：', e.message);
+            return { scenarios: EMBEDDED_SCENARIOS, summary: EMBEDDED_SUMMARY };
+        }
+    }
+
+    /* ============================================================
+       主流程
+       ============================================================ */
+    async function main() {
+        const { scenarios, summary } = await loadData();
+        window.__lastData = { scenarios, summary };
+
+        renderScenarios(scenarios);
+        renderValidityPie(summary);
+        renderCategoryBar(scenarios);
+        renderCoreConclusion(summary);
+        renderInsights();
+
+        // 生成时间戳
+        const genTime = document.getElementById('gen-time');
+        const ts = new Date();
+        const pad = n => String(n).padStart(2, '0');
+        genTime.textContent = `数据生成时间：${ts.getFullYear()}-${pad(ts.getMonth() + 1)}-${pad(ts.getDate())} ${pad(ts.getHours())}:${pad(ts.getMinutes())}`;
+    }
+
+    // 窗口尺寸变化时重绘柱状图
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) renderCategoryBar(window.__lastData.scenarios);
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

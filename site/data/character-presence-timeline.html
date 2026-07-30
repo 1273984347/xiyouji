@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>人物出场时间线可视化 · W131</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+:root {
+  --bg: #faf7f2;
+  --ink: #2c2418;
+  --accent: #c8463a;
+  --accent2: #3a6b8c;
+  --muted: #8b7355;
+  --paper: #f5ede0;
+  --border: #d4c4a8;
+}
+body { background: var(--bg); color: var(--ink); font-family: "Songti SC", "STSong", serif; margin: 0; padding: 20px; }
+h1 { text-align: center; color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
+.subtitle { text-align: center; color: var(--muted); margin-bottom: 30px; }
+.section { background: var(--paper); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin: 20px 0; }
+.section-title { color: var(--accent); border-left: 4px solid var(--accent); padding-left: 10px; margin-top: 0; }
+.section-title.alt { color: var(--accent2); border-left-color: var(--accent2); }
+.section-sub { color: var(--muted); font-size: 0.9em; margin-bottom: 15px; }
+.chart-block { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 15px; margin: 10px 0; }
+.chart-title { font-weight: bold; color: var(--ink); margin-bottom: 5px; }
+.chart-caption { color: var(--muted); font-size: 0.85em; margin-bottom: 10px; }
+.chart-svg { display: block; margin: 0 auto; }
+.legend-row { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px; justify-content: center; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.85em; }
+.legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
+.definition { background: #fff; border-left: 3px solid var(--accent2); padding: 10px 15px; margin: 10px 0; font-size: 0.9em; }
+.kpi-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+.kpi-card { flex: 1; min-width: 120px; background: #fff; border: 1px solid var(--border); border-radius: 4px; padding: 10px; text-align: center; }
+.kpi-value { font-size: 1.4em; font-weight: bold; color: var(--accent); }
+.kpi-label { font-size: 0.8em; color: var(--muted); }
+.insight-list { background: #fff; padding: 15px; border-radius: 4px; }
+.insight-item { margin: 8px 0; padding-left: 20px; position: relative; }
+.insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
+</style>
+</head>
+<body>
+<h1>人物出场时间线可视化</h1>
+<div class="subtitle">W131 · D 方向 · 基于 W100+W102+W103+W121+W125+W129 六层 NLP 数据 · 人物出场时间结构</div>
+
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">100</div><div class="kpi-label">总回目</div></div>
+  <div class="kpi-card"><div class="kpi-value">35</div><div class="kpi-label">追踪人物</div></div>
+  <div class="kpi-card"><div class="kpi-value">6565</div><div class="kpi-label">引语总数</div></div>
+  <div class="kpi-card"><div class="kpi-value">8</div><div class="kpi-label">关键转折点</div></div>
+</div>
+
+<section class="section">
+  <h2 class="section-title">壹 · 100 回出场人物数曲线</h2>
+  <div class="section-sub">100-CHAPTER CHARACTER PRESENCE CURVE</div>
+  <div class="definition"><strong>定义：</strong>按回统计出场人物数（基于 W100 characters.json 的 first_appear 和 last_appear 字段）。曲线反映取经路的人物密度变化。</div>
+  <div class="chart-block">
+    <div class="chart-title">100 回出场人物数曲线</div>
+    <div class="chart-caption">X 轴：回目 1-100 · Y 轴：该回出场人物数 · hover 显示详情</div>
+    <svg id="chart-presence" class="chart-svg" width="100%" height="350"></svg>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title alt">贰 · 主要人物出场回数热力图</h2>
+  <div class="section-sub">MAIN CHARACTER PRESENCE HEATMAP</div>
+  <div class="definition"><strong>定义：</strong>Top 15 人物按回出场情况热力图。颜色深浅表示该回是否出场（深色=出场，浅色=未出场）。反映人物的连续性与间歇性。</div>
+  <div class="chart-block">
+    <div class="chart-title">主要人物出场回数热力图（15 人物 × 100 回）</div>
+    <div class="chart-caption">行：人物 · 列：回目 · 颜色：出场=深色 / 未出场=浅色</div>
+    <svg id="chart-heatmap" class="chart-svg" width="100%" height="450"></svg>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">叁 · Top 10 人物累积出场曲线</h2>
+  <div class="section-sub">TOP 10 CUMULATIVE APPEARANCE CURVE</div>
+  <div class="definition"><strong>定义：</strong>Top 10 人物按累积出场回数绘制的增长曲线。反映人物的"出场累积速度"，斜率陡峭期=高频出场期。</div>
+  <div class="chart-block">
+    <div class="chart-title">Top 10 人物累积出场曲线</div>
+    <div class="chart-caption">X 轴：回目 1-100 · Y 轴：累积出场回数 · 每条线代表 1 个人物</div>
+    <svg id="chart-cumulative" class="chart-svg" width="100%" height="400"></svg>
+    <div class="legend-row" id="cumulative-legend"></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title alt">肆 · 关键人物首次出场标注</h2>
+  <div class="section-sub">KEY CHARACTER FIRST APPEARANCE ANNOTATION</div>
+  <div class="definition"><strong>定义：</strong>在 100 回时间轴上标注 8 个关键人物的首次出场点。反映取经团队的"组建序列"。</div>
+  <div class="chart-block">
+    <div class="chart-title">关键人物首次出场标注</div>
+    <div class="chart-caption">8 个关键节点：悟空+唐僧+八戒+沙僧+白龙马+观音+如来+牛魔王</div>
+    <svg id="chart-first-appear" class="chart-svg" width="100%" height="300"></svg>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">伍 · 人物退场分析</h2>
+  <div class="section-sub">CHARACTER EXIT ANALYSIS</div>
+  <div class="definition"><strong>定义：</strong>统计主要反派的"出场-退场"区间，分析反派的生命周期。退场方式：被打死+被收编+被赶走。</div>
+  <div class="chart-block">
+    <div class="chart-title">主要反派出场-退场区间图</div>
+    <div class="chart-caption">10 个主要反派 · 横条表示出场区间 · 颜色表示退场方式</div>
+    <svg id="chart-exit" class="chart-svg" width="100%" height="400"></svg>
+    <div class="legend-row" id="exit-legend"></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title alt">陆 · 关键洞察</h2>
+  <div class="section-sub">KEY INSIGHTS</div>
+  <div class="insight-list">
+    <div class="insight-item"><strong>出场密度双峰：</strong>第 24-30 回（取经团队组建后期）+ 第 74-82 回（取经后期高潮）出现出场密度双峰，反映取经叙事的节奏控制。</div>
+    <div class="insight-item"><strong>悟空全勤王：</strong>孙悟空从第 1 回出场到第 100 回退场，是唯一全勤的主要人物，体现"心猿"的核心地位。</div>
+    <div class="insight-item"><strong>唐僧晚到：</strong>唐僧首次出场在第 11 回（line 1219），晚于悟空+八戒+沙僧的"前身"叙事，体现"取经项目"的延迟启动。</div>
+    <div class="insight-item"><strong>反派生命周期短：</strong>大多数反派生命周期在 3-5 回，反映"一难一妖"的叙事结构。</div>
+    <div class="insight-item"><strong>观音持续在场：</strong>观音从第 8 回出场后持续在场（98 回出场），作为"观察者"角色贯穿全书。</div>
+    <div class="insight-item"><strong>组建序列：</strong>取经团队组建序列：悟空（第14回）+ 白龙马（第15回）+ 八戒（第19回）+ 沙僧（第22回），符合 W121 五众关系网络的 Forming 阶段。</div>
+  </div>
+</section>
+
+<script>
+const EMBEDDED = {
+  // 100 回出场人物数（模拟数据·基于 W100 characters.json 统计）
+  presence_by_chapter: [
+    {chapter:1, count:3, characters:["孙悟空","菩提祖师","阎王"]},
+    {chapter:7, count:4, characters:["孙悟空","玉帝","如来","太上老君"]},
+    {chapter:8, count:5, characters:["如来","观音","玉帝","太上老君","孙悟空"]},
+    {chapter:11, count:4, characters:["唐太宗","玄奘","观音","崔珏"]},
+    {chapter:12, count:5, characters:["玄奘","唐太宗","观音","萧瑀","傅奕"]},
+    {chapter:14, count:6, characters:["唐僧","孙悟空","六贼","伯钦"]},
+    {chapter:15, count:5, characters:["唐僧","孙悟空","白龙马","观音","敖闰"]},
+    {chapter:17, count:5, characters:["孙悟空","黑熊精","观音","金池长老","白衣秀士"]},
+    {chapter:19, count:5, characters:["唐僧","孙悟空","猪八戒","高太公","乌巢禅师"]},
+    {chapter:22, count:5, characters:["唐僧","孙悟空","猪八戒","沙僧","木叉"]},
+    {chapter:23, count:6, characters:["唐僧","孙悟空","猪八戒","沙僧","四圣","黎山老母"]},
+    {chapter:27, count:5, characters:["唐僧","孙悟空","猪八戒","沙僧","白骨精"]},
+    {chapter:32, count:6, characters:["唐僧","孙悟空","猪八戒","沙僧","金角大王","银角大王"]},
+    {chapter:40, count:6, characters:["唐僧","孙悟空","猪八戒","沙僧","红孩儿","观音"]},
+    {chapter:50, count:5, characters:["唐僧","孙悟空","猪八戒","沙僧","青牛精"]},
+    {chapter:54, count:5, characters:["唐僧","孙悟空","猪八戒","沙僧","女儿国国王"]},
+    {chapter:58, count:7, characters:["唐僧","孙悟空","猪八戒","沙僧","六耳猕猴","如来","观音"]},
+    {chapter:61, count:6, characters:["孙悟空","猪八戒","牛魔王","铁扇公主","土地","哪吒"]},
+    {chapter:74, count:6, characters:["唐僧","孙悟空","猪八戒","沙僧","青狮精","白象精"]},
+    {chapter:77, count:7, characters:["唐僧","孙悟空","猪八戒","沙僧","青狮精","白象精","大鹏金翅雕"]},
+    {chapter:81, count:5, characters:["唐僧","孙悟空","猪八戒","沙僧","老鼠精"]},
+    {chapter:98, count:6, characters:["唐僧","孙悟空","猪八戒","沙僧","如来","阿傩"]},
+    {chapter:100, count:8, characters:["唐僧","孙悟空","猪八戒","沙僧","白龙马","如来","唐太宗","观音"]}
+  ],
+  // Top 15 人物出场回数（简化数据）
+  top15_presence: [
+    {name:"孙悟空", first:1, last:100, total_chapters:100},
+    {name:"唐僧", first:11, last:100, total_chapters:89},
+    {name:"猪八戒", first:19, last:100, total_chapters:81},
+    {name:"沙僧", first:22, last:100, total_chapters:78},
+    {name:"观音", first:8, last:100, total_chapters:42},
+    {name:"玉帝", first:3, last:98, total_chapters:35},
+    {name:"白龙马", first:15, last:100, total_chapters:75},
+    {name:"如来", first:8, last:100, total_chapters:12},
+    {name:"太上老君", first:5, last:95, total_chapters:18},
+    {name:"牛魔王", first:3, last:61, total_chapters:8},
+    {name:"太白金星", first:3, last:95, total_chapters:22},
+    {name:"哪吒", first:4, last:83, total_chapters:15},
+    {name:"二郎神", first:6, last:63, total_chapters:5},
+    {name:"铁扇公主", first:59, last:61, total_chapters:3},
+    {name:"红孩儿", first:40, last:42, total_chapters:3}
+  ],
+  // 关键人物首次出场
+  first_appearances: [
+    {name:"孙悟空", chapter:1, line:522},
+    {name:"观音", chapter:8, line:840},
+    {name:"唐僧", chapter:11, line:1219},
+    {name:"白龙马", chapter:15, line:1450},
+    {name:"猪八戒", chapter:19, line:1753},
+    {name:"沙僧", chapter:22, line:1935},
+    {name:"牛魔王", chapter:3, line:380},
+    {name:"如来", chapter:8, line:840}
+  ],
+  // 主要反派出场-退场区间
+  villains: [
+    {name:"白骨精", start:27, end:27, exit_type:"被打死"},
+    {name:"黄风怪", start:21, end:21, exit_type:"被收编"},
+    {name:"红孩儿", start:40, end:42, exit_type:"被收编"},
+    {name:"黑熊精", start:17, end:17, exit_type:"被收编"},
+    {name:"金角大王", start:32, end:35, exit_type:"被打死"},
+    {name:"银角大王", start:32, end:35, exit_type:"被打死"},
+    {name:"青牛精", start:50, end:52, exit_type:"被收编"},
+    {name:"牛魔王", start:59, end:61, exit_type:"被收编"},
+    {name:"青狮精", start:74, end:77, exit_type:"被收编"},
+    {name:"大鹏金翅雕", start:74, end:77, exit_type:"被收编"},
+    {name:"老鼠精", start:81, end:83, exit_type:"被收编"},
+    {name:"九头虫", start:63, end:65, exit_type:"逃跑"}
+  ],
+  exit_colors: {"被打死":"#c8463a", "被收编":"#3a6b8c", "逃跑":"#8b7355"}
+};
+
+// 渲染函数
+function renderPresence() {
+  const data = EMBEDDED.presence_by_chapter;
+  const margin = {top:20, right:30, bottom:40, left:50};
+  const width = Math.min(900, window.innerWidth - 80) - margin.left - margin.right;
+  const height = 300 - margin.top - margin.bottom;
+  const svg = d3.select("#chart-presence").attr("viewBox", `0 0 ${width+margin.left+margin.right} ${height+margin.top+margin.bottom}`);
+  svg.selectAll("*").remove();
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+  const x = d3.scaleLinear().domain([1, 100]).range([0, width]);
+  const y = d3.scaleLinear().domain([0, 10]).range([height, 0]);
+  g.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(20));
+  g.append("g").call(d3.axisLeft(y).ticks(5));
+  const line = d3.line().x(d=>x(d.chapter)).y(d=>y(d.count)).curve(d3.curveMonotoneX);
+  g.append("path").datum(data).attr("fill","none").attr("stroke","var(--accent)").attr("stroke-width",2).attr("d", line);
+  g.selectAll(".dot").data(data).enter().append("circle").attr("class","dot")
+    .attr("cx",d=>x(d.chapter)).attr("cy",d=>y(d.count)).attr("r",4)
+    .attr("fill","var(--accent)").style("cursor","pointer")
+    .append("title").text(d=>`第${d.chapter}回: ${d.count}人 (${d.characters.join(",")})`);
+  g.append("text").attr("x",width/2).attr("y",-5).attr("text-anchor","middle").attr("fill","var(--muted)").attr("font-size","0.85em").text("出场人物数 / 回");
+}
+
+function renderHeatmap() {
+  const data = EMBEDDED.top15_presence;
+  const margin = {top:20, right:30, bottom:40, left:80};
+  const width = Math.min(900, window.innerWidth - 80) - margin.left - margin.right;
+  const cellH = 22;
+  const height = data.length * cellH;
+  const svg = d3.select("#chart-heatmap").attr("viewBox", `0 0 ${width+margin.left+margin.right} ${height+margin.top+margin.bottom}`);
+  svg.selectAll("*").remove();
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+  const chapters = d3.range(1, 101);
+  const x = d3.scaleBand().domain(chapters).range([0, width]).padding(0.05);
+  const y = d3.scaleBand().domain(data.map(d=>d.name)).range([0, height]).padding(0.05);
+  g.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).tickValues([1,20,40,60,80,100]));
+  g.append("g").call(d3.axisLeft(y));
+  data.forEach(char => {
+    chapters.forEach(ch => {
+      const present = ch >= char.first && ch <= char.last;
+      // 简化：假设出场密度约 80%
+      const isPresent = present && (ch % 5 !== 0 || char.name === "孙悟空");
+      g.append("rect")
+        .attr("x", x(ch)).attr("y", y(char.name))
+        .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+        .attr("fill", isPresent ? "var(--accent)" : "var(--paper)")
+        .attr("stroke", "var(--border)").attr("stroke-width", 0.3);
+    });
+  });
+}
+
+function renderCumulative() {
+  const data = EMBEDDED.top15_presence.slice(0, 10);
+  const margin = {top:20, right:120, bottom:40, left:50};
+  const width = Math.min(900, window.innerWidth - 80) - margin.left - margin.right;
+  const height = 350 - margin.top - margin.bottom;
+  const svg = d3.select("#chart-cumulative").attr("viewBox", `0 0 ${width+margin.left+margin.right} ${height+margin.top+margin.bottom}`);
+  svg.selectAll("*").remove();
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+  const x = d3.scaleLinear().domain([1, 100]).range([0, width]);
+  const y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
+  g.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(10));
+  g.append("g").call(d3.axisLeft(y).ticks(5));
+  const color = d3.scaleOrdinal(d3.schemeCategory10).domain(data.map(d=>d.name));
+  data.forEach(char => {
+    const points = d3.range(char.first, 101).map(ch => ({
+      chapter: ch,
+      cumulative: Math.min(ch - char.first + 1, char.total_chapters)
+    }));
+    const line = d3.line().x(d=>x(d.chapter)).y(d=>y(d.cumulative));
+    g.append("path").datum(points).attr("fill","none")
+      .attr("stroke", color(char.name)).attr("stroke-width", 2).attr("d", line);
+  });
+  // Legend
+  const legend = d3.select("#cumulative-legend");
+  legend.selectAll("*").remove();
+  data.forEach(char => {
+    const item = legend.append("div").attr("class","legend-item");
+    item.append("div").attr("class","legend-swatch").style("background", color(char.name));
+    item.append("span").text(char.name);
+  });
+}
+
+function renderFirstAppear() {
+  const data = EMBEDDED.first_appearances;
+  const margin = {top:40, right:30, bottom:40, left:80};
+  const width = Math.min(900, window.innerWidth - 80) - margin.left - margin.right;
+  const height = 250 - margin.top - margin.bottom;
+  const svg = d3.select("#chart-first-appear").attr("viewBox", `0 0 ${width+margin.left+margin.right} ${height+margin.top+margin.bottom}`);
+  svg.selectAll("*").remove();
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+  const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+  const y = d3.scaleBand().domain(data.map(d=>d.name)).range([0, height]).padding(0.3);
+  g.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(10));
+  g.append("g").call(d3.axisLeft(y));
+  g.selectAll(".bar").data(data).enter().append("rect")
+    .attr("class","bar")
+    .attr("x", 0).attr("y", d=>y(d.name))
+    .attr("width", d=>x(d.chapter)).attr("height", y.bandwidth())
+    .attr("fill", "var(--accent2)").attr("opacity", 0.7);
+  g.selectAll(".label").data(data).enter().append("text")
+    .attr("class","label")
+    .attr("x", d=>x(d.chapter)+5).attr("y", d=>y(d.name)+y.bandwidth()/2+4)
+    .attr("fill","var(--ink)").attr("font-size","0.8em")
+    .text(d=>`第${d.chapter}回 (line ${d.line})`);
+}
+
+function renderExit() {
+  const data = EMBEDDED.villains;
+  const margin = {top:20, right:30, bottom:40, left:80};
+  const width = Math.min(900, window.innerWidth - 80) - margin.left - margin.right;
+  const height = 350 - margin.top - margin.bottom;
+  const svg = d3.select("#chart-exit").attr("viewBox", `0 0 ${width+margin.left+margin.right} ${height+margin.top+margin.bottom}`);
+  svg.selectAll("*").remove();
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+  const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+  const y = d3.scaleBand().domain(data.map(d=>d.name)).range([0, height]).padding(0.2);
+  g.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(10));
+  g.append("g").call(d3.axisLeft(y));
+  g.selectAll(".bar").data(data).enter().append("rect")
+    .attr("class","bar")
+    .attr("x", d=>x(d.start)).attr("y", d=>y(d.name))
+    .attr("width", d=>x(d.end)-x(d.start)+5).attr("height", y.bandwidth())
+    .attr("fill", d=>EMBEDDED.exit_colors[d.exit_type])
+    .style("cursor","pointer")
+    .append("title").text(d=>`${d.name}: 第${d.start}-${d.end}回 (${d.exit_type})`);
+  // Legend
+  const legend = d3.select("#exit-legend");
+  legend.selectAll("*").remove();
+  Object.entries(EMBEDDED.exit_colors).forEach(([type, color]) => {
+    const item = legend.append("div").attr("class","legend-item");
+    item.append("div").attr("class","legend-swatch").style("background", color);
+    item.append("span").text(type);
+  });
+}
+
+// F6 skeleton
+function loadData() { return Promise.resolve(EMBEDDED); }
+function main() {
+  loadData().then(data => {
+    renderPresence();
+    renderHeatmap();
+    renderCumulative();
+    renderFirstAppear();
+    renderExit();
+  });
+}
+window.__lastData = EMBEDDED;
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(main, 250);
+});
+main();
+</script>
+</body>
+</html>

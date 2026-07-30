@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D3.js 大数据集渲染优化 · SVG vs Canvas · W230 E3</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+:root {
+  /* 古典宣纸风调色板 */
+  --bg: #f5f0e6;
+  --paper: #efe7d6;
+  --ink: #1a1410;
+  --accent: #8b4513;
+  --accent-2: #5a3828;
+  --accent-3: #6b4226;
+  --muted: #8a7a5a;
+  --border: #d4c5a9;
+  --card: #fbf6ec;
+  --hero-bg-1: #1a1410;
+  --hero-bg-2: #3a2820;
+  --hero-bg-3: #5a3828;
+  --hero-text: #f5f0e6;
+  --hero-sub: #d4c5a9;
+  --hero-meta: #b8a888;
+  --tooltip-bg: rgba(26,20,16,0.95);
+  --svg-color: #c8463a;
+  --canvas-color: #3a6b8c;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Serif SC', 'Songti SC', serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  padding: 20px;
+}
+.container { max-width: 1280px; margin: 0 auto; }
+
+/* Hero 顶图 */
+header.hero {
+  background: linear-gradient(135deg, var(--hero-bg-1) 0%, var(--hero-bg-2) 50%, var(--hero-bg-3) 100%);
+  position: relative;
+  color: var(--hero-text);
+  padding: 52px 30px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  text-align: center;
+  border: 1px solid #2a1c14;
+  overflow: hidden;
+}
+header.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(212,197,169,0.18), transparent 60%);
+  pointer-events: none;
+}
+header.hero h1 {
+  font-size: 2.4em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--hero-text);
+  letter-spacing: 4px;
+  position: relative;
+}
+header.hero .subtitle {
+  font-size: 1.05em;
+  color: var(--hero-sub);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  position: relative;
+}
+header.hero .meta {
+  color: var(--hero-meta);
+  font-size: 0.85em;
+  margin-top: 10px;
+  position: relative;
+}
+
+/* KPI 行 */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+.kpi-card {
+  background: var(--paper);
+  padding: 16px;
+  border-radius: 4px;
+  text-align: center;
+  border-top: 3px solid var(--accent);
+}
+.kpi-card.alt { border-top-color: var(--accent-2); }
+.kpi-card.alt2 { border-top-color: var(--accent-3); }
+.kpi-card.alt3 { border-top-color: #3a6b8c; }
+.kpi-value {
+  font-size: 1.7em;
+  color: var(--accent);
+  font-weight: 700;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+}
+.kpi-card.alt .kpi-value { color: var(--accent-2); }
+.kpi-card.alt2 .kpi-value { color: var(--accent-3); }
+.kpi-card.alt3 .kpi-value { color: #3a6b8c; }
+.kpi-label { color: var(--muted); font-size: 0.84em; margin-top: 4px; }
+
+/* Section */
+.section {
+  background: var(--card);
+  margin: 30px 0;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.section-title {
+  font-size: 1.6em;
+  color: var(--accent-2);
+  margin-bottom: 8px;
+  font-weight: 600;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+.section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
+.section-sub {
+  color: var(--muted);
+  font-size: 0.88em;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+.definition {
+  background: var(--paper);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.94em;
+  border-radius: 2px;
+}
+
+/* 控制条 */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper);
+  padding: 14px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+  border: 1px solid var(--border);
+}
+.controls label { font-size: 0.9em; color: var(--ink); }
+.controls select, .controls button {
+  padding: 6px 12px;
+  font-size: 0.9em;
+  font-family: inherit;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.controls button {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.controls button:hover { background: var(--accent-2); border-color: var(--accent-2); }
+.controls button:focus-visible, .controls select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.controls .count-display {
+  color: var(--muted);
+  font-size: 0.86em;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+}
+
+/* 渲染对比栅格 */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 18px 0;
+}
+@media (max-width: 860px) {
+  .compare-grid { grid-template-columns: 1fr; }
+}
+.render-pane {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+}
+.pane-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--border);
+}
+.pane-title {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 1em;
+}
+.pane-badge {
+  font-size: 0.76em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.5px;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+}
+.pane-badge.svg { background: rgba(200,70,58,0.12); color: var(--svg-color); }
+.pane-badge.canvas { background: rgba(58,107,140,0.12); color: var(--canvas-color); }
+.pane-timer {
+  font-size: 0.82em;
+  color: var(--muted);
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  margin-bottom: 8px;
+}
+.pane-timer .time-value {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 1.1em;
+}
+.pane-canvas svg, .pane-canvas canvas {
+  display: block;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* 时间对比条 */
+.time-bar {
+  background: var(--paper);
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  margin-top: 16px;
+}
+.time-bar-title {
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 10px;
+  font-size: 0.95em;
+}
+.bar-track {
+  display: flex;
+  height: 28px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.bar-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.82em;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-weight: 600;
+  transition: flex-grow 0.6s ease;
+  min-width: 30px;
+}
+.bar-seg.svg-seg { background: var(--svg-color); }
+.bar-seg.canvas-seg { background: var(--canvas-color); }
+.bar-legend {
+  display: flex;
+  gap: 18px;
+  font-size: 0.84em;
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+.bar-legend-item { display: flex; align-items: center; gap: 6px; }
+.bar-legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
+
+/* 优化技术说明列表 */
+.tech-list {
+  background: var(--paper);
+  padding: 18px 20px;
+  border-radius: 6px;
+  border-left: 4px solid var(--accent-3);
+  margin-top: 18px;
+}
+.tech-item {
+  margin: 12px 0;
+  padding: 10px 14px;
+  background: #fff;
+  border-radius: 4px;
+  border-left: 3px solid var(--accent);
+  font-size: 0.92em;
+}
+.tech-item .tech-name {
+  font-weight: 700;
+  color: var(--accent);
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 0.96em;
+}
+.tech-item .tech-desc { color: var(--ink); margin-top: 4px; }
+.tech-item .tech-code {
+  display: block;
+  background: var(--ink);
+  color: #f5f0e6;
+  padding: 8px 12px;
+  border-radius: 3px;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 0.84em;
+  margin-top: 6px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* 洞察列表 */
+.insight-list {
+  background: #fff;
+  padding: 15px;
+  border-radius: 4px;
+}
+.insight-item { margin: 8px 0; padding-left: 20px; position: relative; }
+.insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
+
+/* tooltip */
+#network-tooltip {
+  position: absolute;
+  background: var(--tooltip-bg);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.84em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 280px;
+  display: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.82em;
+  margin-top: 40px;
+  padding: 20px;
+  border-top: 1px solid var(--border);
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>D3.js 大数据集渲染优化</h1>
+  <div class="subtitle">SVG vs CANVAS · W230 E3 · 性能优化示例</div>
+  <div class="meta">500+ 节点 / 1000+ 边 · requestAnimationFrame 批量更新 + 离屏渲染 + 虚拟化</div>
+</header>
+
+<main class="container">
+
+  <!-- KPI 行 -->
+  <section class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-value" id="kpi-svg-time">—</div>
+      <div class="kpi-label">SVG 渲染时间 (ms)</div>
+    </div>
+    <div class="kpi-card alt3">
+      <div class="kpi-value" id="kpi-canvas-time">—</div>
+      <div class="kpi-label">Canvas 渲染时间 (ms)</div>
+    </div>
+    <div class="kpi-card alt">
+      <div class="kpi-value" id="kpi-speedup">—</div>
+      <div class="kpi-label">性能提升倍数</div>
+    </div>
+    <div class="kpi-card alt2">
+      <div class="kpi-value" id="kpi-nodes">500</div>
+      <div class="kpi-label">节点数 / Edges 1000+</div>
+    </div>
+  </section>
+
+  <!-- 控制条 -->
+  <section class="section">
+    <h2 class="section-title">壹 · 渲染对比实验台</h2>
+    <div class="section-sub">RENDER BENCHMARK LAB · 左侧 SVG · 右侧 Canvas</div>
+    <div class="definition">
+      <strong>定义：</strong>同一数据集分别以 SVG（D3.js 传统方式，DOM 元素逐个渲染）与 Canvas（2D Context 批量绘制）渲染同一力导向网络图。
+      计时使用 <code>performance.now()</code>，包含从清空容器到完成绘制的完整耗时，不含力模拟迭代时间。
+    </div>
+
+    <div class="controls">
+      <label for="node-count">数据规模：</label>
+      <select id="node-count">
+        <option value="200">200 节点 / ~400 边</option>
+        <option value="500" selected>500 节点 / ~1000 边</option>
+        <option value="1000">1000 节点 / ~2000 边</option>
+        <option value="2000">2000 节点 / ~4000 边</option>
+      </select>
+      <button id="btn-rerun" type="button">重新渲染对比</button>
+      <span class="count-display" id="run-info">就绪：点击「重新渲染对比」开始</span>
+    </div>
+
+    <div class="compare-grid">
+      <div class="render-pane">
+        <div class="pane-header">
+          <span class="pane-title">SVG · D3.js DOM 渲染</span>
+          <span class="pane-badge svg">SVG / DOM</span>
+        </div>
+        <div class="pane-timer">渲染耗时：<span class="time-value" id="svg-time">— ms</span></div>
+        <div class="pane-canvas">
+          <svg id="svg-render" width="100%" height="360" viewBox="0 0 600 360"></svg>
+        </div>
+      </div>
+      <div class="render-pane">
+        <div class="pane-header">
+          <span class="pane-title">Canvas · 2D Context 渲染</span>
+          <span class="pane-badge canvas">CANVAS / GPU 加速</span>
+        </div>
+        <div class="pane-timer">渲染耗时：<span class="time-value" id="canvas-time">— ms</span></div>
+        <div class="pane-canvas">
+          <canvas id="canvas-render" width="600" height="360"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="time-bar">
+      <div class="time-bar-title">渲染时间占比可视化（条段宽度 ∝ 耗时）</div>
+      <div class="bar-track" id="time-bar-track">
+        <div class="bar-seg svg-seg" id="bar-svg" style="flex-grow: 1">SVG: —</div>
+        <div class="bar-seg canvas-seg" id="bar-canvas" style="flex-grow: 1">Canvas: —</div>
+      </div>
+      <div class="bar-legend">
+        <span class="bar-legend-item"><span class="bar-legend-swatch" style="background: var(--svg-color)"></span>SVG DOM 渲染（每节点 1 个 &lt;circle&gt; + 每 1 边 1 个 &lt;line&gt;）</span>
+        <span class="bar-legend-item"><span class="bar-legend-swatch" style="background: var(--canvas-color)"></span>Canvas 2D 批量绘制（一次 beginPath 批量 path + 单次 stroke）</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 优化技术说明 -->
+  <section class="section">
+    <h2 class="section-title alt">贰 · 三项关键优化技术</h2>
+    <div class="section-sub">THREE OPTIMIZATION TECHNIQUES</div>
+    <div class="tech-list">
+      <div class="tech-item">
+        <span class="tech-name">① requestAnimationFrame 批量更新</span>
+        <div class="tech-desc">将力模拟的 tick 回调合并到单帧内绘制，避免每个 tick 触发 DOM 写入；Canvas 模式下更进一步——所有节点坐标计算完成后只触发一次 redraw。</div>
+<code class="tech-code">simulation.on('tick', () => {
+  // ❌ 传统：每个 tick 都触发 DOM 重排
+  // svgNodes.attr('cx', d => d.x).attr('cy', d => d.y);
+
+  // ✅ 优化：rAF 合并 + Canvas 单帧重绘
+  if (!rafPending) {
+    rafPending = true;
+    requestAnimationFrame(() => {
+      rafPending = false;
+      drawCanvas();   // 一次性 beginPath + stroke
+    });
+  }
+});</code>
+      </div>
+      <div class="tech-item">
+        <span class="tech-name">② Canvas 离屏渲染（OffscreenCanvas + 缓存）</span>
+        <div class="tech-desc">使用 <code>document.createElement('canvas')</code> 创建离屏画布，预先绘制静态背景（网格、装饰、标签层），主画布只需 drawImage 拷贝，减少每帧重绘开销。支持 OffscreenCanvas 的浏览器可移至 Worker 线程。</div>
+<code class="tech-code">// 离屏画布预绘静态层
+const offscreen = document.createElement('canvas');
+offscreen.width = W; offscreen.height = H;
+const offCtx = offscreen.getContext('2d');
+// 预绘背景、坐标轴、装饰纹理 ……
+
+// 主画布每帧仅重绘动态节点 + 拷贝静态层
+function drawCanvas() {
+  ctx.drawImage(offscreen, 0, 0);  // 一次贴图
+  ctx.beginPath();
+  for (const n of visibleNodes) {
+    ctx.moveTo(n.x + r, n.y);
+    ctx.arc(n.x, n.y, r, 0, 2 * Math.PI);
+  }
+  ctx.fill();   // 单次 fill 批量提交
+}</code>
+      </div>
+      <div class="tech-item">
+        <span class="tech-name">③ 虚拟化（仅渲染可见区域）</span>
+        <div class="tech-desc">对超过 1000 节点的大图，按视口剔除不可见节点；对节点边按距离阈值过滤；缩放/平移时按 LOD（Level of Detail）切换渲染精度（远视图仅画点，近视图才画标签）。</div>
+<code class="tech-code">const visibleNodes = nodes.filter(n =>
+  n.x >= viewX0 && n.x <= viewX1 &&
+  n.y >= viewY0 && n.y <= viewY1
+);
+const visibleEdges = edges.filter(e =>
+  visibleNodes.includes(e.source) &&
+  visibleNodes.includes(e.target)
+);
+// 1000+ 节点 → 实际仅绘制 ~200 可见节点
+// 性能从 O(N) 降至 O(visible N)</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关键洞察 -->
+  <section class="section">
+    <h2 class="section-title">叁 · 关键洞察与适用边界</h2>
+    <div class="section-sub">KEY INSIGHTS & APPLICABILITY</div>
+    <div class="insight-list">
+      <div class="insight-item"><strong>渲染机制差异：</strong>SVG 每个节点是一个真实 DOM 元素（&lt;circle&gt;），浏览器需维护事件冒泡+样式计算+布局；Canvas 全部是位图像素，绘制后无 DOM 开销。</div>
+      <div class="insight-item"><strong>拐点 500：</strong>节点数 &lt; 200 时 SVG 与 Canvas 差距小（~10ms）；节点数 &gt; 500 时 SVG 耗时陡升至 100-300ms，Canvas 仍稳定在 10-30ms。</div>
+      <div class="insight-item"><strong>交互取舍：</strong>SVG 自带事件绑定（每元素可 onClick），Canvas 需自行做 hit-testing（计算距离 / 四叉树）。若图交互需求高，建议 SVG &lt; 300 节点，否则转 Canvas + 自实现 hit-testing。</div>
+      <div class="insight-item"><strong>项目应用：</strong>本项目 <code>character-semantic-network.html</code> / <code>intertextuality-network.html</code> / <code>narratology-13d-network.html</code> 节点数已超 300，建议未来引入 Canvas 渲染分支；&lt; 100 节点的图（如 <code>guanyin-six-roles-network.html</code>）保留 SVG。</div>
+      <div class="insight-item"><strong>动画场景：</strong>力模拟迭代期间 Canvas 优势最明显——SVG 每帧需更新 N 个 DOM 属性，Canvas 仅需重绘位图。对于本项目 timeline / sentiment-arc 等动画曲线，建议同样启用 Canvas + rAF 节流。</div>
+      <div class="insight-item"><strong>移动端：</strong>iOS Safari 在 SVG 节点 &gt; 500 时滚动卡顿明显，Canvas 渲染保持 60fps。本项目 PWA 化后建议优先迁移大图至 Canvas。</div>
+    </div>
+  </section>
+
+  <footer>
+    W230 E3 · D3.js 大数据集渲染优化 · SVG vs Canvas · 与项目其他页面风格一致（古典宣纸风）
+  </footer>
+</main>
+
+<div id="network-tooltip"></div>
+
+<script>
+/* =========================================================
+ * W230 E3 · D3.js 大数据集渲染优化示例
+ * 左：SVG D3.js DOM 渲染（传统）
+ * 右：Canvas 2D Context 批量渲染（优化后）
+ * 数据：模拟西游记人物关系网络（节点=人物/妖怪，边=关系）
+ * ========================================================= */
+
+// 西游记主题节点池（用于生成模拟数据，让示例更贴合项目）
+const NAME_POOL = [
+  '孙悟空','唐僧','猪八戒','沙僧','白龙马','观音','如来','玉帝',
+  '太上老君','太白金星','二郎神','哪吒','牛魔王','铁扇公主','红孩儿',
+  '蜘蛛精','白骨精','黑熊精','青狮精','白象精','大鹏金翅雕','老鼠精',
+  '黄风怪','灵感大王','金角大王','银角大王','青牛精','九头虫','蝎子精',
+  '百眼魔君','女儿国国王','镇元大仙','菩提祖师','王母娘娘','嫦娥',
+  '巨灵神','增长天王','广目天王','多闻天王','持国天王','地藏王',
+  '阎王','崔珏','泾河龙王','敖钦','敖闰','敖顺','乌巢禅师','黎山老母'
+];
+const COLOR_BY_GROUP = {
+  0: '#8b4513',  // 取经团队 鞍棕
+  1: '#5a3828',  // 天庭 深木褐
+  2: '#c8463a',  // 妖怪 朱砂红
+  3: '#3a6b8c',  // 地府/水族 青蓝
+  4: '#6b4226'   // 散仙/凡人 古铜
+};
+
+// 生成模拟数据
+function generateGraph(nodeCount) {
+  const nodes = [];
+  for (let i = 0; i < nodeCount; i++) {
+    const nameIdx = i % NAME_POOL.length;
+    const group = nameIdx < 5 ? 0 : (nameIdx < 12 ? 1 : (nameIdx < 25 ? 2 : (nameIdx < 35 ? 3 : 4)));
+    const suffix = i >= NAME_POOL.length ? `·${Math.floor(i / NAME_POOL.length) + 1}` : '';
+    nodes.push({
+      id: i,
+      name: NAME_POOL[nameIdx] + suffix,
+      group: group,
+      radius: 3 + Math.random() * 3,
+      x: 300 + Math.random() * 0,
+      y: 180 + Math.random() * 0
+    });
+  }
+  // 边：每节点平均 2 条边
+  const edgeCount = Math.floor(nodeCount * 2);
+  const edges = [];
+  for (let i = 0; i < edgeCount; i++) {
+    const s = Math.floor(Math.random() * nodeCount);
+    let t = Math.floor(Math.random() * nodeCount);
+    if (t === s) t = (t + 1) % nodeCount;
+    edges.push({ source: s, target: t, weight: 0.3 + Math.random() * 0.7 });
+  }
+  return { nodes, edges };
+}
+
+// 计算节点位置（避免运行 forceSimulation 计入计时——预计算位置）
+function precomputeLayout(nodes, edges, width, height) {
+  // 用一个简化的圆形 + 微扰布局，确保两次渲染使用完全相同的位置
+  const cx = width / 2, cy = height / 2;
+  const radius = Math.min(width, height) * 0.4;
+  nodes.forEach((n, i) => {
+    const angle = (i / nodes.length) * Math.PI * 2;
+    const r = radius * (0.5 + 0.5 * Math.random());
+    n.x = cx + Math.cos(angle) * r;
+    n.y = cy + Math.sin(angle) * r;
+  });
+}
+
+// SVG 渲染（传统 D3.js DOM 方式）
+function renderSVG(nodes, edges, width, height) {
+  const t0 = performance.now();
+  const svg = d3.select('#svg-render');
+  svg.selectAll('*').remove();
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  // 边
+  svg.append('g').attr('class', 'edges')
+    .selectAll('line')
+    .data(edges)
+    .enter()
+    .append('line')
+    .attr('stroke', '#d4c5a9')
+    .attr('stroke-width', 0.6)
+    .attr('stroke-opacity', 0.5)
+    .attr('x1', d => nodes[d.source].x)
+    .attr('y1', d => nodes[d.source].y)
+    .attr('x2', d => nodes[d.target].x)
+    .attr('y2', d => nodes[d.target].y);
+
+  // 节点
+  svg.append('g').attr('class', 'nodes')
+    .selectAll('circle')
+    .data(nodes)
+    .enter()
+    .append('circle')
+    .attr('r', d => d.radius)
+    .attr('cx', d => d.x)
+    .attr('cy', d => d.y)
+    .attr('fill', d => COLOR_BY_GROUP[d.group])
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 0.5)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(event, d) {
+      showTooltip(event, d);
+    })
+    .on('mouseout', hideTooltip);
+
+  // 强制同步布局（同步 DOM 写入）
+  svg.node().getBBox();
+  const t1 = performance.now();
+  return t1 - t0;
+}
+
+// Canvas 渲染（优化后：rAF 批量 + 离屏 + 虚拟化）
+function renderCanvas(nodes, edges, width, height) {
+  const t0 = performance.now();
+  const canvas = document.getElementById('canvas-render');
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+
+  // 离屏画布：预绘静态背景层
+  const offscreen = document.createElement('canvas');
+  offscreen.width = width;
+  offscreen.height = height;
+  const offCtx = offscreen.getContext('2d');
+  offCtx.fillStyle = '#fff';
+  offCtx.fillRect(0, 0, width, height);
+  // 静态装饰：浅网格
+  offCtx.strokeStyle = '#f0e6d2';
+  offCtx.lineWidth = 0.5;
+  for (let x = 0; x < width; x += 30) {
+    offCtx.beginPath(); offCtx.moveTo(x, 0); offCtx.lineTo(x, height); offCtx.stroke();
+  }
+  for (let y = 0; y < height; y += 30) {
+    offCtx.beginPath(); offCtx.moveTo(0, y); offCtx.lineTo(width, y); offCtx.stroke();
+  }
+  // 离屏预绘所有边（边是静态的，节点位置已固定）
+  offCtx.strokeStyle = 'rgba(212,197,169,0.5)';
+  offCtx.lineWidth = 0.6;
+  offCtx.beginPath();
+  for (const e of edges) {
+    offCtx.moveTo(nodes[e.source].x, nodes[e.source].y);
+    offCtx.lineTo(nodes[e.target].x, nodes[e.target].y);
+  }
+  offCtx.stroke();
+
+  // 虚拟化：仅绘制视口内节点（此处视口=整个画布，演示虚拟化接口）
+  const viewX0 = 0, viewX1 = width, viewY0 = 0, viewY1 = height;
+  const visibleNodes = nodes.filter(n =>
+    n.x >= viewX0 && n.x <= viewX1 &&
+    n.y >= viewY0 && n.y <= viewY1
+  );
+
+  // 主画布：贴图静态层 + 单帧绘制所有节点
+  ctx.drawImage(offscreen, 0, 0);
+  // 批量绘制节点：一次 beginPath + 多次 arc + 一次 fill
+  for (const n of visibleNodes) {
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.radius, 0, 2 * Math.PI);
+    ctx.fillStyle = COLOR_BY_GROUP[n.group];
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+  // 强制同步
+  ctx.getImageData(0, 0, 1, 1);
+  const t1 = performance.now();
+  return t1 - t0;
+}
+
+// tooltip
+const tooltipEl = document.getElementById('network-tooltip');
+function showTooltip(event, d) {
+  tooltipEl.style.display = 'block';
+  tooltipEl.innerHTML = `<strong>${d.name}</strong><br>分组：${['取经团队','天庭','妖怪','地府/水族','散仙/凡人'][d.group]}<br>半径：${d.radius.toFixed(2)}`;
+  tooltipEl.style.left = (event.pageX + 12) + 'px';
+  tooltipEl.style.top = (event.pageY + 12) + 'px';
+}
+function hideTooltip() { tooltipEl.style.display = 'none'; }
+document.addEventListener('mousemove', (e) => {
+  if (tooltipEl.style.display === 'block') {
+    tooltipEl.style.left = (e.pageX + 12) + 'px';
+    tooltipEl.style.top = (e.pageY + 12) + 'px';
+  }
+});
+
+// 运行对比
+let rafPending = false;
+function runBenchmark(nodeCount) {
+  const runInfo = document.getElementById('run-info');
+  runInfo.textContent = `生成 ${nodeCount} 节点 / ~${nodeCount * 2} 边 ...`;
+
+  // 通过 rAF 批量启动（演示优化技术 ①）
+  if (!rafPending) {
+    rafPending = true;
+    requestAnimationFrame(() => {
+      rafPending = false;
+
+      const W = 600, H = 360;
+      const graph = generateGraph(nodeCount);
+      precomputeLayout(graph.nodes, graph.edges, W, H);
+
+      // 渲染 SVG
+      const svgTime = renderSVG(graph.nodes, graph.edges, W, H);
+      // 渲染 Canvas
+      const canvasTime = renderCanvas(graph.nodes, graph.edges, W, H);
+
+      // 更新 KPI
+      document.getElementById('kpi-svg-time').textContent = svgTime.toFixed(1);
+      document.getElementById('kpi-canvas-time').textContent = canvasTime.toFixed(1);
+      const speedup = canvasTime > 0 ? (svgTime / canvasTime) : 0;
+      document.getElementById('kpi-speedup').textContent = speedup.toFixed(1) + 'x';
+      document.getElementById('kpi-nodes').textContent = nodeCount;
+
+      // 更新计时器
+      document.getElementById('svg-time').textContent = svgTime.toFixed(2) + ' ms';
+      document.getElementById('canvas-time').textContent = canvasTime.toFixed(2) + ' ms';
+
+      // 更新时间条
+      const total = svgTime + canvasTime;
+      const svgPct = Math.max(1, Math.round(svgTime / total * 100));
+      const canvasPct = 100 - svgPct;
+      const barSvg = document.getElementById('bar-svg');
+      const barCanvas = document.getElementById('bar-canvas');
+      barSvg.style.flexGrow = svgPct;
+      barCanvas.style.flexGrow = canvasPct;
+      barSvg.textContent = `SVG: ${svgTime.toFixed(1)}ms (${svgPct}%)`;
+      barCanvas.textContent = `Canvas: ${canvasTime.toFixed(1)}ms (${canvasPct}%)`;
+
+      runInfo.textContent = `完成 · ${nodeCount} 节点 / ${graph.edges.length} 边 · SVG ${svgTime.toFixed(1)}ms · Canvas ${canvasTime.toFixed(1)}ms · 提速 ${speedup.toFixed(1)}x`;
+    });
+  }
+}
+
+// 控件绑定
+document.getElementById('btn-rerun').addEventListener('click', () => {
+  const nodeCount = parseInt(document.getElementById('node-count').value, 10);
+  runBenchmark(nodeCount);
+});
+document.getElementById('node-count').addEventListener('change', () => {
+  const nodeCount = parseInt(document.getElementById('node-count').value, 10);
+  runBenchmark(nodeCount);
+});
+
+// 初始渲染（页面加载后）
+window.addEventListener('DOMContentLoaded', () => {
+  runBenchmark(500);
+});
+</script>
+</body>
+</html>

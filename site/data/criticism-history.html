@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>批评史长卷 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --line: #d9cdb8;
+            --rebel: #8c2a2a;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 56px 24px 44px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.3rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.28em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 14px;
+            font-size: 0.86rem;
+            color: rgba(245, 233, 212, 0.68);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 8px; color: var(--ink-soft); opacity: 0.6; }
+
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 768px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card:nth-child(2) { border-top-color: var(--accent-2); }
+        .kpi-card:nth-child(3) { border-top-color: var(--accent-3); }
+        .kpi-card:nth-child(4) { border-top-color: var(--accent-4); }
+        .kpi-card .label {
+            font-size: 0.76rem;
+            color: var(--accent);
+            letter-spacing: 0.16em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card:nth-child(2) .label { color: var(--accent-2); }
+        .kpi-card:nth-child(3) .label { color: var(--accent-3); }
+        .kpi-card:nth-child(4) .label { color: var(--accent-4); }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc { font-size: 0.84rem; color: var(--ink-soft); }
+
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+            line-height: 1.65;
+        }
+        .section-sub strong { color: var(--accent); font-weight: 600; }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 18px;
+            margin-top: 14px;
+            font-size: 0.84rem;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+        /* ===== Chart 1: 解读河流图 ===== */
+        #river-chart {
+            width: 100%;
+            height: 560px;
+            display: block;
+        }
+        .river-axis text, .river-axis line, .river-axis path {
+            font-size: 0.78rem;
+            fill: var(--ink-soft);
+            stroke: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .river-zone-label {
+            font-size: 0.82rem;
+            fill: var(--ink-soft);
+            font-style: italic;
+        }
+        .river-stream {
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .river-node circle.river-dot {
+            stroke: #fff;
+            stroke-width: 2.5;
+            cursor: pointer;
+            transition: r 0.18s, stroke-width 0.18s;
+        }
+        .river-node:hover circle.river-dot { stroke-width: 3.5; }
+        .river-node text.river-name {
+            font-size: 0.92rem;
+            font-weight: 600;
+            fill: var(--ink);
+            pointer-events: none;
+        }
+        .river-node text.river-year {
+            font-size: 0.7rem;
+            fill: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            pointer-events: none;
+        }
+        .river-tooltip {
+            position: absolute;
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 12px 14px;
+            border-radius: 6px;
+            font-size: 0.84rem;
+            line-height: 1.55;
+            max-width: 320px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+            border: 1px solid var(--accent-soft);
+            z-index: 10;
+        }
+        .river-tooltip .rt-name { color: var(--accent-soft); font-weight: 600; font-size: 0.95rem; }
+        .river-tooltip .rt-meta { color: rgba(245,233,212,0.7); font-size: 0.76rem; margin-bottom: 6px; font-family: "JetBrains Mono", monospace; }
+        .river-tooltip .rt-quote { color: var(--accent-soft); font-style: italic; margin: 4px 0 6px; }
+
+        /* ===== Chart 2: 三教争辩三角形 ===== */
+        #triangle-chart {
+            width: 100%;
+            height: 520px;
+            display: block;
+        }
+        .tri-vertex-label {
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-anchor: middle;
+        }
+        .tri-vertex-sub {
+            font-size: 0.78rem;
+            fill: var(--ink-soft);
+            text-anchor: middle;
+            font-style: italic;
+        }
+        .tri-arg {
+            font-size: 0.82rem;
+            fill: var(--ink);
+        }
+        .tri-center-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            fill: var(--accent);
+            text-anchor: middle;
+            letter-spacing: 0.15em;
+        }
+        .tri-center-sub {
+            font-size: 0.72rem;
+            fill: var(--ink-soft);
+            text-anchor: middle;
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        /* ===== Chart 3: 作者悬疑推理图 ===== */
+        .detective-wall {
+            position: relative;
+            padding: 10px 0;
+        }
+        .detective-header {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 22px;
+            border-left: 4px solid var(--accent);
+        }
+        .detective-header strong { color: var(--accent-soft); }
+        .candidate-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+        @media (max-width: 768px) { .candidate-grid { grid-template-columns: 1fr; } }
+        .candidate-card {
+            background: linear-gradient(180deg, #fffdf8 0%, #faf7f2 100%);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 18px;
+            border-top: 3px solid var(--accent-3);
+            position: relative;
+        }
+        .candidate-card.main { border-top-color: var(--accent); }
+        .candidate-card.rejected { border-top-color: var(--ink-soft); opacity: 0.92; }
+        .candidate-card .cc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--line);
+        }
+        .candidate-card .cc-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .candidate-card.main .cc-name { color: var(--accent); }
+        .candidate-card .cc-meta {
+            font-size: 0.74rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .candidate-card .cc-identity {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .candidate-card .cc-status {
+            display: inline-block;
+            font-size: 0.74rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--accent-soft);
+            color: var(--accent-3);
+            margin-bottom: 10px;
+        }
+        .candidate-card.main .cc-status { background: var(--accent); color: #fff; }
+        .candidate-card.rejected .cc-status { background: var(--ink-soft); color: #fff; }
+        .evidence-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.8rem;
+        }
+        .evidence-col h5 {
+            font-size: 0.76rem;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid var(--line);
+        }
+        .evidence-col.for h5 { color: var(--accent-4); }
+        .evidence-col.against h5 { color: var(--accent); }
+        .evidence-col ul { list-style: none; padding: 0; margin: 0; }
+        .evidence-col li {
+            padding: 3px 0 3px 14px;
+            position: relative;
+            line-height: 1.5;
+            font-size: 0.78rem;
+        }
+        .evidence-col.for li::before {
+            content: "＋";
+            position: absolute; left: 0;
+            color: var(--accent-4); font-weight: 600;
+        }
+        .evidence-col.against li::before {
+            content: "－";
+            position: absolute; left: 0;
+            color: var(--accent); font-weight: 600;
+        }
+        .red-string {
+            position: absolute;
+            background: var(--accent);
+            height: 1px;
+            transform-origin: 0 0;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        /* ===== Chart 4: 内丹密码破译表 ===== */
+        .alchemy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            font-size: 0.88rem;
+        }
+        .alchemy-table th, .alchemy-table td {
+            border: 1px solid var(--line);
+            padding: 12px 14px;
+            vertical-align: top;
+            text-align: left;
+        }
+        .alchemy-table th {
+            background: #1a1410;
+            color: #f5e9d4;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            font-size: 0.84rem;
+        }
+        .alchemy-table th.alchemy-th-plot { border-right: 3px solid var(--accent); }
+        .alchemy-table td.plot {
+            background: var(--bg);
+            font-weight: 600;
+            color: var(--accent-3);
+            width: 36%;
+            border-right: 3px solid var(--accent);
+        }
+        .alchemy-table td.plot .plot-arrow {
+            display: block;
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            font-weight: 400;
+            margin-top: 3px;
+            font-style: italic;
+        }
+        .alchemy-table td.decoded {
+            color: var(--ink);
+            line-height: 1.6;
+        }
+        .alchemy-table td.decoded .decoded-key {
+            color: var(--accent-2);
+            font-weight: 600;
+        }
+        .alchemy-table td.source {
+            font-size: 0.76rem;
+            color: var(--accent-4);
+            font-family: "JetBrains Mono", monospace;
+            width: 22%;
+            background: #fffdf8;
+            font-style: italic;
+        }
+
+        /* ===== Chart 5: 鲁迅祛魅手术刀 ===== */
+        .scalpel-stage {
+            position: relative;
+            background: linear-gradient(180deg, #fffdf8 0%, #f5e9d4 100%);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 30px 20px;
+            min-height: 420px;
+            overflow: hidden;
+        }
+        #scalpel-svg {
+            width: 100%;
+            height: 420px;
+            display: block;
+        }
+        .scalpel-note {
+            margin-top: 18px;
+            background: var(--paper);
+            border-left: 4px solid var(--accent);
+            padding: 14px 18px;
+            font-size: 0.88rem;
+            color: var(--ink);
+            line-height: 1.7;
+            border-radius: 0 4px 4px 0;
+        }
+        .scalpel-note strong { color: var(--accent); }
+        .scalpel-note em { color: var(--accent-2); font-style: italic; }
+        @keyframes wordFloat {
+            0%   { opacity: 0; transform: scale(0.6); }
+            20%  { opacity: 1; transform: scale(1); }
+            80%  { opacity: 1; transform: scale(1.08); }
+            100% { opacity: 0; transform: scale(1.15); }
+        }
+        .scalpel-word {
+            transform-origin: center center;
+            transform-box: fill-box;
+            animation: wordFloat 5s ease-in-out infinite;
+        }
+        .scalpel-blade {
+            animation: bladeCut 6s ease-in-out infinite;
+            transform-origin: center;
+            transform-box: fill-box;
+        }
+        @keyframes bladeCut {
+            0%, 30% { transform: translateX(0) rotate(-12deg); }
+            50%     { transform: translateX(120px) rotate(-12deg); }
+            70%, 100% { transform: translateX(0) rotate(-12deg); }
+        }
+        .text-crack {
+            animation: crackOpen 6s ease-in-out infinite;
+        }
+        @keyframes crackOpen {
+            0%, 30% { opacity: 0; }
+            50%, 70% { opacity: 1; }
+            80%, 100% { opacity: 0.4; }
+        }
+
+        /* ===== Insight Box ===== */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 22px 26px;
+            border-radius: 4px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            letter-spacing: 0.05em;
+        }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong { color: var(--accent); font-weight: 600; }
+        .insight-box li em { color: var(--accent-2); font-style: italic; }
+
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: #f5e9d4;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>批评史长卷 · Criticism Through Time</h1>
+        <div class="subtitle">明清至当代 · 五百年解读倾向流变图</div>
+        <div class="tagline">把五百年的《西游记》解读史本身做成被审视的对象——从李贽的童心到今何在的反叛，三条河流汇于一部原典</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">›</span>
+            <span>批评史长卷</span>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">TIMESPAN · 跨度</div>
+                <div class="value">500+ 年</div>
+                <div class="desc">1592 世德堂本刊行 → 2020s 当代重写</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">CRITICS · 批评家</div>
+                <div class="value">9 位</div>
+                <div class="desc">李贽·陈士斌·刘一明·张书绅·鲁迅·胡适·南怀瑾·戴锦华·今何在</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">PARADIGMS · 解读范式</div>
+                <div class="value">3 大</div>
+                <div class="desc">证道·游戏社会批判·反叛解构</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">DEBATE · 三教争辩</div>
+                <div class="value">3 教</div>
+                <div class="desc">儒·道·释·文，四派各执一词</div>
+            </div>
+        </div>
+
+        <!-- 核心可视化 1：解读河流图 -->
+        <section class="section">
+            <h2 class="section-title">解读河流图 · River of Interpretations</h2>
+            <div class="section-sub">
+                横轴为时间（1500s—2020s），纵轴为解读倾向：<strong>上</strong>＝证道/内丹，<strong>中</strong>＝社会批判/文学本位，<strong>下</strong>＝游戏/解构/反叛。
+                三条主流——<strong style="color:var(--accent-2)">证道流（青蓝）</strong>·<strong style="color:var(--accent-3)">文学流（赭石）</strong>·<strong style="color:var(--rebel)">反叛流（暗红）</strong>——汇于一部原典。
+                9 位批评家为节点，hover 显示其核心观点与代表语。
+            </div>
+            <svg id="river-chart"></svg>
+            <div class="legend" id="river-legend"></div>
+            <div class="river-tooltip" id="river-tooltip"></div>
+        </section>
+
+        <!-- 核心可视化 2：三教争辩三角形 -->
+        <section class="section">
+            <h2 class="section-title">三教争辩三角形 · Triangle of Three Teachings</h2>
+            <div class="section-sub">
+                等边三角形布局：顶<strong>儒（张书绅·大学正心）</strong>，左下<strong>道（陈士斌·内丹金丹）</strong>，右下<strong>释·文（现代学者·文学本位）</strong>。
+                中心为《西游记》<strong>原典</strong>——每派都自称"唯一正解"，但多义性恰恰来自这种无法收敛。
+            </div>
+            <svg id="triangle-chart"></svg>
+        </section>
+
+        <!-- 核心可视化 3：作者悬疑推理图 -->
+        <section class="section">
+            <h2 class="section-title">作者悬疑推理图 · The Author Whodunit</h2>
+            <div class="section-sub">
+                候选人 4 位（与 <a href="text-evolution.html" style="color:var(--accent-2)">源流演变</a> 呼应，本页采批评史视角）：
+                <strong>吴承恩 / 丘处机 / 李春芳 / 华阳洞天主人</strong>。侦探墙视觉：红线连接证据节点。
+                顶部锚点：<strong>胡适 1923《西游记考证》→ 推定吴承恩</strong>，鲁迅《中国小说史略》采信。
+            </div>
+            <div class="detective-wall">
+                <div class="detective-header">
+                    📌 <strong>胡适 1923《西游记考证》</strong> 以天启《淮安府志》为据，首次以现代实证方法<strong>推定吴承恩</strong>；鲁迅《中国小说史略》采信，遂成百年定论——然此结论在 21 世纪再度受到挑战。
+                </div>
+                <div class="candidate-grid" id="candidate-grid"></div>
+            </div>
+        </section>
+
+        <!-- 核心可视化 4：内丹密码破译表 -->
+        <section class="section">
+            <h2 class="section-title">内丹密码破译表 · The Alchemy Cipher</h2>
+            <div class="section-sub">
+                双列对照：<strong>左</strong>为原典情节，<strong>右</strong>为内丹派解读。陈士斌《西游真诠》、刘一明《西游原旨》将全部情节读作<strong style="color:var(--accent-2)">内丹修炼次第</strong>的隐喻。
+                这套"密码本"使《西游记》在清代几乎被改读为一部"金丹大道图解"。
+            </div>
+            <div style="overflow-x:auto;">
+                <table class="alchemy-table" id="alchemy-table">
+                    <thead>
+                        <tr>
+                            <th class="alchemy-th-plot">原文情节</th>
+                            <th>内丹解读</th>
+                            <th>出处</th>
+                        </tr>
+                    </thead>
+                    <tbody id="alchemy-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 核心可视化 5：鲁迅祛魅手术刀 -->
+        <section class="section">
+            <h2 class="section-title">鲁迅祛魅手术刀 · Lu Xun's Scalpel</h2>
+            <div class="section-sub">
+                鲁迅以手术刀切开《西游记》文本，剥离清代"金丹大道"的附会，露出核心词汇动态浮现——将其重新定位为<strong>神魔小说</strong>。
+                然而祛魅本身亦是一种<strong style="color:var(--accent)">赋魅</strong>：把"金丹"换成了"人情"，仍是另一种解读。
+            </div>
+            <div class="scalpel-stage">
+                <svg id="scalpel-svg" viewBox="0 0 900 420" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+            <div class="scalpel-note">
+                <strong>鲁迅《中国小说史略》（1923）</strong>："<em>作者禀性，复善谐剧，故虽述变幻恍忽之事，亦每杂解颐之言，使神魔皆有人情，精魅亦通世故……</em>"
+                ——以"游戏之作"四字定调，将《西游记》从"金丹大道"的附会中救出，归入<em>神魔小说</em>一类。
+                这一刀切开了清代证道派的密码本，却也开启了另一种解读的霸权。
+            </div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察 · Insights</h2>
+            <div class="insight-box">
+                <h4>批评史本身，是被审视的对象</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>批评史长卷 · 详解西游记 v0.9.1 · 2026-07-22</div>
+        <div style="margin-top: 8px;">
+            <a href="../dashboard.html">返回数据看板</a> · <a href="../index.html">返回首页</a>
+        </div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/04-文化与历史背景/版本演变.md">版本演变</a></div>
+    </footer>
+
+    <script>
+    /* ==========================================================
+       EMBEDDED_FALLBACK 数据（fetch 失败时使用 · file:// 必可用）
+       ========================================================== */
+    const EMBEDDED_DATA = {
+        summary: {
+            timespan_years: "500+",
+            start_year: 1592,
+            end_year: 2020,
+            critics_count: 9,
+            paradigms_count: 3,
+            religions_debate: 3
+        },
+        streams: [
+            {
+                key: "zhengdao",
+                label: "证道流 · Inner Alchemy",
+                color: "#3a6b8c",
+                desc: "以金丹大道解西游，将全部情节读作内丹修炼次第的隐喻",
+                path: ["陈士斌", "刘一明", "南怀瑾"]
+            },
+            {
+                key: "literary",
+                label: "文学流 · Literary Critique",
+                color: "#7a5230",
+                desc: "以文学本位与社会批判解读，剥离附会，回归文本",
+                path: ["李贽", "鲁迅", "胡适", "戴锦华"]
+            },
+            {
+                key: "rebel",
+                label: "反叛流 · Rebel / Deconstruction",
+                color: "#8c2a2a",
+                desc: "以反英雄、解构权威的姿态重写西游，反抗一切正解",
+                path: ["李贽", "今何在"]
+            }
+        ],
+        critics: [
+            {
+                name: "李贽", alias: "李卓吾",
+                era: "1527-1602", year: 1590,
+                school: "童心说",
+                streams: ["literary", "rebel"],
+                position: { x: 1590, y: 0.45 },
+                quote: "天下之至文，未有不出于童心焉者也。",
+                core_argument: "以童心说为标准，肯定《西游记》的文学性，开游戏说之先声；同时为后世文学本位与反叛解读的共同源头——500 年批评史的两条暗线皆从他分出。",
+                works: "《李卓吾先生批评西游记》（约 1590s）"
+            },
+            {
+                name: "陈士斌", alias: "悟一子",
+                era: "清·康熙间", year: 1696,
+                school: "金丹大道",
+                streams: ["zhengdao"],
+                position: { x: 1696, y: 0.06 },
+                quote: "此乃金丹大道也。心火、肾水，此中分明。",
+                core_argument: "以金丹大道解西游，将全部情节视为内丹修炼次第的隐喻。《西游真诠》为清代最流行评本，奠定证道派正统地位。",
+                works: "《西游真诠》（1696）"
+            },
+            {
+                name: "刘一明", alias: "悟元子",
+                era: "1734-1821", year: 1753,
+                school: "性命双修",
+                streams: ["zhengdao"],
+                position: { x: 1753, y: 0.02 },
+                quote: "西游原旨，在性命双修。心猿归正，六贼无踪。",
+                core_argument: "道教龙门派传人。《西游原旨》100 回逐回评点，丹道解西游最系统、集大成，影响深远，为证道派巅峰。",
+                works: "《西游原旨》（1753）"
+            },
+            {
+                name: "张书绅", alias: "新说主人",
+                era: "清·乾隆间", year: 1753,
+                school: "大学正心",
+                streams: [],
+                position: { x: 1753, y: 0.34 },
+                quote: "西游之旨，在《学》《庸》。心猿，即人心也。",
+                core_argument: "以儒解西游，主张'三教圆融'而归宗于儒，以《大学》《中庸》正心诚意为全书纲领。独树一帜，与证道派分庭抗礼。",
+                works: "《新说西游记》（1753）"
+            },
+            {
+                name: "鲁迅", alias: "",
+                era: "1881-1936", year: 1923,
+                school: "神魔小说",
+                streams: ["literary"],
+                position: { x: 1923, y: 0.5 },
+                quote: "神魔皆有人情，精魅亦通世故。",
+                core_argument: "《中国小说史略》剥离金丹附会，将《西游记》定位为'神魔小说'，主'游戏之说'，开现代文学本位研究先河。这一祛魅手术，影响百年。",
+                works: "《中国小说史略》（1923）"
+            },
+            {
+                name: "胡适", alias: "",
+                era: "1891-1962", year: 1923,
+                school: "考证本位",
+                streams: ["literary"],
+                position: { x: 1923, y: 0.56 },
+                quote: "《西游记》乃一部游戏之作。",
+                core_argument: "《西游记考证》以实证方法考定作者为吴承恩，主'游戏之作'说，与鲁迅共同奠定现代学术范式。'吴承恩说'由此成为百年定论。",
+                works: "《西游记考证》（1923）"
+            },
+            {
+                name: "南怀瑾", alias: "",
+                era: "1918-2012", year: 1976,
+                school: "修行隐喻",
+                streams: ["zhengdao"],
+                position: { x: 1976, y: 0.12 },
+                quote: "《西游记》是一部修行寓言，每一难都是一关。",
+                core_argument: "融汇三教，以修行隐喻解西游，使明清证道说在当代得以隔代回响，连接传统丹道与现代修行。证道流的当代延续。",
+                works: "《西游记》与修行相关讲述（1970s—2000s）"
+            },
+            {
+                name: "戴锦华", alias: "",
+                era: "1959—", year: 1995,
+                school: "文化批判",
+                streams: ["literary"],
+                position: { x: 1995, y: 0.5 },
+                quote: "重读经典，是重读我们自身。",
+                core_argument: "以文化研究、性别批判视角重读《西游记》，将文学本位延伸至意识形态批判。鲁迅式祛魅的当代延续，亦是文学流的当代变奏。",
+                works: "当代文化研究·经典重读论著"
+            },
+            {
+                name: "今何在", alias: "",
+                era: "1977—", year: 2000,
+                school: "反叛解构",
+                streams: ["rebel"],
+                position: { x: 2000, y: 0.95 },
+                quote: "我要这天，再遮不住我眼；要这地，再埋不了我心。",
+                core_argument: "《悟空传》重写西游，以反英雄、解构权威的姿态回应经典。是对鲁迅式文学本位的反动，也是对明清证道说的隔代回响——反叛流终于汇成长河。",
+                works: "《悟空传》（2000）"
+            }
+        ],
+        triangle: {
+            vertices: [
+                {
+                    key: "ru", label: "儒", sub: "张书绅 · 大学正心",
+                    pos: "top",
+                    args: [
+                        "西游之旨，在《学》《庸》",
+                        "心猿即人心·正心诚意",
+                        "三教圆融·归宗于儒"
+                    ]
+                },
+                {
+                    key: "dao", label: "道", sub: "陈士斌 · 内丹金丹",
+                    pos: "bl",
+                    args: [
+                        "全部情节＝内丹修炼次第",
+                        "八卦炉＝丹田·金箍棒＝真意",
+                        "金丹大道·性命双修"
+                    ]
+                },
+                {
+                    key: "wen", label: "释·文", sub: "现代学者 · 文学本位",
+                    pos: "br",
+                    args: [
+                        "游戏之作·神魔小说",
+                        "神魔皆有人情·精魅亦通世故",
+                        "作者考证·文本细读"
+                    ]
+                }
+            ]
+        },
+        candidates: [
+            {
+                name: "吴承恩",
+                identity: "明·淮安府山阳县·长兴县丞",
+                lifetime: "约 1500—1582",
+                status: "主流采信·百年定论",
+                type: "main",
+                evidence_for: [
+                    "天启《淮安府志》'吴承恩《西游记》'著录",
+                    "胡适 1923《考证》推定·鲁迅《史略》采信",
+                    "方言与淮安话有部分契合"
+                ],
+                evidence_against: [
+                    "'西游记'未注明文体·或为游记",
+                    "吴承恩文集无相关道教术语",
+                    "同乡文人圈无第二记录佐证",
+                    "21 世纪学界再度质疑"
+                ],
+                pushed_by: "胡适·鲁迅（1923）"
+            },
+            {
+                name: "丘处机",
+                identity: "元·全真教龙门派祖师",
+                lifetime: "1148—1227",
+                status: "已基本否定·清代评本附会",
+                type: "rejected",
+                evidence_for: [
+                    "清代《西游证道书》主张",
+                    "全真教术语遍布全书",
+                    "丘处机西行见成吉思汗·类取经"
+                ],
+                evidence_against: [
+                    "丘卒于 1227·世本刊于 1592·相隔 300 余年",
+                    "百回本语言为明代·非元初",
+                    "《长春真人西游记》实为游记·非小说"
+                ],
+                pushed_by: "汪象旭·陈士斌·刘一明（证道派）"
+            },
+            {
+                name: "李春芳",
+                identity: "明·内阁首辅·谥文定",
+                lifetime: "1511—1585",
+                status: "近年兴起假说·支持者渐多",
+                type: "candidate",
+                evidence_for: [
+                    "华阳洞天主人·李春芳号'华阳洞天人'",
+                    "茅山华阳洞·李春芳与茅山道派渊源",
+                    "首辅身份与宫廷描写深度匹配"
+                ],
+                evidence_against: [
+                    "无直接证据",
+                    "首辅身份难以为通俗小说署名",
+                    "文献链尚不完整"
+                ],
+                pushed_by: "近年学者（21 世纪）"
+            },
+            {
+                name: "华阳洞天主人",
+                identity: "世德堂本所题校者",
+                lifetime: "约明嘉靖—万历",
+                status: "或为李春芳化名·或为书坊编辑",
+                type: "candidate",
+                evidence_for: [
+                    "世本原题·最直接署名",
+                    "可能与李春芳有关·或为化名"
+                ],
+                evidence_against: [
+                    "为'校'者·非'著'者",
+                    "或为书坊主或编辑者化名",
+                    "化名无法定位真实身份"
+                ],
+                pushed_by: "世德堂本原题（1592）"
+            }
+        ],
+        alchemy: [
+            {
+                plot: "八卦炉中炼猴",
+                arrow: "七七四十九日·炼出火眼金睛",
+                decoded: "<span class='decoded-key'>人体丹田炼真阳</span>。八卦＝乾坎艮震巽离坤兑，对应人身五行火候；猴为心中真阳，炼之方成金刚不坏。",
+                source: "悟一子《西游真诠》"
+            },
+            {
+                plot: "火眼金睛",
+                arrow: "看破妖魔伪装",
+                decoded: "<span class='decoded-key'>修炼出的真阳之气</span>。金睛＝神光内照，能识五蕴皆空、照见妖魔（妄念）本相。",
+                source: "悟元子《西游原旨》"
+            },
+            {
+                plot: "金箍棒 · 一万三千五百斤",
+                arrow: "可大可小·藏于耳中",
+                decoded: "<span class='decoded-key'>元气·真意</span>。一万三千五百＝人一日一夜呼吸之数；藏于耳中＝肾开窍于耳，真意归藏于坎位。",
+                source: "悟一子《西游真诠》"
+            },
+            {
+                plot: "大闹天宫",
+                arrow: "齐天大圣战十万天兵",
+                decoded: "<span class='decoded-key'>心猿放纵</span>。心猿未驯则纵欲乱天，象征修行初期的妄念炽盛；如来五指＝五行山，以定力收心。",
+                source: "悟元子《西游原旨》"
+            },
+            {
+                plot: "取经路 · 十万八千里",
+                arrow: "历经十四年·回转长安",
+                decoded: "<span class='decoded-key'>修心历程</span>。十万八千＝悟空筋斗云之距，言一念可到；十四年＝十四年火候，象征九转还丹之数。",
+                source: "悟一子《西游真诠》"
+            },
+            {
+                plot: "九九八十一难",
+                arrow: "观音菩萨算账·缺一难补足",
+                decoded: "<span class='decoded-key'>修炼劫数</span>。九＝阳数之极，九九八十一＝阳火之极；缺一难补足，象征火候圆满、功德方成。",
+                source: "悟元子《西游原旨》"
+            }
+        ],
+        lu_xun_words: [
+            { text: "神魔皆有人情", weight: 1.0 },
+            { text: "精魅亦通世故", weight: 0.95 },
+            { text: "游戏之作",     weight: 0.9 },
+            { text: "解颐之言",     weight: 0.85 },
+            { text: "神魔小说",     weight: 1.0 }
+        ]
+    };
+
+    /* ==========================================================
+       工具：年份缩写
+       ========================================================== */
+    function yearShort(y) {
+        if (y < 1600) return `${y}`;
+        if (y < 1700) return `${y}`;
+        return `${y}`;
+    }
+
+    /* ==========================================================
+       图表 1：解读河流图
+       ========================================================== */
+    function renderRiverChart(critics, streams) {
+        const svg = d3.select("#river-chart");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("river-chart");
+        const width = Math.max(200, containerEl.clientWidth || 1100);
+        const height = 560;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 50, right: 60, bottom: 50, left: 60 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // X 比例尺：时间 1500s → 2020s
+        const xMin = 1580, xMax = 2010;
+        const x = d3.scaleLinear()
+            .domain([xMin, xMax])
+            .range([0, innerW]);
+
+        // Y 比例尺：0=上(证道) 0.5=中(文学) 1=下(反叛)
+        const y = d3.scaleLinear()
+            .domain([0, 1])
+            .range([0, innerH]);
+
+        // 三带背景
+        const zoneData = [
+            { y0: 0.0, y1: 0.28, label: "证道 · 内丹",  color: "rgba(58,107,140,0.06)" },
+            { y0: 0.28, y1: 0.62, label: "社会批判 · 文学本位", color: "rgba(122,82,48,0.06)" },
+            { y0: 0.62, y1: 1.0, label: "游戏 · 解构 · 反叛", color: "rgba(140,42,42,0.06)" }
+        ];
+        g.selectAll(".river-zone")
+            .data(zoneData)
+            .enter()
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", d => y(d.y0))
+            .attr("width",Math.max(0, innerW))
+            .attr("height", d => y(d.y1) - y(d.y0))
+            .attr("fill", d => d.color);
+
+        g.selectAll(".river-zone-label")
+            .data(zoneData)
+            .enter()
+            .append("text")
+            .attr("class", "river-zone-label")
+            .attr("x", 8)
+            .attr("y", d => y(d.y0) + 16)
+            .text(d => d.label);
+
+        // X 轴：5 个时段节点
+        const tickValues = [1592, 1696, 1753, 1923, 2000];
+        const tickLabels = ["1592 世德堂本", "1696 真诠", "1753 原旨/新说", "1923 鲁迅/胡适", "2000 悟空传"];
+        const xAxis = d3.axisBottom(x)
+            .tickValues(tickValues)
+            .tickFormat((d, i) => tickLabels[i])
+            .tickSize(6);
+
+        g.append("g")
+            .attr("class", "river-axis")
+            .attr("transform", `translate(0,${innerH + 6})`)
+            .call(xAxis)
+            .call(g => g.select(".domain").remove())
+            .selectAll("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "1.1em");
+
+        // 5 个时段节点的竖虚线
+        g.selectAll(".river-tick-line")
+            .data(tickValues)
+            .enter()
+            .append("line")
+            .attr("x1", d => x(d))
+            .attr("x2", d => x(d))
+            .attr("y1", 0)
+            .attr("y2", innerH)
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "3,4")
+            .attr("opacity", 0.5);
+
+        // 流派：以 critic.name 为节点，绘制平滑曲线
+        const criticByName = {};
+        critics.forEach(c => criticByName[c.name] = c);
+
+        streams.forEach(stream => {
+            const pts = stream.path
+                .map(n => criticByName[n])
+                .filter(c => c)
+                .map(c => ({ x: x(c.position.x), y: y(c.position.y), critic: c }));
+
+            if (pts.length < 2) return;
+
+            // 平滑曲线
+            const lineGen = d3.line()
+                .x(d => d.x)
+                .y(d => d.y)
+                .curve(d3.curveMonotoneX);
+
+            // 河流主体（粗半透明）
+            g.append("path")
+                .datum(pts)
+                .attr("class", "river-stream")
+                .attr("d", lineGen)
+                .attr("stroke", stream.color)
+                .attr("stroke-width", 18)
+                .attr("opacity", 0.22);
+
+            // 中线（细实线）
+            g.append("path")
+                .datum(pts)
+                .attr("class", "river-stream")
+                .attr("d", lineGen)
+                .attr("stroke", stream.color)
+                .attr("stroke-width", 2.5)
+                .attr("opacity", 0.7);
+        });
+
+        // 9 位批评家节点
+        const tooltip = d3.select("#river-tooltip");
+
+        const nodeG = g.selectAll(".river-node")
+            .data(critics)
+            .enter()
+            .append("g")
+            .attr("class", "river-node")
+            .attr("transform", d => `translate(${x(d.position.x)},${y(d.position.y)})`)
+            .style("cursor", "pointer");
+
+        // 节点光晕
+        nodeG.append("circle")
+            .attr("r", 12)
+            .attr("fill", d => {
+                const cs = d.streams || [];
+                if (cs.length === 0) return "var(--accent-3)";
+                const map = { zhengdao: "#3a6b8c", literary: "#7a5230", rebel: "#8c2a2a" };
+                return map[cs[0]] || "#7a5230";
+            })
+            .attr("opacity", 0.18);
+
+        // 节点圆点
+        nodeG.append("circle")
+            .attr("class", "river-dot")
+            .attr("r", 8)
+            .attr("fill", d => {
+                const cs = d.streams || [];
+                if (cs.length === 0) return "#7a5230";
+                const map = { zhengdao: "#3a6b8c", literary: "#7a5230", rebel: "#8c2a2a" };
+                return map[cs[0]] || "#7a5230";
+            })
+            .on("mouseover", function(event, d) {
+                d3.select(this).attr("r", 10);
+                tooltip.style("opacity", 1);
+                const streamLabels = (d.streams && d.streams.length)
+                    ? d.streams.map(s => {
+                        const map = { zhengdao: "证道流", literary: "文学流", rebel: "反叛流" };
+                        return map[s] || s;
+                    }).join(" · ")
+                    : "独立（儒学派）";
+                tooltip.html(`
+                    <div class="rt-name">${d.name}${d.alias ? "（" + d.alias + "）" : ""}</div>
+                    <div class="rt-meta">${d.era} · ${d.school} · ${streamLabels}</div>
+                    <div class="rt-quote">「${d.quote}」</div>
+                    <div>${d.core_argument}</div>
+                    <div class="rt-meta" style="margin-top:6px;">代表作：${d.works}</div>
+                `);
+            })
+            .on("mousemove", function(event) {
+                const stageRect = document.querySelector("#river-chart").parentElement.getBoundingClientRect();
+                let left = event.clientX - stageRect.left + 14;
+                let top = event.clientY - stageRect.top + 14;
+                if (left + 340 > stageRect.width) left = event.clientX - stageRect.left - 340;
+                if (top + 220 > stageRect.height) top = event.clientY - stageRect.top - 220;
+                tooltip.style("left", left + "px").style("top", top + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("r", 8);
+                tooltip.style("opacity", 0);
+            });
+
+        // 节点标签（名字 + 年代）
+        nodeG.append("text")
+            .attr("class", "river-name")
+            .attr("x", 0)
+            .attr("y", -16)
+            .attr("text-anchor", "middle")
+            .text(d => d.name);
+
+        nodeG.append("text")
+            .attr("class", "river-year")
+            .attr("x", 0)
+            .attr("y", 26)
+            .attr("text-anchor", "middle")
+            .text(d => d.position.x);
+
+        // 图例
+        const legend = d3.select("#river-legend");
+        legend.selectAll("*").remove();
+        streams.forEach(s => {
+            legend.append("div")
+                .attr("class", "legend-item")
+                .html(`
+                    <span class="legend-swatch" style="background:${s.color};opacity:0.55;"></span>
+                    <span><strong style="color:${s.color}">${s.label}</strong> —— ${s.desc}</span>
+                `);
+        });
+        // 独立派图例
+        legend.append("div")
+            .attr("class", "legend-item")
+            .html(`
+                <span class="legend-swatch" style="background:#7a5230;border-radius:50%;"></span>
+                <span>独立·儒学派（张书绅）</span>
+            `);
+    }
+
+    /* ==========================================================
+       图表 2：三教争辩三角形
+       ========================================================== */
+    function renderTriangleChart(tri) {
+        const svg = d3.select("#triangle-chart");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("triangle-chart");
+        const width = containerEl.clientWidth || 900;
+        const height = 520;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const cx = width / 2;
+        const cy = height / 2 + 10;
+        const R = Math.min(width, height) * 0.36;
+
+        // 等边三角形三顶点
+        const vertices = {
+            top: { x: cx, y: cy - R, label: "儒", sub: "张书绅 · 大学正心", color: "#7a5230", args: tri.vertices[0].args },
+            bl:  { x: cx - R * Math.sin(Math.PI / 3), y: cy + R * Math.cos(Math.PI / 3), label: "道", sub: "陈士斌 · 内丹金丹", color: "#3a6b8c", args: tri.vertices[1].args },
+            br:  { x: cx + R * Math.sin(Math.PI / 3), y: cy + R * Math.cos(Math.PI / 3), label: "释·文", sub: "现代学者 · 文学本位", color: "#c8463a", args: tri.vertices[2].args }
+        };
+
+        // 三角形三条边
+        const triPts = [vertices.top, vertices.bl, vertices.br];
+        svg.append("polygon")
+            .attr("points", triPts.map(p => `${p.x},${p.y}`).join(" "))
+            .attr("fill", "rgba(217,205,184,0.18)")
+            .attr("stroke", "var(--line)")
+            .attr("stroke-width", 2)
+            .attr("stroke-dasharray", "6,4");
+
+        // 三顶点向中心连线
+        triPts.forEach(p => {
+            svg.append("line")
+                .attr("x1", p.x).attr("y1", p.y)
+                .attr("x2", cx).attr("y2", cy)
+                .attr("stroke", p.color)
+                .attr("stroke-width", 1.5)
+                .attr("opacity", 0.4)
+                .attr("stroke-dasharray", "3,5");
+        });
+
+        // 中心圆：原典
+        const centerR = 46;
+        svg.append("circle")
+            .attr("cx", cx).attr("cy", cy)
+            .attr("r", centerR)
+            .attr("fill", "#fffdf8")
+            .attr("stroke", "var(--accent)")
+            .attr("stroke-width", 2.5);
+        svg.append("circle")
+            .attr("cx", cx).attr("cy", cy)
+            .attr("r", centerR + 6)
+            .attr("fill", "none")
+            .attr("stroke", "var(--accent)")
+            .attr("stroke-width", 1)
+            .attr("opacity", 0.35);
+        svg.append("text")
+            .attr("class", "tri-center-text")
+            .attr("x", cx).attr("y", cy - 4)
+            .text("原典");
+        svg.append("text")
+            .attr("class", "tri-center-sub")
+            .attr("x", cx).attr("y", cy + 16)
+            .text("《西游记》");
+
+        // 三顶点圆 + 标签
+        triPts.forEach((p, i) => {
+            // 顶点圆
+            svg.append("circle")
+                .attr("cx", p.x).attr("cy", p.y)
+                .attr("r", 28)
+                .attr("fill", p.color)
+                .attr("opacity", 0.92)
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 2);
+            svg.append("text")
+                .attr("class", "tri-vertex-label")
+                .attr("x", p.x).attr("y", p.y + 6)
+                .attr("fill", "#fff")
+                .text(p.label);
+
+            // 顶点副标题（向外）
+            const offsetMap = {
+                0: { dx: 0, dy: -48, anchor: "middle" },     // top
+                1: { dx: -52, dy: 8,  anchor: "end" },       // bl
+                2: { dx: 52,  dy: 8,  anchor: "start" }      // br
+            };
+            const off = offsetMap[i];
+            svg.append("text")
+                .attr("class", "tri-vertex-sub")
+                .attr("x", p.x + off.dx).attr("y", p.y + off.dy)
+                .attr("text-anchor", off.anchor)
+                .attr("fill", p.color)
+                .style("font-weight", "600")
+                .style("font-size", "0.9rem")
+                .text(p.sub);
+
+            // 论点（每个顶点 2-3 条）
+            const argsOffsetMap = {
+                0: { startX: p.x, startY: p.y - 70, stepY: -20, anchor: "middle" },  // top: 向上排列
+                1: { startX: p.x - 50, startY: p.y + 30, stepY: 20, anchor: "end" }, // bl: 向下左排列
+                2: { startX: p.x + 50, startY: p.y + 30, stepY: 20, anchor: "start" } // br: 向下右排列
+            };
+            const ao = argsOffsetMap[i];
+            p.args.forEach((arg, j) => {
+                // 论点小圆点
+                svg.append("circle")
+                    .attr("cx", i === 0 ? ao.startX - 6 : (i === 1 ? ao.startX + 6 : ao.startX - 6))
+                    .attr("cy", ao.startY + j * ao.stepY - 4)
+                    .attr("r", 3)
+                    .attr("fill", p.color);
+                svg.append("text")
+                    .attr("class", "tri-arg")
+                    .attr("x", ao.startX)
+                    .attr("y", ao.startY + j * ao.stepY)
+                    .attr("text-anchor", ao.anchor)
+                    .text(arg);
+            });
+        });
+
+        // 底部说明
+        svg.append("text")
+            .attr("x", cx)
+            .attr("y", height - 14)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("fill", "var(--ink-soft)")
+            .style("font-style", "italic")
+            .text("每派都自称『唯一正解』——多义性恰恰来自这种无法收敛");
+    }
+
+    /* ==========================================================
+       图表 3：作者悬疑推理图（侦探墙）
+       ========================================================== */
+    function renderCandidateWall(candidates) {
+        const grid = d3.select("#candidate-grid");
+        grid.selectAll("*").remove();
+
+        candidates.forEach(c => {
+            const card = grid.append("div")
+                .attr("class", `candidate-card ${c.type}`);
+
+            const head = card.append("div").attr("class", "cc-head");
+            head.append("div").attr("class", "cc-name").text(c.name);
+            head.append("div").attr("class", "cc-meta").text(c.lifetime);
+
+            card.append("div").attr("class", "cc-identity").text(c.identity);
+            card.append("div").attr("class", "cc-status").text(c.status);
+
+            const ev = card.append("div").attr("class", "evidence-block");
+
+            const forCol = ev.append("div").attr("class", "evidence-col for");
+            forCol.append("h5").text("支持证据 ＋");
+            const ulF = forCol.append("ul");
+            c.evidence_for.forEach(e => ulF.append("li").text(e));
+
+            const againstCol = ev.append("div").attr("class", "evidence-col against");
+            againstCol.append("h5").text("反对证据 －");
+            const ulA = againstCol.append("ul");
+            c.evidence_against.forEach(e => ulA.append("li").text(e));
+
+            card.append("div")
+                .style("margin-top", "10px")
+                .style("padding-top", "8px")
+                .style("border-top", "1px dashed var(--line)")
+                .style("font-size", "0.76rem")
+                .style("color", "var(--accent-2)")
+                .style("font-style", "italic")
+                .html(`<strong>主张者：</strong>${c.pushed_by}`);
+        });
+
+        // 在卡片之间添加红线装饰（侦探墙视觉）
+        // 用 SVG overlay 在 grid 之上画几条装饰性红线
+        setTimeout(() => {
+            const wall = document.querySelector(".detective-wall");
+            const existing = wall.querySelector(".detective-overlay");
+            if (existing) existing.remove();
+            const overlay = document.createElement("div");
+            overlay.className = "detective-overlay";
+            overlay.style.position = "absolute";
+            overlay.style.inset = "0";
+            overlay.style.pointerEvents = "none";
+            overlay.style.zIndex = "0";
+            const wallRect = wall.getBoundingClientRect();
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svgEl = document.createElementNS(svgNS, "svg");
+            svgEl.setAttribute("width", wallRect.width);
+            svgEl.setAttribute("height", wallRect.height);
+            svgEl.style.position = "absolute";
+            svgEl.style.top = "0";
+            svgEl.style.left = "0";
+            // 在候选卡片之间画几条装饰性红线
+            const cards = wall.querySelectorAll(".candidate-card");
+            if (cards.length >= 2) {
+                const r0 = cards[0].getBoundingClientRect();
+                const r1 = cards[cards.length - 1].getBoundingClientRect();
+                const lines = [
+                    [r0.left - wallRect.left + r0.width / 2, r0.top - wallRect.top + r0.height / 2,
+                     r1.left - wallRect.left + r1.width / 2, r1.top - wallRect.top + r1.height / 2]
+                ];
+                // 在第一张卡内部连一条线到主"吴承恩"标签
+                lines.forEach(([x1, y1, x2, y2]) => {
+                    const ln = document.createElementNS(svgNS, "line");
+                    ln.setAttribute("x1", x1); ln.setAttribute("y1", y1);
+                    ln.setAttribute("x2", x2); ln.setAttribute("y2", y2);
+                    ln.setAttribute("stroke", "#c8463a");
+                    ln.setAttribute("stroke-width", "1");
+                    ln.setAttribute("opacity", "0.25");
+                    ln.setAttribute("stroke-dasharray", "4,4");
+                    svgEl.appendChild(ln);
+                });
+            }
+            overlay.appendChild(svgEl);
+            wall.style.position = "relative";
+            wall.appendChild(overlay);
+        }, 50);
+    }
+
+    /* ==========================================================
+       图表 4：内丹密码破译表
+       ========================================================== */
+    function renderAlchemyTable(rows) {
+        const tbody = d3.select("#alchemy-tbody");
+        tbody.selectAll("*").remove();
+        rows.forEach(r => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "plot")
+                .html(`${r.plot}<span class="plot-arrow">${r.arrow}</span>`);
+            tr.append("td").attr("class", "decoded").html(r.decoded);
+            tr.append("td").attr("class", "source").text(r.source);
+        });
+    }
+
+    /* ==========================================================
+       图表 5：鲁迅祛魅手术刀（动态文字云）
+       ========================================================== */
+    function renderScalpel(words) {
+        const svg = d3.select("#scalpel-svg");
+        svg.selectAll("*").remove();
+
+        const W = 900, H = 420;
+
+        // 文本块（被切开的《西游记》）
+        const blockX = 120, blockY = 90, blockW = 660, blockH = 240;
+        // 左半块
+        svg.append("rect")
+            .attr("x", blockX).attr("y", blockY)
+            .attr("width",Math.max(0, blockW / 2 - 6)).attr("height", blockH)
+            .attr("fill", "#fffdf8")
+            .attr("stroke", "var(--accent-3)")
+            .attr("stroke-width", 1.5)
+            .attr("rx", 4);
+        // 右半块
+        svg.append("rect")
+            .attr("x", blockX + blockW / 2 + 6).attr("y", blockY)
+            .attr("width",Math.max(0, blockW / 2 - 6)).attr("height", blockH)
+            .attr("fill", "#fffdf8")
+            .attr("stroke", "var(--accent-3)")
+            .attr("stroke-width", 1.5)
+            .attr("rx", 4);
+
+        // 文本块上的"金丹大道"附会文字（被切开）
+        svg.append("text")
+            .attr("x", blockX + blockW / 2).attr("y", blockY + 50)
+            .attr("text-anchor", "middle")
+            .style("font-size", "1.3rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent-3)")
+            .style("letter-spacing", "0.1em")
+            .text("金丹大道 · 内丹修炼次第");
+        svg.append("text")
+            .attr("x", blockX + blockW / 2).attr("y", blockY + 90)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.86rem")
+            .style("fill", "var(--ink-soft)")
+            .style("font-style", "italic")
+            .text("（清代证道派附会层 — 待祛魅）");
+        svg.append("text")
+            .attr("x", blockX + blockW / 2).attr("y", blockY + 150)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.8rem")
+            .style("fill", "var(--ink-soft)")
+            .style("font-family", '"JetBrains Mono", monospace')
+            .text("八卦炉=丹田 · 金箍棒=真意 · 八十一难=火候");
+
+        // 裂缝
+        const crackX = blockX + blockW / 2;
+        const crackPath = `M ${crackX} ${blockY - 10} L ${crackX - 6} ${blockY + 40} L ${crackX + 8} ${blockY + 100} L ${crackX - 4} ${blockY + 160} L ${crackX + 6} ${blockY + blockH + 10}`;
+        svg.append("path")
+            .attr("d", crackPath)
+            .attr("stroke", "var(--accent)")
+            .attr("stroke-width", 2.5)
+            .attr("fill", "none")
+            .attr("class", "text-crack")
+            .attr("opacity", 0.7);
+
+        // 手术刀（SVG 绘制）
+        const scalpelG = svg.append("g")
+            .attr("class", "scalpel-blade")
+            .attr("transform", `translate(${crackX - 30}, ${blockY + blockH / 2}) rotate(-12)`);
+        // 刀柄
+        scalpelG.append("rect")
+            .attr("x", -60).attr("y", -5)
+            .attr("width",50).attr("height", 10)
+            .attr("fill", "var(--accent-3)")
+            .attr("rx", 2);
+        // 刀身
+        scalpelG.append("polygon")
+            .attr("points", "-10,-5 30,-2 30,2 -10,5")
+            .attr("fill", "#e8e8e8")
+            .attr("stroke", "var(--ink-soft)")
+            .attr("stroke-width", 1);
+        // 刀刃高光
+        scalpelG.append("line")
+            .attr("x1", -8).attr("y1", -3)
+            .attr("x2", 28).attr("y2", -1)
+            .attr("stroke", "#ffffff")
+            .attr("stroke-width", 1.2)
+            .attr("opacity", 0.8);
+        // 鲁迅标签
+        scalpelG.append("text")
+            .attr("x", -35).attr("y", -14)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.74rem")
+            .style("fill", "var(--accent)")
+            .style("font-weight", "600")
+            .style("font-family", '"JetBrains Mono", monospace')
+            .text("鲁迅 1923");
+
+        // 露出的核心词汇（动态浮现）
+        // 5 个词环绕在文本块下方
+        const wordPositions = [
+            { x: 200, y: 380, delay: 0,   color: "var(--accent)", size: "1.5rem" },
+            { x: 360, y: 390, delay: 1.0, color: "var(--accent-2)", size: "1.4rem" },
+            { x: 520, y: 380, delay: 2.0, color: "var(--accent-3)", size: "1.5rem" },
+            { x: 680, y: 390, delay: 3.0, color: "var(--accent-4)", size: "1.4rem" },
+            { x: 450, y: 350, delay: 4.0, color: "var(--rebel)", size: "1.6rem" }
+        ];
+        words.forEach((w, i) => {
+            const pos = wordPositions[i] || wordPositions[0];
+            svg.append("text")
+                .attr("class", "scalpel-word")
+                .attr("x", pos.x)
+                .attr("y", pos.y)
+                .attr("text-anchor", "middle")
+                .style("font-size", pos.size)
+                .style("font-weight", "600")
+                .style("fill", pos.color)
+                .style("letter-spacing", "0.08em")
+                .style("animation-delay", `${pos.delay}s`)
+                .text(w.text);
+        });
+
+        // 顶部小标注
+        svg.append("text")
+            .attr("x", W / 2).attr("y", 30)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.9rem")
+            .style("fill", "var(--ink)")
+            .style("font-weight", "600")
+            .text("祛魅手术 · 1923 · 北京");
+        svg.append("text")
+            .attr("x", W / 2).attr("y", 50)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.76rem")
+            .style("fill", "var(--ink-soft)")
+            .style("font-style", "italic")
+            .text("「使神魔皆有人情，精魅亦通世故」— 露出文学本位的核心词汇");
+    }
+
+    /* ==========================================================
+       关键洞察
+       ========================================================== */
+    function renderInsights() {
+        const insights = [
+            `500 年批评史的本质：<strong>没有"正解"，只有时代语言的重写</strong>。明人借金丹说心性，清人借丹道证道统，民国借考证立学科，当代借解构反权威——每个时代都在用《西游记》照见自己。`,
+            `三教争辩的悖论：每派都自称"<strong>唯一正解</strong>"——儒派以《学》《庸》为纲，道派以金丹为骨，文派以游戏为体。但《西游记》的多义性<em>恰恰来自这种无法收敛</em>，强行收敛即扼杀文本。`,
+            `鲁迅的祛魅本身也是一种<strong>赋魅</strong>——把"金丹大道"换成"人情世故"，把"丹经"换成"神魔小说"，仍是另一种解读。祛魅手术刀切开了附会层，却也设下了新的正典边界。`,
+            `当代反叛（<strong>今何在《悟空传》</strong>）是对鲁迅式文学本位的反动，也是对明清证道说的<em>隔代回响</em>——它重新承认《西游记》是一部修行之书，只是把"金丹"换成了"自由"与"自我"。`,
+            `<strong>李贽的双重身</strong>：既是文学流的源头（童心说·文学性），又是反叛流的源头（游戏说·解构），500 年批评史的两条暗线皆从他分出。他在 1590 年的一个念头，长成了 2000 年的两条河。`,
+            `<strong>莫比乌斯环隐喻</strong>：极致的文学游戏（鲁迅·胡适）与最深奥的哲思（陈士斌·刘一明），可能是一体两面。当今何在写下"我要这天再遮不住我眼"时，他与悟元子的"心猿归正"竟隔着 250 年握了手。`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => ul.append("li").html(text));
+    }
+
+    /* ==========================================================
+       数据加载（fetch 失败则用嵌入数据）
+       ========================================================== */
+    const fetchStatus = { anyFetched: false };
+    async function fetchJson(path, fallbackKey) {
+        try {
+            const response = await fetch(path);
+            if (!response.ok) throw new Error('fetch failed: ' + path);
+            fetchStatus.anyFetched = true;
+            return await response.json();
+        } catch (e) {
+            console.warn('[INFO] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+            return EMBEDDED_DATA[fallbackKey];
+        }
+    }
+
+    async function loadData() {
+        const base = '../../scripts/output/data/';
+        const [critics, streams, triangle, candidates, alchemy, lu_xun_words] = await Promise.all([
+            fetchJson(base + 'criticism_critics.json', 'critics'),
+            fetchJson(base + 'criticism_streams.json', 'streams'),
+            fetchJson(base + 'criticism_triangle.json', 'triangle'),
+            fetchJson(base + 'criticism_candidates.json', 'candidates'),
+            fetchJson(base + 'criticism_alchemy.json', 'alchemy'),
+            fetchJson(base + 'criticism_luxun_words.json', 'lu_xun_words')
+        ]);
+
+        if (fetchStatus.anyFetched) {
+            document.getElementById('dataSource').innerHTML =
+                '数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）';
+        }
+
+        return { critics, streams, triangle, candidates, alchemy, lu_xun_words };
+    }
+
+    /* ==========================================================
+       主流程
+       ========================================================== */
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        renderRiverChart(data.critics, data.streams);
+        renderTriangleChart(data.triangle);
+        renderCandidateWall(data.candidates);
+        renderAlchemyTable(data.alchemy);
+        renderScalpel(data.lu_xun_words);
+        renderInsights();
+    }
+
+    // 响应式重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderRiverChart(window.__lastData.critics, window.__lastData.streams);
+                renderTriangleChart(window.__lastData.triangle);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

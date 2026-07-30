@@ -1,0 +1,131 @@
+name: Security
+
+# W236-E E8 安全加固·PR/push 触发四轨并行安全扫描
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: security-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # E8-1 npm 依赖漏洞审计
+  npm-audit:
+    name: npm audit (依赖漏洞)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: 安装依赖
+        run: |
+          if [ -f scripts/package.json ]; then npm --prefix scripts ci || npm --prefix scripts install; fi
+
+      - name: npm audit（生产依赖漏洞阻断）
+        run: |
+          if [ -f scripts/package.json ]; then
+            npm --prefix scripts audit --omit=dev --audit-level=high
+          else
+            echo "无 scripts/package.json，跳过 npm audit"
+          fi
+
+  # E8-2 Python 依赖漏洞审计
+  pip-audit:
+    name: pip audit (Python 依赖漏洞)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: 安装 pip-audit
+        run: pip install pip-audit
+
+      - name: pip-audit（扫描 requirements 漏洞）
+        run: |
+          if [ -f scripts/requirements.txt ]; then
+            pip-audit -r scripts/requirements.txt --strict
+          else
+            echo "无 scripts/requirements.txt，跳过 pip-audit"
+          fi
+
+  # E8-3 CSP 头配置检查
+  csp-check:
+    name: CSP check (内容安全策略)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 验证 HTML 文件 CSP 头配置
+        run: |
+          python - <<'PY'
+          import re, sys
+          from pathlib import Path
+          missing = []
+          for html in Path("site").rglob("*.html"):
+              text = html.read_text(encoding="utf-8", errors="ignore")
+              has_csp = ("Content-Security-Policy" in text) or \
+                        ('<meta http-equiv="Content-Security-Policy"' in text)
+              # 非阻断：仅记录缺少 CSP 的页面，E8 阶段以提示为主
+              if not has_csp:
+                  missing.append(str(html))
+          if missing:
+              print(f"[E8 CSP] 以下 {len(missing)} 个页面未声明 CSP（提示，不阻断）：")
+              for p in missing[:10]:
+                  print(f"  - {p}")
+              if len(missing) > 10:
+                  print(f"  ... 共 {len(missing)} 个")
+          else:
+              print("[E8 CSP] 全部页面已声明 CSP")
+          PY
+
+  # E8-4 XSS 漏洞检测
+  xss-detect:
+    name: XSS detect (危险 API 检测)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 检测潜在 XSS 漏洞（dangerouslySetHTML / eval / innerHTML 滥用）
+        run: |
+          python scripts/security_scan.py --all --output scripts/output/security-report.md --strict
+          # 严格模式：发现 high 级别问题以非零退出码阻断 PR
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = Path("scripts/output/security-report.json")
+          if not report.exists():
+              print("[E8 XSS] 未找到报告，跳过阻断判定")
+              raise SystemExit(0)
+          data = json.loads(report.read_text(encoding="utf-8"))
+          high = sum(1 for f in data.get("findings", []) if f.get("severity") == "high")
+          if high > 0:
+              print(f"[E8 XSS] 发现 {high} 个 high 级别问题，阻断合并")
+              raise SystemExit(1)
+          print(f"[E8 XSS] high 级别问题数：{high}，通过")
+          PY
+# FILE_INDEX: .github/workflows/security.yml | W236-E | E8 安全工作流

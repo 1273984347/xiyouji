@@ -1,0 +1,6021 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>引语情感分析 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+            --pos: #5a7a3a;
+            --neu: #6b5e4d;
+            --neg: #8c2a2a;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { color: var(--ink-soft); margin: 0 6px; }
+        .breadcrumb .current { color: var(--ink-soft); }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--rebel); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--rebel); }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        .section-title.alt-4 { border-bottom-color: var(--accent-3); }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        .stat-card.positive { border-top: 3px solid var(--pos); }
+        .stat-card.neutral { border-top: 3px solid var(--neu); }
+        .stat-card.negative { border-top: 3px solid var(--neg); }
+        .stat-card .stat-label {
+            font-size: 0.78rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .stat-card.positive .stat-label { color: var(--pos); }
+        .stat-card.neutral .stat-label { color: var(--neu); }
+        .stat-card.negative .stat-label { color: var(--neg); }
+        .stat-card .stat-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .stat-card .stat-pct {
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+            line-height: 1.8;
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .insights-list li strong { color: var(--accent); font-weight: 600; }
+        .word-cloud-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .word-cloud-panel {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px;
+        }
+        .word-cloud-panel.positive { border-left: 4px solid var(--pos); }
+        .word-cloud-panel.negative { border-left: 4px solid var(--neg); }
+        .word-cloud-panel .panel-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--ink);
+        }
+        .word-cloud-panel.positive .panel-title { color: var(--pos); }
+        .word-cloud-panel.negative .panel-title { color: var(--neg); }
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 280px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 24px;
+        }
+        .footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 6px;
+        }
+        .footer a:hover { text-decoration: underline; }
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        .heat-cell { stroke: #fff; stroke-width: 0.5; }
+        .word-circle { cursor: pointer; }
+        .word-label {
+            pointer-events: none;
+            text-anchor: middle;
+            dominant-baseline: central;
+            font-family: "Noto Serif SC", "Songti SC", serif;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.6rem; }
+            .hero .subtitle { font-size: 0.78rem; letter-spacing: 0.15em; }
+            .section { padding: 18px; }
+            .kpi-card .value { font-size: 1.5rem; }
+            .stat-row { grid-template-columns: 1fr; }
+            .word-cloud-grid { grid-template-columns: 1fr; }
+            .stat-card .stat-value { font-size: 1.5rem; }
+        }
+        @media (max-width: 520px) {
+            .hero { padding: 36px 16px 28px; }
+            .hero h1 { font-size: 1.4rem; }
+            .container { padding: 0 12px; }
+            .section { padding: 14px; }
+            .chart-block { padding: 12px; }
+        }
+        a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+            outline: 2px solid #3a6b8c;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>引语情感分析</h1>
+        <div class="subtitle">DIALOGUE SENTIMENT ANALYSIS</div>
+        <div class="tagline">基于 6565 条引语 · 21 位说话者 · 零依赖情感词典（W103）</div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <a href="../dashboard.html">数据可视化</a>
+            <span class="sep">/</span>
+            <span class="current">引语情感分析</span>
+        </nav>
+
+        <div class="notice">
+            本页基于 W103 D 方向·人物引语情感分析脚本生成，包含 6565 条引语 · 21 位说话者的情感分布、人物情感曲线、回目热力图及 Top 情感词。所有图表支持 hover tooltip，fetch 失败时自动回退到内嵌 EMBEDDED 数据。
+        </div>
+
+        <!-- KPI 卡片 -->
+        <div class="kpi-row" id="kpiRow">
+            <div class="kpi-card">
+                <div class="label">TOTAL · 总引语数</div>
+                <div class="value">6565</div>
+                <div class="desc">全书 100 回 · 21 位说话者的引语情感分析</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">SPEAKERS · 说话者数</div>
+                <div class="value">21</div>
+                <div class="desc">孙悟空 / 唐僧 / 猪八戒 / 沙僧 / 观音 等 21 位</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">POSITIVE · 正向引语</div>
+                <div class="value">821</div>
+                <div class="desc">占比 12.5% · 慈悲 / 救度 / 善行类引语</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">NEGATIVE · 负向引语</div>
+                <div class="value">1944</div>
+                <div class="desc">占比 29.6% · 战斗 / 妖魔 / 苦难类引语</div>
+            </div>
+        </div>
+
+        <!-- Section 1: 全书情感分布 -->
+        <section class="section">
+            <h2 class="section-title">壹 · 全书情感分布</h2>
+            <div class="section-sub">SENTIMENT DISTRIBUTION</div>
+            <div class="definition">
+                <strong>定义：</strong>基于零依赖情感词典对 6565 条引语进行三分类：正向（含善/救/慈等词）/ 中性（叙事应答）/ 负向（含妖/打/死等词）。全书负向引语（29.6%）高于正向引语（12.5%），符合《西游记》打妖怪的冲突叙事特征。
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-card positive">
+                    <div class="stat-label">POSITIVE · 正向</div>
+                    <div class="stat-value">821</div>
+                    <div class="stat-pct">12.5%</div>
+                </div>
+                <div class="stat-card neutral">
+                    <div class="stat-label">NEUTRAL · 中性</div>
+                    <div class="stat-value">3800</div>
+                    <div class="stat-pct">57.9%</div>
+                </div>
+                <div class="stat-card negative">
+                    <div class="stat-label">NEGATIVE · 负向</div>
+                    <div class="stat-value">1944</div>
+                    <div class="stat-pct">29.6%</div>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">全书引语情感分布饼图</div>
+                <div class="chart-caption">三色分布：正向 #5a7a3a / 中性 #6b5e4d / 负向 #8c2a2a · 鼠标 hover 显示数量与占比</div>
+                <svg id="chart-distribution-pie" class="chart-svg" width="100%" height="360"></svg>
+                <div class="legend-row" id="distribution-legend"></div>
+            </div>
+        </section>
+
+        <!-- Section 2: 人物情感分布堆叠柱状图 -->
+        <section class="section">
+            <h2 class="section-title alt-2">贰 · 人物情感分布</h2>
+            <div class="section-sub">SPEAKER SENTIMENT DISTRIBUTION</div>
+            <div class="definition">
+                <strong>定义：</strong>基于 Top 10 说话者的引语情感分布堆叠柱状图，横轴为人物，纵轴为引语数量，堆叠正向（绿 #5a7a3a）/ 中性（灰 #6b5e4d）/ 负向（红 #8c2a2a）三色。孙悟空以 3521 条引语居首，占比 53.6%。
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">Top 10 说话者情感分布堆叠柱状图</div>
+                <div class="chart-caption">横轴：Top 10 说话者（按引语数降序） / 纵轴：引语数量 / 堆叠：正向·中性·负向 / hover 显示明细</div>
+                <svg id="chart-speaker-stacked" class="chart-svg" width="100%" height="460"></svg>
+                <div class="legend-row" id="speaker-stacked-legend"></div>
+            </div>
+        </section>
+
+        <!-- Section 3: 主要人物情感曲线 -->
+        <section class="section">
+            <h2 class="section-title alt-3">叁 · 主要人物情感曲线</h2>
+            <div class="section-sub">SPEAKER SENTIMENT CURVE</div>
+            <div class="definition">
+                <strong>定义：</strong>Top 5 说话者按回目（1-100）的 avg_sentiment 曲线，纵轴 -1 到 +1，0 为中性线。颜色：孙悟空 #c8463a / 唐僧 #3a6b8c / 猪八戒 #7a5230 / 沙僧 #5a7a3a / 观音 #8c6a8c。
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">Top 5 说话者 100 回情感曲线</div>
+                <div class="chart-caption">横轴：第 1-100 回 / 纵轴：avg_sentiment（-1 到 +1） / 虚线为中性 y=0 / hover 显示人物·回目·情感值·引语数</div>
+                <svg id="chart-speaker-curve" class="chart-svg" width="100%" height="460"></svg>
+                <div class="legend-row" id="speaker-curve-legend"></div>
+            </div>
+        </section>
+
+        <!-- Section 4: 回目情感热度热力图 -->
+        <section class="section">
+            <h2 class="section-title alt-4">肆 · 回目情感热度</h2>
+            <div class="section-sub">CHAPTER SENTIMENT HEATMAP</div>
+            <div class="definition">
+                <strong>定义：</strong>100 回 × Top 5 说话者的 avg_sentiment 热力图，颜色从红（负向 -1）到白（中性 0）到绿（正向 +1），使用 d3.interpolateRdYlGn 色阶。
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">100 回 × Top 5 说话者情感热力图</div>
+                <div class="chart-caption">横轴：第 1-100 回 / 纵轴：Top 5 说话者 / 颜色：d3.interpolateRdYlGn（红→白→绿） / hover 显示明细</div>
+                <svg id="chart-chapter-heatmap" class="chart-svg" width="100%" height="320"></svg>
+                <div class="legend-row" id="heatmap-legend"></div>
+            </div>
+        </section>
+
+        <!-- Section 5: Top 情感词云 -->
+        <section class="section">
+            <h2 class="section-title">伍 · Top 情感词</h2>
+            <div class="section-sub">TOP SENTIMENT WORDS</div>
+            <div class="definition">
+                <strong>定义：</strong>全书 Top 30 正向情感词 + Top 30 负向情感词，圆点大小代表频次，颜色代表极性。正向词绿色 #5a7a3a，负向词红色 #8c2a2a。
+            </div>
+
+            <div class="word-cloud-grid">
+                <div class="word-cloud-panel positive">
+                    <div class="panel-title">Top 30 正向情感词</div>
+                    <svg id="chart-word-positive" class="chart-svg" width="100%" height="420"></svg>
+                </div>
+                <div class="word-cloud-panel negative">
+                    <div class="panel-title">Top 30 负向情感词</div>
+                    <svg id="chart-word-negative" class="chart-svg" width="100%" height="420"></svg>
+                </div>
+            </div>
+            <div class="legend-row" style="margin-top:16px;">
+                <span class="legend-item"><span class="legend-swatch" style="background:#5a7a3a;border-radius:50%;"></span>正向情感词（圆点大小 = 频次）</span>
+                <span class="legend-item"><span class="legend-swatch" style="background:#8c2a2a;border-radius:50%;"></span>负向情感词（圆点大小 = 频次）</span>
+            </div>
+        </section>
+
+        <!-- Section 6: 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title alt-2">陆 · 关键洞察</h2>
+            <div class="section-sub">KEY INSIGHTS</div>
+            <div class="definition">
+                <strong>定义：</strong>基于 6565 条引语情感分析数据提炼的 8 条关键洞察，涵盖全书分布特征、人物情感画像、叙事功能及数据局限。
+            </div>
+            <ol class="insights-list" id="insights-list"></ol>
+        </section>
+
+        <div style="margin-bottom:24px;">
+            <span class="data-badge">6565 条引语</span>
+            <span class="data-badge">21 位说话者</span>
+            <span class="data-badge">100 回</span>
+            <span class="data-badge">零依赖情感词典</span>
+            <span class="data-badge">D3.js v7</span>
+            <span class="data-badge">fetch + EMBEDDED fallback</span>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div>详解西游记 · 数据可视化 · 引语情感分析（W103）</div>
+        <div class="source-list" style="margin-top:8px;">
+            基于 character_nlp.py 零依赖 NLP pipeline · 6565 条引语 · 21 位说话者
+        </div>
+        <div class="source-list" style="margin-top:8px;">
+            数据源：scripts/output/data/dialogue_sentiment.json · 渲染：D3.js v7 · fetch + EMBEDDED fallback · 支持 file:// 双击打开
+        </div>
+        <div class="source-list" style="margin-top:8px;font-size:0.74rem;color:var(--ink-soft);font-style:italic;">
+            页面结构：Hero · KPI 卡片 × 4 · Section 1（统计卡片 + 饼图） · Section 2（堆叠柱状图） · Section 3（多线曲线图） · Section 4（热力图） · Section 5（情感词云） · Section 6（关键洞察） · Footer
+        </div>
+    </footer>
+
+    <!-- ===== EMBEDDED FALLBACK DATA ===== -->
+    <!--
+        本页 JSON 数据嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback。
+        在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据。
+        在 http(s):// 协议下打开时，优先 fetch scripts/output/data/dialogue_sentiment.json。
+        数据源：scripts/B_人物/character_nlp.py 零依赖 NLP pipeline 生成。
+    -->
+    <script>
+    const EMBEDDED = {
+        sentiment: {
+  "total_dialogues": 6565,
+  "analyzed_dialogues": 6565,
+  "sentiment_distribution": {
+    "positive": 821,
+    "neutral": 3800,
+    "negative": 1944
+  },
+  "speaker_sentiment": [
+    {
+      "speaker": "孙悟空",
+      "total": 3521,
+      "positive": 454,
+      "neutral": 1970,
+      "negative": 1097,
+      "positive_ratio": 0.1289,
+      "neutral_ratio": 0.5595,
+      "negative_ratio": 0.3116,
+      "avg_sentiment": -0.47,
+      "top_positive_words": [
+        {
+          "word": "圣",
+          "count": 281
+        },
+        {
+          "word": "救",
+          "count": 180
+        },
+        {
+          "word": "化",
+          "count": 138
+        },
+        {
+          "word": "功",
+          "count": 79
+        },
+        {
+          "word": "善",
+          "count": 70
+        },
+        {
+          "word": "护",
+          "count": 69
+        },
+        {
+          "word": "贤",
+          "count": 54
+        },
+        {
+          "word": "信",
+          "count": 52
+        },
+        {
+          "word": "恩",
+          "count": 38
+        },
+        {
+          "word": "喜",
+          "count": 34
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 420
+        },
+        {
+          "word": "打",
+          "count": 397
+        },
+        {
+          "word": "怪",
+          "count": 344
+        },
+        {
+          "word": "难",
+          "count": 148
+        },
+        {
+          "word": "魔",
+          "count": 137
+        },
+        {
+          "word": "死",
+          "count": 126
+        },
+        {
+          "word": "怕",
+          "count": 103
+        },
+        {
+          "word": "罪",
+          "count": 90
+        },
+        {
+          "word": "杀",
+          "count": 73
+        },
+        {
+          "word": "苦",
+          "count": 68
+        }
+      ]
+    },
+    {
+      "speaker": "唐僧",
+      "total": 1153,
+      "positive": 162,
+      "neutral": 697,
+      "negative": 294,
+      "positive_ratio": 0.1405,
+      "neutral_ratio": 0.6045,
+      "negative_ratio": 0.255,
+      "avg_sentiment": -0.2706,
+      "top_positive_words": [
+        {
+          "word": "救",
+          "count": 59
+        },
+        {
+          "word": "圣",
+          "count": 46
+        },
+        {
+          "word": "化",
+          "count": 40
+        },
+        {
+          "word": "善",
+          "count": 40
+        },
+        {
+          "word": "恩",
+          "count": 30
+        },
+        {
+          "word": "喜",
+          "count": 19
+        },
+        {
+          "word": "贤",
+          "count": 16
+        },
+        {
+          "word": "功",
+          "count": 15
+        },
+        {
+          "word": "善哉",
+          "count": 14
+        },
+        {
+          "word": "护",
+          "count": 12
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 69
+        },
+        {
+          "word": "怪",
+          "count": 63
+        },
+        {
+          "word": "打",
+          "count": 61
+        },
+        {
+          "word": "死",
+          "count": 49
+        },
+        {
+          "word": "苦",
+          "count": 32
+        },
+        {
+          "word": "难",
+          "count": 30
+        },
+        {
+          "word": "魔",
+          "count": 30
+        },
+        {
+          "word": "罪",
+          "count": 30
+        },
+        {
+          "word": "怕",
+          "count": 29
+        },
+        {
+          "word": "杀",
+          "count": 29
+        }
+      ]
+    },
+    {
+      "speaker": "猪八戒",
+      "total": 1138,
+      "positive": 104,
+      "neutral": 670,
+      "negative": 364,
+      "positive_ratio": 0.0914,
+      "neutral_ratio": 0.5888,
+      "negative_ratio": 0.3199,
+      "avg_sentiment": -0.4947,
+      "top_positive_words": [
+        {
+          "word": "化",
+          "count": 54
+        },
+        {
+          "word": "救",
+          "count": 32
+        },
+        {
+          "word": "圣",
+          "count": 20
+        },
+        {
+          "word": "信",
+          "count": 14
+        },
+        {
+          "word": "福",
+          "count": 13
+        },
+        {
+          "word": "善",
+          "count": 11
+        },
+        {
+          "word": "护",
+          "count": 10
+        },
+        {
+          "word": "功",
+          "count": 9
+        },
+        {
+          "word": "果然",
+          "count": 8
+        },
+        {
+          "word": "恩",
+          "count": 7
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "打",
+          "count": 129
+        },
+        {
+          "word": "妖",
+          "count": 111
+        },
+        {
+          "word": "怪",
+          "count": 69
+        },
+        {
+          "word": "难",
+          "count": 53
+        },
+        {
+          "word": "死",
+          "count": 49
+        },
+        {
+          "word": "怕",
+          "count": 40
+        },
+        {
+          "word": "哭",
+          "count": 32
+        },
+        {
+          "word": "杀",
+          "count": 27
+        },
+        {
+          "word": "破",
+          "count": 19
+        },
+        {
+          "word": "鬼",
+          "count": 17
+        }
+      ]
+    },
+    {
+      "speaker": "沙僧",
+      "total": 318,
+      "positive": 24,
+      "neutral": 210,
+      "negative": 84,
+      "positive_ratio": 0.0755,
+      "neutral_ratio": 0.6604,
+      "negative_ratio": 0.2642,
+      "avg_sentiment": -0.4277,
+      "top_positive_words": [
+        {
+          "word": "救",
+          "count": 18
+        },
+        {
+          "word": "化",
+          "count": 13
+        },
+        {
+          "word": "功",
+          "count": 8
+        },
+        {
+          "word": "护",
+          "count": 6
+        },
+        {
+          "word": "贤",
+          "count": 4
+        },
+        {
+          "word": "圣",
+          "count": 4
+        },
+        {
+          "word": "妙",
+          "count": 4
+        },
+        {
+          "word": "有理",
+          "count": 3
+        },
+        {
+          "word": "吉",
+          "count": 2
+        },
+        {
+          "word": "信",
+          "count": 2
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 41
+        },
+        {
+          "word": "打",
+          "count": 32
+        },
+        {
+          "word": "怪",
+          "count": 16
+        },
+        {
+          "word": "怕",
+          "count": 10
+        },
+        {
+          "word": "死",
+          "count": 8
+        },
+        {
+          "word": "胡",
+          "count": 7
+        },
+        {
+          "word": "惊",
+          "count": 7
+        },
+        {
+          "word": "魔",
+          "count": 7
+        },
+        {
+          "word": "难",
+          "count": 7
+        },
+        {
+          "word": "破",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "speaker": "观音",
+      "total": 189,
+      "positive": 26,
+      "neutral": 121,
+      "negative": 42,
+      "positive_ratio": 0.1376,
+      "neutral_ratio": 0.6402,
+      "negative_ratio": 0.2222,
+      "avg_sentiment": -0.2646,
+      "top_positive_words": [
+        {
+          "word": "救",
+          "count": 22
+        },
+        {
+          "word": "善",
+          "count": 17
+        },
+        {
+          "word": "圣",
+          "count": 16
+        },
+        {
+          "word": "度",
+          "count": 8
+        },
+        {
+          "word": "功",
+          "count": 7
+        },
+        {
+          "word": "寿",
+          "count": 6
+        },
+        {
+          "word": "慈",
+          "count": 5
+        },
+        {
+          "word": "祥",
+          "count": 4
+        },
+        {
+          "word": "喜",
+          "count": 3
+        },
+        {
+          "word": "护",
+          "count": 3
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "打",
+          "count": 19
+        },
+        {
+          "word": "罪",
+          "count": 16
+        },
+        {
+          "word": "难",
+          "count": 15
+        },
+        {
+          "word": "妖",
+          "count": 12
+        },
+        {
+          "word": "怪",
+          "count": 10
+        },
+        {
+          "word": "死",
+          "count": 10
+        },
+        {
+          "word": "灾",
+          "count": 8
+        },
+        {
+          "word": "苦",
+          "count": 7
+        },
+        {
+          "word": "魔",
+          "count": 6
+        },
+        {
+          "word": "失",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "speaker": "如来",
+      "total": 58,
+      "positive": 13,
+      "neutral": 20,
+      "negative": 25,
+      "positive_ratio": 0.2241,
+      "neutral_ratio": 0.3448,
+      "negative_ratio": 0.431,
+      "avg_sentiment": -0.7759,
+      "top_positive_words": [
+        {
+          "word": "功",
+          "count": 8
+        },
+        {
+          "word": "圣",
+          "count": 7
+        },
+        {
+          "word": "善",
+          "count": 5
+        },
+        {
+          "word": "化",
+          "count": 5
+        },
+        {
+          "word": "护",
+          "count": 5
+        },
+        {
+          "word": "乐",
+          "count": 3
+        },
+        {
+          "word": "喜",
+          "count": 3
+        },
+        {
+          "word": "德",
+          "count": 2
+        },
+        {
+          "word": "慈",
+          "count": 1
+        },
+        {
+          "word": "妙",
+          "count": 1
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 14
+        },
+        {
+          "word": "打",
+          "count": 13
+        },
+        {
+          "word": "非",
+          "count": 11
+        },
+        {
+          "word": "怪",
+          "count": 9
+        },
+        {
+          "word": "魔",
+          "count": 5
+        },
+        {
+          "word": "罪",
+          "count": 4
+        },
+        {
+          "word": "苦",
+          "count": 3
+        },
+        {
+          "word": "恶",
+          "count": 3
+        },
+        {
+          "word": "破",
+          "count": 3
+        },
+        {
+          "word": "鬼",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "speaker": "李靖",
+      "total": 53,
+      "positive": 13,
+      "neutral": 28,
+      "negative": 12,
+      "positive_ratio": 0.2453,
+      "neutral_ratio": 0.5283,
+      "negative_ratio": 0.2264,
+      "avg_sentiment": -0.0755,
+      "top_positive_words": [
+        {
+          "word": "圣",
+          "count": 7
+        },
+        {
+          "word": "功",
+          "count": 2
+        },
+        {
+          "word": "救",
+          "count": 2
+        },
+        {
+          "word": "妙",
+          "count": 2
+        },
+        {
+          "word": "护",
+          "count": 2
+        },
+        {
+          "word": "善",
+          "count": 1
+        },
+        {
+          "word": "喜",
+          "count": 1
+        },
+        {
+          "word": "德",
+          "count": 1
+        },
+        {
+          "word": "信",
+          "count": 1
+        },
+        {
+          "word": "领旨",
+          "count": 1
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 5
+        },
+        {
+          "word": "罪",
+          "count": 3
+        },
+        {
+          "word": "打",
+          "count": 2
+        },
+        {
+          "word": "败",
+          "count": 2
+        },
+        {
+          "word": "杀",
+          "count": 2
+        },
+        {
+          "word": "混",
+          "count": 1
+        },
+        {
+          "word": "妖魔",
+          "count": 1
+        },
+        {
+          "word": "魔",
+          "count": 1
+        },
+        {
+          "word": "瞒",
+          "count": 1
+        },
+        {
+          "word": "非",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "speaker": "玉帝",
+      "total": 48,
+      "positive": 11,
+      "neutral": 29,
+      "negative": 8,
+      "positive_ratio": 0.2292,
+      "neutral_ratio": 0.6042,
+      "negative_ratio": 0.1667,
+      "avg_sentiment": 0.125,
+      "top_positive_words": [
+        {
+          "word": "圣",
+          "count": 13
+        },
+        {
+          "word": "恩",
+          "count": 3
+        },
+        {
+          "word": "慈",
+          "count": 3
+        },
+        {
+          "word": "护",
+          "count": 3
+        },
+        {
+          "word": "化",
+          "count": 2
+        },
+        {
+          "word": "喜",
+          "count": 2
+        },
+        {
+          "word": "欢",
+          "count": 2
+        },
+        {
+          "word": "功",
+          "count": 2
+        },
+        {
+          "word": "善",
+          "count": 2
+        },
+        {
+          "word": "贤",
+          "count": 1
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 10
+        },
+        {
+          "word": "死",
+          "count": 4
+        },
+        {
+          "word": "罪",
+          "count": 3
+        },
+        {
+          "word": "妖魔",
+          "count": 2
+        },
+        {
+          "word": "魔",
+          "count": 2
+        },
+        {
+          "word": "非",
+          "count": 2
+        },
+        {
+          "word": "邪",
+          "count": 1
+        },
+        {
+          "word": "损",
+          "count": 1
+        },
+        {
+          "word": "打",
+          "count": 1
+        },
+        {
+          "word": "负",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "speaker": "太上老君",
+      "total": 27,
+      "positive": 1,
+      "neutral": 20,
+      "negative": 6,
+      "positive_ratio": 0.037,
+      "neutral_ratio": 0.7407,
+      "negative_ratio": 0.2222,
+      "avg_sentiment": -0.3333,
+      "top_positive_words": [
+        {
+          "word": "功",
+          "count": 3
+        },
+        {
+          "word": "圣",
+          "count": 2
+        },
+        {
+          "word": "化",
+          "count": 2
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "打",
+          "count": 3
+        },
+        {
+          "word": "魔",
+          "count": 3
+        },
+        {
+          "word": "怪",
+          "count": 2
+        },
+        {
+          "word": "胡",
+          "count": 2
+        },
+        {
+          "word": "妖魔",
+          "count": 1
+        },
+        {
+          "word": "妖",
+          "count": 1
+        },
+        {
+          "word": "错",
+          "count": 1
+        },
+        {
+          "word": "难",
+          "count": 1
+        },
+        {
+          "word": "胡说",
+          "count": 1
+        },
+        {
+          "word": "怕",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "speaker": "哪吒",
+      "total": 14,
+      "positive": 2,
+      "neutral": 9,
+      "negative": 3,
+      "positive_ratio": 0.1429,
+      "neutral_ratio": 0.6429,
+      "negative_ratio": 0.2143,
+      "avg_sentiment": -0.2857,
+      "top_positive_words": [
+        {
+          "word": "善",
+          "count": 2
+        },
+        {
+          "word": "功",
+          "count": 2
+        },
+        {
+          "word": "恩",
+          "count": 2
+        },
+        {
+          "word": "福",
+          "count": 1
+        },
+        {
+          "word": "圣",
+          "count": 1
+        },
+        {
+          "word": "喜",
+          "count": 1
+        },
+        {
+          "word": "奉旨",
+          "count": 1
+        }
+      ],
+      "top_negative_words": [
+        {
+          "word": "妖",
+          "count": 4
+        },
+        {
+          "word": "怪",
+          "count": 2
+        },
+        {
+          "word": "怕",
+          "count": 1
+        },
+        {
+          "word": "难",
+          "count": 1
+        },
+        {
+          "word": "混",
+          "count": 1
+        },
+        {
+          "word": "恼",
+          "count": 1
+        },
+        {
+          "word": "败",
+          "count": 1
+        },
+        {
+          "word": "死",
+          "count": 1
+        },
+        {
+          "word": "打",
+          "count": 1
+        },
+        {
+          "word": "非",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "chapter_sentiment": [
+    {
+      "chapter": 1,
+      "total": 4,
+      "positive": 2,
+      "neutral": 1,
+      "negative": 1,
+      "positive_ratio": 0.5,
+      "negative_ratio": 0.25,
+      "avg_sentiment": 0.5
+    },
+    {
+      "chapter": 2,
+      "total": 28,
+      "positive": 0,
+      "neutral": 22,
+      "negative": 6,
+      "positive_ratio": 0.0,
+      "negative_ratio": 0.2143,
+      "avg_sentiment": -0.3929
+    },
+    {
+      "chapter": 3,
+      "total": 9,
+      "positive": 2,
+      "neutral": 6,
+      "negative": 1,
+      "positive_ratio": 0.2222,
+      "negative_ratio": 0.1111,
+      "avg_sentiment": 0.5556
+    },
+    {
+      "chapter": 4,
+      "total": 40,
+      "positive": 8,
+      "neutral": 24,
+      "negative": 8,
+      "positive_ratio": 0.2,
+      "negative_ratio": 0.2,
+      "avg_sentiment": 0.05
+    },
+    {
+      "chapter": 5,
+      "total": 40,
+      "positive": 12,
+      "neutral": 18,
+      "negative": 10,
+      "positive_ratio": 0.3,
+      "negative_ratio": 0.25,
+      "avg_sentiment": -0.25
+    },
+    {
+      "chapter": 6,
+      "total": 43,
+      "positive": 8,
+      "neutral": 24,
+      "negative": 11,
+      "positive_ratio": 0.186,
+      "negative_ratio": 0.2558,
+      "avg_sentiment": -0.0698
+    },
+    {
+      "chapter": 7,
+      "total": 25,
+      "positive": 6,
+      "neutral": 14,
+      "negative": 5,
+      "positive_ratio": 0.24,
+      "negative_ratio": 0.2,
+      "avg_sentiment": -0.24
+    },
+    {
+      "chapter": 8,
+      "total": 39,
+      "positive": 7,
+      "neutral": 21,
+      "negative": 11,
+      "positive_ratio": 0.1795,
+      "negative_ratio": 0.2821,
+      "avg_sentiment": -0.359
+    },
+    {
+      "chapter": 12,
+      "total": 36,
+      "positive": 11,
+      "neutral": 20,
+      "negative": 5,
+      "positive_ratio": 0.3056,
+      "negative_ratio": 0.1389,
+      "avg_sentiment": 0.1944
+    },
+    {
+      "chapter": 13,
+      "total": 25,
+      "positive": 4,
+      "neutral": 11,
+      "negative": 10,
+      "positive_ratio": 0.16,
+      "negative_ratio": 0.4,
+      "avg_sentiment": -0.4
+    },
+    {
+      "chapter": 14,
+      "total": 99,
+      "positive": 11,
+      "neutral": 59,
+      "negative": 29,
+      "positive_ratio": 0.1111,
+      "negative_ratio": 0.2929,
+      "avg_sentiment": -0.4242
+    },
+    {
+      "chapter": 15,
+      "total": 85,
+      "positive": 12,
+      "neutral": 52,
+      "negative": 21,
+      "positive_ratio": 0.1412,
+      "negative_ratio": 0.2471,
+      "avg_sentiment": -0.1882
+    },
+    {
+      "chapter": 16,
+      "total": 79,
+      "positive": 10,
+      "neutral": 50,
+      "negative": 19,
+      "positive_ratio": 0.1266,
+      "negative_ratio": 0.2405,
+      "avg_sentiment": -0.2278
+    },
+    {
+      "chapter": 17,
+      "total": 71,
+      "positive": 8,
+      "neutral": 42,
+      "negative": 21,
+      "positive_ratio": 0.1127,
+      "negative_ratio": 0.2958,
+      "avg_sentiment": -0.6901
+    },
+    {
+      "chapter": 18,
+      "total": 70,
+      "positive": 4,
+      "neutral": 43,
+      "negative": 23,
+      "positive_ratio": 0.0571,
+      "negative_ratio": 0.3286,
+      "avg_sentiment": -0.7571
+    },
+    {
+      "chapter": 19,
+      "total": 64,
+      "positive": 5,
+      "neutral": 36,
+      "negative": 23,
+      "positive_ratio": 0.0781,
+      "negative_ratio": 0.3594,
+      "avg_sentiment": -0.7344
+    },
+    {
+      "chapter": 20,
+      "total": 73,
+      "positive": 6,
+      "neutral": 42,
+      "negative": 25,
+      "positive_ratio": 0.0822,
+      "negative_ratio": 0.3425,
+      "avg_sentiment": -0.8356
+    },
+    {
+      "chapter": 21,
+      "total": 74,
+      "positive": 14,
+      "neutral": 38,
+      "negative": 22,
+      "positive_ratio": 0.1892,
+      "negative_ratio": 0.2973,
+      "avg_sentiment": -0.3108
+    },
+    {
+      "chapter": 22,
+      "total": 75,
+      "positive": 4,
+      "neutral": 35,
+      "negative": 36,
+      "positive_ratio": 0.0533,
+      "negative_ratio": 0.48,
+      "avg_sentiment": -1.0933
+    },
+    {
+      "chapter": 23,
+      "total": 85,
+      "positive": 12,
+      "neutral": 56,
+      "negative": 17,
+      "positive_ratio": 0.1412,
+      "negative_ratio": 0.2,
+      "avg_sentiment": -0.1176
+    },
+    {
+      "chapter": 24,
+      "total": 87,
+      "positive": 9,
+      "neutral": 58,
+      "negative": 20,
+      "positive_ratio": 0.1034,
+      "negative_ratio": 0.2299,
+      "avg_sentiment": -0.2759
+    },
+    {
+      "chapter": 25,
+      "total": 69,
+      "positive": 2,
+      "neutral": 40,
+      "negative": 27,
+      "positive_ratio": 0.029,
+      "negative_ratio": 0.3913,
+      "avg_sentiment": -0.5942
+    },
+    {
+      "chapter": 26,
+      "total": 77,
+      "positive": 16,
+      "neutral": 47,
+      "negative": 14,
+      "positive_ratio": 0.2078,
+      "negative_ratio": 0.1818,
+      "avg_sentiment": -0.1039
+    },
+    {
+      "chapter": 27,
+      "total": 77,
+      "positive": 12,
+      "neutral": 34,
+      "negative": 31,
+      "positive_ratio": 0.1558,
+      "negative_ratio": 0.4026,
+      "avg_sentiment": -0.9351
+    },
+    {
+      "chapter": 28,
+      "total": 40,
+      "positive": 6,
+      "neutral": 23,
+      "negative": 11,
+      "positive_ratio": 0.15,
+      "negative_ratio": 0.275,
+      "avg_sentiment": -0.625
+    },
+    {
+      "chapter": 29,
+      "total": 44,
+      "positive": 7,
+      "neutral": 19,
+      "negative": 18,
+      "positive_ratio": 0.1591,
+      "negative_ratio": 0.4091,
+      "avg_sentiment": -0.3864
+    },
+    {
+      "chapter": 30,
+      "total": 50,
+      "positive": 10,
+      "neutral": 30,
+      "negative": 10,
+      "positive_ratio": 0.2,
+      "negative_ratio": 0.2,
+      "avg_sentiment": -0.34
+    },
+    {
+      "chapter": 31,
+      "total": 118,
+      "positive": 14,
+      "neutral": 43,
+      "negative": 61,
+      "positive_ratio": 0.1186,
+      "negative_ratio": 0.5169,
+      "avg_sentiment": -1.0
+    },
+    {
+      "chapter": 32,
+      "total": 106,
+      "positive": 8,
+      "neutral": 64,
+      "negative": 34,
+      "positive_ratio": 0.0755,
+      "negative_ratio": 0.3208,
+      "avg_sentiment": -0.7642
+    },
+    {
+      "chapter": 33,
+      "total": 99,
+      "positive": 12,
+      "neutral": 72,
+      "negative": 15,
+      "positive_ratio": 0.1212,
+      "negative_ratio": 0.1515,
+      "avg_sentiment": -0.1515
+    },
+    {
+      "chapter": 34,
+      "total": 68,
+      "positive": 7,
+      "neutral": 49,
+      "negative": 12,
+      "positive_ratio": 0.1029,
+      "negative_ratio": 0.1765,
+      "avg_sentiment": -0.1471
+    },
+    {
+      "chapter": 35,
+      "total": 40,
+      "positive": 3,
+      "neutral": 17,
+      "negative": 20,
+      "positive_ratio": 0.075,
+      "negative_ratio": 0.5,
+      "avg_sentiment": -0.875
+    },
+    {
+      "chapter": 36,
+      "total": 84,
+      "positive": 5,
+      "neutral": 53,
+      "negative": 26,
+      "positive_ratio": 0.0595,
+      "negative_ratio": 0.3095,
+      "avg_sentiment": -0.4167
+    },
+    {
+      "chapter": 37,
+      "total": 100,
+      "positive": 15,
+      "neutral": 53,
+      "negative": 32,
+      "positive_ratio": 0.15,
+      "negative_ratio": 0.32,
+      "avg_sentiment": -0.55
+    },
+    {
+      "chapter": 38,
+      "total": 115,
+      "positive": 14,
+      "neutral": 68,
+      "negative": 33,
+      "positive_ratio": 0.1217,
+      "negative_ratio": 0.287,
+      "avg_sentiment": -0.3478
+    },
+    {
+      "chapter": 39,
+      "total": 105,
+      "positive": 12,
+      "neutral": 55,
+      "negative": 38,
+      "positive_ratio": 0.1143,
+      "negative_ratio": 0.3619,
+      "avg_sentiment": -0.5524
+    },
+    {
+      "chapter": 40,
+      "total": 75,
+      "positive": 6,
+      "neutral": 39,
+      "negative": 30,
+      "positive_ratio": 0.08,
+      "negative_ratio": 0.4,
+      "avg_sentiment": -0.7333
+    },
+    {
+      "chapter": 41,
+      "total": 79,
+      "positive": 11,
+      "neutral": 37,
+      "negative": 31,
+      "positive_ratio": 0.1392,
+      "negative_ratio": 0.3924,
+      "avg_sentiment": -0.5949
+    },
+    {
+      "chapter": 42,
+      "total": 107,
+      "positive": 12,
+      "neutral": 75,
+      "negative": 20,
+      "positive_ratio": 0.1121,
+      "negative_ratio": 0.1869,
+      "avg_sentiment": -0.1963
+    },
+    {
+      "chapter": 43,
+      "total": 82,
+      "positive": 10,
+      "neutral": 43,
+      "negative": 29,
+      "positive_ratio": 0.122,
+      "negative_ratio": 0.3537,
+      "avg_sentiment": -0.4512
+    },
+    {
+      "chapter": 44,
+      "total": 116,
+      "positive": 15,
+      "neutral": 74,
+      "negative": 27,
+      "positive_ratio": 0.1293,
+      "negative_ratio": 0.2328,
+      "avg_sentiment": -0.2845
+    },
+    {
+      "chapter": 45,
+      "total": 54,
+      "positive": 12,
+      "neutral": 37,
+      "negative": 5,
+      "positive_ratio": 0.2222,
+      "negative_ratio": 0.0926,
+      "avg_sentiment": 0.0741
+    },
+    {
+      "chapter": 46,
+      "total": 91,
+      "positive": 5,
+      "neutral": 66,
+      "negative": 20,
+      "positive_ratio": 0.0549,
+      "negative_ratio": 0.2198,
+      "avg_sentiment": -0.2088
+    },
+    {
+      "chapter": 47,
+      "total": 134,
+      "positive": 16,
+      "neutral": 96,
+      "negative": 22,
+      "positive_ratio": 0.1194,
+      "negative_ratio": 0.1642,
+      "avg_sentiment": -0.1343
+    },
+    {
+      "chapter": 48,
+      "total": 63,
+      "positive": 4,
+      "neutral": 43,
+      "negative": 16,
+      "positive_ratio": 0.0635,
+      "negative_ratio": 0.254,
+      "avg_sentiment": -0.3016
+    },
+    {
+      "chapter": 49,
+      "total": 96,
+      "positive": 15,
+      "neutral": 54,
+      "negative": 27,
+      "positive_ratio": 0.1562,
+      "negative_ratio": 0.2812,
+      "avg_sentiment": -0.3854
+    },
+    {
+      "chapter": 50,
+      "total": 66,
+      "positive": 16,
+      "neutral": 28,
+      "negative": 22,
+      "positive_ratio": 0.2424,
+      "negative_ratio": 0.3333,
+      "avg_sentiment": -0.3485
+    },
+    {
+      "chapter": 51,
+      "total": 71,
+      "positive": 14,
+      "neutral": 35,
+      "negative": 22,
+      "positive_ratio": 0.1972,
+      "negative_ratio": 0.3099,
+      "avg_sentiment": -0.5915
+    },
+    {
+      "chapter": 52,
+      "total": 69,
+      "positive": 6,
+      "neutral": 45,
+      "negative": 18,
+      "positive_ratio": 0.087,
+      "negative_ratio": 0.2609,
+      "avg_sentiment": -0.4493
+    },
+    {
+      "chapter": 53,
+      "total": 98,
+      "positive": 8,
+      "neutral": 67,
+      "negative": 23,
+      "positive_ratio": 0.0816,
+      "negative_ratio": 0.2347,
+      "avg_sentiment": -0.2551
+    },
+    {
+      "chapter": 54,
+      "total": 64,
+      "positive": 8,
+      "neutral": 46,
+      "negative": 10,
+      "positive_ratio": 0.125,
+      "negative_ratio": 0.1562,
+      "avg_sentiment": -0.125
+    },
+    {
+      "chapter": 55,
+      "total": 101,
+      "positive": 12,
+      "neutral": 54,
+      "negative": 35,
+      "positive_ratio": 0.1188,
+      "negative_ratio": 0.3465,
+      "avg_sentiment": -0.5149
+    },
+    {
+      "chapter": 56,
+      "total": 98,
+      "positive": 7,
+      "neutral": 54,
+      "negative": 37,
+      "positive_ratio": 0.0714,
+      "negative_ratio": 0.3776,
+      "avg_sentiment": -0.5102
+    },
+    {
+      "chapter": 57,
+      "total": 62,
+      "positive": 15,
+      "neutral": 33,
+      "negative": 14,
+      "positive_ratio": 0.2419,
+      "negative_ratio": 0.2258,
+      "avg_sentiment": -0.3065
+    },
+    {
+      "chapter": 58,
+      "total": 46,
+      "positive": 4,
+      "neutral": 27,
+      "negative": 15,
+      "positive_ratio": 0.087,
+      "negative_ratio": 0.3261,
+      "avg_sentiment": -1.3913
+    },
+    {
+      "chapter": 59,
+      "total": 96,
+      "positive": 13,
+      "neutral": 64,
+      "negative": 19,
+      "positive_ratio": 0.1354,
+      "negative_ratio": 0.1979,
+      "avg_sentiment": -0.125
+    },
+    {
+      "chapter": 60,
+      "total": 37,
+      "positive": 8,
+      "neutral": 16,
+      "negative": 13,
+      "positive_ratio": 0.2162,
+      "negative_ratio": 0.3514,
+      "avg_sentiment": -0.4054
+    },
+    {
+      "chapter": 61,
+      "total": 48,
+      "positive": 7,
+      "neutral": 31,
+      "negative": 10,
+      "positive_ratio": 0.1458,
+      "negative_ratio": 0.2083,
+      "avg_sentiment": -0.0417
+    },
+    {
+      "chapter": 62,
+      "total": 73,
+      "positive": 8,
+      "neutral": 39,
+      "negative": 26,
+      "positive_ratio": 0.1096,
+      "negative_ratio": 0.3562,
+      "avg_sentiment": -0.4384
+    },
+    {
+      "chapter": 63,
+      "total": 47,
+      "positive": 4,
+      "neutral": 21,
+      "negative": 22,
+      "positive_ratio": 0.0851,
+      "negative_ratio": 0.4681,
+      "avg_sentiment": -0.7447
+    },
+    {
+      "chapter": 64,
+      "total": 54,
+      "positive": 10,
+      "neutral": 29,
+      "negative": 15,
+      "positive_ratio": 0.1852,
+      "negative_ratio": 0.2778,
+      "avg_sentiment": -0.1667
+    },
+    {
+      "chapter": 65,
+      "total": 39,
+      "positive": 5,
+      "neutral": 19,
+      "negative": 15,
+      "positive_ratio": 0.1282,
+      "negative_ratio": 0.3846,
+      "avg_sentiment": -0.641
+    },
+    {
+      "chapter": 66,
+      "total": 37,
+      "positive": 10,
+      "neutral": 11,
+      "negative": 16,
+      "positive_ratio": 0.2703,
+      "negative_ratio": 0.4324,
+      "avg_sentiment": -0.4595
+    },
+    {
+      "chapter": 67,
+      "total": 107,
+      "positive": 5,
+      "neutral": 59,
+      "negative": 43,
+      "positive_ratio": 0.0467,
+      "negative_ratio": 0.4019,
+      "avg_sentiment": -0.6636
+    },
+    {
+      "chapter": 68,
+      "total": 87,
+      "positive": 4,
+      "neutral": 61,
+      "negative": 22,
+      "positive_ratio": 0.046,
+      "negative_ratio": 0.2529,
+      "avg_sentiment": -0.4023
+    },
+    {
+      "chapter": 69,
+      "total": 114,
+      "positive": 13,
+      "neutral": 81,
+      "negative": 20,
+      "positive_ratio": 0.114,
+      "negative_ratio": 0.1754,
+      "avg_sentiment": -0.1228
+    },
+    {
+      "chapter": 70,
+      "total": 60,
+      "positive": 7,
+      "neutral": 29,
+      "negative": 24,
+      "positive_ratio": 0.1167,
+      "negative_ratio": 0.4,
+      "avg_sentiment": -0.5667
+    },
+    {
+      "chapter": 71,
+      "total": 54,
+      "positive": 6,
+      "neutral": 26,
+      "negative": 22,
+      "positive_ratio": 0.1111,
+      "negative_ratio": 0.4074,
+      "avg_sentiment": -1.1481
+    },
+    {
+      "chapter": 72,
+      "total": 74,
+      "positive": 10,
+      "neutral": 35,
+      "negative": 29,
+      "positive_ratio": 0.1351,
+      "negative_ratio": 0.3919,
+      "avg_sentiment": -0.5
+    },
+    {
+      "chapter": 73,
+      "total": 67,
+      "positive": 10,
+      "neutral": 29,
+      "negative": 28,
+      "positive_ratio": 0.1493,
+      "negative_ratio": 0.4179,
+      "avg_sentiment": -0.6269
+    },
+    {
+      "chapter": 74,
+      "total": 108,
+      "positive": 4,
+      "neutral": 65,
+      "negative": 39,
+      "positive_ratio": 0.037,
+      "negative_ratio": 0.3611,
+      "avg_sentiment": -0.8981
+    },
+    {
+      "chapter": 75,
+      "total": 65,
+      "positive": 5,
+      "neutral": 38,
+      "negative": 22,
+      "positive_ratio": 0.0769,
+      "negative_ratio": 0.3385,
+      "avg_sentiment": -0.4615
+    },
+    {
+      "chapter": 76,
+      "total": 78,
+      "positive": 13,
+      "neutral": 40,
+      "negative": 25,
+      "positive_ratio": 0.1667,
+      "negative_ratio": 0.3205,
+      "avg_sentiment": -0.359
+    },
+    {
+      "chapter": 77,
+      "total": 80,
+      "positive": 10,
+      "neutral": 37,
+      "negative": 33,
+      "positive_ratio": 0.125,
+      "negative_ratio": 0.4125,
+      "avg_sentiment": -0.6
+    },
+    {
+      "chapter": 78,
+      "total": 60,
+      "positive": 13,
+      "neutral": 29,
+      "negative": 18,
+      "positive_ratio": 0.2167,
+      "negative_ratio": 0.3,
+      "avg_sentiment": -0.5
+    },
+    {
+      "chapter": 79,
+      "total": 46,
+      "positive": 8,
+      "neutral": 17,
+      "negative": 21,
+      "positive_ratio": 0.1739,
+      "negative_ratio": 0.4565,
+      "avg_sentiment": -0.5435
+    },
+    {
+      "chapter": 80,
+      "total": 83,
+      "positive": 16,
+      "neutral": 44,
+      "negative": 23,
+      "positive_ratio": 0.1928,
+      "negative_ratio": 0.2771,
+      "avg_sentiment": -0.2289
+    },
+    {
+      "chapter": 81,
+      "total": 97,
+      "positive": 4,
+      "neutral": 58,
+      "negative": 35,
+      "positive_ratio": 0.0412,
+      "negative_ratio": 0.3608,
+      "avg_sentiment": -0.6392
+    },
+    {
+      "chapter": 82,
+      "total": 105,
+      "positive": 13,
+      "neutral": 57,
+      "negative": 35,
+      "positive_ratio": 0.1238,
+      "negative_ratio": 0.3333,
+      "avg_sentiment": -0.4381
+    },
+    {
+      "chapter": 83,
+      "total": 82,
+      "positive": 9,
+      "neutral": 46,
+      "negative": 27,
+      "positive_ratio": 0.1098,
+      "negative_ratio": 0.3293,
+      "avg_sentiment": -0.4268
+    },
+    {
+      "chapter": 84,
+      "total": 76,
+      "positive": 2,
+      "neutral": 59,
+      "negative": 15,
+      "positive_ratio": 0.0263,
+      "negative_ratio": 0.1974,
+      "avg_sentiment": -0.3553
+    },
+    {
+      "chapter": 85,
+      "total": 73,
+      "positive": 5,
+      "neutral": 48,
+      "negative": 20,
+      "positive_ratio": 0.0685,
+      "negative_ratio": 0.274,
+      "avg_sentiment": -0.4658
+    },
+    {
+      "chapter": 86,
+      "total": 70,
+      "positive": 6,
+      "neutral": 37,
+      "negative": 27,
+      "positive_ratio": 0.0857,
+      "negative_ratio": 0.3857,
+      "avg_sentiment": -0.7286
+    },
+    {
+      "chapter": 87,
+      "total": 77,
+      "positive": 22,
+      "neutral": 45,
+      "negative": 10,
+      "positive_ratio": 0.2857,
+      "negative_ratio": 0.1299,
+      "avg_sentiment": 0.3247
+    },
+    {
+      "chapter": 88,
+      "total": 54,
+      "positive": 8,
+      "neutral": 36,
+      "negative": 10,
+      "positive_ratio": 0.1481,
+      "negative_ratio": 0.1852,
+      "avg_sentiment": -0.0556
+    },
+    {
+      "chapter": 89,
+      "total": 50,
+      "positive": 3,
+      "neutral": 30,
+      "negative": 17,
+      "positive_ratio": 0.06,
+      "negative_ratio": 0.34,
+      "avg_sentiment": -0.66
+    },
+    {
+      "chapter": 90,
+      "total": 30,
+      "positive": 7,
+      "neutral": 15,
+      "negative": 8,
+      "positive_ratio": 0.2333,
+      "negative_ratio": 0.2667,
+      "avg_sentiment": 0.1
+    },
+    {
+      "chapter": 91,
+      "total": 60,
+      "positive": 9,
+      "neutral": 36,
+      "negative": 15,
+      "positive_ratio": 0.15,
+      "negative_ratio": 0.25,
+      "avg_sentiment": -0.25
+    },
+    {
+      "chapter": 92,
+      "total": 56,
+      "positive": 10,
+      "neutral": 27,
+      "negative": 19,
+      "positive_ratio": 0.1786,
+      "negative_ratio": 0.3393,
+      "avg_sentiment": -0.2679
+    },
+    {
+      "chapter": 93,
+      "total": 83,
+      "positive": 11,
+      "neutral": 59,
+      "negative": 13,
+      "positive_ratio": 0.1325,
+      "negative_ratio": 0.1566,
+      "avg_sentiment": -0.1325
+    },
+    {
+      "chapter": 94,
+      "total": 33,
+      "positive": 2,
+      "neutral": 23,
+      "negative": 8,
+      "positive_ratio": 0.0606,
+      "negative_ratio": 0.2424,
+      "avg_sentiment": -0.3939
+    },
+    {
+      "chapter": 95,
+      "total": 32,
+      "positive": 3,
+      "neutral": 21,
+      "negative": 8,
+      "positive_ratio": 0.0938,
+      "negative_ratio": 0.25,
+      "avg_sentiment": -0.5
+    },
+    {
+      "chapter": 96,
+      "total": 38,
+      "positive": 3,
+      "neutral": 22,
+      "negative": 13,
+      "positive_ratio": 0.0789,
+      "negative_ratio": 0.3421,
+      "avg_sentiment": -0.3421
+    },
+    {
+      "chapter": 97,
+      "total": 47,
+      "positive": 6,
+      "neutral": 25,
+      "negative": 16,
+      "positive_ratio": 0.1277,
+      "negative_ratio": 0.3404,
+      "avg_sentiment": -0.4681
+    },
+    {
+      "chapter": 98,
+      "total": 39,
+      "positive": 8,
+      "neutral": 22,
+      "negative": 9,
+      "positive_ratio": 0.2051,
+      "negative_ratio": 0.2308,
+      "avg_sentiment": -0.1282
+    },
+    {
+      "chapter": 99,
+      "total": 16,
+      "positive": 2,
+      "neutral": 12,
+      "negative": 2,
+      "positive_ratio": 0.125,
+      "negative_ratio": 0.125,
+      "avg_sentiment": 0.125
+    },
+    {
+      "chapter": 100,
+      "total": 18,
+      "positive": 5,
+      "neutral": 10,
+      "negative": 3,
+      "positive_ratio": 0.2778,
+      "negative_ratio": 0.1667,
+      "avg_sentiment": 0.5556
+    }
+  ],
+  "speaker_chapter_curve": [
+    {
+      "speaker": "孙悟空",
+      "chapters": [
+        {
+          "chapter": 1,
+          "count": 4,
+          "avg_sentiment": 0.5
+        },
+        {
+          "chapter": 2,
+          "count": 28,
+          "avg_sentiment": -0.3929
+        },
+        {
+          "chapter": 3,
+          "count": 6,
+          "avg_sentiment": 0.1667
+        },
+        {
+          "chapter": 4,
+          "count": 17,
+          "avg_sentiment": 0.2353
+        },
+        {
+          "chapter": 5,
+          "count": 31,
+          "avg_sentiment": -0.4194
+        },
+        {
+          "chapter": 6,
+          "count": 6,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 7,
+          "count": 6,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 8,
+          "count": 6,
+          "avg_sentiment": 0.6667
+        },
+        {
+          "chapter": 9,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 10,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 11,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 12,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 13,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 14,
+          "count": 43,
+          "avg_sentiment": -0.3023
+        },
+        {
+          "chapter": 15,
+          "count": 46,
+          "avg_sentiment": -0.3261
+        },
+        {
+          "chapter": 16,
+          "count": 45,
+          "avg_sentiment": -0.2889
+        },
+        {
+          "chapter": 17,
+          "count": 43,
+          "avg_sentiment": -0.7442
+        },
+        {
+          "chapter": 18,
+          "count": 62,
+          "avg_sentiment": -0.8548
+        },
+        {
+          "chapter": 19,
+          "count": 28,
+          "avg_sentiment": -1.3929
+        },
+        {
+          "chapter": 20,
+          "count": 38,
+          "avg_sentiment": -0.8947
+        },
+        {
+          "chapter": 21,
+          "count": 51,
+          "avg_sentiment": -0.2353
+        },
+        {
+          "chapter": 22,
+          "count": 30,
+          "avg_sentiment": -0.9333
+        },
+        {
+          "chapter": 23,
+          "count": 28,
+          "avg_sentiment": -0.0714
+        },
+        {
+          "chapter": 24,
+          "count": 37,
+          "avg_sentiment": -0.1622
+        },
+        {
+          "chapter": 25,
+          "count": 32,
+          "avg_sentiment": -0.5312
+        },
+        {
+          "chapter": 26,
+          "count": 46,
+          "avg_sentiment": -0.1522
+        },
+        {
+          "chapter": 27,
+          "count": 31,
+          "avg_sentiment": -1.0323
+        },
+        {
+          "chapter": 28,
+          "count": 16,
+          "avg_sentiment": -1.0625
+        },
+        {
+          "chapter": 29,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 30,
+          "count": 19,
+          "avg_sentiment": 0.0526
+        },
+        {
+          "chapter": 31,
+          "count": 74,
+          "avg_sentiment": -1.0811
+        },
+        {
+          "chapter": 32,
+          "count": 58,
+          "avg_sentiment": -0.7586
+        },
+        {
+          "chapter": 33,
+          "count": 70,
+          "avg_sentiment": -0.1714
+        },
+        {
+          "chapter": 34,
+          "count": 51,
+          "avg_sentiment": -0.1176
+        },
+        {
+          "chapter": 35,
+          "count": 27,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 36,
+          "count": 32,
+          "avg_sentiment": -0.6562
+        },
+        {
+          "chapter": 37,
+          "count": 30,
+          "avg_sentiment": -0.5667
+        },
+        {
+          "chapter": 38,
+          "count": 51,
+          "avg_sentiment": -0.4314
+        },
+        {
+          "chapter": 39,
+          "count": 67,
+          "avg_sentiment": -0.6269
+        },
+        {
+          "chapter": 40,
+          "count": 49,
+          "avg_sentiment": -0.7959
+        },
+        {
+          "chapter": 41,
+          "count": 41,
+          "avg_sentiment": -0.5854
+        },
+        {
+          "chapter": 42,
+          "count": 70,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 43,
+          "count": 46,
+          "avg_sentiment": -0.3696
+        },
+        {
+          "chapter": 44,
+          "count": 100,
+          "avg_sentiment": -0.3
+        },
+        {
+          "chapter": 45,
+          "count": 45,
+          "avg_sentiment": 0.0222
+        },
+        {
+          "chapter": 46,
+          "count": 49,
+          "avg_sentiment": -0.3061
+        },
+        {
+          "chapter": 47,
+          "count": 61,
+          "avg_sentiment": -0.0164
+        },
+        {
+          "chapter": 48,
+          "count": 25,
+          "avg_sentiment": -0.36
+        },
+        {
+          "chapter": 49,
+          "count": 43,
+          "avg_sentiment": -0.2326
+        },
+        {
+          "chapter": 50,
+          "count": 38,
+          "avg_sentiment": -0.4737
+        },
+        {
+          "chapter": 51,
+          "count": 58,
+          "avg_sentiment": -0.7759
+        },
+        {
+          "chapter": 52,
+          "count": 53,
+          "avg_sentiment": -0.4906
+        },
+        {
+          "chapter": 53,
+          "count": 61,
+          "avg_sentiment": -0.2131
+        },
+        {
+          "chapter": 54,
+          "count": 23,
+          "avg_sentiment": -0.6522
+        },
+        {
+          "chapter": 55,
+          "count": 42,
+          "avg_sentiment": -0.5238
+        },
+        {
+          "chapter": 56,
+          "count": 38,
+          "avg_sentiment": -0.3684
+        },
+        {
+          "chapter": 57,
+          "count": 12,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 58,
+          "count": 8,
+          "avg_sentiment": -2.625
+        },
+        {
+          "chapter": 59,
+          "count": 69,
+          "avg_sentiment": -0.1014
+        },
+        {
+          "chapter": 60,
+          "count": 35,
+          "avg_sentiment": -0.4286
+        },
+        {
+          "chapter": 61,
+          "count": 24,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 62,
+          "count": 27,
+          "avg_sentiment": -0.4815
+        },
+        {
+          "chapter": 63,
+          "count": 26,
+          "avg_sentiment": -0.3462
+        },
+        {
+          "chapter": 64,
+          "count": 12,
+          "avg_sentiment": -0.4167
+        },
+        {
+          "chapter": 65,
+          "count": 25,
+          "avg_sentiment": -0.8
+        },
+        {
+          "chapter": 66,
+          "count": 24,
+          "avg_sentiment": -0.2083
+        },
+        {
+          "chapter": 67,
+          "count": 72,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 68,
+          "count": 40,
+          "avg_sentiment": -0.425
+        },
+        {
+          "chapter": 69,
+          "count": 73,
+          "avg_sentiment": -0.1918
+        },
+        {
+          "chapter": 70,
+          "count": 56,
+          "avg_sentiment": -0.6071
+        },
+        {
+          "chapter": 71,
+          "count": 44,
+          "avg_sentiment": -1.2727
+        },
+        {
+          "chapter": 72,
+          "count": 36,
+          "avg_sentiment": -0.5556
+        },
+        {
+          "chapter": 73,
+          "count": 51,
+          "avg_sentiment": -0.7255
+        },
+        {
+          "chapter": 74,
+          "count": 79,
+          "avg_sentiment": -0.8481
+        },
+        {
+          "chapter": 75,
+          "count": 60,
+          "avg_sentiment": -0.4833
+        },
+        {
+          "chapter": 76,
+          "count": 45,
+          "avg_sentiment": -0.7556
+        },
+        {
+          "chapter": 77,
+          "count": 30,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 78,
+          "count": 26,
+          "avg_sentiment": -0.4615
+        },
+        {
+          "chapter": 79,
+          "count": 35,
+          "avg_sentiment": -0.5429
+        },
+        {
+          "chapter": 80,
+          "count": 27,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 81,
+          "count": 63,
+          "avg_sentiment": -0.619
+        },
+        {
+          "chapter": 82,
+          "count": 46,
+          "avg_sentiment": -0.6739
+        },
+        {
+          "chapter": 83,
+          "count": 44,
+          "avg_sentiment": -0.2955
+        },
+        {
+          "chapter": 84,
+          "count": 55,
+          "avg_sentiment": -0.2364
+        },
+        {
+          "chapter": 85,
+          "count": 32,
+          "avg_sentiment": -0.6562
+        },
+        {
+          "chapter": 86,
+          "count": 42,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 87,
+          "count": 49,
+          "avg_sentiment": 0.3673
+        },
+        {
+          "chapter": 88,
+          "count": 13,
+          "avg_sentiment": 0.0769
+        },
+        {
+          "chapter": 89,
+          "count": 32,
+          "avg_sentiment": -0.875
+        },
+        {
+          "chapter": 90,
+          "count": 23,
+          "avg_sentiment": 0.1739
+        },
+        {
+          "chapter": 91,
+          "count": 24,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 92,
+          "count": 37,
+          "avg_sentiment": -0.4324
+        },
+        {
+          "chapter": 93,
+          "count": 27,
+          "avg_sentiment": -0.5185
+        },
+        {
+          "chapter": 94,
+          "count": 17,
+          "avg_sentiment": -0.1765
+        },
+        {
+          "chapter": 95,
+          "count": 26,
+          "avg_sentiment": -0.6154
+        },
+        {
+          "chapter": 96,
+          "count": 6,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 97,
+          "count": 28,
+          "avg_sentiment": -0.7143
+        },
+        {
+          "chapter": 98,
+          "count": 14,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 99,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 100,
+          "count": 3,
+          "avg_sentiment": 0.0
+        }
+      ]
+    },
+    {
+      "speaker": "唐僧",
+      "chapters": [
+        {
+          "chapter": 1,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 2,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 3,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 4,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 5,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 6,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 7,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 8,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 9,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 10,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 11,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 12,
+          "count": 9,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 13,
+          "count": 25,
+          "avg_sentiment": -0.4
+        },
+        {
+          "chapter": 14,
+          "count": 54,
+          "avg_sentiment": -0.5185
+        },
+        {
+          "chapter": 15,
+          "count": 27,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 16,
+          "count": 29,
+          "avg_sentiment": -0.3103
+        },
+        {
+          "chapter": 17,
+          "count": 11,
+          "avg_sentiment": -0.8182
+        },
+        {
+          "chapter": 18,
+          "count": 8,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 19,
+          "count": 25,
+          "avg_sentiment": -0.12
+        },
+        {
+          "chapter": 20,
+          "count": 17,
+          "avg_sentiment": -0.7059
+        },
+        {
+          "chapter": 21,
+          "count": 1,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 22,
+          "count": 13,
+          "avg_sentiment": -0.6923
+        },
+        {
+          "chapter": 23,
+          "count": 15,
+          "avg_sentiment": 0.2
+        },
+        {
+          "chapter": 24,
+          "count": 21,
+          "avg_sentiment": -0.7619
+        },
+        {
+          "chapter": 25,
+          "count": 17,
+          "avg_sentiment": -0.8235
+        },
+        {
+          "chapter": 26,
+          "count": 6,
+          "avg_sentiment": 0.1667
+        },
+        {
+          "chapter": 27,
+          "count": 33,
+          "avg_sentiment": -0.5758
+        },
+        {
+          "chapter": 28,
+          "count": 4,
+          "avg_sentiment": -1.5
+        },
+        {
+          "chapter": 29,
+          "count": 21,
+          "avg_sentiment": -0.4286
+        },
+        {
+          "chapter": 30,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 31,
+          "count": 1,
+          "avg_sentiment": 2.0
+        },
+        {
+          "chapter": 32,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 33,
+          "count": 13,
+          "avg_sentiment": 0.3846
+        },
+        {
+          "chapter": 34,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 35,
+          "count": 2,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 36,
+          "count": 42,
+          "avg_sentiment": -0.3571
+        },
+        {
+          "chapter": 37,
+          "count": 65,
+          "avg_sentiment": -0.6154
+        },
+        {
+          "chapter": 38,
+          "count": 14,
+          "avg_sentiment": -0.4286
+        },
+        {
+          "chapter": 39,
+          "count": 11,
+          "avg_sentiment": 0.1818
+        },
+        {
+          "chapter": 40,
+          "count": 10,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 41,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 42,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 43,
+          "count": 8,
+          "avg_sentiment": -0.375
+        },
+        {
+          "chapter": 44,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 45,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 46,
+          "count": 24,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 47,
+          "count": 26,
+          "avg_sentiment": -0.3846
+        },
+        {
+          "chapter": 48,
+          "count": 17,
+          "avg_sentiment": -0.2941
+        },
+        {
+          "chapter": 49,
+          "count": 5,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 50,
+          "count": 15,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 51,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 52,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 53,
+          "count": 12,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 54,
+          "count": 28,
+          "avg_sentiment": 0.3214
+        },
+        {
+          "chapter": 55,
+          "count": 17,
+          "avg_sentiment": -0.5294
+        },
+        {
+          "chapter": 56,
+          "count": 34,
+          "avg_sentiment": -0.5294
+        },
+        {
+          "chapter": 57,
+          "count": 7,
+          "avg_sentiment": -0.1429
+        },
+        {
+          "chapter": 58,
+          "count": 5,
+          "avg_sentiment": -1.2
+        },
+        {
+          "chapter": 59,
+          "count": 11,
+          "avg_sentiment": 0.3636
+        },
+        {
+          "chapter": 60,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 61,
+          "count": 4,
+          "avg_sentiment": 0.5
+        },
+        {
+          "chapter": 62,
+          "count": 30,
+          "avg_sentiment": -0.4667
+        },
+        {
+          "chapter": 63,
+          "count": 4,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 64,
+          "count": 30,
+          "avg_sentiment": 0.0333
+        },
+        {
+          "chapter": 65,
+          "count": 6,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 66,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 67,
+          "count": 8,
+          "avg_sentiment": -0.375
+        },
+        {
+          "chapter": 68,
+          "count": 19,
+          "avg_sentiment": -0.3684
+        },
+        {
+          "chapter": 69,
+          "count": 6,
+          "avg_sentiment": 0.6667
+        },
+        {
+          "chapter": 70,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 71,
+          "count": 1,
+          "avg_sentiment": 3.0
+        },
+        {
+          "chapter": 72,
+          "count": 8,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 73,
+          "count": 8,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 74,
+          "count": 6,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 75,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 76,
+          "count": 5,
+          "avg_sentiment": 2.8
+        },
+        {
+          "chapter": 77,
+          "count": 4,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 78,
+          "count": 23,
+          "avg_sentiment": -0.4783
+        },
+        {
+          "chapter": 79,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 80,
+          "count": 41,
+          "avg_sentiment": -0.1951
+        },
+        {
+          "chapter": 81,
+          "count": 19,
+          "avg_sentiment": -0.1579
+        },
+        {
+          "chapter": 82,
+          "count": 26,
+          "avg_sentiment": -0.1154
+        },
+        {
+          "chapter": 83,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 84,
+          "count": 9,
+          "avg_sentiment": -1.3333
+        },
+        {
+          "chapter": 85,
+          "count": 16,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 86,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 87,
+          "count": 11,
+          "avg_sentiment": 0.4545
+        },
+        {
+          "chapter": 88,
+          "count": 18,
+          "avg_sentiment": -0.1111
+        },
+        {
+          "chapter": 89,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 90,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 91,
+          "count": 27,
+          "avg_sentiment": 0.2593
+        },
+        {
+          "chapter": 92,
+          "count": 7,
+          "avg_sentiment": 0.2857
+        },
+        {
+          "chapter": 93,
+          "count": 40,
+          "avg_sentiment": 0.025
+        },
+        {
+          "chapter": 94,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 95,
+          "count": 4,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 96,
+          "count": 21,
+          "avg_sentiment": -0.381
+        },
+        {
+          "chapter": 97,
+          "count": 9,
+          "avg_sentiment": 0.2222
+        },
+        {
+          "chapter": 98,
+          "count": 12,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 99,
+          "count": 4,
+          "avg_sentiment": 0.25
+        },
+        {
+          "chapter": 100,
+          "count": 9,
+          "avg_sentiment": 0.0
+        }
+      ]
+    },
+    {
+      "speaker": "猪八戒",
+      "chapters": [
+        {
+          "chapter": 1,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 2,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 3,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 4,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 5,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 6,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 7,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 8,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 9,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 10,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 11,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 12,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 13,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 14,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 15,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 16,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 17,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 18,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 19,
+          "count": 11,
+          "avg_sentiment": -0.4545
+        },
+        {
+          "chapter": 20,
+          "count": 18,
+          "avg_sentiment": -0.8333
+        },
+        {
+          "chapter": 21,
+          "count": 20,
+          "avg_sentiment": -0.3
+        },
+        {
+          "chapter": 22,
+          "count": 30,
+          "avg_sentiment": -1.5
+        },
+        {
+          "chapter": 23,
+          "count": 37,
+          "avg_sentiment": -0.2703
+        },
+        {
+          "chapter": 24,
+          "count": 18,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 25,
+          "count": 18,
+          "avg_sentiment": -0.5556
+        },
+        {
+          "chapter": 26,
+          "count": 10,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 27,
+          "count": 12,
+          "avg_sentiment": -1.6667
+        },
+        {
+          "chapter": 28,
+          "count": 10,
+          "avg_sentiment": -0.1
+        },
+        {
+          "chapter": 29,
+          "count": 19,
+          "avg_sentiment": -0.4737
+        },
+        {
+          "chapter": 30,
+          "count": 31,
+          "avg_sentiment": -0.5806
+        },
+        {
+          "chapter": 31,
+          "count": 26,
+          "avg_sentiment": -1.3077
+        },
+        {
+          "chapter": 32,
+          "count": 35,
+          "avg_sentiment": -1.1143
+        },
+        {
+          "chapter": 33,
+          "count": 5,
+          "avg_sentiment": -0.6
+        },
+        {
+          "chapter": 34,
+          "count": 10,
+          "avg_sentiment": -0.3
+        },
+        {
+          "chapter": 35,
+          "count": 7,
+          "avg_sentiment": -0.1429
+        },
+        {
+          "chapter": 36,
+          "count": 8,
+          "avg_sentiment": 0.125
+        },
+        {
+          "chapter": 37,
+          "count": 4,
+          "avg_sentiment": 0.5
+        },
+        {
+          "chapter": 38,
+          "count": 50,
+          "avg_sentiment": -0.24
+        },
+        {
+          "chapter": 39,
+          "count": 17,
+          "avg_sentiment": -0.8235
+        },
+        {
+          "chapter": 40,
+          "count": 13,
+          "avg_sentiment": -0.4615
+        },
+        {
+          "chapter": 41,
+          "count": 21,
+          "avg_sentiment": -0.5238
+        },
+        {
+          "chapter": 42,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 43,
+          "count": 7,
+          "avg_sentiment": -0.8571
+        },
+        {
+          "chapter": 44,
+          "count": 10,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 45,
+          "count": 7,
+          "avg_sentiment": 0.4286
+        },
+        {
+          "chapter": 46,
+          "count": 13,
+          "avg_sentiment": 0.2308
+        },
+        {
+          "chapter": 47,
+          "count": 44,
+          "avg_sentiment": -0.1364
+        },
+        {
+          "chapter": 48,
+          "count": 17,
+          "avg_sentiment": -0.2353
+        },
+        {
+          "chapter": 49,
+          "count": 25,
+          "avg_sentiment": -0.36
+        },
+        {
+          "chapter": 50,
+          "count": 10,
+          "avg_sentiment": 0.2
+        },
+        {
+          "chapter": 51,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 52,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 53,
+          "count": 15,
+          "avg_sentiment": -0.2667
+        },
+        {
+          "chapter": 54,
+          "count": 7,
+          "avg_sentiment": -0.2857
+        },
+        {
+          "chapter": 55,
+          "count": 28,
+          "avg_sentiment": -0.3929
+        },
+        {
+          "chapter": 56,
+          "count": 23,
+          "avg_sentiment": -0.7391
+        },
+        {
+          "chapter": 57,
+          "count": 13,
+          "avg_sentiment": 0.0769
+        },
+        {
+          "chapter": 58,
+          "count": 9,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 59,
+          "count": 13,
+          "avg_sentiment": -0.6154
+        },
+        {
+          "chapter": 60,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 61,
+          "count": 14,
+          "avg_sentiment": -0.2857
+        },
+        {
+          "chapter": 62,
+          "count": 14,
+          "avg_sentiment": -0.3571
+        },
+        {
+          "chapter": 63,
+          "count": 16,
+          "avg_sentiment": -1.25
+        },
+        {
+          "chapter": 64,
+          "count": 10,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 65,
+          "count": 4,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 66,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 67,
+          "count": 24,
+          "avg_sentiment": -0.7083
+        },
+        {
+          "chapter": 68,
+          "count": 25,
+          "avg_sentiment": -0.44
+        },
+        {
+          "chapter": 69,
+          "count": 26,
+          "avg_sentiment": -0.1538
+        },
+        {
+          "chapter": 70,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 71,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 72,
+          "count": 23,
+          "avg_sentiment": -0.6957
+        },
+        {
+          "chapter": 73,
+          "count": 4,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 74,
+          "count": 22,
+          "avg_sentiment": -1.2273
+        },
+        {
+          "chapter": 75,
+          "count": 2,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 76,
+          "count": 26,
+          "avg_sentiment": -0.2308
+        },
+        {
+          "chapter": 77,
+          "count": 21,
+          "avg_sentiment": -0.619
+        },
+        {
+          "chapter": 78,
+          "count": 6,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 79,
+          "count": 6,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 80,
+          "count": 11,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 81,
+          "count": 14,
+          "avg_sentiment": -1.2143
+        },
+        {
+          "chapter": 82,
+          "count": 31,
+          "avg_sentiment": -0.3871
+        },
+        {
+          "chapter": 83,
+          "count": 9,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 84,
+          "count": 11,
+          "avg_sentiment": -0.1818
+        },
+        {
+          "chapter": 85,
+          "count": 22,
+          "avg_sentiment": -0.5455
+        },
+        {
+          "chapter": 86,
+          "count": 22,
+          "avg_sentiment": -0.6364
+        },
+        {
+          "chapter": 87,
+          "count": 7,
+          "avg_sentiment": -0.1429
+        },
+        {
+          "chapter": 88,
+          "count": 16,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 89,
+          "count": 10,
+          "avg_sentiment": -0.9
+        },
+        {
+          "chapter": 90,
+          "count": 3,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 91,
+          "count": 5,
+          "avg_sentiment": -0.8
+        },
+        {
+          "chapter": 92,
+          "count": 6,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 93,
+          "count": 13,
+          "avg_sentiment": 0.1538
+        },
+        {
+          "chapter": 94,
+          "count": 10,
+          "avg_sentiment": -0.7
+        },
+        {
+          "chapter": 95,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 96,
+          "count": 6,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 97,
+          "count": 6,
+          "avg_sentiment": -1.1667
+        },
+        {
+          "chapter": 98,
+          "count": 6,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 99,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 100,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        }
+      ]
+    },
+    {
+      "speaker": "沙僧",
+      "chapters": [
+        {
+          "chapter": 1,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 2,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 3,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 4,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 5,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 6,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 7,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 8,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 9,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 10,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 11,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 12,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 13,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 14,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 15,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 16,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 17,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 18,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 19,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 20,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 21,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 22,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 23,
+          "count": 5,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 24,
+          "count": 10,
+          "avg_sentiment": -0.1
+        },
+        {
+          "chapter": 25,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 26,
+          "count": 1,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 27,
+          "count": 1,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 28,
+          "count": 10,
+          "avg_sentiment": -0.1
+        },
+        {
+          "chapter": 29,
+          "count": 4,
+          "avg_sentiment": 0.25
+        },
+        {
+          "chapter": 30,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 31,
+          "count": 9,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 32,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 33,
+          "count": 5,
+          "avg_sentiment": -1.8
+        },
+        {
+          "chapter": 34,
+          "count": 7,
+          "avg_sentiment": -0.1429
+        },
+        {
+          "chapter": 35,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 36,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 37,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 38,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 39,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 40,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 41,
+          "count": 17,
+          "avg_sentiment": -0.7059
+        },
+        {
+          "chapter": 42,
+          "count": 4,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 43,
+          "count": 20,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 44,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 45,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 46,
+          "count": 5,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 47,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 48,
+          "count": 4,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 49,
+          "count": 18,
+          "avg_sentiment": -1.0556
+        },
+        {
+          "chapter": 50,
+          "count": 3,
+          "avg_sentiment": 1.0
+        },
+        {
+          "chapter": 51,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 52,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 53,
+          "count": 10,
+          "avg_sentiment": -0.8
+        },
+        {
+          "chapter": 54,
+          "count": 6,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 55,
+          "count": 11,
+          "avg_sentiment": -0.4545
+        },
+        {
+          "chapter": 56,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 57,
+          "count": 15,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 58,
+          "count": 11,
+          "avg_sentiment": -1.3636
+        },
+        {
+          "chapter": 59,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 60,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 61,
+          "count": 2,
+          "avg_sentiment": 1.0
+        },
+        {
+          "chapter": 62,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 63,
+          "count": 1,
+          "avg_sentiment": -5.0
+        },
+        {
+          "chapter": 64,
+          "count": 2,
+          "avg_sentiment": -1.5
+        },
+        {
+          "chapter": 65,
+          "count": 3,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 66,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 67,
+          "count": 3,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 68,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 69,
+          "count": 9,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 70,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 71,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 72,
+          "count": 7,
+          "avg_sentiment": -0.1429
+        },
+        {
+          "chapter": 73,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 74,
+          "count": 1,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 75,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 76,
+          "count": 2,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 77,
+          "count": 6,
+          "avg_sentiment": -0.1667
+        },
+        {
+          "chapter": 78,
+          "count": 5,
+          "avg_sentiment": -0.8
+        },
+        {
+          "chapter": 79,
+          "count": 2,
+          "avg_sentiment": -1.5
+        },
+        {
+          "chapter": 80,
+          "count": 4,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 81,
+          "count": 1,
+          "avg_sentiment": -3.0
+        },
+        {
+          "chapter": 82,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 83,
+          "count": 6,
+          "avg_sentiment": -0.6667
+        },
+        {
+          "chapter": 84,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 85,
+          "count": 3,
+          "avg_sentiment": 1.0
+        },
+        {
+          "chapter": 86,
+          "count": 5,
+          "avg_sentiment": -1.8
+        },
+        {
+          "chapter": 87,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 88,
+          "count": 7,
+          "avg_sentiment": 0.2857
+        },
+        {
+          "chapter": 89,
+          "count": 8,
+          "avg_sentiment": 0.5
+        },
+        {
+          "chapter": 90,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 91,
+          "count": 4,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 92,
+          "count": 4,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 93,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 94,
+          "count": 5,
+          "avg_sentiment": -0.6
+        },
+        {
+          "chapter": 95,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 96,
+          "count": 5,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 97,
+          "count": 3,
+          "avg_sentiment": -1.3333
+        },
+        {
+          "chapter": 98,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 99,
+          "count": 4,
+          "avg_sentiment": -0.25
+        },
+        {
+          "chapter": 100,
+          "count": 0,
+          "avg_sentiment": 0
+        }
+      ]
+    },
+    {
+      "speaker": "观音",
+      "chapters": [
+        {
+          "chapter": 1,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 2,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 3,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 4,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 5,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 6,
+          "count": 9,
+          "avg_sentiment": -0.5556
+        },
+        {
+          "chapter": 7,
+          "count": 1,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 8,
+          "count": 30,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 9,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 10,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 11,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 12,
+          "count": 27,
+          "avg_sentiment": 0.3704
+        },
+        {
+          "chapter": 13,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 14,
+          "count": 2,
+          "avg_sentiment": -0.5
+        },
+        {
+          "chapter": 15,
+          "count": 12,
+          "avg_sentiment": -0.0833
+        },
+        {
+          "chapter": 16,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 17,
+          "count": 17,
+          "avg_sentiment": -0.4706
+        },
+        {
+          "chapter": 18,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 19,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 20,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 21,
+          "count": 2,
+          "avg_sentiment": -2.0
+        },
+        {
+          "chapter": 22,
+          "count": 2,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 23,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 24,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 25,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 26,
+          "count": 12,
+          "avg_sentiment": 0.1667
+        },
+        {
+          "chapter": 27,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 28,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 29,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 30,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 31,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 32,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 33,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 34,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 35,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 36,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 37,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 38,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 39,
+          "count": 3,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 40,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 41,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 42,
+          "count": 33,
+          "avg_sentiment": -0.1818
+        },
+        {
+          "chapter": 43,
+          "count": 1,
+          "avg_sentiment": -1.0
+        },
+        {
+          "chapter": 44,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 45,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 46,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 47,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 48,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 49,
+          "count": 4,
+          "avg_sentiment": 0.0
+        },
+        {
+          "chapter": 50,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 51,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 52,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 53,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 54,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 55,
+          "count": 3,
+          "avg_sentiment": -1.6667
+        },
+        {
+          "chapter": 56,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 57,
+          "count": 13,
+          "avg_sentiment": -1.3077
+        },
+        {
+          "chapter": 58,
+          "count": 5,
+          "avg_sentiment": -0.2
+        },
+        {
+          "chapter": 59,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 60,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 61,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 62,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 63,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 64,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 65,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 66,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 67,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 68,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 69,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 70,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 71,
+          "count": 6,
+          "avg_sentiment": -1.5
+        },
+        {
+          "chapter": 72,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 73,
+          "count": 3,
+          "avg_sentiment": -0.3333
+        },
+        {
+          "chapter": 74,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 75,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 76,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 77,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 78,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 79,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 80,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 81,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 82,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 83,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 84,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 85,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 86,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 87,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 88,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 89,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 90,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 91,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 92,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 93,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 94,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 95,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 96,
+          "count": 0,
+          "avg_sentiment": 0
+        },
+        {
+          "chapter": 97,
+          "count": 1,
+          "avg_sentiment": 7.0
+        },
+        {
+          "chapter": 98,
+          "count": 1,
+          "avg_sentiment": 2.0
+        },
+        {
+          "chapter": 99,
+          "count": 2,
+          "avg_sentiment": 1.5
+        },
+        {
+          "chapter": 100,
+          "count": 0,
+          "avg_sentiment": 0
+        }
+      ]
+    }
+  ],
+  "top_sentiment_words": {
+    "positive": [
+      {
+        "word": "圣",
+        "count": 407
+      },
+      {
+        "word": "救",
+        "count": 314
+      },
+      {
+        "word": "化",
+        "count": 257
+      },
+      {
+        "word": "善",
+        "count": 151
+      },
+      {
+        "word": "功",
+        "count": 138
+      },
+      {
+        "word": "护",
+        "count": 111
+      },
+      {
+        "word": "恩",
+        "count": 85
+      },
+      {
+        "word": "贤",
+        "count": 83
+      },
+      {
+        "word": "信",
+        "count": 83
+      },
+      {
+        "word": "喜",
+        "count": 70
+      },
+      {
+        "word": "慈",
+        "count": 59
+      },
+      {
+        "word": "寿",
+        "count": 55
+      },
+      {
+        "word": "妙",
+        "count": 48
+      },
+      {
+        "word": "果然",
+        "count": 43
+      },
+      {
+        "word": "度",
+        "count": 42
+      },
+      {
+        "word": "福",
+        "count": 40
+      },
+      {
+        "word": "德",
+        "count": 39
+      },
+      {
+        "word": "怜",
+        "count": 32
+      },
+      {
+        "word": "乐",
+        "count": 29
+      },
+      {
+        "word": "吉",
+        "count": 29
+      },
+      {
+        "word": "欢",
+        "count": 24
+      },
+      {
+        "word": "有理",
+        "count": 24
+      },
+      {
+        "word": "善哉",
+        "count": 20
+      },
+      {
+        "word": "义",
+        "count": 19
+      },
+      {
+        "word": "甚好",
+        "count": 15
+      },
+      {
+        "word": "祥",
+        "count": 15
+      },
+      {
+        "word": "奉旨",
+        "count": 9
+      },
+      {
+        "word": "好说",
+        "count": 8
+      },
+      {
+        "word": "欢喜",
+        "count": 6
+      },
+      {
+        "word": "忠",
+        "count": 6
+      },
+      {
+        "word": "好个",
+        "count": 5
+      },
+      {
+        "word": "允了",
+        "count": 3
+      },
+      {
+        "word": "笑道",
+        "count": 3
+      },
+      {
+        "word": "甚妙",
+        "count": 2
+      },
+      {
+        "word": "遵命",
+        "count": 2
+      },
+      {
+        "word": "恩德",
+        "count": 2
+      },
+      {
+        "word": "护佑",
+        "count": 2
+      },
+      {
+        "word": "佑",
+        "count": 2
+      },
+      {
+        "word": "妙哉",
+        "count": 2
+      },
+      {
+        "word": "功德",
+        "count": 2
+      },
+      {
+        "word": "喜悦",
+        "count": 1
+      },
+      {
+        "word": "庇",
+        "count": 1
+      },
+      {
+        "word": "领旨",
+        "count": 1
+      },
+      {
+        "word": "救护",
+        "count": 1
+      },
+      {
+        "word": "领命",
+        "count": 1
+      },
+      {
+        "word": "甚善",
+        "count": 1
+      }
+    ],
+    "negative": [
+      {
+        "word": "妖",
+        "count": 689
+      },
+      {
+        "word": "打",
+        "count": 661
+      },
+      {
+        "word": "怪",
+        "count": 520
+      },
+      {
+        "word": "难",
+        "count": 259
+      },
+      {
+        "word": "死",
+        "count": 249
+      },
+      {
+        "word": "魔",
+        "count": 209
+      },
+      {
+        "word": "怕",
+        "count": 188
+      },
+      {
+        "word": "罪",
+        "count": 160
+      },
+      {
+        "word": "杀",
+        "count": 138
+      },
+      {
+        "word": "苦",
+        "count": 132
+      },
+      {
+        "word": "鬼",
+        "count": 83
+      },
+      {
+        "word": "胡",
+        "count": 78
+      },
+      {
+        "word": "哭",
+        "count": 77
+      },
+      {
+        "word": "破",
+        "count": 75
+      },
+      {
+        "word": "邪",
+        "count": 74
+      },
+      {
+        "word": "凶",
+        "count": 73
+      },
+      {
+        "word": "妖魔",
+        "count": 69
+      },
+      {
+        "word": "恼",
+        "count": 65
+      },
+      {
+        "word": "惊",
+        "count": 62
+      },
+      {
+        "word": "瞒",
+        "count": 58
+      },
+      {
+        "word": "恶",
+        "count": 58
+      },
+      {
+        "word": "非",
+        "count": 58
+      },
+      {
+        "word": "失",
+        "count": 50
+      },
+      {
+        "word": "灭",
+        "count": 47
+      },
+      {
+        "word": "骂",
+        "count": 47
+      },
+      {
+        "word": "败",
+        "count": 47
+      },
+      {
+        "word": "悲",
+        "count": 46
+      },
+      {
+        "word": "欺",
+        "count": 46
+      },
+      {
+        "word": "毒",
+        "count": 46
+      },
+      {
+        "word": "祸",
+        "count": 46
+      },
+      {
+        "word": "错",
+        "count": 46
+      },
+      {
+        "word": "灾",
+        "count": 45
+      },
+      {
+        "word": "坏",
+        "count": 45
+      },
+      {
+        "word": "胡说",
+        "count": 43
+      },
+      {
+        "word": "打杀",
+        "count": 37
+      },
+      {
+        "word": "痛",
+        "count": 34
+      },
+      {
+        "word": "妖邪",
+        "count": 31
+      },
+      {
+        "word": "逃",
+        "count": 28
+      },
+      {
+        "word": "恨",
+        "count": 28
+      },
+      {
+        "word": "骗",
+        "count": 24
+      },
+      {
+        "word": "负",
+        "count": 23
+      },
+      {
+        "word": "混",
+        "count": 22
+      },
+      {
+        "word": "损",
+        "count": 21
+      },
+      {
+        "word": "喝",
+        "count": 18
+      },
+      {
+        "word": "否",
+        "count": 17
+      },
+      {
+        "word": "惧",
+        "count": 16
+      },
+      {
+        "word": "险",
+        "count": 16
+      },
+      {
+        "word": "怒",
+        "count": 16
+      },
+      {
+        "word": "慌",
+        "count": 15
+      },
+      {
+        "word": "怨",
+        "count": 15
+      }
+    ]
+  }
+}
+    };
+
+    // ===== F6 skeleton: fetchJson with EMBEDDED fallback =====
+    function fetchJson(path, fallbackKey) {
+        return fetch(path).then(r => {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+        }).catch(() => EMBEDDED[fallbackKey]);
+    }
+
+    // ===== loadData =====
+    async function loadData() {
+        const sentiment = await fetchJson('scripts/output/data/dialogue_sentiment.json', 'sentiment');
+        return { sentiment };
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== Color constants =====
+    const COLOR_POS = '#5a7a3a';
+    const COLOR_NEU = '#6b5e4d';
+    const COLOR_NEG = '#8c2a2a';
+    const SPEAKER_COLORS = {
+        '孙悟空': '#c8463a',
+        '唐僧': '#3a6b8c',
+        '猪八戒': '#7a5230',
+        '沙僧': '#5a7a3a',
+        '观音': '#8c6a8c'
+    };
+    const TOP5_SPEAKERS = ['孙悟空', '唐僧', '猪八戒', '沙僧', '观音'];
+
+    // ===== main =====
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+        renderDistribution(data.sentiment);
+        renderSpeakerStacked(data.sentiment);
+        renderSpeakerCurve(data.sentiment);
+        renderChapterHeatmap(data.sentiment);
+        renderTopWords(data.sentiment);
+        renderInsights(data.sentiment);
+    }
+
+    // ===== Section 1: 全书情感分布饼图 =====
+    function renderDistribution(data) {
+        const svg = d3.select('#chart-distribution-pie');
+        svg.selectAll('*').remove();
+        if (!data || !data.sentiment_distribution) {
+            svg.append('div').text('暂无数据');
+            return;
+        }
+        const dist = data.sentiment_distribution;
+        const total = (dist.positive || 0) + (dist.neutral || 0) + (dist.negative || 0);
+        if (total === 0) {
+            svg.append('text').attr('x', 200).attr('y', 180).text('暂无数据').attr('text-anchor', 'middle');
+            return;
+        }
+
+        const pieData = [
+            { label: '正向', value: dist.positive, color: COLOR_POS, en: 'POSITIVE' },
+            { label: '中性', value: dist.neutral, color: COLOR_NEU, en: 'NEUTRAL' },
+            { label: '负向', value: dist.negative, color: COLOR_NEG, en: 'NEGATIVE' }
+        ];
+
+        const containerW = svg.node().clientWidth || 600;
+        const W = Math.max(containerW, 400), H = 360;
+        const radius = Math.min(W, H) / 2 - 40;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${W/2},${H/2})`);
+
+        const pie = d3.pie().value(d => d.value).sort(null);
+        const arc = d3.arc().innerRadius(radius * 0.4).outerRadius(radius).padAngle(0.02);
+        const arcHover = d3.arc().innerRadius(radius * 0.4).outerRadius(radius + 8).padAngle(0.02);
+        const labelArc = d3.arc().innerRadius(radius * 0.7).outerRadius(radius * 0.7);
+
+        const arcs = g.selectAll('.arc')
+            .data(pie(pieData))
+            .enter().append('g')
+            .attr('class', 'arc');
+
+        arcs.append('path')
+            .attr('d', arc)
+            .attr('fill', d => d.data.color)
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                d3.select(this).transition().duration(150).attr('d', arcHover);
+                const pct = ((d.data.value / total) * 100).toFixed(1);
+                tooltip.show(
+                    `<strong>${d.data.label}</strong>（${d.data.en}）<br/>数量：${d.data.value}<br/>占比：${pct}%`,
+                    event
+                );
+            })
+            .on('mousemove', function(event) {
+                tooltip.show(tooltip, event);
+            })
+            .on('mouseout', function(event, d) {
+                d3.select(this).transition().duration(150).attr('d', arc);
+                tooltip.hide();
+            });
+
+        arcs.append('text')
+            .attr('transform', d => `translate(${labelArc.centroid(d)})`)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#fff')
+            .attr('font-size', '13px')
+            .attr('font-weight', '600')
+            .text(d => {
+                const pct = ((d.data.value / total) * 100).toFixed(1);
+                return pct + '%';
+            });
+
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('dy', '-0.3em')
+            .attr('font-size', '14px')
+            .attr('fill', 'var(--ink-soft)')
+            .attr('fill', '#6b5e4d')
+            .text('总引语');
+
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('dy', '1em')
+            .attr('font-size', '20px')
+            .attr('font-weight', '600')
+            .attr('fill', '#2c2418')
+            .text(total);
+
+        // Legend
+        const legend = d3.select('#distribution-legend');
+        legend.selectAll('*').remove();
+        legend.selectAll('.legend-item')
+            .data(pieData)
+            .enter().append('span')
+            .attr('class', 'legend-item')
+            .html(d => `<span class="legend-swatch" style="background:${d.color};"></span>${d.label}（${d.en}）${d.value} (${((d.value/total)*100).toFixed(1)}%)`);
+    }
+
+    // ===== Section 2: 人物情感分布堆叠柱状图 =====
+    function renderSpeakerStacked(data) {
+        const svg = d3.select('#chart-speaker-stacked');
+        svg.selectAll('*').remove();
+        if (!data || !data.speaker_sentiment || data.speaker_sentiment.length === 0) {
+            svg.append('text').attr('x', 200).attr('y', 200).text('暂无数据').attr('text-anchor', 'middle');
+            return;
+        }
+
+        const speakers = data.speaker_sentiment.slice(0, 10);
+        const keys = ['positive', 'neutral', 'negative'];
+        const keyLabels = { positive: '正向', neutral: '中性', negative: '负向' };
+        const keyColors = { positive: COLOR_POS, neutral: COLOR_NEU, negative: COLOR_NEG };
+
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 460;
+        const m = { top: 30, right: 30, bottom: 60, left: 60 };
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+
+        const stack = d3.stack().keys(keys);
+        const stacked = stack(speakers);
+
+        const x = d3.scaleBand().domain(speakers.map(d => d.speaker)).range([0, w]).padding(0.25);
+        const yMax = d3.max(speakers, d => d.total);
+        const y = d3.scaleLinear().domain([0, yMax]).range([h, 0]).nice();
+
+        // Grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(6))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8e0d0')
+            .attr('stroke-dasharray', '2,3');
+
+        // Axes
+        g.append('g')
+            .attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x))
+            .selectAll('text')
+            .style('text-anchor', 'end')
+            .attr('dx', '-0.4em')
+            .attr('dy', '0.4em')
+            .attr('transform', 'rotate(-30)');
+
+        g.append('g')
+            .attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(6));
+
+        // Y axis label
+        g.append('text')
+            .attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2)
+            .attr('y', -45)
+            .attr('text-anchor', 'middle')
+            .text('引语数量');
+
+        // Stacked bars
+        g.selectAll('.layer')
+            .data(stacked)
+            .enter().append('g')
+            .attr('fill', d => keyColors[d.key])
+            .selectAll('rect')
+            .data(d => d)
+            .enter().append('rect')
+            .attr('x', (d, i) => x(speakers[i].speaker))
+            .attr('y', d => y(d[1]))
+            .attr('height', d => Math.max(0, y(d[0]) - y(d[1])))
+            .attr('width', x.bandwidth())
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                const speakerName = speakers[d.index || (d.data ? speakers.indexOf(d.data) : 0)] ? speakers[d.index || (d.data ? speakers.indexOf(d.data) : 0)].speaker : '';
+                const idx = d.index !== undefined ? d.index : speakers.indexOf(d.data);
+                const sp = speakers[idx];
+                if (sp) {
+                    tooltip.show(
+                        `<strong>${sp.speaker}</strong><br/>` +
+                        `正向：${sp.positive} (${(sp.positive_ratio * 100).toFixed(1)}%)<br/>` +
+                        `中性：${sp.neutral} (${(sp.neutral_ratio * 100).toFixed(1)}%)<br/>` +
+                        `负向：${sp.negative} (${(sp.negative_ratio * 100).toFixed(1)}%)<br/>` +
+                        `总计：${sp.total} · avg=${sp.avg_sentiment.toFixed(3)}`,
+                        event
+                    );
+                }
+            })
+            .on('mousemove', function(event) {
+                const tip = d3.select('.d3-tooltip');
+                tip.style('left', (event.pageX + 12) + 'px').style('top', (event.pageY - 18) + 'px');
+            })
+            .on('mouseout', function() { tooltip.hide(); });
+
+        // Legend
+        const legend = d3.select('#speaker-stacked-legend');
+        legend.selectAll('*').remove();
+        legend.selectAll('.legend-item')
+            .data(keys)
+            .enter().append('span')
+            .attr('class', 'legend-item')
+            .html(k => `<span class="legend-swatch" style="background:${keyColors[k]};"></span>${keyLabels[k]}`);
+    }
+
+    // ===== Section 3: 主要人物情感曲线 =====
+    function renderSpeakerCurve(data) {
+        const svg = d3.select('#chart-speaker-curve');
+        svg.selectAll('*').remove();
+        if (!data || !data.speaker_chapter_curve || data.speaker_chapter_curve.length === 0) {
+            svg.append('text').attr('x', 200).attr('y', 200).text('暂无数据').attr('text-anchor', 'middle');
+            return;
+        }
+
+        const curves = data.speaker_chapter_curve.filter(s => TOP5_SPEAKERS.includes(s.speaker));
+
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 460;
+        const m = { top: 30, right: 120, bottom: 50, left: 60 };
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+
+        const x = d3.scaleLinear().domain([1, 100]).range([0, w]);
+        const y = d3.scaleLinear().domain([-1, 1]).range([h, 0]);
+
+        // Grid
+        g.append('g').selectAll('line.grid')
+            .data([-1, -0.5, 0, 0.5, 1])
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8e0d0')
+            .attr('stroke-dasharray', d => d === 0 ? '0' : '2,3');
+
+        // Zero line (dashed)
+        g.append('line')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', y(0)).attr('y2', y(0))
+            .attr('stroke', '#6b5e4d')
+            .attr('stroke-width', 1.5)
+            .attr('stroke-dasharray', '6,4');
+
+        g.append('text')
+            .attr('x', w + 4)
+            .attr('y', y(0))
+            .attr('dy', '0.3em')
+            .attr('font-size', '10px')
+            .attr('fill', '#6b5e4d')
+            .text('y=0');
+
+        // Axes
+        g.append('g')
+            .attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(20).tickFormat(d => d));
+
+        g.append('g')
+            .attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5));
+
+        g.append('text')
+            .attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 40)
+            .attr('text-anchor', 'middle')
+            .text('回目（1-100）');
+
+        g.append('text')
+            .attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', -45)
+            .attr('text-anchor', 'middle')
+            .text('avg_sentiment（-1 到 +1）');
+
+        // Lines
+        const line = d3.line()
+            .x(d => x(d.chapter))
+            .y(d => y(d.avg_sentiment))
+            .defined(d => d.count > 0)
+            .curve(d3.curveMonotoneX);
+
+        curves.forEach(sp => {
+            const color = SPEAKER_COLORS[sp.speaker] || '#6b5e4d';
+
+            // Invisible wider path for hover detection
+            g.append('path')
+                .datum(sp.chapters)
+                .attr('fill', 'none')
+                .attr('stroke', 'transparent')
+                .attr('stroke-width', 12)
+                .style('cursor', 'pointer')
+                .on('mouseover', function(event) {
+                    d3.select(`#curve-line-${sp.speaker}`).attr('stroke-width', 3.5);
+                })
+                .on('mousemove', function(event) {
+                    const mx = x.invert(event.offsetX - m.left);
+                    const ch = Math.round(mx);
+                    const pt = sp.chapters.find(c => c.chapter === ch);
+                    if (pt) {
+                        tooltip.show(
+                            `<strong>${sp.speaker}</strong><br/>第 ${pt.chapter} 回<br/>avg_sentiment = ${pt.avg_sentiment.toFixed(4)}<br/>引语数：${pt.count}`,
+                            event
+                        );
+                    }
+                })
+                .on('mouseout', function() {
+                    d3.select(`#curve-line-${sp.speaker}`).attr('stroke-width', 2);
+                    tooltip.hide();
+                });
+
+            g.append('path')
+                .datum(sp.chapters)
+                .attr('id', `curve-line-${sp.speaker}`)
+                .attr('fill', 'none')
+                .attr('stroke', color)
+                .attr('stroke-width', 2)
+                .attr('stroke-linejoin', 'round')
+                .attr('d', line)
+                .style('pointer-events', 'none');
+        });
+
+        // Legend
+        const legend = d3.select('#speaker-curve-legend');
+        legend.selectAll('*').remove();
+        legend.selectAll('.legend-item')
+            .data(curves)
+            .enter().append('span')
+            .attr('class', 'legend-item')
+            .html(d => `<span class="legend-swatch line" style="background:${SPEAKER_COLORS[d.speaker]};"></span>${d.speaker}`);
+    }
+
+    // ===== Section 4: 回目情感热度热力图 =====
+    function renderChapterHeatmap(data) {
+        const svg = d3.select('#chart-chapter-heatmap');
+        svg.selectAll('*').remove();
+        if (!data || !data.speaker_chapter_curve || data.speaker_chapter_curve.length === 0) {
+            svg.append('text').attr('x', 200).attr('y', 150).text('暂无数据').attr('text-anchor', 'middle');
+            return;
+        }
+
+        const curves = data.speaker_chapter_curve.filter(s => TOP5_SPEAKERS.includes(s.speaker));
+
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 320;
+        const m = { top: 30, right: 20, bottom: 50, left: 70 };
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+
+        const x = d3.scaleBand().domain(d3.range(1, 101)).range([0, w]).padding(0.02);
+        const y = d3.scaleBand().domain(curves.map(d => d.speaker)).range([0, h]).padding(0.05);
+
+        const colorScale = d3.scaleSequential(d3.interpolateRdYlGn).domain([-1, 1]);
+
+        // Cells
+        curves.forEach(sp => {
+            sp.chapters.forEach(ch => {
+                const cellColor = ch.count > 0 ? colorScale(ch.avg_sentiment) : '#f0ebe0';
+                g.append('rect')
+                    .attr('class', 'heat-cell')
+                    .attr('x', x(ch.chapter))
+                    .attr('y', y(sp.speaker))
+                    .attr('width', x.bandwidth())
+                    .attr('height', y.bandwidth())
+                    .attr('fill', cellColor)
+                    .style('cursor', 'pointer')
+                    .on('mouseover', function(event) {
+                        d3.select(this).attr('stroke', '#2c2418').attr('stroke-width', 1.5);
+                        if (ch.count > 0) {
+                            tooltip.show(
+                                `<strong>${sp.speaker}</strong> · 第 ${ch.chapter} 回<br/>avg_sentiment = ${ch.avg_sentiment.toFixed(4)}<br/>引语数：${ch.count}`,
+                                event
+                            );
+                        } else {
+                            tooltip.show(
+                                `<strong>${sp.speaker}</strong> · 第 ${ch.chapter} 回<br/>无引语数据`,
+                                event
+                            );
+                        }
+                    })
+                    .on('mousemove', function(event) {
+                        const tip = d3.select('.d3-tooltip');
+                        tip.style('left', (event.pageX + 12) + 'px').style('top', (event.pageY - 18) + 'px');
+                    })
+                    .on('mouseout', function() {
+                        d3.select(this).attr('stroke', '#fff').attr('stroke-width', 0.5);
+                        tooltip.hide();
+                    });
+            });
+        });
+
+        // X axis (chapters, show every 5th)
+        const xAxis = d3.axisBottom(x)
+            .tickValues(d3.range(5, 101, 5).concat([1]))
+            .tickFormat(d => d);
+        g.append('g')
+            .attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(xAxis);
+
+        g.append('text')
+            .attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 40)
+            .attr('text-anchor', 'middle')
+            .text('回目（1-100）');
+
+        // Y axis (speakers)
+        g.append('g')
+            .attr('class', 'axis')
+            .call(d3.axisLeft(y));
+
+        // Color legend
+        const legendW = 200, legendH = 12;
+        const legendG = svg.append('g')
+            .attr('transform', `translate(${W - legendW - 20},${H - 20})`);
+
+        const legendScale = d3.scaleLinear().domain([-1, 1]).range([0, legendW]);
+        const legendTicks = [-1, -0.5, 0, 0.5, 1];
+
+        const defs = svg.append('defs');
+        const gradient = defs.append('linearGradient')
+            .attr('id', 'heatmap-gradient')
+            .attr('x1', '0%').attr('x2', '100%');
+        d3.range(-1, 1.01, 0.05).forEach(t => {
+            gradient.append('stop')
+                .attr('offset', `${((t + 1) / 2) * 100}%`)
+                .attr('stop-color', colorScale(t));
+        });
+
+        legendG.append('rect')
+            .attr('width', legendW)
+            .attr('height', legendH)
+            .attr('fill', 'url(#heatmap-gradient)')
+            .attr('stroke', '#d9cdb8');
+
+        legendG.selectAll('text')
+            .data(legendTicks)
+            .enter().append('text')
+            .attr('x', d => legendScale(d))
+            .attr('y', legendH + 12)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '10px')
+            .attr('fill', '#6b5e4d')
+            .text(d => d);
+
+        legendG.append('text')
+            .attr('x', legendW / 2)
+            .attr('y', -4)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '10px')
+            .attr('fill', '#6b5e4d')
+            .text('avg_sentiment');
+    }
+
+    // ===== Section 5: Top 情感词云 =====
+    function renderTopWords(data) {
+        if (!data || !data.top_sentiment_words) {
+            d3.select('#chart-word-positive').append('text').text('暂无数据');
+            d3.select('#chart-word-negative').append('text').text('暂无数据');
+            return;
+        }
+        renderWordPanel('#chart-word-positive', data.top_sentiment_words.positive, COLOR_POS, '正向');
+        renderWordPanel('#chart-word-negative', data.top_sentiment_words.negative, COLOR_NEG, '负向');
+    }
+
+    function renderWordPanel(selector, words, color, label) {
+        const svg = d3.select(selector);
+        svg.selectAll('*').remove();
+        if (!words || words.length === 0) {
+            svg.append('text').attr('x', 150).attr('y', 200).text('暂无数据').attr('text-anchor', 'middle');
+            return;
+        }
+
+        const topWords = words.slice(0, 30);
+        const containerW = svg.node().clientWidth || 400;
+        const W = Math.max(containerW, 350), H = 420;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const maxCount = d3.max(topWords, d => d.count);
+        const minCount = d3.min(topWords, d => d.count);
+        const rScale = d3.scaleSqrt().domain([0, maxCount]).range([8, 28]);
+        const fontScale = d3.scaleLinear().domain([minCount, maxCount]).range([10, 20]);
+
+        // Build hierarchy for pack layout
+        const root = d3.hierarchy({ children: topWords })
+            .sum(d => d.count)
+            .sort((a, b) => b.value - a.value);
+
+        const pack = d3.pack().size([W - 10, H - 10]).padding(2);
+        const packed = pack(root);
+
+        const g = svg.append('g').attr('transform', 'translate(5,5)');
+
+        const nodes = packed.leaves();
+
+        g.selectAll('.word-circle')
+            .data(nodes)
+            .enter().append('circle')
+            .attr('class', 'word-circle')
+            .attr('cx', d => d.x)
+            .attr('cy', d => d.y)
+            .attr('r', d => d.r)
+            .attr('fill', color)
+            .attr('fill-opacity', 0.75)
+            .attr('stroke', color)
+            .attr('stroke-width', 1.5)
+            .on('mouseover', function(event, d) {
+                d3.select(this).attr('fill-opacity', 1).attr('stroke-width', 2.5);
+                tooltip.show(
+                    `<strong>${d.data.word}</strong><br/>count = ${d.data.count}<br/>类型：${label}情感词`,
+                    event
+                );
+            })
+            .on('mousemove', function(event) {
+                const tip = d3.select('.d3-tooltip');
+                tip.style('left', (event.pageX + 12) + 'px').style('top', (event.pageY - 18) + 'px');
+            })
+            .on('mouseout', function() {
+                d3.select(this).attr('fill-opacity', 0.75).attr('stroke-width', 1.5);
+                tooltip.hide();
+            });
+
+        g.selectAll('.word-label')
+            .data(nodes)
+            .enter().append('text')
+            .attr('class', 'word-label')
+            .attr('x', d => d.x)
+            .attr('y', d => d.y)
+            .attr('font-size', d => Math.min(fontScale(d.data.count), d.r * 0.9))
+            .attr('fill', '#fff')
+            .attr('font-weight', '600')
+            .text(d => d.data.word);
+    }
+
+    // ===== Section 6: 关键洞察 =====
+    function renderInsights(data) {
+        const ol = d3.select('#insights-list');
+        ol.selectAll('*').remove();
+
+        const insights = [
+            `<strong>全书负向引语（29.6%）高于正向引语（12.5%）</strong>，符合《西游记》打妖怪的冲突叙事特征。中性引语占比最高（57.9%），多为叙事性应答。`,
+            `<strong>孙悟空是 Top 1 说话者（3521 条 / 53.6%）</strong>，avg_sentiment = -0.47，负向偏多符合其战斗角色。其 Top 正向词为"圣/救/化"，Top 负向词为"妖/打/怪"。`,
+            `<strong>唐僧 avg_sentiment 偏正向</strong>（慈悲为怀），但遇妖怪时负向引语增多。作为取经团队的核心，其情感波动直接影响团队氛围。`,
+            `<strong>猪八戒 avg_sentiment 中性偏负</strong>（呆子常被骂），引语数居 Top 3，其贪吃好色的性格特征在负向词中有所体现。`,
+            `<strong>沙僧引语较少（318 条）</strong>，多为应答（中性偏正），符合其沉默寡言、忠厚老实的角色定位。`,
+            `<strong>观音 avg_sentiment 正向偏多</strong>（救苦救难角色），作为取经项目的实际执行总监，其引语多体现慈悲与决断。`,
+            `<strong>中性引语占比最高（57.9%）</strong>，这与古典小说的叙事体特征一致——大量引语为信息传递性应答，而非情感表达。`,
+            `<strong>数据基于零依赖情感词典</strong>，多义词（好/是/罢了）不收入，可能低估情感极性。未来可结合上下文语义分析提升准确度。`
+        ];
+
+        ol.selectAll('li')
+            .data(insights)
+            .enter().append('li')
+            .html(d => d);
+    }
+
+    // ===== resize debounce 250ms =====
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    // ===== direct call =====
+    main();
+    </script>
+</body>
+</html>

@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>八十一难深度统计 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="../static/js/d3-sankey.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+        }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .cross-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 0.88rem;
+        }
+        .cross-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 0.88rem;
+            min-width: 520px;
+        }
+        .cross-table th, .cross-table td {
+            border: 1px solid var(--line);
+            padding: 8px 12px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .cross-table th {
+            background: #f5e9d4;
+            color: var(--accent-3);
+            font-weight: 600;
+        }
+        .cross-table td:first-child {
+            background: var(--bg);
+            font-weight: 600;
+            text-align: left;
+            white-space: normal;
+        }
+        .cross-table td:first-child {
+            background: var(--bg);
+            font-weight: 600;
+            text-align: left;
+        }
+        .cross-table .highlight {
+            background: #fde8e6;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .cross-table .zero {
+            color: var(--ink-soft);
+            opacity: 0.4;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        /* Sankey */
+        #sankey {
+            width: 100%;
+            height: 420px;
+            display: block;
+        }
+        .sankey-node rect {
+            fill-opacity: 0.9;
+            stroke: #fff;
+            stroke-width: 1;
+        }
+        .sankey-node text {
+            font-size: 0.82rem;
+            fill: var(--ink);
+            font-family: "Noto Serif SC", serif;
+        }
+        .sankey-link {
+            fill: none;
+            stroke-opacity: 0.45;
+            transition: stroke-opacity 0.2s;
+        }
+        .sankey-link:hover {
+            stroke-opacity: 0.75;
+        }
+        /* Filter bar */
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 18px;
+            margin-bottom: 14px;
+            font-size: 0.88rem;
+        }
+        .filter-row label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .filter-row select {
+            padding: 5px 10px;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: inherit;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        .filter-row select:focus {
+            outline: 2px solid var(--accent-soft);
+            border-color: var(--accent);
+        }
+        .filter-row button {
+            padding: 5px 14px;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            background: var(--paper);
+            color: var(--ink-soft);
+            font-family: inherit;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-row button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .filter-count {
+            color: var(--accent-2);
+            font-size: 0.85rem;
+            margin-left: auto;
+        }
+        /* Hardship table */
+        .table-wrap {
+            overflow-x: auto;
+            max-height: 600px;
+            overflow-y: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        .table-wrap::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .table-wrap::-webkit-scrollbar-thumb {
+            background: var(--accent-soft);
+            border-radius: 4px;
+        }
+        #hardship-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+        #hardship-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 10px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        #hardship-table tbody tr {
+            border-bottom: 1px solid var(--line);
+        }
+        #hardship-table tbody tr:nth-child(even) {
+            background: var(--bg);
+        }
+        #hardship-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        #hardship-table td {
+            padding: 8px 12px;
+            vertical-align: top;
+        }
+        #hardship-table td.num {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent-3);
+            width: 50px;
+            text-align: center;
+        }
+        #hardship-table td.chapter {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--ink-soft);
+            width: 80px;
+            text-align: center;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #fff;
+            white-space: nowrap;
+        }
+        .empty-row {
+            padding: 32px;
+            text-align: center;
+            color: var(--ink-soft);
+            font-style: italic;
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+
+        /* 响应式断点 */
+        @media (max-width: 768px) {
+            .container { padding: 0 16px; }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .hero { padding: 40px 16px 32px; }
+            .hero h1 { font-size: 1.8rem; }
+            .filter-row { flex-wrap: wrap; gap: 8px; }
+        }
+        @media (max-width: 520px) {
+            .container { padding: 0 12px; }
+            .kpi-row { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.5rem; }
+            .hero .subtitle { font-size: 0.8rem; }
+            .filter-row { flex-direction: column; align-items: stretch; }
+            .filter-row select, .filter-row button { width: 100%; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>八十一难深度统计</h1>
+        <div class="subtitle">EIGHTY-ONE HARDSHIPS</div>
+        <div class="tagline">九九八十一难的起因、结局、难度全维度透视。</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../dashboard.html">← 返回仪表盘</a>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">TOTAL · 总数</div>
+                <div class="value">81</div>
+                <div class="desc">九九八十一难</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">CAUSE · 起因大类</div>
+                <div class="value">4</div>
+                <div class="desc">如来/观音 · 野怪 · 坐骑 · 心魔</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">RESCUED · 被接走</div>
+                <div class="value">49</div>
+                <div class="desc">占 60.5%，"关系"主导命运</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">RESCUE · 搬救兵</div>
+                <div class="value">39</div>
+                <div class="desc">占 48.1%，悟空并非万能</div>
+            </div>
+        </div>
+
+        <!-- 三维分布 -->
+        <section class="section">
+            <h2 class="section-title">三维分布</h2>
+            <div class="section-sub">按起因、结局、难度三个维度分别统计，中心数字为总计。</div>
+
+            <div class="chart-row">
+                <div class="chart-block">
+                    <h3>按起因分类</h3>
+                    <svg id="chart-cause" width="360" height="360"></svg>
+                    <div class="legend" id="legend-cause"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>按结局分类</h3>
+                    <svg id="chart-ending" width="360" height="360"></svg>
+                    <div class="legend" id="legend-ending"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>按难度分类</h3>
+                    <svg id="chart-difficulty" width="360" height="360"></svg>
+                    <div class="legend" id="legend-difficulty"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 交叉统计表 -->
+        <section class="section">
+            <h2 class="section-title">交叉统计：起因 × 结局</h2>
+            <div class="section-sub">每一行表示该起因下三种结局的分布。注意"天界/西天坐骑下凡"行——16 难全部被接走，0 难被打死。<br><em>注：本页统计"坐骑下凡 16 难"（劫难事件单位）·monster-sociology 统计"10 个坐骑案例"（坐骑个体单位）·ecology 统计"7 个入侵物种"（物种分类单位）·三页口径不同</em></div>
+            <div class="table-wrap">
+                <table class="cross-table" id="cross-table">
+                    <thead>
+                        <tr>
+                            <th>起因 \ 结局</th>
+                            <th>被接走（有背景）</th>
+                            <th>被打死（无背景）</th>
+                            <th>被收编</th>
+                            <th>合计</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 桑基图 -->
+        <section class="section">
+            <h2 class="section-title">桑基图：起因流向结局</h2>
+            <div class="section-sub">从左侧"起因"流向右侧"结局"，流带宽度对应难数。颜色取起因分类色。</div>
+            <svg id="sankey"></svg>
+        </section>
+
+        <!-- 八十一难完整清单 -->
+        <section class="section">
+            <h2 class="section-title">八十一难完整清单</h2>
+            <div class="section-sub">使用下方筛选器按起因/结局/难度组合过滤。</div>
+            <div class="filter-row">
+                <label>起因：
+                    <select id="filter-cause">
+                        <option value="">全部</option>
+                    </select>
+                </label>
+                <label>结局：
+                    <select id="filter-ending">
+                        <option value="">全部</option>
+                    </select>
+                </label>
+                <label>难度：
+                    <select id="filter-difficulty">
+                        <option value="">全部</option>
+                    </select>
+                </label>
+                <button id="reset-filter" type="button">重置</button>
+                <span class="filter-count" id="filter-count">显示 0/0 难</span>
+            </div>
+            <div class="table-wrap">
+                <table id="hardship-table">
+                    <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>名称</th>
+                            <th>回目</th>
+                            <th>起因</th>
+                            <th>结局</th>
+                            <th>难度</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hardship-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">返回仪表盘</a> ·
+        <a href="../index.html">返回首页</a>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/03-主题与情节专题/八十一难专题.md">八十一难专题</a></div>
+    </footer>
+
+    <script>
+    // 嵌入式 fallback 数据（fetch 失败时使用）
+    const EMBEDDED_DATA = {
+        total: 81,
+        by_cause: {
+            "如来/观音安排": 27,
+            "真正野怪": 28,
+            "天界/西天坐骑下凡": 16,
+            "人心自生的魔障": 10
+        },
+        by_ending: {
+            "被接走（有背景）": 49,
+            "被打死（无背景）": 25,
+            "被收编": 7
+        },
+        by_difficulty: {
+            "悟空独立解决": 42,
+            "需要搬救兵": 39
+        },
+        cross_cause_ending: {
+            "如来/观音安排": {"被接走（有背景）": 23, "被打死（无背景）": 0, "被收编": 4},
+            "真正野怪": {"被接走（有背景）": 6, "被打死（无背景）": 19, "被收编": 3},
+            "天界/西天坐骑下凡": {"被接走（有背景）": 16, "被打死（无背景）": 0, "被收编": 0},
+            "人心自生的魔障": {"被接走（有背景）": 4, "被打死（无背景）": 6, "被收编": 0}
+        },
+        // 81 难完整清单：默认为空，由 ../scripts/output/data/hardships_81.json 提供
+        // 字段：n/name/chapter/cause/ending/difficulty
+        hardships: []
+    };
+
+    // 配色（与 dashboard.html 一致）
+    const CAUSE_COLORS = {
+        "如来/观音安排": "#c8463a",
+        "真正野怪": "#7a5230",
+        "天界/西天坐骑下凡": "#3a6b8c",
+        "人心自生的魔障": "#5a7a3a"
+    };
+    const ENDING_COLORS = {
+        "被接走（有背景）": "#e9b885",
+        "被打死（无背景）": "#c8463a",
+        "被收编": "#5a7a3a"
+    };
+    const DIFFICULTY_COLORS = {
+        "悟空独立解决": "#3a6b8c",
+        "需要搬救兵": "#c8463a"
+    };
+
+    // 渲染饼图（比 dashboard 更大：360×360）
+    function renderPie(svgId, legendId, data, colorMap) {
+        const svg = d3.select("#" + svgId);
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${width/2}, ${height/2})`);
+
+        const pie = d3.pie()
+            .value(d => d[1])
+            .sort(null);
+
+        const arc = d3.arc()
+            .innerRadius(radius * 0.58)
+            .outerRadius(radius)
+            .cornerRadius(3);
+
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.82)
+            .outerRadius(radius * 0.82);
+
+        const arcs = pie(Object.entries(data));
+
+        // 切片
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => colorMap[d.data[0]] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 100)
+            .style("opacity", 1);
+
+        // 中心数字
+        const total = Object.values(data).reduce((a, b) => a + b, 0);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "0.35em")
+            .style("font-size", "1.8rem")
+            .style("font-weight", "600")
+            .style("fill", "#2c2418")
+            .text(total);
+
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "2em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6b5e4d")
+            .text("总计");
+
+        // 切片标签
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.88rem")
+            .style("font-weight", "600")
+            .style("fill", "#fff")
+            .text(d => {
+                const pct = (d.data[1] / total * 100).toFixed(0);
+                return d.data[1] > 3 ? `${d.data[1]} · ${pct}%` : "";
+            });
+
+        // 图例
+        const legend = d3.select("#" + legendId);
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(Object.entries(data))
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `
+                <span class="legend-swatch" style="background:${colorMap[d[0]] || '#999'}"></span>
+                <span>${d[0]}：${d[1]} 难</span>
+            `);
+    }
+
+    // 渲染交叉表
+    function renderCrossTable(crossData) {
+        const tbody = d3.select("#cross-table tbody");
+        tbody.selectAll("*").remove();
+        const rows = Object.entries(crossData);
+
+        rows.forEach(([cause, endings]) => {
+            const total = Object.values(endings).reduce((a, b) => a + b, 0);
+            const tr = tbody.append("tr");
+            tr.append("td").text(cause);
+            Object.entries(endings).forEach(([ending, count]) => {
+                const td = tr.append("td");
+                if (count === 0) {
+                    td.classed("zero", true).text("0");
+                } else if (count >= 15) {
+                    td.classed("highlight", true).text(count);
+                } else {
+                    td.text(count);
+                }
+            });
+            tr.append("td").style("font-weight", "600").text(total);
+        });
+    }
+
+    // 渲染桑基图（起因 → 结局）
+    function renderSankey(crossData) {
+        try {
+            if (typeof d3.sankey !== "function") {
+                console.warn("[renderSankey] d3.sankey 不可用，跳过桑基图渲染");
+                return;
+            }
+            const svg = d3.select("#sankey");
+            svg.selectAll("*").remove();
+
+            const containerEl = document.getElementById("sankey");
+            const width = Math.max(200, containerEl.clientWidth || 1100);
+            const height = 420;
+            svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+            const causes = Object.keys(crossData);
+            const endingsSet = new Set();
+            causes.forEach(c => Object.keys(crossData[c]).forEach(e => endingsSet.add(e)));
+            const endings = Array.from(endingsSet);
+
+            const nodes = [
+                ...causes.map(name => ({name, type: "cause"})),
+                ...endings.map(name => ({name, type: "ending"}))
+            ];
+            const links = [];
+            causes.forEach(c => {
+                Object.entries(crossData[c]).forEach(([e, count]) => {
+                    if (count > 0) {
+                        links.push({
+                            source: nodes.findIndex(n => n.name === c),
+                            target: nodes.findIndex(n => n.name === e),
+                            value: count,
+                            cause: c
+                        });
+                    }
+                });
+            });
+
+            const colorOf = (name, type) => {
+                if (type === "cause") return CAUSE_COLORS[name] || "#999";
+                return ENDING_COLORS[name] || "#999";
+            };
+
+            const sankeyLayout = d3.sankey()
+                .nodeWidth(18)
+                .nodePadding(20)
+                .extent([[10, 10], [width - 10, height - 10]]);
+
+            const graph = sankeyLayout({
+                nodes: nodes.map(d => Object.assign({}, d)),
+                links: links.map(d => Object.assign({}, d))
+            });
+
+        // 链接（流带）
+        svg.append("g")
+            .attr("fill", "none")
+            .selectAll("path")
+            .data(graph.links)
+            .enter()
+            .append("path")
+            .attr("class", "sankey-link")
+            .attr("d", d3.sankeyLinkHorizontal())
+            .attr("stroke", d => colorOf(d.cause, "cause"))
+            .attr("stroke-width", d => Math.max(1, d.width))
+            .append("title")
+            .text(d => `${d.source.name} → ${d.target.name}：${d.value} 难`);
+
+        // 节点
+        const nodeG = svg.append("g")
+            .selectAll("g")
+            .data(graph.nodes)
+            .enter()
+            .append("g")
+            .attr("class", "sankey-node");
+
+        nodeG.append("rect")
+            .attr("x", d => d.x0)
+            .attr("y", d => d.y0)
+            .attr("height", d => Math.max(1, d.y1 - d.y0))
+            .attr("width",d => Math.max(0, d.x1 - d.x0))
+            .attr("fill", d => colorOf(d.name, d.type))
+            .append("title")
+            .text(d => `${d.name}：${d.value} 难`);
+
+        nodeG.append("text")
+            .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+            .attr("y", d => (d.y1 + d.y0) / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
+            .text(d => d.name);
+
+        // 列标题
+        svg.append("text")
+            .attr("x", 16)
+            .attr("y", 24)
+            .style("font-size", "0.78rem")
+            .style("fill", "#6b5e4d")
+            .style("letter-spacing", "0.1em")
+            .text("起因");
+
+        svg.append("text")
+            .attr("x", width - 16)
+            .attr("y", 24)
+            .attr("text-anchor", "end")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6b5e4d")
+            .style("letter-spacing", "0.1em")
+            .text("结局");
+        } catch (err) {
+            console.warn("[renderSankey] 渲染失败：", err.message);
+        }
+    }
+
+    // 渲染 81 难表格 + 筛选器
+    function renderTable(hardships) {
+        // 初始化筛选器选项
+        const causes = Array.from(new Set(hardships.map(h => h.cause))).filter(Boolean);
+        const endings = Array.from(new Set(hardships.map(h => h.ending))).filter(Boolean);
+        const difficulties = Array.from(new Set(hardships.map(h => h.difficulty))).filter(Boolean);
+
+        const fillSelect = (id, opts) => {
+            const sel = document.getElementById(id);
+            const cur = sel.value;
+            sel.innerHTML = '<option value="">全部</option>' +
+                opts.map(o => `<option value="${o}">${o}</option>`).join("");
+            sel.value = cur;
+        };
+        fillSelect("filter-cause", causes);
+        fillSelect("filter-ending", endings);
+        fillSelect("filter-difficulty", difficulties);
+
+        function applyFilter() {
+            const fc = document.getElementById("filter-cause").value;
+            const fe = document.getElementById("filter-ending").value;
+            const fd = document.getElementById("filter-difficulty").value;
+            const filtered = hardships.filter(h => {
+                if (fc && h.cause !== fc) return false;
+                if (fe && h.ending !== fe) return false;
+                if (fd && h.difficulty !== fd) return false;
+                return true;
+            });
+
+            const tbody = d3.select("#hardship-tbody");
+            tbody.selectAll("*").remove();
+
+            if (filtered.length === 0) {
+                tbody.append("tr").append("td")
+                    .attr("colspan", 6)
+                    .attr("class", "empty-row")
+                    .text("无匹配项，或数据未加载（请通过 http server 运行）。");
+            } else {
+                filtered.forEach(h => {
+                    const tr = tbody.append("tr");
+                    tr.append("td").attr("class", "num").text(h.n ?? "—");
+                    tr.append("td").text(h.name ?? "—");
+                    tr.append("td").attr("class", "chapter").text(h.chapter ?? "—");
+                    tr.append("td").html(h.cause
+                        ? `<span class="tag" style="background:${CAUSE_COLORS[h.cause] || '#999'}">${h.cause}</span>`
+                        : "—");
+                    tr.append("td").html(h.ending
+                        ? `<span class="tag" style="background:${ENDING_COLORS[h.ending] || '#999'}">${h.ending}</span>`
+                        : "—");
+                    tr.append("td").html(h.difficulty
+                        ? `<span class="tag" style="background:${DIFFICULTY_COLORS[h.difficulty] || '#999'}">${h.difficulty}</span>`
+                        : "—");
+                });
+            }
+
+            document.getElementById("filter-count").textContent = `显示 ${filtered.length}/${hardships.length} 难`;
+        }
+
+        ["filter-cause", "filter-ending", "filter-difficulty"].forEach(id => {
+            document.getElementById(id).onchange = applyFilter;
+        });
+        document.getElementById("reset-filter").onclick = () => {
+            document.getElementById("filter-cause").value = "";
+            document.getElementById("filter-ending").value = "";
+            document.getElementById("filter-difficulty").value = "";
+            applyFilter();
+        };
+
+        applyFilter();
+    }
+
+    // 渲染关键洞察
+    function renderInsights(data) {
+        const insights = [
+            `坐骑下凡 16 难 <strong>全部被接走</strong>，无 1 难被打死——揭示了"背景深厚"的妖怪几乎零犯罪成本。`,
+            `真正野怪 28 难中 <strong>19 难被打死</strong>（67.9%），无背景的妖魔死亡率极高。`,
+            `如来/观音安排 27 难中 <strong>23 难被接走</strong>，4 难被收编，0 难被打死——"考验"性质明显。`,
+            `搬救兵 39 难（48.1%）几乎占一半，<strong>悟空并非万能</strong>，西行是一场协作。`,
+            `被接走 49 难（60.5%）vs 被打死 25 难（30.9%）——<strong>"关系"决定命运</strong>是全书最大潜规则。`,
+            `人心自生的魔障 10 难中 <strong>6 难被打死</strong>——心魔无外援可依，多由行者自悟自破。`
+        ];
+
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => {
+            ul.append("li").html(text);
+        });
+    }
+
+    // 加载数据（fetch 失败则用嵌入数据）
+    async function loadData() {
+        try {
+            const response = await fetch('../../scripts/output/data/hardships_81.json');
+            if (!response.ok) throw new Error('fetch failed');
+            const data = await response.json();
+            document.getElementById('dataSource').innerHTML =
+                '数据源：实时加载自 <code>scripts/output/data/hardships_81.json</code>（运行于 http server 模式）';
+            return data;
+        } catch (e) {
+            console.warn('[INFO] 使用嵌入数据：', e.message);
+            return EMBEDDED_DATA;
+        }
+    }
+
+    // 主流程
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        renderPie("chart-cause", "legend-cause", data.by_cause, CAUSE_COLORS);
+        renderPie("chart-ending", "legend-ending", data.by_ending, ENDING_COLORS);
+        renderPie("chart-difficulty", "legend-difficulty", data.by_difficulty, DIFFICULTY_COLORS);
+
+        renderCrossTable(data.cross_cause_ending);
+        renderSankey(data.cross_cause_ending);
+        renderTable(data.hardships || []);
+        renderInsights(data);
+    }
+
+    // 窗口尺寸变化时重绘桑基图
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) renderSankey(window.__lastData.cross_cause_ending);
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

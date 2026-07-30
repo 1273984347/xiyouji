@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法术阵法体系 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="../static/js/d3-sankey.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --accent-5: #8c6a3a;
+            --line: #d9cdb8;
+            --gold: #d4a857;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(212, 168, 87, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card:nth-child(2) { border-top-color: var(--accent-2); }
+        .kpi-card:nth-child(3) { border-top-color: var(--accent-3); }
+        .kpi-card:nth-child(4) { border-top-color: var(--accent-4); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card:nth-child(2) .label { color: var(--accent-2); }
+        .kpi-card:nth-child(3) .label { color: var(--accent-3); }
+        .kpi-card:nth-child(4) .label { color: var(--accent-4); }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .value .unit {
+            font-size: 0.95rem;
+            color: var(--ink-soft);
+            font-weight: 400;
+            margin-left: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .energy-law {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--gold);
+            padding: 14px 18px;
+            border-radius: 4px;
+            margin-bottom: 18px;
+            font-size: 0.92rem;
+            color: var(--accent-3);
+            font-style: italic;
+        }
+        .energy-law strong { color: var(--accent); font-style: normal; }
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        /* Sankey */
+        #sankey {
+            width: 100%;
+            height: 500px;
+            display: block;
+        }
+        .sankey-node rect {
+            fill-opacity: 0.9;
+            stroke: #fff;
+            stroke-width: 1;
+        }
+        .sankey-node text {
+            font-size: 0.8rem;
+            fill: var(--ink);
+            font-family: "Noto Serif SC", serif;
+        }
+        .sankey-link {
+            fill: none;
+            stroke-opacity: 0.45;
+            transition: stroke-opacity 0.2s;
+        }
+        .sankey-link:hover {
+            stroke-opacity: 0.78;
+        }
+        .sankey-col-label {
+            font-size: 0.8rem;
+            fill: var(--ink-soft);
+            letter-spacing: 0.15em;
+            font-weight: 600;
+        }
+        /* Budget chart */
+        #budget-chart {
+            width: 100%;
+            height: 240px;
+            display: block;
+        }
+        #consumers-chart {
+            width: 100%;
+            height: 260px;
+            display: block;
+        }
+        .budget-bar text {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.82rem;
+            fill: var(--ink);
+        }
+        /* Data tables */
+        .data-table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        .data-table-wrap::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .data-table-wrap::-webkit-scrollbar-thumb {
+            background: var(--accent-soft);
+            border-radius: 4px;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+        .data-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 10px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        .data-table tbody tr {
+            border-bottom: 1px solid var(--line);
+        }
+        .data-table tbody tr:nth-child(even) {
+            background: var(--bg);
+        }
+        .data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .data-table td {
+            padding: 9px 12px;
+            vertical-align: top;
+        }
+        .data-table td.name {
+            font-weight: 600;
+            color: var(--accent-3);
+            white-space: nowrap;
+        }
+        .data-table td.num {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent);
+            text-align: center;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #fff;
+            white-space: nowrap;
+        }
+        .rank-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: "JetBrains Mono", monospace;
+            color: #fff;
+        }
+        .rank-S\+ { background: #c8463a; }
+        .rank-S { background: #d4a857; }
+        .rank-A\+ { background: #5a7a3a; }
+        .intensity-bar {
+            display: inline-block;
+            height: 8px;
+            border-radius: 2px;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        .budget-detail {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .budget-detail h4 {
+            font-size: 0.95rem;
+            color: var(--accent-3);
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px dashed var(--line);
+        }
+        .budget-detail ul {
+            list-style: none;
+            padding: 0;
+        }
+        .budget-detail li {
+            padding: 4px 0;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .budget-detail li .amt {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+        .budget-detail .note {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-style: italic;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            background: rgba(200, 70, 58, 0.1);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+        }
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 768px) {
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 1.6rem; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>法术阵法体系</h1>
+        <div class="subtitle">MAGIC · ARRAY · ENERGY CONSERVATION</div>
+        <div class="tagline">5 项修炼 · 5 种火系 · 6 座阵法 · 8 件法宝 —— 法力守恒第一律：能量不灭，只在源-中转-耗三态间流转。</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../dashboard.html">← 返回数据看板</a>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">CULTIVATION · 修炼体系</div>
+                <div class="value">5<span class="unit">项</span></div>
+                <div class="desc">地煞72变 · 天罡36变 · 三昧真火 · 筋斗云 · 火眼金睛</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">ARRAY · 阵法</div>
+                <div class="value">6<span class="unit">座</span></div>
+                <div class="desc">车迟国法坛 · 盘丝蛛网 · 狮驼万妖 · 金刚琢 · 金铙人种袋 · 无底洞</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">TREASURE · 法宝</div>
+                <div class="value">8<span class="unit">件</span></div>
+                <div class="desc">S+ 级 5 件 · S 级 2 件 · A+ 级 1 件</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">SURPLUS · 天庭年度盈余</div>
+                <div class="value">9249<span class="unit">蟠桃单位</span></div>
+                <div class="desc">92.49% 盈余率 · 蟠桃资源掌握即权力</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：法力能量守恒桑基图 -->
+        <section class="section">
+            <h2 class="section-title">法力能量守恒桑基图</h2>
+            <div class="section-sub">源点（5）→ 中转（4）→ 消耗端（5），流带宽度对应能量单位。金黄=源点·青蓝=中转·朱红=消耗。</div>
+            <div class="energy-law" id="energy-law"></div>
+            <svg id="sankey"></svg>
+            <div class="legend">
+                <div class="legend-item"><span class="legend-swatch" style="background:#d4a857"></span>源点（产能）</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#3a6b8c"></span>中转（仙班）</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#c8463a"></span>消耗（法术）</div>
+            </div>
+        </section>
+
+        <!-- 图表 2：天庭年度能量预算 -->
+        <section class="section">
+            <h2 class="section-title">天庭年度能量预算案</h2>
+            <div class="section-sub">收入（朱红）· 支出（青蓝）· 盈余（草绿），均折算为蟠桃能量单位。盈余率 92.49%。</div>
+            <svg id="budget-chart"></svg>
+            <div class="budget-detail">
+                <div>
+                    <h4>收入明细（原单位）</h4>
+                    <ul id="revenue-list"></ul>
+                </div>
+                <div>
+                    <h4>支出明细（原单位）</h4>
+                    <ul id="expense-list"></ul>
+                </div>
+            </div>
+            <h4 style="margin-top:24px;font-size:0.95rem;color:var(--accent-3);">能耗榜 TOP 6 · 单次施法能耗</h4>
+            <svg id="consumers-chart"></svg>
+        </section>
+
+        <!-- 图表 3：修炼体系对比表 -->
+        <section class="section">
+            <h2 class="section-title">修炼体系对比</h2>
+            <div class="section-sub">地煞七十二变 vs 天罡三十六变 vs 三昧真火 vs 筋斗云 vs 火眼金睛。</div>
+            <div class="data-table-wrap">
+                <table class="data-table" id="cultivation-table">
+                    <thead>
+                        <tr>
+                            <th>体系</th>
+                            <th>修习者</th>
+                            <th>来源</th>
+                            <th>数</th>
+                            <th>优势</th>
+                            <th>缺陷</th>
+                            <th>克星</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 图表 4：火系法术对比表 -->
+        <section class="section">
+            <h2 class="section-title">火系法术对比</h2>
+            <div class="section-sub">5 种火系法术 × 强度评级（1-10），含来源·射程·弱点·战绩。</div>
+            <div class="data-table-wrap">
+                <table class="data-table" id="fire-table">
+                    <thead>
+                        <tr>
+                            <th>火法</th>
+                            <th>持有者</th>
+                            <th>来源</th>
+                            <th>强度</th>
+                            <th>射程</th>
+                            <th>弱点</th>
+                            <th>战绩</th>
+                            <th>回目</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 图表 5：阵法表格 -->
+        <section class="section">
+            <h2 class="section-title">阵法详解</h2>
+            <div class="section-sub">6 座阵法 × 回目·洞主·类型·原理·弱点·结果。</div>
+            <div class="data-table-wrap">
+                <table class="data-table" id="array-table">
+                    <thead>
+                        <tr>
+                            <th>阵法</th>
+                            <th>回目</th>
+                            <th>洞主</th>
+                            <th>类型</th>
+                            <th>原理</th>
+                            <th>弱点</th>
+                            <th>结果</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 图表 6：法宝能源核心分类饼图 -->
+        <section class="section">
+            <h2 class="section-title">法宝能源核心分类</h2>
+            <div class="section-sub">8 件法宝按武器类型与是否依赖持有者法力双维分类。</div>
+            <div class="two-col-grid">
+                <div class="chart-block">
+                    <h3>按武器类型</h3>
+                    <svg id="treasure-cat-pie" width="340" height="340"></svg>
+                    <div class="legend" id="treasure-cat-legend"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>按是否依赖持有者法力</h3>
+                    <svg id="treasure-driven-pie" width="340" height="340"></svg>
+                    <div class="legend" id="treasure-driven-legend"></div>
+                </div>
+            </div>
+            <h4 style="margin-top:24px;font-size:0.95rem;color:var(--accent-3);">法宝全谱</h4>
+            <div class="data-table-wrap">
+                <table class="data-table" id="treasure-table">
+                    <thead>
+                        <tr>
+                            <th>法宝</th>
+                            <th>持有者</th>
+                            <th>类别</th>
+                            <th>能源核心</th>
+                            <th>原理</th>
+                            <th>依赖法力</th>
+                            <th>评级</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../index.html">返回首页</a> ·
+        <span id="gen-time">数据生成时间：—</span>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/04-文化与历史背景/佛道思想.md">佛道思想</a></div>
+    </footer>
+
+    <script>
+    // ========== 嵌入式 fallback 数据（fetch 失败时使用） ==========
+    const EMBEDDED_DATA = {
+        magic_system: [
+            {"name":"地煞七十二变","alias":"地煞数·七十二般变化","practitioner":"孙悟空（菩提祖师传授）","origin":"菩提祖师·灵台方寸山·斜月三星洞","nature":"变化之术·避三灾","count":72,"philosophy":"地煞属阴，主变化藏匿，避灾祸、隐真身","pros":"变化万千、可避三灾（雷/火/风灾）","cons":"尾羽难藏（变寺庙露尾巴）、变物不可大过本相","rival":"天罡三十六变","chapter_first":2},
+            {"name":"天罡三十六变","alias":"天罡数·三十六般变化","practitioner":"猪八戒（传授者未明，疑为真武大帝或玄女）","origin":"未明（与天蓬元帅身份有关）","nature":"变化之术·本源通变","count":36,"philosophy":"天罡属阳，主本源正变，法力深厚","pros":"变化纯正、本源之力强","cons":"数量少、临阵变化不灵活","rival":"地煞七十二变","chapter_first":19},
+            {"name":"三昧真火","alias":"三昧真火·先天火","practitioner":"红孩儿（先天修炼）","origin":"先天火气·自身修炼","nature":"法术·先天真火","count":1,"philosophy":"三昧者，精·气·神三者合一，真火非凡火可比","pros":"水浇不灭、烟可伤人、悟空不能近","cons":"惧观音净瓶杨柳水、惧东海龙王之水","rival":"凡火","chapter_first":41},
+            {"name":"筋斗云","alias":"腾云之术","practitioner":"孙悟空（菩提祖师传授）","origin":"菩提祖师·灵台方寸山","nature":"腾云·位移法术","count":1,"philosophy":"一筋斗十万八千里","pros":"速度极速、可跨洲","cons":"不能载人（除自己）长时间","rival":"无（独一无二）","chapter_first":2},
+            {"name":"火眼金睛","alias":"火眼金睛·瞳术","practitioner":"孙悟空（八卦炉炼就）","origin":"太上老君八卦炉·巽位风烟","nature":"瞳术·识破幻象","count":1,"philosophy":"八卦炉中熏就，可识妖辨伪","pros":"看穿妖物本相","cons":"怕烟熏（红孩儿烟可致盲）","rival":"无","chapter_first":7}
+        ],
+        magic_fire: [
+            {"name":"三昧真火","owner":"红孩儿","origin":"先天修炼·精气神合一","intensity":10,"range":"近中程·烟伤人","weakness":"观音净瓶杨柳水·四海龙王水","kills":"无直接战绩，逼退孙悟空","chapter":41},
+            {"name":"六丁神火","owner":"太上老君·八卦炉","origin":"六丁神火·文武火","intensity":10,"range":"炉内·范围极广","weakness":"无所克制（悟空在巽位逃过）","kills":"可炼悟空七七四十九日不死","chapter":7},
+            {"name":"凡火","owner":"凡间·人间灶火","origin":"凡薪之火","intensity":1,"range":"近·限灶膛","weakness":"水即可灭","kills":"无","chapter":16},
+            {"name":"阴火","owner":"火焰山·地火","origin":"悟空踢翻八卦炉·火砖落地","intensity":8,"range":"八百里火焰山","weakness":"芭蕉扇·四十九搧","kills":"烧损人物","chapter":59},
+            {"name":"三昧神风","owner":"黄风怪","origin":"灵山得道黄毛貂鼠","intensity":7,"range":"百里·能瞎悟空眼","weakness":"灵吉菩萨定风丹·飞龙杖","kills":"无直接战绩","chapter":21}
+        ],
+        magic_energy_sankey: {
+            "nodes":[
+                {"name":"日月精华","category":"源点","value":100},
+                {"name":"金丹·老君","category":"源点","value":90},
+                {"name":"蟠桃·王母","category":"源点","value":95},
+                {"name":"人参果·镇元","category":"源点","value":98},
+                {"name":"禅修功德·如来","category":"源点","value":85},
+                {"name":"天仙（玉帝·老君·如来）","category":"中转"},
+                {"name":"地仙（镇元·五庄观）","category":"中转"},
+                {"name":"妖仙（悟空·牛王·大鹏）","category":"中转"},
+                {"name":"凡仙（取经人）","category":"中转"},
+                {"name":"长生延寿","category":"消耗"},
+                {"name":"变化·七十二变","category":"消耗"},
+                {"name":"腾云·筋斗云","category":"消耗"},
+                {"name":"法宝驱动","category":"消耗"},
+                {"name":"战斗法术","category":"消耗"}
+            ],
+            "links":[
+                {"source":"日月精华","target":"天仙（玉帝·老君·如来）","value":30},
+                {"source":"日月精华","target":"地仙（镇元·五庄观）","value":25},
+                {"source":"日月精华","target":"妖仙（悟空·牛王·大鹏）","value":45},
+                {"source":"金丹·老君","target":"天仙（玉帝·老君·如来）","value":50},
+                {"source":"金丹·老君","target":"妖仙（悟空·牛王·大鹏）","value":40},
+                {"source":"蟠桃·王母","target":"天仙（玉帝·老君·如来）","value":60},
+                {"source":"蟠桃·王母","target":"妖仙（悟空·牛王·大鹏）","value":35},
+                {"source":"人参果·镇元","target":"地仙（镇元·五庄观）","value":60},
+                {"source":"人参果·镇元","target":"凡仙（取经人）","value":38},
+                {"source":"禅修功德·如来","target":"天仙（玉帝·老君·如来）","value":35},
+                {"source":"禅修功德·如来","target":"凡仙（取经人）","value":50},
+                {"source":"天仙（玉帝·老君·如来）","target":"长生延寿","value":90},
+                {"source":"天仙（玉帝·老君·如来）","target":"法宝驱动","value":60},
+                {"source":"天仙（玉帝·老君·如来）","target":"战斗法术","value":25},
+                {"source":"地仙（镇元·五庄观）","target":"长生延寿","value":70},
+                {"source":"地仙（镇元·五庄观）","target":"战斗法术","value":15},
+                {"source":"妖仙（悟空·牛王·大鹏）","target":"变化·七十二变","value":80},
+                {"source":"妖仙（悟空·牛王·大鹏）","target":"腾云·筋斗云","value":40},
+                {"source":"妖仙（悟空·牛王·大鹏）","target":"战斗法术","value":50},
+                {"source":"凡仙（取经人）","target":"长生延寿","value":60},
+                {"source":"凡仙（取经人）","target":"战斗法术","value":28}
+            ],
+            "energy_law":"法力守恒第一律：能量不灭，只在'源-中转-耗'三态间流转。源点产能恒定，过度消耗者须自源点补给，否则法力枯竭。",
+            "tianting_budget":{
+                "title":"天庭年度能量预算案",
+                "revenue":[
+                    {"source":"蟠桃园","amount":9000,"unit":"蟠桃能量单位","note":"9000株桃树，前中后三等"},
+                    {"source":"兜率宫金丹","amount":720,"unit":"金丹","note":"一日一炉，年度产360×2"},
+                    {"source":"五庄观人参果","amount":30,"unit":"人参果","note":"30年一熟30枚"},
+                    {"source":"人间祭祀香火","amount":99999,"unit":"香火单位","note":"全域贡品"}
+                ],
+                "expense":[
+                    {"target":"诸仙俸禄·长生延寿","amount":5000,"unit":"蟠桃单位"},
+                    {"target":"天兵天将维护","amount":1500,"unit":"蟠桃单位"},
+                    {"target":"法宝维护","amount":200,"unit":"金丹"},
+                    {"target":"天庭运行","amount":80000,"unit":"香火单位"}
+                ],
+                "surplus":9249,
+                "surplus_unit":"蟠桃单位",
+                "note":"可结余 9249 单位蟠桃能量储备（约92.49%）—— 可见天庭是法力能量盈余机构，蟠桃资源掌握即掌握权力。"
+            },
+            "top_consumers":[
+                {"consumer":"孙悟空","consumption_per_act":80,"act":"七十二变","note":"变物越大耗能越多"},
+                {"consumer":"孙悟空","consumption_per_act":60,"act":"筋斗云·一筋斗","note":"十万八千里高速位移"},
+                {"consumer":"二郎神","consumption_per_act":75,"act":"天眼显形·变化追踪","note":"天眼持续耗能"},
+                {"consumer":"牛魔王","consumption_per_act":90,"act":"现本相·白牛","note":"千丈白牛·法力激增"},
+                {"consumer":"大鹏","consumption_per_act":70,"act":"阴阳二气瓶驱动","note":"因果律武器·耗能巨"},
+                {"consumer":"观音","consumption_per_act":95,"act":"净瓶杨柳水·灭三昧火","note":"高阶神通·一击定局"}
+            ]
+        },
+        magic_arrays: [
+            {"name":"车迟国求雨法坛","chapter":45,"owner":"虎力大仙·鹿力大仙·羊力大仙","type":"祭司阵法·五雷法","structure":"三层法坛·令牌·符水·神将令","principle":"以五雷法指令诸神降雨，依赖天庭正统符令体系","weakness":"悟空冒名假神·扰乱云部雨部·令不出坛","result":"虎力求雨失败·三仙身死","feature":"典型道家正统降雨法坛，靠符令接通天庭云雨部"},
+            {"name":"盘丝洞蛛网阵","chapter":72,"owner":"蜘蛛精七女","type":"天然阵·丝网封锁","structure":"漫天蛛丝·粘缚取经人","principle":"七女先天丝网，凡物触之即粘","weakness":"悟空金箍棒搅丝·易破","result":"阵破·七女逃至黄花观","feature":"七女共修·丝网阵形如穹顶，覆盖盘丝洞周边"},
+            {"name":"狮驼岭万妖阵","chapter":74,"owner":"青狮·白象·大鹏","type":"人海阵·四万七八千小妖","structure":"狮驼岭八百里·狮驼洞·狮驼国","principle":"以妖众阵型截杀取经人·大小妖分工","weakness":"无（被三魔王集团压倒性实力支撑）","result":"悟空被阴阳二气瓶收·后破瓶·最终如来亲降","feature":"规模最大妖阵，妖数堪比天兵"},
+            {"name":"金兜洞·金刚琢阵","chapter":50,"owner":"独角兕大王","type":"法宝阵·单器吸兵","structure":"一琢收万兵","principle":"金刚琢因果律·套尽诸神兵器","weakness":"不收悟空本身·需太上老君亲降","result":"诸神兵器被套·悟空赤手·最终老君收服","feature":"因果律武器·打破'兵器可胜'原则"},
+            {"name":"小雷音寺·金铙·人种袋","chapter":65,"owner":"黄眉童子","type":"复合阵·金铙困人·人种袋收众","structure":"伪佛殿设陷阱·金铙·人种袋二器配合","principle":"金铙困悟空·人种袋收二十八宿·诸神皆入袋","weakness":"亢金龙角破金铙·弥勒亲降收人种袋","result":"诸天神将尽被收·弥勒降服","feature":"因果律武器·弥勒佛家底，单童子可困诸神"},
+            {"name":"无底洞·牌位镇宅","chapter":82,"owner":"金鼻白毛老鼠精","type":"牌位阵·供奉托塔李天王父女","structure":"洞府深处设李天王与哪吒牌位","principle":"供奉父女牌位·依父女之情庇护","weakness":"悟空发现牌位·上天告状·李天王亲降","result":"牌位反成把柄·李天王擒女","feature":"罕见以'神位'自保·借父女之情抗法"}
+        ],
+        magic_treasures: [
+            {"name":"金刚琢","owner":"独角兕大王（原属太上老君）","category":"因果律武器","power_source":"宇宙级规则引擎","principle":"套万物·不依赖持有者法力·内嵌'收束规则'","user_driven":false,"evidence":"独角兕本身法力非顶级·但能套悟空金箍棒·诸神兵器·哪吒兵器·甚至水火","rank":"S+"},
+            {"name":"紫金红葫芦","owner":"金角大王·银角大王（原属太上老君）","category":"因果律武器·名应人死","power_source":"宇宙级规则引擎·姓名绑定","principle":"呼名即应·应者即入葫芦·化脓血","user_driven":false,"evidence":"悟空一度被假名'者行孙'困住·化脓血·靠'假名'逃出","rank":"S+"},
+            {"name":"人种袋","owner":"黄眉童子（原属弥勒佛）","category":"因果律武器·范围收束","power_source":"宇宙级规则引擎·空间收束","principle":"袋开·人入·诸神皆不能逃","user_driven":false,"evidence":"收二十八宿·五方揭谛·悟空亦险被收·靠弥勒亲降","rank":"S+"},
+            {"name":"阴阳二气瓶","owner":"大鹏金翅雕","category":"因果律武器·消解","power_source":"宇宙级规则引擎·阴阳消解","principle":"入瓶·一时三刻化为浆","user_driven":false,"evidence":"悟空入瓶·靠观音三根救命毫毛·钻破瓶·瓶毁","rank":"S+"},
+            {"name":"芭蕉扇","owner":"铁扇公主·罗刹女","category":"元素武器·风系","power_source":"天地灵宝·先天一炁","principle":"扇出八万四千里·灭火焰山","user_driven":true,"evidence":"罗刹女自身法力中等·但凭扇成一方霸主","rank":"S"},
+            {"name":"金箍棒","owner":"孙悟空","category":"物理武器·重兵器","power_source":"大禹治水定海神针·先天灵宝","principle":"一万三千五百斤·大小如意","user_driven":true,"evidence":"依赖悟空法力驱动·本身威力上限受持有者决定","rank":"S"},
+            {"name":"九齿钉耙","owner":"猪八戒","category":"物理武器·神兵","power_source":"太上老君锻造·玉帝赐","principle":"九齿·神光·可筑山","user_driven":true,"evidence":"八戒法力所限·钉耙威力未充分发挥","rank":"A+"},
+            {"name":"紧箍咒","owner":"观音→唐僧","category":"因果律武器·控制","power_source":"宇宙级规则引擎·心念绑定","principle":"念咒即缩·头痛欲裂·控制执行器","user_driven":false,"evidence":"唐僧凡人即可念·不依赖持有者法力·直接作用于悟空","rank":"S+"}
+        ]
+    };
+
+    // ========== 配色 ==========
+    const SANKEY_COLORS = {
+        "源点": "#d4a857",
+        "中转": "#3a6b8c",
+        "消耗": "#c8463a"
+    };
+    const TREASURE_CAT_COLORS = {
+        "因果律武器": "#c8463a",
+        "元素武器": "#5a7a3a",
+        "物理武器": "#7a5230"
+    };
+    const DRIVEN_COLORS = {
+        "依赖持有者法力": "#3a6b8c",
+        "宇宙级规则引擎": "#d4a857"
+    };
+    const INTENSITY_COLORS = d3.scaleLinear()
+        .domain([1, 5, 8, 10])
+        .range(["#e9b885", "#d4a857", "#c8463a", "#8c1a10"])
+        .clamp(true);
+
+    // ========== 渲染法力守恒桑基图 ==========
+    function renderSankey(data) {
+        try {
+            if (typeof d3.sankey !== "function") {
+                console.warn("[renderSankey] d3.sankey 不可用，跳过桑基图渲染");
+                return;
+            }
+            const svg = d3.select("#sankey");
+            svg.selectAll("*").remove();
+
+        const width = 1100;
+        const height = 500;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        // 名称 → 索引映射
+        const nodeNameToIndex = {};
+        data.nodes.forEach((n, i) => { nodeNameToIndex[n.name] = i; });
+
+        const nodes = data.nodes.map(n => ({
+            name: n.name,
+            category: n.category,
+            value: n.value
+        }));
+        const links = data.links.map(l => ({
+            source: l.source,
+            target: l.target,
+            value: l.value
+        }));
+
+        const colorOf = (node) => SANKEY_COLORS[node.category] || "#999";
+
+        // 初始化 sankey 布局（nodePadding + extent 先设定，再 update layout）
+        const sankeyLayout = d3.sankey()
+            .nodeId(d => d.name)
+            .nodeWidth(18)
+            .nodePadding(20)
+            .extent([[140, 24], [width - 140, height - 24]]);
+
+        // 应用布局得到带坐标的 graph（布局后才可绘制）
+        const graph = sankeyLayout({
+            nodes: nodes.map(d => Object.assign({}, d)),
+            links: links.map(d => Object.assign({}, d))
+        });
+
+        // 为每条 link 创建渐变（source→target 颜色过渡）
+        const defs = svg.append("defs");
+        graph.links.forEach((d, i) => {
+            const grad = defs.append("linearGradient")
+                .attr("id", `sankey-grad-${i}`)
+                .attr("gradientUnits", "userSpaceOnUse")
+                .attr("x1", d.source.x1)
+                .attr("x2", d.target.x0);
+            grad.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", colorOf(d.source));
+            grad.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", colorOf(d.target));
+        });
+
+        // 绘制 link（流带）
+        svg.append("g")
+            .attr("fill", "none")
+            .selectAll("path")
+            .data(graph.links)
+            .enter()
+            .append("path")
+            .attr("class", "sankey-link")
+            .attr("d", d3.sankeyLinkHorizontal())
+            .attr("stroke", (d, i) => `url(#sankey-grad-${i})`)
+            .attr("stroke-width", d => Math.max(1, d.width))
+            .append("title")
+            .text(d => `${d.source.name} → ${d.target.name}：${d.value} 能量单位`);
+
+        // 绘制 node
+        const nodeG = svg.append("g")
+            .selectAll("g")
+            .data(graph.nodes)
+            .enter()
+            .append("g")
+            .attr("class", "sankey-node");
+
+        nodeG.append("rect")
+            .attr("x", d => d.x0)
+            .attr("y", d => d.y0)
+            .attr("height", d => Math.max(1, d.y1 - d.y0))
+            .attr("width",d => Math.max(0, d.x1 - d.x0))
+            .attr("fill", d => colorOf(d))
+            .append("title")
+            .text(d => `${d.name}（${d.category}）：${d.value} 能量单位`);
+
+        // 节点标签（源点在左，消耗在右，中转就近）
+        nodeG.append("text")
+            .attr("x", d => {
+                if (d.category === "源点") return d.x0 - 8;
+                if (d.category === "消耗") return d.x1 + 8;
+                return d.x0 < width / 2 ? d.x1 + 8 : d.x0 - 8;
+            })
+            .attr("y", d => (d.y1 + d.y0) / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", d => {
+                if (d.category === "源点") return "end";
+                if (d.category === "消耗") return "start";
+                return d.x0 < width / 2 ? "start" : "end";
+            })
+            .text(d => d.name);
+
+        // 列标题
+        const cols = [
+            {label: "源点 · 产能", x: 24, anchor: "start"},
+            {label: "中转 · 仙班", x: width / 2, anchor: "middle"},
+            {label: "消耗 · 法术", x: width - 24, anchor: "end"}
+        ];
+        svg.append("g")
+            .selectAll("text")
+            .data(cols)
+            .enter()
+            .append("text")
+            .attr("class", "sankey-col-label")
+            .attr("x", d => d.x)
+            .attr("y", 14)
+            .attr("text-anchor", d => d.anchor)
+            .text(d => d.label);
+        } catch (err) {
+            console.warn("[renderSankey] 渲染失败：", err.message);
+        }
+    }
+
+    // ========== 渲染天庭年度预算条形图 ==========
+    function renderBudgetChart(budget) {
+        const svg = d3.select("#budget-chart");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("budget-chart");
+        const margin = {top: 20, right: 120, bottom: 30, left: 100};
+        const width = Math.max(containerEl.clientWidth || 900, margin.left + margin.right + 100);
+        const height = 240;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        // 盈余率 92.49% → 推算总收支（蟠桃单位折算）
+        const totalRevenue = Math.round(budget.surplus / 0.9249);
+        const totalExpense = totalRevenue - budget.surplus;
+
+        const bars = [
+            {label: "年度收入", value: totalRevenue, color: "#c8463a", unit: "蟠桃单位"},
+            {label: "年度支出", value: totalExpense, color: "#3a6b8c", unit: "蟠桃单位"},
+            {label: "年度盈余", value: budget.surplus, color: "#5a7a3a", unit: "蟠桃单位"}
+        ];
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear()
+            .domain([0, totalRevenue * 1.1])
+            .range([0, innerW]);
+
+        const y = d3.scaleBand()
+            .domain(bars.map(b => b.label))
+            .range([0, innerH])
+            .padding(0.35);
+
+        // 条形
+        g.selectAll(".budget-bar")
+            .data(bars)
+            .enter()
+            .append("rect")
+            .attr("class", "budget-bar")
+            .attr("x", 0)
+            .attr("y", d => y(d.label))
+            .attr("height", y.bandwidth())
+            .attr("width",0)
+            .attr("fill", d => d.color)
+            .attr("rx", 3)
+            .transition()
+            .duration(700)
+            .delay((d, i) => i * 120)
+            .attr("width",d => Math.max(0, x(d.value)));
+
+        // 数值标签
+        g.selectAll(".budget-label")
+            .data(bars)
+            .enter()
+            .append("text")
+            .attr("class", "budget-label")
+            .attr("x", d => x(d.value) + 8)
+            .attr("y", d => y(d.label) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .style("opacity", 0)
+            .text(d => `${d.value.toLocaleString()} ${d.unit}`)
+            .transition()
+            .duration(400)
+            .delay((d, i) => i * 120 + 600)
+            .style("opacity", 1);
+
+        // Y 轴标签
+        g.selectAll(".budget-ylabel")
+            .data(bars)
+            .enter()
+            .append("text")
+            .attr("class", "budget-ylabel")
+            .attr("x", -12)
+            .attr("y", d => y(d.label) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "end")
+            .style("font-size", "0.9rem")
+            .style("fill", "#2c2418")
+            .style("font-weight", "600")
+            .text(d => d.label);
+
+        // 收支明细列表
+        const revList = d3.select("#revenue-list");
+        revList.selectAll("*").remove();
+        budget.revenue.forEach(r => {
+            const li = revList.append("li");
+            li.append("span").text(r.source);
+            li.append("span").attr("class", "amt").text(`${r.amount.toLocaleString()} ${r.unit}`);
+            li.append("span").attr("class", "note").text(r.note);
+        });
+
+        const expList = d3.select("#expense-list");
+        expList.selectAll("*").remove();
+        budget.expense.forEach(e => {
+            const li = expList.append("li");
+            li.append("span").text(e.target);
+            li.append("span").attr("class", "amt").text(`${e.amount.toLocaleString()} ${e.unit}`);
+        });
+    }
+
+    // ========== 渲染能耗榜 TOP 6 ==========
+    function renderConsumersChart(consumers) {
+        const svg = d3.select("#consumers-chart");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("consumers-chart");
+        const margin = {top: 16, right: 180, bottom: 24, left: 130};
+        const width = Math.max(containerEl.clientWidth || 900, margin.left + margin.right + 100);
+        const height = 260;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const sorted = [...consumers].sort((a, b) => b.consumption_per_act - a.consumption_per_act);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear()
+            .domain([0, d3.max(sorted, d => d.consumption_per_act) * 1.1])
+            .range([0, innerW]);
+
+        const y = d3.scaleBand()
+            .domain(sorted.map(d => d.consumer + "·" + d.act))
+            .range([0, innerH])
+            .padding(0.25);
+
+        // 条形
+        g.selectAll(".consumer-bar")
+            .data(sorted)
+            .enter()
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", d => y(d.consumer + "·" + d.act))
+            .attr("height", y.bandwidth())
+            .attr("width",0)
+            .attr("fill", d => INTENSITY_COLORS(d.consumption_per_act))
+            .attr("rx", 2)
+            .transition()
+            .duration(600)
+            .delay((d, i) => i * 80)
+            .attr("width",d => Math.max(0, x(d.consumption_per_act)));
+
+        // 数值
+        g.selectAll(".consumer-label")
+            .data(sorted)
+            .enter()
+            .append("text")
+            .attr("x", d => x(d.consumption_per_act) + 6)
+            .attr("y", d => y(d.consumer + "·" + d.act) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .style("font-size", "0.82rem")
+            .style("font-family", "JetBrains Mono, monospace")
+            .style("fill", "#c8463a")
+            .style("font-weight", "600")
+            .style("opacity", 0)
+            .text(d => `${d.consumption_per_act} 单位 · ${d.note}`)
+            .transition()
+            .duration(300)
+            .delay((d, i) => i * 80 + 500)
+            .style("opacity", 1);
+
+        // Y 轴
+        g.selectAll(".consumer-ylabel")
+            .data(sorted)
+            .enter()
+            .append("text")
+            .attr("x", -10)
+            .attr("y", d => y(d.consumer + "·" + d.act) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "end")
+            .style("font-size", "0.82rem")
+            .style("fill", "#2c2418")
+            .text(d => `${d.consumer}·${d.act}`);
+    }
+
+    // ========== 渲染修炼体系对比表 ==========
+    function renderCultivationTable(systems) {
+        const tbody = d3.select("#cultivation-table tbody");
+        tbody.selectAll("*").remove();
+
+        systems.forEach(s => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "name").text(s.name);
+            tr.append("td").text(s.practitioner);
+            tr.append("td").text(s.origin);
+            tr.append("td").attr("class", "num").text(s.count);
+            tr.append("td").text(s.pros);
+            tr.append("td").text(s.cons);
+            tr.append("td").text(s.rival);
+        });
+    }
+
+    // ========== 渲染火系法术对比表 ==========
+    function renderFireTable(fires) {
+        const tbody = d3.select("#fire-table tbody");
+        tbody.selectAll("*").remove();
+
+        fires.forEach(f => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "name").text(f.name);
+            tr.append("td").text(f.owner);
+            tr.append("td").text(f.origin);
+            // 强度：色块条 + 数字
+            const intensityTd = tr.append("td").attr("class", "num");
+            intensityTd.append("span")
+                .attr("class", "intensity-bar")
+                .style("width", (f.intensity * 12) + "px")
+                .style("background", INTENSITY_COLORS(f.intensity));
+            intensityTd.append("span").text(" " + f.intensity + "/10");
+            tr.append("td").text(f.range);
+            tr.append("td").text(f.weakness);
+            tr.append("td").text(f.kills);
+            tr.append("td").attr("class", "num").text("第" + f.chapter + "回");
+        });
+    }
+
+    // ========== 渲染阵法表格 ==========
+    function renderArrayTable(arrays) {
+        const tbody = d3.select("#array-table tbody");
+        tbody.selectAll("*").remove();
+
+        arrays.forEach(a => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "name").text(a.name);
+            tr.append("td").attr("class", "num").text("第" + a.chapter + "回");
+            tr.append("td").text(a.owner);
+            tr.append("td").text(a.type);
+            tr.append("td").text(a.principle);
+            tr.append("td").text(a.weakness);
+            tr.append("td").text(a.result);
+        });
+    }
+
+    // ========== 渲染法宝分类饼图 + 法宝表 ==========
+    function renderTreasureCharts(treasures) {
+        // 归一化类别（取 · 前的大类）
+        const catCount = {};
+        treasures.forEach(t => {
+            const cat = t.category.split("·")[0];
+            catCount[cat] = (catCount[cat] || 0) + 1;
+        });
+
+        // 按是否依赖持有者法力分组
+        const drivenCount = {
+            "宇宙级规则引擎": treasures.filter(t => !t.user_driven).length,
+            "依赖持有者法力": treasures.filter(t => t.user_driven).length
+        };
+
+        renderPie("treasure-cat-pie", "treasure-cat-legend", catCount, TREASURE_CAT_COLORS, "件");
+        renderPie("treasure-driven-pie", "treasure-driven-legend", drivenCount, DRIVEN_COLORS, "件");
+
+        // 法宝全谱表
+        const tbody = d3.select("#treasure-table tbody");
+        tbody.selectAll("*").remove();
+
+        treasures.forEach(t => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "name").text(t.name);
+            tr.append("td").text(t.owner);
+            tr.append("td").text(t.category);
+            tr.append("td").text(t.power_source);
+            tr.append("td").text(t.principle);
+            tr.append("td").html(t.user_driven
+                ? '<span class="tag" style="background:#3a6b8c">依赖法力</span>'
+                : '<span class="tag" style="background:#d4a857">规则引擎</span>');
+            const rankClass = "rank-" + t.rank;
+            tr.append("td").html(`<span class="rank-badge ${rankClass}">${t.rank}</span>`);
+        });
+    }
+
+    // ========== 通用饼图渲染 ==========
+    function renderPie(svgId, legendId, data, colorMap, unitLabel) {
+        const svg = d3.select("#" + svgId);
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${width/2}, ${height/2})`);
+
+        const pie = d3.pie()
+            .value(d => d[1])
+            .sort(null);
+
+        const arc = d3.arc()
+            .innerRadius(radius * 0.58)
+            .outerRadius(radius)
+            .cornerRadius(3);
+
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.82)
+            .outerRadius(radius * 0.82);
+
+        const arcs = pie(Object.entries(data));
+
+        // 切片
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => colorMap[d.data[0]] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 100)
+            .style("opacity", 1);
+
+        // 中心数字
+        const total = Object.values(data).reduce((a, b) => a + b, 0);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "0.35em")
+            .style("font-size", "1.8rem")
+            .style("font-weight", "600")
+            .style("fill", "#2c2418")
+            .text(total);
+
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "2em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6b5e4d")
+            .text(unitLabel || "总计");
+
+        // 切片标签
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.88rem")
+            .style("font-weight", "600")
+            .style("fill", "#fff")
+            .text(d => {
+                const pct = (d.data[1] / total * 100).toFixed(0);
+                return d.data[1] > 0 ? `${d.data[1]} · ${pct}%` : "";
+            });
+
+        // 图例
+        const legend = d3.select("#" + legendId);
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(Object.entries(data))
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `
+                <span class="legend-swatch" style="background:${colorMap[d[0]] || '#999'}"></span>
+                <span>${d[0]}：${d[1]} ${unitLabel || ""}</span>
+            `);
+    }
+
+    // ========== 关键洞察 ==========
+    function renderInsights() {
+        const insights = [
+            `天庭年度能量预算盈余 <strong>9249 蟠桃单位</strong>（92.49% 盈余率）——蟠桃资源掌握即权力，天庭是法力能量净盈余机构。`,
+            `<strong>S+ 级法宝（金刚琢/紫金红葫芦/人种袋/阴阳二气瓶/紧箍咒）均为宇宙级规则引擎</strong>，不依赖持有者法力——唐僧凡人念紧箍咒即可压制悟空。`,
+            `狮驼洞<strong>万妖阵 48000 小妖规模堪比天兵</strong>，是全书规模最大的妖阵，需如来亲降方能平定。`,
+            `金兜洞<strong>金刚琢是典型的"战略物资掠夺"武器</strong>（套诸神兵器），打破"兵器可胜"原则，悟空赤手无策。`,
+            `8 件法宝中 <strong>5 件为因果律武器（62.5%）</strong>，3 件依赖持有者法力（元素/物理类）——高阶法宝越脱离持有者越强。`,
+            `法力守恒第一律：能量在<strong>源点→中转→消耗</strong>三态间流转，妖仙（悟空·牛王·大鹏）是变化与腾云的主要消耗端。`,
+            `能耗榜首：<strong>观音净瓶杨柳水 95 单位/次</strong> > 牛魔王现本相 90 > 悟空七十二变 80——高阶神通一击定局但耗能巨。`,
+            `火系强度双 10 分：<strong>三昧真火与六丁神火并列顶级</strong>，但三昧真火惧观音净水，六丁神火几无克制（悟空靠巽位风烟逃过）。`
+        ];
+
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => {
+            ul.append("li").html(text);
+        });
+    }
+
+    // ========== 数据加载（fetch 失败则用嵌入数据） ==========
+    async function loadData() {
+        const base = "../../scripts/output/data/";
+        const files = ["magic_system.json", "magic_fire.json", "magic_energy_sankey.json", "magic_arrays.json", "magic_treasures_power.json"];
+        try {
+            const results = await Promise.all(files.map(f => fetch(base + f).then(r => {
+                if (!r.ok) throw new Error(r.status);
+                return r.json();
+            })));
+            document.getElementById("dataSource").innerHTML =
+                "数据源：实时加载自 <code>scripts/output/data/</code>（http server 模式）";
+            return {
+                magic_system: results[0],
+                magic_fire: results[1],
+                magic_energy_sankey: results[2],
+                magic_arrays: results[3],
+                magic_treasures: results[4]
+            };
+        } catch (e) {
+            console.warn("[INFO] 使用嵌入数据：", e.message);
+            return EMBEDDED_DATA;
+        }
+    }
+
+    // ========== 主流程 ==========
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        // 能量守恒律文案
+        d3.select("#energy-law").html(
+            "<strong>⚖ " + data.magic_energy_sankey.energy_law + "</strong>"
+        );
+
+        // 桑基图（核心）
+        renderSankey(data.magic_energy_sankey);
+
+        // 天庭预算
+        renderBudgetChart(data.magic_energy_sankey.tianting_budget);
+        renderConsumersChart(data.magic_energy_sankey.top_consumers);
+
+        // 修炼体系表
+        renderCultivationTable(data.magic_system);
+
+        // 火系法术表
+        renderFireTable(data.magic_fire);
+
+        // 阵法表
+        renderArrayTable(data.magic_arrays);
+
+        // 法宝饼图 + 表
+        renderTreasureCharts(data.magic_treasures);
+
+        // 关键洞察
+        renderInsights();
+
+        // 生成时间
+        const now = new Date();
+        document.getElementById("gen-time").textContent =
+            "数据生成时间：" + now.getFullYear() + "-" +
+            String(now.getMonth() + 1).padStart(2, "0") + "-" +
+            String(now.getDate()).padStart(2, "0") + " " +
+            String(now.getHours()).padStart(2, "0") + ":" +
+            String(now.getMinutes()).padStart(2, "0");
+    }
+
+    // 窗口尺寸变化时重绘桑基图
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderSankey(window.__lastData.magic_energy_sankey);
+                renderBudgetChart(window.__lastData.magic_energy_sankey.tianting_budget);
+                renderConsumersChart(window.__lastData.magic_energy_sankey.top_consumers);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

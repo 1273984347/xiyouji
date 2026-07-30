@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<!--
+  W147 D 妖怪等级制度可视化
+  ============================================
+  - 项目：西游记解读（比赛级质量标准）
+  - 当前版本 v2.2.5 · D 可视化 53→54（D 方向第 10 个 NLP 可视化）
+  - 数据基底：W100 共现 + W102 演化 + W103 情感 + W121 五众 + W125 次要人物
+              + W129 妖怪组织形态 + W143 妖怪受害者关系
+  - 6 Section + 5 D3.js 图表：力导向图 / 桑基图 / 雷达图 / 时间线 / 仪表盘
+  - 古典宣纸风配色 · CSS 变量设计令牌 · EMBEDDED_DATA fallback
+  - 响应式（768px + 520px） · a11y（keyboard nav + ARIA labels） · 空数据保护 · XSS 防护
+  ============================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>妖怪等级制度可视化 · W147 D</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+<noscript><p style="color:#8b3a2a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+<style>
+:root {
+  /* 古典宣纸风配色（任务规范） */
+  --bg: #f5f1e8;
+  --paper: #fffdf6;
+  --ink: #2c2820;
+  --ink-soft: #6b5e4d;
+  --accent: #8b3a2a;       /* 朱砂红 */
+  --accent-2: #6b8e6f;     /* 竹绿 */
+  --accent-3: #c9a961;     /* 古铜金 */
+  --muted: #8a7c6a;
+  --border: #d9cdb8;
+  --card: #fffdf8;
+  --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+  /* 四类组织形态配色 */
+  --t-lone: #8b3a2a;       /* 独狼 · 朱砂 */
+  --t-family: #c9a961;     /* 家族 · 古铜金 */
+  --t-alliance: #6b8e6f;   /* 联盟 · 竹绿 */
+  --t-bureau: #5a4a6b;     /* 官僚 · 紫灰 */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "Microsoft YaHei", serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  padding: 20px;
+  min-height: 100vh;
+}
+.container { max-width: 1280px; margin: 0 auto; }
+
+/* Hero */
+header.hero {
+  background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+  color: #f5e9d4;
+  padding: 48px 30px;
+  border-radius: 8px;
+  margin-bottom: 28px;
+  text-align: center;
+  border: 1px solid #2a1c14;
+  position: relative;
+  overflow: hidden;
+}
+header.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(201, 169, 97, 0.18), transparent 60%);
+  pointer-events: none;
+}
+header.hero h1 {
+  font-size: 2.4em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #f5e9d4;
+  letter-spacing: 6px;
+  position: relative; z-index: 1;
+}
+header.hero .subtitle {
+  font-size: 1.02em;
+  color: var(--accent-3);
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+  position: relative; z-index: 1;
+}
+header.hero .meta {
+  color: #b8a888;
+  font-size: 0.85em;
+  margin-top: 10px;
+  position: relative; z-index: 1;
+}
+
+/* Section */
+.section {
+  background: var(--card);
+  margin: 24px 0;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+}
+.section-title {
+  font-size: 1.55em;
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-weight: 600;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+.section-title.alt { color: var(--accent-2); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+.section-sub {
+  color: var(--muted);
+  font-size: 0.86em;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+}
+.definition {
+  background: #fdfaf0;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.92em;
+  border-radius: 0 4px 4px 0;
+  color: var(--ink-soft);
+  line-height: 1.75;
+}
+.definition strong { color: var(--ink); }
+
+/* KPI */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
+  gap: 14px;
+  margin: 18px 0 24px;
+}
+.kpi-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 14px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.kpi-card.alt { border-top-color: var(--accent-2); }
+.kpi-card.alt-2 { border-top-color: var(--accent-3); }
+.kpi-card.alt-3 { border-top-color: var(--t-bureau); }
+.kpi-value {
+  font-size: 1.85em;
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.kpi-card.alt .kpi-value { color: var(--accent-2); }
+.kpi-card.alt-2 .kpi-value { color: var(--accent-3); }
+.kpi-card.alt-3 .kpi-value { color: var(--t-bureau); }
+.kpi-label {
+  color: var(--muted);
+  font-size: 0.84em;
+  margin-top: 4px;
+}
+
+/* 四类组织卡片 */
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+.tier-card {
+  background: #fdfaf0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 14px;
+  border-top: 4px solid var(--accent);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.tier-card:hover, .tier-card:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(60, 40, 20, 0.12);
+  outline: none;
+}
+.tier-card.t-lone { border-top-color: var(--t-lone); }
+.tier-card.t-family { border-top-color: var(--t-family); }
+.tier-card.t-alliance { border-top-color: var(--t-alliance); }
+.tier-card.t-bureau { border-top-color: var(--t-bureau); }
+.tier-card .t-name {
+  font-size: 1.15em;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.tier-card .t-tag {
+  font-size: 0.78em;
+  color: var(--accent-3);
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.tier-card .t-desc {
+  font-size: 0.86em;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+.tier-card .t-ex {
+  font-size: 0.82em;
+  color: var(--muted);
+  font-style: italic;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+}
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title {
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+  font-size: 1.02em;
+}
+.chart-caption {
+  color: var(--muted);
+  font-size: 0.84em;
+  margin-bottom: 12px;
+}
+.chart-svg {
+  background: #fffdf6;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.84em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; color: var(--ink-soft); }
+.legend-swatch {
+  width: 14px; height: 14px; border-radius: 2px; display: inline-block;
+}
+.legend-swatch.line { width: 18px; height: 3px; border-radius: 1px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: rgba(44, 40, 32, 0.95);
+  color: #fff;
+  padding: 9px 12px;
+  border-radius: 4px;
+  font-size: 0.84em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 280px;
+  line-height: 1.55;
+}
+.tooltip div + div { margin-top: 4px; }
+
+/* Insight list */
+.insight-list { list-style: none; padding: 0; counter-reset: insight; }
+.insight-list li {
+  counter-increment: insight;
+  background: #fdfaf0;
+  margin: 10px 0;
+  padding: 12px 16px 12px 48px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 0 4px 4px 0;
+  position: relative;
+  font-size: 0.92em;
+  color: var(--ink-soft);
+}
+.insight-list li:last-child { border-bottom: none; }
+.insight-list li::before {
+  content: counter(insight, decimal-leading-zero);
+  position: absolute;
+  left: 14px; top: 12px;
+  color: var(--accent);
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+.insight-list li strong { color: var(--accent); font-weight: 600; }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; }
+.node-circle:hover, .node-circle:focus { stroke: var(--accent); stroke-width: 3px; outline: none; }
+
+/* Dashboard section */
+.dash-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  margin-top: 14px;
+}
+.dash-panel {
+  background: #fdfaf0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px;
+}
+.dash-panel h4 {
+  font-size: 1em;
+  color: var(--accent-2);
+  margin-bottom: 10px;
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 6px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tier-grid { grid-template-columns: repeat(2, 1fr); }
+  .dash-grid { grid-template-columns: 1fr; }
+  header.hero { padding: 32px 18px; }
+  header.hero h1 { font-size: 1.8em; letter-spacing: 3px; }
+  .section { padding: 18px; }
+  .section-title { font-size: 1.3em; }
+}
+@media (max-width: 520px) {
+  .tier-grid { grid-template-columns: 1fr; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  body { padding: 10px; }
+  header.hero h1 { font-size: 1.5em; letter-spacing: 2px; }
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.84em;
+  line-height: 1.8;
+}
+footer code {
+  background: #fdfaf0;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  color: var(--accent);
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="hero">
+  <h1>妖怪等级制度可视化</h1>
+  <div class="subtitle">MONSTER HIERARCHY · FOUR-TIER POWER ATLAS</div>
+  <div class="meta">W147 · D 方向 · 妖怪等级制度专题 · 基于 W100/W102/W103/W121/W125/W129/W143 七层 NLP 数据</div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">组织形态层级</div></div>
+  <div class="kpi-card alt"><div class="kpi-value">17</div><div class="kpi-label">主要妖怪节点</div></div>
+  <div class="kpi-card alt-2"><div class="kpi-value">23</div><div class="kpi-label">等级关系边</div></div>
+  <div class="kpi-card alt-3"><div class="kpi-value">5</div><div class="kpi-label">出身来源</div></div>
+  <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">归宿类型</div></div>
+  <div class="kpi-card alt"><div class="kpi-value">14</div><div class="kpi-label">能力雷达样本</div></div>
+  <div class="kpi-card alt-2"><div class="kpi-value">20</div><div class="kpi-label">命运时间事件</div></div>
+</div>
+
+<!-- Section 1：导论（妖怪等级制度的四层结构） -->
+<section class="section" aria-labelledby="s1-title">
+  <h2 class="section-title" id="s1-title">壹 · 妖怪等级制度的四层结构</h2>
+  <div class="section-sub">FOUR-TIER HIERARCHY OF MONSTER ORGANIZATION</div>
+  <div class="definition">
+    <strong>定义：</strong>西游妖怪并非乌合之众，而是按"势力范围 + 血缘/契约纽带 + 与天庭距离"形成四层等级结构。
+    <strong>独狼型</strong>——单兵作战、无家无援、最易被消灭（白骨精、蜘蛛精、九头虫）；
+    <strong>家族型</strong>——以血缘为纽带、跨山头联防、最讲究家产继承（牛魔王家族、金角银角兄弟）；
+    <strong>联盟型</strong>——异姓结盟、按实力排座、共享地盘与情报（狮驼岭三魔、车迟国三妖）；
+    <strong>官僚型</strong>——本身有天上编制、下凡属"出差"或"擅离职守"、归宿是归位不是消灭（黄袍怪即奎木狼、黄风怪即灵吉坐骑）。
+    四层结构揭示了西游"妖怪政治学"的核心规律：与天庭的距离越近，被消灭的概率越低，被收编的概率越高。
+  </div>
+  <div class="tier-grid" id="tier-grid"></div>
+</section>
+
+<!-- Section 2：妖怪等级力导向图 -->
+<section class="section" aria-labelledby="s2-title">
+  <h2 class="section-title alt" id="s2-title">贰 · 妖怪等级力导向图</h2>
+  <div class="section-sub">FORCE-DIRECTED GRAPH · NODE SIZE = POWER · COLOR = TYPE</div>
+  <div class="definition">
+    <strong>定义：</strong>以 17 个核心妖怪为节点，节点大小映射"势力范围（power 1-10）"，颜色映射"组织形态"。
+    边类型分四种：<strong>统属</strong>（天庭编制下凡）、<strong>联盟</strong>（异姓结盟）、<strong>敌对</strong>（与悟空阵营正面冲突）、<strong>血缘</strong>（家族型妖怪的父子/夫妻/兄弟关系）。
+    力导向图直观呈现"家族型抱团、联盟型三角、独狼型孤立、官僚型背靠天上"四种拓扑形态。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">妖怪等级力导向图（17 节点 / 23 边）</div>
+    <div class="chart-caption">节点大小=势力范围 · 颜色=组织形态 · 边色=关系类型 · 可拖拽 · hover 显示详情</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="560" role="img" aria-label="妖怪等级力导向图"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3：妖怪-天庭关系桑基图 -->
+<section class="section" aria-labelledby="s3-title">
+  <h2 class="section-title alt-2" id="s3-title">叁 · 妖怪-天庭关系桑基图</h2>
+  <div class="section-sub">SANKEY · ORIGIN (出身) → FATE (归宿)</div>
+  <div class="definition">
+    <strong>定义：</strong>桑基图展示妖怪的"出身→归宿"流向。<strong>出身</strong>分五类：野生、坐骑、童子、星宿、其他；
+    <strong>归宿</strong>分四类：收编（被纳入天庭/佛门体系）、消灭（被打杀或化水）、逃脱（未被讨伐）、归位（编制妖怪回到原职）。
+    流量揭示西游的核心政治学定律：出身越靠近天庭（星宿/童子/坐骑），归宿越倾向"归位"——西行路上真正被消灭的，几乎全是"野生妖怪"。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">妖怪出身 → 归宿桑基图</div>
+    <div class="chart-caption">左：出身类别 · 右：归宿类别 · 流量=妖怪数量 · hover 高亮路径</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="520" role="img" aria-label="妖怪出身归宿桑基图"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4：妖怪能力雷达图 -->
+<section class="section" aria-labelledby="s4-title">
+  <h2 class="section-title" id="s4-title">肆 · 妖怪能力雷达图</h2>
+  <div class="section-sub">RADAR · 5 DIMENSIONS · 14 MONSTERS</div>
+  <div class="definition">
+    <strong>定义：</strong>五维度评估妖怪综合实力——<strong>武力</strong>（正面战斗能力）、<strong>法术</strong>（神通变化）、<strong>智谋</strong>（计策谋略）、<strong>势力</strong>（地盘与爪牙）、<strong>结局</strong>（最终下场得分，归位>收编>逃脱>消灭）。
+    雷达面积越大，妖怪综合等级越高。大鹏、牛魔王面积最大；白骨精面积最小但智谋维度突出——揭示了"独狼靠智谋活下来，官僚靠编制活下来"的两种生存策略。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">妖怪五维度能力雷达图（14 妖怪叠加对比）</div>
+    <div class="chart-caption">数值 0-10 · 点击图例切换显示 · hover 查看详情</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="540" role="img" aria-label="妖怪能力雷达图"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5：妖怪命运时间线 -->
+<section class="section" aria-labelledby="s5-title">
+  <h2 class="section-title alt" id="s5-title">伍 · 妖怪命运时间线</h2>
+  <div class="section-sub">FATE TIMELINE · BY CHAPTER ORDER</div>
+  <div class="definition">
+    <strong>定义：</strong>按回目顺序排列 20 个妖怪命运节点，分四类组织形态分轨展示。
+    每个节点标记关键事件（出场/结盟/被降/归宿），用颜色区分阶段：<strong>崛起</strong>（崛起期）、<strong>冲突</strong>（与取经团队正面冲突）、<strong>归宿</strong>（最终结局）。
+    时间线呈现"独狼型快速消亡、家族型跨回目缠斗、联盟型集中爆发、官僚型归位收尾"四种节奏。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">妖怪命运时间线（第20-81回）</div>
+    <div class="chart-caption">X 轴：回目时序 · Y 轴：四类组织分轨 · 节点颜色：阶段 · hover 显示详情</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="460" role="img" aria-label="妖怪命运时间线"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6：总览仪表盘 -->
+<section class="section" aria-labelledby="s6-title">
+  <h2 class="section-title alt-2" id="s6-title">陆 · 妖怪等级制度总览仪表盘</h2>
+  <div class="section-sub">DASHBOARD · STATISTICS + KEY METRICS</div>
+  <div class="definition">
+    <strong>定义：</strong>仪表盘汇总妖怪等级制度的核心指标：按组织形态分布、按出身来源占比、按归宿类型计数、平均能力对比、势力范围 Top 5、跨回目跨度等。
+    仪表盘以"统计卡片 + 小型图表"组合方式，将前五节散点信息浓缩为可对比的概览视图。
+  </div>
+  <div class="kpi-row" id="dash-kpi-row"></div>
+  <div class="dash-grid">
+    <div class="dash-panel">
+      <h4>妖怪势力范围 Top 5（条形图）</h4>
+      <svg id="chart-bar-top" class="chart-svg" width="100%" height="280" role="img" aria-label="妖怪势力范围 Top 5"></svg>
+    </div>
+    <div class="dash-panel">
+      <h4>出身 → 归宿分布（甜甜圈图）</h4>
+      <svg id="chart-donut" class="chart-svg" width="100%" height="280" role="img" aria-label="妖怪归宿分布甜甜圈图"></svg>
+    </div>
+  </div>
+  <ul class="insight-list" style="margin-top: 18px;">
+    <li><strong>等级与出身强相关：</strong>17 个妖怪中，野生 9 个（占 53%），其中 6 个被消灭；坐骑/童子/星宿 8 个全部归位或收编。西游路上"该死的几乎都死了，不该死的几乎都没死"——等级制度背后是天庭对生命的预判与分配。</li>
+    <li><strong>家族型最难缠：</strong>牛魔王家族跨第40-61回共 22 回的缠斗，是西行路上最长跨度的对手。家族型妖怪的"难度"不在于单个武力，而在于跨代联防、跨山头救援、跨身份调动资源。</li>
+    <li><strong>联盟型靠制度解体：</strong>狮驼岭三魔武力加在一起远超悟空，最后是被如来+文殊+普贤三大佛同时出面才瓦解。车迟国三妖则死于"斗法"——联盟型妖怪最怕的不是武力，是被各个击破的合法性挑战。</li>
+  </ul>
+</section>
+
+<footer>
+  <p>W147 妖怪等级制度可视化 · D 方向 · 基于 W100/W102/W103/W121/W125/W129/W143 七层 NLP 数据</p>
+  <p>古典宣纸风配色 · D3.js v7 + d3-sankey · F6 skeleton（fetchJson → loadData → main → render×N → cache → resize）</p>
+  <p id="dataSource">数据源：嵌入数据 EMBEDDED_DATA（file:// 模式可直接打开）</p>
+</footer>
+
+</div>
+
+<script>
+// ============================================================
+// EMBEDDED DATA —— 妖怪等级制度数据
+// ============================================================
+const EMBEDDED_DATA = {
+  // 四类组织形态概览
+  tiers: [
+    {
+      key: "lone", name: "独狼型", tag: "LONE WOLF",
+      color: "#8b3a2a",
+      desc: "单兵作战，无家无援，靠智谋或变身术生存，缺乏跨山头救援。",
+      examples: "白骨精 · 蜘蛛精 · 九头虫"
+    },
+    {
+      key: "family", name: "家族型", tag: "FAMILY-CLAN",
+      color: "#c9a961",
+      desc: "以血缘为纽带，跨山头联防，讲究家产继承与子代培养。",
+      examples: "牛魔王家族 · 金角银角兄弟"
+    },
+    {
+      key: "alliance", name: "联盟型", tag: "ALLIANCE",
+      color: "#6b8e6f",
+      desc: "异姓结盟，按实力排座，共享地盘与情报，但内部脆性高。",
+      examples: "狮驼岭三魔 · 车迟国三妖"
+    },
+    {
+      key: "bureau", name: "官僚型", tag: "CELESTIAL BUREAUCRAT",
+      color: "#5a4a6b",
+      desc: "本身有天上编制，下凡属出差或擅离职守，归宿是归位而非消灭。",
+      examples: "黄袍怪（奎木狼）· 黄风怪（灵吉坐骑）"
+    }
+  ],
+
+  // Section 2: 力导向图节点与边
+  network: {
+    nodes: [
+      // 独狼型
+      { id: "白骨精", type: "独狼", power: 3, chapter: 27 },
+      { id: "蜘蛛精", type: "独狼", power: 4, chapter: 72 },
+      { id: "九头虫", type: "独狼", power: 7, chapter: 62 },
+      // 家族型 - 牛魔王家族
+      { id: "牛魔王", type: "家族", power: 9, chapter: 59 },
+      { id: "铁扇公主", type: "家族", power: 6, chapter: 59 },
+      { id: "红孩儿", type: "家族", power: 7, chapter: 40 },
+      { id: "如意真仙", type: "家族", power: 5, chapter: 53 },
+      // 家族型 - 金角银角
+      { id: "金角大王", type: "家族", power: 7, chapter: 32 },
+      { id: "银角大王", type: "家族", power: 7, chapter: 32 },
+      // 联盟型 - 狮驼岭
+      { id: "青狮", type: "联盟", power: 8, chapter: 74 },
+      { id: "白象", type: "联盟", power: 8, chapter: 74 },
+      { id: "大鹏", type: "联盟", power: 10, chapter: 74 },
+      // 联盟型 - 车迟国
+      { id: "虎力大仙", type: "联盟", power: 5, chapter: 44 },
+      { id: "鹿力大仙", type: "联盟", power: 4, chapter: 44 },
+      { id: "羊力大仙", type: "联盟", power: 4, chapter: 44 },
+      // 官僚型
+      { id: "黄袍怪", type: "官僚", power: 7, chapter: 28 },
+      { id: "黄风怪", type: "官僚", power: 6, chapter: 20 },
+      // 天庭枢纽节点（边端点）
+      { id: "太上老君", type: "天庭", power: 10, chapter: 0 },
+      { id: "观音", type: "天庭", power: 10, chapter: 0 },
+      { id: "灵吉菩萨", type: "天庭", power: 8, chapter: 0 },
+      { id: "如来", type: "天庭", power: 10, chapter: 0 },
+      { id: "文殊菩萨", type: "天庭", power: 9, chapter: 0 },
+      { id: "普贤菩萨", type: "天庭", power: 9, chapter: 0 }
+    ],
+    links: [
+      // 血缘 - 牛魔王家族
+      { source: "牛魔王", target: "铁扇公主", type: "血缘" },
+      { source: "牛魔王", target: "红孩儿", type: "血缘" },
+      { source: "牛魔王", target: "如意真仙", type: "血缘" },
+      { source: "铁扇公主", target: "红孩儿", type: "血缘" },
+      // 血缘 - 金角银角
+      { source: "金角大王", target: "银角大王", type: "血缘" },
+      // 联盟 - 狮驼岭
+      { source: "青狮", target: "白象", type: "联盟" },
+      { source: "白象", target: "大鹏", type: "联盟" },
+      { source: "青狮", target: "大鹏", type: "联盟" },
+      // 联盟 - 车迟国
+      { source: "虎力大仙", target: "鹿力大仙", type: "联盟" },
+      { source: "鹿力大仙", target: "羊力大仙", type: "联盟" },
+      { source: "虎力大仙", target: "羊力大仙", type: "联盟" },
+      // 跨山头联盟
+      { source: "牛魔王", target: "大鹏", type: "联盟" },
+      { source: "九头虫", target: "牛魔王", type: "联盟" },
+      // 统属 - 官僚型与天庭
+      { source: "黄袍怪", target: "太上老君", type: "统属" },
+      { source: "黄风怪", target: "灵吉菩萨", type: "统属" },
+      { source: "金角大王", target: "太上老君", type: "统属" },
+      { source: "银角大王", target: "太上老君", type: "统属" },
+      { source: "青狮", target: "文殊菩萨", type: "统属" },
+      { source: "白象", target: "普贤菩萨", type: "统属" },
+      { source: "大鹏", target: "如来", type: "统属" },
+      { source: "红孩儿", target: "观音", type: "统属" },
+      // 敌对 - 与悟空阵营
+      { source: "白骨精", target: "牛魔王", type: "敌对" },
+      { source: "九头虫", target: "大鹏", type: "敌对" }
+    ]
+  },
+
+  // Section 3: 桑基图（出身 → 归宿）
+  sankey: {
+    nodes: [
+      // 出身（左列）
+      { name: "野生", cat: 0 },
+      { name: "坐骑", cat: 0 },
+      { name: "童子", cat: 0 },
+      { name: "星宿", cat: 0 },
+      { name: "其他", cat: 0 },
+      // 归宿（右列）
+      { name: "收编", cat: 1 },
+      { name: "消灭", cat: 1 },
+      { name: "逃脱", cat: 1 },
+      { name: "归位", cat: 1 }
+    ],
+    links: [
+      // 野生 → 归宿
+      { source: "野生", target: "消灭", value: 6 },   // 白骨精、蜘蛛精、九头虫?（逃脱）、虎力、鹿力、羊力
+      { source: "野生", target: "逃脱", value: 2 },   // 九头虫、如意真仙
+      { source: "野生", target: "收编", value: 2 },   // 牛魔王、红孩儿
+      { source: "野生", target: "归位", value: 1 },   // 铁扇公主（修成正果）
+      // 坐骑 → 归宿
+      { source: "坐骑", target: "归位", value: 2 },   // 青狮、白象、黄风怪
+      // 童子 → 归宿
+      { source: "童子", target: "归位", value: 2 },   // 金角、银角
+      // 星宿 → 归宿
+      { source: "星宿", target: "归位", value: 1 },   // 黄袍怪（奎木狼）
+      // 其他 → 归宿
+      { source: "其他", target: "归位", value: 1 }    // 大鹏（如来舅舅）
+    ]
+  },
+
+  // Section 4: 雷达图（14 妖怪 × 5 维度）
+  radar: [
+    { name: "白骨精",   type: "独狼", 武力: 4, 法术: 7, 智谋: 8, 势力: 2, 结局: 2 },
+    { name: "蜘蛛精",   type: "独狼", 武力: 5, 法术: 6, 智谋: 6, 势力: 4, 结局: 3 },
+    { name: "九头虫",   type: "独狼", 武力: 8, 法术: 6, 智谋: 6, 势力: 5, 结局: 5 },
+    { name: "牛魔王",   type: "家族", 武力: 9, 法术: 8, 智谋: 7, 势力: 9, 结局: 6 },
+    { name: "铁扇公主", type: "家族", 武力: 6, 法术: 9, 智谋: 6, 势力: 5, 结局: 7 },
+    { name: "红孩儿",   type: "家族", 武力: 7, 法术: 8, 智谋: 6, 势力: 4, 结局: 7 },
+    { name: "如意真仙", type: "家族", 武力: 5, 法术: 5, 智谋: 5, 势力: 3, 结局: 5 },
+    { name: "金角大王", type: "家族", 武力: 7, 法术: 8, 智谋: 5, 势力: 6, 结局: 5 },
+    { name: "银角大王", type: "家族", 武力: 7, 法术: 7, 智谋: 4, 势力: 6, 结局: 5 },
+    { name: "青狮",     type: "联盟", 武力: 8, 法术: 6, 智谋: 6, 势力: 8, 结局: 6 },
+    { name: "白象",     type: "联盟", 武力: 8, 法术: 6, 智谋: 5, 势力: 8, 结局: 6 },
+    { name: "大鹏",     type: "联盟", 武力: 9, 法术: 8, 智谋: 9, 势力: 9, 结局: 8 },
+    { name: "虎力大仙", type: "联盟", 武力: 5, 法术: 6, 智谋: 5, 势力: 5, 结局: 1 },
+    { name: "黄袍怪",   type: "官僚", 武力: 7, 法术: 7, 智谋: 6, 势力: 5, 结局: 6 }
+  ],
+
+  // Section 5: 时间线（20 事件按回目排序）
+  timeline: [
+    { order: 1,  chapter: 20, monster: "黄风怪",   type: "官僚", stage: "rise",    event: "黄风岭拦路", desc: "黄毛貂鼠成精，刮三昧神风，悟空初次受挫。" },
+    { order: 2,  chapter: 21, monster: "黄风怪",   type: "官僚", stage: "fate",    event: "灵吉菩萨降伏", desc: "拿定风丹与飞龙杖，灵吉菩萨收走黄风怪归位。" },
+    { order: 3,  chapter: 27, monster: "白骨精",   type: "独狼", stage: "conflict",event: "三打白骨精", desc: "白骨夫人三次变化，被悟空三打。师徒决裂。" },
+    { order: 4,  chapter: 28, monster: "黄袍怪",   type: "官僚", stage: "rise",    event: "宝象国掳公主", desc: "奎木狼下凡占百花羞公主，宝象国称王。" },
+    { order: 5,  chapter: 30, monster: "黄袍怪",   type: "官僚", stage: "conflict",event: "黄袍怪变唐僧", desc: "将唐僧变虎，八戒沙僧不能敌，求悟空出山。" },
+    { order: 6,  chapter: 31, monster: "黄袍怪",   type: "官僚", stage: "fate",    event: "奎木狼归位", desc: "玉帝召回奎木狼，贬兜率宫烧火，最终归位。" },
+    { order: 7,  chapter: 32, monster: "金角大王", type: "家族", stage: "rise",    event: "平顶山称王", desc: "太上老君两童子下凡，持五件法宝占平顶山。" },
+    { order: 8,  chapter: 35, monster: "金角大王", type: "家族", stage: "fate",    event: "老君收回童子", desc: "太上老君亲临，金角银角归位为看炉童子。" },
+    { order: 9,  chapter: 40, monster: "红孩儿",   type: "家族", stage: "rise",    event: "火云洞捉三藏", desc: "牛魔王之子，号圣婴大王，三昧真火烧悟空。" },
+    { order: 10, chapter: 42, monster: "红孩儿",   type: "家族", stage: "fate",    event: "观音收善财童子", desc: "观音用金箍咒收红孩儿，做善财童子，归编制。" },
+    { order: 11, chapter: 44, monster: "虎力大仙", type: "联盟", stage: "rise",    event: "车迟国三妖执政", desc: "虎力、鹿力、羊力三妖把持车迟国朝政二十年。" },
+    { order: 12, chapter: 46, monster: "虎力大仙", type: "联盟", stage: "fate",    event: "斗法三妖灭", desc: "比砍头、剖腹、油锅，三妖皆死，无天庭收编。" },
+    { order: 13, chapter: 53, monster: "如意真仙", type: "家族", stage: "conflict",event: "落胎泉索财", desc: "牛魔王之弟，霸落胎泉，因红孩儿事与悟空结仇。" },
+    { order: 14, chapter: 59, monster: "牛魔王",   type: "家族", stage: "rise",    event: "翠云山借扇", desc: "牛魔王与铁扇公主夫妻，悟空三借芭蕉扇。" },
+    { order: 15, chapter: 61, monster: "牛魔王",   type: "家族", stage: "fate",    event: "四面围剿归伏", desc: "哪吒、李天王、悟空合力围剿，牛魔王归伏被收编。" },
+    { order: 16, chapter: 62, monster: "九头虫",   type: "独狼", stage: "rise",    event: "碧波潭盗宝", desc: "万圣龙王女婿九头虫，盗祭赛国佛宝。" },
+    { order: 17, chapter: 63, monster: "九头虫",   type: "独狼", stage: "fate",    event: "二郎神助战逃逸", desc: "二郎神哮天犬咬掉一头，九头虫逃逸北海。" },
+    { order: 18, chapter: 72, monster: "蜘蛛精",   type: "独狼", stage: "rise",    event: "盘丝洞七女", desc: "七个蜘蛛成精，盘丝洞捉唐僧，黄花观师兄蜈蚣精。" },
+    { order: 19, chapter: 74, monster: "大鹏",     type: "联盟", stage: "rise",    event: "狮驼岭三魔结盟", desc: "青狮、白象、大鹏结盟，狮驼国全军覆没。" },
+    { order: 20, chapter: 77, monster: "大鹏",     type: "联盟", stage: "fate",    event: "如来亲降大鹏", desc: "如来佛祖亲临，大鹏为佛舅归位灵山，三魔俱归编制。" }
+  ],
+
+  // Section 6: 仪表盘统计
+  summary: {
+    byType: [
+      { type: "独狼", count: 3, avgPower: 4.7 },
+      { type: "家族", count: 6, avgPower: 6.8 },
+      { type: "联盟", count: 6, avgPower: 6.5 },
+      { type: "官僚", count: 2, avgPower: 6.5 }
+    ],
+    byOrigin: [
+      { origin: "野生", count: 11 },
+      { origin: "坐骑", count: 2 },
+      { origin: "童子", count: 2 },
+      { origin: "星宿", count: 1 },
+      { origin: "其他", count: 1 }
+    ],
+    byFate: [
+      { fate: "归位", count: 8 },
+      { fate: "消灭", count: 6 },
+      { fate: "收编", count: 2 },
+      { fate: "逃脱", count: 2 }
+    ],
+    topPower: [
+      { name: "大鹏",       power: 10, type: "联盟" },
+      { name: "牛魔王",     power: 9,  type: "家族" },
+      { name: "青狮",       power: 8,  type: "联盟" },
+      { name: "白象",       power: 8,  type: "联盟" },
+      { name: "金角大王",   power: 7,  type: "家族" }
+    ],
+    metrics: {
+      totalMonsters: 17,
+      totalLinks: 23,
+      avgPower: 6.4,
+      maxSpan: 22,        // 牛魔王家族跨回目
+      wildEliminationRate: "55%",  // 9野生6消灭
+      bureaucratSurvivalRate: "100%"  // 2官僚2归位
+    }
+  }
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W147] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const tiers = await fetchJson(base + 'monster-tiers.json', 'tiers');
+  return {
+    tiers: Array.isArray(tiers) ? tiers : (tiers.tiers || EMBEDDED_DATA.tiers),
+    network: EMBEDDED_DATA.network,
+    sankey: EMBEDDED_DATA.sankey,
+    radar: EMBEDDED_DATA.radar,
+    timeline: EMBEDDED_DATA.timeline,
+    summary: EMBEDDED_DATA.summary
+  };
+}
+
+// ============================================================
+// Section 1: 四类组织形态卡片
+// ============================================================
+function renderTiers(tiers) {
+  const grid = d3.select('#tier-grid');
+  grid.html('');
+  if (!tiers || tiers.length === 0) {
+    grid.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+  const card = grid.selectAll('.tier-card')
+    .data(tiers)
+    .enter()
+    .append('div')
+    .attr('class', d => 'tier-card t-' + d.key)
+    .attr('role', 'button')
+    .attr('tabindex', '0')
+    .attr('aria-label', d => d.name + ' · ' + d.tag);
+
+  card.append('div').attr('class', 't-name').text(d => d.name);
+  card.append('div').attr('class', 't-tag').text(d => d.tag);
+  card.append('div').attr('class', 't-desc').text(d => d.desc);
+  card.append('div').attr('class', 't-ex').text(d => '例：' + d.examples);
+
+  card.on('keydown', function(e, d) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showTierTooltip(e, d);
+    }
+  });
+  card.on('click', function(e, d) { showTierTooltip(e, d); });
+}
+
+function showTierTooltip(event, d) {
+  let tip = d3.select('.tooltip');
+  if (tip.empty()) tip = d3.select('body').append('div').attr('class', 'tooltip');
+  tip.html('')
+    .style('opacity', 0.95)
+    .style('left', (event.pageX + 10) + 'px')
+    .style('top', (event.pageY - 28) + 'px');
+  // .html() 仅用于可信 EMBEDDED_DATA，其余用 .text()
+  tip.append('div').html('<strong>' + d.name + '</strong> · ' + d.tag);
+  tip.append('div').text(d.desc);
+  tip.append('div').text('代表妖怪：' + d.examples);
+  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3500);
+}
+
+// ============================================================
+// Section 2: 妖怪等级力导向图
+// ============================================================
+function renderForce(networkData) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 280).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 560;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const typeColors = {
+    "独狼": "#8b3a2a",
+    "家族": "#c9a961",
+    "联盟": "#6b8e6f",
+    "官僚": "#5a4a6b",
+    "天庭": "#b8a888"
+  };
+  const linkColors = {
+    "血缘": "#c9a961",
+    "联盟": "#6b8e6f",
+    "统属": "#5a4a6b",
+    "敌对": "#8b3a2a"
+  };
+
+  const nodes = networkData.nodes.map(d => ({ ...d }));
+  const links = networkData.links.map(d => ({ ...d }));
+
+  function nodeRadius(d) {
+    if (d.type === "天庭") return 16;
+    return 6 + d.power * 1.4;
+  }
+  function nodeFill(d) {
+    return typeColors[d.type] || '#8a7c6a';
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id)
+      .distance(d => d.type === "统属" ? 120 : d.type === "血缘" ? 60 : 80)
+      .strength(d => d.type === "血缘" ? 0.6 : d.type === "联盟" ? 0.4 : 0.2))
+    .force('charge', d3.forceManyBody().strength(d => d.type === "天庭" ? -400 : -180))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 6));
+
+  // 边
+  const link = svg.append('g').selectAll('line')
+    .data(links)
+    .enter().append('line')
+    .attr('stroke', d => linkColors[d.type] || '#d9cdb8')
+    .attr('stroke-width', d => d.type === "血缘" ? 2.5 : d.type === "联盟" ? 2 : 1.2)
+    .attr('stroke-opacity', 0.55)
+    .attr('stroke-dasharray', d => d.type === "敌对" ? "6,3" : d.type === "统属" ? "4,2" : "0");
+
+  // 节点
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', nodeFill)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .attr('tabindex', 0)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b3a2a').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.id + '</strong>');
+      tooltip.append('div').text('类型：' + d.type);
+      if (d.type !== "天庭") {
+        tooltip.append('div').text('势力范围：' + d.power + ' / 10');
+        tooltip.append('div').text('首次出场：第' + d.chapter + '回');
+      }
+      const connected = links.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('关联边数：' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  // 标签
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => d.type === "天庭" ? -22 : -1 * (nodeRadius(d) + 4))
+    .attr('font-weight', d => d.type === "天庭" ? 700 : 500)
+    .attr('font-size', d => d.type === "天庭" ? 12 : 11)
+    .attr('fill', d => d.type === "天庭" ? '#5a4a6b' : '#2c2820')
+    .text(d => d.id);
+
+  sim.on('tick', () => {
+    link.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('cx', d => d.x).attr('cy', d => d.y);
+    label.attr('x', d => d.x).attr('y', d => d.y);
+  });
+
+  // 图例
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const typeLegend = [
+    { label: '独狼型', color: typeColors["独狼"] },
+    { label: '家族型', color: typeColors["家族"] },
+    { label: '联盟型', color: typeColors["联盟"] },
+    { label: '官僚型', color: typeColors["官僚"] },
+    { label: '天庭枢纽', color: typeColors["天庭"] }
+  ];
+  const linkLegend = [
+    { label: '血缘', color: linkColors["血缘"], dash: '0' },
+    { label: '联盟', color: linkColors["联盟"], dash: '0' },
+    { label: '统属', color: linkColors["统属"], dash: '4,2' },
+    { label: '敌对', color: linkColors["敌对"], dash: '6,3' }
+  ];
+  typeLegend.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch').style('background', item.color);
+    li.append('span').text(item.label);
+  });
+  linkLegend.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch line')
+      .style('background', item.color)
+      .style('background-image', item.dash === '0' ? 'none' :
+        `repeating-linear-gradient(to right, ${item.color} 0 4px, transparent 4px 7px)`);
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: 出身 → 归宿桑基图
+// ============================================================
+function renderSankey(sankeyData) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyData || !sankeyData.nodes || sankeyData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#8b3a2a')
+      .text('d3-sankey 未加载，请检查网络');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 520;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 30, right: 20, bottom: 20, left: 20 };
+  const catColors = ['#8b3a2a', '#6b8e6f'];  // 0出身 1归宿
+  const nodeColors = {
+    "野生": "#8b3a2a", "坐骑": "#c9a961", "童子": "#6b8e6f",
+    "星宿": "#5a4a6b", "其他": "#8a7c6a",
+    "收编": "#6b8e6f", "消灭": "#8b3a2a",
+    "逃脱": "#c9a961", "归位": "#5a4a6b"
+  };
+
+  const nodes = sankeyData.nodes.map(d => ({ ...d }));
+  const links = sankeyData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(18)
+    .nodePadding(14)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 链接
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => nodeColors[d.source.name] || catColors[d.source.cat])
+    .attr('stroke-width', d => Math.max(2, d.width))
+    .attr('stroke-opacity', 0.45)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.75);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('妖怪数量：' + d.value + ' 个');
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.45);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => d.x1 - d.x0)
+    .attr('height', d => Math.max(2, d.y1 - d.y0))
+    .attr('fill', d => nodeColors[d.name] || catColors[d.cat])
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b3a2a').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      tooltip.append('div').text('层级：' + (d.cat === 0 ? '出身来源' : '最终归宿'));
+      tooltip.append('div').text('妖怪总数：' + d.value + ' 个');
+      tooltip.append('div').text('流入：' + (d.targetLinks || []).length + ' · 流出：' + (d.sourceLinks || []).length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .attr('fill', '#2c2820')
+    .text(d => d.name);
+
+  // 列标题
+  svg.append('text')
+    .attr('x', margin.left + 4).attr('y', 18)
+    .attr('font-size', '13px').attr('font-weight', '700')
+    .attr('fill', '#8b3a2a').text('出身来源');
+  svg.append('text')
+    .attr('x', width - margin.right - 4).attr('y', 18)
+    .attr('text-anchor', 'end')
+    .attr('font-size', '13px').attr('font-weight', '700')
+    .attr('fill', '#6b8e6f').text('最终归宿');
+
+  // 图例
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const legendItems = [
+    { label: '野生', color: '#8b3a2a' },
+    { label: '坐骑', color: '#c9a961' },
+    { label: '童子', color: '#6b8e6f' },
+    { label: '星宿', color: '#5a4a6b' },
+    { label: '其他', color: '#8a7c6a' },
+    { label: '收编', color: '#6b8e6f' },
+    { label: '消灭', color: '#8b3a2a' },
+    { label: '逃脱', color: '#c9a961' },
+    { label: '归位', color: '#5a4a6b' }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch').style('background', item.color);
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 4: 妖怪能力雷达图
+// ============================================================
+function renderRadar(radarData) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!radarData || radarData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 200).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 540;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const dimensions = ['武力', '法术', '智谋', '势力', '结局'];
+  const typeColors = {
+    "独狼": "#8b3a2a",
+    "家族": "#c9a961",
+    "联盟": "#6b8e6f",
+    "官僚": "#5a4a6b"
+  };
+
+  const cx = width / 2;
+  const cy = height / 2;
+  const radius = Math.min(width, height) / 2 - 80;
+  const levels = 5;
+
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  // 同心五边形
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d9cdb8')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // 轴线 + 维度标签
+  dimensions.forEach((dim, i) => {
+    const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d9cdb8')
+      .attr('stroke-width', 1);
+    const labelR = radius + 28;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', '#2c2820')
+      .text(dim);
+  });
+
+  // 数值刻度
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6).attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '10px')
+      .attr('fill', '#8a7c6a')
+      .text(lvl * 2);
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 雷达多边形（按类型聚合颜色，透明叠加）
+  const polygons = [];
+  radarData.forEach((m, idx) => {
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      const r = radius * (m[dim] / 10);
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    const color = typeColors[m.type] || '#8a7c6a';
+    polygons.push({ monster: m, points, color, idx });
+
+    const poly = gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.1)
+      .attr('stroke', color)
+      .attr('stroke-width', 1.5)
+      .attr('stroke-opacity', 0.7)
+      .style('cursor', 'pointer')
+      .attr('class', 'radar-poly idx-' + idx);
+
+    poly.on('mouseover', function(e, d) {
+      d3.select(this).attr('fill-opacity', 0.3).attr('stroke-width', 2.5);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + m.name + '</strong> · ' + m.type);
+      dimensions.forEach(dim => {
+        tooltip.append('div').text(dim + '：' + m[dim] + ' / 10');
+      });
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('fill-opacity', 0.1).attr('stroke-width', 1.5);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+    // 顶点圆
+    points.forEach(p => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 2.5)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 0.8)
+        .attr('pointer-events', 'none');
+    });
+  });
+
+  // 图例（按类型聚合，可点击切换显示）
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  const typeAgg = {};
+  radarData.forEach(m => {
+    if (!typeAgg[m.type]) typeAgg[m.type] = { count: 0, color: typeColors[m.type] };
+    typeAgg[m.type].count++;
+  });
+  Object.keys(typeAgg).forEach(type => {
+    const item = legend.append('div').attr('class', 'legend-item')
+      .style('cursor', 'pointer')
+      .attr('role', 'button')
+      .attr('tabindex', '0')
+      .attr('aria-label', '切换 ' + type + ' 显示');
+    item.append('div').attr('class', 'legend-swatch').style('background', typeAgg[type].color);
+    item.append('span').text(type + '（' + typeAgg[type].count + '）');
+    item.on('click', function() {
+      const active = !d3.select(this).classed('inactive');
+      d3.select(this).classed('inactive', active);
+      d3.selectAll('.radar-poly').each(function() {
+        const cls = d3.select(this).attr('class');
+        const idx = +cls.match(/idx-(\d+)/)[1];
+        if (radarData[idx].type === type) {
+          d3.select(this).style('display', active ? 'none' : null);
+        }
+      });
+    });
+  });
+}
+
+// ============================================================
+// Section 5: 妖怪命运时间线
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 200).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 460;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const typeOrder = ["独狼", "家族", "联盟", "官僚"];
+  const typeColors = {
+    "独狼": "#8b3a2a",
+    "家族": "#c9a961",
+    "联盟": "#6b8e6f",
+    "官僚": "#5a4a6b"
+  };
+  const stageColors = {
+    rise: "#6b8e6f",       // 崛起 - 竹绿
+    conflict: "#8b3a2a",   // 冲突 - 朱砂
+    fate: "#5a4a6b"        // 归宿 - 紫灰
+  };
+  const stageLabels = { rise: "崛起", conflict: "冲突", fate: "归宿" };
+
+  const margin = { top: 30, right: 30, bottom: 60, left: 90 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const xMin = d3.min(timelineData, d => d.chapter) - 1;
+  const xMax = d3.max(timelineData, d => d.chapter) + 1;
+  const xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, innerW]);
+
+  const yScale = d3.scaleBand()
+    .domain(typeOrder)
+    .range([0, innerH])
+    .padding(0.3);
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 背景行
+  typeOrder.forEach(name => {
+    g.append('rect')
+      .attr('x', 0)
+      .attr('y', yScale(name))
+      .attr('width', innerW)
+      .attr('height', yScale.bandwidth())
+      .attr('fill', typeColors[name])
+      .attr('fill-opacity', 0.06);
+  });
+
+  // 连线（同一妖怪的事件串联）
+  const monsters = Array.from(new Set(timelineData.map(d => d.monster)));
+  monsters.forEach(name => {
+    const vEvents = timelineData.filter(d => d.monster === name).sort((a, b) => a.chapter - b.chapter);
+    if (vEvents.length > 1) {
+      const line = d3.line()
+        .x(d => xScale(d.chapter))
+        .y(d => yScale(d.type) + yScale.bandwidth() / 2)
+        .curve(d3.curveMonotoneX);
+      g.append('path')
+        .datum(vEvents)
+        .attr('fill', 'none')
+        .attr('stroke', typeColors[vEvents[0].type])
+        .attr('stroke-width', 1.5)
+        .attr('stroke-opacity', 0.5)
+        .attr('stroke-dasharray', '4,3')
+        .attr('d', line);
+    }
+  });
+
+  // 事件节点
+  g.selectAll('.event-node')
+    .data(timelineData)
+    .enter()
+    .append('circle')
+    .attr('class', 'event-node')
+    .attr('cx', d => xScale(d.chapter))
+    .attr('cy', d => yScale(d.type) + yScale.bandwidth() / 2)
+    .attr('r', 10)
+    .attr('fill', d => stageColors[d.stage] || '#8a7c6a')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('r', 13);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.monster + '</strong> · ' + d.type);
+      tooltip.append('div').text('回目：第' + d.chapter + '回');
+      tooltip.append('div').text('阶段：' + (stageLabels[d.stage] || d.stage));
+      tooltip.append('div').text('事件：' + d.event);
+      tooltip.append('div').text(d.desc);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('r', 10);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 序号
+  g.selectAll('.event-label')
+    .data(timelineData)
+    .enter()
+    .append('text')
+    .attr('class', 'event-label')
+    .attr('x', d => xScale(d.chapter))
+    .attr('y', d => yScale(d.type) + yScale.bandwidth() / 2)
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
+    .attr('font-size', '10px')
+    .attr('font-weight', '700')
+    .attr('fill', '#fff')
+    .attr('pointer-events', 'none')
+    .text(d => d.order);
+
+  // Y 轴标签
+  typeOrder.forEach(name => {
+    g.append('text')
+      .attr('x', -12)
+      .attr('y', yScale(name) + yScale.bandwidth() / 2)
+      .attr('text-anchor', 'end')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', typeColors[name])
+      .text(name);
+  });
+
+  // X 轴
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).tickFormat(d => '第' + d + '回'))
+    .selectAll('text').attr('font-size', '11px');
+
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 45)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7c6a')
+    .text('回目时序');
+
+  // 图例
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  const stages = [
+    { label: '崛起 (rise)', color: stageColors.rise },
+    { label: '冲突 (conflict)', color: stageColors.conflict },
+    { label: '归宿 (fate)', color: stageColors.fate }
+  ];
+  stages.forEach(s => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', s.color);
+    item.append('span').text(s.label);
+  });
+  // 类型图例
+  typeOrder.forEach(t => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', typeColors[t]);
+    item.append('span').text(t + '轨');
+  });
+}
+
+// ============================================================
+// Section 6: 总览仪表盘
+// ============================================================
+function renderDashboard(summary) {
+  // KPI 卡片
+  const kpiRow = d3.select('#dash-kpi-row');
+  kpiRow.html('');
+  if (!summary || !summary.metrics) {
+    kpiRow.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+  const m = summary.metrics;
+  const kpis = [
+    { label: '妖怪总数', value: m.totalMonsters, cls: '' },
+    { label: '等级关系边', value: m.totalLinks, cls: 'alt' },
+    { label: '平均势力', value: m.avgPower, cls: 'alt-2' },
+    { label: '最长跨回目', value: m.maxSpan + ' 回', cls: 'alt-3' },
+    { label: '野生消灭率', value: m.wildEliminationRate, cls: '' },
+    { label: '官僚存活率', value: m.bureaucratSurvivalRate, cls: 'alt' }
+  ];
+  kpis.forEach(k => {
+    const card = kpiRow.append('div').attr('class', 'kpi-card ' + k.cls);
+    card.append('div').attr('class', 'kpi-value').text(k.value);
+    card.append('div').attr('class', 'kpi-label').text(k.label);
+  });
+
+  // 条形图：Top 5 势力范围
+  renderTopBar(summary.topPower);
+  // 甜甜圈图：归宿分布
+  renderDonut(summary.byFate);
+}
+
+function renderTopBar(topPower) {
+  const svg = d3.select('#chart-bar-top');
+  svg.selectAll('*').remove();
+  if (!topPower || topPower.length === 0) {
+    svg.append('text').attr('x', 120).attr('y', 120).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 500;
+  const height = 280;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 30, bottom: 30, left: 80 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const typeColors = {
+    "独狼": "#8b3a2a", "家族": "#c9a961",
+    "联盟": "#6b8e6f", "官僚": "#5a4a6b"
+  };
+
+  const xScale = d3.scaleLinear()
+    .domain([0, 10])
+    .range([0, innerW]);
+  const yScale = d3.scaleBand()
+    .domain(topPower.map(d => d.name))
+    .range([0, innerH])
+    .padding(0.3);
+
+  // 条
+  g.selectAll('.bar')
+    .data(topPower)
+    .enter()
+    .append('rect')
+    .attr('class', 'bar')
+    .attr('x', 0)
+    .attr('y', d => yScale(d.name))
+    .attr('width', d => xScale(d.power))
+    .attr('height', yScale.bandwidth())
+    .attr('fill', d => typeColors[d.type] || '#8a7c6a')
+    .attr('rx', 3);
+
+  // 数值
+  g.selectAll('.bar-label')
+    .data(topPower)
+    .enter()
+    .append('text')
+    .attr('class', 'bar-label')
+    .attr('x', d => xScale(d.power) + 6)
+    .attr('y', d => yScale(d.name) + yScale.bandwidth() / 2)
+    .attr('dy', '0.35em')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .attr('fill', '#2c2820')
+    .text(d => d.power);
+
+  // Y 轴
+  g.append('g')
+    .call(d3.axisLeft(yScale))
+    .selectAll('text').attr('font-size', '12px');
+
+  // X 轴
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).ticks(5))
+    .selectAll('text').attr('font-size', '11px');
+}
+
+function renderDonut(byFate) {
+  const svg = d3.select('#chart-donut');
+  svg.selectAll('*').remove();
+  if (!byFate || byFate.length === 0) {
+    svg.append('text').attr('x', 120).attr('y', 120).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 400;
+  const height = 280;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const fateColors = {
+    "归位": "#5a4a6b", "消灭": "#8b3a2a",
+    "收编": "#6b8e6f", "逃脱": "#c9a961"
+  };
+
+  const radius = Math.min(width, height) / 2 - 30;
+  const cx = width / 2;
+  const cy = height / 2;
+
+  const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  const pie = d3.pie().value(d => d.count).sort(null);
+  const arc = d3.arc()
+    .innerRadius(radius * 0.55)
+    .outerRadius(radius)
+    .cornerRadius(3);
+
+  const arcs = pie(byFate);
+
+  g.selectAll('path')
+    .data(arcs)
+    .enter()
+    .append('path')
+    .attr('d', arc)
+    .attr('fill', d => fateColors[d.data.fate] || '#8a7c6a')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer');
+
+  // 中心数值
+  const total = d3.sum(byFate, d => d.count);
+  g.append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dy', '-0.2em')
+    .attr('font-size', '24px')
+    .attr('font-weight', '700')
+    .attr('fill', '#2c2820')
+    .text(total);
+  g.append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dy', '1.6em')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7c6a')
+    .text('妖怪总数');
+
+  // 标签
+  const labelArc = d3.arc()
+    .innerRadius(radius * 0.9)
+    .outerRadius(radius * 0.9);
+
+  g.selectAll('.donut-label')
+    .data(arcs)
+    .enter()
+    .append('text')
+    .attr('class', 'donut-label')
+    .attr('transform', d => `translate(${labelArc.centroid(d)})`)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .attr('fill', '#2c2820')
+    .text(d => d.data.fate + ' ' + d.data.count);
+}
+
+// ============================================================
+// main：调度所有渲染函数
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      '数据源：实时加载自 <code>scripts/output/data/</code>（http server 模式）';
+  }
+
+  renderTiers(data.tiers);
+  renderForce(data.network);
+  renderSankey(data.sankey);
+  renderRadar(data.radar);
+  renderTimeline(data.timeline);
+  renderDashboard(data.summary);
+}
+
+// 响应式重绘（debounce 250ms）
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderTiers(data.tiers);
+      renderForce(data.network);
+      renderSankey(data.sankey);
+      renderRadar(data.radar);
+      renderTimeline(data.timeline);
+      renderDashboard(data.summary);
+    }
+  }, 250);
+});
+
+// 启动
+main();
+</script>
+</body>
+</html>

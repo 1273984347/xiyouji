@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>六感叙事学关系图谱 · W168</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="../static/js/d3-sankey.min.js"></script>
+<style>
+:root {
+  /* 古典宣纸风调色板（27 CSS 变量）*/
+  --bg: #f5f0e6;            /* 1 米色背景 */
+  --paper: #efe7d6;         /* 2 宣纸表面 */
+  --ink: #1a1410;           /* 3 深褐主文字 */
+  --accent: #8b4513;        /* 4 鞍棕强调 */
+  --accent-2: #5a3828;      /* 5 深木褐次强调 */
+  --accent-3: #6b4226;      /* 6 古铜辅助 */
+  --muted: #8a7a5a;         /* 7 灰褐次文字 */
+  --border: #d4c5a9;        /* 8 古卷边框 */
+  --card: #fbf6ec;          /* 9 卡片底色 */
+  --hero-bg-1: #1a1410;     /* 10 hero 起始 */
+  --hero-bg-2: #3a2820;     /* 11 hero 中段 */
+  --hero-bg-3: #5a3828;     /* 12 hero 终段 */
+  --hero-text: #f5f0e6;    /* 13 hero 文字 */
+  --hero-sub: #d4c5a9;     /* 14 hero 副标题 */
+  --hero-meta: #b8a888;     /* 15 hero meta */
+  --tooltip-bg: rgba(26,20,16,0.95); /* 16 tooltip 背景 */
+  /* 7 感官配色（17-23）*/
+  --sense-time: #8B4513;       /* 17 时间 鞍棕 */
+  --sense-space: #A0522D;     /* 18 空间 赭石 */
+  --sense-auditory: #CD853F;  /* 19 听觉 秘鲁色 */
+  --sense-olfactory: #DAA520; /* 20 嗅觉 金菊 */
+  --sense-tactile: #B8860B;  /* 21 触觉 暗金 */
+  --sense-visual: #D2691E;   /* 22 视觉 秋茄 */
+  --sense-gustatory: #BC8F8F;/* 23 味觉 玫瑰灰 */
+  --type-structure: #6b4226;  /* 24 四层结构节点 */
+  --type-case: #8a7a5a;      /* 25 案例节点 */
+  --table-stripe: #efe7d6;   /* 26 表格斑马纹 */
+  --table-header: #d4c5a9;   /* 27 表头底色 */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Serif SC', 'Songti SC', serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  padding: 20px;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+
+/* Hero */
+header.hero {
+  background: linear-gradient(135deg, var(--hero-bg-1) 0%, var(--hero-bg-2) 50%, var(--hero-bg-3) 100%);
+  position: relative;
+  color: var(--hero-text);
+  padding: 52px 30px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  text-align: center;
+  border: 1px solid #2a1c14;
+  overflow: hidden;
+}
+header.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(212,197,169,0.18), transparent 60%);
+  pointer-events: none;
+}
+header.hero h1 {
+  font-size: 2.4em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--hero-text);
+  letter-spacing: 4px;
+  position: relative;
+}
+header.hero .subtitle {
+  font-size: 1.05em;
+  color: var(--hero-sub);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  position: relative;
+}
+header.hero .meta {
+  color: var(--hero-meta);
+  font-size: 0.85em;
+  margin-top: 10px;
+  position: relative;
+}
+
+/* Section */
+.section {
+  background: var(--card);
+  margin: 30px 0;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.section-title {
+  font-size: 1.6em;
+  color: var(--accent-2);
+  margin-bottom: 8px;
+  font-weight: 600;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+.section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+.section-sub {
+  color: var(--muted);
+  font-size: 0.88em;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+.definition {
+  background: var(--paper);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.94em;
+  border-radius: 2px;
+}
+
+/* KPI */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+.kpi-card {
+  background: var(--paper);
+  padding: 16px;
+  border-radius: 4px;
+  text-align: center;
+  border-top: 3px solid var(--accent);
+}
+.kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
+.kpi-label { color: var(--muted); font-size: 0.84em; margin-top: 4px; }
+
+/* 感官概览卡片网格 */
+.senses-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 16px;
+}
+.sense-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 14px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.sense-card:hover, .sense-card:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  outline: none;
+}
+.sense-card .sense-name {
+  font-size: 1.15em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.sense-card .sense-tag {
+  font-size: 0.8em;
+  color: var(--accent-2);
+  margin-bottom: 6px;
+}
+.sense-card .sense-stats {
+  font-size: 0.82em;
+  color: var(--muted);
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border);
+}
+.swatch-bar {
+  height: 4px;
+  border-radius: 2px;
+  margin: 6px auto;
+  width: 60%;
+}
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.chart-caption { color: var(--muted); font-size: 0.84em; margin-bottom: 12px; }
+.chart-svg {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.84em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: var(--tooltip-bg);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.84em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 300px;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; }
+.node-circle:hover { stroke: var(--accent); stroke-width: 2px; }
+
+/* Summary table */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 0.88em;
+  background: #fff;
+  border: 1px solid var(--border);
+}
+.summary-table th {
+  background: var(--table-header);
+  color: var(--ink);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-3);
+}
+.summary-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.summary-table tr:nth-child(even) td { background: var(--table-stripe); }
+.summary-table tr:hover td { background: #f5efe4; }
+.summary-table .sense-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.theorist-block {
+  margin-top: 18px;
+}
+.theorist-block h3 {
+  font-size: 1.1em;
+  color: var(--accent-2);
+  margin-bottom: 8px;
+  border-left: 3px solid var(--accent-3);
+  padding-left: 8px;
+}
+.theorist-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+.theorist-item {
+  background: var(--paper);
+  padding: 8px 12px;
+  border-radius: 4px;
+  border-left: 3px solid var(--border);
+  font-size: 0.86em;
+}
+.theorist-item .t-name { font-weight: 600; color: var(--ink); }
+.theorist-item .t-sense { color: var(--muted); font-size: 0.9em; }
+
+/* Insight */
+.insight-list { list-style: none; }
+.insight-list li {
+  background: var(--paper);
+  margin: 8px 0;
+  padding: 12px 15px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 2px;
+}
+.insight-list li strong { color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .senses-grid { grid-template-columns: repeat(2, 1fr); }
+  header.hero { padding: 32px 18px; }
+  header.hero h1 { font-size: 1.8em; letter-spacing: 2px; }
+  .section { padding: 18px; }
+  .section-title { font-size: 1.3em; }
+  .summary-table { font-size: 0.8em; }
+  .summary-table th, .summary-table td { padding: 7px 8px; }
+}
+@media (max-width: 520px) {
+  .senses-grid { grid-template-columns: 1fr; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  body { padding: 10px; }
+  header.hero h1 { font-size: 1.5em; }
+  .theorist-list { grid-template-columns: 1fr; }
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.84em;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="hero">
+  <h1>六感叙事学关系图谱</h1>
+  <div class="subtitle">SIX-SENSES NARRATOLOGY NETWORK</div>
+  <div class="meta">W168 · D 方向 · 第 13 个 NLP 可视化 · 基于 W161-W167 七大感官叙事学专题</div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">专题数（W161-W167）</div></div>
+  <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">感官维度</div></div>
+  <div class="kpi-card"><div class="kpi-value">196</div><div class="kpi-label">术语总量（28×7）</div></div>
+  <div class="kpi-card"><div class="kpi-value">28</div><div class="kpi-label">理论家数</div></div>
+  <div class="kpi-card"><div class="kpi-value">35</div><div class="kpi-label">西游案例</div></div>
+  <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">四层结构</div></div>
+</div>
+
+<!-- Section 1: 概览 -->
+<section class="section" id="overview">
+  <h2 class="section-title">壹 · 六感叙事学概览</h2>
+  <div class="section-sub">SIX-SENSES NARRATOLOGY OVERVIEW</div>
+  <div class="definition">
+    <strong>定义：</strong>六感叙事学以时间、空间、听觉、嗅觉、触觉、视觉、味觉七大感官维度为坐标，构建《西游记》的感知-叙事映射体系。每个感官维度对应一个专题（W161-W167），下辖 28 个核心术语、4 位理论家、5 个西游案例与 4 层叙事结构。七大感官共同构成「感知—叙事—结构—案例」四层叙事学分析框架。
+  </div>
+  <div class="senses-grid" id="senses-grid"></div>
+</section>
+
+<!-- Section 2: 力导向图 -->
+<section class="section" id="force-graph">
+  <h2 class="section-title alt">贰 · 七感官-理论家-四层结构力导向图</h2>
+  <div class="section-sub">FORCE-DIRECTED GRAPH: SENSES · THEORISTS · STRUCTURES</div>
+  <div class="definition">
+    <strong>定义：</strong>以七个感官主节点为枢纽，内连结构链（感官间环状连接），外连 28 位理论家节点。力导向布局呈现「感官中心—理论家卫星」的星群结构，节点大小反映度数，颜色区分感官归属。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">七感官-理论家力导向图（中心=七感官 · 外圈=28 理论家 · 环连=感官结构链）</div>
+    <div class="chart-caption">节点颜色：感官配色 · 节点大小=度数 · hover 显示详情 · 可拖拽</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="620"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3: 雷达图 -->
+<section class="section" id="radar">
+  <h2 class="section-title alt-2">叁 · 七感官叙事学维度雷达图</h2>
+  <div class="section-sub">RADAR: SEVEN SENSES × FOUR DIMENSIONS</div>
+  <div class="definition">
+    <strong>定义：</strong>七维度评估七感官——术语数、案例数、理论家数、交叉引用度。雷达面积越大，该感官的叙事学负载越重。视觉与空间引用度最高，味觉最低，反映感官在叙事中的能指密度梯度。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">七感官四维度雷达图（术语数/案例数/理论家数/引用度）</div>
+    <div class="chart-caption">7 感官 × 4 维度 · 数值归一化 0-10 · hover 查看详情</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="540"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4: 桑基图 -->
+<section class="section" id="sankey">
+  <h2 class="section-title">肆 · 感官-四层结构-西游案例桑基图</h2>
+  <div class="section-sub">SANKEY: SENSE → STRUCTURE → CASE</div>
+  <div class="definition">
+    <strong>定义：</strong>桑基图展示三层流向：感官 → 四层结构术语 → 西游案例。流量粗细对应叙事权重。可视化每个感官维度如何经由结构术语映射到具体西游场景，揭示感知到文本的转化路径。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">感官-结构-案例三层桑基图</div>
+    <div class="chart-caption">左起：七感官 → 四层结构术语 → 西游案例 · 流量=叙事权重 · hover 高亮路径</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="580"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5: 时间线 -->
+<section class="section" id="timeline">
+  <h2 class="section-title alt">伍 · W161-W167 专题时间线</h2>
+  <div class="section-sub">TIMELINE: SEVEN TOPICS &amp; THEORIST ERAS</div>
+  <div class="definition">
+    <strong>定义：</strong>按 W161-W167 专题序排列七大感官叙事学的创建时序，并标注每位理论家的活跃年代跨度。时间线呈现从古典（奥古斯丁公元 4 世纪）到当代（萨顿 2012）的理论谱系，覆盖 1600 余年叙事学思想史。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">七专题时间线 + 理论家年代标注</div>
+    <div class="chart-caption">X 轴：W161-W167 专题序 · 节点：感官配色 · hover 显示理论家与年代</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="460"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6: 汇总表 -->
+<section class="section" id="summary">
+  <h2 class="section-title alt-2">陆 · 六感叙事学汇总表</h2>
+  <div class="section-sub">SUMMARY: SENSES · THEORISTS · STRUCTURES</div>
+  <div class="definition">
+    <strong>定义：</strong>汇总七感官维度的完整数据——专题编号、理论家数、术语数、案例数、引用度、理论年代跨度。下方列出 28 位理论家按感官分组清单，构成六感叙事学的完整知识图谱。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">七感官叙事学维度汇总表</div>
+    <div class="chart-caption">7 感官 × 6 字段 · 点击表头排序 · hover 高亮</div>
+    <div id="summary-table-wrap"></div>
+  </div>
+  <div class="theorist-block">
+    <h3>28 位理论家清单（按感官分组）</h3>
+    <div id="theorist-list" class="theorist-list"></div>
+  </div>
+</section>
+
+<footer>
+  <p>W168 六感叙事学关系图谱 · D 方向 · 第 13 个 NLP 可视化 · 基于 W161-W167 七大感官叙事学专题</p>
+  <p>古典宣纸风配色 · D3.js v7 · F6 skeleton（fetchJson → loadData → main → render×N → cache → resize）</p>
+  <p id="dataSource">数据源：嵌入数据 EMBEDDED_DATA（file:// 模式可直接打开）</p>
+</footer>
+
+</div>
+
+<script>
+// ============================================================
+// EMBEDDED DATA —— 六感叙事学数据（W168）
+// ============================================================
+const EMBEDDED_DATA = {
+  sixSenses: {
+    // 七感官主节点
+    senses: [
+      { id: "time", name: "时间叙事学", sense: "时间", color: "#8B4513", 专题: "W161", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 85, 理论年代: "公元4世纪-20世纪" },
+      { id: "space", name: "空间叙事学", sense: "空间", color: "#A0522D", 专题: "W162", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 88, 理论年代: "1974-1996" },
+      { id: "auditory", name: "听觉叙事学", sense: "听觉", color: "#CD853F", 专题: "W163", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 82, 理论年代: "1972-1998" },
+      { id: "olfactory", name: "嗅觉叙事学", sense: "嗅觉", color: "#DAA520", 专题: "W164", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 78, 理论年代: "1798-2002" },
+      { id: "tactile", name: "触觉叙事学", sense: "触觉", color: "#B8860B", 专题: "W165", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 80, 理论年代: "1945-2008" },
+      { id: "visual", name: "视觉叙事学", sense: "视觉", color: "#D2691E", 专题: "W166", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 90, 理论年代: "1972-1994" },
+      { id: "gustatory", name: "味觉叙事学", sense: "味觉", color: "#BC8F8F", 专题: "W167", 理论家数: 4, 术语数: 28, 案例数: 5, 引用度: 75, 理论年代: "1999-2012" }
+    ],
+    nodes: [
+      // 7 个感官主节点
+      { id: "time", name: "时间叙事学", sense: "时间", color: "#8B4513", 专题: "W161", 理论家数: 4, 术语数: 28, 案例数: 5 },
+      { id: "space", name: "空间叙事学", sense: "空间", color: "#A0522D", 专题: "W162", 理论家数: 4, 术语数: 28, 案例数: 5 },
+      { id: "auditory", name: "听觉叙事学", sense: "听觉", color: "#CD853F", 专题: "W163", 理论家数: 4, 术语数: 28, 案例数: 5 },
+      { id: "olfactory", name: "嗅觉叙事学", sense: "嗅觉", color: "#DAA520", 专题: "W164", 理论家数: 4, 术语数: 28, 案例数: 5 },
+      { id: "tactile", name: "触觉叙事学", sense: "触觉", color: "#B8860B", 专题: "W165", 理论家数: 4, 术语数: 28, 案例数: 5 },
+      { id: "visual", name: "视觉叙事学", sense: "视觉", color: "#D2691E", 专题: "W166", 理论家数: 4, 术语数: 28, 案例数: 5 },
+      { id: "gustatory", name: "味觉叙事学", sense: "味觉", color: "#BC8F8F", 专题: "W167", 理论家数: 4, 术语数: 28, 案例数: 5 },
+      // 理论家节点（每个感官 4 个，共 28 个）
+      // 时间叙事学理论家
+      { id: "t1", name: "奥古斯丁", parent: "time", type: "theorist" },
+      { id: "t2", name: "海德格尔", parent: "time", type: "theorist" },
+      { id: "t3", name: "保罗·利科", parent: "time", type: "theorist" },
+      { id: "t4", name: "巴赫金", parent: "time", type: "theorist" },
+      // 空间叙事学理论家
+      { id: "s1", name: "列斐伏尔", parent: "space", type: "theorist" },
+      { id: "s2", name: "福柯", parent: "space", type: "theorist" },
+      { id: "s3", name: "大卫·哈维", parent: "space", type: "theorist" },
+      { id: "s4", name: "索雅", parent: "space", type: "theorist" },
+      // 听觉叙事学理论家
+      { id: "a1", name: "肖恩·洛克本", parent: "auditory", type: "theorist" },
+      { id: "a2", name: "唐纳德·霍顿", parent: "auditory", type: "theorist" },
+      { id: "a3", name: "罗兰·巴特", parent: "auditory", type: "theorist" },
+      { id: "a4", name: "雷蒙德·默里·谢弗", parent: "auditory", type: "theorist" },
+      // 嗅觉叙事学理论家
+      { id: "o1", name: "康德", parent: "olfactory", type: "theorist" },
+      { id: "o2", name: "大卫·豪斯", parent: "olfactory", type: "theorist" },
+      { id: "o3", name: "吉姆·德罗布尼克", parent: "olfactory", type: "theorist" },
+      { id: "o4", name: "雷切尔·赫尔兹", parent: "olfactory", type: "theorist" },
+      // 触觉叙事学理论家
+      { id: "ta1", name: "梅洛-庞蒂", parent: "tactile", type: "theorist" },
+      { id: "ta2", name: "马塞尔·莫斯", parent: "tactile", type: "theorist" },
+      { id: "ta3", name: "让-吕克·南希", parent: "tactile", type: "theorist" },
+      { id: "ta4", name: "阿德里安·帕坦", parent: "tactile", type: "theorist" },
+      // 视觉叙事学理论家
+      { id: "v1", name: "约翰·伯格", parent: "visual", type: "theorist" },
+      { id: "v2", name: "劳拉·穆尔维", parent: "visual", type: "theorist" },
+      { id: "v3", name: "W.J.T.米歇尔", parent: "visual", type: "theorist" },
+      { id: "v4", name: "马丁·杰伊", parent: "visual", type: "theorist" },
+      // 味觉叙事学理论家
+      { id: "g1", name: "卡罗尔·库恩卡斯", parent: "gustatory", type: "theorist" },
+      { id: "g2", name: "巴里·史密斯", parent: "gustatory", type: "theorist" },
+      { id: "g3", name: "戈登·谢泼德", parent: "gustatory", type: "theorist" },
+      { id: "g4", name: "大卫·萨顿", parent: "gustatory", type: "theorist" }
+    ],
+    links: [
+      // 感官内部连接（形成六感结构环）
+      { source: "time", target: "space", type: "结构" },
+      { source: "space", target: "auditory", type: "结构" },
+      { source: "auditory", target: "olfactory", type: "结构" },
+      { source: "olfactory", target: "tactile", type: "结构" },
+      { source: "tactile", target: "visual", type: "结构" },
+      { source: "visual", target: "gustatory", type: "结构" },
+      // 感官到理论家连接（每个感官 4 个）
+      { source: "time", target: "t1" }, { source: "time", target: "t2" }, { source: "time", target: "t3" }, { source: "time", target: "t4" },
+      { source: "space", target: "s1" }, { source: "space", target: "s2" }, { source: "space", target: "s3" }, { source: "space", target: "s4" },
+      { source: "auditory", target: "a1" }, { source: "auditory", target: "a2" }, { source: "auditory", target: "a3" }, { source: "auditory", target: "a4" },
+      { source: "olfactory", target: "o1" }, { source: "olfactory", target: "o2" }, { source: "olfactory", target: "o3" }, { source: "olfactory", target: "o4" },
+      { source: "tactile", target: "ta1" }, { source: "tactile", target: "ta2" }, { source: "tactile", target: "ta3" }, { source: "tactile", target: "ta4" },
+      { source: "visual", target: "v1" }, { source: "visual", target: "v2" }, { source: "visual", target: "v3" }, { source: "visual", target: "v4" },
+      { source: "gustatory", target: "g1" }, { source: "gustatory", target: "g2" }, { source: "gustatory", target: "g3" }, { source: "gustatory", target: "g4" }
+    ],
+    radar: [
+      { sense: "时间", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 85 },
+      { sense: "空间", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 88 },
+      { sense: "听觉", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 82 },
+      { sense: "嗅觉", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 78 },
+      { sense: "触觉", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 80 },
+      { sense: "视觉", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 90 },
+      { sense: "味觉", 术语数: 28, 案例数: 5, 理论家数: 4, 引用度: 75 }
+    ],
+    sankey: [
+      // 感官 → 四层结构
+      { source: "时间", target: "循环结构", value: 4 },
+      { source: "时间", target: "线性结构", value: 3 },
+      { source: "时间", target: "永恒结构", value: 2 },
+      { source: "时间", target: "瞬间结构", value: 2 },
+      { source: "空间", target: "垂直结构", value: 4 },
+      { source: "空间", target: "水平结构", value: 3 },
+      { source: "空间", target: "封闭结构", value: 3 },
+      { source: "空间", target: "开放结构", value: 2 },
+      { source: "听觉", target: "天籁", value: 3 },
+      { source: "听觉", target: "神谕", value: 3 },
+      { source: "听觉", target: "人声", value: 3 },
+      { source: "听觉", target: "妖音", value: 3 },
+      { source: "嗅觉", target: "仙气", value: 3 },
+      { source: "嗅觉", target: "妖风", value: 3 },
+      { source: "嗅觉", target: "烟火", value: 3 },
+      { source: "嗅觉", target: "药香", value: 3 },
+      { source: "触觉", target: "金箍", value: 3 },
+      { source: "触觉", target: "兵器", value: 3 },
+      { source: "触觉", target: "肌肤", value: 3 },
+      { source: "触觉", target: "法器", value: 3 },
+      { source: "视觉", target: "法相", value: 3 },
+      { source: "视觉", target: "幻象", value: 3 },
+      { source: "视觉", target: "凝视", value: 3 },
+      { source: "视觉", target: "显现", value: 3 },
+      { source: "味觉", target: "仙丹", value: 3 },
+      { source: "味觉", target: "人参果", value: 3 },
+      { source: "味觉", target: "素斋", value: 3 },
+      { source: "味觉", target: "妖食", value: 3 },
+      // 四层结构 → 案例
+      { source: "天籁", target: "花果山", value: 2 },
+      { source: "神谕", target: "雷音寺", value: 2 },
+      { source: "人声", target: "师徒对话", value: 2 },
+      { source: "妖音", target: "妖怪呼啸", value: 2 },
+      { source: "幻象", target: "白骨精三变", value: 2 },
+      { source: "凝视", target: "女儿国", value: 2 },
+      { source: "法相", target: "佛祖五指山", value: 2 },
+      { source: "显现", target: "真经显现", value: 2 },
+      { source: "仙丹", target: "蟠桃宴", value: 2 },
+      { source: "人参果", target: "镇元大仙", value: 2 },
+      { source: "素斋", target: "日常修行", value: 2 },
+      { source: "妖食", target: "唐僧肉", value: 2 }
+    ],
+    timeline: [
+      { 专题: "W161", 感官: "时间", 理论家: "奥古斯丁/海德格尔/利科/巴赫金", 创建: "2026-07-28", 理论年代: "公元4世纪-20世纪", 年代起点: 4, 年代终点: 1990 },
+      { 专题: "W162", 感官: "空间", 理论家: "列斐伏尔/福柯/哈维/索雅", 创建: "2026-07-28", 理论年代: "1974-1996", 年代起点: 1974, 年代终点: 1996 },
+      { 专题: "W163", 感官: "听觉", 理论家: "洛克本/霍顿/巴特/谢弗", 创建: "2026-07-28", 理论年代: "1972-1998", 年代起点: 1972, 年代终点: 1998 },
+      { 专题: "W164", 感官: "嗅觉", 理论家: "康德/豪斯/德罗布尼克/赫尔兹", 创建: "2026-07-28", 理论年代: "1798-2007", 年代起点: 1798, 年代终点: 2007 },
+      { 专题: "W165", 感官: "触觉", 理论家: "梅洛-庞蒂/莫斯/南希/帕坦", 创建: "2026-07-28", 理论年代: "1945-2008", 年代起点: 1945, 年代终点: 2008 },
+      { 专题: "W166", 感官: "视觉", 理论家: "伯格/穆尔维/米歇尔/杰伊", 创建: "2026-07-28", 理论年代: "1972-1994", 年代起点: 1972, 年代终点: 1994 },
+      { 专题: "W167", 感官: "味觉", 理论家: "库恩卡斯/史密斯/谢泼德/萨顿", 创建: "2026-07-28", 理论年代: "1999-2012", 年代起点: 1999, 年代终点: 2012 }
+    ]
+  }
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W168] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const sixSenses = await fetchJson(base + 'six-senses-narratology.json', 'sixSenses');
+  const ss = sixSenses.sixSenses || sixSenses;
+  return {
+    senses: ss.senses || EMBEDDED_DATA.sixSenses.senses,
+    network: ss.nodes ? { nodes: ss.nodes, links: ss.links } : { nodes: EMBEDDED_DATA.sixSenses.nodes, links: EMBEDDED_DATA.sixSenses.links },
+    radar: ss.radar || EMBEDDED_DATA.sixSenses.radar,
+    sankey: ss.sankey || EMBEDDED_DATA.sixSenses.sankey,
+    timeline: ss.timeline || EMBEDDED_DATA.sixSenses.timeline
+  };
+}
+
+// 感官配色查表
+function senseColorMap(senses) {
+  const m = {};
+  (senses || EMBEDDED_DATA.sixSenses.senses).forEach(s => { m[s.sense] = s.color; m[s.id] = s.color; });
+  return m;
+}
+
+// ============================================================
+// Section 1: 概览卡片
+// ============================================================
+function renderOverview(senses) {
+  const grid = d3.select('#senses-grid');
+  grid.html('');
+  if (!senses || senses.length === 0) {
+    grid.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+  const card = grid.selectAll('.sense-card')
+    .data(senses)
+    .enter()
+    .append('div')
+    .attr('class', 'sense-card')
+    .attr('role', 'button')
+    .attr('tabindex', '0')
+    .attr('aria-label', d => d.name + ' · ' + d.专题)
+    .each(function(d) { d3.select(this).style('border-top', '4px solid ' + d.color); });
+
+  card.append('div').attr('class', 'sense-name').text(d => d.sense);
+  card.append('div').attr('class', 'swatch-bar').each(function(d) { d3.select(this).style('background', d.color); });
+  card.append('div').attr('class', 'sense-tag').text(d => d.name + ' · ' + d.专题);
+  card.append('div').attr('class', 'sense-stats').text(d => '术语 ' + d.术语数 + ' · 理论家 ' + d.理论家数 + ' · 案例 ' + d.案例数 + ' · 引用 ' + d.引用度);
+
+  // 键盘 a11y
+  card.on('keydown', function(e, d) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showSenseTooltip(e, d);
+    }
+  });
+  card.on('click', function(e, d) { showSenseTooltip(e, d); });
+}
+
+function showSenseTooltip(event, d) {
+  let tip = d3.select('.tooltip');
+  if (tip.empty()) {
+    tip = d3.select('body').append('div').attr('class', 'tooltip');
+  }
+  tip.html('')
+    .style('opacity', 0.95)
+    .style('left', (event.pageX + 10) + 'px')
+    .style('top', (event.pageY - 28) + 'px');
+  tip.append('div').html('<strong>' + d.sense + ' · ' + d.name + '</strong>');
+  tip.append('div').text('专题：' + d.专题);
+  tip.append('div').text('术语数：' + d.术语数);
+  tip.append('div').text('理论家数：' + d.理论家数);
+  tip.append('div').text('案例数：' + d.案例数);
+  tip.append('div').text('引用度：' + d.引用度);
+  tip.append('div').text('理论年代：' + d.理论年代);
+  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3000);
+}
+
+// ============================================================
+// Section 2: 力导向图
+// ============================================================
+function renderForce(networkData) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 310).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 620;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const senseColors = senseColorMap(EMBEDDED_DATA.sixSenses.senses);
+  const senseNames = {};
+  EMBEDDED_DATA.sixSenses.senses.forEach(s => { senseNames[s.id] = s.sense; });
+
+  // 深拷贝节点避免 mutation
+  const nodes = networkData.nodes.map(d => ({ ...d }));
+  const links = networkData.links.map(d => ({ ...d }));
+
+  function nodeRadius(d) {
+    if (d.type === 'theorist') return 7;
+    return 18; // 感官主节点
+  }
+  function nodeFill(d) {
+    if (d.type === 'theorist') {
+      const parent = nodes.find(n => n.id === d.parent);
+      return parent ? parent.color : '#8a7a5a';
+    }
+    return d.color || '#8b4513';
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id)
+      .distance(d => d.type === '结构' ? 140 : 60)
+      .strength(d => d.type === '结构' ? 0.25 : 0.5))
+    .force('charge', d3.forceManyBody().strength(d => d.type === 'theorist' ? -120 : -520))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 8));
+
+  // 结构链（感官间）
+  const structLink = svg.append('g').selectAll('.struct-link')
+    .data(links.filter(l => l.type === '结构'))
+    .enter().append('line')
+    .attr('class', 'struct-link')
+    .attr('stroke', '#8b4513')
+    .attr('stroke-width', 2)
+    .attr('stroke-opacity', 0.5)
+    .attr('stroke-dasharray', '6,3');
+
+  // 理论家连接
+  const theoristLink = svg.append('g').selectAll('.t-link')
+    .data(links.filter(l => l.type !== '结构'))
+    .enter().append('line')
+    .attr('class', 't-link')
+    .attr('stroke', '#d4c5a9')
+    .attr('stroke-width', 1.2)
+    .attr('stroke-opacity', 0.55);
+
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', nodeFill)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      if (d.type === 'theorist') {
+        const parent = nodes.find(n => n.id === d.parent);
+        const parentSense = parent ? parent.sense : '';
+        tooltip.append('div').html('<strong>' + d.name + '</strong>');
+        tooltip.append('div').text('类型：理论家');
+        tooltip.append('div').text('归属：' + parentSense + '叙事学');
+      } else {
+        tooltip.append('div').html('<strong>' + d.sense + ' · ' + d.name + '</strong>');
+        tooltip.append('div').text('专题：' + d.专题);
+        tooltip.append('div').text('术语数：' + d.术语数);
+        tooltip.append('div').text('理论家数：' + d.理论家数);
+        tooltip.append('div').text('案例数：' + d.案例数);
+      }
+      const connected = links.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('关联边数：' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 拖拽
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => d.type === 'theorist' ? -14 : 4)
+    .attr('font-weight', d => d.type === 'theorist' ? 400 : 700)
+    .attr('font-size', d => d.type === 'theorist' ? 10 : 13)
+    .attr('fill', d => d.type === 'theorist' ? '#5a3828' : '#1a1410')
+    .text(d => d.type === 'theorist' ? d.name : d.sense);
+
+  sim.on('tick', () => {
+    structLink.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    theoristLink.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('cx', d => d.x).attr('cy', d => d.y);
+    label.attr('x', d => d.x).attr('y', d => d.y);
+  });
+
+  // 图例
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const legendItems = [
+    { label: '七感官主节点', color: '#8b4513' },
+    { label: '感官结构链（虚线）', color: '#8b4513', dashed: true },
+    { label: '理论家节点', color: '#d4c5a9' }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch')
+      .each(function() { d3.select(this).style('background', item.color).style('border', item.dashed ? '2px dashed #8b4513' : 'none'); });
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: 雷达图（7 感官 × 4 维度）
+// ============================================================
+function renderRadar(radarData) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!radarData || radarData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 270).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 540;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const dimensions = ['术语数', '案例数', '理论家数', '引用度'];
+  const senseColors = senseColorMap(EMBEDDED_DATA.sixSenses.senses);
+
+  // 归一化：每维度映射到 0-10
+  const maxes = {};
+  dimensions.forEach(dim => {
+    maxes[dim] = d3.max(radarData, d => d[dim]) || 1;
+  });
+
+  const cx = width / 2;
+  const cy = height / 2 + 10;
+  const radius = Math.min(width, height) / 2 - 90;
+  const levels = 5;
+
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  // 背景同心多边形
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // 轴线 + 标签
+  dimensions.forEach((dim, i) => {
+    const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1);
+    const labelR = radius + 28;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', '#1a1410')
+      .text(dim);
+  });
+
+  // 数值刻度
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6).attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '10px')
+      .attr('fill', '#8a7a5a')
+      .text(lvl * 2);
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 每个感官一个多边形
+  radarData.forEach(role => {
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      // 归一化到 0-10 后映射半径
+      const normalized = (role[dim] / maxes[dim]) * 10;
+      const rr = radius * (normalized / 10);
+      return [Math.cos(angle) * rr, Math.sin(angle) * rr];
+    });
+    const color = senseColors[role.sense] || '#8b4513';
+
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.12)
+      .attr('stroke', color)
+      .attr('stroke-width', 2)
+      .style('cursor', 'pointer')
+      .on('mouseover', function(e) {
+        d3.select(this).attr('fill-opacity', 0.35);
+        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.html('');
+        tooltip.append('div').html('<strong>' + role.sense + '叙事学</strong>');
+        dimensions.forEach(dim => {
+          tooltip.append('div').text(dim + '：' + role[dim]);
+        });
+      })
+      .on('mousemove', function(e) {
+        tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('fill-opacity', 0.12);
+        tooltip.transition().duration(400).style('opacity', 0);
+      });
+
+    // 顶点圆
+    points.forEach((p) => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 3.5)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 1);
+    });
+  });
+
+  // 图例
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  radarData.forEach(role => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', senseColors[role.sense] || '#8b4513'); });
+    item.append('span').text(role.sense);
+  });
+}
+
+// ============================================================
+// Section 4: 桑基图（感官 → 结构 → 案例）
+// ============================================================
+function buildSankeyGraph(linkData) {
+  // 从 links 提取节点，分三层：感官(0) / 结构(1) / 案例(2)
+  const senseNames = EMBEDDED_DATA.sixSenses.senses.map(s => s.sense);
+  const nodeMap = new Map();
+  // 判断每个节点层级：作为 source 但从不是 target → 感官；既是 target 又是 source → 结构；只是 target → 案例
+  const sources = new Set(linkData.map(l => l.source));
+  const targets = new Set(linkData.map(l => l.target));
+
+  linkData.forEach(l => {
+    if (!nodeMap.has(l.source)) {
+      const cat = senseNames.includes(l.source) ? 0 : 1;
+      nodeMap.set(l.source, { name: l.source, cat });
+    }
+    if (!nodeMap.has(l.target)) {
+      const cat = sources.has(l.target) ? 1 : 2;
+      nodeMap.set(l.target, { name: l.target, cat });
+    }
+  });
+  return {
+    nodes: Array.from(nodeMap.values()),
+    links: linkData.map(l => ({ source: l.source, target: l.target, value: l.value }))
+  };
+}
+
+function renderSankey(sankeyLinkData) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyLinkData || sankeyLinkData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 290).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 290).attr('fill', '#8b4513')
+      .text('d3-sankey 未加载，请检查 ../static/js/d3-sankey.min.js');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 580;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+
+  const senseColors = senseColorMap(EMBEDDED_DATA.sixSenses.senses);
+  const catColors = ['#8b4513', '#6b4226', '#8a7a5a'];
+
+  const graphData = buildSankeyGraph(sankeyLinkData);
+  // 深拷贝避免 mutation
+  const nodes = graphData.nodes.map(d => ({ ...d }));
+  const links = graphData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(16)
+    .nodePadding(8)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 链接
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => {
+      if (d.source.cat === 0) return senseColors[d.source.name] || catColors[0];
+      return catColors[d.source.cat] || '#8a7a5a';
+    })
+    .attr('stroke-width', d => Math.max(1, d.width))
+    .attr('stroke-opacity', 0.4)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.75);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('流量权重：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.4);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => Math.max(1, d.x1 - d.x0))
+    .attr('height', d => Math.max(1, d.y1 - d.y0))
+    .attr('fill', d => {
+      if (d.cat === 0) return senseColors[d.name] || catColors[0];
+      return catColors[d.cat] || '#8a7a5a';
+    })
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      const catLabel = ['感官', '四层结构', '西游案例'][d.cat] || '';
+      tooltip.append('div').text('层级：' + catLabel);
+      tooltip.append('div').text('流入：' + (d.targetLinks || []).length + ' · 流出：' + (d.sourceLinks || []).length);
+      tooltip.append('div').text('总流量：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点标签
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '11px')
+    .attr('fill', '#1a1410')
+    .text(d => d.name);
+
+  // 图例
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const layers = ['感官维度', '四层结构', '西游案例'];
+  layers.forEach((layer, i) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', catColors[i]); });
+    item.append('span').text(layer);
+  });
+}
+
+// ============================================================
+// Section 5: 时间线（W161-W167 + 理论家年代）
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 230).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 460;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const senseColors = senseColorMap(EMBEDDED_DATA.sixSenses.senses);
+  const margin = { top: 50, right: 40, bottom: 90, left: 60 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  // X 轴：W161-W167 专题序（等距分布）
+  const topics = timelineData.map((d, i) => ({ ...d, idx: i }));
+  const xScale = d3.scaleLinear()
+    .domain([0, topics.length - 1])
+    .range([0, innerW]);
+
+  // Y 轴：理论家年代跨度（用年代起点-终点做横向条带）
+  const yearMin = d3.min(topics, d => d.年代起点);
+  const yearMax = d3.max(topics, d => d.年代终点);
+  const yScale = d3.scaleLinear()
+    .domain([yearMin - 50, yearMax + 50])
+    .range([innerH, 0]);
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 背景网格
+  g.append('g')
+    .attr('class', 'grid')
+    .call(d3.axisLeft(yScale).tickSize(-innerW).tickFormat('').ticks(6))
+    .selectAll('line').attr('stroke', '#d4c5a9').attr('stroke-dasharray', '3,3').attr('opacity', 0.4);
+  g.select('.grid .domain').attr('stroke', 'none');
+
+  // 理论家年代跨度条（垂直）
+  topics.forEach(d => {
+    const cx = xScale(d.idx);
+    const y1 = yScale(d.年代起点);
+    const y2 = yScale(d.年代终点);
+    g.append('line')
+      .attr('x1', cx).attr('y1', y1)
+      .attr('x2', cx).attr('y2', y2)
+      .attr('stroke', senseColors[d.感官] || '#8b4513')
+      .attr('stroke-width', 8)
+      .attr('stroke-opacity', 0.35)
+      .attr('stroke-linecap', 'round');
+  });
+
+  // 主时间线（水平）
+  g.append('line')
+    .attr('x1', 0).attr('y1', innerH)
+    .attr('x2', innerW).attr('y2', innerH)
+    .attr('stroke', '#8b4513')
+    .attr('stroke-width', 2);
+
+  // 专题节点
+  g.selectAll('.topic-node')
+    .data(topics)
+    .enter()
+    .append('circle')
+    .attr('class', 'topic-node')
+    .attr('cx', d => xScale(d.idx))
+    .attr('cy', innerH)
+    .attr('r', 12)
+    .attr('fill', d => senseColors[d.感官] || '#8b4513')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2.5)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('r', 15);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.专题 + ' · ' + d.感官 + '叙事学</strong>');
+      tooltip.append('div').text('创建：' + d.创建);
+      tooltip.append('div').text('理论家：' + d.理论家);
+      tooltip.append('div').text('理论年代：' + d.理论年代);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('r', 12);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 专题标签（X 轴下方）
+  g.selectAll('.topic-label')
+    .data(topics)
+    .enter()
+    .append('text')
+    .attr('class', 'topic-label')
+    .attr('x', d => xScale(d.idx))
+    .attr('y', innerH + 24)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .attr('fill', d => senseColors[d.感官] || '#8b4513')
+    .text(d => d.专题);
+
+  // 感官标签（X 轴下方第二行）
+  g.selectAll('.sense-label')
+    .data(topics)
+    .enter()
+    .append('text')
+    .attr('class', 'sense-label')
+    .attr('x', d => xScale(d.idx))
+    .attr('y', innerH + 40)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '10px')
+    .attr('fill', '#5a3828')
+    .text(d => d.感官);
+
+  // 理论年代标注（顶部）
+  g.selectAll('.era-label')
+    .data(topics)
+    .enter()
+    .append('text')
+    .attr('class', 'era-label')
+    .attr('x', d => xScale(d.idx))
+    .attr('y', d => yScale(d.年代终点) - 8)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '9px')
+    .attr('fill', '#8a7a5a')
+    .text(d => d.理论年代);
+
+  // Y 轴
+  g.append('g')
+    .call(d3.axisLeft(yScale).ticks(6).tickFormat(d => d + '年'))
+    .selectAll('text').attr('font-size', '10px');
+
+  // 轴标题
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 65)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a5a')
+    .text('专题序（W161-W167）');
+  g.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -innerH / 2).attr('y', -45)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a5a')
+    .text('理论家活跃年代');
+
+  // 图例
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  EMBEDDED_DATA.sixSenses.senses.forEach(s => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', s.color); });
+    item.append('span').text(s.专题 + ' ' + s.sense);
+  });
+}
+
+// ============================================================
+// Section 6: 汇总表 + 理论家清单
+// ============================================================
+function renderSummary(senses, networkData) {
+  const wrap = d3.select('#summary-table-wrap');
+  wrap.html('');
+  if (!senses || senses.length === 0) {
+    wrap.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+
+  // 汇总表
+  const table = wrap.append('table').attr('class', 'summary-table');
+  const thead = table.append('thead').append('tr');
+  ['感官', '专题', '理论家数', '术语数', '案例数', '引用度', '理论年代'].forEach(h => {
+    thead.append('th').text(h);
+  });
+  const tbody = table.append('tbody');
+  const rows = tbody.selectAll('tr')
+    .data(senses)
+    .enter()
+    .append('tr')
+    .attr('role', 'row')
+    .attr('tabindex', '0');
+
+  rows.each(function(d) {
+    const tr = d3.select(this);
+    const td1 = tr.append('td');
+    td1.append('span').attr('class', 'sense-dot').each(function() { d3.select(this).style('background', d.color); });
+    td1.append('span').text(d.sense + '叙事学');
+    tr.append('td').text(d.专题);
+    tr.append('td').text(d.理论家数);
+    tr.append('td').text(d.术语数);
+    tr.append('td').text(d.案例数);
+    tr.append('td').text(d.引用度);
+    tr.append('td').text(d.理论年代);
+  });
+
+  // 理论家清单
+  const theoristList = d3.select('#theorist-list');
+  theoristList.html('');
+  const theorists = (networkData.nodes || []).filter(n => n.type === 'theorist');
+  if (theorists.length === 0) {
+    theoristList.append('div').attr('class', 'empty-state').text('暂无理论家数据');
+    return;
+  }
+  const senseColors = senseColorMap(senses);
+  const items = theoristList.selectAll('.theorist-item')
+    .data(theorists)
+    .enter()
+    .append('div')
+    .attr('class', 'theorist-item')
+    .each(function(d) {
+      const parent = (networkData.nodes || []).find(n => n.id === d.parent);
+      const senseName = parent ? parent.sense : '';
+      const color = parent ? parent.color : '#d4c5a9';
+      d3.select(this).style('border-left-color', color);
+      d3.select(this).append('div').attr('class', 't-name').text(d.name);
+      d3.select(this).append('div').attr('class', 't-sense').text(senseName + '叙事学');
+    });
+}
+
+// ============================================================
+// main：调度所有渲染函数
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      '数据源：实时加载自 <code>scripts/output/data/</code>（http server 模式）';
+  }
+
+  renderOverview(data.senses);
+  renderForce(data.network);
+  renderRadar(data.radar);
+  renderSankey(data.sankey);
+  renderTimeline(data.timeline);
+  renderSummary(data.senses, data.network);
+}
+
+// 响应式重绘（debounce 250ms）
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderOverview(data.senses);
+      renderForce(data.network);
+      renderRadar(data.radar);
+      renderSankey(data.sankey);
+      renderTimeline(data.timeline);
+      renderSummary(data.senses, data.network);
+    }
+  }, 250);
+});
+
+// 启动
+main();
+</script>
+</body>
+</html>

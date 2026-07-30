@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐声效与章回节奏 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --gold: #c9a14a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 44px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 72% 28%, rgba(232, 184, 133, 0.20), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.28em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 14px;
+            font-size: 0.86rem;
+            color: rgba(245, 233, 212, 0.66);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card:nth-child(2) { border-top-color: var(--accent-2); }
+        .kpi-card:nth-child(3) { border-top-color: var(--accent-4); }
+        .kpi-card:nth-child(4) { border-top-color: var(--gold); }
+        .kpi-card .label {
+            font-size: 0.74rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card:nth-child(2) .label { color: var(--accent-2); }
+        .kpi-card:nth-child(3) .label { color: var(--accent-4); }
+        .kpi-card:nth-child(4) .label { color: var(--gold); }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .value .unit {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--ink-soft);
+            margin-left: 2px;
+        }
+        .kpi-card .desc {
+            font-size: 0.84rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .chart-block { text-align: center; }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .chart-full { width: 100%; }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 18px;
+            margin-top: 14px;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-swatch {
+            width: 14px; height: 14px; border-radius: 3px;
+        }
+        .legend-dot {
+            width: 12px; height: 12px; border-radius: 50%;
+            border: 1.5px solid #fff;
+            box-shadow: 0 0 0 1px var(--ink-soft);
+        }
+        /* Movement timeline + cards */
+        .movement-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-top: 22px;
+            text-align: left;
+        }
+        .mv-card {
+            border-top: 3px solid var(--line);
+            padding: 12px 14px;
+            background: var(--bg);
+            border-radius: 4px;
+        }
+        .mv-card h4 {
+            font-size: 0.96rem;
+            margin-bottom: 4px;
+        }
+        .mv-meta {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 8px;
+        }
+        .mv-feature {
+            font-size: 0.84rem;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        .mv-parallel {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            font-style: italic;
+            border-top: 1px dashed var(--line);
+            padding-top: 6px;
+        }
+        /* Symmetry cards */
+        .sym-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+        .sym-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 18px;
+            background: linear-gradient(180deg, #fffdf8 0%, #faf7f2 100%);
+            box-shadow: 0 1px 2px rgba(60,40,20,0.05);
+        }
+        .sym-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--line);
+        }
+        .sym-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .sym-badge {
+            font-size: 0.72rem;
+            color: #fff;
+            padding: 2px 9px;
+            border-radius: 10px;
+            white-space: nowrap;
+            letter-spacing: 0.05em;
+        }
+        .sym-body {
+            display: grid;
+            grid-template-columns: 1fr 36px 1fr;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        .sym-side {
+            text-align: center;
+            padding: 8px 6px;
+            border-radius: 5px;
+        }
+        .sym-a { background: rgba(200, 70, 58, 0.07); }
+        .sym-b { background: rgba(58, 107, 140, 0.07); }
+        .sym-item {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+        .sym-owner {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+        }
+        .sym-chap {
+            font-size: 0.74rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+            margin-top: 2px;
+        }
+        .sym-vs {
+            text-align: center;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+        }
+        .sym-principle {
+            font-size: 0.84rem;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .sym-principle strong { color: var(--accent); }
+        .sym-feature {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            line-height: 1.6;
+        }
+        /* Climax table */
+        .climax-wrap {
+            max-height: 460px;
+            overflow-x: auto;
+            overflow-y: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .climax-wrap::-webkit-scrollbar { width: 8px; }
+        .climax-wrap::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: 4px; }
+        #climax-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+        #climax-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 10px 14px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        #climax-table tbody tr { border-bottom: 1px solid var(--line); }
+        #climax-table tbody tr:nth-child(even) { background: var(--bg); }
+        #climax-table tbody tr:hover { background: #fff8ec; }
+        #climax-table td { padding: 8px 14px; vertical-align: top; }
+        #climax-table td.num {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent);
+            font-weight: 600;
+            width: 70px;
+            text-align: center;
+        }
+        #climax-table td.phase { width: 90px; }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.74rem;
+            font-weight: 500;
+            color: #fff;
+            white-space: nowrap;
+        }
+        .climax-count {
+            font-size: 0.86rem;
+            color: var(--accent-2);
+            margin-bottom: 12px;
+        }
+        /* Insight box */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+        }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: 7px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong { color: var(--accent); font-weight: 600; }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        /* Tooltip */
+        #tooltip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.94);
+            color: #f5e9d4;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            max-width: 260px;
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 100;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+        }
+        #tooltip .tt-title {
+            font-weight: 600;
+            color: var(--accent-soft);
+            margin-bottom: 3px;
+            font-size: 0.84rem;
+        }
+        #tooltip .tt-row { line-height: 1.5; }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 820px) {
+            .movement-grid { grid-template-columns: repeat(2, 1fr); }
+            .sym-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.7rem; }
+        }
+        @media (max-width: 520px) {
+            .movement-grid { grid-template-columns: 1fr; }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>音乐声效与章回节奏 · 详解西游记</h1>
+        <div class="subtitle">MUSIC · SOUND · STRUCTURE</div>
+        <div class="tagline">短-长-短的波峰波谷，100 回是一首交响乐。</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../dashboard.html">← 返回数据看板</a>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>xiyouji/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">SOUND · 声效</div>
+                <div class="value">16<span class="unit">种</span></div>
+                <div class="desc">兵器·法器·法术·天象·自然·仪式·行进</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">RHYTHM · 章回节奏</div>
+                <div class="value">100<span class="unit">回 · 均 4.26/5</span></div>
+                <div class="desc">序曲 12 · 交响 85 · 尾声 3</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">SYMMETRY · 对称结构</div>
+                <div class="value">8<span class="unit">对</span></div>
+                <div class="desc">三复叙事 · 镜像对偶 · 法器呼应</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">MOVEMENT · 乐章</div>
+                <div class="value">4<span class="unit">乐章</span></div>
+                <div class="desc">序曲 · 收徒 · 交响 · 尾声</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：章回节奏折线图 -->
+        <section class="section">
+            <h2 class="section-title">章回节奏折线图</h2>
+            <div class="section-sub">X 轴为回目 1–100，Y 轴为节奏强度 1–5。背景按乐章阶段分段着色（序曲青蓝 / 交响朱红 / 尾声金黄），节奏达 5 的回目以圆点高亮。悬停查看详情。</div>
+            <div class="chart-block chart-full" id="rhythm-chart">
+                <svg id="rhythm-svg"></svg>
+            </div>
+            <div class="legend" id="rhythm-legend"></div>
+        </section>
+
+        <!-- 图表 2：乐章结构横向时间轴 -->
+        <section class="section">
+            <h2 class="section-title">乐章结构横向时间轴</h2>
+            <div class="section-sub">100 回按四乐章 duration_chapters 比例展开，对应贝多芬第九与马勒第五的交响结构。</div>
+            <div class="chart-block chart-full" id="movement-chart">
+                <svg id="movement-svg"></svg>
+            </div>
+            <div class="movement-grid" id="movement-grid"></div>
+        </section>
+
+        <!-- 图表 3：声效强度分布 -->
+        <section class="section">
+            <h2 class="section-title">声效强度分布</h2>
+            <div class="section-sub">16 种声效按类别分组，组内按 intensity（1–10）排序。颜色区分七大类别。</div>
+            <div class="chart-block chart-full" id="sound-chart">
+                <svg id="sound-svg"></svg>
+            </div>
+            <div class="legend" id="sound-legend"></div>
+        </section>
+
+        <!-- 图表 4：对称结构卡片网格 -->
+        <section class="section">
+            <h2 class="section-title">对称结构卡片网格</h2>
+            <div class="section-sub">8 对对称结构，左右对照 item_a vs item_b，含归属、回目、原理与对称类型徽章。</div>
+            <div class="sym-grid" id="symmetry-grid"></div>
+        </section>
+
+        <!-- 图表 5：节奏高潮榜 -->
+        <section class="section">
+            <h2 class="section-title">节奏高潮榜</h2>
+            <div class="section-sub">所有节奏达到最高潮（rhythm = 5）的回目，按回目顺序排列。</div>
+            <div class="climax-count" id="climax-count"></div>
+            <div class="climax-wrap">
+                <table id="climax-table">
+                    <thead>
+                        <tr>
+                            <th>回目</th>
+                            <th>阶段</th>
+                            <th>情节要点</th>
+                        </tr>
+                    </thead>
+                    <tbody id="climax-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <div id="tooltip"></div>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../index.html">返回首页</a> ·
+        <a href="../dashboard.html">数据看板</a> ·
+        数据生成：2026-07-21
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/05-诗词歌赋/原著诗词赏析.md">原著诗词赏析</a></div>
+    </footer>
+
+    <script>
+    // ============ 嵌入式 fallback 数据（fetch 失败时使用） ============
+    const EMBEDDED_DATA = {
+        summary: {
+            total_sounds: 16, total_chapters: 100, total_symmetries: 8, total_movements: 4,
+            avg_rhythm: 4.26, max_rhythm: 5, min_rhythm: 2,
+            phase_distribution: { "序曲": 12, "交响": 85, "尾声": 3 }
+        },
+        sounds: [
+            { name:"金箍棒破空", category:"兵器", owner:"孙悟空", sound_text:"呼呼作风响·崩崩似雷鸣", intensity:10, frequency:"高频出现", chapter_first:3, feature:"一万三千五百斤定海神针的破空声" },
+            { name:"九齿钉耙筑", category:"兵器", owner:"猪八戒", sound_text:"咚咚·如筑土墙", intensity:7, frequency:"中频", chapter_first:19, feature:"神兵锋利·连筑成坑" },
+            { name:"降妖宝杖", category:"兵器", owner:"沙僧", sound_text:"镗镗·似铜钟", intensity:7, frequency:"中频", chapter_first:22, feature:"降妖宝杖·声如铜钟" },
+            { name:"九环锡杖", category:"法器", owner:"唐僧", sound_text:"哗哗·九环相击", intensity:4, frequency:"高频出现", chapter_first:12, feature:"九环锡杖·地藏遗物" },
+            { name:"三昧真火", category:"法术", owner:"红孩儿", sound_text:"烘烘·如炉中炼", intensity:10, frequency:"短时集中", chapter_first:41, feature:"三昧真火·烘烘火光·烟伤人" },
+            { name:"三昧神风", category:"法术", owner:"黄风怪", sound_text:"飒飒·如刮天风", intensity:8, frequency:"短时集中", chapter_first:21, feature:"三昧神风·吹瞎悟空眼" },
+            { name:"芭蕉扇风", category:"法术", owner:"铁扇公主", sound_text:"呼呼·一扇八万四千里", intensity:10, frequency:"高潮集中", chapter_first:59, feature:"芭蕉扇风·灭阴火·吹飞人" },
+            { name:"雷部诸神", category:"天象", owner:"邓化·张藩", sound_text:"轰隆·雷鸣电闪", intensity:9, frequency:"车迟国斗法", chapter_first:45, feature:"五雷法指令·降雨诸神" },
+            { name:"龙吟", category:"自然", owner:"诸龙", sound_text:"吟吟·如击玉磬", intensity:6, frequency:"龙宫场景", chapter_first:3, feature:"龙吟·四海龙王" },
+            { name:"虎啸", category:"自然", owner:"虎力·虎精", sound_text:"吼吼·震动山谷", intensity:7, frequency:"妖王出场", chapter_first:29, feature:"黄袍怪·虎力大仙" },
+            { name:"诵经", category:"仪式", owner:"唐僧", sound_text:"喃喃·阿弥陀佛", intensity:3, frequency:"全程", chapter_first:12, feature:"唐僧念经·日常仪式" },
+            { name:"紧箍咒", category:"仪式", owner:"唐僧念·悟空受", sound_text:"嗡嗡·头痛欲裂", intensity:10, frequency:"中频出现", chapter_first:14, feature:"控制信号·负反馈启动" },
+            { name:"蟠桃会乐", category:"仪式", owner:"天宫", sound_text:"仙韶·钧天广乐", intensity:10, frequency:"蟠桃宴", chapter_first:5, feature:"天宫宴乐·钧天广乐" },
+            { name:"灵山佛号", category:"仪式", owner:"如来·诸佛", sound_text:"南无·阿弥陀佛", intensity:10, frequency:"灵山说法", chapter_first:7, feature:"灵山佛号·万佛同声" },
+            { name:"马蹄声", category:"行进", owner:"白龙马", sound_text:"嗒嗒·蹄声碎", intensity:2, frequency:"全程", chapter_first:15, feature:"白龙马蹄·取经路上" },
+            { name:"云车驾", category:"行进", owner:"诸神", sound_text:"隆隆·云车驾", intensity:5, frequency:"天将下凡", chapter_first:4, feature:"云车驾·天兵降临" }
+        ],
+        rhythm: [
+            { chapter:1, phase:"序曲", rhythm:5, feature:"石猴出世·拜师学艺·龙宫借宝·大闹天宫前奏" },
+            { chapter:2, phase:"序曲", rhythm:5, feature:"拜师菩提·学七十二变·筋斗云" },
+            { chapter:3, phase:"序曲", rhythm:5, feature:"龙宫借宝·地府销名" },
+            { chapter:4, phase:"序曲", rhythm:5, feature:"初登天庭·弼马温" },
+            { chapter:5, phase:"序曲", rhythm:5, feature:"搅乱蟠桃会·偷仙丹" },
+            { chapter:6, phase:"序曲", rhythm:4, feature:"二郎神擒悟空" },
+            { chapter:7, phase:"序曲", rhythm:5, feature:"大闹天宫·八卦炉·五行山" },
+            { chapter:8, phase:"序曲", rhythm:3, feature:"观音寻访取经人" },
+            { chapter:9, phase:"序曲", rhythm:2, feature:"陈光蕊·江流儿" },
+            { chapter:10, phase:"序曲", rhythm:2, feature:"魏徵斩龙·太宗游地府" },
+            { chapter:11, phase:"序曲", rhythm:3, feature:"太宗还魂·水陆大会" },
+            { chapter:12, phase:"序曲", rhythm:4, feature:"玄奘受命西行" },
+            { chapter:13, phase:"交响", rhythm:4, feature:"出长安·双叉岭" },
+            { chapter:14, phase:"交响", rhythm:5, feature:"收孙悟空·紧箍咒初现" },
+            { chapter:15, phase:"交响", rhythm:4, feature:"收白龙马" },
+            { chapter:16, phase:"交响", rhythm:4, feature:"观音禅院·黑熊精" },
+            { chapter:17, phase:"交响", rhythm:4, feature:"黑风洞·收黑熊精" },
+            { chapter:18, phase:"交响", rhythm:4, feature:"收猪八戒" },
+            { chapter:19, phase:"交响", rhythm:4, feature:"浮屠山·心经" },
+            { chapter:20, phase:"交响", rhythm:3, feature:"黄风岭前" },
+            { chapter:21, phase:"交响", rhythm:5, feature:"黄风怪·三昧神风" },
+            { chapter:22, phase:"交响", rhythm:4, feature:"收沙僧" },
+            { chapter:23, phase:"交响", rhythm:3, feature:"四圣试禅心" },
+            { chapter:24, phase:"交响", rhythm:5, feature:"五庄观·人参果树" },
+            { chapter:25, phase:"交响", rhythm:5, feature:"医治人参果树·镇元大仙结拜" },
+            { chapter:27, phase:"交响", rhythm:5, feature:"三打白骨精" },
+            { chapter:28, phase:"交响", rhythm:4, feature:"悟空被逐·黑松林" },
+            { chapter:29, phase:"交响", rhythm:4, feature:"黄袍怪·宝象国" },
+            { chapter:30, phase:"交响", rhythm:5, feature:"唐僧化虎·悟空回救" },
+            { chapter:32, phase:"交响", rhythm:5, feature:"平顶山·金角银角" },
+            { chapter:33, phase:"交响", rhythm:5, feature:"莲花洞·紫金红葫芦" },
+            { chapter:34, phase:"交响", rhythm:5, feature:"悟空智斗二魔" },
+            { chapter:35, phase:"交响", rhythm:4, feature:"老君收二童子" },
+            { chapter:36, phase:"交响", rhythm:3, feature:"宝林寺·夜谈" },
+            { chapter:37, phase:"交响", rhythm:4, feature:"乌鸡国·鬼王告状" },
+            { chapter:38, phase:"交响", rhythm:4, feature:"井底探真相" },
+            { chapter:39, phase:"交响", rhythm:4, feature:"文殊收青毛狮" },
+            { chapter:41, phase:"交响", rhythm:5, feature:"红孩儿·三昧真火" },
+            { chapter:42, phase:"交响", rhythm:5, feature:"观音收红孩儿" },
+            { chapter:43, phase:"交响", rhythm:4, feature:"黑水河·鼍龙" },
+            { chapter:44, phase:"交响", rhythm:3, feature:"车迟国·前奏" },
+            { chapter:45, phase:"交响", rhythm:5, feature:"车迟国·求雨斗法" },
+            { chapter:46, phase:"交响", rhythm:5, feature:"车迟国·三仙身亡" },
+            { chapter:47, phase:"交响", rhythm:4, feature:"通天河·灵感大王" },
+            { chapter:48, phase:"交响", rhythm:4, feature:"冰上行走·通天河底" },
+            { chapter:49, phase:"交响", rhythm:5, feature:"观音收金鱼" },
+            { chapter:50, phase:"交响", rhythm:5, feature:"金兜洞·金刚琢" },
+            { chapter:51, phase:"交响", rhythm:5, feature:"诸神兵器尽失" },
+            { chapter:52, phase:"交响", rhythm:5, feature:"老君收青牛" },
+            { chapter:53, phase:"交响", rhythm:5, feature:"女儿国·子母河" },
+            { chapter:54, phase:"交响", rhythm:5, feature:"女儿国·蝎子精" },
+            { chapter:55, phase:"交响", rhythm:5, feature:"琵琶洞·蝎子精" },
+            { chapter:56, phase:"交响", rhythm:3, feature:"悟空杀草寇·被逐" },
+            { chapter:57, phase:"交响", rhythm:5, feature:"真假美猴王" },
+            { chapter:58, phase:"交响", rhythm:5, feature:"如来辨真假" },
+            { chapter:59, phase:"交响", rhythm:5, feature:"芭蕉洞·一借芭蕉扇" },
+            { chapter:60, phase:"交响", rhythm:5, feature:"积雷山·牛魔王" },
+            { chapter:61, phase:"交响", rhythm:5, feature:"三借芭蕉扇·灭火焰山" },
+            { chapter:62, phase:"交响", rhythm:4, feature:"祭赛国·金光塔" },
+            { chapter:63, phase:"交响", rhythm:4, feature:"九头驸马·碧波潭" },
+            { chapter:64, phase:"交响", rhythm:3, feature:"荆棘岭·木仙庵" },
+            { chapter:65, phase:"交响", rhythm:5, feature:"小雷音寺·黄眉怪" },
+            { chapter:66, phase:"交响", rhythm:5, feature:"诸神皆入人种袋·弥勒收童子" },
+            { chapter:67, phase:"交响", rhythm:4, feature:"七绝山·蟒蛇精" },
+            { chapter:68, phase:"交响", rhythm:3, feature:"朱紫国·行医" },
+            { chapter:69, phase:"交响", rhythm:4, feature:"朱紫国·悟空行医" },
+            { chapter:70, phase:"交响", rhythm:4, feature:"麒麟山·獬豸洞" },
+            { chapter:71, phase:"交响", rhythm:5, feature:"观音收金毛犼" },
+            { chapter:72, phase:"交响", rhythm:4, feature:"盘丝洞·七蜘蛛" },
+            { chapter:73, phase:"交响", rhythm:4, feature:"黄花观·蜈蚣精" },
+            { chapter:74, phase:"交响", rhythm:5, feature:"狮驼岭·三大魔王" },
+            { chapter:75, phase:"交响", rhythm:5, feature:"狮驼国·大鹏" },
+            { chapter:76, phase:"交响", rhythm:5, feature:"阴阳二气瓶·悟空被收" },
+            { chapter:77, phase:"交响", rhythm:5, feature:"如来亲降·收大鹏" },
+            { chapter:78, phase:"交响", rhythm:5, feature:"比丘国·小儿心肝" },
+            { chapter:79, phase:"交响", rhythm:4, feature:"寿星收白鹿" },
+            { chapter:80, phase:"交响", rhythm:4, feature:"陷空山·老鼠精" },
+            { chapter:81, phase:"交响", rhythm:4, feature:"无底洞·老鼠精" },
+            { chapter:82, phase:"交响", rhythm:4, feature:"老鼠精·李天王牌位" },
+            { chapter:83, phase:"交响", rhythm:4, feature:"李天王收义女" },
+            { chapter:84, phase:"交响", rhythm:3, feature:"灭法国·杀僧" },
+            { chapter:85, phase:"交响", rhythm:4, feature:"隐雾山·豹子精" },
+            { chapter:86, phase:"交响", rhythm:4, feature:"隐雾山·连环洞" },
+            { chapter:87, phase:"交响", rhythm:3, feature:"凤仙郡·求雨" },
+            { chapter:88, phase:"交响", rhythm:4, feature:"玉华州·收徒" },
+            { chapter:89, phase:"交响", rhythm:5, feature:"竹节山·九灵元圣" },
+            { chapter:90, phase:"交响", rhythm:4, feature:"天尊收九灵元圣" },
+            { chapter:91, phase:"交响", rhythm:5, feature:"青龙山·三犀牛" },
+            { chapter:92, phase:"交响", rhythm:4, feature:"四星收三犀牛" },
+            { chapter:93, phase:"交响", rhythm:3, feature:"天竺国·前奏" },
+            { chapter:94, phase:"交响", rhythm:4, feature:"天竺·玉兔精" },
+            { chapter:95, phase:"交响", rhythm:4, feature:"嫦娥收玉兔" },
+            { chapter:96, phase:"交响", rhythm:3, feature:"寇员外·地府还魂" },
+            { chapter:97, phase:"交响", rhythm:3, feature:"寇员外家" },
+            { chapter:98, phase:"尾声", rhythm:5, feature:"凌云渡·灵山取经" },
+            { chapter:99, phase:"尾声", rhythm:4, feature:"通天河·老鼋经书落水" },
+            { chapter:100, phase:"尾声", rhythm:5, feature:"径回东土·五圣成真" }
+        ],
+        symmetry: [
+            { pair_name:"金角银角葫芦配对", item_a:"紫金红葫芦", item_b:"羊脂玉净瓶", owner_a:"金角大王", owner_b:"银角大王", chapter_a:33, chapter_b:33, principle:"人应人死·名应即入", symmetry_type:"法器对偶", feature:"老君二童子下凡·葫芦净瓶成对，皆为因果律武器" },
+            { pair_name:"金兜洞与小雷音寺法宝对比", item_a:"金刚琢", item_b:"金铙·人种袋", owner_a:"独角兕大王", owner_b:"黄眉童子", chapter_a:50, chapter_b:65, principle:"套尽诸神兵器 vs 收尽诸天神将", symmetry_type:"法宝呼应", feature:"均为道祖弥勒家底·皆需主人亲降" },
+            { pair_name:"车迟国斗法与比丘国斗法", item_a:"车迟国·虎鹿羊三仙", item_b:"比丘国·鹿精国丈", owner_a:"虎力·鹿力·羊力", owner_b:"南极寿星坐骑·白鹿", chapter_a:45, chapter_b:78, principle:"道家术士 vs 佛门正统·皆以鹿为媒介", symmetry_type:"斗法对偶", feature:"两次鹿精下凡·皆作道家术士·皆因寿星收伏" },
+            { pair_name:"真假美猴王与六耳猕猴", item_a:"孙悟空", item_b:"六耳猕猴", owner_a:"齐天大圣", owner_b:"混世四猴之一", chapter_a:57, chapter_b:58, principle:"二心竞斗·如来辨真", symmetry_type:"镜像对偶", feature:"二猴同貌同能·观音不能辨·谛听不敢言·唯如来识破" },
+            { pair_name:"女儿国与玉兔国公主", item_a:"女儿国·女王", item_b:"天竺国·真假公主", owner_a:"西梁女王", owner_b:"玉兔精·真公主", chapter_a:54, chapter_b:95, principle:"女色考验·真假难辨", symmetry_type:"女色对偶", feature:"取经末段呼应中段·皆以女色真伪考验" },
+            { pair_name:"黑熊精与红孩儿", item_a:"黑风洞·黑熊精", item_b:"火云洞·红孩儿", owner_a:"黑熊精", owner_b:"红孩儿", chapter_a:17, chapter_b:42, principle:"皆被观音收伏·皆为善财童子", symmetry_type:"归宿对偶", feature:"观音两次收伏幼龄妖王·皆纳入佛门" },
+            { pair_name:"通天河与流沙河", item_a:"通天河·灵感大王", item_b:"流沙河·沙僧", owner_a:"金鱼精", owner_b:"卷帘大将", chapter_a:47, chapter_b:22, principle:"渡河之难·皆为水族", symmetry_type:"渡河对偶", feature:"八百里渡河·一收一杀·水族不同归宿" },
+            { pair_name:"三借芭蕉扇与三打白骨精", item_a:"三打白骨精", item_b:"三借芭蕉扇", owner_a:"白骨夫人", owner_b:"铁扇公主·牛魔王", chapter_a:27, chapter_b:59, principle:"三次反复·成事艰难", symmetry_type:"三复对偶", feature:"古典叙事'三复结构'·两段皆以'三'为节奏" }
+        ],
+        movement: [
+            { movement:"第一乐章·序曲", chapters:"1-12", tempo:"Allegro·快板", duration_chapters:12, feature:"石猴出世·学艺·大闹天宫·五行山·取经人定", musical_parallel:"贝多芬第九·第一乐章·宏大序奏" },
+            { movement:"第二乐章·收徒", chapters:"13-22", tempo:"Andante·行板", duration_chapters:10, feature:"出长安·收悟空·白龙·八戒·沙僧·五圣成团", musical_parallel:"海顿创世·合唱成形段" },
+            { movement:"第三乐章·八十一难", chapters:"23-97", tempo:"Allegro-Presto·快板-急板交替", duration_chapters:75, feature:"九九八十一难·高潮-平缓-高潮的交响乐", musical_parallel:"马勒第五·交响中段·变奏交错" },
+            { movement:"第四乐章·尾声", chapters:"98-100", tempo:"Maestoso·庄严", duration_chapters:3, feature:"凌云渡脱胎·灵山取经·五圣成真", musical_parallel:"贝多芬第九·第四乐章·庄严颂歌" }
+        ]
+    };
+
+    // ============ 配色 ============
+    const PHASE_COLORS = { "序曲": "#3a6b8c", "交响": "#c8463a", "尾声": "#c9a14a" };
+    const CATEGORY_COLORS = {
+        "兵器": "#c8463a", "法器": "#3a6b8c", "法术": "#7a5230",
+        "天象": "#5a7a3a", "自然": "#6a8c6a", "仪式": "#c9a14a", "行进": "#8c5e4d"
+    };
+    const SYMMETRY_COLORS = {
+        "法器对偶": "#c8463a", "法宝呼应": "#3a6b8c", "斗法对偶": "#7a5230",
+        "镜像对偶": "#5a7a3a", "女色对偶": "#c9a14a", "归宿对偶": "#6a8c6a",
+        "渡河对偶": "#8c5e4d", "三复对偶": "#a0522d"
+    };
+    const MOVEMENT_COLORS = ["#3a6b8c", "#5a7a3a", "#c8463a", "#c9a14a"];
+
+    // ============ 图表 1：章回节奏折线图 ============
+    function renderRhythmChart(rhythmData) {
+        const wrap = document.getElementById("rhythm-chart");
+        const W = Math.max(200, wrap.clientWidth || 1100);
+        const H = 380;
+        const m = { top: 40, right: 28, bottom: 48, left: 46 };
+        const iw = W - m.left - m.right, ih = H - m.top - m.bottom;
+
+        const svg = d3.select("#rhythm-svg").attr("viewBox", `0 0 ${W} ${H}`);
+        svg.selectAll("*").remove();
+        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+
+        const x = d3.scaleLinear().domain([1, 100]).range([0, iw]);
+        const y = d3.scaleLinear().domain([0, 5.6]).range([ih, 0]);
+
+        const phases = [
+            { name: "序曲", from: 1, to: 12, color: PHASE_COLORS["序曲"] },
+            { name: "交响", from: 13, to: 97, color: PHASE_COLORS["交响"] },
+            { name: "尾声", from: 98, to: 100, color: PHASE_COLORS["尾声"] }
+        ];
+
+        // 阶段背景区带
+        g.selectAll(".band").data(phases).enter().append("rect")
+            .attr("x", d => x(d.from - 0.5)).attr("y", 0)
+            .attr("width",d => Math.max(0, x(d.to + 0.5) - x(d.from - 0.5)))
+            .attr("height", ih)
+            .attr("fill", d => d.color).attr("opacity", 0.08);
+
+        // 阶段标题
+        g.selectAll(".band-label").data(phases).enter().append("text")
+            .attr("x", d => (x(d.from) + x(d.to)) / 2)
+            .attr("y", -14).attr("text-anchor", "middle")
+            .style("font-size", "0.82rem").style("font-weight", "600")
+            .style("fill", d => d.color)
+            .text(d => `${d.name} · 第${d.from}-${d.to}回`);
+
+        // 水平网格线
+        g.selectAll(".grid").data([1, 2, 3, 4, 5]).enter().append("line")
+            .attr("x1", 0).attr("x2", iw)
+            .attr("y1", d => y(d)).attr("y2", d => y(d))
+            .attr("stroke", "#e6dcc6").attr("stroke-dasharray", "3 3")
+            .attr("stroke-width", 0.7).attr("shape-rendering", "crispEdges");
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${ih})`)
+            .call(d3.axisBottom(x)
+                .tickValues([1, 12, 22, 32, 42, 52, 62, 72, 82, 92, 100])
+                .tickFormat(d => d + "回").tickSize(5).tickSizeOuter(0))
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6b5e4d");
+        // Y 轴
+        g.append("g")
+            .call(d3.axisLeft(y).tickValues([1, 2, 3, 4, 5]).tickSize(5).tickSizeOuter(0))
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6b5e4d");
+
+        // 轴标题
+        g.append("text").attr("x", iw / 2).attr("y", ih + 38).attr("text-anchor", "middle")
+            .style("font-size", "0.8rem").style("fill", "#6b5e4d").text("回目");
+        g.append("text").attr("transform", "rotate(-90)")
+            .attr("x", -ih / 2).attr("y", -34).attr("text-anchor", "middle")
+            .style("font-size", "0.8rem").style("fill", "#6b5e4d").text("节奏强度 rhythm");
+
+        // 分段折线
+        const line = d3.line()
+            .x(d => x(d.chapter)).y(d => y(d.rhythm))
+            .curve(d3.curveMonotoneX);
+        phases.forEach(p => {
+            const seg = rhythmData.filter(d => d.phase === p.name)
+                .sort((a, b) => a.chapter - b.chapter);
+            if (seg.length > 1) {
+                g.append("path").datum(seg).attr("fill", "none")
+                    .attr("stroke", p.color).attr("stroke-width", 2.2)
+                    .attr("stroke-linejoin", "round").attr("stroke-linecap", "round")
+                    .attr("opacity", 0.9).attr("d", line);
+            }
+        });
+
+        // 数据点（rhythm=5 高亮）
+        const tooltip = d3.select("#tooltip");
+        g.selectAll(".dot").data(rhythmData).enter().append("circle")
+            .attr("cx", d => x(d.chapter)).attr("cy", d => y(d.rhythm))
+            .attr("r", d => d.rhythm === 5 ? 5 : 2.2)
+            .attr("fill", d => PHASE_COLORS[d.phase])
+            .attr("stroke", d => d.rhythm === 5 ? "#fff" : "none")
+            .attr("stroke-width", d => d.rhythm === 5 ? 1.5 : 0)
+            .attr("opacity", d => d.rhythm === 5 ? 1 : 0.55)
+            .style("cursor", "pointer")
+            .on("mouseover", function (e, d) {
+                d3.select(this).attr("r", d.rhythm === 5 ? 6.5 : 3.5);
+                tooltip.style("opacity", 1)
+                    .html(`<div class="tt-title">第 ${d.chapter} 回 · ${d.phase}</div>
+                           <div class="tt-row">节奏：<strong>${d.rhythm}/5</strong></div>
+                           <div class="tt-row">${d.feature}</div>`)
+                    .style("left", (e.pageX + 14) + "px")
+                    .style("top", (e.pageY - 10) + "px");
+            })
+            .on("mousemove", e => {
+                tooltip.style("left", (e.pageX + 14) + "px")
+                    .style("top", (e.pageY - 10) + "px");
+            })
+            .on("mouseout", function (e, d) {
+                d3.select(this).attr("r", d.rhythm === 5 ? 5 : 2.2);
+                tooltip.style("opacity", 0);
+            });
+
+        // 图例
+        const legend = d3.select("#rhythm-legend");
+        legend.selectAll("*").remove();
+        const legendItems = [
+            { type: "swatch", color: PHASE_COLORS["序曲"], text: "序曲（1-12）" },
+            { type: "swatch", color: PHASE_COLORS["交响"], text: "交响（13-97）" },
+            { type: "swatch", color: PHASE_COLORS["尾声"], text: "尾声（98-100）" },
+            { type: "dot", color: PHASE_COLORS["交响"], text: "rhythm = 5 高潮回目" }
+        ];
+        legend.selectAll(".legend-item").data(legendItems).enter()
+            .append("div").attr("class", "legend-item")
+            .html(d => d.type === "dot"
+                ? `<span class="legend-dot" style="background:${d.color}"></span><span>${d.text}</span>`
+                : `<span class="legend-swatch" style="background:${d.color};opacity:0.55"></span><span>${d.text}</span>`);
+    }
+
+    // ============ 图表 2：乐章结构横向时间轴 ============
+    function renderMovementChart(movements) {
+        const wrap = document.getElementById("movement-chart");
+        const W = Math.max(200, wrap.clientWidth || 1100);
+        const H = 150;
+        const m = { top: 22, right: 22, bottom: 22, left: 22 };
+        const iw = W - m.left - m.right;
+
+        const svg = d3.select("#movement-svg").attr("viewBox", `0 0 ${W} ${H}`);
+        svg.selectAll("*").remove();
+        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+
+        const total = d3.sum(movements, d => d.duration_chapters);
+        const x = d3.scaleLinear().domain([0, total]).range([0, iw]);
+
+        let acc = 0;
+        movements.forEach((mv, i) => {
+            const x0 = x(acc), x1 = x(acc + mv.duration_chapters);
+            acc += mv.duration_chapters;
+            const w = x1 - x0;
+            const color = MOVEMENT_COLORS[i];
+
+            g.append("rect").attr("x", x0).attr("y", 24)
+                .attr("width",Math.max(0, w)).attr("height", 56)
+                .attr("fill", color).attr("opacity", 0.88)
+                .attr("stroke", "#fff").attr("stroke-width", 2);
+
+            if (w > 90) {
+                g.append("text").attr("x", (x0 + x1) / 2).attr("y", 48)
+                    .attr("text-anchor", "middle").style("fill", "#fff")
+                    .style("font-size", "0.88rem").style("font-weight", "600")
+                    .text(mv.movement.split("·")[0]);
+                g.append("text").attr("x", (x0 + x1) / 2).attr("y", 68)
+                    .attr("text-anchor", "middle").style("fill", "rgba(255,255,255,0.9)")
+                    .style("font-size", "0.72rem")
+                    .text(`${mv.chapters} · ${mv.duration_chapters}回`);
+            } else {
+                // 尾声过窄，标签置于上方
+                g.append("line").attr("x1", (x0 + x1) / 2).attr("x2", (x0 + x1) / 2)
+                    .attr("y1", 20).attr("y2", 24).attr("stroke", color).attr("stroke-width", 1);
+                g.append("text").attr("x", (x0 + x1) / 2).attr("y", 14)
+                    .attr("text-anchor", "middle").style("fill", color)
+                    .style("font-size", "0.78rem").style("font-weight", "600")
+                    .text(mv.movement.split("·")[0]);
+            }
+            // 下方回目区间
+            g.append("text").attr("x", (x0 + x1) / 2).attr("y", 98)
+                .attr("text-anchor", "middle").style("fill", "#6b5e4d")
+                .style("font-size", "0.74rem").style("font-family", "JetBrains Mono, monospace")
+                .text(mv.chapters);
+        });
+
+        // 下方明细卡片
+        const grid = d3.select("#movement-grid");
+        grid.selectAll("*").remove();
+        const cards = grid.selectAll(".mv-card").data(movements).enter()
+            .append("div").attr("class", "mv-card")
+            .style("border-top-color", (d, i) => MOVEMENT_COLORS[i]);
+        cards.append("h4").style("color", (d, i) => MOVEMENT_COLORS[i]).text(d => d.movement);
+        cards.append("div").attr("class", "mv-meta")
+            .text(d => `${d.chapters} · ${d.duration_chapters}回 · ${d.tempo}`);
+        cards.append("div").attr("class", "mv-feature").text(d => d.feature);
+        cards.append("div").attr("class", "mv-parallel").text(d => "♪ " + d.musical_parallel);
+    }
+
+    // ============ 图表 3：声效强度分布 ============
+    function renderSoundChart(sounds) {
+        const wrap = document.getElementById("sound-chart");
+        const W = Math.max(200, wrap.clientWidth || 1000);
+        const rowH = 30, headerH = 30;
+        const cats = ["兵器", "法器", "法术", "天象", "自然", "仪式", "行进"];
+        const byCat = d3.group(sounds, d => d.category);
+
+        const rows = [];
+        cats.forEach(cat => {
+            if (!byCat.has(cat)) return;
+            rows.push({ type: "header", category: cat });
+            byCat.get(cat).sort((a, b) => b.intensity - a.intensity)
+                .forEach(s => rows.push({ type: "sound", ...s }));
+        });
+
+        const innerH = rows.length * rowH;
+        const H = innerH + 24;
+        const m = { top: 16, right: 40, bottom: 8, left: 200 };
+        const iw = W - m.left - m.right;
+
+        const svg = d3.select("#sound-svg").attr("viewBox", `0 0 ${W} ${H}`);
+        svg.selectAll("*").remove();
+        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+
+        const x = d3.scaleLinear().domain([0, 10]).range([0, iw]);
+
+        // 网格线
+        [2, 4, 6, 8, 10].forEach(v => {
+            g.append("line").attr("x1", x(v)).attr("x2", x(v))
+                .attr("y1", 0).attr("y2", innerH)
+                .attr("stroke", "#e6dcc6").attr("stroke-dasharray", "2 3")
+                .attr("stroke-width", 0.7).attr("shape-rendering", "crispEdges");
+            g.append("text").attr("x", x(v)).attr("y", innerH + 14)
+                .attr("text-anchor", "middle").style("fill", "#6b5e4d")
+                .style("font-size", "0.7rem").style("font-family", "JetBrains Mono, monospace")
+                .text(v);
+        });
+
+        const tooltip = d3.select("#tooltip");
+        let yPos = 0;
+        rows.forEach(r => {
+            if (r.type === "header") {
+                g.append("rect").attr("x", -m.left + 8).attr("y", yPos + 2)
+                    .attr("width",Math.max(0, W - 16)).attr("height", headerH - 6)
+                    .attr("fill", "#f5e9d4").attr("opacity", 0.55).attr("rx", 3);
+                g.append("rect").attr("x", -m.left + 8).attr("y", yPos + 2)
+                    .attr("width",4).attr("height", headerH - 6)
+                    .attr("fill", CATEGORY_COLORS[r.category]).attr("rx", 2);
+                g.append("text").attr("x", -m.left + 22).attr("y", yPos + headerH / 2 + 2)
+                    .attr("dy", "0.35em")
+                    .style("fill", CATEGORY_COLORS[r.category])
+                    .style("font-size", "0.92rem").style("font-weight", "600")
+                    .text(r.category);
+                yPos += headerH;
+            } else {
+                g.append("text").attr("x", -12).attr("y", yPos + rowH / 2)
+                    .attr("dy", "0.35em").attr("text-anchor", "end")
+                    .style("fill", "#2c2418").style("font-size", "0.82rem")
+                    .text(r.name);
+                g.append("text").attr("x", -12).attr("y", yPos + rowH / 2 + 12)
+                    .attr("dy", "0.35em").attr("text-anchor", "end")
+                    .style("fill", "#9a8c78").style("font-size", "0.66rem")
+                    .text(r.owner);
+                // 柱
+                g.append("rect").attr("x", 0).attr("y", yPos + 6)
+                    .attr("width",Math.max(0, x(r.intensity))).attr("height", rowH - 14)
+                    .attr("fill", CATEGORY_COLORS[r.category]).attr("opacity", 0.85)
+                    .attr("rx", 2).style("cursor", "pointer")
+                    .on("mouseover", function (e, d) {
+                        d3.select(this).attr("opacity", 1);
+                        tooltip.style("opacity", 1)
+                            .html(`<div class="tt-title">${r.name}</div>
+                                   <div class="tt-row">归属：${r.owner} · 类别：${r.category}</div>
+                                   <div class="tt-row">声效：${r.sound_text}</div>
+                                   <div class="tt-row">强度：<strong>${r.intensity}/10</strong> · 首现：第${r.chapter_first}回</div>
+                                   <div class="tt-row">${r.feature}</div>`)
+                            .style("left", (e.pageX + 14) + "px")
+                            .style("top", (e.pageY - 10) + "px");
+                    })
+                    .on("mousemove", e => {
+                        tooltip.style("left", (e.pageX + 14) + "px")
+                            .style("top", (e.pageY - 10) + "px");
+                    })
+                    .on("mouseout", function () {
+                        d3.select(this).attr("opacity", 0.85);
+                        tooltip.style("opacity", 0);
+                    });
+                // 数值
+                g.append("text").attr("x", x(r.intensity) + 6).attr("y", yPos + rowH / 2)
+                    .attr("dy", "0.35em")
+                    .style("fill", CATEGORY_COLORS[r.category])
+                    .style("font-size", "0.8rem").style("font-weight", "600")
+                    .style("font-family", "JetBrains Mono, monospace")
+                    .text(r.intensity);
+                yPos += rowH;
+            }
+        });
+
+        // X 轴标题
+        g.append("text").attr("x", iw / 2).attr("y", innerH + 14).attr("dy", "1.5em")
+            .attr("text-anchor", "middle").style("fill", "#6b5e4d")
+            .style("font-size", "0.8rem").text("强度 intensity（1–10）");
+
+        // 图例
+        const legend = d3.select("#sound-legend");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item").data(cats).enter()
+            .append("div").attr("class", "legend-item")
+            .html(c => `<span class="legend-swatch" style="background:${CATEGORY_COLORS[c]}"></span><span>${c}</span>`);
+    }
+
+    // ============ 图表 4：对称结构卡片网格 ============
+    function renderSymmetryCards(syms) {
+        const grid = d3.select("#symmetry-grid");
+        grid.selectAll("*").remove();
+        const cards = grid.selectAll(".sym-card").data(syms).enter()
+            .append("div").attr("class", "sym-card");
+
+        cards.append("div").attr("class", "sym-head")
+            .each(function (d) {
+                const head = d3.select(this);
+                head.append("span").attr("class", "sym-name").text(d.pair_name);
+                head.append("span").attr("class", "sym-badge")
+                    .style("background", SYMMETRY_COLORS[d.symmetry_type] || "#6b5e4d")
+                    .text(d.symmetry_type);
+            });
+
+        cards.each(function (d) {
+            const card = d3.select(this);
+            const body = card.append("div").attr("class", "sym-body");
+            const left = body.append("div").attr("class", "sym-side sym-a");
+            left.append("div").attr("class", "sym-item").text(d.item_a);
+            left.append("div").attr("class", "sym-owner").text(d.owner_a);
+            left.append("div").attr("class", "sym-chap").text(`第 ${d.chapter_a} 回`);
+            body.append("div").attr("class", "sym-vs").text("VS");
+            const right = body.append("div").attr("class", "sym-side sym-b");
+            right.append("div").attr("class", "sym-item").text(d.item_b);
+            right.append("div").attr("class", "sym-owner").text(d.owner_b);
+            right.append("div").attr("class", "sym-chap").text(`第 ${d.chapter_b} 回`);
+            card.append("div").attr("class", "sym-principle")
+                .html(`<strong>原理：</strong>${d.principle}`);
+            card.append("div").attr("class", "sym-feature").text(d.feature);
+        });
+    }
+
+    // ============ 图表 5：节奏高潮榜 ============
+    function renderClimaxTable(rhythmData) {
+        const climaxes = rhythmData.filter(d => d.rhythm === 5)
+            .sort((a, b) => a.chapter - b.chapter);
+        const tbody = d3.select("#climax-tbody");
+        tbody.selectAll("*").remove();
+        climaxes.forEach(d => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "num").text(d.chapter);
+            tr.append("td").attr("class", "phase")
+                .html(`<span class="tag" style="background:${PHASE_COLORS[d.phase]}">${d.phase}</span>`);
+            tr.append("td").text(d.feature);
+        });
+        d3.select("#climax-count")
+            .text(`共 ${climaxes.length} 回达到节奏最高潮（rhythm = 5），占全部 ${rhythmData.length} 回的 ${(climaxes.length / rhythmData.length * 100).toFixed(1)}%。`);
+    }
+
+    // ============ 关键洞察 ============
+    function renderInsights() {
+        const insights = [
+            `100 回是首交响乐：<strong>序曲 12 / 交响 85 / 尾声 3</strong>，短-长-短结构对应贝多芬第九的宏大序奏与庄严颂歌。`,
+            `三打白骨精（27）、真假美猴王（57）、狮驼岭（74-77）是节奏最高潮，rhythm = 5 的密集带恰是全书戏剧张力峰值。`,
+            `8 对称结构揭示<strong>"三复叙事"与镜像对偶</strong>的古典叙事美学——三打对三借、真假美猴王的镜像、观音两收幼龄妖王。`,
+            `芭蕉扇风、紧箍咒、金箍棒声 intensity 均为 <strong>10</strong>，为最响声效；蟠桃会乐、灵山佛号同为 10，仪式声压盖兵器。`,
+            `节奏均值 <strong>4.26/5</strong>，全书持续高位运行——西游记是"高潮密度极高"的交响叙事，少有真正的舒缓段。`,
+            `声效七类中<strong>仪式类强度最高</strong>（诵经 3 除外），兵器与法术紧随其后，行进类（马蹄 2）最轻——声响层级暗合"神圣 > 武力 > 日常"。`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => ul.append("li").html(text));
+    }
+
+    // ============ 数据加载 ============
+    async function loadData() {
+        const base = "../../scripts/output/data/";
+        const files = ["music_sounds.json", "chapter_rhythm.json", "chapter_symmetry.json",
+                       "chapter_movement.json", "music_structure_summary.json"];
+        try {
+            const results = await Promise.all(files.map(f =>
+                fetch(base + f).then(r => {
+                    if (!r.ok) throw new Error(r.status);
+                    return r.json();
+                })
+            ));
+            document.getElementById("dataSource").innerHTML =
+                '数据源：实时加载自 <code>scripts/output/data/</code>（http server 模式）';
+            return {
+                sounds: results[0], rhythm: results[1], symmetry: results[2],
+                movement: results[3], summary: results[4]
+            };
+        } catch (e) {
+            console.warn("[INFO] 使用嵌入数据：", e.message);
+            return EMBEDDED_DATA;
+        }
+    }
+
+    // ============ 主流程 ============
+    async function main() {
+        const data = await loadData();
+        window.__data = data;
+
+        renderRhythmChart(data.rhythm);
+        renderMovementChart(data.movement);
+        renderSoundChart(data.sounds);
+        renderSymmetryCards(data.symmetry);
+        renderClimaxTable(data.rhythm);
+        renderInsights();
+    }
+
+    // 响应式重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__data) {
+                renderRhythmChart(window.__data.rhythm);
+                renderMovementChart(window.__data.movement);
+                renderSoundChart(window.__data.sounds);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<!-- W181 · 妖怪女性群体关系图 · D 方向 · 第 13 个 NLP 可视化 -->
+<!-- 数据来源：W179 蜘蛛精七姐妹合集 + W173 女性主义叙事学 + 西游记原文 -->
+<!-- 承接：W155 天庭权力关系图 + W151 地府权力关系图 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>妖怪女性群体关系图 · W181</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="../static/js/d3-sankey.min.js"></script>
+<style>
+:root {
+  /* 古典宣纸风调色板（27 CSS 变量）*/
+  --bg: #f5f0e6;            /* 1 米色背景 */
+  --paper: #efe7d6;         /* 2 宣纸表面 */
+  --ink: #1a1410;           /* 3 深褐主文字 */
+  --accent: #8b4513;        /* 4 鞍棕强调 */
+  --accent-2: #5a3828;      /* 5 深木褐次强调 */
+  --accent-3: #6b4226;      /* 6 古铜辅助 */
+  --muted: #8a7a5a;         /* 7 灰褐次文字 */
+  --border: #d4c5a9;        /* 8 古卷边框 */
+  --card: #fbf6ec;          /* 9 卡片底色 */
+  --hero-bg-1: #1a1410;     /* 10 hero 起始 */
+  --hero-bg-2: #3a2820;     /* 11 hero 中段 */
+  --hero-bg-3: #5a3828;     /* 12 hero 终段 */
+  --hero-text: #f5f0e6;     /* 13 hero 文字 */
+  --hero-sub: #d4c5a9;      /* 14 hero 副标题 */
+  --hero-meta: #b8a888;     /* 15 hero meta */
+  --tooltip-bg: rgba(26,20,16,0.95); /* 16 tooltip 背景 */
+  /* 群体配色（17-21）*/
+  --type-spider: #8B0000;       /* 17 蜘蛛精系 暗红 */
+  --type-loner: #5a3828;        /* 18 孤妖系 深木褐 */
+  --type-collector: #D2691E;    /* 19 收编者 秋茄 */
+  --type-fate-kill: #8b0000;    /* 20 消灭命运 暗红 */
+  --type-fate-tame: #6b4226;    /* 21 收编命运 古铜 */
+  --type-fate-return: #DAA520;  /* 22 归位命运 金黄 */
+  --type-fate-cult: #8B4513;    /* 23 修行命运 鞍棕 */
+  --relation-kinship: #8B0000;  /* 24 亲情边 暗红 */
+  --relation-rivalry: #5a3828;  /* 25 敌对边 深木褐 */
+  --relation-taming: #D2691E;   /* 26 收编边 秋茄 */
+  --table-stripe: #efe7d6;      /* 27 表格斑马纹 */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Serif SC', 'Songti SC', serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  padding: 20px;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+
+/* Hero */
+header.hero {
+  background: linear-gradient(135deg, var(--hero-bg-1) 0%, var(--hero-bg-2) 50%, var(--hero-bg-3) 100%);
+  position: relative;
+  color: var(--hero-text);
+  padding: 52px 30px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  text-align: center;
+  border: 1px solid #2a1c14;
+  overflow: hidden;
+}
+header.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(212,197,169,0.18), transparent 60%);
+  pointer-events: none;
+}
+header.hero h1 {
+  font-size: 2.4em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--hero-text);
+  letter-spacing: 4px;
+  position: relative;
+}
+header.hero .subtitle {
+  font-size: 1.05em;
+  color: var(--hero-sub);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  position: relative;
+}
+header.hero .meta {
+  color: var(--hero-meta);
+  font-size: 0.85em;
+  margin-top: 10px;
+  position: relative;
+}
+
+/* Section */
+.section {
+  background: var(--card);
+  margin: 30px 0;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.section-title {
+  font-size: 1.6em;
+  color: var(--accent-2);
+  margin-bottom: 8px;
+  font-weight: 600;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+.section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+.section-sub {
+  color: var(--muted);
+  font-size: 0.88em;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+.definition {
+  background: var(--paper);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.94em;
+  border-radius: 2px;
+}
+
+/* KPI */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+.kpi-card {
+  background: var(--paper);
+  padding: 16px;
+  border-radius: 4px;
+  text-align: center;
+  border-top: 3px solid var(--accent);
+}
+.kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
+.kpi-label { color: var(--muted); font-size: 0.84em; margin-top: 4px; }
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.chart-caption { color: var(--muted); font-size: 0.84em; margin-bottom: 12px; }
+.chart-svg {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.84em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: var(--tooltip-bg);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.84em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 300px;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; }
+.node-circle:hover { stroke: var(--accent); stroke-width: 2px; }
+
+/* Summary table */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 0.84em;
+  background: #fff;
+  border: 1px solid var(--border);
+}
+.summary-table th {
+  background: var(--border);
+  color: var(--ink);
+  padding: 10px 10px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-3);
+  cursor: pointer;
+  user-select: none;
+}
+.summary-table th:hover { background: var(--accent-3); color: #fff; }
+.summary-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.summary-table tr:nth-child(even) td { background: var(--table-stripe); }
+.summary-table tr:hover td { background: #f5efe4; }
+.summary-table .type-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Insight */
+.insight-list { list-style: none; }
+.insight-list li {
+  background: var(--paper);
+  margin: 8px 0;
+  padding: 12px 15px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 2px;
+}
+.insight-list li strong { color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  header.hero { padding: 32px 18px; }
+  header.hero h1 { font-size: 1.8em; letter-spacing: 2px; }
+  .section { padding: 18px; }
+  .section-title { font-size: 1.3em; }
+  .summary-table { font-size: 0.78em; }
+  .summary-table th, .summary-table td { padding: 6px 7px; }
+}
+@media (max-width: 520px) {
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  body { padding: 10px; }
+  header.hero h1 { font-size: 1.5em; }
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.84em;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="hero">
+  <h1>妖怪女性群体关系图</h1>
+  <div class="subtitle">MONSTER FEMALE NETWORK</div>
+  <div class="meta">W181 · D 方向 · 第 13 个 NLP 可视化 · 西游记女性妖怪群体关系网络 · 承接 W155 天庭权力关系图 + W151 地府权力关系图 · 基于 W179 蜘蛛精七姐妹合集 + W173 女性主义叙事学</div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">17</div><div class="kpi-label">总节点数</div></div>
+  <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">蜘蛛精姐妹</div></div>
+  <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">其他女妖</div></div>
+  <div class="kpi-card"><div class="kpi-value">3</div><div class="kpi-label">收编者</div></div>
+  <div class="kpi-card"><div class="kpi-value">32</div><div class="kpi-label">关系边数</div></div>
+  <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">评估维度</div></div>
+</div>
+
+<!-- Section 1: 标题与导言 -->
+<section class="section" id="intro">
+  <h2 class="section-title">壹 · 妖怪女性群体关系图导言</h2>
+  <div class="section-sub">INTRODUCTION: MONSTER FEMALE NETWORK</div>
+  <div class="definition">
+    <strong>定义：</strong>妖怪女性群体关系图以《西游记》中 14 位女性妖怪为主体，结合 3 位女性神祇收编者（毗蓝婆菩萨、观音菩萨、黎山老母），构建「蜘蛛精七姐妹—孤妖群体—女性神祇」三层网络。蜘蛛精七姐妹作为小说中唯一以姐妹群形态登场的女妖群体（第 72-73 回盘丝洞），形成内亲外疏的姐妹共同体；其他七位女妖散布于取经全程（第 27-95 回），或为情欲所困（蝎子精、杏仙、老鼠精），或为夺夫而争（铁扇公主、玉面狐狸），或为幻化伪装（白骨精、玉兔精），折射出明代小说对女性欲望与危险的双重想象。三位女性神祇作为收编/降服者，构成与女妖对立的「正法女性」镜像。本图沿用力导向、桑基、雷达、时间线、汇总五维呈现，承接 W155/W151 权力关系图系列，对应 W173 女性主义叙事学专题。
+  </div>
+  <ul class="insight-list">
+    <li><strong>群体类型：</strong>蜘蛛精七姐妹为「血亲共同体」（盘丝洞同住、共浴、共谋），其余七位女妖为「孤妖个体」，仅以业缘、地缘、敌对等关系松散联结。</li>
+    <li><strong>命运归途：</strong>14 女妖中 10 位被消灭（蜘蛛精七姐妹 + 蝎子精 + 白骨精 + 玉面狐狸 + 杏仙），仅 3 位获得归位/收编/修行结局（玉兔精、老鼠精、铁扇公主），消灭率 71.4%。</li>
+    <li><strong>收编者角色：</strong>毗蓝婆菩萨（其子昴日星官杀蝎子精，应孙悟空之请收蜈蚣精）、观音菩萨（引荐老鼠精给托塔李天王）、黎山老母（曾化母女试师徒）三位女性神祇构成「正法女性」镜像。</li>
+    <li><strong>四维特征：</strong>自主性、战斗力、智慧、悲剧性四维度评分显示：铁扇公主综合最高（悲剧性 75），蜘蛛精七妹最年幼却悲剧性最强（70），收编者群体则智慧极高而悲剧性极低（15-25）。</li>
+  </ul>
+</section>
+
+<!-- Section 2: 力导向关系图 -->
+<section class="section" id="force">
+  <h2 class="section-title alt">贰 · 女性妖怪群体力导向关系图</h2>
+  <div class="section-sub">FORCE-DIRECTED GRAPH: 17 NODES × 32 EDGES</div>
+  <div class="definition">
+    <strong>定义：</strong>力导向图以 17 节点（蜘蛛精七姐妹 + 七孤妖 + 三收编者）为顶点，32 条边为关系。边类型分四类：姐妹亲情（蜘蛛精七姐妹内部）、敌对共侍（铁扇公主-玉面狐狸）、相邻同道（地缘相邻女妖）、收编关联（女性神祇→女妖）。节点颜色按群体类型区分（蜘蛛精系/孤妖系/收编者），节点大小反映度数，边粗细反映关系强度。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">女性妖怪群体力导向图（17 节点 · 32 边 · 可拖拽）</div>
+    <div class="chart-caption">节点颜色：群体类型 · 节点大小=度数 · 边颜色=关系类型 · 边粗细=关系强度 · hover 显示详情</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="680"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3: 桑基图 -->
+<section class="section" id="sankey">
+  <h2 class="section-title alt-2">叁 · 女妖命运归途桑基图</h2>
+  <div class="section-sub">SANKEY: 14 MONSTERS × EXECUTORS × FATE TYPES</div>
+  <div class="definition">
+    <strong>定义：</strong>桑基图展示三层流向：14 位女妖 → 命运执行者 → 结局类型。执行者包括孙悟空、猪八戒、昴日星官（毗蓝婆之子）、太阴星君、托塔李天王、自修六类；结局类型归纳为消灭、归位、收编、修行四类。流量粗细反映女妖数量。揭示女妖群体以「消灭」为主导命运的叙事规律，归位/收编/修行仅占 21.4%。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">女妖-执行者-结局三层桑基图</div>
+    <div class="chart-caption">左起：14 女妖 → 6 执行者 → 4 结局类型 · 流量=女妖数量 · hover 高亮路径</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="640"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4: 雷达图 -->
+<section class="section" id="radar">
+  <h2 class="section-title">肆 · 女性妖怪四维特征雷达图</h2>
+  <div class="section-sub">RADAR: AUTONOMY × COMBAT × WISDOM × TRAGEDY</div>
+  <div class="definition">
+    <strong>定义：</strong>从四个维度评估每位女性角色（含收编者）：自主性（独立行动与决策能力）、战斗力（武艺与法术强弱）、智慧（计谋与应变）、悲剧性（命运悲惨程度）。雷达面积越大，综合特征越突出。铁扇公主四维最均衡且悲剧性高，蝎子精战斗力最强（88），观音菩萨智慧最高（98）且悲剧性最低（15）。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">17 女性角色四维特征雷达图（自主性/战斗力/智慧/悲剧性）</div>
+    <div class="chart-caption">17 角色 × 4 维度 · 数值 0-100 · hover 查看详情</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="620"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5: 时间线 -->
+<section class="section" id="timeline">
+  <h2 class="section-title alt">伍 · 女妖出场与命运时间线</h2>
+  <div class="section-sub">TIMELINE: APPEARANCE × FATE BY CHAPTER</div>
+  <div class="definition">
+    <strong>定义：</strong>按《西游记》回目排列 14 位女妖的出场与命运时间点。最早出场为白骨精（第 27 回），最晚为玉兔精（第 95 回），跨度 68 回。节点大小反映四维综合分，颜色区分群体类型。揭示女妖在取经全程的分布密度——中后期（第 55-95 回）密集出现，前期（第 27-60 回）以孤妖为主。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">女妖出场回目与命运时间线</div>
+    <div class="chart-caption">X 轴：回目 · 节点大小=综合分 · 颜色=群体类型 · hover 显示命运归途</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="540"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6: 汇总表 -->
+<section class="section" id="summary">
+  <h2 class="section-title alt-2">陆 · 17 节点完整信息汇总表</h2>
+  <div class="section-sub">SUMMARY: 17 NODES COMPLETE TABLE</div>
+  <div class="definition">
+    <strong>定义：</strong>汇总 17 节点（蜘蛛精七姐妹 + 七孤妖 + 三收编者）的完整数据——群体类型、出场回目、居所、命运归途、四维评分、综合分。表头可点击排序，对应 W181 妖怪女性群体关系图完整知识网络，承接 W179 蜘蛛精七姐妹合集与 W173 女性主义叙事学专题。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">17 节点完整信息汇总表（点击表头排序）</div>
+    <div class="chart-caption">17 节点 × 10 字段 · 点击表头排序 · hover 高亮</div>
+    <div id="summary-table-wrap"></div>
+  </div>
+</section>
+
+<footer>
+  <p>W181 妖怪女性群体关系图 · D 方向 · 第 13 个 NLP 可视化 · 承接 W155 天庭权力关系图 + W151 地府权力关系图</p>
+  <p>基于 W179 蜘蛛精七姐妹合集 + W173 女性主义叙事学 · 古典宣纸风配色 · D3.js v7 · F6 skeleton</p>
+  <p id="dataSource">数据源：嵌入数据 EMBEDDED_DATA（file:// 模式可直接打开）</p>
+</footer>
+
+</div>
+
+<script>
+// ============================================================
+// EMBEDDED DATA —— 妖怪女性群体关系图数据（W181）
+// 数据来源：W179 蜘蛛精七姐妹合集 + W173 女性主义叙事学 + 西游记原文
+// ============================================================
+const EMBEDDED_DATA = {
+  monsterFemale: {
+    // 17 节点：蜘蛛精七姐妹（7）+ 七孤妖（7）+ 三收编者（3）
+    nodes: [
+      // 蜘蛛精七姐妹（7 节点 · 第 72-73 回 · 盘丝洞）
+      { id: "sp1", name: "蜘蛛精大姐", type: "spider", color: "#8B0000", 回目: 72, 居所: "盘丝洞", 命运: "被孙悟空消灭", 自主性: 70, 战斗力: 65, 智慧: 75, 悲剧性: 60, 简介: "蜘蛛精七姐妹之长，盘丝洞洞主，统率群妹" },
+      { id: "sp2", name: "蜘蛛精二姐", type: "spider", color: "#A52A2A", 回目: 72, 居所: "盘丝洞", 命运: "被孙悟空消灭", 自主性: 60, 战斗力: 60, 智慧: 65, 悲剧性: 65, 简介: "蜘蛛精二姐，紧随大姐" },
+      { id: "sp3", name: "蜘蛛精三姐", type: "spider", color: "#B22222", 回目: 72, 居所: "盘丝洞", 命运: "被孙悟空消灭", 自主性: 65, 战斗力: 62, 智慧: 68, 悲剧性: 62, 简介: "蜘蛛精三姐，居中调停" },
+      { id: "sp4", name: "蜘蛛精四姐", type: "spider", color: "#CD5C5C", 回目: 72, 居所: "盘丝洞", 命运: "被孙悟空消灭", 自主性: 58, 战斗力: 58, 智慧: 62, 悲剧性: 63, 简介: "蜘蛛精四姐" },
+      { id: "sp5", name: "蜘蛛精五姐", type: "spider", color: "#DC143C", 回目: 72, 居所: "盘丝洞", 命运: "被孙悟空消灭", 自主性: 55, 战斗力: 55, 智慧: 60, 悲剧性: 65, 简介: "蜘蛛精五姐" },
+      { id: "sp6", name: "蜘蛛精六姐", type: "spider", color: "#FF6347", 回目: 72, 居所: "盘丝洞", 命运: "被孙悟空消灭", 自主性: 52, 战斗力: 52, 智慧: 58, 悲剧性: 68, 简介: "蜘蛛精六姐" },
+      { id: "sp7", name: "蜘蛛精七妹", type: "spider", color: "#FF7F50", 回目: 72, 居所: "盘丝洞", 命运: "被孙悟空消灭", 自主性: 48, 战斗力: 48, 智慧: 55, 悲剧性: 70, 简介: "蜘蛛精七妹，最年幼，悲剧性最强" },
+      // 其他女妖（7 节点 · 散布取经全程）
+      { id: "bg", name: "白骨精", type: "loner", color: "#A9A9A9", 回目: 27, 居所: "白虎岭", 命运: "被孙悟空消灭", 自主性: 78, 战斗力: 60, 智慧: 82, 悲剧性: 50, 简介: "白骨夫人，三打白骨精，幻化三家" },
+      { id: "xz", name: "蝎子精", type: "loner", color: "#800080", 回目: 55, 居所: "毒敌山琵琶洞", 命运: "被昴日星官消灭", 自主性: 85, 战斗力: 88, 智慧: 72, 悲剧性: 65, 简介: "琵琶洞主，毒刺曾伤如来佛祖" },
+      { id: "ts", name: "铁扇公主", type: "loner", color: "#5a3828", 回目: 59, 居所: "翠云山芭蕉洞", 命运: "修行归正", 自主性: 90, 战斗力: 80, 智慧: 85, 悲剧性: 75, 简介: "牛魔王之妻，红孩儿之母，持芭蕉扇" },
+      { id: "ym", name: "玉面狐狸", type: "loner", color: "#FFC0CB", 回目: 60, 居所: "摩云洞", 命运: "被猪八戒消灭", 自主性: 55, 战斗力: 50, 智慧: 60, 悲剧性: 75, 简介: "万岁狐王之女，牛魔王之妾" },
+      { id: "xx", name: "杏仙", type: "loner", color: "#FFB6C1", 回目: 64, 居所: "荆棘岭木仙庵", 命运: "被猪八戒消灭", 自主性: 70, 战斗力: 45, 智慧: 68, 悲剧性: 80, 简介: "杏树化仙，文雅多情，与木仙庵众精谈诗" },
+      { id: "ls", name: "老鼠精", type: "loner", color: "#696969", 回目: 82, 居所: "陷空山无底洞", 命运: "天庭收编", 自主性: 82, 战斗力: 72, 智慧: 80, 悲剧性: 60, 简介: "金鼻白毛老鼠精，托塔李天王义女" },
+      { id: "yt", name: "玉兔精", type: "loner", color: "#DAA520", 回目: 95, 居所: "天竺国", 命运: "月宫归位", 自主性: 75, 战斗力: 70, 智慧: 78, 悲剧性: 55, 简介: "月宫玉兔下凡，化身天竺公主招亲" },
+      // 收编者（3 节点 · 女性神祇）
+      { id: "plp", name: "毗蓝婆菩萨", type: "collector", color: "#D2691E", 回目: 73, 居所: "紫云山千花洞", 命运: "收编者", 自主性: 95, 战斗力: 85, 智慧: 92, 悲剧性: 20, 简介: "收服百眼魔君（蜈蚣精），昴日星官之母" },
+      { id: "gy", name: "观音菩萨", type: "collector", color: "#BC8F8F", 回目: 0, 居所: "南海普陀落伽山", 命运: "收编者", 自主性: 98, 战斗力: 90, 智慧: 98, 悲剧性: 15, 简介: "南海观世音菩萨，取经团队护持" },
+      { id: "lsL", name: "黎山老母", type: "collector", color: "#A0522D", 回目: 23, 居所: "骊山", 命运: "收编者", 自主性: 96, 战斗力: 82, 智慧: 95, 悲剧性: 25, 简介: "黎山老母，曾化母女四人试师徒禅心" }
+    ],
+    // 32 条边：姐妹亲情 + 敌对共侍 + 相邻同道 + 收编关联
+    links: [
+      // 蜘蛛精姐妹亲情链（6 条）
+      { source: "sp1", target: "sp2", type: "姐妹亲情", 强度: 90 },
+      { source: "sp2", target: "sp3", type: "姐妹亲情", 强度: 90 },
+      { source: "sp3", target: "sp4", type: "姐妹亲情", 强度: 90 },
+      { source: "sp4", target: "sp5", type: "姐妹亲情", 强度: 90 },
+      { source: "sp5", target: "sp6", type: "姐妹亲情", 强度: 90 },
+      { source: "sp6", target: "sp7", type: "姐妹亲情", 强度: 90 },
+      // 蜘蛛精大姐领导（3 条）
+      { source: "sp1", target: "sp3", type: "领导关系", 强度: 75 },
+      { source: "sp1", target: "sp5", type: "领导关系", 强度: 70 },
+      { source: "sp1", target: "sp7", type: "领导关系", 强度: 65 },
+      // 蜘蛛精横向亲情（2 条）
+      { source: "sp3", target: "sp5", type: "姐妹亲情", 强度: 80 },
+      { source: "sp5", target: "sp7", type: "姐妹亲情", 强度: 75 },
+      // 女妖之间（7 条）
+      { source: "ts", target: "ym", type: "敌对共侍", 强度: 85 },
+      { source: "sp1", target: "xz", type: "相邻同道", 强度: 65 },
+      { source: "ts", target: "sp1", type: "女妖代表", 强度: 60 },
+      { source: "yt", target: "sp7", type: "月精蛛丝", 强度: 55 },
+      { source: "ls", target: "xz", type: "洞穴相邻", 强度: 60 },
+      { source: "bg", target: "xx", type: "皆小妖", 强度: 50 },
+      { source: "ts", target: "xx", type: "文雅同类", 强度: 55 },
+      // 收编者 → 女妖（7 条）
+      { source: "plp", target: "xz", type: "收编关联", 强度: 80 },
+      { source: "plp", target: "sp1", type: "降妖关联", 强度: 75 },
+      { source: "gy", target: "ls", type: "天庭引荐", 强度: 85 },
+      { source: "gy", target: "sp7", type: "点化", 强度: 70 },
+      { source: "gy", target: "yt", type: "月宫协调", 强度: 75 },
+      { source: "lsL", target: "sp3", type: "指点", 强度: 65 },
+      { source: "lsL", target: "ts", type: "指点", 强度: 70 },
+      // 收编者之间（3 条）
+      { source: "plp", target: "gy", type: "菩萨同修", 强度: 70 },
+      { source: "gy", target: "lsL", type: "菩萨同修", 强度: 75 },
+      { source: "plp", target: "lsL", type: "菩萨同修", 强度: 65 },
+      // 补充关联（4 条）
+      { source: "ym", target: "xz", type: "毒系相邻", 强度: 55 },
+      { source: "yt", target: "xx", type: "仙缘同类", 强度: 60 },
+      { source: "bg", target: "yt", type: "幻化同类", 强度: 50 },
+      { source: "gy", target: "sp4", type: "点化", 强度: 60 }
+    ],
+    // 桑基图数据：女妖 → 执行者 → 结局类型
+    sankey: [
+      // 女妖 → 执行者（14 条）
+      { source: "蜘蛛精大姐", target: "孙悟空", value: 1 },
+      { source: "蜘蛛精二姐", target: "孙悟空", value: 1 },
+      { source: "蜘蛛精三姐", target: "孙悟空", value: 1 },
+      { source: "蜘蛛精四姐", target: "孙悟空", value: 1 },
+      { source: "蜘蛛精五姐", target: "孙悟空", value: 1 },
+      { source: "蜘蛛精六姐", target: "孙悟空", value: 1 },
+      { source: "蜘蛛精七妹", target: "孙悟空", value: 1 },
+      { source: "白骨精", target: "孙悟空", value: 1 },
+      { source: "蝎子精", target: "昴日星官", value: 1 },
+      { source: "杏仙", target: "猪八戒", value: 1 },
+      { source: "玉面狐狸", target: "猪八戒", value: 1 },
+      { source: "玉兔精", target: "太阴星君", value: 1 },
+      { source: "老鼠精", target: "托塔李天王", value: 1 },
+      { source: "铁扇公主", target: "自修", value: 1 },
+      // 执行者 → 结局类型（6 条）
+      { source: "孙悟空", target: "消灭", value: 8 },
+      { source: "猪八戒", target: "消灭", value: 2 },
+      { source: "昴日星官", target: "消灭", value: 1 },
+      { source: "太阴星君", target: "归位", value: 1 },
+      { source: "托塔李天王", target: "收编", value: 1 },
+      { source: "自修", target: "修行", value: 1 }
+    ],
+    // 雷达图数据（17 角色 × 4 维度，0-100）
+    radar: [
+      { 名字: "蜘蛛精大姐", 自主性: 70, 战斗力: 65, 智慧: 75, 悲剧性: 60 },
+      { 名字: "蜘蛛精二姐", 自主性: 60, 战斗力: 60, 智慧: 65, 悲剧性: 65 },
+      { 名字: "蜘蛛精三姐", 自主性: 65, 战斗力: 62, 智慧: 68, 悲剧性: 62 },
+      { 名字: "蜘蛛精四姐", 自主性: 58, 战斗力: 58, 智慧: 62, 悲剧性: 63 },
+      { 名字: "蜘蛛精五姐", 自主性: 55, 战斗力: 55, 智慧: 60, 悲剧性: 65 },
+      { 名字: "蜘蛛精六姐", 自主性: 52, 战斗力: 52, 智慧: 58, 悲剧性: 68 },
+      { 名字: "蜘蛛精七妹", 自主性: 48, 战斗力: 48, 智慧: 55, 悲剧性: 70 },
+      { 名字: "白骨精", 自主性: 78, 战斗力: 60, 智慧: 82, 悲剧性: 50 },
+      { 名字: "蝎子精", 自主性: 85, 战斗力: 88, 智慧: 72, 悲剧性: 65 },
+      { 名字: "铁扇公主", 自主性: 90, 战斗力: 80, 智慧: 85, 悲剧性: 75 },
+      { 名字: "玉面狐狸", 自主性: 55, 战斗力: 50, 智慧: 60, 悲剧性: 75 },
+      { 名字: "杏仙", 自主性: 70, 战斗力: 45, 智慧: 68, 悲剧性: 80 },
+      { 名字: "老鼠精", 自主性: 82, 战斗力: 72, 智慧: 80, 悲剧性: 60 },
+      { 名字: "玉兔精", 自主性: 75, 战斗力: 70, 智慧: 78, 悲剧性: 55 },
+      { 名字: "毗蓝婆菩萨", 自主性: 95, 战斗力: 85, 智慧: 92, 悲剧性: 20 },
+      { 名字: "观音菩萨", 自主性: 98, 战斗力: 90, 智慧: 98, 悲剧性: 15 },
+      { 名字: "黎山老母", 自主性: 96, 战斗力: 82, 智慧: 95, 悲剧性: 25 }
+    ],
+    // 时间线数据（14 女妖按回目排序，不含收编者）
+    timeline: [
+      { 名字: "白骨精", 回目: 27, 回目名: "第二十七回", 命运: "孙悟空三打", 类型: "孤妖", color: "#A9A9A9", 综合分: 67 },
+      { 名字: "蝎子精", 回目: 55, 回目名: "第五十五回", 命运: "昴日星官消灭", 类型: "孤妖", color: "#800080", 综合分: 78 },
+      { 名字: "铁扇公主", 回目: 59, 回目名: "第五十九回", 命运: "修行归正", 类型: "孤妖", color: "#5a3828", 综合分: 82 },
+      { 名字: "玉面狐狸", 回目: 60, 回目名: "第六十回", 命运: "猪八戒消灭", 类型: "孤妖", color: "#FFC0CB", 综合分: 60 },
+      { 名字: "杏仙", 回目: 64, 回目名: "第六十四回", 命运: "猪八戒消灭", 类型: "孤妖", color: "#FFB6C1", 综合分: 66 },
+      { 名字: "蜘蛛精大姐", 回目: 72, 回目名: "第七十二回", 命运: "孙悟空消灭", 类型: "蜘蛛精", color: "#8B0000", 综合分: 67 },
+      { 名字: "蜘蛛精二姐", 回目: 72, 回目名: "第七十二回", 命运: "孙悟空消灭", 类型: "蜘蛛精", color: "#A52A2A", 综合分: 62 },
+      { 名字: "蜘蛛精三姐", 回目: 72, 回目名: "第七十二回", 命运: "孙悟空消灭", 类型: "蜘蛛精", color: "#B22222", 综合分: 64 },
+      { 名字: "蜘蛛精四姐", 回目: 72, 回目名: "第七十二回", 命运: "孙悟空消灭", 类型: "蜘蛛精", color: "#CD5C5C", 综合分: 60 },
+      { 名字: "蜘蛛精五姐", 回目: 72, 回目名: "第七十二回", 命运: "孙悟空消灭", 类型: "蜘蛛精", color: "#DC143C", 综合分: 59 },
+      { 名字: "蜘蛛精六姐", 回目: 72, 回目名: "第七十二回", 命运: "孙悟空消灭", 类型: "蜘蛛精", color: "#FF6347", 综合分: 57 },
+      { 名字: "蜘蛛精七妹", 回目: 72, 回目名: "第七十二回", 命运: "孙悟空消灭", 类型: "蜘蛛精", color: "#FF7F50", 综合分: 55 },
+      { 名字: "老鼠精", 回目: 82, 回目名: "第八十二回", 命运: "天庭收编", 类型: "孤妖", color: "#696969", 综合分: 73 },
+      { 名字: "玉兔精", 回目: 95, 回目名: "第九十五回", 命运: "月宫归位", 类型: "孤妖", color: "#DAA520", 综合分: 70 }
+    ]
+  }
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W181] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const mf = await fetchJson(base + 'monster-female-network.json', 'monsterFemale');
+  const data = mf.monsterFemale || mf;
+  return {
+    nodes: data.nodes || EMBEDDED_DATA.monsterFemale.nodes,
+    network: { nodes: data.nodes || EMBEDDED_DATA.monsterFemale.nodes, links: data.links || EMBEDDED_DATA.monsterFemale.links },
+    sankey: data.sankey || EMBEDDED_DATA.monsterFemale.sankey,
+    radar: data.radar || EMBEDDED_DATA.monsterFemale.radar,
+    timeline: data.timeline || EMBEDDED_DATA.monsterFemale.timeline
+  };
+}
+
+// 关系类型颜色查表
+const RELATION_COLORS = {
+  '姐妹亲情': '#8B0000',
+  '领导关系': '#A52A2A',
+  '敌对共侍': '#5a3828',
+  '相邻同道': '#6b4226',
+  '女妖代表': '#8B4513',
+  '月精蛛丝': '#DAA520',
+  '洞穴相邻': '#696969',
+  '皆小妖': '#A9A9A9',
+  '文雅同类': '#FFB6C1',
+  '收编关联': '#D2691E',
+  '降妖关联': '#D2691E',
+  '天庭引荐': '#BC8F8F',
+  '点化': '#A0522D',
+  '月宫协调': '#DAA520',
+  '指点': '#A0522D',
+  '菩萨同修': '#8a7a5a',
+  '毒系相邻': '#800080',
+  '仙缘同类': '#FFC0CB',
+  '幻化同类': '#A9A9A9'
+};
+
+function relationColor(type) {
+  return RELATION_COLORS[type] || '#8a7a5a';
+}
+
+// ============================================================
+// Section 2: 力导向关系图
+// ============================================================
+function renderForce(networkData) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 340).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 680;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  // 深拷贝节点避免 mutation
+  const nodes = networkData.nodes.map(d => ({ ...d }));
+  const links = networkData.links.map(d => ({ ...d }));
+
+  function nodeRadius(d) {
+    if (d.type === 'collector') return 18;
+    if (d.type === 'spider') return 13;
+    return 14; // 孤妖节点
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id)
+      .distance(d => {
+        if (d.type === '菩萨同修') return 200;
+        if (d.type === '姐妹亲情' || d.type === '领导关系') return 70;
+        if (d.type === '收编关联' || d.type === '降妖关联' || d.type === '天庭引荐' || d.type === '点化' || d.type === '月宫协调' || d.type === '指点') return 160;
+        return 130;
+      })
+      .strength(d => {
+        if (d.type === '姐妹亲情') return 0.8;
+        if (d.type === '领导关系') return 0.5;
+        if (d.type === '菩萨同修') return 0.2;
+        return 0.4;
+      }))
+    .force('charge', d3.forceManyBody().strength(d => d.type === 'collector' ? -600 : (d.type === 'spider' ? -200 : -350)))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 8));
+
+  // 姐妹/领导关系边（实线）
+  const kinshipLink = svg.append('g').selectAll('.kin-link')
+    .data(links.filter(l => l.type === '姐妹亲情' || l.type === '领导关系'))
+    .enter().append('line')
+    .attr('class', 'kin-link')
+    .attr('stroke', d => relationColor(d.type))
+    .attr('stroke-width', d => 1 + (d.强度 || 50) / 40)
+    .attr('stroke-opacity', 0.6);
+
+  // 敌对/相邻等关系边（中等实线）
+  const rivalLink = svg.append('g').selectAll('.rival-link')
+    .data(links.filter(l => ['敌对共侍', '相邻同道', '女妖代表', '月精蛛丝', '洞穴相邻', '皆小妖', '文雅同类', '毒系相邻', '仙缘同类', '幻化同类'].includes(l.type)))
+    .enter().append('line')
+    .attr('class', 'rival-link')
+    .attr('stroke', d => relationColor(d.type))
+    .attr('stroke-width', d => 1 + (d.强度 || 50) / 60)
+    .attr('stroke-opacity', 0.45);
+
+  // 收编关系边（虚线）
+  const tamingLink = svg.append('g').selectAll('.taming-link')
+    .data(links.filter(l => ['收编关联', '降妖关联', '天庭引荐', '点化', '月宫协调', '指点', '菩萨同修'].includes(l.type)))
+    .enter().append('line')
+    .attr('class', 'taming-link')
+    .attr('stroke', d => relationColor(d.type))
+    .attr('stroke-width', d => 1 + (d.强度 || 50) / 60)
+    .attr('stroke-opacity', 0.55)
+    .attr('stroke-dasharray', '5,3');
+
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', d => d.color)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      const typeLabel = d.type === 'spider' ? '蜘蛛精系' : (d.type === 'loner' ? '孤妖系' : '收编者');
+      tooltip.append('div').text('群体：' + typeLabel);
+      if (d.回目) tooltip.append('div').text('出场回目：第 ' + d.回目 + ' 回');
+      tooltip.append('div').text('居所：' + (d.居所 || '—'));
+      tooltip.append('div').text('命运：' + (d.命运 || '—'));
+      if (d.简介) tooltip.append('div').text('简介：' + d.简介);
+      const connected = links.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('关联边数：' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 拖拽
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => d.type === 'collector' ? 4 : -22)
+    .attr('font-weight', d => d.type === 'collector' ? 700 : 500)
+    .attr('font-size', d => d.type === 'collector' ? 13 : 11)
+    .attr('fill', d => d.type === 'collector' ? '#1a1410' : '#5a3828')
+    .text(d => d.name);
+
+  sim.on('tick', () => {
+    kinshipLink.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    rivalLink.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    tamingLink.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('cx', d => d.x).attr('cy', d => d.y);
+    label.attr('x', d => d.x).attr('y', d => d.y);
+  });
+
+  // 图例
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const legendItems = [
+    { label: '蜘蛛精系（7 姐妹）', color: '#8B0000' },
+    { label: '孤妖系（7 节点）', color: '#5a3828' },
+    { label: '收编者（女性神祇）', color: '#D2691E' },
+    { label: '姐妹亲情/领导（实线）', color: '#8B0000' },
+    { label: '敌对/相邻关系（实线）', color: '#6b4226' },
+    { label: '收编/点化关系（虚线）', color: '#D2691E', dashed: true }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch')
+      .each(function() { d3.select(this).style('background', item.color).style('border', item.dashed ? '2px dashed #8a7a5a' : 'none'); });
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: 桑基图
+// ============================================================
+function buildSankeyGraph(linkData) {
+  // 三层：女妖(0) / 执行者(1) / 结局类型(2)
+  const monsterNames = EMBEDDED_DATA.monsterFemale.nodes
+    .filter(n => n.type !== 'collector')
+    .map(n => n.name);
+  const executorNames = new Set();
+  const fateNames = new Set();
+  linkData.forEach(l => {
+    if (monsterNames.includes(l.source)) executorNames.add(l.target);
+  });
+  linkData.forEach(l => {
+    if (executorNames.has(l.source)) fateNames.add(l.target);
+  });
+  const sources = new Set(linkData.map(l => l.source));
+  const nodeMap = new Map();
+  linkData.forEach(l => {
+    if (!nodeMap.has(l.source)) {
+      const cat = monsterNames.includes(l.source) ? 0 : 1;
+      nodeMap.set(l.source, { name: l.source, cat });
+    }
+    if (!nodeMap.has(l.target)) {
+      const cat = sources.has(l.target) ? 1 : 2;
+      nodeMap.set(l.target, { name: l.target, cat });
+    }
+  });
+  return {
+    nodes: Array.from(nodeMap.values()),
+    links: linkData.map(l => ({ source: l.source, target: l.target, value: l.value }))
+  };
+}
+
+function renderSankey(sankeyLinkData) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyLinkData || sankeyLinkData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 320).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 320).attr('fill', '#8b4513')
+      .text('d3-sankey 未加载，请检查 ../static/js/d3-sankey.min.js');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 640;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+
+  // 节点配色：女妖按个体色，执行者按中性，结局按命运类型色
+  const monsterColors = {};
+  EMBEDDED_DATA.monsterFemale.nodes.forEach(n => { monsterColors[n.name] = n.color; });
+  const executorColors = {
+    '孙悟空': '#8B4513',
+    '猪八戒': '#CD853F',
+    '昴日星官': '#D2691E',
+    '太阴星君': '#DAA520',
+    '托塔李天王': '#6b4226',
+    '自修': '#8a7a5a'
+  };
+  const fateColors = {
+    '消灭': '#8b0000',
+    '归位': '#DAA520',
+    '收编': '#6b4226',
+    '修行': '#8B4513'
+  };
+  const catColors = ['#5a3828', '#8B4513', '#D2691E'];
+
+  function nodeColor(d) {
+    if (d.cat === 0) return monsterColors[d.name] || catColors[0];
+    if (d.cat === 1) return executorColors[d.name] || catColors[1];
+    return fateColors[d.name] || catColors[2];
+  }
+
+  const graphData = buildSankeyGraph(sankeyLinkData);
+  const nodes = graphData.nodes.map(d => ({ ...d }));
+  const links = graphData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(16)
+    .nodePadding(8)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 链接
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => nodeColor(d.source))
+    .attr('stroke-width', d => Math.max(2, d.width))
+    .attr('stroke-opacity', 0.4)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.75);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('流量：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.4);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => Math.max(1, d.x1 - d.x0))
+    .attr('height', d => Math.max(1, d.y1 - d.y0))
+    .attr('fill', nodeColor)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      const catLabel = ['女妖', '执行者', '结局类型'][d.cat] || '';
+      tooltip.append('div').text('层级：' + catLabel);
+      tooltip.append('div').text('流入：' + (d.targetLinks || []).length + ' · 流出：' + (d.sourceLinks || []).length);
+      tooltip.append('div').text('总流量：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点标签
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '11px')
+    .attr('fill', '#1a1410')
+    .text(d => d.name);
+
+  // 图例
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const layers = ['女妖（14 位）', '执行者（6 类）', '结局类型（4 类）'];
+  layers.forEach((layer, i) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', catColors[i]); });
+    item.append('span').text(layer);
+  });
+}
+
+// ============================================================
+// Section 4: 雷达图（17 角色 × 4 维度）
+// ============================================================
+function renderRadar(radarData) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!radarData || radarData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 310).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 620;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const dimensions = ['自主性', '战斗力', '智慧', '悲剧性'];
+  const roleColors = {};
+  EMBEDDED_DATA.monsterFemale.nodes.forEach(n => { roleColors[n.name] = n.color; });
+
+  const cx = width / 2;
+  const cy = height / 2 + 10;
+  const radius = Math.min(width, height) / 2 - 110;
+  const levels = 5;
+
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  // 背景同心多边形
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // 轴线 + 标签
+  dimensions.forEach((dim, i) => {
+    const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1);
+    const labelR = radius + 32;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '14px')
+      .attr('font-weight', '600')
+      .attr('fill', '#1a1410')
+      .text(dim);
+  });
+
+  // 数值刻度
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6).attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '10px')
+      .attr('fill', '#8a7a5a')
+      .text(lvl * 20);
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 每个角色一个多边形
+  radarData.forEach(role => {
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      const rr = radius * (role[dim] / 100);
+      return [Math.cos(angle) * rr, Math.sin(angle) * rr];
+    });
+    const color = roleColors[role.名字] || '#8b4513';
+
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.08)
+      .attr('stroke', color)
+      .attr('stroke-width', 1.8)
+      .style('cursor', 'pointer')
+      .on('mouseover', function(e) {
+        d3.select(this).attr('fill-opacity', 0.3);
+        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.html('');
+        tooltip.append('div').html('<strong>' + role.名字 + '</strong>');
+        dimensions.forEach(dim => {
+          tooltip.append('div').text(dim + '：' + role[dim]);
+        });
+        const total = dimensions.reduce((sum, dim) => sum + role[dim], 0);
+        tooltip.append('div').text('综合分：' + Math.round(total / 4));
+      })
+      .on('mousemove', function(e) {
+        tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('fill-opacity', 0.08);
+        tooltip.transition().duration(400).style('opacity', 0);
+      });
+
+    // 顶点圆
+    points.forEach((p) => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 3)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 1);
+    });
+  });
+
+  // 图例（按群体分组）
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  const groups = [
+    { label: '蜘蛛精系（7 姐妹）', color: '#8B0000' },
+    { label: '孤妖系（7 节点）', color: '#5a3828' },
+    { label: '收编者（3 神祇）', color: '#D2691E' }
+  ];
+  groups.forEach(g => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', g.color); });
+    item.append('span').text(g.label);
+  });
+}
+
+// ============================================================
+// Section 5: 时间线
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 270).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 540;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 50, right: 50, bottom: 100, left: 70 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  // X 轴：回目
+  const sorted = timelineData.slice().sort((a, b) => a.回目 - b.回目);
+  const chapterMin = d3.min(sorted, d => d.回目);
+  const chapterMax = d3.max(sorted, d => d.回目);
+  const xScale = d3.scaleLinear()
+    .domain([chapterMin - 5, chapterMax + 5])
+    .range([0, innerW]);
+
+  // Y 轴：综合分
+  const yScale = d3.scaleLinear()
+    .domain([0, 100])
+    .range([innerH, 0]);
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 背景网格
+  g.append('g')
+    .attr('class', 'grid')
+    .call(d3.axisLeft(yScale).tickSize(-innerW).tickFormat('').ticks(5))
+    .selectAll('line').attr('stroke', '#d4c5a9').attr('stroke-dasharray', '3,3').attr('opacity', 0.4);
+  g.select('.grid .domain').attr('stroke', 'none');
+
+  // 主时间线（水平）
+  g.append('line')
+    .attr('x1', 0).attr('y1', innerH)
+    .attr('x2', innerW).attr('y2', innerH)
+    .attr('stroke', '#8b4513')
+    .attr('stroke-width', 2);
+
+  // 节点
+  g.selectAll('.text-node')
+    .data(sorted)
+    .enter()
+    .append('circle')
+    .attr('class', 'text-node')
+    .attr('cx', d => xScale(d.回目))
+    .attr('cy', d => yScale(d.综合分))
+    .attr('r', d => 6 + d.综合分 / 14)
+    .attr('fill', d => d.color)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2.5)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.名字 + '</strong>');
+      tooltip.append('div').text('出场：' + d.回目名);
+      tooltip.append('div').text('类型：' + d.类型);
+      tooltip.append('div').text('命运归途：' + d.命运);
+      tooltip.append('div').text('综合分：' + d.综合分);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2.5);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点标签
+  g.selectAll('.text-label')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'text-label')
+    .attr('x', d => xScale(d.回目))
+    .attr('y', d => yScale(d.综合分) - 18)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '10px')
+    .attr('font-weight', '600')
+    .attr('fill', d => d.color)
+    .text(d => d.名字);
+
+  // 回目标签（X 轴下方）
+  g.selectAll('.chapter-label')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'chapter-label')
+    .attr('x', d => xScale(d.回目))
+    .attr('y', innerH + 24)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '9px')
+    .attr('fill', '#5a3828')
+    .text(d => '第' + d.回目 + '回');
+
+  // 命运标签（节点下方第二行）
+  g.selectAll('.fate-label')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'fate-label')
+    .attr('x', d => xScale(d.回目))
+    .attr('y', innerH + 40)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '8px')
+    .attr('fill', '#8a7a5a')
+    .text(d => d.命运);
+
+  // X 轴
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).ticks(8).tickFormat(d => '第' + d + '回'))
+    .selectAll('text').attr('font-size', '10px');
+
+  // Y 轴
+  g.append('g')
+    .call(d3.axisLeft(yScale).ticks(5).tickFormat(d => d))
+    .selectAll('text').attr('font-size', '10px');
+
+  // 轴标题
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 80)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a5a')
+    .text('出场回目（第二十七回 — 第九十五回，跨度 68 回）');
+  g.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -innerH / 2).attr('y', -50)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a5a')
+    .text('四维综合分（0-100）');
+
+  // 图例
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  const typeGroups = {};
+  timelineData.forEach(d => { typeGroups[d.类型] = d.color; });
+  Object.entries(typeGroups).forEach(([type, color]) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', color); });
+    item.append('span').text(type);
+  });
+}
+
+// ============================================================
+// Section 6: 汇总表
+// ============================================================
+let summarySortState = { key: null, asc: true };
+
+function renderSummary(nodes) {
+  const wrap = d3.select('#summary-table-wrap');
+  wrap.html('');
+  if (!nodes || nodes.length === 0) {
+    wrap.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+
+  // 计算综合分
+  const rows = nodes.map(n => {
+    const total = (n.自主性 || 0) + (n.战斗力 || 0) + (n.智慧 || 0) + (n.悲剧性 || 0);
+    return {
+      ...n,
+      综合: Math.round(total / 4)
+    };
+  });
+
+  const columns = [
+    { key: 'name', label: '名字' },
+    { key: 'type', label: '群体' },
+    { key: '回目', label: '回目' },
+    { key: '居所', label: '居所' },
+    { key: '命运', label: '命运归途' },
+    { key: '自主性', label: '自主性' },
+    { key: '战斗力', label: '战斗力' },
+    { key: '智慧', label: '智慧' },
+    { key: '悲剧性', label: '悲剧性' },
+    { key: '综合', label: '综合分' }
+  ];
+
+  const typeLabel = { spider: '蜘蛛精系', loner: '孤妖系', collector: '收编者' };
+
+  const table = wrap.append('table').attr('class', 'summary-table');
+  const thead = table.append('thead').append('tr');
+  columns.forEach(col => {
+    thead.append('th')
+      .text(col.label)
+      .attr('role', 'button')
+      .attr('tabindex', '0')
+      .on('click', function() { sortSummary(col.key); })
+      .on('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sortSummary(col.key); }
+      });
+  });
+  const tbody = table.append('tbody');
+
+  function drawRows(data) {
+    tbody.html('');
+    const trs = tbody.selectAll('tr')
+      .data(data)
+      .enter()
+      .append('tr')
+      .attr('role', 'row')
+      .attr('tabindex', '0');
+
+    trs.each(function(d) {
+      const tr = d3.select(this);
+      const td1 = tr.append('td');
+      td1.append('span').attr('class', 'type-dot').each(function() { d3.select(this).style('background', d.color); });
+      td1.append('span').text(d.name);
+      tr.append('td').text(typeLabel[d.type] || d.type);
+      tr.append('td').text(d.回目 ? '第' + d.回目 + '回' : '—');
+      tr.append('td').text(d.居所 || '—');
+      tr.append('td').text(d.命运 || '—');
+      tr.append('td').text(d.自主性);
+      tr.append('td').text(d.战斗力);
+      tr.append('td').text(d.智慧);
+      tr.append('td').text(d.悲剧性);
+      const tdLast = tr.append('td');
+      tdLast.append('strong').text(d.综合);
+    });
+  }
+
+  window.sortSummary = function(key) {
+    if (summarySortState.key === key) {
+      summarySortState.asc = !summarySortState.asc;
+    } else {
+      summarySortState.key = key;
+      summarySortState.asc = true;
+    }
+    const sorted = rows.slice().sort((a, b) => {
+      const va = a[key], vb = b[key];
+      if (typeof va === 'number' && typeof vb === 'number') {
+        return summarySortState.asc ? va - vb : vb - va;
+      }
+      return summarySortState.asc
+        ? String(va).localeCompare(String(vb), 'zh-CN')
+        : String(vb).localeCompare(String(va), 'zh-CN');
+    });
+    drawRows(sorted);
+  };
+
+  drawRows(rows);
+}
+
+// ============================================================
+// main：调度所有渲染函数
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      '数据源：实时加载自 <code>scripts/output/data/</code>（http server 模式）';
+  }
+
+  renderForce(data.network);
+  renderSankey(data.sankey);
+  renderRadar(data.radar);
+  renderTimeline(data.timeline);
+  renderSummary(data.nodes);
+}
+
+// 响应式重绘（debounce 250ms）
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderForce(data.network);
+      renderSankey(data.sankey);
+      renderRadar(data.radar);
+      renderTimeline(data.timeline);
+      renderSummary(data.nodes);
+    }
+  }, 250);
+});
+
+// 启动
+main();
+</script>
+</body>
+</html>

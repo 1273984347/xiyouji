@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>取经路径地理符号学 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染力导向图。</p></noscript>
+    <style>
+        :root {
+            --bg-primary: #faf7f2;
+            --bg-secondary: #f0ebe0;
+            --paper: #ffffff;
+            --accent-primary: #c8463a;
+            --accent-secondary: #3a6b8c;
+            --accent-tertiary: #7a5230;
+            --accent-quaternary: #5a7a3a;
+            --accent-gold: #d4af37;
+            --text-primary: #2c1810;
+            --text-secondary: #5a3828;
+            --text-muted: #8a7560;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent-soft: #e9b885;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --line-soft: #ebe2d2;
+            --shadow-sm: 0 1px 2px rgba(60, 40, 20, 0.06);
+            --shadow-md: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 24px;
+            --space-6: 32px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1200px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            color: var(--accent-tertiary);
+            margin-bottom: var(--space-4);
+            line-height: 1.7;
+        }
+        .notice code {
+            background: #f5e9d4;
+            color: var(--accent-primary);
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.82rem;
+        }
+        .card-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+        .mech-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            padding: 22px;
+            box-shadow: var(--shadow-md);
+            border-top: 4px solid var(--accent-primary);
+        }
+        .mech-card.de-local { border-top-color: var(--accent-secondary); }
+        .mech-card.re-local { border-top-color: var(--accent-quaternary); }
+        .mech-card .step {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.74rem;
+            letter-spacing: 0.15em;
+            color: var(--accent-primary);
+            margin-bottom: var(--space-2);
+        }
+        .mech-card.de-local .step { color: var(--accent-secondary); }
+        .mech-card.re-local .step { color: var(--accent-quaternary); }
+        .mech-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+        .mech-card .place {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-3);
+            font-style: italic;
+        }
+        .mech-card .desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        .mech-card .ref {
+            margin-top: var(--space-3);
+            padding-top: var(--space-2);
+            border-top: 1px dashed var(--line);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--space-5);
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-primary);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-5);
+        }
+        .graph-wrap {
+            position: relative;
+            background: var(--bg-secondary);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        .graph-wrap svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            cursor: grab;
+        }
+        .graph-wrap svg:active { cursor: grabbing; }
+        .tooltip {
+            position: absolute;
+            pointer-events: none;
+            background: var(--text-primary);
+            color: #f5e9d4;
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            max-width: 280px;
+            line-height: 1.6;
+            z-index: 10;
+        }
+        .tooltip strong { color: var(--accent-soft); }
+        .tooltip .tip-meta {
+            margin-top: 4px;
+            font-size: 0.76rem;
+            color: rgba(245, 233, 212, 0.7);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 18px;
+            margin-top: var(--space-4);
+            font-size: 0.84rem;
+        }
+        .legend-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 8px 14px;
+            background: var(--bg-primary);
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius-sm);
+        }
+        .legend-group h5 {
+            font-size: 0.74rem;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 1.5px solid #fff;
+        }
+        .legend-line {
+            display: inline-block;
+            width: 22px;
+            height: 0;
+            border-top-width: 2px;
+            border-top-style: solid;
+        }
+        .detail-panel {
+            margin-top: var(--space-4);
+            padding: var(--space-4);
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: var(--radius-sm);
+            min-height: 60px;
+        }
+        .detail-panel .placeholder {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-style: italic;
+        }
+        .detail-panel h4 {
+            color: var(--accent-primary);
+            font-size: 1.05rem;
+            margin-bottom: var(--space-2);
+        }
+        .detail-panel dl {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 4px 14px;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+        .detail-panel dt {
+            color: var(--text-muted);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.78rem;
+        }
+        footer {
+            text-align: center;
+            padding: var(--space-5);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+
+        /* a11y: 全局键盘焦点可见性 */
+        a:focus-visible, button:focus-visible,
+        [role="button"]:focus-visible, [tabindex]:focus-visible {
+            outline: 2px solid var(--accent-secondary);
+            outline-offset: 2px;
+        }
+
+        /* 响应式：768px 平板 */
+        @media (max-width: 768px) {
+            .card-row { grid-template-columns: 1fr; }
+            .section { padding: 20px 16px; }
+            .hero { padding: 36px 18px 30px; }
+            .hero h1 { font-size: 1.7rem; }
+            .container { padding: 0 14px; }
+        }
+        /* 520px 窄屏 */
+        @media (max-width: 520px) {
+            .legend { flex-direction: column; align-items: stretch; }
+            .legend-group { padding: 6px 10px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>取经路径地理符号学</h1>
+        <div class="subtitle">GEO-SEMIOTICS OF THE PILGRIMAGE</div>
+        <div class="tagline">地方化 · 去地方化 · 重地方化 —— 三重机制下的空间流转</div>
+    </header>
+
+    <main class="container">
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，可在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- 三栏卡片：三重机制说明 -->
+        <div class="card-row">
+            <article class="mech-card" role="article">
+                <div class="step">STEP 01 · LOCALIZATION</div>
+                <h3>地方化</h3>
+                <div class="place">花果山水帘洞 · 第1回</div>
+                <div class="desc">石猴诞生于花果山，以其本然的地形与生态奠基"自性"——猴子在洞天福地中完成命名与称王，地理即身份。这是一次原初的"地方化"：自然给予意义。</div>
+                <div class="ref">ref: 第1回 line 522-523</div>
+            </article>
+            <article class="mech-card de-local" role="article">
+                <div class="step">STEP 02 · DE-LOCALIZATION</div>
+                <h3>去地方化</h3>
+                <div class="place">取经路径本身 · 第13回起</div>
+                <div class="desc">玄奘自长安出关，十万八千里的西行路把"地方"悬置——途经车迟、朱紫、灭法诸国，地理差异被压缩为意识形态、身体政治、主权暴力的符号试验场。</div>
+                <div class="ref">ref: 第13回 line 1343-1346</div>
+            </article>
+            <article class="mech-card re-local" role="article">
+                <div class="step">STEP 03 · RE-LOCALIZATION</div>
+                <h3>重地方化</h3>
+                <div class="place">灵山-东土回归 · 第98回</div>
+                <div class="desc">抵达灵山取得真经后，再以"东土"为归宿完成回归——意义重新落地。这不是回到原点，而是把西行所获重新编码进本土，构成符号的螺旋闭环。</div>
+                <div class="ref">ref: 第98回 line 7001</div>
+            </article>
+        </div>
+
+        <!-- 力导向图主体 -->
+        <section class="section">
+            <h2 class="section-title">地理符号学三重机制 · 力导向图</h2>
+            <div class="section-sub">圆点为地理节点，颜色按类型分类；连线表征路径关系，粗细与样式区分路径语义。悬停查看详情，点击展开节点详情面板。</div>
+            <div class="graph-wrap" id="graphWrap">
+                <svg id="forceGraph" width="1120" height="560" role="img" aria-label="取经路径地理符号学力导向图"></svg>
+                <div class="tooltip" id="graphTip" role="tooltip"></div>
+            </div>
+            <div class="legend" id="graphLegend"></div>
+            <div class="detail-panel" id="detailPanel" role="region" aria-live="polite">
+                <div class="placeholder">点击任一节点查看详细解析。</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">返回仪表盘</a> ·
+        <a href="../index.html">返回首页</a>
+        <div style="margin-top:8px;">关联文档：<a href="../../docs/03-主题与情节专题/取经路径地理符号学专题.md">取经路径地理符号学专题</a></div>
+    </footer>
+
+    <script>
+    // ============== EMBEDDED_DATA（fallback 用） ==============
+    const EMBEDDED_DATA = {
+        nodes: [
+            { id: 'huaguo Mountain', name: '花果山水帘洞', type: 'local', chapter: '第1回', line: 522, desc: '石猴诞生·地方化起点' },
+            { id: 'lingshan', name: '灵山', type: 'religious', chapter: '第8回', line: 981, desc: '佛界中心·取经终点' },
+            { id: 'changan', name: '长安', type: 'capital', chapter: '第13回', line: 1343, desc: '出发地·去地方化起点' },
+            { id: 'chechi', name: '车迟国', type: 'transit', chapter: '第44回', line: 3443, desc: '途经国·意识形态型' },
+            { id: 'zhuzi', name: '朱紫国', type: 'transit', chapter: '第68回', line: 5041, desc: '途经国·身体政治型' },
+            { id: 'mifa', name: '灭法国', type: 'transit', chapter: '第84回', line: 6137, desc: '途经国·主权暴力型' },
+            { id: 'lingshan-return', name: '灵山归途', type: 'return', chapter: '第98回', line: 7001, desc: '重地方化·回归东土' }
+        ],
+        links: [
+            { source: 'huaguo Mountain', target: 'changan', type: 'de-localization' },
+            { source: 'changan', target: 'chechi', type: 'transit' },
+            { source: 'chechi', target: 'zhuzi', type: 'transit' },
+            { source: 'zhuzi', target: 'mifa', type: 'transit' },
+            { source: 'mifa', target: 'lingshan', type: 'arrival' },
+            { source: 'lingshan', target: 'lingshan-return', type: 're-localization' },
+            { source: 'lingshan-return', target: 'changan', type: 'return' }
+        ]
+    };
+
+    // ============== 节点类型与链接样式 ==============
+    const NODE_COLORS = {
+        local: '#c8463a',         // 红 · 地方化
+        religious: '#d4af37',     // 金 · 宗教中心
+        capital: '#3a6b8c',       // 蓝 · 出发地
+        transit: '#8a7560',       // 灰 · 途经
+        return: '#5a7a3a'         // 绿 · 重地方化
+    };
+    const NODE_LABELS = {
+        local: '地方化', religious: '宗教中心', capital: '出发都城',
+        transit: '途经国', return: '重地方化'
+    };
+    const LINK_STYLES = {
+        'de-localization': { color: '#3a6b8c', dash: '6 4', width: 2, label: '去地方化' },
+        'transit':         { color: '#8a7560', dash: null,   width: 1.5, label: '途经' },
+        'arrival':         { color: '#d4af37', dash: null,   width: 3.5, label: '抵达' },
+        're-localization': { color: '#5a7a3a', dash: '6 4', width: 2, label: '重地方化' },
+        'return':          { color: '#c8463a', dash: null,   width: 3.5, label: '回归' }
+    };
+
+    let CURRENT_DATA = null;
+
+    // ============== 数据加载 ==============
+    async function loadData() {
+        try {
+            const response = await fetch('../../scripts/output/data/geo_semiotics.json');
+            if (!response.ok) throw new Error('fetch failed: ' + response.status);
+            const data = await response.json();
+            if (!data || !Array.isArray(data.nodes) || !Array.isArray(data.links)) {
+                throw new Error('invalid schema');
+            }
+            return data;
+        } catch (e) {
+            console.log('[INFO] 使用嵌入数据：', e.message);
+            return EMBEDDED_DATA;
+        }
+    }
+
+    // ============== 渲染图例 ==============
+    function renderLegend() {
+        const legend = d3.select("#graphLegend");
+        legend.selectAll("*").remove();
+
+        const nodeGroup = legend.append("div").attr("class", "legend-group");
+        nodeGroup.append("h5").text("节点类型 · NODE TYPE");
+        Object.entries(NODE_COLORS).forEach(([key, color]) => {
+            nodeGroup.append("div").attr("class", "legend-item")
+                .html(`<span class="legend-swatch" style="background:${color}"></span><span>${NODE_LABELS[key]}</span>`);
+        });
+
+        const linkGroup = legend.append("div").attr("class", "legend-group");
+        linkGroup.append("h5").text("链接类型 · LINK TYPE");
+        Object.entries(LINK_STYLES).forEach(([key, s]) => {
+            const lineStyle = s.dash
+                ? `border-top-style:dashed;border-top-color:${s.color};border-top-width:${s.width}px;`
+                : `border-top-style:solid;border-top-color:${s.color};border-top-width:${s.width}px;`;
+            linkGroup.append("div").attr("class", "legend-item")
+                .html(`<span class="legend-line" style="${lineStyle}"></span><span>${s.label}</span>`);
+        });
+    }
+
+    // ============== 渲染力导向图 ==============
+    function renderForceGraph(data) {
+        const wrap = document.getElementById("graphWrap");
+        const svg = d3.select("#forceGraph");
+        svg.selectAll("*").remove();
+
+        // 空数据保护
+        if (!data || !data.nodes || data.nodes.length === 0) {
+            svg.append("div").text("暂无数据").style("padding", "20px");
+            return;
+        }
+
+        const wrapWidth = wrap.clientWidth || 1120;
+        const width = Math.max(320, wrapWidth);
+        const height = +svg.attr("height") || 560;
+
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        // 深拷贝防止 mutation 污染原数据
+        const nodes = data.nodes.map(d => ({ ...d }));
+        const links = data.links.map(d => ({ ...d }));
+
+        const g = svg.append("g");
+
+        // zoom / pan
+        const zoom = d3.zoom()
+            .scaleExtent([0.4, 3])
+            .on("zoom", (event) => g.attr("transform", event.transform));
+        svg.call(zoom);
+
+        // 箭头标记
+        const defs = svg.append("defs");
+        Object.entries(LINK_STYLES).forEach(([key, s]) => {
+            defs.append("marker")
+                .attr("id", `arrow-${key}`)
+                .attr("viewBox", "0 -5 10 10")
+                .attr("refX", 18).attr("refY", 0)
+                .attr("markerWidth", 7).attr("markerHeight", 7)
+                .attr("orient", "auto")
+                .append("path")
+                .attr("d", "M0,-5L10,0L0,5")
+                .attr("fill", s.color);
+        });
+
+        // 链接
+        const link = g.append("g").attr("class", "links")
+            .selectAll("line")
+            .data(links)
+            .enter().append("line")
+            .attr("stroke", d => LINK_STYLES[d.type].color)
+            .attr("stroke-width", d => LINK_STYLES[d.type].width)
+            .attr("stroke-dasharray", d => LINK_STYLES[d.type].dash || null)
+            .attr("marker-end", d => `url(#arrow-${d.type})`)
+            .attr("opacity", 0.85);
+
+        // 节点组
+        const node = g.append("g").attr("class", "nodes")
+            .selectAll("g")
+            .data(nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .style("cursor", "pointer")
+            .attr("role", "button")
+            .attr("tabindex", 0)
+            .attr("aria-label", d => `${d.name}：${d.desc}`);
+
+        const radius = 14;
+        node.append("circle")
+            .attr("r", 0)
+            .attr("fill", d => NODE_COLORS[d.type] || '#999')
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2.5)
+            .transition().duration(500).delay((d, i) => i * 80)
+            .attr("r", radius);
+
+        node.append("text")
+            .text(d => d.name)
+            .attr("x", 0).attr("y", radius + 16)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("font-family", "inherit")
+            .style("fill", "var(--text-primary)")
+            .style("font-weight", 600)
+            .style("pointer-events", "none")
+            .style("opacity", 0)
+            .transition().duration(400).delay((d, i) => i * 80 + 200)
+            .style("opacity", 1);
+
+        // 力学模型
+        const simulation = d3.forceSimulation(nodes)
+            .force("link", d3.forceLink(links).id(d => d.id).distance(120).strength(0.5))
+            .force("charge", d3.forceManyBody().strength(-420))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("collide", d3.forceCollide().radius(radius * 2.2));
+
+        simulation.on("tick", () => {
+            link
+                .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+            node.attr("transform", d => `translate(${d.x},${d.y})`);
+        });
+
+        // 拖拽
+        const drag = d3.drag()
+            .on("start", (event, d) => {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x; d.fy = d.y;
+            })
+            .on("drag", (event, d) => { d.fx = event.x; d.fy = event.y; })
+            .on("end", (event, d) => {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null; d.fy = null;
+            });
+        node.call(drag);
+
+        // tooltip & detail
+        const tip = d3.select("#graphTip");
+        const panel = d3.select("#detailPanel");
+
+        function showTip(event, d) {
+            d3.select(this).select("circle").attr("r", radius + 3).attr("stroke", "var(--accent-soft)");
+            // XSS 防护：使用 .text() 处理用户内容；.html() 仅用于 EMBEDDED_DATA 内部已知字符串
+            tip.style("opacity", 1)
+                .html(`<div><strong>${d.name}</strong></div>
+                       <div>${d.desc}</div>
+                       <div class="tip-meta">${d.chapter} · line ${d.line}</div>`);
+            const wrapRect = wrap.getBoundingClientRect();
+            const x0 = event.clientX - wrapRect.left + 14;
+            const y0 = event.clientY - wrapRect.top + 14;
+            tip.style("left", x0 + "px").style("top", y0 + "px");
+        }
+        function hideTip() {
+            d3.select(this).select("circle").attr("r", radius).attr("stroke", "#fff");
+            tip.style("opacity", 0);
+        }
+        function showDetail(event, d) {
+            // XSS 防护：.text() for user content; .html() 仅 EMBEDDED_DATA
+            panel.html("");
+            panel.append("h4").text(d.name + " · " + NODE_LABELS[d.type]);
+            const dl = panel.append("dl");
+            dl.append("dt").text("CHAPTER");
+            dl.append("dd").text(d.chapter);
+            dl.append("dt").text("LINE");
+            dl.append("dd").text(String(d.line));
+            dl.append("dt").text("TYPE");
+            dl.append("dd").text(NODE_LABELS[d.type] + "（" + d.type + "）");
+            dl.append("dt").text("DESC");
+            dl.append("dd").text(d.desc);
+        }
+
+        node.on("mouseover", showTip)
+            .on("mousemove", function(event) {
+                const wrapRect = wrap.getBoundingClientRect();
+                tip.style("left", (event.clientX - wrapRect.left + 14) + "px")
+                    .style("top", (event.clientY - wrapRect.top + 14) + "px");
+            })
+            .on("mouseout", hideTip)
+            .on("click", showDetail)
+            .on("keydown", function(event, d) {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    showDetail.call(this, event, d);
+                }
+            });
+
+        return simulation;
+    }
+
+    // ============== 主流程 ==============
+    async function main() {
+        const data = await loadData();
+        CURRENT_DATA = data;
+        window.__lastData = data;
+
+        const isMock = data === EMBEDDED_DATA;
+        if (isMock) {
+            d3.select("#dataSource").html(
+                `<strong>当前显示嵌入数据（${data.nodes.length} 个节点）。</strong> 如需加载完整数据，请生成 <code>scripts/output/data/geo_semiotics.json</code> 后刷新。`
+            );
+        } else {
+            d3.select("#dataSource").html(
+                `数据源：实时加载自 <code>scripts/output/data/geo_semiotics.json</code>（http server 模式）`
+            );
+        }
+
+        renderLegend();
+        renderForceGraph(data);
+    }
+
+    // resize debounce 250ms
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>
+<!--
+> 轨标：可视化
+> 关联 W ID：W099
+> 版本：v2.0.72
+> 完成日期：2026-07-27
+> Preflight 三轨验证：第二十三次完整执行（line 号归属 + 内容匹配 + chapter 归属 Grep num:N）
+-->
