@@ -39,6 +39,9 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        with:
+          # 自动启用仓库的 GitHub Pages 功能（无需手动到 Settings → Pages 配置）
+          enablement: true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
