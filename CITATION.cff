@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: 详解西游记
+message: "如果本项目对您的研究或写作有帮助，请按以下格式引用。"
+type: software
+authors:
+  - name: 详解西游记项目
+version: "2.2.15"
+date-released: "2026-07-28"
+license: MIT
+license-url: https://spdx.org/licenses/MIT.html
+abstract: >-
+  一座关于《西游记》的混合型解读项目，采用「一源多形」组织方式，
+  包含 100 回逐回解读、56 篇人物深度分析、78 篇主题与情节专题、
+  16 篇文化背景专题、61 个 D3.js 数据可视化页面、132 个数据维度，
+  覆盖叙事学（十六维框架）、明代制度对照（八层镜像）、生态批评、
+  后人类主义等多个学术维度，附 55 条学术引用索引。
+keywords:
+  - 西游记
+  - 文学解读
+  - 数据可视化
+  - 叙事学
+  - 明代文学
+  - D3.js
+  - 数字人文
+preferred-citation:
+  type: software
+  title: "详解西游记"
+  authors:
+    - name: 详解西游记项目
+  version: "2.2.15"
+  date-released: "2026-07-28"
+  license: MIT
+  url: "https://github.com/详见仓库"

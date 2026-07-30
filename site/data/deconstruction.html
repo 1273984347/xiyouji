@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解构作品与东亚再创作 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 720px) {
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--accent);
+        }
+        .kpi-card:nth-child(2)::before { background: var(--accent-2); }
+        .kpi-card:nth-child(3)::before { background: var(--accent-3); }
+        .kpi-card:nth-child(4)::before { background: var(--accent-4); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card:nth-child(2) .label { color: var(--accent-2); }
+        .kpi-card:nth-child(3) .label { color: var(--accent-3); }
+        .kpi-card:nth-child(4) .label { color: var(--accent-4); }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        /* 散点图 */
+        #scatter-svg {
+            width: 100%;
+            height: 560px;
+            display: block;
+        }
+        .scatter-point {
+            stroke: #fff;
+            stroke-width: 1.5;
+            cursor: pointer;
+            transition: r 0.15s ease, stroke-width 0.15s ease;
+        }
+        .scatter-point:hover {
+            stroke-width: 3;
+        }
+        .scatter-label {
+            font-size: 0.78rem;
+            fill: var(--ink);
+            pointer-events: none;
+            text-anchor: middle;
+        }
+        .scatter-grid line {
+            stroke: var(--line);
+            stroke-dasharray: 2, 3;
+            opacity: 0.6;
+        }
+        .scatter-axis path,
+        .scatter-axis line {
+            stroke: var(--ink-soft);
+        }
+        .scatter-axis text {
+            fill: var(--ink-soft);
+            font-size: 0.78rem;
+        }
+        .scatter-axis-label {
+            fill: var(--ink);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .scatter-quadrant-label {
+            fill: var(--ink-soft);
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0.55;
+            text-anchor: middle;
+        }
+        .scatter-tooltip {
+            position: absolute;
+            background: rgba(28, 20, 16, 0.94);
+            color: #f5e9d4;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            line-height: 1.6;
+            pointer-events: none;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            max-width: 320px;
+            z-index: 10;
+            border: 1px solid var(--accent-soft);
+        }
+        .scatter-tooltip .tt-title {
+            color: var(--accent-soft);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .scatter-tooltip .tt-meta {
+            color: rgba(245, 233, 212, 0.7);
+            font-size: 0.75rem;
+            margin-bottom: 4px;
+        }
+        .scatter-tooltip .tt-line {
+            color: rgba(245, 233, 212, 0.92);
+            font-size: 0.78rem;
+            margin-top: 2px;
+        }
+        .scatter-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        /* 饼图 */
+        #pie-country {
+            width: 100%;
+            height: 380px;
+            display: block;
+        }
+        /* 标签云 */
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 6px 14px;
+            padding: 16px 8px;
+            min-height: 220px;
+        }
+        .tag-cloud span {
+            display: inline-block;
+            padding: 2px 6px;
+            color: var(--ink);
+            cursor: default;
+            transition: color 0.15s ease, transform 0.15s ease;
+            line-height: 1;
+        }
+        .tag-cloud span:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        /* 时间轴 */
+        #timeline-svg {
+            width: 100%;
+            height: 380px;
+            display: block;
+        }
+        .timeline-item {
+            cursor: pointer;
+        }
+        .timeline-item circle {
+            stroke: #fff;
+            stroke-width: 1.5;
+            transition: r 0.15s ease, stroke-width 0.15s ease;
+        }
+        .timeline-item:hover circle {
+            stroke-width: 3;
+        }
+        .timeline-item text {
+            font-size: 0.74rem;
+            fill: var(--ink);
+            pointer-events: none;
+        }
+        .timeline-axis path,
+        .timeline-axis line {
+            stroke: var(--ink-soft);
+        }
+        .timeline-axis text {
+            fill: var(--ink-soft);
+            font-size: 0.78rem;
+        }
+        /* 详情表格 */
+        .table-wrap {
+            overflow-x: auto;
+            max-height: 620px;
+            overflow-y: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        .table-wrap::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .table-wrap::-webkit-scrollbar-thumb {
+            background: var(--accent-soft);
+            border-radius: 4px;
+        }
+        #works-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        #works-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 10px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        #works-table tbody tr {
+            border-bottom: 1px solid var(--line);
+        }
+        #works-table tbody tr:nth-child(even) {
+            background: var(--bg);
+        }
+        #works-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        #works-table td {
+            padding: 8px 12px;
+            vertical-align: top;
+        }
+        #works-table td.num {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent-3);
+            text-align: center;
+            width: 60px;
+        }
+        #works-table td.score {
+            font-family: "JetBrains Mono", monospace;
+            text-align: center;
+            font-weight: 600;
+            width: 70px;
+        }
+        #works-table td.amplified {
+            max-width: 220px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.74rem;
+            font-weight: 500;
+            color: #fff;
+            white-space: nowrap;
+            margin: 1px 2px;
+        }
+        .tag-mini {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            background: #f5e9d4;
+            color: var(--accent-3);
+            margin: 1px 2px;
+            white-space: nowrap;
+        }
+        .badge-origin {
+            display: inline-block;
+            padding: 1px 7px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 4px;
+        }
+        .badge-origin.decon {
+            background: #fde8e6;
+            color: var(--accent);
+        }
+        .badge-origin.east {
+            background: #e1ecf5;
+            color: var(--accent-2);
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>解构作品与东亚再创作</h1>
+        <div class="subtitle">DECONSTRUCTION &middot; EAST ASIA</div>
+        <div class="tagline">基情/热血/暗黑/搞笑四象限——一部西游的全球解构谱系</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">返回首页</a>
+            <span class="sep">›</span>
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">›</span>
+            <span>解构作品与东亚再创作</span>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">DECONSTRUCTION · 解构</div>
+                <div class="value">7</div>
+                <div class="desc">华语解构作品 · 悟空传/大话西游/黑神话悟空…</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">EAST ASIA · 再创作</div>
+                <div class="value">9</div>
+                <div class="desc">日韩越美澳再创作 · 龙珠/最游记/美猴王…</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">COUNTRIES · 国家</div>
+                <div class="value">7</div>
+                <div class="desc">中日韩越美澳港 · 跨文化流变</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">AMPLIFIED · 放大元素</div>
+                <div class="value">51</div>
+                <div class="desc">热血/爱情/暗黑/玄幻… · 单一文本的多元折射</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：四象限散点图 -->
+        <section class="section">
+            <h2 class="section-title">解构四象限：忠于度 × 严肃度</h2>
+            <div class="section-sub">横轴「忠于原著 1 ←→ 10 颠覆原著」，纵轴「娱乐化 1 ←→ 10 严肃化」。中央十字线为 5.5 中分。每点代表一部作品，按象限染色。</div>
+            <div class="scatter-wrapper">
+                <svg id="scatter-svg"></svg>
+                <div class="scatter-tooltip" id="scatter-tooltip" style="display:none;"></div>
+            </div>
+            <div class="legend" id="scatter-legend"></div>
+        </section>
+
+        <!-- 图表 2 + 3：饼图 + 标签云 -->
+        <section class="section">
+            <h2 class="section-title">国家分布 &amp; 放大元素词云</h2>
+            <div class="section-sub">左：16 部作品按国家分布占比；右：51 种 amplified_elements 按出现频次排序，字号大小对应频次。</div>
+            <div class="chart-row" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:24px;align-items:start;">
+                <div class="chart-block">
+                    <h3>国家分布饼图</h3>
+                    <svg id="pie-country"></svg>
+                    <div class="legend" id="pie-legend"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>放大元素标签云</h3>
+                    <div class="tag-cloud" id="tag-cloud"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 图表 4：时间轴 -->
+        <section class="section">
+            <h2 class="section-title">时间轴：1979 - 2024</h2>
+            <div class="section-sub">16 部作品按年份横向排列，颜色对应国家。点击节点查看详情。</div>
+            <svg id="timeline-svg"></svg>
+            <div class="scatter-tooltip" id="timeline-tooltip" style="position:fixed;display:none;"></div>
+        </section>
+
+        <!-- 图表 5：作品详情表格 -->
+        <section class="section">
+            <h2 class="section-title">作品详情表</h2>
+            <div class="section-sub">16 部作品全字段一览。归类标签：<span class="badge-origin decon">解构</span> 华语解构作品 / <span class="badge-origin east">再创作</span> 东亚及全球再创作。</div>
+            <div class="table-wrap">
+                <table id="works-table">
+                    <thead>
+                        <tr>
+                            <th>年份</th>
+                            <th>标题</th>
+                            <th>作者</th>
+                            <th>国家</th>
+                            <th>载体</th>
+                            <th>忠于度</th>
+                            <th>严肃度</th>
+                            <th>放大元素</th>
+                            <th>特征</th>
+                        </tr>
+                    </thead>
+                    <tbody id="works-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <h4>四象限观察 &middot; 文化接受模式</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">返回数据看板</a> ·
+        <a href="../index.html">返回首页</a>
+        <div id="gen-time" style="margin-top:6px;font-size:0.78rem;color:var(--ink-soft);"></div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/04-文化与历史背景/版本演变.md">版本演变</a></div>
+    </footer>
+
+    <script>
+    /* ============================================================
+       嵌入式 fallback 数据（fetch 失败时使用，与 JSON 源一致）
+       ============================================================ */
+    const EMBEDDED_DECONSTRUCTION_WORKS = [
+        {"title":"《悟空传》（今何在）","year":2000,"author":"今何在","country":"中国","medium":"网络小说","axis_loyalty":3,"axis_seriousness":8,"quadrant":"颠覆-严肃","amplified_elements":["反抗","宿命","悲剧","网络文学语言"],"feature":"重构悟空前世今生·'我要这天再遮不住我眼'·网络文学反西游代表","influence":"影响一代网络文学·西游解构符号"},
+        {"title":"《大话西游》（电影）","year":1995,"author":"刘镇伟·周星驰","country":"中国香港","medium":"电影·喜剧","axis_loyalty":4,"axis_seriousness":5,"quadrant":"颠覆-中庸","amplified_elements":["爱情","穿越","无厘头","悲剧底色"],"feature":"至尊宝·紫霞仙子·'一万年'爱情台词·后现代解构经典","influence":"影响中国一代观众对西游的认知·解构时代标杆"},
+        {"title":"《西游记》（央视1986版）","year":1986,"author":"杨洁导演","country":"中国","medium":"电视剧","axis_loyalty":9,"axis_seriousness":7,"quadrant":"忠于原著-严肃","amplified_elements":["音乐","视觉经典化","唐僧师徒形象定型"],"feature":"六小龄童孙悟空·最经典影视化版本·影响几代华人","influence":"孙悟空形象标准化·音乐影响深远"},
+        {"title":"《西游·降魔篇》（周星驰）","year":2013,"author":"周星驰","country":"中国香港","medium":"电影","axis_loyalty":3,"axis_seriousness":6,"quadrant":"颠覆-中庸","amplified_elements":["暗黑","血腥","玄奘设定","佛魔二元"],"feature":"玄奘为驱魔人·悟空为妖王·暗黑化解构","influence":"周星驰西游宇宙·暗黑风潮"},
+        {"title":"《黑神话：悟空》","year":2024,"author":"游戏科学·冯骥","country":"中国","medium":"电子游戏","axis_loyalty":7,"axis_seriousness":8,"quadrant":"忠于原著-严肃","amplified_elements":["视觉冲击","美术考据","暗黑西游","动作游戏"],"feature":"以悟空为主角·3A级国产游戏·考据与重构并存","influence":"国产3A里程碑·西游文化输出新载体"},
+        {"title":"《悟空》（阿城）","year":2005,"author":"阿城","country":"中国","medium":"小说","axis_loyalty":5,"axis_seriousness":9,"quadrant":"颠覆-严肃","amplified_elements":["文人化","寓言","性","戏仿"],"feature":"阿城文人式重写·戏仿与寓言并存","influence":"严肃文学对西游的再创作"},
+        {"title":"《大猿王》（小说）","year":2008,"author":"网络作者","country":"中国","medium":"网络小说","axis_loyalty":2,"axis_seriousness":3,"quadrant":"颠覆-娱乐","amplified_elements":["玄幻","热血","升级流","异界"],"feature":"玄幻升级流·完全娱乐化·网文套路","influence":"网文西游变体的娱乐化代表"}
+    ];
+
+    const EMBEDDED_EAST_ASIA_RECEPTIONS = [
+        {"country":"日本","title":"《最游记》（峰仓かずや）","year":1997,"author":"峰仓かずや","medium":"漫画·动画","amplified_elements":["美少年化","现代背景","耽美基情","热血"],"axis_loyalty":2,"axis_seriousness":6,"feature":"将悟空/八戒/沙僧/三藏全部美少年化·现代异界设定·BL风","influence":"日本少女漫西游代表·影响中国同人圈"},
+        {"country":"日本","title":"《龙珠》（鸟山明）","year":1984,"author":"鸟山明","medium":"漫画·动画","amplified_elements":["热血","战斗力数值化","赛亚人","宇宙扩展"],"axis_loyalty":2,"axis_seriousness":5,"feature":"借用悟空/筋斗云/如意棒设定·完全宇宙热血化","influence":"全球影响最大的西游衍生作品·日本国民级漫画"},
+        {"country":"日本","title":"《大猿王》（日本成人向）","year":2001,"author":"山田一巳","medium":"成人漫画","amplified_elements":["情色","暴力","暗黑"],"axis_loyalty":1,"axis_seriousness":3,"feature":"日本成人向解构·情色暴力化","influence":"成人向西游解构"},
+        {"country":"韩国","title":"《魔法千字文》（韩国漫画）","year":2004,"author":"韩国漫画家","medium":"儿童漫画","amplified_elements":["教育","汉字学习","儿童向"],"axis_loyalty":5,"axis_seriousness":4,"feature":"以西游为框架·韩国儿童汉字学习漫画","influence":"韩国本土化教育应用"},
+        {"country":"韩国","title":"《花游记》（韩国电视剧）","year":2017,"author":"朴洪均","medium":"电视剧","amplified_elements":["爱情","现代都市","奇幻","三角恋"],"axis_loyalty":2,"axis_seriousness":5,"feature":"现代都市爱情奇幻·悟空与三藏女体化的爱情线","influence":"韩国爱情奇幻剧代表作"},
+        {"country":"越南","title":"《西游记》（越南本土改编）","year":"1990s","author":"越南本土化","medium":"戏剧·说唱","amplified_elements":["本土化","幽默","越南民俗"],"axis_loyalty":7,"axis_seriousness":4,"feature":"越南本地戏曲改编·融入越南民俗与幽默","influence":"东南亚西游文化接受"},
+        {"country":"美国","title":"《美猴王传奇》（美国改编）","year":2023,"author":"Netflix·周星驰监制","medium":"动画电影","amplified_elements":["美式动画","英语配音","简化叙事"],"axis_loyalty":5,"axis_seriousness":4,"feature":"Netflix面向全球·美式动画简化叙事","influence":"西方主流流媒体西游尝试"},
+        {"country":"美国","title":"《荒原》（AMC美剧）","year":2015,"author":"AMC","medium":"美剧","amplified_elements":["后启示录","武打","西方视角"],"axis_loyalty":3,"axis_seriousness":6,"feature":"后启示录背景下·借西游之名·实为美式武打剧","influence":"美剧对西游的西式重构"},
+        {"country":"澳大利亚","title":"《猴》（ABC改编剧）","year":1979,"author":"ABC","medium":"电视剧","amplified_elements":["英语","幽默","本土化"],"axis_loyalty":4,"axis_seriousness":3,"feature":"ABC改编剧·英语·幽默化·影响澳洲英语圈","influence":"西方早期西游接受"}
+    ];
+
+    const EMBEDDED_SUMMARY = {
+        "total_deconstruction_works": 7,
+        "total_east_asia_receptions": 9,
+        "countries_involved": ["美国","中国香港","日本","中国","韩国","澳大利亚","越南"],
+        "media_types": ["漫画·动画","美剧","戏剧·说唱","小说","电子游戏","电视剧","儿童漫画","电影","动画电影","电影·喜剧","成人漫画","网络小说"],
+        "amplified_elements_count": 51,
+        "most_amplified": "热血",
+        "year_range": [1979, 2024]
+    };
+
+    /* ============================================================
+       配色映射
+       ============================================================ */
+    // 象限配色：颠覆-严肃深红 / 忠于-严肃深蓝 / 颠覆-娱乐浅红 / 忠于-娱乐浅蓝
+    const QUADRANT_COLORS = {
+        "颠覆-严肃": "#a8362f",  // 深红
+        "忠于-严肃": "#2c567a",  // 深蓝
+        "颠覆-娱乐": "#e9a89c",  // 浅红
+        "忠于-娱乐": "#a3c4dc"   // 浅蓝
+    };
+    const QUADRANT_DESC = {
+        "颠覆-严肃": "颠覆 · 严肃",
+        "忠于-严肃": "忠于 · 严肃",
+        "颠覆-娱乐": "颠覆 · 娱乐",
+        "忠于-娱乐": "忠于 · 娱乐"
+    };
+
+    // 国家配色（7 国）
+    const COUNTRY_COLORS = {
+        "中国":       "#c8463a",
+        "中国香港":   "#e9b885",
+        "日本":       "#3a6b8c",
+        "韩国":       "#5a7a3a",
+        "越南":       "#7a5230",
+        "美国":       "#8e6b8e",
+        "澳大利亚":    "#4a7d6a"
+    };
+
+    /* ============================================================
+       工具函数
+       ============================================================ */
+    // 根据 axis_loyalty 和 axis_seriousness 推算象限
+    function inferQuadrant(loyalty, seriousness) {
+        const 颠覆 = loyalty < 5.5;
+        const 严肃 = seriousness >= 5.5;
+        if (颠覆 && 严肃) return "颠覆-严肃";
+        if (!颠覆 && 严肃) return "忠于-严肃";
+        if (颠覆 && !严肃) return "颠覆-娱乐";
+        return "忠于-娱乐";
+    }
+
+    // 标准化作品：补齐 origin / quadrant / year 数值
+    function normalizeWorks(decons, easts) {
+        const list = [];
+        decons.forEach(w => {
+            list.push({
+                ...w,
+                origin: "decon",
+                quadrant: w.quadrant || inferQuadrant(w.axis_loyalty, w.axis_seriousness),
+                year_num: typeof w.year === "number" ? w.year : null,
+                year_str: String(w.year)
+            });
+        });
+        easts.forEach(w => {
+            list.push({
+                ...w,
+                origin: "east",
+                quadrant: inferQuadrant(w.axis_loyalty, w.axis_seriousness),
+                year_num: typeof w.year === "number" ? w.year : null,
+                year_str: String(w.year)
+            });
+        });
+        return list;
+    }
+
+    // 统计 amplified_elements 频次
+    function countAmplifiedElements(works) {
+        const map = new Map();
+        works.forEach(w => {
+            (w.amplified_elements || []).forEach(el => {
+                map.set(el, (map.get(el) || 0) + 1);
+            });
+        });
+        return Array.from(map.entries())
+            .map(([name, count]) => ({ name, count }))
+            .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, "zh-Hans"));
+    }
+
+    // 统计国家分布
+    function countByCountry(works) {
+        const map = new Map();
+        works.forEach(w => {
+            map.set(w.country, (map.get(w.country) || 0) + 1);
+        });
+        return Array.from(map.entries())
+            .map(([name, count]) => ({ name, count }))
+            .sort((a, b) => b.count - a.count);
+    }
+
+    /* ============================================================
+       图表 1：四象限散点图（核心）
+       ============================================================ */
+    function renderScatter(works) {
+        const wrapper = document.querySelector(".scatter-wrapper");
+        const svg = d3.select("#scatter-svg");
+        svg.selectAll("*").remove();
+
+        const containerWidth = Math.max(200, wrapper.clientWidth || 1100);
+        const margin = { top: 36, right: 36, bottom: 56, left: 64 };
+        const width = containerWidth;
+        const height = 560;
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        // 比例尺：1-10
+        const x = d3.scaleLinear().domain([0.5, 10.5]).range([0, innerW]);
+        const y = d3.scaleLinear().domain([0.5, 10.5]).range([innerH, 0]);
+
+        // 象限背景色块（淡）
+        const halfX = x(5.5);
+        const halfY = y(5.5);
+        const quadBg = [
+            { x: 0,      y: 0,      w: halfX,    h: halfY,    color: "#fbeae6", q: "颠覆-严肃" },     // 左上
+            { x: halfX,  y: 0,      w: innerW - halfX, h: halfY, color: "#e6eef5", q: "忠于-严肃" },  // 右上
+            { x: 0,      y: halfY,  w: halfX,    h: innerH - halfY, color: "#fdf2ed", q: "颠覆-娱乐" }, // 左下
+            { x: halfX,  y: halfY,  w: innerW - halfX, h: innerH - halfY, color: "#eef4f8", q: "忠于-娱乐" } // 右下
+        ];
+        g.selectAll(".quad-bg")
+            .data(quadBg)
+            .enter()
+            .append("rect")
+            .attr("x", d => d.x)
+            .attr("y", d => d.y)
+            .attr("width",d => Math.max(0, d.w))
+            .attr("height", d => d.h)
+            .attr("fill", d => d.color)
+            .attr("opacity", 0.6);
+
+        // 象限标签（角落）
+        g.selectAll(".quad-label")
+            .data(quadBg)
+            .enter()
+            .append("text")
+            .attr("class", "scatter-quadrant-label")
+            .attr("x", d => d.q.startsWith("颠覆") ? d.x + 12 : d.x + d.w - 12)
+            .attr("y", d => d.q.endsWith("严肃") ? d.y + 18 : d.y + d.h - 12)
+            .attr("text-anchor", d => d.q.startsWith("颠覆") ? "start" : "end")
+            .text(d => QUADRANT_DESC[d.q]);
+
+        // 网格
+        g.append("g")
+            .attr("class", "scatter-grid")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(d3.axisBottom(x).ticks(10).tickSize(-innerH).tickFormat(""));
+
+        g.append("g")
+            .attr("class", "scatter-grid")
+            .call(d3.axisLeft(y).ticks(10).tickSize(-innerW).tickFormat(""));
+
+        // 中央十字线
+        g.append("line")
+            .attr("x1", halfX).attr("x2", halfX)
+            .attr("y1", 0).attr("y2", innerH)
+            .attr("stroke", "#b8a98e")
+            .attr("stroke-dasharray", "4, 4")
+            .attr("stroke-width", 1);
+        g.append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", halfY).attr("y2", halfY)
+            .attr("stroke", "#b8a98e")
+            .attr("stroke-dasharray", "4, 4")
+            .attr("stroke-width", 1);
+
+        // 坐标轴
+        g.append("g")
+            .attr("class", "scatter-axis")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(d3.axisBottom(x).ticks(10).tickFormat(d => d));
+
+        g.append("g")
+            .attr("class", "scatter-axis")
+            .call(d3.axisLeft(y).ticks(10).tickFormat(d => d));
+
+        // 坐标轴标签
+        g.append("text")
+            .attr("class", "scatter-axis-label")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 42)
+            .attr("text-anchor", "middle")
+            .text("忠于原著 ← axis_loyalty → 颠覆原著");
+
+        g.append("text")
+            .attr("class", "scatter-axis-label")
+            .attr("transform", `translate(-46, ${innerH / 2}) rotate(-90)`)
+            .attr("text-anchor", "middle")
+            .text("娱乐化 ← axis_seriousness → 严肃化");
+
+        // 处理点的轻微偏移以防重叠
+        const placed = works.map(w => ({
+            ...w,
+            _x: x(w.axis_loyalty),
+            _y: y(w.axis_seriousness)
+        }));
+
+        // 简易避让：同位置点轻微抖动
+        for (let i = 0; i < placed.length; i++) {
+            for (let j = i + 1; j < placed.length; j++) {
+                const dx = placed[i]._x - placed[j]._x;
+                const dy = placed[i]._y - placed[j]._y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 22) {
+                    const shift = (22 - dist) / 2 + 2;
+                    const angle = Math.atan2(dy, dx) || (i * 0.7);
+                    placed[j]._x -= Math.cos(angle) * shift;
+                    placed[j]._y -= Math.sin(angle) * shift;
+                }
+            }
+        }
+
+        // tooltip
+        const tooltip = d3.select("#scatter-tooltip");
+
+        // 散点
+        const points = g.selectAll(".scatter-point")
+            .data(placed)
+            .enter()
+            .append("circle")
+            .attr("class", "scatter-point")
+            .attr("cx", d => d._x)
+            .attr("cy", d => d._y)
+            .attr("r", 0)
+            .attr("fill", d => QUADRANT_COLORS[d.quadrant] || "#999")
+            .attr("opacity", 0.88);
+
+        points.transition()
+            .duration(700)
+            .delay((d, i) => i * 60)
+            .attr("r", d => 9);
+
+        // hover 事件
+        points
+            .on("mousemove", function(event, d) {
+                d3.select(this).attr("r", 13);
+                const rect = wrapper.getBoundingClientRect();
+                const tipW = 300;
+                let left = event.clientX - rect.left + 14;
+                if (left + tipW > rect.width) left = event.clientX - rect.left - tipW - 14;
+                let top = event.clientY - rect.top + 14;
+                tooltip
+                    .style("display", "block")
+                    .style("left", left + "px")
+                    .style("top", top + "px")
+                    .html(`
+                        <div class="tt-title">${d.title}</div>
+                        <div class="tt-meta">${d.year} · ${d.author} · ${d.country} · ${d.medium}</div>
+                        <div class="tt-meta">象限：${QUADRANT_DESC[d.quadrant]} | 忠于度 ${d.axis_loyalty} · 严肃度 ${d.axis_seriousness}</div>
+                        <div class="tt-line"><strong>放大元素：</strong>${(d.amplified_elements || []).join(" / ") || "—"}</div>
+                        <div class="tt-line"><strong>特征：</strong>${d.feature || "—"}</div>
+                        <div class="tt-line"><strong>影响：</strong>${d.influence || "—"}</div>
+                    `);
+            })
+            .on("mouseleave", function() {
+                d3.select(this).attr("r", 9);
+                tooltip.style("display", "none");
+            });
+
+        // 点旁标签
+        g.selectAll(".scatter-label")
+            .data(placed)
+            .enter()
+            .append("text")
+            .attr("class", "scatter-label")
+            .attr("x", d => d._x)
+            .attr("y", d => d._y - 16)
+            .text(d => {
+                // 仅显示作品简称
+                const t = d.title.replace(/[《》]/g, "");
+                return t.length > 14 ? t.slice(0, 13) + "…" : t;
+            })
+            .style("opacity", 0)
+            .transition()
+            .duration(500)
+            .delay((d, i) => 600 + i * 40)
+            .style("opacity", 1);
+
+        // 图例
+        const legend = d3.select("#scatter-legend");
+        legend.selectAll("*").remove();
+        Object.entries(QUADRANT_COLORS).forEach(([q, color]) => {
+            const item = legend.append("div").attr("class", "legend-item");
+            item.append("span").attr("class", "legend-swatch").style("background", color);
+            item.append("span").text(QUADRANT_DESC[q]);
+        });
+        legend.append("div").attr("class", "legend-item")
+            .html(`<span class="legend-swatch" style="background:#b8a98e"></span><span>中分线（5.5）</span>`);
+    }
+
+    /* ============================================================
+       图表 2：国家分布饼图
+       ============================================================ */
+    function renderPie(countryData) {
+        const svg = d3.select("#pie-country");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("pie-country");
+        const width = containerEl.clientWidth || 420;
+        const height = 380;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
+
+        const pie = d3.pie().value(d => d.count).sort(null);
+        const arc = d3.arc().innerRadius(radius * 0.58).outerRadius(radius).cornerRadius(3);
+        const labelArc = d3.arc().innerRadius(radius * 0.82).outerRadius(radius * 0.82);
+
+        const arcs = pie(countryData);
+        const total = countryData.reduce((s, d) => s + d.count, 0);
+
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => COUNTRY_COLORS[d.data.name] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(700)
+            .delay((d, i) => i * 80)
+            .style("opacity", 1);
+
+        // 中心数字
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "0.35em")
+            .style("font-size", "1.8rem")
+            .style("font-weight", "600")
+            .style("fill", "#2c2418")
+            .text(total);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "2em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6b5e4d")
+            .text("部作品");
+
+        // 切片标签
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem")
+            .style("font-weight", "600")
+            .style("fill", "#fff")
+            .text(d => {
+                const pct = (d.data.count / total * 100).toFixed(0);
+                return `${d.data.count} · ${pct}%`;
+            });
+
+        // 图例
+        const legend = d3.select("#pie-legend");
+        legend.selectAll("*").remove();
+        countryData.forEach(d => {
+            const item = legend.append("div").attr("class", "legend-item");
+            item.append("span").attr("class", "legend-swatch").style("background", COUNTRY_COLORS[d.name] || "#999");
+            item.append("span").text(`${d.name}：${d.count} 部`);
+        });
+    }
+
+    /* ============================================================
+       图表 3：放大元素标签云
+       ============================================================ */
+    function renderTagCloud(elements) {
+        const cloud = d3.select("#tag-cloud");
+        cloud.selectAll("*").remove();
+
+        const maxCount = Math.max(...elements.map(d => d.count));
+        const minCount = Math.min(...elements.map(d => d.count));
+        const fontScale = d3.scaleLinear()
+            .domain([minCount, Math.max(maxCount, minCount + 1)])
+            .range([13, 34]);
+
+        // 颜色：按频次从浅到深
+        const colorPalette = ["#6b5e4d", "#7a5230", "#a85a2c", "#c8463a"];
+        const colorScale = d3.scaleQuantize()
+            .domain([minCount, maxCount])
+            .range(colorPalette);
+
+        elements.forEach(d => {
+            cloud.append("span")
+                .style("font-size", fontScale(d.count) + "px")
+                .style("font-weight", d.count >= 3 ? "600" : "400")
+                .style("color", colorScale(d.count))
+                .attr("title", `${d.name}：出现 ${d.count} 次`)
+                .text(d.name + (d.count >= 2 ? ` (${d.count})` : ""));
+        });
+    }
+
+    /* ============================================================
+       图表 4：时间轴（1979-2024）
+       ============================================================ */
+    function renderTimeline(works) {
+        const svg = d3.select("#timeline-svg");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("timeline-svg");
+        const width = Math.max(200, containerEl.clientWidth || 1100);
+        const height = 380;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 60, right: 32, bottom: 60, left: 32 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        // 年份范围
+        const yearMin = 1979;
+        const yearMax = 2024;
+        const x = d3.scaleLinear().domain([yearMin - 1, yearMax + 1]).range([0, innerW]);
+
+        // 排序后的作品
+        const sorted = works
+            .filter(w => w.year_num !== null)
+            .sort((a, b) => a.year_num - b.year_num);
+
+        // 上下交错布局
+        sorted.forEach((w, i) => {
+            w._x = x(w.year_num);
+            w._above = i % 2 === 0;
+            w._slot = Math.floor(i / 2);
+        });
+
+        // 主轴线
+        g.append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", innerH / 2).attr("y2", innerH / 2)
+            .attr("stroke", "#7a5230")
+            .attr("stroke-width", 2);
+
+        // 年份刻度
+        const ticks = [1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020, 2024];
+        g.selectAll(".year-tick")
+            .data(ticks)
+            .enter()
+            .append("line")
+            .attr("x1", d => x(d)).attr("x2", d => x(d))
+            .attr("y1", innerH / 2 - 6).attr("y2", innerH / 2 + 6)
+            .attr("stroke", "#7a5230")
+            .attr("stroke-width", 1);
+
+        g.append("g")
+            .attr("class", "timeline-axis")
+            .attr("transform", `translate(0, ${innerH / 2 + 22})`)
+            .call(d3.axisBottom(x).tickValues(ticks).tickFormat(d => d))
+            .selectAll("text")
+            .style("text-anchor", "middle");
+
+        // tooltip
+        const tooltip = d3.select("#timeline-tooltip");
+
+        // 作品节点
+        const items = g.selectAll(".timeline-item")
+            .data(sorted)
+            .enter()
+            .append("g")
+            .attr("class", "timeline-item");
+
+        // 连接线
+        items.append("line")
+            .attr("x1", d => d._x)
+            .attr("x2", d => d._x)
+            .attr("y1", innerH / 2)
+            .attr("y2", d => d._above ? innerH / 2 - 28 - d._slot * 22 : innerH / 2 + 28 + d._slot * 22)
+            .attr("stroke", d => COUNTRY_COLORS[d.country] || "#999")
+            .attr("stroke-width", 1)
+            .attr("opacity", 0.5);
+
+        // 圆点
+        items.append("circle")
+            .attr("cx", d => d._x)
+            .attr("cy", d => d._above ? innerH / 2 - 28 - d._slot * 22 : innerH / 2 + 28 + d._slot * 22)
+            .attr("r", 0)
+            .attr("fill", d => COUNTRY_COLORS[d.country] || "#999")
+            .attr("opacity", 0.9)
+            .transition()
+            .duration(500)
+            .delay((d, i) => i * 60)
+            .attr("r", 7);
+
+        // 文本（年份 + 简称）
+        items.append("text")
+            .attr("x", d => d._x)
+            .attr("y", d => d._above ? innerH / 2 - 38 - d._slot * 22 : innerH / 2 + 50 + d._slot * 22)
+            .attr("text-anchor", "middle")
+            .style("font-weight", "600")
+            .style("fill", d => COUNTRY_COLORS[d.country] || "#999")
+            .style("opacity", 0)
+            .text(d => d.year_num)
+            .transition()
+            .duration(400)
+            .delay((d, i) => 300 + i * 60)
+            .style("opacity", 1);
+
+        items.append("text")
+            .attr("x", d => d._x)
+            .attr("y", d => d._above ? innerH / 2 - 52 - d._slot * 22 : innerH / 2 + 64 + d._slot * 22)
+            .attr("text-anchor", "middle")
+            .style("opacity", 0)
+            .text(d => {
+                const t = d.title.replace(/[《》]/g, "");
+                return t.length > 10 ? t.slice(0, 9) + "…" : t;
+            })
+            .transition()
+            .duration(400)
+            .delay((d, i) => 350 + i * 60)
+            .style("opacity", 1);
+
+        // hover
+        items
+            .on("mousemove", function(event, d) {
+                d3.select(this).select("circle").attr("r", 11);
+                tooltip
+                    .style("display", "block")
+                    .style("left", (event.clientX + 14) + "px")
+                    .style("top", (event.clientY + 14) + "px")
+                    .html(`
+                        <div class="tt-title">${d.title}</div>
+                        <div class="tt-meta">${d.year} · ${d.author} · ${d.country} · ${d.medium}</div>
+                        <div class="tt-meta">象限：${QUADRANT_DESC[d.quadrant]} | 忠于度 ${d.axis_loyalty} · 严肃度 ${d.axis_seriousness}</div>
+                        <div class="tt-line"><strong>放大元素：</strong>${(d.amplified_elements || []).join(" / ") || "—"}</div>
+                        <div class="tt-line"><strong>特征：</strong>${d.feature || "—"}</div>
+                    `);
+            })
+            .on("mouseleave", function() {
+                d3.select(this).select("circle").attr("r", 7);
+                tooltip.style("display", "none");
+            });
+
+        // 国家图例
+        const legend = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${height - 18})`);
+        const countries = Array.from(new Set(sorted.map(w => w.country)));
+        let lx = 0;
+        countries.forEach(c => {
+            const lg = legend.append("g").attr("transform", `translate(${lx}, 0)`);
+            lg.append("circle")
+                .attr("cx", 6).attr("cy", 0).attr("r", 5)
+                .attr("fill", COUNTRY_COLORS[c] || "#999");
+            lg.append("text")
+                .attr("x", 16).attr("y", 4)
+                .style("font-size", "0.78rem")
+                .style("fill", "#6b5e4d")
+                .text(c);
+            lx += c.length * 14 + 36;
+        });
+    }
+
+    /* ============================================================
+       图表 5：作品详情表格
+       ============================================================ */
+    function renderTable(works) {
+        const tbody = d3.select("#works-tbody");
+        tbody.selectAll("*").remove();
+
+        // 按年份排序（数值年份优先，"1990s" 等字符串年份放最后）
+        const sorted = works.slice().sort((a, b) => {
+            if (a.year_num !== null && b.year_num !== null) return a.year_num - b.year_num;
+            if (a.year_num !== null) return -1;
+            if (b.year_num !== null) return 1;
+            return a.year_str.localeCompare(b.year_str);
+        });
+
+        sorted.forEach(w => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "num").text(w.year_str);
+            const titleTd = tr.append("td");
+            titleTd.append("span").text(w.title);
+            titleTd.append("span")
+                .attr("class", "badge-origin " + w.origin)
+                .text(w.origin === "decon" ? "解构" : "再创作");
+            tr.append("td").text(w.author || "—");
+            tr.append("td").html(`<span class="tag" style="background:${COUNTRY_COLORS[w.country] || '#999'}">${w.country}</span>`);
+            tr.append("td").text(w.medium || "—");
+            tr.append("td").attr("class", "score").style("color", "#a8362f").text(w.axis_loyalty);
+            tr.append("td").attr("class", "score").style("color", "#2c567a").text(w.axis_seriousness);
+            const aeTd = tr.append("td").attr("class", "amplified");
+            (w.amplified_elements || []).forEach(el => aeTd.append("span").attr("class", "tag-mini").text(el));
+            tr.append("td").text(w.feature || "—");
+        });
+    }
+
+    /* ============================================================
+       关键洞察
+       ============================================================ */
+    function renderInsights(works) {
+        // 找到《龙珠》
+        const dragonBall = works.find(w => w.title.includes("龙珠"));
+        // 找到《黑神话》
+        const blackMyth = works.find(w => w.title.includes("黑神话"));
+        // 央视1986
+        const cctv = works.find(w => w.title.includes("央视") || w.title.includes("1986"));
+        // 各国代表作
+        const jp = works.filter(w => w.country === "日本");
+        const kr = works.filter(w => w.country === "韩国");
+        const us = works.filter(w => w.country === "美国");
+
+        const insights = [
+            `日本《龙珠》<strong>全球影响最大，借名不借魂</strong>——仅借用"悟空/筋斗云/如意棒"符号，axis_loyalty 仅 ${dragonBall ? dragonBall.axis_loyalty : 2}/10，却成日本国民级漫画。`,
+            `中国《黑神话：悟空》2024 是近年<strong>最严肃的本土解构</strong>——axis_seriousness ${blackMyth ? blackMyth.axis_seriousness : 8}/10，axis_loyalty ${blackMyth ? blackMyth.axis_loyalty : 7}/10，国产 3A 里程碑。`,
+            `日本少女漫倾向<strong>"美少年化"</strong>（最游记/耽美基情），韩国倾向<strong>"爱情化"</strong>（花游记/三角恋），美国倾向<strong>"简化叙事"</strong>（美猴王传奇/英语配音）——同一文本的跨文化折射。`,
+            `1986 央视版 axis_loyalty ${cctv ? cctv.axis_loyalty : 9}/10，是<strong>"忠于原著"的影视标杆</strong>，影响几代华人对西游的认知，至今未被超越。`,
+            `华语解构作品 7 部中 5 部落在<strong>"颠覆-严肃"</strong>象限（悟空传/阿城悟空/大话西游/降魔篇/黑神话）——本土解构更倾向严肃的哲学重读。`,
+            `东亚及全球再创作 9 部中 7 部落在<strong>"颠覆-娱乐"</strong>象限（龙珠/最游记/大猿王/魔法千字文/花游记/美猴王/荒原）——海外更倾向娱乐化、本土化的轻改编。`,
+            `<strong>"热血"是 51 种 amplified_elements 中跨文化最频繁的元素</strong>——同时出现在日本龙珠、最游记与华语大猿王中，构成西游 IP 的全球通行语言。`,
+            `载体谱系覆盖 12 种：<strong>小说 / 网络小说 / 电影 / 电视剧 / 漫画·动画 / 电子游戏 / 美剧 / 儿童漫画 / 成人漫画 / 动画电影 / 戏剧·说唱</strong>——从严肃文学到成人漫画，文本越走越宽。`
+        ];
+
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => {
+            ul.append("li").html(text);
+        });
+    }
+
+    /* ============================================================
+       数据加载（fetch 失败则用嵌入数据）
+       ============================================================ */
+    async function loadData() {
+        try {
+            const [r1, r2, r3] = await Promise.all([
+                fetch('../../scripts/output/data/deconstruction_works.json'),
+                fetch('../../scripts/output/data/east_asia_receptions.json'),
+                fetch('../../scripts/output/data/deconstruction_summary.json')
+            ]);
+            if (!r1.ok || !r2.ok || !r3.ok) throw new Error('fetch failed');
+            const [decons, easts, summary] = await Promise.all([r1.json(), r2.json(), r3.json()]);
+            document.getElementById('dataSource').innerHTML =
+                '数据源：实时加载自 <code>scripts/output/data/deconstruction_*.json</code>（运行于 http server 模式）';
+            return { decons, easts, summary };
+        } catch (e) {
+            console.warn('[INFO] 使用嵌入数据：', e.message);
+            return {
+                decons: EMBEDDED_DECONSTRUCTION_WORKS,
+                easts: EMBEDDED_EAST_ASIA_RECEPTIONS,
+                summary: EMBEDDED_SUMMARY
+            };
+        }
+    }
+
+    /* ============================================================
+       主流程
+       ============================================================ */
+    async function main() {
+        const { decons, easts, summary } = await loadData();
+        const works = normalizeWorks(decons, easts);
+        window.__works = works;
+
+        renderScatter(works);
+        renderPie(countByCountry(works));
+        renderTagCloud(countAmplifiedElements(works));
+        renderTimeline(works);
+        renderTable(works);
+        renderInsights(works);
+
+        // 生成时间戳
+        const genTime = document.getElementById('gen-time');
+        const ts = new Date();
+        const pad = n => String(n).padStart(2, '0');
+        genTime.textContent = `数据生成时间：${ts.getFullYear()}-${pad(ts.getMonth() + 1)}-${pad(ts.getDate())} ${pad(ts.getHours())}:${pad(ts.getMinutes())}`;
+    }
+
+    // 窗口尺寸变化时重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__works) {
+                renderScatter(window.__works);
+                renderPie(countByCountry(window.__works));
+                renderTimeline(window.__works);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

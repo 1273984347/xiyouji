@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>详解西游记 · 人物出场频次与戏份分析</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --accent-5: #d4af37;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1200px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            color: inherit;
+            display: block;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(60, 40, 20, 0.12), 0 8px 24px rgba(60, 40, 20, 0.1);
+            border-color: var(--accent-soft);
+        }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .kpi-card .detail {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            border-top: 1px dashed var(--line);
+            padding-top: 6px;
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .chart-block {
+            text-align: center;
+            overflow-x: auto;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .notice code {
+            background: rgba(200, 70, 58, 0.08);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.85em;
+            color: var(--accent);
+        }
+        .chart-wrap {
+            overflow-x: auto;
+            text-align: center;
+        }
+        .tooltip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.92);
+            color: #f5e9d4;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+            white-space: nowrap;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            color: var(--accent-2);
+            text-decoration: none;
+            padding: 4px 12px;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            background: var(--paper);
+        }
+        .back-link:hover {
+            border-color: var(--accent-soft);
+            color: var(--accent);
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        /* D3 chart text styles */
+        svg text {
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            fill: var(--ink);
+        }
+        svg .axis line, svg .axis path {
+            stroke: var(--line);
+        }
+        svg .axis text {
+            fill: var(--ink-soft);
+            font-size: 11px;
+        }
+        svg .axis-label {
+            fill: var(--accent-3);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .bar-value {
+            fill: var(--accent);
+            font-size: 11px;
+            font-weight: 600;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .bar-mentions {
+            fill: var(--ink-soft);
+            font-size: 10px;
+            font-family: "JetBrains Mono", monospace;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>人物出场频次与戏份分析</h1>
+        <div class="subtitle">CHARACTER APPEARANCE</div>
+        <div class="tagline">取经队伍与各路神魔，谁的戏份最重？</div>
+    </header>
+
+    <main class="container">
+        <a href="../dashboard.html" class="back-link">← 返回仪表盘</a>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row" id="kpi-row"></div>
+
+        <!-- 横向条形图：Top 15 出场频次排行 -->
+        <section class="section">
+            <h2 class="section-title">出场频次排行榜 · Top 15</h2>
+            <div class="section-sub">按出场回数降序排列，每条标注人物名、出场回数与总提及次数</div>
+            <div class="chart-wrap">
+                <svg id="chart-bar"></svg>
+            </div>
+        </section>
+
+        <!-- 热力图：人物 × 回目 -->
+        <section class="section">
+            <h2 class="section-title">人物 × 回目 矩阵热力图</h2>
+            <div class="section-sub">行为人物，列为回目区间（每 10 回一格），颜色深浅表示该区间内提及次数</div>
+            <div class="chart-wrap">
+                <svg id="chart-heatmap"></svg>
+            </div>
+            <div class="legend" id="legend-heatmap"></div>
+        </section>
+
+        <!-- 时间分布图：主要人物出场分布 -->
+        <section class="section">
+            <h2 class="section-title">主要人物出场时间分布</h2>
+            <div class="section-sub">X 轴为回目号（1-100），Y 轴为主要人物，圆点大小表示该回提及次数</div>
+            <div class="chart-wrap">
+                <svg id="chart-timeline"></svg>
+            </div>
+            <div class="legend" id="legend-timeline"></div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">数据仪表盘</a> ·
+        <a href="../index.html">返回首页</a>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/02-人物深度分析/人物谱系表.md">人物谱系表</a></div>
+    </footer>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+    // ============================================================
+    // 嵌入式 mock 数据（fetch 失败时 fallback 使用）
+    // 至少 5 个人物 + Top 15 排行所需的辅助人物
+    // ============================================================
+    const MOCK_CHARACTERS = [
+        {name: "孙悟空",   appearances: 100, mentions: 5000, first_chapter: 1,  color: "#c8463a"},
+        {name: "唐僧",     appearances: 95,  mentions: 3000, first_chapter: 9,  color: "#e9b885"},
+        {name: "猪八戒",   appearances: 85,  mentions: 2500, first_chapter: 18, color: "#7a5230"},
+        {name: "沙僧",     appearances: 80,  mentions: 1500, first_chapter: 22, color: "#3a6b8c"},
+        {name: "观音",     appearances: 30,  mentions: 800,  first_chapter: 8,  color: "#5a7a3a"},
+        {name: "如来",     appearances: 25,  mentions: 600,  first_chapter: 7,  color: "#d4af37"},
+        {name: "玉帝",     appearances: 20,  mentions: 500,  first_chapter: 1,  color: "#9a8c70"},
+        {name: "白龙马",   appearances: 70,  mentions: 700,  first_chapter: 15, color: "#b8a890"},
+        {name: "太白金星", appearances: 15,  mentions: 300,  first_chapter: 3,  color: "#c0b49c"},
+        {name: "牛魔王",   appearances: 12,  mentions: 400,  first_chapter: 41, color: "#8a3a3a"},
+        {name: "铁扇公主", appearances: 8,   mentions: 200,  first_chapter: 59, color: "#a8556a"},
+        {name: "红孩儿",   appearances: 10,  mentions: 250,  first_chapter: 40, color: "#c66868"},
+        {name: "二郎神",   appearances: 8,   mentions: 220,  first_chapter: 6,  color: "#4a7a9a"},
+        {name: "哪吒",     appearances: 12,  mentions: 280,  first_chapter: 4,  color: "#b85a8a"},
+        {name: "镇元大仙", appearances: 5,   mentions: 150,  first_chapter: 24, color: "#6a8a4a"}
+    ];
+
+    // 时间分布图主要人物
+    const MAIN_CHARACTERS = ["孙悟空", "唐僧", "猪八戒", "沙僧", "观音", "如来"];
+
+    // 确定性时间线生成（避免随机抖动，保证每次渲染一致）
+    function makeTimeline(firstCh, appearances, mentions) {
+        const timeline = [];
+        const span = 100 - firstCh + 1;
+        const actualApps = Math.min(appearances, span);
+        const step = span / actualApps;
+        let totalAssigned = 0;
+        for (let i = 0; i < actualApps; i++) {
+            const ch = Math.min(100, Math.max(firstCh, Math.round(firstCh + i * step)));
+            const t = i / Math.max(1, actualApps - 1);
+            const bell = Math.sin(t * Math.PI); // 0 → 1 → 0
+            const m = Math.max(1, Math.round((mentions / actualApps) * (0.4 + bell * 0.9)));
+            timeline.push({chapter: ch, mentions: m});
+            totalAssigned += m;
+        }
+        // 归一化以匹配总提及次数
+        const factor = mentions / Math.max(1, totalAssigned);
+        timeline.forEach(t => t.mentions = Math.max(1, Math.round(t.mentions * factor)));
+        return timeline;
+    }
+
+    function buildMockData() {
+        const chars = MOCK_CHARACTERS.map(c => ({
+            ...c,
+            timeline: makeTimeline(c.first_chapter, c.appearances, c.mentions)
+        }));
+        const firstChar = chars.reduce((a, b) => a.first_chapter <= b.first_chapter ? a : b);
+        return {
+            total_characters: chars.length,
+            first_appearance: { name: firstChar.name, chapter: firstChar.first_chapter },
+            characters: chars,
+            is_mock: true
+        };
+    }
+
+    // ============================================================
+    // 渲染：KPI 卡片
+    // ============================================================
+    function renderKPI(data) {
+        const wukong = data.characters.find(c => c.name === "孙悟空") || data.characters[0];
+        const tangseng = data.characters.find(c => c.name === "唐僧") || data.characters[1];
+
+        const cards = [
+            {
+                label: "TOTAL · 识别人物总数",
+                value: data.total_characters,
+                desc: "出场频次可统计的主要人物",
+                detail: `共 ${data.characters.length} 个角色入库 →`
+            },
+            {
+                label: "WUKONG · 孙悟空出场回数",
+                value: wukong.appearances,
+                desc: `总提及 ${wukong.mentions.toLocaleString()} 次`,
+                detail: `首现第 ${wukong.first_chapter} 回 →`
+            },
+            {
+                label: "TANG · 唐僧出场回数",
+                value: tangseng.appearances,
+                desc: `总提及 ${tangseng.mentions.toLocaleString()} 次`,
+                detail: `首现第 ${tangseng.first_chapter} 回 →`
+            },
+            {
+                label: "EARLIEST · 首现最早",
+                value: data.first_appearance.name,
+                desc: `第 ${data.first_appearance.chapter} 回首次登场`,
+                detail: "取经故事的开端人物 →"
+            }
+        ];
+
+        const row = d3.select("#kpi-row");
+        cards.forEach(c => {
+            const card = row.append("div").attr("class", "kpi-card");
+            card.append("div").attr("class", "label").text(c.label);
+            card.append("div").attr("class", "value").text(c.value);
+            card.append("div").attr("class", "desc").text(c.desc);
+            card.append("div").attr("class", "detail").text(c.detail);
+        });
+    }
+
+    // ============================================================
+    // 渲染：Top 15 横向条形图
+    // ============================================================
+    function renderBarChart(data) {
+        const top = [...data.characters]
+            .sort((a, b) => b.appearances - a.appearances)
+            .slice(0, 15);
+
+        const margin = {top: 20, right: 130, bottom: 36, left: 84};
+        const width = 820 - margin.left - margin.right;
+        const height = top.length * 36 - margin.top - margin.bottom;
+
+        const svg = d3.select("#chart-bar")
+            .attr("width",Math.max(0, width + margin.left + margin.right))
+            .attr("height", height + margin.top + margin.bottom);
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const xMax = d3.max(top, d => d.appearances);
+        const x = d3.scaleLinear()
+            .domain([0, xMax * 1.18])
+            .range([0, width]);
+        const y = d3.scaleBand()
+            .domain(top.map(d => d.name))
+            .range([0, height])
+            .padding(0.25);
+
+        // X 轴
+        g.append("g")
+            .attr("class", "axis")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(x).ticks(6).tickFormat(d => d + " 回"));
+        // Y 轴
+        g.append("g")
+            .attr("class", "axis")
+            .call(d3.axisLeft(y));
+
+        // 轴标签
+        g.append("text")
+            .attr("class", "axis-label")
+            .attr("x", width / 2)
+            .attr("y", height + margin.bottom - 4)
+            .attr("text-anchor", "middle")
+            .text("出场回数");
+
+        const tooltip = d3.select("#tooltip");
+
+        // 条形
+        g.selectAll(".bar")
+            .data(top)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("y", d => y(d.name))
+            .attr("x", 0)
+            .attr("height", y.bandwidth())
+            .attr("width",0)
+            .attr("fill", d => d.color)
+            .attr("rx", 2)
+            .on("mouseover", (e, d) => {
+                tooltip.style("opacity", 1)
+                    .html(`<strong style="color:${d.color}">${d.name}</strong><br>出场：${d.appearances} 回<br>提及：${d.mentions.toLocaleString()} 次<br>首现：第 ${d.first_chapter} 回`);
+            })
+            .on("mousemove", e => {
+                tooltip.style("left", (e.pageX + 14) + "px")
+                    .style("top", (e.pageY - 14) + "px");
+            })
+            .on("mouseout", () => tooltip.style("opacity", 0))
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 50)
+            .attr("width",d => Math.max(0, x(d.appearances)));
+
+        // 数值标签：出场回数
+        g.selectAll(".bar-value")
+            .data(top)
+            .enter()
+            .append("text")
+            .attr("class", "bar-value")
+            .attr("y", d => y(d.name) + y.bandwidth() / 2 + 4)
+            .attr("x", d => x(d.appearances) + 6)
+            .text(d => `${d.appearances} 回`)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 50 + 400)
+            .style("opacity", 1);
+
+        // 提及次数（小字）
+        g.selectAll(".bar-mentions")
+            .data(top)
+            .enter()
+            .append("text")
+            .attr("class", "bar-mentions")
+            .attr("y", d => y(d.name) + y.bandwidth() / 2 + 4)
+            .attr("x", d => x(d.appearances) + 48)
+            .text(d => `/ ${d.mentions.toLocaleString()} 次`)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 50 + 500)
+            .style("opacity", 1);
+    }
+
+    // ============================================================
+    // 渲染：人物 × 回目 矩阵热力图
+    // ============================================================
+    function renderHeatmap(data) {
+        // 回目按 10 回一格分桶
+        const buckets = 10;
+        const bucketSize = 10;
+        const bucketLabels = [];
+        for (let i = 0; i < buckets; i++) {
+            bucketLabels.push(`${i * 10 + 1}-${(i + 1) * 10}`);
+        }
+
+        const chars = [...data.characters].sort((a, b) => b.appearances - a.appearances);
+
+        // 计算每个人物每个区间的提及次数
+        const matrix = chars.map(c => {
+            const row = bucketLabels.map(() => 0);
+            c.timeline.forEach(t => {
+                const idx = Math.min(buckets - 1, Math.floor((t.chapter - 1) / bucketSize));
+                row[idx] += t.mentions;
+            });
+            return {character: c.name, color: c.color, values: row, total: c.mentions};
+        });
+
+        const maxVal = d3.max(matrix, r => d3.max(r.values)) || 1;
+
+        const margin = {top: 20, right: 30, bottom: 50, left: 84};
+        const cellW = 70;
+        const cellH = 26;
+        const width = buckets * cellW;
+        const height = matrix.length * cellH;
+
+        const svg = d3.select("#chart-heatmap")
+            .attr("width",Math.max(0, width + margin.left + margin.right))
+            .attr("height", height + margin.top + margin.bottom);
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 颜色比例（红色系，越深越多）
+        const color = d3.scaleSequential()
+            .domain([0, maxVal])
+            .interpolator(d3.interpolate("#faf7f2", "#c8463a"));
+
+        // X 轴
+        const x = d3.scaleBand()
+            .domain(bucketLabels)
+            .range([0, width])
+            .padding(0.05);
+        g.append("g")
+            .attr("class", "axis")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text")
+            .style("text-anchor", "middle");
+
+        // Y 轴
+        const y = d3.scaleBand()
+            .domain(matrix.map(r => r.character))
+            .range([0, height])
+            .padding(0.05);
+        g.append("g")
+            .attr("class", "axis")
+            .call(d3.axisLeft(y));
+
+        // 轴标签
+        g.append("text")
+            .attr("class", "axis-label")
+            .attr("x", width / 2)
+            .attr("y", height + 38)
+            .attr("text-anchor", "middle")
+            .text("回目区间");
+        g.append("text")
+            .attr("class", "axis-label")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -height / 2)
+            .attr("y", -64)
+            .attr("text-anchor", "middle")
+            .text("人物");
+
+        const tooltip = d3.select("#tooltip");
+
+        // 单元格 + 数值
+        matrix.forEach((row, ri) => {
+            g.selectAll(null)
+                .data(row.values.map((v, ci) => ({
+                    value: v, ci, ri,
+                    character: row.character, color: row.color
+                })))
+                .enter()
+                .append("rect")
+                .attr("x", d => x(bucketLabels[d.ci]))
+                .attr("y", d => y(row.character))
+                .attr("width",Math.max(0, x.bandwidth()))
+                .attr("height", y.bandwidth())
+                .attr("fill", d => d.value === 0 ? "#faf7f2" : color(d.value))
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 1)
+                .style("opacity", 0)
+                .on("mouseover", (e, d) => {
+                    tooltip.style("opacity", 1)
+                        .html(`<strong style="color:${d.color}">${d.character}</strong><br>区间：第 ${bucketLabels[d.ci]} 回<br>提及：${d.value} 次`);
+                })
+                .on("mousemove", e => {
+                    tooltip.style("left", (e.pageX + 14) + "px")
+                        .style("top", (e.pageY - 14) + "px");
+                })
+                .on("mouseout", () => tooltip.style("opacity", 0))
+                .transition()
+                .duration(600)
+                .delay(d => (d.ri + d.ci) * 25)
+                .style("opacity", 1);
+
+            row.values.forEach((v, ci) => {
+                if (v > 0) {
+                    g.append("text")
+                        .attr("x", x(bucketLabels[ci]) + x.bandwidth() / 2)
+                        .attr("y", y(row.character) + y.bandwidth() / 2 + 4)
+                        .attr("text-anchor", "middle")
+                        .style("font-size", "10px")
+                        .style("font-family", '"JetBrains Mono", monospace')
+                        .style("fill", v > maxVal * 0.55 ? "#fff" : "#2c2418")
+                        .style("opacity", 0)
+                        .text(v)
+                        .transition()
+                        .duration(600)
+                        .delay((ri + ci) * 25 + 300)
+                        .style("opacity", 1);
+                }
+            });
+        });
+
+        // 图例：颜色渐变条
+        const legend = d3.select("#legend-heatmap");
+        legend.selectAll("*").remove();
+        const legendW = 220;
+        const legendH = 12;
+        const legendSvg = legend.append("svg")
+            .attr("width",Math.max(0, legendW + 80))
+            .attr("height", legendH + 22);
+        const defs = legendSvg.append("defs");
+        const gradient = defs.append("linearGradient")
+            .attr("id", "heatmap-gradient")
+            .attr("x1", "0%").attr("x2", "100%");
+        for (let i = 0; i <= 10; i++) {
+            gradient.append("stop")
+                .attr("offset", `${i * 10}%`)
+                .attr("stop-color", color(maxVal * i / 10));
+        }
+        const lg = legendSvg.append("g").attr("transform", "translate(0,4)");
+        lg.append("rect")
+            .attr("width",Math.max(0, legendW))
+            .attr("height", legendH)
+            .attr("fill", "url(#heatmap-gradient)")
+            .attr("stroke", "#d9cdb8");
+        lg.append("text")
+            .attr("x", 0).attr("y", legendH + 14)
+            .style("font-size", "10px")
+            .style("fill", "#6b5e4d")
+            .text("0");
+        lg.append("text")
+            .attr("x", legendW).attr("y", legendH + 14)
+            .attr("text-anchor", "end")
+            .style("font-size", "10px")
+            .style("fill", "#6b5e4d")
+            .text(`${maxVal} 次`);
+        lg.append("text")
+            .attr("x", legendW + 8).attr("y", legendH + 2)
+            .style("font-size", "11px")
+            .style("fill", "#7a5230")
+            .text("提及次数");
+    }
+
+    // ============================================================
+    // 渲染：主要人物出场时间分布（圆点散点图）
+    // ============================================================
+    function renderTimeline(data) {
+        const main = data.characters.filter(c => MAIN_CHARACTERS.includes(c.name));
+        // 按 MAIN_CHARACTERS 顺序排序
+        main.sort((a, b) => MAIN_CHARACTERS.indexOf(a.name) - MAIN_CHARACTERS.indexOf(b.name));
+
+        const allPoints = main.flatMap(c => c.timeline.map(t => ({
+            ...t,
+            character: c
+        })));
+
+        const margin = {top: 20, right: 40, bottom: 50, left: 84};
+        const width = 1000 - margin.left - margin.right;
+        const height = main.length * 70 - margin.top - margin.bottom;
+
+        const svg = d3.select("#chart-timeline")
+            .attr("width",Math.max(0, width + margin.left + margin.right))
+            .attr("height", height + margin.top + margin.bottom);
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear()
+            .domain([1, 100])
+            .range([0, width]);
+        const y = d3.scaleBand()
+            .domain(main.map(c => c.name))
+            .range([0, height])
+            .padding(0.2);
+
+        const maxMentions = d3.max(allPoints, d => d.mentions) || 1;
+        const r = d3.scaleSqrt()
+            .domain([0, maxMentions])
+            .range([2, 18]);
+
+        // X 轴
+        g.append("g")
+            .attr("class", "axis")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(x).ticks(20).tickFormat(d => "第" + d + "回"));
+        // Y 轴
+        g.append("g")
+            .attr("class", "axis")
+            .call(d3.axisLeft(y));
+
+        // 轴标签
+        g.append("text")
+            .attr("class", "axis-label")
+            .attr("x", width / 2)
+            .attr("y", height + 38)
+            .attr("text-anchor", "middle")
+            .text("回目号");
+        g.append("text")
+            .attr("class", "axis-label")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -height / 2)
+            .attr("y", -64)
+            .attr("text-anchor", "middle")
+            .text("人物");
+
+        // 行底色（人物色低透明度）
+        main.forEach(c => {
+            g.append("rect")
+                .attr("x", 0)
+                .attr("y", y(c.name))
+                .attr("width",Math.max(0, width))
+                .attr("height", y.bandwidth())
+                .attr("fill", c.color)
+                .attr("opacity", 0.06);
+        });
+
+        // 网格线（每 10 回一条）
+        for (let ch = 10; ch < 100; ch += 10) {
+            g.append("line")
+                .attr("x1", x(ch)).attr("x2", x(ch))
+                .attr("y1", 0).attr("y2", height)
+                .attr("stroke", "#d9cdb8")
+                .attr("stroke-dasharray", "2,3")
+                .attr("opacity", 0.5);
+        }
+
+        const tooltip = d3.select("#tooltip");
+
+        // 圆点
+        g.selectAll(".dot")
+            .data(allPoints)
+            .enter()
+            .append("circle")
+            .attr("class", "dot")
+            .attr("cx", d => x(d.chapter))
+            .attr("cy", d => y(d.character.name) + y.bandwidth() / 2)
+            .attr("r", 0)
+            .attr("fill", d => d.character.color)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 0.8)
+            .style("opacity", 0.85)
+            .on("mouseover", (e, d) => {
+                tooltip.style("opacity", 1)
+                    .html(`<strong style="color:${d.character.color}">${d.character.name}</strong><br>第 ${d.chapter} 回<br>提及：${d.mentions} 次`);
+                d3.select(e.currentTarget)
+                    .attr("stroke", d.character.color)
+                    .attr("stroke-width", 2)
+                    .style("opacity", 1);
+            })
+            .on("mousemove", e => {
+                tooltip.style("left", (e.pageX + 14) + "px")
+                    .style("top", (e.pageY - 14) + "px");
+            })
+            .on("mouseout", (e) => {
+                tooltip.style("opacity", 0);
+                d3.select(e.currentTarget)
+                    .attr("stroke", "#fff")
+                    .attr("stroke-width", 0.8)
+                    .style("opacity", 0.85);
+            })
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 4)
+            .attr("r", d => r(d.mentions));
+
+        // 图例：圆点大小
+        const legend = d3.select("#legend-timeline");
+        legend.selectAll("*").remove();
+        const legendData = [
+            {label: "少", value: Math.round(maxMentions * 0.2)},
+            {label: "中", value: Math.round(maxMentions * 0.5)},
+            {label: "多", value: maxMentions}
+        ];
+        legendData.forEach(d => {
+            const item = legend.append("div").attr("class", "legend-item");
+            const sz = r(d.value) * 2 + 4;
+            const lsvg = item.append("svg").attr("width",Math.max(0, sz)).attr("height", sz);
+            lsvg.append("circle")
+                .attr("cx", r(d.value) + 2)
+                .attr("cy", r(d.value) + 2)
+                .attr("r", r(d.value))
+                .attr("fill", "#c8463a")
+                .attr("opacity", 0.75);
+            item.append("span").text(`${d.label}（${d.value} 次）`);
+        });
+        // 附加人物色图例
+        legend.append("span").style("margin-left", "12px").style("color", "#6b5e4d").text("｜ 人物色：");
+        main.forEach(c => {
+            const item = legend.append("div").attr("class", "legend-item");
+            item.append("span").attr("class", "legend-swatch").style("background", c.color);
+            item.append("span").text(c.name);
+        });
+    }
+
+    // ============================================================
+    // 渲染：关键洞察
+    // ============================================================
+    function renderInsights(data) {
+        const sorted = [...data.characters].sort((a, b) => b.appearances - a.appearances);
+        const top = sorted[0];
+        const totalMentions = data.characters.reduce((s, c) => s + c.mentions, 0);
+        const wukong = data.characters.find(c => c.name === "孙悟空");
+        const wukongShare = wukong ? (wukong.mentions / totalMentions * 100).toFixed(1) : "—";
+        const earliest = data.first_appearance;
+        const latestFirst = sorted.reduce((a, b) => a.first_chapter > b.first_chapter ? a : b);
+        const top5Apps = sorted.slice(0, 5).reduce((s, c) => s + c.appearances, 0);
+
+        const insights = [
+            `<strong>${top.name}</strong> 出场 ${top.appearances} 回、提及 ${top.mentions.toLocaleString()} 次，戏份最重，提及占主要人物总和的 <strong>${(top.mentions / totalMentions * 100).toFixed(1)}%</strong>。`,
+            `<strong>孙悟空</strong>提及次数占主要人物总和的 <strong>${wukongShare}%</strong>，是绝对的主角光环。`,
+            `<strong>${earliest.name}</strong> 首现于第 <strong>${earliest.chapter}</strong> 回，是故事开端的关键人物。`,
+            `<strong>${latestFirst.name}</strong> 首现于第 ${latestFirst.first_chapter} 回，是主要人物中登场最晚的角色——后段才现身的"压轴"人物。`,
+            `出场频次前 5 位合计 <strong>${top5Apps}</strong> 回次，<strong>戏份高度集中</strong>于核心人物。`
+        ];
+
+        const ul = d3.select("#insights");
+        insights.forEach(text => ul.append("li").html(text));
+    }
+
+    // ============================================================
+    // 数据加载：fetch 失败则 fallback 到 mock 数据
+    // ============================================================
+    async function loadData() {
+        try {
+            const response = await fetch('../../scripts/output/data/character_appearance.json');
+            if (!response.ok) throw new Error('fetch failed');
+            const data = await response.json();
+            document.getElementById('dataSource').innerHTML =
+                '数据源：实时加载自 <code>scripts/output/data/character_appearance.json</code>（http server 模式）';
+            return data;
+        } catch (e) {
+            console.log('[INFO] 使用嵌入式 mock 数据：', e.message);
+            const mock = buildMockData();
+            document.getElementById('dataSource').innerHTML =
+                '数据源：<strong>嵌入式 mock 数据</strong>（fallback 状态）。运行 <code>py B_人物/character_appearance.py --input ../source/原文/分回/ --output output/data/character_appearance.json</code> 生成完整数据';
+            return mock;
+        }
+    }
+
+    // ============================================================
+    // 主流程
+    // ============================================================
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        // 容错：若 server 返回数据缺少 timeline 字段，按算法补齐
+        if (data.characters && data.characters[0] && !data.characters[0].timeline) {
+            data.characters = data.characters.map(c => ({
+                ...c,
+                timeline: makeTimeline(c.first_chapter || 1, c.appearances || 0, c.mentions || 0),
+                color: c.color || "#c8463a"
+            }));
+        }
+        if (!data.first_appearance) {
+            const first = data.characters.reduce((a, b) =>
+                (a.first_chapter || 999) <= (b.first_chapter || 999) ? a : b);
+            data.first_appearance = { name: first.name, chapter: first.first_chapter };
+        }
+        if (!data.total_characters) data.total_characters = data.characters.length;
+
+        renderKPI(data);
+        renderBarChart(data);
+        renderHeatmap(data);
+        renderTimeline(data);
+        renderInsights(data);
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

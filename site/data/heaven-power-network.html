@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>天庭权力关系图 - 西游数据可视化</title>
+<!-- W155·D 方向第 12 个 NLP 可视化 -->
+<!-- 创建于 2026-07-28（v2.2.8 多方向并行批次第八次落地） -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="/site/static/js/d3-sankey.min.js"></script>
+<noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+<style>
+:root {
+  /* 古典宣纸风配色（任务规范 27 变量） */
+  --bg: #faf7f2;            /* 1. 宣纸底色 */
+  --paper: #fffdf6;         /* 2. 内嵌纸张 */
+  --ink: #1a1410;           /* 3. 主墨色 */
+  --ink-soft: #3a2820;      /* 4. 次墨色 */
+  --muted: #5a3828;         /* 5. 暗墨褐 */
+  --border: #d9cdb8;        /* 6. 边线米色 */
+  --card: #fffdf8;          /* 7. 卡片底色 */
+  --shadow: 0 1px 3px rgba(58, 40, 32, 0.10), 0 4px 12px rgba(58, 40, 32, 0.06);
+  /* 主辅色 */
+  --accent: #c8463a;        /* 8. 朱砂红（主） */
+  --accent-2: #3a6b8c;      /* 9. 黛青蓝（次） */
+  --accent-3: #c9a961;      /* 10. 古铜金 */
+  /* 天庭角色配色（四类） */
+  --r-king: #c8463a;        /* 11. 玉帝 · 朱砂 */
+  --r-judge: #c9a961;       /* 12. 太白金星 · 古铜金 */
+  --r-warrior: #5a8a6a;     /* 13. 托塔天王 · 武将绿 */
+  --r-marginal: #8a6a4a;    /* 14. 赤脚大仙 · 边缘褐 */
+  --r-buddha: #b8902a;      /* 15. 如来佛祖 · 暗金 */
+  --r-taoist: #3a6b8c;      /* 16. 太上老君 · 黛青 */
+  /* 阶段配色 */
+  --stage-rise: #5a8a6a;    /* 17. 招安阶段 */
+  --stage-conflict: #c8463a;/* 18. 冲突阶段 */
+  --stage-fate: #c9a961;    /* 19. 收束阶段 */
+  /* 文字 */
+  --text-strong: #1a1410;   /* 20. 标题墨色 */
+  --text-body: #3a2820;     /* 21. 正文墨色 */
+  --text-soft: #5a3828;     /* 22. 弱化墨色 */
+  --text-muted: #8a7c6a;    /* 23. 静音灰褐 */
+  /* 背景 */
+  --bg-soft: #f5f1e8;       /* 24. 弱化背景 */
+  --bg-card: #fffdf8;       /* 25. 卡片背景 */
+  --bg-tooltip: #1a1410;    /* 26. tooltip 背景 */
+  --bg-hero-from: #1a1410;  /* 27. hero 渐变起点 */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "Microsoft YaHei", serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  padding: 20px;
+  min-height: 100vh;
+}
+.container { max-width: 1280px; margin: 0 auto; }
+
+/* Hero */
+header.hero {
+  background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+  color: #f5e9d4;
+  padding: 48px 30px;
+  border-radius: 8px;
+  margin-bottom: 28px;
+  text-align: center;
+  border: 1px solid #2a1c14;
+  position: relative;
+  overflow: hidden;
+}
+header.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(201, 169, 97, 0.20), transparent 60%);
+  pointer-events: none;
+}
+header.hero h1 {
+  font-size: 2.4em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #f5e9d4;
+  letter-spacing: 6px;
+  position: relative; z-index: 1;
+}
+header.hero .subtitle {
+  font-size: 1.02em;
+  color: var(--accent-3);
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+  position: relative; z-index: 1;
+}
+header.hero .meta {
+  color: #b8a888;
+  font-size: 0.85em;
+  margin-top: 10px;
+  position: relative; z-index: 1;
+}
+
+/* Section */
+.section {
+  background: var(--card);
+  margin: 24px 0;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+}
+.section-title {
+  font-size: 1.55em;
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-weight: 600;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+.section-title.alt { color: var(--accent-2); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+.section-sub {
+  color: var(--muted);
+  font-size: 0.86em;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+}
+.definition {
+  background: #fdfaf0;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.92em;
+  border-radius: 0 4px 4px 0;
+  color: var(--ink-soft);
+  line-height: 1.75;
+}
+.definition strong { color: var(--ink); }
+
+/* KPI */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
+  gap: 14px;
+  margin: 18px 0 24px;
+}
+.kpi-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 14px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.kpi-card.alt { border-top-color: var(--accent-2); }
+.kpi-card.alt-2 { border-top-color: var(--accent-3); }
+.kpi-card.alt-3 { border-top-color: var(--r-warrior); }
+.kpi-value {
+  font-size: 1.85em;
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.kpi-card.alt .kpi-value { color: var(--accent-2); }
+.kpi-card.alt-2 .kpi-value { color: var(--accent-3); }
+.kpi-card.alt-3 .kpi-value { color: var(--r-warrior); }
+.kpi-label {
+  color: var(--muted);
+  font-size: 0.84em;
+  margin-top: 4px;
+}
+
+/* 角色类别卡片 */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+.role-card {
+  background: #fdfaf0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 14px;
+  border-top: 4px solid var(--accent);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.role-card:hover, .role-card:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(58, 40, 32, 0.14);
+  outline: none;
+}
+.role-card.r-king { border-top-color: var(--r-king); }
+.role-card.r-judge { border-top-color: var(--r-judge); }
+.role-card.r-warrior { border-top-color: var(--r-warrior); }
+.role-card.r-marginal { border-top-color: var(--r-marginal); }
+.role-card.r-buddha { border-top-color: var(--r-buddha); }
+.role-card.r-taoist { border-top-color: var(--r-taoist); }
+.role-card .r-name {
+  font-size: 1.15em;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.role-card .r-tag {
+  font-size: 0.78em;
+  color: var(--accent-3);
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.role-card .r-desc {
+  font-size: 0.86em;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+.role-card .r-ex {
+  font-size: 0.82em;
+  color: var(--muted);
+  font-style: italic;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+}
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title {
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+  font-size: 1.02em;
+}
+.chart-caption {
+  color: var(--muted);
+  font-size: 0.84em;
+  margin-bottom: 12px;
+}
+.chart-svg {
+  background: #fffdf6;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.84em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; color: var(--ink-soft); }
+.legend-swatch {
+  width: 14px; height: 14px; border-radius: 2px; display: inline-block;
+}
+.legend-swatch.line { width: 18px; height: 3px; border-radius: 1px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: rgba(26, 20, 16, 0.95);
+  color: #fff;
+  padding: 9px 12px;
+  border-radius: 4px;
+  font-size: 0.84em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 280px;
+  line-height: 1.55;
+}
+.tooltip div + div { margin-top: 4px; }
+
+/* Insight list */
+.insight-list { list-style: none; padding: 0; counter-reset: insight; }
+.insight-list li {
+  counter-increment: insight;
+  background: #fdfaf0;
+  margin: 10px 0;
+  padding: 12px 16px 12px 48px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 0 4px 4px 0;
+  position: relative;
+  font-size: 0.92em;
+  color: var(--ink-soft);
+}
+.insight-list li:last-child { border-bottom: none; }
+.insight-list li::before {
+  content: counter(insight, decimal-leading-zero);
+  position: absolute;
+  left: 14px; top: 12px;
+  color: var(--accent);
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+.insight-list li strong { color: var(--accent); font-weight: 600; }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; }
+.node-circle:hover, .node-circle:focus { stroke: var(--accent); stroke-width: 3px; outline: none; }
+
+/* Dashboard section */
+.dash-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  margin-top: 14px;
+}
+.dash-panel {
+  background: #fdfaf0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px;
+}
+.dash-panel h4 {
+  font-size: 1em;
+  color: var(--accent-2);
+  margin-bottom: 10px;
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 6px;
+}
+
+/* Stat table */
+.stat-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  font-size: 0.9em;
+}
+.stat-table th, .stat-table td {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+.stat-table th {
+  background: #f5f1e8;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.88em;
+}
+.stat-table td { color: var(--ink-soft); }
+.stat-table td.num { text-align: right; font-family: "JetBrains Mono", "Consolas", monospace; }
+.stat-table tr:hover td { background: #fdfaf0; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .role-grid { grid-template-columns: 1fr; }
+  .dash-grid { grid-template-columns: 1fr; }
+  header.hero { padding: 32px 18px; }
+  header.hero h1 { font-size: 1.8em; letter-spacing: 3px; }
+  .section { padding: 18px; }
+  .section-title { font-size: 1.3em; }
+  .stat-table { font-size: 0.82em; }
+  .stat-table th, .stat-table td { padding: 6px 8px; }
+}
+@media (max-width: 520px) {
+  .role-grid { grid-template-columns: 1fr; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  body { padding: 10px; }
+  header.hero h1 { font-size: 1.5em; letter-spacing: 2px; }
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.84em;
+  line-height: 1.8;
+}
+footer code {
+  background: #fdfaf0;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  color: var(--accent);
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="hero">
+  <h1>天庭权力关系图</h1>
+  <div class="subtitle">HEAVEN POWER NETWORK · TIANGONG HIERARCHY ATLAS</div>
+  <div class="meta">W155 · D 方向第 12 个 NLP 可视化 · 天庭主体权力结构与关系网络专题</div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">1</div><div class="kpi-label">天庭共主</div></div>
+  <div class="kpi-card alt"><div class="kpi-value">20</div><div class="kpi-label">天庭主体角色</div></div>
+  <div class="kpi-card alt-2"><div class="kpi-value">28</div><div class="kpi-label">权力关系边</div></div>
+  <div class="kpi-card alt-3"><div class="kpi-value">4</div><div class="kpi-label">主体类别</div></div>
+  <div class="kpi-card"><div class="kpi-value">9</div><div class="kpi-label">关键天庭事件</div></div>
+  <div class="kpi-card alt"><div class="kpi-value">5</div><div class="kpi-label">权力维度</div></div>
+  <div class="kpi-card alt-2"><div class="kpi-value">97</div><div class="kpi-label">回目跨度</div></div>
+</div>
+
+<!-- Section 1：概览（天庭权力结构） -->
+<section class="section" aria-labelledby="s1-title">
+  <h2 class="section-title" id="s1-title">壹 · 天庭权力结构概览</h2>
+  <div class="section-sub">HEAVEN SYSTEM OVERVIEW · TIANGONG BUREAUCRACY</div>
+  <div class="definition">
+    <strong>定义：</strong>西游世界天庭并非单一行政机构，而是由"玉帝集权 + 武将执行 + 文官辅佐 + 边缘星宿 + 佛道制衡"五层结构组成的复合体系。
+    <strong>玉帝</strong>——三界共主，居凌霄宝殿，掌天庭最高决策权，降旨调兵与封赏册封；
+    <strong>武将体系</strong>——托塔天王李靖统兵，哪吒为先锋，二郎神听调不听宣，天蓬元帅与卷帘大将分掌水军与仪仗；
+    <strong>文官体系</strong>——太白金星为首席使臣，负责招安与外交，文曲星/武曲星辅佐朝政，月老掌姻缘；
+    <strong>边缘星宿</strong>——赤脚大仙闲散超然，风雨雷电四神司职自然，二十八星宿轮值护法；
+    <strong>佛道制衡</strong>——如来佛祖与太上老君虽非天庭臣属，却通过"玉帝请佛降妖"与"老君献宝收徒"形成对天庭的宗教渗透与权力制衡。
+    天庭体系的核心政治学特征：名义上统御三界，实质上对佛道两界只能"请"而不能"调"，对人间只能"降旨"而不能"直管"——天庭的"集权"是相对的，其实质是三界博弈中的最大公约数。
+  </div>
+  <div class="role-grid" id="role-grid"></div>
+</section>
+
+<!-- Section 2：天庭权力力导向图 -->
+<section class="section" aria-labelledby="s2-title">
+  <h2 class="section-title alt" id="s2-title">贰 · 天庭权力力导向图</h2>
+  <div class="section-sub">FORCE-DIRECTED GRAPH · NODE SIZE = POWER · COLOR = ROLE TYPE</div>
+  <div class="definition">
+    <strong>定义：</strong>以 20 个天庭主体为节点，节点大小映射"权力强度（power 1-10）"，颜色映射"角色类别"。
+    边类型分六种：<strong>朝会</strong>（日常朝议隶属关系）、<strong>降旨</strong>（玉帝直接下达指令）、<strong>调兵</strong>（玉帝命李靖统兵征讨）、<strong>招安</strong>（太白金星奉旨招安妖仙）、<strong>朝拜</strong>（星宿小神对玉帝的礼节性朝拜）、<strong>册封</strong>（玉帝对臣属的封赏晋爵）。
+    力导向图直观呈现"玉帝居中集权、李靖哪吒父子抱团武将、太白金星居中文官枢纽、赤脚大仙游离边缘、佛道两大节点超然制衡"五种拓扑形态。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">天庭权力力导向图（20 节点 / 28 边）</div>
+    <div class="chart-caption">节点大小=权力强度 · 颜色=角色类别 · 边色=关系类型 · 可拖拽 · hover 显示详情</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="580" role="img" aria-label="天庭权力力导向图"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3：天庭-地府-人间-西天关系桑基图 -->
+<section class="section" aria-labelledby="s3-title">
+  <h2 class="section-title alt-2" id="s3-title">叁 · 天庭-地府-人间-西天权力流动桑基图</h2>
+  <div class="section-sub">SANKEY · HEAVEN ↔ UNDERWORLD ↔ YANG-REALM ↔ WEST</div>
+  <div class="definition">
+    <strong>定义：</strong>桑基图展示天庭与三界的权力流向。<strong>天庭体系</strong>为左列（玉帝、武将集团、太白金星、风雨雷电、二十八星宿、月老、赤脚大仙）；
+    <strong>对接体系</strong>为右列（地府、人间、西天、天庭自身）。
+    流量揭示西游天庭体系的政治学定律：天庭并非三界绝对宗主——玉帝对西天只能"请佛降妖"而不能"调佛听命"，对地府只能"降旨"而不能"直管审判"，对人间只能"册封龙王"而不能"干预王朝"——天庭的"统御"是名义的，其实质是三界势力范围的协调机构，最大权力集中于"册封"与"调兵"两项实质权柄。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">天庭 → 地府 / 人间 / 西天 关系桑基图</div>
+    <div class="chart-caption">左：天庭体系角色 · 右：对接三界体系 · 流量=关系强度 · hover 高亮路径</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="540" role="img" aria-label="天庭三界权力流动桑基图"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4：天庭主体权力维度雷达图 -->
+<section class="section" aria-labelledby="s4-title">
+  <h2 class="section-title" id="s4-title">肆 · 天庭主体权力维度雷达图</h2>
+  <div class="section-sub">RADAR · 5 DIMENSIONS · AUTHORITY / MAGIC / MILITARY / INDEPENDENCE / PRESTIGE</div>
+  <div class="definition">
+    <strong>定义：</strong>五维度评估天庭主体综合权力——<strong>权位</strong>（朝堂决策之权）、<strong>法力</strong>（神通变化武艺）、<strong>兵权</strong>（统兵调将之能）、<strong>独立性</strong>（不受玉帝直接干预的程度）、<strong>朝望</strong>（在天庭体系内的威望人脉）。
+    雷达面积越大，天庭综合权力越高。玉帝权位满分但法力依赖佛道；如来法力独立双满分但权位为外辅；太白金星朝望高而兵权低；托塔天王兵权高而独立性低；赤脚大仙独立性最高但综合最低——天庭权力的"集中"与"分散"在雷达图上形成鲜明对照。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">天庭主体五维度权力雷达图（4 类别 12 主体叠加对比）</div>
+    <div class="chart-caption">数值 0-10 · 点击图例切换显示 · hover 查看详情</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="560" role="img" aria-label="天庭主体权力维度雷达图"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5：天庭权力演变时间线 -->
+<section class="section" aria-labelledby="s5-title">
+  <h2 class="section-title alt" id="s5-title">伍 · 天庭权力演变时间线</h2>
+  <div class="section-sub">HEAVEN EVENTS TIMELINE · BY CHAPTER ORDER</div>
+  <div class="definition">
+    <strong>定义：</strong>按回目顺序排列 9 个关键天庭事件，按事件性质分轨展示。
+    每个节点标记关键事件（招安/大闹/调兵/贬谪/收妖/赐雨/封佛），用颜色区分阶段：<strong>招安</strong>（天庭招抚妖仙）、<strong>冲突</strong>（与妖仙正面冲突）、<strong>收束</strong>（终局封赏收尾）。
+    时间线呈现"前期密集（第3-7回大闹天宫线）、中段调兵（第50-74回多次请佛降妖）、终局封佛（第100回五圣成真）"三段节奏——天庭在取经叙事中既是"开局挑战者"又是"中段求助者"，最终以"封佛收束"完成权力让渡。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">天庭权力演变时间线（第3-100回）</div>
+    <div class="chart-caption">X 轴：回目时序 · Y 轴：事件阶段分轨 · 节点颜色：阶段 · hover 显示详情</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="480" role="img" aria-label="天庭权力演变时间线"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6：天庭权力结构统计 -->
+<section class="section" aria-labelledby="s6-title">
+  <h2 class="section-title alt-2" id="s6-title">陆 · 天庭权力结构统计</h2>
+  <div class="section-sub">DASHBOARD · KEY INSIGHTS + STATISTICS</div>
+  <div class="definition">
+    <strong>定义：</strong>统计表汇总天庭体系的核心指标：按主体类别分布、按对接体系占比、按事件阶段计数、综合权力对比、权力强度 Top 5、跨回目跨度等。
+    以"统计卡片 + 统计表 + 小型图表"组合方式，将前五节散点信息浓缩为可对比的概览视图，并提炼三条天庭政治学核心洞察。
+  </div>
+  <div class="kpi-row" id="dash-kpi-row"></div>
+  <div class="dash-grid">
+    <div class="dash-panel">
+      <h4>天庭权力强度 Top 5（条形图）</h4>
+      <svg id="chart-bar-top" class="chart-svg" width="100%" height="280" role="img" aria-label="天庭权力强度 Top 5"></svg>
+    </div>
+    <div class="dash-panel">
+      <h4>事件阶段分布（甜甜圈图）</h4>
+      <svg id="chart-donut" class="chart-svg" width="100%" height="280" role="img" aria-label="天庭事件阶段分布甜甜圈图"></svg>
+    </div>
+  </div>
+  <h4 style="margin-top: 22px; color: var(--accent-2); font-size: 1.05em;">天庭主体权力结构统计表</h4>
+  <table class="stat-table" id="stat-table">
+    <thead>
+      <tr>
+        <th>主体类别</th>
+        <th>数量</th>
+        <th>平均权力</th>
+        <th>核心权柄</th>
+        <th>代表角色</th>
+      </tr>
+    </thead>
+    <tbody id="stat-tbody"></tbody>
+  </table>
+  <ul class="insight-list" style="margin-top: 22px;">
+    <li><strong>天庭集权是相对的：</strong>玉帝虽为三界共主，但对佛道两界只能"请"而不能"调"——大闹天宫时需请如来降妖，青牛精事件需请太上老君收服，狮驼岭需如来亲自出面。天庭的"统御权"在法力层面被佛道双重架空，其权力实质集中于"册封"与"调兵"两项制度性权柄，而非个人神通。</li>
+    <li><strong>太白金星是天庭的政治枢纽：</strong>20 个天庭主体中，太白金星同时连接玉帝（降旨）、妖仙（招安）、取经团队（外交）三方，是天庭权力网络的中介节点。他的存在使天庭的"武力征讨"被"招安外交"穿透——这是西游天庭体系最大的制度柔性，也是孙悟空能从"妖仙"转为"取经人"的政治学根源。</li>
+    <li><strong>天庭事件呈"两端密集、中段调兵"节奏：</strong>9 个关键事件中，4 个集中在第3-7回（大闹天宫线 + 招安线），4 个分布于第50-88回（多次请佛降妖 + 贬谪 + 赐雨），1 个在第100回（五圣成真封佛）。这种分布揭示：天庭在取经叙事中是"开局挑战者"与"终局封佛者"，中段则退居"求助者"——天庭的戏剧功能从"对手"转为"赞助人"，最终以"封佛"完成权力让渡。</li>
+  </ul>
+</section>
+
+<footer>
+  <p>W155 天庭权力关系图 · D 方向第 12 个 NLP 可视化 · 基于 W100/W121/W125/W143 多层 NLP 数据</p>
+  <p>古典宣纸风配色 · D3.js v7 + d3-sankey · F6 skeleton（fetchJson → loadData → main → render×N → cache → resize）</p>
+  <p id="dataSource">数据源：嵌入数据 EMBEDDED_DATA（file:// 模式可直接打开）</p>
+</footer>
+
+</div>
+
+<script>
+// ============================================================
+// EMBEDDED DATA —— 天庭权力关系数据
+// ============================================================
+const EMBEDDED_DATA = {
+  // 六类角色概览
+  hierarchy: [
+    {
+      key: "king", name: "玉帝（帝王）", tag: "JADE EMPEROR",
+      color: "#c8463a",
+      desc: "三界共主，居凌霄宝殿。掌天庭最高决策权，降旨调兵与封赏册封。名义统御三界，实质对佛道只能'请'不能'调'。",
+      examples: "玉皇大帝 · 王母娘娘"
+    },
+    {
+      key: "warrior", name: "武将集团", tag: "WARRIORS",
+      color: "#5a8a6a",
+      desc: "托塔天王李靖统兵，哪吒为先锋，二郎神听调不听宣。天蓬元帅与卷帘大将分掌水军与仪仗，巨灵神为门神。",
+      examples: "托塔天王李靖 · 哪吒 · 二郎神 · 天蓬元帅 · 卷帘大将 · 巨灵神"
+    },
+    {
+      key: "judge", name: "文官体系", tag: "CIVIL OFFICIALS",
+      color: "#c9a961",
+      desc: "太白金星为首席使臣，负责招安与外交。文曲星/武曲星辅佐朝政，月老掌姻缘。是天庭的行政与外交中枢。",
+      examples: "太白金星 · 文曲星 · 武曲星 · 月老"
+    },
+    {
+      key: "marginal", name: "边缘星宿", tag: "MARGINAL",
+      color: "#8a6a4a",
+      desc: "赤脚大仙闲散超然，风雨雷电四神司职自然，二十八星宿轮值护法。权力分散但职能专精，独立性较高。",
+      examples: "赤脚大仙 · 风神 · 雨神 · 雷公 · 电母 · 二十八星宿"
+    },
+    {
+      key: "buddha", name: "佛门制衡", tag: "BUDDHA",
+      color: "#b8902a",
+      desc: "如来佛祖虽非天庭臣属，却通过'玉帝请佛降妖'形成对天庭的宗教渗透。法力独立双满分，是天庭权力的重要外部制衡。",
+      examples: "如来佛祖"
+    },
+    {
+      key: "taoist", name: "道家制衡", tag: "TAOIST",
+      color: "#3a6b8c",
+      desc: "太上老君居兜率宫，炼丹炼宝。青牛精下凡需老君亲自收服，是天庭权力的重要道家制衡。",
+      examples: "太上老君"
+    }
+  ],
+
+  // Section 2: 力导向图节点与边
+  network: {
+    nodes: [
+      // 帝王
+      { id: "玉帝", type: "帝王", power: 10, chapter: 1 },
+      { id: "王母娘娘", type: "帝王", power: 8, chapter: 5 },
+      // 武将
+      { id: "托塔天王", type: "武将", power: 8, chapter: 4 },
+      { id: "哪吒", type: "武将", power: 7, chapter: 4 },
+      { id: "二郎神", type: "武将", power: 8, chapter: 6 },
+      { id: "天蓬元帅", type: "武将", power: 7, chapter: 18 },
+      { id: "卷帘大将", type: "武将", power: 6, chapter: 22 },
+      { id: "巨灵神", type: "武将", power: 5, chapter: 4 },
+      // 文官
+      { id: "太白金星", type: "文官", power: 8, chapter: 3 },
+      { id: "文曲星", type: "文官", power: 6, chapter: 9 },
+      { id: "武曲星", type: "文官", power: 6, chapter: 9 },
+      { id: "月老", type: "文官", power: 5, chapter: 54 },
+      // 边缘
+      { id: "赤脚大仙", type: "边缘", power: 5, chapter: 7 },
+      { id: "风神", type: "边缘", power: 4, chapter: 45 },
+      { id: "雨神", type: "边缘", power: 4, chapter: 45 },
+      { id: "雷公", type: "边缘", power: 4, chapter: 45 },
+      { id: "电母", type: "边缘", power: 4, chapter: 45 },
+      { id: "二十八星宿", type: "边缘", power: 6, chapter: 65 },
+      // 佛道制衡（外部枢纽）
+      { id: "如来佛祖", type: "佛门", power: 10, chapter: 7 },
+      { id: "太上老君", type: "道家", power: 9, chapter: 5 }
+    ],
+    links: [
+      // 朝会 - 日常朝议隶属关系
+      { source: "玉帝", target: "王母娘娘", type: "朝会" },
+      { source: "玉帝", target: "文曲星", type: "朝会" },
+      { source: "玉帝", target: "武曲星", type: "朝会" },
+      { source: "玉帝", target: "赤脚大仙", type: "朝会" },
+      { source: "玉帝", target: "月老", type: "朝会" },
+      // 降旨 - 玉帝直接下达指令
+      { source: "玉帝", target: "太白金星", type: "降旨" },
+      { source: "玉帝", target: "托塔天王", type: "降旨" },
+      { source: "玉帝", target: "二十八星宿", type: "降旨" },
+      { source: "玉帝", target: "风神", type: "降旨" },
+      { source: "玉帝", target: "雨神", type: "降旨" },
+      // 调兵 - 玉帝命李靖统兵征讨
+      { source: "托塔天王", target: "哪吒", type: "调兵" },
+      { source: "托塔天王", target: "巨灵神", type: "调兵" },
+      { source: "托塔天王", target: "二郎神", type: "调兵" },
+      { source: "托塔天王", target: "天蓬元帅", type: "调兵" },
+      { source: "托塔天王", target: "卷帘大将", type: "调兵" },
+      // 招安 - 太白金星奉旨招安妖仙
+      { source: "太白金星", target: "玉帝", type: "招安" },
+      // 朝拜 - 星宿小神对玉帝的礼节性朝拜
+      { source: "二十八星宿", target: "玉帝", type: "朝拜" },
+      { source: "雷公", target: "玉帝", type: "朝拜" },
+      { source: "电母", target: "玉帝", type: "朝拜" },
+      // 册封 - 玉帝对臣属的封赏晋爵
+      { source: "玉帝", target: "二郎神", type: "册封" },
+      { source: "玉帝", target: "天蓬元帅", type: "册封" },
+      { source: "玉帝", target: "卷帘大将", type: "册封" },
+      // 文官辅佐
+      { source: "文曲星", target: "太白金星", type: "朝会" },
+      { source: "武曲星", target: "太白金星", type: "朝会" },
+      // 佛道制衡（外部）
+      { source: "如来佛祖", target: "玉帝", type: "降旨" },
+      { source: "太上老君", target: "玉帝", type: "朝会" },
+      { source: "王母娘娘", target: "太上老君", type: "朝会" }
+    ]
+  },
+
+  // Section 3: 桑基图（天庭 → 三界对接）
+  sankey: {
+    nodes: [
+      // 天庭体系（左列）
+      { name: "玉帝集团", cat: 0 },
+      { name: "武将集团", cat: 0 },
+      { name: "太白金星", cat: 0 },
+      { name: "风雨雷电", cat: 0 },
+      { name: "二十八星宿", cat: 0 },
+      { name: "月老", cat: 0 },
+      { name: "赤脚大仙", cat: 0 },
+      // 对接体系（右列）
+      { name: "地府", cat: 1 },
+      { name: "人间", cat: 1 },
+      { name: "西天", cat: 1 },
+      { name: "天庭自身", cat: 1 }
+    ],
+    links: [
+      // 玉帝集团 → 对接
+      { source: "玉帝集团", target: "天庭自身", value: 9 },   // 内部集权
+      { source: "玉帝集团", target: "西天", value: 5 },       // 请佛降妖
+      { source: "玉帝集团", target: "人间", value: 4 },       // 降旨人间
+      { source: "玉帝集团", target: "地府", value: 3 },       // 降旨地府（如魏徵斩龙）
+      // 武将集团 → 对接
+      { source: "武将集团", target: "天庭自身", value: 7 },   // 内部调兵
+      { source: "武将集团", target: "人间", value: 3 },       // 下凡征妖
+      // 太白金星 → 对接
+      { source: "太白金星", target: "人间", value: 5 },       // 招安外交
+      { source: "太白金星", target: "天庭自身", value: 3 },   // 朝堂枢纽
+      // 风雨雷电 → 对接
+      { source: "风雨雷电", target: "人间", value: 4 },       // 司职自然降水
+      { source: "风雨雷电", target: "天庭自身", value: 2 },   // 听旨天庭
+      // 二十八星宿 → 对接
+      { source: "二十八星宿", target: "天庭自身", value: 4 }, // 护法轮值
+      { source: "二十八星宿", target: "人间", value: 2 },     // 下凡收妖（如奎木狼）
+      // 月老 → 对接
+      { source: "月老", target: "人间", value: 3 },           // 司姻缘
+      // 赤脚大仙 → 对接
+      { source: "赤脚大仙", target: "天庭自身", value: 2 }    // 闲散朝拜
+    ]
+  },
+
+  // Section 4: 雷达图（12 主体 × 5 维度）
+  // 维度：权位 / 法力 / 兵权 / 独立性 / 朝望
+  radar: [
+    // 帝王
+    { name: "玉帝",       type: "帝王", 权位: 10, 法力: 7, 兵权: 9, 独立性: 4, 朝望: 10 },
+    { name: "王母娘娘",   type: "帝王", 权位: 8,  法力: 7, 兵权: 4, 独立性: 5, 朝望: 8 },
+    // 武将
+    { name: "托塔天王",   type: "武将", 权位: 6,  法力: 7, 兵权: 9, 独立性: 3, 朝望: 7 },
+    { name: "哪吒",       type: "武将", 权位: 5,  法力: 8, 兵权: 7, 独立性: 4, 朝望: 6 },
+    { name: "二郎神",     type: "武将", 权位: 6,  法力: 9, 兵权: 7, 独立性: 7, 朝望: 5 },
+    { name: "天蓬元帅",   type: "武将", 权位: 6,  法力: 7, 兵权: 7, 独立性: 4, 朝望: 6 },
+    { name: "卷帘大将",   type: "武将", 权位: 5,  法力: 6, 兵权: 5, 独立性: 4, 朝望: 5 },
+    // 文官
+    { name: "太白金星",   type: "文官", 权位: 7,  法力: 6, 兵权: 3, 独立性: 5, 朝望: 9 },
+    { name: "文曲星",     type: "文官", 权位: 5,  法力: 5, 兵权: 2, 独立性: 4, 朝望: 6 },
+    { name: "武曲星",     type: "文官", 权位: 5,  法力: 5, 兵权: 4, 独立性: 4, 朝望: 6 },
+    { name: "月老",       type: "文官", 权位: 4,  法力: 6, 兵权: 1, 独立性: 7, 朝望: 5 },
+    // 边缘
+    { name: "赤脚大仙",   type: "边缘", 权位: 4,  法力: 6, 兵权: 1, 独立性: 9, 朝望: 5 },
+    { name: "二十八星宿", type: "边缘", 权位: 4,  法力: 6, 兵权: 5, 独立性: 5, 朝望: 5 },
+    { name: "风神",       type: "边缘", 权位: 3,  法力: 5, 兵权: 2, 独立性: 5, 朝望: 4 },
+    { name: "如来佛祖",   type: "佛门", 权位: 7,  法力: 10,兵权: 6, 独立性: 10,朝望: 8 },
+    { name: "太上老君",   type: "道家", 权位: 6,  法力: 10,兵权: 4, 独立性: 9, 朝望: 7 }
+  ],
+
+  // Section 5: 时间线（9 事件按回目排序）
+  timeline: [
+    { order: 1, chapter: 3,  actor: "太白金星", stage: "rise",     event: "首次招安", desc: "太白金星奉旨下界招安孙悟空，封弼马温。天庭以招安代替征讨，开启柔性政治。" },
+    { order: 2, chapter: 4,  actor: "托塔天王", stage: "conflict", event: "调兵征讨", desc: "李靖奉旨统兵讨伐悟空，哪吒为先锋，巨灵神出战。首次天庭武力征讨失败。" },
+    { order: 3, chapter: 5,  actor: "玉帝",     stage: "rise",     event: "二次招安", desc: "玉帝二次招安悟空，封齐天大圣，建齐天大圣府。天庭政治妥协的极致。" },
+    { order: 4, chapter: 7,  actor: "如来佛祖", stage: "conflict", event: "大闹天宫", desc: "悟空大闹天宫败天将，玉帝请如来佛祖降妖，五行山镇压。天庭武力与玉帝神通双重失效，依赖佛门制衡。" },
+    { order: 5, chapter: 22, actor: "玉帝",     stage: "fate",     event: "贬谪天蓬卷帘", desc: "天蓬元帅贬下凡为猪八戒，卷帘大将贬为沙僧。天庭对犯臣的惩处，亦是取经团队的伏笔。" },
+    { order: 6, chapter: 50, actor: "太上老君", stage: "conflict", event: "青牛精收服", desc: "青牛精下凡作乱，悟空请玉帝查无此妖，最终请太上老君收服。道家制衡天庭权力的典型事件。" },
+    { order: 7, chapter: 65, actor: "二十八星宿",stage: "conflict", event: "小雷音寺救驾", desc: "黄眉怪困悟空，二十八星宿下凡相救，亢金龙破铙钹。边缘星宿的集体救驾事件。" },
+    { order: 8, chapter: 74, actor: "如来佛祖", stage: "conflict", event: "狮驼岭收大鹏", desc: "狮驼岭三怪之首为大鹏金翅雕，如来佛祖亲自出面收服。天庭再次依赖佛门降妖。" },
+    { order: 9, chapter: 88, actor: "玉帝",     stage: "fate",     event: "凤仙郡赐雨", desc: "玉帝因凤仙郡守冒犯天威设米山面山，悟空劝谏后玉帝赐雨。天庭权力的'显灵'式收束。" }
+  ],
+
+  // Section 6: 仪表盘统计
+  summary: {
+    byType: [
+      { type: "帝王", count: 2, avgPower: 9.0 },
+      { type: "武将", count: 6, avgPower: 6.8 },
+      { type: "文官", count: 4, avgPower: 6.3 },
+      { type: "边缘", count: 6, avgPower: 4.7 },
+      { type: "佛门", count: 1, avgPower: 9.0 },
+      { type: "道家", count: 1, avgPower: 9.0 }
+    ],
+    byRealm: [
+      { realm: "天庭自身", count: 14 },
+      { realm: "人间", count: 6 },
+      { realm: "西天", count: 3 },
+      { realm: "地府", count: 2 }
+    ],
+    byStage: [
+      { stage: "招安", count: 3 },
+      { stage: "冲突", count: 4 },
+      { stage: "收束", count: 2 }
+    ],
+    topPower: [
+      { name: "玉帝",       power: 10, type: "帝王" },
+      { name: "如来佛祖",   power: 10, type: "佛门" },
+      { name: "太上老君",   power: 9,  type: "道家" },
+      { name: "王母娘娘",   power: 8,  type: "帝王" },
+      { name: "托塔天王",   power: 8,  type: "武将" }
+    ],
+    metrics: {
+      totalCharacters: 20,
+      totalLinks: 28,
+      avgPower: 6.4,
+      maxSpan: 97,                // 第3-100回跨度
+      warriorInternalRate: "21%", // 6/28 武将调兵关系占比
+      crossRealmRate: "32%"       // 9/28 跨界关系占比
+    }
+  }
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W155] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const hierarchy = await fetchJson(base + 'heaven-hierarchy.json', 'hierarchy');
+  return {
+    hierarchy: Array.isArray(hierarchy) ? hierarchy : (hierarchy.hierarchy || EMBEDDED_DATA.hierarchy),
+    network: EMBEDDED_DATA.network,
+    sankey: EMBEDDED_DATA.sankey,
+    radar: EMBEDDED_DATA.radar,
+    timeline: EMBEDDED_DATA.timeline,
+    summary: EMBEDDED_DATA.summary
+  };
+}
+
+// ============================================================
+// Section 1: 六类角色卡片
+// ============================================================
+function renderHierarchy(hierarchy) {
+  const grid = d3.select('#role-grid');
+  grid.html('');
+  if (!hierarchy || hierarchy.length === 0) {
+    grid.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+  const card = grid.selectAll('.role-card')
+    .data(hierarchy)
+    .enter()
+    .append('div')
+    .attr('class', d => 'role-card r-' + d.key)
+    .attr('role', 'button')
+    .attr('tabindex', '0')
+    .attr('aria-label', d => d.name + ' · ' + d.tag);
+
+  card.append('div').attr('class', 'r-name').text(d => d.name);
+  card.append('div').attr('class', 'r-tag').text(d => d.tag);
+  card.append('div').attr('class', 'r-desc').text(d => d.desc);
+  card.append('div').attr('class', 'r-ex').text(d => '例：' + d.examples);
+
+  card.on('keydown', function(e, d) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showRoleTooltip(e, d);
+    }
+  });
+  card.on('click', function(e, d) { showRoleTooltip(e, d); });
+}
+
+function showRoleTooltip(event, d) {
+  let tip = d3.select('.tooltip');
+  if (tip.empty()) tip = d3.select('body').append('div').attr('class', 'tooltip');
+  tip.html('')
+    .style('opacity', 0.95)
+    .style('left', (event.pageX + 10) + 'px')
+    .style('top', (event.pageY - 28) + 'px');
+  tip.append('div').html('<strong>' + d.name + '</strong> · ' + d.tag);
+  tip.append('div').text(d.desc);
+  tip.append('div').text('代表角色：' + d.examples);
+  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3500);
+}
+
+// ============================================================
+// Section 2: 天庭权力力导向图
+// ============================================================
+function renderForce(networkData) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 280).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 580;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const typeColors = {
+    "帝王": "#c8463a",
+    "武将": "#5a8a6a",
+    "文官": "#c9a961",
+    "边缘": "#8a6a4a",
+    "佛门": "#b8902a",
+    "道家": "#3a6b8c"
+  };
+  const linkColors = {
+    "朝会": "#c9a961",
+    "降旨": "#c8463a",
+    "调兵": "#5a8a6a",
+    "招安": "#3a6b8c",
+    "朝拜": "#8a6a4a",
+    "册封": "#b8902a"
+  };
+
+  const nodes = networkData.nodes.map(d => ({ ...d }));
+  const links = networkData.links.map(d => ({ ...d }));
+
+  function nodeRadius(d) {
+    if (d.type === "帝王" || d.type === "佛门") return 16;
+    return 6 + d.power * 1.4;
+  }
+  function nodeFill(d) {
+    return typeColors[d.type] || '#8a7c6a';
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id)
+      .distance(d => d.type === "招安" ? 160 : d.type === "调兵" ? 70 : d.type === "朝会" ? 80 : d.type === "降旨" ? 110 : 90)
+      .strength(d => d.type === "调兵" ? 0.7 : d.type === "朝会" ? 0.5 : d.type === "降旨" ? 0.5 : 0.2))
+    .force('charge', d3.forceManyBody().strength(d => d.type === "帝王" ? -450 : d.type === "佛门" || d.type === "道家" ? -400 : -180))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 6));
+
+  // 边
+  const link = svg.append('g').selectAll('line')
+    .data(links)
+    .enter().append('line')
+    .attr('stroke', d => linkColors[d.type] || '#d9cdb8')
+    .attr('stroke-width', d => d.type === "降旨" ? 2.5 : d.type === "调兵" ? 2.2 : d.type === "册封" ? 2 : 1.2)
+    .attr('stroke-opacity', 0.55)
+    .attr('stroke-dasharray', d => d.type === "招安" ? "6,3" : d.type === "朝拜" ? "3,2" : d.type === "册封" ? "5,2" : "0");
+
+  // 节点
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', nodeFill)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .attr('tabindex', 0)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.id + '</strong>');
+      tooltip.append('div').text('类别：' + d.type);
+      tooltip.append('div').text('权力强度：' + d.power + ' / 10');
+      tooltip.append('div').text('首次出场：第' + d.chapter + '回');
+      const connected = links.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('关联边数：' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  // 标签
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => (d.type === "帝王" || d.type === "佛门" || d.type === "道家") ? -24 : -1 * (nodeRadius(d) + 4))
+    .attr('font-weight', d => (d.type === "帝王" || d.type === "佛门" || d.type === "道家") ? 700 : 500)
+    .attr('font-size', d => (d.type === "帝王" || d.type === "佛门" || d.type === "道家") ? 12 : 11)
+    .attr('fill', d => d.type === "帝王" ? '#c8463a' : d.type === "佛门" ? '#b8902a' : d.type === "道家" ? '#3a6b8c' : '#1a1410')
+    .text(d => d.id);
+
+  sim.on('tick', () => {
+    link.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('cx', d => d.x).attr('cy', d => d.y);
+    label.attr('x', d => d.x).attr('y', d => d.y);
+  });
+
+  // 图例
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const typeLegend = [
+    { label: '帝王（玉帝）', color: typeColors["帝王"] },
+    { label: '武将集团', color: typeColors["武将"] },
+    { label: '文官体系', color: typeColors["文官"] },
+    { label: '边缘星宿', color: typeColors["边缘"] },
+    { label: '佛门制衡', color: typeColors["佛门"] },
+    { label: '道家制衡', color: typeColors["道家"] }
+  ];
+  const linkLegend = [
+    { label: '朝会', color: linkColors["朝会"], dash: '0' },
+    { label: '降旨', color: linkColors["降旨"], dash: '0' },
+    { label: '调兵', color: linkColors["调兵"], dash: '0' },
+    { label: '招安', color: linkColors["招安"], dash: '6,3' },
+    { label: '朝拜', color: linkColors["朝拜"], dash: '3,2' },
+    { label: '册封', color: linkColors["册封"], dash: '5,2' }
+  ];
+  typeLegend.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch').style('background', item.color);
+    li.append('span').text(item.label);
+  });
+  linkLegend.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch line')
+      .style('background', item.color)
+      .style('background-image', item.dash === '0' ? 'none' :
+        `repeating-linear-gradient(to right, ${item.color} 0 4px, transparent 4px 7px)`);
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: 天庭 → 三界桑基图
+// ============================================================
+function renderSankey(sankeyData) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyData || !sankeyData.nodes || sankeyData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 270).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 270).attr('fill', '#c8463a')
+      .text('d3-sankey 未加载，请检查网络');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 540;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 30, right: 20, bottom: 20, left: 20 };
+  const catColors = ['#c8463a', '#3a6b8c'];
+  const nodeColors = {
+    "玉帝集团": "#c8463a", "武将集团": "#5a8a6a", "太白金星": "#c9a961",
+    "风雨雷电": "#8a6a4a", "二十八星宿": "#8a6a4a", "月老": "#c9a961",
+    "赤脚大仙": "#8a6a4a",
+    "地府": "#5a3828", "人间": "#6b8e6f",
+    "西天": "#b8902a", "天庭自身": "#c8463a"
+  };
+
+  const nodes = sankeyData.nodes.map(d => ({ ...d }));
+  const links = sankeyData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(18)
+    .nodePadding(14)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 链接
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => nodeColors[d.source.name] || catColors[d.source.cat])
+    .attr('stroke-width', d => Math.max(2, d.width))
+    .attr('stroke-opacity', 0.45)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.75);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('关系强度：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.45);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => d.x1 - d.x0)
+    .attr('height', d => Math.max(2, d.y1 - d.y0))
+    .attr('fill', d => nodeColors[d.name] || catColors[d.cat])
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      tooltip.append('div').text('层级：' + (d.cat === 0 ? '天庭体系角色' : '对接三界体系'));
+      tooltip.append('div').text('关系总数：' + d.value);
+      tooltip.append('div').text('流入：' + (d.targetLinks || []).length + ' · 流出：' + (d.sourceLinks || []).length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .attr('fill', '#1a1410')
+    .text(d => d.name);
+
+  // 列标题
+  svg.append('text')
+    .attr('x', margin.left + 4).attr('y', 18)
+    .attr('font-size', '13px').attr('font-weight', '700')
+    .attr('fill', '#c8463a').text('天庭体系角色');
+  svg.append('text')
+    .attr('x', width - margin.right - 4).attr('y', 18)
+    .attr('text-anchor', 'end')
+    .attr('font-size', '13px').attr('font-weight', '700')
+    .attr('fill', '#3a6b8c').text('对接三界体系');
+
+  // 图例
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const legendItems = [
+    { label: '玉帝集团', color: '#c8463a' },
+    { label: '武将集团', color: '#5a8a6a' },
+    { label: '太白金星', color: '#c9a961' },
+    { label: '边缘星宿', color: '#8a6a4a' },
+    { label: '地府', color: '#5a3828' },
+    { label: '人间', color: '#6b8e6f' },
+    { label: '西天', color: '#b8902a' },
+    { label: '天庭自身', color: '#c8463a' }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch').style('background', item.color);
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 4: 天庭主体权力维度雷达图
+// ============================================================
+function renderRadar(radarData) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!radarData || radarData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 200).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 560;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const dimensions = ['权位', '法力', '兵权', '独立性', '朝望'];
+  const typeColors = {
+    "帝王": "#c8463a",
+    "武将": "#5a8a6a",
+    "文官": "#c9a961",
+    "边缘": "#8a6a4a",
+    "佛门": "#b8902a",
+    "道家": "#3a6b8c"
+  };
+
+  const cx = width / 2;
+  const cy = height / 2;
+  const radius = Math.min(width, height) / 2 - 80;
+  const levels = 5;
+
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  // 同心五边形
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d9cdb8')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // 轴线 + 维度标签
+  dimensions.forEach((dim, i) => {
+    const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d9cdb8')
+      .attr('stroke-width', 1);
+    const labelR = radius + 28;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', '#1a1410')
+      .text(dim);
+  });
+
+  // 数值刻度
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6).attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '10px')
+      .attr('fill', '#8a7c6a')
+      .text(lvl * 2);
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 雷达多边形
+  radarData.forEach((m, idx) => {
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      const r = radius * (m[dim] / 10);
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    const color = typeColors[m.type] || '#8a7c6a';
+
+    const poly = gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.08)
+      .attr('stroke', color)
+      .attr('stroke-width', 1.5)
+      .attr('stroke-opacity', 0.7)
+      .style('cursor', 'pointer')
+      .attr('class', 'radar-poly idx-' + idx);
+
+    poly.on('mouseover', function(e) {
+      d3.select(this).attr('fill-opacity', 0.3).attr('stroke-width', 2.5);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + m.name + '</strong> · ' + m.type);
+      dimensions.forEach(dim => {
+        tooltip.append('div').text(dim + '：' + m[dim] + ' / 10');
+      });
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('fill-opacity', 0.08).attr('stroke-width', 1.5);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+    // 顶点圆
+    points.forEach(p => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 2.5)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 0.8)
+        .attr('pointer-events', 'none');
+    });
+  });
+
+  // 图例（按类型聚合，可点击切换显示）
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  const typeAgg = {};
+  radarData.forEach(m => {
+    if (!typeAgg[m.type]) typeAgg[m.type] = { count: 0, color: typeColors[m.type] };
+    typeAgg[m.type].count++;
+  });
+  Object.keys(typeAgg).forEach(type => {
+    const item = legend.append('div').attr('class', 'legend-item')
+      .style('cursor', 'pointer')
+      .attr('role', 'button')
+      .attr('tabindex', '0')
+      .attr('aria-label', '切换 ' + type + ' 显示');
+    item.append('div').attr('class', 'legend-swatch').style('background', typeAgg[type].color);
+    item.append('span').text(type + '（' + typeAgg[type].count + '）');
+    item.on('click', function() {
+      const active = !d3.select(this).classed('inactive');
+      d3.select(this).classed('inactive', active);
+      d3.selectAll('.radar-poly').each(function() {
+        const cls = d3.select(this).attr('class');
+        const idx = +cls.match(/idx-(\d+)/)[1];
+        if (radarData[idx].type === type) {
+          d3.select(this).style('display', active ? 'none' : null);
+        }
+      });
+    });
+    item.on('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        d3.select(this).node().click();
+      }
+    });
+  });
+}
+
+// ============================================================
+// Section 5: 天庭权力演变时间线
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 200).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 480;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const stageOrder = ["rise", "conflict", "fate"];
+  const stageColors = {
+    rise: "#5a8a6a",       // 招安 - 武将绿
+    conflict: "#c8463a",   // 冲突 - 朱砂
+    fate: "#c9a961"        // 收束 - 古铜金
+  };
+  const stageLabels = { rise: "招安", conflict: "冲突", fate: "收束" };
+  const stageChinese = { rise: "招安轨", conflict: "冲突轨", fate: "收束轨" };
+
+  const margin = { top: 30, right: 30, bottom: 60, left: 90 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const xMin = 0;
+  const xMax = 105;
+  const xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, innerW]);
+
+  const yScale = d3.scaleBand()
+    .domain(stageOrder)
+    .range([0, innerH])
+    .padding(0.3);
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 背景行
+  stageOrder.forEach(name => {
+    g.append('rect')
+      .attr('x', 0)
+      .attr('y', yScale(name))
+      .attr('width', innerW)
+      .attr('height', yScale.bandwidth())
+      .attr('fill', stageColors[name])
+      .attr('fill-opacity', 0.06);
+  });
+
+  // 连线（同一人物事件串联）
+  const actors = Array.from(new Set(timelineData.map(d => d.actor)));
+  actors.forEach(actor => {
+    const vEvents = timelineData.filter(d => d.actor === actor).sort((a, b) => a.chapter - b.chapter);
+    if (vEvents.length > 1) {
+      const line = d3.line()
+        .x(d => xScale(d.chapter))
+        .y(d => yScale(d.stage) + yScale.bandwidth() / 2)
+        .curve(d3.curveMonotoneX);
+      g.append('path')
+        .datum(vEvents)
+        .attr('fill', 'none')
+        .attr('stroke', stageColors[vEvents[0].stage])
+        .attr('stroke-width', 1.5)
+        .attr('stroke-opacity', 0.5)
+        .attr('stroke-dasharray', '4,3')
+        .attr('d', line);
+    }
+  });
+
+  // 事件节点
+  g.selectAll('.event-node')
+    .data(timelineData)
+    .enter()
+    .append('circle')
+    .attr('class', 'event-node')
+    .attr('cx', d => xScale(d.chapter))
+    .attr('cy', d => yScale(d.stage) + yScale.bandwidth() / 2)
+    .attr('r', 10)
+    .attr('fill', d => stageColors[d.stage] || '#8a7c6a')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .attr('tabindex', 0)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('r', 13);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.actor + '</strong> · ' + stageLabels[d.stage]);
+      tooltip.append('div').text('回目：第' + d.chapter + '回');
+      tooltip.append('div').text('阶段：' + stageLabels[d.stage]);
+      tooltip.append('div').text('事件：' + d.event);
+      tooltip.append('div').text(d.desc);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('r', 10);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 序号
+  g.selectAll('.event-label')
+    .data(timelineData)
+    .enter()
+    .append('text')
+    .attr('class', 'event-label')
+    .attr('x', d => xScale(d.chapter))
+    .attr('y', d => yScale(d.stage) + yScale.bandwidth() / 2)
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
+    .attr('font-size', '10px')
+    .attr('font-weight', '700')
+    .attr('fill', '#fff')
+    .attr('pointer-events', 'none')
+    .text(d => d.order);
+
+  // Y 轴标签
+  stageOrder.forEach(name => {
+    g.append('text')
+      .attr('x', -12)
+      .attr('y', yScale(name) + yScale.bandwidth() / 2)
+      .attr('text-anchor', 'end')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', stageColors[name])
+      .text(stageChinese[name]);
+  });
+
+  // X 轴
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).tickFormat(d => '第' + d + '回'))
+    .selectAll('text').attr('font-size', '11px');
+
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 45)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7c6a')
+    .text('回目时序');
+
+  // 图例
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  const stages = [
+    { label: '招安 (rise)', color: stageColors.rise },
+    { label: '冲突 (conflict)', color: stageColors.conflict },
+    { label: '收束 (fate)', color: stageColors.fate }
+  ];
+  stages.forEach(s => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', s.color);
+    item.append('span').text(s.label);
+  });
+}
+
+// ============================================================
+// Section 6: 关键洞察仪表盘 + 统计表
+// ============================================================
+function renderDashboard(summary) {
+  const kpiRow = d3.select('#dash-kpi-row');
+  kpiRow.html('');
+  if (!summary || !summary.metrics) {
+    kpiRow.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+  const m = summary.metrics;
+  const kpis = [
+    { label: '天庭主体总数', value: m.totalCharacters, cls: '' },
+    { label: '权力关系边', value: m.totalLinks, cls: 'alt' },
+    { label: '平均权力', value: m.avgPower, cls: 'alt-2' },
+    { label: '回目跨度', value: m.maxSpan + ' 回', cls: 'alt-3' },
+    { label: '武将调兵关系率', value: m.warriorInternalRate, cls: '' },
+    { label: '跨界关系率', value: m.crossRealmRate, cls: 'alt' }
+  ];
+  kpis.forEach(k => {
+    const card = kpiRow.append('div').attr('class', 'kpi-card ' + k.cls);
+    card.append('div').attr('class', 'kpi-value').text(k.value);
+    card.append('div').attr('class', 'kpi-label').text(k.label);
+  });
+
+  renderTopBar(summary.topPower);
+  renderDonut(summary.byStage);
+  renderStatTable(summary.byType);
+}
+
+function renderTopBar(topPower) {
+  const svg = d3.select('#chart-bar-top');
+  svg.selectAll('*').remove();
+  if (!topPower || topPower.length === 0) {
+    svg.append('text').attr('x', 120).attr('y', 120).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 500;
+  const height = 280;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 30, bottom: 30, left: 90 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const typeColors = {
+    "帝王": "#c8463a", "武将": "#5a8a6a", "文官": "#c9a961",
+    "边缘": "#8a6a4a", "佛门": "#b8902a", "道家": "#3a6b8c"
+  };
+
+  const xScale = d3.scaleLinear()
+    .domain([0, 10])
+    .range([0, innerW]);
+  const yScale = d3.scaleBand()
+    .domain(topPower.map(d => d.name))
+    .range([0, innerH])
+    .padding(0.3);
+
+  // 条
+  g.selectAll('.bar')
+    .data(topPower)
+    .enter()
+    .append('rect')
+    .attr('class', 'bar')
+    .attr('x', 0)
+    .attr('y', d => yScale(d.name))
+    .attr('width', d => xScale(d.power))
+    .attr('height', yScale.bandwidth())
+    .attr('fill', d => typeColors[d.type] || '#8a7c6a')
+    .attr('rx', 3);
+
+  // 数值
+  g.selectAll('.bar-label')
+    .data(topPower)
+    .enter()
+    .append('text')
+    .attr('class', 'bar-label')
+    .attr('x', d => xScale(d.power) + 6)
+    .attr('y', d => yScale(d.name) + yScale.bandwidth() / 2)
+    .attr('dy', '0.35em')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .attr('fill', '#1a1410')
+    .text(d => d.power);
+
+  // Y 轴
+  g.append('g')
+    .call(d3.axisLeft(yScale))
+    .selectAll('text').attr('font-size', '12px');
+
+  // X 轴
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).ticks(5))
+    .selectAll('text').attr('font-size', '11px');
+}
+
+function renderDonut(byStage) {
+  const svg = d3.select('#chart-donut');
+  svg.selectAll('*').remove();
+  if (!byStage || byStage.length === 0) {
+    svg.append('text').attr('x', 120).attr('y', 120).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 400;
+  const height = 280;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const stageColors = {
+    "招安": "#5a8a6a", "冲突": "#c8463a", "收束": "#c9a961"
+  };
+
+  const radius = Math.min(width, height) / 2 - 30;
+  const cx = width / 2;
+  const cy = height / 2;
+
+  const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  const pie = d3.pie().value(d => d.count).sort(null);
+  const arc = d3.arc()
+    .innerRadius(radius * 0.55)
+    .outerRadius(radius)
+    .cornerRadius(3);
+
+  const arcs = pie(byStage);
+
+  g.selectAll('path')
+    .data(arcs)
+    .enter()
+    .append('path')
+    .attr('d', arc)
+    .attr('fill', d => stageColors[d.data.stage] || '#8a7c6a')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer');
+
+  // 中心数值
+  const total = d3.sum(byStage, d => d.count);
+  g.append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dy', '-0.2em')
+    .attr('font-size', '24px')
+    .attr('font-weight', '700')
+    .attr('fill', '#1a1410')
+    .text(total);
+  g.append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dy', '1.6em')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7c6a')
+    .text('事件总数');
+
+  // 标签
+  const labelArc = d3.arc()
+    .innerRadius(radius * 0.9)
+    .outerRadius(radius * 0.9);
+
+  g.selectAll('.donut-label')
+    .data(arcs)
+    .enter()
+    .append('text')
+    .attr('class', 'donut-label')
+    .attr('transform', d => `translate(${labelArc.centroid(d)})`)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .attr('fill', '#1a1410')
+    .text(d => d.data.stage + ' ' + d.data.count);
+}
+
+function renderStatTable(byType) {
+  const tbody = d3.select('#stat-tbody');
+  tbody.html('');
+  if (!byType || byType.length === 0) {
+    tbody.append('tr').append('td').attr('colspan', 5).attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+
+  const corePowers = {
+    "帝王": "降旨 · 册封 · 调兵",
+    "武将": "调兵 · 征讨 · 护驾",
+    "文官": "招安 · 朝议 · 外交",
+    "边缘": "司职 · 朝拜 · 轮值",
+    "佛门": "降妖 · 制衡 · 接引",
+    "道家": "炼宝 · 收妖 · 制衡"
+  };
+  const reps = {
+    "帝王": "玉帝 · 王母娘娘",
+    "武将": "托塔天王 · 哪吒 · 二郎神",
+    "文官": "太白金星 · 文曲星 · 月老",
+    "边缘": "赤脚大仙 · 二十八星宿 · 风雨雷电",
+    "佛门": "如来佛祖",
+    "道家": "太上老君"
+  };
+
+  byType.forEach(item => {
+    const tr = tbody.append('tr');
+    tr.append('td').text(item.type);
+    tr.append('td').attr('class', 'num').text(item.count);
+    tr.append('td').attr('class', 'num').text(item.avgPower.toFixed(1));
+    tr.append('td').text(corePowers[item.type] || '—');
+    tr.append('td').text(reps[item.type] || '—');
+  });
+}
+
+// ============================================================
+// main：调度所有渲染函数
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      '数据源：实时加载自 <code>scripts/output/data/</code>（http server 模式）';
+  }
+
+  renderHierarchy(data.hierarchy);
+  renderForce(data.network);
+  renderSankey(data.sankey);
+  renderRadar(data.radar);
+  renderTimeline(data.timeline);
+  renderDashboard(data.summary);
+}
+
+// 响应式重绘（debounce 250ms）
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderHierarchy(data.hierarchy);
+      renderForce(data.network);
+      renderSankey(data.sankey);
+      renderRadar(data.radar);
+      renderTimeline(data.timeline);
+      renderDashboard(data.summary);
+    }
+  }, 250);
+});
+
+// 启动
+main();
+</script>
+</body>
+</html>

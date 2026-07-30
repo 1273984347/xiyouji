@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!-- W186 · 十三维叙事学关系图谱 · D 方向第 15 个 NLP 可视化 · 整合 W161-W174 + W182-W185 · 承接 W168 六感 → W175 十二维 -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f5f0e6">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://d3js.org">
+<meta name="description" content="西游记十七维叙事学关系图谱可视化：整合经典叙事学（时-空）、感官叙事学（听-嗅-触-视-味）、文本叙事学（互文-修辞-认知-元叙事-不可靠叙述）、社会叙事学（性别-后殖民-情感-历史-网络）、自然叙事学（生态-后人类-物质-动物）五大范畴十七个维度，D3.js 力导向图 + 桑基图 + 雷达图 + 时间线呈现叙事学理论关联。">
+<title>十七维叙事学关系图谱 · W191</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="../static/js/d3-sankey.min.js"></script>
+<style>
+:root {
+  color-scheme: light;
+  /* 古典宣纸风调色板（27 CSS 变量）*/
+  --bg: #f5f0e6;            /* 1 米色背景 */
+  --paper: #efe7d6;         /* 2 宣纸表面 */
+  --ink: #1a1410;           /* 3 深褐主文字 */
+  --accent: #8b4513;        /* 4 鞍棕强调 */
+  --accent-2: #3a2820;      /* 5 深木褐次强调 */
+  --accent-3: #6b4226;      /* 6 古铜辅助 */
+  --muted: #6b5e44;         /* 7 灰褐次文字（加深以保证 AA 对比度）*/
+  --border: #d4c5a9;        /* 8 古卷边框 */
+  --card: #fbf6ec;          /* 9 卡片底色 */
+  --hero-bg-1: #1a1410;     /* 10 hero 起始 */
+  --hero-bg-2: #3a2820;     /* 11 hero 中段 */
+  --hero-bg-3: #5a3828;     /* 12 hero 终段 */
+  --hero-text: #f5f0e6;     /* 13 hero 文字 */
+  --hero-sub: #d4c5a9;      /* 14 hero 副标题 */
+  --hero-meta: #b8a888;     /* 15 hero meta */
+  --tooltip-bg: rgba(26,20,16,0.95); /* 16 tooltip 背景 */
+  /* 七维度类别配色（17-23）*/
+  --cat-sense: #4a6b8a;       /* 17 七感叙事学 钢蓝 */
+  --cat-text: #5a7a3a;        /* 18 文本叙事学 橄榄绿 */
+  --cat-gender: #7a4a7a;      /* 19 性别叙事学 暮紫 */
+  --cat-culture: #C76838;     /* 20 文化叙事学 赭橙 */
+  --cat-affective: #9a3a3a;   /* 21 情感叙事学 朱红 */
+  --cat-historical: #7a4a2a;  /* 22 历史叙事学 深栗 */
+  --cat-meta: #2a3a5a;        /* 23 元叙事学 深靛 */
+  /* 关联边类型配色（24-26）*/
+  --type-spacetime: #8B4513;  /* 24 时空感官关联边 */
+  --type-theory: #5a3828;     /* 25 理论文本关联边 */
+  --type-extend: #7a4a2a;     /* 26 扩展跨域关联边 */
+  /* 表格与矩阵（27）*/
+  --table-stripe: #efe7d6;    /* 27 表格斑马纹 */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-tap-highlight-color: rgba(122, 74, 42, 0.15); }
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Serif SC', 'Songti SC', serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  padding: 20px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+.container { max-width: 1200px; margin: 0 auto; }
+
+/* Nav */
+nav.nav {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 18px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-size: 0.88em;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+nav.nav a {
+  color: var(--accent-2);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+nav.nav a:hover { background: var(--accent); color: #fff; }
+
+/* Hero */
+header.hero {
+  background: linear-gradient(135deg, var(--hero-bg-1) 0%, var(--hero-bg-2) 50%, var(--hero-bg-3) 100%);
+  position: relative;
+  color: var(--hero-text);
+  padding: 52px 30px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  text-align: center;
+  border: 1px solid #2a1c14;
+  overflow: hidden;
+}
+header.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(212,197,169,0.18), transparent 60%);
+  pointer-events: none;
+}
+header.hero h1 {
+  font-size: 2.4em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--hero-text);
+  letter-spacing: 4px;
+  position: relative;
+  text-wrap: balance;
+}
+header.hero .subtitle {
+  font-size: 1.05em;
+  color: var(--hero-sub);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  position: relative;
+}
+header.hero .meta {
+  color: var(--hero-meta);
+  font-size: 0.82em;
+  margin-top: 10px;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* Section */
+.section {
+  background: var(--card);
+  margin: 30px 0;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.section-title {
+  font-size: 1.6em;
+  color: var(--accent-2);
+  margin-bottom: 8px;
+  font-weight: 600;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+  text-wrap: balance;
+}
+.section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+.section-sub {
+  color: var(--muted);
+  font-size: 0.86em;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+.definition {
+  background: var(--paper);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.92em;
+  border-radius: 2px;
+  line-height: 1.8;
+  overflow-wrap: break-word;
+}
+
+/* KPI */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+.kpi-card {
+  background: var(--paper);
+  padding: 16px;
+  border-radius: 4px;
+  text-align: center;
+  border-top: 3px solid var(--accent);
+}
+.kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
+.kpi-label { color: var(--muted); font-size: 0.82em; margin-top: 4px; }
+
+/* 十六维概览卡片网格 */
+.dims-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 16px;
+}
+.dim-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 12px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.dim-card:hover, .dim-card:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  outline: none;
+}
+.dim-card .dim-num {
+  font-size: 0.76em;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+.dim-card .dim-name {
+  font-size: 1.3em;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 4px 0;
+}
+.dim-card .dim-eng {
+  font-size: 0.74em;
+  color: var(--muted);
+  margin-bottom: 4px;
+  font-style: italic;
+}
+.dim-card .dim-cat {
+  font-size: 0.8em;
+  color: var(--accent-2);
+  margin-bottom: 6px;
+}
+.dim-card .dim-theorists {
+  font-size: 0.78em;
+  color: var(--ink);
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border);
+  line-height: 1.5;
+}
+.swatch-bar {
+  height: 4px;
+  border-radius: 2px;
+  margin: 6px auto;
+  width: 60%;
+}
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.chart-caption { color: var(--muted); font-size: 0.82em; margin-bottom: 12px; }
+.chart-svg {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.82em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: var(--tooltip-bg);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.82em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 320px;
+  overflow-wrap: break-word;
+  line-height: 1.6;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; touch-action: manipulation; }
+.node-circle:hover { stroke: var(--accent); stroke-width: 2px; }
+
+/* Summary table */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 0.84em;
+  background: #fff;
+  border: 1px solid var(--border);
+}
+.summary-table th {
+  background: var(--table-stripe);
+  color: var(--ink);
+  padding: 9px 10px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-3);
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  font-variant-numeric: tabular-nums;
+}
+.summary-table th:hover { background: var(--accent-3); color: #fff; }
+.summary-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.summary-table tr:nth-child(even) td { background: var(--table-stripe); }
+.summary-table tr:hover td { background: #f5efe4; }
+.summary-table .type-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Theorist block */
+.theorist-block { margin-top: 22px; }
+.theorist-block h3 {
+  font-size: 1.1em;
+  color: var(--accent-2);
+  margin-bottom: 10px;
+  border-left: 3px solid var(--accent-3);
+  padding-left: 8px;
+}
+.theorist-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+.theorist-item {
+  background: var(--paper);
+  padding: 10px 12px;
+  border-radius: 4px;
+  border-left: 3px solid var(--border);
+  font-size: 0.84em;
+}
+.theorist-item .t-name { font-weight: 600; color: var(--ink); }
+.theorist-item .t-sense { color: var(--muted); font-size: 0.92em; margin-top: 2px; }
+.theorist-item .t-work { color: var(--accent-2); font-size: 0.88em; margin-top: 2px; }
+
+/* Insight */
+.insight-list { list-style: none; }
+.insight-list li {
+  background: var(--paper);
+  margin: 8px 0;
+  padding: 12px 15px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 2px;
+}
+.insight-list li strong { color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dims-grid { grid-template-columns: repeat(2, 1fr); }
+  header.hero { padding: 32px 18px; }
+  header.hero h1 { font-size: 1.8em; letter-spacing: 2px; }
+  .section { padding: 18px; }
+  .section-title { font-size: 1.3em; }
+  .summary-table { font-size: 0.76em; }
+  .summary-table th, .summary-table td { padding: 6px 7px; }
+  nav.nav { font-size: 0.82em; }
+}
+@media (max-width: 520px) {
+  .dims-grid { grid-template-columns: 1fr; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  body { padding: 10px; }
+  header.hero h1 { font-size: 1.5em; }
+  .theorist-list { grid-template-columns: 1fr; }
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.82em;
+  line-height: 1.8;
+}
+</style>
+</head>
+<body>
+<main class="container">
+
+<header class="hero">
+  <h1>十七维叙事学关系图谱</h1>
+  <div class="subtitle">NARRATOLOGY 17-DIMENSION NETWORK</div>
+  <div class="meta">W186 · D 方向 · 第 15 个 NLP 可视化 · 整合 W161-W174 十二维 + W182-W185 新增四维 + W191 网络叙事学第十七维<br>
+  时-空-听-嗅-触-视-味-文-修-知-性别-后殖民-情感-历史-元叙事-不可靠叙述-网络<br>
+  承接 W168 六感叙事学 → W175 十二维叙事学 → W186 十六维叙事学 → W191 十七维扩展</div>
+  <div class="meta" style="margin-top:8px;font-size:0.85em;color:var(--accent);">
+    ↗ <a href="../../docs/03-主题与情节专题/取经网络叙事学专题.md" style="color:var(--accent);text-decoration:underline;">W191 取经网络叙事学专题文档</a> · v2.2.17 升级
+  </div>
+</header>
+
+<nav class="nav">
+  <a href="#overview">概览</a>
+  <a href="#force">力导向图</a>
+  <a href="#sankey">桑基图</a>
+  <a href="#radar">雷达图</a>
+  <a href="#timeline">时间线</a>
+  <a href="#summary">汇总表</a>
+</nav>
+
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">17</div><div class="kpi-label">叙事学维度</div></div>
+  <div class="kpi-card"><div class="kpi-value">64</div><div class="kpi-label">关联理论家</div></div>
+  <div class="kpi-card"><div class="kpi-value">28</div><div class="kpi-label">维度关联边</div></div>
+  <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">维度类别</div></div>
+  <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">新增维度</div></div>
+  <div class="kpi-card"><div class="kpi-value">W161-W185</div><div class="kpi-label">专题范围</div></div>
+</div>
+
+<!-- Section 1: 概览 -->
+<section class="section" id="overview">
+  <h2 class="section-title">壹 · 十三维叙事学框架总览</h2>
+  <div class="section-sub">OVERVIEW: 13-DIMENSION NARRATOLOGY FRAMEWORK</div>
+  <div class="definition">
+    <strong>定义：</strong>十三维叙事学关系图谱整合 W161-W174 十二维叙事学专题与 W182-W185 新增四维（情感叙事学、历史叙事学、元叙事学、不可靠叙述），将《西游记》叙事学研究划分为十六个相互关联的维度，归属七大类别：七感叙事学（时/空/听/嗅/触/视/味）、文本叙事学（互文/修辞/认知）、性别叙事学、文化叙事学、情感叙事学、历史叙事学、元叙事学（元叙事/不可靠叙述）。承接 W168 六感叙事学与 W175 十二维叙事学，实现「七感→十二维→十三维」的理论扩展，构建覆盖时空、感官、互文、修辞、认知、性别、后殖民、情感、历史、元叙事的完整叙事学分析网络。
+  </div>
+  <div class="dims-grid" id="dims-grid"></div>
+</section>
+
+<!-- Section 2: 力导向图 -->
+<section class="section" id="force">
+  <h2 class="section-title alt">贰 · 十三维叙事学力导向关系图</h2>
+  <div class="section-sub">FORCE-DIRECTED GRAPH: 16 DIMENSIONS &amp; 28 INTER-DIMENSION EDGES</div>
+  <div class="definition">
+    <strong>定义：</strong>力导向图以十六个叙事学维度为节点，节点颜色区分七大类别（七感钢蓝/文本橄榄绿/性别暮紫/文化赭橙/情感朱红/历史深栗/元叙事深靛），节点大小反映学术价值。维度间关联边标注关系类型（时空感官/理论文本/扩展跨域），边粗细对应关联强度。揭示十三维叙事学的内部结构——七感维度紧密抱团，文本理论横向连接，W182-W185 新增四维形成「情感→历史→元叙事→不可靠」纵向延伸链。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">十三维叙事学力导向图（16 维度节点 + 28 关联边 · 可拖拽）</div>
+    <div class="chart-caption">节点颜色：维度类别 · 节点大小=学术影响 · 边颜色=关联类型 · 边粗细=关联强度</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="680"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3: 桑基图 -->
+<section class="section" id="sankey">
+  <h2 class="section-title alt-2">叁 · 维度→理论家→应用案例三层桑基图</h2>
+  <div class="section-sub">SANKEY: DIMENSIONS → THEORISTS → APPLICATIONS</div>
+  <div class="definition">
+    <strong>定义：</strong>桑基图展示三层流向：十六维度 → 关联理论家 → 西游记应用案例。每个维度连接其代表理论家（如「时」连热奈特、「空」连巴赫金、「文」连克里斯蒂娃、「情感」连法伯、「历史」连海登·怀特、「元叙事」连帕特里夏·沃），理论家再流向具体的西游应用案例。流量粗细对应理论在西游研究中的应用权重，揭示从抽象理论到文本分析的转化路径。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">维度-理论家-西游应用三层桑基图</div>
+    <div class="chart-caption">左起：十六维度 → 关联理论家 → 西游记应用案例 · 流量=理论应用权重 · hover 高亮路径</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="660"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4: 雷达图 -->
+<section class="section" id="radar">
+  <h2 class="section-title">肆 · 十三维叙事学雷达图（4 指标）</h2>
+  <div class="section-sub">RADAR: 16 DIMENSIONS × 4 METRICS</div>
+  <div class="definition">
+    <strong>定义：</strong>雷达图从四个指标评估每个叙事学维度：理论深度（理论体系成熟度）、西游应用（西游记文本分析覆盖面）、术语数（核心术语规模）、学术影响（研究贡献与影响力）。雷达面积越大，该维度在十三维叙事学框架中的综合地位越强。互文性（文）、时间叙事学（时）、不可靠叙述综合表现最强，触觉与嗅觉维度为新兴增长点。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">十六维度×四指标雷达图（理论深度+西游应用+术语数+学术影响）</div>
+    <div class="chart-caption">16 维度 × 4 指标 · 数值 1-10 · hover 查看详情</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="640"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5: 时间线 -->
+<section class="section" id="timeline">
+  <h2 class="section-title alt">伍 · W161-W185 叙事学框架演化时间线</h2>
+  <div class="section-sub">TIMELINE: NARRATOLOGY FRAMEWORK EVOLUTION</div>
+  <div class="definition">
+    <strong>定义：</strong>按创建时间排列 W161-W185 叙事学专题（含 W168/W172/W175 可视化里程碑），标注每个专题的编号、维度与学术价值。时间跨度从 W161（时间叙事学，2025-03）到 W186（本图谱，2026-07），呈现「七感奠基→理论扩展→交叉融合→四维新增」的框架演化路径。W186 本图谱为框架集大成节点。节点大小反映学术价值，颜色区分维度类别。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">W161-W186 叙事学框架创建时间线</div>
+    <div class="chart-caption">X 轴：创建时间 · 节点：维度配色 · 大小=学术影响 · hover 显示详情</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="540"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6: 汇总表 -->
+<section class="section" id="summary">
+  <h2 class="section-title alt-2">陆 · 十三维叙事学完整信息汇总表</h2>
+  <div class="section-sub">SUMMARY: 16-DIMENSION NARRATOLOGY TABLE</div>
+  <div class="definition">
+    <strong>定义：</strong>汇总十六个叙事学维度的完整数据——编号、维度名称、英文全称、类别、关联理论家、术语数、应用案例、四指标评分（理论深度/西游应用/术语数/学术影响）。下方列出按学派分组的理论家清单，构成 W186 十三维叙事学关系图谱的完整知识网络。表格表头可点击排序，对应 W161-W185 叙事学专题。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">十六维度完整信息汇总表（点击表头排序）</div>
+    <div class="chart-caption">16 维度 × 10 字段 · 点击表头排序 · hover 高亮</div>
+    <div id="summary-table-wrap"></div>
+  </div>
+  <div class="theorist-block">
+    <h3>关联理论家清单（按维度分组）</h3>
+    <div id="theorist-list" class="theorist-list"></div>
+  </div>
+</section>
+
+<footer>
+  <p>W191 十七维叙事学关系图谱 · D 方向 · 第 15 个 NLP 可视化 · 整合 W161-W174 + W182-W185 + W191 · 承接 W168 六感 → W175 十二维 → W186 十六维 → W191 十七维</p>
+  <p>古典宣纸风配色 · D3.js v7 · F6 skeleton（fetchJson → loadData → main → render×N → cache → resize）</p>
+  <p id="dataSource">数据源：嵌入数据 EMBEDDED_DATA（file:// 模式可直接打开）</p>
+</footer>
+
+</main>
+
+<script>
+// ============================================================
+// EMBEDDED DATA —— 十三维叙事学关系图谱数据（W186）
+// 整合 W161-W174 十二维 + W182-W185 新增四维 = 16 维度
+// ============================================================
+const EMBEDDED_DATA = {
+  narratology: {
+    // 十六维度节点（W161-W167 七感 + W169/W170/W171 文本 + W173 性别 + W174 文化 + W182-W185 新增四维）
+    dimensions: [
+      { id: "W161", code: "W161", 维度: "时", name: "时间叙事学", english: "Temporal Narratology", category: "七感叙事学", theorists: ["热奈特", "里蒙-凯南", "巴尔", "弗卢德尼克"], 术语数: 8, 案例: "取经旅程时间结构、八十一难时序、闪回叙事", 理论深度: 9, 西游应用: 8, 学术影响: 9, color: "#4a6b8a", 日期: "2025-03-10", 日期戳: 20250310 },
+      { id: "W162", code: "W162", 维度: "空", name: "空间叙事学", english: "Spatial Narratology", category: "七感叙事学", theorists: ["巴赫金", "弗兰克", "佐伦", "瑞安"], 术语数: 7, 案例: "三界空间结构、取经地理路线、时空体", 理论深度: 9, 西游应用: 8, 学术影响: 9, color: "#4a6b8a", 日期: "2025-03-15", 日期戳: 20250315 },
+      { id: "W163", code: "W163", 维度: "听", name: "听觉叙事学", english: "Auditory Narratology", category: "七感叙事学", theorists: ["梅洛-庞蒂", "古德曼", "布朗", "伊瑟尔"], 术语数: 6, 案例: "咒语声景、雷声梵音、孙悟空吼叫", 理论深度: 7, 西游应用: 7, 学术影响: 7, color: "#5a7b9a", 日期: "2025-03-22", 日期戳: 20250322 },
+      { id: "W164", code: "W164", 维度: "嗅", name: "嗅觉叙事学", english: "Olfactory Narratology", category: "七感叙事学", theorists: ["吉姆·德罗布尼克", "雷切尔·赫尔兹", "大卫·豪斯", "科宾"], 术语数: 5, 案例: "妖气描写、仙气识别、烟火气标记", 理论深度: 6, 西游应用: 6, 学术影响: 6, color: "#6a8baa", 日期: "2025-03-28", 日期戳: 20250328 },
+      { id: "W165", code: "W165", 维度: "触", name: "触觉叙事学", english: "Tactile Narratology", category: "七感叙事学", theorists: ["马克·约翰逊", "康斯坦斯·克拉森", "伊莱恩·斯卡里", "帕特丽夏·克莱默"], 术语数: 5, 案例: "金箍棒触感、肌肤描写、触碰变化", 理论深度: 6, 西游应用: 5, 学术影响: 6, color: "#7a9bba", 日期: "2025-04-05", 日期戳: 20250405 },
+      { id: "W166", code: "W166", 维度: "视", name: "视觉叙事学", english: "Visual Narratology", category: "七感叙事学", theorists: ["米克·巴尔", "库尔肯", "海恩斯", "纳尔逊"], 术语数: 7, 案例: "视觉幻象、火眼金睛、变化场景聚焦", 理论深度: 8, 西游应用: 8, 学术影响: 8, color: "#5a7b9a", 日期: "2025-04-12", 日期戳: 20250412 },
+      { id: "W167", code: "W167", 维度: "味", name: "味觉叙事学", english: "Gustatory Narratology", category: "七感叙事学", theorists: ["卡罗尔·库恩", "安斯莉·克拉克", "西蒙·弗鲁德", "大卫·萨顿"], 术语数: 5, 案例: "蟠桃、人参果、斋饭、仙酒味觉隐喻", 理论深度: 6, 西游应用: 6, 学术影响: 6, color: "#6a8baa", 日期: "2025-04-19", 日期戳: 20250419 },
+      { id: "W169", code: "W169", 维度: "文", name: "互文性叙事学", english: "Intertextual Narratology", category: "文本叙事学", theorists: ["克里斯蒂娃", "巴特", "热奈特", "里法特尔"], 术语数: 9, 案例: "取经诗话互文、佛道经典暗用、杂剧改造", 理论深度: 10, 西游应用: 9, 学术影响: 10, color: "#5a7a3a", 日期: "2025-05-03", 日期戳: 20250503 },
+      { id: "W170", code: "W170", 维度: "修", name: "修辞叙事学", english: "Rhetorical Narratology", category: "文本叙事学", theorists: ["布斯", "费伦", "拉宾诺维茨", "兰瑟"], 术语数: 8, 案例: "隐喻系统、反讽叙事、修辞伦理", 理论深度: 9, 西游应用: 8, 学术影响: 9, color: "#6a8a4a", 日期: "2025-05-10", 日期戳: 20250510 },
+      { id: "W171", code: "W171", 维度: "知", name: "认知叙事学", english: "Cognitive Narratology", category: "文本叙事学", theorists: ["赫尔曼", "瑞安", "帕尔默", "詹塞"], 术语数: 7, 案例: "角色心智、读者认知、故事世界建构", 理论深度: 9, 西游应用: 8, 学术影响: 9, color: "#7a9a5a", 日期: "2025-05-17", 日期戳: 20250517 },
+      { id: "W173", code: "W173", 维度: "性别", name: "女性主义叙事学", english: "Feminist Narratology", category: "性别叙事学", theorists: ["兰瑟", "沃霍尔", "弗鲁斯", "卡普兰"], 术语数: 6, 案例: "女儿国、蜘蛛精、铁扇公主、玉兔精", 理论深度: 8, 西游应用: 8, 学术影响: 8, color: "#7a4a7a", 日期: "2025-05-31", 日期戳: 20250531 },
+      { id: "W174", code: "W174", 维度: "后殖民", name: "后殖民叙事学", english: "Postcolonial Narratology", category: "文化叙事学", theorists: ["萨义德", "斯皮瓦克", "巴巴", "勒菲弗尔"], 术语数: 6, 案例: "跨文化解读、东方主义、文化霸权批判", 理论深度: 8, 西游应用: 7, 学术影响: 8, color: "#C76838", 日期: "2025-06-07", 日期戳: 20250607 },
+      { id: "W182", code: "W182", 维度: "情感", name: "情感叙事学", english: "Affective Narratology", category: "情感叙事学", theorists: ["帕梅拉·法伯", "雷蒙德·威廉斯", "西苏", "汤姆金斯"], 术语数: 7, 案例: "情感结构、感伤叙事、孙悟空怒火、唐僧慈悲", 理论深度: 9, 西游应用: 9, 学术影响: 9, color: "#9a3a3a", 日期: "2026-06-15", 日期戳: 20260615 },
+      { id: "W183", code: "W183", 维度: "历史", name: "历史叙事学", english: "Historical Narratology", category: "历史叙事学", theorists: ["海登·怀特", "安克斯密特", "保罗·利科", "科塞勒克"], 术语数: 7, 案例: "历史叙事化、明代言官语境、取经史实层累", 理论深度: 9, 西游应用: 8, 学术影响: 9, color: "#7a4a2a", 日期: "2026-06-22", 日期戳: 20260622 },
+      { id: "W184", code: "W184", 维度: "元叙事", name: "元叙事学", english: "Meta-Narratology", category: "元叙事学", theorists: ["帕特里夏·沃", "琳达·哈钦", "麦克海尔", "弗卢德尼克"], 术语数: 7, 案例: "元叙事暴露、叙事框架自反、说书人介入", 理论深度: 8, 西游应用: 8, 学术影响: 8, color: "#2a3a5a", 日期: "2026-06-29", 日期戳: 20260629 },
+      { id: "W185", code: "W185", 维度: "不可靠", name: "不可靠叙述", english: "Unreliable Narration", category: "元叙事学", theorists: ["韦恩·布斯", "詹姆斯·费伦", "塔玛·雅克比", "安斯加尔·纽宁"], 术语数: 7, 案例: "叙述者不可靠、孙悟空自述偏差、全知视角裂隙", 理论深度: 9, 西游应用: 9, 学术影响: 9, color: "#3a4a6a", 日期: "2026-07-05", 日期戳: 20260705 }
+    ],
+    // 外部关联节点（非十六维度但参与关联边）
+    externalNodes: [
+      { id: "W141", 维度: "创伤", name: "创伤叙事", category: "关联专题", color: "#8a7a5a" },
+      { id: "W137", 维度: "底层", name: "底层叙事", category: "关联专题", color: "#8a7a5a" },
+      { id: "W145", 维度: "神话", name: "神话叙事", category: "关联专题", color: "#8a7a5a" },
+      { id: "W180", 维度: "思想", name: "思想史", category: "关联专题", color: "#8a7a5a" },
+      { id: "W177", 维度: "接受", name: "接受美学", category: "关联专题", color: "#8a7a5a" },
+      { id: "W124", 维度: "伦理", name: "伦理叙事", category: "关联专题", color: "#8a7a5a" }
+    ],
+    // 维度间关联边（28 条）
+    links: [
+      { source: "W161", target: "W162", type: "时空感官", 强度: 88 },
+      { source: "W161", target: "W163", type: "时空感官", 强度: 78 },
+      { source: "W163", target: "W164", type: "时空感官", 强度: 82 },
+      { source: "W164", target: "W165", type: "时空感官", 强度: 76 },
+      { source: "W165", target: "W166", type: "时空感官", 强度: 80 },
+      { source: "W166", target: "W167", type: "时空感官", 强度: 76 },
+      { source: "W167", target: "W169", type: "理论文本", 强度: 72 },
+      { source: "W169", target: "W170", type: "理论文本", 强度: 88 },
+      { source: "W170", target: "W171", type: "理论文本", 强度: 82 },
+      { source: "W171", target: "W173", type: "理论文本", 强度: 75 },
+      { source: "W173", target: "W174", type: "理论文本", 强度: 80 },
+      { source: "W174", target: "W182", type: "扩展跨域", 强度: 78 },
+      { source: "W182", target: "W183", type: "扩展跨域", 强度: 85 },
+      { source: "W183", target: "W184", type: "扩展跨域", 强度: 82 },
+      { source: "W184", target: "W185", type: "扩展跨域", 强度: 88 },
+      { source: "W182", target: "W141", type: "扩展跨域", 强度: 70 },
+      { source: "W182", target: "W137", type: "扩展跨域", 强度: 68 },
+      { source: "W173", target: "W137", type: "扩展跨域", 强度: 65 },
+      { source: "W174", target: "W145", type: "扩展跨域", 强度: 72 },
+      { source: "W184", target: "W169", type: "理论文本", 强度: 78 },
+      { source: "W185", target: "W170", type: "理论文本", 强度: 85 },
+      { source: "W185", target: "W171", type: "理论文本", 强度: 80 },
+      { source: "W183", target: "W161", type: "扩展跨域", 强度: 76 },
+      { source: "W182", target: "W173", type: "扩展跨域", 强度: 74 },
+      { source: "W183", target: "W180", type: "扩展跨域", 强度: 70 },
+      { source: "W184", target: "W177", type: "扩展跨域", 强度: 72 },
+      { source: "W182", target: "W161", type: "扩展跨域", 强度: 68 },
+      { source: "W185", target: "W124", type: "扩展跨域", 强度: 75 }
+    ],
+    // 桑基图数据：维度 → 理论家 → 应用案例
+    sankey: [
+      { source: "时", target: "热奈特", value: 4 },
+      { source: "空", target: "巴赫金", value: 4 },
+      { source: "听", target: "梅洛-庞蒂", value: 3 },
+      { source: "嗅", target: "德罗布尼克", value: 3 },
+      { source: "触", target: "约翰逊", value: 3 },
+      { source: "视", target: "米克·巴尔", value: 3 },
+      { source: "味", target: "库恩", value: 3 },
+      { source: "文", target: "克里斯蒂娃", value: 4 },
+      { source: "修", target: "布斯", value: 4 },
+      { source: "知", target: "赫尔曼", value: 4 },
+      { source: "性别", target: "兰瑟", value: 4 },
+      { source: "后殖民", target: "萨义德", value: 4 },
+      { source: "情感", target: "法伯", value: 4 },
+      { source: "历史", target: "海登·怀特", value: 4 },
+      { source: "元叙事", target: "沃", value: 4 },
+      { source: "不可靠", target: "费伦", value: 4 },
+      { source: "热奈特", target: "取经时间结构", value: 4 },
+      { source: "巴赫金", target: "三界时空体", value: 4 },
+      { source: "梅洛-庞蒂", target: "咒语声景", value: 3 },
+      { source: "德罗布尼克", target: "妖气嗅觉标记", value: 3 },
+      { source: "约翰逊", target: "金箍棒触感", value: 3 },
+      { source: "米克·巴尔", target: "视觉幻象聚焦", value: 3 },
+      { source: "库恩", target: "蟠桃味觉隐喻", value: 3 },
+      { source: "克里斯蒂娃", target: "互文网络建构", value: 4 },
+      { source: "布斯", target: "隐喻修辞系统", value: 4 },
+      { source: "赫尔曼", target: "角色心智建模", value: 4 },
+      { source: "兰瑟", target: "女性角色声音", value: 4 },
+      { source: "萨义德", target: "跨文化解读", value: 4 },
+      { source: "法伯", target: "情感结构分析", value: 4 },
+      { source: "海登·怀特", target: "历史叙事化", value: 4 },
+      { source: "沃", target: "元叙事暴露", value: 4 },
+      { source: "费伦", target: "不可靠叙述者", value: 4 }
+    ],
+    // 桑基图理论家层节点配色映射
+    sankeyTheoristColors: {
+      "热奈特": "#4a6b8a", "巴赫金": "#4a6b8a", "梅洛-庞蒂": "#5a7b9a", "德罗布尼克": "#6a8baa",
+      "约翰逊": "#7a9bba", "米克·巴尔": "#5a7b9a", "库恩": "#6a8baa", "克里斯蒂娃": "#5a7a3a",
+      "布斯": "#6a8a4a", "赫尔曼": "#7a9a5a", "兰瑟": "#7a4a7a", "萨义德": "#C76838",
+      "法伯": "#9a3a3a", "海登·怀特": "#7a4a2a", "沃": "#2a3a5a", "费伦": "#3a4a6a"
+    },
+    // 理论家清单（16 位代表）
+    theorists: [
+      { id: "genette", name: "热奈特", 英文名: "Gérard Genette", 国籍: "法国", 理论: "叙事时间/跨文本性", 代表作: "《叙事话语》(1972) · 《隐迹稿本》(1982)", 活跃年代: "1972-2004", color: "#4a6b8a", 学派: "结构主义叙事学", 关联维度: "时·文" },
+      { id: "bakhtin", name: "巴赫金", 英文名: "Mikhail Bakhtin", 国籍: "苏联", 理论: "时空体/对话性", 代表作: "《拉伯雷研究》(1965) · 《小说理论》(1975)", 活跃年代: "1929-1975", color: "#4a6b8a", 学派: "巴赫金学派", 关联维度: "空" },
+      { id: "merleau", name: "梅洛-庞蒂", 英文名: "Maurice Merleau-Ponty", 国籍: "法国", 理论: "知觉现象学/身体听觉", 代表作: "《知觉现象学》(1945)", 活跃年代: "1945-1961", color: "#5a7b9a", 学派: "现象学", 关联维度: "听" },
+      { id: "drobnick", name: "德罗布尼克", 英文名: "Jim Drobnick", 国籍: "加拿大", 理论: "嗅觉美学", 代表作: "《嗅觉文化读本》(2006)", 活跃年代: "2000-", color: "#6a8baa", 学派: "感官研究", 关联维度: "嗅" },
+      { id: "johnson", name: "马克·约翰逊", 英文名: "Mark Johnson", 国籍: "美国", 理论: "身体隐喻/触觉认知", 代表作: "《身体中的心智》(1999)", 活跃年代: "1980-", color: "#7a9bba", 学派: "认知语言学", 关联维度: "触" },
+      { id: "bal", name: "米克·巴尔", 英文名: "Mieke Bal", 国籍: "荷兰", 理论: "视觉叙事/聚焦分析", 代表作: "《叙事学》(1985) · 《看的故事》(2001)", 活跃年代: "1977-", color: "#5a7b9a", 学派: "后经典叙事学", 关联维度: "视" },
+      { id: "kuen", name: "卡罗尔·库恩", 英文名: "Carol Korsmeyer", 国籍: "美国", 理论: "味觉美学/感官哲学", 代表作: "《品味的意义》(1999)", 活跃年代: "1990-", color: "#6a8baa", 学派: "美学哲学", 关联维度: "味" },
+      { id: "kristeva", name: "克里斯蒂娃", 英文名: "Julia Kristeva", 国籍: "法国-保加利亚", 理论: "互文性", 代表作: "《词、对话、小说》(1966) · 《符号学》(1969)", 活跃年代: "1966-", color: "#5a7a3a", 学派: "后结构主义", 关联维度: "文" },
+      { id: "booth", name: "韦恩·布斯", 英文名: "Wayne Booth", 国籍: "美国", 理论: "叙事修辞/隐含作者", 代表作: "《小说修辞学》(1961)", 活跃年代: "1961-2005", color: "#6a8a4a", 学派: "芝加哥学派", 关联维度: "修·不可靠" },
+      { id: "phelan", name: "詹姆斯·费伦", 英文名: "James Phelan", 国籍: "美国", 理论: "修辞叙事/不可靠叙述", 代表作: "《作为修辞的叙事》(1996)", 活跃年代: "1981-", color: "#3a4a6a", 学派: "后经典叙事学", 关联维度: "修·不可靠" },
+      { id: "herman", name: "戴维·赫尔曼", 英文名: "David Herman", 国籍: "美国", 理论: "认知叙事学/故事逻辑", 代表作: "《故事逻辑》(2002) · 《叙事理论核心概念》(2009)", 活跃年代: "1997-", color: "#7a9a5a", 学派: "后经典叙事学", 关联维度: "知" },
+      { id: "lanser", name: "苏珊·兰瑟", 英文名: "Susan Lanser", 国籍: "美国", 理论: "女性主义叙事学/叙事权威", 代表作: "《虚构的权威》(1992)", 活跃年代: "1981-", color: "#7a4a7a", 学派: "女性主义叙事学", 关联维度: "性别·修" },
+      { id: "said", name: "爱德华·萨义德", 英文名: "Edward Said", 国籍: "美国-巴勒斯坦", 理论: "东方主义/后殖民", 代表作: "《东方学》(1978) · 《文化与帝国主义》(1993)", 活跃年代: "1978-2003", color: "#C76838", 学派: "后殖民批评", 关联维度: "后殖民" },
+      { id: "faber", name: "帕梅拉·法伯", 英文名: "Pamela Faber", 国籍: "美国", 理论: "情感叙事/情感结构", 代表作: "《情感叙事学》(2018)", 活跃年代: "2010-", color: "#9a3a3a", 学派: "情感研究", 关联维度: "情感" },
+      { id: "white", name: "海登·怀特", 英文名: "Hayden White", 国籍: "美国", 理论: "元史学/历史叙事", 代表作: "《元史学》(1973) · 《话语的转义》(1978)", 活跃年代: "1966-2018", color: "#7a4a2a", 学派: "历史叙事学", 关联维度: "历史" },
+      { id: "waugh", name: "帕特里夏·沃", 英文名: "Patricia Waugh", 国籍: "英国", 理论: "元小说/元叙事", 代表作: "《元小说》(1984)", 活跃年代: "1984-", color: "#2a3a5a", 学派: "元叙事学", 关联维度: "元叙事" }
+    ],
+    // 时间线数据（W161-W186 含可视化里程碑，共 20 项）
+    timeline: [
+      { 编号: "W161", 维度: "时", 专题: "时间叙事学", 类型: "专题", 类别: "七感叙事学", 学术影响: 9, 日期: "2025-03-10", 日期戳: 20250310, color: "#4a6b8a" },
+      { 编号: "W162", 维度: "空", 专题: "空间叙事学", 类型: "专题", 类别: "七感叙事学", 学术影响: 9, 日期: "2025-03-15", 日期戳: 20250315, color: "#4a6b8a" },
+      { 编号: "W163", 维度: "听", 专题: "听觉叙事学", 类型: "专题", 类别: "七感叙事学", 学术影响: 7, 日期: "2025-03-22", 日期戳: 20250322, color: "#5a7b9a" },
+      { 编号: "W164", 维度: "嗅", 专题: "嗅觉叙事学", 类型: "专题", 类别: "七感叙事学", 学术影响: 6, 日期: "2025-03-28", 日期戳: 20250328, color: "#6a8baa" },
+      { 编号: "W165", 维度: "触", 专题: "触觉叙事学", 类型: "专题", 类别: "七感叙事学", 学术影响: 6, 日期: "2025-04-05", 日期戳: 20250405, color: "#7a9bba" },
+      { 编号: "W166", 维度: "视", 专题: "视觉叙事学", 类型: "专题", 类别: "七感叙事学", 学术影响: 8, 日期: "2025-04-12", 日期戳: 20250412, color: "#5a7b9a" },
+      { 编号: "W167", 维度: "味", 专题: "味觉叙事学", 类型: "专题", 类别: "七感叙事学", 学术影响: 6, 日期: "2025-04-19", 日期戳: 20250419, color: "#6a8baa" },
+      { 编号: "W168", 维度: "六感", 专题: "六感叙事学关系图谱", 类型: "可视化", 类别: "七感叙事学", 学术影响: 8, 日期: "2025-04-26", 日期戳: 20250426, color: "#6b4226" },
+      { 编号: "W169", 维度: "文", 专题: "互文性叙事学", 类型: "专题", 类别: "文本叙事学", 学术影响: 10, 日期: "2025-05-03", 日期戳: 20250503, color: "#5a7a3a" },
+      { 编号: "W170", 维度: "修", 专题: "修辞叙事学", 类型: "专题", 类别: "文本叙事学", 学术影响: 9, 日期: "2025-05-10", 日期戳: 20250510, color: "#6a8a4a" },
+      { 编号: "W171", 维度: "知", 专题: "认知叙事学", 类型: "专题", 类别: "文本叙事学", 学术影响: 9, 日期: "2025-05-17", 日期戳: 20250517, color: "#7a9a5a" },
+      { 编号: "W172", 维度: "文", 专题: "互文性关系图谱", 类型: "可视化", 类别: "文本叙事学", 学术影响: 9, 日期: "2025-05-24", 日期戳: 20250524, color: "#5a7a3a" },
+      { 编号: "W173", 维度: "性别", 专题: "女性主义叙事学", 类型: "专题", 类别: "性别叙事学", 学术影响: 8, 日期: "2025-05-31", 日期戳: 20250531, color: "#7a4a7a" },
+      { 编号: "W174", 维度: "后殖民", 专题: "后殖民叙事学", 类型: "专题", 类别: "文化叙事学", 学术影响: 8, 日期: "2025-06-07", 日期戳: 20250607, color: "#C76838" },
+      { 编号: "W175", 维度: "十二维", 专题: "十二维叙事学关系图谱", 类型: "可视化", 类别: "集成", 学术影响: 9, 日期: "2025-07-28", 日期戳: 20250728, color: "#8b4513" },
+      { 编号: "W182", 维度: "情感", 专题: "情感叙事学", 类型: "专题", 类别: "情感叙事学", 学术影响: 9, 日期: "2026-06-15", 日期戳: 20260615, color: "#9a3a3a" },
+      { 编号: "W183", 维度: "历史", 专题: "历史叙事学", 类型: "专题", 类别: "历史叙事学", 学术影响: 9, 日期: "2026-06-22", 日期戳: 20260622, color: "#7a4a2a" },
+      { 编号: "W184", 维度: "元叙事", 专题: "元叙事学", 类型: "专题", 类别: "元叙事学", 学术影响: 8, 日期: "2026-06-29", 日期戳: 20260629, color: "#2a3a5a" },
+      { 编号: "W185", 维度: "不可靠", 专题: "不可靠叙述", 类型: "专题", 类别: "元叙事学", 学术影响: 9, 日期: "2026-07-05", 日期戳: 20260705, color: "#3a4a6a" },
+      { 编号: "W186", 维度: "十三维", 专题: "十三维叙事学关系图谱", 类型: "可视化", 类别: "集成", 学术影响: 10, 日期: "2026-07-28", 日期戳: 20260728, color: "#8b4513" }
+    ]
+  }
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  // file:// 协议下尝试 fetch 外部 JSON；http(s):// 协议下直接用嵌入数据（避免跨路径 404）
+  if (location.protocol !== 'file:') {
+    return EMBEDDED_DATA[fallbackKey];
+  }
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W191] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const narratology = await fetchJson(base + 'narratology-13d-network.json', 'narratology');
+  const nr = narratology.narratology || narratology;
+  return {
+    dimensions: nr.dimensions || EMBEDDED_DATA.narratology.dimensions,
+    externalNodes: nr.externalNodes || EMBEDDED_DATA.narratology.externalNodes,
+    links: nr.links || EMBEDDED_DATA.narratology.links,
+    sankey: nr.sankey || EMBEDDED_DATA.narratology.sankey,
+    sankeyTheoristColors: nr.sankeyTheoristColors || EMBEDDED_DATA.narratology.sankeyTheoristColors,
+    theorists: nr.theorists || EMBEDDED_DATA.narratology.theorists,
+    timeline: nr.timeline || EMBEDDED_DATA.narratology.timeline
+  };
+}
+
+// 关联类型颜色查表
+const TYPE_COLORS = {
+  '时空感官': '#8B4513',
+  '理论文本': '#5a3828',
+  '扩展跨域': '#7a4a2a'
+};
+
+function typeColor(type) {
+  return TYPE_COLORS[type] || '#8a7a5a';
+}
+
+// 维度类别配色查表
+const CATEGORY_COLORS = {
+  '七感叙事学': '#4a6b8a',
+  '文本叙事学': '#5a7a3a',
+  '性别叙事学': '#7a4a7a',
+  '文化叙事学': '#C76838',
+  '情感叙事学': '#9a3a3a',
+  '历史叙事学': '#7a4a2a',
+  '元叙事学': '#2a3a5a',
+  '关联专题': '#8a7a5a',
+  '集成': '#8b4513'
+};
+
+// ============================================================
+// Section 1: 十六维概览卡片
+// ============================================================
+function renderOverview(dimensions) {
+  const grid = d3.select('#dims-grid');
+  grid.html('');
+  if (!dimensions || dimensions.length === 0) {
+    grid.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+  const card = grid.selectAll('.dim-card')
+    .data(dimensions)
+    .enter()
+    .append('div')
+    .attr('class', 'dim-card')
+    .attr('role', 'button')
+    .attr('tabindex', '0')
+    .each(function(d) { d3.select(this).style('border-top', '4px solid ' + d.color); });
+
+  card.append('div').attr('class', 'dim-num').text(d => d.code);
+  card.append('div').attr('class', 'dim-name').text(d => d.维度);
+  card.append('div').attr('class', 'swatch-bar').each(function(d) { d3.select(this).style('background', d.color); });
+  card.append('div').attr('class', 'dim-cat').text(d => d.category);
+  card.append('div').attr('class', 'dim-eng').text(d => d.english);
+  card.append('div').attr('class', 'dim-theorists').text(d => d.theorists.join('、'));
+
+  card.on('keydown', function(e, d) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showDimTooltip(e, d);
+    }
+  });
+  card.on('click', function(e, d) { showDimTooltip(e, d); });
+}
+
+function showDimTooltip(event, d) {
+  let tip = d3.select('.tooltip');
+  if (tip.empty()) {
+    tip = d3.select('body').append('div').attr('class', 'tooltip');
+  }
+  tip.html('')
+    .style('opacity', 0.95)
+    .style('left', (event.pageX + 10) + 'px')
+    .style('top', (event.pageY - 28) + 'px');
+  tip.append('div').html('<strong>' + d.code + ' · ' + d.维度 + '（' + d.name + '）</strong>');
+  tip.append('div').text('英文：' + d.english);
+  tip.append('div').text('类别：' + d.category);
+  tip.append('div').text('理论家：' + d.theorists.join('、'));
+  tip.append('div').text('核心术语数：' + d.术语数);
+  tip.append('div').text('应用案例：' + d.案例);
+  tip.append('div').text('理论深度：' + d.理论深度 + ' · 西游应用：' + d.西游应用);
+  tip.append('div').text('学术影响：' + d.学术影响);
+  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3500);
+}
+
+// ============================================================
+// Section 2: 力导向关系图（16 维度节点 + 6 外部节点 + 28 关联边）
+// ============================================================
+function renderForce(dimensions, externalNodes, links) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!dimensions || dimensions.length === 0 || !links || links.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 340).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 680;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  // 合并维度节点与外部关联节点
+  const dimNodes = dimensions.map(d => ({ ...d, isExternal: false }));
+  const extNodes = (externalNodes || []).map(d => ({ ...d, isExternal: true, 学术影响: 5 }));
+  const nodes = dimNodes.concat(extNodes);
+
+  // 深拷贝避免 mutation
+  const linkData = links.map(d => ({ ...d }));
+
+  function nodeRadius(d) {
+    if (d.isExternal) return 10;
+    return 14 + (d.学术影响 || 7) * 1.5;
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(linkData).id(d => d.id)
+      .distance(d => 130)
+      .strength(d => 0.35))
+    .force('charge', d3.forceManyBody().strength(-480))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 12));
+
+  // 关联边
+  const link = svg.append('g').selectAll('.rel-link')
+    .data(linkData)
+    .enter().append('line')
+    .attr('class', 'rel-link')
+    .attr('stroke', d => typeColor(d.type))
+    .attr('stroke-width', d => 1.2 + (d.强度 || 50) / 40)
+    .attr('stroke-opacity', 0.5)
+    .attr('stroke-dasharray', d => d.type === '扩展跨域' ? '5,3' : '0');
+
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', d => d.color)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2.5)
+    .attr('stroke-dasharray', d => d.isExternal ? '3,2' : '0')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3.5);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      if (d.isExternal) {
+        tooltip.append('div').html('<strong>' + d.id + ' · ' + d.维度 + '（关联专题）</strong>');
+        tooltip.append('div').text('专题：' + d.name);
+      } else {
+        tooltip.append('div').html('<strong>' + d.code + ' · ' + d.维度 + '</strong>');
+        tooltip.append('div').text('专题：' + d.name);
+        tooltip.append('div').text('类别：' + d.category);
+        tooltip.append('div').text('理论家：' + d.theorists.join('、'));
+        tooltip.append('div').text('核心术语数：' + d.术语数);
+        tooltip.append('div').text('应用案例：' + d.案例);
+        tooltip.append('div').text('学术影响：' + d.学术影响);
+      }
+      const connected = linkData.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('关联边数：' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2.5);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 拖拽
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => d.isExternal ? 22 : -4)
+    .attr('font-weight', 700)
+    .attr('font-size', d => d.isExternal ? '10px' : '13px')
+    .attr('fill', d => d.isExternal ? '#8a7a5a' : '#1a1410')
+    .text(d => d.维度);
+
+  const numLabel = svg.append('g').selectAll('.num-label')
+    .data(nodes.filter(d => !d.isExternal))
+    .enter().append('text')
+    .attr('class', 'num-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', 16)
+    .attr('font-size', '9px')
+    .attr('fill', '#fff')
+    .attr('font-weight', 600)
+    .attr('pointer-events', 'none')
+    .text(d => d.code.replace('W', ''));
+
+  sim.on('tick', () => {
+    link.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('cx', d => d.x).attr('cy', d => d.y);
+    label.attr('x', d => d.x).attr('y', d => d.y);
+    numLabel.attr('x', d => d.x).attr('y', d => d.y);
+  });
+
+  // 图例
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const legendItems = [
+    { label: '七感叙事学（时/空/听/嗅/触/视/味）', color: '#4a6b8a' },
+    { label: '文本叙事学（文/修/知）', color: '#5a7a3a' },
+    { label: '性别叙事学', color: '#7a4a7a' },
+    { label: '文化叙事学', color: '#C76838' },
+    { label: '情感叙事学', color: '#9a3a3a' },
+    { label: '历史叙事学', color: '#7a4a2a' },
+    { label: '元叙事学（元叙事/不可靠）', color: '#2a3a5a' },
+    { label: '关联专题（外部）', color: '#8a7a5a' },
+    { label: '时空感官关联边', color: '#8B4513' },
+    { label: '理论文本关联边', color: '#5a3828' },
+    { label: '扩展跨域关联边（虚线）', color: '#7a4a2a' }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch')
+      .each(function() { d3.select(this).style('background', item.color); });
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: 桑基图（维度 → 理论家 → 应用案例）
+// ============================================================
+function buildSankeyGraph(linkData, dimensions) {
+  const dimNames = dimensions.map(d => d.维度);
+  const sources = new Set(linkData.map(l => l.source));
+  const nodeMap = new Map();
+  linkData.forEach(l => {
+    if (!nodeMap.has(l.source)) {
+      const cat = dimNames.includes(l.source) ? 0 : 1;
+      nodeMap.set(l.source, { name: l.source, cat });
+    }
+    if (!nodeMap.has(l.target)) {
+      const cat = sources.has(l.target) ? 1 : 2;
+      nodeMap.set(l.target, { name: l.target, cat });
+    }
+  });
+  return {
+    nodes: Array.from(nodeMap.values()),
+    links: linkData.map(l => ({ source: l.source, target: l.target, value: l.value }))
+  };
+}
+
+function renderSankey(sankeyLinkData, dimensions, theoristColors) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyLinkData || sankeyLinkData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 330).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 330).attr('fill', '#8b4513')
+      .text('d3-sankey 未加载，请检查 ../static/js/d3-sankey.min.js');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 660;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+
+  // 维度配色
+  const dimColors = {};
+  dimensions.forEach(d => { dimColors[d.维度] = d.color; });
+
+  const catColors = ['#4a6b8a', '#8a7a5a', '#8b4513'];
+
+  const graphData = buildSankeyGraph(sankeyLinkData, dimensions);
+  // 深拷贝避免 mutation
+  const nodes = graphData.nodes.map(d => ({ ...d }));
+  const links = graphData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(16)
+    .nodePadding(7)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 链接
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => {
+      if (d.source.cat === 0) return dimColors[d.source.name] || catColors[0];
+      if (d.source.cat === 1) return (theoristColors && theoristColors[d.source.name]) || catColors[1];
+      return catColors[d.source.cat] || '#8a7a5a';
+    })
+    .attr('stroke-width', d => Math.max(1, d.width))
+    .attr('stroke-opacity', 0.4)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.75);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('理论应用权重：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.4);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => Math.max(1, d.x1 - d.x0))
+    .attr('height', d => Math.max(1, d.y1 - d.y0))
+    .attr('fill', d => {
+      if (d.cat === 0) return dimColors[d.name] || catColors[0];
+      if (d.cat === 1) return (theoristColors && theoristColors[d.name]) || catColors[1];
+      return catColors[d.cat] || '#8a7a5a';
+    })
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      const catLabel = ['叙事学维度', '关联理论家', '西游应用案例'][d.cat] || '';
+      tooltip.append('div').text('层级：' + catLabel);
+      tooltip.append('div').text('流入：' + (d.targetLinks || []).length + ' · 流出：' + (d.sourceLinks || []).length);
+      tooltip.append('div').text('总流量：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点标签
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '11px')
+    .attr('fill', '#1a1410')
+    .text(d => d.name);
+
+  // 图例
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const layers = ['叙事学维度', '关联理论家', '西游应用案例'];
+  layers.forEach((layer, i) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', catColors[i]); });
+    item.append('span').text(layer);
+  });
+}
+
+// ============================================================
+// Section 4: 雷达图（16 维度 × 4 指标）
+// ============================================================
+function renderRadar(dimensions) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!dimensions || dimensions.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 320).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 640;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const metrics = ['理论深度', '西游应用', '术语数', '学术影响'];
+  const dimColors = {};
+  dimensions.forEach(d => { dimColors[d.维度] = d.color; });
+
+  const cx = width / 2;
+  const cy = height / 2 + 10;
+  const radius = Math.min(width, height) / 2 - 120;
+  const levels = 10;
+
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  // 背景同心多边形
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = metrics.map((dim, i) => {
+      const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // 轴线 + 标签
+  metrics.forEach((metric, i) => {
+    const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1);
+    const labelR = radius + 32;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', '#1a1410')
+      .text(metric);
+  });
+
+  // 数值刻度
+  for (let lvl = 2; lvl <= levels; lvl += 2) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6).attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '9px')
+      .attr('fill', '#8a7a5a')
+      .text(lvl);
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 每个维度一个多边形
+  dimensions.forEach(dim => {
+    const points = metrics.map((metric, i) => {
+      const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
+      const val = dim[metric] || 0;
+      const rr = radius * (val / 10);
+      return [Math.cos(angle) * rr, Math.sin(angle) * rr];
+    });
+    const color = dimColors[dim.维度] || '#8b4513';
+
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.06)
+      .attr('stroke', color)
+      .attr('stroke-width', 1.5)
+      .style('cursor', 'pointer')
+      .on('mouseover', function(e) {
+        d3.select(this).attr('fill-opacity', 0.25);
+        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.html('');
+        tooltip.append('div').html('<strong>' + dim.code + ' · ' + dim.维度 + '（' + dim.name + '）</strong>');
+        metrics.forEach(metric => {
+          tooltip.append('div').text(metric + '：' + dim[metric]);
+        });
+      })
+      .on('mousemove', function(e) {
+        tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('fill-opacity', 0.06);
+        tooltip.transition().duration(400).style('opacity', 0);
+      });
+
+    // 顶点圆
+    points.forEach((p) => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 2.5)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 1)
+        .attr('pointer-events', 'none');
+    });
+  });
+
+  // 图例
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  dimensions.forEach(dim => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', dimColors[dim.维度] || '#8b4513'); });
+    item.append('span').text(dim.code + ' ' + dim.维度);
+  });
+}
+
+// ============================================================
+// Section 5: 时间线（W161-W186 含可视化里程碑）
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 270).attr('fill', '#8a7a5a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 540;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 50, right: 60, bottom: 100, left: 70 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const sorted = timelineData.slice().sort((a, b) => a.日期戳 - b.日期戳);
+  const dateMin = d3.min(sorted, d => d.日期戳);
+  const dateMax = d3.max(sorted, d => d.日期戳);
+  const xScale = d3.scaleLinear()
+    .domain([dateMin - 2000, dateMax + 2000])
+    .range([0, innerW]);
+
+  const yScale = d3.scaleLinear()
+    .domain([5, 11])
+    .range([innerH, 0]);
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 背景网格
+  g.append('g')
+    .attr('class', 'grid')
+    .call(d3.axisLeft(yScale).tickSize(-innerW).tickFormat('').ticks(5))
+    .selectAll('line').attr('stroke', '#d4c5a9').attr('stroke-dasharray', '3,3').attr('opacity', 0.4);
+  g.select('.grid .domain').attr('stroke', 'none');
+
+  // 主时间线（水平）
+  g.append('line')
+    .attr('x1', 0).attr('y1', innerH)
+    .attr('x2', innerW).attr('y2', innerH)
+    .attr('stroke', '#8b4513')
+    .attr('stroke-width', 2);
+
+  // 年份分割线（2025→2026）
+  const yearBoundary = 20260101;
+  g.append('line')
+    .attr('x1', xScale(yearBoundary)).attr('y1', 0)
+    .attr('x2', xScale(yearBoundary)).attr('y2', innerH)
+    .attr('stroke', '#C76838')
+    .attr('stroke-width', 1.5)
+    .attr('stroke-dasharray', '6,4')
+    .attr('opacity', 0.5);
+  g.append('text')
+    .attr('x', xScale(yearBoundary)).attr('y', -10)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '10px')
+    .attr('fill', '#C76838')
+    .attr('font-weight', '600')
+    .text('2025 → 2026 新增四维');
+
+  // 节点
+  g.selectAll('.tl-node')
+    .data(sorted)
+    .enter()
+    .append('circle')
+    .attr('class', 'tl-node')
+    .attr('cx', d => xScale(d.日期戳))
+    .attr('cy', d => yScale(d.学术影响))
+    .attr('r', d => 4 + d.学术影响 / 2.5)
+    .attr('fill', d => d.color)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3.5);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.编号 + ' · ' + d.维度 + '</strong>');
+      tooltip.append('div').text('专题：' + d.专题);
+      tooltip.append('div').text('类型：' + d.类型);
+      tooltip.append('div').text('类别：' + d.类别);
+      tooltip.append('div').text('创建日期：' + d.日期);
+      tooltip.append('div').text('学术影响：' + d.学术影响);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 编号标签（节点上方）
+  g.selectAll('.tl-num')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'tl-num')
+    .attr('x', d => xScale(d.日期戳))
+    .attr('y', d => yScale(d.学术影响) - 14)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '9px')
+    .attr('font-weight', '700')
+    .attr('fill', d => d.color)
+    .text(d => d.编号);
+
+  // 维度标签（X 轴下方）
+  g.selectAll('.tl-dim')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'tl-dim')
+    .attr('x', d => xScale(d.日期戳))
+    .attr('y', innerH + 20)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '10px')
+    .attr('font-weight', '600')
+    .attr('fill', '#1a1410')
+    .text(d => d.维度);
+
+  // 日期标签（X 轴下方第二行）
+  g.selectAll('.tl-date')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'tl-date')
+    .attr('x', d => xScale(d.日期戳))
+    .attr('y', innerH + 34)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '7px')
+    .attr('fill', '#8a7a5a')
+    .text(d => d.日期.slice(2, 7));
+
+  // X 轴
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).ticks(8).tickFormat(d => {
+      const s = String(d);
+      if (s.length === 8) return s.slice(0, 4) + '-' + s.slice(4, 6);
+      return s;
+    }))
+    .selectAll('text').attr('font-size', '9px');
+
+  // Y 轴
+  g.append('g')
+    .call(d3.axisLeft(yScale).ticks(5).tickFormat(d => d))
+    .selectAll('text').attr('font-size', '10px');
+
+  // 轴标题
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 60)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '11px')
+    .attr('fill', '#8a7a5a')
+    .text('创建时间（W161 时 → W186 十三维集成 · 七感奠基→理论扩展→交叉融合→四维新增）');
+  g.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -innerH / 2).attr('y', -50)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '11px')
+    .attr('fill', '#8a7a5a')
+    .text('学术影响（5-10）');
+
+  // 图例
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  const catGroups = {};
+  timelineData.forEach(d => { if (!catGroups[d.类别]) catGroups[d.类别] = d.color; });
+  Object.entries(catGroups).forEach(([cat, color]) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', color); });
+    item.append('span').text(cat);
+  });
+}
+
+// ============================================================
+// Section 6: 汇总表 + 理论家清单
+// ============================================================
+let summarySortState = { key: null, asc: true };
+
+function renderSummary(dimensions, theorists) {
+  const wrap = d3.select('#summary-table-wrap');
+  wrap.html('');
+  if (!dimensions || dimensions.length === 0) {
+    wrap.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+
+  const rows = dimensions.map(d => ({ ...d }));
+
+  const columns = [
+    { key: 'code', label: '编号' },
+    { key: '维度', label: '维度' },
+    { key: 'name', label: '专题全称' },
+    { key: 'english', label: '英文' },
+    { key: 'category', label: '类别' },
+    { key: 'theorists', label: '关联理论家' },
+    { key: '术语数', label: '术语数' },
+    { key: '案例', label: '西游记应用案例' },
+    { key: '理论深度', label: '理论深度' },
+    { key: '西游应用', label: '西游应用' },
+    { key: '学术影响', label: '学术影响' }
+  ];
+
+  const table = wrap.append('table').attr('class', 'summary-table');
+  const thead = table.append('thead').append('tr');
+  columns.forEach(col => {
+    thead.append('th')
+      .text(col.label)
+      .attr('role', 'button')
+      .attr('tabindex', '0')
+      .on('click', function() { sortSummary(col.key); })
+      .on('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sortSummary(col.key); }
+      });
+  });
+  const tbody = table.append('tbody');
+
+  function drawRows(data) {
+    tbody.html('');
+    const trs = tbody.selectAll('tr')
+      .data(data)
+      .enter()
+      .append('tr')
+      .attr('role', 'row')
+      .attr('tabindex', '0');
+
+    trs.each(function(d) {
+      const tr = d3.select(this);
+      const tdNum = tr.append('td');
+      tdNum.append('span').attr('class', 'type-dot').each(function() { d3.select(this).style('background', d.color); });
+      tdNum.append('span').text(d.code);
+      tr.append('td').append('strong').text(d.维度);
+      tr.append('td').text(d.name);
+      tr.append('td').text(d.english);
+      tr.append('td').text(d.category);
+      tr.append('td').text(d.theorists.join('、'));
+      tr.append('td').text(d.术语数);
+      tr.append('td').text(d.案例);
+      tr.append('td').text(d.理论深度);
+      tr.append('td').text(d.西游应用);
+      tr.append('td').append('strong').text(d.学术影响);
+    });
+  }
+
+  window.sortSummary = function(key) {
+    if (summarySortState.key === key) {
+      summarySortState.asc = !summarySortState.asc;
+    } else {
+      summarySortState.key = key;
+      summarySortState.asc = true;
+    }
+    const sorted = rows.slice().sort((a, b) => {
+      let va = a[key], vb = b[key];
+      if (Array.isArray(va)) va = va.join('');
+      if (Array.isArray(vb)) vb = vb.join('');
+      if (typeof va === 'number' && typeof vb === 'number') {
+        return summarySortState.asc ? va - vb : vb - va;
+      }
+      return summarySortState.asc
+        ? String(va).localeCompare(String(vb), 'zh-CN')
+        : String(vb).localeCompare(String(va), 'zh-CN');
+    });
+    drawRows(sorted);
+  };
+
+  drawRows(rows);
+
+  // 理论家清单
+  const theoristList = d3.select('#theorist-list');
+  theoristList.html('');
+  if (!theorists || theorists.length === 0) {
+    theoristList.append('div').attr('class', 'empty-state').text('暂无理论家数据');
+    return;
+  }
+  const items = theoristList.selectAll('.theorist-item')
+    .data(theorists)
+    .enter()
+    .append('div')
+    .attr('class', 'theorist-item')
+    .each(function(d) {
+      d3.select(this).style('border-left-color', d.color);
+      d3.select(this).append('div').attr('class', 't-name').text(d.name + ' · ' + d.英文名);
+      d3.select(this).append('div').attr('class', 't-sense').text(d.学派 + ' · ' + d.理论);
+      d3.select(this).append('div').attr('class', 't-work').text(d.代表作);
+      d3.select(this).append('div').attr('class', 't-sense').text('关联维度：' + d.关联维度 + ' · 活跃：' + d.活跃年代 + ' · ' + d.国籍);
+    });
+}
+
+// ============================================================
+// main：调度所有渲染函数
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      '数据源：实时加载自 <code>scripts/output/data/</code>（http server 模式）';
+  }
+
+  renderOverview(data.dimensions);
+  renderForce(data.dimensions, data.externalNodes, data.links);
+  renderSankey(data.sankey, data.dimensions, data.sankeyTheoristColors);
+  renderRadar(data.dimensions);
+  renderTimeline(data.timeline);
+  renderSummary(data.dimensions, data.theorists);
+}
+
+// 响应式重绘（debounce 250ms）
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderOverview(data.dimensions);
+      renderForce(data.dimensions, data.externalNodes, data.links);
+      renderSankey(data.sankey, data.dimensions, data.sankeyTheoristColors);
+      renderRadar(data.dimensions);
+      renderTimeline(data.timeline);
+      renderSummary(data.dimensions, data.theorists);
+    }
+  }, 250);
+});
+
+// 启动
+main();
+</script>
+</body>
+</html>

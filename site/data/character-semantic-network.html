@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>人物语义网络可视化 · W127</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+:root {
+  --bg: #faf7f2;
+  --fg: #2c2418;
+  --accent: #c8463a;
+  --accent-2: #3a6b8c;
+  --accent-3: #8b7355;
+  --muted: #8a7a6a;
+  --border: #d4c4a8;
+  --card: #fffdf8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Serif SC', serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.7;
+  padding: 20px;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+header { text-align: center; margin-bottom: 40px; padding: 30px 0; border-bottom: 2px solid var(--border); }
+header h1 { font-size: 2.2em; color: var(--accent); margin-bottom: 10px; font-weight: 600; }
+header .subtitle { color: var(--muted); font-size: 1.1em; }
+header .meta { color: var(--accent-3); font-size: 0.9em; margin-top: 8px; }
+.section { background: var(--card); margin: 30px 0; padding: 30px; border: 1px solid var(--border); border-radius: 4px; }
+.section-title { font-size: 1.6em; color: var(--accent-2); margin-bottom: 8px; font-weight: 600; border-left: 4px solid var(--accent); padding-left: 12px; }
+.section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+.section-sub { color: var(--muted); font-size: 0.9em; margin-bottom: 20px; letter-spacing: 1px; }
+.definition { background: #f5efe4; padding: 15px; margin-bottom: 20px; border-left: 3px solid var(--accent-3); font-size: 0.95em; }
+.chart-block { margin: 20px 0; }
+.chart-title { font-weight: 600; color: var(--fg); margin-bottom: 8px; }
+.chart-caption { color: var(--muted); font-size: 0.85em; margin-bottom: 12px; }
+.chart-svg { background: #fff; border: 1px solid var(--border); border-radius: 4px; }
+.legend-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; font-size: 0.85em; }
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin: 20px 0; }
+.kpi-card { background: #f5efe4; padding: 15px; border-radius: 4px; text-align: center; }
+.kpi-value { font-size: 1.8em; color: var(--accent); font-weight: 700; }
+.kpi-label { color: var(--muted); font-size: 0.85em; margin-top: 4px; }
+.insight-list { list-style: none; }
+.insight-list li { background: #f5efe4; margin: 8px 0; padding: 12px 15px; border-left: 3px solid var(--accent-2); border-radius: 2px; }
+.insight-list li strong { color: var(--accent); }
+.node-label { font-size: 11px; fill: var(--fg); pointer-events: none; }
+.node-circle { cursor: pointer; }
+.node-circle:hover { stroke: var(--accent); stroke-width: 2px; }
+.tooltip { position: absolute; background: rgba(44,36,24,0.95); color: #fff; padding: 8px 12px; border-radius: 4px; font-size: 0.85em; pointer-events: none; z-index: 100; max-width: 280px; }
+footer { text-align: center; margin-top: 40px; padding: 20px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85em; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>人物语义网络可视化</h1>
+<div class="subtitle">CHARACTER SEMANTIC NETWORK VISUALIZATION</div>
+<div class="meta">W127 · D 方向第 5 个 NLP 可视化 · 基于 W100+W102+W103+W121+W125 四层 NLP 数据</div>
+</header>
+
+<section class="section">
+<h2 class="section-title">壹 · 数据来源与三子网络概览</h2>
+<div class="section-sub">DATA SOURCE & THREE SUBNETWORKS OVERVIEW</div>
+<div class="definition">
+<strong>定义：</strong>基于 W100 共现数据（35 节点 + 329 chapter_level 边）+ W102 关系演化时间线 + W103 引语情感 + W121 取经五众关系 + W125 次要人物三子网络，构建人物语义关系图谱。三子网络：神佛体系（12 节点）+ 妖怪群体（13 节点）+ 凡人群体（5 节点）+ 取经团队（5 节点）= 35 节点。
+</div>
+<div class="kpi-row">
+<div class="kpi-card"><div class="kpi-value">35</div><div class="kpi-label">总节点数</div></div>
+<div class="kpi-card"><div class="kpi-value">329</div><div class="kpi-label">chapter_level 边</div></div>
+<div class="kpi-card"><div class="kpi-value">12</div><div class="kpi-label">神佛体系节点</div></div>
+<div class="kpi-card"><div class="kpi-value">13</div><div class="kpi-label">妖怪群体节点</div></div>
+<div class="kpi-card"><div class="kpi-value">5</div><div class="kpi-label">凡人群体节点</div></div>
+<div class="kpi-card"><div class="kpi-value">69.3%</div><div class="kpi-label">跨子网络边占比</div></div>
+</div>
+<div class="chart-block">
+<div class="chart-title">三子网络节点构成饼图</div>
+<div class="chart-caption">展示 35 节点按子网络类型的分布</div>
+<svg id="chart-pie" class="chart-svg" width="100%" height="350"></svg>
+<div class="legend-row" id="pie-legend"></div>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title alt">贰 · 神佛体系子网络力导向图</h2>
+<div class="section-sub">DIVINE SYSTEM SUBNETWORK FORCE-DIRECTED GRAPH</div>
+<div class="definition">
+<strong>定义：</strong>神佛体系子网络含 12 节点（如来/观音/玉帝/太上老君/王母娘娘/二郎神/哪吒/菩提祖师/镇元大仙/太白金星/灵吉菩萨/昴日星官），呈现三层次结构：顶层主权（玉帝+如来）+ 中层执行（观音+太上老君+王母娘娘）+ 底层差遣（其余 7 位）。边权重基于 W100 chapter_level 共现次数。
+</div>
+<div class="chart-block">
+<div class="chart-title">神佛体系力导向图（节点大小=度数·边粗细=共现次数）</div>
+<div class="chart-caption">颜色：顶层=红 / 中层=蓝 / 底层=棕·hover 显示节点详情</div>
+<svg id="chart-divine" class="chart-svg" width="100%" height="500"></svg>
+<div class="legend-row" id="divine-legend"></div>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title alt-2">叁 · 妖怪群体子网络力导向图</h2>
+<div class="section-sub">DEMON GROUP SUBNETWORK FORCE-DIRECTED GRAPH</div>
+<div class="definition">
+<strong>定义：</strong>妖怪群体子网络含 13 节点，呈现四类组织形态：家族化（牛魔王+铁扇公主+红孩儿）+ 结义化（青狮精+白象精+大鹏金翅雕）+ 兄弟化（金角大王+银角大王）+ 孤立化（黑熊精/九头虫/黄风怪/白骨精）。家族化与结义化妖怪是取经团队最难降服的。
+</div>
+<div class="chart-block">
+<div class="chart-title">妖怪群体力导向图（节点颜色=组织形态）</div>
+<div class="chart-caption">颜色：家族=红 / 结义=蓝 / 兄弟=绿 / 孤立=灰·hover 显示节点详情</div>
+<svg id="chart-demon" class="chart-svg" width="100%" height="500"></svg>
+<div class="legend-row" id="demon-legend"></div>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title">肆 · 凡人群体子网络与功能标注</h2>
+<div class="section-sub">MORTAL GROUP SUBNETWORK WITH FUNCTION ANNOTATION</div>
+<div class="definition">
+<strong>定义：</strong>凡人群体子网络含 5 节点（唐太宗/刘伯钦/女儿国国王/玉华王/寇员外），承担三种功能：见证功能（唐太宗/刘伯钦）+ 考验功能（女儿国国王/寇员外）+ 报恩功能（玉华王）。凡人共现次数普遍较低（1-2 次），是功能性角色而非持续性角色。
+</div>
+<div class="chart-block">
+<div class="chart-title">凡人群体功能标注图（节点颜色=功能类型）</div>
+<div class="chart-caption">颜色：见证=蓝 / 考验=红 / 报恩=绿·节点大小=共现次数</div>
+<svg id="chart-mortal" class="chart-svg" width="100%" height="400"></svg>
+<div class="legend-row" id="mortal-legend"></div>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title alt">伍 · 三子网络交互热力图</h2>
+<div class="section-sub">THREE SUBNETWORK INTERACTION HEATMAP</div>
+<div class="definition">
+<strong>定义：</strong>三子网络交互热力图展示四子网络（取经团队+神佛体系+妖怪群体+凡人群体）之间的跨网络边权重。取经团队作为中介节点，连接所有子网络。跨子网络边占比 69.3%（228/329），验证取经叙事的开放性结构。
+</div>
+<div class="chart-block">
+<div class="chart-title">四子网络交互热力图（颜色深浅=边权重）</div>
+<div class="chart-caption">行=源子网络 / 列=目标子网络 / 颜色=跨网络边数</div>
+<svg id="chart-heatmap" class="chart-svg" width="100%" height="400"></svg>
+</div>
+</section>
+
+<section class="section">
+<h2 class="section-title alt-2">陆 · 关键洞察</h2>
+<div class="section-sub">KEY INSIGHTS</div>
+<ul class="insight-list">
+<li><strong>三子网络结构差异：</strong>神佛体系呈三层次结构（主权-执行-差遣），妖怪群体呈四类组织形态（家族-结义-兄弟-孤立），凡人群体呈功能性结构（见证-考验-报恩）。三者持续性递减（神佛高→妖怪中→凡人低）。</li>
+<li><strong>取经团队的中介作用：</strong>取经团队是连接三子网络的核心节点。跨子网络边占比 69.3%，说明取经叙事不是封闭的单一网络，而是开放的多网络交互结构。</li>
+<li><strong>神佛救援模式：</strong>神佛体系对取经团队的救援分三种模式——直接救援（观音降妖）/ 间接救援（如来应对存在论级危机）/ 协调救援（玉帝调兵）。妖怪组织化程度越高，所需救援神佛阶位越高。</li>
+<li><strong>妖怪组织形态与危险性：</strong>家族化妖怪（牛魔王家族）和结义化妖怪（狮驼岭三魔王）最难降服，因需应对多个妖怪协同。孤立化妖怪相对容易，但可能有特殊本领（如白骨精的变化术）。</li>
+<li><strong>凡人功能性与单点性：</strong>凡人群体共现次数低（1-2 次），是功能性角色而非持续性角色。他们出现在特定节点完成特定功能后退出，与神佛的持续性和妖怪的局部持续性形成对比。</li>
+<li><strong>明代政治镜像：</strong>神佛体系的三层次结构与明代政治（皇权-文官-差遣）形成镜像，妖怪群体的家族化与明代藩封形成镜像，凡人群体的功能性与现代利益相关者形成镜像。</li>
+</ul>
+</section>
+
+<footer>
+<p>W127 人物语义网络可视化 · D 方向第 5 个 NLP 可视化 · 基于 W100+W102+W103+W121+W125 四层 NLP 数据</p>
+<p>古典宣纸风配色 · D3.js v7 · 数据来源：scripts/output/data/cooccurrence.json</p>
+</footer>
+</div>
+
+<script>
+// ============= EMBEDDED DATA (W100 三子网络数据) =============
+const EMBEDDED = {
+  subnetworks: {
+    pilgrimage: { name: '取经团队', color: '#c8463a', nodes: ['唐僧','孙悟空','猪八戒','沙僧','白龙马'] },
+    divine: { name: '神佛体系', color: '#3a6b8c', nodes: ['如来','观音','玉帝','太上老君','王母娘娘','二郎神','哪吒','菩提祖师','镇元大仙','太白金星','灵吉菩萨','昴日星官'] },
+    demon: { name: '妖怪群体', color: '#8b7355', nodes: ['牛魔王','铁扇公主','红孩儿','黄袍怪','金角大王','银角大王','青狮精','白象精','大鹏金翅雕','黑熊精','九头虫','黄风怪','白骨精'] },
+    mortal: { name: '凡人群体', color: '#6a8b5a', nodes: ['唐太宗','刘伯钦','女儿国国王','玉华王','寇员外'] }
+  },
+  divine_hierarchy: {
+    top: { nodes: ['玉帝','如来'], color: '#c8463a' },
+    middle: { nodes: ['观音','太上老君','王母娘娘'], color: '#3a6b8c' },
+    bottom: { nodes: ['二郎神','哪吒','菩提祖师','镇元大仙','太白金星','灵吉菩萨','昴日星官'], color: '#8b7355' }
+  },
+  demon_types: {
+    family: { nodes: ['牛魔王','铁扇公主','红孩儿'], color: '#c8463a' },
+    sworn: { nodes: ['青狮精','白象精','大鹏金翅雕'], color: '#3a6b8c' },
+    brother: { nodes: ['金角大王','银角大王'], color: '#5a8b5a' },
+    isolated: { nodes: ['黄袍怪','黑熊精','九头虫','黄风怪','白骨精'], color: '#9a9a9a' }
+  },
+  mortal_functions: {
+    witness: { nodes: ['唐太宗','刘伯钦'], color: '#3a6b8c' },
+    test: { nodes: ['女儿国国王','寇员外'], color: '#c8463a' },
+    gratitude: { nodes: ['玉华王'], color: '#5a8b5a' }
+  },
+  divine_edges: [
+    { source: '如来', target: '观音', weight: 8 },
+    { source: '观音', target: '唐僧', weight: 12 },
+    { source: '观音', target: '孙悟空', weight: 15 },
+    { source: '玉帝', target: '如来', weight: 5 },
+    { source: '太上老君', target: '玉帝', weight: 6 },
+    { source: '太白金星', target: '玉帝', weight: 4 },
+    { source: '二郎神', target: '玉帝', weight: 3 },
+    { source: '哪吒', target: '玉帝', weight: 3 },
+    { source: '观音', target: '太白金星', weight: 2 },
+    { source: '菩提祖师', target: '孙悟空', weight: 1 }
+  ],
+  demon_edges: [
+    { source: '牛魔王', target: '铁扇公主', weight: 6 },
+    { source: '牛魔王', target: '红孩儿', weight: 4 },
+    { source: '金角大王', target: '银角大王', weight: 5 },
+    { source: '青狮精', target: '白象精', weight: 4 },
+    { source: '青狮精', target: '大鹏金翅雕', weight: 4 },
+    { source: '白象精', target: '大鹏金翅雕', weight: 3 },
+    { source: '孙悟空', target: '牛魔王', weight: 8 },
+    { source: '孙悟空', target: '黑熊精', weight: 3 },
+    { source: '孙悟空', target: '白骨精', weight: 2 }
+  ],
+  mortal_edges: [
+    { source: '唐太宗', target: '唐僧', weight: 2 },
+    { source: '女儿国国王', target: '唐僧', weight: 1 },
+    { source: '寇员外', target: '唐僧', weight: 1 },
+    { source: '玉华王', target: '孙悟空', weight: 1 },
+    { source: '刘伯钦', target: '唐僧', weight: 1 }
+  ],
+  cross_network: [
+    { from: '取经团队', to: '神佛体系', weight: 95 },
+    { from: '取经团队', to: '妖怪群体', weight: 88 },
+    { from: '取经团队', to: '凡人群体', weight: 25 },
+    { from: '神佛体系', to: '妖怪群体', weight: 12 },
+    { from: '神佛体系', to: '凡人群体', weight: 5 },
+    { from: '妖怪群体', to: '凡人群体', weight: 3 },
+    { from: '取经团队', to: '取经团队', weight: 10 },
+    { from: '神佛体系', to: '神佛体系', weight: 45 },
+    { from: '妖怪群体', to: '妖怪群体', weight: 38 },
+    { from: '凡人群体', to: '凡人群体', weight: 8 }
+  ]
+};
+
+// ============= Section 1: 三子网络饼图 =============
+function renderPie() {
+  const data = [
+    { name: '取经团队', value: 5, color: '#c8463a' },
+    { name: '神佛体系', value: 12, color: '#3a6b8c' },
+    { name: '妖怪群体', value: 13, color: '#8b7355' },
+    { name: '凡人群体', value: 5, color: '#6a8b5a' }
+  ];
+  const svg = d3.select('#chart-pie');
+  const width = +svg.attr('width') || 800;
+  svg.attr('viewBox', `0 0 ${width} 350`);
+  const radius = Math.min(width, 350) / 2 - 40;
+  const g = svg.append('g').attr('transform', `translate(${width/2},175)`);
+  const pie = d3.pie().value(d => d.value);
+  const arc = d3.arc().innerRadius(0).outerRadius(radius);
+  const arcs = g.selectAll('path').data(pie(data)).enter().append('path')
+    .attr('fill', d => d.data.color).attr('d', arc).attr('stroke', '#fff').attr('stroke-width', 2);
+  g.selectAll('text').data(pie(data)).enter().append('text')
+    .attr('transform', d => `translate(${arc.centroid(d)})`)
+    .attr('text-anchor', 'middle').attr('font-size', '12px').attr('fill', '#fff')
+    .text(d => `${d.data.name} ${d.data.value}`);
+  const legend = d3.select('#pie-legend');
+  data.forEach(d => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', d.color);
+    item.append('span').text(`${d.name} (${d.value})`);
+  });
+}
+
+// ============= Section 2: 神佛体系力导向图 =============
+function renderDivine() {
+  const nodes = EMBEDDED.subnetworks.divine.nodes.map(name => {
+    let tier = 'bottom';
+    if (EMBEDDED.divine_hierarchy.top.nodes.includes(name)) tier = 'top';
+    else if (EMBEDDED.divine_hierarchy.middle.nodes.includes(name)) tier = 'middle';
+    return { id: name, tier };
+  });
+  const colorMap = { top: '#c8463a', middle: '#3a6b8c', bottom: '#8b7355' };
+  const links = EMBEDDED.divine_edges.filter(e =>
+    nodes.find(n => n.id === e.source) && nodes.find(n => n.id === e.target));
+  renderForce('#chart-divine', nodes, links, colorMap, 'tier', 500);
+  const legend = d3.select('#divine-legend');
+  [['顶层主权','#c8463a'],['中层执行','#3a6b8c'],['底层差遣','#8b7355']].forEach(([l,c]) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', c);
+    item.append('span').text(l);
+  });
+}
+
+// ============= Section 3: 妖怪群体力导向图 =============
+function renderDemon() {
+  const nodes = EMBEDDED.subnetworks.demon.nodes.map(name => {
+    let type = 'isolated';
+    if (EMBEDDED.demon_types.family.nodes.includes(name)) type = 'family';
+    else if (EMBEDDED.demon_types.sworn.nodes.includes(name)) type = 'sworn';
+    else if (EMBEDDED.demon_types.brother.nodes.includes(name)) type = 'brother';
+    return { id: name, type };
+  });
+  const colorMap = { family: '#c8463a', sworn: '#3a6b8c', brother: '#5a8b5a', isolated: '#9a9a9a' };
+  const links = EMBEDDED.demon_edges.filter(e =>
+    nodes.find(n => n.id === e.source) && nodes.find(n => n.id === e.target));
+  renderForce('#chart-demon', nodes, links, colorMap, 'type', 500);
+  const legend = d3.select('#demon-legend');
+  [['家族化','#c8463a'],['结义化','#3a6b8c'],['兄弟化','#5a8b5a'],['孤立化','#9a9a9a']].forEach(([l,c]) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', c);
+    item.append('span').text(l);
+  });
+}
+
+// ============= Section 4: 凡人群体功能标注图 =============
+function renderMortal() {
+  const nodes = EMBEDDED.subnetworks.mortal.nodes.map(name => {
+    let func = 'witness';
+    if (EMBEDDED.mortal_functions.test.nodes.includes(name)) func = 'test';
+    else if (EMBEDDED.mortal_functions.gratitude.nodes.includes(name)) func = 'gratitude';
+    return { id: name, func };
+  });
+  const colorMap = { witness: '#3a6b8c', test: '#c8463a', gratitude: '#5a8b5a' };
+  const links = EMBEDDED.mortal_edges.filter(e =>
+    nodes.find(n => n.id === e.source) || nodes.find(n => n.id === e.target));
+  // 添加取经团队节点作为连接
+  const pilgrimageNodes = ['唐僧','孙悟空'].map(id => ({ id, tier: 'pilgrim' }));
+  const allNodes = [...nodes, ...pilgrimageNodes];
+  renderForce('#chart-mortal', allNodes, links, { ...colorMap, pilgrim: '#d4c4a8' }, 'func', 400);
+  const legend = d3.select('#mortal-legend');
+  [['见证','#3a6b8c'],['考验','#c8463a'],['报恩','#5a8b5a'],['取经团队','#d4c4a8']].forEach(([l,c]) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', c);
+    item.append('span').text(l);
+  });
+}
+
+// ============= 通用力导向图渲染 =============
+function renderForce(selector, nodes, links, colorMap, groupKey, height) {
+  const svg = d3.select(selector);
+  const width = +svg.attr('width') || 800;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+  svg.selectAll('*').remove();
+  const tooltip = d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0);
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(80).strength(d => 0.1 + d.weight * 0.02))
+    .force('charge', d3.forceManyBody().strength(-200))
+    .force('center', d3.forceCenter(width/2, height/2));
+
+  const link = svg.append('g').selectAll('line').data(links).enter().append('line')
+    .attr('stroke', '#d4c4a8').attr('stroke-width', d => Math.sqrt(d.weight) * 1.5).attr('stroke-opacity', 0.6);
+
+  const node = svg.append('g').selectAll('circle').data(nodes).enter().append('circle')
+    .attr('class', 'node-circle').attr('r', d => 8 + (d.id.length > 2 ? 2 : 0))
+    .attr('fill', d => colorMap[d[groupKey]] || '#8b7355')
+    .on('mouseover', (e,d) => { tooltip.transition().duration(200).style('opacity', .9);
+      tooltip.html(`<strong>${d.id}</strong><br>分组: ${d[groupKey]}`); })
+    .on('mousemove', e => tooltip.style('left', (e.pageX+10)+'px').style('top', (e.pageY-28)+'px'))
+    .on('mouseout', () => tooltip.transition().duration(500).style('opacity', 0));
+
+  const label = svg.append('g').selectAll('text').data(nodes).enter().append('text')
+    .attr('class', 'node-label').attr('text-anchor', 'middle').attr('dy', -12).text(d => d.id);
+
+  sim.on('tick', () => {
+    link.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('cx', d => d.x).attr('cy', d => d.y);
+    label.attr('x', d => d.x).attr('y', d => d.y);
+  });
+}
+
+// ============= Section 5: 三子网络交互热力图 =============
+function renderHeatmap() {
+  const networks = ['取经团队','神佛体系','妖怪群体','凡人群体'];
+  const colors = ['#c8463a','#3a6b8c','#8b7355','#6a8b5a'];
+  const data = EMBEDDED.cross_network;
+  const svg = d3.select('#chart-heatmap');
+  const width = +svg.attr('width') || 800;
+  const height = 400;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+  const margin = { top: 60, right: 40, bottom: 60, left: 100 };
+  const cellW = (width - margin.left - margin.right) / networks.length;
+  const cellH = (height - margin.top - margin.bottom) / networks.length;
+  const maxWeight = d3.max(data, d => d.weight);
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+  const colorScale = d3.scaleSequential(d => d3.interpolateYlOrRd(d / maxWeight)).domain([0, maxWeight]);
+
+  data.forEach(d => {
+    const i = networks.indexOf(d.from);
+    const j = networks.indexOf(d.to);
+    g.append('rect')
+      .attr('x', j * cellW).attr('y', i * cellH)
+      .attr('width', cellW - 2).attr('height', cellH - 2)
+      .attr('fill', colorScale(d.weight)).attr('stroke', '#fff').attr('stroke-width', 1);
+    g.append('text')
+      .attr('x', j * cellW + cellW/2).attr('y', i * cellH + cellH/2)
+      .attr('text-anchor', 'middle').attr('dy', '0.35em')
+      .attr('fill', d.weight > maxWeight/2 ? '#fff' : '#2c2418')
+      .attr('font-size', '14px').attr('font-weight', '600')
+      .text(d.weight);
+  });
+
+  // 行标签
+  networks.forEach((n, i) => {
+    g.append('text').attr('x', -10).attr('y', i * cellH + cellH/2)
+      .attr('text-anchor', 'end').attr('dy', '0.35em').attr('font-size', '12px').text(n);
+  });
+  // 列标签
+  networks.forEach((n, i) => {
+    g.append('text').attr('x', i * cellW + cellW/2).attr('y', -10)
+      .attr('text-anchor', 'middle').attr('font-size', '12px').text(n);
+  });
+}
+
+// ============= 初始化 =============
+function init() {
+  renderPie();
+  renderDivine();
+  renderDemon();
+  renderMortal();
+  renderHeatmap();
+}
+init();
+
+// 响应式重绘
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    d3.selectAll('svg').selectAll('*').remove();
+    init();
+  }, 250);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语言学 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current { color: var(--ink-soft); }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+        }
+        table.data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        /* 咒语卡片 */
+        .incantation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .inc-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .inc-card.dom-taoist { border-top-color: var(--accent-soft); }
+        .inc-card.dom-ming { border-top-color: var(--accent-2); }
+        .inc-card.dom-classical { border-top-color: var(--accent-4); }
+        .inc-card .inc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+        .inc-card .inc-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .inc-card .inc-no {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.78rem;
+            color: var(--accent);
+        }
+        .inc-card .inc-en {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+        .inc-card .inc-raw {
+            background: #fff;
+            border-left: 3px solid var(--accent-soft);
+            padding: 6px 10px;
+            font-size: 0.9rem;
+            color: var(--ink);
+            margin: 6px 0;
+            font-style: italic;
+        }
+        .inc-card .inc-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .inc-card .inc-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .inc-card .inc-feats {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-top: 4px;
+            padding-left: 14px;
+        }
+        .inc-card .inc-feats li {
+            list-style: disc;
+            margin-bottom: 2px;
+        }
+        .inc-card .inc-prop {
+            margin-top: 6px;
+            display: flex;
+            height: 10px;
+            border-radius: 3px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+        }
+        .inc-card .inc-prop span {
+            display: inline-block;
+            height: 100%;
+        }
+        /* 对话卡片 */
+        .pair-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .pair-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-left: 4px solid var(--accent);
+        }
+        .pair-card.pd-mid { border-left-color: var(--accent-soft); }
+        .pair-card.pd-low { border-left-color: var(--accent-4); }
+        .pair-card .pair-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+        .pair-card .pair-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .pair-card .pair-pd {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.88rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .pair-card .pair-rel {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+        }
+        .pair-card .pair-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .pair-card .pair-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .pair-card .pair-evo {
+            margin-top: 6px;
+            font-size: 0.82rem;
+            padding: 4px 8px;
+            background: #fff;
+            border-radius: 3px;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .pair-card .pair-dlg {
+            margin-top: 8px;
+            padding: 6px 8px;
+            background: #fff;
+            border-left: 2px solid var(--accent-soft);
+            font-size: 0.82rem;
+        }
+        .pair-card .pair-dlg .dlg-ch {
+            color: var(--accent-3);
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .pair-card .pair-dlg .dlg-text {
+            color: var(--ink);
+            font-style: italic;
+            display: block;
+            margin: 2px 0;
+        }
+        .pair-card .pair-dlg .dlg-feats {
+            color: var(--ink-soft);
+            font-size: 0.76rem;
+        }
+        /* MBTI 卡片 */
+        .mbti-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .mbti-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .mbti-card.m-entp { border-top-color: var(--accent); }
+        .mbti-card.m-infj { border-top-color: var(--accent-2); }
+        .mbti-card.m-esfp { border-top-color: var(--accent-soft); }
+        .mbti-card.m-isfj { border-top-color: var(--accent-4); }
+        .mbti-card .mbti-tag {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .mbti-card.m-entp .mbti-tag { color: var(--accent); }
+        .mbti-card.m-infj .mbti-tag { color: var(--accent-2); }
+        .mbti-card.m-esfp .mbti-tag { color: var(--accent-3); }
+        .mbti-card.m-isfj .mbti-tag { color: var(--accent-4); }
+        .mbti-card .mbti-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .mbti-card .mbti-strategy {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        /* 角色身份卡片 */
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .char-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .char-card.c-buddhist { border-top-color: var(--accent); }
+        .char-card.c-daoist { border-top-color: var(--accent-soft); }
+        .char-card.c-confucian { border-top-color: var(--accent-2); }
+        .char-card.c-folk { border-top-color: var(--accent-4); }
+        .char-card.c-mixed { border-top-color: var(--accent-3); }
+        .char-card .char-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .char-card .char-profile {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+        }
+        .char-card .char-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .char-card .char-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .char-card .char-scores {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            margin-top: 6px;
+        }
+        .char-card .char-scores .score-cell {
+            text-align: center;
+            background: #fff;
+            padding: 4px 2px;
+            border-radius: 3px;
+            border: 1px solid var(--line);
+        }
+        .char-card .char-scores .score-cell .score-label {
+            font-size: 0.7rem;
+            color: var(--ink-soft);
+            display: block;
+        }
+        .char-card .char-scores .score-cell .score-val {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: var(--accent);
+        }
+        .char-card .char-vocab {
+            margin-top: 8px;
+            font-size: 0.82rem;
+        }
+        .char-card .char-vocab .vocab-label {
+            color: var(--accent-3);
+            font-size: 0.76rem;
+            margin-bottom: 2px;
+        }
+        .char-card .char-vocab .vocab-list {
+            color: var(--ink);
+        }
+        /* 比例条 mini bar */
+        .prop-bar {
+            display: flex;
+            height: 8px;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 4px;
+            border: 1px solid var(--line);
+        }
+        .prop-bar span {
+            display: inline-block;
+            height: 100%;
+        }
+        /* tooltip */
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 320px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 24px;
+        }
+        .footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 6px;
+        }
+        .footer a:hover { text-decoration: underline; }
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .map-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .map-card.alt { border-left-color: var(--accent-4); }
+        .map-card.alt2 { border-left-color: var(--accent-3); }
+        .map-card .map-label {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .map-card.alt .map-label { color: var(--accent-4); }
+        .map-card.alt2 .map-label { color: var(--accent-3); }
+        .map-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .map-card .map-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .map-card .map-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        @media (max-width: 720px) {
+            .hero h1 { font-size: 1.6rem; }
+            .hero .subtitle { font-size: 0.78rem; letter-spacing: 0.15em; }
+            .section { padding: 18px; }
+            .kpi-card .value { font-size: 1.5rem; }
+            .map-grid, .incantation-grid, .pair-grid, .char-grid, .mbti-grid { grid-template-columns: 1fr; }
+            table.data-table { font-size: 0.78rem; }
+            table.data-table th, table.data-table td { padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            .hero { padding: 36px 16px 28px; }
+            .hero h1 { font-size: 1.4rem; }
+            .container { padding: 0 12px; }
+            .section { padding: 14px; }
+            .chart-block { padding: 12px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>语言学 · 咒语·权力距离·身份认同</h1>
+        <div class="subtitle">DATA-DRIVEN LINGUISTICS OF XIYOUJI</div>
+        <div class="tagline">从紧箍咒的梵音到悟空骂人的市井——一部三教合一的语言图谱。</div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../dashboard.html">仪表盘</a>
+            <span class="sep">/</span>
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <span class="current">语言学</span>
+        </nav>
+
+        <div class="notice">
+            本页基于 AH 类「语言学」脚本生成，包含 4 份 JSON 数据：咒语语言学、对话权力距离、语言身份认同图谱、整体统计。所有图表支持 hover tooltip。
+        </div>
+
+        <!-- 导言 -->
+        <section class="section">
+            <h2 class="section-title">导言 · 三教合一的语言图谱</h2>
+            <div class="section-sub">INTRODUCTION · Linguistic Map of Three-Teachings Synthesis</div>
+            <p style="font-size:0.95rem;line-height:1.8;color:var(--ink);margin-bottom:14px;">
+                《西游记》是<strong>三教合一</strong>的语言标本：紧箍咒的<strong style="color:var(--accent);">梵语音译</strong>、
+                五雷法的<strong style="color:var(--accent-3);">道教术语</strong>、定身咒的<strong style="color:var(--accent-2);">明代市井</strong>、
+                如来说法的<strong style="color:var(--accent-4);">佛经文言</strong>——四种语言来源共存。
+                本页从三个维度剖析：咒语的语言结构、对话的权力距离、角色的语言身份认同。
+            </p>
+            <div style="margin-bottom:18px;">
+                <span class="data-badge">4 份 JSON 数据</span>
+                <span class="data-badge">8 咒语 × 4 语言来源</span>
+                <span class="data-badge">5 对话对 × 19 代表性对话</span>
+                <span class="data-badge">8 角色 × 4 教身份</span>
+                <span class="data-badge">4 MBTI 语言策略</span>
+                <span class="data-badge">3 类 7 条洞察 × 3</span>
+                <span class="data-badge">D3.js v7</span>
+                <span class="data-badge">fetch + EMBEDDED fallback</span>
+            </div>
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">DIMENSION 1</div>
+                    <div class="map-title">咒语的语言结构 · Incantation Linguistics</div>
+                    <div class="map-row">8 咒语涵盖梵语音译（紧箍咒）/道教术语（五雷法）/明代市井（定身咒）/佛经文言（如来说法），4 类来源各占 2 席。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-4);">DIMENSION 2</div>
+                    <div class="map-title">对话权力距离 · Power Distance</div>
+                    <div class="map-row">唐僧→悟空 8/10 命令式 vs 悟空→八戒 3/10 调侃式，4 主要对话对在 4 阶段中演变，反映师徒亲疏。</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-3);">DIMENSION 3</div>
+                    <div class="map-title">语言身份认同 · Language Identity</div>
+                    <div class="map-row">8 角色 × 4 教（佛/道/儒/民间）身份雷达图，如来佛教 10 分、老君道教 10 分、玉帝儒家 10 分、八戒民间 10 分。</div>
+                </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+                数据来源：scripts/AH_语言学/linguistics.py · 共生成 4 份 JSON 输出，本页 fetch 失败时自动回退到内嵌 EMBEDDED 数据，支持 file:// 协议双击打开。
+            </p>
+        </section>
+
+        <!-- KPI 卡片 -->
+        <div class="kpi-row" id="kpiRow">
+            <div class="kpi-card">
+                <div class="label">INCANTATIONS · 咒语</div>
+                <div class="value">8 咒语</div>
+                <div class="desc">4 类语言来源（梵/道/市井/文言）</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">DIALOGUES · 对话</div>
+                <div class="value">5 对话对</div>
+                <div class="desc">19 条代表性对话 · 4 阶段演变</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">IDENTITY · 身份</div>
+                <div class="value">8 角色</div>
+                <div class="desc">4 教身份认同（佛/道/儒/民间）</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">CLASSICAL · 文言</div>
+                <div class="value">38.75%</div>
+                <div class="desc">平均文言占比最高（avg classical_chinese）</div>
+            </div>
+        </div>
+
+        <!-- Section 1: 咒语的语言结构 -->
+        <section class="section">
+            <h2 class="section-title">壹 · 咒语的语言结构</h2>
+            <div class="section-sub">INCANTATION LINGUISTIC STRUCTURE · 梵音 / 道教 / 市井 / 文言 四源共存</div>
+            <div class="definition" id="def-incantation">
+                <strong>语言定义：</strong>咒语语言学（incantation linguistics）：咒语的语言来源、词汇构成、音韵特征·反映宗教与文化融合。8 咒语涵盖梵语借词、道教术语、明代市井口语、佛经文言四类来源。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>核心发现：</strong>紧箍咒"唵吽吒唎·唵嘛呢叭咪吽"是梵语音译·五雷法"急急如律令"是汉地道教术语·
+                悟空骂人"泼怪·畜生·休走"是明代市井口语·三种语言来源反映<strong style="color:var(--accent);">三教合一</strong>。
+                语言来源统计：sanskrit_dominant=2 / taoist_dominant=2 / ming_dominant=2 / classical_dominant=2·四源均势。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">8 咒语 · 4 类语言来源占比堆叠条形图</div>
+                <div class="chart-caption">X 轴：8 咒语 / Y 轴：占比 0-100%（红=梵语 黄=道教 蓝=市井 绿=文言）/ 标注每咒语主导来源</div>
+                <svg id="chart-incantation-stacked" class="chart-svg" width="100%" height="400"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>梵语借词 sanskrit</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>道教术语 taoist</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>明代市井 ming</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>文言 classical</span>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">4 类语言来源 · 总占比环形图</div>
+                <div class="chart-caption">基于 avg_sanskrit=20% / avg_taoist=16.25% / avg_ming=28.75% / avg_classical=35%（8 咒语平均）</div>
+                <svg id="chart-incantation-donut" class="chart-svg" width="100%" height="360"></svg>
+                <div class="legend-row" id="donut-legend"></div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8 咒语卡片</h3>
+            <div class="incantation-grid" id="incantation-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">语言来源统计 KPI</h3>
+            <div class="kpi-row" id="srcStatKpi"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">语言学洞察</h3>
+            <ol class="insights-list" id="incantation-insights"></ol>
+        </section>
+
+        <!-- Section 2: 对话的权力距离 -->
+        <section class="section">
+            <h2 class="section-title alt-2">贰 · 对话的权力距离</h2>
+            <div class="section-sub">CONVERSATIONAL POWER DISTANCE · 命令式 vs 调侃式 vs 尊敬式</div>
+            <div class="definition" id="def-power-distance">
+                <strong>语言定义：</strong>权力距离（power distance）：对话中体现的权力等级·高权力距离用命令式·低权力距离用调侃式。唐僧对悟空 8/10 命令式·悟空对八戒 3/10 调侃式·悟空对唐僧 3/10 尊敬式。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>核心发现：</strong>唐僧→悟空是高权力距离（命令式）·悟空→八戒是低权力距离（调侃式）·
+                量化师徒关系的亲疏演变。唐僧→悟空演变 10→9→6→4·权力距离逐渐降低·师徒关系亲化；
+                八戒→悟空演变 1→6→4·从挑衅到尊称·先升后降。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">5 对话对 · 权力距离对比条形图</div>
+                <div class="chart-caption">X 轴：5 对话对（speaker→listener）/ Y 轴：power_distance（0-10）/ 颜色按距离渐变（绿=低 黄=中 红=高）</div>
+                <svg id="chart-pd-bar" class="chart-svg" width="100%" height="360"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>低距离 0-3（调侃式）</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>中距离 4-6（礼貌式）</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>高距离 7-10（命令式）</span>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">4 主要对话对 · 权力距离演变曲线</div>
+                <div class="chart-caption">X 轴：4 阶段（代表性对话）/ Y 轴：power_distance_reflected（0-10）/ 4 条折线：唐僧→悟空 / 悟空→八戒 / 悟空→唐僧 / 八戒→悟空</div>
+                <svg id="chart-pd-evolution" class="chart-svg" width="100%" height="380"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent);"></span>唐僧→悟空（命令式）</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-2);"></span>悟空→八戒（调侃式）</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-4);"></span>悟空→唐僧（尊敬式）</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-3);"></span>八戒→悟空（波动）</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">5 对话对卡片</h3>
+            <div class="pair-grid" id="pair-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">MBTI 语言策略</h3>
+            <div class="mbti-grid" id="mbti-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">权力距离洞察</h3>
+            <ol class="insights-list" id="pd-insights"></ol>
+        </section>
+
+        <!-- Section 3: 语言身份认同图谱 -->
+        <section class="section">
+            <h2 class="section-title alt-3">叁 · 语言身份认同图谱</h2>
+            <div class="section-sub">LANGUAGE IDENTITY MAP · 8 角色 × 4 教身份认同</div>
+            <div class="definition" id="def-identity">
+                <strong>语言定义：</strong>语言身份认同（language identity）：通过分析角色的语言特征·量化其文化身份·反映三教合一。如来偏佛经·老君偏道教·玉帝偏儒家·八戒偏民间·四教融合。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>核心发现：</strong>唐僧的语言偏佛教（梵语借词多）·悟空偏道教+市井·八戒偏市井·沙僧偏文言·如来偏佛经·诸神偏道教。
+                统计：buddhist_dominant=3 / daoist_dominant=2 / confucian_dominant=1 / folk_dominant=1 / mixed=1·佛教占主导。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">8 角色 × 4 教身份雷达图</div>
+                <div class="chart-caption">4 维度：佛教 / 道教 / 儒家 / 民间（每维度 0-10 分）/ 每角色一个多边形·颜色区分</div>
+                <svg id="chart-identity-radar" class="chart-svg" width="100%" height="560"></svg>
+                <div class="legend-row" id="radar-legend"></div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">8 角色 × 4 类语言来源占比堆叠条形图</div>
+                <div class="chart-caption">X 轴：8 角色 / Y 轴：0-100%（红=梵语 黄=道教 蓝=市井 绿=文言 堆叠）</div>
+                <svg id="chart-identity-stacked" class="chart-svg" width="100%" height="400"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>梵语借词</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>道教术语</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>明代市井</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>文言</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8 角色语言身份表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="identity-table">
+                    <thead>
+                        <tr>
+                            <th>角色</th>
+                            <th>语言身份</th>
+                            <th>梵语%</th>
+                            <th>道教%</th>
+                            <th>市井%</th>
+                            <th>文言%</th>
+                            <th>佛教%</th>
+                            <th>文化身份</th>
+                            <th>佛</th>
+                            <th>道</th>
+                            <th>儒</th>
+                            <th>民</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8 角色代表性词汇与身份卡片</h3>
+            <div class="char-grid" id="char-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">语言分类统计</h3>
+            <div class="kpi-row" id="idStatKpi"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">身份认同洞察</h3>
+            <ol class="insights-list" id="identity-insights"></ol>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div>
+            <a href="../dashboard.html">返回仪表盘</a>
+            <a href="../index.html">返回首页</a>
+        </div>
+        <div class="source-list">
+            数据源：scripts/AH_语言学/linguistics.py ·
+            incantation_linguistics.json / power_distance.json / language_identity.json / linguistics_summary.json
+            <br>
+            本页 fetch 失败时回退到 EMBEDDED 内嵌数据，支持 file:// 协议双击打开。
+        </div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/04-文化与历史背景/佛道思想.md">佛道思想</a></div>
+    </footer>
+
+    <script>
+    // ===== EMBEDDED fallback data（与 4 份 JSON 完全一致）=====
+    const EMBEDDED = {
+        incantation: {
+            "concept_name": "咒语的语言结构",
+            "english_name": "Incantation Linguistic Structure",
+            "definition": "咒语语言学（incantation linguistics）：咒语的语言来源、词汇构成、音韵特征·反映宗教与文化融合",
+            "core_finding": "紧箍咒'唵吽吒唎'是梵语音译·五雷法是汉地道教术语·悟空骂人'泼怪'是明代市井口语·三种语言来源反映三教合一",
+            "incantations": [
+                {"n":1,"incantation_name":"紧箍咒","english_name":"Golden Hoop Mantra","user":"唐僧","target":"孙悟空","raw_text":"唵吽吒唎·唵嘛呢叭咪吽","language_source":"梵语音译·佛教真言","language_classification":"梵语借词（Sanskrit loanword）","phonetic_analysis":{"sanskrit_original":"Oṃ Maṇi Padme Hūṃ","chinese_transliteration":"唵嘛呢叭咪吽","meaning":"归依莲华宝·成就一切","phonetic_features":"鼻音+元音交替·便于连续念诵"},"linguistic_features":["梵语音译·非汉语词汇","音节简短·便于快速念诵","无实义·纯音韵咒语","重复念诵产生催眠效果"],"religious_origin":"佛教密宗真言·六字大明咒","function_mechanism":"音韵刺激+金箍物理收缩·双重作用","cultural_significance":"梵语在汉地的传播·反映佛教中国化","language_proportion":{"sanskrit_loanword":100,"taoist_term":0,"ming_colloquial":0,"classical_chinese":0}},
+                {"n":2,"incantation_name":"五雷法","english_name":"Five Thunder Spell","user":"车迟国三仙/天师道","target":"召唤雷部","raw_text":"急急如律令·五雷速至·敕!","language_source":"汉地道教术语·官方法术语言","language_classification":"道教术语（Daoist terminology）+ 古汉语命令式","phonetic_analysis":{"chinese_original":"急急如律令·五雷速至·敕","meaning":"如律令般迅速执行·五雷速到·命令","phonetic_features":"命令式·短促有力·'敕'字收尾"},"linguistic_features":["古汉语命令式·'急急如律令'是汉代公文用语","道教术语·'五雷'指雷部五方","'敕'字是帝王命令用语","结构：执行指令 + 内容 + 命令结尾"],"religious_origin":"天师道·五斗米道·道教法术","function_mechanism":"公文式命令+神权召唤·结构化法术","cultural_significance":"道教继承汉代公文传统·将世俗权力结构引入神界","language_proportion":{"sanskrit_loanword":0,"taoist_term":60,"ming_colloquial":0,"classical_chinese":40}},
+                {"n":3,"incantation_name":"定身咒","english_name":"Body-Freezing Spell","user":"孙悟空","target":"小妖/凡人","raw_text":"住!·不要动!","language_source":"明代市井口语·简短命令","language_classification":"明代市井口语（Ming colloquial）","phonetic_analysis":{"chinese_original":"住!·不要动!","meaning":"停下·别动","phonetic_features":"短促·直接·无修饰"},"linguistic_features":["市井口语·无文言修饰","命令式·短促","无宗教术语·纯民间","结构：动词 + 否定词 + 动词"],"religious_origin":"民间巫术·非正规宗教","function_mechanism":"民间巫术·语言简短·依赖法力","cultural_significance":"反映明代民间口语的力量·与佛道术语对比","language_proportion":{"sanskrit_loanword":0,"taoist_term":0,"ming_colloquial":100,"classical_chinese":0}},
+                {"n":4,"incantation_name":"避水诀","english_name":"Water-Avoiding Spell","user":"孙悟空/猪八戒","target":"水分开","raw_text":"闭!·水!","language_source":"道教简化术语·单字咒","language_classification":"道教术语简化（Daoist simplified）","phonetic_analysis":{"chinese_original":"闭·水","meaning":"关闭·水","phonetic_features":"单字·最强命令"},"linguistic_features":["单字咒·极简","道教术语简化","无修饰·纯命令","结构：动词 + 名词"],"religious_origin":"道教·水解之术","function_mechanism":"法力注入+单字命令·高效","cultural_significance":"反映道教术语的民间化·从繁到简","language_proportion":{"sanskrit_loanword":0,"taoist_term":70,"ming_colloquial":30,"classical_chinese":0}},
+                {"n":5,"incantation_name":"召唤咒（搬救兵）","english_name":"Summoning Spell","user":"孙悟空","target":"天庭/灵山诸神","raw_text":"南无观世音菩萨·南无十方三世诸佛·弟子孙悟空有事相求","language_source":"佛教术语 + 汉地自谦","language_classification":"佛教术语（Buddhist terminology）+ 古汉语自谦","phonetic_analysis":{"chinese_original":"南无观世音菩萨·弟子孙悟空有事相求","meaning":"归依观世音菩萨·弟子孙悟空有事相求","phonetic_features":"宗教开头 + 自谦 + 请求"},"linguistic_features":["佛教术语开头·'南无'是梵语音译","汉地自谦·'弟子'是佛教称呼","请求式·非命令","结构：宗教呼号 + 自谦 + 请求"],"religious_origin":"佛教·观音信仰","function_mechanism":"宗教呼号 + 礼貌请求·柔性召唤","cultural_significance":"反映佛教在明代的传播·观音信仰普及","language_proportion":{"sanskrit_loanword":30,"taoist_term":0,"ming_colloquial":30,"classical_chinese":40}},
+                {"n":6,"incantation_name":"悟空骂人（妖怪挑衅）","english_name":"Wukong's Verbal Provocation","user":"孙悟空","target":"妖怪","raw_text":"泼怪!·畜生!·休走!·吃俺老孙一棒!","language_source":"明代市井口语·武人话本风格","language_classification":"明代市井口语（Ming colloquial）+ 武人话本","phonetic_analysis":{"chinese_original":"泼怪·畜生·休走·吃俺老孙一棒","meaning":"无赖妖怪·畜生·别走·吃我一棒","phonetic_features":"短促·命令式·挑衅"},"linguistic_features":["市井骂语·'泼怪'是明代市井","武人话本风格·'休走'是话本常用","自称'俺老孙'是民间自称","结构：骂语 + 命令 + 威胁"],"religious_origin":"无·民间武人风格","function_mechanism":"心理威慑+挑衅·非实际法术","cultural_significance":"反映明代话本与市井文化的交融·孙悟空是民间英雄形象","language_proportion":{"sanskrit_loanword":0,"taoist_term":0,"ming_colloquial":80,"classical_chinese":20}},
+                {"n":7,"incantation_name":"唐僧训徒（佛教戒律）","english_name":"Tang Monk's Admonition","user":"唐僧","target":"孙悟空","raw_text":"悟空·不可伤生害命·我等出家人·慈悲为怀","language_source":"佛教戒律语言·文言","language_classification":"佛教术语（Buddhist terminology）+ 文言","phonetic_analysis":{"chinese_original":"悟空·不可伤生害命·我等出家人·慈悲为怀","meaning":"悟空·不可伤生害命·我等出家人·慈悲为怀","phonetic_features":"文言·缓慢·说教式"},"linguistic_features":["佛教术语·'出家人''慈悲'","文言·'不可'是文言否定","说教式·缓慢","结构：呼名 + 戒律 + 身份 + 原则"],"religious_origin":"佛教戒律·慈悲思想","function_mechanism":"道德说教+身份认同·柔性约束","cultural_significance":"反映佛教戒律语言的文言化·与市井对比","language_proportion":{"sanskrit_loanword":10,"taoist_term":0,"ming_colloquial":20,"classical_chinese":70}},
+                {"n":8,"incantation_name":"如来佛祖说法（佛经语言）","english_name":"Buddha's Sermon","user":"如来佛祖","target":"诸佛菩萨","raw_text":"色不异空·空不异色·色即是空·空即是色","language_source":"佛经翻译语言·玄奘译《心经》","language_classification":"佛经文言（Buddhist Classical Chinese）","phonetic_analysis":{"chinese_original":"色不异空·空不异色·色即是空·空即是色","meaning":"色（物质）不异于空·空不异于色","phonetic_features":"对仗·重复·韵律"},"linguistic_features":["佛经翻译·玄奘译风","对仗工整·便于记忆","韵律强·适合诵读","结构：色/空 对仗 + 四句循环"],"religious_origin":"《般若波罗蜜多心经》·玄奘译","function_mechanism":"经文诵读·法会仪式","cultural_significance":"反映玄奘翻译风格·佛经汉化的巅峰","language_proportion":{"sanskrit_loanword":20,"taoist_term":0,"ming_colloquial":0,"classical_chinese":80}}
+            ],
+            "language_source_stats": {
+                "total_incantations": 8,
+                "sanskrit_dominant": 2,
+                "taoist_dominant": 2,
+                "ming_colloquial_dominant": 2,
+                "classical_chinese_dominant": 2,
+                "avg_sanskrit_proportion": 20.0,
+                "avg_taoist_proportion": 16.25,
+                "avg_ming_colloquial_proportion": 28.75,
+                "avg_classical_chinese_proportion": 35.0
+            },
+            "linguistic_insights": [
+                "8 咒语反映三教合一：梵语（佛）+ 道教术语（道）+ 市井口语（民间）",
+                "紧箍咒是唯一纯梵语音译咒语·反映佛教密宗真言传统",
+                "五雷法是道教术语+古汉语公文·反映道教继承汉代公文传统",
+                "悟空骂人是明代市井口语·反映孙悟空的民间英雄形象",
+                "唐僧训徒是佛教戒律语言·文言化·反映僧侣身份",
+                "如来佛祖说法是玄奘译风·佛经汉化的巅峰",
+                "语言来源的多样性反映《西游记》的三教合一思想"
+            ]
+        },
+        power_distance: {
+            "concept_name": "对话的权力距离",
+            "english_name": "Conversational Power Distance",
+            "definition": "权力距离（power distance）：对话中体现的权力等级·高权力距离用命令式·低权力距离用调侃式",
+            "core_finding": "唐僧对悟空是高权力距离（命令式）·悟空对八戒是低权力距离（调侃式）·量化师徒关系的亲疏演变",
+            "dialogue_pairs": [
+                {"speaker":"唐僧","listener":"孙悟空","relationship":"师徒·师对徒","power_distance":8,"politeness_level":5,"formality":7,"representative_dialogues":[{"chapter":"第 14 回","context":"悟空打死六贼","tang_monk_speech":"你这猴子·十分撒泼！这般凶顽·不是我徒弟·你回去罢！","linguistic_features":["命令式·'回去罢'","贬称·'你这猴子'","断绝关系威胁"],"power_distance_reflected":9},{"chapter":"第 27 回","context":"三打白骨精","tang_monk_speech":"你这猴子·分明是杀生害命！我不要你做徒弟·你回去罢！","linguistic_features":["命令式","贬称","逐出师门"],"power_distance_reflected":10},{"chapter":"第 38 回","context":"乌鸡国救国王","tang_monk_speech":"悟空·你且仔细·莫要伤他性命。","linguistic_features":["请求式·'你且仔细'","温和·'莫要'","保留指令"],"power_distance_reflected":6},{"chapter":"第 80 回","context":"老鼠精事件","tang_monk_speech":"悟空·你说是不是妖怪？","linguistic_features":["询问式","平等·'你说'","信任表现"],"power_distance_reflected":4}],"evolution_pattern":"10→9→6→4·权力距离逐渐降低·师徒关系亲化"},
+                {"speaker":"孙悟空","listener":"猪八戒","relationship":"师兄师弟·兄对弟","power_distance":3,"politeness_level":2,"formality":2,"representative_dialogues":[{"chapter":"第 18 回","context":"高老庄收八戒","wukong_speech":"呆子·你可认得俺老孙么？","linguistic_features":["调侃·'呆子'","自称·'俺老孙'","亲昵"],"power_distance_reflected":3},{"chapter":"第 32 回","context":"平顶山巡山","wukong_speech":"八戒·你这呆子·又偷懒！快去巡山！","linguistic_features":["命令式·'快去'","调侃·'呆子'","兄长教训"],"power_distance_reflected":4},{"chapter":"第 41 回","context":"红孩儿事件","wukong_speech":"呆子·别哭！师父被妖怪抓了·咱们得救！","linguistic_features":["劝慰·'别哭'","鼓励·'咱们得救'","兄弟情"],"power_distance_reflected":2},{"chapter":"第 76 回","context":"狮驼岭大战","wukong_speech":"八戒·你这呆子·又被抓了？看俺老孙来救你！","linguistic_features":["调侃","救援","兄长保护"],"power_distance_reflected":3}],"evolution_pattern":"3→4→2→3·权力距离低·师兄弟调侃为主"},
+                {"speaker":"孙悟空","listener":"唐僧","relationship":"徒弟对师·徒对师","power_distance":3,"politeness_level":8,"formality":6,"representative_dialogues":[{"chapter":"第 14 回","context":"首次冲突","wukong_speech":"师父·我是好意·你不该这等量人！","linguistic_features":["尊称·'师父'","辩解·'我是好意'","保留尊敬"],"power_distance_reflected":2},{"chapter":"第 27 回","context":"三打白骨精·被逐","wukong_speech":"师父·我回去就是了·但这紧箍咒你莫念了！","linguistic_features":["尊称","请求·'你莫念了'","委屈"],"power_distance_reflected":3},{"chapter":"第 57 回","context":"真假美猴王前","wukong_speech":"师父·我又不曾杀生·你怎的又赶我？","linguistic_features":["尊称","质问·'怎的又赶我'","委屈"],"power_distance_reflected":2},{"chapter":"第 88 回","context":"玉华州收徒","wukong_speech":"师父·这两个王子倒有缘·可收为徒。","linguistic_features":["尊称","建议·'倒有缘'","平等商议"],"power_distance_reflected":1}],"evolution_pattern":"2→3→2→1·悟空对唐僧的权力距离一直低·尊敬为主"},
+                {"speaker":"猪八戒","listener":"孙悟空","relationship":"师弟对师兄·弟对兄","power_distance":4,"politeness_level":4,"formality":3,"representative_dialogues":[{"chapter":"第 18 回","context":"首次见面","bajie_speech":"你这弼马温·当年大闹天宫的泼猴！","linguistic_features":["贬称·'弼马温'","挑衅","无礼"],"power_distance_reflected":1},{"chapter":"第 32 回","context":"巡山偷懒","bajie_speech":"哥啊·我去了·我去了！","linguistic_features":["尊称·'哥啊'","顺从","撒娇"],"power_distance_reflected":6},{"chapter":"第 41 回","context":"红孩儿事件·悟空被烧","bajie_speech":"哥啊·你死了吗？","linguistic_features":["尊称","关切","直白"],"power_distance_reflected":4},{"chapter":"第 76 回","context":"狮驼岭·悟空被吞","bajie_speech":"哥啊·你死在里面了！我们散伙罢！","linguistic_features":["尊称","散伙·ESFP 行为","绝望"],"power_distance_reflected":3}],"evolution_pattern":"1→6→4→3·从挑衅到尊称·权力距离先升后降"},
+                {"speaker":"沙僧","listener":"孙悟空+猪八戒","relationship":"师弟对师兄·弟对兄","power_distance":5,"politeness_level":9,"formality":7,"representative_dialogues":[{"chapter":"第 22 回","context":"首次见面","shaseng_speech":"哥哥·万望救我一救！","linguistic_features":["尊称·'哥哥'","请求·'万望'","礼貌"],"power_distance_reflected":7},{"chapter":"第 27 回","context":"三打白骨精","shaseng_speech":"大师兄·师父说的是·你且忍耐。","linguistic_features":["尊称·'大师兄'","劝解","中立"],"power_distance_reflected":5},{"chapter":"第 56 回","context":"悟空被逐","shaseng_speech":"大师兄·你且去·我劝师父。","linguistic_features":["尊称","劝慰","缓冲"],"power_distance_reflected":4}],"evolution_pattern":"7→5→4·沙僧对师兄的权力距离逐渐降低·但保持尊敬"}
+            ],
+            "power_distance_insights": [
+                "唐僧对悟空权力距离最高（8/10）·命令式为主",
+                "悟空对八戒权力距离低（3/10）·调侃式为主",
+                "悟空对唐僧权力距离最低（3/10）·尊敬为主·但平等",
+                "八戒对悟空从挑衅（1）到尊称（6）·权力距离先升后降",
+                "沙僧对师兄权力距离中等（5/10）·礼貌为主",
+                "权力距离演变反映师徒关系的亲疏：唐僧→悟空逐渐亲化·悟空→八戒一直亲密",
+                "ISFJ 沙僧最礼貌·ENTP 悟空最调侃·INFJ 唐僧最命令式·ESFP 八戒最反复"
+            ],
+            "linguistic_strategy_by_mbti": {
+                "INFJ_唐僧": "命令式·文言化·说教式（高权力距离）",
+                "ENTP_悟空": "调侃式·市井口语·灵活切换（低权力距离）",
+                "ESFP_八戒": "反复式·撒娇式·情绪化（权力距离波动）",
+                "ISFJ_沙僧": "礼貌式·文言·温和（中等权力距离）"
+            }
+        },
+        language_identity: {
+            "concept_name": "语言身份认同图谱",
+            "english_name": "Language Identity Map",
+            "definition": "语言身份认同（language identity）：通过分析角色的语言特征·量化其文化身份·反映三教合一",
+            "core_finding": "唐僧的语言偏佛教（梵语借词多）·悟空偏道教+市井·八戒偏市井·沙僧偏文言·如来偏佛经·诸神偏道教",
+            "character_language_profiles": [
+                {"character":"唐僧","language_identity":"佛教僧侣+儒家士人","sanskrit_loanword_proportion":25,"taoist_term_proportion":5,"ming_colloquial_proportion":20,"classical_chinese_proportion":50,"buddhist_term_proportion":30,"representative_vocabulary":["南无","慈悲","出家人","戒律","善哉","阿弥陀佛"],"language_features":["佛教术语多·'南无''慈悲'","文言为主·'我等''不可'","儒家修养·'不可伤生'","说教式·缓慢"],"cultural_identity":"佛教僧侣+儒家士人·文化正统","identity_score_buddhist":9,"identity_score_daoist":1,"identity_score_confucian":7,"identity_score_folk":2},
+                {"character":"孙悟空","language_identity":"道教行者+市井武人","sanskrit_loanword_proportion":10,"taoist_term_proportion":35,"ming_colloquial_proportion":40,"classical_chinese_proportion":15,"buddhist_term_proportion":10,"representative_vocabulary":["俺老孙","泼怪","畜生","休走","避水诀","五雷法"],"language_features":["市井口语·'俺老孙''泼怪'","道教术语·'避水诀''五雷法'","武人话本·'休走''吃我一棒'","灵活切换·可佛教可道教"],"cultural_identity":"道教行者+市井武人·民间英雄","identity_score_buddhist":4,"identity_score_daoist":8,"identity_score_confucian":2,"identity_score_folk":9},
+                {"character":"猪八戒","language_identity":"市井俗人+道家武将","sanskrit_loanword_proportion":5,"taoist_term_proportion":20,"ming_colloquial_proportion":60,"classical_chinese_proportion":15,"buddhist_term_proportion":10,"representative_vocabulary":["俺老猪","哥啊","散伙","回高老庄","嫦娥","斋饭"],"language_features":["市井口语为主·'俺老猪''哥啊'","情绪化·'散伙''回高老庄'","道教残留·'天蓬元帅'","无文言修养"],"cultural_identity":"市井俗人+道家武将·最世俗","identity_score_buddhist":3,"identity_score_daoist":6,"identity_score_confucian":1,"identity_score_folk":10},
+                {"character":"沙悟净","language_identity":"儒家守卫者+佛教徒","sanskrit_loanword_proportion":15,"taoist_term_proportion":10,"ming_colloquial_proportion":30,"classical_chinese_proportion":45,"buddhist_term_proportion":20,"representative_vocabulary":["大师兄","师父","万望","师兄","善哉","阿弥陀佛"],"language_features":["文言为主·'万望''师兄'","佛教术语·'善哉'","礼貌·尊称","ISFJ 守卫者风格"],"cultural_identity":"儒家守卫者+佛教徒·最传统","identity_score_buddhist":7,"identity_score_daoist":2,"identity_score_confucian":8,"identity_score_folk":4},
+                {"character":"如来佛祖","language_identity":"佛教最高+哲学思辨","sanskrit_loanword_proportion":40,"taoist_term_proportion":0,"ming_colloquial_proportion":0,"classical_chinese_proportion":60,"buddhist_term_proportion":70,"representative_vocabulary":["南无","色不异空","空不异色","般若波罗蜜多","菩提","涅槃"],"language_features":["佛经文言·'色不异空'","梵语借词·'般若波罗蜜多'","哲学思辨·'空''色'","庄严·缓慢"],"cultural_identity":"佛教最高+哲学思辨·最神圣","identity_score_buddhist":10,"identity_score_daoist":0,"identity_score_confucian":3,"identity_score_folk":0},
+                {"character":"观音菩萨","language_identity":"佛教慈悲+儒家礼教","sanskrit_loanword_proportion":30,"taoist_term_proportion":5,"ming_colloquial_proportion":15,"classical_chinese_proportion":50,"buddhist_term_proportion":50,"representative_vocabulary":["南无","善哉","慈悲","普度","众生","般若"],"language_features":["佛教术语·'普度''众生'","儒家礼教·'善哉'","文言·庄严","慈悲式·劝慰"],"cultural_identity":"佛教慈悲+儒家礼教·融合","identity_score_buddhist":9,"identity_score_daoist":1,"identity_score_confucian":6,"identity_score_folk":2},
+                {"character":"太上老君","language_identity":"道教最高+道家哲学","sanskrit_loanword_proportion":0,"taoist_term_proportion":70,"ming_colloquial_proportion":5,"classical_chinese_proportion":25,"buddhist_term_proportion":0,"representative_vocabulary":["道","无","气","炼丹","金丹","符箓","阴阳"],"language_features":["道教术语·'道''无''气'","道家哲学·'阴阳'","文言·简洁","炼丹术·'金丹'"],"cultural_identity":"道教最高+道家哲学·最玄妙","identity_score_buddhist":0,"identity_score_daoist":10,"identity_score_confucian":4,"identity_score_folk":1},
+                {"character":"玉帝","language_identity":"天庭官僚+儒家帝王","sanskrit_loanword_proportion":5,"taoist_term_proportion":20,"ming_colloquial_proportion":15,"classical_chinese_proportion":60,"buddhist_term_proportion":5,"representative_vocabulary":["准奏","圣旨","卿","赦","敕","钦此"],"language_features":["公文文言·'准奏''圣旨'","儒家帝王·'卿''赦'","命令式·'敕'","官僚体制语言"],"cultural_identity":"天庭官僚+儒家帝王·最正统","identity_score_buddhist":1,"identity_score_daoist":4,"identity_score_confucian":10,"identity_score_folk":1}
+            ],
+            "language_identity_insights": [
+                "8 角色语言身份图谱清晰反映三教合一",
+                "唐僧/如来/观音偏佛教·语言身份认同高（佛教 7-10 分）",
+                "悟空/老君偏道教·但悟空更市井化（道教 8-10 分·市井 9 分）",
+                "八戒最市井化（市井 10 分）·最世俗",
+                "沙僧/玉帝偏儒家·但沙僧佛教化（儒家 8 分）",
+                "角色语言身份与其 MBTI 相关：INFJ 唐僧偏佛教·ENTP 悟空偏道教+市井·ESFP 八戒偏市井·ISFJ 沙僧偏儒家",
+                "语言身份图谱反映《西游记》的三教合一思想：佛+道+儒+民间·四教融合"
+            ],
+            "language_classification_stats": {
+                "total_characters": 8,
+                "buddhist_dominant": 3,
+                "daoist_dominant": 2,
+                "confucian_dominant": 1,
+                "folk_dominant": 1,
+                "mixed": 1,
+                "avg_sanskrit_proportion": 16.25,
+                "avg_taoist_proportion": 21.25,
+                "avg_ming_colloquial_proportion": 23.75,
+                "avg_classical_chinese_proportion": 38.75
+            }
+        },
+        summary: {
+            "incantations": 8,
+            "language_sources": 4,
+            "dialogue_pairs": 5,
+            "total_representative_dialogues": 19,
+            "character_profiles": 8,
+            "avg_sanskrit_proportion": 16.25,
+            "avg_classical_chinese_proportion": 38.75
+        }
+    };
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('[fallback] ' + path + ' → embedded data:', e.message);
+            return fallback;
+        }
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== Color palettes =====
+    const LANG_COLORS = {
+        sanskrit: '#c8463a',
+        taoist: '#e9b885',
+        ming: '#3a6b8c',
+        classical: '#5a7a3a'
+    };
+    const CHAR_COLORS = {
+        '唐僧': '#3a6b8c',
+        '孙悟空': '#c8463a',
+        '猪八戒': '#e9b885',
+        '沙悟净': '#5a7a3a',
+        '如来佛祖': '#7a5230',
+        '观音菩萨': '#c8463a',
+        '太上老君': '#e9b885',
+        '玉帝': '#3a6b8c'
+    };
+
+    // ===== Main render =====
+    async function main() {
+        const baseUrl = '../../scripts/output/data/';
+        const [incantation, power, identity, summary] = await Promise.all([
+            loadJson(baseUrl + 'incantation_linguistics.json', EMBEDDED.incantation),
+            loadJson(baseUrl + 'power_distance.json', EMBEDDED.power_distance),
+            loadJson(baseUrl + 'language_identity.json', EMBEDDED.language_identity),
+            loadJson(baseUrl + 'linguistics_summary.json', EMBEDDED.summary)
+        ]);
+        window.__lastData = { incantation, power, identity, summary };
+
+        renderIncantationStacked(incantation);
+        renderIncantationDonut(incantation);
+        renderIncantationCards(incantation);
+        renderSrcStatKpi(incantation);
+        renderIncantationInsights(incantation);
+        renderPdBar(power);
+        renderPdEvolution(power);
+        renderPairCards(power);
+        renderMbtiCards(power);
+        renderPdInsights(power);
+        renderIdentityRadar(identity);
+        renderIdentityStacked(identity);
+        renderIdentityTable(identity);
+        renderCharCards(identity);
+        renderIdStatKpi(identity);
+        renderIdentityInsights(identity);
+    }
+
+    // ===== Section 1-1: 咒语堆叠条形图 =====
+    function renderIncantationStacked(data) {
+        const svg = d3.select('#chart-incantation-stacked');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 400;
+        const m = {top: 30, right: 30, bottom: 80, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const incs = data.incantations.map(d => ({ ...d, ...d.language_proportion }));
+        const keys = ['sanskrit_loanword', 'taoist_term', 'ming_colloquial', 'classical_chinese'];
+        const keyLabels = {sanskrit_loanword:'梵', taoist_term:'道', ming_colloquial:'市', classical_chinese:'文'};
+
+        const stack = d3.stack().keys(keys).offset(d3.stackOffsetExpand);
+        const series = stack(incs);
+
+        const x = d3.scaleBand().domain(incs.map(d => d.incantation_name)).range([0, w]).padding(0.25);
+        const y = d3.scaleLinear().domain([0, 1]).range([h, 0]);
+        const color = d3.scaleOrdinal().domain(keys).range([LANG_COLORS.sanskrit, LANG_COLORS.taoist, LANG_COLORS.ming, LANG_COLORS.classical]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
+            .selectAll('text')
+            .style('font-size', '11px')
+            .attr('transform', 'rotate(-20)')
+            .style('text-anchor', 'end');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('.0%')));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#2c2418')
+            .text('语言来源占比');
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w/2).attr('y', h + 60)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#2c2418')
+            .text('咒语名称');
+
+        // stacked bars
+        g.append('g').selectAll('g')
+            .data(series)
+            .enter().append('g')
+            .attr('fill', d => color(d.key))
+            .selectAll('rect')
+            .data(d => d)
+            .enter().append('rect')
+            .attr('x', d => x(d.data.incantation_name))
+            .attr('y', d => y(d[1]))
+            .attr('height', d => Math.max(0, y(d[0]) - y(d[1])))
+            .attr('width', x.bandwidth())
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                const k = e.target.parentNode.__data__.key;
+                tooltip.show(
+                    `<strong>${d.data.incantation_name}</strong><br>` +
+                    `语言来源：${d.data.language_source}<br>` +
+                    `${keyLabels[k]}：${d.data.language_proportion[k]}%<br>` +
+                    `<em>"${d.data.raw_text}"</em>`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 主导来源标注
+        incs.forEach(d => {
+            const prop = d.language_proportion;
+            let max = -1, maxKey = '';
+            Object.keys(prop).forEach(k => { if (prop[k] > max) { max = prop[k]; maxKey = k; }});
+            const labelMap = {sanskrit_loanword:'梵', taoist_term:'道', ming_colloquial:'市', classical_chinese:'文'};
+            g.append('text')
+                .attr('x', x(d.incantation_name) + x.bandwidth()/2)
+                .attr('y', -6)
+                .attr('text-anchor', 'middle')
+                .style('font-size', '10px')
+                .style('font-weight', '600')
+                .attr('fill', color(maxKey))
+                .text('主：' + labelMap[maxKey] + ' ' + max + '%');
+        });
+    }
+
+    // ===== Section 1-2: 咒语语言来源环形图 =====
+    function renderIncantationDonut(data) {
+        const svg = d3.select('#chart-incantation-donut');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 600;
+        const W = Math.max(containerW, 400), H = 360;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const cx = W/2, cy = H/2, r = Math.max(0, Math.min(W, H)/2 - 40), rIn = r * 0.55;
+
+        const stats = data.language_source_stats;
+        const donutData = [
+            {key:'sanskrit', label:'梵语借词', value: stats.avg_sanskrit_proportion, color: LANG_COLORS.sanskrit},
+            {key:'taoist', label:'道教术语', value: stats.avg_taoist_proportion, color: LANG_COLORS.taoist},
+            {key:'ming', label:'明代市井', value: stats.avg_ming_colloquial_proportion, color: LANG_COLORS.ming},
+            {key:'classical', label:'文言', value: stats.avg_classical_chinese_proportion, color: LANG_COLORS.classical}
+        ];
+
+        const pie = d3.pie().value(d => d.value).sort(null);
+        const arc = d3.arc().innerRadius(rIn).outerRadius(r).padAngle(0.02);
+        const arcHover = d3.arc().innerRadius(rIn).outerRadius(r + 8).padAngle(0.02);
+
+        const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+        const arcs = g.selectAll('path').data(pie(donutData)).enter().append('path')
+            .attr('fill', d => d.data.color)
+            .attr('d', arc)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                d3.select(e.target).transition().duration(150).attr('d', arcHover);
+                tooltip.show(
+                    `<strong>${d.data.label}</strong><br>` +
+                    `平均占比：${d.data.value}%<br>` +
+                    `主导咒语：${d.data.key === 'sanskrit' ? '紧箍咒/召唤咒' : (d.data.key === 'taoist' ? '五雷法/避水诀' : (d.data.key === 'ming' ? '定身咒/悟空骂人' : '唐僧训徒/如来说法'))}`, e);
+            })
+            .on('mouseout', (e) => {
+                d3.select(e.target).transition().duration(150).attr('d', arc);
+                tooltip.hide();
+            });
+
+        // 中心文字
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', -8)
+            .style('font-size', '14px')
+            .style('font-weight', '600')
+            .style('fill', '#2c2418')
+            .text('8 咒语');
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', 12)
+            .style('font-size', '11px')
+            .style('fill', '#6b5e4d')
+            .text('4 类来源均势');
+
+        // 标注
+        arcs.each(function(d) {
+            const centroid = arc.centroid(d);
+            d3.select(this.parentNode).append('text')
+                .attr('x', centroid[0])
+                .attr('y', centroid[1])
+                .attr('text-anchor', 'middle')
+                .attr('dy', '0.35em')
+                .style('font-size', '11px')
+                .style('font-weight', '600')
+                .style('fill', '#fff')
+                .text(d.data.value + '%');
+        });
+
+        // legend
+        const legendEl = d3.select('#donut-legend');
+        legendEl.selectAll('*').remove();
+        legendEl.selectAll('.legend-item')
+            .data(donutData)
+            .enter().append('span')
+            .attr('class', 'legend-item')
+            .html(d => `<span class="legend-swatch" style="background:${d.color};"></span>${d.label} ${d.value}%`);
+    }
+
+    // ===== Section 1-3: 咒语卡片 =====
+    function renderIncantationCards(data) {
+        const grid = d3.select('#incantation-grid');
+        const cards = grid.selectAll('.inc-card').data(data.incantations).enter().append('div');
+        cards.each(function(d) {
+            const card = d3.select(this);
+            const prop = d.language_proportion;
+            let max = -1, maxKey = '';
+            Object.keys(prop).forEach(k => { if (prop[k] > max) { max = prop[k]; maxKey = k; }});
+            const domClass = maxKey === 'sanskrit_loanword' ? '' :
+                             (maxKey === 'taoist_term' ? 'dom-taoist' :
+                             (maxKey === 'ming_colloquial' ? 'dom-ming' : 'dom-classical'));
+            card.attr('class', 'inc-card ' + domClass);
+            card.html(`
+                <div class="inc-head">
+                    <div class="inc-name">${d.incantation_name}</div>
+                    <div class="inc-no">No.${d.n}</div>
+                </div>
+                <div class="inc-en">${d.english_name} · 使用者：${d.user} → ${d.target}</div>
+                <div class="inc-raw">"${d.raw_text}"</div>
+                <div class="inc-row"><strong>语言来源：</strong>${d.language_source}</div>
+                <div class="inc-row"><strong>分类：</strong>${d.language_classification}</div>
+                <div class="inc-row"><strong>音韵：</strong>${d.phonetic_analysis.phonetic_features}（${d.phonetic_analysis.meaning}）</div>
+                <ul class="inc-feats">${d.linguistic_features.map(f => `<li>${f}</li>`).join('')}</ul>
+                <div class="inc-row"><strong>宗教源：</strong>${d.religious_origin}</div>
+                <div class="inc-row"><strong>功能：</strong>${d.function_mechanism}</div>
+                <div class="inc-row"><strong>文化意：</strong>${d.cultural_significance}</div>
+                <div class="prop-bar">
+                    <span style="width:${prop.sanskrit_loanword}%;background:${LANG_COLORS.sanskrit};"></span>
+                    <span style="width:${prop.taoist_term}%;background:${LANG_COLORS.taoist};"></span>
+                    <span style="width:${prop.ming_colloquial}%;background:${LANG_COLORS.ming};"></span>
+                    <span style="width:${prop.classical_chinese}%;background:${LANG_COLORS.classical};"></span>
+                </div>
+                <div style="font-size:0.75rem;color:var(--ink-soft);margin-top:3px;font-family:'JetBrains Mono',monospace;">
+                    梵 ${prop.sanskrit_loanword}% · 道 ${prop.taoist_term}% · 市 ${prop.ming_colloquial}% · 文 ${prop.classical_chinese}%
+                </div>
+            `);
+        });
+    }
+
+    // ===== Section 1-4: 语言来源统计 KPI =====
+    function renderSrcStatKpi(data) {
+        const s = data.language_source_stats;
+        const items = [
+            {label:'SANSKRIT DOMINANT', value: s.sanskrit_dominant, desc:'梵语主导咒语（紧箍咒/召唤咒）', cls:''},
+            {label:'TAOIST DOMINANT', value: s.taoist_dominant, desc:'道教主导咒语（五雷法/避水诀）', cls:'alt-2'},
+            {label:'MING DOMINANT', value: s.ming_colloquial_dominant, desc:'市井主导咒语（定身咒/悟空骂人）', cls:'alt-3'},
+            {label:'CLASSICAL DOMINANT', value: s.classical_chinese_dominant, desc:'文言主导咒语（唐僧训徒/如来说法）', cls:'alt-4'}
+        ];
+        const row = d3.select('#srcStatKpi');
+        row.selectAll('*').remove();
+        items.forEach(it => {
+            row.append('div')
+                .attr('class', 'kpi-card ' + it.cls)
+                .html(`<div class="label">${it.label}</div><div class="value">${it.value}</div><div class="desc">${it.desc}</div>`);
+        });
+    }
+
+    // ===== Section 1-5: 咒语洞察 =====
+    function renderIncantationInsights(data) {
+        const list = d3.select('#incantation-insights');
+        list.selectAll('li').data(data.linguistic_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 2-1: 权力距离条形图 =====
+    function renderPdBar(data) {
+        const svg = d3.select('#chart-pd-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 360;
+        const m = {top: 30, right: 30, bottom: 60, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const pairs = data.dialogue_pairs;
+        const labels = pairs.map(d => `${d.speaker}→${d.listener}`);
+
+        const x = d3.scaleBand().domain(labels).range([0, w]).padding(0.3);
+        const y = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        const colorScale = d3.scaleLinear().domain([0, 5, 10]).range([LANG_COLORS.classical, LANG_COLORS.taoist, LANG_COLORS.sanskrit]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
+            .selectAll('text')
+            .style('font-size', '11px')
+            .attr('transform', 'rotate(-15)')
+            .style('text-anchor', 'end');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#2c2418')
+            .text('power_distance 权力距离 (0-10)');
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w/2).attr('y', h + 50)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#2c2418')
+            .text('对话对（speaker → listener）');
+
+        // bars
+        g.selectAll('.bar-pd')
+            .data(pairs).enter().append('rect')
+            .attr('class', 'bar-pd')
+            .attr('x', d => x(`${d.speaker}→${d.listener}`))
+            .attr('y', d => y(d.power_distance))
+            .attr('width', x.bandwidth())
+            .attr('height', d => h - y(d.power_distance))
+            .attr('fill', d => colorScale(d.power_distance))
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 1)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>${d.speaker} → ${d.listener}</strong><br>` +
+                    `关系：${d.relationship}<br>` +
+                    `权力距离：${d.power_distance} / 10<br>` +
+                    `礼貌度：${d.politeness_level} / 10<br>` +
+                    `正式度：${d.formality} / 10<br>` +
+                    `演变：${d.evolution_pattern}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 数值
+        g.selectAll('.val-pd')
+            .data(pairs).enter().append('text')
+            .attr('class', 'val-pd')
+            .attr('x', d => x(`${d.speaker}→${d.listener}`) + x.bandwidth()/2)
+            .attr('y', d => y(d.power_distance) - 6)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '12px')
+            .style('font-weight', '600')
+            .attr('fill', '#2c2418')
+            .text(d => d.power_distance);
+    }
+
+    // ===== Section 2-2: 权力距离演变折线图 =====
+    function renderPdEvolution(data) {
+        const svg = d3.select('#chart-pd-evolution');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 380;
+        const m = {top: 30, right: 30, bottom: 70, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        // 4 main pairs (exclude 沙僧)
+        const pairs = data.dialogue_pairs.slice(0, 4);
+        const colors = [LANG_COLORS.sanskrit, LANG_COLORS.ming, LANG_COLORS.classical, '#7a5230'];
+
+        // stage labels: 阶段 1-4
+        const stageCount = 4;
+        const stageLabels = ['阶段 1', '阶段 2', '阶段 3', '阶段 4'];
+
+        const x = d3.scalePoint().domain(stageLabels).range([0, w]).padding(0.5);
+        const y = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
+            .selectAll('text').style('font-size', '11px');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#2c2418')
+            .text('power_distance_reflected 权力距离反映 (0-10)');
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w/2).attr('y', h + 50)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#2c2418')
+            .text('演变阶段（代表性对话按章节顺序）');
+
+        // lines
+        const line = d3.line()
+            .x((d, i) => x(stageLabels[i]))
+            .y(d => y(d.power_distance_reflected))
+            .curve(d3.curveMonotoneX);
+
+        pairs.forEach((p, idx) => {
+            const dlg = p.representative_dialogues;
+            g.append('path')
+                .datum(dlg)
+                .attr('fill', 'none')
+                .attr('stroke', colors[idx])
+                .attr('stroke-width', 2.5)
+                .attr('d', line);
+            g.selectAll('.pt-ev-' + idx)
+                .data(dlg).enter().append('circle')
+                .attr('class', 'pt-ev-' + idx)
+                .attr('cx', (d, i) => x(stageLabels[i]))
+                .attr('cy', d => y(d.power_distance_reflected))
+                .attr('r', 6)
+                .attr('fill', colors[idx])
+                .attr('stroke', '#fff')
+                .attr('stroke-width', 2)
+                .style('cursor', 'pointer')
+                .on('mouseover', (e, d) => {
+                    tooltip.show(
+                        `<strong>${p.speaker} → ${p.listener}</strong><br>` +
+                        `${d.chapter} · ${d.context}<br>` +
+                        `权力距离：${d.power_distance_reflected} / 10<br>` +
+                        `<em>"${d.tang_monk_speech || d.wukong_speech || d.bajie_speech || d.shaseng_speech || ''}"</em><br>` +
+                        `特征：${d.linguistic_features.join('、')}`, e);
+                })
+                .on('mouseout', tooltip.hide);
+        });
+    }
+
+    // ===== Section 2-3: 对话对卡片 =====
+    function renderPairCards(data) {
+        const grid = d3.select('#pair-grid');
+        const cards = grid.selectAll('.pair-card').data(data.dialogue_pairs).enter().append('div');
+        cards.each(function(d) {
+            const card = d3.select(this);
+            const cls = d.power_distance >= 7 ? '' : (d.power_distance >= 4 ? 'pd-mid' : 'pd-low');
+            card.attr('class', 'pair-card ' + cls);
+            const dlgs = d.representative_dialogues.map(dlg => {
+                const sp = dlg.tang_monk_speech || dlg.wukong_speech || dlg.bajie_speech || dlg.shaseng_speech || '';
+                return `<div class="pair-dlg">
+                    <div class="dlg-ch">${dlg.chapter} · ${dlg.context} · PD=${dlg.power_distance_reflected}</div>
+                    <span class="dlg-text">"${sp}"</span>
+                    <div class="dlg-feats">${dlg.linguistic_features.join(' · ')}</div>
+                </div>`;
+            }).join('');
+            card.html(`
+                <div class="pair-head">
+                    <div class="pair-name">${d.speaker} → ${d.listener}</div>
+                    <div class="pair-pd">PD ${d.power_distance}/10</div>
+                </div>
+                <div class="pair-rel">${d.relationship}</div>
+                <div class="pair-row"><strong>礼貌度：</strong>${d.politeness_level}/10 · <strong>正式度：</strong>${d.formality}/10</div>
+                <div class="pair-evo">演变：${d.evolution_pattern}</div>
+                ${dlgs}
+            `);
+        });
+    }
+
+    // ===== Section 2-4: MBTI 卡片 =====
+    function renderMbtiCards(data) {
+        const grid = d3.select('#mbti-grid');
+        const items = [
+            {tag:'INFJ', name:'唐僧', strategy: data.linguistic_strategy_by_mbti.INFJ_唐僧, cls:'m-infj'},
+            {tag:'ENTP', name:'悟空', strategy: data.linguistic_strategy_by_mbti.ENTP_悟空, cls:'m-entp'},
+            {tag:'ESFP', name:'八戒', strategy: data.linguistic_strategy_by_mbti.ESFP_八戒, cls:'m-esfp'},
+            {tag:'ISFJ', name:'沙僧', strategy: data.linguistic_strategy_by_mbti.ISFJ_沙僧, cls:'m-isfj'}
+        ];
+        grid.selectAll('*').remove();
+        items.forEach(it => {
+            grid.append('div')
+                .attr('class', 'mbti-card ' + it.cls)
+                .html(`<div class="mbti-tag">${it.tag} · ${it.name}</div>
+                    <div class="mbti-name">${it.name} 语言策略</div>
+                    <div class="mbti-strategy">${it.strategy}</div>`);
+        });
+    }
+
+    // ===== Section 2-5: 权力距离洞察 =====
+    function renderPdInsights(data) {
+        const list = d3.select('#pd-insights');
+        list.selectAll('li').data(data.power_distance_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 3-1: 身份雷达图 =====
+    function renderIdentityRadar(data) {
+        const svg = d3.select('#chart-identity-radar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 800;
+        const W = Math.max(containerW, 600), H = 560;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const cx = W/2, cy = H/2 + 10;
+        const radius = Math.max(0, Math.min(W, H)/2 - 90);
+        const levels = 5;
+        const dims = ['identity_score_buddhist', 'identity_score_daoist', 'identity_score_confucian', 'identity_score_folk'];
+        const dimLabels = ['佛教', '道教', '儒家', '民间'];
+        const nDims = dims.length;
+        const angle = (i) => (i * 2 * Math.PI / nDims) - Math.PI / 2;
+
+        const chars = data.character_language_profiles;
+        const gridG = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+        // 网格圆
+        for (let lv = 1; lv <= levels; lv++) {
+            const r = radius * lv / levels;
+            const pts = dims.map((_, i) => [r * Math.cos(angle(i)), r * Math.sin(angle(i))]);
+            gridG.append('polygon')
+                .attr('points', pts.map(p => p.join(',')).join(' '))
+                .attr('fill', 'none')
+                .attr('stroke', '#e8ddc8')
+                .attr('stroke-width', 1);
+            // 刻度
+            gridG.append('text')
+                .attr('x', -8)
+                .attr('y', -r)
+                .attr('text-anchor', 'end')
+                .style('font-size', '9px')
+                .style('fill', '#6b5e4d')
+                .text((lv * 2).toString());
+        }
+        // 轴线
+        dims.forEach((_, i) => {
+            const x2 = radius * Math.cos(angle(i));
+            const y2 = radius * Math.sin(angle(i));
+            gridG.append('line')
+                .attr('x1', 0).attr('y1', 0)
+                .attr('x2', x2).attr('y2', y2)
+                .attr('stroke', '#d9cdb8')
+                .attr('stroke-width', 1);
+            // 轴标签
+            gridG.append('text')
+                .attr('x', (radius + 24) * Math.cos(angle(i)))
+                .attr('y', (radius + 24) * Math.sin(angle(i)))
+                .attr('text-anchor', 'middle')
+                .attr('dy', '0.35em')
+                .style('font-size', '13px')
+                .style('font-weight', '600')
+                .style('fill', '#2c2418')
+                .text(dimLabels[i]);
+        });
+
+        // 多边形
+        chars.forEach((c, idx) => {
+            const pts = dims.map((k, i) => {
+                const v = c[k];
+                const r = radius * v / 10;
+                return [r * Math.cos(angle(i)), r * Math.sin(angle(i))];
+            });
+            const color = CHAR_COLORS[c.character] || '#888';
+            gridG.append('polygon')
+                .attr('points', pts.map(p => p.join(',')).join(' '))
+                .attr('fill', color)
+                .attr('fill-opacity', 0.08)
+                .attr('stroke', color)
+                .attr('stroke-width', 1.5)
+                .style('cursor', 'pointer')
+                .on('mouseover', (e) => {
+                    tooltip.show(
+                        `<strong>${c.character}</strong><br>` +
+                        `身份：${c.language_identity}<br>` +
+                        `佛：${c.identity_score_buddhist} / 道：${c.identity_score_daoist}<br>` +
+                        `儒：${c.identity_score_confucian} / 民：${c.identity_score_folk}<br>` +
+                        `<em>${c.cultural_identity}</em>`, e);
+                })
+                .on('mouseout', tooltip.hide);
+            // 顶点圆点
+            pts.forEach(p => {
+                gridG.append('circle')
+                    .attr('cx', p[0]).attr('cy', p[1])
+                    .attr('r', 3)
+                    .attr('fill', color);
+            });
+        });
+
+        // legend
+        const legendEl = d3.select('#radar-legend');
+        legendEl.selectAll('*').remove();
+        legendEl.selectAll('.legend-item')
+            .data(chars)
+            .enter().append('span')
+            .attr('class', 'legend-item')
+            .html(c => `<span class="legend-swatch" style="background:${CHAR_COLORS[c.character]};"></span>${c.character}`);
+    }
+
+    // ===== Section 3-2: 身份堆叠条形图 =====
+    function renderIdentityStacked(data) {
+        const svg = d3.select('#chart-identity-stacked');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 400;
+        const m = {top: 30, right: 30, bottom: 80, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const chars = data.character_language_profiles;
+        const keys = ['sanskrit_loanword_proportion', 'taoist_term_proportion', 'ming_colloquial_proportion', 'classical_chinese_proportion'];
+        const keyLabels = {sanskrit_loanword_proportion:'梵', taoist_term_proportion:'道', ming_colloquial_proportion:'市', classical_chinese_proportion:'文'};
+
+        const stack = d3.stack().keys(keys).offset(d3.stackOffsetExpand);
+        const series = stack(chars);
+
+        const x = d3.scaleBand().domain(chars.map(d => d.character)).range([0, w]).padding(0.25);
+        const y = d3.scaleLinear().domain([0, 1]).range([h, 0]);
+        const color = d3.scaleOrdinal().domain(keys).range([LANG_COLORS.sanskrit, LANG_COLORS.taoist, LANG_COLORS.ming, LANG_COLORS.classical]);
+
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
+            .selectAll('text')
+            .style('font-size', '11px')
+            .attr('transform', 'rotate(-20)')
+            .style('text-anchor', 'end');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('.0%')));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#2c2418')
+            .text('语言来源占比');
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w/2).attr('y', h + 60)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#2c2418')
+            .text('角色');
+
+        g.append('g').selectAll('g')
+            .data(series)
+            .enter().append('g')
+            .attr('fill', d => color(d.key))
+            .selectAll('rect')
+            .data(d => d)
+            .enter().append('rect')
+            .attr('x', d => x(d.data.character))
+            .attr('y', d => y(d[1]))
+            .attr('height', d => Math.max(0, y(d[0]) - y(d[1])))
+            .attr('width', x.bandwidth())
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                const k = e.target.parentNode.__data__.key;
+                tooltip.show(
+                    `<strong>${d.data.character}</strong><br>` +
+                    `身份：${d.data.language_identity}<br>` +
+                    `${keyLabels[k]}：${d.data[k]}%<br>` +
+                    `<em>${d.data.cultural_identity}</em>`, e);
+            })
+            .on('mouseout', tooltip.hide);
+    }
+
+    // ===== Section 3-3: 身份表格 =====
+    function renderIdentityTable(data) {
+        const tbody = d3.select('#identity-table tbody');
+        const rows = tbody.selectAll('tr').data(data.character_language_profiles).enter().append('tr');
+        rows.append('td').html(d => '<strong>' + d.character + '</strong>');
+        rows.append('td').text(d => d.language_identity);
+        rows.append('td').html(d => '<span style="color:var(--accent);">' + d.sanskrit_loanword_proportion + '%</span>');
+        rows.append('td').html(d => '<span style="color:var(--accent-3);">' + d.taoist_term_proportion + '%</span>');
+        rows.append('td').html(d => '<span style="color:var(--accent-2);">' + d.ming_colloquial_proportion + '%</span>');
+        rows.append('td').html(d => '<span style="color:var(--accent-4);">' + d.classical_chinese_proportion + '%</span>');
+        rows.append('td').text(d => d.buddhist_term_proportion + '%');
+        rows.append('td').text(d => d.cultural_identity);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.identity_score_buddhist + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-3);">' + d.identity_score_daoist + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-2);">' + d.identity_score_confucian + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-4);">' + d.identity_score_folk + '</strong>');
+    }
+
+    // ===== Section 3-4: 角色卡片 =====
+    function renderCharCards(data) {
+        const grid = d3.select('#char-grid');
+        const cards = grid.selectAll('.char-card').data(data.character_language_profiles).enter().append('div');
+        cards.each(function(d) {
+            const card = d3.select(this);
+            // determine dominant identity
+            const scores = [
+                {k:'buddhist', v:d.identity_score_buddhist},
+                {k:'daoist', v:d.identity_score_daoist},
+                {k:'confucian', v:d.identity_score_confucian},
+                {k:'folk', v:d.identity_score_folk}
+            ];
+            scores.sort((a, b) => b.v - a.v);
+            const dom = scores[0].k;
+            // 检查 mixed（最高只比次高高 1 分以内）
+            const cls = (scores[0].v - scores[1].v <= 1) ? 'c-mixed' :
+                        (dom === 'buddhist' ? 'c-buddhist' :
+                        (dom === 'daoist' ? 'c-daoist' :
+                        (dom === 'confucian' ? 'c-confucian' : 'c-folk')));
+            card.attr('class', 'char-card ' + cls);
+            card.html(`
+                <div class="char-name">${d.character}</div>
+                <div class="char-profile">${d.language_identity}</div>
+                <div class="char-row"><strong>文化身份：</strong>${d.cultural_identity}</div>
+                <div class="prop-bar">
+                    <span style="width:${d.sanskrit_loanword_proportion}%;background:${LANG_COLORS.sanskrit};"></span>
+                    <span style="width:${d.taoist_term_proportion}%;background:${LANG_COLORS.taoist};"></span>
+                    <span style="width:${d.ming_colloquial_proportion}%;background:${LANG_COLORS.ming};"></span>
+                    <span style="width:${d.classical_chinese_proportion}%;background:${LANG_COLORS.classical};"></span>
+                </div>
+                <div style="font-size:0.75rem;color:var(--ink-soft);margin-top:3px;font-family:'JetBrains Mono',monospace;">
+                    梵 ${d.sanskrit_loanword_proportion}% · 道 ${d.taoist_term_proportion}% · 市 ${d.ming_colloquial_proportion}% · 文 ${d.classical_chinese_proportion}% · 佛词 ${d.buddhist_term_proportion}%
+                </div>
+                <div class="char-scores">
+                    <div class="score-cell"><span class="score-label">佛教</span><span class="score-val" style="color:var(--accent);">${d.identity_score_buddhist}</span></div>
+                    <div class="score-cell"><span class="score-label">道教</span><span class="score-val" style="color:var(--accent-3);">${d.identity_score_daoist}</span></div>
+                    <div class="score-cell"><span class="score-label">儒家</span><span class="score-val" style="color:var(--accent-2);">${d.identity_score_confucian}</span></div>
+                    <div class="score-cell"><span class="score-label">民间</span><span class="score-val" style="color:var(--accent-4);">${d.identity_score_folk}</span></div>
+                </div>
+                <div class="char-vocab">
+                    <div class="vocab-label">代表性词汇：</div>
+                    <div class="vocab-list">${d.representative_vocabulary.map(v => '<code>' + v + '</code>').join(' ')}</div>
+                </div>
+                <div style="margin-top:6px;font-size:0.78rem;color:var(--ink-soft);">
+                    ${d.language_features.map(f => '· ' + f).join('<br>')}
+                </div>
+            `);
+        });
+    }
+
+    // ===== Section 3-5: 身份统计 KPI =====
+    function renderIdStatKpi(data) {
+        const s = data.language_classification_stats;
+        const items = [
+            {label:'BUDDHIST DOMINANT', value: s.buddhist_dominant, desc:'佛教主导（唐僧/如来/观音）', cls:''},
+            {label:'DAOIST DOMINANT', value: s.daoist_dominant, desc:'道教主导（悟空/老君）', cls:'alt-2'},
+            {label:'CONFUCIAN DOMINANT', value: s.confucian_dominant, desc:'儒家主导（玉帝）', cls:'alt-3'},
+            {label:'FOLK DOMINANT', value: s.folk_dominant, desc:'民间主导（八戒）', cls:'alt-4'},
+            {label:'MIXED', value: s.mixed, desc:'混合身份（沙僧）', cls:'alt-2'},
+            {label:'AVG CLASSICAL', value: s.avg_classical_chinese_proportion + '%', desc:'平均文言占比最高', cls:'alt-3'}
+        ];
+        const row = d3.select('#idStatKpi');
+        row.selectAll('*').remove();
+        items.forEach(it => {
+            row.append('div')
+                .attr('class', 'kpi-card ' + it.cls)
+                .html(`<div class="label">${it.label}</div><div class="value">${it.value}</div><div class="desc">${it.desc}</div>`);
+        });
+    }
+
+    // ===== Section 3-6: 身份洞察 =====
+    function renderIdentityInsights(data) {
+        const list = d3.select('#identity-insights');
+        list.selectAll('li').data(data.language_identity_insights).enter().append('li').text(d => d);
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

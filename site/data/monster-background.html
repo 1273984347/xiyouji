@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>妖怪后台论 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        .section-title.alt-4 { border-bottom-color: var(--accent-3); }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .chart-svg:focus-visible {
+            outline: 2px solid var(--accent-2);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+        }
+        table.data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .icon-correct {
+            color: var(--accent-4);
+            font-weight: 700;
+        }
+        .icon-wrong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .case-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-left: 4px solid var(--accent-4);
+        }
+        .case-card.survived { border-left-color: var(--accent-4); }
+        .case-card.killed { border-left-color: var(--accent); }
+        .case-card .case-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .case-card .case-badge {
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-weight: 600;
+        }
+        .case-card .case-badge.survived {
+            background: #e8f0dc;
+            color: var(--accent-4);
+        }
+        .case-card .case-badge.killed {
+            background: #f8e0dc;
+            color: var(--accent);
+        }
+        .case-card .case-bg {
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .case-card .case-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .case-card .case-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .case-card .case-crime {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed var(--line);
+            font-style: italic;
+        }
+        footer {
+            max-width: 1280px;
+            margin: 40px auto 0;
+            padding: 24px;
+            border-top: 1px solid var(--line);
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            text-align: center;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        footer a:hover { text-decoration: underline; }
+        .tooltip {
+            position: absolute;
+            background: rgba(44, 36, 24, 0.95);
+            color: #f5e9d4;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            max-width: 280px;
+            z-index: 100;
+        }
+        @media (max-width: 768px) {
+            .hero { padding: 36px 16px 28px; }
+            .hero h1 { font-size: 1.6rem; }
+            .container { padding: 0 14px; }
+            .section { padding: 18px 14px; }
+            .kpi-card { padding: 14px; }
+            .kpi-card .value { font-size: 1.5rem; }
+            .chart-block { padding: 14px; }
+            table.data-table { font-size: 0.78rem; }
+            .case-grid { grid-template-columns: 1fr; }
+            .insights-list li { padding: 10px 12px 10px 36px; }
+        }
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #3a6b8c;
+            color: #fff;
+            padding: 8px 16px;
+            z-index: 100;
+            text-decoration: none;
+            border-radius: 0 0 4px 0;
+            transition: top 0.2s;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">跳到主内容</a>
+    <div class="hero">
+        <h1>妖怪后台论</h1>
+        <div class="subtitle">Monster Background Theory</div>
+        <div class="tagline">—— 没有背景的妖怪，连成为妖怪的资格都没有</div>
+    </div>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span class="sep">›</span>
+            <a href="monster-sociology.html">妖怪社会学</a>
+            <span class="sep">›</span>
+            <span class="current">妖怪后台论</span>
+        </div>
+        <div class="notice">
+            本页是「妖怪社会学」的专题深化，聚焦全书最尖锐的讽刺——妖怪的生死不取决于实力，而取决于后台。数据基于《西游记》原著 100 回，共统计 69 名妖怪。统计口径说明：「后台分类存活率」按妖怪所属后台类型聚合，「处置方式计数」按最终结局聚合，两类口径存在 ±2 名交叉误差（逃脱类妖怪的后台归属判定差异所致），不影响核心结论。
+        </div>
+
+        <div class="kpi-row" id="kpi-row" role="region" aria-label="核心指标"></div>
+
+        <main id="main-content">
+            <section class="section" aria-labelledby="sec-types">
+                <h2 class="section-title" id="sec-types">一、后台类型分类</h2>
+                <div class="section-sub">4 类后台强度 × 存活率相关性分析 · 气泡大小代表妖怪数量</div>
+                <div class="definition">
+                    <strong>后台强度评分（1-10）</strong>：综合「原主地位」「关系亲疏」「下凡性质」三维度。9-10=三清/佛祖直系坐骑；7-8=菩萨坐骑/童子；5-6=地方神祇/结拜亲属；1-2=野生无背景。
+                </div>
+                <div class="chart-block">
+                    <div class="chart-title">后台强度 vs 存活率散点图</div>
+                    <div class="chart-caption">横轴=后台强度（1-10），纵轴=存活率（%），气泡大小=妖怪数量，颜色=4 类后台</div>
+                    <svg class="chart-svg" id="chart-scatter" role="img" aria-label="后台强度与存活率散点图" tabindex="0"></svg>
+                    <div class="legend-row" id="legend-types"></div>
+                </div>
+                <table class="data-table" id="table-types">
+                    <thead>
+                        <tr>
+                            <th>后台类型</th>
+                            <th>数量</th>
+                            <th>存活率</th>
+                            <th>平均实力</th>
+                            <th>后台强度</th>
+                            <th>典型代表</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+
+            <section class="section" aria-labelledby="sec-compare">
+                <h2 class="section-title alt-2" id="sec-compare">二、有后台 vs 无后台</h2>
+                <div class="section-sub">西游司法的二元结构 · 存活率差距 10.7 倍</div>
+                <div class="chart-block">
+                    <div class="chart-title">存活率对比柱状图</div>
+                    <div class="chart-caption">有后台妖怪存活率 97.2% vs 无后台妖怪存活率 9.1%</div>
+                    <svg class="chart-svg" id="chart-compare" role="img" aria-label="有后台与无后台妖怪存活率对比" tabindex="0"></svg>
+                </div>
+                <div class="definition">
+                    <strong>核心发现</strong>：36 名有后台妖怪中仅 1 名未存活（特殊案例），33 名无后台妖怪中仅 3 名存活。后台强度与存活率呈强正相关——这不是巧合，而是制度。
+                </div>
+            </section>
+
+            <section class="section" aria-labelledby="sec-cases">
+                <h2 class="section-title alt-3" id="sec-cases">三、典型案例对比</h2>
+                <div class="section-sub">10 个典型案例 · 有后台 5 个（存活 5）vs 无后台 5 个（存活 0）</div>
+                <div class="case-grid" id="case-grid" role="region" aria-label="典型案例卡片"></div>
+            </section>
+
+            <section class="section" aria-labelledby="sec-outcomes">
+                <h2 class="section-title alt-4" id="sec-outcomes">四、处置方式分析</h2>
+                <div class="section-sub">5 种处置方式 · 揭示「收走」与「打死」的二元结构</div>
+                <div class="chart-block">
+                    <div class="chart-title">处置方式占比饼图</div>
+                    <div class="chart-caption">归还原主 26.1% + 收编 11.6% + 降职 4.3% vs 直接击杀 47.8% + 逃脱 10.1%</div>
+                    <svg class="chart-svg" id="chart-pie" role="img" aria-label="处置方式占比饼图" tabindex="0"></svg>
+                    <div class="legend-row" id="legend-outcomes"></div>
+                </div>
+                <table class="data-table" id="table-outcomes">
+                    <thead>
+                        <tr>
+                            <th>处置方式</th>
+                            <th>数量</th>
+                            <th>占比</th>
+                            <th>典型案例</th>
+                            <th>司法评价</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+
+            <section class="section" aria-labelledby="sec-insights">
+                <h2 class="section-title" id="sec-insights">五、核心洞察</h2>
+                <div class="section-sub">妖怪后台论的 7 条社会讽刺</div>
+                <ol class="insights-list" id="insights-list" role="list"></ol>
+            </section>
+
+            <section class="section" aria-labelledby="sec-related">
+                <h2 class="section-title alt-2" id="sec-related">延伸阅读</h2>
+                <div class="section-sub">关联页面 · 深入了解妖怪社会学全貌</div>
+                <div class="case-grid">
+                    <a href="monster-sociology.html" style="text-decoration:none;color:inherit;">
+                        <div class="case-card survived">
+                            <div class="case-name">妖怪社会学</div>
+                            <div class="case-bg">I · 妖怪社会</div>
+                            <div class="case-row">作案模式 · 信号生存 · 坐骑档案</div>
+                            <div class="case-crime">5 类作案手法 + 10 种求救信号 + 10 起坐骑下凡</div>
+                        </div>
+                    </a>
+                    <a href="jurisprudence.html" style="text-decoration:none;color:inherit;">
+                        <div class="case-card survived">
+                            <div class="case-name">西游法理学</div>
+                            <div class="case-bg">Q · 法理学</div>
+                            <div class="case-row">天庭律法 · 司法双标 · 判决差异</div>
+                            <div class="case-crime">坐骑下凡实质惩罚率 0% 的法律分析</div>
+                        </div>
+                    </a>
+                    <a href="power-resources.html" style="text-decoration:none;color:inherit;">
+                        <div class="case-card survived">
+                            <div class="case-name">权力资源</div>
+                            <div class="case-bg">J · 权力资源</div>
+                            <div class="case-row">天庭 · 灵山 · 妖界势力分布</div>
+                            <div class="case-crime">后台强度 = 原主影响力 × 关系亲密度</div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>妖怪后台论 · 数据基于《西游记》原著 100 回 · 共统计 69 名妖怪</p>
+        <p>返回 <a href="../index.html">首页</a> · <a href="monster-sociology.html">妖怪社会学</a> · <a href="../dashboard.html">总览</a></p>
+    </footer>
+    <div class="tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
+
+    <script>
+    const EMBEDDED = {
+        background: {
+            concept_name: "妖怪后台论",
+            english_name: "Monster Background Theory",
+            definition: "西游记最尖锐的社会讽刺——有后台的妖怪都被救走，没后台的妖怪都被打死。后台强度决定生死，实力只是次要因素。",
+            background_types: [
+                {
+                    id: "celestial",
+                    name: "天庭坐骑/神兽",
+                    english_name: "Celestial Mounts",
+                    count: 16,
+                    survival_rate: 100,
+                    avg_power: 8.5,
+                    background_strength: 9,
+                    color: "#c8463a",
+                    examples: ["青牛精(老君坐骑)", "九灵元圣(太乙天尊坐骑)", "黄袍怪(奎木狼)", "赛太岁(观音坐骑)", "青狮(文殊坐骑)"]
+                },
+                {
+                    id: "disciple",
+                    name: "佛道弟子/童子",
+                    english_name: "Disciples/Attendants",
+                    count: 12,
+                    survival_rate: 100,
+                    avg_power: 8.2,
+                    background_strength: 8,
+                    color: "#3a6b8c",
+                    examples: ["金角银角(老君童子)", "黄眉老怪(弥勒童子)", "红孩儿(妖二代→观音收编)", "灵感大王(观音莲池)"]
+                },
+                {
+                    id: "local",
+                    name: "地方神祇/亲属",
+                    english_name: "Local Deities/Kin",
+                    count: 8,
+                    survival_rate: 87.5,
+                    avg_power: 7.0,
+                    background_strength: 6,
+                    color: "#7a5230",
+                    examples: ["牛魔王(结拜兄弟)", "铁扇公主(罗刹女)", "玉兔精(嫦娥宠物)", "黑熊精(自修→观音收守山)"]
+                },
+                {
+                    id: "wild",
+                    name: "无背景野生",
+                    english_name: "Wild Demons",
+                    count: 33,
+                    survival_rate: 9.1,
+                    avg_power: 6.8,
+                    background_strength: 1,
+                    color: "#6b5e4d",
+                    examples: ["白骨精", "虎力大仙", "蜘蛛精七姐妹", "蟒蛇精", "六耳猕猴"]
+                }
+            ],
+            type_stats: {
+                total: 69,
+                with_background: 36,
+                without_background: 33,
+                with_background_survival_rate: 97.2,
+                without_background_survival_rate: 9.1,
+                survival_gap: 10.7
+            }
+        },
+        cases: {
+            concept_name: "典型案例对比",
+            case_list: [
+                { name: "青牛精", background: "太上老君坐骑", background_type: "celestial", outcome: "老君亲临收伏", survived: true, chapter: "第50-52回", power: 9, crime: "偷金刚琢·套取诸天法宝·绑架唐僧" },
+                { name: "金角银角", background: "太上老君炼丹童子", background_type: "disciple", outcome: "老君收回", survived: true, chapter: "第32-35回", power: 8, crime: "持紫金红葫芦·玉净瓶·绑架唐僧" },
+                { name: "红孩儿", background: "牛魔王之子→观音收编", background_type: "disciple", outcome: "观音收为善财童子", survived: true, chapter: "第40-42回", power: 8, crime: "三昧真火·差点烧死悟空" },
+                { name: "黄眉老怪", background: "弥勒佛童子", background_type: "disciple", outcome: "弥勒收回", survived: true, chapter: "第65-66回", power: 9, crime: "金铙人种袋·困诸天神将" },
+                { name: "九灵元圣", background: "太乙救苦天尊坐骑", background_type: "celestial", outcome: "天尊收回", survived: true, chapter: "第88-90回", power: 10, crime: "九曲盘桓洞·收六狮孙" },
+                { name: "白骨精", background: "无", background_type: "wild", outcome: "被打死", survived: false, chapter: "第27回", power: 3, crime: "三变骗唐僧·离间师徒" },
+                { name: "虎力大仙", background: "无", background_type: "wild", outcome: "比试败死", survived: false, chapter: "第44-46回", power: 5, crime: "车迟国迫害和尚·斗法" },
+                { name: "蜘蛛精", background: "无", background_type: "wild", outcome: "被打死", survived: false, chapter: "第72-73回", power: 4, crime: "濯垢泉色诱·蜈蚣精同谋" },
+                { name: "六耳猕猴", background: "无（冒充）", background_type: "wild", outcome: "如来识破被杀", survived: false, chapter: "第57-58回", power: 9, crime: "假冒悟空·篡夺取经成果" },
+                { name: "蝎子精", background: "无", background_type: "wild", outcome: "昴日星官杀", survived: false, chapter: "第55回", power: 7, crime: "琵琶洞逼婚·蜇伤悟空八戒" }
+            ]
+        },
+        outcomes: {
+            concept_name: "处置方式分析",
+            outcome_types: [
+                { type: "归还原主", english_name: "Returned to Owner", count: 18, percentage: 26.1, color: "#3a6b8c", typical_cases: ["青牛精→老君", "金角银角→老君", "黄眉→弥勒"], verdict: "象征性教育·无实质惩罚" },
+                { type: "收编/收伏", english_name: "Recruited", count: 8, percentage: 11.6, color: "#5a7a3a", typical_cases: ["红孩儿→善财童子", "黑熊精→守山神", "牛魔王→归降"], verdict: "体制吸收·改换身份" },
+                { type: "降职处分", english_name: "Demoted", count: 3, percentage: 4.3, color: "#7a5230", typical_cases: ["奎木狼→烧火", "白龙马→驮马", "天蓬元帅→猪八戒"], verdict: "轻判·后复职" },
+                { type: "直接击杀", english_name: "Killed", count: 33, percentage: 47.8, color: "#c8463a", typical_cases: ["白骨精", "蜘蛛精", "虎力大仙", "蝎子精"], verdict: "野生妖怪的唯一结局" },
+                { type: "逃脱/失踪", english_name: "Escaped", count: 7, percentage: 10.1, color: "#6b5e4d", typical_cases: ["九头虫逃北海", "碧波潭驸马党羽"], verdict: "少数侥幸逃脱" }
+            ]
+        },
+        insights: {
+            concept_name: "核心洞察",
+            insight_list: [
+                "妖怪命运的决定因素不是实力而是关系——白骨精实力最弱(3)被打死，九灵元圣实力最强(10)却被收走",
+                "天庭的「临时工」机制——坐骑下凡作恶，原主不担责，坐骑不偿命，受害者无赔偿，是典型的「权力寻租」",
+                "处置方式呈二元结构——有后台的「收走/收编」，无后台的「打死/杀掉」，中间仅 4.3% 降职处分作为过渡（如奎木狼烧火、白龙马驮马）",
+                "金翅大鹏雕是特权司法的极端案例——灭狮驼国一国百姓，因是佛祖亲属反被封护法（注：此案例未纳入 69 名统计样本，作为制度极端例证单独引用）",
+                "六耳猕猴是「冒充后台」的反面教材——无后台却冒充有后台（悟空），最终被如来识破击杀",
+                "观音是「收编大户」——红孩儿/黑熊精/灵感大王，她倾向于「体制吸收」而非「击杀」",
+                "妖怪后台强度与存活率呈强正相关——后台强度 9→存活率 100%，后台强度 1→存活率 9.1%"
+            ]
+        }
+    };
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('Fallback to EMBEDDED for', path, e.message);
+            return fallback;
+        }
+    }
+
+    function makeTooltip() {
+        const tip = d3.select('#tooltip');
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1)
+                   .attr('aria-hidden', 'false');
+            },
+            hide: function() {
+                tip.style('opacity', 0).attr('aria-hidden', 'true');
+            }
+        };
+    }
+
+    // ===== Main render =====
+    async function main() {
+        if (typeof d3 === 'undefined') {
+            document.getElementById('kpi-row').innerHTML = '<p style="color:#c8463a;padding:12px;">图表库（D3.js）加载失败，请检查网络连接后刷新。</p>';
+            return;
+        }
+        const baseUrl = '../../scripts/output/data/';
+        const [background, cases, outcomes, insights] = await Promise.all([
+            loadJson(baseUrl + 'monster_background.json', EMBEDDED.background),
+            loadJson(baseUrl + 'monster_background_cases.json', EMBEDDED.cases),
+            loadJson(baseUrl + 'monster_background_outcomes.json', EMBEDDED.outcomes),
+            loadJson(baseUrl + 'monster_background_insights.json', EMBEDDED.insights)
+        ]);
+        window.__lastData = { background, cases, outcomes, insights };
+
+        renderKPI(background);
+        renderScatter(background);
+        renderTypesTable(background);
+        renderCompare(background);
+        renderCases(cases);
+        renderOutcomePie(outcomes);
+        renderOutcomesTable(outcomes);
+        renderInsights(insights);
+    }
+
+    // ===== KPI 卡片 =====
+    function renderKPI(data) {
+        const stats = data.type_stats;
+        const kpis = [
+            { label: "TOTAL · 妖怪总数", value: stats.total, desc: "统计覆盖原著 100 回", cls: "" },
+            { label: "BACKED · 有后台存活率", value: stats.with_background_survival_rate + "%", desc: stats.with_background + " 名有后台妖怪", cls: "alt-3" },
+            { label: "WILD · 无后台存活率", value: stats.without_background_survival_rate + "%", desc: stats.without_background + " 名无后台妖怪", cls: "alt-2" },
+            { label: "GAP · 存活率差距", value: stats.survival_gap + "x", desc: "有后台 vs 无后台", cls: "alt-4" }
+        ];
+        const row = d3.select('#kpi-row');
+        kpis.forEach(k => {
+            const card = row.append('div').attr('class', 'kpi-card ' + k.cls);
+            card.append('div').attr('class', 'label').text(k.label);
+            card.append('div').attr('class', 'value').text(k.value);
+            card.append('div').attr('class', 'desc').text(k.desc);
+        });
+    }
+
+    // ===== Section 1: 散点图 =====
+    function renderScatter(data) {
+        const svg = d3.select('#chart-scatter');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 420;
+        const m = { top: 30, right: 40, bottom: 60, left: 60 };
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+
+        const tooltip = makeTooltip();
+        const types = data.background_types;
+
+        const x = d3.scaleLinear().domain([0, 10]).range([0, w]);
+        const y = d3.scaleLinear().domain([0, 110]).range([h, 0]);
+        const r = d3.scaleSqrt().domain([0, 35]).range([8, 38]);
+
+        // 网格线
+        g.append('g')
+            .attr('class', 'grid')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(-h).tickFormat(''))
+            .selectAll('line').attr('stroke', '#e8dfd0').attr('stroke-dasharray', '2,3');
+        g.append('g')
+            .attr('class', 'grid')
+            .call(d3.axisLeft(y).tickSize(-w).tickFormat(''))
+            .selectAll('line').attr('stroke', '#e8dfd0').attr('stroke-dasharray', '2,3');
+
+        // 坐标轴
+        g.append('g')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickFormat(d => d))
+            .append('text')
+            .attr('x', w / 2).attr('y', 45).attr('fill', '#6b5e4d')
+            .attr('text-anchor', 'middle').attr('font-size', '0.85rem')
+            .text('后台强度（1=无背景 → 10=三清/佛祖直系）');
+        g.append('g')
+            .call(d3.axisLeft(y).tickFormat(d => d + '%'))
+            .append('text')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', -45).attr('fill', '#6b5e4d')
+            .attr('text-anchor', 'middle').attr('font-size', '0.85rem')
+            .text('存活率（%）');
+
+        // 气泡
+        g.selectAll('.bubble')
+            .data(types)
+            .enter()
+            .append('circle')
+            .attr('class', 'bubble')
+            .attr('cx', d => x(d.background_strength))
+            .attr('cy', d => y(d.survival_rate))
+            .attr('r', d => r(d.count))
+            .attr('fill', d => d.color)
+            .attr('fill-opacity', 0.55)
+            .attr('stroke', d => d.color)
+            .attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                d3.select(this).attr('fill-opacity', 0.8);
+                tooltip.show(
+                    `<strong>${d.name}</strong><br/>` +
+                    `数量：${d.count} · 存活率：${d.survival_rate}%<br/>` +
+                    `后台强度：${d.background_strength}/10 · 平均实力：${d.avg_power}/10<br/>` +
+                    `<em>${d.examples.slice(0, 3).join(' / ')}</em>`,
+                    event
+                );
+            })
+            .on('mouseout', function() {
+                d3.select(this).attr('fill-opacity', 0.55);
+                tooltip.hide();
+            });
+
+        // 标签
+        g.selectAll('.bubble-label')
+            .data(types)
+            .enter()
+            .append('text')
+            .attr('class', 'bubble-label')
+            .attr('x', d => x(d.background_strength))
+            .attr('y', d => y(d.survival_rate) - r(d.count) - 6)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#2c2418')
+            .attr('font-size', '0.82rem')
+            .attr('font-weight', 600)
+            .text(d => d.name);
+
+        // 图例
+        const legend = d3.select('#legend-types');
+        legend.selectAll('*').remove();
+        types.forEach(t => {
+            const item = legend.append('span').attr('class', 'legend-item');
+            item.append('span').attr('class', 'legend-swatch').style('background', t.color);
+            item.append('span').text(`${t.name}（${t.count}）`);
+        });
+    }
+
+    // ===== Section 1: 类型表格 =====
+    function renderTypesTable(data) {
+        const tbody = d3.select('#table-types tbody');
+        tbody.selectAll('*').remove();
+        const rows = tbody.selectAll('tr').data(data.background_types).enter().append('tr');
+        rows.append('td').html(d => `<strong style="color:${d.color}">${d.name}</strong><br/><span style="font-size:0.78rem;color:#6b5e4d">${d.english_name}</span>`);
+        rows.append('td').text(d => d.count);
+        rows.append('td').html(d => `<strong>${d.survival_rate}%</strong>`);
+        rows.append('td').text(d => d.avg_power + '/10');
+        rows.append('td').text(d => d.background_strength + '/10');
+        rows.append('td').html(d => d.examples.map(e => `<span style="display:inline-block;background:#f5ede0;padding:1px 6px;border-radius:3px;margin:1px;font-size:0.78rem">${e}</span>`).join(' '));
+    }
+
+    // ===== Section 2: 对比柱状图 =====
+    function renderCompare(data) {
+        const svg = d3.select('#chart-compare');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 360;
+        const m = { top: 40, right: 40, bottom: 50, left: 60 };
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+
+        const stats = data.type_stats;
+        const compareData = [
+            { label: '有后台', value: stats.with_background_survival_rate, count: stats.with_background, color: '#5a7a3a' },
+            { label: '无后台', value: stats.without_background_survival_rate, count: stats.without_background, color: '#c8463a' }
+        ];
+
+        const x = d3.scaleBand().domain(compareData.map(d => d.label)).range([0, w]).padding(0.4);
+        const y = d3.scaleLinear().domain([0, 110]).range([h, 0]);
+
+        // 网格
+        g.append('g')
+            .attr('class', 'grid')
+            .call(d3.axisLeft(y).tickSize(-w).tickFormat(''))
+            .selectAll('line').attr('stroke', '#e8dfd0').attr('stroke-dasharray', '2,3');
+
+        g.append('g')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x))
+            .selectAll('text').attr('font-size', '0.9rem').attr('font-weight', 600);
+
+        g.append('g')
+            .call(d3.axisLeft(y).tickFormat(d => d + '%'));
+
+        // 柱子
+        const tooltip = makeTooltip();
+        g.selectAll('.bar')
+            .data(compareData)
+            .enter()
+            .append('rect')
+            .attr('class', 'bar')
+            .attr('x', d => x(d.label))
+            .attr('y', h)
+            .attr('width', x.bandwidth())
+            .attr('height', 0)
+            .attr('fill', d => d.color)
+            .attr('fill-opacity', 0.8)
+            .style('cursor', 'pointer')
+            .transition()
+            .duration(800)
+            .attr('y', d => y(d.value))
+            .attr('height', d => h - y(d.value));
+
+        // 数值标签
+        g.selectAll('.bar-label')
+            .data(compareData)
+            .enter()
+            .append('text')
+            .attr('class', 'bar-label')
+            .attr('x', d => x(d.label) + x.bandwidth() / 2)
+            .attr('y', d => y(d.value) - 8)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#2c2418')
+            .attr('font-size', '1.2rem')
+            .attr('font-weight', 700)
+            .text(d => d.value + '%');
+
+        g.selectAll('.bar-sublabel')
+            .data(compareData)
+            .enter()
+            .append('text')
+            .attr('class', 'bar-sublabel')
+            .attr('x', d => x(d.label) + x.bandwidth() / 2)
+            .attr('y', d => y(d.value) + 22)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#fff')
+            .attr('font-size', '0.82rem')
+            .text(d => `${d.count} 名`);
+
+        // 差距标注
+        g.append('line')
+            .attr('x1', x('有后台') + x.bandwidth() / 2)
+            .attr('x2', x('无后台') + x.bandwidth() / 2)
+            .attr('y1', y(stats.with_background_survival_rate) - 30)
+            .attr('y2', y(stats.with_background_survival_rate) - 30)
+            .attr('stroke', '#7a5230')
+            .attr('stroke-width', 1.5)
+            .attr('stroke-dasharray', '4,3');
+        g.append('text')
+            .attr('x', w / 2)
+            .attr('y', y(stats.with_background_survival_rate) - 40)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#7a5230')
+            .attr('font-size', '0.85rem')
+            .attr('font-weight', 600)
+            .text(`差距 ${stats.survival_gap}x`);
+    }
+
+    // ===== Section 3: 案例卡片 =====
+    function renderCases(data) {
+        const grid = d3.select('#case-grid');
+        grid.selectAll('*').remove();
+        const typeColor = {
+            celestial: '#c8463a',
+            disciple: '#3a6b8c',
+            local: '#7a5230',
+            wild: '#6b5e4d'
+        };
+        const typeName = {
+            celestial: '天庭坐骑',
+            disciple: '佛道弟子',
+            local: '地方神祇',
+            wild: '无背景'
+        };
+        data.case_list.forEach(c => {
+            const card = grid.append('div')
+                .attr('class', 'case-card ' + (c.survived ? 'survived' : 'killed'));
+            const nameDiv = card.append('div').attr('class', 'case-name');
+            nameDiv.append('span').text(c.name);
+            nameDiv.append('span')
+                .attr('class', 'case-badge ' + (c.survived ? 'survived' : 'killed'))
+                .text(c.survived ? '存活' : '击杀');
+            card.append('div').attr('class', 'case-bg')
+                .style('color', typeColor[c.background_type])
+                .text(`${typeName[c.background_type]} · ${c.background}`);
+            card.append('div').attr('class', 'case-row')
+                .html(`<strong>结局：</strong>${c.outcome}`);
+            card.append('div').attr('class', 'case-row')
+                .html(`<strong>回目：</strong>${c.chapter} · <strong>实力：</strong>${c.power}/10`);
+            card.append('div').attr('class', 'case-crime').text(c.crime);
+        });
+    }
+
+    // ===== Section 4: 处置方式饼图 =====
+    function renderOutcomePie(data) {
+        const svg = d3.select('#chart-pie');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 700;
+        const W = Math.max(containerW, 500), H = 360;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const radius = Math.min(W, H) / 2 - 40;
+        const g = svg.append('g').attr('transform', `translate(${W / 2},${H / 2})`);
+
+        const tooltip = makeTooltip();
+        const pie = d3.pie().value(d => d.count).sort(null);
+        const arc = d3.arc().innerRadius(radius * 0.55).outerRadius(radius);
+        const labelArc = d3.arc().innerRadius(radius * 0.85).outerRadius(radius * 0.85);
+
+        const arcs = pie(data.outcome_types);
+
+        g.selectAll('.arc')
+            .data(arcs)
+            .enter()
+            .append('path')
+            .attr('class', 'arc')
+            .attr('d', arc)
+            .attr('fill', d => d.data.color)
+            .attr('fill-opacity', 0.8)
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                d3.select(this).attr('fill-opacity', 1);
+                tooltip.show(
+                    `<strong>${d.data.type}</strong><br/>` +
+                    `数量：${d.data.count} · 占比：${d.data.percentage}%<br/>` +
+                    `<em>${d.data.verdict}</em>`,
+                    event
+                );
+            })
+            .on('mouseout', function() {
+                d3.select(this).attr('fill-opacity', 0.8);
+                tooltip.hide();
+            });
+
+        // 百分比标签
+        g.selectAll('.pie-label')
+            .data(arcs)
+            .enter()
+            .append('text')
+            .attr('class', 'pie-label')
+            .attr('transform', d => `translate(${labelArc.centroid(d)})`)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#fff')
+            .attr('font-size', '0.85rem')
+            .attr('font-weight', 600)
+            .text(d => d.data.percentage + '%');
+
+        // 中心文字
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', -8)
+            .attr('fill', '#2c2418')
+            .attr('font-size', '1.3rem')
+            .attr('font-weight', 700)
+            .text('69');
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', 14)
+            .attr('fill', '#6b5e4d')
+            .attr('font-size', '0.82rem')
+            .text('妖怪总数');
+
+        // 图例
+        const legend = d3.select('#legend-outcomes');
+        legend.selectAll('*').remove();
+        data.outcome_types.forEach(o => {
+            const item = legend.append('span').attr('class', 'legend-item');
+            item.append('span').attr('class', 'legend-swatch').style('background', o.color);
+            item.append('span').text(`${o.type}（${o.count}）`);
+        });
+    }
+
+    // ===== Section 4: 处置方式表格 =====
+    function renderOutcomesTable(data) {
+        const tbody = d3.select('#table-outcomes tbody');
+        tbody.selectAll('*').remove();
+        const rows = tbody.selectAll('tr').data(data.outcome_types).enter().append('tr');
+        rows.append('td').html(d => `<strong style="color:${d.color}">${d.type}</strong><br/><span style="font-size:0.78rem;color:#6b5e4d">${d.english_name}</span>`);
+        rows.append('td').text(d => d.count);
+        rows.append('td').html(d => `<strong>${d.percentage}%</strong>`);
+        rows.append('td').html(d => d.typical_cases.map(c => `<span style="display:inline-block;background:#f5ede0;padding:1px 6px;border-radius:3px;margin:1px;font-size:0.78rem">${c}</span>`).join(' '));
+        rows.append('td').text(d => d.verdict);
+    }
+
+    // ===== Section 5: 洞察列表 =====
+    function renderInsights(data) {
+        const list = d3.select('#insights-list');
+        list.selectAll('*').remove();
+        data.insight_list.forEach(insight => {
+            list.append('li').text(insight);
+        });
+    }
+
+    main();
+    </script>
+</body>
+</html>

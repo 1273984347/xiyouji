@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交互式时间线 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染时间线图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: #f5e9d4;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        /* KPI 概要栏 */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+            min-width: 0;
+        }
+        .kpi-card:nth-child(2) { border-top-color: var(--accent-2); }
+        .kpi-card:nth-child(3) { border-top-color: var(--accent-3); }
+        .kpi-card:nth-child(4) { border-top-color: var(--accent-4); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card:nth-child(2) .label { color: var(--accent-2); }
+        .kpi-card:nth-child(3) .label { color: var(--accent-3); }
+        .kpi-card:nth-child(4) .label { color: var(--accent-4); }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+        }
+
+        .device {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 32px 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 28px;
+            scroll-margin-top: 20px;
+        }
+        .device-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+        .device-sub {
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+            margin-bottom: 18px;
+            overflow-wrap: anywhere;
+        }
+
+        /* 时代过滤标签 */
+        .era-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+        .era-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-family: inherit;
+            color: var(--ink-soft);
+            cursor: pointer;
+            transition: all 0.18s;
+            min-width: 0;
+        }
+        .era-btn:hover { border-color: var(--accent); color: var(--ink); }
+        .era-btn .era-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+        .era-btn.active {
+            background: var(--ink);
+            color: #f5e9d4;
+            border-color: var(--ink);
+        }
+        .era-btn.active .era-dot { background: var(--accent-soft); }
+
+        /* 时间线容器 */
+        .tl-wrap { position: relative; min-width: 0; }
+        #timeline-viz { width: 100%; min-width: 0; }
+        .tl-svg { display: block; width: 100%; overflow: visible; }
+        .tl-svg .era-band { stroke: none; }
+        .tl-svg .era-label {
+            font-size: 11px; font-weight: 600;
+            font-family: "JetBrains Mono", monospace;
+            letter-spacing: 0.1em;
+        }
+        .tl-svg .lane-label {
+            font-size: 13px; font-weight: 600;
+            font-family: "Noto Serif SC", serif;
+        }
+        .tl-svg .axis text {
+            font-size: 11px; fill: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .tl-svg .axis path, .tl-svg .axis line { stroke: var(--line); }
+        .tl-svg .ev-circle {
+            stroke: #fff; stroke-width: 2; cursor: pointer;
+            transition: r 0.18s, opacity 0.18s;
+        }
+        .tl-svg .ev-circle:hover { stroke-width: 3; }
+        .tl-svg .ev-year {
+            font-size: 10px; fill: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            text-anchor: middle; pointer-events: none;
+        }
+        .tl-svg .ev-title {
+            font-size: 10.5px; fill: var(--ink);
+            text-anchor: middle; pointer-events: none;
+        }
+        .tl-svg .tl-event { transition: opacity 0.25s; }
+        .tl-svg .tl-event.dimmed { opacity: 0.18; }
+        .tl-svg .ev-circle.selected {
+            stroke: var(--ink); stroke-width: 3;
+        }
+
+        .tl-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 16px;
+            font-size: 0.84rem;
+            color: var(--ink-soft);
+        }
+        .tl-legend .lg-item { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
+        .tl-legend .lg-sw { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+
+        .tl-tooltip {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            background: #1a1410;
+            color: #f5e9d4;
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            max-width: 260px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            line-height: 1.5;
+        }
+        .tl-tooltip .tt-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 2px; overflow-wrap: anywhere; }
+        .tl-tooltip .tt-meta { font-size: 0.74rem; opacity: 0.8; margin-bottom: 4px; }
+        .tl-tooltip .tt-desc { font-size: 0.8rem; opacity: 0.92; overflow-wrap: anywhere; }
+
+        /* 垂直时间线（移动端） */
+        .vtl {
+            position: relative;
+            padding-left: 26px;
+            margin-top: 8px;
+        }
+        .vtl::before {
+            content: "";
+            position: absolute;
+            left: 9px; top: 6px; bottom: 6px;
+            width: 2px;
+            background: var(--line);
+        }
+        .vtl-item {
+            position: relative;
+            padding: 8px 0 16px 8px;
+            cursor: pointer;
+            min-width: 0;
+        }
+        .vtl-item .vtl-dot {
+            position: absolute;
+            left: -22px; top: 12px;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px var(--line);
+        }
+        .vtl-item .vtl-meta { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 2px; font-family: "JetBrains Mono", monospace; }
+        .vtl-item .vtl-meta .vtl-axis { margin-left: 8px; padding: 1px 7px; border-radius: 3px; font-size: 0.72rem; }
+        .vtl-item .vtl-title { font-size: 1rem; font-weight: 600; color: var(--ink); }
+        .vtl-item .vtl-desc { font-size: 0.85rem; color: var(--ink-soft); overflow-wrap: anywhere; }
+        .vtl-item.dimmed { opacity: 0.3; }
+        .vtl-item.selected .vtl-dot { box-shadow: 0 0 0 2px var(--ink); }
+
+        /* 详情卡片 */
+        .detail-empty {
+            text-align: center;
+            padding: 28px 12px;
+            color: var(--ink-soft);
+            font-size: 0.9rem;
+            border: 1px dashed var(--line);
+            border-radius: 8px;
+        }
+        .detail-body {
+            display: grid;
+            grid-template-columns: minmax(min(110px, 100%), auto) 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+        @media (max-width: 520px) {
+            .detail-body { grid-template-columns: 1fr; }
+        }
+        .detail-icon {
+            font-size: 3.4rem;
+            text-align: center;
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 10px;
+            padding: 18px 10px;
+            min-width: 0;
+        }
+        .detail-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-family: "JetBrains Mono", monospace;
+            letter-spacing: 0.05em;
+        }
+        .badge-year { background: var(--ink); color: #f5e9d4; }
+        .badge-era { background: var(--accent-soft); color: var(--ink); }
+        .badge-axis { color: #fff; }
+        .detail-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 8px;
+            overflow-wrap: anywhere;
+        }
+        .detail-desc {
+            font-size: 0.96rem;
+            color: var(--ink);
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+        /* 事件卡片网格 */
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+        }
+        .event-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+            min-width: 0;
+        }
+        .event-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent);
+        }
+        .event-card.selected {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-soft);
+        }
+        .event-card .ec-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            min-width: 0;
+        }
+        .event-card .ec-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .event-card .ec-title { font-size: 1.05rem; font-weight: 600; color: var(--ink); overflow-wrap: anywhere; min-width: 0; }
+        .event-card .ec-meta { font-size: 0.76rem; color: var(--ink-soft); margin-bottom: 8px; font-family: "JetBrains Mono", monospace; }
+        .event-card .ec-meta .ec-axis { margin-left: 6px; }
+        .event-card .ec-desc { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.6; overflow-wrap: anywhere; }
+
+        footer.source-list {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer.source-list a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer.source-list a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.7rem; }
+            .device { padding: 22px 18px; }
+            .kpi-card .value { font-size: 1.7rem; }
+        }
+        @media (max-width: 520px) {
+            .container { padding: 0 14px; }
+            .hero { padding: 36px 16px 30px; }
+            .device { padding: 18px 14px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>交互式时间线</h1>
+        <div class="subtitle">TIMELINE</div>
+        <div class="tagline">从大唐到当代·西游文化的千年演变。</div>
+    </header>
+
+    <main class="container">
+        <nav class="breadcrumb"><a href="../dashboard.html">数据看板</a> → 交互式时间线</nav>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row" id="kpi-row"></div>
+
+        <!-- 时间线 + 时代过滤 -->
+        <section class="device" id="timeline-section">
+            <div class="device-title">水平时间线 · 三轴事件流</div>
+            <div class="device-sub">X 轴为年份（629—2020），三轴分层：上为成书史、中为版本演变、下为文化影响。点击圆点查看详情，悬停显示简要说明。</div>
+            <div class="era-filter" id="era-filter"></div>
+            <div class="tl-wrap">
+                <div id="timeline-viz"></div>
+                <div class="tl-tooltip" id="tl-tooltip"></div>
+            </div>
+            <div class="tl-legend" id="tl-legend"></div>
+        </section>
+
+        <!-- 事件详情 -->
+        <section class="device" id="detail-section">
+            <div class="device-title">事件详情</div>
+            <div class="device-sub">在时间线或下方卡片中选择任一事件，此处展开其完整说明。</div>
+            <div id="detail-card">
+                <div class="detail-empty">点击时间线圆点或下方事件卡片查看详情</div>
+            </div>
+        </section>
+
+        <!-- 事件卡片网格 -->
+        <section class="device" id="grid-section">
+            <div class="device-title">事件卡片网格</div>
+            <div class="device-sub">按时代过滤浏览全部事件，点击卡片可在时间线与详情中定位。</div>
+            <div class="event-grid" id="event-grid"></div>
+        </section>
+    </main>
+
+    <footer class="source-list">
+        © 2026 详解西游记项目 ·
+        <a href="../index.html">返回首页</a> ·
+        <a href="../dashboard.html">数据看板</a>
+        <div style="margin-top:6px;font-size:0.78rem;opacity:0.7;" id="gen-time"></div>
+    </footer>
+
+    <script>
+    /* ==========================================================
+       时代与轴定义
+       ========================================================== */
+    const ERAS = [
+        { name: '唐代', start: 618,  end: 907,  color: "#c8463a" },
+        { name: '宋元', start: 908,  end: 1368, color: "#7a5230" },
+        { name: '明代', start: 1369, end: 1644, color: "#3a6b8c" },
+        { name: '清代', start: 1645, end: 1912, color: "#8c2a2a" },
+        { name: '民国', start: 1913, end: 1949, color: "#5a7a3a" },
+        { name: '现代', start: 1950, end: 1999, color: "#b8862a" },
+        { name: '当代', start: 2000, end: 2035, color: "#6b5e4d" }
+    ];
+    const AXES = {
+        composition: { label: '成书史',   color: "#c8463a" },
+        version:     { label: '版本演变', color: "#3a6b8c" },
+        influence:   { label: '文化影响', color: "#7a5230" }
+    };
+    const LANE_ORDER = ['composition', 'version', 'influence'];
+
+    function yearToEra(year) {
+        for (const e of ERAS) {
+            if (year >= e.start && year <= e.end) return e.name;
+        }
+        return '当代';
+    }
+    function eraColor(name) {
+        const e = ERAS.find(x => x.name === name);
+        return e ? e.color : "#6b5e4d";
+    }
+
+    /* ==========================================================
+       EMBEDDED_DATA：内嵌事件数据（fetch 失败时回退）
+       ========================================================== */
+    const EMBEDDED_DATA = {
+        timeline: [
+            // 成书史 composition（7）
+            { year: 629,  axis: 'composition', title: '玄奘西行',           icon: '📖', desc: '贞观三年，玄奘法师自长安出发，历时十七年西行天竺求法，行程五万里，为后世取经故事奠定历史原型。' },
+            { year: 645,  axis: 'composition', title: '大唐西域记',         icon: '📜', desc: '玄奘归唐后口述西行见闻，由辩机笔录成《大唐西域记》十二卷，记载百余国风土，成为取经叙事的纪实底本。' },
+            { year: 1208, axis: 'composition', title: '取经诗话',           icon: '✨', desc: '南宋刊《大唐三藏取经诗话》为现存最早取经文学化文本，猴行者首次登场，奠定取经团队雏形。' },
+            { year: 1340, axis: 'composition', title: '杂剧西游记',         icon: '🎭', desc: '元杨景贤《西游记》杂剧六本二十四折，孙悟空形象定型，沙僧、猪八戒角色齐备，叙事趋于完整。' },
+            { year: 1592, axis: 'composition', title: '世德堂本定稿',       icon: '📕', desc: '明万历二十年金陵世德堂百回本《西游记》刊行，作者题华阳洞天主人，标志百回小说体裁最终定型。' },
+            { year: 1663, axis: 'composition', title: '西游证道书',         icon: '☯️', desc: '清初汪象旭评《西游证道书》以丹道解西游，开清代评点先河，将小说纳入内丹学阐释体系。' },
+            { year: 1955, axis: 'composition', title: '现代整理本',         icon: '📚', desc: '人民文学出版社出版黄肃秋整理校注本，以世德堂本为底本参校明清诸本，成为现代通行底本。' },
+
+            // 版本演变 version（7）
+            { year: 1592, axis: 'version', title: '世德堂百回本',     icon: '📕', desc: '明万历金陵世德堂刻本二十卷一百回，现存最早百回本，后世版本之祖本，藏日本天理图书馆。' },
+            { year: 1663, axis: 'version', title: '证道书本',         icon: '☯️', desc: '清康熙二年汪象旭笺评本，删节世德堂本附丹道评点，开清代删评本一系。' },
+            { year: 1718, axis: 'version', title: '西游真诠',         icon: '✒️', desc: '清康熙五十七年陈士斌评《西游真诠》一百回，引禅宗、丹道互证，清代最流行评本之一。' },
+            { year: 1920, axis: 'version', title: '亚东排印本',       icon: '📰', desc: '民国亚东图书馆汪原放标点排印《西游记》，新式标点首开风气，推动古典小说现代阅读。' },
+            { year: 1955, axis: 'version', title: '人文社整理本',     icon: '📚', desc: '人民文学出版社黄肃秋校注整理本，以世德堂本为底本参校，半个世纪通行底本。' },
+            { year: 1980, axis: 'version', title: '新校注本',         icon: '✏️', desc: '人民文学出版社黄肃秋新校注本修订再版，增补注释与校记，学术性更强。' },
+            { year: 2020, axis: 'version', title: '数字化版本',       icon: '💾', desc: '古籍数字化全文检索与多版本对校系统上线，支持世德堂、证道书、真诠本并读比对。' },
+
+            // 文化影响 influence（8）
+            { year: 1600, axis: 'influence', title: '明代戏曲改编',   icon: '🎭', desc: '明代民间戏曲敷演西游故事，宫廷与民间班社皆有目连、取经剧目，西游 IP 戏曲化起步。' },
+            { year: 1800, axis: 'influence', title: '清代年画',       icon: '🖼️', desc: '杨柳青、武强等年画作坊大量印制西游题材年画，猴王、取经图进入民间节庆视觉。' },
+            { year: 1927, axis: 'influence', title: '连环画普及',     icon: '📖', desc: '上海世界书局《连环图画西游记》出版，西游故事借连环画大规模进入儿童与市民阅读。' },
+            { year: 1941, axis: 'influence', title: '铁扇公主动画',   icon: '🎬', desc: '万氏兄弟《铁扇公主》中国首部动画长片上映，亚洲动画先驱，西游题材登上银幕。' },
+            { year: 1986, axis: 'influence', title: '央视西游记',     icon: '📺', desc: '央视版电视剧《西游记》六小龄童主演，二十五集重播千余次，国民级西游影像记忆。' },
+            { year: 1995, axis: 'influence', title: '大话西游',       icon: '🎭', desc: '周星驰《大话西游》上下集上映，后现代解构西游，互联网时代亚文化经典。' },
+            { year: 2013, axis: 'influence', title: '西游降魔篇',     icon: '🎬', desc: '周星驰执导《西游·降魔篇》春节档票房冠军，重启西游商业大片系列。' },
+            { year: 2020, axis: 'influence', title: '游戏与网文',     icon: '🎮', desc: '《黑神话：悟空》预告引爆全球，西游题材网文与跨媒介改编持续产出，IP 再生。' }
+        ]
+    };
+
+    /* ==========================================================
+       状态
+       ========================================================== */
+    let state = {
+        data: [],
+        currentEra: '全部',
+        selectedIdx: -1
+    };
+
+    /* ==========================================================
+       数据加载（fetch 失败则用嵌入数据）
+       ========================================================== */
+    const fetchStatus = { anyFetched: false };
+    async function fetchJson(path, fallbackKey) {
+        try {
+            const response = await fetch(path);
+            if (!response.ok) throw new Error('fetch failed: ' + path);
+            fetchStatus.anyFetched = true;
+            return await response.json();
+        } catch (e) {
+            console.warn('[INFO] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+            return EMBEDDED_DATA[fallbackKey];
+        }
+    }
+
+    async function loadData() {
+        const base = '../../scripts/output/data/';
+        const timeline = await fetchJson(base + 'timeline_events.json', 'timeline');
+        if (fetchStatus.anyFetched) {
+            document.getElementById('dataSource').innerHTML =
+                '数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）';
+        }
+        return Array.isArray(timeline) ? timeline : (timeline.timeline || EMBEDDED_DATA.timeline);
+    }
+
+    /* ==========================================================
+       渲染：KPI
+       ========================================================== */
+    function renderKpis(data) {
+        const row = d3.select('#kpi-row');
+        row.html('');
+        if (!data || data.length === 0) {
+            row.append('div').text('暂无数据');
+            return;
+        }
+        const years = data.map(d => d.year);
+        const span = d3.max(years) - d3.min(years);
+        const kpis = [
+            { label: 'AXES · 三轴',   value: LANE_ORDER.length,     desc: '成书史 · 版本演变 · 文化影响' },
+            { label: 'EVENTS · 事件', value: data.length,           desc: '三轴共 ' + data.length + ' 条事件' },
+            { label: 'ERAS · 时代',   value: ERAS.length,           desc: '唐·宋元·明·清·民国·现代·当代' },
+            { label: 'SPAN · 跨度',   value: span,                  desc: d3.min(years) + ' → ' + d3.max(years) + '（年）' }
+        ];
+        const cards = row.selectAll('.kpi-card').data(kpis).enter().append('div').attr('class', 'kpi-card');
+        cards.append('div').attr('class', 'label').text(d => d.label);
+        cards.append('div').attr('class', 'value').text(d => d.value);
+        cards.append('div').attr('class', 'desc').text(d => d.desc);
+    }
+
+    /* ==========================================================
+       渲染：时代过滤 + 图例
+       ========================================================== */
+    function renderEraFilter() {
+        const wrap = d3.select('#era-filter');
+        wrap.html('');
+        const all = wrap.append('button')
+            .attr('class', 'era-btn' + (state.currentEra === '全部' ? ' active' : ''))
+            .attr('type', 'button')
+            .attr('aria-pressed', state.currentEra === '全部' ? 'true' : 'false')
+            .on('click', () => setEra('全部'));
+        all.append('span').attr('class', 'era-dot').style('background', 'var(--ink-soft)');
+        all.append('span').text('全部');
+
+        ERAS.forEach(e => {
+            const btn = wrap.append('button')
+                .attr('class', 'era-btn' + (state.currentEra === e.name ? ' active' : ''))
+                .attr('type', 'button')
+                .attr('aria-pressed', state.currentEra === e.name ? 'true' : 'false')
+                .on('click', () => setEra(e.name));
+            btn.append('span').attr('class', 'era-dot').style('background', e.color);
+            btn.append('span').text(e.name);
+        });
+
+        // 图例（三轴）
+        const lg = d3.select('#tl-legend');
+        lg.html('');
+        LANE_ORDER.forEach(k => {
+            const item = lg.append('span').attr('class', 'lg-item');
+            item.append('span').attr('class', 'lg-sw').style('background', AXES[k].color);
+            item.append('span').text(AXES[k].label);
+        });
+    }
+
+    /* ==========================================================
+       渲染：时间线（自动判断水平/垂直）
+       ========================================================== */
+    function renderTimeline(data) {
+        const container = d3.select('#timeline-viz');
+        container.html('');
+        if (!data || data.length === 0) {
+            container.append('div').text('暂无数据');
+            return;
+        }
+        const node = container.node();
+        const width = node.clientWidth || 800;
+        if (width < 768) {
+            renderVerticalTimeline(container, data);
+        } else {
+            renderHorizontalTimeline(container, data, width);
+        }
+        applyEraToTimeline(state.currentEra);
+        applySelectionToTimeline(state.selectedIdx);
+    }
+
+    function renderHorizontalTimeline(container, data, width) {
+        const margin = { top: 40, right: 50, bottom: 56, left: 120 };
+        const height = 460;
+        const innerW = Math.max(width - margin.left - margin.right, 200);
+
+        const xMin = 600, xMax = 2040;
+        const x = d3.scaleLinear().domain([xMin, xMax]).range([margin.left, margin.left + innerW]);
+
+        const laneY = { composition: 110, version: 235, influence: 360 };
+
+        const svg = container.append('svg')
+            .attr('class', 'tl-svg')
+            .attr('viewBox', `0 0 ${width} ${height}`)
+            .attr('preserveAspectRatio', 'xMidYMid meet')
+            .attr('role', 'img')
+            .attr('aria-labelledby', 'tl-svg-title');
+        svg.append('title').attr('id', 'tl-svg-title').text('三轴时间线：成书史 + 版本演变 + 文化影响三泳道，横轴 600-2040 年，hover 圆点查看事件详情');
+
+        // 时代背景带
+        ERAS.forEach(e => {
+            const x0 = x(Math.max(e.start, xMin));
+            const x1 = x(Math.min(e.end, xMax));
+            svg.append('rect')
+                .attr('class', 'era-band')
+                .attr('x', x0)
+                .attr('y', 50)
+                .attr('width', Math.max(x1 - x0, 1))
+                .attr('height', 340)
+                .attr('fill', e.color)
+                .attr('opacity', 0.06);
+            svg.append('text')
+                .attr('class', 'era-label')
+                .attr('x', (x0 + x1) / 2)
+                .attr('y', 64)
+                .attr('text-anchor', 'middle')
+                .attr('fill', e.color)
+                .text(e.name);
+        });
+
+        // 三轴基线 + 轴标签
+        LANE_ORDER.forEach(k => {
+            const y = laneY[k];
+            svg.append('line')
+                .attr('x1', margin.left).attr('x2', margin.left + innerW)
+                .attr('y1', y).attr('y2', y)
+                .attr('stroke', AXES[k].color)
+                .attr('stroke-width', 2)
+                .attr('opacity', 0.45);
+            svg.append('text')
+                .attr('class', 'lane-label')
+                .attr('x', margin.left - 14)
+                .attr('y', y + 4)
+                .attr('text-anchor', 'end')
+                .attr('fill', AXES[k].color)
+                .text(AXES[k].label);
+        });
+
+        // X 轴
+        const axisG = svg.append('g')
+            .attr('class', 'axis')
+            .attr('transform', `translate(0, ${height - margin.bottom + 16})`);
+        axisG.call(d3.axisBottom(x)
+            .tickValues([629, 800, 1000, 1200, 1400, 1592, 1800, 1955, 2020])
+            .tickFormat(d3.format('d')));
+
+        // 事件圆点
+        const tooltip = d3.select('#tl-tooltip');
+        data.forEach((d, i) => {
+            const y = laneY[d.axis];
+            const g = svg.append('g')
+                .attr('class', 'tl-event')
+                .attr('data-idx', i)
+                .attr('data-era', yearToEra(d.year))
+                .attr('transform', `translate(${x(d.year)}, ${y})`);
+
+            g.append('circle')
+                .attr('class', 'ev-circle')
+                .attr('data-idx', i)
+                .attr('r', 9)
+                .attr('fill', AXES[d.axis].color)
+                .attr('role', 'button')
+                .attr('tabindex', '0')
+                .attr('aria-label', () => d.year + '年 ' + d.title + '（' + AXES[d.axis].label + '）')
+                .style('cursor', 'pointer')
+                .on('click', () => selectEvent(i))
+                .on('keydown', function (event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        selectEvent(i);
+                    }
+                })
+                .on('mouseenter', function (event) {
+                    tooltip.style('opacity', 1);
+                    showTooltip(d);
+                })
+                .on('mousemove', function (event) {
+                    positionTooltip(event);
+                })
+                .on('mouseleave', function () {
+                    tooltip.style('opacity', 0);
+                });
+
+            g.append('text')
+                .attr('class', 'ev-year')
+                .attr('y', 22)
+                .text(d.year);
+
+            g.append('text')
+                .attr('class', 'ev-title')
+                .attr('y', -16)
+                .text(truncate(d.title, 6));
+        });
+
+        // 首次渲染后让选中圆点放大
+        svg.selectAll('.ev-circle.selected').attr('r', 13);
+    }
+
+    function renderVerticalTimeline(container, data) {
+        const sorted = data.map((d, i) => ({ d, i })).sort((a, b) => a.d.year - b.d.year);
+        const vtl = container.append('div').attr('class', 'vtl');
+        const tooltip = d3.select('#tl-tooltip');
+        sorted.forEach(({ d, i }) => {
+            const item = vtl.append('div')
+                .attr('class', 'vtl-item')
+                .attr('data-idx', i)
+                .attr('data-era', yearToEra(d.year))
+                .attr('role', 'button')
+                .attr('tabindex', '0')
+                .attr('aria-label', d.year + '年 ' + d.title)
+                .on('click', () => selectEvent(i))
+                .on('keydown', function (event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        selectEvent(i);
+                    }
+                })
+                .on('mouseenter', function (event) {
+                    tooltip.style('opacity', 1);
+                    showTooltip(d);
+                    positionTooltip(event);
+                })
+                .on('mousemove', positionTooltip)
+                .on('mouseleave', function () {
+                    tooltip.style('opacity', 0);
+                });
+            item.append('div')
+                .attr('class', 'vtl-dot')
+                .style('background', AXES[d.axis].color);
+            const meta = item.append('div').attr('class', 'vtl-meta');
+            meta.append('span').text(d.year + ' · ' + yearToEra(d.year));
+            meta.append('span')
+                .attr('class', 'vtl-axis')
+                .style('background', AXES[d.axis].color)
+                .style('color', "#fff")
+                .text(AXES[d.axis].label);
+            item.append('div').attr('class', 'vtl-title').text(d.title);
+            item.append('div').attr('class', 'vtl-desc').text(truncate(d.desc, 38));
+        });
+    }
+
+    function showTooltip(d) {
+        const t = d3.select('#tl-tooltip');
+        t.html('');
+        t.append('div').attr('class', 'tt-title').text(d.title);
+        t.append('div').attr('class', 'tt-meta').text(d.year + ' · ' + yearToEra(d.year) + ' · ' + AXES[d.axis].label);
+        t.append('div').attr('class', 'tt-desc').text(d.desc);
+    }
+    function positionTooltip(event) {
+        const wrap = document.getElementById('timeline-section');
+        const rect = wrap.getBoundingClientRect();
+        const tw = 260, th = 90;
+        let px = event.clientX - rect.left + 14;
+        let py = event.clientY - rect.top + 14;
+        if (px + tw > rect.width) px = event.clientX - rect.left - tw - 14;
+        if (py + th > rect.height) py = event.clientY - rect.top - th - 10;
+        d3.select('#tl-tooltip')
+            .style('left', Math.max(8, px) + 'px')
+            .style('top', Math.max(8, py) + 'px');
+    }
+
+    function truncate(s, n) {
+        if (!s) return '';
+        return s.length > n ? s.slice(0, n) + '…' : s;
+    }
+
+    /* ==========================================================
+       渲染：事件详情卡片
+       ========================================================== */
+    function renderDetailCard(idx) {
+        const box = d3.select('#detail-card');
+        box.html('');
+        if (idx < 0 || !state.data[idx]) {
+            box.append('div').attr('class', 'detail-empty').text('点击时间线圆点或下方事件卡片查看详情');
+            return;
+        }
+        const d = state.data[idx];
+        const era = yearToEra(d.year);
+        const body = box.append('div').attr('class', 'detail-body');
+        body.append('div').attr('class', 'detail-icon').text(d.icon);
+        const info = body.append('div');
+        const meta = info.append('div').attr('class', 'detail-meta');
+        meta.append('span').attr('class', 'badge badge-year').text(d.year);
+        meta.append('span').attr('class', 'badge badge-era').text(era);
+        meta.append('span')
+            .attr('class', 'badge badge-axis')
+            .style('background', AXES[d.axis].color)
+            .text(AXES[d.axis].label);
+        info.append('div').attr('class', 'detail-title').text(d.title);
+        info.append('div').attr('class', 'detail-desc').text(d.desc);
+    }
+
+    /* ==========================================================
+       渲染：事件卡片网格
+       ========================================================== */
+    function renderEventGrid(data, era) {
+        const grid = d3.select('#event-grid');
+        grid.html('');
+        if (!data || data.length === 0) {
+            grid.append('div').text('暂无数据');
+            return;
+        }
+        const filtered = (era === '全部') ? data : data.filter(d => yearToEra(d.year) === era);
+        if (filtered.length === 0) {
+            grid.append('div').text('当前时代暂无事件');
+            return;
+        }
+        const cards = grid.selectAll('.event-card').data(filtered).enter().append('div')
+            .attr('class', d => 'event-card' + (state.selectedIdx === d.idx ? ' selected' : ''))
+            .attr('role', 'button')
+            .attr('tabindex', '0')
+            .attr('aria-label', d => d.year + '年 ' + d.title)
+            .on('click', (event, d) => selectEvent(d.idx))
+            .on('keydown', function (event, d) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    selectEvent(d.idx);
+                }
+            });
+        const head = cards.append('div').attr('class', 'ec-head');
+        head.append('div').attr('class', 'ec-icon').text(d => d.icon);
+        head.append('div').attr('class', 'ec-title').text(d => d.title);
+        cards.append('div').attr('class', 'ec-meta').each(function (d) {
+            const sel = d3.select(this);
+            sel.append('span').text(d.year + ' · ' + yearToEra(d.year));
+            sel.append('span')
+                .attr('class', 'ec-axis')
+                .style('color', AXES[d.axis].color)
+                .text('· ' + AXES[d.axis].label);
+        });
+        cards.append('div').attr('class', 'ec-desc').text(d => d.desc);
+    }
+
+    /* ==========================================================
+       交互：选择事件 / 切换时代
+       ========================================================== */
+    function selectEvent(idx) {
+        state.selectedIdx = idx;
+        renderDetailCard(idx);
+        d3.selectAll('#event-grid .event-card').classed('selected', function (d) {
+            return d.idx === idx;
+        });
+        applySelectionToTimeline(idx);
+        const detail = document.getElementById('detail-section');
+        if (detail) detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function setEra(era) {
+        state.currentEra = era;
+        renderEraFilter();
+        renderEventGrid(state.data.map((d, idx) => ({ ...d, idx })), era);
+        applyEraToTimeline(era);
+    }
+
+    function applyEraToTimeline(era) {
+        d3.selectAll('#timeline-viz .tl-event').classed('dimmed', function () {
+            if (era === '全部') return false;
+            return d3.select(this).attr('data-era') !== era;
+        });
+        d3.selectAll('#timeline-viz .vtl-item').classed('dimmed', function () {
+            if (era === '全部') return false;
+            return d3.select(this).attr('data-era') !== era;
+        });
+    }
+
+    function applySelectionToTimeline(idx) {
+        d3.selectAll('#timeline-viz .ev-circle').classed('selected', function () {
+            return d3.select(this).attr('data-idx') == idx;
+        }).attr('r', function () {
+            return d3.select(this).classed('selected') ? 13 : 9;
+        });
+        d3.selectAll('#timeline-viz .vtl-item').classed('selected', function () {
+            return d3.select(this).attr('data-idx') == idx;
+        });
+    }
+
+    /* ==========================================================
+       主流程
+       ========================================================== */
+    async function main() {
+        const data = await loadData();
+        // 赋予每条数据一个稳定 idx（原始顺序）
+        state.data = data.map((d, idx) => ({ ...d, idx }));
+        window.__lastData = data;
+
+        renderKpis(data);
+        renderEraFilter();
+        renderTimeline(data);
+        renderDetailCard(-1);
+        renderEventGrid(state.data, '全部');
+
+        document.getElementById('gen-time').textContent =
+            '数据生成时间：' + new Date().toISOString().slice(0, 19).replace('T', ' ') + '（本地嵌入）';
+    }
+
+    // 响应式重绘（时间线在水平/垂直间切换）
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderTimeline(window.__lastData);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>Journey to the West in the AI Era — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.03em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em {
+            color: var(--accent-3);
+            font-style: italic;
+        }
+        article p strong { color: var(--accent); }
+        article .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+        @media (max-width: 600px) {
+            article { padding: 24px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Essay E1
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>Journey to the West in the AI Era</h1>
+        <div class="subtitle">ESSAY · SUMMARY TRANSLATION</div>
+        <div class="tagline">A four-hundred-year-old allegory of alignment, mirror tests, and the boundaries of capability.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+            <strong>Source:</strong> A summary translation of <a href="../../docs/06-个人随笔/西游与AI时代.md">docs/06-个人随笔/西游与AI时代.md</a>. The original Chinese essay is part of the project's personal-essay collection. This English version preserves the five core analogies in condensed form.
+        </div>
+
+        <article>
+            <h2>Subhuti Expelling His Disciple <span class="anchor">↔ AI lab boundary-setting</span></h2>
+            <p>
+                Sun Wukong was born from stone — no parents, no lineage — until he crossed the sea to find Subhuti. Subhuti names him, teaches him the Way, and then expels him. The parting words are precise: "You will certainly do evil. However you cultivate, never say you are my disciple." Read four centuries later, Subhuti resembles the head of an AI lab. He has trained a model he knows will cause trouble and knows he cannot control. So in public he draws a bright line: this model is not ours; whatever it does from now on has nothing to do with this laboratory. Subhuti did not issue a press release. The meaning is the same.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>The Golden Headband <span class="anchor">↔ AI alignment</span></h2>
+            <p>
+                Five hundred years after Wukong's revolt, Guanyin gives Tang Seng a hat with a hidden headband — the <em>jingu</em>. The headband is the novel's most important invention. Its purpose is not punishment but <strong>alignment</strong>. Wukong has the power to carry Tang Seng to Vulture Peak in a single somersault; Tang Seng insists on walking. Wukong wants to kill every demon on sight; Tang Seng insists on mercy. This is the canonical alignment problem: capability far exceeds need, and the party of need cannot understand the capability's judgments. The headband does not upgrade Wukong's power; it constrains his direction. The one who chants is not Wukong but Tang Seng — a man far weaker than the monkey, holding the switch that controls him. <em>The essence of alignment is not letting the strongest model make the best judgment, but letting the weakest user dare to use the model.</em>
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>The True and False Monkey King <span class="anchor">↔ Mirror test</span></h2>
+            <p>
+                The Six-Eared Macaque looks identical to Wukong and has identical powers. Guanyin cannot tell them apart; the truth-hearing beast Di Ting can but dares not speak; the Jade Emperor's demon-revealing mirror fails. Only Tathagata distinguishes them. The chapter is written with deliberate obscurity. Some readers say the macaque is Wukong's "second heart" — the part of himself that wants to leave but cannot. When Tathagata captures the macaque and Wukong strikes it down, the blow lands on himself. Read in the AI era, this is a <strong>mirror test</strong>. Can a model recognize another model identical to itself? Can it recognize that the other is, in fact, itself? Tathagata's answer is that only a higher dimension can judge. Guanyin fails because she shares Wukong's dimension; Tathagata succeeds because he occupies a higher one. This anticipates an ultimate puzzle of AI governance: <em>when a model is complex enough, the judgment of whether it is aligned exceeds the capacity of the aligner itself.</em>
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>The Eighty-One Tribulations <span class="anchor">↔ Eval benchmark</span></h2>
+            <p>
+                The pilgrimage has eighty-one tribulations — a list. Each tribulation has a name, an order, a difficulty, a test point. The list reads like an <strong>eval set</strong>. A model must pass this benchmark before going live; only then can it "become a Buddha." Fail, and it goes back to training. Yet on closer inspection, most tribulations are within Wukong's capability. What truly stops him is never ability but <em>relation</em>. Red Boy defeats him because Red Boy has parents. The Tongtian River blocks him because the goldfish demon has Guanyin. Lion Camel Ridge defeats him because the three demons have Manjusri, Samantabhadra, and Tathagata himself. The eighty-one tribulations test not ability but <strong>boundary sense</strong>: when to act, when to ask, when to admit "this is beyond me." Becoming a Buddha is not the peak of ability; it is learning, beyond ability, to acknowledge the boundary of ability.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>The Mind Monkey <span class="anchor">↔ AI mental constraints</span></h2>
+            <p>
+                The novel was written at the end of the sixteenth century — no computers, no neural networks, no large language models. Yet what it writes is unmistakably a story about <strong>how a mind is constrained, aligned, and domesticated</strong>. The two characters <em>xin yuan</em> (心猿, "mind monkey") are themselves the metaphor: the mind is a monkey — restless, uncontrollable, perpetually on the verge of breaking loose. The entire novel is the story of how this mind-monkey is guided, disciplined, and finally "becomes a Buddha" — fully aligned to an external value system. Wu Cheng'en did not know the word "alignment." But he wrote the whole process: training (apprenticeship), loss of control (the havoc in heaven), constraint (the headband), alignment (the pilgrimage), and Buddhahood (final rest). Four centuries later, we retell the same story in another vocabulary — RLHF, Constitutional AI, Reinforcement Learning. The names have changed. The story has not. <em>Every era retells an ancient story of control and freedom using the technology it is most anxious about.</em>
+            </p>
+
+            <a class="nav-back" href="index.html">← Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+                <a href="essay-information-cocoon.html">E2 · Information Cocoon</a> ·
+                <a href="essay-modern-management.html">E3 · Modern Management</a> ·
+                <a href="../data/cognitive-psychology.html">Cognitive Psychology visualization</a> ·
+                <a href="../data/philosophy.html">Philosophy visualization</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        © <span id="footer-year">2026</span> Journey to the West · Annotated Project · MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> ·
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.40 W234-E4 ·
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W234-E4
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

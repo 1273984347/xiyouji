@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>Journey to the West · Annotated — Data Dashboard</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 1200px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(60, 40, 20, 0.12), 0 8px 24px rgba(60, 40, 20, 0.1);
+            border-color: var(--accent-soft);
+        }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .value {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .kpi-card .detail {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            border-top: 1px dashed var(--line);
+            padding-top: 6px;
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        .footer-index {
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+        }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> · <a href="../dashboard.html" lang="zh-CN">中文 Dashboard</a>
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../dashboard.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>Journey to the West · Data Dashboard</h1>
+        <div class="subtitle">DATA DASHBOARD — ENGLISH SUMMARY</div>
+        <div class="tagline">Five core KPIs across the hundred-chapter pilgrimage.</div>
+    </header>
+
+    <main class="container">
+        <div class="notice">
+            This is a simplified English summary of the project's core metrics. The full interactive dashboard (with D3.js charts, cross-tables, and 45+ topic cards) lives at <a href="../dashboard.html">../dashboard.html</a>.
+        </div>
+
+        <div class="kpi-row">
+            <a class="kpi-card" href="../data/chapter-stats.html">
+                <div class="label">A · CHAPTERS</div>
+                <div class="value">100</div>
+                <div class="desc">One hundred chapters, each annotated with plot, motifs, foreshadowing, and famous lines.</div>
+                <div class="detail">Per-chapter word counts and dialogue ratios →</div>
+            </a>
+            <a class="kpi-card" href="../data/character-appearance.html">
+                <div class="label">B · CHARACTERS</div>
+                <div class="value">60</div>
+                <div class="desc">Character analyses covering the pilgrim team, heaven, the Buddhist pantheon, and the demon hierarchy.</div>
+                <div class="detail">8 major figures + extended genealogies →</div>
+            </a>
+            <a class="kpi-card" href="../data/philosophy.html">
+                <div class="label">C · THEMES</div>
+                <div class="value">91</div>
+                <div class="desc">Theme essays across the six main sections plus three applied layers (use / cognition / spirit).</div>
+                <div class="detail">Cross-disciplinary coverage V–AH →</div>
+            </a>
+            <a class="kpi-card" href="../dashboard.html">
+                <div class="label">D · VISUALIZATIONS</div>
+                <div class="value">68</div>
+                <div class="desc">D3.js data-visualization pages spanning chapters, characters, themes, and cross-disciplinary lenses.</div>
+                <div class="detail">45 topics, 37 category groups A–AH →</div>
+            </a>
+            <a class="kpi-card" href="academic-papers.html">
+                <div class="label">E · ACADEMIC PAPERS</div>
+                <div class="value">55</div>
+                <div class="desc">Scholarly bibliography: editions, classical commentary, modern monographs, overseas translations, recent research.</div>
+                <div class="detail">10 representative entries in English index →</div>
+            </a>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">The Pilgrimage in Numbers</h2>
+            <div class="section-sub">A few structural facts that frame the hundred-chapter journey.</div>
+            <div class="insight-box">
+                <h4>Key structural insights</h4>
+                <ul>
+                    <li><strong>81 tribulations</strong> across 14 years of travel, from Chang'an to Vulture Peak — a benchmark list of graded trials.</li>
+                    <li><strong>53 named places</strong> across 26 regions, with caves (13) the most common site type — the demon lair as the novel's signature space.</li>
+                    <li><strong>49 of 81 tribulations</strong> end with the demon "taken away" by a heavenly sponsor; only 25 end with the demon killed — backing decides fate.</li>
+                    <li><strong>39 of 81 tribulations</strong> require Wukong to "call for backup" — the pilgrimage is a collaboration, not a solo performance.</li>
+                    <li><strong>Mount-related demons: 16 of 16</strong> all taken away alive, 0 killed — the most striking "backing effect" in the whole novel.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Cross-Disciplinary Coverage</h2>
+            <div class="section-sub">The project extends the novel across 37 category groups (A–AH), from linguistics and jurisprudence to ecology and cognitive psychology.</div>
+            <div class="kpi-row">
+                <a class="kpi-card" href="../data/linguistics.html">
+                    <div class="label">AH · LINGUISTICS</div>
+                    <div class="value">8·5·8</div>
+                    <div class="desc">Spells · dialogue · identity markers</div>
+                    <div class="detail">A map of three-teachings-one-language →</div>
+                </a>
+                <a class="kpi-card" href="../data/jurisprudence.html">
+                    <div class="label">AF · JURISPRUDENCE</div>
+                    <div class="value">10·8·8</div>
+                    <div class="desc">Sentencing · property rights · data</div>
+                    <div class="detail">Dapeng eagle disparity 10/10 →</div>
+                </a>
+                <a class="kpi-card" href="../data/ecology.html">
+                    <div class="label">AE · ECOLOGY</div>
+                    <div class="value">7·10·6</div>
+                    <div class="desc">Invasion · pulse · succession</div>
+                    <div class="detail">Mount Huaguo macaque population −97.2% →</div>
+                </a>
+                <a class="kpi-card" href="../data/cognitive-psychology.html">
+                    <div class="label">AD · COGNITION</div>
+                    <div class="value">4·5·6</div>
+                    <div class="desc">Stages · people · cases</div>
+                    <div class="detail">The headband = external executive control →</div>
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">English Essays</h2>
+            <div class="section-sub">Three long-form essays, each mapping the novel onto a contemporary concern.</div>
+            <div class="kpi-row">
+                <a class="kpi-card" href="essay-ai-era.html">
+                    <div class="label">E1 · ESSAY</div>
+                    <div class="value">AI Era</div>
+                    <div class="desc">The novel as a four-hundred-year-old allegory of AI alignment.</div>
+                    <div class="detail">Subhuti · headband · mirror test · 81 tribulations →</div>
+                </a>
+                <a class="kpi-card" href="essay-information-cocoon.html">
+                    <div class="label">E2 · ESSAY</div>
+                    <div class="value">Cocoon</div>
+                    <div class="desc">Tathagata's palm as the first information cocoon; Ming-era and algorithmic framing.</div>
+                    <div class="detail">Asymmetric information · confirmation bias →</div>
+                </a>
+                <a class="kpi-card" href="essay-modern-management.html">
+                    <div class="label">E3 · ESSAY</div>
+                    <div class="value">Management</div>
+                    <div class="desc">The pilgrimage team as a project squad; demons and organizational politics.</div>
+                    <div class="detail">Middle manager · senior IC · CEO →</div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © <span id="footer-year">2026</span> Journey to the West · Annotated Project · MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> ·
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.40 W234-E4 ·
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W234-E4
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

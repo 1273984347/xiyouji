@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世纪对话 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染世纪对话。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --line: #d9cdb8;
+            --rebel: #8c2a2a;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 56px 24px 44px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.3rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.28em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 14px;
+            font-size: 0.86rem;
+            color: rgba(245, 233, 212, 0.68);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 8px; color: var(--ink-soft); opacity: 0.6; }
+
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: #f5e9d4;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .device {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 32px 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 28px;
+            scroll-margin-top: 20px;
+        }
+        .device-title {
+            font-size: 1.45rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+
+        /* 三方会谈舞台 */
+        .triangle-stage { position: relative; height: 480px; background: linear-gradient(160deg, #1a1410, #3a2820);
+                          border-radius: 10px; padding: 30px; overflow: hidden; }
+        .speech-bubble { position: absolute; background: var(--paper); border: 2px solid var(--accent);
+                         border-radius: 12px; padding: 16px; max-width: 280px; box-shadow: var(--shadow);
+                         opacity: 0; animation: fadeInUp 0.8s ease forwards; }
+        .speech-bubble:nth-child(1) { animation-delay: 0.2s; }
+        .speech-bubble:nth-child(2) { animation-delay: 1.2s; }
+        .speech-bubble:nth-child(3) { animation-delay: 2.2s; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .speech-bubble .speaker { font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+        .speech-bubble .position { font-size: 0.75rem; color: var(--ink-soft); margin-bottom: 8px; }
+        .speech-bubble .argument { font-size: 0.88rem; line-height: 1.6; }
+        .speech-bubble .quote { font-size: 0.82rem; color: var(--accent-3); font-style: italic; margin-top: 8px; }
+
+        /* 角色圆桌 */
+        .roundtable { position: relative; height: 500px; background: var(--paper); border: 1px solid var(--line);
+                      border-radius: 10px; padding: 30px; }
+        .bajie-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                        width: 120px; height: 120px; border-radius: 50%; background: var(--accent-soft);
+                        display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .roundtable-view { position: absolute; width: 180px; background: #fff8ec; border: 1px solid var(--line);
+                           border-radius: 8px; padding: 12px; transition: transform 0.2s; }
+        .roundtable-view:hover { transform: scale(1.05); border-color: var(--accent); }
+        .roundtable-view .speaker { font-weight: 600; color: var(--accent); font-size: 0.9rem; }
+        .roundtable-view .view { font-size: 0.82rem; color: var(--ink); margin-top: 4px; }
+
+        @media (max-width: 768px) {
+            .triangle-stage { height: auto; min-height: 600px; }
+            .speech-bubble { position: relative; top: auto !important; left: auto !important; right: auto !important;
+                             max-width: 100%; margin-bottom: 16px; }
+            .roundtable { height: auto; min-height: 700px; }
+            .bajie-center { position: relative; top: auto; left: auto; transform: none; margin: 0 auto 20px; }
+            .roundtable-view { position: relative; left: auto !important; top: auto !important; margin: 12px auto; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+<header class="hero">
+    <h1>世纪对话</h1>
+    <div class="subtitle">CENTURY DIALOGUE</div>
+    <div class="tagline">让五百年批评家跨越时空·当面辩论。</div>
+</header>
+
+<main class="container">
+    <nav class="breadcrumb"><a href="../dashboard.html">数据看板</a> → 世纪对话</nav>
+
+    <div class="notice" id="dataSource">
+        数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+    </div>
+
+    <section class="device">
+        <h2 class="device-title">三方主旨会谈</h2>
+        <div id="triangle-stage" class="triangle-stage"></div>
+    </section>
+
+    <section class="device">
+        <h2 class="device-title">角色圆桌讨论</h2>
+        <div id="roundtable" class="roundtable"></div>
+    </section>
+</main>
+
+<footer style="text-align:center;padding:24px;color:var(--ink-soft);font-size:0.85rem;border-top:1px solid var(--line);margin-top:40px;">
+    详解西游记 · v0.8 世纪对话
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/06-个人随笔/现代视角解读.md">现代视角解读</a></div>
+</footer>
+
+<script>
+const EMBEDDED_DATA = {
+    triangle_dialogue: [
+        { speaker: "李卓吾", position: "释厄密码", argument: "《西游记》表面写取经降妖，实则写心性修行。「释厄」二字是全书密码——解脱苦难即是修心。九九八十一难，每一难都是心魔的外化。",
+          quote: "读《西游记》者，不知作者宗旨，定作戏论。", era: "明代" },
+        { speaker: "胡适", position: "滑稽神话", argument: "《西游记》至多不过是一部很有趣味的滑稽小说，并没有什么微妙的意思。不必过度解读，好玩本身就是价值。",
+          quote: "至多不过是一部很有趣味的滑稽小说……并没有什么微妙的意思", era: "民国" },
+        { speaker: "毛泽东", position: "被压迫者反抗战歌", argument: "孙悟空大闹天宫是被压迫者反抗统治阶级的战歌。唐僧百折不回、悟空反权威、八戒艰苦奋斗——取经团队就是革命队伍的缩影。",
+          quote: "唐僧百折不回·悟空反权威·八戒艰苦奋斗·白龙马任劳任怨", era: "现代" }
+    ],
+    roundtable_topics: [
+        { topic: "如何评价猪八戒",
+          participants: ["鲁迅", "林语堂", "毛泽东"],
+          views: [
+              { speaker: "鲁迅", view: "人情味——八戒身上的贪吃好色正是神魔皆有人情的最好注脚" },
+              { speaker: "林语堂", view: "人欲原型——八戒是荣格心理学中的阴影原型，真实打工人的缩影" },
+              { speaker: "毛泽东", view: "艰苦奋斗务实——八戒虽有缺点但始终走完取经路，是务实打工人的典范" }
+          ] }
+    ]
+};
+
+// triangleData 参数：fetch 成功时传 data.triangle，失败时传 EMBEDDED_DATA.triangle_dialogue
+function renderTriangle(triangleData) {
+    const stage = d3.select("#triangle-stage");
+    stage.selectAll("*").remove();
+    if (!triangleData || triangleData.length === 0) {
+        stage.append("div").text("暂无三方会谈数据")
+             .style("color", "var(--ink-soft)").style("text-align", "center")
+             .style("padding", "60px 20px");
+        return;
+    }
+    // positions 顺序必须与 triangle_dialogue 数组顺序一致：[李卓吾, 胡适, 毛泽东]
+    const positions = [
+        { top: "10%", left: "5%", right: null },   // 李卓吾 左上
+        { top: "10%", left: null, right: "5%" },   // 胡适 右上
+        { top: "55%", left: "35%", right: null }    // 毛泽东 中下
+    ];
+    const bubbles = stage.selectAll(".speech-bubble").data(triangleData).enter()
+        .append("div").attr("class", "speech-bubble")
+        .style("top", (d, i) => positions[i].top)
+        .each(function(d, i) {
+            // D3 v7 selection.style(name, value) 要求 name 是 string，不能用函数
+            const pos = positions[i];
+            if (pos.left !== null) d3.select(this).style("left", pos.left);
+            if (pos.right !== null) d3.select(this).style("right", pos.right);
+        });
+    bubbles.append("div").attr("class", "speaker").text(d => d.speaker);
+    bubbles.append("div").attr("class", "position").text(d => d.position);
+    bubbles.append("div").attr("class", "argument").text(d => d.argument);
+    bubbles.append("div").attr("class", "quote").text(d => "「" + d.quote + "」");
+}
+
+// roundtableData 参数：fetch 成功时传 data.roundtable，失败时传 EMBEDDED_DATA.roundtable_topics
+function renderRoundtable(roundtableData, topicIndex = 0) {
+    const rt = d3.select("#roundtable");
+    rt.selectAll("*").remove();
+    // 空数据保护
+    const topic = roundtableData && roundtableData[topicIndex];
+    if (!topic || !topic.views || topic.views.length === 0) {
+        rt.append("div").text("暂无圆桌讨论数据")
+          .style("color", "var(--ink-soft)").style("text-align", "center")
+          .style("padding", "60px 20px");
+        return;
+    }
+    rt.append("div").attr("class", "bajie-center").text("🐷");
+    // 3 观点环绕（120 度均分，center 基于容器实际宽度动态计算，与 .bajie-center left:50% 对齐）
+    const radius = 180;
+    const containerWidth = Math.max(200, rt.node().clientWidth || 500);
+    const containerHeight = rt.node().clientHeight || 500;
+    const center = { x: containerWidth / 2, y: containerHeight / 2 };
+    topic.views.forEach((v, i) => {
+        const angle = (i * 120 - 90) * Math.PI / 180;
+        const x = center.x + radius * Math.cos(angle);
+        const y = center.y + radius * Math.sin(angle);
+        // D3 v7 .style(name, value) 的 name 必须是 string；此处 left/top 需条件计算，用 .each() pattern
+        rt.append("div").attr("class", "roundtable-view")
+          .each(function() {
+              d3.select(this).style("left", x + "px").style("top", y + "px");
+          })
+          .each(function() {
+              const viewDiv = d3.select(this);
+              viewDiv.append("div").attr("class", "speaker").text(v.speaker);
+              viewDiv.append("div").attr("class", "view").text(v.view);
+          });
+    });
+}
+
+const fetchStatus = { anyFetched: false };
+async function fetchJson(path, fallbackKey) {
+    try {
+        const response = await fetch(path);
+        if (!response.ok) throw new Error('fetch failed: ' + path);
+        fetchStatus.anyFetched = true;
+        return await response.json();
+    } catch (e) {
+        console.warn('[INFO] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+        return EMBEDDED_DATA[fallbackKey];
+    }
+}
+async function loadData() {
+    const base = '../../scripts/output/data/';
+    const [triangle, roundtable] = await Promise.all([
+        fetchJson(base + 'v08_triangle_dialogue.json', 'triangle_dialogue'),
+        fetchJson(base + 'v08_roundtable.json', 'roundtable_topics')
+    ]);
+    return { triangle, roundtable };
+}
+async function main() {
+    const data = await loadData();
+    window.__lastData = data;
+    if (fetchStatus.anyFetched) {
+        document.getElementById('dataSource').innerHTML =
+            '数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）';
+    }
+    renderTriangle(data.triangle);
+    renderRoundtable(data.roundtable, 0);
+}
+let resizeTimer;
+window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        if (window.__lastData) {
+            renderTriangle(window.__lastData.triangle);
+            renderRoundtable(window.__lastData.roundtable, 0);
+        }
+    }, 250);
+});
+main();
+</script>
+</body>
+</html>

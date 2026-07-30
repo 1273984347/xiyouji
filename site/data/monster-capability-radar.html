@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>妖怪能力雷达图 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        @font-face {
+            font-family: "Noto Serif SC"; src: local("Noto Serif SC"), local("Source Han Serif SC");
+            font-display: swap;
+        }
+        @font-face {
+            font-family: "JetBrains Mono"; src: local("JetBrains Mono"), local("Fira Code");
+            font-display: swap;
+        }
+        :root {
+            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
+            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7; background: var(--bg); color: var(--ink);
+        }
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 20px 80px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232,184,133,0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 { font-size: 2.2em; margin: 0 0 10px; position: relative; z-index: 1; }
+        .hero .subtitle { color: #e9b885; font-size: 1.1em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85em; color: rgba(245,233,212,0.65); font-style: italic; position: relative; z-index: 1; }
+        .container { max-width: 1280px; margin: -30px auto 60px; padding: 0 20px; position: relative; z-index: 2; }
+        .breadcrumb { font-size: 0.85em; color: var(--ink-soft); margin-bottom: 12px; }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .cross-page-nav {
+            background: #fff8e7; border: 1px solid var(--line); border-left: 4px solid var(--accent);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.86em; border-radius: 4px;
+            color: var(--ink-soft); line-height: 1.9;
+        }
+        .cross-page-nav a { color: var(--accent-2); text-decoration: none; padding: 2px 4px; border-radius: 2px; }
+        .cross-page-nav a:hover { background: var(--accent-soft); color: var(--ink); }
+        .cross-page-nav a.active { color: var(--accent); font-weight: 700; background: rgba(200,70,58,0.08); }
+        .cross-page-nav .nav-label { font-family: "JetBrains Mono", monospace; color: var(--accent-3); font-weight: 700; margin-right: 8px; }
+        .notice {
+            background: #fff8e7; border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        }
+        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px; margin-bottom: 32px; }
+        .kpi-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 20px; box-shadow: var(--shadow); border-top: 3px solid var(--accent); }
+        .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
+        .kpi-card .label { color: var(--ink-soft); font-size: 0.9em; margin-top: 4px; }
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
+        .section { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 28px; margin-bottom: 28px; box-shadow: var(--shadow); }
+        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: var(--accent-2);
+            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 4px 0; transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+        .monster-switcher { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+        .monster-btn {
+            padding: 6px 12px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.82em;
+            font-family: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .monster-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .monster-btn:hover { background: var(--accent-soft); }
+        .monster-btn.active:hover { background: var(--accent); }
+        .chart-wrap { position: relative; overflow-x: auto; }
+        #radar-svg, #bar-svg, #scatter-svg, #sankey-svg { display: block; }
+        #radar-svg { min-width: 720px; }
+        #bar-svg, #scatter-svg { min-width: 880px; }
+        #sankey-svg { min-width: 880px; }
+        .radar-tip, .bar-tip, .scatter-tip {
+            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
+            color: #f5e9d4; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem;
+            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 320px;
+        }
+        .radar-tip .tip-title, .bar-tip .tip-title, .scatter-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
+        .radar-tip .tip-row, .bar-tip .tip-row, .scatter-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
+        .radar-tip .tip-meta, .bar-tip .tip-meta, .scatter-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6b5e4d; }
+        .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
+        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
+        .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 2px; }
+        .insight-box {
+            background: #fffdf8; border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+        }
+        .insight-box strong { color: var(--accent); font-weight: 700; }
+        .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
+        .extreme-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px; }
+        .extreme-card {
+            background: linear-gradient(135deg, #fffdf8 0%, #fff8e7 100%);
+            border: 1px solid var(--line); border-radius: 8px; padding: 18px;
+            box-shadow: var(--shadow); position: relative; overflow: hidden;
+        }
+        .extreme-card::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(to right, var(--accent), var(--accent-2));
+        }
+        .extreme-card .ex-label { font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: var(--accent-3); font-weight: 700; letter-spacing: 0.05em; }
+        .extreme-card .ex-monster { font-size: 1.4em; color: var(--accent); font-weight: 700; margin-top: 4px; }
+        .extreme-card .ex-value { font-size: 0.95em; color: var(--ink); margin-top: 6px; font-weight: 600; }
+        .extreme-card .ex-desc { font-size: 0.8em; color: var(--ink-soft); margin-top: 6px; }
+        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer a { color: #e9b885; }
+        footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
+        footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
+        @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+        @media (max-width: 480px) {
+            .hero { padding: 40px 16px 60px; }
+            .hero h1 { font-size: 1.6em; }
+            .section { padding: 18px; }
+            .monster-btn { padding: 5px 9px; font-size: 0.76em; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">跳到主内容</a>
+    <header class="hero">
+        <h1>妖怪能力雷达图</h1>
+        <div class="subtitle">W233-3 · V3 · 与 monster-hierarchy-network 形成 等级-能力 双维</div>
+        <div class="tagline">—— 15 代表妖怪 × 5 能力维度（法力 / 智谋 / 法宝 / 背景 / 结局）半透明叠加 · 来历→结局桑基流向</div>
+    </header>
+    <main class="container" id="main-content">
+        <nav class="breadcrumb" aria-label="面包屑">
+            <a href="../index.html">站点首页</a>
+            <span class="sep">›</span>
+            <a href="../dashboard.html">数据仪表盘</a>
+            <span class="sep">›</span>
+            <span>妖怪能力雷达图</span>
+        </nav>
+        <nav class="cross-page-nav" aria-label="跨页面导航">
+            <span class="nav-label">跨页面导航：</span>
+            <a href="ming-political-thought-comparison.html">明代政治思想对照</a> ·
+            <a href="pilgrim-team-psychology-arc.html">取经团队心理</a> ·
+            <a href="monster-capability-radar.html" class="active">妖怪能力雷达</a> ·
+            <a href="poetry-rhythm-analysis.html">诗词韵律分析</a> ·
+            <a href="../index.html">返回 dashboard</a>
+        </nav>
+        <div class="notice" role="note">
+            <strong>能力维度说明</strong>：
+            <span class="mono">法力</span>（1-10 · 战斗力直接体现）·
+            <span class="mono">智谋</span>（1-10 · 计策与欺骗能力）·
+            <span class="mono">法宝</span>（1-10 · 法宝数量与威力）·
+            <span class="mono">背景</span>（1-10 · 来历层次与靠山）·
+            <span class="mono">结局</span>（1-10 · 结局好坏，6+ 善终，1-2 悲剧）。15 妖怪×5 维度共 75 个数据点。
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <section class="kpi-row" aria-label="妖怪能力概要">
+            <div class="kpi-card">
+                <div class="num">15</div>
+                <div class="label">代表妖怪</div>
+                <div class="detail">白骨精 → 灵感大王 · 跨 60 回</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">5</div>
+                <div class="label">能力维度</div>
+                <div class="detail">法力/智谋/法宝/背景/结局</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">4</div>
+                <div class="label">来历分类</div>
+                <div class="detail">天庭/佛界/凡间/野生</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">4</div>
+                <div class="label">结局分类</div>
+                <div class="detail">收编/打死/逃走/借走</div>
+            </div>
+        </section>
+
+        <!-- Section 1：15 妖怪雷达图叠加 -->
+        <section class="section" aria-labelledby="sec-radar">
+            <h2 id="sec-radar">① 15 妖怪能力雷达图叠加</h2>
+            <p>使用 D3.js radarChart 绘制。15 个妖怪的 5 维能力（法力/智谋/法宝/背景/结局）以半透明多边形叠加，可点击妖怪名称切换高亮。叠加图揭示了"无背景高智谋型"（白骨精/六耳猕猴）与"高背景全维型"（大鹏金翅雕/黄眉大王）两类典型妖怪。</p>
+            <div class="monster-switcher" id="radar-switcher" role="group" aria-label="妖怪切换"></div>
+            <div class="chart-wrap">
+                <svg id="radar-svg" width="100%" height="560" role="img" aria-labelledby="radar-title radar-desc">
+                    <title id="radar-title">15 妖怪能力雷达图叠加</title>
+                    <desc id="radar-desc">15 个妖怪在 5 个能力维度上的雷达图叠加，半透明多边形展示。</desc>
+                </svg>
+                <div class="radar-tip" id="radar-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="radar-legend" aria-label="妖怪图例"></div>
+        </section>
+
+        <!-- Section 2：能力对比柱状图 -->
+        <section class="section" aria-labelledby="sec-bar">
+            <h2 id="sec-bar">② 五维度能力排名柱状图</h2>
+            <p>统计五个能力维度的最高分妖怪与平均分。可见"法力"维度上限最高（10 分·大鹏金翅雕），"结局"维度均值最低（4.7 分）——15 妖怪中 6 个结局≤2，妖怪群体整体"善终率"不足 40%。</p>
+            <div class="chart-wrap">
+                <svg id="bar-svg" width="100%" height="420" role="img" aria-labelledby="bar-title bar-desc">
+                    <title id="bar-title">五维度能力对比柱状图</title>
+                    <desc id="bar-desc">五维度的最高分与平均分对比。</desc>
+                </svg>
+                <div class="bar-tip" id="bar-tip" role="tooltip"></div>
+            </div>
+        </section>
+
+        <!-- Section 3：妖怪能力散点图 -->
+        <section class="section" aria-labelledby="sec-scatter">
+            <h2 id="sec-scatter">③ 法力 vs 结局 散点图</h2>
+            <p>横轴为法力（1-10），纵轴为结局（1-10）。15 个妖怪分布揭示"法力越高结局越差"的反向趋势——六耳猕猴（法力 9 / 结局 1）与大鹏金翅雕（法力 10 / 结局 6）形成强烈对比。红色虚线为结局均值参考线。</p>
+            <div class="chart-wrap">
+                <svg id="scatter-svg" width="100%" height="480" role="img" aria-labelledby="sc-title sc-desc">
+                    <title id="sc-title">法力 vs 结局散点图</title>
+                    <desc id="sc-desc">15 个妖怪在法力与结局二维空间的分布。</desc>
+                </svg>
+                <div class="scatter-tip" id="scatter-tip" role="tooltip"></div>
+            </div>
+        </section>
+
+        <!-- Section 4：妖怪分类桑基图 -->
+        <section class="section" aria-labelledby="sec-sankey">
+            <h2 id="sec-sankey">④ 妖怪分类桑基图（来历→结局）</h2>
+            <p>左侧为四类来历（天庭/佛界/凡间/野生），右侧为四类结局（收编/打死/逃走/借走）。流量揭示"天庭与佛界妖怪多被收编（9 个）"，"野生与凡间妖怪多被打死（7 个）"——结局与来历高度耦合，背景决定命运。</p>
+            <div class="chart-wrap">
+                <svg id="sankey-svg" width="100%" height="460" role="img" aria-labelledby="sk-title sk-desc">
+                    <title id="sk-title">妖怪来历结局桑基图</title>
+                    <desc id="sk-desc">左侧四类来历流向右侧四类结局。</desc>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Section 5：能力 KPI 极值卡片 -->
+        <section class="section" aria-labelledby="sec-extreme">
+            <h2 id="sec-extreme">⑤ 能力极值 KPI 卡片</h2>
+            <p>四个极值妖怪：最强法力（大鹏金翅雕·如来亲舅父）、最智谋（六耳猕猴·假悟空难辨）、最悲剧（六耳猕猴·被如来识破即死）、最幸运（红孩儿·收编善财童子）。智谋与结局呈现强烈反差。</p>
+            <div class="extreme-grid" id="extreme-grid"></div>
+            <div class="insight-box" style="margin-top:16px;">
+                <span class="ib-tag">[反差]</span>
+                <strong>六耳猕猴"智谋第二、结局最惨"</strong>。9/10 智谋对应 1/10 结局——他能假扮悟空骗过取经团队与天庭众神，却唯独骗不过如来佛祖。"智谋"在绝对法力面前失效，是全书最锋利的反讽。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[收编]</span>
+                <strong>"最幸运"红孩儿并非弱者</strong>。法力 8/智谋 7 的红孩儿被观音收为善财童子，看似"被降伏"实为"得正果"。这与白骨精（法力 4/结局 2）形成对比——能被收编的前提是"有利用价值"。
+            </div>
+        </section>
+
+        <!-- Section 6：跨页面导航 + footer -->
+        <section class="section" aria-labelledby="sec-cross">
+            <h2 id="sec-cross">⑥ 跨页面导航 · 等级-能力双维</h2>
+            <p>本页与 <a href="monster-hierarchy-network.html" style="color:var(--accent);">monster-hierarchy-network.html</a>（W194 妖怪等级网络）形成"等级-能力"双维：前者呈现妖怪的层级结构与从属关系，本页呈现妖怪的多维能力对比。两者交叉阅读，可见"高等级未必高能力，高能力未必好结局"。</p>
+            <nav class="cross-page-nav" aria-label="相关页面">
+                <span class="nav-label">相关页面：</span>
+                <a href="monster-hierarchy-network.html">妖怪等级网络（W194）</a> ·
+                <a href="hardship-difficulty-heatmap.html">八十一难难度热力图（W229-1）</a> ·
+                <a href="journey-spacetime.html">取经路线时空双轴（W229-2）</a> ·
+                <a href="character-dynamic-network.html">人物关系动态网络（W229-3）</a> ·
+                <a href="../dashboard.html">数据仪表盘</a>
+            </nav>
+        </section>
+    </main>
+    <footer>
+        <p>详解西游记 · 妖怪能力雷达图 · W233-3 · V3 可视化页面</p>
+        <p>15 妖怪 × 5 维度数据基于原著综合重构，与 monster-hierarchy-network.html 等级网络形成"等级-能力"双维。</p>
+        <p>
+            <a href="../dashboard.html">← 返回数据仪表盘</a> ·
+            <a href="monster-hierarchy-network.html">查看妖怪等级网络 →</a> ·
+            <a href="hardship-difficulty-heatmap.html">查看 81 难难度热力图 →</a>
+        </p>
+        <div class="footer-index">
+            正向时间线：CHANGELOG.md v2.2.39 W233 · 反向文件索引：scripts/output/file-index.md W233-3 · 方向索引：site/data/ · V 方向·V3 四页并行
+        </div>
+        <div class="footer-cross">
+            跨文档链接：
+            <a href="monster-hierarchy-network.html">monster-hierarchy-network.html</a> /
+            <a href="hardship-difficulty-heatmap.html">W229 V2 三页</a> /
+            <a href="character-dynamic-network.html">W194 narratology-13d</a>
+        </div>
+    </footer>
+
+    <script>
+    // ============= EMBEDDED_DATA =============
+    const EMBEDDED_DATA = {
+        meta: {title: "妖怪能力雷达图", version: "v2.2.39", w_id: "W233-3", direction: "V3"},
+        kpi: [
+            {label: "代表妖怪", value: 15, unit: "个"},
+            {label: "能力维度", value: 5, unit: "维"},
+            {label: "来历分类", value: 4, unit: "类"},
+            {label: "结局分类", value: 4, unit: "类"}
+        ],
+        radar: [
+            {monster: "白骨精", magic: 4, strategy: 9, artifact: 2, background: 1, ending: 2},
+            {monster: "黄袍怪", magic: 7, strategy: 5, artifact: 6, background: 8, ending: 5},
+            {monster: "红孩儿", magic: 8, strategy: 7, artifact: 7, background: 8, ending: 6},
+            {monster: "黑熊精", magic: 7, strategy: 5, artifact: 4, background: 5, ending: 6},
+            {monster: "银角大王", magic: 8, strategy: 6, artifact: 9, background: 8, ending: 5},
+            {monster: "蜘蛛精", magic: 5, strategy: 6, artifact: 5, background: 4, ending: 2},
+            {monster: "蝎子精", magic: 9, strategy: 6, artifact: 7, background: 5, ending: 2},
+            {monster: "六耳猕猴", magic: 9, strategy: 9, artifact: 6, background: 2, ending: 1},
+            {monster: "牛魔王", magic: 9, strategy: 7, artifact: 7, background: 7, ending: 6},
+            {monster: "铁扇公主", magic: 7, strategy: 6, artifact: 9, background: 7, ending: 6},
+            {monster: "大鹏金翅雕", magic: 10, strategy: 9, artifact: 7, background: 9, ending: 6},
+            {monster: "黄眉大王", magic: 9, strategy: 6, artifact: 9, background: 8, ending: 6},
+            {monster: "青狮精", magic: 8, strategy: 5, artifact: 6, background: 8, ending: 6},
+            {monster: "白象精", magic: 7, strategy: 5, artifact: 6, background: 8, ending: 6},
+            {monster: "灵感大王", magic: 7, strategy: 6, artifact: 5, background: 7, ending: 2}
+        ],
+        bar: [
+            {dimension: "法力", max: 10, monster: "大鹏金翅雕", avg: 7.6},
+            {dimension: "智谋", max: 9, monster: "白骨精/六耳猕猴/大鹏金翅雕", avg: 6.5},
+            {dimension: "法宝", max: 9, monster: "银角大王/铁扇公主/黄眉大王", avg: 6.5},
+            {dimension: "背景", max: 9, monster: "大鹏金翅雕", avg: 6.4},
+            {dimension: "结局", max: 6, monster: "红孩儿/黑熊精/牛魔王等", avg: 4.7}
+        ],
+        scatter: [
+            {monster: "白骨精", magic: 4, ending: 2},
+            {monster: "黄袍怪", magic: 7, ending: 5},
+            {monster: "红孩儿", magic: 8, ending: 6},
+            {monster: "黑熊精", magic: 7, ending: 6},
+            {monster: "银角大王", magic: 8, ending: 5},
+            {monster: "蜘蛛精", magic: 5, ending: 2},
+            {monster: "蝎子精", magic: 9, ending: 2},
+            {monster: "六耳猕猴", magic: 9, ending: 1},
+            {monster: "牛魔王", magic: 9, ending: 6},
+            {monster: "铁扇公主", magic: 7, ending: 6},
+            {monster: "大鹏金翅雕", magic: 10, ending: 6},
+            {monster: "黄眉大王", magic: 9, ending: 6},
+            {monster: "青狮精", magic: 8, ending: 6},
+            {monster: "白象精", magic: 7, ending: 6},
+            {monster: "灵感大王", magic: 7, ending: 2}
+        ],
+        sankey: {
+            nodes: [
+                {name: "天庭"}, {name: "佛界"}, {name: "凡间"}, {name: "野生"},
+                {name: "收编"}, {name: "打死"}, {name: "逃走"}, {name: "借走"}
+            ],
+            links: [
+                {source: 0, target: 4, value: 5},
+                {source: 0, target: 5, value: 2},
+                {source: 1, target: 4, value: 4},
+                {source: 1, target: 6, value: 1},
+                {source: 2, target: 5, value: 3},
+                {source: 3, target: 5, value: 4},
+                {source: 3, target: 7, value: 1}
+            ]
+        },
+        kpi_extreme: [
+            {label: "最强法力", monster: "大鹏金翅雕", value: "10/10", desc: "如来亲舅父·佛祖亲率五百罗汉降伏"},
+            {label: "最智谋", monster: "六耳猕猴", value: "9/10", desc: "假悟空难辨·骗过天庭众神"},
+            {label: "最悲剧", monster: "六耳猕猴", value: "结局 1/10", desc: "被如来识破即被悟空一棒打死"},
+            {label: "最幸运", monster: "红孩儿", value: "收编善财童子", desc: "观音收为侍童·得正果"}
+        ]
+    };
+
+    // 维度配置
+    const DIMENSIONS = [
+        {key: "magic",      label: "法力", color: "#c8463a"},
+        {key: "strategy",   label: "智谋", color: "#3a6b8c"},
+        {key: "artifact",   label: "法宝", color: "#7a5230"},
+        {key: "background", label: "背景", color: "#5a7a3a"},
+        {key: "ending",     label: "结局", color: "#b8862a"}
+    ];
+
+    // 15 妖怪配色（柔和循环）
+    const MONSTER_COLORS = [
+        "#c8463a","#3a6b8c","#7a5230","#5a7a3a","#b8862a",
+        "#8c2a2a","#2c5573","#6b4030","#4a6a2a","#a06d2a",
+        "#d98060","#5a8caf","#9a6e4a","#7a9c5a","#c49a4a"
+    ];
+
+    const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DUR = REDUCE_MOTION ? 0 : 600;
+    let highlightedMonster = null;
+
+    // ============= Section 1：雷达图叠加 =============
+    function renderRadar() {
+        const svg = d3.select("#radar-svg");
+        svg.selectAll("*").remove();
+
+        const wrap = document.getElementById("radar-svg");
+        const width = Math.max(720, wrap.clientWidth || 720);
+        const height = 560;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const cx = width / 2, cy = height / 2 + 10;
+        const radius = Math.min(width, height) / 2 - 80;
+        const levels = 10;
+
+        // 网格圆
+        for (let i = 1; i <= levels; i++) {
+            const r = radius * i / levels;
+            const pts = DIMENSIONS.map((d, di) => {
+                const ang = -Math.PI / 2 + di * 2 * Math.PI / DIMENSIONS.length;
+                return [cx + r * Math.cos(ang), cy + r * Math.sin(ang)];
+            });
+            svg.append("polygon")
+                .attr("points", pts.map(p => p.join(",")).join(" "))
+                .attr("fill", "none")
+                .attr("stroke", "#e9b885")
+                .attr("stroke-width", 0.6)
+                .attr("stroke-dasharray", i === levels ? "none" : "2,3")
+                .attr("opacity", 0.5);
+        }
+
+        // 轴线 + 标签
+        DIMENSIONS.forEach((dim, di) => {
+            const ang = -Math.PI / 2 + di * 2 * Math.PI / DIMENSIONS.length;
+            const ex = cx + radius * Math.cos(ang);
+            const ey = cy + radius * Math.sin(ang);
+            svg.append("line")
+                .attr("x1", cx).attr("y1", cy)
+                .attr("x2", ex).attr("y2", ey)
+                .attr("stroke", "#d9cdb8")
+                .attr("stroke-width", 0.8);
+            // 维度标签
+            const lx = cx + (radius + 28) * Math.cos(ang);
+            const ly = cy + (radius + 28) * Math.sin(ang);
+            svg.append("text")
+                .attr("x", lx).attr("y", ly)
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .style("font-size", "0.95rem")
+                .style("font-weight", "700")
+                .style("fill", dim.color)
+                .text(dim.label);
+            // 顶点数值
+            svg.append("text")
+                .attr("x", cx + (radius + 12) * Math.cos(ang))
+                .attr("y", cy + (radius + 12) * Math.sin(ang))
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .style("font-size", "0.7rem")
+                .style("fill", "#b8a584")
+                .style("font-family", "JetBrains Mono, monospace")
+                .text("10");
+        });
+
+        // 中心点
+        svg.append("circle")
+            .attr("cx", cx).attr("cy", cy).attr("r", 2)
+            .attr("fill", "#7a5230");
+
+        // 15 妖怪多边形叠加
+        const tip = d3.select("#radar-tip");
+        const wrapEl = wrap.parentElement;
+        const monsterPolys = [];
+
+        EMBEDDED_DATA.radar.forEach((m, mi) => {
+            const pts = DIMENSIONS.map((dim, di) => {
+                const ang = -Math.PI / 2 + di * 2 * Math.PI / DIMENSIONS.length;
+                const r = radius * m[dim.key] / 10;
+                return [cx + r * Math.cos(ang), cy + r * Math.sin(ang)];
+            });
+            const poly = svg.append("polygon")
+                .attr("points", pts.map(p => p.join(",")).join(" "))
+                .attr("fill", MONSTER_COLORS[mi])
+                .attr("fill-opacity", highlightedMonster === m.monster ? 0.55 : 0.18)
+                .attr("stroke", MONSTER_COLORS[mi])
+                .attr("stroke-width", highlightedMonster === m.monster ? 2.5 : 1)
+                .attr("stroke-opacity", highlightedMonster === m.monster ? 1 : 0.6)
+                .style("cursor", "pointer")
+                .on("mouseover", function(event) {
+                    d3.select(this).attr("fill-opacity", 0.55).attr("stroke-width", 2.5);
+                    tip.style("opacity", 1)
+                        .html(`<div class="tip-title">${m.monster}</div>
+                            <div class="tip-row">法力：<strong style="color:#e9b885">${m.magic}/10</strong></div>
+                            <div class="tip-row">智谋：<strong style="color:#e9b885">${m.strategy}/10</strong></div>
+                            <div class="tip-row">法宝：<strong style="color:#e9b885">${m.artifact}/10</strong></div>
+                            <div class="tip-row">背景：<strong style="color:#e9b885">${m.background}/10</strong></div>
+                            <div class="tip-row">结局：<strong style="color:#e9b885">${m.ending}/10</strong></div>
+                            <div class="tip-meta">总分 ${m.magic + m.strategy + m.artifact + m.background + m.ending}/50 · 索引 ${mi + 1}/15</div>`);
+                })
+                .on("mousemove", function(event) {
+                    const rect = wrapEl.getBoundingClientRect();
+                    tip.style("left", (event.clientX - rect.left + 14) + "px")
+                        .style("top", (event.clientY - rect.top + 14) + "px");
+                })
+                .on("mouseout", function() {
+                    const isHL = highlightedMonster === m.monster;
+                    d3.select(this)
+                        .attr("fill-opacity", isHL ? 0.55 : 0.18)
+                        .attr("stroke-width", isHL ? 2.5 : 1);
+                    tip.style("opacity", 0);
+                })
+                .on("click", function() {
+                    highlightedMonster = highlightedMonster === m.monster ? null : m.monster;
+                    renderRadar();
+                    renderSwitcher();
+                });
+            monsterPolys.push(poly);
+        });
+
+        renderRadarLegend();
+    }
+
+    function renderRadarLegend() {
+        const legend = d3.select("#radar-legend");
+        legend.selectAll("*").remove();
+        EMBEDDED_DATA.radar.forEach((m, mi) => {
+            const item = legend.append("div").attr("class", "lg-item")
+                .style("cursor", "pointer")
+                .style("background", highlightedMonster === m.monster ? MONSTER_COLORS[mi] : "#fff8e7")
+                .style("color", highlightedMonster === m.monster ? "#fff" : "var(--ink-soft)")
+                .on("click", function() {
+                    highlightedMonster = highlightedMonster === m.monster ? null : m.monster;
+                    renderRadar();
+                    renderSwitcher();
+                });
+            item.append("span").attr("class", "lg-swatch").style("background", MONSTER_COLORS[mi]);
+            item.append("span").text(m.monster);
+        });
+    }
+
+    function renderSwitcher() {
+        const sw = d3.select("#radar-switcher");
+        sw.selectAll("*").remove();
+        EMBEDDED_DATA.radar.forEach((m, mi) => {
+            sw.append("button")
+                .attr("class", "monster-btn" + (highlightedMonster === m.monster ? " active" : ""))
+                .style("border-left", `3px solid ${MONSTER_COLORS[mi]}`)
+                .text(m.monster)
+                .on("click", function() {
+                    highlightedMonster = highlightedMonster === m.monster ? null : m.monster;
+                    renderRadar();
+                    renderSwitcher();
+                });
+        });
+    }
+
+    // ============= Section 2：能力对比柱状图 =============
+    function renderBar() {
+        const svg = d3.select("#bar-svg");
+        svg.selectAll("*").remove();
+
+        const wrap = document.getElementById("bar-svg");
+        const width = Math.max(880, wrap.clientWidth || 880);
+        const height = 420;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 30, right: 60, bottom: 80, left: 50 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const data = EMBEDDED_DATA.bar;
+        const x0 = d3.scaleBand().domain(data.map(d => d.dimension)).range([0, innerW]).padding(0.25);
+        const x1 = d3.scaleBand().domain(["max", "avg"]).range([0, x0.bandwidth()]).padding(0.1);
+        const y = d3.scaleLinear().domain([0, 10]).range([innerH, 0]);
+
+        // 轴
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x0))
+            .selectAll("text").style("font-size", "0.88rem").style("fill", "#2c2418").style("font-weight", "600");
+        g.append("g").call(d3.axisLeft(y).ticks(10))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6b5e4d");
+
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 50)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .text("能力维度");
+
+        // 柱
+        const tip = d3.select("#bar-tip");
+        const wrapEl = wrap.parentElement;
+        const colors = { max: "#c8463a", avg: "#3a6b8c" };
+
+        data.forEach(d => {
+            ["max", "avg"].forEach(k => {
+                const val = d[k];
+                g.append("rect")
+                    .attr("x", x0(d.dimension) + x1(k))
+                    .attr("y", innerH)
+                    .attr("width", x1.bandwidth())
+                    .attr("height", 0)
+                    .attr("fill", colors[k])
+                    .attr("stroke", "#fff")
+                    .attr("stroke-width", 1)
+                    .on("mouseover", function(event) {
+                        d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 1.5);
+                        tip.style("opacity", 1)
+                            .html(`<div class="tip-title">${d.dimension} · ${k === "max" ? "最高分" : "平均分"}</div>
+                                <div class="tip-row">数值：<strong style="color:#e9b885">${val}/10</strong></div>
+                                <div class="tip-row">代表妖怪：<strong style="color:#e9b885">${d.monster}</strong></div>
+                                <div class="tip-meta">${k === "max" ? "维度上限" : "15 妖怪均值"} · ${d.dimension}</div>`);
+                    })
+                    .on("mousemove", function(event) {
+                        const rect = wrapEl.getBoundingClientRect();
+                        tip.style("left", (event.clientX - rect.left + 14) + "px")
+                            .style("top", (event.clientY - rect.top + 14) + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
+                        tip.style("opacity", 0);
+                    })
+                    .transition()
+                    .duration(DUR)
+                    .delay(data.indexOf(d) * 80 + (k === "max" ? 0 : 60))
+                    .attr("y", y(val))
+                    .attr("height", innerH - y(val));
+            });
+            // 数值标签
+            g.append("text")
+                .attr("x", x0(d.dimension) + x1("max") + x1.bandwidth() / 2)
+                .attr("y", y(d.max) - 6)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.78rem").style("font-weight", "700").style("fill", "#c8463a")
+                .style("opacity", 0)
+                .text(d.max)
+                .transition().duration(DUR).delay(data.indexOf(d) * 80 + 300).style("opacity", 1);
+            g.append("text")
+                .attr("x", x0(d.dimension) + x1("avg") + x1.bandwidth() / 2)
+                .attr("y", y(d.avg) - 6)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.78rem").style("font-weight", "700").style("fill", "#3a6b8c")
+                .style("opacity", 0)
+                .text(d.avg)
+                .transition().duration(DUR).delay(data.indexOf(d) * 80 + 360).style("opacity", 1);
+        });
+
+        // 图例
+        g.append("rect").attr("x", innerW - 140).attr("y", 0).attr("width", 14).attr("height", 14).attr("fill", "#c8463a");
+        g.append("text").attr("x", innerW - 120).attr("y", 11).style("font-size", "0.82rem").style("fill", "#2c2418").text("最高分");
+        g.append("rect").attr("x", innerW - 70).attr("y", 0).attr("width", 14).attr("height", 14).attr("fill", "#3a6b8c");
+        g.append("text").attr("x", innerW - 50).attr("y", 11).style("font-size", "0.82rem").style("fill", "#2c2418").text("平均分");
+    }
+
+    // ============= Section 3：散点图 =============
+    function renderScatter() {
+        const svg = d3.select("#scatter-svg");
+        svg.selectAll("*").remove();
+
+        const wrap = document.getElementById("scatter-svg");
+        const width = Math.max(880, wrap.clientWidth || 880);
+        const height = 480;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 30, right: 40, bottom: 60, left: 60 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear().domain([3, 11]).range([0, innerW]);
+        const y = d3.scaleLinear().domain([0, 7.5]).range([innerH, 0]);
+
+        // 轴
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(8).tickFormat(d => d))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6b5e4d");
+        g.append("g").call(d3.axisLeft(y).ticks(7))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6b5e4d");
+
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .text("法力（1-10）");
+        g.append("text")
+            .attr("x", -innerH / 2).attr("y", -42)
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .text("结局（1-10）");
+
+        // 结局均值参考线
+        const avgEnding = 4.7;
+        g.append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", y(avgEnding)).attr("y2", y(avgEnding))
+            .attr("stroke", "#c8463a")
+            .attr("stroke-dasharray", "5,4")
+            .attr("stroke-width", 1.5)
+            .attr("opacity", 0.6);
+        g.append("text")
+            .attr("x", innerW - 4).attr("y", y(avgEnding) - 6)
+            .attr("text-anchor", "end")
+            .style("font-size", "0.74rem").style("fill", "#c8463a").style("font-weight", "600")
+            .text(`结局均值 ${avgEnding}`);
+
+        // 散点
+        const tip = d3.select("#scatter-tip");
+        const wrapEl = wrap.parentElement;
+        g.selectAll("circle.dot")
+            .data(EMBEDDED_DATA.scatter)
+            .enter()
+            .append("circle")
+            .attr("class", "dot")
+            .attr("cx", d => x(d.magic))
+            .attr("cy", d => y(d.ending))
+            .attr("r", 0)
+            .attr("fill", (d, i) => MONSTER_COLORS[i])
+            .attr("fill-opacity", 0.7)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1.5)
+            .style("cursor", "pointer")
+            .on("mouseover", function(event, d) {
+                d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2.5).attr("r", 9);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${d.monster}</div>
+                        <div class="tip-row">法力：<strong style="color:#e9b885">${d.magic}/10</strong></div>
+                        <div class="tip-row">结局：<strong style="color:#e9b885">${d.ending}/10</strong></div>
+                        <div class="tip-row">${d.ending <= 2 ? "悲剧结局（被打死/逃走）" : d.ending >= 6 ? "善终结局（收编/逃走）" : "中等结局"}</div>
+                        <div class="tip-meta">法力-结局差值 ${d.magic - d.ending > 0 ? "+" : ""}${(d.magic - d.ending).toFixed(0)}</div>`);
+            })
+            .on("mousemove", function(event) {
+                const rect = wrapEl.getBoundingClientRect();
+                tip.style("left", (event.clientX - rect.left + 14) + "px")
+                    .style("top", (event.clientY - rect.top + 14) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1.5).attr("r", 7);
+                tip.style("opacity", 0);
+            })
+            .transition()
+            .duration(DUR)
+            .delay((d, i) => i * 40)
+            .attr("r", 7);
+
+        // 妖怪标签
+        g.selectAll("text.dot-label")
+            .data(EMBEDDED_DATA.scatter)
+            .enter()
+            .append("text")
+            .attr("class", "dot-label")
+            .attr("x", d => x(d.magic))
+            .attr("y", d => y(d.ending) - 12)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.72rem")
+            .style("fill", "#2c2418")
+            .style("font-weight", "600")
+            .style("opacity", 0)
+            .text(d => d.monster)
+            .transition()
+            .duration(DUR)
+            .delay((d, i) => i * 40 + 300)
+            .style("opacity", 0.85);
+    }
+
+    // ============= Section 4：桑基图 =============
+    function renderSankey() {
+        const svg = d3.select("#sankey-svg");
+        svg.selectAll("*").remove();
+
+        const wrap = document.getElementById("sankey-svg");
+        const width = Math.max(880, wrap.clientWidth || 880);
+        const height = 460;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const nodes = EMBEDDED_DATA.sankey.nodes.map((n, i) => ({...n, index: i}));
+        const links = EMBEDDED_DATA.sankey.links.map(l => ({
+            source: nodes[l.source],
+            target: nodes[l.target],
+            value: l.value
+        }));
+
+        // 简化版桑基：左右两列节点 + 流向带
+        const leftNodes = nodes.slice(0, 4);
+        const rightNodes = nodes.slice(4, 8);
+        const totalLeft = d3.sum(links, d => d.value);
+        const nodePadding = 18;
+        const nodeHeight = (innerH - nodePadding * (leftNodes.length - 1)) / leftNodes.length;
+
+        // 计算每个节点的流总量
+        const nodeFlow = {};
+        nodes.forEach(n => { nodeFlow[n.name] = 0; });
+        links.forEach(l => {
+            nodeFlow[l.source.name] += l.value;
+            nodeFlow[l.target.name] += l.value;
+        });
+
+        // 左侧节点位置
+        let leftY = 0;
+        leftNodes.forEach(n => {
+            n.x = 0; n.y = leftY; n.w = 28;
+            n.h = nodeHeight;
+            leftY += nodeHeight + nodePadding;
+        });
+        // 右侧节点位置
+        let rightY = 0;
+        const rightH = (innerH - nodePadding * (rightNodes.length - 1)) / rightNodes.length;
+        rightNodes.forEach(n => {
+            n.x = innerW - 28; n.y = rightY; n.w = 28;
+            n.h = rightH;
+            rightY += rightH + nodePadding;
+        });
+
+        const ORIGIN_COLORS = ["#c8463a", "#3a6b8c", "#7a5230", "#5a7a3a"];
+        const END_COLORS = ["#5a7a3a", "#8c2a2a", "#b8862a", "#3a6b8c"];
+
+        // 绘制流向带（贝塞尔）
+        // 累计每节点已用高度
+        const usedTop = {};
+        nodes.forEach(n => usedTop[n.name] = 0);
+
+        links.forEach((l, li) => {
+            const sY = l.source.y + usedTop[l.source.name] * l.source.h / nodeFlow[l.source.name];
+            const sH = l.value * l.source.h / nodeFlow[l.source.name];
+            const tY = l.target.y + usedTop[l.target.name] * l.target.h / nodeFlow[l.target.name];
+            const tH = l.value * l.target.h / nodeFlow[l.target.name];
+            usedTop[l.source.name] += l.value;
+            usedTop[l.target.name] += l.value;
+
+            const sx0 = l.source.x + l.source.w;
+            const sx1 = l.target.x;
+            const midX = (sx0 + sx1) / 2;
+            const path = `M${sx0},${sY} C${midX},${sY} ${midX},${tY} ${sx1},${tY} L${sx1},${tY + tH} C${midX},${tY + tH} ${midX},${sY + sH} ${sx0},${sY + sH} Z`;
+
+            g.append("path")
+                .attr("d", path)
+                .attr("fill", ORIGIN_COLORS[l.source.index])
+                .attr("fill-opacity", 0.35)
+                .attr("stroke", ORIGIN_COLORS[l.source.index])
+                .attr("stroke-width", 0.5)
+                .style("cursor", "pointer")
+                .on("mouseover", function() {
+                    d3.select(this).attr("fill-opacity", 0.6);
+                })
+                .on("mouseout", function() {
+                    d3.select(this).attr("fill-opacity", 0.35);
+                })
+                .append("title")
+                .text(`${l.source.name} → ${l.target.name}：${l.value} 个妖怪`);
+        });
+
+        // 绘制节点矩形
+        leftNodes.forEach((n, i) => {
+            g.append("rect")
+                .attr("x", n.x).attr("y", n.y)
+                .attr("width", n.w).attr("height", n.h)
+                .attr("fill", ORIGIN_COLORS[i])
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 1);
+            g.append("text")
+                .attr("x", n.x - 8).attr("y", n.y + n.h / 2)
+                .attr("text-anchor", "end")
+                .attr("dominant-baseline", "middle")
+                .style("font-size", "0.92rem")
+                .style("font-weight", "700")
+                .style("fill", ORIGIN_COLORS[i])
+                .text(n.name);
+            g.append("text")
+                .attr("x", n.x - 8).attr("y", n.y + n.h / 2 + 16)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.74rem")
+                .style("fill", "#6b5e4d")
+                .style("font-family", "JetBrains Mono, monospace")
+                .text(`(${nodeFlow[n.name]})`);
+        });
+
+        rightNodes.forEach((n, i) => {
+            g.append("rect")
+                .attr("x", n.x).attr("y", n.y)
+                .attr("width", n.w).attr("height", n.h)
+                .attr("fill", END_COLORS[i])
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 1);
+            g.append("text")
+                .attr("x", n.x + n.w + 8).attr("y", n.y + n.h / 2)
+                .attr("text-anchor", "start")
+                .attr("dominant-baseline", "middle")
+                .style("font-size", "0.92rem")
+                .style("font-weight", "700")
+                .style("fill", END_COLORS[i])
+                .text(n.name);
+            g.append("text")
+                .attr("x", n.x + n.w + 8).attr("y", n.y + n.h / 2 + 16)
+                .attr("text-anchor", "start")
+                .style("font-size", "0.74rem")
+                .style("fill", "#6b5e4d")
+                .style("font-family", "JetBrains Mono, monospace")
+                .text(`(${nodeFlow[n.name]})`);
+        });
+
+        // 标题
+        g.append("text")
+            .attr("x", 0).attr("y", -6)
+            .style("font-size", "0.85rem")
+            .style("fill", "#7a5230")
+            .style("font-weight", "700")
+            .text("来历（左）→ 结局（右）");
+    }
+
+    // ============= Section 5：极值 KPI 卡片 =============
+    function renderExtreme() {
+        const grid = d3.select("#extreme-grid");
+        grid.selectAll("*").remove();
+        EMBEDDED_DATA.kpi_extreme.forEach((k, i) => {
+            const card = grid.append("div").attr("class", "extreme-card");
+            card.append("div").attr("class", "ex-label").text(`[${k.label}] · 极值 ${i + 1}/4`);
+            card.append("div").attr("class", "ex-monster").text(k.monster);
+            card.append("div").attr("class", "ex-value").text(k.value);
+            card.append("div").attr("class", "ex-desc").text(k.desc);
+        });
+    }
+
+    // ============= 初始化 =============
+    function renderAll() {
+        renderSwitcher();
+        renderRadar();
+        renderBar();
+        renderScatter();
+        renderSankey();
+        renderExtreme();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAll);
+    } else {
+        renderAll();
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(renderAll, 250);
+    });
+    </script>
+</body>
+</html>

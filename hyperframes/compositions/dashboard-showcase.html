@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>详解西游记 · 数据仪表盘展示</title>
+    <style>
+      @font-face {
+        font-family: 'Noto Serif SC';
+        src: local('Noto Serif SC'), local('Source Han Serif SC'), local('Songti SC'), local('SimSun'), local('STSong'), local('宋体');
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: local('JetBrains Mono'), local('Consolas'), local('Courier New');
+        font-display: swap;
+      }
+
+      :root {
+        --bg: #faf7f2;
+        --paper: #ffffff;
+        --ink: #2c2418;
+        --ink-soft: #6b5e4d;
+        --accent: #c8463a;
+        --accent-soft: #e9b885;
+        --accent-2: #3a6b8c;
+        --accent-3: #7a5230;
+        --accent-4: #5a7a3a;
+        --line: #d9cdb8;
+        --hero-1: #1a1410;
+        --hero-2: #3a2820;
+        --hero-3: #5a3828;
+        --hero-ink: #f5e9d4;
+        --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: "Noto Serif SC", serif;
+        background: #000;
+        color: var(--ink);
+      }
+
+      [data-composition-id="root"] {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .section-header {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .section-eyebrow {
+        font-size: 22px;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--accent);
+        letter-spacing: 0.3em;
+      }
+      .section-title {
+        font-size: 64px;
+        font-weight: 700;
+        color: var(--ink);
+        border-bottom: 4px solid var(--accent);
+        padding-bottom: 12px;
+        align-self: flex-start;
+      }
+
+      /* ===== Scene 1: 项目概览 (0-5s) ===== */
+      #scene-1 {
+        background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 50%, var(--hero-3) 100%);
+        color: var(--hero-ink);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 120px 160px;
+        gap: 32px;
+      }
+      #scene-1::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+        pointer-events: none;
+      }
+      .cover-eyebrow {
+        font-size: 28px;
+        letter-spacing: 0.4em;
+        color: var(--accent-soft);
+        font-family: "JetBrains Mono", monospace;
+        opacity: 0.85;
+        position: relative;
+        z-index: 2;
+      }
+      .cover-title {
+        font-size: 130px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        line-height: 1.1;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+      }
+      .cover-rule {
+        width: 260px;
+        height: 4px;
+        background: var(--accent);
+        position: relative;
+        z-index: 2;
+      }
+      .cover-subtitle {
+        font-size: 44px;
+        font-weight: 400;
+        letter-spacing: 0.2em;
+        opacity: 0.92;
+        position: relative;
+        z-index: 2;
+      }
+      .cover-meta {
+        margin-top: 32px;
+        display: flex;
+        gap: 40px;
+        font-size: 24px;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--accent-soft);
+        letter-spacing: 0.12em;
+        position: relative;
+        z-index: 2;
+      }
+      .cover-meta span {
+        padding: 8px 20px;
+        border: 1px solid rgba(232, 184, 133, 0.3);
+        border-radius: 20px;
+      }
+
+      /* ===== Scene 2: dashboard hero (5-12s) ===== */
+      #scene-2 {
+        background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 60%, var(--hero-3) 100%);
+        color: var(--hero-ink);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 100px 140px;
+        gap: 40px;
+      }
+      #scene-2::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 40%, rgba(232, 184, 133, 0.14), transparent 65%);
+        pointer-events: none;
+      }
+      .hero-eyebrow {
+        font-size: 24px;
+        letter-spacing: 0.3em;
+        color: var(--accent-soft);
+        font-family: "JetBrains Mono", monospace;
+        position: relative;
+        z-index: 2;
+      }
+      .hero-title {
+        font-size: 160px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        line-height: 1.1;
+        position: relative;
+        z-index: 2;
+      }
+      .hero-subtitle {
+        font-size: 40px;
+        font-weight: 400;
+        letter-spacing: 0.15em;
+        opacity: 0.9;
+        position: relative;
+        z-index: 2;
+      }
+      .hero-rule {
+        width: 400px;
+        height: 3px;
+        background: var(--accent);
+        position: relative;
+        z-index: 2;
+      }
+      .hero-stats {
+        display: flex;
+        gap: 56px;
+        margin-top: 24px;
+        position: relative;
+        z-index: 2;
+      }
+      .hero-stat {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .hero-stat-value {
+        font-size: 72px;
+        font-weight: 700;
+        color: var(--accent-soft);
+        font-family: "JetBrains Mono", monospace;
+        line-height: 1;
+      }
+      .hero-stat-label {
+        font-size: 20px;
+        color: var(--hero-ink);
+        opacity: 0.75;
+        letter-spacing: 0.1em;
+      }
+
+      /* ===== Scene 3: KPI 卡片网格 (12-22s) ===== */
+      #scene-3 {
+        background: var(--bg);
+        padding: 80px 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+      }
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 28px;
+        flex: 1;
+      }
+      .kpi-card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 32px 28px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 14px;
+      }
+      .kpi-label {
+        font-size: 20px;
+        color: var(--ink-soft);
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.1em;
+      }
+      .kpi-value {
+        font-size: 84px;
+        font-weight: 700;
+        color: var(--accent);
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+      }
+      .kpi-desc {
+        font-size: 18px;
+        color: var(--ink-soft);
+      }
+      .kpi-card.alt .kpi-value { color: var(--accent-2); }
+      .kpi-card.alt2 .kpi-value { color: var(--accent-3); }
+      .kpi-card.alt3 .kpi-value { color: var(--accent-4); }
+
+      /* ===== Scene 4: 分类过滤演示 (22-30s) ===== */
+      #scene-4 {
+        background: var(--bg);
+        padding: 80px 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+      }
+      .filter-bar {
+        display: flex;
+        gap: 16px;
+        position: relative;
+        padding: 8px 0;
+      }
+      .filter-tab {
+        padding: 14px 36px;
+        font-size: 24px;
+        font-family: "Noto Serif SC", serif;
+        color: var(--ink-soft);
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
+      }
+      .filter-tab.active {
+        color: var(--paper);
+        background: var(--accent);
+        border-color: var(--accent);
+        box-shadow: 0 4px 16px rgba(200, 70, 58, 0.25);
+      }
+      .filter-count {
+        font-size: 28px;
+        color: var(--ink-soft);
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.1em;
+      }
+      .filter-count strong {
+        color: var(--accent);
+        font-size: 36px;
+        font-weight: 700;
+      }
+      .filter-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        flex: 1;
+      }
+      .filter-card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 24px 20px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: opacity 0.3s;
+      }
+      .filter-card .fc-label {
+        font-size: 18px;
+        color: var(--ink-soft);
+        font-family: "JetBrains Mono", monospace;
+      }
+      .filter-card .fc-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .filter-card.dim {
+        opacity: 0.25;
+      }
+      .filter-card.match {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(200, 70, 58, 0.15), var(--shadow);
+      }
+
+      /* ===== Scene 5: 搜索演示 (30-38s) ===== */
+      #scene-5 {
+        background: var(--bg);
+        padding: 80px 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+      }
+      .search-box {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background: var(--paper);
+        border: 2px solid var(--line);
+        border-radius: 12px;
+        padding: 24px 36px;
+        box-shadow: var(--shadow);
+      }
+      .search-box:focus-within {
+        border-color: var(--accent);
+      }
+      .search-icon {
+        font-size: 36px;
+        color: var(--accent);
+        font-family: "JetBrains Mono", monospace;
+      }
+      .search-input {
+        font-size: 36px;
+        font-family: "Noto Serif SC", serif;
+        color: var(--ink);
+        flex: 1;
+        display: flex;
+        align-items: center;
+      }
+      .search-placeholder {
+        color: var(--ink-soft);
+        opacity: 0.5;
+      }
+      .search-query {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .q-char { display: inline-block; }
+      .q-cursor {
+        display: inline-block;
+        width: 3px;
+        height: 36px;
+        background: var(--accent);
+        margin-left: 4px;
+        vertical-align: middle;
+      }
+      .search-result-info {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .result-count {
+        font-size: 32px;
+        color: var(--ink-soft);
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.1em;
+      }
+      .result-count strong {
+        color: var(--accent);
+        font-size: 40px;
+        font-weight: 700;
+      }
+      .result-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        flex: 1;
+      }
+      .result-item {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 24px 28px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .result-item .ri-tag {
+        font-size: 16px;
+        color: var(--accent);
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.1em;
+      }
+      .result-item .ri-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .result-item .ri-desc {
+        font-size: 18px;
+        color: var(--ink-soft);
+      }
+
+      /* ===== Scene 6: 结尾 (38-42s) ===== */
+      #scene-6 {
+        background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 50%, var(--hero-3) 100%);
+        color: var(--hero-ink);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 120px 160px;
+        gap: 32px;
+      }
+      #scene-6::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 70%, rgba(232, 184, 133, 0.16), transparent 60%);
+        pointer-events: none;
+      }
+      .end-mark {
+        font-size: 28px;
+        letter-spacing: 0.4em;
+        color: var(--accent-soft);
+        font-family: "JetBrains Mono", monospace;
+        position: relative;
+        z-index: 2;
+      }
+      .end-title {
+        font-size: 100px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        position: relative;
+        z-index: 2;
+      }
+      .end-rule {
+        width: 200px;
+        height: 4px;
+        background: var(--accent);
+        position: relative;
+        z-index: 2;
+      }
+      .end-tagline {
+        font-size: 36px;
+        font-weight: 400;
+        letter-spacing: 0.18em;
+        opacity: 0.92;
+        position: relative;
+        z-index: 2;
+        text-align: center;
+      }
+      .end-meta {
+        margin-top: 24px;
+        display: flex;
+        gap: 40px;
+        font-size: 22px;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--accent-soft);
+        letter-spacing: 0.12em;
+        position: relative;
+        z-index: 2;
+      }
+      .end-meta span {
+        padding: 8px 20px;
+        border: 1px solid rgba(232, 184, 133, 0.3);
+        border-radius: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-composition-id="root" data-width="1920" data-height="1080" data-start="0" data-duration="42" data-track-index="0">
+
+      <!-- Scene 1: 项目概览 (0-5s) -->
+      <div id="scene-1" class="scene clip" data-start="0" data-duration="5.2">
+        <div class="cover-eyebrow">DASHBOARD SHOWCASE · 2026</div>
+        <h1 class="cover-title">详解西游记</h1>
+        <div class="cover-rule"></div>
+        <div class="cover-subtitle">数据仪表盘展示</div>
+        <div class="cover-meta">
+          <span>古典文本</span>
+          <span>数字人文</span>
+          <span>交互式可视化</span>
+        </div>
+      </div>
+
+      <!-- Scene 2: dashboard hero (5-12s) -->
+      <div id="scene-2" class="scene clip" data-start="5" data-duration="7.2">
+        <div class="hero-eyebrow">INTERACTIVE DASHBOARD</div>
+        <h1 class="hero-title">详解西游记</h1>
+        <div class="hero-rule"></div>
+        <div class="hero-subtitle">数字人文 · 交互式仪表盘</div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-value">100</div>
+            <div class="hero-stat-label">回</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">56</div>
+            <div class="hero-stat-label">人物</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">79</div>
+            <div class="hero-stat-label">专题</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">61</div>
+            <div class="hero-stat-label">可视化</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 3: KPI 卡片网格 (12-22s) -->
+      <div id="scene-3" class="scene clip" data-start="12" data-duration="10.2">
+        <div class="section-header">
+          <div class="section-eyebrow">01 / KPI OVERVIEW</div>
+          <h2 class="section-title">核心指标</h2>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">A1 逐回解读</div>
+            <div class="kpi-value">100</div>
+            <div class="kpi-desc">回回细读 · 收束完成</div>
+          </div>
+          <div class="kpi-card alt">
+            <div class="kpi-label">A2 个人随笔</div>
+            <div class="kpi-value">43</div>
+            <div class="kpi-desc">美学 · 心理 · 媒介史</div>
+          </div>
+          <div class="kpi-card alt2">
+            <div class="kpi-label">A3 人物深化</div>
+            <div class="kpi-value">56</div>
+            <div class="kpi-desc">取经五众 · 神魔谱系</div>
+          </div>
+          <div class="kpi-card alt3">
+            <div class="kpi-label">A4 主题专题</div>
+            <div class="kpi-value">79</div>
+            <div class="kpi-desc">十七维叙事学框架</div>
+          </div>
+          <div class="kpi-card alt2">
+            <div class="kpi-label">A5 文化背景</div>
+            <div class="kpi-value">17</div>
+            <div class="kpi-desc">九层明代镜像结构</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">A6 诗词歌赋</div>
+            <div class="kpi-value">4</div>
+            <div class="kpi-desc">诗词四层次形成</div>
+          </div>
+          <div class="kpi-card alt">
+            <div class="kpi-label">D3.js 可视化</div>
+            <div class="kpi-value">61</div>
+            <div class="kpi-desc">页面 · 132 数据维度</div>
+          </div>
+          <div class="kpi-card alt3">
+            <div class="kpi-label">KPI 总数</div>
+            <div class="kpi-value">45</div>
+            <div class="kpi-desc">仪表盘指标汇总</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 4: 分类过滤演示 (22-30s) -->
+      <div id="scene-4" class="scene clip" data-start="22" data-duration="8.2">
+        <div class="section-header">
+          <div class="section-eyebrow">02 / FILTER</div>
+          <h2 class="section-title">分类过滤</h2>
+        </div>
+        <div class="filter-bar">
+          <div class="filter-tab active" data-tab="0">全部</div>
+          <div class="filter-tab" data-tab="1">逐回解读</div>
+          <div class="filter-tab" data-tab="2">人物</div>
+          <div class="filter-tab" data-tab="3">主题</div>
+          <div class="filter-tab" data-tab="4">文化</div>
+        </div>
+        <div class="filter-count">显示 <strong id="filter-count-num">8</strong> 条结果</div>
+        <div class="filter-grid">
+          <div class="filter-card match" data-cat="0">
+            <div class="fc-label">A1</div>
+            <div class="fc-title">逐回解读</div>
+          </div>
+          <div class="filter-card" data-cat="1">
+            <div class="fc-label">A3</div>
+            <div class="fc-title">人物深化</div>
+          </div>
+          <div class="filter-card" data-cat="0">
+            <div class="fc-label">A2</div>
+            <div class="fc-title">个人随笔</div>
+          </div>
+          <div class="filter-card" data-cat="0">
+            <div class="fc-label">A4</div>
+            <div class="fc-title">主题专题</div>
+          </div>
+          <div class="filter-card" data-cat="0">
+            <div class="fc-label">A5</div>
+            <div class="fc-title">文化背景</div>
+          </div>
+          <div class="filter-card" data-cat="0">
+            <div class="fc-label">A6</div>
+            <div class="fc-title">诗词歌赋</div>
+          </div>
+          <div class="filter-card" data-cat="0">
+            <div class="fc-label">D3</div>
+            <div class="fc-title">可视化</div>
+          </div>
+          <div class="filter-card" data-cat="0">
+            <div class="fc-label">KPI</div>
+            <div class="fc-title">指标汇总</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 5: 搜索演示 (30-38s) -->
+      <div id="scene-5" class="scene clip" data-start="30" data-duration="8.2">
+        <div class="section-header">
+          <div class="section-eyebrow">03 / SEARCH</div>
+          <h2 class="section-title">搜索演示</h2>
+        </div>
+        <div class="search-box">
+          <div class="search-icon">Q</div>
+          <div class="search-input">
+            <span class="search-query">
+              <span class="q-char q1">悟</span><span class="q-char q2">空</span>
+            </span>
+            <span class="q-cursor"></span>
+          </div>
+        </div>
+        <div class="search-result-info">
+          <div class="result-count">找到 <strong>12</strong> 条结果</div>
+        </div>
+        <div class="result-list">
+          <div class="result-item">
+            <div class="ri-tag">人物</div>
+            <div class="ri-title">孙悟空</div>
+            <div class="ri-desc">取经五众 · 心猿</div>
+          </div>
+          <div class="result-item">
+            <div class="ri-tag">回目</div>
+            <div class="ri-title">第七回</div>
+            <div class="ri-desc">八卦炉中逃大圣</div>
+          </div>
+          <div class="result-item">
+            <div class="ri-tag">专题</div>
+            <div class="ri-title">真假猴王</div>
+            <div class="ri-desc">六耳猕猴 · 身份辨析</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 6: 结尾 (38-42s) -->
+      <div id="scene-6" class="scene clip" data-start="38" data-duration="4">
+        <div class="end-mark">END · 详解西游记</div>
+        <h1 class="end-title">仪表盘展示</h1>
+        <div class="end-rule"></div>
+        <div class="end-tagline">古典文本 × 数字人文 × 交互式可视化</div>
+        <div class="end-meta">
+          <span>v2.2.27</span>
+          <span>2026-07-29</span>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      // ===== Scene 1: 项目概览 (0-5s) =====
+      tl.from("#scene-1 .cover-eyebrow", { y: 30, opacity: 0, duration: 0.5, ease: "power3.out" }, 0.2)
+        .from("#scene-1 .cover-title", { y: 60, opacity: 0, duration: 0.7, ease: "power3.out" }, 0.4)
+        .from("#scene-1 .cover-rule", { scaleX: 0, transformOrigin: "left center", duration: 0.5, ease: "power2.out" }, 1.1)
+        .from("#scene-1 .cover-subtitle", { y: 30, opacity: 0, duration: 0.5, ease: "power3.out" }, 1.3)
+        .from("#scene-1 .cover-meta span", { y: 20, opacity: 0, duration: 0.4, ease: "back.out(1.4)", stagger: 0.1 }, 1.8)
+        .to("#scene-1", { opacity: 0, duration: 0.4, ease: "power2.in" }, 4.6);
+
+      // ===== Scene 2: dashboard hero (5-12s) =====
+      tl.from("#scene-2 .hero-eyebrow", { y: 20, opacity: 0, duration: 0.4, ease: "power3.out" }, 5.2)
+        .from("#scene-2 .hero-title", { y: 60, opacity: 0, duration: 0.8, ease: "power3.out" }, 5.4)
+        .from("#scene-2 .hero-rule", { scaleX: 0, transformOrigin: "left center", duration: 0.6, ease: "power2.out" }, 6.1)
+        .from("#scene-2 .hero-subtitle", { y: 30, opacity: 0, duration: 0.5, ease: "power3.out" }, 6.3)
+        .from("#scene-2 .hero-stat", { y: 40, opacity: 0, duration: 0.5, ease: "back.out(1.4)", stagger: 0.12 }, 6.8)
+        .to("#scene-2", { opacity: 0, duration: 0.4, ease: "power2.in" }, 11.6);
+
+      // ===== Scene 3: KPI 卡片网格 (12-22s) =====
+      tl.from("#scene-3 .section-eyebrow", { y: 20, opacity: 0, duration: 0.4, ease: "power3.out" }, 12.2)
+        .from("#scene-3 .section-title", { y: 30, opacity: 0, duration: 0.5, ease: "power3.out" }, 12.4)
+        .from("#scene-3 .kpi-card", { y: 50, opacity: 0, duration: 0.5, ease: "back.out(1.3)", stagger: 0.1 }, 12.8)
+        .to("#scene-3", { opacity: 0, duration: 0.4, ease: "power2.in" }, 21.6);
+
+      // ===== Scene 4: 分类过滤演示 (22-30s) =====
+      tl.from("#scene-4 .section-eyebrow", { y: 20, opacity: 0, duration: 0.4, ease: "power3.out" }, 22.2)
+        .from("#scene-4 .section-title", { y: 30, opacity: 0, duration: 0.5, ease: "power3.out" }, 22.4)
+        .from("#scene-4 .filter-tab", { y: 30, opacity: 0, duration: 0.4, ease: "power3.out", stagger: 0.08 }, 22.8)
+        .from("#scene-4 .filter-count", { opacity: 0, duration: 0.4, ease: "power2.out" }, 23.3)
+        .from("#scene-4 .filter-card", { y: 40, opacity: 0, duration: 0.4, ease: "power3.out", stagger: 0.05 }, 23.5);
+
+      // 过滤演示：切换到"人物"
+      tl.to("#scene-4 .filter-tab", { color: "#6b5e4d", backgroundColor: "#ffffff", borderColor: "#d9cdb8", duration: 0.3 }, 24.5)
+        .to("#scene-4 .filter-tab[data-tab='2']", { color: "#ffffff", backgroundColor: "#c8463a", borderColor: "#c8463a", duration: 0.3, ease: "power2.out" }, 24.5)
+        .to("#scene-4 .filter-card:not([data-cat='1'])", { opacity: 0.25, scale: 0.95, duration: 0.4, ease: "power2.out" }, 24.8)
+        .to("#scene-4 .filter-card[data-cat='1']", { borderColor: "#c8463a", boxShadow: "0 0 0 3px rgba(200, 70, 58, 0.15), 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06)", duration: 0.4, ease: "power2.out" }, 24.8)
+        .to("#filter-count-num", { textContent: "1", duration: 0.3 }, 24.8);
+
+      // 切换到"主题"
+      tl.to("#scene-4 .filter-tab[data-tab='2']", { color: "#6b5e4d", backgroundColor: "#ffffff", borderColor: "#d9cdb8", duration: 0.3 }, 26.0)
+        .to("#scene-4 .filter-tab[data-tab='3']", { color: "#ffffff", backgroundColor: "#c8463a", borderColor: "#c8463a", duration: 0.3, ease: "power2.out" }, 26.0)
+        .to("#scene-4 .filter-card", { opacity: 1, scale: 1, borderColor: "#d9cdb8", boxShadow: "0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06)", duration: 0.4, ease: "power2.out" }, 26.3)
+        .to("#scene-4 .filter-card[data-cat='0']:nth-child(4)", { opacity: 0.25, scale: 0.95, duration: 0.4, ease: "power2.out" }, 26.3)
+        .to("#filter-count-num", { textContent: "3", duration: 0.3 }, 26.3);
+
+      // 切换回"全部"
+      tl.to("#scene-4 .filter-tab[data-tab='3']", { color: "#6b5e4d", backgroundColor: "#ffffff", borderColor: "#d9cdb8", duration: 0.3 }, 27.5)
+        .to("#scene-4 .filter-tab[data-tab='0']", { color: "#ffffff", backgroundColor: "#c8463a", borderColor: "#c8463a", duration: 0.3, ease: "power2.out" }, 27.5)
+        .to("#scene-4 .filter-card", { opacity: 1, scale: 1, borderColor: "#d9cdb8", boxShadow: "0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06)", duration: 0.4, ease: "power2.out" }, 27.8)
+        .to("#filter-count-num", { textContent: "8", duration: 0.3 }, 27.8)
+        .to("#scene-4", { opacity: 0, duration: 0.4, ease: "power2.in" }, 29.6);
+
+      // ===== Scene 5: 搜索演示 (30-38s) =====
+      tl.from("#scene-5 .section-eyebrow", { y: 20, opacity: 0, duration: 0.4, ease: "power3.out" }, 30.2)
+        .from("#scene-5 .section-title", { y: 30, opacity: 0, duration: 0.5, ease: "power3.out" }, 30.4)
+        .from("#scene-5 .search-box", { y: 40, opacity: 0, duration: 0.5, ease: "power3.out" }, 30.8)
+        .from("#scene-5 .search-icon", { opacity: 0, scale: 0.5, duration: 0.3, ease: "back.out(1.6)" }, 31.1)
+        .from("#scene-5 .q1", { opacity: 0, y: 10, duration: 0.2, ease: "power3.out" }, 31.4)
+        .from("#scene-5 .q-cursor", { opacity: 0, duration: 0.1 }, 31.4)
+        .from("#scene-5 .q2", { opacity: 0, y: 10, duration: 0.2, ease: "power3.out" }, 31.7);
+
+      // 光标闪烁
+      tl.to("#scene-5 .q-cursor", { opacity: 0, duration: 0.2, yoyo: true, repeat: 7, ease: "none" }, 32.0);
+
+      // 搜索结果出现
+      tl.from("#scene-5 .result-count", { opacity: 0, y: 20, duration: 0.4, ease: "power3.out" }, 32.2)
+        .from("#scene-5 .result-item", { y: 40, opacity: 0, duration: 0.5, ease: "back.out(1.3)", stagger: 0.15 }, 32.6)
+        .to("#scene-5", { opacity: 0, duration: 0.4, ease: "power2.in" }, 37.6);
+
+      // ===== Scene 6: 结尾 (38-42s) =====
+      tl.from("#scene-6 .end-mark", { y: 20, opacity: 0, duration: 0.4, ease: "power3.out" }, 38.2)
+        .from("#scene-6 .end-title", { y: 50, opacity: 0, duration: 0.6, ease: "power3.out" }, 38.4)
+        .from("#scene-6 .end-rule", { scaleX: 0, transformOrigin: "left center", duration: 0.5, ease: "power2.out" }, 39.0)
+        .from("#scene-6 .end-tagline", { y: 30, opacity: 0, duration: 0.5, ease: "power3.out" }, 39.2)
+        .from("#scene-6 .end-meta span", { y: 20, opacity: 0, duration: 0.4, ease: "back.out(1.4)", stagger: 0.1 }, 39.6);
+
+      window.__timelines["root"] = tl;
+    </script>
+  </body>
+</html>

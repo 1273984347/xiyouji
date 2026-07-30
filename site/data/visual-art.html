@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视觉艺术 · 心经物质形态与气味地图 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --gold: #d4af37;
+            --gold-soft: #f0d878;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+            --shadow-deep: 0 4px 16px rgba(60, 40, 20, 0.14);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 920px) {
+            .kpi-row { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 560px) {
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-deep);
+        }
+        .kpi-card.gold { border-top-color: var(--gold); }
+        .kpi-card.blue { border-top-color: var(--accent-2); }
+        .kpi-card.green { border-top-color: var(--accent-4); }
+        .kpi-card.brown { border-top-color: var(--accent-3); }
+        .kpi-card .label {
+            font-size: 0.74rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card.gold .label { color: var(--accent-3); }
+        .kpi-card.blue .label { color: var(--accent-2); }
+        .kpi-card.green .label { color: var(--accent-4); }
+        .kpi-card.brown .label { color: var(--accent-3); }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .desc {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        /* 项目介绍卡 */
+        .project-intro {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 8px;
+            padding: 22px 26px;
+            margin-bottom: 20px;
+        }
+        .project-intro h3 {
+            color: var(--accent);
+            font-size: 1.15rem;
+            margin-bottom: 4px;
+            letter-spacing: 0.04em;
+        }
+        .project-intro .english-name {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            letter-spacing: 0.15em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 12px;
+        }
+        .project-intro .intro-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 10px 20px;
+            font-size: 0.88rem;
+            margin-top: 10px;
+        }
+        .project-intro .intro-field .k {
+            color: var(--accent-3);
+            font-size: 0.74rem;
+            letter-spacing: 0.08em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 2px;
+        }
+        .project-intro .intro-field .v {
+            color: var(--ink);
+            font-weight: 500;
+        }
+        .project-intro .intro-block {
+            grid-column: 1 / -1;
+            margin-top: 6px;
+        }
+        /* 艺术宣言引用块 */
+        .artistic-statement {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 100%);
+            color: #f5e9d4;
+            border-radius: 8px;
+            padding: 24px 28px;
+            margin: 18px 0;
+            border-left: 4px solid var(--gold);
+            position: relative;
+        }
+        .artistic-statement::before {
+            content: "“";
+            position: absolute;
+            left: 16px;
+            top: 4px;
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.4;
+            font-family: serif;
+            line-height: 1;
+        }
+        .artistic-statement .label {
+            color: var(--gold);
+            font-size: 0.74rem;
+            letter-spacing: 0.18em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 36px;
+        }
+        .artistic-statement .text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            font-style: italic;
+            padding-left: 36px;
+            color: #f5e9d4;
+        }
+        /* 设计规格表 */
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: 12px;
+            margin: 18px 0;
+        }
+        .spec-item {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--gold);
+            border-radius: 6px;
+            padding: 10px 14px;
+        }
+        .spec-item .k {
+            font-size: 0.72rem;
+            color: var(--accent-3);
+            letter-spacing: 0.1em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 3px;
+        }
+        .spec-item .v {
+            font-size: 0.9rem;
+            color: var(--ink);
+            font-weight: 500;
+        }
+        /* 心经波纹图 */
+        #wave-svg {
+            width: 100%;
+            height: 480px;
+            display: block;
+            background: linear-gradient(180deg, #1a1410 0%, #2a1f18 100%);
+            border-radius: 8px;
+            margin: 14px 0;
+        }
+        .wave-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(255, 248, 236, 0.97);
+            color: var(--ink);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            max-width: 260px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .wave-tip .tip-title {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .wave-tip .tip-emotion {
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.78rem;
+            margin-top: 4px;
+        }
+        .wave-tip .tip-phrase {
+            color: var(--accent-3);
+            font-style: italic;
+            margin-top: 4px;
+            font-size: 0.78rem;
+        }
+        /* 通用卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            margin-top: 16px;
+        }
+        @media (max-width: 1100px) {
+            .card-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 720px) {
+            .card-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .card-grid { grid-template-columns: 1fr; }
+        }
+        /* 诵经记录卡片 */
+        .chant-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            border-top: 3px solid var(--accent-2);
+            position: relative;
+            overflow: hidden;
+        }
+        .chant-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-deep);
+        }
+        .chant-card.amp-high { border-top-color: var(--accent); }
+        .chant-card.amp-mid { border-top-color: #d97706; }
+        .chant-card.amp-low { border-top-color: var(--accent-2); }
+        .chant-card .ch-n {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            opacity: 0.6;
+        }
+        .chant-card .ch-chapter {
+            font-size: 0.74rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 2px;
+            letter-spacing: 0.05em;
+        }
+        .chant-card .ch-location {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+        .chant-card .ch-context {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+            line-height: 1.55;
+        }
+        .chant-card .ch-amp {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .chant-card .ch-amp-bar {
+            display: inline-block;
+            height: 6px;
+            border-radius: 3px;
+            vertical-align: middle;
+        }
+        .chant-card .ch-emotion {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            margin-bottom: 6px;
+            font-style: italic;
+        }
+        .chant-card .ch-emotion .arrow {
+            color: var(--accent-3);
+            margin: 0 4px;
+        }
+        .chant-card .ch-phrase {
+            font-size: 0.76rem;
+            color: var(--accent-3);
+            font-style: italic;
+            border-top: 1px dashed var(--line);
+            padding-top: 6px;
+            line-height: 1.5;
+        }
+        /* 气味地点卡片 */
+        .scent-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            border-left: 4px solid var(--accent);
+            position: relative;
+        }
+        .scent-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-deep);
+        }
+        .scent-card.cat-immortal { border-left-color: var(--accent-4); }
+        .scent-card.cat-danger { border-left-color: var(--accent); }
+        .scent-card.cat-desolate { border-left-color: var(--ink-soft); }
+        .scent-card .sc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+        .scent-card .sc-n {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.72rem;
+            color: var(--ink-soft);
+        }
+        .scent-card .sc-cat {
+            font-size: 0.66rem;
+            padding: 2px 7px;
+            border-radius: 8px;
+            color: #fff;
+            white-space: nowrap;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        .sc-cat.cat-immortal { background: var(--accent-4); }
+        .sc-cat.cat-danger { background: var(--accent); }
+        .sc-cat.cat-desolate { background: var(--ink-soft); }
+        .scent-card .sc-location {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+        .scent-card .sc-meta {
+            font-size: 0.72rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 8px;
+        }
+        .scent-card .sc-profile {
+            font-size: 0.86rem;
+            color: var(--accent-3);
+            font-weight: 500;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            background: #fff8ec;
+            border-radius: 4px;
+            padding: 6px 8px;
+        }
+        .scent-card .sc-notes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        .scent-card .sc-notes .chip {
+            font-size: 0.7rem;
+            padding: 2px 7px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            color: var(--ink-soft);
+        }
+        .scent-card .sc-intensity {
+            font-size: 0.74rem;
+            margin-bottom: 6px;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .scent-card .sc-stars {
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+        .scent-card .sc-mood {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+        .scent-card .sc-desc {
+            font-size: 0.78rem;
+            color: var(--ink);
+            border-left: 2px solid var(--accent-soft);
+            padding-left: 8px;
+            margin-bottom: 8px;
+            line-height: 1.55;
+            font-style: italic;
+        }
+        .scent-card .sc-formula {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3px;
+            font-size: 0.72rem;
+            background: var(--bg);
+            border-radius: 4px;
+            padding: 6px 8px;
+            border: 1px dashed var(--line);
+        }
+        .scent-card .sc-formula .note-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 6px;
+        }
+        .scent-card .sc-formula .note-label {
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.68rem;
+        }
+        .scent-card .sc-formula .note-val {
+            color: var(--ink);
+            text-align: right;
+        }
+        /* 类别分组徽章 */
+        .category-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 16px 0 6px;
+            font-size: 0.84rem;
+        }
+        .category-row .cat-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 14px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            color: var(--ink-soft);
+        }
+        .category-row .cat-pill .dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            display: inline-block;
+        }
+        .category-row .cat-pill.immortal .dot { background: var(--accent-4); }
+        .category-row .cat-pill.danger .dot { background: var(--accent); }
+        .category-row .cat-pill.desolate .dot { background: var(--ink-soft); }
+        /* 取经路径气味流 */
+        #scent-flow-svg {
+            width: 100%;
+            height: 280px;
+            display: block;
+            background: linear-gradient(180deg, #faf7f2 0%, #fff8ec 100%);
+            border-radius: 8px;
+            margin-top: 14px;
+        }
+        .scent-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            max-width: 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .scent-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        .scent-tip .tip-meta { color: #e9b885; font-size: 0.74rem; font-family: "JetBrains Mono", monospace; }
+        /* 视觉艺术构想卡 */
+        .idea-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            border-top: 3px solid var(--accent-3);
+            position: relative;
+        }
+        .idea-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-deep);
+        }
+        .idea-card .id-n {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.4rem;
+            color: var(--accent-soft);
+            opacity: 0.5;
+            font-weight: 700;
+        }
+        .idea-card .id-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+            padding-right: 32px;
+        }
+        .idea-card .id-form {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 8px;
+            background: var(--accent-soft);
+            color: var(--accent-3);
+            margin-bottom: 8px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+        .idea-card .id-concept {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        .idea-card .id-innovation {
+            font-size: 0.8rem;
+            color: var(--accent);
+            background: #fff8ec;
+            border-left: 2px solid var(--accent);
+            padding: 6px 8px;
+            border-radius: 0 4px 4px 0;
+            line-height: 1.55;
+            font-style: italic;
+        }
+        .idea-card .id-innovation::before {
+            content: "★ 创新 · ";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 0.72rem;
+            color: var(--accent-3);
+        }
+        /* 洞察栏 */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        /* 小标题 */
+        .sub-h {
+            font-size: 1rem;
+            color: var(--accent-2);
+            margin: 18px 0 8px;
+            letter-spacing: 0.05em;
+            border-left: 3px solid var(--accent-2);
+            padding-left: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        footer .gen-time {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+        /* 图例 */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 18px;
+            margin-top: 14px;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+        .legend .lg-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend .lg-dot {
+            width: 12px; height: 12px; border-radius: 50%;
+            display: inline-block;
+        }
+        .legend .lg-line {
+            width: 22px; height: 3px; display: inline-block; border-radius: 2px;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>视觉艺术 · 心经物质形态与气味地图</h1>
+        <div class="subtitle">VISUAL &amp; ART</div>
+        <div class="tagline">将西游转化为独特的视觉语言与感官体验</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">/</span>
+            <span>视觉艺术</span>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入式版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">CHANTINGS · 诵经</div>
+                <div class="value">10<span style="font-size:1rem;color:var(--ink-soft);"> 次</span></div>
+                <div class="desc">心经诵经记录</div>
+            </div>
+            <div class="kpi-card gold">
+                <div class="label">MAX AMP · 最大波幅</div>
+                <div class="value">1.2</div>
+                <div class="desc">比丘国·最深波谷</div>
+            </div>
+            <div class="kpi-card green">
+                <div class="label">SCENTS · 气味地点</div>
+                <div class="value">10<span style="font-size:1rem;color:var(--ink-soft);"> 处</span></div>
+                <div class="desc">取经路径气味节点</div>
+            </div>
+            <div class="kpi-card brown">
+                <div class="label">CATEGORIES · 气味分类</div>
+                <div class="value">3<span style="font-size:1rem;color:var(--ink-soft);"> 种</span></div>
+                <div class="desc">仙境·危险·荒凉</div>
+            </div>
+            <div class="kpi-card blue">
+                <div class="label">IDEAS · 视觉构想</div>
+                <div class="value">10<span style="font-size:1rem;color:var(--ink-soft);"> 个</span></div>
+                <div class="desc">视觉艺术项目构想</div>
+            </div>
+        </div>
+
+        <!-- 板块 1：心经物质形态数据雕塑 -->
+        <section class="section">
+            <h2 class="section-title">心经物质形态 · 数据雕塑</h2>
+            <div class="section-sub">Material Form of the Heart Sutra · 用极细金线在展墙上以波浪形态呈现诵经情绪波动</div>
+
+            <div class="project-intro" id="project-intro"></div>
+
+            <div class="artistic-statement" id="artistic-statement"></div>
+
+            <h3 class="sub-h">雕塑设计规格</h3>
+            <div class="spec-grid" id="spec-grid"></div>
+
+            <h3 class="sub-h">核心可视化 · 心经波纹图（金线波动 + 心形空洞投影）</h3>
+            <div style="position:relative;">
+                <svg id="wave-svg"></svg>
+                <div class="wave-tip" id="wave-tip"></div>
+            </div>
+            <div class="legend">
+                <div class="lg-item"><span class="lg-line" style="background:#d4af37;box-shadow:0 0 6px #d4af37;"></span><span>金线波纹（极细金线 0.5mm）</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:#d4af37;"></span><span>波点（诵经记录）</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:#c8463a;"></span><span>深谷（高 amplitude）</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:#f0d878;"></span><span>归零（灵山成佛）</span></div>
+                <div class="lg-item"><span style="font-size:1.1rem;color:#d4af37;">♡</span><span>心形空洞投影</span></div>
+            </div>
+
+            <h3 class="sub-h">诵经记录卡片网格（10 次诵经 · 5 × 2）</h3>
+            <div class="card-grid" id="chant-grid"></div>
+        </section>
+
+        <!-- 板块 2：西游记气味地图 -->
+        <section class="section">
+            <h2 class="section-title">西游记气味地图 · 嗅觉艺术</h2>
+            <div class="section-sub">Scent Map of Journey to the West · 为取经路径关键地点设计独特气味</div>
+
+            <div class="project-intro" id="scent-intro"></div>
+
+            <div class="category-row">
+                <span class="cat-pill immortal"><span class="dot"></span>仙境型（3 处）· 花果山 · 五庄观 · 灵山</span>
+                <span class="cat-pill danger"><span class="dot"></span>危险型（5 处）· 白虎岭 · 火焰山 · 盘丝洞 · 狮驼岭 · 无底洞</span>
+                <span class="cat-pill desolate"><span class="dot"></span>荒凉型（2 处）· 五行山 · 流沙河</span>
+            </div>
+
+            <h3 class="sub-h">气味地点卡片网格（10 地点 · 5 × 2）</h3>
+            <div class="card-grid" id="scent-grid"></div>
+
+            <h3 class="sub-h">取经路径气味流（D3.js 路径可视化）</h3>
+            <div style="position:relative;">
+                <svg id="scent-flow-svg"></svg>
+                <div class="scent-tip" id="scent-tip"></div>
+            </div>
+            <div class="legend">
+                <div class="lg-item"><span class="lg-line" style="background:var(--accent-3);"></span><span>取经路径</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:var(--accent-4);"></span><span>仙境型</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:var(--accent);"></span><span>危险型</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:var(--ink-soft);"></span><span>荒凉型</span></div>
+                <div class="lg-item"><span>圆点大小 = 气味强度 intensity</span></div>
+            </div>
+        </section>
+
+        <!-- 板块 3：视觉艺术构想库 -->
+        <section class="section">
+            <h2 class="section-title">视觉艺术构想库 · 10 个项目构想</h2>
+            <div class="section-sub">Visual Art Ideas · 装置艺术 / 数据可视化 / 立体投影 / 光艺术 / 标本馆 / 沙画 / 三屏装置 / 书法 / 生态装置 / 摄影</div>
+            <div class="card-grid" id="idea-grid"></div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <h4>从视觉艺术视角看西游</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">返回数据看板</a> ·
+        <a href="../index.html">返回首页</a> ·
+        <a href="workplace.html">查看其他专题</a>
+        <span class="gen-time" id="gen-time"></span>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/05-诗词歌赋/原著诗词赏析.md">原著诗词赏析</a></div>
+    </footer>
+
+    <script>
+    // ===== 嵌入式 fallback 数据（fetch 失败时使用）=====
+    const EMBEDDED = {
+        heart_sutra_sculpture: {
+            project_name: "心经的物质形态",
+            english_name: "Material Form of the Heart Sutra",
+            art_form: "抽象数据雕塑·装置艺术",
+            core_concept: "统计《西游记》全文中唐僧诵读《多心经》的次数·场景·前后情节的情绪波动·用一根极细的金线·在展墙上以波浪形态呈现",
+            design_principle: "波峰代表诵经后心安的平缓·波谷代表诵经前后遭遇的极度恐惧·金线最终蜿蜒成一个巨大的'心'字空洞投影",
+            deeper_meaning: "这是一个关于'信仰如何对抗外界震荡'的物理模型",
+            sutra_chanting_records: [
+                { n: 1, chapter: "第 19 回", location: "浮屠山", context: "乌巢禅师传授《多心经》给唐僧·首次接触", pre_emotion: "期待·好奇", post_emotion: "震撼·觉醒", wave_amplitude: 0.3, wave_direction: "上升", key_phrase: "色不异空·空不异色" },
+                { n: 2, chapter: "第 20 回", location: "黄风岭", context: "遇黄风怪·悟空眼伤·唐僧诵经祈求", pre_emotion: "恐惧·担忧", post_emotion: "稍安·仍忧", wave_amplitude: 0.7, wave_direction: "波谷", key_phrase: "心无挂碍·无挂碍故" },
+                { n: 3, chapter: "第 27 回", location: "白虎岭", context: "三打白骨精·悟空被赶走·唐僧孤独诵经", pre_emotion: "愤怒·悲伤", post_emotion: "懊悔·孤独", wave_amplitude: 1.0, wave_direction: "深谷", key_phrase: "无有恐怖·远离颠倒梦想" },
+                { n: 4, chapter: "第 36 回", location: "乌鸡国", context: "救乌鸡国王·夜宿宝林寺·唐僧诵经安抚", pre_emotion: "焦虑·疲惫", post_emotion: "平静·坚定", wave_amplitude: 0.4, wave_direction: "上升", key_phrase: "究竟涅槃" },
+                { n: 5, chapter: "第 47 回", location: "通天河", context: "通天河遇阻·夜宿陈家庄·唐僧诵经求渡", pre_emotion: "焦虑·无助", post_emotion: "稍安·期待", wave_amplitude: 0.6, wave_direction: "波谷", key_phrase: "般若波罗蜜多" },
+                { n: 6, chapter: "第 62 回", location: "祭赛国", context: "祭赛国扫塔·夜半诵经·遇九头虫", pre_emotion: "庄严·平静", post_emotion: "惊扰·警觉", wave_amplitude: 0.5, wave_direction: "上升后下落", key_phrase: "三世诸佛·依般若波罗蜜多故" },
+                { n: 7, chapter: "第 78 回", location: "比丘国", context: "救小孩心肝·唐僧愤怒诵经", pre_emotion: "愤怒·悲悯", post_emotion: "坚定·悲悯", wave_amplitude: 1.2, wave_direction: "深谷后高峰", key_phrase: "无苦集灭道·无智亦无得" },
+                { n: 8, chapter: "第 85 回", location: "灭法国", context: "灭法国杀和尚·唐僧伪装·夜诵心经", pre_emotion: "恐惧·伪装", post_emotion: "平静·祈愿", wave_amplitude: 0.9, wave_direction: "波谷", key_phrase: "心无挂碍·无挂碍故" },
+                { n: 9, chapter: "第 93 回", location: "天竺国", context: "近灵山·天竺公主招亲·唐僧诵经定心", pre_emotion: "动摇·疲惫", post_emotion: "坚定·圆满", wave_amplitude: 0.3, wave_direction: "上升", key_phrase: "阿耨多罗三藐三菩提" },
+                { n: 10, chapter: "第 98 回", location: "灵山雷音寺", context: "到达灵山·凌云渡脱胎·唐僧最后一次诵经", pre_emotion: "圆满·感动", post_emotion: "成佛·无我", wave_amplitude: 0.0, wave_direction: "归零", key_phrase: "揭谛揭谛·波罗揭谛" }
+            ],
+            wave_statistics: {
+                total_chantings: 10,
+                max_amplitude: 1.2,
+                min_amplitude: 0.0,
+                avg_amplitude: 0.59,
+                deepest_valley: "比丘国·救小孩心肝",
+                highest_peak: "灵山·成佛归零",
+                trend: "波动逐渐平缓·最终归零·体现心性成熟"
+            },
+            sculpture_design: {
+                material: "极细金线（直径 0.5mm）",
+                wall_size: "12m × 4m 展墙",
+                wave_length: "每段约 1.2m·对应一次诵经",
+                color: "纯金·光泽度 95%",
+                lighting: "顶光 + 侧光·让金线产生微弱阴影",
+                projection: "金线最终蜿蜒成'心'字空洞·投影至地面",
+                interaction: "观众靠近时·心形空洞呼吸式闪烁"
+            },
+            artistic_statement: "信仰不是一成不变的平静·而是在恐惧与安定之间的反复拉锯·金线的波动是这拉锯的物质化"
+        },
+        scent_map: {
+            project_name: "西游记气味地图",
+            english_name: "Scent Map of Journey to the West",
+            art_form: "感官地图·嗅觉艺术",
+            core_concept: "为取经路径上的关键地点设计独特的气味·这是一次极其独特的感官阅读体验",
+            presentation_method: "一张长卷地图·每个地点旁边有一块可摩擦的香片·或一个二维码链接的定制香氛配方",
+            locations: [
+                { n: 1, location: "花果山", chapter: "第 1 回", geography: "东胜神洲·海中名山", scent_profile: "水汽·桃子的甜腻·猴群的动物体味", scent_notes: ["海水咸味", "熟桃甜香", "猿猴体味", "晨露清新"], intensity: 4, mood: "生机勃勃·原始野性", key_description: "刚出世的孙悟空·与万猴嬉戏·水帘洞飞瀑·桃花漫山", fragrance_formula: { top_note: "海风·桃香", middle_note: "猕猴体味·青草", base_note: "湿润岩石" } },
+                { n: 2, location: "五行山", chapter: "第 14 回", geography: "西牛贺洲·两界山", scent_profile: "岩石冷硬·尘土·500 年的孤寂", scent_notes: ["冰冷岩石", "尘土", "铁锈", "枯草"], intensity: 3, mood: "压抑·孤寂·等待", key_description: "悟空被压 500 年·只有铁丸铜汁·风沙漫天", fragrance_formula: { top_note: "尘土·寒风", middle_note: "岩石·铁锈", base_note: "枯草·枯寂" } },
+                { n: 3, location: "流沙河", chapter: "第 22 回", geography: "西牛贺洲·800 里流沙", scent_profile: "浑浊河水·沙土·湿气", scent_notes: ["浑浊水汽", "湿沙", "鱼腥", "河泥"], intensity: 3, mood: "荒凉·危险", key_description: "沙僧盘踞·水深仅 1m 但充满陷阱", fragrance_formula: { top_note: "湿沙·河风", middle_note: "鱼腥·河泥", base_note: "腐草" } },
+                { n: 4, location: "五庄观", chapter: "第 24-26 回", geography: "万寿山·五庄观", scent_profile: "仙草·人参果·道观檀香", scent_notes: ["道观檀香", "人参果甜香", "仙草", "清露"], intensity: 5, mood: "仙境·庄严", key_description: "镇元子的道观·万年人参果树·仙气盎然", fragrance_formula: { top_note: "人参果·清露", middle_note: "道观檀香·仙草", base_note: "云雾·沉香" } },
+                { n: 5, location: "白虎岭", chapter: "第 27 回", geography: "西牛贺洲·荒山", scent_profile: "枯骨·腐朽·阴风", scent_notes: ["枯骨", "腐肉", "阴风", "荒草"], intensity: 5, mood: "恐怖·阴森", key_description: "白骨精的领地·遍地白骨·阴风阵阵", fragrance_formula: { top_note: "阴风·腐草", middle_note: "枯骨·腐肉", base_note: "黄泉气息" } },
+                { n: 6, location: "火焰山", chapter: "第 59-61 回", geography: "西牛贺洲·800 里火焰", scent_profile: "灼热矿物质焦味·汗味·风干热浪", scent_notes: ["焦土", "硫磺", "汗味", "热浪"], intensity: 5, mood: "灼热·焦灼·渴望", key_description: "800 里火焰·寸草不生·行者三调芭蕉扇", fragrance_formula: { top_note: "热浪·焦土", middle_note: "硫磺·矿物", base_note: "汗味·烟熏" } },
+                { n: 7, location: "盘丝洞", chapter: "第 72-73 回", geography: "西牛贺洲·盘丝岭", scent_profile: "潮湿泥土腥气·昆虫信息素的微甜·腐化的丝绸味", scent_notes: ["潮湿泥土", "昆虫信息素", "腐丝", "蛛网"], intensity: 4, mood: "诡异·诱惑·危险", key_description: "七个蜘蛛精的洞府·丝网密布·湿气浓重", fragrance_formula: { top_note: "蛛网·湿气", middle_note: "昆虫信息素·腐丝", base_note: "泥土腥气" } },
+                { n: 8, location: "狮驼岭", chapter: "第 74-77 回", geography: "西牛贺洲·800 里狮驼岭", scent_profile: "血腥·骨头·恐怖", scent_notes: ["血腥", "人骨", "腐肉", "兵器铁锈"], intensity: 5, mood: "恐怖·死亡·绝望", key_description: "三妖吃人 800 里·人骨成山·血腥冲天", fragrance_formula: { top_note: "血腥·腐臭", middle_note: "人骨·兵器铁锈", base_note: "死亡气息" } },
+                { n: 9, location: "无底洞", chapter: "第 80-83 回", geography: "西牛贺洲·陷空山", scent_profile: "潮湿·花香·老鼠·地下深处的霉味", scent_notes: ["霉味", "老鼠体味", "花香（伪装）", "湿气"], intensity: 4, mood: "诡谲·诱骗·逼婚", key_description: "老鼠精的洞府·花香伪装·内里潮湿霉腐", fragrance_formula: { top_note: "花香·甜腻", middle_note: "湿气·老鼠体味", base_note: "霉腐" } },
+                { n: 10, location: "灵山雷音寺", chapter: "第 98 回", geography: "西牛贺洲·灵山", scent_profile: "檀香·贝叶经的草本味·一种'无'的洁净气味", scent_notes: ["檀香", "贝叶草本", "金粉", "纯净空气"], intensity: 5, mood: "庄严·圆满·无我", key_description: "佛国圣地·贝叶经香·金粉闪耀·空气纯净至极", fragrance_formula: { top_note: "檀香·贝叶", middle_note: "金粉·纯净空气", base_note: "无·洁净" } }
+            ],
+            scent_categories: {
+                "仙境型": ["花果山", "五庄观", "灵山雷音寺"],
+                "危险型": ["白虎岭", "火焰山", "盘丝洞", "狮驼岭", "无底洞"],
+                "荒凉型": ["五行山", "流沙河"]
+            },
+            presentation_innovation: "可摩擦香片 + 二维码香氛配方·让读者通过嗅觉进入西游世界"
+        },
+        visual_art_summary: {
+            sutra_chantings: 10,
+            max_wave_amplitude: 1.2,
+            deepest_valley: "比丘国·救小孩心肝",
+            scent_locations: 10,
+            scent_categories: 3,
+            visual_art_ideas: 10
+        },
+        visual_art_ideas: [
+            { n: 1, idea_name: "八十一难装置墙", art_form: "装置艺术·交互墙", concept: "一面 12m 的墙·用 81 个不同大小的方框·按八十一难的时间顺序排列·每个方框内有不同的视觉元素（金线·灰烬·血迹·碎片）", innovation: "用视觉密度表达难度的强弱·用材质表达灾难的性质" },
+            { n: 2, idea_name: "悟空情绪心电图", art_form: "数据可视化·动态心电图", concept: "把悟空的 100 回情绪波动做成心电图·红色波峰代表愤怒·蓝色波谷代表悲伤·绿色平直代表平静", innovation: "把抽象的情绪用医学符号可视化" },
+            { n: 3, idea_name: "三界地图立体投影", art_form: "立体投影·装置", concept: "把天界·人间·地府三层立体投影·用半透明纱幕·每层之间用烟雾效果隔开", innovation: "打破传统地图的平面限制·让三界立体可见" },
+            { n: 4, idea_name: "金箍棒光柱", art_form: "光艺术·雕塑", concept: "一根 10m 高的金箍棒光柱·内部 LED 灯按悟空的战力数值发光·顶部喷射雾化水", innovation: "用光与水雾塑造神话兵器的物质形态" },
+            { n: 5, idea_name: "妖怪标本馆", art_form: "标本馆·装置", concept: "把 81 难的妖怪做成标本·每个标本旁边有详细的'物种卡片'·标注栖息地·食性·背景·战斗力", innovation: "用博物馆的严肃感呈现妖怪的荒诞·产生强烈反差" },
+            { n: 6, idea_name: "取经路线沙画", art_form: "沙画·动态", concept: "把取经路线做成沙画·沙子颜色按地区变化·绿色草原·黄色沙漠·红色火焰山", innovation: "沙画的流动性表达取经路的曲折与变化" },
+            { n: 7, idea_name: "佛道道三家对话", art_form: "三屏装置·对话", concept: "三块屏幕分别代表佛·道·儒·屏幕上有各自的代表人物（如来·老君·孔子）·用 AI 让他们对话", innovation: "让三家思想进行当代对话·打破传统隔阂" },
+            { n: 8, idea_name: "心经书法长卷", art_form: "书法·装置", concept: "把《多心经》全文用书法写在 100m 长卷上·每段字的大小与唐僧诵经时的情绪强度成比例", innovation: "用书法的视觉变化呈现内心波动" },
+            { n: 9, idea_name: "妖怪生态瓶", art_form: "生态装置·微缩景观", concept: "每个妖怪做成一个生态瓶·瓶内有微缩的妖怪·洞府·小妖·环境", innovation: "用微缩景观呈现妖怪的生存状态" },
+            { n: 10, idea_name: "取经团队合影", art_form: "摄影·装置", concept: "用摄影术拍取经团队 5 人的'合影'·每个人在不同时间地点的同一姿势·合成一张", innovation: "打破时间的限制·让 14 年的取经过程压缩成一张照片" }
+        ]
+    };
+
+    // ===== 类别与配色映射 =====
+    // scent_category 判定（基于 scent_categories 反查）
+    function getScentCategory(location, scent_categories) {
+        for (const cat in scent_categories) {
+            if (scent_categories[cat].includes(location)) {
+                return cat;
+            }
+        }
+        return "未知";
+    }
+    const CAT_CLASS_MAP = {
+        "仙境型": "cat-immortal",
+        "危险型": "cat-danger",
+        "荒凉型": "cat-desolate"
+    };
+    const CAT_COLOR_MAP = {
+        "仙境型": "#5a7a3a",
+        "危险型": "#c8463a",
+        "荒凉型": "#6b5e4d"
+    };
+
+    // 视觉艺术构想 art_form 配色
+    const IDEA_FORM_COLOR = {
+        "装置艺术·交互墙": "#c8463a",
+        "数据可视化·动态心电图": "#3a6b8c",
+        "立体投影·装置": "#7a5230",
+        "光艺术·雕塑": "#d4af37",
+        "标本馆·装置": "#5a7a3a",
+        "沙画·动态": "#d97706",
+        "三屏装置·对话": "#3a6b8c",
+        "书法·装置": "#7a5230",
+        "生态装置·微缩景观": "#5a7a3a",
+        "摄影·装置": "#2c2418"
+    };
+
+    // ===== 渲染：心经项目介绍 =====
+    function renderSutraIntro(data) {
+        const sel = d3.select("#project-intro");
+        sel.selectAll("*").remove();
+        sel.append("h3").text(data.project_name);
+        sel.append("div").attr("class", "english-name").text(data.english_name);
+        const grid = sel.append("div").attr("class", "intro-row");
+        const fields = [
+            { k: "ART FORM · 艺术形式", v: data.art_form },
+            { k: "DESIGN · 设计原则", v: data.design_principle },
+            { k: "MEANING · 深层含义", v: data.deeper_meaning }
+        ];
+        fields.forEach(f => {
+            const d = grid.append("div").attr("class", "intro-field");
+            d.append("div").attr("class", "k").text(f.k);
+            d.append("div").attr("class", "v").text(f.v);
+        });
+        grid.append("div").attr("class", "intro-field intro-block")
+            .html(`<div class="k">CORE CONCEPT · 核心概念</div><div class="v">${data.core_concept}</div>`);
+    }
+
+    function renderArtisticStatement(text) {
+        const sel = d3.select("#artistic-statement");
+        sel.selectAll("*").remove();
+        sel.append("div").attr("class", "label").text("ARTISTIC STATEMENT · 艺术宣言");
+        sel.append("div").attr("class", "text").text(text);
+    }
+
+    function renderSpecGrid(spec) {
+        const sel = d3.select("#spec-grid");
+        sel.selectAll("*").remove();
+        const items = [
+            { k: "MATERIAL · 材质", v: spec.material },
+            { k: "WALL · 展墙尺寸", v: spec.wall_size },
+            { k: "WAVE · 波段长度", v: spec.wave_length },
+            { k: "COLOR · 颜色", v: spec.color },
+            { k: "LIGHTING · 灯光", v: spec.lighting },
+            { k: "PROJECTION · 投影", v: spec.projection },
+            { k: "INTERACTION · 交互", v: spec.interaction }
+        ];
+        items.forEach(it => {
+            const d = sel.append("div").attr("class", "spec-item");
+            d.append("div").attr("class", "k").text(it.k);
+            d.append("div").attr("class", "v").text(it.v);
+        });
+    }
+
+    // ===== 渲染：心经波纹图（核心 D3.js 可视化）=====
+    function renderWaveChart(records) {
+        const svg = d3.select("#wave-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("wave-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 480;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 50, right: 60, bottom: 90, left: 60 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+
+        const x = d3.scaleLinear()
+            .domain([0, records.length - 1])
+            .range([0, innerW - 80]); // 留出空间给心形末端
+        const y = d3.scaleLinear()
+            .domain([-0.2, 1.4])
+            .range([innerH, 0]);
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 背景网格（金色淡线）
+        for (let i = 0; i <= 5; i++) {
+            const yy = (innerH / 5) * i;
+            g.append("line")
+                .attr("x1", 0).attr("x2", innerW)
+                .attr("y1", yy).attr("y2", yy)
+                .attr("stroke", "#d4af37")
+                .attr("stroke-opacity", 0.08)
+                .attr("stroke-dasharray", "2,4");
+        }
+
+        // 中线（amplitude=0 平静线）
+        g.append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", y(0)).attr("y2", y(0))
+            .attr("stroke", "#d4af37")
+            .attr("stroke-opacity", 0.25)
+            .attr("stroke-dasharray", "4,4");
+
+        // 计算每个波点的 x、y
+        records.forEach((r, i) => {
+            r._x = x(i);
+            r._y = y(r.wave_amplitude);
+        });
+
+        // 生成波形：在两点之间加一个波峰（amplitude 的反向·即"心安"为波峰高位）
+        // 设计逻辑：amplitude 越大 → 波谷越深（向下）；amplitude 越小 → 越接近基线（向上波峰）
+        // 我们以 y(amplitude) 为节点·曲线带波动
+        const lineGen = d3.line()
+            .x(d => d._x)
+            .y(d => d._y)
+            .curve(d3.curveCatmullRom.alpha(0.6));
+
+        // 金线发光阴影
+        const defs = svg.append("defs");
+        const filter = defs.append("filter")
+            .attr("id", "gold-glow")
+            .attr("x", "-20%").attr("y", "-20%")
+            .attr("width","140%").attr("height", "140%");
+        filter.append("feGaussianBlur")
+            .attr("stdDeviation", "3")
+            .attr("result", "coloredBlur");
+        const merge = filter.append("feMerge");
+        merge.append("feMergeNode").attr("in", "coloredBlur");
+        merge.append("feMergeNode").attr("in", "SourceGraphic");
+
+        // 主金线
+        const path = g.append("path")
+            .datum(records)
+            .attr("fill", "none")
+            .attr("stroke", "#d4af37")
+            .attr("stroke-width", 2.5)
+            .attr("stroke-linecap", "round")
+            .attr("filter", "url(#gold-glow)")
+            .attr("d", lineGen);
+
+        // 路径动画
+        const totalLen = path.node().getTotalLength();
+        path.attr("stroke-dasharray", totalLen)
+            .attr("stroke-dashoffset", totalLen)
+            .transition()
+            .duration(1800)
+            .ease(d3.easeCubicOut)
+            .attr("stroke-dashoffset", 0);
+
+        // 心形末端（在波形末端汇聚成心形）
+        const heartCenterX = innerW - 30;
+        const heartCenterY = y(0);
+        const heartScale = 1.4;
+        // 心形 SVG path（参考提示）
+        const heartPath = "M12,21.35l-1.45-1.32C5.4,15.36,2,12.28,2,8.5 C2,5.42,4.42,3,7.5,3c1.74,0,3.41,0.81,4.5,2.09C13.09,3.81,14.76,3,16.5,3 C19.58,3,22,5.42,22,8.5c0,3.78-3.4,6.86-8.55,11.54L12,21.35z";
+
+        // 连接线（从最后一个波点到心形）
+        g.append("path")
+            .datum([
+                { _x: records[records.length - 1]._x, _y: records[records.length - 1]._y },
+                { _x: heartCenterX - 12 * heartScale, _y: heartCenterY }
+            ])
+            .attr("fill", "none")
+            .attr("stroke", "#d4af37")
+            .attr("stroke-width", 2)
+            .attr("stroke-opacity", 0.7)
+            .attr("filter", "url(#gold-glow)")
+            .attr("d", d3.line().x(d => d._x).y(d => d._y).curve(d3.curveBasis))
+            .style("opacity", 0)
+            .transition().delay(1500).duration(600)
+            .style("opacity", 1);
+
+        // 心形轮廓（金色）
+        g.append("path")
+            .attr("d", heartPath)
+            .attr("transform", `translate(${heartCenterX - 12 * heartScale},${heartCenterY - 10 * heartScale}) scale(${heartScale})`)
+            .attr("fill", "none")
+            .attr("stroke", "#d4af37")
+            .attr("stroke-width", 2.2)
+            .attr("filter", "url(#gold-glow)")
+            .style("opacity", 0)
+            .transition().delay(1800).duration(800)
+            .style("opacity", 1);
+
+        // 心形呼吸闪烁动画
+        g.append("path")
+            .attr("d", heartPath)
+            .attr("transform", `translate(${heartCenterX - 12 * heartScale},${heartCenterY - 10 * heartScale}) scale(${heartScale})`)
+            .attr("fill", "#d4af37")
+            .attr("fill-opacity", 0)
+            .style("animation", "heart-breath 2.4s ease-in-out infinite");
+
+        // 添加 keyframes 心形呼吸动画
+        const styleEl = document.createElement("style");
+        styleEl.textContent = `
+            @keyframes heart-breath {
+                0%, 100% { fill-opacity: 0; }
+                50% { fill-opacity: 0.35; }
+            }
+        `;
+        document.head.appendChild(styleEl);
+
+        // 心形下方标签
+        g.append("text")
+            .attr("x", heartCenterX)
+            .attr("y", heartCenterY + 28 * heartScale)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#d4af37")
+            .style("letter-spacing", "0.15em")
+            .style("font-family", "'Noto Serif SC', serif")
+            .style("opacity", 0)
+            .text("心")
+            .transition().delay(2200).duration(400)
+            .style("opacity", 1);
+
+        // 波点 + tooltip
+        const tip = d3.select("#wave-tip");
+        g.selectAll(".wave-dot")
+            .data(records)
+            .enter()
+            .append("circle")
+            .attr("class", "wave-dot")
+            .attr("cx", d => d._x)
+            .attr("cy", d => d._y)
+            .attr("r", 0)
+            .attr("fill", d => d.wave_amplitude >= 1.0 ? "#c8463a" : d.wave_amplitude >= 0.5 ? "#e9b885" : "#f0d878")
+            .attr("stroke", "#d4af37")
+            .attr("stroke-width", 1.5)
+            .style("cursor", "pointer")
+            .style("filter", "drop-shadow(0 0 4px rgba(212,175,55,0.6))")
+            .transition().delay((d, i) => 200 + i * 150).duration(400)
+            .attr("r", d => d.wave_amplitude >= 1.0 ? 7 : 5);
+
+        g.selectAll(".wave-dot")
+            .on("mouseover", function(e, d) {
+                d3.select(this).transition().duration(150).attr("r", 9);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">第 ${d.n} 次 · ${d.chapter}</div>` +
+                          `<div>${d.location} · ${d.context}</div>` +
+                          `<div class="tip-emotion">${d.pre_emotion} <span style="color:var(--accent);">→</span> ${d.post_emotion}</div>` +
+                          `<div class="tip-emotion">波幅 ${d.wave_amplitude} · ${d.wave_direction}</div>` +
+                          `<div class="tip-phrase">"${d.key_phrase}"</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = el.parentElement.getBoundingClientRect();
+                let left = e.clientX - rect.left + 14;
+                if (left + 260 > rect.width) left = e.clientX - rect.left - 270;
+                tip.style("left", left + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function(e, d) {
+                d3.select(this).transition().duration(150)
+                    .attr("r", d.wave_amplitude >= 1.0 ? 7 : 5);
+                tip.style("opacity", 0);
+            });
+
+        // 波点标签（chapter + location）
+        g.selectAll(".wave-label-top")
+            .data(records)
+            .enter()
+            .append("text")
+            .attr("class", "wave-label-top")
+            .attr("x", d => d._x)
+            .attr("y", d => d._y - 14)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.72rem")
+            .style("fill", "#e9b885")
+            .style("font-family", "'JetBrains Mono', monospace")
+            .style("opacity", 0)
+            .text(d => d.chapter.replace("第 ", "").replace(" 回", ""))
+            .transition().delay((d, i) => 400 + i * 150).duration(400)
+            .style("opacity", 0.9);
+
+        g.selectAll(".wave-label-bottom")
+            .data(records)
+            .enter()
+            .append("text")
+            .attr("class", "wave-label-bottom")
+            .attr("x", d => d._x)
+            .attr("y", d => d._y + 20)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#f5e9d4")
+            .style("font-weight", "600")
+            .style("opacity", 0)
+            .text(d => d.location)
+            .transition().delay((d, i) => 500 + i * 150).duration(400)
+            .style("opacity", 1);
+
+        // X 轴标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 70)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#e9b885")
+            .style("letter-spacing", "0.05em")
+            .text("诵经次序（按章节回目）→ 心形空洞投影");
+
+        // Y 轴标题
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerH / 2)
+            .attr("y", -42)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#e9b885")
+            .style("letter-spacing", "0.05em")
+            .text("Wave Amplitude 波幅（深谷=恐惧·平缓=心安）");
+
+        // Y 轴刻度
+        [0, 0.3, 0.6, 0.9, 1.2].forEach(v => {
+            g.append("text")
+                .attr("x", -10)
+                .attr("y", y(v) + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.7rem")
+                .style("fill", "#e9b885")
+                .style("font-family", "'JetBrains Mono', monospace")
+                .text(v.toFixed(1));
+            g.append("line")
+                .attr("x1", -4).attr("x2", 0)
+                .attr("y1", y(v)).attr("y2", y(v))
+                .attr("stroke", "#d4af37")
+                .attr("stroke-opacity", 0.4);
+        });
+
+        // 标注：最深波谷
+        const deepest = records.find(r => r.wave_amplitude === 1.2);
+        if (deepest) {
+            g.append("text")
+                .attr("x", deepest._x)
+                .attr("y", deepest._y + 36)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.7rem")
+                .style("fill", "#c8463a")
+                .style("font-style", "italic")
+                .style("opacity", 0)
+                .text("↓ 最深波谷")
+                .transition().delay(1800).duration(400)
+                .style("opacity", 1);
+        }
+
+        // 标注：归零
+        const lastRec = records[records.length - 1];
+        g.append("text")
+            .attr("x", lastRec._x)
+            .attr("y", lastRec._y - 30)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.7rem")
+            .style("fill", "#f0d878")
+            .style("font-style", "italic")
+            .style("opacity", 0)
+            .text("归零·成佛")
+            .transition().delay(2000).duration(400)
+            .style("opacity", 1);
+    }
+
+    // ===== 渲染：诵经记录卡片 =====
+    function renderChantCards(records) {
+        const sel = d3.select("#chant-grid");
+        sel.selectAll("*").remove();
+        records.forEach(r => {
+            const cls = r.wave_amplitude > 1.0 ? "amp-high" : r.wave_amplitude >= 0.5 ? "amp-mid" : "amp-low";
+            const ampColor = r.wave_amplitude > 1.0 ? "#c8463a" : r.wave_amplitude >= 0.5 ? "#d97706" : "#3a6b8c";
+            const ampPct = (r.wave_amplitude / 1.2) * 100;
+            const card = sel.append("div").attr("class", `chant-card ${cls}`);
+            card.append("div").attr("class", "ch-n").text("#" + r.n);
+            card.append("div").attr("class", "ch-chapter").text(r.chapter + " · " + r.wave_direction);
+            card.append("div").attr("class", "ch-location").text(r.location);
+            card.append("div").attr("class", "ch-context").text(r.context);
+            card.append("div").attr("class", "ch-amp")
+                .html(`<span style="color:${ampColor};">波幅 ${r.wave_amplitude.toFixed(1)}</span>` +
+                      `<span class="ch-amp-bar" style="width:${ampPct}%;background:${ampColor};"></span>`);
+            card.append("div").attr("class", "ch-emotion")
+                .html(`${r.pre_emotion}<span class="arrow">→</span>${r.post_emotion}`);
+            card.append("div").attr("class", "ch-phrase").text("「" + r.key_phrase + "」");
+        });
+    }
+
+    // ===== 渲染：气味地图介绍 =====
+    function renderScentIntro(data) {
+        const sel = d3.select("#scent-intro");
+        sel.selectAll("*").remove();
+        sel.append("h3").text(data.project_name);
+        sel.append("div").attr("class", "english-name").text(data.english_name);
+        const grid = sel.append("div").attr("class", "intro-row");
+        const fields = [
+            { k: "ART FORM · 艺术形式", v: data.art_form },
+            { k: "PRESENTATION · 呈现方式", v: data.presentation_method }
+        ];
+        fields.forEach(f => {
+            const d = grid.append("div").attr("class", "intro-field");
+            d.append("div").attr("class", "k").text(f.k);
+            d.append("div").attr("class", "v").text(f.v);
+        });
+        grid.append("div").attr("class", "intro-field intro-block")
+            .html(`<div class="k">CORE CONCEPT · 核心概念</div><div class="v">${data.core_concept}</div>`);
+        grid.append("div").attr("class", "intro-field intro-block")
+            .html(`<div class="k">INNOVATION · 呈现创新</div><div class="v">${data.presentation_innovation}</div>`);
+    }
+
+    // ===== 渲染：气味地点卡片 =====
+    function renderScentCards(locations, scent_categories) {
+        const sel = d3.select("#scent-grid");
+        sel.selectAll("*").remove();
+        locations.forEach(loc => {
+            const cat = getScentCategory(loc.location, scent_categories);
+            const catClass = CAT_CLASS_MAP[cat] || "cat-desolate";
+            const catColor = CAT_COLOR_MAP[cat] || "#6b5e4d";
+            const card = sel.append("div").attr("class", `scent-card ${catClass}`);
+            const head = card.append("div").attr("class", "sc-head");
+            head.append("div").attr("class", "sc-n").text("No." + loc.n);
+            head.append("div").attr("class", `sc-cat ${catClass}`).text(cat);
+            card.append("div").attr("class", "sc-location").text(loc.location);
+            card.append("div").attr("class", "sc-meta").text(loc.chapter + " · " + loc.geography);
+            card.append("div").attr("class", "sc-profile").text(loc.scent_profile);
+
+            const notesDiv = card.append("div").attr("class", "sc-notes");
+            loc.scent_notes.forEach(n => {
+                notesDiv.append("span").attr("class", "chip").text(n);
+            });
+
+            // intensity 星标
+            const stars = "★".repeat(loc.intensity) + "☆".repeat(5 - loc.intensity);
+            card.append("div").attr("class", "sc-intensity")
+                .html(`<span style="color:var(--ink-soft);">强度</span> <span class="sc-stars">${stars}</span> <span style="color:var(--ink-soft);">${loc.intensity}/5</span>`);
+
+            card.append("div").attr("class", "sc-mood").text("· " + loc.mood);
+            card.append("div").attr("class", "sc-desc").text(loc.key_description);
+
+            // fragrance_formula
+            const formula = card.append("div").attr("class", "sc-formula");
+            formula.append("div").attr("class", "note-row")
+                .html(`<span class="note-label">前调 TOP</span><span class="note-val">${loc.fragrance_formula.top_note}</span>`);
+            formula.append("div").attr("class", "note-row")
+                .html(`<span class="note-label">中调 MID</span><span class="note-val">${loc.fragrance_formula.middle_note}</span>`);
+            formula.append("div").attr("class", "note-row")
+                .html(`<span class="note-label">后调 BASE</span><span class="note-val">${loc.fragrance_formula.base_note}</span>`);
+        });
+    }
+
+    // ===== 渲染：取经路径气味流 =====
+    function renderScentFlow(locations, scent_categories) {
+        const svg = d3.select("#scent-flow-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("scent-flow-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 280;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 30, right: 50, bottom: 70, left: 50 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // X 轴：地点序号
+        const x = d3.scaleLinear()
+            .domain([0, locations.length - 1])
+            .range([0, innerW]);
+
+        // Y 轴：使用 intensity，但加入随机起伏模拟"路径"
+        const y = d3.scaleLinear()
+            .domain([0, 6])
+            .range([innerH, 0]);
+
+        // 为每个地点生成 y（基于 intensity + 微妙波浪）
+        locations.forEach((loc, i) => {
+            loc._x = x(i);
+            loc._y = y(loc.intensity) + (i % 2 === 0 ? -15 : 15);
+            // 限制范围
+            loc._y = Math.max(20, Math.min(innerH - 20, loc._y));
+            loc._cat = getScentCategory(loc.location, scent_categories);
+            loc._color = CAT_COLOR_MAP[loc._cat] || "#6b5e4d";
+        });
+
+        // 路径（曲线）
+        const lineGen = d3.line()
+            .x(d => d._x)
+            .y(d => d._y)
+            .curve(d3.curveCatmullRom.alpha(0.5));
+
+        // 路径阴影带
+        const areaGen = d3.area()
+            .x(d => d._x)
+            .y0(innerH)
+            .y1(d => d._y)
+            .curve(d3.curveCatmullRom.alpha(0.5));
+
+        const areaPath = g.append("path")
+            .datum(locations)
+            .attr("fill", "var(--accent-soft)")
+            .attr("fill-opacity", 0.15)
+            .attr("d", areaGen);
+
+        const path = g.append("path")
+            .datum(locations)
+            .attr("fill", "none")
+            .attr("stroke", "var(--accent-3)")
+            .attr("stroke-width", 2.2)
+            .attr("stroke-dasharray", "6,4")
+            .attr("d", lineGen);
+
+        // 路径动画
+        const totalLen = path.node().getTotalLength();
+        path.attr("stroke-dasharray", totalLen + " 6")
+            .attr("stroke-dashoffset", totalLen)
+            .transition()
+            .duration(1500)
+            .ease(d3.easeCubicOut)
+            .attr("stroke-dashoffset", 0)
+            .on("end", function() {
+                d3.select(this).attr("stroke-dasharray", "6,4");
+            });
+
+        // 起点终点标记
+        g.append("text")
+            .attr("x", locations[0]._x)
+            .attr("y", locations[0]._y - 22)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.74rem")
+            .style("fill", "var(--accent-3)")
+            .style("font-weight", "600")
+            .style("opacity", 0)
+            .text("起点 · 长安")
+            .transition().delay(200).duration(400).style("opacity", 1);
+
+        g.append("text")
+            .attr("x", locations[locations.length - 1]._x)
+            .attr("y", locations[locations.length - 1]._y - 22)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.74rem")
+            .style("fill", "var(--accent)")
+            .style("font-weight", "600")
+            .style("opacity", 0)
+            .text("终点 · 灵山")
+            .transition().delay(1400).duration(400).style("opacity", 1);
+
+        // 圆点（按 intensity 大小·按 category 颜色）
+        const tip = d3.select("#scent-tip");
+        g.selectAll(".scent-dot")
+            .data(locations)
+            .enter()
+            .append("circle")
+            .attr("class", "scent-dot")
+            .attr("cx", d => d._x)
+            .attr("cy", d => d._y)
+            .attr("r", 0)
+            .attr("fill", d => d._color)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .style("cursor", "pointer")
+            .style("filter", "drop-shadow(0 1px 3px rgba(0,0,0,0.2))")
+            .transition().delay((d, i) => 300 + i * 100).duration(400)
+            .attr("r", d => 4 + d.intensity * 1.6);
+
+        g.selectAll(".scent-dot")
+            .on("mouseover", function(e, d) {
+                d3.select(this).transition().duration(150)
+                    .attr("r", 4 + d.intensity * 1.6 + 3);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">No.${d.n} · ${d.location}</div>` +
+                          `<div class="tip-meta">${d.chapter} · ${d.geography}</div>` +
+                          `<div style="margin-top:4px;">${d.scent_profile}</div>` +
+                          `<div style="margin-top:4px;color:#e9b885;font-style:italic;">${d.key_description}</div>` +
+                          `<div class="tip-meta" style="margin-top:4px;">强度 ${d.intensity}/5 · ${d._cat}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = el.parentElement.getBoundingClientRect();
+                let left = e.clientX - rect.left + 14;
+                if (left + 280 > rect.width) left = e.clientX - rect.left - 290;
+                tip.style("left", left + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function(e, d) {
+                d3.select(this).transition().duration(150)
+                    .attr("r", 4 + d.intensity * 1.6);
+                tip.style("opacity", 0);
+            });
+
+        // 地点标签
+        g.selectAll(".scent-label")
+            .data(locations)
+            .enter()
+            .append("text")
+            .attr("class", "scent-label")
+            .attr("x", d => d._x)
+            .attr("y", d => d._y + (d._y > innerH / 2 ? -16 : 22))
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.74rem")
+            .style("font-weight", "600")
+            .style("fill", d => d._color)
+            .style("opacity", 0)
+            .text(d => d.location)
+            .transition().delay((d, i) => 400 + i * 100).duration(400)
+            .style("opacity", 1);
+
+        // X 轴：地点序号
+        g.selectAll(".scent-n-label")
+            .data(locations)
+            .enter()
+            .append("text")
+            .attr("class", "scent-n-label")
+            .attr("x", d => d._x)
+            .attr("y", innerH + 50)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.7rem")
+            .style("fill", "var(--ink-soft)")
+            .style("font-family", "'JetBrains Mono', monospace")
+            .style("opacity", 0)
+            .text(d => "No." + d.n)
+            .transition().delay((d, i) => 500 + i * 100).duration(400)
+            .style("opacity", 0.8);
+
+        // 标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", -12)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem")
+            .style("fill", "var(--accent-3)")
+            .style("font-weight", "600")
+            .text("取经路径气味流 · 10 个气味节点 · 圆点大小=强度·颜色=类别");
+
+        // X 轴标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 60)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.76rem")
+            .style("fill", "var(--ink-soft)")
+            .text("取经路径（按章节顺序）→ 灵山");
+    }
+
+    // ===== 渲染：视觉艺术构想库 =====
+    function renderIdeas(ideas) {
+        const sel = d3.select("#idea-grid");
+        sel.selectAll("*").remove();
+        ideas.forEach(idea => {
+            const color = IDEA_FORM_COLOR[idea.art_form] || "var(--accent-3)";
+            const card = sel.append("div").attr("class", "idea-card")
+                .style("border-top-color", color);
+            card.append("div").attr("class", "id-n").text(idea.n);
+            card.append("div").attr("class", "id-name").text(idea.idea_name);
+            card.append("div").attr("class", "id-form")
+                .style("background", color)
+                .style("color", "#fff")
+                .text(idea.art_form);
+            card.append("div").attr("class", "id-concept").text(idea.concept);
+            card.append("div").attr("class", "id-innovation").text(idea.innovation);
+        });
+    }
+
+    // ===== 渲染：关键洞察 =====
+    function renderInsights() {
+        const insights = [
+            `信仰不是一成不变的平静·<strong>而是在恐惧与安定之间的反复拉锯</strong>·金线的波动是这拉锯的物质化。`,
+            `心经波纹图揭示了唐僧的情绪成长曲线：<strong>从波谷（白虎岭/比丘国）到归零（灵山成佛）</strong>·波幅由 1.2 → 0.0·体现心性成熟。`,
+            `气味地图将抽象的取经过程<strong>转化为可感的嗅觉体验</strong>·10 个地点通过 scent_profile + fragrance_formula 三层香调呈现。`,
+            `灵山的"无的洁净气味"是信仰的终极境界：<strong>base_note 为"无·洁净"</strong>·与花果山的"湿润岩石"形成首尾呼应。`,
+            `危险型气味占了 <strong>50%（5/10）</strong>·说明取经路上充满了感官的冲击与考验·视觉与嗅觉的"危险密度"贯穿全程。`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(t => ul.append("li").html(t));
+    }
+
+    // ===== 数据加载 =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error("fetch failed: " + path);
+            return await res.json();
+        } catch (e) {
+            console.warn("[INFO] 使用嵌入数据 for", path, ":", e.message);
+            return fallback;
+        }
+    }
+
+    async function loadAll() {
+        const [hs, sm, vs] = await Promise.all([
+            loadJson("../../scripts/output/data/heart_sutra_sculpture.json", EMBEDDED.heart_sutra_sculpture),
+            loadJson("../../scripts/output/data/scent_map.json", EMBEDDED.scent_map),
+            loadJson("../../scripts/output/data/visual_art_summary.json", EMBEDDED.visual_art_summary)
+        ]);
+        return {
+            heart_sutra: hs,
+            scent_map: sm,
+            summary: vs,
+            visual_art_ideas: EMBEDDED.visual_art_ideas  // 视觉艺术构想仅在 EMBEDDED 中
+        };
+    }
+
+    // ===== 主流程 =====
+    async function main() {
+        const data = await loadAll();
+        window.__data = data;
+
+        // 数据源提示
+        const usingEmbedded = (data.heart_sutra === EMBEDDED.heart_sutra_sculpture);
+        if (!usingEmbedded) {
+            document.getElementById("dataSource").innerHTML =
+                "数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）";
+        } else {
+            document.getElementById("dataSource").innerHTML =
+                "数据源：嵌入式数据（file:// 协议·fetch 不可用·直接读取硬编码 JSON）";
+        }
+
+        // 渲染心经板块
+        renderSutraIntro(data.heart_sutra);
+        renderArtisticStatement(data.heart_sutra.artistic_statement);
+        renderSpecGrid(data.heart_sutra.sculpture_design);
+        renderWaveChart(data.heart_sutra.sutra_chanting_records);
+        renderChantCards(data.heart_sutra.sutra_chanting_records);
+
+        // 渲染气味地图板块
+        renderScentIntro(data.scent_map);
+        renderScentCards(data.scent_map.locations, data.scent_map.scent_categories);
+        renderScentFlow(data.scent_map.locations, data.scent_map.scent_categories);
+
+        // 渲染视觉艺术构想
+        renderIdeas(data.visual_art_ideas);
+
+        // 关键洞察
+        renderInsights();
+
+        // 生成时间
+        document.getElementById("gen-time").textContent =
+            "数据生成时间：" + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
+    }
+
+    // 窗口缩放重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__data) {
+                renderWaveChart(window.__data.heart_sutra.sutra_chanting_records);
+                renderScentFlow(window.__data.scent_map.locations, window.__data.scent_map.scent_categories);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

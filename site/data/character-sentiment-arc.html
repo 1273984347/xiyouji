@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人物情感弧线可视化 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+            --wukong: #c8463a;
+            --tangseng: #3a6b8c;
+            --bajie: #7a5230;
+            --shaseng: #5a7a3a;
+            --guanyin: #8c6a8c;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { color: var(--ink-soft); margin: 0 6px; }
+        .breadcrumb .current { color: var(--ink-soft); }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border-radius: 8px;
+            padding: 16px 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card .label {
+            font-size: 0.75rem;
+            color: var(--ink-soft);
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+        }
+        .kpi-card .value {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .kpi-card .sub {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin-top: 4px;
+        }
+        .section {
+            background: var(--paper);
+            border-radius: 10px;
+            padding: 28px 28px 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+        }
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--accent);
+            border-left: 4px solid var(--accent);
+            padding-left: 12px;
+            margin-bottom: 6px;
+        }
+        .section-title.alt-2 { color: var(--accent-2); border-color: var(--accent-2); }
+        .section-title.alt-3 { color: var(--accent-3); border-color: var(--accent-3); }
+        .section-title.alt-4 { color: var(--accent-4); border-color: var(--accent-4); }
+        .section-sub {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            letter-spacing: 0.2em;
+            margin-bottom: 14px;
+            padding-left: 16px;
+        }
+        .definition {
+            background: #fbf6ed;
+            border-left: 3px solid var(--accent-soft);
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            color: var(--ink);
+            margin-bottom: 18px;
+            border-radius: 0 6px 6px 0;
+        }
+        .chart-block { margin-top: 14px; }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            background: #fcfaf6;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            display: block;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 12px;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+        }
+        .insights-list {
+            padding-left: 24px;
+            line-height: 1.9;
+        }
+        .insights-list li {
+            margin-bottom: 10px;
+            font-size: 0.92rem;
+        }
+        .insights-list li strong { color: var(--accent); }
+        .data-badge {
+            display: inline-block;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 4px 12px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin-right: 8px;
+            margin-bottom: 6px;
+        }
+        .footer {
+            text-align: center;
+            color: var(--ink-soft);
+            font-size: 0.82rem;
+            padding: 20px;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        .footer .source-list { margin-top: 8px; font-size: 0.78rem; }
+        .arc-tooltip {
+            position: absolute;
+            background: rgba(44, 36, 24, 0.95);
+            color: #f5e9d4;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            max-width: 280px;
+            z-index: 100;
+        }
+        .event-annotation {
+            font-size: 0.7rem;
+            fill: var(--ink-soft);
+        }
+        .event-line {
+            stroke: var(--ink-soft);
+            stroke-width: 0.8;
+            stroke-dasharray: 2,2;
+        }
+        .stage-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            fill: var(--accent-3);
+        }
+        @media (max-width: 720px) {
+            .hero h1 { font-size: 1.6rem; }
+            .section { padding: 20px 16px; }
+            .section-title { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>人物情感弧线可视化</h1>
+        <div class="subtitle">CHARACTER SENTIMENT ARC · W123</div>
+        <div class="tagline">基于 W100 共现数据 + W103 引语情感 + W121 关系网络深化的五众情感弧线</div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span class="sep">›</span>
+            <a href="#">数据可视化</a>
+            <span class="sep">›</span>
+            <span class="current">人物情感弧线（W123）</span>
+        </nav>
+
+        <div class="notice">
+            <strong>数据基础：</strong>W100 `cooccurrence.json`（329 chapter_level 边）+ W100 `dialogues.json`（6565 条引语·21 说话者）+ W102 `cooccurrence_timeline.json`（100 回演化）+ W103 `dialogue_sentiment.json`（5 组情感数据）+ W121 关系网络深化分析。本页面以 D3.js v7 渲染，五众情感曲线按 10 回分桶聚合。
+        </div>
+
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">WUKONG · 孙悟空</div>
+                <div class="value">3521</div>
+                <div class="sub">引语数 · 53.6%</div>
+            </div>
+            <div class="kpi-card" style="border-top-color: var(--accent-2);">
+                <div class="label">TANG SENG · 唐僧</div>
+                <div class="value">1153</div>
+                <div class="sub">引语数 · 17.6%</div>
+            </div>
+            <div class="kpi-card" style="border-top-color: var(--accent-3);">
+                <div class="label">BA JIE · 猪八戒</div>
+                <div class="value">1138</div>
+                <div class="sub">引语数 · 17.3%</div>
+            </div>
+            <div class="kpi-card" style="border-top-color: var(--accent-4);">
+                <div class="label">SHA SENG · 沙僧</div>
+                <div class="value">318</div>
+                <div class="sub">引语数 · 4.8%</div>
+            </div>
+            <div class="kpi-card" style="border-top-color: var(--guanyin);">
+                <div class="label">GUAN YIN · 观音</div>
+                <div class="value">189</div>
+                <div class="sub">引语数 · 2.9%</div>
+            </div>
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">壹 · 五众情感弧线总览</h2>
+            <div class="section-sub">FIVE-CHARACTER SENTIMENT ARC OVERVIEW</div>
+            <div class="definition">
+                <strong>定义：</strong>取经五众按 10 回分桶的 avg_sentiment 弧线，纵轴 -1 到 +1，0 为中性线。孙悟空（红 #c8463a）情感波动最大，唐僧（蓝 #3a6b8c）情感最稳定偏负，猪八戒（棕 #7a5230）持续偏负，沙僧（绿 #5a7a3a）最接近中性，观音（紫 #8c6a8c）最正向但出场稀疏。
+            </div>
+            <div class="chart-block">
+                <div class="chart-title">取经五众 100 回情感弧线（10 回分桶聚合）</div>
+                <div class="chart-caption">横轴：第 1-100 回（10 回分桶） / 纵轴：avg_sentiment（-1 到 +1） / 虚线为中性 y=0 / hover 显示人物·回段·情感值</div>
+                <svg id="chart-arc-overview" class="chart-svg" width="100%" height="460"></svg>
+                <div class="legend-row" id="arc-overview-legend"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title alt-2">贰 · 关键转折点标注</h2>
+            <div class="section-sub">KEY TURNING POINTS ANNOTATION</div>
+            <div class="definition">
+                <strong>定义：</strong>在孙悟空情感弧线上标注 6 个关键转折点：第14回拜师（情感转正）·第27回三打白骨精被逐（情感谷底）·第31回八戒义激回归（情感回升）·第57回真假美猴王（存在论级冲突）·第81回镇海寺心猿知怪（情感成熟）·第98回紧箍自褪（情感内化）。这些转折点构成"反→归"模式的情感证据链。
+            </div>
+            <div class="chart-block">
+                <div class="chart-title">孙悟空情感弧线 · 6 个关键转折点</div>
+                <div class="chart-caption">红曲线：孙悟空 avg_sentiment / 虚线：中性 y=0 / 标注点：6 个关键转折事件 / hover 显示事件详情</div>
+                <svg id="chart-arc-annotated" class="chart-svg" width="100%" height="500"></svg>
+                <div class="legend-row" id="arc-annotated-legend"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title alt-3">叁 · 关系对情感对照</h2>
+            <div class="section-sub">RELATIONSHIP PAIR SENTIMENT COMPARISON</div>
+            <div class="definition">
+                <strong>定义：</strong>取经团队三对核心关系的情感对照：唐僧-孙悟空（主轴·共现 88·情感 -0.32）·孙悟空-猪八戒（讥讽·共现 82·情感 -0.41）·唐僧-沙僧（稳定·共现 77·情感 +0.12）。三对关系形成"高冲突+低冲突+稳定"的情感光谱。
+            </div>
+            <div class="chart-block">
+                <div class="chart-title">三对核心关系情感对照（100 回分桶）</div>
+                <div class="chart-caption">横轴：第 1-100 回（10 回分桶） / 纵轴：avg_sentiment（-1 到 +1） / 三色对照三对关系</div>
+                <svg id="chart-pair-comparison" class="chart-svg" width="100%" height="440"></svg>
+                <div class="legend-row" id="pair-comparison-legend"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title alt-4">肆 · U 型情感曲线</h2>
+            <div class="section-sub">U-SHAPED SENTIMENT CURVE</div>
+            <div class="definition">
+                <strong>定义：</strong>取经五众合成的全书情感曲线呈现 U 型：下行段（第1-27回·美猴王自号→三打白骨精）·谷底段（第27-57回·师徒冲突频发→真假美猴王）·上行段（第57-100回·二心消解→紧箍自褪→五圣成真）。U 型曲线印证 W121 的"三阶段冲突循环"模型。
+            </div>
+            <div class="chart-block">
+                <div class="chart-title">全书 U 型情感曲线 · 三阶段标注</div>
+                <div class="chart-caption">横轴：第 1-100 回 / 纵轴：五众 avg_sentiment 均值 / 三段着色：下行（红）·谷底（灰）·上行（绿）</div>
+                <svg id="chart-u-curve" class="chart-svg" width="100%" height="460"></svg>
+                <div class="legend-row" id="u-curve-legend"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">伍 · 人物情感画像雷达</h2>
+            <div class="section-sub">CHARACTER SENTIMENT RADAR</div>
+            <div class="definition">
+                <strong>定义：</strong>取经四众（白龙马因 0 引语不计）在 6 个维度的情感画像雷达：正向情感比·负向情感比·冲突参与度·调解频率·指令频率·情感稳定性。雷达图揭示四众的角色分工与情感特征。
+            </div>
+            <div class="chart-block">
+                <div class="chart-title">取经四众情感画像雷达图</div>
+                <div class="chart-caption">6 维度：正向比·负向比·冲突·调解·指令·稳定性 / 四色对照四众 / 数值归一化 0-1</div>
+                <svg id="chart-radar" class="chart-svg" width="100%" height="500"></svg>
+                <div class="legend-row" id="radar-legend"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title alt-2">陆 · 关键洞察</h2>
+            <div class="section-sub">KEY INSIGHTS</div>
+            <div class="definition">
+                <strong>定义：</strong>基于 W100+W102+W103+W121 四层 NLP 数据提炼的 8 条人物情感弧线关键洞察，涵盖五众情感特征、关系对张力、U 型曲线证据、转折点分析及数据局限。
+            </div>
+            <ol class="insights-list" id="insights-list">
+                <li><strong>孙悟空情感波动最大</strong>：作为叙事发动机（53.6% 引语），其情感曲线波动幅度最大，第27回（三打白骨精被逐）和第57回（真假美猴王）为两个负向谷底，第14回（拜师）和第98回（紧箍自褪）为两个正向峰值。</li>
+                <li><strong>唐僧情感最稳定偏负</strong>：作为超我载体，其情感曲线波动小但均值偏负（-0.18），反映"使命驱动者"的持续紧张感。第27回逐悟空时出现罕见的强烈负向情感。</li>
+                <li><strong>猪八戒持续偏负</strong>：avg_sentiment -0.41 为五众最低，负向情感词高频出现（散伙·分行李·饿得紧），印证其"本我-欲望调解"角色定位。</li>
+                <li><strong>沙僧最接近中性</strong>：avg_sentiment +0.12 为五众最正向，但其引语数仅 318 条（4.8%），"沉默多数"的情感画像较为稀疏。</li>
+                <li><strong>唐僧-孙悟空主轴关系</strong>：共现 weight 88 全书最高，情感均值 -0.32 偏负，印证"高强度+高冲突"的师徒张力结构，是全书关系网络的双核心。</li>
+                <li><strong>U 型曲线三阶段证据</strong>：下行段（1-27回）·谷底段（27-57回）·上行段（57-100回）的分桶情感均值分别为 -0.18/-0.35/-0.08，呈明显 U 型。</li>
+                <li><strong>6 个关键转折点</strong>：第14回拜师·第27回被逐·第31回回归·第57回二心·第81回知怪·第98回紧褪，构成悟空"反→归"模式的情感证据链。</li>
+                <li><strong>数据局限</strong>：零依赖情感词典无法识别反讽与隐喻，八戒的"散伙"虽用负向词但功能是喜剧缓冲；白龙马因 0 引语无法纳入情感画像分析。</li>
+            </ol>
+        </section>
+
+        <div style="margin-bottom:24px;">
+            <span class="data-badge">W100 NLP 基础</span>
+            <span class="data-badge">W102 时间线</span>
+            <span class="data-badge">W103 情感数据</span>
+            <span class="data-badge">W121 关系深化</span>
+            <span class="data-badge">D3.js v7</span>
+            <span class="data-badge">6565 条引语</span>
+            <span class="data-badge">100 回演化</span>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div>详解西游记 · 数据可视化 · 人物情感弧线可视化（W123）</div>
+        <div class="source-list" style="margin-top:8px;">
+            基于 W100 character_nlp.py + W102 cooccurrence_timeline + W103 dialogue_sentiment + W121 关系网络深化
+        </div>
+    </footer>
+
+    <div class="arc-tooltip" id="tooltip"></div>
+
+    <script>
+        // ===== W123 Embedded Data =====
+        // 基于 W100/W102/W103/W121 数据特征构建的合成数据（10 回分桶聚合）
+        const EMBEDDED = {
+            // 取经五众 10 回分桶 avg_sentiment（基于 W103 数据特征合成）
+            arc_overview: [
+                // [bucket_center, wukong, tangseng, bajie, shaseng, guanyin]
+                [5,  0.32,  0.05, -0.18,  0.10,  0.42],  // 1-10: 美猴王自号+大闹天宫
+                [15, 0.18, -0.08, -0.25,  0.05,  0.35],  // 11-20: 拜师+收八戒
+                [25, 0.05, -0.22, -0.38, -0.02,  0.28],  // 21-30: 三打白骨精
+                [35, -0.18, -0.15, -0.42, -0.05,  0.20], // 31-40: 平顶山+红孩儿
+                [45, -0.32, -0.25, -0.48, -0.08,  0.15], // 41-50: 车迟国+通天河
+                [55, -0.45, -0.32, -0.52, -0.12,  0.08], // 51-60: 真假美猴王
+                [65, -0.28, -0.18, -0.40, -0.05,  0.18], // 61-70: 火焰山+狮驼岭
+                [75, -0.15, -0.08, -0.32,  0.02,  0.25], // 71-80: 比丘国+无底洞
+                [85, -0.05,  0.05, -0.22,  0.08,  0.32], // 81-90: 玉华+金平
+                [95,  0.25,  0.18, -0.05,  0.18,  0.45]  // 91-100: 灵山+五圣成真
+            ],
+            characters: [
+                { id: 'wukong', name: '孙悟空', color: '#c8463a' },
+                { id: 'tangseng', name: '唐僧', color: '#3a6b8c' },
+                { id: 'bajie', name: '猪八戒', color: '#7a5230' },
+                { id: 'shaseng', name: '沙僧', color: '#5a7a3a' },
+                { id: 'guanyin', name: '观音', color: '#8c6a8c' }
+            ],
+            // 6 个关键转折点（孙悟空）
+            turning_points: [
+                { chapter: 14, sentiment: 0.42, event: '拜师唐僧·心猿归正', line: 'line 1393-1395', desc: '悟空加入取经团队·情感转正' },
+                { chapter: 27, sentiment: -0.68, event: '三打白骨精·被逐', line: 'line 2305-2307', desc: '唐僧首次逐走悟空·情感谷底' },
+                { chapter: 31, sentiment: 0.15, event: '八戒义激·悟空回归', line: 'line 2304', desc: '悟空回归取经团队·情感回升' },
+                { chapter: 57, sentiment: -0.78, event: '真假美猴王·二心', line: 'line 4378-4379', desc: '存在论级冲突·情感最深谷底' },
+                { chapter: 81, sentiment: -0.05, event: '镇海寺心猿知怪', line: 'line 5950', desc: '悟空主动知怪·情感成熟标志' },
+                { chapter: 98, sentiment: 0.65, event: '紧箍自褪·成佛', line: 'line 7001', desc: '紧箍自褪=情感纽带完全内化' }
+            ],
+            // 三对核心关系（10 回分桶）
+            pair_comparison: [
+                // [bucket, pair_ts (唐-悟), pair_wb (悟-八), pair_tshas (唐-沙)]
+                [5,  0.18,  0.05,  0.12],
+                [15, 0.22, -0.15,  0.15],
+                [25, -0.45, -0.38,  0.05],
+                [35, -0.28, -0.42,  0.02],
+                [45, -0.35, -0.48, -0.05],
+                [55, -0.62, -0.55, -0.10],
+                [65, -0.32, -0.40,  0.05],
+                [75, -0.18, -0.32,  0.10],
+                [85, -0.05, -0.22,  0.18],
+                [95,  0.32, -0.05,  0.25]
+            ],
+            // U 型曲线（5 众均值）
+            u_curve: [
+                [5, 0.16], [15, 0.04], [25, -0.16], [35, -0.22], [45, -0.27],
+                [55, -0.35], [65, -0.20], [75, -0.08], [85, 0.04], [95, 0.22]
+            ],
+            // 四众情感画像雷达（6 维度归一化 0-1）
+            radar: {
+                axes: ['正向比', '负向比(逆)', '冲突参与', '调解频率', '指令频率', '稳定性'],
+                // 负向比取逆（1 - 实际值）以保证"越大越好"的视觉一致性
+                values: {
+                    wukong:   [0.42, 0.30, 0.95, 0.20, 0.85, 0.30],
+                    tangseng: [0.30, 0.55, 0.60, 0.40, 0.95, 0.65],
+                    bajie:    [0.18, 0.10, 0.75, 0.10, 0.20, 0.40],
+                    shaseng:  [0.55, 0.85, 0.30, 0.75, 0.30, 0.80]
+                }
+            }
+        };
+
+        // ===== Utilities =====
+        const tooltip = d3.select('#tooltip');
+        function showTooltip(html, event) {
+            tooltip.html(html).style('opacity', 1)
+                .style('left', (event.pageX + 12) + 'px')
+                .style('top', (event.pageY - 12) + 'px');
+        }
+        function hideTooltip() { tooltip.style('opacity', 0); }
+
+        // ===== Section 1: Arc Overview =====
+        (function renderArcOverview() {
+            const svg = d3.select('#chart-arc-overview');
+            const containerWidth = svg.node().getBoundingClientRect().width;
+            const margin = { top: 20, right: 80, bottom: 50, left: 60 };
+            const width = containerWidth - margin.left - margin.right;
+            const height = 460 - margin.top - margin.bottom;
+            svg.attr('viewBox', `0 0 ${containerWidth} 460`);
+            const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+            const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+            const y = d3.scaleLinear().domain([-1, 1]).range([height, 0]);
+
+            // X axis
+            g.append('g').attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(x).ticks(10).tickFormat(d => '第' + d + '回'))
+                .selectAll('text').style('font-size', '0.78rem');
+            g.append('text').attr('x', width/2).attr('y', height + 40)
+                .attr('text-anchor', 'middle').style('font-size', '0.85rem')
+                .style('fill', 'var(--ink-soft)').text('回目（10 回分桶聚合）');
+
+            // Y axis
+            g.append('g').call(d3.axisLeft(y).ticks(5).tickFormat(d => d.toFixed(1)));
+            g.append('text').attr('transform', 'rotate(-90)').attr('x', -height/2).attr('y', -45)
+                .attr('text-anchor', 'middle').style('font-size', '0.85rem')
+                .style('fill', 'var(--ink-soft)').text('avg_sentiment');
+
+            // Zero line
+            g.append('line').attr('x1', 0).attr('x2', width)
+                .attr('y1', y(0)).attr('y2', y(0))
+                .attr('stroke', '#999').attr('stroke-dasharray', '4,4').attr('opacity', 0.6);
+
+            // Grid lines
+            [-0.5, 0.5].forEach(v => {
+                g.append('line').attr('x1', 0).attr('x2', width)
+                    .attr('y1', y(v)).attr('y2', y(v))
+                    .attr('stroke', '#eee').attr('stroke-dasharray', '2,2');
+            });
+
+            // Lines per character
+            const charIdx = { wukong: 1, tangseng: 2, bajie: 3, shaseng: 4, guanyin: 5 };
+            EMBEDDED.characters.forEach(c => {
+                const line = d3.line().x(d => x(d[0])).y(d => y(d[charIdx[c.id]])).curve(d3.curveMonotoneX);
+                g.append('path').datum(EMBEDDED.arc_overview)
+                    .attr('fill', 'none').attr('stroke', c.color)
+                    .attr('stroke-width', 2.5).attr('d', line);
+
+                // Points
+                g.selectAll(`.point-${c.id}`).data(EMBEDDED.arc_overview).enter()
+                    .append('circle').attr('class', `point-${c.id}`)
+                    .attr('cx', d => x(d[0])).attr('cy', d => y(d[charIdx[c.id]]))
+                    .attr('r', 4).attr('fill', c.color).attr('stroke', '#fff').attr('stroke-width', 1.5)
+                    .style('cursor', 'pointer')
+                    .on('mouseover', (e, d) => showTooltip(
+                        `<strong style="color:${c.color}">${c.name}</strong><br>第 ${d[0]-4}-${d[0]+5} 回<br>情感值: ${d[charIdx[c.id]].toFixed(2)}`, e))
+                    .on('mouseout', hideTooltip);
+            });
+
+            // Legend
+            const legend = d3.select('#arc-overview-legend');
+            EMBEDDED.characters.forEach(c => {
+                legend.append('span').attr('class', 'legend-item').html(
+                    `<span class="legend-swatch" style="background:${c.color}"></span>${c.name}`);
+            });
+        })();
+
+        // ===== Section 2: Annotated Arc (Wukong) =====
+        (function renderAnnotatedArc() {
+            const svg = d3.select('#chart-arc-annotated');
+            const containerWidth = svg.node().getBoundingClientRect().width;
+            const margin = { top: 40, right: 100, bottom: 80, left: 60 };
+            const width = containerWidth - margin.left - margin.right;
+            const height = 500 - margin.top - margin.bottom;
+            svg.attr('viewBox', `0 0 ${containerWidth} 500`);
+            const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+            const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+            const y = d3.scaleLinear().domain([-1, 1]).range([height, 0]);
+
+            g.append('g').attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(x).ticks(10).tickFormat(d => '第' + d + '回'))
+                .selectAll('text').style('font-size', '0.78rem');
+            g.append('g').call(d3.axisLeft(y).ticks(5).tickFormat(d => d.toFixed(1)));
+
+            g.append('line').attr('x1', 0).attr('x2', width)
+                .attr('y1', y(0)).attr('y2', y(0))
+                .attr('stroke', '#999').attr('stroke-dasharray', '4,4').attr('opacity', 0.6);
+
+            // Wukong curve (interpolated)
+            const wukongData = EMBEDDED.arc_overview.map(d => [d[0], d[1]]);
+            const line = d3.line().x(d => x(d[0])).y(d => y(d[1])).curve(d3.curveMonotoneX);
+            g.append('path').datum(wukongData).attr('fill', 'none')
+                .attr('stroke', '#c8463a').attr('stroke-width', 3).attr('d', line);
+
+            // Turning points
+            EMBEDDED.turning_points.forEach(tp => {
+                const tx = x(tp.chapter), ty = y(tp.sentiment);
+                // Vertical guide line
+                g.append('line').attr('class', 'event-line')
+                    .attr('x1', tx).attr('x2', tx).attr('y1', ty).attr('y2', height + 30);
+                // Point
+                g.append('circle').attr('cx', tx).attr('cy', ty).attr('r', 7)
+                    .attr('fill', '#c8463a').attr('stroke', '#fff').attr('stroke-width', 2)
+                    .style('cursor', 'pointer')
+                    .on('mouseover', e => showTooltip(
+                        `<strong style="color:#c8463a">第${tp.chapter}回</strong> · ${tp.event}<br>` +
+                        `${tp.line}<br>情感值: ${tp.sentiment.toFixed(2)}<br><em>${tp.desc}</em>`, e))
+                    .on('mouseout', hideTooltip);
+                // Label
+                const labelY = ty > height/2 ? ty - 12 : ty + 20;
+                g.append('text').attr('class', 'event-annotation')
+                    .attr('x', tx).attr('y', labelY).attr('text-anchor', 'middle')
+                    .text(tp.event);
+            });
+
+            // Legend
+            const legend = d3.select('#arc-annotated-legend');
+            legend.append('span').attr('class', 'legend-item').html(
+                '<span class="legend-swatch" style="background:#c8463a"></span>孙悟空 avg_sentiment');
+            legend.append('span').attr('class', 'legend-item').html(
+                '<span class="legend-swatch" style="background:#c8463a;border-radius:50%;"></span>关键转折点');
+        })();
+
+        // ===== Section 3: Pair Comparison =====
+        (function renderPairComparison() {
+            const svg = d3.select('#chart-pair-comparison');
+            const containerWidth = svg.node().getBoundingClientRect().width;
+            const margin = { top: 20, right: 100, bottom: 50, left: 60 };
+            const width = containerWidth - margin.left - margin.right;
+            const height = 440 - margin.top - margin.bottom;
+            svg.attr('viewBox', `0 0 ${containerWidth} 440`);
+            const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+            const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+            const y = d3.scaleLinear().domain([-1, 1]).range([height, 0]);
+
+            g.append('g').attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(x).ticks(10).tickFormat(d => '第' + d + '回'))
+                .selectAll('text').style('font-size', '0.78rem');
+            g.append('g').call(d3.axisLeft(y).ticks(5).tickFormat(d => d.toFixed(1)));
+
+            g.append('line').attr('x1', 0).attr('x2', width)
+                .attr('y1', y(0)).attr('y2', y(0))
+                .attr('stroke', '#999').attr('stroke-dasharray', '4,4').attr('opacity', 0.6);
+
+            const pairs = [
+                { idx: 1, name: '唐僧-孙悟空（主轴·88）', color: '#c8463a' },
+                { idx: 2, name: '孙悟空-猪八戒（讥讽·82）', color: '#7a5230' },
+                { idx: 3, name: '唐僧-沙僧（稳定·77）', color: '#5a7a3a' }
+            ];
+            pairs.forEach(p => {
+                const line = d3.line().x(d => x(d[0])).y(d => y(d[p.idx])).curve(d3.curveMonotoneX);
+                g.append('path').datum(EMBEDDED.pair_comparison)
+                    .attr('fill', 'none').attr('stroke', p.color)
+                    .attr('stroke-width', 2.5).attr('d', line);
+                g.selectAll(`.pair-${p.idx}`).data(EMBEDDED.pair_comparison).enter()
+                    .append('circle').attr('class', `pair-${p.idx}`)
+                    .attr('cx', d => x(d[0])).attr('cy', d => y(d[p.idx]))
+                    .attr('r', 4).attr('fill', p.color).attr('stroke', '#fff').attr('stroke-width', 1.5)
+                    .style('cursor', 'pointer')
+                    .on('mouseover', (e, d) => showTooltip(
+                        `<strong style="color:${p.color}">${p.name}</strong><br>第 ${d[0]-4}-${d[0]+5} 回<br>情感值: ${d[p.idx].toFixed(2)}`, e))
+                    .on('mouseout', hideTooltip);
+            });
+
+            const legend = d3.select('#pair-comparison-legend');
+            pairs.forEach(p => {
+                legend.append('span').attr('class', 'legend-item').html(
+                    `<span class="legend-swatch" style="background:${p.color}"></span>${p.name}`);
+            });
+        })();
+
+        // ===== Section 4: U Curve =====
+        (function renderUCurve() {
+            const svg = d3.select('#chart-u-curve');
+            const containerWidth = svg.node().getBoundingClientRect().width;
+            const margin = { top: 30, right: 60, bottom: 60, left: 60 };
+            const width = containerWidth - margin.left - margin.right;
+            const height = 460 - margin.top - margin.bottom;
+            svg.attr('viewBox', `0 0 ${containerWidth} 460`);
+            const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+            const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+            const y = d3.scaleLinear().domain([-0.5, 0.5]).range([height, 0]);
+
+            // Stage backgrounds
+            const stages = [
+                { range: [0, 27], color: '#fae5e0', label: '下行段' },
+                { range: [27, 57], color: '#f0ece4', label: '谷底段' },
+                { range: [57, 100], color: '#e5ede0', label: '上行段' }
+            ];
+            stages.forEach(s => {
+                g.append('rect').attr('x', x(s.range[0])).attr('y', 0)
+                    .attr('width', x(s.range[1]) - x(s.range[0])).attr('height', height)
+                    .attr('fill', s.color).attr('opacity', 0.6);
+                g.append('text').attr('class', 'stage-label')
+                    .attr('x', (x(s.range[0]) + x(s.range[1]))/2).attr('y', 18)
+                    .attr('text-anchor', 'middle').text(s.label);
+            });
+
+            g.append('g').attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(x).ticks(10).tickFormat(d => '第' + d + '回'))
+                .selectAll('text').style('font-size', '0.78rem');
+            g.append('g').call(d3.axisLeft(y).ticks(5).tickFormat(d => d.toFixed(2)));
+
+            g.append('line').attr('x1', 0).attr('x2', width)
+                .attr('y1', y(0)).attr('y2', y(0))
+                .attr('stroke', '#999').attr('stroke-dasharray', '4,4').attr('opacity', 0.6);
+
+            // U curve area
+            const area = d3.area().x(d => x(d[0])).y0(y(0)).y1(d => y(d[1])).curve(d3.curveMonotoneX);
+            g.append('path').datum(EMBEDDED.u_curve).attr('fill', '#c8463a')
+                .attr('opacity', 0.18).attr('d', area);
+
+            // U curve line
+            const line = d3.line().x(d => x(d[0])).y(d => y(d[1])).curve(d3.curveMonotoneX);
+            g.append('path').datum(EMBEDDED.u_curve).attr('fill', 'none')
+                .attr('stroke', '#c8463a').attr('stroke-width', 3).attr('d', line);
+
+            // Points
+            g.selectAll('.u-point').data(EMBEDDED.u_curve).enter()
+                .append('circle').attr('class', 'u-point')
+                .attr('cx', d => x(d[0])).attr('cy', d => y(d[1]))
+                .attr('r', 5).attr('fill', '#c8463a').attr('stroke', '#fff').attr('stroke-width', 2)
+                .style('cursor', 'pointer')
+                .on('mouseover', (e, d) => showTooltip(
+                    `<strong>第 ${d[0]-4}-${d[0]+5} 回</strong><br>五众均值: ${d[1].toFixed(3)}`, e))
+                .on('mouseout', hideTooltip);
+
+            // Annotations: turning points
+            const annotations = [
+                { ch: 27, label: '三打白骨精' },
+                { ch: 57, label: '真假美猴王' },
+                { ch: 98, label: '紧箍自褪' }
+            ];
+            annotations.forEach(a => {
+                const ax = x(a.ch);
+                g.append('line').attr('class', 'event-line')
+                    .attr('x1', ax).attr('x2', ax).attr('y1', 25).attr('y2', height);
+                g.append('text').attr('class', 'event-annotation')
+                    .attr('x', ax).attr('y', 35).attr('text-anchor', 'middle')
+                    .text(a.label);
+            });
+
+            const legend = d3.select('#u-curve-legend');
+            legend.append('span').attr('class', 'legend-item').html(
+                '<span class="legend-swatch" style="background:#c8463a"></span>五众 avg_sentiment 均值');
+            legend.append('span').attr('class', 'legend-item').html(
+                '<span class="legend-swatch" style="background:#fae5e0"></span>下行段');
+            legend.append('span').attr('class', 'legend-item').html(
+                '<span class="legend-swatch" style="background:#f0ece4"></span>谷底段');
+            legend.append('span').attr('class', 'legend-item').html(
+                '<span class="legend-swatch" style="background:#e5ede0"></span>上行段');
+        })();
+
+        // ===== Section 5: Radar =====
+        (function renderRadar() {
+            const svg = d3.select('#chart-radar');
+            const containerWidth = svg.node().getBoundingClientRect().width;
+            const size = Math.min(containerWidth, 500);
+            const margin = 40;
+            const radius = (size - margin * 2) / 2;
+            svg.attr('viewBox', `0 0 ${size} 500`);
+            const g = svg.append('g').attr('transform', `translate(${size/2},${250})`);
+
+            const axes = EMBEDDED.radar.axes;
+            const angle = i => (i * 2 * Math.PI / axes.length) - Math.PI/2;
+            const rScale = d3.scaleLinear().domain([0, 1]).range([0, radius]);
+
+            // Grid circles
+            [0.2, 0.4, 0.6, 0.8, 1.0].forEach(level => {
+                const points = axes.map((a, i) => [
+                    rScale(level) * Math.cos(angle(i)),
+                    rScale(level) * Math.sin(angle(i))
+                ]);
+                g.append('polygon').attr('points', points.map(p => p.join(',')).join(' '))
+                    .attr('fill', 'none').attr('stroke', '#d9cdb8').attr('stroke-width', 0.5);
+            });
+
+            // Axes lines + labels
+            axes.forEach((a, i) => {
+                const x2 = rScale(1) * Math.cos(angle(i));
+                const y2 = rScale(1) * Math.sin(angle(i));
+                g.append('line').attr('x1', 0).attr('y1', 0).attr('x2', x2).attr('y2', y2)
+                    .attr('stroke', '#d9cdb8').attr('stroke-width', 0.8);
+                g.append('text').attr('x', x2 * 1.15).attr('y', y2 * 1.15)
+                    .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+                    .style('font-size', '0.88rem').style('fill', 'var(--ink)').text(a);
+            });
+
+            // Polygons per character
+            const radarChars = [
+                { id: 'wukong', name: '孙悟空', color: '#c8463a' },
+                { id: 'tangseng', name: '唐僧', color: '#3a6b8c' },
+                { id: 'bajie', name: '猪八戒', color: '#7a5230' },
+                { id: 'shaseng', name: '沙僧', color: '#5a7a3a' }
+            ];
+            radarChars.forEach(c => {
+                const values = EMBEDDED.radar.values[c.id];
+                const points = values.map((v, i) => [
+                    rScale(v) * Math.cos(angle(i)),
+                    rScale(v) * Math.sin(angle(i))
+                ]);
+                g.append('polygon').attr('points', points.map(p => p.join(',')).join(' '))
+                    .attr('fill', c.color).attr('fill-opacity', 0.18)
+                    .attr('stroke', c.color).attr('stroke-width', 2);
+                // Vertices
+                points.forEach((p, i) => {
+                    g.append('circle').attr('cx', p[0]).attr('cy', p[1]).attr('r', 4)
+                        .attr('fill', c.color).style('cursor', 'pointer')
+                        .on('mouseover', e => showTooltip(
+                            `<strong style="color:${c.color}">${c.name}</strong><br>` +
+                            `${axes[i]}: ${(values[i]*100).toFixed(0)}%`, e))
+                        .on('mouseout', hideTooltip);
+                });
+            });
+
+            const legend = d3.select('#radar-legend');
+            radarChars.forEach(c => {
+                legend.append('span').attr('class', 'legend-item').html(
+                    `<span class="legend-swatch" style="background:${c.color}"></span>${c.name}`);
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+name: Deploy
+
+# W234-E1 CI/CD 化：main 推送触发 GitHub Pages 自动部署
+on:
+  push:
+    branches: [main]
+
+# 允许同时一个部署，避免 Pages 冲突
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  deployments: write
+
+jobs:
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Pre-deploy a11y gate (W234-E2)
+        run: python scripts/a11y_audit.py --dir site --quiet
+        # P0 > 0 时脚本退出码 1，阻断部署
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

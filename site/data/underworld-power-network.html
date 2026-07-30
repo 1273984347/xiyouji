@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>地府权力关系图 - 西游数据可视化</title>
+<!-- W151·D 方向第 11 个 NLP 可视化 -->
+<!-- 创建于 2026-07-28（v2.2.7 多方向并行批次第七次落地） -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="/site/static/js/d3-sankey.min.js"></script>
+<noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+<style>
+:root {
+  /* 古典宣纸风配色（任务规范 27 变量） */
+  --bg: #faf7f2;            /* 1. 宣纸底色 */
+  --paper: #fffdf6;         /* 2. 内嵌纸张 */
+  --ink: #1a1410;           /* 3. 主墨色 */
+  --ink-soft: #3a2820;      /* 4. 次墨色 */
+  --muted: #5a3828;         /* 5. 暗墨褐 */
+  --border: #d9cdb8;        /* 6. 边线米色 */
+  --card: #fffdf8;          /* 7. 卡片底色 */
+  --shadow: 0 1px 3px rgba(58, 40, 32, 0.10), 0 4px 12px rgba(58, 40, 32, 0.06);
+  /* 主辅色 */
+  --accent: #c8463a;        /* 8. 朱砂红（主） */
+  --accent-2: #3a6b8c;      /* 9. 黛青蓝（次） */
+  --accent-3: #c9a961;      /* 10. 古铜金 */
+  /* 地府角色配色 */
+  --r-king: #c8463a;        /* 11. 十殿阎王 · 朱砂 */
+  --r-judge: #c9a961;       /* 12. 崔判官 · 古铜金 */
+  --r-bodhi: #3a6b8c;       /* 13. 地藏王菩萨 · 黛青 */
+  --r-mortal: #6b8e6f;      /* 14. 阳间人 · 竹绿 */
+  --r-mount: #8a5a8a;       /* 15. 谛听坐骑 · 紫罗兰 */
+  --r-buddha: #b8902a;      /* 16. 接引佛祖 · 暗金 */
+  /* 阶段配色 */
+  --stage-rise: #3a6b8c;    /* 17. 崛起阶段 */
+  --stage-conflict: #c8463a;/* 18. 冲突阶段 */
+  --stage-fate: #5a3828;    /* 19. 归宿阶段 */
+  /* 文字 */
+  --text-strong: #1a1410;   /* 20. 标题墨色 */
+  --text-body: #3a2820;     /* 21. 正文墨色 */
+  --text-soft: #5a3828;     /* 22. 弱化墨色 */
+  --text-muted: #8a7c6a;    /* 23. 静音灰褐 */
+  /* 背景 */
+  --bg-soft: #f5f1e8;       /* 24. 弱化背景 */
+  --bg-card: #fffdf8;       /* 25. 卡片背景 */
+  --bg-tooltip: #1a1410;    /* 26. tooltip 背景 */
+  --bg-hero-from: #1a1410;  /* 27. hero 渐变起点 */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "Microsoft YaHei", serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  padding: 20px;
+  min-height: 100vh;
+}
+.container { max-width: 1280px; margin: 0 auto; }
+
+/* Hero */
+header.hero {
+  background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+  color: #f5e9d4;
+  padding: 48px 30px;
+  border-radius: 8px;
+  margin-bottom: 28px;
+  text-align: center;
+  border: 1px solid #2a1c14;
+  position: relative;
+  overflow: hidden;
+}
+header.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(201, 169, 97, 0.18), transparent 60%);
+  pointer-events: none;
+}
+header.hero h1 {
+  font-size: 2.4em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #f5e9d4;
+  letter-spacing: 6px;
+  position: relative; z-index: 1;
+}
+header.hero .subtitle {
+  font-size: 1.02em;
+  color: var(--accent-3);
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+  position: relative; z-index: 1;
+}
+header.hero .meta {
+  color: #b8a888;
+  font-size: 0.85em;
+  margin-top: 10px;
+  position: relative; z-index: 1;
+}
+
+/* Section */
+.section {
+  background: var(--card);
+  margin: 24px 0;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+}
+.section-title {
+  font-size: 1.55em;
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-weight: 600;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+.section-title.alt { color: var(--accent-2); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+.section-sub {
+  color: var(--muted);
+  font-size: 0.86em;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+}
+.definition {
+  background: #fdfaf0;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.92em;
+  border-radius: 0 4px 4px 0;
+  color: var(--ink-soft);
+  line-height: 1.75;
+}
+.definition strong { color: var(--ink); }
+
+/* KPI */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
+  gap: 14px;
+  margin: 18px 0 24px;
+}
+.kpi-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 14px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.kpi-card.alt { border-top-color: var(--accent-2); }
+.kpi-card.alt-2 { border-top-color: var(--accent-3); }
+.kpi-card.alt-3 { border-top-color: var(--r-bodhi); }
+.kpi-value {
+  font-size: 1.85em;
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.kpi-card.alt .kpi-value { color: var(--accent-2); }
+.kpi-card.alt-2 .kpi-value { color: var(--accent-3); }
+.kpi-card.alt-3 .kpi-value { color: var(--r-bodhi); }
+.kpi-label {
+  color: var(--muted);
+  font-size: 0.84em;
+  margin-top: 4px;
+}
+
+/* 角色类别卡片 */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+.role-card {
+  background: #fdfaf0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 14px;
+  border-top: 4px solid var(--accent);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.role-card:hover, .role-card:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(58, 40, 32, 0.14);
+  outline: none;
+}
+.role-card.r-king { border-top-color: var(--r-king); }
+.role-card.r-judge { border-top-color: var(--r-judge); }
+.role-card.r-bodhi { border-top-color: var(--r-bodhi); }
+.role-card.r-mortal { border-top-color: var(--r-mortal); }
+.role-card.r-mount { border-top-color: var(--r-mount); }
+.role-card.r-buddha { border-top-color: var(--r-buddha); }
+.role-card .r-name {
+  font-size: 1.15em;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.role-card .r-tag {
+  font-size: 0.78em;
+  color: var(--accent-3);
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.role-card .r-desc {
+  font-size: 0.86em;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+.role-card .r-ex {
+  font-size: 0.82em;
+  color: var(--muted);
+  font-style: italic;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+}
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title {
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+  font-size: 1.02em;
+}
+.chart-caption {
+  color: var(--muted);
+  font-size: 0.84em;
+  margin-bottom: 12px;
+}
+.chart-svg {
+  background: #fffdf6;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.84em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; color: var(--ink-soft); }
+.legend-swatch {
+  width: 14px; height: 14px; border-radius: 2px; display: inline-block;
+}
+.legend-swatch.line { width: 18px; height: 3px; border-radius: 1px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: rgba(26, 20, 16, 0.95);
+  color: #fff;
+  padding: 9px 12px;
+  border-radius: 4px;
+  font-size: 0.84em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 280px;
+  line-height: 1.55;
+}
+.tooltip div + div { margin-top: 4px; }
+
+/* Insight list */
+.insight-list { list-style: none; padding: 0; counter-reset: insight; }
+.insight-list li {
+  counter-increment: insight;
+  background: #fdfaf0;
+  margin: 10px 0;
+  padding: 12px 16px 12px 48px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 0 4px 4px 0;
+  position: relative;
+  font-size: 0.92em;
+  color: var(--ink-soft);
+}
+.insight-list li:last-child { border-bottom: none; }
+.insight-list li::before {
+  content: counter(insight, decimal-leading-zero);
+  position: absolute;
+  left: 14px; top: 12px;
+  color: var(--accent);
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+.insight-list li strong { color: var(--accent); font-weight: 600; }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; }
+.node-circle:hover, .node-circle:focus { stroke: var(--accent); stroke-width: 3px; outline: none; }
+
+/* Dashboard section */
+.dash-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  margin-top: 14px;
+}
+.dash-panel {
+  background: #fdfaf0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px;
+}
+.dash-panel h4 {
+  font-size: 1em;
+  color: var(--accent-2);
+  margin-bottom: 10px;
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 6px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .role-grid { grid-template-columns: repeat(2, 1fr); }
+  .dash-grid { grid-template-columns: 1fr; }
+  header.hero { padding: 32px 18px; }
+  header.hero h1 { font-size: 1.8em; letter-spacing: 3px; }
+  .section { padding: 18px; }
+  .section-title { font-size: 1.3em; }
+}
+@media (max-width: 520px) {
+  .role-grid { grid-template-columns: 1fr; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  body { padding: 10px; }
+  header.hero h1 { font-size: 1.5em; letter-spacing: 2px; }
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.84em;
+  line-height: 1.8;
+}
+footer code {
+  background: #fdfaf0;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  color: var(--accent);
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="hero">
+  <h1>地府权力关系图</h1>
+  <div class="subtitle">UNDERWORLD POWER NETWORK · DIYU HIERARCHY ATLAS</div>
+  <div class="meta">W151 · D 方向第 11 个 NLP 可视化 · 地府体系权力结构与关系网络专题</div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">10</div><div class="kpi-label">十殿阎王</div></div>
+  <div class="kpi-card alt"><div class="kpi-value">16</div><div class="kpi-label">地府核心角色</div></div>
+  <div class="kpi-card alt-2"><div class="kpi-value">20</div><div class="kpi-label">权力关系边</div></div>
+  <div class="kpi-card alt-3"><div class="kpi-value">4</div><div class="kpi-label">跨界体系</div></div>
+  <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">关键地府事件</div></div>
+  <div class="kpi-card alt"><div class="kpi-value">5</div><div class="kpi-label">能力维度</div></div>
+  <div class="kpi-card alt-2"><div class="kpi-value">100</div><div class="kpi-label">回目跨度</div></div>
+</div>
+
+<!-- Section 1：概览（地府体系） -->
+<section class="section" aria-labelledby="s1-title">
+  <h2 class="section-title" id="s1-title">壹 · 地府权力体系概览</h2>
+  <div class="section-sub">UNDERWORLD SYSTEM OVERVIEW · DIYU BUREAUCRACY</div>
+  <div class="definition">
+    <strong>定义：</strong>西游世界地府并非单一审判机构，而是由"十殿阎王科层 + 崔判官执行 + 地藏王监督 + 阳间桥梁 + 佛门接引"五层结构组成的复合体系。
+    <strong>十殿阎王</strong>——秦广、楚江、宋帝、五官、阎罗、卞城、泰山、都市、平等、转轮，按亡魂罪孽分殿审判，是地府的科层主体；
+    <strong>崔判官（崔珏）</strong>——掌生死簿，受魏徵私人请托改太宗阳寿，是地府最关键的执行枢纽；
+    <strong>地藏王菩萨</strong>——佛门驻地狱代表，发"地狱不空誓不成佛"宏愿，监督而不干预审判；
+    <strong>阳间桥梁</strong>——魏徵（斩龙人）与刘全（进瓜人）以肉身或梦游出入阴阳，是地府与阳间的接口；
+    <strong>佛门接引</strong>——谛听（地藏王坐骑）与接引佛祖（凌云渡）承担地府与灵山的接驳功能。
+    地府体系的核心政治学悖论：名义上独立于天庭，实质上接受天庭（魏徵梦中斩龙受玉帝敕令）与灵山（地藏王监督）双重渗透。
+  </div>
+  <div class="role-grid" id="role-grid"></div>
+</section>
+
+<!-- Section 2：地府权力力导向图 -->
+<section class="section" aria-labelledby="s2-title">
+  <h2 class="section-title alt" id="s2-title">贰 · 地府权力力导向图</h2>
+  <div class="section-sub">FORCE-DIRECTED GRAPH · NODE SIZE = POWER · COLOR = ROLE TYPE</div>
+  <div class="definition">
+    <strong>定义：</strong>以 14 个地府核心人物为节点，节点大小映射"权力强度（power 1-10）"，颜色映射"角色类别"。
+    边类型分五种：<strong>科层</strong>（十殿阎王之间的层级关系）、<strong>从属</strong>（崔判官受十殿阎王调遣）、<strong>监督</strong>（地藏王菩萨对十殿阎王的宗教监督）、<strong>跨界</strong>（魏徵与天庭的私人渠道）、<strong>归属</strong>（刘全与阳间的肉身归属）。
+    力导向图直观呈现"十殿阎王抱团科层、崔判官居中执行、地藏王菩萨超然监督、魏徵跨界天庭、刘全单点接阳间"五种拓扑形态。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">地府权力力导向图（19 节点 / 20 边）</div>
+    <div class="chart-caption">节点大小=权力强度 · 颜色=角色类别 · 边色=关系类型 · 可拖拽 · hover 显示详情</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="560" role="img" aria-label="地府权力力导向图"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3：地府-天庭关系桑基图 -->
+<section class="section" aria-labelledby="s3-title">
+  <h2 class="section-title alt-2" id="s3-title">叁 · 地府-天庭-灵山-阳间关系桑基图</h2>
+  <div class="section-sub">SANKEY · UNDERWORLD ↔ HEAVEN ↔ LINGSHAN ↔ YANG-REALM</div>
+  <div class="definition">
+    <strong>定义：</strong>桑基图展示地府与三界的权力流向。<strong>地府体系</strong>为左列（十殿阎王、崔判官、地藏王、魏徵、刘全）；
+    <strong>对接体系</strong>为右列（天庭、灵山、阳间、地府自身）。
+    流量揭示西游地府体系的政治学定律：地府并非独立王国——十殿阎王接受天庭编制与灵山监督双重渗透，崔判官通过私人关系为阳间开方便之门，
+    地藏王以佛门身份坐镇地狱却"地狱不空誓不成佛"——地府的"独立性"是相对的，其实质是天庭-灵山-阳间三界博弈的缓冲地带。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">地府 → 天庭 / 灵山 / 阳间 关系桑基图</div>
+    <div class="chart-caption">左：地府体系角色 · 右：对接三界体系 · 流量=关系强度 · hover 高亮路径</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="520" role="img" aria-label="地府三界关系桑基图"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4：地府人物能力雷达图 -->
+<section class="section" aria-labelledby="s4-title">
+  <h2 class="section-title" id="s4-title">肆 · 地府人物能力雷达图</h2>
+  <div class="section-sub">RADAR · 5 DIMENSIONS · JUDGMENT / EXECUTION / MAGIC / MERCY / INDEPENDENCE</div>
+  <div class="definition">
+    <strong>定义：</strong>五维度评估地府人物综合能力——<strong>审判力</strong>（断亡魂罪孽之权）、<strong>执行力</strong>（落实判决之能）、<strong>法力</strong>（神通变化武艺）、<strong>慈悲度</strong>（对亡魂与阳间的悲悯）、<strong>独立性</strong>（不受天庭与灵山干预的程度）。
+    雷达面积越大，地府综合权力越高。地藏王菩萨面积最大但独立性低（佛门监督）；十殿阎王审判力满分但法力偏低；崔判官独立性最低（受双重请托）；魏徵独立性最高（梦中斩龙，天庭特使身份）。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">地府人物五维度能力雷达图（16 人物叠加对比）</div>
+    <div class="chart-caption">数值 0-10 · 点击图例切换显示 · hover 查看详情</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="540" role="img" aria-label="地府人物能力雷达图"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5：地府事件时间线 -->
+<section class="section" aria-labelledby="s5-title">
+  <h2 class="section-title alt" id="s5-title">伍 · 地府事件时间线</h2>
+  <div class="section-sub">UNDERWORLD EVENTS TIMELINE · BY CHAPTER ORDER</div>
+  <div class="definition">
+    <strong>定义：</strong>按回目顺序排列 7 个关键地府事件，按事件性质分轨展示。
+    每个节点标记关键事件（销名/斩龙/游地府/进瓜/井龙王/谛听辨伪/成真），用颜色区分阶段：<strong>冲突</strong>（与阳间正面冲突）、<strong>沟通</strong>（阴阳两界交涉）、<strong>归宿</strong>（终局收尾）。
+    时间线呈现"前期密集（第3-11回太宗地府线）、中期稀疏（中段仅井龙王与谛听两事）、终局收束（第100回五圣成真跨越阴阳）"三段节奏。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">地府事件时间线（第3-100回）</div>
+    <div class="chart-caption">X 轴：回目时序 · Y 轴：事件阶段分轨 · 节点颜色：阶段 · hover 显示详情</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="460" role="img" aria-label="地府事件时间线"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6：关键洞察 -->
+<section class="section" aria-labelledby="s6-title">
+  <h2 class="section-title alt-2" id="s6-title">陆 · 地府体系关键洞察</h2>
+  <div class="section-sub">DASHBOARD · KEY INSIGHTS + STATISTICS</div>
+  <div class="definition">
+    <strong>定义：</strong>仪表盘汇总地府体系的核心指标：按角色类别分布、按对接体系占比、按事件阶段计数、综合能力对比、权力强度 Top 5、跨回目跨度等。
+    以"统计卡片 + 小型图表"组合方式，将前五节散点信息浓缩为可对比的概览视图，并提炼三条地府政治学核心洞察。
+  </div>
+  <div class="kpi-row" id="dash-kpi-row"></div>
+  <div class="dash-grid">
+    <div class="dash-panel">
+      <h4>地府权力强度 Top 5（条形图）</h4>
+      <svg id="chart-bar-top" class="chart-svg" width="100%" height="280" role="img" aria-label="地府权力强度 Top 5"></svg>
+    </div>
+    <div class="dash-panel">
+      <h4>事件阶段分布（甜甜圈图）</h4>
+      <svg id="chart-donut" class="chart-svg" width="100%" height="280" role="img" aria-label="地府事件阶段分布甜甜圈图"></svg>
+    </div>
+  </div>
+  <ul class="insight-list" style="margin-top: 18px;">
+    <li><strong>地府独立性是相对的：</strong>地藏王菩萨虽发"地狱不空誓不成佛"宏愿，实质是灵山对地府的宗教监督；崔判官虽掌生死簿，却因魏徵私人请托而私改太宗阳寿——地府名义上独立审判，实质同时接受天庭编制（魏徵梦中斩龙受玉帝敕令）与灵山监督（地藏王坐镇）双重渗透。</li>
+    <li><strong>崔判官是地府的政治枢纽：</strong>14 个地府人物中，崔判官同时连接十殿阎王（从属）、阳间（魏徵请托）、太宗（私改阳寿）三方，是地府权力网络的中介节点。他的存在使地府的"科层审判"被"私人请托"穿透——这是西游地府体系最大的制度漏洞。</li>
+    <li><strong>地府事件集中于首尾两段：</strong>7 个关键事件中，5 个集中在第3-11回（太宗地府线 + 悟空销名 + 刘全进瓜），2 个分布于第58回与第100回。这种分布揭示：地府在取经叙事中是"起点装置"（确立生死簿规则）与"终局装置"（五圣成真跨越阴阳），中段几乎缺席——地府的戏剧功能是结构性的，而非过程性的。</li>
+  </ul>
+</section>
+
+<footer>
+  <p>W151 地府权力关系图 · D 方向第 11 个 NLP 可视化 · 基于 W100/W121/W125/W143 多层 NLP 数据</p>
+  <p>古典宣纸风配色 · D3.js v7 + d3-sankey · F6 skeleton（fetchJson → loadData → main → render×N → cache → resize）</p>
+  <p id="dataSource">数据源：嵌入数据 EMBEDDED_DATA（file:// 模式可直接打开）</p>
+</footer>
+
+</div>
+
+<script>
+// ============================================================
+// EMBEDDED DATA —— 地府权力关系数据
+// ============================================================
+const EMBEDDED_DATA = {
+  // 六类角色概览
+  hierarchy: [
+    {
+      key: "king", name: "十殿阎王", tag: "TEN KINGS",
+      color: "#c8463a",
+      desc: "地府科层主体，按亡魂罪孽分殿审判。秦广初查，楚江到转轮依次受审，阎罗居中。",
+      examples: "秦广王 · 楚江王 · 宋帝王 · 五官王 · 阎罗王 · 卞城王 · 泰山王 · 都市王 · 平等王 · 转轮王"
+    },
+    {
+      key: "judge", name: "崔判官（崔珏）", tag: "JUDGE CUI",
+      color: "#c9a961",
+      desc: "掌生死簿，受十殿阎王调遣。受魏徵私人请托改太宗阳寿，地府最关键的执行枢纽。",
+      examples: "崔珏 · 崔判官"
+    },
+    {
+      key: "bodhi", name: "地藏王菩萨", tag: "KSITIGARBHA",
+      color: "#3a6b8c",
+      desc: "佛门驻地狱代表，发'地狱不空誓不成佛'宏愿。监督地府而不干预审判，灵山对地府的宗教渗透。",
+      examples: "地藏王菩萨"
+    },
+    {
+      key: "mortal", name: "阳间桥梁", tag: "YANG-BRIDGE",
+      color: "#6b8e6f",
+      desc: "以肉身或梦游出入阴阳，是地府与阳间的接口。魏徵梦中斩龙，刘全进瓜还魂。",
+      examples: "魏徵（斩龙人） · 刘全（进瓜人）"
+    },
+    {
+      key: "mount", name: "谛听", tag: "DI-TING",
+      color: "#8a5a8a",
+      desc: "地藏王菩萨坐骑，能辨万物真伪。第58回真假美猴王事件中识破六耳猕猴而不敢言。",
+      examples: "谛听"
+    },
+    {
+      key: "buddha", name: "接引佛祖", tag: "RECEPTION BUDDHA",
+      color: "#b8902a",
+      desc: "凌云渡接引佛，渡唐僧脱胎换骨。地府与灵山之间的接驳节点，标志取经人完成阴阳跨越。",
+      examples: "接引佛祖"
+    }
+  ],
+
+  // Section 2: 力导向图节点与边
+  network: {
+    nodes: [
+      // 十殿阎王（前五殿）
+      { id: "秦广王", type: "阎王", power: 7, chapter: 10 },
+      { id: "楚江王", type: "阎王", power: 6, chapter: 10 },
+      { id: "宋帝王", type: "阎王", power: 6, chapter: 10 },
+      { id: "五官王", type: "阎王", power: 6, chapter: 10 },
+      { id: "阎罗王", type: "阎王", power: 8, chapter: 10 },
+      // 十殿阎王（后五殿）
+      { id: "卞城王", type: "阎王", power: 6, chapter: 10 },
+      { id: "泰山王", type: "阎王", power: 6, chapter: 10 },
+      { id: "都市王", type: "阎王", power: 6, chapter: 10 },
+      { id: "平等王", type: "阎王", power: 6, chapter: 10 },
+      { id: "转轮王", type: "阎王", power: 7, chapter: 10 },
+      // 崔判官
+      { id: "崔判官", type: "判官", power: 8, chapter: 10 },
+      // 地藏王菩萨
+      { id: "地藏王菩萨", type: "菩萨", power: 9, chapter: 58 },
+      // 阳间人
+      { id: "魏徵", type: "阳间", power: 7, chapter: 10 },
+      { id: "刘全", type: "阳间", power: 4, chapter: 11 },
+      // 坐骑
+      { id: "谛听", type: "坐骑", power: 7, chapter: 58 },
+      // 佛祖
+      { id: "接引佛祖", type: "佛祖", power: 9, chapter: 100 },
+      // 天庭枢纽节点（边端点）
+      { id: "玉帝", type: "天庭", power: 10, chapter: 0 },
+      { id: "如来", type: "天庭", power: 10, chapter: 0 },
+      // 阳间太宗（边端点）
+      { id: "唐太宗", type: "阳间", power: 6, chapter: 10 }
+    ],
+    links: [
+      // 科层 - 十殿阎王之间的层级关系（秦广到转轮依次受审）
+      { source: "秦广王", target: "楚江王", type: "科层" },
+      { source: "楚江王", target: "宋帝王", type: "科层" },
+      { source: "宋帝王", target: "五官王", type: "科层" },
+      { source: "五官王", target: "阎罗王", type: "科层" },
+      { source: "阎罗王", target: "卞城王", type: "科层" },
+      { source: "卞城王", target: "泰山王", type: "科层" },
+      { source: "泰山王", target: "都市王", type: "科层" },
+      { source: "都市王", target: "平等王", type: "科层" },
+      { source: "平等王", target: "转轮王", type: "科层" },
+      // 从属 - 崔判官受十殿阎王调遣（与阎罗王直接关系）
+      { source: "崔判官", target: "阎罗王", type: "从属" },
+      { source: "崔判官", target: "秦广王", type: "从属" },
+      // 监督 - 地藏王菩萨对十殿阎王的宗教监督
+      { source: "地藏王菩萨", target: "阎罗王", type: "监督" },
+      { source: "地藏王菩萨", target: "转轮王", type: "监督" },
+      // 跨界 - 魏徵与天庭的私人渠道
+      { source: "魏徵", target: "玉帝", type: "跨界" },
+      { source: "魏徵", target: "崔判官", type: "跨界" },
+      { source: "魏徵", target: "唐太宗", type: "跨界" },
+      // 归属 - 刘全与阳间的肉身归属
+      { source: "刘全", target: "唐太宗", type: "归属" },
+      { source: "刘全", target: "崔判官", type: "归属" },
+      // 佛门接驳 - 谛听与地藏王、接引佛祖与如来
+      { source: "谛听", target: "地藏王菩萨", type: "从属" },
+      { source: "接引佛祖", target: "如来", type: "跨界" }
+    ]
+  },
+
+  // Section 3: 桑基图（地府 → 三界对接）
+  sankey: {
+    nodes: [
+      // 地府体系（左列）
+      { name: "十殿阎王", cat: 0 },
+      { name: "崔判官", cat: 0 },
+      { name: "地藏王菩萨", cat: 0 },
+      { name: "魏徵", cat: 0 },
+      { name: "刘全", cat: 0 },
+      { name: "谛听", cat: 0 },
+      // 对接体系（右列）
+      { name: "天庭", cat: 1 },
+      { name: "灵山", cat: 1 },
+      { name: "阳间", cat: 1 },
+      { name: "地府自身", cat: 1 }
+    ],
+    links: [
+      // 十殿阎王 → 对接
+      { source: "十殿阎王", target: "天庭", value: 5 },      // 受天庭编制
+      { source: "十殿阎王", target: "灵山", value: 3 },      // 受地藏王监督
+      { source: "十殿阎王", target: "地府自身", value: 8 },  // 内部科层
+      // 崔判官 → 对接
+      { source: "崔判官", target: "地府自身", value: 4 },    // 执行生死簿
+      { source: "崔判官", target: "阳间", value: 3 },        // 私改太宗阳寿
+      // 地藏王菩萨 → 对接
+      { source: "地藏王菩萨", target: "灵山", value: 6 },    // 佛门驻地狱
+      { source: "地藏王菩萨", target: "地府自身", value: 2 },// 监督地府
+      // 魏徵 → 对接
+      { source: "魏徵", target: "天庭", value: 4 },          // 梦中斩龙受玉帝敕令
+      { source: "魏徵", target: "阳间", value: 3 },          // 唐太宗臣子
+      // 刘全 → 对接
+      { source: "刘全", target: "阳间", value: 2 },          // 进瓜还魂
+      { source: "刘全", target: "地府自身", value: 2 },      // 献瓜于地府
+      // 谛听 → 对接
+      { source: "谛听", target: "灵山", value: 2 }           // 地藏王坐骑
+    ]
+  },
+
+  // Section 4: 雷达图（14 人物 × 5 维度）
+  // 维度：审判力 / 执行力 / 法力 / 慈悲度 / 独立性
+  radar: [
+    { name: "秦广王",     type: "阎王", 审判力: 9, 执行力: 7, 法力: 5, 慈悲度: 4, 独立性: 5 },
+    { name: "阎罗王",     type: "阎王", 审判力: 10, 执行力: 8, 法力: 6, 慈悲度: 4, 独立性: 5 },
+    { name: "转轮王",     type: "阎王", 审判力: 8, 执行力: 8, 法力: 6, 慈悲度: 5, 独立性: 5 },
+    { name: "楚江王",     type: "阎王", 审判力: 7, 执行力: 6, 法力: 4, 慈悲度: 5, 独立性: 5 },
+    { name: "宋帝王",     type: "阎王", 审判力: 7, 执行力: 6, 法力: 4, 慈悲度: 5, 独立性: 5 },
+    { name: "五官王",     type: "阎王", 审判力: 7, 执行力: 6, 法力: 4, 慈悲度: 5, 独立性: 5 },
+    { name: "卞城王",     type: "阎王", 审判力: 7, 执行力: 6, 法力: 4, 慈悲度: 5, 独立性: 5 },
+    { name: "泰山王",     type: "阎王", 审判力: 7, 执行力: 6, 法力: 4, 慈悲度: 5, 独立性: 5 },
+    { name: "都市王",     type: "阎王", 审判力: 7, 执行力: 6, 法力: 4, 慈悲度: 5, 独立性: 5 },
+    { name: "平等王",     type: "阎王", 审判力: 7, 执行力: 6, 法力: 4, 慈悲度: 5, 独立性: 5 },
+    { name: "崔判官",     type: "判官", 审判力: 6, 执行力: 9, 法力: 5, 慈悲度: 6, 独立性: 3 },
+    { name: "地藏王菩萨", type: "菩萨", 审判力: 7, 执行力: 5, 法力: 10, 慈悲度: 10, 独立性: 4 },
+    { name: "魏徵",       type: "阳间", 审判力: 5, 执行力: 8, 法力: 7, 慈悲度: 6, 独立性: 9 },
+    { name: "刘全",       type: "阳间", 审判力: 2, 执行力: 5, 法力: 2, 慈悲度: 8, 独立性: 7 },
+    { name: "谛听",       type: "坐骑", 审判力: 4, 执行力: 6, 法力: 8, 慈悲度: 6, 独立性: 3 },
+    { name: "接引佛祖",   type: "佛祖", 审判力: 4, 执行力: 5, 法力: 9, 慈悲度: 9, 独立性: 6 }
+  ],
+
+  // Section 5: 时间线（7 事件按回目排序）
+  timeline: [
+    { order: 1, chapter: 3,  actor: "孙悟空",   stage: "conflict", event: "销生死簿", desc: "悟空大闹地府，强销生死簿猴属名号，勾去同类姓名。十殿阎王告至天庭，玉帝招安。" },
+    { order: 2, chapter: 10, actor: "魏徵",     stage: "conflict", event: "梦中斩龙", desc: "魏徵梦斩泾河龙王，龙王冤魂缠太宗，引出太宗游地府。" },
+    { order: 3, chapter: 10, actor: "唐太宗",   stage: "comm",     event: "游地府",   desc: "太宗魂游地府，崔判官受魏徵请托私改阳寿，添注一纪。还阳后办水陆大会。" },
+    { order: 4, chapter: 11, actor: "刘全",     stage: "comm",     event: "进瓜还魂", desc: "刘全受太宗命，以瓜果进献地府。十殿阎王嘉其忠，赐还魂与妻李翠莲。" },
+    { order: 5, chapter: 38, actor: "井龙王",   stage: "fate",     event: "乌鸡国井龙", desc: "乌鸡国国王被推入井中三年，井龙王护其尸身不坏。地府水系分支职能之体现。" },
+    { order: 6, chapter: 58, actor: "谛听",     stage: "comm",     event: "辨真假美猴王", desc: "真假美猴王闹至地府，谛听虽辨出六耳猕猴，却恐其闹地府而不敢言，建议求助如来。" },
+    { order: 7, chapter: 100,actor: "接引佛祖", stage: "fate",    event: "凌云渡脱胎", desc: "接引佛祖以无底船渡唐僧过凌云渡，唐僧脱胎换骨，五圣成真，跨越阴阳界限。" }
+  ],
+
+  // Section 6: 仪表盘统计
+  summary: {
+    byType: [
+      { type: "阎王", count: 10, avgPower: 6.4 },
+      { type: "判官", count: 1, avgPower: 8.0 },
+      { type: "菩萨", count: 1, avgPower: 9.0 },
+      { type: "阳间", count: 2, avgPower: 5.5 },
+      { type: "坐骑", count: 1, avgPower: 7.0 },
+      { type: "佛祖", count: 1, avgPower: 9.0 }
+    ],
+    byRealm: [
+      { realm: "地府自身", count: 11 },
+      { realm: "天庭", count: 4 },
+      { realm: "灵山", count: 3 },
+      { realm: "阳间", count: 3 }
+    ],
+    byStage: [
+      { stage: "冲突", count: 2 },
+      { stage: "沟通", count: 3 },
+      { stage: "归宿", count: 2 }
+    ],
+    topPower: [
+      { name: "地藏王菩萨", power: 9, type: "菩萨" },
+      { name: "接引佛祖",   power: 9, type: "佛祖" },
+      { name: "阎罗王",     power: 8, type: "阎王" },
+      { name: "崔判官",     power: 8, type: "判官" },
+      { name: "秦广王",     power: 7, type: "阎王" }
+    ],
+    metrics: {
+      totalCharacters: 16,
+      totalLinks: 20,
+      avgPower: 6.6,
+      maxSpan: 97,             // 第3-100回跨度
+      kingInternalRate: "45%", // 9/20 阎王科层关系占内部
+      crossRealmRate: "20%"    // 4/20 跨界关系占比
+    }
+  }
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W151] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const hierarchy = await fetchJson(base + 'underworld-hierarchy.json', 'hierarchy');
+  return {
+    hierarchy: Array.isArray(hierarchy) ? hierarchy : (hierarchy.hierarchy || EMBEDDED_DATA.hierarchy),
+    network: EMBEDDED_DATA.network,
+    sankey: EMBEDDED_DATA.sankey,
+    radar: EMBEDDED_DATA.radar,
+    timeline: EMBEDDED_DATA.timeline,
+    summary: EMBEDDED_DATA.summary
+  };
+}
+
+// ============================================================
+// Section 1: 六类角色卡片
+// ============================================================
+function renderHierarchy(hierarchy) {
+  const grid = d3.select('#role-grid');
+  grid.html('');
+  if (!hierarchy || hierarchy.length === 0) {
+    grid.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+  const card = grid.selectAll('.role-card')
+    .data(hierarchy)
+    .enter()
+    .append('div')
+    .attr('class', d => 'role-card r-' + d.key)
+    .attr('role', 'button')
+    .attr('tabindex', '0')
+    .attr('aria-label', d => d.name + ' · ' + d.tag);
+
+  card.append('div').attr('class', 'r-name').text(d => d.name);
+  card.append('div').attr('class', 'r-tag').text(d => d.tag);
+  card.append('div').attr('class', 'r-desc').text(d => d.desc);
+  card.append('div').attr('class', 'r-ex').text(d => '例：' + d.examples);
+
+  card.on('keydown', function(e, d) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showRoleTooltip(e, d);
+    }
+  });
+  card.on('click', function(e, d) { showRoleTooltip(e, d); });
+}
+
+function showRoleTooltip(event, d) {
+  let tip = d3.select('.tooltip');
+  if (tip.empty()) tip = d3.select('body').append('div').attr('class', 'tooltip');
+  tip.html('')
+    .style('opacity', 0.95)
+    .style('left', (event.pageX + 10) + 'px')
+    .style('top', (event.pageY - 28) + 'px');
+  // .html() 仅用于可信 EMBEDDED_DATA，其余用 .text()
+  tip.append('div').html('<strong>' + d.name + '</strong> · ' + d.tag);
+  tip.append('div').text(d.desc);
+  tip.append('div').text('代表角色：' + d.examples);
+  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3500);
+}
+
+// ============================================================
+// Section 2: 地府权力力导向图
+// ============================================================
+function renderForce(networkData) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 280).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 560;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const typeColors = {
+    "阎王": "#c8463a",
+    "判官": "#c9a961",
+    "菩萨": "#3a6b8c",
+    "阳间": "#6b8e6f",
+    "坐骑": "#8a5a8a",
+    "佛祖": "#b8902a",
+    "天庭": "#5a3828"
+  };
+  const linkColors = {
+    "科层": "#c8463a",
+    "从属": "#c9a961",
+    "监督": "#3a6b8c",
+    "跨界": "#6b8e6f",
+    "归属": "#8a5a8a"
+  };
+
+  const nodes = networkData.nodes.map(d => ({ ...d }));
+  const links = networkData.links.map(d => ({ ...d }));
+
+  function nodeRadius(d) {
+    if (d.type === "天庭") return 14;
+    return 6 + d.power * 1.4;
+  }
+  function nodeFill(d) {
+    return typeColors[d.type] || '#8a7c6a';
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id)
+      .distance(d => d.type === "监督" ? 140 : d.type === "跨界" ? 120 : d.type === "科层" ? 60 : 80)
+      .strength(d => d.type === "科层" ? 0.7 : d.type === "从属" ? 0.5 : 0.2))
+    .force('charge', d3.forceManyBody().strength(d => d.type === "天庭" ? -400 : d.type === "菩萨" || d.type === "佛祖" ? -350 : -180))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 6));
+
+  // 边
+  const link = svg.append('g').selectAll('line')
+    .data(links)
+    .enter().append('line')
+    .attr('stroke', d => linkColors[d.type] || '#d9cdb8')
+    .attr('stroke-width', d => d.type === "科层" ? 2.5 : d.type === "从属" ? 2 : 1.2)
+    .attr('stroke-opacity', 0.55)
+    .attr('stroke-dasharray', d => d.type === "跨界" ? "6,3" : d.type === "监督" ? "4,2" : "0");
+
+  // 节点
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', nodeFill)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .attr('tabindex', 0)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.id + '</strong>');
+      tooltip.append('div').text('类别：' + d.type);
+      if (d.type !== "天庭") {
+        tooltip.append('div').text('权力强度：' + d.power + ' / 10');
+        tooltip.append('div').text('首次出场：第' + d.chapter + '回');
+      }
+      const connected = links.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('关联边数：' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  // 标签
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => (d.type === "天庭" || d.type === "菩萨" || d.type === "佛祖") ? -22 : -1 * (nodeRadius(d) + 4))
+    .attr('font-weight', d => (d.type === "天庭" || d.type === "菩萨" || d.type === "佛祖") ? 700 : 500)
+    .attr('font-size', d => (d.type === "天庭" || d.type === "菩萨" || d.type === "佛祖") ? 12 : 11)
+    .attr('fill', d => d.type === "天庭" ? '#5a3828' : d.type === "菩萨" ? '#3a6b8c' : '#1a1410')
+    .text(d => d.id);
+
+  sim.on('tick', () => {
+    link.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('cx', d => d.x).attr('cy', d => d.y);
+    label.attr('x', d => d.x).attr('y', d => d.y);
+  });
+
+  // 图例
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const typeLegend = [
+    { label: '十殿阎王', color: typeColors["阎王"] },
+    { label: '崔判官', color: typeColors["判官"] },
+    { label: '地藏王菩萨', color: typeColors["菩萨"] },
+    { label: '阳间人', color: typeColors["阳间"] },
+    { label: '谛听坐骑', color: typeColors["坐骑"] },
+    { label: '接引佛祖', color: typeColors["佛祖"] },
+    { label: '天庭枢纽', color: typeColors["天庭"] }
+  ];
+  const linkLegend = [
+    { label: '科层', color: linkColors["科层"], dash: '0' },
+    { label: '从属', color: linkColors["从属"], dash: '0' },
+    { label: '监督', color: linkColors["监督"], dash: '4,2' },
+    { label: '跨界', color: linkColors["跨界"], dash: '6,3' },
+    { label: '归属', color: linkColors["归属"], dash: '0' }
+  ];
+  typeLegend.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch').style('background', item.color);
+    li.append('span').text(item.label);
+  });
+  linkLegend.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch line')
+      .style('background', item.color)
+      .style('background-image', item.dash === '0' ? 'none' :
+        `repeating-linear-gradient(to right, ${item.color} 0 4px, transparent 4px 7px)`);
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: 地府 → 三界桑基图
+// ============================================================
+function renderSankey(sankeyData) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyData || !sankeyData.nodes || sankeyData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#c8463a')
+      .text('d3-sankey 未加载，请检查网络');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 520;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 30, right: 20, bottom: 20, left: 20 };
+  const catColors = ['#c8463a', '#3a6b8c'];
+  const nodeColors = {
+    "十殿阎王": "#c8463a", "崔判官": "#c9a961", "地藏王菩萨": "#3a6b8c",
+    "魏徵": "#6b8e6f", "刘全": "#6b8e6f", "谛听": "#8a5a8a",
+    "天庭": "#5a3828", "灵山": "#b8902a",
+    "阳间": "#6b8e6f", "地府自身": "#c8463a"
+  };
+
+  const nodes = sankeyData.nodes.map(d => ({ ...d }));
+  const links = sankeyData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(18)
+    .nodePadding(14)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 链接
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => nodeColors[d.source.name] || catColors[d.source.cat])
+    .attr('stroke-width', d => Math.max(2, d.width))
+    .attr('stroke-opacity', 0.45)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.75);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('关系强度：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.45);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => d.x1 - d.x0)
+    .attr('height', d => Math.max(2, d.y1 - d.y0))
+    .attr('fill', d => nodeColors[d.name] || catColors[d.cat])
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      tooltip.append('div').text('层级：' + (d.cat === 0 ? '地府体系角色' : '对接三界体系'));
+      tooltip.append('div').text('关系总数：' + d.value);
+      tooltip.append('div').text('流入：' + (d.targetLinks || []).length + ' · 流出：' + (d.sourceLinks || []).length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .attr('fill', '#1a1410')
+    .text(d => d.name);
+
+  // 列标题
+  svg.append('text')
+    .attr('x', margin.left + 4).attr('y', 18)
+    .attr('font-size', '13px').attr('font-weight', '700')
+    .attr('fill', '#c8463a').text('地府体系角色');
+  svg.append('text')
+    .attr('x', width - margin.right - 4).attr('y', 18)
+    .attr('text-anchor', 'end')
+    .attr('font-size', '13px').attr('font-weight', '700')
+    .attr('fill', '#3a6b8c').text('对接三界体系');
+
+  // 图例
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const legendItems = [
+    { label: '十殿阎王', color: '#c8463a' },
+    { label: '崔判官', color: '#c9a961' },
+    { label: '地藏王菩萨', color: '#3a6b8c' },
+    { label: '阳间人', color: '#6b8e6f' },
+    { label: '谛听', color: '#8a5a8a' },
+    { label: '天庭', color: '#5a3828' },
+    { label: '灵山', color: '#b8902a' },
+    { label: '地府自身', color: '#c8463a' }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch').style('background', item.color);
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 4: 地府人物能力雷达图
+// ============================================================
+function renderRadar(radarData) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!radarData || radarData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 200).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 540;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const dimensions = ['审判力', '执行力', '法力', '慈悲度', '独立性'];
+  const typeColors = {
+    "阎王": "#c8463a",
+    "判官": "#c9a961",
+    "菩萨": "#3a6b8c",
+    "阳间": "#6b8e6f",
+    "坐骑": "#8a5a8a",
+    "佛祖": "#b8902a"
+  };
+
+  const cx = width / 2;
+  const cy = height / 2;
+  const radius = Math.min(width, height) / 2 - 80;
+  const levels = 5;
+
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  // 同心五边形
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d9cdb8')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // 轴线 + 维度标签
+  dimensions.forEach((dim, i) => {
+    const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d9cdb8')
+      .attr('stroke-width', 1);
+    const labelR = radius + 28;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', '#1a1410')
+      .text(dim);
+  });
+
+  // 数值刻度
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6).attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '10px')
+      .attr('fill', '#8a7c6a')
+      .text(lvl * 2);
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 雷达多边形
+  radarData.forEach((m, idx) => {
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      const r = radius * (m[dim] / 10);
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    const color = typeColors[m.type] || '#8a7c6a';
+
+    const poly = gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.08)
+      .attr('stroke', color)
+      .attr('stroke-width', 1.5)
+      .attr('stroke-opacity', 0.7)
+      .style('cursor', 'pointer')
+      .attr('class', 'radar-poly idx-' + idx);
+
+    poly.on('mouseover', function(e) {
+      d3.select(this).attr('fill-opacity', 0.3).attr('stroke-width', 2.5);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + m.name + '</strong> · ' + m.type);
+      dimensions.forEach(dim => {
+        tooltip.append('div').text(dim + '：' + m[dim] + ' / 10');
+      });
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('fill-opacity', 0.08).attr('stroke-width', 1.5);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+    // 顶点圆
+    points.forEach(p => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 2.5)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 0.8)
+        .attr('pointer-events', 'none');
+    });
+  });
+
+  // 图例（按类型聚合，可点击切换显示）
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  const typeAgg = {};
+  radarData.forEach(m => {
+    if (!typeAgg[m.type]) typeAgg[m.type] = { count: 0, color: typeColors[m.type] };
+    typeAgg[m.type].count++;
+  });
+  Object.keys(typeAgg).forEach(type => {
+    const item = legend.append('div').attr('class', 'legend-item')
+      .style('cursor', 'pointer')
+      .attr('role', 'button')
+      .attr('tabindex', '0')
+      .attr('aria-label', '切换 ' + type + ' 显示');
+    item.append('div').attr('class', 'legend-swatch').style('background', typeAgg[type].color);
+    item.append('span').text(type + '（' + typeAgg[type].count + '）');
+    item.on('click', function() {
+      const active = !d3.select(this).classed('inactive');
+      d3.select(this).classed('inactive', active);
+      d3.selectAll('.radar-poly').each(function() {
+        const cls = d3.select(this).attr('class');
+        const idx = +cls.match(/idx-(\d+)/)[1];
+        if (radarData[idx].type === type) {
+          d3.select(this).style('display', active ? 'none' : null);
+        }
+      });
+    });
+  });
+}
+
+// ============================================================
+// Section 5: 地府事件时间线
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 200).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 460;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const stageOrder = ["conflict", "comm", "fate"];
+  const stageColors = {
+    conflict: "#c8463a",   // 冲突 - 朱砂
+    comm: "#3a6b8c",       // 沟通 - 黛青
+    fate: "#5a3828"        // 归宿 - 暗墨
+  };
+  const stageLabels = { conflict: "冲突", comm: "沟通", fate: "归宿" };
+  const stageChinese = { conflict: "冲突轨", comm: "沟通轨", fate: "归宿轨" };
+
+  const margin = { top: 30, right: 30, bottom: 60, left: 90 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const xMin = 0;
+  const xMax = 105;
+  const xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, innerW]);
+
+  const yScale = d3.scaleBand()
+    .domain(stageOrder)
+    .range([0, innerH])
+    .padding(0.3);
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 背景行
+  stageOrder.forEach(name => {
+    g.append('rect')
+      .attr('x', 0)
+      .attr('y', yScale(name))
+      .attr('width', innerW)
+      .attr('height', yScale.bandwidth())
+      .attr('fill', stageColors[name])
+      .attr('fill-opacity', 0.06);
+  });
+
+  // 连线（同一人物事件串联）
+  const actors = Array.from(new Set(timelineData.map(d => d.actor)));
+  actors.forEach(actor => {
+    const vEvents = timelineData.filter(d => d.actor === actor).sort((a, b) => a.chapter - b.chapter);
+    if (vEvents.length > 1) {
+      const line = d3.line()
+        .x(d => xScale(d.chapter))
+        .y(d => yScale(d.stage) + yScale.bandwidth() / 2)
+        .curve(d3.curveMonotoneX);
+      g.append('path')
+        .datum(vEvents)
+        .attr('fill', 'none')
+        .attr('stroke', stageColors[vEvents[0].stage])
+        .attr('stroke-width', 1.5)
+        .attr('stroke-opacity', 0.5)
+        .attr('stroke-dasharray', '4,3')
+        .attr('d', line);
+    }
+  });
+
+  // 事件节点
+  g.selectAll('.event-node')
+    .data(timelineData)
+    .enter()
+    .append('circle')
+    .attr('class', 'event-node')
+    .attr('cx', d => xScale(d.chapter))
+    .attr('cy', d => yScale(d.stage) + yScale.bandwidth() / 2)
+    .attr('r', 10)
+    .attr('fill', d => stageColors[d.stage] || '#8a7c6a')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('r', 13);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.actor + '</strong> · ' + stageLabels[d.stage]);
+      tooltip.append('div').text('回目：第' + d.chapter + '回');
+      tooltip.append('div').text('阶段：' + stageLabels[d.stage]);
+      tooltip.append('div').text('事件：' + d.event);
+      tooltip.append('div').text(d.desc);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('r', 10);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 序号
+  g.selectAll('.event-label')
+    .data(timelineData)
+    .enter()
+    .append('text')
+    .attr('class', 'event-label')
+    .attr('x', d => xScale(d.chapter))
+    .attr('y', d => yScale(d.stage) + yScale.bandwidth() / 2)
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
+    .attr('font-size', '10px')
+    .attr('font-weight', '700')
+    .attr('fill', '#fff')
+    .attr('pointer-events', 'none')
+    .text(d => d.order);
+
+  // Y 轴标签
+  stageOrder.forEach(name => {
+    g.append('text')
+      .attr('x', -12)
+      .attr('y', yScale(name) + yScale.bandwidth() / 2)
+      .attr('text-anchor', 'end')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', stageColors[name])
+      .text(stageChinese[name]);
+  });
+
+  // X 轴
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).tickFormat(d => '第' + d + '回'))
+    .selectAll('text').attr('font-size', '11px');
+
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 45)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7c6a')
+    .text('回目时序');
+
+  // 图例
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  const stages = [
+    { label: '冲突 (conflict)', color: stageColors.conflict },
+    { label: '沟通 (comm)', color: stageColors.comm },
+    { label: '归宿 (fate)', color: stageColors.fate }
+  ];
+  stages.forEach(s => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', s.color);
+    item.append('span').text(s.label);
+  });
+}
+
+// ============================================================
+// Section 6: 关键洞察仪表盘
+// ============================================================
+function renderDashboard(summary) {
+  const kpiRow = d3.select('#dash-kpi-row');
+  kpiRow.html('');
+  if (!summary || !summary.metrics) {
+    kpiRow.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+  const m = summary.metrics;
+  const kpis = [
+    { label: '地府人物总数', value: m.totalCharacters, cls: '' },
+    { label: '权力关系边', value: m.totalLinks, cls: 'alt' },
+    { label: '平均权力', value: m.avgPower, cls: 'alt-2' },
+    { label: '回目跨度', value: m.maxSpan + ' 回', cls: 'alt-3' },
+    { label: '阎王内部关系率', value: m.kingInternalRate, cls: '' },
+    { label: '跨界关系率', value: m.crossRealmRate, cls: 'alt' }
+  ];
+  kpis.forEach(k => {
+    const card = kpiRow.append('div').attr('class', 'kpi-card ' + k.cls);
+    card.append('div').attr('class', 'kpi-value').text(k.value);
+    card.append('div').attr('class', 'kpi-label').text(k.label);
+  });
+
+  renderTopBar(summary.topPower);
+  renderDonut(summary.byStage);
+}
+
+function renderTopBar(topPower) {
+  const svg = d3.select('#chart-bar-top');
+  svg.selectAll('*').remove();
+  if (!topPower || topPower.length === 0) {
+    svg.append('text').attr('x', 120).attr('y', 120).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 500;
+  const height = 280;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 30, bottom: 30, left: 90 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const typeColors = {
+    "阎王": "#c8463a", "判官": "#c9a961", "菩萨": "#3a6b8c",
+    "阳间": "#6b8e6f", "坐骑": "#8a5a8a", "佛祖": "#b8902a"
+  };
+
+  const xScale = d3.scaleLinear()
+    .domain([0, 10])
+    .range([0, innerW]);
+  const yScale = d3.scaleBand()
+    .domain(topPower.map(d => d.name))
+    .range([0, innerH])
+    .padding(0.3);
+
+  // 条
+  g.selectAll('.bar')
+    .data(topPower)
+    .enter()
+    .append('rect')
+    .attr('class', 'bar')
+    .attr('x', 0)
+    .attr('y', d => yScale(d.name))
+    .attr('width', d => xScale(d.power))
+    .attr('height', yScale.bandwidth())
+    .attr('fill', d => typeColors[d.type] || '#8a7c6a')
+    .attr('rx', 3);
+
+  // 数值
+  g.selectAll('.bar-label')
+    .data(topPower)
+    .enter()
+    .append('text')
+    .attr('class', 'bar-label')
+    .attr('x', d => xScale(d.power) + 6)
+    .attr('y', d => yScale(d.name) + yScale.bandwidth() / 2)
+    .attr('dy', '0.35em')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .attr('fill', '#1a1410')
+    .text(d => d.power);
+
+  // Y 轴
+  g.append('g')
+    .call(d3.axisLeft(yScale))
+    .selectAll('text').attr('font-size', '12px');
+
+  // X 轴
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).ticks(5))
+    .selectAll('text').attr('font-size', '11px');
+}
+
+function renderDonut(byStage) {
+  const svg = d3.select('#chart-donut');
+  svg.selectAll('*').remove();
+  if (!byStage || byStage.length === 0) {
+    svg.append('text').attr('x', 120).attr('y', 120).attr('fill', '#8a7c6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 400;
+  const height = 280;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const stageColors = {
+    "冲突": "#c8463a", "沟通": "#3a6b8c", "归宿": "#5a3828"
+  };
+
+  const radius = Math.min(width, height) / 2 - 30;
+  const cx = width / 2;
+  const cy = height / 2;
+
+  const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  const pie = d3.pie().value(d => d.count).sort(null);
+  const arc = d3.arc()
+    .innerRadius(radius * 0.55)
+    .outerRadius(radius)
+    .cornerRadius(3);
+
+  const arcs = pie(byStage);
+
+  g.selectAll('path')
+    .data(arcs)
+    .enter()
+    .append('path')
+    .attr('d', arc)
+    .attr('fill', d => stageColors[d.data.stage] || '#8a7c6a')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer');
+
+  // 中心数值
+  const total = d3.sum(byStage, d => d.count);
+  g.append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dy', '-0.2em')
+    .attr('font-size', '24px')
+    .attr('font-weight', '700')
+    .attr('fill', '#1a1410')
+    .text(total);
+  g.append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dy', '1.6em')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7c6a')
+    .text('事件总数');
+
+  // 标签
+  const labelArc = d3.arc()
+    .innerRadius(radius * 0.9)
+    .outerRadius(radius * 0.9);
+
+  g.selectAll('.donut-label')
+    .data(arcs)
+    .enter()
+    .append('text')
+    .attr('class', 'donut-label')
+    .attr('transform', d => `translate(${labelArc.centroid(d)})`)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .attr('fill', '#1a1410')
+    .text(d => d.data.stage + ' ' + d.data.count);
+}
+
+// ============================================================
+// main：调度所有渲染函数
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      '数据源：实时加载自 <code>scripts/output/data/</code>（http server 模式）';
+  }
+
+  renderHierarchy(data.hierarchy);
+  renderForce(data.network);
+  renderSankey(data.sankey);
+  renderRadar(data.radar);
+  renderTimeline(data.timeline);
+  renderDashboard(data.summary);
+}
+
+// 响应式重绘（debounce 250ms）
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderHierarchy(data.hierarchy);
+      renderForce(data.network);
+      renderSankey(data.sankey);
+      renderRadar(data.radar);
+      renderTimeline(data.timeline);
+      renderDashboard(data.summary);
+    }
+  }, 250);
+});
+
+// 启动
+main();
+</script>
+</body>
+</html>

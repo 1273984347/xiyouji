@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球取经者家族 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        /* 取经者卡片网格 */
+        .pilgrim-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 18px;
+            margin-top: 8px;
+        }
+        .pilgrim-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 16px 18px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .pilgrim-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(60, 40, 20, 0.12);
+        }
+        .pilgrim-card .p-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+        .pilgrim-card .p-work {
+            font-size: 0.88rem;
+            color: var(--accent-3);
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+        .pilgrim-card .p-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            line-height: 1.55;
+        }
+        .pilgrim-card .p-row b {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .pilgrim-card .p-country {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.74rem;
+            color: #fff;
+            margin-bottom: 6px;
+            align-self: flex-start;
+        }
+        .pilgrim-card .p-symbol {
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed var(--line);
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            font-style: italic;
+        }
+        /* 旅程对照表 */
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        .table-wrap::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .table-wrap::-webkit-scrollbar-thumb {
+            background: var(--accent-soft);
+            border-radius: 4px;
+        }
+        .journey-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+            min-width: 900px;
+        }
+        .journey-table th, .journey-table td {
+            border: 1px solid var(--line);
+            padding: 10px 12px;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+        .journey-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .journey-table thead th:first-child {
+            background: #3a2820;
+        }
+        .journey-table tbody td:first-child {
+            background: var(--bg);
+            font-weight: 600;
+            color: var(--accent);
+            text-align: left;
+            white-space: nowrap;
+        }
+        .journey-table tbody td:first-child .node-meaning {
+            display: block;
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            font-weight: 400;
+            font-style: italic;
+            margin-top: 2px;
+        }
+        .journey-table tbody tr:nth-child(even) td:not(:first-child) {
+            background: #fdfaf4;
+        }
+        .journey-table tbody tr:hover td:not(:first-child) {
+            background: #fff8ec;
+        }
+        .journey-table .cell-xiyou {
+            color: var(--accent);
+            font-weight: 500;
+        }
+        /* 目的地对照表 */
+        .dest-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        .dest-table th, .dest-table td {
+            border: 1px solid var(--line);
+            padding: 10px 14px;
+            text-align: left;
+        }
+        .dest-table thead th {
+            background: #f5e9d4;
+            color: var(--accent-3);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .dest-table tbody td:first-child {
+            font-weight: 600;
+            color: var(--ink);
+            background: var(--bg);
+        }
+        .dest-table tbody td.dest-cell {
+            color: var(--accent);
+            font-weight: 500;
+        }
+        .dest-table tbody tr:nth-child(even) td:not(:first-child) {
+            background: #fdfaf4;
+        }
+        .dest-table tbody tr:hover td:not(:first-child) {
+            background: #fff8ec;
+        }
+        /* 时间轴 */
+        #timeline {
+            width: 100%;
+            height: 360px;
+            display: block;
+        }
+        .timeline-dot {
+            cursor: pointer;
+            transition: r 0.2s;
+        }
+        .timeline-dot:hover {
+            r: 9;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            background: rgba(200, 70, 58, 0.1);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.82em;
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 640px) {
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .pilgrim-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .pilgrim-card { padding: 12px; }
+            .pilgrim-card .p-name { font-size: 1rem; }
+            .hero h1 { font-size: 1.6rem; }
+            .section { padding: 18px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>全球取经者家族 · 详解西游记</h1>
+        <div class="subtitle">PILGRIMS ACROSS THE WORLD</div>
+        <div class="tagline">通往圣地或真理之路的考验，在人类叙事中是共通的。</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../dashboard.html">← 返回数据看板</a>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">PILGRIMS · 取经者</div>
+                <div class="value">8</div>
+                <div class="desc">玄奘·法显·唐僧·基督徒·但丁·格列佛·奥德修斯·乔达摩</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">NODES · 旅程节点</div>
+                <div class="value">8</div>
+                <div class="desc">出发→启示→考验→诱惑→同伴→终极→归来·7段式原型</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">CULTURES · 文化圈</div>
+                <div class="value">8</div>
+                <div class="desc">中·希·印·意·英·爱，跨东西方文明</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">SPAN · 跨度</div>
+                <div class="value">2300+</div>
+                <div class="desc">公元前 8 世纪 — 公元 1726 年</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：世界取经者家族卡片网格 -->
+        <section class="section">
+            <h2 class="section-title">世界取经者家族卡片</h2>
+            <div class="section-sub">8 位取经者按文化圈染色边框，跨越东西方 2300 年的"求真/归乡/朝圣"叙事家族。</div>
+            <div class="pilgrim-grid" id="pilgrim-grid"></div>
+        </section>
+
+        <!-- 图表 2：旅程节点对照表（核心） -->
+        <section class="section">
+            <h2 class="section-title">旅程节点对照表 · 核心</h2>
+            <div class="section-sub">8 段节点 × 5 部作品横向对照——西游记 / 天路历程 / 神曲 / 格列佛游记 / 奥德赛，共享"7 段式英雄旅程"原型。</div>
+            <div class="table-wrap">
+                <table class="journey-table" id="journey-table">
+                    <thead>
+                        <tr>
+                            <th>节点</th>
+                            <th>西游记</th>
+                            <th>天路历程</th>
+                            <th>神曲</th>
+                            <th>格列佛游记</th>
+                            <th>奥德赛</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 图表 3 + 图表 4：饼图与时间轴 -->
+        <section class="section">
+            <h2 class="section-title">文化圈分布与时间轴</h2>
+            <div class="section-sub">左：8 文化圈作品数占比；右：公元前 8 世纪到公元 1726，8 部作品按成书年代横向排列。</div>
+            <div class="chart-row">
+                <div class="chart-block">
+                    <h3>8 文化圈作品分布</h3>
+                    <svg id="chart-country" width="360" height="360"></svg>
+                    <div class="legend" id="legend-country"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>成书年代时间轴</h3>
+                    <svg id="timeline"></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- 图表 5：目的地对照表 -->
+        <section class="section">
+            <h2 class="section-title">目的地对照</h2>
+            <div class="section-sub">8 部作品的"圣地"对照——灵山 / 天国 / 天堂 / 异国 / 伊萨卡 / 涅槃，皆为求索的终极归宿。</div>
+            <div class="table-wrap">
+                <table class="dest-table" id="dest-table">
+                    <thead>
+                        <tr>
+                            <th>作品 / 取经者</th>
+                            <th>目的地</th>
+                            <th>目标</th>
+                            <th>向导</th>
+                            <th>历时</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../index.html">返回首页</a> ·
+        <a href="../dashboard.html">返回数据看板</a>
+        <div id="gen-time" style="margin-top:6px;font-size:0.78rem;opacity:0.7;"></div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/04-文化与历史背景/成书背景.md">成书背景</a></div>
+    </footer>
+
+    <script>
+    // ========== 嵌入式 fallback 数据（fetch 失败时使用） ==========
+    const EMBEDDED_PILGRIMS = [
+        {"name":"玄奘","work":"《大唐西域记》/《西游记》原型","author":"真实历史·玄奘自述","country":"中国·唐","year":"7世纪","destination":"印度·那烂陀寺","goal":"求取瑜伽师地论等真经","guide":"无（自力）","companions":"马匹·西域向导","trials":"沙漠迷路·雪山·盗匪·异国","duration":"17年","symbolic_meaning":"真实求法者·历史原型","influence":"《西游记》直接原型·中印文化交流史"},
+        {"name":"法显","work":"《佛国记》/《高僧法显传》","author":"法显自述","country":"中国·东晋","year":"5世纪","destination":"印度·佛国","goal":"求取戒律经典","guide":"无（自力）","companions":"慧景·道整等","trials":"沙漠·雪山·海上风暴","duration":"15年","symbolic_meaning":"比玄奘更早的求法者·《西游记》前驱","influence":"中国佛教求法运动先驱"},
+        {"name":"唐僧（玄奘文学化）","work":"《西游记》","author":"世德堂本","country":"中国·明","year":"1592","destination":"灵山·雷音寺","goal":"求取大乘真经·普度众生","guide":"观音菩萨（暗中护持）","companions":"孙悟空·猪八戒·沙僧·白龙马","trials":"九九八十一难·妖魔·女色·心魔","duration":"14年","symbolic_meaning":"儒释道三教圆融的修行寓言·心猿意马的修证","influence":"中国古典四大名著·东亚文化原型"},
+        {"name":"基督徒（Christian）","work":"《天路历程》","author":"约翰·班扬","country":"英国","year":1678,"destination":"天国·锡安山","goal":"脱离'将亡城'·到达天国","guide":"传道者·Interpreter·Hopeful","companions":"Faithful·Hopeful","trials":"灰心沼·艰难山·死荫幽谷·浮华市","duration":"象征性旅程","symbolic_meaning":"清教徒信仰历程·基督教寓言","influence":"英语世界第二大阅读书·仅次于圣经"},
+        {"name":"但丁本人","work":"《神曲》","author":"但丁·阿利吉耶里","country":"意大利","year":"1320","destination":"天堂·得见三位一体","goal":"游历地狱·炼狱·天堂·得见神面","guide":"维吉尔（理性）·贝雅特丽齐（信仰）","companions":"向导","trials":"地狱九层·炼狱七层·天堂十层","duration":"复活节前后一周","symbolic_meaning":"中世纪基督教世界观总览·人性与神性","influence":"意大利文学奠基·西方经典"},
+        {"name":"格列佛","work":"《格列佛游记》","author":"乔纳森·斯威夫特","country":"爱尔兰","year":1726,"destination":"多个'异国'（小人国/大人国/飞岛国/慧骃国）","goal":"航海探险·以异国反讽本土","guide":"无（探险者）","companions":"船员","trials":"风暴·异国习俗·人类本性","duration":"约16年（四航次）","symbolic_meaning":"启蒙时代对人性与社会的辛辣批判","influence":"西方讽刺文学经典·影响后世乌托邦/反乌托邦"},
+        {"name":"奥德修斯","work":"《奥德赛》","author":"荷马","country":"古希腊","year":"前8世纪","destination":"伊萨卡·故土","goal":"归乡·与妻儿团聚","guide":"雅典娜（暗中）","companions":"船员","trials":"独眼巨人·塞壬·Circe·Calypso·求婚者","duration":"10年","symbolic_meaning":"归乡·忠诚·智慧·人性","influence":"西方文学最早'旅程'原型"},
+        {"name":"佛·乔达摩·悉达多","work":"佛传（《本生经》《佛所行赞》）","author":"马鸣等","country":"印度","year":"前5世纪-后2世纪","destination":"菩提树·涅槃","goal":"出家·悟道·度众生","guide":"无（自悟）","companions":"五比丘","trials":"魔王波旬·魔女·生死轮回","duration":"80年一生","symbolic_meaning":"佛教创始·觉悟之路","influence":"佛教世界影响·东方精神原型"}
+    ];
+
+    const EMBEDDED_JOURNEY = [
+        {"node":"出发","xiyou":"长安出城·唐僧受命","pilgrims_progress":"将亡城出发·背负重担","divine_comedy":"黑暗森林·迷失正路","gulliver":"英国布里斯托尔港起航","odyssey":"特洛伊战争结束·启程归乡","meaning":"脱离旧有生活·踏上未知"},
+        {"node":"向导/启示","xiyou":"观音点化·五行山收悟空","pilgrims_progress":"Evangelist传道者指路","divine_comedy":"维吉尔受贝雅特丽齐之托指引","gulliver":"无固定向导·遇异国即考察","odyssey":"雅典娜多次化身指点","meaning":"获得上界/智慧指引"},
+        {"node":"第一次大考验","xiyou":"双叉岭·寅将军·熊山君·特处士","pilgrims_progress":"灰心沼·Slough of Despond","divine_comedy":"地狱入口·维吉尔迟疑","gulliver":"小人国被俘·捆绑","odyssey":"食莲者之岛·船员忘归","meaning":"初次考验·动摇初心"},
+        {"node":"强力妖魔/罪","xiyou":"九九八十一难·各种妖魔","pilgrims_progress":"死荫幽谷·Apollyon魔王","divine_comedy":"地狱九层·罪人受罚","gulliver":"大人国·被当作玩物","odyssey":"独眼巨人波吕斐摩斯·食人","meaning":"对抗邪魔/原罪"},
+        {"node":"诱惑/女色","xiyou":"女儿国·蝎子精·玉兔精","pilgrims_progress":"浮华市·Vanity Fair","divine_comedy":"炼狱山顶·Matelda·贝雅特丽齐","gulliver":"Laputa飞岛国·虚浮学问","odyssey":"塞壬歌声·Circe·Calypso","meaning":"感官与欲望诱惑"},
+        {"node":"同伴·考验","xiyou":"悟空被逐·真假美猴王","pilgrims_progress":"Faithful殉道·Hopeful同行","divine_comedy":"维吉尔离去·贝雅特丽齐接引","gulliver":"船员叛变·威廉·普里查克","odyssey":"船员宰食太阳神牛·全灭","meaning":"同伴考验·信任危机"},
+        {"node":"终极考验·圣地","xiyou":"凌云渡·灵山取经","pilgrims_progress":"渡过死亡河·入天国","divine_comedy":"天堂·见三位一体","gulliver":"慧骃国·被驱逐","odyssey":"伊萨卡·求婚者·与妻团圆","meaning":"终极考验·到达目标"},
+        {"node":"归来/圆满","xiyou":"径回东土·五圣成真","pilgrims_progress":"入天国·永生","divine_comedy":"见神·得蒙恩典","gulliver":"归家·厌世·与马为伴","odyssey":"团圆·恢复秩序","meaning":"圆满·秩序重建"}
+    ];
+
+    const EMBEDDED_SUMMARY = {
+        total_pilgrims: 8,
+        total_journey_nodes: 8,
+        countries: ["古希腊","中国·唐","爱尔兰","印度","中国·东晋","中国·明","意大利","英国"],
+        year_range: ["前8世纪（奥德赛）","1726（格列佛）"],
+        common_pattern: "出发→启示→考验→诱惑→同伴→终极考验→归来·7段式英雄旅程"
+    };
+
+    // ========== 配色 ==========
+    // 8 文化圈染色（用于卡片边框 + 饼图 + 时间轴）
+    const COUNTRY_COLORS = {
+        "中国·唐":   "#c8463a",  // 朱砂红
+        "中国·东晋": "#9c3a2e",  // 暗红
+        "中国·明":   "#e0654a",  // 亮红
+        "古希腊":    "#3a6b8c",  // 青蓝
+        "印度":      "#7a5230",  // 褐
+        "意大利":    "#5a7a3a",  // 橄榄绿
+        "英国":      "#b8860b",  // 金黄
+        "爱尔兰":    "#4a7a6a"   // 青绿
+    };
+
+    // ========== 工具：解析年代字符串为数值 ==========
+    function parseYear(yearStr) {
+        if (typeof yearStr === 'number') return yearStr;
+        const s = String(yearStr).trim();
+        // "前8世纪" → -750
+        if (s.includes('前') && s.includes('世纪')) {
+            const century = parseInt(s.match(/\d+/)[0]);
+            return -(century - 1) * 100 - 50;
+        }
+        // "前5世纪-后2世纪" → 取首段 -450
+        if (s.includes('-') && s.includes('前')) {
+            const firstPart = s.split('-')[0];
+            const century = parseInt(firstPart.match(/\d+/)[0]);
+            return -(century - 1) * 100 - 50;
+        }
+        // "5世纪" → 450
+        if (s.includes('世纪')) {
+            const century = parseInt(s.match(/\d+/)[0]);
+            return (century - 1) * 100 + 50;
+        }
+        // "1592" → 1592
+        const num = parseInt(s);
+        return isNaN(num) ? 0 : num;
+    }
+
+    // 格式化年代用于显示
+    function formatYear(yearStr) {
+        return String(yearStr).replace('前', '前').replace('世纪', '世纪');
+    }
+
+    // ========== 图表 1：取经者卡片网格 ==========
+    function renderPilgrimGrid(pilgrims) {
+        const grid = d3.select("#pilgrim-grid");
+        grid.selectAll("*").remove();
+
+        const cards = grid.selectAll(".pilgrim-card")
+            .data(pilgrims)
+            .enter()
+            .append("div")
+            .attr("class", "pilgrim-card")
+            .style("border-left-color", d => COUNTRY_COLORS[d.country] || "var(--accent)");
+
+        cards.append("div").attr("class", "p-name").text(d => d.name);
+
+        cards.append("div").attr("class", "p-work").text(d => d.work);
+
+        cards.append("span")
+            .attr("class", "p-country")
+            .style("background", d => COUNTRY_COLORS[d.country] || "#999")
+            .text(d => `${d.country} · ${d.year}`);
+
+        cards.append("div").attr("class", "p-row").html(d => `<b>作者：</b>${d.author}`);
+        cards.append("div").attr("class", "p-row").html(d => `<b>目的地：</b>${d.destination}`);
+        cards.append("div").attr("class", "p-row").html(d => `<b>目标：</b>${d.goal}`);
+        cards.append("div").attr("class", "p-row").html(d => `<b>向导：</b>${d.guide}`);
+        cards.append("div").attr("class", "p-row").html(d => `<b>同伴：</b>${d.companions}`);
+        cards.append("div").attr("class", "p-row").html(d => `<b>考验：</b>${d.trials}`);
+        cards.append("div").attr("class", "p-row").html(d => `<b>历时：</b>${d.duration}`);
+
+        cards.append("div").attr("class", "p-symbol")
+            .html(d => `<b>象征：</b>${d.symbolic_meaning}`);
+    }
+
+    // ========== 图表 2：旅程节点对照表 ==========
+    function renderJourneyTable(journey) {
+        const tbody = d3.select("#journey-table tbody");
+        tbody.selectAll("*").remove();
+
+        const rows = tbody.selectAll("tr")
+            .data(journey)
+            .enter()
+            .append("tr");
+
+        rows.append("td")
+            .html(d => `${d.node}<span class="node-meaning">${d.meaning}</span>`);
+
+        rows.append("td").attr("class", "cell-xiyou").text(d => d.xiyou);
+        rows.append("td").text(d => d.pilgrims_progress);
+        rows.append("td").text(d => d.divine_comedy);
+        rows.append("td").text(d => d.gulliver);
+        rows.append("td").text(d => d.odyssey);
+    }
+
+    // ========== 图表 3：文化圈分布饼图 ==========
+    function renderCountryPie(pilgrims) {
+        const svg = d3.select("#chart-country");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${width/2}, ${height/2})`);
+
+        // 按国家统计作品数
+        const countryCount = {};
+        pilgrims.forEach(p => {
+            countryCount[p.country] = (countryCount[p.country] || 0) + 1;
+        });
+        const data = Object.entries(countryCount);
+
+        const pie = d3.pie().value(d => d[1]).sort(null);
+        const arc = d3.arc()
+            .innerRadius(radius * 0.58)
+            .outerRadius(radius)
+            .cornerRadius(3);
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.82)
+            .outerRadius(radius * 0.82);
+
+        const arcs = pie(data);
+
+        // 切片
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => COUNTRY_COLORS[d.data[0]] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 80)
+            .style("opacity", 1);
+
+        // 中心数字
+        const total = data.reduce((a, b) => a + b[1], 0);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "0.35em")
+            .style("font-size", "1.8rem")
+            .style("font-weight", "600")
+            .style("fill", "#2c2418")
+            .text(total);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "2em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6b5e4d")
+            .text("文化圈");
+
+        // 切片标签
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("font-weight", "600")
+            .style("fill", "#fff")
+            .text(d => d.data[1]);
+
+        // 图例
+        const legend = d3.select("#legend-country");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(data)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `
+                <span class="legend-swatch" style="background:${COUNTRY_COLORS[d[0]] || '#999'}"></span>
+                <span>${d[0]}：${d[1]} 部</span>
+            `);
+    }
+
+    // ========== 图表 4：时间轴 ==========
+    function renderTimeline(pilgrims) {
+        const svg = d3.select("#timeline");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("timeline");
+        const width = Math.max(200, containerEl.clientWidth || 700);
+        const height = 360;
+        const margin = { top: 40, right: 40, bottom: 60, left: 50 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 准备数据
+        const data = pilgrims.map(p => ({
+            ...p,
+            yearNum: parseYear(p.year)
+        })).sort((a, b) => a.yearNum - b.yearNum);
+
+        const xExtent = d3.extent(data, d => d.yearNum);
+        // 扩展域到整数百年
+        const xMin = Math.floor(xExtent[0] / 100) * 100 - 50;
+        const xMax = Math.ceil(xExtent[1] / 100) * 100 + 50;
+
+        const x = d3.scaleLinear()
+            .domain([xMin, xMax])
+            .range([0, innerW]);
+
+        // 轴
+        const xAxis = d3.axisBottom(x)
+            .tickSize(innerH)
+            .tickFormat(d => {
+                if (d < 0) return `前${Math.abs(d)}`;
+                if (d === 0) return "公元元年";
+                return `${d}`;
+            })
+            .ticks(8);
+
+        const axisG = g.append("g")
+            .attr("class", "x-axis")
+            .call(xAxis);
+
+        axisG.selectAll("line")
+            .style("stroke", "#e6dcc7")
+            .style("stroke-width", 0.5)
+            .style("shape-rendering", "crispEdges");
+        axisG.selectAll("text")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6b5e4d")
+            .style("font-family", "inherit");
+        axisG.select(".domain").remove();
+
+        // 公元元年参考线
+        const zeroX = x(0);
+        g.append("line")
+            .attr("x1", zeroX)
+            .attr("x2", zeroX)
+            .attr("y1", 0)
+            .attr("y2", innerH)
+            .style("stroke", "#c8463a")
+            .style("stroke-width", 1)
+            .style("stroke-dasharray", "4 4")
+            .style("opacity", 0.5);
+        g.append("text")
+            .attr("x", zeroX)
+            .attr("y", -8)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.72rem")
+            .style("fill", "#c8463a")
+            .style("font-style", "italic")
+            .text("公元元年");
+
+        // 主时间轴线
+        g.append("line")
+            .attr("x1", 0)
+            .attr("x2", innerW)
+            .attr("y1", innerH / 2)
+            .attr("y2", innerH / 2)
+            .style("stroke", "#7a5230")
+            .style("stroke-width", 2);
+
+        // 节点：交替上下分布
+        const labelData = data.map((d, i) => ({
+            ...d,
+            yOff: (i % 2 === 0) ? -1 : 1
+        }));
+
+        const nodeG = g.selectAll(".tl-node")
+            .data(labelData)
+            .enter()
+            .append("g")
+            .attr("class", "tl-node")
+            .attr("transform", d => `translate(${x(d.yearNum)},${innerH / 2})`);
+
+        // 连接线
+        nodeG.append("line")
+            .attr("x1", 0)
+            .attr("x2", 0)
+            .attr("y1", 0)
+            .attr("y2", d => d.yOff * 40)
+            .style("stroke", d => COUNTRY_COLORS[d.country] || "#999")
+            .style("stroke-width", 1.2);
+
+        // 圆点
+        nodeG.append("circle")
+            .attr("class", "timeline-dot")
+            .attr("r", 7)
+            .attr("fill", d => COUNTRY_COLORS[d.country] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .style("opacity", 0)
+            .transition()
+            .duration(600)
+            .delay((d, i) => i * 90)
+            .style("opacity", 1);
+
+        // 作品名标签
+        nodeG.append("text")
+            .attr("x", 0)
+            .attr("y", d => d.yOff * 58)
+            .attr("text-anchor", "middle")
+            .attr("dy", d => d.yOff < 0 ? "-0.2em" : "1em")
+            .style("font-size", "0.82rem")
+            .style("font-weight", "600")
+            .style("fill", "#2c2418")
+            .text(d => d.work.replace(/《|》/g, "").split("/")[0].slice(0, 8));
+
+        // 年代标签
+        nodeG.append("text")
+            .attr("x", 0)
+            .attr("y", d => d.yOff * 75)
+            .attr("text-anchor", "middle")
+            .attr("dy", d => d.yOff < 0 ? "-0.2em" : "1em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6b5e4d")
+            .style("font-style", "italic")
+            .text(d => String(d.year));
+
+        // tooltip
+        nodeG.append("title")
+            .text(d => `${d.name} · ${d.work}\n${d.country} · ${d.year}\n作者：${d.author}`);
+
+        // 轴标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 42)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("fill", "#6b5e4d")
+            .style("letter-spacing", "0.1em")
+            .text("成书年代（公元前 8 世纪 — 公元 1726）");
+    }
+
+    // ========== 图表 5：目的地对照表 ==========
+    function renderDestTable(pilgrims) {
+        const tbody = d3.select("#dest-table tbody");
+        tbody.selectAll("*").remove();
+
+        const rows = tbody.selectAll("tr")
+            .data(pilgrims)
+            .enter()
+            .append("tr");
+
+        rows.append("td").html(d => `<b>${d.name}</b><br><span style="font-size:0.78rem;color:#6b5e4d;font-style:italic;">${d.work}</span>`);
+        rows.append("td").attr("class", "dest-cell").text(d => d.destination);
+        rows.append("td").text(d => d.goal);
+        rows.append("td").text(d => d.guide);
+        rows.append("td").text(d => d.duration);
+    }
+
+    // ========== 关键洞察 ==========
+    function renderInsights() {
+        const insights = [
+            `8 位取经者跨 <strong>8 文化圈、2300 年</strong>，共享"7 段式英雄旅程"原型——出发→启示→考验→诱惑→同伴→终极考验→归来。`,
+            `唐僧的"<strong>九九八十一难</strong>"对应基督徒的"艰难山"、但丁的"地狱九层"、奥德修斯的"10 年归乡"——考验的数量与烈度各异，结构同构。`,
+            `向导结构相似：<strong>观音→Evangelist→维吉尔→雅典娜</strong>，皆是上界/智慧指引者；唯有格列佛与玄奘·法显·乔达摩为"无向导·自力"型。`,
+            `诱惑考验普世：<strong>女儿国对应塞壬、Circe、浮华市</strong>——感官与欲望的试炼，在东西方叙事中都是必经之关。`,
+            `目的地谱系：<strong>灵山·天国·天堂·伊萨卡·涅槃</strong>——或求真理、或归故土、或超轮回，皆为"终极归宿"的具象化。`,
+            `从荷马（前 8 世纪）到斯威夫特（1726），<strong>跨越 2300 年</strong>的旅程叙事共同印证：人类对"求索—考验—圆满"的叙事渴望是文明共通的。`
+        ];
+
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => {
+            ul.append("li").html(text);
+        });
+    }
+
+    // ========== 数据加载（fetch 失败则用嵌入数据） ==========
+    async function loadData() {
+        const base = '../../scripts/output/data/';
+        const files = ['pilgrims_family.json', 'journey_comparison.json', 'global_pattern_summary.json'];
+        try {
+            const [pilgrimsRes, journeyRes, summaryRes] = await Promise.all(files.map(f => fetch(base + f)));
+            if (!pilgrimsRes.ok || !journeyRes.ok || !summaryRes.ok) throw new Error('fetch failed');
+            const pilgrims = await pilgrimsRes.json();
+            const journey = await journeyRes.json();
+            const summary = await summaryRes.json();
+            document.getElementById('dataSource').innerHTML =
+                '数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）';
+            return { pilgrims, journey, summary };
+        } catch (e) {
+            console.warn('[INFO] 使用嵌入数据：', e.message);
+            return {
+                pilgrims: EMBEDDED_PILGRIMS,
+                journey: EMBEDDED_JOURNEY,
+                summary: EMBEDDED_SUMMARY
+            };
+        }
+    }
+
+    // ========== 主流程 ==========
+    async function main() {
+        const { pilgrims, journey, summary } = await loadData();
+        window.__lastData = { pilgrims, journey, summary };
+
+        renderPilgrimGrid(pilgrims);
+        renderJourneyTable(journey);
+        renderCountryPie(pilgrims);
+        renderTimeline(pilgrims);
+        renderDestTable(pilgrims);
+        renderInsights();
+
+        document.getElementById('gen-time').textContent =
+            `数据生成时间：${summary.year_range ? summary.year_range.join(' → ') : '前8世纪 → 1726'}`;
+    }
+
+    // 窗口尺寸变化时重绘时间轴
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) renderTimeline(window.__lastData.pilgrims);
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情感热力图 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 56px 24px 44px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.3rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.28em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 14px;
+            font-size: 0.86rem;
+            color: rgba(245, 233, 212, 0.68);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 8px; color: var(--ink-soft); opacity: 0.6; }
+
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(min(180px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 768px) { .kpi-row { grid-template-columns: repeat(2, minmax(min(160px, 100%), 1fr)); } }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+            min-width: 0;
+        }
+        .kpi-card:nth-child(2) { border-top-color: var(--accent-2); }
+        .kpi-card:nth-child(3) { border-top-color: var(--accent-3); }
+        .kpi-card:nth-child(4) { border-top-color: var(--accent-4); }
+        .kpi-card .label {
+            font-size: 0.76rem;
+            color: var(--accent);
+            letter-spacing: 0.16em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card:nth-child(2) .label { color: var(--accent-2); }
+        .kpi-card:nth-child(3) .label { color: var(--accent-3); }
+        .kpi-card:nth-child(4) .label { color: var(--accent-4); }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc { font-size: 0.82rem; color: var(--ink-soft); overflow-wrap: anywhere; }
+
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            min-width: 0;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+            line-height: 1.65;
+            overflow-wrap: anywhere;
+        }
+        .section-sub strong { color: var(--accent); font-weight: 600; }
+        .section-sub .pos { color: var(--accent-4); font-weight: 600; }
+        .section-sub .neu { color: var(--accent-3); font-weight: 600; }
+        .section-sub .neg { color: var(--accent); font-weight: 600; }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 18px;
+            margin-bottom: 16px;
+            font-size: 0.84rem;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; min-width: 0; }
+        .legend-swatch { width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0; }
+        .legend-grad {
+            width: 90px; height: 12px; border-radius: 2px; flex-shrink: 0;
+            background: linear-gradient(90deg, rgba(44,36,24,0.18), rgba(44,36,24,1));
+        }
+
+        /* ===== Chart 1: 热力图矩阵 ===== */
+        .heatmap-wrap {
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 6px;
+        }
+        #heatmap-svg {
+            display: block;
+            min-width: 720px;
+            width: 100%;
+            height: auto;
+        }
+        .heat-cell {
+            stroke: #fff;
+            stroke-width: 1.2;
+            cursor: pointer;
+            transition: stroke-width 0.15s, transform 0.15s;
+        }
+        .heat-cell:hover { stroke-width: 2.5; }
+        .heat-row-label {
+            font-size: 0.86rem;
+            font-weight: 600;
+            fill: var(--ink);
+        }
+        .heat-row-label.dim { fill: var(--ink-soft); opacity: 0.5; }
+        .heat-row-label.active { fill: var(--accent); }
+        .heat-col-label {
+            font-size: 0.74rem;
+            fill: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .heat-cell.dim { opacity: 0.18 !important; }
+        .heat-cell.active { stroke: var(--ink); stroke-width: 2; }
+        .heat-row-band {
+            fill: var(--accent-soft);
+            opacity: 0.16;
+            pointer-events: none;
+        }
+        .heat-tooltip {
+            position: absolute;
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 12px 14px;
+            border-radius: 6px;
+            font-size: 0.84rem;
+            line-height: 1.55;
+            max-width: 340px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+            border: 1px solid var(--accent-soft);
+            z-index: 10;
+        }
+        .heat-tooltip .ht-scholar { color: var(--accent-soft); font-weight: 600; font-size: 0.96rem; }
+        .heat-tooltip .ht-meta { color: rgba(245,233,212,0.7); font-size: 0.76rem; margin: 2px 0 6px; font-family: "JetBrains Mono", monospace; }
+        .heat-tooltip .ht-pill {
+            display: inline-block;
+            font-size: 0.72rem;
+            padding: 1px 7px;
+            border-radius: 10px;
+            margin-right: 6px;
+            color: #fff;
+        }
+        .ht-pill.positive { background: var(--accent-4); }
+        .ht-pill.neutral  { background: var(--accent-3); }
+        .ht-pill.negative { background: var(--accent); }
+        .heat-tooltip .ht-quote { color: var(--accent-soft); font-style: italic; margin-top: 6px; overflow-wrap: anywhere; }
+
+        /* ===== Chart 2: 情感波动曲线 ===== */
+        .curves-wrap {
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 6px;
+        }
+        #curves-svg {
+            display: block;
+            min-width: 720px;
+            width: 100%;
+            height: auto;
+        }
+        .curves-axis text, .curves-axis line, .curves-axis path {
+            font-size: 0.76rem;
+            fill: var(--ink-soft);
+            stroke: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .curve-seg {
+            fill: none;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+        }
+        .curve-seg.dim { opacity: 0.12; }
+        .curve-dot {
+            stroke: #fff;
+            stroke-width: 1.2;
+            cursor: pointer;
+            transition: r 0.15s;
+        }
+        .curve-dot:hover { r: 5; }
+        .curve-dot.dim { opacity: 0.15; }
+        .curve-end-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+        .curve-end-label.dim { opacity: 0.18; }
+        .curves-tooltip {
+            position: absolute;
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            max-width: 300px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+            border: 1px solid var(--accent-soft);
+            z-index: 10;
+        }
+        .curves-tooltip .ct-name { color: var(--accent-soft); font-weight: 600; }
+
+        /* ===== Chart 3: 名人卡片 ===== */
+        .scholar-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(min(260px, 100%), 1fr));
+            gap: 16px;
+        }
+        @media (max-width: 1040px) { .scholar-grid { grid-template-columns: repeat(2, minmax(min(280px, 100%), 1fr)); } }
+        @media (max-width: 520px)  { .scholar-grid { grid-template-columns: 1fr; } }
+        .scholar-card {
+            background: linear-gradient(180deg, #fffdf8 0%, #faf7f2 100%);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent-3);
+            cursor: pointer;
+            position: relative;
+            min-width: 0;
+            transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+            overflow-wrap: anywhere;
+        }
+        .scholar-card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(60,40,20,0.12); }
+        .scholar-card.active { border-color: var(--accent); border-top-color: var(--accent); box-shadow: 0 0 0 2px var(--accent), var(--shadow); }
+        .scholar-card .sc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--line);
+            gap: 8px;
+        }
+        .scholar-card .sc-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--ink);
+            min-width: 0;
+        }
+        .scholar-card.active .sc-name { color: var(--accent); }
+        .scholar-card .sc-era {
+            font-size: 0.72rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+            flex-shrink: 0;
+        }
+        .scholar-card .sc-school {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        .scholar-card .sc-motto {
+            font-size: 0.82rem;
+            color: var(--accent-2);
+            line-height: 1.55;
+            margin-bottom: 10px;
+            padding: 6px 8px;
+            background: rgba(58,107,140,0.06);
+            border-left: 2px solid var(--accent-2);
+            border-radius: 0 3px 3px 0;
+            overflow-wrap: anywhere;
+        }
+        .sc-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            font-size: 0.74rem;
+        }
+        .sc-stat { text-align: center; padding: 4px 0; }
+        .sc-stat .num { font-size: 1rem; font-weight: 600; display: block; }
+        .sc-stat.pos .num { color: var(--accent-4); }
+        .sc-stat.neu .num { color: var(--accent-3); }
+        .sc-stat.neg .num { color: var(--accent); }
+        .sc-stat .lbl { color: var(--ink-soft); font-size: 0.7rem; }
+        .sc-avg {
+            margin-top: 8px;
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            text-align: right;
+        }
+        .sc-hint {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            font-size: 0.66rem;
+            color: var(--ink-soft);
+            opacity: 0.5;
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        /* ===== Insight Box ===== */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 22px 26px;
+            border-radius: 4px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            letter-spacing: 0.05em;
+        }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong { color: var(--accent); font-weight: 600; }
+        .insight-box li em { color: var(--accent-2); font-style: italic; }
+
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+            overflow-wrap: anywhere;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: #f5e9d4;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .interaction-hint {
+            margin-top: 14px;
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            text-align: center;
+            overflow-wrap: anywhere;
+        }
+        .interaction-hint kbd {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            padding: 1px 6px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.78rem;
+            color: var(--ink);
+        }
+
+        footer.footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+            overflow-wrap: anywhere;
+        }
+        footer.footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer.footer a:hover { text-decoration: underline; }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>情感热力图 · 详解西游记</h1>
+        <div class="subtitle">EMOTIONAL HEATMAP</div>
+        <div class="tagline">八位批评家对八十一难的情感波动·一图尽览。</div>
+    </header>
+
+    <main class="container">
+        <nav class="breadcrumb">
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">›</span>
+            <span>情感热力图</span>
+        </nav>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）。引文标注「史料」者为真实文献，「拟作」者为依思想脉络拟写。
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">SCHOLARS · 批评家</div>
+                <div class="value">8 位</div>
+                <div class="desc">李卓吾·金圣叹·鲁迅·胡适·毛泽东·林语堂·钱钟书·郭沫若</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">HARDSHIPS · 精选回目</div>
+                <div class="value">20 难</div>
+                <div class="desc">第 1 / 2 / 5 / 7 / 8 / 12 / 14 / 17 / 22 / 24 / 27 / 32 / 45 / 53 / 59 / 65 / 74 / 78 / 88 / 100 回</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">REACTIONS · 情感反应</div>
+                <div class="value">160 条</div>
+                <div class="desc">8 × 20 矩阵 · 每格含 sentiment / intensity / quote</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">POLARITY · 情感极性</div>
+                <div class="value">3 类</div>
+                <div class="desc">正面（绿）·中性（黄）·负面（红）·强度 1–10 映射透明度</div>
+            </div>
+        </div>
+
+        <!-- 核心可视化 1：热力图矩阵 -->
+        <section class="section device">
+            <h2 class="section-title">热力图矩阵 · Heatmap Matrix</h2>
+            <div class="section-sub">
+                横轴为 20 个精选回目（按章回序），纵轴为 8 位批评家。每格颜色映射 <span class="pos">情感极性</span>（正面=绿 / 中性=黄 / 负面=红），
+                透明度映射 <strong>反应强度</strong>（1–10，越浓越强）。<strong>hover</strong> 单元格显示引文 tooltip；<strong>click</strong> 单元格或下方名人卡片可锁定/取消高亮该行。
+            </div>
+            <div class="legend">
+                <div class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span><span>正面 positive</span></div>
+                <div class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span><span>中性 neutral</span></div>
+                <div class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span><span>负面 negative</span></div>
+                <div class="legend-item"><span class="legend-grad"></span><span>强度 低 → 高</span></div>
+            </div>
+            <div class="heatmap-wrap">
+                <svg id="heatmap-svg" role="img" aria-labelledby="heatmap-title"><title id="heatmap-title">情感热力图：8 位名人 × 20 难的反应强度矩阵，hover 单元格查看引文</title></svg>
+            </div>
+            <div class="heat-tooltip" id="heat-tooltip"></div>
+            <div class="interaction-hint">
+                提示：<kbd>hover</kbd> 单元格查看引文 · <kbd>click</kbd> 名人卡片或单元格锁定高亮该行 · 再次点击取消
+            </div>
+        </section>
+
+        <!-- 核心可视化 2：情感波动曲线 -->
+        <section class="section device">
+            <h2 class="section-title">情感波动曲线 · Sentiment Curves</h2>
+            <div class="section-sub">
+                每位名人一条折线，横轴为 20 个难序号，纵轴为反应强度（1–10）。<strong>线段颜色</strong>映射该段的情感极性，
+                <strong>端点圆点</strong>同色映射。线尾标签为该学者姓名。<strong>hover</strong> 圆点显示详情。
+            </div>
+            <div class="curves-wrap">
+                <svg id="curves-svg" role="img" aria-labelledby="curves-title"><title id="curves-title">情感波动曲线：每位名人一条折线，横轴 20 难序号，纵轴反应强度 1-10，hover 圆点显示详情</title></svg>
+            </div>
+            <div class="curves-tooltip" id="curves-tooltip"></div>
+        </section>
+
+        <!-- 核心可视化 3：名人卡片 -->
+        <section class="section device">
+            <h2 class="section-title">名人卡片 · Scholar Cards</h2>
+            <div class="section-sub">
+                8 张卡片，每张含姓名·生卒·学派·代表语，及 20 难中 <span class="pos">正面</span> / <span class="neu">中性</span> / <span class="neg">负面</span> 计数与平均强度。
+                <strong>hover</strong> 高亮对应热力图行；<strong>click</strong> 锁定高亮（支持键盘 <kbd>Enter</kbd> / <kbd>Space</kbd> 操作）。
+            </div>
+            <div class="scholar-grid" id="scholar-grid"></div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察 · Insights</h2>
+            <div class="insight-box">
+                <h4>同一种文本，八种心跳</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div>
+            <a href="../dashboard.html">返回数据看板</a> ·
+            <a href="../index.html">返回首页</a>
+        </div>
+        <div class="source-list" style="margin-top:14px;">
+            数据源：EMBEDDED 内嵌 · 8 scholars × 20 hardships = 160 reactions · D3.js v7 · 古典宣纸风 CSS 变量配色
+        </div>
+        <div class="source-list" style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7;font-size:0.74rem;color:var(--ink-soft);">
+            <strong style="color:var(--accent-3);">数据结构摘要：</strong><br>
+            · <code>scholars[8]</code>：key · name · era · school · color · motto<br>
+            · <code>hardships[20]</code>：idx · chapter · title · subtitle<br>
+            · <code>reactions[160]</code>：scholar · chapter · hardship · sentiment · intensity · quote（史料/拟作 标注）<br>
+            <strong style="color:var(--accent-3);">渲染机制：</strong>fetch + EMBEDDED fallback · 支持 file:// 双击打开 · hover tooltip + click 高亮联动
+        </div>
+        <div class="source-list" style="margin-top:8px;font-size:0.74rem;color:var(--ink-soft);font-style:italic;">
+            © 详解西游记 · 情感热力图 · 8 位批评家 × 20 回目 · 160 条情感反应
+        </div>
+        <div style="margin-top:8px;">深入阅读：<a href="criticism-history.html">批评史长卷</a> · <a href="81-hardships.html">八十一难深度统计</a></div>
+    </footer>
+
+    <script>
+    /* ==========================================================
+       EMBEDDED_FALLBACK 数据（fetch 失败时使用 · file:// 必可用）
+       8 位名人 × 20 难 = 160 条情感反应
+       引文标注「史料」者为真实文献，「拟作」者为依思想脉络拟写
+       ========================================================== */
+    const EMBEDDED_DATA = {
+        meta: {
+            title: "情感热力图",
+            scholar_count: 8,
+            hardship_count: 20,
+            reaction_count: 160
+        },
+        scholars: [
+            { key: "lizhuowu",     name: "李卓吾", era: "1527-1602", school: "童心说",   color: "#7a5230", motto: "天下之至文，未有不出于童心焉者也。" },
+            { key: "jinshengtan",  name: "金圣叹", era: "1608-1661", school: "才子书",   color: "#3a6b8c", motto: "文章之妙，全在无定法。" },
+            { key: "luxun",        name: "鲁迅",   era: "1881-1936", school: "神魔小说", color: "#c8463a", motto: "神魔皆有人情，精魅亦通世故。" },
+            { key: "hushi",        name: "胡适",   era: "1891-1962", school: "考证本位", color: "#5a7a3a", motto: "《西游记》乃一部游戏之作。" },
+            { key: "maozedong",    name: "毛泽东", era: "1893-1976", school: "革命寓言", color: "#8c2a2a", motto: "今日欢呼孙大圣，只缘妖雾又重来。" },
+            { key: "linyutang",    name: "林语堂", era: "1895-1976", school: "闲适幽默", color: "#b88a3a", motto: "悟空是中国式自由的化身。" },
+            { key: "qianzhongshu", name: "钱钟书", era: "1910-1998", school: "博学旁通", color: "#6b5e4d", motto: "西游一书，子不语之渊府也。" },
+            { key: "guomoruo",     name: "郭沫若", era: "1892-1978", school: "浪漫革命", color: "#b85a3a", motto: "人妖颠倒是非淆，对敌慈悲对友刁。" }
+        ],
+        hardships: [
+            { idx: 1,  chapter: 1,   title: "石猴出世",         subtitle: "灵根育孕源流出" },
+            { idx: 2,  chapter: 2,   title: "悟空学艺",         subtitle: "悟彻菩提真妙理" },
+            { idx: 3,  chapter: 5,   title: "大圣偷丹",         subtitle: "乱蟠桃大圣偷丹" },
+            { idx: 4,  chapter: 7,   title: "八卦炉中逃大圣",   subtitle: "八卦炉中逃大圣" },
+            { idx: 5,  chapter: 8,   title: "佛祖定计",         subtitle: "我佛造经传极乐" },
+            { idx: 6,  chapter: 12,  title: "玄奘现身",         subtitle: "唐王秉诚修大会" },
+            { idx: 7,  chapter: 14,  title: "收悟空",           subtitle: "心猿归正六贼无踪" },
+            { idx: 8,  chapter: 17,  title: "黑熊精",           subtitle: "孙行者大闹黑风山" },
+            { idx: 9,  chapter: 22,  title: "收沙僧",           subtitle: "八戒大战流沙河" },
+            { idx: 10, chapter: 24,  title: "五庄观人参果",     subtitle: "万寿山大仙留故友" },
+            { idx: 11, chapter: 27,  title: "三打白骨精",       subtitle: "尸魔三戏唐三藏" },
+            { idx: 12, chapter: 32,  title: "莲花洞金角银角",   subtitle: "平顶山功曹传信" },
+            { idx: 13, chapter: 45,  title: "车迟国斗法",       subtitle: "三清观大圣留名" },
+            { idx: 14, chapter: 53,  title: "女儿国",           subtitle: "禅主吞餐怀鬼孕" },
+            { idx: 15, chapter: 59,  title: "火焰山",           subtitle: "唐三藏路阻火焰山" },
+            { idx: 16, chapter: 65,  title: "黄眉怪",           subtitle: "妖邪假设小雷音" },
+            { idx: 17, chapter: 74,  title: "狮驼岭",           subtitle: "长庚传报魔头狠" },
+            { idx: 18, chapter: 78,  title: "比丘国",           subtitle: "比丘怜子遣阴神" },
+            { idx: 19, chapter: 88,  title: "玉华州收徒",       subtitle: "禅到玉华施法会" },
+            { idx: 20, chapter: 100, title: "取经圆满",         subtitle: "径回东土五圣成真" }
+        ],
+        reactions: [
+            /* ===== 李卓吾（童心说 · 倾向自由、游戏、真情） ===== */
+            { scholar: "李卓吾", chapter: 1,   hardship: "石猴出世",       sentiment: "positive", intensity: 9, quote: "天生石猴，纯然童心也。（拟作）" },
+            { scholar: "李卓吾", chapter: 2,   hardship: "悟空学艺",       sentiment: "positive", intensity: 8, quote: "求道之心，童心之真。（拟作）" },
+            { scholar: "李卓吾", chapter: 5,   hardship: "大圣偷丹",       sentiment: "positive", intensity: 9, quote: "偷丹偷桃，游戏之至，童心之至。（拟作）" },
+            { scholar: "李卓吾", chapter: 7,   hardship: "八卦炉中逃大圣", sentiment: "positive", intensity: 8, quote: "炉中炼出火眼金睛，童心不被焚毁。（拟作）" },
+            { scholar: "李卓吾", chapter: 8,   hardship: "佛祖定计",       sentiment: "neutral",  intensity: 5, quote: "如来一掌定心猿，乃作者游戏之笔。（拟作）" },
+            { scholar: "李卓吾", chapter: 12,  hardship: "玄奘现身",       sentiment: "neutral",  intensity: 4, quote: "取经缘起，过场文字。（拟作）" },
+            { scholar: "李卓吾", chapter: 14,  hardship: "收悟空",         sentiment: "negative", intensity: 7, quote: "心猿归正，童心动辄受制，可叹。（拟作）" },
+            { scholar: "李卓吾", chapter: 17,  hardship: "黑熊精",         sentiment: "neutral",  intensity: 5, quote: "黑熊窃袈裟，俗情耳。（拟作）" },
+            { scholar: "李卓吾", chapter: 22,  hardship: "收沙僧",         sentiment: "neutral",  intensity: 5, quote: "三徒俱备，程式之笔。（拟作）" },
+            { scholar: "李卓吾", chapter: 24,  hardship: "五庄观人参果",   sentiment: "positive", intensity: 7, quote: "推倒人参果，童心敢为。（拟作）" },
+            { scholar: "李卓吾", chapter: 27,  hardship: "三打白骨精",     sentiment: "positive", intensity: 8, quote: "识破妖魔，童心不被惑。（拟作）" },
+            { scholar: "李卓吾", chapter: 32,  hardship: "莲花洞金角银角", sentiment: "positive", intensity: 7, quote: "智取宝物，游戏笔墨。（拟作）" },
+            { scholar: "李卓吾", chapter: 45,  hardship: "车迟国斗法",     sentiment: "positive", intensity: 8, quote: "斗法胜妖道，童心无畏。（拟作）" },
+            { scholar: "李卓吾", chapter: 53,  hardship: "女儿国",         sentiment: "positive", intensity: 9, quote: "情关难破，童心见真情。（拟作）" },
+            { scholar: "李卓吾", chapter: 59,  hardship: "火焰山",         sentiment: "positive", intensity: 7, quote: "借扇调风，游戏之妙。（拟作）" },
+            { scholar: "李卓吾", chapter: 65,  hardship: "黄眉怪",         sentiment: "neutral",  intensity: 5, quote: "小雷音之难，佛亦作魔。（拟作）" },
+            { scholar: "李卓吾", chapter: 74,  hardship: "狮驼岭",         sentiment: "neutral",  intensity: 5, quote: "三魔连势，世俗之喻。（拟作）" },
+            { scholar: "李卓吾", chapter: 78,  hardship: "比丘国",         sentiment: "positive", intensity: 7, quote: "救一千一百一十一个小儿，童心大悲。（拟作）" },
+            { scholar: "李卓吾", chapter: 88,  hardship: "玉华州收徒",     sentiment: "neutral",  intensity: 5, quote: "收徒传法，平淡之笔。（拟作）" },
+            { scholar: "李卓吾", chapter: 100, hardship: "取经圆满",       sentiment: "negative", intensity: 6, quote: "心猿归伏成佛，童心之悲。（拟作）" },
+
+            /* ===== 金圣叹（才子书 · 文学本位、文法批评） ===== */
+            { scholar: "金圣叹", chapter: 1,   hardship: "石猴出世",       sentiment: "positive", intensity: 8, quote: "开篇奇笔，文章之妙全在无定。（拟作）" },
+            { scholar: "金圣叹", chapter: 2,   hardship: "悟空学艺",       sentiment: "positive", intensity: 7, quote: "学艺一段，文法森严。（拟作）" },
+            { scholar: "金圣叹", chapter: 5,   hardship: "大圣偷丹",       sentiment: "positive", intensity: 8, quote: "笔墨恣肆，才子书之笔。（拟作）" },
+            { scholar: "金圣叹", chapter: 7,   hardship: "八卦炉中逃大圣", sentiment: "positive", intensity: 8, quote: "八卦炉一段，火候恰到好处。（拟作）" },
+            { scholar: "金圣叹", chapter: 8,   hardship: "佛祖定计",       sentiment: "neutral",  intensity: 5, quote: "如来定计，文章转折。（拟作）" },
+            { scholar: "金圣叹", chapter: 12,  hardship: "玄奘现身",       sentiment: "neutral",  intensity: 4, quote: "水陆大会一段，未见奇处。（拟作）" },
+            { scholar: "金圣叹", chapter: 14,  hardship: "收悟空",         sentiment: "neutral",  intensity: 5, quote: "心猿归正，文势一收。（拟作）" },
+            { scholar: "金圣叹", chapter: 17,  hardship: "黑熊精",         sentiment: "neutral",  intensity: 5, quote: "黑风山一段，笔墨平实。（拟作）" },
+            { scholar: "金圣叹", chapter: 22,  hardship: "收沙僧",         sentiment: "neutral",  intensity: 4, quote: "流沙河收徒，程式化。（拟作）" },
+            { scholar: "金圣叹", chapter: 24,  hardship: "五庄观人参果",   sentiment: "positive", intensity: 7, quote: "五庄观人参果，奇想妙构。（拟作）" },
+            { scholar: "金圣叹", chapter: 27,  hardship: "三打白骨精",     sentiment: "positive", intensity: 9, quote: "三打白骨精，文章之妙极矣。（拟作）" },
+            { scholar: "金圣叹", chapter: 32,  hardship: "莲花洞金角银角", sentiment: "positive", intensity: 8, quote: "金角银角，文字波折。（拟作）" },
+            { scholar: "金圣叹", chapter: 45,  hardship: "车迟国斗法",     sentiment: "positive", intensity: 8, quote: "斗法一段，文心独运。（拟作）" },
+            { scholar: "金圣叹", chapter: 53,  hardship: "女儿国",         sentiment: "positive", intensity: 7, quote: "女儿国一段，情致婉转。（拟作）" },
+            { scholar: "金圣叹", chapter: 59,  hardship: "火焰山",         sentiment: "positive", intensity: 8, quote: "三借芭蕉扇，文势如潮。（拟作）" },
+            { scholar: "金圣叹", chapter: 65,  hardship: "黄眉怪",         sentiment: "neutral",  intensity: 6, quote: "小雷音，文意略复。（拟作）" },
+            { scholar: "金圣叹", chapter: 74,  hardship: "狮驼岭",         sentiment: "positive", intensity: 7, quote: "狮驼三魔，文章大观。（拟作）" },
+            { scholar: "金圣叹", chapter: 78,  hardship: "比丘国",         sentiment: "positive", intensity: 7, quote: "比丘救儿，文心悲悯。（拟作）" },
+            { scholar: "金圣叹", chapter: 88,  hardship: "玉华州收徒",     sentiment: "neutral",  intensity: 5, quote: "玉华州收徒，文势渐缓。（拟作）" },
+            { scholar: "金圣叹", chapter: 100, hardship: "取经圆满",       sentiment: "neutral",  intensity: 5, quote: "成佛作祖，结局圆满但少奇。（拟作）" },
+
+            /* ===== 鲁迅（神魔小说 · 游戏之说、社会批判底色） ===== */
+            { scholar: "鲁迅", chapter: 1,   hardship: "石猴出世",       sentiment: "positive", intensity: 7, quote: "石猴化生，神魔皆有人情。（拟作）" },
+            { scholar: "鲁迅", chapter: 2,   hardship: "悟空学艺",       sentiment: "neutral",  intensity: 5, quote: "学艺一段，犹见他山之石。（拟作）" },
+            { scholar: "鲁迅", chapter: 5,   hardship: "大圣偷丹",       sentiment: "positive", intensity: 7, quote: "作者禀性，复善谐剧，故虽变幻恍忽之事……（史料）" },
+            { scholar: "鲁迅", chapter: 7,   hardship: "八卦炉中逃大圣", sentiment: "positive", intensity: 8, quote: "神魔皆有人情，精魅亦通世故。（史料）" },
+            { scholar: "鲁迅", chapter: 8,   hardship: "佛祖定计",       sentiment: "neutral",  intensity: 5, quote: "如来定心猿，乃作者结构之需。（拟作）" },
+            { scholar: "鲁迅", chapter: 12,  hardship: "玄奘现身",       sentiment: "neutral",  intensity: 4, quote: "取经缘起，史实与小说杂糅。（拟作）" },
+            { scholar: "鲁迅", chapter: 14,  hardship: "收悟空",         sentiment: "negative", intensity: 6, quote: "心猿归正，自此失却野性。（拟作）" },
+            { scholar: "鲁迅", chapter: 17,  hardship: "黑熊精",         sentiment: "neutral",  intensity: 5, quote: "黑熊精一段，亦通世故。（拟作）" },
+            { scholar: "鲁迅", chapter: 22,  hardship: "收沙僧",         sentiment: "neutral",  intensity: 4, quote: "三徒收齐，结构之必然。（拟作）" },
+            { scholar: "鲁迅", chapter: 24,  hardship: "五庄观人参果",   sentiment: "positive", intensity: 6, quote: "五庄观一段，每杂解颐之言。（拟作）" },
+            { scholar: "鲁迅", chapter: 27,  hardship: "三打白骨精",     sentiment: "negative", intensity: 7, quote: "唐僧糊涂，神魔亦通世故之反例。（拟作）" },
+            { scholar: "鲁迅", chapter: 32,  hardship: "莲花洞金角银角", sentiment: "neutral",  intensity: 5, quote: "莲花洞一段，亦游戏之作。（拟作）" },
+            { scholar: "鲁迅", chapter: 45,  hardship: "车迟国斗法",     sentiment: "positive", intensity: 7, quote: "车迟国斗法，讽刺释道之争。（拟作）" },
+            { scholar: "鲁迅", chapter: 53,  hardship: "女儿国",         sentiment: "positive", intensity: 7, quote: "女儿国一段，世故人情之至。（拟作）" },
+            { scholar: "鲁迅", chapter: 59,  hardship: "火焰山",         sentiment: "neutral",  intensity: 6, quote: "火焰山一段，亦游戏笔墨。（拟作）" },
+            { scholar: "鲁迅", chapter: 65,  hardship: "黄眉怪",         sentiment: "neutral",  intensity: 5, quote: "小雷音，神魔小说之常套。（拟作）" },
+            { scholar: "鲁迅", chapter: 74,  hardship: "狮驼岭",         sentiment: "neutral",  intensity: 5, quote: "狮驼岭，亦神魔亦世故。（拟作）" },
+            { scholar: "鲁迅", chapter: 78,  hardship: "比丘国",         sentiment: "positive", intensity: 7, quote: "比丘国救儿，世故人情。（拟作）" },
+            { scholar: "鲁迅", chapter: 88,  hardship: "玉华州收徒",     sentiment: "neutral",  intensity: 4, quote: "玉华州，文笔渐疲。（拟作）" },
+            { scholar: "鲁迅", chapter: 100, hardship: "取经圆满",       sentiment: "neutral",  intensity: 5, quote: "成佛作祖，游戏收场。（拟作）" },
+
+            /* ===== 胡适（考证本位 · 游戏之作、实证） ===== */
+            { scholar: "胡适", chapter: 1,   hardship: "石猴出世",       sentiment: "neutral",  intensity: 5, quote: "石猴出世，神话色彩浓。（拟作）" },
+            { scholar: "胡适", chapter: 2,   hardship: "悟空学艺",       sentiment: "neutral",  intensity: 4, quote: "学艺一段，平平。（拟作）" },
+            { scholar: "胡适", chapter: 5,   hardship: "大圣偷丹",       sentiment: "neutral",  intensity: 5, quote: "偷丹一段，游戏之作。（拟作）" },
+            { scholar: "胡适", chapter: 7,   hardship: "八卦炉中逃大圣", sentiment: "neutral",  intensity: 5, quote: "八卦炉，亦游戏笔墨。（拟作）" },
+            { scholar: "胡适", chapter: 8,   hardship: "佛祖定计",       sentiment: "neutral",  intensity: 4, quote: "佛祖定计，结构之需。（拟作）" },
+            { scholar: "胡适", chapter: 12,  hardship: "玄奘现身",       sentiment: "neutral",  intensity: 5, quote: "玄奘现身，史实与小说杂糅。（拟作）" },
+            { scholar: "胡适", chapter: 14,  hardship: "收悟空",         sentiment: "neutral",  intensity: 5, quote: "收悟空一段，乃作者结构之需。（拟作）" },
+            { scholar: "胡适", chapter: 17,  hardship: "黑熊精",         sentiment: "neutral",  intensity: 4, quote: "黑熊精一段，平实。（拟作）" },
+            { scholar: "胡适", chapter: 22,  hardship: "收沙僧",         sentiment: "neutral",  intensity: 4, quote: "流沙河收徒，程式化。（拟作）" },
+            { scholar: "胡适", chapter: 24,  hardship: "五庄观人参果",   sentiment: "neutral",  intensity: 5, quote: "五庄观，亦游戏之作。（拟作）" },
+            { scholar: "胡适", chapter: 27,  hardship: "三打白骨精",     sentiment: "neutral",  intensity: 5, quote: "三打白骨精，乃游戏之作。（拟作）" },
+            { scholar: "胡适", chapter: 32,  hardship: "莲花洞金角银角", sentiment: "neutral",  intensity: 4, quote: "莲花洞，亦游戏。（拟作）" },
+            { scholar: "胡适", chapter: 45,  hardship: "车迟国斗法",     sentiment: "neutral",  intensity: 5, quote: "车迟国，讽刺之笔。（拟作）" },
+            { scholar: "胡适", chapter: 53,  hardship: "女儿国",         sentiment: "positive", intensity: 6, quote: "女儿国，游戏之中见情。（拟作）" },
+            { scholar: "胡适", chapter: 59,  hardship: "火焰山",         sentiment: "neutral",  intensity: 5, quote: "火焰山，游戏笔墨。（拟作）" },
+            { scholar: "胡适", chapter: 65,  hardship: "黄眉怪",         sentiment: "neutral",  intensity: 4, quote: "黄眉怪，亦套数。（拟作）" },
+            { scholar: "胡适", chapter: 74,  hardship: "狮驼岭",         sentiment: "neutral",  intensity: 4, quote: "狮驼岭，篇幅冗长。（拟作）" },
+            { scholar: "胡适", chapter: 78,  hardship: "比丘国",         sentiment: "neutral",  intensity: 5, quote: "比丘国，亦游戏。（拟作）" },
+            { scholar: "胡适", chapter: 88,  hardship: "玉华州收徒",     sentiment: "neutral",  intensity: 4, quote: "玉华州，平实。（拟作）" },
+            { scholar: "胡适", chapter: 100, hardship: "取经圆满",       sentiment: "positive", intensity: 6, quote: "《西游记》乃一部游戏之作。（史料）" },
+
+            /* ===== 毛泽东（革命寓言 · 悟空=革命者、妖魔=反动派） ===== */
+            { scholar: "毛泽东", chapter: 1,   hardship: "石猴出世",       sentiment: "positive", intensity: 9,  quote: "石猴造反，造反有理。（拟作）" },
+            { scholar: "毛泽东", chapter: 2,   hardship: "悟空学艺",       sentiment: "positive", intensity: 8,  quote: "悟空学艺，武装头脑。（拟作）" },
+            { scholar: "毛泽东", chapter: 5,   hardship: "大圣偷丹",       sentiment: "positive", intensity: 9,  quote: "大闹天宫，造反有理。（拟作）" },
+            { scholar: "毛泽东", chapter: 7,   hardship: "八卦炉中逃大圣", sentiment: "positive", intensity: 10, quote: "金猴奋起千钧棒，玉宇澄清万里埃。（史料）" },
+            { scholar: "毛泽东", chapter: 8,   hardship: "佛祖定计",       sentiment: "negative", intensity: 6,  quote: "佛祖镇压，反动派之喻。（拟作）" },
+            { scholar: "毛泽东", chapter: 12,  hardship: "玄奘现身",       sentiment: "neutral",  intensity: 4,  quote: "玄奘现身，过场。（拟作）" },
+            { scholar: "毛泽东", chapter: 14,  hardship: "收悟空",         sentiment: "negative", intensity: 7,  quote: "心猿被驯，可惜。（拟作）" },
+            { scholar: "毛泽东", chapter: 17,  hardship: "黑熊精",         sentiment: "positive", intensity: 7,  quote: "黑熊一段，斗争之喻。（拟作）" },
+            { scholar: "毛泽东", chapter: 22,  hardship: "收沙僧",         sentiment: "neutral",  intensity: 5,  quote: "三徒聚义。（拟作）" },
+            { scholar: "毛泽东", chapter: 24,  hardship: "五庄观人参果",   sentiment: "neutral",  intensity: 5,  quote: "五庄观，过场。（拟作）" },
+            { scholar: "毛泽东", chapter: 27,  hardship: "三打白骨精",     sentiment: "positive", intensity: 10, quote: "今日欢呼孙大圣，只缘妖雾又重来。（史料）" },
+            { scholar: "毛泽东", chapter: 32,  hardship: "莲花洞金角银角", sentiment: "positive", intensity: 7,  quote: "莲花洞智斗，可借鉴。（拟作）" },
+            { scholar: "毛泽东", chapter: 45,  hardship: "车迟国斗法",     sentiment: "positive", intensity: 8,  quote: "破除迷信，斗争到底。（拟作）" },
+            { scholar: "毛泽东", chapter: 53,  hardship: "女儿国",         sentiment: "neutral",  intensity: 5,  quote: "美人关，警惕糖衣炮弹。（拟作）" },
+            { scholar: "毛泽东", chapter: 59,  hardship: "火焰山",         sentiment: "positive", intensity: 9,  quote: "火焰山，人民斗争之喻。（拟作）" },
+            { scholar: "毛泽东", chapter: 65,  hardship: "黄眉怪",         sentiment: "positive", intensity: 7,  quote: "黄眉怪，警惕假革命。（拟作）" },
+            { scholar: "毛泽东", chapter: 74,  hardship: "狮驼岭",         sentiment: "positive", intensity: 8,  quote: "狮驼岭，三座大山之喻。（拟作）" },
+            { scholar: "毛泽东", chapter: 78,  hardship: "比丘国",         sentiment: "positive", intensity: 8,  quote: "救小儿，救救孩子。（拟作）" },
+            { scholar: "毛泽东", chapter: 88,  hardship: "玉华州收徒",     sentiment: "neutral",  intensity: 5,  quote: "玉华州，过场。（拟作）" },
+            { scholar: "毛泽东", chapter: 100, hardship: "取经圆满",       sentiment: "neutral",  intensity: 6,  quote: "成佛作祖，革命成功但妥协。（拟作）" },
+
+            /* ===== 林语堂（闲适幽默 · 悟空=自由化身） ===== */
+            { scholar: "林语堂", chapter: 1,   hardship: "石猴出世",       sentiment: "positive", intensity: 8, quote: "石猴出世，自由之化身。（拟作）" },
+            { scholar: "林语堂", chapter: 2,   hardship: "悟空学艺",       sentiment: "positive", intensity: 7, quote: "学艺一段，求自由之始。（拟作）" },
+            { scholar: "林语堂", chapter: 5,   hardship: "大圣偷丹",       sentiment: "positive", intensity: 8, quote: "偷丹，幽默之至。（拟作）" },
+            { scholar: "林语堂", chapter: 7,   hardship: "八卦炉中逃大圣", sentiment: "positive", intensity: 7, quote: "八卦炉，自由不被焚。（拟作）" },
+            { scholar: "林语堂", chapter: 8,   hardship: "佛祖定计",       sentiment: "neutral",  intensity: 5, quote: "佛祖定计，作者结构。（拟作）" },
+            { scholar: "林语堂", chapter: 12,  hardship: "玄奘现身",       sentiment: "neutral",  intensity: 4, quote: "玄奘过场。（拟作）" },
+            { scholar: "林语堂", chapter: 14,  hardship: "收悟空",         sentiment: "negative", intensity: 5, quote: "心猿被驯，自由受制。（拟作）" },
+            { scholar: "林语堂", chapter: 17,  hardship: "黑熊精",         sentiment: "neutral",  intensity: 5, quote: "黑熊精，世俗之喻。（拟作）" },
+            { scholar: "林语堂", chapter: 22,  hardship: "收沙僧",         sentiment: "neutral",  intensity: 4, quote: "三徒齐聚。（拟作）" },
+            { scholar: "林语堂", chapter: 24,  hardship: "五庄观人参果",   sentiment: "positive", intensity: 7, quote: "五庄观，幽默妙构。（拟作）" },
+            { scholar: "林语堂", chapter: 27,  hardship: "三打白骨精",     sentiment: "positive", intensity: 7, quote: "三打白骨精，识人之明。（拟作）" },
+            { scholar: "林语堂", chapter: 32,  hardship: "莲花洞金角银角", sentiment: "neutral",  intensity: 5, quote: "莲花洞，游戏笔墨。（拟作）" },
+            { scholar: "林语堂", chapter: 45,  hardship: "车迟国斗法",     sentiment: "positive", intensity: 7, quote: "车迟国，幽默讽刺。（拟作）" },
+            { scholar: "林语堂", chapter: 53,  hardship: "女儿国",         sentiment: "positive", intensity: 8, quote: "女儿国，人情之至。（拟作）" },
+            { scholar: "林语堂", chapter: 59,  hardship: "火焰山",         sentiment: "positive", intensity: 7, quote: "火焰山，机智之妙。（拟作）" },
+            { scholar: "林语堂", chapter: 65,  hardship: "黄眉怪",         sentiment: "neutral",  intensity: 5, quote: "黄眉怪，过场。（拟作）" },
+            { scholar: "林语堂", chapter: 74,  hardship: "狮驼岭",         sentiment: "neutral",  intensity: 5, quote: "狮驼岭，篇幅冗。（拟作）" },
+            { scholar: "林语堂", chapter: 78,  hardship: "比丘国",         sentiment: "positive", intensity: 6, quote: "救儿，悲悯之笔。（拟作）" },
+            { scholar: "林语堂", chapter: 88,  hardship: "玉华州收徒",     sentiment: "neutral",  intensity: 5, quote: "玉华州，平。（拟作）" },
+            { scholar: "林语堂", chapter: 100, hardship: "取经圆满",       sentiment: "neutral",  intensity: 5, quote: "成佛，闲适收场。（拟作）" },
+
+            /* ===== 钱钟书（博学旁通 · 讽刺学者、用典） ===== */
+            { scholar: "钱钟书", chapter: 1,   hardship: "石猴出世",       sentiment: "neutral",  intensity: 6, quote: "石猴化生，子不语之列。（拟作）" },
+            { scholar: "钱钟书", chapter: 2,   hardship: "悟空学艺",       sentiment: "positive", intensity: 6, quote: "学艺，亦见他山之石。（拟作）" },
+            { scholar: "钱钟书", chapter: 5,   hardship: "大圣偷丹",       sentiment: "neutral",  intensity: 5, quote: "偷丹，亦游戏。（拟作）" },
+            { scholar: "钱钟书", chapter: 7,   hardship: "八卦炉中逃大圣", sentiment: "positive", intensity: 7, quote: "八卦炉，子不语之渊府。（拟作）" },
+            { scholar: "钱钟书", chapter: 8,   hardship: "佛祖定计",       sentiment: "neutral",  intensity: 5, quote: "佛祖定计，结构。（拟作）" },
+            { scholar: "钱钟书", chapter: 12,  hardship: "玄奘现身",       sentiment: "neutral",  intensity: 5, quote: "玄奘现身，史实糅合。（拟作）" },
+            { scholar: "钱钟书", chapter: 14,  hardship: "收悟空",         sentiment: "neutral",  intensity: 5, quote: "收悟空，结构之需。（拟作）" },
+            { scholar: "钱钟书", chapter: 17,  hardship: "黑熊精",         sentiment: "neutral",  intensity: 4, quote: "黑熊，笔墨平。（拟作）" },
+            { scholar: "钱钟书", chapter: 22,  hardship: "收沙僧",         sentiment: "neutral",  intensity: 4, quote: "收沙僧，程式。（拟作）" },
+            { scholar: "钱钟书", chapter: 24,  hardship: "五庄观人参果",   sentiment: "positive", intensity: 7, quote: "五庄观，用典之妙。（拟作）" },
+            { scholar: "钱钟书", chapter: 27,  hardship: "三打白骨精",     sentiment: "neutral",  intensity: 6, quote: "三打，世故之喻。（拟作）" },
+            { scholar: "钱钟书", chapter: 32,  hardship: "莲花洞金角银角", sentiment: "neutral",  intensity: 5, quote: "莲花洞，亦用典。（拟作）" },
+            { scholar: "钱钟书", chapter: 45,  hardship: "车迟国斗法",     sentiment: "positive", intensity: 7, quote: "车迟国，讽刺之笔。（拟作）" },
+            { scholar: "钱钟书", chapter: 53,  hardship: "女儿国",         sentiment: "positive", intensity: 7, quote: "女儿国，博学之喻。（拟作）" },
+            { scholar: "钱钟书", chapter: 59,  hardship: "火焰山",         sentiment: "neutral",  intensity: 6, quote: "火焰山，亦用典。（拟作）" },
+            { scholar: "钱钟书", chapter: 65,  hardship: "黄眉怪",         sentiment: "neutral",  intensity: 5, quote: "黄眉怪，亦套数。（拟作）" },
+            { scholar: "钱钟书", chapter: 74,  hardship: "狮驼岭",         sentiment: "positive", intensity: 6, quote: "狮驼岭，喻世。（拟作）" },
+            { scholar: "钱钟书", chapter: 78,  hardship: "比丘国",         sentiment: "positive", intensity: 7, quote: "比丘国，讽刺之至。（拟作）" },
+            { scholar: "钱钟书", chapter: 88,  hardship: "玉华州收徒",     sentiment: "neutral",  intensity: 5, quote: "玉华州，平。（拟作）" },
+            { scholar: "钱钟书", chapter: 100, hardship: "取经圆满",       sentiment: "neutral",  intensity: 5, quote: "成佛，闲笔收场。（拟作）" },
+
+            /* ===== 郭沫若（浪漫革命 · 浪漫主义反抗） ===== */
+            { scholar: "郭沫若", chapter: 1,   hardship: "石猴出世",       sentiment: "positive", intensity: 9,  quote: "石猴出世，浪漫之始。（拟作）" },
+            { scholar: "郭沫若", chapter: 2,   hardship: "悟空学艺",       sentiment: "positive", intensity: 8,  quote: "学艺，浪漫主义之笔。（拟作）" },
+            { scholar: "郭沫若", chapter: 5,   hardship: "大圣偷丹",       sentiment: "positive", intensity: 9,  quote: "偷丹，浪漫反抗。（拟作）" },
+            { scholar: "郭沫若", chapter: 7,   hardship: "八卦炉中逃大圣", sentiment: "positive", intensity: 10, quote: "八卦炉，浪漫主义至极。（拟作）" },
+            { scholar: "郭沫若", chapter: 8,   hardship: "佛祖定计",       sentiment: "negative", intensity: 6,  quote: "佛祖镇压，反动之喻。（拟作）" },
+            { scholar: "郭沫若", chapter: 12,  hardship: "玄奘现身",       sentiment: "neutral",  intensity: 4,  quote: "玄奘过场。（拟作）" },
+            { scholar: "郭沫若", chapter: 14,  hardship: "收悟空",         sentiment: "negative", intensity: 7,  quote: "心猿被驯，浪漫之悲。（拟作）" },
+            { scholar: "郭沫若", chapter: 17,  hardship: "黑熊精",         sentiment: "neutral",  intensity: 5,  quote: "黑熊，过场。（拟作）" },
+            { scholar: "郭沫若", chapter: 22,  hardship: "收沙僧",         sentiment: "neutral",  intensity: 5,  quote: "三徒聚。（拟作）" },
+            { scholar: "郭沫若", chapter: 24,  hardship: "五庄观人参果",   sentiment: "neutral",  intensity: 6,  quote: "五庄观，浪漫稍减。（拟作）" },
+            { scholar: "郭沫若", chapter: 27,  hardship: "三打白骨精",     sentiment: "negative", intensity: 9,  quote: "人妖颠倒是非淆，对敌慈悲对友刁。（史料）" },
+            { scholar: "郭沫若", chapter: 32,  hardship: "莲花洞金角银角", sentiment: "neutral",  intensity: 5,  quote: "莲花洞，平。（拟作）" },
+            { scholar: "郭沫若", chapter: 45,  hardship: "车迟国斗法",     sentiment: "positive", intensity: 7,  quote: "车迟国，浪漫斗争。（拟作）" },
+            { scholar: "郭沫若", chapter: 53,  hardship: "女儿国",         sentiment: "positive", intensity: 7,  quote: "女儿国，浪漫之笔。（拟作）" },
+            { scholar: "郭沫若", chapter: 59,  hardship: "火焰山",         sentiment: "positive", intensity: 8,  quote: "火焰山，浪漫之至。（拟作）" },
+            { scholar: "郭沫若", chapter: 65,  hardship: "黄眉怪",         sentiment: "neutral",  intensity: 5,  quote: "黄眉，过场。（拟作）" },
+            { scholar: "郭沫若", chapter: 74,  hardship: "狮驼岭",         sentiment: "positive", intensity: 7,  quote: "狮驼岭，斗争之喻。（拟作）" },
+            { scholar: "郭沫若", chapter: 78,  hardship: "比丘国",         sentiment: "positive", intensity: 8,  quote: "救儿，浪漫悲悯。（拟作）" },
+            { scholar: "郭沫若", chapter: 88,  hardship: "玉华州收徒",     sentiment: "neutral",  intensity: 5,  quote: "玉华州，平。（拟作）" },
+            { scholar: "郭沫若", chapter: 100, hardship: "取经圆满",       sentiment: "positive", intensity: 7,  quote: "成佛，浪漫收场。（拟作）" }
+        ]
+    };
+
+    /* ==========================================================
+       全局状态：高亮学者（持久）+ 悬停学者（瞬时）
+       ========================================================== */
+    const state = {
+        highlightedScholar: null,   // click 锁定
+        hoveredScholar: null        // hover 瞬时
+    };
+
+    function sentimentColor(s) {
+        if (s === "positive") return "var(--accent-4)";
+        if (s === "neutral")  return "var(--accent-soft)";
+        return "var(--accent)";     // negative
+    }
+    function sentimentLabel(s) {
+        if (s === "positive") return "正面";
+        if (s === "neutral")  return "中性";
+        return "负面";
+    }
+    // 当前生效高亮（hover 优先于 click 锁定）
+    function activeScholar() {
+        return state.hoveredScholar || state.highlightedScholar;
+    }
+
+    /* ==========================================================
+       工具：按 (scholar, hardship) 索引 reactions
+       ========================================================== */
+    function indexReactions(reactions) {
+        const map = {};
+        reactions.forEach(r => {
+            const key = r.scholar + "|" + r.chapter;
+            map[key] = r;
+        });
+        return map;
+    }
+
+    /* ==========================================================
+       图表 1：热力图矩阵
+       ========================================================== */
+    function renderHeatmap(scholars, hardships, reactions) {
+        if (!scholars || !hardships || !reactions || scholars.length === 0 || hardships.length === 0 || reactions.length === 0) {
+            d3.select("#heatmap-svg").selectAll("*").remove();
+            d3.select("#heatmap-svg").append("text").text("暂无数据");
+            return;
+        }
+        const svg = d3.select("#heatmap-svg");
+        svg.selectAll("*").remove();
+
+        const idxMap = indexReactions(reactions);
+
+        const cellW = 36, cellH = 38;
+        const margin = { top: 110, right: 24, bottom: 24, left: 96 };
+        const width = margin.left + cellW * hardships.length + margin.right;
+        const height = margin.top + cellH * scholars.length + margin.bottom;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 行带（高亮时显示）
+        scholars.forEach((s, si) => {
+            g.append("rect")
+                .attr("class", "heat-row-band")
+                .attr("data-scholar-band", s.key)
+                .attr("x", -8)
+                .attr("y", si * cellH - 2)
+                .attr("width", cellW * hardships.length + 16)
+                .attr("height", cellH)
+                .attr("opacity", 0);
+        });
+
+        // 单元格
+        const tooltip = d3.select("#heat-tooltip");
+        scholars.forEach((s, si) => {
+            hardships.forEach((h, hi) => {
+                const r = idxMap[s.name + "|" + h.chapter];
+                if (!r) return;
+                const opacity = 0.22 + (r.intensity - 1) / 9 * 0.78;
+                g.append("rect")
+                    .attr("class", "heat-cell")
+                    .attr("data-scholar", s.key)
+                    .attr("data-hardship", h.idx)
+                    .attr("x", hi * cellW + 1)
+                    .attr("y", si * cellH + 1)
+                    .attr("width", cellW - 2)
+                    .attr("height", cellH - 2)
+                    .attr("rx", 3)
+                    .attr("fill", sentimentColor(r.sentiment))
+                    .attr("opacity", opacity)
+                    .attr("data-base-opacity", opacity)
+                    .on("mouseover", function(event) {
+                        tooltip.style("opacity", 1);
+                        tooltip.html(
+                            `<div class="ht-scholar">${s.name}</div>` +
+                            `<div class="ht-meta">第 ${r.chapter} 回 · ${h.title}</div>` +
+                            `<span class="ht-pill ${r.sentiment}">${sentimentLabel(r.sentiment)}</span>` +
+                            `<span class="ht-meta" style="display:inline;">强度 ${r.intensity}/10</span>` +
+                            `<div class="ht-quote">「${r.quote}」</div>`
+                        );
+                        // 瞬时高亮该行
+                        state.hoveredScholar = s.key;
+                        applyHeatmapHighlight();
+                    })
+                    .on("mousemove", function(event) {
+                        const stage = document.querySelector("#heatmap-svg").parentElement.parentElement;
+                        const rect = stage.getBoundingClientRect();
+                        let left = event.clientX - rect.left + 14;
+                        let top = event.clientY - rect.top + 14;
+                        if (left + 360 > rect.width) left = event.clientX - rect.left - 360;
+                        if (top + 220 > rect.height) top = event.clientY - rect.top - 220;
+                        tooltip.style("left", left + "px").style("top", top + "px");
+                    })
+                    .on("mouseout", function() {
+                        tooltip.style("opacity", 0);
+                        state.hoveredScholar = null;
+                        applyHeatmapHighlight();
+                    })
+                    .on("click", function() {
+                        state.highlightedScholar = (state.highlightedScholar === s.key) ? null : s.key;
+                        applyAllHighlight();
+                    });
+            });
+        });
+
+        // 行标签
+        scholars.forEach((s, si) => {
+            g.append("text")
+                .attr("class", "heat-row-label")
+                .attr("data-scholar-label", s.key)
+                .attr("x", -14)
+                .attr("y", si * cellH + cellH / 2)
+                .attr("dy", "0.32em")
+                .attr("text-anchor", "end")
+                .text(s.name);
+        });
+
+        // 列标签（旋转）
+        hardships.forEach((h, hi) => {
+            g.append("text")
+                .attr("class", "heat-col-label")
+                .attr("x", hi * cellW + cellW / 2)
+                .attr("y", -10)
+                .attr("transform", `rotate(-50, ${hi * cellW + cellW / 2}, -10)`)
+                .attr("text-anchor", "end")
+                .text(`${h.chapter} · ${h.title}`);
+        });
+
+        applyHeatmapHighlight();
+    }
+
+    // 仅刷新热力图高亮（不重建）
+    function applyHeatmapHighlight() {
+        const active = activeScholar();
+        d3.selectAll(".heat-cell")
+            .classed("dim", function() {
+                return active && d3.select(this).attr("data-scholar") !== active;
+            })
+            .classed("active", function() {
+                return active && d3.select(this).attr("data-scholar") === active;
+            });
+        d3.selectAll(".heat-row-label")
+            .classed("dim", function() {
+                return active && d3.select(this).attr("data-scholar-label") !== active;
+            })
+            .classed("active", function() {
+                return active && d3.select(this).attr("data-scholar-label") === active;
+            });
+        d3.selectAll(".heat-row-band")
+            .attr("opacity", function() {
+                if (!active) return 0;
+                return d3.select(this).attr("data-scholar-band") === active ? 0.32 : 0;
+            });
+    }
+
+    /* ==========================================================
+       图表 2：情感波动曲线
+       ========================================================== */
+    function renderCurves(scholars, hardships, reactions) {
+        if (!scholars || !hardships || !reactions || scholars.length === 0 || hardships.length === 0 || reactions.length === 0) {
+            d3.select("#curves-svg").selectAll("*").remove();
+            d3.select("#curves-svg").append("text").text("暂无数据");
+            return;
+        }
+        const svg = d3.select("#curves-svg");
+        svg.selectAll("*").remove();
+
+        const idxMap = indexReactions(reactions);
+
+        const margin = { top: 30, right: 90, bottom: 60, left: 56 };
+        const wrap = document.querySelector("#curves-svg").parentElement.parentElement;
+        const rawW = Math.max(720, wrap ? wrap.clientWidth - 4 : 1000);
+        const width = rawW;
+        const height = 420;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear()
+            .domain([1, hardships.length])
+            .range([0, innerW]);
+
+        const y = d3.scaleLinear()
+            .domain([0, 10])
+            .range([innerH, 0]);
+
+        // X 轴
+        g.append("g")
+            .attr("class", "curves-axis")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).tickFormat(d => "·" + d).ticks(hardships.length))
+            .call(g => g.select(".domain").remove());
+
+        // Y 轴
+        g.append("g")
+            .attr("class", "curves-axis")
+            .call(d3.axisLeft(y).ticks(5))
+            .call(g => g.select(".domain").remove());
+
+        // 轴标签
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 42)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.8rem").style("fill", "var(--ink-soft)")
+            .text("难序号（1–20，对应章回）");
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerH / 2).attr("y", -42)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.8rem").style("fill", "var(--ink-soft)")
+            .text("反应强度 intensity（1–10）");
+
+        // 横向网格虚线
+        const yTicks = [2, 4, 6, 8, 10];
+        g.selectAll(".curves-grid")
+            .data(yTicks)
+            .enter()
+            .append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", d => y(d)).attr("y2", d => y(d))
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "2,4")
+            .attr("opacity", 0.6);
+
+        const tooltip = d3.select("#curves-tooltip");
+
+        // 8 条曲线，每条按段着色
+        scholars.forEach(s => {
+            const pts = hardships.map(h => {
+                const r = idxMap[s.name + "|" + h.chapter];
+                if (!r) return null;
+                return { x: x(h.idx), y: y(r.intensity), h: h, r: r, scholar: s };
+            }).filter(p => p);
+
+            // 段（每两个相邻点一段，颜色 = 起点的 sentiment）
+            for (let i = 0; i < pts.length - 1; i++) {
+                g.append("line")
+                    .attr("class", "curve-seg")
+                    .attr("data-scholar", s.key)
+                    .attr("x1", pts[i].x).attr("y1", pts[i].y)
+                    .attr("x2", pts[i + 1].x).attr("y2", pts[i + 1].y)
+                    .attr("stroke", sentimentColor(pts[i].r.sentiment));
+            }
+
+            // 点
+            pts.forEach(p => {
+                g.append("circle")
+                    .attr("class", "curve-dot")
+                    .attr("data-scholar", s.key)
+                    .attr("cx", p.x)
+                    .attr("cy", p.y)
+                    .attr("r", 3.4)
+                    .attr("fill", sentimentColor(p.r.sentiment))
+                    .on("mouseover", function(event) {
+                        d3.select(this).attr("r", 5.5);
+                        tooltip.style("opacity", 1);
+                        tooltip.html(
+                            `<div class="ct-name">${s.name} <span style="color:rgba(245,233,212,0.6);font-size:0.78rem;">· 第 ${p.r.chapter} 回 ${p.h.title}</span></div>` +
+                            `<div style="margin-top:4px;"><span class="ht-pill ${p.r.sentiment}">${sentimentLabel(p.r.sentiment)}</span>` +
+                            `<span style="color:rgba(245,233,212,0.7);font-size:0.78rem;font-family:'JetBrains Mono',monospace;"> 强度 ${p.r.intensity}/10</span></div>` +
+                            `<div style="color:var(--accent-soft);font-style:italic;margin-top:4px;overflow-wrap:anywhere;">「${p.r.quote}」</div>`
+                        );
+                        state.hoveredScholar = s.key;
+                        applyCurvesHighlight();
+                        applyHeatmapHighlight();
+                    })
+                    .on("mousemove", function(event) {
+                        const stage = document.querySelector("#curves-svg").parentElement.parentElement;
+                        const rect = stage.getBoundingClientRect();
+                        let left = event.clientX - rect.left + 14;
+                        let top = event.clientY - rect.top + 14;
+                        if (left + 320 > rect.width) left = event.clientX - rect.left - 320;
+                        if (top + 200 > rect.height) top = event.clientY - rect.top - 200;
+                        tooltip.style("left", left + "px").style("top", top + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this).attr("r", 3.4);
+                        tooltip.style("opacity", 0);
+                        state.hoveredScholar = null;
+                        applyCurvesHighlight();
+                        applyHeatmapHighlight();
+                    });
+            });
+
+            // 线尾标签
+            if (pts.length > 0) {
+                const last = pts[pts.length - 1];
+                g.append("text")
+                    .attr("class", "curve-end-label")
+                    .attr("data-scholar-label", s.key)
+                    .attr("x", last.x + 8)
+                    .attr("y", last.y)
+                    .attr("dy", "0.32em")
+                    .attr("fill", s.color)
+                    .text(s.name);
+            }
+        });
+
+        applyCurvesHighlight();
+    }
+
+    function applyCurvesHighlight() {
+        const active = activeScholar();
+        d3.selectAll(".curve-seg")
+            .classed("dim", function() {
+                return active && d3.select(this).attr("data-scholar") !== active;
+            });
+        d3.selectAll(".curve-dot")
+            .classed("dim", function() {
+                return active && d3.select(this).attr("data-scholar") !== active;
+            });
+        d3.selectAll(".curve-end-label")
+            .classed("dim", function() {
+                return active && d3.select(this).attr("data-scholar-label") !== active;
+            });
+    }
+
+    /* ==========================================================
+       图表 3：名人卡片
+       ========================================================== */
+    function renderScholarCards(scholars, hardships, reactions) {
+        if (!scholars || scholars.length === 0) {
+            d3.select("#scholar-grid").append("div").text("暂无数据");
+            return;
+        }
+        const grid = d3.select("#scholar-grid");
+        grid.selectAll("*").remove();
+
+        const idxMap = indexReactions(reactions);
+
+        scholars.forEach(s => {
+            const card = grid.append("div")
+                .attr("class", "scholar-card")
+                .attr("data-scholar-card", s.key)
+                .attr("role", "button")
+                .attr("tabindex", "0")
+                .attr("aria-label", `${s.name}：${s.school}，点击高亮该行`)
+                .style("border-top-color", s.color);
+
+            // 计数
+            const counts = { positive: 0, neutral: 0, negative: 0 };
+            let sum = 0, n = 0;
+            hardships.forEach(h => {
+                const r = idxMap[s.name + "|" + h.chapter];
+                if (r) {
+                    counts[r.sentiment]++;
+                    sum += r.intensity;
+                    n++;
+                }
+            });
+            const avg = n > 0 ? (sum / n).toFixed(2) : "—";
+
+            card.append("div").attr("class", "sc-hint").text("hover/click");
+            const head = card.append("div").attr("class", "sc-head");
+            head.append("div").attr("class", "sc-name").text(s.name);
+            head.append("div").attr("class", "sc-era").text(s.era);
+
+            card.append("div").attr("class", "sc-school").text(s.school);
+            card.append("div").attr("class", "sc-motto").text(`「${s.motto}」`);
+
+            const stats = card.append("div").attr("class", "sc-stats");
+            stats.append("div").attr("class", "sc-stat pos")
+                .html(`<span class="num">${counts.positive}</span><span class="lbl">正面</span>`);
+            stats.append("div").attr("class", "sc-stat neu")
+                .html(`<span class="num">${counts.neutral}</span><span class="lbl">中性</span>`);
+            stats.append("div").attr("class", "sc-stat neg")
+                .html(`<span class="num">${counts.negative}</span><span class="lbl">负面</span>`);
+
+            card.append("div").attr("class", "sc-avg").text(`avg intensity · ${avg}`);
+
+            // 交互：hover（瞬时）+ click（锁定）+ 键盘
+            card.on("mouseover", function() {
+                state.hoveredScholar = s.key;
+                applyAllHighlight();
+            })
+            .on("mouseout", function() {
+                state.hoveredScholar = null;
+                applyAllHighlight();
+            })
+            .on("click", function() {
+                state.highlightedScholar = (state.highlightedScholar === s.key) ? null : s.key;
+                applyAllHighlight();
+            })
+            .on("keydown", function(event) {
+                if (event.key === "Enter" || event.key === " " || event.key === "Spacebar") {
+                    event.preventDefault();
+                    state.highlightedScholar = (state.highlightedScholar === s.key) ? null : s.key;
+                    applyAllHighlight();
+                }
+            });
+        });
+
+        applyCardsHighlight();
+    }
+
+    function applyCardsHighlight() {
+        const active = activeScholar();
+        d3.selectAll(".scholar-card")
+            .classed("active", function() {
+                return active && d3.select(this).attr("data-scholar-card") === active;
+            });
+    }
+
+    function applyAllHighlight() {
+        applyHeatmapHighlight();
+        applyCurvesHighlight();
+        applyCardsHighlight();
+    }
+
+    /* ==========================================================
+       关键洞察
+       ========================================================== */
+    function renderInsights() {
+        const insights = [
+            `<strong>李卓吾与毛泽东</strong>共享对"造反"的兴奋——前者以<em>童心</em>之名赞大圣偷丹，后者以<em>革命</em>之名呼"今日欢呼孙大圣"。两人跨越四百年，在八卦炉一难给出全图最高强度反应（9–10）。`,
+            `<strong>胡适的"全中性"曲线</strong>是 8 人中最平的——他以"游戏之作"四字定调，几乎所有难都被压回 4–6 的中性区间。这正是 1923 年考证派祛魅后的<strong>情感扁平化</strong>，与鲁迅同期的负向偏移形成对照。`,
+            `<strong>三打白骨精（第 27 回）</strong>是分歧最大的一难：毛泽东给 +10（革命警惕），郭沫若给 −9（人妖颠倒之愤），鲁迅给 −7（唐僧糊涂），胡适给中性 5。同一文本，<em>四种心跳</em>。`,
+            `<strong>毛泽东 × 郭沫若的 1961 年对话</strong>在热图上清晰可见：第 27 回两人强度都极高但极性相反——郭沫若愤唐僧"千刀当剐"，毛泽东答"僧是愚氓犹可训"。两条曲线在此<strong>相交而不同向</strong>。`,
+            `<strong>金圣叹的拟作曲线</strong>是文学本位的样本——他从未评过西游，但依其"才子书"标准，全部 20 难都偏向正面/中性，强度集中在 5–9。他对<strong>第 27 回三打白骨精</strong>给出全图最高正面强度（9），视其为"文章之妙极矣"。`,
+            `<strong>钱钟书的低波动</strong>最像学者——20 难中 12 条中性、6 条正面、2 条负面，平均强度 5.3。他的"子不语之渊府"立场使其<em>拒绝情绪卷入</em>，与林语堂的闲适波动（平均 5.9）恰成两种"距离感"。`,
+            `<strong>收悟空（第 14 回）</strong>是负面集中点——李卓吾、鲁迅、毛泽东、林语堂、郭沫若五人皆给负面。心猿归正被五派同时读作<strong>自由被驯</strong>，这是 500 年批评史罕见的共识。`,
+            `<strong>取经圆满（第 100 回）</strong>的反应最分裂：郭沫若、胡适给正面，李卓吾给负面（童心之悲），毛泽东给中性（革命成功但妥协）。<em>结局不是终点，而是各派立场的最终试金石</em>。`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => ul.append("li").html(text));
+    }
+
+    /* ==========================================================
+       数据加载（fetch 失败则用嵌入数据）
+       ========================================================== */
+    const fetchStatus = { anyFetched: false };
+    async function fetchJson(path, fallbackKey) {
+        try {
+            const response = await fetch(path);
+            if (!response.ok) throw new Error('fetch failed: ' + path);
+            fetchStatus.anyFetched = true;
+            return await response.json();
+        } catch (e) {
+            console.warn('[INFO] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+            return EMBEDDED_DATA[fallbackKey];
+        }
+    }
+
+    async function loadData() {
+        const base = '../../scripts/output/data/';
+        const [scholars, hardships, reactions] = await Promise.all([
+            fetchJson(base + 'emotional_scholars.json', 'scholars'),
+            fetchJson(base + 'emotional_hardships.json', 'hardships'),
+            fetchJson(base + 'emotional_reactions.json', 'reactions')
+        ]);
+
+        if (fetchStatus.anyFetched) {
+            document.getElementById('dataSource').innerHTML =
+                '数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）。引文标注「史料」者为真实文献，「拟作」者为依思想脉络拟写。';
+        }
+
+        return { scholars, hardships, reactions };
+    }
+
+    /* ==========================================================
+       主流程
+       ========================================================== */
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        renderHeatmap(data.scholars, data.hardships, data.reactions);
+        renderCurves(data.scholars, data.hardships, data.reactions);
+        renderScholarCards(data.scholars, data.hardships, data.reactions);
+        renderInsights();
+    }
+
+    // 响应式重绘（防抖 250ms）
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderHeatmap(window.__lastData.scholars, window.__lastData.hardships, window.__lastData.reactions);
+                renderCurves(window.__lastData.scholars, window.__lastData.hardships, window.__lastData.reactions);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

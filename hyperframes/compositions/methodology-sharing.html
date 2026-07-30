@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>详解西游记 · 方法论分享</title>
+    <style>
+      @font-face {
+        font-family: 'Noto Serif SC';
+        src: local('Noto Serif SC'), local('Source Han Serif SC'), local('Songti SC'), local('SimSun'), local('STSong'), local('宋体');
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: local('JetBrains Mono'), local('Consolas'), local('Courier New');
+        font-display: swap;
+      }
+
+      :root {
+        --bg: #faf7f2;
+        --paper: #ffffff;
+        --ink: #2c2418;
+        --ink-soft: #6b5e4d;
+        --accent: #c8463a;
+        --accent-soft: #e9b885;
+        --accent-2: #3a6b8c;
+        --accent-3: #7a5230;
+        --accent-4: #5a7a3a;
+        --rebel: #8c2a2a;
+        --line: #d9cdb8;
+        --hero-1: #1a1410;
+        --hero-2: #3a2820;
+        --hero-3: #5a3828;
+        --hero-ink: #f5e9d4;
+        --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: "Noto Serif SC", serif;
+        background: #000;
+        color: var(--ink);
+      }
+
+      [data-composition-id="root"] {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ===== Scene 1: 封面 ===== */
+      #scene-1 {
+        background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 50%, var(--hero-3) 100%);
+        color: var(--hero-ink);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 120px 160px;
+        gap: 32px;
+      }
+      #scene-1::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+        pointer-events: none;
+      }
+      .cover-eyebrow {
+        font-size: 28px;
+        letter-spacing: 0.4em;
+        color: var(--accent-soft);
+        font-family: "JetBrains Mono", monospace;
+        opacity: 0.85;
+      }
+      .cover-title {
+        font-size: 180px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        line-height: 1.1;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+      }
+      .cover-rule {
+        width: 280px;
+        height: 4px;
+        background: var(--accent);
+        margin: 8px 0 16px;
+        position: relative;
+        z-index: 2;
+      }
+      .cover-subtitle {
+        font-size: 56px;
+        font-weight: 400;
+        letter-spacing: 0.2em;
+        color: var(--hero-ink);
+        opacity: 0.92;
+        position: relative;
+        z-index: 2;
+      }
+      .cover-meta {
+        margin-top: 48px;
+        font-size: 24px;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--accent-soft);
+        letter-spacing: 0.15em;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* ===== Scene 2: KPI 数据 ===== */
+      #scene-2 {
+        background: var(--bg);
+        padding: 100px 120px;
+        display: flex;
+        flex-direction: column;
+        gap: 56px;
+      }
+      .section-header {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .section-eyebrow {
+        font-size: 22px;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--accent);
+        letter-spacing: 0.3em;
+      }
+      .section-title {
+        font-size: 72px;
+        font-weight: 700;
+        color: var(--ink);
+        border-bottom: 4px solid var(--accent);
+        padding-bottom: 12px;
+        align-self: flex-start;
+      }
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 32px;
+        flex: 1;
+      }
+      .kpi-card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 36px 32px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .kpi-label {
+        font-size: 22px;
+        color: var(--ink-soft);
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.1em;
+      }
+      .kpi-value {
+        font-size: 96px;
+        font-weight: 700;
+        color: var(--accent);
+        line-height: 1;
+      }
+      .kpi-desc {
+        font-size: 20px;
+        color: var(--ink-soft);
+      }
+      .kpi-card.alt .kpi-value { color: var(--accent-2); }
+      .kpi-card.alt2 .kpi-value { color: var(--accent-3); }
+      .kpi-card.alt3 .kpi-value { color: var(--accent-4); }
+
+      /* ===== Scene 3: DRL 真循环 ===== */
+      #scene-3 {
+        background: var(--bg);
+        padding: 100px 120px;
+        display: flex;
+        flex-direction: column;
+        gap: 56px;
+      }
+      .loop-stage {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .loop-ring {
+        position: relative;
+        width: 760px;
+        height: 760px;
+      }
+      .loop-node {
+        position: absolute;
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        background: var(--paper);
+        border: 3px solid var(--line);
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        text-align: center;
+      }
+      .loop-node.active {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 6px rgba(200, 70, 58, 0.18), var(--shadow);
+      }
+      .loop-node-num {
+        font-size: 20px;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--accent);
+        letter-spacing: 0.2em;
+      }
+      .loop-node-text {
+        font-size: 36px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .loop-node-desc {
+        font-size: 18px;
+        color: var(--ink-soft);
+      }
+      #loop-1 { top: 0; left: 50%; transform: translateX(-50%); }
+      #loop-2 { right: 0; top: 50%; transform: translateY(-50%); }
+      #loop-3 { bottom: 0; left: 50%; transform: translateX(-50%); }
+      #loop-4 { left: 0; top: 50%; transform: translateY(-50%); }
+      .loop-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      .loop-center-label {
+        font-size: 22px;
+        color: var(--ink-soft);
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.2em;
+        margin-bottom: 8px;
+      }
+      .loop-center-title {
+        font-size: 56px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.1em;
+      }
+      .loop-caption {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 28px;
+        color: var(--ink-soft);
+        text-align: center;
+        letter-spacing: 0.08em;
+      }
+      .loop-caption strong { color: var(--accent); font-weight: 700; }
+
+      /* ===== Scene 4: 三 skill 闭环 ===== */
+      #scene-4 {
+        background: var(--bg);
+        padding: 100px 120px;
+        display: flex;
+        flex-direction: column;
+        gap: 56px;
+      }
+      .flow-stage {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 48px;
+      }
+      .flow-card {
+        width: 420px;
+        height: 480px;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        padding: 48px 36px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        position: relative;
+      }
+      .flow-card-num {
+        font-size: 24px;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--accent);
+        letter-spacing: 0.2em;
+      }
+      .flow-card-title {
+        font-size: 48px;
+        font-weight: 700;
+        color: var(--ink);
+        line-height: 1.2;
+      }
+      .flow-card-role {
+        font-size: 22px;
+        color: var(--accent);
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.1em;
+        padding: 6px 14px;
+        background: rgba(200, 70, 58, 0.08);
+        border-radius: 12px;
+        align-self: flex-start;
+      }
+      .flow-card-desc {
+        font-size: 22px;
+        color: var(--ink-soft);
+        line-height: 1.6;
+        flex: 1;
+      }
+      .flow-card-footer {
+        font-size: 18px;
+        color: var(--ink-soft);
+        font-family: "JetBrains Mono", monospace;
+        border-top: 1px dashed var(--line);
+        padding-top: 16px;
+      }
+      .flow-arrow {
+        font-size: 64px;
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .flow-card.c2 .flow-card-num,
+      .flow-card.c2 .flow-card-role { color: var(--accent-2); }
+      .flow-card.c2 .flow-card-role { background: rgba(58, 107, 140, 0.08); }
+      .flow-card.c3 .flow-card-num,
+      .flow-card.c3 .flow-card-role { color: var(--accent-4); }
+      .flow-card.c3 .flow-card-role { background: rgba(90, 122, 58, 0.08); }
+
+      /* ===== Scene 5: 结尾 ===== */
+      #scene-5 {
+        background: linear-gradient(135deg, var(--hero-1) 0%, var(--hero-2) 50%, var(--hero-3) 100%);
+        color: var(--hero-ink);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 120px 160px;
+        gap: 36px;
+      }
+      #scene-5::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 70%, rgba(232, 184, 133, 0.16), transparent 60%);
+        pointer-events: none;
+      }
+      .end-mark {
+        font-size: 32px;
+        letter-spacing: 0.4em;
+        color: var(--accent-soft);
+        font-family: "JetBrains Mono", monospace;
+        position: relative;
+        z-index: 2;
+      }
+      .end-title {
+        font-size: 140px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        position: relative;
+        z-index: 2;
+      }
+      .end-rule {
+        width: 200px;
+        height: 4px;
+        background: var(--accent);
+        position: relative;
+        z-index: 2;
+      }
+      .end-tagline {
+        font-size: 44px;
+        font-weight: 400;
+        letter-spacing: 0.18em;
+        opacity: 0.92;
+        position: relative;
+        z-index: 2;
+        text-align: center;
+      }
+      .end-meta {
+        margin-top: 32px;
+        display: flex;
+        gap: 48px;
+        font-size: 24px;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--accent-soft);
+        letter-spacing: 0.12em;
+        position: relative;
+        z-index: 2;
+      }
+      .end-meta span { padding: 8px 20px; border: 1px solid rgba(232, 184, 133, 0.3); border-radius: 20px; }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-jrfz" data-composition-id="root" data-width="1920" data-height="1080" data-start="0" data-duration="40" data-track-index="0">
+      <!-- Scene 1: 封面 (0-6s) -->
+      <div data-hf-id="hf-tj6f" id="scene-1" class="scene clip" data-start="0" data-duration="6.5">
+        <div data-hf-id="hf-gct5" class="cover-eyebrow">DIGITAL HUMANITIES · 2026</div>
+        <h1 data-hf-id="hf-id76" class="cover-title">详解西游记</h1>
+        <div data-hf-id="hf-qpbg" class="cover-rule"></div>
+        <div data-hf-id="hf-jfm2" class="cover-subtitle">数字人文 × 方法论分享</div>
+        <div data-hf-id="hf-x3iu" class="cover-meta">v2.2.27 · 100 回 · 17 维叙事学</div>
+      </div>
+
+      <!-- Scene 2: KPI 数据 (6.5-16s) -->
+      <div data-hf-id="hf-hhmk" id="scene-2" class="scene clip" data-start="6" data-duration="10">
+        <div data-hf-id="hf-k0k5" class="section-header">
+          <div data-hf-id="hf-txik" class="section-eyebrow">01 / PROJECT SCOPE</div>
+          <h2 data-hf-id="hf-2dh5" class="section-title">项目规模</h2>
+        </div>
+        <div data-hf-id="hf-lwr3" class="kpi-grid">
+          <div data-hf-id="hf-ckox" class="kpi-card">
+            <div data-hf-id="hf-9qxj" class="kpi-label">A1 逐回解读</div>
+            <div data-hf-id="hf-zs15" class="kpi-value">100</div>
+            <div data-hf-id="hf-vr1d" class="kpi-desc">回回细读 · 收束完成</div>
+          </div>
+          <div data-hf-id="hf-h928" class="kpi-card alt">
+            <div data-hf-id="hf-u5lf" class="kpi-label">A2 个人随笔</div>
+            <div data-hf-id="hf-6y97" class="kpi-value">43</div>
+            <div data-hf-id="hf-hovk" class="kpi-desc">美学 · 心理 · 媒介史</div>
+          </div>
+          <div data-hf-id="hf-t57m" class="kpi-card alt2">
+            <div data-hf-id="hf-ygb7" class="kpi-label">A3 人物深化</div>
+            <div data-hf-id="hf-t90h" class="kpi-value">56</div>
+            <div data-hf-id="hf-2zyz" class="kpi-desc">取经五众 · 神魔谱系</div>
+          </div>
+          <div data-hf-id="hf-x3bn" class="kpi-card alt3">
+            <div data-hf-id="hf-m2oq" class="kpi-label">A4 主题专题</div>
+            <div data-hf-id="hf-3056" class="kpi-value">79</div>
+            <div data-hf-id="hf-jl3a" class="kpi-desc">十七维叙事学框架</div>
+          </div>
+          <div data-hf-id="hf-b4p2" class="kpi-card alt2">
+            <div data-hf-id="hf-359n" class="kpi-label">A5 文化背景</div>
+            <div data-hf-id="hf-29fm" class="kpi-value">17</div>
+            <div data-hf-id="hf-i42y" class="kpi-desc">九层明代镜像结构</div>
+          </div>
+          <div data-hf-id="hf-gout" class="kpi-card">
+            <div data-hf-id="hf-p90d" class="kpi-label">A6 诗词歌赋</div>
+            <div data-hf-id="hf-l9bu" class="kpi-value">4</div>
+            <div data-hf-id="hf-gch2" class="kpi-desc">诗词四层次形成</div>
+          </div>
+          <div data-hf-id="hf-6gpk" class="kpi-card alt">
+            <div data-hf-id="hf-fvzy" class="kpi-label">D3.js 可视化</div>
+            <div data-hf-id="hf-4mbj" class="kpi-value">61</div>
+            <div data-hf-id="hf-kbdg" class="kpi-desc">页面 · 132 数据维度</div>
+          </div>
+          <div data-hf-id="hf-fwxf" class="kpi-card alt3">
+            <div data-hf-id="hf-kp94" class="kpi-label">S 方法论</div>
+            <div data-hf-id="hf-lnmv" class="kpi-value">7</div>
+            <div data-hf-id="hf-d7np" class="kpi-desc">内审 5 + 学术投稿 2</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 3: DRL 真循环 (16-26s) -->
+      <div data-hf-id="hf-e9t6" id="scene-3" class="scene clip" data-start="16" data-duration="10">
+        <div data-hf-id="hf-qx3d" class="section-header">
+          <div data-hf-id="hf-5hpg" class="section-eyebrow">02 / DEEP REVIEW LOOP</div>
+          <h2 data-hf-id="hf-i6vz" class="section-title">DRL 真循环</h2>
+        </div>
+        <div data-hf-id="hf-7xjv" class="loop-stage">
+          <div data-hf-id="hf-fhb1" class="loop-ring">
+            <div data-hf-id="hf-x5mh" id="loop-1" class="loop-node">
+              <div data-hf-id="hf-2sy9" class="loop-node-num">R1</div>
+              <div data-hf-id="hf-zxzb" class="loop-node-text">审查</div>
+              <div data-hf-id="hf-ypde" class="loop-node-desc">3 verifier + 对抗性</div>
+            </div>
+            <div data-hf-id="hf-3bca" id="loop-2" class="loop-node">
+              <div data-hf-id="hf-3zvc" class="loop-node-num">R2</div>
+              <div data-hf-id="hf-99so" class="loop-node-text">修复</div>
+              <div data-hf-id="hf-betp" class="loop-node-desc">基于 R1b 报告</div>
+            </div>
+            <div data-hf-id="hf-79gb" id="loop-3" class="loop-node">
+              <div data-hf-id="hf-3lkb" class="loop-node-num">R3</div>
+              <div data-hf-id="hf-bou6" class="loop-node-text">重新审查</div>
+              <div data-hf-id="hf-7ks2" class="loop-node-desc">独立审计 · 不可省</div>
+            </div>
+            <div data-hf-id="hf-ntxw" id="loop-4" class="loop-node">
+              <div data-hf-id="hf-1m16" class="loop-node-num">R4</div>
+              <div data-hf-id="hf-0cde" class="loop-node-text">收敛</div>
+              <div data-hf-id="hf-a0wh" class="loop-node-desc">连续 N 轮 = 0</div>
+            </div>
+            <div data-hf-id="hf-54yo" class="loop-center">
+              <div data-hf-id="hf-k8do" class="loop-center-label">TRUE CONVERGENCE</div>
+              <div data-hf-id="hf-4byp" class="loop-center-title">真收敛</div>
+            </div>
+          </div>
+          <div data-hf-id="hf-tu1g" class="loop-caption">问题数严格单调递减到 <strong data-hf-id="hf-f0b2">0</strong> · 下一轮重新审查仍未发现新问题</div>
+        </div>
+      </div>
+
+      <!-- Scene 4: 三 skill 闭环 (26-34s) -->
+      <div data-hf-id="hf-h1oe" id="scene-4" class="scene clip" data-start="26" data-duration="8.5">
+        <div data-hf-id="hf-s40g" class="section-header">
+          <div data-hf-id="hf-z6sb" class="section-eyebrow">03 / THREE-SKILL LOOP</div>
+          <h2 data-hf-id="hf-9g2z" class="section-title">三 skill 闭环</h2>
+        </div>
+        <div data-hf-id="hf-9o81" class="flow-stage">
+          <div data-hf-id="hf-zbq9" class="flow-card c1">
+            <div data-hf-id="hf-v4a8" class="flow-card-num">SKILL 01</div>
+            <div data-hf-id="hf-n0ly" class="flow-card-role">审查端 · 起点</div>
+            <div data-hf-id="hf-ngns" class="flow-card-title">deep-<br data-hf-id="hf-x5px">review-loop</div>
+            <div data-hf-id="hf-qg2e" class="flow-card-desc">深度审查循环 · 4 层过拟合防护 · R0-R3 完整流程 · 真收敛判据</div>
+            <div data-hf-id="hf-rrgf" class="flow-card-footer">v1.2.0 · 4 层防护</div>
+          </div>
+          <div data-hf-id="hf-gmsy" class="flow-arrow">→</div>
+          <div data-hf-id="hf-39ua" class="flow-card c2">
+            <div data-hf-id="hf-txd5" class="flow-card-num">SKILL 02</div>
+            <div data-hf-id="hf-fw9q" class="flow-card-role">收尾端 · 中段</div>
+            <div data-hf-id="hf-ug2c" class="flow-card-title">mem-<br data-hf-id="hf-rsrt">wrap-up</div>
+            <div data-hf-id="hf-0hwa" class="flow-card-desc">7 步收尾 · memory 三件套同步 · Step 7a spot-check · E1 铁律验证</div>
+            <div data-hf-id="hf-q80a" class="flow-card-footer">7 步 · W### 段补齐</div>
+          </div>
+          <div data-hf-id="hf-ialy" class="flow-arrow">→</div>
+          <div data-hf-id="hf-77yb" class="flow-card c3">
+            <div data-hf-id="hf-ubo6" class="flow-card-num">SKILL 03</div>
+            <div data-hf-id="hf-29n3" class="flow-card-role">沉淀端 · 末端</div>
+            <div data-hf-id="hf-1axw" class="flow-card-title">self-<br data-hf-id="hf-szow">evolution</div>
+            <div data-hf-id="hf-brfs" class="flow-card-desc">11 维度复盘 · 反向喂回 DRL · 知识升级 · 经验沉淀闭环</div>
+            <div data-hf-id="hf-imwm" class="flow-card-footer">11 维 · retro</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 5: 结尾 (34-40s) -->
+      <div data-hf-id="hf-7eif" id="scene-5" class="scene clip" data-start="34" data-duration="6">
+        <div data-hf-id="hf-rknp" class="end-mark">END · 详解西游记</div>
+        <h1 data-hf-id="hf-qmpv" class="end-title">方法论分享</h1>
+        <div data-hf-id="hf-ro1e" class="end-rule"></div>
+        <div data-hf-id="hf-qzy5" class="end-tagline">古典文本 × 数字人文 × 内审方法论</div>
+        <div data-hf-id="hf-xf0n" class="end-meta">
+          <span data-hf-id="hf-cuol">v2.2.27</span>
+          <span data-hf-id="hf-bsvf">199 W### ID</span>
+          <span data-hf-id="hf-36ef">2026-07-29</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // ===== Scene 1: 封面 (0-6.5s) =====
+      tl.from("#scene-1 .cover-eyebrow", { y: 30, opacity: 0, duration: 0.5, ease: "power3.out" }, 0)
+        .from("#scene-1 .cover-title", { y: 60, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2)
+        .from("#scene-1 .cover-rule", { scaleX: 0, transformOrigin: "left center", duration: 0.6, ease: "power2.out" }, 0.9)
+        .from("#scene-1 .cover-subtitle", { y: 30, opacity: 0, duration: 0.6, ease: "power3.out" }, 1.0)
+        .from("#scene-1 .cover-meta", { y: 20, opacity: 0, duration: 0.5, ease: "power3.out" }, 1.3)
+        .to("#scene-1", { opacity: 0, duration: 0.5, ease: "power2.in" }, 5.8);
+
+      // ===== Scene 2: KPI 数据 (6-16s) =====
+      tl.from("#scene-2 .section-eyebrow", { y: 20, opacity: 0, duration: 0.4, ease: "power3.out" }, 6.2)
+        .from("#scene-2 .section-title", { y: 30, opacity: 0, duration: 0.5, ease: "power3.out" }, 6.4)
+        .from("#scene-2 .kpi-card", { y: 50, opacity: 0, duration: 0.5, ease: "power3.out", stagger: 0.08 }, 6.8)
+        .to("#scene-2", { opacity: 0, duration: 0.5, ease: "power2.in" }, 15.4);
+
+      // ===== Scene 3: DRL 真循环 (16-26s) =====
+      tl.from("#scene-3 .section-eyebrow", { y: 20, opacity: 0, duration: 0.4, ease: "power3.out" }, 16.2)
+        .from("#scene-3 .section-title", { y: 30, opacity: 0, duration: 0.5, ease: "power3.out" }, 16.4)
+        .from("#scene-3 .loop-ring", { scale: 0.7, opacity: 0, duration: 0.7, ease: "power3.out" }, 16.8)
+        .from("#scene-3 .loop-node", { scale: 0.5, opacity: 0, duration: 0.5, ease: "back.out(1.6)", stagger: 0.12 }, 17.2)
+        .from("#scene-3 .loop-center", { scale: 0.6, opacity: 0, duration: 0.6, ease: "power3.out" }, 17.9)
+        .from("#scene-3 .loop-caption", { y: 20, opacity: 0, duration: 0.5, ease: "power3.out" }, 18.3);
+
+      // 循环高亮动画
+      tl.to("#loop-1", { borderColor: "#c8463a", boxShadow: "0 0 0 6px rgba(200, 70, 58, 0.18), 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06)", duration: 0.4 }, 18.8)
+        .to("#loop-1", { borderColor: "#d9cdb8", boxShadow: "0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06)", duration: 0.4 }, 20.0)
+        .to("#loop-2", { borderColor: "#c8463a", boxShadow: "0 0 0 6px rgba(200, 70, 58, 0.18), 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06)", duration: 0.4 }, 20.0)
+        .to("#loop-2", { borderColor: "#d9cdb8", boxShadow: "0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06)", duration: 0.4 }, 21.2)
+        .to("#loop-3", { borderColor: "#c8463a", boxShadow: "0 0 0 6px rgba(200, 70, 58, 0.18), 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06)", duration: 0.4 }, 21.2)
+        .to("#loop-3", { borderColor: "#d9cdb8", boxShadow: "0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06)", duration: 0.4 }, 22.4)
+        .to("#loop-4", { borderColor: "#c8463a", boxShadow: "0 0 0 6px rgba(200, 70, 58, 0.18), 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06)", duration: 0.4 }, 22.4)
+        .to("#scene-3", { opacity: 0, duration: 0.5, ease: "power2.in" }, 25.4);
+
+      // ===== Scene 4: 三 skill 闭环 (26-34.5s) =====
+      tl.from("#scene-4 .section-eyebrow", { y: 20, opacity: 0, duration: 0.4, ease: "power3.out" }, 26.2)
+        .from("#scene-4 .section-title", { y: 30, opacity: 0, duration: 0.5, ease: "power3.out" }, 26.4)
+        .from("#scene-4 .flow-card.c1", { x: -60, opacity: 0, duration: 0.6, ease: "power3.out" }, 26.8)
+        .from("#scene-4 .flow-arrow:nth-of-type(2)", { opacity: 0, scale: 0.5, duration: 0.4, ease: "power2.out" }, 27.4)
+        .from("#scene-4 .flow-card.c2", { y: 60, opacity: 0, duration: 0.6, ease: "power3.out" }, 27.6)
+        .from("#scene-4 .flow-arrow:nth-of-type(4)", { opacity: 0, scale: 0.5, duration: 0.4, ease: "power2.out" }, 28.2)
+        .from("#scene-4 .flow-card.c3", { x: 60, opacity: 0, duration: 0.6, ease: "power3.out" }, 28.4)
+        .to("#scene-4", { opacity: 0, duration: 0.5, ease: "power2.in" }, 33.8);
+
+      // ===== Scene 5: 结尾 (34-40s) =====
+      tl.from("#scene-5 .end-mark", { y: 20, opacity: 0, duration: 0.5, ease: "power3.out" }, 34.2)
+        .from("#scene-5 .end-title", { y: 60, opacity: 0, duration: 0.8, ease: "power3.out" }, 34.4)
+        .from("#scene-5 .end-rule", { scaleX: 0, transformOrigin: "left center", duration: 0.6, ease: "power2.out" }, 35.1)
+        .from("#scene-5 .end-tagline", { y: 30, opacity: 0, duration: 0.6, ease: "power3.out" }, 35.3)
+        .from("#scene-5 .end-meta span", { y: 20, opacity: 0, duration: 0.5, ease: "power3.out", stagger: 0.1 }, 35.8);
+
+      window.__timelines["root"] = tl;
+    </script>
+  </body>
+</html>

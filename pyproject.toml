@@ -1,0 +1,18 @@
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = ["E501"]  # 行长由 line-length 控制
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/audit/*" = ["F401"]  # 临时脚本允许未使用 import
+"tests/*" = ["F401", "F811"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+# 注：pytest 配置位于根目录 pytest.ini（优先级高于 pyproject.toml）

@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>妖怪受害者关系图谱 · W143 D</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+<style>
+:root {
+  --bg: #faf7f2;
+  --paper: #f5ede0;
+  --ink: #2c2418;
+  --accent: #c8463a;
+  --accent-2: #3a6b8c;
+  --accent-3: #8b7355;
+  --muted: #8a7a6a;
+  --border: #d4c4a8;
+  --card: #fffdf8;
+  /* 四受害者配色 */
+  --v-jin: #c8463a;        /* 金角银角 · 被借来的苦难 · 朱红 */
+  --v-sai: #8b7355;        /* 赛太岁 · 不想再被骑 · 麻褐 */
+  --v-gong: #3a6b8c;       /* 金圣宫娘娘 · 穿棕衣的人 · 青蓝 */
+  --v-tong: #5a4a6b;       /* 童男童女 · 眼泪盐晶 · 紫灰 */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Serif SC', 'Songti SC', serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  padding: 20px;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+
+/* Hero */
+header.hero {
+  background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+  color: #f5ede0;
+  padding: 48px 30px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  text-align: center;
+  border: 1px solid #2a1c14;
+}
+header.hero h1 {
+  font-size: 2.4em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #f5ede0;
+  letter-spacing: 4px;
+}
+header.hero .subtitle {
+  font-size: 1.05em;
+  color: #d4c4a8;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+header.hero .meta {
+  color: #b8a888;
+  font-size: 0.85em;
+  margin-top: 10px;
+}
+
+/* Section */
+.section {
+  background: var(--card);
+  margin: 30px 0;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.section-title {
+  font-size: 1.6em;
+  color: var(--accent-2);
+  margin-bottom: 8px;
+  font-weight: 600;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+.section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+.section-sub {
+  color: var(--muted);
+  font-size: 0.88em;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+.definition {
+  background: #f5efe4;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.94em;
+  border-radius: 2px;
+}
+
+/* KPI */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+.kpi-card {
+  background: #f5efe4;
+  padding: 14px;
+  border-radius: 4px;
+  text-align: center;
+}
+.kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
+.kpi-label { color: var(--muted); font-size: 0.84em; margin-top: 4px; }
+
+/* Victim cards grid (Section 1) */
+.victims-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+.victim-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.victim-card:hover, .victim-card:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  outline: none;
+}
+.victim-card .v-name {
+  font-size: 1.25em;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.victim-card .v-tag {
+  font-size: 0.84em;
+  color: var(--accent-3);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.victim-card .v-row {
+  font-size: 0.86em;
+  color: var(--ink);
+  margin-top: 4px;
+}
+.victim-card .v-row.muted { color: var(--muted); }
+.victim-card .v-wound {
+  font-size: 0.84em;
+  color: var(--accent);
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+}
+.swatch-bar {
+  height: 4px;
+  border-radius: 2px;
+  margin: 8px 0;
+  width: 60%;
+}
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.chart-caption { color: var(--muted); font-size: 0.84em; margin-bottom: 12px; }
+.chart-svg {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.84em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: rgba(44,36,24,0.95);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.84em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 280px;
+}
+
+/* Insight */
+.insight-list { list-style: none; }
+.insight-list li {
+  background: #f5efe4;
+  margin: 8px 0;
+  padding: 12px 15px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 2px;
+}
+.insight-list li strong { color: var(--accent); }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; }
+.node-circle:hover { stroke: var(--accent); stroke-width: 2px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .victims-grid { grid-template-columns: 1fr; }
+  header.hero { padding: 32px 18px; }
+  header.hero h1 { font-size: 1.8em; letter-spacing: 2px; }
+  .section { padding: 18px; }
+  .section-title { font-size: 1.3em; }
+}
+@media (max-width: 520px) {
+  .victims-grid { grid-template-columns: 1fr; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  body { padding: 10px; }
+  header.hero h1 { font-size: 1.5em; }
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.84em;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="hero">
+  <h1>妖怪受害者关系图谱</h1>
+  <div class="subtitle">MONSTER VICTIMS · TRAUMA NETWORK ATLAS</div>
+  <div class="meta">W143 · D 方向 · 妖怪受害者专题 · 基于《人物二》妖怪受害者文本（金角银角 / 赛太岁 / 金圣宫娘娘 / 陈家庄童男童女）</div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">受害者群体</div></div>
+  <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">创伤类型</div></div>
+  <div class="kpi-card"><div class="kpi-value">3</div><div class="kpi-label">回收型施害</div></div>
+  <div class="kpi-card"><div class="kpi-value">5</div><div class="kpi-label">创伤维度</div></div>
+  <div class="kpi-card"><div class="kpi-value">3</div><div class="kpi-label">沉默旁观者</div></div>
+  <div class="kpi-card"><div class="kpi-value">9</div><div class="kpi-label">叙事回目</div></div>
+</div>
+
+<!-- Section 1: 四受害者概览 -->
+<section class="section">
+  <h2 class="section-title">壹 · 妖怪受害者概览</h2>
+  <div class="section-sub">FOUR VICTIMS OVERVIEW</div>
+  <div class="definition">
+    <strong>定义：</strong>四类被西游叙事"借来"或"漏算"的受害者——童子下凡的金角银角（被借来的苦难）、咬断铁索的赛太岁（不想再被骑）、穿棕衣的金圣宫娘娘（性别受害者）、献祭盐晶的陈家庄童男童女（灵感大王祭品）。他们分属身份创伤、存在创伤、性别创伤与献祭创伤，构成妖怪叙事下的沉默受害光谱。
+  </div>
+  <div class="victims-grid" id="victims-grid"></div>
+</section>
+
+<!-- Section 2: 力导向图 -->
+<section class="section">
+  <h2 class="section-title alt">贰 · 受害者-施害者-旁观者关系力导向图</h2>
+  <div class="section-sub">VICTIM-PERPETRATOR-BYSTANDER FORCE-DIRECTED GRAPH</div>
+  <div class="definition">
+    <strong>定义：</strong>以四受害者为中心节点，向外辐射施害者、旁观者与救援者。边粗细代表关系强度，节点颜色代表类型。观音在多个案件中同时出现——既是金角银角的"借主"、赛太岁的"骑主"，也是童男童女灵感大王案的回收者——构成最复杂的"沉默枢纽"。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">受害者-施害者-旁观者-救援者力导向图</div>
+    <div class="chart-caption">中心=受害者 · 红边=施害 · 灰边=旁观 · 蓝边=救援 · 节点大小=度数 · hover 显示详情</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="560"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3: 桑基图 -->
+<section class="section">
+  <h2 class="section-title alt-2">叁 · 创伤类型-受害者-施害者-旁观者桑基图</h2>
+  <div class="section-sub">TRAUMA-TYPE → VICTIM → PERPETRATOR → BYSTANDER SANKEY</div>
+  <div class="definition">
+    <strong>定义：</strong>桑基图展示四层流向：创伤类型 → 受害者 → 施害者 → 旁观者。流量粗细对应事件权重。可视化揭示"被借来的苦难"与"沉默的犯罪"如何从创伤类型出发，经受害者身体流到施害者手中，最终落到旁观者的沉默里。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">创伤类型 → 受害者 → 施害者 → 旁观者四层桑基图</div>
+    <div class="chart-caption">左起：创伤类型 → 受害者 → 施害者 → 旁观者 · 流量=事件权重 · hover 高亮路径</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="520"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4: 雷达图 -->
+<section class="section">
+  <h2 class="section-title">肆 · 四受害者创伤维度雷达图</h2>
+  <div class="section-sub">FOUR VICTIMS · FIVE TRAUMA DIMENSIONS RADAR</div>
+  <div class="definition">
+    <strong>定义：</strong>五维度评估四受害者——身体（物理伤害强度）/心理（精神剥夺）/社会（关系断裂）/法律（问责与审判缺失）/叙事（被讲述的可见度）。雷达面积越大，受害者的创伤负载越重。童男童女身体创伤最高，金圣宫娘娘心理创伤最高。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">四受害者五维度雷达图（身体/心理/社会/法律/叙事）</div>
+    <div class="chart-caption">四受害者 × 5 维度 · 数值 0-10 · hover 查看详情</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="500"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5: 时间线 -->
+<section class="section">
+  <h2 class="section-title alt">伍 · 受害者命运时间线</h2>
+  <div class="section-sub">VICTIM FATE TIMELINE</div>
+  <div class="definition">
+    <strong>定义：</strong>按叙事时序排列四受害者的创伤节点与复原节点。从第32回平顶山画影图，到第71回金圣宫回国，再到第49回观音编竹篮——时间线呈现"被借→受害→回收→沉默"的完整弧线，以及偶发的"被救→自浇"的复原起点。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">四受害者命运时间线</div>
+    <div class="chart-caption">X 轴：回目时序 · Y 轴：四受害者分轨 · 颜色：阶段（创伤/复原）· hover 显示详情</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="440"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6: 关键洞察 -->
+<section class="section">
+  <h2 class="section-title alt-2">陆 · 关键洞察</h2>
+  <div class="section-sub">KEY INSIGHTS</div>
+  <ul class="insight-list">
+    <li><strong>被借来的苦难：</strong>金角银角不是偷跑、不是贬下界，是太上老君应观音"借了三次"托化妖魔的考官道具。考官不是妖怪，考官是道具——苦难被设计、被安排、被收回。这是西游"八十一难"伦理困境的最尖锐一例：你拼死爬出的坑，是别人事先挖好的。</li>
+    <li><strong>沉默的犯罪：</strong>赛太岁三年不碰金圣宫娘娘、不出门、不扩张、不吃人——他偷的不是紫金铃的威力，是"不被骑"的权利。但咬断铁索逃下凡本身是对观音的"对称报复"——抢走国王的王后，象征性地夺回自己被剥夺的"专属物"。最后被观音重新套上笼头时，他没有咬第二次。</li>
+    <li><strong>棕衣的反抗：</strong>紫阳真人的棕衣保护了金圣宫娘娘的贞洁，也剥夺了她"允许"的权利——三年里她不能摸自己的脸，不能在夜里抱自己的肩膀哭。倒刺掉了，触觉失忆还在；棕衣脱了，身体里长出的另一件棕衣没有神仙能收走。贞洁保护的最后不是团圆，是国王学会了隔着三丈远说话。</li>
+    <li><strong>眼泪的结晶：</strong>陈家庄每年献祭一对童男童女给灵感大王（观音莲花池的金鱼），九年十八个孩子，村里所有雄黄都泡过同一双手。被悟空解救后，灵感大王没有被审判，被观音竹篮悄悄收走——创造者回收造物，是西游里最"私了"的一笔。九年的眼泪结晶成盐，盐渍渗进庄子的地基，比妖怪留得更久。</li>
+    <li><strong>观音的"沉默枢纽"：</strong>观音在四个案件中三次出现——金角银角的"借主"、赛太岁的"骑主"、灵感大王的"造物主回收者"。她既是施害链的上游，又是救援链的终点。"私了"逻辑贯穿始终：犯罪者全部未被公开审判，全部被收编为更好位置。秩序维护的代价是被害者的故事被压进借条与驳回公文的边角。</li>
+    <li><strong>受害者与叙事的错位：</strong>金角银角化为水后无人在意、赛太岁被骑回莲花座下不再有三年、金圣宫娘娘回国后学不会被碰、童男童女被解救后盐晶仍在庄子地基里。受害者被"救出"的只是身体，叙事的回声留在物件上——葫芦口的丝线、铁链上的牙印、棕衣掉落的倒刺、雄黄坛底的盐晶。</li>
+  </ul>
+</section>
+
+<footer>
+  <p>W143 妖怪受害者关系图谱 · D 方向 · 基于《人物二》妖怪受害者文本</p>
+  <p>古典宣纸风配色 · D3.js v7 · F6 skeleton（fetchJson → loadData → main → render×N → cache → resize）</p>
+  <p id="dataSource">数据源：嵌入数据 EMBEDDED_DATA（file:// 模式可直接打开）</p>
+</footer>
+
+</div>
+
+<script>
+// ============================================================
+// EMBEDDED DATA —— 妖怪受害者数据
+// ============================================================
+const EMBEDDED_DATA = {
+  // Section 1: 四受害者卡片
+  victims: [
+    {
+      name: "金角银角", type: "身份创伤", chapter: "第32-35回",
+      perpetrator: "太上老君（借）", bystander: "观音", rescuer: "—",
+      fate: "被老君回收", color: "#c8463a", key: "jin",
+      tag: "被借来的苦难·童子下凡",
+      wound: "画影图形备战的考官道具，化为水后被老君收回魂魄",
+      desc: "观音向太上老君借三次，托化妖魔测试取经团队决心。借来的苦难，被借走的人。"
+    },
+    {
+      name: "赛太岁", type: "存在创伤", chapter: "第70-71回",
+      perpetrator: "观音（紫金铃）", bystander: "朱紫国王", rescuer: "悟空",
+      fate: "被观音重新套笼头", color: "#8b7355", key: "sai",
+      tag: "偷走紫金铃·不想再被骑·安静妖怪",
+      wound: "咬断铁索·三年不疼的脖子·腰上挂紫金铃当身份证",
+      desc: "金毛犼咬断观音莲花座下铁索，叼走紫金铃，抢娘娘，关自己三年不出门。偷的不是铃，是不被骑的权利。"
+    },
+    {
+      name: "金圣宫娘娘", type: "性别创伤", chapter: "第70-71回",
+      perpetrator: "赛太岁", bystander: "朱紫国王", rescuer: "紫阳真人",
+      fate: "穿棕衣回国", color: "#3a6b8c", key: "gong",
+      tag: "穿棕衣的人·性别受害者",
+      wound: "棕衣三年·触觉失忆·三丈距离的内化",
+      desc: "紫阳真人赠棕衣保护贞洁，也剥夺她允许的权利。三年里不能摸自己的脸。倒刺掉了，触觉神经还没醒。"
+    },
+    {
+      name: "陈家庄童男童女", type: "献祭创伤", chapter: "第47-49回",
+      perpetrator: "灵感大王", bystander: "观音", rescuer: "悟空",
+      fate: "被悟空解救", color: "#5a4a6b", key: "tong",
+      tag: "灵感大王祭品·眼泪盐晶",
+      wound: "九年代祭品·十八童命·村中雄黄同源",
+      desc: "通天河灵感大王（观音莲花池金鱼）每年索一对童男童女。九年代价结晶成盐，渗进庄子地基。"
+    }
+  ],
+  // Section 2: 力导向图节点与边
+  network: {
+    nodes: [
+      // 受害者（中心）
+      { id: "金角银角", type: "victim", sub: "身份创伤" },
+      { id: "赛太岁", type: "victim", sub: "存在创伤" },
+      { id: "金圣宫娘娘", type: "victim", sub: "性别创伤" },
+      { id: "童男童女", type: "victim", sub: "献祭创伤" },
+      // 施害者
+      { id: "太上老君", type: "perpetrator", sub: "借主" },
+      { id: "观音", type: "perpetrator", sub: "骑主/借主" },
+      { id: "灵感大王", type: "perpetrator", sub: "金鱼" },
+      // 旁观者
+      { id: "朱紫国王", type: "bystander", sub: "王夫" },
+      // 救援者
+      { id: "悟空", type: "rescuer", sub: "解救" },
+      { id: "紫阳真人", type: "rescuer", sub: "赠棕衣" },
+      // 章节节点
+      { id: "第32-35回", type: "chapter" },
+      { id: "第70-71回", type: "chapter" },
+      { id: "第47-49回", type: "chapter" }
+    ],
+    links: [
+      // 金角银角
+      { source: "金角银角", target: "太上老君", weight: 9, kind: "perpetrate" },
+      { source: "金角银角", target: "观音", weight: 8, kind: "bystander" },
+      { source: "金角银角", target: "第32-35回", weight: 6, kind: "chapter" },
+      // 赛太岁
+      { source: "赛太岁", target: "观音", weight: 10, kind: "perpetrate" },
+      { source: "赛太岁", target: "朱紫国王", weight: 6, kind: "bystander" },
+      { source: "赛太岁", target: "悟空", weight: 5, kind: "rescue" },
+      { source: "赛太岁", target: "第70-71回", weight: 6, kind: "chapter" },
+      // 金圣宫娘娘
+      { source: "金圣宫娘娘", target: "赛太岁", weight: 10, kind: "perpetrate" },
+      { source: "金圣宫娘娘", target: "朱紫国王", weight: 7, kind: "bystander" },
+      { source: "金圣宫娘娘", target: "紫阳真人", weight: 8, kind: "rescue" },
+      { source: "金圣宫娘娘", target: "第70-71回", weight: 6, kind: "chapter" },
+      // 童男童女
+      { source: "童男童女", target: "灵感大王", weight: 10, kind: "perpetrate" },
+      { source: "童男童女", target: "悟空", weight: 7, kind: "rescue" },
+      { source: "童男童女", target: "观音", weight: 6, kind: "bystander" },
+      { source: "童男童女", target: "第47-49回", weight: 6, kind: "chapter" }
+    ]
+  },
+  // Section 3: 桑基图（创伤类型 → 受害者 → 施害者 → 旁观者）
+  sankey: {
+    nodes: [
+      { name: "身份创伤", cat: 0 }, { name: "存在创伤", cat: 0 },
+      { name: "性别创伤", cat: 0 }, { name: "献祭创伤", cat: 0 },
+      { name: "金角银角", cat: 1 }, { name: "赛太岁", cat: 1 },
+      { name: "金圣宫娘娘", cat: 1 }, { name: "童男童女", cat: 1 },
+      { name: "太上老君", cat: 2 }, { name: "观音", cat: 2 },
+      { name: "赛太岁·施", cat: 2 }, { name: "灵感大王", cat: 2 },
+      { name: "观音·旁观", cat: 3 }, { name: "朱紫国王", cat: 3 },
+      { name: "朱紫国王·旁观", cat: 3 }, { name: "观音·回收", cat: 3 }
+    ],
+    links: [
+      // 创伤类型 → 受害者
+      { source: "身份创伤", target: "金角银角", value: 8 },
+      { source: "存在创伤", target: "赛太岁", value: 7 },
+      { source: "性别创伤", target: "金圣宫娘娘", value: 9 },
+      { source: "献祭创伤", target: "童男童女", value: 10 },
+      // 受害者 → 施害者
+      { source: "金角银角", target: "太上老君", value: 6 },
+      { source: "赛太岁", target: "观音", value: 7 },
+      { source: "金圣宫娘娘", target: "赛太岁·施", value: 8 },
+      { source: "童男童女", target: "灵感大王", value: 9 },
+      // 受害者 → 旁观者（直接或间接）
+      { source: "金角银角", target: "观音·旁观", value: 3 },
+      { source: "赛太岁", target: "朱紫国王·旁观", value: 4 },
+      { source: "金圣宫娘娘", target: "朱紫国王", value: 5 },
+      { source: "童男童女", target: "观音·回收", value: 4 },
+      // 施害者 → 旁观者
+      { source: "太上老君", target: "观音·旁观", value: 3 },
+      { source: "观音", target: "朱紫国王·旁观", value: 2 },
+      { source: "赛太岁·施", target: "朱紫国王", value: 4 },
+      { source: "灵感大王", target: "观音·回收", value: 4 }
+    ]
+  },
+  // Section 4: 雷达图（4 受害者 × 5 维度）
+  radar: [
+    { victim: "金角银角",       身体: 6, 心理: 9, 社会: 7, 法律: 3, 叙事: 8 },
+    { victim: "赛太岁",         身体: 4, 心理: 8, 社会: 5, 法律: 3, 叙事: 7 },
+    { victim: "金圣宫娘娘",     身体: 8, 心理: 10, 社会: 9, 法律: 6, 叙事: 9 },
+    { victim: "童男童女",       身体: 10, 心理: 8, 社会: 8, 法律: 4, 叙事: 6 }
+  ],
+  // Section 5: 时间线
+  timeline: [
+    { order: 1, chapter: 32, victim: "金角银角", stage: "trauma", event: "画影图形备战", desc: "派小妖持图巡山，叫名字——答应了就被装进葫芦。考官式备战，西游唯一。" },
+    { order: 2, chapter: 34, victim: "金角银角", stage: "trauma", event: "玄奘地窖念心经", desc: "玄奘被捆在莲花洞地窖，恐惧中念《心经》——心经从日课升级为应急。" },
+    { order: 3, chapter: 35, victim: "金角银角", stage: "recycle", event: "被老君回收", desc: "太上老君「借了三次」的供词。考官被收回，化为炼丹房旁两只银色飞蛾。" },
+    { order: 4, chapter: 47, victim: "陈家庄童男童女", stage: "trauma", event: "灵感大王索祭品", desc: "通天河灵感大王每年索一对童男童女，九年十八命，村中雄黄同源。" },
+    { order: 5, chapter: 48, victim: "陈家庄童男童女", stage: "rescue", event: "悟空化身替祭", desc: "悟空变童女，八戒变童男，替陈家庄祭典。冰上比武识破灵感大王。" },
+    { order: 6, chapter: 49, victim: "陈家庄童男童女", stage: "recycle", event: "观音竹篮收金鱼", desc: "观音编竹篮亲临通天河，金鱼被悄悄收走——创造者回收造物，无公开审判。" },
+    { order: 7, chapter: 70, victim: "赛太岁", stage: "trauma", event: "咬断铁索抢娘娘", desc: "金毛犼咬断观音莲花座下铁索，叼走紫金铃，抢金圣宫娘娘回麒麟山。" },
+    { order: 8, chapter: 70, victim: "金圣宫娘娘", stage: "trauma", event: "紫阳真人赠棕衣", desc: "棕衣长满倒刺，三年囚禁中任何触碰皆被刺伤。贞洁保住，触觉权被剥夺。" },
+    { order: 9, chapter: 70, victim: "金圣宫娘娘", stage: "trauma", event: "三年隔三丈问食", desc: "赛太岁每天隔三丈问娘娘想吃什么，自问自答去打獐子——被驯养者的反向投射。" },
+    { order: 10, chapter: 71, victim: "赛太岁", stage: "recycle", event: "被观音重新套笼头", desc: "观音来收，赛太岁安静跪下。不是顺从，是「那三年是唯一一次脖子不疼」。" },
+    { order: 11, chapter: 71, victim: "金圣宫娘娘", stage: "rescue", event: "棕衣倒刺落地", desc: "紫阳真人念咒收倒刺，但触觉失忆比贞洁更难修复。她学会了端蜂蜜水看麒麟山。" }
+  ]
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W143] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const victims = await fetchJson(base + 'monster-victims.json', 'victims');
+  return {
+    victims: Array.isArray(victims) ? victims : (victims.victims || EMBEDDED_DATA.victims),
+    network: EMBEDDED_DATA.network,
+    sankey: EMBEDDED_DATA.sankey,
+    radar: EMBEDDED_DATA.radar,
+    timeline: EMBEDDED_DATA.timeline
+  };
+}
+
+// ============================================================
+// Section 1: 受害者概览卡片
+// ============================================================
+function renderOverview(victims) {
+  const grid = d3.select('#victims-grid');
+  grid.html('');
+  if (!victims || victims.length === 0) {
+    grid.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+  const card = grid.selectAll('.victim-card')
+    .data(victims)
+    .enter()
+    .append('div')
+    .attr('class', 'victim-card')
+    .attr('role', 'button')
+    .attr('tabindex', '0')
+    .attr('aria-label', d => d.name + ' · ' + d.type)
+    .style('border-top', d => '4px solid ' + d.color);
+
+  card.append('div').attr('class', 'v-name').text(d => d.name);
+  card.append('div').attr('class', 'swatch-bar').style('background', d => d.color);
+  card.append('div').attr('class', 'v-tag').text(d => '「' + d.tag + '」');
+  card.append('div').attr('class', 'v-row muted').text(d => '回目：' + d.chapter);
+  card.append('div').attr('class', 'v-row').text(d => '创伤类型：' + d.type);
+  card.append('div').attr('class', 'v-row').text(d => '施害者：' + d.perpetrator);
+  card.append('div').attr('class', 'v-row muted').text(d => '旁观者：' + d.bystander);
+  card.append('div').attr('class', 'v-row muted').text(d => '结局：' + d.fate);
+  card.append('div').attr('class', 'v-wound').text(d => '伤痕：' + d.wound);
+
+  // 键盘 a11y
+  card.on('keydown', function(e, d) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showVictimTooltip(e, d);
+    }
+  });
+  card.on('click', function(e, d) { showVictimTooltip(e, d); });
+}
+
+function showVictimTooltip(event, d) {
+  let tip = d3.select('.tooltip');
+  if (tip.empty()) {
+    tip = d3.select('body').append('div').attr('class', 'tooltip');
+  }
+  tip.html('')
+    .style('opacity', 0.95)
+    .style('left', (event.pageX + 10) + 'px')
+    .style('top', (event.pageY - 28) + 'px');
+  // 用 .html() 仅插入可信 EMBEDDED_DATA 的 name，其余用 .text()
+  tip.append('div').html('<strong>' + d.name + '</strong>');
+  tip.append('div').text('标签：' + d.tag);
+  tip.append('div').text('回目：' + d.chapter);
+  tip.append('div').text('施害者：' + d.perpetrator);
+  tip.append('div').text('旁观者：' + d.bystander);
+  tip.append('div').text('救援者：' + d.rescuer);
+  tip.append('div').text('结局：' + d.fate);
+  tip.append('div').text(d.desc);
+  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3500);
+}
+
+// ============================================================
+// Section 2: 受害者-施害者-旁观者力导向图
+// ============================================================
+function renderForce(networkData) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 280).attr('fill', '#8a7a6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 560;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  // 受害者颜色映射
+  const victimColors = {};
+  EMBEDDED_DATA.victims.forEach(v => { victimColors[v.name] = v.color; });
+
+  // 类型颜色
+  const typeColors = {
+    victim: '#2c2418',
+    perpetrator: '#c8463a',
+    bystander: '#8a7a6a',
+    rescuer: '#3a6b8c',
+    chapter: '#d4c4a8'
+  };
+  // 关系边颜色
+  const kindColors = {
+    perpetrate: '#c8463a',
+    bystander: '#8a7a6a',
+    rescue: '#3a6b8c',
+    chapter: '#d4c4a8'
+  };
+
+  // 深拷贝避免 mutation + 初始随机抖动（防止 forceCollide 同位置除零 NaN）
+  const cx = width / 2, cy = height / 2;
+  const nodes = networkData.nodes.map((d, i) => ({
+    ...d,
+    x: cx + (Math.random() - 0.5) * 40,
+    y: cy + (Math.random() - 0.5) * 40
+  }));
+  const links = networkData.links.map(d => ({ ...d }));
+
+  // 节点半径
+  function nodeRadius(d) {
+    if (d.type === 'victim') return 18;
+    if (d.type === 'perpetrator') return 14;
+    if (d.type === 'chapter') return 8;
+    return 11;
+  }
+  function nodeFill(d) {
+    if (d.type === 'victim') return victimColors[d.id] || typeColors.victim;
+    return typeColors[d.type] || '#8b7355';
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(d => 80 + (10 - d.weight) * 4).strength(d => 0.08 + d.weight * 0.02))
+    .force('charge', d3.forceManyBody().strength(d => d.type === 'victim' ? -500 : -160))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 6));
+
+  // 边
+  const link = svg.append('g').selectAll('line')
+    .data(links)
+    .enter().append('line')
+    .attr('stroke', d => kindColors[d.kind] || '#d4c4a8')
+    .attr('stroke-width', d => Math.sqrt(d.weight) * 1.5)
+    .attr('stroke-opacity', 0.55);
+
+  // 节点
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', nodeFill)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      const typeLabel = { victim: '受害者', perpetrator: '施害者', bystander: '旁观者', rescuer: '救援者', chapter: '回目' }[d.type] || d.type;
+      tooltip.append('div').html('<strong>' + d.id + '</strong>');
+      tooltip.append('div').text('类型：' + typeLabel + (d.sub ? '（' + d.sub + '）' : ''));
+      const connected = links.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('关联边数：' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 拖拽
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  // 标签
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => d.type === 'victim' ? 4 : -14)
+    .attr('font-weight', d => d.type === 'victim' || d.type === 'perpetrator' ? 700 : 400)
+    .attr('font-size', d => d.type === 'victim' ? 13 : d.type === 'perpetrator' ? 11 : 10)
+    .attr('fill', d => d.type === 'victim' ? '#2c2418' : '#5a4a3a')
+    .text(d => d.id);
+
+  sim.on('tick', () => {
+    link.attr('x1', d => d.source.x || 0).attr('y1', d => d.source.y || 0)
+        .attr('x2', d => d.target.x || 0).attr('y2', d => d.target.y || 0);
+    node.attr('cx', d => d.x || 0).attr('cy', d => d.y || 0);
+    label.attr('x', d => d.x || 0).attr('y', d => d.y || 0);
+  });
+
+  // 图例
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const legendItems = [
+    { label: '受害者（中心）', color: '#2c2418' },
+    { label: '施害者', color: '#c8463a' },
+    { label: '旁观者', color: '#8a7a6a' },
+    { label: '救援者', color: '#3a6b8c' },
+    { label: '回目', color: '#d4c4a8' }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch').style('background', item.color);
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: 创伤类型-受害者-施害者-旁观者桑基图
+// ============================================================
+function renderSankey(sankeyData) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyData || !sankeyData.nodes || sankeyData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#8a7a6a').text('暂无数据');
+    return;
+  }
+
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#c8463a')
+      .text('d3-sankey 未加载，请检查网络');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 520;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+  // 颜色：按 cat 分层（0创伤类型/1受害者/2施害者/3旁观者）
+  const catColors = ['#8b7355', '#c8463a', '#3a6b8c', '#8a7a6a'];
+  const victimColors = {};
+  EMBEDDED_DATA.victims.forEach(v => { victimColors[v.name] = v.color; });
+
+  // 深拷贝
+  const nodes = sankeyData.nodes.map(d => ({ ...d }));
+  const links = sankeyData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(16)
+    .nodePadding(10)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 链接
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => {
+      if (d.source.cat === 1) return victimColors[d.source.name] || catColors[1];
+      return catColors[d.source.cat] || '#8b7355';
+    })
+    .attr('stroke-width', d => Math.max(1, d.width))
+    .attr('stroke-opacity', 0.4)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.7);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('流量权重：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.4);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => d.x1 - d.x0)
+    .attr('height', d => Math.max(1, d.y1 - d.y0))
+    .attr('fill', d => {
+      if (d.cat === 1) return victimColors[d.name] || catColors[1];
+      return catColors[d.cat] || '#8b7355';
+    })
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      const catLabel = ['创伤类型', '受害者', '施害者', '旁观者'][d.cat] || '';
+      tooltip.append('div').text('层级：' + catLabel);
+      tooltip.append('div').text('流入：' + (d.targetLinks || []).length + ' · 流出：' + (d.sourceLinks || []).length);
+      tooltip.append('div').text('总流量：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点标签
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '11px')
+    .attr('fill', '#2c2418')
+    .text(d => d.name);
+
+  // 图例
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const layers = ['创伤类型', '受害者', '施害者', '旁观者'];
+  layers.forEach((layer, i) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', catColors[i]);
+    item.append('span').text(layer);
+  });
+}
+
+// ============================================================
+// Section 4: 四受害者创伤维度雷达图
+// ============================================================
+function renderRadar(radarData) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!radarData || radarData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 200).attr('fill', '#8a7a6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 500;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const dimensions = ['身体', '心理', '社会', '法律', '叙事'];
+  const victimColors = {};
+  EMBEDDED_DATA.victims.forEach(v => { victimColors[v.name] = v.color; });
+
+  const cx = width / 2;
+  const cy = height / 2 + 10;
+  const radius = Math.min(width, height) / 2 - 80;
+  const levels = 5;
+
+  // 背景同心五边形
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d4c4a8')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // 轴线 + 标签
+  dimensions.forEach((dim, i) => {
+    const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d4c4a8')
+      .attr('stroke-width', 1);
+    const labelR = radius + 25;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', '#2c2418')
+      .text(dim);
+  });
+
+  // 数值刻度
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6)
+      .attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '10px')
+      .attr('fill', '#8a7a6a')
+      .text(lvl * 2);
+  }
+
+  // tooltip
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 每个受害者一个多边形
+  radarData.forEach(victim => {
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      const r = radius * (victim[dim] / 10);
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    const color = victimColors[victim.victim] || '#8b7355';
+
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.18)
+      .attr('stroke', color)
+      .attr('stroke-width', 2)
+      .style('cursor', 'pointer')
+      .on('mouseover', function(e) {
+        d3.select(this).attr('fill-opacity', 0.35);
+        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.html('');
+        tooltip.append('div').html('<strong>' + victim.victim + '</strong>');
+        dimensions.forEach(dim => {
+          tooltip.append('div').text(dim + '：' + victim[dim] + ' / 10');
+        });
+      })
+      .on('mousemove', function(e) {
+        tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('fill-opacity', 0.18);
+        tooltip.transition().duration(400).style('opacity', 0);
+      });
+
+    // 顶点圆
+    points.forEach((p) => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 3.5)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 1);
+    });
+  });
+
+  // 图例
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  radarData.forEach(victim => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', victimColors[victim.victim]);
+    item.append('span').text(victim.victim);
+  });
+}
+
+// ============================================================
+// Section 5: 受害者命运时间线
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 200).attr('fill', '#8a7a6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 440;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const victimNames = EMBEDDED_DATA.victims.map(v => v.name);
+  const victimColors = {};
+  EMBEDDED_DATA.victims.forEach(v => { victimColors[v.name] = v.color; });
+
+  const margin = { top: 30, right: 40, bottom: 70, left: 110 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  // X 轴：回目
+  const xMin = d3.min(timelineData, d => d.chapter) - 1;
+  const xMax = d3.max(timelineData, d => d.chapter) + 1;
+  const xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, innerW]);
+
+  // Y 轴：四受害者分轨
+  const yScale = d3.scaleBand()
+    .domain(victimNames)
+    .range([0, innerH])
+    .padding(0.3);
+
+  // 阶段颜色
+  const stageColors = {
+    trauma: '#c8463a',
+    rescue: '#3a6b8c',
+    recycle: '#8b7355'
+  };
+
+  // tooltip
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 背景行
+  victimNames.forEach(name => {
+    g.append('rect')
+      .attr('x', 0)
+      .attr('y', yScale(name))
+      .attr('width', innerW)
+      .attr('height', yScale.bandwidth())
+      .attr('fill', victimColors[name])
+      .attr('fill-opacity', 0.06);
+  });
+
+  // X 轴节点段（按回目聚类）
+  const timeNodes = [
+    { label: '金角银角案 (32-35回)', range: [32, 35] },
+    { label: '通天河案 (47-49回)', range: [47, 49] },
+    { label: '朱紫国案 (70-71回)', range: [70, 71] }
+  ];
+  timeNodes.forEach(node => {
+    const x1 = xScale(node.range[0] - 0.5);
+    const x2 = xScale(node.range[1] + 0.5);
+    g.append('rect')
+      .attr('x', x1)
+      .attr('y', innerH + 8)
+      .attr('width', x2 - x1)
+      .attr('height', 18)
+      .attr('fill', '#f5efe4')
+      .attr('stroke', '#d4c4a8')
+      .attr('stroke-width', 1)
+      .attr('rx', 3);
+    g.append('text')
+      .attr('x', (x1 + x2) / 2)
+      .attr('y', innerH + 22)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '11px')
+      .attr('font-weight', '600')
+      .attr('fill', '#2c2418')
+      .text(node.label);
+  });
+
+  // 连线（同一受害者的创伤串联）
+  victimNames.forEach(name => {
+    const vEvents = timelineData.filter(d => d.victim === name).sort((a, b) => a.chapter - b.chapter);
+    if (vEvents.length > 1) {
+      const line = d3.line()
+        .x(d => xScale(d.chapter))
+        .y(d => yScale(d.victim) + yScale.bandwidth() / 2)
+        .curve(d3.curveMonotoneX);
+      g.append('path')
+        .datum(vEvents)
+        .attr('fill', 'none')
+        .attr('stroke', victimColors[name])
+        .attr('stroke-width', 1.5)
+        .attr('stroke-opacity', 0.5)
+        .attr('stroke-dasharray', '4,3')
+        .attr('d', line);
+    }
+  });
+
+  // 事件节点
+  g.selectAll('.event-node')
+    .data(timelineData)
+    .enter()
+    .append('circle')
+    .attr('class', 'event-node')
+    .attr('cx', d => xScale(d.chapter))
+    .attr('cy', d => yScale(d.victim) + yScale.bandwidth() / 2)
+    .attr('r', 11)
+    .attr('fill', d => stageColors[d.stage] || '#8a7a6a')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('r', 14);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.victim + '</strong>');
+      tooltip.append('div').text('回目：第' + d.chapter + '回');
+      tooltip.append('div').text('阶段：' + ({ trauma: '创伤', rescue: '救援', recycle: '回收' }[d.stage] || d.stage));
+      tooltip.append('div').text('事件：' + d.event);
+      tooltip.append('div').text(d.desc);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('r', 11);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 事件序号
+  g.selectAll('.event-label')
+    .data(timelineData)
+    .enter()
+    .append('text')
+    .attr('class', 'event-label')
+    .attr('x', d => xScale(d.chapter))
+    .attr('y', d => yScale(d.victim) + yScale.bandwidth() / 2)
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
+    .attr('font-size', '10px')
+    .attr('font-weight', '700')
+    .attr('fill', '#fff')
+    .attr('pointer-events', 'none')
+    .text(d => d.order);
+
+  // Y 轴标签（受害者名）
+  victimNames.forEach(name => {
+    g.append('text')
+      .attr('x', -12)
+      .attr('y', yScale(name) + yScale.bandwidth() / 2)
+      .attr('text-anchor', 'end')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', victimColors[name])
+      .text(name);
+  });
+
+  // X 轴
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).tickFormat(d => '第' + d + '回'))
+    .selectAll('text').attr('font-size', '11px');
+
+  // 轴标题
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 50)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a6a')
+    .text('回目时序');
+
+  // 图例：阶段
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  const stages = [
+    { label: '创伤 (trauma)', color: stageColors.trauma },
+    { label: '救援 (rescue)', color: stageColors.rescue },
+    { label: '回收 (recycle)', color: stageColors.recycle }
+  ];
+  stages.forEach(s => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', s.color);
+    item.append('span').text(s.label);
+  });
+}
+
+// ============================================================
+// main：调度所有渲染函数
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      '数据源：实时加载自 <code>scripts/output/data/</code>（http server 模式）';
+  }
+
+  renderOverview(data.victims);
+  renderForce(data.network);
+  renderSankey(data.sankey);
+  renderRadar(data.radar);
+  renderTimeline(data.timeline);
+}
+
+// 响应式重绘（debounce 250ms）
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderOverview(data.victims);
+      renderForce(data.network);
+      renderSankey(data.sankey);
+      renderRadar(data.radar);
+      renderTimeline(data.timeline);
+    }
+  }, 250);
+});
+
+// 启动
+main();
+</script>
+</body>
+</html>

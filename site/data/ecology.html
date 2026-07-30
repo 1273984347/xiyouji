@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生态学 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --accent-5: #7a4a8c;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-5); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-5); }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        .section-title.alt-4 { border-bottom-color: var(--accent-5); }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+        }
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        .legend-swatch.circle {
+            border-radius: 50%;
+        }
+        h3.sub-h {
+            font-size: 1.05rem;
+            color: var(--ink);
+            margin: 18px 0 8px;
+            padding-left: 10px;
+            border-left: 3px solid var(--accent);
+        }
+        h3.sub-h.alt-2 { border-left-color: var(--accent-2); }
+        h3.sub-h.alt-3 { border-left-color: var(--accent-4); }
+        h3.sub-h.alt-4 { border-left-color: var(--accent-5); }
+        .table-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        table.data-table {
+            width: 100%;
+            min-width: 480px;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            margin-bottom: 12px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 9px 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+        }
+        table.data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        table.data-table .num {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            text-align: right;
+        }
+        .damage-pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-weight: 600;
+            color: #fff;
+        }
+        .damage-low { background: var(--accent-4); }
+        .damage-mid { background: var(--accent-3); }
+        .damage-high { background: var(--accent); }
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        /* 物种卡片 */
+        .species-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+            margin-bottom: 16px;
+        }
+        .species-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .species-card.d-low { border-top-color: var(--accent-4); }
+        .species-card.d-mid { border-top-color: var(--accent-3); }
+        .species-card.d-high { border-top-color: var(--accent); }
+        .species-card .sp-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .species-card .sp-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 3px;
+        }
+        .species-card .sp-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        /* 营养级卡片 */
+        .trophic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+            margin-bottom: 16px;
+        }
+        .trophic-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-left: 4px solid var(--accent-4);
+        }
+        .trophic-card.l1 { border-left-color: var(--accent-4); }
+        .trophic-card.l2 { border-left-color: var(--accent-2); }
+        .trophic-card.l3 { border-left-color: var(--accent-soft); }
+        .trophic-card.l4 { border-left-color: var(--accent-3); }
+        .trophic-card.l5 { border-left-color: var(--accent); }
+        .trophic-card.l6 { border-left-color: var(--accent-5); }
+        .trophic-card .tr-level {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            letter-spacing: 0.1em;
+            margin-bottom: 2px;
+        }
+        .trophic-card .tr-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .trophic-card .tr-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 3px;
+        }
+        .trophic-card .tr-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        /* 现代对应卡片 */
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+            margin-bottom: 16px;
+        }
+        .map-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .map-card.alt { border-left-color: var(--accent-4); }
+        .map-card.alt2 { border-left-color: var(--accent-3); }
+        .map-card.alt3 { border-left-color: var(--accent-5); }
+        .map-card .map-label {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .map-card.alt .map-label { color: var(--accent-4); }
+        .map-card.alt2 .map-label { color: var(--accent-3); }
+        .map-card.alt3 .map-label { color: var(--accent-5); }
+        .map-card .map-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .map-card .map-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        /* 对比表 */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+        .compare-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+        }
+        .compare-card.native { border-top: 3px solid var(--accent-4); }
+        .compare-card.invasive { border-top: 3px solid var(--accent); }
+        .compare-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        .compare-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .compare-card li {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            padding: 4px 0 4px 14px;
+            position: relative;
+        }
+        .compare-card li::before {
+            content: "·";
+            position: absolute;
+            left: 4px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        .compare-card .rate-row {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed var(--line);
+            font-size: 0.85rem;
+            color: var(--ink);
+        }
+        .compare-card .rate-row strong {
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .compare-card.native .rate-row strong { color: var(--accent-4); }
+        /* 三阶段对比 */
+        .stage-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+        .stage-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent-4);
+        }
+        .stage-card.during { border-top-color: var(--accent); }
+        .stage-card.after { border-top-color: var(--accent-2); }
+        .stage-card .stage-label {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+        .stage-card.during .stage-label { color: var(--accent); }
+        .stage-card.after .stage-label { color: var(--accent-2); }
+        .stage-card .stage-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .stage-card .stage-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .stage-card .stage-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        /* tooltip */
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 280px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 24px;
+        }
+        .footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 6px;
+        }
+        .footer a:hover { text-decoration: underline; }
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        .narrative {
+            font-size: 0.92rem;
+            line-height: 1.85;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .narrative strong { color: var(--ink); font-weight: 600; }
+        @media (max-width: 720px) {
+            .hero h1 { font-size: 1.6rem; }
+            .hero .subtitle { font-size: 0.78rem; letter-spacing: 0.15em; }
+            .section { padding: 18px; }
+            .kpi-card .value { font-size: 1.5rem; }
+            .compare-grid, .stage-grid { grid-template-columns: 1fr; }
+            table.data-table { font-size: 0.76rem; }
+            table.data-table th, table.data-table td { padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            .hero { padding: 36px 16px 28px; }
+            .hero h1 { font-size: 1.4rem; }
+            .container { padding: 0 12px; }
+            .section { padding: 14px; }
+            .chart-block { padding: 12px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>生态学 · 取经路上的物种入侵与生态演替</h1>
+        <div class="subtitle">DATA-DRIVEN ECOLOGY OF XIYOUJI</div>
+        <div class="tagline">从青牛精到金翅大鹏雕——一部天庭制度性物种入侵史。</div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../dashboard.html">仪表盘</a>
+            <span class="sep">/</span>
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <span class="current">生态学</span>
+        </nav>
+
+        <div class="notice">
+            本页基于 AE 类「生态学」脚本生成，包含 5 份 JSON 数据：入侵物种、资源脉冲、生态演替、食物网、整体统计。
+            <span class="data-badge">fetch + EMBEDDED fallback</span>
+            <span class="data-badge">D3.js v7</span>
+            <span class="data-badge">古典宣纸风</span>
+        </div>
+
+        <!-- KPI 卡片 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">INVASIVE SPECIES</div>
+                <div class="value">7 物种</div>
+                <div class="desc">全部 100% 被原主收回 · 无一被打死</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">TOTAL PREY</div>
+                <div class="value">76,018</div>
+                <div class="desc">总受害估计 · 大鹏雕 48,000 居首</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">POPULATION CRASH</div>
+                <div class="value">−97.2%</div>
+                <div class="desc">花果山猴群 47,000 → 1,300</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">TROPHIC LEVELS</div>
+                <div class="value">6 级</div>
+                <div class="desc">比自然系统多 2 级 · 含天庭/灵山</div>
+            </div>
+        </div>
+
+        <!-- Section 1: 入侵物种 -->
+        <section class="section">
+            <h2 class="section-title">天庭坐骑下凡作为物种入侵</h2>
+            <div class="section-sub">SECTION 1 · HEAVENLY MOUNTS AS INVASIVE SPECIES</div>
+            <div class="definition">
+                <strong>入侵物种（invasive species）：</strong>外来物种进入新生态系统后，因缺乏天敌、携带生态位优势（高级法宝），迅速成为顶级掠食者，破坏本地生态平衡。
+                <br><strong>核心案例：</strong>青牛精（太上老君坐骑）、九灵元圣（太乙救苦天尊坐骑）下凡后，在西牛贺洲无敌手，本地妖怪与人类皆成猎物。
+            </div>
+
+            <!-- 图表 1：水平条形图 -->
+            <div class="chart-block">
+                <div class="chart-title">图表 1 · 7 入侵物种破坏等级条形图</div>
+                <div class="chart-caption">按 damage_level 1-10 排序 · 颜色按破坏等级渐变（绿/黄/红）· 标注 owner 与入侵时长</div>
+                <svg id="chart-invasive-bar" class="chart-svg"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch damage-low"></span>低破坏（≤4）</span>
+                    <span class="legend-item"><span class="legend-swatch damage-mid"></span>中破坏（5-7）</span>
+                    <span class="legend-item"><span class="legend-swatch damage-high"></span>高破坏（8+）</span>
+                </div>
+            </div>
+
+            <!-- 图表 2：散点图 -->
+            <div class="chart-block">
+                <div class="chart-title">图表 2 · 入侵时长 × 受害人数 散点图</div>
+                <div class="chart-caption">X 轴：入侵时长（年）· Y 轴：受害估计人数 · 点大小 = damage_level</div>
+                <svg id="chart-invasive-scatter" class="chart-svg"></svg>
+            </div>
+
+            <!-- 7 物种卡片表格 -->
+            <h3 class="sub-h">7 入侵物种详表</h3>
+            <div class="table-wrap">
+                <table class="data-table" id="table-invasive">
+                    <thead>
+                        <tr>
+                            <th>物种</th><th>原栖息地</th><th>入侵地</th><th>章回</th>
+                            <th>原主</th><th class="num">时长(年)</th><th class="num">受害估计</th>
+                            <th class="num">破坏等级</th><th>清除方式</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- 本地 vs 入侵 对比 -->
+            <h3 class="sub-h alt-2">本地妖怪 vs 入侵物种 对比</h3>
+            <div class="compare-grid">
+                <div class="compare-card native">
+                    <h4>本地妖怪（Native）</h4>
+                    <ul id="list-native"></ul>
+                    <div class="rate-row">生存率：<strong id="rate-native"></strong></div>
+                </div>
+                <div class="compare-card invasive">
+                    <h4>入侵物种（Invasive）</h4>
+                    <ul id="list-invasive"></ul>
+                    <div class="rate-row">生存率：<strong id="rate-invasive"></strong></div>
+                </div>
+            </div>
+
+            <!-- 6 条入侵模式洞察 -->
+            <h3 class="sub-h alt-3">入侵模式洞察</h3>
+            <ol class="insights-list" id="list-invasive-insights"></ol>
+        </section>
+
+        <!-- Section 2: 资源脉冲 -->
+        <section class="section">
+            <h2 class="section-title alt-2">唐僧肉的资源脉冲效应</h2>
+            <div class="section-sub">SECTION 2 · TANG MONK FLESH AS RESOURCE PULSE</div>
+            <div class="definition">
+                <strong>资源脉冲（resource pulse）：</strong>稀缺高能量资源在特定时间地点大量出现，引发局部生态系统剧烈波动，类似自然界中鲑鱼洄游、橡子丰收引发的种群爆发。
+                <br><strong>核心案例：</strong>唐僧肉作为稀缺资源，每到一处就引发妖怪聚集、地盘争夺，局部生态剧烈波动。
+            </div>
+
+            <!-- 图表 1：分组条形图 -->
+            <div class="chart-block">
+                <div class="chart-title">图表 1 · 10 案例 monster_count vs pulse_intensity</div>
+                <div class="chart-caption">X 轴：10 地点 · 左 Y 轴：monster_count（蓝）· 右 Y 轴：pulse_intensity（红）</div>
+                <svg id="chart-pulse-bar" class="chart-svg"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2)"></span>妖怪数量（左轴）</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent)"></span>脉冲强度（右轴）</span>
+                </div>
+            </div>
+
+            <!-- 图表 2：散点图 -->
+            <div class="chart-block">
+                <div class="chart-title">图表 2 · 脉冲时长 × 脉冲强度 散点图</div>
+                <div class="chart-caption">X 轴：pulse_duration_days · Y 轴：pulse_intensity · 点大小 = monster_count</div>
+                <svg id="chart-pulse-scatter" class="chart-svg"></svg>
+            </div>
+
+            <!-- 脉冲分析 KPI -->
+            <h3 class="sub-h alt-2">脉冲分析</h3>
+            <div class="kpi-row" id="pulse-kpi"></div>
+
+            <!-- 10 案例表格 -->
+            <h3 class="sub-h alt-2">10 资源脉冲案例</h3>
+            <div class="table-wrap">
+                <table class="data-table" id="table-pulse">
+                    <thead>
+                        <tr>
+                            <th>地点</th><th>章回</th><th class="num">妖数</th><th>妖怪名</th>
+                            <th class="num">强度</th><th class="num">时长(天)</th><th>资源竞争</th><th>结局</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- 5 条生态洞察 -->
+            <h3 class="sub-h alt-3">生态洞察</h3>
+            <ol class="insights-list" id="list-pulse-insights"></ol>
+        </section>
+
+        <!-- Section 3: 生态演替 -->
+        <section class="section">
+            <h2 class="section-title alt-3">花果山 500 年生态演替</h2>
+            <div class="section-sub">SECTION 3 · FLOWER FRUIT MOUNTAIN 500-YEAR ECOLOGICAL SUCCESSION</div>
+            <div class="definition">
+                <strong>生态演替（ecological succession）：</strong>生态系统在干扰后，经历一系列阶段逐渐恢复的过程，类似森林火灾后的次生演替。
+                <br><strong>核心案例：</strong>悟空被压五行山 500 年，花果山从"猴群鼎盛"到"被猎户侵扰"再到"恢复"，是一部完整的次生演替史。
+            </div>
+
+            <!-- 图表 1：组合图 -->
+            <div class="chart-block">
+                <div class="chart-title">图表 1 · 猴群数量 + 生物多样性组合图</div>
+                <div class="chart-caption">柱：monkey_population（左 Y·log scale）· 折线：biodiversity_index（右 Y·0-10）· 标注五行山 500 年与 97.2% 减幅</div>
+                <svg id="chart-succession-combo" class="chart-svg"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4)"></span>猴群数量（log·左轴）</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent)"></span>生物多样性指数（右轴）</span>
+                </div>
+            </div>
+
+            <!-- 图表 2：植被覆盖率折线图 -->
+            <div class="chart-block">
+                <div class="chart-title">图表 2 · 植被覆盖率折线图</div>
+                <div class="chart-caption">6 阶段植被覆盖率（vegetation_cover %）</div>
+                <svg id="chart-vegetation" class="chart-svg"></svg>
+            </div>
+
+            <!-- 6 阶段时间线表格 -->
+            <h3 class="sub-h alt-3">6 阶段时间线</h3>
+            <div class="table-wrap">
+                <table class="data-table" id="table-succession">
+                    <thead>
+                        <tr>
+                            <th>阶段</th><th>名称</th><th>年份</th>
+                            <th class="num">猴群</th><th class="num">多样性</th>
+                            <th class="num">植被%</th><th class="num">人扰</th><th class="num">稳定</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- 现代对应 -->
+            <h3 class="sub-h alt-2">现代生态学对应</h3>
+            <div class="map-grid" id="modern-parallel"></div>
+
+            <!-- 6 条演替洞察 -->
+            <h3 class="sub-h alt-3">演替洞察</h3>
+            <ol class="insights-list" id="list-succession-insights"></ol>
+        </section>
+
+        <!-- Section 4: 食物网 -->
+        <section class="section">
+            <h2 class="section-title alt-4">西牛贺洲食物网</h2>
+            <div class="section-sub">SECTION 4 · WESTERN CONTINENT FOOD WEB WITH INVASIVE SPECIES</div>
+            <div class="definition">
+                <strong>食物网（food web）：</strong>生态系统中能量流动与捕食关系的网络，入侵物种会改变食物网结构。
+                <br><strong>核心案例：</strong>西牛贺洲食物网共 6 营养级，比自然生态系统多 2 级——多出的"取经团队"与"天庭/灵山"是制度性干预力量。
+            </div>
+
+            <!-- 桑基图 / 层级条形图 -->
+            <div class="chart-block">
+                <div class="chart-title">图表 · 6 营养级生物量层级图</div>
+                <div class="chart-caption">biomass_share 100 → 0.001 · 颜色：绿→蓝→黄→橙→红→紫 · 标注能量流动效率</div>
+                <svg id="chart-foodweb" class="chart-svg"></svg>
+                <div class="legend-row" id="legend-foodweb"></div>
+            </div>
+
+            <!-- 6 营养级卡片 -->
+            <h3 class="sub-h alt-4">6 营养级详表</h3>
+            <div class="trophic-grid" id="trophic-cards"></div>
+
+            <!-- 入侵影响三阶段对比 -->
+            <h3 class="sub-h alt-4">入侵影响三阶段对比</h3>
+            <div class="stage-grid" id="stage-compare"></div>
+
+            <!-- 6 条食物网洞察 -->
+            <h3 class="sub-h alt-3">食物网洞察</h3>
+            <ol class="insights-list" id="list-foodweb-insights"></ol>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div>
+            <a href="../dashboard.html">返回仪表盘</a>
+            <span class="sep">·</span>
+            <a href="../index.html">返回首页</a>
+        </div>
+        <div class="source-list">
+            数据来源：scripts/AE_生态学/ecology.py · 共生成 5 份 JSON 输出，本页 fetch 失败时自动回退到内嵌 EMBEDDED 数据，支持 file:// 协议双击打开。
+            <br>渲染机制：fetch + EMBEDDED fallback · 支持 file:// 双击打开 · D3.js v7 · 古典宣纸风 CSS 变量配色
+        </div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/04-文化与历史背景/明代隐喻.md">明代社会隐喻</a></div>
+    </footer>
+
+    <!-- ===== EMBEDDED FALLBACK DATA ===== -->
+    <!--
+        本页所有 JSON 数据均嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback。
+        在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据。
+        在 http(s):// 协议下打开时，优先 fetch ../../scripts/output/data/*.json。
+        数据源：scripts/AE_生态学/ecology.py 生成的 5 份 JSON。
+    -->
+    <script>
+    const EMBEDDED = {
+        invasive: {
+            "concept_name": "天庭坐骑下凡作为物种入侵",
+            "english_name": "Heavenly Mounts as Invasive Species",
+            "ecological_definition": "入侵物种（invasive species）：外来物种进入新生态系统后·因缺乏天敌、携带生态位优势（高级法宝）·迅速成为顶级掠食者·破坏本地生态平衡",
+            "core_case": "青牛精（太上老君坐骑）、九灵元圣（太乙救苦天尊坐骑）下凡后·在西牛贺洲无敌手·本地妖怪与人类皆成猎物",
+            "invasive_species_list": [
+                {"species": "青牛精", "original_habitat": "兜率宫·太上老君炼丹房", "invasion_location": "金兜山·金兜洞", "chapter": "第 50-52 回", "owner": "太上老君", "invasion_duration_years": 7, "ecological_niche": "顶级掠食者（法宝金刚琢无敌）", "invasion_advantage": "携带金刚琢·可收取一切兵器·本地物种无法抵抗", "prey_count_estimated": 10000, "local_predators": "无", "removal_method": "原主（太上老君）亲降收回", "ecological_damage": "严重·诸神兵器被套·本地秩序瘫痪", "damage_level": 9, "invasion_success": true},
+                {"species": "九灵元圣", "original_habitat": "东极妙岩宫·太乙救苦天尊坐骑", "invasion_location": "竹节山·九曲盘桓洞", "chapter": "第 89-90 回", "owner": "太乙救苦天尊", "invasion_duration_years": 3, "ecological_niche": "群居型顶级掠食者（认 6 个孙子妖怪）", "invasion_advantage": "九头狮子·一口可吞下万千生灵·建立家族式入侵网络", "prey_count_estimated": 8000, "local_predators": "无", "removal_method": "原主（太乙救苦天尊）亲降收回", "ecological_damage": "严重·建立跨代家族入侵网络", "damage_level": 8, "invasion_success": true},
+                {"species": "金翅大鹏雕", "original_habitat": "灵山·如来佛祖舅舅", "invasion_location": "狮驼岭·狮驼国", "chapter": "第 74-77 回", "owner": "如来佛祖", "invasion_duration_years": 9, "ecological_niche": "顶级掠食者（一日可吞 5 万只禽鸟）", "invasion_advantage": "背景深厚（如来舅舅）+ 阴阳二气瓶·可装万千生灵", "prey_count_estimated": 48000, "prey_count_note": "原著仅载'吃光一城百姓'未给出具体数字·48000 为估算值（参考狮驼岭小妖四万七八千规模）", "local_predators": "无", "removal_method": "原主（如来佛祖）亲降收回", "ecological_damage": "毁灭性·整个狮驼国被吃光·变成骷髅若岭", "damage_level": 10, "invasion_success": true},
+                {"species": "青毛狮子怪", "original_habitat": "文殊菩萨坐骑", "invasion_location": "乌鸡国 / 狮驼岭", "chapter": "第 36-39 回 + 第 74-77 回", "owner": "文殊菩萨", "invasion_duration_years": 5, "ecological_niche": "顶级掠食者 + 政治伪装（冒充国王 3 年）", "invasion_advantage": "变化伪装 + 文殊背景", "prey_count_estimated": 3000, "local_predators": "无", "removal_method": "原主（文殊菩萨）亲降收回", "ecological_damage": "中度·冒充国王扰乱朝政·吃宫女", "damage_level": 6, "invasion_success": true},
+                {"species": "黄牙老象", "original_habitat": "普贤菩萨坐骑", "invasion_location": "狮驼岭", "chapter": "第 74-77 回", "owner": "普贤菩萨", "invasion_duration_years": 6, "ecological_niche": "大型草食破坏者（虽食草但破坏力强）", "invasion_advantage": "体型巨大 + 长鼻卷杀 + 普贤背景", "prey_count_estimated": 2000, "local_predators": "无", "removal_method": "原主（普贤菩萨）亲降收回", "ecological_damage": "中度·践踏农田", "damage_level": 5, "invasion_success": true},
+                {"species": "金鱼精", "original_habitat": "南海普陀·观音莲花池金鱼", "invasion_location": "通天河", "chapter": "第 47-49 回", "owner": "观音菩萨", "invasion_duration_years": 9, "ecological_niche": "水生顶级掠食者（要吃童男童女）", "invasion_advantage": "九瓣铜锤 + 观音背景 + 水中优势", "prey_count_estimated": 18, "local_predators": "无", "removal_method": "原主（观音菩萨）用竹篮收回", "ecological_damage": "局部·每年吃 1 对童男童女", "damage_level": 4, "invasion_success": true},
+                {"species": "黄袍怪（奎木狼）", "original_habitat": "天庭二十八星宿·奎木狼", "invasion_location": "碗子山·波月洞", "chapter": "第 28-31 回", "owner": "天庭星宿", "invasion_duration_years": 13, "ecological_niche": "顶级掠食者 + 婚姻伪装（与百花羞公主）", "invasion_advantage": "天庭编制 + 内丹 + 变化", "prey_count_estimated": 5000, "local_predators": "无", "removal_method": "原主（玉帝）贬去兜率宫烧火", "ecological_damage": "中度·吃人 + 强占公主", "damage_level": 6, "invasion_success": true}
+            ],
+            "invasion_pattern_insights": [
+                "7 大入侵物种全部来自天庭/灵山·无一例外",
+                "入侵成功率 100%·本地物种无力抵抗",
+                "清除方式高度统一：原主亲降收回·从不 extermination（灭绝式清除）",
+                "生态破坏程度与入侵时长正相关·大鹏雕 9 年破坏最严重",
+                "天庭坐骑下凡本质是'制度性物种入侵'·非偶发事件",
+                "外来物种的'生态位优势'（法宝）是入侵成功的关键"
+            ],
+            "native_vs_invasive_comparison": {
+                "native_species_characteristics": [
+                    "无背景·单干型（白骨精/蜘蛛精）",
+                    "无高级法宝·依靠自身法术",
+                    "容易被本地天敌（悟空）捕食",
+                    "清除方式：被悟空打死·不留活口"
+                ],
+                "invasive_species_characteristics": [
+                    "有背景·编制型（天庭/灵山坐骑）",
+                    "携带高级法宝（金刚琢/阴阳二气瓶/九瓣铜锤）",
+                    "本地无天敌·诸神也难敌",
+                    "清除方式：原主收回·'押送回原单位'"
+                ],
+                "survival_rate_native": "约 30%（草根妖怪被消灭率 70%）",
+                "survival_rate_invasive": "100%（全部被原主接走·无一被打死）"
+            }
+        },
+        pulse: {
+            "concept_name": "唐僧肉的资源脉冲效应",
+            "english_name": "Tang Monk Flesh as Resource Pulse",
+            "ecological_definition": "资源脉冲（resource pulse）：稀缺高能量资源在特定时间地点大量出现·引发局部生态系统剧烈波动·类似自然界中鲑鱼洄游、橡子丰收引发的种群爆发",
+            "core_case": "唐僧肉作为稀缺资源·每到一处就引发妖怪聚集、地盘争夺·局部生态剧烈波动",
+            "pulse_cases": [
+                {"location": "白虎岭", "chapter": "第 27 回", "monster_count": 1, "monster_names": ["白骨精"], "pulse_intensity": 7, "ecological_response": "白骨精独自行动·三变取经人", "resource_competition": "无（独占）", "outcome": "白骨精被消灭", "pulse_duration_days": 1},
+                {"location": "平顶山·莲花洞", "chapter": "第 32-35 回", "monster_count": 2, "monster_names": ["金角大王", "银角大王"], "pulse_intensity": 8, "ecological_response": "兄弟合伙·依赖法宝（紫金葫芦）", "resource_competition": "无（兄弟共享）", "outcome": "太上老君收回", "pulse_duration_days": 4},
+                {"location": "号山·火云洞", "chapter": "第 40-42 回", "monster_count": 1, "monster_names": ["红孩儿"], "pulse_intensity": 9, "ecological_response": "三昧真火 + 诈骗（变小孩）", "resource_competition": "无（独占）", "outcome": "观音收为善财童子", "pulse_duration_days": 3},
+                {"location": "通天河·灵感大王", "chapter": "第 47-49 回", "monster_count": 1, "monster_names": ["金鱼精"], "pulse_intensity": 6, "ecological_response": "水生拦截·每年一对童男童女", "resource_competition": "无（独占）", "outcome": "观音竹篮收回", "pulse_duration_days": 2},
+                {"location": "金兜山·金兜洞", "chapter": "第 50-52 回", "monster_count": 1, "monster_names": ["青牛精"], "pulse_intensity": 10, "ecological_response": "金刚琢收取诸神兵器·独占", "resource_competition": "无（独占）", "outcome": "太上老君收回", "pulse_duration_days": 6},
+                {"location": "狮驼岭·狮驼国", "chapter": "第 74-77 回", "monster_count": 3, "monster_names": ["青毛狮子怪", "黄牙老象", "金翅大鹏雕"], "pulse_intensity": 10, "ecological_response": "三大魔王结盟·骷髅若岭", "resource_competition": "三人争夺·大鹏雕最积极", "outcome": "三大菩萨/如来亲降收回", "pulse_duration_days": 12},
+                {"location": "盘丝洞·黄花观", "chapter": "第 72-73 回", "monster_count": 7, "monster_names": ["七个蜘蛛精", "百眼魔君（蜈蚣精）"], "pulse_intensity": 7, "ecological_response": "蜘蛛精姐妹 + 蜈蚣精表兄", "resource_competition": "姐妹共享 + 表兄争夺", "outcome": "蜈蚣精被收·蜘蛛精被打死", "pulse_duration_days": 3},
+                {"location": "无底洞·陷空山", "chapter": "第 80-83 回", "monster_count": 1, "monster_names": ["老鼠精"], "pulse_intensity": 8, "ecological_response": "地府无底洞 + 强娶唐僧", "resource_competition": "无（独占）", "outcome": "李天王收回（义女）", "pulse_duration_days": 5},
+                {"location": "青龙山·玄英洞", "chapter": "第 91-92 回", "monster_count": 3, "monster_names": ["辟寒大王", "辟暑大王", "辟尘大王"], "pulse_intensity": 8, "ecological_response": "三犀牛合伙 + 偷香油", "resource_competition": "三人共享", "outcome": "四木禽星收服", "pulse_duration_days": 4},
+                {"location": "天竺国·毛颖山", "chapter": "第 93-95 回", "monster_count": 1, "monster_names": ["玉兔精"], "pulse_intensity": 5, "ecological_response": "伪装公主 + 想招唐僧为夫", "resource_competition": "无（独占）", "outcome": "太阴星君收回", "pulse_duration_days": 2}
+            ],
+            "pulse_analysis": {
+                "total_pulse_events": 10,
+                "avg_monsters_per_pulse": 2.1,
+                "max_monsters_pulse": 7,
+                "avg_pulse_intensity": 7.8,
+                "avg_pulse_duration_days": 4.2,
+                "most_intense_pulse": "狮驼岭（10/10·3 大魔王 + 12 天）",
+                "longest_pulse": "狮驼岭（12 天）",
+                "highest_competition": "狮驼岭（3 大魔王争夺）"
+            },
+            "ecological_insights": [
+                "唐僧肉是稀缺脉冲资源·每到一处引发妖怪聚集",
+                "妖怪数量与脉冲强度正相关·狮驼岭 3 妖+12 天 = 最高强度",
+                "草根妖怪独自行动（白骨精/红孩儿）·背景妖怪倾向结盟（狮驼岭三妖）",
+                "资源竞争激烈时·背景妖怪胜出（大鹏雕主导狮驼岭）",
+                "唐僧肉的'稀缺性'是脉冲效应的根本原因·若唐僧肉'量产'则失去价值"
+            ]
+        },
+        succession: {
+            "concept_name": "花果山 500 年生态演替",
+            "english_name": "Flower Fruit Mountain 500-Year Ecological Succession",
+            "ecological_definition": "生态演替（ecological succession）：生态系统在干扰后·经历一系列阶段逐渐恢复的过程·类似森林火灾后的次生演替",
+            "core_case": "悟空被压五行山 500 年·花果山从'猴群鼎盛'到'被猎户侵扰'再到'恢复'·是一部完整的次生演替史",
+            "succession_stages": [
+                {"stage": 1, "name": "鼎盛期·齐天大圣时代", "year_range": "大闹天宫前 1000+ 年", "monkey_population": 47000, "biodiversity_index": 9.5, "vegetation_cover": 95, "key_species": ["猕猴", "金丝猴", "猿猴", "马猴"], "ecological_description": "花果山福地·水帘洞洞天·猴群繁盛·无天敌·生物多样性极高", "keystone_species": "孙悟空（齐天大圣）", "human_interference": 0, "stability": 10},
+                {"stage": 2, "name": "干扰期·大闹天宫", "year_range": "大闹天宫当年", "monkey_population": 47000, "biodiversity_index": 9.5, "vegetation_cover": 90, "key_species": ["猕猴", "金丝猴", "猿猴", "马猴"], "ecological_description": "悟空反抗天庭·花果山被天兵天将焚烧·'七大圣'联盟瓦解·第一次重大干扰", "keystone_species": "孙悟空（被捕）", "human_interference": 10, "stability": 5, "disturbance_event": "天兵火攻·烧毁大半花果山"},
+                {"stage": 3, "name": "崩溃期·五行山 500 年·猎户屠杀", "year_range": "五行山 500 年间", "monkey_population": 1300, "biodiversity_index": 4.0, "vegetation_cover": 60, "key_species": ["残存猕猴"], "ecological_description": "悟空被压五行山·群龙无首·猎户常来侵扰·'放火烧山+网捕箭射'·猴群从 47000 锐减到 1300·减幅 97%", "keystone_species": "无（keystone 丢失）", "human_interference": 10, "stability": 2, "disturbance_event": "猎户持续屠杀·火烧山+箭射+网捕", "population_decline_percent": 97.2},
+                {"stage": 4, "name": "残存期·悟空回归·清理猎户", "year_range": "五行山解脱后第 1 年", "monkey_population": 1300, "biodiversity_index": 4.5, "vegetation_cover": 65, "key_species": ["残存猕猴"], "ecological_description": "悟空回花果山·'千余猴'迎接·清理猎户 1000+ 人·重建水帘洞·恢复秩序", "keystone_species": "孙悟空（回归）", "human_interference": 0, "stability": 5},
+                {"stage": 5, "name": "恢复期·取经途中·悟空偶回", "year_range": "取经 14 年", "monkey_population": 2000, "biodiversity_index": 6.0, "vegetation_cover": 75, "key_species": ["猕猴", "金丝猴（恢复中）"], "ecological_description": "悟空偶尔回花果山·猴群恢复中·但悟空不在时仍有骚扰·未能完全恢复", "keystone_species": "孙悟空（偶尔回归）", "human_interference": 2, "stability": 7},
+                {"stage": 6, "name": "成佛期·斗战胜佛归来", "year_range": "取经成功后", "monkey_population": 8000, "biodiversity_index": 8.0, "vegetation_cover": 90, "key_species": ["猕猴", "金丝猴", "猿猴（恢复中）"], "ecological_description": "悟空成斗战胜佛·偶回花果山·猴群恢复到鼎盛期 1/6·生态系统稳定", "keystone_species": "孙悟空（斗战胜佛）", "human_interference": 0, "stability": 9}
+            ],
+            "succession_insights": [
+                "花果山经历完整次生演替：鼎盛→干扰→崩溃→残存→恢复→成佛",
+                "keystone species（孙悟空）丢失是崩溃的根本原因·非猎户本身",
+                "500 年间猴群从 47000 锐减到 1300·减幅 97.2%·生态崩溃",
+                "猎户屠杀本质是 keystone 丢失后的连锁反应·非独立干扰",
+                "恢复缓慢：从 1300 到 8000 用了 14+ 年·仍未恢复到鼎盛",
+                "成佛后猴群恢复到 8000·仅鼎盛期 17%·生态恢复是漫长的"
+            ],
+            "modern_parallel": {
+                "yellowstone_wolves": "黄石公园狼群 reintroduction：keystone 丢失导致生态崩溃·reintroduction 后恢复",
+                "forest_fire_succession": "森林火灾后的次生演替：先锋物种→中间物种→顶级群落",
+                "island_ecology": "岛屿生态学：花果山类似孤岛·keystone 丢失影响更大",
+                "wukong_as_keystone": "悟空是花果山的 keystone species·等同黄石公园的狼"
+            }
+        },
+        foodweb: {
+            "concept_name": "西牛贺洲食物链与物种入侵图",
+            "english_name": "Western Continent Food Web with Invasive Species",
+            "ecological_definition": "食物网（food web）：生态系统中能量流动与捕食关系的网络·入侵物种会改变食物网结构",
+            "trophic_levels": [
+                {"level": 1, "name": "初级生产者", "members": ["植物", "农作物", "野生果实"], "energy_source": "太阳能", "biomass_share": 100},
+                {"level": 2, "name": "初级消费者", "members": ["凡人", "家畜", "小动物"], "energy_source": "植物", "biomass_share": 10},
+                {"level": 3, "name": "次级消费者·本地妖怪", "members": ["白骨精", "蜘蛛精", "黄风怪", "车迟国三仙"], "energy_source": "凡人 + 动物", "biomass_share": 1, "characteristics": "无背景·单干·容易被清除"},
+                {"level": 4, "name": "顶级掠食者·入侵妖怪", "members": ["青牛精", "金翅大鹏雕", "九灵元圣", "青毛狮子怪"], "energy_source": "凡人 + 动物 + 本地妖怪", "biomass_share": 0.1, "characteristics": "天庭/灵山坐骑下凡·无天敌·必须原主收回"},
+                {"level": 5, "name": "超顶级控制者·取经团队", "members": ["孙悟空", "唐僧（受观音/如来保护）"], "energy_source": "不参与能量流动（外部干预）", "biomass_share": 0.01, "characteristics": "外部干预力量·清除入侵物种"},
+                {"level": 6, "name": "终极调节者·天庭/灵山", "members": ["如来佛祖", "观音菩萨", "太上老君", "玉帝"], "energy_source": "不参与（制度性调节）", "biomass_share": 0.001, "characteristics": "源头控制·收回坐骑·制度性'入侵'"}
+            ],
+            "energy_flow": [
+                {"from": "初级生产者", "to": "初级消费者", "efficiency": 10},
+                {"from": "初级消费者", "to": "本地妖怪", "efficiency": 10},
+                {"from": "本地妖怪", "to": "入侵妖怪", "efficiency": 5},
+                {"from": "入侵妖怪", "to": "取经团队", "efficiency": 1},
+                {"from": "取经团队", "to": "天庭/灵山", "efficiency": 0.1}
+            ],
+            "invasive_impact": {
+                "before_invasion": {"top_predator": "本地妖怪（白骨精等）", "ecosystem_balance": "稳定·本地妖怪与凡人维持平衡", "removal_mechanism": "悟空直接打死"},
+                "during_invasion": {"top_predator": "入侵妖怪（青牛精等）", "ecosystem_balance": "失衡·入侵妖怪无天敌·凡人大量被吃", "removal_mechanism": "原主收回·非消灭"},
+                "after_invasion": {"top_predator": "取经团队通过后·无妖怪", "ecosystem_balance": "凡人恢复·但本地妖怪也被清除", "removal_mechanism": "取经团队'清场'·生态单一化"}
+            },
+            "food_web_insights": [
+                "西牛贺洲食物网有 6 个营养级·比自然生态系统多 2 级",
+                "入侵物种占据第 4 级·本地无天敌·打破能量流动",
+                "取经团队是外部干预力量·不参与能量流动",
+                "天庭/灵山是终极调节者·既制造入侵又收回入侵",
+                "取经团队通过后·生态单一化（凡人独大·妖怪被清场）",
+                "本质是'制度性物种入侵'：天庭/灵山制造问题又解决问题"
+            ]
+        },
+        summary: {
+            "invasive_species_count": 7,
+            "invasion_success_rate": "100%（7/7 全部被原主收回）",
+            "avg_invasion_duration_years": 7.4,
+            "total_prey_estimated": 76018,
+            "max_damage_species": "金翅大鹏雕",
+            "resource_pulse_events": 10,
+            "avg_pulse_intensity": 7.8,
+            "avg_pulse_duration_days": 4.2,
+            "succession_stages": 6,
+            "peak_population": 47000,
+            "lowest_population": 1300,
+            "population_decline_percent": 97.2,
+            "trophic_levels": 6
+        }
+    };
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('[fallback] ' + path + ' → embedded data:', e.message);
+            return fallback;
+        }
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== Damage level color helper =====
+    function damageColor(level) {
+        if (level >= 8) return '#c8463a'; // accent (red)
+        if (level >= 5) return '#7a5230';  // accent-3 (orange-brown)
+        return '#5a7a3a';                  // accent-4 (green)
+    }
+    function damageClass(level) {
+        if (level >= 8) return 'damage-high';
+        if (level >= 5) return 'damage-mid';
+        return 'damage-low';
+    }
+    function trophicColor(level) {
+        const colors = ['#5a7a3a', '#3a6b8c', '#e9b885', '#7a5230', '#c8463a', '#7a4a8c'];
+        return colors[level - 1];
+    }
+
+    // ===== Main render =====
+    async function main() {
+        const baseUrl = '../../scripts/output/data/';
+        const [invasive, pulse, succession, foodweb, summary] = await Promise.all([
+            loadJson(baseUrl + 'invasive_species.json', EMBEDDED.invasive),
+            loadJson(baseUrl + 'resource_pulse.json', EMBEDDED.pulse),
+            loadJson(baseUrl + 'ecological_succession.json', EMBEDDED.succession),
+            loadJson(baseUrl + 'food_web.json', EMBEDDED.foodweb),
+            loadJson(baseUrl + 'ecology_summary.json', EMBEDDED.summary)
+        ]);
+        window.__lastData = { invasive, pulse, succession, foodweb, summary };
+
+        // Section 1
+        renderInvasiveBar(invasive);
+        renderInvasiveScatter(invasive);
+        renderInvasiveTable(invasive);
+        renderCompare(invasive);
+        renderInsights('list-invasive-insights', invasive.invasion_pattern_insights);
+
+        // Section 2
+        renderPulseBar(pulse);
+        renderPulseScatter(pulse);
+        renderPulseKpi(pulse);
+        renderPulseTable(pulse);
+        renderInsights('list-pulse-insights', pulse.ecological_insights);
+
+        // Section 3
+        renderSuccessionCombo(succession);
+        renderVegetation(succession);
+        renderSuccessionTable(succession);
+        renderModernParallel(succession);
+        renderInsights('list-succession-insights', succession.succession_insights);
+
+        // Section 4
+        renderFoodWeb(foodweb);
+        renderTrophicCards(foodweb);
+        renderStageCompare(foodweb);
+        renderInsights('list-foodweb-insights', foodweb.food_web_insights);
+    }
+
+    // ===== Section 1.1: 入侵物种水平条形图 =====
+    function renderInvasiveBar(data) {
+        const svg = d3.select('#chart-invasive-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 600), H = 420;
+        const m = {top: 30, right: 220, bottom: 50, left: 110};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const sorted = data.invasive_species_list.slice().sort((a, b) => a.damage_level - b.damage_level);
+
+        const y = d3.scaleBand().domain(sorted.map(d => d.species)).range([0, h]).padding(0.25);
+        const x = d3.scaleLinear().domain([0, 10]).range([0, w]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(x.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', d => x(d)).attr('x2', d => x(d))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).tickSize(0).tickPadding(8));
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(5));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 38)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--ink)')
+            .text('破坏等级 damage_level（1-10）');
+
+        // bars
+        g.selectAll('rect.bar')
+            .data(sorted)
+            .enter().append('rect')
+            .attr('class', 'bar')
+            .attr('x', 0)
+            .attr('y', d => y(d.species))
+            .attr('width', d => x(d.damage_level))
+            .attr('height', y.bandwidth())
+            .attr('fill', d => damageColor(d.damage_level))
+            .attr('rx', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                tooltip.show(
+                    `<strong style="color:#e9b885">${d.species}</strong><br>` +
+                    `原主：${d.owner}<br>` +
+                    `入侵时长：${d.invasion_duration_years} 年<br>` +
+                    `受害估计：${d.prey_count_estimated.toLocaleString()}<br>` +
+                    `破坏等级：${d.damage_level}/10<br>` +
+                    `章节：${d.chapter}`,
+                    event
+                );
+            })
+            .on('mousemove', function(event) {
+                tooltip.style('left', (event.pageX + 12) + 'px')
+                       .style('top', (event.pageY - 18) + 'px');
+            })
+            .on('mouseout', () => tooltip.hide());
+
+        // value + owner labels
+        g.selectAll('text.value')
+            .data(sorted)
+            .enter().append('text')
+            .attr('class', 'value')
+            .attr('x', d => x(d.damage_level) + 6)
+            .attr('y', d => y(d.species) + y.bandwidth() / 2 + 4)
+            .attr('font-size', '11px')
+            .attr('font-family', '"JetBrains Mono", monospace')
+            .attr('fill', 'var(--ink)')
+            .text(d => d.damage_level + '/10');
+
+        // owner + duration annotations (right side)
+        g.selectAll('text.owner')
+            .data(sorted)
+            .enter().append('text')
+            .attr('class', 'owner')
+            .attr('x', w + 12)
+            .attr('y', d => y(d.species) + y.bandwidth() / 2 - 2)
+            .attr('font-size', '11px')
+            .attr('fill', 'var(--ink-soft)')
+            .text(d => d.owner);
+        g.selectAll('text.dur')
+            .data(sorted)
+            .enter().append('text')
+            .attr('class', 'dur')
+            .attr('x', w + 12)
+            .attr('y', d => y(d.species) + y.bandwidth() / 2 + 12)
+            .attr('font-size', '10px')
+            .attr('font-family', '"JetBrains Mono", monospace')
+            .attr('fill', 'var(--accent-3)')
+            .text(d => `${d.invasion_duration_years} 年 · ${d.prey_count_estimated.toLocaleString()} 受害`);
+    }
+
+    // ===== Section 1.2: 入侵时长 × 受害人数 散点图 =====
+    function renderInvasiveScatter(data) {
+        const svg = d3.select('#chart-invasive-scatter');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 600), H = 380;
+        const m = {top: 30, right: 30, bottom: 60, left: 70};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const items = data.invasive_species_list;
+
+        const x = d3.scaleLinear().domain([0, 15]).range([0, w]);
+        const y = d3.scaleLog().domain([10, 100000]).range([h, 0]);
+        const r = d3.scaleLinear().domain([4, 10]).range([10, 32]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data([100, 1000, 10000, 50000])
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(7));
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(4, d3.format(',d')));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--accent-3)')
+            .text('入侵时长 invasion_duration_years');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', -52)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--accent)')
+            .text('受害估计 prey_count（log scale）');
+
+        // dots
+        g.selectAll('circle.dot')
+            .data(items)
+            .enter().append('circle')
+            .attr('class', 'dot')
+            .attr('cx', d => x(d.invasion_duration_years))
+            .attr('cy', d => y(d.prey_count_estimated))
+            .attr('r', d => r(d.damage_level))
+            .attr('fill', d => damageColor(d.damage_level))
+            .attr('fill-opacity', 0.7)
+            .attr('stroke', d => damageColor(d.damage_level))
+            .attr('stroke-width', 1.5)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                d3.select(this).attr('fill-opacity', 0.9).attr('stroke-width', 2.5);
+                tooltip.show(
+                    `<strong style="color:#e9b885">${d.species}</strong><br>` +
+                    `时长：${d.invasion_duration_years} 年<br>` +
+                    `受害：${d.prey_count_estimated.toLocaleString()}<br>` +
+                    `破坏等级：${d.damage_level}/10<br>` +
+                    `原主：${d.owner}`,
+                    event
+                );
+            })
+            .on('mousemove', function(event) {
+                tooltip.style('left', (event.pageX + 12) + 'px')
+                       .style('top', (event.pageY - 18) + 'px');
+            })
+            .on('mouseout', function() {
+                d3.select(this).attr('fill-opacity', 0.7).attr('stroke-width', 1.5);
+                tooltip.hide();
+            });
+
+        // labels next to dots
+        g.selectAll('text.label')
+            .data(items)
+            .enter().append('text')
+            .attr('class', 'label')
+            .attr('x', d => x(d.invasion_duration_years) + r(d.damage_level) + 4)
+            .attr('y', d => y(d.prey_count_estimated) + 4)
+            .attr('font-size', '11px')
+            .attr('fill', 'var(--ink)')
+            .text(d => d.species);
+    }
+
+    // ===== Section 1.3: 7 物种详表 =====
+    function renderInvasiveTable(data) {
+        const tbody = d3.select('#table-invasive tbody');
+        const rows = tbody.selectAll('tr').data(data.invasive_species_list).enter().append('tr');
+        rows.append('td').text(d => d.species);
+        rows.append('td').text(d => d.original_habitat);
+        rows.append('td').text(d => d.invasion_location);
+        rows.append('td').text(d => d.chapter);
+        rows.append('td').text(d => d.owner);
+        rows.append('td').attr('class', 'num').text(d => d.invasion_duration_years);
+        rows.append('td').attr('class', 'num').text(d => d.prey_count_estimated.toLocaleString());
+        rows.append('td').attr('class', 'num').html(d => `<span class="damage-pill ${damageClass(d.damage_level)}">${d.damage_level}/10</span>`);
+        rows.append('td').text(d => d.removal_method);
+    }
+
+    // ===== Section 1.4: 本地 vs 入侵 对比 =====
+    function renderCompare(data) {
+        const cmp = data.native_vs_invasive_comparison;
+        const nativeList = d3.select('#list-native');
+        cmp.native_species_characteristics.forEach(t => {
+            nativeList.append('li').text(t);
+        });
+        const invasiveList = d3.select('#list-invasive');
+        cmp.invasive_species_characteristics.forEach(t => {
+            invasiveList.append('li').text(t);
+        });
+        d3.select('#rate-native').text(cmp.survival_rate_native);
+        d3.select('#rate-invasive').text(cmp.survival_rate_invasive);
+    }
+
+    // ===== Section 2.1: 资源脉冲分组条形图（双 Y 轴） =====
+    function renderPulseBar(data) {
+        const svg = d3.select('#chart-pulse-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 600), H = 420;
+        const m = {top: 30, right: 60, bottom: 90, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const items = data.pulse_cases;
+        const labels = items.map(d => d.location);
+
+        const x = d3.scaleBand().domain(labels).range([0, w]).padding(0.3);
+        const yL = d3.scaleLinear().domain([0, 8]).range([h, 0]);
+        const yR = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(yL.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => yL(d)).attr('y2', d => yL(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(6))
+            .selectAll('text')
+            .style('font-size', '10px')
+            .attr('transform', 'rotate(-30)')
+            .style('text-anchor', 'end');
+        g.append('g').attr('class', 'axis').call(d3.axisLeft(yL).ticks(5));
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(${w},0)`)
+            .call(d3.axisRight(yR).ticks(5));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', -44)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--accent-2)')
+            .text('妖怪数量 monster_count（左轴）');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', w + 50)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--accent)')
+            .text('脉冲强度 pulse_intensity（右轴）');
+
+        // bars: monster_count (left axis, blue)
+        g.selectAll('rect.bar-monster')
+            .data(items)
+            .enter().append('rect')
+            .attr('class', 'bar-monster')
+            .attr('x', d => x(d.location))
+            .attr('y', d => yL(d.monster_count))
+            .attr('width', x.bandwidth())
+            .attr('height', d => h - yL(d.monster_count))
+            .attr('fill', 'var(--accent-2)')
+            .attr('fill-opacity', 0.75)
+            .attr('rx', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                tooltip.show(
+                    `<strong style="color:#e9b885">${d.location}</strong><br>` +
+                    `章回：${d.chapter}<br>` +
+                    `妖怪数量：${d.monster_count}<br>` +
+                    `妖怪：${d.monster_names.join('、')}<br>` +
+                    `脉冲强度：${d.pulse_intensity}/10<br>` +
+                    `时长：${d.pulse_duration_days} 天<br>` +
+                    `竞争：${d.resource_competition}<br>` +
+                    `结局：${d.outcome}`,
+                    event
+                );
+            })
+            .on('mousemove', function(event) {
+                tooltip.style('left', (event.pageX + 12) + 'px')
+                       .style('top', (event.pageY - 18) + 'px');
+            })
+            .on('mouseout', () => tooltip.hide());
+
+        // line: pulse_intensity (right axis, red)
+        const line = d3.line().x(d => x(d.location) + x.bandwidth() / 2).y(d => yR(d.pulse_intensity)).curve(d3.curveMonotoneX);
+        g.append('path').datum(items)
+            .attr('fill', 'none')
+            .attr('stroke', 'var(--accent)')
+            .attr('stroke-width', 2.5)
+            .attr('d', line);
+        g.selectAll('circle.intensity')
+            .data(items)
+            .enter().append('circle')
+            .attr('class', 'intensity')
+            .attr('cx', d => x(d.location) + x.bandwidth() / 2)
+            .attr('cy', d => yR(d.pulse_intensity))
+            .attr('r', 5)
+            .attr('fill', 'var(--accent)')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 1.5)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                tooltip.show(
+                    `<strong style="color:#e9b885">${d.location}</strong><br>` +
+                    `脉冲强度：${d.pulse_intensity}/10<br>` +
+                    `时长：${d.pulse_duration_days} 天`,
+                    event
+                );
+            })
+            .on('mousemove', function(event) {
+                tooltip.style('left', (event.pageX + 12) + 'px')
+                       .style('top', (event.pageY - 18) + 'px');
+            })
+            .on('mouseout', () => tooltip.hide());
+    }
+
+    // ===== Section 2.2: 脉冲时长 × 脉冲强度 散点图 =====
+    function renderPulseScatter(data) {
+        const svg = d3.select('#chart-pulse-scatter');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 600), H = 380;
+        const m = {top: 30, right: 30, bottom: 60, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const items = data.pulse_cases;
+
+        const x = d3.scaleLinear().domain([0, 14]).range([0, w]);
+        const y = d3.scaleLinear().domain([0, 11]).range([h, 0]);
+        const r = d3.scaleLinear().domain([1, 8]).range([8, 28]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(7));
+        g.append('g').attr('class', 'axis').call(d3.axisLeft(y).ticks(5));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--accent-3)')
+            .text('脉冲时长 pulse_duration_days');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', -44)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--accent)')
+            .text('脉冲强度 pulse_intensity');
+
+        g.selectAll('circle.dot')
+            .data(items)
+            .enter().append('circle')
+            .attr('class', 'dot')
+            .attr('cx', d => x(d.pulse_duration_days))
+            .attr('cy', d => y(d.pulse_intensity))
+            .attr('r', d => r(d.monster_count))
+            .attr('fill', d => d.monster_count >= 3 ? 'var(--accent)' : 'var(--accent-2)')
+            .attr('fill-opacity', 0.7)
+            .attr('stroke', d => d.monster_count >= 3 ? 'var(--accent)' : 'var(--accent-2)')
+            .attr('stroke-width', 1.5)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                d3.select(this).attr('fill-opacity', 0.9).attr('stroke-width', 2.5);
+                tooltip.show(
+                    `<strong style="color:#e9b885">${d.location}</strong><br>` +
+                    `时长：${d.pulse_duration_days} 天<br>` +
+                    `强度：${d.pulse_intensity}/10<br>` +
+                    `妖数：${d.monster_count}<br>` +
+                    `妖怪：${d.monster_names.join('、')}<br>` +
+                    `竞争：${d.resource_competition}`,
+                    event
+                );
+            })
+            .on('mousemove', function(event) {
+                tooltip.style('left', (event.pageX + 12) + 'px')
+                       .style('top', (event.pageY - 18) + 'px');
+            })
+            .on('mouseout', function() {
+                d3.select(this).attr('fill-opacity', 0.7).attr('stroke-width', 1.5);
+                tooltip.hide();
+            });
+
+        g.selectAll('text.label')
+            .data(items)
+            .enter().append('text')
+            .attr('class', 'label')
+            .attr('x', d => x(d.pulse_duration_days) + r(d.monster_count) + 3)
+            .attr('y', d => y(d.pulse_intensity) + 4)
+            .attr('font-size', '10px')
+            .attr('fill', 'var(--ink)')
+            .text(d => d.location.length > 5 ? d.location.slice(0, 5) + '…' : d.location);
+    }
+
+    // ===== Section 2.3: 脉冲分析 KPI =====
+    function renderPulseKpi(data) {
+        const pa = data.pulse_analysis;
+        const kpi = d3.select('#pulse-kpi');
+        const items = [
+            {label: 'AVG INTENSITY', value: pa.avg_pulse_intensity + '/10', desc: '平均脉冲强度', cls: ''},
+            {label: 'AVG DURATION', value: pa.avg_pulse_duration_days + ' 天', desc: '平均脉冲时长', cls: 'alt-2'},
+            {label: 'LONGEST PULSE', value: '12 天', desc: pa.longest_pulse, cls: 'alt-3'},
+            {label: 'HIGHEST COMPETITION', value: '3 大魔王', desc: pa.highest_competition, cls: 'alt-4'}
+        ];
+        const cards = kpi.selectAll('div.kpi-card').data(items).enter()
+            .append('div').attr('class', d => 'kpi-card ' + d.cls);
+        cards.append('div').attr('class', 'label').text(d => d.label);
+        cards.append('div').attr('class', 'value').text(d => d.value);
+        cards.append('div').attr('class', 'desc').text(d => d.desc);
+    }
+
+    // ===== Section 2.4: 10 案例表格 =====
+    function renderPulseTable(data) {
+        const tbody = d3.select('#table-pulse tbody');
+        const rows = tbody.selectAll('tr').data(data.pulse_cases).enter().append('tr');
+        rows.append('td').text(d => d.location);
+        rows.append('td').text(d => d.chapter);
+        rows.append('td').attr('class', 'num').text(d => d.monster_count);
+        rows.append('td').text(d => d.monster_names.join('、'));
+        rows.append('td').attr('class', 'num').html(d => `<span class="damage-pill ${damageClass(d.pulse_intensity)}">${d.pulse_intensity}/10</span>`);
+        rows.append('td').attr('class', 'num').text(d => d.pulse_duration_days);
+        rows.append('td').text(d => d.resource_competition);
+        rows.append('td').text(d => d.outcome);
+    }
+
+    // ===== Section 3.1: 猴群 + 多样性组合图 =====
+    function renderSuccessionCombo(data) {
+        const svg = d3.select('#chart-succession-combo');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 600), H = 440;
+        const m = {top: 30, right: 60, bottom: 90, left: 80};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const stages = data.succession_stages;
+        const labels = stages.map(s => '阶段' + s.stage + '·' + s.name.split('·')[0]);
+
+        const x = d3.scaleBand().domain(labels).range([0, w]).padding(0.3);
+        const yL = d3.scaleLog().domain([100, 100000]).range([h, 0]);
+        const yR = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data([1000, 10000, 50000])
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => yL(d)).attr('y2', d => yL(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(6))
+            .selectAll('text')
+            .style('font-size', '10px')
+            .attr('transform', 'rotate(-30)')
+            .style('text-anchor', 'end');
+        g.append('g').attr('class', 'axis').call(d3.axisLeft(yL).ticks(5, d3.format(',d')));
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(${w},0)`)
+            .call(d3.axisRight(yR).ticks(5));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', -58)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--accent-4)')
+            .text('猴群数量 monkey_population（log·左轴）');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', w + 50)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--accent)')
+            .text('生物多样性 biodiversity_index（右轴）');
+
+        // 阶段 3（崩溃期）高亮区间
+        const stage3 = stages[2];
+        g.append('rect')
+            .attr('x', x(labels[2]) - 8)
+            .attr('y', 0)
+            .attr('width', x.bandwidth() + 16)
+            .attr('height', h)
+            .attr('fill', 'var(--accent)')
+            .attr('fill-opacity', 0.06);
+        g.append('text')
+            .attr('x', x(labels[2]) + x.bandwidth() / 2)
+            .attr('y', 14)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '10px')
+            .attr('fill', 'var(--accent)')
+            .text('五行山 500 年');
+
+        // bars: monkey_population (left axis, log)
+        g.selectAll('rect.bar')
+            .data(stages)
+            .enter().append('rect')
+            .attr('class', 'bar')
+            .attr('x', d => x('阶段' + d.stage + '·' + d.name.split('·')[0]))
+            .attr('y', d => yL(d.monkey_population))
+            .attr('width', x.bandwidth())
+            .attr('height', d => h - yL(d.monkey_population))
+            .attr('fill', 'var(--accent-4)')
+            .attr('fill-opacity', 0.75)
+            .attr('rx', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                tooltip.show(
+                    `<strong style="color:#e9b885">${d.name}</strong><br>` +
+                    `年份：${d.year_range}<br>` +
+                    `猴群：${d.monkey_population.toLocaleString()}<br>` +
+                    `多样性：${d.biodiversity_index}/10<br>` +
+                    `植被覆盖：${d.vegetation_cover}%<br>` +
+                    `keystone：${d.keystone_species}`,
+                    event
+                );
+            })
+            .on('mousemove', function(event) {
+                tooltip.style('left', (event.pageX + 12) + 'px')
+                       .style('top', (event.pageY - 18) + 'px');
+            })
+            .on('mouseout', () => tooltip.hide());
+
+        // 97.2% decline annotation between stage 1 and stage 3
+        const x1 = x(labels[0]) + x.bandwidth() / 2;
+        const x3 = x(labels[2]) + x.bandwidth() / 2;
+        g.append('line')
+            .attr('x1', x1).attr('x2', x3)
+            .attr('y1', yL(47000) - 12).attr('y2', yL(1300) - 12)
+            .attr('stroke', 'var(--accent)')
+            .attr('stroke-width', 1)
+            .attr('stroke-dasharray', '4,3');
+        g.append('text')
+            .attr('x', (x1 + x3) / 2)
+            .attr('y', yL(47000) - 20)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '11px')
+            .attr('font-family', '"JetBrains Mono", monospace')
+            .attr('fill', 'var(--accent)')
+            .text('−97.2%');
+
+        // line: biodiversity_index (right axis)
+        const line = d3.line().x(d => x('阶段' + d.stage + '·' + d.name.split('·')[0]) + x.bandwidth() / 2).y(d => yR(d.biodiversity_index)).curve(d3.curveMonotoneX);
+        g.append('path').datum(stages)
+            .attr('fill', 'none')
+            .attr('stroke', 'var(--accent)')
+            .attr('stroke-width', 2.5)
+            .attr('d', line);
+        g.selectAll('circle.bio')
+            .data(stages)
+            .enter().append('circle')
+            .attr('class', 'bio')
+            .attr('cx', d => x('阶段' + d.stage + '·' + d.name.split('·')[0]) + x.bandwidth() / 2)
+            .attr('cy', d => yR(d.biodiversity_index))
+            .attr('r', 5)
+            .attr('fill', 'var(--accent)')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 1.5);
+    }
+
+    // ===== Section 3.2: 植被覆盖率折线图 =====
+    function renderVegetation(data) {
+        const svg = d3.select('#chart-vegetation');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 600), H = 320;
+        const m = {top: 30, right: 30, bottom: 80, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const stages = data.succession_stages;
+        const labels = stages.map(s => '阶段' + s.stage);
+
+        const x = d3.scalePoint().domain(labels).range([0, w]).padding(0.5);
+        const y = d3.scaleLinear().domain([0, 100]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // area
+        const area = d3.area()
+            .x(d => x('阶段' + d.stage))
+            .y0(h)
+            .y1(d => y(d.vegetation_cover))
+            .curve(d3.curveMonotoneX);
+        g.append('path').datum(stages)
+            .attr('fill', 'var(--accent-4)')
+            .attr('fill-opacity', 0.15)
+            .attr('d', area);
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(8));
+        g.append('g').attr('class', 'axis').call(d3.axisLeft(y).ticks(5));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 50)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--accent-3)')
+            .text('演替阶段');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', -44)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--accent-4)')
+            .text('植被覆盖率 vegetation_cover (%)');
+
+        // line
+        const line = d3.line().x(d => x('阶段' + d.stage)).y(d => y(d.vegetation_cover)).curve(d3.curveMonotoneX);
+        g.append('path').datum(stages)
+            .attr('fill', 'none')
+            .attr('stroke', 'var(--accent-4)')
+            .attr('stroke-width', 2.5)
+            .attr('d', line);
+
+        // dots
+        g.selectAll('circle.veg')
+            .data(stages)
+            .enter().append('circle')
+            .attr('class', 'veg')
+            .attr('cx', d => x('阶段' + d.stage))
+            .attr('cy', d => y(d.vegetation_cover))
+            .attr('r', 6)
+            .attr('fill', 'var(--accent-4)')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 1.5)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                tooltip.show(
+                    `<strong style="color:#e9b885">${d.name}</strong><br>` +
+                    `年份：${d.year_range}<br>` +
+                    `植被覆盖：${d.vegetation_cover}%<br>` +
+                    `猴群：${d.monkey_population.toLocaleString()}<br>` +
+                    `稳定性：${d.stability}/10`,
+                    event
+                );
+            })
+            .on('mousemove', function(event) {
+                tooltip.style('left', (event.pageX + 12) + 'px')
+                       .style('top', (event.pageY - 18) + 'px');
+            })
+            .on('mouseout', () => tooltip.hide());
+
+        // value labels
+        g.selectAll('text.val')
+            .data(stages)
+            .enter().append('text')
+            .attr('class', 'val')
+            .attr('x', d => x('阶段' + d.stage))
+            .attr('y', d => y(d.vegetation_cover) - 12)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '11px')
+            .attr('font-family', '"JetBrains Mono", monospace')
+            .attr('fill', 'var(--accent-4)')
+            .text(d => d.vegetation_cover + '%');
+    }
+
+    // ===== Section 3.3: 6 阶段时间线表格 =====
+    function renderSuccessionTable(data) {
+        const tbody = d3.select('#table-succession tbody');
+        const rows = tbody.selectAll('tr').data(data.succession_stages).enter().append('tr');
+        rows.append('td').attr('class', 'num').text(d => d.stage);
+        rows.append('td').text(d => d.name);
+        rows.append('td').text(d => d.year_range);
+        rows.append('td').attr('class', 'num').text(d => d.monkey_population.toLocaleString());
+        rows.append('td').attr('class', 'num').text(d => d.biodiversity_index);
+        rows.append('td').attr('class', 'num').text(d => d.vegetation_cover + '%');
+        rows.append('td').attr('class', 'num').text(d => d.human_interference);
+        rows.append('td').attr('class', 'num').text(d => d.stability);
+    }
+
+    // ===== Section 3.4: 现代对应卡片 =====
+    function renderModernParallel(data) {
+        const mp = data.modern_parallel;
+        const grid = d3.select('#modern-parallel');
+        const items = [
+            {label: 'YELLOWSTONE WOLVES', title: '黄石公园狼群 reintroduction', text: mp.yellowstone_wolves, cls: ''},
+            {label: 'FOREST FIRE', title: '森林火灾后次生演替', text: mp.forest_fire_succession, cls: 'alt'},
+            {label: 'ISLAND ECOLOGY', title: '岛屿生态学', text: mp.island_ecology, cls: 'alt2'},
+            {label: 'WUKONG = KEYSTONE', title: '悟空 = keystone species', text: mp.wukong_as_keystone, cls: 'alt3'}
+        ];
+        const cards = grid.selectAll('div.map-card').data(items).enter()
+            .append('div').attr('class', d => 'map-card ' + d.cls);
+        cards.append('div').attr('class', 'map-label').text(d => d.label);
+        cards.append('div').attr('class', 'map-title').text(d => d.title);
+        cards.append('div').attr('class', 'map-row').text(d => d.text);
+    }
+
+    // ===== Section 4.1: 6 营养级层级条形图 =====
+    function renderFoodWeb(data) {
+        const svg = d3.select('#chart-foodweb');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 600), H = 420;
+        const m = {top: 40, right: 220, bottom: 60, left: 160};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const levels = data.trophic_levels.slice().reverse();
+
+        const y = d3.scaleBand().domain(levels.map(d => d.name)).range([0, h]).padding(0.25);
+        const x = d3.scaleLog().domain([0.0001, 1000]).range([0, w]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data([0.001, 0.01, 0.1, 1, 10, 100])
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', d => x(d)).attr('x2', d => x(d))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).tickSize(0).tickPadding(8));
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(6, d => d.toString()));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--ink)')
+            .text('生物量占比 biomass_share（log scale）');
+
+        // bars
+        g.selectAll('rect.bar')
+            .data(levels)
+            .enter().append('rect')
+            .attr('class', 'bar')
+            .attr('x', 0)
+            .attr('y', d => y(d.name))
+            .attr('width', d => x(d.biomass_share))
+            .attr('height', y.bandwidth())
+            .attr('fill', d => trophicColor(d.level))
+            .attr('fill-opacity', 0.75)
+            .attr('rx', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                tooltip.show(
+                    `<strong style="color:#e9b885">L${d.level} · ${d.name}</strong><br>` +
+                    `成员：${d.members.join('、')}<br>` +
+                    `能量源：${d.energy_source}<br>` +
+                    `生物量：${d.biomass_share}<br>` +
+                    (d.characteristics ? `特征：${d.characteristics}` : ''),
+                    event
+                );
+            })
+            .on('mousemove', function(event) {
+                tooltip.style('left', (event.pageX + 12) + 'px')
+                       .style('top', (event.pageY - 18) + 'px');
+            })
+            .on('mouseout', () => tooltip.hide());
+
+        // value + members labels
+        g.selectAll('text.val')
+            .data(levels)
+            .enter().append('text')
+            .attr('class', 'val')
+            .attr('x', d => x(d.biomass_share) + 6)
+            .attr('y', d => y(d.name) + y.bandwidth() / 2 + 4)
+            .attr('font-size', '11px')
+            .attr('font-family', '"JetBrains Mono", monospace')
+            .attr('fill', 'var(--ink)')
+            .text(d => d.biomass_share.toString());
+
+        g.selectAll('text.mem')
+            .data(levels)
+            .enter().append('text')
+            .attr('class', 'mem')
+            .attr('x', w + 12)
+            .attr('y', d => y(d.name) + y.bandwidth() / 2 - 2)
+            .attr('font-size', '11px')
+            .attr('fill', 'var(--ink-soft)')
+            .text(d => d.members.join('、'));
+        g.selectAll('text.eff')
+            .data(levels)
+            .enter().append('text')
+            .attr('class', 'eff')
+            .attr('x', w + 12)
+            .attr('y', d => y(d.name) + y.bandwidth() / 2 + 12)
+            .attr('font-size', '10px')
+            .attr('font-family', '"JetBrains Mono", monospace')
+            .attr('fill', 'var(--accent-3)')
+            .text((d, i) => {
+                if (i === levels.length - 1) return '太阳能 → 100%';
+                const next = levels[i + 1];
+                const flow = data.energy_flow.find(f => f.to === d.name.split('·').pop().replace('者', '').replace('者', ''));
+                return d.energy_source.length > 18 ? d.energy_source.slice(0, 18) + '…' : d.energy_source;
+            });
+
+        // legend
+        const legend = d3.select('#legend-foodweb');
+        legend.selectAll('span.legend-item').data(data.trophic_levels).enter()
+            .append('span').attr('class', 'legend-item')
+            .html(d => `<span class="legend-swatch" style="background:${trophicColor(d.level)}"></span>L${d.level} ${d.name}`);
+    }
+
+    // ===== Section 4.2: 6 营养级卡片 =====
+    function renderTrophicCards(data) {
+        const grid = d3.select('#trophic-cards');
+        const cards = grid.selectAll('div.trophic-card').data(data.trophic_levels).enter()
+            .append('div').attr('class', d => 'trophic-card l' + d.level);
+        cards.append('div').attr('class', 'tr-level').text(d => 'LEVEL ' + d.level + ' · TROPHIC');
+        cards.append('div').attr('class', 'tr-name').text(d => d.name);
+        cards.append('div').attr('class', 'tr-row').html(d => `<strong>成员：</strong>${d.members.join('、')}`);
+        cards.append('div').attr('class', 'tr-row').html(d => `<strong>能量源：</strong>${d.energy_source}`);
+        cards.append('div').attr('class', 'tr-row').html(d => `<strong>生物量：</strong>${d.biomass_share}`);
+        cards.append('div').attr('class', 'tr-row').html(d => d.characteristics ? `<strong>特征：</strong>${d.characteristics}` : `<strong>特征：</strong>能量起点`);
+    }
+
+    // ===== Section 4.3: 入侵影响三阶段对比 =====
+    function renderStageCompare(data) {
+        const ii = data.invasive_impact;
+        const grid = d3.select('#stage-compare');
+        const items = [
+            {label: 'BEFORE INVASION', title: '入侵前', cls: '', data: ii.before_invasion},
+            {label: 'DURING INVASION', title: '入侵中', cls: 'during', data: ii.during_invasion},
+            {label: 'AFTER INVASION', title: '入侵后', cls: 'after', data: ii.after_invasion}
+        ];
+        const cards = grid.selectAll('div.stage-card').data(items).enter()
+            .append('div').attr('class', d => 'stage-card ' + d.cls);
+        cards.append('div').attr('class', 'stage-label').text(d => d.label);
+        cards.append('div').attr('class', 'stage-title').text(d => d.title);
+        cards.append('div').attr('class', 'stage-row').html(d => `<strong>顶级掠食者：</strong>${d.data.top_predator}`);
+        cards.append('div').attr('class', 'stage-row').html(d => `<strong>生态平衡：</strong>${d.data.ecosystem_balance}`);
+        cards.append('div').attr('class', 'stage-row').html(d => `<strong>清除机制：</strong>${d.data.removal_mechanism}`);
+    }
+
+    // ===== Insights list helper =====
+    function renderInsights(id, items) {
+        const list = d3.select('#' + id);
+        list.selectAll('li').data(items).enter().append('li').text(d => d);
+    }
+
+    // ===== Run main =====
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main().catch(err => console.error('Render failed:', err));
+    </script>
+</body>
+</html>

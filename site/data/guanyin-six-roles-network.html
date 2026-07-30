@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>观音六重身份关系图谱 · W139</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+<style>
+:root {
+  --bg: #faf7f2;
+  --paper: #f5ede0;
+  --ink: #2c2418;
+  --accent: #c8463a;
+  --accent-2: #3a6b8c;
+  --accent-3: #8b7355;
+  --muted: #8a7a6a;
+  --border: #d4c4a8;
+  --card: #fffdf8;
+  --role-recruit: #c8463a;
+  --role-constraint: #3a6b8c;
+  --role-recycle: #8b7355;
+  --role-mediate: #5a4a6b;
+  --role-operate: #6a8b5a;
+  --role-exit: #8a7a6a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Serif SC', 'Songti SC', serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  padding: 20px;
+}
+.container { max-width: 1200px; margin: 0 auto; }
+
+/* Hero */
+header.hero {
+  background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+  color: #f5ede0;
+  padding: 48px 30px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  text-align: center;
+  border: 1px solid #2a1c14;
+}
+header.hero h1 {
+  font-size: 2.4em;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #f5ede0;
+  letter-spacing: 4px;
+}
+header.hero .subtitle {
+  font-size: 1.05em;
+  color: #d4c4a8;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+header.hero .meta {
+  color: #b8a888;
+  font-size: 0.85em;
+  margin-top: 10px;
+}
+
+/* Section */
+.section {
+  background: var(--card);
+  margin: 30px 0;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.section-title {
+  font-size: 1.6em;
+  color: var(--accent-2);
+  margin-bottom: 8px;
+  font-weight: 600;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+.section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+.section-sub {
+  color: var(--muted);
+  font-size: 0.88em;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+.definition {
+  background: #f5efe4;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.94em;
+  border-radius: 2px;
+}
+
+/* KPI */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+.kpi-card {
+  background: #f5efe4;
+  padding: 14px;
+  border-radius: 4px;
+  text-align: center;
+}
+.kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
+.kpi-label { color: var(--muted); font-size: 0.84em; margin-top: 4px; }
+
+/* Role cards grid */
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+.role-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 16px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.role-card:hover, .role-card:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  outline: none;
+}
+.role-card .role-name {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.role-card .role-chapter {
+  font-size: 0.82em;
+  color: var(--accent-2);
+  margin-bottom: 6px;
+}
+.role-card .role-target {
+  font-size: 0.88em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.role-card .role-action {
+  font-size: 0.84em;
+  color: var(--ink);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+}
+.role-card .role-tag {
+  font-size: 0.76em;
+  color: var(--accent-3);
+  font-style: italic;
+  margin-top: 6px;
+}
+.swatch-bar {
+  height: 4px;
+  border-radius: 2px;
+  margin: 8px auto;
+  width: 60%;
+}
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.chart-caption { color: var(--muted); font-size: 0.84em; margin-bottom: 12px; }
+.chart-svg {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.84em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: rgba(44,36,24,0.95);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.84em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 280px;
+}
+
+/* Insight */
+.insight-list { list-style: none; }
+.insight-list li {
+  background: #f5efe4;
+  margin: 8px 0;
+  padding: 12px 15px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 2px;
+}
+.insight-list li strong { color: var(--accent); }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; }
+.node-circle:hover { stroke: var(--accent); stroke-width: 2px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .roles-grid { grid-template-columns: repeat(2, 1fr); }
+  header.hero { padding: 32px 18px; }
+  header.hero h1 { font-size: 1.8em; letter-spacing: 2px; }
+  .section { padding: 18px; }
+  .section-title { font-size: 1.3em; }
+}
+@media (max-width: 520px) {
+  .roles-grid { grid-template-columns: 1fr; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  body { padding: 10px; }
+  header.hero h1 { font-size: 1.5em; }
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.84em;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="hero">
+  <h1>观音六重身份关系图谱</h1>
+  <div class="subtitle">GUANYIN · SIX-ROLE RELATIONSHIP NETWORK</div>
+  <div class="meta">W139 · D 方向 · 观音人物专题深化 · 基于《人物.txt》观音六重身份文本</div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">6</div><div class="kpi-label">身份层数</div></div>
+  <div class="kpi-card"><div class="kpi-value">5</div><div class="kpi-label">招募成员</div></div>
+  <div class="kpi-card"><div class="kpi-value">3</div><div class="kpi-label">回收妖怪</div></div>
+  <div class="kpi-card"><div class="kpi-value">3</div><div class="kpi-label">调停节点</div></div>
+  <div class="kpi-card"><div class="kpi-value">81</div><div class="kpi-label">操盘劫数</div></div>
+  <div class="kpi-card"><div class="kpi-value">56</div><div class="kpi-label">退场回目</div></div>
+</div>
+
+<!-- Section 1: 六重身份概览 -->
+<section class="section">
+  <h2 class="section-title">壹 · 观音六重身份概览</h2>
+  <div class="section-sub">SIX ROLES OVERVIEW</div>
+  <div class="definition">
+    <strong>定义：</strong>观音在取经工程中身兼六重身份——招募者（组建团队）、约束者（紧箍定心）、回收者（收妖善后）、调停者（危机公关）、操盘手（八十一难总调度）、退场者（紧箍废止后沉默抽身）。六重身份对应取经工程从立项到交付的完整生命周期，介入强度呈倒 U 形曲线。
+  </div>
+  <div class="roles-grid" id="roles-grid"></div>
+  <div class="chart-block" style="margin-top:24px;">
+    <div class="chart-title">观音介入强度倒 U 形曲线（贯穿取经全周期）</div>
+    <div class="chart-caption">X 轴：回目时序 · Y 轴：介入强度 0-10 · 倒 U 形：立项高→中段平台→第56回紧箍废止骤降→第98回退场归零</div>
+    <svg id="chart-intensity" class="chart-svg" width="100%" height="320"></svg>
+    <div class="legend-row" id="intensity-legend"></div>
+  </div>
+</section>
+
+<!-- Section 2: 力导向图 -->
+<section class="section">
+  <h2 class="section-title alt">贰 · 六重身份关系力导向图</h2>
+  <div class="section-sub">SIX-ROLE FORCE-DIRECTED GRAPH</div>
+  <div class="definition">
+    <strong>定义：</strong>以观音为中心节点，六重身份为内圈，对应关键回目与互动人物为外圈。边粗细代表身份与事件的关联强度。观音作为六重身份的唯一承载者，构成取经工程中最密集的关系枢纽。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">观音六重身份力导向图（中心=观音 · 内圈=六身份 · 外圈=回目+互动对象）</div>
+    <div class="chart-caption">节点颜色：六身份配色 · 节点大小=度数 · hover 显示详情</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="560"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3: 桑基图 -->
+<section class="section">
+  <h2 class="section-title alt-2">叁 · 身份职能-回目-对象桑基图</h2>
+  <div class="section-sub">ROLE-FUNCTION-CHAPTER-TARGET SANKEY</div>
+  <div class="definition">
+    <strong>定义：</strong>桑基图展示四层流向：身份 → 职能 → 回目 → 互动对象。流量粗细对应事件权重。可视化观音在不同身份下对应的具体职能、触发回目与互动对象，揭示其多线并行的操盘结构。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">身份-职能-回目-对象四层桑基图</div>
+    <div class="chart-caption">左起：身份 → 职能 → 回目 → 互动对象 · 流量=事件权重 · hover 高亮路径</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="520"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4: 雷达图 -->
+<section class="section">
+  <h2 class="section-title">肆 · 慈悲-精算悖论雷达图</h2>
+  <div class="section-sub">MERCY-CALCULATION PARADOX RADAR</div>
+  <div class="definition">
+    <strong>定义：</strong>五维度评估六身份——慈悲度（对受害者的同情）/精算度（成本核算）/权力（资源调配力）/隐匿（退场程度）/介入（直接出手频率）。雷达面积越大，身份的符号负载越重。招募者与操盘手精算度高、慈悲度低；退场者隐匿度极高、介入度归零。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">六身份五维度雷达图（慈悲/精算/权力/隐匿/介入）</div>
+    <div class="chart-caption">六身份 × 5 维度 · 数值 0-10 · hover 查看详情</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="500"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5: 时间线 -->
+<section class="section">
+  <h2 class="section-title alt">伍 · 关键事件时间线</h2>
+  <div class="section-sub">KEY EVENT TIMELINE</div>
+  <div class="definition">
+    <strong>定义：</strong>按叙事时序排列六身份对应的关键回目事件。从第8回盂兰盆会请缨立项，到第56回紧箍废止外控失效，再到第98回灵山之下沉默退场——时间线呈现观音从「需要操盘手」到「操盘手可以退场」的完整弧线。
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">六身份关键事件时间线</div>
+    <div class="chart-caption">X 轴：回目时序 · Y 轴：六身份分轨 · 颜色：身份配色 · hover 显示详情</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="440"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6: 关键洞察 -->
+<section class="section">
+  <h2 class="section-title alt-2">陆 · 关键洞察</h2>
+  <div class="section-sub">KEY INSIGHTS</div>
+  <ul class="insight-list">
+    <li><strong>项目经理观音：</strong>观音不是慈悲的化身，是取经工程的实际操盘手。她主动请缨立项、组建团队、控制风险、调配资源、协调利益、解决突发、确保交付——六重身份对应项目管理全生命周期。如来是立项人与验收人，观音是执行负责人。</li>
+    <li><strong>因材施教的梯度控制：</strong>三个箍儿三种用法——紧箍骗戴（悟空无法正面约束）、禁箍明收（黑熊精有妥协意愿）、金箍碾压加天罡刀穿腿（红孩儿野性最重）。暴力本身就是精确的刻度，用最少的暴力达到约束。</li>
+    <li><strong>回收者的「私了」逻辑：</strong>金鱼吃九年童男童女被竹篮收走、红孩儿勒索百姓后被收为善财童子、黑熊精偷袈裟后当守山大神。犯罪者全部未被公开审判，全部获得比原来更好的位置。这是务实到极致的秩序维护——把过去的事都不提了。</li>
+    <li><strong>调停者的「骂归骂帮归帮」：</strong>五庄观救人参果树、火云洞强行收编红孩儿、通天河悄悄私了金鱼。调停没有统一标准，根据利益格局选择策略——地仙不可得罪、战力太强需收编、自身漏洞需掩盖。项目经理的第一要务是让项目继续往前走。</li>
+    <li><strong>操盘的边界：</strong>观音的介入强度呈倒 U 形——第8回立项高强度介入，第14回团队成型后逐渐退后，第17-46回高峰平台期遇阻才下场，第56回紧箍废止后外控功能自动失效，第74回正式退场。她在团队成熟后逐渐撤离，在终点到来前提前消失。</li>
+    <li><strong>退场的伦理：</strong>观音退场时没有带走任何东西——没有带走敬畏、感恩、功绩。她从「掌握紧箍咒的菩萨」变成「种竹子的邻居」。退场的干净是一种自觉选择——真正的成功不是「项目离了我不行」，是「项目离了我照样行」。慈悲与精算的悖论在此和解。</li>
+  </ul>
+</section>
+
+<footer>
+  <p>W139 观音六重身份关系图谱 · D 方向 · 基于《人物.txt》观音六重身份文本</p>
+  <p>古典宣纸风配色 · D3.js v7 · F6 skeleton（fetchJson → loadData → main → render×N → cache → resize）</p>
+  <p id="dataSource">数据源：嵌入数据 EMBEDDED_DATA（file:// 模式可直接打开）</p>
+</footer>
+
+</div>
+
+<script>
+// ============================================================
+// EMBEDDED DATA —— 观音六重身份数据
+// ============================================================
+const EMBEDDED_DATA = {
+  roles: [
+    {
+      name: "招募者", chapter: "第8回 / 第12回", target: "唐玄奘 / 悟空 / 八戒 / 沙僧 / 白龙马",
+      action: "长安城选僧 · 盂兰盆会请缨", tag: "选人的眼光比法力更准",
+      color: "#c8463a", key: "recruit"
+    },
+    {
+      name: "约束者", chapter: "第14回", target: "孙悟空",
+      action: "紧箍儿发牌 · 定心真言", tag: "紧箍是礼物，只是包装很疼",
+      color: "#3a6b8c", key: "constraint"
+    },
+    {
+      name: "回收者", chapter: "第17回 / 第39回 / 第46回", target: "黑熊精 / 红孩儿 / 金鱼",
+      action: "收妖善后 · 因材施教的梯度控制", tag: "收走的是自己洒出去的碎片",
+      color: "#8b7355", key: "recycle"
+    },
+    {
+      name: "调停者", chapter: "第26回 / 第39回 / 第46回", target: "镇元子 / 红孩儿 / 通天河",
+      action: "团队内伤 · 危机公关", tag: "不出手时反而最见功力",
+      color: "#5a4a6b", key: "mediate"
+    },
+    {
+      name: "操盘手", chapter: "第8回", target: "八十一难 · 妖怪派遣",
+      action: "项目经理 · 资源调配 · 风险控制", tag: "她不是菩萨心肠，是项目经理",
+      color: "#6a8b5a", key: "operate"
+    },
+    {
+      name: "退场者", chapter: "第56回 / 第98回", target: "灵山 · 紫竹林",
+      action: "沉默退场 · 紧箍废止 · 种竹归隐", tag: "连目送都省略了",
+      color: "#8a7a6a", key: "exit"
+    }
+  ],
+  // 力导向图：中心观音 + 六身份 + 回目 + 互动人物
+  network: {
+    nodes: [
+      { id: "观音", type: "center" },
+      { id: "招募者", type: "role" },
+      { id: "约束者", type: "role" },
+      { id: "回收者", type: "role" },
+      { id: "调停者", type: "role" },
+      { id: "操盘手", type: "role" },
+      { id: "退场者", type: "role" },
+      { id: "第8回", type: "chapter" },
+      { id: "第12回", type: "chapter" },
+      { id: "第14回", type: "chapter" },
+      { id: "第17回", type: "chapter" },
+      { id: "第26回", type: "chapter" },
+      { id: "第39回", type: "chapter" },
+      { id: "第46回", type: "chapter" },
+      { id: "第56回", type: "chapter" },
+      { id: "第98回", type: "chapter" },
+      { id: "唐玄奘", type: "character" },
+      { id: "孙悟空", type: "character" },
+      { id: "猪八戒", type: "character" },
+      { id: "沙僧", type: "character" },
+      { id: "白龙马", type: "character" },
+      { id: "黑熊精", type: "character" },
+      { id: "红孩儿", type: "character" },
+      { id: "金鱼", type: "character" },
+      { id: "镇元子", type: "character" },
+      { id: "八十一难", type: "character" },
+      { id: "如来", type: "character" }
+    ],
+    links: [
+      { source: "观音", target: "招募者", weight: 9 },
+      { source: "观音", target: "约束者", weight: 8 },
+      { source: "观音", target: "回收者", weight: 9 },
+      { source: "观音", target: "调停者", weight: 8 },
+      { source: "观音", target: "操盘手", weight: 10 },
+      { source: "观音", target: "退场者", weight: 7 },
+      { source: "招募者", target: "第8回", weight: 6 },
+      { source: "招募者", target: "第12回", weight: 6 },
+      { source: "招募者", target: "唐玄奘", weight: 7 },
+      { source: "招募者", target: "孙悟空", weight: 6 },
+      { source: "招募者", target: "猪八戒", weight: 5 },
+      { source: "招募者", target: "沙僧", weight: 5 },
+      { source: "招募者", target: "白龙马", weight: 4 },
+      { source: "招募者", target: "如来", weight: 5 },
+      { source: "约束者", target: "第14回", weight: 7 },
+      { source: "约束者", target: "孙悟空", weight: 8 },
+      { source: "回收者", target: "第17回", weight: 6 },
+      { source: "回收者", target: "第39回", weight: 6 },
+      { source: "回收者", target: "第46回", weight: 6 },
+      { source: "回收者", target: "黑熊精", weight: 7 },
+      { source: "回收者", target: "红孩儿", weight: 8 },
+      { source: "回收者", target: "金鱼", weight: 7 },
+      { source: "调停者", target: "第26回", weight: 6 },
+      { source: "调停者", target: "第39回", weight: 6 },
+      { source: "调停者", target: "第46回", weight: 6 },
+      { source: "调停者", target: "镇元子", weight: 6 },
+      { source: "调停者", target: "红孩儿", weight: 5 },
+      { source: "调停者", target: "金鱼", weight: 4 },
+      { source: "操盘手", target: "第8回", weight: 8 },
+      { source: "操盘手", target: "八十一难", weight: 9 },
+      { source: "操盘手", target: "如来", weight: 6 },
+      { source: "退场者", target: "第56回", weight: 6 },
+      { source: "退场者", target: "第98回", weight: 6 },
+      { source: "退场者", target: "孙悟空", weight: 4 }
+    ]
+  },
+  // 桑基图：身份 → 职能 → 回目 → 互动对象
+  sankey: {
+    nodes: [
+      { name: "招募者", cat: 0 }, { name: "约束者", cat: 0 }, { name: "回收者", cat: 0 },
+      { name: "调停者", cat: 0 }, { name: "操盘手", cat: 0 }, { name: "退场者", cat: 0 },
+      { name: "组建团队", cat: 1 }, { name: "定心约束", cat: 1 }, { name: "收妖归位", cat: 1 },
+      { name: "危机公关", cat: 1 }, { name: "资源调度", cat: 1 }, { name: "沉默抽身", cat: 1 },
+      { name: "第8回", cat: 2 }, { name: "第12回", cat: 2 }, { name: "第14回", cat: 2 },
+      { name: "第17回", cat: 2 }, { name: "第26回", cat: 2 }, { name: "第39回", cat: 2 },
+      { name: "第46回", cat: 2 }, { name: "第56回", cat: 2 }, { name: "第98回", cat: 2 },
+      { name: "唐玄奘", cat: 3 }, { name: "孙悟空", cat: 3 }, { name: "猪八戒", cat: 3 },
+      { name: "沙僧", cat: 3 }, { name: "白龙马", cat: 3 }, { name: "黑熊精", cat: 3 },
+      { name: "红孩儿", cat: 3 }, { name: "金鱼", cat: 3 }, { name: "镇元子", cat: 3 },
+      { name: "八十一难", cat: 3 }, { name: "如来", cat: 3 }, { name: "紫竹林", cat: 3 }
+    ],
+    links: [
+      { source: "招募者", target: "组建团队", value: 6 },
+      { source: "约束者", target: "定心约束", value: 5 },
+      { source: "回收者", target: "收妖归位", value: 6 },
+      { source: "调停者", target: "危机公关", value: 5 },
+      { source: "操盘手", target: "资源调度", value: 7 },
+      { source: "退场者", target: "沉默抽身", value: 4 },
+      { source: "组建团队", target: "第8回", value: 4 },
+      { source: "组建团队", target: "第12回", value: 3 },
+      { source: "定心约束", target: "第14回", value: 5 },
+      { source: "收妖归位", target: "第17回", value: 3 },
+      { source: "收妖归位", target: "第39回", value: 3 },
+      { source: "收妖归位", target: "第46回", value: 3 },
+      { source: "危机公关", target: "第26回", value: 3 },
+      { source: "危机公关", target: "第39回", value: 2 },
+      { source: "危机公关", target: "第46回", value: 2 },
+      { source: "资源调度", target: "第8回", value: 5 },
+      { source: "沉默抽身", target: "第56回", value: 3 },
+      { source: "沉默抽身", target: "第98回", value: 3 },
+      { source: "第8回", target: "唐玄奘", value: 2 },
+      { source: "第8回", target: "孙悟空", value: 2 },
+      { source: "第8回", target: "猪八戒", value: 1 },
+      { source: "第8回", target: "沙僧", value: 1 },
+      { source: "第8回", target: "如来", value: 2 },
+      { source: "第8回", target: "八十一难", value: 3 },
+      { source: "第12回", target: "唐玄奘", value: 2 },
+      { source: "第14回", target: "孙悟空", value: 4 },
+      { source: "第17回", target: "黑熊精", value: 3 },
+      { source: "第26回", target: "镇元子", value: 3 },
+      { source: "第39回", target: "红孩儿", value: 4 },
+      { source: "第46回", target: "金鱼", value: 3 },
+      { source: "第12回", target: "白龙马", value: 1 },
+      { source: "第56回", target: "孙悟空", value: 2 },
+      { source: "第98回", target: "紫竹林", value: 2 }
+    ]
+  },
+  // 雷达图：六身份 × 5 维度
+  radar: [
+    { role: "招募者", 慈悲度: 6, 精算度: 9, 权力: 8, 隐匿: 3, 介入: 9 },
+    { role: "约束者", 慈悲度: 5, 精算度: 9, 权力: 9, 隐匿: 6, 介入: 7 },
+    { role: "回收者", 慈悲度: 4, 精算度: 10, 权力: 8, 隐匿: 5, 介入: 8 },
+    { role: "调停者", 慈悲度: 6, 精算度: 9, 权力: 9, 隐匿: 6, 介入: 8 },
+    { role: "操盘手", 慈悲度: 3, 精算度: 10, 权力: 10, 隐匿: 5, 介入: 9 },
+    { role: "退场者", 慈悲度: 7, 精算度: 8, 权力: 4, 隐匿: 10, 介入: 1 }
+  ],
+  // 时间线：六身份关键事件
+  timeline: [
+    { order: 1, chapter: 8, role: "招募者", event: "盂兰盆会请缨", desc: "如来立项，观音主动举手「弟子不才，愿上东土寻一个取经人来」" },
+    { order: 2, chapter: 8, role: "操盘手", event: "组建取经团队", desc: "五行山访悟空、福陵山收八戒、流沙河约沙僧，逐个招募成员" },
+    { order: 3, chapter: 12, role: "招募者", event: "长安显圣点玄奘", desc: "满朝文武前点名金蝉子转世，把唐太宗变成取经工程赞助人" },
+    { order: 4, chapter: 14, role: "约束者", event: "紧箍儿发牌", desc: "花帽藏紧箍骗悟空戴上，全书最温柔也最残忍的礼物" },
+    { order: 5, chapter: 17, role: "回收者", event: "禁箍收黑熊精", desc: "用禁箍儿套头收编守山大神，第一笔妖怪人才引进" },
+    { order: 6, chapter: 26, role: "调停者", event: "柳枝甘露救树", desc: "骂归骂帮归帮，救活人参果树，地仙系统不可得罪" },
+    { order: 7, chapter: 39, role: "回收者", event: "金箍收红孩儿", desc: "天罡刀穿双腿，最暴烈的降伏手段，收为善财童子" },
+    { order: 8, chapter: 39, role: "调停者", event: "火云洞强行收编", desc: "红孩儿战力太强背景太复杂，强行收编削弱牛魔王势力" },
+    { order: 9, chapter: 46, role: "回收者", event: "竹篮回收金鱼", desc: "编竹篮捞走莲花池金鱼，创造者回收造物，全书最「人」的时刻" },
+    { order: 10, chapter: 46, role: "调停者", event: "通天河悄悄私了", desc: "金鱼吃九年童男童女，竹篮捞走不公开审判，掩盖自身管理漏洞" },
+    { order: 11, chapter: 56, role: "退场者", event: "紧箍咒废止", desc: "六耳猕猴事件后玄奘不再念咒，外控系统被内控系统取代" },
+    { order: 12, chapter: 74, role: "退场者", event: "灵山受封缺席", desc: "不在灵山大殿、不在长安送别、不在凌云渡，回紫竹林种竹子" },
+    { order: 13, chapter: 98, role: "退场者", event: "沉默退场归零", desc: "从「掌握紧箍咒的菩萨」变成「种竹子的邻居」，连目送都省略" }
+  ],
+  // 介入强度倒 U 形曲线
+  intensity: [
+    { chapter: 8, intensity: 9, phase: "立项请缨" },
+    { chapter: 12, intensity: 8, phase: "长安显圣" },
+    { chapter: 14, intensity: 7, phase: "紧箍发牌" },
+    { chapter: 17, intensity: 8, phase: "回收黑熊精" },
+    { chapter: 26, intensity: 7, phase: "调停人参果" },
+    { chapter: 39, intensity: 8, phase: "收红孩儿" },
+    { chapter: 46, intensity: 7, phase: "回收金鱼" },
+    { chapter: 56, intensity: 3, phase: "紧箍废止" },
+    { chapter: 74, intensity: 1, phase: "灵山缺席" },
+    { chapter: 98, intensity: 0, phase: "退场归零" }
+  ]
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W139] 使用嵌入数据 (' + fallbackKey + ')：', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const roles = await fetchJson(base + 'guanyin-six-roles.json', 'roles');
+  return {
+    roles: Array.isArray(roles) ? roles : (roles.roles || EMBEDDED_DATA.roles),
+    network: EMBEDDED_DATA.network,
+    sankey: EMBEDDED_DATA.sankey,
+    radar: EMBEDDED_DATA.radar,
+    timeline: EMBEDDED_DATA.timeline,
+    intensity: EMBEDDED_DATA.intensity
+  };
+}
+
+// ============================================================
+// Section 1: 六身份概览卡片
+// ============================================================
+function renderOverview(roles) {
+  const grid = d3.select('#roles-grid');
+  grid.html('');
+  if (!roles || roles.length === 0) {
+    grid.append('div').attr('class', 'empty-state').text('暂无数据');
+    return;
+  }
+  const card = grid.selectAll('.role-card')
+    .data(roles)
+    .enter()
+    .append('div')
+    .attr('class', 'role-card')
+    .attr('role', 'button')
+    .attr('tabindex', '0')
+    .attr('aria-label', d => d.name + ' · ' + d.action)
+    .style('border-top', d => '4px solid ' + d.color);
+
+  card.append('div').attr('class', 'role-name').text(d => d.name);
+  card.append('div').attr('class', 'swatch-bar').style('background', d => d.color);
+  card.append('div').attr('class', 'role-chapter').text(d => d.chapter);
+  card.append('div').attr('class', 'role-target').text(d => '对象：' + d.target);
+  card.append('div').attr('class', 'role-action').text(d => d.action);
+  card.append('div').attr('class', 'role-tag').text(d => '「' + d.tag + '」');
+
+  // 键盘 a11y
+  card.on('keydown', function(e, d) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showRoleTooltip(e, d);
+    }
+  });
+  card.on('click', function(e, d) { showRoleTooltip(e, d); });
+}
+
+function showRoleTooltip(event, d) {
+  let tip = d3.select('.tooltip');
+  if (tip.empty()) {
+    tip = d3.select('body').append('div').attr('class', 'tooltip');
+  }
+  tip.html('')
+    .style('opacity', 0.95)
+    .style('left', (event.pageX + 10) + 'px')
+    .style('top', (event.pageY - 28) + 'px');
+  tip.append('div').html('<strong>' + d.name + '</strong>');
+  tip.append('div').text('回目：' + d.chapter);
+  tip.append('div').text('对象：' + d.target);
+  tip.append('div').text('职能：' + d.action);
+  tip.append('div').text('签名：' + d.tag);
+  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3000);
+}
+
+// ============================================================
+// Section 1 chart: 介入强度倒 U 形曲线
+// ============================================================
+function renderIntensity(intensityData) {
+  const svg = d3.select('#chart-intensity');
+  svg.selectAll('*').remove();
+  if (!intensityData || intensityData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 160).attr('fill', '#8a7a6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 320;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 30, right: 40, bottom: 60, left: 60 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const xScale = d3.scaleLinear()
+    .domain(d3.extent(intensityData, d => d.chapter))
+    .range([0, innerW]);
+  const yScale = d3.scaleLinear()
+    .domain([0, 10])
+    .range([innerH, 0]);
+
+  // 背景网格
+  g.append('g')
+    .attr('class', 'grid')
+    .call(d3.axisLeft(yScale).tickSize(-innerW).tickFormat(''))
+    .selectAll('line').attr('stroke', '#d4c4a8').attr('stroke-dasharray', '3,3').attr('opacity', 0.4);
+  g.select('.grid .domain').attr('stroke', 'none');
+
+  // 倒 U 形填充区域
+  const area = d3.area()
+    .x(d => xScale(d.chapter))
+    .y0(innerH)
+    .y1(d => yScale(d.intensity))
+    .curve(d3.curveMonotoneX);
+  g.append('path')
+    .datum(intensityData)
+    .attr('fill', '#c8463a')
+    .attr('fill-opacity', 0.18)
+    .attr('d', area);
+
+  // 曲线
+  const line = d3.line()
+    .x(d => xScale(d.chapter))
+    .y(d => yScale(d.intensity))
+    .curve(d3.curveMonotoneX);
+  g.append('path')
+    .datum(intensityData)
+    .attr('fill', 'none')
+    .attr('stroke', '#c8463a')
+    .attr('stroke-width', 2.5)
+    .attr('d', line);
+
+  // tooltip
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 节点
+  g.selectAll('.intensity-node')
+    .data(intensityData)
+    .enter()
+    .append('circle')
+    .attr('class', 'intensity-node')
+    .attr('cx', d => xScale(d.chapter))
+    .attr('cy', d => yScale(d.intensity))
+    .attr('r', 6)
+    .attr('fill', '#c8463a')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('r', 9);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>第' + d.chapter + '回</strong>');
+      tooltip.append('div').text('阶段：' + d.phase);
+      tooltip.append('div').text('介入强度：' + d.intensity + ' / 10');
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('r', 6);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 阶段标签
+  g.selectAll('.phase-label')
+    .data(intensityData)
+    .enter()
+    .append('text')
+    .attr('class', 'phase-label')
+    .attr('x', d => xScale(d.chapter))
+    .attr('y', d => yScale(d.intensity) - 12)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '10px')
+    .attr('fill', '#2c2418')
+    .text(d => d.phase);
+
+  // 坐标轴
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).tickFormat(d => '第' + d + '回'))
+    .selectAll('text').attr('font-size', '11px');
+  g.append('g')
+    .call(d3.axisLeft(yScale).ticks(5))
+    .selectAll('text').attr('font-size', '11px');
+
+  // 轴标题
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 45)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a6a')
+    .text('回目时序');
+  g.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -innerH / 2).attr('y', -45)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a6a')
+    .text('介入强度');
+
+  // 图例
+  const legend = d3.select('#intensity-legend');
+  legend.html('');
+  const phases = [
+    { label: '立项高峰 (第8回)', color: '#c8463a' },
+    { label: '中段平台 (第17-46回)', color: '#3a6b8c' },
+    { label: '退场归零 (第56-98回)', color: '#8a7a6a' }
+  ];
+  phases.forEach(p => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', p.color);
+    item.append('span').text(p.label);
+  });
+}
+
+// ============================================================
+// Section 2: 力导向图
+// ============================================================
+function renderForce(networkData) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 280).attr('fill', '#8a7a6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 560;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  // 颜色映射
+  const roleColors = {};
+  EMBEDDED_DATA.roles.forEach(r => { roleColors[r.name] = r.color; });
+  const typeColors = {
+    center: '#2c2418',
+    role: null, // 动态查表
+    chapter: '#d4c4a8',
+    character: '#8b7355'
+  };
+
+  // 深拷贝节点避免 mutation
+  const nodes = networkData.nodes.map(d => ({ ...d }));
+  const links = networkData.links.map(d => ({ ...d }));
+
+  // 节点半径
+  function nodeRadius(d) {
+    if (d.type === 'center') return 22;
+    if (d.type === 'role') return 16;
+    if (d.type === 'chapter') return 9;
+    return 7;
+  }
+  function nodeFill(d) {
+    if (d.type === 'center') return typeColors.center;
+    if (d.type === 'role') return roleColors[d.id] || '#8b7355';
+    if (d.type === 'chapter') return typeColors.chapter;
+    return typeColors.character;
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(d => 70 + (10 - d.weight) * 4).strength(d => 0.08 + d.weight * 0.02))
+    .force('charge', d3.forceManyBody().strength(d => d.type === 'center' ? -600 : -180))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 6));
+
+  const link = svg.append('g').selectAll('line')
+    .data(links)
+    .enter().append('line')
+    .attr('stroke', '#d4c4a8')
+    .attr('stroke-width', d => Math.sqrt(d.weight) * 1.4)
+    .attr('stroke-opacity', 0.55);
+
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', nodeFill)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      const typeLabel = { center: '中心', role: '身份', chapter: '回目', character: '互动对象' }[d.type] || d.type;
+      tooltip.append('div').html('<strong>' + d.id + '</strong>');
+      tooltip.append('div').text('类型：' + typeLabel);
+      const connected = links.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('关联边数：' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 拖拽
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => d.type === 'center' ? 4 : -14)
+    .attr('font-weight', d => d.type === 'center' || d.type === 'role' ? 700 : 400)
+    .attr('font-size', d => d.type === 'center' ? 14 : d.type === 'role' ? 12 : 10)
+    .text(d => d.id);
+
+  sim.on('tick', () => {
+    link.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('cx', d => d.x).attr('cy', d => d.y);
+    label.attr('x', d => d.x).attr('y', d => d.y);
+  });
+
+  // 图例
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const legendItems = [
+    { label: '观音（中心）', color: '#2c2418' },
+    { label: '六重身份', color: '#c8463a' },
+    { label: '关键回目', color: '#d4c4a8' },
+    { label: '互动对象', color: '#8b7355' }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch').style('background', item.color);
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: 桑基图
+// ============================================================
+function renderSankey(sankeyData) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyData || !sankeyData.nodes || sankeyData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#8a7a6a').text('暂无数据');
+    return;
+  }
+
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#c8463a')
+      .text('d3-sankey 未加载，请检查网络');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 520;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  // 颜色：按 cat 分层
+  const catColors = ['#c8463a', '#3a6b8c', '#8b7355', '#5a4a6b'];
+  const roleColors = {};
+  EMBEDDED_DATA.roles.forEach(r => { roleColors[r.name] = r.color; });
+
+  // 深拷贝
+  const nodes = sankeyData.nodes.map(d => ({ ...d }));
+  const links = sankeyData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(16)
+    .nodePadding(10)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 链接
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => roleColors[d.source.name] || catColors[d.source.cat] || '#8b7355')
+    .attr('stroke-width', d => Math.max(1, d.width))
+    .attr('stroke-opacity', 0.4)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.7);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('流量权重：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.4);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => d.x1 - d.x0)
+    .attr('height', d => Math.max(1, d.y1 - d.y0))
+    .attr('fill', d => {
+      if (d.cat === 0) return roleColors[d.name] || catColors[0];
+      return catColors[d.cat] || '#8b7355';
+    })
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      const catLabel = ['身份', '职能', '回目', '互动对象'][d.cat] || '';
+      tooltip.append('div').text('层级：' + catLabel);
+      tooltip.append('div').text('流入：' + (d.targetLinks || []).length + ' · 流出：' + (d.sourceLinks || []).length);
+      tooltip.append('div').text('总流量：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点标签
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '11px')
+    .attr('fill', '#2c2418')
+    .text(d => d.name);
+
+  // 图例
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const layers = ['身份', '职能', '回目', '互动对象'];
+  layers.forEach((layer, i) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', catColors[i]);
+    item.append('span').text(layer);
+  });
+}
+
+// ============================================================
+// Section 4: 雷达图
+// ============================================================
+function renderRadar(radarData) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!radarData || radarData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 250).attr('fill', '#8a7a6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 500;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const dimensions = ['慈悲度', '精算度', '权力', '隐匿', '介入'];
+  const roleColors = {};
+  EMBEDDED_DATA.roles.forEach(r => { roleColors[r.name] = r.color; });
+
+  const cx = width / 2;
+  const cy = height / 2 + 10;
+  const radius = Math.min(width, height) / 2 - 90;
+  const levels = 5;
+
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  // 背景同心五边形
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d4c4a8')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // 轴线 + 标签
+  dimensions.forEach((dim, i) => {
+    const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d4c4a8')
+      .attr('stroke-width', 1);
+    const labelR = radius + 28;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', '#2c2418')
+      .text(dim);
+  });
+
+  // 数值刻度
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6).attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '10px')
+      .attr('fill', '#8a7a6a')
+      .text(lvl * 2);
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 每个身份一个多边形
+  radarData.forEach(role => {
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      const r = radius * (role[dim] / 10);
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    const color = roleColors[role.role] || '#8b7355';
+
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.15)
+      .attr('stroke', color)
+      .attr('stroke-width', 2)
+      .style('cursor', 'pointer')
+      .on('mouseover', function(e) {
+        d3.select(this).attr('fill-opacity', 0.35);
+        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.html('');
+        tooltip.append('div').html('<strong>' + role.role + '</strong>');
+        dimensions.forEach(dim => {
+          tooltip.append('div').text(dim + '：' + role[dim] + ' / 10');
+        });
+      })
+      .on('mousemove', function(e) {
+        tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('fill-opacity', 0.15);
+        tooltip.transition().duration(400).style('opacity', 0);
+      });
+
+    // 顶点圆
+    points.forEach((p) => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 3.5)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 1);
+    });
+  });
+
+  // 图例
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  radarData.forEach(role => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', roleColors[role.role]);
+    item.append('span').text(role.role);
+  });
+}
+
+// ============================================================
+// Section 5: 时间线
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 220).attr('fill', '#8a7a6a').text('暂无数据');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 440;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const roleNames = EMBEDDED_DATA.roles.map(r => r.name);
+  const roleColors = {};
+  EMBEDDED_DATA.roles.forEach(r => { roleColors[r.name] = r.color; });
+
+  const margin = { top: 30, right: 40, bottom: 70, left: 100 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const xScale = d3.scaleLinear()
+    .domain([0, 100])
+    .range([0, innerW]);
+  const yScale = d3.scaleBand()
+    .domain(roleNames)
+    .range([0, innerH])
+    .padding(0.25);
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 背景行
+  roleNames.forEach(name => {
+    g.append('rect')
+      .attr('x', 0).attr('y', yScale(name))
+      .attr('width', innerW)
+      .attr('height', yScale.bandwidth())
+      .attr('fill', roleColors[name])
+      .attr('fill-opacity', 0.06);
+  });
+
+  // X 轴
+  const xTicks = [8, 14, 26, 39, 46, 56, 74, 98];
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).tickValues(xTicks).tickFormat(d => '第' + d + '回'))
+    .selectAll('text').attr('font-size', '11px');
+
+  // 连线（同一身份的事件串联）
+  roleNames.forEach(name => {
+    const events = timelineData.filter(d => d.role === name).sort((a, b) => a.chapter - b.chapter);
+    if (events.length > 1) {
+      const line = d3.line()
+        .x(d => xScale(d.chapter))
+        .y(d => yScale(d.role) + yScale.bandwidth() / 2)
+        .curve(d3.curveMonotoneX);
+      g.append('path')
+        .datum(events)
+        .attr('fill', 'none')
+        .attr('stroke', roleColors[name])
+        .attr('stroke-width', 1.5)
+        .attr('stroke-opacity', 0.5)
+        .attr('stroke-dasharray', '4,3')
+        .attr('d', line);
+    }
+  });
+
+  // 事件节点
+  g.selectAll('.event-node')
+    .data(timelineData)
+    .enter()
+    .append('circle')
+    .attr('class', 'event-node')
+    .attr('cx', d => xScale(d.chapter))
+    .attr('cy', d => yScale(d.role) + yScale.bandwidth() / 2)
+    .attr('r', 10)
+    .attr('fill', d => roleColors[d.role])
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('r', 13);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>第' + d.chapter + '回 · ' + d.role + '</strong>');
+      tooltip.append('div').text('事件：' + d.event);
+      tooltip.append('div').text(d.desc);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('r', 10);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 事件序号
+  g.selectAll('.event-label')
+    .data(timelineData)
+    .enter()
+    .append('text')
+    .attr('class', 'event-label')
+    .attr('x', d => xScale(d.chapter))
+    .attr('y', d => yScale(d.role) + yScale.bandwidth() / 2)
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
+    .attr('font-size', '10px')
+    .attr('font-weight', '700')
+    .attr('fill', '#fff')
+    .attr('pointer-events', 'none')
+    .text(d => d.order);
+
+  // Y 轴标签（身份名）
+  roleNames.forEach(name => {
+    g.append('text')
+      .attr('x', -12)
+      .attr('y', yScale(name) + yScale.bandwidth() / 2)
+      .attr('text-anchor', 'end')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', roleColors[name])
+      .text(name);
+  });
+
+  // 轴标题
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 50)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a6a')
+    .text('回目时序');
+
+  // 图例
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  roleNames.forEach(name => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', roleColors[name]);
+    item.append('span').text(name);
+  });
+}
+
+// ============================================================
+// main：调度所有渲染函数
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      '数据源：实时加载自 <code>scripts/output/data/</code>（http server 模式）';
+  }
+
+  renderOverview(data.roles);
+  renderIntensity(data.intensity);
+  renderForce(data.network);
+  renderSankey(data.sankey);
+  renderRadar(data.radar);
+  renderTimeline(data.timeline);
+}
+
+// 响应式重绘（debounce 250ms）
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderOverview(data.roles);
+      renderIntensity(data.intensity);
+      renderForce(data.network);
+      renderSankey(data.sankey);
+      renderRadar(data.radar);
+      renderTimeline(data.timeline);
+    }
+  }, 250);
+});
+
+// 启动
+main();
+</script>
+</body>
+</html>

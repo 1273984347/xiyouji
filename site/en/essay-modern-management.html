@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>Journey to the West and Modern Organizational Management — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 1.95rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.28rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.02em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+        @media (max-width: 600px) {
+            article { padding: 24px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Essay E3
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>Journey to the West and Modern Organizational Management</h1>
+        <div class="subtitle">ESSAY · SUMMARY TRANSLATION</div>
+        <div class="tagline">A pilgrimage team as a project squad — manager, IC, valve, adhesive, CEO, and the politics of backing.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+            <strong>Source:</strong> A summary translation of <a href="../../docs/06-个人随笔/西游与现代组织管理.md">docs/06-个人随笔/西游与现代组织管理.md</a>. The original Chinese essay reads the pilgrim team as a project organization, then maps each role to a familiar modern archetype.
+        </div>
+
+        <article>
+            <h2>Tang Seng, the Middle Manager <span class="anchor">↔ authority by charter</span></h2>
+            <p>
+                The pilgrim team is the most-studied project squad in literary history. Five people, fourteen years, a clear goal, clear KPIs, a clear deadline. From Chang'an to Vulture Peak, a hundred and eight thousand <em>li</em>, eighty-one tribulations. Transpose it to today: a mid-sized project, one project manager, four individual contributors, one client (Emperor Taizong), one supervisor (Guanyin), one final approver (Tathagata). The org chart is clean enough to fit on a slide. Yet it nearly collapsed ten times. <strong>Tang Seng is the archetypal middle manager.</strong> Above him are Taizong, Guanyin, and Tathagata; below him are Wukong, Bajie, and Sha Seng. He has no hard power — he cannot defeat a single demon, cannot see through a single disguise, cannot even read directions. But he has one thing: the headband chant. The chant is the only tool the organization gives him to constrain Wukong. It is not ability; it is <em>authorization</em>. The middle manager's tragedy is the mismatch between authorization and ability: he supervises the most capable person in the room without that capability himself. The worst chant — the Three Striking of the White Bone Demon — he was wrong, the demon was real, yet he would rather misfire than admit he was wrong. Once he admits it, his authority collapses.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>Wukong, the Senior IC <span class="anchor">↔ capability without authority</span></h2>
+            <p>
+                Wukong is the archetypal senior Individual Contributor. Extremely capable, extremely senior résumé — former Great Sage Equal to Heaven, stormed heaven, single-handedly fought a hundred thousand heavenly soldiers. Yet inside the pilgrim team he has no personnel authority. He cannot command Bajie, cannot command Sha Seng, cannot even command Tang Seng. He can only <em>do things</em>: fight demons, scout the road, beg for alms, call for backup. He leaves the team twice. The first time, after the White Bone Demon — Tang Seng rejects his judgment, chants, writes a dismissal letter, and he returns to Mount Huaguo. He was pushed out. The second time, before the True and False Monkey King — again a chant, again a dismissal, but this time he goes not home but to Putuo to complain to Guanyin. Both are dismissals; the mood differs. The first time, he still wants to prove himself; the second, he really wants to leave, but he cannot leave cleanly — the Six-Eared Macaque is the part of himself he cannot shed. <strong>The senior IC's fate: the organization always needs his capability and never hands him real decision-making power.</strong> Capability buys the right to speak. Between the right to speak and the right to decide sits a headband.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>Bajie, the Pressure-Relief Valve <span class="anchor">↔ the politically incorrect voice</span></h2>
+            <p>
+                Bajie is something else. His ability is modest, his seniority is not (former Marshal Tianpeng), but his role is more important than his ability suggests. He is the team's <strong>political animal</strong>. At every crisis he is the first to shout "split the luggage." Whenever Tang Seng is captured, he is the first to suggest disbanding. Whenever Wukong is absent, he is the first to consider surrender. He sounds like dead weight. Look again: Bajie is the team's <em>pressure-relief valve</em>. In a high-pressure project where everyone is as intense as Wukong and as stubborn as Tang Seng, the team would have imploded long ago. Bajie says the things no one else can — disband, surrender, split. Tang Seng cannot say them. Wukong will not. Sha Seng dares not. Only Bajie says them. Once the worst possibility is spoken aloud, the team can keep moving; it no longer has to be hidden. <strong>Every organization needs a Bajie</strong>: someone to say out loud what everyone is thinking but no one dares say, so the team can find, in fear, a reason to continue.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>Sha Seng, the Team Adhesive <span class="anchor">↔ the 80% who do not speak</span></h2>
+            <p>
+                Sha Seng is the most easily overlooked. He carries the luggage. He leads the horse. He rarely speaks. He almost never proposes anything. Yet he is the team's <strong>adhesive</strong>. When Wukong and Tang Seng clash, Sha Seng mediates. When Wukong and Bajie fight, Sha Seng holds them apart. When Tang Seng is captured, Sha Seng stands guard. He is not visible, but as long as he is there the team is still a team; without him, Wukong and Bajie would have scattered long ago. <strong>Eighty percent of an organization's stability comes from the eighty percent who do not speak.</strong> The visible stars of the project take the credit; the silent load-bearers hold the structure together. Sha Seng is the load-bearer. He represents the unglamorous, indispensible middle of every team — the people whose absence would be felt instantly and whose presence is rarely praised.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>The Jade Emperor, the CEO <span class="anchor">↔ the art of asking</span></h2>
+            <p>
+                The Jade Emperor is the CEO of Heaven. Yet in the novel he solves almost nothing himself. Wukong storms heaven — the Jade Emperor summons the Buddha. Wukong meets backed demons on the road — the Jade Emperor cannot help. Lion Camel Ridge — he is helpless. His management style is a single word: <em>ask</em>. Ask the Buddha, ask the Bodhisattva, ask Laozi. Whatever can be outsourced is outsourced; whatever can be passed on is passed on. This sounds incompetent. Read it another way — it is exactly the survival logic of large organizations. The Jade Emperor knows that Heaven is a vast bureaucracy and that any active decision carries risk. Rather than act himself, he prefers to call in a higher, more specialized, more credentialed force. "Asking the Buddha" becomes the universal solution. Like a modern corporation that, facing an unmanageable problem, does not ask how to solve it but first asks "is there a vendor who can." <strong>The core competency of a large-organization CEO is not solving problems — it is knowing, at what moment, whom to ask, to solve this problem.</strong>
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>Demon Backings, Organizational Politics <span class="anchor">↔ the coldest rule</span></h2>
+            <p>
+                The demons' backing is the coldest rule in the world of the novel. <strong>Demons with backing are taken away; demons without backing are killed.</strong> The White Bone Demon has no sponsor — killed. The Spider Demons have no sponsor — killed. The three demons of Chechi Kingdom have no sponsor — killed. But the Gold and Silver Horns are Laozi's attendants — taken away. The Yellow-Robed Demon is Maitreya's attendant — taken away. The Goldfish Demon is from Guanyin's pond — taken away. The Green Lion and White Elephant are Manjusri's and Samantabhadra's mounts; the Great Peng is Tathagata's uncle — all taken away. Same organization, same kind of error, completely different handling. This is not Wu Cheng'en's satire; it is his plain description. He is not writing about a dynasty. He is writing about organizations themselves — <em>any sufficiently large, sufficiently old organization evolves this logic of "handling by background."</em> The Ming had the <em>lijia</em>; today has KPIs. The form changes; the logic does not. Patronage and collective punishment are two sides of the same coin. The coin is always in the organization's hand. <strong>The novel is not a myth. It is an organizational-behavior textbook wrapped in a mythological skin.</strong>
+            </p>
+
+            <a class="nav-back" href="index.html">← Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+                <a href="essay-ai-era.html">E1 · AI Era</a> ·
+                <a href="essay-information-cocoon.html">E2 · Information Cocoon</a> ·
+                <a href="../data/workplace.html">Workplace visualization</a> ·
+                <a href="../data/business-model.html">Business Model visualization</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        © <span id="footer-year">2026</span> Journey to the West · Annotated Project · MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> ·
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.40 W234-E4 ·
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W234-E4
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

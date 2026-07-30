@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>妖怪社会学 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+        }
+        .breadcrumb a {
+            color: var(--accent-2);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        .kpi-card .value {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        .section-title.alt-4 { border-bottom-color: var(--accent-3); }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        /* 表格 */
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+        }
+        table.data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .icon-correct {
+            color: var(--accent-4);
+            font-weight: 700;
+        }
+        .icon-wrong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        /* 洞察列表 */
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        /* 信号卡片 */
+        .signal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .signal-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent-2);
+        }
+        .signal-card.s-active { border-top-color: var(--accent); }
+        .signal-card.s-passive { border-top-color: var(--ink-soft); }
+        .signal-card.s-external { border-top-color: var(--accent-4); }
+        .signal-card .signal-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .signal-card .signal-eng {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 8px;
+        }
+        .signal-card .signal-score {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .signal-card .signal-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .signal-card .signal-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        /* 雷达图坐骑卡片 */
+        .mount-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .mount-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent-4);
+        }
+        .mount-card .mount-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .mount-card .mount-owner {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+        }
+        .mount-card .mount-score {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            color: var(--accent-4);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .mount-card .mount-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .mount-card .mount-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        /* 维度 / 现代对应 卡片 */
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .map-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .map-card.alt { border-left-color: var(--accent-4); }
+        .map-card.alt2 { border-left-color: var(--accent-3); }
+        .map-card .map-label {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .map-card.alt .map-label { color: var(--accent-4); }
+        .map-card.alt2 .map-label { color: var(--accent-3); }
+        .map-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .map-card .map-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .map-card .map-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 16px;
+            grid-column: 1 / -1;
+        }
+        .summary-card .map-label {
+            color: var(--accent);
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .summary-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--ink);
+        }
+        .summary-card .map-row {
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+        /* tooltip */
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 280px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 24px;
+        }
+        .footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 6px;
+        }
+        .footer a:hover { text-decoration: underline; }
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        /* axis 文字 */
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        /* code 样式 */
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        /* 叙事段落 */
+        .narrative {
+            font-size: 0.92rem;
+            line-height: 1.85;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .narrative strong { color: var(--ink); font-weight: 600; }
+        /* 数据来源徽章 */
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        @media (max-width: 720px) {
+            .hero h1 { font-size: 1.6rem; }
+            .hero .subtitle { font-size: 0.78rem; letter-spacing: 0.15em; }
+            .section { padding: 18px; }
+            .kpi-card .value { font-size: 1.5rem; }
+            .map-grid { grid-template-columns: 1fr; }
+            .mount-grid { grid-template-columns: 1fr; }
+            .signal-grid { grid-template-columns: 1fr; }
+            table.data-table { font-size: 0.78rem; }
+            table.data-table th, table.data-table td { padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            .hero { padding: 36px 16px 28px; }
+            .hero h1 { font-size: 1.4rem; }
+            .container { padding: 0 12px; }
+            .section { padding: 14px; }
+            .chart-block { padding: 12px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>妖怪社会学 · 西游世界的犯罪与司法</h1>
+        <div class="subtitle">DATA-DRIVEN MONSTER SOCIOLOGY OF XIYOUJI</div>
+        <div class="tagline">从作案模式到求救信号，再到坐骑下凡——一部西游司法双标的活档案。</div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="../dashboard.html">仪表盘</a>
+            <span class="sep">/</span>
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <span class="current">妖怪社会学</span>
+        </nav>
+
+        <div class="notice">
+            本页基于 AD 类「妖怪社会学」脚本生成，包含 4 份 JSON 数据：作案模式分类学、遇险信号生存概率、坐骑下凡全档案、整体统计。所有图表支持 hover tooltip。
+        </div>
+
+        <!-- 研究方法论 -->
+        <section class="section">
+            <h2 class="section-title">导言 · 妖怪社会学的三维透镜</h2>
+            <div class="section-sub">INTRODUCTION · Three-Dimensional Sociological Lens on Xiyouji</div>
+            <p style="font-size:0.95rem;line-height:1.8;color:var(--ink);margin-bottom:14px;">
+                《西游记》不仅是神魔小说，更是一部活生生的<strong>妖怪社会学教材</strong>。本页从三个维度剖析西游世界的犯罪与司法：
+                <strong style="color:var(--accent);">作案模式分类学</strong>（5 类妖怪手法 69 起案件）、
+                <strong style="color:var(--accent-2);">遇险信号生存概率</strong>（10 种求救方式·生存率差异巨大）、
+                <strong style="color:var(--accent-4);">坐骑下凡全档案</strong>（10 起特权妖怪司法豁免案例）。
+            </p>
+
+            <div style="margin-bottom:18px;">
+                <span class="data-badge">4 份 JSON 数据</span>
+                <span class="data-badge">3 个社会学维度</span>
+                <span class="data-badge">5 类作案手法</span>
+                <span class="data-badge">10 种求救信号</span>
+                <span class="data-badge">10 起坐骑下凡</span>
+                <span class="data-badge">69 起案件样本</span>
+                <span class="data-badge">实质惩罚率 0%</span>
+                <span class="data-badge">D3.js v7</span>
+                <span class="data-badge">fetch + EMBEDDED fallback</span>
+            </div>
+
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">DIMENSION 1</div>
+                    <div class="map-title">作案模式分类学 · Crime Patterns</div>
+                    <div class="map-row">5 类妖怪作案手法共 69 起·武力劫掠最常见（25 起 36%）·法术威胁最危险（成功率 50% + 难度 9）。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">DIMENSION 2</div>
+                    <div class="map-title">遇险信号生存概率 · Survival Signals</div>
+                    <div class="map-row">10 种求救信号平均生存率 42.5%·悟空火眼金睛最可靠（80%）·哭泣最无效（5%）·主动 vs 被动差距显著。</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">DIMENSION 3</div>
+                    <div class="map-title">坐骑下凡全档案 · Mount Desertion</div>
+                    <div class="map-row">10 起坐骑下凡案平均判决严厉度仅 2.8/10·实质惩罚率 0%·野生妖怪死亡率 60%+ vs 坐骑下凡死亡率 0%。</div>
+                </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+                数据来源：scripts/AD_妖怪社会学/monster_sociology.py · 共生成 4 份 JSON 输出，本页 fetch 失败时自动回退到内嵌 EMBEDDED 数据，支持 file:// 协议双击打开。
+            </p>
+        </section>
+
+        <!-- 研究方法论 -->
+        <section class="section">
+            <h2 class="section-title">研究方法论 · 数据来源与评分体系</h2>
+            <div class="section-sub">METHODOLOGY · Data Sources &amp; Scoring System</div>
+            <p style="font-size:0.92rem;line-height:1.85;color:var(--ink);margin-bottom:14px;">
+                本页数据基于<strong>《西游记》原著 100 回</strong>·案件数与判决均为定性分析·severity 采用 1-10 主观评分。
+                共采集 <strong style="color:var(--accent);">25 个数据点</strong>，分布于 <strong>3 个社会学维度</strong>
+                （作案模式 5 类 / 求救信号 10 种 / 坐骑下凡 10 起）。所有评分由 AD 类脚本基于文本挖掘与人工校验生成，
+                数据存在主观性，结论为趋势性而非精确性分析。
+            </p>
+
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">DATA SOURCE 1</div>
+                    <div class="map-title">作案模式 · 69 起案件</div>
+                    <div class="map-row"><strong>采集范围：</strong>原著 100 回·81 难中明确的妖怪作案事件</div>
+                    <div class="map-row"><strong>分类依据：</strong>作案手法（变化/武力/色诱/法术/团队）</div>
+                    <div class="map-row"><strong>评分维度：</strong>count / success_rate / detection_difficulty（1-10）</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">DATA SOURCE 2</div>
+                    <div class="map-title">求救信号 · 10 种方式</div>
+                    <div class="map-row"><strong>采集范围：</strong>唐僧历次被擒后的求救行为</div>
+                    <div class="map-row"><strong>分类依据：</strong>主动 / 被动 / 外部三类信号机制</div>
+                    <div class="map-row"><strong>评分维度：</strong>survival_probability / response_time / effectiveness（1-10）</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">DATA SOURCE 3</div>
+                    <div class="map-title">坐骑下凡 · 10 起案件</div>
+                    <div class="map-row"><strong>采集范围：</strong>明确为神仙坐骑/天神下凡的 10 起案件</div>
+                    <div class="map-row"><strong>对照样本：</strong>野生妖怪（白骨精/蜘蛛精/蝎子精/车迟国三妖）</div>
+                    <div class="map-row"><strong>评分维度：</strong>sentence_severity / harm_severity / owner_influence（1-10）</div>
+                </div>
+            </div>
+
+            <p style="font-size:0.82rem;color:var(--ink-soft);font-style:italic;margin-top:10px;">
+                数据生成脚本：scripts/AD_妖怪社会学/monster_sociology.py · 输出位置：scripts/output/data/*.json · 评分标准遵循原著文本叙事与司法结局，存在主观判定成分。
+            </p>
+        </section>
+
+        <!-- KPI 卡片 -->
+        <div class="kpi-row" id="kpiRow">
+            <div class="kpi-card">
+                <div class="label">CRIME · 作案模式</div>
+                <div class="value">5 类</div>
+                <div class="desc">妖怪作案手法分类（69 起案件·武力劫掠 25 起最多·法术威胁成功率 50% 最高）</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">SIGNAL · 求救信号</div>
+                <div class="value">10 种</div>
+                <div class="desc">唐僧遇险求救方式（平均生存率 42.5%·悟空火眼金睛 80% 最高·哭泣 5% 最低）</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">MOUNT · 坐骑下凡</div>
+                <div class="value">10 例</div>
+                <div class="desc">坐骑/天神下凡案件（平均判决严厉度 2.8/10·原主分布 7 方·菩萨坐骑占 6 起）</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">JUSTICE · 实质惩罚率</div>
+                <div class="value">0%</div>
+                <div class="desc">坐骑下凡案 0 起被处死·野生妖怪死亡率 60%+·背景决定判决·司法双标明显</div>
+            </div>
+        </div>
+
+        <!-- Section 1: 妖怪作案模式分类学 -->
+        <section class="section">
+            <h2 class="section-title">壹 · 妖怪作案模式分类学</h2>
+            <div class="section-sub">CRIME PATTERN TAXONOMY · 5 类手法 69 起案件的犯罪学图谱</div>
+            <div class="definition" id="def-crime">
+                <strong>概念定义：</strong>西游妖怪 81 难中暴露 5 类作案手法·从"变化诈骗"到"团队围剿"·手法等级与法宝等级呈正相关。本节从犯罪学视角分类妖怪作案模式，揭示西游世界的"犯罪生态学"。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>5 类作案手法：</strong>
+                <strong style="color:var(--accent);">变化诈骗</strong>（18 起·信息差型·成功率 60%）、
+                <strong style="color:var(--accent-2);">武力劫掠</strong>（25 起·肌肉型·成功率 40%·最常见）、
+                <strong style="color:var(--accent-soft);">色诱</strong>（8 起·软实力型·成功率 10%·心理威胁最大）、
+                <strong style="color:var(--accent-4);">法术威胁</strong>（12 起·技术壁垒型·成功率 50%·最危险）、
+                <strong style="color:var(--accent-3);">团队围剿</strong>（6 起·组织型·成功率 30%·单兵弱协同强）。
+                平均成功率 <strong>38%</strong>，最高侦破难度 <strong>9/10（法术威胁）</strong>。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">5 类作案模式水平条形图（按 count 排序·带 success_rate 标注）</div>
+                <div class="chart-caption">Y 轴：5 类作案手法（按 count 降序）/ X 轴：count 案件数 / 红色数值标签：success_rate 成功率</div>
+                <svg id="chart-crime-bar" class="chart-svg" width="100%" height="380"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>count 案件数</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-2);"></span>success_rate 成功率标注</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);opacity:0.5;"></span>detection_difficulty 难度背景</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">5 作案模式详表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="crime-table">
+                    <thead>
+                        <tr>
+                            <th>类型</th>
+                            <th>英文名</th>
+                            <th>案件数</th>
+                            <th>成功率</th>
+                            <th>侦破难度</th>
+                            <th>目标模式</th>
+                            <th>代表案例</th>
+                            <th>关键洞察</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">作案模式洞察</h3>
+            <ol class="insights-list" id="crime-insights-list"></ol>
+        </section>
+
+        <!-- Section 2: 遇险信号生存概率 -->
+        <section class="section">
+            <h2 class="section-title alt-2">贰 · 遇险信号生存概率</h2>
+            <div class="section-sub">SURVIVAL SIGNAL PROBABILITY · 唐僧的 10 种求救方式与生存率</div>
+            <div class="definition" id="def-signal">
+                <strong>概念定义：</strong>唐僧被擒后通过 10 种方式发出求救信号·信号的有效性决定其能否活到救援到达·这是妖怪社会学的"被害人生存学"。平均生存率 42.5%，主动信号平均 70%、被动信号平均 15%，差距显著。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>3 类信号：</strong>
+                <strong style="color:var(--accent);">主动信号</strong>（悟空火眼金睛 80% / 八戒找救兵 70% / 白龙马传讯 60% — 平均 70%）、
+                <strong style="color:var(--ink-soft);">被动信号</strong>（哭泣 5% / 念经 10% / 沙僧等待 30% — 平均 15%）、
+                <strong style="color:var(--accent-4);">外部信号</strong>（托梦 30% / 求救信物 50% / 妖怪同情者 40% / 天庭预警 50% — 平均 42.5%）。
+                <strong style="color:var(--accent);">核心发现：</strong>唐僧自身求救能力极弱，生存严重依赖悟空·揭示"被动受害者"困境。
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">10 种求救信号生存概率条形图（按 survival_probability 排序·主动 vs 被动颜色区分）</div>
+                <div class="chart-caption">Y 轴：10 种求救方式（按生存概率降序）/ X 轴：survival_probability 0-100% / 红色=主动 灰色=被动 绿色=外部</div>
+                <svg id="chart-signal-bar" class="chart-svg" width="100%" height="460"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>active 主动信号（均值 70%）</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--ink-soft);"></span>passive 被动信号（均值 15%）</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>external 外部信号（均值 42.5%）</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">10 信号分类卡片</h3>
+            <div class="signal-grid" id="signal-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">求救信号洞察</h3>
+            <ol class="insights-list" id="signal-insights-list"></ol>
+        </section>
+
+        <!-- Section 3: 坐骑下凡全档案 -->
+        <section class="section">
+            <h2 class="section-title alt-3">叁 · 坐骑下凡全档案</h2>
+            <div class="section-sub">MOUNT DESERTION ARCHIVE · 10 起特权妖怪的司法豁免案例</div>
+            <div class="definition" id="def-mount">
+                <strong>概念定义：</strong>西游世界 10 起坐骑/天神下凡案件·揭示"有背景的妖怪与无背景的妖怪判决差异巨大"·是西游司法社会学的核心案例。平均判决严厉度 2.8/10，实质惩罚率 0%，与野生妖怪 60%+ 死亡率形成鲜明对比。
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>原主分布：</strong>观音菩萨（2 起·金鱼精/金毛犼）、文殊菩萨（2 起·青毛狮子怪/青狮）、
+                普贤菩萨（2 起·黄牙老象/白象）、太上老君（1 起·青牛精）、如来佛祖（1 起·金翅大鹏雕）、
+                太乙救苦天尊（1 起·九灵元圣）、天庭（1 起·黄袍怪）。
+                <strong style="color:var(--accent);">核心发现：</strong>判决模式为"原主收走 8 例·贬职 1 例·封官 1 例·实质惩罚率 0%"——
+                <strong>100% 坐骑下凡案均未被处死</strong>·揭示"有背景的妖怪判决豁免率 100%"的司法双标。
+            </p>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">5 维度评分体系说明</h3>
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">DIM 1 · sentence_severity</div>
+                    <div class="map-title">判决严厉度（1-10）</div>
+                    <div class="map-row">基于原著最终结局的判决严重程度评分·2 = 原主带走无惩罚·5 = 贬职/封官·10 = 处死。10 起案件平均仅 2.8·揭示系统性轻判。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">DIM 2 · crimes_committed</div>
+                    <div class="map-title">罪行数量（×2.5 归一化）</div>
+                    <div class="map-row">每起坐骑下凡的明确罪行条目数（如"绑架唐僧/吃人/对抗神将"等）·乘以 2.5 归一化到 0-10·最大 4 起 = 10 分。</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">DIM 3 · time_on_earth</div>
+                    <div class="map-title">下凡年数（÷13×10 归一化）</div>
+                    <div class="map-row">妖怪在下界作乱的时间跨度（年）·除以最大值 13（黄袍怪）再×10 归一化。下凡越久危害越大·但与判决严厉度无相关性。</div>
+                </div>
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">DIM 4 · harm_severity</div>
+                    <div class="map-title">社会危害度（1-10）</div>
+                    <div class="map-row">基于罪行后果的主观评分·如吃童男童女=8·灭国=10·篡位假冒=6。金翅大鹏雕 10 分最严重·却被封护法·是司法双标的极端案例。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">DIM 5 · owner_influence</div>
+                    <div class="map-title">原主影响力（1-10）</div>
+                    <div class="map-row">原主在三界神佛体系中的等级映射·三清/佛祖=10·四大菩萨=8-9·天庭星官=7-8。原主影响力越高·坐骑判决越轻·呈强负相关。</div>
+                </div>
+                <div class="summary-card">
+                    <div class="map-label">RADAR INSIGHT</div>
+                    <div class="map-title">5 维度的核心矛盾 · 危害度与判决严厉度反相关</div>
+                    <div class="map-row">雷达图最直观的发现：<strong>社会危害度高的坐骑（金翅大鹏雕 harm=10）反而判决严厉度低（sentence=5·仅封护法）</strong>·而 owner_influence 高的妖怪往往 sentence_severity 低·揭示"原主影响力 ↔ 判决严厉度"的强负相关·是西游司法社会学的核心矛盾。</div>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">10 坐骑下凡雷达图（5 维度：判决严厉度/罪行数量/下凡年数/社会危害度/原主影响力）</div>
+                <div class="chart-caption">5 维度均归一化至 0-10：sentence_severity / crimes_committed×2.5 / time_on_earth÷13×10 / harm_severity / owner_influence</div>
+                <svg id="chart-mount-radar" class="chart-svg" width="100%" height="560"></svg>
+                <div class="legend-row" id="radar-legend">
+                    <span class="legend-item"><span class="legend-swatch" style="background:#c8463a;"></span>青牛精</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#3a6b8c;"></span>金鱼精</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;"></span>金毛犼</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#5a7a3a;"></span>青毛狮子怪</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#7a5230;"></span>黄牙老象</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#8c4a6b;"></span>金翅大鹏雕</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#4a6b8c;"></span>九灵元圣</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#a8542a;"></span>黄袍怪</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#6b8c4a;"></span>白象</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#8c6b4a;"></span>青狮</span>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">坐骑原主分布饼图（7 方原主·占比）</div>
+                <div class="chart-caption">观音 2 / 文殊 2 / 普贤 2 / 太上老君 1 / 如来 1 / 太乙 1 / 天庭 1 — 三大菩萨合计占 60%</div>
+                <svg id="chart-owner-pie" class="chart-svg" width="100%" height="420"></svg>
+                <div class="legend-row" id="pie-legend"></div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">10 坐骑下凡详表</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="mount-table">
+                    <thead>
+                        <tr>
+                            <th>坐骑</th>
+                            <th>原主</th>
+                            <th>原主身份</th>
+                            <th>下凡原因</th>
+                            <th>下凡年数</th>
+                            <th>罪行</th>
+                            <th>判决严厉度</th>
+                            <th>章节</th>
+                            <th>最终结局</th>
+                            <th>法律分析</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">10 坐骑特征卡片</h3>
+            <div class="mount-grid" id="mount-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">野生妖怪对照表 · 司法双标的物证</h3>
+            <p style="font-size:0.85rem;color:var(--ink-soft);margin-bottom:10px;">
+                以下野生妖怪罪行严重度未必高于坐骑下凡案·但<strong style="color:var(--accent);">100% 被处死</strong>·与坐骑下凡 0% 死亡率形成最直接的对照。
+            </p>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="wild-table">
+                    <thead>
+                        <tr>
+                            <th>野生妖怪</th>
+                            <th>主要罪行</th>
+                            <th>章节</th>
+                            <th>判决</th>
+                            <th>对比坐骑</th>
+                            <th>差异说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong style="color:var(--accent);">白骨精</strong></td>
+                            <td>三变诈骗·图谋唐僧肉</td>
+                            <td>第 27 回</td>
+                            <td><span class="icon-wrong">✗ 被打死</span></td>
+                            <td>变化诈骗类</td>
+                            <td>无背景·虽仅图谋未遂即被处死</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color:var(--accent);">蜘蛛精七姐妹</strong></td>
+                            <td>色诱唐僧·濯垢泉困人</td>
+                            <td>第 72-73 回</td>
+                            <td><span class="icon-wrong">✗ 被打死</span></td>
+                            <td>色诱+团队围剿</td>
+                            <td>无背景·七妖全灭·对比坐骑团伙轻判</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color:var(--accent);">蝎子精</strong></td>
+                            <td>琵琶洞逼婚·破唐僧元阳</td>
+                            <td>第 55 回</td>
+                            <td><span class="icon-wrong">✗ 被杀</span></td>
+                            <td>色诱类</td>
+                            <td>无背景·被昴日星官杀掉·无原主收容</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color:var(--accent);">车迟国三妖</strong></td>
+                            <td>虎力/鹿力/羊力·斗法欺僧</td>
+                            <td>第 44-46 回</td>
+                            <td><span class="icon-wrong">✗ 三妖惨死</span></td>
+                            <td>团队围剿类</td>
+                            <td>无背景·斗法失败全死·对比狮驼三魔全活</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="background:#fff8ec;text-align:center;">
+                                <strong style="color:var(--accent-3);">对照结论：</strong>
+                                野生妖怪死亡率 <strong style="color:var(--accent);">100%</strong>（4/4）·坐骑下凡死亡率 <strong style="color:var(--accent-4);">0%</strong>（0/10）·
+                                <strong>背景决定生死</strong>是西游司法社会学的核心规律。
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">坐骑下凡洞察</h3>
+            <ol class="insights-list" id="mount-insights-list"></ol>
+        </section>
+
+        <!-- 综合结论 -->
+        <section class="section">
+            <h2 class="section-title alt-4">肆 · 综合结论 · 妖怪社会学的三大发现</h2>
+            <div class="section-sub">SYNTHESIS · Three Discoveries of Monster Sociology</div>
+
+            <p style="font-size:0.95rem;line-height:1.85;color:var(--ink);margin-bottom:18px;">
+                从三个维度交叉观察，《西游记》呈现了一个完整的<strong>妖怪社会学图谱</strong>：
+                作案手法与法宝等级正相关（69 起案件·5 类手法）；唐僧生存严重依赖悟空（自身求生能力极弱·10 种信号平均生存率 42.5%）；
+                西游司法是典型的"背景决定判决"——坐骑下凡是特权阶层的"司法豁免券"（10 起案件·实质惩罚率 0%·野生妖怪死亡率 60%+）。
+            </p>
+
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">FINDING 1 · 作案手法梯度</div>
+                    <div class="map-title">手法与法宝等级正相关</div>
+                    <div class="map-row">5 类作案手法从"技术型"（变化诈骗 60% 成功率）到"体力型"（武力劫掠 40%）呈梯度分布·法术威胁（成功率 50% + 难度 9）最危险·揭示"技术壁垒即生存壁垒"。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">FINDING 2 · 被害人生存学</div>
+                    <div class="map-title">唐僧严重依赖悟空</div>
+                    <div class="map-row">10 种信号平均生存率 42.5%·主动信号 70% vs 被动信号 15%·哭泣 5% / 念经 10% 几乎无效·唐僧自身求救能力极弱·是典型的"被动受害者"。</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">FINDING 3 · 司法双标</div>
+                    <div class="map-title">背景决定生死</div>
+                    <div class="map-row">10 起坐骑下凡案 0 起被处死·实质惩罚率 0%·平均判决严厉度仅 2.8/10·对比野生妖怪 60%+ 死亡率·"有背景的妖怪判决豁免率 100%"是西游司法社会学的核心矛盾。</div>
+                </div>
+                <div class="summary-card">
+                    <div class="map-label">META INSIGHT</div>
+                    <div class="map-title">妖怪社会学的三大发现 · 西游世界的"特权司法券"</div>
+                    <div class="map-row">
+                        三大发现共同指向一个深层主题：<strong>背景决定命运</strong>。作案手法越接近"技术壁垒型"（法术威胁）·妖怪生存率越高；
+                        唐僧作为受害者·自身求生能力极弱·完全依赖悟空的火眼金睛；坐骑下凡案 100% 司法豁免·
+                        金翅大鹏雕灭狮驼国一国却封护法·是特权司法的极端案例。这构成了《西游记》最深的
+                        <strong>社会学悖论</strong>——神佛体系既是立法者又是司法者还是受益者·"监管责任缺失"是制度性缺陷。
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 10px;color:var(--ink);">交叉发现 · 三个维度的内在关联</h3>
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">CROSS 1 · 作案 vs 求救</div>
+                    <div class="map-title">唐僧求救能力与妖怪手法等级负相关</div>
+                    <div class="map-row">面对"变化诈骗"（难度 8）唐僧自身生存率仅 5%·面对"武力劫掠"（难度 3）则相对容易脱险。法术威胁（难度 9）几乎必然需要外援·揭示<strong>妖怪手法升级 → 求救能力降级</strong>的负相关规律。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">CROSS 2 · 作案 vs 司法</div>
+                    <div class="map-title">法术型妖怪多来自坐骑下凡</div>
+                    <div class="map-row">"法术威胁"类妖怪（青牛精金刚琢/金鱼精通天河/金翅大鹏雕阴阳二气瓶）多对应坐骑下凡案·专属法术来自原主法宝·揭示<strong>坐骑下凡 = 法术型犯罪的高发源头</strong>。</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">CROSS 3 · 求救 vs 司法</div>
+                    <div class="map-title">司法豁免与求救无效相互印证</div>
+                    <div class="map-row">坐骑下凡案的"原主收走"模式让取经团队的求救行为变得形式化——无论唐僧如何挣扎·最终都是"等原主来收"。这构成<strong>司法豁免与求救无效的循环印证</strong>。</div>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 10px;color:var(--ink);">现代视角 · 西游司法社会学的当代映照</h3>
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label">CRIMINOLOGY</div>
+                    <div class="map-title">犯罪学映射 · 作案手法分级</div>
+                    <div class="map-row">5 类作案手法对应现代犯罪学的<strong>白领犯罪/暴力犯罪/色情犯罪/技术犯罪/有组织犯罪</strong>分类·《西游记》本质是一部犯罪学图谱。</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label">VICTIMOLOGY</div>
+                    <div class="map-title">被害人生存学 · 求救信号有效度</div>
+                    <div class="map-row">10 种信号对应现代危机响应体系·<strong>主动 vs 被动信号 70% vs 15% 的生存率差异</strong>·印证了"主动响应"在危机管理中的核心价值。</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label">JURISPRUDENCE</div>
+                    <div class="map-title">司法社会学 · 特权豁免机制</div>
+                    <div class="map-row">坐骑下凡 0% 实质惩罚率 vs 野生妖怪 60%+ 死亡率·对应现代社会学中的<strong>"特权阶层司法豁免"</strong>现象·《西游记》是这一议题的最早寓言。</div>
+                </div>
+                <div class="summary-card">
+                    <div class="map-label">CONCLUSION</div>
+                    <div class="map-title">妖怪社会学的当代启示</div>
+                    <div class="map-row">
+                        《西游记》以神话外壳包裹了一个完整的<strong>社会学考察</strong>：作案手法的分类学映射现代犯罪学·求救信号的有效度差异印证被害人生存学·
+                        坐骑下凡的司法豁免率则揭示特权司法的制度性缺陷。三者共同构成一部<strong>妖怪社会学教材</strong>·其洞察在 500 年后的今天依然具有现实意义。
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div>
+            <a href="../dashboard.html">返回仪表盘</a> ·
+            <a href="../index.html">返回首页</a>
+        </div>
+        <div class="source-list">
+            数据源：scripts/AD_妖怪社会学/monster_sociology.py · output/data/monster_crime_patterns.json · survival_signals.json · mount_deserters.json · monster_sociology_summary.json
+        </div>
+        <div class="source-list" style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7;">
+            <strong style="color:var(--accent-3);">数据结构摘要：</strong><br>
+            · <code>monster_crime_patterns.json</code>：crime_types[5] · pattern_stats{total_cases=69} · pattern_insights[6]<br>
+            · <code>survival_signals.json</code>：signal_methods[10] · signal_stats{avg_survival_probability=0.425} · survival_insights[6]<br>
+            · <code>mount_deserters.json</code>：desertion_cases[10] · desertion_stats{avg_sentence_severity=2.8·verdict_pattern} · desertion_insights[7]<br>
+            · <code>monster_sociology_summary.json</code>：total_concepts=3 · total_data_points=25 · key_findings[4] · cross_concept_insight
+            <strong style="color:var(--accent-3);">渲染机制：</strong>fetch + EMBEDDED fallback · 支持 file:// 双击打开 · D3.js v7 · 古典宣纸风 CSS 变量配色
+        </div>
+        <div class="source-list" style="margin-top:14px;font-size:0.74rem;color:var(--ink-soft);">
+            页面结构：Hero · KPI 卡片 × 4 · 导言 · Section 1（条形图 + 5 案表 + 6 洞察） · Section 2（条形图 + 10 卡片 + 6 洞察） · Section 3（雷达图 + 饼图 + 10 案表 + 10 卡片 + 7 洞察） · Section 4（综合结论 + 4 发现） · Footer
+        </div>
+        <div class="source-list" style="margin-top:8px;font-size:0.74rem;color:var(--ink-soft);font-style:italic;">
+            © 详解西游记 · AD 类「妖怪社会学」可视化 · 共 4 份 JSON 数据源 · 4 张图表 · 3 张表格 · 27 张卡片
+        </div>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/02-人物深度分析/妖怪谱系深度分析.md">妖怪谱系深度分析</a></div>
+    </footer>
+
+    <!-- ===== EMBEDDED FALLBACK DATA ===== -->
+    <!--
+        本页所有 JSON 数据均嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback。
+        在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据。
+        在 http(s):// 协议下打开时，优先 fetch ../../scripts/output/data/*.json。
+        数据源：scripts/AD_妖怪社会学/monster_sociology.py 生成的 4 份 JSON。
+    -->
+    <script>
+    const EMBEDDED = {
+        crime: {
+            "concept_name": "妖怪作案模式分类学",
+            "english_name": "Monster Crime Pattern Taxonomy",
+            "definition": "西游妖怪 81 难中暴露 5 类作案手法·从'变化诈骗'到'团队围剿'·手法等级与法宝等级呈正相关",
+            "crime_types": [
+                {"type": "变化诈骗", "english_name": "Transformation Fraud", "count": 18, "representative_cases": ["白骨精三变（村姑/老妇/老翁）骗取唐僧信任", "金角银角变化老道·假扮僧人混入寺院", "黄袍怪变俊俏郎君·骗宝象国公主", "六耳猕猴变化孙悟空·篡夺取经团队", "银角大王变化老道·骗悟空背山"], "target_pattern": "唐僧肉眼凡胎的信任·取经团队内部的认知盲区", "success_rate": 0.6, "detection_difficulty": 8, "typical_chapters": ["第 27 回", "第 32-35 回", "第 57-58 回"], "key_insight": "变化类妖怪是'信息差型'犯罪·靠伪装和信息不对称获利"},
+                {"type": "武力劫掠", "english_name": "Forceful Plunder", "count": 25, "representative_cases": ["黑熊精偷盗袈裟·趁火打劫", "黄风怪强掳唐僧入洞", "灵感大王通天河冻结抓人", "黄袍怪直接抢婚·武力胁迫", "九头虫盗佛宝舍利子"], "target_pattern": "唐僧肉/法宝/财物·以力量压制为目标", "success_rate": 0.4, "detection_difficulty": 3, "typical_chapters": ["第 17 回", "第 21 回", "第 47-49 回", "第 62-63 回"], "key_insight": "武力型妖怪是'肌肉型'犯罪·容易识别但难以力敌"},
+                {"type": "色诱", "english_name": "Seduction", "count": 8, "representative_cases": ["蝎子精琵琶洞逼婚·欲破唐僧元阳", "蜘蛛精七姐妹濯垢泉色诱", "老鼠精无底洞逼婚", "玉兔精天竺国假公主招亲", "杏仙荆棘岭诗文相诱"], "target_pattern": "唐僧元阳·破取经人童子之身以获长生", "success_rate": 0.1, "detection_difficulty": 6, "typical_chapters": ["第 55 回", "第 72-73 回", "第 80-83 回", "第 95 回"], "key_insight": "色诱型妖怪是'软实力型'犯罪·成功率低但唐僧多次濒临破戒"},
+                {"type": "法术威胁", "english_name": "Magic Threat", "count": 12, "representative_cases": ["红孩儿三昧真火·差点烧死悟空", "青牛精金刚琢收尽兵器", "大鹏雕阴阳二气瓶·装入化浆", "黄眉怪金铙人种袋", "百眼魔君千眼金光·困住悟空"], "target_pattern": "靠专属法术/法宝压制取经团队·迫使求助外援", "success_rate": 0.5, "detection_difficulty": 9, "typical_chapters": ["第 40-42 回", "第 50-52 回", "第 73 回", "第 65-66 回"], "key_insight": "法术型妖怪是'技术壁垒型'犯罪·必须找原主或克制法宝才能破解"},
+                {"type": "团队围剿", "english_name": "Team Siege", "count": 6, "representative_cases": ["狮驼岭三魔（青狮/白象/大鹏）协同作战", "车迟国三妖（虎力/鹿力/羊力）斗法", "碧波潭九头驸马+万圣龙王家族", "荆棘岭十八公+杏仙等树精群", "盘丝洞七蜘蛛精协同"], "target_pattern": "多妖配合·分工明确·攻防有度", "success_rate": 0.3, "detection_difficulty": 7, "typical_chapters": ["第 44-46 回", "第 74-77 回", "第 62-63 回", "第 64 回"], "key_insight": "团队型妖怪是'组织型'犯罪·单兵弱但协同强·需逐一击破"}
+            ],
+            "pattern_stats": {"total_cases": 69, "by_type": {"变化诈骗": 18, "武力劫掠": 25, "色诱": 8, "法术威胁": 12, "团队围剿": 6}, "avg_success_rate": 0.38, "highest_difficulty": "法术威胁（9/10）", "most_common": "武力劫掠（25 起·占 36%）", "most_dangerous": "法术威胁（成功率 50% + 难度 9）"},
+            "pattern_insights": ["5 类作案手法对应 5 种妖怪策略·从'技术型'到'体力型'呈梯度分布", "变化诈骗侦破难度高·但被悟空火眼金睛专克", "武力劫掠最常见但成功率最低·属于'低技术高数量'犯罪", "色诱类专攻唐僧元阳·成功率仅 10%·但心理威胁最大", "法术威胁成功率最高·揭示西游'技术壁垒即生存壁垒'的本质", "团队围剿代表妖怪组织化·狮驼三魔是妖怪组织的最高级形态"]
+        },
+        signal: {
+            "concept_name": "遇险信号生存概率",
+            "english_name": "Survival Signal Probability",
+            "definition": "唐僧被擒后通过 10 种方式发出求救信号·信号的有效性决定其能否活到救援到达·这是妖怪社会学的'被害人生存学'",
+            "signal_methods": [
+                {"method": "哭泣", "english_name": "Crying", "survival_probability": 0.05, "response_time_hours": 12, "effectiveness": 1, "cases": ["宝象国被黄袍怪囚禁时整日啼哭", "盘丝洞被吊在梁上哭泣"], "mechanism": "纯情绪宣泄·无信息传递·对方接收不到信号", "verdict": "无效信号·仅作心理安慰"},
+                {"method": "念经", "english_name": "Chanting Sutras", "survival_probability": 0.1, "response_time_hours": 24, "effectiveness": 2, "cases": ["平顶山被金角银角抓入洞中念心经", "无底洞被老鼠精逼迫时默念观音"], "mechanism": "通过宗教仪式寻求心理庇护·偶有灵感触动", "verdict": "心理防御机制·实战效果有限"},
+                {"method": "托梦", "english_name": "Dream Visit", "survival_probability": 0.3, "response_time_hours": 8, "effectiveness": 4, "cases": ["乌鸡国王托梦唐僧求救", "被青牛精囚禁时托梦给徒弟"], "mechanism": "通过梦境传递信息·需接收方有灵性", "verdict": "针对鬼魂/被害者有效·唐僧主动托梦少"},
+                {"method": "求救信物", "english_name": "Rescue Token", "survival_probability": 0.5, "response_time_hours": 12, "effectiveness": 6, "cases": ["宝象国百花羞公主送血书给唐僧", "女儿国国王送通关文牒"], "mechanism": "通过信物传递求救信息·需有外部人员协助", "verdict": "中等有效·依赖信物能否送达"},
+                {"method": "借助妖怪同情者", "english_name": "Monster Sympathizer", "survival_probability": 0.4, "response_time_hours": 18, "effectiveness": 5, "cases": ["金鱼精事件中陈家庄村民通风报信", "通天河老鼋主动驮渡", "铁扇公主因儿子被收而对悟空有怨但未杀唐僧"], "mechanism": "妖怪洞府内部或边缘人物因同情而传讯", "verdict": "概率不稳定·依赖妖怪性格"},
+                {"method": "悟空火眼金睛", "english_name": "Wukong's Fiery Eyes", "survival_probability": 0.8, "response_time_hours": 2, "effectiveness": 9, "cases": ["白骨精变化时悟空一眼识破", "六耳猕猴虽难辨但最终被识破", "蜘蛛精变化被悟空识破"], "mechanism": "火眼金睛能看穿变化·主动识别威胁", "verdict": "最可靠的被动信号·但需悟空在场"},
+                {"method": "八戒找救兵", "english_name": "Bajie Seeks Reinforcements", "survival_probability": 0.7, "response_time_hours": 36, "effectiveness": 8, "cases": ["红孩儿事件中八戒去南海请观音", "青牛精事件中八戒首战被擒·后协调求助", "狮驼岭八戒去南海请观音"], "mechanism": "八戒虽懒·但求助能力不弱·常作为副救援通道", "verdict": "效率中等·可靠性较高"},
+                {"method": "沙僧等待", "english_name": "Sandy Waits", "survival_probability": 0.3, "response_time_hours": 72, "effectiveness": 3, "cases": ["通天河事件中沙僧守行李", "多次被擒后沙僧被动等待悟空处理"], "mechanism": "沙僧性格被动·等待救援而非主动求救", "verdict": "信号传递效率最低·但稳定坚守岗位"},
+                {"method": "白龙马传讯", "english_name": "White Dragon Horse Sends Message", "survival_probability": 0.6, "response_time_hours": 12, "effectiveness": 7, "cases": ["宝象国黄袍怪事件中白龙马化身宫女刺杀", "黄袍怪事件中白龙马催促八戒去找悟空"], "mechanism": "白龙马虽沉默·但关键时刻化身人类传讯或出手", "verdict": "低频但高效·关键节点出手"},
+                {"method": "天庭预警", "english_name": "Heavenly Court Warning", "survival_probability": 0.5, "response_time_hours": 24, "effectiveness": 6, "cases": ["玉帝派太白金星预告前方有难", "如来佛祖提前布局（如金角银角下凡为磨砺）", "观音菩萨多次暗示前方考验"], "mechanism": "天庭/灵山提前预警·但常以隐语方式·不易解读", "verdict": "信息模糊·需事后才能验证"}
+            ],
+            "signal_stats": {"total_methods": 10, "best_method": "悟空火眼金睛（生存率 80%）", "worst_method": "哭泣（生存率 5%）", "fastest_response": "悟空火眼金睛（2 小时）", "slowest_response": "沙僧等待（72 小时）", "avg_survival_probability": 0.425, "avg_effectiveness": 5.1, "passive_methods": ["哭泣", "念经", "沙僧等待"], "active_methods": ["悟空火眼金睛", "八戒找救兵", "白龙马传讯"], "external_methods": ["托梦", "求救信物", "借助妖怪同情者", "天庭预警"]},
+            "survival_insights": ["唐僧自身求救能力极弱·哭泣+念经生存率仅 5-10%·需依赖外部救援", "悟空火眼金睛是最可靠的'被动信号'·但前提是悟空在场且未被骗", "白龙马虽沉默·但在黄袍怪事件中是关键转折·揭示'低调角色的高价值'", "沙僧'等待模式'效率最低·反映其被动性格特征", "天庭预警虽存在但信息模糊·揭示天庭'有限干预'原则", "10 种信号中主动信号平均生存率 70%·被动信号平均 15%·差距显著"]
+        },
+        mount: {
+            "concept_name": "坐骑下凡全档案",
+            "english_name": "Mount Desertion Archive",
+            "definition": "西游世界 10 起坐骑/天神下凡案件·揭示'有背景的妖怪与无背景的妖怪判决差异巨大'·是西游司法社会学的核心案例",
+            "desertion_cases": [
+                {"name": "青牛精", "english_name": "Green Ox Demon", "original_owner": "太上老君", "owner_rank": "三清之一·道祖", "descent_reason": "童子看管不严·青牛趁牛栏未锁偷跑下界", "time_on_earth_years": 7, "crimes_committed": ["偷盗金刚琢", "套取金箍棒等法宝", "绑架唐僧", "对抗诸天神将"], "final_outcome": "太上老君亲自下界收走·带回兜率宫", "sentence_severity": 2, "chapter": "第 50-52 回", "legal_analysis": "原主轻判·象征性教育后继续服役·无实质惩罚", "harm_severity": 5, "owner_influence": 10},
+                {"name": "金鱼精", "english_name": "Goldfish Demon", "original_owner": "观音菩萨", "owner_rank": "四大菩萨之首", "descent_reason": "观音莲花池中金鱼·趁观音不在浮头听经成精·后下界作怪", "time_on_earth_years": 6, "crimes_committed": ["通天河每年吃童男童女", "绑架唐僧", "冰冻通天河陷害取经人"], "final_outcome": "观音用竹篮收回归莲池", "sentence_severity": 3, "chapter": "第 47-49 回", "legal_analysis": "原主带走·无惩罚·仅回归原岗位", "harm_severity": 8, "owner_influence": 9},
+                {"name": "金毛犼", "english_name": "Golden-haired Hou", "original_owner": "观音菩萨", "owner_rank": "四大菩萨之首", "descent_reason": "牧童睡着·金毛犼咬断绳索逃下界", "time_on_earth_years": 3, "crimes_committed": ["抢朱紫国皇后", "绑架唐僧", "以紫金铃法术威胁"], "final_outcome": "观音亲自收回·带回南海", "sentence_severity": 3, "chapter": "第 70-71 回", "legal_analysis": "原主带走·无惩罚·朱紫国王后被归还", "harm_severity": 5, "owner_influence": 9},
+                {"name": "青毛狮子怪", "english_name": "Green-maned Lion Demon", "original_owner": "文殊菩萨", "owner_rank": "四大菩萨之一", "descent_reason": "文殊菩萨坐骑·下界至乌鸡国·按佛旨惩罚国王（推井淹死三天）", "time_on_earth_years": 3, "crimes_committed": ["篡位乌鸡国王", "假冒国王三年", "推国王入井淹死（后还魂）"], "final_outcome": "文殊菩萨收回·带回五台山", "sentence_severity": 2, "chapter": "第 36-39 回", "legal_analysis": "原主带走·无惩罚·名义上是'佛旨报应'", "harm_severity": 6, "owner_influence": 8},
+                {"name": "黄牙老象", "english_name": "Yellow-tusked Elephant", "original_owner": "普贤菩萨", "owner_rank": "四大菩萨之一", "descent_reason": "普贤菩萨坐骑·下界至狮驼岭作二魔王", "time_on_earth_years": 5, "crimes_committed": ["狮驼岭吃人无数", "绑架唐僧", "与青狮大鹏结盟围剿"], "final_outcome": "普贤菩萨收回·带回峨眉山", "sentence_severity": 2, "chapter": "第 74-77 回", "legal_analysis": "原主带走·无实质惩罚·尽管罪行累累", "harm_severity": 8, "owner_influence": 8},
+                {"name": "金翅大鹏雕", "english_name": "Golden-winged Dapeng", "original_owner": "如来佛祖", "owner_rank": "佛祖本身·孔雀大明王菩萨之弟", "descent_reason": "孔雀大明王菩萨之弟·佛母亲属·下界至狮驼国作三魔王", "time_on_earth_years": 6, "crimes_committed": ["狮驼国灭国吃尽一国百姓", "绑架唐僧", "对抗如来佛祖亲临", "阴阳二气瓶威胁"], "final_outcome": "如来佛祖亲临收服·封为护法·留灵山", "sentence_severity": 5, "chapter": "第 74-77 回", "legal_analysis": "虽罪大恶极但因佛祖亲属身份免罚·还封护法·'特权阶层的免罪金牌'", "harm_severity": 10, "owner_influence": 10},
+                {"name": "九灵元圣", "english_name": "Nine-spirit Sage", "original_owner": "太乙救苦天尊", "owner_rank": "东极青华大帝·道教四御之一", "descent_reason": "太乙救苦天尊坐骑·下界至竹节山为九头狮子", "time_on_earth_years": 4, "crimes_committed": ["九曲盘桓洞霸占一方", "收服黄狮等六狮孙", "绑架唐僧师徒"], "final_outcome": "太乙救苦天尊亲自收回·带回东极妙岩宫", "sentence_severity": 2, "chapter": "第 88-90 回", "legal_analysis": "原主带走·无惩罚·虽未吃人但势力范围大", "harm_severity": 5, "owner_influence": 9},
+                {"name": "黄袍怪", "english_name": "Yellow Robe Demon", "original_owner": "玉皇大帝（二十八宿奎木狼）", "owner_rank": "天庭星官·非坐骑但为天神下凡对照", "descent_reason": "奎木狼与披香殿玉女私通·相约下界续前缘", "time_on_earth_years": 13, "crimes_committed": ["强抢宝象国百花羞公主", "篡位驸马", "吃宫女", "逼迫唐僧变虎"], "final_outcome": "天庭召回·贬去兜率宫烧火·后官复原职", "sentence_severity": 5, "chapter": "第 28-31 回", "legal_analysis": "天神下凡受罚较重·贬职烧火·但最终复职·对比坐骑轻微惩罚仍属轻判", "harm_severity": 7, "owner_influence": 8},
+                {"name": "白象", "english_name": "White Elephant", "original_owner": "普贤菩萨", "owner_rank": "四大菩萨之一", "descent_reason": "普贤菩萨坐骑·下界至狮驼岭作二魔王·与青狮大鹏结盟", "time_on_earth_years": 5, "crimes_committed": ["狮驼岭吃人无数", "绑架唐僧", "鼻卷悟空险些致命"], "final_outcome": "普贤菩萨收回·带回峨眉山", "sentence_severity": 2, "chapter": "第 74-77 回", "legal_analysis": "与黄牙老象同类事件·原主带走·无实质惩罚", "harm_severity": 8, "owner_influence": 8},
+                {"name": "青狮", "english_name": "Green Lion", "original_owner": "文殊菩萨", "owner_rank": "四大菩萨之一", "descent_reason": "文殊菩萨坐骑·下界至狮驼岭作大魔王·与白象大鹏结盟", "time_on_earth_years": 5, "crimes_committed": ["狮驼岭吞吃无数行人", "绑架唐僧", "张口吞悟空"], "final_outcome": "文殊菩萨收回·带回五台山", "sentence_severity": 2, "chapter": "第 74-77 回", "legal_analysis": "与青毛狮子怪同类事件·原主带走·无实质惩罚", "harm_severity": 9, "owner_influence": 8}
+            ],
+            "desertion_stats": {"total_cases": 10, "avg_sentence_severity": 2.8, "highest_severity": "金翅大鹏雕 & 黄袍怪（5）", "lowest_severity": "青牛精/金鱼精/金毛犼/青毛狮子怪/黄牙老象/九灵元圣/白象/青狮（均为 2-3）", "owners_distribution": {"观音菩萨": 2, "文殊菩萨": 2, "普贤菩萨": 2, "太上老君": 1, "如来佛祖": 1, "太乙救苦天尊": 1, "天庭（玉帝）": 1}, "verdict_pattern": "原主收走 8 例·贬职 1 例·封官 1 例·实质惩罚率 0%", "legal_bias": "100% 坐骑下凡案均未被处死·揭示'有背景的妖怪判决豁免率 100%'", "comparable_wild_demons": ["白骨精被打死", "蜘蛛精被打死", "蝎子精被杀", "车迟国三妖惨死"]},
+            "desertion_insights": ["10 起坐骑下凡案中 0 起被处死·对比野生妖怪 60%+ 死亡率·司法双标明显", "观音/文殊/普贤三大菩萨共占 6 起·揭示'菩萨坐骑是下凡主力'", "金翅大鹏雕虽罪大恶极（灭狮驼国一国）·但因佛祖亲属身份反被封护法·是特权司法的极端案例", "黄袍怪作为天神下凡受罚相对较重（贬职烧火）·说明天庭司法比佛界略严", "狮驼岭三魔（青狮/白象/大鹏）是坐骑团伙化下凡的典型案例·三方原主协同收走", "坐骑下凡的'失职罪'本应惩罚原主·但《西游记》中原主均无实质担责·揭示'监管责任缺失'", "平均判决严厉度仅 2.8/10·与罪行严重度严重不匹配·是西游司法社会学的核心矛盾"]
+        },
+        summary: {
+            "concept_name": "妖怪社会学整体统计",
+            "total_concepts": 3,
+            "concept_list": ["妖怪作案模式分类学", "遇险信号生存概率", "坐骑下凡全档案"],
+            "total_data_points": 25,
+            "key_findings": ["5 类妖怪作案手法共 69 起·武力劫掠最常见（25 起）·法术威胁最危险（成功率 50%）", "10 种遇险信号平均生存率 42.5%·悟空火眼金睛最可靠（80%）·哭泣最无效（5%）", "10 起坐骑下凡案平均判决严厉度仅 2.8/10·实质惩罚率 0%·揭示司法双标", "野生妖怪死亡率 60%+ vs 坐骑下凡死亡率 0%·背景决定生死"],
+            "cross_concept_insight": "妖怪社会学三大发现：1) 作案手法与法宝等级正相关；2) 唐僧生存严重依赖悟空·自身求生能力极弱；3) 西游司法是典型的'背景决定判决'·坐骑下凡是特权阶层的'司法豁免券'",
+            "methodology_note": "数据基于《西游记》原著 100 回·案件数与判决均为定性分析·severity 采用 1-10 主观评分"
+        }
+    };
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('[fallback] ' + path + ' → embedded data:', e.message);
+            return fallback;
+        }
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== Main render =====
+    async function main() {
+        const baseUrl = '../../scripts/output/data/';
+        const [crime, signal, mount, summary] = await Promise.all([
+            loadJson(baseUrl + 'monster_crime_patterns.json', EMBEDDED.crime),
+            loadJson(baseUrl + 'survival_signals.json', EMBEDDED.signal),
+            loadJson(baseUrl + 'mount_deserters.json', EMBEDDED.mount),
+            loadJson(baseUrl + 'monster_sociology_summary.json', EMBEDDED.summary)
+        ]);
+        window.__lastData = { crime, signal, mount, summary };
+
+        renderCrimeBar(crime);
+        renderCrimeTable(crime);
+        renderCrimeInsights(crime);
+        renderSignalBar(signal);
+        renderSignalCards(signal);
+        renderSignalInsights(signal);
+        renderMountRadar(mount);
+        renderOwnerPie(mount);
+        renderMountTable(mount);
+        renderMountCards(mount);
+        renderMountInsights(mount);
+    }
+
+    // ===== Section 1: 作案模式水平条形图 =====
+    function renderCrimeBar(data) {
+        const svg = d3.select('#chart-crime-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 380;
+        const m = {top: 30, right: 100, bottom: 50, left: 110};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const types = data.crime_types.slice().sort((a, b) => b.count - a.count);
+
+        const y = d3.scaleBand().domain(types.map(d => d.type)).range([0, h]).padding(0.35);
+        const x = d3.scaleLinear().domain([0, 30]).range([0, w]);
+
+        // 难度背景带（按 detection_difficulty 着色）
+        g.selectAll('.diff-bg')
+            .data(types).enter().append('rect')
+            .attr('class', 'diff-bg')
+            .attr('x', 0).attr('y', d => y(d.type))
+            .attr('width', w).attr('height', y.bandwidth())
+            .attr('fill', '#e9b885')
+            .attr('fill-opacity', d => d.detection_difficulty * 0.04)
+            .attr('rx', 2);
+
+        // 网格线
+        g.append('g').selectAll('line.grid')
+            .data(x.ticks(6))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', d => x(d)).attr('x2', d => x(d))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // 坐标轴
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).tickSize(0).tickPadding(8))
+            .selectAll('text').style('font-size', '12px').style('font-weight', '600');
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(6));
+
+        // 轴标签
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 40)
+            .attr('text-anchor', 'middle')
+            .text('count 案件数（共 69 起）');
+
+        // 条形
+        const colorMap = {
+            '变化诈骗': '#c8463a',
+            '武力劫掠': '#3a6b8c',
+            '色诱': '#e9b885',
+            '法术威胁': '#5a7a3a',
+            '团队围剿': '#7a5230'
+        };
+
+        g.selectAll('.bar')
+            .data(types).enter().append('rect')
+            .attr('class', 'bar')
+            .attr('x', 0)
+            .attr('y', d => y(d.type))
+            .attr('width', d => x(d.count))
+            .attr('height', y.bandwidth())
+            .attr('fill', d => colorMap[d.type])
+            .attr('stroke', '#fff').attr('stroke-width', 1.5)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong style="color:${colorMap[d.type]}">${d.type}</strong> · ${d.english_name}<br>` +
+                    `案件数：<strong>${d.count}</strong> 起<br>` +
+                    `成功率：<strong>${(d.success_rate * 100).toFixed(0)}%</strong><br>` +
+                    `侦破难度：<strong>${d.detection_difficulty} / 10</strong><br>` +
+                    `目标模式：${d.target_pattern}<br>` +
+                    `<em>${d.key_insight}</em>`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // count 数值标签
+        g.selectAll('.bar-val')
+            .data(types).enter().append('text')
+            .attr('class', 'bar-val')
+            .attr('x', d => x(d.count) + 6)
+            .attr('y', d => y(d.type) + y.bandwidth() / 2 + 4)
+            .style('font-size', '13px')
+            .style('font-weight', '600')
+            .attr('fill', '#2c2418')
+            .text(d => d.count + ' 起');
+
+        // success_rate 标注（右侧）
+        g.selectAll('.bar-rate')
+            .data(types).enter().append('text')
+            .attr('class', 'bar-rate')
+            .attr('x', w + 8)
+            .attr('y', d => y(d.type) + y.bandwidth() / 2 + 4)
+            .style('font-size', '12px')
+            .style('font-family', '"JetBrains Mono", "Consolas", monospace')
+            .style('font-weight', '600')
+            .attr('fill', '#3a6b8c')
+            .text(d => '成功率 ' + (d.success_rate * 100).toFixed(0) + '%');
+
+        g.append('text')
+            .attr('x', w + 8).attr('y', -10)
+            .style('font-size', '11px')
+            .style('font-weight', '600')
+            .attr('fill', '#3a6b8c')
+            .text('success_rate');
+    }
+
+    function renderCrimeTable(data) {
+        const tbody = d3.select('#crime-table tbody');
+        const rows = tbody.selectAll('tr').data(data.crime_types).enter().append('tr');
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.type + '</strong>');
+        rows.append('td').text(d => d.english_name);
+        rows.append('td').html(d => '<strong>' + d.count + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-2);">' + (d.success_rate * 100).toFixed(0) + '%</strong>');
+        rows.append('td').text(d => d.detection_difficulty + ' / 10');
+        rows.append('td').text(d => d.target_pattern);
+        rows.append('td').html(d => d.representative_cases.slice(0, 2).map(c => '· ' + c).join('<br>'));
+        rows.append('td').html(d => '<em>' + d.key_insight + '</em>');
+    }
+
+    function renderCrimeInsights(data) {
+        const list = d3.select('#crime-insights-list');
+        list.selectAll('li').data(data.pattern_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 2: 求救信号生存概率条形图 =====
+    function renderSignalBar(data) {
+        const svg = d3.select('#chart-signal-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 460;
+        const m = {top: 30, right: 80, bottom: 50, left: 140};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const stats = data.signal_stats;
+        const methods = data.signal_methods.slice().sort((a, b) => b.survival_probability - a.survival_probability);
+
+        // 分类
+        const classify = (m) => {
+            if (stats.active_methods.includes(m)) return 'active';
+            if (stats.passive_methods.includes(m)) return 'passive';
+            return 'external';
+        };
+        const colorMap = {
+            'active': '#c8463a',
+            'passive': '#6b5e4d',
+            'external': '#5a7a3a'
+        };
+
+        const y = d3.scaleBand().domain(methods.map(d => d.method)).range([0, h]).padding(0.25);
+        const x = d3.scaleLinear().domain([0, 1]).range([0, w]);
+
+        // 网格线
+        g.append('g').selectAll('line.grid')
+            .data(x.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', d => x(d)).attr('x2', d => x(d))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // 平均线
+        const avgLine = x(stats.avg_survival_probability);
+        g.append('line')
+            .attr('x1', avgLine).attr('x2', avgLine)
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#7a5230')
+            .attr('stroke-dasharray', '6,4')
+            .attr('stroke-width', 1.5);
+        g.append('text')
+            .attr('x', avgLine + 4).attr('y', -8)
+            .style('font-size', '11px')
+            .style('fill', '#7a5230')
+            .style('font-weight', '600')
+            .text('均值 ' + (stats.avg_survival_probability * 100).toFixed(1) + '%');
+
+        // 坐标轴
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).tickSize(0).tickPadding(8))
+            .selectAll('text').style('font-size', '12px').style('font-weight', '600');
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(5).tickFormat(d => (d * 100) + '%'));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 40)
+            .attr('text-anchor', 'middle')
+            .text('survival_probability 生存概率');
+
+        // 条形
+        g.selectAll('.bar')
+            .data(methods).enter().append('rect')
+            .attr('class', 'bar')
+            .attr('x', 0)
+            .attr('y', d => y(d.method))
+            .attr('width', d => x(d.survival_probability))
+            .attr('height', y.bandwidth())
+            .attr('fill', d => colorMap[classify(d.method)])
+            .attr('stroke', '#fff').attr('stroke-width', 1.5)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                const cls = classify(d.method);
+                const clsName = cls === 'active' ? '主动信号' : (cls === 'passive' ? '被动信号' : '外部信号');
+                tooltip.show(
+                    `<strong>${d.method}</strong> · ${d.english_name}<br>` +
+                    `分类：<strong>${clsName}</strong><br>` +
+                    `生存概率：<strong style="color:${colorMap[cls]}">${(d.survival_probability * 100).toFixed(0)}%</strong><br>` +
+                    `响应时间：${d.response_time_hours} 小时<br>` +
+                    `有效性：${d.effectiveness} / 10<br>` +
+                    `机制：${d.mechanism}<br>` +
+                    `<em>${d.verdict}</em>`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 数值标签
+        g.selectAll('.bar-val')
+            .data(methods).enter().append('text')
+            .attr('class', 'bar-val')
+            .attr('x', d => x(d.survival_probability) + 4)
+            .attr('y', d => y(d.method) + y.bandwidth() / 2 + 4)
+            .style('font-size', '12px')
+            .style('font-weight', '600')
+            .style('font-family', '"JetBrains Mono", "Consolas", monospace')
+            .attr('fill', d => colorMap[classify(d.method)])
+            .text(d => (d.survival_probability * 100).toFixed(0) + '%');
+
+        // 响应时间标注（右侧）
+        g.selectAll('.bar-time')
+            .data(methods).enter().append('text')
+            .attr('class', 'bar-time')
+            .attr('x', w + 6)
+            .attr('y', d => y(d.method) + y.bandwidth() / 2 + 4)
+            .style('font-size', '11px')
+            .attr('fill', '#6b5e4d')
+            .text(d => d.response_time_hours + 'h');
+
+        g.append('text')
+            .attr('x', w + 6).attr('y', -10)
+            .style('font-size', '11px')
+            .style('font-weight', '600')
+            .attr('fill', '#6b5e4d')
+            .text('response');
+    }
+
+    function renderSignalCards(data) {
+        const stats = data.signal_stats;
+        const classify = (m) => {
+            if (stats.active_methods.includes(m)) return 'active';
+            if (stats.passive_methods.includes(m)) return 'passive';
+            return 'external';
+        };
+        const clsName = {active: '主动信号', passive: '被动信号', external: '外部信号'};
+        const clsCss = {active: 's-active', passive: 's-passive', external: 's-external'};
+
+        const grid = d3.select('#signal-grid');
+        const cards = grid.selectAll('.signal-card')
+            .data(data.signal_methods).enter()
+            .append('div')
+            .attr('class', d => 'signal-card ' + clsCss[classify(d.method)]);
+        cards.append('div').attr('class', 'signal-name').text(d => d.method);
+        cards.append('div').attr('class', 'signal-eng').text(d => d.english_name);
+        cards.append('div').attr('class', 'signal-score')
+            .text(d => '生存率 ' + (d.survival_probability * 100).toFixed(0) + '% · 响应 ' + d.response_time_hours + 'h');
+        cards.append('div').attr('class', 'signal-row')
+            .html(d => '<strong>分类：</strong>' + clsName[classify(d.method)] + ' · 有效性 ' + d.effectiveness + '/10');
+        cards.append('div').attr('class', 'signal-row')
+            .html(d => '<strong>机制：</strong>' + d.mechanism);
+        cards.append('div').attr('class', 'signal-row')
+            .html(d => '<strong>案例：</strong>' + d.cases[0]);
+        cards.append('div').attr('class', 'signal-row')
+            .html(d => '<strong>判决：</strong><em>' + d.verdict + '</em>');
+    }
+
+    function renderSignalInsights(data) {
+        const list = d3.select('#signal-insights-list');
+        list.selectAll('li').data(data.survival_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 3: 坐骑下凡雷达图 =====
+    function renderMountRadar(data) {
+        const svg = d3.select('#chart-mount-radar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 700;
+        const W = Math.max(containerW, 600), H = 560;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const cx = W / 2, cy = H / 2 + 10;
+        const radius = Math.max(0, Math.min(W, H) / 2 - 80);
+        const levels = 5;
+        const dims = ['判决严厉度', '罪行数量', '下凡年数', '社会危害度', '原主影响力'];
+        const nDims = dims.length;
+
+        const colorMap = {
+            '青牛精': '#c8463a',
+            '金鱼精': '#3a6b8c',
+            '金毛犼': '#e9b885',
+            '青毛狮子怪': '#5a7a3a',
+            '黄牙老象': '#7a5230',
+            '金翅大鹏雕': '#8c4a6b',
+            '九灵元圣': '#4a6b8c',
+            '黄袍怪': '#a8542a',
+            '白象': '#6b8c4a',
+            '青狮': '#8c6b4a'
+        };
+
+        const angle = (i) => (i * 2 * Math.PI / nDims) - Math.PI / 2;
+
+        // 网格圆
+        const gridG = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+        for (let lv = 1; lv <= levels; lv++) {
+            const r = radius * lv / levels;
+            const pts = dims.map((_, i) => [r * Math.cos(angle(i)), r * Math.sin(angle(i))]);
+            gridG.append('polygon')
+                .attr('points', pts.map(p => p.join(',')).join(' '))
+                .attr('fill', 'none')
+                .attr('stroke', '#d9cdb8')
+                .attr('stroke-dasharray', lv === levels ? '0' : '3,3');
+        }
+        // 刻度数字
+        for (let lv = 1; lv <= levels; lv++) {
+            const r = radius * lv / levels;
+            gridG.append('text')
+                .attr('x', 4).attr('y', -r + 3)
+                .style('font-size', '10px')
+                .attr('fill', '#6b5e4d')
+                .text((lv * 2).toString());
+        }
+
+        // 轴线
+        dims.forEach((d, i) => {
+            const x2 = radius * Math.cos(angle(i));
+            const y2 = radius * Math.sin(angle(i));
+            gridG.append('line')
+                .attr('x1', 0).attr('y1', 0)
+                .attr('x2', x2).attr('y2', y2)
+                .attr('stroke', '#d9cdb8');
+            const lx = (radius + 36) * Math.cos(angle(i));
+            const ly = (radius + 36) * Math.sin(angle(i));
+            gridG.append('text')
+                .attr('x', lx).attr('y', ly)
+                .attr('text-anchor', 'middle')
+                .attr('dominant-baseline', 'middle')
+                .style('font-size', '12px')
+                .style('font-weight', '600')
+                .attr('fill', '#2c2418')
+                .text(d);
+        });
+
+        // 数据多边形
+        const rScale = d3.scaleLinear().domain([0, 10]).range([0, radius]);
+        const maxCrimes = 5; // 最大罪行数 = 4
+        const maxYears = 13; // 最大下凡年数 = 13
+
+        data.desertion_cases.forEach(mount => {
+            const vals = [
+                mount.sentence_severity,
+                Math.min(10, mount.crimes_committed.length * 2.5),
+                Math.min(10, mount.time_on_earth_years / maxYears * 10),
+                mount.harm_severity,
+                mount.owner_influence
+            ];
+            const pts = vals.map((v, i) => [rScale(v) * Math.cos(angle(i)), rScale(v) * Math.sin(angle(i))]);
+            const poly = gridG.append('polygon')
+                .attr('points', pts.map(p => p.join(',')).join(' '))
+                .attr('fill', colorMap[mount.name])
+                .attr('fill-opacity', 0.10)
+                .attr('stroke', colorMap[mount.name])
+                .attr('stroke-width', 1.8)
+                .style('cursor', 'pointer');
+            poly.on('mouseover', (e) => {
+                poly.attr('fill-opacity', 0.32).attr('stroke-width', 2.6);
+                tooltip.show(
+                    `<strong style="color:${colorMap[mount.name]}">${mount.name}</strong> · ${mount.english_name}<br>` +
+                    `原主：${mount.original_owner}<br>` +
+                    `判决严厉度：${mount.sentence_severity} / 10<br>` +
+                    `罪行数量：${mount.crimes_committed.length} 起<br>` +
+                    `下凡年数：${mount.time_on_earth_years} 年<br>` +
+                    `社会危害度：${mount.harm_severity} / 10<br>` +
+                    `原主影响力：${mount.owner_influence} / 10<br>` +
+                    `<em>${mount.legal_analysis}</em>`, e);
+            }).on('mouseout', () => {
+                poly.attr('fill-opacity', 0.10).attr('stroke-width', 1.8);
+                tooltip.hide();
+            });
+            // 顶点
+            pts.forEach((p, i) => {
+                gridG.append('circle')
+                    .attr('cx', p[0]).attr('cy', p[1])
+                    .attr('r', 2.8)
+                    .attr('fill', colorMap[mount.name])
+                    .attr('stroke', '#fff').attr('stroke-width', 1.2)
+                    .style('pointer-events', 'none');
+            });
+        });
+
+        // 平均判决线
+        const avgSeverity = data.desertion_stats.avg_sentence_severity;
+        const avgR = rScale(avgSeverity);
+        gridG.append('circle')
+            .attr('cx', 0).attr('cy', 0)
+            .attr('r', avgR)
+            .attr('fill', 'none')
+            .attr('stroke', '#c8463a')
+            .attr('stroke-dasharray', '6,4')
+            .attr('stroke-width', 1.2);
+        gridG.append('text')
+            .attr('x', avgR * Math.SQRT1_2 + 4)
+            .attr('y', -avgR * Math.SQRT1_2 - 4)
+            .style('font-size', '10px').style('fill', '#c8463a')
+            .text(`平均判决 ${avgSeverity}`);
+    }
+
+    // ===== Section 3: 坐骑原主分布饼图 =====
+    function renderOwnerPie(data) {
+        const svg = d3.select('#chart-owner-pie');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 700;
+        const W = Math.max(containerW, 600), H = 420;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const cx = W / 2 - 80, cy = H / 2;
+        const radius = Math.max(0, Math.min(W, H) / 2 - 60);
+
+        const dist = data.desertion_stats.owners_distribution;
+        // 归一化标签：观音菩萨→观音·天庭（玉帝）→天庭
+        const labelMap = {
+            '观音菩萨': '观音',
+            '文殊菩萨': '文殊',
+            '普贤菩萨': '普贤',
+            '太上老君': '老君',
+            '如来佛祖': '如来',
+            '太乙救苦天尊': '太乙',
+            '天庭（玉帝）': '天庭'
+        };
+        const colorMap = {
+            '观音菩萨': '#c8463a',
+            '文殊菩萨': '#3a6b8c',
+            '普贤菩萨': '#5a7a3a',
+            '太上老君': '#7a5230',
+            '如来佛祖': '#8c4a6b',
+            '太乙救苦天尊': '#4a6b8c',
+            '天庭（玉帝）': '#a8542a'
+        };
+
+        const pieData = Object.entries(dist).map(([k, v]) => ({
+            owner: k,
+            label: labelMap[k] || k,
+            value: v,
+            color: colorMap[k] || '#6b5e4d'
+        }));
+
+        const pie = d3.pie().value(d => d.value).sort(null);
+        const arc = d3.arc().innerRadius(radius * 0.45).outerRadius(radius).padAngle(0.02);
+        const arcHover = d3.arc().innerRadius(radius * 0.45).outerRadius(radius + 8).padAngle(0.02);
+        const arcLabel = d3.arc().innerRadius(radius * 0.7).outerRadius(radius * 0.7);
+
+        const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+        const slices = g.selectAll('.slice')
+            .data(pie(pieData)).enter().append('g')
+            .attr('class', 'slice');
+
+        slices.append('path')
+            .attr('d', arc)
+            .attr('fill', d => d.data.color)
+            .attr('stroke', '#fff').attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(e, d) {
+                d3.select(this).transition().duration(150).attr('d', arcHover);
+                tooltip.show(
+                    `<strong style="color:${d.data.color}">${d.data.owner}</strong><br>` +
+                    `坐骑数：<strong>${d.data.value}</strong> 起<br>` +
+                    `占比：<strong>${(d.data.value / 10 * 100).toFixed(0)}%</strong>`, e);
+            })
+            .on('mouseout', function() {
+                d3.select(this).transition().duration(150).attr('d', arc);
+                tooltip.hide();
+            });
+
+        // 饼图内部数字
+        slices.append('text')
+            .attr('transform', d => `translate(${arcLabel.centroid(d)})`)
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
+            .style('font-size', '14px')
+            .style('font-weight', '700')
+            .attr('fill', '#fff')
+            .text(d => d.data.value);
+
+        // 中心文本
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', -8)
+            .style('font-size', '14px')
+            .style('font-weight', '600')
+            .attr('fill', '#2c2418')
+            .text('7 方原主');
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', 14)
+            .style('font-size', '12px')
+            .attr('fill', '#6b5e4d')
+            .text('共 10 起');
+
+        // 图例（右侧）
+        const legendG = svg.append('g')
+            .attr('transform', `translate(${W - 200}, 60)`);
+        const legendItems = legendG.selectAll('.legend-item')
+            .data(pieData).enter().append('g')
+            .attr('class', 'legend-item')
+            .attr('transform', (d, i) => `translate(0, ${i * 32})`);
+        legendItems.append('rect')
+            .attr('width', 16).attr('height', 16)
+            .attr('fill', d => d.color)
+            .attr('rx', 2);
+        legendItems.append('text')
+            .attr('x', 24).attr('y', 12)
+            .style('font-size', '13px')
+            .style('fill', '#2c2418')
+            .text(d => d.label + ' ' + d.value + ' 起 (' + (d.value / 10 * 100).toFixed(0) + '%)');
+
+        // 也将图例渲染到 legend-row
+        const legendRow = d3.select('#pie-legend');
+        legendRow.selectAll('.legend-item-pie').data(pieData).enter()
+            .append('span')
+            .attr('class', 'legend-item')
+            .html(d => `<span class="legend-swatch" style="background:${d.color};"></span>${d.label} ${d.value} (${(d.value / 10 * 100).toFixed(0)}%)`);
+    }
+
+    function renderMountTable(data) {
+        const tbody = d3.select('#mount-table tbody');
+        const rows = tbody.selectAll('tr').data(data.desertion_cases).enter().append('tr');
+        rows.append('td').html(d => '<strong style="color:var(--accent-4);">' + d.name + '</strong>');
+        rows.append('td').text(d => d.original_owner);
+        rows.append('td').text(d => d.owner_rank);
+        rows.append('td').text(d => d.descent_reason);
+        rows.append('td').html(d => '<strong>' + d.time_on_earth_years + ' 年</strong>');
+        rows.append('td').html(d => d.crimes_committed.map(c => '· ' + c).join('<br>'));
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.sentence_severity + ' / 10</strong>');
+        rows.append('td').text(d => d.chapter);
+        rows.append('td').text(d => d.final_outcome);
+        rows.append('td').html(d => '<em>' + d.legal_analysis + '</em>');
+    }
+
+    function renderMountCards(data) {
+        const grid = d3.select('#mount-grid');
+        const cards = grid.selectAll('.mount-card')
+            .data(data.desertion_cases).enter()
+            .append('div')
+            .attr('class', 'mount-card');
+        cards.append('div').attr('class', 'mount-name').text(d => d.name + ' · ' + d.english_name);
+        cards.append('div').attr('class', 'mount-owner').text(d => '原主：' + d.original_owner + ' · ' + d.owner_rank);
+        cards.append('div').attr('class', 'mount-score')
+            .text(d => '判决 ' + d.sentence_severity + '/10 · 下凡 ' + d.time_on_earth_years + '年 · 罪行 ' + d.crimes_committed.length + '起');
+        cards.append('div').attr('class', 'mount-row')
+            .html(d => '<strong>下凡原因：</strong>' + d.descent_reason);
+        cards.append('div').attr('class', 'mount-row')
+            .html(d => '<strong>最终结局：</strong>' + d.final_outcome);
+        cards.append('div').attr('class', 'mount-row')
+            .html(d => '<strong>法律分析：</strong><em>' + d.legal_analysis + '</em>');
+    }
+
+    function renderMountInsights(data) {
+        const list = d3.select('#mount-insights-list');
+        list.selectAll('li').data(data.desertion_insights).enter().append('li').text(d => d);
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

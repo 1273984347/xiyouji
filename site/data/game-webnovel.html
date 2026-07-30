@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏网文 · 角色卡牌战力系统 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+            --shadow-hover: 0 6px 20px rgba(60, 40, 20, 0.16);
+            /* 稀有度配色 */
+            --rarity-ur: #d4af37;
+            --rarity-ssr: #9b59b6;
+            --rarity-sr: #3a6b8c;
+            --rarity-r: #5a7a3a;
+            --rarity-n: #6b5e4d;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        /* ===== Hero 区 ===== */
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        /* ===== 容器与面包屑 ===== */
+        .container {
+            max-width: 1280px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: rgba(200, 70, 58, 0.08);
+            padding: 1px 5px;
+            border-radius: 3px;
+            color: var(--accent);
+        }
+        /* ===== KPI 概要栏 ===== */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 960px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card .label {
+            font-size: 0.74rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .value {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .kpi-card .desc { font-size: 0.8rem; color: var(--ink-soft); }
+        /* ===== Section 通用 ===== */
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        /* ===== 角色卡牌墙 ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+        @media (max-width: 960px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .card-grid { grid-template-columns: 1fr; } }
+        .char-card {
+            background: var(--paper);
+            border: 2px solid var(--line);
+            border-radius: 10px;
+            padding: 14px 16px;
+            box-shadow: var(--shadow);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .char-card.rarity-UR { border-color: var(--rarity-ur); box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), var(--shadow); }
+        .char-card.rarity-SSR { border-color: var(--rarity-ssr); box-shadow: 0 0 8px rgba(155, 89, 182, 0.18), var(--shadow); }
+        .char-card.rarity-SR { border-color: var(--rarity-sr); }
+        .char-card.rarity-R { border-color: var(--rarity-r); }
+        .char-card.rarity-N { border-color: var(--rarity-n); }
+        .char-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(60, 40, 20, 0.18);
+        }
+        .char-card.rarity-UR:hover { box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45); border-color: var(--rarity-ur); }
+        .char-card.rarity-SSR:hover { box-shadow: 0 8px 24px rgba(155, 89, 182, 0.35); border-color: var(--rarity-ssr); }
+        .char-card.rarity-SR:hover { box-shadow: 0 8px 24px rgba(58, 107, 140, 0.35); border-color: var(--rarity-sr); }
+        .char-card.rarity-R:hover { box-shadow: 0 8px 24px rgba(90, 122, 58, 0.35); border-color: var(--rarity-r); }
+        .char-card.rarity-N:hover { box-shadow: 0 8px 24px rgba(107, 94, 77, 0.35); border-color: var(--rarity-n); }
+        .cc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .cc-rarity {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            line-height: 1;
+        }
+        .cc-rarity.UR { color: var(--rarity-ur); text-shadow: 0 0 6px rgba(212, 175, 55, 0.4); }
+        .cc-rarity.SSR { color: var(--rarity-ssr); }
+        .cc-rarity.SR { color: var(--rarity-sr); }
+        .cc-rarity.R { color: var(--rarity-r); }
+        .cc-rarity.N { color: var(--rarity-n); }
+        .cc-elem {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.05em;
+        }
+        .cc-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-top: 2px;
+        }
+        .cc-title {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        .cc-power {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 2px;
+        }
+        .cc-power-label {
+            font-size: 0.7rem;
+            color: var(--ink-soft);
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .cc-stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+        .cc-stat-row {
+            display: grid;
+            grid-template-columns: 38px 1fr 38px;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+        }
+        .cc-stat-label {
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+        }
+        .cc-stat-track {
+            height: 6px;
+            background: var(--bg);
+            border-radius: 3px;
+            border: 1px solid var(--line);
+            overflow: hidden;
+        }
+        .cc-stat-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.6s ease;
+        }
+        .cc-stat-val {
+            text-align: right;
+            color: var(--ink);
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+            font-size: 0.7rem;
+        }
+        .cc-skills {
+            margin-bottom: 8px;
+        }
+        .cc-skill {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            font-size: 0.76rem;
+            color: var(--ink);
+            padding: 3px 0;
+            border-bottom: 1px dashed var(--line);
+            line-height: 1.5;
+        }
+        .cc-skill:last-child { border-bottom: none; }
+        .cc-skill-cost {
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.68rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .cc-skill-text { flex: 1; }
+        .cc-skill-name { font-weight: 600; color: var(--ink); }
+        .cc-skill-type {
+            display: inline-block;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.64rem;
+            background: rgba(122, 82, 48, 0.1);
+            color: var(--accent-3);
+            margin-left: 4px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .cc-passive {
+            font-size: 0.74rem;
+            color: var(--accent-3);
+            background: #fff8ec;
+            border-left: 2px solid var(--accent-soft);
+            padding: 5px 8px;
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        .cc-passive::before {
+            content: "被动 · ";
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.7rem;
+        }
+        .cc-acq {
+            font-size: 0.72rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-top: auto;
+            padding-top: 6px;
+            border-top: 1px dashed var(--line);
+        }
+        .cc-acq::before { content: "📜 "; font-style: normal; }
+        /* ===== D3 图表容器 ===== */
+        .chart-wrap {
+            position: relative;
+            width: 100%;
+        }
+        .chart-wrap svg { width: 100%; display: block; }
+        .pie-wrap {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 24px;
+            align-items: center;
+        }
+        @media (max-width: 860px) { .pie-wrap { grid-template-columns: 1fr; } }
+        #rarity-pie-svg { height: 360px; }
+        #power-bar-svg { height: 480px; }
+        #element-donut-svg { height: 360px; }
+        #artifact-scatter-svg { height: 440px; }
+        #webnovel-bar-svg { height: 420px; }
+        .pie-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+        .pie-legend h4 {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 6px;
+            letter-spacing: 0.1em;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--ink);
+            padding: 4px 6px;
+            border-radius: 4px;
+        }
+        .legend-item .swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            flex-shrink: 0;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .legend-item .li-val {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 700;
+            color: var(--accent-3);
+            margin-left: auto;
+        }
+        .chart-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            max-width: 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .chart-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        /* ===== 法宝表格 ===== */
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        #artifact-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+            min-width: 880px;
+        }
+        #artifact-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 11px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        #artifact-table tbody tr { border-bottom: 1px solid var(--line); }
+        #artifact-table tbody tr:nth-child(even) { background: var(--bg); }
+        #artifact-table tbody tr:hover { background: #fff8ec; }
+        #artifact-table td { padding: 10px 12px; vertical-align: top; }
+        #artifact-table td.col-name { font-weight: 600; color: var(--ink); }
+        #artifact-table td.col-name .en {
+            display: block;
+            font-size: 0.72rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+        #artifact-table td.col-stat {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        #artifact-table td.col-stat .stat-key {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--ink-soft);
+            font-weight: 500;
+            font-style: italic;
+        }
+        .rarity-pill {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 10px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: #fff;
+            font-family: "JetBrains Mono", monospace;
+            letter-spacing: 0.05em;
+        }
+        .elem-chip {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.72rem;
+            color: #fff;
+            font-weight: 600;
+        }
+        /* ===== 网文卡片网格 ===== */
+        .novel-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 960px) { .novel-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .novel-grid { grid-template-columns: 1fr; } }
+        .novel-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--accent-2);
+            border-radius: 8px;
+            padding: 14px 16px;
+            box-shadow: var(--shadow);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .novel-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        .novel-card.top-pick {
+            border-left-color: var(--rarity-ur);
+            background: linear-gradient(135deg, #fff8ec 0%, #ffffff 60%);
+        }
+        .top-badge {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            background: linear-gradient(135deg, #d4af37, #e9b885);
+            color: #1a1410;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            box-shadow: 0 2px 6px rgba(212, 175, 55, 0.4);
+        }
+        .nc-genre {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+            letter-spacing: 0.05em;
+        }
+        .nc-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1.3;
+            margin-bottom: 4px;
+            padding-right: 90px;
+        }
+        .nc-protagonist {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            margin-bottom: 8px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .nc-protagonist::before { content: "主角 · "; color: var(--ink-soft); }
+        .nc-block {
+            font-size: 0.8rem;
+            color: var(--ink);
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+        .nc-block .lbl {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            margin-bottom: 1px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .nc-quote {
+            font-size: 0.8rem;
+            color: var(--accent-3);
+            font-style: italic;
+            background: var(--bg);
+            border-left: 2px solid var(--accent-soft);
+            padding: 6px 10px;
+            border-radius: 0 4px 4px 0;
+            margin: 8px 0;
+            line-height: 1.6;
+            position: relative;
+        }
+        .nc-quote::before {
+            content: "❝ ";
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+        .nc-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: auto;
+            padding-top: 8px;
+            border-top: 1px dashed var(--line);
+            gap: 8px;
+        }
+        .nc-bottom-left {
+            flex: 1;
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            line-height: 1.5;
+        }
+        .nc-bottom-left .sp { color: var(--accent-3); font-weight: 600; }
+        .nc-score {
+            flex-shrink: 0;
+            text-align: right;
+        }
+        .nc-score-val {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.6rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .nc-score-unit {
+            font-size: 0.7rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+        }
+        /* ===== 关键洞察 ===== */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: 9px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li .idx {
+            flex-shrink: 0;
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.85rem;
+            min-width: 24px;
+        }
+        .insight-box li strong { color: var(--accent); font-weight: 600; }
+        /* ===== Footer ===== */
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+        footer .gen-time {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid #3a6b8c;
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+    <header class="hero">
+        <h1>游戏网文 · 角色卡牌战力系统</h1>
+        <div class="subtitle">GAME &amp; WEBNOVEL</div>
+        <div class="tagline">当西游角色变成抽卡 SSR 与网文主角</div>
+    </header>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span class="sep">/</span>
+            <a href="../dashboard.html">数据看板</a>
+            <span class="sep">/</span>
+            <span>游戏网文 · 角色卡牌</span>
+        </div>
+
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">CARDS · 角色卡</div>
+                <div class="value">12<span style="font-size:0.9rem;color:var(--ink-soft);"> 张</span></div>
+                <div class="desc">UR×2 SSR×5 SR×2 R×2 N×1</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">ARTIFACTS · 法宝</div>
+                <div class="value">10<span style="font-size:0.9rem;color:var(--ink-soft);"> 件</span></div>
+                <div class="desc">UR×2 SSR×5 SR×2 R×1</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">WEBNOVELS · 网文</div>
+                <div class="value">9<span style="font-size:0.9rem;color:var(--ink-soft);"> 部</span></div>
+                <div class="desc">9 大流派改编</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">AVG POWER · 平均战力</div>
+                <div class="value" style="color:var(--accent);">6358</div>
+                <div class="desc">12 张卡牌均值</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">POWER RANGE · 战力跨度</div>
+                <div class="value" style="font-size:1.4rem;color:var(--accent-3);">800–10000</div>
+                <div class="desc">白骨精 → 如来佛祖</div>
+            </div>
+        </div>
+
+        <!-- 板块 1：角色卡牌墙 -->
+        <section class="section">
+            <h2 class="section-title">角色卡牌墙 · 12 张</h2>
+            <div class="section-sub">按稀有度（UR/SSR/SR/R/N）边框色分级，UR 金光、SSR 紫光。hover 卡牌查看动效。</div>
+            <div class="card-grid" id="card-grid"></div>
+        </section>
+
+        <!-- 板块 2：稀有度分布饼图 -->
+        <section class="section">
+            <h2 class="section-title">稀有度分布饼图</h2>
+            <div class="section-sub">12 张卡牌按 UR/SSR/SR/R/N 数量分布，中心显示总数。</div>
+            <div class="pie-wrap">
+                <div class="chart-wrap" style="position:relative;">
+                    <svg id="rarity-pie-svg"></svg>
+                    <div class="chart-tip" id="rarity-tip"></div>
+                </div>
+                <div class="pie-legend" id="rarity-legend">
+                    <h4>稀有度图例</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- 板块 3：战力排行条形图 -->
+        <section class="section">
+            <h2 class="section-title">战力排行条形图</h2>
+            <div class="section-sub">12 个角色按 power 降序排列，条形按稀有度配色，前 3 名金色边框高亮。</div>
+            <div class="chart-wrap" style="position:relative;">
+                <svg id="power-bar-svg"></svg>
+                <div class="chart-tip" id="power-tip"></div>
+            </div>
+        </section>
+
+        <!-- 板块 4：元素分布圆环图 -->
+        <section class="section">
+            <h2 class="section-title">元素分布圆环图</h2>
+            <div class="section-sub">12 张卡牌按 10 种元素（金木水火土雷风光暗心）分布。</div>
+            <div class="pie-wrap">
+                <div class="chart-wrap" style="position:relative;">
+                    <svg id="element-donut-svg"></svg>
+                    <div class="chart-tip" id="element-tip"></div>
+                </div>
+                <div class="pie-legend" id="element-legend">
+                    <h4>元素图例</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- 板块 5：法宝装备面板表 -->
+        <section class="section">
+            <h2 class="section-title">法宝装备面板表 · 10 件</h2>
+            <div class="section-sub">西游十大法宝，含稀有度、持有者、元素、主属性数值与克制关系。</div>
+            <div class="table-wrap">
+                <table id="artifact-table">
+                    <thead>
+                        <tr>
+                            <th>法宝名</th>
+                            <th>稀有度</th>
+                            <th>持有者</th>
+                            <th>元素</th>
+                            <th>主属性</th>
+                            <th>效果</th>
+                            <th>克制</th>
+                        </tr>
+                    </thead>
+                    <tbody id="artifact-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 板块 6：法宝天梯散点图 -->
+        <section class="section">
+            <h2 class="section-title">法宝天梯散点图</h2>
+            <div class="section-sub">x 轴=ATK · y 轴=Control · 圆点大小=主属性总和。右上角为控制系顶级法宝。</div>
+            <div class="chart-wrap" style="position:relative;">
+                <svg id="artifact-scatter-svg"></svg>
+                <div class="chart-tip" id="scatter-tip"></div>
+            </div>
+        </section>
+
+        <!-- 板块 7：网文流派改编卡片网格 -->
+        <section class="section">
+            <h2 class="section-title">网文流派改编卡片 · 9 部</h2>
+            <div class="section-sub">9 大流派改编西游，顶部高亮最高人气网文（🏆 9/10 退队流）。</div>
+            <div class="novel-grid" id="novel-grid"></div>
+        </section>
+
+        <!-- 板块 8：网文人气排行条形图 -->
+        <section class="section">
+            <h2 class="section-title">网文人气排行条形图</h2>
+            <div class="section-sub">9 部网文按人气分数降序，条形按分数配色（金≥8.5 / 紫≥7.5 / 蓝≥6.5 / 灰<6.5）。</div>
+            <div class="chart-wrap" style="position:relative;">
+                <svg id="webnovel-bar-svg"></svg>
+                <div class="chart-tip" id="novel-tip"></div>
+            </div>
+        </section>
+
+        <!-- 板块 9：关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">关键洞察</h2>
+            <div class="insight-box">
+                <h4>从抽卡与网文视角看西游宇宙</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="../dashboard.html">返回数据看板</a> ·
+        <a href="../index.html">返回首页</a> ·
+        <a href="workplace.html">打工人专题</a> ·
+        <a href="social-media.html">社媒 MBTI 专题</a>
+        <span class="gen-time" id="gen-time"></span>
+        <div style="margin-top:8px;">深入阅读：<a href="../../docs/02-人物深度分析/孙悟空.md">孙悟空深度分析</a></div>
+    </footer>
+
+    <script>
+    // ============================================================
+    // 嵌入式 fallback 数据（fetch 失败时使用）
+    // 数据源：scripts/output/data/{character_cards,artifact_panels,webnovel_adaptations,game_webnovel_summary}.json
+    // ============================================================
+    const EMBEDDED = {
+        character_cards: [
+            {
+                character: "孙悟空", title: "齐天大圣·斗战胜佛", rarity: "UR", element: "金",
+                power: 9800, hp: 9500, atk: 9800, def: 8500, spd: 9900,
+                skills: [
+                    { name: "七十二变", cost: 5, effect: "变形·回避率+50%·持续 3 回合", type: "buff" },
+                    { name: "筋斗云", cost: 3, effect: "先手·无视地形·必中", type: "move" },
+                    { name: "如意金箍棒·定海神针", cost: 8, effect: "物理伤害×3·破防", type: "attack" },
+                    { name: "火眼金睛", cost: 2, effect: "识破·看穿一切伪装与幻术", type: "skill" }
+                ],
+                passive: "大闹天宫——首次受击免疫·每场战斗 1 次",
+                acquisition: "限定卡池·五行山封印解除纪念",
+                lore: "花果山灵石育孕·大闹天宫·护送取经·终成斗战胜佛"
+            },
+            {
+                character: "如来佛祖", title: "西天极乐世界·最高主宰", rarity: "UR", element: "光",
+                power: 10000, hp: 9999, atk: 9500, def: 9999, spd: 7000,
+                skills: [
+                    { name: "五行山压顶", cost: 10, effect: "无视对方防御·直接剥夺回合数 500 年", type: "attack" },
+                    { name: "佛法无边", cost: 8, effect: "全场净化·解除一切 buff/debuff", type: "buff" },
+                    { name: "掌中佛国", cost: 6, effect: "将目标封入掌中·无法行动", type: "control" }
+                ],
+                passive: "规则系——所有战斗结果由如来判定",
+                acquisition: "灵山最高祭祀·全服仅 1 张",
+                lore: "西天极乐世界最高主宰·九九八十一难总设计师"
+            },
+            {
+                character: "观音菩萨", title: "南海普陀·大慈大悲", rarity: "SSR", element: "水",
+                power: 8200, hp: 8500, atk: 7800, def: 8800, spd: 8000,
+                skills: [
+                    { name: "净瓶甘露", cost: 5, effect: "群体回复 50% HP·解除负面", type: "heal" },
+                    { name: "紧箍咒", cost: 4, effect: "对单体的 ENTP 类角色强制控制 3 回合", type: "control" },
+                    { name: "三根救命毫毛", cost: 3, effect: "赋予队友复活道具·可使用 3 次", type: "buff" }
+                ],
+                passive: "暗中护持——队友 HP < 30% 时自动触发护盾",
+                acquisition: "南海普陀限定卡池",
+                lore: "大慈大悲观世音菩萨·取经项目暗中投资人"
+            },
+            {
+                character: "二郎神杨戬", title: "显圣二郎真君", rarity: "SSR", element: "雷",
+                power: 8800, hp: 8200, atk: 9000, def: 8000, spd: 9200,
+                skills: [
+                    { name: "天眼通", cost: 4, effect: "看穿一切伪装与变化·持续 5 回合", type: "skill" },
+                    { name: "八九玄功", cost: 6, effect: "七十二变之敌·附带雷属性伤害", type: "attack" },
+                    { name: "哮天犬", cost: 3, effect: "召唤哮天犬咬住目标·无法行动 2 回合", type: "control" }
+                ],
+                passive: "天庭最强战神——对妖怪类敌人伤害+30%",
+                acquisition: "灌江口限定·天庭军团卡池",
+                lore: "玉帝外甥·曾与悟空大战三百回合不分胜负"
+            },
+            {
+                character: "唐三藏", title: "旃檀功德佛·金蝉子转世", rarity: "SR", element: "心",
+                power: 1500, hp: 1500, atk: 800, def: 1200, spd: 3000,
+                skills: [
+                    { name: "紧箍咒念诵", cost: 2, effect: "对悟空类角色强制控制·但伤害为 0", type: "control" },
+                    { name: "诵读多心经", cost: 3, effect: "净化全场负面·但需吟唱 1 回合", type: "heal" },
+                    { name: "求助观音", cost: 5, effect: "召唤观音救场·冷却 5 回合", type: "summon" }
+                ],
+                passive: "金蝉子转世——被妖怪击败时 100% 触发剧情救援",
+                acquisition: "默认卡·开局赠送",
+                lore: "金蝉子转世·14 年徒步取经·终成旃檀功德佛"
+            },
+            {
+                character: "猪八戒", title: "天蓬元帅·净坛使者", rarity: "SR", element: "土",
+                power: 4200, hp: 6000, atk: 4500, def: 5500, spd: 3000,
+                skills: [
+                    { name: "三十六变", cost: 3, effect: "变形·但失败率 50%", type: "buff" },
+                    { name: "九齿钉耙", cost: 4, effect: "物理伤害×1.5·对女性妖怪伤害-50%", type: "attack" },
+                    { name: "高老庄红烧肉", cost: 2, effect: "回复 30% HP·但攻击力-20%·持续 3 回合", type: "heal" }
+                ],
+                passive: "天蓬元帅——遇到女性妖怪时 50% 概率叛变",
+                acquisition: "高老庄剧情解锁",
+                lore: "前天蓬元帅·调戏嫦娥被贬·后成取经团队气氛组"
+            },
+            {
+                character: "沙悟净", title: "卷帘大将·金身罗汉", rarity: "R", element: "水",
+                power: 3200, hp: 4500, atk: 3200, def: 5000, spd: 3500,
+                skills: [
+                    { name: "降妖宝杖", cost: 3, effect: "稳定物理伤害×1.2", type: "attack" },
+                    { name: "挑担术", cost: 1, effect: "提升团队负重上限·但无战斗效果", type: "buff" },
+                    { name: "师父被妖怪抓走了", cost: 2, effect: "通知全队·但无实际伤害", type: "skill" }
+                ],
+                passive: "默默奉献——每回合稳定回复 5% HP",
+                acquisition: "流沙河剧情解锁",
+                lore: "前卷帘大将·打破琉璃盏被贬·默默挑担 14 年"
+            },
+            {
+                character: "白龙马", title: "西海龙王三太子·八部天龙", rarity: "R", element: "水",
+                power: 3800, hp: 5000, atk: 3500, def: 4500, spd: 4000,
+                skills: [
+                    { name: "化身白马", cost: 0, effect: "成为唐僧坐骑·无法战斗", type: "passive" },
+                    { name: "踹一脚", cost: 5, effect: "关键时刻救场·对黄袍怪伤害×3", type: "attack" },
+                    { name: "龙吟", cost: 3, effect: "威吓低级妖怪 2 回合", type: "control" }
+                ],
+                passive: "关键时刻救场——剧情触发时强制激活",
+                acquisition: "鹰愁涧剧情解锁",
+                lore: "西海龙王三太子·因纵火烧殿上明珠被贬·化为白马驮唐僧"
+            },
+            {
+                character: "牛魔王", title: "平天大圣·七大圣之首", rarity: "SSR", element: "土",
+                power: 8500, hp: 9500, atk: 8800, def: 8500, spd: 6000,
+                skills: [
+                    { name: "七十二变（牛版）", cost: 5, effect: "变形·与悟空同级", type: "buff" },
+                    { name: "混铁棍", cost: 6, effect: "物理伤害×2.5·破防", type: "attack" },
+                    { name: "芭蕉扇·借", cost: 8, effect: "需先借到·否则无效", type: "attack" }
+                ],
+                passive: "七大圣之首——对悟空类角色伤害+50%",
+                acquisition: "火焰山剧情限定",
+                lore: "悟空结拜大哥·平天大圣·最终被哪吒收服"
+            },
+            {
+                character: "红孩儿", title: "圣婴大王·善财童子", rarity: "SSR", element: "火",
+                power: 7800, hp: 6500, atk: 8500, def: 6000, spd: 8800,
+                skills: [
+                    { name: "三昧真火", cost: 6, effect: "持续燃烧伤害 5 回合·对悟空特效", type: "attack" },
+                    { name: "火云枪", cost: 4, effect: "物理+火属性伤害×1.8", type: "attack" },
+                    { name: "变身小郎君", cost: 3, effect: "伪装·骗取敌方信任", type: "control" }
+                ],
+                passive: "三昧真火——免疫一切火系伤害·对悟空类伤害+30%",
+                acquisition: "号山火云洞限定",
+                lore: "牛魔王与铁扇公主之子·三昧真火无人能敌·终被观音收服"
+            },
+            {
+                character: "六耳猕猴", title: "假美猴王·心魔", rarity: "SSR", element: "暗",
+                power: 9700, hp: 9400, atk: 9700, def: 8500, spd: 9900,
+                skills: [
+                    { name: "七十二变（复制）", cost: 5, effect: "完全复制目标技能", type: "buff" },
+                    { name: "如意金箍棒（伪）", cost: 8, effect: "物理伤害×3·但伤害 90%", type: "attack" },
+                    { name: "谛听难辨", cost: 4, effect: "伪装·识破率-50%", type: "control" }
+                ],
+                passive: "心魔——对悟空类角色伤害+50%·且免疫紧箍咒",
+                acquisition: "真假美猴王剧情限定",
+                lore: "悟空心魔化身·与悟空一模一样·终被如来识破"
+            },
+            {
+                character: "白骨精", title: "白骨夫人·野怪", rarity: "N", element: "暗",
+                power: 800, hp: 500, atk: 900, def: 400, spd: 1500,
+                skills: [
+                    { name: "三变（少女/老妇/老翁）", cost: 2, effect: "伪装·识破率 30%", type: "control" },
+                    { name: "解尸法", cost: 1, effect: "假死逃脱·实际无伤害", type: "skill" }
+                ],
+                passive: "野怪——被悟空一击秒杀（但悟空会被赶走）",
+                acquisition: "白虎岭剧情·新手教程",
+                lore: "白虎岭野怪·想吃唐僧肉长生不老·三次变化被悟空识破"
+            }
+        ],
+        artifact_panels: [
+            {
+                name: "金刚琢", english_name: "Golden Ring", rarity: "SSR",
+                owner: "太上老君→青牛精", element: "金",
+                stats: { atk: 0, def: 0, control: 9999 },
+                effect: "可收取对方一切攻击性法宝与兵器·但对芭蕉扇无效",
+                counter: "芭蕉扇（克制）",
+                background: "太上老君化胡时期锻造·锟钢抟炼",
+                battle_impact: "天庭战斗格局变化：单体法宝流被废·需群体战术",
+                popularity: "普及后所有依赖单法宝的妖怪集体失业"
+            },
+            {
+                name: "金箍棒·如意", english_name: "Ruyi Jingu Bang", rarity: "UR",
+                owner: "大禹→东海龙王→孙悟空", element: "金",
+                stats: { atk: 9800, def: 0, control: 0 },
+                effect: "物理伤害×3·可大可小·重一万三千五百斤",
+                counter: "无（但被金刚琢收取）",
+                background: "大禹治水时定海神针·后存于东海龙宫",
+                battle_impact: "单体近战最强武器·远距离无解",
+                popularity: "悟空专属·无法复制"
+            },
+            {
+                name: "芭蕉扇（阳）", english_name: "Banana Fan (Yang)", rarity: "SSR",
+                owner: "铁扇公主", element: "风",
+                stats: { atk: 0, def: 0, control: 9500 },
+                effect: "一扇扇出八万四千里·无物可挡·对金刚琢特攻",
+                counter: "定风丹（一次性克制）",
+                background: "昆仑山后自混沌开辟时产生的一缕太阴之叶",
+                battle_impact: "群体位移流核心·可改变战场地形",
+                popularity: "依赖持扇者法力·普及率低"
+            },
+            {
+                name: "紫金红葫芦", english_name: "Purple Gold Gourd", rarity: "SSR",
+                owner: "太上老君→金角银角", element: "暗",
+                stats: { atk: 0, def: 0, control: 9000 },
+                effect: "呼名即应·一时三刻化为脓水",
+                counter: "假名（如'孙行者''者行孙'）",
+                background: "老君化胡途中·葫芦发出来的金气所凝",
+                battle_impact: "单体必杀·但需知道真名",
+                popularity: "天庭内部流通·妖怪获取需偷盗"
+            },
+            {
+                name: "阴阳二气瓶", english_name: "Yin-Yang Bottle", rarity: "SSR",
+                owner: "大鹏金翅雕", element: "光",
+                stats: { atk: 0, def: 0, control: 9300 },
+                effect: "装入瓶中·一时三刻化为浆水·悟空需用观音三根毫毛破解",
+                counter: "观音救命毫毛（一次性破解）",
+                background: "阴阳二气所凝·大鹏金翅雕专属",
+                battle_impact: "单体必杀·但对顶级 UR 卡效果减半",
+                popularity: "妖怪独占·普及率为 0"
+            },
+            {
+                name: "九齿钉耙", english_name: "Nine-Tooth Rake", rarity: "SR",
+                owner: "猪八戒", element: "土",
+                stats: { atk: 4500, def: 0, control: 0 },
+                effect: "物理伤害×1.5·对女性妖怪伤害-50%",
+                counter: "无",
+                background: "天庭神锤所锻·原为天蓬元帅兵符",
+                battle_impact: "稳定输出·但情感干扰严重",
+                popularity: "八戒专属·无法流通"
+            },
+            {
+                name: "降妖宝杖", english_name: "Demon-Subduing Staff", rarity: "R",
+                owner: "沙悟净", element: "水",
+                stats: { atk: 3200, def: 0, control: 0 },
+                effect: "物理伤害×1.2·稳定输出无变化",
+                counter: "无",
+                background: "吴刚伐桂所出·鲁班所制",
+                battle_impact: "稳定·但缺乏爆发力",
+                popularity: "沙僧专属"
+            },
+            {
+                name: "紧箍咒", english_name: "Golden Hoop Mantra", rarity: "UR",
+                owner: "观音→唐僧", element: "心",
+                stats: { atk: 0, def: 0, control: 10000 },
+                effect: "对 ENTP 类角色（悟空）100% 控制·无法抵抗",
+                counter: "无（除非远离唐僧 100 里）",
+                background: "观音赐予·专为控制悟空设计",
+                battle_impact: "颠覆团队权力结构·唐僧从弱势变强势",
+                popularity: "管理神器·但全三界仅 1 个"
+            },
+            {
+                name: "火眼金睛", english_name: "Fiery Golden Eyes", rarity: "SSR",
+                owner: "孙悟空", element: "火",
+                stats: { atk: 0, def: 0, control: 0, perception: 9500 },
+                effect: "识破一切幻术与变化·但对烟熏敏感",
+                counter: "烟熏（如红孩儿三昧真火的烟）",
+                background: "八卦炉中炼七七四十九日所得·副作用是畏烟",
+                battle_impact: "情报流核心·改变战场信息透明度",
+                popularity: "悟空专属·不可复制"
+            },
+            {
+                name: "三根救命毫毛", english_name: "Three Life-Saving Hairs", rarity: "SR",
+                owner: "观音→孙悟空", element: "心",
+                stats: { atk: 0, def: 0, control: 0, rescue: 3 },
+                effect: "可变化任意物品·共 3 次",
+                counter: "无",
+                background: "观音赐予的紧急救援道具",
+                battle_impact: "保命道具·但使用次数有限",
+                popularity: "限定·全三界仅 3 根"
+            }
+        ],
+        webnovel_adaptations: [
+            {
+                genre: "赘婿流", title: "西游：开局入赘高老庄", protagonist: "猪八戒",
+                setting: "高老庄",
+                premise: "现代程序员魂穿猪八戒·开局就被高太公招赘·面对貌美翠兰却只能装作不会武功",
+                core_plothook: "用现代商业知识改造高老庄·成为当地首富·但要躲避悟空的收编",
+                selling_point: "搞笑 + 种田 + 商战三合一",
+                target_audience: "都市文爱好者·轻松向读者",
+                popularity_estimate: "中等（7.5/10）",
+                key_quote: "我天蓬元帅·堂堂前水军总司令·现在要入赘？"
+            },
+            {
+                genre: "退队流", title: "取经？不干了，我猴哥只想躺平", protagonist: "孙悟空",
+                setting: "花果山",
+                premise: "悟空被唐僧赶回花果山·这次他真的不再归队·回花果山搞起了猴子猴孙的 K12 教育",
+                core_plothook: "三界大乱·诸神跪求复出·但悟空表示'我退休了·别烦我'",
+                selling_point: "躺平爽文 + 教育流 + 反传统",
+                target_audience: "996 打工人·反内卷群体",
+                popularity_estimate: "高（9/10）·贴合当下情绪",
+                key_quote: "你叫我回去就回去？我花果山学区房刚买好"
+            },
+            {
+                genre: "心声流", title: "大唐取经人，皇帝能听我心声", protagonist: "唐僧",
+                setting: "长安→西天",
+                premise: "李世民能听到唐僧的心声·发现这个御弟天天在心里吐槽路远妖多",
+                core_plothook: "李世民一路偷偷安排救援·把观音的剧本全打乱·改写取经项目",
+                selling_point: "爽文 + 改剧本 + 吐槽喜剧",
+                target_audience: "爽文读者·喜欢 meta 段子",
+                popularity_estimate: "高（8.5/10）",
+                key_quote: "【心声】这鬼地方又是哪？怎么妖怪比人都多。"
+            },
+            {
+                genre: "系统流", title: "西游：我有渡劫系统", protagonist: "沙僧",
+                setting: "流沙河→取经路",
+                premise: "沙僧觉醒渡劫系统·每过一难就升级·从最低调的徒弟逆袭成最强",
+                core_plothook: "系统任务奖励让沙僧默默变强·最终超越悟空",
+                selling_point: "逆袭 + 数据流 + 隐藏大佬",
+                target_audience: "数据党·逆袭文爱好者",
+                popularity_estimate: "中高（8/10）",
+                key_quote: "叮！宿主完成'挑担 10000 公里'成就·奖励：体质+10"
+            },
+            {
+                genre: "重生流", title: "重生之我是唐僧他哥", protagonist: "陈光蕊（复活）",
+                setting: "洪江→长安",
+                premise: "陈光蕊复活后重生到取经开始前·决定先一步保护弟弟唐僧",
+                core_plothook: "带着前世记忆·改造取经路线·把八十一难变成三十难",
+                selling_point: "改命 + 兄弟情 + 战略流",
+                target_audience: "重生文爱好者·亲情向读者",
+                popularity_estimate: "中等（7/10）",
+                key_quote: "玄奘·哥这次绝对不让你死在妖怪手里"
+            },
+            {
+                genre: "反派流", title: "西游：我，六耳猕猴，本该成佛", protagonist: "六耳猕猴",
+                setting: "灵山→花果山",
+                premise: "六耳猕猴视角重写真假美猴王·揭示他本是悟空的另一半·却被如来一棒打死",
+                core_plothook: "重生回到真假美猴王前·这次他要做回自己·不当替身",
+                selling_point: "反派视角 + 反英雄 + 哲学流",
+                target_audience: "深度党·喜欢反派视角",
+                popularity_estimate: "中高（8/10）",
+                key_quote: "凭什么他成佛·我被打死？我才是真正的孙悟空"
+            },
+            {
+                genre: "后宫流", title: "西游之天蓬再临", protagonist: "猪八戒",
+                setting: "天庭→凡间",
+                premise: "天蓬元帅重生·这次不再调戏嫦娥·而是用实际行动赢回所有女神",
+                core_plothook: "收服嫦娥·高翠兰·玉兔精·蜘蛛精·打造最强后宫",
+                selling_point: "爽文 + 后宫 + 重生",
+                target_audience: "后宫文爱好者·爽文党",
+                popularity_estimate: "中等（6/10）·赛道拥挤",
+                key_quote: "前世错过的·这一世我全都要"
+            },
+            {
+                genre: "无敌流", title: "西游：我如来，从开局就无敌", protagonist: "如来佛祖",
+                setting: "灵山→三界",
+                premise: "如来视角讲述九九八十一难的幕后设计·所有劫难都是他一手安排",
+                core_plothook: "读者跟着如来一起'看戏'·欣赏自己设计的剧本如何展开",
+                selling_point: "上帝视角 + 无敌爽文 + 幕后流",
+                target_audience: "高段位读者·喜欢看主角操控一切",
+                popularity_estimate: "中等（7/10）·门槛较高",
+                key_quote: "悟空啊·这一难是我给你设计的成长课"
+            },
+            {
+                genre: "无限流", title: "西游副本：我在灵山刷怪", protagonist: "原创主角",
+                setting: "无限空间",
+                premise: "主角被卷入西游副本世界·必须通关九九八十一难副本才能回到现实",
+                core_plothook: "每个副本都有特殊规则·主角需破解规则通关",
+                selling_point: "无限流 + 解谜 + 西游题材",
+                target_audience: "无限流爱好者·解谜党",
+                popularity_estimate: "中高（8/10）",
+                key_quote: "副本·火焰山·难度 S 级·存活率 5%"
+            }
+        ],
+        game_webnovel_summary: {
+            total_cards: 12,
+            total_artifacts: 10,
+            total_webnovels: 9,
+            rarity_distribution: { UR: 2, SSR: 5, SR: 2, R: 2, N: 1 },
+            element_distribution: { "金": 1, "光": 1, "水": 3, "雷": 1, "心": 1, "土": 2, "火": 1, "暗": 2 },
+            avg_power: 6358.3,
+            max_power: 10000,
+            min_power: 800,
+            webnovel_genres: ["赘婿流", "退队流", "心声流", "系统流", "重生流", "反派流", "后宫流", "无敌流", "无限流"],
+            best_webnovel: "取经？不干了，我猴哥只想躺平"
+        }
+    };
+
+    // ============================================================
+    // 配色映射
+    // ============================================================
+    const RARITY_COLORS = {
+        UR: "#d4af37", SSR: "#9b59b6", SR: "#3a6b8c", R: "#5a7a3a", N: "#6b5e4d"
+    };
+    const RARITY_ORDER = ["UR", "SSR", "SR", "R", "N"];
+    const ELEMENT_COLORS = {
+        "金": "#d4af37", "木": "#5a7a3a", "水": "#3a6b8c", "火": "#c8463a",
+        "土": "#7a5230", "雷": "#9b59b6", "风": "#a8c97f", "光": "#f1c40f",
+        "暗": "#2c2418", "心": "#e91e63"
+    };
+    // 网文流派配色
+    const GENRE_COLORS = {
+        "赘婿流": "#7a5230", "退队流": "#c8463a", "心声流": "#e91e63",
+        "系统流": "#3a6b8c", "重生流": "#5a7a3a", "反派流": "#2c2418",
+        "后宫流": "#d97706", "无敌流": "#d4af37", "无限流": "#9b59b6"
+    };
+    // 战力条形图按稀有度配色
+    function rarityColor(r) { return RARITY_COLORS[r] || "#7a5230"; }
+    // 元素色
+    function elemColor(e) { return ELEMENT_COLORS[e] || "#7a5230"; }
+    // 网文人气分颜色
+    function scoreColor(s) {
+        if (s >= 8.5) return "#d4af37";
+        if (s >= 7.5) return "#9b59b6";
+        if (s >= 6.5) return "#3a6b8c";
+        return "#6b5e4d";
+    }
+    // 解析 popularity_estimate 字符串中的数字
+    function parseScore(s) {
+        const m = String(s).match(/(\d+(?:\.\d+)?)/);
+        return m ? parseFloat(m[1]) : 0;
+    }
+
+    // ============================================================
+    // 数据加载
+    // ============================================================
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error("fetch failed: " + path);
+            return await res.json();
+        } catch (e) {
+            console.warn("[INFO] 使用嵌入数据 for", path, ":", e.message);
+            return fallback;
+        }
+    }
+    async function loadAll() {
+        const [cards, artifacts, novels, summary] = await Promise.all([
+            loadJson("../../scripts/output/data/character_cards.json", EMBEDDED.character_cards),
+            loadJson("../../scripts/output/data/artifact_panels.json", EMBEDDED.artifact_panels),
+            loadJson("../../scripts/output/data/webnovel_adaptations.json", EMBEDDED.webnovel_adaptations),
+            loadJson("../../scripts/output/data/game_webnovel_summary.json", EMBEDDED.game_webnovel_summary)
+        ]);
+        return { cards, artifacts, novels, summary };
+    }
+
+    // ============================================================
+    // 渲染：角色卡牌墙
+    // ============================================================
+    function renderCards(cards) {
+        const grid = d3.select("#card-grid");
+        grid.selectAll("*").remove();
+        cards.forEach(c => {
+            const card = grid.append("div")
+                .attr("class", "char-card rarity-" + c.rarity);
+
+            // 头部：稀有度 + 元素
+            const head = card.append("div").attr("class", "cc-head");
+            head.append("div").attr("class", "cc-rarity " + c.rarity).text(c.rarity);
+            head.append("div")
+                .attr("class", "cc-elem")
+                .style("background", elemColor(c.element))
+                .text(c.element);
+
+            // 角色名 + 称号
+            card.append("div").attr("class", "cc-name").text(c.character);
+            card.append("div").attr("class", "cc-title").text(c.title);
+
+            // 战力
+            const pw = card.append("div").attr("class", "cc-power")
+                .style("color", elemColor(c.element))
+                .text(c.power.toLocaleString());
+            card.append("div").attr("class", "cc-power-label").text("POWER · 战力");
+
+            // 4 维条形图
+            const stats = card.append("div").attr("class", "cc-stats");
+            const statData = [
+                { label: "HP", val: c.hp, color: "#c8463a" },
+                { label: "ATK", val: c.atk, color: "#d97706" },
+                { label: "DEF", val: c.def, color: "#3a6b8c" },
+                { label: "SPD", val: c.spd, color: "#5a7a3a" }
+            ];
+            const maxStat = 10000;
+            statData.forEach(s => {
+                const row = stats.append("div").attr("class", "cc-stat-row");
+                row.append("div").attr("class", "cc-stat-label").text(s.label);
+                const track = row.append("div").attr("class", "cc-stat-track");
+                track.append("div").attr("class", "cc-stat-fill")
+                    .style("background", s.color)
+                    .style("width", "0%")
+                    .transition().duration(700).ease(d3.easeCubicOut)
+                    .style("width", (s.val / maxStat * 100) + "%");
+                row.append("div").attr("class", "cc-stat-val").text(s.val);
+            });
+
+            // 技能（前 3 个）
+            const sk = card.append("div").attr("class", "cc-skills");
+            c.skills.slice(0, 3).forEach(s => {
+                const sr = sk.append("div").attr("class", "cc-skill");
+                sr.append("div").attr("class", "cc-skill-cost").text(s.cost);
+                const txt = sr.append("div").attr("class", "cc-skill-text");
+                txt.append("span").attr("class", "cc-skill-name").text(s.name);
+                txt.append("span").attr("class", "cc-skill-type").text(s.type);
+            });
+
+            // 被动
+            card.append("div").attr("class", "cc-passive").text(c.passive);
+
+            // 获取方式
+            card.append("div").attr("class", "cc-acq").text(c.acquisition);
+        });
+    }
+
+    // ============================================================
+    // 渲染：稀有度分布饼图
+    // ============================================================
+    function renderRarityPie(summary) {
+        const svg = d3.select("#rarity-pie-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("rarity-pie-svg");
+        const w = el.clientWidth || 500;
+        const h = 360;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const cx = w / 2, cy = h / 2;
+        const radius = Math.max(0, Math.min(w, h) / 2 - 30);
+
+        const data = RARITY_ORDER
+            .filter(r => summary.rarity_distribution[r])
+            .map(r => ({ rarity: r, count: summary.rarity_distribution[r] }));
+        const total = d3.sum(data, d => d.count);
+
+        const pie = d3.pie().value(d => d.count).sort(null);
+        const arc = d3.arc().innerRadius(radius * 0.55).outerRadius(radius).padAngle(0.02);
+        const arcHover = d3.arc().innerRadius(radius * 0.55).outerRadius(radius + 8).padAngle(0.02);
+
+        const tip = d3.select("#rarity-tip");
+        const elParent = el.parentElement;
+
+        const g = svg.append("g").attr("transform", `translate(${cx},${cy})`);
+
+        const arcs = pie(data);
+        const paths = g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => RARITY_COLORS[d.data.rarity])
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .style("cursor", "pointer")
+            .style("opacity", 0)
+            .each(function(d) { this._current = { startAngle: 0, endAngle: 0 }; });
+
+        paths.transition()
+            .duration(800)
+            .ease(d3.easeCubicOut)
+            .style("opacity", 1)
+            .attrTween("d", function(d) {
+                const i = d3.interpolate(this._current, d);
+                this._current = i(1);
+                return t => arc(i(t));
+            });
+
+        paths.on("mouseover", function(e, d) {
+            d3.select(this).transition().duration(150).attr("d", arcHover);
+            tip.style("opacity", 1)
+                .html(`<div class="tip-title">${d.data.rarity} · 稀有度</div>` +
+                      `数量：<strong style="color:var(--accent-soft);">${d.data.count} 张</strong><br/>` +
+                      `占比：${(d.data.count / total * 100).toFixed(1)}%`);
+        })
+        .on("mousemove", function(e) {
+            const rect = elParent.getBoundingClientRect();
+            tip.style("left", (e.clientX - rect.left + 14) + "px")
+               .style("top", (e.clientY - rect.top - 10) + "px");
+        })
+        .on("mouseout", function() {
+            d3.select(this).transition().duration(150).attr("d", arc);
+            tip.style("opacity", 0);
+        });
+
+        // 中心文字
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("y", -6)
+            .style("font-size", "2rem")
+            .style("font-weight", "800")
+            .style("font-family", "JetBrains Mono, monospace")
+            .style("fill", "var(--accent)")
+            .text(total);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("y", 18)
+            .style("font-size", "0.78rem")
+            .style("fill", "var(--ink-soft)")
+            .style("letter-spacing", "0.1em")
+            .text("TOTAL CARDS");
+
+        // 稀有度标签（外侧）
+        g.selectAll(".rarity-label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "rarity-label")
+            .attr("transform", d => {
+                const pos = arc.centroid(d);
+                const r = Math.sqrt(pos[0] * pos[0] + pos[1] * pos[1]);
+                const scale = (radius + 18) / r;
+                return `translate(${pos[0] * scale},${pos[1] * scale})`;
+            })
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("font-weight", "700")
+            .style("font-family", "JetBrains Mono, monospace")
+            .style("fill", d => RARITY_COLORS[d.data.rarity])
+            .text(d => d.data.rarity);
+
+        // 渲染图例
+        const legend = d3.select("#rarity-legend");
+        legend.selectAll("*").remove();
+        legend.append("h4").text("稀有度图例 · 5 档");
+        RARITY_ORDER.forEach(r => {
+            const cnt = summary.rarity_distribution[r] || 0;
+            const item = legend.append("div").attr("class", "legend-item");
+            item.append("span").attr("class", "swatch").style("background", RARITY_COLORS[r]);
+            item.append("span").text(r + " 级");
+            item.append("span").attr("class", "li-val").text(cnt + " 张");
+        });
+    }
+
+    // ============================================================
+    // 渲染：战力排行条形图
+    // ============================================================
+    function renderPowerBar(cards) {
+        const svg = d3.select("#power-bar-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("power-bar-svg");
+        const margin = { top: 24, right: 100, bottom: 40, left: 110 };
+        const w = Math.max(el.clientWidth || 1100, margin.left + margin.right + 120);
+        const sorted = cards.slice().sort((a, b) => b.power - a.power);
+        const n = sorted.length;
+        const barH = 28, gap = 10;
+        const innerW = w - margin.left - margin.right;
+        const totalH = n * (barH + gap) - gap;
+        const h = Math.max(480, totalH + margin.top + margin.bottom);
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+        const innerH = totalH;
+
+        const x = d3.scaleLinear().domain([0, 11000]).range([0, innerW]);
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 网格线
+        g.append("g").selectAll("line")
+            .data([2000, 4000, 6000, 8000, 10000])
+            .enter().append("line")
+            .attr("x1", d => x(d)).attr("x2", d => x(d))
+            .attr("y1", -4).attr("y2", innerH + 4)
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "3,3")
+            .attr("opacity", 0.5);
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH + 6})`)
+            .call(d3.axisBottom(x).ticks(6).tickFormat(d => d.toLocaleString()))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
+
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 36)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.8rem").style("fill", "var(--accent-3)")
+            .text("POWER · 战力数值");
+
+        const tip = d3.select("#power-tip");
+        const elParent = el.parentElement;
+
+        sorted.forEach((c, i) => {
+            const yPos = i * (barH + gap);
+            const isTop3 = i < 3;
+            const color = rarityColor(c.rarity);
+
+            // 角色名（左）
+            g.append("text")
+                .attr("x", -12).attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.86rem")
+                .style("font-weight", "600")
+                .style("fill", isTop3 ? "var(--accent)" : "var(--ink)")
+                .text(c.character);
+
+            // 背景轨道
+            g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",Math.max(0, innerW)).attr("height", barH)
+                .attr("fill", "var(--bg)")
+                .attr("stroke", isTop3 ? "var(--rarity-ur)" : "var(--line)")
+                .attr("stroke-width", isTop3 ? 1.5 : 1)
+                .attr("rx", 4);
+
+            // 数值条
+            const bar = g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",0).attr("height", barH)
+                .attr("fill", color)
+                .attr("rx", 4)
+                .style("cursor", "pointer")
+                .attr("class", "power-bar");
+
+            bar.transition()
+                .delay(i * 80).duration(800)
+                .ease(d3.easeCubicOut)
+                .attr("width",Math.max(0, x(c.power)));
+
+            // 条内文字：稀有度 + 数值
+            g.append("text")
+                .attr("x", x(c.power) - 8).attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.8rem")
+                .style("font-weight", "700")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "#fff")
+                .style("opacity", 0)
+                .text(c.rarity + " " + c.power.toLocaleString())
+                .transition().delay(i * 80 + 600).duration(400).style("opacity", 1);
+
+            // Top 3 皇冠/数字
+            if (isTop3) {
+                const medal = ["🥇", "🥈", "🥉"][i];
+                g.append("text")
+                    .attr("x", x(c.power) + 8).attr("y", yPos + barH / 2 + 4)
+                    .style("font-size", "0.95rem")
+                    .style("opacity", 0)
+                    .text(medal)
+                    .transition().delay(i * 80 + 700).duration(400).style("opacity", 1);
+            }
+
+            bar.on("mouseover", function(e) {
+                d3.select(this).attr("fill", d3.color(color).darker(0.6));
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${c.character} · ${c.rarity} · ${c.element}</div>` +
+                          `<div>称号：${c.title}</div>` +
+                          `<div>战力：<strong style="color:var(--accent-soft);">${c.power.toLocaleString()}</strong></div>` +
+                          `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">${c.lore}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = elParent.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("fill", color);
+                tip.style("opacity", 0);
+            });
+        });
+    }
+
+    // ============================================================
+    // 渲染：元素分布圆环图
+    // ============================================================
+    function renderElementDonut(summary) {
+        const svg = d3.select("#element-donut-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("element-donut-svg");
+        const w = el.clientWidth || 500;
+        const h = 360;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const cx = w / 2, cy = h / 2;
+        const radius = Math.max(0, Math.min(w, h) / 2 - 30);
+
+        const data = Object.entries(summary.element_distribution)
+            .map(([k, v]) => ({ element: k, count: v }));
+        const total = d3.sum(data, d => d.count);
+
+        const pie = d3.pie().value(d => d.count).sort(null);
+        const arc = d3.arc().innerRadius(radius * 0.6).outerRadius(radius).padAngle(0.02);
+        const arcHover = d3.arc().innerRadius(radius * 0.6).outerRadius(radius + 8).padAngle(0.02);
+
+        const tip = d3.select("#element-tip");
+        const elParent = el.parentElement;
+        const g = svg.append("g").attr("transform", `translate(${cx},${cy})`);
+
+        const arcs = pie(data);
+        const paths = g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => elemColor(d.data.element))
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .style("cursor", "pointer")
+            .style("opacity", 0)
+            .each(function(d) { this._current = { startAngle: 0, endAngle: 0 }; });
+
+        paths.transition()
+            .duration(800)
+            .ease(d3.easeCubicOut)
+            .style("opacity", 1)
+            .attrTween("d", function(d) {
+                const i = d3.interpolate(this._current, d);
+                this._current = i(1);
+                return t => arc(i(t));
+            });
+
+        paths.on("mouseover", function(e, d) {
+            d3.select(this).transition().duration(150).attr("d", arcHover);
+            tip.style("opacity", 1)
+                .html(`<div class="tip-title">${d.data.element} · 元素属性</div>` +
+                      `数量：<strong style="color:var(--accent-soft);">${d.data.count} 张</strong><br/>` +
+                      `占比：${(d.data.count / total * 100).toFixed(1)}%`);
+        })
+        .on("mousemove", function(e) {
+            const rect = elParent.getBoundingClientRect();
+            tip.style("left", (e.clientX - rect.left + 14) + "px")
+               .style("top", (e.clientY - rect.top - 10) + "px");
+        })
+        .on("mouseout", function() {
+            d3.select(this).transition().duration(150).attr("d", arc);
+            tip.style("opacity", 0);
+        });
+
+        // 中心
+        g.append("text")
+            .attr("text-anchor", "middle").attr("y", -6)
+            .style("font-size", "1.8rem")
+            .style("font-weight", "800")
+            .style("font-family", "JetBrains Mono, monospace")
+            .style("fill", "var(--accent)")
+            .text(Object.keys(summary.element_distribution).length);
+        g.append("text")
+            .attr("text-anchor", "middle").attr("y", 18)
+            .style("font-size", "0.78rem")
+            .style("fill", "var(--ink-soft)")
+            .style("letter-spacing", "0.1em")
+            .text("ELEMENTS");
+
+        // 元素标签
+        g.selectAll(".elem-label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "elem-label")
+            .attr("transform", d => {
+                const pos = arc.centroid(d);
+                const r = Math.sqrt(pos[0] * pos[0] + pos[1] * pos[1]);
+                const scale = (radius + 18) / r;
+                return `translate(${pos[0] * scale},${pos[1] * scale})`;
+            })
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("font-weight", "700")
+            .style("fill", d => elemColor(d.data.element))
+            .text(d => d.data.element + " " + d.data.count);
+
+        // 图例
+        const legend = d3.select("#element-legend");
+        legend.selectAll("*").remove();
+        legend.append("h4").text("元素图例 · " + Object.keys(summary.element_distribution).length + " 种");
+        Object.entries(summary.element_distribution)
+            .sort((a, b) => b[1] - a[1])
+            .forEach(([k, v]) => {
+                const item = legend.append("div").attr("class", "legend-item");
+                item.append("span").attr("class", "swatch").style("background", elemColor(k));
+                item.append("span").text(k + " 元素");
+                item.append("span").attr("class", "li-val").text(v + " 张");
+            });
+    }
+
+    // ============================================================
+    // 渲染：法宝装备面板表
+    // ============================================================
+    function renderArtifactTable(artifacts) {
+        const tbody = d3.select("#artifact-tbody");
+        tbody.selectAll("*").remove();
+        artifacts.forEach(a => {
+            const tr = tbody.append("tr");
+            // 法宝名
+            const nameTd = tr.append("td").attr("class", "col-name");
+            nameTd.append("span").text(a.name);
+            nameTd.append("span").attr("class", "en").text(a.english_name);
+            // 稀有度
+            tr.append("td").html(`<span class="rarity-pill" style="background:${RARITY_COLORS[a.rarity]}">${a.rarity}</span>`);
+            // 持有者
+            tr.append("td").text(a.owner);
+            // 元素
+            tr.append("td").html(`<span class="elem-chip" style="background:${elemColor(a.element)}">${a.element}</span>`);
+            // 主属性
+            const stats = a.stats;
+            let mainKey = "atk", mainVal = stats.atk;
+            if (stats.control && stats.control > mainVal) { mainKey = "control"; mainVal = stats.control; }
+            if (stats.perception && stats.perception > mainVal) { mainKey = "perception"; mainVal = stats.perception; }
+            if (stats.rescue !== undefined && mainKey === "atk" && mainVal === 0) { mainKey = "rescue"; mainVal = stats.rescue; }
+            const statTd = tr.append("td").attr("class", "col-stat");
+            statTd.append("span").text(mainVal.toLocaleString());
+            statTd.append("span").attr("class", "stat-key").text(mainKey);
+            // 效果（截断 50 字）
+            const effTd = tr.append("td");
+            const eff = a.effect.length > 50 ? a.effect.slice(0, 50) + "…" : a.effect;
+            effTd.style("font-size", "0.82rem").style("color", "var(--ink)").text(eff);
+            // 克制
+            tr.append("td").style("font-size", "0.78rem").style("color", "var(--accent-3)").style("font-style", "italic").text(a.counter);
+        });
+    }
+
+    // ============================================================
+    // 渲染：法宝天梯散点图
+    // ============================================================
+    function renderArtifactScatter(artifacts) {
+        const svg = d3.select("#artifact-scatter-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("artifact-scatter-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 440;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 40, right: 40, bottom: 60, left: 70 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+
+        // 计算每件法宝的 atk / control / stats 总和
+        const data = artifacts.map(a => {
+            const s = a.stats;
+            const atk = s.atk || 0;
+            const ctrl = s.control || 0;
+            const total = (s.atk || 0) + (s.def || 0) + (s.control || 0) +
+                          (s.perception || 0) + (s.rescue || 0);
+            return {
+                name: a.name, rarity: a.rarity, owner: a.owner,
+                atk: atk, control: ctrl, total: total,
+                effect: a.effect
+            };
+        });
+
+        const x = d3.scaleLinear().domain([-500, 11000]).range([0, innerW]);
+        const y = d3.scaleLinear().domain([-500, 11000]).range([innerH, 0]);
+        const r = d3.scaleLinear().domain([0, 12000]).range([6, 30]);
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 网格
+        g.append("g").selectAll("line")
+            .data([0, 2500, 5000, 7500, 10000])
+            .enter().append("line")
+            .attr("x1", d => x(d)).attr("x2", d => x(d))
+            .attr("y1", 0).attr("y2", innerH)
+            .attr("stroke", "var(--line)").attr("stroke-dasharray", "3,3").attr("opacity", 0.5);
+        g.append("g").selectAll("line")
+            .data([0, 2500, 5000, 7500, 10000])
+            .enter().append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", d => y(d)).attr("y2", d => y(d))
+            .attr("stroke", "var(--line)").attr("stroke-dasharray", "3,3").attr("opacity", 0.5);
+
+        // X / Y 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(6).tickFormat(d => d >= 0 ? d.toLocaleString() : ""))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
+        g.append("g")
+            .call(d3.axisLeft(y).ticks(6).tickFormat(d => d >= 0 ? d.toLocaleString() : ""))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
+
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 42)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem").style("fill", "var(--accent-3)")
+            .text("ATK · 攻击力");
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerH / 2).attr("y", -50)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem").style("fill", "var(--accent-3)")
+            .text("CONTROL · 控制力");
+
+        const tip = d3.select("#scatter-tip");
+        const elParent = el.parentElement;
+
+        // 散点
+        g.selectAll(".scatter-dot")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("class", "scatter-dot")
+            .attr("cx", d => x(d.atk))
+            .attr("cy", d => y(d.control))
+            .attr("r", 0)
+            .attr("fill", d => RARITY_COLORS[d.rarity])
+            .attr("fill-opacity", 0.65)
+            .attr("stroke", d => RARITY_COLORS[d.rarity])
+            .attr("stroke-width", 2)
+            .style("cursor", "pointer")
+            .transition().delay((d, i) => i * 80).duration(500)
+            .attr("r", d => r(d.total));
+
+        g.selectAll(".scatter-dot")
+            .on("mouseover", function(e, d) {
+                d3.select(this).attr("fill-opacity", 0.9);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${d.name} · ${d.rarity}</div>` +
+                          `<div>持有：${d.owner}</div>` +
+                          `<div>ATK：<strong style="color:var(--accent-soft);">${d.atk.toLocaleString()}</strong> · ` +
+                          `CTRL：<strong style="color:var(--accent-soft);">${d.control.toLocaleString()}</strong></div>` +
+                          `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">${d.effect}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = elParent.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("fill-opacity", 0.65);
+                tip.style("opacity", 0);
+            });
+
+        // 标注每件法宝名
+        g.selectAll(".scatter-label")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "scatter-label")
+            .attr("x", d => x(d.atk))
+            .attr("y", d => y(d.control) - r(d.total) - 4)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.72rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--ink)")
+            .style("opacity", 0)
+            .text(d => d.name.length > 5 ? d.name.slice(0, 5) + "…" : d.name)
+            .transition().delay((d, i) => i * 80 + 400).duration(400)
+            .style("opacity", 1);
+    }
+
+    // ============================================================
+    // 渲染：网文流派改编卡片网格
+    // ============================================================
+    function renderNovels(novels, summary) {
+        const grid = d3.select("#novel-grid");
+        grid.selectAll("*").remove();
+        // 找最高人气
+        let maxScore = -1, maxTitle = "";
+        novels.forEach(n => {
+            const s = parseScore(n.popularity_estimate);
+            if (s > maxScore) { maxScore = s; maxTitle = n.title; }
+        });
+        novels.forEach(n => {
+            const score = parseScore(n.popularity_estimate);
+            const isTop = n.title === maxTitle;
+            const card = grid.append("div")
+                .attr("class", "novel-card" + (isTop ? " top-pick" : ""));
+            if (isTop) {
+                card.append("div").attr("class", "top-badge").text("🏆 最高人气");
+            }
+            card.append("div")
+                .attr("class", "nc-genre")
+                .style("background", GENRE_COLORS[n.genre] || "var(--accent-3)")
+                .text(n.genre);
+            card.append("div").attr("class", "nc-title").text(n.title);
+            card.append("div").attr("class", "nc-protagonist").text(n.protagonist + " · " + n.setting);
+
+            const premise = card.append("div").attr("class", "nc-block");
+            premise.append("span").attr("class", "lbl").text("PREMISE · 开局");
+            premise.append("span").text(n.premise);
+
+            const hook = card.append("div").attr("class", "nc-block");
+            hook.append("span").attr("class", "lbl").text("HOOK · 钩子");
+            hook.append("span").text(n.core_plothook);
+
+            card.append("div").attr("class", "nc-quote").text(n.key_quote);
+
+            const bottom = card.append("div").attr("class", "nc-bottom");
+            const bl = bottom.append("div").attr("class", "nc-bottom-left");
+            bl.append("div").html(`<span class="sp">卖点</span> · ${n.selling_point}`);
+            bl.append("div").html(`<span class="sp">受众</span> · ${n.target_audience}`);
+            const sc = bottom.append("div").attr("class", "nc-score");
+            sc.append("div").attr("class", "nc-score-val").style("color", scoreColor(score)).text(score.toFixed(1));
+            sc.append("div").attr("class", "nc-score-unit").text("/ 10");
+        });
+    }
+
+    // ============================================================
+    // 渲染：网文人气排行条形图
+    // ============================================================
+    function renderNovelBar(novels) {
+        const svg = d3.select("#webnovel-bar-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("webnovel-bar-svg");
+        const margin = { top: 24, right: 130, bottom: 40, left: 200 };
+        const w = Math.max(el.clientWidth || 1100, margin.left + margin.right + 120);
+        const data = novels.map(n => ({
+            ...n, score: parseScore(n.popularity_estimate)
+        })).sort((a, b) => b.score - a.score);
+        const n = data.length;
+        const barH = 30, gap = 10;
+        const innerW = w - margin.left - margin.right;
+        const totalH = n * (barH + gap) - gap;
+        const h = Math.max(420, totalH + margin.top + margin.bottom);
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+        const innerH = totalH;
+
+        const x = d3.scaleLinear().domain([0, 10]).range([0, innerW]);
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 网格
+        g.append("g").selectAll("line")
+            .data([2, 4, 6, 8, 10])
+            .enter().append("line")
+            .attr("x1", d => x(d)).attr("x2", d => x(d))
+            .attr("y1", -4).attr("y2", innerH + 4)
+            .attr("stroke", "var(--line)").attr("stroke-dasharray", "3,3").attr("opacity", 0.5);
+
+        g.append("g")
+            .attr("transform", `translate(0,${innerH + 6})`)
+            .call(d3.axisBottom(x).ticks(10).tickFormat(d => d))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 36)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.8rem").style("fill", "var(--accent-3)")
+            .text("POPULARITY · 人气评分 (0-10)");
+
+        const tip = d3.select("#novel-tip");
+        const elParent = el.parentElement;
+
+        data.forEach((nv, i) => {
+            const yPos = i * (barH + gap);
+            const color = scoreColor(nv.score);
+
+            // 标题（左）
+            g.append("text")
+                .attr("x", -12).attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.82rem")
+                .style("font-weight", "600")
+                .style("fill", "var(--ink)")
+                .text(nv.title.length > 16 ? nv.title.slice(0, 16) + "…" : nv.title);
+
+            // 轨道
+            g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",Math.max(0, innerW)).attr("height", barH)
+                .attr("fill", "var(--bg)")
+                .attr("stroke", "var(--line)")
+                .attr("rx", 4);
+
+            // 数值条
+            const bar = g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",0).attr("height", barH)
+                .attr("fill", color)
+                .attr("rx", 4)
+                .style("cursor", "pointer");
+
+            bar.transition()
+                .delay(i * 80).duration(800)
+                .ease(d3.easeCubicOut)
+                .attr("width",Math.max(0, x(nv.score)));
+
+            // 条内：流派 + 分数
+            g.append("text")
+                .attr("x", x(nv.score) - 8).attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.8rem")
+                .style("font-weight", "700")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "#fff")
+                .style("opacity", 0)
+                .text(nv.genre + " " + nv.score.toFixed(1))
+                .transition().delay(i * 80 + 600).duration(400).style("opacity", 1);
+
+            // 右侧：主角
+            g.append("text")
+                .attr("x", x(nv.score) + 8).attr("y", yPos + barH / 2 + 4)
+                .style("font-size", "0.78rem")
+                .style("fill", "var(--ink-soft)")
+                .style("font-style", "italic")
+                .style("opacity", 0)
+                .text(nv.protagonist)
+                .transition().delay(i * 80 + 700).duration(400).style("opacity", 1);
+
+            bar.on("mouseover", function(e) {
+                d3.select(this).attr("fill", d3.color(color).darker(0.6));
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${nv.title}</div>` +
+                          `<div>流派：${nv.genre} · 主角：${nv.protagonist}</div>` +
+                          `<div>人气：<strong style="color:var(--accent-soft);">${nv.score.toFixed(1)}/10</strong></div>` +
+                          `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">${nv.key_quote}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = elParent.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("fill", color);
+                tip.style("opacity", 0);
+            });
+        });
+    }
+
+    // ============================================================
+    // 渲染：关键洞察
+    // ============================================================
+    function renderInsights() {
+        const insights = [
+            `<span class="idx">01</span><div><strong>如来 UR 满分 10000</strong>·全服仅 1 张·灵山最高祭祀限定·规则系被动"所有战斗结果由如来判定"——本质是不可抽取的"NPC 卡"。</div>`,
+            `<span class="idx">02</span><div><strong>六耳猕猴 SSR power 9700</strong>·几乎是悟空复刻（仅低 100 点）·但稀有度低一级·且被动"免疫紧箍咒"是悟空的硬克制——心魔设定在卡牌上的完美体现。</div>`,
+            `<span class="idx">03</span><div><strong>紧箍咒 control 10000</strong>·是控制系最强法宝·专为克制 ENTP 悟空设计·UR 稀有度但全三界仅 1 个·颠覆团队权力结构。</div>`,
+            `<span class="idx">04</span><div><strong>退队流网文 9/10 人气最高</strong>·贴合当下"反内卷躺平"情绪·"我花果山学区房刚买好"成为年度金句。</div>`,
+            `<span class="idx">05</span><div><strong>白骨精 N 卡 power 800</strong>·是唯一新手教程级妖怪·但被动"被悟空一击秒杀（但悟空会被赶走）"——剧情杀机制设计的典范。</div>`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(t => ul.append("li").html(t));
+    }
+
+    // ============================================================
+    // 主流程
+    // ============================================================
+    async function main() {
+        const data = await loadAll();
+        window.__data = data;
+
+        // 数据源提示
+        if (data.cards === EMBEDDED.character_cards) {
+            // 嵌入数据
+        } else {
+            document.getElementById("dataSource").innerHTML =
+                "数据源：实时加载自 <code>scripts/output/data/</code>（运行于 http server 模式）";
+        }
+
+        renderCards(data.cards);
+        renderRarityPie(data.summary);
+        renderPowerBar(data.cards);
+        renderElementDonut(data.summary);
+        renderArtifactTable(data.artifacts);
+        renderArtifactScatter(data.artifacts);
+        renderNovels(data.novels, data.summary);
+        renderNovelBar(data.novels);
+        renderInsights();
+
+        document.getElementById("gen-time").textContent =
+            "数据生成时间：" + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
+    }
+
+    // 窗口缩放重绘 D3 图表
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__data) {
+                renderRarityPie(window.__data.summary);
+                renderPowerBar(window.__data.cards);
+                renderElementDonut(window.__data.summary);
+                renderArtifactScatter(window.__data.artifacts);
+                renderNovelBar(window.__data.novels);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+</body>
+</html>

@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诗词韵律分析图谱 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        @font-face {
+            font-family: "Noto Serif SC";
+            src: local("Noto Serif SC"), local("Source Han Serif SC"), local("Songti SC");
+            font-weight: 400 700; font-display: swap;
+        }
+        @font-face {
+            font-family: "JetBrains Mono";
+            src: local("JetBrains Mono"), local("Fira Code"), local("Consolas");
+            font-weight: 400 700; font-display: swap;
+        }
+        :root {
+            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
+            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7; background: var(--bg); color: var(--ink);
+        }
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 20px 80px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232,184,133,0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 { font-size: 2.2em; margin: 0 0 10px; position: relative; z-index: 1; }
+        .hero .subtitle { color: #e9b885; font-size: 1.1em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85em; color: rgba(245,233,212,0.65); font-style: italic; position: relative; z-index: 1; }
+        .container { max-width: 1280px; margin: -30px auto 60px; padding: 0 20px; position: relative; z-index: 2; }
+        .breadcrumb { font-size: 0.85em; color: var(--ink-soft); margin-bottom: 12px; }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .cross-page-nav {
+            font-size: 0.86em; color: var(--ink-soft); margin-bottom: 18px;
+            padding: 10px 14px; background: #fff8e7; border-left: 4px solid var(--accent-2);
+            border-radius: 0 4px 4px 0;
+        }
+        .cross-page-nav a { color: var(--accent-2); text-decoration: none; }
+        .cross-page-nav a:hover { text-decoration: underline; }
+        .cross-page-nav a.active { color: var(--accent); font-weight: 700; }
+        .notice {
+            background: #fff8e7; border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        }
+        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px; margin-bottom: 32px; }
+        .kpi-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 20px; box-shadow: var(--shadow); border-top: 3px solid var(--accent); }
+        .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
+        .kpi-card .label { color: var(--ink-soft); font-size: 0.9em; margin-top: 4px; }
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
+        .section { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 28px; margin-bottom: 28px; box-shadow: var(--shadow); }
+        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: var(--accent-2);
+            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 4px 0; transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        a:focus-visible, button:focus-visible, [tabindex]:focus-visible, input:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+        .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; padding: 12px 16px; background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; }
+        .control-row .ctrl-label { font-size: 0.88em; color: var(--ink-soft); font-weight: 600; }
+        .ctrl-btn {
+            padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.9em;
+            font-family: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .ctrl-btn:hover { background: var(--accent-soft); }
+        .ctrl-btn.play { background: var(--accent-2); color: #fff; border-color: var(--accent-2); }
+        .ctrl-btn.play:hover { background: #2c5573; }
+        .ctrl-btn.play.playing { background: var(--accent); border-color: var(--accent); }
+        .slider-wrap { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 240px; }
+        .slider-wrap input[type=range] {
+            flex: 1; height: 6px; -webkit-appearance: none; appearance: none;
+            background: var(--line); border-radius: 3px; outline: none;
+        }
+        .slider-wrap input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
+            cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .slider-wrap input[type=range]::-moz-range-thumb {
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
+            cursor: pointer; border: 2px solid #fff;
+        }
+        .slider-wrap .seg-label { font-family: "JetBrains Mono", monospace; font-size: 0.85em; color: var(--accent); font-weight: 700; min-width: 110px; }
+        .speed-select {
+            padding: 6px 10px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.85em;
+            font-family: inherit;
+        }
+        .chart-wrap { position: relative; overflow-x: auto; }
+        #pie-svg, #heatmap-svg, #timeline-svg, #stacked-svg { display: block; }
+        #pie-svg { min-width: 420px; }
+        #heatmap-svg, #timeline-svg, #stacked-svg { min-width: 980px; }
+        .heat-cell, .pie-slice, .tl-bar, .stack-rect { cursor: pointer; transition: opacity 0.2s; }
+        .heat-cell:hover, .pie-slice:hover, .tl-bar:hover, .stack-rect:hover { opacity: 0.78; }
+        .event-tip {
+            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
+            color: #f5e9d4; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem;
+            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 320px;
+        }
+        .event-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
+        .event-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
+        .event-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6b5e4d; }
+        .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
+        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
+        .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 2px; }
+        .legend-row .lg-swatch.round { border-radius: 50%; }
+        .progress-bar { position: relative; height: 6px; background: var(--line); border-radius: 3px; margin-top: 8px; overflow: hidden; }
+        .progress-bar .progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
+        .insight-box {
+            background: #fffdf8; border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+        }
+        .insight-box strong { color: var(--accent); font-weight: 700; }
+        .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
+        .box-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 900px) { .box-grid { grid-template-columns: 1fr 1fr; } }
+        .box-card { border: 1px solid var(--line); border-radius: 6px; padding: 14px; background: #fffdf8; }
+        .box-card h3 { font-size: 0.98em; margin-bottom: 8px; color: var(--ink); }
+        .box-card svg { width: 100%; height: 200px; display: block; }
+        .cross-page-section { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 28px; margin-bottom: 28px; box-shadow: var(--shadow); }
+        .cross-page-section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .cross-page-section .nav-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 12px; margin-top: 12px; }
+        .cross-page-section .nav-list li { padding: 10px 14px; background: #fff8e7; border-left: 3px solid var(--accent-2); border-radius: 0 4px 4px 0; font-size: 0.9em; }
+        .cross-page-section .nav-list a { color: var(--accent-2); text-decoration: none; font-weight: 600; }
+        .cross-page-section .nav-list a:hover { text-decoration: underline; }
+        .cross-page-section .nav-list .desc { display: block; color: var(--ink-soft); font-size: 0.82em; margin-top: 4px; font-weight: 400; }
+        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer a { color: #e9b885; }
+        footer .idx-row { margin: 6px 0; }
+        footer .idx-label { color: #b8a584; font-family: "JetBrains Mono", monospace; font-size: 0.82em; margin-right: 6px; }
+        @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+        @media (max-width: 480px) {
+            .hero { padding: 40px 16px 60px; }
+            .hero h1 { font-size: 1.6em; }
+            .section { padding: 18px; }
+            .ctrl-btn { padding: 6px 12px; font-size: 0.82em; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">跳到主内容</a>
+    <header class="hero">
+        <h1>诗词韵律分析图谱</h1>
+        <div class="subtitle">W233-4 · V3 · 与 A6 诗词 7 篇文档形成 文本-可视化 双轨</div>
+        <div class="tagline">—— 词牌 3 种 · 平仄 2 类 · 五层次 5 层 · 100 回全覆盖</div>
+    </header>
+    <main class="container" id="main-content">
+        <nav class="breadcrumb" aria-label="面包屑">
+            <a href="../index.html">站点首页</a>
+            <span class="sep">›</span>
+            <a href="../dashboard.html">数据仪表盘</a>
+            <span class="sep">›</span>
+            <span>诗词韵律分析图谱</span>
+        </nav>
+        <nav class="cross-page-nav" aria-label="跨页面导航">
+            <a href="ming-political-thought-comparison.html">明代政治思想对照</a> ·
+            <a href="pilgrim-team-psychology-arc.html">取经团队心理</a> ·
+            <a href="monster-capability-radar.html">妖怪能力雷达</a> ·
+            <a href="poetry-rhythm-analysis.html" class="active">诗词韵律分析</a> ·
+            <a href="../index.html">返回 dashboard</a>
+        </nav>
+        <div class="notice" role="note">
+            <strong>双轨说明</strong>：本页面为 A6 诗词 7 篇文档的可视化补充，与
+            <span class="mono">docs/06-诗词/</span> 形成"文本-可视化"双轨。
+            <span class="mono">词牌</span>（西江月/临江仙/满庭芳）·
+            <span class="mono">平仄</span>（平声/仄声）·
+            <span class="mono">五层次</span>（开篇/回目/人物/景物/词牌）·
+            <span class="mono">时间轴</span>：100 回分 10 段，支持播放/暂停/滑块控制（参考 W229 时空双轴）。
+        </div>
+
+        <!-- 板块 1：KPI 概要栏 -->
+        <section class="kpi-row" aria-label="诗词概要">
+            <div class="kpi-card">
+                <div class="num">7</div>
+                <div class="label">A6 诗词文档</div>
+                <div class="detail">docs/06-诗词/ · 7 篇专题</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">3</div>
+                <div class="label">词牌数</div>
+                <div class="detail">西江月 / 临江仙 / 满庭芳</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">2</div>
+                <div class="label">平仄类型</div>
+                <div class="detail">平声 / 仄声 · 二元韵律</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">5</div>
+                <div class="label">诗词五层次</div>
+                <div class="detail">开篇/回目/人物/景物/词牌</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">100</div>
+                <div class="label">回目覆盖</div>
+                <div class="detail">第 1-100 回 · 全覆盖</div>
+            </div>
+        </section>
+
+        <!-- 板块 2：词牌分布饼图 -->
+        <section class="section" aria-labelledby="sec-pie">
+            <h2 id="sec-pie">① 词牌分布饼图</h2>
+            <p>将《西游记》全书诗词按 7 类划分：3 种词牌（西江月/临江仙/满庭芳）+ 开篇诗 + 回目对联（100 回）+ 人物赋 + 景物诗。回目对联数量最多（100 副），构成全书诗词骨架；词牌虽仅 3 种 3 首，却是韵律分析的核心样本。hover 扇区查看类别详情。</p>
+            <div class="chart-wrap">
+                <svg id="pie-svg" width="100%" height="420" role="img" aria-labelledby="pie-title pie-desc">
+                    <title id="pie-title">词牌分布饼图</title>
+                    <desc id="pie-desc">7 类诗词的占比分布。</desc>
+                </svg>
+                <div class="event-tip" id="pie-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="pie-legend" aria-label="词牌类别图例"></div>
+        </section>
+
+        <!-- 板块 3：平仄韵脚分布热力图 -->
+        <section class="section" aria-labelledby="sec-heat">
+            <h2 id="sec-heat">② 平仄韵脚分布热力图</h2>
+            <p>7 篇 A6 诗词样本 × 平声/仄声二元的韵脚分布矩阵。颜色深浅表示该诗词中平声或仄声字所占百分比。可见"满庭芳"平声占比最高（72%，最舒缓），"回目对联"平仄最均衡（50/50，对仗工整），"开篇诗"仄声偏多（40%，节奏感强）。</p>
+            <div class="chart-wrap">
+                <svg id="heatmap-svg" width="100%" height="360" role="img" aria-labelledby="hm-title hm-desc">
+                    <title id="hm-title">平仄韵脚分布热力图</title>
+                    <desc id="hm-desc">7 篇诗词 × 平仄声的百分比矩阵。</desc>
+                </svg>
+                <div class="event-tip" id="heat-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="heat-legend" aria-label="平仄占比图例"></div>
+        </section>
+
+        <!-- 板块 4：诗词在 100 回分布时间线（带动画） -->
+        <section class="section" aria-labelledby="sec-timeline">
+            <h2 id="sec-timeline">③ 诗词在 100 回分布时间线</h2>
+            <p>将 100 回分为 10 段（每段 10 回），统计各段诗词数量。可见首段（1-10 回，开篇集中）与末段（91-100 回，归途总结）诗词最密集，中段相对均匀。点击"播放"按段落推进动画，或拖动滑块手动定位段段（参考 W229 时空双轴动画模式）。</p>
+            <div class="control-row" role="group" aria-label="时间轴控制">
+                <button class="ctrl-btn play" id="play-btn" aria-label="播放/暂停">▶ 播放</button>
+                <div class="slider-wrap">
+                    <span class="ctrl-label">段落：</span>
+                    <input type="range" id="seg-slider" min="1" max="10" value="10" aria-label="段落滑块" />
+                    <span class="seg-label" id="seg-display">第 10 段 91-100</span>
+                </div>
+                <span class="ctrl-label">速度：</span>
+                <select class="speed-select" id="speed-select" aria-label="播放速度">
+                    <option value="1100">慢速</option>
+                    <option value="650" selected>常速</option>
+                    <option value="320">快速</option>
+                </select>
+                <button class="ctrl-btn" id="reset-btn">↺ 重置</button>
+            </div>
+            <div class="progress-bar" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+            <div class="chart-wrap">
+                <svg id="timeline-svg" width="100%" height="380" role="img" aria-labelledby="tl-title tl-desc">
+                    <title id="tl-title">诗词在 100 回分布时间线</title>
+                    <desc id="tl-desc">10 段回目区间的诗词数量柱状图，支持播放动画。</desc>
+                </svg>
+                <div class="event-tip" id="tl-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="tl-legend" aria-label="时间线图例"></div>
+        </section>
+
+        <!-- 板块 5：诗词五层次堆叠图 -->
+        <section class="section" aria-labelledby="sec-stacked">
+            <h2 id="sec-stacked">④ 诗词五层次堆叠图</h2>
+            <p>将 10 段回目中的诗词按 5 个层次堆叠：开篇诗（kaipian）/ 回目对联（huimu）/ 人物赋（renwu）/ 景物诗（jingwu）/ 词牌（cipai）。回目对联每段恒为 10（每回 1 副），构成稳定基座；景物诗与人物赋在中段波动，反映叙事密度；词牌仅在首末两段出现（西江月开篇、满庭芳结尾）。</p>
+            <div class="chart-wrap">
+                <svg id="stacked-svg" width="100%" height="440" role="img" aria-labelledby="st-title st-desc">
+                    <title id="st-title">诗词五层次堆叠图</title>
+                    <desc id="st-desc">5 个诗词层次在 10 段回目区间的堆叠柱状图。</desc>
+                </svg>
+                <div class="event-tip" id="stack-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="stack-legend" aria-label="五层次图例"></div>
+        </section>
+
+        <!-- 板块 6：韵律特征 KPI 卡片 + 箱线图 -->
+        <section class="section" aria-labelledby="sec-box">
+            <h2 id="sec-box">⑤ 韵律特征分布箱线图</h2>
+            <p>7 篇 A6 诗词样本的"平声占比"统计分布（min/Q1/median/Q3/max）。箱体高度反映分布离散度，中线为均值。可见词牌类（西江月/临江仙/满庭芳）平声占比中位数最高且离散度小（韵律最规整），回目对联分布最集中（对仗工整），开篇诗离散度最大（叙事性强导致波动）。</p>
+            <div class="box-grid">
+                <div class="box-card">
+                    <h3>7 篇诗词平声占比箱线图</h3>
+                    <svg id="box-svg"></svg>
+                </div>
+                <div class="box-card">
+                    <h3>韵律特征要点</h3>
+                    <div class="insight-box">
+                        <span class="ib-tag">[词牌]</span>
+                        <strong>三词牌平声占比均 ≥ 68%</strong>。满庭芳 72% 居首，临江仙 68% 次之，西江月 70%。词牌讲究平仄交替，平声占优显舒缓典雅。
+                    </div>
+                    <div class="insight-box">
+                        <span class="ib-tag">[对联]</span>
+                        <strong>回目对联平仄 50/50 完美均衡</strong>。100 副对联严格对仗，平仄相对，是全书韵律的"标准参照系"。
+                    </div>
+                    <div class="insight-box">
+                        <span class="ib-tag">[开篇]</span>
+                        <strong>开篇诗平声 60% / 仄声 40%</strong>。仄声偏多营造庄重叙事感，与"混沌未分天地乱"的史诗开篇基调吻合。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 板块 7：跨页面导航 -->
+        <section class="cross-page-section" aria-labelledby="sec-nav">
+            <h2 id="sec-nav">⑥ 跨页面导航 · W233 V3 四页并行</h2>
+            <p>本页为 W233 V 方向四页并行第四批之一，与明代政治思想对照、取经团队心理、妖怪能力雷达三页构成 V3 方向四页矩阵。点击下方链接跳转。</p>
+            <ul class="nav-list">
+                <li><a href="ming-political-thought-comparison.html">明代政治思想对照 →</a><span class="desc">W233-1 · 政治思想维度对照</span></li>
+                <li><a href="pilgrim-team-psychology-arc.html">取经团队心理 →</a><span class="desc">W233-2 · 团队心理弧线</span></li>
+                <li><a href="monster-capability-radar.html">妖怪能力雷达 →</a><span class="desc">W233-3 · 妖怪能力多维雷达</span></li>
+                <li><a href="poetry-rhythm-analysis.html">诗词韵律分析（本页）</a><span class="desc">W233-4 · 与 A6 诗词 7 篇文档双轨</span></li>
+                <li><a href="narratology-13d-network.html">W194 叙事学 13 维 →</a><span class="desc">跨文档 · 叙事学 13 维网络</span></li>
+                <li><a href="hardship-difficulty-heatmap.html">W229 V2 难度热力图 →</a><span class="desc">跨文档 · W229 V2 三页之一</span></li>
+                <li><a href="journey-spacetime.html">W229 V2 时空双轴 →</a><span class="desc">跨文档 · 本页时间轴动画参考</span></li>
+                <li><a href="character-dynamic-network.html">W229 V2 动态网络 →</a><span class="desc">跨文档 · W229 V2 三页之三</span></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>详解西游记 · 诗词韵律分析图谱 · W233-4 V3 可视化页面</p>
+        <div class="idx-row"><span class="idx-label">正向时间线：</span><a href="../CHANGELOG.md">CHANGELOG.md v2.2.39 W233</a></div>
+        <div class="idx-row"><span class="idx-label">反向文件索引：</span><a href="../../scripts/output/file-index.md">scripts/output/file-index.md W233-4</a></div>
+        <div class="idx-row"><span class="idx-label">方向索引：</span>site/data/ · V 方向 · V3 四页并行</div>
+        <div class="idx-row"><span class="idx-label">跨文档链接：</span>A6 诗词 7 篇文档（<a href="../docs/06-诗词/">docs/06-诗词/</a>）· W194 narratology-13d · W229 V2 三页</div>
+        <p style="margin-top:10px;"><a href="../dashboard.html">← 返回数据仪表盘</a> · <a href="pilgrim-team-psychology-arc.html">取经团队心理 →</a> · <a href="monster-capability-radar.html">妖怪能力雷达 →</a></p>
+    </footer>
+
+    <script>
+    // ============= EMBEDDED_DATA =============
+    const EMBEDDED_DATA = {
+      meta: {title: "诗词韵律分析图谱", version: "v2.2.39", w_id: "W233-4", direction: "V3"},
+      kpi: [
+        {label: "A6 诗词文档", value: 7, unit: "篇"},
+        {label: "词牌数", value: 3, unit: "种"},
+        {label: "平仄类型", value: 2, unit: "类"},
+        {label: "诗词五层次", value: 5, unit: "层"},
+        {label: "回目覆盖", value: 100, unit: "回"}
+      ],
+      pie: [
+        {name: "西江月", value: 1},
+        {name: "临江仙", value: 1},
+        {name: "满庭芳", value: 1},
+        {name: "开篇诗", value: 1},
+        {name: "回目对联", value: 100},
+        {name: "人物赋", value: 20},
+        {name: "景物诗", value: 40}
+      ],
+      heatmap: [
+        {poem: "开篇诗", ping: 60, ze: 40},
+        {poem: "回目对联", ping: 50, ze: 50},
+        {poem: "人物赋", ping: 55, ze: 45},
+        {poem: "景物诗", ping: 65, ze: 35},
+        {poem: "西江月", ping: 70, ze: 30},
+        {poem: "临江仙", ping: 68, ze: 32},
+        {poem: "满庭芳", ping: 72, ze: 28}
+      ],
+      timeline: [
+        {chapter_range: "1-10", count: 12},
+        {chapter_range: "11-20", count: 8},
+        {chapter_range: "21-30", count: 10},
+        {chapter_range: "31-40", count: 9},
+        {chapter_range: "41-50", count: 11},
+        {chapter_range: "51-60", count: 8},
+        {chapter_range: "61-70", count: 10},
+        {chapter_range: "71-80", count: 9},
+        {chapter_range: "81-90", count: 7},
+        {chapter_range: "91-100", count: 14}
+      ],
+      stacked: [
+        {range: "1-10", kaipian: 1, huimu: 10, renwu: 2, jingwu: 4, cipai: 1},
+        {range: "11-20", kaipian: 0, huimu: 10, renwu: 1, jingwu: 4, cipai: 0},
+        {range: "21-30", kaipian: 0, huimu: 10, renwu: 3, jingwu: 3, cipai: 0},
+        {range: "31-40", kaipian: 0, huimu: 10, renwu: 2, jingwu: 4, cipai: 0},
+        {range: "41-50", kaipian: 0, huimu: 10, renwu: 2, jingwu: 5, cipai: 0},
+        {range: "51-60", kaipian: 0, huimu: 10, renwu: 1, jingwu: 4, cipai: 0},
+        {range: "61-70", kaipian: 0, huimu: 10, renwu: 2, jingwu: 5, cipai: 0},
+        {range: "71-80", kaipian: 0, huimu: 10, renwu: 2, jingwu: 4, cipai: 0},
+        {range: "81-90", kaipian: 0, huimu: 10, renwu: 1, jingwu: 3, cipai: 0},
+        {range: "91-100", kaipian: 0, huimu: 10, renwu: 4, jingwu: 6, cipai: 1}
+      ],
+      boxplot: [
+        {poem: "开篇诗", q1: 50, median: 60, q3: 70, min: 40, max: 80},
+        {poem: "回目对联", q1: 45, median: 50, q3: 55, min: 40, max: 60},
+        {poem: "人物赋", q1: 50, median: 55, q3: 60, min: 45, max: 65},
+        {poem: "景物诗", q1: 55, median: 65, q3: 75, min: 50, max: 80},
+        {poem: "西江月", q1: 65, median: 70, q3: 75, min: 60, max: 80},
+        {poem: "临江仙", q1: 63, median: 68, q3: 73, min: 58, max: 78},
+        {poem: "满庭芳", q1: 67, median: 72, q3: 77, min: 62, max: 82}
+      ]
+    };
+
+    // 配色（古典宣纸风）
+    const PIE_COLORS = ["#c8463a", "#3a6b8c", "#7a5230", "#5a7a3a", "#e9b885", "#b8862a", "#8c2a2a"];
+    const LAYER_COLORS = { kaipian: "#c8463a", huimu: "#e9b885", renwu: "#7a5230", jingwu: "#5a7a3a", cipai: "#3a6b8c" };
+    const LAYER_LABELS = { kaipian: "开篇诗", huimu: "回目对联", renwu: "人物赋", jingwu: "景物诗", cipai: "词牌" };
+    const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DUR = REDUCE_MOTION ? 0 : 600;
+
+    // ============= 板块 2：词牌分布饼图 =============
+    function renderPie() {
+        const svg = d3.select("#pie-svg");
+        svg.selectAll("*").remove();
+        const wrap = document.getElementById("pie-svg");
+        const width = Math.max(420, wrap.clientWidth || 760);
+        const height = 420;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+        const radius = Math.min(width, height) / 2 - 60;
+
+        const g = svg.append("g").attr("transform", `translate(${width / 2},${height / 2})`);
+
+        const pie = d3.pie().value(d => d.value).sort(null);
+        const arc = d3.arc().innerRadius(radius * 0.45).outerRadius(radius).padAngle(0.012);
+        const arcHover = d3.arc().innerRadius(radius * 0.45).outerRadius(radius + 10).padAngle(0.012);
+        const arcs = pie(EMBEDDED_DATA.pie);
+
+        const tip = d3.select("#pie-tip");
+        const wrapEl = wrap.parentElement;
+
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("class", "pie-slice")
+            .attr("fill", (d, i) => PIE_COLORS[i % PIE_COLORS.length])
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .style("opacity", 0)
+            .on("mouseover", function(event, d) {
+                d3.select(this).transition().duration(150).attr("d", arcHover);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${d.data.name}</div>
+                        <div class="tip-row">数量：<strong style="color:#e9b885">${d.data.value}</strong></div>
+                        <div class="tip-row">占比：<strong style="color:#e9b885">${(d.data.value / EMBEDDED_DATA.pie.reduce((a, b) => a + b.value, 0) * 100).toFixed(1)}%</strong></div>
+                        <div class="tip-meta">类别索引 ${d.index + 1}/7</div>`);
+            })
+            .on("mousemove", function(event) {
+                const rect = wrapEl.getBoundingClientRect();
+                tip.style("left", (event.clientX - rect.left + 14) + "px")
+                    .style("top", (event.clientY - rect.top + 14) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).transition().duration(150).attr("d", arc);
+                tip.style("opacity", 0);
+            })
+            .transition().duration(DUR).delay((d, i) => i * 70)
+            .style("opacity", 1)
+            .attrTween("d", function(d) {
+                const i = d3.interpolate({ startAngle: d.startAngle, endAngle: d.startAngle }, d);
+                return t => arc(i(t));
+            });
+
+        // 中心文字
+        g.append("text").attr("text-anchor", "middle").attr("dy", -8)
+            .style("font-size", "1.4em").style("font-weight", "700").style("fill", "#c8463a")
+            .text("7 类");
+        g.append("text").attr("text-anchor", "middle").attr("dy", 16)
+            .style("font-size", "0.85em").style("fill", "#7a5230")
+            .text("诗词总计 164");
+
+        // 标签
+        const labelArc = d3.arc().innerRadius(radius + 14).outerRadius(radius + 14);
+        g.selectAll("text.lbl")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "lbl")
+            .attr("text-anchor", "middle")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .style("font-size", "0.78rem")
+            .style("fill", "#2c2418")
+            .style("opacity", 0)
+            .text(d => d.data.name)
+            .transition().duration(DUR).delay((d, i) => i * 70 + 300)
+            .style("opacity", 1);
+
+        // 图例
+        const legend = d3.select("#pie-legend");
+        legend.selectAll("*").remove();
+        EMBEDDED_DATA.pie.forEach((p, i) => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch round").style("background", PIE_COLORS[i % PIE_COLORS.length]);
+            item.append("span").text(`${p.name}（${p.value}）`);
+        });
+    }
+
+    // ============= 板块 3：平仄热力图 =============
+    function renderHeatmap() {
+        const svg = d3.select("#heatmap-svg");
+        svg.selectAll("*").remove();
+        const wrap = document.getElementById("heatmap-svg");
+        const width = Math.max(980, wrap.clientWidth || 980);
+        const height = 360;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 40, right: 30, bottom: 60, left: 110 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const poems = EMBEDDED_DATA.heatmap.map(d => d.poem);
+        const tones = ["ping", "ze"];
+        const toneLabels = { ping: "平声", ze: "仄声" };
+
+        const x = d3.scaleBand().domain(tones).range([0, innerW]).padding(0.15);
+        const y = d3.scaleBand().domain(poems).range([0, innerH]).padding(0.12);
+        const color = d3.scaleSequential(t => d3.interpolateRgb("#fff8e7", "#c8463a")(t)).domain([0, 100]);
+
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).tickFormat(d => toneLabels[d]))
+            .selectAll("text").style("font-size", "0.85rem").style("fill", "#2c2418").style("font-weight", "600");
+
+        g.append("g").call(d3.axisLeft(y))
+            .selectAll("text").style("font-size", "0.85rem").style("fill", "#2c2418");
+
+        g.append("text").attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle").style("font-size", "0.85rem").style("fill", "#7a5230")
+            .text("韵脚类型");
+
+        const tip = d3.select("#heat-tip");
+        const wrapEl = wrap.parentElement;
+
+        EMBEDDED_DATA.heatmap.forEach((row, ri) => {
+            tones.forEach((t, ti) => {
+                const val = row[t];
+                g.append("rect")
+                    .attr("class", "heat-cell")
+                    .attr("x", x(t)).attr("y", y(row.poem))
+                    .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+                    .attr("fill", color(val)).attr("stroke", "#fff").attr("stroke-width", 1.5)
+                    .style("opacity", 0)
+                    .on("mouseover", function(event) {
+                        d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2);
+                        tip.style("opacity", 1)
+                            .html(`<div class="tip-title">${row.poem} · ${toneLabels[t]}</div>
+                                <div class="tip-row">占比：<strong style="color:#e9b885">${val}%</strong></div>
+                                <div class="tip-row">平声 ${row.ping}% / 仄声 ${row.ze}%</div>
+                                <div class="tip-meta">样本索引 ${ri + 1}/7</div>`);
+                    })
+                    .on("mousemove", function(event) {
+                        const rect = wrapEl.getBoundingClientRect();
+                        tip.style("left", (event.clientX - rect.left + 14) + "px")
+                            .style("top", (event.clientY - rect.top + 14) + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1.5);
+                        tip.style("opacity", 0);
+                    })
+                    .transition().duration(DUR).delay(ri * 60 + ti * 30)
+                    .style("opacity", 1);
+
+                g.append("text")
+                    .attr("x", x(t) + x.bandwidth() / 2).attr("y", y(row.poem) + y.bandwidth() / 2 + 5)
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "0.92rem").style("font-weight", "700")
+                    .style("fill", val > 55 ? "#fff" : "#2c2418")
+                    .style("opacity", 0)
+                    .text(val + "%")
+                    .transition().duration(DUR).delay(ri * 60 + ti * 30 + 200)
+                    .style("opacity", 1);
+            });
+        });
+
+        // 图例
+        const legend = d3.select("#heat-legend");
+        legend.selectAll("*").remove();
+        [0, 25, 50, 75, 100].forEach(v => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch").style("background", color(v));
+            item.append("span").text(v + "%");
+        });
+    }
+
+    // ============= 板块 4：时间线柱状图（带动画） =============
+    let currentSeg = 10;
+    let playTimer = null;
+    let playSpeed = 650;
+
+    function renderTimeline(maxSeg) {
+        const svg = d3.select("#timeline-svg");
+        svg.selectAll("*").remove();
+        const wrap = document.getElementById("timeline-svg");
+        const width = Math.max(980, wrap.clientWidth || 980);
+        const height = 380;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 30, right: 30, bottom: 60, left: 50 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const data = EMBEDDED_DATA.timeline;
+        const x = d3.scaleBand().domain(data.map(d => d.chapter_range)).range([0, innerW]).padding(0.25);
+        const yMax = d3.max(data, d => d.count) || 1;
+        const y = d3.scaleLinear().domain([0, Math.max(1, yMax)]).range([innerH, 0]).nice();
+
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6b5e4d");
+
+        g.append("g").call(d3.axisLeft(y).ticks(5))
+            .selectAll("text").style("font-size", "0.75rem").style("fill", "#6b5e4d");
+
+        g.append("text").attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle").style("font-size", "0.85rem").style("fill", "#7a5230")
+            .text("回目区间（10 段）");
+
+        // 当前段垂线
+        const segIdx = maxSeg - 1;
+        g.append("rect")
+            .attr("x", x(data[segIdx].chapter_range) - 4)
+            .attr("y", 0).attr("width", x.bandwidth() + 8).attr("height", innerH)
+            .attr("fill", "#fff8e7").attr("stroke", "#e9b885").attr("stroke-dasharray", "3,3").attr("opacity", 0.7);
+
+        const tip = d3.select("#tl-tip");
+        const wrapEl = wrap.parentElement;
+
+        g.selectAll("rect.tl-bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "tl-bar")
+            .attr("x", d => x(d.chapter_range))
+            .attr("y", innerH)
+            .attr("width", x.bandwidth())
+            .attr("height", 0)
+            .attr("fill", (d, i) => i <= segIdx ? "#c8463a" : "#e9b885")
+            .attr("stroke", "#fff").attr("stroke-width", 1)
+            .on("mouseover", function(event, d) {
+                d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">第 ${d.chapter_range} 回</div>
+                        <div class="tip-row">诗词数量：<strong style="color:#e9b885">${d.count}</strong></div>
+                        <div class="tip-row">段落 ${data.indexOf(d) + 1}/10</div>
+                        <div class="tip-meta">区间 ${d.chapter_range} 回</div>`);
+            })
+            .on("mousemove", function(event) {
+                const rect = wrapEl.getBoundingClientRect();
+                tip.style("left", (event.clientX - rect.left + 14) + "px")
+                    .style("top", (event.clientY - rect.top + 14) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
+                tip.style("opacity", 0);
+            })
+            .transition().duration(DUR).delay((d, i) => i * 40)
+            .attr("y", d => y(d.count))
+            .attr("height", d => innerH - y(d.count));
+
+        g.selectAll("text.bar-val")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "bar-val")
+            .attr("x", d => x(d.chapter_range) + x.bandwidth() / 2)
+            .attr("y", d => y(d.count) - 6)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem").style("font-weight", "700").style("fill", "#c8463a")
+            .style("opacity", 0)
+            .text(d => d.count)
+            .transition().duration(DUR).delay((d, i) => i * 40 + 250)
+            .style("opacity", (d, i) => i <= segIdx ? 1 : 0.4);
+
+        // 进度
+        d3.select("#progress-fill").style("width", `${(maxSeg / 10) * 100}%`);
+        d3.select("#seg-display").text(`第 ${maxSeg} 段 ${data[maxSeg - 1].chapter_range}`);
+
+        // 图例
+        const legend = d3.select("#tl-legend");
+        legend.selectAll("*").remove();
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#c8463a;"></span><span>已播放段</span>');
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#e9b885;"></span><span>未播放段</span>');
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#fff8e7;border:1px dashed #e9b885;"></span><span>当前段高亮</span>');
+    }
+
+    function togglePlay() {
+        const btn = document.getElementById("play-btn");
+        if (playTimer) {
+            clearInterval(playTimer); playTimer = null;
+            btn.textContent = "▶ 播放"; btn.classList.remove("playing");
+        } else {
+            if (currentSeg >= 10) currentSeg = 1;
+            btn.textContent = "⏸ 暂停"; btn.classList.add("playing");
+            playTimer = setInterval(() => {
+                if (currentSeg >= 10) {
+                    clearInterval(playTimer); playTimer = null;
+                    btn.textContent = "▶ 播放"; btn.classList.remove("playing");
+                    return;
+                }
+                currentSeg += 1;
+                document.getElementById("seg-slider").value = currentSeg;
+                renderTimeline(currentSeg);
+            }, playSpeed);
+        }
+    }
+
+    document.getElementById("play-btn").addEventListener("click", togglePlay);
+    document.getElementById("reset-btn").addEventListener("click", function() {
+        if (playTimer) { clearInterval(playTimer); playTimer = null; }
+        const btn = document.getElementById("play-btn");
+        btn.textContent = "▶ 播放"; btn.classList.remove("playing");
+        currentSeg = 10;
+        document.getElementById("seg-slider").value = 10;
+        renderTimeline(10);
+    });
+    document.getElementById("seg-slider").addEventListener("input", function(e) {
+        if (playTimer) {
+            clearInterval(playTimer); playTimer = null;
+            const btn = document.getElementById("play-btn");
+            btn.textContent = "▶ 播放"; btn.classList.remove("playing");
+        }
+        currentSeg = +e.target.value;
+        renderTimeline(currentSeg);
+    });
+    document.getElementById("speed-select").addEventListener("change", function(e) {
+        playSpeed = +e.target.value;
+        if (playTimer) { clearInterval(playTimer); playTimer = null; togglePlay(); }
+    });
+
+    // ============= 板块 5：五层次堆叠图 =============
+    function renderStacked() {
+        const svg = d3.select("#stacked-svg");
+        svg.selectAll("*").remove();
+        const wrap = document.getElementById("stacked-svg");
+        const width = Math.max(980, wrap.clientWidth || 980);
+        const height = 440;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 30, right: 30, bottom: 60, left: 50 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const data = EMBEDDED_DATA.stacked;
+        const keys = ["kaipian", "huimu", "renwu", "jingwu", "cipai"];
+        const stack = d3.stack().keys(keys);
+        const series = stack(data);
+
+        const x = d3.scaleBand().domain(data.map(d => d.range)).range([0, innerW]).padding(0.25);
+        const yMax = d3.max(data, d => d.kaipian + d.huimu + d.renwu + d.jingwu + d.cipai) || 1;
+        const y = d3.scaleLinear().domain([0, Math.max(1, yMax)]).range([innerH, 0]).nice();
+
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6b5e4d");
+
+        g.append("g").call(d3.axisLeft(y).ticks(6))
+            .selectAll("text").style("font-size", "0.75rem").style("fill", "#6b5e4d");
+
+        g.append("text").attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle").style("font-size", "0.85rem").style("fill", "#7a5230")
+            .text("回目区间（10 段）");
+        g.append("text").attr("x", -innerH / 2).attr("y", -38)
+            .attr("text-anchor", "middle").attr("transform", "rotate(-90)")
+            .style("font-size", "0.85rem").style("fill", "#7a5230").text("诗词数（堆叠）");
+
+        const tip = d3.select("#stack-tip");
+        const wrapEl = wrap.parentElement;
+
+        series.forEach((layer, li) => {
+            g.selectAll("rect.stack-" + li)
+                .data(layer)
+                .enter()
+                .append("rect")
+                .attr("class", "stack-rect stack-" + li)
+                .attr("x", d => x(d.data.range))
+                .attr("y", innerH)
+                .attr("width", x.bandwidth())
+                .attr("height", 0)
+                .attr("fill", LAYER_COLORS[layer.key])
+                .attr("stroke", "#fff").attr("stroke-width", 1)
+                .on("mouseover", function(event, d) {
+                    d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2);
+                    const val = d.data[layer.key];
+                    tip.style("opacity", 1)
+                        .html(`<div class="tip-title">${d.data.range} 回 · ${LAYER_LABELS[layer.key]}</div>
+                            <div class="tip-row">数量：<strong style="color:#e9b885">${val}</strong></div>
+                            <div class="tip-row">开篇 ${d.data.kaipian} / 回目 ${d.data.huimu} / 人物 ${d.data.renwu} / 景物 ${d.data.jingwu} / 词牌 ${d.data.cipai}</div>
+                            <div class="tip-meta">层次 ${li + 1}/5 · ${layer.key}</div>`);
+                })
+                .on("mousemove", function(event) {
+                    const rect = wrapEl.getBoundingClientRect();
+                    tip.style("left", (event.clientX - rect.left + 14) + "px")
+                        .style("top", (event.clientY - rect.top + 14) + "px");
+                })
+                .on("mouseout", function() {
+                    d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
+                    tip.style("opacity", 0);
+                })
+                .transition().duration(DUR).delay((d, i) => i * 50 + li * 120)
+                .attr("y", d => y(d[1]))
+                .attr("height", d => y(d[0]) - y(d[1]));
+        });
+
+        // 图例
+        const legend = d3.select("#stack-legend");
+        legend.selectAll("*").remove();
+        keys.forEach(k => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch").style("background", LAYER_COLORS[k]);
+            item.append("span").text(LAYER_LABELS[k]);
+        });
+    }
+
+    // ============= 板块 6：箱线图 =============
+    function renderBoxplot() {
+        const svg = d3.select("#box-svg");
+        svg.selectAll("*").remove();
+        const wrap = svg.node().parentElement;
+        const width = Math.max(320, wrap.clientWidth || 460);
+        const height = 200;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 16, right: 16, bottom: 50, left: 40 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const data = EMBEDDED_DATA.boxplot;
+        const x = d3.scaleBand().domain(data.map(d => d.poem)).range([0, innerW]).padding(0.3);
+        const y = d3.scaleLinear().domain([35, 85]).range([innerH, 0]);
+
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text").style("font-size", "0.62rem").style("fill", "#6b5e4d")
+            .attr("transform", "rotate(-18)").style("text-anchor", "end");
+
+        g.append("g").call(d3.axisLeft(y).ticks(4))
+            .selectAll("text").style("font-size", "0.68rem").style("fill", "#6b5e4d");
+
+        data.forEach((d, i) => {
+            const cx = x(d.poem) + x.bandwidth() / 2;
+            const boxW = x.bandwidth() * 0.6;
+            // 须线
+            g.append("line").attr("x1", cx).attr("x2", cx)
+                .attr("y1", y(d.min)).attr("y2", y(d.max))
+                .attr("stroke", "#7a5230").attr("stroke-width", 1);
+            g.append("line").attr("x1", cx - boxW / 3).attr("x2", cx + boxW / 3)
+                .attr("y1", y(d.min)).attr("y2", y(d.min))
+                .attr("stroke", "#7a5230").attr("stroke-width", 1);
+            g.append("line").attr("x1", cx - boxW / 3).attr("x2", cx + boxW / 3)
+                .attr("y1", y(d.max)).attr("y2", y(d.max))
+                .attr("stroke", "#7a5230").attr("stroke-width", 1);
+            // 箱体
+            g.append("rect")
+                .attr("x", cx - boxW / 2).attr("y", y(d.q3))
+                .attr("width", boxW).attr("height", y(d.q1) - y(d.q3))
+                .attr("fill", PIE_COLORS[i % PIE_COLORS.length]).attr("opacity", 0.55)
+                .attr("stroke", "#2c2418").attr("stroke-width", 1)
+                .style("opacity", 0)
+                .transition().duration(DUR).delay(i * 80)
+                .style("opacity", 0.55);
+            // 中位线
+            g.append("line").attr("x1", cx - boxW / 2).attr("x2", cx + boxW / 2)
+                .attr("y1", y(d.median)).attr("y2", y(d.median))
+                .attr("stroke", "#c8463a").attr("stroke-width", 2.5)
+                .style("opacity", 0)
+                .transition().duration(DUR).delay(i * 80 + 200).style("opacity", 1);
+            // 中位数标签
+            g.append("text").attr("x", cx).attr("y", y(d.median) - 4)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.72rem").style("font-weight", "700").style("fill", "#c8463a")
+                .style("opacity", 0)
+                .text(d.median)
+                .transition().duration(DUR).delay(i * 80 + 300).style("opacity", 1);
+        });
+    }
+
+    // ============= 初始化 =============
+    function renderAll() {
+        renderPie();
+        renderHeatmap();
+        renderTimeline(currentSeg);
+        renderStacked();
+        renderBoxplot();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAll);
+    } else {
+        renderAll();
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(renderAll, 200);
+    });
+    </script>
+</body>
+</html>

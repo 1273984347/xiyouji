@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>详解西游记 · 数据仪表盘</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+            /* badge tokens */
+            --badge-a-l-bg: rgba(90, 122, 58, 0.12);
+            --badge-a-l-border: rgba(90, 122, 58, 0.25);
+            --badge-m-u-bg: rgba(58, 107, 140, 0.12);
+            --badge-m-u-border: rgba(58, 107, 140, 0.25);
+            --badge-v-ah-bg: rgba(122, 82, 48, 0.12);
+            --badge-v-ah-border: rgba(122, 82, 48, 0.25);
+            --badge-q-plus-bg: rgba(200, 70, 58, 0.10);
+            --badge-q-plus-border: rgba(200, 70, 58, 0.22);
+            --badge-q-plusplus-bg: rgba(233, 184, 133, 0.18);
+            --badge-q-plusplus-border: rgba(233, 184, 133, 0.35);
+            --badge-q-plusplusplus-bg: rgba(140, 42, 42, 0.12);
+            --badge-q-plusplusplus-border: rgba(140, 42, 42, 0.28);
+            /* focus ring tokens */
+            --focus-ring-accent: rgba(200, 70, 58, 0.25);
+            --focus-ring-accent-soft: rgba(233, 184, 133, 0.20);
+            --focus-ring-clear: rgba(233, 184, 133, 0.35);
+            /* table tokens */
+            --cross-table-header-bg: #f5e9d4;
+            --cross-table-highlight-bg: #fde8e6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 50px 24px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1200px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(60, 40, 20, 0.12), 0 8px 24px rgba(60, 40, 20, 0.1);
+            border-color: var(--accent-soft);
+        }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 6px;
+            font-family: "JetBrains Mono", monospace;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .kpi-card .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+        .kpi-card .desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .kpi-card .detail {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            border-top: 1px dashed var(--line);
+            padding-top: 6px;
+        }
+        .section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+
+        /* Name That UI 迁移：分类过滤 + 搜索 */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 14px 16px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+        }
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .filter-tab {
+            padding: 6px 14px;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: var(--paper);
+            color: var(--ink-soft);
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .filter-tab:hover {
+            border-color: var(--accent-soft);
+            color: var(--accent);
+        }
+        .filter-tab.active {
+            background: var(--accent);
+            color: #fff8ec;
+            border-color: var(--accent);
+        }
+        .filter-tab:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--focus-ring-accent);
+        }
+        .search-box {
+            margin-left: auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .search-box input {
+            padding: 7px 34px 7px 36px;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: inherit;
+            font-size: 0.85rem;
+            width: 240px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .search-box input:focus,
+        .search-box input:focus-visible {
+            outline: none;
+            border-color: var(--accent-soft);
+            box-shadow: 0 0 0 3px var(--focus-ring-accent-soft);
+        }
+        .search-box .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            color: var(--ink-soft);
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .search-box .clear-btn {
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            border: none;
+            border-radius: 50%;
+            background: transparent;
+            color: var(--ink-soft);
+            font-size: 1rem;
+            line-height: 1;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            transition: background 0.15s, color 0.15s;
+        }
+        .search-box .clear-btn:hover,
+        .search-box .clear-btn:focus-visible {
+            background: var(--bg);
+            color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 2px var(--focus-ring-clear);
+        }
+        .search-box.has-value .clear-btn {
+            display: flex;
+        }
+        .search-box input::-webkit-search-decoration,
+        .search-box input::-webkit-search-cancel-button,
+        .search-box input::-webkit-search-results-button,
+        .search-box input::-webkit-search-results-decoration {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .filter-bar { flex-direction: column; align-items: stretch; }
+            .search-box { margin-left: 0; width: 100%; }
+            .search-box input { width: 100%; }
+        }
+        .category-badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            letter-spacing: 0.05em;
+            font-family: "JetBrains Mono", monospace;
+            vertical-align: middle;
+        }
+        /* 徽章颜色基于项目 CSS token 派生 */
+        .badge-a-l { background: var(--badge-a-l-bg); color: var(--accent-4); border: 1px solid var(--badge-a-l-border); }
+        .badge-m-u { background: var(--badge-m-u-bg); color: var(--accent-2); border: 1px solid var(--badge-m-u-border); }
+        .badge-v-ah { background: var(--badge-v-ah-bg); color: var(--accent-3); border: 1px solid var(--badge-v-ah-border); }
+        .badge-q-plus { background: var(--badge-q-plus-bg); color: var(--accent); border: 1px solid var(--badge-q-plus-border); }
+        .badge-q-plusplus { background: var(--badge-q-plusplus-bg); color: var(--accent-3); border: 1px solid var(--badge-q-plusplus-border); }
+        .badge-q-plusplusplus { background: var(--badge-q-plusplusplus-bg); color: var(--rebel); border: 1px solid var(--badge-q-plusplusplus-border); }
+        .kpi-card.hidden { display: none; }
+        .kpi-card.filter-enter {
+            animation: cardFadeIn 0.25s ease;
+        }
+        @keyframes cardFadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 44px 24px;
+            color: var(--ink-soft);
+            font-size: 0.95rem;
+            border: 1px dashed var(--line);
+            border-radius: 8px;
+            background: var(--paper);
+        }
+        .empty-state.hidden { display: none; }
+        .empty-state .empty-query {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        /* 全站搜索浮层（v2.0 Q+++） */
+        .search-results {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            right: 0;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(60, 40, 20, 0.15);
+            max-height: 380px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+        .search-results.visible { display: block; }
+        .search-result-item {
+            display: block;
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--line);
+            text-decoration: none;
+            color: var(--ink);
+            transition: background 0.15s;
+        }
+        .search-result-item:last-child { border-bottom: none; }
+        .search-result-item:hover,
+        .search-result-item.active { background: var(--bg); }
+        .search-result-item .result-title {
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            min-width: 0;
+        }
+        .search-result-item .result-desc {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+        }
+        .search-result-item mark {
+            background: var(--accent-soft);
+            color: var(--ink);
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        .search-result-empty {
+            padding: 16px;
+            text-align: center;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+        }
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            margin-top: 12px;
+        }
+        .table-wrapper .cross-table {
+            margin-top: 0;
+            border: none;
+            min-width: 480px;
+        }
+
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .cross-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 0.88rem;
+        }
+        .cross-table th, .cross-table td {
+            border: 1px solid var(--line);
+            padding: 8px 12px;
+            text-align: center;
+        }
+        .cross-table th {
+            background: var(--cross-table-header-bg);
+            color: var(--accent-3);
+            font-weight: 600;
+        }
+        .cross-table td:first-child {
+            background: var(--bg);
+            font-weight: 600;
+            text-align: left;
+        }
+        .cross-table .highlight {
+            background: var(--cross-table-highlight-bg);
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .cross-table .zero {
+            color: var(--ink-soft);
+            opacity: 0.4;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a {
+            color: var(--accent-2);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover { text-decoration: underline; }
+
+        /* 三层架构导航区（v0.11 W019） */
+        .three-layer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .three-layer-card {
+            display: block;
+            padding: 20px;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--ink);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .three-layer-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        .three-layer-card:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+        .three-layer-card .layer-num {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .three-layer-card h3 {
+            font-size: 1.1rem;
+            margin: 0 0 8px;
+        }
+        .three-layer-card p {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin: 0 0 10px;
+            line-height: 1.5;
+        }
+        .three-layer-card .layer-meta {
+            font-size: 0.75rem;
+            color: var(--accent-2);
+        }
+        @media (max-width: 768px) {
+            .three-layer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>详解西游记 · 数据仪表盘</h1>
+        <div class="subtitle">DATA DASHBOARD</div>
+        <div class="tagline">用数字看取经路上的众生与劫难。</div>
+    </header>
+
+    <main class="container">
+        <div class="notice" id="dataSource">
+            数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <a class="kpi-card" href="data/chapter-stats.html" data-category="a-l">
+                <div class="label">A · 章节统计<span class="category-badge badge-a-l">A-L</span></div>
+                <div class="value">100</div>
+                <div class="desc">回逐回字数与对话占比</div>
+                <div class="detail">对话占比 42%（示例） →</div>
+            </a>
+            <a class="kpi-card" href="data/character-appearance.html" data-category="a-l">
+                <div class="label">B · 人物出场<span class="category-badge badge-a-l">A-L</span></div>
+                <div class="value">15</div>
+                <div class="desc">主要人物出场频次排行</div>
+                <div class="detail">孙悟空领衔，观音第四 →</div>
+            </a>
+            <a class="kpi-card" href="data/81-hardships.html" data-category="a-l">
+                <div class="label">C · 八十一难<span class="category-badge badge-a-l">A-L</span></div>
+                <div class="value">81</div>
+                <div class="desc">九九八十一难完整清单</div>
+                <div class="detail">坐骑下凡 16 难全部被接走 →</div>
+            </a>
+            <a class="kpi-card" href="data/journey-route.html" data-category="a-l">
+                <div class="label">E · 取经路线<span class="category-badge badge-a-l">A-L</span></div>
+                <div class="value">53</div>
+                <div class="desc">个地点，跨越 26 个地区</div>
+                <div class="detail">第 12 - 100 回，洞 13 处最多 →</div>
+            </a>
+        </div>
+
+        <!-- 八十一难深度统计区 -->
+        <section class="section">
+            <h2 class="section-title">八十一难深度统计</h2>
+            <div class="section-sub">按起因、结局、难度三维度切分，交叉统计揭示"背景"与"命运"的关系</div>
+
+            <div class="chart-row">
+                <div class="chart-block">
+                    <h3>按起因分类</h3>
+                    <svg id="chart-cause" width="280" height="280"></svg>
+                    <div class="legend" id="legend-cause"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>按结局分类</h3>
+                    <svg id="chart-ending" width="280" height="280"></svg>
+                    <div class="legend" id="legend-ending"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>按难度分类</h3>
+                    <svg id="chart-difficulty" width="280" height="280"></svg>
+                    <div class="legend" id="legend-difficulty"></div>
+                </div>
+            </div>
+
+            <h3 style="margin-top:32px;font-size:1.05rem;color:var(--accent-3);">交叉统计：起因 × 结局</h3>
+            <div class="section-sub" style="margin-bottom:12px;">每一行表示该起因下三种结局的分布。注意"坐骑下凡"行——16 难全部被接走，0 难被打死。</div>
+            <div class="table-wrapper">
+                <table class="cross-table" id="cross-table">
+                    <thead>
+                        <tr>
+                            <th>起因 \ 结局</th>
+                            <th>被接走</th>
+                            <th>被打死</th>
+                            <th>被收编</th>
+                            <th>合计</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="insight-box">
+                <h4>关键洞察</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+
+        <!-- 取经路线概要区 -->
+        <section class="section">
+            <h2 class="section-title">取经路线概要</h2>
+            <div class="section-sub">53 个地点，跨越 26 个地区，从长安化生寺到灵山雷音寺</div>
+            <div id="route-summary"></div>
+        </section>
+
+        <!-- 专题数据看板入口区（A-AH 全门类） -->
+        <section class="section">
+            <h2 class="section-title">专题数据看板</h2>
+            <div class="section-sub">45 个专题，37 大门类可视化总览，覆盖 A-AI 全维度 + Q+++ v2.0 新功能 + 原著全文检索 + 妖怪后台论 + D2A 难度热力图。可按类别筛选，或用搜索框按关键词定位。</div>
+
+            <div class="filter-bar">
+                <div class="filter-tabs" role="group" aria-label="专题分类筛选">
+                    <button class="filter-tab active" data-category="all" data-label="全部" aria-pressed="true">全部 39</button>
+                    <button class="filter-tab" data-category="a-l" data-label="A-L 基础" aria-pressed="false">A-L 基础 8</button>
+                    <button class="filter-tab" data-category="m-u" data-label="M-U 扩展" aria-pressed="false">M-U 扩展 9</button>
+                    <button class="filter-tab" data-category="v-ah" data-label="V-AH 跨学科" aria-pressed="false">V-AH 跨学科 14</button>
+                    <button class="filter-tab" data-category="q-plus" data-label="Q+ 批评史" aria-pressed="false">Q+ 批评史 2</button>
+                    <button class="filter-tab" data-category="q-plusplus" data-label="Q++ 弹幕博物馆" aria-pressed="false">Q++ 弹幕博物馆 3</button>
+                    <button class="filter-tab" data-category="q-plusplusplus" data-label="Q+++ v2.0 新功能" aria-pressed="false">Q+++ v2.0 新功能 5</button>
+                </div>
+                <div class="search-box" id="search-box">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                    <input type="search" id="topic-search" placeholder="搜索专题关键词..." aria-label="搜索专题" aria-controls="topic-grid">
+                    <button type="button" class="clear-btn" id="clear-search" aria-label="清除搜索">×</button>
+                    <div id="search-results" class="search-results" role="listbox" aria-label="全站搜索结果"></div>
+                </div>
+            </div>
+
+            <div class="visually-hidden" aria-live="polite" aria-atomic="true" id="filter-announce"></div>
+
+            <div class="kpi-row" id="topic-grid">
+                <div class="empty-state hidden" id="topic-empty" aria-live="polite" aria-atomic="true">
+                    未找到匹配“<span class="empty-query"></span>”的专题，试试其他关键词？
+                </div>
+                <a class="kpi-card" href="data/relationships.html" data-category="a-l">
+                    <div class="label">D · 关系网络<span class="category-badge badge-a-l">A-L</span></div>
+                    <div class="value">7·8·15·5</div>
+                    <div class="desc">势力·法宝·搬救兵·贝尔宾</div>
+                    <div class="detail">天庭与灵山双中心结构 →</div>
+                </a>
+                <a class="kpi-card" href="data/philosophy.html" data-category="a-l">
+                    <div class="label">G · 哲学心性<span class="category-badge badge-a-l">A-L</span></div>
+                    <div class="value">6·8·81</div>
+                    <div class="desc">心猿阶段·修心寓言·难</div>
+                    <div class="detail">六耳猕猴是降伏二心转折点 →</div>
+                </a>
+                <a class="kpi-card" href="data/risk-project.html" data-category="a-l">
+                    <div class="label">H · 风险项目<span class="category-badge badge-a-l">A-L</span></div>
+                    <div class="value">5·7·8</div>
+                    <div class="desc">风险类别·KPI·MBTI</div>
+                    <div class="detail">综合风险评分 7.2·项目成功 →</div>
+                </a>
+                <a class="kpi-card" href="data/monster-sociology.html" data-category="a-l">
+                    <div class="label">I · 妖怪社会<span class="category-badge badge-a-l">A-L</span></div>
+                    <div class="value">5·10·10</div>
+                    <div class="desc">作案·信号·坐骑档案</div>
+                    <div class="detail">坐骑下凡实质惩罚率 0% →</div>
+                </a>
+                <a class="kpi-card" href="data/power-resources.html" data-category="a-l">
+                    <div class="label">J · 权力资源<span class="category-badge badge-a-l">A-L</span></div>
+                    <div class="value">7·8·10</div>
+                    <div class="desc">势力·晋升·长生资源</div>
+                    <div class="detail">天庭与灵山并列影响力 10 →</div>
+                </a>
+                <a class="kpi-card" href="data/karma-reincarnation.html" data-category="a-l">
+                    <div class="label">K · 命运轮回<span class="category-badge badge-a-l">A-L</span></div>
+                    <div class="value">8·10·6</div>
+                    <div class="desc">生死簿·因果·六道</div>
+                    <div class="detail">地府治理漏洞率 87.5% →</div>
+                </a>
+                <a class="kpi-card" href="data/business-model.html" data-category="a-l">
+                    <div class="label">L · 商业模型<span class="category-badge badge-a-l">A-L</span></div>
+                    <div class="value">2·6·5</div>
+                    <div class="desc">组织对比·悟空职业·妖怪公司</div>
+                    <div class="detail">妖怪 IPO 失败率 100% →</div>
+                </a>
+                <a class="kpi-card" href="data/cave-estate.html" data-category="m-u">
+                    <div class="label">M · 洞府房产<span class="category-badge badge-m-u">M-U</span></div>
+                    <div class="value">22</div>
+                    <div class="desc">处洞府房产档案</div>
+                    <div class="detail">狮驼洞与小雷音寺并列满分 →</div>
+                </a>
+                <a class="kpi-card" href="data/magic-system.html" data-category="m-u">
+                    <div class="label">N · 法术阵法<span class="category-badge badge-m-u">M-U</span></div>
+                    <div class="value">5+5+6+8</div>
+                    <div class="desc">修炼·火系·阵法·法宝</div>
+                    <div class="detail">天庭能量预算盈余 9249 蟠桃 →</div>
+                </a>
+                <a class="kpi-card" href="data/aesthetics.html" data-category="m-u">
+                    <div class="label">O · 美学时尚<span class="category-badge badge-m-u">M-U</span></div>
+                    <div class="value">10·12·14</div>
+                    <div class="desc">角色·色彩·场景</div>
+                    <div class="detail">悟空时尚 U 型曲线 →</div>
+                </a>
+                <a class="kpi-card" href="data/music-structure.html" data-category="m-u">
+                    <div class="label">P · 音乐声效<span class="category-badge badge-m-u">M-U</span></div>
+                    <div class="value">16·8·4</div>
+                    <div class="desc">声效·对称·乐章</div>
+                    <div class="detail">100 回是一首交响乐 →</div>
+                </a>
+                <a class="kpi-card" href="data/text-evolution.html" data-category="m-u">
+                    <div class="label">Q · 源流演变<span class="category-badge badge-m-u">M-U</span></div>
+                    <div class="value">10·4·5</div>
+                    <div class="desc">版本·候选作者·批点者</div>
+                    <div class="detail">5 批点者共 6100 条评论 →</div>
+                </a>
+                <a class="kpi-card" href="data/criticism-history.html" data-category="q-plus">
+                    <div class="label">Q+ · 批评史长卷<span class="category-badge badge-q-plus">Q+</span></div>
+                    <div class="value">500·9·3</div>
+                    <div class="desc">年·批评家·解读流派</div>
+                    <div class="detail">明清至当代解读倾向流变 →</div>
+                </a>
+                <a class="kpi-card" href="data/concept-device.html" data-category="q-plus">
+                    <div class="label">Q+ · 观念装置<span class="category-badge badge-q-plus">Q+</span></div>
+                    <div class="value">6</div>
+                    <div class="desc">三棱镜·收音机·莫比乌斯环</div>
+                    <div class="detail">批评史做成可摸的思想装置 →</div>
+                </a>
+                <a class="kpi-card" href="data/cross-time-danmaku.html" data-category="q-plusplus">
+                    <div class="label">Q++ · 弹幕博物馆<span class="category-badge badge-q-plusplus">Q++</span></div>
+                    <div class="value">3 模块</div>
+                    <div class="desc">跨时空弹幕 · 全年龄分层 · 留言博物馆</div>
+                    <div class="detail">4 年龄段 + 嘴替 + 留言 →</div>
+                </a>
+                <a class="kpi-card" href="data/century-dialogue.html" data-category="q-plusplus">
+                    <div class="label">Q++ · 世纪对话<span class="category-badge badge-q-plusplus">Q++</span></div>
+                    <div class="value">2 场</div>
+                    <div class="desc">三方会谈 · 角色圆桌 · 动态海报</div>
+                    <div class="detail">李卓吾 vs 胡适 vs 毛泽东 →</div>
+                </a>
+                <a class="kpi-card" href="data/famous-time-travel.html" data-category="q-plusplus">
+                    <div class="label">Q++ · 名人穿越<span class="category-badge badge-q-plusplus">Q++</span></div>
+                    <div class="value">6 位</div>
+                    <div class="desc">穿越身份 · 入戏插画 · 场景猜想</div>
+                    <div class="detail">鲁迅地府 + 钱钟书纠错 →</div>
+                </a>
+                <a class="kpi-card" href="data/emotional-heatmap.html" data-category="q-plusplusplus">
+                    <div class="label">Q+++ · 情感热力图<span class="category-badge badge-q-plusplusplus">Q+++</span></div>
+                    <div class="value">8×20</div>
+                    <div class="desc">名人情感矩阵 · 波动曲线 · 洞察</div>
+                    <div class="detail">8 位批评家 × 20 难情感波动 →</div>
+                </a>
+                <a class="kpi-card" href="data/text-search.html" data-category="q-plusplusplus">
+                    <div class="label">Q+++ · 原著全文检索<span class="category-badge badge-q-plusplusplus">Q+++</span></div>
+                    <div class="value">100 回</div>
+                    <div class="desc">关键词 / 人物 / 法宝检索</div>
+                    <div class="detail">上下文高亮 · 命中计数 →</div>
+                </a>
+                <a class="kpi-card" href="data/timeline.html" data-category="q-plusplusplus">
+                    <div class="label">Q+++ · 交互时间线<span class="category-badge badge-q-plusplusplus">Q+++</span></div>
+                    <div class="value">3 轴 22 事</div>
+                    <div class="desc">成书史 · 版本演变 · 文化影响</div>
+                    <div class="detail">629-2020 千年演变 →</div>
+                </a>
+                <a class="kpi-card" href="data/ai-dialogue.html" data-category="q-plusplusplus">
+                    <div class="label">Q+++ · AI 名人对话<span class="category-badge badge-q-plusplusplus">Q+++</span></div>
+                    <div class="value">6 位 48 答</div>
+                    <div class="desc">关键词匹配 · 跨时空对话 · 快捷话题</div>
+                    <div class="detail">鲁迅/胡适/毛泽东/林语堂 →</div>
+                </a>
+                <a class="kpi-card" href="data/monster-background.html" data-category="q-plusplusplus">
+                    <div class="label">Q+++ · 妖怪后台论<span class="category-badge badge-q-plusplusplus">Q+++</span></div>
+                    <div class="value">4·10·5</div>
+                    <div class="desc">后台分类 · 典型案例 · 处置方式</div>
+                    <div class="detail">有后台存活率 97.2% vs 无后台 9.1% →</div>
+                </a>
+                <a class="kpi-card" href="data/deconstruction.html" data-category="m-u">
+                    <div class="label">R · 解构作品<span class="category-badge badge-m-u">M-U</span></div>
+                    <div class="value">7·9·7</div>
+                    <div class="desc">解构·再创作·国家</div>
+                    <div class="detail">日本龙珠全球影响最大 →</div>
+                </a>
+                <a class="kpi-card" href="data/global-pattern.html" data-category="m-u">
+                    <div class="label">S · 全球模式<span class="category-badge badge-m-u">M-U</span></div>
+                    <div class="value">8·8·2300</div>
+                    <div class="desc">取经者·节点·跨年</div>
+                    <div class="detail">世界取经者家族跨 2300 年 →</div>
+                </a>
+                <a class="kpi-card" href="data/counterfactual.html" data-category="m-u">
+                    <div class="label">T · 反事实推断<span class="category-badge badge-m-u">M-U</span></div>
+                    <div class="value">10·6</div>
+                    <div class="desc">场景·类别</div>
+                    <div class="detail">无紧箍咒则取经失败 →</div>
+                </a>
+                <a class="kpi-card" href="data/cultural-misreading.html" data-category="m-u">
+                    <div class="label">U · 文化错位<span class="category-badge badge-m-u">M-U</span></div>
+                    <div class="value">12·12·6</div>
+                    <div class="desc">翻译偏差·放大元素·国</div>
+                    <div class="detail">心猿意马文化鸿沟满分 →</div>
+                </a>
+                <a class="kpi-card" href="data/workplace.html" data-category="v-ah">
+                    <div class="label">V · 打工人职场<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">14·5·15</div>
+                    <div class="desc">年项目·团队·黑话</div>
+                    <div class="detail">紧箍咒是负反馈抑制信号 →</div>
+                </a>
+                <a class="kpi-card" href="data/social-media.html" data-category="v-ah">
+                    <div class="label">W · 社媒人设<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">7·8·7.88</div>
+                    <div class="desc">社媒·MBTI·适配度</div>
+                    <div class="detail">如来 INTJ 10/10 适配 →</div>
+                </a>
+                <a class="kpi-card" href="data/game-webnovel.html" data-category="v-ah">
+                    <div class="label">X · 游戏网文<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">12·10·9</div>
+                    <div class="desc">卡牌·法宝·网文</div>
+                    <div class="detail">退队流猴哥人气 9/10 →</div>
+                </a>
+                <a class="kpi-card" href="data/ethics-consumption.html" data-category="v-ah">
+                    <div class="label">Y · 伦理消费<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">5·12·5</div>
+                    <div class="desc">发现·探店·IPO</div>
+                    <div class="detail">坐骑权益 0 元赔付 →</div>
+                </a>
+                <a class="kpi-card" href="data/chart-design.html" data-category="v-ah">
+                    <div class="label">Z · 图表设计<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">5·5·6</div>
+                    <div class="desc">链·螺旋·日晷</div>
+                    <div class="detail">阿基米德螺旋修心进度 →</div>
+                </a>
+                <a class="kpi-card" href="data/narrative-experiment.html" data-category="v-ah">
+                    <div class="label">AA · 叙事实验<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">4·32·1200</div>
+                    <div class="desc">玩家·卡牌·组合</div>
+                    <div class="detail">灵山董事会反取经桌游 →</div>
+                </a>
+                <a class="kpi-card" href="data/visual-art.html" data-category="v-ah">
+                    <div class="label">AB · 视觉艺术<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">10·10·10</div>
+                    <div class="desc">诵经·气味·构想</div>
+                    <div class="detail">心经物质形态金线雕塑 →</div>
+                </a>
+                <a class="kpi-card" href="data/methodology-matrix.html" data-category="v-ah">
+                    <div class="label">AC · 方法论矩阵<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">15·4·10</div>
+                    <div class="desc">反派·象限·ROI</div>
+                    <div class="detail">搬救兵 ROI 三阶段演变 →</div>
+                </a>
+                <a class="kpi-card" href="data/cognitive-psychology.html" data-category="v-ah">
+                    <div class="label">AD · 认知心理<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">4·5·6</div>
+                    <div class="desc">阶段·人·案例</div>
+                    <div class="detail">紧箍咒=外部执行控制 →</div>
+                </a>
+                <a class="kpi-card" href="data/ecology.html" data-category="v-ah">
+                    <div class="label">AE · 生态学<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">7·10·6</div>
+                    <div class="desc">入侵·脉冲·演替</div>
+                    <div class="detail">花果山猴群降 97.2% →</div>
+                </a>
+                <a class="kpi-card" href="data/jurisprudence.html" data-category="v-ah">
+                    <div class="label">AF · 法理经济<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">10·8·8</div>
+                    <div class="desc">量刑·产权·数据</div>
+                    <div class="detail">大鹏雕 disparity 10/10 →</div>
+                </a>
+                <a class="kpi-card" href="data/material-archaeology.html" data-category="v-ah">
+                    <div class="label">AG · 物质考古<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">8·19·14</div>
+                    <div class="desc">法宝·服饰·洞府</div>
+                    <div class="detail">金刚琢莫氏硬度 9.5 →</div>
+                </a>
+                <a class="kpi-card" href="data/linguistics.html" data-category="v-ah">
+                    <div class="label">AH · 语言学<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">8·5·8</div>
+                    <div class="desc">咒语·对话·身份</div>
+                    <div class="detail">三教合一语言图谱 →</div>
+                </a>
+                <a class="kpi-card" href="data/mbti-evolution.html" data-category="v-ah">
+                    <div class="label">MBTI · 演变<span class="category-badge badge-v-ah">V-AH</span></div>
+                    <div class="value">5·4·8</div>
+                    <div class="desc">人·阶段·维度漂移</div>
+                    <div class="detail">D1·取经团队人格动力学 →</div>
+                </a>
+                <a class="kpi-card" href="data/hardship-heatmap.html" data-category="a-l">
+                    <div class="label">C · 难度热力<span class="category-badge badge-a-l">A-L</span></div>
+                    <div class="value">81·10</div>
+                    <div class="desc">难·难度系数 1-10</div>
+                    <div class="detail">D2A·狮驼三魔 10 分极难 →</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 三层架构导航区（v0.11 W019） -->
+        <section class="section">
+            <h2 class="section-title">三层架构 · 从读懂到用活</h2>
+            <div class="section-sub">把《西游记》读到的"是什么"和"为什么"，延伸到"怎么用"、"如何看见自己的思考"、"在苦难中如何立住自己"。</div>
+            <div class="three-layer-grid">
+                <a class="three-layer-card" href="../docs/07-学以致用/">
+                    <div class="layer-num">07 · 学以致用</div>
+                    <h3>怎么用</h3>
+                    <p>学习路径 / 决策模型 / 领导力 / 危机应对</p>
+                    <div class="layer-meta">应用层 · 4 篇 · 连接卡尼曼/塔勒布/分级响应</div>
+                </a>
+                <a class="three-layer-card" href="../docs/08-提升认知/">
+                    <div class="layer-num">08 · 提升认知</div>
+                    <h3>如何看见自己的思考</h3>
+                    <p>角色思维模型 / 反事实训练 / 元认知地图</p>
+                    <div class="layer-meta">思维层 · 3 篇 · 连接加德纳/弗拉维尔/费斯汀格</div>
+                </a>
+                <a class="three-layer-card" href="../docs/09-精神塑造/">
+                    <div class="layer-num">09 · 精神塑造</div>
+                    <h3>在苦难中如何立住自己</h3>
+                    <p>八十一难人生隐喻 / 自我整合 / 价值坐标系 / 苦难意义论</p>
+                    <div class="layer-meta">价值层 · 4 篇 · 连接加缪/弗兰克尔/荣格/亚隆</div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 详解西游记项目 ·
+        <a href="index.html">返回首页</a> ·
+        <a href="../README.md">项目说明</a> ·
+        <a href="../CHANGELOG.md">更新日志</a>
+    </footer>
+
+    <script>
+    // 嵌入式数据（fallback 用，避免 file:// 协议下 fetch 失败）
+    const EMBEDDED_DATA = {
+        hardships: {
+            total: 81,
+            by_cause: {
+                "如来/观音安排": 27,
+                "真正野怪": 28,
+                "天界/西天坐骑下凡": 16,
+                "人心自生的魔障": 10
+            },
+            by_ending: {
+                "被接走（有背景）": 49,
+                "被打死（无背景）": 25,
+                "被收编": 7
+            },
+            by_difficulty: {
+                "悟空独立解决": 42,
+                "需要搬救兵": 39
+            },
+            cross_cause_ending: {
+                "如来/观音安排": {"被接走（有背景）": 23, "被打死（无背景）": 0, "被收编": 4},
+                "真正野怪": {"被接走（有背景）": 6, "被打死（无背景）": 19, "被收编": 3},
+                "天界/西天坐骑下凡": {"被接走（有背景）": 16, "被打死（无背景）": 0, "被收编": 0},
+                "人心自生的魔障": {"被接走（有背景）": 4, "被打死（无背景）": 6, "被收编": 0}
+            }
+        },
+        route: {
+            total_places: 53,
+            total_regions: 26,
+            chapter_range: { start: 12, end: 100 },
+            by_type: {
+                "洞": 13, "山": 10, "寺/观": 9, "国": 9, "水": 6, "城": 6
+            }
+        }
+    };
+
+    // 配色
+    const CAUSE_COLORS = {
+        "如来/观音安排": "#c8463a",
+        "真正野怪": "#7a5230",
+        "天界/西天坐骑下凡": "#3a6b8c",
+        "人心自生的魔障": "#5a7a3a"
+    };
+    const ENDING_COLORS = {
+        "被接走（有背景）": "#e9b885",
+        "被打死（无背景）": "#c8463a",
+        "被收编": "#5a7a3a"
+    };
+    const DIFFICULTY_COLORS = {
+        "悟空独立解决": "#3a6b8c",
+        "需要搬救兵": "#c8463a"
+    };
+
+    // 渲染饼图
+    function renderPie(svgId, legendId, data, colorMap) {
+        const svg = d3.select("#" + svgId);
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const radius = Math.max(0, Math.min(width, height) / 2 - 10);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${width/2}, ${height/2})`);
+
+        const pie = d3.pie()
+            .value(d => d[1])
+            .sort(null);
+
+        const arc = d3.arc()
+            .innerRadius(radius * 0.55)
+            .outerRadius(radius)
+            .cornerRadius(2);
+
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.85)
+            .outerRadius(radius * 0.85);
+
+        const arcs = pie(Object.entries(data));
+
+        // 切片
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => colorMap[d.data[0]] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 100)
+            .style("opacity", 1);
+
+        // 中心文字
+        const total = Object.values(data).reduce((a, b) => a + b, 0);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "0.35em")
+            .style("font-size", "1.6rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--ink)")
+            .text(total);
+
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "1.8em")
+            .style("font-size", "0.7rem")
+            .style("fill", "var(--ink-soft)")
+            .text("总计");
+
+        // 切片标签
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem")
+            .style("font-weight", "600")
+            .style("fill", "#fff")
+            .text(d => {
+                const pct = (d.data[1] / total * 100).toFixed(0);
+                return d.data[1] > 3 ? `${d.data[1]}\n${pct}%` : "";
+            });
+
+        // 图例
+        const legend = d3.select("#" + legendId);
+        legend.selectAll(".legend-item")
+            .data(Object.entries(data))
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `
+                <span class="legend-swatch" style="background:${colorMap[d[0]] || '#999'}"></span>
+                <span>${d[0]}：${d[1]} 难</span>
+            `);
+    }
+
+    // 渲染交叉表
+    function renderCrossTable(crossData) {
+        const tbody = d3.select("#cross-table tbody");
+        const rows = Object.entries(crossData);
+
+        rows.forEach(([cause, endings]) => {
+            const total = Object.values(endings).reduce((a, b) => a + b, 0);
+            const tr = tbody.append("tr");
+            tr.append("td").text(cause);
+            Object.entries(endings).forEach(([ending, count]) => {
+                const td = tr.append("td");
+                if (count === 0) {
+                    td.classed("zero", true).text("0");
+                } else if (count >= 15) {
+                    td.classed("highlight", true).text(count);
+                } else {
+                    td.text(count);
+                }
+            });
+            tr.append("td").style("font-weight", "600").text(total);
+        });
+    }
+
+    // 渲染关键洞察（基于实际数据计算，避免 fetch 成功后洞察与图表脱节）
+    function renderInsights(data) {
+        const cause = data.by_cause || {};
+        const ending = data.by_ending || {};
+        const cross = data.cross_cause_ending || {};
+        const difficulty = data.by_difficulty || {};
+        const total = data.total || 81;
+
+        const mount = cause["天界/西天坐骑下凡"] || 0;
+        const mountTaken = (cross["天界/西天坐骑下凡"] || {})["被接走（有背景）"] || 0;
+        const wild = cause["真正野怪"] || 0;
+        const wildKilled = (cross["真正野怪"] || {})["被打死（无背景）"] || 0;
+        const arranged = cause["如来/观音安排"] || 0;
+        const arrangedTaken = (cross["如来/观音安排"] || {})["被接走（有背景）"] || 0;
+        const arrangedRecruited = (cross["如来/观音安排"] || {})["被收编"] || 0;
+        const helpNeeded = difficulty["需要搬救兵"] || 0;
+        const taken = ending["被接走（有背景）"] || 0;
+        const killed = ending["被打死（无背景）"] || 0;
+
+        const insights = [];
+        if (mount > 0) {
+            insights.push(`坐骑下凡 ${mount} 难 <strong>${mountTaken === mount ? '全部被接走' : mountTaken + ' 难被接走'}</strong>，无 1 难被打死——揭示了"背景深厚"的妖怪几乎零犯罪成本。`);
+        }
+        if (wild > 0) {
+            insights.push(`真正野怪 ${wild} 难中 <strong>${wildKilled} 难被打死</strong>（${((wildKilled / wild) * 100).toFixed(1)}%），无背景的妖魔死亡率极高。`);
+        }
+        if (arranged > 0) {
+            insights.push(`如来/观音安排 ${arranged} 难中 <strong>${arrangedTaken} 难被接走</strong>，${arrangedRecruited} 难被收编，0 难被打死——"考验"性质明显。`);
+        }
+        if (helpNeeded > 0) {
+            insights.push(`搬救兵 ${helpNeeded} 难（${((helpNeeded / total) * 100).toFixed(1)}%）几乎占一半，<strong>悟空并非万能</strong>，西行是一场协作。`);
+        }
+        if (taken > 0 || killed > 0) {
+            insights.push(`被接走 ${taken} 难（${((taken / total) * 100).toFixed(1)}%）vs 被打死 ${killed} 难（${((killed / total) * 100).toFixed(1)}%）——<strong>"关系"决定命运</strong>是全书最大潜规则。`);
+        }
+
+        const ul = d3.select("#insights");
+        insights.forEach(text => {
+            ul.append("li").html(text);
+        });
+    }
+
+    // 渲染取经路线概要
+    function renderRouteSummary(route) {
+        const summary = d3.select("#route-summary");
+        summary.html("");
+
+        const typeRow = summary.append("div")
+            .style("display", "flex")
+            .style("flex-wrap", "wrap")
+            .style("gap", "12px")
+            .style("margin-top", "12px");
+
+        Object.entries(route.by_type).forEach(([type, count]) => {
+            typeRow.append("div")
+                .style("background", "#f5e9d4")
+                .style("padding", "8px 14px")
+                .style("border-radius", "4px")
+                .style("font-size", "0.85rem")
+                .html(`<strong style="color:var(--accent)">${count}</strong> <span style="color:var(--ink-soft)">${type}</span>`);
+        });
+
+        summary.append("p")
+            .style("margin-top", "16px")
+            .style("font-size", "0.9rem")
+            .style("color", "var(--ink-soft)")
+            .html(`从第 ${route.chapter_range.start} 回出发，至第 ${route.chapter_range.end} 回归真，途经 <strong style="color:var(--accent)">${route.total_places}</strong> 个地点，跨越 <strong style="color:var(--accent)">${route.total_regions}</strong> 个地区。`);
+    }
+
+    // 加载数据（fetch 失败则用嵌入数据）
+    async function loadData() {
+        try {
+            const response = await fetch('../scripts/output/data/hardships_81.json');
+            if (!response.ok) throw new Error('fetch failed');
+            const data = await response.json();
+            document.getElementById('dataSource').innerHTML =
+                '数据源：实时加载自 <code>scripts/output/data/hardships_81.json</code>（运行于 http server 模式）';
+            return data;
+        } catch (e) {
+            console.log('[INFO] 使用嵌入数据：', e.message);
+            return EMBEDDED_DATA.hardships;
+        }
+    }
+
+    // 主流程
+    async function main() {
+        const data = await loadData();
+
+        renderPie("chart-cause", "legend-cause", data.by_cause, CAUSE_COLORS);
+        renderPie("chart-ending", "legend-ending", data.by_ending, ENDING_COLORS);
+        renderPie("chart-difficulty", "legend-difficulty", data.by_difficulty, DIFFICULTY_COLORS);
+
+        renderCrossTable(data.cross_cause_ending);
+        renderInsights(data);
+        renderRouteSummary(EMBEDDED_DATA.route);
+    }
+
+    // 专题看板：分类 tab + 搜索过滤
+    (function initTopicFilter() {
+        const tabs = document.querySelectorAll('.filter-tab');
+        const searchInput = document.getElementById('topic-search');
+        const clearBtn = document.getElementById('clear-search');
+        const searchBox = document.getElementById('search-box');
+        const cards = document.querySelectorAll('#topic-grid .kpi-card');
+        const emptyState = document.getElementById('topic-empty');
+        const emptyQuery = emptyState.querySelector('.empty-query');
+        const announce = document.getElementById('filter-announce');
+
+        let activeCategory = 'all';
+        let searchQuery = '';
+        let debounceTimer;
+
+        function getVisibleCards() {
+            const query = searchQuery.trim().toLowerCase();
+            return Array.from(cards).filter(card => {
+                const category = card.dataset.category || '';
+                const matchesCategory = activeCategory === 'all' || category === activeCategory;
+                const text = card.textContent.toLowerCase();
+                const matchesSearch = !query || text.includes(query);
+                return matchesCategory && matchesSearch;
+            });
+        }
+
+        function updateCounts() {
+            const query = searchQuery.trim().toLowerCase();
+            tabs.forEach(tab => {
+                const cat = tab.dataset.category;
+                const label = tab.dataset.label;
+                const count = Array.from(cards).filter(card => {
+                    const category = card.dataset.category || '';
+                    const text = card.textContent.toLowerCase();
+                    const matchesCategory = cat === 'all' || category === cat;
+                    const matchesSearch = !query || text.includes(query);
+                    return matchesCategory && matchesSearch;
+                }).length;
+                tab.textContent = `${label} ${count}`;
+            });
+        }
+
+        function announceResult(visibleCount) {
+            if (!announce) return;
+            const query = searchQuery.trim();
+            const activeTab = document.querySelector(`.filter-tab[data-category="${activeCategory}"]`);
+            const catLabel = activeTab ? activeTab.dataset.label : '';
+            if (query) {
+                announce.textContent = `搜索“${query}”在 ${catLabel} 中找到 ${visibleCount} 个专题`;
+            } else {
+                announce.textContent = `${catLabel} 共 ${visibleCount} 个专题`;
+            }
+        }
+
+        function applyFilter() {
+            const visibleCards = getVisibleCards();
+            cards.forEach(card => {
+                const isVisible = visibleCards.includes(card);
+                card.classList.toggle('hidden', !isVisible);
+                if (isVisible) {
+                    card.classList.remove('filter-enter');
+                    void card.offsetWidth;
+                    card.classList.add('filter-enter');
+                    setTimeout(() => card.classList.remove('filter-enter'), 260);
+                } else {
+                    card.classList.remove('filter-enter');
+                }
+            });
+
+            updateCounts();
+
+            const query = searchQuery.trim();
+            if (visibleCards.length === 0 && query) {
+                emptyQuery.textContent = query;
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            searchBox.classList.toggle('has-value', query.length > 0);
+            announceResult(visibleCards.length);
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-pressed', 'false');
+                });
+                tab.classList.add('active');
+                tab.setAttribute('aria-pressed', 'true');
+                activeCategory = tab.dataset.category || 'all';
+                applyFilter();
+            });
+        });
+
+        searchInput.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                searchQuery = searchInput.value;
+                applyFilter();
+                renderSearchResults(searchQuery);
+            }, 150);
+        });
+
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchInput.value = '';
+                searchQuery = '';
+                applyFilter();
+                renderSearchResults('');
+                searchInput.focus();
+                return;
+            }
+            if (!resultsBox.classList.contains('visible')) return;
+            const items = resultsBox.querySelectorAll('.search-result-item');
+            if (items.length === 0) return;
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                setActiveResult(Math.min(activeResultIdx + 1, items.length - 1));
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                setActiveResult(Math.max(activeResultIdx - 1, 0));
+            } else if (e.key === 'Enter' && activeResultIdx >= 0 && currentResults[activeResultIdx]) {
+                e.preventDefault();
+                window.location.href = currentResults[activeResultIdx].href;
+            }
+        });
+
+        clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            searchQuery = '';
+            applyFilter();
+            renderSearchResults('');
+            searchInput.focus();
+        });
+
+        // 全站搜索浮层（v2.0 Q+++）：从所有 kpi-card 提取索引 + fuzzy match
+        const allCardsIndex = Array.from(document.querySelectorAll('.kpi-card')).map(card => {
+            const labelEl = card.querySelector('.label');
+            const descEl = card.querySelector('.desc');
+            const detailEl = card.querySelector('.detail');
+            const badgeEl = card.querySelector('.category-badge');
+            let label = labelEl ? labelEl.textContent.trim() : '';
+            const badge = badgeEl ? badgeEl.textContent.trim() : '';
+            if (badge && label.endsWith(badge)) label = label.slice(0, -badge.length).trim();
+            const desc = descEl ? descEl.textContent.trim() : '';
+            const detail = detailEl ? detailEl.textContent.trim() : '';
+            return {
+                label, desc, detail, badge,
+                href: card.getAttribute('href') || '',
+                category: card.dataset.category || ''
+            };
+        });
+        const resultsBox = document.getElementById('search-results');
+        let activeResultIdx = -1;
+        let currentResults = [];
+
+        function escapeRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+        function escapeHtml(s) { return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+        function highlight(text, query) {
+            if (!query.trim()) return escapeHtml(text);
+            const words = query.trim().split(/\s+/).filter(Boolean).map(escapeRegex);
+            if (!words.length) return escapeHtml(text);
+            const regex = new RegExp(`(${words.join('|')})`, 'gi');
+            return escapeHtml(text).replace(regex, '<mark>$1</mark>');
+        }
+        function scoreItem(query, item) {
+            const q = query.trim().toLowerCase();
+            if (!q) return 0;
+            if (item.label.toLowerCase().includes(q)) return 100;
+            const words = q.split(/\s+/).filter(Boolean);
+            let score = 0;
+            words.forEach(w => {
+                if (item.label.toLowerCase().includes(w)) score += 15;
+                if (item.desc.toLowerCase().includes(w)) score += 8;
+                if (item.detail.toLowerCase().includes(w)) score += 5;
+            });
+            return score;
+        }
+        function renderSearchResults(query) {
+            if (!query.trim()) {
+                resultsBox.classList.remove('visible');
+                resultsBox.innerHTML = '';
+                activeResultIdx = -1;
+                currentResults = [];
+                return;
+            }
+            currentResults = allCardsIndex
+                .map(item => ({ ...item, score: scoreItem(query, item) }))
+                .filter(item => item.score > 0)
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 12);
+            if (currentResults.length === 0) {
+                resultsBox.innerHTML = `<div class="search-result-empty">未找到匹配"${escapeHtml(query)}"的专题，试试其他关键词？</div>`;
+                resultsBox.classList.add('visible');
+                activeResultIdx = -1;
+                return;
+            }
+            resultsBox.innerHTML = currentResults.map((item, idx) => {
+                const badgeClass = item.category ? `badge-${item.category}` : '';
+                return `<a class="search-result-item" href="${item.href}" role="option" data-idx="${idx}" aria-selected="false">
+                    <div class="result-title">${highlight(item.label, query)} ${item.badge ? `<span class="result-badge ${badgeClass}">${item.badge}</span>` : ''}</div>
+                    <div class="result-desc">${highlight(item.desc, query)} · ${highlight(item.detail, query)}</div>
+                </a>`;
+            }).join('');
+            resultsBox.classList.add('visible');
+            activeResultIdx = -1;
+        }
+        function setActiveResult(idx) {
+            const items = resultsBox.querySelectorAll('.search-result-item');
+            items.forEach((el, i) => {
+                const active = i === idx;
+                el.classList.toggle('active', active);
+                el.setAttribute('aria-selected', active ? 'true' : 'false');
+            });
+            if (idx >= 0 && items[idx]) items[idx].scrollIntoView({ block: 'nearest' });
+            activeResultIdx = idx;
+        }
+        // 点击浮层外部关闭
+        document.addEventListener('click', (e) => {
+            if (!searchBox.contains(e.target)) {
+                resultsBox.classList.remove('visible');
+            }
+        });
+
+        // 初始化计数
+        updateCounts();
+    })();
+
+    main();
+    </script>
+</body>
+</html>

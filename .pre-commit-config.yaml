@@ -1,0 +1,50 @@
+# pre-commit 钩子配置
+# 用途：git commit 时自动运行 ruff lint + 文档一致性校验
+# 安装：pip install pre-commit && pre-commit install
+# 跳过：git commit --no-verify
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.5.7
+    hooks:
+      - id: ruff
+        name: ruff lint (scripts/)
+        args: [--fix]
+        files: ^scripts/.+\.py$
+        # 遵循 pyproject.toml 中的 ruff 配置
+
+  - repo: local
+    hooks:
+      - id: sync-docs
+        name: 6 文件文档一致性校验 (sync_docs.py)
+        entry: python scripts/sync_docs.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        # 仅在 commit 时检查；如需自动修复用 `python scripts/sync_docs.py --fix`
+
+      - id: drl-contracts
+        name: DRL contract 批量验证 (drl_spotcheck.py --batch)
+        entry: python scripts/drl_spotcheck.py --batch scripts/drl_contracts.yaml
+        language: system
+        pass_filenames: false
+        always_run: true
+        # E1 升级版铁律工程化：验证"修复声明已落地"的文件内容实际包含期望值
+        # 失败时阻断 commit；更新 contract 见 scripts/drl_contracts.yaml
+
+      - id: check-untracked
+        name: 交付物 untracked 文件检测 (check_untracked.py)
+        entry: python scripts/check_untracked.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        # E1 铁律工程化：检测 docs/site/data/scripts/ 中 untracked 文件
+        # 警告不阻断 commit（可能有合理未跟踪文件）
+
+      - id: pytest
+        name: pytest 测试套件
+        entry: python -m pytest tests/ -q
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [commit]

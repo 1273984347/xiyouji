@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>Journey to the West and the Information Cocoon — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #2c2418;
+            --ink-soft: #6b5e4d;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.0rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.02em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+        @media (max-width: 600px) {
+            article { padding: 24px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Essay E2
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>Journey to the West and the Information Cocoon</h1>
+        <div class="subtitle">ESSAY · SUMMARY TRANSLATION</div>
+        <div class="tagline">Tathagata's palm, Tang Seng's map, Bajie's hammer — three cocoons, four centuries apart.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+            <strong>Source:</strong> A summary translation of <a href="../../docs/06-个人随笔/西游与信息茧房.md">docs/06-个人随笔/西游与信息茧房.md</a>. The original Chinese essay links the novel's information structures to Ming-era court reporting and modern algorithmic feeds.
+        </div>
+
+        <article>
+            <h2>Tathagata's Palm <span class="anchor">↔ the first cocoon</span></h2>
+            <p>
+                In Chapter 7, Wukong kicks over Laozi's furnace and storms the Lingxiao Hall. Tathagata arrives, extends his palm, and offers a wager: leap beyond my hand and you win. Wukong laughs — one somersault is a hundred and eight thousand <em>li</em>. He flies to the edge of the world, finds five fleshy-red pillars, inscribes them, urinates on them to mark his arrival, and returns. Tathagata points to his middle finger. The inscription is there. The smell is there. <strong>He never left.</strong> We usually read this as a story of ability: even Wukong cannot outmatch Tathagata. But it is also the novel's first metaphor for the <em>information cocoon</em>. Tathagata's palm is not a spatial boundary but an informational one. The pillars, the inscription, the colors of the sky — all are clipped reality. Wukong thought he had reached the edge of the world; he had never left the inside of someone's hand. The further he flew, the freer he felt.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>Tang Seng's Asymmetric Information <span class="anchor">↔ the driver without a map</span></h2>
+            <p>
+                Tang Seng has his own cocoon. When Guanyin descends to Chang'an in Chapter 8, the pilgrimage project is already approved at Vulture Peak. The scriptures, the ritual implements, the quota of pilgrims, the eighty-one tribulations, the backer behind each tribulation — all are decided at project charter. Tang Seng knows none of it. He knows only one sentence: go west, fetch the scriptures. He does not know the journey will take fourteen years. He does not know there will be eighty-one tribulations. He does not know each demon is a borrowed actor. He treats every tribulation as a surprise; he judges every demon by appearance. <strong>Tang Seng's tragedy is not incompetence — it is information asymmetry.</strong> He holds the steering wheel of the pilgrimage but cannot see the map. A driver without a map treats every curve as an accident and every warning as insubordination. The decision-maker is the person furthest from the source.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>Bajie's Confirmation Bias <span class="anchor">↔ the self-woven cocoon</span></h2>
+            <p>
+                Bajie's cocoon takes another form. In Chapter 27, the White Bone Demon disguises herself three times. Wukong sees through her three times; Tang Seng refuses to believe three times; and three times Bajie fans the flames — "Master, this monkey wants to divide the luggage again." Bajie knows Wukong has fiery golden eyes. He chooses not to believe. Why? Because "disband and go back to Gao Village" is the only frame he has for the world. Demon? Disband. Difficulty? Disband. Wukong hits someone? Disband. Tang Seng chants? Disband. Every complex situation is compressed into one solution. This is textbook <strong>confirmation bias</strong>. Bajie is not observing the world; he is repeatedly confirming a judgment he made long ago. His hammer turns every nail into the same shape. The terrifying thing about confirmation bias is not stupidity but self-consistency. Bajie's cocoon is self-woven. He lives in a small world where "disband is always right" — stable, self-consistent, unfalsifiable. Tang Seng's cocoon was clipped by Vulture Peak. Bajie's he wove himself. The second is harder to break.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>Wukong's Algorithmic Immunity <span class="anchor">↔ what the eyes cannot see</span></h2>
+            <p>
+                Wukong has fiery golden eyes. In theory he should have no cocoon. He sees through disguise, demon-aura, and ill wind. His world is ten times more real than Tang Seng's. Yet at Lion Camel Ridge in Chapter 74, he falls. Taibai Jinxing warns him in disguise: three demon kings on this mountain, each more ruthless than the last. Wukong investigates, learns of the green lion, white elephant, and great peng, and is confident he can win. He cannot. Not for lack of ability, but because he does not know their backers — the green lion is Manjusri's mount, the white elephant is Samantabhadra's, the great peng is Tathagata's uncle. <strong>Wukong fights demons but offends the senior management of Vulture Peak.</strong> This is Wukong's cocoon: he can see a demon's form but not a demon's network. Fiery golden eyes pierce surface appearance but not structure. His algorithmic immunity stops at the skin; it does not reach the backstage. The most hidden layer of the cocoon is not what is in front of you but what is behind you.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>The Hand-Palm of Every Era <span class="anchor">↔ Ming papers, algorithmic feeds</span></h2>
+            <p>
+                Wu Cheng'en did not invent this from nothing. The Ming information environment was itself a cocoon system. What scholars could see was the <em>dibao</em> — court-issued edicts filtered layer by layer. Beyond that, oral transmission: market rumor and court small-talk, half true. Beyond that, the bookshops: novels, plays, and notebooks turning unspeakable politics into gods and demons. "Heavenly secrets must not be leaked" is the Ming version of information classification. Four centuries later, the <em>dibao</em> has become the recommendation algorithm; oral transmission has become social media; the bookshop has become short video. The medium has changed. The logic has not. What the algorithm shows is what it judges you should see; what it does not show, you do not even know you missed. Just as the demons Tang Seng saw were the demons Vulture Peak let him see. <strong>The Ming cocoon was hand-woven. Today's cocoon is computed.</strong> In both, we sit inside a palm and believe we have flown beyond it.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>A Larger Cocoon <span class="anchor">↔ the pilgrimage's endpoint</span></h2>
+            <p>
+                Chapter 99: the nine-times-nine tribulations are complete. The team reaches Vulture Peak, receives the scriptures, is granted fruits and titles. Project accepted. <em>Is the cocoon broken?</em> On the surface, yes. Tang Seng learns the truth of the road; Wukong removes his headband; Bajie becomes a Cleanser of Altars; Sha Seng becomes a Golden Arhat. Each is promoted one level. But on closer inspection, Vulture Peak is itself the new cocoon. Tang Seng becomes the Sandalwood Merit Buddha; his information source shifts from "mortal eyes" to "Vulture Peak perspective," but what he can see is still determined by his level in the hierarchy. <strong>The "growth" of the five pilgrims is moving from one cocoon into a larger one.</strong> The eighty-one tribulations shattered the cocoon of mortal ignorance and installed the cocoon of Vulture Peak order. This is the ultimate paradox of modern recommendation: when you break one cocoon, the algorithm finds you a bigger one. You think you are broadening your view; you are only changing the layer of the palm. The cocoon is not a cage — in a cage, you know you are inside. In a cocoon, you think there is no outside.
+            </p>
+
+            <a class="nav-back" href="index.html">← Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+                <a href="essay-ai-era.html">E1 · AI Era</a> ·
+                <a href="essay-modern-management.html">E3 · Modern Management</a> ·
+                <a href="../data/cognitive-psychology.html">Cognitive Psychology visualization</a> ·
+                <a href="../data/philosophy.html">Philosophy visualization</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        © <span id="footer-year">2026</span> Journey to the West · Annotated Project · MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> ·
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.40 W234-E4 ·
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W234-E4
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
