@@ -55,6 +55,8 @@ scripts/output/figures/*.svg
 scripts/output/data/*.json
 scripts/output/data/*.csv
 scripts/output/screenshots/slices/
+scripts/output/security-report.md
+scripts/output/security-report.json
 
 # 临时文件
 *.tmp
