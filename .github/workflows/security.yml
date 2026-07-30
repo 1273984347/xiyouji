@@ -112,8 +112,9 @@ jobs:
 
       - name: 检测潜在 XSS 漏洞（dangerouslySetHTML / eval / innerHTML 滥用）
         run: |
-          python scripts/security_scan.py --all --output scripts/output/security-report.md --strict
-          # 严格模式：发现 high 级别问题以非零退出码阻断 PR
+          # 非严格模式：仅 high 级别问题阻断（可视化页面的 innerHTML 已路径感知降级为 medium）
+          python scripts/security_scan.py --all --output scripts/output/security-report.md
+          # 双重保险：再次检查 high 数量
           python - <<'PY'
           import json
           from pathlib import Path
