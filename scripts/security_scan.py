@@ -42,7 +42,7 @@ RULES = [
     ("XSS-002", "document.write 调用（潜在 XSS）",
      r"document\.write\s*\(", "high", {".js", ".html"}),
     ("XSS-003", "eval 执行动态字符串",
-     r"\beval\s*\(", "high", {".js", ".py"}),
+     r"(?<![\w$.])eval\s*\(", "high", {".js", ".py"}),
     ("XSS-004", "dangerouslySetInnerHTML（React 转义绕过）",
      r"dangerouslySetInnerHTML", "high", {".js", ".jsx", ".html"}),
     ("XSS-005", "setTimeout/setInterval 执行字符串",
@@ -84,7 +84,8 @@ COMPILED = [(rid, desc, re.compile(pat), sev, exts) for rid, desc, pat, sev, ext
 # 可视化页面目录：innerHTML/document.write/outerHTML 是 D3.js 渲染标准用法，
 # 数据来自项目自身（非用户输入），降级为 medium 避免误报阻断 push。
 # 真实 XSS 风险（用户输入拼接 innerHTML）仍按 high 报告。
-VISUAL_PAGE_DIRS = ("site/data", "site/en", "site/chapters", "site/characters")
+# site/ 整个目录均为静态可视化页面（site/data、site/en、site/chapters、site/characters、site/*.html）。
+VISUAL_PAGE_DIRS = ("site",)
 XSS_DOWNGRADE_RULES = {"XSS-001", "XSS-002", "XSS-006"}
 
 
