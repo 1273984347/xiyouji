@@ -39,9 +39,8 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          # 自动启用仓库的 GitHub Pages 功能（无需手动到 Settings → Pages 配置）
-          enablement: true
+        # 注意：需先在仓库 Settings → Pages → Source 选择 "GitHub Actions"
+        # enablement 参数因 token 权限不足无法自动启用（403 Resource not accessible）
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
