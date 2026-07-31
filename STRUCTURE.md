@@ -239,7 +239,7 @@
 
 ## 版本变更
 
-完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（v0.1-v2.2.55 共 286c 个 W### ID）。v0.1-v2.0.60（W001-W087）已归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
+完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（v0.1-v2.2.55 共 286d 个 W### ID）。v0.1-v2.0.60（W001-W087）已归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
 
 **主要阶段里程碑**：
 
