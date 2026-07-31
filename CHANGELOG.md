@@ -4,9 +4,28 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W305），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W309），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.2.62（2026-08-01）：W306-W309 S3 方法论外部分享第三批 4 篇·核心方法论大量改写（DRL 真循环 + 三 skill 闭环 + E1 铁律 + Preflight 与 Subagent 模板·4 subagent 并行创作·主代理 spot-check 脱敏验证通过·4 新建 + 1 README 更新 + 5 同步 = 10 文件）
+
+> **W306-W309 S3 方法论外部分享第三批 4 篇·核心方法论大量改写**
+> - **来源**：用户要求"继续推进"·延续 S3 方向·完成 6 篇大量改写工作量中的 4 篇核心方法论（剩余 2 篇"记忆研究理论框架"/"可视化测试计划"留待第四批）
+> - **执行**：4 subagent 并行创作（dispatching-parallel-agents 模式·独立无共享状态·主代理统一 spot-check）：
+>   - **W306 DRL 真循环**（350 行）·脱敏 DRL真循环.md·AI 代理协作中如何避免假收敛·4 个收敛判据 + 4 层过拟合防护 + 13 条执行清单·核心方法论最有价值
+>   - **W307 三 skill 闭环**（241 行）·脱敏 三skill闭环.md·审查-收尾-沉淀完整循环·deep-review-loop → mem-wrap-up → self-evolution
+>   - **W308 E1 铁律**（344 行）·脱敏 E1铁律.md·跨 session 接续的三层 spot-check 验证·git tracked + 文件内容 + subagent 声明
+>   - **W309 Preflight 与 Subagent 模板**（296 行）·脱敏 Preflight与Subagent模板.md·派 subagent 前的三轨验证 + Scope-lock + fallback
+> - **文件**：
+>   - 新建：`docs/S3-方法论外部分享/W306-S3-发布-DRL真循环.md`
+>   - 新建：`docs/S3-方法论外部分享/W307-S3-发布-三skill闭环.md`
+>   - 新建：`docs/S3-方法论外部分享/W308-S3-发布-E1铁律.md`
+>   - 新建：`docs/S3-方法论外部分享/W309-S3-发布-Preflight与Subagent模板.md`
+>   - 更新：`docs/S3-方法论外部分享/README.md`（追加 4 篇索引 + 创建说明更新为 11 篇 + 后续计划调整至第四批剩余 2 篇）
+> - **验证**：主代理 spot-check 4 项 Grep 全部 No matches（绝对路径/内部文件/.trae-cn/commit hash/W### 编号）·脱敏验证通过·subagent 报告可信
+> - **状态**：已完成（2026-08-01）
+> - **S3 累计 11 篇**：W299-W301 首批 3 篇 + W302-W305 第二批 4 篇 + W306-W309 第三批 4 篇·13 篇内部方法论已发布 11 篇·剩余 2 篇（记忆研究理论框架/可视化测试计划）留待第四批
 
 ### v2.2.61（2026-08-01）：W302-W305 S3 方法论外部分享第二批 4 篇·中等改写工作量（双索引可追溯改造 + Subagent 盲信铁律 + 改动后影响面扫描 + E2 文档同步区分历史vs现役·4 subagent 并行创作·主代理 spot-check 脱敏验证通过·4 新建 + 1 README 更新 + 5 同步 = 10 文件）
 
