@@ -4,9 +4,17 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W296），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改过几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W297），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改过几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.2.58（2026-08-01）：W297 V1 dashboard KPI 数据更新·新增"项目研究矩阵"section（site/dashboard.html 新增 6 个 KPI 卡片展示 docs/ 6 方向文档数·A1 100 回/A2 43 篇/A3 199 篇/A4 192 篇/A5 22 篇/A6 12 篇·kpi-card 总数 45→51·复用现有 kpi-card 样式·点击跳转对应 docs/ 目录·V1 可视化深化·dashboard 45 KPI→51 KPI 声明更新）
+
+> **W297 V1 dashboard KPI 数据更新·新增"项目研究矩阵"section**
+> - **来源**：用户要求"继续推进"·选择 W297 V1 dashboard KPI 数据更新·短期优先级最后一项
+> - **执行**：site/dashboard.html 在三层架构导航区前新增"项目研究矩阵 · docs/ 内容总览"section·6 个 kpi-card 展示 docs/ 6 方向文档数（A1 逐回 100 回 + A2 随笔 43 篇 + A3 人物深化 199 篇 + A4 主题专题 192 篇 + A5 文化背景 22 篇 + A6 诗词歌赋 12 篇）·每个卡片含 label/value/desc/detail 四要素 + category-badge 分类标识·点击跳转对应 docs/ 目录·复用现有 kpi-card CSS 样式·kpi-card 总数 45→51
+> - **验证**：Grep 验证 dashboard.html kpi-card 总数 51 ✓ · "项目研究矩阵"等关键词命中 5 ✓ · README/STRUCTURE/项目说明 三文档头部版本号 v2.2.57→v2.2.58 + dashboard 45 KPI→51 KPI 同步更新
+> - **状态**：本次提交
 
 ### v2.2.57（2026-08-01）：W288-W296 A 方向内容扩容（A6 诗词 Batch 2 三篇 + A4 主题专题 Batch 23 三篇 + A5 文化背景 Batch 3 两篇 + A3 人物深化补遗三篇 = 11 篇新文档·11 新建 = 11 文件·A3 196→199 篇 + A4 189→192 篇 + A5 20→22 篇 + A6 9→12 篇·dispatching-parallel-agents 4 subagent 并行创作·主代理 spot-check 结构合规·W191 旧版"取经网络叙事学专题.md"被 subagent 误覆盖→git checkout 恢复 + 新文件改名为"取经网络叙事学深化专题.md"避免冲突）
 

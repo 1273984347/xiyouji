@@ -10,6 +10,18 @@
 
 ## 项目文件反向索引（按版本倒序，覆盖 site/data/ 可视化页面 + docs/ 文档 + 根目录 6 文件 + 其他）
 
+### v2.2.58 W297 V1 dashboard KPI 数据更新·新增"项目研究矩阵"section（site/dashboard.html 新增 6 个 KPI 卡片展示 docs/ 6 方向文档数·kpi-card 总数 45→51·1 修改 + 5 同步 = 6 文件）
+
+| 文件 | W ID | 改动摘要 |
+|:---|:---|:---|
+| site/dashboard.html | W297 | v2.2.58 修改·新增"项目研究矩阵 · docs/ 内容总览"section·6 个 kpi-card 展示 A1-A6 方向文档数·kpi-card 总数 45→51·复用现有 kpi-card CSS 样式·点击跳转对应 docs/ 目录 |
+| README.md | W297 | v2.2.58 同步·版本号 v2.2.57→v2.2.58·dashboard 45 KPI→51 KPI（含项目研究矩阵 6 卡片） |
+| STRUCTURE.md | W297 | v2.2.58 同步·版本号 v2.2.57→v2.2.58·dashboard 45 KPI→51 KPI（含项目研究矩阵 6 卡片） |
+| docs/00-导读/项目说明.md | W297 | v2.2.58 同步·版本号 v2.2.57→v2.2.58·dashboard 45 KPI→51 KPI（含项目研究矩阵 6 卡片） |
+| CHANGELOG.md | W297 | v2.2.58 同步·新增 W297 段·W### 编号规则更新 W296→W297 |
+| 交接文档.md | W297 | v2.2.58 同步·版本号 v2.2.57→v2.2.58·当前进度段新增 W297 里程碑·待办事项更新·W### 编号 W296→W297·底部时间更新 |
+| scripts/output/file-index.md | W297 | v2.2.58 同步·新增 W297 反向索引段 |
+
 ### v2.2.57 W288-W296 A 方向内容扩容（A6 诗词 Batch 2 三篇 + A4 主题专题 Batch 23 三篇 + A5 文化背景 Batch 3 两篇 + A3 人物深化补遗三篇 = 11 篇新文档·11 新建 + 4 同步 = 15 文件）
 
 | 文件 | W ID | 改动摘要 |
