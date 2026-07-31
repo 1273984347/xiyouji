@@ -1,7 +1,7 @@
-﻿# 目录结构说明
+# 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.2.51（进行中，2026-07-30）— A1 逐回 100 回 + A2 随笔 43 篇 + A3 人物深化 76 篇 + A4 主题专题 101 篇 + A5 文化 20 篇 + A6 诗词 9 篇 + S1 方法论 13 篇 + S2 学术投稿 8 篇 + S2 外部分享 16 篇 + 79 个 D3.js/Three.js 可视化页面（133 数据维度）+ dashboard 45 KPI + 全站搜索 + 学术索引 55 条 + hyperframes 多视频 + MCP Server + Playwright E2E 三层测试 + AI 代理协作模板 + E3-E8 工程化深化（性能/监控/SEO/安全/CI-CD/a11y 30 WCAG 2.2 规则）+ site/en/ 英文站。详细方向描述见 [CHANGELOG.md](CHANGELOG.md) 当前版本段，历史版本归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
+> 当前版本：v2.2.52（2026-07-31）— A1 逐回 100 回 + A2 随笔 43 篇 + A3 人物深化 197 篇 + A4 主题专题 169 篇 + A5 文化 20 篇 + A6 诗词 9 篇 + S1 方法论 13 篇 + S2 学术投稿 8 篇 + S2 外部分享 16 篇 + 79 个 D3.js/Three.js 可视化页面（133 数据维度）+ dashboard 45 KPI + 全站搜索 + 学术索引 55 条 + hyperframes 多视频 + MCP Server + Playwright E2E 三层测试 + AI 代理协作模板 + E3-E8 工程化深化（性能/监控/SEO/安全/CI-CD/a11y 30 WCAG 2.2 规则）+ site/en/ 英文站。详细方向描述见 [CHANGELOG.md](CHANGELOG.md) 当前版本段，历史版本归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
 
 ## 顶层结构
 
@@ -238,7 +238,7 @@
 
 ## 版本变更
 
-完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（v0.1-v2.2.51 共 284 个 W### ID）。v0.1-v2.0.60（W001-W087）已归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
+完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（v0.1-v2.2.52 共 285 个 W### ID）。v0.1-v2.0.60（W001-W087）已归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
 
 **主要阶段里程碑**：
 
