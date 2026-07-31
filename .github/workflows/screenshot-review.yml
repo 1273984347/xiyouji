@@ -1,0 +1,141 @@
+name: Screenshot Review
+
+# W298 E1 截图审查 CI 化 · v2.2.59
+#
+# 将三个截图审查脚本纳入 GitHub Actions CI：
+#   1. detect_unwrapped_tables.py — 静态扫描 HTML，检测未包裹 table（阻断）
+#   2. batch_screenshots.js        — Playwright 批量截图 + 布局断言 + 控制台异常（--fail-on-issues 阻断）
+#   3. slice_screenshots.py        — 截图切片为 800px 块，供像素级人工复核（非阻断，仅产物）
+#
+# 触发：
+#   - PR 改动 site/ 或三个脚本自身时
+#   - 每周一次定期审查（防止 site/ 长期静默退化）
+#   - workflow_dispatch 手动触发
+#
+# 失败阈值：
+#   - detect_unwrapped_tables.py 找到未包裹 table → exit 1 阻断
+#   - batch_screenshots.js --fail-on-issues 检测到 capture/page/console/layout 异常 → exit 1 阻断
+#   - slice_screenshots.py 失败不阻断（产物缺失仅影响人工复核）
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'scripts/batch_screenshots.js'
+      - 'scripts/slice_screenshots.py'
+      - 'scripts/detect_unwrapped_tables.py'
+      - '.github/workflows/screenshot-review.yml'
+  schedule:
+    # 每周一 02:00 UTC（北京时间 10:00）定期审查
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: screenshot-review-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  screenshot-review:
+    name: Screenshot Review (Playwright + Slice + Table Scan)
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install Python deps (Pillow)
+        run: pip install -r scripts/requirements.txt
+
+      - name: Install Playwright
+        run: |
+          npm install playwright @playwright/test
+          npx playwright install --with-deps chromium
+
+      - name: Detect unwrapped tables (baseline diff, blocking on new entries)
+        id: table-scan
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASELINE="scripts/output/unwrapped-tables-baseline.txt"
+          # 已知历史未包裹 table 文件清单（来自 W298 baseline 快照）
+          # 仅阻断"新增"未包裹 table，历史问题留作单独修复
+          KNOWN=$(grep -v '^#' "$BASELINE" | sed '/^$/d' | sort -u)
+
+          # 跑静态扫描，捕获输出（脚本本身会 exit 1，用 || true 容忍）
+          OUTPUT=$(python scripts/detect_unwrapped_tables.py --extra site/index.html 2>&1 || true)
+          echo "$OUTPUT"
+
+          # 提取实际报告的文件名（第一列 .html 结尾），去重排序
+          ACTUAL=$(echo "$OUTPUT" | awk '/\.html/ {print $1}' | sort -u)
+
+          # 新增未包裹 table = ACTUAL - KNOWN
+          NEW=$(comm -23 <(echo "$ACTUAL") <(echo "$KNOWN"))
+
+          if [ -n "$NEW" ]; then
+            echo "::error::检测到新增未包裹 table 文件（不在 baseline 内）："
+            echo "$NEW" | sed 's/^/  - /' >&2
+            echo "" >&2
+            echo "如需包裹：在 table 父 div 添加 class=\"table-wrap\" 或 style=\"overflow-x:auto\"。" >&2
+            echo "若确属历史问题，更新 scripts/output/unwrapped-tables-baseline.txt 后重试。" >&2
+            exit 1
+          fi
+
+          echo "✓ 无新增未包裹 table 文件（baseline 内历史问题 $(echo "$KNOWN" | wc -l) 个留待单独修复）。"
+
+      - name: Run batch screenshots (Playwright + layout assertions, blocking)
+        id: batch-screenshots
+        uses: nick-fields/retry@v3
+        with:
+          max_attempts: 2
+          timeout_minutes: 20
+          command: node scripts/batch_screenshots.js --fail-on-issues
+
+      - name: Slice screenshots (800px chunks, non-blocking)
+        id: slice
+        if: always() && steps.batch-screenshots.outcome == 'success'
+        continue-on-error: true
+        run: python scripts/slice_screenshots.py
+
+      - name: Summarize results
+        if: always()
+        run: |
+          echo "## W298 截图审查结果" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| 步骤 | 脚本 | 阻断 | 状态 |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|------|------|------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 表格扫描 | \`detect_unwrapped_tables.py\` | 是 | ${{ steps.table-scan.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 批量截图 | \`batch_screenshots.js --fail-on-issues\` | 是 | ${{ steps.batch-screenshots.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 截图切片 | \`slice_screenshots.py\` | 否 | ${{ steps.slice.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "完整报告见 \`screenshot-review-reports\` artifact。" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload screenshot artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshot-review-reports-${{ github.sha }}
+          path: |
+            scripts/output/screenshots/screenshot-summary.md
+            scripts/output/screenshots/layout-audit-report.md
+            scripts/output/screenshots/slice-index.md
+            scripts/output/screenshots/desktop/
+            scripts/output/screenshots/mobile/
+            scripts/output/screenshots/slices/
+          if-no-files-found: ignore
+          retention-days: 30
+# FILE_INDEX: .github/workflows/screenshot-review.yml | W298 | E1 截图审查 CI 化工作流

@@ -37,6 +37,7 @@ function parseArgs(argv) {
     outputDir: path.join(ROOT, 'scripts', 'output', 'screenshots'),
     viewports: { ...DEFAULT_VIEWPORTS },
     extraPages: [...DEFAULT_EXTRA_PAGES],
+    failOnIssues: false,
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -52,6 +53,8 @@ Options:
   --mobile WxH           Mobile viewport, e.g. 375x812 (default)
   --extra-pages LIST     Comma-separated "file:dir" pairs relative to project root,
                          e.g. "dashboard.html:site,index.html:site"
+  --fail-on-issues       Exit with code 1 if any capture error, page error,
+                         console error or layout issue is detected (CI mode).
   --help, -h             Show this help
 `);
         process.exit(0);
@@ -67,6 +70,9 @@ Options:
         break;
       case '--extra-pages':
         config.extraPages = parseExtraPages(args[++i]);
+        break;
+      case '--fail-on-issues':
+        config.failOnIssues = true;
         break;
       default:
         throw new Error(`Unknown argument: ${arg}`);
@@ -403,6 +409,31 @@ async function main() {
 
   fs.writeFileSync(auditPath, auditLines.join('\n'), 'utf-8');
   console.log(`Layout audit report written to ${auditPath}`);
+
+  // CI mode: fail the run if any capture error, page error, console error
+  // or layout issue was detected. Local development keeps the historical
+  // non-blocking behaviour so the summary/audit reports can still be inspected.
+  if (config.failOnIssues) {
+    const captureErrors = results.filter((r) => r.error);
+    const consoleErrors = results.filter((r) => !r.error && r.consoleErrors.length > 0);
+    const pageErrors = results.filter((r) => !r.error && r.pageErrors.length > 0);
+    const layoutIssues = results.filter((r) => !r.error && r.layoutIssues.length > 0);
+    const totalConsole = results.reduce((s, r) => s + (r.consoleErrors?.length || 0), 0);
+    const totalPage = results.reduce((s, r) => s + (r.pageErrors?.length || 0), 0);
+    const totalLayout = results.reduce((s, r) => s + (r.layoutIssues?.length || 0), 0);
+
+    console.log('\n=== CI failure check (--fail-on-issues) ===');
+    console.log(`  capture errors : ${captureErrors.length}`);
+    console.log(`  console errors : ${consoleErrors.length} file(s) / ${totalConsole} total`);
+    console.log(`  page errors    : ${pageErrors.length} file(s) / ${totalPage} total`);
+    console.log(`  layout issues  : ${layoutIssues.length} file(s) / ${totalLayout} total`);
+
+    if (captureErrors.length || totalConsole || totalPage || totalLayout) {
+      console.error('\n::error::Screenshot review failed — see summary/audit reports above.');
+      process.exit(1);
+    }
+    console.log('  -> all pages clean, CI check passed.');
+  }
 }
 
 main().catch((e) => {

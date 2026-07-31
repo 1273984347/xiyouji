@@ -10,6 +10,20 @@
 
 ## 项目文件反向索引（按版本倒序，覆盖 site/data/ 可视化页面 + docs/ 文档 + 根目录 6 文件 + 其他）
 
+### v2.2.59 W298 E1 截图审查 CI 化·新增 GitHub Actions screenshot-review workflow·三脚本纳入 CI（detect_unwrapped_tables baseline diff + batch_screenshots --fail-on-issues + slice_screenshots 800px 切片·1 新建 + 1 改造 + 1 baseline + 5 同步 = 8 文件）
+
+| 文件 | W ID | 改动摘要 |
+|:---|:---|:---|
+| .github/workflows/screenshot-review.yml | W298 | v2.2.59 新建·独立 workflow·PR paths + 每周一 02:00 UTC 定期 + workflow_dispatch 手动·detect_unwrapped_tables baseline diff 阻断 + batch_screenshots --fail-on-issues 阻断 + slice_screenshots 非阻断·artifacts 30 天保留·与 ci.yml screenshots-regression 区分 |
+| scripts/batch_screenshots.js | W298 | v2.2.59 改造·新增 `--fail-on-issues` flag·CI 模式下统计 captureErrors/consoleErrors/pageErrors/layoutIssues·任一 > 0 → process.exit(1)·本地开发行为不变 |
+| scripts/output/unwrapped-tables-baseline.txt | W298 | v2.2.59 新建·baseline 快照记录 10 个含历史未包裹 table 的 site/data 文件·CI 仅阻断新增·维护规则：修复后从此清单删除 |
+| README.md | W298 | v2.2.59 同步·版本号 v2.2.58→v2.2.59·CI workflows 3→4（新增 screenshot-review） |
+| STRUCTURE.md | W298 | v2.2.59 同步·版本号 v2.2.58→v2.2.59·CI workflows 3→4（新增 screenshot-review） |
+| docs/00-导读/项目说明.md | W298 | v2.2.59 同步·版本号 v2.2.58→v2.2.59·CI workflows 3→4（新增 screenshot-review） |
+| CHANGELOG.md | W298 | v2.2.59 同步·新增 W298 段·W### 编号规则更新 W297→W298 |
+| 交接文档.md | W298 | v2.2.59 同步·版本号 v2.2.58→v2.2.59·当前进度段新增 W298 里程碑·待办事项更新·W### 编号 W297→W298·底部时间更新 |
+| scripts/output/file-index.md | W298 | v2.2.59 同步·新增 W298 反向索引段 |
+
 ### v2.2.58 W297 V1 dashboard KPI 数据更新·新增"项目研究矩阵"section（site/dashboard.html 新增 6 个 KPI 卡片展示 docs/ 6 方向文档数·kpi-card 总数 45→51·1 修改 + 5 同步 = 6 文件）
 
 | 文件 | W ID | 改动摘要 |
