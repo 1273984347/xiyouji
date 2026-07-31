@@ -4,9 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W297），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改过几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W298），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.2.59（2026-08-01）：W298 E1 截图审查 CI 化·新增 GitHub Actions screenshot-review workflow·三脚本纳入 CI（detect_unwrapped_tables.py baseline diff 阻断新增 + batch_screenshots.js --fail-on-issues 阻断 capture/page/console/layout 异常 + slice_screenshots.py 800px 切片产物非阻断·PR paths 触发 + 每周一 02:00 UTC 定期 + workflow_dispatch 手动·30 天 artifact 保留·3 workflows→4 workflows·E1 工程化深化）
+
+> **W298 E1 截图审查 CI 化**
+> - **来源**：用户要求"继续推进"·选择 W298 E1 截图审查 CI 化·将 batch_screenshots.js + slice_screenshots.py + detect_unwrapped_tables.py 纳入 GitHub Actions CI
+> - **执行**：
+>   - `.github/workflows/screenshot-review.yml` 新建·独立 workflow（与现有 ci.yml 的 screenshots-regression baseline diff 区分）·触发：PR paths（site/** + 三脚本自身 + workflow 文件）+ 每周一 02:00 UTC 定期 + workflow_dispatch 手动·concurrency group 防并发·timeout 25 分钟
+>   - **detect_unwrapped_tables.py step（baseline diff 阻断）**：bash shell 跑脚本捕获输出 + 提取实际未包裹 table 文件名 + 与 scripts/output/unwrapped-tables-baseline.txt 比对·仅阻断"新增"未包裹 table·baseline 内 10 个历史问题留待单独修复·避免 CI 立即阻断所有 PR
+>   - **batch_screenshots.js step（--fail-on-issues 阻断）**：nick-fields/retry 2 次重试·20 分钟超时·capture error + page error + console error + layout issue 任一 > 0 即 exit 1·CI 失败检查段输出各类异常计数
+>   - **slice_screenshots.py step（非阻断）**：continue-on-error: true·仅生成 800px 切片产物供人工像素级复核
+>   - **scripts/batch_screenshots.js 改造**：新增 `--fail-on-issues` flag·本地开发行为不变·CI 模式下统计 captureErrors/consoleErrors/pageErrors/layoutIssues·任一 > 0 → process.exit(1)
+>   - **scripts/output/unwrapped-tables-baseline.txt 新建**：W298 baseline 快照·记录当前 10 个含历史未包裹 table 的 site/data 文件（character-dynamic-network / four-heavenly-kings-artifacts / hardship-difficulty-heatmap / hardship-heatmap / heaven-power-network / journey-spacetime / monster-background × 2 / monster-ecology-network × 2 / pilgrim-team-dynamic-network / theological-intervention-network）·维护规则：修复某文件后从此清单删除·新增历史问题不主动添加（应直接修复）
+>   - **artifacts 上传**：screenshot-review-reports-${{ github.sha }}·含 screenshot-summary.md + layout-audit-report.md + slice-index.md + desktop/ + mobile/ + slices/ 目录·30 天保留·if-no-files-found: ignore
+>   - **GITHUB_STEP_SUMMARY**：表格展示三脚本阻断状态与 outcome
+> - **验证**：YAML 合法性 `py -c "import yaml; yaml.safe_load(...)"` ✓ · Python 脚本 ast 语法检查 ✓ · Node 脚本 `node -c` 语法检查 ✓ · `node scripts/batch_screenshots.js --help` 输出含 `--fail-on-issues` flag ✓ · detect_unwrapped_tables.py 实际跑通（10 文件命中）✓ · baseline diff 本地模拟：actual=10 baseline=10 new=[] → CI 会通过 ✓
+> - **状态**：本次提交
 
 ### v2.2.58（2026-08-01）：W297 V1 dashboard KPI 数据更新·新增"项目研究矩阵"section（site/dashboard.html 新增 6 个 KPI 卡片展示 docs/ 6 方向文档数·A1 100 回/A2 43 篇/A3 199 篇/A4 192 篇/A5 22 篇/A6 12 篇·kpi-card 总数 45→51·复用现有 kpi-card 样式·点击跳转对应 docs/ 目录·V1 可视化深化·dashboard 45 KPI→51 KPI 声明更新）
 

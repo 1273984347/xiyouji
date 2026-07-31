@@ -1,0 +1,14 @@
+# W298 E1 截图审查 CI 化 baseline
+# 当前已知含未包裹 table 的 site/data 文件清单（2026-08-01 快照）。
+# CI 仅阻断"新增"未包裹 table 文件，baseline 内的历史问题留作单独修复。
+# 维护方式：修复某文件后从此清单删除该行；新增历史问题不主动添加（应直接修复）。
+character-dynamic-network.html
+four-heavenly-kings-artifacts.html
+hardship-difficulty-heatmap.html
+hardship-heatmap.html
+heaven-power-network.html
+journey-spacetime.html
+monster-background.html
+monster-ecology-network.html
+pilgrim-team-dynamic-network.html
+theological-intervention-network.html
