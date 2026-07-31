@@ -4,9 +4,17 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W286d），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改过几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W287），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改过几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.2.56（2026-08-01）：W287 pre-commit 自动化校验门禁建立 + 文件计数声明修复（scripts/pre-commit-validate.py 新建·三项校验：版本号一致性/文件计数一致性/声明计数一致性·.git/hooks/pre-commit 钩子安装·E3 铁律双重门禁强化：门禁1 TodoWrite 清单 + 门禁2 pre-commit 自动化校验·A3 人物深化 197→196 篇 + A4 主题专题 190→189 篇声明数修正匹配实际·project_memory.md E3 铁律更新·防复发机制建立）
+
+> **W287 pre-commit 自动化校验门禁建立 + 文件计数声明修复**
+> - **来源**：用户质问"完成任务后未及时同步文档"失误复发·要求建立防复发机制·选择"自动化校验脚本 + 强制 TodoWrite 门禁"两者都要方案
+> - **执行**：scripts/pre-commit-validate.py 新建（版本号一致性 + 文件计数一致性 + 声明计数一致性三项校验·从 CHANGELOG 提取版本号 + 从 README 解析期望计数 + 实际目录计数对比）+ .git/hooks/pre-commit 钩子安装（py -3 scripts/pre-commit-validate.py --quiet）+ project_memory.md E3 铁律追加双重门禁（门禁1 TodoWrite 清单 + 门禁2 pre-commit 自动化校验）+ README/STRUCTURE/项目说明 三文档头部 A3 197→196/A4 190→189 声明数修正（历史遗留计数差异·W286 21 篇验证齐全·差异来自更早批次计数错误）
+> - **验证**：py -3 scripts/pre-commit-validate.py 运行 exit code 0 ✓ · 三项校验全部通过（版本号 v2.2.56 一致 + 文件计数 A1=100/A2=43/A3=196/A4=189/A5=20/A6=9 一致 + 声明计数 README=STRUCTURE=项目说明 一致）
+> - **状态**：本次提交
 
 ### v2.2.55（2026-07-31）：W286c 审查修复 + W286d 文档过时信息全面修复（全面审查项目所有文件·清除第069/099回网页垃圾内容·第099回追加缺失深度解读SD075·7个已迁移源.txt 删除·w286c_fix_junk.py 脚本·4 文件修复 + 7 文件删除 + 1 新建脚本·W286d 交接文档.md 14处过时信息修复 + 项目说明.md 3处 + README.md 1处·E3 收尾文档同步铁律建立 + DRL 门禁·全面审查发现"局部更新"而非"全文审查"失误）
 
