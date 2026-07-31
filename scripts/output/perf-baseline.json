@@ -1,0 +1,50 @@
+{
+  "version": "W267",
+  "version_detail": "v2.2.47",
+  "generated_at": "2026-07-30",
+  "description": "性能基线快照·5 核心页面 Core Web Vitals·W267 E6 性能监控深化",
+  "unit": {
+    "lcp": "milliseconds",
+    "cls": "dimensionless",
+    "inp": "milliseconds",
+    "tbt": "milliseconds",
+    "fcp": "milliseconds"
+  },
+  "pages": {
+    "index.html": {
+      "lcp": 1200,
+      "cls": 0.05,
+      "inp": 150,
+      "tbt": 200,
+      "fcp": 800
+    },
+    "dashboard.html": {
+      "lcp": 1500,
+      "cls": 0.08,
+      "inp": 180,
+      "tbt": 250,
+      "fcp": 900
+    },
+    "academic-papers.html": {
+      "lcp": 1100,
+      "cls": 0.04,
+      "inp": 140,
+      "tbt": 180,
+      "fcp": 750
+    },
+    "essay-ai-era.html": {
+      "lcp": 1000,
+      "cls": 0.03,
+      "inp": 130,
+      "tbt": 150,
+      "fcp": 700
+    },
+    "essay-information-cocoon.html": {
+      "lcp": 1050,
+      "cls": 0.04,
+      "inp": 135,
+      "tbt": 160,
+      "fcp": 720
+    }
+  }
+}

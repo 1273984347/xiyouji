@@ -4,11 +4,68 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W244），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改过几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W284），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改过几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
-### v2.2.43 — 进行中（2026-07-30）：W237-W244 A3 女性人物深化专题八篇并行（精神分析女性主义+凝视理论+性别表演理论+物质女性主义+后人类女性主义+酷儿理论+后殖民女性主义+女神政治学八理论框架·dispatching-parallel-agents 八 subagent 并行·8 新建 = 8 文件·A3 人物深化 60→68 篇）
+### v2.2.51 — 进行中（2026-07-30）：W281-W284 跨方向整合项目主题 4·西游四维研究（A 文档 + V 页面 + E a11y 深化 + S 短文·AVES 四方向串行·4 产出 = 4 文件·跨方向整合项目主题 4 完整闭环·四主题串行收束）
+
+> **W281-W284 跨方向整合项目主题 4·西游四维研究**
+> - **来源**：用户选择跨方向整合项目·四个主题全做·方法 C 四主题串行·主题 4 西游四维研究（修行心性+权力政治+文化记忆+时间叙事四维整合）·4 方向串行执行（A→V→E→S）
+> - **W281 A 方向文档**：docs/03-主题与情节专题/西游四维研究专题.md 新建·九段式·12 理论家四维整合（王阳明《传习录》+弗洛伊德《精神分析引论》+荣格《心理学与炼金术》+福柯《规训与惩罚》+韦伯《经济与社会》+马基雅维利《君主论》+阿斯曼《文化记忆》+哈布瓦赫《集体记忆》+姚斯《接受美学》+海德格尔《存在与时间》+热奈特《叙事话语》+里柯尔《时间与叙事》）·修行心性+权力政治+文化记忆+时间叙事四维度·8 处 line 号·与 W269 取经团队动力学/W273 妖怪生态学/W277 神学干预机制形成四主题串行收束·A4 主题专题 100→101 篇
+> - **W282 V 方向页面**：site/data/four-dimensional-research-network.html 新建·D3.js 五图表·四维雷达图+12 理论家×4 维度矩阵热力图+四维整合网络图+100 回四维强度时间线+四维谱系极坐标图·4 维度+12 理论家+8 line 号·古典宣纸风配色·与 theological-intervention-network.html 形成"神学-四维"双轨
+> - **W283 E 方向 a11y 深化**：scripts/a11y_audit.py 升级·WCAG 2.2 26→30 规则·新增 4 项深化规则（E2-27 持续可用 WCAG 2.2.2·自动播放/滚动/动画需可暂停 + E2-28 无闪烁 WCAG 2.3.1·不含超过 3 次/秒闪烁 + E2-29 可编程确定 WCAG 4.1.1·HTML 无严重解析错误 + E2-30 不变功能 WCAG 3.2.3·一致导航元素保持相同顺序）·脚本退出码 0·全站 30 规则审查通过
+> - **W284 S 方向短文**：docs/S2-外部分享/S2-发布-西游四维研究.md 新建·西游四维研究跨学科分析短文·约 2900 字·导语+修行心性+权力政治+文化记忆+时间叙事+四维整合+结语七段式·公众号/知乎发布格式·S2 外部分享 15→16 篇
+> - **验证**：DRL R1b 主代理 spot-check 真收敛·P0=0/P1=0/P2=0/P3=0·4 文件存在性 + W281 九段式结构完整 + 12 理论家引用准确 + 8 line 号 + W282 D3.js 五图表 + W283 a11y 4 新规则 ID E2-27 到 E2-30 + W284 短文 2900 字 + 无 placeholder
+> - **跨方向呼应**：W281 与 W269 取经团队动力学形成"团队-四维"双轨·W281 与 W273 妖怪生态学形成"妖怪-四维"双轨·W281 与 W277 神学干预机制形成"神学-四维"双轨·W282 与 theological-intervention-network.html 形成"神学-四维"可视化双轨·W283 与 W279 a11y 26 规则形成"26→30 规则"升级·W284 与 S2-发布-西游神学干预机制形成"神学-四维"短文双视角·跨方向整合项目主题 4 AVES 四方向完整闭环·跨方向整合项目方法 C 四主题串行完整收束（主题 1-4）
+
+### v2.2.50（2026-07-30）：W277-W280 跨方向整合项目主题 3·宗教与神学体系（A 文档 + V 页面 + E a11y 深化 + S 短文·AVES 四方向串行·4 产出 = 4 文件·跨方向整合项目主题 3 完整闭环）
+
+> **W277-W280 跨方向整合项目主题 3·宗教与神学体系**
+> - **来源**：用户选择跨方向整合项目·四个主题全做·方法 C 四主题串行·主题 3 宗教与神学体系·4 方向串行执行（A→V→E→S）
+> - **W277 A 方向文档**：docs/03-主题与情节专题/神学干预机制专题.md 新建·九段式·鲁道夫·奥托《论神圣》（神圣感四要素：受造感+全能感+敬畏感+奥秘感）+ 米尔恰·伊利亚德《神圣与世俗》（显圣 hierophany+圣化空间+神显时间）+ 保罗·田立克《系统神学》（终极关怀+神学符号+存在勇气）+ 约翰·希克《宗教哲学》（多元主义+The Real+神祇译为文化符号）四理论家首次整合·显化-点化-试炼-收服-授记五型干预结构 + 佛性论-道性论-心性论三轴神学逻辑·13 处 line 号·与 W192 三教合一思想史形成"思想史-神学"双轨·与 W135 明代宗教制度形成"制度-教义"双轨·A4 主题专题 96→97 篇
+> - **W278 V 方向页面**：site/data/theological-intervention-network.html 新建·D3.js 力导向神学网络图·五型干预能量流桑基图·三教神学雷达图叠加·神学干预时间线·四理论家 × 五型干预矩阵·三轴神学谱系五图表·3 三教神祇 + 5 干预型 + 13 line 号·古典宣纸风配色·与 monster-ecology-network.html 形成"妖怪-神学"双轨·与 pilgrim-team-dynamics.html 形成"团队-神学"双轨
+> - **W279 E 方向 a11y 深化**：scripts/a11y_audit.py 升级·WCAG 2.2 21→26 规则·新增 5 项 a11y 深化规则（E2-22 表单错误识别 WCAG 3.3.1·错误提示需文本呈现 + E2-23 表单标签或指令 WCAG 3.3.2·表单控件需关联 label + E2-24 表单错误建议 WCAG 3.3.3·错误提示需提供修正建议 + E2-25 状态消息角色 WCAG 4.1.3·动态消息需 role=status/alert + E2-26 目标尺寸最小增强 WCAG 2.5.8·紧凑元素需 min-size 兜底）·脚本退出码 0·全站 26 规则审查通过
+> - **W280 S 方向短文**：docs/S2-外部分享/S2-发布-西游神学干预机制.md 新建·神学干预机制跨学科分析短文·约 2800 中文字符·导语 + 奥托神圣感 + 伊利亚德显圣 + 田立克终极关怀 + 希克多元主义 + 三重透镜 + 结语七段式·与 W277 A 文档/W278 V 页面/W279 E a11y 深化配套·公众号/知乎发布格式·S2 外部分享 14→15 篇
+> - **验证**：DRL R1b 主代理 spot-check 真收敛·P0=0/P1=0/P2=0/P3=0·4 文件存在性 + W277 九段式结构完整 + 四理论家引用准确 + 13 line 号归属正确（修复 13 处 line 号索引错误）+ W278 D3.js 五图表 + W279 a11y 5 新规则 ID E2-22 到 E2-26 + W280 短文 2800 字 + 无 placeholder
+> - **跨方向呼应**：W277 与 W192 三教合一思想史形成"思想史-神学"双轨·W277 与 W135 明代宗教制度形成"制度-教义"双轨·W278 与 monster-ecology-network.html 形成"妖怪-神学"双轨·W278 与 pilgrim-team-dynamics.html 形成"团队-神学"双轨·W279 与 W275 a11y 21 规则形成"21→26 规则"升级·W280 与 S2-发布-西游与心理学形成"心理学-神学"双视角·跨方向整合项目主题 3 AVES 四方向完整闭环（A→V→E→S）
+
+### v2.2.49 — 2026-07-30：W273-W276 跨方向整合项目主题 2·妖怪生态学（A 文档 + V 页面 + E a11y 深化 + S 短文·AVES 四方向串行·4 产出 = 4 文件·跨方向整合项目主题 2 完整闭环）
+
+> **W273-W276 跨方向整合项目主题 2·妖怪生态学**
+> - **来源**：用户选择跨方向整合项目·四个主题全做·方法 C 四主题串行·主题 2 妖怪生态学·4 方向串行执行（A→V→E→S）
+> - **W273 A 方向文档**：docs/03-主题与情节专题/妖怪生态学专题.md 新建·六段式·查尔斯·埃尔顿食物链与生态金字塔（四级金字塔·生产者→一级消费者→二级消费者→顶级捕食者·大鹏金翅雕关键种）+ 尤金·奥德姆生态位与栖息地分化（五种生态位山地/水域/洞穴/天庭/凡间·竞争排斥原理·火焰山生态位重叠冲突）+ 罗伯特·麦克阿瑟 r/K 选择与共生关系（r 策略蜘蛛精七姐妹 vs K 策略牛魔王家族·互利共生金角银角-九尾狐/偏利共生黄袍怪-百花羞/寄生蝎子精-女儿国）+ 罗伯特·梅种群动态与稳定性四理论框架首次整合·与 W108 妖怪经济学形成"经济-生态"双层研究
+> - **W274 V 方向页面**：site/data/monster-ecology-network.html 新建·D3.js 力导向生态网络图·节点-链接-能量流桑基图·妖怪生态位雷达图·种群动态时间线四图表·古典宣纸风配色·与 monster-capability-radar.html 形成"生态-能力"双维
+> - **W275 E 方向 a11y 深化**：scripts/a11y_audit.py 升级·WCAG 2.2 16→21 规则·新增 5 项 a11y 深化规则（E2-17 键盘焦点 DOM 顺序·原生元素冗余 tabindex=0 + E2-18 滚动陷阱检测·onscroll 重置+overflow:hidden 无关闭机制 + E2-19 颜色单一信息载体·状态类名需配文本/icon + E2-20 文字间距可调·!important 锁死+nowrap 阻止重排 + E2-21 内容重排焦点保持·viewport 禁用缩放+固定宽度）·脚本退出码 0·全站 21 规则审查通过
+> - **W276 S 方向短文**：docs/S2-外部分享/S2-发布-西游妖怪生态学.md 新建·妖怪生态学跨学科分析短文·约 2772 中文字符·导语 + 埃尔顿食物链 + 奥德姆生态位 + 麦克阿瑟共生与 r/K 选择 + 现代启示三重透镜 + 结语·与 W273 A 文档/W274 V 页面/W275 E a11y 深化配套·公众号/知乎发布格式·S2 外部分享 13→14 篇
+> - **验证**：DRL R1b 主代理 spot-check 真收敛·P0=0/P1=0/P2=0/P3=0·4 文件存在性 + W273 六段式结构完整 + 四理论家引用准确 + W274 D3.js 力导向网络四图表 + W275 a11y 5 新规则 ID E2-17 到 E2-21 + W276 短文 2772 字 + 无 placeholder
+> - **跨方向呼应**：W273 与 W108 妖怪经济学形成"经济-生态"双轨·W274 与 monster-capability-radar.html 形成"生态-能力"双维·W275 与 W271 a11y 16 规则形成"16→21 规则"升级·W276 与 S2-发布-西游与经济学形成"经济-生态"双视角·跨方向整合项目主题 2 AVES 四方向完整闭环（A→V→E→S）
+
+### v2.2.48 — 2026-07-30：W269-W272 跨方向整合项目主题 1·取经团队动力学（A 文档 + V 页面 + E a11y 深化 + S 短文·AVES 四方向串行·4 产出 = 4 文件·跨方向整合项目主题 1 完整闭环）
+
+> **W269-W272 跨方向整合项目主题 1·取经团队动力学**
+> - **来源**：用户选择跨方向整合项目·四个主题全做·方法 C 四主题串行·主题 1 取经团队动力学·4 方向串行执行（A→V→E→S）
+> - **W269 A 方向文档**：docs/02-人物深度分析/取经团队动力学深化专题.md 新建·六段式·Belbin 团队角色理论（九角色配置·5 人覆盖 8 种缺监督评估者）+ Tuckman 团队发展模型（形成期 15 回-震荡期 38 回-规范期 23 回-执行期 19 回-解散期 1 回）+ 群体动力学（目标-角色-互动三要素·表层共识-深层分化结构）三框架首次整合·五成员 Belbin 角色深化 + Tuckman 四阶段演化 + 群体动力学冲突机制 + 跨学科现代启示
+> - **W270 V 方向页面**：site/data/pilgrim-team-dynamic-network.html 新建·D3.js force-directed 关系网络·5 节点 + 多边·三视图模式（全部关系/冲突关系/合作关系）+ Belbin 角色雷达图 + Tuckman 阶段时间线·点击节点展开角色卡片·古典宣纸风配色
+> - **W271 E 方向 a11y 深化**：scripts/a11y_audit.py 升级·WCAG 2.2 9→16 规则·新增 7 项 a11y 深化规则（E2-10 ARIA live regions 验证 + E2-11 tabindex 顺序 + E2-12 焦点陷阱 + E2-13 sr-only 文本 + E2-14 跳过链接 + E2-15 标题层级 + E2-16 landmark 完整性）·动态更新内容屏幕阅读器可感知性提升
+> - **W272 S 方向短文**：docs/S2-外部分享/S2-发布-西游与团队动力学心理学.md 新建·心理学跨学科分析短文·约 2100 字·导语 + Belbin 角色心理学 + Tuckman 发展心理学 + 群体动力学 + 现代启示三重透镜 + 结语·与 W269 A 文档/W270 V 页面/W271 E a11y 深化配套·公众号/知乎发布格式·S2 外部分享 12→13 篇
+> - **验证**：DRL R1b 主代理 spot-check 真收敛·P0=0/P1=0/P2=0/P3=0·4 文件存在性 + W269 六段式结构完整 + 三理论家引用准确 + W270 D3.js force-coded 网络三视图模式 + W271 a11y 7 新规则 ID E2-10 到 E2-16 + W272 短文 2100 字 + 无 placeholder
+> - **跨方向呼应**：W269 与 W034 取经团队动力学基础文档形成"基础-深化"双轨·W270 与 pilgrim-team-psychology-arc.html 形成"团队网络-个体心理"双层·W271 与 W264 a11y 9 规则形成"9→16 规则"升级·W272 与 S2-发布-西游与现代组织管理形成"心理学-组织管理"双视角·跨方向整合项目主题 1 AVES 四方向完整闭环（A→V→E→S）
+
+### v2.2.47 — 2026-07-30：W263-W268 E 方向六产出深化（E1 CI/CD matrix 9+pip-audit+ruff + E2 a11y WCAG 2.2 四新规则 + E3 perf_optimize.py LCP+Canvas+CSS+JS+Minify + E5 测试覆盖率 80%+Lighthouse CI+8 E2E 用例 + E6 RUM+alerting+perf-budget + E8 CSP+SRI+pip-audit+_headers·dispatching-parallel-agents 三 subagent 并行·6 产出 = 14 文件·E 方向 6 子方向深化收束）
+
+> **W263-W268 E 方向六产出深化**
+> - **来源**：用户选择 S/E/V 三方向全做·方法 C 分三批执行·第二批 E 方向六子方向深化·E1+E2+E3+E5+E6+E8·dispatching-parallel-agents 三 subagent 并行
+> - **W263 E1 CI/CD 深化**：ci.yml 升级·matrix 9（Python 3.10/3.11/3.12 × ubuntu/windows/macos）+ pip 缓存 + artifact 30 天 + 失败重试 3 次 + 并发取消旧 run + 新增 dependency-scan job（pip-audit）+ code-quality job（ruff+black）
+> - **W264 E2 a11y 深化**：a11y_audit.py 升级·WCAG 2.1→2.2·5→9 规则（规则 6 焦点可见+规则 7 目标尺寸 24px+规则 8 拖拽移动+规则 9 一致帮助）+ 键盘导航审计（Tab 顺序+焦点陷阱）+ ARIA 标签验证
+> - **W265 E3 性能深化**：perf_optimize.py 新建·6 模块（optimize_lcp 图片懒加载+资源预加载+字体子集化 / convert_svg_to_canvas SVG→Canvas 阈值切换 / inline_critical_css 首屏 CSS 内联 / add_defer_async defer/async 自动添加 / minify_resources HTML/CSS/JS 压缩 / generate_report 报告生成）
+> - **W266 E5 测试深化**：3 单元测试新建（test_perf_optimize.py 14 test + test_security_scan.py 12 test + test_a11y_audit.py 31 test）+ perf.yml Lighthouse CI（LCP<2.5s/CLS<0.1/TBT<300ms）+ test_w266_e2e_extended.js 8 Playwright 用例
+> - **W267 E6 监控深化**：perf_monitor.py 升级·4 新函数（collect_rum_metrics RUM 采集+check_alerts Core Web Vitals 阈值警报+compare_trend 历史趋势对比+check_budget 性能预算校验）+ rum.js 新建（5 指标 LCP/CLS/INP/TBT/FCP+PerformanceObserver+采样率）+ perf-budget.json 6 预算项 + perf-baseline.json 5 页面基线
+> - **W268 E8 安全深化**：security_scan.py 升级·3 新函数（scan_headers _headers 验证+scan_sri SRI 验证+run_pip_audit 依赖扫描）+ site/_headers 新建（CSP+X-Frame-Options+X-Content-Type-Options+Referrer-Policy+Permissions-Policy 5 安全头）+ .env.example 新建（脱敏模板）
+> - **验证**：DRL R1b 主代理 spot-check 真收敛·P0=0/P1=0/P2=0/P3=0·14 文件存在性+ci.yml 9 矩阵+2 新 job+a11y_audit.py 9 规则+perf_optimize.py 6 模块+perf_monitor.py 4 新函数+security_scan.py 3 新函数+site/_headers 5 安全头+rum.js 5 指标+perf-budget.json 6 预算项+perf-baseline.json 5 页面+.env.example 5 变量+3 测试文件+perf.yml Lighthouse CI+8 E2E 用例全部命中·无 placeholder
+> - **跨方向呼应**：W263 与 W234-E1 CI/CD 形成"基础→深化"双轨·W264 与 W234-E2 a11y 形成"5 规则→9 规则"升级·W265 与 W236-E3 性能优化形成"方案→实施"双轨·W266 与 W236-E5 测试深化形成"三层→四层"升级·W267 与 W236-E6 性能监控形成"采集→alerting"升级·W268 与 W236-E8 安全加固形成"扫描→防御"升级
+
+### v2.2.43 — 已完成（2026-07-30）：W237-W244 A3 女性人物深化专题八篇并行（精神分析女性主义+凝视理论+性别表演理论+物质女性主义+后人类女性主义+酷儿理论+后殖民女性主义+女神政治学八理论框架·dispatching-parallel-agents 八 subagent 并行·8 新建 = 8 文件·A3 人物深化 60→68 篇）
 
 > **W237-W244 A3 女性人物深化专题八篇并行**
 > - **来源**：用户选择 A3 女性人物专题·8 位全做·大范围 8 产出·dispatching-parallel-agents 八 subagent 并行
@@ -23,7 +80,31 @@
 > - **验证**：DRL R1b 主代理 spot-check 真收敛·P0=0/P1=0/P2=0/P3=0·8 篇九段式结构完整·四理论家齐全·四核心概念齐全·line 号归属正确·术语表 30 个·footer 双索引完整·无 placeholder
 > - **跨方向呼应**：与 W220-W222 心理学三专题形成"男性心理学-女性主义"性别双轨·与 W223-W225 宗教史三专题形成"宗教-女神"双轨·与 W232 明代历史原型对照形成"男性历史-女性理论"双轨·八篇内部"经典女性主义（W237-W239）-前沿女性主义（W240-W242）-后殖民/女神（W243-W244）"三段递进
 
-### v2.2.44 — 进行中（2026-07-30）：W245-W252 A3 男性人物深化专题八篇并行（霸权男性气质研究+神圣男性研究+精神分析男性主义+酷儿男性研究+物质男性主义+后殖民男性气质+生态男性主义+媒介男性主义八理论框架·dispatching-parallel-agents 八 subagent 并行·8 新建 = 8 文件·A3 人物深化 68→76 篇）
+### v2.2.46 — 已完成（2026-07-30）：W257-W262 S 方向六产出（S1 方法论深化 2 + S2 学术投稿 2 + S2 外部分享 2·dispatching-parallel-agents 三 subagent 并行·6 新建 = 6 文件·S1 方法论 9→11 篇·S2 学术投稿 6→8 篇·S2 外部分享 10→12 篇）
+
+> **W257-W262 S 方向六产出**
+> - **来源**：用户选择 S/E/V 三方向全做·方法 C 分三批执行·第一批 S 方向三子方向全做·dispatching-parallel-agents 三 subagent 并行
+> - **W257 dispatching-parallel-agents 四 subagent 并行模式**：基于 W253-W256 四 subagent 并行经验·模式定义+适用场景+设计原则+执行流程+spot-check 策略+假收敛应对+三 skill 闭环关系+案例·S1 方法论沉淀第 10 篇
+> - **W258 记忆研究理论框架应用方法论**：阿斯曼文化记忆+哈布瓦赫集体记忆+诺拉记忆之场+利科记忆伦理四框架应用方法论·四框架核心概念+西游记切入点+line 号引用策略+九段式结构适配+跨专题呼应设计+案例·S1 方法论沉淀第 11 篇
+> - **W259 学术投稿候选-记忆研究方法论**：基于 W253-W256 A4 记忆研究四篇·摘要+研究背景+方法论框架+应用分析+讨论+关联文档+参考文献·投稿目标：记忆研究/文学批评期刊·S2 学术投稿候选第 7 篇
+> - **W260 学术投稿候选-A3 性别对照双轨方法论**：基于 W237-W252 A3 男女八框架性别对照双轨·摘要+研究背景+性别对照双轨框架+应用分析+讨论+关联文档+参考文献·投稿目标：性别研究/文学批评期刊·S2 学术投稿候选第 8 篇
+> - **W261 S2-发布-西游与记忆研究**：基于 W253-W256 A4 记忆研究四篇·导语+文化记忆+集体记忆+记忆之场+记忆伦理+结尾互动·发布平台：公众号/知乎·S2 外部分享第 11 篇
+> - **W262 S2-发布-西游与男性研究**：基于 W245-W252 A3 男性人物深化八篇·导语+霸权男性气质+神圣男性+精神分析男性主义+酷儿男性研究+物质男性主义+后殖民男性气质+生态男性主义+媒介男性主义+结尾互动·发布平台：公众号/知乎·S2 外部分享第 12 篇
+> - **验证**：DRL R1b 主代理 spot-check 真收敛·P0=0/P1=0/P2=0/P3=0·6 文件存在性+W### ID+版本号 v2.2.46+footer 双索引全部命中·无真正 placeholder（3 次 TBD/TODO 命中为描述性文字 false positive）
+> - **跨方向呼应**：W257←W253-W256 经验·W258←W253-W256 四篇·W259←W253-W256+W161 时间叙事学·W260←W237-W252 十六篇·W261←W253-W256 四篇·W262←W245-W252 男性八篇
+
+### v2.2.45 — 已完成（2026-07-30）：W253-W256 A4 主题专题·记忆研究四篇并行（文化记忆+集体记忆+记忆之场+记忆伦理四理论框架·dispatching-parallel-agents 四 subagent 并行·4 新建 = 4 文件·A4 主题专题 91→95 篇·A4 方向第 92-95 个新维度）
+
+> **W253-W256 A4 主题专题·记忆研究四篇并行**
+> - **来源**：用户选择 A4 主题专题新维度·记忆研究方向·方法 B 四篇并行·dispatching-parallel-agents 四 subagent 并行
+> - **W253 文化记忆专题**：扬·阿斯曼（Jan Assmann·《Das kulturelle Gedächtnis》1992）·文化记忆+仪式重复+经典文本+文化身份四核心概念·第12回 line 1200+第14回 line 1443+第98回 line 8900+第100回 line 914·A4 方向第 92 个新维度
+> - **W254 集体记忆专题**：莫里斯·哈布瓦赫（Maurice Halbwachs·《La mémoire collective》1950）·集体记忆+社会框架+记忆群体+现在的视角四核心概念·第7回 line 722+第14回 line 1443+第57回 line 4378-4379+第58回 line 4432-4434·A4 方向第 93 个新维度
+> - **W255 记忆之场专题**：皮埃尔·诺拉（Pierre Nora·《Les lieux de mémoire》1984-1992）·记忆之场+物质性+功能性+象征性四核心概念·第1回 line 522+第2回 line 235+第14回 line 1519+第98回 line 8900·A4 方向第 94 个新维度
+> - **W256 记忆伦理专题**：保罗·利科（Paul Ricœur·《La mémoire, l'histoire, l'oubli》2000）·记忆伦理+遗忘伦理+宽恕+历史与记忆的区分四核心概念·第7回 line 724+第14回 line 1519+第27回 line 2305+第100回 line 914·A4 方向第 95 个新维度·记忆研究四框架系列收束
+> - **验证**：DRL R1b 主代理 spot-check 真收敛·P0=0/P1=0/P2=0/P3=0·4 篇九段式结构完整·四理论家齐全·四核心概念齐全·line 号归属正确·术语表 22/24/22/22 个·footer 双索引完整·无 placeholder
+> - **跨方向呼应**：与 W161 时间叙事学（同理论家利科）形成"时间-记忆"跨专题呼应·与 W141 创伤叙事学形成"创伤-记忆"二元结构·与 W117 历史学专题形成"历史-记忆"二元结构·四篇内部"文化（W253）-集体（W254）-场所（W255）-伦理（W256）"四元结构形成记忆研究完整闭环·A4 方向第 92-95 个新维度
+
+### v2.2.44 — 已完成（2026-07-30）：W245-W252 A3 男性人物深化专题八篇并行（霸权男性气质研究+神圣男性研究+精神分析男性主义+酷儿男性研究+物质男性主义+后殖民男性气质+生态男性主义+媒介男性主义八理论框架·dispatching-parallel-agents 八 subagent 并行·8 新建 = 8 文件·A3 人物深化 68→76 篇）
 
 > **W245-W252 A3 男性人物深化专题八篇并行**
 > - **来源**：用户选择 A3 男性人物专题·8 位全做·大范围 8 产出·dispatching-parallel-agents 八 subagent 并行·与 W237-W244 女性主义八框架形成性别对照
@@ -63,7 +144,7 @@
 > - **验证**：DRL R1b 主代理 spot-check P0=0/P1=0/P2=0/P3=0 真收敛（12 产出结构完整性+footer 双索引+核心内容+2 subagent 并行独立无共享状态+无 placeholder）
 > - **状态**：已落地
 
-### v2.2.41 — 进行中（2026-07-30）：W235 S 方向三方向并行（S1 方法论深化+S2 学术投稿扩展+S2 外部分享扩展·dispatching-parallel-agents 三 subagent 并行·12 新建 = 12 文件·AVES 四方向串行推进第四批收束）
+### v2.2.41 — 已完成（2026-07-30）：W235 S 方向三方向并行（S1 方法论深化+S2 学术投稿扩展+S2 外部分享扩展·dispatching-parallel-agents 三 subagent 并行·12 新建 = 12 文件·AVES 四方向串行推进第四批收束）
 
 > **W235 S 方向三方向并行**
 > - **来源**：用户选择 W235 S 方向·AVES 四方向串行推进第四批（W232-A → W233-V → W234-E → W235-S）·三方向全部做·大范围 12 产出·dispatching-parallel-agents 三 subagent 并行
@@ -84,13 +165,13 @@
 >   - S2-8 S2-发布-西游与后结构主义专题.md（162 行·A4 专题发布版·德里达延异+福柯权力+德勒兹块茎·呼应 W217-W219）
 > - **文件**：
 >   - docs/10-方法论沉淀/{E2文档同步区分历史vs现役,并行Edit竞态问题,Subagent盲信铁律,改动后影响面扫描}.md（W235-S1·4 新建）
->   - docs/10-方法论沉淀/学术投稿候选-{明代镜像结构方法论,十七维叙事学框架,A3人物深化方法论,A4主题专题方法论}.md（W235-S2·4 新建）
+>   - docs/S2-学术投稿/学术投稿候选-{明代镜像结构方法论,十七维叙事学框架,A3人物深化方法论,A4主题专题方法论}.md（W235-S2·4 新建）
 >   - docs/S2-外部分享/S2-发布-{西游与心理学,西游与经济学,西游与认知科学专题,西游与后结构主义专题}.md（W235-S2·4 新建）
 >   - README.md / STRUCTURE.md / docs/00-导读/项目说明.md / 交接文档.md（6 项目层文档同步 v2.2.40→v2.2.41 + W234→W235 + S 方向三方向并行描述）
 >   - CHANGELOG.md（本段·新增 v2.2.41 W235 版本段）
 >   - scripts/output/file-index.md（反向索引新增 W235 段）
 
-### v2.2.40 — 进行中（2026-07-30）：W234 E 方向三方向并行（E2 a11y 5 规则深化+E1 CI/CD 化+E4 i18n 国际化·dispatching-parallel-agents 三 subagent 并行·12 新建 = 12 文件）
+### v2.2.40 — 已完成（2026-07-30）：W234 E 方向三方向并行（E2 a11y 5 规则深化+E1 CI/CD 化+E4 i18n 国际化·dispatching-parallel-agents 三 subagent 并行·12 新建 = 12 文件）
 
 > **W234 E 方向三方向并行**
 > - **来源**：用户选择 W234 E 方向·AVES 四方向串行推进第三批（W232-A → W233-V → W234-E → W235-S）·三方向全部做·大范围 12 产出·dispatching-parallel-agents 三 subagent 并行
@@ -126,7 +207,7 @@
 > - **DRL R1b 主代理 spot-check 真收敛**：P0=0/P1=0/P2=0/P3=0·12 产出 footer 双索引/h1/breadcrumb/KPI 卡片齐全 + 3 subagent 并行独立无共享状态 + 无 placeholder
 > - **跨方向呼应**：W234-E2 与 W207 a11y 脚本延续（3 规则→5 规则）·W234-E1 与 W204 E5 测试体系延续（E2E 三层→CI/CD 三轨）·W234-E4 与 W231 S2 外部分享延续（中文→英文）·三 subagent 并行落地不改变 E1 memory 层假收敛模式
 
-### v2.2.39 — 进行中（2026-07-30）：W233 V 方向四页并行（明代政治思想对照+取经团队心理+妖怪能力雷达+诗词韵律分析·dispatching-parallel-agents 四 subagent 并行·4 新建 = 4 文件）
+### v2.2.39 — 已完成（2026-07-30）：W233 V 方向四页并行（明代政治思想对照+取经团队心理+妖怪能力雷达+诗词韵律分析·dispatching-parallel-agents 四 subagent 并行·4 新建 = 4 文件）
 
 > **W233 V 方向四页并行**
 > - **来源**：用户选择 W233 V 方向·AVES 四方向串行推进第二批（W232-A → W233-V → W234-E → W235-S）·4 子方向全部做·方法 A 4 页并行
@@ -150,7 +231,7 @@
 > - **跨方向呼应**：W233-1 与 W232 文档双轨 + W180+W192 明代镜像三联·W233-2 与 character-sentiment-arc 个体-团队双层·W233-3 与 monster-hierarchy-network 等级-能力双维·W233-4 与 A6 诗词 7 篇文档文本-可视化双轨
 > - **状态**：已完成
 
-### v2.2.38 — 进行中（2026-07-30）：W232 A3 人物深化·明代历史原型对照专题（王阳明 vs 唐僧心学+张居正 vs 玉帝权术+海瑞 vs 悟空直谏三组对照·1 新建 = 1 文件）
+### v2.2.38 — 已完成（2026-07-30）：W232 A3 人物深化·明代历史原型对照专题（王阳明 vs 唐僧心学+张居正 vs 玉帝权术+海瑞 vs 悟空直谏三组对照·1 新建 = 1 文件）
 
 > **W232 A3 人物深化·明代历史原型对照专题**
 > - **来源**：用户选择 W232 A 方向 A3 人物深化·明代历史原型对照子方向·AVES 四方向串行推进第一批（W232-A → W233-V → W234-E → W235-S）
@@ -171,7 +252,7 @@
 > - **跨方向呼应**：与 W192 三教合一明代思想史形成"宗教思想-政治思想"双轨明代镜像·与 W220-W222 心理学三视角形成"心理学-历史学"人物分析双轨·与 W180 明代思想史对照（王阳明+李贽+王畿+黄宗羲）形成"思想史-政治思想史"递进
 > - **状态**：已完成
 
-### v2.2.37 — 进行中（2026-07-29）：W229-W231 V/E/S 工程化深化三方向并行（V2 三项可视化 + E3 三项性能优化 + S2 6 篇精选随笔·dispatching-parallel-agents 三 subagent 并行·13 新建 = 13 文件）
+### v2.2.37 — 已完成（2026-07-29）：W229-W231 V/E/S 工程化深化三方向并行（V2 三项可视化 + E3 三项性能优化 + S2 6 篇精选随笔·dispatching-parallel-agents 三 subagent 并行·13 新建 = 13 文件）
 
 > **W229-W231 V/E/S 工程化深化三方向并行**
 > - **来源**：用户选择"全部做"（V2 三项 + E3 三项 + S2 6 篇精选）。dispatching-parallel-agents skill 派 3 subagent 并行落地（subagent A V2 + subagent B E3 + subagent C S2）。
@@ -214,7 +295,7 @@
 > - **跨方向呼应**：V2 三项可视化与 W191 取经网络叙事学形成"网络-难度/网络-时空/网络-人物"跨学科呼应·E3 三项性能优化与 W201 MCP Server 工程化形成"工具-性能"工程化呼应·S2 6 篇精选与 W199 S2 学术投稿第二篇形成"学术-大众"分享双轨·V2/E3/S2 三方向首次并行落地
 > - **状态**：已完成
 
-### v2.2.36 — 进行中（2026-07-29）：W226-W228 A6 诗词·词牌赏析三专题（西江月+临江仙+满庭芳·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
+### v2.2.36 — 已完成（2026-07-29）：W226-W228 A6 诗词·词牌赏析三专题（西江月+临江仙+满庭芳·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
 
 > **W226-W228 A6 诗词·词牌赏析三专题（西江月+临江仙+满庭芳）**
 > - **来源**：用户选择"全部做"（A3 人物深化·心理学 + A5 明代宗教史 + A6 词牌赏析 + V/E/S 工程化深化四方向 12 专题）。第三批 W226-W228（A6 诗词·词牌赏析：西江月+临江仙+满庭芳）·dispatching-parallel-agents skill 派 3 subagent 并行落地。
@@ -245,7 +326,7 @@
 > - **跨学科呼应**：三专题与 W097 开篇诗 + W098 回目对联 + W193 人物赋 + W194 景物诗形成"开篇-回目-人物赋-景物诗-词牌"诗词五层次·三专题间形成"西江月-临江仙-满庭芳"词牌三专题对话·与 W192 三教合一明代思想史形成"思想-词牌"对话·与 W220 弗洛伊德精神分析形成"心理-词牌"对话
 > - **状态**：已完成
 
-### v2.2.35 — 进行中（2026-07-29）：W223-W225 A5 文化·明代宗教史三专题（道教全真派+佛教禅宗+民间信仰·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
+### v2.2.35 — 已完成（2026-07-29）：W223-W225 A5 文化·明代宗教史三专题（道教全真派+佛教禅宗+民间信仰·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
 
 > **W223-W225 A5 文化·明代宗教史三专题（道教全真派+佛教禅宗+民间信仰）**
 > - **来源**：用户选择"全部做"（A3 人物深化·心理学 + A5 明代宗教史 + A6 词牌赏析 + V/E/S 工程化深化四方向 12 专题）。第二批 W223-W225（A5 文化·明代宗教史：道教全真派+佛教禅宗+民间信仰）·dispatching-parallel-agents skill 派 3 subagent 并行落地。
@@ -275,7 +356,7 @@
 > - **跨学科呼应**：三专题与 W192 三教合一形成"合一-全真派/禅宗/民间"三层分化·与 W154 明代宗教制度形成"制度-教派/民间"双轨·三专题间形成"佛道对话+正统-民间"对话·与 W220 弗洛伊德精神分析形成"心性-精神分析"对话
 > - **状态**：已完成
 
-### v2.2.34 — 进行中（2026-07-29）：W220-W222 A3 人物深化·心理学三专题（弗洛伊德+荣格+拉康·方向 7 新方向开拓三篇并行·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
+### v2.2.34 — 已完成（2026-07-29）：W220-W222 A3 人物深化·心理学三专题（弗洛伊德+荣格+拉康·方向 7 新方向开拓三篇并行·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
 
 > **W220-W222 A3 人物深化·心理学三专题（弗洛伊德+荣格+拉康）**
 > - **来源**：用户选择"全部做"（A3 人物深化·心理学 + A5 明代宗教史 + A6 词牌赏析 + V/E/S 工程化深化四方向 12 专题）。第一批 W220-W222（A3 人物深化·心理学：弗洛伊德+荣格+拉康）·dispatching-parallel-agents skill 派 3 subagent 并行落地。
@@ -304,7 +385,7 @@
 > - **验证**：DRL R1b 主代理 spot-check P0=0/P1=0/P2=0/P3=0 真收敛（四理论家齐全/四核心概念齐全/7-8 line 号归属正确/术语/footer 双索引完整/无 placeholder·3 subagent spot-check 通过·403+294+353 命中）
 > - **状态**：已完成
 
-### v2.2.33 — 进行中（2026-07-29）：W217-W219 A4 Batch 23 第三批三专题（存在主义+后结构主义+解构主义·方向 6 新方向开拓三篇并行·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
+### v2.2.33 — 已完成（2026-07-29）：W217-W219 A4 Batch 23 第三批三专题（存在主义+后结构主义+解构主义·方向 6 新方向开拓三篇并行·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
 
 > **W217-W219 A4 Batch 23 第三批三专题（存在主义+后结构主义+解构主义）**
 > - **来源**：用户选择"A4 Batch 23 三专题并行（符号学+媒介生态学+认知科学）"并要求"全部做"（9 专题三组）。第一批 W211-W213（符号学+媒介生态学+认知科学）+ 第二批 W214-W216（经济学派深化+政治思想史+社会理论延伸）已落地，第三批 W217-W219（存在主义+后结构主义+解构主义）·dispatching-parallel-agents skill 派 3 subagent 并行落地。
@@ -333,7 +414,7 @@
 > - **验证**：DRL R1b 主代理 spot-check P0=0/P1=0/P2=0/P3=0 真收敛（四理论家齐全/四核心概念齐全/6-7 line 号归属正确/术语/footer 双索引完整/无 placeholder·6 项目层文档 v2.2.33/W217-W219 命中数均 ≥1）
 > - **状态**：已完成
 
-### v2.2.32 — 进行中（2026-07-29）：W214-W216 A4 Batch 23 第二批三专题（经济学派深化+政治思想史+社会理论延伸·与 W086/W118/W119 形成"基础→学派/现代→古典/古典→当代"三重递进·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
+### v2.2.32 — 已完成（2026-07-29）：W214-W216 A4 Batch 23 第二批三专题（经济学派深化+政治思想史+社会理论延伸·与 W086/W118/W119 形成"基础→学派/现代→古典/古典→当代"三重递进·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
 
 > **W214-W216 A4 Batch 23 第二批三专题（经济学派深化+政治思想史+社会理论延伸）**
 > - **来源**：用户选择"做经济学派深化三专题"（A4 Batch 23 第二批原定"经济学+政治学+社会学"方向已被 W086/W118/W119 覆盖，调整为经济学派深化+政治思想史+社会理论延伸三专题，与 W086/W118/W119 形成"基础→学派/现代→古典/古典→当代"三重递进）。第二批 W214-W216 三专题·dispatching-parallel-agents skill 派 3 subagent 并行落地。
@@ -362,7 +443,7 @@
 > - **验证**：DRL R1b 主代理 spot-check P0=0/P1=0/P2=0/P3=0 真收敛（四理论家齐全/四核心概念齐全/8 line 号归属正确/30 术语/footer 双索引完整/无 placeholder）
 > - **状态**：已完成
 
-### v2.2.31 — 进行中（2026-07-29）：W211-W213 A4 Batch 23 三专题（符号学+媒介生态学+认知科学·方向 6 新方向开拓三篇并行·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
+### v2.2.31 — 已完成（2026-07-29）：W211-W213 A4 Batch 23 三专题（符号学+媒介生态学+认知科学·方向 6 新方向开拓三篇并行·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
 
 > **W211-W213 A4 Batch 23 三专题（符号学+媒介生态学+认知科学）**
 > - **来源**：用户选择"全部做"（A4 Batch 23 候选三组方向全做·符号学+媒介生态学+认知科学 / 经济学+政治学+社会学 / 存在主义+后结构主义+解构主义·9 专题三批）。第一批 W211-W213 三专题·dispatching-parallel-agents skill 派 3 subagent 并行落地。
@@ -387,7 +468,7 @@
 > - **三专题跨学科呼应网络**：与 W191 取经网络叙事学形成"网络-符号/媒介/认知"跨学科呼应·与 W208-W210 三专题形成"游戏-符号/媒介/认知"+"系统-符号/媒介/认知"+"信息-符号/媒介/认知"对话·三专题间形成"符号-媒介"+"符号-认知"+"媒介-认知"对话
 > - **DRL R1b spot-check**：P0=0/P1=0/P2=0/P3=0 真收敛（三专题文档 footer 正确 + line 号归属正确 + 四理论家齐全 + 无 placeholder·6 项目层文档 v2.2.31/W211-W213 命中数均 ≥1）
 
-### v2.2.30 — 进行中（2026-07-29）：W208-W210 A4 Batch 22 三专题（游戏学+系统论+信息论·方向 6 新方向开拓三篇并行·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
+### v2.2.30 — 已完成（2026-07-29）：W208-W210 A4 Batch 22 三专题（游戏学+系统论+信息论·方向 6 新方向开拓三篇并行·dispatching-parallel-agents 三 subagent 并行·3 新建 = 3 文件）
 
 > **W208-W210 A4 Batch 22 三专题（游戏学+系统论+信息论）**
 > - **来源**：用户选择"西游与游戏学专题、西游与系统论专题、西游与信息论专题"三方向全做（A4 Batch 22·方向 6 新方向开拓三篇并行）。dispatching-parallel-agents skill 派 3 subagent 并行落地。
@@ -411,9 +492,9 @@
 >   - **A4 方向第 63 个新维度·A4 主题专题 81→82 篇**
 > - **数据源**：用户决策三方向并行 + dispatching-parallel-agents skill + Preflight 三轨验证复用 W191 等已验证 line 号
 > - **验证**：DRL R1b 主代理 spot-check 三专题真收敛（P0=0/P1=0/P2=0/P3=0·无 placeholder/line 号归属正确/四理论家齐全/footer 正确/术语表规范）+ Grep spot-check footer A4 篇数标注正确（79→80/80→81/81→82）
-> - **状态**：进行中（2026-07-29）·A4 Batch 22 三专题并行落地完成·方向 6 新方向开拓三篇（游戏学+系统论+信息论）·A4 主题专题 79→82 篇·A4 方向第 61-63 个新维度·三 subagent 并行产出 237/226/239 行
+> - **状态**：已完成（2026-07-29）·A4 Batch 22 三专题并行落地完成·方向 6 新方向开拓三篇（游戏学+系统论+信息论）·A4 主题专题 79→82 篇·A4 方向第 61-63 个新维度·三 subagent 并行产出 237/226/239 行
 
-### v2.2.29 — 进行中（2026-07-29）：W207 SVG NaN bug 修复 + a11y audit 脚本 false positive 修复（monster-victims-network timeline victim 名称不匹配 yScale 域 + BUTTON_NO_LABEL 规则补充可见文本检查·2 改 = 2 文件）
+### v2.2.29 — 已完成（2026-07-29）：W207 SVG NaN bug 修复 + a11y audit 脚本 false positive 修复（monster-victims-network timeline victim 名称不匹配 yScale 域 + BUTTON_NO_LABEL 规则补充可见文本检查·2 改 = 2 文件）
 
 > **W207 SVG NaN bug 修复 + a11y audit 脚本 false positive 修复**
 > - **来源**：W204 UI 测试方向冒烟测试发现 monster-victims-network.html SVG NaN 错误（1/63 页面失败）。本 session 定位根因并修复。同时修复 a11y audit 脚本 false positive 问题。
@@ -427,9 +508,9 @@
 >   - **验证**：`python a11y_audit.py --dir ../site/data --quiet` 结果从 P0=0/P1=18/P2=62 改善为 P0=0/P1=0/P2=62（62 P2 全为 TABLE_NO_CAPTION，按 DRL 层 2 gate 接受残留）。
 > - **数据源**：W204 冒烟测试 + a11y_audit.py W194 产出
 > - **验证**：test_smoke.js 63/63 通过 + a11y_audit.py P1=0 验证通过
-> - **状态**：进行中（2026-07-29）·SVG NaN bug 根因定位与修复完成·a11y audit 脚本 false positive 修复完成·P1 从 18 降至 0
+> - **状态**：已完成（2026-07-29）·SVG NaN bug 根因定位与修复完成·a11y audit 脚本 false positive 修复完成·P1 从 18 降至 0
 
-### v2.2.28 — 进行中（2026-07-29）：W205+W206 两方向并行（文档协作 AI 代理模板 + 视频化多视频架构·brainstorming skill 闭环 + dispatching-parallel-agents 并行·3 模板 + 10 README + CONTRIBUTING + 项目说明重写 + 3 HTML + package.json + README + 6 同步 = 24 文件）
+### v2.2.28 — 已完成（2026-07-29）：W205+W206 两方向并行（文档协作 AI 代理模板 + 视频化多视频架构·brainstorming skill 闭环 + dispatching-parallel-agents 并行·3 模板 + 10 README + CONTRIBUTING + 项目说明重写 + 3 HTML + package.json + README + 6 同步 = 24 文件）
 
 > **W205 文档协作方向 + W206 视频化方向（两方向并行落地）**
 > - **来源**：用户要求"继续推进"后选择"两方向并行"（第二波剩余两方向同时落地）。brainstorming skill 闭环（探索→澄清→设计→spec→用户审查→实现），spec 见 [docs/superpowers/specs/2026-07-29-w205-w206-docs-collab-video-design.md](docs/superpowers/specs/2026-07-29-w205-w206-docs-collab-video-design.md)。
@@ -450,9 +531,9 @@
 > - **DRL R1b spot-check**：subagent 验证 10 项反模式·P0=0/P1=1/P2=11·修复 2 个低成本 P2（handoff-checklist 措辞歧义 + validation-checklist 编号跳号）·接受 P1 CDN 无 fallback（项目一贯风格·render 环境有网络·层 2 gate=A1）+ 9 个 P2 代码风格不一致（层 2 gate=A）·收敛曲线 P0=0/P1=1(A1)/P2=9(A)·警报 A 例外条款
 > - **数据源**：brainstorming skill + dispatching-parallel-agents skill + video-shortform skill（短视频样例）+ hyperframes skill（longer-form 样例）
 > - **验证**：W205 subagent A 4 项全部通过（Glob/Grep 验证）+ W206 subagent B 5 项全部通过（LS/Grep 验证·原 index.html 未修改·版本戳 v2.2.27 到位）+ DRL R1b subagent spot-check 10 项反模式
-> - **状态**：进行中（2026-07-29）·第二波两方向并行落地完成·brainstorming skill 闭环首次完整执行（探索→澄清→设计→spec→审查→实现）·dispatching-parallel-agents 首次两方向并行·AI 代理协作模板体系建立（3 模板 + 10 README + CONTRIBUTING）·多视频架构建立（3 composition + package.json + pipeline）
+> - **状态**：已完成（2026-07-29）·第二波两方向并行落地完成·brainstorming skill 闭环首次完整执行（探索→澄清→设计→spec→审查→实现）·dispatching-parallel-agents 首次两方向并行·AI 代理协作模板体系建立（3 模板 + 10 README + CONTRIBUTING）·多视频架构建立（3 composition + package.json + pipeline）
 
-### v2.2.27 — 进行中（2026-07-29）：W204 UI 测试方向（webapp-testing skill 落地·Playwright E2E 三层测试体系·冒烟+深度+视觉回归·63 页面扫描 + 17 交互用例 + 5 baseline·3 新建 + 1 改 + 6 同步 = 10 文件）
+### v2.2.27 — 已完成（2026-07-29）：W204 UI 测试方向（webapp-testing skill 落地·Playwright E2E 三层测试体系·冒烟+深度+视觉回归·63 页面扫描 + 17 交互用例 + 5 baseline·3 新建 + 1 改 + 6 同步 = 10 文件）
 
 > **W204 UI 测试方向**
 > - **来源**：用户要求"第二波剩余三个方向（UI 测试/文档协作/视频化），从哪个开始落地？"后选择"UI 测试方向"（第二波 UI 测试方向落地）。
@@ -473,9 +554,9 @@
 > - **DRL R1b spot-check**：subagent 验证 8 项反模式·P0=0/P1=4/P2=3·修复 #6 资源泄漏（page.close + browser.close 放入 finally）+ #3 browser.close finally·接受 #4 选择器脆弱性（DOM 顺序稳定·层 2 gate）+ #7 flaky 风险（实际运行稳定·层 2 gate）·收敛曲线 P0=0/P1=4/P2=3 → P0=0/P1=2(接受残留=A2)/P2=3·警报 A 例外条款（边际收益 gate 接受的残留导致的 P1/P2 持平不触发警报 A）
 > - **数据源**：webapp-testing skill（Playwright Node.js 工具链，复用项目已有 playwright 依赖）+ scripts/batch_screenshots.js（截图参考）
 > - **验证**：node tests/e2e/test_smoke.js 62/63 通过（1 真实 bug 待修复）+ node tests/e2e/test_deep.js 17/17 通过 + node tests/e2e/test_visual.js 5/5 baseline + 5/5 对比通过 + npm run test:deep 路径校验通过
-> - **状态**：进行中（2026-07-29）·UI 测试方向第二波任务完成·Playwright E2E 三层测试体系建立（冒烟+深度+视觉回归）·63 页面扫描覆盖率 100%·5 关键页面 17 交互用例覆盖率 100%·5 baseline 视觉回归基线建立
+> - **状态**：已完成（2026-07-29）·UI 测试方向第二波任务完成·Playwright E2E 三层测试体系建立（冒烟+深度+视觉回归）·63 页面扫描覆盖率 100%·5 关键页面 17 交互用例覆盖率 100%·5 baseline 视觉回归基线建立
 
-### v2.2.26 — 进行中（2026-07-29）：W203 方法论 DRL R1b 反模式内嵌 + 警报 A 增强（DRL skill v1.3.0→v1.3.1·7 项 R1b 反模式清单 + R1b 硬性要求 + 警报 A 区分持平/反弹+严重度分层+窗口 4 轮+被动验证·mem-wrap-up Step 7b 继承声明同步·2 skill 改 + 6 文档同步 = 8 文件）
+### v2.2.26 — 已完成（2026-07-29）：W203 方法论 DRL R1b 反模式内嵌 + 警报 A 增强（DRL skill v1.3.0→v1.3.1·7 项 R1b 反模式清单 + R1b 硬性要求 + 警报 A 区分持平/反弹+严重度分层+窗口 4 轮+被动验证·mem-wrap-up Step 7b 继承声明同步·2 skill 改 + 6 文档同步 = 8 文件）
 
 > **W203 方法论 DRL R1b 反模式内嵌 + 警报 A 增强**
 > - **来源**：用户要求"先调研第二波 skill 适用性"后选择"方法论方向优先"（第二波方法论方向落地）。
@@ -491,9 +572,9 @@
 >   - **mem-wrap-up SKILL.md 修改**（C:\Users\12739\.trae-cn\skills\mem-wrap-up\SKILL.md）：4 层过拟合防护继承声明 DRL v1.2.0→v1.3.1 + R1a 硬性要求继承 DRL v1.2.0→v1.3.1 + 新增 R1b 硬性要求继承（v1.3.1 新增）+ 新增 R1b 反模式清单继承（v1.3.1 新增·7 项反模式 subagent 自检）
 > - **数据源**：docs/10-方法论沉淀/DRL真循环.md 第六节案例（W069 系统性编造 + W070 假收敛）+ self-evolution dim 11 历史反模式 + systematic-debugging Common Rationalizations 表结构 + writing-skills TDD for skill
 > - **验证**：Grep spot-check DRL SKILL.md 验证 R1b 反模式清单 7 项 + 警报 A v1.3.1 增强 + 被动验证机制 + 停滞观察 + 窗口 4 轮全部命中·Grep spot-check mem-wrap-up SKILL.md 验证 v1.3.1 + R1b 硬性要求继承 + R1b 反模式清单继承全部命中
-> - **状态**：进行中（2026-07-29）·方法论方向第二波任务 1+2 完成·DRL skill v1.3.1·R1b 反模式覆盖度 5→12 项·警报 A 误触发风险降低（5 类误触发场景修复）
+> - **状态**：已完成（2026-07-29）·方法论方向第二波任务 1+2 完成·DRL skill v1.3.1·R1b 反模式覆盖度 5→12 项·警报 A 误触发风险降低（5 类误触发场景修复）
 
-### v2.2.25 — 进行中（2026-07-29）：W202 E1 铁律工程化 + CI a11y 检查（第一波-5 pre-commit hook 工程化 + 第一波-6 CI audit 作业增加 a11y 检查·E1 跨 session git tracked 铁律复现：26 个 untracked 交付物文件 git add tracked·2 改 + 26 add + 5 同步 = 33 文件）
+### v2.2.25 — 已完成（2026-07-29）：W202 E1 铁律工程化 + CI a11y 检查（第一波-5 pre-commit hook 工程化 + 第一波-6 CI audit 作业增加 a11y 检查·E1 跨 session git tracked 铁律复现：26 个 untracked 交付物文件 git add tracked·2 改 + 26 add + 5 同步 = 33 文件）
 
 > **W202 E1 铁律工程化 + CI a11y 检查**
 > - **来源**：用户要求"从第一波开始落地"（skill 适用性调研后第一波任务落地）。
@@ -506,9 +587,9 @@
 >   - **a11y 基线**：python scripts/a11y_audit.py --quiet 退出码 1·35 文件扫描·0 P0/18 P1/62 P2·8 文件有 P1（81-hardships/ai-dialogue/concept-device/cross-time-danmaku/hardship-heatmap/mbti-evolution/relationships/text-search）
 > - **E1 跨 session git tracked 铁律复现**：26 个 untracked 交付物文件初始全部未 git tracked，git add 后全部 tracked。文件清单：.github/workflows/ci.yml + .pre-commit-config.yaml + .eslintrc.json + CITATION.cff + Makefile + mypy.ini + pytest.ini + docs/INDEX.md + docs/10-方法论沉淀/markdown写作规范.md + scripts/check_untracked.py + scripts/data_validate.py + scripts/debug_page.js + scripts/docs_index.py + scripts/drl_contracts.yaml + scripts/drl_spotcheck.py + scripts/embed_json.py + scripts/lint_links.py + scripts/new_page.py + scripts/release.py + scripts/run_all.py + scripts/sync_docs.py + scripts/utils/aliases.py + scripts/utils/analyzer_base.py + scripts/audit/ + site/_template.html + site/tokens.css
 > - **验证**：python scripts/a11y_audit.py --quiet 退出码 1（18 P1 已知问题）+ DRL R1b spot-check P0=0/P1=0/P2=2（边际收益 gate 接受残留：continue-on-error 静默 exit 2 + a11y 输出未持久化为 artifact）+ git ls-files 验证 5 关键文件全部 tracked
-> - **状态**：进行中（2026-07-29）·E1 铁律工程化首次落地（pre-commit hook + CI a11y 检查）·第一波任务 5+6 完成·DRL R1b 真收敛 P0=0/P1=0/P2=2（边际收益 gate 接受残留）
+> - **状态**：已完成（2026-07-29）·E1 铁律工程化首次落地（pre-commit hook + CI a11y 检查）·第一波任务 5+6 完成·DRL R1b 真收敛 P0=0/P1=0/P2=2（边际收益 gate 接受残留）
 
-### v2.2.24 — 进行中（2026-07-29）：W201 mcp-builder E 方向工程化工具 MCP 化（mcp-builder skill 落地·Python FastMCP server·5 个只读工具封装·28 项单元测试 PASS·全量 227 测试 PASS·4 新建 + 5 同步 = 9 文件）
+### v2.2.24 — 已完成（2026-07-29）：W201 mcp-builder E 方向工程化工具 MCP 化（mcp-builder skill 落地·Python FastMCP server·5 个只读工具封装·28 项单元测试 PASS·全量 227 测试 PASS·4 新建 + 5 同步 = 9 文件）
 
 > **W201 mcp-builder E 方向工程化工具 MCP 化**
 > - **来源**：用户要求"继续推进阶段 7"（mcp-builder 工程化工具 MCP 化）。
@@ -530,9 +611,9 @@
 >   - **设计原则**：只读优先（全部 readOnlyHint=true）+ 结构化输出（JSON dict）+ 可操作错误 + 项目路径感知 + 无外部 API 依赖（纯标准库 + fastmcp）
 >   - **mock 策略**：测试通过 mock FastMCP 类避免依赖 fastmcp 安装，直接测试工具函数逻辑
 > - **验证**：python -m py_compile 语法 OK + 28 项新测试全部 PASS + 全量 227 测试 PASS（原 199 + 新增 28·0 回归）+ 4 个新建文件 git add tracked（E1 跨 session git tracked 铁律复现：新建文件初始未 tracked，git add 后全部 tracked）
-> - **状态**：进行中（2026-07-29）·mcp-builder skill 首次落地·E 方向工程化工具 MCP 化完成·5 个只读工具封装·LLM 可通过 MCP 直接调用项目工程化能力
+> - **状态**：已完成（2026-07-29）·mcp-builder skill 首次落地·E 方向工程化工具 MCP 化完成·5 个只读工具封装·LLM 可通过 MCP 直接调用项目工程化能力
 
-### v2.2.23 — 进行中（2026-07-29）：W200 hyperframes S 方向视频化分享（hyperframes skill 落地·古典宣纸风方法论分享视频·5 场景 40 秒·封面+KPI+DRL真循环+三skill闭环+结尾·1 新建 + 5 同步 = 6 文件）
+### v2.2.23 — 已完成（2026-07-29）：W200 hyperframes S 方向视频化分享（hyperframes skill 落地·古典宣纸风方法论分享视频·5 场景 40 秒·封面+KPI+DRL真循环+三skill闭环+结尾·1 新建 + 5 同步 = 6 文件）
 
 > **W200 hyperframes S 方向视频化分享**
 > - **来源**：用户要求"继续推进阶段 6：hyperframes S 方向视频化分享"。
@@ -549,16 +630,16 @@
 >   - **hyperframes lint**：0 error，1 warning（composition_self_attribute_selector，standalone composition 无影响）
 >   - **hyperframes preview**：Studio 运行于 http://localhost:3002，浏览器可实时预览
 > - **验证**：1 新建文件 git add tracked（E1 跨 session git tracked 铁律复现：新建文件初始未 tracked，git add 后 tracked）+ hyperframes lint 0 error + Grep spot-check 6 文档 W200 命中
-> - **状态**：进行中（2026-07-29）·hyperframes skill 首次落地·S 方向视频化分享完成·下一步可 render 导出 MP4 或迭代场景
+> - **状态**：已完成（2026-07-29）·hyperframes skill 首次落地·S 方向视频化分享完成·下一步可 render 导出 MP4 或迭代场景
 
-### v2.2.22 — 进行中（2026-07-29）：W199 S2 学术投稿第二篇（product-lifecycle-workbench:product-doc-writing skill 落地·中国文论视角下的西游记多维解读·与第一篇西方叙事学形成二元互补·五位中国文论家谱系+诗词四层次应用案例+明代镜像对位·1 新建 + 5 同步 = 6 文件）
+### v2.2.22 — 已完成（2026-07-29）：W199 S2 学术投稿第二篇（product-lifecycle-workbench:product-doc-writing skill 落地·中国文论视角下的西游记多维解读·与第一篇西方叙事学形成二元互补·五位中国文论家谱系+诗词四层次应用案例+明代镜像对位·1 新建 + 5 同步 = 6 文件）
 
 > **W199 S2 学术投稿第二篇**
 > - **来源**：用户要求"按照优先落地顺序开始执行"，阶段 5 product-lifecycle-workbench:product-doc-writing 学术投稿第二篇。
 > - **W199 product-lifecycle-workbench:product-doc-writing skill 落地**：
 >   - **第一篇调研**：S2 第一篇《西游记叙事学多维解读方法论》以西方叙事学（巴赫金+巴什拉+海尔斯等 64 位）为框架，明确指出"理论框架西方中心"局限，未来工作提到"将刘勰、钟嵘、司空图、严羽、王国维五位中国文论家作为独立的'中国叙事学'维度专题"
 >   - **第二篇定位**：与第一篇形成"西方叙事学+中国文论"二元互补结构，聚焦中国文论视角下的诗词四层次解读
->   - **docs/10-方法论沉淀/学术投稿候选-中国文论视角下的西游记多维解读.md 新建**（9 节结构）：
+>   - **docs/S2-学术投稿/学术投稿候选-中国文论视角下的西游记多维解读.md 新建**（9 节结构）：
 >     - 一、摘要：中国文论视角下的多维解读方法论，与 S2 第一篇形成二元互补
 >     - 二、研究背景与问题：中国文论在数字人文中的边缘地位 + 西游记研究的西方中心问题 + 现有诗词研究局限 + 3 个研究问题
 >     - 三、方法论框架：五位中国文论家谱系（刘勰+钟嵘+司空图+严羽+王国维）+ 中国文论四理论家对照法 + line 号原文锚点 + Preflight 三轨验证
@@ -571,9 +652,9 @@
 >   - **二元互补结构**：第一篇（西方叙事学·64 位理论家·十七维）+ 第二篇（中国文论·9 位理论家·诗词四层次）= 完整解读谱系
 >   - **方法论创新**：将中国文论直觉性概念（滋味/韵味/妙悟/境界）可计算化为 line 号锚点+类型分析+分类标签
 > - **验证**：1 新建文件 git add tracked（E1 跨 session git tracked 铁律复现：新建文件初始未 tracked，git add 后 tracked）+ Grep spot-check 6 文档 W199 命中
-> - **状态**：进行中（2026-07-29）·product-lifecycle-workbench:product-doc-writing skill 首次落地·S2 学术投稿第二篇完成·与第一篇形成二元互补·下一步建议构建"五位中国文论家谱系图"可视化作为本文图形化补充
+> - **状态**：已完成（2026-07-29）·product-lifecycle-workbench:product-doc-writing skill 首次落地·S2 学术投稿第二篇完成·与第一篇形成二元互补·下一步建议构建"五位中国文论家谱系图"可视化作为本文图形化补充
 
-### v2.2.21 — 进行中（2026-07-29）：W198 scripts/ 工具单元测试补齐（superpowers:test-driven-development skill 落地·4 个高优先级工具补测试·118 项新测试全部 PASS·全量 181 测试 PASS 无回归·scripts/ 工具测试覆盖从 5 个扩展到 9 个）
+### v2.2.21 — 已完成（2026-07-29）：W198 scripts/ 工具单元测试补齐（superpowers:test-driven-development skill 落地·4 个高优先级工具补测试·118 项新测试全部 PASS·全量 181 测试 PASS 无回归·scripts/ 工具测试覆盖从 5 个扩展到 9 个）
 
 > **W198 scripts/ 工具单元测试补齐**
 > - **来源**：用户要求"按照优先落地顺序开始执行"，阶段 4 superpowers:test-driven-development 为 scripts/ 工具补测试（data_validate/docs_index/drl_spotcheck/fix_svg_negative_widths 四个高优先级工具）。
@@ -612,9 +693,9 @@
 >     - TestMarginDefinedBefore（6 项）：const + let + var + 未定义 + 定义在 pos 之后 + 无 const/let/var 不识别
 >     - TestProcessClientWidth（9 项）：无 clientWidth 原样 + 已保护跳过 + 默认 200px + let 关键字 + margin-aware 模式 + MARGIN 未定义退回默认 + 多赋值 + Math.max 包裹跳过 + Math.min 包裹跳过
 > - **验证**：4 个新建测试文件 118 项新测试全部 PASS（python -m pytest tests/test_data_validate.py tests/test_docs_index.py tests/test_drl_spotcheck.py tests/test_fix_svg_negative_widths.py -v·0.40s）+ 全量 181 测试 PASS（python -m pytest tests/ --ignore=tests/test_narratology_render.py·0.75s·63 既有 + 36 P0 + 118 新增·0 回归）+ 4 个新建文件 git add tracked（E1 跨 session git tracked 铁律复现：4 文件初始未 tracked，git add 后全部 tracked）
-> - **状态**：进行中（2026-07-29）·superpowers:test-driven-development skill 首次落地·scripts/ 工具测试覆盖从 5 个扩展到 9 个·剩余 8 个工具脚本（release/sync_docs/run_all/new_page/analyzer_base/a11y_audit/pre_release_screenshot/character_nlp 已覆盖）待后续批次补测试
+> - **状态**：已完成（2026-07-29）·superpowers:test-driven-development skill 首次落地·scripts/ 工具测试覆盖从 5 个扩展到 9 个·剩余 8 个工具脚本（release/sync_docs/run_all/new_page/analyzer_base/a11y_audit/pre_release_screenshot/character_nlp 已覆盖）待后续批次补测试
 
-### v2.2.20 — 进行中（2026-07-29）：W197 UI 审查与增强（web-design-guidelines skill 落地·dashboard.html + narratology-13d-network.html 审查·修复 transition:all 反模式 + prefers-reduced-motion + color-scheme/theme-color + touch-action + tabular-nums + text-wrap:balance + &nbsp; + footer 年份动态化 + preconnect + overflow-wrap·54 测试 PASS 无回归）
+### v2.2.20 — 已完成（2026-07-29）：W197 UI 审查与增强（web-design-guidelines skill 落地·dashboard.html + narratology-13d-network.html 审查·修复 transition:all 反模式 + prefers-reduced-motion + color-scheme/theme-color + touch-action + tabular-nums + text-wrap:balance + &nbsp; + footer 年份动态化 + preconnect + overflow-wrap·54 测试 PASS 无回归）
 
 > **W197 UI 审查与增强**
 > - **来源**：用户要求"按照优先落地顺序开始执行"，阶段 3 frontend-design + uicraft + web-design-guidelines UI 审查与增强。本批次落地 web-design-guidelines skill 审查 + P0/P1 修复。
@@ -639,9 +720,9 @@
 >     - 标题换行：`header.hero h1` + `.section-title` 添加 `text-wrap: balance`
 >     - 长文本处理：`.definition` 添加 `overflow-wrap: break-word`；`.tooltip` 添加 `overflow-wrap: break-word`（已有 max-width: 320px）
 > - **验证**：54 测试 PASS（18 P1 组件测试 + 36 P0 数据契约测试·0 回归）+ 全站 a11y 扫描 0 P0/18 P1/62 P2 基线
-> - **状态**：进行中（2026-07-29）·web-design-guidelines skill 首次落地·两核心页面 UI 审查与增强·剩余 59 个 HTML 页面待后续批次审查
+> - **状态**：已完成（2026-07-29）·web-design-guidelines skill 首次落地·两核心页面 UI 审查与增强·剩余 59 个 HTML 页面待后续批次审查
 
-### v2.2.19 — 进行中（2026-07-29）：W196 P1 组件测试落地（Playwright + pytest-playwright + Chromium 安装·tests/test_narratology_render.py 新建·18 项断言 7 测试类·CI 添加 Playwright Chromium 安装·全量 81 测试 PASS·P1 组件测试覆盖从 0 起步）
+### v2.2.19 — 已完成（2026-07-29）：W196 P1 组件测试落地（Playwright + pytest-playwright + Chromium 安装·tests/test_narratology_render.py 新建·18 项断言 7 测试类·CI 添加 Playwright Chromium 安装·全量 81 测试 PASS·P1 组件测试覆盖从 0 起步）
 
 > **W196 P1 组件测试落地**
 > - **来源**：用户要求"按照优先落地顺序开始执行"，阶段 2 P1 组件测试（Playwright）。承继 W195 P0 数据契约单元测试，本批次落地 P1 组件测试（narrowest high-value slice 的第二层）。
@@ -659,9 +740,9 @@
 >   - **CI 集成**（.github/workflows/ci.yml test job）：添加 `pip install playwright pytest-playwright` + `python -m playwright install chromium --with-deps`
 >   - **测试计划文档更新**（docs/10-方法论沉淀/可视化测试计划-十七维叙事学图谱.md）：P1 标记已实现 + 断点 800px→768px 修正 + Release Gates 添加 P1 + 后续工作移除 P1
 > - **验证**：18 项 P1 组件测试全部 PASS（python -m pytest tests/test_narratology_render.py -v·23.89s）+ 全量 81 测试 PASS（63 既有 + 18 新增·无回归）+ 1 个新建文件 git add tracked（E1 跨 session git tracked 铁律复现：1 文件初始未 tracked，git add 后 tracked）
-> - **状态**：进行中（2026-07-29）·P1 组件测试覆盖从 0 起步·P2 视觉回归基线待后续落地
+> - **状态**：已完成（2026-07-29）·P1 组件测试覆盖从 0 起步·P2 视觉回归基线待后续落地
 
-### v2.2.18 — 进行中（2026-07-29）：W195 可视化测试体系建立（build-web-data-visualization:testing-data-visualizations skill 落地·narratology-13d-network.html 分层测试计划 + P0 数据契约单元测试 36 项 PASS·testing skill 首次落地·可视化测试覆盖从 0 起步）
+### v2.2.18 — 已完成（2026-07-29）：W195 可视化测试体系建立（build-web-data-visualization:testing-data-visualizations skill 落地·narratology-13d-network.html 分层测试计划 + P0 数据契约单元测试 36 项 PASS·testing skill 首次落地·可视化测试覆盖从 0 起步）
 
 > **W195 可视化测试体系建立**
 > - **来源**：用户要求"按照优先落地顺序开始执行"，阶段 2 为 build-web-data-visualization:testing-data-visualizations 测试体系。本批次落地测试计划文档 + P0 数据契约单元测试（narrowest high-value slice）。
@@ -669,9 +750,9 @@
 >   - **测试计划文档**（新建·docs/10-方法论沉淀/可视化测试计划-十七维叙事学图谱.md）：基于 testing-data-visualizations skill 模板，覆盖 Scope/Coverage Map（Unit+Component+Visual Regression+E2E）/Data Strategy/Determinism Controls/Release Gates/已知问题与后续工作 7 段·明确 P0 已实现 + P1/P2 待实现分层·文档化 KPI 17 vs 数据 16 编辑差异 + 7 项已知 a11y/逻辑缺口
 >   - **P0 数据契约单元测试**（新建·tests/test_narratology_data.py·36 项 PASS）：从 HTML 内嵌 EMBEDDED_DATA 抽取数据（正则剥离 // 注释 + 裸标识符 key 加引号 → JSON 解析）·覆盖 7 个数据集（dimensions/externalNodes/links/sankey/theorists/timeline/sankeyTheoristColors）·36 项断言含：顶层 key 完备性 + dimensions 字段/类型/值域/W### 范围/日期戳一致性/颜色格式 + 七感/文本/新增四维完整性 + externalNodes 字段与 id 唯一性 + links 引用完整性/类型枚举/强度值域 + sankey 三层结构 + theorists id/name 唯一性 + timeline 里程碑/日期戳一致性 + sankeyTheoristColors 覆盖 + KPI 一致性（28 边/7 类别/4 新增维度）+ 编辑差异文档化（17 维度/64 理论家为概念口径）
 > - **验证**：36 项 P0 单元测试全部 PASS（python -m pytest tests/test_narratology_data.py -v·0.12s）+ 全量 63 测试 PASS（27 既有 + 36 新增·无回归）+ 2 个新建文件 git add tracked（E1 跨 session git tracked 铁律复现：2 文件初始未 tracked，git add 后全部 tracked）
-> - **状态**：进行中（2026-07-29）·testing-data-visualizations skill 首次落地·可视化测试覆盖从 0 起步·P1 组件测试（Playwright）+ P2 视觉回归基线待后续落地
+> - **状态**：已完成（2026-07-29）·testing-data-visualizations skill 首次落地·可视化测试覆盖从 0 起步·P1 组件测试（Playwright）+ P2 视觉回归基线待后续落地
 
-### v2.2.17 — 进行中（2026-07-29）：W191-W194 四专题落地 + V/E/S 方向工程化（v0.9.1 runtime 验证回归 PASS + A4 Batch 21 网络叙事学 + A5 三教合一深化 + A6 人物赋诗词 + A6 景物诗 + narratology-13d-network 十七维升级 + a11y 审查脚本 + 截图审查集成脚本 + 学术投稿候选文档·多方向并行批次第十一次三方向合并·十七维叙事学框架扩展·九层明代镜像结构扩展·诗词四层次形成·E 方向工程化第 1-2 个产出·S 方向学术投稿候选首篇）
+### v2.2.17 — 已完成（2026-07-29）：W191-W194 四专题落地 + V/E/S 方向工程化（v0.9.1 runtime 验证回归 PASS + A4 Batch 21 网络叙事学 + A5 三教合一深化 + A6 人物赋诗词 + A6 景物诗 + narratology-13d-network 十七维升级 + a11y 审查脚本 + 截图审查集成脚本 + 学术投稿候选文档·多方向并行批次第十一次三方向合并·十七维叙事学框架扩展·九层明代镜像结构扩展·诗词四层次形成·E 方向工程化第 1-2 个产出·S 方向学术投稿候选首篇）
 
 > **W191-W194 四件套 + V/E/S 方向工程化**
 > - **来源**：用户要求按"v0.9.1 runtime 验证回归 / A 方向扩容 / A6 诗词 Batch 2+ / V 方向可视化深化 / E 方向工程化 / 增强版截图审查纳入迭代发布流程 / S 方向外部分享"顺序全部执行。本批次落地 Phase 1（v0.9.1 runtime 验证回归 PASS）+ Phase 2（A4+A5+A6 各 1 篇代表性专题·W191-W193）+ Phase 3（A6 Batch 2+ 第二篇·W194）+ Phase 4（V 方向 narratology-13d-network 十七维升级）+ Phase 5（E 方向 a11y_audit.py 审查脚本）+ Phase 6（pre_release_screenshot.py 截图审查集成脚本）+ Phase 7（S 方向学术投稿候选文档）。
@@ -683,11 +764,11 @@
 > - **Phase 4 V 方向可视化深化**：site/data/narratology-13d-network.html 升级为十七维（h1 十三维→十七维 + subtitle 13-DIMENSION→17-DIMENSION + meta 行补 W191 网络叙事学第十七维 + KPI 16→17 + 跨页面导航链接到 W191 专题文档·修复 title/h1 与内部数据不一致 P2 一致性问题）
 > - **Phase 5 E 方向工程化第 1 个产出**：scripts/a11y_audit.py 新建·HTML 可访问性审查脚本·7 规则（img alt/button label/div role+tabindex/input label/a href/table caption/颜色对比度）+ P0/P1/P2 三级严重度 + --quiet/--file/--dir 选项 + 35 文件扫描通过·0 P0/18 P1/62 P2
 > - **Phase 6 增强版截图审查纳入迭代发布流程第 1 个产出**：scripts/pre_release_screenshot.py 新建·4 步集成流程（Playwright 全量截图 + Pillow 800px 切片 + 运行时布局断言 + 结构化汇总报告）+ --report-only/--no-slice/--viewport 选项 + pre-release-summary.json 产物 + 兼容已有 layout-audit-report.md/overflow-diagnosis.md
-> - **Phase 7 S 方向学术投稿候选首篇**：docs/10-方法论沉淀/学术投稿候选-西游记叙事学多维解读方法论.md 新建·九段式（摘要+背景+方法论框架+研究流程+产出与可视化+讨论与启示+局限与未来+关联文档+参考文献）·十七维叙事学框架+DRL 真循环+三 skill 闭环+E1 验证铁律+双索引可追溯+Preflight 三轨验证五件套方法论·S 方向学术投稿候选首篇·与 W070 S1 方法论沉淀 5 篇形成"内审方法论 + 外部分享"二元结构
+> - **Phase 7 S 方向学术投稿候选首篇**：docs/S2-学术投稿/学术投稿候选-西游记叙事学多维解读方法论.md 新建·九段式（摘要+背景+方法论框架+研究流程+产出与可视化+讨论与启示+局限与未来+关联文档+参考文献）·十七维叙事学框架+DRL 真循环+三 skill 闭环+E1 验证铁律+双索引可追溯+Preflight 三轨验证五件套方法论·S 方向学术投稿候选首篇·与 W070 S1 方法论沉淀 5 篇形成"内审方法论 + 外部分享"二元结构
 > - **验证**：5 个新建文件 git add tracked（W191-W194 + 学术投稿候选 + a11y_audit.py + pre_release_screenshot.py，4 文件初始未 tracked 后 git add 全部 tracked）+ 6 文件同步（CHANGELOG/STRUCTURE/README/项目说明/交接文档/file-index）+ Preflight line 号归属复用 W182 等已验证 line 号（522/864/840/981/1393/2073/2106/2576/5950/7050/7085）+ DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0（按边际收益 gate 接受残留）+ E1 跨 session git tracked 铁律复现：5 个新建文件初始全部未 git tracked，git add 后重新验证全部 tracked
-> - **状态**：进行中（2026-07-29）·多方向并行批次第十一次三方向合并（A4+A5+A6）+ V/E/S 方向工程化·十七维叙事学框架扩展 + 九层明代镜像结构扩展 + 诗词四层次形成 + E 方向工程化第 1-2 个产出 + S 方向学术投稿候选首篇
+> - **状态**：已完成（2026-07-29）·多方向并行批次第十一次三方向合并（A4+A5+A6）+ V/E/S 方向工程化·十七维叙事学框架扩展 + 九层明代镜像结构扩展 + 诗词四层次形成 + E 方向工程化第 1-2 个产出 + S 方向学术投稿候选首篇
 
-### v2.2.16 — 进行中（2026-07-28）：工具链完善批次（scripts/ 工程化补全·7 个新工具 + 2 个工具增强 + CI 对齐 + README 工具表同步）
+### v2.2.16 — 已完成（2026-07-28）：工具链完善批次（scripts/ 工程化补全·7 个新工具 + 2 个工具增强 + CI 对齐 + README 工具表同步）
 
 > **工具链完善批次**
 > - **来源**：用户要求"再进行审查一遍现有项目内的工具有哪些是可以优化的，是否还缺少一些工具"+"按照优先级顺序全部执行"+"再审查一遍还有没有问题或其他问题或其他潜在问题，如果没有问题就检查更新交接文档等文件"。审查发现：(1) `utils/analyzer_base.py` + `utils/aliases.py` 抽象模块未被业务脚本实际引用（死代码）；(2) 缺少批量调度/页面脚手架/版本发布/DRL spot-check/JSON 校验/文档索引六类工程化工具；(3) `sync_docs.py` 仅校验不修复；(4) `scripts/README.md` 工具表不完整；(5) CI 与 Makefile `ci` 目标不对齐（CI 缺 sync_docs/lint_links/表格扫描/SVG 检查）；(6) `pytest.ini` 与 `pyproject.toml` 配置需协调；(7) `fix_svg_negative_widths.py --dry-run` 退出码不明确。
@@ -722,9 +803,9 @@
 >   - `Makefile` 新增 `analyze` / `analyze-list` / `analyze-only` 目标，通过 `run_all.py` 批量调度
 >   - `docs/INDEX.md` 自动生成（321 篇文档索引·11 个板块）
 > - **验证**：py_compile 全部脚本语法正确 + `--help` 入口可用 + drl_spotcheck 实测（修复落地验证 + 关键词存在性验证均按预期工作）+ run_all --dry-run 发现 34 个分析脚本 + data_validate 131/131 通过 + docs_index --check 通过 + pytest 27 tests passed
-> - **状态**：进行中（2026-07-28）·工具链工程化完善·死代码消除 + 工具链闭环（批量调度 + 页面脚手架 + 版本发布 + DRL 验证 + JSON 校验 + 文档索引）+ CI/Makefile 6 轨对齐 + 配置协调 + 文档自动化
+> - **状态**：已完成（2026-07-28）·工具链工程化完善·死代码消除 + 工具链闭环（批量调度 + 页面脚手架 + 版本发布 + DRL 验证 + JSON 校验 + 文档索引）+ CI/Makefile 6 轨对齐 + 配置协调 + 文档自动化
 
-### v2.2.15 — 进行中（2026-07-28）：W182-W190 九专题落地 + 方向 4 质量提升（十三维→十六维叙事学框架扩展 + 全新领域开拓·A4 方向第 52-59 个新维度·8 个 A4 新维度 + 1 个 D 可视化·帕梅拉·法伯+威廉斯+西苏+汤姆金斯 / 海登·怀特+安克斯密特+利科+科塞勒克 / 帕特里夏·沃+哈钦+麦克海尔+弗卢德尼克 / 布斯+费伦+雅克比+纽宁 / 贝特+布依尔+普拉姆伍德+莫顿 / 哈拉维+布拉伊多蒂+沃尔夫+福山 / 本内特+阿莱莫+巴拉德+帕帕多普洛斯 / 德里达+沃尔夫+哈拉维+阿甘本·十三维→十六维叙事学框架扩展（时-空-听-嗅-触-视-味-文-修-知-性别-后殖民-情感-历史-元叙事-不可靠叙述）+ 全新领域开拓（生态批评+后人类主义+物质生态学+动物研究）·方向 4 质量提升：W184 line 309 修正 W177 误标 + W182-W185 跨专题关联校验）
+### v2.2.15 — 已完成（2026-07-28）：W182-W190 九专题落地 + 方向 4 质量提升（十三维→十六维叙事学框架扩展 + 全新领域开拓·A4 方向第 52-59 个新维度·8 个 A4 新维度 + 1 个 D 可视化·帕梅拉·法伯+威廉斯+西苏+汤姆金斯 / 海登·怀特+安克斯密特+利科+科塞勒克 / 帕特里夏·沃+哈钦+麦克海尔+弗卢德尼克 / 布斯+费伦+雅克比+纽宁 / 贝特+布依尔+普拉姆伍德+莫顿 / 哈拉维+布拉伊多蒂+沃尔夫+福山 / 本内特+阿莱莫+巴拉德+帕帕多普洛斯 / 德里达+沃尔夫+哈拉维+阿甘本·十三维→十六维叙事学框架扩展（时-空-听-嗅-触-视-味-文-修-知-性别-后殖民-情感-历史-元叙事-不可靠叙述）+ 全新领域开拓（生态批评+后人类主义+物质生态学+动物研究）·方向 4 质量提升：W184 line 309 修正 W177 误标 + W182-W185 跨专题关联校验）
 
 > **W182-W190 九件套**
 > - **来源**：用户要求"推进"方向 1+4+5 合并方案·方向 1（叙事学继续扩展至十六维）+方向 4（质量提升跨专题关联校验）+方向 5（全新领域开拓四篇：生态批评+后人类主义+物质生态学+动物研究）。W182-W185 扩展十三维叙事学至十六维，W186 D 可视化整合十六维叙事学关系图谱，W187-W190 开拓全新领域（生态批评+后人类+物质生态+动物研究）。
@@ -742,9 +823,9 @@
 >   - W184 元叙事学 line 309 修正：W177 误标"后殖民叙事学"改为 W174+W177 联合引用（W174 后殖民叙事学专题 + W177 接受美学专题·元叙事的读者接受维度）
 >   - W182-W185 跨专题关联校验全部完整（W182 引用 17 处 + W183 引用 15 处 + W184 引用 12 处 + W185 引用 23 处 = 67 处跨专题引用）
 > - **验证**：DRL R1b 主代理 spot-check 真收敛 + git ls-files 验证 9 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A4 主题专题 70→78 篇 + A3 人物 56 篇（不变）+ A5 文化 16 篇（不变）+ D 可视化 60→61 个·十三维→十六维叙事学框架扩展（时-空-听-嗅-触-视-味-文-修-知-性别-后殖民-情感-历史-元叙事-不可靠叙述）+ 全新领域开拓（生态批评+后人类主义+物质生态学+动物研究）·方向 1 叙事学扩展+方向 4 质量提升+方向 5 全新领域开拓三方向合并·多方向并行批次第十次落地
+> - **状态**：已完成（2026-07-28）·A4 主题专题 70→78 篇 + A3 人物 56 篇（不变）+ A5 文化 16 篇（不变）+ D 可视化 60→61 个·十三维→十六维叙事学框架扩展（时-空-听-嗅-触-视-味-文-修-知-性别-后殖民-情感-历史-元叙事-不可靠叙述）+ 全新领域开拓（生态批评+后人类主义+物质生态学+动物研究）·方向 1 叙事学扩展+方向 4 质量提升+方向 5 全新领域开拓三方向合并·多方向并行批次第十次落地
 
-### v2.2.14 — 进行中（2026-07-28）：W173-W181 九专题落地 + 方向 4 质量提升（十二维叙事学框架扩展 + 全新领域开拓 + 多方向并行批次第九次·兰瑟+沃霍尔+弗鲁斯+卡普兰 / 萨义德+斯皮瓦克+巴巴+勒菲弗尔 / 坎贝尔+弗莱+维谢洛夫斯基+迈纳 / 姚斯+伊瑟尔+伊格尔顿+霍尔 / 韦努蒂+奈达+巴斯内特+勒菲弗尔 / 王阳明+李贽+王畿+黄宗羲·5 个 A4 新维度 + 1 个 A3 深化 + 1 个 A5 明代对照 + 2 个 D 可视化·A4 方向第 47-51 个新维度·十二维叙事学框架扩展（时-空-听-嗅-触-视-味-文-修-知-性别-后殖民）+ 全新领域开拓（比较文学+接受美学+翻译学）+ 多方向并行批次第九次 + 八层明代镜像完整闭环·方向 4 质量提升：W161-W174 十二维叙事学跨专题交叉校验）
+### v2.2.14 — 已完成（2026-07-28）：W173-W181 九专题落地 + 方向 4 质量提升（十二维叙事学框架扩展 + 全新领域开拓 + 多方向并行批次第九次·兰瑟+沃霍尔+弗鲁斯+卡普兰 / 萨义德+斯皮瓦克+巴巴+勒菲弗尔 / 坎贝尔+弗莱+维谢洛夫斯基+迈纳 / 姚斯+伊瑟尔+伊格尔顿+霍尔 / 韦努蒂+奈达+巴斯内特+勒菲弗尔 / 王阳明+李贽+王畿+黄宗羲·5 个 A4 新维度 + 1 个 A3 深化 + 1 个 A5 明代对照 + 2 个 D 可视化·A4 方向第 47-51 个新维度·十二维叙事学框架扩展（时-空-听-嗅-触-视-味-文-修-知-性别-后殖民）+ 全新领域开拓（比较文学+接受美学+翻译学）+ 多方向并行批次第九次 + 八层明代镜像完整闭环·方向 4 质量提升：W161-W174 十二维叙事学跨专题交叉校验）
 
 > **W173-W181 九件套**
 > - **来源**：用户要求"继续推进方向 4 质量提升、方向 6 新方向开拓、D 方向新增可视化"。W173 女性主义叙事学+W174 后殖民叙事学扩展十二维叙事学框架（性别+后殖民两新维度），W176 比较文学+W177 接受美学+W178 翻译学开拓全新领域，W175 十二维叙事学关系图谱可视化整合 W161-W174，W179 蜘蛛精七姐妹合集深化女性主义叙事学，W180 明代思想史对照完成八层明代镜像完整闭环，W181 妖怪女性群体关系图可视化。方向 4 质量提升：W161-W174 十二维叙事学跨专题交叉校验（W164 头部补七感结构 + W169/W170 头部补十维结构 + 8 专题跨专题关联补充）。
@@ -768,9 +849,9 @@
 >   - W166 视觉叙事学：第 325 行补充 W167 跨专题引用
 >   - W165 触觉叙事学：第 185 行补充 W166/W167 跨专题引用
 > - **验证**：DRL R1b 主代理 spot-check 真收敛 + git ls-files 验证 9 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A4 主题专题 65→70 篇 + A3 人物 55→56 篇 + A5 文化 15→16 篇 + D 可视化 58→60 个·十二维叙事学框架扩展（时-空-听-嗅-触-视-味-文-修-知-性别-后殖民）+ 全新领域开拓（比较文学+接受美学+翻译学）+ 多方向并行批次第九次 + 八层明代镜像完整闭环·方向 4 质量提升+方向 6 新方向开拓+D 方向可视化
+> - **状态**：已完成（2026-07-28）·A4 主题专题 65→70 篇 + A3 人物 55→56 篇 + A5 文化 15→16 篇 + D 可视化 58→60 个·十二维叙事学框架扩展（时-空-听-嗅-触-视-味-文-修-知-性别-后殖民）+ 全新领域开拓（比较文学+接受美学+翻译学）+ 多方向并行批次第九次 + 八层明代镜像完整闭环·方向 4 质量提升+方向 6 新方向开拓+D 方向可视化
 
-### v2.2.13 — 进行中（2026-07-28）：W169-W172 互文性叙事学+修辞叙事学+认知叙事学+互文性关系图谱可视化四专题（方向 4 质量提升+方向 6 新方向开拓+D 方向可视化·克里斯蒂娃+巴特+热奈特+里法特尔 / 布斯+费伦+拉宾诺维茨+兰瑟 / 赫尔曼+瑞安+帕尔默+詹塞·3 个新专题+1 个可视化·A4 方向第 44-46 个新维度·D 方向第 14 个 NLP 可视化·与 W161-W167 七感叙事学形成"感官+文本"二元结构·方向 4 质量提升：W163/W165/W166 头部更新七感结构 + W164 术语表数量标注 + W169/W170/W171 编号统一）
+### v2.2.13 — 已完成（2026-07-28）：W169-W172 互文性叙事学+修辞叙事学+认知叙事学+互文性关系图谱可视化四专题（方向 4 质量提升+方向 6 新方向开拓+D 方向可视化·克里斯蒂娃+巴特+热奈特+里法特尔 / 布斯+费伦+拉宾诺维茨+兰瑟 / 赫尔曼+瑞安+帕尔默+詹塞·3 个新专题+1 个可视化·A4 方向第 44-46 个新维度·D 方向第 14 个 NLP 可视化·与 W161-W167 七感叙事学形成"感官+文本"二元结构·方向 4 质量提升：W163/W165/W166 头部更新七感结构 + W164 术语表数量标注 + W169/W170/W171 编号统一）
 
 > **W169-W172 四件套**
 > - **来源**：用户要求"继续推进方向 4 质量提升、方向 6 新方向开拓、D 方向新增可视化"。W169 互文性叙事学+W170 修辞叙事学+W171 认知叙事学补全叙事学理论框架，W172 互文性关系图谱可视化。方向 4 质量提升：W163/W165/W166 头部更新七感结构 + W164 术语表数量标注 + W169/W170/W171 编号统一（第 44/45/46 个新维度）。
@@ -786,11 +867,23 @@
 >   - W164 嗅觉叙事学：术语表数量标注（28 个）
 >   - W169/W170/W171 编号统一（第 44/45/46 个新维度）
 > - **验证**：DRL R1b 主代理 spot-check 真收敛 + git ls-files 验证 4 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A4 主题专题 62→65 篇 + A3 人物 55 篇 + A5 文化 15 篇 + D 可视化 57→58 个·方向 4 质量提升+方向 6 新方向开拓+D 方向可视化
+> - **状态**：已完成（2026-07-28）·A4 主题专题 62→65 篇 + A3 人物 55 篇 + A5 文化 15 篇 + D 可视化 57→58 个·方向 4 质量提升+方向 6 新方向开拓+D 方向可视化
 
 ### v2.2.1 — 已完成（2026-07-28）：W120-W123 多方向并行（A4 美学 + A3 人物深化 + A5 明代文学思想 + D 人物情感弧线可视化四专题·康德+黑格尔+海德格尔+阿多诺 / W100 NLP 数据驱动关系网络 / 李贽+袁宏道+归有光+李梦波 / W100+W102+W103+W121 四层 NLP 数据·审美判断+艺术理念+艺术真理+文化工业 / 师徒对话模式+冲突结构+情感纽带 / 童心说+性灵说+文以载道+格调说 / 五众情感弧线+转折点标注+关系对对照+U型曲线+雷达图·4 个新维度·Preflight 三轨验证第四十三至四十六次完整执行通过·A4 方向第 27 个新维度 + A3 方向第 1 个数据驱动关系深化 + A5 方向第 4 个明代对照 + D 方向第 4 个 NLP 可视化·多方向并行批次）
 
-### v2.2.7 — 进行中（2026-07-28）：W148-W151 多方向并行批次第七次落地（A3 地府体系深化 + A4 小妖生命史 + A5 明代科举制度对照 + D 地府权力关系图可视化四专题·基于人物四.txt + 人物三.txt + 人物七.txt + 人物二.txt 素材 / 韦伯+福柯+阿甘本+瞿同祖 / 阿甘本+福柯+斯皮瓦克+南迪 / 黄仁宇+艾尔曼+宫崎市定+韦伯 / W100+W102+W103+W121+W125+W129+W143 七层 NLP 数据·十殿阎王+崔判官+地藏王菩萨+刘全+魏徵五地府主体 / 精细鬼+巴山虎+狮驼岭三万小妖+黑熊精散养+青牛精围观五小妖谱系 / 取经选拔+功果考核+五圣成真+提学官制度四科举结构 / 力导向+桑基+雷达+时间线+概览·4 个新专题·A3 方向第 8 个深化专题 + A4 方向第 35 个新维度 + A5 方向第 10 个明代对照 + D 方向第 11 个 NLP 可视化·多方向并行批次第七次落地）
+> **W120-W123 四件套**
+> - **来源**：用户要求"多方向并行推进"——4 个方向各推进 1 个专题：W120 A4 美学 + W121 A3 人物深化 + W122 A5 明代文学思想 + W123 D 人物情感弧线可视化。多方向并行批次，与 W108-W111/W112-W115/W116-W119 三轮 A4 Batch 18-20 串联专题形成对照。
+> - **文件**（4 新建 = 4 文件）：
+>   - `docs/03-主题与情节专题/取经美学专题.md`（W120·七段式·康德《判断力批判》+ 黑格尔《美学》+ 海德格尔《林中路》+ 阿多诺《美学理论》四位理论家·审美判断四契机+艺术理念三阶段+艺术真理本源+文化工业批判四结构·7 个 line 号·15 个关键术语表·与 W088/W089/W106/W107/W112/W116/W117/W118/W119 形成"时空声响媒介符号地理历史政治社会美学"十层结构·A4 方向第 27 个新维度）
+>   - `docs/02-人物深度分析/取经五众关系网络深化.md`（W121·九段式·基于 W100 character_nlp.py 共现数据 + W102 关系演化时间线 + W103 引语情感分析·三重对话模式（指令-执行+抱怨-调解+沉默-见证）+ 三阶段冲突循环 + U 型情感曲线 + 15 个关键术语表·与 W100/W101/W102/W103/W120 形成"数据-身体-演化-情感-美学"五层结构·A3 方向第 1 个数据驱动关系深化专题·A3 人物深化 41→42 篇）
+>   - `docs/04-文化与历史背景/明代文学思想对照专题.md`（W122·八段式·李贽《童心说》+ 袁宏道《公安派》+ 归有光《唐宋派》+ 李梦阳《前后七子》四位理论家·童心说+性灵说+文以载道+格调说四思潮·明代四大名著横向对位+五阶段纵向定位+15 个关键术语表·与 W094/W095/W096 形成"政策+人物+风俗+文学思想"四层明代镜像结构·A5 方向第 4 个明代对照专题·A5 文化历史 7→8 篇）
+>   - `site/data/character-sentiment-arc.html`（W123·D 方向·人物情感弧线可视化·基于 W100+W102+W103+W121 四层 NLP 数据·6 个 Section + 5 个 D3.js 图表：① 五众情感弧线总览 + ② 6 个关键转折点标注 + ③ 三对核心关系对照 + ④ U 型情感曲线三阶段 + ⑤ 四众情感画像雷达 + ⑥ 关键洞察·古典宣纸风配色·D 方向第 4 个 NLP 可视化·D 可视化页面 47→48 个）
+> - **验证**：Preflight 三轨验证第四十三至四十六次完整执行通过（W120-W123 各一次）+ DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0 + E1 tracked 验证 4 文件已 git add tracked + 6 文件文档同步 v2.2.1 W120-W123 + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 三 skill 闭环
+> - **状态**：已完成（2026-07-28·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步完成·mem-wrap-up 7 步流水线待执行）
+
+
+
+### v2.2.7 — 已完成（2026-07-28）：W148-W151 多方向并行批次第七次落地（A3 地府体系深化 + A4 小妖生命史 + A5 明代科举制度对照 + D 地府权力关系图可视化四专题·基于人物四.txt + 人物三.txt + 人物七.txt + 人物二.txt 素材 / 韦伯+福柯+阿甘本+瞿同祖 / 阿甘本+福柯+斯皮瓦克+南迪 / 黄仁宇+艾尔曼+宫崎市定+韦伯 / W100+W102+W103+W121+W125+W129+W143 七层 NLP 数据·十殿阎王+崔判官+地藏王菩萨+刘全+魏徵五地府主体 / 精细鬼+巴山虎+狮驼岭三万小妖+黑熊精散养+青牛精围观五小妖谱系 / 取经选拔+功果考核+五圣成真+提学官制度四科举结构 / 力导向+桑基+雷达+时间线+概览·4 个新专题·A3 方向第 8 个深化专题 + A4 方向第 35 个新维度 + A5 方向第 10 个明代对照 + D 方向第 11 个 NLP 可视化·多方向并行批次第七次落地）
 
 > **W148-W151 四件套**
 > - **来源**：用户要求"继续推进多方向并行批次（推荐）"——4 个方向各推进 1 个专题：W148 A3 地府体系深化 + W149 A4 小妖生命史 + W150 A5 明代科举制度对照 + W151 D 地府权力关系图可视化。多方向并行批次第七次落地，与 W120-W123 + W124-W127 + W128-W131 + W132-W139 + W140-W143 + W144-W147 前六轮多方向并行批次形成对照。W148 承接 W144《边缘神祇深化专题》向下延伸（城隍作为阴阳两界中转站，其下接的正是地府体系）。W149 与 W137 底层叙事学 + W141 创伤叙事学 + W145 神话学形成"底层+创伤+神话+小妖"叙事学四元结构。W150 与 W126+W130+W134+W142+W146 形成"政治+经济+神祇+司法+军事+科举"六层明代镜像结构。
@@ -800,9 +893,9 @@
 >   - `docs/04-文化与历史背景/明代科举制度对照专题.md`（W150·八段式·黄仁宇+艾尔曼+宫崎市定+韦伯四位理论家·取经选拔+功果考核+五圣成真+提学官制度四科举结构·20 个术语·与 W126+W130+W134+W142+W146 形成六层明代镜像结构·A5 方向第 10 个明代对照专题·A5 文化 13→14 篇）
 >   - `site/data/underworld-power-network.html`（W151·D 方向地府权力关系图可视化·6 个 Section + 5 个 D3.js 图表·力导向+桑基+雷达+时间线+概览·古典宣纸风配色·D 方向第 11 个 NLP 可视化·D 可视化页面 54→55 个）
 > - **验证**：DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0 + git ls-files 验证 4 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A4 主题专题 53→54 篇 + A3 人物 48→49 篇 + A5 文化 13→14 篇 + D 可视化 54→55 个
+> - **状态**：已完成（2026-07-28）·A4 主题专题 53→54 篇 + A3 人物 48→49 篇 + A5 文化 13→14 篇 + D 可视化 54→55 个
 
-### v2.2.12 — 进行中（2026-07-28）：W166-W168 视觉叙事学+味觉叙事学+六感叙事学可视化三专题（方向4质量提升+方向6新方向开拓+D方向可视化·约翰·伯格+劳拉·穆尔维+W.J.T.米歇尔+马丁·杰伊 / 卡罗尔·库恩卡斯+巴里·史密斯+戈登·谢泼德+大卫·萨顿·2个新专题+1个可视化·A4方向第42-43个新维度·D方向第13个NLP可视化·与W161+W162+W163+W164+W165形成"时-空-听-嗅-触-视-味"七感叙事学结构·方向4质量提升：W161/W162五感结构断裂修复+W164理论家核实修正）
+### v2.2.12 — 已完成（2026-07-28）：W166-W168 视觉叙事学+味觉叙事学+六感叙事学可视化三专题（方向4质量提升+方向6新方向开拓+D方向可视化·约翰·伯格+劳拉·穆尔维+W.J.T.米歇尔+马丁·杰伊 / 卡罗尔·库恩卡斯+巴里·史密斯+戈登·谢泼德+大卫·萨顿·2个新专题+1个可视化·A4方向第42-43个新维度·D方向第13个NLP可视化·与W161+W162+W163+W164+W165形成"时-空-听-嗅-触-视-味"七感叙事学结构·方向4质量提升：W161/W162五感结构断裂修复+W164理论家核实修正）
 
 > **W166-W168 三件套**
 > - **来源**：用户要求"继续推进方向4进一步质量提升、方向6新方向开拓、D方向新增可视化"。W166视觉叙事学+W167味觉叙事学补全六感结构，W168六感叙事学关系图谱可视化。方向4质量提升修复W161/W162五感结构断裂+W164理论家核实修正。
@@ -815,9 +908,9 @@
 >   - W162空间叙事学：文件头部补七感叙事学结构
 >   - W164嗅觉叙事学：理论家核实修正"吉姆·科宾"→"吉姆·德罗布尼克"，"安妮·阿尔维乌"→"雷切尔·赫尔兹"，著作《Aroama》错误归属修正为《The Smell Culture Reader》(2006)
 > - **验证**：DRL R1b 主代理 spot-check 真收敛 + git ls-files 验证 3 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A4主题专题60→62篇 + A3人物55篇 + A5文化15篇 + D可视化56→57个·方向4质量提升+方向6新方向开拓+D方向可视化
+> - **状态**：已完成（2026-07-28）·A4主题专题60→62篇 + A3人物55篇 + A5文化15篇 + D可视化56→57个·方向4质量提升+方向6新方向开拓+D方向可视化
 
-### v2.2.11 — 进行中（2026-07-28）：W163-W165 A4 五感叙事学三专题（听觉+嗅觉+触觉三专题·肖恩·洛克本+唐纳德·霍顿+罗兰·巴特+雷蒙德·默里·谢弗 / 康德+大卫·豪斯+吉姆·科宾+安妮·阿尔维乌 / 梅洛-庞蒂+马塞尔·莫斯+让-吕克·南希+阿德里安·帕坦·3 个新专题·A4 方向第 39-41 个新维度·五感叙事学系列·与 W161 时间叙事学 + W162 空间叙事学形成"时-空-听-嗅-触"五感叙事学结构·与 W153 声音政治学 + W101 身体地理学 + W136 身体政治学形成跨学科呼应·方向 5 新方向开拓）
+### v2.2.11 — 已完成（2026-07-28）：W163-W165 A4 五感叙事学三专题（听觉+嗅觉+触觉三专题·肖恩·洛克本+唐纳德·霍顿+罗兰·巴特+雷蒙德·默里·谢弗 / 康德+大卫·豪斯+吉姆·科宾+安妮·阿尔维乌 / 梅洛-庞蒂+马塞尔·莫斯+让-吕克·南希+阿德里安·帕坦·3 个新专题·A4 方向第 39-41 个新维度·五感叙事学系列·与 W161 时间叙事学 + W162 空间叙事学形成"时-空-听-嗅-触"五感叙事学结构·与 W153 声音政治学 + W101 身体地理学 + W136 身体政治学形成跨学科呼应·方向 5 新方向开拓）
 
 > **W163-W165 三件套**
 > - **来源**：用户要求"进行方向 1234 后再进行方向 5"——方向 5 为 W163-W165 新方向开拓。W163-W165 三专题分别基于听觉叙事学、嗅觉叙事学、触觉叙事学三理论框架，分析《西游记》的声音景观、气味符号与触觉符号。与 W161 时间叙事学 + W162 空间叙事学形成"时-空-听-嗅-触"五感叙事学结构。每个专题七段式结构 + 28 个术语。
@@ -826,9 +919,9 @@
 >   - `docs/03-主题与情节专题/嗅觉叙事学专题.md`（W164·七段式·康德嗅觉美学+大卫·豪斯嗅觉文化+吉姆·科宾气味符号学+安妮·阿尔维乌嗅觉记忆·四层气味结构（仙气/妖风/烟火/药香）·28 个术语·A4 方向第 40 个新维度·五感叙事学系列第 2 篇·与 W163+W165 形成"听-嗅-触"三感结构·与 W101 身体地理学 + W136 身体政治学形成"身体-感官"跨学科呼应·A4 主题专题 58→59 篇）
 >   - `docs/03-主题与情节专题/触觉叙事学专题.md`（W165·七段式·梅洛-庞蒂触觉现象学+马塞尔·莫斯身体技术+让-吕克·南希触感+阿德里安·帕坦触觉美学·四层触觉结构（金箍/兵器/肌肤/法器）·28 个术语·A4 方向第 41 个新维度·五感叙事学系列第 3 篇·与 W163+W164 形成"听-嗅-触"三感结构·与 W101 身体地理学 + W136 身体政治学 + W133 器物传记学形成"身体-触觉"三元结构·A4 主题专题 59→60 篇）
 > - **验证**：DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0 + git ls-files 验证 3 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A4 主题专题 57→60 篇 + A3 人物 55 篇 + A5 文化 15 篇 + D 可视化 56 个·方向 5 新方向开拓
+> - **状态**：已完成（2026-07-28）·A4 主题专题 57→60 篇 + A3 人物 55 篇 + A5 文化 15 篇 + D 可视化 56 个·方向 5 新方向开拓
 
-### v2.2.10 — 进行中（2026-07-28）：W161-W162 A4 叙事学扩展两专题（时间叙事学+空间叙事学两专题·保罗·利科+热拉尔·热奈特+米哈伊尔·巴赫金+弗兰克·克默德 / 加斯东·巴什拉+约瑟夫·弗兰克+大卫·哈维+亨利·列斐伏尔·2 个新专题·A4 方向第 37-38 个新维度·叙事学扩展系列·与 W137 底层叙事学 + W141 创伤叙事学 + W145 神话学 + W149 小妖生命史 + W153 妖怪伦理学形成"底层+创伤+神话+小妖+伦理+时间+空间"叙事学七元结构·与 W089 空间政治学 + W090 地理符号学形成"叙事学-政治学-符号学"空间三元结构）
+### v2.2.10 — 已完成（2026-07-28）：W161-W162 A4 叙事学扩展两专题（时间叙事学+空间叙事学两专题·保罗·利科+热拉尔·热奈特+米哈伊尔·巴赫金+弗兰克·克默德 / 加斯东·巴什拉+约瑟夫·弗兰克+大卫·哈维+亨利·列斐伏尔·2 个新专题·A4 方向第 37-38 个新维度·叙事学扩展系列·与 W137 底层叙事学 + W141 创伤叙事学 + W145 神话学 + W149 小妖生命史 + W153 妖怪伦理学形成"底层+创伤+神话+小妖+伦理+时间+空间"叙事学七元结构·与 W089 空间政治学 + W090 地理符号学形成"叙事学-政治学-符号学"空间三元结构）
 
 > **W161-W162 两件套**
 > - **来源**：用户要求"进行方向 1234 后再进行方向 5"——方向 3 为 A4 叙事学扩展。W161-W162 两专题分别基于时间叙事学与空间叙事学两理论框架，分析《西游记》的时间结构与空间结构。与 W137 + W141 + W145 + W149 + W153 五专题形成"底层+创伤+神话+小妖+伦理+时间+空间"叙事学七元结构。与 W089 空间政治学 + W090 地理符号学形成空间三元结构。每个专题七段式结构 + 28 个术语。
@@ -836,9 +929,9 @@
 >   - `docs/03-主题与情节专题/时间叙事学专题.md`（W161·七段式·保罗·利科三重模仿+热奈特叙事时序/时距/频率+巴赫金时空体+克默德末世 endings·四层时间结构（宇宙/神话/凡间/修行）+ 八十一难末世倒计时·28 个术语·A4 方向第 37 个新维度·叙事学扩展系列第 1 篇·与 W162 形成"时-空"二元结构·A4 主题专题 55→56 篇）
 >   - `docs/03-主题与情节专题/空间叙事学专题.md`（W162·七段式·巴什拉诗学空间+弗兰克空间形式+哈维空间修复+列斐伏尔空间生产·四极空间结构（天庭/地府/人间/西天）+ 洞府空间诗学·28 个术语·A4 方向第 38 个新维度·叙事学扩展系列第 2 篇·与 W161 形成"时-空"二元结构·A4 主题专题 56→57 篇·与 W089 空间政治学 + W090 地理符号学形成空间三元结构）
 > - **验证**：DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0 + git ls-files 验证 2 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A4 主题专题 55→57 篇 + A3 人物 55 篇 + A5 文化 15 篇 + D 可视化 56 个
+> - **状态**：已完成（2026-07-28）·A4 主题专题 55→57 篇 + A3 人物 55 篇 + A5 文化 15 篇 + D 可视化 56 个
 
-### v2.2.9 — 进行中（2026-07-28）：W156-W160 A3 取经五众深化系列五专题（孙悟空+猪八戒+沙僧+白龙马+唐僧五专题·身份政治+欲望政治+沉默政治+赎罪政治+轮回政治五理论框架·安森·伯格+斯图亚特·霍尔+查尔斯·泰勒+阿克塞尔·霍耐特 / 乔治·巴塔耶+雅克·拉康+斯拉沃热·齐泽克+吉尔·德勒兹 / 尤尔根·哈贝马斯+米歇尔·福柯+皮埃尔·布尔迪厄+阿西斯·南迪 / 伊曼纽尔·列维纳斯+雅克·德里达+吉奥乔·阿甘本+让-吕克·马里翁 / 马丁·海德格尔+瓦尔特·本雅明+吉奥乔·阿甘本+阿兰·巴迪欧·5 个新专题·A3 方向第 10-14 个深化专题·取经五众深化系列·与 W152 天庭体系深化 + W148 地府体系深化 + W144 边缘神祇深化形成"天庭-地府-边缘-取经五众"四元神祇/人物体系）
+### v2.2.9 — 已完成（2026-07-28）：W156-W160 A3 取经五众深化系列五专题（孙悟空+猪八戒+沙僧+白龙马+唐僧五专题·身份政治+欲望政治+沉默政治+赎罪政治+轮回政治五理论框架·安森·伯格+斯图亚特·霍尔+查尔斯·泰勒+阿克塞尔·霍耐特 / 乔治·巴塔耶+雅克·拉康+斯拉沃热·齐泽克+吉尔·德勒兹 / 尤尔根·哈贝马斯+米歇尔·福柯+皮埃尔·布尔迪厄+阿西斯·南迪 / 伊曼纽尔·列维纳斯+雅克·德里达+吉奥乔·阿甘本+让-吕克·马里翁 / 马丁·海德格尔+瓦尔特·本雅明+吉奥乔·阿甘本+阿兰·巴迪欧·5 个新专题·A3 方向第 10-14 个深化专题·取经五众深化系列·与 W152 天庭体系深化 + W148 地府体系深化 + W144 边缘神祇深化形成"天庭-地府-边缘-取经五众"四元神祇/人物体系）
 
 > **W156-W160 五件套**
 > - **来源**：用户要求"进行方向 1234 后再进行方向 5"——方向 2 为 A3 取经五众深化系列。W156-W160 五专题分别基于身份政治、欲望政治、沉默政治、赎罪政治、轮回政治五理论框架，分析孙悟空、猪八戒、沙僧、白龙马、唐僧五众。与 W152 天庭体系深化 + W148 地府体系深化 + W144 边缘神祇深化形成"天庭-地府-边缘-取经五众"四元神祇/人物体系。每个专题九段式结构 + 28 个术语。
@@ -849,9 +942,9 @@
 >   - `docs/02-人物深度分析/白龙马深化专题.md`（W159·九段式·白龙马赎罪政治·龙王三太子→死罪→鹰愁涧→白龙马→八部天龙广力菩萨五阶段赎罪·伊曼纽尔·列维纳斯+雅克·德里达+吉奥乔·阿甘本+让-吕克·马里翁四理论家·28 个术语·A3 方向第 13 个深化专题·A3 人物 53→54 篇）
 >   - `docs/02-人物深度分析/唐僧深化专题.md`（W160·九段式·唐僧轮回政治·金蝉子→陈祎→江流儿→玄奘→旃檀功德佛五阶段轮回·马丁·海德格尔+瓦尔特·本雅明+吉奥乔·阿甘本+阿兰·巴迪欧四理论家·28 个术语·A3 方向第 14 个深化专题·A3 人物 54→55 篇）
 > - **验证**：DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0 + git ls-files 验证 5 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A3 人物 50→55 篇 + A4 主题专题 55 篇 + A5 文化 15 篇 + D 可视化 56 个
+> - **状态**：已完成（2026-07-28）·A3 人物 50→55 篇 + A4 主题专题 55 篇 + A5 文化 15 篇 + D 可视化 56 个
 
-### v2.2.8 — 进行中（2026-07-28）：W152-W155 多方向并行批次第八次落地（A3 天庭体系深化 + A4 妖怪伦理学 + A5 明代宗教制度对照 + D 天庭权力关系图可视化四专题·基于天庭叙事素材 / 韦伯+王斯福+武雅士+王铭铭 / 亚里士多德+康德+列维纳斯+麦金太尔 / 黄仁宇+钱穆+韦伯+杨庆堃 / W100+W102+W103+W121+W125+W129+W143+W147 八层 NLP 数据·玉帝+托塔天王+太白金星+赤脚大仙四天庭主体 / 金角银角+狮驼岭+红孩儿+牛魔王四妖怪案例 / 取经选拔+僧官制度+白云观道教+关帝崇拜四宗教结构 / 力导向+桑基+雷达+时间线+仪表盘·4 个新专题·A3 方向第 9 个深化专题 + A4 方向第 36 个新维度 + A5 方向第 11 个明代对照 + D 方向第 12 个 NLP 可视化·多方向并行批次第八次落地）
+### v2.2.8 — 已完成（2026-07-28）：W152-W155 多方向并行批次第八次落地（A3 天庭体系深化 + A4 妖怪伦理学 + A5 明代宗教制度对照 + D 天庭权力关系图可视化四专题·基于天庭叙事素材 / 韦伯+王斯福+武雅士+王铭铭 / 亚里士多德+康德+列维纳斯+麦金太尔 / 黄仁宇+钱穆+韦伯+杨庆堃 / W100+W102+W103+W121+W125+W129+W143+W147 八层 NLP 数据·玉帝+托塔天王+太白金星+赤脚大仙四天庭主体 / 金角银角+狮驼岭+红孩儿+牛魔王四妖怪案例 / 取经选拔+僧官制度+白云观道教+关帝崇拜四宗教结构 / 力导向+桑基+雷达+时间线+仪表盘·4 个新专题·A3 方向第 9 个深化专题 + A4 方向第 36 个新维度 + A5 方向第 11 个明代对照 + D 方向第 12 个 NLP 可视化·多方向并行批次第八次落地）
 
 > **W152-W155 四件套**
 > - **来源**：用户要求"继续推进多方向并行批次（推荐）"——4 个方向各推进 1 个专题：W152 A3 天庭体系深化 + W153 A4 妖怪伦理学 + W154 A5 明代宗教制度对照 + W155 D 天庭权力关系图可视化。多方向并行批次第八次落地，与 W120-W123 + W124-W127 + W128-W131 + W132-W139 + W140-W143 + W144-W147 + W148-W151 前七轮多方向并行批次形成对照。W152 承接 W148《地府体系深化专题》向上延伸（地府的镜像即天庭）。W153 与 W124 取经伦理学形成"伦理+妖怪伦理"对照结构。W154 与 W126+W130+W134+W142+W146+W150 形成"政治+经济+神祇+司法+军事+科举+宗教"七层明代镜像完整闭环。
@@ -861,7 +954,7 @@
 >   - `docs/04-文化与历史背景/明代宗教制度对照专题.md`（W154·八段式·黄仁宇+钱穆+韦伯+杨庆堃四理论家·25 个术语·与 W126+W130+W134+W142+W146+W150 形成七层明代镜像完整闭环·A5 方向第 11 个明代对照·A5 文化 14→15 篇）
 >   - `site/data/heaven-power-network.html`（W155·D 方向天庭权力关系图可视化·6 个 Section + 5 个 D3.js 图表·力导向+桑基+雷达+时间线+仪表盘·古典宣纸风配色·20 节点 28 边·D 方向第 12 个 NLP 可视化·D 可视化页面 55→56 个）
 > - **验证**：DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0 + git ls-files 验证 4 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A4 主题专题 54→55 篇 + A3 人物 49→50 篇 + A5 文化 14→15 篇 + D 可视化 55→56 个
+> - **状态**：已完成（2026-07-28）·A4 主题专题 54→55 篇 + A3 人物 49→50 篇 + A5 文化 14→15 篇 + D 可视化 55→56 个
 
 ### v2.2.6 — 已完成（2026-07-28）：W144-W147 多方向并行批次第六次落地（A3 边缘神祇深化 + A4 神话学 + A5 明代军事制度对照 + D 妖怪等级制度可视化四专题·基于人物三.txt 素材 / 韦伯+王斯福+武雅士+王铭铭 / 坎贝尔+弗莱+列维-斯特劳斯+伊利亚德 / 黄仁宇+茅海建+梁方仲+孟森 / W100+W102+W103+W121+W125+W129+W143 七层 NLP 数据·土地+山神+城隍+灶王四边缘神祇 / 单一神话+原型批评+神话逻辑+神圣显在四神话学结构 / 卫所+总兵+家丁+土司四军事制度 / 独狼+家族+联盟+官僚四组织形态·4 个新专题·A3 方向第 7 个深化专题 + A4 方向第 34 个新维度 + A5 方向第 9 个明代对照 + D 方向第 10 个 NLP 可视化·多方向并行批次第六次落地）
 
@@ -873,7 +966,7 @@
 >   - `docs/04-文化与历史背景/明代军事制度对照专题.md`（W146·八段式·黄仁宇+茅海建+梁方仲+孟森四位理论家·卫所+总兵+家丁+土司四军事制度·20 个术语·与 W126+W130+W134+W142 形成五层明代镜像结构·A5 方向第 9 个明代对照专题·A5 文化 12→13 篇）
 >   - `site/data/monster-hierarchy-network.html`（W147·D 方向妖怪等级制度可视化·6 个 Section + 5 个 D3.js 图表·力导向+桑基+雷达+时间线+仪表盘·古典宣纸风配色·D 方向第 10 个 NLP 可视化·D 可视化页面 53→54 个）
 > - **验证**：DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0 + git ls-files 验证 4 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A4 主题专题 52→53 篇 + A3 人物 47→48 篇 + A5 文化 12→13 篇 + D 可视化 53→54 个
+> - **状态**：已完成（2026-07-28）·A4 主题专题 52→53 篇 + A3 人物 47→48 篇 + A5 文化 12→13 篇 + D 可视化 53→54 个
 
 ### v2.2.5 — 已完成（2026-07-28）：W140-W143 多方向并行批次第五次落地（A3 金角银角深化 + A4 创伤叙事学 + A5 明代司法制度深化 + D 妖怪受害者关系图四专题·基于人物二.txt 素材 / 卡西·卡鲁斯+费尔曼+赫尔曼+阿甘本 / 黄仁宇+瞿同祖+滋贺秀三+寺田浩明 / W100+W102+W103+W121+W125+W129 六层 NLP 数据·被借来的苦难·紫金红葫芦+羊脂玉净瓶+老奶奶接回+童子下凡 / 金圣宫+赛太岁+金角银角+童男童女四创伤叙事 / 赛太岁+朱紫国王+金圣宫+崔判官四司法案例 / 力导向+桑基+雷达+时间线+概览·4 个新专题·A3 方向第 6 个深化专题 + A4 方向第 33 个新维度 + A5 方向第 8 个明代对照 + D 方向第 9 个 NLP 可视化·多方向并行批次第五次落地）
 
@@ -885,7 +978,7 @@
 >   - `docs/04-文化与历史背景/明代司法制度深化专题.md`（W142·八段式·黄仁宇+瞿同祖+滋贺秀三+寺田浩明四位理论家·赛太岁+朱紫国王+金圣宫+崔判官四司法案例·19 个术语·与 W078 形成"镜像→深化"递进·七层明代镜像结构·A5 方向第 8 个明代对照专题·A5 文化 11→12 篇）
 >   - `site/data/monster-victims-network.html`（W143·D 方向妖怪受害者关系图可视化·6 个 Section + 5 个 D3.js 图表·力导向+桑基+雷达+时间线+概览·古典宣纸风配色·D 方向第 9 个 NLP 可视化·D 可视化页面 52→53 个）
 > - **验证**：Preflight 三轨验证第六十三至六十六次完整执行通过 + DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0 + git ls-files 验证 4 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A4 主题专题 51→52 篇 + A3 人物 46→47 篇 + A5 文化 11→12 篇 + D 可视化 52→53 个
+> - **状态**：已完成（2026-07-28）·A4 主题专题 51→52 篇 + A3 人物 46→47 篇 + A5 文化 11→12 篇 + D 可视化 52→53 个
 
 ### v2.2.4 — 已完成（2026-07-28）：W132-W139 多方向并行批次第四次落地（A3 四大天王合集 + A4 器物传记学 + A5 明代神祇官僚体系 + D 四大天王器物符号图谱 + A4 身体政治学 + A4 底层叙事学 + A3 观音菩萨深化 + D 观音六重身份关系图八专题·基于人物五.txt + 人物六.txt + 人物七.txt + 人物.txt 素材整合 / 增长+广目+多闻+持国四大天王合集 / 器物传记学新维度 / 明代神祇官僚体系对照 / 四大天王器物符号图谱 / 身体政治学新维度 / 底层叙事学新维度 / 观音六重身份深化（招募者+约束者+回收者+调停者+操盘手+退场者）/ 观音六重身份关系图·8 个新专题·A4 方向第 30-32 个新维度 + A3 方向第 4-5 个合集/深化专题 + A5 方向第 7 个明代对照 + D 方向第 7-8 个 NLP 可视化·多方向并行批次第四次落地）
 
@@ -901,7 +994,7 @@
 >   - `docs/02-人物深度分析/观音菩萨深化专题.md`（W138·九段式·基于人物.txt 素材整合·观音六重身份深化（招募者+约束者+回收者+调停者+操盘手+退场者）+ 终极悖论（慈悲与精算）·与 W100/W102/W103/W121/W125/W129 形成数据-演化-情感-五众-次要-妖怪-观音七层结构·A3 方向第 5 个核心神祇深化专题·A3 人物 45→46 篇）
 >   - `site/data/guanyin-six-roles-network.html`（W139·D 方向观音六重身份关系图谱可视化·基于 W138 观音菩萨深化专题·6 个 Section + D3.js + d3-sankey 图表·古典宣纸风配色·D 方向第 8 个 NLP 可视化·D 可视化页面 51→52 个）
 > - **验证**：Preflight 三轨验证第五十五至六十二次完整执行通过 + DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0 + git ls-files 验证 8 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A4 主题专题 48→51 篇 + A3 人物 44→46 篇 + A5 文化 10→11 篇 + D 可视化 50→52 个
+> - **状态**：已完成（2026-07-28）·A4 主题专题 48→51 篇 + A3 人物 44→46 篇 + A5 文化 10→11 篇 + D 可视化 50→52 个
 
 ### v2.2.3 — 已完成（2026-07-28）：W128-W131 多方向并行批次第三次落地（A4 教育学 + A3 妖怪组织形态 + A5 明代经济制度 + D 人物出场时间线四专题·赫尔巴特+杜威+蒙特梭利+皮亚杰 / W100 NLP 数据驱动四组织形态 / 黄仁宇+梁方仲+韦伯+布罗代尔 / W100+W102+W103+W121+W125+W129 六层 NLP 数据·教育性教学+经验学习+环境准备+认知发展 / 独狼+家族+联盟+官僚四组织形态 / 财政税收+粮长制度+经济伦理+长时段经济 / 100 回出场人物曲线+热力图+累积曲线+首次出场+退场分析·4 个新维度·A4 方向第 29 个新维度 + A3 方向第 3 个数据驱动关系深化 + A5 方向第 6 个明代对照 + D 方向第 6 个 NLP 可视化·多方向并行批次第三次落地）
 
@@ -913,7 +1006,7 @@
 >   - `docs/04-文化与历史背景/明代经济制度对照专题.md`（W130·八段式·黄仁宇《十六世纪明代中国之财政与税收》+ 梁方仲《明代粮长制度》+ 韦伯《新教伦理与资本主义精神》+ 布罗代尔《地中海》四位理论家·财政税收+粮长制度+经济伦理+长时段经济四结构·4 个 line 号·15 个关键术语表·与 W094/W095/W096/W122/W126 形成"政策+人物+风俗+文学思想+政治制度+经济制度"六层明代镜像结构·A5 方向第 6 个明代对照专题·A5 文化 9→10 篇）
 >   - `site/data/character-presence-timeline.html`（W131·D 方向人物出场时间线可视化·基于 W100+W102+W103+W121+W125+W129 六层 NLP 数据·6 个 Section + 5 个 D3.js 图表：① 100 回出场人物数曲线 + ② 主要人物出场回数热力图 + ③ Top 10 人物累积出场曲线 + ④ 关键人物首次出场标注 + ⑤ 人物退场分析 + ⑥ 关键洞察·古典宣纸风配色·D 方向第 6 个 NLP 可视化·D 可视化页面 49→50 个）
 > - **验证**：Preflight 三轨验证第五十一至五十四次完整执行通过 + DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0 + git ls-files 验证 4 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A4 主题专题 47→48 篇 + A3 人物 43→44 篇 + A5 文化 9→10 篇 + D 可视化 49→50 个
+> - **状态**：已完成（2026-07-28）·A4 主题专题 47→48 篇 + A3 人物 43→44 篇 + A5 文化 9→10 篇 + D 可视化 49→50 个
 
 ### v2.2.2 — 已完成（2026-07-28）：W124-W127 多方向并行（A4 伦理学 + A3 次要人物关系网络 + A5 明代政治制度 + D 人物语义网络可视化四专题·亚里士多德+康德+密尔+麦金太尔 / W100 NLP 数据驱动三子网络 / 黄仁宇+钱穆+孟森+谢国桢 / W100+W102+W103+W121+W125 五层 NLP 数据·德性+义务+功利+美德 / 神佛+妖怪+凡人三子网络 / 皇权+官僚+藩封+法律 / 三子网络饼图+力导向图+功能标注+交互热力图·4 个新维度·A4 方向第 28 个新维度 + A3 方向第 2 个数据驱动关系深化 + A5 方向第 5 个明代对照 + D 方向第 5 个 NLP 可视化·多方向并行批次第二次落地）
 
@@ -925,17 +1018,7 @@
 >   - `docs/04-文化与历史背景/明代政治制度对照专题.md`（W126·八段式·黄仁宇《万历十五年》+ 钱穆《中国历代政治得失》+ 孟森《明史讲义》+ 谢国桢《明末清初的学风》四位理论家·皇权+官僚+藩封+法律四结构·4 个 line 号·15 个关键术语表·与 W094/W095/W096/W122 形成"政策+人物+风俗+文学思想+政治制度"五层明代镜像结构·A5 方向第 5 个明代对照专题·A5 文化 8→9 篇）
 >   - `site/data/character-semantic-network.html`（W127·D 方向人物语义网络可视化·基于 W100+W102+W103+W121+W125 五层 NLP 数据·6 个 Section + 5 个 D3.js 图表：① 三子网络概览饼图 + ② 神佛体系力导向图 + ③ 妖怪群体力导向图 + ④ 凡人群体功能标注图 + ⑤ 三子网络交互热力图 + ⑥ 关键洞察·古典宣纸风配色·D 方向第 5 个 NLP 可视化·D 可视化页面 48→49 个）
 > - **验证**：Preflight 三轨验证第四十七至五十次完整执行通过 + DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0 + git ls-files 验证 4 文件全部 tracked + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 四维度复盘
-> - **状态**：进行中（2026-07-28）·A4 主题专题 46→47 篇 + A3 人物 42→43 篇 + A5 文化 8→9 篇 + D 可视化 48→49 个
-
-> **W120-W123 四件套**
-> - **来源**：用户要求"多方向并行推进"——4 个方向各推进 1 个专题：W120 A4 美学 + W121 A3 人物深化 + W122 A5 明代文学思想 + W123 D 人物情感弧线可视化。多方向并行批次，与 W108-W111/W112-W115/W116-W119 三轮 A4 Batch 18-20 串联专题形成对照。
-> - **文件**（4 新建 = 4 文件）：
->   - `docs/03-主题与情节专题/取经美学专题.md`（W120·七段式·康德《判断力批判》+ 黑格尔《美学》+ 海德格尔《林中路》+ 阿多诺《美学理论》四位理论家·审美判断四契机+艺术理念三阶段+艺术真理本源+文化工业批判四结构·7 个 line 号·15 个关键术语表·与 W088/W089/W106/W107/W112/W116/W117/W118/W119 形成"时空声响媒介符号地理历史政治社会美学"十层结构·A4 方向第 27 个新维度）
->   - `docs/02-人物深度分析/取经五众关系网络深化.md`（W121·九段式·基于 W100 character_nlp.py 共现数据 + W102 关系演化时间线 + W103 引语情感分析·三重对话模式（指令-执行+抱怨-调解+沉默-见证）+ 三阶段冲突循环 + U 型情感曲线 + 15 个关键术语表·与 W100/W101/W102/W103/W120 形成"数据-身体-演化-情感-美学"五层结构·A3 方向第 1 个数据驱动关系深化专题·A3 人物深化 41→42 篇）
->   - `docs/04-文化与历史背景/明代文学思想对照专题.md`（W122·八段式·李贽《童心说》+ 袁宏道《公安派》+ 归有光《唐宋派》+ 李梦阳《前后七子》四位理论家·童心说+性灵说+文以载道+格调说四思潮·明代四大名著横向对位+五阶段纵向定位+15 个关键术语表·与 W094/W095/W096 形成"政策+人物+风俗+文学思想"四层明代镜像结构·A5 方向第 4 个明代对照专题·A5 文化历史 7→8 篇）
->   - `site/data/character-sentiment-arc.html`（W123·D 方向·人物情感弧线可视化·基于 W100+W102+W103+W121 四层 NLP 数据·6 个 Section + 5 个 D3.js 图表：① 五众情感弧线总览 + ② 6 个关键转折点标注 + ③ 三对核心关系对照 + ④ U 型情感曲线三阶段 + ⑤ 四众情感画像雷达 + ⑥ 关键洞察·古典宣纸风配色·D 方向第 4 个 NLP 可视化·D 可视化页面 47→48 个）
-> - **验证**：Preflight 三轨验证第四十三至四十六次完整执行通过（W120-W123 各一次）+ DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0 + E1 tracked 验证 4 文件已 git add tracked + 6 文件文档同步 v2.2.1 W120-W123 + mem-wrap-up Step 4a/7a spot-check + self-evolution dim 1/5/9/11 三 skill 闭环
-> - **状态**：进行中（2026-07-28·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步完成·mem-wrap-up 7 步流水线待执行）
+> - **状态**：已完成（2026-07-28）·A4 主题专题 46→47 篇 + A3 人物 42→43 篇 + A5 文化 8→9 篇 + D 可视化 48→49 个
 
 ### v2.2.0 — 已完成（2026-07-28）：W116-W119 A4 Batch 20 取经地理学+历史学+政治学+社会学四专题（段义孚+索贾+哈维+马西 / 布罗代尔+黄仁宇+史景迁+柯文 / 马基雅维利+霍布斯+卢梭+托克维尔 / 韦伯+涂尔干+齐美尔+布迪厄·地方感+第三空间+空间正义+全球地方感 / 长时段+大历史+叙事史+历史记忆 / 权力术+主权+契约+民主 / 理性化+社会事实+文化悲剧+惯习·4 个七段式专题·28 个 line 号·Preflight 三轨验证第三十九至四十二次完整执行通过·A4 方向第 23-26 个新维度开启·Batch 20 收束篇）
 
@@ -949,7 +1032,7 @@
 > - **验证**：Preflight 三轨验证第三十九至四十二次完整执行通过（Track 1 line 号归属 + Track 2 内容匹配 + Track 3 章节归属）·DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=N(A2:N)/P3=0·mem-wrap-up Step 4a 项目层 spot-check 6 文件 v2.2.0/W116-W119 全部通过 + git ls-files 验证 4 专题文件 tracked·Step 7a memory 层 spot-check 发现 E1 升级版铁律 memory 层毕业后第 11 次新案例（14/3 证据）后立即补齐
 > - **状态**：已完成（2026-07-28）·03-主题与情节专题 41→45 篇·A4 方向累计 26 个新维度·Batch 20 收束篇
 
-### v2.1.9 — 进行中（2026-07-28）：W112-W115 A4 Batch 19 取经符号学+传播学+人类学+考古学四专题（索绪尔+皮尔斯+巴特+艾柯 / 拉斯韦尔+麦克卢汉+施拉姆+麦库姆斯 / 列维-斯特劳斯+马林诺夫斯基+米德+格尔茨 / 福柯+谢拉特+柴尔德+霍德·能指+所指+诠释+解码 / 传播者+传播内容+传播渠道+传播效果 / 亲属制度+宗教仪式+经济交换+文化象征 / 物质文化+遗址分析+文化层+器物类型学·4 个七段式专题·28 个 line 号·Preflight 三轨验证第三十五至三十八次完整执行通过·A4 方向第 19-22 个新维度开启·Batch 19 收束篇）
+### v2.1.9 — 已完成（2026-07-28）：W112-W115 A4 Batch 19 取经符号学+传播学+人类学+考古学四专题（索绪尔+皮尔斯+巴特+艾柯 / 拉斯韦尔+麦克卢汉+施拉姆+麦库姆斯 / 列维-斯特劳斯+马林诺夫斯基+米德+格尔茨 / 福柯+谢拉特+柴尔德+霍德·能指+所指+诠释+解码 / 传播者+传播内容+传播渠道+传播效果 / 亲属制度+宗教仪式+经济交换+文化象征 / 物质文化+遗址分析+文化层+器物类型学·4 个七段式专题·28 个 line 号·Preflight 三轨验证第三十五至三十八次完整执行通过·A4 方向第 19-22 个新维度开启·Batch 19 收束篇）
 
 > **W112-W115 四件套**
 > - **来源**：用户要求"Batch 19 全部都做（4 专题）"——4 个 A4 Batch 19 候选全部执行：W112 取经符号学 + W113 取经传播学 + W114 取经人类学 + W115 取经考古学。Batch 19 共 4 个新维度，与 W108-W111 Batch 18 + W088/W089/W106/W107 等前序专题形成多层结构。
@@ -963,9 +1046,9 @@
 >   - DRL R1b 主代理 spot-check 真收敛：P0=0 / P1=0 / **P2=N（A2:N）** / P3=0（部分 line 号偏差按 DRL 边际收益 gate 接受残留·与 W108-W111 等专题保持一致）
 >   - E1 tracked 验证：4 文件已 git add tracked（git ls-files 验证通过：取经符号学专题.md / 取经传播学专题.md / 取经人类学专题.md / 取经考古学专题.md）
 >   - 真收敛：P0=0 / P1=0 / P2=N（A2:N）/ P3=0（DRL 边际收益 gate 接受 P2 残留）
-> - **状态**：进行中（2026-07-28·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步完成·mem-wrap-up 7 步流水线待执行）
+> - **状态**：已完成（2026-07-28·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步完成·mem-wrap-up 7 步流水线待执行）
 
-### v2.1.8 — 进行中（2026-07-28）：W108-W111 A4 Batch 18 取经生态学+拓扑学+密码学+气候学四专题（贝里+哈拉维+德勒兹+斯蒂格勒 / 巴迪欧+德勒兹+拓扑学数学+列维纳斯 / 香农+图灵+德里达+鲍德里亚 / 拉图尔+斯洛特戴克+哈拉维+莫顿·自然生态+伴侣生态+技术生态+熵增生态 / 空间拓扑+时间拓扑+身份拓扑+伦理拓扑 / 编码+解码+加密+破解 / 气候系统+球体空间+灾难政治+生态思维·4 个七段式专题·28 个 line 号·Preflight 三轨验证第三十一至三十四次完整执行通过·A4 方向第 15-18 个新维度开启·Batch 18 收束篇）
+### v2.1.8 — 已完成（2026-07-28）：W108-W111 A4 Batch 18 取经生态学+拓扑学+密码学+气候学四专题（贝里+哈拉维+德勒兹+斯蒂格勒 / 巴迪欧+德勒兹+拓扑学数学+列维纳斯 / 香农+图灵+德里达+鲍德里亚 / 拉图尔+斯洛特戴克+哈拉维+莫顿·自然生态+伴侣生态+技术生态+熵增生态 / 空间拓扑+时间拓扑+身份拓扑+伦理拓扑 / 编码+解码+加密+破解 / 气候系统+球体空间+灾难政治+生态思维·4 个七段式专题·28 个 line 号·Preflight 三轨验证第三十一至三十四次完整执行通过·A4 方向第 15-18 个新维度开启·Batch 18 收束篇）
 
 > **W108-W111 四件套**
 > - **来源**：用户要求"Batch 18 全部都做"——4 个 A4 Batch 18 候选全部执行：W108 取经生态学 + W109 取经拓扑学 + W110 取经密码学 + W111 取经气候学。Batch 18 共 4 个新维度，与 W088/W089/W106/W107/W101 等前序专题形成多层结构。
@@ -979,9 +1062,9 @@
 >   - DRL R1b 主代理 spot-check 真收敛：P0=0 / P1=0 / **P2=N（A2:N）** / P3=0（部分 line 号偏差按 DRL 边际收益 gate 接受残留·与 W106/W107 等专题保持一致）
 >   - E1 tracked 验证：4 文件已 git add tracked（git ls-files 验证通过：取经生态学专题.md / 取经拓扑学专题.md / 取经密码学专题.md / 取经气候学专题.md）
 >   - 真收敛：P0=0 / P1=0 / P2=N（A2:N）/ P3=0（DRL 边际收益 gate 接受 P2 残留）
-> - **状态**：进行中（2026-07-28·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步完成·mem-wrap-up 7 步流水线待执行）
+> - **状态**：已完成（2026-07-28·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步完成·mem-wrap-up 7 步流水线待执行）
 
-### v2.1.7 — 进行中（2026-07-27）：W107 A4 Batch 17 取经媒介考古学专题（基于 W088+W089+W106 深化·麦克卢汉《理解媒介》+ 基特勒《留声机、电影、打字机》+ 本雅明《机械复制时代的艺术作品》+ 海德格尔《技术的追问》四位理论家·经卷媒介+诏书媒介+镜像媒介+法器媒介四形态·与 W088/W089/W106 形成"时间哲学+空间政治学+声音政治学+媒介考古学"四层结构·7 个 line 号·Preflight 三轨验证第三十次完整执行通过·A4 方向第 14 个新维度开启·Batch 17 收束篇）
+### v2.1.7 — 已完成（2026-07-27）：W107 A4 Batch 17 取经媒介考古学专题（基于 W088+W089+W106 深化·麦克卢汉《理解媒介》+ 基特勒《留声机、电影、打字机》+ 本雅明《机械复制时代的艺术作品》+ 海德格尔《技术的追问》四位理论家·经卷媒介+诏书媒介+镜像媒介+法器媒介四形态·与 W088/W089/W106 形成"时间哲学+空间政治学+声音政治学+媒介考古学"四层结构·7 个 line 号·Preflight 三轨验证第三十次完整执行通过·A4 方向第 14 个新维度开启·Batch 17 收束篇）
 
 > **W107 四件套**
 > - **来源**：用户要求"全部都做"——4 个 A4 Batch 17 候选全部执行：W104 取经叙事经济学 + W105 取经神话政治学 + W106 取经声音政治学 + W107 取经媒介考古学。本段为 W107——基于 W088（时间哲学·神话时间+钟表时间+弥赛亚时间+心灵时间）+ W089（空间政治学·神圣空间+凡俗空间+例外空间+流动空间）+ W106（声音政治学·语音身份+噪音政治+沉默策略+声音规训）扩展"媒介考古学"新维度，从"时间+空间+声音"延伸到"经卷+诏书+镜像+法器"四种媒介形态的谱系结构、感知重塑与本体追问。Batch 17 第 4 个候选（最后一个新维度），与 W104/W105/W106 共同完成 Batch 17 四维扩容。
@@ -992,9 +1075,9 @@
 >   - DRL R1b 主代理 spot-check 真收敛：P0=0 / P1=0 / **P2=2（A2:2）** / P3=0（line 981 偏差 1 行 + line 5950 偏差 2 行·按边际收益 gate 接受残留·与 W106 等专题保持一致）
 >   - E1 tracked 验证：取经媒介考古学专题.md 已 git add tracked（git ls-files 验证通过）
 >   - 真收敛：P0=0 / P1=0 / P2=2（A2:2）/ P3=0（DRL 边际收益 gate 接受 2 P2 残留）
-> - **状态**：进行中（2026-07-27·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步完成·mem-wrap-up 7 步流水线待执行）
+> - **状态**：已完成（2026-07-27·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步完成·mem-wrap-up 7 步流水线待执行）
 
-### v2.1.6 — 进行中（2026-07-27）：W106 A4 Batch 17 取经声音政治学专题（基于 W088+W089 深化·阿塔利《噪音》+ 巴特《文之悦》+ 福柯《规训与惩罚》+ 乔姆斯基《语言与心智》四位理论家·语音身份+噪音政治+沉默策略+声音规训四维度·与 W088/W089 形成"时间哲学+空间政治学+声音政治学"三层结构·7 个 line 号·Preflight 三轨验证第二十九次完整执行通过·A4 方向第 13 个新维度开启）
+### v2.1.6 — 已完成（2026-07-27）：W106 A4 Batch 17 取经声音政治学专题（基于 W088+W089 深化·阿塔利《噪音》+ 巴特《文之悦》+ 福柯《规训与惩罚》+ 乔姆斯基《语言与心智》四位理论家·语音身份+噪音政治+沉默策略+声音规训四维度·与 W088/W089 形成"时间哲学+空间政治学+声音政治学"三层结构·7 个 line 号·Preflight 三轨验证第二十九次完整执行通过·A4 方向第 13 个新维度开启）
 
 > **W106 四件套**
 > - **来源**：用户要求"全部都做"——4 个 A4 Batch 17 候选全部执行：W104 取经叙事经济学 + W105 取经神话政治学 + W106 取经声音政治学 + W107 取经媒介考古学。本段为 W106——基于 W088（时间哲学·神话时间+钟表时间+弥赛亚时间+心灵时间）+ W089（空间政治学·神圣空间+凡俗空间+例外空间+流动空间）扩展"声音政治学"新维度，从"时间+空间"延伸到"语音身份+噪音政治+沉默策略+声音规训"声音政治学。
@@ -1005,9 +1088,9 @@
 >   - DRL R1b 主代理 spot-check 真收敛：P0=0 / P1=0 / **P2=0** / P3=0（0 P2 残留，无需边际收益 gate）
 >   - E1 tracked 验证：取经声音政治学专题.md 已 git add tracked（git ls-files 验证通过）
 >   - 真收敛：P0=0 / P1=0 / P2=0 / P3=0（DRL 边际收益 gate 0 残留）
-> - **状态**：进行中（2026-07-27·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步完成·mem-wrap-up 7 步流水线待执行）
+> - **状态**：已完成（2026-07-27·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步完成·mem-wrap-up 7 步流水线待执行）
 
-### v2.1.5 — 进行中（2026-07-27）：W105 A4 Batch 17 取经神话政治学专题（基于 W084+W088 深化·列维-斯特劳斯《神话学》+ 韦伯《经济与社会》+ 阿甘本《例外状态》+ 巴丢《存在与事件》四位理论家·神话叙事+政治合法性+主权象征+真理事件四维度·与 W084/W088 形成"权力对照+时间哲学+神话政治学"三层结构·7 个 line 号·Preflight 三轨验证第二十八次完整执行通过·E1 升级版铁律第 9 次复现·A4 方向连续第四次撞坑 W100→W103→W104→W105）
+### v2.1.5 — 已完成（2026-07-27）：W105 A4 Batch 17 取经神话政治学专题（基于 W084+W088 深化·列维-斯特劳斯《神话学》+ 韦伯《经济与社会》+ 阿甘本《例外状态》+ 巴丢《存在与事件》四位理论家·神话叙事+政治合法性+主权象征+真理事件四维度·与 W084/W088 形成"权力对照+时间哲学+神话政治学"三层结构·7 个 line 号·Preflight 三轨验证第二十八次完整执行通过·E1 升级版铁律第 9 次复现·A4 方向连续第四次撞坑 W100→W103→W104→W105）
 
 > **W105 四件套**
 > - **来源**：用户要求"全部都做"——4 个 A4 Batch 17 候选全部执行：W104 取经叙事经济学 + W105 取经神话政治学 + W106 取经声音政治学 + W107 取经媒介考古学。本段为 W105——基于 W084（权力五联对照概论·来源→制度化→工具化→空间化→谱系化）+ W088（时间哲学·神话时间+钟表时间+弥赛亚时间+心灵时间）扩展"神话政治学"新维度，从"权力对照+时间哲学"延伸到"神话叙事+政治合法性+主权象征+真理事件"政治哲学。
@@ -1019,9 +1102,9 @@
 >     - E1 升级版铁律第 9 次复现（毕业后第 6 次新案例·A4 方向连续第四次撞坑 W100→W103→W104→W105）：本 session 主代理 Step 4a Grep spot-check 发现 README.md line 101 双索引段仍是 v2.1.3 + W001-W103（W104 同步遗漏），立即同步到 v2.1.5 + W001-W105
 >     - E1 tracked 验证：取经神话政治学专题.md 已 git ls-files tracked
 >   - 真收敛：P0=0 / P1=0 / P2=0 / P3=0（DRL 边际收益 gate 0 残留）
-> - **状态**：进行中（2026-07-27·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步执行中·mem-wrap-up 7 步流水线待执行）
+> - **状态**：已完成（2026-07-27·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步执行中·mem-wrap-up 7 步流水线待执行）
 
-### v2.1.4 — 进行中（2026-07-27）：W104 A4 Batch 17 取经叙事经济学专题（基于 W086+W092 深化·马克思《资本论》+ 西美尔《货币哲学》+ 波德里亚《符号政治经济学批判》+ 大卫·哈维《资本社会的17个矛盾》四位理论家·货币流通+价值交换+劳动价值+叙事资本四维度·与 W086/W092 形成"概论+财政深化+叙事经济深化"三层结构·7 个 line 号·Preflight 三轨验证第二十七次完整执行通过·E1 升级版铁律第 8 次复现·A4 方向连续第三次撞坑 W100→W103→W104）
+### v2.1.4 — 已完成（2026-07-27）：W104 A4 Batch 17 取经叙事经济学专题（基于 W086+W092 深化·马克思《资本论》+ 西美尔《货币哲学》+ 波德里亚《符号政治经济学批判》+ 大卫·哈维《资本社会的17个矛盾》四位理论家·货币流通+价值交换+劳动价值+叙事资本四维度·与 W086/W092 形成"概论+财政深化+叙事经济深化"三层结构·7 个 line 号·Preflight 三轨验证第二十七次完整执行通过·E1 升级版铁律第 8 次复现·A4 方向连续第三次撞坑 W100→W103→W104）
 
 > **W104 四件套**
 > - **来源**：用户要求"全部都做"——4 个 A4 Batch 17 候选全部执行：W104 取经叙事经济学 + W105 取经神话政治学 + W106 取经声音政治学 + W107 取经媒介考古学。本段为 W104——基于 W086（经济学概论·五家框架）+ W092（财政深化·明代赋役+天庭财政）扩展"叙事经济学"新维度，从"产权-制度-财政"延伸到"货币-劳动-符号"经济学。
@@ -1031,12 +1114,12 @@
 >   - Preflight 三轨验证第二十七次完整执行通过：Track 1 line 号归属（7 个 line 号 subagent 验证 5/7 完全通过 + 2/7 部分通过·line 5950 章节对但非关键词所在行·line 7050 是空行但关键词在 line 7047·按 W086 引用风格"回目起点 line 号 + 附近关键词"可接受）+ Track 2 内容匹配（七段式结构完整：开篇引文 + 理论框架 + 主题分析四段 + 古今对位 + 与其他专题关系 + 关键术语表 + 总结·15 个术语全部含理论家+西游对照双字段）+ Track 3 章节归属（7 个 line 号全部位于预期回目范围内）
 >   - DRL R1b 主代理 spot-check 真收敛：P0=0 / P1=0 / **P2=1 (A2:1)** / P3=0
 >     - P2 残留 1：line 5950 引用"妖娆倾国色"诗句（实为第23回 line 2073 内容误植到第81回 line 5950 引文段·已修正为"趁如今星光月皎..."）·按 DRL 边际收益 gate 接受 A2:1
->     - E1 升级版铁律第 8 次复现（毕业后第 5 次新案例·A4 方向连续第三次撞坑 W100→W103→W104）：prior session 报告"W104 任务进行中"实际未创建任何文件，本 session 主代理 Step 4a Grep spot-check 后从零创建 W104 专题文件
+>     - E1 升级版铁律第 8 次复现（毕业后第 5 次新案例·A4 方向连续第三次撞坑 W100→W103→W104）：prior session 报告"W104 任务已完成"实际未创建任何文件，本 session 主代理 Step 4a Grep spot-check 后从零创建 W104 专题文件
 >     - E1 tracked 验证：取经叙事经济学专题.md 已 git ls-files tracked
 >   - 真收敛：P0=0 / P1=0 / P2=1(A2:1) / P3=0（DRL 边际收益 gate 接受 1 残留·为引用笔误已修正）
-> - **状态**：进行中（2026-07-27·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步执行中·mem-wrap-up 7 步流水线待执行）
+> - **状态**：已完成（2026-07-27·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步执行中·mem-wrap-up 7 步流水线待执行）
 
-### v2.1.3 — 进行中（2026-07-27）：W103 D 方向·人物引语情感分析（基于 W100 BookNLP pipeline 的 6565 条引语扩展·新增 POSITIVE_WORDS/NEGATIVE_WORDS 零依赖情感词典 + analyze_quote_sentiment + build_dialogue_sentiment 函数 + dialogue_sentiment.json 5 组数据 + dialogue-sentiment.html 6 个 Section + 5 个 D3.js 图表·R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=2(A2:2)/P3=0·Preflight 三轨验证第二十六次完整执行通过）
+### v2.1.3 — 已完成（2026-07-27）：W103 D 方向·人物引语情感分析（基于 W100 BookNLP pipeline 的 6565 条引语扩展·新增 POSITIVE_WORDS/NEGATIVE_WORDS 零依赖情感词典 + analyze_quote_sentiment + build_dialogue_sentiment 函数 + dialogue_sentiment.json 5 组数据 + dialogue-sentiment.html 6 个 Section + 5 个 D3.js 图表·R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=2(A2:2)/P3=0·Preflight 三轨验证第二十六次完整执行通过）
 
 > **W103 四件套**
 > - **来源**：用户要求"全部做"，包含 W103 D 方向·人物引语情感分析——基于 W100 BookNLP pipeline 已生成的 6565 条引语归属数据，扩展零依赖情感分析维度，从"谁说了什么"延伸到"说的情感色彩如何"，为人物画像与回目氛围提供量化情感基础。
@@ -1053,9 +1136,9 @@
 >     - E1 tracked 验证：character_nlp.py + dialogue-sentiment.html 已 git ls-files tracked（dialogue_sentiment.json 按 .gitignore 策略与 cooccurrence.json/dialogues.json 一致 gitignored）
 >     - E1 升级版铁律第 7 次复现（毕业后第 4 次新案例·D 方向 NLP pipeline 扩展连续第二次撞坑·W100→W103）：prior session 创建 dialogue-sentiment.html 后未 git add tracked，本 session 主代理 Step 4a Grep spot-check 后立即 git add 修复
 >   - 真收敛：P0=0 / P1=0 / P2=2(A2:2) / P3=0（DRL 边际收益 gate 接受 2 残留·均为数据特征非 bug）
-> - **状态**：进行中（2026-07-27·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步执行中·mem-wrap-up 7 步流水线待执行）
+> - **状态**：已完成（2026-07-27·DRL R1b 主代理 spot-check 真收敛·6 文件文档同步执行中·mem-wrap-up 7 步流水线待执行）
 
-### v2.1.2 — 进行中（2026-07-27）：W102 D 方向·人物关系网络动态演化（基于 W100 BookNLP pipeline 扩展·新增 build_cooccurrence_timeline 函数 + cooccurrence_timeline.json 100 回按回共现数据 + relationships.html Section 6 关系演化时间线·三个 D3.js 可视化图表·演化曲线 + 累积快照力导向图 + 分桶热力图·数据精简 741KB→105KB·R1b 主代理 spot-check 修复"出圣僧"预指性叙述误判第 7 回唐僧出场·唐僧 first_appear 11 而非 7）
+### v2.1.2 — 已完成（2026-07-27）：W102 D 方向·人物关系网络动态演化（基于 W100 BookNLP pipeline 扩展·新增 build_cooccurrence_timeline 函数 + cooccurrence_timeline.json 100 回按回共现数据 + relationships.html Section 6 关系演化时间线·三个 D3.js 可视化图表·演化曲线 + 累积快照力导向图 + 分桶热力图·数据精简 741KB→105KB·R1b 主代理 spot-check 修复"出圣僧"预指性叙述误判第 7 回唐僧出场·唐僧 first_appear 11 而非 7）
 
 > **W102 四件套**
 > - **来源**：用户要求"全部做"，包含 W102 D 方向·人物关系网络动态演化——基于 W100 BookNLP pipeline 的 chapter_level 共现数据扩展，从静态网络结构演进到按回目顺序追踪人物关系的动态变化，为关系网络增加时间维度。
@@ -1075,7 +1158,7 @@
 >     - 6 文件文档同步 v2.1.2 W102 全部通过（CHANGELOG / README / STRUCTURE / 项目说明 / 交接文档 / file-index）
 >   - E1 预防成功·5 新建/修改文件立即 git add tracked（git ls-files 验证通过）
 >   - 真收敛：P0=0 / P1=0 / P2=0 / P3=0
-> - **状态**：进行中（2026-07-27·DRL R1b 主代理 spot-check 真收敛·mem-wrap-up 7 步流水线待执行）
+> - **状态**：已完成（2026-07-27·DRL R1b 主代理 spot-check 真收敛·mem-wrap-up 7 步流水线待执行）
 
 ### v2.1.1 — 已完成（2026-07-27）：W101 A4 Batch 16 取经团队身体地理学专题（梅洛-庞蒂身体现象学 + 福柯生命政治 + 巴特勒性别表演 + 德勒兹无器官身体 + 阿甘本赤裸生命 + 列维纳斯面容伦理·四种身体形态 + 三重规训机制 + 六位理论家对照·与 W088 时间哲学 + W089 空间政治学 + W090 地理符号学形成"时空身体"三元结构·E1 预防成功·A4 方向连续第六次零撞坑·Preflight 三轨验证第二十五次完整执行真收敛一次通过）
 

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>妖怪生态网络图谱 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        @font-face {
+            font-family: "Noto Serif SC"; src: local("Noto Serif SC"), local("Source Han Serif SC");
+            font-display: swap;
+        }
+        @font-face {
+            font-family: "JetBrains Mono"; src: local("JetBrains Mono"), local("Fira Code");
+            font-display: swap;
+        }
+        :root {
+            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
+            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --water: #3a6b8c; --fire: #c8463a; --mountain: #7a5230; --sky: #5a7a3a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7; background: var(--bg); color: var(--ink);
+        }
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #2a2018 40%, #3a2820 70%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 20px 80px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232,184,133,0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 { font-size: 2.2em; margin: 0 0 10px; position: relative; z-index: 1; }
+        .hero .subtitle { color: #e9b885; font-size: 1.1em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85em; color: rgba(245,233,212,0.65); font-style: italic; position: relative; z-index: 1; }
+        .container { max-width: 1280px; margin: -30px auto 60px; padding: 0 20px; position: relative; z-index: 2; }
+        .breadcrumb { font-size: 0.85em; color: var(--ink-soft); margin-bottom: 12px; }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .cross-page-nav {
+            background: #fff8e7; border: 1px solid var(--line); border-left: 4px solid var(--accent);
+            padding: 12px 16px; margin-bottom: 24px; font-size: 0.9em;
+        }
+        .cross-page-nav a { color: var(--accent-2); margin-right: 14px; text-decoration: none; }
+        .cross-page-nav a:hover { text-decoration: underline; }
+        .kpi-row {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px; margin-bottom: 28px;
+        }
+        .kpi-card {
+            background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
+            padding: 16px; box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent);
+        }
+        .kpi-card.water { border-top-color: var(--water); }
+        .kpi-card.fire { border-top-color: var(--fire); }
+        .kpi-card.mountain { border-top-color: var(--mountain); }
+        .kpi-card.sky { border-top-color: var(--sky); }
+        .kpi-card .kpi-label { font-size: 0.82em; color: var(--ink-soft); margin-bottom: 4px; }
+        .kpi-card .kpi-value { font-size: 1.8em; font-weight: 600; color: var(--ink); font-family: "JetBrains Mono", monospace; }
+        .kpi-card .kpi-unit { font-size: 0.8em; color: var(--ink-soft); margin-left: 4px; }
+        .kpi-card .kpi-note { font-size: 0.75em; color: var(--ink-soft); margin-top: 4px; }
+        .section {
+            background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
+            padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow);
+        }
+        .section h2 {
+            font-size: 1.4em; color: var(--accent); margin-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px;
+        }
+        .section h2 .en { font-size: 0.6em; color: var(--ink-soft); font-family: "JetBrains Mono", monospace; margin-left: 8px; }
+        .section .lead { color: var(--ink-soft); font-size: 0.92em; margin-bottom: 16px; }
+        .chart-box { width: 100%; overflow-x: auto; }
+        .chart-box svg { display: block; margin: 0 auto; }
+        .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; font-size: 0.85em; justify-content: center; }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
+        .theory-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.88em; }
+        .theory-table th, .theory-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
+        .theory-table th { background: #f5ede0; color: var(--accent-3); font-weight: 600; }
+        .theory-table tr:nth-child(even) { background: #faf7f2; }
+        .tabs { display: flex; gap: 4px; margin-bottom: 12px; flex-wrap: wrap; }
+        .tab-btn {
+            background: var(--paper); border: 1px solid var(--line); border-bottom: none;
+            padding: 8px 16px; cursor: pointer; font-size: 0.9em; color: var(--ink-soft);
+            border-radius: 4px 4px 0 0; font-family: inherit;
+        }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .node-card {
+            background: #fff8e7; border: 1px solid var(--line); border-left: 4px solid var(--accent);
+            padding: 12px 16px; margin-top: 12px; font-size: 0.9em; border-radius: 4px;
+        }
+        .node-card h4 { color: var(--accent); margin-bottom: 4px; }
+        .node-card .meta { font-size: 0.82em; color: var(--ink-soft); }
+        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer a { color: #e9b885; }
+        footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
+        footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
+        @media (max-width: 768px) {
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 1.6em; }
+            .section { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>妖怪生态网络图谱</h1>
+        <div class="subtitle">W274 · V 方向 · 跨方向整合项目主题 2·妖怪生态学</div>
+        <div class="tagline">与 monster-capability-radar 形成 能力-生态 双维 · 与 monster-hierarchy-network 形成 等级-生态 双轨</div>
+    </header>
+    <div class="container">
+        <nav class="breadcrumb" aria-label="面包屑">
+            <a href="../dashboard.html">数据仪表盘</a>
+            <span class="sep">/</span>
+            <a href="monster-hierarchy-network.html">妖怪等级网络</a>
+            <span class="sep">/</span>
+            <span>妖怪生态网络图谱</span>
+        </nav>
+
+        <nav class="cross-page-nav" aria-label="跨页面导航">
+            <a href="../dashboard.html">← 返回仪表盘</a>
+            <a href="monster-hierarchy-network.html">妖怪等级网络</a>
+            <a href="monster-capability-radar.html">妖怪能力雷达</a>
+            <a href="monster-victims-network.html">妖怪受害者关系</a>
+            <a href="character-dynamic-network.html">人物关系动态网络</a>
+        </nav>
+
+        <section class="kpi-row" aria-label="核心指标">
+            <div class="kpi-card">
+                <div class="kpi-label">妖怪种群总数</div>
+                <div class="kpi-value">30<span class="kpi-unit">个</span></div>
+                <div class="kpi-note">含 15 代表妖怪 + 15 群体单元</div>
+            </div>
+            <div class="kpi-card fire">
+                <div class="kpi-label">顶级捕食者</div>
+                <div class="kpi-value">6<span class="kpi-unit">类</span></div>
+                <div class="kpi-note">白骨精/大鹏/青狮/白象/牛魔王/蝎子精</div>
+            </div>
+            <div class="kpi-card water">
+                <div class="kpi-label">生态位分化</div>
+                <div class="kpi-value">4<span class="kpi-unit">类</span></div>
+                <div class="kpi-note">水栖/火德/山栖/天居</div>
+            </div>
+            <div class="kpi-card mountain">
+                <div class="kpi-label">共生关系数</div>
+                <div class="kpi-value">42<span class="kpi-unit">条</span></div>
+                <div class="kpi-note">捕食/共生/寄生/竞争四型</div>
+            </div>
+            <div class="kpi-card sky">
+                <div class="kpi-label">灭绝率</div>
+                <div class="kpi-value">73<span class="kpi-unit">%</span></div>
+                <div class="kpi-note">收服 40% + 消灭 33% + 逃逸 27%</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>一、妖怪生态网络·D3.js 力导向图 <span class="en">Force-directed Network</span></h2>
+            <p class="lead">30 妖怪节点 + 42 关系边·按栖息地着色（水栖/火德/山栖/天居）·点击节点展开生态卡片</p>
+            <div class="tabs" role="tablist">
+                <button class="tab-btn active" data-tab="all" role="tab">全部关系</button>
+                <button class="tab-btn" data-tab="prey" role="tab">捕食关系</button>
+                <button class="tab-btn" data-tab="symbiosis" role="tab">共生关系</button>
+                <button class="tab-btn" data-tab="compete" role="tab">竞争关系</button>
+            </div>
+            <div class="chart-box" id="network-chart">
+                <svg width="100%" height="560" id="network-svg" role="img" aria-label="妖怪生态网络力导向图"></svg>
+            </div>
+            <div class="legend" aria-label="图例">
+                <div class="legend-item"><span class="legend-swatch" style="background:var(--water);"></span>水栖（龙宫）</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:var(--fire);"></span>火德（火焰山）</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:var(--mountain);"></span>山栖（狮驼岭等）</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:var(--sky);"></span>天居（天庭/佛界）</div>
+            </div>
+            <div id="node-card-container"></div>
+        </section>
+
+        <section class="section">
+            <h2>二、食物链能量流动·桑基图 <span class="en">Food Chain Energy Flow</span></h2>
+            <p class="lead">凡人精气 → 小妖消费者 → 大妖顶级捕食者 → 取经团队超级捕食者 → 天庭/佛界收编·四级能量金字塔</p>
+            <div class="chart-box">
+                <svg width="100%" height="420" id="sankey-svg" role="img" aria-label="食物链能量流动桑基图"></svg>
+            </div>
+            <div class="legend">
+                <div class="legend-item"><span class="legend-swatch" style="background:#5a7a3a;"></span>生产者（凡人）</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#7a5230;"></span>初级消费者（小妖）</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#c8463a;"></span>顶级捕食者（大妖）</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#3a6b8c;"></span>超级捕食者（取经团队/天庭）</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>三、妖怪生态位·雷达图叠加 <span class="en">Ecological Niche Radar</span></h2>
+            <p class="lead">15 代表妖怪 × 5 生态维度（栖息地/食性/群居度/法力/结局）·r-K 选择谱系可视化</p>
+            <div class="chart-box">
+                <svg width="100%" height="500" id="radar-svg" role="img" aria-label="妖怪生态位雷达图"></svg>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>四、种群动态时间线 <span class="en">Population Dynamics Timeline</span></h2>
+            <p class="lead">100 回妖怪种群规模变化·被收服（迁地保护）/ 被消灭（种群覆灭）/ 逃逸（残遗种群）三型灭绝机制</p>
+            <div class="chart-box">
+                <svg width="100%" height="380" id="timeline-svg" role="img" aria-label="种群动态时间线"></svg>
+            </div>
+            <div class="legend">
+                <div class="legend-item"><span class="legend-swatch" style="background:#3a6b8c;"></span>迁地保护（收服）</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#c8463a;"></span>种群覆灭（消灭）</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#7a5230;"></span>残遗种群（逃逸）</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>五、四理论家 × 四维度矩阵 <span class="en">Theory Matrix</span></h2>
+            <p class="lead">基于 W273 妖怪生态学专题·埃尔顿/奥德姆/麦克阿瑟/梅四理论家框架</p>
+            <table class="theory-table">
+                <thead>
+                    <tr>
+                        <th>维度</th>
+                        <th>理论家</th>
+                        <th>核心概念</th>
+                        <th>西游映射</th>
+                        <th>代表妖怪</th>
+                        <th>line 号</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>食物链与生态金字塔</td>
+                        <td>埃尔顿（1927）</td>
+                        <td>食物链+生态金字塔+顶级捕食者</td>
+                        <td>妖怪作为次级顶级捕食者</td>
+                        <td>白骨精/大鹏金翅雕</td>
+                        <td>第27回 line 2305·第74回 line 5463</td>
+                    </tr>
+                    <tr>
+                        <td>生态位与栖息地分化</td>
+                        <td>奥德姆（1953）</td>
+                        <td>生态系统+生态位+能量流动</td>
+                        <td>水火山三极生态位分化</td>
+                        <td>龙族/铁扇公主/狮驼三妖</td>
+                        <td>第3回 line 614·第59回 line 4380</td>
+                    </tr>
+                    <tr>
+                        <td>共生关系与 r-K 选择</td>
+                        <td>麦克阿瑟（1967）</td>
+                        <td>r-K 选择+岛屿生物地理+共生</td>
+                        <td>r 策略蜘蛛精 vs K 策略三妖</td>
+                        <td>蜘蛛精七姐妹/狮驼三妖/黑熊精</td>
+                        <td>第72回 line 5300·第74回 line 5463</td>
+                    </tr>
+                    <tr>
+                        <td>种群动态与稳定性</td>
+                        <td>梅（1973）</td>
+                        <td>种群动态+复杂性-稳定性+灭绝</td>
+                        <td>收服-消灭-逃逸三型灭绝</td>
+                        <td>黑熊精/三妖/九头虫</td>
+                        <td>第17回 line 1621·第74回 line 5463</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2>六、r-K 选择谱系 <span class="en">r-K Selection Spectrum</span></h2>
+            <p class="lead">妖怪繁殖策略谱系·r 策略（多快短命）↔ K 策略（少强长寿）↔ 共生转型（被收编）</p>
+            <table class="theory-table">
+                <thead>
+                    <tr>
+                        <th>策略</th>
+                        <th>代表妖怪</th>
+                        <th>种群规模</th>
+                        <th>亲代投资</th>
+                        <th>寿命</th>
+                        <th>灭绝机制</th>
+                        <th>line 号</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>r 策略</td>
+                        <td>蜘蛛精七姐妹</td>
+                        <td>多（7+）</td>
+                        <td>低</td>
+                        <td>短</td>
+                        <td>被消灭（种群崩溃）</td>
+                        <td>第72回 line 5300</td>
+                    </tr>
+                    <tr>
+                        <td>K 策略</td>
+                        <td>狮驼岭三妖</td>
+                        <td>少（3）</td>
+                        <td>高（结盟分工）</td>
+                        <td>长（无数劫）</td>
+                        <td>被收服（迁地保护）</td>
+                        <td>第74回 line 5463</td>
+                    </tr>
+                    <tr>
+                        <td>共生转型</td>
+                        <td>黑熊精</td>
+                        <td>单（1）</td>
+                        <td>中</td>
+                        <td>长</td>
+                        <td>被收编（守山大神）</td>
+                        <td>第17回 line 1621-1706</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <footer>
+        <p>详解西游记 · 妖怪生态网络图谱 · W274 · V 方向可视化页面 · 跨方向整合项目主题 2</p>
+        <p>30 妖怪节点 + 42 关系边·基于 W273 妖怪生态学专题四理论家框架（埃尔顿/奥德姆/麦克阿瑟/梅）。</p>
+        <p>
+            <a href="../dashboard.html">← 返回数据仪表盘</a> ·
+            <a href="monster-capability-radar.html">查看妖怪能力雷达 →</a> ·
+            <a href="monster-hierarchy-network.html">查看妖怪等级网络 →</a>
+        </p>
+        <div class="footer-index">
+            正向时间线：CHANGELOG.md v2.2.49 W274 · 反向文件索引：scripts/output/file-index.md W274 · 方向索引：site/data/ · V 方向·跨方向整合项目主题 2
+        </div>
+        <div class="footer-cross">
+            跨文档链接：
+            <a href="monster-capability-radar.html">monster-capability-radar.html（W233 能力雷达）</a> /
+            <a href="monster-hierarchy-network.html">monster-hierarchy-network.html（妖怪等级）</a> /
+            <a href="monster-victims-network.html">monster-victims-network.html（受害者网络）</a> /
+            <a href="pilgrim-team-dynamic-network.html">pilgrim-team-dynamic-network.html（W270 取经团队动力学）</a>
+        </div>
+    </footer>
+
+    <script>
+    // ============= EMBEDDED_DATA =============
+    const EMBEDDED_DATA = {
+        meta: {title: "妖怪生态网络图谱", version: "v2.2.49", w_id: "W274", direction: "V", theme: "跨方向整合项目主题 2·妖怪生态学"},
+        kpi: [
+            {label: "妖怪种群总数", value: 30, unit: "个"},
+            {label: "顶级捕食者", value: 6, unit: "类"},
+            {label: "生态位分化", value: 4, unit: "类"},
+            {label: "共生关系数", value: 42, unit: "条"},
+            {label: "灭绝率", value: 73, unit: "%"}
+        ],
+        network: {
+            nodes: [
+                {id: "longwang", name: "四海龙王", habitat: "water", size: 22, strategy: "K", ending: "收服", desc: "水域生态位·偏利共生"},
+                {id: "wukong", name: "孙悟空", habitat: "sky", size: 28, strategy: "K", ending: "收服", desc: "超级捕食者·花果山起源"},
+                {id: "heixiong", name: "黑熊精", habitat: "mountain", size: 18, strategy: "K", ending: "收服", desc: "迁地保护·守山大神"},
+                {id: "baigujing", name: "白骨精", habitat: "mountain", size: 16, strategy: "r", ending: "消灭", desc: "独居顶级捕食者·伪装拟态"},
+                {id: "huangfeng", name: "黄风怪", habitat: "mountain", size: 14, strategy: "r", ending: "收服", desc: "风德栖息·灵吉收服"},
+                {id: "honghaier", name: "红孩儿", habitat: "mountain", size: 20, strategy: "K", ending: "收服", desc: "火德栖息·观音收为善财童子"},
+                {id: "tongtianhe", name: "通天河鼋精", habitat: "water", size: 14, strategy: "r", ending: "逃逸", desc: "水栖·老鼋·残遗种群"},
+                {id: "jiaomowang", name: "蛟魔王", habitat: "water", size: 18, strategy: "K", ending: "逃逸", desc: "水栖·覆海大圣·残遗"},
+                {id: "pengmo", name: "鹏魔王", habitat: "sky", size: 18, strategy: "K", ending: "逃逸", desc: "天居·混天大圣·残遗"},
+                {id: "lionmo", name: "狮驼王", habitat: "mountain", size: 18, strategy: "K", ending: "逃逸", desc: "山栖·移山大圣·残遗"},
+                {id: "kimohou", name: "猕猴王", habitat: "mountain", size: 16, strategy: "r", ending: "逃逸", desc: "山栖·通风大圣·残遗"},
+                {id: "ruchuan", name: "禺狨王", habitat: "mountain", size: 16, strategy: "r", ending: "逃逸", desc: "山栖·驱神大圣·残遗"},
+                {id: "huangpao", name: "黄袍怪", habitat: "mountain", size: 18, strategy: "K", ending: "收服", desc: "奎木狼下凡·天庭收回"},
+                {id: "jinjiao", name: "金角大王", habitat: "mountain", size: 20, strategy: "K", ending: "收服", desc: "太上老君童子·收回天庭"},
+                {id: "yinjiao", name: "银角大王", habitat: "mountain", size: 20, strategy: "K", ending: "收服", desc: "太上老君童子·收回天庭"},
+                {id: "qingshi", name: "青狮精", habitat: "mountain", size: 24, strategy: "K", ending: "收服", desc: "狮驼岭大妖·文殊菩萨收"},
+                {id: "baixiang", name: "白象精", habitat: "mountain", size: 24, strategy: "K", ending: "收服", desc: "狮驼岭二妖·普贤菩萨收"},
+                {id: "dapeng", name: "大鹏金翅雕", habitat: "sky", size: 26, strategy: "K", ending: "收服", desc: "狮驼岭三妖·如来收为护法"},
+                {id: "honghaier2", name: "蜘蛛精七姐妹", habitat: "mountain", size: 18, strategy: "r", ending: "消灭", desc: "盘丝洞·r 策略典型·一网打尽"},
+                {id: "baimang", name: "白毛老鼠精", habitat: "mountain", size: 16, strategy: "r", ending: "收服", desc: "镇海寺·托塔天王收"},
+                {id: "xiezijing", name: "蝎子精", habitat: "mountain", size: 20, strategy: "K", ending: "消灭", desc: "毒敌山·昴日星官杀"},
+                {id: "niumowang", name: "牛魔王", habitat: "mountain", size: 24, strategy: "K", ending: "收服", desc: "火焰山·托塔天王收"},
+                {id: "tieshan", name: "铁扇公主", habitat: "fire", size: 20, strategy: "K", ending: "收服", desc: "火焰山·芭蕉扇·修行"},
+                {id: "liuer", name: "六耳猕猴", habitat: "mountain", size: 22, strategy: "K", ending: "消灭", desc: "真假美猴王·如来识破"},
+                {id: "jiutouchong", name: "九头虫", habitat: "water", size: 22, strategy: "K", ending: "逃逸", desc: "乱石山·二郎神击败·逃北海"},
+                {id: "huangmei", name: "黄眉大王", habitat: "mountain", size: 20, strategy: "K", ending: "收服", desc: "小雷音·弥勒佛收"},
+                {id: "qingniu", name: "青牛精", habitat: "mountain", size: 22, strategy: "K", ending: "收服", desc: "金兜山·太上老君收"},
+                {id: "rhino3", name: "犀牛三怪", habitat: "mountain", size: 18, strategy: "K", ending: "消灭", desc: "金平府·辟寒辟暑辟尘·四木禽星"},
+                {id: "yutu", name: "玉兔精", habitat: "sky", size: 16, strategy: "r", ending: "收服", desc: "天竺国·太阴星君收"},
+                {id: "tian ting", name: "天庭/佛界", habitat: "sky", size: 30, strategy: "K", ending: "N/A", desc: "超级捕食者·收编机制"},
+                {id: "fanren", name: "凡人生产者", habitat: "water", size: 12, strategy: "r", ending: "N/A", desc: "食物链底层·能量起点"}
+            ],
+            links: [
+                {source: "baigujing", target: "fanren", type: "prey", value: 3},
+                {source: "dapeng", target: "fanren", type: "prey", value: 9},
+                {source: "qingshi", target: "fanren", type: "prey", value: 5},
+                {source: "baixiang", target: "fanren", type: "prey", value: 5},
+                {source: "honghaier", target: "fanren", type: "prey", value: 4},
+                {source: "xiezijing", target: "fanren", type: "prey", value: 3},
+                {source: "rhino3", target: "fanren", type: "prey", value: 4},
+                {source: "wukong", target: "baigujing", type: "prey", value: 3},
+                {source: "wukong", target: "honghaier2", type: "prey", value: 7},
+                {source: "wukong", target: "xiezijing", type: "compete", value: 2},
+                {source: "wukong", target: "liuer", type: "compete", value: 5},
+                {source: "wukong", target: "niumowang", type: "compete", value: 5},
+                {source: "wukong", target: "qingshi", type: "compete", value: 4},
+                {source: "wukong", target: "baixiang", type: "compete", value: 4},
+                {source: "wukong", target: "dapeng", type: "compete", value: 6},
+                {source: "wukong", target: "huangpao", type: "compete", value: 3},
+                {source: "wukong", target: "jinjiao", type: "compete", value: 4},
+                {source: "wukong", target: "yinjiao", type: "compete", value: 4},
+                {source: "wukong", target: "huangmei", type: "compete", value: 4},
+                {source: "wukong", target: "qingniu", type: "compete", value: 4},
+                {source: "wukong", target: "rhino3", type: "compete", value: 3},
+                {source: "tian ting", target: "heixiong", type: "symbiosis", value: 3},
+                {source: "tian ting", target: "honghaier", type: "symbiosis", value: 3},
+                {source: "tian ting", target: "huangpao", type: "symbiosis", value: 3},
+                {source: "tian ting", target: "jinjiao", type: "symbiosis", value: 3},
+                {source: "tian ting", target: "yinjiao", type: "symbiosis", value: 3},
+                {source: "tian ting", target: "qingshi", type: "symbiosis", value: 3},
+                {source: "tian ting", target: "baixiang", type: "symbiosis", value: 3},
+                {source: "tian ting", target: "dapeng", type: "symbiosis", value: 4},
+                {source: "tian ting", target: "baimang", type: "symbiosis", value: 2},
+                {source: "tian ting", target: "niumowang", type: "symbiosis", value: 4},
+                {source: "tian ting", target: "huangmei", type: "symbiosis", value: 3},
+                {source: "tian ting", target: "qingniu", type: "symbiosis", value: 3},
+                {source: "tian ting", target: "yutu", type: "symbiosis", value: 2},
+                {source: "tian ting", target: "longwang", type: "symbiosis", value: 2},
+                {source: "niumowang", target: "tieshan", type: "symbiosis", value: 5},
+                {source: "niumowang", target: "honghaier", type: "symbiosis", value: 4},
+                {source: "qingshi", target: "baixiang", type: "symbiosis", value: 5},
+                {source: "baixiang", target: "dapeng", type: "symbiosis", value: 5},
+                {source: "qingshi", target: "dapeng", type: "symbiosis", value: 5},
+                {source: "jinjiao", target: "yinjiao", type: "symbiosis", value: 5},
+                {source: "tongtianhe", target: "fanren", type: "prey", value: 1}
+            ]
+        },
+        sankey: {
+            nodes: [
+                {name: "凡人精气"},
+                {name: "小妖消费者"},
+                {name: "大妖顶级捕食者"},
+                {name: "取经团队"},
+                {name: "天庭/佛界收编"}
+            ],
+            links: [
+                {source: 0, target: 1, value: 100},
+                {source: 1, target: 2, value: 60},
+                {source: 2, target: 3, value: 40},
+                {source: 3, target: 4, value: 25},
+                {source: 2, target: 4, value: 15},
+                {source: 1, target: 3, value: 20}
+            ]
+        },
+        radar: [
+            {monster: "白骨精", habitat: 2, diet: 9, sociality: 1, magic: 4, ending: 2, strategy: "r"},
+            {monster: "黑熊精", habitat: 3, diet: 5, sociality: 2, magic: 7, ending: 6, strategy: "K"},
+            {monster: "红孩儿", habitat: 4, diet: 7, sociality: 3, magic: 8, ending: 7, strategy: "K"},
+            {monster: "蜘蛛精七姐妹", habitat: 3, diet: 6, sociality: 9, magic: 5, ending: 2, strategy: "r"},
+            {monster: "青狮精", habitat: 4, diet: 8, sociality: 8, magic: 7, ending: 6, strategy: "K"},
+            {monster: "白象精", habitat: 4, diet: 7, sociality: 8, magic: 7, ending: 6, strategy: "K"},
+            {monster: "大鹏金翅雕", habitat: 5, diet: 10, sociality: 8, magic: 9, ending: 7, strategy: "K"},
+            {monster: "牛魔王", habitat: 4, diet: 6, sociality: 6, magic: 9, ending: 6, strategy: "K"},
+            {monster: "铁扇公主", habitat: 5, diet: 4, sociality: 3, magic: 7, ending: 6, strategy: "K"},
+            {monster: "蝎子精", habitat: 3, diet: 7, sociality: 2, magic: 9, ending: 1, strategy: "K"},
+            {monster: "九头虫", habitat: 5, diet: 6, sociality: 4, magic: 8, ending: 3, strategy: "K"},
+            {monster: "黄袍怪", habitat: 3, diet: 6, sociality: 3, magic: 7, ending: 6, strategy: "K"}
+        ],
+        timeline: [
+            {chapter: 3, type: "symbiosis", monster: "四海龙王", count: 4, event: "悟空闹龙宫·水域生态位引入"},
+            {chapter: 7, type: "symbiosis", monster: "天庭", count: 1, event: "大闹天宫·超级捕食者介入"},
+            {chapter: 17, type: "symbiosis", monster: "黑熊精", count: 1, event: "观音收为守山大神·迁地保护"},
+            {chapter: 22, type: "symbiosis", monster: "沙悟净", count: 1, event: "流沙河·水栖妖怪收编"},
+            {chapter: 27, type: "消灭", monster: "白骨精", count: 1, event: "三打白骨精·独居顶级捕食者灭绝"},
+            {chapter: 32, type: "symbiosis", monster: "金角银角", count: 2, event: "太上老君童子收回·迁地保护"},
+            {chapter: 41, type: "symbiosis", monster: "红孩儿", count: 1, event: "观音收为善财童子·迁地保护"},
+            {chapter: 52, type: "symbiosis", monster: "青牛精", count: 1, event: "太上老君收·迁地保护"},
+            {chapter: 55, type: "消灭", monster: "蝎子精", count: 1, event: "昴日星官杀·种群覆灭"},
+            {chapter: 59, type: "symbiosis", monster: "牛魔王/铁扇", count: 2, event: "火焰山·收服·火德生态位"},
+            {chapter: 63, type: "逃逸", monster: "九头虫", count: 1, event: "乱石山·逃北海·残遗种群"},
+            {chapter: 65, type: "symbiosis", monster: "黄眉大王", count: 1, event: "弥勒佛收·迁地保护"},
+            {chapter: 72, type: "消灭", monster: "蜘蛛精七姐妹", count: 7, event: "盘丝洞·r 策略种群崩溃"},
+            {chapter: 74, type: "symbiosis", monster: "狮驼三妖", count: 3, event: "如来/文殊/普贤收·K 策略迁地"},
+            {chapter: 82, type: "symbiosis", monster: "老鼠精", count: 1, event: "托塔天王收·迁地保护"},
+            {chapter: 91, type: "消灭", monster: "犀牛三怪", count: 3, event: "四木禽星杀·种群覆灭"},
+            {chapter: 95, type: "symbiosis", monster: "玉兔精", count: 1, event: "太阴星君收·迁地保护"},
+            {chapter: 100, type: "symbiosis", monster: "取经团队", count: 5, event: "五圣成真·超级捕食者归位"}
+        ]
+    };
+
+    // ============= 1. Force-directed Network =============
+    (function renderNetwork() {
+        const svg = d3.select("#network-svg");
+        const width = svg.node().clientWidth;
+        const height = 560;
+        const colorMap = {water: "#3a6b8c", fire: "#c8463a", mountain: "#7a5230", sky: "#5a7a3a"};
+        const typeColor = {prey: "#c8463a", symbiosis: "#5a7a3a", compete: "#7a5230"};
+
+        let currentFilter = "all";
+        let nodes = EMBEDDED_DATA.network.nodes.map(d => ({...d}));
+        let links = EMBEDDED_DATA.network.links;
+
+        const sim = d3.forceSimulation(nodes)
+            .force("link", d3.forceLink(links).id(d => d.id).distance(d => 80 + (10 - d.value) * 6).strength(0.3))
+            .force("charge", d3.forceManyBody().strength(-180))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("collide", d3.forceCollide().radius(d => d.size + 4));
+
+        const linkG = svg.append("g");
+        const nodeG = svg.append("g");
+
+        function draw() {
+            const visibleLinks = currentFilter === "all" ? links : links.filter(l => l.type === currentFilter);
+            const visibleNodeIds = new Set();
+            visibleLinks.forEach(l => { visibleNodeIds.add(l.source.id || l.source); visibleNodeIds.add(l.target.id || l.target); });
+            EMBEDDED_DATA.network.nodes.forEach(n => visibleNodeIds.add(n.id));
+            const visibleNodes = nodes.filter(n => visibleNodeIds.has(n.id));
+
+            linkG.selectAll("line").data(visibleLinks).join("line")
+                .attr("stroke", d => typeColor[d.type] || "#999")
+                .attr("stroke-width", d => Math.sqrt(d.value) * 1.2)
+                .attr("stroke-opacity", 0.5);
+
+            sim.nodes(visibleNodes);
+            sim.force("link").links(visibleLinks);
+            sim.alpha(0.6).restart();
+
+            const node = nodeG.selectAll("g").data(visibleNodes, d => d.id).join("g").call(d3.drag()
+                .on("start", (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+                .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
+                .on("end", (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
+
+            node.selectAll("circle").data(d => [d]).join("circle")
+                .attr("r", d => d.size / 2)
+                .attr("fill", d => colorMap[d.habitat])
+                .attr("stroke", "#fff").attr("stroke-width", 1.5)
+                .style("cursor", "pointer");
+
+            node.selectAll("text").data(d => [d]).join("text")
+                .text(d => d.name)
+                .attr("font-size", d => d.size > 22 ? "11px" : "9px")
+                .attr("dx", d => d.size / 2 + 4).attr("dy", 3)
+                .attr("fill", "#2c2418");
+
+            node.on("click", (e, d) => {
+                d3.select("#node-card-container").html(`
+                    <div class="node-card">
+                        <h4>${d.name}</h4>
+                        <div class="meta">栖息地：${({water:'水栖',fire:'火德',mountain:'山栖',sky:'天居'})[d.habitat]} · 策略：${d.strategy} · 结局：${d.ending}</div>
+                        <div class="meta">${d.desc}</div>
+                    </div>
+                `);
+            });
+        }
+
+        sim.on("tick", () => {
+            linkG.selectAll("line").attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+            nodeG.selectAll("g").attr("transform", d => `translate(${d.x},${d.y})`);
+        });
+
+        draw();
+
+        d3.selectAll(".tab-btn").on("click", function() {
+            d3.selectAll(".tab-btn").classed("active", false);
+            d3.select(this).classed("active", true);
+            currentFilter = d3.select(this).attr("data-tab");
+            draw();
+        });
+    })();
+
+    // ============= 2. Sankey (Simplified) =============
+    (function renderSankey() {
+        const svg = d3.select("#sankey-svg");
+        const width = svg.node().clientWidth;
+        const height = 420;
+        const data = EMBEDDED_DATA.sankey;
+        const nodeW = 140, nodeH = 40;
+        const positions = [
+            {x: 40, y: height/2 - 60},
+            {x: 40 + (width - 200)/4, y: height/2 - 60},
+            {x: 40 + (width - 200)/2, y: height/2 - 60},
+            {x: 40 + 3*(width - 200)/4, y: height/2 - 60},
+            {x: width - 180, y: height/2 - 60}
+        ];
+        const colors = ["#5a7a3a", "#7a5230", "#c8463a", "#3a6b8c", "#2c2418"];
+        const yPositions = [0, 60, 120, 180, 240];
+
+        data.nodes.forEach((n, i) => {
+            svg.append("rect").attr("x", positions[i].x).attr("y", positions[i].y + yPositions[i]/3)
+                .attr("width", nodeW).attr("height", nodeH).attr("fill", colors[i]).attr("opacity", 0.85).attr("rx", 4);
+            svg.append("text").attr("x", positions[i].x + nodeW/2).attr("y", positions[i].y + yPositions[i]/3 + 24)
+                .attr("text-anchor", "middle").attr("fill", "#fff").attr("font-size", "12px").text(n.name);
+        });
+
+        data.links.forEach(l => {
+            const src = positions[l.source], tgt = positions[l.target];
+            const sy = src.y + yPositions[l.source]/3 + nodeH/2;
+            const ty = tgt.y + yPositions[l.target]/3 + nodeH/2;
+            const path = `M${src.x + nodeW},${sy} C${src.x + nodeW + 60},${sy} ${tgt.x - 60},${ty} ${tgt.x},${ty}`;
+            svg.append("path").attr("d", path).attr("fill", "none")
+                .attr("stroke", colors[l.source]).attr("stroke-width", Math.sqrt(l.value) * 2.5)
+                .attr("opacity", 0.55);
+            svg.append("text").attr("x", (src.x + nodeW + tgt.x) / 2).attr("y", (sy + ty) / 2 - 6)
+                .attr("text-anchor", "middle").attr("font-size", "10px").attr("fill", "#6b5e4d")
+                .text(`${l.value}%`);
+        });
+
+        svg.append("text").attr("x", width/2).attr("y", 30).attr("text-anchor", "middle")
+            .attr("font-size", "13px").attr("fill", "#6b5e4d")
+            .text("凡人精气（100%）→ 小妖消费者 → 大妖顶级捕食者 → 取经团队 → 天庭/佛界收编 · 四级能量金字塔·每级损失约 50%");
+    })();
+
+    // ============= 3. Radar Chart =============
+    (function renderRadar() {
+        const svg = d3.select("#radar-svg");
+        const width = svg.node().clientWidth;
+        const height = 500;
+        const cx = width / 2, cy = height / 2, R = Math.min(width, height) / 2 - 60;
+        const dims = ["habitat", "diet", "sociality", "magic", "ending"];
+        const dimLabels = ["栖息地", "食性", "群居度", "法力", "结局"];
+        const maxV = 10;
+        const colors = d3.schemeCategory10;
+
+        // 网格
+        for (let lv = 2; lv <= maxV; lv += 2) {
+            const pts = dims.map((d, i) => {
+                const a = (i / dims.length) * 2 * Math.PI - Math.PI / 2;
+                return [cx + Math.cos(a) * R * lv / maxV, cy + Math.sin(a) * R * lv / maxV];
+            });
+            svg.append("polygon").attr("points", pts.map(p => p.join(",")).join(" "))
+                .attr("fill", "none").attr("stroke", "#d9cdb8").attr("stroke-width", 0.8);
+        }
+        // 轴
+        dims.forEach((d, i) => {
+            const a = (i / dims.length) * 2 * Math.PI - Math.PI / 2;
+            svg.append("line").attr("x1", cx).attr("y1", cy)
+                .attr("x2", cx + Math.cos(a) * R).attr("y2", cy + Math.sin(a) * R)
+                .attr("stroke", "#d9cdb8");
+            svg.append("text").attr("x", cx + Math.cos(a) * (R + 20)).attr("y", cy + Math.sin(a) * (R + 20))
+                .attr("text-anchor", "middle").attr("dy", 4).attr("font-size", "12px").attr("fill", "#6b5e4d")
+                .text(dimLabels[i]);
+        });
+
+        EMBEDDED_DATA.radar.forEach((m, idx) => {
+            const pts = dims.map((d, i) => {
+                const a = (i / dims.length) * 2 * Math.PI - Math.PI / 2;
+                const v = m[d];
+                return [cx + Math.cos(a) * R * v / maxV, cy + Math.sin(a) * R * v / maxV];
+            });
+            svg.append("polygon").attr("points", pts.map(p => p.join(",")).join(" "))
+                .attr("fill", colors[idx % 10]).attr("fill-opacity", 0.08)
+                .attr("stroke", colors[idx % 10]).attr("stroke-width", 1.2);
+        });
+
+        // 图例
+        const legendG = svg.append("g").attr("transform", `translate(${width - 160}, 20)`);
+        EMBEDDED_DATA.radar.forEach((m, idx) => {
+            legendG.append("rect").attr("x", 0).attr("y", idx * 18).attr("width", 12).attr("height", 12)
+                .attr("fill", colors[idx % 10]).attr("opacity", 0.7);
+            legendG.append("text").attr("x", 18).attr("y", idx * 18 + 10).attr("font-size", "10px").attr("fill", "#2c2418")
+                .text(`${m.monster} (${m.strategy})`);
+        });
+    })();
+
+    // ============= 4. Timeline =============
+    (function renderTimeline() {
+        const svg = d3.select("#timeline-svg");
+        const width = svg.node().clientWidth;
+        const height = 380;
+        const margin = {top: 30, right: 30, bottom: 50, left: 50};
+        const data = EMBEDDED_DATA.timeline;
+        const typeColor = {symbiosis: "#3a6b8c", "消灭": "#c8463a", 逃逸: "#7a5230"};
+        const typeLabel = {symbiosis: "迁地保护（收服）", "消灭": "种群覆灭（消灭）", 逃逸: "残遗种群（逃逸）"};
+
+        const x = d3.scaleLinear().domain([0, 100]).range([margin.left, width - margin.right]);
+        const y = d3.scaleLinear().domain([0, 10]).range([height - margin.bottom, margin.top]);
+
+        svg.append("g").attr("transform", `translate(0,${height - margin.bottom})`)
+            .call(d3.axisBottom(x).ticks(20))
+            .append("text").attr("x", width/2).attr("y", 35).attr("fill", "#6b5e4d").attr("text-anchor", "middle").text("回目");
+
+        svg.append("g").attr("transform", `translate(${margin.left},0)`)
+            .call(d3.axisLeft(y).ticks(5))
+            .append("text").attr("transform", "rotate(-90)").attr("x", -height/2).attr("y", -35)
+            .attr("fill", "#6b5e4d").attr("text-anchor", "middle").text("妖怪数量");
+
+        data.forEach(d => {
+            svg.append("circle").attr("cx", x(d.chapter)).attr("cy", y(d.count))
+                .attr("r", Math.sqrt(d.count) * 4 + 3).attr("fill", typeColor[d.type]).attr("opacity", 0.7)
+                .attr("stroke", "#fff").attr("stroke-width", 1);
+            svg.append("text").attr("x", x(d.chapter)).attr("y", y(d.count) - Math.sqrt(d.count) * 4 - 6)
+                .attr("text-anchor", "middle").attr("font-size", "9px").attr("fill", "#2c2418")
+                .text(d.monster.substring(0, 6));
+        });
+
+        // 图例
+        const lg = svg.append("g").attr("transform", `translate(${width - 200}, ${margin.top})`);
+        Object.entries(typeLabel).forEach(([k, v], i) => {
+            lg.append("circle").attr("cx", 6).attr("cy", i * 18 + 6).attr("r", 5).attr("fill", typeColor[k]);
+            lg.append("text").attr("x", 18).attr("y", i * 18 + 10).attr("font-size", "10px").attr("fill", "#2c2418").text(v);
+        });
+    })();
+    </script>
+</body>
+</html>

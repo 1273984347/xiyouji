@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>取经团队动力学关系网络 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <style>
+        @font-face {
+            font-family: "Noto Serif SC";
+            font-style: normal;
+            font-weight: 400 900;
+            src: local("Noto Serif SC"), local("Source Han Serif SC");
+        }
+        @font-face {
+            font-family: "JetBrains Mono";
+            font-style: normal;
+            font-weight: 400 700;
+            src: local("JetBrains Mono"), local("Fira Code");
+        }
+        :root {
+            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
+            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7; background: var(--bg); color: var(--ink);
+        }
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 20px 80px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232,184,133,0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 { font-size: 2.2em; margin: 0 0 10px; position: relative; z-index: 1; }
+        .hero .subtitle { color: #e9b885; font-size: 1.1em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85em; color: rgba(245,233,212,0.65); font-style: italic; position: relative; z-index: 1; }
+        .container { max-width: 1280px; margin: -30px auto 60px; padding: 0 20px; position: relative; z-index: 2; }
+        .breadcrumb { font-size: 0.85em; color: var(--ink-soft); margin-bottom: 12px; }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .cross-page-nav {
+            background: #fffdf8; border: 1px solid var(--line); border-radius: 6px;
+            padding: 10px 16px; margin-bottom: 20px; font-size: 0.88em; color: var(--ink-soft);
+        }
+        .cross-page-nav a { color: var(--accent-2); text-decoration: none; padding: 2px 4px; border-radius: 3px; }
+        .cross-page-nav a:hover { background: #fff8e7; color: var(--accent); }
+        .cross-page-nav a.active { color: var(--accent); font-weight: 700; background: #fff8e7; }
+        .notice {
+            background: #fff8e7; border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        }
+        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 16px; margin-bottom: 32px; }
+        .kpi-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 20px; box-shadow: var(--shadow); border-top: 3px solid var(--accent); }
+        .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
+        .kpi-card .label { color: var(--ink-soft); font-size: 0.9em; margin-top: 4px; }
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
+        .section { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 28px; margin-bottom: 28px; box-shadow: var(--shadow); }
+        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: var(--accent-2);
+            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 4px 0; transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        a:focus-visible, button:focus-visible, [tabindex]:focus-visible, input:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+        .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; padding: 12px 16px; background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; }
+        .control-row .ctrl-label { font-size: 0.88em; color: var(--ink-soft); font-weight: 600; }
+        .ctrl-btn { background: var(--paper); border: 1px solid var(--line); color: var(--ink); padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 0.88em; }
+        .ctrl-btn:hover { background: #fff8e7; border-color: var(--accent-soft); }
+        .ctrl-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .chart-wrap { background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; padding: 16px; margin-top: 12px; }
+        .legend-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; font-size: 0.85em; color: var(--ink-soft); }
+        .legend-row .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-row .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .node-card { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 14px; margin-top: 12px; }
+        .node-card h3 { color: var(--accent); margin-bottom: 6px; font-size: 1.05em; }
+        .node-card .role-tag { display: inline-block; background: var(--accent-soft); color: var(--ink); padding: 2px 8px; border-radius: 3px; font-size: 0.78em; margin-right: 4px; margin-bottom: 4px; }
+        .node-card .role-tag.missing { background: #f0d0c0; color: var(--rebel); }
+        .phase-timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 16px; }
+        .phase-card { background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; padding: 12px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .phase-card:hover { border-color: var(--accent-soft); }
+        .phase-card.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .phase-card .phase-name { font-weight: 700; font-size: 0.92em; margin-bottom: 4px; }
+        .phase-card .phase-range { font-size: 0.78em; opacity: 0.85; }
+        .alignment-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.88em; }
+        .alignment-table th, .alignment-table td { padding: 8px 12px; border: 1px solid var(--line); text-align: left; }
+        .alignment-table th { background: #fff8e7; color: var(--accent); font-weight: 600; }
+        .alignment-table .align-high { color: var(--accent-4); font-weight: 600; }
+        .alignment-table .align-mid { color: var(--accent-3); }
+        .alignment-table .align-low { color: var(--rebel); font-weight: 600; }
+        .footer-idx { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 12px; text-align: left; }
+        @media (min-width: 760px) { .footer-idx { grid-template-columns: 1fr 1fr; } }
+        .footer-idx .idx-block { background: rgba(245,233,212,0.06); border: 1px solid rgba(233,184,133,0.2); border-radius: 6px; padding: 10px 14px; }
+        .footer-idx .idx-block h4 { color: #f5e9d4; font-size: 0.82em; margin-bottom: 6px; font-weight: 700; }
+        .footer-idx .idx-block p { color: #e9b885; font-size: 0.78em; line-height: 1.6; margin: 0; }
+        .footer-idx .idx-block a { color: #e9b885; text-decoration: underline; }
+        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer a { color: #e9b885; }
+        .svg-tooltip { position: absolute; pointer-events: none; background: var(--ink); color: #f5e9d4; padding: 6px 10px; border-radius: 4px; font-size: 0.82em; opacity: 0; transition: opacity 0.15s; }
+        .svg-tooltip.visible { opacity: 0.95; }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">跳到主要内容</a>
+    <header class="hero">
+        <h1>取经团队动力学关系网络</h1>
+        <div class="subtitle">W270 · V5 首篇 · 跨方向整合项目主题 1 · 与 W269 A 文档 + W271 E 脚本 + W272 S 短文形成四方向整合</div>
+        <div class="tagline">Belbin 团队角色理论 + Tuckman 团队发展模型 + 群体动力学 三框架首次整合可视化</div>
+    </header>
+    <main class="container" id="main">
+        <nav class="breadcrumb" aria-label="面包屑导航">
+            <a href="../index.html">首页</a>
+            <span class="sep">›</span>
+            <a href="../dashboard.html">数据仪表盘</a>
+            <span class="sep">›</span>
+            <span>取经团队动力学关系网络</span>
+        </nav>
+        <nav class="cross-page-nav" aria-label="跨页面导航">
+            相关页面：
+            <a href="pilgrim-team-psychology-arc.html">取经团队心理变化曲线</a> ·
+            <a href="character-dynamic-network.html">人物关系网络</a> ·
+            <a href="character-sentiment-arc.html">个体情感弧线</a> ·
+            <a href="ming-political-thought-comparison.html">明代政治思想对照</a>
+        </nav>
+        <div class="notice">
+            <strong>本页为 V5 子方向首篇</strong>·基于 W233 V3 取经团队心理变化曲线升级·从"心理弧线"扩展到"关系网络 + 理论框架"双层·整合 Belbin/Tuckman/群体动力学三理论框架·与 W269 A 文档《取经团队动力学深化专题》形成"文档-可视化"互文。
+        </div>
+
+        <!-- KPI 卡片 -->
+        <section class="kpi-row" aria-label="核心指标">
+            <div class="kpi-card">
+                <div class="num">5</div>
+                <div class="label">团队成员</div>
+                <div class="detail">唐僧 / 悟空 / 八戒 / 沙僧 / 白龙马</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">9</div>
+                <div class="label">Belbin 角色</div>
+                <div class="detail">8/9 覆盖 · 缺监督评估者</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">4</div>
+                <div class="label">Tuckman 阶段</div>
+                <div class="detail">形成 / 震荡 / 规范 / 执行 + 解散</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">3</div>
+                <div class="label">大冲突</div>
+                <div class="detail">三打白骨精 / 真假美猴王 / 杀六贼</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">14</div>
+                <div class="label">西行年限</div>
+                <div class="detail">贞观十三年至贞观二十七年</div>
+            </div>
+        </section>
+
+        <!-- 板块 1：Belbin 角色雷达图 -->
+        <section class="section" aria-labelledby="sec-belbin">
+            <h2 id="sec-belbin">① Belbin 九角色覆盖度雷达</h2>
+            <p>取经团队 5 人覆盖 Belbin 九角色中的 8 种，仅缺"监督评估者"（Monitor Evaluator）——这正是团队反复陷入"悟空决策-唐僧否决"冲突的根因。无人冷静评估方案，导致决策震荡。</p>
+            <div class="chart-wrap">
+                <svg id="belbin-radar" width="100%" height="460" role="img" aria-labelledby="belbin-title belbin-desc">
+                    <title id="belbin-title">Belbin 九角色覆盖度雷达图</title>
+                    <desc id="belbin-desc">取经团队五成员在 Belbin 九角色上的覆盖度雷达对比。</desc>
+                </svg>
+                <div class="svg-tooltip" id="belbin-tip"></div>
+            </div>
+            <div class="legend-row" id="belbin-legend" aria-label="角色图例"></div>
+        </section>
+
+        <!-- 板块 2：五成员关系网络 force-directed -->
+        <section class="section" aria-labelledby="sec-network">
+            <h2 id="sec-network">② 五成员关系网络（D3.js force-directed）</h2>
+            <p>节点大小代表 Belbin 角色数（悟空 3 角色 / 唐僧 2 / 八戒 2 / 沙僧 2 / 白龙马 1），边粗细代表互动强度（冲突强度 + 合作强度）。点击节点展开角色卡片。</p>
+            <div class="control-row" role="group" aria-label="网络图控制">
+                <span class="ctrl-label">视图模式：</span>
+                <button class="ctrl-btn active" id="mode-all" aria-pressed="true">全部关系</button>
+                <button class="ctrl-btn" id="mode-conflict" aria-pressed="false">冲突关系</button>
+                <button class="ctrl-btn" id="mode-coop" aria-pressed="false">合作关系</button>
+                <button class="ctrl-btn" id="reset-network">↺ 重置布局</button>
+            </div>
+            <div class="chart-wrap">
+                <svg id="network-svg" width="100%" height="520" role="img" aria-labelledby="network-title network-desc">
+                    <title id="network-title">五成员关系网络</title>
+                    <desc id="network-desc">唐僧/悟空/八戒/沙僧/白龙马五成员的 force-directed 关系网络图。</desc>
+                </svg>
+                <div class="svg-tooltip" id="network-tip"></div>
+            </div>
+            <div id="node-detail" class="node-card" aria-live="polite">
+                <h3>点击节点查看角色详情</h3>
+                <p>选择左侧节点以查看 Belbin 角色定位、Tuckman 阶段特征、群体动力学位置。</p>
+            </div>
+        </section>
+
+        <!-- 板块 3：Tuckman 四阶段时间线 -->
+        <section class="section" aria-labelledby="sec-tuckman">
+            <h2 id="sec-tuckman">③ Tuckman 团队发展五阶段</h2>
+            <p>取经团队 Tuckman 五阶段：形成期（15 回）/ 震荡期（38 回）/ 规范期（23 回）/ 执行期（19 回）/ 解散期（1 回）。震荡期异常漫长，因团队被外部力量强制装配，缺乏共同价值观基础。</p>
+            <div class="phase-timeline" id="phase-timeline" role="tablist" aria-label="Tuckman 阶段时间线">
+                <div class="phase-card active" data-phase="forming" role="tab" aria-selected="true" tabindex="0">
+                    <div class="phase-name">形成期 Forming</div>
+                    <div class="phase-range">第 8-22 回 · 15 回</div>
+                </div>
+                <div class="phase-card" data-phase="storming" role="tab" aria-selected="false" tabindex="0">
+                    <div class="phase-name">震荡期 Storming</div>
+                    <div class="phase-range">第 22-59 回 · 38 回</div>
+                </div>
+                <div class="phase-card" data-phase="norming" role="tab" aria-selected="false" tabindex="0">
+                    <div class="phase-name">规范期 Norming</div>
+                    <div class="phase-range">第 59-81 回 · 23 回</div>
+                </div>
+                <div class="phase-card" data-phase="performing" role="tab" aria-selected="false" tabindex="0">
+                    <div class="phase-name">执行期 Performing</div>
+                    <div class="phase-range">第 81-99 回 · 19 回</div>
+                </div>
+                <div class="phase-card" data-phase="adjourning" role="tab" aria-selected="false" tabindex="0">
+                    <div class="phase-name">解散期 Adjourning</div>
+                    <div class="phase-range">第 100 回 · 1 回</div>
+                </div>
+            </div>
+            <div id="phase-detail" class="node-card" aria-live="polite" style="margin-top:16px;"></div>
+        </section>
+
+        <!-- 板块 4：群体动力学冲突机制 -->
+        <section class="section" aria-labelledby="sec-dynamic">
+            <h2 id="sec-dynamic">④ 群体动力学：目标对齐度分析</h2>
+            <p>五人表面目标对齐（取经），深层动机分化。仅唐僧目标对齐度高，八戒最低。这种"表层共识-深层分化"结构，是群体动力学冲突的根因。每次八戒提议分行李，都是深层动机（还俗）浮出水面。</p>
+            <table class="alignment-table" aria-label="目标对齐度分析表">
+                <thead>
+                    <tr>
+                        <th scope="col">成员</th>
+                        <th scope="col">表层目标</th>
+                        <th scope="col">深层动机</th>
+                        <th scope="col">对齐度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>唐僧</td><td>取经</td><td>信念（报恩+弘法）</td><td class="align-high">高</td></tr>
+                    <tr><td>悟空</td><td>取经</td><td>赎罪（脱五行山）</td><td class="align-mid">中</td></tr>
+                    <tr><td>八戒</td><td>取经</td><td>还俗（回高老庄）</td><td class="align-low">低</td></tr>
+                    <tr><td>沙僧</td><td>取经</td><td>脱罪（免飞剑穿心）</td><td class="align-mid">中</td></tr>
+                    <tr><td>白龙马</td><td>取经</td><td>复活（免死罪）</td><td class="align-mid">中</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:14px;"><strong>关键发现</strong>：决策三角（唐僧→悟空→八戒）与冲突三角（唐僧 vs 悟空→八戒附和）重叠——悟空既是执行者又是冲突方。这种角色重叠导致悟空每次执行都可能引发冲突。</p>
+            <p style="margin-top:8px;"><strong>权力结构</strong>：外部合法性（观音/如来授权→唐僧）与内部合法性（能力最强→悟空）分离，是"三打白骨精"冲突的权力结构根因。</p>
+        </section>
+
+        <!-- 板块 5：跨方向整合说明 -->
+        <section class="section" aria-labelledby="sec-integration">
+            <h2 id="sec-integration">⑤ 跨方向整合项目主题 1</h2>
+            <p>本页为<strong>跨方向整合项目主题 1（取经团队动力学）</strong>的 V 方向产出</p>
+            <p>四方向整合产出：</p>
+            <ul style="margin-left:20px; color:var(--ink-soft); font-size:0.9em;">
+                <li><strong>W269 A 方向</strong>：<a href="#">取经团队动力学深化专题</a>（docs/02-人物深度分析/取经团队动力学深化专题.md）·Belbin + Tuckman + 群体动力学三框架</li>
+                <li><strong>W270 V 方向</strong>：本页 · force-directed 关系网络 + 九角色雷达 + 五阶段时间线</li>
+                <li><strong>W271 E 方向</strong>：a11y 深化（WCAG 2.2 SC 2.4.13 焦点可见 + 屏幕阅读器 + 键盘导航）</li>
+                <li><strong>W272 S 方向</strong>：心理学跨学科分析短文（团队动力学视角 · 2000 字）</li>
+            </ul>
+            <p style="margin-top:10px;">本页与 pilgrim-team-psychology-arc.html 形成"心理弧线-关系网络"双层。心理弧线关注个体心理演化，关系网络（本页）关注成员互动结构。两层交叉观察可见：震荡期（ch22-59）是双层共振的关键枢纽。</p>
+        </section>
+    </main>
+    <footer>
+        <p>详解西游记 · 取经团队动力学关系网络 · W270 V5 首篇 跨方向整合项目主题 1</p>
+        <p>数据基于原著 100 回五成员关系素材整合，与 W269 A 文档 + W271 E 脚本 + W272 S 短文形成四方向整合。</p>
+        <p>
+            <a href="../dashboard.html">← 返回数据仪表盘</a> ·
+            <a href="pilgrim-team-psychology-arc.html">取经团队心理变化曲线 →</a> ·
+            <a href="character-dynamic-network.html">人物关系网络 →</a> ·
+            <a href="ming-political-thought-comparison.html">明代政治思想对照 →</a>
+        </p>
+        <div class="footer-idx">
+            <div class="idx-block">
+                <h4>正向时间线索引</h4>
+                <p>CHANGELOG.md v2.2.48 · W270 · V5 首篇 · 跨方向整合项目主题 1 V 方向</p>
+            </div>
+            <div class="idx-block">
+                <h4>反向文件索引</h4>
+                <p>scripts/output/file-index.md · W270 · site/data/pilgrim-team-dynamic-network.html</p>
+            </div>
+            <div class="idx-block">
+                <h4>方向索引</h4>
+                <p>site/data/ · V 方向 · V5 首篇（取经团队动力学关系网络）·跨方向整合项目主题 1</p>
+            </div>
+            <div class="idx-block">
+                <h4>跨文档链接</h4>
+                <p>
+                    <a href="pilgrim-team-psychology-arc.html">pilgrim-team-psychology-arc.html</a> ·
+                    W233-2 V3 ·
+                    <a href="character-dynamic-network.html">character-dynamic-network.html</a> ·
+                    W269 A 文档 / W271 E 脚本 / W272 S 短文
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // ============= EMBEDDED_DATA =============
+    const EMBEDDED_DATA = {
+        meta: {title: "取经团队动力学关系网络", version: "v2.2.48", w_id: "W270", direction: "V5"},
+        kpi: [
+            {label: "团队成员", value: 5, unit: "位"},
+            {label: "Belbin 角色", value: 9, unit: "种"},
+            {label: "Tuckman 阶段", value: 4, unit: "阶段"},
+            {label: "大冲突", value: 3, unit: "次"},
+            {label: "西行年限", value: 14, unit: "年"}
+        ],
+        belbin: [
+            {character: "唐僧", coordinator: 9, completer: 7, shaper: 3, plant: 4, specialist: 2, ri: 3, tw: 5, me: 2, implementer: 4},
+            {character: "悟空", coordinator: 4, completer: 3, shaper: 9, plant: 8, specialist: 9, ri: 6, tw: 4, me: 3, implementer: 5},
+            {character: "八戒", coordinator: 3, completer: 2, shaper: 4, plant: 3, specialist: 4, ri: 8, tw: 8, me: 3, implementer: 4},
+            {character: "沙僧", coordinator: 3, completer: 7, shaper: 2, plant: 2, specialist: 3, ri: 3, tw: 6, me: 2, implementer: 9},
+            {character: "白龙马", coordinator: 2, completer: 3, shaper: 2, plant: 2, specialist: 8, ri: 2, tw: 4, me: 2, implementer: 5}
+        ],
+        network: {
+            nodes: [
+                {id: "唐僧", roles: 2, color: "#c8463a", belbin: "协调者+完成者", tuckman: "目标澄清", dynamic: "外部合法性"},
+                {id: "悟空", roles: 3, color: "#8c2a2a", belbin: "塑造者+智多星+专家", tuckman: "推动行动", dynamic: "内部合法性"},
+                {id: "八戒", roles: 2, color: "#7a5230", belbin: "资源调查员+团队工作者", tuckman: "调节气氛", dynamic: "动机分化"},
+                {id: "沙僧", roles: 2, color: "#5a7a3a", belbin: "执行者+完成者", tuckman: "稳重执行", dynamic: "沉默缓冲"},
+                {id: "白龙马", roles: 1, color: "#3a6b8c", belbin: "专家", tuckman: "危急出手", dynamic: "角色固化"}
+            ],
+            links: [
+                {source: "唐僧", target: "悟空", conflict: 9, coop: 6, label: "权威vs能力"},
+                {source: "唐僧", target: "八戒", conflict: 3, coop: 5, label: "持戒vs动摇"},
+                {source: "唐僧", target: "沙僧", conflict: 1, coop: 7, label: "领导vs执行"},
+                {source: "唐僧", target: "白龙马", conflict: 1, coop: 4, label: "骑乘"},
+                {source: "悟空", target: "八戒", conflict: 5, coop: 8, label: "主战vs助力"},
+                {source: "悟空", target: "沙僧", conflict: 2, coop: 7, label: "主战vs守师"},
+                {source: "悟空", target: "白龙马", conflict: 1, coop: 3, label: "罕见互动"},
+                {source: "八戒", target: "沙僧", conflict: 2, coop: 6, label: "边缘互动"},
+                {source: "八戒", target: "白龙马", conflict: 1, coop: 2, label: "罕见互动"},
+                {source: "沙僧", target: "白龙马", conflict: 1, coop: 3, label: "沉默并行"}
+            ]
+        },
+        phases: {
+            forming: {name: "形成期 Forming", range: "第 8-22 回 · 15 回", feature: "观音装配团队，五人到位。成员对团队目标认知模糊（悟空=赎罪、八戒=误入、沙僧=脱罪）。表面形成，深层未形成。", key_events: ["第 8 回 观音奉旨寻取经人", "第 14 回 五行山收悟空", "第 15 回 鹰愁涧收小白龙", "第 19 回 高老庄收八戒", "第 22 回 流沙河收沙僧"]},
+            storming: {name: "震荡期 Storming", range: "第 22-59 回 · 38 回", feature: "三次大冲突密集。每次冲突都是深层动机浮出水面。冲突不是团队失败的标志，而是团队建立信任的必经过程——但取经团队的震荡期过长，因缺乏监督评估者角色，冲突无法被冷静调解。", key_events: ["第 14 回 杀六贼冲突", "第 27 回 三打白骨精冲突", "第 57-58 回 真假美猴王冲突"]},
+            norming: {name: "规范期 Norming", range: "第 59-81 回 · 23 回", feature: "角色边界清晰化。悟空不再挑战唐僧权威，唐僧不再轻易逐徒。但深层动机分化仍未解决——这是规范期的脆弱性。", key_events: ["第 59-61 回 火焰山借扇", "第 65-66 回 小雷音寺", "第 75-77 回 狮驼岭"]},
+            performing: {name: "执行期 Performing", range: "第 81-99 回 · 19 回", feature: "团队从被动应对转向主动执行。但执行期的代价是角色固化——白龙马彻底沉默、沙僧彻底边缘化。高效以牺牲成员潜能实现。", key_events: ["第 88 回 玉华州授徒", "第 93-95 回 天竺国玉兔", "第 98 回 凌云渡脱壳"]},
+            adjourning: {name: "解散期 Adjourning", range: "第 100 回 · 1 回", feature: "团队目标达成后立即解体。这是因为团队是任务导向（取经），非关系导向——任务完成，关系即解。", key_events: ["第 100 回 五圣成真"]}
+        }
+    };
+
+    // ============= Belbin 雷达图 =============
+    (function renderBelbinRadar() {
+        const svg = d3.select("#belbin-radar");
+        const tip = d3.select("#belbin-tip");
+        const width = +svg.attr("width") || 800;
+        const height = +svg.attr("height");
+        const cx = width / 2, cy = height / 2;
+        const radius = Math.min(width, height) / 2 - 60;
+        const roles = ["coordinator", "completer", "shaper", "plant", "specialist", "ri", "tw", "me", "implementer"];
+        const roleLabels = ["协调者", "完成者", "塑造者", "智多星", "专家", "资源调查员", "团队工作者", "监督评估者", "执行者"];
+        const colors = {唐僧: "#c8463a", 悟空: "#8c2a2a", 八戒: "#7a5230", 沙僧: "#5a7a3a", 白龙马: "#3a6b8c"};
+        const levels = [2, 4, 6, 8, 10];
+        const g = svg.append("g").attr("transform", `translate(${cx},${cy})`);
+
+        // 网格圆
+        levels.forEach(lv => {
+            const r = (lv / 10) * radius;
+            g.append("circle").attr("r", r).attr("fill", "none").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "3,3");
+            g.append("text").attr("y", -r).attr("text-anchor", "middle").attr("font-size", "10px").attr("fill", "#6b5e4d").text(lv);
+        });
+
+        // 轴线 + 标签
+        roles.forEach((role, i) => {
+            const angle = (i / roles.length) * 2 * Math.PI - Math.PI / 2;
+            const x2 = Math.cos(angle) * radius, y2 = Math.sin(angle) * radius;
+            g.append("line").attr("x1", 0).attr("y1", 0).attr("x2", x2).attr("y2", y2).attr("stroke", "#d9cdb8");
+            const lx = Math.cos(angle) * (radius + 24), ly = Math.sin(angle) * (radius + 24);
+            g.append("text").attr("x", lx).attr("y", ly).attr("text-anchor", "middle").attr("dominant-baseline", "middle")
+                .attr("font-size", "11px").attr("fill", "#2c2418").text(roleLabels[i]);
+        });
+
+        // 角色多边形
+        EMBEDDED_DATA.belbin.forEach(d => {
+            const points = roles.map((role, i) => {
+                const angle = (i / roles.length) * 2 * Math.PI - Math.PI / 2;
+                const val = d[role];
+                const r = (val / 10) * radius;
+                return [Math.cos(angle) * r, Math.sin(angle) * r];
+            });
+            g.append("polygon").attr("points", points.map(p => p.join(",")).join(" "))
+                .attr("fill", colors[d.character]).attr("fill-opacity", 0.12)
+                .attr("stroke", colors[d.character]).attr("stroke-width", 1.8)
+                .style("cursor", "pointer")
+                .on("mouseover", (e) => {
+                    tip.classed("visible", true).html(`<strong>${d.character}</strong>`);
+                })
+                .on("mousemove", (e) => {
+                    tip.style("left", (e.pageX + 10) + "px").style("top", (e.pageY - 10) + "px");
+                })
+                .on("mouseout", () => tip.classed("visible", false));
+        });
+
+        // 图例
+        const legend = d3.select("#belbin-legend");
+        Object.entries(colors).forEach(([name, color]) => {
+            legend.append("div").attr("class", "legend-item").html(
+                `<span class="legend-dot" style="background:${color}"></span>${name}`
+            );
+        });
+    })();
+
+    // ============= 关系网络 force-directed =============
+    let networkSimulation, networkSvg;
+    (function renderNetwork() {
+        networkSvg = d3.select("#network-svg");
+        const tip = d3.select("#network-tip");
+        const width = networkSvg.node().getBoundingClientRect().width;
+        const height = +networkSvg.attr("height");
+        const data = JSON.parse(JSON.stringify(EMBEDDED_DATA.network));
+
+        networkSimulation = d3.forceSimulation(data.nodes)
+            .force("charge", d3.forceManyBody().strength(-800))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("link", d3.forceLink(data.links).id(d => d.id).distance(d => 120 + (10 - Math.max(d.conflict, d.coop)) * 10))
+            .force("collide", d3.forceCollide(d => 25 + d.roles * 6));
+
+        const link = networkSvg.append("g").selectAll("line").data(data.links).enter().append("line")
+            .attr("stroke", "#d9cdb8").attr("stroke-width", d => Math.max(d.conflict, d.coop) * 0.6);
+
+        const node = networkSvg.append("g").selectAll("circle").data(data.nodes).enter().append("circle")
+            .attr("r", d => 18 + d.roles * 5).attr("fill", d => d.color).attr("stroke", "#fff").attr("stroke-width", 2)
+            .style("cursor", "pointer").attr("tabindex", 0);
+
+        const label = networkSvg.append("g").selectAll("text").data(data.nodes).enter().append("text")
+            .text(d => d.id).attr("text-anchor", "middle").attr("font-size", "13px").attr("fill", "#fff").attr("font-weight", "700")
+            .style("pointer-events", "none").attr("dy", 4);
+
+        node.on("click", (e, d) => showNodeDetail(d))
+            .on("mouseover", (e, d) => {
+                tip.classed("visible", true).html(`<strong>${d.id}</strong> · ${d.belbin}`);
+            })
+            .on("mousemove", (e) => tip.style("left", (e.pageX + 10) + "px").style("top", (e.pageY - 10) + "px"))
+            .on("mouseout", () => tip.classed("visible", false));
+
+        networkSimulation.on("tick", () => {
+            link.attr("x1", d => d.source.x).attr("y1", d => d.source.y).attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+            node.attr("cx", d => d.x).attr("cy", d => d.y);
+            label.attr("x", d => d.x).attr("y", d => d.y);
+        });
+
+        // 视图切换
+        function switchMode(mode) {
+            link.attr("stroke", d => {
+                if (mode === "conflict") return d.conflict > d.coop ? "#c8463a" : "#e8dfd0";
+                if (mode === "coop") return d.coop > d.conflict ? "#5a7a3a" : "#e8dfd0";
+                return "#d9cdb8";
+            }).attr("stroke-width", d => {
+                if (mode === "conflict") return d.conflict * 0.8;
+                if (mode === "coop") return d.coop * 0.8;
+                return Math.max(d.conflict, d.coop) * 0.6;
+            });
+        }
+        d3.select("#mode-all").on("click", function() { switchMode("all"); setActiveMode(this); });
+        d3.select("#mode-conflict").on("click", function() { switchMode("conflict"); setActiveMode(this); });
+        d3.select("#mode-coop").on("click", function() { switchMode("coop"); setActiveMode(this); });
+        function setActiveMode(btn) {
+            d3.selectAll(".control-row .ctrl-btn").classed("active", false).attr("aria-pressed", "false");
+            d3.select(btn).classed("active", true).attr("aria-pressed", "true");
+        }
+
+        d3.select("#reset-network").on("click", () => {
+            data.nodes.forEach(n => { n.x = null; n.y = null; n.vx = null; n.vy = null; });
+            networkSimulation.alpha(1).restart();
+        });
+    })();
+
+    function showNodeDetail(d) {
+        const detail = d3.select("#node-detail");
+        const roles = d.belbin.split("+");
+        const roleTags = roles.map(r => `<span class="role-tag">${r}</span>`).join("");
+        detail.html(`
+            <h3>${d.id}</h3>
+            <p><strong>Belbin 角色</strong>：${roleTags}</p>
+            <p><strong>Tuckman 阶段特征</strong>：${d.tuckman}</p>
+            <p><strong>群体动力学位置</strong>：${d.dynamic}</p>
+            <p><strong>Belbin 短板</strong>：${getShortboard(d.id)}</p>
+        `);
+    }
+    function getShortboard(name) {
+        const map = {
+            "唐僧": "协调者需具备权威性。唐僧权威来自外部合法性（观音授权）而非内部合法性（个人能力）——导致悟空持续挑战。",
+            "悟空": "塑造者易急躁、抗上。三次被逐（杀六贼/三打白骨精/真假美猴王）均因塑造者角色过度——推动过猛，挑战协调者权威。",
+            "八戒": "资源调查员易动摇、好色。多次提议分行李。团队工作者易逃避冲突——在悟空与唐僧冲突时往往沉默或附和唐僧。",
+            "沙僧": "执行者易缺主见、少台词。100 回中台词极少，关键决策从不发声。这是团队缺监督评估者的三生影响。",
+            "白龙马": "专家戏份少、被动。100 回中仅第 30 回主动出手一次。这是团队角色固化的极端案例——专家被锁定在承载功能上。"
+        };
+        return map[name] || "";
+    }
+
+    // ============= Tuckman 阶段时间线 =============
+    (function renderPhases() {
+        const phases = EMBEDDED_DATA.phases;
+        const detail = d3.select("#phase-detail");
+        function showPhase(key) {
+            const p = phases[key];
+            const events = p.key_events.map(e => `<li>${e}</li>`).join("");
+            detail.html(`
+                <h3>${p.name}</h3>
+                <p><strong>回目范围</strong>：${p.range}</p>
+                <p><strong>阶段特征</strong>：${p.feature}</p>
+                <p><strong>关键事件</strong>：</p>
+                <ul style="margin-left:20px; color:var(--ink-soft); font-size:0.88em;">${events}</ul>
+            `);
+            d3.selectAll(".phase-card").classed("active", false).attr("aria-selected", "false");
+            d3.select(`.phase-card[data-phase="${key}"]`).classed("active", true).attr("aria-selected", "true");
+        }
+        d3.selectAll(".phase-card").on("click", function() {
+            showPhase(this.getAttribute("data-phase"));
+        }).on("keydown", function(e) {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                showPhase(this.getAttribute("data-phase"));
+            }
+        });
+        showPhase("forming");
+    })();
+    </script>
+</body>
+</html>
