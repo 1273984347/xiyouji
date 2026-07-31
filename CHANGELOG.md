@@ -4,9 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W298），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W301），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.2.60（2026-08-01）：W299-W301 S3 方法论外部分享首批 3 篇·新增 docs/S3-方法论外部分享/ 目录（基于 docs/10-方法论沉淀/ 13 篇内部方法论改写·脱敏项目特定引用 + 通用化 + 受众转换·3 subagent 并行创作·主代理 spot-check 脱敏验证通过·S3 方向启动·3 新建 + 1 README + 5 同步 = 9 文件）
+
+> **W299-W301 S3 方法论外部分享首批 3 篇**
+> - **来源**：用户要求"继续推进"·选择 S3 方法论外部分享·将 docs/10-方法论沉淀/ 内部方法论改写为对外可发布文章
+> - **执行**：
+>   - **docs/S3-方法论外部分享/ 新建目录**：S3 方向启动·与 docs/S2-外部分享/（A 方向外部分享）区分·S3 专注方法论外部分享
+>   - **3 subagent 并行创作**（dispatching-parallel-agents 模式·独立无共享状态·主代理统一 spot-check）：
+>     - **W299 AI 代理协作写作规范**（149 行·docs/S3-方法论外部分享/W299-S3-发布-AI代理协作写作规范.md）·脱敏 markdown写作规范.md·六类纪律：段落级反模式/句子级反模式/格式纪律/内容体反模式/默认不创建的章节/任务描述反模式·少量改写
+>     - **W300 多代理并行协作模式**（152 行·docs/S3-方法论外部分享/W300-S3-发布-多代理并行协作模式.md）·脱敏 dispatching-parallel-agents四subagent并行模式.md·4 subagent 独立无共享状态执行范式·三大设计原则 + 五步流程 + 五维 spot-check·少量改写
+>     - **W301 Edit 工具竞态问题与决策树**（230 行·docs/S3-方法论外部分享/W301-S3-发布-Edit工具竞态问题与决策树.md）·脱敏 并行Edit竞态问题.md·同文件多 Edit 并行执行静默丢失陷阱·三种处置方案（串行/replace_all/多文件分发）+ 决策树·7 次复现计数器抽象为 3 个通用案例·中等改写
+>   - **脱敏规则**：删除 W### 编号/commit hash/绝对路径/内部文件名交叉引用/内部 skill 路径·将项目内部案例抽象为通用场景·受众从项目接手者转为 AI 代理协作/项目管理/工程实践领域技术人员
+>   - **主代理 spot-check 验证**：Grep 搜索 C:\Users/.trae-cn/W070/W076/W083/W086/W253/W256/W235-S1/E20 候选 等项目特定引用·3 文件全部 No matches·subagent 报告可信
+>   - **README.md 索引**：docs/S3-方法论外部分享/README.md·3 篇文章索引 + 改写工作量分布表（2 少量/5 中等/6 大量）+ 后续计划（W302-W309 第二批 + 第三批核心方法论）
+> - **验证**：3 文件脱敏 Grep 验证通过 ✓ · 目录结构 LS 验证 ✓ · README.md 索引完整 ✓
+> - **状态**：本次提交
 
 ### v2.2.59（2026-08-01）：W298 E1 截图审查 CI 化·新增 GitHub Actions screenshot-review workflow·三脚本纳入 CI（detect_unwrapped_tables.py baseline diff 阻断新增 + batch_screenshots.js --fail-on-issues 阻断 capture/page/console/layout 异常 + slice_screenshots.py 800px 切片产物非阻断·PR paths 触发 + 每周一 02:00 UTC 定期 + workflow_dispatch 手动·30 天 artifact 保留·3 workflows→4 workflows·E1 工程化深化）
 
