@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三教神学干预网络图谱</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+:root {
+    --ink: #2c2418;
+    --ink-soft: #5c4a35;
+    --paper: #f5ecd9;
+    --paper-deep: #e9dcc0;
+    --accent-1: #a83232;   /* 佛·朱砂红 */
+    --accent-2: #2d6a4f;   /* 道·松柏绿 */
+    --accent-3: #1e3a8a;   /* 儒·靛青蓝 */
+    --accent-4: #b8860b;   /* 心·心学金黄 */
+    --line: #c9b896;
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: "Noto Serif SC", "Source Han Serif SC", serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+}
+.container { max-width: 1280px; margin: 0 auto; padding: 24px 20px; }
+header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--accent-1); }
+h1 { font-size: 2.2em; margin: 8px 0 4px; color: var(--ink); letter-spacing: 4px; }
+.subtitle { font-size: 0.95em; color: var(--ink-soft); }
+.tagline { font-size: 0.88em; color: var(--accent-2); margin-top: 6px; font-style: italic; }
+.breadcrumb { font-size: 0.85em; color: var(--ink-soft); margin-bottom: 12px; }
+.breadcrumb a { color: var(--accent-2); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb .sep { margin: 0 6px; color: var(--line); }
+
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 28px; }
+.kpi-card { background: var(--paper-deep); border-left: 4px solid var(--accent-1); padding: 12px 16px; border-radius: 4px; }
+.kpi-card:nth-child(2) { border-left-color: var(--accent-2); }
+.kpi-card:nth-child(3) { border-left-color: var(--accent-3); }
+.kpi-card:nth-child(4) { border-left-color: var(--accent-4); }
+.kpi-card:nth-child(5) { border-left-color: var(--accent-1); }
+.kpi-value { font-size: 1.6em; font-weight: 700; color: var(--ink); font-family: "JetBrains Mono", monospace; }
+.kpi-label { font-size: 0.82em; color: var(--ink-soft); margin-top: 2px; }
+
+section { background: #fff8e7; border: 1px solid var(--line); border-radius: 6px; padding: 20px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+h2 { font-size: 1.4em; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px dashed var(--line); color: var(--ink); }
+h2 .en { font-size: 0.6em; color: var(--ink-soft); font-family: "JetBrains Mono", monospace; margin-left: 10px; }
+.lead { font-size: 0.95em; color: var(--ink-soft); margin: 0 0 14px; }
+.chart-area { background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 10px; }
+svg { display: block; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; font-size: 0.82em; color: var(--ink-soft); }
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+.theory-matrix { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+.theory-matrix th, .theory-matrix td { padding: 8px 10px; border: 1px solid var(--line); text-align: left; }
+.theory-matrix th { background: var(--paper-deep); font-weight: 600; }
+.theory-matrix tr:nth-child(even) { background: rgba(255,248,231,0.5); }
+
+footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+footer a { color: #e9b885; }
+footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
+footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
+</style>
+</head>
+<body>
+<div class="container">
+    <nav class="breadcrumb" aria-label="面包屑">
+        <a href="../index.html">首页</a><span class="sep">›</span>
+        <a href="../dashboard.html">仪表盘</a><span class="sep">›</span>
+        <a href="theological-intervention-network.html">三教神学干预网络图谱</a>
+    </nav>
+
+    <header>
+        <h1>三教神学干预网络图谱</h1>
+        <div class="subtitle">W278 · V 方向 · 跨方向整合项目主题 3·宗教与神学体系</div>
+        <div class="tagline">与 monster-ecology-network 形成 妖怪-神学 双轨 · 与 pilgrim-team-dynamics 形成 团队-神学 双轨</div>
+    </header>
+
+    <div class="kpi-row">
+        <div class="kpi-card">
+            <div class="kpi-value">3</div>
+            <div class="kpi-label">三教神祇（佛/道/儒心学）</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value">5</div>
+            <div class="kpi-label">五型干预（显化/点化/试炼/收服/授记）</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value">13</div>
+            <div class="kpi-label">关联回目 line 号</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value">4</div>
+            <div class="kpi-label">宗教学理论家（奥托/伊利亚德/田立克/希克）</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value">3</div>
+            <div class="kpi-label">三轴神学（佛性/道性/心性）</div>
+        </div>
+    </div>
+
+    <section>
+        <h2>一、三教神祇干预网络·D3.js 力导向图 <span class="en">Force-directed Network</span></h2>
+        <p class="lead">3 三教神祇（观音/如来/太上老君）× 5 干预型 × 13 回目 line 号，节点大小=干预强度，边粗细=关联强度</p>
+        <div class="chart-area">
+            <svg width="100%" height="560" id="network-svg" role="img" aria-label="三教神学干预网络力导向图"></svg>
+        </div>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-1)"></div>佛教神祇（观音/如来）</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-2)"></div>道教神祇（太上老君）</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-4)"></div>心性论神学指向</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--line)"></div>干预关系边</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>二、五型干预能量流动·桑基图 <span class="en">Five-type Intervention Sankey</span></h2>
+        <p class="lead">三教神祇 → 五型干预 → 关键回目·能量从神祇经干预型流向具体情节</p>
+        <div class="chart-area">
+            <svg width="100%" height="420" id="sankey-svg" role="img" aria-label="五型干预能量流动桑基图"></svg>
+        </div>
+    </section>
+
+    <section>
+        <h2>三、三教神学雷达图叠加 <span class="en">Three-religion Theology Radar</span></h2>
+        <p class="lead">佛性论/道性论/心性论三轴神学 × 五型干预·三教神学逻辑对照</p>
+        <div class="chart-area">
+            <svg width="100%" height="500" id="radar-svg" role="img" aria-label="三教神学雷达图叠加"></svg>
+        </div>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-1)"></div>佛性论（如来/观音）</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-2)"></div>道性论（太上老君）</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-4)"></div>心性论（三教归心）</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>四、神学干预时间线 <span class="en">Theological Intervention Timeline</span></h2>
+        <p class="lead">第7回至第100回·13 处 line 号·三教神祇干预机制沿取经路线的时序展开</p>
+        <div class="chart-area">
+            <svg width="100%" height="380" id="timeline-svg" role="img" aria-label="神学干预时间线"></svg>
+        </div>
+    </section>
+
+    <section>
+        <h2>五、四理论家 × 五型干预矩阵 <span class="en">Theory Matrix</span></h2>
+        <p class="lead">基于 W277 神学干预机制专题·奥托/伊利亚德/田立克/希克四理论家框架</p>
+        <table class="theory-matrix">
+            <thead>
+                <tr>
+                    <th>理论家</th>
+                    <th>核心概念</th>
+                    <th>显化</th>
+                    <th>点化</th>
+                    <th>试炼</th>
+                    <th>收服</th>
+                    <th>授记</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>奥托</td>
+                    <td>神圣感四要素</td>
+                    <td>受造感+全能感</td>
+                    <td>奥秘感</td>
+                    <td>敬畏感双重性</td>
+                    <td>全能感显化</td>
+                    <td>奥秘感极致</td>
+                </tr>
+                <tr>
+                    <td>伊利亚德</td>
+                    <td>显圣+圣化空间</td>
+                    <td>时空圣化</td>
+                    <td>符号媒介</td>
+                    <td>神显时间</td>
+                    <td>神圣空间</td>
+                    <td>宇宙轴心顶点</td>
+                </tr>
+                <tr>
+                    <td>田立克</td>
+                    <td>终极关怀+符号</td>
+                    <td>终极关怀显化</td>
+                    <td>神学符号传递</td>
+                    <td>关怀纯度测试</td>
+                    <td>关怀超越困境</td>
+                    <td>符号圆满消解</td>
+                </tr>
+                <tr>
+                    <td>希克</td>
+                    <td>多元主义+The Real</td>
+                    <td>神祇协作显化</td>
+                    <td>多元点化</td>
+                    <td>一心多元辨析</td>
+                    <td>三教神祇协作</td>
+                    <td>终极实在显化</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>六、三轴神学谱系 <span class="en">Three-axis Theology Spectrum</span></h2>
+        <p class="lead">佛性论（显化本有）— 道性论（复归本分）— 心性论（三教归心）·三轴神学逻辑谱系</p>
+        <div class="chart-area">
+            <svg width="100%" height="280" id="spectrum-svg" role="img" aria-label="三轴神学谱系图"></svg>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <p>详解西游记 · 三教神学干预网络图谱 · W278 · V 方向可视化页面 · 跨方向整合项目主题 3</p>
+    <p>3 三教神祇 + 5 干预型 + 13 line 号·基于 W277 神学干预机制专题四理论家框架（奥托/伊利亚德/田立克/希克）。</p>
+    <div class="footer-index">
+        正向时间线：CHANGELOG.md v2.2.50 W278 · 反向文件索引：scripts/output/file-index.md W278 · 方向索引：site/data/ · V 方向·跨方向整合项目主题 3
+    </div>
+    <div class="footer-cross">
+        <a href="monster-ecology-network.html">monster-ecology-network.html（W274 妖怪生态）</a> /
+        <a href="pilgrim-team-dynamics.html">pilgrim-team-dynamics.html（W270 取经团队）</a> /
+        <a href="../docs/03-主题与情节专题/神学干预机制专题.md">神学干预机制专题.md（W277 A 文档）</a>
+    </div>
+</footer>
+
+<script>
+// ============= Embedded Data =============
+const EMBEDDED_DATA = {
+    meta: {title: "三教神学干预网络图谱", version: "v2.2.50", w_id: "W278", direction: "V", theme: "跨方向整合项目主题 3·宗教与神学体系"},
+    // 1. Force-directed Network
+    network: {
+        nodes: [
+            // 三教神祇
+            {id: "观音", type: "deity", religion: "佛", size: 28, color: "var(--accent-1)"},
+            {id: "如来", type: "deity", religion: "佛", size: 30, color: "var(--accent-1)"},
+            {id: "太上老君", type: "deity", religion: "道", size: 26, color: "var(--accent-2)"},
+            // 五型干预
+            {id: "显化", type: "intervention", size: 22, color: "var(--accent-3)"},
+            {id: "点化", type: "intervention", size: 22, color: "var(--accent-3)"},
+            {id: "试炼", type: "intervention", size: 20, color: "var(--accent-3)"},
+            {id: "收服", type: "intervention", size: 22, color: "var(--accent-3)"},
+            {id: "授记", type: "intervention", size: 20, color: "var(--accent-3)"},
+            // 关键回目
+            {id: "第8回·灵山说法", type: "chapter", size: 16, color: "var(--accent-4)"},
+            {id: "第11回·疥癞显化", type: "chapter", size: 14, color: "var(--accent-4)"},
+            {id: "第14回·紧箍点化", type: "chapter", size: 16, color: "var(--accent-4)"},
+            {id: "第7回·八卦炉试炼", type: "chapter", size: 14, color: "var(--accent-4)"},
+            {id: "第42回·收红孩儿", type: "chapter", size: 14, color: "var(--accent-4)"},
+            {id: "第52回·收青牛", type: "chapter", size: 14, color: "var(--accent-4)"},
+            {id: "第77回·收大鹏", type: "chapter", size: 14, color: "var(--accent-4)"},
+            {id: "第58回·辨真假", type: "chapter", size: 14, color: "var(--accent-4)"},
+            {id: "第98回·无字真经", type: "chapter", size: 16, color: "var(--accent-4)"},
+            {id: "第100回·五众成佛", type: "chapter", size: 16, color: "var(--accent-4)"}
+        ],
+        links: [
+            // 神祇 → 干预型
+            {source: "观音", target: "显化", value: 3},
+            {source: "观音", target: "点化", value: 4},
+            {source: "观音", target: "试炼", value: 2},
+            {source: "观音", target: "收服", value: 3},
+            {source: "如来", target: "显化", value: 3},
+            {source: "如来", target: "点化", value: 2},
+            {source: "如来", target: "试炼", value: 2},
+            {source: "如来", target: "收服", value: 2},
+            {source: "如来", target: "授记", value: 4},
+            {source: "太上老君", target: "试炼", value: 3},
+            {source: "太上老君", target: "收服", value: 2},
+            // 干预型 → 回目
+            {source: "显化", target: "第8回·灵山说法", value: 2},
+            {source: "显化", target: "第11回·疥癞显化", value: 2},
+            {source: "点化", target: "第14回·紧箍点化", value: 3},
+            {source: "点化", target: "第98回·无字真经", value: 3},
+            {source: "试炼", target: "第7回·八卦炉试炼", value: 2},
+            {source: "试炼", target: "第58回·辨真假", value: 2},
+            {source: "收服", target: "第42回·收红孩儿", value: 2},
+            {source: "收服", target: "第52回·收青牛", value: 2},
+            {source: "收服", target: "第77回·收大鹏", value: 2},
+            {source: "授记", target: "第98回·无字真经", value: 2},
+            {source: "授记", target: "第100回·五众成佛", value: 3}
+        ]
+    },
+    // 2. Sankey
+    sankey: {
+        nodes: [
+            {name: "观音", color: "var(--accent-1)"},
+            {name: "如来", color: "var(--accent-1)"},
+            {name: "太上老君", color: "var(--accent-2)"},
+            {name: "显化", color: "var(--accent-3)"},
+            {name: "点化", color: "var(--accent-3)"},
+            {name: "试炼", color: "var(--accent-3)"},
+            {name: "收服", color: "var(--accent-3)"},
+            {name: "授记", color: "var(--accent-3)"},
+            {name: "第8回", color: "var(--accent-4)"},
+            {name: "第11回", color: "var(--accent-4)"},
+            {name: "第14回", color: "var(--accent-4)"},
+            {name: "第98回", color: "var(--accent-4)"},
+            {name: "第7回", color: "var(--accent-4)"},
+            {name: "第58回", color: "var(--accent-4)"},
+            {name: "第42回", color: "var(--accent-4)"},
+            {name: "第52回", color: "var(--accent-4)"},
+            {name: "第77回", color: "var(--accent-4)"},
+            {name: "第100回", color: "var(--accent-4)"}
+        ],
+        links: [
+            {source: 0, target: 3, value: 3},  // 观音→显化
+            {source: 0, target: 4, value: 4},  // 观音→点化
+            {source: 0, target: 5, value: 2},  // 观音→试炼
+            {source: 0, target: 6, value: 3},  // 观音→收服
+            {source: 1, target: 3, value: 3},  // 如来→显化
+            {source: 1, target: 4, value: 2},  // 如来→点化
+            {source: 1, target: 5, value: 2},  // 如来→试炼
+            {source: 1, target: 6, value: 2},  // 如来→收服
+            {source: 1, target: 7, value: 4},  // 如来→授记
+            {source: 2, target: 5, value: 3},  // 太上老君→试炼
+            {source: 2, target: 6, value: 2},  // 太上老君→收服
+            {source: 3, target: 8, value: 2},  // 显化→第8回
+            {source: 3, target: 9, value: 2},  // 显化→第11回
+            {source: 4, target: 10, value: 3}, // 点化→第14回
+            {source: 4, target: 11, value: 3}, // 点化→第98回
+            {source: 5, target: 12, value: 2}, // 试炼→第7回
+            {source: 5, target: 13, value: 2}, // 试炼→第58回
+            {source: 6, target: 14, value: 2}, // 收服→第42回
+            {source: 6, target: 15, value: 2}, // 收服→第52回
+            {source: 6, target: 16, value: 2}, // 收服→第77回
+            {source: 7, target: 11, value: 2}, // 授记→第98回
+            {source: 7, target: 17, value: 3}  // 授记→第100回
+        ]
+    },
+    // 3. Radar
+    radar: [
+        {name: "佛性论", color: "var(--accent-1)", values: [5, 5, 3, 5, 5]},  // 显化/点化/试炼/收服/授记
+        {name: "道性论", color: "var(--accent-2)", values: [2, 1, 5, 4, 1]},
+        {name: "心性论", color: "var(--accent-4)", values: [4, 5, 4, 3, 5]}
+    ],
+    // 4. Timeline
+    timeline: [
+        {chapter: "第7回", line: 720, deity: "太上老君", type: "试炼", desc: "八卦炉炼度四十九日"},
+        {chapter: "第8回", line: 838, deity: "如来/观音", type: "显化+点化", desc: "灵山说法+奉旨点化四众"},
+        {chapter: "第11回", line: 1178, deity: "观音", type: "显化", desc: "疥癞和尚显化长安"},
+        {chapter: "第14回", line: 1441, deity: "观音", type: "点化", desc: "紧箍咒与定心真言"},
+        {chapter: "第23回", line: 2211, deity: "观音", type: "试炼", desc: "四圣试禅心"},
+        {chapter: "第26回", line: 2501, deity: "观音", type: "显化", desc: "医人参果树"},
+        {chapter: "第42回", line: 1229, deity: "观音", type: "收服", desc: "收红孩儿为善财童子"},
+        {chapter: "第49回", line: 1797, deity: "观音", type: "收服", desc: "收金鱼精"},
+        {chapter: "第52回", line: 137, deity: "太上老君", type: "收服", desc: "收青牛精"},
+        {chapter: "第58回", line: 1253, deity: "如来", type: "试炼", desc: "辨真假悟空·二心竞斗"},
+        {chapter: "第77回", line: 135, deity: "如来", type: "收服", desc: "收大鹏金翅雕"},
+        {chapter: "第98回", line: 4170, deity: "如来", type: "授记+点化", desc: "灵山授记+无字真经"},
+        {chapter: "第100回", line: 4396, deity: "如来", type: "授记", desc: "五众成佛·紧箍自化"}
+    ]
+};
+
+// ============= 1. Force-directed Network =============
+(function renderNetwork() {
+    const svg = d3.select("#network-svg");
+    const width = svg.node().clientWidth;
+    const height = 560;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+    const data = JSON.parse(JSON.stringify(EMBEDDED_DATA.network));
+    // Resolve color vars to hex for rendering
+    const colorMap = {
+        "var(--accent-1)": "#a83232",
+        "var(--accent-2)": "#2d6a4f",
+        "var(--accent-3)": "#1e3a8a",
+        "var(--accent-4)": "#b8860b",
+        "var(--line)": "#c9b896"
+    };
+    data.nodes.forEach(n => n.color = colorMap[n.color] || n.color);
+
+    const sim = d3.forceSimulation(data.nodes)
+        .force("link", d3.forceLink(data.links).id(d => d.id).distance(d => d.value * 30 + 60))
+        .force("charge", d3.forceManyBody().strength(-400))
+        .force("center", d3.forceCenter(width/2, height/2))
+        .force("collision", d3.forceCollide().radius(d => d.size + 4));
+
+    const link = svg.append("g").selectAll("line")
+        .data(data.links).enter().append("line")
+        .attr("stroke", "#c9b896")
+        .attr("stroke-width", d => Math.sqrt(d.value))
+        .attr("opacity", 0.6);
+
+    const node = svg.append("g").selectAll("circle")
+        .data(data.nodes).enter().append("circle")
+        .attr("r", d => d.size / 2)
+        .attr("fill", d => d.color)
+        .attr("stroke", "#2c2418")
+        .attr("stroke-width", 1.5)
+        .call(d3.drag()
+            .on("start", (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+            .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
+            .on("end", (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+        );
+
+    const label = svg.append("g").selectAll("text")
+        .data(data.nodes).enter().append("text")
+        .text(d => d.id)
+        .attr("font-size", d => d.type === "deity" ? "13px" : (d.type === "intervention" ? "12px" : "10px"))
+        .attr("font-weight", d => d.type === "deity" ? 700 : (d.type === "intervention" ? 600 : 400))
+        .attr("fill", "#2c2418")
+        .attr("text-anchor", "middle")
+        .attr("dy", d => d.size / 2 + 14);
+
+    sim.on("tick", () => {
+        link.attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+        node.attr("cx", d => d.x).attr("cy", d => d.y);
+        label.attr("x", d => d.x).attr("y", d => d.y);
+    });
+})();
+
+// ============= 2. Sankey (Simplified bar-based) =============
+(function renderSankey() {
+    const svg = d3.select("#sankey-svg");
+    const width = svg.node().clientWidth;
+    const height = 420;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+    const data = EMBEDDED_DATA.sankey;
+    const pad = 20;
+    const colW = (width - pad * 2) / 3;
+
+    // Compute node positions per column
+    const colCounts = [3, 5, 10]; // 3 deities, 5 interventions, 10 chapters (some duplicate)
+    const nodePos = {};
+    ["观音", "如来", "太上老君"].forEach((n, i) => nodePos[n] = {x: pad + colW * 0.5, y: pad + (height - pad*2) * (i + 0.5) / 3});
+    ["显化", "点化", "试炼", "收服", "授记"].forEach((n, i) => nodePos[n] = {x: pad + colW * 1.5, y: pad + (height - pad*2) * (i + 0.5) / 5});
+
+    // Group chapters - aggregate by chapter name
+    const chapterList = ["第8回", "第11回", "第14回", "第98回", "第7回", "第58回", "第42回", "第52回", "第77回", "第100回"];
+    chapterList.forEach((n, i) => nodePos[n] = {x: pad + colW * 2.5, y: pad + (height - pad*2) * (i + 0.5) / 10});
+
+    const colorMap = {
+        "观音": "#a83232", "如来": "#a83232", "太上老君": "#2d6a4f",
+        "显化": "#1e3a8a", "点化": "#1e3a8a", "试炼": "#1e3a8a", "收服": "#1e3a8a", "授记": "#1e3a8a"
+    };
+    chapterList.forEach(c => colorMap[c] = "#b8860b");
+
+    // Draw links as curves
+    data.links.forEach(l => {
+        const src = data.nodes[l.source];
+        const tgt = data.nodes[l.target];
+        const s = nodePos[src.name];
+        const t = nodePos[tgt.name];
+        if (!s || !t) return;
+        const midX = (s.x + t.x) / 2;
+        svg.append("path")
+            .attr("d", `M${s.x + 30},${s.y} C${midX},${s.y} ${midX},${t.y} ${t.x - 30},${t.y}`)
+            .attr("fill", "none")
+            .attr("stroke", colorMap[src.name])
+            .attr("stroke-width", Math.sqrt(l.value) * 2)
+            .attr("opacity", 0.4);
+    });
+
+    // Draw nodes
+    Object.entries(nodePos).forEach(([name, pos]) => {
+        svg.append("rect")
+            .attr("x", pos.x - 30)
+            .attr("y", pos.y - 10)
+            .attr("width", 60)
+            .attr("height", 20)
+            .attr("fill", colorMap[name])
+            .attr("rx", 3);
+        svg.append("text")
+            .attr("x", pos.x)
+            .attr("y", pos.y + 4)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#fff")
+            .attr("font-size", "11px")
+            .attr("font-weight", 600)
+            .text(name);
+    });
+})();
+
+// ============= 3. Radar Chart =============
+(function renderRadar() {
+    const svg = d3.select("#radar-svg");
+    const width = svg.node().clientWidth;
+    const height = 500;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const cx = width / 2;
+    const cy = height / 2;
+    const r = Math.min(width, height) / 2 - 60;
+    const axes = ["显化", "点化", "试炼", "收服", "授记"];
+
+    const colorMap = {
+        "var(--accent-1)": "#a83232",
+        "var(--accent-2)": "#2d6a4f",
+        "var(--accent-4)": "#b8860b"
+    };
+
+    // Background circles
+    [0.2, 0.4, 0.6, 0.8, 1.0].forEach(scale => {
+        const pts = axes.map((_, i) => {
+            const a = (i / axes.length) * 2 * Math.PI - Math.PI / 2;
+            return [cx + r * scale * Math.cos(a), cy + r * scale * Math.sin(a)];
+        });
+        svg.append("polygon")
+            .attr("points", pts.map(p => p.join(",")).join(" "))
+            .attr("fill", "none")
+            .attr("stroke", "#c9b896")
+            .attr("stroke-dasharray", "2,2");
+    });
+
+    // Axes
+    axes.forEach((ax, i) => {
+        const a = (i / axes.length) * 2 * Math.PI - Math.PI / 2;
+        svg.append("line")
+            .attr("x1", cx).attr("y1", cy)
+            .attr("x2", cx + r * Math.cos(a))
+            .attr("y2", cy + r * Math.sin(a))
+            .attr("stroke", "#c9b896");
+        svg.append("text")
+            .attr("x", cx + (r + 20) * Math.cos(a))
+            .attr("y", cy + (r + 20) * Math.sin(a) + 4)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "13px")
+            .attr("font-weight", 600)
+            .attr("fill", "#2c2418")
+            .text(ax);
+    });
+
+    // Data
+    EMBEDDED_DATA.radar.forEach(m => {
+        const color = colorMap[m.color];
+        const pts = m.values.map((v, i) => {
+            const a = (i / axes.length) * 2 * Math.PI - Math.PI / 2;
+            const scale = v / 5;
+            return [cx + r * scale * Math.cos(a), cy + r * scale * Math.sin(a)];
+        });
+        svg.append("polygon")
+            .attr("points", pts.map(p => p.join(",")).join(" "))
+            .attr("fill", color)
+            .attr("fill-opacity", 0.15)
+            .attr("stroke", color)
+            .attr("stroke-width", 2);
+        pts.forEach(p => {
+            svg.append("circle")
+                .attr("cx", p[0]).attr("cy", p[1])
+                .attr("r", 4)
+                .attr("fill", color);
+        });
+    });
+})();
+
+// ============= 4. Timeline =============
+(function renderTimeline() {
+    const svg = d3.select("#timeline-svg");
+    const width = svg.node().clientWidth;
+    const height = 380;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const pad = 40;
+    const data = EMBEDDED_DATA.timeline;
+
+    const xScale = d3.scaleLinear()
+        .domain([0, data.length - 1])
+        .range([pad, width - pad]);
+
+    const typeColor = {
+        "显化": "#1e3a8a", "点化": "#1e3a8a", "试炼": "#1e3a8a",
+        "收服": "#1e3a8a", "授记": "#1e3a8a", "授记+点化": "#a83232",
+        "显化+点化": "#a83232"
+    };
+
+    // Baseline
+    svg.append("line")
+        .attr("x1", pad).attr("y1", height / 2)
+        .attr("x2", width - pad).attr("y2", height / 2)
+        .attr("stroke", "#c9b896")
+        .attr("stroke-width", 2);
+
+    data.forEach((d, i) => {
+        const x = xScale(i);
+        const y = height / 2;
+        const isAbove = i % 2 === 0;
+        const offset = isAbove ? -80 : 80;
+        const color = typeColor[d.type] || "#1e3a8a";
+
+        // Connecting line
+        svg.append("line")
+            .attr("x1", x).attr("y1", y)
+            .attr("x2", x).attr("y2", y + offset)
+            .attr("stroke", color)
+            .attr("stroke-width", 1.5);
+
+        // Node
+        svg.append("circle")
+            .attr("cx", x).attr("cy", y)
+            .attr("r", 6)
+            .attr("fill", color)
+            .attr("stroke", "#2c2418")
+            .attr("stroke-width", 1.5);
+
+        // Label box
+        const labelY = y + offset;
+        svg.append("rect")
+            .attr("x", x - 55).attr("y", labelY - 20)
+            .attr("width", 110).attr("height", 40)
+            .attr("fill", "#fff8e7")
+            .attr("stroke", color)
+            .attr("rx", 3);
+        svg.append("text")
+            .attr("x", x).attr("y", labelY - 6)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "10px")
+            .attr("font-weight", 700)
+            .attr("fill", "#2c2418")
+            .text(`${d.chapter}·${d.type}`);
+        svg.append("text")
+            .attr("x", x).attr("y", labelY + 8)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "9px")
+            .attr("fill", "#5c4a35")
+            .text(d.deity);
+    });
+})();
+
+// ============= 5. Spectrum (Three-axis Theology) =============
+(function renderSpectrum() {
+    const svg = d3.select("#spectrum-svg");
+    const width = svg.node().clientWidth;
+    const height = 280;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const pad = 60;
+
+    // Three axes: 佛性论 - 道性论 - 心性论
+    const axes = [
+        {name: "佛性论", x: pad + (width - pad * 2) * 0.15, color: "#a83232", desc: "显化本有"},
+        {name: "心性论", x: pad + (width - pad * 2) * 0.5, color: "#b8860b", desc: "三教归心"},
+        {name: "道性论", x: pad + (width - pad * 2) * 0.85, color: "#2d6a4f", desc: "复归本分"}
+    ];
+
+    // Spectrum line
+    svg.append("line")
+        .attr("x1", pad).attr("y1", height / 2)
+        .attr("x2", width - pad).attr("y2", height / 2)
+        .attr("stroke", "#c9b896")
+        .attr("stroke-width", 3);
+
+    axes.forEach(a => {
+        svg.append("circle")
+            .attr("cx", a.x).attr("cy", height / 2)
+            .attr("r", 16)
+            .attr("fill", a.color)
+            .attr("stroke", "#2c2418")
+            .attr("stroke-width", 2);
+        svg.append("text")
+            .attr("x", a.x).attr("y", height / 2 - 30)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "16px")
+            .attr("font-weight", 700)
+            .attr("fill", a.color)
+            .text(a.name);
+        svg.append("text")
+            .attr("x", a.x).attr("y", height / 2 + 40)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "12px")
+            .attr("fill", "#5c4a35")
+            .text(a.desc);
+    });
+
+    // Endpoints labels
+    svg.append("text")
+        .attr("x", pad).attr("y", height / 2 + 70)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "11px")
+        .attr("font-style", "italic")
+        .attr("fill", "#5c4a35")
+        .text("佛教神祇主导");
+    svg.append("text")
+        .attr("x", width - pad).attr("y", height / 2 + 70)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "11px")
+        .attr("font-style", "italic")
+        .attr("fill", "#5c4a35")
+        .text("道教神祇主导");
+    svg.append("text")
+        .attr("x", width / 2).attr("y", height / 2 + 70)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "11px")
+        .attr("font-style", "italic")
+        .attr("fill", "#5c4a35")
+        .text("三教合一终极指向");
+})();
+</script>
+</body>
+</html>

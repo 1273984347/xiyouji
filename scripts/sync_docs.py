@@ -28,8 +28,9 @@ FILES = {
 
 HEADER_LINES = 50  # 头部扫描行数
 
-# 统计字段静态期望值（A1/A2/A6 不变；A3/A4/A5/D 从 CHANGELOG 动态提取后覆盖）
-STATIC_EXPECTED = {"A1": 100, "A2": 43, "A6": 2}
+# 统计字段静态期望值（A1/A2 不变；A3/A4/A5/D 从 CHANGELOG 动态提取后覆盖）
+# 2026-07-31 修正：A6 从 2→9（05-诗词歌赋/ 实际 10 文件含 README.md = 9 篇）
+STATIC_EXPECTED = {"A1": 100, "A2": 43, "A6": 9}
 
 # CHANGELOG 最新版本段统计正则（提取最终值，支持 N→M 和 N 两种格式）
 CL_PATTERNS = {
@@ -40,9 +41,10 @@ CL_PATTERNS = {
 }
 
 # 目标文件统计正则（README/STRUCTURE/项目说明 头部格式）
+# 2026-07-31 修正：A1/A2 正则兼容缩写格式（"A1 逐回" / "A2 随笔"）和完整格式（"A1 逐回解读" / "A2 个人随笔"）
 TARGET_PATTERNS = {
-    "A1": re.compile(r"A1 逐回解读 (\d+) 回"),
-    "A2": re.compile(r"A2 个人随笔 (\d+) 篇"),
+    "A1": re.compile(r"A1 逐回(?:解读)? (\d+) 回"),
+    "A2": re.compile(r"A2 (?:个人)?随笔 (\d+) 篇"),
     "A3": re.compile(r"A3 人物深化 (\d+) 篇"),
     "A4": re.compile(r"A4 主题专题 (\d+) 篇"),
     "A5": re.compile(r"A5 文化背景 (\d+) 篇"),
@@ -246,6 +248,169 @@ def rule_fileindex_latest(cl_text):
     return issues
 
 
+# ============ 规则 5/6/7：E2 扩展扫描（2026-07-31 新增）============
+# 背景：user_profile.md E2 扩展从 5 项扫描扩展到 8 项，新增 3 项覆盖：
+#   - 规则 5 rule_status_marker：状态标记计数（P1-3 进行中泛滥）
+#   - 规则 6 rule_counter_sum：计数器求和一致性（P1-6 声明数 vs 表格求和）
+#   - 规则 7 rule_file_location：文件位置规范（P1-5 S2 方向文件错位）
+
+# CHANGELOG 现役段"进行中"标记正则
+IN_PROGRESS_RE = re.compile(r"进行中")
+
+# README 数据维度全景段标题正则（主源：提取标题声明数）
+README_DIM_HEADER_RE = re.compile(r"##\s+数据维度全景[（(]\s*(\d+)\s*维")
+
+# README 数据维度表格行正则（提取"维度数"列，支持 42 / 8+3 / 1 等格式）
+README_DIM_ROW_RE = re.compile(r"^\|[^|]*\|[^|]*\|\s*([\d+\-\s]+)\s*\|", re.MULTILINE)
+
+# STRUCTURE 头部"维度"声明正则（存在则检查）
+STRUCTURE_DIM_RE = re.compile(r"(\d+)\s*(?:数据维度|维度)")
+
+# site/index.html "维度"声明正则（存在则检查）
+INDEX_HTML_DIM_RE = re.compile(r"(\d+)&nbsp;维度|(\d+)\s*维度")
+
+# S2 方向文件命名模式 → 应属目录映射
+S2_FILE_RULES = [
+    # (文件名包含子串, 应属目录子串, 描述)
+    ("学术投稿候选", "S2-学术投稿", "S2 学术投稿候选文件"),
+    ("S2-发布",     "S2-外部分享", "S2 外部分享发布文件"),
+]
+
+
+def rule_status_marker(cl_text, fix=False):
+    """规则 5: 状态标记计数 - CHANGELOG 现役段"进行中"应 ≤ 1。
+
+    背景：P1-3 复现 87 处"进行中"标记泛滥（仅最新版本段应为进行中）。
+    判据：get_latest_section 提取现役段，统计"进行中"命中数。
+    """
+    issues = []
+    latest_section = get_latest_section(cl_text)
+    if not latest_section:
+        return ["[ERROR] CHANGELOG 无法提取最新版本段"]
+    hits = len(IN_PROGRESS_RE.findall(latest_section))
+    if hits > 1:
+        issues.append(
+            f"[MISMATCH] CHANGELOG 现役段'进行中'标记 {hits} 处（应 ≤ 1，仅最新版本段应为进行中）"
+        )
+    # fix=True 不自动修复：批量替换"进行中"→"已完成"需人工确认哪些是历史段、哪些是现役段
+    # 避免误改历史段（E2 铁律：历史条目不可改）
+    return issues
+
+
+def _eval_dim_expr(expr: str) -> int:
+    """将维度表达式（如 '8+3' / '42' / '8 + 3'）求值为整数。无法求值返回 0。"""
+    expr = expr.strip()
+    if not expr:
+        return 0
+    # 仅允许数字和 + - 空白
+    if not re.fullmatch(r"[\d+\-\s]+", expr):
+        return 0
+    try:
+        return int(eval(expr, {"__builtins__": {}}, {}))
+    except Exception:
+        return 0
+
+
+def rule_counter_sum(fix=False):
+    """规则 6: 计数器求和一致性 - README 标题声明数 == 表格求和 == 其他位置。
+
+    主源：README "## 数据维度全景（N 维）" 标题声明数 N。
+    其他位置（存在则检查，不存在则跳过）：
+      - README 表格"维度数"列求和
+      - STRUCTURE 头部"维度"声明数
+      - site/index.html "维度"声明数
+    """
+    issues = []
+    readme_path = FILES["README"]
+    if not readme_path.exists():
+        return ["[MISSING] README.md 不存在"]
+    readme_text = read_text(readme_path)
+
+    # 主源：README 标题声明数
+    m = README_DIM_HEADER_RE.search(readme_text)
+    if not m:
+        return ["[ERROR] README.md 未找到'数据维度全景（N 维）'标题"]
+    declared = int(m.group(1))
+
+    # 校验 1：README 表格求和
+    # 找到"数据维度全景"标题后的第一个表格
+    table_start = readme_text.find("| 阶段", m.end())
+    if table_start == -1:
+        issues.append("[MISMATCH] README.md 数据维度表格未找到'| 阶段'起始行")
+    else:
+        # 从表头分隔行之后开始提取数据行
+        sep_end = readme_text.find("\n", readme_text.find("|---", table_start))
+        table_chunk = readme_text[sep_end:readme_text.find("\n## ", sep_end)] if sep_end != -1 else ""
+        row_sums = []
+        for row_m in README_DIM_ROW_RE.finditer(table_chunk):
+            row_sums.append(_eval_dim_expr(row_m.group(1)))
+        if not row_sums:
+            issues.append("[MISMATCH] README.md 数据维度表格未提取到任何维度数")
+        else:
+            total = sum(row_sums)
+            if total != declared:
+                issues.append(
+                    f"[MISMATCH] README.md 表格求和 {total} (={' + '.join(str(s) for s in row_sums)}) vs 标题声明 {declared}"
+                )
+
+    # 校验 2：STRUCTURE 头部（存在则检查）
+    struct_path = FILES["STRUCTURE"]
+    if struct_path.exists():
+        struct_head = "\n".join(read_head(struct_path))
+        sm = STRUCTURE_DIM_RE.search(struct_head)
+        if sm:
+            struct_val = int(sm.group(1))
+            if struct_val != declared:
+                ln = find_line(struct_head.splitlines(), STRUCTURE_DIM_RE)
+                issues.append(
+                    f"[MISMATCH] STRUCTURE.md:line {ln} 维度声明 {struct_val} vs README 主源 {declared}"
+                )
+
+    # 校验 3：site/index.html（存在则检查）
+    index_path = ROOT / "site" / "index.html"
+    if index_path.exists():
+        index_text = read_text(index_path)
+        im = INDEX_HTML_DIM_RE.search(index_text)
+        if im:
+            index_val = int(im.group(1) or im.group(2))
+            if index_val != declared:
+                issues.append(
+                    f"[MISMATCH] site/index.html 维度声明 {index_val} vs README 主源 {declared}"
+                )
+
+    # fix=True 不自动修复：求和不一致通常意味着缺维度行而非数字错误，需人工补行
+    return issues
+
+
+def rule_file_location(scan_dir=None, fix=False):
+    """规则 7: 文件位置规范 - S2 方向文件必须在对应 S2-*/ 目录下。
+
+    背景：P1-3 复现 8 个 S2 学术投稿文件错位于 docs/10-方法论沉淀/。
+    判据：文件名含'学术投稿候选' → 必须位于 docs/S2-学术投稿/；
+         文件名含'S2-发布' → 必须位于 docs/S2-外部分享/。
+    """
+    issues = []
+    if scan_dir is None:
+        scan_dir = ROOT / "docs"
+    else:
+        scan_dir = Path(scan_dir)
+    if not scan_dir.exists():
+        return [f"[MISSING] 扫描目录不存在: {scan_dir}"]
+
+    # 遍历 docs/ 下所有 .md 文件
+    for md_file in sorted(scan_dir.rglob("*.md")):
+        rel_path = md_file.relative_to(ROOT)
+        rel_str = str(rel_path).replace("\\", "/")
+        fname = md_file.name
+        for name_keyword, expected_dir, desc in S2_FILE_RULES:
+            if name_keyword in fname and expected_dir not in rel_str:
+                issues.append(
+                    f"[MISMATCH] {rel_str} 是{desc}但不在 docs/{expected_dir}/ 下"
+                )
+    # fix=True 不自动修复：文件迁移涉及引用路径更新，需人工确认
+    return issues
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="6 文件文档一致性自动校验（解决 E1 铁律：prior session 报告'已同步'但残留过时数据）",
@@ -256,10 +421,13 @@ def main():
   stats    统计计数一致性（A1/A2/A3/A4/A5/A6/D 在 README/STRUCTURE/项目说明 一致）
   wids     W### 编号连续性（CHANGELOG W### 连续 + file-index 条目一致）
   fidx     file-index 最新条目（file-index 应含最新 W### 条目）
+  marker   状态标记计数（CHANGELOG 现役段'进行中'应 ≤ 1）
+  sum      计数器求和一致性（README 维度标题声明数 == 表格求和 == 其他位置）
+  loc      文件位置规范（S2 方向文件必须在 docs/S2-*/ 目录下）
 
 退出码: 0 全部一致 / 1 有不一致
 """)
-    parser.add_argument("--rule", choices=["version", "stats", "wids", "fidx"],
+    parser.add_argument("--rule", choices=["version", "stats", "wids", "fidx", "marker", "sum", "loc"],
                         help="只运行指定规则（默认全部）")
     parser.add_argument("--fix", action="store_true",
                         help="自动修复版本号 + 统计计数不一致")
@@ -316,6 +484,36 @@ def main():
             all_ok = False
         else:
             print("  [OK] file-index.md 包含最新 W### 条目")
+
+    if args.rule in (None, "marker"):
+        print("\n=== 规则 5: 状态标记计数（E2 扩展）===")
+        issues = rule_status_marker(cl_text, fix=args.fix)
+        if issues:
+            for i in issues:
+                print(f"  {i}")
+            all_ok = False
+        else:
+            print("  [OK] CHANGELOG 现役段'进行中'标记 ≤ 1")
+
+    if args.rule in (None, "sum"):
+        print("\n=== 规则 6: 计数器求和一致性（E2 扩展）===")
+        issues = rule_counter_sum(fix=args.fix)
+        if issues:
+            for i in issues:
+                print(f"  {i}")
+            all_ok = False
+        else:
+            print("  [OK] README 维度标题声明数 == 表格求和 == 其他位置")
+
+    if args.rule in (None, "loc"):
+        print("\n=== 规则 7: 文件位置规范（E2 扩展）===")
+        issues = rule_file_location(fix=args.fix)
+        if issues:
+            for i in issues:
+                print(f"  {i}")
+            all_ok = False
+        else:
+            print("  [OK] S2 方向文件均在对应 docs/S2-*/ 目录下")
 
     print("\n" + "=" * 60)
     if all_ok:

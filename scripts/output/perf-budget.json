@@ -1,0 +1,13 @@
+{
+  "version": "W267",
+  "version_detail": "v2.2.47",
+  "generated_at": "2026-07-30",
+  "description": "性能预算配置·单位 bytes·W267 E6 性能监控深化",
+  "unit": "bytes",
+  "html": 51200,
+  "css": 102400,
+  "js": 204800,
+  "image": 512000,
+  "font": 102400,
+  "total": 921600
+}

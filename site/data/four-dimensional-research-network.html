@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西游四维研究网络图谱 · 详解西游记</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<noscript><p style="color:#c8392c;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+<style>
+    :root {
+        --paper: #f5f0e6;
+        --paper-deep: #e9dcc0;
+        --paper-card: #fff8e7;
+        --ink: #2c2416;
+        --ink-soft: #6b5e4d;
+        --cinnabar: #c8392c;   /* 朱砂·修行心性 */
+        --indigo: #2c5f7c;     /* 靛青·权力政治 */
+        --gold: #c89b3c;       /* 金色·文化记忆 */
+        --jade: #5a7a3a;       /* 松绿·时间叙事 */
+        --line: #c9b896;
+        --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+        line-height: 1.7;
+        background: var(--paper);
+        color: var(--ink);
+    }
+    .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+    .hero {
+        background: linear-gradient(135deg, #1a1410 0%, #2a2018 40%, #3a2820 70%, #5a3828 100%);
+        color: #f5e9d4; padding: 48px 20px 64px; text-align: center;
+        position: relative; overflow: hidden;
+    }
+    .hero::after {
+        content: ""; position: absolute; inset: 0;
+        background: radial-gradient(circle at 70% 30%, rgba(200,155,60,0.18), transparent 60%);
+        pointer-events: none;
+    }
+    .hero h1 { font-size: 2.2em; margin: 0 0 10px; position: relative; z-index: 1; letter-spacing: 4px; }
+    .hero .subtitle { color: #e9b885; font-size: 1.05em; position: relative; z-index: 1; }
+    .hero .tagline { margin-top: 12px; font-size: 0.85em; color: rgba(245,233,212,0.65); font-style: italic; position: relative; z-index: 1; }
+    .container { max-width: 1280px; margin: -28px auto 48px; padding: 0 20px; position: relative; z-index: 2; }
+    .breadcrumb { font-size: 0.85em; color: var(--ink-soft); margin-bottom: 12px; }
+    .breadcrumb a { color: var(--indigo); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+    .cross-page-nav {
+        background: var(--paper-card); border: 1px solid var(--line); border-left: 4px solid var(--cinnabar);
+        padding: 12px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 4px;
+    }
+    .cross-page-nav a { color: var(--indigo); margin-right: 16px; text-decoration: none; }
+    .cross-page-nav a:hover { text-decoration: underline; }
+    .kpi-row {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px; margin-bottom: 28px;
+    }
+    .kpi-card {
+        background: var(--paper-card); border: 1px solid var(--line); border-radius: 6px;
+        padding: 14px 16px; box-shadow: var(--shadow); border-top: 3px solid var(--cinnabar);
+    }
+    .kpi-card.power { border-top-color: var(--indigo); }
+    .kpi-card.culture { border-top-color: var(--gold); }
+    .kpi-card.time { border-top-color: var(--jade); }
+    .kpi-card.chart { border-top-color: var(--ink); }
+    .kpi-card .kpi-label { font-size: 0.82em; color: var(--ink-soft); margin-bottom: 4px; }
+    .kpi-card .kpi-value { font-size: 1.7em; font-weight: 700; color: var(--ink); font-family: "JetBrains Mono", monospace; }
+    .kpi-card .kpi-note { font-size: 0.75em; color: var(--ink-soft); margin-top: 4px; }
+    .section {
+        background: var(--paper-card); border: 1px solid var(--line); border-radius: 6px;
+        padding: 22px; margin-bottom: 24px; box-shadow: var(--shadow);
+    }
+    .section h2 {
+        font-size: 1.4em; color: var(--ink); margin-bottom: 6px;
+        border-bottom: 2px solid var(--line); padding-bottom: 8px;
+    }
+    .section h2 .badge {
+        display: inline-block; font-size: 0.6em; padding: 2px 8px; border-radius: 10px;
+        margin-left: 8px; vertical-align: middle; color: #fff;
+    }
+    .section h2 .badge.cinnabar { background: var(--cinnabar); }
+    .section h2 .badge.indigo { background: var(--indigo); }
+    .section h2 .badge.gold { background: var(--gold); }
+    .section h2 .badge.jade { background: var(--jade); }
+    .section h2 .en { font-size: 0.6em; color: var(--ink-soft); font-family: "JetBrains Mono", monospace; margin-left: 10px; }
+    .section .lead { color: var(--ink-soft); font-size: 0.92em; margin-bottom: 14px; }
+    .chart-box { width: 100%; overflow-x: auto; background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 8px; }
+    .chart-box svg { display: block; margin: 0 auto; }
+    .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; font-size: 0.85em; justify-content: center; color: var(--ink-soft); }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
+    footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+    footer a { color: #e9b885; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
+    footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
+    @media (max-width: 768px) {
+        .kpi-row { grid-template-columns: repeat(2, 1fr); }
+        .hero h1 { font-size: 1.6em; letter-spacing: 2px; }
+    }
+</style>
+</head>
+<body>
+<header class="hero">
+    <h1>西游四维研究网络图谱</h1>
+    <div class="subtitle">Four-dimensional Research Network · 修行心性 × 权力政治 × 文化记忆 × 时间叙事</div>
+    <div class="tagline">W282 · V 方向 · 跨方向整合项目主题 4 · 西游研究四维度整合图谱</div>
+</header>
+<div class="container">
+    <nav class="breadcrumb" aria-label="面包屑">
+        <a href="../index.html">首页</a><span class="sep">›</span>
+        <a href="../dashboard.html">可视化</a><span class="sep">›</span>
+        <a href="four-dimensional-research-network.html">四维研究网络图谱</a>
+    </nav>
+
+    <div class="cross-page-nav">
+        <a href="../dashboard.html">← 返回 Dashboard</a>
+        <a href="theological-intervention-network.html">查看神学干预网络 →</a>
+        <a href="monster-ecology-network.html">查看妖怪生态网络 →</a>
+    </div>
+
+    <div class="kpi-row">
+        <div class="kpi-card">
+            <div class="kpi-label">研究维度</div>
+            <div class="kpi-value">4</div>
+            <div class="kpi-note">修行心性 / 权力政治 / 文化记忆 / 时间叙事</div>
+        </div>
+        <div class="kpi-card power">
+            <div class="kpi-label">理论家</div>
+            <div class="kpi-value">12</div>
+            <div class="kpi-note">每维度 3 位：阳明/弗氏/荣格 等</div>
+        </div>
+        <div class="kpi-card culture">
+            <div class="kpi-label">关键 line 号</div>
+            <div class="kpi-value">8</div>
+            <div class="kpi-note">第1回 line 1 至 第100回 line 9140</div>
+        </div>
+        <div class="kpi-card time">
+            <div class="kpi-label">可视化图表</div>
+            <div class="kpi-value">5</div>
+            <div class="kpi-note">雷达 / 热力矩阵 / 网络 / 时间线 / 谱系</div>
+        </div>
+    </div>
+
+    <!-- 一、四维雷达图 -->
+    <section class="section">
+        <h2>一、四维研究雷达叠加 <span class="badge cinnabar">心</span><span class="badge indigo">权</span><span class="badge gold">忆</span><span class="badge jade">时</span><span class="en">Radar Overlay</span></h2>
+        <p class="lead">4 维度 × 5 指标（理论深度 / 文本证据 / 现代相关性 / 跨维度呼应 / 教学价值）·雷达叠加对照</p>
+        <div class="chart-box">
+            <svg width="100%" height="500" id="radar-svg" role="img" aria-label="四维研究雷达叠加图"></svg>
+        </div>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--cinnabar)"></div>修行心性（阳明/弗洛伊德/荣格）</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--indigo)"></div>权力政治（福柯/韦伯/马基雅维利）</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--gold)"></div>文化记忆（阿斯曼/哈布瓦赫/姚斯）</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--jade)"></div>时间叙事（海德格尔/热奈特/里柯尔）</div>
+        </div>
+    </section>
+
+    <!-- 二、12 理论家 × 4 维度矩阵热力图 -->
+    <section class="section">
+        <h2>二、12 理论家 × 4 维度贡献度热力图 <span class="en">Contribution Heatmap</span></h2>
+        <p class="lead">12 位理论家在 4 维度上的贡献度（0–10）·对角线为主维度高贡献，跨维度呼应可见于次对角</p>
+        <div class="chart-box">
+            <svg width="100%" height="460" id="heatmap-svg" role="img" aria-label="12 理论家 × 4 维度贡献度热力图"></svg>
+        </div>
+    </section>
+
+    <!-- 三、四维整合网络图 -->
+    <section class="section">
+        <h2>三、四维整合网络·力导向图 <span class="en">Force-directed Network</span></h2>
+        <p class="lead">4 维度节点 + 12 理论家节点 + 8 line 号节点·节点大小=关联强度，边粗细=呼应强度</p>
+        <div class="chart-box">
+            <svg width="100%" height="620" id="network-svg" role="img" aria-label="四维整合力导向网络图"></svg>
+        </div>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--cinnabar)"></div>修行心性维度</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--indigo)"></div>权力政治维度</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--gold)"></div>文化记忆维度</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--jade)"></div>时间叙事维度</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--ink-soft)"></div>line 号节点</div>
+        </div>
+    </section>
+
+    <!-- 四、100 回四维强度时间线 -->
+    <section class="section">
+        <h2>四、100 回四维强度时间线·堆叠面积图 <span class="en">Stacked Area Timeline</span></h2>
+        <p class="lead">100 回沿取经路线·4 维度叙事强度变化·11 个采样点展示四维共振节律</p>
+        <div class="chart-box">
+            <svg width="100%" height="440" id="timeline-svg" role="img" aria-label="100 回四维强度堆叠面积图"></svg>
+        </div>
+    </section>
+
+    <!-- 五、四维谱系图 -->
+    <section class="section">
+        <h2>五、四维研究谱系·极坐标图 <span class="en">Polar Spectrum</span></h2>
+        <p class="lead">修行心性—权力政治—文化记忆—时间叙事四轴谱系·12 理论家沿所属轴分布，辐射距离=跨维度呼应度</p>
+        <div class="chart-box">
+            <svg width="100%" height="540" id="spectrum-svg" role="img" aria-label="四维研究谱系极坐标图"></svg>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <p>详解西游记 · 西游四维研究网络图谱 · W282 · V 方向可视化页面 · 跨方向整合项目主题 4</p>
+    <p>4 维度 + 12 理论家 + 8 line 号·基于四维研究框架（修行心性 / 权力政治 / 文化记忆 / 时间叙事）整合。</p>
+    <div class="footer-index">
+        正向时间线：CHANGELOG.md v2.2.51 W282 · 反向文件索引：scripts/output/file-index.md W282 · 方向索引：site/data/ · V 方向·跨方向整合项目主题 4
+    </div>
+    <div class="footer-cross">
+        跨页面导航：
+        <a href="../dashboard.html">dashboard.html（仪表盘）</a> /
+        <a href="theological-intervention-network.html">theological-intervention-network.html（W278 神学干预网络）</a> /
+        <a href="monster-ecology-network.html">monster-ecology-network.html（W274 妖怪生态网络）</a>
+    </div>
+</footer>
+
+<script>
+// ============= Embedded Data =============
+const EMBEDDED_DATA = {
+    meta: {title: "西游四维研究网络图谱", version: "v2.2.51", w_id: "W282", direction: "V", theme: "跨方向整合项目主题 4·西游研究四维整合"},
+    dimensions: [
+        {key: "mind",     name: "修行心性", en: "Cultivation-Mind",    color: "#c8392c"},
+        {key: "power",    name: "权力政治", en: "Power-Politics",      color: "#2c5f7c"},
+        {key: "culture",  name: "文化记忆", en: "Cultural-Memory",     color: "#c89b3c"},
+        {key: "time",     name: "时间叙事", en: "Time-Narrative",      color: "#5a7a3a"}
+    ],
+    indicators: ["理论深度", "文本证据", "现代相关性", "跨维度呼应", "教学价值"],
+    // 1. Radar data
+    radar: [
+        {name: "修行心性", color: "#c8392c", values: [5, 5, 4, 4, 5]},
+        {name: "权力政治", color: "#2c5f7c", values: [4, 5, 5, 4, 4]},
+        {name: "文化记忆", color: "#c89b3c", values: [4, 4, 5, 5, 4]},
+        {name: "时间叙事", color: "#5a7a3a", values: [5, 4, 4, 5, 5]}
+    ],
+    // 2. Heatmap: 12 theorists × 4 dimensions
+    theorists: [
+        {name: "王阳明",    dim: "mind",    values: {mind: 10, power: 4, culture: 5, time: 3}},
+        {name: "弗洛伊德",  dim: "mind",    values: {mind: 9,  power: 2, culture: 4, time: 3}},
+        {name: "荣格",      dim: "mind",    values: {mind: 9,  power: 3, culture: 6, time: 4}},
+        {name: "福柯",      dim: "power",   values: {mind: 4,  power: 10, culture: 7, time: 5}},
+        {name: "韦伯",      dim: "power",   values: {mind: 3,  power: 9, culture: 5, time: 3}},
+        {name: "马基雅维利", dim: "power",   values: {mind: 2,  power: 10, culture: 4, time: 2}},
+        {name: "阿斯曼",    dim: "culture", values: {mind: 3,  power: 5, culture: 10, time: 6}},
+        {name: "哈布瓦赫",  dim: "culture", values: {mind: 2,  power: 4, culture: 9,  time: 5}},
+        {name: "姚斯",      dim: "culture", values: {mind: 3,  power: 2, culture: 9,  time: 4}},
+        {name: "海德格尔",  dim: "time",    values: {mind: 6,  power: 3, culture: 5,  time: 10}},
+        {name: "热奈特",    dim: "time",    values: {mind: 2,  power: 2, culture: 4,  time: 10}},
+        {name: "里柯尔",    dim: "time",    values: {mind: 5,  power: 3, culture: 6,  time: 10}}
+    ],
+    // 3. Network: 4 dimensions + 12 theorists + 8 line nodes
+    network: {
+        nodes: [
+            // 4 dimension nodes
+            {id: "修行心性", type: "dim", dim: "mind",    size: 32, color: "#c8392c"},
+            {id: "权力政治", type: "dim", dim: "power",   size: 32, color: "#2c5f7c"},
+            {id: "文化记忆", type: "dim", dim: "culture", size: 32, color: "#c89b3c"},
+            {id: "时间叙事", type: "dim", dim: "time",    size: 32, color: "#5a7a3a"},
+            // 12 theorists
+            {id: "王阳明",    type: "theorist", dim: "mind",    size: 18, color: "#c8392c"},
+            {id: "弗洛伊德",  type: "theorist", dim: "mind",    size: 18, color: "#c8392c"},
+            {id: "荣格",      type: "theorist", dim: "mind",    size: 18, color: "#c8392c"},
+            {id: "福柯",      type: "theorist", dim: "power",   size: 18, color: "#2c5f7c"},
+            {id: "韦伯",      type: "theorist", dim: "power",   size: 18, color: "#2c5f7c"},
+            {id: "马基雅维利", type: "theorist", dim: "power",   size: 18, color: "#2c5f7c"},
+            {id: "阿斯曼",    type: "theorist", dim: "culture", size: 18, color: "#c89b3c"},
+            {id: "哈布瓦赫",  type: "theorist", dim: "culture", size: 18, color: "#c89b3c"},
+            {id: "姚斯",      type: "theorist", dim: "culture", size: 18, color: "#c89b3c"},
+            {id: "海德格尔",  type: "theorist", dim: "time",    size: 18, color: "#5a7a3a"},
+            {id: "热奈特",    type: "theorist", dim: "time",    size: 18, color: "#5a7a3a"},
+            {id: "里柯尔",    type: "theorist", dim: "time",    size: 18, color: "#5a7a3a"},
+            // 8 line nodes
+            {id: "L1·石猴出世",    type: "line", line: 1,    chapter: "第1回",   desc: "石猴出世",   size: 14, color: "#6b5e4d"},
+            {id: "L722·大闹天宫",  type: "line", line: 722,  chapter: "第7回",   desc: "大闹天宫",   size: 14, color: "#6b5e4d"},
+            {id: "L1441·心猿归正", type: "line", line: 1441, chapter: "第14回",  desc: "心猿归正",   size: 14, color: "#6b5e4d"},
+            {id: "L1519·紧箍咒",   type: "line", line: 1519, chapter: "第14回",  desc: "紧箍咒",     size: 14, color: "#6b5e4d"},
+            {id: "L3200·三打白骨精", type: "line", line: 3200, chapter: "第27回",  desc: "三打白骨精", size: 14, color: "#6b5e4d"},
+            {id: "L6800·真假美猴王", type: "line", line: 6800, chapter: "第58回",  desc: "真假美猴王", size: 14, color: "#6b5e4d"},
+            {id: "L9100·凌云渡",    type: "line", line: 9100, chapter: "第98回",  desc: "凌云渡",     size: 14, color: "#6b5e4d"},
+            {id: "L9140·斗战胜佛",  type: "line", line: 9140, chapter: "第100回", desc: "斗战胜佛",   size: 14, color: "#6b5e4d"}
+        ],
+        links: [
+            // Dimension → its 3 theorists
+            {source: "修行心性", target: "王阳明",    value: 4},
+            {source: "修行心性", target: "弗洛伊德",  value: 4},
+            {source: "修行心性", target: "荣格",      value: 4},
+            {source: "权力政治", target: "福柯",      value: 4},
+            {source: "权力政治", target: "韦伯",      value: 4},
+            {source: "权力政治", target: "马基雅维利", value: 4},
+            {source: "文化记忆", target: "阿斯曼",    value: 4},
+            {source: "文化记忆", target: "哈布瓦赫",  value: 4},
+            {source: "文化记忆", target: "姚斯",      value: 4},
+            {source: "时间叙事", target: "海德格尔",  value: 4},
+            {source: "时间叙事", target: "热奈特",    value: 4},
+            {source: "时间叙事", target: "里柯尔",    value: 4},
+            // Theorist → line nodes (cross-dimension resonance)
+            {source: "王阳明",   target: "L1441·心猿归正", value: 3},
+            {source: "荣格",     target: "L1·石猴出世",    value: 3},
+            {source: "弗洛伊德", target: "L1519·紧箍咒",   value: 3},
+            {source: "福柯",    target: "L722·大闹天宫",  value: 4},
+            {source: "马基雅维利", target: "L722·大闹天宫", value: 3},
+            {source: "韦伯",    target: "L1519·紧箍咒",   value: 2},
+            {source: "阿斯曼",  target: "L3200·三打白骨精", value: 3},
+            {source: "哈布瓦赫", target: "L3200·三打白骨精", value: 3},
+            {source: "姚斯",    target: "L9140·斗战胜佛",  value: 3},
+            {source: "海德格尔", target: "L6800·真假美猴王", value: 4},
+            {source: "热奈特",  target: "L6800·真假美猴王", value: 3},
+            {source: "里柯尔",  target: "L9100·凌云渡",    value: 3},
+            {source: "里柯尔",  target: "L9140·斗战胜佛",  value: 3},
+            // Dimension → line nodes (direct ties)
+            {source: "修行心性", target: "L9100·凌云渡",    value: 3},
+            {source: "修行心性", target: "L9140·斗战胜佛",  value: 3},
+            {source: "权力政治", target: "L722·大闹天宫",  value: 3},
+            {source: "文化记忆", target: "L1·石猴出世",    value: 2},
+            {source: "文化记忆", target: "L9140·斗战胜佛",  value: 2},
+            {source: "时间叙事", target: "L1·石猴出世",    value: 3},
+            {source: "时间叙事", target: "L9100·凌云渡",    value: 2}
+        ]
+    },
+    // 4. 100-chapter timeline (11 sample points)
+    timeline: [
+        {chapter: 1,   mind: 8,  power: 3, culture: 7, time: 9},
+        {chapter: 10,  mind: 7,  power: 8, culture: 5, time: 6},
+        {chapter: 20,  mind: 6,  power: 6, culture: 5, time: 5},
+        {chapter: 30,  mind: 8,  power: 5, culture: 6, time: 5},
+        {chapter: 40,  mind: 6,  power: 7, culture: 6, time: 6},
+        {chapter: 50,  mind: 7,  power: 6, culture: 7, time: 7},
+        {chapter: 60,  mind: 9,  power: 7, culture: 7, time: 8},
+        {chapter: 70,  mind: 7,  power: 6, culture: 8, time: 7},
+        {chapter: 80,  mind: 7,  power: 5, culture: 8, time: 7},
+        {chapter: 90,  mind: 8,  power: 6, culture: 9, time: 8},
+        {chapter: 100, mind: 10, power: 7, culture: 10, time: 10}
+    ],
+    // 5. Polar spectrum: theorists placed on their dim-axis at radial distance = cross-resonance
+    polarExtra: [
+        // {theorist, axis: dimKey, r: 0-1 (relative), crossResonance: 0-10}
+        {theorist: "王阳明",    axis: "mind",    r: 0.85, cross: 7},
+        {theorist: "弗洛伊德",  axis: "mind",    r: 0.65, cross: 5},
+        {theorist: "荣格",      axis: "mind",    r: 0.75, cross: 8},
+        {theorist: "福柯",      axis: "power",   r: 0.90, cross: 9},
+        {theorist: "韦伯",      axis: "power",   r: 0.75, cross: 6},
+        {theorist: "马基雅维利", axis: "power",   r: 0.95, cross: 5},
+        {theorist: "阿斯曼",    axis: "culture", r: 0.90, cross: 9},
+        {theorist: "哈布瓦赫",  axis: "culture", r: 0.80, cross: 7},
+        {theorist: "姚斯",      axis: "culture", r: 0.70, cross: 6},
+        {theorist: "海德格尔",  axis: "time",    r: 0.95, cross: 9},
+        {theorist: "热奈特",    axis: "time",    r: 0.85, cross: 6},
+        {theorist: "里柯尔",    axis: "time",    r: 0.90, cross: 8}
+    ]
+};
+
+// ============= 1. Radar Chart =============
+(function renderRadar() {
+    const svg = d3.select("#radar-svg");
+    const width = svg.node().clientWidth;
+    const height = 500;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const cx = width / 2, cy = height / 2;
+    const r = Math.min(width, height) / 2 - 70;
+    const axes = EMBEDDED_DATA.indicators;
+    const levels = 5;
+
+    // Background polygons
+    for (let lv = 1; lv <= levels; lv++) {
+        const scale = lv / levels;
+        const pts = axes.map((_, i) => {
+            const a = (i / axes.length) * 2 * Math.PI - Math.PI / 2;
+            return [cx + r * scale * Math.cos(a), cy + r * scale * Math.sin(a)];
+        });
+        svg.append("polygon")
+            .attr("points", pts.map(p => p.join(",")).join(" "))
+            .attr("fill", "none")
+            .attr("stroke", "#c9b896")
+            .attr("stroke-dasharray", lv === levels ? "0" : "2,3");
+    }
+    // Axes lines + labels
+    axes.forEach((ax, i) => {
+        const a = (i / axes.length) * 2 * Math.PI - Math.PI / 2;
+        svg.append("line")
+            .attr("x1", cx).attr("y1", cy)
+            .attr("x2", cx + r * Math.cos(a))
+            .attr("y2", cy + r * Math.sin(a))
+            .attr("stroke", "#c9b896");
+        svg.append("text")
+            .attr("x", cx + (r + 22) * Math.cos(a))
+            .attr("y", cy + (r + 22) * Math.sin(a) + 4)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "13px")
+            .attr("font-weight", 600)
+            .attr("fill", "#2c2416")
+            .text(ax);
+    });
+    // Data polygons
+    EMBEDDED_DATA.radar.forEach(m => {
+        const pts = m.values.map((v, i) => {
+            const a = (i / axes.length) * 2 * Math.PI - Math.PI / 2;
+            const scale = v / 5;
+            return [cx + r * scale * Math.cos(a), cy + r * scale * Math.sin(a)];
+        });
+        svg.append("polygon")
+            .attr("points", pts.map(p => p.join(",")).join(" "))
+            .attr("fill", m.color)
+            .attr("fill-opacity", 0.15)
+            .attr("stroke", m.color)
+            .attr("stroke-width", 2);
+        pts.forEach(p => {
+            svg.append("circle")
+                .attr("cx", p[0]).attr("cy", p[1])
+                .attr("r", 4)
+                .attr("fill", m.color)
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 1);
+        });
+    });
+    // Center label
+    svg.append("text")
+        .attr("x", cx).attr("y", cy - 6)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "11px")
+        .attr("fill", "#6b5e4d")
+        .text("四维雷达");
+    svg.append("text")
+        .attr("x", cx).attr("y", cy + 10)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "10px")
+        .attr("fill", "#6b5e4d")
+        .attr("font-family", "JetBrains Mono, monospace")
+        .text("5 indicators × 4 dims");
+})();
+
+// ============= 2. Heatmap (12 theorists × 4 dimensions) =============
+(function renderHeatmap() {
+    const svg = d3.select("#heatmap-svg");
+    const width = svg.node().clientWidth;
+    const height = 460;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const padL = 110, padR = 40, padT = 60, padB = 40;
+    const cellW = (width - padL - padR) / 4;
+    const cellH = (height - padT - padB) / 12;
+    const dims = EMBEDDED_DATA.dimensions;
+    const theorists = EMBEDDED_DATA.theorists;
+
+    // Color scale: dim contribution 0-10 → intensity along dim color
+    const dimColors = {mind: "#c8392c", power: "#2c5f7c", culture: "#c89b3c", time: "#5a7a3a"};
+    function colorFor(dimKey, value) {
+        const base = d3.rgb(dimColors[dimKey]);
+        const intensity = value / 10;
+        // mix with paper background
+        const bg = d3.rgb("#fff8e7");
+        const r = Math.round(bg.r + (base.r - bg.r) * intensity);
+        const g = Math.round(bg.g + (base.g - bg.g) * intensity);
+        const b = Math.round(bg.b + (base.b - bg.b) * intensity);
+        return `rgb(${r},${g},${b})`;
+    }
+
+    // Column headers
+    dims.forEach((d, j) => {
+        svg.append("rect")
+            .attr("x", padL + j * cellW)
+            .attr("y", padT - 36)
+            .attr("width", cellW).attr("height", 28)
+            .attr("fill", d.color)
+            .attr("rx", 3);
+        svg.append("text")
+            .attr("x", padL + j * cellW + cellW / 2)
+            .attr("y", padT - 18)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#fff")
+            .attr("font-size", "12px")
+            .attr("font-weight", 700)
+            .text(d.name);
+    });
+
+    // Row labels + cells
+    theorists.forEach((t, i) => {
+        const y = padT + i * cellH;
+        // Row label with home-dim color stripe
+        svg.append("rect")
+            .attr("x", padL - 8)
+            .attr("y", y)
+            .attr("width", 4)
+            .attr("height", cellH)
+            .attr("fill", dimColors[t.dim]);
+        svg.append("text")
+            .attr("x", padL - 14)
+            .attr("y", y + cellH / 2 + 4)
+            .attr("text-anchor", "end")
+            .attr("font-size", "12px")
+            .attr("fill", "#2c2416")
+            .attr("font-weight", t.dim ? 600 : 400)
+            .text(t.name);
+        // Cells
+        dims.forEach((d, j) => {
+            const v = t.values[d.key];
+            const x = padL + j * cellW;
+            svg.append("rect")
+                .attr("x", x + 2)
+                .attr("y", y + 2)
+                .attr("width", cellW - 4)
+                .attr("height", cellH - 4)
+                .attr("fill", colorFor(d.key, v))
+                .attr("stroke", "#c9b896")
+                .attr("stroke-width", 0.5);
+            svg.append("text")
+                .attr("x", x + cellW / 2)
+                .attr("y", y + cellH / 2 + 4)
+                .attr("text-anchor", "middle")
+                .attr("font-size", "12px")
+                .attr("font-weight", v >= 8 ? 700 : (v >= 5 ? 500 : 400))
+                .attr("fill", v >= 7 ? "#fff" : "#2c2416")
+                .text(v);
+        });
+    });
+
+    // Color legend
+    const legendY = height - 22;
+    svg.append("text")
+        .attr("x", padL).attr("y", legendY)
+        .attr("font-size", "11px")
+        .attr("fill", "#6b5e4d")
+        .text("贡献度：");
+    [0, 2, 4, 6, 8, 10].forEach((v, i) => {
+        const x = padL + 60 + i * 30;
+        svg.append("rect")
+            .attr("x", x).attr("y", legendY - 12)
+            .attr("width", 26).attr("height", 12)
+            .attr("fill", colorFor("mind", v))
+            .attr("stroke", "#c9b896")
+            .attr("stroke-width", 0.5);
+        svg.append("text")
+            .attr("x", x + 13).attr("y", legendY - 16)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "9px")
+            .attr("fill", "#6b5e4d")
+            .text(v);
+    });
+})();
+
+// ============= 3. Force-directed Network =============
+(function renderNetwork() {
+    const svg = d3.select("#network-svg");
+    const width = svg.node().clientWidth;
+    const height = 620;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+    const data = JSON.parse(JSON.stringify(EMBEDDED_DATA.network));
+
+    const sim = d3.forceSimulation(data.nodes)
+        .force("link", d3.forceLink(data.links).id(d => d.id)
+            .distance(d => d.source.type === "dim" && d.target.type === "theorist" ? 70 :
+                          d.target.type === "line" ? 90 : 80)
+            .strength(d => d.value === 4 ? 0.5 : 0.25))
+        .force("charge", d3.forceManyBody().strength(d => d.type === "dim" ? -600 : -200))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .force("collision", d3.forceCollide().radius(d => d.size + 6));
+
+    const link = svg.append("g").selectAll("line")
+        .data(data.links).enter().append("line")
+        .attr("stroke", d => {
+            const s = typeof d.source === "object" ? d.source : data.nodes.find(n => n.id === d.source);
+            return s && s.color ? s.color : "#c9b896";
+        })
+        .attr("stroke-width", d => Math.sqrt(d.value) * 1.4)
+        .attr("opacity", 0.45);
+
+    const node = svg.append("g").selectAll("circle")
+        .data(data.nodes).enter().append("circle")
+        .attr("r", d => d.size / 2)
+        .attr("fill", d => d.color)
+        .attr("stroke", "#2c2416")
+        .attr("stroke-width", d => d.type === "dim" ? 2 : 1.2)
+        .call(d3.drag()
+            .on("start", (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+            .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
+            .on("end", (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+        );
+
+    const label = svg.append("g").selectAll("text")
+        .data(data.nodes).enter().append("text")
+        .text(d => d.id)
+        .attr("font-size", d => d.type === "dim" ? "14px" : (d.type === "theorist" ? "11px" : "9px"))
+        .attr("font-weight", d => d.type === "dim" ? 700 : (d.type === "theorist" ? 600 : 400))
+        .attr("fill", d => d.type === "dim" ? d.color : "#2c2416")
+        .attr("text-anchor", "middle")
+        .attr("dy", d => d.size / 2 + 13);
+
+    sim.on("tick", () => {
+        link.attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+        node.attr("cx", d => d.x).attr("cy", d => d.y);
+        label.attr("x", d => d.x).attr("y", d => d.y);
+    });
+})();
+
+// ============= 4. Stacked Area Timeline =============
+(function renderTimeline() {
+    const svg = d3.select("#timeline-svg");
+    const width = svg.node().clientWidth;
+    const height = 440;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const pad = {l: 60, r: 30, t: 30, b: 50};
+    const innerW = width - pad.l - pad.r;
+    const innerH = height - pad.t - pad.b;
+
+    const data = EMBEDDED_DATA.timeline;
+    const dims = EMBEDDED_DATA.dimensions;
+    const stack = d3.stack()
+        .keys(dims.map(d => d.key))
+        .order(d3.stackOrderNone)
+        .offset(d3.stackOffsetNone);
+    const series = stack(data);
+
+    const x = d3.scaleLinear()
+        .domain([1, 100])
+        .range([pad.l, pad.l + innerW]);
+    // Each dim value up to 10, stacked 4 dims → max ~ 40
+    const y = d3.scaleLinear()
+        .domain([0, 40])
+        .range([pad.t + innerH, pad.t]);
+
+    const area = d3.area()
+        .x(d => x(d.data.chapter))
+        .y0(d => y(d[0]))
+        .y1(d => y(d[1]))
+        .curve(d3.curveMonotoneX);
+
+    // Axes
+    svg.append("g")
+        .attr("transform", `translate(0,${pad.t + innerH})`)
+        .call(d3.axisBottom(x).ticks(10).tickFormat(d => "第" + d + "回"))
+        .selectAll("text")
+        .attr("font-size", "10px");
+    svg.append("g")
+        .attr("transform", `translate(${pad.l},0)`)
+        .call(d3.axisLeft(y).ticks(8))
+        .selectAll("text")
+        .attr("font-size", "10px");
+
+    // Axis labels
+    svg.append("text")
+        .attr("x", pad.l + innerW / 2)
+        .attr("y", height - 8)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "11px")
+        .attr("fill", "#6b5e4d")
+        .text("回目（取经路线时序）");
+    svg.append("text")
+        .attr("x", 16).attr("y", pad.t + innerH / 2)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "11px")
+        .attr("fill", "#6b5e4d")
+        .attr("transform", `rotate(-90,16,${pad.t + innerH / 2})`)
+        .text("四维强度堆叠值");
+
+    // Areas
+    series.forEach((s, i) => {
+        const dim = dims[i];
+        svg.append("path")
+            .datum(s)
+            .attr("fill", dim.color)
+            .attr("fill-opacity", 0.78)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 0.5)
+            .attr("d", area);
+    });
+
+    // Legend
+    const legendG = svg.append("g")
+        .attr("transform", `translate(${pad.l + 12},${pad.t + 8})`);
+    dims.forEach((d, i) => {
+        const g = legendG.append("g").attr("transform", `translate(${i * 110},0)`);
+        g.append("rect").attr("width", 14).attr("height", 14).attr("fill", d.color).attr("rx", 2);
+        g.append("text").attr("x", 20).attr("y", 11).attr("font-size", "11px").attr("fill", "#2c2416").text(d.name);
+    });
+
+    // Sample point markers (line markers at key chapters)
+    const keyChapters = [1, 7, 14, 27, 58, 98, 100];
+    keyChapters.forEach(ch => {
+        svg.append("line")
+            .attr("x1", x(ch)).attr("y1", pad.t)
+            .attr("x2", x(ch)).attr("y2", pad.t + innerH)
+            .attr("stroke", "#2c2416")
+            .attr("stroke-width", 0.5)
+            .attr("stroke-dasharray", "3,3")
+            .attr("opacity", 0.35);
+        svg.append("text")
+            .attr("x", x(ch))
+            .attr("y", pad.t + innerH + 16)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "9px")
+            .attr("fill", "#2c2416")
+            .attr("font-weight", 600)
+            .text("L" + ch);
+    });
+})();
+
+// ============= 5. Polar Spectrum =============
+(function renderSpectrum() {
+    const svg = d3.select("#spectrum-svg");
+    const width = svg.node().clientWidth;
+    const height = 540;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const cx = width / 2, cy = height / 2;
+    const r = Math.min(width, height) / 2 - 70;
+    const dims = EMBEDDED_DATA.dimensions;
+    const extra = EMBEDDED_DATA.polarExtra;
+
+    // Concentric rings
+    [0.25, 0.5, 0.75, 1.0].forEach(scale => {
+        svg.append("circle")
+            .attr("cx", cx).attr("cy", cy)
+            .attr("r", r * scale)
+            .attr("fill", "none")
+            .attr("stroke", "#c9b896")
+            .attr("stroke-dasharray", scale === 1.0 ? "0" : "2,3");
+    });
+    // Ring labels
+    [0.25, 0.5, 0.75, 1.0].forEach(scale => {
+        svg.append("text")
+            .attr("x", cx + 4).attr("y", cy - r * scale + 12)
+            .attr("font-size", "9px")
+            .attr("fill", "#6b5e4d")
+            .attr("font-family", "JetBrains Mono, monospace")
+            .text((scale * 10).toFixed(1));
+    });
+
+    // 4 axes
+    dims.forEach((d, i) => {
+        const a = (i / dims.length) * 2 * Math.PI - Math.PI / 2;
+        svg.append("line")
+            .attr("x1", cx).attr("y1", cy)
+            .attr("x2", cx + r * Math.cos(a))
+            .attr("y2", cy + r * Math.sin(a))
+            .attr("stroke", d.color)
+            .attr("stroke-width", 2.5);
+        // Axis label box
+        const lx = cx + (r + 30) * Math.cos(a);
+        const ly = cy + (r + 30) * Math.sin(a);
+        svg.append("rect")
+            .attr("x", lx - 38).attr("y", ly - 12)
+            .attr("width", 76).attr("height", 24)
+            .attr("fill", d.color)
+            .attr("rx", 4);
+        svg.append("text")
+            .attr("x", lx).attr("y", ly + 4)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#fff")
+            .attr("font-size", "12px")
+            .attr("font-weight", 700)
+            .text(d.name);
+    });
+
+    // Theorist nodes placed on their dim-axis at radial distance = r × relative
+    extra.forEach(t => {
+        const dimIdx = dims.findIndex(d => d.key === t.axis);
+        const a = (dimIdx / dims.length) * 2 * Math.PI - Math.PI / 2;
+        const px = cx + r * t.r * Math.cos(a);
+        const py = cy + r * t.r * Math.sin(a);
+        const color = dims[dimIdx].color;
+        // Resonance ring (size = cross resonance)
+        svg.append("circle")
+            .attr("cx", px).attr("cy", py)
+            .attr("r", 4 + t.cross * 0.6)
+            .attr("fill", color)
+            .attr("fill-opacity", 0.25)
+            .attr("stroke", color)
+            .attr("stroke-width", 0.5);
+        // Node
+        svg.append("circle")
+            .attr("cx", px).attr("cy", py)
+            .attr("r", 5)
+            .attr("fill", color)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1.2);
+        // Label (rotate to read outward)
+        const labelOffset = 14;
+        const lx = px + labelOffset * Math.cos(a);
+        const ly = py + labelOffset * Math.sin(a);
+        svg.append("text")
+            .attr("x", lx).attr("y", ly)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "11px")
+            .attr("font-weight", 600)
+            .attr("fill", "#2c2416")
+            .text(t.theorist);
+    });
+
+    // Center hub
+    svg.append("circle")
+        .attr("cx", cx).attr("cy", cy)
+        .attr("r", 12)
+        .attr("fill", "#2c2416");
+    svg.append("text")
+        .attr("x", cx).attr("y", cy + 4)
+        .attr("text-anchor", "middle")
+        .attr("fill", "#f5e9d4")
+        .attr("font-size", "10px")
+        .attr("font-weight", 700)
+        .text("四维");
+
+    // Legend (resonance ring scale)
+    const legX = 16, legY = height - 36;
+    svg.append("text")
+        .attr("x", legX).attr("y", legY)
+        .attr("font-size", "10px")
+        .attr("fill", "#6b5e4d")
+        .text("辐射圈 = 跨维度呼应度");
+    [5, 7, 9].forEach((v, i) => {
+        const x = legX + 130 + i * 50;
+        svg.append("circle")
+            .attr("cx", x + 8).attr("cy", legY - 4)
+            .attr("r", 4 + v * 0.6)
+            .attr("fill", "#c89b3c")
+            .attr("fill-opacity", 0.25)
+            .attr("stroke", "#c89b3c");
+        svg.append("text")
+            .attr("x", x + 22).attr("y", legY)
+            .attr("font-size", "10px")
+            .attr("fill", "#6b5e4d")
+            .text(v);
+    });
+})();
+</script>
+</body>
+</html>

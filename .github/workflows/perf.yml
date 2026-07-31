@@ -1,0 +1,127 @@
+name: Lighthouse CI
+
+# W266 E5 测试深化·Lighthouse CI + 性能预算断言 · v2.2.47
+#
+# 在 PR/Merge 时启动 Lighthouse CI，对 site/ 下关键页面进行 Core Web Vitals 采集，
+# 通过 --assert.* 参数强制断言性能预算：
+#   LCP  Largest Contentful Paint   < 2500 ms
+#   CLS  Cumulative Layout Shift     < 0.1
+#   TBT  Total Blocking Time        < 300 ms
+# 失败时阻断 CI 并上传完整 lighthouse-report artifact。
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/perf.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: perf-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lighthouse-ci:
+    name: Lighthouse CI (LCP < 2.5s / CLS < 0.1 / TBT < 300ms)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.13.x
+
+      - name: Start static server
+        run: |
+          python -m http.server 8000 --directory site &
+          echo $! > server.pid
+          sleep 3
+          curl -sSf http://localhost:8000/dashboard.html -o /dev/null
+
+      - name: Create LHCI config
+        run: |
+          mkdir -p .lhci
+          cat > .lhci/lighthouserc.json <<'EOF'
+          {
+            "ci": {
+              "collect": {
+                "url": [
+                  "http://localhost:8000/dashboard.html",
+                  "http://localhost:8000/index.html",
+                  "http://localhost:8000/data/timeline.html",
+                  "http://localhost:8000/data/character-relationship-3d.html"
+                ],
+                "numberOfRuns": 3,
+                "settings": {
+                  "preset": "desktop",
+                  "chromeFlags": "--no-sandbox --headless"
+                }
+              },
+              "assert": {
+                "assertions": {
+                  "largest-contentful-paint": ["error", {"maxNumericValue": 2500}],
+                  "cumulative-layout-shift": ["error", {"maxNumericValue": 0.1}],
+                  "total-blocking-time": ["error", {"maxNumericValue": 300}],
+                  "first-contentful-paint": ["warn", {"maxNumericValue": 1800}],
+                  "interactive": ["warn", {"maxNumericValue": 3500}]
+                }
+              },
+              "upload": {
+                "target": "temporary-public-storage",
+                "reportFilenamePattern": "%%-%%-%%-%%.%%"
+              }
+            }
+          }
+          EOF
+
+      - name: Run Lighthouse CI autorun
+        uses: nick-fields/retry@v3
+        with:
+          max_attempts: 3
+          timeout_minutes: 20
+          command: lhci autorun --config=.lhci/lighthouserc.json --upload.target=temporary-public-storage
+
+      - name: Stop static server
+        if: always()
+        run: |
+          if [ -f server.pid ]; then kill "$(cat server.pid)" || true; fi
+
+      - name: Upload Lighthouse report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: |
+            .lighthouseci/
+            lighthouse-report.json
+            lighthouse-report.html
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Lighthouse CI 性能预算断言" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| 指标 | 阈值 | 来源 |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|------|------|" >> $GITHUB_STEP_SUMMARY
+          echo "| LCP  | < 2500 ms | WCAG / web.dev |" >> $GITHUB_STEP_SUMMARY
+          echo "| CLS  | < 0.1     | WCAG / web.dev |" >> $GITHUB_STEP_SUMMARY
+          echo "| TBT  | < 300 ms  | WCAG / web.dev |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "完整报告已上传至 \`lighthouse-report\` artifact。" >> $GITHUB_STEP_SUMMARY
