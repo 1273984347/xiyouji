@@ -8,32 +8,38 @@
 #
 # 退出码：0 全部通过 / 1 有失败（阻断 commit）
 
-# 当前版本 contract（v2.2.25 W202）
+# 当前版本 contract（v2.2.55 W286c）
 - file: README.md
   checks:
-    - must_still_contain: "v2.2.25"
-    - must_still_contain: "W202"
+    - must_still_contain: "v2.2.55"
+    - must_still_contain: "W286c"
 
 - file: STRUCTURE.md
   checks:
-    - must_still_contain: "v2.2.25"
-    - must_still_contain: "W202"
+    - must_still_contain: "v2.2.55"
+    - must_still_contain: "W286c"
 
 - file: CHANGELOG.md
   checks:
-    - must_still_contain: "v2.2.25"
-    - must_still_contain: "W202"
+    - must_still_contain: "v2.2.55"
+    - must_still_contain: "W286c"
 
 - file: docs/00-导读/项目说明.md
   checks:
-    - must_still_contain: "v2.2.25"
-    - must_still_contain: "W202"
+    - must_still_contain: "v2.2.55"
+    - must_still_contain: "W286c"
 
 - file: 交接文档.md
   checks:
-    - must_still_contain: "v2.2.25"
-    - must_still_contain: "W202"
-    - must_still_contain: "W203"  # 下一版本段编号
+    - must_still_contain: "v2.2.55"
+    - must_still_contain: "W286c"
+
+# E3 收尾文档同步铁律门禁（2026-07-31 新增）
+# 每次任务完成并 commit 后，必须验证 6 个文档均已同步更新
+- file: scripts/output/file-index.md
+  checks:
+    - must_still_contain: "W286c"
+    - must_still_contain: "v2.2.55"
 
 # DRL skill v1.3.0 升级验证
 - file: C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md
