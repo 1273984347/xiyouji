@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.2.54（2026-07-31）— A1 逐回 100 回（每回追加深度解读+原文全文） + A2 随笔 43 篇 + A3 人物深化 197 篇 + A4 主题专题 190 篇 + A5 文化 20 篇 + A6 诗词 9 篇 + S1 方法论 13 篇 + S2 学术投稿 8 篇 + S2 外部分享 16 篇 + 79 个 D3.js/Three.js 可视化页面（133 数据维度）+ dashboard 45 KPI + 全站搜索 + 学术索引 55 条 + hyperframes 多视频 + MCP Server + Playwright E2E 三层测试 + AI 代理协作模板 + E3-E8 工程化深化（性能/监控/SEO/安全/CI-CD/a11y 30 WCAG 2.2 规则）+ site/en/ 英文站。详细方向描述见 [CHANGELOG.md](CHANGELOG.md) 当前版本段，历史版本归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
+> 当前版本：v2.2.55（2026-07-31）— A1 逐回 100 回（每回追加深度解读+原文全文） + A2 随笔 43 篇 + A3 人物深化 197 篇 + A4 主题专题 190 篇 + A5 文化 20 篇 + A6 诗词 9 篇 + S1 方法论 13 篇 + S2 学术投稿 8 篇 + S2 外部分享 16 篇 + 79 个 D3.js/Three.js 可视化页面（133 数据维度）+ dashboard 45 KPI + 全站搜索 + 学术索引 55 条 + hyperframes 多视频 + MCP Server + Playwright E2E 三层测试 + AI 代理协作模板 + E3-E8 工程化深化（性能/监控/SEO/安全/CI-CD/a11y 30 WCAG 2.2 规则）+ site/en/ 英文站。详细方向描述见 [CHANGELOG.md](CHANGELOG.md) 当前版本段，历史版本归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
 
 ## 顶层结构
 
@@ -117,9 +117,8 @@
 ## source/ 子目录
 
 ### 原文/
-- `西游记-全文.txt`：完整原著文本（不纳入 Git，见 .gitignore）
-- `示例-两回.txt`：含第 1-2 回的示例文本，用于工具验证
-- `分回/`：每回单独一个文件 `第NNN回.txt`，由 `tools/章节切分.py` 生成
+- `分回/`：每回单独一个文件 `第NNN回.md`（W286 从古诗文网批量抓取 100 回原文·W286b 从 .txt 转为 .md 并添加 `# 第NNN回 回目` 标题头·W286c 清除第069/099回网页垃圾内容）
+- `shendu/`：100 篇深读切片 `SD001-SD100.md`（W286 从 5 个原著逐回深读*.txt 拆分·每篇含 `<!-- 元数据注释 -->` 标注推测原著回号映射·W286b 从 temp_shendu/ 重命名为 shendu/ 并从 .txt 转为 .md 添加 `# SDnnn · 标题` 标题头）
 
 ### 引用与网络解读/
 - `学术论文索引.md`：学术论文与专著引用（已收录 50 条，覆盖原著版本/古代评点/现代学术/当代整理/海外译本/思想渊源/现代名家解读/近 5 年新研究 8 大类，GB/T 7714 格式）
@@ -240,7 +239,7 @@
 
 ## 版本变更
 
-完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（v0.1-v2.2.54 共 286b 个 W### ID）。v0.1-v2.0.60（W001-W087）已归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
+完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（v0.1-v2.2.55 共 286c 个 W### ID）。v0.1-v2.0.60（W001-W087）已归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
 
 **主要阶段里程碑**：
 
