@@ -4,9 +4,32 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W312），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W313），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.2.65（2026-08-01）：W313 V3 跨页面导航增强·tag-cloud.html 标签云全站导航 + 3 核心页面 footer-cross 补全（可视化页面 79→80·dashboard 新增标签云入口·D3.js v7 标签云+分类筛选+搜索+智能推荐）
+
+> **W313 V3 跨页面导航增强·标签云 + 智能推荐 + footer 关联链接补全**
+> - **来源**：用户要求按 V→E→S2 顺序推进·V 方向 V3 跨页面导航增强（footer 关联链接补全 / 标签云 / 智能推荐）
+> - **执行**：
+>   - **新建 site/data/tag-cloud.html**（40.58KB·D3.js v7 驱动·全站标签云导航中心）：
+>     - 79 个可视化页面元数据内嵌（EMBEDDED_DATA·6 大分类：A-L 基础 9 / M-U 扩展 9 / V-AH 跨学科 12 / Q 系列 9 / D 方向 NLP 11 / V 方向新增 29）
+>     - 标签云：按分类着色（6 色），字号 12-28px 映射数据维度数（size 字段），hover 显示 tooltip（标题/描述/分类/维度/标签），click 跳转对应页面
+>     - 分类筛选 tabs：全部 / A-L 基础 / M-U 扩展 / V-AH 跨学科 / Q 系列 / D 方向 NLP / V 方向新增（aria-pressed 键盘左右箭头导航）
+>     - 搜索框：200ms 防抖，匹配 title/tags/desc/file 四字段
+>     - 智能推荐：点击标签显示同分类 5 个相关页面；初始显示热门推荐（size 最大的 5 个）
+>     - footer：含 footer-index + footer-cross + FILE_INDEX/CHANGELOG 注释（符合双索引可追溯规范）
+>     - a11y：role="tab"/aria-pressed/aria-label/tabindex/键盘导航/noscript 降级
+>   - **dashboard 入口**：site/dashboard.html 新增"全站标签云 · 可视化导航中心" section（kpi-card 跳转 tag-cloud.html·span 3 宽幅卡片）
+>   - **3 核心页面 footer-cross 补全**（早期页面从简单 footer 升级为双索引规范）：
+>     - philosophy.html（G·哲学心性）：关联 relationships/risk-project/karma-reincarnation/tag-cloud
+>     - relationships.html（D·关系网络）：关联 philosophy/risk-project/character-dynamic-network/tag-cloud
+>     - risk-project.html（H·风险项目）：关联 philosophy/relationships/monster-sociology/tag-cloud
+>   - **可视化页面计数**：79→80（新增 tag-cloud.html·D3.js 驱动导航页面）
+> - **文件**：site/data/tag-cloud.html（新建）+ site/dashboard.html + site/data/philosophy.html + site/data/relationships.html + site/data/risk-project.html + 6 文档同步（CHANGELOG/README/STRUCTURE/项目说明/file-index/交接文档）
+> - **验证**：Grep spot-check tag-cloud.html footer-index/footer-cross/FILE_INDEX/CHANGELOG/EMBEDDED_DATA 全部存在·3 核心 footer-cross 落地验证通过
+> - **状态**：已完成
 
 ### v2.2.64（2026-08-01）：W312 V1 dashboard 深化·项目研究矩阵 6→10 卡片 + KPI 数据修正（A2 43→44 / 专题 45→41 / 总数 368→619·新增 S1/S2-外部分享/S2-学术投稿/S3 四卡片·kpi-card 51→55·5 文件同步）
 
