@@ -10,6 +10,20 @@
 
 ## 项目文件反向索引（按版本倒序，覆盖 site/data/ 可视化页面 + docs/ 文档 + 根目录 6 文件 + 其他）
 
+### v2.2.66 W314 V4 移动端体验·mobile-index.html 移动端入口 + dashboard/tag-cloud 375px 断点优化 + tag-cloud 触摸事件（safe-area 适配·底部固定导航栏·触摸友好·URL 搜索参数）
+
+| 文件 | W ID | 改动摘要 |
+|------|------|----------|
+| site/mobile-index.html | W314 | v2.2.66 新建·移动端入口页面（375px 原生设计·safe-area 适配·触摸友好·快速导航+KPI 概览+方向导航+底部固定栏+搜索跳转 tag-cloud） |
+| site/dashboard.html | W314 | v2.2.66 修改·加 375px 断点（hero/kpi-card/section 缩小+topic-grid 单列+360px 极小屏断点） |
+| site/data/tag-cloud.html | W314 | v2.2.66 修改·加 375px 断点（hero 缩小+tab-row 横向滚动+tag-cloud 高度 320px）+ 触摸事件（setupTouchNav 拖动反馈+长按防选中）+ URL 搜索参数处理（handleSearchQuery 解析 ?q=） |
+| CHANGELOG.md | W314 | v2.2.66 同步·新增 W314 版本段·W### 编号范围 W313→W314 |
+| README.md | W314 | v2.2.66 同步·版本号 v2.2.65→v2.2.66·新增 site/mobile-index.html 移动端入口说明 |
+| STRUCTURE.md | W314 | v2.2.66 同步·版本号 v2.2.65→v2.2.66·新增 site/mobile-index.html 移动端入口说明 |
+| docs/00-导读/项目说明.md | W314 | v2.2.66 同步·版本号 v2.2.65→v2.2.66·新增 W314 V4 移动端入口说明 |
+| scripts/output/file-index.md | W314 | v2.2.66 同步·新增 W314 反向索引段 |
+| 交接文档.md | W314 | v2.2.66 同步·更新当前进度至 W314 V4·版本号 v2.2.65→v2.2.66·V 方向 V4 子方向收束 |
+
 ### v2.2.65 W313 V3 跨页面导航增强·tag-cloud.html 标签云全站导航 + 3 核心页面 footer-cross 补全（可视化页面 79→80·dashboard 新增标签云入口·D3.js v7 标签云+分类筛选+搜索+智能推荐）
 
 | 文件 | W ID | 改动摘要 |

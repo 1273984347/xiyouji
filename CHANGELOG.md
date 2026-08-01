@@ -4,9 +4,34 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W313），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W314），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.2.66（2026-08-01）：W314 V4 移动端体验·mobile-index.html 移动端入口 + dashboard/tag-cloud 375px 断点优化 + tag-cloud 触摸事件（safe-area 适配·底部固定导航栏·触摸友好·URL 搜索参数）
+
+> **W314 V4 移动端体验·375px 原生设计 + 触摸交互优化 + 移动端专属入口**
+> - **来源**：用户要求按 V→E→S2 顺序推进·V 方向 V4 移动端体验（375px 视口回归 / 触摸交互优化 / 移动端专属可视化）
+> - **执行**：
+>   - **新建 site/mobile-index.html**（移动端入口页面·375px 原生设计）：
+>     - viewport-fit=cover + safe-area-inset 适配（iPhone 刘海屏/底部 Home Indicator）
+>     - theme-color + apple-mobile-web-app-capable（PWA 友好）
+>     - Hero 区 + 搜索框（跳转 tag-cloud.html?q=）+ 快速导航 2 列网格（6 核心入口·触摸友好 min 88px 高）+ KPI 竖版概览（8 项计数）+ docs 方向导航（7 方向卡片）+ 底部固定导航栏（4 入口·min 44x44 touch target）+ 返回顶部浮动按钮
+>     - 触摸 ripple 效果（touchstart/touchend 缩放反馈）+ prefers-reduced-motion 支持
+>     - 响应式断点：375px / 414px / 768px 三档
+>   - **site/dashboard.html 加 375px 断点**：
+>     - hero 字号缩小（h1 20px / subtitle 11px / tagline 12px）
+>     - section padding 缩小（14px 12px）
+>     - kpi-card 字号缩小（value 24px / label 12px / desc 11px）
+>     - topic-grid 单列 + filter-tab 缩小
+>     - 加 360px 断点（极小屏 kpi-card value 20px）
+>   - **site/data/tag-cloud.html 加 375px 断点 + 触摸事件**：
+>     - 375px 断点：hero 缩小 + tab-row 横向滚动（-webkit-overflow-scrolling: touch）+ tag-cloud 高度 320px + svg text 11px
+>     - 触摸事件（setupTouchNav）：touchstart/touchmove/touchend 拖动反馈 + 标签文字长按防选中（user-select: none）
+>     - URL 搜索参数处理（handleSearchQuery）：解析 ?q= 参数 → 填充搜索框 → 触发 input 事件 → 滚动到搜索框
+> - **文件**：site/mobile-index.html（新建）+ site/dashboard.html + site/data/tag-cloud.html + 6 文档同步
+> - **验证**：Grep spot-check mobile-index.html 含 viewport-fit=cover/safe-area/bottom-bar 全部存在·dashboard.html 375px 断点落地·tag-cloud.html 触摸事件+URL 参数处理落地
+> - **状态**：已提交·V 方向 V4 子方向收束（375px 视口回归 + 触摸交互优化 + 移动端专属入口三任务完成）
 
 ### v2.2.65（2026-08-01）：W313 V3 跨页面导航增强·tag-cloud.html 标签云全站导航 + 3 核心页面 footer-cross 补全（可视化页面 79→80·dashboard 新增标签云入口·D3.js v7 标签云+分类筛选+搜索+智能推荐）
 
