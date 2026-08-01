@@ -4,9 +4,36 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W315），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W316），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.2.68（2026-08-01）：W316 E2 a11y 规则扩展至 WCAG 2.2 完整规范·30→40 条规则·新增 10 条覆盖关键缺失 SC
+
+> **W316 E2 a11y 规则扩展至 WCAG 2.2 完整规范**
+> - **来源**：用户要求按 V→E→S2 顺序推进·E 方向 E2 a11y 规则扩展至 WCAG 2.2 完整规范
+> - **执行**：
+>   - **10 条新增规则覆盖 WCAG 2.2 关键缺失 SC**（E2-31 至 E2-40）：
+>     - E2-31 页面语言规则（SC 3.1.1 Language of Page）·`<html lang>` 存在且有效 BCP 47 标签
+>     - E2-32 链接目的规则（SC 2.4.4/2.4.9 Link Purpose）·链接文本非模糊（「点击这里」/「更多」/「here」）
+>     - E2-33 多种导航方式规则（SC 2.4.5 Multiple Ways）·至少 2 种导航方式（nav + search/breadcrumb/sitemap）
+>     - E2-34 非文本对比度规则（SC 1.4.11 Non-text Contrast）·UI 组件 border-color 与背景对比度 ≥ 3:1
+>     - E2-35 悬停或聚焦内容规则（SC 1.4.13 Content on Hover or Focus）·tooltip 可关闭/可悬停/持续显示
+>     - E2-36 字符快捷键规则（SC 2.1.4 Character Key Shortcuts）·单字符快捷键可关闭/重映射/仅聚焦时
+>     - E2-37 指针手势规则（SC 2.5.1 Pointer Gestures）·多点/路径手势有单点 click 替代
+>     - E2-38 指针取消规则（SC 2.5.2 Pointer Cancellation）·onmousedown 即时触发需有 onmouseup 替代
+>     - E2-39 名称中的标签规则（SC 2.5.3 Label in Name）·可见标签文本包含在 aria-label 中
+>     - E2-40 交互动画规则（SC 2.3.3 Animation from Interactions，新增 WCAG 2.2）·非必要动画支持 prefers-reduced-motion
+>   - **a11y_audit.py 12 处修改**：文档头注释（30→40）/规则 ID 常量（E2-31-E2-40）/RULE_NAMES/10 个规则函数实现/ALL_CHECKS 注册/RULE_DESCRIPTIONS/_render_md 说明/main argparse 描述
+>   - **覆盖的 WCAG 2.2 SC 完整列表**（40 条规则覆盖）：1.1.1/1.3.1/1.4.1/1.4.3/1.4.10/1.4.11/1.4.12/1.4.13/2.1.1/2.1.2/2.1.4/2.2.2/2.3.1/2.3.3/2.4.1/2.4.3/2.4.4/2.4.5/2.4.6/2.4.7/2.4.13/2.5.1/2.5.2/2.5.3/2.5.7/2.5.8/3.1.1/3.2.3/3.2.6/3.3.1/3.3.2/3.3.3/4.1.1/4.1.2/4.1.3
+> - **验证**：
+>   - `py -3 -c "import ast; ast.parse(open('scripts/a11y_audit.py', encoding='utf-8').read())"` → Syntax OK
+>   - `py -3 scripts/a11y_audit.py --dir site --quiet` → exit code 0（P0=0）
+>   - 报告确认 40 条规则全部执行：P0=0/P1=23/P2=683/P3=525/合计 1231 findings
+>   - 新增规则 finding 分布：E2-33 多种导航 41 P2 / E2-40 交互动画 59 P2 / E2-35 悬停聚焦 5 P2 / E2-39 名称标签 7 P3 / E2-31/E2-32/E2-34/E2-36/E2-37/E2-38 均为 0
+>   - **E2 方向收束**：a11y 规则从 9→30→40 条·WCAG 2.2 完整规范覆盖完成
+> - **状态**：已落地·E3 铁律 6 文档同步
+> - **文件**：scripts/a11y_audit.py（12 Edit）+ scripts/output/a11y-report.md（自动生成）
 
 ### v2.2.67（2026-08-01）：W315 E1 截图审查 baseline 10 历史问题全部修复·12 处未包裹 table 全部包裹（detect_unwrapped_tables.py 验证 0 未包裹·baseline 清空·CI 后续阻断新增）
 

@@ -10,6 +10,19 @@
 
 ## 项目文件反向索引（按版本倒序，覆盖 site/data/ 可视化页面 + docs/ 文档 + 根目录 6 文件 + 其他）
 
+### v2.2.68 W316 E2 a11y 规则扩展至 WCAG 2.2 完整规范·30→40 条规则·新增 10 条覆盖关键缺失 SC（a11y_audit.py 12 处修改·全站扫描 exit code 0 P0=0·40 条规则全部执行 P1=23/P2=683/P3=525/合计 1231 findings）
+
+| 文件 | W ID | 改动摘要 |
+|------|------|----------|
+| scripts/a11y_audit.py | W316 | v2.2.68 修改·12 处修改（文档头注释 30→40/规则 ID 常量 E2-31-E2-40/RULE_NAMES/10 个规则函数实现：check_language_of_page/check_link_purpose/check_multiple_ways/check_non_text_contrast/check_hover_focus_content/check_char_key_shortcuts/check_pointer_gestures/check_pointer_cancellation/check_label_in_name/check_animation_interactions/ALL_CHECKS 注册/RULE_DESCRIPTIONS/_render_md 说明/main argparse 描述） |
+| scripts/output/a11y-report.md | W316 | v2.2.68 自动生成·40 条 WCAG 2.2 AA 规则全站扫描报告·findings 总数 1231（P0=0/P1=23/P2=683/P3=525） |
+| CHANGELOG.md | W316 | v2.2.68 同步·新增 W316 版本段·W### 编号范围 W315→W316 |
+| README.md | W316 | v2.2.68 同步·版本号 v2.2.67→v2.2.68·a11y 规则描述 30 WCAG 2.2 规则→40 WCAG 2.2 完整规范规则 |
+| STRUCTURE.md | W316 | v2.2.68 同步·版本号 v2.2.67→v2.2.68·a11y 规则描述 30 WCAG 2.2 规则→40 WCAG 2.2 完整规范规则 |
+| docs/00-导读/项目说明.md | W316 | v2.2.68 同步·版本号 v2.2.67→v2.2.68·a11y 描述 30→40 WCAG 2.2 完整规范规则·新增 W316/W315 段补版本连续性 |
+| scripts/output/file-index.md | W316 | v2.2.68 同步·新增 W316 反向索引段 |
+| 交接文档.md | W316 | v2.2.68 同步·更新当前进度至 W316 E2·版本号 v2.2.67→v2.2.68·E 方向 E2 子方向收束 |
+
 ### v2.2.67 W315 E1 截图审查 baseline 10 历史问题全部修复·12 处未包裹 table 全部包裹（detect_unwrapped_tables.py 验证 0 未包裹·baseline 清空·CI 后续阻断新增）
 
 | 文件 | W ID | 改动摘要 |
