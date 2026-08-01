@@ -4,9 +4,31 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W314），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W315），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.2.67（2026-08-01）：W315 E1 截图审查 baseline 10 历史问题全部修复·12 处未包裹 table 全部包裹（detect_unwrapped_tables.py 验证 0 未包裹·baseline 清空·CI 后续阻断新增）
+
+> **W315 E1 截图审查 baseline 10 历史问题全部修复**
+> - **来源**：用户要求按 V→E→S2 顺序推进·E 方向 E1 截图审查 baseline 10 历史问题修复
+> - **执行**：
+>   - **10 文件 12 处未包裹 table 全部包裹**：用 `<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">` 包裹
+>     - character-dynamic-network.html（L200 rel-table）
+>     - four-heavenly-kings-artifacts.html（L324 matrix）
+>     - hardship-difficulty-heatmap.html（L202 dim-stat-table）
+>     - hardship-heatmap.html（L205 stage-table）
+>     - heaven-power-network.html（L514 stat-table）
+>     - journey-spacetime.html（L211 stage-table）
+>     - monster-background.html（L427 + L470 data-table × 2）
+>     - monster-ecology-network.html（L228 + L279 theory-table × 2）
+>     - pilgrim-team-dynamic-network.html（L242 alignment-table）
+>     - theological-intervention-network.html（L152 theory-matrix）
+>   - **baseline 文件清空**：scripts/output/unwrapped-tables-baseline.txt 移除 10 个文件清单·改为注释说明 W315 全部修复·baseline 为空
+>   - **一次性脚本删除**：scripts/w315_wrap_tables.py 修复完成后删除
+> - **文件**：10 个 site/data/*.html + baseline 文件 + 6 文档同步
+> - **验证**：`py -3 scripts/detect_unwrapped_tables.py` 返回 "Total files with unwrapped tables: 0"·exit code 0·baseline 清空确认
+> - **状态**：已提交·E 方向 E1 子方向收束（baseline 10 历史问题全部修复·CI 后续直接阻断新增未包裹 table）
 
 ### v2.2.66（2026-08-01）：W314 V4 移动端体验·mobile-index.html 移动端入口 + dashboard/tag-cloud 375px 断点优化 + tag-cloud 触摸事件（safe-area 适配·底部固定导航栏·触摸友好·URL 搜索参数）
 

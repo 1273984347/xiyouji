@@ -10,6 +10,28 @@
 
 ## 项目文件反向索引（按版本倒序，覆盖 site/data/ 可视化页面 + docs/ 文档 + 根目录 6 文件 + 其他）
 
+### v2.2.67 W315 E1 截图审查 baseline 10 历史问题全部修复·12 处未包裹 table 全部包裹（detect_unwrapped_tables.py 验证 0 未包裹·baseline 清空·CI 后续阻断新增）
+
+| 文件 | W ID | 改动摘要 |
+|------|------|----------|
+| site/data/character-dynamic-network.html | W315 | v2.2.67 修改·L200 rel-table 用 overflow-x:auto 包裹 |
+| site/data/four-heavenly-kings-artifacts.html | W315 | v2.2.67 修改·L324 matrix table 用 overflow-x:auto 包裹 |
+| site/data/hardship-difficulty-heatmap.html | W315 | v2.2.67 修改·L202 dim-stat-table 用 overflow-x:auto 包裹 |
+| site/data/hardship-heatmap.html | W315 | v2.2.67 修改·L205 stage-table 用 overflow-x:auto 包裹 |
+| site/data/heaven-power-network.html | W315 | v2.2.67 修改·L514 stat-table 用 overflow-x:auto 包裹 |
+| site/data/journey-spacetime.html | W315 | v2.2.67 修改·L211 stage-table 用 overflow-x:auto 包裹 |
+| site/data/monster-background.html | W315 | v2.2.67 修改·L427 + L470 data-table × 2 用 overflow-x:auto 包裹 |
+| site/data/monster-ecology-network.html | W315 | v2.2.67 修改·L228 + L279 theory-table × 2 用 overflow-x:auto 包裹 |
+| site/data/pilgrim-team-dynamic-network.html | W315 | v2.2.67 修改·L242 alignment-table 用 overflow-x:auto 包裹 |
+| site/data/theological-intervention-network.html | W315 | v2.2.67 修改·L152 theory-matrix 用 overflow-x:auto 包裹 |
+| scripts/output/unwrapped-tables-baseline.txt | W315 | v2.2.67 修改·baseline 清空·改为注释说明 W315 全部修复 |
+| CHANGELOG.md | W315 | v2.2.67 同步·新增 W315 版本段·W### 编号范围 W314→W315 |
+| README.md | W315 | v2.2.67 同步·版本号 v2.2.66→v2.2.67 |
+| STRUCTURE.md | W315 | v2.2.67 同步·版本号 v2.2.66→v2.2.67 |
+| docs/00-导读/项目说明.md | W315 | v2.2.67 同步·版本号 v2.2.66→v2.2.67 |
+| scripts/output/file-index.md | W315 | v2.2.67 同步·新增 W315 反向索引段 |
+| 交接文档.md | W315 | v2.2.67 同步·更新当前进度至 W315 E1·版本号 v2.2.66→v2.2.67·E 方向 E1 子方向收束 |
+
 ### v2.2.66 W314 V4 移动端体验·mobile-index.html 移动端入口 + dashboard/tag-cloud 375px 断点优化 + tag-cloud 触摸事件（safe-area 适配·底部固定导航栏·触摸友好·URL 搜索参数）
 
 | 文件 | W ID | 改动摘要 |
