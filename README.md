@@ -2,7 +2,7 @@
 
 > 一座关于《西游记》的混合型解读项目 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前版本 v2.2.69（2026-08-01）**：A1 逐回 100 回（每回追加深度解读 + 原文全文） + A2 随笔 43 篇 + A3 人物深化 199 篇 + A4 主题专题 192 篇 + A5 文化 22 篇 + A6 诗词 12 篇 + S1 方法论 13 篇 + S2 学术投稿 8 篇 + S2 外部分享 16 篇 + S3 方法论外部分享 13 篇（方向收束）+ 80 个 D3.js/Three.js 可视化页面（133 数据维度·含 W313 V3 标签云全站导航）+ site/mobile-index.html 移动端入口（W314 V4·375px 原生设计·触摸友好）+ dashboard 55 KPI（含项目研究矩阵 10 卡片 + 标签云入口）+ 全站搜索 + 学术索引 55 条 + hyperframes 多视频 + MCP Server + Playwright E2E 三层测试 + AI 代理协作模板 + E3-E8 工程化深化（性能/监控/SEO/安全/CI-CD/a11y 40 WCAG 2.2 完整规范规则·W317 E5 单元测试 53 个全通过）+ GitHub Actions 4 workflows（ci/perf/security/screenshot-review）+ site/en/ 英文站。详细方向描述见 [CHANGELOG.md](CHANGELOG.md) 当前版本段。
+> **当前版本 v2.2.70（2026-08-01）**：A1 逐回 100 回（每回追加深度解读 + 原文全文） + A2 随笔 43 篇 + A3 人物深化 199 篇 + A4 主题专题 192 篇 + A5 文化 22 篇 + A6 诗词 12 篇 + S1 方法论 13 篇 + S2 学术投稿 8 篇（W318 候选达一致详细度 124-176 行） + S2 外部分享 16 篇 + S3 方法论外部分享 13 篇（方向收束）+ 80 个 D3.js/Three.js 可视化页面（133 数据维度·含 W313 V3 标签云全站导航）+ site/mobile-index.html 移动端入口（W314 V4·375px 原生设计·触摸友好）+ dashboard 55 KPI（含项目研究矩阵 10 卡片 + 标签云入口）+ 全站搜索 + 学术索引 55 条 + hyperframes 多视频 + MCP Server + Playwright E2E 三层测试 + AI 代理协作模板 + E3-E8 工程化深化（性能/监控/SEO/安全/CI-CD/a11y 40 WCAG 2.2 完整规范规则·W317 E5 单元测试 53 个全通过）+ GitHub Actions 4 workflows（ci/perf/security/screenshot-review）+ site/en/ 英文站。详细方向描述见 [CHANGELOG.md](CHANGELOG.md) 当前版本段。
 
 ## 项目定位
 
