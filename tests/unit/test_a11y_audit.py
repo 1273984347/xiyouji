@@ -511,3 +511,265 @@ def test_audit_directory_integration(tmp_path: Path):
     assert rc == 1
     out_report = SCRIPTS_DIR / "output" / "a11y-report.md"
     assert out_report.exists()
+
+
+# ===========================================================================
+# W317 E5 测试体系扩展·E2-31 至 E2-40 新增规则单元测试
+# 覆盖 W316 新增的 10 条 WCAG 2.2 关键缺失 SC 规则
+# ===========================================================================
+
+
+# ---------------------------------------------------------------------------
+# E2-31：页面语言（WCAG 3.1.1 Language of Page）
+# ---------------------------------------------------------------------------
+
+def test_rule_31_language_of_page_good():
+    """<html lang="zh-CN"> 应无 findings"""
+    text = '<!DOCTYPE html><html lang="zh-CN"><head><title>x</title></head><body></body></html>'
+    findings = a11y_audit.check_language_of_page(text, Path("ok.html"))
+    assert len(findings) == 0
+
+
+def test_rule_31_language_of_page_missing():
+    """<html> 缺 lang 属性应报 P1"""
+    text = '<!DOCTYPE html><html><head><title>x</title></head><body></body></html>'
+    findings = a11y_audit.check_language_of_page(text, Path("bad.html"))
+    p1 = [f for f in findings if f["severity"] == a11y_audit.Severity.P1]
+    assert len(p1) >= 1
+    assert any("lang" in f["message"].lower() for f in p1)
+
+
+def test_rule_31_language_of_page_invalid_bcp47():
+    """<html lang="1"> 不符合 BCP 47 应报 P2"""
+    text = '<!DOCTYPE html><html lang="1"><head><title>x</title></head><body></body></html>'
+    findings = a11y_audit.check_language_of_page(text, Path("bad.html"))
+    p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
+    assert len(p2) >= 1
+    assert any("BCP 47" in f["message"] for f in p2)
+
+
+# ---------------------------------------------------------------------------
+# E2-32：链接目的（WCAG 2.4.4/2.4.9 Link Purpose）
+# ---------------------------------------------------------------------------
+
+def test_rule_32_link_purpose_good():
+    """描述性链接文本应无 findings"""
+    text = '<html><body><a href="/about">关于我们</a></body></html>'
+    findings = a11y_audit.check_link_purpose(text, Path("ok.html"))
+    assert len(findings) == 0
+
+
+def test_rule_32_link_purpose_vague():
+    """「点击这里」模糊链接应报 P2"""
+    text = '<html><body><a href="/x">点击这里</a></body></html>'
+    findings = a11y_audit.check_link_purpose(text, Path("bad.html"))
+    p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
+    assert len(p2) >= 1
+    assert any("模糊" in f["message"] for f in p2)
+
+
+def test_rule_32_link_purpose_aria_label_exempt():
+    """有 aria-label 的链接应跳过模糊检测"""
+    text = '<html><body><a href="/x" aria-label="查看详情">更多</a></body></html>'
+    findings = a11y_audit.check_link_purpose(text, Path("ok.html"))
+    assert len(findings) == 0
+
+
+# ---------------------------------------------------------------------------
+# E2-33：多种导航方式（WCAG 2.4.5 Multiple Ways）
+# ---------------------------------------------------------------------------
+
+def test_rule_33_multiple_ways_good():
+    """nav + search 两种导航方式应无 findings"""
+    text = (
+        '<html><body>'
+        '<nav><a href="/">首页</a></nav>'
+        '<input type="search" placeholder="搜索">'
+        '</body></html>'
+    )
+    findings = a11y_audit.check_multiple_ways(text, Path("ok.html"))
+    assert len(findings) == 0
+
+
+def test_rule_33_multiple_ways_insufficient():
+    """无 nav 无 search 应报 P2（仅 0 种导航方式）"""
+    text = '<html><body><p>内容</p></body></html>'
+    findings = a11y_audit.check_multiple_ways(text, Path("bad.html"))
+    p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
+    assert len(p2) >= 1
+    assert any("导航方式" in f["message"] for f in p2)
+
+
+# ---------------------------------------------------------------------------
+# E2-34：非文本对比度（WCAG 1.4.11 Non-text Contrast）
+# ---------------------------------------------------------------------------
+
+def test_rule_34_non_text_contrast_good():
+    """button border #000 vs background #fff 对比度 ≥ 3:1 应无 findings"""
+    text = (
+        '<html><head><style>'
+        'button { border-color: #000000; background-color: #ffffff; }'
+        '</style></head><body><button>x</button></body></html>'
+    )
+    findings = a11y_audit.check_non_text_contrast(text, Path("ok.html"))
+    assert len(findings) == 0
+
+
+def test_rule_34_non_text_contrast_low():
+    """button border #ccc vs background #ddd 对比度 < 3:1 应报 P2"""
+    text = (
+        '<html><head><style>'
+        'button { border-color: #cccccc; background-color: #dddddd; }'
+        '</style></head><body><button>x</button></body></html>'
+    )
+    findings = a11y_audit.check_non_text_contrast(text, Path("bad.html"))
+    p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
+    assert len(p2) >= 1
+    assert any("1.4.11" in f["message"] or "非文本" in f["message"] for f in p2)
+
+
+# ---------------------------------------------------------------------------
+# E2-35：悬停焦点内容（WCAG 1.4.13 Content on Hover or Focus）
+# ---------------------------------------------------------------------------
+
+def test_rule_35_hover_focus_content_good():
+    """无 title 属性无 tooltip CSS 应无 findings"""
+    text = '<html><body><button>提交</button></body></html>'
+    findings = a11y_audit.check_hover_focus_content(text, Path("ok.html"))
+    assert len(findings) == 0
+
+
+def test_rule_35_hover_focus_content_title_attr():
+    """2+ 交互元素 title 属性应报 P3"""
+    text = (
+        '<html><body>'
+        '<a href="/x" title="点击查看详细信息内容">链接</a>'
+        '<button title="提交表单数据">提交</button>'
+        '</body></html>'
+    )
+    findings = a11y_audit.check_hover_focus_content(text, Path("bad.html"))
+    p3 = [f for f in findings if f["severity"] == a11y_audit.Severity.P3]
+    assert len(p3) >= 1
+    assert any("title" in f["message"].lower() for f in p3)
+
+
+# ---------------------------------------------------------------------------
+# E2-36：字符键快捷键（WCAG 2.1.4 Character Key Shortcuts）
+# ---------------------------------------------------------------------------
+
+def test_rule_36_char_key_shortcuts_good():
+    """无 accesskey 无单字符 keydown 应无 findings"""
+    text = '<html><body><button>提交</button></body></html>'
+    findings = a11y_audit.check_char_key_shortcuts(text, Path("ok.html"))
+    assert len(findings) == 0
+
+
+def test_rule_36_char_key_shortcuts_accesskey():
+    """2+ accesskey 属性应报 P3"""
+    text = (
+        '<html><body>'
+        '<button accesskey="a">A</button>'
+        '<button accesskey="b">B</button>'
+        '</body></html>'
+    )
+    findings = a11y_audit.check_char_key_shortcuts(text, Path("bad.html"))
+    p3 = [f for f in findings if f["severity"] == a11y_audit.Severity.P3]
+    assert len(p3) >= 1
+    assert any("accesskey" in f["message"].lower() for f in p3)
+
+
+# ---------------------------------------------------------------------------
+# E2-37：指针手势（WCAG 2.5.1 Pointer Gestures）
+# ---------------------------------------------------------------------------
+
+def test_rule_37_pointer_gestures_good():
+    """无多指手势无路径手势应无 findings"""
+    text = '<html><body><button onclick="doStuff()">点击</button></body></html>'
+    findings = a11y_audit.check_pointer_gestures(text, Path("ok.html"))
+    assert len(findings) == 0
+
+
+def test_rule_37_pointer_gestures_no_click_alt():
+    """多指手势无 click 替代应报 P2"""
+    text = (
+        '<html><head><script>'
+        'document.addEventListener("touchstart", function(e){'
+        '  if(e.touches.length === 2) { doPinch(); }'
+        '});'
+        '</script></head><body></body></html>'
+    )
+    findings = a11y_audit.check_pointer_gestures(text, Path("bad.html"))
+    p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
+    assert len(p2) >= 1
+    assert any("2.5.1" in f["message"] for f in p2)
+
+
+# ---------------------------------------------------------------------------
+# E2-38：指针取消（WCAG 2.5.2 Pointer Cancellation）
+# ---------------------------------------------------------------------------
+
+def test_rule_38_pointer_cancellation_good():
+    """onmousedown + onclick 应无 findings（down 事件有 up/click 替代）"""
+    text = '<html><body><button onmousedown="down()" onclick="doStuff()">x</button></body></html>'
+    findings = a11y_audit.check_pointer_cancellation(text, Path("ok.html"))
+    assert len(findings) == 0
+
+
+def test_rule_38_pointer_cancellation_down_only():
+    """仅 onmousedown 无 onmouseup/onclick 应报 P2"""
+    text = '<html><body><button onmousedown="doStuff()">x</button></body></html>'
+    findings = a11y_audit.check_pointer_cancellation(text, Path("bad.html"))
+    p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
+    assert len(p2) >= 1
+    assert any("2.5.2" in f["message"] for f in p2)
+
+
+# ---------------------------------------------------------------------------
+# E2-39：名称中的标签（WCAG 2.5.3 Label in Name）
+# ---------------------------------------------------------------------------
+
+def test_rule_39_label_in_name_good():
+    """aria-label 包含可见文本应无 findings"""
+    text = '<html><body><button aria-label="提交表单">提交</button></body></html>'
+    findings = a11y_audit.check_label_in_name(text, Path("ok.html"))
+    assert len(findings) == 0
+
+
+def test_rule_39_label_in_name_mismatch():
+    """aria-label 不包含可见文本应报 P3"""
+    text = '<html><body><button aria-label="确认操作">提交</button></body></html>'
+    findings = a11y_audit.check_label_in_name(text, Path("bad.html"))
+    p3 = [f for f in findings if f["severity"] == a11y_audit.Severity.P3]
+    assert len(p3) >= 1
+    assert any("2.5.3" in f["message"] for f in p3)
+
+
+# ---------------------------------------------------------------------------
+# E2-40：交互动画（WCAG 2.3.3 Animation from Interactions）
+# ---------------------------------------------------------------------------
+
+def test_rule_40_animation_interactions_good():
+    """transition + prefers-reduced-motion 覆盖应无 findings"""
+    text = (
+        '<html><head><style>'
+        'button { transition: all 0.3s; }'
+        '@media (prefers-reduced-motion: reduce) {'
+        '  button { transition: none !important; }'
+        '}'
+        '</style></head><body><button>x</button></body></html>'
+    )
+    findings = a11y_audit.check_animation_interactions(text, Path("ok.html"))
+    assert len(findings) == 0
+
+
+def test_rule_40_animation_interactions_no_reduced_motion():
+    """transition 无 prefers-reduced-motion 覆盖应报 P2"""
+    text = (
+        '<html><head><style>'
+        'button { transition: all 0.3s; }'
+        '</style></head><body><button>x</button></body></html>'
+    )
+    findings = a11y_audit.check_animation_interactions(text, Path("bad.html"))
+    p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
+    assert len(p2) >= 1
+    assert any("prefers-reduced-motion" in f["message"] for f in p2)

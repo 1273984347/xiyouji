@@ -179,7 +179,10 @@ class A11yElement:
 
 
 class A11yHTMLParser(HTMLParser):
-    """收集元素、<style> 块、button 内文本"""
+    """收集元素、<style> 块、button/a 内文本"""
+
+    # 需要收集可见文本的标签（用于规则 E2-32 链接目的 / E2-39 名称中的标签等）
+    _TEXT_COLLECT_TAGS = ("button", "a")
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -188,7 +191,7 @@ class A11yHTMLParser(HTMLParser):
         self._in_style = False
         self._style_buf = []
         self._style_start = 0
-        self._button_stack = []
+        self._text_stack = []  # 收集 button/a 文本的元素索引栈
 
     def handle_starttag(self, tag, attrs):
         line, _ = self.getpos()
@@ -197,8 +200,8 @@ class A11yHTMLParser(HTMLParser):
             self._in_style = True
             self._style_buf = []
             self._style_start = line
-        if tag.lower() == "button":
-            self._button_stack.append(len(self.elements) - 1)
+        if tag.lower() in self._TEXT_COLLECT_TAGS:
+            self._text_stack.append(len(self.elements) - 1)
 
     def handle_startendtag(self, tag, attrs):
         # 自闭合标签（如 <img/>）
@@ -210,14 +213,14 @@ class A11yHTMLParser(HTMLParser):
             self.style_blocks.append((self._style_start, "".join(self._style_buf)))
             self._in_style = False
             self._style_buf = []
-        if tag.lower() == "button" and self._button_stack:
-            self._button_stack.pop()
+        if tag.lower() in self._TEXT_COLLECT_TAGS and self._text_stack:
+            self._text_stack.pop()
 
     def handle_data(self, data):
         if self._in_style:
             self._style_buf.append(data)
-        if self._button_stack:
-            self.elements[self._button_stack[-1]].text += data.strip()
+        if self._text_stack:
+            self.elements[self._text_stack[-1]].text += data.strip()
 
 
 def _parse_html(html_text):
