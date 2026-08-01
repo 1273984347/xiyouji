@@ -5,9 +5,10 @@ W271-E2 a11y 深化·7 项深化规则（v2.2.48）
 W275-E2 a11y 深化·5 项深化规则（v2.2.49）
 W279-E2 a11y 深化·5 项表单与状态消息规则（v2.2.50）
 W283-E2 a11y 深化·4 项持续可用与解析规则（v2.2.51）
+W316-E2 a11y 深化·10 项 WCAG 2.2 完整规范扩展规则（v2.2.68）
 W263-E1 CI/CD 深化配套：9 矩阵 × 3 OS 跨平台验证
 
-扫描 site/ 下所有 HTML 文件，按 30 条规则审查可访问性问题：
+扫描 site/ 下所有 HTML 文件，按 40 条规则审查可访问性问题：
   E2-1 键盘导航规则（tabindex/focus 陷阱/accesskey 冲突 + Tab 顺序 + 焦点陷阱）
   E2-2 色彩对比度规则（WCAG 2.2 AA：正常文本 4.5:1，大文本 3:1）
   E2-3 ARIA 标签规则（role 完整性/aria 互斥/aria-hidden 冲突 + ARIA 引用完整性）
@@ -38,6 +39,16 @@ W263-E1 CI/CD 深化配套：9 矩阵 × 3 OS 跨平台验证
   E2-28 无闪烁规则（W283 深化·页面不含超过 3 次/秒闪烁，Three Flashes or Below Threshold，WCAG 2.3.1）
   E2-29 可编程确定规则（W283 深化·HTML 无严重解析错误，Parsing，WCAG 4.1.1）
   E2-30 不变功能规则（W283 深化·一致导航元素在多页面中保持相同顺序，Consistent Navigation，WCAG 3.2.3）
+  E2-31 页面语言规则（W316 深化·<html lang> 存在且有效，Language of Page，WCAG 3.1.1）
+  E2-32 链接目的规则（W316 深化·链接文本非模糊，Link Purpose，WCAG 2.4.4/2.4.9）
+  E2-33 多种导航方式规则（W316 深化·至少 2 种导航方式，Multiple Ways，WCAG 2.4.5）
+  E2-34 非文本对比度规则（W316 深化·UI 组件边框/图标对比度 ≥ 3:1，Non-text Contrast，WCAG 1.4.11）
+  E2-35 悬停或聚焦内容规则（W316 深化·tooltip 可关闭/可悬停/持续，Content on Hover or Focus，WCAG 1.4.13）
+  E2-36 字符快捷键规则（W316 深化·单字符快捷键可关闭/重映射/仅聚焦，Character Key Shortcuts，WCAG 2.1.4）
+  E2-37 指针手势规则（W316 深化·多点/路径手势有单点替代，Pointer Gestures，WCAG 2.5.1）
+  E2-38 指针取消规则（W316 深化·onmousedown 即时触发需有 onmouseup 替代，Pointer Cancellation，WCAG 2.5.2）
+  E2-39 名称中的标签规则（W316 深化·可见标签文本包含在可访问名中，Label in Name，WCAG 2.5.3）
+  E2-40 交互动画规则（W316 深化·非必要动画支持 prefers-reduced-motion，Animation from Interactions，WCAG 2.3.3）
 
 用法：
     py scripts/a11y_audit.py --dir site --quiet
@@ -100,6 +111,17 @@ R_PAUSE_STOP_HIDE = "E2-27"
 R_NO_THREE_FLASHES = "E2-28"
 R_PARSING = "E2-29"
 R_CONSISTENT_NAVIGATION = "E2-30"
+# W316 E 方向深化：10 项 WCAG 2.2 完整规范扩展规则（页面语言/链接目的/多种导航/非文本对比/悬停聚焦/字符快捷键/指针手势/指针取消/名称标签/交互动画）
+R_LANGUAGE_OF_PAGE = "E2-31"
+R_LINK_PURPOSE = "E2-32"
+R_MULTIPLE_WAYS = "E2-33"
+R_NON_TEXT_CONTRAST = "E2-34"
+R_HOVER_FOCUS_CONTENT = "E2-35"
+R_CHAR_KEY_SHORTCUTS = "E2-36"
+R_POINTER_GESTURES = "E2-37"
+R_POINTER_CANCELLATION = "E2-38"
+R_LABEL_IN_NAME = "E2-39"
+R_ANIMATION_INTERACTIONS = "E2-40"
 
 RULE_NAMES = {
     R_KEYBOARD: "键盘导航规则",
@@ -132,6 +154,16 @@ RULE_NAMES = {
     R_NO_THREE_FLASHES: "无闪烁规则",
     R_PARSING: "可编程确定规则",
     R_CONSISTENT_NAVIGATION: "不变功能规则",
+    R_LANGUAGE_OF_PAGE: "页面语言规则",
+    R_LINK_PURPOSE: "链接目的规则",
+    R_MULTIPLE_WAYS: "多种导航方式规则",
+    R_NON_TEXT_CONTRAST: "非文本对比度规则",
+    R_HOVER_FOCUS_CONTENT: "悬停或聚焦内容规则",
+    R_CHAR_KEY_SHORTCUTS: "字符快捷键规则",
+    R_POINTER_GESTURES: "指针手势规则",
+    R_POINTER_CANCELLATION: "指针取消规则",
+    R_LABEL_IN_NAME: "名称中的标签规则",
+    R_ANIMATION_INTERACTIONS: "交互动画规则",
 }
 
 
@@ -1769,6 +1801,469 @@ def check_consistent_navigation(html_content, file_path):
     return findings
 
 
+# ---------- W316 E 方向深化：10 项 WCAG 2.2 完整规范扩展规则（E2-31 至 E2-40）----------
+
+
+def check_language_of_page(html_content, file_path):
+    """E2-31：WCAG 3.1.1 Language of Page。
+    检测 <html> 元素是否有 lang 属性且值有效（BCP 47 语言标签，如 zh/zh-CN/en/en-US）。
+    无 lang 属性 → 屏幕阅读器无法正确发音。"""
+    findings = []
+    parser = _parse_html(html_content)
+
+    html_el = None
+    for el in parser.elements:
+        if el.tag == "html":
+            html_el = el
+            break
+
+    if html_el is None:
+        # 可能是片段 HTML（如 data 子页面 include），不报
+        return findings
+
+    lang = html_el.attrs.get("lang", "").strip()
+    if not lang:
+        findings.append(_finding(
+            file_path, html_el.line, R_LANGUAGE_OF_PAGE, Severity.P1,
+            "<html> 元素缺少 lang 属性，屏幕阅读器无法确定页面语言"
+            "（WCAG 3.1.1，W316 E2-31 深化）",
+            _snippet(html_content, html_el.line),
+        ))
+    else:
+        # 简单验证：lang 应至少 2 字符且含字母
+        if len(lang) < 2 or not re.search(r"[a-zA-Z]", lang):
+            findings.append(_finding(
+                file_path, html_el.line, R_LANGUAGE_OF_PAGE, Severity.P2,
+                f"<html lang={lang!r}> 值不符合 BCP 47 语言标签格式（如 zh/zh-CN/en）"
+                "（WCAG 3.1.1，W316 E2-31 深化）",
+                _snippet(html_content, html_el.line),
+            ))
+
+    return findings
+
+
+def check_link_purpose(html_content, file_path):
+    """E2-32：WCAG 2.4.4 Link Purpose (In Context) + 2.4.9 Link Purpose (Link Only)。
+    检测 <a> 链接文本是否模糊（仅"点击这里"/"更多"/"链接"/here/more/click 等），
+    用户脱离上下文时无法判断链接目的。"""
+    findings = []
+    parser = _parse_html(html_content)
+
+    # 模糊链接文本（中英文）
+    vague_patterns = re.compile(
+        r"^(点击这里|点击|查看|更多|详见|链接|这里|此处|查看更多|了解更多|阅读更多|"
+        r"click\s*here|here|more|read\s*more|click|link|this|details?|continue)$",
+        re.IGNORECASE,
+    )
+
+    vague_count = 0
+    first_vague_line = 0
+    for el in parser.elements:
+        if el.tag != "a":
+            continue
+        # 收集链接文本（直接文本 + 子元素文本）
+        link_text = el.text.strip() if el.text else ""
+        # 如果有 aria-label，以 aria-label 为准（已有可访问名，不报模糊）
+        aria_label = el.attrs.get("aria-label", "").strip()
+        if aria_label:
+            continue
+        # 如果链接含 <img alt>，认为有替代文本
+        # （简化检测：如果链接文本为空但有 aria-label 已跳过，此处只检测有文本但模糊的）
+        if not link_text:
+            continue
+        # 清理文本：去除首尾空白和常见标点
+        clean_text = re.sub(r"^[\s\d•·\-–—]+|[\s·]+$", "", link_text).strip()
+        if vague_patterns.match(clean_text):
+            vague_count += 1
+            if first_vague_line == 0:
+                first_vague_line = el.line
+
+    if vague_count >= 1:
+        findings.append(_finding(
+            file_path, first_vague_line, R_LINK_PURPOSE, Severity.P2,
+            f"页面含 {vague_count} 个链接使用模糊文本（如「点击这里」/「更多」/「here」），"
+            "脱离上下文时用户无法判断链接目的。应使用描述性链接文本"
+            "（WCAG 2.4.4/2.4.9，W316 E2-32 深化）",
+            _snippet(html_content, first_vague_line),
+        ))
+
+    return findings
+
+
+def check_multiple_ways(html_content, file_path):
+    """E2-33：WCAG 2.4.5 Multiple Ways。
+    检测页面是否提供至少 2 种导航方式（导航栏 + 搜索框/站点地图/面包屑等），
+    帮助用户以不同方式发现内容。"""
+    findings = []
+    parser = _parse_html(html_content)
+
+    ways = 0
+    way_names = []
+
+    # 方式 1：<nav> 导航栏
+    has_nav = any(el.tag == "nav" for el in parser.elements)
+    if has_nav:
+        ways += 1
+        way_names.append("导航栏<nav>")
+
+    # 方式 2：搜索框（<input type=search> / role=search / 搜索类名）
+    has_search = bool(
+        re.search(r'<input[^>]*type\s*=\s*["\']?search["\']?', html_content, re.I)
+        or re.search(r'role\s*=\s*["\']?search["\']?', html_content, re.I)
+        or re.search(r'class\s*=\s*["\'][^"\']*search[^"\']*["\']', html_content, re.I)
+        or re.search(r'id\s*=\s*["\'][^"\']*search[^"\']*["\']', html_content, re.I)
+    )
+    if has_search:
+        ways += 1
+        way_names.append("搜索框")
+
+    # 方式 3：面包屑导航（breadcrumb 类名或 aria-label）
+    has_breadcrumb = bool(
+        re.search(r'class\s*=\s*["\'][^"\']*breadcrumb[^"\']*["\']', html_content, re.I)
+        or re.search(r'aria-label\s*=\s*["\'][^"\']*面包屑[^"\']*["\']', html_content, re.I)
+        or re.search(r'class\s*=\s*["\'][^"\']*面包屑[^"\']*["\']', html_content, re.I)
+    )
+    if has_breadcrumb:
+        ways += 1
+        way_names.append("面包屑")
+
+    # 方式 4：站点地图链接（href 含 sitemap / 站点地图）
+    has_sitemap = bool(re.search(r'href\s*=\s*["\'][^"\']*(?:sitemap|site-map|站点地图)["\']', html_content, re.I))
+    if has_sitemap:
+        ways += 1
+        way_names.append("站点地图")
+
+    # 方式 5：skip link（跳过链接也算一种导航辅助）
+    has_skip = bool(re.search(r'class\s*=\s*["\'][^"\']*skip-link[^"\']*["\']', html_content, re.I))
+    if has_skip:
+        ways += 1
+        way_names.append("跳过链接")
+
+    if ways < 2:
+        findings.append(_finding(
+            file_path, 1, R_MULTIPLE_WAYS, Severity.P2,
+            f"页面仅提供 {ways} 种导航方式（{', '.join(way_names) or '无'}），"
+            "应至少提供 2 种（如导航栏 + 搜索框/面包屑/站点地图），"
+            "帮助用户以不同方式发现内容"
+            "（WCAG 2.4.5，W316 E2-33 深化）",
+            "",
+        ))
+
+    return findings
+
+
+def check_non_text_contrast(html_content, file_path):
+    """E2-34：WCAG 1.4.11 Non-text Contrast。
+    检测 UI 组件（button/input/select/textarea 的 border-color）与背景的对比度 ≥ 3:1。
+    非文本元素（边框/图标）对比度不足会影响识别。"""
+    findings = []
+    parser = _parse_html(html_content)
+
+    css_text = "\n".join(css for _, css in parser.style_blocks)
+    if not css_text.strip():
+        return findings
+
+    # 检测交互元素的 border-color vs background-color 对比度
+    ui_selector_re = re.compile(
+        r"\b(button|input|select|textarea|\.btn|\.button|\.link|\.tab|\.stage-btn)\b",
+        re.I,
+    )
+    THRESHOLD = 3.0
+
+    for selector, decls in _extract_css_rules(css_text):
+        if not ui_selector_re.search(selector):
+            continue
+        # 提取 border-color
+        border_color_val = None
+        bg_val = None
+        for decl in decls.split(";"):
+            if ":" not in decl:
+                continue
+            k, _, v = decl.partition(":")
+            k = k.strip().lower()
+            v = v.strip()
+            if k == "border-color":
+                border_color_val = v
+            elif k in ("background", "background-color"):
+                bg_val = v
+        if not border_color_val or not bg_val:
+            continue
+        if "var(" in border_color_val or "var(" in bg_val:
+            continue
+        if "gradient" in bg_val or "gradient" in border_color_val:
+            continue
+        border_rgb = _parse_color(border_color_val)
+        bg_rgb = _parse_color(bg_val)
+        if not border_rgb or not bg_rgb:
+            continue
+        ratio = _contrast_ratio(border_rgb, bg_rgb)
+        if ratio < THRESHOLD:
+            findings.append(_finding(
+                file_path, 0, R_NON_TEXT_CONTRAST, Severity.P2,
+                f"选择器 {selector!r} 的 border-color={border_color_val} vs "
+                f"background={bg_val} 对比度 {ratio:.2f}:1 低于 WCAG 1.4.11 "
+                f"非文本对比度阈值 {THRESHOLD}:1",
+                f"border-color:{border_color_val}; background:{bg_val}; ratio={ratio:.2f}",
+            ))
+
+    return findings
+
+
+def check_hover_focus_content(html_content, file_path):
+    """E2-35：WCAG 1.4.13 Content on Hover or Focus。
+    检测悬停/聚焦触发的附加内容（tooltip/popover）是否满足三条件：
+    1. 可关闭（Esc 键关闭）
+    2. 可悬停（鼠标移入附加内容不立即消失）
+    3. 持续显示（直到用户移除触发器或关闭）
+    静态检测：title 属性（原生 tooltip 不满足条件）+ tooltip 类名但无 Esc 处理。"""
+    findings = []
+
+    # 1. title 属性作为 tooltip（原生 tooltip 不可关闭、不可悬停、不持续）
+    # 仅检测交互元素上的 title（a/button/input/img 等）
+    parser = _parse_html(html_content)
+    interactive_tags = ("a", "button", "input", "select", "textarea", "summary", "img")
+    title_count = 0
+    first_title_line = 0
+    for el in parser.elements:
+        if el.tag not in interactive_tags:
+            continue
+        title = el.attrs.get("title", "").strip()
+        if not title:
+            continue
+        # title 长度 > 5 才报（短 title 可能只是标签补充）
+        if len(title) > 5:
+            title_count += 1
+            if first_title_line == 0:
+                first_title_line = el.line
+
+    if title_count >= 2:
+        findings.append(_finding(
+            file_path, first_title_line, R_HOVER_FOCUS_CONTENT, Severity.P3,
+            f"页面含 {title_count} 个交互元素使用 title 属性作为 tooltip，"
+            "原生 title tooltip 不可关闭（无 Esc 键）、不可悬停（鼠标移入即消失）、"
+            "不持续显示。建议改用自定义 tooltip 组件并实现三条件"
+            "（WCAG 1.4.13，W316 E2-35 深化）",
+            _snippet(html_content, first_title_line),
+        ))
+
+    # 2. CSS tooltip 类名但无 Esc 处理（检测 .tooltip:hover 但无 JS Esc 监听）
+    has_tooltip_css = bool(re.search(r"\.tooltip\s*[,{:~+>]|\.popover", html_content, re.I))
+    if has_tooltip_css:
+        has_esc_handler = bool(re.search(
+            r"(?:Escape|Esc|key\s*===?\s*['\"]Escape['\"]|keyCode\s*===?\s*27)",
+            html_content, re.I,
+        ))
+        if not has_esc_handler:
+            findings.append(_finding(
+                file_path, 1, R_HOVER_FOCUS_CONTENT, Severity.P2,
+                "页面检测到 tooltip/popover CSS 但未找到 Esc 键关闭处理。"
+                "悬停/聚焦触发的附加内容必须可关闭（Esc 键）"
+                "（WCAG 1.4.13，W316 E2-35 深化）",
+                "",
+            ))
+
+    return findings
+
+
+def check_char_key_shortcuts(html_content, file_path):
+    """E2-36：WCAG 2.1.4 Character Key Shortcuts。
+    检测单字符快捷键（accesskey 或 JS keydown 单字符监听）是否满足：
+    可关闭 / 可重映射 / 仅在聚焦时生效。
+    单字符快捷键可能误触发（如语音输入用户）。"""
+    findings = []
+    parser = _parse_html(html_content)
+
+    # 1. accesskey 属性（单字符快捷键）
+    accesskey_count = 0
+    first_accesskey_line = 0
+    for el in parser.elements:
+        ak = el.attrs.get("accesskey", "").strip()
+        if ak:
+            accesskey_count += 1
+            if first_accesskey_line == 0:
+                first_accesskey_line = el.line
+
+    # accesskey 本身是浏览器原生快捷键，WCAG 2.1.4 主要关注 JS 实现的单字符快捷键
+    # 但 accesskey 无关闭机制也值得提示
+    if accesskey_count >= 2:
+        findings.append(_finding(
+            file_path, first_accesskey_line, R_CHAR_KEY_SHORTCUTS, Severity.P3,
+            f"页面含 {accesskey_count} 个 accesskey 属性，单字符快捷键可能误触发"
+            "（语音输入/键盘用户）。建议提供关闭或重映射机制"
+            "（WCAG 2.1.4，W316 E2-36 深化）",
+            _snippet(html_content, first_accesskey_line),
+        ))
+
+    # 2. JS 单字符快捷键（addEventListener keydown 检测单字符 e.key === 'x'）
+    # 检测模式：e.key === 'x' 或 e.key == 'x' 或 event.key == 'x'
+    # 排除修饰键组合（Ctrl+ / Meta+ / Alt+）
+    single_char_keydown = re.findall(
+        r"(?:e|event)\.key\s*===?\s*['\"]([a-zA-Z])['\"]",
+        html_content,
+    )
+    # 排除常见非快捷键用途（如 Enter/Escape/Tab 等不是单字符）
+    # single_char_keydown 已经过滤为单字母
+    if len(single_char_keydown) >= 1:
+        # 检测是否仅在聚焦时生效（检测元素级 addEventListener 而非 document/window 级）
+        # 简化：如果检测到 document.addEventListener 或 window.addEventListener keydown
+        # 且匹配单字符，则视为全局单字符快捷键
+        has_global_listener = bool(re.search(
+            r"(?:document|window)\.addEventListener\s*\(\s*['\"]keydown",
+            html_content, re.I,
+        ))
+        if has_global_listener:
+            findings.append(_finding(
+                file_path, 1, R_CHAR_KEY_SHORTCUTS, Severity.P2,
+                f"页面检测到 {len(single_char_keydown)} 个全局单字符快捷键"
+                f"（{', '.join(single_char_keydown[:5])}），"
+                "全局单字符快捷键可能误触发（语音输入用户说字母即触发）。"
+                "应提供关闭、重映射、或仅在特定元素聚焦时生效"
+                "（WCAG 2.1.4，W316 E2-36 深化）",
+                "",
+            ))
+
+    return findings
+
+
+def check_pointer_gestures(html_content, file_path):
+    """E2-37：WCAG 2.5.1 Pointer Gestures。
+    检测多点触控或路径手势是否有单点替代方案。
+    触发条件：JS 中 touchstart 检测 touches.length > 1（多指）或
+    touchmove 检测路径手势（swipe/pinch）但无 click 替代。"""
+    findings = []
+
+    # 检测多指手势（touches.length > 1 / touches.length === 2）
+    multi_touch = bool(re.search(
+        r"touches\.length\s*[><=]+\s*[2-9]|touches\.length\s*===?\s*[2-9]",
+        html_content,
+    ))
+    # 检测路径手势（swipe/pinch/drag 方向检测）
+    path_gesture = bool(re.search(
+        r"(?:swipe|pinch|gesture|gesturestart|gesturechange)",
+        html_content, re.I,
+    ))
+
+    if multi_touch or path_gesture:
+        # 检测是否有单点替代（click/tap 或 click 事件处理）
+        has_click_alt = bool(re.search(
+            r"(?:onclick|addEventListener\s*\(\s*['\"]click|\.on\s*\(\s*['\"]click)",
+            html_content, re.I,
+        ))
+        if not has_click_alt:
+            gesture_type = "多指触控" if multi_touch else "路径手势"
+            findings.append(_finding(
+                file_path, 1, R_POINTER_GESTURES, Severity.P2,
+                f"页面检测到 {gesture_type} 但未找到 click 替代方案。"
+                "多点/路径手势必须有单点（click/tap）替代方案"
+                "（WCAG 2.5.1，W316 E2-37 深化）",
+                "",
+            ))
+
+    return findings
+
+
+def check_pointer_cancellation(html_content, file_path):
+    """E2-38：WCAG 2.5.2 Pointer Cancellation。
+    检测 onmousedown/ontouchstart 即时触发操作是否提供 onmouseup/onclick 替代。
+    应使用 up 事件触发操作，允许用户通过移开指针取消。"""
+    findings = []
+    parser = _parse_html(html_content)
+
+    # 检测 onmousedown 但无 onmouseup/onclick 的元素
+    down_only_count = 0
+    first_down_line = 0
+    for el in parser.elements:
+        has_mousedown = "onmousedown" in el.attrs or "ontouchstart" in el.attrs
+        has_mouseup = "onmouseup" in el.attrs or "ontouchend" in el.attrs
+        has_click = "onclick" in el.attrs
+        if has_mousedown and not has_mouseup and not has_click:
+            down_only_count += 1
+            if first_down_line == 0:
+                first_down_line = el.line
+
+    if down_only_count >= 1:
+        findings.append(_finding(
+            file_path, first_down_line, R_POINTER_CANCELLATION, Severity.P2,
+            f"页面含 {down_only_count} 个元素使用 onmousedown/ontouchstart 即时触发操作"
+            "但无 onmouseup/onclick 替代。用户无法通过移开指针取消操作。"
+            "应使用 onmouseup/onclick 触发，down 事件仅做视觉反馈"
+            "（WCAG 2.5.2，W316 E2-38 深化）",
+            _snippet(html_content, first_down_line),
+        ))
+
+    return findings
+
+
+def check_label_in_name(html_content, file_path):
+    """E2-39：WCAG 2.5.3 Label in Name。
+    检测可见标签文本是否包含在可访问名（aria-label）中。
+    语音控制用户说出可见标签文本应能激活对应元素。
+    触发条件：button/a/input 的 aria-label 不包含其可见文本。"""
+    findings = []
+    parser = _parse_html(html_content)
+
+    for el in parser.elements:
+        if el.tag not in ("button", "a", "input"):
+            continue
+        aria_label = el.attrs.get("aria-label", "").strip()
+        if not aria_label:
+            continue
+        # 获取可见文本
+        visible_text = el.text.strip() if el.text else ""
+        if not visible_text:
+            continue
+        # 检查可见文本是否是 aria-label 的一部分（或反之）
+        # 简化：如果 aria-label 完全不包含可见文本（忽略大小写），报告
+        if (visible_text.lower() not in aria_label.lower() and
+                aria_label.lower() not in visible_text.lower()):
+            findings.append(_finding(
+                file_path, el.line, R_LABEL_IN_NAME, Severity.P3,
+                f"<{el.tag}> 可见文本 {visible_text!r} 未包含在 aria-label {aria_label!r} 中。"
+                "语音控制用户说出可见标签文本时无法激活元素。"
+                "aria-label 应包含或等于可见文本"
+                "（WCAG 2.5.3，W316 E2-39 深化）",
+                _snippet(html_content, el.line),
+            ))
+
+    return findings
+
+
+def check_animation_interactions(html_content, file_path):
+    """E2-40：WCAG 2.3.3 Animation from Interactions（新增 WCAG 2.2）。
+    检测非必要动画是否支持 prefers-reduced-motion。
+    触发条件：页面含 transition/animation 但无 @media (prefers-reduced-motion: reduce) 覆盖。
+    前庭 disorder 用户需要关闭非必要动画。"""
+    findings = []
+    parser = _parse_html(html_content)
+    css_text = "\n".join(css for _, css in parser.style_blocks)
+    if not css_text.strip():
+        return findings
+
+    # 检测是否含 transition 或 animation
+    has_transition = bool(re.search(r"transition\s*:", css_text, re.I))
+    has_animation = bool(re.search(r"animation\s*:", css_text, re.I))
+
+    if not (has_transition or has_animation):
+        return findings
+
+    # 检测是否有 prefers-reduced-motion 覆盖
+    has_reduced_motion = bool(re.search(
+        r"@media\s*\(?\s*prefers-reduced-motion\s*:\s*reduce",
+        css_text, re.I,
+    ))
+
+    if not has_reduced_motion:
+        findings.append(_finding(
+            file_path, 1, R_ANIMATION_INTERACTIONS, Severity.P2,
+            "页面含 transition/animation 但无 @media (prefers-reduced-motion: reduce) 覆盖。"
+            "非必要动画应支持用户通过系统设置关闭，前庭 disorder 用户可能因动画不适"
+            "（WCAG 2.3.3，W316 E2-40 深化）",
+            "建议添加：@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }",
+        ))
+
+    return findings
+
+
 # ---------- 主流程 ----------
 ALL_CHECKS = [
     (R_KEYBOARD, check_keyboard_navigation),
@@ -1805,11 +2300,22 @@ ALL_CHECKS = [
     (R_NO_THREE_FLASHES, check_no_three_flashes),
     (R_PARSING, check_parsing),
     (R_CONSISTENT_NAVIGATION, check_consistent_navigation),
+    # W316 E 方向深化：10 项 WCAG 2.2 完整规范扩展规则（页面语言/链接目的/多种导航/非文本对比/悬停聚焦/字符快捷键/指针手势/指针取消/名称标签/交互动画）
+    (R_LANGUAGE_OF_PAGE, check_language_of_page),
+    (R_LINK_PURPOSE, check_link_purpose),
+    (R_MULTIPLE_WAYS, check_multiple_ways),
+    (R_NON_TEXT_CONTRAST, check_non_text_contrast),
+    (R_HOVER_FOCUS_CONTENT, check_hover_focus_content),
+    (R_CHAR_KEY_SHORTCUTS, check_char_key_shortcuts),
+    (R_POINTER_GESTURES, check_pointer_gestures),
+    (R_POINTER_CANCELLATION, check_pointer_cancellation),
+    (R_LABEL_IN_NAME, check_label_in_name),
+    (R_ANIMATION_INTERACTIONS, check_animation_interactions),
 ]
 
 
 def audit_file(file_path):
-    """对单个 HTML 文件运行 30 项检查，返回 findings 列表"""
+    """对单个 HTML 文件运行 40 项检查，返回 findings 列表"""
     try:
         text = file_path.read_text(encoding="utf-8", errors="replace")
     except Exception as e:
@@ -1827,7 +2333,7 @@ def audit_file(file_path):
 
 
 def audit_directory(root_dir, output_format="md", quiet=False):
-    """扫描目录下所有 HTML，运行 30 项检查，输出报告"""
+    """扫描目录下所有 HTML，运行 40 项检查，输出报告"""
     root = Path(root_dir)
     if not root.exists():
         print(f"错误：目录不存在 {root}", file=sys.stderr)
@@ -1897,6 +2403,16 @@ RULE_DESCRIPTIONS = {
     R_NO_THREE_FLASHES: "页面不含超过 3 次/秒闪烁元素，避免光敏性癫痫风险（WCAG 2.3.1，W283 E2-28 深化）",
     R_PARSING: "HTML 无严重解析错误：重复 ID、未闭合标签、stray end tag（WCAG 4.1.1，W283 E2-29 深化）",
     R_CONSISTENT_NAVIGATION: "多导航元素需稳定标识保证多页面顺序一致（WCAG 3.2.3，W283 E2-30 深化）",
+    R_LANGUAGE_OF_PAGE: "<html lang> 存在且有效 BCP 47 语言标签（WCAG 3.1.1，W316 E2-31 深化）",
+    R_LINK_PURPOSE: "链接文本非模糊，描述性文本代替「点击这里」（WCAG 2.4.4/2.4.9，W316 E2-32 深化）",
+    R_MULTIPLE_WAYS: "至少 2 种导航方式：导航栏 + 搜索/面包屑/站点地图（WCAG 2.4.5，W316 E2-33 深化）",
+    R_NON_TEXT_CONTRAST: "UI 组件 border-color 与背景对比度 ≥ 3:1（WCAG 1.4.11，W316 E2-34 深化）",
+    R_HOVER_FOCUS_CONTENT: "tooltip/popover 可关闭/可悬停/持续显示（WCAG 1.4.13，W316 E2-35 深化）",
+    R_CHAR_KEY_SHORTCUTS: "单字符快捷键可关闭/重映射/仅聚焦时（WCAG 2.1.4，W316 E2-36 深化）",
+    R_POINTER_GESTURES: "多点/路径手势有单点 click 替代（WCAG 2.5.1，W316 E2-37 深化）",
+    R_POINTER_CANCELLATION: "onmousedown 即时触发需有 onmouseup/onclick 替代（WCAG 2.5.2，W316 E2-38 深化）",
+    R_LABEL_IN_NAME: "可见标签文本包含在 aria-label 中，支持语音控制（WCAG 2.5.3，W316 E2-39 深化）",
+    R_ANIMATION_INTERACTIONS: "非必要动画支持 prefers-reduced-motion 关闭（WCAG 2.3.3，W316 E2-40 深化）",
 }
 
 
@@ -1905,7 +2421,7 @@ def _render_md(root, html_files, counts, all_findings):
     lines = []
     lines.append("# 西游记项目 a11y 审查报告")
     lines.append("")
-    lines.append("> 本报告由 `scripts/a11y_audit.py` 自动生成，按 30 条 WCAG 2.2 AA 规则扫描全站 HTML。")
+    lines.append("> 本报告由 `scripts/a11y_audit.py` 自动生成，按 40 条 WCAG 2.2 完整规范规则扫描全站 HTML。")
     lines.append("> 严重度分级：P0 阻断 / P1 严重 / P2 一般 / P3 提示。退出码 0 表示无 P0 问题。")
     lines.append("")
     lines.append("## 元信息")
@@ -1980,13 +2496,13 @@ def _render_md(root, html_files, counts, all_findings):
     lines.append("")
     lines.append("---")
     lines.append("")
-    lines.append("由 `scripts/a11y_audit.py` 生成 · W264-E2 + W271-E2 + W275-E2 + W279-E2 + W283-E2 a11y 深化 · 30 条 WCAG 2.2 AA 规则 · v2.2.51")
+    lines.append("由 `scripts/a11y_audit.py` 生成 · W264-E2 + W271-E2 + W275-E2 + W279-E2 + W283-E2 + W316-E2 a11y 深化 · 40 条 WCAG 2.2 完整规范规则 · v2.2.68")
     return "\n".join(lines) + "\n"
 
 
 def main():
     ap = argparse.ArgumentParser(
-        description="a11y_audit.py - 全站可访问性审查（30 条 WCAG 2.2 AA 规则）",
+        description="a11y_audit.py - 全站可访问性审查（40 条 WCAG 2.2 完整规范规则）",
     )
     ap.add_argument("--dir", type=Path, default=Path("site"), help="扫描目录（默认 site）")
     ap.add_argument("--format", choices=["md", "json"], default="md", help="输出格式（默认 md）")
