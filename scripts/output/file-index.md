@@ -10,6 +10,21 @@
 
 ## 项目文件反向索引（按版本倒序，覆盖 site/data/ 可视化页面 + docs/ 文档 + 根目录 6 文件 + 其他）
 
+### v2.2.65 W313 V3 跨页面导航增强·tag-cloud.html 标签云全站导航 + 3 核心页面 footer-cross 补全（可视化页面 79→80·dashboard 新增标签云入口·D3.js v7 标签云+分类筛选+搜索+智能推荐）
+
+| 文件 | W ID | 改动摘要 |
+|------|------|----------|
+| site/data/tag-cloud.html | W313 | v2.2.65 新建·全站标签云导航页面（40.58KB·D3.js v7 驱动·79 页面元数据内嵌·6 大分类·标签云+分类筛选+搜索+智能推荐+footer 双索引） |
+| site/dashboard.html | W313 | v2.2.65 修改·新增"全站标签云 · 可视化导航中心" section（kpi-card 跳转 tag-cloud.html·span 3 宽幅·80 个可视化页面） |
+| site/data/philosophy.html | W313 | v2.2.65 修改·footer-cross 补全（关联 relationships/risk-project/karma-reincarnation/tag-cloud·FILE_INDEX/CHANGELOG 注释） |
+| site/data/relationships.html | W313 | v2.2.65 修改·footer-cross 补全（关联 philosophy/risk-project/character-dynamic-network/tag-cloud·FILE_INDEX/CHANGELOG 注释） |
+| site/data/risk-project.html | W313 | v2.2.65 修改·footer-cross 补全（关联 philosophy/relationships/monster-sociology/tag-cloud·FILE_INDEX/CHANGELOG 注释） |
+| CHANGELOG.md | W313 | v2.2.65 同步·新增 W313 版本段·W### 编号范围 W312→W313 |
+| README.md | W313 | v2.2.65 同步·版本号 v2.2.64→v2.2.65·可视化页面 79→80·新增 W313 V3 标签云说明 |
+| STRUCTURE.md | W313 | v2.2.65 同步·版本号 v2.2.64→v2.2.65·可视化页面 79→80·含 W313 V3 标签云导航 |
+| docs/00-导读/项目说明.md | W313 | v2.2.65 同步·版本号 v2.2.64→v2.2.65·可视化页面 79→80·当前版本/阶段/关键产出三处更新 |
+| 交接文档.md | W313 | v2.2.65 同步·当前进度段新增 W313 V3 里程碑·W### 编号 W312→W313 |
+
 ### v2.2.64 W312 V1 dashboard 深化·项目研究矩阵 6→10 卡片 + KPI 数据修正（A2 43→44 / 专题 45→41 / 总数 368→619·新增 S1/S2-外部分享/S2-学术投稿/S3 四卡片·kpi-card 51→55·5 文件同步）
 
 | 文件 | W ID | 改动摘要 |

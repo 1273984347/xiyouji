@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全站标签云 · 可视化导航中心 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染标签云。</p></noscript>
+    <style>
+        :root {
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #3a3a3a;
+            --ink-soft: #6a6a6a;
+            --accent: #c8463a;
+            --accent-2: #3a6b8c;
+            --accent-3: #7a5230;
+            --accent-4: #5a7a3a;
+            --accent-5: #8a5a8c;
+            --accent-6: #c89a3a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 56px 24px 44px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero p {
+            font-size: 1rem;
+            color: #d9c9a8;
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .hero .stats {
+            margin-top: 18px;
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .stats span {
+            font-size: 0.92rem;
+            color: #e9d8b8;
+        }
+        .hero .stats b {
+            color: #f0c878;
+            font-weight: 600;
+            font-size: 1.15rem;
+        }
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 24px 48px;
+        }
+        /* Tabs */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 24px;
+            padding: 10px;
+            background: var(--paper);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        .tab-btn {
+            font-family: inherit;
+            font-size: 0.92rem;
+            padding: 8px 16px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            color: var(--ink);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            line-height: 1.4;
+        }
+        .tab-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .tab-btn[aria-pressed="true"] {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            box-shadow: 0 2px 6px rgba(200, 70, 58, 0.3);
+        }
+        .tab-btn .count {
+            font-size: 0.78rem;
+            opacity: 0.75;
+            margin-left: 2px;
+        }
+        /* Search */
+        .search-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .search-box {
+            width: 100%;
+            max-width: 560px;
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 12px 16px 12px 42px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--paper);
+            color: var(--ink);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-box input:focus {
+            border-color: var(--accent-2);
+            box-shadow: 0 0 0 3px rgba(58, 107, 140, 0.12);
+        }
+        .search-box::before {
+            content: "🔍";
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            opacity: 0.5;
+        }
+        .search-hint {
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-top: 6px;
+        }
+        /* Tag cloud */
+        .cloud-section {
+            background: var(--paper);
+            border-radius: 12px;
+            padding: 32px 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+        }
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .section-sub {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        #tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 6px 10px;
+            min-height: 200px;
+            padding: 16px 0;
+        }
+        .tag-item {
+            font-family: inherit;
+            cursor: pointer;
+            line-height: 1.5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            display: inline-block;
+            user-select: none;
+            border-bottom: 2px solid transparent;
+        }
+        .tag-item:hover {
+            background: rgba(0,0,0,0.04);
+            border-bottom-color: currentColor;
+            transform: translateY(-2px);
+        }
+        .tag-item.active {
+            background: rgba(200, 70, 58, 0.1);
+            border-bottom-color: var(--accent);
+        }
+        .tag-item.dimmed {
+            opacity: 0.25;
+        }
+        /* Category colors */
+        .cat-a-l { color: var(--accent); }
+        .cat-m-u { color: var(--accent-2); }
+        .cat-v-ah { color: var(--accent-3); }
+        .cat-q-series { color: var(--accent-4); }
+        .cat-d-nlp { color: var(--accent-5); }
+        .cat-v-new { color: var(--accent-6); }
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px dashed var(--line);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        /* Tooltip */
+        #tooltip {
+            position: fixed;
+            z-index: 1000;
+            background: rgba(26, 20, 16, 0.96);
+            color: #f5e9d4;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            max-width: 320px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            line-height: 1.5;
+        }
+        #tooltip .tt-title {
+            font-weight: 600;
+            color: #f0c878;
+            margin-bottom: 4px;
+        }
+        #tooltip .tt-desc {
+            color: #d9c9a8;
+        }
+        #tooltip .tt-meta {
+            font-size: 0.76rem;
+            color: #a89878;
+            margin-top: 6px;
+        }
+        /* Recommendations */
+        .rec-section {
+            background: var(--paper);
+            border-radius: 12px;
+            padding: 32px 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+        }
+        .rec-context {
+            text-align: center;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .rec-context b {
+            color: var(--accent);
+        }
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .rec-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px;
+            background: var(--bg);
+            text-decoration: none;
+            color: var(--ink);
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .rec-card:hover {
+            border-color: var(--accent-2);
+            box-shadow: 0 4px 12px rgba(58, 107, 140, 0.15);
+            transform: translateY(-3px);
+        }
+        .rec-card .rc-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--accent-2);
+        }
+        .rec-card .rc-desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            line-height: 1.5;
+        }
+        .rec-card .rc-meta {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .rec-card .rc-size {
+            background: var(--accent);
+            color: #fff;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+        }
+        .rec-empty {
+            text-align: center;
+            color: var(--ink-soft);
+            padding: 24px;
+            font-size: 0.9rem;
+        }
+        /* Footer */
+        footer {
+            background: #1a1410;
+            color: #d9c9a8;
+            padding: 36px 24px 24px;
+            text-align: center;
+            font-size: 0.88rem;
+            line-height: 1.9;
+        }
+        footer a {
+            color: #f0c878;
+            text-decoration: none;
+            border-bottom: 1px dashed transparent;
+            transition: border-color 0.2s;
+        }
+        footer a:hover {
+            border-bottom-color: #f0c878;
+        }
+        footer p {
+            margin-bottom: 6px;
+        }
+        .footer-index {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid #3a2820;
+            font-size: 0.78rem;
+            color: #a89878;
+        }
+        .footer-cross {
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: #a89878;
+        }
+        .footer-cross a {
+            color: #c8a878;
+        }
+        /* Responsive */
+        @media (max-width: 640px) {
+            .hero { padding: 36px 16px 28px; }
+            .hero h1 { font-size: 1.6rem; }
+            .container { padding: 20px 12px 36px; }
+            .cloud-section, .rec-section { padding: 20px 14px; }
+            .tab-btn { padding: 6px 12px; font-size: 0.85rem; }
+            .rec-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>全站标签云 · 可视化导航中心</h1>
+        <p>D3.js 驱动的《详解西游记》全站 79 个可视化页面导航，按分类着色，按数据维度数缩放，点击标签直达对应页面。</p>
+        <div class="stats">
+            <span>页面总数 <b id="stat-total">79</b></span>
+            <span>分类数 <b>6</b></span>
+            <span>标签数 <b id="stat-tags">--</b></span>
+            <span>当前显示 <b id="stat-shown">79</b></span>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 分类筛选 Tabs -->
+        <nav class="tabs" role="tablist" aria-label="分类筛选">
+            <button class="tab-btn" data-cat="all" aria-pressed="true" role="tab">全部 <span class="count" id="cnt-all"></span></button>
+            <button class="tab-btn" data-cat="a-l" aria-pressed="false" role="tab">A-L 基础 <span class="count" id="cnt-a-l"></span></button>
+            <button class="tab-btn" data-cat="m-u" aria-pressed="false" role="tab">M-U 扩展 <span class="count" id="cnt-m-u"></span></button>
+            <button class="tab-btn" data-cat="v-ah" aria-pressed="false" role="tab">V-AH 跨学科 <span class="count" id="cnt-v-ah"></span></button>
+            <button class="tab-btn" data-cat="q-series" aria-pressed="false" role="tab">Q 系列 <span class="count" id="cnt-q-series"></span></button>
+            <button class="tab-btn" data-cat="d-nlp" aria-pressed="false" role="tab">D 方向 NLP <span class="count" id="cnt-d-nlp"></span></button>
+            <button class="tab-btn" data-cat="v-new" aria-pressed="false" role="tab">V 方向新增 <span class="count" id="cnt-v-new"></span></button>
+        </nav>
+
+        <!-- 搜索框 -->
+        <div class="search-wrap">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="按关键词搜索：标题、标签、描述..." aria-label="搜索标签">
+            </div>
+        </div>
+        <p class="search-hint">支持匹配页面标题、标签词、描述文本</p>
+
+        <!-- 标签云主体 -->
+        <section class="cloud-section" aria-label="标签云">
+            <h2 class="section-title">标签云导航</h2>
+            <p class="section-sub">标签大小反映数据维度数 · 颜色对应分类 · 点击跳转对应页面</p>
+            <div id="tag-cloud" role="navigation" aria-label="全站标签云"></div>
+            <div class="legend" aria-hidden="false">
+                <div class="legend-item"><span class="legend-dot" style="background:#c8463a"></span>A-L 基础</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#3a6b8c"></span>M-U 扩展</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#7a5230"></span>V-AH 跨学科</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#5a7a3a"></span>Q 系列</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#8a5a8c"></span>D 方向 NLP</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#c89a3a"></span>V 方向新增</div>
+            </div>
+        </section>
+
+        <!-- 智能推荐 -->
+        <section class="rec-section" aria-label="相关页面推荐">
+            <h2 class="section-title">相关页面推荐</h2>
+            <p class="section-sub">点击标签云中任一标签，此处显示同分类相关推荐</p>
+            <p class="rec-context" id="rec-context">当前显示：<b>热门推荐</b>（数据维度数最大的 5 个页面）</p>
+            <div class="rec-grid" id="rec-grid"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>详解西游记 · 全站标签云导航 · W313-V3 跨页面导航增强</p>
+        <p>D3.js 标签云，点击标签跳转对应可视化页面，支持分类筛选与搜索。</p>
+        <p>
+            <a href="../dashboard.html">← 返回数据仪表盘</a> ·
+            <a href="relationships.html">→ 人物关系总览</a> ·
+            <a href="philosophy.html">→ 哲学心性</a>
+        </p>
+        <div class="footer-index">
+            正向时间线：CHANGELOG.md v2.2.65 W313 · 反向文件索引：site/data/tag-cloud.html · V 方向·W313 V3 跨页面导航增强
+        </div>
+        <div class="footer-cross">
+            跨文档链接：
+            <a href="dashboard.html">dashboard.html</a> /
+            <a href="relationships.html">relationships.html</a> /
+            <a href="philosophy.html">philosophy.html</a>
+        </div>
+    </footer>
+
+    <!-- FILE_INDEX: tag-cloud.html | W313-V3 | 标签云全站导航 -->
+    <!-- CHANGELOG: v2.2.65 W313 V3 跨页面导航增强 -->
+
+    <div id="tooltip" role="tooltip" aria-hidden="true"></div>
+
+    <script>
+    // ============================================================
+    // EMBEDDED_DATA: site/data/ 目录下全部 79 个 HTML 页面元数据
+    // 字段: file(文件名) title(标题) category(分类) tags(标签) size(数据维度数) desc(描述)
+    // ============================================================
+    const EMBEDDED_DATA = [
+        // ===== A-L 基础 (9) =====
+        {file:"dashboard.html", title:"数据仪表盘", category:"a-l", tags:["总览","导航","仪表盘","KPI"], size:10, desc:"全站数据可视化总览仪表盘，KPI 汇总"},
+        {file:"relationships.html", title:"A·人物关系", category:"a-l", tags:["人物关系","师徒","网络图","三界"], size:8, desc:"西游记人物关系网络总览，师徒团队结构"},
+        {file:"philosophy.html", title:"G·哲学心性", category:"a-l", tags:["心猿","修心","六耳猕猴","二心"], size:6, desc:"心猿阶段·修心寓言·六耳猕猴的二心隐喻"},
+        {file:"risk-project.html", title:"风险项目", category:"a-l", tags:["风险","项目","九九八十一难","取经"], size:7, desc:"取经项目风险分析与管控"},
+        {file:"monster-sociology.html", title:"妖怪社会学", category:"a-l", tags:["妖怪","社会","阶层","组织"], size:7, desc:"妖怪社会阶层结构与组织形态"},
+        {file:"power-resources.html", title:"权力资源", category:"a-l", tags:["权力","资源","法宝","天庭"], size:6, desc:"三界权力资源分布与博弈"},
+        {file:"karma-reincarnation.html", title:"因果轮回", category:"a-l", tags:["因果","轮回","业报","前世"], size:6, desc:"因果业报轮回体系分析"},
+        {file:"business-model.html", title:"商业模式", category:"a-l", tags:["商业","模式","经济","交易"], size:5, desc:"取经团队商业模式与经济逻辑"},
+        {file:"cave-estate.html", title:"洞府地产", category:"a-l", tags:["洞府","地产","空间","领地"], size:5, desc:"妖怪洞府空间分布与领地经济"},
+        // ===== M-U 扩展 (9) =====
+        {file:"magic-system.html", title:"法术体系", category:"m-u", tags:["法术","体系","神通","变化"], size:8, desc:"西游记法术神通体系全览"},
+        {file:"aesthetics.html", title:"美学", category:"m-u", tags:["美学","审美","意境","古典"], size:6, desc:"西游记美学意境分析"},
+        {file:"music-structure.html", title:"音乐结构", category:"m-u", tags:["音乐","结构","韵律","节奏"], size:5, desc:"文本音乐结构与韵律分析"},
+        {file:"text-evolution.html", title:"文本演变", category:"m-u", tags:["文本","演变","版本","校勘"], size:7, desc:"西游记文本版本演变与流变"},
+        {file:"deconstruction.html", title:"解构", category:"m-u", tags:["解构","后现代","文本","颠覆"], size:6, desc:"后现代解构主义视角分析"},
+        {file:"global-pattern.html", title:"全局模式", category:"m-u", tags:["全局","模式","结构","叙事"], size:7, desc:"全书全局叙事模式提取"},
+        {file:"counterfactual.html", title:"反事实", category:"m-u", tags:["反事实","假设","推演","可能世界"], size:6, desc:"反事实历史推演与假设分析"},
+        {file:"cultural-misreading.html", title:"文化误读", category:"m-u", tags:["文化","误读","跨文化","接受"], size:5, desc:"跨文化误读现象与接受史"},
+        {file:"methodology-matrix.html", title:"方法论矩阵", category:"m-u", tags:["方法论","矩阵","研究","框架"], size:8, desc:"研究方法论矩阵与多维框架"},
+        // ===== V-AH 跨学科 (12) =====
+        {file:"workplace.html", title:"职场", category:"v-ah", tags:["职场","打工","团队","管理"], size:7, desc:"取经团队职场生态解读"},
+        {file:"social-media.html", title:"社交媒体", category:"v-ah", tags:["社交","媒体","网络","传播"], size:6, desc:"社交媒体视角下的传播分析"},
+        {file:"game-webnovel.html", title:"游戏网文", category:"v-ah", tags:["游戏","网文","互动","叙事"], size:6, desc:"游戏网文叙事机制分析"},
+        {file:"ethics-consumption.html", title:"伦理消费", category:"v-ah", tags:["伦理","消费","道德","资本"], size:5, desc:"伦理与消费文化批判"},
+        {file:"chart-design.html", title:"图表设计", category:"v-ah", tags:["图表","设计","可视化","规范"], size:7, desc:"数据图表设计规范与最佳实践"},
+        {file:"narrative-experiment.html", title:"叙事实验", category:"v-ah", tags:["叙事","实验","创新","形式"], size:6, desc:"叙事形式创新实验"},
+        {file:"visual-art.html", title:"视觉艺术", category:"v-ah", tags:["视觉","艺术","图像","色彩"], size:6, desc:"视觉艺术表现与图像分析"},
+        {file:"cognitive-psychology.html", title:"认知心理", category:"v-ah", tags:["认知","心理","认知科学","心智"], size:7, desc:"认知心理学视角解读"},
+        {file:"ecology.html", title:"生态", category:"v-ah", tags:["生态","环境","自然","系统"], size:5, desc:"生态学视角下的环境系统"},
+        {file:"jurisprudence.html", title:"法理", category:"v-ah", tags:["法理","法律","正义","秩序"], size:6, desc:"法理学视角下的正义与秩序"},
+        {file:"material-archaeology.html", title:"物质考古", category:"v-ah", tags:["物质","考古","文物","器物"], size:5, desc:"物质考古学器物分析"},
+        {file:"linguistics.html", title:"语言学", category:"v-ah", tags:["语言","语言学","语义","语法"], size:7, desc:"语言学与语义分析"},
+        // ===== Q 系列 (9) =====
+        {file:"criticism-history.html", title:"批评史", category:"q-series", tags:["批评","历史","评论","接受史"], size:7, desc:"西游记批评史与评论流变"},
+        {file:"cross-time-danmaku.html", title:"跨时空弹幕", category:"q-series", tags:["弹幕","跨时空","互动","评论"], size:6, desc:"跨时空弹幕互动评论"},
+        {file:"concept-device.html", title:"概念装置", category:"q-series", tags:["概念","装置","工具","方法"], size:5, desc:"概念装置与分析工具"},
+        {file:"emotional-heatmap.html", title:"情感热力图", category:"q-series", tags:["情感","热力图","情绪","可视化"], size:7, desc:"情感热力图可视化"},
+        {file:"timeline.html", title:"时间线", category:"q-series", tags:["时间线","年表","编年","事件"], size:8, desc:"西游记事件编年时间线"},
+        {file:"ai-dialogue.html", title:"AI 对话", category:"q-series", tags:["AI","对话","智能","生成"], size:6, desc:"AI 对话生成与交互"},
+        {file:"text-search.html", title:"文本检索", category:"q-series", tags:["检索","搜索","文本","索引"], size:7, desc:"全文检索系统与索引"},
+        {file:"century-dialogue.html", title:"世纪对话", category:"q-series", tags:["世纪","对话","跨时代","思想"], size:5, desc:"跨世纪思想对话"},
+        {file:"famous-time-travel.html", title:"名人穿越", category:"q-series", tags:["名人","穿越","时空","相遇"], size:5, desc:"名人时空穿越相遇"},
+        // ===== D 方向 NLP (11) =====
+        {file:"character-sentiment-arc.html", title:"角色情感弧线", category:"d-nlp", tags:["角色","情感","弧线","NLP"], size:8, desc:"角色情感弧线 NLP 分析"},
+        {file:"character-semantic-network.html", title:"角色语义网络", category:"d-nlp", tags:["角色","语义","网络","NLP"], size:7, desc:"角色语义网络构建"},
+        {file:"character-presence-timeline.html", title:"角色出场时间线", category:"d-nlp", tags:["角色","出场","时间线","NLP"], size:7, desc:"角色出场时间线追踪"},
+        {file:"character-appearance.html", title:"角色登场", category:"d-nlp", tags:["角色","登场","出场","频次"], size:6, desc:"角色登场频次分析"},
+        {file:"dialogue-sentiment.html", title:"对话情感", category:"d-nlp", tags:["对话","情感","分析","NLP"], size:7, desc:"对话情感分析与极性"},
+        {file:"character-dynamic-network.html", title:"角色动态网络", category:"d-nlp", tags:["角色","动态","网络","时序"], size:8, desc:"角色动态时序网络"},
+        {file:"character-relationship-3d.html", title:"角色关系3D", category:"d-nlp", tags:["角色","关系","3D","立体"], size:8, desc:"3D 角色关系网络可视化"},
+        {file:"narrative-rhythm-curve.html", title:"叙事节奏曲线", category:"d-nlp", tags:["叙事","节奏","曲线","韵律"], size:7, desc:"叙事节奏曲线分析"},
+        {file:"language-style-radar.html", title:"语言风格雷达", category:"d-nlp", tags:["语言","风格","雷达","特征"], size:6, desc:"语言风格雷达图"},
+        {file:"chapter-structure-graph.html", title:"章节结构图", category:"d-nlp", tags:["章节","结构","图","NLP"], size:7, desc:"章节结构图谱分析"},
+        {file:"chapter-stats.html", title:"章节统计", category:"d-nlp", tags:["章节","统计","数据","字数"], size:6, desc:"章节统计数据与字数分布"},
+        // ===== V 方向新增 (29) =====
+        {file:"journey-map-interactive.html", title:"取经路线交互", category:"v-new", tags:["取经","路线","交互","地图"], size:9, desc:"取经路线交互地图"},
+        {file:"journey-spacetime.html", title:"取经时空", category:"v-new", tags:["取经","时空","时空图","维度"], size:8, desc:"取经时空维度分析"},
+        {file:"journey-route.html", title:"取经路线", category:"v-new", tags:["取经","路线","地理","轨迹"], size:7, desc:"取经路线地理轨迹"},
+        {file:"journey-geo-semiotics.html", title:"取经地理符号学", category:"v-new", tags:["取经","地理","符号学","空间"], size:6, desc:"取经地理符号学解读"},
+        {file:"hardship-heatmap.html", title:"劫难热力图", category:"v-new", tags:["劫难","热力图","八十一难","分布"], size:8, desc:"劫难分布热力图"},
+        {file:"hardship-difficulty-heatmap.html", title:"劫难难度热力图", category:"v-new", tags:["劫难","难度","热力图","等级"], size:7, desc:"劫难难度等级热力图"},
+        {file:"81-hardships.html", title:"九九八十一难", category:"v-new", tags:["八十一难","劫难","九九","磨难"], size:9, desc:"九九八十一难全览"},
+        {file:"mbti-evolution.html", title:"MBTI 演化", category:"v-new", tags:["MBTI","人格","演化","性格"], size:7, desc:"角色 MBTI 人格演化轨迹"},
+        {file:"monster-capability-radar.html", title:"妖怪能力雷达", category:"v-new", tags:["妖怪","能力","雷达","战力"], size:7, desc:"妖怪能力雷达图"},
+        {file:"monster-victims-network.html", title:"妖怪受害者网络", category:"v-new", tags:["妖怪","受害者","网络","伤害"], size:6, desc:"妖怪受害者关系网络"},
+        {file:"monster-female-network.html", title:"女妖网络", category:"v-new", tags:["女妖","妖怪","网络","性别"], size:6, desc:"女妖角色关系网络"},
+        {file:"monster-background.html", title:"妖怪背景", category:"v-new", tags:["妖怪","背景","来历","出身"], size:6, desc:"妖怪背景来历分析"},
+        {file:"monster-hierarchy-network.html", title:"妖怪等级网络", category:"v-new", tags:["妖怪","等级","网络","阶层"], size:7, desc:"妖怪等级阶层网络"},
+        {file:"heaven-power-network.html", title:"天庭权力网络", category:"v-new", tags:["天庭","权力","网络","神仙"], size:8, desc:"天庭权力关系网络"},
+        {file:"underworld-power-network.html", title:"地府权力网络", category:"v-new", tags:["地府","权力","网络","阎罗"], size:7, desc:"地府权力关系网络"},
+        {file:"guanyin-six-roles-network.html", title:"观音六角色网络", category:"v-new", tags:["观音","角色","网络","救度"], size:6, desc:"观音六重角色网络"},
+        {file:"four-heavenly-kings-artifacts.html", title:"四大天王法器", category:"v-new", tags:["四大天王","法器","兵器","守护"], size:5, desc:"四大天王法器兵器"},
+        {file:"pilgrim-team-psychology-arc.html", title:"取经团队心理弧", category:"v-new", tags:["取经","团队","心理","弧线"], size:7, desc:"取经团队心理弧线"},
+        {file:"pilgrim-team-dynamic-network.html", title:"取经团队动态网络", category:"v-new", tags:["取经","团队","动态","网络"], size:8, desc:"取经团队动态关系网络"},
+        {file:"six-senses-narratology-network.html", title:"六根叙事学网络", category:"v-new", tags:["六根","叙事学","网络","感官"], size:7, desc:"六根叙事学网络分析"},
+        {file:"narratology-12d-network.html", title:"12维叙事学网络", category:"v-new", tags:["叙事学","12维","网络","多维"], size:9, desc:"12维叙事学网络"},
+        {file:"narratology-13d-network.html", title:"13维叙事学网络", category:"v-new", tags:["叙事学","13维","网络","多维"], size:9, desc:"13维叙事学网络"},
+        {file:"intertextuality-network.html", title:"互文性网络", category:"v-new", tags:["互文性","文本","网络","引用"], size:7, desc:"互文性引用网络"},
+        {file:"monster-ecology-network.html", title:"妖怪生态网络", category:"v-new", tags:["妖怪","生态","网络","栖息"], size:7, desc:"妖怪生态栖息网络"},
+        {file:"theological-intervention-network.html", title:"神学介入网络", category:"v-new", tags:["神学","介入","网络","神佛"], size:7, desc:"神学介入干预网络"},
+        {file:"four-dimensional-research-network.html", title:"四维研究网络", category:"v-new", tags:["四维","研究","网络","框架"], size:8, desc:"四维研究框架网络"},
+        {file:"ming-political-thought-comparison.html", title:"明代政治思想对比", category:"v-new", tags:["明代","政治","思想","对比"], size:6, desc:"明代政治思想对比分析"},
+        {file:"poetry-rhythm-analysis.html", title:"诗词韵律分析", category:"v-new", tags:["诗词","韵律","分析","格律"], size:6, desc:"诗词韵律格律分析"},
+        {file:"perf-canvas-rendering.html", title:"Canvas 性能渲染", category:"v-new", tags:["Canvas","性能","渲染","优化"], size:6, desc:"Canvas 高性能渲染优化"}
+    ];
+
+    // ============================================================
+    // 分类配置
+    // ============================================================
+    const CATEGORY_CONFIG = {
+        "a-l":      {label:"A-L 基础",     color:"#c8463a", cls:"cat-a-l"},
+        "m-u":      {label:"M-U 扩展",    color:"#3a6b8c", cls:"cat-m-u"},
+        "v-ah":     {label:"V-AH 跨学科",  color:"#7a5230", cls:"cat-v-ah"},
+        "q-series": {label:"Q 系列",      color:"#5a7a3a", cls:"cat-q-series"},
+        "d-nlp":    {label:"D 方向 NLP",  color:"#8a5a8c", cls:"cat-d-nlp"},
+        "v-new":    {label:"V 方向新增",   color:"#c89a3a", cls:"cat-v-new"}
+    };
+
+    // ============================================================
+    // 状态管理
+    // ============================================================
+    let state = {
+        activeCategory: "all",
+        searchQuery: "",
+        selectedFile: null,
+        filteredData: []
+    };
+
+    // ============================================================
+    // D3.js 标签云渲染
+    // ============================================================
+    const tooltip = d3.select("#tooltip");
+
+    function fontSizeScale(size) {
+        // size 范围 5-10 映射到 12px-28px
+        const min = 5, max = 10;
+        const fmin = 12, fmax = 28;
+        const ratio = (size - min) / (max - min);
+        return fmin + ratio * (fmax - fmin);
+    }
+
+    function filterData() {
+        let data = EMBEDDED_DATA;
+        if (state.activeCategory !== "all") {
+            data = data.filter(d => d.category === state.activeCategory);
+        }
+        if (state.searchQuery) {
+            const q = state.searchQuery.toLowerCase();
+            data = data.filter(d =>
+                d.title.toLowerCase().includes(q) ||
+                d.desc.toLowerCase().includes(q) ||
+                d.tags.some(t => t.toLowerCase().includes(q)) ||
+                d.file.toLowerCase().includes(q)
+            );
+        }
+        state.filteredData = data;
+        return data;
+    }
+
+    function renderTagCloud() {
+        const data = filterData();
+        const cloud = d3.select("#tag-cloud");
+
+        // 绑定数据
+        const tags = cloud.selectAll(".tag-item")
+            .data(data, d => d.file);
+
+        tags.exit()
+            .transition().duration(200)
+            .style("opacity", 0)
+            .remove();
+
+        const enter = tags.enter()
+            .append("span")
+            .attr("class", d => "tag-item " + (CATEGORY_CONFIG[d.category] || {cls:""}).cls)
+            .style("font-size", d => fontSizeScale(d.size) + "px")
+            .style("opacity", 0)
+            .text(d => d.title)
+            .attr("role", "link")
+            .attr("tabindex", "0")
+            .attr("aria-label", d => d.title + "：" + d.desc)
+            .attr("data-file", d => d.file);
+
+        enter.merge(tags)
+            .classed("active", d => d.file === state.selectedFile)
+            .transition().duration(300)
+            .style("opacity", 1)
+            .style("font-size", d => fontSizeScale(d.size) + "px");
+
+        // 事件绑定
+        enter.merge(tags)
+            .on("click", (event, d) => {
+                event.preventDefault();
+                handleTagClick(d);
+            })
+            .on("mouseenter", (event, d) => {
+                showTooltip(event, d);
+            })
+            .on("mousemove", (event) => {
+                positionTooltip(event);
+            })
+            .on("mouseleave", () => {
+                hideTooltip();
+            })
+            .on("keydown", (event, d) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    handleTagClick(d);
+                }
+            });
+
+        // 更新统计
+        d3.select("#stat-shown").text(data.length);
+        d3.select("#stat-total").text(EMBEDDED_DATA.length);
+    }
+
+    function showTooltip(event, d) {
+        const cat = CATEGORY_CONFIG[d.category] || {label: d.category};
+        tooltip.html(
+            '<div class="tt-title">' + d.title + '</div>' +
+            '<div class="tt-desc">' + d.desc + '</div>' +
+            '<div class="tt-meta">分类：' + cat.label + ' · 维度数：' + d.size + ' · 标签：' + d.tags.join("、") + '</div>'
+        );
+        tooltip.style("opacity", 1).attr("aria-hidden", "false");
+        positionTooltip(event);
+    }
+
+    function positionTooltip(event) {
+        const tt = document.getElementById("tooltip");
+        const rect = tt.getBoundingClientRect();
+        let x = event.clientX + 14;
+        let y = event.clientY + 14;
+        if (x + rect.width > window.innerWidth) x = event.clientX - rect.width - 14;
+        if (y + rect.height > window.innerHeight) y = event.clientY - rect.height - 14;
+        tooltip.style("left", x + "px").style("top", y + "px");
+    }
+
+    function hideTooltip() {
+        tooltip.style("opacity", 0).attr("aria-hidden", "true");
+    }
+
+    // ============================================================
+    // 标签点击：跳转 + 智能推荐
+    // ============================================================
+    function handleTagClick(d) {
+        state.selectedFile = d.file;
+        renderTagCloud();
+        renderRecommendations(d);
+        // 跳转对应页面
+        window.location.href = d.file;
+    }
+
+    // ============================================================
+    // 智能推荐渲染
+    // ============================================================
+    function renderRecommendations(selected) {
+        const grid = d3.select("#rec-grid");
+        const context = d3.select("#rec-context");
+
+        let recs;
+        if (selected) {
+            // 同分类的其他页面，按 size 降序取 5 个
+            recs = EMBEDDED_DATA
+                .filter(d => d.category === selected.category && d.file !== selected.file)
+                .sort((a, b) => b.size - a.size)
+                .slice(0, 5);
+            const cat = CATEGORY_CONFIG[selected.category] || {label: selected.category};
+            context.html('当前显示：与 <b>' + selected.title + '</b> 同分类（' + cat.label + '）的相关推荐');
+        } else {
+            // 初始：size 最大的 5 个
+            recs = EMBEDDED_DATA
+                .slice()
+                .sort((a, b) => b.size - a.size)
+                .slice(0, 5);
+            context.html('当前显示：<b>热门推荐</b>（数据维度数最大的 5 个页面）');
+        }
+
+        grid.selectAll(".rec-card").remove();
+
+        if (recs.length === 0) {
+            grid.append("div").attr("class", "rec-empty").text("暂无相关推荐");
+            return;
+        }
+
+        const cards = grid.selectAll(".rec-card")
+            .data(recs)
+            .enter()
+            .append("a")
+            .attr("class", d => "rec-card")
+            .attr("href", d => d.file)
+            .attr("aria-label", d => "推荐页面：" + d.title);
+
+        cards.append("div").attr("class", "rc-title").text(d => d.title);
+        cards.append("div").attr("class", "rc-desc").text(d => d.desc);
+        cards.append("div").attr("class", "rc-meta").html(d => {
+            const cat = CATEGORY_CONFIG[d.category] || {label: d.category};
+            return '<span>' + cat.label + '</span><span class="rc-size">维度 ' + d.size + '</span>';
+        });
+    }
+
+    // ============================================================
+    // 分类筛选 Tabs
+    // ============================================================
+    function setupTabs() {
+        d3.selectAll(".tab-btn").on("click", function() {
+            const cat = this.getAttribute("data-cat");
+            state.activeCategory = cat;
+            d3.selectAll(".tab-btn").attr("aria-pressed", "false");
+            this.setAttribute("aria-pressed", "true");
+            renderTagCloud();
+        });
+
+        // 初始化计数
+        const counts = {};
+        EMBEDDED_DATA.forEach(d => { counts[d.category] = (counts[d.category]||0) + 1; });
+        d3.select("#cnt-all").text("(" + EMBEDDED_DATA.length + ")");
+        Object.keys(CATEGORY_CONFIG).forEach(cat => {
+            d3.select("#cnt-" + cat).text("(" + (counts[cat]||0) + ")");
+        });
+    }
+
+    // ============================================================
+    // 搜索框
+    // ============================================================
+    function setupSearch() {
+        const input = document.getElementById("search-input");
+        let debounceTimer;
+        input.addEventListener("input", () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                state.searchQuery = input.value.trim();
+                renderTagCloud();
+            }, 200);
+        });
+    }
+
+    // ============================================================
+    // 统计标签总数
+    // ============================================================
+    function countTags() {
+        const tagSet = new Set();
+        EMBEDDED_DATA.forEach(d => d.tags.forEach(t => tagSet.add(t)));
+        d3.select("#stat-tags").text(tagSet.size);
+    }
+
+    // ============================================================
+    // 键盘导航：左右箭头在标签间移动
+    // ============================================================
+    function setupKeyboardNav() {
+        const cloud = document.getElementById("tag-cloud");
+        cloud.addEventListener("keydown", (e) => {
+            const items = Array.from(cloud.querySelectorAll(".tag-item"));
+            const idx = items.indexOf(document.activeElement);
+            if (idx === -1) return;
+            if (e.key === "ArrowRight" && idx < items.length - 1) {
+                e.preventDefault();
+                items[idx + 1].focus();
+            } else if (e.key === "ArrowLeft" && idx > 0) {
+                e.preventDefault();
+                items[idx - 1].focus();
+            }
+        });
+    }
+
+    // ============================================================
+    // 初始化
+    // ============================================================
+    function init() {
+        setupTabs();
+        setupSearch();
+        countTags();
+        renderTagCloud();
+        renderRecommendations(null);
+        setupKeyboardNav();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+    } else {
+        init();
+    }
+    </script>
+</body>
+</html>
