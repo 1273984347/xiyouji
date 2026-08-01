@@ -4,9 +4,39 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W316），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W317），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.2.69（2026-08-01）：W317 E5 测试体系扩展·修复 A11yHTMLParser 文本收集缺陷（E2-32/E2-39 对 `<a>` 元素静默失效）·53 单元测试全通过
+
+> **W317 E5 测试体系扩展·修复 A11yHTMLParser 文本收集缺陷**
+> - **来源**：用户要求按 V→E→S2 顺序推进·E 方向 E5 测试体系扩展·为 W316 新增 10 条 a11y 规则编写单元测试
+> - **执行**：
+>   - **新增 21 个单元测试**（tests/unit/test_a11y_audit.py）：覆盖 E2-31 至 E2-40 规则的正向/反向/边界情况
+>     - E2-31 页面语言（3 个）：`<html lang="zh-CN">` 通过 / 缺 lang 报 P1 / 无效 BCP 47 报 P2
+>     - E2-32 链接目的（3 个）：描述性链接通过 / 「点击这里」模糊链接报 P2 / aria-label 豁免
+>     - E2-33 多种导航（2 个）：nav+search 双导航通过 / 单一导航报 P2
+>     - E2-34 非文本对比度（2 个）：border ≥3:1 通过 / 浅色 border 报 P2
+>     - E2-35 悬停聚焦内容（2 个）：title 属性 tooltip 通过 / 无关闭机制报 P2
+>     - E2-36 字符快捷键（2 个）：accesskey 豁免通过 / 无关闭机制报 P2
+>     - E2-37 指针手势（2 个）：click 替代通过 / 无单点替代报 P2
+>     - E2-38 指针取消（2 个）：up-event 通过 / 仅 mousedown 报 P2
+>     - E2-39 名称中的标签（2 个）：aria-label 匹配可见文本通过 / 不匹配报 P2
+>     - E2-40 交互动画（2 个）：prefers-reduced-motion 支持 / 缺失报 P2
+>   - **修复 A11yHTMLParser 文本收集缺陷**（scripts/a11y_audit.py）：
+>     - **根因**：`A11yHTMLParser` 仅为 `<button>` 元素收集可见文本（`_button_stack`），`<a>` 元素的 `el.text` 始终为空字符串
+>     - **影响**：E2-32 链接目的规则（check_link_purpose）和 E2-39 名称中的标签规则（check_label_in_name）对 `<a>` 元素静默失效——`if not link_text: continue` 直接跳过所有 `<a>` 链接，规则形同虚设
+>     - **修复**：将 `_button_stack` 泛化为 `_text_stack`，`_TEXT_COLLECT_TAGS = ("button", "a")`，一次修复两条规则
+>     - **验证**：`test_rule_32_link_purpose_vague`（此前 `assert 0 >= 1` 失败）现通过；E2-39 对 `<a>` 元素检测生效
+>   - **测试结果**：53 个 a11y 单元测试全部通过（32 原有 + 21 新增）；完整测试套件 321 passed（18 errors 为 test_narratology_render.py 的 Playwright `browser` fixture 缺失，环境问题与本次改动无关）
+> - **验证**：
+>   - `py -3 -m pytest tests/unit/test_a11y_audit.py -v` → 53 passed in 0.29s
+>   - `py -3 scripts/a11y_audit.py --dir site --quiet` → exit code 0（P0=0）
+>   - 报告重新生成（2026-08-01 17:08:58）：P0=0/P1=23/P2=683/P3=525/合计 1231 findings（与修复前一致·无回归）
+>   - E2-32=0（站点无模糊链接）/ E2-39=7 P3（已有按钮检测·`<a>` 无新增问题）
+> - **状态**：已落地·E3 铁律 6 文档同步
+> - **文件**：scripts/a11y_audit.py（1 处 Edit·解析器泛化）+ tests/unit/test_a11y_audit.py（21 个测试函数新增）+ scripts/output/a11y-report.md（自动生成）
 
 ### v2.2.68（2026-08-01）：W316 E2 a11y 规则扩展至 WCAG 2.2 完整规范·30→40 条规则·新增 10 条覆盖关键缺失 SC
 
