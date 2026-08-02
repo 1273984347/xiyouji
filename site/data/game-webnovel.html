@@ -1096,19 +1096,19 @@
     // 配色映射
     // ============================================================
     const RARITY_COLORS = {
-        UR: "#d4af37", SSR: "#9b59b6", SR: "#3a6b8c", R: "#6B8E5A", N: "#6B6455"
+        UR: "#d4af37", SSR: "#8A6D3B", SR: "#3a6b8c", R: "#6B8E5A", N: "#6B6455"
     };
     const RARITY_ORDER = ["UR", "SSR", "SR", "R", "N"];
     const ELEMENT_COLORS = {
         "金": "#d4af37", "木": "#6B8E5A", "水": "#3a6b8c", "火": "#c8463a",
-        "土": "#C9A063", "雷": "#9b59b6", "风": "#a8c97f", "光": "#f1c40f",
+        "土": "#C9A063", "雷": "#8A6D3B", "风": "#a8c97f", "光": "#C9A063",
         "暗": "#23201A", "心": "#e91e63"
     };
     // 网文流派配色
     const GENRE_COLORS = {
         "赘婿流": "#C9A063", "退队流": "#c8463a", "心声流": "#e91e63",
         "系统流": "#3a6b8c", "重生流": "#6B8E5A", "反派流": "#23201A",
-        "后宫流": "#d97706", "无敌流": "#d4af37", "无限流": "#9b59b6"
+        "后宫流": "#d97706", "无敌流": "#d4af37", "无限流": "#8A6D3B"
     };
     // 战力条形图按稀有度配色
     function rarityColor(r) { return RARITY_COLORS[r] || "#C9A063"; }
@@ -1117,7 +1117,7 @@
     // 网文人气分颜色
     function scoreColor(s) {
         if (s >= 8.5) return "#d4af37";
-        if (s >= 7.5) return "#9b59b6";
+        if (s >= 7.5) return "#8A6D3B";
         if (s >= 6.5) return "#3a6b8c";
         return "#6B6455";
     }

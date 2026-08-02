@@ -148,6 +148,10 @@ h4 { font-size: 18px; font-weight: 500; }
 /* ===== Hero（数据页通用） ===== */
 .hero {
     background: var(--dark);
+    background-image: url('static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
     color: var(--dark-text);
     padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
     position: relative;

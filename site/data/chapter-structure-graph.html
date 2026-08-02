@@ -149,7 +149,7 @@
                 <div class="legend">
                     <div class="legend-item"><span class="legend-swatch" style="background:#fff5e6"></span>弱对偶</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#f4d4b2"></span>中对偶</div>
-                    <div class="legend-item"><span class="legend-swatch" style="background:#e67e22"></span>强对偶</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#C9A063"></span>强对偶</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#8c3a0a"></span>完美对仗</div>
                 </div>
             </div>
@@ -257,9 +257,9 @@
     };
 
     // 配色
-    const COLOR_ACCENT = "#e67e22";
+    const COLOR_ACCENT = "#C9A063";
     const COLOR_ACCENT_2 = "#2c3e50";
-    const COLOR_CLUSTER = ["#e67e22", "#2c3e50", "#6B8E5A", "#8c6e3a", "#3a6b8c", "#c8463a", "#C9A063", "#8c2a2a"];
+    const COLOR_CLUSTER = ["#C9A063", "#2c3e50", "#6B8E5A", "#8c6e3a", "#3a6b8c", "#c8463a", "#C9A063", "#8c2a2a"];
 
     // 渲染 KPI 卡片
     function renderKPI(data) {
@@ -383,7 +383,7 @@
         // 颜色比例
         const colorScale = d3.scaleLinear()
             .domain([15, 50, 75, 100])
-            .range(["#fff5e6", "#f4d4b2", "#e67e22", "#8c3a0a"]);
+            .range(["#fff5e6", "#f4d4b2", "#C9A063", "#8c3a0a"]);
 
         // 单元格
         for (let i = 0; i < 10; i++) {
