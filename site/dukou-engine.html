@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>西游·渡口 — 无我写作引擎（原型）</title>
+<style>
+  :root{
+    --paper:#faf7f2; --ink:#2b2118; --cinnabar:#c8463a; --indigo:#3a6b8c;
+    --umber:#C9A063; --moss:#6B8E5A; --line:#d9cfc0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:"Noto Serif SC","Songti SC",serif;
+    background:var(--paper); color:var(--ink); line-height:1.8;
+  }
+  header{
+    padding:32px 24px 16px; border-bottom:2px solid var(--line);
+    background:linear-gradient(180deg,#f3ece0,#faf7f2);
+  }
+  header h1{margin:0; font-size:26px; color:var(--cinnabar); letter-spacing:2px;}
+  header p{margin:6px 0 0; color:var(--umber); font-size:13px;}
+  main{max-width:760px; margin:0 auto; padding:24px;}
+  .panel{
+    border:1px solid var(--line); border-radius:10px; padding:18px;
+    background:#fffdf9; margin-bottom:20px;
+  }
+  label{display:block; font-size:13px; color:var(--indigo); margin-bottom:8px;}
+  input[type=text]{
+    width:100%; padding:10px 12px; font-size:15px; font-family:inherit;
+    border:1px solid var(--line); border-radius:6px; background:#fff;
+  }
+  .row{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;}
+  button{
+    font-family:inherit; font-size:14px; padding:9px 18px; cursor:pointer;
+    border:1px solid var(--cinnabar); border-radius:6px; color:#fff;
+    background:var(--cinnabar); transition:.15s;
+  }
+  button.ghost{background:#fff; color:var(--indigo); border-color:var(--indigo);}
+  button:hover{opacity:.88;}
+  #out{
+    white-space:pre-wrap; font-size:15px; color:var(--ink);
+    border-left:4px solid var(--moss); padding:4px 0 4px 16px; min-height:120px;
+  }
+  .meta{font-size:12px; color:var(--umber); margin-top:10px;}
+  footer{
+    text-align:center; padding:20px; color:var(--umber); font-size:12px;
+    border-top:1px solid var(--line);
+  }
+  code{background:#f0e9dc; padding:1px 5px; border-radius:4px;}
+  #graphBox svg{background:#fffdf9; border-radius:6px;}
+  #graphBox text{font-family:"Noto Serif SC","Songti SC",serif;}
+  #graphBox .gnode{cursor:pointer; user-select:none;}
+  #graphBox .gnode:hover{opacity:.72;}
+  #graphBox .gnode.fx{font-weight:700;}
+</style>
+<link rel="stylesheet" href="tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+<header>
+  <h1>西游 · 渡口</h1>
+  <p>无我写作引擎（原型）— 输入任意路人 / 器物 / 地名，生成一篇约 300 字"渡口档案"草稿</p>
+</header>
+<main>
+  <div class="panel">
+    <label for="q">渡口入口（路人 / 器物 / 地名）</label>
+    <input id="q" type="text" placeholder="例如：五行山下的牧童、晾经石的裂痕、陈家庄的晒经石…" />
+    <div class="row">
+      <button id="gen">生成渡口档案</button>
+      <button id="rand" class="ghost">随机一个渡口</button>
+      <button id="rag" class="ghost">检索真实语料</button>
+    </div>
+    <div class="meta" id="hint">默认是模板引擎（不调用外部模型）。若本地已启动 RAG 服务（<code>python scripts/rag/rag_server.py</code>），点「检索真实语料」会返回基于 672 篇文档 + W326 图谱的真实检索结果（含可视化关系图）；服务未启动则自动回退到模板引擎。</div>
+  </div>
+
+  <div class="panel">
+    <label>渡口档案（草稿）</label>
+    <div id="out">— 在上方输入，或点"随机一个渡口" —</div>
+  </div>
+
+  <div class="panel" id="graphPanel" style="display:none;">
+    <label>佛法=AI 图谱（W326 · 可视化 · 来自 /graph）</label>
+    <div class="row" style="margin:6px 0 10px;">
+      <span class="meta" style="margin:0;">点击任意节点展开其关联 ·</span>
+      <button id="graphReset" class="ghost" style="font-size:12px;padding:2px 12px;">重置图谱</button>
+    </div>
+    <div id="graphBox"></div>
+  </div>
+</main>
+<footer>佛法=AI · 缘起即算法 · v2.2.86 W334 · 渡口原型 + 本地 RAG（LightRAG 架构轻量落地 · 图谱力导向布局 · 新中式数字雅集换肤）</footer>
+
+<script>
+// ---- 渡口知识库（抽取自项目西游渡·翻面方法论）----
+const SENSORY = [
+  "舌苔的十四层还带着前世的咸",
+  "钯柄的温差氧化层，是这只手留下的唯一年轮",
+  "鳞片不痒了，但裂还在",
+  "风从山坳里拐了个弯，带着铁锈与艾草的气味",
+  "石笋释放压缩的飞剑声波，年轮似的荡开",
+  "莲藕的断面渗出一点清甜的生涩"
+];
+const ROLE = [
+  "他不是主角，他是让主角得以通行的隐变量",
+  "她从不在回目里出现，却在每个难里呼吸",
+  "它是一段被默认值为零、其实不为零的参数",
+  "他们是被模型从训练集直接删除的样本"
+];
+const LINE = [
+  "（见 W321 line 7012 凌云渡：脱胎即 Dropout）",
+  "（见 W323 西游渡元定义：渡口的人=隐变量）",
+  "（见 W324 遗忘者列传：暗数据即先验分布）",
+  "（见 W321 line 1393 紧箍咒：正则项在收敛后归零）"
+];
+const TURN = [
+  "翻一面看：被记为背景的，其实是前提",
+  "身体书写：残差不会被格式化，它是唯一诚实的存储器",
+  "渡口视角：在 loss 之外，还有人被计入了分母",
+  "无我写作：这不是谁的传记，是数据流经此处时的一次驻留"
+];
+const CLOSE = [
+  "他不在乎被记住。他只是让取经的路，成立过一次。",
+  "经书湿了，字淡了，但石头替他记住了那一笔。",
+  "多年以后，有人路过，闻到风里旧年的焦味——那是他。",
+  "模型收敛之后，他仍是一处微小的漂移。"
+];
+
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+
+function generate(raw){
+  const name = (raw||"").trim() || "无名者";
+  const s = pick(SENSORY), r = pick(ROLE), l = pick(LINE),
+        t = pick(TURN), c = pick(CLOSE);
+  const body =
+`【渡口档案】${name}
+
+${name}，${r}。
+
+在取经工程的训练日志里，主流叙事只记录参与前向传播的节点——妖、神、师徒。而${name}属于另一类：被忽略的隐变量。没有他，主要角色的路径不会成立，只是没有人把他的权重写进正文。
+
+${s}。这是身体书写留下的残差——训练结束后仍在微微振动，因为曾经在那里停留得足够长。
+
+${t}。${l}。
+
+${c}`;
+  return body;
+}
+
+const RANDOMS = ["五行山下的牧童","晾经石的裂痕","陈家庄的晒经石","流沙河底的九颗骷髅","钉在门上的桩","通天河岸哭红的眼","火焰山北坡的第七户","狮驼岭空城里的一扇门","金箍棒重量的那根针","桃木拐杖插进的泥"];
+
+document.getElementById('gen').onclick = ()=>{
+  const v = document.getElementById('q').value;
+  document.getElementById('out').textContent = generate(v);
+};
+document.getElementById('rand').onclick = ()=>{
+  const v = RANDOMS[Math.floor(Math.random()*RANDOMS.length)];
+  document.getElementById('q').value = v;
+  document.getElementById('out').textContent = generate(v);
+};
+
+// ---- RAG 桥接：调用本地 scripts/rag/rag_server.py，失败回退模板引擎 ----
+let graphState = { triples: [], seen: new Set(), seed: new Map() };
+let graphRootQuery = null;
+const nodePos = new Map();   // label -> {x,y}，跨重绘缓存，消除点击跳变
+let graphFocus = null;       // 当前焦点节点 label
+async function queryRAG(){
+  const v = document.getElementById('q').value.trim();
+  const out = document.getElementById('out');
+  if(!v){ out.textContent = '请先输入渡口入口（路人 / 器物 / 地名）。'; return; }
+  out.textContent = '检索中……（本地 RAG 服务 http://127.0.0.1:8777）';
+  try{
+    const r = await fetch('http://127.0.0.1:8777/query?q=' + encodeURIComponent(v));
+    if(!r.ok) throw new Error('http '+r.status);
+    const data = await r.json();
+    renderRAG(v, data);
+  }catch(e){
+    document.getElementById('graphPanel').style.display='none';
+    out.textContent = generate(v) + '\n\n〔本地 RAG 服务未启动，已回退到模板引擎。启动：python scripts/rag/rag_server.py〕';
+  }
+}
+function renderRAG(name, data){
+  let s = '【渡口检索档案 · RAG】' + name + '\n\n';
+  if(data.snippets && data.snippets.length){
+    s += '— 语料检索（BM25 · 672 篇 docs）—\n';
+    data.snippets.forEach(x=>{
+      s += '· ' + x.path + '（score ' + x.score + '）\n';
+      if(x.excerpt) s += '  …' + x.excerpt.slice(0,90) + '…\n';
+    });
+  }
+  if(data.graph && data.graph.length){
+    s += '\n— 佛法=AI 图谱（W326 · LightRAG 图谱层）—\n';
+    data.graph.slice(0,4).forEach(t=>{
+      s += '· ' + t.from + ' —' + t.relation + '→ ' + t.to + '\n';
+    });
+  }
+  if(data.draft) s += '\n' + data.draft;
+  document.getElementById('out').textContent = s;
+  graphState = { triples: [], seen: new Set(), seed: new Map() };
+  graphRootQuery = name;
+  nodePos.clear(); graphFocus = null;
+  mergeTriples(data.graph || []);
+  renderGraph();
+}
+
+// ---- 图谱可视化：纯 SVG 力导向简化版，零依赖（不引 D3 / CDN，适配 file://）----
+function shortLabel(s){
+  if(!s) return '?';
+  let x = s;
+  const i = x.indexOf('（'); if(i>0) x = x.slice(0,i);
+  const j = x.indexOf('/'); if(j>0) x = x.slice(0,j);
+  x = x.trim().replace(/^["'「『]/,'').replace(/["'」』]$/,'');
+  return x || s.slice(0,10);
+}
+function xmlEsc(s){ return (s||'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function mergeTriples(triples, parent){
+  (triples||[]).forEach(t=>{
+    const a = shortLabel(t.from), b = shortLabel(t.to);
+    if(!a || !b) return;
+    const key = a + ' ' + t.relation + ' ' + b;
+    if(graphState.seen.has(key)) return;
+    graphState.seen.add(key);
+    graphState.triples.push({a,b,rel:t.relation});
+    if(parent && parent!==a) graphState.seed.set(a, parent);
+    if(parent && parent!==b) graphState.seed.set(b, parent);
+  });
+}
+// 力导向布局：跨重绘缓存节点位置（nodePos），新节点从父节点旁长出，消除点击跳变
+function layoutGraph(ids){
+  const W=760, H=420, cx=W/2, cy=H/2;
+  // 1) 初始化尚未定位的节点
+  let k=0;
+  ids.forEach(id=>{
+    if(nodePos.has(id)) return;
+    const p = graphState.seed.get(id);
+    if(p && nodePos.has(p)){
+      const ang = Math.random()*Math.PI*2;
+      nodePos.set(id, { x: nodePos.get(p).x + Math.cos(ang)*55, y: nodePos.get(p).y + Math.sin(ang)*55 });
+    }else{
+      const idx = nodePos.size + (k++);
+      const a = (Math.PI*2*idx)/Math.max(ids.length,1) - Math.PI/2;
+      const R = Math.min(W,H)/2 - 60;
+      nodePos.set(id, { x: cx + R*Math.cos(a), y: cy + R*Math.sin(a) });
+    }
+  });
+  // 2) 力导向松弛：斥力 + 边弹簧 + 中心引力 + 锚定（维持旧节点稳定，消除点击跳变）
+  const anchor = new Map();
+  ids.forEach(id=>{ const p=nodePos.get(id); anchor.set(id,{x:p.x,y:p.y}); });
+  const iters = ids.length > 60 ? 90 : 160;
+  const ideal = 132;
+  for(let it=0; it<iters; it++){
+    const fx=new Map(), fy=new Map();
+    ids.forEach(id=>{ fx.set(id,0); fy.set(id,0); });
+    for(let i=0;i<ids.length;i++){
+      for(let j=i+1;j<ids.length;j++){
+        const a=nodePos.get(ids[i]), b=nodePos.get(ids[j]);
+        let dx=a.x-b.x, dy=a.y-b.y, d2=dx*dx+dy*dy; if(d2<1) d2=1;
+        const d=Math.sqrt(d2), rep=5200/d2, ux=dx/d, uy=dy/d;
+        fx.set(ids[i], fx.get(ids[i])+rep*ux); fy.set(ids[i], fy.get(ids[i])+rep*uy);
+        fx.set(ids[j], fx.get(ids[j])-rep*ux); fy.set(ids[j], fy.get(ids[j])-rep*uy);
+      }
+    }
+    graphState.triples.forEach(t=>{
+      const a=nodePos.get(t.a), b=nodePos.get(t.b); if(!a||!b) return;
+      let dx=b.x-a.x, dy=b.y-a.y, d=Math.sqrt(dx*dx+dy*dy)||1;
+      const f=(d-ideal)*0.06, ux=dx/d, uy=dy/d;
+      fx.set(t.a, fx.get(t.a)+f*ux); fy.set(t.a, fy.get(t.a)+f*uy);
+      fx.set(t.b, fx.get(t.b)-f*ux); fy.set(t.b, fy.get(t.b)-f*uy);
+    });
+    const cool = 1 - it/iters;
+    ids.forEach(id=>{
+      const p=nodePos.get(id), an=anchor.get(id);
+      fx.set(id, fx.get(id) + (cx-p.x)*0.012 + (an.x-p.x)*0.07);
+      fy.set(id, fy.get(id) + (cy-p.y)*0.012 + (an.y-p.y)*0.07);
+      p.x += Math.max(-16, Math.min(16, fx.get(id)*cool));
+      p.y += Math.max(-16, Math.min(16, fy.get(id)*cool));
+      p.x = Math.max(26, Math.min(W-26, p.x));
+      p.y = Math.max(26, Math.min(H-26, p.y));
+    });
+  }
+  return {W,H};
+}
+function renderGraph(){
+  const box = document.getElementById('graphBox');
+  const panel = document.getElementById('graphPanel');
+  const triples = graphState.triples;
+  if(!triples.length){ panel.style.display='none'; box.innerHTML=''; return; }
+  const deg = new Map();
+  triples.forEach(t=>{
+    deg.set(t.a,(deg.get(t.a)||0)+1); deg.set(t.b,(deg.get(t.b)||0)+1);
+  });
+  const ids=[...deg.keys()];
+  const {W,H} = layoutGraph(ids);
+  const maxDeg=Math.max(...ids.map(id=>deg.get(id)));
+  const minDeg=Math.min(...ids.map(id=>deg.get(id)));
+  const radiusOf = id=>{
+    const d=deg.get(id);
+    if(maxDeg===minDeg) return 7;
+    return 5 + (d-minDeg)/(maxDeg-minDeg)*9;   // 5..14，按度数映射
+  };
+  const focusNbr = new Set();
+  if(graphFocus){ triples.forEach(t=>{ if(t.a===graphFocus) focusNbr.add(t.b); if(t.b===graphFocus) focusNbr.add(t.a); }); }
+  let svg=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:${W}px;">`;
+  svg+=`<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9c6b3f"/></marker></defs>`;
+  triples.forEach(e=>{
+    const p1=nodePos.get(e.a), p2=nodePos.get(e.b); if(!p1||!p2) return;
+    const ra=radiusOf(e.a), rb=radiusOf(e.b);
+    const dx=p2.x-p1.x, dy=p2.y-p1.y, d=Math.sqrt(dx*dx+dy*dy)||1;
+    const ux=dx/d, uy=dy/d;
+    const x1=p1.x+ux*ra, y1=p1.y+uy*ra, x2=p2.x-ux*(rb+5), y2=p2.y-uy*(rb+5);
+    const mx=(x1+x2)/2, my=(y1+y2)/2;
+    const isFocus = graphFocus && (e.a===graphFocus||e.b===graphFocus);
+    svg+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${isFocus?'#c8463a':'#bb8a5f'}" stroke-width="${isFocus?3:1.5}" opacity="${isFocus?0.95:0.6}" marker-end="url(#arr)"/>`;
+    svg+=`<text x="${mx.toFixed(1)}" y="${(my-4).toFixed(1)}" fill="#C9A063" font-size="11" text-anchor="middle">${xmlEsc(e.rel)}</text>`;
+  });
+  ids.forEach(id=>{
+    const p=nodePos.get(id); if(!p) return;
+    const r=radiusOf(id);
+    const isHub=(deg.get(id)===maxDeg&&maxDeg>1);
+    const isFocus=(id===graphFocus);
+    const isNbr=(graphFocus && focusNbr.has(id));
+    const fill=isFocus?'#d4a017':(isHub?'#c8463a':'#3a6b8c');
+    const stroke=isFocus?'#8a5a00':(isNbr?'#d4a017':'#fff');
+    const sw=isFocus?3:(isNbr?2:1.5);
+    const lab=id.length>9?id.slice(0,9)+'…':id;
+    svg+=`<circle class="gnode${isFocus?' fx':''}" data-label="${xmlEsc(id)}" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${r.toFixed(1)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
+    svg+=`<text class="gnode" data-label="${xmlEsc(id)}" x="${p.x.toFixed(1)}" y="${(p.y-r-5).toFixed(1)}" fill="#2b2118" font-size="12" text-anchor="middle">${xmlEsc(lab)}</text>`;
+  });
+  svg+='</svg>';
+  box.innerHTML=svg; panel.style.display='block';
+  box.querySelectorAll('.gnode').forEach(el=>{
+    el.addEventListener('click', ()=>{ const lbl=el.getAttribute('data-label'); graphFocus=lbl; renderGraph(); expandNode(lbl); });
+  });
+}
+async function expandNode(label){
+  if(!label) return;
+  try{
+    const r = await fetch('http://127.0.0.1:8777/graph?q=' + encodeURIComponent(label));
+    if(!r.ok) return;
+    const data = await r.json();
+    if(data.graph && data.graph.length){
+      mergeTriples(data.graph, label);
+      renderGraph();
+    }
+  }catch(e){ /* 服务未启动则忽略点击 */ }
+}
+async function resetGraph(){
+  if(!graphRootQuery) return;
+  graphState = { triples: [], seen: new Set(), seed: new Map() };
+  nodePos.clear(); graphFocus = null;
+  try{
+    const r = await fetch('http://127.0.0.1:8777/graph?q=' + encodeURIComponent(graphRootQuery));
+    const data = await r.json();
+    mergeTriples(data.graph || []);
+    renderGraph();
+  }catch(e){}
+}
+document.getElementById('rag').onclick = queryRAG;
+document.getElementById('graphReset').onclick = resetGraph;
+</script>
+</body>
+</html>

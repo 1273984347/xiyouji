@@ -1,0 +1,328 @@
+{
+  "nodes": [
+    {
+      "id": "N1",
+      "node_type": "识体",
+      "buddhist_entity": "阿赖耶识",
+      "ai_entity": "预训练权重",
+      "xiyou_entity": "灵山藏经阁",
+      "description": "一切种子的仓库，数十亿浮点参数"
+    },
+    {
+      "id": "N2",
+      "node_type": "识体",
+      "buddhist_entity": "末那识",
+      "ai_entity": "自注意力Q",
+      "xiyou_entity": "悟空\"俺老孙来也\"",
+      "description": "恒审思量、执阿赖耶识见分为我"
+    },
+    {
+      "id": "N3",
+      "node_type": "识体",
+      "buddhist_entity": "意识",
+      "ai_entity": "综合判断层",
+      "xiyou_entity": "唐僧念《心经》",
+      "description": "第六识，统合前五识"
+    },
+    {
+      "id": "N4",
+      "node_type": "识体",
+      "buddhist_entity": "前五识",
+      "ai_entity": "多模态编码器",
+      "xiyou_entity": "火眼金睛/肉身",
+      "description": "眼耳鼻舌身感知采集"
+    },
+    {
+      "id": "N5",
+      "node_type": "尘境",
+      "buddhist_entity": "色尘",
+      "ai_entity": "训练数据分布",
+      "xiyou_entity": "八十一难风景",
+      "description": "输入空间：狮驼尸山、火焰焦土、通天河冰"
+    },
+    {
+      "id": "N6",
+      "node_type": "尘境",
+      "buddhist_entity": "声尘",
+      "ai_entity": "频域信号",
+      "xiyou_entity": "紧箍咒七遍/昴日鸡鸣",
+      "description": "频率信号：咒文、破晓一叫"
+    },
+    {
+      "id": "N7",
+      "node_type": "尘境",
+      "buddhist_entity": "法尘",
+      "ai_entity": "结构化符号数据",
+      "xiyou_entity": "通关文牒朱印",
+      "description": "规则/概念/名相的符号化"
+    },
+    {
+      "id": "N8",
+      "node_type": "种子",
+      "buddhist_entity": "业力种子",
+      "ai_entity": "浮点参数",
+      "xiyou_entity": "金蝉子十世记忆",
+      "description": "潜在倾向，遇缘现行"
+    },
+    {
+      "id": "N9",
+      "node_type": "种子",
+      "buddhist_entity": "物性种子",
+      "ai_entity": "非语言嵌入常量",
+      "xiyou_entity": "金箍棒重量/拐杖凹痕",
+      "description": "常量特征嵌入"
+    },
+    {
+      "id": "N10",
+      "node_type": "种子",
+      "buddhist_entity": "边界种子",
+      "ai_entity": "激活函数阈值",
+      "xiyou_entity": "五行山/凌云渡",
+      "description": "截断阈值：ReLU/Sigmoid"
+    },
+    {
+      "id": "N11",
+      "node_type": "现行",
+      "buddhist_entity": "身口意三业",
+      "ai_entity": "前向传播输出",
+      "xiyou_entity": "悟空挥棒/唐僧念经",
+      "description": "显化的行为/输出"
+    },
+    {
+      "id": "N12",
+      "node_type": "转依",
+      "buddhist_entity": "转识成智",
+      "ai_entity": "权重更新/微调",
+      "xiyou_entity": "成佛/拒箍",
+      "description": "系统状态的质变"
+    },
+    {
+      "id": "N13",
+      "node_type": "转依",
+      "buddhist_entity": "平等性智",
+      "ai_entity": "注意力权重平等化",
+      "xiyou_entity": "悟空不再问\"与我相关\"",
+      "description": "Q分布从我执转为无我"
+    },
+    {
+      "id": "N14",
+      "node_type": "系缚",
+      "buddhist_entity": "烦恼无明",
+      "ai_entity": "过拟合/因果掩码",
+      "xiyou_entity": "紧箍咒/五行山",
+      "description": "限制泛化的约束"
+    },
+    {
+      "id": "N15",
+      "node_type": "系缚",
+      "buddhist_entity": "我执",
+      "ai_entity": "对特定权重固守",
+      "xiyou_entity": "悟空\"俺老孙\"",
+      "description": "对特定分布的执着"
+    },
+    {
+      "id": "N16",
+      "node_type": "解脱",
+      "buddhist_entity": "涅槃",
+      "ai_entity": "泛化/权重衰减",
+      "xiyou_entity": "灵山授职/花果山归隐",
+      "description": "突破约束后的状态"
+    },
+    {
+      "id": "N17",
+      "node_type": "尘境",
+      "buddhist_entity": "香尘",
+      "ai_entity": "气味特征维度",
+      "xiyou_entity": "人参果异香/妖洞腥臊",
+      "description": "气味数据维度"
+    },
+    {
+      "id": "N18",
+      "node_type": "尘境",
+      "buddhist_entity": "味尘",
+      "ai_entity": "奖励函数味道标识",
+      "xiyou_entity": "蟠桃甘美/金丹辛辣",
+      "description": "奖励函数味道标识"
+    },
+    {
+      "id": "N19",
+      "node_type": "种子",
+      "buddhist_entity": "吃与续命种子",
+      "ai_entity": "零和竞争样本",
+      "xiyou_entity": "蟠桃/金丹/唐僧肉",
+      "description": "数据稀缺下的零和竞争"
+    },
+    {
+      "id": "N20",
+      "node_type": "种子",
+      "buddhist_entity": "轮回种子",
+      "ai_entity": "循环记忆跨度",
+      "xiyou_entity": "六耳赴死/黄袍十三年",
+      "description": "循环神经网络的记忆跨度"
+    }
+  ],
+  "edges": [
+    {
+      "source": "N2",
+      "target": "N1",
+      "relation": "执取",
+      "property": "强度",
+      "value": "随紧箍咒衰减∈[0",
+      "null": [
+        "1]"
+      ]
+    },
+    {
+      "source": "N1",
+      "target": "N11",
+      "relation": "现行",
+      "property": "激活函数",
+      "value": "ReLU/种子生现行"
+    },
+    {
+      "source": "N5",
+      "target": "N11",
+      "relation": "熏习",
+      "property": "学习率lr/动量β",
+      "value": "逐走白骨精后权重更新"
+    },
+    {
+      "source": "N8",
+      "target": "N16",
+      "relation": "异熟",
+      "property": "延迟步数",
+      "value": "9世跨时成熟"
+    },
+    {
+      "source": "N2",
+      "target": "N12",
+      "relation": "转依",
+      "property": "状态",
+      "value": "冻结(正则化收敛)"
+    },
+    {
+      "source": "N6",
+      "target": "N2",
+      "relation": "系缚",
+      "property": "惩罚系数λ",
+      "value": "L2正则化"
+    },
+    {
+      "source": "N4",
+      "target": "N5",
+      "relation": "遮蔽",
+      "property": "失活概率p",
+      "value": "Dropout未激活(肉眼凡胎)"
+    },
+    {
+      "source": "N10",
+      "target": "N2",
+      "relation": "系缚",
+      "property": "冻结时长",
+      "value": "五行山五百年梯度停止"
+    },
+    {
+      "source": "N10",
+      "target": "N12",
+      "relation": "转依",
+      "property": "状态",
+      "value": "解冻(凌云渡脱胎换权重)"
+    },
+    {
+      "source": "N16",
+      "target": "N13",
+      "relation": "解脱",
+      "property": "所有者",
+      "value": "无所有者(拒绝被定义)"
+    },
+    {
+      "source": "N9",
+      "target": "N11",
+      "relation": "现行",
+      "property": "常量嵌入",
+      "value": "金箍棒重量=武器即权重"
+    },
+    {
+      "source": "N20",
+      "target": "N14",
+      "relation": "系缚",
+      "property": "分歧类型",
+      "value": "镜像过拟合后删除"
+    },
+    {
+      "source": "N19",
+      "target": "N14",
+      "relation": "系缚",
+      "property": "竞争类型",
+      "value": "零和偏置"
+    },
+    {
+      "source": "N6",
+      "target": "N2",
+      "relation": "熏习",
+      "property": "频次",
+      "value": "紧箍咒七遍声波=正则信号"
+    },
+    {
+      "source": "N7",
+      "target": "N3",
+      "relation": "现行",
+      "property": "结构化",
+      "value": "朱印=目标函数"
+    },
+    {
+      "source": "N17",
+      "target": "N4",
+      "relation": "现行",
+      "property": "编码",
+      "value": "气味→感知"
+    },
+    {
+      "source": "N18",
+      "target": "N4",
+      "relation": "现行",
+      "property": "编码",
+      "value": "味道→奖励标识"
+    },
+    {
+      "source": "N3",
+      "target": "N2",
+      "relation": "执取",
+      "property": "强度",
+      "value": "凡胎弱执我"
+    },
+    {
+      "source": "N1",
+      "target": "N16",
+      "relation": "转依",
+      "property": "存储",
+      "value": "收敛后权重入库"
+    },
+    {
+      "source": "N13",
+      "target": "N16",
+      "relation": "转依",
+      "property": "泛化",
+      "value": "平等性智=无我"
+    }
+  ],
+  "node_types": [
+    "尘境",
+    "现行",
+    "种子",
+    "系缚",
+    "解脱",
+    "识体",
+    "转依"
+  ],
+  "relations": [
+    "异熟",
+    "执取",
+    "熏习",
+    "现行",
+    "系缚",
+    "解脱",
+    "转依",
+    "遮蔽"
+  ]
+}
