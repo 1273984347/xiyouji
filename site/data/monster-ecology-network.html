@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
     <title>妖怪生态网络图谱 · 详解西游记</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
     <style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         @font-face {
             font-family: "Noto Serif SC"; src: local("Noto Serif SC"), local("Source Han Serif SC");
             font-display: swap;
@@ -15,37 +19,19 @@
             font-family: "JetBrains Mono"; src: local("JetBrains Mono"), local("Fira Code");
             font-display: swap;
         }
-        :root {
-            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
-            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
-            --accent-3: #C9A063; --accent-4: #6B8E5A; --rebel: #8c2a2a;
-            --water: #3a6b8c; --fire: #c8463a; --mountain: #C9A063; --sky: #6B8E5A;
-            --line: #d9cdb8;
-            --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-            line-height: 1.7; background: var(--bg); color: var(--ink);
-        }
+        
+        
+        
         .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
-        .hero {
-            background: linear-gradient(135deg, #1a1410 0%, #2a2018 40%, #3a2820 70%, #5a3828 100%);
-            color: #f5e9d4; padding: 60px 20px 80px; text-align: center;
-            position: relative; overflow: hidden;
-        }
-        .hero::after {
-            content: ""; position: absolute; inset: 0;
-            background: radial-gradient(circle at 70% 30%, rgba(232,184,133,0.18), transparent 60%);
-            pointer-events: none;
-        }
-        .hero h1 { font-size: 2.2em; margin: 0 0 10px; position: relative; z-index: 1; }
-        .hero .subtitle { color: #e9b885; font-size: 1.1em; position: relative; z-index: 1; }
-        .hero .tagline { margin-top: 12px; font-size: 0.85em; color: rgba(245,233,212,0.65); font-style: italic; position: relative; z-index: 1; }
-        .container { max-width: 1280px; margin: -30px auto 60px; padding: 0 20px; position: relative; z-index: 2; }
-        .breadcrumb { font-size: 0.85em; color: var(--ink-soft); margin-bottom: 12px; }
-        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
-        .breadcrumb a:hover { text-decoration: underline; }
+        
+        
+        
+        
+        
+        
+        
+        
+        
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         .cross-page-nav {
             background: #fff8e7; border: 1px solid var(--line); border-left: 4px solid var(--accent);
@@ -53,15 +39,8 @@
         }
         .cross-page-nav a { color: var(--accent-2); margin-right: 14px; text-decoration: none; }
         .cross-page-nav a:hover { text-decoration: underline; }
-        .kpi-row {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px; margin-bottom: 28px;
-        }
-        .kpi-card {
-            background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
-            padding: 16px; box-shadow: var(--shadow);
-            border-top: 3px solid var(--accent);
-        }
+        
+        
         .kpi-card.water { border-top-color: var(--water); }
         .kpi-card.fire { border-top-color: var(--fire); }
         .kpi-card.mountain { border-top-color: var(--mountain); }
@@ -70,10 +49,7 @@
         .kpi-card .kpi-value { font-size: 1.8em; font-weight: 600; color: var(--ink); font-family: "JetBrains Mono", monospace; }
         .kpi-card .kpi-unit { font-size: 0.8em; color: var(--ink-soft); margin-left: 4px; }
         .kpi-card .kpi-note { font-size: 0.75em; color: var(--ink-soft); margin-top: 4px; }
-        .section {
-            background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
-            padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow);
-        }
+        
         .section h2 {
             font-size: 1.4em; color: var(--accent); margin-bottom: 6px;
             border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px;
@@ -104,26 +80,43 @@
         }
         .node-card h4 { color: var(--accent); margin-bottom: 4px; }
         .node-card .meta { font-size: 0.82em; color: var(--ink-soft); }
-        footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
-        footer a { color: #e9b885; }
+        
+        
         footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
         footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
         @media (max-width: 768px) {
-            .kpi-row { grid-template-columns: repeat(2, 1fr); }
-            .hero h1 { font-size: 1.6em; }
-            .section { padding: 16px; }
+            
+            
+            
         }
     </style>
-<link rel="stylesheet" href="../tokens.css">
-<!-- W334-RESKIN -->
 </head>
 <body>
-    <header class="hero">
-        <h1>妖怪生态网络图谱</h1>
-        <div class="subtitle">W274 · V 方向 · 跨方向整合项目主题 2·妖怪生态学</div>
-        <div class="tagline">与 monster-capability-radar 形成 能力-生态 双维 · 与 monster-hierarchy-network 形成 等级-生态 双轨</div>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
     </header>
-    <div class="container">
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 妖怪生态网络图谱</p>
+        <p class="kicker">数据可视化</p>
+        <h1>妖怪生态网络图谱</h1>
+        <p class="subtitle">W274 · V 方向 · 跨方向整合项目主题 2·妖怪生态学</p>
+        <p class="tagline">与 monster-capability-radar 形成 能力-生态 双维 · 与 monster-hierarchy-network 形成 等级-生态 双轨</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="container">
         <nav class="breadcrumb" aria-label="面包屑">
             <a href="../dashboard.html">数据仪表盘</a>
             <span class="sep">/</span>
@@ -326,28 +319,22 @@
             </div>
         </section>
     </div>
+    </main>
 
-    <footer>
-        <p>详解西游记 · 妖怪生态网络图谱 · W274 · V 方向可视化页面 · 跨方向整合项目主题 2</p>
-        <p>30 妖怪节点 + 42 关系边·基于 W273 妖怪生态学专题四理论家框架（埃尔顿/奥德姆/麦克阿瑟/梅）。</p>
-        <p>
-            <a href="../dashboard.html">← 返回数据仪表盘</a> ·
-            <a href="monster-capability-radar.html">查看妖怪能力雷达 →</a> ·
-            <a href="monster-hierarchy-network.html">查看妖怪等级网络 →</a>
-        </p>
-        <div class="footer-index">
-            正向时间线：CHANGELOG.md v2.2.49 W274 · 反向文件索引：scripts/output/file-index.md W274 · 方向索引：site/data/ · V 方向·跨方向整合项目主题 2
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
         </div>
-        <div class="footer-cross">
-            跨文档链接：
-            <a href="monster-capability-radar.html">monster-capability-radar.html（W233 能力雷达）</a> /
-            <a href="monster-hierarchy-network.html">monster-hierarchy-network.html（妖怪等级）</a> /
-            <a href="monster-victims-network.html">monster-victims-network.html（受害者网络）</a> /
-            <a href="pilgrim-team-dynamic-network.html">pilgrim-team-dynamic-network.html（W270 取经团队动力学）</a>
-        </div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
     </footer>
 
-    <script>
+<script>
     // ============= EMBEDDED_DATA =============
     const EMBEDDED_DATA = {
         meta: {title: "妖怪生态网络图谱", version: "v2.2.49", w_id: "W274", direction: "V", theme: "跨方向整合项目主题 2·妖怪生态学"},
@@ -704,5 +691,7 @@
         });
     })();
     </script>
+</body>
+</html>
 </body>
 </html>

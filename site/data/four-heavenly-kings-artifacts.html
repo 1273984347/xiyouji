@@ -1,59 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>四大天王器物符号图谱 · W135</title>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<style>
-:root {
-  --bg: #faf7f2;
-  --paper: #f5ede0;
-  --ink: #23201A;
-  --accent: #c8463a;
-  --accent-2: #3a6b8c;
-  --accent-3: #8b7355;
-  --muted: #8a7a6a;
-  --border: #d4c4a8;
-  --card: #fffdf8;
-  --king-growth: #3a6b8c;
-  --king-see: #8b7355;
-  --king-hear: #5a4a6b;
-  --king-hold: #c8463a;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Serif SC', 'Songti SC', serif;
-  background: var(--bg);
-  color: var(--ink);
-  line-height: 1.7;
-  padding: 20px;
-}
-.container { max-width: 1200px; margin: 0 auto; }
-
-/* Hero */
-header.hero {
-  background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
-  color: #f5ede0;
-  padding: 48px 30px;
-  border-radius: 8px;
-  margin-bottom: 30px;
-  text-align: center;
-  border: 1px solid #2a1c14;
-}
-header.hero h1 {
-  font-size: 2.4em;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: #f5ede0;
-  letter-spacing: 4px;
-}
-header.hero .subtitle {
-  font-size: 1.05em;
-  color: #d4c4a8;
-  letter-spacing: 2px;
-  margin-bottom: 8px;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>四大天王器物符号图谱 · W135 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
+    <style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        /* Hero */
+header
+header
+header
 header.hero .meta {
   color: #b8a888;
   font-size: 0.85em;
@@ -61,29 +22,10 @@ header.hero .meta {
 }
 
 /* Section */
-.section {
-  background: var(--card);
-  margin: 30px 0;
-  padding: 28px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-}
-.section-title {
-  font-size: 1.6em;
-  color: var(--accent-2);
-  margin-bottom: 8px;
-  font-weight: 600;
-  border-left: 4px solid var(--accent);
-  padding-left: 12px;
-}
+
 .section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
 .section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
-.section-sub {
-  color: var(--muted);
-  font-size: 0.88em;
-  margin-bottom: 18px;
-  letter-spacing: 1px;
-}
+
 .definition {
   background: #f5efe4;
   padding: 14px 16px;
@@ -94,18 +36,7 @@ header.hero .meta {
 }
 
 /* KPI */
-.kpi-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 14px;
-  margin: 18px 0;
-}
-.kpi-card {
-  background: #f5efe4;
-  padding: 14px;
-  border-radius: 4px;
-  text-align: center;
-}
+
 .kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
 .kpi-label { color: var(--muted); font-size: 0.84em; margin-top: 4px; }
 
@@ -246,39 +177,43 @@ table.matrix td.cell-wound { color: var(--accent); }
 /* Responsive */
 @media (max-width: 768px) {
   .kings-grid { grid-template-columns: repeat(2, 1fr); }
-  header.hero { padding: 32px 18px; }
-  header.hero h1 { font-size: 1.8em; letter-spacing: 2px; }
-  .section { padding: 18px; }
-  .section-title { font-size: 1.3em; }
+  header
+  header
+  
+  
 }
 @media (max-width: 520px) {
   .kings-grid { grid-template-columns: 1fr; }
-  .kpi-row { grid-template-columns: repeat(2, 1fr); }
-  body { padding: 10px; }
-  header.hero h1 { font-size: 1.5em; }
+  
+  
+  header
 }
-
-footer {
-  text-align: center;
-  margin-top: 40px;
-  padding: 20px 0;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 0.84em;
-}
-</style>
-<link rel="stylesheet" href="../tokens.css">
-<!-- W334-RESKIN -->
+    </style>
 </head>
 <body>
-<div class="container">
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
 
-<header class="hero">
-  <h1>四大天王器物符号图谱</h1>
-  <div class="subtitle">FOUR HEAVENLY KINGS · ARTIFACT SEMIOTIC ATLAS</div>
-  <div class="meta">W135 · D 方向 · 器物-象征-伤痕-签名四层符号学解构 · 基于《人物五》四大天王文本</div>
-</header>
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </header>
 
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 四大天王器物符号图谱</p>
+        <p class="kicker">数据可视化</p>
+        <h1>四大天王器物符号图谱</h1>
+        <p class="subtitle">FOUR HEAVENLY KINGS · ARTIFACT SEMIOTIC ATLAS</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
 <div class="kpi-row">
   <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">天王数量</div></div>
   <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">器物符号</div></div>
@@ -373,12 +308,20 @@ footer {
     <li><strong>失败编年史：</strong>八处伤痕按节点分布——金箍棒留 3 处（大闹天宫）、金刚琢留 4 处（围剿青牛精）、时间留 1 处（成佛后）。围剿青牛精是伤痕最密集的节点，因金刚琢「只套不杀」留下的是物证而非伤口。</li>
   </ul>
 </section>
+    </main>
 
-<footer>
-  <p>W135 四大天王器物符号图谱 · D 方向 · 基于《人物五》四大天王文本</p>
-  <p>古典宣纸风配色 · D3.js v7 · F6 skeleton（fetchJson → loadData → main → render×N → cache → resize）</p>
-  <p id="dataSource">数据源：嵌入数据 EMBEDDED_DATA（file:// 模式可直接打开）</p>
-</footer>
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </footer>
 
 </div>
 
@@ -1060,5 +1003,7 @@ window.addEventListener('resize', () => {
 // 启动
 main();
 </script>
+</body>
+</html>
 </body>
 </html>

@@ -3,88 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
     <title>社媒人设 · MBTI 人格图谱 · 详解西游记</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
     <style>
-        :root {
-            --bg: #faf7f2;
-            --paper: #ffffff;
-            --ink: #23201A;
-            --ink-soft: #6B6455;
-            --accent: #c8463a;
-            --accent-soft: #e9b885;
-            --accent-2: #3a6b8c;
-            --accent-3: #C9A063;
-            --accent-4: #6B8E5A;
-            --rebel: #8c2a2a;
-            --line: #d9cdb8;
-            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
-            --shadow-hover: 0 6px 20px rgba(60, 40, 20, 0.16);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background: var(--bg);
-            color: var(--ink);
-            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-            line-height: 1.7;
-            min-height: 100vh;
-        }
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
         /* ===== Hero 区 ===== */
-        .hero {
-            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
-            color: #f5e9d4;
-            padding: 50px 24px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
-            pointer-events: none;
-        }
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-        }
-        .hero .subtitle {
-            font-size: 0.95rem;
-            color: var(--accent-soft);
-            letter-spacing: 0.25em;
-            position: relative;
-            z-index: 1;
-        }
-        .hero .tagline {
-            margin-top: 12px;
-            font-size: 0.85rem;
-            color: rgba(245, 233, 212, 0.65);
-            font-style: italic;
-            position: relative;
-            z-index: 1;
-        }
+        
+        
+        
+        
+        
         /* ===== 容器与面包屑 ===== */
-        .container {
-            max-width: 1280px;
-            margin: -30px auto 60px;
-            padding: 0 24px;
-            position: relative;
-            z-index: 2;
-        }
-        .breadcrumb {
-            margin-bottom: 16px;
-            font-size: 0.88rem;
-            color: var(--ink-soft);
-        }
-        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
-        .breadcrumb a:hover { text-decoration: underline; }
+        
+        
+        
+        
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         .notice {
             background: #fff8ec;
@@ -103,57 +41,16 @@
             color: var(--accent);
         }
         /* ===== KPI 概要栏 ===== */
-        .kpi-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-        @media (max-width: 720px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
-        .kpi-card {
-            background: var(--paper);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            padding: 18px;
-            box-shadow: var(--shadow);
-            border-top: 3px solid var(--accent);
-        }
-        .kpi-card .label {
-            font-size: 0.78rem;
-            color: var(--accent);
-            letter-spacing: 0.15em;
-            margin-bottom: 6px;
-            font-family: "JetBrains Mono", monospace;
-        }
-        .kpi-card .value {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--ink);
-            line-height: 1.2;
-            margin-bottom: 4px;
-        }
-        .kpi-card .desc { font-size: 0.85rem; color: var(--ink-soft); }
+        
+        @media (max-width: 720px) {  }
+        
+        
+        
+        
         /* ===== Section 通用 ===== */
-        .section {
-            background: var(--paper);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            padding: 28px;
-            box-shadow: var(--shadow);
-            margin-bottom: 24px;
-        }
-        .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 6px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid var(--accent);
-            display: inline-block;
-        }
-        .section-sub {
-            font-size: 0.88rem;
-            color: var(--ink-soft);
-            margin-bottom: 20px;
-        }
+        
+        
+        
         /* ===== 社媒人设卡片网格 ===== */
         .profile-grid {
             display: grid;
@@ -493,20 +390,9 @@
         }
         .insight-box li strong { color: var(--accent); font-weight: 600; }
         /* ===== Footer ===== */
-        footer {
-            text-align: center;
-            padding: 24px;
-            color: var(--ink-soft);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--line);
-            margin-top: 40px;
-        }
-        footer a {
-            color: var(--accent-2);
-            text-decoration: none;
-            margin: 0 8px;
-        }
-        footer a:hover { text-decoration: underline; }
+        
+        
+        
         footer .gen-time {
             display: block;
             margin-top: 6px;
@@ -516,30 +402,33 @@
         }
     
 /* W042 a11y: 全局键盘焦点可见性 */
-a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
-    outline: 2px solid #3a6b8c;
-    outline-offset: 2px;
-}
-</style>
-<link rel="stylesheet" href="../tokens.css">
-<!-- W334-RESKIN -->
+    </style>
 </head>
 <body>
-    <header class="hero">
-        <h1>社媒人设 · MBTI 人格图谱</h1>
-        <div class="subtitle">SOCIAL MEDIA &amp; MBTI</div>
-        <div class="tagline">当西游角色开通了社交账号</div>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
     </header>
 
-    <main class="container">
-        <div class="breadcrumb">
-            <a href="../index.html">首页</a>
-            <span class="sep">/</span>
-            <a href="../dashboard.html">数据看板</a>
-            <span class="sep">/</span>
-            <span>社媒人设 · MBTI</span>
-        </div>
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 社媒人设 · MBTI 人格图谱</p>
+        <p class="kicker">W · 社媒人设</p>
+        <h1>社媒人设 · MBTI 人格图谱</h1>
+        <p class="subtitle">SOCIAL MEDIA &amp; MBTI</p>
+        <p class="tagline">当西游角色开通了社交账号</p>
+    </section>
 
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
         <div class="notice" id="dataSource">
             数据源：嵌入版本（如需加载最新数据，请在 <code>site/</code> 目录运行 <code>py -m http.server 8000</code>）
         </div>
@@ -630,16 +519,20 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         </section>
     </main>
 
-    <footer>
-        © 2026 详解西游记项目 ·
-        <a href="../dashboard.html">返回数据看板</a> ·
-        <a href="../index.html">返回首页</a> ·
-        <a href="workplace.html">查看打工人专题</a>
-        <span class="gen-time" id="gen-time"></span>
-        <div style="margin-top:8px;">深入阅读：<a href="../../docs/02-人物深度分析/孙悟空.md">孙悟空深度分析</a></div>
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化 · <a href="../../docs/02-人物深度分析/孙悟空.md">孙悟空深度分析</a></div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
     </footer>
 
-    <script>
+<script>
     // ============================================================
     // 嵌入式 fallback 数据（fetch 失败时使用）
     // 数据源：scripts/output/data/{social_media_profiles,mbti_characters,social_media_summary}.json
@@ -1380,8 +1273,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         renderInsights();
 
         // 生成时间
-        document.getElementById("gen-time").textContent =
-            "数据生成时间：" + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
+        const _gt = document.getElementById("gen-time"); if (_gt) _gt.textContent = "数据生成时间：" + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
     }
 
     // 窗口缩放重绘（仅 D3 图表）
@@ -1398,5 +1290,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
 
     main();
     </script>
+</body>
+</html>
 </body>
 </html>

@@ -1,50 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>西游四维研究网络图谱 · 详解西游记</title>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<noscript><p style="color:#c8392c;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
-<style>
-    :root {
-        --paper: #f5f0e6;
-        --paper-deep: #e9dcc0;
-        --paper-card: #fff8e7;
-        --ink: #2c2416;
-        --ink-soft: #6B6455;
-        --cinnabar: #c8392c;   /* 朱砂·修行心性 */
-        --indigo: #2c5f7c;     /* 靛青·权力政治 */
-        --gold: #c89b3c;       /* 金色·文化记忆 */
-        --jade: #6B8E5A;       /* 松绿·时间叙事 */
-        --line: #c9b896;
-        --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-        font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-        line-height: 1.7;
-        background: var(--paper);
-        color: var(--ink);
-    }
-    .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
-    .hero {
-        background: linear-gradient(135deg, #1a1410 0%, #2a2018 40%, #3a2820 70%, #5a3828 100%);
-        color: #f5e9d4; padding: 48px 20px 64px; text-align: center;
-        position: relative; overflow: hidden;
-    }
-    .hero::after {
-        content: ""; position: absolute; inset: 0;
-        background: radial-gradient(circle at 70% 30%, rgba(200,155,60,0.18), transparent 60%);
-        pointer-events: none;
-    }
-    .hero h1 { font-size: 2.2em; margin: 0 0 10px; position: relative; z-index: 1; letter-spacing: 4px; }
-    .hero .subtitle { color: #e9b885; font-size: 1.05em; position: relative; z-index: 1; }
-    .hero .tagline { margin-top: 12px; font-size: 0.85em; color: rgba(245,233,212,0.65); font-style: italic; position: relative; z-index: 1; }
-    .container { max-width: 1280px; margin: -28px auto 48px; padding: 0 20px; position: relative; z-index: 2; }
-    .breadcrumb { font-size: 0.85em; color: var(--ink-soft); margin-bottom: 12px; }
-    .breadcrumb a { color: var(--indigo); text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>西游四维研究网络图谱 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
+    <style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     .breadcrumb .sep { margin: 0 6px; color: var(--line); }
     .cross-page-nav {
         background: var(--paper-card); border: 1px solid var(--line); border-left: 4px solid var(--cinnabar);
@@ -52,14 +28,8 @@
     }
     .cross-page-nav a { color: var(--indigo); margin-right: 16px; text-decoration: none; }
     .cross-page-nav a:hover { text-decoration: underline; }
-    .kpi-row {
-        display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 12px; margin-bottom: 28px;
-    }
-    .kpi-card {
-        background: var(--paper-card); border: 1px solid var(--line); border-radius: 6px;
-        padding: 14px 16px; box-shadow: var(--shadow); border-top: 3px solid var(--cinnabar);
-    }
+    
+    
     .kpi-card.power { border-top-color: var(--indigo); }
     .kpi-card.culture { border-top-color: var(--gold); }
     .kpi-card.time { border-top-color: var(--jade); }
@@ -67,10 +37,7 @@
     .kpi-card .kpi-label { font-size: 0.82em; color: var(--ink-soft); margin-bottom: 4px; }
     .kpi-card .kpi-value { font-size: 1.7em; font-weight: 700; color: var(--ink); font-family: "JetBrains Mono", monospace; }
     .kpi-card .kpi-note { font-size: 0.75em; color: var(--ink-soft); margin-top: 4px; }
-    .section {
-        background: var(--paper-card); border: 1px solid var(--line); border-radius: 6px;
-        padding: 22px; margin-bottom: 24px; box-shadow: var(--shadow);
-    }
+    
     .section h2 {
         font-size: 1.4em; color: var(--ink); margin-bottom: 6px;
         border-bottom: 2px solid var(--line); padding-bottom: 8px;
@@ -90,25 +57,42 @@
     .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; font-size: 0.85em; justify-content: center; color: var(--ink-soft); }
     .legend-item { display: flex; align-items: center; gap: 6px; }
     .legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
-    footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
-    footer a { color: #e9b885; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    
+    
+    
     footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
     footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
     @media (max-width: 768px) {
-        .kpi-row { grid-template-columns: repeat(2, 1fr); }
-        .hero h1 { font-size: 1.6em; letter-spacing: 2px; }
+        
+        
     }
-</style>
-<link rel="stylesheet" href="../tokens.css">
-<!-- W334-RESKIN -->
+    </style>
 </head>
 <body>
-<header class="hero">
-    <h1>西游四维研究网络图谱</h1>
-    <div class="subtitle">Four-dimensional Research Network · 修行心性 × 权力政治 × 文化记忆 × 时间叙事</div>
-    <div class="tagline">W282 · V 方向 · 跨方向整合项目主题 4 · 西游研究四维度整合图谱</div>
-</header>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 西游四维研究网络图谱</p>
+        <p class="kicker">数据可视化</p>
+        <h1>西游四维研究网络图谱</h1>
+        <p class="subtitle">Four-dimensional Research Network · 修行心性 × 权力政治 × 文化记忆 × 时间叙事</p>
+        <p class="tagline">W282 · V 方向 · 跨方向整合项目主题 4 · 西游研究四维度整合图谱</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
 <div class="container">
     <nav class="breadcrumb" aria-label="面包屑">
         <a href="../index.html">首页</a><span class="sep">›</span>
@@ -203,20 +187,20 @@
         </div>
     </section>
 </div>
+    </main>
 
-<footer>
-    <p>详解西游记 · 西游四维研究网络图谱 · W282 · V 方向可视化页面 · 跨方向整合项目主题 4</p>
-    <p>4 维度 + 12 理论家 + 8 line 号·基于四维研究框架（修行心性 / 权力政治 / 文化记忆 / 时间叙事）整合。</p>
-    <div class="footer-index">
-        正向时间线：CHANGELOG.md v2.2.51 W282 · 反向文件索引：scripts/output/file-index.md W282 · 方向索引：site/data/ · V 方向·跨方向整合项目主题 4
-    </div>
-    <div class="footer-cross">
-        跨页面导航：
-        <a href="../dashboard.html">dashboard.html（仪表盘）</a> /
-        <a href="theological-intervention-network.html">theological-intervention-network.html（W278 神学干预网络）</a> /
-        <a href="monster-ecology-network.html">monster-ecology-network.html（W274 妖怪生态网络）</a>
-    </div>
-</footer>
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </footer>
 
 <script>
 // ============= Embedded Data =============
@@ -824,5 +808,7 @@ const EMBEDDED_DATA = {
     });
 })();
 </script>
+</body>
+</html>
 </body>
 </html>

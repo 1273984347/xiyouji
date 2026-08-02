@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>{{PAGE_TITLE}} · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <!-- 设计系统：令牌层 + 组件层 -->
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
+    <style>
+        /* === 仅放本页图表/数据特有样式 === */
+        /* 导航、hero、卡片、表格、footer 等通用样式已由 system.css 提供 */
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
+
+    <!-- 顶部导航（全站统一） -->
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+            <a href="../en/index.html" class="text-mono text-xs">EN</a>
+        </nav>
+    </header>
+
+    <!-- Hero（每页自定义标题/副标题） -->
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 当前页</p>
+        <p class="kicker">{{CATEGORY_LABEL}}</p>
+        <h1>{{PAGE_TITLE}}</h1>
+        <p class="subtitle">{{SUBTITLE}}</p>
+        <p class="tagline">{{TAGLINE}}</p>
+    </section>
+
+    <!-- 主内容区 -->
+    <main id="main" class="page-wrap">
+        <div class="section">
+            <div class="section-head">
+                <p class="kicker">数据概览</p>
+                <h2>{{SECTION_TITLE}}</h2>
+                <p class="note">{{SECTION_NOTE}}</p>
+            </div>
+
+            <!-- 图表区块示例 -->
+            <div class="chart-block">
+                <h3>图表标题</h3>
+                <p class="chart-sub">图表说明文字</p>
+                <div id="chart-1"><!-- D3.js 渲染目标 --></div>
+            </div>
+
+            <!-- KPI 卡片示例 -->
+            <div class="kpi-grid">
+                <div class="kpi">
+                    <div class="kpi-value">100</div>
+                    <div class="kpi-label">指标名称</div>
+                    <div class="kpi-desc">指标说明</div>
+                </div>
+            </div>
+
+            <!-- 表格示例 -->
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>列名</th><th class="num">数值</th></tr></thead>
+                    <tbody><tr><td>数据</td><td class="num">0</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚（全站统一） -->
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数字人文 × 数据可视化</div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </footer>
+
+    <script>
+    // === 本页 D3.js 图表逻辑 ===
+    // EMBEDDED_DATA fallback 模式（file:// 兼容）
+    const EMBEDDED_DATA = {};
+    async function fetchJson(path, key) {
+        try { const r = await fetch(path); return await r.json(); }
+        catch (e) { console.warn('[INFO] 使用嵌入数据：', e.message); return EMBEDDED_DATA[key]; }
+    }
+    // 空数据保护
+    function guardEmpty(data, container) {
+        if (!data || data.length === 0) {
+            container.append('div').attr('class', 'empty-state')
+                .html('<div class="empty-icon">∅</div><p>暂无数据</p>');
+            return false;
+        }
+        return true;
+    }
+    </script>
+</body>
+</html>
