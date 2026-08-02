@@ -3,86 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
     <title>商业模型 · 详解西游记</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
     <style>
-        :root {
-            --bg: #faf7f2;
-            --paper: #ffffff;
-            --ink: #23201A;
-            --ink-soft: #6B6455;
-            --accent: #c8463a;
-            --accent-soft: #e9b885;
-            --accent-2: #3a6b8c;
-            --accent-3: #C9A063;
-            --accent-4: #6B8E5A;
-            --rebel: #8c2a2a;
-            --line: #d9cdb8;
-            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background: var(--bg);
-            color: var(--ink);
-            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-            line-height: 1.7;
-            min-height: 100vh;
-        }
-        .hero {
-            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
-            color: #f5e9d4;
-            padding: 50px 24px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
-            pointer-events: none;
-        }
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-        }
-        .hero .subtitle {
-            font-size: 0.95rem;
-            color: var(--accent-soft);
-            letter-spacing: 0.25em;
-            position: relative;
-            z-index: 1;
-        }
-        .hero .tagline {
-            margin-top: 12px;
-            font-size: 0.85rem;
-            color: rgba(245, 233, 212, 0.65);
-            font-style: italic;
-            position: relative;
-            z-index: 1;
-        }
-        .container {
-            max-width: 1280px;
-            margin: -30px auto 60px;
-            padding: 0 24px;
-            position: relative;
-            z-index: 2;
-        }
-        .breadcrumb {
-            margin-bottom: 16px;
-            font-size: 0.88rem;
-        }
-        .breadcrumb a {
-            color: var(--accent-2);
-            text-decoration: none;
-        }
-        .breadcrumb a:hover { text-decoration: underline; }
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .breadcrumb .sep {
             color: var(--ink-soft);
             margin: 0 6px;
@@ -99,66 +27,22 @@
             color: var(--accent-3);
             margin-bottom: 16px;
         }
-        .kpi-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-        .kpi-card {
-            background: var(--paper);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            padding: 18px;
-            box-shadow: var(--shadow);
-            border-top: 3px solid var(--accent);
-        }
+        
+        
         .kpi-card.alt-2 { border-top-color: var(--accent-2); }
         .kpi-card.alt-3 { border-top-color: var(--accent-4); }
         .kpi-card.alt-4 { border-top-color: var(--accent-3); }
-        .kpi-card .label {
-            font-size: 0.78rem;
-            color: var(--accent);
-            letter-spacing: 0.15em;
-            margin-bottom: 6px;
-            font-family: "JetBrains Mono", "Consolas", monospace;
-        }
+        
         .kpi-card.alt-2 .label { color: var(--accent-2); }
         .kpi-card.alt-3 .label { color: var(--accent-4); }
         .kpi-card.alt-4 .label { color: var(--accent-3); }
-        .kpi-card .value {
-            font-size: 1.9rem;
-            font-weight: 600;
-            color: var(--ink);
-            line-height: 1.2;
-            margin-bottom: 4px;
-        }
-        .kpi-card .desc {
-            font-size: 0.85rem;
-            color: var(--ink-soft);
-        }
-        .section {
-            background: var(--paper);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            padding: 28px;
-            box-shadow: var(--shadow);
-            margin-bottom: 24px;
-        }
-        .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 6px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid var(--accent);
-            display: inline-block;
-        }
+        
+        
+        
+        
         .section-title.alt-2 { border-bottom-color: var(--accent-2); }
         .section-title.alt-3 { border-bottom-color: var(--accent-4); }
-        .section-sub {
-            font-size: 0.88rem;
-            color: var(--ink-soft);
-            margin-bottom: 20px;
-        }
+        
         .definition {
             background: #fdfaf4;
             border-left: 4px solid var(--accent-soft);
@@ -300,11 +184,7 @@
             color: var(--ink);
             margin-bottom: 8px;
         }
-        .insight-box .ibox-body {
-            font-size: 0.9rem;
-            color: var(--ink);
-            line-height: 1.8;
-        }
+        .insight-box .ibox-
         .insight-box .ibox-body strong { color: var(--accent); font-weight: 600; }
         /* 神经科学 / 现代对应 卡片 */
         .map-grid {
@@ -383,20 +263,9 @@
             line-height: 1.5;
             z-index: 100;
         }
-        .footer {
-            text-align: center;
-            padding: 24px;
-            color: var(--ink-soft);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--line);
-            margin-top: 24px;
-        }
-        .footer a {
-            color: var(--accent-2);
-            text-decoration: none;
-            margin: 0 6px;
-        }
-        .footer a:hover { text-decoration: underline; }
+        .
+        .
+        .
         .source-list {
             margin-top: 8px;
             font-size: 0.78rem;
@@ -489,40 +358,52 @@
         }
         .ipo-badge.failed { background: #f8e3df; color: var(--accent); border: 1px solid var(--accent); }
         @media (max-width: 720px) {
-            .hero h1 { font-size: 1.6rem; }
-            .hero .subtitle { font-size: 0.78rem; letter-spacing: 0.15em; }
-            .section { padding: 18px; }
-            .kpi-card .value { font-size: 1.5rem; }
+            
+            
+            
+            
             .map-grid { grid-template-columns: 1fr; }
             .monster-grid { grid-template-columns: 1fr; }
             table.data-table { font-size: 0.76rem; }
             table.data-table th, table.data-table td { padding: 6px 8px; }
         }
         @media (max-width: 480px) {
-            .hero { padding: 36px 16px 28px; }
-            .hero h1 { font-size: 1.4rem; }
-            .container { padding: 0 12px; }
-            .section { padding: 14px; }
+            
+            
+            
+            
             .chart-block { padding: 12px; }
         }
     
 /* W042 a11y: 全局键盘焦点可见性 */
-a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
-    outline: 2px solid #3a6b8c;
-    outline-offset: 2px;
-}
-</style>
-<link rel="stylesheet" href="../tokens.css">
-<!-- W334-RESKIN -->
+    </style>
 </head>
 <body>
-    <header class="hero">
-        <h1>商业模型 · 西游世界的组织经济学</h1>
-        <div class="subtitle">DATA-DRIVEN BUSINESS MODEL OF XIYOUJI</div>
-        <div class="tagline">从天庭国企到灵山民企，从悟空职业曲线到妖怪创业公司——一部西游商业模型图谱。</div>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
     </header>
 
-    <div class="container">
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 商业模型 · 西游世界的组织经济学</p>
+        <p class="kicker">L · 商业模型</p>
+        <h1>商业模型 · 西游世界的组织经济学</h1>
+        <p class="subtitle">DATA-DRIVEN BUSINESS MODEL OF XIYOUJI</p>
+        <p class="tagline">从天庭国企到灵山民企，从悟空职业曲线到妖怪创业公司——一部西游商业模型图谱。</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="container">
         <nav class="breadcrumb">
             <a href="../dashboard.html">仪表盘</a>
             <span class="sep">/</span>
@@ -839,33 +720,22 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             </div>
         </section>
     </div>
+    </main>
 
-    <footer class="footer">
+    <footer class="site-footer">
         <div>
-            <a href="../dashboard.html">返回仪表盘</a> ·
-            <a href="../index.html">返回首页</a>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化 · <a href="../../docs/07-学以致用/领导力.md">领导力</a></div>
         </div>
-        <div class="source-list">
-            数据源：scripts/AD_商业模型/business_model.py · output/data/organization_comparison.json · wukong_career.json · monster_business.json · business_model_summary.json
-        </div>
-        <div class="source-list" style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7;">
-            <strong style="color:var(--accent-3);">数据结构摘要：</strong><br>
-            · <code>organization_comparison.json</code>：comparison_dimensions[13] · organizations[2] · comparison_matrix{7} · key_insights[6]<br>
-            · <code>wukong_career.json</code>：career_stages[6] · career_stats{8} · career_insights[7]<br>
-            · <code>monster_business.json</code>：monster_companies[5] · ipo_matrix{7} · monster_business_insights[7]<br>
-            · <code>business_model_summary.json</code>：total_concepts=3 · total_data_points=13 · key_findings[5] · business_lessons[5]
-            <strong style="color:var(--accent-3);">渲染机制：</strong>fetch + EMBEDDED fallback · 支持 file:// 双击打开 · D3.js v7 · 古典宣纸风 CSS 变量配色
-        </div>
-        <div class="source-list" style="margin-top:14px;font-size:0.74rem;color:var(--ink-soft);">
-            页面结构：Hero · KPI 卡片 × 4 · 导言 · Section 1（分组条形图 + 13 维度表 + insight-box + 6 洞察） · Section 2（折线图 + 阶梯图 + 6 阶段表 + insight-box + 7 洞察） · Section 3（饼图 + 柱状图 + 5 卡片 + 5 公司表 + insight-box + 7 洞察） · Section 4（综合结论 + 4 发现） · Footer
-        </div>
-        <div class="source-list" style="margin-top:8px;font-size:0.74rem;color:var(--ink-soft);font-style:italic;">
-            © 详解西游记 · L 类「商业模型」可视化 · 共 4 份 JSON 数据源 · 5 张图表 · 3 张表格 · 17 张卡片
-        </div>
-        <div style="margin-top:8px;">深入阅读：<a href="../../docs/07-学以致用/领导力.md">领导力</a></div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
     </footer>
 
-    <!-- ===== EMBEDDED FALLBACK DATA ===== -->
+<!-- ===== EMBEDDED FALLBACK DATA ===== -->
     <!--
         本页所有 JSON 数据均嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback。
         在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据。
@@ -1786,5 +1656,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
 
     main();
     </script>
+</body>
+</html>
 </body>
 </html>

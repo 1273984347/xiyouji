@@ -3,86 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
     <title>命运与轮回 · 详解西游记</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
     <style>
-        :root {
-            --bg: #faf7f2;
-            --paper: #ffffff;
-            --ink: #23201A;
-            --ink-soft: #6B6455;
-            --accent: #c8463a;
-            --accent-soft: #e9b885;
-            --accent-2: #3a6b8c;
-            --accent-3: #C9A063;
-            --accent-4: #6B8E5A;
-            --rebel: #8c2a2a;
-            --line: #d9cdb8;
-            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background: var(--bg);
-            color: var(--ink);
-            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-            line-height: 1.7;
-            min-height: 100vh;
-        }
-        .hero {
-            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
-            color: #f5e9d4;
-            padding: 50px 24px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
-            pointer-events: none;
-        }
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-        }
-        .hero .subtitle {
-            font-size: 0.95rem;
-            color: var(--accent-soft);
-            letter-spacing: 0.25em;
-            position: relative;
-            z-index: 1;
-        }
-        .hero .tagline {
-            margin-top: 12px;
-            font-size: 0.85rem;
-            color: rgba(245, 233, 212, 0.65);
-            font-style: italic;
-            position: relative;
-            z-index: 1;
-        }
-        .container {
-            max-width: 1280px;
-            margin: -30px auto 60px;
-            padding: 0 24px;
-            position: relative;
-            z-index: 2;
-        }
-        .breadcrumb {
-            margin-bottom: 16px;
-            font-size: 0.88rem;
-        }
-        .breadcrumb a {
-            color: var(--accent-2);
-            text-decoration: none;
-        }
-        .breadcrumb a:hover { text-decoration: underline; }
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .breadcrumb .sep {
             color: var(--ink-soft);
             margin: 0 6px;
@@ -99,67 +27,23 @@
             color: var(--accent-3);
             margin-bottom: 16px;
         }
-        .kpi-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-        .kpi-card {
-            background: var(--paper);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            padding: 18px;
-            box-shadow: var(--shadow);
-            border-top: 3px solid var(--accent);
-        }
+        
+        
         .kpi-card.alt-2 { border-top-color: var(--accent-2); }
         .kpi-card.alt-3 { border-top-color: var(--accent-4); }
         .kpi-card.alt-4 { border-top-color: var(--accent-3); }
-        .kpi-card .label {
-            font-size: 0.78rem;
-            color: var(--accent);
-            letter-spacing: 0.15em;
-            margin-bottom: 6px;
-            font-family: "JetBrains Mono", "Consolas", monospace;
-        }
+        
         .kpi-card.alt-2 .label { color: var(--accent-2); }
         .kpi-card.alt-3 .label { color: var(--accent-4); }
         .kpi-card.alt-4 .label { color: var(--accent-3); }
-        .kpi-card .value {
-            font-size: 1.9rem;
-            font-weight: 600;
-            color: var(--ink);
-            line-height: 1.2;
-            margin-bottom: 4px;
-        }
-        .kpi-card .desc {
-            font-size: 0.85rem;
-            color: var(--ink-soft);
-        }
-        .section {
-            background: var(--paper);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            padding: 28px;
-            box-shadow: var(--shadow);
-            margin-bottom: 24px;
-        }
-        .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 6px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid var(--accent);
-            display: inline-block;
-        }
+        
+        
+        
+        
         .section-title.alt-2 { border-bottom-color: var(--accent-2); }
         .section-title.alt-3 { border-bottom-color: var(--accent-4); }
         .section-title.alt-4 { border-bottom-color: var(--accent-3); }
-        .section-sub {
-            font-size: 0.88rem;
-            color: var(--ink-soft);
-            margin-bottom: 20px;
-        }
+        
         .definition {
             background: #fdfaf4;
             border-left: 4px solid var(--accent-soft);
@@ -400,20 +284,9 @@
             line-height: 1.5;
             z-index: 100;
         }
-        .footer {
-            text-align: center;
-            padding: 24px;
-            color: var(--ink-soft);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--line);
-            margin-top: 24px;
-        }
-        .footer a {
-            color: var(--accent-2);
-            text-decoration: none;
-            margin: 0 6px;
-        }
-        .footer a:hover { text-decoration: underline; }
+        .
+        .
+        .
         .source-list {
             margin-top: 8px;
             font-size: 0.78rem;
@@ -474,40 +347,52 @@
         }
         .pyramid-layer:hover { opacity: 0.85; }
         @media (max-width: 720px) {
-            .hero h1 { font-size: 1.6rem; }
-            .hero .subtitle { font-size: 0.78rem; letter-spacing: 0.15em; }
-            .section { padding: 18px; }
-            .kpi-card .value { font-size: 1.5rem; }
+            
+            
+            
+            
             .map-grid { grid-template-columns: 1fr; }
             .char-grid { grid-template-columns: 1fr; }
             table.data-table { font-size: 0.78rem; }
             table.data-table th, table.data-table td { padding: 6px 8px; }
         }
         @media (max-width: 480px) {
-            .hero { padding: 36px 16px 28px; }
-            .hero h1 { font-size: 1.4rem; }
-            .container { padding: 0 12px; }
-            .section { padding: 14px; }
+            
+            
+            
+            
             .chart-block { padding: 12px; }
         }
     
 /* W042 a11y: 全局键盘焦点可见性 */
-a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
-    outline: 2px solid #3a6b8c;
-    outline-offset: 2px;
-}
-</style>
-<link rel="stylesheet" href="../tokens.css">
-<!-- W334-RESKIN -->
+    </style>
 </head>
 <body>
-    <header class="hero">
-        <h1>命运与轮回 · 业力流转的暗规则</h1>
-        <div class="subtitle">DATA-DRIVEN KARMA & REINCARNATION OF XIYOUJI</div>
-        <div class="tagline">业力大于天命·业力大于簿籍——一部可被转化的因果史诗。</div>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
     </header>
 
-    <div class="container">
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 命运与轮回 · 业力流转的暗规则</p>
+        <p class="kicker">K · 命运与轮回</p>
+        <h1>命运与轮回 · 业力流转的暗规则</h1>
+        <p class="subtitle">DATA-DRIVEN KARMA & REINCARNATION OF XIYOUJI</p>
+        <p class="tagline">业力大于天命·业力大于簿籍——一部可被转化的因果史诗。</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="container">
         <nav class="breadcrumb">
             <a href="../dashboard.html">仪表盘</a>
             <span class="sep">/</span>
@@ -810,62 +695,22 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             </div>
         </section>
     </div>
+    </main>
 
-    <footer class="footer">
+    <footer class="site-footer">
         <div>
-            <a href="../dashboard.html">返回仪表盘</a> ·
-            <a href="../index.html">返回首页</a>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化 · <a href="../../docs/04-文化与历史背景/佛道思想.md">佛道思想</a></div>
         </div>
-        <div class="source-list">
-            数据源：scripts/K_命运与轮回/karma_reincarnation.py · output/data/karma_life_death_registry.json · karma_law.json · samsara_wheel.json · karma_reincarnation_summary.json
-        </div>
-        <div class="source-list" style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7;">
-            <strong style="color:var(--accent-3);">数据结构摘要：</strong><br>
-            · <code>karma_life_death_registry.json</code>：cases[8] · registry_stats{6 tampering_types} · registry_insights[6]<br>
-            · <code>karma_law.json</code>：cases[10] × karma_type · karma_stats{10 types · 6 destinations} · karma_insights[7]<br>
-            · <code>samsara_wheel.json</code>：realms[6] × in_pilgrim_team · samsara_stats{good/neutral/evil · escape_paths} · samsara_insights[6]<br>
-            · <code>karma_reincarnation_summary.json</code>：key_findings[4] · key_numbers{9} · thematic_summary{4}
-            <strong style="color:var(--accent-3);">渲染机制：</strong>fetch + EMBEDDED fallback · 支持 file:// 双击打开 · D3.js v7 · 古典宣纸风 CSS 变量配色
-        </div>
-        <div class="source-list" style="margin-top:14px;font-size:0.74rem;color:var(--ink-soft);">
-            页面结构：Hero · KPI 卡片 × 4 · 导言 · Section 1（时间线 + 8 案例表 + 6 类型卡 + 6 洞察） · Section 2（饼图 + 桑基图 + 10 案例表 + 6 去向卡 + 7 洞察） · Section 3（金字塔图 + 6 道表 + 6 卡片 + 6 洞察） · Section 4（综合结论 + 4 发现） · Footer
-        </div>
-        <div class="source-list" style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.8;font-size:0.76rem;">
-            <strong style="color:var(--accent-3);">关键数字（key_numbers）：</strong><br>
-            · <code>life_death_cases</code> = 8（生死簿篡改案例数）<br>
-            · <code>karma_cases</code> = 10（因果报应案例数）<br>
-            · <code>samsara_realms</code> = 6（六道轮回数）<br>
-            · <code>wukong_age_at_death</code> = 342（悟空生死簿原寿数·岁）<br>
-            · <code>li_shimin_extended_years</code> = 20（李世民延寿年数）<br>
-            · <code>wukong_mountain_years</code> = 500（悟空被压五行山年数）<br>
-            · <code>tang_monk_incarnations</code> = 10（唐僧转世数·9 世遭难 + 第 10 世成佛）<br>
-            · <code>wujing_flying_sword_cycle_days</code> = 7（沙僧七日一次飞剑穿胸周期·天）<br>
-            · <code>baoxiang_kingdom_years</code> = 13（黄袍怪与百花羞 13 年姻缘·年）<br>
-            · <code>child_sacrifices_per_year_tongtian_river</code> = 2（通天河灵感大王每年祭祀童男童女·人/年）
-        </div>
-        <div class="source-list" style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.8;font-size:0.76rem;">
-            <strong style="color:var(--accent-3);">主题摘要（thematic_summary）：</strong><br>
-            · <strong>命运观：</strong>业力大于天命·业力大于簿籍·但业力可由修行/收编/归正转化<br>
-            · <strong>轮回观：</strong>六道轮回是基础架构·但"仙佛眷属"与"取经成正果者"可跳出轮回<br>
-            · <strong>报应观：</strong>善有善报·恶有恶报·如是因如是果·但恶业可由赎罪转化<br>
-            · <strong>修行观：</strong>人道是修行的最佳场所·取经是赎罪+历练+成正果的复合机制
-        </div>
-        <div class="source-list" style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.8;font-size:0.76rem;">
-            <strong style="color:var(--accent-3);">跨概念洞察（cross_concept_insight）：</strong><br>
-            命运与轮回揭示西游是"业力可转化"的故事·非"命定不可改"·但转化需付出代价（赎罪·收编·归正·修行）。
-            四种转化途径构成西游业力观的核心机制：<br>
-            · <strong style="color:var(--accent);">赎罪</strong>——悟空 500 年五行山清偿大闹天宫之业<br>
-            · <strong style="color:var(--accent-2);">收编</strong>——红孩儿被观音收为善财童子·恶业转善果<br>
-            · <strong style="color:var(--accent-4);">归正</strong>——牛魔王被哪吒降伏·强力归顺天庭灵山<br>
-            · <strong style="color:var(--accent-3);">修行</strong>——唐僧 9 世遭难 + 第 10 世取经·多世赎罪终成正果
-        </div>
-        <div class="source-list" style="margin-top:8px;font-size:0.74rem;color:var(--ink-soft);font-style:italic;">
-            © 详解西游记 · K 类「命运与轮回」可视化 · 共 4 份 JSON 数据源 · 4 张图表 · 3 张表格 · 24 数据点
-        </div>
-        <div style="margin-top:8px;">深入阅读：<a href="../../docs/04-文化与历史背景/佛道思想.md">佛道思想</a></div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
     </footer>
 
-    <!-- ===== EMBEDDED FALLBACK DATA ===== -->
+<!-- ===== EMBEDDED FALLBACK DATA ===== -->
     <!--
         本页所有 JSON 数据均嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback。
         在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据。
@@ -1728,5 +1573,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
 
     main();
     </script>
+</body>
+</html>
 </body>
 </html>

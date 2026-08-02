@@ -3,147 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
     <title>情感热力图 · 详解西游记</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
     <style>
-        :root {
-            --bg: #faf7f2;
-            --paper: #ffffff;
-            --ink: #23201A;
-            --ink-soft: #6B6455;
-            --accent: #c8463a;
-            --accent-soft: #e9b885;
-            --accent-2: #3a6b8c;
-            --accent-3: #C9A063;
-            --accent-4: #6B8E5A;
-            --rebel: #8c2a2a;
-            --line: #d9cdb8;
-            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background: var(--bg);
-            color: var(--ink);
-            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-            line-height: 1.7;
-            min-height: 100vh;
-        }
-        .hero {
-            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
-            color: #f5e9d4;
-            padding: 56px 24px 44px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
-            pointer-events: none;
-        }
-        .hero h1 {
-            font-size: 2.3rem;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-        .hero .subtitle {
-            font-size: 0.95rem;
-            color: var(--accent-soft);
-            letter-spacing: 0.28em;
-            position: relative;
-            z-index: 1;
-        }
-        .hero .tagline {
-            margin-top: 14px;
-            font-size: 0.86rem;
-            color: rgba(245, 233, 212, 0.68);
-            font-style: italic;
-            position: relative;
-            z-index: 1;
-        }
-        .container {
-            max-width: 1280px;
-            margin: -30px auto 60px;
-            padding: 0 24px;
-            position: relative;
-            z-index: 2;
-        }
-        .breadcrumb {
-            margin-bottom: 16px;
-            font-size: 0.88rem;
-            color: var(--ink-soft);
-        }
-        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
-        .breadcrumb a:hover { text-decoration: underline; }
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .breadcrumb .sep { margin: 0 8px; color: var(--ink-soft); opacity: 0.6; }
 
-        .kpi-row {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(min(180px, 100%), 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-        @media (max-width: 768px) { .kpi-row { grid-template-columns: repeat(2, minmax(min(160px, 100%), 1fr)); } }
-        .kpi-card {
-            background: var(--paper);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            padding: 18px;
-            box-shadow: var(--shadow);
-            border-top: 3px solid var(--accent);
-            min-width: 0;
-        }
+        
+        @media (max-width: 768px) {  }
+        
         .kpi-card:nth-child(2) { border-top-color: var(--accent-2); }
         .kpi-card:nth-child(3) { border-top-color: var(--accent-3); }
         .kpi-card:nth-child(4) { border-top-color: var(--accent-4); }
-        .kpi-card .label {
-            font-size: 0.76rem;
-            color: var(--accent);
-            letter-spacing: 0.16em;
-            margin-bottom: 6px;
-            font-family: "JetBrains Mono", monospace;
-        }
+        
         .kpi-card:nth-child(2) .label { color: var(--accent-2); }
         .kpi-card:nth-child(3) .label { color: var(--accent-3); }
         .kpi-card:nth-child(4) .label { color: var(--accent-4); }
-        .kpi-card .value {
-            font-size: 1.9rem;
-            font-weight: 600;
-            color: var(--ink);
-            line-height: 1.2;
-            margin-bottom: 4px;
-        }
-        .kpi-card .desc { font-size: 0.82rem; color: var(--ink-soft); overflow-wrap: anywhere; }
+        
+        
 
-        .section {
-            background: var(--paper);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            padding: 28px;
-            box-shadow: var(--shadow);
-            margin-bottom: 24px;
-            min-width: 0;
-        }
-        .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 6px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid var(--accent);
-            display: inline-block;
-        }
-        .section-sub {
-            font-size: 0.88rem;
-            color: var(--ink-soft);
-            margin-bottom: 20px;
-            line-height: 1.65;
-            overflow-wrap: anywhere;
-        }
+        
+        
+        
         .section-sub strong { color: var(--accent); font-weight: 600; }
         .section-sub .pos { color: var(--accent-4); font-weight: 600; }
         .section-sub .neu { color: var(--accent-3); font-weight: 600; }
@@ -440,35 +325,38 @@
             color: var(--ink);
         }
 
-        footer.footer {
-            text-align: center;
-            padding: 24px;
-            color: var(--ink-soft);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--line);
-            margin-top: 40px;
-            overflow-wrap: anywhere;
-        }
-        footer.footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
-        footer.footer a:hover { text-decoration: underline; }
+        footer.
+        footer.
+        footer.
     
 /* W042 a11y: 全局键盘焦点可见性 */
-a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible {
-    outline: 2px solid #3a6b8c;
-    outline-offset: 2px;
-}
-</style>
-<link rel="stylesheet" href="../tokens.css">
-<!-- W334-RESKIN -->
+    </style>
 </head>
 <body>
-    <header class="hero">
-        <h1>情感热力图 · 详解西游记</h1>
-        <div class="subtitle">EMOTIONAL HEATMAP</div>
-        <div class="tagline">八位批评家对八十一难的情感波动·一图尽览。</div>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
     </header>
 
-    <main class="container">
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 情感热力图 · 详解西游记</p>
+        <p class="kicker">Q+++ · 情感热力图</p>
+        <h1>情感热力图 · 详解西游记</h1>
+        <p class="subtitle">EMOTIONAL HEATMAP</p>
+        <p class="tagline">八位批评家对八十一难的情感波动·一图尽览。</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
         <nav class="breadcrumb">
             <a href="../dashboard.html">数据看板</a>
             <span class="sep">›</span>
@@ -558,28 +446,20 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         </section>
     </main>
 
-    <footer class="footer">
+    <footer class="site-footer">
         <div>
-            <a href="../dashboard.html">返回数据看板</a> ·
-            <a href="../index.html">返回首页</a>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化 · <a href="criticism-history.html">批评史长卷</a></div>
         </div>
-        <div class="source-list" style="margin-top:14px;">
-            数据源：EMBEDDED 内嵌 · 8 scholars × 20 hardships = 160 reactions · D3.js v7 · 古典宣纸风 CSS 变量配色
-        </div>
-        <div class="source-list" style="margin-top:14px;text-align:left;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7;font-size:0.74rem;color:var(--ink-soft);">
-            <strong style="color:var(--accent-3);">数据结构摘要：</strong><br>
-            · <code>scholars[8]</code>：key · name · era · school · color · motto<br>
-            · <code>hardships[20]</code>：idx · chapter · title · subtitle<br>
-            · <code>reactions[160]</code>：scholar · chapter · hardship · sentiment · intensity · quote（史料/拟作 标注）<br>
-            <strong style="color:var(--accent-3);">渲染机制：</strong>fetch + EMBEDDED fallback · 支持 file:// 双击打开 · hover tooltip + click 高亮联动
-        </div>
-        <div class="source-list" style="margin-top:8px;font-size:0.74rem;color:var(--ink-soft);font-style:italic;">
-            © 详解西游记 · 情感热力图 · 8 位批评家 × 20 回目 · 160 条情感反应
-        </div>
-        <div style="margin-top:8px;">深入阅读：<a href="criticism-history.html">批评史长卷</a> · <a href="81-hardships.html">八十一难深度统计</a></div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
     </footer>
 
-    <script>
+<script>
     /* ==========================================================
        EMBEDDED_FALLBACK 数据（fetch 失败时使用 · file:// 必可用）
        8 位名人 × 20 难 = 160 条情感反应
@@ -1310,5 +1190,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
 
     main();
     </script>
+</body>
+</html>
 </body>
 </html>

@@ -1,96 +1,21 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>地府权力关系图 - 西游数据可视化</title>
-<!-- W151·D 方向第 11 个 NLP 可视化 -->
-<!-- 创建于 2026-07-28（v2.2.7 多方向并行批次第七次落地） -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="/site/static/js/d3-sankey.min.js"></script>
-<noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
-<style>
-:root {
-  /* 古典宣纸风配色（任务规范 27 变量） */
-  --bg: #faf7f2;            /* 1. 宣纸底色 */
-  --paper: #fffdf6;         /* 2. 内嵌纸张 */
-  --ink: #1a1410;           /* 3. 主墨色 */
-  --ink-soft: #3a2820;      /* 4. 次墨色 */
-  --muted: #5a3828;         /* 5. 暗墨褐 */
-  --border: #d9cdb8;        /* 6. 边线米色 */
-  --card: #fffdf8;          /* 7. 卡片底色 */
-  --shadow: 0 1px 3px rgba(58, 40, 32, 0.10), 0 4px 12px rgba(58, 40, 32, 0.06);
-  /* 主辅色 */
-  --accent: #c8463a;        /* 8. 朱砂红（主） */
-  --accent-2: #3a6b8c;      /* 9. 黛青蓝（次） */
-  --accent-3: #c9a961;      /* 10. 古铜金 */
-  /* 地府角色配色 */
-  --r-king: #c8463a;        /* 11. 十殿阎王 · 朱砂 */
-  --r-judge: #c9a961;       /* 12. 崔判官 · 古铜金 */
-  --r-bodhi: #3a6b8c;       /* 13. 地藏王菩萨 · 黛青 */
-  --r-mortal: #6b8e6f;      /* 14. 阳间人 · 竹绿 */
-  --r-mount: #8a5a8a;       /* 15. 谛听坐骑 · 紫罗兰 */
-  --r-buddha: #b8902a;      /* 16. 接引佛祖 · 暗金 */
-  /* 阶段配色 */
-  --stage-rise: #3a6b8c;    /* 17. 崛起阶段 */
-  --stage-conflict: #c8463a;/* 18. 冲突阶段 */
-  --stage-fate: #5a3828;    /* 19. 归宿阶段 */
-  /* 文字 */
-  --text-strong: #1a1410;   /* 20. 标题墨色 */
-  --text-body: #3a2820;     /* 21. 正文墨色 */
-  --text-soft: #5a3828;     /* 22. 弱化墨色 */
-  --text-muted: #8a7c6a;    /* 23. 静音灰褐 */
-  /* 背景 */
-  --bg-soft: #f5f1e8;       /* 24. 弱化背景 */
-  --bg-card: #fffdf8;       /* 25. 卡片背景 */
-  --bg-tooltip: #1a1410;    /* 26. tooltip 背景 */
-  --bg-hero-from: #1a1410;  /* 27. hero 渐变起点 */
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "Microsoft YaHei", serif;
-  background: var(--bg);
-  color: var(--ink);
-  line-height: 1.7;
-  padding: 20px;
-  min-height: 100vh;
-}
-.container { max-width: 1280px; margin: 0 auto; }
-
-/* Hero */
-header.hero {
-  background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
-  color: #f5e9d4;
-  padding: 48px 30px;
-  border-radius: 8px;
-  margin-bottom: 28px;
-  text-align: center;
-  border: 1px solid #2a1c14;
-  position: relative;
-  overflow: hidden;
-}
-header.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 70% 30%, rgba(201, 169, 97, 0.18), transparent 60%);
-  pointer-events: none;
-}
-header.hero h1 {
-  font-size: 2.4em;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: #f5e9d4;
-  letter-spacing: 6px;
-  position: relative; z-index: 1;
-}
-header.hero .subtitle {
-  font-size: 1.02em;
-  color: var(--accent-3);
-  letter-spacing: 3px;
-  margin-bottom: 8px;
-  position: relative; z-index: 1;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>地府权力关系图 - 西游数据可视化 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
+    <style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        /* Hero */
+header
+header
+header
+header
 header.hero .meta {
   color: #b8a888;
   font-size: 0.85em;
@@ -99,31 +24,10 @@ header.hero .meta {
 }
 
 /* Section */
-.section {
-  background: var(--card);
-  margin: 24px 0;
-  padding: 28px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  box-shadow: var(--shadow);
-}
-.section-title {
-  font-size: 1.55em;
-  color: var(--accent);
-  margin-bottom: 8px;
-  font-weight: 600;
-  border-left: 4px solid var(--accent);
-  padding-left: 12px;
-}
+
 .section-title.alt { color: var(--accent-2); border-left-color: var(--accent-2); }
 .section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
-.section-sub {
-  color: var(--muted);
-  font-size: 0.86em;
-  margin-bottom: 16px;
-  letter-spacing: 2px;
-  font-family: "JetBrains Mono", "Consolas", monospace;
-}
+
 .definition {
   background: #fdfaf0;
   padding: 14px 16px;
@@ -137,21 +41,7 @@ header.hero .meta {
 .definition strong { color: var(--ink); }
 
 /* KPI */
-.kpi-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
-  gap: 14px;
-  margin: 18px 0 24px;
-}
-.kpi-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--accent);
-  border-radius: 6px;
-  padding: 14px;
-  text-align: center;
-  box-shadow: var(--shadow);
-}
+
 .kpi-card.alt { border-top-color: var(--accent-2); }
 .kpi-card.alt-2 { border-top-color: var(--accent-3); }
 .kpi-card.alt-3 { border-top-color: var(--r-bodhi); }
@@ -335,27 +225,18 @@ header.hero .meta {
 @media (max-width: 768px) {
   .role-grid { grid-template-columns: repeat(2, 1fr); }
   .dash-grid { grid-template-columns: 1fr; }
-  header.hero { padding: 32px 18px; }
-  header.hero h1 { font-size: 1.8em; letter-spacing: 3px; }
-  .section { padding: 18px; }
-  .section-title { font-size: 1.3em; }
+  header
+  header
+  
+  
 }
 @media (max-width: 520px) {
   .role-grid { grid-template-columns: 1fr; }
-  .kpi-row { grid-template-columns: repeat(2, 1fr); }
-  body { padding: 10px; }
-  header.hero h1 { font-size: 1.5em; letter-spacing: 2px; }
+  
+  
+  header
 }
 
-footer {
-  text-align: center;
-  margin-top: 40px;
-  padding: 20px 0;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 0.84em;
-  line-height: 1.8;
-}
 footer code {
   background: #fdfaf0;
   padding: 1px 6px;
@@ -363,19 +244,32 @@ footer code {
   font-family: "JetBrains Mono", "Consolas", monospace;
   color: var(--accent);
 }
-</style>
-<link rel="stylesheet" href="../tokens.css">
-<!-- W334-RESKIN -->
+    </style>
 </head>
 <body>
-<div class="container">
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
 
-<header class="hero">
-  <h1>地府权力关系图</h1>
-  <div class="subtitle">UNDERWORLD POWER NETWORK · DIYU HIERARCHY ATLAS</div>
-  <div class="meta">W151 · D 方向第 11 个 NLP 可视化 · 地府体系权力结构与关系网络专题</div>
-</header>
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </header>
 
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 地府权力关系图</p>
+        <p class="kicker">数据可视化</p>
+        <h1>地府权力关系图</h1>
+        <p class="subtitle">UNDERWORLD POWER NETWORK · DIYU HIERARCHY ATLAS</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
 <div class="kpi-row">
   <div class="kpi-card"><div class="kpi-value">10</div><div class="kpi-label">十殿阎王</div></div>
   <div class="kpi-card alt"><div class="kpi-value">16</div><div class="kpi-label">地府核心角色</div></div>
@@ -495,12 +389,20 @@ footer code {
     <li><strong>地府事件集中于首尾两段：</strong>7 个关键事件中，5 个集中在第3-11回（太宗地府线 + 悟空销名 + 刘全进瓜），2 个分布于第58回与第100回。这种分布揭示：地府在取经叙事中是"起点装置"（确立生死簿规则）与"终局装置"（五圣成真跨越阴阳），中段几乎缺席——地府的戏剧功能是结构性的，而非过程性的。</li>
   </ul>
 </section>
+    </main>
 
-<footer>
-  <p>W151 地府权力关系图 · D 方向第 11 个 NLP 可视化 · 基于 W100/W121/W125/W143 多层 NLP 数据</p>
-  <p>古典宣纸风配色 · D3.js v7 + d3-sankey · F6 skeleton（fetchJson → loadData → main → render×N → cache → resize）</p>
-  <p id="dataSource">数据源：嵌入数据 EMBEDDED_DATA（file:// 模式可直接打开）</p>
-</footer>
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </footer>
 
 </div>
 
@@ -1629,5 +1531,7 @@ window.addEventListener('resize', () => {
 // 启动
 main();
 </script>
+</body>
+</html>
 </body>
 </html>

@@ -1,90 +1,21 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<!-- W175 · 十二维叙事学关系图谱可视化 · D 方向第 14 个 NLP 可视化 · 承接 W168 六感叙事学关系图谱 -->
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>十二维叙事学关系图谱 · W175</title>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="../static/js/d3-sankey.min.js"></script>
-<style>
-:root {
-  /* 古典宣纸风调色板（27 CSS 变量）*/
-  --bg: #f5f0e6;            /* 1 米色背景 */
-  --paper: #efe7d6;         /* 2 宣纸表面 */
-  --ink: #1a1410;           /* 3 深褐主文字 */
-  --accent: #8b4513;        /* 4 鞍棕强调 */
-  --accent-2: #5a3828;      /* 5 深木褐次强调 */
-  --accent-3: #6b4226;      /* 6 古铜辅助 */
-  --muted: #8a7a5a;         /* 7 灰褐次文字 */
-  --border: #d4c5a9;        /* 8 古卷边框 */
-  --card: #fbf6ec;          /* 9 卡片底色 */
-  --hero-bg-1: #1a1410;     /* 10 hero 起始 */
-  --hero-bg-2: #3a2820;     /* 11 hero 中段 */
-  --hero-bg-3: #5a3828;     /* 12 hero 终段 */
-  --hero-text: #f5f0e6;     /* 13 hero 文字 */
-  --hero-sub: #d4c5a9;      /* 14 hero 副标题 */
-  --hero-meta: #b8a888;     /* 15 hero meta */
-  --tooltip-bg: rgba(26,20,16,0.95); /* 16 tooltip 背景 */
-  /* 十二维度类别配色（17-21）*/
-  --cat-spacetime: #8B4513;   /* 17 时空类（时/空）鞍棕 */
-  --cat-sense: #CD853F;       /* 18 感官类（听嗅触视味）秘鲁色 */
-  --cat-theory: #5a3828;      /* 19 理论类（文修知）深木褐 */
-  --cat-gender: #C76838;      /* 20 性别类 橙褐 */
-  --cat-postcol: #7a4a2a;     /* 21 后殖民类 深栗 */
-  /* 关联边类型配色（22-24）*/
-  --type-spacetime: #8B4513;  /* 22 时空关联边 */
-  --type-sense: #D2691E;      /* 23 感官关联边 */
-  --type-theory: #5a3828;     /* 24 理论关联边 */
-  /* 表格与矩阵（25-27）*/
-  --table-stripe: #efe7d6;    /* 25 表格斑马纹 */
-  --table-header: #d4c5a9;    /* 26 表头底色 */
-  --matrix-cell: #efe7d6;     /* 27 矩阵单元格底色 */
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Source Han Serif SC', 'Songti SC', serif;
-  background: var(--bg);
-  color: var(--ink);
-  line-height: 1.7;
-  padding: 20px;
-}
-.container { max-width: 1200px; margin: 0 auto; }
-
-/* Hero */
-header.hero {
-  background: linear-gradient(135deg, var(--hero-bg-1) 0%, var(--hero-bg-2) 50%, var(--hero-bg-3) 100%);
-  position: relative;
-  color: var(--hero-text);
-  padding: 52px 30px;
-  border-radius: 8px;
-  margin-bottom: 30px;
-  text-align: center;
-  border: 1px solid #2a1c14;
-  overflow: hidden;
-}
-header.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(212,197,169,0.18), transparent 60%);
-  pointer-events: none;
-}
-header.hero h1 {
-  font-size: 2.4em;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: var(--hero-text);
-  letter-spacing: 4px;
-  position: relative;
-}
-header.hero .subtitle {
-  font-size: 1.05em;
-  color: var(--hero-sub);
-  letter-spacing: 2px;
-  margin-bottom: 8px;
-  position: relative;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>十二维叙事学关系图谱 · W175 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
+    <style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        /* Hero */
+header
+header
+header
+header
 header.hero .meta {
   color: var(--hero-meta);
   font-size: 0.85em;
@@ -93,29 +24,10 @@ header.hero .meta {
 }
 
 /* Section */
-.section {
-  background: var(--card);
-  margin: 30px 0;
-  padding: 28px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-}
-.section-title {
-  font-size: 1.6em;
-  color: var(--accent-2);
-  margin-bottom: 8px;
-  font-weight: 600;
-  border-left: 4px solid var(--accent);
-  padding-left: 12px;
-}
+
 .section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
 .section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
-.section-sub {
-  color: var(--muted);
-  font-size: 0.88em;
-  margin-bottom: 18px;
-  letter-spacing: 1px;
-}
+
 .definition {
   background: var(--paper);
   padding: 14px 16px;
@@ -126,19 +38,7 @@ header.hero .meta {
 }
 
 /* KPI */
-.kpi-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 14px;
-  margin: 18px 0;
-}
-.kpi-card {
-  background: var(--paper);
-  padding: 16px;
-  border-radius: 4px;
-  text-align: center;
-  border-top: 3px solid var(--accent);
-}
+
 .kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
 .kpi-label { color: var(--muted); font-size: 0.84em; margin-top: 4px; }
 
@@ -313,42 +213,46 @@ header.hero .meta {
 /* Responsive */
 @media (max-width: 768px) {
   .dims-grid { grid-template-columns: repeat(2, 1fr); }
-  header.hero { padding: 32px 18px; }
-  header.hero h1 { font-size: 1.8em; letter-spacing: 2px; }
-  .section { padding: 18px; }
-  .section-title { font-size: 1.3em; }
+  header
+  header
+  
+  
   .summary-table { font-size: 0.78em; }
   .summary-table th, .summary-table td { padding: 7px 8px; }
 }
 @media (max-width: 520px) {
   .dims-grid { grid-template-columns: 1fr; }
-  .kpi-row { grid-template-columns: repeat(2, 1fr); }
-  body { padding: 10px; }
-  header.hero h1 { font-size: 1.5em; }
+  
+  
+  header
   .theorist-list { grid-template-columns: 1fr; }
 }
-
-footer {
-  text-align: center;
-  margin-top: 40px;
-  padding: 20px 0;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 0.84em;
-}
-</style>
-<link rel="stylesheet" href="../tokens.css">
-<!-- W334-RESKIN -->
+    </style>
 </head>
 <body>
-<div class="container">
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
 
-<header class="hero">
-  <h1>十二维叙事学关系图谱</h1>
-  <div class="subtitle">NARRATOLOGY 12-DIMENSION NETWORK</div>
-  <div class="meta">W175 · D 方向 · 第 14 个 NLP 可视化 · 整合 W161-W174 十二维叙事学专题 · 承接 W168 六感叙事学关系图谱（七感→十二维扩展）</div>
-</header>
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </header>
 
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 十二维叙事学关系图谱</p>
+        <p class="kicker">数据可视化</p>
+        <h1>十二维叙事学关系图谱</h1>
+        <p class="subtitle">NARRATOLOGY 12-DIMENSION NETWORK</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
 <div class="kpi-row">
   <div class="kpi-card"><div class="kpi-value">12</div><div class="kpi-label">叙事学维度</div></div>
   <div class="kpi-card"><div class="kpi-value">14</div><div class="kpi-label">关联理论家</div></div>
@@ -445,12 +349,20 @@ footer {
     <div id="theorist-list" class="theorist-list"></div>
   </div>
 </section>
+    </main>
 
-<footer>
-  <p>W175 十二维叙事学关系图谱 · D 方向 · 第 14 个 NLP 可视化 · 整合 W161-W174 叙事学专题 · 承接 W168 六感叙事学</p>
-  <p>古典宣纸风配色 · D3.js v7 · F6 skeleton（fetchJson → loadData → main → render×N → cache → resize）</p>
-  <p id="dataSource">数据源：嵌入数据 EMBEDDED_DATA（file:// 模式可直接打开）</p>
-</footer>
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </footer>
 
 </div>
 
@@ -1423,5 +1335,7 @@ window.addEventListener('resize', () => {
 // 启动
 main();
 </script>
+</body>
+</html>
 </body>
 </html>

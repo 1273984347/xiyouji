@@ -3,51 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
     <title>八十一难多维度难度热力图 · 详解西游记</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
     <style>
-        :root {
-            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
-            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
-            --accent-3: #C9A063; --accent-4: #6B8E5A; --rebel: #8c2a2a;
-            --line: #d9cdb8;
-            --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-            line-height: 1.7; background: var(--bg); color: var(--ink);
-        }
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
-        .hero {
-            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
-            color: #f5e9d4; padding: 60px 20px 80px; text-align: center;
-            position: relative; overflow: hidden;
-        }
-        .hero::after {
-            content: ""; position: absolute; inset: 0;
-            background: radial-gradient(circle at 70% 30%, rgba(232,184,133,0.18), transparent 60%);
-            pointer-events: none;
-        }
-        .hero h1 { font-size: 2.2em; margin: 0 0 10px; position: relative; z-index: 1; }
-        .hero .subtitle { color: #e9b885; font-size: 1.1em; position: relative; z-index: 1; }
-        .hero .tagline { margin-top: 12px; font-size: 0.85em; color: rgba(245,233,212,0.65); font-style: italic; position: relative; z-index: 1; }
-        .container { max-width: 1280px; margin: -30px auto 60px; padding: 0 20px; position: relative; z-index: 2; }
-        .breadcrumb { font-size: 0.85em; color: var(--ink-soft); margin-bottom: 16px; }
-        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
-        .breadcrumb a:hover { text-decoration: underline; }
+        
+        
+        
+        
+        
+        
+        
+        
+        
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         .notice {
             background: #fff8e7; border-left: 4px solid var(--accent-soft);
             padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
         }
-        .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px; margin-bottom: 32px; }
-        .kpi-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 20px; box-shadow: var(--shadow); border-top: 3px solid var(--accent); }
+        
+        
         .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
-        .kpi-card .label { color: var(--ink-soft); font-size: 0.9em; margin-top: 4px; }
+        
         .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
-        .section { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 28px; margin-bottom: 28px; box-shadow: var(--shadow); }
+        
         .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
         .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
         .skip-link {
@@ -56,7 +40,7 @@
             border-radius: 0 0 4px 0; transition: top 0.2s;
         }
         .skip-link:focus { top: 0; }
-        a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+        
         .dim-switcher { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
         .dim-btn {
             padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
@@ -99,27 +83,42 @@
         .stat-card { border: 1px solid var(--line); border-radius: 6px; padding: 14px; background: #fffdf8; }
         .stat-card h3 { font-size: 0.98em; margin-bottom: 8px; color: var(--ink); }
         .stat-card svg { width: 100%; height: 220px; display: block; }
-        footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
-        footer a { color: #e9b885; }
-        @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+        
+        
+        @media (prefers-reduced-motion: reduce) {  }
         @media (max-width: 480px) {
-            .hero { padding: 40px 16px 60px; }
-            .hero h1 { font-size: 1.6em; }
-            .section { padding: 18px; }
+            
+            
+            
             .dim-btn { padding: 6px 12px; font-size: 0.82em; }
         }
     </style>
-<link rel="stylesheet" href="../tokens.css">
-<!-- W334-RESKIN -->
 </head>
 <body>
-    <a href="#main-content" class="skip-link">跳到主内容</a>
-    <header class="hero">
-        <h1>八十一难多维度难度热力图</h1>
-        <div class="subtitle">D2A+ · 战斗时长 / 求助次数 / 法宝使用 / 难度等级 四维矩阵深化</div>
-        <div class="tagline">—— 在原难度系数基础上叠加四类难度维度，呈现 81 难的"难法地形图"</div>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
     </header>
-    <main class="container" id="main-content">
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 八十一难多维度难度热力图</p>
+        <p class="kicker">数据可视化</p>
+        <h1>八十一难多维度难度热力图</h1>
+        <p class="subtitle">D2A+ · 战斗时长 / 求助次数 / 法宝使用 / 难度等级 四维矩阵深化</p>
+        <p class="tagline">—— 在原难度系数基础上叠加四类难度维度，呈现 81 难的"难法地形图"</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
         <nav class="breadcrumb" aria-label="面包屑">
             <a href="../index.html">站点首页</a>
             <span class="sep">›</span>
@@ -236,13 +235,21 @@
             </div>
         </section>
     </main>
-    <footer>
-        <p>详解西游记 · 八十一难多维度难度热力图 · D2A+ 可视化页面</p>
-        <p>四维度数据为综合重构（战斗时长 / 求助次数 / 法宝使用 / 难度等级），与原 hardship-heatmap.html 难度系数互补。</p>
-        <p><a href="../dashboard.html">← 返回数据仪表盘</a> · <a href="hardship-heatmap.html">查看原难度系数热力图 →</a> · <a href="81-hardships.html">81 难原始统计 →</a></p>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
     </footer>
 
-    <script>
+<script>
     // EMBEDDED_DATA：81 难多维度数据
     // 字段：n/name/chapter/chNum/score/stage/duration(short/mid/long)/rescueCount(0/1/2/3)/treasure(none/borrow/self)/level(easy/mid/hard/extreme)/monster/rescuer
     const EMBEDDED_DATA = [
@@ -641,5 +648,7 @@
         resizeTimer = setTimeout(renderAll, 200);
     });
     </script>
+</body>
+</html>
 </body>
 </html>
