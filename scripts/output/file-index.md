@@ -8,6 +8,20 @@
 
 ---
 
+
+## W335 全站设计系统迁移（2026-08-03）
+
+| 文件 | 操作 | 说明 |
+|------|------|------|
+| site/system.css | 新建 | 组件设计系统（topnav/hero/card/kpi/chart/table/footer） |
+| site/data/_shell.html | 新建 | 数据页骨架模板 |
+| scripts/w335_migrate_design_system.py | 新建 | 幂等迁移脚本 |
+| site/index.html | 重写 | 594→170 行，通用组件由 system.css 驱动 |
+| site/data/*.html（72 页） | 迁移 | 替换 head/hero/footer，保留 D3 逻辑 |
+| site/data/ 4 特殊页面 | 手动迁移 | 非标准 hero 结构 |
+| 16 页 gen-time 修复 | 修改 | null guard 防止 JS 报错 |
+
+
 ## 项目文件反向索引（按版本倒序，覆盖 site/data/ 可视化页面 + docs/ 文档 + 根目录 6 文件 + 其他）
 
 ### v2.2.86 W334 全站 UI/UX 重设计·新中式·数字雅集（tokens 集中化+首页/看板重写+88 页批量换肤+字体子集化·零新增运行时依赖·A4 计数不变仍 199 篇）
