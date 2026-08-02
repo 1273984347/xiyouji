@@ -8,6 +8,21 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.2.87（2026-08-03）：W335 全站设计系统迁移·故宫×Linear
+
+- **新增 site/system.css**：组件设计系统（~320 行）·topnav（sticky+毛玻璃）/hero（玄墨纯色）/card/kpi/chart-block/table/badge/btn/site-footer/dark-band/filter-tabs/search-box/empty-state·响应式断点+打印样式
+- **新增 site/data/_shell.html**：数据页骨架模板·展示新系统标准结构
+- **新增 scripts/w335_migrate_design_system.py**：幂等迁移脚本·自动提取页面特有 CSS·重建 head/topnav/hero/footer·跳过已迁移页面
+- **site/index.html 全量重写**：594→170 行·内联 CSS 减 70%·通用组件由 system.css 驱动
+- **72 个数据页批量迁移**：替换 head（tokens+system+页面 CSS）→ 替换 hero（system hero+breadcrumb+kicker）→ 替换 footer（site-footer）→ D3.js 逻辑不动
+- **4 个特殊页面手动迁移**：character-presence-timeline/character-semantic-network/monster-background/theological-intervention-network（非标准 hero 结构）
+- **修复 16 页 gen-time/footer-meta null 引用**：旧 footer 元素被替换后 JS 报 Cannot set properties of null
+- **验证**：Playwright 全量扫描 82 页（78 data + index + dashboard + mobile-index + dukou-engine）·零 JS 错误·topnav/hero/footer 组件全部就位
+- **净效果**：删除 11121 行冗余内联 CSS·新增 5448 行（system.css + 页面特有 CSS）·净减 5673 行
+- **设计语言**：故宫数字馆藏（大留白/发丝线/极小 meta/朱砂单点/宋体标题）× Linear（sticky 导航/卡片密度/功能性 hover/快速扫描层级）
+- **未迁移**：site/data/dashboard.html（死代码·无页面链接·独立暗色模式系统）
+- **A4 主题专题计数不变（仍 199 篇）**·本 W 为纯前端工程化·未新增 docs 篇目
+
 ### v2.2.86（2026-08-02）：W334 全站 UI/UX 重设计·新中式·数字雅集（tokens 集中化 + 首页/看板全量重写 + 88 页批量换肤 + 字体子集化管线·零新增运行时依赖·file:// 全兼容）
 
 > **W334 全站 UI/UX 重设计·新中式·数字雅集**
