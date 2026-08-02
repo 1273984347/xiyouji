@@ -1,0 +1,786 @@
+{
+  "tiers": [
+    {
+      "key": "lone",
+      "name": "独狼型",
+      "tag": "LONE WOLF",
+      "color": "#8b3a2a",
+      "desc": "单兵作战，无家无援，靠智谋或变身术生存，缺乏跨山头救援。",
+      "examples": "白骨精 · 蜘蛛精 · 九头虫"
+    },
+    {
+      "key": "family",
+      "name": "家族型",
+      "tag": "FAMILY-CLAN",
+      "color": "#c9a961",
+      "desc": "以血缘为纽带，跨山头联防，讲究家产继承与子代培养。",
+      "examples": "牛魔王家族 · 金角银角兄弟"
+    },
+    {
+      "key": "alliance",
+      "name": "联盟型",
+      "tag": "ALLIANCE",
+      "color": "#6b8e6f",
+      "desc": "异姓结盟，按实力排座，共享地盘与情报，但内部脆性高。",
+      "examples": "狮驼岭三魔 · 车迟国三妖"
+    },
+    {
+      "key": "bureau",
+      "name": "官僚型",
+      "tag": "CELESTIAL BUREAUCRAT",
+      "color": "#5a4a6b",
+      "desc": "本身有天上编制，下凡属出差或擅离职守，归宿是归位而非消灭。",
+      "examples": "黄袍怪（奎木狼）· 黄风怪（灵吉坐骑）"
+    }
+  ],
+  "network": {
+    "nodes": [
+      {
+        "id": "白骨精",
+        "type": "独狼",
+        "power": 3,
+        "chapter": 27
+      },
+      {
+        "id": "蜘蛛精",
+        "type": "独狼",
+        "power": 4,
+        "chapter": 72
+      },
+      {
+        "id": "九头虫",
+        "type": "独狼",
+        "power": 7,
+        "chapter": 62
+      },
+      {
+        "id": "牛魔王",
+        "type": "家族",
+        "power": 9,
+        "chapter": 59
+      },
+      {
+        "id": "铁扇公主",
+        "type": "家族",
+        "power": 6,
+        "chapter": 59
+      },
+      {
+        "id": "红孩儿",
+        "type": "家族",
+        "power": 7,
+        "chapter": 40
+      },
+      {
+        "id": "如意真仙",
+        "type": "家族",
+        "power": 5,
+        "chapter": 53
+      },
+      {
+        "id": "金角大王",
+        "type": "家族",
+        "power": 7,
+        "chapter": 32
+      },
+      {
+        "id": "银角大王",
+        "type": "家族",
+        "power": 7,
+        "chapter": 32
+      },
+      {
+        "id": "青狮",
+        "type": "联盟",
+        "power": 8,
+        "chapter": 74
+      },
+      {
+        "id": "白象",
+        "type": "联盟",
+        "power": 8,
+        "chapter": 74
+      },
+      {
+        "id": "大鹏",
+        "type": "联盟",
+        "power": 10,
+        "chapter": 74
+      },
+      {
+        "id": "虎力大仙",
+        "type": "联盟",
+        "power": 5,
+        "chapter": 44
+      },
+      {
+        "id": "鹿力大仙",
+        "type": "联盟",
+        "power": 4,
+        "chapter": 44
+      },
+      {
+        "id": "羊力大仙",
+        "type": "联盟",
+        "power": 4,
+        "chapter": 44
+      },
+      {
+        "id": "黄袍怪",
+        "type": "官僚",
+        "power": 7,
+        "chapter": 28
+      },
+      {
+        "id": "黄风怪",
+        "type": "官僚",
+        "power": 6,
+        "chapter": 20
+      },
+      {
+        "id": "太上老君",
+        "type": "天庭",
+        "power": 10,
+        "chapter": 0
+      },
+      {
+        "id": "观音",
+        "type": "天庭",
+        "power": 10,
+        "chapter": 0
+      },
+      {
+        "id": "灵吉菩萨",
+        "type": "天庭",
+        "power": 8,
+        "chapter": 0
+      },
+      {
+        "id": "如来",
+        "type": "天庭",
+        "power": 10,
+        "chapter": 0
+      },
+      {
+        "id": "文殊菩萨",
+        "type": "天庭",
+        "power": 9,
+        "chapter": 0
+      },
+      {
+        "id": "普贤菩萨",
+        "type": "天庭",
+        "power": 9,
+        "chapter": 0
+      }
+    ],
+    "links": [
+      {
+        "source": "牛魔王",
+        "target": "铁扇公主",
+        "type": "血缘"
+      },
+      {
+        "source": "牛魔王",
+        "target": "红孩儿",
+        "type": "血缘"
+      },
+      {
+        "source": "牛魔王",
+        "target": "如意真仙",
+        "type": "血缘"
+      },
+      {
+        "source": "铁扇公主",
+        "target": "红孩儿",
+        "type": "血缘"
+      },
+      {
+        "source": "金角大王",
+        "target": "银角大王",
+        "type": "血缘"
+      },
+      {
+        "source": "青狮",
+        "target": "白象",
+        "type": "联盟"
+      },
+      {
+        "source": "白象",
+        "target": "大鹏",
+        "type": "联盟"
+      },
+      {
+        "source": "青狮",
+        "target": "大鹏",
+        "type": "联盟"
+      },
+      {
+        "source": "虎力大仙",
+        "target": "鹿力大仙",
+        "type": "联盟"
+      },
+      {
+        "source": "鹿力大仙",
+        "target": "羊力大仙",
+        "type": "联盟"
+      },
+      {
+        "source": "虎力大仙",
+        "target": "羊力大仙",
+        "type": "联盟"
+      },
+      {
+        "source": "牛魔王",
+        "target": "大鹏",
+        "type": "联盟"
+      },
+      {
+        "source": "九头虫",
+        "target": "牛魔王",
+        "type": "联盟"
+      },
+      {
+        "source": "黄袍怪",
+        "target": "太上老君",
+        "type": "统属"
+      },
+      {
+        "source": "黄风怪",
+        "target": "灵吉菩萨",
+        "type": "统属"
+      },
+      {
+        "source": "金角大王",
+        "target": "太上老君",
+        "type": "统属"
+      },
+      {
+        "source": "银角大王",
+        "target": "太上老君",
+        "type": "统属"
+      },
+      {
+        "source": "青狮",
+        "target": "文殊菩萨",
+        "type": "统属"
+      },
+      {
+        "source": "白象",
+        "target": "普贤菩萨",
+        "type": "统属"
+      },
+      {
+        "source": "大鹏",
+        "target": "如来",
+        "type": "统属"
+      },
+      {
+        "source": "红孩儿",
+        "target": "观音",
+        "type": "统属"
+      },
+      {
+        "source": "白骨精",
+        "target": "牛魔王",
+        "type": "敌对"
+      },
+      {
+        "source": "九头虫",
+        "target": "大鹏",
+        "type": "敌对"
+      }
+    ]
+  },
+  "sankey": {
+    "nodes": [
+      {
+        "name": "野生",
+        "cat": 0
+      },
+      {
+        "name": "坐骑",
+        "cat": 0
+      },
+      {
+        "name": "童子",
+        "cat": 0
+      },
+      {
+        "name": "星宿",
+        "cat": 0
+      },
+      {
+        "name": "其他",
+        "cat": 0
+      },
+      {
+        "name": "收编",
+        "cat": 1
+      },
+      {
+        "name": "消灭",
+        "cat": 1
+      },
+      {
+        "name": "逃脱",
+        "cat": 1
+      },
+      {
+        "name": "归位",
+        "cat": 1
+      }
+    ],
+    "links": [
+      {
+        "source": "野生",
+        "target": "消灭",
+        "value": 6
+      },
+      {
+        "source": "野生",
+        "target": "逃脱",
+        "value": 2
+      },
+      {
+        "source": "野生",
+        "target": "收编",
+        "value": 2
+      },
+      {
+        "source": "野生",
+        "target": "归位",
+        "value": 1
+      },
+      {
+        "source": "坐骑",
+        "target": "归位",
+        "value": 2
+      },
+      {
+        "source": "童子",
+        "target": "归位",
+        "value": 2
+      },
+      {
+        "source": "星宿",
+        "target": "归位",
+        "value": 1
+      },
+      {
+        "source": "其他",
+        "target": "归位",
+        "value": 1
+      }
+    ]
+  },
+  "radar": [
+    {
+      "name": "白骨精",
+      "type": "独狼",
+      "武力": 4,
+      "法术": 7,
+      "智谋": 8,
+      "势力": 2,
+      "结局": 2
+    },
+    {
+      "name": "蜘蛛精",
+      "type": "独狼",
+      "武力": 5,
+      "法术": 6,
+      "智谋": 6,
+      "势力": 4,
+      "结局": 3
+    },
+    {
+      "name": "九头虫",
+      "type": "独狼",
+      "武力": 8,
+      "法术": 6,
+      "智谋": 6,
+      "势力": 5,
+      "结局": 5
+    },
+    {
+      "name": "牛魔王",
+      "type": "家族",
+      "武力": 9,
+      "法术": 8,
+      "智谋": 7,
+      "势力": 9,
+      "结局": 6
+    },
+    {
+      "name": "铁扇公主",
+      "type": "家族",
+      "武力": 6,
+      "法术": 9,
+      "智谋": 6,
+      "势力": 5,
+      "结局": 7
+    },
+    {
+      "name": "红孩儿",
+      "type": "家族",
+      "武力": 7,
+      "法术": 8,
+      "智谋": 6,
+      "势力": 4,
+      "结局": 7
+    },
+    {
+      "name": "如意真仙",
+      "type": "家族",
+      "武力": 5,
+      "法术": 5,
+      "智谋": 5,
+      "势力": 3,
+      "结局": 5
+    },
+    {
+      "name": "金角大王",
+      "type": "家族",
+      "武力": 7,
+      "法术": 8,
+      "智谋": 5,
+      "势力": 6,
+      "结局": 5
+    },
+    {
+      "name": "银角大王",
+      "type": "家族",
+      "武力": 7,
+      "法术": 7,
+      "智谋": 4,
+      "势力": 6,
+      "结局": 5
+    },
+    {
+      "name": "青狮",
+      "type": "联盟",
+      "武力": 8,
+      "法术": 6,
+      "智谋": 6,
+      "势力": 8,
+      "结局": 6
+    },
+    {
+      "name": "白象",
+      "type": "联盟",
+      "武力": 8,
+      "法术": 6,
+      "智谋": 5,
+      "势力": 8,
+      "结局": 6
+    },
+    {
+      "name": "大鹏",
+      "type": "联盟",
+      "武力": 9,
+      "法术": 8,
+      "智谋": 9,
+      "势力": 9,
+      "结局": 8
+    },
+    {
+      "name": "虎力大仙",
+      "type": "联盟",
+      "武力": 5,
+      "法术": 6,
+      "智谋": 5,
+      "势力": 5,
+      "结局": 1
+    },
+    {
+      "name": "黄袍怪",
+      "type": "官僚",
+      "武力": 7,
+      "法术": 7,
+      "智谋": 6,
+      "势力": 5,
+      "结局": 6
+    }
+  ],
+  "timeline": [
+    {
+      "order": 1,
+      "chapter": 20,
+      "monster": "黄风怪",
+      "type": "官僚",
+      "stage": "rise",
+      "event": "黄风岭拦路",
+      "desc": "黄毛貂鼠成精，刮三昧神风，悟空初次受挫。"
+    },
+    {
+      "order": 2,
+      "chapter": 21,
+      "monster": "黄风怪",
+      "type": "官僚",
+      "stage": "fate",
+      "event": "灵吉菩萨降伏",
+      "desc": "拿定风丹与飞龙杖，灵吉菩萨收走黄风怪归位。"
+    },
+    {
+      "order": 3,
+      "chapter": 27,
+      "monster": "白骨精",
+      "type": "独狼",
+      "stage": "conflict",
+      "event": "三打白骨精",
+      "desc": "白骨夫人三次变化，被悟空三打。师徒决裂。"
+    },
+    {
+      "order": 4,
+      "chapter": 28,
+      "monster": "黄袍怪",
+      "type": "官僚",
+      "stage": "rise",
+      "event": "宝象国掳公主",
+      "desc": "奎木狼下凡占百花羞公主，宝象国称王。"
+    },
+    {
+      "order": 5,
+      "chapter": 30,
+      "monster": "黄袍怪",
+      "type": "官僚",
+      "stage": "conflict",
+      "event": "黄袍怪变唐僧",
+      "desc": "将唐僧变虎，八戒沙僧不能敌，求悟空出山。"
+    },
+    {
+      "order": 6,
+      "chapter": 31,
+      "monster": "黄袍怪",
+      "type": "官僚",
+      "stage": "fate",
+      "event": "奎木狼归位",
+      "desc": "玉帝召回奎木狼，贬兜率宫烧火，最终归位。"
+    },
+    {
+      "order": 7,
+      "chapter": 32,
+      "monster": "金角大王",
+      "type": "家族",
+      "stage": "rise",
+      "event": "平顶山称王",
+      "desc": "太上老君两童子下凡，持五件法宝占平顶山。"
+    },
+    {
+      "order": 8,
+      "chapter": 35,
+      "monster": "金角大王",
+      "type": "家族",
+      "stage": "fate",
+      "event": "老君收回童子",
+      "desc": "太上老君亲临，金角银角归位为看炉童子。"
+    },
+    {
+      "order": 9,
+      "chapter": 40,
+      "monster": "红孩儿",
+      "type": "家族",
+      "stage": "rise",
+      "event": "火云洞捉三藏",
+      "desc": "牛魔王之子，号圣婴大王，三昧真火烧悟空。"
+    },
+    {
+      "order": 10,
+      "chapter": 42,
+      "monster": "红孩儿",
+      "type": "家族",
+      "stage": "fate",
+      "event": "观音收善财童子",
+      "desc": "观音用金箍咒收红孩儿，做善财童子，归编制。"
+    },
+    {
+      "order": 11,
+      "chapter": 44,
+      "monster": "虎力大仙",
+      "type": "联盟",
+      "stage": "rise",
+      "event": "车迟国三妖执政",
+      "desc": "虎力、鹿力、羊力三妖把持车迟国朝政二十年。"
+    },
+    {
+      "order": 12,
+      "chapter": 46,
+      "monster": "虎力大仙",
+      "type": "联盟",
+      "stage": "fate",
+      "event": "斗法三妖灭",
+      "desc": "比砍头、剖腹、油锅，三妖皆死，无天庭收编。"
+    },
+    {
+      "order": 13,
+      "chapter": 53,
+      "monster": "如意真仙",
+      "type": "家族",
+      "stage": "conflict",
+      "event": "落胎泉索财",
+      "desc": "牛魔王之弟，霸落胎泉，因红孩儿事与悟空结仇。"
+    },
+    {
+      "order": 14,
+      "chapter": 59,
+      "monster": "牛魔王",
+      "type": "家族",
+      "stage": "rise",
+      "event": "翠云山借扇",
+      "desc": "牛魔王与铁扇公主夫妻，悟空三借芭蕉扇。"
+    },
+    {
+      "order": 15,
+      "chapter": 61,
+      "monster": "牛魔王",
+      "type": "家族",
+      "stage": "fate",
+      "event": "四面围剿归伏",
+      "desc": "哪吒、李天王、悟空合力围剿，牛魔王归伏被收编。"
+    },
+    {
+      "order": 16,
+      "chapter": 62,
+      "monster": "九头虫",
+      "type": "独狼",
+      "stage": "rise",
+      "event": "碧波潭盗宝",
+      "desc": "万圣龙王女婿九头虫，盗祭赛国佛宝。"
+    },
+    {
+      "order": 17,
+      "chapter": 63,
+      "monster": "九头虫",
+      "type": "独狼",
+      "stage": "fate",
+      "event": "二郎神助战逃逸",
+      "desc": "二郎神哮天犬咬掉一头，九头虫逃逸北海。"
+    },
+    {
+      "order": 18,
+      "chapter": 72,
+      "monster": "蜘蛛精",
+      "type": "独狼",
+      "stage": "rise",
+      "event": "盘丝洞七女",
+      "desc": "七个蜘蛛成精，盘丝洞捉唐僧，黄花观师兄蜈蚣精。"
+    },
+    {
+      "order": 19,
+      "chapter": 74,
+      "monster": "大鹏",
+      "type": "联盟",
+      "stage": "rise",
+      "event": "狮驼岭三魔结盟",
+      "desc": "青狮、白象、大鹏结盟，狮驼国全军覆没。"
+    },
+    {
+      "order": 20,
+      "chapter": 77,
+      "monster": "大鹏",
+      "type": "联盟",
+      "stage": "fate",
+      "event": "如来亲降大鹏",
+      "desc": "如来佛祖亲临，大鹏为佛舅归位灵山，三魔俱归编制。"
+    }
+  ],
+  "summary": {
+    "byType": [
+      {
+        "type": "独狼",
+        "count": 3,
+        "avgPower": 4.7
+      },
+      {
+        "type": "家族",
+        "count": 6,
+        "avgPower": 6.8
+      },
+      {
+        "type": "联盟",
+        "count": 6,
+        "avgPower": 6.5
+      },
+      {
+        "type": "官僚",
+        "count": 2,
+        "avgPower": 6.5
+      }
+    ],
+    "byOrigin": [
+      {
+        "origin": "野生",
+        "count": 11
+      },
+      {
+        "origin": "坐骑",
+        "count": 2
+      },
+      {
+        "origin": "童子",
+        "count": 2
+      },
+      {
+        "origin": "星宿",
+        "count": 1
+      },
+      {
+        "origin": "其他",
+        "count": 1
+      }
+    ],
+    "byFate": [
+      {
+        "fate": "归位",
+        "count": 8
+      },
+      {
+        "fate": "消灭",
+        "count": 6
+      },
+      {
+        "fate": "收编",
+        "count": 2
+      },
+      {
+        "fate": "逃脱",
+        "count": 2
+      }
+    ],
+    "topPower": [
+      {
+        "name": "大鹏",
+        "power": 10,
+        "type": "联盟"
+      },
+      {
+        "name": "牛魔王",
+        "power": 9,
+        "type": "家族"
+      },
+      {
+        "name": "青狮",
+        "power": 8,
+        "type": "联盟"
+      },
+      {
+        "name": "白象",
+        "power": 8,
+        "type": "联盟"
+      },
+      {
+        "name": "金角大王",
+        "power": 7,
+        "type": "家族"
+      }
+    ],
+    "metrics": {
+      "totalMonsters": 17,
+      "totalLinks": 23,
+      "avgPower": 6.4,
+      "maxSpan": 22,
+      "wildEliminationRate": "55%",
+      "bureaucratSurvivalRate": "100%"
+    }
+  }
+}

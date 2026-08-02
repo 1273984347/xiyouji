@@ -1,0 +1,326 @@
+{
+  "meta": {
+    "title": "明代政治思想对照图谱",
+    "version": "v2.2.39",
+    "w_id": "W233-1",
+    "direction": "V3",
+    "source_doc": "docs/02-人物深度分析/明代历史原型对照专题.md"
+  },
+  "kpi": [
+    {
+      "label": "对照组数",
+      "value": 3,
+      "unit": "组"
+    },
+    {
+      "label": "对照维度",
+      "value": 9,
+      "unit": "维"
+    },
+    {
+      "label": "明代人物",
+      "value": 3,
+      "unit": "位"
+    },
+    {
+      "label": "西游人物",
+      "value": 3,
+      "unit": "位"
+    },
+    {
+      "label": "时间节点",
+      "value": 5,
+      "unit": "个"
+    },
+    {
+      "label": "理论文献",
+      "value": 9,
+      "unit": "篇"
+    }
+  ],
+  "radar": [
+    {
+      "group": "王阳明 vs 唐僧",
+      "axis": "心性论",
+      "value_ming": 9,
+      "value_xy": 8
+    },
+    {
+      "group": "王阳明 vs 唐僧",
+      "axis": "治理术",
+      "value_ming": 3,
+      "value_xy": 7
+    },
+    {
+      "group": "王阳明 vs 唐僧",
+      "axis": "谏诤传统",
+      "value_ming": 5,
+      "value_xy": 4
+    },
+    {
+      "group": "张居正 vs 玉帝",
+      "axis": "心性论",
+      "value_ming": 4,
+      "value_xy": 6
+    },
+    {
+      "group": "张居正 vs 玉帝",
+      "axis": "治理术",
+      "value_ming": 9,
+      "value_xy": 9
+    },
+    {
+      "group": "张居正 vs 玉帝",
+      "axis": "谏诤传统",
+      "value_ming": 3,
+      "value_xy": 2
+    },
+    {
+      "group": "海瑞 vs 悟空",
+      "axis": "心性论",
+      "value_ming": 6,
+      "value_xy": 7
+    },
+    {
+      "group": "海瑞 vs 悟空",
+      "axis": "治理术",
+      "value_ming": 4,
+      "value_xy": 3
+    },
+    {
+      "group": "海瑞 vs 悟空",
+      "axis": "谏诤传统",
+      "value_ming": 9,
+      "value_xy": 9
+    }
+  ],
+  "heatmap": [
+    {
+      "group": "王阳明 vs 唐僧",
+      "dimension": "理论",
+      "score": 9
+    },
+    {
+      "group": "王阳明 vs 唐僧",
+      "dimension": "实践",
+      "score": 8
+    },
+    {
+      "group": "王阳明 vs 唐僧",
+      "dimension": "境界",
+      "score": 9
+    },
+    {
+      "group": "张居正 vs 玉帝",
+      "dimension": "理论",
+      "score": 7
+    },
+    {
+      "group": "张居正 vs 玉帝",
+      "dimension": "实践",
+      "score": 9
+    },
+    {
+      "group": "张居正 vs 玉帝",
+      "dimension": "境界",
+      "score": 6
+    },
+    {
+      "group": "海瑞 vs 悟空",
+      "dimension": "理论",
+      "score": 6
+    },
+    {
+      "group": "海瑞 vs 悟空",
+      "dimension": "实践",
+      "score": 9
+    },
+    {
+      "group": "海瑞 vs 悟空",
+      "dimension": "境界",
+      "score": 8
+    }
+  ],
+  "timeline": [
+    {
+      "year": 1472,
+      "event": "王阳明出生",
+      "figure": "王阳明"
+    },
+    {
+      "year": 1500,
+      "event": "吴承恩出生",
+      "figure": "吴承恩"
+    },
+    {
+      "year": 1514,
+      "event": "海瑞出生",
+      "figure": "海瑞"
+    },
+    {
+      "year": 1525,
+      "event": "张居正出生",
+      "figure": "张居正"
+    },
+    {
+      "year": 1529,
+      "event": "王阳明逝世",
+      "figure": "王阳明"
+    },
+    {
+      "year": 1582,
+      "event": "张居正逝世 / 吴承恩逝世",
+      "figure": "张居正/吴承恩"
+    },
+    {
+      "year": 1587,
+      "event": "海瑞逝世",
+      "figure": "海瑞"
+    },
+    {
+      "year": 1592,
+      "event": "世德堂本《西游记》刊刻",
+      "figure": "世德堂"
+    }
+  ],
+  "sankey": {
+    "nodes": [
+      {
+        "name": "传习录"
+      },
+      {
+        "name": "张文忠公全集"
+      },
+      {
+        "name": "海瑞集"
+      },
+      {
+        "name": "王阳明 vs 唐僧"
+      },
+      {
+        "name": "张居正 vs 玉帝"
+      },
+      {
+        "name": "海瑞 vs 悟空"
+      },
+      {
+        "name": "心性论"
+      },
+      {
+        "name": "治理术"
+      },
+      {
+        "name": "谏诤传统"
+      }
+    ],
+    "links": [
+      {
+        "source": 0,
+        "target": 3,
+        "value": 3
+      },
+      {
+        "source": 1,
+        "target": 4,
+        "value": 3
+      },
+      {
+        "source": 2,
+        "target": 5,
+        "value": 3
+      },
+      {
+        "source": 3,
+        "target": 6,
+        "value": 1
+      },
+      {
+        "source": 3,
+        "target": 7,
+        "value": 1
+      },
+      {
+        "source": 3,
+        "target": 8,
+        "value": 1
+      },
+      {
+        "source": 4,
+        "target": 6,
+        "value": 1
+      },
+      {
+        "source": 4,
+        "target": 7,
+        "value": 1
+      },
+      {
+        "source": 4,
+        "target": 8,
+        "value": 1
+      },
+      {
+        "source": 5,
+        "target": 6,
+        "value": 1
+      },
+      {
+        "source": 5,
+        "target": 7,
+        "value": 1
+      },
+      {
+        "source": 5,
+        "target": 8,
+        "value": 1
+      }
+    ]
+  },
+  "polar": [
+    {
+      "group": "王阳明 vs 唐僧",
+      "axis": "心性论",
+      "value": 9
+    },
+    {
+      "group": "王阳明 vs 唐僧",
+      "axis": "实践论",
+      "value": 8
+    },
+    {
+      "group": "王阳明 vs 唐僧",
+      "axis": "境界论",
+      "value": 9
+    },
+    {
+      "group": "张居正 vs 玉帝",
+      "axis": "治理术",
+      "value": 9
+    },
+    {
+      "group": "张居正 vs 玉帝",
+      "axis": "权力结构",
+      "value": 9
+    },
+    {
+      "group": "张居正 vs 玉帝",
+      "axis": "改革守成",
+      "value": 6
+    },
+    {
+      "group": "海瑞 vs 悟空",
+      "axis": "谏诤传统",
+      "value": 9
+    },
+    {
+      "group": "海瑞 vs 悟空",
+      "axis": "反抗精神",
+      "value": 9
+    },
+    {
+      "group": "海瑞 vs 悟空",
+      "axis": "个人体制",
+      "value": 8
+    }
+  ]
+}

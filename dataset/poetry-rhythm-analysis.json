@@ -1,0 +1,284 @@
+{
+  "meta": {
+    "title": "诗词韵律分析图谱",
+    "version": "v2.2.39",
+    "w_id": "W233-4",
+    "direction": "V3"
+  },
+  "kpi": [
+    {
+      "label": "A6 诗词文档",
+      "value": 7,
+      "unit": "篇"
+    },
+    {
+      "label": "词牌数",
+      "value": 3,
+      "unit": "种"
+    },
+    {
+      "label": "平仄类型",
+      "value": 2,
+      "unit": "类"
+    },
+    {
+      "label": "诗词五层次",
+      "value": 5,
+      "unit": "层"
+    },
+    {
+      "label": "回目覆盖",
+      "value": 100,
+      "unit": "回"
+    }
+  ],
+  "pie": [
+    {
+      "name": "西江月",
+      "value": 1
+    },
+    {
+      "name": "临江仙",
+      "value": 1
+    },
+    {
+      "name": "满庭芳",
+      "value": 1
+    },
+    {
+      "name": "开篇诗",
+      "value": 1
+    },
+    {
+      "name": "回目对联",
+      "value": 100
+    },
+    {
+      "name": "人物赋",
+      "value": 20
+    },
+    {
+      "name": "景物诗",
+      "value": 40
+    }
+  ],
+  "heatmap": [
+    {
+      "poem": "开篇诗",
+      "ping": 60,
+      "ze": 40
+    },
+    {
+      "poem": "回目对联",
+      "ping": 50,
+      "ze": 50
+    },
+    {
+      "poem": "人物赋",
+      "ping": 55,
+      "ze": 45
+    },
+    {
+      "poem": "景物诗",
+      "ping": 65,
+      "ze": 35
+    },
+    {
+      "poem": "西江月",
+      "ping": 70,
+      "ze": 30
+    },
+    {
+      "poem": "临江仙",
+      "ping": 68,
+      "ze": 32
+    },
+    {
+      "poem": "满庭芳",
+      "ping": 72,
+      "ze": 28
+    }
+  ],
+  "timeline": [
+    {
+      "chapter_range": "1-10",
+      "count": 12
+    },
+    {
+      "chapter_range": "11-20",
+      "count": 8
+    },
+    {
+      "chapter_range": "21-30",
+      "count": 10
+    },
+    {
+      "chapter_range": "31-40",
+      "count": 9
+    },
+    {
+      "chapter_range": "41-50",
+      "count": 11
+    },
+    {
+      "chapter_range": "51-60",
+      "count": 8
+    },
+    {
+      "chapter_range": "61-70",
+      "count": 10
+    },
+    {
+      "chapter_range": "71-80",
+      "count": 9
+    },
+    {
+      "chapter_range": "81-90",
+      "count": 7
+    },
+    {
+      "chapter_range": "91-100",
+      "count": 14
+    }
+  ],
+  "stacked": [
+    {
+      "range": "1-10",
+      "kaipian": 1,
+      "huimu": 10,
+      "renwu": 2,
+      "jingwu": 4,
+      "cipai": 1
+    },
+    {
+      "range": "11-20",
+      "kaipian": 0,
+      "huimu": 10,
+      "renwu": 1,
+      "jingwu": 4,
+      "cipai": 0
+    },
+    {
+      "range": "21-30",
+      "kaipian": 0,
+      "huimu": 10,
+      "renwu": 3,
+      "jingwu": 3,
+      "cipai": 0
+    },
+    {
+      "range": "31-40",
+      "kaipian": 0,
+      "huimu": 10,
+      "renwu": 2,
+      "jingwu": 4,
+      "cipai": 0
+    },
+    {
+      "range": "41-50",
+      "kaipian": 0,
+      "huimu": 10,
+      "renwu": 2,
+      "jingwu": 5,
+      "cipai": 0
+    },
+    {
+      "range": "51-60",
+      "kaipian": 0,
+      "huimu": 10,
+      "renwu": 1,
+      "jingwu": 4,
+      "cipai": 0
+    },
+    {
+      "range": "61-70",
+      "kaipian": 0,
+      "huimu": 10,
+      "renwu": 2,
+      "jingwu": 5,
+      "cipai": 0
+    },
+    {
+      "range": "71-80",
+      "kaipian": 0,
+      "huimu": 10,
+      "renwu": 2,
+      "jingwu": 4,
+      "cipai": 0
+    },
+    {
+      "range": "81-90",
+      "kaipian": 0,
+      "huimu": 10,
+      "renwu": 1,
+      "jingwu": 3,
+      "cipai": 0
+    },
+    {
+      "range": "91-100",
+      "kaipian": 0,
+      "huimu": 10,
+      "renwu": 4,
+      "jingwu": 6,
+      "cipai": 1
+    }
+  ],
+  "boxplot": [
+    {
+      "poem": "开篇诗",
+      "q1": 50,
+      "median": 60,
+      "q3": 70,
+      "min": 40,
+      "max": 80
+    },
+    {
+      "poem": "回目对联",
+      "q1": 45,
+      "median": 50,
+      "q3": 55,
+      "min": 40,
+      "max": 60
+    },
+    {
+      "poem": "人物赋",
+      "q1": 50,
+      "median": 55,
+      "q3": 60,
+      "min": 45,
+      "max": 65
+    },
+    {
+      "poem": "景物诗",
+      "q1": 55,
+      "median": 65,
+      "q3": 75,
+      "min": 50,
+      "max": 80
+    },
+    {
+      "poem": "西江月",
+      "q1": 65,
+      "median": 70,
+      "q3": 75,
+      "min": 60,
+      "max": 80
+    },
+    {
+      "poem": "临江仙",
+      "q1": 63,
+      "median": 68,
+      "q3": 73,
+      "min": 58,
+      "max": 78
+    },
+    {
+      "poem": "满庭芳",
+      "q1": 67,
+      "median": 72,
+      "q3": 77,
+      "min": 62,
+      "max": 82
+    }
+  ]
+}

@@ -1,0 +1,349 @@
+{
+  "meta": {
+    "title": "取经团队心理变化曲线",
+    "version": "v2.2.39",
+    "w_id": "W233-2",
+    "direction": "V3"
+  },
+  "kpi": [
+    {
+      "label": "取经众",
+      "value": 5,
+      "unit": "位"
+    },
+    {
+      "label": "回目",
+      "value": 100,
+      "unit": "回"
+    },
+    {
+      "label": "心理维度",
+      "value": 5,
+      "unit": "维"
+    },
+    {
+      "label": "转折点",
+      "value": 9,
+      "unit": "个"
+    },
+    {
+      "label": "平均凝聚力",
+      "value": 6.8,
+      "unit": "/10"
+    }
+  ],
+  "radar": [
+    {
+      "character": "悟空",
+      "fear": 2,
+      "resolve": 9,
+      "anger": 7,
+      "wisdom": 9,
+      "obedience": 5
+    },
+    {
+      "character": "唐僧",
+      "fear": 7,
+      "resolve": 8,
+      "anger": 3,
+      "wisdom": 8,
+      "obedience": 9
+    },
+    {
+      "character": "八戒",
+      "fear": 8,
+      "resolve": 4,
+      "anger": 6,
+      "wisdom": 4,
+      "obedience": 5
+    },
+    {
+      "character": "沙僧",
+      "fear": 4,
+      "resolve": 7,
+      "anger": 2,
+      "wisdom": 6,
+      "obedience": 9
+    },
+    {
+      "character": "白龙马",
+      "fear": 3,
+      "resolve": 8,
+      "anger": 4,
+      "wisdom": 7,
+      "obedience": 8
+    }
+  ],
+  "psychology_arc": [
+    {
+      "chapter": 1,
+      "wukong": 8,
+      "tang": 0,
+      "bajie": 0,
+      "sha": 0,
+      "bai": 0
+    },
+    {
+      "chapter": 7,
+      "wukong": 10,
+      "tang": 0,
+      "bajie": 0,
+      "sha": 0,
+      "bai": 0
+    },
+    {
+      "chapter": 14,
+      "wukong": 5,
+      "tang": 6,
+      "bajie": 0,
+      "sha": 0,
+      "bai": 0
+    },
+    {
+      "chapter": 18,
+      "wukong": 7,
+      "tang": 7,
+      "bajie": 5,
+      "sha": 0,
+      "bai": 0
+    },
+    {
+      "chapter": 22,
+      "wukong": 7,
+      "tang": 7,
+      "bajie": 5,
+      "sha": 6,
+      "bai": 0
+    },
+    {
+      "chapter": 27,
+      "wukong": 4,
+      "tang": 4,
+      "bajie": 4,
+      "sha": 5,
+      "bai": 6
+    },
+    {
+      "chapter": 31,
+      "wukong": 7,
+      "tang": 7,
+      "bajie": 5,
+      "sha": 6,
+      "bai": 7
+    },
+    {
+      "chapter": 41,
+      "wukong": 6,
+      "tang": 5,
+      "bajie": 6,
+      "sha": 6,
+      "bai": 7
+    },
+    {
+      "chapter": 58,
+      "wukong": 5,
+      "tang": 4,
+      "bajie": 5,
+      "sha": 5,
+      "bai": 6
+    },
+    {
+      "chapter": 59,
+      "wukong": 7,
+      "tang": 6,
+      "bajie": 5,
+      "sha": 6,
+      "bai": 7
+    },
+    {
+      "chapter": 65,
+      "wukong": 7,
+      "tang": 7,
+      "bajie": 6,
+      "sha": 6,
+      "bai": 7
+    },
+    {
+      "chapter": 74,
+      "wukong": 8,
+      "tang": 6,
+      "bajie": 4,
+      "sha": 5,
+      "bai": 7
+    },
+    {
+      "chapter": 81,
+      "wukong": 8,
+      "tang": 8,
+      "bajie": 7,
+      "sha": 7,
+      "bai": 8
+    },
+    {
+      "chapter": 88,
+      "wukong": 9,
+      "tang": 8,
+      "bajie": 7,
+      "sha": 7,
+      "bai": 8
+    },
+    {
+      "chapter": 95,
+      "wukong": 9,
+      "tang": 9,
+      "bajie": 8,
+      "sha": 8,
+      "bai": 9
+    },
+    {
+      "chapter": 100,
+      "wukong": 10,
+      "tang": 10,
+      "bajie": 9,
+      "sha": 9,
+      "bai": 10
+    }
+  ],
+  "cohesion_heatmap": [
+    {
+      "character": "悟空",
+      "ch7": 10,
+      "ch14": 5,
+      "ch22": 7,
+      "ch27": 4,
+      "ch31": 7,
+      "ch41": 6,
+      "ch58": 5,
+      "ch81": 8,
+      "ch100": 10
+    },
+    {
+      "character": "唐僧",
+      "ch7": 0,
+      "ch14": 6,
+      "ch22": 7,
+      "ch27": 4,
+      "ch31": 7,
+      "ch41": 5,
+      "ch58": 4,
+      "ch81": 8,
+      "ch100": 10
+    },
+    {
+      "character": "八戒",
+      "ch7": 0,
+      "ch14": 0,
+      "ch22": 5,
+      "ch27": 4,
+      "ch31": 5,
+      "ch41": 6,
+      "ch58": 5,
+      "ch81": 7,
+      "ch100": 9
+    },
+    {
+      "character": "沙僧",
+      "ch7": 0,
+      "ch14": 0,
+      "ch22": 6,
+      "ch27": 5,
+      "ch31": 6,
+      "ch41": 6,
+      "ch58": 5,
+      "ch81": 7,
+      "ch100": 9
+    },
+    {
+      "character": "白龙马",
+      "ch7": 0,
+      "ch14": 0,
+      "ch22": 0,
+      "ch27": 6,
+      "ch31": 7,
+      "ch41": 7,
+      "ch58": 6,
+      "ch81": 8,
+      "ch100": 10
+    }
+  ],
+  "turning_points": [
+    {
+      "chapter": 7,
+      "event": "大闹天宫·悟空极盛"
+    },
+    {
+      "chapter": 14,
+      "event": "心猿归正·收悟空"
+    },
+    {
+      "chapter": 18,
+      "event": "收八戒·团队初成"
+    },
+    {
+      "chapter": 22,
+      "event": "收沙僧·五众齐全"
+    },
+    {
+      "chapter": 27,
+      "event": "三打白骨精·信任危机"
+    },
+    {
+      "chapter": 31,
+      "event": "黄袍怪·团队修复"
+    },
+    {
+      "chapter": 41,
+      "event": "红孩儿·悟空受难"
+    },
+    {
+      "chapter": 58,
+      "event": "真假美猴王·身份危机"
+    },
+    {
+      "chapter": 81,
+      "event": "无底洞·最后大难"
+    }
+  ],
+  "boxplot": [
+    {
+      "character": "悟空",
+      "q1": 5,
+      "median": 7,
+      "q3": 9,
+      "min": 4,
+      "max": 10
+    },
+    {
+      "character": "唐僧",
+      "q1": 4,
+      "median": 6,
+      "q3": 8,
+      "min": 0,
+      "max": 10
+    },
+    {
+      "character": "八戒",
+      "q1": 4,
+      "median": 5,
+      "q3": 7,
+      "min": 0,
+      "max": 9
+    },
+    {
+      "character": "沙僧",
+      "q1": 5,
+      "median": 6,
+      "q3": 7,
+      "min": 0,
+      "max": 9
+    },
+    {
+      "character": "白龙马",
+      "q1": 6,
+      "median": 7,
+      "q3": 8,
+      "min": 0,
+      "max": 10
+    }
+  ]
+}

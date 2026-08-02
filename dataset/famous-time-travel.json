@@ -1,0 +1,62 @@
+{
+  "travel_identities": [
+    {
+      "celebrity_id": "lu_xun",
+      "celebrity_name": "鲁迅",
+      "original_role": "神魔小说鼻祖",
+      "travel_role": "花果山史官",
+      "would_do": "写《妖界见闻录》揭露天庭黑幕"
+    },
+    {
+      "celebrity_id": "hu_shi",
+      "celebrity_name": "胡适",
+      "original_role": "高级童话派",
+      "travel_role": "取经团队顾问",
+      "would_do": "别解读了·先赶路！"
+    },
+    {
+      "celebrity_id": "mao_zedong",
+      "celebrity_name": "毛泽东",
+      "original_role": "西游十级学者",
+      "travel_role": "悟空的政委",
+      "would_do": "我们要建立自己的根据地！"
+    },
+    {
+      "celebrity_id": "qian_zhongshu",
+      "celebrity_name": "钱钟书",
+      "original_role": "细节狂魔",
+      "travel_role": "车迟国裁判",
+      "would_do": "纠正一口钟的常识错误"
+    },
+    {
+      "celebrity_id": "lin_yutang",
+      "celebrity_name": "林语堂",
+      "original_role": "人性解剖师",
+      "travel_role": "高老庄心理师",
+      "would_do": "给八戒做欲望管理咨询"
+    },
+    {
+      "celebrity_id": "chen_yinke",
+      "celebrity_name": "陈寅恪",
+      "original_role": "考据派",
+      "travel_role": "灵山档案馆员",
+      "would_do": "考证书真经的梵文原典"
+    }
+  ],
+  "scene_illustrations": [
+    {
+      "scene_id": "luxun_underworld",
+      "character": "鲁迅",
+      "setting": "地府改革观察员",
+      "judgment": "我翻开这生死簿一查·歪歪斜斜的每页上都写着「天命注定」四个字·我横竖睡不着·仔细看了半夜·才从字缝里看出字来·满本都写着两个字是「吃人」！",
+      "svg_description": "鲁迅站在阎罗殿中横眉冷对生死簿的线稿"
+    },
+    {
+      "scene_id": "qian_postcard",
+      "character": "钱钟书",
+      "setting": "三界考据纠察官",
+      "judgment": "写信给吴承恩纠正妖王宴上宋代官窑瓷瓶形制在唐朝尚未出现·又给央视杨洁导演写信画图示意「一口钟」——两张幽默「纠错信」明信片。",
+      "svg_description": "两张幽默纠错信明信片"
+    }
+  ]
+}

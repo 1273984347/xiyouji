@@ -1,0 +1,314 @@
+{
+  "celebrity_profiles": [
+    {
+      "id": "li_zhuowu",
+      "name": "李卓吾",
+      "era": "明清",
+      "role": "明代思想家·头号解读UP主",
+      "quote": "读《西游记》者，不知作者宗旨，定作戏论。",
+      "modern_translation": "看不懂深层意思的人·只配当乐子人",
+      "suitable_age": "高中+",
+      "historical_detail": "明代思想家李贽（1527-1602），号卓吾。首位将《西游记》提升到哲学高度的批评家，提出「释厄」即心性修行解脱密码。"
+    },
+    {
+      "id": "jin_shengtan",
+      "name": "金圣叹",
+      "era": "清初",
+      "role": "清代评点家·毒舌一星差评",
+      "quote": "（对西游评价不及水浒）",
+      "modern_translation": "连差评区顶流都忍不住要评·说明西游火到绕不开",
+      "suitable_age": "初中+",
+      "historical_detail": "金圣叹（1608-1661），清初文学批评家。以评点水浒、西厢闻名，对西游评价不高但绕不开，侧面证明西游影响力。"
+    },
+    {
+      "id": "lu_xun",
+      "name": "鲁迅",
+      "era": "民国",
+      "role": "神魔小说鼻祖·神魔皆有人情",
+      "quote": "神魔皆有人情·精魅亦通世故",
+      "modern_translation": "妖怪也懂人情世故",
+      "suitable_age": "小学+",
+      "historical_detail": "鲁迅《中国小说史略》将《西游记》定位为「神魔小说」，剥离金丹大道宗教附会，完成祛魅手术。提出「神魔皆有人情」经典论断。"
+    },
+    {
+      "id": "hu_shi",
+      "name": "胡适",
+      "era": "民国",
+      "role": "高级童话派·反对过度解读",
+      "quote": "至多不过是一部很有趣味的滑稽小说……并没有什么微妙的意思",
+      "modern_translation": "就是个好玩的故事",
+      "suitable_age": "初中+",
+      "historical_detail": "胡适《西游记考证》花大力气考证作者与版本源流，怀疑作者非吴承恩，开启作者悬疑推理。但认为西游「并无微妙意思」，反对过度解读。"
+    },
+    {
+      "id": "chen_yinke",
+      "name": "陈寅恪",
+      "era": "民国",
+      "role": "考据派·追溯悟空形象源流",
+      "quote": "《西游记玄奘弟子故事之演变》",
+      "modern_translation": "孙悟空的形象是怎么一步步演变来的",
+      "suitable_age": "高中+",
+      "historical_detail": "陈寅恪（1890-1969），国学大师。撰《西游记玄奘弟子故事之演变》（1930），赞同胡适哈奴曼说，对悟空、八戒、沙僧故事进行佛经溯源。"
+    },
+    {
+      "id": "zheng_zhenduo",
+      "name": "郑振铎",
+      "era": "民国",
+      "role": "考据派·梳理故事演化层叠",
+      "quote": "《西游记的演化》",
+      "modern_translation": "西游故事是一层一层叠上去的",
+      "suitable_age": "高中+",
+      "historical_detail": "郑振铎（1898-1958），文学史家。撰《西游记的演化》，梳理西游故事从民间传说到成书的层叠演化过程。"
+    },
+    {
+      "id": "mao_zedong",
+      "name": "毛泽东",
+      "era": "现代",
+      "role": "西游十级学者+野生代言人",
+      "quote": "唐僧百折不回·悟空反权威·八戒艰苦奋斗·白龙马任劳任怨",
+      "modern_translation": "项目经理天花板+整顿职场先驱+务实打工人+最强后勤",
+      "suitable_age": "高中+",
+      "historical_detail": "毛泽东熟读《西游记》，1945年重庆谈判时与民主党派人士聊一小时西游，大赞悟空「反权威」，表面说猴哥实际针砭蒋介石独裁——「用文化暗号谈政治」顶级案例。"
+    },
+    {
+      "id": "lin_yutang",
+      "name": "林语堂",
+      "era": "现代",
+      "role": "人性解剖师",
+      "quote": "悟空=叛逆少年·八戒=真实打工人·用荣格原型对读",
+      "modern_translation": "猴哥是青春期·猪哥是打工人",
+      "suitable_age": "大学+",
+      "historical_detail": "林语堂（1895-1976），作家、学者。用荣格心理学原型理论对读西游角色，将悟空视为叛逆少年原型，八戒视为真实打工人原型。"
+    },
+    {
+      "id": "qian_zhongshu",
+      "name": "钱钟书",
+      "era": "现代",
+      "role": "细节狂魔+纠错达人",
+      "quote": "一口钟是无袖长衣非铜钟",
+      "modern_translation": "读书仔细·连电视剧都骗不了你",
+      "suitable_age": "小学+",
+      "historical_detail": "钱钟书（1910-1998），学者、作家。1980年代致信央视杨洁导演指出「一口钟」应为无袖长外衣（明清俗语·类似斗篷）非庙堂之钟，导演收信后专门重拍。"
+    },
+    {
+      "id": "guo_moruo",
+      "name": "郭沫若",
+      "era": "现代",
+      "role": "分类学家+对联高手",
+      "quote": "迎风逐浪吹长叹·斩尽魔头万事休",
+      "modern_translation": "将西游归为神魔小说·还题了副对联",
+      "suitable_age": "全年龄",
+      "historical_detail": "郭沫若（1892-1978），诗人、史学家。将《西游记》归类为「神魔小说」，题联「迎风逐浪吹长叹·斩尽魔头万事休」。"
+    }
+  ],
+  "age_groups": [
+    {
+      "age_group": "幼儿/小学",
+      "title": "名人一句话",
+      "form": "表情包墙",
+      "content": [
+        {
+          "name": "鲁迅",
+          "quote": "神魔皆有人情·精魅亦通世故",
+          "modern_translation": "妖怪也懂人情世故",
+          "age_tag": "幼儿/小学"
+        },
+        {
+          "name": "胡适",
+          "quote": "至多不过是一部很有趣味的滑稽小说",
+          "modern_translation": "就是个好玩的故事",
+          "age_tag": "幼儿/小学"
+        },
+        {
+          "name": "毛泽东",
+          "quote": "悟空反权威·八戒艰苦奋斗",
+          "modern_translation": "猴哥敢造反·猪哥肯吃苦",
+          "age_tag": "幼儿/小学"
+        },
+        {
+          "name": "钱钟书",
+          "quote": "一口钟是无袖长衣非铜钟",
+          "modern_translation": "读书仔细·连电视剧都骗不了你",
+          "age_tag": "幼儿/小学"
+        }
+      ]
+    },
+    {
+      "age_group": "初中",
+      "title": "观点PK赛",
+      "form": "辩题",
+      "content": [
+        {
+          "name": "鲁迅+李卓吾",
+          "quote": "深度寓言·神魔皆有人情",
+          "modern_translation": "甲方：西游有深意",
+          "age_tag": "初中"
+        },
+        {
+          "name": "胡适",
+          "quote": "滑稽小说·并无微妙意思",
+          "modern_translation": "乙方：西游就是好玩",
+          "age_tag": "初中"
+        },
+        {
+          "name": "裁判（读者）",
+          "quote": "你站哪边？",
+          "modern_translation": "自己判断",
+          "age_tag": "初中"
+        }
+      ]
+    },
+    {
+      "age_group": "高中",
+      "title": "政治隐喻解码器",
+      "form": "修辞训练",
+      "content": [
+        {
+          "name": "毛泽东·1945重庆谈判",
+          "quote": "大赞悟空反权威·表面说猴哥实际针砭蒋介石独裁",
+          "modern_translation": "用文化暗号谈政治的顶级案例",
+          "age_tag": "高中"
+        },
+        {
+          "name": "大闹天宫",
+          "quote": "类比反帝反封建",
+          "modern_translation": "借古讽今修辞训练素材",
+          "age_tag": "高中"
+        }
+      ]
+    },
+    {
+      "age_group": "大学",
+      "title": "学术谱系图",
+      "form": "谱系",
+      "content": [
+        {
+          "name": "明代·李卓吾",
+          "quote": "释厄密码",
+          "modern_translation": "心性修行的密码本",
+          "age_tag": "大学"
+        },
+        {
+          "name": "清代·证道书",
+          "quote": "内丹修炼指南",
+          "modern_translation": "道家修行手册",
+          "age_tag": "大学"
+        },
+        {
+          "name": "民国·胡适+鲁迅",
+          "quote": "考证+定型",
+          "modern_translation": "作者悬疑+神魔小说定位",
+          "age_tag": "大学"
+        },
+        {
+          "name": "现代·毛泽东/林语堂/钱钟书",
+          "quote": "政治/人文/细读",
+          "modern_translation": "三路并行解读",
+          "age_tag": "大学"
+        },
+        {
+          "name": "当代·跨文化研究",
+          "quote": "比较文学视野",
+          "modern_translation": "走向世界文学",
+          "age_tag": "大学"
+        }
+      ]
+    }
+  ],
+  "mouthpiece_quotes": [
+    {
+      "character": "金圣叹",
+      "role": "反内卷先锋",
+      "quote": "一部《西游》·不过教人安心做个「弼马温」·何苦非要闹天宫·争那斗战胜佛的虚名？",
+      "modern_translation": "别卷了·安稳打工不香吗"
+    },
+    {
+      "character": "猪八戒",
+      "role": "人间清醒代言人",
+      "quote": "取经路远·记得先吃饱·团队散伙是常态·保住高老庄的退路才是王道。",
+      "modern_translation": "保命要紧·退路第一"
+    }
+  ],
+  "modern_commentary": [
+    {
+      "celebrity": "鲁迅",
+      "era": "民国",
+      "modern_topic": "互联网大厂",
+      "commentary": "我向来是不惮以最坏的恶意来推测某些公司的·然而我还不料·也不信竟会把人当成牛马来使。但《西游记》里早说过·妖魔要吃人·还得编个长生不老的理由。",
+      "aside": "妖魔吃人·还得编个理由"
+    },
+    {
+      "celebrity": "胡适",
+      "era": "民国",
+      "modern_topic": "AI 焦虑",
+      "commentary": "怕什么真理无穷·进一寸有一寸的欢喜。妖怪再多·猴子还不是一棒一棒打过来的？工具只是工具·何必非要问出个微妙的意思。",
+      "aside": "进一寸有一寸的欢喜"
+    },
+    {
+      "celebrity": "林语堂",
+      "era": "现代",
+      "modern_topic": "社交媒体人设",
+      "commentary": "每个人都在扮演他理想中的自己·就像那个去西天的八戒·明明心里念着高老庄·口里却要唱「我佛慈悲」——这正是人性的可爱处。",
+      "aside": "心里高老庄·口里我佛慈悲"
+    },
+    {
+      "celebrity": "钱钟书",
+      "era": "现代",
+      "modern_topic": "内卷",
+      "commentary": "你们现在说的「内卷」·不就是车迟国斗法？隔板猜物而已·赢了又如何？我还是那句话·真正的幽默是自知这「一口钟」不是铜钟。",
+      "aside": "车迟国斗法·赢了又如何"
+    }
+  ],
+  "international_critics": [
+    {
+      "name": "赛珍珠",
+      "country": "美国",
+      "flag": "🇺🇸",
+      "role": "诺贝尔文学奖得主",
+      "work": "英译本《Monkey》",
+      "viewpoint": "孙悟空是「一个自由的精灵·一个与命运抗争的反叛者」",
+      "contribution": "将西游精神推介给西方世界"
+    },
+    {
+      "name": "博尔赫斯",
+      "country": "阿根廷",
+      "flag": "🇦🇷",
+      "role": "文学大师",
+      "work": "《西游记》评论",
+      "viewpoint": "这部小说的魅力在于「奇幻的无限性」·每一难都像开启了另一扇门·这种结构本身蕴含对人生旅途的深刻隐喻",
+      "contribution": "从结构主义视角解读西游"
+    },
+    {
+      "name": "大江健三郎",
+      "country": "日本",
+      "flag": "🇯🇵",
+      "role": "诺贝尔文学奖得主",
+      "work": "东亚文学评论",
+      "viewpoint": "《西游记》对东亚少年心性的影响·「这就像我们童年的星空·一直照亮未来」",
+      "contribution": "确认西游为东亚共同文化记忆"
+    }
+  ],
+  "global_adaptations": [
+    {
+      "country": "日本",
+      "flag": "🇯🇵",
+      "work": "龙珠",
+      "type": "动漫",
+      "note": "孙悟空化身超级赛亚人"
+    },
+    {
+      "country": "韩国",
+      "flag": "🇰🇷",
+      "work": "韩国漫画改编",
+      "type": "漫画",
+      "note": "东亚流行文化再创作"
+    },
+    {
+      "country": "美国",
+      "flag": "🇺🇸",
+      "work": "功夫之王",
+      "type": "电影",
+      "note": "成龙·李连杰主演·西游元素好莱坞化"
+    }
+  ]
+}

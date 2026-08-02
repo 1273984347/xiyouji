@@ -1,0 +1,240 @@
+{
+  "meta": {
+    "title": "取经路线交互式地图",
+    "version": "v2.2.42",
+    "w_id": "W236-V",
+    "direction": "V4"
+  },
+  "kpi": [
+    {
+      "label": "DISTANCE · 总里程",
+      "value": "10.8万里",
+      "desc": "约 5.4 万公里"
+    },
+    {
+      "label": "COUNTRIES · 途经国",
+      "value": "12",
+      "desc": "邦国/部族"
+    },
+    {
+      "label": "HARDSHIPS · 难点",
+      "value": "9",
+      "desc": "重大难点标注"
+    },
+    {
+      "label": "FARTHEST · 最远点",
+      "value": "灵山",
+      "desc": "西天雷音寺"
+    },
+    {
+      "label": "DURATION · 耗时",
+      "value": "14年",
+      "desc": "约 5040 日"
+    }
+  ],
+  "nodes": [
+    {
+      "id": 0,
+      "name": "长安",
+      "lon": 108.9,
+      "lat": 34.3,
+      "isHardship": false,
+      "linkPage": "journey-route.html",
+      "desc": "取经起点，唐王送行之处。",
+      "duration": 0,
+      "chapter": "第12回"
+    },
+    {
+      "id": 1,
+      "name": "双叉岭",
+      "lon": 107.5,
+      "lat": 33.8,
+      "isHardship": false,
+      "linkPage": "journey-route.html",
+      "desc": "唐僧首难，被寅将军擒获。",
+      "duration": 1,
+      "chapter": "第13回"
+    },
+    {
+      "id": 2,
+      "name": "两界山",
+      "lon": 106,
+      "lat": 33.5,
+      "isHardship": false,
+      "linkPage": "journey-route.html",
+      "desc": "收孙悟空，五行山改名。",
+      "duration": 1,
+      "chapter": "第14回"
+    },
+    {
+      "id": 3,
+      "name": "鹰愁涧",
+      "lon": 104,
+      "lat": 33,
+      "isHardship": false,
+      "linkPage": "journey-route.html",
+      "desc": "收白龙马，小白龙化马。",
+      "duration": 1,
+      "chapter": "第15回"
+    },
+    {
+      "id": 4,
+      "name": "观音院",
+      "lon": 102,
+      "lat": 32.5,
+      "isHardship": false,
+      "linkPage": "journey-route.html",
+      "desc": "黑熊精偷袈裟，观音收妖。",
+      "duration": 2,
+      "chapter": "第16-17回"
+    },
+    {
+      "id": 5,
+      "name": "高老庄",
+      "lon": 100,
+      "lat": 32,
+      "isHardship": false,
+      "linkPage": "journey-route.html",
+      "desc": "收猪八戒，庄主招亲。",
+      "duration": 1,
+      "chapter": "第18-19回"
+    },
+    {
+      "id": 6,
+      "name": "流沙河",
+      "lon": 98,
+      "lat": 31.5,
+      "isHardship": true,
+      "linkPage": "journey-route.html",
+      "desc": "收沙悟净，七日难渡。",
+      "duration": 2,
+      "chapter": "第22回",
+      "hardshipTitle": "流沙河八百难渡",
+      "hardshipDesc": "八百里流沙，鹅毛浮不起。沙僧九世吃取经人，终被收服，成为取经团第三徒。"
+    },
+    {
+      "id": 7,
+      "name": "五庄观",
+      "lon": 96,
+      "lat": 31,
+      "isHardship": false,
+      "linkPage": "journey-route.html",
+      "desc": "镇元大仙，人参果事件。",
+      "duration": 2,
+      "chapter": "第24-26回"
+    },
+    {
+      "id": 8,
+      "name": "白虎岭",
+      "lon": 94,
+      "lat": 30.5,
+      "isHardship": true,
+      "linkPage": "journey-route.html",
+      "desc": "三打白骨精，师徒离心。",
+      "duration": 1,
+      "chapter": "第27回",
+      "hardshipTitle": "三打白骨精",
+      "hardshipDesc": "白骨精三变戏弄，唐僧逐走悟空。师徒首次严重裂痕，反映信任与误解的主题。"
+    },
+    {
+      "id": 9,
+      "name": "黑松林",
+      "lon": 92,
+      "lat": 30,
+      "isHardship": false,
+      "linkPage": "journey-route.html",
+      "desc": "黄袍怪擒唐僧。",
+      "duration": 3,
+      "chapter": "第28-31回"
+    },
+    {
+      "id": 10,
+      "name": "平顶山",
+      "lon": 90,
+      "lat": 29.5,
+      "isHardship": true,
+      "linkPage": "journey-route.html",
+      "desc": "金角银角大王。",
+      "duration": 2,
+      "chapter": "第32-35回",
+      "hardshipTitle": "平顶山金角银角",
+      "hardshipDesc": "太上老君两童子下凡，持紫金红葫芦等五件法宝。悟空智夺法宝，降伏二妖。"
+    },
+    {
+      "id": 11,
+      "name": "号山",
+      "lon": 88,
+      "lat": 29,
+      "isHardship": true,
+      "linkPage": "journey-route.html",
+      "desc": "红孩儿三昧真火。",
+      "duration": 3,
+      "chapter": "第40-42回",
+      "hardshipTitle": "火云洞红孩儿",
+      "hardshipDesc": "牛魔王之子红孩儿，三昧真火难灭。悟空请观音收服，封为善财童子。"
+    },
+    {
+      "id": 12,
+      "name": "通天河",
+      "lon": 86,
+      "lat": 28.5,
+      "isHardship": true,
+      "linkPage": "journey-route.html",
+      "desc": "老鼋驮渡，灵感大王。",
+      "duration": 2,
+      "chapter": "第47-49回",
+      "hardshipTitle": "通天河灵感大王",
+      "hardshipDesc": "金鱼精每年吃童男女，悟空请观音收服。归途老鼋驮渡，后于第98回落水。"
+    },
+    {
+      "id": 13,
+      "name": "火焰山",
+      "lon": 84,
+      "lat": 28,
+      "isHardship": true,
+      "linkPage": "journey-route.html",
+      "desc": "三调芭蕉扇。",
+      "duration": 3,
+      "chapter": "第59-61回",
+      "hardshipTitle": "火焰山三调芭蕉扇",
+      "hardshipDesc": "八百里火焰山阻路。悟空三调芭蕉扇，斗智斗勇于铁扇公主与牛魔王，最终灭火通行。"
+    },
+    {
+      "id": 14,
+      "name": "小雷音寺",
+      "lon": 82,
+      "lat": 27.5,
+      "isHardship": true,
+      "linkPage": "journey-route.html",
+      "desc": "黄眉大王假佛。",
+      "duration": 2,
+      "chapter": "第65-66回",
+      "hardshipTitle": "小雷音寺黄眉怪",
+      "hardshipDesc": "弥勒童子黄眉假佛设局，悟空困于金铙。请二十八宿方脱困，弥勒亲降收服。"
+    },
+    {
+      "id": 15,
+      "name": "狮驼岭",
+      "lon": 80,
+      "lat": 27,
+      "isHardship": true,
+      "linkPage": "journey-route.html",
+      "desc": "三大魔王最险。",
+      "duration": 4,
+      "chapter": "第74-77回",
+      "hardshipTitle": "狮驼岭三大魔王",
+      "hardshipDesc": "青狮、白象、大鹏三大魔王，悟空最险一战。如来亲降收服大鹏，全书最艰难段落之一。"
+    },
+    {
+      "id": 16,
+      "name": "灵山",
+      "lon": 78,
+      "lat": 26.5,
+      "isHardship": false,
+      "linkPage": "journey-route.html",
+      "desc": "西天雷音寺，取经终点。",
+      "duration": 1,
+      "chapter": "第98回"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "nodes": [
+    {
+      "id": "huaguo Mountain",
+      "name": "花果山水帘洞",
+      "type": "local",
+      "chapter": "第1回",
+      "line": 522,
+      "desc": "石猴诞生·地方化起点"
+    },
+    {
+      "id": "lingshan",
+      "name": "灵山",
+      "type": "religious",
+      "chapter": "第8回",
+      "line": 981,
+      "desc": "佛界中心·取经终点"
+    },
+    {
+      "id": "changan",
+      "name": "长安",
+      "type": "capital",
+      "chapter": "第13回",
+      "line": 1343,
+      "desc": "出发地·去地方化起点"
+    },
+    {
+      "id": "chechi",
+      "name": "车迟国",
+      "type": "transit",
+      "chapter": "第44回",
+      "line": 3443,
+      "desc": "途经国·意识形态型"
+    },
+    {
+      "id": "zhuzi",
+      "name": "朱紫国",
+      "type": "transit",
+      "chapter": "第68回",
+      "line": 5041,
+      "desc": "途经国·身体政治型"
+    },
+    {
+      "id": "mifa",
+      "name": "灭法国",
+      "type": "transit",
+      "chapter": "第84回",
+      "line": 6137,
+      "desc": "途经国·主权暴力型"
+    },
+    {
+      "id": "lingshan-return",
+      "name": "灵山归途",
+      "type": "return",
+      "chapter": "第98回",
+      "line": 7001,
+      "desc": "重地方化·回归东土"
+    }
+  ],
+  "links": [
+    {
+      "source": "huaguo Mountain",
+      "target": "changan",
+      "type": "de-localization"
+    },
+    {
+      "source": "changan",
+      "target": "chechi",
+      "type": "transit"
+    },
+    {
+      "source": "chechi",
+      "target": "zhuzi",
+      "type": "transit"
+    },
+    {
+      "source": "zhuzi",
+      "target": "mifa",
+      "type": "transit"
+    },
+    {
+      "source": "mifa",
+      "target": "lingshan",
+      "type": "arrival"
+    },
+    {
+      "source": "lingshan",
+      "target": "lingshan-return",
+      "type": "re-localization"
+    },
+    {
+      "source": "lingshan-return",
+      "target": "changan",
+      "type": "return"
+    }
+  ]
+}

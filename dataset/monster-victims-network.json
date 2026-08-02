@@ -1,0 +1,492 @@
+{
+  "victims": [
+    {
+      "name": "金角银角",
+      "type": "身份创伤",
+      "chapter": "第32-35回",
+      "perpetrator": "太上老君（借）",
+      "bystander": "观音",
+      "rescuer": "—",
+      "fate": "被老君回收",
+      "color": "#c8463a",
+      "key": "jin",
+      "tag": "被借来的苦难·童子下凡",
+      "wound": "画影图形备战的考官道具，化为水后被老君收回魂魄",
+      "desc": "观音向太上老君借三次，托化妖魔测试取经团队决心。借来的苦难，被借走的人。"
+    },
+    {
+      "name": "赛太岁",
+      "type": "存在创伤",
+      "chapter": "第70-71回",
+      "perpetrator": "观音（紫金铃）",
+      "bystander": "朱紫国王",
+      "rescuer": "悟空",
+      "fate": "被观音重新套笼头",
+      "color": "#8b7355",
+      "key": "sai",
+      "tag": "偷走紫金铃·不想再被骑·安静妖怪",
+      "wound": "咬断铁索·三年不疼的脖子·腰上挂紫金铃当身份证",
+      "desc": "金毛犼咬断观音莲花座下铁索，叼走紫金铃，抢娘娘，关自己三年不出门。偷的不是铃，是不被骑的权利。"
+    },
+    {
+      "name": "金圣宫娘娘",
+      "type": "性别创伤",
+      "chapter": "第70-71回",
+      "perpetrator": "赛太岁",
+      "bystander": "朱紫国王",
+      "rescuer": "紫阳真人",
+      "fate": "穿棕衣回国",
+      "color": "#3a6b8c",
+      "key": "gong",
+      "tag": "穿棕衣的人·性别受害者",
+      "wound": "棕衣三年·触觉失忆·三丈距离的内化",
+      "desc": "紫阳真人赠棕衣保护贞洁，也剥夺她允许的权利。三年里不能摸自己的脸。倒刺掉了，触觉神经还没醒。"
+    },
+    {
+      "name": "陈家庄童男童女",
+      "type": "献祭创伤",
+      "chapter": "第47-49回",
+      "perpetrator": "灵感大王",
+      "bystander": "观音",
+      "rescuer": "悟空",
+      "fate": "被悟空解救",
+      "color": "#5a4a6b",
+      "key": "tong",
+      "tag": "灵感大王祭品·眼泪盐晶",
+      "wound": "九年代祭品·十八童命·村中雄黄同源",
+      "desc": "通天河灵感大王（观音莲花池金鱼）每年索一对童男童女。九年代价结晶成盐，渗进庄子地基。"
+    }
+  ],
+  "network": {
+    "nodes": [
+      {
+        "id": "金角银角",
+        "type": "victim",
+        "sub": "身份创伤"
+      },
+      {
+        "id": "赛太岁",
+        "type": "victim",
+        "sub": "存在创伤"
+      },
+      {
+        "id": "金圣宫娘娘",
+        "type": "victim",
+        "sub": "性别创伤"
+      },
+      {
+        "id": "童男童女",
+        "type": "victim",
+        "sub": "献祭创伤"
+      },
+      {
+        "id": "太上老君",
+        "type": "perpetrator",
+        "sub": "借主"
+      },
+      {
+        "id": "观音",
+        "type": "perpetrator",
+        "sub": "骑主/借主"
+      },
+      {
+        "id": "灵感大王",
+        "type": "perpetrator",
+        "sub": "金鱼"
+      },
+      {
+        "id": "朱紫国王",
+        "type": "bystander",
+        "sub": "王夫"
+      },
+      {
+        "id": "悟空",
+        "type": "rescuer",
+        "sub": "解救"
+      },
+      {
+        "id": "紫阳真人",
+        "type": "rescuer",
+        "sub": "赠棕衣"
+      },
+      {
+        "id": "第32-35回",
+        "type": "chapter"
+      },
+      {
+        "id": "第70-71回",
+        "type": "chapter"
+      },
+      {
+        "id": "第47-49回",
+        "type": "chapter"
+      }
+    ],
+    "links": [
+      {
+        "source": "金角银角",
+        "target": "太上老君",
+        "weight": 9,
+        "kind": "perpetrate"
+      },
+      {
+        "source": "金角银角",
+        "target": "观音",
+        "weight": 8,
+        "kind": "bystander"
+      },
+      {
+        "source": "金角银角",
+        "target": "第32-35回",
+        "weight": 6,
+        "kind": "chapter"
+      },
+      {
+        "source": "赛太岁",
+        "target": "观音",
+        "weight": 10,
+        "kind": "perpetrate"
+      },
+      {
+        "source": "赛太岁",
+        "target": "朱紫国王",
+        "weight": 6,
+        "kind": "bystander"
+      },
+      {
+        "source": "赛太岁",
+        "target": "悟空",
+        "weight": 5,
+        "kind": "rescue"
+      },
+      {
+        "source": "赛太岁",
+        "target": "第70-71回",
+        "weight": 6,
+        "kind": "chapter"
+      },
+      {
+        "source": "金圣宫娘娘",
+        "target": "赛太岁",
+        "weight": 10,
+        "kind": "perpetrate"
+      },
+      {
+        "source": "金圣宫娘娘",
+        "target": "朱紫国王",
+        "weight": 7,
+        "kind": "bystander"
+      },
+      {
+        "source": "金圣宫娘娘",
+        "target": "紫阳真人",
+        "weight": 8,
+        "kind": "rescue"
+      },
+      {
+        "source": "金圣宫娘娘",
+        "target": "第70-71回",
+        "weight": 6,
+        "kind": "chapter"
+      },
+      {
+        "source": "童男童女",
+        "target": "灵感大王",
+        "weight": 10,
+        "kind": "perpetrate"
+      },
+      {
+        "source": "童男童女",
+        "target": "悟空",
+        "weight": 7,
+        "kind": "rescue"
+      },
+      {
+        "source": "童男童女",
+        "target": "观音",
+        "weight": 6,
+        "kind": "bystander"
+      },
+      {
+        "source": "童男童女",
+        "target": "第47-49回",
+        "weight": 6,
+        "kind": "chapter"
+      }
+    ]
+  },
+  "sankey": {
+    "nodes": [
+      {
+        "name": "身份创伤",
+        "cat": 0
+      },
+      {
+        "name": "存在创伤",
+        "cat": 0
+      },
+      {
+        "name": "性别创伤",
+        "cat": 0
+      },
+      {
+        "name": "献祭创伤",
+        "cat": 0
+      },
+      {
+        "name": "金角银角",
+        "cat": 1
+      },
+      {
+        "name": "赛太岁",
+        "cat": 1
+      },
+      {
+        "name": "金圣宫娘娘",
+        "cat": 1
+      },
+      {
+        "name": "童男童女",
+        "cat": 1
+      },
+      {
+        "name": "太上老君",
+        "cat": 2
+      },
+      {
+        "name": "观音",
+        "cat": 2
+      },
+      {
+        "name": "赛太岁·施",
+        "cat": 2
+      },
+      {
+        "name": "灵感大王",
+        "cat": 2
+      },
+      {
+        "name": "观音·旁观",
+        "cat": 3
+      },
+      {
+        "name": "朱紫国王",
+        "cat": 3
+      },
+      {
+        "name": "朱紫国王·旁观",
+        "cat": 3
+      },
+      {
+        "name": "观音·回收",
+        "cat": 3
+      }
+    ],
+    "links": [
+      {
+        "source": "身份创伤",
+        "target": "金角银角",
+        "value": 8
+      },
+      {
+        "source": "存在创伤",
+        "target": "赛太岁",
+        "value": 7
+      },
+      {
+        "source": "性别创伤",
+        "target": "金圣宫娘娘",
+        "value": 9
+      },
+      {
+        "source": "献祭创伤",
+        "target": "童男童女",
+        "value": 10
+      },
+      {
+        "source": "金角银角",
+        "target": "太上老君",
+        "value": 6
+      },
+      {
+        "source": "赛太岁",
+        "target": "观音",
+        "value": 7
+      },
+      {
+        "source": "金圣宫娘娘",
+        "target": "赛太岁·施",
+        "value": 8
+      },
+      {
+        "source": "童男童女",
+        "target": "灵感大王",
+        "value": 9
+      },
+      {
+        "source": "金角银角",
+        "target": "观音·旁观",
+        "value": 3
+      },
+      {
+        "source": "赛太岁",
+        "target": "朱紫国王·旁观",
+        "value": 4
+      },
+      {
+        "source": "金圣宫娘娘",
+        "target": "朱紫国王",
+        "value": 5
+      },
+      {
+        "source": "童男童女",
+        "target": "观音·回收",
+        "value": 4
+      },
+      {
+        "source": "太上老君",
+        "target": "观音·旁观",
+        "value": 3
+      },
+      {
+        "source": "观音",
+        "target": "朱紫国王·旁观",
+        "value": 2
+      },
+      {
+        "source": "赛太岁·施",
+        "target": "朱紫国王",
+        "value": 4
+      },
+      {
+        "source": "灵感大王",
+        "target": "观音·回收",
+        "value": 4
+      }
+    ]
+  },
+  "radar": [
+    {
+      "victim": "金角银角",
+      "身体": 6,
+      "心理": 9,
+      "社会": 7,
+      "法律": 3,
+      "叙事": 8
+    },
+    {
+      "victim": "赛太岁",
+      "身体": 4,
+      "心理": 8,
+      "社会": 5,
+      "法律": 3,
+      "叙事": 7
+    },
+    {
+      "victim": "金圣宫娘娘",
+      "身体": 8,
+      "心理": 10,
+      "社会": 9,
+      "法律": 6,
+      "叙事": 9
+    },
+    {
+      "victim": "童男童女",
+      "身体": 10,
+      "心理": 8,
+      "社会": 8,
+      "法律": 4,
+      "叙事": 6
+    }
+  ],
+  "timeline": [
+    {
+      "order": 1,
+      "chapter": 32,
+      "victim": "金角银角",
+      "stage": "trauma",
+      "event": "画影图形备战",
+      "desc": "派小妖持图巡山，叫名字——答应了就被装进葫芦。考官式备战，西游唯一。"
+    },
+    {
+      "order": 2,
+      "chapter": 34,
+      "victim": "金角银角",
+      "stage": "trauma",
+      "event": "玄奘地窖念心经",
+      "desc": "玄奘被捆在莲花洞地窖，恐惧中念《心经》——心经从日课升级为应急。"
+    },
+    {
+      "order": 3,
+      "chapter": 35,
+      "victim": "金角银角",
+      "stage": "recycle",
+      "event": "被老君回收",
+      "desc": "太上老君「借了三次」的供词。考官被收回，化为炼丹房旁两只银色飞蛾。"
+    },
+    {
+      "order": 4,
+      "chapter": 47,
+      "victim": "陈家庄童男童女",
+      "stage": "trauma",
+      "event": "灵感大王索祭品",
+      "desc": "通天河灵感大王每年索一对童男童女，九年十八命，村中雄黄同源。"
+    },
+    {
+      "order": 5,
+      "chapter": 48,
+      "victim": "陈家庄童男童女",
+      "stage": "rescue",
+      "event": "悟空化身替祭",
+      "desc": "悟空变童女，八戒变童男，替陈家庄祭典。冰上比武识破灵感大王。"
+    },
+    {
+      "order": 6,
+      "chapter": 49,
+      "victim": "陈家庄童男童女",
+      "stage": "recycle",
+      "event": "观音竹篮收金鱼",
+      "desc": "观音编竹篮亲临通天河，金鱼被悄悄收走——创造者回收造物，无公开审判。"
+    },
+    {
+      "order": 7,
+      "chapter": 70,
+      "victim": "赛太岁",
+      "stage": "trauma",
+      "event": "咬断铁索抢娘娘",
+      "desc": "金毛犼咬断观音莲花座下铁索，叼走紫金铃，抢金圣宫娘娘回麒麟山。"
+    },
+    {
+      "order": 8,
+      "chapter": 70,
+      "victim": "金圣宫娘娘",
+      "stage": "trauma",
+      "event": "紫阳真人赠棕衣",
+      "desc": "棕衣长满倒刺，三年囚禁中任何触碰皆被刺伤。贞洁保住，触觉权被剥夺。"
+    },
+    {
+      "order": 9,
+      "chapter": 70,
+      "victim": "金圣宫娘娘",
+      "stage": "trauma",
+      "event": "三年隔三丈问食",
+      "desc": "赛太岁每天隔三丈问娘娘想吃什么，自问自答去打獐子——被驯养者的反向投射。"
+    },
+    {
+      "order": 10,
+      "chapter": 71,
+      "victim": "赛太岁",
+      "stage": "recycle",
+      "event": "被观音重新套笼头",
+      "desc": "观音来收，赛太岁安静跪下。不是顺从，是「那三年是唯一一次脖子不疼」。"
+    },
+    {
+      "order": 11,
+      "chapter": 71,
+      "victim": "金圣宫娘娘",
+      "stage": "rescue",
+      "event": "棕衣倒刺落地",
+      "desc": "紫阳真人念咒收倒刺，但触觉失忆比贞洁更难修复。她学会了端蜂蜜水看麒麟山。"
+    }
+  ]
+}

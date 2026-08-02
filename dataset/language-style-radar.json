@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "title": "语言风格雷达图",
+    "version": "v2.2.42",
+    "w_id": "W236-V",
+    "direction": "V"
+  },
+  "kpi": [
+    {
+      "label": "CHARACTERS · 角色",
+      "value": "7",
+      "desc": "对比角色数"
+    },
+    {
+      "label": "DIMENSIONS · 维度",
+      "value": "5",
+      "desc": "语言特征维度"
+    },
+    {
+      "label": "CLUSTERS · 聚类",
+      "value": "3",
+      "desc": "风格聚类簇"
+    },
+    {
+      "label": "MOST COLLOQUIAL · 最口语",
+      "value": "八戒",
+      "desc": "口语化指数 9.2"
+    },
+    {
+      "label": "MOST LITERARY · 最文言",
+      "value": "如来",
+      "desc": "文言化指数 9.5"
+    }
+  ],
+  "dimensions": [
+    "词汇丰富度",
+    "句长",
+    "修辞密度",
+    "口语化",
+    "文言化"
+  ],
+  "characters": [
+    {
+      "name": "唐僧",
+      "color": "#c8463a",
+      "values": [
+        7.2,
+        7.8,
+        6.5,
+        4.2,
+        7.8
+      ],
+      "cluster": 0
+    },
+    {
+      "name": "悟空",
+      "color": "#e67e22",
+      "values": [
+        8.5,
+        5.5,
+        5.8,
+        8.8,
+        3.2
+      ],
+      "cluster": 0
+    },
+    {
+      "name": "八戒",
+      "color": "#8c6e3a",
+      "values": [
+        6.8,
+        4.2,
+        3.5,
+        9.2,
+        2
+      ],
+      "cluster": 0
+    },
+    {
+      "name": "悟净",
+      "color": "#6B8E5A",
+      "values": [
+        6.5,
+        6,
+        5,
+        6.5,
+        5.5
+      ],
+      "cluster": 2
+    },
+    {
+      "name": "观音",
+      "color": "#3a6b8c",
+      "values": [
+        8.8,
+        8.2,
+        7.5,
+        3.8,
+        8.5
+      ],
+      "cluster": 1
+    },
+    {
+      "name": "如来",
+      "color": "#2c3e50",
+      "values": [
+        9.5,
+        9.2,
+        9,
+        2,
+        9.5
+      ],
+      "cluster": 1
+    },
+    {
+      "name": "玉帝",
+      "color": "#C9A063",
+      "values": [
+        8,
+        8.5,
+        7,
+        3,
+        8.8
+      ],
+      "cluster": 1
+    }
+  ],
+  "pca": [
+    {
+      "name": "唐僧",
+      "x": -1.8,
+      "y": 1.2,
+      "cluster": 0,
+      "color": "#c8463a"
+    },
+    {
+      "name": "悟空",
+      "x": -2.5,
+      "y": -2.8,
+      "cluster": 0,
+      "color": "#e67e22"
+    },
+    {
+      "name": "八戒",
+      "x": -3.2,
+      "y": -3.5,
+      "cluster": 0,
+      "color": "#8c6e3a"
+    },
+    {
+      "name": "悟净",
+      "x": -0.2,
+      "y": -0.5,
+      "cluster": 2,
+      "color": "#6B8E5A"
+    },
+    {
+      "name": "观音",
+      "x": 2.5,
+      "y": 1.8,
+      "cluster": 1,
+      "color": "#3a6b8c"
+    },
+    {
+      "name": "如来",
+      "x": 3.5,
+      "y": 3.2,
+      "cluster": 1,
+      "color": "#2c3e50"
+    },
+    {
+      "name": "玉帝",
+      "x": 2.8,
+      "y": 2.5,
+      "cluster": 1,
+      "color": "#C9A063"
+    }
+  ]
+}
