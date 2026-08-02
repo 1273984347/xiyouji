@@ -10,6 +10,127 @@
 
 ## 项目文件反向索引（按版本倒序，覆盖 site/data/ 可视化页面 + docs/ 文档 + 根目录 6 文件 + 其他）
 
+### v2.2.86 W334 全站 UI/UX 重设计·新中式·数字雅集（tokens 集中化+首页/看板重写+88 页批量换肤+字体子集化·零新增运行时依赖·A4 计数不变仍 199 篇）
+
+| 文件 | W ID | 改动摘要 |
+|---|---|---|
+| site/tokens.css | W334 | v2.2.86 重写为 v2·新中式数字雅集令牌集中化：新色板（#FAF7F0/#23201A/#C8463A/#E5DFD0）+ --chart-1..6 雅集图表五色 + --font-serif/sans/mono 三层字体栈 + 6 个 @font-face 子集 webfont + hero 玄墨覆写 + 全站字体分层覆写 + 选区/焦点细节 |
+| site/index.html | W334 | v2.2.86 全量重写·新中式首页：顶部导航（印章+字标+文字链）+ 负空间 Hero（kicker+88px 宋体大标+巨数 100 回）+ 墨山纹 SVG + 数据条（100/625/80/133）+ 九卷索引档案表（00-09 编号+宋体板块名+描述+靛蓝 meta）+ 玄墨开篇诗深色节奏段 + 站点工具不等高卡片 + 新页脚·375px 断点·skip-link/a11y |
+| site/dashboard.html | W334 | v2.2.86 全量重写·新中式看板：紧凑看板头+数据源注条+4 KPI 卡+八十一难三维透视（环图标签外置图例·色块+名称+数值+占比·语义配色靛蓝=被接走/朱砂=被诛杀）+交叉表+关键洞察+取经路线紧凑条+专题数据看板（文字筛选 tab+41 卡+搜索浮层 JS 交互原样保留）+标签云横幅+研究矩阵 10 卡（A4 199·625 篇口径修正）+三层架构 |
+| site/_template.html | W334 | v2.2.86 升级·新令牌/玄墨 hero/发丝线卡片/图表规范注释（系列色取 --chart-1..6·标签一律外置·环图内径 0.62R）+ CHART_PALETTE 常量·new_page.py 占位符全部保留兼容 |
+| scripts/w334_reskin.py | W334 | v2.2.86 新建·批量换肤脚本（幂等 W334-RESKIN 标记）：tokens.css 链接归位至 </head> 前 + JS 硬编码色值映射（#7a5230→#C9A063/#5a7a3a→#6B8E5A/#2c2418→#23201A/#6b5e4d→#6B6455）·处理 88 页 |
+| scripts/w334_font_subset.py | W334 | v2.2.86 新建·字体子集化管线：扫描 docs/+site/ 实际用字（~3,700 字符）→ pyftsubset（fonttools+brotli）→ site/static/fonts/ 4 个 woff2（Noto Serif/Sans SC 可变字重 + JetBrains Mono Regular/Medium） |
+| site/data/*.html（80 个可视化页面） | W334 | v2.2.86 批量换肤：tokens.css 链接归位（此前 80 页均无外链 tokens·内联重复定义）+ JS 色值映射雅集色板·hero 玄墨化与字体分层经 tokens.css 级联覆写生效·页面结构与 EMBEDDED_DATA 未动 |
+| site/en/*.html（7 个英文站页面） | W334 | v2.2.86 批量换肤：同 site/data 处理 |
+| site/mobile-index.html | W334 | v2.2.86 批量换肤：tokens.css 链接归位 + JS 色值映射 |
+| site/dukou-engine.html | W334 | v2.2.86 批量换肤：tokens.css 链接归位 + JS 色值映射（图谱配色随雅集色板） |
+| site/static/fonts/ | W334 | v2.2.86 新建·子集化 woff2 产物目录（pyftsubset 生成·~3,700 字覆盖全站文本） |
+| assets/fonts/source/ | W334 | v2.2.86 新建·源字体目录（google/fonts 官方仓库可变 TTF：NotoSerifSC/NotoSansSC [wght] + JetBrains Mono Regular/Medium） |
+| CHANGELOG.md | W334 | v2.2.86 同步·新增 W334 版本段·W### 编号范围 W333→W334 |
+| README.md | W334 | v2.2.86 同步·版本号 v2.2.85→v2.2.86·新增 W334 全站 UI/UX 重设计描述 |
+| STRUCTURE.md | W334 | v2.2.86 同步·版本号 v2.2.85→v2.2.86·新增 W334 描述 |
+| docs/00-导读/项目说明.md | W334 | v2.2.86 同步·版本号 v2.2.85→v2.2.86·新增 W334 段 |
+| scripts/output/file-index.md | W334 | v2.2.86 同步·新增 v2.2.86 反向索引段 |
+| 交接文档.md | W334 | v2.2.86 同步·更新当前进度至 W334 全站 UI/UX 重设计·版本号 v2.2.85→v2.2.86·A4 主题专题 199 篇（不变） |
+
+### v2.2.85 W333 渡口引擎图谱力导向布局·消除点击跳变·节点度数半径·方向箭头·焦点高亮（零依赖·复用 /graph·nodePos 位置缓存轻量力导向·A4 计数不变仍 199 篇）
+
+| 文件 | W ID | 改动摘要 |
+|---|---|---|
+| site/dukou-engine.html | W333 | v2.2.85 改造·新增 nodePos 跨重绘位置缓存 Map + graphFocus 焦点·layoutGraph() 轻量力导向（斥力+边弹簧+中心引力+锚定回弹）·新节点从父旁长出·旧节点锚定稳定·节点半径按度数映射 5–14px·边加 SVG marker 方向箭头·点击节点聚焦高亮+展开邻居·mergeTriples(triples,parent) 记种子父·resetGraph() 清 nodePos/graphFocus·footer 版本 v2.2.84 W332 → v2.2.85 W333 |
+| CHANGELOG.md | W333 | v2.2.85 同步·新增 W333 版本段·W### 编号范围 W332→W333 |
+| README.md | W333 | v2.2.85 同步·版本号 v2.2.84→v2.2.85·新增 W333 渡口引擎图谱力导向布局描述 |
+| STRUCTURE.md | W333 | v2.2.85 同步·版本号 v2.2.84→v2.2.85·新增 W333 渡口引擎图谱力导向布局描述 |
+| docs/00-导读/项目说明.md | W333 | v2.2.85 同步·版本号 v2.2.84→v2.2.85·新增 W333 段 |
+| scripts/output/file-index.md | W333 | v2.2.85 同步·新增 v2.2.85 反向索引段 |
+| 交接文档.md | W333 | v2.2.85 同步·更新当前进度至 W333 渡口引擎图谱力导向布局·版本号 v2.2.84→v2.2.85·A4 主题专题 199 篇（不变） |
+
+### v2.2.84 W332 渡口引擎图谱交互式展开·节点可点击扩展关联三元组（零依赖·复用 /graph·graphState 累加去重·重置按钮·A4 计数不变仍 199 篇）
+
+| 文件 | W ID | 改动摘要 |
+|---|---|---|
+| site/dukou-engine.html | W332 | v2.2.84 改造·新增 graphState 三元组累加器 + mergeTriples() 去重·renderGraph() 改无参读 graphState 重绘·节点加 gnode class + cursor:pointer + hover 高亮·枢纽 ghub 朱砂红描边·新增「重置图谱」按钮 resetGraph()·点击节点 expandNode(label) 调 /graph?q=label 展开邻居·footer 版本 v2.2.83 W331 → v2.2.84 W332 |
+| CHANGELOG.md | W332 | v2.2.84 同步·新增 W332 版本段·W### 编号范围 W331→W332 |
+| README.md | W332 | v2.2.84 同步·版本号 v2.2.83→v2.2.84·新增 W332 渡口引擎图谱交互式展开描述 |
+| STRUCTURE.md | W332 | v2.2.84 同步·版本号 v2.2.83→v2.2.84·新增 W332 渡口引擎图谱交互式展开描述 |
+| docs/00-导读/项目说明.md | W332 | v2.2.84 同步·版本号 v2.2.83→v2.2.84·新增 W332 段 |
+| scripts/output/file-index.md | W332 | v2.2.84 同步·新增 v2.2.84 反向索引段 |
+| 交接文档.md | W332 | v2.2.84 同步·更新当前进度至 W332 渡口引擎图谱交互式展开·版本号 v2.2.83→v2.2.84·A4 主题专题 199 篇（不变） |
+
+### v2.2.83 W331 渡口引擎图谱可视化·W326 三元组纯 SVG 渲染（零依赖·复用 /graph·dukou-engine 检索结果新增关系图面板·A4 计数不变仍 199 篇）
+
+| 文件 | W ID | 改动摘要 |
+|---|---|---|
+| site/dukou-engine.html | W331 | v2.2.83 改造·新增 #graphPanel 面板 + renderGraph() 纯 SVG 关系图（圆形布局·边标关系·枢纽节点朱砂红）·shortLabel() 截断长标签 + xmlEsc() XML 转义·renderRAG() 末尾调 renderGraph()·RAG 未启动回退模板引擎并隐藏面板·修正提示「检索真实语口语料」→「检索真实语料」·footer 版本 v2.2.82 W330 → v2.2.83 W331 |
+| CHANGELOG.md | W331 | v2.2.83 同步·新增 W331 版本段·W### 编号范围 W330→W331 |
+| README.md | W331 | v2.2.83 同步·版本号 v2.2.82→v2.2.83·新增 W331 渡口引擎图谱可视化描述 |
+| STRUCTURE.md | W331 | v2.2.83 同步·版本号 v2.2.82→v2.2.83·新增 W331 渡口引擎图谱可视化描述 |
+| docs/00-导读/项目说明.md | W331 | v2.2.83 同步·版本号 v2.2.82→v2.2.83·新增 W331 段 |
+| scripts/output/file-index.md | W331 | v2.2.83 同步·新增 v2.2.83 反向索引段 |
+| 交接文档.md | W331 | v2.2.83 同步·更新当前进度至 W331 渡口引擎图谱可视化·版本号 v2.2.82→v2.2.83·A4 主题专题 199 篇（不变） |
+
+### v2.2.82 W330 本地 RAG 后端·LightRAG 架构轻量落地（零依赖·BM25 向量层 + W326 图谱层双层检索·rag_server.py + Neo4j 种子脚本 + dukou-engine 桥接·结合项目实际无 LLM key 落地零依赖本地 RAG·A4 计数不变仍 199 篇）
+
+| 文件 | W ID | 改动摘要 |
+|---|---|---|
+| scripts/rag/xiyouji_rag.py | W330 | v2.2.82 新建·零依赖核心引擎·stdlib BM25 向量层（671 篇 docs/*.md 索引）+ W326 yuanqi_nodes/edges.csv 图谱层（1~2 跳邻居展开）·`answer()` 返回 语料片段+三元组+渡口风格摘要·`LLM_API_KEY` 存在走真实生成 |
+| scripts/rag/rag_server.py | W330 | v2.2.82 新建·stdlib http.server 本地 API（/query /graph /health·默认 127.0.0.1:8777·CORS 跨域）·dukou-engine 桥接真实后端 |
+| scripts/rag/graph_seed_neo4j.py | W330 | v2.2.82 新建·导出 rag_graph.json 快照 + neo4j_seed.cypher（LOAD CSV 灌入 Neo4j·对齐 LightRAG Neo4j 后端） |
+| scripts/rag/README.md | W330 | v2.2.82 新建·架构对照表（LightRAG↔本实现）+ 快速开始 + 升级 lightrag-hku 路径 |
+| scripts/rag/.env.lightrag.example | W330 | v2.2.82 新建·lightrag-hku 接入示例 |
+| site/dukou-engine.html | W330 | v2.2.82 改造·新增「检索真实语料」按钮 + queryRAG() 调用本地 /query·服务未启动自动回退模板引擎·footer 版本 v2.2.82 W330 |
+| .env.example | W330 | v2.2.82 更新·新增可选 LLM_API_KEY / LLM_BASE_URL / LLM_MODEL / EMBEDDING_MODEL |
+| CHANGELOG.md | W330 | v2.2.82 同步·新增 W330 版本段·W### 编号范围 W329→W330 |
+| README.md | W330 | v2.2.82 同步·版本号 v2.2.81→v2.2.82·补回佛法=AI 六大拓展描述 + 新增 W329 招安对比 + 新增 W330 本地 RAG 后端 |
+| STRUCTURE.md | W330 | v2.2.82 同步·版本号 v2.2.81→v2.2.82·补回佛法=AI 六大拓展描述 + 新增 W329 招安对比 + 新增 W330 本地 RAG 后端 |
+| docs/00-导读/项目说明.md | W330 | v2.2.82 同步·版本号 v2.2.81→v2.2.82·A4 主题专题 198→199 篇·新增 W330 段 |
+| scripts/output/file-index.md | W330 | v2.2.82 同步·新增 v2.2.82 反向索引段 |
+| 交接文档.md | W330 | v2.2.82 同步·更新当前进度至 W330 本地 RAG 后端·版本号 v2.2.81→v2.2.82·A4 主题专题 199 篇（不变） |
+
+### v2.2.81 W329 方向③落地·招安对比重写专题·唯识AI框架双模型对照（宋江=过拟合模型/悟空=正则化模型·跨文本西游×水浒·A4 主题专题 198→199 篇）
+
+| 文件 | W ID | 改动摘要 |
+|---|---|---|
+| docs/03-主题与情节专题/招安对比重写专题.md | W329 | v2.2.81 新建·七段式（与 W321-W327 一致）·核心命题：招安=同一模型部署操作·差别在权重分布（过拟合vs正则化）与部署环境接口松紧·四理论家（玄奘末那识Q初始偏差/龙树空性泛化/Hinton过拟合+正则化/Vaswani注意力QKV）·三个对照维度（训练数据差异/部署环境/结局对称性）·跨文本西游×水浒（水浒以回目标注·未用西游line锚点）·6 个西游 line 号（522/864/964/1393/7012/7142 沿用已验证）·术语表+关联文档（W321/W322/W324/W325） |
+| CHANGELOG.md | W329 | v2.2.81 同步·新增 W329 版本段·W### 编号范围 W328→W329 |
+| README.md | W329 | v2.2.81 同步·版本号 v2.2.80→v2.2.81·A4 主题专题 198→199 篇·补回佛法=AI六大拓展描述+新增 W329 招安对比 |
+| STRUCTURE.md | W329 | v2.2.81 同步·版本号 v2.2.80→v2.2.81·A4 主题专题 198→199 篇·补回佛法=AI六大拓展描述+新增 W329 招安对比 |
+| docs/00-导读/项目说明.md | W329 | v2.2.81 同步·版本号 v2.2.80→v2.2.81·A4 主题专题 198→199 篇·新增 W329 段 |
+| scripts/output/file-index.md | W329 | v2.2.81 同步·新增 v2.2.81 反向索引段 |
+| 交接文档.md | W329 | v2.2.81 同步·更新当前进度至 W329 招安对比重写·版本号 v2.2.80→v2.2.81·A4 主题专题 198→199 篇 |
+
+### v2.2.80 W328 佛法=AI 框架六项拓展全部落地·六文档同步收口（W322-W327·A4 主题专题 193→198 篇）
+
+| 文件 | W ID | 改动摘要 |
+|---|---|---|
+| docs/03-主题与情节专题/黑神话拒绝金箍专题.md | W322 | v2.2.74 新建·七段式·四理论家（玄奘末那识/龙树空性/Hinton 冻结解冻/Vaswani 注意力 Q+KV 缓存）·金箍四层映射·天命人=清空 KV 缓存未初始化模型·三结局 AI 翻译·8 个 line 号（沿用 W321 锚点） |
+| docs/00-导读/缘起总纲-取经是训练.md | W323 | v2.2.75 新建·元叙事八段·第0篇·回指 W321 缘起即算法专题 |
+| docs/03-主题与情节专题/西游渡元定义.md | W323 | v2.2.75 新建·西游渡一句话定义·渡口隐变量 |
+| docs/03-主题与情节专题/暗数据遗忘者列传.md | W324 | v2.2.76 新建·系列宣言+三篇（火焰山北坡村民/通天河童男女/狮驼国百姓）·对应三种数据命运 |
+| docs/03-主题与情节专题/缘起即算法-章节体.md | W325 | v2.2.77 新建·六章（总纲回指/种子与权重/优化器/损失函数/数据增强/凌云渡 Dropout）·章节体收束表 |
+| docs/03-主题与情节专题/佛学AI西游三维语义映射表.md | W326 | v2.2.78 新建·节点定义 7 类+关系定义 7 类+Cypher 模板+Neo4j 导入脚本 |
+| scripts/output/yuanqi_nodes.csv | W326 | v2.2.78 新建·20 节点·列 id,node_type,buddhist_entity,ai_entity,xiyou_entity,description |
+| scripts/output/yuanqi_edges.csv | W326 | v2.2.78 新建·20 边·列 source,target,relation,property,value |
+| site/dukou-engine.html | W327 | v2.2.79 新建·西游渡口无我写作引擎·纯前端模板引擎·五母题库 SENSORY/ROLE/LINE/TURN/CLOSE·约 300 字渡口档案草稿·无外部 API |
+| CHANGELOG.md | W328 | v2.2.80 同步·新增 v2.2.74-v2.2.80 七个版本段·W### 编号范围 W321→W328 |
+| README.md | W328 | v2.2.80 同步·版本号 v2.2.73→v2.2.80·A4 主题专题 193→198 篇·新增佛法=AI 框架六大拓展描述 |
+| STRUCTURE.md | W328 | v2.2.80 同步·版本号 v2.2.73→v2.2.80·A4 主题专题 193→198 篇·新增佛法=AI 框架六大拓展描述 |
+| docs/00-导读/项目说明.md | W328 | v2.2.80 同步·版本号 v2.2.73→v2.2.80·A4 主题专题 193→198 篇·新增 W328 段 |
+| scripts/output/file-index.md | W328 | v2.2.80 同步·新增 v2.2.80 反向索引段 |
+| 交接文档.md | W328 | v2.2.80 同步·更新当前进度至 W328 佛法=AI 框架六项拓展落地·版本号 v2.2.73→v2.2.80·A4 主题专题 193→198 篇 |
+
+### v2.2.73 W321 A4 跨学科开拓·缘起即算法专题·唯识学×深度学习×西游记三向同构映射（玄奘唯识学+龙树中观+Hinton深度学习+Vaswani注意力机制四理论家·9 个 line 号·A4 主题专题 192→193 篇）
+
+| 文件 | W ID | 改动摘要 |
+|---|---|---|
+| docs/03-主题与情节专题/缘起即算法专题.md | W321 | v2.2.73 新建·294 行·七段式·唯识学×深度学习×西游记三向同构映射·四理论家+四核心概念+取经五众=模型架构+八节点训练日志+AI心经偈子+9 个 line 号（522/554/864/964/1393/2306/4432/7012/7142） |
+| CHANGELOG.md | W321 | v2.2.73 同步·新增 W321 版本段·W### 编号范围 W320→W321 |
+| README.md | W321 | v2.2.73 同步·版本号 v2.2.72→v2.2.73·A4 主题专题 192→193 篇 |
+| STRUCTURE.md | W321 | v2.2.73 同步·版本号 v2.2.72→v2.2.73·A4 主题专题 192→193 篇 |
+| docs/00-导读/项目说明.md | W321 | v2.2.73 同步·版本号 v2.2.72→v2.2.73·新增 W321 段 |
+| scripts/output/file-index.md | W321 | v2.2.73 同步·新增 W321 反向索引段 |
+| 交接文档.md | W321 | v2.2.73 同步·更新当前进度至 W321 缘起即算法专题·版本号 v2.2.72→v2.2.73·A4 主题专题 192→193 篇 |
+
 ### v2.2.72 W320 S2 外部分享扩充第二批·4 篇中等文章扩展至 200+ 行（心理学 144→206 / 经济学 148→225 / 后结构主义 162→244 / 认知科学 164→220·4 subagent 并行扩展·主代理 spot-check 验证行数·16 篇 S2 外部分享全部达 200+ 行·S2 方向收束）
 
 | 文件 | W ID | 改动摘要 |
