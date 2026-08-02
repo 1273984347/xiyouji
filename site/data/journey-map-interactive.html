@@ -44,7 +44,7 @@
         .hardship-detail {
             background: #fff5e6;
             border: 1px solid #f4d4b2;
-            border-left: 4px solid #e67e22;
+            border-left: 4px solid #C9A063;
             border-radius: 6px;
             padding: 14px 18px;
             margin-top: 14px;
@@ -53,7 +53,7 @@
             display: none;
         }
         .hardship-detail.visible { display: block; }
-        .hardship-detail h4 { color: #e67e22; margin-bottom: 6px; }
+        .hardship-detail h4 { color: #C9A063; margin-bottom: 6px; }
     </style>
 </head>
 <body>
@@ -102,7 +102,7 @@
             <div class="chart-block">
                 <svg id="chart-map" width="1150" height="640"></svg>
                 <div class="legend">
-                    <div class="legend-item"><span class="legend-swatch" style="background:#e67e22"></span>普通节点</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#C9A063"></span>普通节点</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#c8463a"></span>九难点（点击展开）</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#6B8E5A"></span>起点/终点</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#3a6b8c; opacity:0.6"></span>取经路线</div>
@@ -323,7 +323,7 @@
             .attr("fill", d => {
                 if (d.id === 0 || d.id === 16) return "#6B8E5A";
                 if (d.isHardship) return "#c8463a";
-                return "#e67e22";
+                return "#C9A063";
             })
             .attr("stroke", "#fff")
             .attr("stroke-width", 2)
@@ -362,7 +362,7 @@
             .attr("id", "current-marker")
             .attr("r", 14)
             .attr("fill", "none")
-            .attr("stroke", "#e67e22")
+            .attr("stroke", "#C9A063")
             .attr("stroke-width", 3)
             .attr("opacity", 0)
             .attr("transform", `translate(${projected[0].px},${projected[0].py})`);
@@ -411,7 +411,7 @@
     function showHardshipDetail(d) {
         const detail = document.getElementById("hardshipDetail");
         document.getElementById("hdTitle").textContent = `【第${d.id}节点】${d.hardshipTitle} · ${d.chapter}`;
-        document.getElementById("hdContent").innerHTML = `${d.hardshipDesc}<br><br><strong>位置：</strong>${d.name}（经度 ${d.lon}°，纬度 ${d.lat}°）<br><strong>耗时：</strong>${d.duration} 月<br><a href="${d.linkPage}" style="color:#e67e22;">查看取经全路程图 →</a>`;
+        document.getElementById("hdContent").innerHTML = `${d.hardshipDesc}<br><br><strong>位置：</strong>${d.name}（经度 ${d.lon}°，纬度 ${d.lat}°）<br><strong>耗时：</strong>${d.duration} 月<br><a href="${d.linkPage}" style="color:#C9A063;">查看取经全路程图 →</a>`;
         detail.classList.add("visible");
     }
 
@@ -450,7 +450,7 @@
             .attr("fill", d => {
                 if (d.id === 0 || d.id === 16) return "#6B8E5A";
                 if (d.isHardship) return "#c8463a";
-                return "#e67e22";
+                return "#C9A063";
             })
             .attr("opacity", 0.8)
             .on("mouseover", function(event, d) {
