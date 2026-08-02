@@ -7297,7 +7297,7 @@
     function main() {
         renderAll();
         bindEvents();
-        document.getElementById('gen-time').textContent =
+        const _gt=document.getElementById('gen-time');if(_gt)_gt.textContent =
             '页面生成时间：' + new Date().toISOString().slice(0, 19).replace('T', ' ') + '（本地嵌入）';
     }
 
