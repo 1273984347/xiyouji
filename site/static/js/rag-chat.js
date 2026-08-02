@@ -233,41 +233,41 @@
       const data = await res.json();
 
       let html = '';
-      // 文本片段
+      // 文本片段（snippets 为 {path, score, excerpt} 对象数组）
       if (data.snippets && data.snippets.length) {
-        html += data.snippets.map((s, i) =>
-          `<strong>${i + 1}.</strong> ${escapeHtml(s.slice(0, 200))}${s.length > 200 ? '…' : ''}`
-        ).join('<br><br>');
+        html += data.snippets.map((s, i) => {
+          const text = typeof s === 'string' ? s : (s.excerpt || s.path || '');
+          const score = s.score ? ` <small style="color:#9A9280">(${s.score.toFixed(1)})</small>` : '';
+          return `<strong>${i + 1}.</strong> ${escapeHtml(text.slice(0, 200))}${text.length > 200 ? '…' : ''}${score}`;
+        }).join('<br><br>');
       } else {
         html += '未找到相关语料。换个问法试试？';
       }
 
       const botMsg = addMessage('bot', html);
 
-      // 来源标注
-      if (data.sources && data.sources.length) {
+      // 来源标注（从 snippets 的 path 字段提取）
+      const sources = (data.snippets || [])
+        .filter(s => typeof s === 'object' && s.path)
+        .map(s => s.path.replace(/\\/g, '/').split('/').pop());
+      if (sources.length) {
         const srcDiv = document.createElement('div');
         srcDiv.className = 'rag-source';
-        srcDiv.innerHTML = '📖 来源：' + data.sources.map(s => escapeHtml(s)).join(' · ');
+        srcDiv.innerHTML = '📖 来源：' + sources.map(s => escapeHtml(s)).join(' · ');
         botMsg.querySelector('.rag-bubble').appendChild(srcDiv);
       }
 
-      // 图谱三元组
+      // 图谱三元组（{from, relation, to} 对象数组）
       if (data.graph && data.graph.length) {
         const graphDiv = document.createElement('div');
         graphDiv.className = 'rag-graph';
-        graphDiv.innerHTML = '🔗 ' + data.graph.slice(0, 6).map(g =>
-          `<span>${escapeHtml(g.from || g[0])} → ${escapeHtml(g.relation || g[1])} → ${escapeHtml(g.to || g[2])}</span>`
-        ).join('');
+        graphDiv.innerHTML = '🔗 ' + data.graph.slice(0, 6).map(g => {
+          const from = g.from || g[0] || '';
+          const rel = g.relation || g[1] || '';
+          const to = g.to || g[2] || '';
+          return `<span>${escapeHtml(from.slice(0,12))} →${escapeHtml(rel)}→ ${escapeHtml(to.slice(0,12))}</span>`;
+        }).join('');
         botMsg.querySelector('.rag-bubble').appendChild(graphDiv);
-      }
-
-      // 统计
-      if (data.total_docs) {
-        const metaDiv = document.createElement('div');
-        metaDiv.className = 'rag-source';
-        metaDiv.textContent = `索引 ${data.total_docs} 篇文档 · ${data.graph ? data.graph.length : 0} 条图谱三元组`;
-        botMsg.querySelector('.rag-bubble').appendChild(metaDiv);
       }
 
     } catch (e) {
