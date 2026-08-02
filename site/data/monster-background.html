@@ -3,70 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
     <title>妖怪后台论 · 详解西游记</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
     <style>
-        :root {
-            --bg: #faf7f2;
-            --paper: #ffffff;
-            --ink: #23201A;
-            --ink-soft: #6B6455;
-            --accent: #c8463a;
-            --accent-soft: #e9b885;
-            --accent-2: #3a6b8c;
-            --accent-3: #C9A063;
-            --accent-4: #6B8E5A;
-            --rebel: #8c2a2a;
-            --line: #d9cdb8;
-            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background: var(--bg);
-            color: var(--ink);
-            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-            line-height: 1.7;
-            min-height: 100vh;
-        }
-        .hero {
-            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
-            color: #f5e9d4;
-            padding: 50px 24px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
-            pointer-events: none;
-        }
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-        }
-        .hero .subtitle {
-            font-size: 0.95rem;
-            color: var(--accent-soft);
-            letter-spacing: 0.25em;
-            position: relative;
-            z-index: 1;
-        }
-        .hero .tagline {
-            margin-top: 12px;
-            font-size: 0.85rem;
-            color: rgba(245, 233, 212, 0.65);
-            font-style: italic;
-            position: relative;
-            z-index: 1;
-        }
+        /* === 仅本页特有样式 === */
         .container {
             max-width: 1280px;
             margin: -30px auto 60px;
@@ -362,8 +306,8 @@
             z-index: 100;
         }
         @media (max-width: 768px) {
-            .hero { padding: 36px 16px 28px; }
-            .hero h1 { font-size: 1.6rem; }
+            
+            
             .container { padding: 0 14px; }
             .section { padding: 18px 14px; }
             .kpi-card { padding: 14px; }
@@ -389,31 +333,37 @@
             top: 0;
         }
     </style>
-<link rel="stylesheet" href="../tokens.css">
-<!-- W334-RESKIN -->
 </head>
 <body>
-    <a href="#main-content" class="skip-link">跳到主内容</a>
-    <div class="hero">
-        <h1>妖怪后台论</h1>
-        <div class="subtitle">Monster Background Theory</div>
-        <div class="tagline">—— 没有背景的妖怪，连成为妖怪的资格都没有</div>
-    </div>
-    <div class="container">
-        <div class="breadcrumb">
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
             <a href="../index.html">首页</a>
-            <span class="sep">›</span>
-            <a href="monster-sociology.html">妖怪社会学</a>
-            <span class="sep">›</span>
-            <span class="current">妖怪后台论</span>
-        </div>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 妖怪后台论</p>
+        <p class="kicker">I · 妖怪社会学</p>
+        <h1>妖怪后台论</h1>
+        <p class="subtitle">坐骑下凡·有背景妖怪的命运透视</p>
+    </section>
+
+    <main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
         <div class="notice">
             本页是「妖怪社会学」的专题深化，聚焦全书最尖锐的讽刺——妖怪的生死不取决于实力，而取决于后台。数据基于《西游记》原著 100 回，共统计 69 名妖怪。统计口径说明：「后台分类存活率」按妖怪所属后台类型聚合，「处置方式计数」按最终结局聚合，两类口径存在 ±2 名交叉误差（逃脱类妖怪的后台归属判定差异所致），不影响核心结论。
         </div>
 
         <div class="kpi-row" id="kpi-row" role="region" aria-label="核心指标"></div>
 
-        <main id="main-content">
             <section class="section" aria-labelledby="sec-types">
                 <h2 class="section-title" id="sec-types">一、后台类型分类</h2>
                 <div class="section-sub">4 类后台强度 × 存活率相关性分析 · 气泡大小代表妖怪数量</div>
@@ -523,13 +473,21 @@
                     </a>
                 </div>
             </section>
-        </main>
-    </div>
-    <footer>
-        <p>妖怪后台论 · 数据基于《西游记》原著 100 回 · 共统计 69 名妖怪</p>
-        <p>返回 <a href="../index.html">首页</a> · <a href="monster-sociology.html">妖怪社会学</a> · <a href="../dashboard.html">总览</a></p>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
     </footer>
-    <div class="tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
+<div class="tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
 
     <script>
     const EMBEDDED = {
@@ -1049,5 +1007,7 @@
 
     main();
     </script>
+</body>
+</html>
 </body>
 </html>
