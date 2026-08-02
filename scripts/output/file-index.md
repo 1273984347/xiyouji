@@ -9,6 +9,18 @@
 ---
 
 
+## W336 RAG前端接入+数据产品化（2026-08-03）
+
+| 文件 | 操作 | 说明 |
+|------|------|------|
+| site/static/js/rag-chat.js | 新建 | 渡口问津浮动对话组件 |
+| scripts/extract_datasets.js | 新建 | EMBEDDED_DATA 提取脚本 |
+| dataset/*.json（40 个） | 新建 | 结构化数据集 |
+| dataset/README.md | 新建 | 数据手册 |
+| site/index.html | 修改 | 嵌入 rag-chat.js |
+| site/dashboard.html | 修改 | 嵌入 rag-chat.js |
+
+
 ## W335 全站设计系统迁移（2026-08-03）
 
 | 文件 | 操作 | 说明 |
