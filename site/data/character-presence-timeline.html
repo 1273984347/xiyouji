@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>人物出场时间线可视化 · W131</title>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<style>
-:root {
-  --bg: #faf7f2;
-  --ink: #23201A;
-  --accent: #c8463a;
-  --accent2: #3a6b8c;
-  --muted: #8b7355;
-  --paper: #f5ede0;
-  --border: #d4c4a8;
-}
-body { background: var(--bg); color: var(--ink); font-family: "Songti SC", "STSong", serif; margin: 0; padding: 20px; }
-h1 { text-align: center; color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>人物出场时间线可视化 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
+    <style>
+        /* === 仅本页特有样式 === */
+        h1 { text-align: center; color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
 .subtitle { text-align: center; color: var(--muted); margin-bottom: 30px; }
 .section { background: var(--paper); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin: 20px 0; }
 .section-title { color: var(--accent); border-left: 4px solid var(--accent); padding-left: 10px; margin-top: 0; }
@@ -36,14 +32,32 @@ h1 { text-align: center; color: var(--accent); border-bottom: 2px solid var(--ac
 .insight-list { background: #fff; padding: 15px; border-radius: 4px; }
 .insight-item { margin: 8px 0; padding-left: 20px; position: relative; }
 .insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
-</style>
-<link rel="stylesheet" href="../tokens.css">
-<!-- W334-RESKIN -->
+    </style>
 </head>
 <body>
-<h1>人物出场时间线可视化</h1>
-<div class="subtitle">W131 · D 方向 · 基于 W100+W102+W103+W121+W125+W129 六层 NLP 数据 · 人物出场时间结构</div>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
 
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 人物出场时间线可视化</p>
+        <p class="kicker">D · 关系</p>
+        <h1>人物出场时间线可视化</h1>
+        <p class="subtitle">W131 · 六层 NLP 数据 · 人物出场时间结构</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
 <div class="kpi-row">
   <div class="kpi-card"><div class="kpi-value">100</div><div class="kpi-label">总回目</div></div>
   <div class="kpi-card"><div class="kpi-value">35</div><div class="kpi-label">追踪人物</div></div>
@@ -120,7 +134,20 @@ h1 { text-align: center; color: var(--accent); border-bottom: 2px solid var(--ac
     <div class="insight-item"><strong>组建序列：</strong>取经团队组建序列：悟空（第14回）+ 白龙马（第15回）+ 八戒（第19回）+ 沙僧（第22回），符合 W121 五众关系网络的 Forming 阶段。</div>
   </div>
 </section>
+    </main>
 
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </footer>
 <script>
 const EMBEDDED = {
   // 100 回出场人物数（模拟数据·基于 W100 characters.json 统计）
@@ -350,5 +377,7 @@ window.addEventListener('resize', () => {
 });
 main();
 </script>
+</body>
+</html>
 </body>
 </html>

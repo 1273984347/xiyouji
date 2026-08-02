@@ -1,31 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>三教神学干预网络图谱</title>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<style>
-:root {
-    --ink: #23201A;
-    --ink-soft: #5c4a35;
-    --paper: #f5ecd9;
-    --paper-deep: #e9dcc0;
-    --accent-1: #a83232;   /* 佛·朱砂红 */
-    --accent-2: #2d6a4f;   /* 道·松柏绿 */
-    --accent-3: #1e3a8a;   /* 儒·靛青蓝 */
-    --accent-4: #b8860b;   /* 心·心学金黄 */
-    --line: #c9b896;
-}
-* { box-sizing: border-box; }
-body {
-    margin: 0;
-    font-family: "Noto Serif SC", "Source Han Serif SC", serif;
-    background: var(--paper);
-    color: var(--ink);
-    line-height: 1.6;
-}
-.container { max-width: 1280px; margin: 0 auto; padding: 24px 20px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>三教神学干预网络图谱 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <link rel="stylesheet" href="../tokens.css">
+    <link rel="stylesheet" href="../system.css">
+    <style>
+        /* === 仅本页特有样式 === */
+        .container { max-width: 1280px; margin: 0 auto; padding: 24px 20px; }
 header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--accent-1); }
 h1 { font-size: 2.2em; margin: 8px 0 4px; color: var(--ink); letter-spacing: 4px; }
 .subtitle { font-size: 0.95em; color: var(--ink-soft); }
@@ -64,11 +50,32 @@ footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: ce
 footer a { color: #e9b885; }
 footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
 footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
-</style>
-<link rel="stylesheet" href="../tokens.css">
-<!-- W334-RESKIN -->
+    </style>
 </head>
 <body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 三教神学干预网络图谱</p>
+        <p class="kicker">D · 关系</p>
+        <h1>三教神学干预网络图谱</h1>
+        <p class="subtitle">W278 · 显化-点化-试炼-收服-授记五型干预</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
 <div class="container">
     <nav class="breadcrumb" aria-label="面包屑">
         <a href="../index.html">首页</a><span class="sep">›</span>
@@ -214,20 +221,20 @@ footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
         </div>
     </section>
 </div>
+    </main>
 
-<footer>
-    <p>详解西游记 · 三教神学干预网络图谱 · W278 · V 方向可视化页面 · 跨方向整合项目主题 3</p>
-    <p>3 三教神祇 + 5 干预型 + 13 line 号·基于 W277 神学干预机制专题四理论家框架（奥托/伊利亚德/田立克/希克）。</p>
-    <div class="footer-index">
-        正向时间线：CHANGELOG.md v2.2.50 W278 · 反向文件索引：scripts/output/file-index.md W278 · 方向索引：site/data/ · V 方向·跨方向整合项目主题 3
-    </div>
-    <div class="footer-cross">
-        <a href="monster-ecology-network.html">monster-ecology-network.html（W274 妖怪生态）</a> /
-        <a href="pilgrim-team-dynamics.html">pilgrim-team-dynamics.html（W270 取经团队）</a> /
-        <a href="../docs/03-主题与情节专题/神学干预机制专题.md">神学干预机制专题.md（W277 A 文档）</a>
-    </div>
-</footer>
-
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </footer>
 <script>
 // ============= Embedded Data =============
 const EMBEDDED_DATA = {
@@ -688,5 +695,7 @@ const EMBEDDED_DATA = {
         .text("三教合一终极指向");
 })();
 </script>
+</body>
+</html>
 </body>
 </html>
