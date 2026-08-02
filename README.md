@@ -2,7 +2,8 @@
 
 > 一座关于《西游记》的混合型解读项目 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前版本 v2.2.88（2026-08-03）**：A1 逐回 100 回（每回追加深度解读 + 原文全文） + A2 随笔 43 篇 + A3 人物深化 199 篇 + A4 主题专题 199 篇 + A5 文化 22 篇 + A6 诗词 12 篇 + S1 方法论 13 篇 + S2 学术投稿 8 篇（W318 候选达一致详细度 124-176 行） + S2 外部分享 16 篇（W319-W320 全部扩展至 200+ 行） + S3 方法论外部分享 13 篇（方向收束）+ 80 个 D3.js/Three.js 可视化页面（133 数据维度·含 W313 V3 标签云全站导航）+ site/mobile-index.html 移动端入口（W314 V4·375px 原生设计·触摸友好）+ dashboard 55 KPI（含项目研究矩阵 10 卡片 + 标签云入口）+ 全站搜索 + 学术索引 55 条 + hyperframes 多视频 + MCP Server + Playwright E2E 三层测试 + AI 代理协作模板 + E3-E8 工程化深化（性能/监控/SEO/安全/CI-CD/a11y 40 WCAG 2.2 完整规范规则·W317 E5 单元测试 53 个全通过）+ GitHub Actions 4 workflows（ci/perf/security/screenshot-review）+ site/en/ 英文站 + 佛法=AI 框架六大拓展落地（W322 黑神话拒箍专题 + W323 第0篇缘起总纲·西游渡元定义 + W324 暗数据遗忘者列传 + W325 缘起即算法章节体 + W326 三维语义映射表·Neo4j CSV + W327 渡口无我写作引擎 HTML 原型）+ W329 方向③招安对比重写专题·唯识AI框架双模型对照（西游×水浒·宋江=过拟合模型/悟空=正则化模型）+ W330 本地 RAG 后端（scripts/rag/ 零依赖·BM25 向量层+W326 图谱层双层检索·Neo4j 种子脚本+dukou-engine 桥接）+ W331 渡口引擎图谱可视化（site/dukou-engine 新增 W326 三元组纯 SVG 关系图面板·零依赖复用 /graph + W332 渡口引擎图谱交互式展开（site/dukou-engine 图谱节点可点击·展开关联三元组·零依赖复用 /graph·去重累积·重置按钮）+ W333 渡口引擎图谱力导向布局（site/dukou-engine 图谱升级为带位置缓存的轻量力导向布局·消除点击跳变·节点半径按度数映射·方向箭头 marker·焦点节点高亮·零依赖复用 /graph·本 W 为前端增强·A4 计数不变仍 199 篇）+ W334（v2.2.86）全站 UI/UX 重设计·新中式·数字雅集（tokens.css v2 令牌集中化·图表五色雅集色板·字体三层栈·首页档案索引表+巨数 Hero 全量重写·dashboard 环图外置图例+文字筛选 tab 全量重写·88 页批量换肤·字体子集化管线 woff2 本地托管·零新增运行时依赖·file:// 全兼容·A4 计数不变仍 199 篇） + W335 全站设计系统迁移（site/system.css 组件库·故宫×Linear 设计语言·topnav/hero/card/kpi/chart/table/footer 统一组件·76 页批量迁移至新骨架·Playwright 82 页零 JS 错误验证·净减 5673 行冗余 CSS） + W336 RAG前端接入+数据产品化（site/static/js/rag-chat.js 渡口问津浮动对话组件·调用 rag_server.py /query+/graph·服务在线/离线自动检测·已嵌入 index+dashboard + dataset/ 目录 40 个结构化 JSON·scripts/extract_datasets.js 提取脚本·dataset/README.md 数据手册））。详细方向描述见 [CHANGELOG.md](CHANGELOG.md) 当前版本段。
+> **当前版本 v2.2.88（2026-08-03）**：A1 逐回 100 回 + A2 随笔 43 篇 + A3 人物 199 篇 + A4 专题 199 篇 + A5 文化 22 篇 + A6 诗词 12 篇 + S1-S3 方法论/分享 50 篇 + 80 个 D3.js/Three.js 可视化（133 维度）+ 全站设计系统（system.css·故宫×Linear）+ RAG 对话（渡口问津）+ dataset/ 40 个结构化 JSON + 本地 RAG 后端 + Playwright E2E + GitHub Actions 4 workflows + 英文站。
+> 详细变更见 [CHANGELOG.md](CHANGELOG.md)，历史归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
 
 ## 项目定位
 
@@ -374,4 +375,4 @@ npm run test:e2e
 
 ---
 
-> 项目目录创建于 2026-07-21，初版骨架。详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 项目目录创建于 2026-07-21，初版骨架。W334（v2.2.86）全站设计系统·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
