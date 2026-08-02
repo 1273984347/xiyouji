@@ -7,7 +7,7 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <style>
 :root {
-    --ink: #2c2418;
+    --ink: #23201A;
     --ink-soft: #5c4a35;
     --paper: #f5ecd9;
     --paper-deep: #e9dcc0;
@@ -60,11 +60,13 @@ svg { display: block; }
 .theory-matrix th { background: var(--paper-deep); font-weight: 600; }
 .theory-matrix tr:nth-child(even) { background: rgba(255,248,231,0.5); }
 
-footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
 footer a { color: #e9b885; }
 footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
 footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
 <div class="container">
@@ -387,7 +389,7 @@ const EMBEDDED_DATA = {
         .data(data.nodes).enter().append("circle")
         .attr("r", d => d.size / 2)
         .attr("fill", d => d.color)
-        .attr("stroke", "#2c2418")
+        .attr("stroke", "#23201A")
         .attr("stroke-width", 1.5)
         .call(d3.drag()
             .on("start", (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
@@ -400,7 +402,7 @@ const EMBEDDED_DATA = {
         .text(d => d.id)
         .attr("font-size", d => d.type === "deity" ? "13px" : (d.type === "intervention" ? "12px" : "10px"))
         .attr("font-weight", d => d.type === "deity" ? 700 : (d.type === "intervention" ? 600 : 400))
-        .attr("fill", "#2c2418")
+        .attr("fill", "#23201A")
         .attr("text-anchor", "middle")
         .attr("dy", d => d.size / 2 + 14);
 
@@ -519,7 +521,7 @@ const EMBEDDED_DATA = {
             .attr("text-anchor", "middle")
             .attr("font-size", "13px")
             .attr("font-weight", 600)
-            .attr("fill", "#2c2418")
+            .attr("fill", "#23201A")
             .text(ax);
     });
 
@@ -591,7 +593,7 @@ const EMBEDDED_DATA = {
             .attr("cx", x).attr("cy", y)
             .attr("r", 6)
             .attr("fill", color)
-            .attr("stroke", "#2c2418")
+            .attr("stroke", "#23201A")
             .attr("stroke-width", 1.5);
 
         // Label box
@@ -607,7 +609,7 @@ const EMBEDDED_DATA = {
             .attr("text-anchor", "middle")
             .attr("font-size", "10px")
             .attr("font-weight", 700)
-            .attr("fill", "#2c2418")
+            .attr("fill", "#23201A")
             .text(`${d.chapter}·${d.type}`);
         svg.append("text")
             .attr("x", x).attr("y", labelY + 8)
@@ -645,7 +647,7 @@ const EMBEDDED_DATA = {
             .attr("cx", a.x).attr("cy", height / 2)
             .attr("r", 16)
             .attr("fill", a.color)
-            .attr("stroke", "#2c2418")
+            .attr("stroke", "#23201A")
             .attr("stroke-width", 2);
         svg.append("text")
             .attr("x", a.x).attr("y", height / 2 - 30)

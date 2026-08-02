@@ -8,9 +8,9 @@
     <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     <style>
         :root {
-            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
             --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
-            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --accent-3: #C9A063; --accent-4: #6B8E5A; --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
         }
@@ -85,7 +85,7 @@
         .chart-wrap { position: relative; }
         #network-svg { display: block; width: 100%; min-height: 580px; background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; }
         .node-circle { cursor: pointer; transition: stroke 0.2s; }
-        .node-circle:hover { stroke: #2c2418; stroke-width: 2.5px; }
+        .node-circle:hover { stroke: #23201A; stroke-width: 2.5px; }
         .node-label { font-size: 12px; fill: var(--ink); pointer-events: none; font-weight: 600; }
         .node-label.dim { fill: #b8a584; font-weight: 400; }
         .network-tip {
@@ -95,7 +95,7 @@
         }
         .network-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
         .network-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
-        .network-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6b5e4d; }
+        .network-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
         .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
         .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
         .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 50%; }
@@ -110,7 +110,7 @@
         }
         .insight-box strong { color: var(--accent); font-weight: 700; }
         .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
-        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
         footer a { color: #e9b885; }
         @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
         @media (max-width: 480px) {
@@ -120,6 +120,8 @@
             .stage-btn { padding: 6px 12px; font-size: 0.82em; }
         }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <a href="#main-content" class="skip-link">跳到主内容</a>
@@ -249,8 +251,8 @@
         pilgrim: { label: "取经团队", color: "#c8463a" },
         heaven:  { label: "天庭神系", color: "#3a6b8c" },
         buddha:  { label: "佛界菩萨", color: "#b8862a" },
-        demon:   { label: "妖怪群体", color: "#7a5230" },
-        mortal:  { label: "凡人",     color: "#5a7a3a" }
+        demon:   { label: "妖怪群体", color: "#C9A063" },
+        mortal:  { label: "凡人",     color: "#6B8E5A" }
     };
 
     // 关系类型配置
@@ -259,7 +261,7 @@
         enemy:   { label: "敌对", color: "#8c2a2a" },
         help:    { label: "帮助", color: "#3a6b8c" },
         kin:     { label: "亲属", color: "#b8862a" },
-        recruit: { label: "收编", color: "#5a7a3a" }
+        recruit: { label: "收编", color: "#6B8E5A" }
     };
 
     // 35 个节点：id/name/faction/freq（出场频次 1-15）/stages（活跃阶段 [1,2,3,4]）
@@ -439,7 +441,7 @@
             .attr("stroke", "#fff")
             .attr("stroke-width", 2)
             .on("mouseover", function(event, d) {
-                d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2.5);
+                d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2.5);
                 // 高亮关联边
                 link.attr("stroke-opacity", e =>
                     (e.source.id || e.source) === d.id || (e.target.id || e.target) === d.id ? 0.95 : 0.15

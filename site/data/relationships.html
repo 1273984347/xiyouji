@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -443,6 +443,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -1044,10 +1046,10 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             "factions": [
                 {"name": "天庭", "english_name": "Heavenly Court", "leader": "玉皇大帝", "members_count": 10000, "core_members": ["玉帝","王母","太上老君","如来(名义)","李天王","哪吒","二郎神","二十八星宿","四大天王"], "influence": 10, "resources": ["蟠桃园","兜率宫仙丹","天兵天将","法宝库"], "relationship_to_pilgrim": "名义监管·多次派兵围剿·后默许取经", "color": "#c8463a"},
                 {"name": "灵山", "english_name": "Vulture Peak", "leader": "如来佛祖", "members_count": 4800, "core_members": ["如来","观音","文殊","普贤","十八罗汉","阿难迦叶","弥勒"], "influence": 10, "resources": ["佛经三藏","金箍咒三件","菩提场","功德"], "relationship_to_pilgrim": "项目发起方·终极目标·多次救援", "color": "#3a6b8c"},
-                {"name": "妖界", "english_name": "Demon Realm", "leader": "无统一领导", "members_count": 500, "core_members": ["牛魔王","六耳猕猴","白骨精","蜘蛛精","蜈蚣精","百眼魔君"], "influence": 7, "resources": ["洞府","法宝（盗用）","小妖军队"], "relationship_to_pilgrim": "项目主要障碍·81 难中 60+ 来自妖界", "color": "#5a7a3a"},
+                {"name": "妖界", "english_name": "Demon Realm", "leader": "无统一领导", "members_count": 500, "core_members": ["牛魔王","六耳猕猴","白骨精","蜘蛛精","蜈蚣精","百眼魔君"], "influence": 7, "resources": ["洞府","法宝（盗用）","小妖军队"], "relationship_to_pilgrim": "项目主要障碍·81 难中 60+ 来自妖界", "color": "#6B8E5A"},
                 {"name": "地府", "english_name": "Underworld", "leader": "十殿阎王", "members_count": 3000, "core_members": ["十殿阎王","崔判官","孟婆","黑白无常","牛头马面"], "influence": 6, "resources": ["生死簿","黄泉路","十八层地狱","轮回系统"], "relationship_to_pilgrim": "曾被悟空大闹·李世民游地府·寇洪还魂", "color": "#5a3828"},
                 {"name": "散仙", "english_name": "Loose Immortals", "leader": "无", "members_count": 50, "core_members": ["镇元大仙","菩提祖师","乌巢禅师","黎山老母","紫云真人"], "influence": 6, "resources": ["人参果","道法传承","独立势力"], "relationship_to_pilgrim": "中立偏助·菩提是悟空师傅·镇元结拜", "color": "#9c6b3a"},
-                {"name": "人间", "english_name": "Mortal Realm", "leader": "李世民（大唐）", "members_count": 100000000, "core_members": ["李世民","魏征","秦叔宝","尉迟恭","陈光蕊","殷温娇"], "influence": 5, "resources": ["军队","人口","土地","贡品"], "relationship_to_pilgrim": "项目发起国·唐僧出身地", "color": "#7a5230"},
+                {"name": "人间", "english_name": "Mortal Realm", "leader": "李世民（大唐）", "members_count": 100000000, "core_members": ["李世民","魏征","秦叔宝","尉迟恭","陈光蕊","殷温娇"], "influence": 5, "resources": ["军队","人口","土地","贡品"], "relationship_to_pilgrim": "项目发起国·唐僧出身地", "color": "#C9A063"},
                 {"name": "水族", "english_name": "Aquatic Tribes", "leader": "四海龙王", "members_count": 5000, "core_members": ["东海龙王","南海龙王","西海龙王","北海龙王","泾河龙王","万圣龙王"], "influence": 5, "resources": ["水族兵","珍珠珊瑚","雨水控制"], "relationship_to_pilgrim": "中立·悟空'借'定海神针·泾河龙王被斩", "color": "#3a8c8c"}
             ],
             "balance_analysis": {
@@ -4614,7 +4616,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('dy', '0.35em')
             .style('font-size', '12px')
             .style('font-weight', '600')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text(d => d.influence);
 
         // 首领标注（右侧）
@@ -4623,7 +4625,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('y', d => y(d.name) + y.bandwidth() / 2)
             .attr('dy', '0.35em')
             .style('font-size', '11px')
-            .attr('fill', '#6b5e4d')
+            .attr('fill', '#6B6455')
             .text(d => '首领：' + d.leader);
     }
 
@@ -4683,7 +4685,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         // 构建克制边（克制者 → 被克者）
         // 解析 countered_by 与 can_collect 生成边
         const edges = [];
-        const counterColor = '#7a5230';
+        const counterColor = '#C9A063';
 
         // 从 can_collect 提取：主法宝 克制 can_collect 中的其他主法宝
         data.counter_chain.forEach(src => {
@@ -4806,7 +4808,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 .attr('dominant-baseline', 'middle')
                 .style('font-size', isMain ? '12px' : '10px')
                 .style('font-weight', isMain ? '600' : '400')
-                .attr('fill', isMain ? '#2c2418' : '#3a6b8c')
+                .attr('fill', isMain ? '#23201A' : '#3a6b8c')
                 .text(node.id);
         });
 
@@ -4816,13 +4818,13 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('y', -6)
             .style('font-size', '14px')
             .style('font-weight', '600')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text('法宝克制链');
         g.append('text')
             .attr('text-anchor', 'middle')
             .attr('y', 12)
             .style('font-size', '11px')
-            .attr('fill', '#6b5e4d')
+            .attr('fill', '#6B6455')
             .text('8 法宝 · 14 克制关系');
     }
 
@@ -4882,8 +4884,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const colorMap = {
             'source': '#c8463a',
             'buddha': '#3a6b8c',
-            'specialist': '#5a7a3a',
-            'self': '#6b5e4d'
+            'specialist': '#6B8E5A',
+            'self': '#6B6455'
         };
 
         const g = svg.append('g');
@@ -5001,8 +5003,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             '唐僧': '#3a6b8c',
             '孙悟空': '#c8463a',
             '猪八戒': '#e9b885',
-            '沙僧': '#5a7a3a',
-            '白龙马': '#7a5230'
+            '沙僧': '#6B8E5A',
+            '白龙马': '#C9A063'
         };
 
         const angle = (i) => (i * 2 * Math.PI / nDims) - Math.PI / 2;
@@ -5022,7 +5024,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             gridG.append('text')
                 .attr('x', 4).attr('y', -r + 3)
                 .style('font-size', '10px')
-                .attr('fill', '#6b5e4d')
+                .attr('fill', '#6B6455')
                 .text((lv * 2).toString());
         }
 
@@ -5041,7 +5043,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 .attr('dominant-baseline', 'middle')
                 .style('font-size', '11px')
                 .style('font-weight', '600')
-                .attr('fill', '#2c2418')
+                .attr('fill', '#23201A')
                 .text(d);
         });
 
@@ -5086,13 +5088,13 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('cx', 0).attr('cy', 0)
             .attr('r', scoreR)
             .attr('fill', 'none')
-            .attr('stroke', '#6b5e4d')
+            .attr('stroke', '#6B6455')
             .attr('stroke-dasharray', '6,4')
             .attr('stroke-width', 1.5);
         gridG.append('text')
             .attr('x', scoreR * Math.SQRT1_2 + 4)
             .attr('y', -scoreR * Math.SQRT1_2 - 4)
-            .style('font-size', '10px').style('fill', '#6b5e4d')
+            .style('font-size', '10px').style('fill', '#6B6455')
             .text(`团队评分 ${data.team_balance.team_score}`);
     }
 
@@ -5103,8 +5105,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             '唐僧': '#3a6b8c',
             '孙悟空': '#c8463a',
             '猪八戒': '#e9b885',
-            '沙僧': '#5a7a3a',
-            '白龙马': '#7a5230'
+            '沙僧': '#6B8E5A',
+            '白龙马': '#C9A063'
         };
         const items = legend.selectAll('.legend-item')
             .data(data.pilgrim_team).enter()
@@ -5113,7 +5115,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         items.append('span').attr('class', 'legend-swatch').style('background', d => colorMap[d.character]);
         items.append('span').text(d => d.character + '（' + d.primary_role + '）');
         legend.append('span').attr('class', 'legend-item')
-            .html('<span class="legend-swatch line" style="background:#6b5e4d;"></span>团队评分 ' + data.team_balance.team_score);
+            .html('<span class="legend-swatch line" style="background:#6B6455;"></span>团队评分 ' + data.team_balance.team_score);
     }
 
     function renderBelbinTable(data) {
@@ -5153,9 +5155,9 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const factionColor = {
             pilgrim: '#c8463a',    // 取经团队 红
             buddha: '#3a6b8c',     // 神佛 蓝
-            monster: '#5a7a3a',    // 妖怪 绿
+            monster: '#6B8E5A',    // 妖怪 绿
             loose: '#9c6b3a',      // 散仙 棕
-            heaven: '#7a5230'      // 天庭 棕红
+            heaven: '#C9A063'      // 天庭 棕红
         };
 
         // 人物阵营分类
@@ -5410,7 +5412,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             return;
         }
 
-        const colors = ['#c8463a', '#3a6b8c', '#5a7a3a', '#9c6b3a', '#7a5230', '#3a8c8c', '#c8783a', '#6b3a8c', '#3a8c6b', '#8c3a6b'];
+        const colors = ['#c8463a', '#3a6b8c', '#6B8E5A', '#9c6b3a', '#C9A063', '#3a8c8c', '#c8783a', '#6b3a8c', '#3a8c6b', '#8c3a6b'];
 
         const x = d3.scaleLinear().domain([1, 100]).range([0, w]);
         const y = d3.scalePoint().domain(pairs.map((p, i) => i)).range([h, 0]).padding(0.5);
@@ -5515,7 +5517,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             '二郎神': '#3a6b8c', '哪吒': '#3a6b8c', '李靖': '#3a6b8c', '王母': '#3a6b8c', '太白金星': '#3a6b8c',
             '弥勒佛': '#3a6b8c', '镇元子': '#9c6b3a'
         };
-        const defaultColor = '#5a7a3a';
+        const defaultColor = '#6B8E5A';
         const getColor = id => factionColors[id] || defaultColor;
 
         const sim = d3.forceSimulation(nodes)

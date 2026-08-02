@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -477,6 +477,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -658,8 +660,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         "中国":       "#c8463a",
         "中国香港":   "#e9b885",
         "日本":       "#3a6b8c",
-        "韩国":       "#5a7a3a",
-        "越南":       "#7a5230",
+        "韩国":       "#6B8E5A",
+        "越南":       "#C9A063",
         "美国":       "#8e6b8e",
         "澳大利亚":    "#4a7d6a"
     };
@@ -972,13 +974,13 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("dy", "0.35em")
             .style("font-size", "1.8rem")
             .style("font-weight", "600")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .text(total);
         g.append("text")
             .attr("text-anchor", "middle")
             .attr("dy", "2em")
             .style("font-size", "0.72rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .text("部作品");
 
         // 切片标签
@@ -1021,7 +1023,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .range([13, 34]);
 
         // 颜色：按频次从浅到深
-        const colorPalette = ["#6b5e4d", "#7a5230", "#a85a2c", "#c8463a"];
+        const colorPalette = ["#6B6455", "#C9A063", "#a85a2c", "#c8463a"];
         const colorScale = d3.scaleQuantize()
             .domain([minCount, maxCount])
             .range(colorPalette);
@@ -1076,7 +1078,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         g.append("line")
             .attr("x1", 0).attr("x2", innerW)
             .attr("y1", innerH / 2).attr("y2", innerH / 2)
-            .attr("stroke", "#7a5230")
+            .attr("stroke", "#C9A063")
             .attr("stroke-width", 2);
 
         // 年份刻度
@@ -1087,7 +1089,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .append("line")
             .attr("x1", d => x(d)).attr("x2", d => x(d))
             .attr("y1", innerH / 2 - 6).attr("y2", innerH / 2 + 6)
-            .attr("stroke", "#7a5230")
+            .attr("stroke", "#C9A063")
             .attr("stroke-width", 1);
 
         g.append("g")
@@ -1191,7 +1193,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             lg.append("text")
                 .attr("x", 16).attr("y", 4)
                 .style("font-size", "0.78rem")
-                .style("fill", "#6b5e4d")
+                .style("fill", "#6B6455")
                 .text(c);
             lx += c.length * 14 + 36;
         });

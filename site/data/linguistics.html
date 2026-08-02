@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -666,6 +666,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -1072,14 +1074,14 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         sanskrit: '#c8463a',
         taoist: '#e9b885',
         ming: '#3a6b8c',
-        classical: '#5a7a3a'
+        classical: '#6B8E5A'
     };
     const CHAR_COLORS = {
         '唐僧': '#3a6b8c',
         '孙悟空': '#c8463a',
         '猪八戒': '#e9b885',
-        '沙悟净': '#5a7a3a',
-        '如来佛祖': '#7a5230',
+        '沙悟净': '#6B8E5A',
+        '如来佛祖': '#C9A063',
         '观音菩萨': '#c8463a',
         '太上老君': '#e9b885',
         '玉帝': '#3a6b8c'
@@ -1161,12 +1163,12 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('transform', 'rotate(-90)')
             .attr('x', -h/2).attr('y', -42)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text('语言来源占比');
         g.append('text').attr('class', 'axis-label')
             .attr('x', w/2).attr('y', h + 60)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text('咒语名称');
 
         // stacked bars
@@ -1253,13 +1255,13 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('y', -8)
             .style('font-size', '14px')
             .style('font-weight', '600')
-            .style('fill', '#2c2418')
+            .style('fill', '#23201A')
             .text('8 咒语');
         g.append('text')
             .attr('text-anchor', 'middle')
             .attr('y', 12)
             .style('font-size', '11px')
-            .style('fill', '#6b5e4d')
+            .style('fill', '#6B6455')
             .text('4 类来源均势');
 
         // 标注
@@ -1394,12 +1396,12 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('transform', 'rotate(-90)')
             .attr('x', -h/2).attr('y', -42)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text('power_distance 权力距离 (0-10)');
         g.append('text').attr('class', 'axis-label')
             .attr('x', w/2).attr('y', h + 50)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text('对话对（speaker → listener）');
 
         // bars
@@ -1434,7 +1436,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('text-anchor', 'middle')
             .style('font-size', '12px')
             .style('font-weight', '600')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text(d => d.power_distance);
     }
 
@@ -1451,7 +1453,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
         // 4 main pairs (exclude 沙僧)
         const pairs = data.dialogue_pairs.slice(0, 4);
-        const colors = [LANG_COLORS.sanskrit, LANG_COLORS.ming, LANG_COLORS.classical, '#7a5230'];
+        const colors = [LANG_COLORS.sanskrit, LANG_COLORS.ming, LANG_COLORS.classical, '#C9A063'];
 
         // stage labels: 阶段 1-4
         const stageCount = 4;
@@ -1482,12 +1484,12 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('transform', 'rotate(-90)')
             .attr('x', -h/2).attr('y', -42)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text('power_distance_reflected 权力距离反映 (0-10)');
         g.append('text').attr('class', 'axis-label')
             .attr('x', w/2).attr('y', h + 50)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text('演变阶段（代表性对话按章节顺序）');
 
         // lines
@@ -1612,7 +1614,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 .attr('y', -r)
                 .attr('text-anchor', 'end')
                 .style('font-size', '9px')
-                .style('fill', '#6b5e4d')
+                .style('fill', '#6B6455')
                 .text((lv * 2).toString());
         }
         // 轴线
@@ -1632,7 +1634,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 .attr('dy', '0.35em')
                 .style('font-size', '13px')
                 .style('font-weight', '600')
-                .style('fill', '#2c2418')
+                .style('fill', '#23201A')
                 .text(dimLabels[i]);
         });
 
@@ -1723,12 +1725,12 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('transform', 'rotate(-90)')
             .attr('x', -h/2).attr('y', -42)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text('语言来源占比');
         g.append('text').attr('class', 'axis-label')
             .attr('x', w/2).attr('y', h + 60)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text('角色');
 
         g.append('g').selectAll('g')

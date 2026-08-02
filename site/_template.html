@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  _template.html — 西游记可视化页面起点模板
+  _template.html — 西游记可视化页面起点模板（W334 新中式·数字雅集版）
   ==================================================
   用途：新建可视化页面时复制本文件，修改 title / 数据 / 图表即可。
   使用步骤：
@@ -8,8 +8,17 @@
     2. 修改 <title>、.hero 内标题 / 副标题 / tagline
     3. 在 EMBEDDED_DATA 区块替换为页面专属数据
     4. 在图表占位区编写 D3 渲染逻辑
-  注意：tokens.css 位于 site/ 根，data/ 子目录页面用 href="../tokens.css" 引用。
-  不修改现有 57 个 HTML 页面，本模板仅供未来新页面使用。
+  注意：tokens.css 位于 site/ 根，data/ 子目录页面用 href="../tokens.css" 引用
+        （本模板位于 site/ 根故为 href="tokens.css"，复制到 data/ 后请改为 ../tokens.css）。
+  不修改现有页面，本模板仅供未来新页面使用。
+
+  【W334 图表规范】
+    - 系列色一律取令牌：var(--chart-1..6) = 朱砂/靛蓝/赭金/苔绿/米灰/赭石
+      JS 中写法：getComputedStyle(document.documentElement).getPropertyValue('--chart-1')
+      或直接硬编码 #C8463A / #3A6B8C / #C9A063 / #6B8E5A / #D8CFBC / #8A6D3B
+    - 饼/环图标签一律外置为图例（色块+名称+数值+占比），禁止把数值压在扇区上
+    - 环图内径建议 0.62R，切片间 2px 纸色描边，中心放总计（等宽数字）
+    - 坐标轴 / tooltip / 网格线颜色用 var(--line) / var(--ink-soft)，不用默认黑
 -->
 <html lang="zh-CN">
 <head>
@@ -18,8 +27,8 @@
     <title>页面标题 · 详解西游记</title>
     <!-- D3.js 本地引用（如改用 CDN：https://d3js.org/d3.v7.min.js） -->
     <script src="d3.v7.min.js"></script>
-    <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
-    <!-- 公共设计令牌：配色 / 字体 / 阴影变量 -->
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    <!-- 公共设计令牌：配色 / 字体 / 图表色板（W334 集中化） -->
     <link rel="stylesheet" href="tokens.css">
     <style>
         /* ===== 页面专属样式：仅写本页特有部分，公共变量见 tokens.css ===== */
@@ -27,16 +36,16 @@
         body {
             background: var(--bg);
             color: var(--ink);
-            font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+            font-family: var(--font-sans);
             line-height: 1.7;
             min-height: 100vh;
         }
 
-        /* —— Hero 顶图：深褐渐变 + 朱金光晕 —— */
+        /* —— Hero：玄墨纯色 + 淡金光晕（W334） —— */
         .hero {
-            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
-            color: #f5e9d4;
-            padding: 50px 24px 40px;
+            background: var(--dark);
+            color: var(--dark-text);
+            padding: 44px 24px 36px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -45,29 +54,29 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
             pointer-events: none;
         }
         .hero h1 {
-            font-size: 2.2rem;
+            font-family: var(--font-serif);
+            font-size: 2rem;
             font-weight: 600;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.06em;
             margin-bottom: 8px;
             position: relative;
             z-index: 1;
         }
         .hero .subtitle {
-            font-size: 0.95rem;
-            color: var(--accent-soft);
-            letter-spacing: 0.25em;
+            font-size: 0.85rem;
+            color: #C9A063;
+            letter-spacing: 0.18em;
             position: relative;
             z-index: 1;
         }
         .hero .tagline {
-            margin-top: 12px;
+            margin-top: 10px;
             font-size: 0.85rem;
-            color: rgba(245, 233, 212, 0.65);
-            font-style: italic;
+            color: rgba(242, 235, 220, 0.65);
             position: relative;
             z-index: 1;
         }
@@ -75,23 +84,20 @@
         /* —— 主容器：上覆 hero，居中限宽 —— */
         .container {
             max-width: 1280px;
-            margin: -30px auto 60px;
+            margin: -24px auto 60px;
             padding: 0 24px;
             position: relative;
             z-index: 2;
         }
 
         /* —— 面包屑导航 —— */
-        .breadcrumb {
-            margin-bottom: 16px;
-            font-size: 0.88rem;
-        }
+        .breadcrumb { margin-bottom: 16px; font-size: 13px; }
         .breadcrumb a { color: var(--accent-2); text-decoration: none; }
         .breadcrumb a:hover { text-decoration: underline; }
-        .breadcrumb .sep { color: var(--ink-soft); margin: 0 6px; }
+        .breadcrumb .sep { color: var(--ink-faint); margin: 0 6px; }
         .breadcrumb .current { color: var(--ink-soft); }
 
-        /* —— KPI 行：关键指标卡片网格 —— */
+        /* —— KPI 行：关键指标卡片网格（W334 发丝线卡片） —— */
         .kpi-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -104,98 +110,91 @@
         .kpi-card {
             background: var(--paper);
             border: 1px solid var(--line);
-            border-top: 3px solid var(--accent);
-            border-radius: 8px;
-            padding: 18px;
-            box-shadow: var(--shadow);
+            border-radius: 2px;
+            padding: 20px;
         }
         .kpi-card .label {
-            font-size: 0.78rem;
+            font-size: 12px;
+            font-weight: 500;
             color: var(--accent);
-            letter-spacing: 0.15em;
-            margin-bottom: 6px;
-            font-family: "JetBrains Mono", "Consolas", monospace;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
         }
         .kpi-card .value {
-            font-size: 2rem;
-            font-weight: 600;
+            font-family: var(--font-mono);
+            font-size: 1.9rem;
+            font-weight: 500;
             color: var(--ink);
             line-height: 1.2;
             margin-bottom: 4px;
+            font-variant-numeric: tabular-nums;
         }
-        .kpi-card .desc {
-            font-size: 0.85rem;
-            color: var(--ink-soft);
-        }
+        .kpi-card .desc { font-size: 13px; color: var(--ink-soft); }
 
         /* —— Section：内容区块（标题 + 正文 + 图表） —— */
         .section {
             background: var(--paper);
             border: 1px solid var(--line);
-            border-radius: 8px;
+            border-radius: 2px;
             padding: 28px;
-            box-shadow: var(--shadow);
             margin-bottom: 24px;
         }
         .section-title {
+            font-family: var(--font-serif);
             font-size: 1.3rem;
+            font-weight: 600;
             margin-bottom: 6px;
             padding-bottom: 6px;
             border-bottom: 2px solid var(--accent);
             display: inline-block;
         }
-        .section-sub {
-            font-size: 0.88rem;
-            color: var(--ink-soft);
-            margin-bottom: 20px;
-        }
+        .section-sub { font-size: 14px; color: var(--ink-soft); margin-bottom: 20px; }
 
         /* —— 图表块：D3 SVG 容器 —— */
         .chart-block {
-            background: #fdfaf4;
+            background: var(--paper);
             border: 1px solid var(--line);
-            border-radius: 6px;
+            border-radius: 2px;
             padding: 20px;
             margin-bottom: 20px;
             text-align: center;
         }
         .chart-block h3 {
-            font-size: 1rem;
-            color: var(--accent);
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--ink);
             margin-bottom: 12px;
-            letter-spacing: 0.1em;
         }
-        .chart-block svg {
-            max-width: 100%;
-            height: auto;
-        }
+        .chart-block svg { max-width: 100%; height: auto; }
 
-        /* —— 图例 —— */
+        /* —— 图例（W334：数值+占比外置） —— */
         .legend {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 8px 16px;
             margin-top: 12px;
-            font-size: 0.82rem;
+            font-size: 13px;
         }
-        .legend-item { display: flex; align-items: center; gap: 6px; }
-        .legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
+        .legend-item { display: flex; align-items: center; gap: 8px; }
+        .legend-swatch { width: 10px; height: 10px; border-radius: 2px; }
 
-        /* —— 洞察盒：浅金渐变 + 朱砂左边框 —— */
+        /* —— 洞察盒：纸面 + 朱砂左边框（W334 去渐变） —— */
         .insight-box {
-            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
-            border-left: 4px solid var(--accent);
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
             padding: 20px 24px;
-            border-radius: 4px;
+            border-radius: 2px;
             margin-top: 16px;
         }
-        .insight-box h4 { color: var(--accent); font-size: 1rem; margin-bottom: 8px; }
+        .insight-box h4 { font-family: var(--font-serif); color: var(--accent); font-size: 1rem; margin-bottom: 8px; }
         .insight-box ul { list-style: none; padding-left: 0; }
         .insight-box li {
-            padding: 6px 0;
+            padding: 7px 0;
             border-bottom: 1px dashed var(--line);
-            font-size: 0.92rem;
+            font-size: 14px;
         }
         .insight-box li:last-child { border-bottom: none; }
         .insight-box li strong { color: var(--accent); font-weight: 600; }
@@ -206,26 +205,19 @@
             max-height: 640px;
             overflow-y: auto;
             border: 1px solid var(--line);
-            border-radius: 6px;
+            border-radius: 2px;
         }
         .table-wrap::-webkit-scrollbar { width: 8px; height: 8px; }
         .table-wrap::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: 4px; }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.86rem;
-        }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
         .data-table thead th {
-            background: #1a1410;
-            color: #f5e9d4;
+            background: var(--dark);
+            color: var(--dark-text);
             padding: 10px 12px;
             text-align: left;
         }
-        .data-table tbody td {
-            padding: 10px 12px;
-            border-bottom: 1px solid var(--line);
-        }
-        .data-table tbody tr:hover { background: #fff8ec; }
+        .data-table tbody td { padding: 10px 12px; border-bottom: 1px solid var(--line); }
+        .data-table tbody tr:hover { background: var(--paper-warm); }
 
         /* ===== 页面专属样式结束，下方可追加本页特有样式 ===== */
     </style>
@@ -246,7 +238,7 @@
         <nav class="breadcrumb">
             <a href="../index.html">首页</a>
             <span class="sep">/</span>
-            <a href="../index.html#data">数据</a>
+            <a href="../dashboard.html">数据看板</a>
             <span class="sep">/</span>
             <span class="current">当前页面</span>
         </nav>
@@ -280,13 +272,13 @@
             <h2 class="section-title">章节标题</h2>
             <div class="section-sub">章节副标题 / 数据来源说明</div>
 
-            <!-- 图表块：D3 渲染目标容器 -->
+            <!-- 图表块：D3 渲染目标容器（W334：系列色取 --chart-1..6，标签外置图例） -->
             <div class="chart-block">
                 <h3>图表标题</h3>
                 <div id="chart-1"></div>
                 <div class="legend">
-                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent)"></span>系列 A</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2)"></span>系列 B</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--chart-1)"></span>系列 A · 00 · 00%</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--chart-2)"></span>系列 B · 00 · 00%</span>
                 </div>
             </div>
 
@@ -325,12 +317,18 @@
         新页面默认使用页面内 <script> 中嵌入的 EMBEDDED_DATA 常量作为数据源，
         避免运行时 fetch 本地 JSON 失败（file:// 协议下 CORS 受限）。
         如需切换为外部 JSON，可将 fetch('../data/xxx.json') 取消注释。
+
+      W334 图表配色速查：
+        const CHART = ['#C8463A', '#3A6B8C', '#C9A063', '#6B8E5A', '#D8CFBC', '#8A6D3B'];
     -->
     <script>
         // ===== EMBEDDED_DATA：页面内嵌数据 fallback =====
         const EMBEDDED_DATA = [
             // { name: "...", value: 0 },
         ];
+
+        // ===== W334 雅集色板（朱砂/靛蓝/赭金/苔绿/米灰/赭石） =====
+        const CHART_PALETTE = ['#C8463A', '#3A6B8C', '#C9A063', '#6B8E5A', '#D8CFBC', '#8A6D3B'];
 
         // ===== 可选：从外部 JSON 加载（默认不启用） =====
         // d3.json('../data/your-data.json').then(data => render(data));
@@ -339,6 +337,7 @@
         function render(data) {
             // 在 #chart-1 内绘制图表
             // 示例：const svg = d3.select('#chart-1').append('svg')...
+            // 配色：d3.scaleOrdinal(CHART_PALETTE)
         }
 
         // 初始化：优先用 EMBEDDED_DATA

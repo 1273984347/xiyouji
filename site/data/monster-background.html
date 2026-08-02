@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -389,6 +389,8 @@
             top: 0;
         }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <a href="#main-content" class="skip-link">跳到主内容</a>
@@ -566,7 +568,7 @@
                     survival_rate: 87.5,
                     avg_power: 7.0,
                     background_strength: 6,
-                    color: "#7a5230",
+                    color: "#C9A063",
                     examples: ["牛魔王(结拜兄弟)", "铁扇公主(罗刹女)", "玉兔精(嫦娥宠物)", "黑熊精(自修→观音收守山)"]
                 },
                 {
@@ -577,7 +579,7 @@
                     survival_rate: 9.1,
                     avg_power: 6.8,
                     background_strength: 1,
-                    color: "#6b5e4d",
+                    color: "#6B6455",
                     examples: ["白骨精", "虎力大仙", "蜘蛛精七姐妹", "蟒蛇精", "六耳猕猴"]
                 }
             ],
@@ -609,10 +611,10 @@
             concept_name: "处置方式分析",
             outcome_types: [
                 { type: "归还原主", english_name: "Returned to Owner", count: 18, percentage: 26.1, color: "#3a6b8c", typical_cases: ["青牛精→老君", "金角银角→老君", "黄眉→弥勒"], verdict: "象征性教育·无实质惩罚" },
-                { type: "收编/收伏", english_name: "Recruited", count: 8, percentage: 11.6, color: "#5a7a3a", typical_cases: ["红孩儿→善财童子", "黑熊精→守山神", "牛魔王→归降"], verdict: "体制吸收·改换身份" },
-                { type: "降职处分", english_name: "Demoted", count: 3, percentage: 4.3, color: "#7a5230", typical_cases: ["奎木狼→烧火", "白龙马→驮马", "天蓬元帅→猪八戒"], verdict: "轻判·后复职" },
+                { type: "收编/收伏", english_name: "Recruited", count: 8, percentage: 11.6, color: "#6B8E5A", typical_cases: ["红孩儿→善财童子", "黑熊精→守山神", "牛魔王→归降"], verdict: "体制吸收·改换身份" },
+                { type: "降职处分", english_name: "Demoted", count: 3, percentage: 4.3, color: "#C9A063", typical_cases: ["奎木狼→烧火", "白龙马→驮马", "天蓬元帅→猪八戒"], verdict: "轻判·后复职" },
                 { type: "直接击杀", english_name: "Killed", count: 33, percentage: 47.8, color: "#c8463a", typical_cases: ["白骨精", "蜘蛛精", "虎力大仙", "蝎子精"], verdict: "野生妖怪的唯一结局" },
-                { type: "逃脱/失踪", english_name: "Escaped", count: 7, percentage: 10.1, color: "#6b5e4d", typical_cases: ["九头虫逃北海", "碧波潭驸马党羽"], verdict: "少数侥幸逃脱" }
+                { type: "逃脱/失踪", english_name: "Escaped", count: 7, percentage: 10.1, color: "#6B6455", typical_cases: ["九头虫逃北海", "碧波潭驸马党羽"], verdict: "少数侥幸逃脱" }
             ]
         },
         insights: {
@@ -734,14 +736,14 @@
             .attr('transform', `translate(0,${h})`)
             .call(d3.axisBottom(x).tickFormat(d => d))
             .append('text')
-            .attr('x', w / 2).attr('y', 45).attr('fill', '#6b5e4d')
+            .attr('x', w / 2).attr('y', 45).attr('fill', '#6B6455')
             .attr('text-anchor', 'middle').attr('font-size', '0.85rem')
             .text('后台强度（1=无背景 → 10=三清/佛祖直系）');
         g.append('g')
             .call(d3.axisLeft(y).tickFormat(d => d + '%'))
             .append('text')
             .attr('transform', 'rotate(-90)')
-            .attr('x', -h / 2).attr('y', -45).attr('fill', '#6b5e4d')
+            .attr('x', -h / 2).attr('y', -45).attr('fill', '#6B6455')
             .attr('text-anchor', 'middle').attr('font-size', '0.85rem')
             .text('存活率（%）');
 
@@ -783,7 +785,7 @@
             .attr('x', d => x(d.background_strength))
             .attr('y', d => y(d.survival_rate) - r(d.count) - 6)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .attr('font-size', '0.82rem')
             .attr('font-weight', 600)
             .text(d => d.name);
@@ -803,7 +805,7 @@
         const tbody = d3.select('#table-types tbody');
         tbody.selectAll('*').remove();
         const rows = tbody.selectAll('tr').data(data.background_types).enter().append('tr');
-        rows.append('td').html(d => `<strong style="color:${d.color}">${d.name}</strong><br/><span style="font-size:0.78rem;color:#6b5e4d">${d.english_name}</span>`);
+        rows.append('td').html(d => `<strong style="color:${d.color}">${d.name}</strong><br/><span style="font-size:0.78rem;color:#6B6455">${d.english_name}</span>`);
         rows.append('td').text(d => d.count);
         rows.append('td').html(d => `<strong>${d.survival_rate}%</strong>`);
         rows.append('td').text(d => d.avg_power + '/10');
@@ -824,7 +826,7 @@
 
         const stats = data.type_stats;
         const compareData = [
-            { label: '有后台', value: stats.with_background_survival_rate, count: stats.with_background, color: '#5a7a3a' },
+            { label: '有后台', value: stats.with_background_survival_rate, count: stats.with_background, color: '#6B8E5A' },
             { label: '无后台', value: stats.without_background_survival_rate, count: stats.without_background, color: '#c8463a' }
         ];
 
@@ -873,7 +875,7 @@
             .attr('x', d => x(d.label) + x.bandwidth() / 2)
             .attr('y', d => y(d.value) - 8)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .attr('font-size', '1.2rem')
             .attr('font-weight', 700)
             .text(d => d.value + '%');
@@ -896,14 +898,14 @@
             .attr('x2', x('无后台') + x.bandwidth() / 2)
             .attr('y1', y(stats.with_background_survival_rate) - 30)
             .attr('y2', y(stats.with_background_survival_rate) - 30)
-            .attr('stroke', '#7a5230')
+            .attr('stroke', '#C9A063')
             .attr('stroke-width', 1.5)
             .attr('stroke-dasharray', '4,3');
         g.append('text')
             .attr('x', w / 2)
             .attr('y', y(stats.with_background_survival_rate) - 40)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#7a5230')
+            .attr('fill', '#C9A063')
             .attr('font-size', '0.85rem')
             .attr('font-weight', 600)
             .text(`差距 ${stats.survival_gap}x`);
@@ -916,8 +918,8 @@
         const typeColor = {
             celestial: '#c8463a',
             disciple: '#3a6b8c',
-            local: '#7a5230',
-            wild: '#6b5e4d'
+            local: '#C9A063',
+            wild: '#6B6455'
         };
         const typeName = {
             celestial: '天庭坐骑',
@@ -1003,14 +1005,14 @@
         g.append('text')
             .attr('text-anchor', 'middle')
             .attr('y', -8)
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .attr('font-size', '1.3rem')
             .attr('font-weight', 700)
             .text('69');
         g.append('text')
             .attr('text-anchor', 'middle')
             .attr('y', 14)
-            .attr('fill', '#6b5e4d')
+            .attr('fill', '#6B6455')
             .attr('font-size', '0.82rem')
             .text('妖怪总数');
 
@@ -1029,7 +1031,7 @@
         const tbody = d3.select('#table-outcomes tbody');
         tbody.selectAll('*').remove();
         const rows = tbody.selectAll('tr').data(data.outcome_types).enter().append('tr');
-        rows.append('td').html(d => `<strong style="color:${d.color}">${d.type}</strong><br/><span style="font-size:0.78rem;color:#6b5e4d">${d.english_name}</span>`);
+        rows.append('td').html(d => `<strong style="color:${d.color}">${d.type}</strong><br/><span style="font-size:0.78rem;color:#6B6455">${d.english_name}</span>`);
         rows.append('td').text(d => d.count);
         rows.append('td').html(d => `<strong>${d.percentage}%</strong>`);
         rows.append('td').html(d => d.typical_cases.map(c => `<span style="display:inline-block;background:#f5ede0;padding:1px 6px;border-radius:3px;margin:1px;font-size:0.78rem">${c}</span>`).join(' '));

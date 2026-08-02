@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --accent-5: #7a4a8c;
             --line: #d9cdb8;
@@ -581,6 +581,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -1001,8 +1003,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     function severityColor(v) {
         if (v >= 9) return '#7a1a14';
         if (v >= 7) return '#c8463a';
-        if (v >= 4) return '#7a5230';
-        return '#5a7a3a';
+        if (v >= 4) return '#C9A063';
+        return '#6B8E5A';
     }
     function severityClass(v) {
         if (v >= 9) return 'sev-extreme';
@@ -1013,8 +1015,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     function clarityColor(c) {
         if (c <= 3) return '#c8463a';
         if (c <= 5) return '#e9b885';
-        if (c <= 7) return '#7a5230';
-        return '#5a7a3a';
+        if (c <= 7) return '#C9A063';
+        return '#6B8E5A';
     }
     function clarityClass(c) {
         if (c <= 3) return 'c-low';
@@ -1027,8 +1029,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         if (identity.indexOf('天庭') >= 0) return '#3a6b8c';
         if (identity.indexOf('灵山') >= 0 || identity.indexOf('佛祖') >= 0 || identity.indexOf('菩萨') >= 0) return '#7a4a8c';
         if (identity.indexOf('无编制') >= 0 || identity.indexOf('草根') >= 0) return '#c8463a';
-        if (identity.indexOf('仙家') >= 0) return '#7a5230';
-        return '#6b5e4d';
+        if (identity.indexOf('仙家') >= 0) return '#C9A063';
+        return '#6B6455';
     }
     function identityCategory(identity) {
         if (identity.indexOf('天庭') >= 0) return '天庭编制';
@@ -1096,12 +1098,12 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         g.append('line')
             .attr('x1', x(0)).attr('y1', y(0))
             .attr('x2', x(11)).attr('y2', y(11))
-            .attr('stroke', '#7a5230')
+            .attr('stroke', '#C9A063')
             .attr('stroke-dasharray', '6,4')
             .attr('stroke-width', 1.5);
         g.append('text')
             .attr('x', x(8.5)).attr('y', y(9.2))
-            .attr('fill', '#7a5230').attr('font-size', '11px')
+            .attr('fill', '#C9A063').attr('font-size', '11px')
             .attr('font-style', 'italic')
             .text('理想司法线 Y=X（罪刑相适应）');
 
@@ -1167,7 +1169,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const legendData = [
             {color: '#3a6b8c', label: '天庭编制'},
             {color: '#7a4a8c', label: '灵山编制'},
-            {color: '#7a5230', label: '仙家财产'},
+            {color: '#C9A063', label: '仙家财产'},
             {color: '#c8463a', label: '草根无编制'}
         ];
         const lg = d3.select('#legend-sentencing');
@@ -1180,7 +1182,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         });
         const item2 = lg.append('span').attr('class', 'legend-item');
         item2.append('span').attr('class', 'legend-swatch line')
-            .style('background', '#7a5230');
+            .style('background', '#C9A063');
         item2.append('span').text('理想司法线 Y=X');
     }
 
@@ -1226,7 +1228,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         groups.append('rect')
             .attr('x', x1('crime')).attr('y', d => y(d.crime_severity))
             .attr('width', x1.bandwidth()).attr('height', d => h - y(d.crime_severity))
-            .attr('fill', '#7a5230').attr('fill-opacity', 0.85)
+            .attr('fill', '#C9A063').attr('fill-opacity', 0.85)
             .style('cursor', 'pointer')
             .on('mouseover', (event, d) => {
                 tooltip.show(`<strong>${d.case_name}</strong><br>罪行严重度：${d.crime_severity} / 10<br>罪：${d.crime}`, event);
@@ -1249,12 +1251,12 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('text-anchor', 'middle')
             .attr('font-size', '10px')
             .attr('font-weight', 600)
-            .attr('fill', d => d.disparity_score >= 8 ? '#c8463a' : '#2c2418')
+            .attr('fill', d => d.disparity_score >= 8 ? '#c8463a' : '#23201A')
             .text(d => 'Δ=' + d.disparity_score);
 
         // Legend
         const legend = g.append('g').attr('transform', `translate(${w - 200}, 0)`);
-        legend.append('rect').attr('width', 12).attr('height', 12).attr('fill', '#7a5230');
+        legend.append('rect').attr('width', 12).attr('height', 12).attr('fill', '#C9A063');
         legend.append('text').attr('x', 18).attr('y', 10).attr('font-size', '11px').text('罪行严重度');
         legend.append('rect').attr('width', 12).attr('height', 12).attr('fill', '#c8463a').attr('y', 18);
         legend.append('text').attr('x', 18).attr('y', 28).attr('font-size', '11px').text('刑罚严重度');
@@ -1267,7 +1269,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         tbody.innerHTML = data.sentencing_cases.map(c => {
             return `<tr>
                 <td class="num">${c.n}</td>
-                <td>${c.case_name}<br><span style="color:#6b5e4d;font-size:0.78rem;">${c.chapter}</span></td>
+                <td>${c.case_name}<br><span style="color:#6B6455;font-size:0.78rem;">${c.chapter}</span></td>
                 <td>${c.criminal}</td>
                 <td>${c.identity}</td>
                 <td>${c.rank}</td>
@@ -1275,7 +1277,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 <td class="num"><span class="severity-pill ${severityClass(c.crime_severity)}">${c.crime_severity}</span></td>
                 <td>${c.actual_sentence}</td>
                 <td class="num"><span class="severity-pill ${severityClass(c.sentence_severity)}">${c.sentence_severity}</span></td>
-                <td class="num"><strong style="color:${c.disparity_score >= 8 ? '#c8463a' : c.disparity_score === 0 ? '#5a7a3a' : '#7a5230'};">${c.disparity_score}</strong></td>
+                <td class="num"><strong style="color:${c.disparity_score >= 8 ? '#c8463a' : c.disparity_score === 0 ? '#6B8E5A' : '#C9A063'};">${c.disparity_score}</strong></td>
             </tr>`;
         }).join('');
     }
@@ -1351,7 +1353,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('x', d => x(d.property_clarity) + 6)
             .attr('y', d => y(d.artifact_name) + y.bandwidth()/2 + 4)
             .attr('font-size', '10px')
-            .attr('fill', '#6b5e4d')
+            .attr('fill', '#6B6455')
             .text(d => d.claimed_owner + ' · ' + d.property_clarity + '/10');
 
         // Legend for clarity color
@@ -1359,13 +1361,13 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const legendItems = [
             {c: '#c8463a', t: '1-3 模糊'},
             {c: '#e9b885', t: '4-5 中下'},
-            {c: '#7a5230', t: '6-7 中上'},
-            {c: '#5a7a3a', t: '8-10 清晰'}
+            {c: '#C9A063', t: '6-7 中上'},
+            {c: '#6B8E5A', t: '8-10 清晰'}
         ];
         legendItems.forEach((it, i) => {
             const ly = i * 22;
             legend.append('rect').attr('width', 14).attr('height', 14).attr('y', ly).attr('fill', it.c);
-            legend.append('text').attr('x', 20).attr('y', ly + 11).attr('font-size', '11px').attr('fill', '#6b5e4d').text(it.t);
+            legend.append('text').attr('x', 20).attr('y', ly + 11).attr('font-size', '11px').attr('fill', '#6B6455').text(it.t);
         });
     }
 
@@ -1410,9 +1412,9 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const color = {
             private_pure: '#c8463a',
             public_pure: '#3a6b8c',
-            mixed_ownership: '#7a5230',
+            mixed_ownership: '#C9A063',
             delegated_use: '#7a4a8c',
-            usucaption: '#5a7a3a'
+            usucaption: '#6B8E5A'
         };
 
         const pie = d3.pie().value(d => d.value).sort(null);
@@ -1443,10 +1445,10 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
 
         // 中心文字
         g.append('text').attr('text-anchor', 'middle').attr('y', -5)
-            .attr('font-size', '20px').attr('font-weight', 600).attr('fill', '#2c2418')
+            .attr('font-size', '20px').attr('font-weight', 600).attr('fill', '#23201A')
             .text(total);
         g.append('text').attr('text-anchor', 'middle').attr('y', 14)
-            .attr('font-size', '11px').attr('fill', '#6b5e4d')
+            .attr('font-size', '11px').attr('fill', '#6B6455')
             .text('件法宝');
 
         // Legend
@@ -1465,7 +1467,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         if (!grid) return;
         grid.innerHTML = data.artifact_inventory.map(a => {
             const cls = a.property_clarity <= 4 ? 'c-low' : a.property_clarity <= 6 ? 'c-mid' : 'c-high';
-            const usageHtml = (a.usage_history || []).map(u => `<div style="font-size:0.78rem;color:#6b5e4d;padding-left:8px;border-left:2px solid #d9cdb8;margin:3px 0;">${u.event} · <em>${u.type}</em></div>`).join('');
+            const usageHtml = (a.usage_history || []).map(u => `<div style="font-size:0.78rem;color:#6B6455;padding-left:8px;border-left:2px solid #d9cdb8;margin:3px 0;">${u.event} · <em>${u.type}</em></div>`).join('');
             return `<div class="artifact-card ${cls}">
                 <div class="ar-name">${a.artifact_name}</div>
                 <div class="ar-en">${a.english_name}</div>
@@ -1476,7 +1478,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 <div class="ar-row"><strong>法律风险：</strong>${a.legal_risk}</div>
                 <div class="ar-row" style="margin-top:6px;"><strong>使用历史：</strong></div>
                 ${usageHtml}
-                <div class="ar-row" style="margin-top:6px;color:#7a5230;"><strong>争议：</strong>${a.property_dispute}</div>
+                <div class="ar-row" style="margin-top:6px;color:#C9A063;"><strong>争议：</strong>${a.property_dispute}</div>
                 <div class="ar-row"><strong>赔偿：</strong>¥${a.compensation_paid}</div>
             </div>`;
         }).join('');
@@ -1605,7 +1607,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const audited = incidents.filter(i => i.audit_trail && i.audit_trail.indexOf('有') >= 0).length;
         const notAudited = incidents.length - audited;
         const pieData = [
-            {key: 'audited', label: '有完整审计', value: audited, color: '#5a7a3a'},
+            {key: 'audited', label: '有完整审计', value: audited, color: '#6B8E5A'},
             {key: 'not', label: '无审计追踪', value: notAudited, color: '#c8463a'}
         ];
 
@@ -1639,12 +1641,12 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('font-size', '24px').attr('font-weight', 600).attr('fill', '#c8463a')
             .text('37.5%');
         g.append('text').attr('text-anchor', 'middle').attr('y', 14)
-            .attr('font-size', '11px').attr('fill', '#6b5e4d')
+            .attr('font-size', '11px').attr('fill', '#6B6455')
             .text('审计覆盖率 (3/8)');
 
         // 标注
         g.append('text').attr('x', 0).attr('y', H/2 - 10).attr('text-anchor', 'middle')
-            .attr('font-size', '11px').attr('fill', '#5a7a3a').attr('font-weight', 600)
+            .attr('font-size', '11px').attr('fill', '#6B8E5A').attr('font-weight', 600)
             .text('有审计：3 起 · 37.5%');
         g.append('text').attr('x', 0).attr('y', H/2 + 6).attr('text-anchor', 'middle')
             .attr('font-size', '11px').attr('fill', '#c8463a').attr('font-weight', 600)
@@ -1658,11 +1660,11 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         tbody.innerHTML = data.data_incidents.map(i => {
             return `<tr>
                 <td class="num">${i.n}</td>
-                <td>${i.incident_name}<br><span style="color:#6b5e4d;font-size:0.78rem;">${i.chapter}</span></td>
+                <td>${i.incident_name}<br><span style="color:#6B6455;font-size:0.78rem;">${i.chapter}</span></td>
                 <td>${i.perpetrator}</td>
                 <td>${i.perpetrator_identity}</td>
                 <td>${i.incident_type}</td>
-                <td>${i.data_affected}<br><span style="color:#6b5e4d;font-size:0.76rem;">${i.data_volume}</span></td>
+                <td>${i.data_affected}<br><span style="color:#6B6455;font-size:0.76rem;">${i.data_volume}</span></td>
                 <td>${i.unauthorized_access ? '<span class="severity-pill sev-high">未授权</span>' : '<span class="severity-pill sev-low">授权</span>'}</td>
                 <td>${i.audit_trail}</td>
                 <td class="num"><span class="severity-pill ${severityClass(i.severity)}">${i.severity}</span></td>

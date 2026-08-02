@@ -8,9 +8,9 @@
     <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。请启用浏览器 JavaScript 以查看可视化内容。</p></noscript>
     <style>
         :root {
-            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
             --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
-            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --accent-3: #C9A063; --accent-4: #6B8E5A; --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
         }
@@ -82,14 +82,14 @@
         }
         .tooltip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
         .tooltip .tip-row { color: #d9cdb8; line-height: 1.5; }
-        .tooltip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6b5e4d; }
+        .tooltip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
         .insight-box {
             background: #fffdf8; border-left: 4px solid var(--accent-soft);
             padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
         }
         .insight-box strong { color: var(--accent); font-weight: 700; }
         .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
-        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
         footer a { color: #e9b885; }
         footer .footer-index { display: grid; grid-template-columns: 1fr; gap: 8px; margin: 12px auto; max-width: 900px; }
         @media (min-width: 720px) { footer .footer-index { grid-template-columns: repeat(2, 1fr); } }
@@ -103,6 +103,8 @@
             .cross-page-nav { font-size: 0.78em; }
         }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <a href="#main-content" class="skip-link">跳到主内容</a>
@@ -335,10 +337,10 @@
     const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const DUR = REDUCE_MOTION ? 0 : 600;
     const GROUPS = ["王阳明 vs 唐僧", "张居正 vs 玉帝", "海瑞 vs 悟空"];
-    const GROUP_COLORS = ["#c8463a", "#7a5230", "#3a6b8c"];
+    const GROUP_COLORS = ["#c8463a", "#C9A063", "#3a6b8c"];
     const FIGURE_COLORS = {
-        "王阳明": "#c8463a", "吴承恩": "#5a7a3a", "海瑞": "#3a6b8c",
-        "张居正": "#7a5230", "世德堂": "#b8862a", "张居正/吴承恩": "#8c2a2a"
+        "王阳明": "#c8463a", "吴承恩": "#6B8E5A", "海瑞": "#3a6b8c",
+        "张居正": "#C9A063", "世德堂": "#b8862a", "张居正/吴承恩": "#8c2a2a"
     };
 
     function getWrapWidth(id) {
@@ -393,7 +395,7 @@
                     .attr("text-anchor", "middle")
                     .attr("dy", "0.35em")
                     .style("font-size", "0.82rem")
-                    .style("fill", "#2c2418")
+                    .style("fill", "#23201A")
                     .style("font-weight", "600")
                     .text(ax);
             });
@@ -511,22 +513,22 @@
         g.append("g")
             .attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x))
-            .selectAll("text").style("font-size", "0.9rem").style("fill", "#2c2418").style("font-weight", "600");
+            .selectAll("text").style("font-size", "0.9rem").style("fill", "#23201A").style("font-weight", "600");
         g.append("g")
             .call(d3.axisLeft(y))
-            .selectAll("text").style("font-size", "0.88rem").style("fill", "#2c2418").style("font-weight", "600");
+            .selectAll("text").style("font-size", "0.88rem").style("fill", "#23201A").style("font-weight", "600");
 
         // 轴标题
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 44)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("对照维度");
         g.append("text")
             .attr("x", -innerH / 2).attr("y", -110)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("对照组");
 
         const tip = d3.select("#heat-tip");
@@ -544,7 +546,7 @@
                 .attr("stroke-width", 2)
                 .style("opacity", 0)
                 .on("mouseover", function(event) {
-                    d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2.5);
+                    d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2.5);
                     tip.style("opacity", 1)
                         .html(`<div class="tip-title">${d.group} · ${d.dimension}</div>
                             <div class="tip-row">对照强度：<strong style="color:#e9b885">${d.score} / 10</strong></div>
@@ -570,7 +572,7 @@
                 .attr("dy", "0.35em")
                 .style("font-size", "1.5rem")
                 .style("font-weight", "700")
-                .style("fill", d.score <= 6 ? "#7a5230" : "#fff")
+                .style("fill", d.score <= 6 ? "#C9A063" : "#fff")
                 .style("opacity", 0)
                 .text(d.score)
                 .transition().duration(DUR).delay(delay + 200)
@@ -617,13 +619,13 @@
             g.append("line")
                 .attr("x1", x(yr)).attr("x2", x(yr))
                 .attr("y1", innerH / 2 - 6).attr("y2", innerH / 2 + 6)
-                .attr("stroke", "#7a5230").attr("stroke-width", 1);
+                .attr("stroke", "#C9A063").attr("stroke-width", 1);
             g.append("text")
                 .attr("x", x(yr)).attr("y", innerH / 2 + 22)
                 .attr("text-anchor", "middle")
                 .style("font-size", "0.74rem")
                 .style("font-family", "JetBrains Mono, monospace")
-                .style("fill", "#6b5e4d")
+                .style("fill", "#6B6455")
                 .text(yr);
         });
 
@@ -631,7 +633,7 @@
         const wrapEl = document.getElementById("timeline-svg").parentElement;
 
         EMBEDDED_DATA.timeline.forEach((d, i) => {
-            const col = FIGURE_COLORS[d.figure] || "#6b5e4d";
+            const col = FIGURE_COLORS[d.figure] || "#6B6455";
             const offset = (i % 2 === 0 ? -1 : 1) * (50 + (i % 3) * 18);
             const yPos = innerH / 2 + offset;
 
@@ -651,7 +653,7 @@
                 .attr("stroke-width", 2)
                 .style("cursor", "pointer")
                 .on("mouseover", function(event) {
-                    d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2.5);
+                    d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2.5);
                     tip.style("opacity", 1)
                         .html(`<div class="tip-title">${d.year} · ${d.event}</div>
                             <div class="tip-row">人物：<strong style="color:#e9b885">${d.figure}</strong></div>
@@ -687,7 +689,7 @@
             .attr("y", innerH + 50)
             .attr("text-anchor", "middle")
             .style("font-size", "0.85rem")
-            .style("fill", "#7a5230")
+            .style("fill", "#C9A063")
             .text("年份（明成化八年至万历二十年）");
 
         const legend = d3.select("#timeline-legend");
@@ -742,9 +744,9 @@
         });
 
         const nodeColor = (i) => {
-            if (i < 3) return ["#c8463a", "#7a5230", "#3a6b8c"][i];
+            if (i < 3) return ["#c8463a", "#C9A063", "#3a6b8c"][i];
             if (i < 6) return ["#e9b885", "#d98060", "#b8862a"][i - 3];
-            return ["#5a7a3a", "#3a6b8c", "#8c2a2a"][i - 6];
+            return ["#6B8E5A", "#3a6b8c", "#8c2a2a"][i - 6];
         };
 
         const tip = d3.select("#sankey-tip");
@@ -807,7 +809,7 @@
                 .attr("text-anchor", anchor)
                 .attr("dy", n.col === 1 ? 0 : "0.35em")
                 .style("font-size", "0.82rem")
-                .style("fill", "#2c2418")
+                .style("fill", "#23201A")
                 .style("font-weight", "600")
                 .text(n.name);
         });
@@ -819,7 +821,7 @@
                 .attr("y", -18)
                 .attr("text-anchor", "middle")
                 .style("font-size", "0.85rem")
-                .style("fill", "#7a5230")
+                .style("fill", "#C9A063")
                 .style("font-weight", "700")
                 .text(t);
         });
@@ -830,7 +832,7 @@
         [
             { label: "文献源（传习录 / 张文忠公全集 / 海瑞集）", color: "#c8463a" },
             { label: "对照组（王阳明vs唐僧 / 张居正vs玉帝 / 海瑞vs悟空）", color: "#e9b885" },
-            { label: "对照维度（心性论 / 治理术 / 谏诤传统）", color: "#5a7a3a" }
+            { label: "对照维度（心性论 / 治理术 / 谏诤传统）", color: "#6B8E5A" }
         ].forEach(item => {
             const li = legend.append("div").attr("class", "lg-item");
             li.append("span").attr("class", "lg-swatch").style("background", item.color);
@@ -884,7 +886,7 @@
                     .attr("text-anchor", "middle")
                     .attr("dy", "0.35em")
                     .style("font-size", "0.78rem")
-                    .style("fill", "#2c2418")
+                    .style("fill", "#23201A")
                     .style("font-weight", "600")
                     .text(ax);
             });

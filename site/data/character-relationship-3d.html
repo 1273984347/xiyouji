@@ -61,6 +61,8 @@
         footer a:hover { text-decoration: underline; }
         a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <nav class="breadcrumb">
@@ -102,8 +104,8 @@
                     <div class="legend-item"><span class="legend-swatch" style="background:#e67e22"></span>取经团</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#3a6b8c"></span>天庭</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#8c2a2a"></span>佛门</div>
-                    <div class="legend-item"><span class="legend-swatch" style="background:#5a7a3a"></span>妖界</div>
-                    <div class="legend-item"><span class="legend-swatch" style="background:#7a5230"></span>龙族</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#6B8E5A"></span>妖界</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#C9A063"></span>龙族</div>
                 </div>
             </div>
         </section>
@@ -218,7 +220,6 @@
 
     // 渲染 KPI
     function renderKPI(data) {
-        const row = d3.select ? null : null; // 不用 d3，直接 DOM
         const kpiRow = document.getElementById("kpiRow");
         data.kpi.forEach(k => {
             const card = document.createElement("div");

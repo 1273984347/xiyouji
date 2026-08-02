@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --gold: #c9a14a;
             --line: #d9cdb8;
@@ -422,6 +422,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -684,15 +686,15 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     // ============ 配色 ============
     const PHASE_COLORS = { "序曲": "#3a6b8c", "交响": "#c8463a", "尾声": "#c9a14a" };
     const CATEGORY_COLORS = {
-        "兵器": "#c8463a", "法器": "#3a6b8c", "法术": "#7a5230",
-        "天象": "#5a7a3a", "自然": "#6a8c6a", "仪式": "#c9a14a", "行进": "#8c5e4d"
+        "兵器": "#c8463a", "法器": "#3a6b8c", "法术": "#C9A063",
+        "天象": "#6B8E5A", "自然": "#6a8c6a", "仪式": "#c9a14a", "行进": "#8c5e4d"
     };
     const SYMMETRY_COLORS = {
-        "法器对偶": "#c8463a", "法宝呼应": "#3a6b8c", "斗法对偶": "#7a5230",
-        "镜像对偶": "#5a7a3a", "女色对偶": "#c9a14a", "归宿对偶": "#6a8c6a",
+        "法器对偶": "#c8463a", "法宝呼应": "#3a6b8c", "斗法对偶": "#C9A063",
+        "镜像对偶": "#6B8E5A", "女色对偶": "#c9a14a", "归宿对偶": "#6a8c6a",
         "渡河对偶": "#8c5e4d", "三复对偶": "#a0522d"
     };
-    const MOVEMENT_COLORS = ["#3a6b8c", "#5a7a3a", "#c8463a", "#c9a14a"];
+    const MOVEMENT_COLORS = ["#3a6b8c", "#6B8E5A", "#c8463a", "#c9a14a"];
 
     // ============ 图表 1：章回节奏折线图 ============
     function renderRhythmChart(rhythmData) {
@@ -743,18 +745,18 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .call(d3.axisBottom(x)
                 .tickValues([1, 12, 22, 32, 42, 52, 62, 72, 82, 92, 100])
                 .tickFormat(d => d + "回").tickSize(5).tickSizeOuter(0))
-            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
         // Y 轴
         g.append("g")
             .call(d3.axisLeft(y).tickValues([1, 2, 3, 4, 5]).tickSize(5).tickSizeOuter(0))
-            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
 
         // 轴标题
         g.append("text").attr("x", iw / 2).attr("y", ih + 38).attr("text-anchor", "middle")
-            .style("font-size", "0.8rem").style("fill", "#6b5e4d").text("回目");
+            .style("font-size", "0.8rem").style("fill", "#6B6455").text("回目");
         g.append("text").attr("transform", "rotate(-90)")
             .attr("x", -ih / 2).attr("y", -34).attr("text-anchor", "middle")
-            .style("font-size", "0.8rem").style("fill", "#6b5e4d").text("节奏强度 rhythm");
+            .style("font-size", "0.8rem").style("fill", "#6B6455").text("节奏强度 rhythm");
 
         // 分段折线
         const line = d3.line()
@@ -862,7 +864,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             }
             // 下方回目区间
             g.append("text").attr("x", (x0 + x1) / 2).attr("y", 98)
-                .attr("text-anchor", "middle").style("fill", "#6b5e4d")
+                .attr("text-anchor", "middle").style("fill", "#6B6455")
                 .style("font-size", "0.74rem").style("font-family", "JetBrains Mono, monospace")
                 .text(mv.chapters);
         });
@@ -914,7 +916,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 .attr("stroke", "#e6dcc6").attr("stroke-dasharray", "2 3")
                 .attr("stroke-width", 0.7).attr("shape-rendering", "crispEdges");
             g.append("text").attr("x", x(v)).attr("y", innerH + 14)
-                .attr("text-anchor", "middle").style("fill", "#6b5e4d")
+                .attr("text-anchor", "middle").style("fill", "#6B6455")
                 .style("font-size", "0.7rem").style("font-family", "JetBrains Mono, monospace")
                 .text(v);
         });
@@ -938,7 +940,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             } else {
                 g.append("text").attr("x", -12).attr("y", yPos + rowH / 2)
                     .attr("dy", "0.35em").attr("text-anchor", "end")
-                    .style("fill", "#2c2418").style("font-size", "0.82rem")
+                    .style("fill", "#23201A").style("font-size", "0.82rem")
                     .text(r.name);
                 g.append("text").attr("x", -12).attr("y", yPos + rowH / 2 + 12)
                     .attr("dy", "0.35em").attr("text-anchor", "end")
@@ -981,7 +983,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
 
         // X 轴标题
         g.append("text").attr("x", iw / 2).attr("y", innerH + 14).attr("dy", "1.5em")
-            .attr("text-anchor", "middle").style("fill", "#6b5e4d")
+            .attr("text-anchor", "middle").style("fill", "#6B6455")
             .style("font-size", "0.8rem").text("强度 intensity（1–10）");
 
         // 图例
@@ -1004,7 +1006,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 const head = d3.select(this);
                 head.append("span").attr("class", "sym-name").text(d.pair_name);
                 head.append("span").attr("class", "sym-badge")
-                    .style("background", SYMMETRY_COLORS[d.symmetry_type] || "#6b5e4d")
+                    .style("background", SYMMETRY_COLORS[d.symmetry_type] || "#6B6455")
                     .text(d.symmetry_type);
             });
 

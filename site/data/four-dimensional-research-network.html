@@ -12,11 +12,11 @@
         --paper-deep: #e9dcc0;
         --paper-card: #fff8e7;
         --ink: #2c2416;
-        --ink-soft: #6b5e4d;
+        --ink-soft: #6B6455;
         --cinnabar: #c8392c;   /* 朱砂·修行心性 */
         --indigo: #2c5f7c;     /* 靛青·权力政治 */
         --gold: #c89b3c;       /* 金色·文化记忆 */
-        --jade: #5a7a3a;       /* 松绿·时间叙事 */
+        --jade: #6B8E5A;       /* 松绿·时间叙事 */
         --line: #c9b896;
         --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
     }
@@ -90,7 +90,7 @@
     .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; font-size: 0.85em; justify-content: center; color: var(--ink-soft); }
     .legend-item { display: flex; align-items: center; gap: 6px; }
     .legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
-    footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+    footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
     footer a { color: #e9b885; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
     footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
@@ -100,6 +100,8 @@
         .hero h1 { font-size: 1.6em; letter-spacing: 2px; }
     }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
 <header class="hero">
@@ -224,7 +226,7 @@ const EMBEDDED_DATA = {
         {key: "mind",     name: "修行心性", en: "Cultivation-Mind",    color: "#c8392c"},
         {key: "power",    name: "权力政治", en: "Power-Politics",      color: "#2c5f7c"},
         {key: "culture",  name: "文化记忆", en: "Cultural-Memory",     color: "#c89b3c"},
-        {key: "time",     name: "时间叙事", en: "Time-Narrative",      color: "#5a7a3a"}
+        {key: "time",     name: "时间叙事", en: "Time-Narrative",      color: "#6B8E5A"}
     ],
     indicators: ["理论深度", "文本证据", "现代相关性", "跨维度呼应", "教学价值"],
     // 1. Radar data
@@ -232,7 +234,7 @@ const EMBEDDED_DATA = {
         {name: "修行心性", color: "#c8392c", values: [5, 5, 4, 4, 5]},
         {name: "权力政治", color: "#2c5f7c", values: [4, 5, 5, 4, 4]},
         {name: "文化记忆", color: "#c89b3c", values: [4, 4, 5, 5, 4]},
-        {name: "时间叙事", color: "#5a7a3a", values: [5, 4, 4, 5, 5]}
+        {name: "时间叙事", color: "#6B8E5A", values: [5, 4, 4, 5, 5]}
     ],
     // 2. Heatmap: 12 theorists × 4 dimensions
     theorists: [
@@ -256,7 +258,7 @@ const EMBEDDED_DATA = {
             {id: "修行心性", type: "dim", dim: "mind",    size: 32, color: "#c8392c"},
             {id: "权力政治", type: "dim", dim: "power",   size: 32, color: "#2c5f7c"},
             {id: "文化记忆", type: "dim", dim: "culture", size: 32, color: "#c89b3c"},
-            {id: "时间叙事", type: "dim", dim: "time",    size: 32, color: "#5a7a3a"},
+            {id: "时间叙事", type: "dim", dim: "time",    size: 32, color: "#6B8E5A"},
             // 12 theorists
             {id: "王阳明",    type: "theorist", dim: "mind",    size: 18, color: "#c8392c"},
             {id: "弗洛伊德",  type: "theorist", dim: "mind",    size: 18, color: "#c8392c"},
@@ -267,18 +269,18 @@ const EMBEDDED_DATA = {
             {id: "阿斯曼",    type: "theorist", dim: "culture", size: 18, color: "#c89b3c"},
             {id: "哈布瓦赫",  type: "theorist", dim: "culture", size: 18, color: "#c89b3c"},
             {id: "姚斯",      type: "theorist", dim: "culture", size: 18, color: "#c89b3c"},
-            {id: "海德格尔",  type: "theorist", dim: "time",    size: 18, color: "#5a7a3a"},
-            {id: "热奈特",    type: "theorist", dim: "time",    size: 18, color: "#5a7a3a"},
-            {id: "里柯尔",    type: "theorist", dim: "time",    size: 18, color: "#5a7a3a"},
+            {id: "海德格尔",  type: "theorist", dim: "time",    size: 18, color: "#6B8E5A"},
+            {id: "热奈特",    type: "theorist", dim: "time",    size: 18, color: "#6B8E5A"},
+            {id: "里柯尔",    type: "theorist", dim: "time",    size: 18, color: "#6B8E5A"},
             // 8 line nodes
-            {id: "L1·石猴出世",    type: "line", line: 1,    chapter: "第1回",   desc: "石猴出世",   size: 14, color: "#6b5e4d"},
-            {id: "L722·大闹天宫",  type: "line", line: 722,  chapter: "第7回",   desc: "大闹天宫",   size: 14, color: "#6b5e4d"},
-            {id: "L1441·心猿归正", type: "line", line: 1441, chapter: "第14回",  desc: "心猿归正",   size: 14, color: "#6b5e4d"},
-            {id: "L1519·紧箍咒",   type: "line", line: 1519, chapter: "第14回",  desc: "紧箍咒",     size: 14, color: "#6b5e4d"},
-            {id: "L3200·三打白骨精", type: "line", line: 3200, chapter: "第27回",  desc: "三打白骨精", size: 14, color: "#6b5e4d"},
-            {id: "L6800·真假美猴王", type: "line", line: 6800, chapter: "第58回",  desc: "真假美猴王", size: 14, color: "#6b5e4d"},
-            {id: "L9100·凌云渡",    type: "line", line: 9100, chapter: "第98回",  desc: "凌云渡",     size: 14, color: "#6b5e4d"},
-            {id: "L9140·斗战胜佛",  type: "line", line: 9140, chapter: "第100回", desc: "斗战胜佛",   size: 14, color: "#6b5e4d"}
+            {id: "L1·石猴出世",    type: "line", line: 1,    chapter: "第1回",   desc: "石猴出世",   size: 14, color: "#6B6455"},
+            {id: "L722·大闹天宫",  type: "line", line: 722,  chapter: "第7回",   desc: "大闹天宫",   size: 14, color: "#6B6455"},
+            {id: "L1441·心猿归正", type: "line", line: 1441, chapter: "第14回",  desc: "心猿归正",   size: 14, color: "#6B6455"},
+            {id: "L1519·紧箍咒",   type: "line", line: 1519, chapter: "第14回",  desc: "紧箍咒",     size: 14, color: "#6B6455"},
+            {id: "L3200·三打白骨精", type: "line", line: 3200, chapter: "第27回",  desc: "三打白骨精", size: 14, color: "#6B6455"},
+            {id: "L6800·真假美猴王", type: "line", line: 6800, chapter: "第58回",  desc: "真假美猴王", size: 14, color: "#6B6455"},
+            {id: "L9100·凌云渡",    type: "line", line: 9100, chapter: "第98回",  desc: "凌云渡",     size: 14, color: "#6B6455"},
+            {id: "L9140·斗战胜佛",  type: "line", line: 9140, chapter: "第100回", desc: "斗战胜佛",   size: 14, color: "#6B6455"}
         ],
         links: [
             // Dimension → its 3 theorists
@@ -418,13 +420,13 @@ const EMBEDDED_DATA = {
         .attr("x", cx).attr("y", cy - 6)
         .attr("text-anchor", "middle")
         .attr("font-size", "11px")
-        .attr("fill", "#6b5e4d")
+        .attr("fill", "#6B6455")
         .text("四维雷达");
     svg.append("text")
         .attr("x", cx).attr("y", cy + 10)
         .attr("text-anchor", "middle")
         .attr("font-size", "10px")
-        .attr("fill", "#6b5e4d")
+        .attr("fill", "#6B6455")
         .attr("font-family", "JetBrains Mono, monospace")
         .text("5 indicators × 4 dims");
 })();
@@ -442,7 +444,7 @@ const EMBEDDED_DATA = {
     const theorists = EMBEDDED_DATA.theorists;
 
     // Color scale: dim contribution 0-10 → intensity along dim color
-    const dimColors = {mind: "#c8392c", power: "#2c5f7c", culture: "#c89b3c", time: "#5a7a3a"};
+    const dimColors = {mind: "#c8392c", power: "#2c5f7c", culture: "#c89b3c", time: "#6B8E5A"};
     function colorFor(dimKey, value) {
         const base = d3.rgb(dimColors[dimKey]);
         const intensity = value / 10;
@@ -518,7 +520,7 @@ const EMBEDDED_DATA = {
     svg.append("text")
         .attr("x", padL).attr("y", legendY)
         .attr("font-size", "11px")
-        .attr("fill", "#6b5e4d")
+        .attr("fill", "#6B6455")
         .text("贡献度：");
     [0, 2, 4, 6, 8, 10].forEach((v, i) => {
         const x = padL + 60 + i * 30;
@@ -532,7 +534,7 @@ const EMBEDDED_DATA = {
             .attr("x", x + 13).attr("y", legendY - 16)
             .attr("text-anchor", "middle")
             .attr("font-size", "9px")
-            .attr("fill", "#6b5e4d")
+            .attr("fill", "#6B6455")
             .text(v);
     });
 })();
@@ -643,13 +645,13 @@ const EMBEDDED_DATA = {
         .attr("y", height - 8)
         .attr("text-anchor", "middle")
         .attr("font-size", "11px")
-        .attr("fill", "#6b5e4d")
+        .attr("fill", "#6B6455")
         .text("回目（取经路线时序）");
     svg.append("text")
         .attr("x", 16).attr("y", pad.t + innerH / 2)
         .attr("text-anchor", "middle")
         .attr("font-size", "11px")
-        .attr("fill", "#6b5e4d")
+        .attr("fill", "#6B6455")
         .attr("transform", `rotate(-90,16,${pad.t + innerH / 2})`)
         .text("四维强度堆叠值");
 
@@ -720,7 +722,7 @@ const EMBEDDED_DATA = {
         svg.append("text")
             .attr("x", cx + 4).attr("y", cy - r * scale + 12)
             .attr("font-size", "9px")
-            .attr("fill", "#6b5e4d")
+            .attr("fill", "#6B6455")
             .attr("font-family", "JetBrains Mono, monospace")
             .text((scale * 10).toFixed(1));
     });
@@ -804,7 +806,7 @@ const EMBEDDED_DATA = {
     svg.append("text")
         .attr("x", legX).attr("y", legY)
         .attr("font-size", "10px")
-        .attr("fill", "#6b5e4d")
+        .attr("fill", "#6B6455")
         .text("辐射圈 = 跨维度呼应度");
     [5, 7, 9].forEach((v, i) => {
         const x = legX + 130 + i * 50;
@@ -817,7 +819,7 @@ const EMBEDDED_DATA = {
         svg.append("text")
             .attr("x", x + 22).attr("y", legY)
             .attr("font-size", "10px")
-            .attr("fill", "#6b5e4d")
+            .attr("fill", "#6B6455")
             .text(v);
     });
 })();

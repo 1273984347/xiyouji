@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -306,7 +306,7 @@
         .tag.karst { background: var(--accent-2); }
         .tag.cliff { background: var(--accent-3); }
         .tag.water { background: #2d8aa8; }
-        .tag.under { background: #6b5e4d; }
+        .tag.under { background: #6B6455; }
         .tag.palace { background: var(--accent); }
         .stat-grid {
             display: grid;
@@ -562,6 +562,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -1276,7 +1278,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     // 图表 2.1：4 角色多阶段折线图（社会身份等级 1-10）
     // ==========================================================================
     function renderCostumeLineChart(characters) {
-        const charColors = { '孙悟空': '#c8463a', '唐僧': '#3a6b8c', '猪八戒': '#7a5230', '沙僧': '#5a7a3a' };
+        const charColors = { '孙悟空': '#c8463a', '唐僧': '#3a6b8c', '猪八戒': '#C9A063', '沙僧': '#6B8E5A' };
 
         const container = d3.select('#chart-costume-line');
         container.selectAll('*').remove();
@@ -1386,7 +1388,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const data = Object.keys(materialCount).map(k => ({ label: k, value: materialCount[k] }));
         const total = d3.sum(data, d => d.value);
 
-        const colorPalette = ['#c8463a', '#e9b885', '#7a5230', '#3a6b8c', '#5a7a3a', '#6b5e4d', '#a85a3a'];
+        const colorPalette = ['#c8463a', '#e9b885', '#C9A063', '#3a6b8c', '#6B8E5A', '#6B6455', '#a85a3a'];
 
         const container = d3.select('#chart-costume-pie');
         container.selectAll('*').remove();
@@ -1427,7 +1429,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     // ==========================================================================
     function renderCostumeStagesChart(characters) {
         const data = characters.map(c => ({ name: c.character, count: c.costume_evolution.length }));
-        const colors = { '孙悟空': '#c8463a', '唐僧': '#3a6b8c', '猪八戒': '#7a5230', '沙僧': '#5a7a3a' };
+        const colors = { '孙悟空': '#c8463a', '唐僧': '#3a6b8c', '猪八戒': '#C9A063', '沙僧': '#6B8E5A' };
         const container = d3.select('#chart-costume-stages');
         container.selectAll('*').remove();
         const margin = { top: 30, right: 30, bottom: 50, left: 60 };
@@ -1539,8 +1541,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     // ==========================================================================
     function renderCaveBarChart(types) {
         const typeColors = {
-            '天然溶洞型': '#3a6b8c', '崖墓型': '#7a5230', '水景别墅型': '#2d8aa8',
-            '地下迷宫型': '#6b5e4d', '山中宫殿型': '#c8463a'
+            '天然溶洞型': '#3a6b8c', '崖墓型': '#C9A063', '水景别墅型': '#2d8aa8',
+            '地下迷宫型': '#6B6455', '山中宫殿型': '#c8463a'
         };
         const data = types.map(t => ({
             name: t.type_name,
@@ -1609,8 +1611,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     // ==========================================================================
     function renderCaveDonutChart(types) {
         const typeColors = {
-            '天然溶洞型': '#3a6b8c', '崖墓型': '#7a5230', '水景别墅型': '#2d8aa8',
-            '地下迷宫型': '#6b5e4d', '山中宫殿型': '#c8463a'
+            '天然溶洞型': '#3a6b8c', '崖墓型': '#C9A063', '水景别墅型': '#2d8aa8',
+            '地下迷宫型': '#6B6455', '山中宫殿型': '#c8463a'
         };
         const data = types.map(t => ({
             label: t.type_name,
@@ -1661,8 +1663,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     // 图表 3.3：14 洞府豪华度排名
     function renderCaveRankChart(types) {
         const typeColors = {
-            '天然溶洞型': '#3a6b8c', '崖墓型': '#7a5230', '水景别墅型': '#2d8aa8',
-            '地下迷宫型': '#6b5e4d', '山中宫殿型': '#c8463a'
+            '天然溶洞型': '#3a6b8c', '崖墓型': '#C9A063', '水景别墅型': '#2d8aa8',
+            '地下迷宫型': '#6B6455', '山中宫殿型': '#c8463a'
         };
         const allCaves = [];
         types.forEach(t => {
@@ -1712,8 +1714,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const wrap = d3.select('#type-cards');
         wrap.selectAll('*').remove();
         const typeColors = {
-            '天然溶洞型': '#3a6b8c', '崖墓型': '#7a5230', '水景别墅型': '#2d8aa8',
-            '地下迷宫型': '#6b5e4d', '山中宫殿型': '#c8463a'
+            '天然溶洞型': '#3a6b8c', '崖墓型': '#C9A063', '水景别墅型': '#2d8aa8',
+            '地下迷宫型': '#6B6455', '山中宫殿型': '#c8463a'
         };
         types.forEach(t => {
             const card = wrap.append('div').attr('class', 'type-card')

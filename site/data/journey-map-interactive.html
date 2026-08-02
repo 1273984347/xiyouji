@@ -78,6 +78,8 @@
         footer a:hover { text-decoration: underline; }
         a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <nav class="breadcrumb">
@@ -118,7 +120,7 @@
                 <div class="legend">
                     <div class="legend-item"><span class="legend-swatch" style="background:#e67e22"></span>普通节点</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#c8463a"></span>九难点（点击展开）</div>
-                    <div class="legend-item"><span class="legend-swatch" style="background:#5a7a3a"></span>起点/终点</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#6B8E5A"></span>起点/终点</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#3a6b8c; opacity:0.6"></span>取经路线</div>
                 </div>
                 <div class="hardship-detail" id="hardshipDetail">
@@ -280,7 +282,7 @@
                 .attr("x", m.cx).attr("y", m.cy + m.r + 14)
                 .attr("text-anchor", "middle")
                 .style("font-size", "10px")
-                .style("fill", "#6b5e4d")
+                .style("fill", "#6B6455")
                 .style("font-style", "italic")
                 .text(m.name);
         });
@@ -340,7 +342,7 @@
         nodeG.append("circle")
             .attr("r", d => d.isHardship ? 8 : 6)
             .attr("fill", d => {
-                if (d.id === 0 || d.id === 16) return "#5a7a3a";
+                if (d.id === 0 || d.id === 16) return "#6B8E5A";
                 if (d.isHardship) return "#c8463a";
                 return "#e67e22";
             })
@@ -391,14 +393,14 @@
             .attr("x", projected[0].px).attr("y", projected[0].py + 30)
             .attr("text-anchor", "middle")
             .style("font-size", "11px")
-            .style("fill", "#5a7a3a")
+            .style("fill", "#6B8E5A")
             .style("font-weight", "600")
             .text("【起点】");
         g.append("text")
             .attr("x", projected[16].px).attr("y", projected[16].py + 30)
             .attr("text-anchor", "middle")
             .style("font-size", "11px")
-            .style("fill", "#5a7a3a")
+            .style("fill", "#6B8E5A")
             .style("font-weight", "600")
             .text("【终点】");
 
@@ -467,7 +469,7 @@
             .attr("width", x.bandwidth())
             .attr("height", d => innerH - y(d.duration))
             .attr("fill", d => {
-                if (d.id === 0 || d.id === 16) return "#5a7a3a";
+                if (d.id === 0 || d.id === 16) return "#6B8E5A";
                 if (d.isHardship) return "#c8463a";
                 return "#e67e22";
             })

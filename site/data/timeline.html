@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -431,6 +431,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -491,17 +493,17 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
        ========================================================== */
     const ERAS = [
         { name: '唐代', start: 618,  end: 907,  color: "#c8463a" },
-        { name: '宋元', start: 908,  end: 1368, color: "#7a5230" },
+        { name: '宋元', start: 908,  end: 1368, color: "#C9A063" },
         { name: '明代', start: 1369, end: 1644, color: "#3a6b8c" },
         { name: '清代', start: 1645, end: 1912, color: "#8c2a2a" },
-        { name: '民国', start: 1913, end: 1949, color: "#5a7a3a" },
+        { name: '民国', start: 1913, end: 1949, color: "#6B8E5A" },
         { name: '现代', start: 1950, end: 1999, color: "#b8862a" },
-        { name: '当代', start: 2000, end: 2035, color: "#6b5e4d" }
+        { name: '当代', start: 2000, end: 2035, color: "#6B6455" }
     ];
     const AXES = {
         composition: { label: '成书史',   color: "#c8463a" },
         version:     { label: '版本演变', color: "#3a6b8c" },
-        influence:   { label: '文化影响', color: "#7a5230" }
+        influence:   { label: '文化影响', color: "#C9A063" }
     };
     const LANE_ORDER = ['composition', 'version', 'influence'];
 
@@ -513,7 +515,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     }
     function eraColor(name) {
         const e = ERAS.find(x => x.name === name);
-        return e ? e.color : "#6b5e4d";
+        return e ? e.color : "#6B6455";
     }
 
     /* ==========================================================

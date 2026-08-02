@@ -20,9 +20,9 @@
             src: local("JetBrains Mono"), local("Fira Code");
         }
         :root {
-            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
             --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
-            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --accent-3: #C9A063; --accent-4: #6B8E5A; --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
         }
@@ -107,11 +107,13 @@
         .footer-idx .idx-block h4 { color: #f5e9d4; font-size: 0.82em; margin-bottom: 6px; font-weight: 700; }
         .footer-idx .idx-block p { color: #e9b885; font-size: 0.78em; line-height: 1.6; margin: 0; }
         .footer-idx .idx-block a { color: #e9b885; text-decoration: underline; }
-        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
         footer a { color: #e9b885; }
         .svg-tooltip { position: absolute; pointer-events: none; background: var(--ink); color: #f5e9d4; padding: 6px 10px; border-radius: 4px; font-size: 0.82em; opacity: 0; transition: opacity 0.15s; }
         .svg-tooltip.visible { opacity: 0.95; }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <a href="#main" class="skip-link">跳到主要内容</a>
@@ -332,8 +334,8 @@
             nodes: [
                 {id: "唐僧", roles: 2, color: "#c8463a", belbin: "协调者+完成者", tuckman: "目标澄清", dynamic: "外部合法性"},
                 {id: "悟空", roles: 3, color: "#8c2a2a", belbin: "塑造者+智多星+专家", tuckman: "推动行动", dynamic: "内部合法性"},
-                {id: "八戒", roles: 2, color: "#7a5230", belbin: "资源调查员+团队工作者", tuckman: "调节气氛", dynamic: "动机分化"},
-                {id: "沙僧", roles: 2, color: "#5a7a3a", belbin: "执行者+完成者", tuckman: "稳重执行", dynamic: "沉默缓冲"},
+                {id: "八戒", roles: 2, color: "#C9A063", belbin: "资源调查员+团队工作者", tuckman: "调节气氛", dynamic: "动机分化"},
+                {id: "沙僧", roles: 2, color: "#6B8E5A", belbin: "执行者+完成者", tuckman: "稳重执行", dynamic: "沉默缓冲"},
                 {id: "白龙马", roles: 1, color: "#3a6b8c", belbin: "专家", tuckman: "危急出手", dynamic: "角色固化"}
             ],
             links: [
@@ -368,7 +370,7 @@
         const radius = Math.min(width, height) / 2 - 60;
         const roles = ["coordinator", "completer", "shaper", "plant", "specialist", "ri", "tw", "me", "implementer"];
         const roleLabels = ["协调者", "完成者", "塑造者", "智多星", "专家", "资源调查员", "团队工作者", "监督评估者", "执行者"];
-        const colors = {唐僧: "#c8463a", 悟空: "#8c2a2a", 八戒: "#7a5230", 沙僧: "#5a7a3a", 白龙马: "#3a6b8c"};
+        const colors = {唐僧: "#c8463a", 悟空: "#8c2a2a", 八戒: "#C9A063", 沙僧: "#6B8E5A", 白龙马: "#3a6b8c"};
         const levels = [2, 4, 6, 8, 10];
         const g = svg.append("g").attr("transform", `translate(${cx},${cy})`);
 
@@ -376,7 +378,7 @@
         levels.forEach(lv => {
             const r = (lv / 10) * radius;
             g.append("circle").attr("r", r).attr("fill", "none").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "3,3");
-            g.append("text").attr("y", -r).attr("text-anchor", "middle").attr("font-size", "10px").attr("fill", "#6b5e4d").text(lv);
+            g.append("text").attr("y", -r).attr("text-anchor", "middle").attr("font-size", "10px").attr("fill", "#6B6455").text(lv);
         });
 
         // 轴线 + 标签
@@ -386,7 +388,7 @@
             g.append("line").attr("x1", 0).attr("y1", 0).attr("x2", x2).attr("y2", y2).attr("stroke", "#d9cdb8");
             const lx = Math.cos(angle) * (radius + 24), ly = Math.sin(angle) * (radius + 24);
             g.append("text").attr("x", lx).attr("y", ly).attr("text-anchor", "middle").attr("dominant-baseline", "middle")
-                .attr("font-size", "11px").attr("fill", "#2c2418").text(roleLabels[i]);
+                .attr("font-size", "11px").attr("fill", "#23201A").text(roleLabels[i]);
         });
 
         // 角色多边形
@@ -462,7 +464,7 @@
         function switchMode(mode) {
             link.attr("stroke", d => {
                 if (mode === "conflict") return d.conflict > d.coop ? "#c8463a" : "#e8dfd0";
-                if (mode === "coop") return d.coop > d.conflict ? "#5a7a3a" : "#e8dfd0";
+                if (mode === "coop") return d.coop > d.conflict ? "#6B8E5A" : "#e8dfd0";
                 return "#d9cdb8";
             }).attr("stroke-width", d => {
                 if (mode === "conflict") return d.conflict * 0.8;

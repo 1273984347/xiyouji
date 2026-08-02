@@ -10,20 +10,20 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
             --shadow-hover: 0 6px 20px rgba(60, 40, 20, 0.18);
             /* 5 条多米诺链主题色 */
             --c1: #c8463a;   /* 红·袈裟·紧箍咒 */
-            --c2: #5a7a3a;   /* 绿·五庄观·道佛联盟 */
+            --c2: #6B8E5A;   /* 绿·五庄观·道佛联盟 */
             --c3: #d97706;   /* 橙·红孩儿·观音扩张 */
             --c4: #9b59b6;   /* 紫·六耳猕猴·心魔 */
             --c5: #3a6b8c;   /* 蓝·狮驼岭·佛道博弈 */
@@ -640,6 +640,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -1001,19 +1003,19 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     // 5 条多米诺链主题色
     const CHAIN_COLORS = {
         "C1": "#c8463a",  // 红·袈裟·紧箍咒
-        "C2": "#5a7a3a",  // 绿·五庄观·道佛联盟
+        "C2": "#6B8E5A",  // 绿·五庄观·道佛联盟
         "C3": "#d97706",  // 橙·红孩儿·观音扩张
         "C4": "#9b59b6",  // 紫·六耳猕猴·心魔
         "C5": "#3a6b8c"   // 蓝·狮驼岭·佛道博弈
     };
     // 5 个螺旋阶段主题色（与链色呼应但区分）
-    const STAGE_COLORS = ["#7a5230", "#c8463a", "#d97706", "#5a7a3a", "#3a6b8c"];
+    const STAGE_COLORS = ["#C9A063", "#c8463a", "#d97706", "#6B8E5A", "#3a6b8c"];
     // 阶段情节符号
     const STAGE_EMOJI = ["⛰️", "💀", "👂", "🪭", "🪷"];
     // 6 个妖怪主题色
     const MONSTER_COLORS = {
         "白骨精": "#c8463a",
-        "青牛精": "#5a7a3a",
+        "青牛精": "#6B8E5A",
         "黄袍怪": "#d97706",
         "红孩儿": "#e9b885",
         "六耳猕猴": "#9b59b6",
@@ -1025,9 +1027,9 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         patrol: "#3a6b8c",     // 巡山/侦查·蓝
         feast: "#c8463a",      // 设宴/吃·红
         council: "#d97706",    // 议事·橙
-        rest: "#6b5e4d",       // 睡觉/休息·灰
+        rest: "#6B6455",       // 睡觉/休息·灰
         battle: "#1a1410",     // 战斗/被收·黑
-        disguise: "#5a7a3a",   // 伪装/逃跑·绿
+        disguise: "#6B8E5A",   // 伪装/逃跑·绿
         unknown: "#d9cdb8"     // 未知·浅灰
     };
     const ACTIVITY_LABELS = {
@@ -1745,7 +1747,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             {
                 num: "03 · SUNDIAL",
                 title: "妖怪沙盘 · 时间预算解读反派",
-                color: "#5a7a3a",
+                color: "#6B8E5A",
                 desc: `<strong>${monster.design_innovation}</strong>。 6 个圆形日晷对应 6 妖怪，12 时辰用 d3.pie + d3.arc 等分，活动按 7 类着色。白骨精全是侦查伪装（内卷），青牛精大量喝茶睡觉（松弛），<strong>用时间预算揭示底层与有背景妖怪的生存策略差异</strong>。`
             }
         ];

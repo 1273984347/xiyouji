@@ -8,9 +8,9 @@
     <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     <style>
         :root {
-            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
             --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
-            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --accent-3: #C9A063; --accent-4: #6B8E5A; --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
         }
@@ -105,7 +105,7 @@
         }
         .insight-box strong { color: var(--accent); font-weight: 700; }
         .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
-        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
         footer a { color: #e9b885; }
         @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
         @media (max-width: 480px) {
@@ -115,6 +115,8 @@
             .stage-btn { padding: 6px 12px; font-size: 0.82em; }
         }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <a href="#main-content" class="skip-link">跳到主内容</a>
@@ -355,9 +357,9 @@
     };
     const CAUSE_COLORS = {
         arranged: "#3a6b8c",
-        wild: "#7a5230",
+        wild: "#C9A063",
         mount: "#c8463a",
-        mind: "#5a7a3a"
+        mind: "#6B8E5A"
     };
     const STAGE_LABEL = {
         pre: "前传",
@@ -428,26 +430,26 @@
             .call(d3.axisBottom(xScale).tickValues(xTicks).tickFormat(d => d === 0 ? "前传" : `第${d}回`))
             .selectAll("text")
             .style("font-size", "0.72rem")
-            .style("fill", "#6b5e4d");
+            .style("fill", "#6B6455");
 
         g.append("g")
             .call(d3.axisLeft(yScale).ticks(10))
             .selectAll("text")
             .style("font-size", "0.78rem")
-            .style("fill", "#6b5e4d");
+            .style("fill", "#6B6455");
 
         // 轴标题
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 40)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("回目");
 
         g.append("text")
             .attr("x", -innerH / 2).attr("y", -38)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("难度系数（1-10）");
 
         // 同一回目多个难时，按难度堆叠偏移
@@ -472,7 +474,7 @@
                     .attr("stroke-width", 1)
                     .style("opacity", 0)
                     .on("mouseover", function(event) {
-                        d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2);
+                        d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
                         tip.style("opacity", 1)
                             .html(`<div class="tip-title">第 ${d.n} 难 · ${d.name}</div>
                                 <div class="tip-row">回目：${d.chapter}</div>
@@ -538,10 +540,10 @@
 
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
 
         g.append("g").call(d3.axisLeft(y).ticks(5))
-            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
 
         const tip = d3.select("#stage-bar-tip");
         g.selectAll("rect.bar")
@@ -629,16 +631,16 @@
 
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
 
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 38)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("难度系数");
 
         g.append("g").call(d3.axisLeft(y).ticks(4))
-            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
 
         const tip = d3.select("#cause-bar-tip");
         const layers = g.selectAll("g.layer")

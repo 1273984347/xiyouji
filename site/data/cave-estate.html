@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -351,6 +351,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -591,7 +593,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .call(gn => gn.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "2,3"))
             .selectAll("text")
             .style("font-size", "0.78rem")
-            .style("fill", "#6b5e4d");
+            .style("fill", "#6B6455");
 
         // X 轴标题
         g.append("text")
@@ -599,7 +601,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("y", innerH + 30)
             .attr("text-anchor", "middle")
             .style("font-size", "0.78rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .text("豪华度（满分 10）");
 
         // 柱
@@ -629,7 +631,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("dy", "0.35em")
             .attr("text-anchor", "end")
             .style("font-size", "0.82rem")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .text(d => d.name);
 
         // 数值标签
@@ -639,7 +641,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("dy", "0.35em")
             .style("font-size", "0.78rem")
             .style("font-weight", "600")
-            .style("fill", "#7a5230")
+            .style("fill", "#C9A063")
             .style("font-family", "JetBrains Mono, monospace")
             .text(d => d.luxury);
 
@@ -708,13 +710,13 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("dy", "0.35em")
             .style("font-size", "1.8rem")
             .style("font-weight", "600")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .text(total);
         g.append("text")
             .attr("text-anchor", "middle")
             .attr("dy", "2em")
             .style("font-size", "0.72rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .text("洞府总数");
 
         // 切片标签
@@ -774,7 +776,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .call(gn => gn.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "2,3"))
             .selectAll("text")
             .style("font-size", "0.74rem")
-            .style("fill", "#6b5e4d");
+            .style("fill", "#6B6455");
 
         // 柱
         g.selectAll(".bar")
@@ -805,7 +807,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("text-anchor", "middle")
             .style("font-size", "0.7rem")
             .style("font-weight", "600")
-            .style("fill", "#7a5230")
+            .style("fill", "#C9A063")
             .style("font-family", "JetBrains Mono, monospace")
             .text(d => d.luxury);
 
@@ -816,7 +818,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .call(gn => gn.select(".domain").remove())
             .selectAll("text")
             .style("font-size", "0.66rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .attr("transform", "rotate(-55)")
             .style("text-anchor", "end")
             .text(d => d.length > 10 ? d.slice(0, 9) + "…" : d);
@@ -881,7 +883,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .call(gn => gn.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "2,3"))
             .selectAll("text")
             .style("font-size", "0.74rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .style("font-family", "JetBrains Mono, monospace");
 
         g.append("text")
@@ -889,7 +891,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("y", innerH + 56)
             .attr("text-anchor", "middle")
             .style("font-size", "0.78rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .text("小妖数量（对数刻度 log10）");
 
         // Y 轴
@@ -898,7 +900,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .call(gn => gn.select(".domain").remove())
             .selectAll("text")
             .style("font-size", "0.78rem")
-            .style("fill", "#2c2418");
+            .style("fill", "#23201A");
 
         // 柱（0 值用 1px 起点标记）
         g.selectAll(".bar")
@@ -928,7 +930,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("dy", "0.35em")
             .style("font-size", "0.74rem")
             .style("font-weight", "600")
-            .style("fill", "#7a5230")
+            .style("fill", "#C9A063")
             .style("font-family", "JetBrains Mono, monospace")
             .text(d => d.minions_count === 0 ? "0（无小妖）" : formatNum(d.minions_count));
 

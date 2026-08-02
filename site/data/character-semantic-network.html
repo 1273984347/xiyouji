@@ -7,7 +7,7 @@
 <style>
 :root {
   --bg: #faf7f2;
-  --fg: #2c2418;
+  --fg: #23201A;
   --accent: #c8463a;
   --accent-2: #3a6b8c;
   --accent-3: #8b7355;
@@ -54,6 +54,8 @@ header .meta { color: var(--accent-3); font-size: 0.9em; margin-top: 8px; }
 .tooltip { position: absolute; background: rgba(44,36,24,0.95); color: #fff; padding: 8px 12px; border-radius: 4px; font-size: 0.85em; pointer-events: none; z-index: 100; max-width: 280px; }
 footer { text-align: center; margin-top: 40px; padding: 20px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85em; }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
 <div class="container">
@@ -383,7 +385,7 @@ function renderHeatmap() {
     g.append('text')
       .attr('x', j * cellW + cellW/2).attr('y', i * cellH + cellH/2)
       .attr('text-anchor', 'middle').attr('dy', '0.35em')
-      .attr('fill', d.weight > maxWeight/2 ? '#fff' : '#2c2418')
+      .attr('fill', d.weight > maxWeight/2 ? '#fff' : '#23201A')
       .attr('font-size', '14px').attr('font-weight', '600')
       .text(d.weight);
   });

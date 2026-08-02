@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --gold: #d4af37;
@@ -739,6 +739,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -979,23 +981,23 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         "荒凉型": "cat-desolate"
     };
     const CAT_COLOR_MAP = {
-        "仙境型": "#5a7a3a",
+        "仙境型": "#6B8E5A",
         "危险型": "#c8463a",
-        "荒凉型": "#6b5e4d"
+        "荒凉型": "#6B6455"
     };
 
     // 视觉艺术构想 art_form 配色
     const IDEA_FORM_COLOR = {
         "装置艺术·交互墙": "#c8463a",
         "数据可视化·动态心电图": "#3a6b8c",
-        "立体投影·装置": "#7a5230",
+        "立体投影·装置": "#C9A063",
         "光艺术·雕塑": "#d4af37",
-        "标本馆·装置": "#5a7a3a",
+        "标本馆·装置": "#6B8E5A",
         "沙画·动态": "#d97706",
         "三屏装置·对话": "#3a6b8c",
-        "书法·装置": "#7a5230",
-        "生态装置·微缩景观": "#5a7a3a",
-        "摄影·装置": "#2c2418"
+        "书法·装置": "#C9A063",
+        "生态装置·微缩景观": "#6B8E5A",
+        "摄影·装置": "#23201A"
     };
 
     // ===== 渲染：心经项目介绍 =====
@@ -1393,7 +1395,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         locations.forEach(loc => {
             const cat = getScentCategory(loc.location, scent_categories);
             const catClass = CAT_CLASS_MAP[cat] || "cat-desolate";
-            const catColor = CAT_COLOR_MAP[cat] || "#6b5e4d";
+            const catColor = CAT_COLOR_MAP[cat] || "#6B6455";
             const card = sel.append("div").attr("class", `scent-card ${catClass}`);
             const head = card.append("div").attr("class", "sc-head");
             head.append("div").attr("class", "sc-n").text("No." + loc.n);
@@ -1458,7 +1460,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             // 限制范围
             loc._y = Math.max(20, Math.min(innerH - 20, loc._y));
             loc._cat = getScentCategory(loc.location, scent_categories);
-            loc._color = CAT_COLOR_MAP[loc._cat] || "#6b5e4d";
+            loc._color = CAT_COLOR_MAP[loc._cat] || "#6B6455";
         });
 
         // 路径（曲线）

@@ -10,7 +10,7 @@
 :root {
   --bg: #faf7f2;
   --paper: #f5ede0;
-  --ink: #2c2418;
+  --ink: #23201A;
   --accent: #c8463a;
   --accent-2: #3a6b8c;
   --accent-3: #8b7355;
@@ -250,6 +250,8 @@ footer {
   font-size: 0.84em;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
 <div class="container">
@@ -750,7 +752,7 @@ function renderIntensity(intensityData) {
     .attr('y', d => yScale(d.intensity) - 12)
     .attr('text-anchor', 'middle')
     .attr('font-size', '10px')
-    .attr('fill', '#2c2418')
+    .attr('fill', '#23201A')
     .text(d => d.phase);
 
   // 坐标轴
@@ -811,7 +813,7 @@ function renderForce(networkData) {
   const roleColors = {};
   EMBEDDED_DATA.roles.forEach(r => { roleColors[r.name] = r.color; });
   const typeColors = {
-    center: '#2c2418',
+    center: '#23201A',
     role: null, // 动态查表
     chapter: '#d4c4a8',
     character: '#8b7355'
@@ -908,7 +910,7 @@ function renderForce(networkData) {
   const legend = d3.select('#force-legend');
   legend.html('');
   const legendItems = [
-    { label: '观音（中心）', color: '#2c2418' },
+    { label: '观音（中心）', color: '#23201A' },
     { label: '六重身份', color: '#c8463a' },
     { label: '关键回目', color: '#d4c4a8' },
     { label: '互动对象', color: '#8b7355' }
@@ -1033,7 +1035,7 @@ function renderSankey(sankeyData) {
     .attr('dy', '0.35em')
     .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
     .attr('font-size', '11px')
-    .attr('fill', '#2c2418')
+    .attr('fill', '#23201A')
     .text(d => d.name);
 
   // 图例
@@ -1105,7 +1107,7 @@ function renderRadar(radarData) {
       .attr('dy', '0.35em')
       .attr('font-size', '13px')
       .attr('font-weight', '600')
-      .attr('fill', '#2c2418')
+      .attr('fill', '#23201A')
       .text(dim);
   });
 

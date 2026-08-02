@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --accent-5: #d4af37;
             --line: #d9cdb8;
@@ -302,6 +302,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -375,9 +377,9 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     const MOCK_CHARACTERS = [
         {name: "孙悟空",   appearances: 100, mentions: 5000, first_chapter: 1,  color: "#c8463a"},
         {name: "唐僧",     appearances: 95,  mentions: 3000, first_chapter: 9,  color: "#e9b885"},
-        {name: "猪八戒",   appearances: 85,  mentions: 2500, first_chapter: 18, color: "#7a5230"},
+        {name: "猪八戒",   appearances: 85,  mentions: 2500, first_chapter: 18, color: "#C9A063"},
         {name: "沙僧",     appearances: 80,  mentions: 1500, first_chapter: 22, color: "#3a6b8c"},
-        {name: "观音",     appearances: 30,  mentions: 800,  first_chapter: 8,  color: "#5a7a3a"},
+        {name: "观音",     appearances: 30,  mentions: 800,  first_chapter: 8,  color: "#6B8E5A"},
         {name: "如来",     appearances: 25,  mentions: 600,  first_chapter: 7,  color: "#d4af37"},
         {name: "玉帝",     appearances: 20,  mentions: 500,  first_chapter: 1,  color: "#9a8c70"},
         {name: "白龙马",   appearances: 70,  mentions: 700,  first_chapter: 15, color: "#b8a890"},
@@ -698,7 +700,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                         .attr("text-anchor", "middle")
                         .style("font-size", "10px")
                         .style("font-family", '"JetBrains Mono", monospace')
-                        .style("fill", v > maxVal * 0.55 ? "#fff" : "#2c2418")
+                        .style("fill", v > maxVal * 0.55 ? "#fff" : "#23201A")
                         .style("opacity", 0)
                         .text(v)
                         .transition()
@@ -735,18 +737,18 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         lg.append("text")
             .attr("x", 0).attr("y", legendH + 14)
             .style("font-size", "10px")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .text("0");
         lg.append("text")
             .attr("x", legendW).attr("y", legendH + 14)
             .attr("text-anchor", "end")
             .style("font-size", "10px")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .text(`${maxVal} 次`);
         lg.append("text")
             .attr("x", legendW + 8).attr("y", legendH + 2)
             .style("font-size", "11px")
-            .style("fill", "#7a5230")
+            .style("fill", "#C9A063")
             .text("提及次数");
     }
 
@@ -893,7 +895,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             item.append("span").text(`${d.label}（${d.value} 次）`);
         });
         // 附加人物色图例
-        legend.append("span").style("margin-left", "12px").style("color", "#6b5e4d").text("｜ 人物色：");
+        legend.append("span").style("margin-left", "12px").style("color", "#6B6455").text("｜ 人物色：");
         main.forEach(c => {
             const item = legend.append("div").attr("class", "legend-item");
             item.append("span").attr("class", "legend-swatch").style("background", c.color);

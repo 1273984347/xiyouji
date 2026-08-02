@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -477,6 +477,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -1151,7 +1153,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         g.append('text')
             .attr('x', bx).attr('y', -16)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#7a5230')
+            .attr('fill', '#C9A063')
             .style('font-size', '11px').style('font-weight', '600')
             .text('▼ 白骨精转折点');
     }
@@ -1193,8 +1195,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             '孙悟空': '#c8463a',
             '唐僧': '#3a6b8c',
             '猪八戒': '#e9b885',
-            '沙悟净': '#5a7a3a',
-            '白龙马': '#7a5230'
+            '沙悟净': '#6B8E5A',
+            '白龙马': '#C9A063'
         };
 
         // 角度
@@ -1217,7 +1219,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             gridG.append('text')
                 .attr('x', 4).attr('y', -r + 3)
                 .style('font-size', '10px')
-                .attr('fill', '#6b5e4d')
+                .attr('fill', '#6B6455')
                 .text((lv * 2).toString());
         }
 
@@ -1238,7 +1240,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 .attr('dominant-baseline', 'middle')
                 .style('font-size', '12px')
                 .style('font-weight', '600')
-                .attr('fill', '#2c2418')
+                .attr('fill', '#23201A')
                 .text(d);
         });
 
@@ -1285,13 +1287,13 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('cx', 0).attr('cy', 0)
             .attr('r', avgR)
             .attr('fill', 'none')
-            .attr('stroke', '#6b5e4d')
+            .attr('stroke', '#6B6455')
             .attr('stroke-dasharray', '6,4')
             .attr('stroke-width', 1.5);
         gridG.append('text')
             .attr('x', avgR * Math.SQRT1_2 + 4)
             .attr('y', -avgR * Math.SQRT1_2 - 4)
-            .style('font-size', '10px').style('fill', '#6b5e4d')
+            .style('font-size', '10px').style('fill', '#6B6455')
             .text(`团队均值 ${data.team_avg_flexibility}`);
     }
 
@@ -1378,7 +1380,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const colors = {
             'mantra_intensity': '#c8463a',
             'prefrontal_activation': '#3a6b8c',
-            'limbic_inhibition': '#5a7a3a'
+            'limbic_inhibition': '#6B8E5A'
         };
         const labels = {
             'mantra_intensity': '咒语强度',
@@ -1424,7 +1426,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('y', d => y(d.value) - 4)
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
-            .style('fill', '#2c2418')
+            .style('fill', '#23201A')
             .text(d => d.value);
     }
 
@@ -1493,7 +1495,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('transform', 'rotate(-90)')
             .attr('x', -h/2).attr('y', w + 50)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#7a5230')
+            .attr('fill', '#C9A063')
             .text('success_rate 成功率 (0-100%)');
 
         // 强度折线
@@ -1539,7 +1541,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('x', d => x(d.key)).attr('y', d => yS(d.success) + 14)
             .attr('text-anchor', 'middle')
             .style('font-size', '11px').style('font-weight', '600')
-            .attr('fill', '#7a5230')
+            .attr('fill', '#C9A063')
             .text(d => d.success + '%');
     }
 

@@ -18,9 +18,9 @@
             font-weight: 400 700; font-display: swap;
         }
         :root {
-            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
             --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
-            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --accent-3: #C9A063; --accent-4: #6B8E5A; --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
         }
@@ -119,7 +119,7 @@
         }
         .event-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
         .event-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
-        .event-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6b5e4d; }
+        .event-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
         .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
         .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
         .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 2px; }
@@ -144,7 +144,7 @@
         .cross-page-section .nav-list a { color: var(--accent-2); text-decoration: none; font-weight: 600; }
         .cross-page-section .nav-list a:hover { text-decoration: underline; }
         .cross-page-section .nav-list .desc { display: block; color: var(--ink-soft); font-size: 0.82em; margin-top: 4px; font-weight: 400; }
-        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
         footer a { color: #e9b885; }
         footer .idx-row { margin: 6px 0; }
         footer .idx-label { color: #b8a584; font-family: "JetBrains Mono", monospace; font-size: 0.82em; margin-right: 6px; }
@@ -156,6 +156,8 @@
             .ctrl-btn { padding: 6px 12px; font-size: 0.82em; }
         }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <a href="#main-content" class="skip-link">跳到主内容</a>
@@ -406,8 +408,8 @@
     };
 
     // 配色（古典宣纸风）
-    const PIE_COLORS = ["#c8463a", "#3a6b8c", "#7a5230", "#5a7a3a", "#e9b885", "#b8862a", "#8c2a2a"];
-    const LAYER_COLORS = { kaipian: "#c8463a", huimu: "#e9b885", renwu: "#7a5230", jingwu: "#5a7a3a", cipai: "#3a6b8c" };
+    const PIE_COLORS = ["#c8463a", "#3a6b8c", "#C9A063", "#6B8E5A", "#e9b885", "#b8862a", "#8c2a2a"];
+    const LAYER_COLORS = { kaipian: "#c8463a", huimu: "#e9b885", renwu: "#C9A063", jingwu: "#6B8E5A", cipai: "#3a6b8c" };
     const LAYER_LABELS = { kaipian: "开篇诗", huimu: "回目对联", renwu: "人物赋", jingwu: "景物诗", cipai: "词牌" };
     const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const DUR = REDUCE_MOTION ? 0 : 600;
@@ -470,7 +472,7 @@
             .style("font-size", "1.4em").style("font-weight", "700").style("fill", "#c8463a")
             .text("7 类");
         g.append("text").attr("text-anchor", "middle").attr("dy", 16)
-            .style("font-size", "0.85em").style("fill", "#7a5230")
+            .style("font-size", "0.85em").style("fill", "#C9A063")
             .text("诗词总计 164");
 
         // 标签
@@ -483,7 +485,7 @@
             .attr("text-anchor", "middle")
             .attr("transform", d => `translate(${labelArc.centroid(d)})`)
             .style("font-size", "0.78rem")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .style("opacity", 0)
             .text(d => d.data.name)
             .transition().duration(DUR).delay((d, i) => i * 70 + 300)
@@ -523,13 +525,13 @@
 
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x).tickFormat(d => toneLabels[d]))
-            .selectAll("text").style("font-size", "0.85rem").style("fill", "#2c2418").style("font-weight", "600");
+            .selectAll("text").style("font-size", "0.85rem").style("fill", "#23201A").style("font-weight", "600");
 
         g.append("g").call(d3.axisLeft(y))
-            .selectAll("text").style("font-size", "0.85rem").style("fill", "#2c2418");
+            .selectAll("text").style("font-size", "0.85rem").style("fill", "#23201A");
 
         g.append("text").attr("x", innerW / 2).attr("y", innerH + 44)
-            .attr("text-anchor", "middle").style("font-size", "0.85rem").style("fill", "#7a5230")
+            .attr("text-anchor", "middle").style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("韵脚类型");
 
         const tip = d3.select("#heat-tip");
@@ -545,7 +547,7 @@
                     .attr("fill", color(val)).attr("stroke", "#fff").attr("stroke-width", 1.5)
                     .style("opacity", 0)
                     .on("mouseover", function(event) {
-                        d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2);
+                        d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
                         tip.style("opacity", 1)
                             .html(`<div class="tip-title">${row.poem} · ${toneLabels[t]}</div>
                                 <div class="tip-row">占比：<strong style="color:#e9b885">${val}%</strong></div>
@@ -568,7 +570,7 @@
                     .attr("x", x(t) + x.bandwidth() / 2).attr("y", y(row.poem) + y.bandwidth() / 2 + 5)
                     .attr("text-anchor", "middle")
                     .style("font-size", "0.92rem").style("font-weight", "700")
-                    .style("fill", val > 55 ? "#fff" : "#2c2418")
+                    .style("fill", val > 55 ? "#fff" : "#23201A")
                     .style("opacity", 0)
                     .text(val + "%")
                     .transition().duration(DUR).delay(ri * 60 + ti * 30 + 200)
@@ -611,13 +613,13 @@
 
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
 
         g.append("g").call(d3.axisLeft(y).ticks(5))
-            .selectAll("text").style("font-size", "0.75rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.75rem").style("fill", "#6B6455");
 
         g.append("text").attr("x", innerW / 2).attr("y", innerH + 44)
-            .attr("text-anchor", "middle").style("font-size", "0.85rem").style("fill", "#7a5230")
+            .attr("text-anchor", "middle").style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("回目区间（10 段）");
 
         // 当前段垂线
@@ -642,7 +644,7 @@
             .attr("fill", (d, i) => i <= segIdx ? "#c8463a" : "#e9b885")
             .attr("stroke", "#fff").attr("stroke-width", 1)
             .on("mouseover", function(event, d) {
-                d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2);
+                d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">第 ${d.chapter_range} 回</div>
                         <div class="tip-row">诗词数量：<strong style="color:#e9b885">${d.count}</strong></div>
@@ -760,17 +762,17 @@
 
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
 
         g.append("g").call(d3.axisLeft(y).ticks(6))
-            .selectAll("text").style("font-size", "0.75rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.75rem").style("fill", "#6B6455");
 
         g.append("text").attr("x", innerW / 2).attr("y", innerH + 44)
-            .attr("text-anchor", "middle").style("font-size", "0.85rem").style("fill", "#7a5230")
+            .attr("text-anchor", "middle").style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("回目区间（10 段）");
         g.append("text").attr("x", -innerH / 2).attr("y", -38)
             .attr("text-anchor", "middle").attr("transform", "rotate(-90)")
-            .style("font-size", "0.85rem").style("fill", "#7a5230").text("诗词数（堆叠）");
+            .style("font-size", "0.85rem").style("fill", "#C9A063").text("诗词数（堆叠）");
 
         const tip = d3.select("#stack-tip");
         const wrapEl = wrap.parentElement;
@@ -788,7 +790,7 @@
                 .attr("fill", LAYER_COLORS[layer.key])
                 .attr("stroke", "#fff").attr("stroke-width", 1)
                 .on("mouseover", function(event, d) {
-                    d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2);
+                    d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
                     const val = d.data[layer.key];
                     tip.style("opacity", 1)
                         .html(`<div class="tip-title">${d.data.range} 回 · ${LAYER_LABELS[layer.key]}</div>
@@ -840,11 +842,11 @@
 
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x))
-            .selectAll("text").style("font-size", "0.62rem").style("fill", "#6b5e4d")
+            .selectAll("text").style("font-size", "0.62rem").style("fill", "#6B6455")
             .attr("transform", "rotate(-18)").style("text-anchor", "end");
 
         g.append("g").call(d3.axisLeft(y).ticks(4))
-            .selectAll("text").style("font-size", "0.68rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.68rem").style("fill", "#6B6455");
 
         data.forEach((d, i) => {
             const cx = x(d.poem) + x.bandwidth() / 2;
@@ -852,19 +854,19 @@
             // 须线
             g.append("line").attr("x1", cx).attr("x2", cx)
                 .attr("y1", y(d.min)).attr("y2", y(d.max))
-                .attr("stroke", "#7a5230").attr("stroke-width", 1);
+                .attr("stroke", "#C9A063").attr("stroke-width", 1);
             g.append("line").attr("x1", cx - boxW / 3).attr("x2", cx + boxW / 3)
                 .attr("y1", y(d.min)).attr("y2", y(d.min))
-                .attr("stroke", "#7a5230").attr("stroke-width", 1);
+                .attr("stroke", "#C9A063").attr("stroke-width", 1);
             g.append("line").attr("x1", cx - boxW / 3).attr("x2", cx + boxW / 3)
                 .attr("y1", y(d.max)).attr("y2", y(d.max))
-                .attr("stroke", "#7a5230").attr("stroke-width", 1);
+                .attr("stroke", "#C9A063").attr("stroke-width", 1);
             // 箱体
             g.append("rect")
                 .attr("x", cx - boxW / 2).attr("y", y(d.q3))
                 .attr("width", boxW).attr("height", y(d.q1) - y(d.q3))
                 .attr("fill", PIE_COLORS[i % PIE_COLORS.length]).attr("opacity", 0.55)
-                .attr("stroke", "#2c2418").attr("stroke-width", 1)
+                .attr("stroke", "#23201A").attr("stroke-width", 1)
                 .style("opacity", 0)
                 .transition().duration(DUR).delay(i * 80)
                 .style("opacity", 0.55);

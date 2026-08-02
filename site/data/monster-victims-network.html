@@ -10,7 +10,7 @@
 :root {
   --bg: #faf7f2;
   --paper: #f5ede0;
-  --ink: #2c2418;
+  --ink: #23201A;
   --accent: #c8463a;
   --accent-2: #3a6b8c;
   --accent-3: #8b7355;
@@ -244,6 +244,8 @@ footer {
   font-size: 0.84em;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
 <div class="container">
@@ -608,7 +610,7 @@ function renderForce(networkData) {
 
   // 类型颜色
   const typeColors = {
-    victim: '#2c2418',
+    victim: '#23201A',
     perpetrator: '#c8463a',
     bystander: '#8a7a6a',
     rescuer: '#3a6b8c',
@@ -706,7 +708,7 @@ function renderForce(networkData) {
     .attr('dy', d => d.type === 'victim' ? 4 : -14)
     .attr('font-weight', d => d.type === 'victim' || d.type === 'perpetrator' ? 700 : 400)
     .attr('font-size', d => d.type === 'victim' ? 13 : d.type === 'perpetrator' ? 11 : 10)
-    .attr('fill', d => d.type === 'victim' ? '#2c2418' : '#5a4a3a')
+    .attr('fill', d => d.type === 'victim' ? '#23201A' : '#5a4a3a')
     .text(d => d.id);
 
   sim.on('tick', () => {
@@ -720,7 +722,7 @@ function renderForce(networkData) {
   const legend = d3.select('#force-legend');
   legend.html('');
   const legendItems = [
-    { label: '受害者（中心）', color: '#2c2418' },
+    { label: '受害者（中心）', color: '#23201A' },
     { label: '施害者', color: '#c8463a' },
     { label: '旁观者', color: '#8a7a6a' },
     { label: '救援者', color: '#3a6b8c' },
@@ -846,7 +848,7 @@ function renderSankey(sankeyData) {
     .attr('dy', '0.35em')
     .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
     .attr('font-size', '11px')
-    .attr('fill', '#2c2418')
+    .attr('fill', '#23201A')
     .text(d => d.name);
 
   // 图例
@@ -917,7 +919,7 @@ function renderRadar(radarData) {
       .attr('dy', '0.35em')
       .attr('font-size', '13px')
       .attr('font-weight', '600')
-      .attr('fill', '#2c2418')
+      .attr('fill', '#23201A')
       .text(dim);
   });
 
@@ -1075,7 +1077,7 @@ function renderTimeline(timelineData) {
       .attr('text-anchor', 'middle')
       .attr('font-size', '11px')
       .attr('font-weight', '600')
-      .attr('fill', '#2c2418')
+      .attr('fill', '#23201A')
       .text(node.label);
   });
 

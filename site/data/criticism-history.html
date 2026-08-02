@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --line: #d9cdb8;
             --rebel: #8c2a2a;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -526,6 +526,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -688,7 +690,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             {
                 key: "literary",
                 label: "文学流 · Literary Critique",
-                color: "#7a5230",
+                color: "#C9A063",
                 desc: "以文学本位与社会批判解读，剥离附会，回归文本",
                 path: ["李贽", "鲁迅", "胡适", "戴锦华"]
             },
@@ -1092,8 +1094,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("fill", d => {
                 const cs = d.streams || [];
                 if (cs.length === 0) return "var(--accent-3)";
-                const map = { zhengdao: "#3a6b8c", literary: "#7a5230", rebel: "#8c2a2a" };
-                return map[cs[0]] || "#7a5230";
+                const map = { zhengdao: "#3a6b8c", literary: "#C9A063", rebel: "#8c2a2a" };
+                return map[cs[0]] || "#C9A063";
             })
             .attr("opacity", 0.18);
 
@@ -1103,9 +1105,9 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("r", 8)
             .attr("fill", d => {
                 const cs = d.streams || [];
-                if (cs.length === 0) return "#7a5230";
-                const map = { zhengdao: "#3a6b8c", literary: "#7a5230", rebel: "#8c2a2a" };
-                return map[cs[0]] || "#7a5230";
+                if (cs.length === 0) return "#C9A063";
+                const map = { zhengdao: "#3a6b8c", literary: "#C9A063", rebel: "#8c2a2a" };
+                return map[cs[0]] || "#C9A063";
             })
             .on("mouseover", function(event, d) {
                 d3.select(this).attr("r", 10);
@@ -1167,7 +1169,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         legend.append("div")
             .attr("class", "legend-item")
             .html(`
-                <span class="legend-swatch" style="background:#7a5230;border-radius:50%;"></span>
+                <span class="legend-swatch" style="background:#C9A063;border-radius:50%;"></span>
                 <span>独立·儒学派（张书绅）</span>
             `);
     }
@@ -1190,7 +1192,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
 
         // 等边三角形三顶点
         const vertices = {
-            top: { x: cx, y: cy - R, label: "儒", sub: "张书绅 · 大学正心", color: "#7a5230", args: tri.vertices[0].args },
+            top: { x: cx, y: cy - R, label: "儒", sub: "张书绅 · 大学正心", color: "#C9A063", args: tri.vertices[0].args },
             bl:  { x: cx - R * Math.sin(Math.PI / 3), y: cy + R * Math.cos(Math.PI / 3), label: "道", sub: "陈士斌 · 内丹金丹", color: "#3a6b8c", args: tri.vertices[1].args },
             br:  { x: cx + R * Math.sin(Math.PI / 3), y: cy + R * Math.cos(Math.PI / 3), label: "释·文", sub: "现代学者 · 文学本位", color: "#c8463a", args: tri.vertices[2].args }
         };

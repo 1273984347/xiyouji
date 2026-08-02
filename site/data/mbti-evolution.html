@@ -8,9 +8,9 @@
     <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     <style>
         :root {
-            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
             --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
-            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --accent-3: #C9A063; --accent-4: #6B8E5A; --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
         }
@@ -103,7 +103,7 @@
         }
         .insight-box strong { color: var(--accent); font-weight: 700; }
         .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
-        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
         footer a { color: #e9b885; }
         @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
         @media (max-width: 480px) {
@@ -113,6 +113,8 @@
             .stage-btn { padding: 6px 12px; font-size: 0.82em; }
         }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <a href="#main-content" class="skip-link">跳到主内容</a>
@@ -202,8 +204,8 @@
         dimPairs: [
             { a: "E", b: "I", label: "E-I", color: "#c8463a" },
             { a: "S", b: "N", label: "S-N", color: "#3a6b8c" },
-            { a: "T", b: "F", label: "T-F", color: "#7a5230" },
-            { a: "J", b: "P", label: "J-P", color: "#5a7a3a" }
+            { a: "T", b: "F", label: "T-F", color: "#C9A063" },
+            { a: "J", b: "P", label: "J-P", color: "#6B8E5A" }
         ],
         characters: [
             {
@@ -243,7 +245,7 @@
                 ]
             },
             {
-                name: "白龙马", mbti: "ISTP", color: "#6b5e4d",
+                name: "白龙马", mbti: "ISTP", color: "#6B6455",
                 stages: [
                     {stage: "拼凑期", chapters: "8-22", dims: {E:2,I:8,S:7,N:3,T:7,F:3,J:3,P:7}, dominant: "Ti-Se", note: "化为马·沉默·执行"},
                     {stage: "冲突期", chapters: "27-58", dims: {E:3,I:7,S:7,N:3,T:7,F:3,J:3,P:7}, dominant: "Ti-Se", note: "第30回黄袍怪事件显化人形·E 升"},
