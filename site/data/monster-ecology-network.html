@@ -16,10 +16,10 @@
             font-display: swap;
         }
         :root {
-            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
             --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
-            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
-            --water: #3a6b8c; --fire: #c8463a; --mountain: #7a5230; --sky: #5a7a3a;
+            --accent-3: #C9A063; --accent-4: #6B8E5A; --rebel: #8c2a2a;
+            --water: #3a6b8c; --fire: #c8463a; --mountain: #C9A063; --sky: #6B8E5A;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
         }
@@ -104,7 +104,7 @@
         }
         .node-card h4 { color: var(--accent); margin-bottom: 4px; }
         .node-card .meta { font-size: 0.82em; color: var(--ink-soft); }
-        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
         footer a { color: #e9b885; }
         footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
         footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
@@ -114,6 +114,8 @@
             .section { padding: 16px; }
         }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -194,8 +196,8 @@
                 <svg width="100%" height="420" id="sankey-svg" role="img" aria-label="食物链能量流动桑基图"></svg>
             </div>
             <div class="legend">
-                <div class="legend-item"><span class="legend-swatch" style="background:#5a7a3a;"></span>生产者（凡人）</div>
-                <div class="legend-item"><span class="legend-swatch" style="background:#7a5230;"></span>初级消费者（小妖）</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#6B8E5A;"></span>生产者（凡人）</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#C9A063;"></span>初级消费者（小妖）</div>
                 <div class="legend-item"><span class="legend-swatch" style="background:#c8463a;"></span>顶级捕食者（大妖）</div>
                 <div class="legend-item"><span class="legend-swatch" style="background:#3a6b8c;"></span>超级捕食者（取经团队/天庭）</div>
             </div>
@@ -218,7 +220,7 @@
             <div class="legend">
                 <div class="legend-item"><span class="legend-swatch" style="background:#3a6b8c;"></span>迁地保护（收服）</div>
                 <div class="legend-item"><span class="legend-swatch" style="background:#c8463a;"></span>种群覆灭（消灭）</div>
-                <div class="legend-item"><span class="legend-swatch" style="background:#7a5230;"></span>残遗种群（逃逸）</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#C9A063;"></span>残遗种群（逃逸）</div>
             </div>
         </section>
 
@@ -493,8 +495,8 @@
         const svg = d3.select("#network-svg");
         const width = svg.node().clientWidth;
         const height = 560;
-        const colorMap = {water: "#3a6b8c", fire: "#c8463a", mountain: "#7a5230", sky: "#5a7a3a"};
-        const typeColor = {prey: "#c8463a", symbiosis: "#5a7a3a", compete: "#7a5230"};
+        const colorMap = {water: "#3a6b8c", fire: "#c8463a", mountain: "#C9A063", sky: "#6B8E5A"};
+        const typeColor = {prey: "#c8463a", symbiosis: "#6B8E5A", compete: "#C9A063"};
 
         let currentFilter = "all";
         let nodes = EMBEDDED_DATA.network.nodes.map(d => ({...d}));
@@ -540,7 +542,7 @@
                 .text(d => d.name)
                 .attr("font-size", d => d.size > 22 ? "11px" : "9px")
                 .attr("dx", d => d.size / 2 + 4).attr("dy", 3)
-                .attr("fill", "#2c2418");
+                .attr("fill", "#23201A");
 
             node.on("click", (e, d) => {
                 d3.select("#node-card-container").html(`
@@ -583,7 +585,7 @@
             {x: 40 + 3*(width - 200)/4, y: height/2 - 60},
             {x: width - 180, y: height/2 - 60}
         ];
-        const colors = ["#5a7a3a", "#7a5230", "#c8463a", "#3a6b8c", "#2c2418"];
+        const colors = ["#6B8E5A", "#C9A063", "#c8463a", "#3a6b8c", "#23201A"];
         const yPositions = [0, 60, 120, 180, 240];
 
         data.nodes.forEach((n, i) => {
@@ -602,12 +604,12 @@
                 .attr("stroke", colors[l.source]).attr("stroke-width", Math.sqrt(l.value) * 2.5)
                 .attr("opacity", 0.55);
             svg.append("text").attr("x", (src.x + nodeW + tgt.x) / 2).attr("y", (sy + ty) / 2 - 6)
-                .attr("text-anchor", "middle").attr("font-size", "10px").attr("fill", "#6b5e4d")
+                .attr("text-anchor", "middle").attr("font-size", "10px").attr("fill", "#6B6455")
                 .text(`${l.value}%`);
         });
 
         svg.append("text").attr("x", width/2).attr("y", 30).attr("text-anchor", "middle")
-            .attr("font-size", "13px").attr("fill", "#6b5e4d")
+            .attr("font-size", "13px").attr("fill", "#6B6455")
             .text("凡人精气（100%）→ 小妖消费者 → 大妖顶级捕食者 → 取经团队 → 天庭/佛界收编 · 四级能量金字塔·每级损失约 50%");
     })();
 
@@ -638,7 +640,7 @@
                 .attr("x2", cx + Math.cos(a) * R).attr("y2", cy + Math.sin(a) * R)
                 .attr("stroke", "#d9cdb8");
             svg.append("text").attr("x", cx + Math.cos(a) * (R + 20)).attr("y", cy + Math.sin(a) * (R + 20))
-                .attr("text-anchor", "middle").attr("dy", 4).attr("font-size", "12px").attr("fill", "#6b5e4d")
+                .attr("text-anchor", "middle").attr("dy", 4).attr("font-size", "12px").attr("fill", "#6B6455")
                 .text(dimLabels[i]);
         });
 
@@ -658,7 +660,7 @@
         EMBEDDED_DATA.radar.forEach((m, idx) => {
             legendG.append("rect").attr("x", 0).attr("y", idx * 18).attr("width", 12).attr("height", 12)
                 .attr("fill", colors[idx % 10]).attr("opacity", 0.7);
-            legendG.append("text").attr("x", 18).attr("y", idx * 18 + 10).attr("font-size", "10px").attr("fill", "#2c2418")
+            legendG.append("text").attr("x", 18).attr("y", idx * 18 + 10).attr("font-size", "10px").attr("fill", "#23201A")
                 .text(`${m.monster} (${m.strategy})`);
         });
     })();
@@ -670,7 +672,7 @@
         const height = 380;
         const margin = {top: 30, right: 30, bottom: 50, left: 50};
         const data = EMBEDDED_DATA.timeline;
-        const typeColor = {symbiosis: "#3a6b8c", "消灭": "#c8463a", 逃逸: "#7a5230"};
+        const typeColor = {symbiosis: "#3a6b8c", "消灭": "#c8463a", 逃逸: "#C9A063"};
         const typeLabel = {symbiosis: "迁地保护（收服）", "消灭": "种群覆灭（消灭）", 逃逸: "残遗种群（逃逸）"};
 
         const x = d3.scaleLinear().domain([0, 100]).range([margin.left, width - margin.right]);
@@ -678,19 +680,19 @@
 
         svg.append("g").attr("transform", `translate(0,${height - margin.bottom})`)
             .call(d3.axisBottom(x).ticks(20))
-            .append("text").attr("x", width/2).attr("y", 35).attr("fill", "#6b5e4d").attr("text-anchor", "middle").text("回目");
+            .append("text").attr("x", width/2).attr("y", 35).attr("fill", "#6B6455").attr("text-anchor", "middle").text("回目");
 
         svg.append("g").attr("transform", `translate(${margin.left},0)`)
             .call(d3.axisLeft(y).ticks(5))
             .append("text").attr("transform", "rotate(-90)").attr("x", -height/2).attr("y", -35)
-            .attr("fill", "#6b5e4d").attr("text-anchor", "middle").text("妖怪数量");
+            .attr("fill", "#6B6455").attr("text-anchor", "middle").text("妖怪数量");
 
         data.forEach(d => {
             svg.append("circle").attr("cx", x(d.chapter)).attr("cy", y(d.count))
                 .attr("r", Math.sqrt(d.count) * 4 + 3).attr("fill", typeColor[d.type]).attr("opacity", 0.7)
                 .attr("stroke", "#fff").attr("stroke-width", 1);
             svg.append("text").attr("x", x(d.chapter)).attr("y", y(d.count) - Math.sqrt(d.count) * 4 - 6)
-                .attr("text-anchor", "middle").attr("font-size", "9px").attr("fill", "#2c2418")
+                .attr("text-anchor", "middle").attr("font-size", "9px").attr("fill", "#23201A")
                 .text(d.monster.substring(0, 6));
         });
 
@@ -698,7 +700,7 @@
         const lg = svg.append("g").attr("transform", `translate(${width - 200}, ${margin.top})`);
         Object.entries(typeLabel).forEach(([k, v], i) => {
             lg.append("circle").attr("cx", 6).attr("cy", i * 18 + 6).attr("r", 5).attr("fill", typeColor[k]);
-            lg.append("text").attr("x", 18).attr("y", i * 18 + 10).attr("font-size", "10px").attr("fill", "#2c2418").text(v);
+            lg.append("text").attr("x", 18).attr("y", i * 18 + 10).attr("font-size", "10px").attr("fill", "#23201A").text(v);
         });
     })();
     </script>

@@ -8,9 +8,9 @@
     <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     <style>
         :root {
-            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
             --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
-            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --accent-3: #C9A063; --accent-4: #6B8E5A; --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
         }
@@ -101,7 +101,7 @@
         }
         .event-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
         .event-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
-        .event-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6b5e4d; }
+        .event-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
         .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
         .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
         .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 50%; }
@@ -117,7 +117,7 @@
         .stage-table th, .stage-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
         .stage-table th { background: #fff8e7; color: var(--accent-3); font-weight: 600; }
         .stage-table td.num { text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--accent); }
-        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
         footer a { color: #e9b885; }
         @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
         @media (max-width: 480px) {
@@ -127,6 +127,8 @@
             .ctrl-btn { padding: 6px 12px; font-size: 0.82em; }
         }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <a href="#main-content" class="skip-link">跳到主内容</a>
@@ -266,8 +268,8 @@
     // 事件类型配置
     const EVENT_TYPES = {
         battle:   { label: "战斗", color: "#c8463a" },
-        recruit:  { label: "收徒", color: "#5a7a3a" },
-        trial:    { label: "渡劫", color: "#7a5230" },
+        recruit:  { label: "收徒", color: "#6B8E5A" },
+        trial:    { label: "渡劫", color: "#C9A063" },
         insight:  { label: "悟道", color: "#3a6b8c" },
         meeting:  { label: "会见", color: "#e9b885" }
     };
@@ -381,12 +383,12 @@
             .call(d3.axisBottom(xScale).ticks(20).tickFormat(d => `第${d}回`))
             .selectAll("text")
             .style("font-size", "0.7rem")
-            .style("fill", "#6b5e4d");
+            .style("fill", "#6B6455");
 
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 44)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("回目（时间轴）");
 
         // Y 轴
@@ -394,13 +396,13 @@
             .call(d3.axisLeft(yScale))
             .selectAll("text")
             .style("font-size", "0.78rem")
-            .style("fill", "#2c2418");
+            .style("fill", "#23201A");
 
         g.append("text")
             .attr("x", -innerH / 2).attr("y", -72)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("地理位置（长安 → 灵山）");
 
         // 网格线
@@ -465,7 +467,7 @@
             .attr("stroke", "#fff")
             .attr("stroke-width", 1.5)
             .on("mouseover", function(event, d) {
-                d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2);
+                d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">第 ${d.ch} 回 · ${d.name}</div>
                         <div class="tip-row">地点：<strong style="color:#e9b885">${d.loc}</strong></div>

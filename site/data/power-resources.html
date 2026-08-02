@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --accent-5: #9c6b3a;
             --accent-6: #3a8c8c;
@@ -498,6 +498,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -923,7 +925,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                     "resource_control": ["军队", "人口亿万", "土地", "贡品赋税"],
                     "influence": 5,
                     "power_gap": "名义权 6 > 实权 5·差 1 分·人间王权受天庭册封·但实际独立",
-                    "color": "#7a5230"
+                    "color": "#C9A063"
                 },
                 {
                     "name": "妖界",
@@ -935,7 +937,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                     "resource_control": ["洞府", "盗用法宝", "小妖军队", "地方割据"],
                     "influence": 7,
                     "power_gap": "实权 7 > 名义权 2·差 5 分·最大逆差·妖界实强名弱·故常被天庭围剿",
-                    "color": "#5a7a3a"
+                    "color": "#6B8E5A"
                 },
                 {
                     "name": "水族",
@@ -1283,8 +1285,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     const FACTION_COLORS = {
         '天庭': '#c8463a',
         '灵山': '#3a6b8c',
-        '散仙': '#5a7a3a',
-        '特殊': '#7a5230'
+        '散仙': '#6B8E5A',
+        '特殊': '#C9A063'
     };
 
     // ===== Main render =====
@@ -1410,7 +1412,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('x', d => x(Math.max(d.actual_power, d.nominal_power)) + 32)
             .attr('y', d => y0.bandwidth() / 2 + 3)
             .style('font-size', '10px')
-            .attr('fill', '#7a5230')
+            .attr('fill', '#C9A063')
             .style('font-style', 'italic')
             .text(d => '差 ' + Math.abs(d.actual_power - d.nominal_power));
     }
@@ -1497,7 +1499,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         // 颜色：按成功率渐变（高=accent-2·低=accent-3）
         const colorScale = d3.scaleLinear()
             .domain([0, 0.3, 0.6])
-            .range(['#7a5230', '#9c6b3a', '#3a6b8c']);
+            .range(['#C9A063', '#9c6b3a', '#3a6b8c']);
 
         // 柱
         g.selectAll('.bar')
@@ -1541,7 +1543,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('y', d => y(d.success_rate) - 22)
             .attr('text-anchor', 'middle')
             .style('font-size', '9px')
-            .style('fill', '#7a5230')
+            .style('fill', '#C9A063')
             .style('font-style', 'italic')
             .text(d => d.duration);
     }
@@ -1669,7 +1671,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
             .style('font-weight', '600')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text(d => d.name.length > 8 ? d.name.slice(0, 7) + '…' : d.name);
 
         // access_level 图例（右下角小注）
@@ -1678,7 +1680,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('text-anchor', 'end')
             .style('font-size', '10px')
             .style('font-style', 'italic')
-            .attr('fill', '#6b5e4d')
+            .attr('fill', '#6B6455')
             .text('圆点半径 ∝ access_level 获取难度');
     }
 
@@ -1768,14 +1770,14 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('text-anchor', 'middle')
             .attr('dy', -8)
             .style('font-size', '14px')
-            .attr('fill', '#6b5e4d')
+            .attr('fill', '#6B6455')
             .text('总资源');
         g.append('text')
             .attr('text-anchor', 'middle')
             .attr('dy', 22)
             .style('font-size', '32px')
             .style('font-weight', '700')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text(total);
     }
 

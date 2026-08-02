@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -393,6 +393,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -622,10 +624,10 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     const CATEGORY_COLORS = {
         "结构性假设": "#c8463a",
         "监管假设":   "#3a6b8c",
-        "兵器实验":   "#7a5230",
-        "替换假设":   "#5a7a3a",
+        "兵器实验":   "#C9A063",
+        "替换假设":   "#6B8E5A",
         "控制论假设": "#e9b885",
-        "情节假设":   "#6b5e4d"
+        "情节假设":   "#6B6455"
     };
     const VALIDITY_COLORS = {
         "high":   "#c8463a",
@@ -734,13 +736,13 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("dy", "0.35em")
             .style("font-size", "1.8rem")
             .style("font-weight", "600")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .text(total);
         g.append("text")
             .attr("text-anchor", "middle")
             .attr("dy", "2em")
             .style("font-size", "0.72rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .text("场景总数");
 
         g.selectAll("text.label")
@@ -752,7 +754,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("text-anchor", "middle")
             .style("font-size", "0.88rem")
             .style("font-weight", "600")
-            .style("fill", d => d.data[0] === "高可信" ? "#fff" : "#7a5230")
+            .style("fill", d => d.data[0] === "高可信" ? "#fff" : "#C9A063")
             .text(d => {
                 const pct = (d.data[1] / total * 100).toFixed(0);
                 return `${d.data[1]} · ${pct}%`;
@@ -809,7 +811,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
             .selectAll("text")
             .style("font-size", "0.82rem")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .attr("transform", "rotate(-18)")
             .style("text-anchor", "end");
 
@@ -819,7 +821,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .call(g2 => g2.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-opacity", 0.55))
             .selectAll("text")
             .style("font-size", "0.78rem")
-            .style("fill", "#6b5e4d");
+            .style("fill", "#6B6455");
 
         // 柱
         const bars = g.selectAll(".bar")
@@ -851,7 +853,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("text-anchor", "middle")
             .style("font-size", "0.85rem")
             .style("font-weight", "600")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .text(d => d.count);
 
         // 标题
@@ -860,7 +862,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("y", 14)
             .attr("text-anchor", "middle")
             .style("font-size", "0.78rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .style("letter-spacing", "0.08em")
             .text(`共 ${data.length} 类 · ${d3.sum(data, d => d.count)} 场景`);
     }

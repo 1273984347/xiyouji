@@ -16,9 +16,9 @@
             font-display: swap;
         }
         :root {
-            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
             --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
-            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --accent-3: #C9A063; --accent-4: #6B8E5A; --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
         }
@@ -95,7 +95,7 @@
         }
         .radar-tip .tip-title, .bar-tip .tip-title, .scatter-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
         .radar-tip .tip-row, .bar-tip .tip-row, .scatter-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
-        .radar-tip .tip-meta, .bar-tip .tip-meta, .scatter-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6b5e4d; }
+        .radar-tip .tip-meta, .bar-tip .tip-meta, .scatter-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
         .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
         .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
         .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 2px; }
@@ -119,7 +119,7 @@
         .extreme-card .ex-monster { font-size: 1.4em; color: var(--accent); font-weight: 700; margin-top: 4px; }
         .extreme-card .ex-value { font-size: 0.95em; color: var(--ink); margin-top: 6px; font-weight: 600; }
         .extreme-card .ex-desc { font-size: 0.8em; color: var(--ink-soft); margin-top: 6px; }
-        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
         footer a { color: #e9b885; }
         footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
         footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
@@ -131,6 +131,8 @@
             .monster-btn { padding: 5px 9px; font-size: 0.76em; }
         }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <a href="#main-content" class="skip-link">跳到主内容</a>
@@ -367,14 +369,14 @@
     const DIMENSIONS = [
         {key: "magic",      label: "法力", color: "#c8463a"},
         {key: "strategy",   label: "智谋", color: "#3a6b8c"},
-        {key: "artifact",   label: "法宝", color: "#7a5230"},
-        {key: "background", label: "背景", color: "#5a7a3a"},
+        {key: "artifact",   label: "法宝", color: "#C9A063"},
+        {key: "background", label: "背景", color: "#6B8E5A"},
         {key: "ending",     label: "结局", color: "#b8862a"}
     ];
 
     // 15 妖怪配色（柔和循环）
     const MONSTER_COLORS = [
-        "#c8463a","#3a6b8c","#7a5230","#5a7a3a","#b8862a",
+        "#c8463a","#3a6b8c","#C9A063","#6B8E5A","#b8862a",
         "#8c2a2a","#2c5573","#6b4030","#4a6a2a","#a06d2a",
         "#d98060","#5a8caf","#9a6e4a","#7a9c5a","#c49a4a"
     ];
@@ -449,7 +451,7 @@
         // 中心点
         svg.append("circle")
             .attr("cx", cx).attr("cy", cy).attr("r", 2)
-            .attr("fill", "#7a5230");
+            .attr("fill", "#C9A063");
 
         // 15 妖怪多边形叠加
         const tip = d3.select("#radar-tip");
@@ -561,14 +563,14 @@
         // 轴
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x0))
-            .selectAll("text").style("font-size", "0.88rem").style("fill", "#2c2418").style("font-weight", "600");
+            .selectAll("text").style("font-size", "0.88rem").style("fill", "#23201A").style("font-weight", "600");
         g.append("g").call(d3.axisLeft(y).ticks(10))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
 
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 50)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("能力维度");
 
         // 柱
@@ -588,7 +590,7 @@
                     .attr("stroke", "#fff")
                     .attr("stroke-width", 1)
                     .on("mouseover", function(event) {
-                        d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 1.5);
+                        d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 1.5);
                         tip.style("opacity", 1)
                             .html(`<div class="tip-title">${d.dimension} · ${k === "max" ? "最高分" : "平均分"}</div>
                                 <div class="tip-row">数值：<strong style="color:#e9b885">${val}/10</strong></div>
@@ -631,9 +633,9 @@
 
         // 图例
         g.append("rect").attr("x", innerW - 140).attr("y", 0).attr("width", 14).attr("height", 14).attr("fill", "#c8463a");
-        g.append("text").attr("x", innerW - 120).attr("y", 11).style("font-size", "0.82rem").style("fill", "#2c2418").text("最高分");
+        g.append("text").attr("x", innerW - 120).attr("y", 11).style("font-size", "0.82rem").style("fill", "#23201A").text("最高分");
         g.append("rect").attr("x", innerW - 70).attr("y", 0).attr("width", 14).attr("height", 14).attr("fill", "#3a6b8c");
-        g.append("text").attr("x", innerW - 50).attr("y", 11).style("font-size", "0.82rem").style("fill", "#2c2418").text("平均分");
+        g.append("text").attr("x", innerW - 50).attr("y", 11).style("font-size", "0.82rem").style("fill", "#23201A").text("平均分");
     }
 
     // ============= Section 3：散点图 =============
@@ -657,20 +659,20 @@
         // 轴
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x).ticks(8).tickFormat(d => d))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
         g.append("g").call(d3.axisLeft(y).ticks(7))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
 
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 44)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("法力（1-10）");
         g.append("text")
             .attr("x", -innerH / 2).attr("y", -42)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("结局（1-10）");
 
         // 结局均值参考线
@@ -705,7 +707,7 @@
             .attr("stroke-width", 1.5)
             .style("cursor", "pointer")
             .on("mouseover", function(event, d) {
-                d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 2.5).attr("r", 9);
+                d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2.5).attr("r", 9);
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">${d.monster}</div>
                         <div class="tip-row">法力：<strong style="color:#e9b885">${d.magic}/10</strong></div>
@@ -737,7 +739,7 @@
             .attr("y", d => y(d.ending) - 12)
             .attr("text-anchor", "middle")
             .style("font-size", "0.72rem")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .style("font-weight", "600")
             .style("opacity", 0)
             .text(d => d.monster)
@@ -800,8 +802,8 @@
             rightY += rightH + nodePadding;
         });
 
-        const ORIGIN_COLORS = ["#c8463a", "#3a6b8c", "#7a5230", "#5a7a3a"];
-        const END_COLORS = ["#5a7a3a", "#8c2a2a", "#b8862a", "#3a6b8c"];
+        const ORIGIN_COLORS = ["#c8463a", "#3a6b8c", "#C9A063", "#6B8E5A"];
+        const END_COLORS = ["#6B8E5A", "#8c2a2a", "#b8862a", "#3a6b8c"];
 
         // 绘制流向带（贝塞尔）
         // 累计每节点已用高度
@@ -858,7 +860,7 @@
                 .attr("x", n.x - 8).attr("y", n.y + n.h / 2 + 16)
                 .attr("text-anchor", "end")
                 .style("font-size", "0.74rem")
-                .style("fill", "#6b5e4d")
+                .style("fill", "#6B6455")
                 .style("font-family", "JetBrains Mono, monospace")
                 .text(`(${nodeFlow[n.name]})`);
         });
@@ -882,7 +884,7 @@
                 .attr("x", n.x + n.w + 8).attr("y", n.y + n.h / 2 + 16)
                 .attr("text-anchor", "start")
                 .style("font-size", "0.74rem")
-                .style("fill", "#6b5e4d")
+                .style("fill", "#6B6455")
                 .style("font-family", "JetBrains Mono, monospace")
                 .text(`(${nodeFlow[n.name]})`);
         });
@@ -891,7 +893,7 @@
         g.append("text")
             .attr("x", 0).attr("y", -6)
             .style("font-size", "0.85rem")
-            .style("fill", "#7a5230")
+            .style("fill", "#C9A063")
             .style("font-weight", "700")
             .text("来历（左）→ 结局（右）");
     }

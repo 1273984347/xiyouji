@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -552,6 +552,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -735,8 +737,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         "层1": "#c8463a",
         "层2": "#e9b885",
         "层3": "#3a6b8c",
-        "层4": "#7a5230",
-        "层5": "#5a7a3a",
+        "层4": "#C9A063",
+        "层5": "#6B8E5A",
         "层6": "#8c6d3a",
         "层7": "#6b4a8c"
     };
@@ -752,15 +754,15 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     const COMMENTATOR_COLORS = {
         "李卓吾": "#c8463a",
         "汪象旭": "#3a6b8c",
-        "陈士斌": "#7a5230",
-        "刘一明": "#5a7a3a",
+        "陈士斌": "#C9A063",
+        "刘一明": "#6B8E5A",
         "张书绅": "#8c6d3a"
     };
     const TYPE_COLORS = {
         "叫好": "#c8463a",
-        "骂人": "#7a5230",
+        "骂人": "#C9A063",
         "点旨": "#3a6b8c",
-        "考证": "#5a7a3a",
+        "考证": "#6B8E5A",
         "训诂": "#e9b885"
     };
 
@@ -867,7 +869,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                     .attr("y", 0)
                     .attr("dy", "0.35em")
                     .style("font-size", "0.72rem")
-                    .style("fill", "#6b5e4d")
+                    .style("fill", "#6B6455")
                     .style("font-style", "italic")
                     .text(d.label);
             });
@@ -941,7 +943,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("x", lineX)
             .attr("y", -20)
             .style("font-size", "0.78rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .style("letter-spacing", "0.1em")
             .text("↑ 最早");
 
@@ -949,7 +951,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("x", lineX)
             .attr("y", innerH + 28)
             .style("font-size", "0.78rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .style("letter-spacing", "0.1em")
             .text("↓ 最晚");
 
@@ -1084,13 +1086,13 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("dy", "-0.2em")
             .style("font-size", "1.8rem")
             .style("font-weight", "600")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .text(total);
         g.append("text")
             .attr("text-anchor", "middle")
             .attr("dy", "1.6em")
             .style("font-size", "0.72rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .text("总评论数");
 
         g.selectAll("text.label")
@@ -1190,7 +1192,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("y", d => y(d.name) + y.bandwidth() / 2)
             .attr("dy", "0.35em")
             .style("font-size", "0.82rem")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .style("font-weight", "600")
             .text(d => d.commentary_count);
 
@@ -1200,7 +1202,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("y", innerH + 38)
             .attr("text-anchor", "middle")
             .style("font-size", "0.78rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .text("评论条数");
     }
 
@@ -1325,7 +1327,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("y", innerH + 38)
             .attr("text-anchor", "middle")
             .style("font-size", "0.78rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .text("评论条数（按类型堆叠）");
 
         // 图例

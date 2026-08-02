@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -821,6 +821,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -956,7 +958,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
 
             <div class="card-group">
                 <div class="group-header">
-                    <span class="gh-tag" style="background: #7a5230;">执念卡</span>
+                    <span class="gh-tag" style="background: #C9A063;">执念卡</span>
                     <span class="gh-title">OBSESSION · 心境执念</span>
                     <span class="gh-count">10 张 · Z01–Z10</span>
                 </div>
@@ -1002,8 +1004,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             <div class="combo-legend">
                 <div class="lg-item"><span class="lg-dot" style="background:#c8463a;"></span><span>因果卡 · 12 张</span></div>
                 <div class="lg-item"><span class="lg-dot" style="background:#3a6b8c;"></span><span>法器卡 · 10 张</span></div>
-                <div class="lg-item"><span class="lg-dot" style="background:#7a5230;"></span><span>执念卡 · 10 张</span></div>
-                <div class="lg-item"><span class="lg-dot" style="background:#5a7a3a;"></span><span>故事输出 · 1200 种</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:#C9A063;"></span><span>执念卡 · 10 张</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:#6B8E5A;"></span><span>故事输出 · 1200 种</span></div>
             </div>
         </section>
 
@@ -1065,7 +1067,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                     role: "道具供应商",
                     avatar: "🔮",
                     merit: 9000,
-                    color: "#7a5230",
+                    color: "#C9A063",
                     special_ability: "法宝出租 · 拥有金刚琢 / 芭蕉扇 / 紫金葫芦等 · 出租给妖王收取「道具费」",
                     winning_strategy: "通过「青牛精」展示金刚琢威力·拉抬道具估值·坐收租金",
                     weakness: "道具被悟空破解后·妖王溃败·投资血本无归"
@@ -1102,13 +1104,13 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 }
             ],
             hardship_cards: [
-                { name: "黄风怪·三昧神风", type: "自然灾害", cost: 200, rating_bonus: 600, difficulty: 3, owner: "通用", owner_color: "#6b5e4d" },
+                { name: "黄风怪·三昧神风", type: "自然灾害", cost: 200, rating_bonus: 600, difficulty: 3, owner: "通用", owner_color: "#6B6455" },
                 { name: "白骨精·三打", type: "心理战", cost: 300, rating_bonus: 900, difficulty: 4, owner: "观音", owner_color: "#3a6b8c" },
                 { name: "黄袍怪·奎木狼", type: "天庭内应", cost: 250, rating_bonus: 700, difficulty: 3, owner: "玉帝", owner_color: "#c8463a" },
                 { name: "红孩儿·三昧真火", type: "极端灾害", cost: 500, rating_bonus: 1200, difficulty: 5, owner: "观音", owner_color: "#3a6b8c" },
-                { name: "青牛精·金刚琢", type: "道具广告", cost: 350, rating_bonus: 1100, difficulty: 4, owner: "老君", owner_color: "#7a5230" },
-                { name: "六耳猕猴·真假难辨", type: "心魔副本", cost: 600, rating_bonus: 1500, difficulty: 5, owner: "通用", owner_color: "#6b5e4d" },
-                { name: "牛魔王·芭蕉洞", type: "家族内讧", cost: 400, rating_bonus: 1000, difficulty: 4, owner: "通用", owner_color: "#6b5e4d" },
+                { name: "青牛精·金刚琢", type: "道具广告", cost: 350, rating_bonus: 1100, difficulty: 4, owner: "老君", owner_color: "#C9A063" },
+                { name: "六耳猕猴·真假难辨", type: "心魔副本", cost: 600, rating_bonus: 1500, difficulty: 5, owner: "通用", owner_color: "#6B6455" },
+                { name: "牛魔王·芭蕉洞", type: "家族内讧", cost: 400, rating_bonus: 1000, difficulty: 4, owner: "通用", owner_color: "#6B6455" },
                 { name: "大鹏金翅雕·狮驼岭", type: "佛门内定", cost: 50, rating_bonus: 1800, difficulty: 5, owner: "如来", owner_color: "#c9a14a", is_rigged: true },
                 { name: "黄眉怪·小雷音寺", type: "伪佛冒充", cost: 450, rating_bonus: 1300, difficulty: 5, owner: "如来", owner_color: "#c9a14a" },
                 { name: "老鼠精·无底洞", type: "天庭旧案", cost: 200, rating_bonus: 800, difficulty: 3, owner: "玉帝", owner_color: "#c8463a" }
@@ -1121,9 +1123,9 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 { title: "五行山保险", text: "如来提前将悟空压在五行山下 500 年 · 实为「项目储备人才冷冻机制」 · 等取经项目启动再解冻启用。" }
             ],
             scoring: [
-                { name: "项目成功率", icon: "✅", desc: "取经项目最终是否抵达灵山 · 成功 +5000 功德 / 失败 -3000 功德", color: "#5a7a3a" },
+                { name: "项目成功率", icon: "✅", desc: "取经项目最终是否抵达灵山 · 成功 +5000 功德 / 失败 -3000 功德", color: "#6B8E5A" },
                 { name: "劫难收视率", icon: "📺", desc: "投放的劫难卡收视率累加 · 每张卡的 rating_bonus 计入总分", color: "#c8463a" },
-                { name: "广告位曝光", icon: "🎯", desc: "道具 / 天兵 / 法术在劫难中的品牌曝光次数 · 每次曝光 +200 功德", color: "#7a5230" },
+                { name: "广告位曝光", icon: "🎯", desc: "道具 / 天兵 / 法术在劫难中的品牌曝光次数 · 每次曝光 +200 功德", color: "#C9A063" },
                 { name: "投资回报率", icon: "💰", desc: "（收视率 - 投放成本）/ 投放成本 · 衡量资本运作效率", color: "#3a6b8c" }
             ]
         },
@@ -1172,7 +1174,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 {
                     name: "执念卡",
                     name_en: "OBSESSION",
-                    color: "#7a5230",
+                    color: "#C9A063",
                     count: 10,
                     cards: [
                         { id: "Z01", name: "傲慢", manifestation: "自视甚高 · 蔑视凡尘 · 拒绝低头" },
@@ -1193,7 +1195,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                     cards: [
                         { id: "K02", name: "误入魔窟", color: "#c8463a" },
                         { id: "F03", name: "金箍棒", color: "#3a6b8c" },
-                        { id: "Z02", name: "猜忌", color: "#7a5230" }
+                        { id: "Z02", name: "猜忌", color: "#C9A063" }
                     ],
                     category: "师徒冲突型",
                     category_color: "#3a6b8c",
@@ -1206,10 +1208,10 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                     cards: [
                         { id: "K03", name: "故人重逢", color: "#c8463a" },
                         { id: "F08", name: "紫金葫芦", color: "#3a6b8c" },
-                        { id: "Z06", name: "名相", color: "#7a5230" }
+                        { id: "Z06", name: "名相", color: "#C9A063" }
                     ],
                     category: "悟道型",
-                    category_color: "#5a7a3a",
+                    category_color: "#6B8E5A",
                     opening: "前世的旧友以陌生面孔在路口出现 · 手持紫金葫芦轻唤悟空姓名 · 悟空应声 · 几乎被吸入葫芦之中 · 葫芦中传出一个声音：「你以齐天大圣之名行走江湖 · 却忘了本名是什么？」",
                     continuation: "悟空被困葫芦三日 · 在虚空中听见自己所有名号回响 · 终于意识到「名」是束缚 · 一声大笑震碎葫芦 · 重获自由。",
                     conflict: "名相之争 · 齐天大圣 vs 孙行者 vs 斗战胜佛",
@@ -1219,7 +1221,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                     cards: [
                         { id: "K07", name: "误入轮回", color: "#c8463a" },
                         { id: "F06", name: "火眼金睛", color: "#3a6b8c" },
-                        { id: "Z01", name: "傲慢", color: "#7a5230" }
+                        { id: "Z01", name: "傲慢", color: "#C9A063" }
                     ],
                     category: "灾难型",
                     category_color: "#c8463a",
@@ -1232,10 +1234,10 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                     cards: [
                         { id: "K10", name: "天劫降临", color: "#c8463a" },
                         { id: "F04", name: "芭蕉扇", color: "#3a6b8c" },
-                        { id: "Z07", name: "长生执念", color: "#7a5230" }
+                        { id: "Z07", name: "长生执念", color: "#C9A063" }
                     ],
                     category: "诱惑型",
-                    category_color: "#7a5230",
+                    category_color: "#C9A063",
                     opening: "九霄雷劫劈下 · 罪人无处可逃 · 芭蕉扇在混乱中落地 · 一个老者拾起扇子 · 扇出阴风 · 雷劫被引向唐僧方向 · 老者大笑：「长生不老的真经就在你身上 · 给我！」",
                     continuation: "原来老者乃百年前一位高僧 · 因长生执念堕落为妖 · 三次索要真经不得 · 最后以芭蕉扇扇出万里黄沙 · 困住取经人三天三夜。",
                     conflict: "正法 vs 邪修 · 同求长生 · 路径不同 · 结局殊途",
@@ -1245,7 +1247,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                     cards: [
                         { id: "K12", name: "真假难辨", color: "#c8463a" },
                         { id: "F05", name: "金刚琢", color: "#3a6b8c" },
-                        { id: "Z09", name: "嫉妒", color: "#7a5230" }
+                        { id: "Z09", name: "嫉妒", color: "#C9A063" }
                     ],
                     category: "师徒冲突型",
                     category_color: "#3a6b8c",
@@ -1276,8 +1278,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             story_categories: [
                 { name: "灾难型", color: "#c8463a", card_ids: "K02·误入魔窟 · K04·取经人遇难 · K06·误食仙丹 · K10·天劫降临", desc: "突发的灾难事件 · 主角须在极限条件下求生与抉择" },
                 { name: "师徒冲突型", color: "#3a6b8c", card_ids: "K01·被赶出师门 · K02·误入魔窟 · K09·凡人执剑 · K12·真假难辨", desc: "取经团队内部的信任危机与理念冲突" },
-                { name: "悟道型", color: "#5a7a3a", card_ids: "K03·故人重逢 · K05·天降甘霖 · K07·误入轮回 · K08·梦中点化 · K11·魂归地府", desc: "通过奇遇与点化 · 主角领悟某种佛 / 道 / 人生真理" },
-                { name: "诱惑型", color: "#7a5230", card_ids: "K06·误食仙丹 · K09·凡人执剑 · K12·真假难辨", desc: "色 / 名 / 利 / 长生等外在诱惑的考验" }
+                { name: "悟道型", color: "#6B8E5A", card_ids: "K03·故人重逢 · K05·天降甘霖 · K07·误入轮回 · K08·梦中点化 · K11·魂归地府", desc: "通过奇遇与点化 · 主角领悟某种佛 / 道 / 人生真理" },
+                { name: "诱惑型", color: "#C9A063", card_ids: "K06·误食仙丹 · K09·凡人执剑 · K12·真假难辨", desc: "色 / 名 / 利 / 长生等外在诱惑的考验" }
             ],
             design_innovation: "故事的生产器 · 而非复述"
         },
@@ -1294,14 +1296,14 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     };
 
     // ===== 配色映射 =====
-    const PHASE_COLORS = ["#c9a14a", "#c8463a", "#7a5230"];
+    const PHASE_COLORS = ["#c9a14a", "#c8463a", "#C9A063"];
     const PLAYER_COLOR_BORDER = {
         "如来佛祖": "#c9a14a",
         "观音菩萨": "#3a6b8c",
-        "太上老君": "#7a5230",
+        "太上老君": "#C9A063",
         "玉皇大帝": "#c8463a"
     };
-    const CATEGORY_DEFAULT_COLOR = "#6b5e4d";
+    const CATEGORY_DEFAULT_COLOR = "#6B6455";
 
     // ===== 渲染：桌游介绍 =====
     function renderBoardMeta(bg) {
@@ -1638,7 +1640,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             centerG.append("circle")
                 .attr("r", centerR + 10 + i * 8)
                 .attr("fill", "none")
-                .attr("stroke", "#5a7a3a")
+                .attr("stroke", "#6B8E5A")
                 .attr("opacity", 0.15 - i * 0.04)
                 .attr("stroke-dasharray", "2,4");
         }
@@ -1646,7 +1648,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         // 中心圆
         centerG.append("circle")
             .attr("r", centerR)
-            .attr("fill", "#5a7a3a")
+            .attr("fill", "#6B8E5A")
             .attr("stroke", "#fff")
             .attr("stroke-width", 3)
             .style("filter", "drop-shadow(0 4px 12px rgba(90, 122, 58, 0.4))");

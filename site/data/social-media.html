@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -521,6 +521,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -854,22 +856,22 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     // 卡片左边框色（按角色/平台）
     const PROFILE_BORDER = {
         "唐僧": "#c8463a",
-        "猪八戒": "#2c2418",
+        "猪八戒": "#23201A",
         "孙悟空": "#e9b885",
         "沙僧": "#3a6b8c",
-        "白龙马": "#6b5e4d",
-        "观音菩萨": "#7a5230",
-        "如来佛祖": "#5a7a3a"
+        "白龙马": "#6B6455",
+        "观音菩萨": "#C9A063",
+        "如来佛祖": "#6B8E5A"
     };
     // 平台徽章背景色
     const PLATFORM_BADGE = {
         "小红书": "#c8463a",
-        "抖音": "#2c2418",
+        "抖音": "#23201A",
         "微博": "#e9b885",
         "微信公众号": "#3a6b8c",
-        "深夜小号（平台不详）": "#6b5e4d",
-        "知乎": "#7a5230",
-        "B站": "#5a7a3a"
+        "深夜小号（平台不详）": "#6B6455",
+        "知乎": "#C9A063",
+        "B站": "#6B8E5A"
     };
     // 8 个角色雷达图配色（与卡片左边框色呼应，玉帝补一个色）
     const MBTI_COLORS = {
@@ -877,14 +879,14 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         "孙悟空": "#e9b885",
         "猪八戒": "#5a4030",
         "沙僧": "#3a6b8c",
-        "白龙马": "#6b5e4d",
-        "观音菩萨": "#7a5230",
-        "如来佛祖": "#5a7a3a",
+        "白龙马": "#6B6455",
+        "观音菩萨": "#C9A063",
+        "如来佛祖": "#6B8E5A",
         "玉帝": "#d97706"
     };
     // 条形图 I 系冷色 / E 系暖色
     function fitColor(mbti) {
-        if (!mbti) return "#7a5230";
+        if (!mbti) return "#C9A063";
         return mbti.charAt(0) === "I"
             ? "#3a6b8c"  // I 系：冷蓝
             : "#c8463a"; // E 系：暖红
@@ -1031,9 +1033,9 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             // 配对色：E/I 红/蓝、S/N 棕/橙、T/F 灰/绿、J/P 深浅
             const axisColor = {
                 E: "#c8463a", I: "#3a6b8c",
-                N: "#e9b885", S: "#7a5230",
-                T: "#6b5e4d", F: "#5a7a3a",
-                J: "#2c2418", P: "#d97706"
+                N: "#e9b885", S: "#C9A063",
+                T: "#6B6455", F: "#6B8E5A",
+                J: "#23201A", P: "#d97706"
             };
             svg.append("circle")
                 .attr("cx", lx).attr("cy", ly).attr("r", 11)
@@ -1059,7 +1061,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const elParent = el.parentElement;
         mbtiList.forEach((m, idx) => {
             const values = mbtiToRadar(m.mbti);
-            const color = MBTI_COLORS[m.character] || "#7a5230";
+            const color = MBTI_COLORS[m.character] || "#C9A063";
             const pts = values.map((v, i) => {
                 const r = radius * v;
                 return [cx + r * Math.cos(angle(i)), cy + r * Math.sin(angle(i))];
@@ -1126,7 +1128,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         legend.selectAll("*").remove();
         legend.append("h4").text("角色图例 · 8 位");
         mbtiList.forEach((m, idx) => {
-            const color = MBTI_COLORS[m.character] || "#7a5230";
+            const color = MBTI_COLORS[m.character] || "#C9A063";
             const item = legend.append("div").attr("class", "legend-item")
                 .attr("tabindex", "0")
                 .on("mouseover", function() {

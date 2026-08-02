@@ -16,7 +16,7 @@
             --accent-soft: #f4d4b2;
             --accent-2: #2c3e50;
             --accent-3: #8c6e3a;
-            --accent-4: #5a7a3a;
+            --accent-4: #6B8E5A;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(44, 62, 80, 0.08), 0 4px 12px rgba(44, 62, 80, 0.06);
         }
@@ -227,6 +227,8 @@
             outline-offset: 2px;
         }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <nav class="breadcrumb">
@@ -381,7 +383,7 @@
     // 配色
     const COLOR_ACCENT = "#e67e22";
     const COLOR_ACCENT_2 = "#2c3e50";
-    const COLOR_CLUSTER = ["#e67e22", "#2c3e50", "#5a7a3a", "#8c6e3a", "#3a6b8c", "#c8463a", "#7a5230", "#8c2a2a"];
+    const COLOR_CLUSTER = ["#e67e22", "#2c3e50", "#6B8E5A", "#8c6e3a", "#3a6b8c", "#c8463a", "#C9A063", "#8c2a2a"];
 
     // 渲染 KPI 卡片
     function renderKPI(data) {
@@ -602,7 +604,7 @@
             .attr("fill", d => {
                 if (d.words === maxWords) return COLOR_ACCENT;
                 if (d.words === minWords) return COLOR_ACCENT_2;
-                return d3.interpolateRgb("#a8b8c8", "#5a7a3a")(d.words / maxWords);
+                return d3.interpolateRgb("#a8b8c8", "#6B8E5A")(d.words / maxWords);
             })
             .style("cursor", "pointer")
             .on("mouseover", function(event, d) {

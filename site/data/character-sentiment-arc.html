@@ -10,20 +10,20 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
             --wukong: #c8463a;
             --tangseng: #3a6b8c;
-            --bajie: #7a5230;
-            --shaseng: #5a7a3a;
+            --bajie: #C9A063;
+            --shaseng: #6B8E5A;
             --guanyin: #8c6a8c;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -258,6 +258,8 @@
             .section-title { font-size: 1.2rem; }
         }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -311,7 +313,7 @@
             <h2 class="section-title">壹 · 五众情感弧线总览</h2>
             <div class="section-sub">FIVE-CHARACTER SENTIMENT ARC OVERVIEW</div>
             <div class="definition">
-                <strong>定义：</strong>取经五众按 10 回分桶的 avg_sentiment 弧线，纵轴 -1 到 +1，0 为中性线。孙悟空（红 #c8463a）情感波动最大，唐僧（蓝 #3a6b8c）情感最稳定偏负，猪八戒（棕 #7a5230）持续偏负，沙僧（绿 #5a7a3a）最接近中性，观音（紫 #8c6a8c）最正向但出场稀疏。
+                <strong>定义：</strong>取经五众按 10 回分桶的 avg_sentiment 弧线，纵轴 -1 到 +1，0 为中性线。孙悟空（红 #c8463a）情感波动最大，唐僧（蓝 #3a6b8c）情感最稳定偏负，猪八戒（棕 #C9A063）持续偏负，沙僧（绿 #6B8E5A）最接近中性，观音（紫 #8c6a8c）最正向但出场稀疏。
             </div>
             <div class="chart-block">
                 <div class="chart-title">取经五众 100 回情感弧线（10 回分桶聚合）</div>
@@ -436,8 +438,8 @@
             characters: [
                 { id: 'wukong', name: '孙悟空', color: '#c8463a' },
                 { id: 'tangseng', name: '唐僧', color: '#3a6b8c' },
-                { id: 'bajie', name: '猪八戒', color: '#7a5230' },
-                { id: 'shaseng', name: '沙僧', color: '#5a7a3a' },
+                { id: 'bajie', name: '猪八戒', color: '#C9A063' },
+                { id: 'shaseng', name: '沙僧', color: '#6B8E5A' },
                 { id: 'guanyin', name: '观音', color: '#8c6a8c' }
             ],
             // 6 个关键转折点（孙悟空）
@@ -637,8 +639,8 @@
 
             const pairs = [
                 { idx: 1, name: '唐僧-孙悟空（主轴·88）', color: '#c8463a' },
-                { idx: 2, name: '孙悟空-猪八戒（讥讽·82）', color: '#7a5230' },
-                { idx: 3, name: '唐僧-沙僧（稳定·77）', color: '#5a7a3a' }
+                { idx: 2, name: '孙悟空-猪八戒（讥讽·82）', color: '#C9A063' },
+                { idx: 3, name: '唐僧-沙僧（稳定·77）', color: '#6B8E5A' }
             ];
             pairs.forEach(p => {
                 const line = d3.line().x(d => x(d[0])).y(d => y(d[p.idx])).curve(d3.curveMonotoneX);
@@ -784,8 +786,8 @@
             const radarChars = [
                 { id: 'wukong', name: '孙悟空', color: '#c8463a' },
                 { id: 'tangseng', name: '唐僧', color: '#3a6b8c' },
-                { id: 'bajie', name: '猪八戒', color: '#7a5230' },
-                { id: 'shaseng', name: '沙僧', color: '#5a7a3a' }
+                { id: 'bajie', name: '猪八戒', color: '#C9A063' },
+                { id: 'shaseng', name: '沙僧', color: '#6B8E5A' }
             ];
             radarChars.forEach(c => {
                 const values = EMBEDDED.radar.values[c.id];

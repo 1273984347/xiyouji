@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --accent-5: #7a3a8c;
             --line: #d9cdb8;
@@ -472,7 +472,7 @@
             text-align: center;
             white-space: nowrap;
         }
-        .roi-high { color: #5a7a3a; background: #f0f5e8; }
+        .roi-high { color: #6B8E5A; background: #f0f5e8; }
         .roi-mid { color: var(--accent-2); background: #e8eff5; }
         .roi-low { color: var(--accent); background: #fbeae5; }
         /* ROI 折线图 */
@@ -701,6 +701,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -943,7 +945,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                     x_range: "x: 7-10", y_range: "y: 0-6",
                     description: "草根出身 + 形而上动机·心魔型反派，全书仅 1 例。",
                     example_count: 1, typical_outcome: "被打死（心魔外化）",
-                    color: "#7a5230", visual: "bottom-right"
+                    color: "#C9A063", visual: "bottom-right"
                 }
             ],
             villain_positions: [
@@ -1091,7 +1093,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         "left_top": "#7a3a8c",      // 强背景+形而上 · 紫
         "right_top": "#3a6b8c",     // 强背景+求生 · 蓝
         "left_bottom": "#c8463a",   // 弱背景+求生 · 红
-        "right_bottom": "#7a5230"   // 弱背景+形而上 · 棕
+        "right_bottom": "#C9A063"   // 弱背景+形而上 · 棕
     };
     const QUADRANT_LABELS = {
         "left_top": "左上 · 强背景+形而上",
@@ -1102,7 +1104,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     const PHASE_COLORS = {
         "早期·本能型": "#c8463a",
         "中期·学习型": "#d97706",
-        "后期·精算师型": "#5a7a3a"
+        "后期·精算师型": "#6B8E5A"
     };
 
     // ===== 渲染：设计目的 =====

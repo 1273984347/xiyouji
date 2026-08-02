@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -25,8 +25,8 @@
             --rarity-ur: #d4af37;
             --rarity-ssr: #9b59b6;
             --rarity-sr: #3a6b8c;
-            --rarity-r: #5a7a3a;
-            --rarity-n: #6b5e4d;
+            --rarity-r: #6B8E5A;
+            --rarity-n: #6B6455;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -679,6 +679,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -1209,30 +1211,30 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     // 配色映射
     // ============================================================
     const RARITY_COLORS = {
-        UR: "#d4af37", SSR: "#9b59b6", SR: "#3a6b8c", R: "#5a7a3a", N: "#6b5e4d"
+        UR: "#d4af37", SSR: "#9b59b6", SR: "#3a6b8c", R: "#6B8E5A", N: "#6B6455"
     };
     const RARITY_ORDER = ["UR", "SSR", "SR", "R", "N"];
     const ELEMENT_COLORS = {
-        "金": "#d4af37", "木": "#5a7a3a", "水": "#3a6b8c", "火": "#c8463a",
-        "土": "#7a5230", "雷": "#9b59b6", "风": "#a8c97f", "光": "#f1c40f",
-        "暗": "#2c2418", "心": "#e91e63"
+        "金": "#d4af37", "木": "#6B8E5A", "水": "#3a6b8c", "火": "#c8463a",
+        "土": "#C9A063", "雷": "#9b59b6", "风": "#a8c97f", "光": "#f1c40f",
+        "暗": "#23201A", "心": "#e91e63"
     };
     // 网文流派配色
     const GENRE_COLORS = {
-        "赘婿流": "#7a5230", "退队流": "#c8463a", "心声流": "#e91e63",
-        "系统流": "#3a6b8c", "重生流": "#5a7a3a", "反派流": "#2c2418",
+        "赘婿流": "#C9A063", "退队流": "#c8463a", "心声流": "#e91e63",
+        "系统流": "#3a6b8c", "重生流": "#6B8E5A", "反派流": "#23201A",
         "后宫流": "#d97706", "无敌流": "#d4af37", "无限流": "#9b59b6"
     };
     // 战力条形图按稀有度配色
-    function rarityColor(r) { return RARITY_COLORS[r] || "#7a5230"; }
+    function rarityColor(r) { return RARITY_COLORS[r] || "#C9A063"; }
     // 元素色
-    function elemColor(e) { return ELEMENT_COLORS[e] || "#7a5230"; }
+    function elemColor(e) { return ELEMENT_COLORS[e] || "#C9A063"; }
     // 网文人气分颜色
     function scoreColor(s) {
         if (s >= 8.5) return "#d4af37";
         if (s >= 7.5) return "#9b59b6";
         if (s >= 6.5) return "#3a6b8c";
-        return "#6b5e4d";
+        return "#6B6455";
     }
     // 解析 popularity_estimate 字符串中的数字
     function parseScore(s) {
@@ -1297,7 +1299,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 { label: "HP", val: c.hp, color: "#c8463a" },
                 { label: "ATK", val: c.atk, color: "#d97706" },
                 { label: "DEF", val: c.def, color: "#3a6b8c" },
-                { label: "SPD", val: c.spd, color: "#5a7a3a" }
+                { label: "SPD", val: c.spd, color: "#6B8E5A" }
             ];
             const maxStat = 10000;
             statData.forEach(s => {

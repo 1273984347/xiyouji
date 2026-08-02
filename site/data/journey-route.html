@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --accent-5: #d4af37;
             --line: #d9cdb8;
@@ -180,7 +180,7 @@
         .timeline-tip {
             position: absolute;
             pointer-events: none;
-            background: #2c2418;
+            background: #23201A;
             color: #f5e9d4;
             padding: 10px 12px;
             border-radius: 6px;
@@ -357,6 +357,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -490,10 +492,10 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     <script>
     // ============== 地理类型配色 ==============
     const TYPE_COLORS = {
-        "山": "#5a7a3a",
+        "山": "#6B8E5A",
         "水": "#3a6b8c",
-        "城": "#7a5230",
-        "洞": "#2c2418",
+        "城": "#C9A063",
+        "洞": "#23201A",
         "国": "#c8463a",
         "寺": "#e9b885",
         "寺/观": "#e9b885",
@@ -845,10 +847,10 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     // ============== 类型说明 ==============
     function renderTypeExplain() {
         const explain = [
-            ["山", "#5a7a3a", "峻岭险峰，妖魔出没之所"],
+            ["山", "#6B8E5A", "峻岭险峰，妖魔出没之所"],
             ["水", "#3a6b8c", "江河湖海，多有水族为患"],
-            ["城", "#7a5230", "城郭都邑，王侯治所之地"],
-            ["洞", "#2c2418", "山洞穴窟，妖怪藏身之巢"],
+            ["城", "#C9A063", "城郭都邑，王侯治所之地"],
+            ["洞", "#23201A", "山洞穴窟，妖怪藏身之巢"],
             ["国", "#c8463a", "异邦国度，西域诸国风土"],
             ["寺/观", "#e9b885", "寺院道观，僧道栖身之所"],
             ["宫", "#d4af37", "天宫龙宫，神佛居停之处"]

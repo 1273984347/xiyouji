@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -534,6 +534,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -806,8 +808,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                     <span class="legend-item"><span class="legend-swatch" style="background:#c8463a;"></span>唐僧 INFJ</span>
                     <span class="legend-item"><span class="legend-swatch" style="background:#3a6b8c;"></span>悟空 ENTP</span>
                     <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;"></span>八戒 ESFP</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#5a7a3a;"></span>沙僧 ISFJ</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#7a5230;"></span>白龙马 ISTP</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#6B8E5A;"></span>沙僧 ISFJ</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#C9A063;"></span>白龙马 ISTP</span>
                     <span class="legend-item"><span class="legend-swatch" style="background:#a04060;"></span>观音 ENFJ</span>
                     <span class="legend-item"><span class="legend-swatch" style="background:#4a3a6b;"></span>如来 INTJ</span>
                     <span class="legend-item"><span class="legend-swatch" style="background:#8a7a3a;"></span>玉帝 ESTJ</span>
@@ -1274,7 +1276,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
             .style('font-weight', '600')
-            .style('fill', '#2c2418')
+            .style('fill', '#23201A')
             .text(d => '#' + d.rank);
     }
 
@@ -1340,7 +1342,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const colors = {
             'count': '#c8463a',
             'prob': '#3a6b8c',
-            'impact': '#5a7a3a'
+            'impact': '#6B8E5A'
         };
         const labels = {
             'count': '数量',
@@ -1391,7 +1393,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('y', d => yMaps[d.key](d.value) - 4)
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
-            .style('fill', '#2c2418')
+            .style('fill', '#23201A')
             .style('font-weight', '600')
             .text(d => d.key === 'count' ? d.value : (d.key === 'prob' ? d.value + '%' : d.value));
     }
@@ -1461,8 +1463,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const colorMap = {
             'crisis': '#c8463a',
             'team': '#3a6b8c',
-            'progress': '#5a7a3a',
-            'finish': '#7a5230'
+            'progress': '#6B8E5A',
+            'finish': '#C9A063'
         };
         const sizeMap = { 'crisis': 12, 'team': 9, 'progress': 8, 'finish': 13 };
 
@@ -1479,7 +1481,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         g.append('line')
             .attr('x1', x(1)).attr('x2', x(14))
             .attr('y1', y(5)).attr('y2', y(5))
-            .attr('stroke', '#7a5230')
+            .attr('stroke', '#C9A063')
             .attr('stroke-width', 3)
             .attr('stroke-linecap', 'round');
 
@@ -1493,7 +1495,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         g.append('text').attr('class', 'axis-label')
             .attr('x', w / 2).attr('y', h + 44)
             .attr('text-anchor', 'middle')
-            .attr('fill', '#7a5230')
+            .attr('fill', '#C9A063')
             .text('project year 项目年份（贞观 13-27 年）');
 
         // 节点：奇数索引向上·偶数向下·避免重叠
@@ -1609,7 +1611,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('text-anchor', 'middle')
             .style('font-size', '12px')
             .style('font-weight', '600')
-            .style('fill', '#2c2418')
+            .style('fill', '#23201A')
             .text(d => d.data.label + ' ' + d.data.value);
 
         // 中心文字
@@ -1625,7 +1627,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('text-anchor', 'middle')
             .attr('dy', '18')
             .style('font-size', '12px')
-            .style('fill', '#6b5e4d')
+            .style('fill', '#6B6455')
             .text('达成率 · ' + achieved + '/' + kpis.length + ' KPI');
     }
 
@@ -1684,8 +1686,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             '唐僧': '#c8463a',
             '孙悟空': '#3a6b8c',
             '猪八戒': '#e9b885',
-            '沙僧': '#5a7a3a',
-            '白龙马': '#7a5230',
+            '沙僧': '#6B8E5A',
+            '白龙马': '#C9A063',
             '观音菩萨': '#a04060',
             '如来佛祖': '#4a3a6b',
             '玉皇大帝': '#8a7a3a'
@@ -1710,7 +1712,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             gridG.append('text')
                 .attr('x', 4).attr('y', -r + 3)
                 .style('font-size', '10px')
-                .attr('fill', '#6b5e4d')
+                .attr('fill', '#6B6455')
                 .text((lv * 2).toString());
         }
 
@@ -1730,7 +1732,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 .attr('dominant-baseline', 'middle')
                 .style('font-size', '13px')
                 .style('font-weight', '600')
-                .attr('fill', '#2c2418')
+                .attr('fill', '#23201A')
                 .text(dimLabels[i]);
         });
 
@@ -1778,13 +1780,13 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('cx', 0).attr('cy', 0)
             .attr('r', avgR)
             .attr('fill', 'none')
-            .attr('stroke', '#6b5e4d')
+            .attr('stroke', '#6B6455')
             .attr('stroke-dasharray', '6,4')
             .attr('stroke-width', 1.5);
         gridG.append('text')
             .attr('x', avgR * Math.SQRT1_2 + 4)
             .attr('y', -avgR * Math.SQRT1_2 - 4)
-            .style('font-size', '10px').style('fill', '#6b5e4d')
+            .style('font-size', '10px').style('fill', '#6B6455')
             .text(`avg fit ${data.mbti_stats.avg_fit_score}`);
     }
 

@@ -8,9 +8,9 @@
     <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     <style>
         :root {
-            --bg: #faf7f2; --paper: #ffffff; --ink: #2c2418; --ink-soft: #6b5e4d;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
             --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c;
-            --accent-3: #7a5230; --accent-4: #5a7a3a; --rebel: #8c2a2a;
+            --accent-3: #C9A063; --accent-4: #6B8E5A; --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60,40,20,0.08), 0 4px 12px rgba(60,40,20,0.06);
         }
@@ -77,7 +77,7 @@
         }
         .heat-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
         .heat-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
-        .heat-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6b5e4d; }
+        .heat-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
         .legend-bar { display: flex; align-items: center; gap: 12px; margin-top: 16px; font-size: 0.82em; color: var(--ink-soft); flex-wrap: wrap; }
         .legend-block { display: flex; align-items: center; gap: 4px; }
         .legend-swatch { width: 18px; height: 14px; border-radius: 2px; display: inline-block; }
@@ -99,7 +99,7 @@
         .stat-card { border: 1px solid var(--line); border-radius: 6px; padding: 14px; background: #fffdf8; }
         .stat-card h3 { font-size: 0.98em; margin-bottom: 8px; color: var(--ink); }
         .stat-card svg { width: 100%; height: 220px; display: block; }
-        footer { background: #2c2418; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+        footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
         footer a { color: #e9b885; }
         @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
         @media (max-width: 480px) {
@@ -109,6 +109,8 @@
             .dim-btn { padding: 6px 12px; font-size: 0.82em; }
         }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <a href="#main-content" class="skip-link">跳到主内容</a>
@@ -406,7 +408,7 @@
             .call(d3.axisBottom(xScale).tickValues(xTicks).tickFormat(d => `第${d}难`))
             .selectAll("text")
             .style("font-size", "0.7rem")
-            .style("fill", "#6b5e4d");
+            .style("fill", "#6B6455");
 
         // Y 轴标签（中文）
         const yLabels = ["难度等级", "战斗时长", "求助次数", "法宝使用"];
@@ -414,21 +416,21 @@
             .call(d3.axisLeft(yScale).tickFormat((d, i) => yLabels[i]))
             .selectAll("text")
             .style("font-size", "0.82rem")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .style("font-weight", "600");
 
         // 轴标题
         g.append("text")
             .attr("x", innerW / 2).attr("y", innerH + 44)
             .attr("text-anchor", "middle")
-            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("八十一难（按章节顺序）");
 
         g.append("text")
             .attr("x", -innerH / 2).attr("y", -90)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .style("font-size", "0.85rem").style("fill", "#7a5230")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
             .text("难度维度");
 
         // 高亮当前维度的行
@@ -460,7 +462,7 @@
                     .attr("stroke-width", 0.5)
                     .style("opacity", 0)
                     .on("mouseover", function(event) {
-                        d3.select(this).attr("stroke", "#2c2418").attr("stroke-width", 1.5);
+                        d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 1.5);
                         const valLabel = DIM_CONFIG[d].valueLabels[val] || val;
                         tip.style("opacity", 1)
                             .html(`<div class="tip-title">第 ${item.n} 难 · ${item.name}</div>
@@ -535,10 +537,10 @@
 
         g.append("g").attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x))
-            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
 
         g.append("g").call(d3.axisLeft(y).ticks(4))
-            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6b5e4d");
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
 
         g.selectAll("rect.bar")
             .data(counts)

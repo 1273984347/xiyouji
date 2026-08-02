@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -196,7 +196,7 @@
         }
         .notice .cmd-block {
             display: block;
-            background: #2c2418;
+            background: #23201A;
             color: #f5e9d4;
             padding: 10px 14px;
             border-radius: 4px;
@@ -258,6 +258,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -306,7 +308,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             <div class="chart-block">
                 <svg id="chart-poems" width="1150" height="280"></svg>
                 <div class="legend">
-                    <div class="legend-item"><span class="legend-swatch" style="background:#5a7a3a"></span>诗词数量</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#6B8E5A"></span>诗词数量</div>
                 </div>
             </div>
         </section>
@@ -326,7 +328,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     const COLOR_NARRATIVE = "#3a6b8c";  // 叙述字数（深蓝）
     const COLOR_DIALOGUE  = "#e9b885";  // 对话字数（米黄）
     const COLOR_RATIO     = "#c8463a";  // 对话占比折线（红）
-    const COLOR_POEM      = "#5a7a3a";  // 诗词数（绿）
+    const COLOR_POEM      = "#6B8E5A";  // 诗词数（绿）
 
     // fallback mock 数据（10 回示例）
     const MOCK_DATA = {

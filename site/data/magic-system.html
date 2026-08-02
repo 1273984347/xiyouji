@@ -11,13 +11,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --accent-5: #8c6a3a;
             --line: #d9cdb8;
@@ -318,7 +318,7 @@
         }
         .rank-S\+ { background: #c8463a; }
         .rank-S { background: #d4a857; }
-        .rank-A\+ { background: #5a7a3a; }
+        .rank-A\+ { background: #6B8E5A; }
         .intensity-bar {
             display: inline-block;
             height: 8px;
@@ -434,6 +434,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -738,8 +740,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     };
     const TREASURE_CAT_COLORS = {
         "因果律武器": "#c8463a",
-        "元素武器": "#5a7a3a",
-        "物理武器": "#7a5230"
+        "元素武器": "#6B8E5A",
+        "物理武器": "#C9A063"
     };
     const DRIVEN_COLORS = {
         "依赖持有者法力": "#3a6b8c",
@@ -899,7 +901,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const bars = [
             {label: "年度收入", value: totalRevenue, color: "#c8463a", unit: "蟠桃单位"},
             {label: "年度支出", value: totalExpense, color: "#3a6b8c", unit: "蟠桃单位"},
-            {label: "年度盈余", value: budget.surplus, color: "#5a7a3a", unit: "蟠桃单位"}
+            {label: "年度盈余", value: budget.surplus, color: "#6B8E5A", unit: "蟠桃单位"}
         ];
 
         const g = svg.append("g")
@@ -958,7 +960,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("dy", "0.35em")
             .attr("text-anchor", "end")
             .style("font-size", "0.9rem")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .style("font-weight", "600")
             .text(d => d.label);
 
@@ -1054,7 +1056,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("dy", "0.35em")
             .attr("text-anchor", "end")
             .style("font-size", "0.82rem")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .text(d => `${d.consumer}·${d.act}`);
     }
 
@@ -1201,14 +1203,14 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr("dy", "0.35em")
             .style("font-size", "1.8rem")
             .style("font-weight", "600")
-            .style("fill", "#2c2418")
+            .style("fill", "#23201A")
             .text(total);
 
         g.append("text")
             .attr("text-anchor", "middle")
             .attr("dy", "2em")
             .style("font-size", "0.72rem")
-            .style("fill", "#6b5e4d")
+            .style("fill", "#6B6455")
             .text(unitLabel || "总计");
 
         // 切片标签

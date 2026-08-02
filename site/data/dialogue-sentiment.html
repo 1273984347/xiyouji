@@ -10,18 +10,18 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
-            --pos: #5a7a3a;
-            --neu: #6b5e4d;
+            --pos: #6B8E5A;
+            --neu: #6B6455;
             --neg: #8c2a2a;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -386,6 +386,8 @@
             outline-offset: 2px;
         }
     </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -459,7 +461,7 @@
 
             <div class="chart-block">
                 <div class="chart-title">全书引语情感分布饼图</div>
-                <div class="chart-caption">三色分布：正向 #5a7a3a / 中性 #6b5e4d / 负向 #8c2a2a · 鼠标 hover 显示数量与占比</div>
+                <div class="chart-caption">三色分布：正向 #6B8E5A / 中性 #6B6455 / 负向 #8c2a2a · 鼠标 hover 显示数量与占比</div>
                 <svg id="chart-distribution-pie" class="chart-svg" width="100%" height="360"></svg>
                 <div class="legend-row" id="distribution-legend"></div>
             </div>
@@ -470,7 +472,7 @@
             <h2 class="section-title alt-2">贰 · 人物情感分布</h2>
             <div class="section-sub">SPEAKER SENTIMENT DISTRIBUTION</div>
             <div class="definition">
-                <strong>定义：</strong>基于 Top 10 说话者的引语情感分布堆叠柱状图，横轴为人物，纵轴为引语数量，堆叠正向（绿 #5a7a3a）/ 中性（灰 #6b5e4d）/ 负向（红 #8c2a2a）三色。孙悟空以 3521 条引语居首，占比 53.6%。
+                <strong>定义：</strong>基于 Top 10 说话者的引语情感分布堆叠柱状图，横轴为人物，纵轴为引语数量，堆叠正向（绿 #6B8E5A）/ 中性（灰 #6B6455）/ 负向（红 #8c2a2a）三色。孙悟空以 3521 条引语居首，占比 53.6%。
             </div>
 
             <div class="chart-block">
@@ -486,7 +488,7 @@
             <h2 class="section-title alt-3">叁 · 主要人物情感曲线</h2>
             <div class="section-sub">SPEAKER SENTIMENT CURVE</div>
             <div class="definition">
-                <strong>定义：</strong>Top 5 说话者按回目（1-100）的 avg_sentiment 曲线，纵轴 -1 到 +1，0 为中性线。颜色：孙悟空 #c8463a / 唐僧 #3a6b8c / 猪八戒 #7a5230 / 沙僧 #5a7a3a / 观音 #8c6a8c。
+                <strong>定义：</strong>Top 5 说话者按回目（1-100）的 avg_sentiment 曲线，纵轴 -1 到 +1，0 为中性线。颜色：孙悟空 #c8463a / 唐僧 #3a6b8c / 猪八戒 #C9A063 / 沙僧 #6B8E5A / 观音 #8c6a8c。
             </div>
 
             <div class="chart-block">
@@ -518,7 +520,7 @@
             <h2 class="section-title">伍 · Top 情感词</h2>
             <div class="section-sub">TOP SENTIMENT WORDS</div>
             <div class="definition">
-                <strong>定义：</strong>全书 Top 30 正向情感词 + Top 30 负向情感词，圆点大小代表频次，颜色代表极性。正向词绿色 #5a7a3a，负向词红色 #8c2a2a。
+                <strong>定义：</strong>全书 Top 30 正向情感词 + Top 30 负向情感词，圆点大小代表频次，颜色代表极性。正向词绿色 #6B8E5A，负向词红色 #8c2a2a。
             </div>
 
             <div class="word-cloud-grid">
@@ -532,7 +534,7 @@
                 </div>
             </div>
             <div class="legend-row" style="margin-top:16px;">
-                <span class="legend-item"><span class="legend-swatch" style="background:#5a7a3a;border-radius:50%;"></span>正向情感词（圆点大小 = 频次）</span>
+                <span class="legend-item"><span class="legend-swatch" style="background:#6B8E5A;border-radius:50%;"></span>正向情感词（圆点大小 = 频次）</span>
                 <span class="legend-item"><span class="legend-swatch" style="background:#8c2a2a;border-radius:50%;"></span>负向情感词（圆点大小 = 频次）</span>
             </div>
         </section>
@@ -5423,14 +5425,14 @@
     const tooltip = makeTooltip();
 
     // ===== Color constants =====
-    const COLOR_POS = '#5a7a3a';
-    const COLOR_NEU = '#6b5e4d';
+    const COLOR_POS = '#6B8E5A';
+    const COLOR_NEU = '#6B6455';
     const COLOR_NEG = '#8c2a2a';
     const SPEAKER_COLORS = {
         '孙悟空': '#c8463a',
         '唐僧': '#3a6b8c',
-        '猪八戒': '#7a5230',
-        '沙僧': '#5a7a3a',
+        '猪八戒': '#C9A063',
+        '沙僧': '#6B8E5A',
         '观音': '#8c6a8c'
     };
     const TOP5_SPEAKERS = ['孙悟空', '唐僧', '猪八戒', '沙僧', '观音'];
@@ -5523,7 +5525,7 @@
             .attr('dy', '-0.3em')
             .attr('font-size', '14px')
             .attr('fill', 'var(--ink-soft)')
-            .attr('fill', '#6b5e4d')
+            .attr('fill', '#6B6455')
             .text('总引语');
 
         g.append('text')
@@ -5531,7 +5533,7 @@
             .attr('dy', '1em')
             .attr('font-size', '20px')
             .attr('font-weight', '600')
-            .attr('fill', '#2c2418')
+            .attr('fill', '#23201A')
             .text(total);
 
         // Legend
@@ -5687,7 +5689,7 @@
         g.append('line')
             .attr('x1', 0).attr('x2', w)
             .attr('y1', y(0)).attr('y2', y(0))
-            .attr('stroke', '#6b5e4d')
+            .attr('stroke', '#6B6455')
             .attr('stroke-width', 1.5)
             .attr('stroke-dasharray', '6,4');
 
@@ -5696,7 +5698,7 @@
             .attr('y', y(0))
             .attr('dy', '0.3em')
             .attr('font-size', '10px')
-            .attr('fill', '#6b5e4d')
+            .attr('fill', '#6B6455')
             .text('y=0');
 
         // Axes
@@ -5730,7 +5732,7 @@
             .curve(d3.curveMonotoneX);
 
         curves.forEach(sp => {
-            const color = SPEAKER_COLORS[sp.speaker] || '#6b5e4d';
+            const color = SPEAKER_COLORS[sp.speaker] || '#6B6455';
 
             // Invisible wider path for hover detection
             g.append('path')
@@ -5816,7 +5818,7 @@
                     .attr('fill', cellColor)
                     .style('cursor', 'pointer')
                     .on('mouseover', function(event) {
-                        d3.select(this).attr('stroke', '#2c2418').attr('stroke-width', 1.5);
+                        d3.select(this).attr('stroke', '#23201A').attr('stroke-width', 1.5);
                         if (ch.count > 0) {
                             tooltip.show(
                                 `<strong>${sp.speaker}</strong> · 第 ${ch.chapter} 回<br/>avg_sentiment = ${ch.avg_sentiment.toFixed(4)}<br/>引语数：${ch.count}`,
@@ -5891,7 +5893,7 @@
             .attr('y', legendH + 12)
             .attr('text-anchor', 'middle')
             .attr('font-size', '10px')
-            .attr('fill', '#6b5e4d')
+            .attr('fill', '#6B6455')
             .text(d => d);
 
         legendG.append('text')
@@ -5899,7 +5901,7 @@
             .attr('y', -4)
             .attr('text-anchor', 'middle')
             .attr('font-size', '10px')
-            .attr('fill', '#6b5e4d')
+            .attr('fill', '#6B6455')
             .text('avg_sentiment');
     }
 

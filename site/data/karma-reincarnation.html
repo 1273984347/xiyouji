@@ -10,13 +10,13 @@
         :root {
             --bg: #faf7f2;
             --paper: #ffffff;
-            --ink: #2c2418;
-            --ink-soft: #6b5e4d;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
             --accent: #c8463a;
             --accent-soft: #e9b885;
             --accent-2: #3a6b8c;
-            --accent-3: #7a5230;
-            --accent-4: #5a7a3a;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
             --rebel: #8c2a2a;
             --line: #d9cdb8;
             --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
@@ -497,6 +497,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     outline-offset: 2px;
 }
 </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
 </head>
 <body>
     <header class="hero">
@@ -1163,7 +1165,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('y', d => y(d.impact_severity) - 16)
             .attr('text-anchor', 'middle')
             .style('font-size', '9.5px')
-            .style('fill', '#7a5230')
+            .style('fill', '#C9A063')
             .style('font-weight', '600')
             .text(d => d.modifier.split('（')[0]);
 
@@ -1187,7 +1189,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('y', h + 28)
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
-            .style('fill', '#6b5e4d')
+            .style('fill', '#6B6455')
             .text(d => d.chapter);
 
         // 角色名标签
@@ -1199,7 +1201,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('text-anchor', 'middle')
             .style('font-size', '10.5px')
             .style('font-weight', '600')
-            .style('fill', '#2c2418')
+            .style('fill', '#23201A')
             .text(d => d.character);
     }
 
@@ -1221,7 +1223,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     function renderTamperTypes(data) {
         const grid = d3.select('#tamper-types-grid');
         const types = Object.entries(data.registry_stats.tampering_types);
-        const colorMap = ['#c8463a', '#3a6b8c', '#5a7a3a', '#7a5230', '#e9b885', '#a85a3a'];
+        const colorMap = ['#c8463a', '#3a6b8c', '#6B8E5A', '#C9A063', '#e9b885', '#a85a3a'];
         const cards = grid.selectAll('.map-card').data(types).enter()
             .append('div')
             .attr('class', 'map-card')
@@ -1252,7 +1254,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const types = Array.from(new Set(cases.map(d => d.karma_type)));
         const colorScale = d3.scaleOrdinal()
             .domain(types)
-            .range(['#c8463a', '#3a6b8c', '#5a7a3a', '#7a5230', '#e9b885',
+            .range(['#c8463a', '#3a6b8c', '#6B8E5A', '#C9A063', '#e9b885',
                     '#a85a3a', '#6b8e9c', '#8b6b3a', '#4a7a5c', '#9c5a4a']);
 
         const pie = d3.pie().value(d => 1).sort(null);
@@ -1294,7 +1296,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('text-anchor', 'middle')
             .style('font-size', '10px')
             .style('font-weight', '600')
-            .style('fill', '#2c2418')
+            .style('fill', '#23201A')
             .text(d => d.data.karma_type)
             .style('pointer-events', 'none');
 
@@ -1310,7 +1312,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('text-anchor', 'middle')
             .attr('y', 14)
             .style('font-size', '11px')
-            .style('fill', '#6b5e4d')
+            .style('fill', '#6B6455')
             .text('每类 1 例 · 占比 10%');
 
         // legend
@@ -1346,11 +1348,11 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
 
         const leftColor = d3.scaleOrdinal()
             .domain(leftNodes)
-            .range(['#c8463a', '#3a6b8c', '#5a7a3a', '#7a5230', '#e9b885',
+            .range(['#c8463a', '#3a6b8c', '#6B8E5A', '#C9A063', '#e9b885',
                     '#a85a3a', '#6b8e9c', '#8b6b3a', '#4a7a5c', '#9c5a4a']);
         const rightColor = d3.scaleOrdinal()
             .domain(rightNodes)
-            .range(['#c8463a', '#3a6b8c', '#5a7a3a', '#7a5230', '#e9b885', '#a85a3a']);
+            .range(['#c8463a', '#3a6b8c', '#6B8E5A', '#C9A063', '#e9b885', '#a85a3a']);
 
         // 左侧节点位置
         const leftPos = {};
@@ -1474,7 +1476,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('x', w / 2).attr('y', h + 22)
             .attr('text-anchor', 'middle')
             .style('font-size', '11px')
-            .style('fill', '#6b5e4d')
+            .style('fill', '#6B6455')
             .style('font-style', 'italic')
             .text('每条链接 = 1 个因果案例 · 业力如何从因（karma_type）流向果（rebirth_destination）');
     }
@@ -1495,7 +1497,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
     function renderRebirthGrid(data) {
         const grid = d3.select('#rebirth-grid');
         const dests = Object.entries(data.karma_stats.rebirth_destinations);
-        const colorMap = ['#c8463a', '#3a6b8c', '#5a7a3a', '#7a5230', '#e9b885', '#a85a3a'];
+        const colorMap = ['#c8463a', '#3a6b8c', '#6B8E5A', '#C9A063', '#e9b885', '#a85a3a'];
         const cards = grid.selectAll('.map-card').data(dests).enter()
             .append('div')
             .attr('class', 'map-card alt')
@@ -1535,7 +1537,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
         const colorMap = {
             '天道': '#3a6b8c',
             '人道': '#5a8aac',
-            '阿修罗道': '#5a7a3a',
+            '阿修罗道': '#6B8E5A',
             '畜生道': '#c8463a',
             '饿鬼道': '#a85a3a',
             '地狱道': '#7a2818'
@@ -1547,7 +1549,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('text-anchor', 'middle')
             .style('font-size', '13px')
             .style('font-weight', '700')
-            .style('fill', '#2c2418')
+            .style('fill', '#23201A')
             .text('六道层级（顶层最善 · 底层最恶）');
 
         orderedRealms.forEach((r, i) => {
@@ -1605,7 +1607,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 .attr('text-anchor', 'start')
                 .style('font-size', '11px')
                 .style('font-weight', '600')
-                .style('fill', r.in_pilgrim_team > 0 ? '#7a5230' : '#9c9080')
+                .style('fill', r.in_pilgrim_team > 0 ? '#C9A063' : '#9c9080')
                 .text('● ' + teamBadge);
 
             // 序号标注（左侧）
@@ -1614,7 +1616,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
                 .attr('text-anchor', 'end')
                 .style('font-size', '11px')
                 .style('font-weight', '600')
-                .style('fill', '#7a5230')
+                .style('fill', '#C9A063')
                 .text('Lv ' + r.n);
 
             layerG.on('mouseover', (e) => {
@@ -1657,7 +1659,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible, [tabindex]
             .attr('x', cx).attr('y', 14)
             .attr('text-anchor', 'middle')
             .style('font-size', '10.5px')
-            .style('fill', '#7a5230')
+            .style('fill', '#C9A063')
             .style('font-style', 'italic')
             .text('↑ 修行圆满可超脱轮回');
 
