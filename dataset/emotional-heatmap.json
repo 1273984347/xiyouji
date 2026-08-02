@@ -1,0 +1,1478 @@
+{
+  "meta": {
+    "title": "情感热力图",
+    "scholar_count": 8,
+    "hardship_count": 20,
+    "reaction_count": 160
+  },
+  "scholars": [
+    {
+      "key": "lizhuowu",
+      "name": "李卓吾",
+      "era": "1527-1602",
+      "school": "童心说",
+      "color": "#C9A063",
+      "motto": "天下之至文，未有不出于童心焉者也。"
+    },
+    {
+      "key": "jinshengtan",
+      "name": "金圣叹",
+      "era": "1608-1661",
+      "school": "才子书",
+      "color": "#3a6b8c",
+      "motto": "文章之妙，全在无定法。"
+    },
+    {
+      "key": "luxun",
+      "name": "鲁迅",
+      "era": "1881-1936",
+      "school": "神魔小说",
+      "color": "#c8463a",
+      "motto": "神魔皆有人情，精魅亦通世故。"
+    },
+    {
+      "key": "hushi",
+      "name": "胡适",
+      "era": "1891-1962",
+      "school": "考证本位",
+      "color": "#6B8E5A",
+      "motto": "《西游记》乃一部游戏之作。"
+    },
+    {
+      "key": "maozedong",
+      "name": "毛泽东",
+      "era": "1893-1976",
+      "school": "革命寓言",
+      "color": "#8c2a2a",
+      "motto": "今日欢呼孙大圣，只缘妖雾又重来。"
+    },
+    {
+      "key": "linyutang",
+      "name": "林语堂",
+      "era": "1895-1976",
+      "school": "闲适幽默",
+      "color": "#b88a3a",
+      "motto": "悟空是中国式自由的化身。"
+    },
+    {
+      "key": "qianzhongshu",
+      "name": "钱钟书",
+      "era": "1910-1998",
+      "school": "博学旁通",
+      "color": "#6B6455",
+      "motto": "西游一书，子不语之渊府也。"
+    },
+    {
+      "key": "guomoruo",
+      "name": "郭沫若",
+      "era": "1892-1978",
+      "school": "浪漫革命",
+      "color": "#b85a3a",
+      "motto": "人妖颠倒是非淆，对敌慈悲对友刁。"
+    }
+  ],
+  "hardships": [
+    {
+      "idx": 1,
+      "chapter": 1,
+      "title": "石猴出世",
+      "subtitle": "灵根育孕源流出"
+    },
+    {
+      "idx": 2,
+      "chapter": 2,
+      "title": "悟空学艺",
+      "subtitle": "悟彻菩提真妙理"
+    },
+    {
+      "idx": 3,
+      "chapter": 5,
+      "title": "大圣偷丹",
+      "subtitle": "乱蟠桃大圣偷丹"
+    },
+    {
+      "idx": 4,
+      "chapter": 7,
+      "title": "八卦炉中逃大圣",
+      "subtitle": "八卦炉中逃大圣"
+    },
+    {
+      "idx": 5,
+      "chapter": 8,
+      "title": "佛祖定计",
+      "subtitle": "我佛造经传极乐"
+    },
+    {
+      "idx": 6,
+      "chapter": 12,
+      "title": "玄奘现身",
+      "subtitle": "唐王秉诚修大会"
+    },
+    {
+      "idx": 7,
+      "chapter": 14,
+      "title": "收悟空",
+      "subtitle": "心猿归正六贼无踪"
+    },
+    {
+      "idx": 8,
+      "chapter": 17,
+      "title": "黑熊精",
+      "subtitle": "孙行者大闹黑风山"
+    },
+    {
+      "idx": 9,
+      "chapter": 22,
+      "title": "收沙僧",
+      "subtitle": "八戒大战流沙河"
+    },
+    {
+      "idx": 10,
+      "chapter": 24,
+      "title": "五庄观人参果",
+      "subtitle": "万寿山大仙留故友"
+    },
+    {
+      "idx": 11,
+      "chapter": 27,
+      "title": "三打白骨精",
+      "subtitle": "尸魔三戏唐三藏"
+    },
+    {
+      "idx": 12,
+      "chapter": 32,
+      "title": "莲花洞金角银角",
+      "subtitle": "平顶山功曹传信"
+    },
+    {
+      "idx": 13,
+      "chapter": 45,
+      "title": "车迟国斗法",
+      "subtitle": "三清观大圣留名"
+    },
+    {
+      "idx": 14,
+      "chapter": 53,
+      "title": "女儿国",
+      "subtitle": "禅主吞餐怀鬼孕"
+    },
+    {
+      "idx": 15,
+      "chapter": 59,
+      "title": "火焰山",
+      "subtitle": "唐三藏路阻火焰山"
+    },
+    {
+      "idx": 16,
+      "chapter": 65,
+      "title": "黄眉怪",
+      "subtitle": "妖邪假设小雷音"
+    },
+    {
+      "idx": 17,
+      "chapter": 74,
+      "title": "狮驼岭",
+      "subtitle": "长庚传报魔头狠"
+    },
+    {
+      "idx": 18,
+      "chapter": 78,
+      "title": "比丘国",
+      "subtitle": "比丘怜子遣阴神"
+    },
+    {
+      "idx": 19,
+      "chapter": 88,
+      "title": "玉华州收徒",
+      "subtitle": "禅到玉华施法会"
+    },
+    {
+      "idx": 20,
+      "chapter": 100,
+      "title": "取经圆满",
+      "subtitle": "径回东土五圣成真"
+    }
+  ],
+  "reactions": [
+    {
+      "scholar": "李卓吾",
+      "chapter": 1,
+      "hardship": "石猴出世",
+      "sentiment": "positive",
+      "intensity": 9,
+      "quote": "天生石猴，纯然童心也。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 2,
+      "hardship": "悟空学艺",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "求道之心，童心之真。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 5,
+      "hardship": "大圣偷丹",
+      "sentiment": "positive",
+      "intensity": 9,
+      "quote": "偷丹偷桃，游戏之至，童心之至。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 7,
+      "hardship": "八卦炉中逃大圣",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "炉中炼出火眼金睛，童心不被焚毁。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 8,
+      "hardship": "佛祖定计",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "如来一掌定心猿，乃作者游戏之笔。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 12,
+      "hardship": "玄奘现身",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "取经缘起，过场文字。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 14,
+      "hardship": "收悟空",
+      "sentiment": "negative",
+      "intensity": 7,
+      "quote": "心猿归正，童心动辄受制，可叹。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 17,
+      "hardship": "黑熊精",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "黑熊窃袈裟，俗情耳。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 22,
+      "hardship": "收沙僧",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "三徒俱备，程式之笔。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 24,
+      "hardship": "五庄观人参果",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "推倒人参果，童心敢为。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 27,
+      "hardship": "三打白骨精",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "识破妖魔，童心不被惑。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 32,
+      "hardship": "莲花洞金角银角",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "智取宝物，游戏笔墨。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 45,
+      "hardship": "车迟国斗法",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "斗法胜妖道，童心无畏。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 53,
+      "hardship": "女儿国",
+      "sentiment": "positive",
+      "intensity": 9,
+      "quote": "情关难破，童心见真情。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 59,
+      "hardship": "火焰山",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "借扇调风，游戏之妙。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 65,
+      "hardship": "黄眉怪",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "小雷音之难，佛亦作魔。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 74,
+      "hardship": "狮驼岭",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "三魔连势，世俗之喻。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 78,
+      "hardship": "比丘国",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "救一千一百一十一个小儿，童心大悲。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 88,
+      "hardship": "玉华州收徒",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "收徒传法，平淡之笔。（拟作）"
+    },
+    {
+      "scholar": "李卓吾",
+      "chapter": 100,
+      "hardship": "取经圆满",
+      "sentiment": "negative",
+      "intensity": 6,
+      "quote": "心猿归伏成佛，童心之悲。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 1,
+      "hardship": "石猴出世",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "开篇奇笔，文章之妙全在无定。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 2,
+      "hardship": "悟空学艺",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "学艺一段，文法森严。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 5,
+      "hardship": "大圣偷丹",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "笔墨恣肆，才子书之笔。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 7,
+      "hardship": "八卦炉中逃大圣",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "八卦炉一段，火候恰到好处。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 8,
+      "hardship": "佛祖定计",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "如来定计，文章转折。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 12,
+      "hardship": "玄奘现身",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "水陆大会一段，未见奇处。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 14,
+      "hardship": "收悟空",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "心猿归正，文势一收。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 17,
+      "hardship": "黑熊精",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "黑风山一段，笔墨平实。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 22,
+      "hardship": "收沙僧",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "流沙河收徒，程式化。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 24,
+      "hardship": "五庄观人参果",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "五庄观人参果，奇想妙构。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 27,
+      "hardship": "三打白骨精",
+      "sentiment": "positive",
+      "intensity": 9,
+      "quote": "三打白骨精，文章之妙极矣。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 32,
+      "hardship": "莲花洞金角银角",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "金角银角，文字波折。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 45,
+      "hardship": "车迟国斗法",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "斗法一段，文心独运。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 53,
+      "hardship": "女儿国",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "女儿国一段，情致婉转。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 59,
+      "hardship": "火焰山",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "三借芭蕉扇，文势如潮。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 65,
+      "hardship": "黄眉怪",
+      "sentiment": "neutral",
+      "intensity": 6,
+      "quote": "小雷音，文意略复。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 74,
+      "hardship": "狮驼岭",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "狮驼三魔，文章大观。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 78,
+      "hardship": "比丘国",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "比丘救儿，文心悲悯。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 88,
+      "hardship": "玉华州收徒",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "玉华州收徒，文势渐缓。（拟作）"
+    },
+    {
+      "scholar": "金圣叹",
+      "chapter": 100,
+      "hardship": "取经圆满",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "成佛作祖，结局圆满但少奇。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 1,
+      "hardship": "石猴出世",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "石猴化生，神魔皆有人情。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 2,
+      "hardship": "悟空学艺",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "学艺一段，犹见他山之石。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 5,
+      "hardship": "大圣偷丹",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "作者禀性，复善谐剧，故虽变幻恍忽之事……（史料）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 7,
+      "hardship": "八卦炉中逃大圣",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "神魔皆有人情，精魅亦通世故。（史料）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 8,
+      "hardship": "佛祖定计",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "如来定心猿，乃作者结构之需。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 12,
+      "hardship": "玄奘现身",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "取经缘起，史实与小说杂糅。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 14,
+      "hardship": "收悟空",
+      "sentiment": "negative",
+      "intensity": 6,
+      "quote": "心猿归正，自此失却野性。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 17,
+      "hardship": "黑熊精",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "黑熊精一段，亦通世故。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 22,
+      "hardship": "收沙僧",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "三徒收齐，结构之必然。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 24,
+      "hardship": "五庄观人参果",
+      "sentiment": "positive",
+      "intensity": 6,
+      "quote": "五庄观一段，每杂解颐之言。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 27,
+      "hardship": "三打白骨精",
+      "sentiment": "negative",
+      "intensity": 7,
+      "quote": "唐僧糊涂，神魔亦通世故之反例。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 32,
+      "hardship": "莲花洞金角银角",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "莲花洞一段，亦游戏之作。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 45,
+      "hardship": "车迟国斗法",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "车迟国斗法，讽刺释道之争。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 53,
+      "hardship": "女儿国",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "女儿国一段，世故人情之至。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 59,
+      "hardship": "火焰山",
+      "sentiment": "neutral",
+      "intensity": 6,
+      "quote": "火焰山一段，亦游戏笔墨。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 65,
+      "hardship": "黄眉怪",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "小雷音，神魔小说之常套。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 74,
+      "hardship": "狮驼岭",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "狮驼岭，亦神魔亦世故。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 78,
+      "hardship": "比丘国",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "比丘国救儿，世故人情。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 88,
+      "hardship": "玉华州收徒",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "玉华州，文笔渐疲。（拟作）"
+    },
+    {
+      "scholar": "鲁迅",
+      "chapter": 100,
+      "hardship": "取经圆满",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "成佛作祖，游戏收场。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 1,
+      "hardship": "石猴出世",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "石猴出世，神话色彩浓。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 2,
+      "hardship": "悟空学艺",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "学艺一段，平平。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 5,
+      "hardship": "大圣偷丹",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "偷丹一段，游戏之作。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 7,
+      "hardship": "八卦炉中逃大圣",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "八卦炉，亦游戏笔墨。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 8,
+      "hardship": "佛祖定计",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "佛祖定计，结构之需。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 12,
+      "hardship": "玄奘现身",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "玄奘现身，史实与小说杂糅。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 14,
+      "hardship": "收悟空",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "收悟空一段，乃作者结构之需。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 17,
+      "hardship": "黑熊精",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "黑熊精一段，平实。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 22,
+      "hardship": "收沙僧",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "流沙河收徒，程式化。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 24,
+      "hardship": "五庄观人参果",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "五庄观，亦游戏之作。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 27,
+      "hardship": "三打白骨精",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "三打白骨精，乃游戏之作。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 32,
+      "hardship": "莲花洞金角银角",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "莲花洞，亦游戏。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 45,
+      "hardship": "车迟国斗法",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "车迟国，讽刺之笔。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 53,
+      "hardship": "女儿国",
+      "sentiment": "positive",
+      "intensity": 6,
+      "quote": "女儿国，游戏之中见情。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 59,
+      "hardship": "火焰山",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "火焰山，游戏笔墨。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 65,
+      "hardship": "黄眉怪",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "黄眉怪，亦套数。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 74,
+      "hardship": "狮驼岭",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "狮驼岭，篇幅冗长。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 78,
+      "hardship": "比丘国",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "比丘国，亦游戏。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 88,
+      "hardship": "玉华州收徒",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "玉华州，平实。（拟作）"
+    },
+    {
+      "scholar": "胡适",
+      "chapter": 100,
+      "hardship": "取经圆满",
+      "sentiment": "positive",
+      "intensity": 6,
+      "quote": "《西游记》乃一部游戏之作。（史料）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 1,
+      "hardship": "石猴出世",
+      "sentiment": "positive",
+      "intensity": 9,
+      "quote": "石猴造反，造反有理。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 2,
+      "hardship": "悟空学艺",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "悟空学艺，武装头脑。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 5,
+      "hardship": "大圣偷丹",
+      "sentiment": "positive",
+      "intensity": 9,
+      "quote": "大闹天宫，造反有理。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 7,
+      "hardship": "八卦炉中逃大圣",
+      "sentiment": "positive",
+      "intensity": 10,
+      "quote": "金猴奋起千钧棒，玉宇澄清万里埃。（史料）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 8,
+      "hardship": "佛祖定计",
+      "sentiment": "negative",
+      "intensity": 6,
+      "quote": "佛祖镇压，反动派之喻。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 12,
+      "hardship": "玄奘现身",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "玄奘现身，过场。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 14,
+      "hardship": "收悟空",
+      "sentiment": "negative",
+      "intensity": 7,
+      "quote": "心猿被驯，可惜。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 17,
+      "hardship": "黑熊精",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "黑熊一段，斗争之喻。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 22,
+      "hardship": "收沙僧",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "三徒聚义。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 24,
+      "hardship": "五庄观人参果",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "五庄观，过场。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 27,
+      "hardship": "三打白骨精",
+      "sentiment": "positive",
+      "intensity": 10,
+      "quote": "今日欢呼孙大圣，只缘妖雾又重来。（史料）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 32,
+      "hardship": "莲花洞金角银角",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "莲花洞智斗，可借鉴。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 45,
+      "hardship": "车迟国斗法",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "破除迷信，斗争到底。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 53,
+      "hardship": "女儿国",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "美人关，警惕糖衣炮弹。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 59,
+      "hardship": "火焰山",
+      "sentiment": "positive",
+      "intensity": 9,
+      "quote": "火焰山，人民斗争之喻。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 65,
+      "hardship": "黄眉怪",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "黄眉怪，警惕假革命。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 74,
+      "hardship": "狮驼岭",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "狮驼岭，三座大山之喻。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 78,
+      "hardship": "比丘国",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "救小儿，救救孩子。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 88,
+      "hardship": "玉华州收徒",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "玉华州，过场。（拟作）"
+    },
+    {
+      "scholar": "毛泽东",
+      "chapter": 100,
+      "hardship": "取经圆满",
+      "sentiment": "neutral",
+      "intensity": 6,
+      "quote": "成佛作祖，革命成功但妥协。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 1,
+      "hardship": "石猴出世",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "石猴出世，自由之化身。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 2,
+      "hardship": "悟空学艺",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "学艺一段，求自由之始。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 5,
+      "hardship": "大圣偷丹",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "偷丹，幽默之至。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 7,
+      "hardship": "八卦炉中逃大圣",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "八卦炉，自由不被焚。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 8,
+      "hardship": "佛祖定计",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "佛祖定计，作者结构。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 12,
+      "hardship": "玄奘现身",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "玄奘过场。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 14,
+      "hardship": "收悟空",
+      "sentiment": "negative",
+      "intensity": 5,
+      "quote": "心猿被驯，自由受制。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 17,
+      "hardship": "黑熊精",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "黑熊精，世俗之喻。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 22,
+      "hardship": "收沙僧",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "三徒齐聚。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 24,
+      "hardship": "五庄观人参果",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "五庄观，幽默妙构。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 27,
+      "hardship": "三打白骨精",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "三打白骨精，识人之明。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 32,
+      "hardship": "莲花洞金角银角",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "莲花洞，游戏笔墨。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 45,
+      "hardship": "车迟国斗法",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "车迟国，幽默讽刺。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 53,
+      "hardship": "女儿国",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "女儿国，人情之至。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 59,
+      "hardship": "火焰山",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "火焰山，机智之妙。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 65,
+      "hardship": "黄眉怪",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "黄眉怪，过场。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 74,
+      "hardship": "狮驼岭",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "狮驼岭，篇幅冗。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 78,
+      "hardship": "比丘国",
+      "sentiment": "positive",
+      "intensity": 6,
+      "quote": "救儿，悲悯之笔。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 88,
+      "hardship": "玉华州收徒",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "玉华州，平。（拟作）"
+    },
+    {
+      "scholar": "林语堂",
+      "chapter": 100,
+      "hardship": "取经圆满",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "成佛，闲适收场。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 1,
+      "hardship": "石猴出世",
+      "sentiment": "neutral",
+      "intensity": 6,
+      "quote": "石猴化生，子不语之列。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 2,
+      "hardship": "悟空学艺",
+      "sentiment": "positive",
+      "intensity": 6,
+      "quote": "学艺，亦见他山之石。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 5,
+      "hardship": "大圣偷丹",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "偷丹，亦游戏。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 7,
+      "hardship": "八卦炉中逃大圣",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "八卦炉，子不语之渊府。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 8,
+      "hardship": "佛祖定计",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "佛祖定计，结构。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 12,
+      "hardship": "玄奘现身",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "玄奘现身，史实糅合。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 14,
+      "hardship": "收悟空",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "收悟空，结构之需。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 17,
+      "hardship": "黑熊精",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "黑熊，笔墨平。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 22,
+      "hardship": "收沙僧",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "收沙僧，程式。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 24,
+      "hardship": "五庄观人参果",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "五庄观，用典之妙。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 27,
+      "hardship": "三打白骨精",
+      "sentiment": "neutral",
+      "intensity": 6,
+      "quote": "三打，世故之喻。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 32,
+      "hardship": "莲花洞金角银角",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "莲花洞，亦用典。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 45,
+      "hardship": "车迟国斗法",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "车迟国，讽刺之笔。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 53,
+      "hardship": "女儿国",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "女儿国，博学之喻。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 59,
+      "hardship": "火焰山",
+      "sentiment": "neutral",
+      "intensity": 6,
+      "quote": "火焰山，亦用典。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 65,
+      "hardship": "黄眉怪",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "黄眉怪，亦套数。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 74,
+      "hardship": "狮驼岭",
+      "sentiment": "positive",
+      "intensity": 6,
+      "quote": "狮驼岭，喻世。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 78,
+      "hardship": "比丘国",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "比丘国，讽刺之至。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 88,
+      "hardship": "玉华州收徒",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "玉华州，平。（拟作）"
+    },
+    {
+      "scholar": "钱钟书",
+      "chapter": 100,
+      "hardship": "取经圆满",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "成佛，闲笔收场。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 1,
+      "hardship": "石猴出世",
+      "sentiment": "positive",
+      "intensity": 9,
+      "quote": "石猴出世，浪漫之始。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 2,
+      "hardship": "悟空学艺",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "学艺，浪漫主义之笔。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 5,
+      "hardship": "大圣偷丹",
+      "sentiment": "positive",
+      "intensity": 9,
+      "quote": "偷丹，浪漫反抗。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 7,
+      "hardship": "八卦炉中逃大圣",
+      "sentiment": "positive",
+      "intensity": 10,
+      "quote": "八卦炉，浪漫主义至极。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 8,
+      "hardship": "佛祖定计",
+      "sentiment": "negative",
+      "intensity": 6,
+      "quote": "佛祖镇压，反动之喻。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 12,
+      "hardship": "玄奘现身",
+      "sentiment": "neutral",
+      "intensity": 4,
+      "quote": "玄奘过场。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 14,
+      "hardship": "收悟空",
+      "sentiment": "negative",
+      "intensity": 7,
+      "quote": "心猿被驯，浪漫之悲。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 17,
+      "hardship": "黑熊精",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "黑熊，过场。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 22,
+      "hardship": "收沙僧",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "三徒聚。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 24,
+      "hardship": "五庄观人参果",
+      "sentiment": "neutral",
+      "intensity": 6,
+      "quote": "五庄观，浪漫稍减。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 27,
+      "hardship": "三打白骨精",
+      "sentiment": "negative",
+      "intensity": 9,
+      "quote": "人妖颠倒是非淆，对敌慈悲对友刁。（史料）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 32,
+      "hardship": "莲花洞金角银角",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "莲花洞，平。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 45,
+      "hardship": "车迟国斗法",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "车迟国，浪漫斗争。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 53,
+      "hardship": "女儿国",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "女儿国，浪漫之笔。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 59,
+      "hardship": "火焰山",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "火焰山，浪漫之至。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 65,
+      "hardship": "黄眉怪",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "黄眉，过场。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 74,
+      "hardship": "狮驼岭",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "狮驼岭，斗争之喻。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 78,
+      "hardship": "比丘国",
+      "sentiment": "positive",
+      "intensity": 8,
+      "quote": "救儿，浪漫悲悯。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 88,
+      "hardship": "玉华州收徒",
+      "sentiment": "neutral",
+      "intensity": 5,
+      "quote": "玉华州，平。（拟作）"
+    },
+    {
+      "scholar": "郭沫若",
+      "chapter": 100,
+      "hardship": "取经圆满",
+      "sentiment": "positive",
+      "intensity": 7,
+      "quote": "成佛，浪漫收场。（拟作）"
+    }
+  ]
+}

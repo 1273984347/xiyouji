@@ -1,0 +1,862 @@
+{
+  "meta": {
+    "title": "妖怪生态网络图谱",
+    "version": "v2.2.49",
+    "w_id": "W274",
+    "direction": "V",
+    "theme": "跨方向整合项目主题 2·妖怪生态学"
+  },
+  "kpi": [
+    {
+      "label": "妖怪种群总数",
+      "value": 30,
+      "unit": "个"
+    },
+    {
+      "label": "顶级捕食者",
+      "value": 6,
+      "unit": "类"
+    },
+    {
+      "label": "生态位分化",
+      "value": 4,
+      "unit": "类"
+    },
+    {
+      "label": "共生关系数",
+      "value": 42,
+      "unit": "条"
+    },
+    {
+      "label": "灭绝率",
+      "value": 73,
+      "unit": "%"
+    }
+  ],
+  "network": {
+    "nodes": [
+      {
+        "id": "longwang",
+        "name": "四海龙王",
+        "habitat": "water",
+        "size": 22,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "水域生态位·偏利共生"
+      },
+      {
+        "id": "wukong",
+        "name": "孙悟空",
+        "habitat": "sky",
+        "size": 28,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "超级捕食者·花果山起源"
+      },
+      {
+        "id": "heixiong",
+        "name": "黑熊精",
+        "habitat": "mountain",
+        "size": 18,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "迁地保护·守山大神"
+      },
+      {
+        "id": "baigujing",
+        "name": "白骨精",
+        "habitat": "mountain",
+        "size": 16,
+        "strategy": "r",
+        "ending": "消灭",
+        "desc": "独居顶级捕食者·伪装拟态"
+      },
+      {
+        "id": "huangfeng",
+        "name": "黄风怪",
+        "habitat": "mountain",
+        "size": 14,
+        "strategy": "r",
+        "ending": "收服",
+        "desc": "风德栖息·灵吉收服"
+      },
+      {
+        "id": "honghaier",
+        "name": "红孩儿",
+        "habitat": "mountain",
+        "size": 20,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "火德栖息·观音收为善财童子"
+      },
+      {
+        "id": "tongtianhe",
+        "name": "通天河鼋精",
+        "habitat": "water",
+        "size": 14,
+        "strategy": "r",
+        "ending": "逃逸",
+        "desc": "水栖·老鼋·残遗种群"
+      },
+      {
+        "id": "jiaomowang",
+        "name": "蛟魔王",
+        "habitat": "water",
+        "size": 18,
+        "strategy": "K",
+        "ending": "逃逸",
+        "desc": "水栖·覆海大圣·残遗"
+      },
+      {
+        "id": "pengmo",
+        "name": "鹏魔王",
+        "habitat": "sky",
+        "size": 18,
+        "strategy": "K",
+        "ending": "逃逸",
+        "desc": "天居·混天大圣·残遗"
+      },
+      {
+        "id": "lionmo",
+        "name": "狮驼王",
+        "habitat": "mountain",
+        "size": 18,
+        "strategy": "K",
+        "ending": "逃逸",
+        "desc": "山栖·移山大圣·残遗"
+      },
+      {
+        "id": "kimohou",
+        "name": "猕猴王",
+        "habitat": "mountain",
+        "size": 16,
+        "strategy": "r",
+        "ending": "逃逸",
+        "desc": "山栖·通风大圣·残遗"
+      },
+      {
+        "id": "ruchuan",
+        "name": "禺狨王",
+        "habitat": "mountain",
+        "size": 16,
+        "strategy": "r",
+        "ending": "逃逸",
+        "desc": "山栖·驱神大圣·残遗"
+      },
+      {
+        "id": "huangpao",
+        "name": "黄袍怪",
+        "habitat": "mountain",
+        "size": 18,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "奎木狼下凡·天庭收回"
+      },
+      {
+        "id": "jinjiao",
+        "name": "金角大王",
+        "habitat": "mountain",
+        "size": 20,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "太上老君童子·收回天庭"
+      },
+      {
+        "id": "yinjiao",
+        "name": "银角大王",
+        "habitat": "mountain",
+        "size": 20,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "太上老君童子·收回天庭"
+      },
+      {
+        "id": "qingshi",
+        "name": "青狮精",
+        "habitat": "mountain",
+        "size": 24,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "狮驼岭大妖·文殊菩萨收"
+      },
+      {
+        "id": "baixiang",
+        "name": "白象精",
+        "habitat": "mountain",
+        "size": 24,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "狮驼岭二妖·普贤菩萨收"
+      },
+      {
+        "id": "dapeng",
+        "name": "大鹏金翅雕",
+        "habitat": "sky",
+        "size": 26,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "狮驼岭三妖·如来收为护法"
+      },
+      {
+        "id": "honghaier2",
+        "name": "蜘蛛精七姐妹",
+        "habitat": "mountain",
+        "size": 18,
+        "strategy": "r",
+        "ending": "消灭",
+        "desc": "盘丝洞·r 策略典型·一网打尽"
+      },
+      {
+        "id": "baimang",
+        "name": "白毛老鼠精",
+        "habitat": "mountain",
+        "size": 16,
+        "strategy": "r",
+        "ending": "收服",
+        "desc": "镇海寺·托塔天王收"
+      },
+      {
+        "id": "xiezijing",
+        "name": "蝎子精",
+        "habitat": "mountain",
+        "size": 20,
+        "strategy": "K",
+        "ending": "消灭",
+        "desc": "毒敌山·昴日星官杀"
+      },
+      {
+        "id": "niumowang",
+        "name": "牛魔王",
+        "habitat": "mountain",
+        "size": 24,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "火焰山·托塔天王收"
+      },
+      {
+        "id": "tieshan",
+        "name": "铁扇公主",
+        "habitat": "fire",
+        "size": 20,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "火焰山·芭蕉扇·修行"
+      },
+      {
+        "id": "liuer",
+        "name": "六耳猕猴",
+        "habitat": "mountain",
+        "size": 22,
+        "strategy": "K",
+        "ending": "消灭",
+        "desc": "真假美猴王·如来识破"
+      },
+      {
+        "id": "jiutouchong",
+        "name": "九头虫",
+        "habitat": "water",
+        "size": 22,
+        "strategy": "K",
+        "ending": "逃逸",
+        "desc": "乱石山·二郎神击败·逃北海"
+      },
+      {
+        "id": "huangmei",
+        "name": "黄眉大王",
+        "habitat": "mountain",
+        "size": 20,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "小雷音·弥勒佛收"
+      },
+      {
+        "id": "qingniu",
+        "name": "青牛精",
+        "habitat": "mountain",
+        "size": 22,
+        "strategy": "K",
+        "ending": "收服",
+        "desc": "金兜山·太上老君收"
+      },
+      {
+        "id": "rhino3",
+        "name": "犀牛三怪",
+        "habitat": "mountain",
+        "size": 18,
+        "strategy": "K",
+        "ending": "消灭",
+        "desc": "金平府·辟寒辟暑辟尘·四木禽星"
+      },
+      {
+        "id": "yutu",
+        "name": "玉兔精",
+        "habitat": "sky",
+        "size": 16,
+        "strategy": "r",
+        "ending": "收服",
+        "desc": "天竺国·太阴星君收"
+      },
+      {
+        "id": "tian ting",
+        "name": "天庭/佛界",
+        "habitat": "sky",
+        "size": 30,
+        "strategy": "K",
+        "ending": "N/A",
+        "desc": "超级捕食者·收编机制"
+      },
+      {
+        "id": "fanren",
+        "name": "凡人生产者",
+        "habitat": "water",
+        "size": 12,
+        "strategy": "r",
+        "ending": "N/A",
+        "desc": "食物链底层·能量起点"
+      }
+    ],
+    "links": [
+      {
+        "source": "baigujing",
+        "target": "fanren",
+        "type": "prey",
+        "value": 3
+      },
+      {
+        "source": "dapeng",
+        "target": "fanren",
+        "type": "prey",
+        "value": 9
+      },
+      {
+        "source": "qingshi",
+        "target": "fanren",
+        "type": "prey",
+        "value": 5
+      },
+      {
+        "source": "baixiang",
+        "target": "fanren",
+        "type": "prey",
+        "value": 5
+      },
+      {
+        "source": "honghaier",
+        "target": "fanren",
+        "type": "prey",
+        "value": 4
+      },
+      {
+        "source": "xiezijing",
+        "target": "fanren",
+        "type": "prey",
+        "value": 3
+      },
+      {
+        "source": "rhino3",
+        "target": "fanren",
+        "type": "prey",
+        "value": 4
+      },
+      {
+        "source": "wukong",
+        "target": "baigujing",
+        "type": "prey",
+        "value": 3
+      },
+      {
+        "source": "wukong",
+        "target": "honghaier2",
+        "type": "prey",
+        "value": 7
+      },
+      {
+        "source": "wukong",
+        "target": "xiezijing",
+        "type": "compete",
+        "value": 2
+      },
+      {
+        "source": "wukong",
+        "target": "liuer",
+        "type": "compete",
+        "value": 5
+      },
+      {
+        "source": "wukong",
+        "target": "niumowang",
+        "type": "compete",
+        "value": 5
+      },
+      {
+        "source": "wukong",
+        "target": "qingshi",
+        "type": "compete",
+        "value": 4
+      },
+      {
+        "source": "wukong",
+        "target": "baixiang",
+        "type": "compete",
+        "value": 4
+      },
+      {
+        "source": "wukong",
+        "target": "dapeng",
+        "type": "compete",
+        "value": 6
+      },
+      {
+        "source": "wukong",
+        "target": "huangpao",
+        "type": "compete",
+        "value": 3
+      },
+      {
+        "source": "wukong",
+        "target": "jinjiao",
+        "type": "compete",
+        "value": 4
+      },
+      {
+        "source": "wukong",
+        "target": "yinjiao",
+        "type": "compete",
+        "value": 4
+      },
+      {
+        "source": "wukong",
+        "target": "huangmei",
+        "type": "compete",
+        "value": 4
+      },
+      {
+        "source": "wukong",
+        "target": "qingniu",
+        "type": "compete",
+        "value": 4
+      },
+      {
+        "source": "wukong",
+        "target": "rhino3",
+        "type": "compete",
+        "value": 3
+      },
+      {
+        "source": "tian ting",
+        "target": "heixiong",
+        "type": "symbiosis",
+        "value": 3
+      },
+      {
+        "source": "tian ting",
+        "target": "honghaier",
+        "type": "symbiosis",
+        "value": 3
+      },
+      {
+        "source": "tian ting",
+        "target": "huangpao",
+        "type": "symbiosis",
+        "value": 3
+      },
+      {
+        "source": "tian ting",
+        "target": "jinjiao",
+        "type": "symbiosis",
+        "value": 3
+      },
+      {
+        "source": "tian ting",
+        "target": "yinjiao",
+        "type": "symbiosis",
+        "value": 3
+      },
+      {
+        "source": "tian ting",
+        "target": "qingshi",
+        "type": "symbiosis",
+        "value": 3
+      },
+      {
+        "source": "tian ting",
+        "target": "baixiang",
+        "type": "symbiosis",
+        "value": 3
+      },
+      {
+        "source": "tian ting",
+        "target": "dapeng",
+        "type": "symbiosis",
+        "value": 4
+      },
+      {
+        "source": "tian ting",
+        "target": "baimang",
+        "type": "symbiosis",
+        "value": 2
+      },
+      {
+        "source": "tian ting",
+        "target": "niumowang",
+        "type": "symbiosis",
+        "value": 4
+      },
+      {
+        "source": "tian ting",
+        "target": "huangmei",
+        "type": "symbiosis",
+        "value": 3
+      },
+      {
+        "source": "tian ting",
+        "target": "qingniu",
+        "type": "symbiosis",
+        "value": 3
+      },
+      {
+        "source": "tian ting",
+        "target": "yutu",
+        "type": "symbiosis",
+        "value": 2
+      },
+      {
+        "source": "tian ting",
+        "target": "longwang",
+        "type": "symbiosis",
+        "value": 2
+      },
+      {
+        "source": "niumowang",
+        "target": "tieshan",
+        "type": "symbiosis",
+        "value": 5
+      },
+      {
+        "source": "niumowang",
+        "target": "honghaier",
+        "type": "symbiosis",
+        "value": 4
+      },
+      {
+        "source": "qingshi",
+        "target": "baixiang",
+        "type": "symbiosis",
+        "value": 5
+      },
+      {
+        "source": "baixiang",
+        "target": "dapeng",
+        "type": "symbiosis",
+        "value": 5
+      },
+      {
+        "source": "qingshi",
+        "target": "dapeng",
+        "type": "symbiosis",
+        "value": 5
+      },
+      {
+        "source": "jinjiao",
+        "target": "yinjiao",
+        "type": "symbiosis",
+        "value": 5
+      },
+      {
+        "source": "tongtianhe",
+        "target": "fanren",
+        "type": "prey",
+        "value": 1
+      }
+    ]
+  },
+  "sankey": {
+    "nodes": [
+      {
+        "name": "凡人精气"
+      },
+      {
+        "name": "小妖消费者"
+      },
+      {
+        "name": "大妖顶级捕食者"
+      },
+      {
+        "name": "取经团队"
+      },
+      {
+        "name": "天庭/佛界收编"
+      }
+    ],
+    "links": [
+      {
+        "source": 0,
+        "target": 1,
+        "value": 100
+      },
+      {
+        "source": 1,
+        "target": 2,
+        "value": 60
+      },
+      {
+        "source": 2,
+        "target": 3,
+        "value": 40
+      },
+      {
+        "source": 3,
+        "target": 4,
+        "value": 25
+      },
+      {
+        "source": 2,
+        "target": 4,
+        "value": 15
+      },
+      {
+        "source": 1,
+        "target": 3,
+        "value": 20
+      }
+    ]
+  },
+  "radar": [
+    {
+      "monster": "白骨精",
+      "habitat": 2,
+      "diet": 9,
+      "sociality": 1,
+      "magic": 4,
+      "ending": 2,
+      "strategy": "r"
+    },
+    {
+      "monster": "黑熊精",
+      "habitat": 3,
+      "diet": 5,
+      "sociality": 2,
+      "magic": 7,
+      "ending": 6,
+      "strategy": "K"
+    },
+    {
+      "monster": "红孩儿",
+      "habitat": 4,
+      "diet": 7,
+      "sociality": 3,
+      "magic": 8,
+      "ending": 7,
+      "strategy": "K"
+    },
+    {
+      "monster": "蜘蛛精七姐妹",
+      "habitat": 3,
+      "diet": 6,
+      "sociality": 9,
+      "magic": 5,
+      "ending": 2,
+      "strategy": "r"
+    },
+    {
+      "monster": "青狮精",
+      "habitat": 4,
+      "diet": 8,
+      "sociality": 8,
+      "magic": 7,
+      "ending": 6,
+      "strategy": "K"
+    },
+    {
+      "monster": "白象精",
+      "habitat": 4,
+      "diet": 7,
+      "sociality": 8,
+      "magic": 7,
+      "ending": 6,
+      "strategy": "K"
+    },
+    {
+      "monster": "大鹏金翅雕",
+      "habitat": 5,
+      "diet": 10,
+      "sociality": 8,
+      "magic": 9,
+      "ending": 7,
+      "strategy": "K"
+    },
+    {
+      "monster": "牛魔王",
+      "habitat": 4,
+      "diet": 6,
+      "sociality": 6,
+      "magic": 9,
+      "ending": 6,
+      "strategy": "K"
+    },
+    {
+      "monster": "铁扇公主",
+      "habitat": 5,
+      "diet": 4,
+      "sociality": 3,
+      "magic": 7,
+      "ending": 6,
+      "strategy": "K"
+    },
+    {
+      "monster": "蝎子精",
+      "habitat": 3,
+      "diet": 7,
+      "sociality": 2,
+      "magic": 9,
+      "ending": 1,
+      "strategy": "K"
+    },
+    {
+      "monster": "九头虫",
+      "habitat": 5,
+      "diet": 6,
+      "sociality": 4,
+      "magic": 8,
+      "ending": 3,
+      "strategy": "K"
+    },
+    {
+      "monster": "黄袍怪",
+      "habitat": 3,
+      "diet": 6,
+      "sociality": 3,
+      "magic": 7,
+      "ending": 6,
+      "strategy": "K"
+    }
+  ],
+  "timeline": [
+    {
+      "chapter": 3,
+      "type": "symbiosis",
+      "monster": "四海龙王",
+      "count": 4,
+      "event": "悟空闹龙宫·水域生态位引入"
+    },
+    {
+      "chapter": 7,
+      "type": "symbiosis",
+      "monster": "天庭",
+      "count": 1,
+      "event": "大闹天宫·超级捕食者介入"
+    },
+    {
+      "chapter": 17,
+      "type": "symbiosis",
+      "monster": "黑熊精",
+      "count": 1,
+      "event": "观音收为守山大神·迁地保护"
+    },
+    {
+      "chapter": 22,
+      "type": "symbiosis",
+      "monster": "沙悟净",
+      "count": 1,
+      "event": "流沙河·水栖妖怪收编"
+    },
+    {
+      "chapter": 27,
+      "type": "消灭",
+      "monster": "白骨精",
+      "count": 1,
+      "event": "三打白骨精·独居顶级捕食者灭绝"
+    },
+    {
+      "chapter": 32,
+      "type": "symbiosis",
+      "monster": "金角银角",
+      "count": 2,
+      "event": "太上老君童子收回·迁地保护"
+    },
+    {
+      "chapter": 41,
+      "type": "symbiosis",
+      "monster": "红孩儿",
+      "count": 1,
+      "event": "观音收为善财童子·迁地保护"
+    },
+    {
+      "chapter": 52,
+      "type": "symbiosis",
+      "monster": "青牛精",
+      "count": 1,
+      "event": "太上老君收·迁地保护"
+    },
+    {
+      "chapter": 55,
+      "type": "消灭",
+      "monster": "蝎子精",
+      "count": 1,
+      "event": "昴日星官杀·种群覆灭"
+    },
+    {
+      "chapter": 59,
+      "type": "symbiosis",
+      "monster": "牛魔王/铁扇",
+      "count": 2,
+      "event": "火焰山·收服·火德生态位"
+    },
+    {
+      "chapter": 63,
+      "type": "逃逸",
+      "monster": "九头虫",
+      "count": 1,
+      "event": "乱石山·逃北海·残遗种群"
+    },
+    {
+      "chapter": 65,
+      "type": "symbiosis",
+      "monster": "黄眉大王",
+      "count": 1,
+      "event": "弥勒佛收·迁地保护"
+    },
+    {
+      "chapter": 72,
+      "type": "消灭",
+      "monster": "蜘蛛精七姐妹",
+      "count": 7,
+      "event": "盘丝洞·r 策略种群崩溃"
+    },
+    {
+      "chapter": 74,
+      "type": "symbiosis",
+      "monster": "狮驼三妖",
+      "count": 3,
+      "event": "如来/文殊/普贤收·K 策略迁地"
+    },
+    {
+      "chapter": 82,
+      "type": "symbiosis",
+      "monster": "老鼠精",
+      "count": 1,
+      "event": "托塔天王收·迁地保护"
+    },
+    {
+      "chapter": 91,
+      "type": "消灭",
+      "monster": "犀牛三怪",
+      "count": 3,
+      "event": "四木禽星杀·种群覆灭"
+    },
+    {
+      "chapter": 95,
+      "type": "symbiosis",
+      "monster": "玉兔精",
+      "count": 1,
+      "event": "太阴星君收·迁地保护"
+    },
+    {
+      "chapter": 100,
+      "type": "symbiosis",
+      "monster": "取经团队",
+      "count": 5,
+      "event": "五圣成真·超级捕食者归位"
+    }
+  ]
+}

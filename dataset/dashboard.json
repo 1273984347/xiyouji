@@ -1,0 +1,325 @@
+{
+  "meta": {
+    "title": "数据仪表盘",
+    "version": "v2.2.42",
+    "w_id": "W236-V",
+    "direction": "V"
+  },
+  "kpi": [
+    {
+      "label": "A·总回数",
+      "value": "100",
+      "desc": "西游记总回数",
+      "dir": "A",
+      "progress": 100
+    },
+    {
+      "label": "A·总字数",
+      "value": "65.8万",
+      "desc": "全书总字数",
+      "dir": "A",
+      "progress": 100
+    },
+    {
+      "label": "A·角色数",
+      "value": "342",
+      "desc": "有台词的角色总数",
+      "dir": "A",
+      "progress": 85
+    },
+    {
+      "label": "A·妖怪数",
+      "value": "187",
+      "desc": "出现的妖怪种类",
+      "dir": "A",
+      "progress": 70
+    },
+    {
+      "label": "A·对话占比",
+      "value": "41.6%",
+      "desc": "对话/总字数",
+      "dir": "A",
+      "progress": 42
+    },
+    {
+      "label": "A·诗词数",
+      "value": "428",
+      "desc": "全书诗词总数",
+      "dir": "A",
+      "progress": 78
+    },
+    {
+      "label": "A·八十一难",
+      "value": "81",
+      "desc": "九九八十一难",
+      "dir": "A",
+      "progress": 81
+    },
+    {
+      "label": "A·取经里程",
+      "value": "10.8万里",
+      "desc": "长安到灵山",
+      "dir": "A",
+      "progress": 100
+    },
+    {
+      "label": "A·耗时",
+      "value": "14年",
+      "desc": "取经总耗时",
+      "dir": "A",
+      "progress": 90
+    },
+    {
+      "label": "A·邦国数",
+      "value": "12",
+      "desc": "途经邦国/部族",
+      "dir": "A",
+      "progress": 60
+    },
+    {
+      "label": "A·法宝数",
+      "value": "56",
+      "desc": "重要法宝兵器",
+      "dir": "A",
+      "progress": 65
+    },
+    {
+      "label": "A·神仙数",
+      "value": "94",
+      "desc": "天庭佛门神仙",
+      "dir": "A",
+      "progress": 75
+    },
+    {
+      "label": "V·可视化页面",
+      "value": "68",
+      "desc": "总可视化页面数",
+      "dir": "V",
+      "progress": 100
+    },
+    {
+      "label": "V·D3.js 页面",
+      "value": "62",
+      "desc": "使用 D3.js 的页面",
+      "dir": "V",
+      "progress": 91
+    },
+    {
+      "label": "V·Three.js 页面",
+      "value": "3",
+      "desc": "3D 可视化页面",
+      "dir": "V",
+      "progress": 20
+    },
+    {
+      "label": "V·热力图",
+      "value": "8",
+      "desc": "热力图类页面",
+      "dir": "V",
+      "progress": 50
+    },
+    {
+      "label": "V·网络图",
+      "value": "12",
+      "desc": "网络/关系图页面",
+      "dir": "V",
+      "progress": 75
+    },
+    {
+      "label": "V·雷达图",
+      "value": "5",
+      "desc": "雷达图类页面",
+      "dir": "V",
+      "progress": 30
+    },
+    {
+      "label": "V·地图类",
+      "value": "4",
+      "desc": "地理可视化页面",
+      "dir": "V",
+      "progress": 25
+    },
+    {
+      "label": "V·时间线",
+      "value": "6",
+      "desc": "时间序列页面",
+      "dir": "V",
+      "progress": 40
+    },
+    {
+      "label": "V·KPI 总数",
+      "value": "45",
+      "desc": "本仪表盘 KPI 数",
+      "dir": "V",
+      "progress": 100
+    },
+    {
+      "label": "V·W236 新增",
+      "value": "6",
+      "desc": "本批次新增页面",
+      "dir": "V",
+      "progress": 100
+    },
+    {
+      "label": "V·V4 升级",
+      "value": "2",
+      "desc": "3D/交互升级页面",
+      "dir": "V",
+      "progress": 33
+    },
+    {
+      "label": "V·动画页面",
+      "value": "9",
+      "desc": "含动画交互页面",
+      "dir": "V",
+      "progress": 56
+    },
+    {
+      "label": "V·聚类数",
+      "value": "8",
+      "desc": "回目主题聚类",
+      "dir": "V",
+      "progress": 80
+    },
+    {
+      "label": "V·转折点",
+      "value": "9",
+      "desc": "叙事转折点",
+      "dir": "V",
+      "progress": 90
+    },
+    {
+      "label": "V·角色对比",
+      "value": "7",
+      "desc": "语言风格对比角色",
+      "dir": "V",
+      "progress": 70
+    },
+    {
+      "label": "E·文本搜索",
+      "value": "可检索",
+      "desc": "全文搜索引擎",
+      "dir": "E",
+      "progress": 100
+    },
+    {
+      "label": "E·章节索引",
+      "value": "100",
+      "desc": "可检索回目",
+      "dir": "E",
+      "progress": 100
+    },
+    {
+      "label": "E·词条索引",
+      "value": "2.3万",
+      "desc": "索引词条数",
+      "dir": "E",
+      "progress": 88
+    },
+    {
+      "label": "E·搜索响应",
+      "value": "<50ms",
+      "desc": "平均响应时间",
+      "dir": "E",
+      "progress": 95
+    },
+    {
+      "label": "E·数据快照",
+      "value": "68",
+      "desc": "页面数据快照",
+      "dir": "E",
+      "progress": 100
+    },
+    {
+      "label": "E·交互组件",
+      "value": "120+",
+      "desc": "可交互组件",
+      "dir": "E",
+      "progress": 85
+    },
+    {
+      "label": "E·跨页链接",
+      "value": "200+",
+      "desc": "跨页面导航链接",
+      "dir": "E",
+      "progress": 80
+    },
+    {
+      "label": "E·响应式",
+      "value": "100%",
+      "desc": "响应式适配率",
+      "dir": "E",
+      "progress": 100
+    },
+    {
+      "label": "E·无障碍",
+      "value": "WCAG AA",
+      "desc": "无障碍合规等级",
+      "dir": "E",
+      "progress": 90
+    },
+    {
+      "label": "E·性能评分",
+      "value": "92/100",
+      "desc": "Lighthouse 性能分",
+      "dir": "E",
+      "progress": 92
+    },
+    {
+      "label": "S·研究论文",
+      "value": "45",
+      "desc": "关联研究文献",
+      "dir": "S",
+      "progress": 75
+    },
+    {
+      "label": "S·批评史",
+      "value": "明-今",
+      "desc": "批评史覆盖",
+      "dir": "S",
+      "progress": 100
+    },
+    {
+      "label": "S·主题分析",
+      "value": "18",
+      "desc": "主题研究方向",
+      "dir": "S",
+      "progress": 60
+    },
+    {
+      "label": "S·方法论",
+      "value": "12维",
+      "desc": "多维方法论框架",
+      "dir": "S",
+      "progress": 100
+    },
+    {
+      "label": "S·比较研究",
+      "value": "6",
+      "desc": "中外比较研究",
+      "dir": "S",
+      "progress": 50
+    },
+    {
+      "label": "S·文化误读",
+      "value": "8",
+      "desc": "文化误读案例",
+      "dir": "S",
+      "progress": 40
+    },
+    {
+      "label": "S·哲学维度",
+      "value": "儒释道",
+      "desc": "三教哲学维度",
+      "dir": "S",
+      "progress": 100
+    },
+    {
+      "label": "S·学术引用",
+      "value": "230+",
+      "desc": "学术引用文献",
+      "dir": "S",
+      "progress": 88
+    }
+  ]
+}

@@ -1,0 +1,552 @@
+{
+  "meta": {
+    "title": "三教神学干预网络图谱",
+    "version": "v2.2.50",
+    "w_id": "W278",
+    "direction": "V",
+    "theme": "跨方向整合项目主题 3·宗教与神学体系"
+  },
+  "network": {
+    "nodes": [
+      {
+        "id": "观音",
+        "type": "deity",
+        "religion": "佛",
+        "size": 28,
+        "color": "var(--accent-1)"
+      },
+      {
+        "id": "如来",
+        "type": "deity",
+        "religion": "佛",
+        "size": 30,
+        "color": "var(--accent-1)"
+      },
+      {
+        "id": "太上老君",
+        "type": "deity",
+        "religion": "道",
+        "size": 26,
+        "color": "var(--accent-2)"
+      },
+      {
+        "id": "显化",
+        "type": "intervention",
+        "size": 22,
+        "color": "var(--accent-3)"
+      },
+      {
+        "id": "点化",
+        "type": "intervention",
+        "size": 22,
+        "color": "var(--accent-3)"
+      },
+      {
+        "id": "试炼",
+        "type": "intervention",
+        "size": 20,
+        "color": "var(--accent-3)"
+      },
+      {
+        "id": "收服",
+        "type": "intervention",
+        "size": 22,
+        "color": "var(--accent-3)"
+      },
+      {
+        "id": "授记",
+        "type": "intervention",
+        "size": 20,
+        "color": "var(--accent-3)"
+      },
+      {
+        "id": "第8回·灵山说法",
+        "type": "chapter",
+        "size": 16,
+        "color": "var(--accent-4)"
+      },
+      {
+        "id": "第11回·疥癞显化",
+        "type": "chapter",
+        "size": 14,
+        "color": "var(--accent-4)"
+      },
+      {
+        "id": "第14回·紧箍点化",
+        "type": "chapter",
+        "size": 16,
+        "color": "var(--accent-4)"
+      },
+      {
+        "id": "第7回·八卦炉试炼",
+        "type": "chapter",
+        "size": 14,
+        "color": "var(--accent-4)"
+      },
+      {
+        "id": "第42回·收红孩儿",
+        "type": "chapter",
+        "size": 14,
+        "color": "var(--accent-4)"
+      },
+      {
+        "id": "第52回·收青牛",
+        "type": "chapter",
+        "size": 14,
+        "color": "var(--accent-4)"
+      },
+      {
+        "id": "第77回·收大鹏",
+        "type": "chapter",
+        "size": 14,
+        "color": "var(--accent-4)"
+      },
+      {
+        "id": "第58回·辨真假",
+        "type": "chapter",
+        "size": 14,
+        "color": "var(--accent-4)"
+      },
+      {
+        "id": "第98回·无字真经",
+        "type": "chapter",
+        "size": 16,
+        "color": "var(--accent-4)"
+      },
+      {
+        "id": "第100回·五众成佛",
+        "type": "chapter",
+        "size": 16,
+        "color": "var(--accent-4)"
+      }
+    ],
+    "links": [
+      {
+        "source": "观音",
+        "target": "显化",
+        "value": 3
+      },
+      {
+        "source": "观音",
+        "target": "点化",
+        "value": 4
+      },
+      {
+        "source": "观音",
+        "target": "试炼",
+        "value": 2
+      },
+      {
+        "source": "观音",
+        "target": "收服",
+        "value": 3
+      },
+      {
+        "source": "如来",
+        "target": "显化",
+        "value": 3
+      },
+      {
+        "source": "如来",
+        "target": "点化",
+        "value": 2
+      },
+      {
+        "source": "如来",
+        "target": "试炼",
+        "value": 2
+      },
+      {
+        "source": "如来",
+        "target": "收服",
+        "value": 2
+      },
+      {
+        "source": "如来",
+        "target": "授记",
+        "value": 4
+      },
+      {
+        "source": "太上老君",
+        "target": "试炼",
+        "value": 3
+      },
+      {
+        "source": "太上老君",
+        "target": "收服",
+        "value": 2
+      },
+      {
+        "source": "显化",
+        "target": "第8回·灵山说法",
+        "value": 2
+      },
+      {
+        "source": "显化",
+        "target": "第11回·疥癞显化",
+        "value": 2
+      },
+      {
+        "source": "点化",
+        "target": "第14回·紧箍点化",
+        "value": 3
+      },
+      {
+        "source": "点化",
+        "target": "第98回·无字真经",
+        "value": 3
+      },
+      {
+        "source": "试炼",
+        "target": "第7回·八卦炉试炼",
+        "value": 2
+      },
+      {
+        "source": "试炼",
+        "target": "第58回·辨真假",
+        "value": 2
+      },
+      {
+        "source": "收服",
+        "target": "第42回·收红孩儿",
+        "value": 2
+      },
+      {
+        "source": "收服",
+        "target": "第52回·收青牛",
+        "value": 2
+      },
+      {
+        "source": "收服",
+        "target": "第77回·收大鹏",
+        "value": 2
+      },
+      {
+        "source": "授记",
+        "target": "第98回·无字真经",
+        "value": 2
+      },
+      {
+        "source": "授记",
+        "target": "第100回·五众成佛",
+        "value": 3
+      }
+    ]
+  },
+  "sankey": {
+    "nodes": [
+      {
+        "name": "观音",
+        "color": "var(--accent-1)"
+      },
+      {
+        "name": "如来",
+        "color": "var(--accent-1)"
+      },
+      {
+        "name": "太上老君",
+        "color": "var(--accent-2)"
+      },
+      {
+        "name": "显化",
+        "color": "var(--accent-3)"
+      },
+      {
+        "name": "点化",
+        "color": "var(--accent-3)"
+      },
+      {
+        "name": "试炼",
+        "color": "var(--accent-3)"
+      },
+      {
+        "name": "收服",
+        "color": "var(--accent-3)"
+      },
+      {
+        "name": "授记",
+        "color": "var(--accent-3)"
+      },
+      {
+        "name": "第8回",
+        "color": "var(--accent-4)"
+      },
+      {
+        "name": "第11回",
+        "color": "var(--accent-4)"
+      },
+      {
+        "name": "第14回",
+        "color": "var(--accent-4)"
+      },
+      {
+        "name": "第98回",
+        "color": "var(--accent-4)"
+      },
+      {
+        "name": "第7回",
+        "color": "var(--accent-4)"
+      },
+      {
+        "name": "第58回",
+        "color": "var(--accent-4)"
+      },
+      {
+        "name": "第42回",
+        "color": "var(--accent-4)"
+      },
+      {
+        "name": "第52回",
+        "color": "var(--accent-4)"
+      },
+      {
+        "name": "第77回",
+        "color": "var(--accent-4)"
+      },
+      {
+        "name": "第100回",
+        "color": "var(--accent-4)"
+      }
+    ],
+    "links": [
+      {
+        "source": 0,
+        "target": 3,
+        "value": 3
+      },
+      {
+        "source": 0,
+        "target": 4,
+        "value": 4
+      },
+      {
+        "source": 0,
+        "target": 5,
+        "value": 2
+      },
+      {
+        "source": 0,
+        "target": 6,
+        "value": 3
+      },
+      {
+        "source": 1,
+        "target": 3,
+        "value": 3
+      },
+      {
+        "source": 1,
+        "target": 4,
+        "value": 2
+      },
+      {
+        "source": 1,
+        "target": 5,
+        "value": 2
+      },
+      {
+        "source": 1,
+        "target": 6,
+        "value": 2
+      },
+      {
+        "source": 1,
+        "target": 7,
+        "value": 4
+      },
+      {
+        "source": 2,
+        "target": 5,
+        "value": 3
+      },
+      {
+        "source": 2,
+        "target": 6,
+        "value": 2
+      },
+      {
+        "source": 3,
+        "target": 8,
+        "value": 2
+      },
+      {
+        "source": 3,
+        "target": 9,
+        "value": 2
+      },
+      {
+        "source": 4,
+        "target": 10,
+        "value": 3
+      },
+      {
+        "source": 4,
+        "target": 11,
+        "value": 3
+      },
+      {
+        "source": 5,
+        "target": 12,
+        "value": 2
+      },
+      {
+        "source": 5,
+        "target": 13,
+        "value": 2
+      },
+      {
+        "source": 6,
+        "target": 14,
+        "value": 2
+      },
+      {
+        "source": 6,
+        "target": 15,
+        "value": 2
+      },
+      {
+        "source": 6,
+        "target": 16,
+        "value": 2
+      },
+      {
+        "source": 7,
+        "target": 11,
+        "value": 2
+      },
+      {
+        "source": 7,
+        "target": 17,
+        "value": 3
+      }
+    ]
+  },
+  "radar": [
+    {
+      "name": "佛性论",
+      "color": "var(--accent-1)",
+      "values": [
+        5,
+        5,
+        3,
+        5,
+        5
+      ]
+    },
+    {
+      "name": "道性论",
+      "color": "var(--accent-2)",
+      "values": [
+        2,
+        1,
+        5,
+        4,
+        1
+      ]
+    },
+    {
+      "name": "心性论",
+      "color": "var(--accent-4)",
+      "values": [
+        4,
+        5,
+        4,
+        3,
+        5
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "chapter": "第7回",
+      "line": 720,
+      "deity": "太上老君",
+      "type": "试炼",
+      "desc": "八卦炉炼度四十九日"
+    },
+    {
+      "chapter": "第8回",
+      "line": 838,
+      "deity": "如来/观音",
+      "type": "显化+点化",
+      "desc": "灵山说法+奉旨点化四众"
+    },
+    {
+      "chapter": "第11回",
+      "line": 1178,
+      "deity": "观音",
+      "type": "显化",
+      "desc": "疥癞和尚显化长安"
+    },
+    {
+      "chapter": "第14回",
+      "line": 1441,
+      "deity": "观音",
+      "type": "点化",
+      "desc": "紧箍咒与定心真言"
+    },
+    {
+      "chapter": "第23回",
+      "line": 2211,
+      "deity": "观音",
+      "type": "试炼",
+      "desc": "四圣试禅心"
+    },
+    {
+      "chapter": "第26回",
+      "line": 2501,
+      "deity": "观音",
+      "type": "显化",
+      "desc": "医人参果树"
+    },
+    {
+      "chapter": "第42回",
+      "line": 1229,
+      "deity": "观音",
+      "type": "收服",
+      "desc": "收红孩儿为善财童子"
+    },
+    {
+      "chapter": "第49回",
+      "line": 1797,
+      "deity": "观音",
+      "type": "收服",
+      "desc": "收金鱼精"
+    },
+    {
+      "chapter": "第52回",
+      "line": 137,
+      "deity": "太上老君",
+      "type": "收服",
+      "desc": "收青牛精"
+    },
+    {
+      "chapter": "第58回",
+      "line": 1253,
+      "deity": "如来",
+      "type": "试炼",
+      "desc": "辨真假悟空·二心竞斗"
+    },
+    {
+      "chapter": "第77回",
+      "line": 135,
+      "deity": "如来",
+      "type": "收服",
+      "desc": "收大鹏金翅雕"
+    },
+    {
+      "chapter": "第98回",
+      "line": 4170,
+      "deity": "如来",
+      "type": "授记+点化",
+      "desc": "灵山授记+无字真经"
+    },
+    {
+      "chapter": "第100回",
+      "line": 4396,
+      "deity": "如来",
+      "type": "授记",
+      "desc": "五众成佛·紧箍自化"
+    }
+  ]
+}

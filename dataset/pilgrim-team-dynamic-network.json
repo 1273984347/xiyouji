@@ -1,0 +1,265 @@
+{
+  "meta": {
+    "title": "取经团队动力学关系网络",
+    "version": "v2.2.48",
+    "w_id": "W270",
+    "direction": "V5"
+  },
+  "kpi": [
+    {
+      "label": "团队成员",
+      "value": 5,
+      "unit": "位"
+    },
+    {
+      "label": "Belbin 角色",
+      "value": 9,
+      "unit": "种"
+    },
+    {
+      "label": "Tuckman 阶段",
+      "value": 4,
+      "unit": "阶段"
+    },
+    {
+      "label": "大冲突",
+      "value": 3,
+      "unit": "次"
+    },
+    {
+      "label": "西行年限",
+      "value": 14,
+      "unit": "年"
+    }
+  ],
+  "belbin": [
+    {
+      "character": "唐僧",
+      "coordinator": 9,
+      "completer": 7,
+      "shaper": 3,
+      "plant": 4,
+      "specialist": 2,
+      "ri": 3,
+      "tw": 5,
+      "me": 2,
+      "implementer": 4
+    },
+    {
+      "character": "悟空",
+      "coordinator": 4,
+      "completer": 3,
+      "shaper": 9,
+      "plant": 8,
+      "specialist": 9,
+      "ri": 6,
+      "tw": 4,
+      "me": 3,
+      "implementer": 5
+    },
+    {
+      "character": "八戒",
+      "coordinator": 3,
+      "completer": 2,
+      "shaper": 4,
+      "plant": 3,
+      "specialist": 4,
+      "ri": 8,
+      "tw": 8,
+      "me": 3,
+      "implementer": 4
+    },
+    {
+      "character": "沙僧",
+      "coordinator": 3,
+      "completer": 7,
+      "shaper": 2,
+      "plant": 2,
+      "specialist": 3,
+      "ri": 3,
+      "tw": 6,
+      "me": 2,
+      "implementer": 9
+    },
+    {
+      "character": "白龙马",
+      "coordinator": 2,
+      "completer": 3,
+      "shaper": 2,
+      "plant": 2,
+      "specialist": 8,
+      "ri": 2,
+      "tw": 4,
+      "me": 2,
+      "implementer": 5
+    }
+  ],
+  "network": {
+    "nodes": [
+      {
+        "id": "唐僧",
+        "roles": 2,
+        "color": "#c8463a",
+        "belbin": "协调者+完成者",
+        "tuckman": "目标澄清",
+        "dynamic": "外部合法性"
+      },
+      {
+        "id": "悟空",
+        "roles": 3,
+        "color": "#8c2a2a",
+        "belbin": "塑造者+智多星+专家",
+        "tuckman": "推动行动",
+        "dynamic": "内部合法性"
+      },
+      {
+        "id": "八戒",
+        "roles": 2,
+        "color": "#C9A063",
+        "belbin": "资源调查员+团队工作者",
+        "tuckman": "调节气氛",
+        "dynamic": "动机分化"
+      },
+      {
+        "id": "沙僧",
+        "roles": 2,
+        "color": "#6B8E5A",
+        "belbin": "执行者+完成者",
+        "tuckman": "稳重执行",
+        "dynamic": "沉默缓冲"
+      },
+      {
+        "id": "白龙马",
+        "roles": 1,
+        "color": "#3a6b8c",
+        "belbin": "专家",
+        "tuckman": "危急出手",
+        "dynamic": "角色固化"
+      }
+    ],
+    "links": [
+      {
+        "source": "唐僧",
+        "target": "悟空",
+        "conflict": 9,
+        "coop": 6,
+        "label": "权威vs能力"
+      },
+      {
+        "source": "唐僧",
+        "target": "八戒",
+        "conflict": 3,
+        "coop": 5,
+        "label": "持戒vs动摇"
+      },
+      {
+        "source": "唐僧",
+        "target": "沙僧",
+        "conflict": 1,
+        "coop": 7,
+        "label": "领导vs执行"
+      },
+      {
+        "source": "唐僧",
+        "target": "白龙马",
+        "conflict": 1,
+        "coop": 4,
+        "label": "骑乘"
+      },
+      {
+        "source": "悟空",
+        "target": "八戒",
+        "conflict": 5,
+        "coop": 8,
+        "label": "主战vs助力"
+      },
+      {
+        "source": "悟空",
+        "target": "沙僧",
+        "conflict": 2,
+        "coop": 7,
+        "label": "主战vs守师"
+      },
+      {
+        "source": "悟空",
+        "target": "白龙马",
+        "conflict": 1,
+        "coop": 3,
+        "label": "罕见互动"
+      },
+      {
+        "source": "八戒",
+        "target": "沙僧",
+        "conflict": 2,
+        "coop": 6,
+        "label": "边缘互动"
+      },
+      {
+        "source": "八戒",
+        "target": "白龙马",
+        "conflict": 1,
+        "coop": 2,
+        "label": "罕见互动"
+      },
+      {
+        "source": "沙僧",
+        "target": "白龙马",
+        "conflict": 1,
+        "coop": 3,
+        "label": "沉默并行"
+      }
+    ]
+  },
+  "phases": {
+    "forming": {
+      "name": "形成期 Forming",
+      "range": "第 8-22 回 · 15 回",
+      "feature": "观音装配团队，五人到位。成员对团队目标认知模糊（悟空=赎罪、八戒=误入、沙僧=脱罪）。表面形成，深层未形成。",
+      "key_events": [
+        "第 8 回 观音奉旨寻取经人",
+        "第 14 回 五行山收悟空",
+        "第 15 回 鹰愁涧收小白龙",
+        "第 19 回 高老庄收八戒",
+        "第 22 回 流沙河收沙僧"
+      ]
+    },
+    "storming": {
+      "name": "震荡期 Storming",
+      "range": "第 22-59 回 · 38 回",
+      "feature": "三次大冲突密集。每次冲突都是深层动机浮出水面。冲突不是团队失败的标志，而是团队建立信任的必经过程——但取经团队的震荡期过长，因缺乏监督评估者角色，冲突无法被冷静调解。",
+      "key_events": [
+        "第 14 回 杀六贼冲突",
+        "第 27 回 三打白骨精冲突",
+        "第 57-58 回 真假美猴王冲突"
+      ]
+    },
+    "norming": {
+      "name": "规范期 Norming",
+      "range": "第 59-81 回 · 23 回",
+      "feature": "角色边界清晰化。悟空不再挑战唐僧权威，唐僧不再轻易逐徒。但深层动机分化仍未解决——这是规范期的脆弱性。",
+      "key_events": [
+        "第 59-61 回 火焰山借扇",
+        "第 65-66 回 小雷音寺",
+        "第 75-77 回 狮驼岭"
+      ]
+    },
+    "performing": {
+      "name": "执行期 Performing",
+      "range": "第 81-99 回 · 19 回",
+      "feature": "团队从被动应对转向主动执行。但执行期的代价是角色固化——白龙马彻底沉默、沙僧彻底边缘化。高效以牺牲成员潜能实现。",
+      "key_events": [
+        "第 88 回 玉华州授徒",
+        "第 93-95 回 天竺国玉兔",
+        "第 98 回 凌云渡脱壳"
+      ]
+    },
+    "adjourning": {
+      "name": "解散期 Adjourning",
+      "range": "第 100 回 · 1 回",
+      "feature": "团队目标达成后立即解体。这是因为团队是任务导向（取经），非关系导向——任务完成，关系即解。",
+      "key_events": [
+        "第 100 回 五圣成真"
+      ]
+    }
+  }
+}

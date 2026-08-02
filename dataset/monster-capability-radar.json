@@ -1,0 +1,352 @@
+{
+  "meta": {
+    "title": "妖怪能力雷达图",
+    "version": "v2.2.39",
+    "w_id": "W233-3",
+    "direction": "V3"
+  },
+  "kpi": [
+    {
+      "label": "代表妖怪",
+      "value": 15,
+      "unit": "个"
+    },
+    {
+      "label": "能力维度",
+      "value": 5,
+      "unit": "维"
+    },
+    {
+      "label": "来历分类",
+      "value": 4,
+      "unit": "类"
+    },
+    {
+      "label": "结局分类",
+      "value": 4,
+      "unit": "类"
+    }
+  ],
+  "radar": [
+    {
+      "monster": "白骨精",
+      "magic": 4,
+      "strategy": 9,
+      "artifact": 2,
+      "background": 1,
+      "ending": 2
+    },
+    {
+      "monster": "黄袍怪",
+      "magic": 7,
+      "strategy": 5,
+      "artifact": 6,
+      "background": 8,
+      "ending": 5
+    },
+    {
+      "monster": "红孩儿",
+      "magic": 8,
+      "strategy": 7,
+      "artifact": 7,
+      "background": 8,
+      "ending": 6
+    },
+    {
+      "monster": "黑熊精",
+      "magic": 7,
+      "strategy": 5,
+      "artifact": 4,
+      "background": 5,
+      "ending": 6
+    },
+    {
+      "monster": "银角大王",
+      "magic": 8,
+      "strategy": 6,
+      "artifact": 9,
+      "background": 8,
+      "ending": 5
+    },
+    {
+      "monster": "蜘蛛精",
+      "magic": 5,
+      "strategy": 6,
+      "artifact": 5,
+      "background": 4,
+      "ending": 2
+    },
+    {
+      "monster": "蝎子精",
+      "magic": 9,
+      "strategy": 6,
+      "artifact": 7,
+      "background": 5,
+      "ending": 2
+    },
+    {
+      "monster": "六耳猕猴",
+      "magic": 9,
+      "strategy": 9,
+      "artifact": 6,
+      "background": 2,
+      "ending": 1
+    },
+    {
+      "monster": "牛魔王",
+      "magic": 9,
+      "strategy": 7,
+      "artifact": 7,
+      "background": 7,
+      "ending": 6
+    },
+    {
+      "monster": "铁扇公主",
+      "magic": 7,
+      "strategy": 6,
+      "artifact": 9,
+      "background": 7,
+      "ending": 6
+    },
+    {
+      "monster": "大鹏金翅雕",
+      "magic": 10,
+      "strategy": 9,
+      "artifact": 7,
+      "background": 9,
+      "ending": 6
+    },
+    {
+      "monster": "黄眉大王",
+      "magic": 9,
+      "strategy": 6,
+      "artifact": 9,
+      "background": 8,
+      "ending": 6
+    },
+    {
+      "monster": "青狮精",
+      "magic": 8,
+      "strategy": 5,
+      "artifact": 6,
+      "background": 8,
+      "ending": 6
+    },
+    {
+      "monster": "白象精",
+      "magic": 7,
+      "strategy": 5,
+      "artifact": 6,
+      "background": 8,
+      "ending": 6
+    },
+    {
+      "monster": "灵感大王",
+      "magic": 7,
+      "strategy": 6,
+      "artifact": 5,
+      "background": 7,
+      "ending": 2
+    }
+  ],
+  "bar": [
+    {
+      "dimension": "法力",
+      "max": 10,
+      "monster": "大鹏金翅雕",
+      "avg": 7.6
+    },
+    {
+      "dimension": "智谋",
+      "max": 9,
+      "monster": "白骨精/六耳猕猴/大鹏金翅雕",
+      "avg": 6.5
+    },
+    {
+      "dimension": "法宝",
+      "max": 9,
+      "monster": "银角大王/铁扇公主/黄眉大王",
+      "avg": 6.5
+    },
+    {
+      "dimension": "背景",
+      "max": 9,
+      "monster": "大鹏金翅雕",
+      "avg": 6.4
+    },
+    {
+      "dimension": "结局",
+      "max": 6,
+      "monster": "红孩儿/黑熊精/牛魔王等",
+      "avg": 4.7
+    }
+  ],
+  "scatter": [
+    {
+      "monster": "白骨精",
+      "magic": 4,
+      "ending": 2
+    },
+    {
+      "monster": "黄袍怪",
+      "magic": 7,
+      "ending": 5
+    },
+    {
+      "monster": "红孩儿",
+      "magic": 8,
+      "ending": 6
+    },
+    {
+      "monster": "黑熊精",
+      "magic": 7,
+      "ending": 6
+    },
+    {
+      "monster": "银角大王",
+      "magic": 8,
+      "ending": 5
+    },
+    {
+      "monster": "蜘蛛精",
+      "magic": 5,
+      "ending": 2
+    },
+    {
+      "monster": "蝎子精",
+      "magic": 9,
+      "ending": 2
+    },
+    {
+      "monster": "六耳猕猴",
+      "magic": 9,
+      "ending": 1
+    },
+    {
+      "monster": "牛魔王",
+      "magic": 9,
+      "ending": 6
+    },
+    {
+      "monster": "铁扇公主",
+      "magic": 7,
+      "ending": 6
+    },
+    {
+      "monster": "大鹏金翅雕",
+      "magic": 10,
+      "ending": 6
+    },
+    {
+      "monster": "黄眉大王",
+      "magic": 9,
+      "ending": 6
+    },
+    {
+      "monster": "青狮精",
+      "magic": 8,
+      "ending": 6
+    },
+    {
+      "monster": "白象精",
+      "magic": 7,
+      "ending": 6
+    },
+    {
+      "monster": "灵感大王",
+      "magic": 7,
+      "ending": 2
+    }
+  ],
+  "sankey": {
+    "nodes": [
+      {
+        "name": "天庭"
+      },
+      {
+        "name": "佛界"
+      },
+      {
+        "name": "凡间"
+      },
+      {
+        "name": "野生"
+      },
+      {
+        "name": "收编"
+      },
+      {
+        "name": "打死"
+      },
+      {
+        "name": "逃走"
+      },
+      {
+        "name": "借走"
+      }
+    ],
+    "links": [
+      {
+        "source": 0,
+        "target": 4,
+        "value": 5
+      },
+      {
+        "source": 0,
+        "target": 5,
+        "value": 2
+      },
+      {
+        "source": 1,
+        "target": 4,
+        "value": 4
+      },
+      {
+        "source": 1,
+        "target": 6,
+        "value": 1
+      },
+      {
+        "source": 2,
+        "target": 5,
+        "value": 3
+      },
+      {
+        "source": 3,
+        "target": 5,
+        "value": 4
+      },
+      {
+        "source": 3,
+        "target": 7,
+        "value": 1
+      }
+    ]
+  },
+  "kpi_extreme": [
+    {
+      "label": "最强法力",
+      "monster": "大鹏金翅雕",
+      "value": "10/10",
+      "desc": "如来亲舅父·佛祖亲率五百罗汉降伏"
+    },
+    {
+      "label": "最智谋",
+      "monster": "六耳猕猴",
+      "value": "9/10",
+      "desc": "假悟空难辨·骗过天庭众神"
+    },
+    {
+      "label": "最悲剧",
+      "monster": "六耳猕猴",
+      "value": "结局 1/10",
+      "desc": "被如来识破即被悟空一棒打死"
+    },
+    {
+      "label": "最幸运",
+      "monster": "红孩儿",
+      "value": "收编善财童子",
+      "desc": "观音收为侍童·得正果"
+    }
+  ]
+}

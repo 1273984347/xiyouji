@@ -1,0 +1,713 @@
+{
+  "meta": {
+    "title": "西游四维研究网络图谱",
+    "version": "v2.2.51",
+    "w_id": "W282",
+    "direction": "V",
+    "theme": "跨方向整合项目主题 4·西游研究四维整合"
+  },
+  "dimensions": [
+    {
+      "key": "mind",
+      "name": "修行心性",
+      "en": "Cultivation-Mind",
+      "color": "#c8392c"
+    },
+    {
+      "key": "power",
+      "name": "权力政治",
+      "en": "Power-Politics",
+      "color": "#2c5f7c"
+    },
+    {
+      "key": "culture",
+      "name": "文化记忆",
+      "en": "Cultural-Memory",
+      "color": "#c89b3c"
+    },
+    {
+      "key": "time",
+      "name": "时间叙事",
+      "en": "Time-Narrative",
+      "color": "#6B8E5A"
+    }
+  ],
+  "indicators": [
+    "理论深度",
+    "文本证据",
+    "现代相关性",
+    "跨维度呼应",
+    "教学价值"
+  ],
+  "radar": [
+    {
+      "name": "修行心性",
+      "color": "#c8392c",
+      "values": [
+        5,
+        5,
+        4,
+        4,
+        5
+      ]
+    },
+    {
+      "name": "权力政治",
+      "color": "#2c5f7c",
+      "values": [
+        4,
+        5,
+        5,
+        4,
+        4
+      ]
+    },
+    {
+      "name": "文化记忆",
+      "color": "#c89b3c",
+      "values": [
+        4,
+        4,
+        5,
+        5,
+        4
+      ]
+    },
+    {
+      "name": "时间叙事",
+      "color": "#6B8E5A",
+      "values": [
+        5,
+        4,
+        4,
+        5,
+        5
+      ]
+    }
+  ],
+  "theorists": [
+    {
+      "name": "王阳明",
+      "dim": "mind",
+      "values": {
+        "mind": 10,
+        "power": 4,
+        "culture": 5,
+        "time": 3
+      }
+    },
+    {
+      "name": "弗洛伊德",
+      "dim": "mind",
+      "values": {
+        "mind": 9,
+        "power": 2,
+        "culture": 4,
+        "time": 3
+      }
+    },
+    {
+      "name": "荣格",
+      "dim": "mind",
+      "values": {
+        "mind": 9,
+        "power": 3,
+        "culture": 6,
+        "time": 4
+      }
+    },
+    {
+      "name": "福柯",
+      "dim": "power",
+      "values": {
+        "mind": 4,
+        "power": 10,
+        "culture": 7,
+        "time": 5
+      }
+    },
+    {
+      "name": "韦伯",
+      "dim": "power",
+      "values": {
+        "mind": 3,
+        "power": 9,
+        "culture": 5,
+        "time": 3
+      }
+    },
+    {
+      "name": "马基雅维利",
+      "dim": "power",
+      "values": {
+        "mind": 2,
+        "power": 10,
+        "culture": 4,
+        "time": 2
+      }
+    },
+    {
+      "name": "阿斯曼",
+      "dim": "culture",
+      "values": {
+        "mind": 3,
+        "power": 5,
+        "culture": 10,
+        "time": 6
+      }
+    },
+    {
+      "name": "哈布瓦赫",
+      "dim": "culture",
+      "values": {
+        "mind": 2,
+        "power": 4,
+        "culture": 9,
+        "time": 5
+      }
+    },
+    {
+      "name": "姚斯",
+      "dim": "culture",
+      "values": {
+        "mind": 3,
+        "power": 2,
+        "culture": 9,
+        "time": 4
+      }
+    },
+    {
+      "name": "海德格尔",
+      "dim": "time",
+      "values": {
+        "mind": 6,
+        "power": 3,
+        "culture": 5,
+        "time": 10
+      }
+    },
+    {
+      "name": "热奈特",
+      "dim": "time",
+      "values": {
+        "mind": 2,
+        "power": 2,
+        "culture": 4,
+        "time": 10
+      }
+    },
+    {
+      "name": "里柯尔",
+      "dim": "time",
+      "values": {
+        "mind": 5,
+        "power": 3,
+        "culture": 6,
+        "time": 10
+      }
+    }
+  ],
+  "network": {
+    "nodes": [
+      {
+        "id": "修行心性",
+        "type": "dim",
+        "dim": "mind",
+        "size": 32,
+        "color": "#c8392c"
+      },
+      {
+        "id": "权力政治",
+        "type": "dim",
+        "dim": "power",
+        "size": 32,
+        "color": "#2c5f7c"
+      },
+      {
+        "id": "文化记忆",
+        "type": "dim",
+        "dim": "culture",
+        "size": 32,
+        "color": "#c89b3c"
+      },
+      {
+        "id": "时间叙事",
+        "type": "dim",
+        "dim": "time",
+        "size": 32,
+        "color": "#6B8E5A"
+      },
+      {
+        "id": "王阳明",
+        "type": "theorist",
+        "dim": "mind",
+        "size": 18,
+        "color": "#c8392c"
+      },
+      {
+        "id": "弗洛伊德",
+        "type": "theorist",
+        "dim": "mind",
+        "size": 18,
+        "color": "#c8392c"
+      },
+      {
+        "id": "荣格",
+        "type": "theorist",
+        "dim": "mind",
+        "size": 18,
+        "color": "#c8392c"
+      },
+      {
+        "id": "福柯",
+        "type": "theorist",
+        "dim": "power",
+        "size": 18,
+        "color": "#2c5f7c"
+      },
+      {
+        "id": "韦伯",
+        "type": "theorist",
+        "dim": "power",
+        "size": 18,
+        "color": "#2c5f7c"
+      },
+      {
+        "id": "马基雅维利",
+        "type": "theorist",
+        "dim": "power",
+        "size": 18,
+        "color": "#2c5f7c"
+      },
+      {
+        "id": "阿斯曼",
+        "type": "theorist",
+        "dim": "culture",
+        "size": 18,
+        "color": "#c89b3c"
+      },
+      {
+        "id": "哈布瓦赫",
+        "type": "theorist",
+        "dim": "culture",
+        "size": 18,
+        "color": "#c89b3c"
+      },
+      {
+        "id": "姚斯",
+        "type": "theorist",
+        "dim": "culture",
+        "size": 18,
+        "color": "#c89b3c"
+      },
+      {
+        "id": "海德格尔",
+        "type": "theorist",
+        "dim": "time",
+        "size": 18,
+        "color": "#6B8E5A"
+      },
+      {
+        "id": "热奈特",
+        "type": "theorist",
+        "dim": "time",
+        "size": 18,
+        "color": "#6B8E5A"
+      },
+      {
+        "id": "里柯尔",
+        "type": "theorist",
+        "dim": "time",
+        "size": 18,
+        "color": "#6B8E5A"
+      },
+      {
+        "id": "L1·石猴出世",
+        "type": "line",
+        "line": 1,
+        "chapter": "第1回",
+        "desc": "石猴出世",
+        "size": 14,
+        "color": "#6B6455"
+      },
+      {
+        "id": "L722·大闹天宫",
+        "type": "line",
+        "line": 722,
+        "chapter": "第7回",
+        "desc": "大闹天宫",
+        "size": 14,
+        "color": "#6B6455"
+      },
+      {
+        "id": "L1441·心猿归正",
+        "type": "line",
+        "line": 1441,
+        "chapter": "第14回",
+        "desc": "心猿归正",
+        "size": 14,
+        "color": "#6B6455"
+      },
+      {
+        "id": "L1519·紧箍咒",
+        "type": "line",
+        "line": 1519,
+        "chapter": "第14回",
+        "desc": "紧箍咒",
+        "size": 14,
+        "color": "#6B6455"
+      },
+      {
+        "id": "L3200·三打白骨精",
+        "type": "line",
+        "line": 3200,
+        "chapter": "第27回",
+        "desc": "三打白骨精",
+        "size": 14,
+        "color": "#6B6455"
+      },
+      {
+        "id": "L6800·真假美猴王",
+        "type": "line",
+        "line": 6800,
+        "chapter": "第58回",
+        "desc": "真假美猴王",
+        "size": 14,
+        "color": "#6B6455"
+      },
+      {
+        "id": "L9100·凌云渡",
+        "type": "line",
+        "line": 9100,
+        "chapter": "第98回",
+        "desc": "凌云渡",
+        "size": 14,
+        "color": "#6B6455"
+      },
+      {
+        "id": "L9140·斗战胜佛",
+        "type": "line",
+        "line": 9140,
+        "chapter": "第100回",
+        "desc": "斗战胜佛",
+        "size": 14,
+        "color": "#6B6455"
+      }
+    ],
+    "links": [
+      {
+        "source": "修行心性",
+        "target": "王阳明",
+        "value": 4
+      },
+      {
+        "source": "修行心性",
+        "target": "弗洛伊德",
+        "value": 4
+      },
+      {
+        "source": "修行心性",
+        "target": "荣格",
+        "value": 4
+      },
+      {
+        "source": "权力政治",
+        "target": "福柯",
+        "value": 4
+      },
+      {
+        "source": "权力政治",
+        "target": "韦伯",
+        "value": 4
+      },
+      {
+        "source": "权力政治",
+        "target": "马基雅维利",
+        "value": 4
+      },
+      {
+        "source": "文化记忆",
+        "target": "阿斯曼",
+        "value": 4
+      },
+      {
+        "source": "文化记忆",
+        "target": "哈布瓦赫",
+        "value": 4
+      },
+      {
+        "source": "文化记忆",
+        "target": "姚斯",
+        "value": 4
+      },
+      {
+        "source": "时间叙事",
+        "target": "海德格尔",
+        "value": 4
+      },
+      {
+        "source": "时间叙事",
+        "target": "热奈特",
+        "value": 4
+      },
+      {
+        "source": "时间叙事",
+        "target": "里柯尔",
+        "value": 4
+      },
+      {
+        "source": "王阳明",
+        "target": "L1441·心猿归正",
+        "value": 3
+      },
+      {
+        "source": "荣格",
+        "target": "L1·石猴出世",
+        "value": 3
+      },
+      {
+        "source": "弗洛伊德",
+        "target": "L1519·紧箍咒",
+        "value": 3
+      },
+      {
+        "source": "福柯",
+        "target": "L722·大闹天宫",
+        "value": 4
+      },
+      {
+        "source": "马基雅维利",
+        "target": "L722·大闹天宫",
+        "value": 3
+      },
+      {
+        "source": "韦伯",
+        "target": "L1519·紧箍咒",
+        "value": 2
+      },
+      {
+        "source": "阿斯曼",
+        "target": "L3200·三打白骨精",
+        "value": 3
+      },
+      {
+        "source": "哈布瓦赫",
+        "target": "L3200·三打白骨精",
+        "value": 3
+      },
+      {
+        "source": "姚斯",
+        "target": "L9140·斗战胜佛",
+        "value": 3
+      },
+      {
+        "source": "海德格尔",
+        "target": "L6800·真假美猴王",
+        "value": 4
+      },
+      {
+        "source": "热奈特",
+        "target": "L6800·真假美猴王",
+        "value": 3
+      },
+      {
+        "source": "里柯尔",
+        "target": "L9100·凌云渡",
+        "value": 3
+      },
+      {
+        "source": "里柯尔",
+        "target": "L9140·斗战胜佛",
+        "value": 3
+      },
+      {
+        "source": "修行心性",
+        "target": "L9100·凌云渡",
+        "value": 3
+      },
+      {
+        "source": "修行心性",
+        "target": "L9140·斗战胜佛",
+        "value": 3
+      },
+      {
+        "source": "权力政治",
+        "target": "L722·大闹天宫",
+        "value": 3
+      },
+      {
+        "source": "文化记忆",
+        "target": "L1·石猴出世",
+        "value": 2
+      },
+      {
+        "source": "文化记忆",
+        "target": "L9140·斗战胜佛",
+        "value": 2
+      },
+      {
+        "source": "时间叙事",
+        "target": "L1·石猴出世",
+        "value": 3
+      },
+      {
+        "source": "时间叙事",
+        "target": "L9100·凌云渡",
+        "value": 2
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "chapter": 1,
+      "mind": 8,
+      "power": 3,
+      "culture": 7,
+      "time": 9
+    },
+    {
+      "chapter": 10,
+      "mind": 7,
+      "power": 8,
+      "culture": 5,
+      "time": 6
+    },
+    {
+      "chapter": 20,
+      "mind": 6,
+      "power": 6,
+      "culture": 5,
+      "time": 5
+    },
+    {
+      "chapter": 30,
+      "mind": 8,
+      "power": 5,
+      "culture": 6,
+      "time": 5
+    },
+    {
+      "chapter": 40,
+      "mind": 6,
+      "power": 7,
+      "culture": 6,
+      "time": 6
+    },
+    {
+      "chapter": 50,
+      "mind": 7,
+      "power": 6,
+      "culture": 7,
+      "time": 7
+    },
+    {
+      "chapter": 60,
+      "mind": 9,
+      "power": 7,
+      "culture": 7,
+      "time": 8
+    },
+    {
+      "chapter": 70,
+      "mind": 7,
+      "power": 6,
+      "culture": 8,
+      "time": 7
+    },
+    {
+      "chapter": 80,
+      "mind": 7,
+      "power": 5,
+      "culture": 8,
+      "time": 7
+    },
+    {
+      "chapter": 90,
+      "mind": 8,
+      "power": 6,
+      "culture": 9,
+      "time": 8
+    },
+    {
+      "chapter": 100,
+      "mind": 10,
+      "power": 7,
+      "culture": 10,
+      "time": 10
+    }
+  ],
+  "polarExtra": [
+    {
+      "theorist": "王阳明",
+      "axis": "mind",
+      "r": 0.85,
+      "cross": 7
+    },
+    {
+      "theorist": "弗洛伊德",
+      "axis": "mind",
+      "r": 0.65,
+      "cross": 5
+    },
+    {
+      "theorist": "荣格",
+      "axis": "mind",
+      "r": 0.75,
+      "cross": 8
+    },
+    {
+      "theorist": "福柯",
+      "axis": "power",
+      "r": 0.9,
+      "cross": 9
+    },
+    {
+      "theorist": "韦伯",
+      "axis": "power",
+      "r": 0.75,
+      "cross": 6
+    },
+    {
+      "theorist": "马基雅维利",
+      "axis": "power",
+      "r": 0.95,
+      "cross": 5
+    },
+    {
+      "theorist": "阿斯曼",
+      "axis": "culture",
+      "r": 0.9,
+      "cross": 9
+    },
+    {
+      "theorist": "哈布瓦赫",
+      "axis": "culture",
+      "r": 0.8,
+      "cross": 7
+    },
+    {
+      "theorist": "姚斯",
+      "axis": "culture",
+      "r": 0.7,
+      "cross": 6
+    },
+    {
+      "theorist": "海德格尔",
+      "axis": "time",
+      "r": 0.95,
+      "cross": 9
+    },
+    {
+      "theorist": "热奈特",
+      "axis": "time",
+      "r": 0.85,
+      "cross": 6
+    },
+    {
+      "theorist": "里柯尔",
+      "axis": "time",
+      "r": 0.9,
+      "cross": 8
+    }
+  ]
+}

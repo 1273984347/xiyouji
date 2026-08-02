@@ -1,0 +1,840 @@
+{
+  "roles": [
+    {
+      "name": "招募者",
+      "chapter": "第8回 / 第12回",
+      "target": "唐玄奘 / 悟空 / 八戒 / 沙僧 / 白龙马",
+      "action": "长安城选僧 · 盂兰盆会请缨",
+      "tag": "选人的眼光比法力更准",
+      "color": "#c8463a",
+      "key": "recruit"
+    },
+    {
+      "name": "约束者",
+      "chapter": "第14回",
+      "target": "孙悟空",
+      "action": "紧箍儿发牌 · 定心真言",
+      "tag": "紧箍是礼物，只是包装很疼",
+      "color": "#3a6b8c",
+      "key": "constraint"
+    },
+    {
+      "name": "回收者",
+      "chapter": "第17回 / 第39回 / 第46回",
+      "target": "黑熊精 / 红孩儿 / 金鱼",
+      "action": "收妖善后 · 因材施教的梯度控制",
+      "tag": "收走的是自己洒出去的碎片",
+      "color": "#8b7355",
+      "key": "recycle"
+    },
+    {
+      "name": "调停者",
+      "chapter": "第26回 / 第39回 / 第46回",
+      "target": "镇元子 / 红孩儿 / 通天河",
+      "action": "团队内伤 · 危机公关",
+      "tag": "不出手时反而最见功力",
+      "color": "#5a4a6b",
+      "key": "mediate"
+    },
+    {
+      "name": "操盘手",
+      "chapter": "第8回",
+      "target": "八十一难 · 妖怪派遣",
+      "action": "项目经理 · 资源调配 · 风险控制",
+      "tag": "她不是菩萨心肠，是项目经理",
+      "color": "#6a8b5a",
+      "key": "operate"
+    },
+    {
+      "name": "退场者",
+      "chapter": "第56回 / 第98回",
+      "target": "灵山 · 紫竹林",
+      "action": "沉默退场 · 紧箍废止 · 种竹归隐",
+      "tag": "连目送都省略了",
+      "color": "#8a7a6a",
+      "key": "exit"
+    }
+  ],
+  "network": {
+    "nodes": [
+      {
+        "id": "观音",
+        "type": "center"
+      },
+      {
+        "id": "招募者",
+        "type": "role"
+      },
+      {
+        "id": "约束者",
+        "type": "role"
+      },
+      {
+        "id": "回收者",
+        "type": "role"
+      },
+      {
+        "id": "调停者",
+        "type": "role"
+      },
+      {
+        "id": "操盘手",
+        "type": "role"
+      },
+      {
+        "id": "退场者",
+        "type": "role"
+      },
+      {
+        "id": "第8回",
+        "type": "chapter"
+      },
+      {
+        "id": "第12回",
+        "type": "chapter"
+      },
+      {
+        "id": "第14回",
+        "type": "chapter"
+      },
+      {
+        "id": "第17回",
+        "type": "chapter"
+      },
+      {
+        "id": "第26回",
+        "type": "chapter"
+      },
+      {
+        "id": "第39回",
+        "type": "chapter"
+      },
+      {
+        "id": "第46回",
+        "type": "chapter"
+      },
+      {
+        "id": "第56回",
+        "type": "chapter"
+      },
+      {
+        "id": "第98回",
+        "type": "chapter"
+      },
+      {
+        "id": "唐玄奘",
+        "type": "character"
+      },
+      {
+        "id": "孙悟空",
+        "type": "character"
+      },
+      {
+        "id": "猪八戒",
+        "type": "character"
+      },
+      {
+        "id": "沙僧",
+        "type": "character"
+      },
+      {
+        "id": "白龙马",
+        "type": "character"
+      },
+      {
+        "id": "黑熊精",
+        "type": "character"
+      },
+      {
+        "id": "红孩儿",
+        "type": "character"
+      },
+      {
+        "id": "金鱼",
+        "type": "character"
+      },
+      {
+        "id": "镇元子",
+        "type": "character"
+      },
+      {
+        "id": "八十一难",
+        "type": "character"
+      },
+      {
+        "id": "如来",
+        "type": "character"
+      }
+    ],
+    "links": [
+      {
+        "source": "观音",
+        "target": "招募者",
+        "weight": 9
+      },
+      {
+        "source": "观音",
+        "target": "约束者",
+        "weight": 8
+      },
+      {
+        "source": "观音",
+        "target": "回收者",
+        "weight": 9
+      },
+      {
+        "source": "观音",
+        "target": "调停者",
+        "weight": 8
+      },
+      {
+        "source": "观音",
+        "target": "操盘手",
+        "weight": 10
+      },
+      {
+        "source": "观音",
+        "target": "退场者",
+        "weight": 7
+      },
+      {
+        "source": "招募者",
+        "target": "第8回",
+        "weight": 6
+      },
+      {
+        "source": "招募者",
+        "target": "第12回",
+        "weight": 6
+      },
+      {
+        "source": "招募者",
+        "target": "唐玄奘",
+        "weight": 7
+      },
+      {
+        "source": "招募者",
+        "target": "孙悟空",
+        "weight": 6
+      },
+      {
+        "source": "招募者",
+        "target": "猪八戒",
+        "weight": 5
+      },
+      {
+        "source": "招募者",
+        "target": "沙僧",
+        "weight": 5
+      },
+      {
+        "source": "招募者",
+        "target": "白龙马",
+        "weight": 4
+      },
+      {
+        "source": "招募者",
+        "target": "如来",
+        "weight": 5
+      },
+      {
+        "source": "约束者",
+        "target": "第14回",
+        "weight": 7
+      },
+      {
+        "source": "约束者",
+        "target": "孙悟空",
+        "weight": 8
+      },
+      {
+        "source": "回收者",
+        "target": "第17回",
+        "weight": 6
+      },
+      {
+        "source": "回收者",
+        "target": "第39回",
+        "weight": 6
+      },
+      {
+        "source": "回收者",
+        "target": "第46回",
+        "weight": 6
+      },
+      {
+        "source": "回收者",
+        "target": "黑熊精",
+        "weight": 7
+      },
+      {
+        "source": "回收者",
+        "target": "红孩儿",
+        "weight": 8
+      },
+      {
+        "source": "回收者",
+        "target": "金鱼",
+        "weight": 7
+      },
+      {
+        "source": "调停者",
+        "target": "第26回",
+        "weight": 6
+      },
+      {
+        "source": "调停者",
+        "target": "第39回",
+        "weight": 6
+      },
+      {
+        "source": "调停者",
+        "target": "第46回",
+        "weight": 6
+      },
+      {
+        "source": "调停者",
+        "target": "镇元子",
+        "weight": 6
+      },
+      {
+        "source": "调停者",
+        "target": "红孩儿",
+        "weight": 5
+      },
+      {
+        "source": "调停者",
+        "target": "金鱼",
+        "weight": 4
+      },
+      {
+        "source": "操盘手",
+        "target": "第8回",
+        "weight": 8
+      },
+      {
+        "source": "操盘手",
+        "target": "八十一难",
+        "weight": 9
+      },
+      {
+        "source": "操盘手",
+        "target": "如来",
+        "weight": 6
+      },
+      {
+        "source": "退场者",
+        "target": "第56回",
+        "weight": 6
+      },
+      {
+        "source": "退场者",
+        "target": "第98回",
+        "weight": 6
+      },
+      {
+        "source": "退场者",
+        "target": "孙悟空",
+        "weight": 4
+      }
+    ]
+  },
+  "sankey": {
+    "nodes": [
+      {
+        "name": "招募者",
+        "cat": 0
+      },
+      {
+        "name": "约束者",
+        "cat": 0
+      },
+      {
+        "name": "回收者",
+        "cat": 0
+      },
+      {
+        "name": "调停者",
+        "cat": 0
+      },
+      {
+        "name": "操盘手",
+        "cat": 0
+      },
+      {
+        "name": "退场者",
+        "cat": 0
+      },
+      {
+        "name": "组建团队",
+        "cat": 1
+      },
+      {
+        "name": "定心约束",
+        "cat": 1
+      },
+      {
+        "name": "收妖归位",
+        "cat": 1
+      },
+      {
+        "name": "危机公关",
+        "cat": 1
+      },
+      {
+        "name": "资源调度",
+        "cat": 1
+      },
+      {
+        "name": "沉默抽身",
+        "cat": 1
+      },
+      {
+        "name": "第8回",
+        "cat": 2
+      },
+      {
+        "name": "第12回",
+        "cat": 2
+      },
+      {
+        "name": "第14回",
+        "cat": 2
+      },
+      {
+        "name": "第17回",
+        "cat": 2
+      },
+      {
+        "name": "第26回",
+        "cat": 2
+      },
+      {
+        "name": "第39回",
+        "cat": 2
+      },
+      {
+        "name": "第46回",
+        "cat": 2
+      },
+      {
+        "name": "第56回",
+        "cat": 2
+      },
+      {
+        "name": "第98回",
+        "cat": 2
+      },
+      {
+        "name": "唐玄奘",
+        "cat": 3
+      },
+      {
+        "name": "孙悟空",
+        "cat": 3
+      },
+      {
+        "name": "猪八戒",
+        "cat": 3
+      },
+      {
+        "name": "沙僧",
+        "cat": 3
+      },
+      {
+        "name": "白龙马",
+        "cat": 3
+      },
+      {
+        "name": "黑熊精",
+        "cat": 3
+      },
+      {
+        "name": "红孩儿",
+        "cat": 3
+      },
+      {
+        "name": "金鱼",
+        "cat": 3
+      },
+      {
+        "name": "镇元子",
+        "cat": 3
+      },
+      {
+        "name": "八十一难",
+        "cat": 3
+      },
+      {
+        "name": "如来",
+        "cat": 3
+      },
+      {
+        "name": "紫竹林",
+        "cat": 3
+      }
+    ],
+    "links": [
+      {
+        "source": "招募者",
+        "target": "组建团队",
+        "value": 6
+      },
+      {
+        "source": "约束者",
+        "target": "定心约束",
+        "value": 5
+      },
+      {
+        "source": "回收者",
+        "target": "收妖归位",
+        "value": 6
+      },
+      {
+        "source": "调停者",
+        "target": "危机公关",
+        "value": 5
+      },
+      {
+        "source": "操盘手",
+        "target": "资源调度",
+        "value": 7
+      },
+      {
+        "source": "退场者",
+        "target": "沉默抽身",
+        "value": 4
+      },
+      {
+        "source": "组建团队",
+        "target": "第8回",
+        "value": 4
+      },
+      {
+        "source": "组建团队",
+        "target": "第12回",
+        "value": 3
+      },
+      {
+        "source": "定心约束",
+        "target": "第14回",
+        "value": 5
+      },
+      {
+        "source": "收妖归位",
+        "target": "第17回",
+        "value": 3
+      },
+      {
+        "source": "收妖归位",
+        "target": "第39回",
+        "value": 3
+      },
+      {
+        "source": "收妖归位",
+        "target": "第46回",
+        "value": 3
+      },
+      {
+        "source": "危机公关",
+        "target": "第26回",
+        "value": 3
+      },
+      {
+        "source": "危机公关",
+        "target": "第39回",
+        "value": 2
+      },
+      {
+        "source": "危机公关",
+        "target": "第46回",
+        "value": 2
+      },
+      {
+        "source": "资源调度",
+        "target": "第8回",
+        "value": 5
+      },
+      {
+        "source": "沉默抽身",
+        "target": "第56回",
+        "value": 3
+      },
+      {
+        "source": "沉默抽身",
+        "target": "第98回",
+        "value": 3
+      },
+      {
+        "source": "第8回",
+        "target": "唐玄奘",
+        "value": 2
+      },
+      {
+        "source": "第8回",
+        "target": "孙悟空",
+        "value": 2
+      },
+      {
+        "source": "第8回",
+        "target": "猪八戒",
+        "value": 1
+      },
+      {
+        "source": "第8回",
+        "target": "沙僧",
+        "value": 1
+      },
+      {
+        "source": "第8回",
+        "target": "如来",
+        "value": 2
+      },
+      {
+        "source": "第8回",
+        "target": "八十一难",
+        "value": 3
+      },
+      {
+        "source": "第12回",
+        "target": "唐玄奘",
+        "value": 2
+      },
+      {
+        "source": "第14回",
+        "target": "孙悟空",
+        "value": 4
+      },
+      {
+        "source": "第17回",
+        "target": "黑熊精",
+        "value": 3
+      },
+      {
+        "source": "第26回",
+        "target": "镇元子",
+        "value": 3
+      },
+      {
+        "source": "第39回",
+        "target": "红孩儿",
+        "value": 4
+      },
+      {
+        "source": "第46回",
+        "target": "金鱼",
+        "value": 3
+      },
+      {
+        "source": "第12回",
+        "target": "白龙马",
+        "value": 1
+      },
+      {
+        "source": "第56回",
+        "target": "孙悟空",
+        "value": 2
+      },
+      {
+        "source": "第98回",
+        "target": "紫竹林",
+        "value": 2
+      }
+    ]
+  },
+  "radar": [
+    {
+      "role": "招募者",
+      "慈悲度": 6,
+      "精算度": 9,
+      "权力": 8,
+      "隐匿": 3,
+      "介入": 9
+    },
+    {
+      "role": "约束者",
+      "慈悲度": 5,
+      "精算度": 9,
+      "权力": 9,
+      "隐匿": 6,
+      "介入": 7
+    },
+    {
+      "role": "回收者",
+      "慈悲度": 4,
+      "精算度": 10,
+      "权力": 8,
+      "隐匿": 5,
+      "介入": 8
+    },
+    {
+      "role": "调停者",
+      "慈悲度": 6,
+      "精算度": 9,
+      "权力": 9,
+      "隐匿": 6,
+      "介入": 8
+    },
+    {
+      "role": "操盘手",
+      "慈悲度": 3,
+      "精算度": 10,
+      "权力": 10,
+      "隐匿": 5,
+      "介入": 9
+    },
+    {
+      "role": "退场者",
+      "慈悲度": 7,
+      "精算度": 8,
+      "权力": 4,
+      "隐匿": 10,
+      "介入": 1
+    }
+  ],
+  "timeline": [
+    {
+      "order": 1,
+      "chapter": 8,
+      "role": "招募者",
+      "event": "盂兰盆会请缨",
+      "desc": "如来立项，观音主动举手「弟子不才，愿上东土寻一个取经人来」"
+    },
+    {
+      "order": 2,
+      "chapter": 8,
+      "role": "操盘手",
+      "event": "组建取经团队",
+      "desc": "五行山访悟空、福陵山收八戒、流沙河约沙僧，逐个招募成员"
+    },
+    {
+      "order": 3,
+      "chapter": 12,
+      "role": "招募者",
+      "event": "长安显圣点玄奘",
+      "desc": "满朝文武前点名金蝉子转世，把唐太宗变成取经工程赞助人"
+    },
+    {
+      "order": 4,
+      "chapter": 14,
+      "role": "约束者",
+      "event": "紧箍儿发牌",
+      "desc": "花帽藏紧箍骗悟空戴上，全书最温柔也最残忍的礼物"
+    },
+    {
+      "order": 5,
+      "chapter": 17,
+      "role": "回收者",
+      "event": "禁箍收黑熊精",
+      "desc": "用禁箍儿套头收编守山大神，第一笔妖怪人才引进"
+    },
+    {
+      "order": 6,
+      "chapter": 26,
+      "role": "调停者",
+      "event": "柳枝甘露救树",
+      "desc": "骂归骂帮归帮，救活人参果树，地仙系统不可得罪"
+    },
+    {
+      "order": 7,
+      "chapter": 39,
+      "role": "回收者",
+      "event": "金箍收红孩儿",
+      "desc": "天罡刀穿双腿，最暴烈的降伏手段，收为善财童子"
+    },
+    {
+      "order": 8,
+      "chapter": 39,
+      "role": "调停者",
+      "event": "火云洞强行收编",
+      "desc": "红孩儿战力太强背景太复杂，强行收编削弱牛魔王势力"
+    },
+    {
+      "order": 9,
+      "chapter": 46,
+      "role": "回收者",
+      "event": "竹篮回收金鱼",
+      "desc": "编竹篮捞走莲花池金鱼，创造者回收造物，全书最「人」的时刻"
+    },
+    {
+      "order": 10,
+      "chapter": 46,
+      "role": "调停者",
+      "event": "通天河悄悄私了",
+      "desc": "金鱼吃九年童男童女，竹篮捞走不公开审判，掩盖自身管理漏洞"
+    },
+    {
+      "order": 11,
+      "chapter": 56,
+      "role": "退场者",
+      "event": "紧箍咒废止",
+      "desc": "六耳猕猴事件后玄奘不再念咒，外控系统被内控系统取代"
+    },
+    {
+      "order": 12,
+      "chapter": 74,
+      "role": "退场者",
+      "event": "灵山受封缺席",
+      "desc": "不在灵山大殿、不在长安送别、不在凌云渡，回紫竹林种竹子"
+    },
+    {
+      "order": 13,
+      "chapter": 98,
+      "role": "退场者",
+      "event": "沉默退场归零",
+      "desc": "从「掌握紧箍咒的菩萨」变成「种竹子的邻居」，连目送都省略"
+    }
+  ],
+  "intensity": [
+    {
+      "chapter": 8,
+      "intensity": 9,
+      "phase": "立项请缨"
+    },
+    {
+      "chapter": 12,
+      "intensity": 8,
+      "phase": "长安显圣"
+    },
+    {
+      "chapter": 14,
+      "intensity": 7,
+      "phase": "紧箍发牌"
+    },
+    {
+      "chapter": 17,
+      "intensity": 8,
+      "phase": "回收黑熊精"
+    },
+    {
+      "chapter": 26,
+      "intensity": 7,
+      "phase": "调停人参果"
+    },
+    {
+      "chapter": 39,
+      "intensity": 8,
+      "phase": "收红孩儿"
+    },
+    {
+      "chapter": 46,
+      "intensity": 7,
+      "phase": "回收金鱼"
+    },
+    {
+      "chapter": 56,
+      "intensity": 3,
+      "phase": "紧箍废止"
+    },
+    {
+      "chapter": 74,
+      "intensity": 1,
+      "phase": "灵山缺席"
+    },
+    {
+      "chapter": 98,
+      "intensity": 0,
+      "phase": "退场归零"
+    }
+  ]
+}

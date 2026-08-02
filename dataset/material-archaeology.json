@@ -1,0 +1,676 @@
+{
+  "artifact_materials": {
+    "concept_name": "法宝材质学",
+    "english_name": "Artifact Material Science",
+    "definition": "材质学（material science）：通过分析物质的化学成分、物理特性、工艺推测·复原古代工艺技术·将法宝从神话还原为可分析的工程材料",
+    "core_case": "金刚琢是'锟钢抟炼'（合金钢）·金箍棒是'神铁'（陨铁？）·芭蕉扇是'太阴叶'（有机复合材料？）·这些材质对应明代实际工艺",
+    "artifact_material_reports": [
+      {
+        "artifact_name": "金刚琢",
+        "english_name": "Diamond Snare",
+        "owner": "太上老君",
+        "raw_material_description": "锟钢抟炼",
+        "material_classification": "合金钢·高碳钢",
+        "modern_equivalent": "钨钢/高速钢（硬度高·耐磨·耐腐蚀）",
+        "chemical_composition_guess": "Fe-C-W-Cr（铁碳钨铬合金）",
+        "physical_properties": {
+          "hardness": "莫氏 9.5·接近金刚石",
+          "density": "7.85 g/cm³·高于普通钢",
+          "magnetic": "弱磁性",
+          "conductivity": "良导电·导热"
+        },
+        "crafting_process": [
+          "选矿·采集铁矿石+钨矿+铬矿",
+          "炼钢·高炉熔炼·去除杂质",
+          "合金化·加入钨铬提升硬度",
+          "锻造·反复锻打·致密化",
+          "淬火·油淬或水淬·提升硬度",
+          "回火·低温回火·降低脆性",
+          "抛光·达到镜面光泽"
+        ],
+        "function_principle": "硬度极高·可收取任何金属兵器（金属碰撞时金刚琢不变形·兵器变形）",
+        "estimated_value": "无价·明代工艺巅峰",
+        "archaeological_parallel": "汉代百炼钢+唐代镔铁·明代景泰蓝工艺"
+      },
+      {
+        "artifact_name": "金箍棒",
+        "english_name": "Golden Cudgel",
+        "owner": "孙悟空（原东海龙王保管）",
+        "raw_material_description": "神铁·定海神针",
+        "material_classification": "陨铁（铁镍合金）",
+        "modern_equivalent": "镍铁陨石（含镍 5-30%）",
+        "chemical_composition_guess": "Fe-Ni（铁镍合金·含镍 8%）",
+        "physical_properties": {
+          "hardness": "莫氏 7.5·硬度高于普通铁",
+          "density": "8.0 g/cm³·高于普通铁",
+          "magnetic": "强磁性",
+          "conductivity": "良导电"
+        },
+        "crafting_process": [
+          "陨石坠落·大禹治水时获得",
+          "熔炼·去除硅酸盐杂质",
+          "锻造·定海神针形制",
+          "刻字·'如意金箍棒·重一万三千五百斤'",
+          "祭炼·道家祭炼提升灵性"
+        ],
+        "function_principle": "陨铁含镍·耐腐蚀·可大可小（道家祭炼赋予变形能力）",
+        "estimated_value": "定海神针·无价",
+        "archaeological_parallel": "商代铁刃铜钺（用陨铁制成）·明代炼铁技术"
+      },
+      {
+        "artifact_name": "芭蕉扇",
+        "english_name": "Banana Leaf Fan",
+        "owner": "铁扇公主",
+        "raw_material_description": "太阴叶·女娲补天遗留",
+        "material_classification": "有机复合材料·植物纤维+矿物",
+        "modern_equivalent": "碳纤维+矿物涂层复合材料",
+        "chemical_composition_guess": "C-Si-O-K（碳硅氧钾复合材料）",
+        "physical_properties": {
+          "hardness": "可变·平时柔软·激活时硬如钢",
+          "density": "1.5 g/cm³·轻于钢",
+          "magnetic": "无",
+          "conductivity": "绝缘"
+        },
+        "crafting_process": [
+          "采集·太阴之精（月球矿物）",
+          "提取·植物纤维（芭蕉叶）",
+          "复合·纤维与矿物结合",
+          "祭炼·道家祭炼·赋予控风能力",
+          "装饰·扇骨刻花·扇面题字"
+        ],
+        "function_principle": "复合材料·柔性 + 矿物激活·可扇出八百里风",
+        "estimated_value": "稀世·控风能力无价",
+        "archaeological_parallel": "汉代漆器（漆+麻布复合材料）·明代折扇工艺"
+      },
+      {
+        "artifact_name": "紫金红葫芦",
+        "english_name": "Purple Gold Red Gourd",
+        "owner": "太上老君",
+        "raw_material_description": "紫金·炼丹房容器",
+        "material_classification": "紫铜合金·铜金合金",
+        "modern_equivalent": "红铜+金合金（类似景泰蓝底材）",
+        "chemical_composition_guess": "Cu-Au-Ag（铜金银合金·含金 5%）",
+        "physical_properties": {
+          "hardness": "莫氏 3·较软",
+          "density": "9.0 g/cm³·重于普通铜",
+          "magnetic": "无",
+          "conductivity": "良导电"
+        },
+        "crafting_process": [
+          "选材·紫铜+黄金",
+          "熔炼·合金化",
+          "锻造·葫芦形制",
+          "内壁处理·防腐涂层",
+          "祭炼·赋予'吸人'能力"
+        ],
+        "function_principle": "合金容器·内壁特殊涂层（吸力机制不明）",
+        "estimated_value": "稀世·炼丹房专用",
+        "archaeological_parallel": "明代景泰蓝铜胎+战国铜壶"
+      },
+      {
+        "artifact_name": "九齿钉耙",
+        "english_name": "Nine-Tooth Rake",
+        "owner": "猪八戒",
+        "raw_material_description": "神冰铁·天庭御赐",
+        "material_classification": "陨铁+冰淬工艺",
+        "modern_equivalent": "镍铁陨石+冷处理钢",
+        "chemical_composition_guess": "Fe-Ni-C（铁镍碳合金·冰淬）",
+        "physical_properties": {
+          "hardness": "莫氏 8·高于普通钢",
+          "density": "7.9 g/cm³",
+          "magnetic": "强磁性",
+          "conductivity": "良导电"
+        },
+        "crafting_process": [
+          "选材·神冰铁（陨铁）",
+          "熔炼·去除杂质",
+          "锻造·九齿耙形制",
+          "冰淬·用冰水淬火·提升硬度",
+          "回火·低温回火",
+          "装饰·金箍装饰"
+        ],
+        "function_principle": "陨铁冰淬·硬度极高·九齿分散冲击力",
+        "estimated_value": "天庭御赐·无价",
+        "archaeological_parallel": "战国冰淬剑+明代农具改进"
+      },
+      {
+        "artifact_name": "降妖宝杖",
+        "english_name": "Demon-Suppressing Staff",
+        "owner": "沙僧",
+        "raw_material_description": "梭罗仙木·月宫桂树",
+        "material_classification": "硬木+金属复合材料",
+        "modern_equivalent": "乌木+钢芯复合材料",
+        "chemical_composition_guess": "C-H-O（木质）+ Fe（金属芯）",
+        "physical_properties": {
+          "hardness": "莫氏 5·硬木级别",
+          "density": "1.2 g/cm³·轻于金属",
+          "magnetic": "无",
+          "conductivity": "绝缘"
+        },
+        "crafting_process": [
+          "选材·梭罗仙木（月宫桂树）",
+          "干燥·自然阴干",
+          "雕刻·杖身形制",
+          "金属芯·内嵌钢芯",
+          "装饰·金线缠绕"
+        ],
+        "function_principle": "硬木+金属芯·轻便+坚韧",
+        "estimated_value": "月宫稀木·稀世",
+        "archaeological_parallel": "明代禅杖+战国木芯铜器"
+      },
+      {
+        "artifact_name": "紧箍咒",
+        "english_name": "Golden Hoop Mantra",
+        "owner": "如来佛祖",
+        "raw_material_description": "金·嵌明珠",
+        "material_classification": "黄金+宝石",
+        "modern_equivalent": "24K 金+红宝石/玛瑙",
+        "chemical_composition_guess": "Au（黄金）+ Al2O3（刚玉·红宝石）",
+        "physical_properties": {
+          "hardness": "莫氏 2.5（金）·9（红宝石）",
+          "density": "19.3 g/cm³（金）",
+          "magnetic": "无",
+          "conductivity": "良导电"
+        },
+        "crafting_process": [
+          "选材·纯金+红宝石",
+          "熔铸·金圈形制",
+          "嵌石·镶嵌明珠",
+          "咒文·刻梵文咒语",
+          "祭炼·佛家开光·赋予咒语能力"
+        ],
+        "function_principle": "金质+咒文·念咒时金箍收缩·物理疼痛刺激",
+        "estimated_value": "佛家法宝·无价",
+        "archaeological_parallel": "明代金箍+佛教法器"
+      },
+      {
+        "artifact_name": "阴阳二气瓶",
+        "english_name": "Yin-Yang Bottle",
+        "owner": "金翅大鹏雕（实为灵山法宝）",
+        "raw_material_description": "阴阳二气·灵山法宝",
+        "material_classification": "陶瓷+神秘气态",
+        "modern_equivalent": "钧窑陶瓷+惰性气体",
+        "chemical_composition_guess": "SiO2-Al2O3（陶瓷）+ 未知气态",
+        "physical_properties": {
+          "hardness": "莫氏 6·陶瓷级",
+          "density": "2.5 g/cm³",
+          "magnetic": "无",
+          "conductivity": "绝缘"
+        },
+        "crafting_process": [
+          "选材·灵山陶土",
+          "成型·瓶形",
+          "烧制·高温窑烧",
+          "封气·封入阴阳二气",
+          "祭炼·赋予'装人'能力"
+        ],
+        "function_principle": "陶瓷瓶+神秘气态·内封特殊气体（推测类似一氧化碳使人昏睡）",
+        "estimated_value": "灵山法宝·无价",
+        "archaeological_parallel": "宋代钧窑+战国陶瓶"
+      }
+    ],
+    "material_classification_stats": {
+      "total_artifacts": 8,
+      "metallic_artifacts": 5,
+      "composite_artifacts": 3,
+      "avg_hardness": 6.6,
+      "avg_density": 7,
+      "hardest_artifact": "金刚琢（9.5）",
+      "softest_artifact": "紧箍咒（2.5·金质）",
+      "densest_artifact": "紧箍咒（19.3·金）",
+      "lightest_artifact": "降妖宝杖（1.2·木）"
+    },
+    "material_insights": [
+      "8 件法宝中 5 件金属·3 件复合材料·反映明代工艺水平",
+      "陨铁/神铁是常见的'神话材质'·对应商代陨铁使用传统",
+      "金刚琢的'锟钢'对应明代百炼钢工艺·硬度接近金刚石",
+      "芭蕉扇的'太阴叶'是唯一植物基复合材料·对应汉代漆器工艺",
+      "紧箍咒是唯一贵金属法宝·反映佛教重视黄金的传统",
+      "材质多样反映明代多元工艺：钢铁+陶瓷+木材+贵金属+复合材料"
+    ]
+  },
+  "costume_archaeology": {
+    "concept_name": "服饰考古",
+    "english_name": "Costume Archaeology",
+    "definition": "服饰考古（costume archaeology）：通过分析服饰的材质、形制、纹样·复原古代社会等级制度与文化变迁",
+    "core_case": "悟空从'虎皮裙'到'僧衣'再到'佛衣'·不仅是心路历程·也是明代服饰制度的折射",
+    "character_costumes": [
+      {
+        "character": "孙悟空",
+        "costume_evolution": [
+          {
+            "stage": "石猴期",
+            "costume": "裸体·毛",
+            "material": "原生猴毛",
+            "function": "保暖·伪装",
+            "social_status": "无·野兽",
+            "ming_dynasty_parallel": "无·原始状态"
+          },
+          {
+            "stage": "美猴王期",
+            "costume": "通臂猿猴赠·黄色短打",
+            "material": "粗布",
+            "function": "区分身份",
+            "social_status": "王·花果山主",
+            "ming_dynasty_parallel": "庶民服饰·黄色为贱色"
+          },
+          {
+            "stage": "齐天大圣期",
+            "costume": "锁子黄金甲+凤翅紫金冠+藕丝步云履",
+            "material": "黄金+丝绸",
+            "function": "威慑·身份象征",
+            "social_status": "王·齐天大圣",
+            "ming_dynasty_parallel": "藩王服饰·金甲为仪仗"
+          },
+          {
+            "stage": "取经初期",
+            "costume": "虎皮裙+直裰",
+            "material": "虎皮+粗布",
+            "function": "遮羞·御寒",
+            "social_status": "徒弟·行者",
+            "ming_dynasty_parallel": "游方僧人·百衲衣传统"
+          },
+          {
+            "stage": "取经后期",
+            "costume": "僧衣·锦襕袈裟",
+            "material": "丝绸+金线",
+            "function": "佛教徒身份",
+            "social_status": "高僧弟子",
+            "ming_dynasty_parallel": "高僧法服·明代袈裟"
+          },
+          {
+            "stage": "成佛期",
+            "costume": "佛衣·金缕",
+            "material": "金缕+宝石",
+            "function": "佛位象征",
+            "social_status": "佛·斗战胜佛",
+            "ming_dynasty_parallel": "帝王衮服·金缕衣"
+          }
+        ],
+        "evolution_pattern": "U 型曲线：裸→粗布→金甲→虎皮→僧衣→佛衣·鼎盛→低谷→巅峰",
+        "social_meaning": "从王到徒再到佛·服饰折射身份的起落"
+      },
+      {
+        "character": "唐僧",
+        "costume_evolution": [
+          {
+            "stage": "出身期",
+            "costume": "婴儿·漂流",
+            "material": "无",
+            "function": "无",
+            "social_status": "弃婴",
+            "ming_dynasty_parallel": "无"
+          },
+          {
+            "stage": "出家期",
+            "costume": "粗布僧衣",
+            "material": "粗布",
+            "function": "僧人身份",
+            "social_status": "僧·沙弥",
+            "ming_dynasty_parallel": "明代普通僧人服饰"
+          },
+          {
+            "stage": "取经期",
+            "costume": "锦襕袈裟+九环锡杖",
+            "material": "丝绸+金线+锡",
+            "function": "御弟身份·佛教徒",
+            "social_status": "御弟·高僧",
+            "ming_dynasty_parallel": "明代高僧法服·御赐袈裟"
+          },
+          {
+            "stage": "成佛期",
+            "costume": "旃檀功德佛衣",
+            "material": "金缕+宝石",
+            "function": "佛位象征",
+            "social_status": "佛·旃檀功德佛",
+            "ming_dynasty_parallel": "帝王衮服"
+          }
+        ],
+        "evolution_pattern": "上升曲线：弃婴→僧→御弟→佛·服饰上升",
+        "social_meaning": "从弃婴到佛·服饰折射身份的逆袭"
+      },
+      {
+        "character": "猪八戒",
+        "costume_evolution": [
+          {
+            "stage": "天蓬元帅期",
+            "costume": "金甲·元帅服饰",
+            "material": "黄金+丝绸",
+            "function": "元帅身份",
+            "social_status": "元帅·天庭武将",
+            "ming_dynasty_parallel": "明代总兵服饰"
+          },
+          {
+            "stage": "贬凡期",
+            "costume": "猪形·裸体",
+            "material": "猪毛",
+            "function": "无",
+            "social_status": "妖·猪精",
+            "ming_dynasty_parallel": "无·兽形"
+          },
+          {
+            "stage": "高老庄期",
+            "costume": "粗布短打",
+            "material": "粗布",
+            "function": "遮羞·干活",
+            "social_status": "赘婿·农夫",
+            "ming_dynasty_parallel": "明代农民服饰"
+          },
+          {
+            "stage": "取经期",
+            "costume": "僧衣·黑布",
+            "material": "粗布",
+            "function": "僧人身份",
+            "social_status": "徒弟·行者",
+            "ming_dynasty_parallel": "明代游僧服饰"
+          },
+          {
+            "stage": "成佛期",
+            "costume": "净坛使者衣",
+            "material": "金缕",
+            "function": "使者身份",
+            "social_status": "使者·净坛使者",
+            "ming_dynasty_parallel": "明代宦官服饰"
+          }
+        ],
+        "evolution_pattern": "下降-上升曲线：元帅→猪→赘婿→僧→使者·大落大起",
+        "social_meaning": "从元帅到猪再到使者·服饰折射身份的跌宕"
+      },
+      {
+        "character": "沙僧",
+        "costume_evolution": [
+          {
+            "stage": "卷帘大将期",
+            "costume": "金甲·大将服饰",
+            "material": "黄金+丝绸",
+            "function": "大将身份",
+            "social_status": "大将·天庭武将",
+            "ming_dynasty_parallel": "明代仪仗服饰"
+          },
+          {
+            "stage": "流沙河期",
+            "costume": "妖怪装·乱发",
+            "material": "无·兽形",
+            "function": "无",
+            "social_status": "妖·流沙河怪",
+            "ming_dynasty_parallel": "无·野人"
+          },
+          {
+            "stage": "取经期",
+            "costume": "僧衣·灰布",
+            "material": "粗布",
+            "function": "僧人身份·挑担",
+            "social_status": "徒弟·挑担者",
+            "ming_dynasty_parallel": "明代挑夫服饰"
+          },
+          {
+            "stage": "成佛期",
+            "costume": "金身罗汉衣",
+            "material": "金缕",
+            "function": "罗汉身份",
+            "social_status": "罗汉·金身罗汉",
+            "ming_dynasty_parallel": "明代罗汉塑像"
+          }
+        ],
+        "evolution_pattern": "下降-上升曲线：大将→妖→僧→罗汉·跌宕",
+        "social_meaning": "从大将到妖再到罗汉·服饰折射身份的跌宕"
+      }
+    ],
+    "costume_insights": [
+      "悟空服饰演变最复杂·6 阶段·反映主角心路",
+      "4 主角服饰演变均呈现'天庭→凡间→佛果'的共同模式",
+      "服饰材质与身份严格对应：金=佛/王·粗布=僧/民·裸=妖/兽",
+      "明代服饰制度折射：黄色为贱色（庶民）·金缕为贵（帝王）·袈裟为僧",
+      "成佛期 4 人服饰材质统一为金缕·反映'众生平等'的佛教思想",
+      "服饰演变反映明代社会流动性：王↔徒↔佛·身份可转换"
+    ],
+    "ming_dynasty_parallel": {
+      "imperial_robess": "帝王衮服：金缕+十二章纹（成佛期对应）",
+      "monk_robes": "高僧法服：锦襕袈裟+九环锡杖（唐僧取经期对应）",
+      "military_uniforms": "武将甲胄：金甲+战靴（齐天大圣期对应）",
+      "commoner_clothing": "庶民服饰：粗布短打+百衲衣（取经初期对应）",
+      "official_uniforms": "官员朝服：按品级分色（净坛使者衣对应）"
+    }
+  },
+  "cave_architecture": {
+    "concept_name": "洞府建筑类型学",
+    "english_name": "Cave Architecture Typology",
+    "definition": "建筑类型学（architectural typology）：按建筑形制、空间结构、功能特征分类·揭示文化与时代背景",
+    "core_case": "妖怪洞府按建筑形制可分为：天然溶洞型、崖墓型、水景别墅型、地下迷宫型·对应明代以前建筑遗存的幻想投射",
+    "architectural_types": [
+      {
+        "type_name": "天然溶洞型",
+        "english_name": "Natural Karst Cave Type",
+        "features": [
+          "石灰岩溶蚀",
+          "钟乳石",
+          "暗河",
+          "天然通风"
+        ],
+        "representative_caves": [
+          {
+            "cave_name": "水帘洞",
+            "owner": "孙悟空",
+            "location": "花果山",
+            "chapter": "第 1 回",
+            "spatial_structure": "洞内有瀑布+石房+石床+石凳",
+            "function": "居住+避难",
+            "luxury_level": 8,
+            "ecological_integration": "极高·与山体一体"
+          },
+          {
+            "cave_name": "黑风洞",
+            "owner": "黑熊精",
+            "location": "黑风山",
+            "chapter": "第 16-17 回",
+            "spatial_structure": "洞内有佛衣会·佛事活动",
+            "function": "居住+佛事",
+            "luxury_level": 6,
+            "ecological_integration": "高"
+          },
+          {
+            "cave_name": "波月洞",
+            "owner": "黄袍怪",
+            "location": "碗子山",
+            "chapter": "第 28-31 回",
+            "spatial_structure": "洞内有宫殿·强占公主",
+            "function": "居住+囚禁",
+            "luxury_level": 7,
+            "ecological_integration": "中"
+          }
+        ],
+        "archaeological_parallel": "广西桂林溶洞+贵州织金洞",
+        "architectural_significance": "最古老的居住形态·反映明代对'洞穴崇拜'的传统"
+      },
+      {
+        "type_name": "崖墓型",
+        "english_name": "Cliff Tomb Type",
+        "features": [
+          "悬崖开凿",
+          "石室",
+          "墓室结构",
+          "居高临下"
+        ],
+        "representative_caves": [
+          {
+            "cave_name": "盘丝洞",
+            "owner": "蜘蛛精",
+            "location": "盘丝岭",
+            "chapter": "第 72-73 回",
+            "spatial_structure": "洞内深穴+丝网+暗室",
+            "function": "居住+陷阱",
+            "luxury_level": 4,
+            "ecological_integration": "中"
+          },
+          {
+            "cave_name": "莲花洞",
+            "owner": "金角大王+银角大王",
+            "location": "平顶山",
+            "chapter": "第 32-35 回",
+            "spatial_structure": "崖壁开凿+石室+石门",
+            "function": "居住+藏宝",
+            "luxury_level": 6,
+            "ecological_integration": "高"
+          }
+        ],
+        "archaeological_parallel": "四川乐山崖墓+福建土楼",
+        "architectural_significance": "崖墓是汉代特色葬俗·反映对'高处'与'神圣'的联想"
+      },
+      {
+        "type_name": "水景别墅型",
+        "english_name": "Waterside Villa Type",
+        "features": [
+          "依水而建",
+          "亭台楼阁",
+          "水景环绕",
+          "豪华装饰"
+        ],
+        "representative_caves": [
+          {
+            "cave_name": "碧波潭",
+            "owner": "万圣龙王",
+            "location": "乱石山",
+            "chapter": "第 62-63 回",
+            "spatial_structure": "龙宫式+水景+亭台",
+            "function": "居住+宴饮",
+            "luxury_level": 10,
+            "ecological_integration": "极高·与水景一体"
+          },
+          {
+            "cave_name": "通天河龙宫",
+            "owner": "金鱼精",
+            "location": "通天河",
+            "chapter": "第 47-49 回",
+            "spatial_structure": "水底龙宫+水晶宫",
+            "function": "居住+祭祀",
+            "luxury_level": 8,
+            "ecological_integration": "极高·水下"
+          },
+          {
+            "cave_name": "水晶宫",
+            "owner": "东海龙王",
+            "location": "东海",
+            "chapter": "第 3 回",
+            "spatial_structure": "海底龙宫+水晶建筑",
+            "function": "居住+政务",
+            "luxury_level": 10,
+            "ecological_integration": "极高·海底"
+          }
+        ],
+        "archaeological_parallel": "苏州园林+江南水乡别墅",
+        "architectural_significance": "水景别墅反映明代江南园林审美·龙王宫殿折射皇家建筑"
+      },
+      {
+        "type_name": "地下迷宫型",
+        "english_name": "Underground Labyrinth Type",
+        "features": [
+          "地下深挖",
+          "多层结构",
+          "迷宫通道",
+          "暗室机关"
+        ],
+        "representative_caves": [
+          {
+            "cave_name": "无底洞",
+            "owner": "老鼠精",
+            "location": "陷空山",
+            "chapter": "第 80-83 回",
+            "spatial_structure": "无限深挖+多层+迷宫",
+            "function": "居住+囚禁+藏匿",
+            "luxury_level": 7,
+            "ecological_integration": "低·人造"
+          },
+          {
+            "cave_name": "狮驼洞",
+            "owner": "三大魔王",
+            "location": "狮驼岭",
+            "chapter": "第 74-77 回",
+            "spatial_structure": "巨型地下+人骨装饰+多层",
+            "function": "居住+屠杀+藏尸",
+            "luxury_level": 3,
+            "ecological_integration": "低·恐怖"
+          },
+          {
+            "cave_name": "九曲盘桓洞",
+            "owner": "九灵元圣",
+            "location": "竹节山",
+            "chapter": "第 89-90 回",
+            "spatial_structure": "九曲迷宫+石室+暗道",
+            "function": "居住+防御",
+            "luxury_level": 6,
+            "ecological_integration": "中"
+          }
+        ],
+        "archaeological_parallel": "秦始皇陵地宫+明代地窖",
+        "architectural_significance": "地下迷宫反映对'冥界'的想象·与帝王陵墓对应"
+      },
+      {
+        "type_name": "山中宫殿型",
+        "english_name": "Mountain Palace Type",
+        "features": [
+          "山中开凿",
+          "宫殿式",
+          "雕梁画栋",
+          "豪华装饰"
+        ],
+        "representative_caves": [
+          {
+            "cave_name": "火云洞",
+            "owner": "红孩儿",
+            "location": "号山",
+            "chapter": "第 40-42 回",
+            "spatial_structure": "山中宫殿+火池+石室",
+            "function": "居住+修炼",
+            "luxury_level": 7,
+            "ecological_integration": "中·火主题"
+          },
+          {
+            "cave_name": "小西天·小雷音寺",
+            "owner": "黄眉怪",
+            "location": "小西天",
+            "chapter": "第 65-66 回",
+            "spatial_structure": "山中寺庙+伪佛殿+人种袋",
+            "function": "居住+伪佛事",
+            "luxury_level": 9,
+            "ecological_integration": "低·伪神圣"
+          }
+        ],
+        "archaeological_parallel": "武当山金殿+布达拉宫",
+        "architectural_significance": "山中宫殿反映明代山岳崇拜+皇家建筑融合"
+      }
+    ],
+    "architecture_insights": [
+      "5 大洞府类型覆盖明代主要建筑形态",
+      "天然溶洞型最古老·反映明代对洞穴崇拜的传统",
+      "崖墓型来自汉代葬俗·反映对'神圣高处'的联想",
+      "水景别墅型折射江南园林审美·龙王宫殿对应皇家建筑",
+      "地下迷宫型对应帝王陵墓·反映对'冥界'的想象",
+      "山中宫殿型融合山岳崇拜与皇家建筑·最豪华",
+      "洞府豪华度与妖怪背景正相关：草根住溶洞·贵族住宫殿"
+    ],
+    "architectural_classification_stats": {
+      "total_caves": 14,
+      "type_distribution": {
+        "天然溶洞型": 3,
+        "崖墓型": 2,
+        "水景别墅型": 3,
+        "地下迷宫型": 3,
+        "山中宫殿型": 2
+      },
+      "avg_luxury": 6.6,
+      "most_luxurious": "碧波潭 + 水晶宫（10/10）",
+      "least_luxurious": "狮驼洞（3/10）"
+    }
+  },
+  "summary": {
+    "artifact_reports": 8,
+    "metallic_artifacts": 5,
+    "composite_artifacts": 3,
+    "avg_hardness": 6.6,
+    "character_costumes": 4,
+    "total_costume_stages": 19,
+    "architectural_types": 5,
+    "total_caves_classified": 14,
+    "avg_luxury": 6.6
+  }
+}
