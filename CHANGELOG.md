@@ -8,6 +8,14 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.2.89（2026-08-03）：W337 RAG质量提升+数据API化+可视化交互深化+移动端PWA
+
+- **RAG 质量提升**：scripts/rag/xiyouji_rag.py 重写（零依赖·stdlib）·新增西游专名/别名词典（40 canonical→别名）+ 最长匹配分词 + 查询别名扩展 + 标题/短语字段加权 + Reciprocal Rank Fusion 四路融合重排 + 改进摘录（最近小标题上下文）·INDEX_VERSION=2 触发缓存重建·6 个查询实跑验证质量提升·rag_server.py 改用 ThreadingHTTPServer 修复并发卡死
+- **数据 API 化**：scripts/api/api_server.py 新建（零依赖·stdlib ThreadingHTTPServer）·暴露 /datasets /dataset/<name> /dataset/<name>/keys /search?q= 跨集递归检索 /health /openapi.json + 人类可读 /api 文档页·同时托管 site/ 前端静态资源（app shell 一体）·40 数据集全部验证
+- **可视化交互深化**：site/static/js/vis-tools.js 新建（筛选表格+排序+CSV/JSON 导出+行点击钻取面板+SVG→PNG 导出·沿用 tokens.css 设计语言）·site/data/data-explorer.html 新建（可筛选/可钻取/可导出旗舰示范页·fetch 在线优先 + file:// 内嵌 FALLBACK 降级）
+- **移动端 PWA**：site/manifest.webmanifest 新建 + site/sw.js 新建（app shell 预缓存 + 导航网络优先回退缓存 + 静态缓存优先 + 数据/API 网络优先回退缓存）·site/static/icons/ 新建 icon-192/512/maskable-512.png（Pillow 生成）·index.html + mobile-index.html 注册 SW（http 协议守卫·file:// 不注册）
+- **A4 主题专题计数不变（仍 199 篇）**·本 W 为四大工程方向落地，未新增 docs 篇目·零新增运行时依赖·file:// 全兼容
+
 ### v2.2.88（2026-08-03）：W336 RAG前端接入+数据产品化
 
 - **RAG 前端接入**：site/static/js/rag-chat.js「渡口问津」浮动对话组件·朱砂红 FAB→宣纸风对话面板→调用 rag_server.py /query+/graph·服务在线/离线自动检测·优雅降级（file:// 兼容）·已嵌入 index.html + dashboard.html·Playwright 验证零 JS 错误

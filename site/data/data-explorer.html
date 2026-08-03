@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>详解西游记 · 数据浏览器</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../system.css">
+<style>
+  :root{
+    --bg:#faf7f2; --paper:#fff; --ink:#23201A; --ink-soft:#6B6455;
+    --accent:#c8463a; --accent-2:#3a6b8c; --line:#d9cdb8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Noto Serif SC","Songti SC",serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  header.top{padding:22px 20px 14px;background:linear-gradient(135deg,#1a1410,#3a2820);color:#f5e9d4}
+  header.top h1{margin:0;font-size:22px}
+  header.top p{margin:6px 0 0;font-size:13px;opacity:.85}
+  .banner{margin:12px 16px;padding:10px 14px;border-radius:8px;font-size:13px;border:1px solid var(--line);background:#fff7ec}
+  .banner.offline{border-color:#d9b36b;background:#fdf3df}
+  .layout{display:flex;gap:16px;padding:0 16px 40px;align-items:flex-start}
+  .picker{width:230px;flex:0 0 230px;max-height:70vh;overflow:auto;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+  .picker .item{padding:10px 12px;border-bottom:1px solid var(--line);cursor:pointer;font-size:14px}
+  .picker .item:hover{background:rgba(200,70,58,.06)}
+  .picker .item.active{background:rgba(200,70,58,.12);color:var(--accent);font-weight:600}
+  .picker .item small{display:block;color:var(--ink-soft);font-size:11px}
+  .main{flex:1;min-width:0}
+  .keytabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
+  .keytab{padding:6px 12px;border:1px solid var(--line);border-radius:999px;cursor:pointer;font-size:13px;background:var(--paper)}
+  .keytab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .chartbox{margin:8px 0 14px;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px}
+  .chartbox h3{margin:4px 6px 8px;font-size:14px;color:var(--accent-2)}
+  .toolbar2{display:flex;gap:8px;margin:0 0 10px;flex-wrap:wrap;align-items:center}
+  .toolbar2 .vt-btn{padding:7px 12px;border:1px solid var(--accent-2);background:var(--accent-2);color:#fff;border-radius:8px;cursor:pointer;font-size:13px}
+  .meta{color:var(--ink-soft);font-size:13px;margin:2px 0 8px}
+  .hint{color:var(--ink-soft);font-size:12px;margin-top:8px}
+  @media(max-width:720px){.layout{flex-direction:column}.picker{width:100%;flex:none;max-height:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>详解西游记 · 数据浏览器</h1>
+  <p>W337 可视化交互深化示范 —— 筛选 / 钻取 / 导出（复用 vis-tools.js 与数据 API）</p>
+</header>
+
+<div id="banner" class="banner">正在连接数据 API…</div>
+
+<div class="layout">
+  <nav id="picker" class="picker" aria-label="数据集列表"></nav>
+  <main class="main">
+    <div id="meta" class="meta"></div>
+    <div id="keytabs" class="keytabs"></div>
+    <div class="toolbar2">
+      <button class="vt-btn" id="pngBtn">导出图表 PNG</button>
+      <span class="hint">点击表格任意行可钻取详情；表头可点击排序；顶部输入框可筛选。</span>
+    </div>
+    <div id="chartbox" class="chartbox" style="display:none">
+      <h3 id="chartTitle"></h3>
+      <div id="chartHost"></div>
+    </div>
+    <div id="tableHost"></div>
+  </main>
+</div>
+
+<script src="../static/js/vis-tools.js"></script>
+<script>
+// ---- 离线降级：file:// 下无 API 时，内置 81-hardships 聚合示例 ----
+var FALLBACK = {
+  "81-hardships": {
+    meta: { title: "八十一难（离线示例）", note: "内置聚合，启动 API 可得完整 81 难明细" },
+    by_cause: { "如来/观音安排": 27, "真火锻性": 28, "天界/西域佛祖下凡收徒": 16, "人心自生的障碍": 10 },
+    by_ending: { "被收走（有后台）": 44, "被打死（无后台）": 37 },
+    by_difficulty: { "高": 22, "中": 41, "低": 18 }
+  }
+};
+var API_BASE = location.origin + location.pathname.replace(/\/site\/.*/, "") ;
+// 直接相对请求（同源）：用空基址让 /dataset 命中 API（若由 API 托管）或 file:// 失败
+var API_OK = false;
+var CUR = { name: null, data: null, key: null };
+
+function setBanner(html, offline) {
+  var b = document.getElementById("banner");
+  b.innerHTML = html;
+  b.className = "banner" + (offline ? " offline" : "");
+}
+
+function apiFetch(path) {
+  // 尝试本页同源的 API；file:// 下 fetch 会抛错，被 catch 捕获走降级
+  return fetch(path, { cache: "no-store" }).then(function (r) {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  });
+}
+
+function loadDatasets() {
+  apiFetch("/datasets").then(function (list) {
+    API_OK = true;
+    setBanner("已连接数据 API · 共 " + list.length + " 个数据集 · 支持筛选/钻取/导出。", false);
+    renderPicker(list.map(function (d) { return { name: d.name, title: d.title, size: d.size_kb }; }));
+  }).catch(function () {
+    API_OK = false;
+    setBanner("离线模式（file://）：仅内置示例可用。启动 <code>python scripts/api/api_server.py</code> 后通过 http://127.0.0.1:8787/data/data-explorer.html 访问，即可浏览全部 40 个数据集。", true);
+    var names = Object.keys(FALLBACK);
+    renderPicker(names.map(function (n) { return { name: n, title: (FALLBACK[n].meta || {}).title || n, size: null }; }));
+  });
+}
+
+function renderPicker(items) {
+  var box = document.getElementById("picker");
+  box.innerHTML = "";
+  items.forEach(function (it) {
+    var div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = it.name + (it.title ? "<small>" + it.title + "</small>" : "") +
+      (it.size ? "<small>" + it.size + " KB</small>" : "");
+    div.addEventListener("click", function () { selectDataset(it.name, div); });
+    box.appendChild(div);
+  });
+  if (items.length) selectDataset(items[0].name, box.firstChild);
+}
+
+function selectDataset(name, el) {
+  document.querySelectorAll("#picker .item").forEach(function (n) { n.classList.remove("active"); });
+  if (el) el.classList.add("active");
+  CUR.name = name;
+  var load = API_OK
+    ? apiFetch("/dataset/" + name)
+    : Promise.resolve(FALLBACK[name] || null);
+  load.then(function (data) {
+    if (!data) { document.getElementById("meta").textContent = "（该数据集需启动 API 才能获取）"; return; }
+    CUR.data = data;
+    var title = (data.meta && data.meta.title) || name;
+    document.getElementById("meta").textContent = "数据集：" + name + (data.meta && data.meta.note ? " · " + data.meta.note : "");
+    renderKeyTabs(data);
+  }).catch(function () {
+    document.getElementById("meta").textContent = "加载失败。";
+  });
+}
+
+function renderKeyTabs(data) {
+  var tabs = document.getElementById("keytabs");
+  tabs.innerHTML = "";
+  var keys = Object.keys(data).filter(function (k) { return k !== "meta"; });
+  if (!keys.length) { document.getElementById("tableHost").textContent = "（无表格数据）"; return; }
+  function choose(k) {
+    CUR.key = k;
+    document.querySelectorAll("#keytabs .keytab").forEach(function (n) { n.classList.remove("active"); });
+    Array.prototype.slice.call(tabs.children).find(function (c) { return c.dataset.k === k; }).classList.add("active");
+    renderKey(k, data[k]);
+  }
+  keys.forEach(function (k) {
+    var t = document.createElement("span");
+    t.className = "keytab"; t.dataset.k = k; t.textContent = k;
+    t.addEventListener("click", function () { choose(k); });
+    tabs.appendChild(t);
+  });
+  choose(keys[0]);
+}
+
+function renderKey(key, value) {
+  document.getElementById("chartbox").style.display = "none";
+  var host = document.getElementById("tableHost");
+  if (Array.isArray(value) && value.length && typeof value[0] === "object") {
+    renderArrayTable(key, value);
+  } else if (value && typeof value === "object") {
+    // 对象 → 柱状图 + 表
+    renderObjectView(key, value);
+  } else if (Array.isArray(value)) {
+    renderArrayTable(key, value.map(function (v, i) { return { "#": i + 1, value: v }; }));
+  } else {
+    host.innerHTML = "<p class='meta'>" + key + "：<b>" + String(value) + "</b></p>";
+  }
+}
+
+function pickColumns(rows) {
+  var cols = [];
+  rows.slice(0, 50).forEach(function (r) {
+    Object.keys(r).forEach(function (k) { if (cols.indexOf(k) < 0) cols.push(k); });
+  });
+  return cols.slice(0, 7).map(function (k) { return { key: k, label: k }; });
+}
+
+function renderArrayTable(key, rows) {
+  VisTools.makeFilterableTable({
+    container: "#tableHost",
+    columns: pickColumns(rows),
+    rows: rows,
+    searchKeys: pickColumns(rows).map(function (c) { return c.key; }),
+    onRowClick: function (row) { openRowDrill(key, row); }
+  });
+}
+
+function renderObjectView(key, obj) {
+  var entries = Object.keys(obj).map(function (k) { return { label: k, value: obj[k] }; });
+  // 柱状图（横向）
+  var max = Math.max.apply(null, entries.map(function (e) { return +e.value || 0; })) || 1;
+  var colors = ["#c8463a", "#3a6b8c", "#C9A063", "#6B8E5A", "#8c2a2a", "#b07a3a"];
+  var svg = '<svg id="chart" viewBox="0 0 520 ' + (entries.length * 34 + 10) + '" width="100%" style="max-width:560px">';
+  entries.forEach(function (e, i) {
+    var w = Math.round(((+e.value || 0) / max) * 360);
+    svg += '<text x="0" y="' + (i * 34 + 18) + '" font-size="12" fill="#23201A">' + e.label + "</text>";
+    svg += '<rect x="120" y="' + (i * 34 + 6) + '" width="' + w + '" height="18" rx="3" fill="' + colors[i % colors.length] + '"/>';
+    svg += '<text x="' + (124 + w) + '" y="' + (i * 34 + 19) + '" font-size="11" fill="#6B6455">' + e.value + "</text>";
+  });
+  svg += "</svg>";
+  document.getElementById("chartTitle").textContent = "分布：" + key;
+  document.getElementById("chartHost").innerHTML = svg;
+  document.getElementById("chartbox").style.display = "block";
+  VisTools.makeFilterableTable({
+    container: "#tableHost",
+    columns: [{ key: "label", label: "项" }, { key: "value", label: "值" }],
+    rows: entries,
+    onRowClick: function (row) { openRowDrill(key, row); }
+  });
+}
+
+function openRowDrill(key, row) {
+  var html = "<p><b>所属键：</b>" + key + "</p><table><tbody>";
+  Object.keys(row).forEach(function (k) {
+    var v = row[k];
+    if (v && typeof v === "object") v = JSON.stringify(v);
+    html += "<tr><th>" + k + "</th><td>" + String(v) + "</td></tr>";
+  });
+  html += "</tbody></table>";
+  VisTools.openDrill((row.name || row.label || key), html);
+}
+
+document.getElementById("pngBtn").addEventListener("click", function () {
+  var svg = document.querySelector("#chartHost svg");
+  VisTools.exportSVG(svg, (CUR.name || "chart") + "-" + (CUR.key || "chart") + ".png");
+});
+
+loadDatasets();
+</script>
+</body>
+</html>
