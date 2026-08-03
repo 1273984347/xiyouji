@@ -8,6 +8,14 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.2.91（2026-08-03）：W339 知识图谱探索器（纯 SVG 力导向·多图·/graph 端点）
+
+- **知识图谱探索器**：新建 `site/data/graph-explorer.html` —— 零依赖纯 SVG 力导向（复用 dukou 范式，不引 D3/CDN，适配 file://）；支持多图切换（佛法=AI=西游 三元映射 20 节点/20 边 + 取经团队人物关系 22 节点/32 边）、按类型筛选、维度标签切换（佛学/AI/西游）、节点拖拽、点击钻取（详情+邻居）、SVG/PNG/JSON 导出
+- **data API 新增 /graph 端点**：`scripts/api/api_server.py` 新增 `GET /graph`（图集清单）与 `GET /graph/<name>`（nodes/edges 归一化）；注册 `yuanqi-graph`（由 `scripts/output/yuanqi_*.csv` 生成 `dataset/yuanqi-graph.json`）+ `character-relationship-3d` 两图；同时生成 `site/static/js/graph-fallback.js` 离线内嵌图集
+- **数据中枢接入图谱**：`site/dashboard.html` 数据中枢新增「知识图谱探索器」入口卡片；`site/static/js/datahub-index.js` 扩至 41 数据集（含 yuanqi-graph）
+- **新功能 E2E 回归**：`tests/e2e/test_graph.js` 覆盖 graph-explorer 的 file:// 离线渲染 + 钻取 + 筛选，以及 /graph 在线断言（2 图集、yuanqi 20/20、切换人物图 22 节点），全部通过 ✅
+- 可视化/交互页计数 84 → 85（新增 graph-explorer 1 页）；dataset/ 40 → 41（新增 yuanqi-graph.json）
+
 ### v2.2.90（2026-08-03）：W338 收口价值（数据API接入+vis-tools范式复用+新功能E2E回归）
 
 - **数据 API 接入全站**：新建 `site/data/search.html`（全站搜索，在线 `/search` 跨 40 数据集递归检索 + 离线 file:// 内置索引降级，复用 vis-tools 表格/钻取）；`site/dashboard.html` 新增「数据中枢」section（在线拉 `/datasets` + 离线内置索引 `site/static/js/datahub-index.js`，卡片跳转数据浏览器/搜索/两个范式视图）

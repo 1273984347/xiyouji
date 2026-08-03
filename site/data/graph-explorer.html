@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>知识图谱探索器 · 详解西游记</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../system.css">
+<style>
+  :root{ --zhu:#c8463a; --qing:#3a6b8c; --xuan:#faf7f2; --ink:#2b2118; --line:#d9cdb8; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Noto Sans SC","PingFang SC",system-ui,sans-serif;background:var(--xuan);color:var(--ink)}
+  header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--line);background:#fffdf9}
+  header h1{font-family:"Noto Serif SC",serif;font-size:20px;margin:0;color:var(--zhu)}
+  header .sub{font-size:13px;color:#7a6f5e}
+  #banner{margin-left:auto;font-size:12px;padding:3px 10px;border-radius:20px;background:#f0e7d6;color:#7a6f5e}
+  #banner.online{background:#e3f0e8;color:#2f7d52}
+  .layout{display:grid;grid-template-columns:240px 1fr 280px;gap:0;height:calc(100vh - 56px)}
+  .side{border-right:1px solid var(--line);padding:14px;overflow:auto;background:#fffdf9}
+  .stage{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,#fffdf9,#f4ece0)}
+  .drill{border-left:1px solid var(--line);padding:14px;overflow:auto;background:#fffdf9;display:none}
+  .drill.show{display:block}
+  .side h3{font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:14px 0 6px;text-transform:uppercase}
+  .side h3:first-child{margin-top:0}
+  select,input[type=text]{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;font-size:13px;background:#fff;color:var(--ink)}
+  .grp{display:flex;align-items:center;gap:7px;font-size:13px;margin:4px 0;cursor:pointer}
+  .grp input{accent-color:var(--zhu)}
+  .swatch{width:12px;height:12px;border-radius:50%;display:inline-block;border:1px solid #fff}
+  .dimbtns{display:flex;gap:5px;flex-wrap:wrap}
+  .dimbtns button{flex:1;font-size:12px;padding:5px 0;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)}
+  .dimbtns button.active{background:var(--qing);color:#fff;border-color:var(--qing)}
+  .exp{display:flex;gap:6px;flex-wrap:wrap}
+  .exp button{flex:1;min-width:64px;font-size:12px;padding:6px 0;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)}
+  .exp button:hover{border-color:var(--zhu);color:var(--zhu)}
+  .legend{font-size:12px;color:#7a6f5e;line-height:1.7}
+  #graphBox svg{width:100%;height:100%;display:block;cursor:grab}
+  #graphBox svg:active{cursor:grabbing}
+  #graphBox text{font-family:"Noto Serif SC",serif;pointer-events:none}
+  .gnode{cursor:pointer;user-select:none}
+  .gnode:hover{opacity:.78}
+  .drill h2{font-family:"Noto Serif SC",serif;font-size:18px;margin:2px 0 4px;color:var(--zhu)}
+  .drill .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;background:#f0e7d6;color:#7a6f5e;margin-bottom:8px}
+  .drill .desc{font-size:13px;line-height:1.7;color:#4a4136}
+  .drill .alias{margin:8px 0;padding:8px 10px;background:#f7f1e6;border-radius:8px;font-size:13px}
+  .drill .alias b{color:var(--qing)}
+  .drill .nbr{list-style:none;padding:0;margin:6px 0}
+  .drill .nbr li{font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:6px;margin:4px 0;cursor:pointer;display:flex;justify-content:space-between;gap:8px}
+  .drill .nbr li:hover{border-color:var(--zhu);color:var(--zhu)}
+  .drill .nbr .rel{color:#8a7d68;font-size:12px}
+  .hint{font-size:12px;color:#9a8f7c;margin-top:10px;line-height:1.6}
+</style>
+</head>
+<body>
+<header>
+  <h1>知识图谱探索器</h1>
+  <span class="sub">佛法=AI=西游 · 取经人物关系 · 力导向可交互</span>
+  <span id="banner">加载中…</span>
+</header>
+<div class="layout">
+  <aside class="side">
+    <h3>图谱</h3>
+    <select id="graphSel"></select>
+    <h3>按类型筛选</h3>
+    <div id="grpFilters"></div>
+    <h3>标签维度</h3>
+    <div class="dimbtns" id="dimBtns"></div>
+    <h3>搜索节点</h3>
+    <input type="text" id="search" placeholder="节点名（如 悟空 / 阿赖耶识）">
+    <h3>导出</h3>
+    <div class="exp">
+      <button id="exSvg">SVG</button>
+      <button id="exPng">PNG</button>
+      <button id="exJson">JSON</button>
+    </div>
+    <h3>图例</h3>
+    <div class="legend" id="legend"></div>
+    <div class="hint">拖拽节点可调整布局；点击节点查看详情与邻居。在线模式数据来自 <code>/graph</code>，离线回退内嵌图集。</div>
+  </aside>
+  <section class="stage">
+    <div id="graphBox"></div>
+  </section>
+  <aside class="drill" id="drill"></aside>
+</div>
+
+<script src="../static/js/graph-fallback.js"></script>
+<script>
+(function(){
+  "use strict";
+  var GRAPH=null, GRAPH_NAME="yuanqi-graph";
+  var nodePos=new Map(), focusNode=null, draggingId=null, dragMoved=false;
+  var activeGroups=new Set(), labelDim="", searchTerm="";
+  var PALETTE=["#3a6b8c","#c8463a","#d98a3d","#4f9d8a","#8a6db0","#d4a017","#6b8e23","#b5651d","#708090","#cd5c5c"];
+  function colorFor(group, map){
+    if(map && map[group]) return map[group];
+    var h=0; for(var i=0;i<group.length;i++) h=(h*31+group.charCodeAt(i))>>>0;
+    return PALETTE[h%PALETTE.length];
+  }
+  function xmlEsc(s){return (s==null?"":String(s)).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function shortLabel(s){ if(!s) return "?"; var x=String(s); var i=x.indexOf("（"); if(i>0)x=x.slice(0,i); var j=x.indexOf("/"); if(j>0)x=x.slice(0,j); return x.trim()||s.slice(0,10); }
+
+  function setBanner(online,msg){ var b=document.getElementById("banner"); b.textContent=msg||(online?"在线：数据来自 /graph":"离线：内嵌图集（启动数据 API 见完整在线版）"); b.className=online?"online":""; }
+
+  async function loadGraphList(){
+    try{
+      var r=await fetch("/graph"); if(!r.ok) throw 0;
+      var list=await r.json();
+      return {online:true, list:list};
+    }catch(e){
+      var fb=window.GRAPH_LIST||[];
+      return {online:false, list:fb};
+    }
+  }
+  async function loadGraph(name){
+    try{
+      var r=await fetch("/graph/"+name); if(!r.ok) throw 0;
+      var g=await r.json(); setBanner(true); return g;
+    }catch(e){
+      var fb=window.GRAPH_FALLBACK&&window.GRAPH_FALLBACK[name];
+      setBanner(false); return fb||null;
+    }
+  }
+
+  function buildControls(){
+    var meta=GRAPH.meta||{};
+    // group filters
+    var groups={}; GRAPH.nodes.forEach(function(n){ if(n.group) groups[n.group]=(groups[n.group]||0)+1; });
+    var gf=document.getElementById("grpFilters"); gf.innerHTML="";
+    Object.keys(groups).sort().forEach(function(g){
+      activeGroups.add(g);
+      var lab=document.createElement("label"); lab.className="grp";
+      lab.innerHTML='<input type="checkbox" checked data-g="'+xmlEsc(g)+'"><span class="swatch" style="background:'+colorFor(g,meta.group_colors)+'"></span>'+xmlEsc(g)+' <span style="color:#9a8f7c">('+groups[g]+')</span>';
+      gf.appendChild(lab);
+    });
+    gf.querySelectorAll("input").forEach(function(cb){
+      cb.addEventListener("change",function(){ var g=cb.getAttribute("data-g"); if(cb.checked)activeGroups.add(g); else activeGroups.delete(g); renderGraph(); });
+    });
+    // dimension toggle
+    var db=document.getElementById("dimBtns"); db.innerHTML="";
+    var dims=meta.dimensions||[];
+    if(dims.length){
+      labelDim=dims[0];
+      dims.forEach(function(d){
+        var b=document.createElement("button"); b.textContent=d; if(d===labelDim)b.className="active";
+        b.addEventListener("click",function(){ labelDim=d; db.querySelectorAll("button").forEach(function(x){x.className="";}); b.className="active"; renderGraph(); });
+        db.appendChild(b);
+      });
+    }else{ db.innerHTML='<span class="legend">本图无多维度标签</span>'; }
+    // legend
+    var lg=document.getElementById("legend"); lg.innerHTML="";
+    Object.keys(groups).sort().forEach(function(g){
+      lg.innerHTML+='<div><span class="swatch" style="background:'+colorFor(g,meta.group_colors)+'"></span> '+xmlEsc(g)+'</div>';
+    });
+  }
+
+  function labelOf(n){
+    if(labelDim && n.aliases && n.aliases[labelDim]) return n.aliases[labelDim];
+    return n.label||n.id;
+  }
+  function visibleSet(){
+    var vis=new Set();
+    GRAPH.nodes.forEach(function(n){
+      var okG=activeGroups.has(n.group);
+      var okS=true;
+      if(searchTerm){
+        var hay=[n.label||"",n.id].concat(n.aliases?Object.values(n.aliases):[]).join(" ");
+        okS=hay.toLowerCase().indexOf(searchTerm.toLowerCase())>=0;
+      }
+      if(okG&&okS) vis.add(n.id);
+    });
+    return vis;
+  }
+  function layout(ids, edges){
+    var W=900,H=560,cx=W/2,cy=H/2;
+    var k=0;
+    ids.forEach(function(id){
+      if(nodePos.has(id)) return;
+      var ang=Math.random()*Math.PI*2;
+      var idx=nodePos.size+(k++);
+      var a=(Math.PI*2*idx)/Math.max(ids.length,1)-Math.PI/2;
+      var R=Math.min(W,H)/2-70;
+      nodePos.set(id,{x:cx+R*Math.cos(a),y:cy+R*Math.sin(a)});
+    });
+    var anchor=new Map();
+    ids.forEach(function(id){ var p=nodePos.get(id); anchor.set(id,{x:p.x,y:p.y}); });
+    var iters=ids.length>60?90:200, ideal=120;
+    for(var it=0;it<iters;it++){
+      var fx=new Map(),fy=new Map();
+      ids.forEach(function(id){fx.set(id,0);fy.set(id,0);});
+      for(var i=0;i<ids.length;i++)for(var j=i+1;j<ids.length;j++){
+        var a=nodePos.get(ids[i]),b=nodePos.get(ids[j]);
+        var dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy; if(d2<1)d2=1;
+        var d=Math.sqrt(d2),rep=6200/d2,ux=dx/d,uy=dy/d;
+        fx.set(ids[i],fx.get(ids[i])+rep*ux); fy.set(ids[i],fy.get(ids[i])+rep*uy);
+        fx.set(ids[j],fx.get(ids[j])-rep*ux); fy.set(ids[j],fy.get(ids[j])-rep*uy);
+      }
+      edges.forEach(function(e){
+        var a=nodePos.get(e.source),b=nodePos.get(e.target); if(!a||!b)return;
+        var dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)||1;
+        var f=(d-ideal)*0.05,ux=dx/d,uy=dy/d;
+        fx.set(e.source,fx.get(e.source)+f*ux); fy.set(e.source,fy.get(e.source)+f*uy);
+        fx.set(e.target,fx.get(e.target)-f*ux); fy.set(e.target,fy.get(e.target)-f*uy);
+      });
+      var cool=1-it/iters;
+      ids.forEach(function(id){
+        var p=nodePos.get(id),an=anchor.get(id);
+        fx.set(id,fx.get(id)+(cx-p.x)*0.01+(an.x-p.x)*0.085);
+        fy.set(id,fy.get(id)+(cy-p.y)*0.01+(an.y-p.y)*0.085);
+        p.x+=Math.max(-18,Math.min(18,fx.get(id)*cool));
+        p.y+=Math.max(-18,Math.min(18,fy.get(id)*cool));
+        p.x=Math.max(28,Math.min(W-28,p.x)); p.y=Math.max(28,Math.min(H-28,p.y));
+      });
+    }
+    return {W:W,H:H};
+  }
+  function renderGraph(){
+    if(!GRAPH){return;}
+    var vis=visibleSet();
+    var edges=GRAPH.edges.filter(function(e){return vis.has(e.source)&&vis.has(e.target);});
+    var ids=[];
+    vis.forEach(function(id){ ids.push(id); });
+    if(!ids.length){ document.getElementById("graphBox").innerHTML='<p style="padding:20px;color:#9a8f7c">无匹配节点，调整筛选条件。</p>'; return; }
+    var dims=layout(ids,edges);
+    var deg=new Map(); edges.forEach(function(e){ deg.set(e.source,(deg.get(e.source)||0)+1); deg.set(e.target,(deg.get(e.target)||0)+1); });
+    var maxDeg=Math.max.apply(null,ids.map(function(i){return deg.get(i)||0;})), minDeg=Math.min.apply(null,ids.map(function(i){return deg.get(i)||0;}));
+    function rad(id){ var d=deg.get(id)||0; if(maxDeg===minDeg)return 8; return 6+(d-minDeg)/(maxDeg-minDeg)*10; }
+    var meta=GRAPH.meta||{}, nmap={};
+    GRAPH.nodes.forEach(function(n){ nmap[n.id]=n; });
+    var focusNbr=new Set();
+    if(focusNode){ edges.forEach(function(e){ if(e.source===focusNode)focusNbr.add(e.target); if(e.target===focusNode)focusNbr.add(e.source); }); }
+    var svg='<svg viewBox="0 0 '+dims.W+' '+dims.H+'" preserveAspectRatio="xMidYMid meet">';
+    svg+='<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9c6b3f"/></marker></defs>';
+    edges.forEach(function(e){
+      var p1=nodePos.get(e.source),p2=nodePos.get(e.target); if(!p1||!p2)return;
+      var ra=rad(e.source),rb=rad(e.target);
+      var dx=p2.x-p1.x,dy=p2.y-p1.y,d=Math.sqrt(dx*dx+dy*dy)||1,ux=dx/d,uy=dy/d;
+      var x1=p1.x+ux*ra,y1=p1.y+uy*ra,x2=p2.x-ux*(rb+6),y2=p2.y-uy*(rb+6);
+      var mx=(x1+x2)/2,my=(y1+y2)/2;
+      var isF=focusNode&&(e.source===focusNode||e.target===focusNode);
+      svg+='<line x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'" stroke="'+(isF?"#c8463a":"#bb8a5f")+'" stroke-width="'+(isF?3:1.4)+'" opacity="'+(isF?0.95:0.55)+'" marker-end="url(#arr)"/>';
+      if(e.relation) svg+='<text x="'+mx.toFixed(1)+'" y="'+(my-4).toFixed(1)+'" fill="#C9A063" font-size="11" text-anchor="middle">'+xmlEsc(shortLabel(e.relation))+'</text>';
+    });
+    ids.forEach(function(id){
+      var p=nodePos.get(id),n=nmap[id]; if(!p||!n)return;
+      var r=rad(id), isHub=(deg.get(id)===maxDeg&&maxDeg>1), isF=(id===focusNode), isN=!isF&&focusNode&&focusNbr.has(id);
+      var fill=isF?"#d4a017":(isHub?"#c8463a":colorFor(n.group,meta.group_colors));
+      var stroke=isF?"#8a5a00":(isN?"#d4a017":"#fff"), sw=isF?3:(isN?2:1.5);
+      var lab=labelOf(n); if(lab.length>9)lab=lab.slice(0,9)+"…";
+      svg+='<circle class="gnode" data-id="'+xmlEsc(id)+'" cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'"/>';
+      svg+='<text class="gnode" data-id="'+xmlEsc(id)+'" x="'+p.x.toFixed(1)+'" y="'+(p.y-r-5).toFixed(1)+'" fill="#2b2118" font-size="12" text-anchor="middle">'+xmlEsc(lab)+'</text>';
+    });
+    svg+='</svg>';
+    var box=document.getElementById("graphBox"); box.innerHTML=svg;
+    // 拖拽/点击统一由 box 容器承接（box 在重渲染间持续存在，避免 SVG 替换丢失监听）
+    if(!box._wired){
+      box._wired=true;
+      box.addEventListener("pointerdown",function(ev){
+        var t=ev.target; if(!t||!t.getAttribute||!t.getAttribute("data-id"))return;
+        draggingId=t.getAttribute("data-id"); dragMoved=false;
+      });
+      box.addEventListener("pointermove",function(ev){
+        if(!draggingId)return;
+        var svgEl=box.querySelector("svg"); if(!svgEl)return;
+        var pt=svgEl.createSVGPoint(); pt.x=ev.clientX; pt.y=ev.clientY;
+        var loc=pt.matrixTransform(svgEl.getScreenCTM().inverse());
+        var p=nodePos.get(draggingId); if(!p)return;
+        p.x=Math.max(28,Math.min(dims.W-28,loc.x)); p.y=Math.max(28,Math.min(dims.H-28,loc.y));
+        dragMoved=true; renderGraph();
+      });
+      box.addEventListener("pointerup",function(ev){
+        if(draggingId && !dragMoved){ focusNode=draggingId; renderGraph(); openDrill(draggingId); }
+        draggingId=null;
+      });
+      box.addEventListener("pointerleave",function(){ draggingId=null; });
+    }
+  }
+  function openDrill(id){
+    var n=null; GRAPH.nodes.forEach(function(x){ if(x.id===id)n=x; }); if(!n)return;
+    var panel=document.getElementById("drill"); panel.className="drill show";
+    var html='<button onclick="document.getElementById(\'drill\').className=\'drill\'" style="float:right;border:none;background:none;cursor:pointer;color:#9a8f7c">✕</button>';
+    html+='<h2>'+xmlEsc(labelOf(n))+'</h2>';
+    if(n.aliases) html+='<div class="tag">'+(n.aliases["佛学"]||"")+' · '+(n.aliases["AI"]||"")+' · '+(n.aliases["西游"]||"")+'</div>';
+    else if(n.group) html+='<div class="tag">'+xmlEsc(n.group)+'</div>';
+    if(n.desc) html+='<div class="desc">'+xmlEsc(n.desc)+'</div>';
+    if(n.aliases){
+      html+='<div class="alias"><b>佛学</b> '+xmlEsc(n.aliases["佛学"]||"")+'</div>';
+      html+='<div class="alias"><b>AI</b> '+xmlEsc(n.aliases["AI"]||"")+'</div>';
+      html+='<div class="alias"><b>西游</b> '+xmlEsc(n.aliases["西游"]||"")+'</div>';
+    }
+    var nbrs=[];
+    GRAPH.edges.forEach(function(e){
+      if(e.source===id) nbrs.push({other:e.target,rel:e.relation,dir:"→"});
+      else if(e.target===id) nbrs.push({other:e.source,rel:e.relation,dir:"←"});
+    });
+    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">邻居（'+nbrs.length+'）</h3>';
+    html+='<ul class="nbr">';
+    nbrs.forEach(function(x){
+      var on=null; GRAPH.nodes.forEach(function(y){ if(y.id===x.other)on=y; });
+      var ol=on?labelOf(on):x.other;
+      html+='<li data-id="'+xmlEsc(x.other)+'"><span>'+x.dir+' '+xmlEsc(ol)+'</span><span class="rel">'+xmlEsc(shortLabel(x.rel))+'</span></li>';
+    });
+    html+='</ul>';
+    panel.innerHTML=html;
+    panel.querySelectorAll(".nbr li").forEach(function(li){
+      li.addEventListener("click",function(){ var tid=li.getAttribute("data-id"); focusNode=tid; renderGraph(); openDrill(tid); });
+    });
+  }
+  // ---- 导出 ----
+  function svgString(){ var s=document.querySelector("#graphBox svg"); return s?new XMLSerializer().serializeToString(s):""; }
+  document.getElementById("exSvg").addEventListener("click",function(){
+    var s=svgString(); if(!s)return; var blob=new Blob([s],{type:"image/svg+xml;charset=utf-8"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=GRAPH_NAME+".svg"; a.click();
+  });
+  document.getElementById("exPng").addEventListener("click",function(){
+    var s=svgString(); if(!s)return;
+    var img=new Image(); var svg64="data:image/svg+xml;base64,"+btoa(unescape(encodeURIComponent(s)));
+    img.onload=function(){
+      var c=document.createElement("canvas"); var vb=(document.querySelector("#graphBox svg").getAttribute("viewBox")||"0 0 900 560").split(" ");
+      c.width=+vb[2]||900; c.height=+vb[3]||560; var ctx=c.getContext("2d");
+      ctx.fillStyle="#fffdf9"; ctx.fillRect(0,0,c.width,c.height); ctx.drawImage(img,0,0,c.width,c.height);
+      c.toBlob(function(blob){ var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=GRAPH_NAME+".png"; a.click(); });
+    };
+    img.src=svg64;
+  });
+  document.getElementById("exJson").addEventListener("click",function(){
+    var vis=visibleSet(); var out={name:GRAPH_NAME,meta:GRAPH.meta,
+      nodes:GRAPH.nodes.filter(function(n){return vis.has(n.id);}),
+      edges:GRAPH.edges.filter(function(e){return vis.has(e.source)&&vis.has(e.target);})};
+    var blob=new Blob([JSON.stringify(out,null,1)],{type:"application/json;charset=utf-8"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=GRAPH_NAME+".json"; a.click();
+  });
+  document.getElementById("search").addEventListener("input",function(e){ searchTerm=e.target.value; renderGraph(); });
+
+  async function init(){
+    var info=await loadGraphList();
+    var sel=document.getElementById("graphSel");
+    sel.innerHTML="";
+    info.list.forEach(function(g){
+      var o=document.createElement("option"); o.value=g.name; o.textContent=g.title+" ("+g.node_count+"节点/"+g.edge_count+"边)"; sel.appendChild(o);
+    });
+    if(!info.list.length){ setBanner(false,"离线：无内嵌图集"); return; }
+    sel.addEventListener("change",function(){ GRAPH_NAME=sel.value; loadAndRender().catch(function(e){ console.error("LOADERR: "+e.message); }); });
+    GRAPH_NAME=info.list[0].name;
+    await loadAndRender();
+  }
+  async function loadAndRender(){
+    focusNode=null; nodePos=new Map(); activeGroups=new Set();
+    GRAPH=await loadGraph(GRAPH_NAME);
+    if(!GRAPH){ document.getElementById("graphBox").innerHTML='<p style="padding:20px;color:#9a8f7c">图谱加载失败（离线且无内嵌数据）。</p>'; return; }
+    buildControls(); renderGraph();
+    document.getElementById("drill").className="drill";
+  }
+  init();
+})();
+</script>
+</body>
+</html>

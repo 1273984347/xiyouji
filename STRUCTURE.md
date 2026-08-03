@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.2.90（2026-08-03）— W338 收口价值（数据API接入全站搜索+dashboard数据中枢+vis-tools范式复用+新功能E2E回归） · 全站设计系统（system.css）+ 84 个可视化/交互页 + RAG 对话 + 数据 API 服务 + dataset/ 40 JSON + 100 回逐回解读 + 625 篇研究文档 + PWA 离线。A4 主题专题 199 篇·W334（v2.2.86）全站设计系统·详细变更见 [CHANGELOG.md](CHANGELOG.md)，历史归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
+> 当前版本：v2.2.91（2026-08-03）— W339 知识图谱探索器（纯SVG力导向·多图切换·/graph 端点·数据中枢接入） · 全站设计系统（system.css）+ 85 个可视化/交互页 + RAG 对话 + 数据 API 服务 + dataset/ 41 JSON + 100 回逐回解读 + 625 篇研究文档 + PWA 离线。A4 主题专题 199 篇·W334（v2.2.86）全站设计系统·详细变更见 [CHANGELOG.md](CHANGELOG.md)，历史归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
 
 ## 顶层结构
 
