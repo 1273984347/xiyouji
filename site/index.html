@@ -7,6 +7,7 @@
     <title>详解西游记 · 项目导航</title>
     <link rel="stylesheet" href="tokens.css">
     <link rel="stylesheet" href="system.css">
+    <link rel="manifest" href="manifest.webmanifest">
     <style>
         /* === 仅首页特有样式 === */
         .masthead {
@@ -225,7 +226,7 @@
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">2026 · MIT License · 持续更新中 · v2.2.86</div>
+            <div class="footer-meta">2026 · MIT License · 持续更新中 · v2.2.89</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../docs/00-导读/项目说明.md">项目说明</a>
@@ -235,5 +236,11 @@
         </nav>
     </footer>
     <script src="static/js/rag-chat.js"></script>
+    <script>
+      // PWA：仅在 http(s)/localhost 注册 Service Worker（file:// 不支持）
+      if (location.protocol.indexOf('http') === 0) {
+        navigator.serviceWorker.register('sw.js').catch(function () { /* 离线降级，忽略 */ });
+      }
+    </script>
 </body>
 </html>

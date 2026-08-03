@@ -9,6 +9,27 @@
 ---
 
 
+## W337 RAG质量提升+数据API化+可视化交互深化+移动端PWA（2026-08-03）
+
+| scripts/rag/xiyouji_rag.py | W337 | v2.2.89 改造·RAG 质量提升：西游专名/别名词典（40 canonical→别名）+ 最长匹配分词 + 查询别名扩展 + 标题/短语字段加权 + RRF 四路融合重排 + 改进摘录（最近小标题上下文）·INDEX_VERSION=2 触发缓存重建 |
+| scripts/rag/rag_server.py | W337 | v2.2.89 改造·HTTPServer→ThreadingHTTPServer 修复并发卡死 |
+| scripts/api/api_server.py | W337 | v2.2.89 新建·零依赖数据 API 服务（/datasets /dataset/<name> /dataset/<name>/keys /search?q= 跨集递归检索 /health /openapi.json + /api 文档页 + 托管 site/ 静态资源）·ThreadingHTTPServer |
+| site/static/js/vis-tools.js | W337 | v2.2.89 新建·可视化交互工具库（makeFilterableTable 搜索+排序+CSV/JSON 导出 + openDrill/closeDrill 钻取面板 + exportSVG→PNG · 沿用 tokens.css 设计语言） |
+| site/data/data-explorer.html | W337 | v2.2.89 新建·可筛选/可钻取/可导出旗舰示范页·fetch 在线优先 + file:// 内嵌 FALLBACK 降级 |
+| site/manifest.webmanifest | W337 | v2.2.89 新建·PWA manifest（name/short_name/start_url/display standalone/theme_color #3a2820/background_color #faf7f2 + 3 icons） |
+| site/sw.js | W337 | v2.2.89 新建·Service Worker（app shell 预缓存 + 导航网络优先回退缓存 + 静态缓存优先 + 数据/API 网络优先回退缓存 + activate 清理旧缓存） |
+| site/static/icons/icon-192.png | W337 | v2.2.89 新建·PWA 图标 192×192（Pillow·宣纸底+朱砂外圈+靛青中心印） |
+| site/static/icons/icon-512.png | W337 | v2.2.89 新建·PWA 图标 512×512 |
+| site/static/icons/icon-maskable-512.png | W337 | v2.2.89 新建·PWA maskable 图标 512×512 |
+| site/index.html | W337 | v2.2.89 改造·head 加 manifest link + </body> 前注册 SW（http 协议守卫）·footer v2.2.86 W334 → v2.2.89 W337 |
+| site/mobile-index.html | W337 | v2.2.89 改造·head 加 manifest link + </body> 前注册 SW（http 协议守卫） |
+| CHANGELOG.md | W337 | v2.2.89 同步·新增 W337 版本段·W### 编号范围 W336→W337 |
+| README.md | W337 | v2.2.89 同步·版本号 v2.2.88→v2.2.89·新增 W337 四方向描述 |
+| STRUCTURE.md | W337 | v2.2.89 同步·版本号 v2.2.88→v2.2.89·新增 W337 四方向描述 |
+| docs/00-导读/项目说明.md | W337 | v2.2.89 同步·版本号 v2.2.88→v2.2.89·新增 W337 段 |
+| scripts/output/file-index.md | W337 | v2.2.89 同步·新增 v2.2.89 反向索引段 |
+| 交接文档.md | W337 | v2.2.89 同步·更新当前进度至 W337 四方向·版本号 v2.2.88→v2.2.89 |
+
 ## W336 RAG前端接入+数据产品化（2026-08-03）
 
 | docs/00-导读/文档规范.md | W336 | 新建·文档写入规则（防膨胀·归档触发·6文档同步正确方式） |

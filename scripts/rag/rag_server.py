@@ -23,7 +23,7 @@ import os
 import sys
 import json
 import urllib.parse
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import xiyouji_rag as RAG
@@ -66,7 +66,7 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8777
     host = "127.0.0.1"
-    srv = HTTPServer((host, port), Handler)
+    srv = ThreadingHTTPServer((host, port), Handler)
     print(f"西游·渡口 RAG 服务已启动： http://{host}:{port}")
     print("  按 Ctrl+C 停止。")
     try:
