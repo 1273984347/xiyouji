@@ -43,7 +43,7 @@
 ### v2.2.88（2026-08-03）：W336 RAG前端接入+数据产品化
 
 - **RAG 前端接入**：site/static/js/rag-chat.js「渡口问津」浮动对话组件·朱砂红 FAB→宣纸风对话面板→调用 rag_server.py /query+/graph·服务在线/离线自动检测·优雅降级（file:// 兼容）·已嵌入 index.html + dashboard.html·Playwright 验证零 JS 错误
-- **数据产品化**：scripts/extract_datasets.js 从 80 个 HTML 的 EMBEDDED_DATA 提取 40 个结构化 JSON 至 dataset/ 目录·含 dataset/README.md 数据手册（索引+使用示例+许可）·最大数据集 text-search.json 2MB（70.8 万字原著全文）
+- **数据产品化**：scripts/extract_datasets.js 从 80 个 HTML 的 EMBEDDED_DATA 提取 41 个结构化 JSON 至 dataset/ 目录·含 dataset/README.md 数据手册（索引+使用示例+许可）·最大数据集 text-search.json 2MB（70.8 万字原著全文）
 - **A4 主题专题计数不变（仍 199 篇）**·本 W 为工程化+产品化，未新增 docs 篇目
 
 ### v2.2.87（2026-08-03）：W335 全站设计系统迁移·故宫×Linear
