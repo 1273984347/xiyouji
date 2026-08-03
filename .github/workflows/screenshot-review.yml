@@ -74,7 +74,7 @@ jobs:
           BASELINE="scripts/output/unwrapped-tables-baseline.txt"
           # 已知历史未包裹 table 文件清单（来自 W298 baseline 快照）
           # 仅阻断"新增"未包裹 table，历史问题留作单独修复
-          KNOWN=$(grep -v '^#' "$BASELINE" | sed '/^$/d' | sort -u)
+          KNOWN=$(grep -v '^#' "$BASELINE" 2>/dev/null | sed '/^$/d' | sort -u || true)
 
           # 跑静态扫描，捕获输出（脚本本身会 exit 1，用 || true 容忍）
           OUTPUT=$(python scripts/detect_unwrapped_tables.py --extra site/index.html 2>&1 || true)
