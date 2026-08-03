@@ -205,7 +205,9 @@ async function capture(browser, pageInfo, viewportName, viewports, outDirs) {
 
   page.on('console', (msg) => {
     const type = msg.type();
-    if (type === 'error' || type === 'warning') {
+    // 仅把 console.error 视为阻断项；warning（如 D3 弃用提示、favicon 404）
+    // 属良性噪声，不应令 CI 失败。真实 JS 异常仍由 pageerror 捕获。
+    if (type === 'error') {
       consoleErrors.push({ type, text: msg.text() });
     }
   });
@@ -214,7 +216,9 @@ async function capture(browser, pageInfo, viewportName, viewports, outDirs) {
   });
 
   const start = Date.now();
-  await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
+  // 用 'load' 而非 'networkidle'：动画/SSE/长轮询页面 networkidle 永不 settle，
+  // 会导致 30s 超时被判为 capture error 而阻断 CI。load 后已额外 wait 2s 让 D3 落定。
+  await page.goto(url, { waitUntil: 'load', timeout: 30000 });
   // Give D3 animations a moment to settle.
   await page.waitForTimeout(2000);
 
