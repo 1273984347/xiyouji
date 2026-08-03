@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>详解西游记 · 八十一难可交互视图</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../system.css">
+<style>
+  :root{--bg:#faf7f2;--paper:#fff;--ink:#23201A;--ink-soft:#6B6455;--accent:#c8463a;--accent-2:#3a6b8c;--line:#d9cdb8}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Noto Serif SC","Songti SC",serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  header.top{padding:22px 20px 14px;background:linear-gradient(135deg,#1a1410,#3a2820);color:#f5e9d4}
+  header.top h1{margin:0;font-size:22px}
+  header.top p{margin:6px 0 0;font-size:13px;opacity:.85}
+  .banner{margin:12px 16px;padding:10px 14px;border-radius:8px;font-size:13px;border:1px solid var(--line);background:#fff7ec}
+  .banner.offline{border-color:#d9b36b;background:#fdf3df}
+  .main{padding:0 16px 40px}
+  .meta{color:var(--ink-soft);font-size:13px;margin:10px 0 8px}
+  .keytabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
+  .keytab{padding:6px 12px;border:1px solid var(--line);border-radius:999px;cursor:pointer;font-size:13px;background:var(--paper)}
+  .keytab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .chartbox{margin:8px 0 14px;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px;display:none}
+  .chartbox h3{margin:4px 6px 8px;font-size:14px;color:var(--accent-2)}
+  .hint{color:var(--ink-soft);font-size:12px;margin-top:8px}
+  @media(max-width:720px){header.top h1{font-size:18px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>详解西游记 · 八十一难可交互视图</h1>
+  <p>W338 可视化交互范式复用示范 · 数据集 81-hardships（筛选 / 钻取 / 导出，复用 vis-tools.js + dataset-view.js）</p>
+</header>
+<div id="banner" class="banner">正在连接数据 API…</div>
+<main class="main">
+  <div id="meta" class="meta"></div>
+  <div id="keytabs" class="keytabs"></div>
+  <div class="chartbox" id="chartbox">
+    <h3 id="chartTitle"></h3>
+    <div id="chartHost"></div>
+  </div>
+  <div id="tableHost"></div>
+  <p class="hint">点击表格任意行可钻取详情；表头可排序；顶部搜索框可筛选；工具栏可导出 CSV / JSON。</p>
+</main>
+<script src="../static/js/vis-tools.js"></script>
+<script src="../static/js/dataset-view.js"></script>
+<script>
+window.HD_FB = {"meta": {"title": "", "note": "八十一难分布离线示例（启动 API 得完整统计）"}, "by_cause": {"如来/观音安排": 27, "真正野怪": 28, "天界/西天坐骑下凡": 16, "人心自生的魔障": 10}, "by_ending": {"被接走（有背景）": 49, "被打死（无背景）": 25, "被收编": 7}, "by_difficulty": {"悟空独立解决": 42, "需要搬救兵": 39}, "cross_cause_ending": {"如来/观音安排": {"被接走（有背景）": 23, "被打死（无背景）": 0, "被收编": 4}, "真正野怪": {"被接走（有背景）": 6, "被打死（无背景）": 19, "被收编": 3}, "天界/西天坐骑下凡": {"被接走（有背景）": 16, "被打死（无背景）": 0, "被收编": 0}, "人心自生的魔障": {"被接走（有背景）": 4, "被打死（无背景）": 6, "被收编": 0}}};
+DatasetView.mount({
+  name: "81-hardships",
+  fallback: window.HD_FB,
+  bannerId: "banner", metaId: "meta", keytabsId: "keytabs",
+  chartTitleId: "chartTitle", chartHostId: "chartHost", tableHostId: "tableHost"
+});
+</script>
+</body>
+</html>

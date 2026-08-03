@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>详解西游记 · 人物关系可交互视图</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../system.css">
+<style>
+  :root{--bg:#faf7f2;--paper:#fff;--ink:#23201A;--ink-soft:#6B6455;--accent:#c8463a;--accent-2:#3a6b8c;--line:#d9cdb8}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Noto Serif SC","Songti SC",serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  header.top{padding:22px 20px 14px;background:linear-gradient(135deg,#1a1410,#3a2820);color:#f5e9d4}
+  header.top h1{margin:0;font-size:22px}
+  header.top p{margin:6px 0 0;font-size:13px;opacity:.85}
+  .banner{margin:12px 16px;padding:10px 14px;border-radius:8px;font-size:13px;border:1px solid var(--line);background:#fff7ec}
+  .banner.offline{border-color:#d9b36b;background:#fdf3df}
+  .main{padding:0 16px 40px}
+  .meta{color:var(--ink-soft);font-size:13px;margin:10px 0 8px}
+  .keytabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
+  .keytab{padding:6px 12px;border:1px solid var(--line);border-radius:999px;cursor:pointer;font-size:13px;background:var(--paper)}
+  .keytab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .chartbox{margin:8px 0 14px;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px;display:none}
+  .chartbox h3{margin:4px 6px 8px;font-size:14px;color:var(--accent-2)}
+  .hint{color:var(--ink-soft);font-size:12px;margin-top:8px}
+  @media(max-width:720px){header.top h1{font-size:18px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>详解西游记 · 人物关系可交互视图</h1>
+  <p>W338 可视化交互范式复用示范 · 数据集 character-relationship-3d（筛选 / 钻取 / 导出，复用 vis-tools.js + dataset-view.js）</p>
+</header>
+<div id="banner" class="banner">正在连接数据 API…</div>
+<main class="main">
+  <div id="meta" class="meta"></div>
+  <div id="keytabs" class="keytabs"></div>
+  <div class="chartbox" id="chartbox">
+    <h3 id="chartTitle"></h3>
+    <div id="chartHost"></div>
+  </div>
+  <div id="tableHost"></div>
+  <p class="hint">点击表格任意行可钻取详情；表头可排序；顶部搜索框可筛选；工具栏可导出 CSV / JSON。</p>
+</main>
+<script src="../static/js/vis-tools.js"></script>
+<script src="../static/js/dataset-view.js"></script>
+<script>
+window.CHAR_FB = {"meta": {"title": "人物关系 3D 网络图", "note": "人物关系 3D 离线示例（22 节点 + 32 关系）"}, "nodes": [{"id": 1, "name": "唐僧", "group": 0, "importance": 9, "desc": "金蝉子转世，取经团队核心，意志坚定但常陷险境。"}, {"id": 2, "name": "孙悟空", "group": 0, "importance": 10, "desc": "齐天大圣，神通广大，降妖除魔的主力。"}, {"id": 3, "name": "猪八戒", "group": 0, "importance": 7, "desc": "天蓬元帅转世，贪吃好色但忠心耿耿。"}, {"id": 4, "name": "沙悟净", "group": 0, "importance": 6, "desc": "卷帘大将转世，沉稳老实，挑担随行。"}, {"id": 5, "name": "白龙马", "group": 0, "importance": 5, "desc": "西海龙王三太子，化身为马驮唐僧。"}, {"id": 6, "name": "观音菩萨", "group": 2, "importance": 9, "desc": "南海普陀落伽山，取经事业的策划者与守护者。"}, {"id": 7, "name": "如来佛祖", "group": 2, "importance": 10, "desc": "西天灵山释迦牟尼，最终授经者。"}, {"id": 8, "name": "文殊菩萨", "group": 2, "importance": 6, "desc": "五台山文殊，智慧象征。"}, {"id": 9, "name": "普贤菩萨", "group": 2, "importance": 6, "desc": "峨眉山普贤，行愿象征。"}, {"id": 10, "name": "玉皇大帝", "group": 1, "importance": 9, "desc": "天庭最高统治者，三界之主。"}, {"id": 11, "name": "太白金星", "group": 1, "importance": 7, "desc": "天庭外交官，多次招安悟空。"}, {"id": 12, "name": "二郎神", "group": 1, "importance": 8, "desc": "杨戬，玉帝外甥，擒获悟空。"}, {"id": 13, "name": "托塔天王", "group": 1, "importance": 7, "desc": "李靖，天兵统帅，多次征讨。"}, {"id": 14, "name": "哪吒", "group": 1, "importance": 7, "desc": "三太子，先锋官，与悟空交战。"}, {"id": 15, "name": "牛魔王", "group": 3, "importance": 8, "desc": "平天大圣，悟空结拜大哥，最终归顺。"}, {"id": 16, "name": "铁扇公主", "group": 3, "importance": 6, "desc": "罗刹女，芭蕉扇主人，牛魔王之妻。"}, {"id": 17, "name": "红孩儿", "group": 3, "importance": 7, "desc": "圣婴大王，牛魔王之子，三昧真火。"}, {"id": 18, "name": "白骨精", "group": 3, "importance": 6, "desc": "白骨夫人，三变戏悟空，致师徒离心。"}, {"id": 19, "name": "黄袍怪", "group": 3, "importance": 6, "desc": "奎木狼下凡，与百花羞宿缘。"}, {"id": 20, "name": "六耳猕猴", "group": 3, "importance": 8, "desc": "假悟空，乱真难辨，全书最大悬案。"}, {"id": 21, "name": "东海龙王", "group": 4, "importance": 6, "desc": "敖广，悟空借取定海神针。"}, {"id": 22, "name": "西海龙王", "group": 4, "importance": 5, "desc": "敖闰，白龙马之父。"}], "links": [{"source": 1, "target": 2, "type": "师徒"}, {"source": 1, "target": 3, "type": "师徒"}, {"source": 1, "target": 4, "type": "师徒"}, {"source": 1, "target": 5, "type": "师徒"}, {"source": 1, "target": 6, "type": "庇护"}, {"source": 6, "target": 7, "type": "从属"}, {"source": 6, "target": 1, "type": "指派"}, {"source": 6, "target": 8, "type": "同僚"}, {"source": 6, "target": 9, "type": "同僚"}, {"source": 7, "target": 1, "type": "授经"}, {"source": 2, "target": 10, "type": "反叛"}, {"source": 2, "target": 12, "type": "敌对"}, {"source": 2, "target": 13, "type": "敌对"}, {"source": 2, "target": 14, "type": "敌对"}, {"source": 2, "target": 21, "type": "索取"}, {"source": 2, "target": 15, "type": "结拜"}, {"source": 2, "target": 20, "type": "宿敌"}, {"source": 10, "target": 11, "type": "从属"}, {"source": 10, "target": 12, "type": "从属"}, {"source": 10, "target": 13, "type": "从属"}, {"source": 10, "target": 14, "type": "从属"}, {"source": 13, "target": 14, "type": "父子"}, {"source": 12, "target": 14, "type": "兄弟"}, {"source": 15, "target": 16, "type": "夫妻"}, {"source": 15, "target": 17, "type": "父子"}, {"source": 16, "target": 17, "type": "母子"}, {"source": 2, "target": 16, "type": "敌对"}, {"source": 2, "target": 17, "type": "敌对"}, {"source": 2, "target": 18, "type": "击杀"}, {"source": 2, "target": 19, "type": "交战"}, {"source": 5, "target": 22, "type": "父子"}, {"source": 21, "target": 22, "type": "兄弟"}]};
+DatasetView.mount({
+  name: "character-relationship-3d",
+  fallback: window.CHAR_FB,
+  bannerId: "banner", metaId: "meta", keytabsId: "keytabs",
+  chartTitleId: "chartTitle", chartHostId: "chartHost", tableHostId: "tableHost"
+});
+</script>
+</body>
+</html>

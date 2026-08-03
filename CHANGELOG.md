@@ -8,6 +8,13 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.2.90（2026-08-03）：W338 收口价值（数据API接入+vis-tools范式复用+新功能E2E回归）
+
+- **数据 API 接入全站**：新建 `site/data/search.html`（全站搜索，在线 `/search` 跨 40 数据集递归检索 + 离线 file:// 内置索引降级，复用 vis-tools 表格/钻取）；`site/dashboard.html` 新增「数据中枢」section（在线拉 `/datasets` + 离线内置索引 `site/static/js/datahub-index.js`，卡片跳转数据浏览器/搜索/两个范式视图）
+- **vis-tools 范式复用**：抽离 `site/static/js/dataset-view.js`（单数据集渲染模块：键 tab → 数组表/对象柱状图），实例化为 `site/data/character-relationship-3d-view.html`（22 人物节点表+钻取）与 `site/data/81-hardships-view.html`（起因/结局/难度分布柱状图），均 fetch 在线 + 内嵌 FALLBACK 离线
+- **新功能 E2E 回归**：`tests/e2e/test_newfeatures.js` 覆盖 search/data-explorer/两个范式视图的 file:// 离线渲染 + API 在线断言（`/datasets` 40、`/search?q=火焰山` 命中 8、数据浏览器在线 banner），全部通过 ✅
+- 可视化/交互页计数 80 → 84（新增 search / character-relationship-3d-view / 81-hardships-view 3 页 + dashboard 数据中枢）
+
 ### v2.2.89（2026-08-03）：W337 RAG质量提升+数据API化+可视化交互深化+移动端PWA
 
 - **RAG 质量提升**：scripts/rag/xiyouji_rag.py 重写（零依赖·stdlib）·新增西游专名/别名词典（40 canonical→别名）+ 最长匹配分词 + 查询别名扩展 + 标题/短语字段加权 + Reciprocal Rank Fusion 四路融合重排 + 改进摘录（最近小标题上下文）·INDEX_VERSION=2 触发缓存重建·6 个查询实跑验证质量提升·rag_server.py 改用 ThreadingHTTPServer 修复并发卡死

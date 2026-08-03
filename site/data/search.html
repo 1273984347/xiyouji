@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>详解西游记 · 全站搜索</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../system.css">
+<style>
+  :root{--bg:#faf7f2;--paper:#fff;--ink:#23201A;--ink-soft:#6B6455;--accent:#c8463a;--accent-2:#3a6b8c;--line:#d9cdb8}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Noto Serif SC","Songti SC",serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  header.top{padding:22px 20px 14px;background:linear-gradient(135deg,#1a1410,#3a2820);color:#f5e9d4}
+  header.top h1{margin:0;font-size:22px}
+  header.top p{margin:6px 0 0;font-size:13px;opacity:.85}
+  .banner{margin:12px 16px;padding:10px 14px;border-radius:8px;font-size:13px;border:1px solid var(--line);background:#fff7ec}
+  .banner.offline{border-color:#d9b36b;background:#fdf3df}
+  .main{padding:0 16px 40px}
+  .meta{color:var(--ink-soft);font-size:13px;margin:10px 0 8px}
+  .keytabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
+  .keytab{padding:6px 12px;border:1px solid var(--line);border-radius:999px;cursor:pointer;font-size:13px;background:var(--paper)}
+  .keytab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .chartbox{margin:8px 0 14px;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px;display:none}
+  .chartbox h3{margin:4px 6px 8px;font-size:14px;color:var(--accent-2)}
+  .hint{color:var(--ink-soft);font-size:12px;margin-top:8px}
+  @media(max-width:720px){header.top h1{font-size:18px}}
+
+  .searchbar{display:flex;gap:8px;margin:12px 16px;align-items:center;flex-wrap:wrap}
+  .searchbar input{flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:15px;background:var(--paper)}
+  .searchbar .vt-btn{padding:9px 16px}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>详解西游记 · 全站搜索</h1>
+  <p>W338 数据 API 接入 · 在线跨 40 数据集递归检索（/search）· 离线 file:// 降级到内置数据集索引</p>
+</header>
+<div id="banner" class="banner">正在连接数据 API…</div>
+<div class="searchbar">
+  <input id="q" type="search" placeholder="搜索关键词，如：火焰山 / 孙悟空 / 如来" aria-label="搜索">
+  <button class="vt-btn" id="go">搜索</button>
+  <span class="hint">在线命中「数据集 + 片段」；离线仅按数据集名称/标题过滤。</span>
+</div>
+<div id="results"></div>
+<script src="../static/js/vis-tools.js"></script>
+<script>
+window.SEARCH_INDEX = [{"name": "81-hardships", "title": ""}, {"name": "ai-dialogue", "title": ""}, {"name": "cave-estate", "title": ""}, {"name": "century-dialogue", "title": ""}, {"name": "chapter-structure-graph", "title": "回目结构图谱"}, {"name": "character-relationship-3d", "title": "人物关系 3D 网络图"}, {"name": "concept-device", "title": ""}, {"name": "criticism-history", "title": ""}, {"name": "cross-time-danmaku", "title": ""}, {"name": "dashboard", "title": "数据仪表盘"}, {"name": "emotional-heatmap", "title": "情感热力图"}, {"name": "famous-time-travel", "title": ""}, {"name": "four-dimensional-research-network", "title": "西游四维研究网络图谱"}, {"name": "four-heavenly-kings-artifacts", "title": ""}, {"name": "guanyin-six-roles-network", "title": ""}, {"name": "heaven-power-network", "title": ""}, {"name": "intertextuality-network", "title": ""}, {"name": "journey-geo-semiotics", "title": ""}, {"name": "journey-map-interactive", "title": "取经路线交互式地图"}, {"name": "language-style-radar", "title": "语言风格雷达图"}, {"name": "magic-system", "title": ""}, {"name": "material-archaeology", "title": ""}, {"name": "ming-political-thought-comparison", "title": "明代政治思想对照图谱"}, {"name": "monster-capability-radar", "title": "妖怪能力雷达图"}, {"name": "monster-ecology-network", "title": "妖怪生态网络图谱"}, {"name": "monster-female-network", "title": ""}, {"name": "monster-hierarchy-network", "title": ""}, {"name": "monster-victims-network", "title": ""}, {"name": "music-structure", "title": ""}, {"name": "narratology-12d-network", "title": ""}, {"name": "narratology-13d-network", "title": ""}, {"name": "pilgrim-team-dynamic-network", "title": "取经团队动力学关系网络"}, {"name": "pilgrim-team-psychology-arc", "title": "取经团队心理变化曲线"}, {"name": "poetry-rhythm-analysis", "title": "诗词韵律分析图谱"}, {"name": "six-senses-narratology-network", "title": ""}, {"name": "text-evolution", "title": ""}, {"name": "text-search", "title": ""}, {"name": "theological-intervention-network", "title": "三教神学干预网络图谱"}, {"name": "timeline", "title": ""}, {"name": "underworld-power-network", "title": ""}];
+var API_OK = false;
+
+function setBanner(html, offline){var b=document.getElementById("banner");b.innerHTML=html;b.className="banner"+(offline?" offline":"");}
+
+function apiFetch(path){return fetch(path,{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});}
+
+function probe(){
+  apiFetch("/datasets").then(function(list){
+    API_OK=true;
+    setBanner("已连接数据 API · 共 "+list.length+" 个数据集 · 输入关键词跨集检索。",false);
+  }).catch(function(){
+    API_OK=false;
+    setBanner("离线模式（file://）：仅按内置数据集索引过滤。启动 <code>python scripts/api/api_server.py</code> 后通过 http://127.0.0.1:8787/data/search.html 访问可跨集递归检索。",true);
+  });
+}
+
+function renderOffline(q){
+  var kw=q.toLowerCase();
+  var rows=window.SEARCH_INDEX.filter(function(d){
+    return (d.name+"").toLowerCase().indexOf(kw)>=0 || (d.title+"").toLowerCase().indexOf(kw)>=0;
+  }).map(function(d){return {数据集:d.name, 标题:d.title||"—", 模式:"离线索引"};});
+  VisTools.makeFilterableTable({
+    container:"#results",
+    columns:[{key:"数据集",label:"数据集"},{key:"标题",label:"标题"},{key:"模式",label:"模式"}],
+    rows:rows, searchKeys:["数据集","标题"],
+    onRowClick:function(row){
+      VisTools.openDrill(row.数据集,"<p>离线模式仅含数据集名称/标题。</p><p>启动数据 API 后访问 <code>/data/"+row.数据集+"-view.html</code> 或 <code>/dataset/"+row.数据集+"</code> 查看完整数据。</p>");
+    }
+  });
+}
+
+function renderOnline(q){
+  apiFetch("/search?q="+encodeURIComponent(q)).then(function(res){
+    var rows=[];
+    (res.results||[]).forEach(function(m){
+      var sample=(m.hits&&m.hits[0]&&m.hits[0].snippet)||"";
+      rows.push({数据集:m.dataset, 命中数:m.hit_count, 示例片段:sample});
+    });
+    if(!rows.length){document.getElementById("results").innerHTML="<p class='meta'>无命中。</p>";return;}
+    VisTools.makeFilterableTable({
+      container:"#results",
+      columns:[{key:"数据集",label:"数据集"},{key:"命中数",label:"命中数",sortable:true},{key:"示例片段",label:"示例片段"}],
+      rows:rows, searchKeys:["数据集","示例片段"],
+      onRowClick:function(row){
+        var m=(res.results||[]).find(function(x){return x.dataset===row.数据集;});
+        var h="<p><b>数据集：</b>"+row.数据集+" · <b>命中 "+row.命中数+" 处</b></p><table><tbody>";
+        (m.hits||[]).slice(0,12).forEach(function(hit){
+          h+="<tr><th>"+hit.path+"</th><td>"+hit.snippet+"</td></tr>";
+        });
+        h+="</tbody></table>";
+        VisTools.openDrill(row.数据集,h);
+      }
+    });
+  }).catch(function(){ renderOffline(q); });
+}
+
+function doSearch(){
+  var q=(document.getElementById("q").value||"").trim();
+  if(!q){return;}
+  if(API_OK) renderOnline(q); else renderOffline(q);
+}
+
+document.getElementById("go").addEventListener("click",doSearch);
+document.getElementById("q").addEventListener("keydown",function(e){if(e.key==="Enter")doSearch();});
+document.getElementById("q").addEventListener("input",function(){
+  var q=(this.value||"").trim();
+  if(q.length>=1 && !API_OK) renderOffline(q);
+});
+probe();
+</script>
+</body>
+</html>
