@@ -37,7 +37,7 @@ HTML = os.path.join(ROOT, "site", "dukou-engine.html")
 # 四份含 A4 计数语义的文档
 A4_DOCS = ["README.md", "STRUCTURE.md",
            os.path.join("docs", "00-导读", "项目说明.md"), "交接文档.md"]
-EXPECT_A4 = "199 篇"  # 当前基线（W333 后恒定）
+EXPECT_A4 = "201 篇"  # W342 gap-fill（权力五联对照 W084 + 妖怪身份政治）后：199→201
 
 
 def _read(p):
