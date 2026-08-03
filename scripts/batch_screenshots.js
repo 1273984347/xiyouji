@@ -17,6 +17,25 @@ const DEFAULT_EXTRA_PAGES = [
   { file: 'index.html', dir: path.join(ROOT, 'site') },
 ];
 
+// 静态 CI 以 file:// 打开页面，且运行环境无后端（数据 API / RAG 服务）。
+// 页面引用的绝对路径资源（favicon、/static/*、/dataset/* 等）会触发浏览器
+// 抛出 "Failed to load resource" / "net::ERR_FILE_NOT_FOUND" 等 console.error，
+// 属良性噪声（页面已回退内置示例），不应令 CI 失败。真实未捕获 JS 异常由
+// pageerror 捕获；真实前端逻辑错误以其特有文案出现、不在此名单内，仍会阻断。
+const BENIGN_CONSOLE_RE = [
+  /Failed to load resource/i,
+  /net::ERR/i,
+  /ERR_FILE_NOT_FOUND/i,
+  /favicon/i,
+  /the server responded with a status of [45]\d\d/i,
+  /\/query|\/graph|\/datasets|\/api\/rum|\/health/i, // 后端端点，CI 无服务
+  /Failed to fetch/i,
+  /NetworkError/i,
+];
+function isBenignConsoleError(text) {
+  return BENIGN_CONSOLE_RE.some((re) => re.test(text));
+}
+
 function parseViewport(value) {
   const match = value.match(/^(\d+)x(\d+)$/);
   if (!match) throw new Error(`Invalid viewport format: ${value} (expected WxH)`);
@@ -205,11 +224,17 @@ async function capture(browser, pageInfo, viewportName, viewports, outDirs) {
 
   page.on('console', (msg) => {
     const type = msg.type();
-    // 仅把 console.error 视为阻断项；warning（如 D3 弃用提示、favicon 404）
+    // 仅把 console.error 视为阻断候选；warning（如 D3 弃用提示、favicon 404）
     // 属良性噪声，不应令 CI 失败。真实 JS 异常仍由 pageerror 捕获。
-    if (type === 'error') {
-      consoleErrors.push({ type, text: msg.text() });
-    }
+    if (type !== 'error') return;
+    const text = msg.text();
+    // file:// + 无后端的静态 CI 下，浏览器会对绝对路径资源（favicon、/static/*、
+    // /dataset/*）与后端端点（/query、/graph、/datasets、/api/rum、/health）
+    // 抛出 "Failed to load resource" / "net::ERR_FILE_NOT_FOUND" / "Failed to fetch"
+    // 等 console.error，页面已回退内置示例，属良性噪声。真实前端逻辑错误以其
+    // 特有文案出现、不在此名单内，仍会令 CI 失败。
+    if (isBenignConsoleError(text)) return;
+    consoleErrors.push({ type, text });
   });
   page.on('pageerror', (err) => {
     pageErrors.push(err.message);
