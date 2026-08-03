@@ -44,10 +44,17 @@
   .drill .alias{margin:8px 0;padding:8px 10px;background:#f7f1e6;border-radius:8px;font-size:13px}
   .drill .alias b{color:var(--qing)}
   .drill .nbr{list-style:none;padding:0;margin:6px 0}
-  .drill .nbr li{font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:6px;margin:4px 0;cursor:pointer;display:flex;justify-content:space-between;gap:8px}
-  .drill .nbr li:hover{border-color:var(--zhu);color:var(--zhu)}
+  .drill .nbr li{font-size:13px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;margin:4px 0;cursor:pointer}
+  .drill .nbr li:hover{border-color:var(--zhu)}
+  .drill .nbr li .row{display:flex;justify-content:space-between;gap:8px;align-items:center}
   .drill .nbr .rel{color:#8a7d68;font-size:12px}
   .hint{font-size:12px;color:#9a8f7c;margin-top:10px;line-height:1.6}
+  .edge-label{font-size:10px;pointer-events:none;font-family:"Noto Sans SC",sans-serif}
+  .relchip{display:inline-block;font-size:10px;padding:1px 6px;border-radius:10px;color:#fff;margin-left:6px;vertical-align:middle}
+  .relsum{font-size:12px;color:#5a5040;background:#f7f1e6;border-radius:8px;padding:7px 10px;margin:8px 0;line-height:1.9}
+  .relsum b{color:var(--zhu)}
+  .relsum .rs{display:inline-block;margin:0 6px 2px 0}
+  .relsum .rs i{font-style:normal;width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:middle}
 </style>
 </head>
 <body>
@@ -62,6 +69,8 @@
     <select id="graphSel"></select>
     <h3>按类型筛选</h3>
     <div id="grpFilters"></div>
+    <h3>按关系筛选</h3>
+    <div id="relFilters"></div>
     <h3>标签维度</h3>
     <div class="dimbtns" id="dimBtns"></div>
     <h3>搜索节点</h3>
@@ -74,7 +83,9 @@
     </div>
     <h3>图例</h3>
     <div class="legend" id="legend"></div>
-    <div class="hint">拖拽节点可调整布局；点击节点查看详情与邻居。在线模式数据来自 <code>/graph</code>，离线回退内嵌图集。</div>
+    <h3>关系图例</h3>
+    <div class="legend" id="relLegend"></div>
+    <div class="hint">边按<b>关系类型</b>着色，粗细=语义权重；悬停边可见「关系·属性·取值」。可勾选「按关系筛选」「按类型筛选」联动；点击节点查看语义关系汇总与邻居。在线数据来自 <code>/graph</code>，离线回退内嵌图集。</div>
   </aside>
   <section class="stage">
     <div id="graphBox"></div>
@@ -88,8 +99,28 @@
   "use strict";
   var GRAPH=null, GRAPH_NAME="yuanqi-graph";
   var nodePos=new Map(), focusNode=null, draggingId=null, dragMoved=false;
-  var activeGroups=new Set(), labelDim="", searchTerm="";
+  var activeGroups=new Set(), activeRels=new Set(), labelDim="", searchTerm="";
   var PALETTE=["#3a6b8c","#c8463a","#d98a3d","#4f9d8a","#8a6db0","#d4a017","#6b8e23","#b5651d","#708090","#cd5c5c"];
+  // ---- 关系语义模型：curated 配色 + 语义权重（粗细） ----
+  // 三元映射（佛法=AI=西游）八类关系
+  var RELATION_COLORS={
+    "执取":"#c0392b","现行":"#e67e22","熏习":"#16a085","异熟":"#8e44ad",
+    "转依":"#27ae60","系缚":"#7f5af0","遮蔽":"#5d8aa8","解脱":"#d4a017",
+    // 取经人物关系
+    "师徒":"#c0392b","授经":"#e67e22","父子":"#8e44ad","母子":"#9b59b6",
+    "兄弟":"#16a085","结拜":"#1abc9c","夫妻":"#e84393","同僚":"#2980b9",
+    "从属":"#34495e","指派":"#7f8c8d","庇护":"#27ae60","敌对":"#d63031",
+    "宿敌":"#b33939","交战":"#e17055","击杀":"#6c2e2e","反叛":"#d35400","索取":"#95a5a6"
+  };
+  var RELATION_WEIGHT={
+    "执取":2.0,"现行":1.6,"熏习":2.0,"异熟":2.2,"转依":3.0,"系缚":2.6,"遮蔽":1.5,"解脱":3.0,
+    "师徒":2.4,"授经":1.8,"父子":2.6,"母子":2.4,"兄弟":2.2,"结拜":2.2,"夫妻":2.2,
+    "同僚":1.4,"从属":1.8,"指派":1.4,"庇护":1.8,"敌对":2.6,"宿敌":2.8,"交战":2.2,"击杀":3.0,"反叛":2.4,"索取":1.6
+  };
+  function relationColor(r){ if(RELATION_COLORS[r]) return RELATION_COLORS[r]; var h=0; for(var i=0;i<(r||"").length;i++) h=(h*37+r.charCodeAt(i))>>>0; return PALETTE[h%PALETTE.length]; }
+  function relationWeight(r){ return RELATION_WEIGHT[r]!=null?RELATION_WEIGHT[r]:1.6; }
+  function edgeRel(e){ return e.relation||e.type||""; }
+
   function colorFor(group, map){
     if(map && map[group]) return map[group];
     var h=0; for(var i=0;i<group.length;i++) h=(h*31+group.charCodeAt(i))>>>0;
@@ -113,11 +144,17 @@
   async function loadGraph(name){
     try{
       var r=await fetch("/graph/"+name); if(!r.ok) throw 0;
-      var g=await r.json(); setBanner(true); return g;
+      var g=await r.json(); setBanner(true); return normalizeGraph(g);
     }catch(e){
       var fb=window.GRAPH_FALLBACK&&window.GRAPH_FALLBACK[name];
-      setBanner(false); return fb||null;
+      setBanner(false); return fb?normalizeGraph(fb):null;
     }
+  }
+  function normalizeGraph(g){
+    if(!g||!g.nodes) return g;
+    g.nodes.forEach(function(n){ if(n.id!=null) n.id=String(n.id); });
+    (g.edges||[]).forEach(function(e){ if(e.source!=null) e.source=String(e.source); if(e.target!=null) e.target=String(e.target); });
+    return g;
   }
 
   function buildControls(){
@@ -149,6 +186,22 @@
     var lg=document.getElementById("legend"); lg.innerHTML="";
     Object.keys(groups).sort().forEach(function(g){
       lg.innerHTML+='<div><span class="swatch" style="background:'+colorFor(g,meta.group_colors)+'"></span> '+xmlEsc(g)+'</div>';
+    });
+    // 关系筛选 + 关系图例
+    var rels={}; GRAPH.edges.forEach(function(e){ var r=edgeRel(e); if(r) rels[r]=(rels[r]||0)+1; });
+    var rf=document.getElementById("relFilters"); rf.innerHTML="";
+    Object.keys(rels).sort().forEach(function(r){
+      activeRels.add(r);
+      var lab=document.createElement("label"); lab.className="grp";
+      lab.innerHTML='<input type="checkbox" checked data-r="'+xmlEsc(r)+'"><span class="swatch" style="background:'+relationColor(r)+'"></span>'+xmlEsc(r)+' <span style="color:#9a8f7c">('+rels[r]+')</span>';
+      rf.appendChild(lab);
+    });
+    rf.querySelectorAll("input").forEach(function(cb){
+      cb.addEventListener("change",function(){ var r=cb.getAttribute("data-r"); if(cb.checked)activeRels.add(r); else activeRels.delete(r); renderGraph(); });
+    });
+    var rl=document.getElementById("relLegend"); rl.innerHTML="";
+    Object.keys(rels).sort().forEach(function(r){
+      rl.innerHTML+='<div><span class="swatch" style="background:'+relationColor(r)+'"></span> '+xmlEsc(r)+' <span style="color:#9a8f7c">· 权重 '+relationWeight(r).toFixed(1)+'</span></div>';
     });
   }
 
@@ -215,7 +268,7 @@
   function renderGraph(){
     if(!GRAPH){return;}
     var vis=visibleSet();
-    var edges=GRAPH.edges.filter(function(e){return vis.has(e.source)&&vis.has(e.target);});
+    var edges=GRAPH.edges.filter(function(e){return vis.has(e.source)&&vis.has(e.target)&&activeRels.has(edgeRel(e));});
     var ids=[];
     vis.forEach(function(id){ ids.push(id); });
     if(!ids.length){ document.getElementById("graphBox").innerHTML='<p style="padding:20px;color:#9a8f7c">无匹配节点，调整筛选条件。</p>'; return; }
@@ -235,9 +288,17 @@
       var dx=p2.x-p1.x,dy=p2.y-p1.y,d=Math.sqrt(dx*dx+dy*dy)||1,ux=dx/d,uy=dy/d;
       var x1=p1.x+ux*ra,y1=p1.y+uy*ra,x2=p2.x-ux*(rb+6),y2=p2.y-uy*(rb+6);
       var mx=(x1+x2)/2,my=(y1+y2)/2;
+      var rel=edgeRel(e), rc=relationColor(rel), rw=relationWeight(rel);
       var isF=focusNode&&(e.source===focusNode||e.target===focusNode);
-      svg+='<line x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'" stroke="'+(isF?"#c8463a":"#bb8a5f")+'" stroke-width="'+(isF?3:1.4)+'" opacity="'+(isF?0.95:0.55)+'" marker-end="url(#arr)"/>';
-      if(e.relation) svg+='<text x="'+mx.toFixed(1)+'" y="'+(my-4).toFixed(1)+'" fill="#C9A063" font-size="11" text-anchor="middle">'+xmlEsc(shortLabel(e.relation))+'</text>';
+      var isDim=focusNode&&!isF;
+      var w=(isF?2.4:1.1)+rw*0.45;
+      var op=isF?0.95:(isDim?0.10:0.5);
+      svg+='<line x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'" stroke="'+rc+'" stroke-width="'+w.toFixed(2)+'" opacity="'+op+'" marker-end="url(#arr)">';
+      var tip=rel+(e.property?(" · "+e.property):"")+(e.value?(" · "+e.value):"");
+      svg+='<title>'+xmlEsc(tip)+'</title></line>';
+      if(rel && (isF||!focusNode)){
+        svg+='<text class="edge-label" x="'+mx.toFixed(1)+'" y="'+(my-3).toFixed(1)+'" fill="'+rc+'" text-anchor="middle" opacity="'+(isF?1:0.7)+'">'+xmlEsc(rel)+'</text>';
+      }
     });
     ids.forEach(function(id){
       var p=nodePos.get(id),n=nmap[id]; if(!p||!n)return;
@@ -288,15 +349,25 @@
     }
     var nbrs=[];
     GRAPH.edges.forEach(function(e){
-      if(e.source===id) nbrs.push({other:e.target,rel:e.relation,dir:"→"});
-      else if(e.target===id) nbrs.push({other:e.source,rel:e.relation,dir:"←"});
+      if(e.source===id) nbrs.push({other:e.target,rel:edgeRel(e),dir:"→",property:e.property,value:e.value});
+      else if(e.target===id) nbrs.push({other:e.source,rel:edgeRel(e),dir:"←",property:e.property,value:e.value});
     });
-    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">邻居（'+nbrs.length+'）</h3>';
+    // 语义关系汇总：按关系类型计数
+    var relCount={}; nbrs.forEach(function(x){ if(x.rel) relCount[x.rel]=(relCount[x.rel]||0)+1; });
+    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">语义关系汇总（'+nbrs.length+' 条关系）</h3>';
+    html+='<div class="relsum">';
+    Object.keys(relCount).sort().forEach(function(r){
+      html+='<span class="rs"><i style="background:'+relationColor(r)+'"></i><b>'+xmlEsc(r)+'</b>×'+relCount[r]+'</span>';
+    });
+    html+='</div>';
+    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">邻居与关系</h3>';
     html+='<ul class="nbr">';
     nbrs.forEach(function(x){
       var on=null; GRAPH.nodes.forEach(function(y){ if(y.id===x.other)on=y; });
       var ol=on?labelOf(on):x.other;
-      html+='<li data-id="'+xmlEsc(x.other)+'"><span>'+x.dir+' '+xmlEsc(ol)+'</span><span class="rel">'+xmlEsc(shortLabel(x.rel))+'</span></li>';
+      var pv='';
+      if(x.property||x.value) pv='<div style="font-size:11px;color:#8a7d68;margin-top:3px">'+xmlEsc(x.property||"")+(x.property&&x.value?" · ":"")+xmlEsc(x.value||"")+'</div>';
+      html+='<li data-id="'+xmlEsc(x.other)+'"><div class="row"><span>'+x.dir+' '+xmlEsc(ol)+'</span><span class="rel"><span class="relchip" style="background:'+relationColor(x.rel)+'">'+xmlEsc(x.rel)+'</span></span></div>'+pv+'</li>';
     });
     html+='</ul>';
     panel.innerHTML=html;
@@ -343,7 +414,7 @@
     await loadAndRender();
   }
   async function loadAndRender(){
-    focusNode=null; nodePos=new Map(); activeGroups=new Set();
+    focusNode=null; nodePos=new Map(); activeGroups=new Set(); activeRels=new Set();
     GRAPH=await loadGraph(GRAPH_NAME);
     if(!GRAPH){ document.getElementById("graphBox").innerHTML='<p style="padding:20px;color:#9a8f7c">图谱加载失败（离线且无内嵌数据）。</p>'; return; }
     buildControls(); renderGraph();

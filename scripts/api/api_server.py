@@ -208,7 +208,7 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/openapi.json":
             self._send({
-                "name": "xiyouji-dataset-api", "version": "v2.2.91",
+                "name": "xiyouji-dataset-api", "version": "v2.2.92",
                 "baseUrl": f"http://{HOST}:{PORT}",
                 "endpoints": [
                     {"path": "/health", "method": "GET", "desc": "存活探测"},
