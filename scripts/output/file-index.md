@@ -11,6 +11,11 @@
 
 ## W337 RAG质量提升+数据API化+可视化交互深化+移动端PWA（2026-08-03）
 
+## W340 图谱关系语义增强（边关系着色·语义权重·关系筛选·钻取富语义，2026-08-03）
+
+| site/data/graph-explorer.html | W340 | v2.2.92 改造·图谱关系语义增强（边按关系类型 curated 着色+语义权重粗细+关系类型筛选+钻取面板「语义关系汇总」+属性/取值富展示·悬停边可见「关系·属性·取值」·normalizeGraph 修复整数 id 钻取·edgeRel 兼容 relation/type）·复用 dukou 范式适配 file:// |
+| scripts/api/api_server.py | W340 | v2.2.92 改造·openapi version 升 v2.2.92 |
+
 ## W339 知识图谱探索器（纯SVG力导向·多图·/graph端点，2026-08-03）
 
 | site/data/graph-explorer.html | W339 | v2.2.91 新建·知识图谱探索器（零依赖纯SVG力导向·多图切换+按类型筛选+维度标签+节点拖拽+钻取+SVG/PNG/JSON导出）·复用 dukou 范式适配 file:// |

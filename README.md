@@ -2,7 +2,7 @@
 
 > 一座关于《西游记》的混合型解读项目 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前版本 v2.2.91（2026-08-03）**：W339 知识图谱探索器（零依赖纯SVG力导向·多图切换+按类型筛选+维度标签+节点拖拽+钻取+SVG/PNG/JSON导出·data API 新增 /graph 端点·dashboard 数据中枢接入图谱入口）— A1 逐回 100 回 + A2 随笔 43 篇 + A3 人物 199 篇 + A4 专题 199 篇 + A5 文化 22 篇 + A6 诗词 12 篇 + S1-S3 方法论/分享 50 篇 + 85 个可视化/交互页（133 维度）+ 全站设计系统（system.css·故宫×Linear）+ RAG 对话（渡口问津）+ dataset/ 41 个结构化 JSON（含 yuanqi-graph 三元映射图谱）+ 本地 RAG 后端 + 数据 API 服务 + Playwright E2E + GitHub Actions 4 workflows + 英文站 + PWA 离线。
+> **当前版本 v2.2.92（2026-08-03）**：W340 图谱关系语义增强（边按关系类型 curated 着色·语义权重粗细·关系类型筛选·钻取面板「语义关系汇总」+属性/取值富展示·悬停边可见关系·属性·取值）+ W339 知识图谱探索器（零依赖纯SVG力导向·多图切换+按类型筛选+维度标签+节点拖拽+钻取+SVG/PNG/JSON导出·data API 新增 /graph 端点·dashboard 数据中枢接入图谱入口）— A1 逐回 100 回 + A2 随笔 43 篇 + A3 人物 199 篇 + A4 专题 199 篇 + A5 文化 22 篇 + A6 诗词 12 篇 + S1-S3 方法论/分享 50 篇 + 85 个可视化/交互页（133 维度）+ 全站设计系统（system.css·故宫×Linear）+ RAG 对话（渡口问津）+ dataset/ 41 个结构化 JSON（含 yuanqi-graph 三元映射图谱）+ 本地 RAG 后端 + 数据 API 服务 + Playwright E2E + GitHub Actions 4 workflows + 英文站 + PWA 离线。
 > 详细变更见 [CHANGELOG.md](CHANGELOG.md)，历史归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
 
 ## 项目定位

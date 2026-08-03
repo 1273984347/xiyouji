@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.2.91（2026-08-03）— W339 知识图谱探索器（纯SVG力导向·多图切换·/graph 端点·数据中枢接入） · 全站设计系统（system.css）+ 85 个可视化/交互页 + RAG 对话 + 数据 API 服务 + dataset/ 41 JSON + 100 回逐回解读 + 625 篇研究文档 + PWA 离线。A4 主题专题 199 篇·W334（v2.2.86）全站设计系统·详细变更见 [CHANGELOG.md](CHANGELOG.md)，历史归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
+> 当前版本：v2.2.92（2026-08-03）— W340 图谱关系语义增强（边按关系类型着色·语义权重·关系筛选·钻取富语义）+ W339 知识图谱探索器（纯SVG力导向·多图切换·/graph 端点·数据中枢接入） · 全站设计系统（system.css）+ 85 个可视化/交互页 + RAG 对话 + 数据 API 服务 + dataset/ 41 JSON + 100 回逐回解读 + 625 篇研究文档 + PWA 离线。A4 主题专题 199 篇·W334（v2.2.86）全站设计系统·详细变更见 [CHANGELOG.md](CHANGELOG.md)，历史归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
 
 ## 顶层结构
 

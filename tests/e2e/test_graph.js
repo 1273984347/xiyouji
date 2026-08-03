@@ -76,11 +76,28 @@ async function main() {
       return opt >= 1 ? true : ('图集下拉空: ' + opt);
     },
     async p => {
-      // 点击第一个节点 → 钻取面板出现
+      // W340：关系图例 + 关系筛选器存在（三元映射 8 类关系）
+      const rl = await p.locator('#relLegend > div').count();
+      const rf = await p.locator('#relFilters input').count();
+      return (rl >= 8 && rf >= 8) ? true : ('关系图例/筛选不足: legend=' + rl + ' filter=' + rf);
+    },
+    async p => {
+      // W340：取消勾选一个关系类型 → 边数量减少
+      const before = await p.locator('#graphBox svg line').count();
+      await p.locator('#relFilters input').first().uncheck();
+      await p.waitForTimeout(150);
+      const after = await p.locator('#graphBox svg line').count();
+      await p.locator('#relFilters input').first().check();
+      await p.waitForTimeout(150);
+      return after < before ? true : ('关系筛选未减少边: ' + before + '→' + after);
+    },
+    async p => {
+      // 点击第一个节点 → 钻取面板出现 + 语义关系汇总
       await p.locator('#graphBox svg circle.gnode').first().click();
       await p.waitForSelector('#drill.show h2', { timeout: 4000 });
       const t = await p.locator('#drill.show h2').innerText();
-      return t && t.trim() ? true : '钻取面板标题空';
+      const sum = await p.locator('#drill').innerText();
+      return (t && t.trim() && sum.includes('语义关系汇总')) ? true : '钻取面板/语义汇总缺失';
     },
     async p => {
       // 搜索筛选：输入不存在的词 → 节点归零提示
@@ -90,7 +107,7 @@ async function main() {
       await p.fill('#search', '');
       return ok ? true : '搜索筛选未生效';
     },
-  ], 'graph-explorer.html（file:// 离线·渲染+钻取+筛选）');
+  ], 'graph-explorer.html（file:// 离线·渲染+钻取+筛选+W340关系语义）');
 
   // ---- 在线断言（数据 API 含 /graph 时） ----
   let apiUp = false;
@@ -125,6 +142,16 @@ async function main() {
       const okC = cn >= 22;
       pass = pass && okC;
       console.log((okC ? '✓' : '✗') + ' 切换到人物关系图 → ' + cn + ' 节点');
+      const rfC = await page.locator('#relFilters input').count();
+      const okRF = rfC >= 16;
+      pass = pass && okRF;
+      console.log((okRF ? '✓' : '✗') + ' 人物关系图关系筛选器 → ' + rfC + ' 类');
+      await page.locator('#graphBox svg circle.gnode').first().click();
+      await page.waitForSelector('#drill.show h2', { timeout: 4000 });
+      const sumC = await page.locator('#drill').innerText();
+      const okSum = sumC.includes('语义关系汇总');
+      pass = pass && okSum;
+      console.log((okSum ? '✓' : '✗') + ' 人物关系图钻取含语义关系汇总');
       await page.close();
     } catch (e) {
       console.log('✗ 在线断言异常: ' + e.message);
