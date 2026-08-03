@@ -11,6 +11,16 @@
 
 ## W337 RAG质量提升+数据API化+可视化交互深化+移动端PWA（2026-08-03）
 
+## W339 知识图谱探索器（纯SVG力导向·多图·/graph端点，2026-08-03）
+
+| site/data/graph-explorer.html | W339 | v2.2.91 新建·知识图谱探索器（零依赖纯SVG力导向·多图切换+按类型筛选+维度标签+节点拖拽+钻取+SVG/PNG/JSON导出）·复用 dukou 范式适配 file:// |
+| scripts/api/api_server.py | W339 | v2.2.91 改造·新增 GET /graph（图集清单）+ GET /graph/<name>（nodes/edges 归一化）·注册 yuanqi-graph + character-relationship-3d |
+| dataset/yuanqi-graph.json | W339 | v2.2.91 新建·由 scripts/output/yuanqi_*.csv 生成的佛法=AI=西游 三元映射图谱（20 节点/20 边） |
+| site/static/js/graph-fallback.js | W339 | v2.2.91 新建·离线内嵌图集（yuanqi-graph + character-relationship-3d）·file:// 降级用 |
+| site/dashboard.html | W339 | v2.2.91 改造·数据中枢新增「知识图谱探索器」入口卡片 |
+| site/static/js/datahub-index.js | W339 | v2.2.91 改造·41 数据集名称/标题索引（含 yuanqi-graph） |
+| tests/e2e/test_graph.js | W339 | v2.2.91 新建·图谱 E2E 回归（离线渲染+钻取+筛选 + /graph 在线断言） |
+
 ## W338 收口价值（数据API接入+vis-tools范式复用+新功能E2E回归，2026-08-03）
 
 | site/data/search.html | W338 | v2.2.90 新建·全站搜索（在线 /search 跨集递归检索 + 离线 file:// 内置索引降级）·复用 vis-tools |

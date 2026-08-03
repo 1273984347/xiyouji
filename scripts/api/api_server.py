@@ -93,6 +93,59 @@ def _recursive_search(obj, q, path=""):
     return hits
 
 
+# ---- 图谱数据（图集注册表，W339 知识图谱探索器）----
+def _load_yuanqi_graph():
+    d = _load_dataset("yuanqi-graph")
+    if not isinstance(d, dict) or "nodes" not in d:
+        return None
+    return d
+
+
+def _load_char_graph():
+    d = _load_dataset("character-relationship-3d")
+    if not isinstance(d, dict):
+        return None
+    nodes = [{"id": n.get("id"), "label": n.get("name", n.get("id")),
+              "group": str(n.get("group", "")), "desc": n.get("desc", ""),
+              "importance": n.get("importance", 0)}
+             for n in d.get("nodes", []) if isinstance(n, dict)]
+    edges = [{"source": e.get("source"), "target": e.get("target"),
+              "relation": e.get("type", ""), "property": "", "value": ""}
+             for e in d.get("links", []) if isinstance(e, dict)]
+    return {"meta": {"title": "取经团队人物关系图谱（3D 投影）",
+                     "note": "取经五人 + 关键神佛妖魔的关系网络（group=阵营/身份）。",
+                     "schema": "graph", "group_colors": {}, "dimensions": []},
+            "nodes": nodes, "edges": edges}
+
+
+_GRAPH_REGISTRY = {
+    "yuanqi-graph": {"title": "佛法=AI=西游 三元映射图谱（W326）", "loader": _load_yuanqi_graph},
+    "character-relationship-3d": {"title": "取经团队人物关系图谱（3D 投影）", "loader": _load_char_graph},
+}
+
+
+def _load_graph(name):
+    reg = _GRAPH_REGISTRY.get(name)
+    if not reg:
+        return None
+    try:
+        return reg["loader"]()
+    except Exception:
+        return None
+
+
+def _list_graphs():
+    out = []
+    for name, reg in _GRAPH_REGISTRY.items():
+        g = _load_graph(name)
+        if not g:
+            continue
+        out.append({"name": name, "title": reg.get("title", name),
+                    "node_count": len(g.get("nodes", [])),
+                    "edge_count": len(g.get("edges", []))})
+    return out
+
+
 def _doc_html():
     ds = _list_datasets()
     rows = "".join(
@@ -117,6 +170,8 @@ th{{background:#faf7f2}}a{{color:#3a6b8c}}.ep{{background:#faf7f2;border:1px sol
 <div class="ep"><span class="endpoint">GET /dataset/&lt;name&gt;</span> — 某数据集全量 JSON</div>
 <div class="ep"><span class="endpoint">GET /dataset/&lt;name&gt;/keys</span> — 仅顶层键 + 元信息</div>
 <div class="ep"><span class="endpoint">GET /search?q=&lt;关键词&gt;</span> — 跨所有数据集递归检索</div>
+<div class="ep"><span class="endpoint">GET /graph</span> — 图集清单（W339 知识图谱探索器）</div>
+<div class="ep"><span class="endpoint">GET /graph/&lt;name&gt;</span> — 单图 nodes/edges（yuanqi-graph / character-relationship-3d）</div>
 <div class="ep"><span class="endpoint">GET /openapi.json</span> — 接口描述（类 OpenAPI）</div>
 <h2>数据集清单（{len(ds)}）</h2>
 <table><thead><tr><th>名称</th><th>大小</th><th>标题</th><th>顶层键</th></tr></thead>
@@ -153,7 +208,7 @@ class Handler(BaseHTTPRequestHandler):
             return
         if path == "/openapi.json":
             self._send({
-                "name": "xiyouji-dataset-api", "version": "v2.2.89",
+                "name": "xiyouji-dataset-api", "version": "v2.2.91",
                 "baseUrl": f"http://{HOST}:{PORT}",
                 "endpoints": [
                     {"path": "/health", "method": "GET", "desc": "存活探测"},
@@ -161,6 +216,8 @@ class Handler(BaseHTTPRequestHandler):
                     {"path": "/dataset/<name>", "method": "GET", "desc": "数据集全量"},
                     {"path": "/dataset/<name>/keys", "method": "GET", "desc": "顶层键"},
                     {"path": "/search", "method": "GET", "desc": "跨集检索", "params": ["q"]},
+                    {"path": "/graph", "method": "GET", "desc": "图集清单"},
+                    {"path": "/graph/<name>", "method": "GET", "desc": "单图（nodes/edges）"},
                 ],
             })
             return
@@ -181,6 +238,19 @@ class Handler(BaseHTTPRequestHandler):
                 if hits:
                     res.append({"dataset": d["name"], "hit_count": len(hits), "hits": hits[:20]})
             self._send({"query": kw, "matches": len(res), "results": res})
+            return
+
+        # /graph 图集列举 与 /graph/<name> 单图（W339 知识图谱探索器）
+        gparts = [p for p in path.split("/") if p]
+        if gparts and gparts[0] == "graph":
+            if len(gparts) == 1:
+                self._send(_list_graphs())
+            else:
+                g = _load_graph(gparts[1])
+                if g is None:
+                    self._send({"error": f"graph not found: {gparts[1]}", "try": "/graph"}, code=404)
+                else:
+                    self._send(g)
             return
 
         # /dataset/<name> 或 /dataset/<name>/keys
