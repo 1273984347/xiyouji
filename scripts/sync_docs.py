@@ -298,7 +298,11 @@ def rule_status_marker(cl_text, fix=False):
 
 
 def _eval_dim_expr(expr: str) -> int:
-    """将维度表达式（如 '8+3' / '42' / '8 + 3'）求值为整数。无法求值返回 0。"""
+    """将维度表达式（如 '8+3' / '42' / '8 + 3'）求值为整数。无法求值返回 0。
+
+    手写安全解析器替代 eval：输入已通过正则限制为非负整数与 + - 运算符，
+    按 token 顺序累加/累减，杜绝任意代码执行风险（安全扫描 XSS-003）。
+    """
     expr = expr.strip()
     if not expr:
         return 0
@@ -306,7 +310,19 @@ def _eval_dim_expr(expr: str) -> int:
     if not re.fullmatch(r"[\d+\-\s]+", expr):
         return 0
     try:
-        return int(eval(expr, {"__builtins__": {}}, {}))
+        total = None
+        pending_op = "+"
+        for tok in re.findall(r"\d+|\+|\-", expr):
+            if tok in "+-":
+                pending_op = tok
+                continue
+            val = int(tok)
+            if total is None:
+                # 首个数字：pending_op 作为符号（处理前导负号）
+                total = val if pending_op == "+" else -val
+            else:
+                total = total + val if pending_op == "+" else total - val
+        return total if total is not None else 0
     except Exception:
         return 0
 
