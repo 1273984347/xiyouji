@@ -48,9 +48,9 @@ lint: ## ruff + eslint（如配置存在）— 跨平台兼容
 	@python -c "import shutil,sys,subprocess; rc=0; exec('''for t in ['ruff','eslint']:\n p=shutil.which(t)\n if p:\n  args=[t]+(['check','scripts/'] if t=='ruff' else ['.'])\n  r=subprocess.run(args)\n  rc=rc or r.returncode\n else:\n  print(f'  [skip] {t} 未安装')\n'''); sys.exit(rc)"
 	@echo "==> lint 完成"
 
-links: ## 链接校验（HTML href/src + Markdown）
-	@echo "==> links: 链接校验"
-	python scripts/lint_links.py
+links: ## 链接校验（全仓库 HTML href/src + Markdown，排除 node_modules/.workbuddy/_template.html）
+	@echo "==> links: 全仓库链接校验（排除第三方包/模板）"
+	python scripts/lint_links.py --dir .
 	@echo "==> links 完成"
 
 data-validate: ## JSON 数据完整性校验（output/data/ 131 个文件）

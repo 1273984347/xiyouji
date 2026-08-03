@@ -15,7 +15,7 @@
 | `fix_svg_negative_widths.py` | 批量修复 SVG 负宽度/负半径 class-level pattern | `python fix_svg_negative_widths.py --dry-run` |
 | `slice_screenshots.py` | 将全页截图按固定高度切片（Pillow，默认 800px） | `python slice_screenshots.py --output-dir output/screenshots` |
 | `embed_json.py` | 统一 JSON 数据嵌入 HTML（EMBEDDED_DATA fallback 模式） | `python embed_json.py site/data/foo.html output/data/foo.json` |
-| `lint_links.py` | 链接校验（HTML href/src + Markdown [text](url)）+ 自动修复 | `python lint_links.py --all` / `python lint_links.py --fix` |
+| `lint_links.py` | 链接校验（HTML href/src + Markdown [text] (url) 形式）+ 自动修复 | `python lint_links.py --all` / `python lint_links.py --fix` |
 | `sync_docs.py` | 6 文件文档一致性校验（版本号/统计计数/W### 编号/file-index）+ `--fix` 自动修复版本号与统计 | `python sync_docs.py` / `python sync_docs.py --fix` |
 | `run_all.py` | 批量运行 A-AH 34 类分析脚本，汇总 PASS/FAIL 报告 | `python scripts/run_all.py` / `python scripts/run_all.py --only A,B,F` |
 | `new_page.py` | 基于 `_template.html` 的可视化页面脚手架，自动替换占位符并更新 index.html 导航 | `python scripts/new_page.py --name foo --title "Foo" --category "Z_图表设计" --desc "..."` |
