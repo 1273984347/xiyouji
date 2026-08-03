@@ -208,6 +208,12 @@ def main():
     ap.add_argument("--all", action="store_true", help="校验全部（站内 + 外链）")
     ap.add_argument("--dir", default="site", help="扫描目录（默认 site/）")
     ap.add_argument("--fix", action="store_true", help="自动修复相对路径错误（按 basename 唯一匹配）")
+    ap.add_argument(
+        "--exclude",
+        nargs="*",
+        default=["node_modules", ".workbuddy", "_template.html"],
+        help="排除含这些路径片段的文件/目录（默认 node_modules/.workbuddy/_template.html）",
+    )
     args = ap.parse_args()
 
     # 未指定任何模式时默认仅站内
@@ -225,6 +231,14 @@ def main():
         sys.exit(2)
 
     files = collect_files(scan_dir)
+    if args.exclude:
+        before = len(files)
+        files = [
+            f for f in files
+            if not any(tok in str(f.relative_to(scan_dir)) for tok in args.exclude)
+        ]
+        if len(files) != before:
+            print(f"[exclude] 已排除 {before - len(files)} 个文件: {args.exclude}")
     print(f"扫描目录: {display_path(scan_dir)}  文件数: {len(files)}")
     print(f"模式: {'internal' if do_internal else '--'} + {'external' if do_external else '--'}")
     print("-" * 60)
