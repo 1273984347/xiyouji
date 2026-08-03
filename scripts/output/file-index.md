@@ -11,6 +11,18 @@
 
 ## W337 RAG质量提升+数据API化+可视化交互深化+移动端PWA（2026-08-03）
 
+## W338 收口价值（数据API接入+vis-tools范式复用+新功能E2E回归，2026-08-03）
+
+| site/data/search.html | W338 | v2.2.90 新建·全站搜索（在线 /search 跨集递归检索 + 离线 file:// 内置索引降级）·复用 vis-tools |
+| site/static/js/dataset-view.js | W338 | v2.2.90 新建·单数据集可交互渲染模块（键 tab→数组表/对象柱状图）·vis-tools 范式复用核心 |
+| site/static/js/datahub-index.js | W338 | v2.2.90 新建·40 数据集名称/标题索引（dashboard 数据中枢离线降级用） |
+| site/data/character-relationship-3d-view.html | W338 | v2.2.90 新建·人物关系可交互视图（22 节点表+钻取·fetch 在线 + FALLBACK 离线） |
+| site/data/81-hardships-view.html | W338 | v2.2.90 新建·八十一难可交互视图（起因/结局/难度分布柱状图） |
+| site/dashboard.html | W338 | v2.2.90 改造·新增「数据中枢」section（在线 /datasets + 离线 datahub-index·卡片跳转） |
+| tests/e2e/test_newfeatures.js | W338 | v2.2.90 新建·新功能 E2E 回归（离线渲染 + API 在线断言） |
+
+
+
 | scripts/rag/xiyouji_rag.py | W337 | v2.2.89 改造·RAG 质量提升：西游专名/别名词典（40 canonical→别名）+ 最长匹配分词 + 查询别名扩展 + 标题/短语字段加权 + RRF 四路融合重排 + 改进摘录（最近小标题上下文）·INDEX_VERSION=2 触发缓存重建 |
 | scripts/rag/rag_server.py | W337 | v2.2.89 改造·HTTPServer→ThreadingHTTPServer 修复并发卡死 |
 | scripts/api/api_server.py | W337 | v2.2.89 新建·零依赖数据 API 服务（/datasets /dataset/<name> /dataset/<name>/keys /search?q= 跨集递归检索 /health /openapi.json + /api 文档页 + 托管 site/ 静态资源）·ThreadingHTTPServer |

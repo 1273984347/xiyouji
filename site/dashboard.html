@@ -552,6 +552,62 @@
             </div>
         </section>
 
+        <!-- 数据中枢（W338 接入数据 API） -->
+        <section class="section" id="datahub">
+            <style>
+                #datahub .datahub-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:8px 0 18px}
+                #datahub .datahub-list{max-width:760px}
+            </style>
+            <div class="section-kick">DATA HUB</div>
+            <h2 class="section-title">数据中枢 · 40 个结构化数据集</h2>
+            <div class="section-sub">W338 把 W337 的零依赖数据 API 真正接进站点：在线可跨 40 数据集检索，离线 file:// 展示内置索引。可筛选 / 钻取 / 导出，复用 vis-tools.js。</div>
+            <div class="datahub-cards">
+                <a class="kpi-card" href="data/data-explorer.html" data-category="data">
+                    <div class="label">数据浏览器</div>
+                    <div class="value">40 数据集</div>
+                    <div class="desc">逐数据集浏览 · 键切换 · 表格/图表</div>
+                    <div class="detail">打开数据浏览器 →</div>
+                </a>
+                <a class="kpi-card" href="data/search.html" data-category="data">
+                    <div class="label">全站搜索</div>
+                    <div class="value">跨集检索</div>
+                    <div class="desc">/search 递归检索 · 命中片段</div>
+                    <div class="detail">打开全站搜索 →</div>
+                </a>
+                <a class="kpi-card" href="data/character-relationship-3d-view.html" data-category="data">
+                    <div class="label">人物关系视图</div>
+                    <div class="value">22 节点</div>
+                    <div class="desc">可交互 · 可钻取</div>
+                    <div class="detail">打开人物视图 →</div>
+                </a>
+                <a class="kpi-card" href="data/81-hardships-view.html" data-category="data">
+                    <div class="label">八十一难视图</div>
+                    <div class="value">三维透视</div>
+                    <div class="desc">起因/结局/难度分布</div>
+                    <div class="detail">打开难数视图 →</div>
+                </a>
+            </div>
+            <div id="datahub-list" class="datahub-list"></div>
+            <script src="static/js/vis-tools.js"></script>
+            <script src="static/js/datahub-index.js"></script>
+            <script>
+            (function(){
+              function render(list){
+                var rows=list.map(function(d){return {数据集:d.name,标题:d.title||"—"};});
+                if(!window.VisTools)return;
+                VisTools.makeFilterableTable({container:"#datahub-list",
+                  columns:[{key:"数据集",label:"数据集"},{key:"标题",label:"标题"}],
+                  rows:rows,searchKeys:["数据集","标题"],
+                  onRowClick:function(r){VisTools.openDrill(r.数据集,"<p>数据集：<b>"+r.数据集+"</b></p><p>启动数据 API 后访问 <code>/dataset/"+r.数据集+"</code> 查看完整 JSON。</p>");}});
+              }
+              if(!window.DATAHUB_INDEX){return;}
+              fetch("/datasets",{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json();})
+                .then(function(list){render(list);})
+                .catch(function(){ render(window.DATAHUB_INDEX); });
+            })();
+            </script>
+        </section>
+
         <!-- 专题数据看板入口区（A-AH 全门类） -->
         <section class="section" style="padding-top:8px;">
             <div class="section-kick">TOPICS</div>
