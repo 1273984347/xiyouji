@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.2.93（2026-08-03）— W342 A4 身份政治 gap-fill（权力五联对照 W084 + 妖怪身份政治）+ W341 死链巡检修复 + SD 全量错位排查/SD001 修复 + A1 逐回关联分析 + A5/A6 结构标准化 · 全站设计系统（system.css）+ 85 个可视化/交互页 + RAG 对话 + 数据 API 服务 + dataset/ 41 JSON + 100 回逐回解读 + 626 篇研究文档 + PWA 离线。A4 主题专题 201 篇·W334（v2.2.86）全站设计系统·详细变更见 [CHANGELOG.md](CHANGELOG.md)，历史归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
+> 当前版本：v2.2.94（2026-08-04）— W342 A4 身份政治 gap-fill 等全部交付收尾 + W343 交付收尾（A1 逐回关联分析 footer 100/100 覆盖 + 28 篇跨章 SD 交叉引用 + RAG 索引 675 全覆盖 + 内容空缺审计无宏观空缺 + Security/Screenshot Review 全 CI 转绿 + 移动端表格溢出修复）· 全站设计系统（system.css）+ 85 个可视化/交互页 + RAG 对话 + 数据 API 服务 + dataset/ 41 JSON + 100 回逐回解读 + 626 篇研究文档 + PWA 离线。A4 主题专题 201 篇·W334（v2.2.86）全站设计系统·详细变更见 [CHANGELOG.md](CHANGELOG.md)，历史归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
 
 ## 顶层结构
 

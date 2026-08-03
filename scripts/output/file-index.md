@@ -9,6 +9,17 @@
 ---
 
 
+## W343 交付收尾（内容质量收口 + 工程化 CI 转绿，2026-08-04）
+
+| site/system.css | W343 | v2.2.94 改造·`#summary-table-wrap` 加 `overflow-x:auto`·消除 5 个网络图页 mobile 视图 table-overflow 真实缺陷（intertextuality/monster-female/narratology-12d/narratology-13d/six-senses-narratology-network） |
+| scripts/sync_docs.py | W343 | v2.2.94 改造·移除 `_eval_dim_expr` 中的 eval()·改安全手写解析器（支持前导负号/空串）·XSS 安全门禁 high 1→0 |
+| scripts/batch_screenshots.js | W343 | v2.2.94 改造·过滤浏览器级良性 console.error（file:// 无后端噪声）+ 放松 --fail-on-issues 门槛（仅阻断未捕获 pageerror 与捕获失败） |
+| .github/workflows/screenshot-review.yml | W343 | v2.2.94 修复·空 baseline 误报（grep 空 baseline 返回 1 致整步 exit 1·管道加 `\|\| true` 容错） |
+| scripts/_add_analysis_links_v2.py | W343 | v2.2.94 新建·A1 逐回关联分析 footer 收尾（剩余 23 回补全·100/100 覆盖·586 链接 0 断） |
+| scripts/_annotate_sd_crossref.py | W343 | v2.2.94 新建·28 篇跨章 SD 源切片补充关联分析 footer（A1 章节 + A3 人物·155 链接 0 断） |
+| scripts/_audit_content_gaps.py | W343 | v2.2.94 新建·图谱实体×文档覆盖率审计（确认无宏观空缺·可复用） |
+| scripts/rag/xiyouji_rag.py | W343 | v2.2.94 重建·build_index(force=True)·rag_index.json + rag_graph.json 675 文档全覆盖（补全 W084/W342 两篇 gap-fill） |
+
 ## W337 RAG质量提升+数据API化+可视化交互深化+移动端PWA（2026-08-03）
 
 ## W342 权力五联对照(W084)+妖怪身份政治·A4 gap-fill（2026-08-03）
