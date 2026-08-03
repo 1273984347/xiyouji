@@ -9,6 +9,17 @@
 ---
 
 
+## W344 质量增强包（术语统一审计 + A1 结构化元数据 + A5/A6 提质 + 项目说明版本残留修复，2026-08-04）
+
+| docs/00-导读/项目说明.md | W344 | v2.2.95 修复·第 45 行残留 v2.2.69 旧版本号（实为 v2.2.94）·消除版本错乱 |
+| scripts/_audit_terminology.py | W344 | v2.2.95 新建·术语统一审计（全站 docs/ + site/ 扫描·繁→简专名/OCR 错谬/单字繁体残余·区分有意别名与错谬·产出 terminology-audit-report.md 并保守修复） |
+| scripts/_build_chapter_metadata.py | W344 | v2.2.95 新建·A1 逐回结构化元数据生成（回目 couplet/主要人物≤6/难序/地点≤6·由 dataset 反推·零编造） |
+| dataset/chapters-metadata.json | W344 | v2.2.95 新建·第 42 个结构化 JSON·100 回结构化元数据（回目/主要人物/难序/地点）·反哺图谱 |
+| docs/01-全书逐回解读/第001-100回-*.md（100 篇） | W344 | v2.2.95 注入 `<!-- chapter-meta -->` 机器可读注释（渲染不可见·可重跑·反哺图谱） |
+| docs/04-文化与历史背景/西游与禅宗公案专题.md | W344 | v2.2.95 新建·A5 提质·禅宗顿悟读法 × 清代内丹渐修读法并置 |
+| docs/04-文化与历史背景/版本演变补遗-平话层.md | W344 | v2.2.95 新建·A5 提质·已佚《西游记平话》层残迹推考（明确标注推测/残存） |
+| docs/05-诗词歌赋/原著景物诗分类赏析专题.md | W344 | v2.2.95 新建·A6 提质·景物诗三型分类赏析（引文与原著回目原文逐句核对） |
+
 ## W343 交付收尾（内容质量收口 + 工程化 CI 转绿，2026-08-04）
 
 | site/system.css | W343 | v2.2.94 改造·`#summary-table-wrap` 加 `overflow-x:auto`·消除 5 个网络图页 mobile 视图 table-overflow 真实缺陷（intertextuality/monster-female/narratology-12d/narratology-13d/six-senses-narratology-network） |
