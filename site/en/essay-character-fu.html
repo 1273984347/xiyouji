@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>Portrait Poems &mdash; Fu as Character-Making</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c; --accent-3: #C9A063;
+            --accent-4: #6B8E5A; --rebel: #8c2a2a; --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8; min-height: 100vh; }
+        .hero { background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+        .hero::after { content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%); pointer-events: none; }
+        .lang-switch { position: absolute; top: 18px; right: 24px; font-size: 0.85rem; z-index: 5; }
+        .lang-switch a { color: var(--accent-soft); text-decoration: none; padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35); border-radius: 4px; }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 8px; position: relative; z-index: 1; }
+        .hero .subtitle { font-size: 0.95rem; color: var(--accent-soft); letter-spacing: 0.25em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85rem; color: rgba(245, 233, 212, 0.65); font-style: italic; position: relative; z-index: 1; }
+        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--line); }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container { max-width: 820px; margin: -30px auto 60px; padding: 0 24px; position: relative; z-index: 2; }
+        .source-note { background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+            padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 32px; font-size: 0.88rem; color: var(--ink-soft); }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 36px 40px; box-shadow: var(--shadow); }
+        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 12px; padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft); letter-spacing: 0.03em; }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor { font-size: 0.78rem; color: var(--accent-2); font-family: "JetBrains Mono", monospace; margin-left: 8px; letter-spacing: 0.1em; font-weight: 400; }
+        article p { margin-bottom: 18px; font-size: 1rem; color: var(--ink); text-wrap: pretty; }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider { text-align: center; color: var(--accent-soft); margin: 28px 0; letter-spacing: 0.5em; font-size: 1rem; }
+        .nav-back { display: inline-block; margin-top: 28px; padding: 8px 16px; background: var(--accent);
+            color: #fff8ec; border-radius: 4px; text-decoration: none; font-size: 0.88rem; transition: background 0.15s; }
+        .nav-back:hover { background: var(--rebel); }
+        .related { margin-top: 24px; padding: 14px 18px; background: #fff8ec; border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        @media (max-width: 640px) { article { padding: 24px 20px; } }
+        footer { text-align: center; padding: 24px; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 40px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> &middot; <a href="dashboard.html">Dashboard</a> &middot; Essay 34
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">&#20013;&#25991;</a>
+        </div>
+        <h1>Portrait Poems &mdash; Fu as Character-Making</h1>
+        <div class="subtitle">ESSAY 34 &middot; SUMMARY TRANSLATION</div>
+        <div class="tagline">About 60 portrait-fu among 800+ poems; four fu-types (debut / transformation / enlightenment / apotheosis) read through Liu Xie, Zhong Rong, Sikong Tu, and Wang Guowei.</div>
+    </header>
+    <main class="container">
+        <div class="source-note">
+            A summary translation of <a href="../../docs/05-诗词歌赋/原著人物赋诗词赏析专题.md">原著人物赋诗词赏析专题.md</a>. the Chinese original reads the novel's character-portrait verse through four classical fu-theorists and four portrait types (debut / transformation / enlightenment / apotheosis), with chapter-line anchors 522 / 864 / 1393 / 7085. All anchors are carried over without fabrication.
+        </div>
+        <article>
+
+            <h2>A Portrait Tradition Inside the Verse <span class="anchor">&#8596; ch. 1 / 7 / 14 / 100</span></h2>
+            <p>
+                Of the novel's 800-plus poems, roughly 60 are <em>portrait-fu</em> (&ldquo;character fu,&rdquo; r&eacute;nf&ugrave;) &mdash; set-pieces that fix a figure's appearance, bearing, and destiny in verse. They do four jobs: <strong>debut portraiture</strong> (fixing the image at first entrance), <strong>battle narrative</strong> (describing both combatants mid-fight), <strong>enlightenment</strong> (a deity's verse that awakens a mortal), and <strong>closing appraisal</strong> (judging a figure at apotheosis). Four anchor lines carry the argument: ch. 1 line 522 (the stone monkey's birth &mdash; debut portrait), ch. 7 line 864 (Havoc in Heaven &mdash; transformation portrait), ch. 14 line 1393 (the tightening circlet &mdash; enlightenment portrait), ch. 100 line 7085 (the Five Sages perfected &mdash; apotheosis portrait).
+            </p>
+
+            <h2>Four Theorists of the Fu <span class="anchor">&#8596; Liu &middot; Zhong &middot; Sikong &middot; Wang</span></h2>
+            <table>
+                <tr><th>Theorist</th><th>Work</th><th>Core claim</th><th>JTTW correspondence</th></tr>
+                <tr><td>Liu Xie (c. 465&ndash;520)</td><td><em>Wenxin Diaolong &middot; On the Fu</em></td><td>fu = &ldquo;exposition&rdquo;: display ornament, <em>embody the object</em> (t&#464;w&ugrave;) and <em>express the intent</em> (xi&#283;zh&igrave;)</td><td>portrait-fu both describes the body and discloses the character</td></tr>
+                <tr><td>Zhong Rong (c. 468&ndash;518)</td><td><em>Shi Pin (Grading the Poets)</em></td><td>flavor theory (&ldquo;z&#299;w&egrave;i&rdquo;): poetry's essence is savour arising from &ldquo;pointing at things / shaping forms&rdquo;</td><td>portrait-fu yields savour through form-shaping plus feeling</td></tr>
+                <tr><td>Sikong Tu (837&ndash;908)</td><td><em>Twenty-four Modes of Poetry</em></td><td>resonance theory (&ldquo;b&ugrave;zhu&oacute; y&iacute;z&igrave;, j&igrave;n d&eacute; f&#275;ngli&uacute;&rdquo;): meaning beyond the words; 24 realms</td><td>Wukong = &ldquo;virile&rdquo; (xi&oacute;ngh&uacute;n), Tang Monk = &ldquo;still&rdquo; (ch&omacr;ngd&agrave;n), Guanyin = &ldquo;weighty&rdquo; (ch&eacute;nzh&ugrave;), the Sages = &ldquo;high-antique&rdquo; (g&#257;og&#468;)</td></tr>
+                <tr><td>Wang Guowei (1877&ndash;1927)</td><td><em>Renjian Cihua</em></td><td>realm theory: realms &ldquo;with-self&rdquo; vs &ldquo;no-self&rdquo;; worlds &ldquo;made&rdquo; vs &ldquo;written&rdquo;</td><td>portrait-fu holds both objective depiction and subjective feeling</td></tr>
+            </table>
+
+            <h2>Debut Portrait &mdash; the Stone Monkey <span class="anchor">&#8596; ch. 1, line 522</span></h2>
+            <p>
+                &ldquo;Complete in five senses, whole in four limbs&hellip; from his eyes stream two shafts of golden light, piercing the Palace of Poles.&rdquo; This is the debut portrait: the first clause <em>embodies the object</em> (senses, limbs, golden light), the second <em>expresses the intent</em> (a rebellious nature already implied). The golden gaze threads the whole arc &mdash; from the Great Sage Equal-to-Heaven to the Victorious Buddha.
+            </p>
+
+            <h2>Transformation Portrait &mdash; Havoc in Heaven <span class="anchor">&#8596; ch. 7, line 864</span></h2>
+            <p>
+                The duel with Erlang: Wukong becomes a sparrow, Erlang a hawkeagle; Wukong a fish, Erlang a kingfisher; Wukong a bird, Erlang a bowman. The transformation portrait is Liu Xie's &ldquo;display&rdquo; at full stretch &mdash; a catalogue of mutual shape-shifting that is itself the fight.
+            </p>
+
+            <h2>Enlightenment Portrait &mdash; the Circlet <span class="anchor">&#8596; ch. 14, line 1393</span></h2>
+            <p>
+                Guanyin's Heart-Sutra verse &mdash; &ldquo;form is not other than emptiness, emptiness not other than form&rdquo; &mdash; is the enlightenment portrait. A few words imply infinite &ldquo;mind-nature&rdquo; resonance: Sikong Tu's &ldquo;meaning beyond the words&rdquo; made verse.
+            </p>
+
+            <h2>Apotheosis Portrait &mdash; the Five Sages <span class="anchor">&#8596; ch. 100, line 7085</span></h2>
+            <p>
+                Tang = Candana-Merit Buddha, Wukong = Victorious Buddha, Bajie = Altar-Cleaner, Sha = Golden-Body Arhat, Ao Lie = Eightfold Dragon-horse. The apotheosis portrait is both <em>made</em> (a fictional Buddhist apotheosis) and <em>written</em> (a real record of cultivation's end) &mdash; Wang Guowei's two worlds resolved.
+            </p>
+
+            <h2>A Ming Mirror <span class="anchor">&#8596; archaism &middot; xinling &middot; song-speech</span></h2>
+            <p>
+                The portrait-fu is a literary echo of three Ming currents: the <em>Archaist</em> movement (Li Mengyang, Wang Shizhen &mdash; &ldquo;prose must be Qin-Han, poetry must be High Tang&rdquo;) in its return to Han-fu grandeur; the <em>Gong'an</em> school's <em>xinling</em> (&ldquo;utter one's true sensibility, brook no fixed form&rdquo;) in Wukong's and Bajie's undisguised natures; and the <em>ch&agrave;ngb&aacute;i</em> (song-speech) of Kunqu and Yiyang opera, which lets the fu be both chanted and sung.
+            </p>
+
+            <a class="nav-back" href="index.html">&larr; Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+<a href="essay-poetry-opening.html">E31 &middot; Opening Verse</a> &middot; <a href="essay-poetry-imagery.html">E33 &middot; Imagery Lineage</a> &middot; <a href="essay-scenery-poems.html">E6 &middot; Scenery Poems</a> &middot; <a href="character-wukong.html">Wukong deep-dive</a>
+            </div>
+        </article>
+    </main>
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.8 W357 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W357
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

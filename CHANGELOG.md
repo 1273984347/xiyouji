@@ -8,6 +8,12 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.3.8（2026-08-04）：W357 英文站 A6 诗词译介续（四篇 poetry essay·site/en/ 47→51 文件）
+
+- **英文站新增 4 页（site/en/ 47→51 文件）**：essay-character-fu.html（E34·人物赋·四理论家 刘勰/钟嵘/司空图/王国维 + 四赋型 定像/变化/点化/封圣 line 522/864/1393/7085·明代镜像 前后七子/公安派/戏曲唱白）、essay-rhythm-analysis.html（E35·韵律分析·四理论家 王力/启功/周振甫/朱光潜 + 四维度 平仄/对仗/节奏/韵律圆成 line 522/864/1393/7085·仄起平收）、essay-thematic-poetry.html（E36·主题诗词创作·项目自身创作四首 五行山/三打白骨精/真假美猴王/凌云渡 忠实英译）、essay-original-poetry.html（E37·原著诗词赏析·约 800 首功能/主题/回目对联/体裁分布 6%/37%/10%/25%/4%/6%/5% + 人物赞对比）；按"策展摘要 + 中文源文回链 + 中文切换 + footer 双索引 v2.3.8 W357"约定
+- **英文站入口与文档同步**：site/en/index.html 入口卡片 46→50、README 文件清单 47→51、版本号升 v2.3.8 W357；全部 51 个 EN HTML 页 footer 双索引统一升级；修复 E33 失效回链（已删 essay-poetry-landscape.html E32 → essay-scenery-poems.html E6）
+- **六文档 + dukou-engine footer 同步 v2.3.8 W357**；verify_delivery 门禁全绿
+
 ### v2.3.7（2026-08-04）：W356 英文站 A6 诗词译介（两篇 poetry essay·site/en/ 46→48 文件）
 
 - **英文站新增 2 页（site/en/ 46→48 文件）**：essay-poetry-opening.html（E31·开篇诗·三重诗学坐标 王国维境界说/朱光潜诗学/叶嘉莹词学 + 六处关键回目诗 1/7/8/14/22/100 三教合一·道→佛→圆融权力弧 + 古今对位）、essay-poetry-imagery.html（E33·意象谱系·四理论家 庞德/艾略特/巴什拉/刘勰 + 四意象 石猴/蟠桃/白骨/真经=造化→欲望→虚妄→觉悟 + 中西对位 刘勰早于西方意象派1400年）；按"策展摘要 + 中文源文回链 + 中文切换 + footer 双索引 v2.3.7 W356"约定

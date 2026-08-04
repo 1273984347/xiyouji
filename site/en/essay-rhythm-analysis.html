@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>The Music of the Verse &mdash; Four Dimensions of Sound-Law</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c; --accent-3: #C9A063;
+            --accent-4: #6B8E5A; --rebel: #8c2a2a; --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8; min-height: 100vh; }
+        .hero { background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+        .hero::after { content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%); pointer-events: none; }
+        .lang-switch { position: absolute; top: 18px; right: 24px; font-size: 0.85rem; z-index: 5; }
+        .lang-switch a { color: var(--accent-soft); text-decoration: none; padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35); border-radius: 4px; }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 8px; position: relative; z-index: 1; }
+        .hero .subtitle { font-size: 0.95rem; color: var(--accent-soft); letter-spacing: 0.25em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85rem; color: rgba(245, 233, 212, 0.65); font-style: italic; position: relative; z-index: 1; }
+        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--line); }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container { max-width: 820px; margin: -30px auto 60px; padding: 0 24px; position: relative; z-index: 2; }
+        .source-note { background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+            padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 32px; font-size: 0.88rem; color: var(--ink-soft); }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 36px 40px; box-shadow: var(--shadow); }
+        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 12px; padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft); letter-spacing: 0.03em; }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor { font-size: 0.78rem; color: var(--accent-2); font-family: "JetBrains Mono", monospace; margin-left: 8px; letter-spacing: 0.1em; font-weight: 400; }
+        article p { margin-bottom: 18px; font-size: 1rem; color: var(--ink); text-wrap: pretty; }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider { text-align: center; color: var(--accent-soft); margin: 28px 0; letter-spacing: 0.5em; font-size: 1rem; }
+        .nav-back { display: inline-block; margin-top: 28px; padding: 8px 16px; background: var(--accent);
+            color: #fff8ec; border-radius: 4px; text-decoration: none; font-size: 0.88rem; transition: background 0.15s; }
+        .nav-back:hover { background: var(--rebel); }
+        .related { margin-top: 24px; padding: 14px 18px; background: #fff8ec; border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        @media (max-width: 640px) { article { padding: 24px 20px; } }
+        footer { text-align: center; padding: 24px; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 40px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> &middot; <a href="dashboard.html">Dashboard</a> &middot; Essay 35
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">&#20013;&#25991;</a>
+        </div>
+        <h1>The Music of the Verse &mdash; Four Dimensions of Sound-Law</h1>
+        <div class="subtitle">ESSAY 35 &middot; SUMMARY TRANSLATION</div>
+        <div class="tagline">Four rhythm theorists (Wang Li, Qi Gong, Zhou Zhenfu, Zhu Guangqian) read four nodes (opening / furnace / spell / finale) through tone-level, parallelism, rhythm, and rounding-completion.</div>
+    </header>
+    <main class="container">
+        <div class="source-note">
+            A summary translation of <a href="../../docs/05-诗词歌赋/西游诗词韵律分析专题.md">西游诗词韵律分析专题.md</a>. the Chinese original analyses the novel's prosody through four modern rhythm scholars and four sound-law dimensions (tone-level / parallelism / rhythm / rounding-completion), anchored at lines 522 / 864 / 1393 / 7085. All anchors are carried over without fabrication.
+        </div>
+        <article>
+
+            <h2>Sound-Law as the Bone of Verse <span class="anchor">&#8596; ch. 1 / 7 / 14 / 100</span></h2>
+            <p>
+                Rhythm is the &ldquo;bone of sound-law&rdquo; in the novel's verse. Four modern scholars give four names to that bone &mdash; Wang Li names it <em>tone-level</em> (p&iacute;ngz&egrave;), Qi Gong names it <em>sound-law</em> (sh&#275;ngl&uuml;), Zhou Zhenfu names it <em>parallelism</em> (du&igrave;zh&agrave;ng), Zhu Guangqian names it <em>rhythm</em> (ji&eacute;z&ograve;u). The novel's four anchor nodes map onto four dimensions: tone-level (ch. 1 line 522 opening verse), parallelism (ch. 7 line 864 the Eight-Trigram Furnace), rhythm (ch. 14 line 1393 the tightening spell), and rounding-completion (ch. 100 line 7085 the closing verse).
+            </p>
+
+            <h2>Four Rhythm Theorists <span class="anchor">&#8596; Wang &middot; Qi &middot; Zhou &middot; Zhu</span></h2>
+            <table>
+                <tr><th>Theorist</th><th>Work</th><th>Core claim</th><th>JTTW correspondence</th></tr>
+                <tr><td>Wang Li (1900&ndash;1986)</td><td><em>Chinese Metrical Law</em></td><td>tone-level: level/oblique interlace; rhyme; line-type; form</td><td>ch. 1 line 522 opening verse interlaces tones, opens on an <em>oblique</em> rhyme</td></tr>
+                <tr><td>Qi Gong (1912&ndash;2005)</td><td><em>On the Sound-Law of Poetry &amp; Prose</em></td><td>two-character beat; sound symmetry; permissible variants (&ldquo;1-3-5 free, 2-4-6 fixed&rdquo;)</td><td>ch. 7 line 864 furnace verse as sound-symmetry plus variant</td></tr>
+                <tr><td>Zhou Zhenfu (1911&ndash;2000)</td><td><em>Examples on Poetry</em></td><td>parallelism: strict / loose / running / borrowed; flowing parallelism</td><td>ch. 14 line 1393 spell verse as a running couplet (cause&rarr;effect)</td></tr>
+                <tr><td>Zhu Guangqian (1897&ndash;1986)</td><td><em>On Poetry</em></td><td>rhythm: born of tension-relaxation; types; rhythm-emotion</td><td>ch. 14 urgent rhythm + ch. 100 relaxed rhythm</td></tr>
+            </table>
+
+            <h2>Tone-Level &mdash; the Opening Verse <span class="anchor">&#8596; ch. 1, line 522</span></h2>
+            <p>
+                &ldquo;Before chaos parted, heaven and earth were troubled&hellip;&rdquo; runs the seven-character opening. Its tone pattern (&ldquo;oblique-oblique-level-level-level-oblique-oblique&rdquo;) follows Wang Li's interlace exactly, and it rhymes on <em>oblique</em> tones (&ldquo;troubled / unseen / discerned&rdquo;). Wu Cheng'en opens on an oblique rhyme to match the &ldquo;troubled&rdquo; chaos &mdash; short, hard oblique tones fit the unparted world. Tone is not mere rule here; it is the sound of heaven and earth opening.
+            </p>
+
+            <h2>Parallelism &mdash; the Eight-Trigram Furnace <span class="anchor">&#8596; ch. 7, line 864</span></h2>
+            <p>
+                The furnace verse sets &ldquo;fire&rdquo; against &ldquo;furnace,&rdquo; &ldquo;civil/martial&rdquo; against &ldquo;eight trigrams,&rdquo; &ldquo;forty-nine days&rdquo; against &ldquo;fiery eyes.&rdquo; Qi Gong's sound-symmetry shows in the balanced pairs; his permissible variants show in the &ldquo;1-3-5 free&rdquo; licence that never breaks the &ldquo;2-4-6&rdquo; scaffold &mdash; the variant maps to &ldquo;adjusting the fire,&rdquo; the scaffold to &ldquo;temper unchanging.&rdquo;
+            </p>
+
+            <h2>Rhythm &mdash; the Tightening Spell <span class="anchor">&#8596; ch. 14, line 1393</span></h2>
+            <p>
+                The spell's rhythm is urgent and tense: the Tang Monk chants quickly, Wukong's head aches with matching tension &mdash; Zhu Guangqian's &ldquo;urgent rhythm matches tense feeling.&rdquo; Zhou Zhenfu's flowing parallelism appears in &ldquo;the mind-monkey submits / the six thieves vanish&rdquo;: a running couplet where cause (submission) flows into effect (vanishing). Rhythm here is not pattern but the sound of constraint becoming release.
+            </p>
+
+            <h2>Rounding-Completion &mdash; the Closing Verse <span class="anchor">&#8596; ch. 100, line 7085</span></h2>
+            <p>
+                The closing verse rounds the four dimensions into one: it closes on a <em>level</em> rhyme against the opening's oblique rhyme &mdash; an &ldquo;oblique opening, level close&rdquo; (z&egrave;q&#464; p&iacute;ngsh&#333;u). Opening verse raises the rhyme, furnace carries it, spell turns it, finale answers it; four rhymes become one. The contemporary lesson: a poem needs the full path tone-level &rarr; parallelism &rarr; rhythm &rarr; completion &mdash; bone, joint, turn, and close.
+            </p>
+
+            <a class="nav-back" href="index.html">&larr; Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+<a href="essay-poetry-opening.html">E31 &middot; Opening Verse</a> &middot; <a href="essay-chapter-couplets.html">E9 &middot; Chapter Couplets</a> &middot; <a href="essay-poetry-imagery.html">E33 &middot; Imagery Lineage</a> &middot; <a href="character-wukong.html">Wukong deep-dive</a>
+            </div>
+        </article>
+    </main>
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.8 W357 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W357
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
