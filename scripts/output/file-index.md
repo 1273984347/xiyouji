@@ -41,6 +41,10 @@
 | site/en/character-bailongma.html | W350 | v2.3.1 新建·英文站深度页·白龙马（西海三太子→马→八部天龙/ Belbin Specialist/ 低恐惧高顺从雷达） |
 | site/en/essay-buddhist-chan.html | W350 | v2.3.1 新建·英文站 E11 译介·佛教禅宗读法（达摩/慧能/神秀/玄奘·八识结构·四概念） |
 | site/en/essay-folk-belief.html | W350 | v2.3.1 新建·英文站 E12 译介·民间信仰读法（杨庆堃/王斯福/武雅士/华琛·弥漫性宗教/帝国隐喻/标准化） |
+| site/en/essay-composition-origins.html | W351 | v2.3.2 新建·英文站 E13 译介·成书背景（作者之谜/版本谱系/历史vs小说玄奘/明代世界） |
+| site/en/essay-ming-metaphor.html | W351 | v2.3.2 新建·英文站 E14 译介·明代隐喻（六重隐喻/官场/荫庇株连/市民文化/宗教政治） |
+| site/en/essay-three-teachings.html | W351 | v2.3.2 新建·英文站 E15 译介·佛道思想（三教合一/五蕴对应五人/内丹三家相见） |
+| site/en/site-map.html | W351 | v2.3.2 新建·英文站全局主题索引·七簇 29 链接 |
 
 
 

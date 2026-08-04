@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>The Ming in Disguise: Six Layers of Social Satire — Annotated English Edition</title>
+    <style>        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg); color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8; min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 24px 48px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::after { content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none; }
+        .lang-switch { position: absolute; top: 18px; right: 24px; font-size: 0.85rem; z-index: 5; }
+        .lang-switch a { color: var(--accent-soft); text-decoration: none;
+            padding: 4px 10px; border: 1px solid rgba(245, 233, 212, 0.35); border-radius: 4px; }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em;
+            margin-bottom: 8px; position: relative; z-index: 1; }
+        .hero .subtitle { font-size: 0.95rem; color: var(--accent-soft);
+            letter-spacing: 0.25em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65); font-style: italic; position: relative; z-index: 1; }
+        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px 24px;
+            background: var(--bg); border-bottom: 1px solid var(--line); }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container { max-width: 820px; margin: -30px auto 60px; padding: 0 24px;
+            position: relative; z-index: 2; }
+        .source-note { background: var(--paper); border: 1px solid var(--line);
+            border-radius: 8px; padding: 16px 20px; box-shadow: var(--shadow);
+            margin-bottom: 32px; font-size: 0.88rem; color: var(--ink-soft); }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article { background: var(--paper); border: 1px solid var(--line);
+            border-radius: 8px; padding: 36px 40px; box-shadow: var(--shadow); }
+        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 12px;
+            padding-bottom: 6px; border-bottom: 2px solid var(--accent-soft); letter-spacing: 0.03em; }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor { font-size: 0.78rem; color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace; margin-left: 8px; letter-spacing: 0.1em; font-weight: 400; }
+        article p { margin-bottom: 18px; font-size: 1rem; color: var(--ink); text-wrap: pretty; }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider { text-align: center; color: var(--accent-soft); margin: 28px 0;
+            letter-spacing: 0.5em; font-size: 1rem; }
+        .nav-back { display: inline-block; margin-top: 28px; padding: 8px 16px;
+            background: var(--accent); color: #fff8ec; border-radius: 4px; text-decoration: none;
+            font-size: 0.88rem; transition: background 0.15s; }
+        .nav-back:hover { background: var(--rebel); }
+        .related { margin-top: 24px; padding: 14px 18px; background: #fff8ec;
+            border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer { text-align: center; padding: 24px; color: var(--ink-soft);
+            font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 40px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+        .sm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
+        .sm-cluster { background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+            padding: 18px 20px; box-shadow: var(--shadow); }
+        .sm-cluster h3 { color: var(--accent); font-size: 1.05rem; margin-bottom: 10px;
+            border-bottom: 2px solid var(--accent-soft); padding-bottom: 5px; letter-spacing: 0.03em; }
+        .sm-cluster ul { list-style: none; margin: 0; }
+        .sm-cluster li { margin-bottom: 9px; font-size: 0.9rem; line-height: 1.5; }
+        .sm-cluster a { color: var(--accent-2); text-decoration: none; font-weight: 600; }
+        .sm-cluster a:hover { text-decoration: underline; }
+        .sm-cluster .d { color: var(--ink-soft); font-size: 0.84rem; display: block; margin-top: 1px; }
+        @media (max-width: 680px) { .sm-grid { grid-template-columns: 1fr; } }</style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb"><a href="index.html">EN Home</a> &middot; <a href="essay-zen-koan-vs-neidan.html">Essays</a> &middot; E14</nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>The Ming in Disguise: Six Layers of Social Satire</h1>
+        <div class="subtitle">ESSAY &middot; E14 &middot; SATIRE</div>
+        <div class="tagline">Heaven is the Ming court projected skyward &mdash; and a demon's fate turns on who its master is.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">A curated English summary of the project's Chinese essay <strong>Míngdài Yǐnyù</strong> (明代隐喻, A5 &middot; 社会隐喻 &middot; six metaphor dimensions). The officialdom table and the demon-backing table are taken directly from that source; no figures are invented. This is a summary translation, not a full rendering.</div>
+        <article>
+            <h2>Introduction: Heaven Is the Ming Court in the Sky <span class="anchor">&#8596; the thesis</span></h2>
+            <p>
+                The project's Chinese study <strong>Míngdài Yǐnyù</strong> (明代隐喻) argues that the novel is a six-layered satire of mid-Ming society. Its most famous move: the celestial bureaucracy is not a heaven above but a <em>Ming court projected upward</em>. This essay keeps to the source's six dimensions and its central, slightly cynical insight &mdash; that the demons' fates are decided less by merit than by <em>connections</em>.
+            </p>
+
+            <h2>1 &middot; Officialdom <span class="anchor">&#8596; ranks and seals</span></h2>
+            <p>
+                "Bimawen" (弼马温), the post Wukong is given and storms out of, maps to the real <strong>Office of the Imperial Stables</strong> (御马监) &mdash; a eunuch-run bureau of the fourth rank, close to the throne but menial in substance. Wukong's rage is the rage of a low Ming clerk against a rigid hierarchy. Heaven's nine-rank system mirrors the dynasty's civil-service grades one-for-one:
+            </p>
+            <table>
+                <tr><th>Heavenly post</th><th>Ming counterpart</th><th>Function</th></tr>
+                <tr><td>Jade Emperor</td><td>The Emperor</td><td>supreme sovereignty</td></tr>
+                <tr><td>Grand Supreme Elder</td><td>Preceptor / imperial tutor</td><td>Daoist legitimation</td></tr>
+                <tr><td>Li Jing (Heavenly King)</td><td>a meritorious martial duke</td><td>commands troops</td></tr>
+                <tr><td>Venus (Taibai Jinxing)</td><td>censor / Tongzheng office</td><td>remonstrance, proclamations</td></tr>
+                <tr><td>Bimawen</td><td>eunuch of the Stables</td><td>manages imperial horses (rank 4)</td></tr>
+                <tr><td>Curtain-Lifting General</td><td>Embroidered-Uniform Guard</td><td>close-body attendant</td></tr>
+                <tr><td>Marshal Tianpeng</td><td>capital naval commander</td><td>commands the river fleet</td></tr>
+                <tr><td>the star lords</td><td>the Nine Ministers &amp; censors</td><td>each to their office</td></tr>
+            </table>
+
+            <h2>2 &middot; Patronage &amp; Persecution <span class="anchor">&#8596; backing decides the ending</span></h2>
+            <p>
+                The novel's folk punchline &mdash; <em>"those with backing are reclaimed, those without are smashed"</em> &mdash; is a mirror of Ming <strong>patronage and collective punishment</strong> (荫庇与株连). The pattern is unmistakable:
+            </p>
+            <table>
+                <tr><th>Demon</th><th>Backing</th><th>Fate</th></tr>
+                <tr><td>Gold &amp; Silver Horns</td><td>the Elder Lord's boys</td><td>reclaimed by the Elder Lord</td></tr>
+                <tr><td>Green-Buffalo Demon</td><td>the Elder Lord's mount</td><td>led away by the Elder Lord</td></tr>
+                <tr><td>Yellow-Brow</td><td>Maitreya's acolyte</td><td>reclaimed by Maitreya</td></tr>
+                <tr><td>Great Peng</td><td>Tathagata's maternal uncle</td><td>absorbed by Tathagata</td></tr>
+                <tr><td>Red Boy</td><td>son of the Bull Demon King</td><td>enlisted by Guanyin</td></tr>
+                <tr><td>White-Bone Demon</td><td><em>no backing</em></td><td>beaten to death (three strikes)</td></tr>
+                <tr><td>Spider Spirits</td><td><em>no backing</em></td><td>slain at a stroke</td></tr>
+            </table>
+            <p>
+                Those with a provenance all have a destination; those without die under the staff. A god's mount or page causing trouble below is "on a business trip"; returning to post is "returning to the capital." This in-and-out is precisely Ming officialdom's "those with a patron rise, those without fall" &mdash; in demonic dress.
+            </p>
+
+            <h2>3 &middot; Commercial Economy <span class="anchor">&#8596; the vernacular and the marketplace</span></h2>
+            <p>
+                The mid-Ming saw a rising urban class and a flourishing market; the <em>vernacular</em> novel &mdash; entertaining, secular, colloquial &mdash; is its product. Wukong's street talk ("old Sun!"), Bajie's greed, the demons' very humanity (the Bull King with wife, concubine, and son; Red Boy with anxious parents) all spring from this market-town culture. The book could become a hundred-chapter monument only because a <em>citizen society</em> could sustain it &mdash; and its longevity rests on exactly that earthy, vital breath.
+            </p>
+
+            <h2>4 &middot; Religious Politics <span class="anchor">&#8596; Daoist emperor, Buddhist folk</span></h2>
+            <p>
+                The Jiajing emperor's favour to Daoism (his private altar never idle; the "green-tally" prime ministers) and Buddhism's declining official rank &mdash; yet booming folk devotion &mdash; are the real religious ecology. The kingdom of Chechi (车迟国), which suppresses Buddhism and exalts Daoism, is almost a mirror of the Jiajing court. Heaven and Thunderclap Monastery keep a balance of power that maps the Ming Buddhist-Daoist polity; and the scripture-fetching itself is a <em>cross-system political marriage</em> &mdash; initiated by Tathagata, tolerated by the Jade Emperor, executed by Guanyin.
+            </p>
+
+            <h2>5 &middot; Social Contradiction <span class="anchor">&#8596; demon = bureaucrat</span></h2>
+            <p>
+                The novel's sharpest stroke is the <em>overlap of demon and bureaucrat</em>. Many demons are Heaven's officials &mdash; causing trouble below is a business trip, returning to post is going home to the capital. The same being is demon when below and immortal when above; good and evil flip with position. That is another phrasing of Ming officialdom's "crown while in office, corrupt once departed."
+            </p>
+
+            <h2>Conclusion <span class="anchor">&#8596; a comedy with a ledger</span></h2>
+            <p>
+                Read as satire, the journey west is a ledger of Ming society: a celestial court photocopied from the earthly one, demons who are really clerks, and a salvation that depends on whom you know. The comedy is bright; the accounting is cold. (For the thought-world behind the satire, see E15; for the bureaucracy's real institutions, see E8.)
+            </p>
+
+            <h2>Explore Further <span class="anchor">&#8596; cross-linked</span></h2>
+            <ul>
+                <li><a href="essay-divine-bureaucracy.html">Heaven as a Ming Bureaucracy</a> (E8) &mdash; the celestial administration in detail.</li>
+                <li><a href="essay-three-teachings.html">Three Teachings, One Journey</a> (E15) &mdash; the syncretic thought-world.</li>
+                <li><a href="essay-composition-origins.html">The Making of the Novel</a> (E13) &mdash; the Ming world that produced it.</li>
+                <li><a href="../../docs/04-文化与历史背景/明代隐喻.md">&#20013;&#25991;&#28304;&#25991; (Chinese source)</a>.</li>
+            </ul>
+
+            <a class="nav-back" href="index.html">&#8592; Back to EN Home</a>
+            <div class="related"><strong>Related:</strong><a href="essay-divine-bureaucracy.html">E8 Divine Bureaucracy</a> &middot; <a href="essay-three-teachings.html">E15 Three Teachings</a> &middot; <a href="essay-composition-origins.html">E13 Composition</a></div>
+        </article>
+    </main>
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.2 W351 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W351
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

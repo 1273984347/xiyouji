@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>The Making of the Novel: Authorship, Texts, and the Ming World — Annotated English Edition</title>
+    <style>        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg); color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8; min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 24px 48px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::after { content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none; }
+        .lang-switch { position: absolute; top: 18px; right: 24px; font-size: 0.85rem; z-index: 5; }
+        .lang-switch a { color: var(--accent-soft); text-decoration: none;
+            padding: 4px 10px; border: 1px solid rgba(245, 233, 212, 0.35); border-radius: 4px; }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em;
+            margin-bottom: 8px; position: relative; z-index: 1; }
+        .hero .subtitle { font-size: 0.95rem; color: var(--accent-soft);
+            letter-spacing: 0.25em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65); font-style: italic; position: relative; z-index: 1; }
+        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px 24px;
+            background: var(--bg); border-bottom: 1px solid var(--line); }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container { max-width: 820px; margin: -30px auto 60px; padding: 0 24px;
+            position: relative; z-index: 2; }
+        .source-note { background: var(--paper); border: 1px solid var(--line);
+            border-radius: 8px; padding: 16px 20px; box-shadow: var(--shadow);
+            margin-bottom: 32px; font-size: 0.88rem; color: var(--ink-soft); }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article { background: var(--paper); border: 1px solid var(--line);
+            border-radius: 8px; padding: 36px 40px; box-shadow: var(--shadow); }
+        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 12px;
+            padding-bottom: 6px; border-bottom: 2px solid var(--accent-soft); letter-spacing: 0.03em; }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor { font-size: 0.78rem; color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace; margin-left: 8px; letter-spacing: 0.1em; font-weight: 400; }
+        article p { margin-bottom: 18px; font-size: 1rem; color: var(--ink); text-wrap: pretty; }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider { text-align: center; color: var(--accent-soft); margin: 28px 0;
+            letter-spacing: 0.5em; font-size: 1rem; }
+        .nav-back { display: inline-block; margin-top: 28px; padding: 8px 16px;
+            background: var(--accent); color: #fff8ec; border-radius: 4px; text-decoration: none;
+            font-size: 0.88rem; transition: background 0.15s; }
+        .nav-back:hover { background: var(--rebel); }
+        .related { margin-top: 24px; padding: 14px 18px; background: #fff8ec;
+            border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer { text-align: center; padding: 24px; color: var(--ink-soft);
+            font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 40px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+        .sm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
+        .sm-cluster { background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+            padding: 18px 20px; box-shadow: var(--shadow); }
+        .sm-cluster h3 { color: var(--accent); font-size: 1.05rem; margin-bottom: 10px;
+            border-bottom: 2px solid var(--accent-soft); padding-bottom: 5px; letter-spacing: 0.03em; }
+        .sm-cluster ul { list-style: none; margin: 0; }
+        .sm-cluster li { margin-bottom: 9px; font-size: 0.9rem; line-height: 1.5; }
+        .sm-cluster a { color: var(--accent-2); text-decoration: none; font-weight: 600; }
+        .sm-cluster a:hover { text-decoration: underline; }
+        .sm-cluster .d { color: var(--ink-soft); font-size: 0.84rem; display: block; margin-top: 1px; }
+        @media (max-width: 680px) { .sm-grid { grid-template-columns: 1fr; } }</style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb"><a href="index.html">EN Home</a> &middot; <a href="essay-zen-koan-vs-neidan.html">Essays</a> &middot; E13</nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>The Making of the Novel: Authorship, Texts, and the Ming World</h1>
+        <div class="subtitle">ESSAY &middot; E13 &middot; COMPOSITION</div>
+        <div class="tagline">Who wrote it, which text we read, and the Ming world that shaped a four-hundred-year bestseller.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">A curated English summary of the project's Chinese essay <strong>Chéngshū Bèijǐng</strong> (成书背景, A5 &middot; 文化与历史背景). All dates, the version lineage, and the historical/fictional Xuanzang comparison are taken from that source; no figures are invented. This is a summary translation, not a full rendering.</div>
+        <article>
+            <h2>Introduction: A Masterpiece Without a Certain Author <span class="anchor">&#8596; the puzzle</span></h2>
+            <p>
+                The <em>Journey to the West</em> is one of the four great classical novels of China, yet its authorship is unusually contested for a book of its stature. What we hold today &mdash; a hundred-chapter vernacular novel &mdash; is the product of centuries of accretion by anonymous storytellers and a final redactor whose identity the academy still debates. This essay follows the project's Chinese study <strong>Chéngshū Bèijǐng</strong> (成书背景) through the three questions every reader should know: who wrote it, which text we actually read, and what world shaped it.
+            </p>
+
+            <h2>The Authorship Puzzle <span class="anchor">&#8596; Wu Cheng'en and the doubters</span></h2>
+            <p>
+                The conventional attribution is to <strong>Wu Cheng'en</strong> (吴承恩, c. 1500&ndash;1582), a literatus of Huai'an (淮安山阳, in modern Jiangsu), styled Ruzhong (汝忠), styled Sheyang Shanren (射阳山人). The claim rests mainly on the Tianqi-era (天启) <em>Huai'an Prefecture Gazetteer</em> (《淮安府志》), whose bibliography lists "Wu Cheng'en &mdash; <em>Sheyang Collection</em> in four juan, <em>Preface to the Spring and Autumn Annals Biographies</em>, and the <em>Journey to the West</em>." Lu Xun (鲁迅) adopted this in his <em>History of Chinese Fiction</em> (《中国小说史略》), and it became canonical.
+            </p>
+            <p>
+                Since the 1980s scholars such as <strong>Zhuang Peiheng</strong> (章培恒) have raised doubts: the gazetteer entry might refer to a travelogue rather than the novel; the earliest complete edition &mdash; the Shide Hall (世德堂) print &mdash; names no author, bearing only the editor's seal "Master of the Huayang Grotto" (华阳洞天主人); and the book's heavy northern dialect and Daoist inner-alchemy jargon sit oddly with a southern man of letters. Competing candidates include <strong>Qiu Chuji</strong> (丘处机, the Quanzhen patriarch &mdash; a Qing-era attribution now rejected), the "Master of the Huayang Grotto" himself (identity unknown), and the <strong>collective-accumulation theory</strong> (集体累积说) &mdash; that no single author exists because the story grew from centuries of popular oral and written performance. The mainstream today holds a compromise: <em>Wu Cheng'en as final redactor, upon earlier accretions.</em>
+            </p>
+
+            <h2>The Version Lineage <span class="anchor">&#8596; which text we read</span></h2>
+            <table>
+                <tr><th>Era</th><th>Version / work</th><th>Significance</th></tr>
+                <tr><td>Southern Song</td><td><em>Tale of the Tang Tripitaka's Scripture-Fetching</em> (《大唐三藏取经诗话》)</td><td>Earliest extant Xiyou story text; the "Monkey-Pilgrim" (猴行者) already appears.</td></tr>
+                <tr><td>Yuan dynasty</td><td>Yang Jingxian's <em>Journey to the West</em> zaju (杂剧)</td><td>The title "Great Sage Equalling Heaven" (齐天大圣) is already present.</td></tr>
+                <tr><td>1592 (Wanli 20)</td><td><strong>Shide Hall edition</strong> (世德堂本)</td><td><strong>Earliest complete hundred-chapter print; the base text of all modern editions.</strong></td></tr>
+                <tr><td>Qing</td><td>Zhengdao edition (证道本, Wang Xiangxu &amp; Huang Zhouxing)</td><td>Adds heavy Quanzhen Daoist inner-alchemy commentary.</td></tr>
+                <tr><td>Qing</td><td>Zhenquan edition (真诠本, Chen Shibin)</td><td>Another inner-alchemy reading.</td></tr>
+                <tr><td>1955</td><td>People's Literature Publishing House edition</td><td>Collated against the Shide Hall base with other witnesses.</td></tr>
+            </table>
+            <p>
+                The Shide Hall edition (full title <em>Newly Cut, Illustrated, Official-Format, Large-Character Journey to the West</em>) is the closest to the original face of the book, and it is the project's own base text. Known lacunae exist in its scrolls 3, 9, 13, 15, and 18, which later collations supply from other editions.
+            </p>
+
+            <h2>Historical vs. Fictional Xuanzang <span class="anchor">&#8596; from history to myth</span></h2>
+            <table>
+                <tr><th>Dimension</th><th>Historical Xuanzang</th><th>Fictional Tang Monk</th></tr>
+                <tr><td>Epoch</td><td>Tang (602&ndash;664)</td><td>Zhenguan reign</td></tr>
+                <tr><td>Origin</td><td>Chenliu, Henan; surname Chen</td><td>Son of Chen Guangrui; cast adrift as infant "River-Flow"</td></tr>
+                <tr><td>Motive</td><td>Sutras incomplete in China; seek the Dharma</td><td>Sent by Emperor Taizong; the Water-Land Assembly</td></tr>
+                <tr><td>Company</td><td>Solo, with occasional guides</td><td>Wukong, Bajie, Sha, White Dragon Horse</td></tr>
+                <tr><td>Duration</td><td>17 years (627&ndash;645)</td><td>14 years (novel's own reckoning)</td></tr>
+                <tr><td>Return</td><td>657 scriptures brought, 75 translated</td><td>5,048 volumes of true scripture</td></tr>
+                <tr><td>End</td><td>Died at Yuhua Palace, Chang'an</td><td>Enfeoffed as the "Sandalwood Merit Buddha"</td></tr>
+            </table>
+            <p>
+                The leap from a solitary historian-monk to a team-escorted fiction is <em>a complete remaking from history into myth</em>. It crystallised after the Southern-Song <em>Scripture-Fetching Tale</em> and was fixed in the Ming Shide Hall redaction &mdash; the very transformation this project's E7 essay examines in depth.
+            </p>
+
+            <h2>The Ming World That Made It <span class="anchor">&#8596; three teachings, one market</span></h2>
+            <p>
+                Wu Cheng'en lived under the Jiajing and Wanli emperors, the high tide of <strong>three-teachings-syncretism</strong> (三教合一): the Zhengde-Jiajing court favoured Daoism (the emperor's private altar burned day and night), Buddhism thrived in folk practice even as its official standing fell, and Wang Yangming's "heart learning" (心学, "the mind is principle") spread through the literati. The novel's Buddhist-Daoist interpenetration and its "mind-monkey" (心猿) vocabulary answer directly to that moment. Equally, the Ming bureaucracy it mirrors (the real Office of the Imperial Stables behind "Bimawen"; the nine-rank officialdom behind Heaven's hierarchy; demons "with backing reclaimed, without smashed") and the booming <em>vernacular</em> novel born of a rising urban class &mdash; all are products of the mid-to-late Ming.
+            </p>
+
+            <h2>Conclusion <span class="anchor">&#8596; why the uncertainty matters</span></h2>
+            <p>
+                To read the novel well is to hold two truths at once: it is a popular oral epic centuries in the making, polished by a Ming redactor we may never name with certainty; and the text we read is the 1592 Shide Hall print, not the Tang pilgrim's world. That humility about origin is itself a reading method &mdash; and it frames every essay in this English edition.
+            </p>
+
+            <h2>Explore Further <span class="anchor">&#8596; cross-linked</span></h2>
+            <ul>
+                <li><a href="essay-historical-xuanzang.html">Historical vs. Fictional Xuanzang</a> (E7) &mdash; the transformation examined closely.</li>
+                <li><a href="essay-three-teachings.html">Three Teachings, One Journey</a> (E15) &mdash; the syncretic thought-world.</li>
+                <li><a href="essay-ming-metaphor.html">The Ming in Disguise</a> (E14) &mdash; the satire of Ming officialdom.</li>
+                <li><a href="../../docs/04-文化与历史背景/成书背景.md">&#20013;&#25991;&#28304;&#25991; (Chinese source)</a>.</li>
+            </ul>
+
+            <a class="nav-back" href="index.html">&#8592; Back to EN Home</a>
+            <div class="related"><strong>Related:</strong><a href="essay-historical-xuanzang.html">E7 Xuanzang</a> &middot; <a href="essay-three-teachings.html">E15 Three Teachings</a> &middot; <a href="essay-ming-metaphor.html">E14 Ming Metaphor</a></div>
+        </article>
+    </main>
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.2 W351 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W351
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

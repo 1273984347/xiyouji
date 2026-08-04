@@ -1,21 +1,21 @@
-# Journey to the West · Annotated — English Edition (W350)
+# Journey to the West · Annotated — English Edition (W351)
 
 > i18n internationalization subproject of the main **Journey to the West · Annotated** project.
-> Version: v2.3.1 · W350 · 2026-08-04
+> Version: v2.3.2 · W351 · 2026-08-04
 
 ## Overview
 
-`site/en/` is the English-language subset of the main site at `site/`. It provides a curated entry point for non-Chinese readers: a landing page, a simplified data dashboard, a selected academic papers index, four data pages (the 81 tribulations, the pilgrims, the bestiary, and a 100-chapter map), twelve long-form essays in summary-translation form, five deep-dive character studies, a methodology reading-guide, and an English tour of all 85 visualizations. The full Chinese site remains the canonical edition; the English pages link back to it through Chinese↔English switch links.
+`site/en/` is the English-language subset of the main site at `site/`. It provides a curated entry point for non-Chinese readers: a landing page, a simplified data dashboard, a selected academic papers index, four data pages (the 81 tribulations, the pilgrims, the bestiary, and a 100-chapter map), fifteen long-form essays in summary-translation form, five deep-dive character studies, a methodology reading-guide, a site map, and an English tour of all 85 visualizations. The full Chinese site remains the canonical edition; the English pages link back to it through Chinese↔English switch links.
 
-This subproject was created in W234-E4 (v2.2.40) as part of the AVES (Academic / Visualization / Essay / Site) fourth-direction batch. It was expanded in W345 (v2.2.95) with three new essays (E4–E6) drawn from the W344 quality-enhancement A5/A6 articles, growing the subset from 7 to 10 files. It was further expanded in W347 (v2.2.98) with four data pages (TRIBULATIONS · PILGRIMS · BESTIARY · CHAPTER-MAP) bridging the project's own datasets (81-hardships, pilgrim-team-*, monster-*, chapters-metadata), growing the subset from 10 to 14 files. It was expanded again in W348 (v2.2.99) with three scholarship essays (E7–E9: historical vs. fictional Xuanzang, Heaven as a Ming bureaucracy, the hundred chapter-couplets), a visualization tour (85 pages in eight clusters), a deep-dive on Sun Wukong, and a methodology reading-guide — growing the subset from 14 to 20 files. It was expanded once more in W349 (v2.3.0) with three pilgrim deep-dives (Tang Sanzang, Zhu Bajie, Sha Wujing) and an essay on Quanzhen Daoism (E10) reading the novel's allegorical layer as a Daoist inner-alchemy manual — growing the subset from 20 to 24 files. It was expanded in W350 (v2.3.1) with the fifth pilgrim deep-dive (Ao Lie, the White Dragon Horse) completing the five-pilgrim set, plus two religion essays — Chan Buddhism (E11) and popular religion (E12) — reading the novel's allegorical layer as a Buddhist mind-cultivation tale beneath a folk-religious substrate, growing the subset from 24 to 27 files.
+This subproject was created in W234-E4 (v2.2.40) as part of the AVES (Academic / Visualization / Essay / Site) fourth-direction batch. It was expanded in W345 (v2.2.95) with three new essays (E4–E6) drawn from the W344 quality-enhancement A5/A6 articles, growing the subset from 7 to 10 files. It was further expanded in W347 (v2.2.98) with four data pages (TRIBULATIONS · PILGRIMS · BESTIARY · CHAPTER-MAP) bridging the project's own datasets (81-hardships, pilgrim-team-*, monster-*, chapters-metadata), growing the subset from 10 to 14 files. It was expanded again in W348 (v2.2.99) with three scholarship essays (E7–E9: historical vs. fictional Xuanzang, Heaven as a Ming bureaucracy, the hundred chapter-couplets), a visualization tour (85 pages in eight clusters), a deep-dive on Sun Wukong, and a methodology reading-guide — growing the subset from 14 to 20 files. It was expanded once more in W349 (v2.3.0) with three pilgrim deep-dives (Tang Sanzang, Zhu Bajie, Sha Wujing) and an essay on Quanzhen Daoism (E10) reading the novel's allegorical layer as a Daoist inner-alchemy manual — growing the subset from 20 to 24 files. It was expanded in W350 (v2.3.1) with the fifth pilgrim deep-dive (Ao Lie, the White Dragon Horse) completing the five-pilgrim set, plus two religion essays — Chan Buddhism (E11) and popular religion (E12) — reading the novel's allegorical layer as a Buddhist mind-cultivation tale beneath a folk-religious substrate, growing the subset from 24 to 27 files. It was expanded in W351 (v2.3.2) with three culture essays (E13 the making of the novel, E14 the Ming in disguise, E15 three-teachings synthesis) and a Site Map indexing every English page by cluster — growing the subset from 27 to 31 files.
 
-## File list (27 files)
+## File list (31 files)
 
 All files live under `d:\1\xiyouji\site\en\`.
 
 | # | File | Lines | Purpose |
 |---|---|---|---|
-| 1 | `index.html` | ~390 | English landing page. Title "Journey to the West · Annotated", subtitle "A hybrid reading project". Twenty-five entry cards (dashboard / academic papers / 4 data pages / 12 essays / 5 deep-dives / 2 guides / visualization tour). |
+| 1 | `index.html` | ~410 | English landing page. Title "Journey to the West · Annotated", subtitle "A hybrid reading project". Twenty-nine entry cards (dashboard / academic papers / 4 data pages / 15 essays / 5 deep-dives / 2 guides / visualization tour / site map). |
 | 2 | `dashboard.html` | ~370 | English data dashboard. Five core KPI cards (100 chapters / 60 character analyses / 91 theme essays / 68 visualizations / 55 academic papers). |
 | 3 | `academic-papers.html` | ~210 | Academic papers index. Ten representative entries selected from the 55-entry bibliography. Columns: ID / Author / Year / Title / Journal / Topic. |
 | 4 | `essay-ai-era.html` | ~250 | Summary translation of `docs/06-个人随笔/西游与AI时代.md`. Five paragraphs: Subhuti · headband · mirror test · 81 tribulations · Mind Monkey. |
@@ -28,7 +28,11 @@ All files live under `d:\1\xiyouji\site\en\`.
 | 11 | `characters.html` | ~155 | Data page on the five pilgrims, scored with Belbin team roles and a 5-dimension psychology profile; cohesion milestones table. |
 | 12 | `bestiary.html` | ~140 | Data page on the demon ecology: KPI cards, four social tiers, by-type/origin/fate tables, capability extremes. |
 | 13 | `chapters-map.html` | ~245 | Data page mapping all 100 chapters into four arcs with each chapter's couplet, key figures, and localities. |
-| 14 | `README.md` | (this file) | i18n English-site documentation. |
+| 14 | `essay-composition-origins.html` | ~310 | Summary translation of `docs/04-文化与历史背景/成书背景.md`. The making of the novel: authorship puzzle (Wu Cheng'en c.1500–1582, Zhuang Peiheng's doubts, Qiu Chuji / Huayang Grotto / collective-accumulation candidates), version lineage (Song shihua / Yuan zaju / 1592 Shide tang / Qing Zhengdao & Zhenquan / 1955 PLA), historical vs. fictional Xuanzang, the Ming world. |
+| 15 | `essay-ming-metaphor.html` | ~300 | Summary translation of `docs/04-文化与历史背景/明代隐喻.md`. Six metaphor dimensions: officialdom (Bimawen = Imperial Stables, rank 4; Heaven's nine ranks = the court), patronage-persecution (demon-backing table), commercial economy & the vernacular novel, religious politics (Jiajing Daoism / Chechi kingdom / Heaven-Thunderclap balance), demon-bureaucrat identity overlap. |
+| 16 | `essay-three-teachings.html` | ~310 | Summary translation of `docs/04-文化与历史背景/佛道思想.md`. Three-teachings syncretism: Buddhism (81 tribulations as stages, mind-monkey/will-horse, Tathagata-Guanyin-Maitreya, five skandhas → five pilgrims table), Daoism (Subodhi = heart, Metal-Sire/Wood-Mother/Yellow-Dame inner alchemy, Quanzhen Zhengdao), Confucianism (master-disciple = lord-son). |
+| 17 | `site-map.html` | ~230 | Navigation capstone for the English edition: all 29 English pages indexed into seven clusters (Start Here / Data / Culture essays / Poetry essays / Contemporary essays / Characters / Visualizations), with a "how to use" note and links to the Chinese site. |
+| 18 | `README.md` | (this file) | i18n English-site documentation. |
 | 15 | `essay-historical-xuanzang.html` | ~290 | Summary translation of `docs/04-文化与历史背景/历史玄奘与小说玄奘专题.md`. Seven-dimension comparison of the historical vs. fictional Xuanzang; pilgrimage facts (138 kingdoms, 657 scrolls, 1,335 juan); Ming projections. |
 | 16 | `essay-divine-bureaucracy.html` | ~260 | Summary translation of `docs/04-文化与历史背景/明代神祇官僚体系对照专题.md`. Heaven as Ming bureaucracy; three features; four theorists (Huang / Qian Mu / Weber / Feuchtwang); four deity groups; the "demon-revealing mirror". |
 | 17 | `essay-chapter-couplets.html` | ~250 | Summary translation of `docs/05-诗词歌赋/回目对联分析专题.md`. Three coordinates; prosody (7+7 couplets); five types; structure stats (100% / 85% / 70%); narrative function. |
@@ -56,19 +60,19 @@ All files live under `d:\1\xiyouji\site\en\`.
 - `site/en/` is a **subset** of `site/`, not a fork. The English pages link outward to the main site's full visualizations (e.g. `../data/cognitive-psychology.html`, `../data/philosophy.html`) and to the original Chinese essays under `docs/06-个人随笔/`.
 - The main site (`site/index.html`, `site/dashboard.html`, `site/data/*.html`) remains the canonical, complete edition. The English subset offers a curated on-ramp for non-Chinese readers; it does not attempt to mirror every page.
 - The English dashboard's KPIs (`100 / 60 / 91 / 68 / 55`) match the project's current totals as of W234; they will be updated alongside the main site as the project grows.
-- Footer double-index links (`../../CHANGELOG.md` v2.3.1 W350 / `../../scripts/output/file-index.md` W350) appear on every English HTML page, matching the footer convention used across the main site.
+- Footer double-index links (`../../CHANGELOG.md` v2.3.2 W351 / `../../scripts/output/file-index.md` W351) appear on every English HTML page, matching the footer convention used across the main site.
 
 ## Verification
 
 Each English HTML page was verified to contain:
 
 1. A recognizable English title ("Journey to the West" or the corresponding section title).
-2. The footer double-index: `CHANGELOG.md v2.3.1 W350` and `file-index.md W350`.
+2. The footer double-index: `CHANGELOG.md v2.3.2 W351` and `file-index.md W351`.
 3. A Chinese↔English switch link pointing back to `../index.html` or the corresponding main-site page.
 
 ## Scope boundaries
 
-This subproject creates the 27 files listed above under `site/en/`. It does **not**:
+This subproject creates the 31 files listed above under `site/en/`. It does **not**:
 
 - Create `scripts/a11y_audit.py` (handled by a separate subagent).
 - Create `.github/workflows/` CI definitions (handled by a separate subagent).
