@@ -8,6 +8,13 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.3.4（2026-08-04）：W353 英文站明代制度丛译介（A5 四篇 Ming-institution essay·site/en/ 35→39 文件）
+
+- **英文站新增 4 页（site/en/ 35→39 文件）**：essay-ming-examination.html（E20·明代科举制度·取经叙事=科举复刻·如来开科 line 981/玄奘被举 line 1219/八十一难=考课/灵山金榜 line 7085·四理论家 黄仁宇/艾尔曼/宫崎市定/韦伯）、essay-ming-garrison.html（E21·明代卫所制度·天兵/龙宫/狮驼=卫所三层次·line 632/700/726/5484·四史家 黄仁宇/顾诚/于志嘉/彭勇）、essay-ming-maritime-ban.html（E22·明代海禁政策·花果山海外法外/朝贡跨海/流沙渡水/真经东传·line 522/996/1936/7085·四史家 黄仁宇/樊树志/李庆/卜正民）、essay-ming-judiciary.html（E23·明代司法制度深化·四案 赛太岁安静犯罪/朱紫国王罪己/金圣宫失声/崔判官改簿·四理论家 黄仁宇/瞿同祖/滋贺秀三/寺田浩明）
+- **数据/源文纪律**：E20-E23 从既有中文专题（明代科举/卫所/海禁/司法制度深化对照专题，W150/W293/W292/W142）摘译，理论家、line 锚点均与源文一致，零编造
+- **英文站入口与文档同步**：site/en/index.html 入口卡片 33→37、README 文件清单 35→39、版本号升 v2.3.4 W353；全部 38 个 EN HTML 页 footer 双索引统一升级
+- **六文档 + dukou-engine footer 同步 v2.3.4 W353**；verify_delivery 门禁全绿
+
 ### v2.3.3（2026-08-04）：W352 英文站词牌赏析译介（A6 四篇 cipai essay·site/en/ 31→35 文件）
 
 - **英文站新增 4 页（site/en/ 31→35 文件）**：essay-cipai-xijiangyue.html（E16·西江月词牌·52字双调·四理论家 王国维/叶嘉莹/龙榆生/夏承焘·四重境界 line 522/864/1393/7085）、essay-cipai-linjiangxian.html（E17·临江仙词牌·60字·四理论家 王国维/叶嘉莹/龙榆生/唐圭璋·四重境界 line 981/2306/4432/7052）、essay-cipai-mantingfang.html（E18·满庭芳词牌·全书唯一明名词牌·樵夫 line 39·四理论家 王国维/叶嘉莹/龙榆生/缪钺·四重境界 line 39/981/4792/7085）、essay-cipai-shuidiaogetou.html（E19·水调歌头词牌·95字长调·四理论家 王国维/叶嘉莹/龙榆生/缪钺·苏轼对照·四重境界 line 522/864/1393/7085）
