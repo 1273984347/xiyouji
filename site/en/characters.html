@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>The Pilgrims — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg); color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8; min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 24px 48px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch { position: absolute; top: 18px; right: 24px; font-size: 0.85rem; z-index: 5; }
+        .lang-switch a {
+            color: var(--accent-soft); text-decoration: none; padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35); border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 8px; position: relative; z-index: 1; }
+        .hero .subtitle { font-size: 0.95rem; color: var(--accent-soft); letter-spacing: 0.25em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85rem; color: rgba(245, 233, 212, 0.65); font-style: italic; position: relative; z-index: 1; }
+        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--line); }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container { max-width: 1000px; margin: -30px auto 60px; padding: 0 24px; position: relative; z-index: 2; }
+        .source-note {
+            background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+            padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 32px;
+            font-size: 0.88rem; color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 36px 40px; box-shadow: var(--shadow); }
+        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--accent-soft); letter-spacing: 0.03em; }
+        article h2:first-child { margin-top: 0; }
+        article p { margin-bottom: 18px; font-size: 1rem; color: var(--ink); text-wrap: pretty; }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        .divider { text-align: center; color: var(--accent-soft); margin: 28px 0; letter-spacing: 0.5em; font-size: 1rem; }
+        /* KPI cards */
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin: 8px 0 32px; }
+        .kpi-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 20px 18px; box-shadow: var(--shadow); text-align: center; }
+        .kpi-card .num { font-size: 2rem; font-weight: 700; color: var(--accent); font-family: "JetBrains Mono", monospace; }
+        .kpi-card .lbl { font-size: 0.82rem; color: var(--ink-soft); margin-top: 4px; }
+        /* bar groups */
+        .bars { margin: 10px 0 28px; }
+        .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .bar-row .tag { flex: 0 0 200px; font-size: 0.86rem; color: var(--ink); text-align: right; }
+        .bar-track { flex: 1; background: #f0e9da; border-radius: 4px; height: 22px; position: relative; overflow: hidden; }
+        .bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent-soft), var(--accent)); border-radius: 4px; }
+        .bar-row .val { flex: 0 0 96px; font-size: 0.82rem; color: var(--ink-soft); font-family: "JetBrains Mono", monospace; }
+        /* data table */
+        .data-table { width: 100%; border-collapse: collapse; margin: 12px 0 28px; font-size: 0.82rem; }
+        .data-table th, .data-table td { border: 1px solid var(--line); padding: 6px 9px; text-align: left; vertical-align: top; }
+        .data-table thead th { background: #f3ead9; color: var(--accent); position: sticky; top: 0; }
+        .data-table tbody tr:nth-child(even) { background: #fcf8f0; }
+        .data-table .idx { font-family: "JetBrains Mono", monospace; color: var(--accent-2); white-space: nowrap; }
+        .scroll-wrap { max-height: 520px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px; }
+        .pill { display: inline-block; font-size: 0.74rem; padding: 1px 8px; border-radius: 10px; border: 1px solid var(--line); color: var(--ink-soft); }
+        .pill.cause { color: var(--accent-2); border-color: var(--accent-2); }
+        .pill.end { color: var(--accent); border-color: var(--accent); }
+        .pill.diff { color: var(--accent-4); border-color: var(--accent-4); }
+        .arc-head { background: #efe6d3; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin: 12px 0 28px; }
+        .mini-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; box-shadow: var(--shadow); }
+        .mini-card h3 { font-size: 1.1rem; color: var(--accent); margin-bottom: 6px; }
+        .mini-card .role { font-size: 0.8rem; color: var(--accent-2); margin-bottom: 10px; }
+        .mini-card p { font-size: 0.86rem; margin-bottom: 8px; }
+        .mini-card ul { margin: 6px 0 0 18px; font-size: 0.82rem; color: var(--ink-soft); }
+        .nav-back { display: inline-block; margin-top: 28px; padding: 8px 16px; background: var(--accent); color: #fff8ec; border-radius: 4px; text-decoration: none; font-size: 0.88rem; }
+        .nav-back:hover { background: var(--rebel); }
+        .related { margin-top: 24px; padding: 14px 18px; background: #fff8ec; border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer { text-align: center; padding: 24px; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 40px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+        @media (max-width: 600px) {
+            article { padding: 24px 20px; }
+            .bar-row .tag { flex-basis: 120px; font-size: 0.78rem; }
+            .bar-row .val { flex-basis: 70px; }
+        }
+</style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Data · Characters
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>The Pilgrims</h1>
+        <div class="subtitle">CHARACTERS · A PROJECT SQUAD</div>
+        <div class="tagline">Five travelers, scored as a team: a fragile coordinator, an over-powered engineer, a pressure-valve, a stabilizer, and a silent mount.</div>
+    </header>
+    <main class="container">
+        <div class="source-note">
+            <strong>Source:</strong> Curated from the project's character system (A3, 199 figures) and three datasets: <a href="../../dataset/pilgrim-team-dynamic-network.json">pilgrim-team-dynamic-network.json</a> (Belbin team roles), <a href="../../dataset/pilgrim-team-psychology-arc.json">pilgrim-team-psychology-arc.json</a> (5-dimension psychology profiles + cohesion milestones), and <a href="../../dataset/character-relationship-3d.json">character-relationship-3d.json</a> (22-node relationship graph). Scores are the project's own analytical ratings.
+        </div>
+        <article>
+            <h2>A Squad, Not a Solo Act</h2>
+            <p>
+                The pilgrimage is often reduced to "Wukong beats the monster." Modeled with team-role theory (Belbin) and a five-dimension psychology profile, the five travelers resolve into a recognizable <strong>project squad</strong>: a devout but fragile coordinator (Tang), an over-powered senior engineer (Wukong), a social pressure-valve (Bajie), a dependable implementer (Sha), and a silent specialist mount (the Dragon Horse). The data below is the project's own classification of the cast — each number is a scored tendency, not a verdict.
+            </p>
+        <h2>The Five Pilgrims</h2>
+        <div class="card-grid">
+            <div class="mini-card">
+                <h3>Tang Sanzang (Tripitaka)</h3>
+                <div class="role">The Moral Anchor · Coordinator</div>
+                <p>The reincarnation of the Golden Cicada, chosen to fetch the scriptures. High on coordination and devotion, low on worldly courage — he is the mission's conscience and its greatest liability, forever mistaking Wukong's loyalty for insubordination.</p>
+                <p><strong>Top team roles:</strong> Coordinator 9 · Completer-Finisher 7 · Teamworker 5</p>
+                <p><strong>Psychology profile:</strong></p>
+                <ul><li>Fear: 7/10</li><li>Resolve: 8/10</li><li>Anger: 3/10</li><li>Wisdom: 8/10</li><li>Obedience: 9/10</li></ul>
+            </div>
+            <div class="mini-card">
+                <h3>Sun Wukong (the Monkey King)</h3>
+                <div class="role">The Fixer · Shaper / Plant / Specialist</div>
+                <p>The once-rebellious stone monkey, now the team's irreplaceable problem-solver. Maxed on resolve, wisdom and innovation, near-zero on fear. He alone clears 42 of the 81 tribulations; the other 39 are where the heavens must intervene.</p>
+                <p><strong>Top team roles:</strong> Shaper 9 · Specialist 9 · Plant (Innovator) 8</p>
+                <p><strong>Psychology profile:</strong></p>
+                <ul><li>Fear: 2/10</li><li>Resolve: 9/10</li><li>Anger: 7/10</li><li>Wisdom: 9/10</li><li>Obedience: 5/10</li></ul>
+            </div>
+            <div class="mini-card">
+                <h3>Zhu Bajie (Pigsy)</h3>
+                <div class="role">The Pressure Valve · Resource Investigator / Teamworker</div>
+                <p>The fallen Marshal Tianpeng, half glutton, half-hearted warrior. High on sociability, low on resolve and wisdom — the comic relief who also quietly keeps the group human and the morale afloat.</p>
+                <p><strong>Top team roles:</strong> Resource Investigator 8 · Teamworker 8 · Shaper 4</p>
+                <p><strong>Psychology profile:</strong></p>
+                <ul><li>Fear: 8/10</li><li>Resolve: 4/10</li><li>Anger: 6/10</li><li>Wisdom: 4/10</li><li>Obedience: 5/10</li></ul>
+            </div>
+            <div class="mini-card">
+                <h3>Sha Wujing (Sandy)</h3>
+                <div class="role">The Stabilizer · Implementer</div>
+                <p>The reformed Curtain-Lifting General, the team's steady hand. Maxed on obedience and implementation, minimal on anger — the one who carries the luggage, keeps the peace, and never complains.</p>
+                <p><strong>Top team roles:</strong> Implementer 9 · Completer-Finisher 7 · Teamworker 6</p>
+                <p><strong>Psychology profile:</strong></p>
+                <ul><li>Fear: 4/10</li><li>Resolve: 7/10</li><li>Anger: 2/10</li><li>Wisdom: 6/10</li><li>Obedience: 9/10</li></ul>
+            </div>
+            <div class="mini-card">
+                <h3>White Dragon Horse</h3>
+                <div class="role">The Silent Specialist · Mount</div>
+                <p>The third prince of the West Sea, transformed into a steed. A specialist who speaks little but bears the master across a continent; high on resolve and obedience, the quiet enabler of the whole journey.</p>
+                <p><strong>Top team roles:</strong> Specialist 8 · Implementer 5 · Teamworker 4</p>
+                <p><strong>Psychology profile:</strong></p>
+                <ul><li>Fear: 3/10</li><li>Resolve: 8/10</li><li>Anger: 4/10</li><li>Wisdom: 7/10</li><li>Obedience: 8/10</li></ul>
+            </div>
+        </div>
+            <p>
+                The team's arc is not linear. It forms in Chapters 8–22 as Guanyin assembles the members, storms through the long middle (the Bai Gu Jing crisis at Ch.27 nearly dissolves it), and only coheres after the "false monkey" identity crisis of Ch.58. Wukong's obedience sits at a middling 5/10 — enough to stay, never enough to stop arguing — which is precisely why the group needs both his power and Tang's authority.
+            </p>
+        <h2>Cohesion Milestones</h2>
+        <table class="data-table">
+            <thead><tr><th>Chapter</th><th>Turning point</th></tr></thead>
+            <tbody>
+<tr><td class="idx">Ch.07</td><td>大闹天宫·悟空极盛</td></tr><tr><td class="idx">Ch.14</td><td>心猿归正·收悟空</td></tr><tr><td class="idx">Ch.18</td><td>收八戒·团队初成</td></tr><tr><td class="idx">Ch.22</td><td>收沙僧·五众齐全</td></tr><tr><td class="idx">Ch.27</td><td>三打白骨精·信任危机</td></tr><tr><td class="idx">Ch.31</td><td>黄袍怪·团队修复</td></tr><tr><td class="idx">Ch.41</td><td>红孩儿·悟空受难</td></tr><tr><td class="idx">Ch.58</td><td>真假美猴王·身份危机</td></tr><tr><td class="idx">Ch.81</td><td>无底洞·最后大难</td></tr>
+            </tbody>
+        </table>
+        </article>
+        <a class="nav-back" href="index.html">← Back to EN Home</a>
+        <div class="related">
+            <strong>Related:</strong>
+            <a href="tribulations.html">The 81 Tribulations</a> ·
+                            <a href="bestiary.html">The Bestiary</a> ·
+                            <a href="../data/character-relationship-3d.html">Character Network 3D</a> ·
+                            <a href="../data/pilgrim-team-dynamic-network.html">Team Dynamics visualization</a>
+        </div>
+    </main>
+    <footer>
+        © <span id="footer-year">2026</span> Journey to the West · Annotated Project · MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> ·
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.98 W347 ·
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W347
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>The Bestiary — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg); color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8; min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 24px 48px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch { position: absolute; top: 18px; right: 24px; font-size: 0.85rem; z-index: 5; }
+        .lang-switch a {
+            color: var(--accent-soft); text-decoration: none; padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35); border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 8px; position: relative; z-index: 1; }
+        .hero .subtitle { font-size: 0.95rem; color: var(--accent-soft); letter-spacing: 0.25em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85rem; color: rgba(245, 233, 212, 0.65); font-style: italic; position: relative; z-index: 1; }
+        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--line); }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container { max-width: 1000px; margin: -30px auto 60px; padding: 0 24px; position: relative; z-index: 2; }
+        .source-note {
+            background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+            padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 32px;
+            font-size: 0.88rem; color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 36px 40px; box-shadow: var(--shadow); }
+        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--accent-soft); letter-spacing: 0.03em; }
+        article h2:first-child { margin-top: 0; }
+        article p { margin-bottom: 18px; font-size: 1rem; color: var(--ink); text-wrap: pretty; }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        .divider { text-align: center; color: var(--accent-soft); margin: 28px 0; letter-spacing: 0.5em; font-size: 1rem; }
+        /* KPI cards */
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin: 8px 0 32px; }
+        .kpi-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 20px 18px; box-shadow: var(--shadow); text-align: center; }
+        .kpi-card .num { font-size: 2rem; font-weight: 700; color: var(--accent); font-family: "JetBrains Mono", monospace; }
+        .kpi-card .lbl { font-size: 0.82rem; color: var(--ink-soft); margin-top: 4px; }
+        /* bar groups */
+        .bars { margin: 10px 0 28px; }
+        .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .bar-row .tag { flex: 0 0 200px; font-size: 0.86rem; color: var(--ink); text-align: right; }
+        .bar-track { flex: 1; background: #f0e9da; border-radius: 4px; height: 22px; position: relative; overflow: hidden; }
+        .bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent-soft), var(--accent)); border-radius: 4px; }
+        .bar-row .val { flex: 0 0 96px; font-size: 0.82rem; color: var(--ink-soft); font-family: "JetBrains Mono", monospace; }
+        /* data table */
+        .data-table { width: 100%; border-collapse: collapse; margin: 12px 0 28px; font-size: 0.82rem; }
+        .data-table th, .data-table td { border: 1px solid var(--line); padding: 6px 9px; text-align: left; vertical-align: top; }
+        .data-table thead th { background: #f3ead9; color: var(--accent); position: sticky; top: 0; }
+        .data-table tbody tr:nth-child(even) { background: #fcf8f0; }
+        .data-table .idx { font-family: "JetBrains Mono", monospace; color: var(--accent-2); white-space: nowrap; }
+        .scroll-wrap { max-height: 520px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px; }
+        .pill { display: inline-block; font-size: 0.74rem; padding: 1px 8px; border-radius: 10px; border: 1px solid var(--line); color: var(--ink-soft); }
+        .pill.cause { color: var(--accent-2); border-color: var(--accent-2); }
+        .pill.end { color: var(--accent); border-color: var(--accent); }
+        .pill.diff { color: var(--accent-4); border-color: var(--accent-4); }
+        .arc-head { background: #efe6d3; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin: 12px 0 28px; }
+        .mini-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; box-shadow: var(--shadow); }
+        .mini-card h3 { font-size: 1.1rem; color: var(--accent); margin-bottom: 6px; }
+        .mini-card .role { font-size: 0.8rem; color: var(--accent-2); margin-bottom: 10px; }
+        .mini-card p { font-size: 0.86rem; margin-bottom: 8px; }
+        .mini-card ul { margin: 6px 0 0 18px; font-size: 0.82rem; color: var(--ink-soft); }
+        .nav-back { display: inline-block; margin-top: 28px; padding: 8px 16px; background: var(--accent); color: #fff8ec; border-radius: 4px; text-decoration: none; font-size: 0.88rem; }
+        .nav-back:hover { background: var(--rebel); }
+        .related { margin-top: 24px; padding: 14px 18px; background: #fff8ec; border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer { text-align: center; padding: 24px; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 40px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+        @media (max-width: 600px) {
+            article { padding: 24px 20px; }
+            .bar-row .tag { flex-basis: 120px; font-size: 0.78rem; }
+            .bar-row .val { flex-basis: 70px; }
+        }
+</style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Data · Demons
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>The Bestiary</h1>
+        <div class="subtitle">DEMONS · AN ECOLOGY</div>
+        <div class="tagline">Thirty named species, four social types, a 73% extinction rate — and the nagging sense that the scariest monsters are the connected ones.</div>
+    </header>
+    <main class="container">
+        <div class="source-note">
+            <strong>Source:</strong> Curated from three datasets: <a href="../../dataset/monster-ecology-network.json">monster-ecology-network.json</a> (30 species, niches, symbiosis links, 73% extinction), <a href="../../dataset/monster-hierarchy-network.json">monster-hierarchy-network.json</a> (4 social tiers + fate/origin summaries), and <a href="../../dataset/monster-capability-radar.json">monster-capability-radar.json</a> (15 demons × 5 capability dimensions, extremes).
+        </div>
+        <article>
+            <h2>Not Monsters — an Ecology</h2>
+            <p>
+                The novel's demons are not random frights; read as a population they form an <strong>ecology</strong> with niches, food-chains, and a striking 73% extinction rate. The project models 30 named species across 4 social types and tracks 42 symbiosis links — most of them the "reclamation" of a demon by its heavenly patron. Below, the headline numbers, the four ways a demon organizes itself, and the capability outliers.
+            </p>
+        <h2>The Demon Ecology at a Glance</h2>
+        <div class="kpi-grid">
+            <div class="kpi-card"><div class="num">30</div><div class="lbl">妖怪种群总数 个</div></div>            <div class="kpi-card"><div class="num">6</div><div class="lbl">顶级捕食者 类</div></div>            <div class="kpi-card"><div class="num">4</div><div class="lbl">生态位分化 类</div></div>            <div class="kpi-card"><div class="num">42</div><div class="lbl">共生关系数 条</div></div>            <div class="kpi-card"><div class="num">73</div><div class="lbl">灭绝率 %</div></div>
+        </div>
+        <h2>Four Ways to Be a Monster</h2>
+        <div class="card-grid">
+            <div class="mini-card">
+                <h3>独狼型 <span style="font-size:0.7rem;color:var(--ink-soft)">LONE WOLF</span></h3>
+                <p>单兵作战，无家无援，靠智谋或变身术生存，缺乏跨山头救援。</p>
+                <p><strong>Examples:</strong> 白骨精 · 蜘蛛精 · 九头虫</p>
+            </div>
+            <div class="mini-card">
+                <h3>家族型 <span style="font-size:0.7rem;color:var(--ink-soft)">FAMILY-CLAN</span></h3>
+                <p>以血缘为纽带，跨山头联防，讲究家产继承与子代培养。</p>
+                <p><strong>Examples:</strong> 牛魔王家族 · 金角银角兄弟</p>
+            </div>
+            <div class="mini-card">
+                <h3>联盟型 <span style="font-size:0.7rem;color:var(--ink-soft)">ALLIANCE</span></h3>
+                <p>异姓结盟，按实力排座，共享地盘与情报，但内部脆性高。</p>
+                <p><strong>Examples:</strong> 狮驼岭三魔 · 车迟国三妖</p>
+            </div>
+            <div class="mini-card">
+                <h3>官僚型 <span style="font-size:0.7rem;color:var(--ink-soft)">CELESTIAL BUREAUCRAT</span></h3>
+                <p>本身有天上编制，下凡属出差或擅离职守，归宿是归位而非消灭。</p>
+                <p><strong>Examples:</strong> 黄袍怪（奎木狼）· 黄风怪（灵吉坐骑）</p>
+            </div>
+        </div>
+        <h2>By Social Type (avg power)</h2>
+        <table class="data-table" style="max-width:420px">
+            <thead><tr><th>type</th><th>count</th></tr></thead>
+            <tbody><tr><td>独狼</td><td class="idx">3</td></tr><tr><td>家族</td><td class="idx">6</td></tr><tr><td>联盟</td><td class="idx">6</td></tr><tr><td>官僚</td><td class="idx">2</td></tr></tbody>
+        </table>
+        <h2>By Origin</h2>
+        <table class="data-table" style="max-width:420px">
+            <thead><tr><th>origin</th><th>count</th></tr></thead>
+            <tbody><tr><td>野生</td><td class="idx">11</td></tr><tr><td>坐骑</td><td class="idx">2</td></tr><tr><td>童子</td><td class="idx">2</td></tr><tr><td>星宿</td><td class="idx">1</td></tr><tr><td>其他</td><td class="idx">1</td></tr></tbody>
+        </table>
+        <h2>By Fate</h2>
+        <table class="data-table" style="max-width:420px">
+            <thead><tr><th>fate</th><th>count</th></tr></thead>
+            <tbody><tr><td>归位</td><td class="idx">8</td></tr><tr><td>消灭</td><td class="idx">6</td></tr><tr><td>收编</td><td class="idx">2</td></tr><tr><td>逃脱</td><td class="idx">2</td></tr></tbody>
+        </table>
+        <h2>Capability Extremes</h2>
+        <ul style="margin:8px 0 20px 20px;font-size:0.9rem;color:var(--ink)">
+<li><strong>最强法力:</strong> 大鹏金翅雕 — 10/10 (如来亲舅父·佛祖亲率五百罗汉降伏)</li><li><strong>最智谋:</strong> 六耳猕猴 — 9/10 (假悟空难辨·骗过天庭众神)</li><li><strong>最悲剧:</strong> 六耳猕猴 — 结局 1/10 (被如来识破即被悟空一棒打死)</li><li><strong>最幸运:</strong> 红孩儿 — 收编善财童子 (观音收为侍童·得正果)</li>
+        </ul>
+            <p>
+                The deepest pattern: the most dangerous foes are rarely the wild ones. The apex predators — the <em>Golden-Winged Great Peng</em> (magic 10/10, Buddha's own uncle) and the <em>Buffalo King</em> (power 9/10, head of a family empire) — are insiders. Wild demons get killed; connected demons get reclaimed. The bestiary is, quietly, a satire of bureaucracy.
+            </p>
+        </article>
+        <a class="nav-back" href="index.html">← Back to EN Home</a>
+        <div class="related">
+            <strong>Related:</strong>
+            <a href="characters.html">The Pilgrims</a> ·
+                            <a href="tribulations.html">The 81 Tribulations</a> ·
+                            <a href="../data/monster-ecology-network.html">Monster Ecology visualization</a> ·
+                            <a href="../data/monster-hierarchy-network.html">Hierarchy Network</a>
+        </div>
+    </main>
+    <footer>
+        © <span id="footer-year">2026</span> Journey to the West · Annotated Project · MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> ·
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.98 W347 ·
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W347
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

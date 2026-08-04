@@ -8,6 +8,12 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.2.98（2026-08-04）：W347 英文站关键页扩张（四数据页 bridging 项目数据集）
+
+- **英文站新增 4 关键数据页（W347）**：按 `site/en/` 既有"策展摘要 + 数据看板"约定（hero + source-note + footer 双索引 + 中文切换），由项目既有数据集桥接生成（零编造、口径与 dataset 一致）—— `site/en/tribulations.html`（dataset/81-hardships.json 八十一难看板：成因/结局/难度三维条形 + 成因×结局矩阵 + 81 难全表）、`site/en/characters.html`（取经五人组：Belbin 团队角色 + 五维心理画像 + 凝聚力里程碑，源 pilgrim-team-dynamic-network / pilgrim-team-psychology-arc / character-relationship-3d）、`site/en/bestiary.html`（妖魔生态：30 种群·4 社会型·73% 灭绝率·能力极值，源 monster-ecology/hierarchy/capability-radar）、`site/en/chapters-map.html`（百回阅读地图：四幕分章 + 每回回目对联/主要人物/地点，源 chapters-metadata.json）。四页均含中文源文回链。
+- **英文站入口与文档同步（W347）**：`site/en/index.html` 入口卡片 8→12（新增 4 数据页卡，section-sub 更新为 12 入口）；`site/en/README.md` 文件清单 10→14、版本升 v2.2.98 W347；全部 13 个 EN HTML 页 footer 双索引统一升至 v2.2.98 W347（含 5 个 W234 古页 v2.2.40→v2.2.98 与 3 个 W345 页 v2.2.95→v2.2.98 的滞后修正）。英文站从 10 文件扩至 14 文件。
+- **六文档同步已执行（v2.2.98 + W347）**：统一将 CHANGELOG/README/STRUCTURE/项目说明/file-index/交接文档 六文档升 v2.2.98、W 标到 W347，verify_delivery 门禁全绿 ✅（中文内容计数 A1-A6 总 629 不变·dataset 仍 42 JSON·A4 计数 201 篇不变；英文站扩张不改中文文档规模）
+
 ### v2.2.97（2026-08-04）：W346 数据闭环——八十一难逐难明细填充
 
 - **`dataset/81-hardships.json` 数据闭环（W346）**：该数据集此前 `hardships` 数组为空（仅聚合轴 `by_cause`/`by_ending`/`by_difficulty`/`cross_cause_ending` 已填），属"半空"数据集。现从项目既有权威源 `scripts/C_情节/hardships_81.py`（世德堂本末尾灾难簿为骨架·参校近人整理）→ `scripts/output/data/hardships_81.json` 桥接 81 条逐难明细（index/name/chapter/cause/ending/difficulty）到 `hardships` 字段，前 80 难 index→name 与 `dataset/text-search.json` 第 99 回「菩萨灾难簿」原文逐难对齐。新增可重跑桥接脚本 `scripts/_build_81_hardships.py`，写入前断言四项聚合轴与既有值 100% 吻合（如来/观音安排 27·真正野怪 28·天界/西天坐骑下凡 16·人心自生魔障 10；被接走 49·被打死 25·被收编 7；悟空独立 42·搬救兵 39）。`dataset/README.md` 第 17 行登记键补 `hardships`、大小 0.7→5.1 KB。

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>The Eighty-One Tribulations — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg); color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8; min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 24px 48px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::after {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch { position: absolute; top: 18px; right: 24px; font-size: 0.85rem; z-index: 5; }
+        .lang-switch a {
+            color: var(--accent-soft); text-decoration: none; padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35); border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 8px; position: relative; z-index: 1; }
+        .hero .subtitle { font-size: 0.95rem; color: var(--accent-soft); letter-spacing: 0.25em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85rem; color: rgba(245, 233, 212, 0.65); font-style: italic; position: relative; z-index: 1; }
+        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--line); }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container { max-width: 1000px; margin: -30px auto 60px; padding: 0 24px; position: relative; z-index: 2; }
+        .source-note {
+            background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+            padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 32px;
+            font-size: 0.88rem; color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 36px 40px; box-shadow: var(--shadow); }
+        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--accent-soft); letter-spacing: 0.03em; }
+        article h2:first-child { margin-top: 0; }
+        article p { margin-bottom: 18px; font-size: 1rem; color: var(--ink); text-wrap: pretty; }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        .divider { text-align: center; color: var(--accent-soft); margin: 28px 0; letter-spacing: 0.5em; font-size: 1rem; }
+        /* KPI cards */
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin: 8px 0 32px; }
+        .kpi-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 20px 18px; box-shadow: var(--shadow); text-align: center; }
+        .kpi-card .num { font-size: 2rem; font-weight: 700; color: var(--accent); font-family: "JetBrains Mono", monospace; }
+        .kpi-card .lbl { font-size: 0.82rem; color: var(--ink-soft); margin-top: 4px; }
+        /* bar groups */
+        .bars { margin: 10px 0 28px; }
+        .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .bar-row .tag { flex: 0 0 200px; font-size: 0.86rem; color: var(--ink); text-align: right; }
+        .bar-track { flex: 1; background: #f0e9da; border-radius: 4px; height: 22px; position: relative; overflow: hidden; }
+        .bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent-soft), var(--accent)); border-radius: 4px; }
+        .bar-row .val { flex: 0 0 96px; font-size: 0.82rem; color: var(--ink-soft); font-family: "JetBrains Mono", monospace; }
+        /* data table */
+        .data-table { width: 100%; border-collapse: collapse; margin: 12px 0 28px; font-size: 0.82rem; }
+        .data-table th, .data-table td { border: 1px solid var(--line); padding: 6px 9px; text-align: left; vertical-align: top; }
+        .data-table thead th { background: #f3ead9; color: var(--accent); position: sticky; top: 0; }
+        .data-table tbody tr:nth-child(even) { background: #fcf8f0; }
+        .data-table .idx { font-family: "JetBrains Mono", monospace; color: var(--accent-2); white-space: nowrap; }
+        .scroll-wrap { max-height: 520px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px; }
+        .pill { display: inline-block; font-size: 0.74rem; padding: 1px 8px; border-radius: 10px; border: 1px solid var(--line); color: var(--ink-soft); }
+        .pill.cause { color: var(--accent-2); border-color: var(--accent-2); }
+        .pill.end { color: var(--accent); border-color: var(--accent); }
+        .pill.diff { color: var(--accent-4); border-color: var(--accent-4); }
+        .arc-head { background: #efe6d3; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin: 12px 0 28px; }
+        .mini-card { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; box-shadow: var(--shadow); }
+        .mini-card h3 { font-size: 1.1rem; color: var(--accent); margin-bottom: 6px; }
+        .mini-card .role { font-size: 0.8rem; color: var(--accent-2); margin-bottom: 10px; }
+        .mini-card p { font-size: 0.86rem; margin-bottom: 8px; }
+        .mini-card ul { margin: 6px 0 0 18px; font-size: 0.82rem; color: var(--ink-soft); }
+        .nav-back { display: inline-block; margin-top: 28px; padding: 8px 16px; background: var(--accent); color: #fff8ec; border-radius: 4px; text-decoration: none; font-size: 0.88rem; }
+        .nav-back:hover { background: var(--rebel); }
+        .related { margin-top: 24px; padding: 14px 18px; background: #fff8ec; border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer { text-align: center; padding: 24px; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 40px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+        @media (max-width: 600px) {
+            article { padding: 24px 20px; }
+            .bar-row .tag { flex-basis: 120px; font-size: 0.78rem; }
+            .bar-row .val { flex-basis: 70px; }
+        }
+</style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Data · Tribulations
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>The Eighty-One Tribulations</h1>
+        <div class="subtitle">DATA · A CALAMITY LEDGER</div>
+        <div class="tagline">Eighty-one trials, read not as monsters but as a system of causes, outcomes, and who must solve them.</div>
+    </header>
+    <main class="container">
+        <div class="source-note">
+            <strong>Source:</strong> A curated data view of <a href="../../dataset/81-hardships.json">dataset/81-hardships.json</a>, bridged from the project's authoritative classifier <a href="../../scripts/C_情节/hardships_81.py">scripts/C_情节/hardships_81.py</a> (the Chapter-99 "catalogue of calamities" as skeleton, cross-checked against the received text). The four aggregate axes are reproduced exactly; the 81-row ledger is verbatim. Chinese labels appear alongside English glosses.
+        </div>
+        <article>
+            <h2>Reading the Eighty-One as a System</h2>
+            <p>
+                The <em>eighty-one tribulations</em> (八十一难) are the novel's hidden spine. Convention treats them as a checklist of monsters defeated on the road to Vulture Peak. Read as data, they become a map of <strong>who sends trouble, how it ends, and who must solve it</strong>. The project rebuilt the full per-tribulation ledger (name, chapter, cause, outcome, and whether Wukong needed reinforcements) from the authoritative "catalogue of calamities" in Chapter 99 and the project's own classification. Four axes fall out of the eighty-one records.
+            </p>
+        <h2>By Cause — who authored the trouble</h2>
+        <div class="bars">
+        <div class="bar-row">
+            <div class="tag">如来/观音安排</div>
+            <div class="bar-track"><div class="bar-fill" style="width:96.4%"></div></div>
+            <div class="val">27 · 33%</div>
+        </div>
+        <div class="bar-row">
+            <div class="tag">真正野怪</div>
+            <div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div>
+            <div class="val">28 · 35%</div>
+        </div>
+        <div class="bar-row">
+            <div class="tag">天界/西天坐骑下凡</div>
+            <div class="bar-track"><div class="bar-fill" style="width:57.1%"></div></div>
+            <div class="val">16 · 20%</div>
+        </div>
+        <div class="bar-row">
+            <div class="tag">人心自生的魔障</div>
+            <div class="bar-track"><div class="bar-fill" style="width:35.7%"></div></div>
+            <div class="val">10 · 12%</div>
+        </div>
+        </div>
+        <h2>By Outcome — how each foe is disposed of</h2>
+        <div class="bars">
+        <div class="bar-row">
+            <div class="tag">被接走（有背景）</div>
+            <div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div>
+            <div class="val">49 · 60%</div>
+        </div>
+        <div class="bar-row">
+            <div class="tag">被打死（无背景）</div>
+            <div class="bar-track"><div class="bar-fill" style="width:51.0%"></div></div>
+            <div class="val">25 · 31%</div>
+        </div>
+        <div class="bar-row">
+            <div class="tag">被收编</div>
+            <div class="bar-track"><div class="bar-fill" style="width:14.3%"></div></div>
+            <div class="val">7 · 9%</div>
+        </div>
+        </div>
+        <h2>By Resolution — could Wukong manage alone?</h2>
+        <div class="bars">
+        <div class="bar-row">
+            <div class="tag">悟空独立解决</div>
+            <div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div>
+            <div class="val">42 · 52%</div>
+        </div>
+        <div class="bar-row">
+            <div class="tag">需要搬救兵</div>
+            <div class="bar-track"><div class="bar-fill" style="width:92.9%"></div></div>
+            <div class="val">39 · 48%</div>
+        </div>
+        </div>
+        <h2>Cause × Outcome Matrix</h2>
+        <table class="data-table">
+            <thead><tr><th>Cause \ Outcome</th><th>Reclaimed by a patron deity</th><th>Slain (no patron)</th><th>Recruited / converted</th></tr></thead>
+            <tbody>
+            <tr><td><strong>如来/观音安排</strong></td><td>23</td><td>0</td><td>4</td></tr>
+            <tr><td><strong>真正野怪</strong></td><td>6</td><td>19</td><td>3</td></tr>
+            <tr><td><strong>天界/西天坐骑下凡</strong></td><td>16</td><td>0</td><td>0</td></tr>
+            <tr><td><strong>人心自生的魔障</strong></td><td>4</td><td>6</td><td>0</td></tr>
+            </tbody>
+        </table>
+            <p>
+                Two patterns dominate. First, <strong>nearly two-thirds of the dangers are "arranged"</strong> — dispatched by Buddha or Guanyin as tests, not random evil. Second, the outcomes split cleanly: about <strong>60% are reclaimed by a patron deity</strong> (a celestial mount sent home, a converted demon taken on as an attendant), while the genuinely wild ones are the ones Wukong must simply kill. The pilgrimage is less a war against chaos than a managed obstacle course — and Wukong, solving 42 of 81 alone and needing help for 39, is the indispensable engine of the whole machine.
+            </p>
+        <h2>The Complete Eighty-One</h2>
+        <div class="scroll-wrap">
+        <table class="data-table">
+            <thead><tr><th>#</th><th>Tribulation (难)</th><th>Chapter</th><th>Cause</th><th>Outcome</th><th>Resolution</th></tr></thead>
+            <tbody>
+            <tr><td class="idx">01</td><td>金蝉遭贬</td><td>Prequel</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">02</td><td>出胎几杀</td><td>Prequel</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">03</td><td>满月抛江</td><td>Prequel</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">04</td><td>寻亲报冤</td><td>Prequel</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">05</td><td>出城逢虎</td><td>Ch.13</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">06</td><td>落坑折从</td><td>Ch.13</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">07</td><td>双叉岭上</td><td>Ch.13</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">08</td><td>两界山头</td><td>Ch.14</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">09</td><td>陡涧换马</td><td>Ch.15</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">10</td><td>夜被火烧</td><td>Ch.16</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">11</td><td>失却袈裟</td><td>Ch.16</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">12</td><td>收降八戒</td><td>Ch.19</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Recruited / converted</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">13</td><td>黄风怪阻</td><td>Ch.21</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">14</td><td>请求灵吉</td><td>Ch.21</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">15</td><td>流沙难渡</td><td>Ch.22</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Recruited / converted</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">16</td><td>收得沙僧</td><td>Ch.22</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Recruited / converted</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">17</td><td>四圣显化</td><td>Ch.23</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">18</td><td>五庄观中</td><td>Ch.24</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">19</td><td>难活人参</td><td>Ch.26</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">20</td><td>贬退心猿</td><td>Ch.27</td><td><span class="pill cause">Inner-demons born of the human mind</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">21</td><td>黑松林失散</td><td>Ch.28</td><td><span class="pill cause">Inner-demons born of the human mind</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">22</td><td>宝象国捎书</td><td>Ch.29</td><td><span class="pill cause">Inner-demons born of the human mind</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">23</td><td>金銮殿变虎</td><td>Ch.30</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">24</td><td>平顶山逢魔</td><td>Ch.32</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">25</td><td>乌鸡国礼佛</td><td>Ch.36</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">26</td><td>被魔化身</td><td>Ch.37</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">27</td><td>号山逢怪</td><td>Ch.40</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Recruited / converted</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">28</td><td>风摄圣僧</td><td>Ch.41</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Recruited / converted</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">29</td><td>心猿遭害</td><td>Ch.41</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Recruited / converted</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">30</td><td>请圣降妖</td><td>Ch.42</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Recruited / converted</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">31</td><td>黑河沉没</td><td>Ch.43</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">32</td><td>搬运车迟</td><td>Ch.44</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">33</td><td>大赌输赢</td><td>Ch.45</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">34</td><td>祛道兴僧</td><td>Ch.46</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">35</td><td>路逢大水</td><td>Ch.47</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">36</td><td>身落天河</td><td>Ch.47</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">37</td><td>鱼篮现身</td><td>Ch.49</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">38</td><td>金兜山遇怪</td><td>Ch.50</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">39</td><td>普天神难伏</td><td>Ch.52</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">40</td><td>问佛根源</td><td>Ch.52</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">41</td><td>吃水遭毒</td><td>Ch.53</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">42</td><td>西梁国留婚</td><td>Ch.54</td><td><span class="pill cause">Inner-demons born of the human mind</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">43</td><td>琵琶洞受苦</td><td>Ch.55</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">44</td><td>再贬心猿</td><td>Ch.57</td><td><span class="pill cause">Inner-demons born of the human mind</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">45</td><td>难辨猕猴</td><td>Ch.58</td><td><span class="pill cause">Inner-demons born of the human mind</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">46</td><td>路阻火焰山</td><td>Ch.59</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">47</td><td>求取芭蕉扇</td><td>Ch.59</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">48</td><td>收缚魔王</td><td>Ch.61</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">49</td><td>赛城扫塔</td><td>Ch.62</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">50</td><td>宝林遭魔</td><td>Ch.65</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">51</td><td>捉获圣僧</td><td>Ch.65</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">52</td><td>七绝山稀柿</td><td>Ch.67</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">53</td><td>朱紫国行医</td><td>Ch.68</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">54</td><td>拯救疲癃</td><td>Ch.71</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">55</td><td>降妖取后</td><td>Ch.71</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">56</td><td>八戒忘形</td><td>Ch.72</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">57</td><td>盘丝洞中</td><td>Ch.72</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">58</td><td>濯垢泉八戒</td><td>Ch.72</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">59</td><td>驱逐大圣</td><td>Ch.76</td><td><span class="pill cause">Inner-demons born of the human mind</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">60</td><td>路阻狮驼</td><td>Ch.74</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">61</td><td>城遇暗云</td><td>Ch.75</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">62</td><td>金鏘凌虚</td><td>Ch.75</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">63</td><td>比丘救子</td><td>Ch.78</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">64</td><td>辨认妖邪</td><td>Ch.79</td><td><span class="pill cause">Fallen celestial & Buddhist mounts</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">65</td><td>赶捉犀牛</td><td>Ch.91</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong must summon help</span></td></tr>
+            <tr><td class="idx">66</td><td>天竺遇婚</td><td>Ch.93</td><td><span class="pill cause">Inner-demons born of the human mind</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">67</td><td>铜台府监禁</td><td>Ch.97</td><td><span class="pill cause">Inner-demons born of the human mind</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">68</td><td>凌云渡脱胎</td><td>Ch.98</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">69</td><td>有经未全</td><td>Ch.98</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">70</td><td>珍珠悬挂</td><td>Ch.98</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">71</td><td>分色成形</td><td>Ch.99</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">72</td><td>遇着猛兽</td><td>Ch.99</td><td><span class="pill cause">Genuine demons of the wild</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">73</td><td>风雪寒冰</td><td>Ch.99</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">74</td><td>落水鼋窟</td><td>Ch.99</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">75</td><td>阴魔作祟</td><td>Ch.99</td><td><span class="pill cause">Inner-demons born of the human mind</span></td><td><span class="pill end">Slain (no patron)</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">76</td><td>老鼋落水</td><td>Ch.99</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">77</td><td>未齐经全</td><td>Ch.99</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">78</td><td>佛国雷音</td><td>Ch.98</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">79</td><td>经传天下</td><td>Ch.100</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">80</td><td>佛国归途</td><td>Ch.100</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            <tr><td class="idx">81</td><td>五圣成真</td><td>Ch.100</td><td><span class="pill cause">Arranged by Buddha / Guanyin</span></td><td><span class="pill end">Reclaimed by a patron deity</span></td><td><span class="pill diff">Wukong resolves alone</span></td></tr>
+            </tbody>
+        </table>
+        </div>
+        </article>
+        <a class="nav-back" href="index.html">← Back to EN Home</a>
+        <div class="related">
+            <strong>Related:</strong>
+            <a href="characters.html">The Pilgrims</a> ·
+                            <a href="chapters-map.html">100 Chapters Map</a> ·
+                            <a href="../data/monster-ecology-network.html">Monster Ecology visualization</a>
+        </div>
+    </main>
+    <footer>
+        © <span id="footer-year">2026</span> Journey to the West · Annotated Project · MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> ·
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.98 W347 ·
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W347
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
