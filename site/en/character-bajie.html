@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>Zhu Bajie, the Pig — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.03em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb">
+<a href="index.html">EN Home</a> &middot; <a href="characters.html">The Pilgrims</a> &middot; Deep Dive
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>Zhu Bajie, the Pig</h1>
+        <div class="subtitle">CHARACTER &middot; DEEP DIVE</div>
+        <div class="tagline">Field-Marshal Tianpeng fallen to swine, Altar-Cleaner of leftovers — appetite, comedy, and the most human of the pilgrims.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+A long-form English portrait of Zhu Bajie, grounded in the canonical narrative and the project's team/psychology datasets (<code>pilgrim-team-dynamic-network</code>, <code>pilgrim-team-psychology-arc</code>, <code>character-relationship-3d</code>). Belbin and radar figures are taken directly from those datasets.
+        </div>
+
+        <article>
+
+            <h2>Names &amp; Identities <span class="anchor">&#8596; marshal to pig</span></h2>
+            <p>
+                He is <strong>Zhu Bajie</strong> (猪八戒, "Pig of the Eight Precepts"), given the Dharma name <strong>Zhu Wuneng</strong> (猪悟能, "Awakened to Ability"). Before his fall he was <strong>Field-Marshal Tianpeng</strong> (天蓬元帅), a commander of the heavenly navy, demoted to a pig-demon for drunkenly harassing the Moon's Lady Chang'e. At the journey's end he is rewarded as the <strong>Altar-Cleaner</strong> (净坛使者), patron of leftovers. The slide from marshal to swine to half-comic glutton is the joke the whole book runs on — and also its most honest portrait of appetite.
+            </p>
+
+            <h2>The Earthy One <span class="anchor">&#8596; honest about wanting</span></h2>
+            <p>
+                The project's network describes him tersely: "天蓬元帅转世，贪吃好色但忠心耿耿。". Where Wukong is the restless mind and Sanzang the stubborn will, Bajie is the <em>body</em> — hungry, lustful, lazy, homesick, and therefore the most recognisably human of the three. His constant wish to split the luggage and go home is the reader's own fatigue given a voice.
+            </p>
+
+            <h2>Team Role <span class="anchor">&#8596; Belbin: social glue</span></h2>
+            <p>
+                In Belbin terms Bajie scores highest on <strong>Resource Investigator</strong> (8) and <strong>Teamworker</strong> (8) — the roles that keep a group sociable and unblocked — but lowest on <strong>Completer-Finisher</strong> (2). He is the one who defuses tension with a joke and the one who abandons the post when things get hard. The team needs his warmth; it can never trust his discipline.
+            </p>
+
+            <h2>Psychology Profile <span class="anchor">&#8596; radar: low fear, low wrath</span></h2>
+            <p>
+                His five-axis radar reads <strong>Fear 8</strong>, <strong>Resolve 4</strong>, <strong>Anger 6</strong>, <strong>Wisdom 4</strong>, <strong>Obedience 5</strong>. He is not especially afraid and not especially angry; what he lacks is the discipline axis. Compared with Sanzang's obedience (9) and Wukong's resolve (9), Bajie's middle values are exactly his charm and his liability — a creature of the moment.
+            </p>
+
+            <h2>Comic Relief, and More <span class="anchor">&#8596; the body's truth</span></h2>
+            <p>
+                Bajie is the book's comedy, but the comedy is structural. A pilgrimage that only contained a flawless sage and a flawless saint would be a sermon; Bajie is the appetite that must be carried the whole way and never quite tamed. His failures — sleeping through guard duty, believing the easiest story, wanting the pretty girl — are the reader's failures, forgiven in advance.
+            </p>
+
+            <h2>Explore the Data <span class="anchor">&#8596; cross-linked</span></h2>
+            <ul>
+                <li><a href="characters.html">The Pilgrims</a> — the five as a project team.</li>
+                <li><a href="../data/pilgrim-team-dynamic-network.html">Team Dynamic Network</a> — Bajie's Resource-Investigator role.</li>
+                <li><a href="../data/pilgrim-team-psychology-arc.html">Psychology Arc</a> — his steadier late-chapter scores.</li>
+                <li><a href="character-wukong.html">Sun Wukong</a> — the partner he quarrels with and saves.</li>
+            </ul>
+
+            <a class="nav-back" href="index.html">&#8592; Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+<a href="characters.html">The Pilgrims</a> &middot; <a href="character-wukong.html">Sun Wukong</a> &middot; <a href="character-shaseng.html">Sha Wujing</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.0 W349 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W349
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

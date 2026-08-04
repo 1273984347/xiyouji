@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>Tang Sanzang, the Tang Monk — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.03em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb">
+<a href="index.html">EN Home</a> &middot; <a href="characters.html">The Pilgrims</a> &middot; Deep Dive
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>Tang Sanzang, the Tang Monk</h1>
+        <div class="subtitle">CHARACTER &middot; DEEP DIVE</div>
+        <div class="tagline">Golden Cicada reborn, Imperial Younger Brother, Tripitaka-master — the faithful centre the whole pilgrimage orbits.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+A long-form English portrait of Tang Sanzang, grounded in the canonical narrative (Wu Cheng'en, 16th c.) and the project's own team/psychology datasets (<code>pilgrim-team-dynamic-network</code>, <code>pilgrim-team-psychology-arc</code>, <code>character-relationship-3d</code>). Belbin and radar figures are taken directly from those datasets.
+        </div>
+
+        <article>
+
+            <h2>Names &amp; Identities <span class="anchor">&#8596; one monk, many titles</span></h2>
+            <p>
+                The monk is called <strong>Tang Sanzang</strong> (唐僧 / 唐三藏, "the Tang Tripitaka-master"), and in the novel his given Dharma name is <strong>Xuanzang</strong> (玄奘). He is also the reincarnation of <strong>Golden Cicada</strong> (金蝉子), a disciple of the Buddha banished to earth; the founding emperor Taizong of Tang calls him <strong>Imperial Younger Brother</strong> (御弟) after he swears brotherhood with the throne. As a baby cast adrift on a river he is nicknamed <strong>River-Float</strong> (江流儿). Each name fixes a different relation — to heaven, to the court, to the road.
+            </p>
+
+            <h2>The Heart of the Journey <span class="anchor">&#8596; why he matters</span></h2>
+            <p>
+                Sanzang is the project's centre of gravity. In the project's relationship network he carries the highest importance score among the pilgrims (importance 9/10), and the team dataset describes him plainly: "金蝉子转世，取经团队核心，意志坚定但常陷险境。". Without him there is no scripture to fetch and no frame for the others' redemption. He is faith made flesh — and faith, in this book, is precisely what cannot see the demon standing in front of it.
+            </p>
+
+            <h2>Team Role <span class="anchor">&#8596; Belbin: Coordinator</span></h2>
+            <p>
+                Mapped onto Belbin team roles, Sanzang is overwhelmingly the <strong>Coordinator</strong> (score 9) with a strong <strong>Completer-Finisher</strong> streak (7). He sets the goal, holds the compass, and refuses to swerve from it. His lowest scores fall on the "doing" roles (Specialist 2, Shaper 3): he is not the one who fights or schemes. That is the whole dramatic premise — the man who knows the destination but cannot survive the road without those who can.
+            </p>
+
+            <h2>Psychology Profile <span class="anchor">&#8596; radar: faith over fury</span></h2>
+            <p>
+                His five-axis profile is the mirror image of Wukong's: <strong>Obedience 9</strong>, <strong>Wisdom 8</strong>, <strong>Resolve 8</strong>, <strong>Fear 7</strong>, and the lowest <strong>Anger 3</strong>. He is principled, trusting, and easily frightened; he rarely erupts. The consequence is the novel's engine: his high obedience makes him credulous toward disguised demons and suspicious of his own sharpest protector. The tension between Sanzang's faith and Wukong's insight is the book's central conflict.
+            </p>
+
+            <h2>The Conflict With Wukong <span class="anchor">&#8596; insight vs faith</span></h2>
+            <p>
+                Again and again Sanzang cannot see the evil that Wukong sees, and again and again he recites the <em>Band-Tightening Sutra</em> to punish the very disciple who has just saved him. The low point — the <strong>White Bone Demon</strong> episode (ch. 27) — drives Wukong away and the team near to ruin. It is repaired only at the <strong>Yellow Robe demon</strong> (ch. 31). This is not a character flaw to be corrected so much as the structure of the pilgrimage: vision and belief must be reconciled, not merged.
+            </p>
+
+            <h2>From River-Float to Buddha <span class="anchor">&#8596; the arc closes</span></h2>
+            <p>
+                He begins as a vulnerable mortal monk and ends enthroned as the <strong>Buddha of the Sandalwood Merit</strong> (旃檀功德佛). The journey does not make him less faithful; it makes his faith tested, tempered, and finally vindicated. For the data behind these arcs, see the project's team and psychology visualizations.
+            </p>
+
+            <h2>Explore the Data <span class="anchor">&#8596; cross-linked</span></h2>
+            <ul>
+                <li><a href="characters.html">The Pilgrims</a> — the five as a project team.</li>
+                <li><a href="../data/pilgrim-team-dynamic-network.html">Team Dynamic Network</a> — Sanzang's Coordinator role in context.</li>
+                <li><a href="../data/pilgrim-team-psychology-arc.html">Psychology Arc</a> — his resolve and obedience across 100 chapters.</li>
+                <li><a href="../data/character-relationship-3d.html">Character Relationship 3D</a> — his central node.</li>
+            </ul>
+
+            <a class="nav-back" href="index.html">&#8592; Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+<a href="characters.html">The Pilgrims</a> &middot; <a href="character-wukong.html">Sun Wukong</a> &middot; <a href="bestiary.html">Bestiary</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.0 W349 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W349
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

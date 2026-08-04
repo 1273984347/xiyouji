@@ -8,6 +8,12 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.3.0（2026-08-04）：W349 英文站角色深度页扩张（取经三人组深度页 + E10 道教全真派专题译介）
+
+- **英文站角色深度页扩张（W349）**：延续 W348 孙悟空深度页方向，按"策展摘要 + 数据看板 + 中文源文回链 + footer 双索引"约定再扩 4 页（site/en/ 20→24 文件）—— ① 取经三人组深度页（补全孙悟空之外的三主角，均 bridging 项目既有数据集 pilgrim-team-dynamic-network / pilgrim-team-psychology-arc / character-relationship-3d，零编造）：`character-tangseng.html`（唐僧·Belbin 协调者 9/顺从 9/五维心理画像·与悟空信任张力·江流儿→旃檀功德佛）、`character-bajie.html`（猪八戒·天蓬元帅→猪→净坛使者·Belbin 资源探索者/团队工者 8·食欲喜剧）、`character-shaseng.html`（沙悟净·卷帘大将→金身罗汉·Belbin 执行者 9/完成者 7·平稳心理轴）；② `essay-quanzhen-daoism.html`（E10·道教全真派内丹学读法，源 西游与道教全真派专题.md：内丹密码本 心猿/金公/木母/刀圭·四理论家 王重阳/丘处机/马钰/张三丰·四概念 性命双修/三教合一/内丹学/全真戒律）。
+- **英文站入口与文档同步（W349）**：`site/en/index.html` 入口卡片 18→22（新增 唐僧/八戒/沙僧 三深度页卡 + E10 卡，section-sub 更新为 22 入口）；`site/en/README.md` 文件清单 20→24、版本升 v2.3.0 W349；全部 22 个 EN HTML 页 footer 双索引统一升至 v2.3.0 W349（含 W348 页滞后修正）。英文站从 20 文件扩至 24 文件。
+- **六文档同步已执行（v2.3.0 + W349）**：统一将 CHANGELOG/README/STRUCTURE/项目说明/file-index/交接文档 六文档升 v2.3.0、W 标到 W349，verify_delivery 门禁全绿 ✅（中文内容计数 A1-A6 总 629 不变·dataset 仍 42 JSON·A4 计数 201 篇不变；英文站扩张不改中文文档规模）
+
 ### v2.2.99（2026-08-04）：W348 英文站四类扩张（E7-E9 译介 + 可视化英文导览 + 孙悟空深度页 + 方法论指南）
 
 - **英文站四类扩张（W348）**：延续 W347 数据页方向，按"策展摘要 + 数据看板 + 中文源文回链 + footer 双索引"约定再扩 6 页（site/en/ 14→20 文件）—— ① 三篇 A5/A6 专题译介 E7-E9：`essay-historical-xuanzang.html`（历史玄奘 vs 小说玄奘七维对照，源 历史玄奘与小说玄奘专题.md）、`essay-divine-bureaucracy.html`（天庭即明代衙门·黄仁宇/钱穆/韦伯/王斯福四理论家对照，源 明代神祇官僚体系对照专题.md）、`essay-chapter-couplets.html`（百回回目七言对联·格律/五型/结构统计，源 回目对联分析专题.md）；② `visualizations.html` 可视化英文导览（85 个 site/data 页面按八簇分类 + 每页说明与直链）；③ `character-wukong.html` 孙悟空深度页（名号/石生/反天/13500 斤金箍棒/心猿·跨可视化链接）；④ `methodology.html` 全站读法指南（内容地图/A4 七段式/宣纸设计语言/双索引可追溯/零编造门禁）。全部由项目既有中文源文与 dataset 桥接，零编造。
