@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>The Mind as Cosmos — Ming Intellectual History · Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c; --accent-3: #C9A063;
+            --accent-4: #6B8E5A; --rebel: #8c2a2a; --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8; min-height: 100vh; }
+        .hero { background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+        .hero::after { content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%); pointer-events: none; }
+        .lang-switch { position: absolute; top: 18px; right: 24px; font-size: 0.85rem; z-index: 5; }
+        .lang-switch a { color: var(--accent-soft); text-decoration: none; padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35); border-radius: 4px; }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 8px; position: relative; z-index: 1; }
+        .hero .subtitle { font-size: 0.95rem; color: var(--accent-soft); letter-spacing: 0.25em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85rem; color: rgba(245, 233, 212, 0.65); font-style: italic; position: relative; z-index: 1; }
+        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--line); }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container { max-width: 820px; margin: -30px auto 60px; padding: 0 24px; position: relative; z-index: 2; }
+        .source-note { background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+            padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 32px; font-size: 0.88rem; color: var(--ink-soft); }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 36px 40px; box-shadow: var(--shadow); }
+        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 12px; padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft); letter-spacing: 0.03em; }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor { font-size: 0.78rem; color: var(--accent-2); font-family: "JetBrains Mono", monospace; margin-left: 8px; letter-spacing: 0.1em; font-weight: 400; }
+        article p { margin-bottom: 18px; font-size: 1rem; color: var(--ink); text-wrap: pretty; }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider { text-align: center; color: var(--accent-soft); margin: 28px 0; letter-spacing: 0.5em; font-size: 1rem; }
+        .nav-back { display: inline-block; margin-top: 28px; padding: 8px 16px; background: var(--accent);
+            color: #fff8ec; border-radius: 4px; text-decoration: none; font-size: 0.88rem; transition: background 0.15s; }
+        .nav-back:hover { background: var(--rebel); }
+        .related { margin-top: 24px; padding: 14px 18px; background: #fff8ec; border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        @media (max-width: 640px) { article { padding: 24px 20px; } }
+        footer { text-align: center; padding: 24px; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 40px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> &middot; <a href="dashboard.html">Dashboard</a> &middot; Essay E30
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">&#20013;&#25991;</a>
+        </div>
+        <h1>The Mind as Cosmos — Ming Intellectual History · Annotated English Edition</h1>
+        <div class="subtitle">ESSAY E30 &middot; SUMMARY TRANSLATION</div>
+        <div class="tagline">Wang Yangming's heart-mind, Li Zhi's childlike mind, Wang Ji's everyday-Way, Huang Zongxi's people-host-ruler-guest — the pilgrimage as Ming intellectual history.</div>
+    </header>
+    <main class="container">
+        <div class="source-note">
+            A summary translation of <a href="../../docs/04-文化与历史背景/明代思想史对照专题.md">%E6%98%8E%E4%BB%A3%E6%80%9D%E6%83%B3%E5%8F%B2%E5%AF%B9%E7%85%A7%E4%B8%93%E9%A2%98.md</a>. The Chinese original (W180) reads the pilgrimage as the literary replication of Ming intellectual history, triangulated through Wang Yangming, Li Zhi, Wang Ji (Taizhou), and Huang Zongxi, closing the project's eight-layer 'Ming mirror' (politics + economy + deities + judiciary + military + exam + religion + thought).
+        </div>
+        <article>
+            <h2>The Pilgrimage as Intellectual History <span class="anchor">&#8596; the thesis</span></h2>
+            <p>
+                The scripture pilgrimage is not mere mythic adventure; it is the literary replication of Ming intellectual history. "Mind-ape" (xinyuan) and "intention-horse" (yima) run through the book &mdash; the mythologised form of Wang Yangming's "heart-mind learning" (xinxue). Red Boy styles himself the "Sage-Infant King" &mdash; a mirror of Li Zhi's "childlike mind." Zhu Bajie's earthy "food and sex are nature" is perfectly isomorphic with the Taizhou School's "the everyday is the Way." The Jade Emperor ruling Heaven and the Buddha presiding over the West form a "Heaven-West dual track" &mdash; the mythologised projection of Huang Zongxi's "the people are host, the ruler is guest." Written amid the turbulence of mid-late Ming thought (Wang Yangming's rise against Cheng-Zhu orthodoxy, the Taizhou "wild Chan," Li Zhi martyred as a heretic, Huang Zongxi's early enlightenment), the novel casts all of it onto the pilgrimage.
+            </p>
+            <p>
+                <em>Distinction from E15.</em> Essay E15 reads the novel through the "Three Teachings as One" framework (Confucian governance, Daoist self-cultivation, Buddhist mind) &mdash; a synthesis of traditions. This essay instead reads it through four individual Ming thinkers as case studies, completing the eighth layer of the project's "eight-layer Ming mirror" (politics + economy + deities + judiciary + military + exam + religion + thought). Religion is outer discipline; thought is inner awakening.
+            </p>
+
+            <h2>Four Thinkers <span class="anchor">&#8596; the scaffold</span></h2>
+            <ul>
+                <li><strong>Wang Yangming</strong> (1472&ndash;1529): "the mind is principle," "extending innate knowing" (zhiliangzhi), "the unity of knowing and acting." His "crush the thieves in the heart" (po zhongxinzei) is exactly Wukong slaying the six thieves. The "Four-Sentence Teaching" maps onto Wukong's four cultivation stages.</li>
+                <li><strong>Li Zhi</strong> (1527&ndash;1602): the "childlike mind" (tongxin) &mdash; the true, undefiled original mind &mdash; and self-styled "heterodoxy" (yiduan). Martyred in prison (1602). Red Boy's "Sage-Infant" is the mythologised childlike mind; his defiance is the mythologised heretic.</li>
+                <li><strong>Wang Ji</strong> (1498&ndash;1583), Taizhou School: the "Four-Nothings" (siwu) and "the everyday is the Way." Bajie's "food and sex" is the mythologised everyday-Way; the Taizhou "every street a sage" mirrors demons who still attain Buddhahood.</li>
+                <li><strong>Huang Zongxi</strong> (1610&ndash;1695), <em>Waiting for the Dawn</em>: "the people are host, the ruler is guest" (junkezhulilun) and "schools deliberate affairs." The Heaven-West dual track is its mythologised projection &mdash; a century before Rousseau.</li>
+            </ul>
+
+            <h2>Four Case Mappings <span class="anchor">&#8596; line anchors</span></h2>
+            <table>
+                <tr><th>Thinker / concept</th><th>JTTW node</th><th>Line</th><th>Mapping</th></tr>
+                <tr><td>Wang Yangming &middot; crush the heart-thieves</td><td>Mind-ape submits, six thieves vanish</td><td>ch. 14, line 1459</td><td>the six thieves = the six sense-roots; killing them = crushing the heart-thieves</td></tr>
+                <tr><td>Li Zhi &middot; childlike mind / heretic</td><td>Red Boy, Sage-Infant King, subdued</td><td>ch. 42, line 4370</td><td>"sage-infant" = the true childlike mind; his defiance = the heretic, "co-opted" by Guanyin</td></tr>
+                <tr><td>Wang Ji &middot; everyday is the Way</td><td>Bajie submits, "great bowels"</td><td>ch. 19, line 1868</td><td>food-and-sex = the everyday; attaining fruit despite it = "eating-dressing is the Way"</td></tr>
+                <tr><td>Huang Zongxi &middot; people host, ruler guest</td><td>the five attain truth</td><td>ch. 100, line 7085</td><td>Buddha's spirit-certification + Jade Emperor's admin-approval = the dual-track check</td></tr>
+            </table>
+
+            <h2>The Eight-Layer Ming Mirror <span class="anchor">&#8596; the closure</span></h2>
+            <p>
+                With this essay the project closes its "eight-layer Ming mirror": W126 politics (bureaucracy = Heaven's structure), W130 economy (salary = Peach ration), W134 deities (deities = state bureaucracy), W142 judiciary (Heavenly Law = the Code), W146 military (heavenly troops = weisuo garrison), W150 exam (merit = Buddhahood), W154 religion (ordination certificate = pilgrimage qualification), and W180 thought (heart-mind = mind-ape, childlike mind = sage-infant, everyday-Way = food-sex, people-host-ruler-guest = Heaven-West dual track). The first seven expose the "hard structure" of state machinery and its "soft mechanisms"; thought (W180) exposes the "inner awakening" &mdash; strong structure, smooth mechanism, fixed soul-order, yet without awakening the empire is but a shell.
+            </p>
+
+            <h2>Glossary <span class="anchor">&#8596; 22 terms</span></h2>
+            <table>
+                <tr><th>Term</th><th>Thinker</th><th>JTTW mapping</th></tr>
+                <tr><td>heart-mind learning (xinxue)</td><td>Wang Yangming</td><td>Wukong named "mind-ape"</td></tr>
+                <tr><td>extend innate knowing</td><td>Wang Yangming</td><td>the fiery-golden eyes discern demons</td></tr>
+                <tr><td>unity of knowing and acting</td><td>Wang Yangming</td><td>knowing the demon + acting to subdue it</td></tr>
+                <tr><td>Four-Sentence Teaching</td><td>Wang Yangming</td><td>Wukong's four cultivation stages</td></tr>
+                <tr><td>crush the heart-thieves</td><td>Wang Yangming</td><td>Wukong slays the six thieves</td></tr>
+                <tr><td>childlike mind</td><td>Li Zhi</td><td>Red Boy "Sage-Infant"</td></tr>
+                <tr><td>heterodoxy</td><td>Li Zhi</td><td>Red Boy defies father, crowns himself</td></tr>
+                <tr><td>everyday is the Way</td><td>Wang Ji / Taizhou</td><td>Bajie's food-sex attains fruit</td></tr>
+                <tr><td>Four-Nothings</td><td>Wang Ji</td><td>Wukong's no-good-no-evil Equal-to-Heaven phase</td></tr>
+                <tr><td>every street a sage</td><td>Taizhou</td><td>demons too attain Buddhahood</td></tr>
+                <tr><td>Waiting for the Dawn</td><td>Huang Zongxi</td><td>Heaven-West dual track</td></tr>
+                <tr><td>people host, ruler guest</td><td>Huang Zongxi</td><td>Jade Emperor (guest/ruler) + Buddha (host/spirit)</td></tr>
+                <tr><td>schools deliberate affairs</td><td>Huang Zongxi</td><td>Guanyin audits the merit (spirit-power checks admin-power)</td></tr>
+                <tr><td>Three Teachings as One</td><td>Ming current</td><td>xinxue + Chan + Daoist inner-alchemy</td></tr>
+            </table>
+
+            <a class="nav-back" href="index.html">&larr; Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+                <a href="essay-three-teachings.html">E15 &middot; Three Teachings as One</a> &middot; <a href="essay-ming-literary-thought.html">E29 &middot; From Archaism to Xinling</a> &middot; <a href="essay-ming-religion.html">E27 &middot; The Dynastic Pantheon</a> &middot; <a href="essay-ming-politics.html">E24 &middot; Heaven Is a Ming Court</a>
+            </div>
+        </article>
+    </main>
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.6 W355 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W355
+        </div>
+
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

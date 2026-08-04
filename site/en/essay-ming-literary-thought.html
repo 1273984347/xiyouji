@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>From Archaism to Xinling — Ming Literary Thought · Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c; --accent-3: #C9A063;
+            --accent-4: #6B8E5A; --rebel: #8c2a2a; --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8; min-height: 100vh; }
+        .hero { background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+        .hero::after { content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%); pointer-events: none; }
+        .lang-switch { position: absolute; top: 18px; right: 24px; font-size: 0.85rem; z-index: 5; }
+        .lang-switch a { color: var(--accent-soft); text-decoration: none; padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35); border-radius: 4px; }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 8px; position: relative; z-index: 1; }
+        .hero .subtitle { font-size: 0.95rem; color: var(--accent-soft); letter-spacing: 0.25em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85rem; color: rgba(245, 233, 212, 0.65); font-style: italic; position: relative; z-index: 1; }
+        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--line); }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container { max-width: 820px; margin: -30px auto 60px; padding: 0 24px; position: relative; z-index: 2; }
+        .source-note { background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+            padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 32px; font-size: 0.88rem; color: var(--ink-soft); }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 36px 40px; box-shadow: var(--shadow); }
+        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 12px; padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft); letter-spacing: 0.03em; }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor { font-size: 0.78rem; color: var(--accent-2); font-family: "JetBrains Mono", monospace; margin-left: 8px; letter-spacing: 0.1em; font-weight: 400; }
+        article p { margin-bottom: 18px; font-size: 1rem; color: var(--ink); text-wrap: pretty; }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider { text-align: center; color: var(--accent-soft); margin: 28px 0; letter-spacing: 0.5em; font-size: 1rem; }
+        .nav-back { display: inline-block; margin-top: 28px; padding: 8px 16px; background: var(--accent);
+            color: #fff8ec; border-radius: 4px; text-decoration: none; font-size: 0.88rem; transition: background 0.15s; }
+        .nav-back:hover { background: var(--rebel); }
+        .related { margin-top: 24px; padding: 14px 18px; background: #fff8ec; border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        @media (max-width: 640px) { article { padding: 24px 20px; } }
+        footer { text-align: center; padding: 24px; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 40px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> &middot; <a href="dashboard.html">Dashboard</a> &middot; Essay E29
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">&#20013;&#25991;</a>
+        </div>
+        <h1>From Archaism to Xinling — Ming Literary Thought · Annotated English Edition</h1>
+        <div class="subtitle">ESSAY E29 &middot; SUMMARY TRANSLATION</div>
+        <div class="tagline">A transitional text: the novel inherits the Tang-Song School's 'writing conveys the Way' and anticipates the Gong'an School's 'give voice to one's own xinling.'</div>
+    </header>
+    <main class="container">
+        <div class="source-note">
+            A summary translation of <a href="../../docs/04-文化与历史背景/明代文学思想对照专题.md">%E6%98%8E%E4%BB%A3%E6%96%87%E5%AD%A6%E6%80%9D%E6%83%B3%E5%AF%B9%E7%85%A7%E4%B8%93%E9%A2%98.md</a>. The Chinese original places the novel in the Ming literary genealogy &mdash; laterally against the four great novels, longitudinally across cabinet style, the Seven Masters, the Tang-Song and Gong'an Schools &mdash; triangulated through Li Zhi, Yuan Hongdao, Gui Youguang, and Li Mengyang.
+        </div>
+        <article>
+            <h2>From Archaism to Xinling <span class="anchor">&#8596; the spectrum</span></h2>
+            <p>
+                Written in the mid-to-late Ming (c. 1550s&ndash;1590s), the novel sits at the very hinge of Chinese literary thought's turn "from archaism to xinling (innate sensibility)." This essay places it in the Ming literary genealogy: laterally against the four great novels, and longitudinally against the early-Ming "cabinet style" (taiget i), the mid-Ming "Former and Latter Seven Masters" archaist movement, the Tang-Song School, the Gong'an School, and the Jingling School. The novel is a transitional text &mdash; it inherits the Tang-Song School's utilitarian "writing conveys the Way" yet anticipates the Gong'an School's "give voice to one's own xinling, bound by no formula," the optimistic prelude to a literature of emancipated individuality.
+            </p>
+
+            <h2>Four Literary Thinkers <span class="anchor">&#8596; the scaffold</span></h2>
+            <ul>
+                <li><strong>Li Zhi</strong> (1527&ndash;1602), <em>On the Childlike Mind (Tongxin Shuo)</em>: the supreme literature issues from the "childlike mind" &mdash; the true, undefiled original mind. He condemns "received doctrines" that obscure it and breaks the genre hierarchy (poetry-prose over fiction), legitimising the novel and drama. His commentary on <em>Water Margin</em> opened the Ming practice of fiction commentary.</li>
+                <li><strong>Yuan Hongdao</strong> (Gong'an School): "give voice to one's own xinling, bound by no formula" &mdash; oppose archaist mimicry ("prose must imitate Qin-Han, poetry must imitate High Tang"). A disciple lineage from Li Zhi; the Gong'an taste for popular literature prepared the soil for the novel's reception.</li>
+                <li><strong>Gui Youguang</strong> (Tang-Song School): return to the natural fluency of the Eight Masters; "writing should flow from one's breast." His detail-realism (e.g. <em>The Pavilion of Recollections</em>) methodologically echoes the novel's everyday scene-writing and its rational social observation.</li>
+                <li><strong>Li Mengyang</strong> (Former and Latter Seven Masters): "prose must imitate Qin-Han, poetry must imitate High Tang" &mdash; the orthodox "tonal-pattern" (gediao) formalism of mid-Ming. The novel's vernacular composition is itself a rebellion against this archaist hierarchy.</li>
+            </ul>
+
+            <h2>The Four Great Novels <span class="anchor">&#8596; lateral mapping</span></h2>
+            <table>
+                <tr><th>Novel</th><th>Date</th><th>Form</th><th>Literary position</th><th>vs. JTTW</th></tr>
+                <tr><td><em>Three Kingdoms</em></td><td>c. 1370s</td><td>historical romance</td><td>Zhang Xuecheng's "all histories are Classics" &mdash; history as mirror</td><td>historical reason vs. demon imagination</td></tr>
+                <tr><td><em>Water Margin</em></td><td>c. 1380s</td><td>heroic legend</td><td>Li Zhi's "loyalty-righteousness" resistance</td><td>rebellion continued, but Wukong "rebel&rarr;submit" not "rebel&rarr;surrender"</td></tr>
+                <tr><td><em>Journey to the West</em></td><td>c. 1550s&ndash;1590s</td><td>god-demon</td><td>individual emancipation + utilitarian reason</td><td>the core of this essay</td></tr>
+                <tr><td><em>Plum in the Golden Vase</em></td><td>c. 1590s&ndash;1610s</td><td>worldly</td><td>desire-writing + marketplace realism</td><td>"demon" vs. "market" &mdash; one moving, one still; one illusion, one truth</td></tr>
+            </table>
+
+            <h2>Rebel&rarr;Submit vs. Rebel&rarr;Surrender <span class="anchor">&#8596; the contrast</span></h2>
+            <p>
+                <em>Water Margin</em> ends in tragic "rebel&rarr;surrender": the 108 are amnestied then decimated campaigning against Fang La. <em>Journey</em> ends in comic "rebel&rarr;submit": Wukong, crushed by the Five-Element Mountain, joins the pilgrimage and becomes a Buddha. At ch. 7, line 864 "the Great Sage escapes the Eight-Trigram Furnace" the rebellion peaks; at ch. 14, line 1393 "the mind-ape submits, the six thieves vanish" is the turning point; at ch. 100, line 7085 "the five pilgrims attain truth" is its completion. The difference refracts two Ming imaginings of resistance &mdash; a hopeless tragedy versus an optimistic comedy where individuality is preserved and sublimated through "submission."
+            </p>
+
+            <h2>A Transitional Text <span class="anchor">&#8596; five stages</span></h2>
+            <p>
+                Early Ming (1368&ndash;1450) cabinet style &middot; mid-Ming (1450&ndash;1520) the Seven Masters &middot; mid-late (1520&ndash;1590) Tang-Song School / Childlike Mind &middot; late (1590&ndash;1644) Gong'an / Jingling. The novel's composition period (c. 1550s&ndash;1590s) straddles the last two: it inherits the Tang-Song School's "writing conveys the Way" (ch. 1, line 522 "to know creation's work, read the Scripture of Liberation") yet anticipates the Gong'an "give voice to xinling" (Wukong's self-styled "Handsome Monkey King" and his "Equal-to-Heaven" title transgress rank). Yuan Hongdao praised the novel as "the strangest of all writings," confirming the Gong'an endorsement.
+            </p>
+
+            <h2>Past and Present <span class="anchor">&#8596; five rows</span></h2>
+            <table>
+                <tr><th>Dimension</th><th>Ming thought</th><th>Modern theory</th><th>Insight</th></tr>
+                <tr><td>Genre hierarchy</td><td>poetry above, fiction below</td><td>genre equality, fiction central</td><td>the hierarchy dissolved; fiction from "minor way" to mainstream</td></tr>
+                <tr><td>Creative subject</td><td>the literatus, "convey the Way"</td><td>the professional writer, "self-expression"</td><td>motivation from "Way" to "expression"</td></tr>
+                <tr><td>Truth</td><td>archaist historical truth</td><td>plural truth (magical realism)</td><td>JTTW's "truth via illusion" prefigures magical realism</td></tr>
+                <tr><td>Individuality</td><td>germ of childlike mind / xinling</td><td>emancipation a given</td><td>Wukong is the literary archetype of emancipated self</td></tr>
+                <tr><td>Commercialisation</td><td>late-Ming workshop printing</td><td>modern IP industry</td><td>JTTW's IP-ification is the contemporary heir of Ming print commerce</td></tr>
+            </table>
+
+            <a class="nav-back" href="index.html">&larr; Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+                <a href="essay-ming-intellectual-history.html">E30 &middot; The Mind as Cosmos</a> &middot; <a href="essay-three-teachings.html">E15 &middot; Three Teachings as One</a> &middot; <a href="essay-ming-politics.html">E24 &middot; Heaven Is a Ming Court</a> &middot; <a href="essay-literary-couplets.html">E9 &middot; The Chapter Couplets</a>
+            </div>
+        </article>
+    </main>
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.6 W355 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W355
+        </div>
+
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
