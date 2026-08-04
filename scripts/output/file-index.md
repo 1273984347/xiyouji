@@ -9,6 +9,14 @@
 ---
 
 
+## W346 数据闭环·八十一难逐难明细填充（2026-08-04）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| dataset/81-hardships.json | W346 | v2.2.97 填充 `hardships` 数组 0→81 条逐难明细（index/name/chapter/cause/ending/difficulty），数据源 scripts/C_情节/hardships_81.py → scripts/output/data/hardships_81.json，前 80 难与原著第 99 回灾难簿对齐；数据集由"半空"变闭环 |
+| scripts/_build_81_hardships.py | W346 | v2.2.97 新建·可重跑桥接脚本·写入前断言四项聚合轴与既有值 100% 吻合 |
+| dataset/README.md | W346 | v2.2.97 第 17 行登记键补 `hardships`、大小 0.7→5.1 KB |
+
 ## W345 英文站扩张（A5/A6 三篇专题译介 + 入口与文档同步，2026-08-04）
 
 | site/en/essay-zen-koan-vs-neidan.html | W345 | v2.2.96 新建·英文站 A5 专题译介·禅宗公案顿悟 × 清代内丹渐修两种读法并置（策展摘要·非全文翻译·footer 双索引 v2.2.96 W345） |
