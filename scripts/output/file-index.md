@@ -28,6 +28,13 @@
 | site/en/characters.html | W347 | v2.2.98 新建·英文站数据页·取经五人组（Belbin 团队角色 + 五维心理画像 + 凝聚力里程碑） |
 | site/en/bestiary.html | W347 | v2.2.98 新建·英文站数据页·妖魔生态（30 种群·4 社会型·73% 灭绝率·能力极值） |
 | site/en/chapters-map.html | W347 | v2.2.98 新建·英文站数据页·百回阅读地图（四幕分章 + 每回回目对联/主要人物/地点） |
+| site/en/essay-historical-xuanzang.html | W348 | v2.2.99 新建·英文站 E7 译介·历史玄奘 vs 小说玄奘七维对照（138 国·657 经·1335 卷·明朝投射） |
+| site/en/essay-divine-bureaucracy.html | W348 | v2.2.99 新建·英文站 E8 译介·天庭即明代衙门（黄仁宇/钱穆/韦伯/王斯福·照妖镜反讽） |
+| site/en/essay-chapter-couplets.html | W348 | v2.2.99 新建·英文站 E9 译介·百回回目七言对联（格律/五型/结构统计 100%-85%-70%） |
+| site/en/visualizations.html | W348 | v2.2.99 新建·英文站导览·85 个 site/data 可视化分页入八簇（含每页说明与直链） |
+| site/en/character-wukong.html | W348 | v2.2.99 新建·英文站深度页·孙悟空（名号/石生/反天/13500 斤金箍棒/心猿·跨可视化链接） |
+| site/en/methodology.html | W348 | v2.2.99 新建·英文站指南·全站读法（内容地图/A4 七段式/宣纸设计语言/双索引/零编造门禁） |
+
 
 
 ## W344 质量增强包（术语统一审计 + A1 结构化元数据 + A5/A6 提质 + 项目说明版本残留修复，2026-08-04）

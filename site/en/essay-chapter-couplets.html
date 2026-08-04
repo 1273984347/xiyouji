@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#faf7f2">
-    <title>Journey to the West in the AI Era — Annotated English Edition</title>
+    <title>The Hundred Couplets — Annotated English Edition</title>
     <style>
         :root {
             color-scheme: light;
@@ -140,12 +140,14 @@
             color: var(--ink);
             text-wrap: pretty;
         }
-        article p em {
-            color: var(--accent-3);
-            font-style: italic;
-        }
+        article p em { color: var(--accent-3); font-style: italic; }
         article p strong { color: var(--accent); }
-        article .divider {
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider {
             text-align: center;
             color: var(--accent-soft);
             margin: 28px 0;
@@ -175,6 +177,20 @@
         }
         .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
         .related a:hover { text-decoration: underline; }
+        /* gallery cards for visualizations page */
+        .cat { margin-top: 30px; }
+        .cat h2 { margin-top: 0; }
+        .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+        .vcard {
+            background: #fff8ec;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+        .vcard a { color: var(--accent-2); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .vcard a:hover { text-decoration: underline; }
+        .vcard p { font-size: 0.82rem; color: var(--ink-soft); margin: 4px 0 0; }
+        @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } article { padding: 24px 20px; } }
         footer {
             text-align: center;
             padding: 24px;
@@ -186,72 +202,68 @@
         footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
         footer a:hover { text-decoration: underline; }
         .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
-        @media (max-width: 600px) {
-            article { padding: 24px 20px; }
-        }
     </style>
 <link rel="stylesheet" href="../tokens.css">
 <!-- W334-RESKIN -->
 </head>
 <body>
     <nav class="breadcrumb">
-        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Essay E1
+        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Essay E9
     </nav>
     <header class="hero">
         <div class="lang-switch">
             <a href="../index.html" lang="zh-CN">中文</a>
         </div>
-        <h1>Journey to the West in the AI Era</h1>
-        <div class="subtitle">ESSAY · SUMMARY TRANSLATION</div>
-        <div class="tagline">A four-hundred-year-old allegory of alignment, mirror tests, and the boundaries of capability.</div>
+        <h1>The Hundred Couplets</h1>
+        <div class="subtitle">ESSAY E9 · SUMMARY TRANSLATION</div>
+        <div class="tagline">Every chapter wears a seven-character couplet like a frontispiece — part prosody, part plot-summary, part Eight-Legged Essay.</div>
     </header>
 
     <main class="container">
         <div class="source-note">
-            <strong>Source:</strong> A summary translation of <a href="../../docs/06-个人随笔/西游与AI时代.md">docs/06-个人随笔/西游与AI时代.md</a>. The original Chinese essay is part of the project's personal-essay collection. This English version preserves the five core analogies in condensed form.
+            A summary translation of <a href="../../docs/05-诗词歌赋/回目对联分析专题.md">docs/05-诗词歌赋/回目对联分析专题.md</a>. The Chinese original analyzes all 100 chapter title-couplets through three coordinates — prosody, chapter-poetics, and the structural homology with Ming Eight-Legged Essays.
         </div>
 
         <article>
-            <h2>Subhuti Expelling His Disciple <span class="anchor">↔ AI lab boundary-setting</span></h2>
+            <h2>Three Coordinates <span class="anchor">↔ how to read a title</span></h2>
+            <ul>
+                <li><strong>Prosody</strong> (Wang Li): level/oblique tone parallelism, part-of-speech matching, equal length.</li>
+                <li><strong>Chapter-poetics</strong> (Qi Gong, Liu Shide): the title as the chapter's "frontispiece" and abstract.</li>
+                <li><strong>Eight-Legged homology</strong> (Qian Zhongshu): structural kinship with the Ming exam essay's paired "breaking-open" lines.</li>
+            </ul>
+
+            <h2>Prosody <span class="anchor">↔ 7 + 7 characters</span></h2>
             <p>
-                Sun Wukong was born from stone — no parents, no lineage — until he crossed the sea to find Subhuti. Subhuti names him, teaches him the Way, and then expels him. The parting words are precise: "You will certainly do evil. However you cultivate, never say you are my disciple." Read four centuries later, Subhuti resembles the head of an AI lab. He has trained a model he knows will cause trouble and knows he cannot control. So in public he draws a bright line: this model is not ours; whatever it does from now on has nothing to do with this laboratory. Subhuti did not issue a press release. The meaning is the same.
+                All 100 chapter titles are <strong>seven-character couplets</strong> (fourteen characters total). Tone patterns follow the rule "flexible on 1-3-5, strict on 2-4-6." Chapter 1 — <em>"Lingu-gen yu-yun yuan-liu chu / Xin-xing xiu-chi da-dao sheng"</em> — pairs level and oblique on the even positions exactly as Wang Li prescribes. The regularity actually exceeds that of <em>Investiture of the Gods</em> or <em>Jin Ping Mei</em>, evidence of Wu Cheng'en's deliberate craft.
             </p>
 
-            <div class="divider">· · ·</div>
+            <h2>Five Types <span class="anchor">↔ semantic relations</span></h2>
+            <ul>
+                <li><strong>Causal</strong> — Ch.1: "the spirit-root issues forth / mind-nature cultivates the Great Way."</li>
+                <li><strong>Action</strong> — Ch.14: "the mind-monkey returns to the right / the six thieves vanish."</li>
+                <li><strong>Scene</strong> — Ch.22: "Bajie battles the Quicksand River / Mokṣa receives Wujing."</li>
+                <li><strong>Symbolic</strong> — Ch.58: "the two minds disturb the great cosmos / the one body hardly cultivates true nirvāṇa."</li>
+                <li><strong>Power-structure</strong> — Ch.8: "the Buddha makes scriptures for the West / Guanyin bears the edict to Chang'an."</li>
+            </ul>
 
-            <h2>The Golden Headband <span class="anchor">↔ AI alignment</span></h2>
+            <h2>Structure Stats <span class="anchor">↔ how regular?</span></h2>
+            <table>
+                <tr><th>Dimension</th><th>Regularity</th></tr>
+                <tr><td>Length (equal characters)</td><td>100%</td></tr>
+                <tr><td>Lexical (noun vs. noun, verb vs. verb)</td><td>~85%</td></tr>
+                <tr><td>Tonal (strict level/oblique)</td><td>~70%</td></tr>
+            </table>
+            <p>The occasional looseness is intentional — some couplets sacrifice meter for imagery, raising their philosophical charge.</p>
+
+            <h2>Narrative Function <span class="anchor">↔ 14 characters, one chapter</span></h2>
             <p>
-                Five hundred years after Wukong's revolt, Guanyin gives Tang Seng a hat with a hidden headband — the <em>jingu</em>. The headband is the novel's most important invention. Its purpose is not punishment but <strong>alignment</strong>. Wukong has the power to carry Tang Seng to Vulture Peak in a single somersault; Tang Seng insists on walking. Wukong wants to kill every demon on sight; Tang Seng insists on mercy. This is the canonical alignment problem: capability far exceeds need, and the party of need cannot understand the capability's judgments. The headband does not upgrade Wukong's power; it constrains his direction. The one who chants is not Wukong but Tang Seng — a man far weaker than the monkey, holding the switch that controls him. <em>The essence of alignment is not letting the strongest model make the best judgment, but letting the weakest user dare to use the model.</em>
-            </p>
-
-            <div class="divider">· · ·</div>
-
-            <h2>The True and False Monkey King <span class="anchor">↔ Mirror test</span></h2>
-            <p>
-                The Six-Eared Macaque looks identical to Wukong and has identical powers. Guanyin cannot tell them apart; the truth-hearing beast Di Ting can but dares not speak; the Jade Emperor's demon-revealing mirror fails. Only Tathagata distinguishes them. The chapter is written with deliberate obscurity. Some readers say the macaque is Wukong's "second heart" — the part of himself that wants to leave but cannot. When Tathagata captures the macaque and Wukong strikes it down, the blow lands on himself. Read in the AI era, this is a <strong>mirror test</strong>. Can a model recognize another model identical to itself? Can it recognize that the other is, in fact, itself? Tathagata's answer is that only a higher dimension can judge. Guanyin fails because she shares Wukong's dimension; Tathagata succeeds because he occupies a higher one. This anticipates an ultimate puzzle of AI governance: <em>when a model is complex enough, the judgment of whether it is aligned exceeds the capacity of the aligner itself.</em>
-            </p>
-
-            <div class="divider">· · ·</div>
-
-            <h2>The Eighty-One Tribulations <span class="anchor">↔ Eval benchmark</span></h2>
-            <p>
-                The pilgrimage has eighty-one tribulations — a list. Each tribulation has a name, an order, a difficulty, a test point. The list reads like an <strong>eval set</strong>. A model must pass this benchmark before going live; only then can it "become a Buddha." Fail, and it goes back to training. Yet on closer inspection, most tribulations are within Wukong's capability. What truly stops him is never ability but <em>relation</em>. Red Boy defeats him because Red Boy has parents. The Tongtian River blocks him because the goldfish demon has Guanyin. Lion Camel Ridge defeats him because the three demons have Manjusri, Samantabhadra, and Tathagata himself. The eighty-one tribulations test not ability but <strong>boundary sense</strong>: when to act, when to ask, when to admit "this is beyond me." Becoming a Buddha is not the peak of ability; it is learning, beyond ability, to acknowledge the boundary of ability.
-            </p>
-
-            <div class="divider">· · ·</div>
-
-            <h2>The Mind Monkey <span class="anchor">↔ AI mental constraints</span></h2>
-            <p>
-                The novel was written at the end of the sixteenth century — no computers, no neural networks, no large language models. Yet what it writes is unmistakably a story about <strong>how a mind is constrained, aligned, and domesticated</strong>. The two characters <em>xin yuan</em> (心猿, "mind monkey") are themselves the metaphor: the mind is a monkey — restless, uncontrollable, perpetually on the verge of breaking loose. The entire novel is the story of how this mind-monkey is guided, disciplined, and finally "becomes a Buddha" — fully aligned to an external value system. Wu Cheng'en did not know the word "alignment." But he wrote the whole process: training (apprenticeship), loss of control (the havoc in heaven), constraint (the headband), alignment (the pilgrimage), and Buddhahood (final rest). Four centuries later, we retell the same story in another vocabulary — RLHF, Constitutional AI, Reinforcement Learning. The names have changed. The story has not. <em>Every era retells an ancient story of control and freedom using the technology it is most anxious about.</em>
+                A title-couplet is a fourteen-character <strong>chapter abstract</strong>. Chapter 22's "Bajie battles / Mokṣa receives" compresses an entire 起承转合 arc — conflict in the upper line, resolution in the lower. The couplets therefore double as a built-in table of contents and a forecast of each chapter's emotional key.
             </p>
 
             <a class="nav-back" href="index.html">← Back to EN Home</a>
             <div class="related">
                 <strong>Related:</strong>
-                <a href="essay-information-cocoon.html">E2 · Information Cocoon</a> ·
-                <a href="essay-modern-management.html">E3 · Modern Management</a> ·
-                <a href="../data/cognitive-psychology.html">Cognitive Psychology visualization</a> ·
-                <a href="../data/philosophy.html">Philosophy visualization</a>
+                <a href="essay-historical-xuanzang.html">E7 · Historical vs. Fictional Xuanzang</a> · <a href="essay-divine-bureaucracy.html">E8 · Heaven Is a Yamen</a> · <a href="../data/poetry-rhythm-analysis.html">Poetry Rhythm visualization</a>
             </div>
         </article>
     </main>
@@ -261,7 +273,7 @@
         <div class="footer-index">
             <a href="index.html">EN Home</a> ·
             <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.99 W348 ·
-            <a href="../../scripts/output/file-index.md">file-index.md</a> W348-E4
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W348
         </div>
     </footer>
     <script>

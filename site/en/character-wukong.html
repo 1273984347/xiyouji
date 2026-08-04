@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#faf7f2">
-    <title>Journey to the West in the AI Era — Annotated English Edition</title>
+    <title>Sun Wukong, the Monkey King — Annotated English Edition</title>
     <style>
         :root {
             color-scheme: light;
@@ -140,12 +140,14 @@
             color: var(--ink);
             text-wrap: pretty;
         }
-        article p em {
-            color: var(--accent-3);
-            font-style: italic;
-        }
+        article p em { color: var(--accent-3); font-style: italic; }
         article p strong { color: var(--accent); }
-        article .divider {
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider {
             text-align: center;
             color: var(--accent-soft);
             margin: 28px 0;
@@ -175,6 +177,20 @@
         }
         .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
         .related a:hover { text-decoration: underline; }
+        /* gallery cards for visualizations page */
+        .cat { margin-top: 30px; }
+        .cat h2 { margin-top: 0; }
+        .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+        .vcard {
+            background: #fff8ec;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+        .vcard a { color: var(--accent-2); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .vcard a:hover { text-decoration: underline; }
+        .vcard p { font-size: 0.82rem; color: var(--ink-soft); margin: 4px 0 0; }
+        @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } article { padding: 24px 20px; } }
         footer {
             text-align: center;
             padding: 24px;
@@ -186,72 +202,76 @@
         footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
         footer a:hover { text-decoration: underline; }
         .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
-        @media (max-width: 600px) {
-            article { padding: 24px 20px; }
-        }
     </style>
 <link rel="stylesheet" href="../tokens.css">
 <!-- W334-RESKIN -->
 </head>
 <body>
     <nav class="breadcrumb">
-        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Essay E1
+        <a href="index.html">EN Home</a> · <a href="characters.html">The Pilgrims</a> · Deep Dive
     </nav>
     <header class="hero">
         <div class="lang-switch">
             <a href="../index.html" lang="zh-CN">中文</a>
         </div>
-        <h1>Journey to the West in the AI Era</h1>
-        <div class="subtitle">ESSAY · SUMMARY TRANSLATION</div>
-        <div class="tagline">A four-hundred-year-old allegory of alignment, mirror tests, and the boundaries of capability.</div>
+        <h1>Sun Wukong, the Monkey King</h1>
+        <div class="subtitle">CHARACTER · DEEP DIVE</div>
+        <div class="tagline">Stone monkey, Great Sage Equal to Heaven, Pilgrim, Victorious Fighting Buddha — the most-adapted figure in Chinese literature.</div>
     </header>
 
     <main class="container">
         <div class="source-note">
-            <strong>Source:</strong> A summary translation of <a href="../../docs/06-个人随笔/西游与AI时代.md">docs/06-个人随笔/西游与AI时代.md</a>. The original Chinese essay is part of the project's personal-essay collection. This English version preserves the five core analogies in condensed form.
+            A long-form English portrait of Sun Wukong, grounded in the canonical narrative (Wu Cheng'en, 16th c.) and cross-linked to the project's own visualizations. Numbersstated (e.g. the 13,500-jin staff) are drawn from the novel text as cited in the project's Chinese essays.
         </div>
 
         <article>
-            <h2>Subhuti Expelling His Disciple <span class="anchor">↔ AI lab boundary-setting</span></h2>
+            <h2>Names & Identities <span class="anchor">↔ one figure, five masks</span></h2>
             <p>
-                Sun Wukong was born from stone — no parents, no lineage — until he crossed the sea to find Subhuti. Subhuti names him, teaches him the Way, and then expels him. The parting words are precise: "You will certainly do evil. However you cultivate, never say you are my disciple." Read four centuries later, Subhuti resembles the head of an AI lab. He has trained a model he knows will cause trouble and knows he cannot control. So in public he draws a bright line: this model is not ours; whatever it does from now on has nothing to do with this laboratory. Subhuti did not issue a press release. The meaning is the same.
+                Wukong accumulates names like skins. He is the <strong>Stone Monkey</strong> (石猴) who learns he must die; the <strong>Handsome Monkey King</strong> (美猴王) who wins a throne; <strong>Sun Wukong</strong> (孙悟空, "Awakened to Emptiness") taken from his Daoist master; the <strong>Great Sage Equal to Heaven</strong> (齐天大圣) claimed in rebellion; the <strong>Pilgrim</strong> (行者) imposed by Guanyin; and finally the <strong>Victorious Fighting Buddha</strong> (斗战胜佛). Each name marks a stage in a single arc: from nature, through defiance, to disciplined enlightenment.
             </p>
 
-            <div class="divider">· · ·</div>
-
-            <h2>The Golden Headband <span class="anchor">↔ AI alignment</span></h2>
+            <h2>Born from Stone <span class="anchor">↔ the immortal stone</span></h2>
             <p>
-                Five hundred years after Wukong's revolt, Guanyin gives Tang Seng a hat with a hidden headband — the <em>jingu</em>. The headband is the novel's most important invention. Its purpose is not punishment but <strong>alignment</strong>. Wukong has the power to carry Tang Seng to Vulture Peak in a single somersault; Tang Seng insists on walking. Wukong wants to kill every demon on sight; Tang Seng insists on mercy. This is the canonical alignment problem: capability far exceeds need, and the party of need cannot understand the capability's judgments. The headband does not upgrade Wukong's power; it constrains his direction. The one who chants is not Wukong but Tang Seng — a man far weaker than the monkey, holding the switch that controls him. <em>The essence of alignment is not letting the strongest model make the best judgment, but letting the weakest user dare to use the model.</em>
+                On Flower-Fruit Mountain an <em>immortal stone</em> hatches a stone egg that becomes the monkey. His first crisis is existential: watching fellow monkeys die, he leaves to seek immortality — the mind awakening to its own mortality. This origin (natural, not born of parents) is what lets him later stand outside the heavenly register.
             </p>
 
-            <div class="divider">· · ·</div>
-
-            <h2>The True and False Monkey King <span class="anchor">↔ Mirror test</span></h2>
+            <h2>The Mind That Learns <span class="anchor">↔ 72 transformations</span></h2>
             <p>
-                The Six-Eared Macaque looks identical to Wukong and has identical powers. Guanyin cannot tell them apart; the truth-hearing beast Di Ting can but dares not speak; the Jade Emperor's demon-revealing mirror fails. Only Tathagata distinguishes them. The chapter is written with deliberate obscurity. Some readers say the macaque is Wukong's "second heart" — the part of himself that wants to leave but cannot. When Tathagata captures the macaque and Wukong strikes it down, the blow lands on himself. Read in the AI era, this is a <strong>mirror test</strong>. Can a model recognize another model identical to itself? Can it recognize that the other is, in fact, itself? Tathagata's answer is that only a higher dimension can judge. Guanyin fails because she shares Wukong's dimension; Tathagata succeeds because he occupies a higher one. This anticipates an ultimate puzzle of AI governance: <em>when a model is complex enough, the judgment of whether it is aligned exceeds the capacity of the aligner itself.</em>
+                Under the Patriarch Subhuti he acquires the <strong>seventy-two transformations</strong> and the <strong>somersault cloud</strong> (a single leap of 108,000 li). These are not mere fireworks; they are an allegory of the cultivated mind's plasticity and speed. The name "Wukong" (awakened to emptiness) signals that power without insight is precisely the problem the journey exists to correct.
             </p>
 
-            <div class="divider">· · ·</div>
-
-            <h2>The Eighty-One Tribulations <span class="anchor">↔ Eval benchmark</span></h2>
+            <h2>Rebellion <span class="anchor">↔ war against heaven</span></h2>
             <p>
-                The pilgrimage has eighty-one tribulations — a list. Each tribulation has a name, an order, a difficulty, a test point. The list reads like an <strong>eval set</strong>. A model must pass this benchmark before going live; only then can it "become a Buddha." Fail, and it goes back to training. Yet on closer inspection, most tribulations are within Wukong's capability. What truly stops him is never ability but <em>relation</em>. Red Boy defeats him because Red Boy has parents. The Tongtian River blocks him because the goldfish demon has Guanyin. Lion Camel Ridge defeats him because the three demons have Manjusri, Samantabhadra, and Tathagata himself. The eighty-one tribulations test not ability but <strong>boundary sense</strong>: when to act, when to ask, when to admit "this is beyond me." Becoming a Buddha is not the peak of ability; it is learning, beyond ability, to acknowledge the boundary of ability.
+                Insulted by minor posts (Keeper of the Heavenly Horses, Keeper of the Peach Orchard), he claims the title <strong>Great Sage Equal to Heaven</strong> and wars against the celestial army — until the Buddha pins him beneath the <strong>Mountain of the Five Phases</strong> for five hundred years. The rebellion is the novel's great set-piece on unchecked ego; the mountain is the patient lesson.
             </p>
 
-            <div class="divider">· · ·</div>
-
-            <h2>The Mind Monkey <span class="anchor">↔ AI mental constraints</span></h2>
+            <h2>The Ruyi Jingu Bang <span class="anchor">↔ 13,500 jin</span></h2>
             <p>
-                The novel was written at the end of the sixteenth century — no computers, no neural networks, no large language models. Yet what it writes is unmistakably a story about <strong>how a mind is constrained, aligned, and domesticated</strong>. The two characters <em>xin yuan</em> (心猿, "mind monkey") are themselves the metaphor: the mind is a monkey — restless, uncontrollable, perpetually on the verge of breaking loose. The entire novel is the story of how this mind-monkey is guided, disciplined, and finally "becomes a Buddha" — fully aligned to an external value system. Wu Cheng'en did not know the word "alignment." But he wrote the whole process: training (apprenticeship), loss of control (the havoc in heaven), constraint (the headband), alignment (the pilgrimage), and Buddhahood (final rest). Four centuries later, we retell the same story in another vocabulary — RLHF, Constitutional AI, Reinforcement Learning. The names have changed. The story has not. <em>Every era retells an ancient story of control and freedom using the technology it is most anxious about.</em>
+                His staff, the <strong>Ruyi Jingu Bang</strong> ("as-you-wish golden cudgel"), weighs <strong>13,500 jin</strong> and shrinks to a needle. It comes from the Dragon King — a weapon that is also a measure: the disciplined mind's instrument, responsive to intent, never heavier than necessity.
+            </p>
+
+            <h2>On the Journey <span class="anchor">↔ the mind-monkey</span></h2>
+            <p>
+                As the pilgrims' protector, Wukong is the <strong>mind-monkey (心猿)</strong> — brilliant, impatient, forever tempted to act alone. The eighty-one tribulations are as much tests of his obedience and discernment as of the team's safety. His tension with the Tang monk (who cannot see the demons Wukong sees) is the book's central dramatic engine: insight versus faith.
+            </p>
+
+            <h2>Psychology & Evolution <span class="anchor">↔ traced in the data</span></h2>
+            <ul>
+                <li><a href="../data/mbti-evolution.html">MBTI Evolution</a> — his typological drift across the narrative.</li>
+                <li><a href="../data/character-sentiment-arc.html">Sentiment Arc</a> — his emotional trajectory chapter by chapter.</li>
+                <li><a href="../data/pilgrim-team-dynamic-network.html">Team Dynamic Network</a> — his role inside the five-pilgrim team.</li>
+                <li><a href="characters.html">The Pilgrims</a> — the team as a project group.</li>
+            </ul>
+
+            <h2>Afterlife & Reception <span class="anchor">↔ a global figure</span></h2>
+            <p>
+                Ennobled as a Buddha at the journey's end, Wukong became the most-adapted character in Chinese literature — from the <em>Journey to the West</em> TV serials to global games and anime. See <a href="../data/cultural-misreading.html">Cultural Misreading</a> and <a href="../data/global-pattern.html">Global Pattern</a> for how he travels across cultures.
             </p>
 
             <a class="nav-back" href="index.html">← Back to EN Home</a>
             <div class="related">
                 <strong>Related:</strong>
-                <a href="essay-information-cocoon.html">E2 · Information Cocoon</a> ·
-                <a href="essay-modern-management.html">E3 · Modern Management</a> ·
-                <a href="../data/cognitive-psychology.html">Cognitive Psychology visualization</a> ·
-                <a href="../data/philosophy.html">Philosophy visualization</a>
+                <a href="characters.html">The Pilgrims</a> · <a href="bestiary.html">Bestiary</a> · <a href="../data/mbti-evolution.html">MBTI Evolution</a>
             </div>
         </article>
     </main>
@@ -261,7 +281,7 @@
         <div class="footer-index">
             <a href="index.html">EN Home</a> ·
             <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.99 W348 ·
-            <a href="../../scripts/output/file-index.md">file-index.md</a> W348-E4
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W348
         </div>
     </footer>
     <script>
