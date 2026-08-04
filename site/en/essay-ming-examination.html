@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>The Scripture Quest Was an Imperial Exam — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.03em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        @media (max-width: 640px) { article { padding: 24px 20px; } }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> &middot; <a href="dashboard.html">Dashboard</a> &middot; Essay E20
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>The Scripture Quest Was an Imperial Exam</h1>
+        <div class="subtitle">ESSAY E20 &middot; SUMMARY TRANSLATION</div>
+        <div class="tagline">From the Buddha's 'open exam' to the Five Pilgrims' 'gold list' &mdash; the journey is Ming civil-service recruitment in myth.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+            A summary translation of <a href="../../docs/04-文化与历史背景/明代科举制度对照专题.md">明代科举制度对照专题.md</a>. The Chinese original reads the scripture quest as a precise literary replication of the Ming civil-service examination (&#31185;&#20030;) system &mdash; triangulated through Huang Rensong, Benjamin Elman, Miyazaki Ichisada, and Max Weber.
+        </div>
+
+        <article>
+            <h2>The Quest as Examination Mirror <span class="anchor">&#8596; the keju thesis</span></h2>
+            <p>
+                The scripture quest is not mere mythic adventure; it is the literary replica of the Ming civil-service examination (&#31185;&#20030;) machine. The Buddha's proclamation of the scripture project at the grand assembly (ch. 8) mirrors the throne's "opening the exam" (&#24320;&#31185;); Guanyin's search for a pilgrim mirrors the provincial education commissioner's (&#25552;&#23398;) selection of candidates; Xuanzang's nomination mirrors a provincial graduate (&#35299;&#20803;) recommended to the capital; the Eighty-One Trials as merit-check (&#21151;&#26524;) mirror the triennial evaluation (&#32771;&#35838;: first / second / general review); the Five Pilgrims' "attainment of true fruit" (&#20116;&#22336;&#25104;&#30495;) mirrors the gold-list appointment (&#37329;&#27004;&#38977;&#21517;) and subsequent office. The novel was written in the mid-to-late Ming (c. 1550s&ndash;1590s), when the examination system was mature yet rotten &mdash; eight-legged essays fixed, the scholar class swollen, office the only ladder up.
+            </p>
+
+            <h2>The "Open Exam" (&#24320;&#31185;) <span class="anchor">&#8596; Buddha &middot; Guanyin &middot; Xuanzang</span></h2>
+            <ul>
+                <li><strong>Buddha's grand assembly</strong> (ch. 8, line 981): the "Three Baskets of scripture" = the Four Books and Five Classics (the exam's content is fixed); "seek a believer in the East" = the exam's geographic scope; "one with Dharma-power" = the eligibility threshold &mdash; the state announcing an exam.</li>
+                <li><strong>Guanyin as &#25552;&#23398;:</strong> dispatched to the "locality" (East Land) to select a candidate; she grants Xuanzang the cassock and staff as the "examination credential." Weber's "state exam" &mdash; content, certification, and qualification all monopolised by the state.</li>
+                <li><strong>Xuanzang's nomination</strong> (ch. 12, line 1219): recommended by the monks, appointed by Taizong &mdash; exactly the provincial graduate's path into the capital.</li>
+            </ul>
+
+            <h2>Merit-Check as &#32771;&#35838; <span class="anchor">&#8596; quota over result</span></h2>
+            <p>
+                The Eighty-One Tribulations are a quota. When Guanyin finds only eighty recorded, she forces one more (the old tortoise) to reach eighty-one (ch. 99) &mdash; "making up the number," structurally identical to Ming civil-service evaluation where promotion requires serving the fixed terms (three / six / nine years). Huang Rensong's "governance by morality": the check values moral completion (sincere pilgrimage) over actual deeds (how many demons slain) &mdash; just as Ming evaluation prized the "conduct" column over competence. The tightening-band spell (&#32039;&#31682;&#21608;) is the &#23398;&#35268; / &#22823;&#35889;: a disciplinary tool ensuring the candidate obeys the rules, applied asymmetrically (only to Wukong, never the compliant Bajie or Shaseng) &mdash; mirroring the double standard "strict with the poor, lenient with the elite."
+            </p>
+
+            <h2>Four Theorists <span class="anchor">&#8596; the critical scaffold</span></h2>
+            <ul>
+                <li><strong>Huang Rensong</strong> (<em>1587, A Year of No Significance</em>): governance by morality over law; an evaluation system measured by quotas not results.</li>
+                <li><strong>Benjamin Elman</strong> (<em>A Cultural History of the Examinations</em>): the exam as a knowledge-production machine &mdash; what is tested shapes what is learned; the celestial hierarchy as the scholar-elite's status capital (&#25991;&#21270;&#36164;&#26412;).</li>
+                <li><strong>Miyazaki Ichisada</strong> (<em>The Examination System</em>): aristocracy-to-bureaucracy; limited social mobility &mdash; the Five Pilgrims' mixed origins (grassroots monkey, fallen former nobles) mirror the exam's mixing of commoners and lineages, while the fixed ranking of fruits (Buddha vs. envoy vs. arhat) mirrors the &#19968;&#30002; / &#20108;&#30002; / &#19977;&#30002; ceiling on mobility.</li>
+                <li><strong>Max Weber</strong> (<em>The Religion of China</em>): the exam as rationalised state recruitment &mdash; formal, substantive, and procedural rationality; the pilgrimage's layered selection (proclaim &rarr; select &rarr; journey &rarr; enthrone) mirrors the &#20065;&#35797; &rarr; &#20250;&#35797; &rarr; &#27595;&#35797; staircase.</li>
+            </ul>
+
+            <h2>Gold List (&#37329;&#27004;&#38977;&#21517;) <span class="anchor">&#8596; the fruit is irreversible</span></h2>
+            <p>
+                At Ling Mountain (ch. 100, line 7085) the Buddha reads out the five fruits &mdash; Xuanzang the &#26091;&#26976;&#21191;&#24503;&#20315;, Wukong the &#26007;&#32988;&#32988;&#20315;, Bajie the &#20928;&#22366;&#20351;&#32773;, Shaseng the &#37329;&#36523;&#32645;&#27714;, the dragon-horse the &#20843;&#37096;&#22825;&#40857;. This is the gold-list ceremony: certification by the supreme authority, status leap confirmed publicly. The fruit is irreversible (like Ming &#21151;&#21517; for life); the grading is fixed (like the three tiers). Miyazaki's "social confirmation of mobility" &mdash; the leap is witnessed by all, the defining trait of the rationalised state exam.
+            </p>
+
+            <a class="nav-back" href="index.html">&larr; Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+                <a href="essay-divine-bureaucracy.html">E8 &middot; Heaven Is a Yamen</a> &middot; <a href="essay-ming-metaphor.html">E14 &middot; The Ming in Disguise</a> &middot; <a href="essay-three-teachings.html">E15 &middot; Three Teachings</a> &middot; <a href="characters.html">The Pilgrims</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.4 W353 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W353
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

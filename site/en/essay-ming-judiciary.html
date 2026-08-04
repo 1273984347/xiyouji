@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>Justice in Three Realms — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.03em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        @media (max-width: 640px) { article { padding: 24px 20px; } }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> &middot; <a href="dashboard.html">Dashboard</a> &middot; Essay E23
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>Justice in Three Realms</h1>
+        <div class="subtitle">ESSAY E23 &middot; SUMMARY TRANSLATION</div>
+        <div class="tagline">Four cases &mdash; a quiet crime, a repentant king, a silenced queen, a forged ledger &mdash; expose Ming law's fault lines.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+            A summary translation of <a href="../../docs/04-文化与历史背景/明代司法制度深化专题.md">明代司法制度深化专题.md</a>. The Chinese original reads four novel cases as a deepened mirror of Ming jurisprudence &mdash; triangulated through Huang Rensong, Qu Tongzu, Shiga Sh&#363;z&#333;, and Terada Hiroaki.
+        </div>
+
+        <article>
+            <h2>Three Realms, Three Courts <span class="anchor">&#8596; the judiciary map</span></h2>
+            <p>
+                Ming justice rested on the "three judicial offices" (&#19977;&#27861;&#21496;: Ministry of Justice, Censorate, Court of Judicial Review) with provincial and prefectural courts below. The novel maps this exactly: Heaven = the three offices (Jade Emperor = emperor, Li Jing = ministry, Taibai = review court), the Underworld = provincial authority (Ten Kings = surveillance commissioner, Judge Cui = clerk), the human kingdoms = prefectures (Zizhu, Wuji, Bhik&#7779;u = counties). Three deep traits: &#31062;&#27861;&#21512;&#19968; (ritual fused with law), &#24773;&#29702;&#27861; (feeling &rarr; reason &rarr; law, in that order), and &#31366;&#25269;&#20280;&#29702; (redress of grievance, not rights-protection). Companion to the Chinese project's W078 "judicial mirror" topic.
+            </p>
+
+            <h2>Case 1 &mdash; the "Quiet Criminal" (&#36187;&#22826;&#23665;) <span class="anchor">&#8596; exile penalty</span></h2>
+            <p>
+                The Golden-King steals Guanyin's bell, abducts Queen Jingu, then locks himself in his cave &mdash; no expansion, no eating people. This "quiet crime" has no Ming statutory match, yet mirrors the exile penalty (&#27969;&#21009;): far from home, settled in place, no return &mdash; a self-imposed exile. His biting through the chain (&#36867;&#31881;) mirrors the "deserting soldier" (&#36867;&#20891;). When Guanyin simply "recalls" him, no trial &mdash; Huang Rensong's "morality substituting for law": the master-servant ethic overwrites the robbery charge.
+            </p>
+
+            <h2>Case 2 &mdash; the Repentant King (&#26417;&#32032;&#22269;) <span class="anchor">&#8596; the guilt-edict</span></h2>
+            <p>
+                The Zizhu king's "crime" (wounding a peacock in a past life) is never litigated; it becomes a three-year wine-waiting ritual of repentance. This mirrors the Ming emperor's guilt-edict (&#32618;&#24049;&#35848;) &mdash; a political gesture, not a legal procedure; after self-accusation, related cases are "leniently released." The king's repentance suspends the demon's prosecution: if the king admits karma, the demon is karma's executor &mdash; to prosecute the demon is to deny cosmic order. Qu Tongzu's &#31062;&#27861;&#21512;&#19968;: the king's crime dissolved by ritual (causal retribution), never judged by law; royal power is simultaneously judge, judged, and pardoner.
+            </p>
+
+            <h2>Case 3 &mdash; the Silenced Queen (&#37329;&#22336;&#23447;) <span class="anchor">&#8596; women's law</span></h2>
+            <p>
+                Queen Jingu is "protected" by a spiky brown robe (&#26837;&#34915;) for three years &mdash; chastity preserved, but she loses the right to refuse, even the right to touch herself. The robe protects the king's face, the state's propriety, the ritual order &mdash; never Jingu herself. This is Ming women's legal "objectification" (&#23458;&#20307;&#21270;): wives had no independent standing, "a woman's word" was discounted, victimisation meant social stigma. Her choosing silence is the mythic version of the female litigant's "voicelessness" (&#22833;&#22768;) &mdash; grievance that cannot be translated into relief.
+            </p>
+
+            <h2>Case 4 &mdash; the Forged Ledger (&#23925;&#21028;&#23448;) <span class="anchor">&#8596; institutional corruption</span></h2>
+            <p>
+                Emperor Taizong's underworld trial: Wei Zheng's letter pulls strings; Judge Cui alters the life-register (&#29983;&#27515;&#33192;: "13" &rarr; "33"); the Ten Kings collectively stamp approval; the mirror of deeds (&#19994;&#38257;) is never activated; the wronged Jiancheng and Yuanji are "pushed into the City of Wrongful Death." This is the full chain of Ming institutional corruption &mdash; clerks manipulating records (&#20070;&#21464;&#25805;&#24335;), collective "review" endorsement (&#20250;&#23457;&#32972;&#20070;), and justice hollowed by power (&#35889;&#29366;). Terada's "grievance must be heard to count" is inverted: heard, yet pushed aside, never tried.
+            </p>
+
+            <h2>Conclusion <span class="anchor">&#8596; fault lines of Ming law</span></h2>
+            <p>
+                Four cases &mdash; criminal law, church-state, gender, administration &mdash; expose the Ming legal order's fault lines: stagnation by morality-over-law, hierarchical &#31062;&#27861;&#21512;&#19968;, distorted &#24773;&#29702;&#27861;, and grievance silenced by power. From the quiet criminal to the forged ledger, the novel is not telling fairy tales but re-narrating Ming justice's deepest pathologies in myth.
+            </p>
+
+            <a class="nav-back" href="index.html">&larr; Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+                <a href="essay-divine-bureaucracy.html">E8 &middot; Heaven Is a Yamen</a> &middot; <a href="essay-ming-metaphor.html">E14 &middot; The Ming in Disguise</a> &middot; <a href="character-tangseng.html">Tang Monk</a> &middot; <a href="characters.html">The Pilgrims</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.4 W353 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W353
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
