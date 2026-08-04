@@ -24,6 +24,11 @@
 | site/en/essay-scenery-poems.html | W345 | v2.2.96 新建·英文站 A6 专题译介·景物诗"山水奇观/旅途即景/禅境灵域"三型分类赏析（引文逐句核对原著） |
 | site/en/index.html | W345 | v2.2.96 入口卡片 5→8（新增 E4/E5/E6 三卡）·section-sub 文案更新·footer 双索引升 v2.2.96 W345 |
 | site/en/README.md | W345 | v2.2.96 文件清单 7→10·版本号升 v2.2.96 W345·Footer/Verification/Scope 段同步 |
+| site/en/tribulations.html | W347 | v2.2.98 新建·英文站数据页·八十一难看板（dataset/81-hardships.json 桥接·成因/结局/难度三维 + 成因×结局矩阵 + 81 难全表） |
+| site/en/characters.html | W347 | v2.2.98 新建·英文站数据页·取经五人组（Belbin 团队角色 + 五维心理画像 + 凝聚力里程碑） |
+| site/en/bestiary.html | W347 | v2.2.98 新建·英文站数据页·妖魔生态（30 种群·4 社会型·73% 灭绝率·能力极值） |
+| site/en/chapters-map.html | W347 | v2.2.98 新建·英文站数据页·百回阅读地图（四幕分章 + 每回回目对联/主要人物/地点） |
+
 
 ## W344 质量增强包（术语统一审计 + A1 结构化元数据 + A5/A6 提质 + 项目说明版本残留修复，2026-08-04）
 

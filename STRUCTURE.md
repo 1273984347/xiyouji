@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.2.97（2026-08-04）— W346 数据闭环（八十一难逐难明细填充 · dataset/81-hardships.json 由半空变闭环）+ W345 英文站扩张（A5/A6 三篇专题译介 + site/en/ 10 文件）+ W344 质量增强包（术语统一审计 + A1 结构化元数据 + A5/A6 提质）+ W342 A4 身份政治 gap-fill 等全部交付收尾 + W343 交付收尾（A1 逐回关联分析 footer 100/100 覆盖 + 28 篇跨章 SD 交叉引用 + RAG 索引 675 全覆盖 + 内容空缺审计无宏观空缺 + Security/Screenshot Review 全 CI 转绿 + 移动端表格溢出修复）· 全站设计系统（system.css）+ 85 个可视化/交互页 + RAG 对话 + 数据 API 服务 + dataset/ 42 JSON + 100 回逐回解读 + 629 篇研究文档 + PWA 离线。A4 主题专题 201 篇·W334（v2.2.86）全站设计系统·详细变更见 [CHANGELOG.md](CHANGELOG.md)，历史归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
+> 当前版本：v2.2.98（2026-08-04）— W347 英文站关键页扩张（四数据页·dataset 桥接·site/en/ 14 文件）+ W346 数据闭环（八十一难逐难明细填充 · dataset/81-hardships.json 由半空变闭环）+ W345 英文站扩张（A5/A6 三篇专题译介 + site/en/ 14 文件）+ W344 质量增强包（术语统一审计 + A1 结构化元数据 + A5/A6 提质）+ W342 A4 身份政治 gap-fill 等全部交付收尾 + W343 交付收尾（A1 逐回关联分析 footer 100/100 覆盖 + 28 篇跨章 SD 交叉引用 + RAG 索引 675 全覆盖 + 内容空缺审计无宏观空缺 + Security/Screenshot Review 全 CI 转绿 + 移动端表格溢出修复）· 全站设计系统（system.css）+ 85 个可视化/交互页 + RAG 对话 + 数据 API 服务 + dataset/ 42 JSON + 100 回逐回解读 + 629 篇研究文档 + PWA 离线。A4 主题专题 201 篇·W334（v2.2.86）全站设计系统·详细变更见 [CHANGELOG.md](CHANGELOG.md)，历史归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
 
 ## 顶层结构
 
