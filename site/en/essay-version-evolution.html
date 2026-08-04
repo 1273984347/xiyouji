@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>The Lost Pinghua Layer — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.03em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em {
+            color: var(--accent-3);
+            font-style: italic;
+        }
+        article p strong { color: var(--accent); }
+        article .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+        @media (max-width: 600px) {
+            article { padding: 24px 20px; }
+        }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Essay E5
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>The Lost Pinghua Layer</h1>
+        <div class="subtitle">ESSAY · SUMMARY TRANSLATION</div>
+        <div class="tagline">Between the Song <em>shihua</em> and the 1592 Shide tang edition lies a folded gap of four hundred years.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+            <strong>Source:</strong> A summary translation of <a href="../../docs/04-文化与历史背景/版本演变补遗-平话层.md">docs/04-文化与历史背景/版本演变补遗-平话层.md</a>. The original Chinese essay supplements the version-history overview by excavating the佚失 (lost) oral-prose <em>pinghua</em> stratum between the Southern-Song <em>shihua</em> and the Ming complete edition. This English version preserves the argument in condensed form; reconstructions are explicitly marked as conjecture.
+        </div>
+
+        <article>
+            <h2>The Problem: A Folded Four Hundred Years <span class="anchor">↔ gap in the chain</span></h2>
+            <p>
+                The earliest complete hundred-chapter edition is the 1592 Shide tang print, yet the story's embryo already existed in the Southern-Song <em>Datang Sanzang qujing shihua</em> — there the Monkey Pilgrim is a gentle "White-Robed Scholar," and Sanzang is still the narrative protagonist. Between them lie roughly four hundred years of Yuan and early-Ming text history. What we can "establish" from this span amounts to a single relatively complete surviving drama — Yang Jingxian's <em>Journey to the West</em> zaju. The rest — storytellers' prompt-books, workshop <em>pinghua</em>, abridged manuscripts — mostly never entered woodblock circulation and vanished in war and worm-rot. The "lost <em>pinghua</em> layer" refers to this intermediate zone that textual history repeatedly acknowledges as "having existed" yet rarely preserves in full. It supplied flesh to the Shide tang edition without leaving its own name under the carver's knife.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>The Zaju Layer: Yang Jingxian and the Fixing of "Great Sage" <span class="anchor">↔定型 stage</span></h2>
+            <p>
+                Yang Jingxian's (or Yang Na's) six-book, twenty-four-act <em>Journey to the West</em> zaju is the most reliable surviving specimen above the <em>pinghua</em> layer and the pivot of dramatized fixation. Its contributions to image-history are threefold. <strong>First, the migration of titles.</strong> The <em>shihua</em>'s Monkey is a mild White-Robed Scholar; by the zaju, Sun the Pilgrim calls himself "Great Sage Who Reaches Heaven," with "Equal-to-Heaven" perhaps his brother's name — the pugnacious aura already appears. By Shide tang it consolidates into Wukong's self-proclaimed, then heaven-acknowledged, "Equal-to-Heaven Great Sage," completing the turn from "helping scholar" to "rebel demon-king." <strong>Second, the prototype of "Havoc in Heaven" takes shape</strong> — stealing peaches, stealing immortal robes, fighting heaven's troops; Flower-Fruit Mountain and Water-Curtain Cave are roughly fixed here. <strong>Third, the team expands dramaturgically:</strong> Zhu Bajie and Sha Seng enter, the "three disciples protect the master" pattern first forms — direct evidence that the <em>pinghua</em> layer expanded the <em>shihua</em>'s single-thread tale into multi-character narrative. Drama, as the "fixing layer," framed fluid oral story into a repeatable stage structure for the first time.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>The Pinghua Layer: From Yongle Canon to Poktongsa <span class="anchor">↔ conjectural</span></h2>
+            <p>
+                Above the zaju lies a Yuan-dynasty <em>Journey to the West</em> <em>pinghua</em> now wholly lost. Evidence that it "existed" comes from two fragmentary sources. One is a <strong>surviving Yongle Canon scroll</strong> (vol. 13139, "song" rhyme) which records the episode "Dream: Beheading the Jing River Dragon" and explicitly notes it is quoted from the <em>Journey to the West pinghua</em> — enough to establish that a written Yuan <em>pinghua</em> existed and already contained the "Wei Zheng beheads the dragon" thread, ancestor of chapters 9–10 of Shide tang. The other is the Korean-Lee-dynasty Chinese textbook <strong>Poktongsa Ŏnhae</strong>, whose dialogue and glosses cite the <em>pinghua</em>'s plot outline — mentioning Wei Zheng beheading the dragon, Tang Taizong touring the underworld, Tripitaka's origin, the Chechi Kingdom contest. These are the only surviving "glints" of the <em>pinghua</em> layer. From them we may <em>conjecture</em> (not establish) that the Yuan <em>pinghua</em> already possessed a fairly complete front structure of "Wei Zheng beheads dragon — Tang king enters underworld — pilgrimage origin" and demon-subduing episodes like the Chechi contest, broadly inherited by the later hundred-chapter order. The full <em>pinghua</em> text is gone; its length, chapter count, and wording are unknowable. All such links are reasonable inference from fragmentary quotation; the real Yuan <em>pinghua</em> has sunk into the "lost layer" itself.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>The Abridged Layer: The Ancestor-Text Dispute <span class="anchor">↔ preserved remnant</span></h2>
+            <p>
+                The Ming also produced "abridged editions" — <em>Tang Sanzang xiyou shie zhuan</em> (attrib. Zhu Dingchen) and <em>Xiyou ji zhuan</em> (attrib. Yang Zhihe) — far shorter than the hundred-chapter book. Their relation to Shide tang is a longstanding puzzle. One view (Lu Xun, Hu Shi) holds the abridged are condensations of the fuller Shide tang line, produced later by booksellers for profit. Another holds the abridged preserve an earlier folk-<em>pinghua</em> archetype — a partial remnant of the <em>pinghua</em> layer in compressed form — with the hundred-chapter book expanding on top of them. The dispute is unresolved. Crucially, it is itself the best footnote to the <em>pinghua</em> layer's existence: if Shide tang were written from nothing, the abridged could only be its downstream cut; yet certain "same-yet-different" naïve narratives in the abridged (Tripitaka's origin, some subduing orders) hint they may descend from a more ancient oral-<em>pinghua</em> tradition. The <em>pinghua</em> layer likely never fully vanished but flowed, in compressed form, partially into the hundred-chapter book. The ancestor dispute matters precisely because it leads us back to that lost riverbed.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>Conclusion: A Stratified Riverbed <span class="anchor">↔ cumulative canon</span></h2>
+            <p>
+                Stacking <em>shihua</em>, zaju, <em>pinghua</em>, and abridged layers, the Shide tang edition is no longer a "original scripture" born from nothing, but a riverbed pressed atop multiple accumulations: the <em>shihua</em> gave it the Monkey-Pilgrim seed; the zaju gave it the Great-Sage character and stage structure; the <em>pinghua</em> gave it the skeleton of "Wei Zheng beheads dragon" and the Chechi contest; the abridged may be the last channel by which that skeleton flowed into print. The so-called "original" was never a clear spring but a river constantly patched and overlaid. What we can touch is only the instant preserved by the carver's knife in 1592. The point of this supplement is not to fictionalize the river's full face, but to admit that "loss" itself is part of <em>Journey</em>'s history — those lost <em>pinghua</em>, scattered manuscripts, and unnamed guild authors are equally the foundation on which the monkey took shape.
+            </p>
+
+            <a class="nav-back" href="index.html">← Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+                <a href="essay-zen-koan-vs-neidan.html">E4 · Zen vs. Neidan</a> ·
+                <a href="essay-scenery-poems.html">E6 · Scenery Poems</a> ·
+                <a href="../data/text-evolution.html">Text Evolution visualization</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        © <span id="footer-year">2026</span> Journey to the West · Annotated Project · MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> ·
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.95 W345 ·
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W345
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

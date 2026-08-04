@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>Zen Koan vs. Inner-Alchemy — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.03em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em {
+            color: var(--accent-3);
+            font-style: italic;
+        }
+        article p strong { color: var(--accent); }
+        article .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+        @media (max-width: 600px) {
+            article { padding: 24px 20px; }
+        }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Essay E4
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>Zen Koan vs. Inner-Alchemy</h1>
+        <div class="subtitle">ESSAY · SUMMARY TRANSLATION</div>
+        <div class="tagline">One monkey, two pairs of glasses — the sudden enlightenment of Chan and the gradual discipline of Neidan.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+            <strong>Source:</strong> A summary translation of <a href="../../docs/04-文化与历史背景/西游与禅宗公案专题.md">docs/04-文化与历史背景/西游与禅宗公案专题.md</a>. The original Chinese essay compares two competing readings of the same hundred-chapter novel. This English version preserves the core contrast in condensed form.
+        </div>
+
+        <article>
+            <h2>One Wukong, Two Pairs of Glasses <span class="anchor">↔ sudden vs. gradual</span></h2>
+            <p>
+                The strangest thing about <em>Journey to the West</em> is not that it tells a scripture-seeking tale, but that the same hundred chapters can be read in two opposite directions. One road leads to Chan (Zen) Buddhism's <strong>sudden</strong> enlightenment — direct apprehension beyond words. The other leads to Daoist inner-alchemy's (Neidan) <strong>gradual</strong> cultivation — measured stages and precise timing. The novel itself plants both readings: Wukong's Dharma name comes from Subhuti's line "break stubborn emptiness, you must realize emptiness," where the character <em>kong</em> (空, emptiness) echoes the Chan heartbeat of "dwelling nowhere"; yet the eighty-one tribulations were later dismantled by Qing-dynasty alchemical commentators into a step-by-step cultivation chart. "Wukong" is at once a Chan koan and an alchemical symbol of the body's structure. This essay does not judge which is "truer"; it spreads the tension between them — and asks what that tension reveals about the history of reading.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>The Chan Reading: The Unspeakable Transmission <span class="anchor">↔ koan as method</span></h2>
+            <p>
+                Chan's four-phrase style — "a separate transmission outside scripture, not founded on words, pointing directly to the mind, seeing one's nature and becoming Buddha" — resonates with the novel more deeply than most readers suppose. <strong>First, the name is itself a koan.</strong> Subhuti naming the stone monkey "Wukong" is a miniature Chan <em>huatou</em>; "realization" here is not accumulated knowledge but a single turn of self-recognition — matching Huineng's "one thought of confusion, a mortal; one thought of awakening, a Buddha." <strong>Second, sudden awakening recurs throughout.</strong> Wukong's moments of insight are not gradual inference but a sudden seeing-through of delusion. <strong>Third, the golden headband reads as <em>bizuo</em></strong> — the Zen master's fierce prod that drives the student to the cliff-edge of letting go. The pain is not external removal but the mind taming itself, akin to the koan's "bucket-bottom falls out." The essence of this reading is in four characters: <em>the untransmitted wonder</em> — it refuses to reduce the novel to a checklist and insists that what matters most lies beyond words.
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>The Neidan Reading: Timing and the Chart <span class="anchor">↔ gradual as map</span></h2>
+            <p>
+                Qing readers swapped the "untransmitted wonder" for an "order to be followed." The Zhengdao and Zhenquan editions rewrote the whole narrative as an alchemical textbook. <strong>Characters become the five-phases body structure:</strong> Wukong is Metal Lord (Monkey), Bajie is Wood Mother (Pig), Sha Seng is Yellow Dame (Earth, harmonizing metal and wood), the White Dragon Horse is the Will-Horse. The pilgrimage is no longer a journey but a set of internal "medicines" and "cauldrons"; subduing demons is refining the inner "thief." <strong>Plot becomes firing-times:</strong> the eighty-one tribulations are the ninety-nine number's cultivation rhythm; the forty-nine days in the Bagua furnace are the gentle-and-forceful fires of alchemy; Vulture Peak is not a geographic endpoint but the inner symbol of completion. Where the Chan reading sees a single sudden turn, the alchemical reading sees an order that cannot skip a single step. Its power is that it gives the chaotic narrative a graspable skeleton — turning a "god-demon novel" into a "cultivation manual."
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>The Tension: Who Gets to Re-read Wukong <span class="anchor">↔ canon as attitude</span></h2>
+            <p>
+                Layering the two glasses, the sharpest contradiction is that the same text yields "sudden" to Chan and "gradual" to Neidan. This is not accidental misreading but the competitive occupation of a narrative by two paradigms. One tension is the <strong>textualization of sudden-vs-gradual</strong>: Huineng and Shenxiu's debate lives on in the novel, which satisfies both — Wukong "returns in a single thought" yet "becomes true through ordeals." Another is <strong>words "established" or "not"</strong>: Chan flaunts "not founded on words," yet the hundred chapters are plainly words; Neidan does the opposite, literalizing every phrase into oral formula. The deepest tension is <strong>who has the right to re-read</strong>: in the Ming the novel was popular god-demon fiction; under the Qing, beneath literary inquisition, scholars elevated it into an alchemical secret code — reading what you needed as a refuge. The 1955 People's Literature edition then stripped the alchemical shell and returned to the literary Shide tang base text. <em>Choice of base edition has always been a question of attitude</em>: choose the alchemical commentary and the novel is a scripture of cultivation; choose Shide tang and it is literature. Every "edition choice" is an answer to "what is <em>Journey to the West</em>."
+            </p>
+
+            <div class="divider">· · ·</div>
+
+            <h2>Conclusion: Richness Lies in Holding Both <span class="anchor">↔ open structure</span></h2>
+            <p>
+                What makes the novel fascinating is precisely its refusal to be colonized by a single frame. The name "Wukong" is already a Chan sign; the structure "eighty-one tribulations" was read by alchemists as a cultivation chart — Chan and Dan, sudden and gradual, coexist and even complete each other. The koan reading reminds us that what matters is the beyond-words moment of recognition; the alchemical reading reminds us that cultivation has rhythm and order, and the body's refinement is equally serious. Both together say one thing: the novel is never about "fetching a scroll from the West" but about "how to settle this one mind." Qing scholars read it as alchemy, modern scholars read it back as fiction, and future readers may find a third or fourth <em>Journey</em>. <em>The debate over versions and readings has no end, because the book itself permits being rewritten again and again</em> — is that not exactly its greatness?
+            </p>
+
+            <a class="nav-back" href="index.html">← Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+                <a href="essay-zen-koan-vs-neidan.html">E4 · Zen vs. Neidan</a> ·
+                <a href="essay-version-evolution.html">E5 · Lost Pinghua Layer</a> ·
+                <a href="essay-scenery-poems.html">E6 · Scenery Poems</a> ·
+                <a href="../data/text-evolution.html">Text Evolution visualization</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        © <span id="footer-year">2026</span> Journey to the West · Annotated Project · MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> ·
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.95 W345 ·
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W345
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
