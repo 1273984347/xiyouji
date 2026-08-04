@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>The Opening Verse — Poetics of the Frame</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c; --accent-3: #C9A063;
+            --accent-4: #6B8E5A; --rebel: #8c2a2a; --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8; min-height: 100vh; }
+        .hero { background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+        .hero::after { content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%); pointer-events: none; }
+        .lang-switch { position: absolute; top: 18px; right: 24px; font-size: 0.85rem; z-index: 5; }
+        .lang-switch a { color: var(--accent-soft); text-decoration: none; padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35); border-radius: 4px; }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 8px; position: relative; z-index: 1; }
+        .hero .subtitle { font-size: 0.95rem; color: var(--accent-soft); letter-spacing: 0.25em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85rem; color: rgba(245, 233, 212, 0.65); font-style: italic; position: relative; z-index: 1; }
+        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--line); }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container { max-width: 820px; margin: -30px auto 60px; padding: 0 24px; position: relative; z-index: 2; }
+        .source-note { background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+            padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 32px; font-size: 0.88rem; color: var(--ink-soft); }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 36px 40px; box-shadow: var(--shadow); }
+        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 12px; padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft); letter-spacing: 0.03em; }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor { font-size: 0.78rem; color: var(--accent-2); font-family: "JetBrains Mono", monospace; margin-left: 8px; letter-spacing: 0.1em; font-weight: 400; }
+        article p { margin-bottom: 18px; font-size: 1rem; color: var(--ink); text-wrap: pretty; }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider { text-align: center; color: var(--accent-soft); margin: 28px 0; letter-spacing: 0.5em; font-size: 1rem; }
+        .nav-back { display: inline-block; margin-top: 28px; padding: 8px 16px; background: var(--accent);
+            color: #fff8ec; border-radius: 4px; text-decoration: none; font-size: 0.88rem; transition: background 0.15s; }
+        .nav-back:hover { background: var(--rebel); }
+        .related { margin-top: 24px; padding: 14px 18px; background: #fff8ec; border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        @media (max-width: 640px) { article { padding: 24px 20px; } }
+        footer { text-align: center; padding: 24px; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 40px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> &middot; <a href="dashboard.html">Dashboard</a> &middot; Essay E31
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">&#20013;&#25991;</a>
+        </div>
+        <h1>The Opening Verse — Poetics of the Frame</h1>
+        <div class="subtitle">ESSAY E31 &middot; SUMMARY TRANSLATION</div>
+        <div class="tagline">Six paired-couplet chapter titles (chs. 1/7/8/14/22/100) fold the Three Teachings into eight characters each — a 'constitutional' poetics.</div>
+    </header>
+    <main class="container">
+        <div class="source-note">
+            A summary translation of <a href="../../docs/05-诗词歌赋/开篇诗专题深化.md">开篇诗专题深化.md</a>. The Chinese original reads the novel's verse through three poet theorists and six frame couplets (E31), three classes of scene-poem (E32), and four imagery theorists reading a four-image lineage (E33). All line numbers and chapter titles are carried over from the source without fabrication.
+        </div>
+        <article>
+
+            <h2>Three Poetic Coordinates <span class="anchor">&#8596; Wang &middot; Zhu &middot; Ye</span></h2>
+            <p>
+                The opening-verse study builds three poetic coordinates. <strong>Wang Guowei</strong> (Wang Guowei's <em>Renjian Cihua</em>, the "realm" theory) supplies the "self-involved" vs "self-removed" scene &mdash; the couplet's power to "build a realm" (zaojing). <strong>Zhu Guangqian</strong> (Zhu's <em>Poetics</em>) supplies "the poetic realm = intuition + affection + image," asking how imagery carries the author's felt interest. <strong>Ye Jiaying</strong> (Ye's <em>Ganfa</em> theory of "evocation and moved response," the beauty of passive virtue) supplies the "arousal" mechanism &mdash; how eight characters ignite a hundred chapters of narrative expectation.
+            </p>
+            <table>
+                <tr><th>Theorist</th><th>Core thesis</th><th>Lens on the frame couplets</th></tr>
+                <tr><td>Wang Guowei</td><td>self-involved / self-removed realm; "build a realm"</td><td>the couplet's zaochen nature &mdash; constructing the book's mood in eight characters</td></tr>
+                <tr><td>Zhu Guangqian</td><td>realm = intuition + affection + image</td><td>imagery choice (linggen, xinyuan, wuxing) bearing authorial interest</td></tr>
+                <tr><td>Ye Jiaying</td><td>ganfa (evocation); beauty of passive virtue</td><td>how the eight characters arouse the hundred-chapter arc</td></tr>
+            </table>
+
+            <h2>Ch. 1 &mdash; "Linggen yuyun yuanliu chu" <span class="anchor">&#8596; line 522</span></h2>
+            <p>
+                "灵根育孕源流出 &middot; 心性修持大道生" (A numinous root breeds the source-stream; mind-nature cultivates the Great Way). Eight characters hide three teachings' terms: <em>linggen</em> (numinous root) is Daoist (the innate true nature, the Flower-Fruit stone); <em>xinxing</em> (mind-nature) is Buddhist (the Chan ontological ground); <em>dadao</em> (Great Way) is Confucian (the political-ethical ideal). The three stand side by side, none dominant &mdash; Wu Cheng'en's foundational declaration that the book is not one teaching's novel but a three-teachings-synthesis narrative. Read through Wang Guowei, the first five characters are a <em>self-removed</em> realm (objective birth of a stone-monkey); the last five are <em>self-involved</em> (the subjective will in "cultivate") &mdash; from self-removed to self-involved, exactly Wukong's arc from innocent stone to enlightened pilgrim.
+            </p>
+
+            <h2>Ch. 7 &mdash; "Bagua lu zhong tao dasheng" <span class="anchor">&#8596; line 864</span></h2>
+            <p>
+                "八卦炉中逃大圣 &middot; 五行山下定心猿" (The Great Sage escapes the Eight-Trigram furnace; the mind-monkey is pinned beneath the Five-Phases mountain). The couplet hides a wuxing (Five-Phases) conquest structure: fire (furnace) subdues metal (the Monkey, "Metal Sire"); yet the Monkey survives and forges the Fiery Eyes &mdash; metal counters fire. Earth (the mountain) drains fire (the restless mind-monkey belongs to fire). A complete wuxing cycle &mdash; fire &rarr; metal &rarr; earth &rarr; fire &mdash; rendered as literary philosophy.
+            </p>
+
+            <h2>Ch. 8 &mdash; "Wofo zaojing chuan jile" <span class="anchor">&#8596; line 982</span></h2>
+            <p>
+                "我佛造经传极乐 &middot; 观音奉旨上长安" (Buddha makes scriptures to spread bliss; Guanyin takes the edict to Chang'an). Three verbs build a power gradient: <em>zaojing</em> (make) &mdash; the Buddha's sovereign act of authoring the canon; <em>chuan jile</em> (spread bliss) &mdash; his act of exporting the Pure Land; <em>fengzhi</em> (take the edict) &mdash; Guanyin's subordinate act. Buddha (maker) &rarr; Buddha (spreader) &rarr; Guanyin (edict-bearer): a poetic diagram of the Buddhist hierarchy compressed into eight characters &mdash; the Dao opens at ch. 1, the Buddha takes over at ch. 8.
+            </p>
+
+            <h2>Ch. 14 &mdash; "Xinyuan guizheng" <span class="anchor">&#8596; line 1394</span></h2>
+            <p>
+                "心猿归正 &middot; 六贼无踪" (The mind-monkey returns to right; the six thieves vanish). <em>Xinyuan</em> (mind-monkey) is a Chan core image (from the <em>Vimalakirti Sutra</em>: "the hard-to-tame mind is like a monkey"). Wukong receiving the fillet is not physical restraint but a Xin-Xue (Heart-Mind learning) "gathering of the heart." The six thieves are the six sense-roots' afflictions; Wukong's slaying of them is a violent narrative carrying the Chan "six roots purified" metaphor. "Return to right" (inward) vs "thieves vanish" (outward) is the poetic projection of Wang Yangming's "easy to crush mountain-thieves, hard to crush heart-thieves."
+            </p>
+
+            <h2>Ch. 22 &mdash; "Bajie dazhan Liusha he" <span class="anchor">&#8596; line 1936</span></h2>
+            <p>
+                "八戒大战流沙河 &middot; 木叉奉法收悟净" (Bajie battles the Quicksand River; Moksha, by the Dharma, receives Wujing). The team's five-person roster completes here. The three-beat "battle &mdash; mediation &mdash; recruitment" (Bajie fights, Moksha intervenes, Wujing is taken) is the poetic arc of team assembly &mdash; each new member repeats the same beat (Wukong via Guanyin, Bajie via Guanyin, Wujing via Moksha-by-Guanyin's law).
+            </p>
+
+            <h2>Ch. 100 &mdash; "Jinghui dongtu" <span class="anchor">&#8596; line 7086</span></h2>
+            <p>
+                "径回东土 &middot; 五圣成真" (Straight back to the Eastern Land; the Five Sages become perfected). "Eastern Land" is the Confucian ethical world (Great Tang); "become perfected" (chengzhen) is Daoist (Perfected Ones), "sage" (sheng) is Confucian, "five" is the wuxing number. The eight characters fuse Buddha (return), Dao (perfected), Confucian (sage) &mdash; echoing ch. 1's opening and closing the ring.
+            </p>
+            <table>
+                <tr><th>Dimension</th><th>Ch. 1 opening</th><th>Ch. 100 closing</th></tr>
+                <tr><td>Characters</td><td>8</td><td>8</td></tr>
+                <tr><td>Three-teaching order</td><td>Dao (root) &rarr; Buddha (nature) &rarr; Confucian (Way)</td><td>Buddha (return) &rarr; Dao (perfected) &rarr; Confucian (sage)</td></tr>
+                <tr><td>Narrative direction</td><td>flow out (outward)</td><td>straight return (inward)</td></tr>
+                <tr><td>State</td><td>breeding (beginning)</td><td>perfected (end)</td></tr>
+            </table>
+
+            <h2>The Power of the Three Teachings <span class="anchor">&#8596; Dao &rarr; Buddha &rarr; synthesis</span></h2>
+            <p>
+                Across the six key frame couplets, the three teachings' discourse shifts dynamically: ch. 1 &amp; 7 Dao-led (root, furnace, mountain); ch. 8, 14, 22 Buddha-led (make-scripture, mind-monkey, take-by-Dharma); ch. 100 fused. The trajectory &mdash; <em>Dao (chs. 1&ndash;7) &rarr; Buddha (chs. 8&ndash;99) &rarr; synthesis (ch. 100)</em> &mdash; is the literary map of Ming three-teachings synthesis. Wang Yangming's Xin-Xue (mature c. 1500&ndash;1520) and the book's composition (c. 1570&ndash;1590) are near-contemporary; ch. 14's resonance with "crush the heart-thief" is no accident &mdash; the frame-verse series is Ming Heart-Mind learning projected onto the chapter titles.
+            </p>
+
+            <h2>Past and Present <span class="anchor">&#8596; three rows</span></h2>
+            <table>
+                <tr><th>Dimension</th><th>Ming poetics (JTTW)</th><th>Contemporary criticism</th></tr>
+                <tr><td>Couplet function</td><td>condensed book-philosophy</td><td>chapter label + reader guide</td></tr>
+                <tr><td>Three-teaching discourse</td><td>mainstream three-teachings ideology</td><td>metaphor of multicultural coexistence</td></tr>
+                <tr><td>Poetic bearing</td><td>philosophy in paired couplets</td><td>theme in titles</td></tr>
+            </table>
+            <p>
+                Marquez opens "Many years later..." with a long sentence bearing time; Wu opens with an eight-character couplet bearing the three teachings &mdash; both use the fewest words to set the largest narrative frame.
+            </p>
+            <a class="nav-back" href="index.html">&larr; Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+<a href="essay-cipai-shuidiaogetou.html">E19 &middot; Shuidiaogetou</a> &middot; <a href="essay-ming-intellectual-history.html">E30 &middot; Ming Intellectual History</a> &middot; <a href="essay-poetry-imagery.html">E33 &middot; Imagery Lineage</a> &middot; <a href="essay-ming-politics.html">E24 &middot; Heaven Is a Ming Court</a>            </div>
+        </article>
+    </main>
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.7 W356 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W356
+        </div>
+
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

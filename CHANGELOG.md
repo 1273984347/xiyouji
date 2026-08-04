@@ -8,6 +8,13 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.3.7（2026-08-04）：W356 英文站 A6 诗词译介（两篇 poetry essay·site/en/ 46→48 文件）
+
+- **英文站新增 2 页（site/en/ 46→48 文件）**：essay-poetry-opening.html（E31·开篇诗·三重诗学坐标 王国维境界说/朱光潜诗学/叶嘉莹词学 + 六处关键回目诗 1/7/8/14/22/100 三教合一·道→佛→圆融权力弧 + 古今对位）、essay-poetry-imagery.html（E33·意象谱系·四理论家 庞德/艾略特/巴什拉/刘勰 + 四意象 石猴/蟠桃/白骨/真经=造化→欲望→虚妄→觉悟 + 中西对位 刘勰早于西方意象派1400年）；按"策展摘要 + 中文源文回链 + 中文切换 + footer 双索引 v2.3.7 W356"约定
+- **英文站入口与文档同步**：site/en/index.html 入口卡片 44→46、README 文件清单 46→48、版本号升 v2.3.7 W356；全部 47 个 EN HTML 页 footer 双索引统一升级
+- **六文档 + dukou-engine footer 同步 v2.3.7 W356**；verify_delivery 门禁全绿
+- **说明**：A6 第三项"景物诗"已早于本批由 E6 essay-scenery-poems.html 覆盖（同源 原著景物诗分类赏析专题.md），本批未重复生成，仅交付 E31+E33
+
 ### v2.3.6（2026-08-04）：W355 英文站 A5 明代思想丛译介（三篇 Ming-thought essay·site/en/ 43→46 文件）
 
 - **英文站新增 3 页（site/en/ 43→46 文件）**：essay-ming-social-customs.html（E28·明代社会风俗·五大风俗维度 marriage/dress/diet/burial/exam=制度性风俗·福柯治理术·13 处 line 锚点·古今对位五组）、essay-ming-literary-thought.html（E29·明代文学思想·四位文学思想家 李贽童心说/袁宏道公安派/归有光唐宋派/李梦阳前后七子·四大名著横向对位·五阶段纵向定位）、essay-ming-intellectual-history.html（E30·明代思想史·四位思想家 王阳明心学/李贽童心异端/王畿泰州学派/黄宗羲君客主·四组案例对照 line 1459/4370/1868/7085·八层明代镜像闭环）；按"策展摘要 + 中文源文回链 + 中文切换 + footer 双索引 v2.3.6 W355"约定
