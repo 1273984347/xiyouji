@@ -38,6 +38,9 @@
 | site/en/character-bajie.html | W349 | v2.3.0 新建·英文站深度页·猪八戒（天蓬→猪→净坛使者/团队社交胶水/食欲喜剧） |
 | site/en/character-shaseng.html | W349 | v2.3.0 新建·英文站深度页·沙悟净（卷帘大将→金身罗汉/执行者/平稳心理轴） |
 | site/en/essay-quanzhen-daoism.html | W349 | v2.3.0 新建·英文站 E10 译介·道教全真派内丹学读法（心猿/金公/木母/刀圭·四理论家·四概念） |
+| site/en/character-bailongma.html | W350 | v2.3.1 新建·英文站深度页·白龙马（西海三太子→马→八部天龙/ Belbin Specialist/ 低恐惧高顺从雷达） |
+| site/en/essay-buddhist-chan.html | W350 | v2.3.1 新建·英文站 E11 译介·佛教禅宗读法（达摩/慧能/神秀/玄奘·八识结构·四概念） |
+| site/en/essay-folk-belief.html | W350 | v2.3.1 新建·英文站 E12 译介·民间信仰读法（杨庆堃/王斯福/武雅士/华琛·弥漫性宗教/帝国隐喻/标准化） |
 
 
 

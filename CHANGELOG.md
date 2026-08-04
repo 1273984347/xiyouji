@@ -8,6 +8,13 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.3.1（2026-08-04）：W350 英文站角色深度页收尾（白龙马深度页 + E11 佛教禅宗 + E12 民间信仰）
+
+- **英文站新增 3 页（site/en/ 24→27 文件）**：character-bailongma.html（白龙马深度页·西海三太子→马→八部天龙·Belbin Specialist(8)/Implementer(5)·低恐惧高顺从心理雷达）、essay-buddhist-chan.html（E11·佛教禅宗读法·达摩/慧能/神秀/玄奘四理论家·八识结构·明心见性/顿渐/无念/戒定慧四概念）、essay-folk-belief.html（E12·民间信仰读法·杨庆堃/王斯福/武雅士/华琛四人类学家·弥漫性宗教/帝国隐喻/神鬼祖先三分/标准化四概念）
+- **数据/源文纪律**：白龙马页 Belbin/雷达/关系描述全部从 dataset 三权威 JSON 直接抽取（pilgrim-team-dynamic-network / pilgrim-team-psychology-arc / character-relationship-3d）；E11/E12 从既有中文专题（西游与佛教禅宗专题 / 西游与民间信仰专题）摘译，关键年代与数字有据可查，零编造
+- **英文站入口与文档同步**：site/en/index.html 入口卡片 22→25、README 文件清单 24→27、版本号升 v2.3.1 W350；全部 22 个 EN HTML 页 footer 双索引统一升级
+- **六文档 + dukou-engine footer 同步 v2.3.1 W350**；verify_delivery 门禁全绿
+
 ### v2.3.0（2026-08-04）：W349 英文站角色深度页扩张（取经三人组深度页 + E10 道教全真派专题译介）
 
 - **英文站角色深度页扩张（W349）**：延续 W348 孙悟空深度页方向，按"策展摘要 + 数据看板 + 中文源文回链 + footer 双索引"约定再扩 4 页（site/en/ 20→24 文件）—— ① 取经三人组深度页（补全孙悟空之外的三主角，均 bridging 项目既有数据集 pilgrim-team-dynamic-network / pilgrim-team-psychology-arc / character-relationship-3d，零编造）：`character-tangseng.html`（唐僧·Belbin 协调者 9/顺从 9/五维心理画像·与悟空信任张力·江流儿→旃檀功德佛）、`character-bajie.html`（猪八戒·天蓬元帅→猪→净坛使者·Belbin 资源探索者/团队工者 8·食欲喜剧）、`character-shaseng.html`（沙悟净·卷帘大将→金身罗汉·Belbin 执行者 9/完成者 7·平稳心理轴）；② `essay-quanzhen-daoism.html`（E10·道教全真派内丹学读法，源 西游与道教全真派专题.md：内丹密码本 心猿/金公/木母/刀圭·四理论家 王重阳/丘处机/马钰/张三丰·四概念 性命双修/三教合一/内丹学/全真戒律）。
