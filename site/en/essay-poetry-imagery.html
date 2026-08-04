@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>An Imagery Lineage — Stone, Peach, Bone, Sutra</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c; --accent-3: #C9A063;
+            --accent-4: #6B8E5A; --rebel: #8c2a2a; --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8; min-height: 100vh; }
+        .hero { background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+        .hero::after { content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%); pointer-events: none; }
+        .lang-switch { position: absolute; top: 18px; right: 24px; font-size: 0.85rem; z-index: 5; }
+        .lang-switch a { color: var(--accent-soft); text-decoration: none; padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35); border-radius: 4px; }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 8px; position: relative; z-index: 1; }
+        .hero .subtitle { font-size: 0.95rem; color: var(--accent-soft); letter-spacing: 0.25em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85rem; color: rgba(245, 233, 212, 0.65); font-style: italic; position: relative; z-index: 1; }
+        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--line); }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container { max-width: 820px; margin: -30px auto 60px; padding: 0 24px; position: relative; z-index: 2; }
+        .source-note { background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+            padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 32px; font-size: 0.88rem; color: var(--ink-soft); }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 36px 40px; box-shadow: var(--shadow); }
+        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 12px; padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft); letter-spacing: 0.03em; }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor { font-size: 0.78rem; color: var(--accent-2); font-family: "JetBrains Mono", monospace; margin-left: 8px; letter-spacing: 0.1em; font-weight: 400; }
+        article p { margin-bottom: 18px; font-size: 1rem; color: var(--ink); text-wrap: pretty; }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider { text-align: center; color: var(--accent-soft); margin: 28px 0; letter-spacing: 0.5em; font-size: 1rem; }
+        .nav-back { display: inline-block; margin-top: 28px; padding: 8px 16px; background: var(--accent);
+            color: #fff8ec; border-radius: 4px; text-decoration: none; font-size: 0.88rem; transition: background 0.15s; }
+        .nav-back:hover { background: var(--rebel); }
+        .related { margin-top: 24px; padding: 14px 18px; background: #fff8ec; border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        @media (max-width: 640px) { article { padding: 24px 20px; } }
+        footer { text-align: center; padding: 24px; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 40px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> &middot; <a href="dashboard.html">Dashboard</a> &middot; Essay E33
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">&#20013;&#25991;</a>
+        </div>
+        <h1>An Imagery Lineage — Stone, Peach, Bone, Sutra</h1>
+        <div class="subtitle">ESSAY E33 &middot; SUMMARY TRANSLATION</div>
+        <div class="tagline">Four images (stone-monkey, peach, white-bone, true-sutra) trace Creation→Desire→Illusion→Awakening, read through Pound, Eliot, Bachelard, Liu Xie.</div>
+    </header>
+    <main class="container">
+        <div class="source-note">
+            A summary translation of <a href="../../docs/05-诗词歌赋/西游诗词意象谱系专题.md">西游诗词意象谱系专题.md</a>. The Chinese original reads the novel's verse through three poet theorists and six frame couplets (E31), three classes of scene-poem (E32), and four imagery theorists reading a four-image lineage (E33). All line numbers and chapter titles are carried over from the source without fabrication.
+        </div>
+        <article>
+
+            <h2>Four Theorists of Imagery <span class="anchor">&#8596; Pound &middot; Eliot &middot; Bachelard &middot; Liu</span></h2>
+            <p>
+                An image differs from a scene: a scene is "objective view," an image is "the image within meaning" (Liu Xie: "gaze on the image, then wield the axe"). The book's four most lineage-bearing images are the Stone Monkey (creation), the Peach (desire), the White Bone (illusion), and the True Sutra (awakening) &mdash; a complete lineage of <em>creation &rarr; desire &rarr; illusion &rarr; awakening</em>.
+            </p>
+            <table>
+                <tr><th>Theorist</th><th>Work</th><th>Core claim</th><th>JTTW correspondence</th></tr>
+                <tr><td>Ezra Pound (1885&ndash;1972)</td><td><em>Imagist Manifesto</em></td><td>direct treatment; image = complex of intellect &amp; emotion in an instant</td><td>ch. 1 line 522 stone-monkey "direct treatment"; ch. 27 line 2306 white-bone "complex"</td></tr>
+                <tr><td>T. S. Eliot (1888&ndash;1965)</td><td><em>Hamlet and His Problems</em></td><td>objective correlative (object evokes feeling)</td><td>ch. 5 line 726 peach (desire); ch. 100 line 7085 sutra (awakening)</td></tr>
+                <tr><td>Gaston Bachelard (1884&ndash;1962)</td><td><em>The Poetics of Space</em></td><td>phenomenology of image; four elements</td><td>stone(earth)+peach(water)+bone(air)+sutra(fire)</td></tr>
+                <tr><td>Liu Xie (c. 465&ndash;532)</td><td><em>Wenxin Diaolong &middot; Shensi</em></td><td>image-generation: spirit roams with things</td><td>ch. 1 / 5 / 100 spirit-with-things</td></tr>
+            </table>
+
+            <h2>Creation: the Stone Monkey <span class="anchor">&#8596; ch. 1, line 522</span></h2>
+            <p>
+                "Since the world's opening it received heaven's truth and earth's grace, the sun's essence and moon's bloom; long steeped, it gained spiritual awareness. Within bred an immortal embryo; one day it split, bore a stone egg like a ball, and met the wind, became a stone monkey." The stone-monkey is the lineage's <em>creation</em> origin &mdash; heaven's unmade, desire-less image. Pound's "direct treatment": Wu writes the thing itself with three verbs (split, bear, transform), no abstract sermon. Bachelard's earth-image: the immortal stone bears creation. Liu Xie's "spirit roams with things": Wu's spirit roams the immortal-stone object and generates the image.
+            </p>
+
+            <h2>Desire: the Peach <span class="anchor">&#8596; ch. 5, line 726</span></h2>
+            <p>
+                Wukong raids the Peach Garden, eating peaches of three-thousand, six-thousand, nine-thousand years' ripening, then the Jade Pool banquet, then Laozi's golden elixir. The peach is the lineage's <em>desire</em> turn &mdash; the image of immortal longevity's desire. Eliot's objective correlative: the peach is desire's formula; when it appears, desiring feeling is instantly aroused (three ripenings = small/middle/great desire). Bachelard's water-image: peach-juice flows, water bears desire's fluidity. Liu Xie's "gaze on the image, wield the axe": Wu glimpses the peach-desire image and presents it as a feast. From the stone's desire-less to the peach's desire-full &mdash; the lineage's turn.
+            </p>
+
+            <h2>Illusion: the White Bone <span class="anchor">&#8596; ch. 27, line 2306</span></h2>
+            <p>
+                The Corpse-Demon thrice tempts the Tang Monk, transformed as a maiden, an old woman, an old man; Wukong thrice strikes her back to "a pile of powdery skulls." The white bone is the lineage's <em>illusion</em> deepening &mdash; the image of "form is empty." Pound's "complex of intellect and emotion": the skull instantaneously unites intellect (form-is-empty) and feeling (fear, pity). Bachelard's air-image: bone dissolves to smoke, air bears illusion's dissipation. Liu Xie's "spirit penetrates through image": Wu passes the bone-illusion image through the truth of emptiness. The three transformations (maiden / mother / elder) are illusion's three disguises &mdash; desire dissolved by illusion.
+            </p>
+
+            <h2>Awakening: the True Sutra <span class="anchor">&#8596; ch. 100, line 7085</span></h2>
+            <p>
+                The Tang Monk returns with thirty-five divisions, 5,048 scrolls; the Five Sages become perfected. The sutra is the lineage's <em>awakening</em> round-completion &mdash; the image of enlightened mind-nature. Eliot's objective correlative rounded: the sutra is awakening's formula (thirty-five divisions / 5,048 scrolls = small/middle/great awakening). Bachelard's fire-image: the sutra illuminates the mind, fire bears awakening's light. Liu Xie's image-generation rounded: from spirit roaming the sutra-awakening object, to wielding the axe, to spirit penetrating &mdash; the path completes. The lineage from creation &rarr; desire &rarr; illusion &rarr; awakening closes in the sutra's awakening.
+            </p>
+
+            <h2>East Meets West <span class="anchor">&#8596; Liu Xie, 1,400 years ahead</span></h2>
+            <table>
+                <tr><th>Theorist's image-theory</th><th>JTTW node</th><th>Correspondence</th></tr>
+                <tr><td>Pound "direct treatment" (West, 1913)</td><td>ch. 1 line 522 stone-monkey</td><td>both present the thing directly</td></tr>
+                <tr><td>Eliot "objective correlative" (West, 1919)</td><td>ch. 5 line 726 peach</td><td>both evoke feeling through object</td></tr>
+                <tr><td>Bachelard "four elements" (West, 1957)</td><td>ch. 27 line 2306 white bone</td><td>both bind image to element</td></tr>
+                <tr><td>Liu Xie "spirit roams with things" (China, c. 500)</td><td>ch. 100 line 7085 sutra</td><td>both generate image through spirit</td></tr>
+            </table>
+            <p>
+                Liu Xie (China, c. 500) precedes Pound (1913), Eliot (1919), and Bachelard (1957) by over 1,400 years yet already proposed a complete image-generation theory &mdash; the earliness of Chinese imagery theory is visible here. Wu Cheng'en (c. 1500&ndash;1582) inherited Liu Xie and unfolded the four-image lineage four centuries before Western Imagism. The contemporary meaning: the imagery lineage is not only a classical structure but a modern life-path of creation &rarr; desire &rarr; illusion &rarr; awakening.
+            </p>
+            <a class="nav-back" href="index.html">&larr; Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+<a href="essay-poetry-opening.html">E31 &middot; Opening Verse</a> &middot; <a href="essay-poetry-landscape.html">E32 &middot; Landscape Verse</a> &middot; <a href="essay-cipai-xijiangyue.html">E16 &middot; Xijiangyue</a> &middot; <a href="character-wukong.html">Wukong deep-dive</a>            </div>
+        </article>
+    </main>
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.7 W356 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W356
+        </div>
+
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
