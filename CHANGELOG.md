@@ -8,6 +8,12 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.2.96（2026-08-04）：W345 英文站扩张（A5/A6 三篇专题译介 + 入口与文档同步）
+
+- **英文站 A5/A6 三篇摘要页（W345）**：按 `site/en/` 既有"策展摘要、非全文翻译"约定（hero + source-note + article + footer 双索引 + 中文切换链接），新增 3 个英文 HTML 页，将 W344 的 3 篇 A5/A6 专题译介为非中文读者的精选入口—— `site/en/essay-zen-koan-vs-neidan.html`（禅宗公案顿悟 × 清代内丹渐修两种读法并置）、`site/en/essay-version-evolution.html`（南宋诗话—1592 世德堂本之间"失落的平话层"推考·明确标注推测/残存）、`site/en/essay-scenery-poems.html`（景物诗按"山水奇观/旅途即景/禅境灵域"三型分类赏析·例证逐句核对原著）。每页引文均来自已核对的中文源文。
+- **英文站入口与文档同步（W345）**：`site/en/index.html` 入口卡片 5→8（新增 E4/E5/E6 三卡，section-sub 文案更新为 8 入口）；`site/en/README.md` 文件清单 7→10、版本号升 v2.2.96 W345、footer 双索引与 Verification/Scope 段同步。英文站从 7 文件扩至 10 文件。
+- **六文档同步已执行（v2.2.96 + W345）**：统一将 CHANGELOG/README/STRUCTURE/项目说明/file-index/交接文档 六文档升 v2.2.96、W 标到 W345，verify_delivery 门禁全绿 ✅（注：中文内容计数 A1-A6 总 629 不变，英文站扩张不改中文文档规模）
+
 ### v2.2.95（2026-08-04）：W344 质量增强包（术语统一审计 + A1 结构化元数据 + A5/A6 提质 + 项目说明版本残留修复）
 
 - **项目说明版本残留修复（W344）**：修正 `docs/00-导读/项目说明.md` 第 45 行残留的 `v2.2.69` 旧版本号（实为 v2.2.94），消除读者视角的版本错乱
