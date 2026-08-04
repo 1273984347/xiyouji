@@ -34,6 +34,10 @@
 | site/en/visualizations.html | W348 | v2.2.99 新建·英文站导览·85 个 site/data 可视化分页入八簇（含每页说明与直链） |
 | site/en/character-wukong.html | W348 | v2.2.99 新建·英文站深度页·孙悟空（名号/石生/反天/13500 斤金箍棒/心猿·跨可视化链接） |
 | site/en/methodology.html | W348 | v2.2.99 新建·英文站指南·全站读法（内容地图/A4 七段式/宣纸设计语言/双索引/零编造门禁） |
+| site/en/character-tangseng.html | W349 | v2.3.0 新建·英文站深度页·唐僧（Belbin 协调者/五维心理画像/与悟空信任张力·江流儿→旃檀功德佛） |
+| site/en/character-bajie.html | W349 | v2.3.0 新建·英文站深度页·猪八戒（天蓬→猪→净坛使者/团队社交胶水/食欲喜剧） |
+| site/en/character-shaseng.html | W349 | v2.3.0 新建·英文站深度页·沙悟净（卷帘大将→金身罗汉/执行者/平稳心理轴） |
+| site/en/essay-quanzhen-daoism.html | W349 | v2.3.0 新建·英文站 E10 译介·道教全真派内丹学读法（心猿/金公/木母/刀圭·四理论家·四概念） |
 
 
 

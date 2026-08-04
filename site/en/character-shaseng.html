@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#faf7f2">
-    <title>The Hundred Couplets — Annotated English Edition</title>
+    <title>Sha Wujing, the Sand Monk — Annotated English Edition</title>
     <style>
         :root {
             color-scheme: light;
@@ -177,20 +177,6 @@
         }
         .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
         .related a:hover { text-decoration: underline; }
-        /* gallery cards for visualizations page */
-        .cat { margin-top: 30px; }
-        .cat h2 { margin-top: 0; }
-        .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
-        .vcard {
-            background: #fff8ec;
-            border: 1px solid var(--line);
-            border-radius: 6px;
-            padding: 12px 14px;
-        }
-        .vcard a { color: var(--accent-2); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
-        .vcard a:hover { text-decoration: underline; }
-        .vcard p { font-size: 0.82rem; color: var(--ink-soft); margin: 4px 0 0; }
-        @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } article { padding: 24px 20px; } }
         footer {
             text-align: center;
             padding: 24px;
@@ -208,71 +194,70 @@
 </head>
 <body>
     <nav class="breadcrumb">
-        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Essay E9
+<a href="index.html">EN Home</a> &middot; <a href="characters.html">The Pilgrims</a> &middot; Deep Dive
     </nav>
     <header class="hero">
         <div class="lang-switch">
             <a href="../index.html" lang="zh-CN">中文</a>
         </div>
-        <h1>The Hundred Couplets</h1>
-        <div class="subtitle">ESSAY E9 · SUMMARY TRANSLATION</div>
-        <div class="tagline">Every chapter wears a seven-character couplet like a frontispiece — part prosody, part plot-summary, part Eight-Legged Essay.</div>
+        <h1>Sha Wujing, the Sand Monk</h1>
+        <div class="subtitle">CHARACTER &middot; DEEP DIVE</div>
+        <div class="tagline">Curtain-Lifting General fallen to the Flowing-Sand River, Golden-Body Arhat — the quiet backbone who simply endures.</div>
     </header>
 
     <main class="container">
         <div class="source-note">
-            A summary translation of <a href="../../docs/05-诗词歌赋/回目对联分析专题.md">docs/05-诗词歌赋/回目对联分析专题.md</a>. The Chinese original analyzes all 100 chapter title-couplets through three coordinates — prosody, chapter-poetics, and the structural homology with Ming Eight-Legged Essays.
+A long-form English portrait of Sha Wujing, grounded in the canonical narrative and the project's team/psychology datasets (<code>pilgrim-team-dynamic-network</code>, <code>pilgrim-team-psychology-arc</code>, <code>character-relationship-3d</code>). Belbin and radar figures are taken directly from those datasets.
         </div>
 
         <article>
-            <h2>Three Coordinates <span class="anchor">↔ how to read a title</span></h2>
-            <ul>
-                <li><strong>Prosody</strong> (Wang Li): level/oblique tone parallelism, part-of-speech matching, equal length.</li>
-                <li><strong>Chapter-poetics</strong> (Qi Gong, Liu Shide): the title as the chapter's "frontispiece" and abstract.</li>
-                <li><strong>Eight-Legged homology</strong> (Qian Zhongshu): structural kinship with the Ming exam essay's paired "breaking-open" lines.</li>
-            </ul>
 
-            <h2>Prosody <span class="anchor">↔ 7 + 7 characters</span></h2>
+            <h2>Names &amp; Identities <span class="anchor">&#8596; curtain-lifter to monk</span></h2>
             <p>
-                All 100 chapter titles are <strong>seven-character couplets</strong> (fourteen characters total). Tone patterns follow the rule "flexible on 1-3-5, strict on 2-4-6." Chapter 1 — <em>"Lingu-gen yu-yun yuan-liu chu / Xin-xing xiu-chi da-dao sheng"</em> — pairs level and oblique on the even positions exactly as Wang Li prescribes. The regularity actually exceeds that of <em>Investiture of the Gods</em> or <em>Jin Ping Mei</em>, evidence of Wu Cheng'en's deliberate craft.
+                He is <strong>Sha Wujing</strong> (沙悟净, also called <strong>Sha Seng</strong> 沙僧, "Sand Monk"). Before his fall he was <strong>Curtain-Lifting General</strong> (卷帘大将), a bodyguard of the Jade Emperor, demoted to a man-eating sand-demon at the Flowing-Sand River for smashing a precious vase at a heavenly banquet. At the journey's end he becomes the <strong>Golden-Body Arhat</strong> (金身罗汉). The least colourful of the pilgrims is also the one who never leaves.
             </p>
 
-            <h2>Five Types <span class="anchor">↔ semantic relations</span></h2>
-            <ul>
-                <li><strong>Causal</strong> — Ch.1: "the spirit-root issues forth / mind-nature cultivates the Great Way."</li>
-                <li><strong>Action</strong> — Ch.14: "the mind-monkey returns to the right / the six thieves vanish."</li>
-                <li><strong>Scene</strong> — Ch.22: "Bajie battles the Quicksand River / Mokṣa receives Wujing."</li>
-                <li><strong>Symbolic</strong> — Ch.58: "the two minds disturb the great cosmos / the one body hardly cultivates true nirvāṇa."</li>
-                <li><strong>Power-structure</strong> — Ch.8: "the Buddha makes scriptures for the West / Guanyin bears the edict to Chang'an."</li>
-            </ul>
-
-            <h2>Structure Stats <span class="anchor">↔ how regular?</span></h2>
-            <table>
-                <tr><th>Dimension</th><th>Regularity</th></tr>
-                <tr><td>Length (equal characters)</td><td>100%</td></tr>
-                <tr><td>Lexical (noun vs. noun, verb vs. verb)</td><td>~85%</td></tr>
-                <tr><td>Tonal (strict level/oblique)</td><td>~70%</td></tr>
-            </table>
-            <p>The occasional looseness is intentional — some couplets sacrifice meter for imagery, raising their philosophical charge.</p>
-
-            <h2>Narrative Function <span class="anchor">↔ 14 characters, one chapter</span></h2>
+            <h2>The Quiet Backbone <span class="anchor">&#8596; steadiness personified</span></h2>
             <p>
-                A title-couplet is a fourteen-character <strong>chapter abstract</strong>. Chapter 22's "Bajie battles / Mokṣa receives" compresses an entire 起承转合 arc — conflict in the upper line, resolution in the lower. The couplets therefore double as a built-in table of contents and a forecast of each chapter's emotional key.
+                The project's network describes him simply: "卷帘大将转世，沉稳老实，挑担随行。". He carries the luggage, mediates the quarrels, and asks for nothing. In a team of a brilliant rebel, a fretful saint, and a comic glutton, Sha is the load-bearing wall — unnoticed precisely because he never shifts.
             </p>
 
-            <a class="nav-back" href="index.html">← Back to EN Home</a>
+            <h2>Team Role <span class="anchor">&#8596; Belbin: Implementer</span></h2>
+            <p>
+                His Belbin profile is the steadiest on the team: <strong>Implementer</strong> (9) and <strong>Completer-Finisher</strong> (7) lead, while Shaper and Plant sit at 2. He is the one who executes the plan without reinventing it and closes the task without drama. Every functioning team needs its Sha Wujing; few novels bother to write one.
+            </p>
+
+            <h2>Psychology Profile <span class="anchor">&#8596; radar: the calm axis</span></h2>
+            <p>
+                His five-axis radar reads <strong>Fear 4</strong>, <strong>Resolve 7</strong>, <strong>Anger 2</strong>, <strong>Wisdom 6</strong>, <strong>Obedience 9</strong>. The profile is strikingly flat and moderate — no spike, no deficit. That flatness is the point: Sha is the emotional baseline against which the others' storms are measured.
+            </p>
+
+            <h2>Why the Third Disciple Matters <span class="anchor">&#8596; the unshown labour</span></h2>
+            <p>
+                Sha's near-invisibility is the book's quiet argument that redemption is not only for the spectacular. Wukong wins by force, Sanzang by faith, Bajie by surviving his own weakness; Sha wins by simply enduring and obeying. The pilgrimage needed all four modes, and the fourth is the one nobody writes a legend about.
+            </p>
+
+            <h2>Explore the Data <span class="anchor">&#8596; cross-linked</span></h2>
+            <ul>
+                <li><a href="characters.html">The Pilgrims</a> — the five as a project team.</li>
+                <li><a href="../data/pilgrim-team-dynamic-network.html">Team Dynamic Network</a> — Sha's Implementer role.</li>
+                <li><a href="../data/pilgrim-team-psychology-arc.html">Psychology Arc</a> — his flat, stable trajectory.</li>
+                <li><a href="character-bajie.html">Zhu Bajie</a> — the louder brother he balances.</li>
+            </ul>
+
+            <a class="nav-back" href="index.html">&#8592; Back to EN Home</a>
             <div class="related">
                 <strong>Related:</strong>
-                <a href="essay-historical-xuanzang.html">E7 · Historical vs. Fictional Xuanzang</a> · <a href="essay-divine-bureaucracy.html">E8 · Heaven Is a Yamen</a> · <a href="../data/poetry-rhythm-analysis.html">Poetry Rhythm visualization</a>
+<a href="characters.html">The Pilgrims</a> &middot; <a href="character-bajie.html">Zhu Bajie</a> &middot; <a href="character-wukong.html">Sun Wukong</a>
             </div>
         </article>
     </main>
 
     <footer>
-        © <span id="footer-year">2026</span> Journey to the West · Annotated Project · MIT License
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
         <div class="footer-index">
-            <a href="index.html">EN Home</a> ·
-            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.0 W349 ·
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.0 W349 &middot;
             <a href="../../scripts/output/file-index.md">file-index.md</a> W349
         </div>
     </footer>

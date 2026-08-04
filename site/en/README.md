@@ -1,21 +1,21 @@
-# Journey to the West · Annotated — English Edition (W348)
+# Journey to the West · Annotated — English Edition (W349)
 
 > i18n internationalization subproject of the main **Journey to the West · Annotated** project.
-> Version: v2.2.99 · W348 · 2026-08-04
+> Version: v2.3.0 · W349 · 2026-08-04
 
 ## Overview
 
-`site/en/` is the English-language subset of the main site at `site/`. It provides a curated entry point for non-Chinese readers: a landing page, a simplified data dashboard, a selected academic papers index, four data pages (the 81 tribulations, the pilgrims, the bestiary, and a 100-chapter map), eight long-form essays in summary-translation form, a deep-dive character study, a methodology reading-guide, and an English tour of all 85 visualizations. The full Chinese site remains the canonical edition; the English pages link back to it through Chinese↔English switch links.
+`site/en/` is the English-language subset of the main site at `site/`. It provides a curated entry point for non-Chinese readers: a landing page, a simplified data dashboard, a selected academic papers index, four data pages (the 81 tribulations, the pilgrims, the bestiary, and a 100-chapter map), ten long-form essays in summary-translation form, four deep-dive character studies, a methodology reading-guide, and an English tour of all 85 visualizations. The full Chinese site remains the canonical edition; the English pages link back to it through Chinese↔English switch links.
 
-This subproject was created in W234-E4 (v2.2.40) as part of the AVES (Academic / Visualization / Essay / Site) fourth-direction batch. It was expanded in W345 (v2.2.95) with three new essays (E4–E6) drawn from the W344 quality-enhancement A5/A6 articles, growing the subset from 7 to 10 files. It was further expanded in W347 (v2.2.98) with four data pages (TRIBULATIONS · PILGRIMS · BESTIARY · CHAPTER-MAP) bridging the project's own datasets (81-hardships, pilgrim-team-*, monster-*, chapters-metadata), growing the subset from 10 to 14 files. It was expanded again in W348 (v2.2.99) with three scholarship essays (E7–E9: historical vs. fictional Xuanzang, Heaven as a Ming bureaucracy, the hundred chapter-couplets), a visualization tour (85 pages in eight clusters), a deep-dive on Sun Wukong, and a methodology reading-guide — growing the subset from 14 to 20 files.
+This subproject was created in W234-E4 (v2.2.40) as part of the AVES (Academic / Visualization / Essay / Site) fourth-direction batch. It was expanded in W345 (v2.2.95) with three new essays (E4–E6) drawn from the W344 quality-enhancement A5/A6 articles, growing the subset from 7 to 10 files. It was further expanded in W347 (v2.2.98) with four data pages (TRIBULATIONS · PILGRIMS · BESTIARY · CHAPTER-MAP) bridging the project's own datasets (81-hardships, pilgrim-team-*, monster-*, chapters-metadata), growing the subset from 10 to 14 files. It was expanded again in W348 (v2.2.99) with three scholarship essays (E7–E9: historical vs. fictional Xuanzang, Heaven as a Ming bureaucracy, the hundred chapter-couplets), a visualization tour (85 pages in eight clusters), a deep-dive on Sun Wukong, and a methodology reading-guide — growing the subset from 14 to 20 files. It was expanded once more in W349 (v2.3.0) with three pilgrim deep-dives (Tang Sanzang, Zhu Bajie, Sha Wujing) and an essay on Quanzhen Daoism (E10) reading the novel's allegorical layer as a Daoist inner-alchemy manual — growing the subset from 20 to 24 files.
 
-## File list (20 files)
+## File list (24 files)
 
 All files live under `d:\1\xiyouji\site\en\`.
 
 | # | File | Lines | Purpose |
 |---|---|---|---|
-| 1 | `index.html` | ~360 | English landing page. Title "Journey to the West · Annotated", subtitle "A hybrid reading project". Eighteen entry cards (dashboard / academic papers / 4 data pages / 8 essays / 2 guides / visualization tour / deep-dive). |
+| 1 | `index.html` | ~375 | English landing page. Title "Journey to the West · Annotated", subtitle "A hybrid reading project". Twenty-two entry cards (dashboard / academic papers / 4 data pages / 10 essays / 4 deep-dives / 2 guides / visualization tour). |
 | 2 | `dashboard.html` | ~370 | English data dashboard. Five core KPI cards (100 chapters / 60 character analyses / 91 theme essays / 68 visualizations / 55 academic papers). |
 | 3 | `academic-papers.html` | ~210 | Academic papers index. Ten representative entries selected from the 55-entry bibliography. Columns: ID / Author / Year / Title / Journal / Topic. |
 | 4 | `essay-ai-era.html` | ~250 | Summary translation of `docs/06-个人随笔/西游与AI时代.md`. Five paragraphs: Subhuti · headband · mirror test · 81 tribulations · Mind Monkey. |
@@ -35,6 +35,10 @@ All files live under `d:\1\xiyouji\site\en\`.
 | 18 | `visualizations.html` | ~520 | English gallery + reading guide of the ~85 interactive D3.js pages under `site/data/`, grouped into eight analytical clusters with per-page descriptions and live links. |
 | 19 | `character-wukong.html` | ~300 | Deep-dive portrait of Sun Wukong: identities, stone birth, mind / 72 transformations, rebellion, the 13,500-jin staff, the mind-monkey, reception; cross-links to character visualizations. |
 | 20 | `methodology.html` | ~310 | Reading guide to the whole project: hybrid static-first design, content map (A1–A6/S counts), seven-part A4 template, rice-paper design language, dual-index traceability, zero-fabrication data trust. |
+| 21 | `character-tangseng.html` | ~290 | Deep-dive portrait of Tang Sanzang: identities, the faithful centre, Belbin Coordinator role, psychology radar (faith over fury), the conflict with Wukong, the arc to Buddha. |
+| 22 | `character-bajie.html` | ~270 | Deep-dive portrait of Zhu Bajie: identities (Tianpeng → pig → Altar-Cleaner), the earthy one, Belbin social glue, psychology radar, comic relief. |
+| 23 | `character-shaseng.html` | ~260 | Deep-dive portrait of Sha Wujing: identities, the quiet backbone, Belbin Implementer, flat psychology radar, the unshown labour. |
+| 24 | `essay-quanzhen-daoism.html` | ~300 | Summary translation of `docs/04-文化与历史背景/西游与道教全真派专题.md`. Quanzhen reading: inner-alchemy codebook (心猿/金公/木母/刀圭), four theorists (Wang/Qiu/Ma/Zhang), four core concepts; the novel as a Daoist cultivation manual. |
 
 ## Translation strategy
 
@@ -49,19 +53,19 @@ All files live under `d:\1\xiyouji\site\en\`.
 - `site/en/` is a **subset** of `site/`, not a fork. The English pages link outward to the main site's full visualizations (e.g. `../data/cognitive-psychology.html`, `../data/philosophy.html`) and to the original Chinese essays under `docs/06-个人随笔/`.
 - The main site (`site/index.html`, `site/dashboard.html`, `site/data/*.html`) remains the canonical, complete edition. The English subset offers a curated on-ramp for non-Chinese readers; it does not attempt to mirror every page.
 - The English dashboard's KPIs (`100 / 60 / 91 / 68 / 55`) match the project's current totals as of W234; they will be updated alongside the main site as the project grows.
-- Footer double-index links (`../../CHANGELOG.md` v2.2.99 W348 / `../../scripts/output/file-index.md` W348) appear on every English HTML page, matching the footer convention used across the main site.
+- Footer double-index links (`../../CHANGELOG.md` v2.3.0 W349 / `../../scripts/output/file-index.md` W349) appear on every English HTML page, matching the footer convention used across the main site.
 
 ## Verification
 
 Each English HTML page was verified to contain:
 
 1. A recognizable English title ("Journey to the West" or the corresponding section title).
-2. The footer double-index: `CHANGELOG.md v2.2.99 W348` and `file-index.md W348`.
+2. The footer double-index: `CHANGELOG.md v2.3.0 W349` and `file-index.md W349`.
 3. A Chinese↔English switch link pointing back to `../index.html` or the corresponding main-site page.
 
 ## Scope boundaries
 
-This subproject creates the 20 files listed above under `site/en/`. It does **not**:
+This subproject creates the 24 files listed above under `site/en/`. It does **not**:
 
 - Create `scripts/a11y_audit.py` (handled by a separate subagent).
 - Create `.github/workflows/` CI definitions (handled by a separate subagent).
