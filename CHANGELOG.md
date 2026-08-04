@@ -8,6 +8,12 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.3.6（2026-08-04）：W355 英文站 A5 明代思想丛译介（三篇 Ming-thought essay·site/en/ 43→46 文件）
+
+- **英文站新增 3 页（site/en/ 43→46 文件）**：essay-ming-social-customs.html（E28·明代社会风俗·五大风俗维度 marriage/dress/diet/burial/exam=制度性风俗·福柯治理术·13 处 line 锚点·古今对位五组）、essay-ming-literary-thought.html（E29·明代文学思想·四位文学思想家 李贽童心说/袁宏道公安派/归有光唐宋派/李梦阳前后七子·四大名著横向对位·五阶段纵向定位）、essay-ming-intellectual-history.html（E30·明代思想史·四位思想家 王阳明心学/李贽童心异端/王畿泰州学派/黄宗羲君客主·四组案例对照 line 1459/4370/1868/7085·八层明代镜像闭环）；按"策展摘要 + 中文源文回链 + 中文切换 + footer 双索引 v2.3.6 W355"约定
+- **英文站入口与文档同步**：site/en/index.html 入口卡片 41→44、README 文件清单 43→46、版本号升 v2.3.6 W355；全部 45 个 EN HTML 页 footer 双索引统一升级
+- **六文档 + dukou-engine footer 同步 v2.3.6 W355**；verify_delivery 门禁全绿
+
 ### v2.3.5（2026-08-04）：W354 英文站明代制度丛续译介（A5 四篇 Ming-institution essay·site/en/ 39→43 文件）
 
 - **英文站新增 4 页（site/en/ 39→43 文件）**：essay-ming-politics.html（E24·明代政治制度·天庭=明代政治镜像·皇权/官僚/藩封/法律四重对照·line 522/621/864/981·四理论家 黄仁宇/钱穆/孟森/谢国桢）、essay-ming-economy.html（E25·明代经济制度·天庭财政/取经团队=粮长/功德货币/长时段·line 660/840/1149/1393/2073/7085·四理论家 黄仁宇/梁方仲/韦伯/布罗代尔）、essay-ming-military.html（E26·明代军事制度·天兵=卫所兵/李天王=总兵/哪吒=家丁/二郎神=土司·四学者 黄仁宇/茅海建/梁方仲/孟森）、essay-ming-religion.html（E27·明代宗教制度·僧官/昊天上帝/关帝观音/度牒考核·line 981/1219/7085·四理论家 黄仁宇/钱穆/韦伯/杨庆堃）
