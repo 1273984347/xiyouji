@@ -45,6 +45,11 @@
 | site/en/essay-ming-metaphor.html | W351 | v2.3.2 新建·英文站 E14 译介·明代隐喻（六重隐喻/官场/荫庇株连/市民文化/宗教政治） |
 | site/en/essay-three-teachings.html | W351 | v2.3.2 新建·英文站 E15 译介·佛道思想（三教合一/五蕴对应五人/内丹三家相见） |
 | site/en/site-map.html | W351 | v2.3.2 新建·英文站全局主题索引·七簇 29 链接 |
+| site/en/essay-cipai-xijiangyue.html | W352 | v2.3.3 新建·英文站 E16 译介·西江月词牌（52字双调·四理论家 王国维/叶嘉莹/龙榆生/夏承焘·四重境界 line 522/864/1393/7085） |
+| site/en/essay-cipai-linjiangxian.html | W352 | v2.3.3 新建·英文站 E17 译介·临江仙词牌（60字·四理论家 王国维/叶嘉莹/龙榆生/唐圭璋·四重境界 line 981/2306/4432/7052） |
+| site/en/essay-cipai-mantingfang.html | W352 | v2.3.3 新建·英文站 E18 译介·满庭芳词牌（全书唯一明名词牌·樵夫 line 39·四理论家 王国维/叶嘉莹/龙榆生/缪钺·四重境界 line 39/981/4792/7085） |
+| site/en/essay-cipai-shuidiaogetou.html | W352 | v2.3.3 新建·英文站 E19 译介·水调歌头词牌（95字长调·四理论家 王国维/叶嘉莹/龙榆生/缪钺·苏轼对照·四重境界 line 522/864/1393/7085） |
+
 
 
 

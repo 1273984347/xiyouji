@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>Mantingfang: The Only Named Tune in the Book — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.03em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb">
+<a href="index.html">EN Home</a> &middot; <a href="essay-chapter-couplets.html">Essays</a> &middot; E18
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>Mantingfang: The Only Named Tune in the Book</h1>
+        <div class="subtitle">ESSAY &middot; E18 &middot; POETRY</div>
+        <div class="tagline">Chapter 1, line 39 &mdash; a woodcutter names the tune aloud. The genre's single native anchor.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+A curated English summary of the project's Chinese essay <strong>Xīyóu yǔ Mǎntíngfāng Cípái Shǎngxī</strong> (A6 &middot; W228). Theorists, dates, line anchors, and metric specs are taken from that source; no figures are invented. This is a summary translation, not a full rendering.
+        </div>
+
+        <article>
+
+            <h2>Introduction: The Only Named Tune in the Whole Book <span class="anchor">&#8596; a unique anchor</span></h2>
+            <p>
+                Among the novel's lyric-meter poems, exactly one is named aloud by a character: in chapter 1, line 39, the woodcutter sings and says, <em>"this song is called <strong>Mantingfang</strong>"</em> (满庭芳, "Courtyard Full of Fragrance"). It is the <strong>only explicitly named <em>cipai</em> in the entire 100-chapter novel</strong> &mdash; the genre's native anchor point. The project's Chinese专题 <em>Xīyóu yǔ Mǎntíngfāng Cípái Shǎngxī</em> (A6 &middot; W228) treats that moment as origin: from it, the meter's four realms &mdash; <em>created, with-self, no-self, fulfilled</em> &mdash; map onto four key nodes (lines 39, 981, 4792, 7085).
+            </p>
+
+            <h2>Four Theorists, Four Mirrors <span class="anchor">&#8596; a dialogue</span></h2>
+            <table>
+                <tr><th>Theorist</th><th>Dates</th><th>Signature idea</th><th>Mirror in the novel</th></tr>
+                <tr><td><strong>Wang Guowei</strong> 王国维</td><td>1877&ndash;1927</td><td>Realm theory: created / depicted, with-self / no-self</td><td>The woodcutter's song is a "created realm"; the scripture mission is "with-self"; the Tree-Spirit poetry gathering is "no-self."</td></tr>
+                <tr><td><strong>Ye Jiaying</strong> 叶嘉莹</td><td>1924&ndash;2024</td><td>Evocation of feeling &amp; weak virtue</td><td>The woodcutter sings "when troubled, I recite this to ease my heart" &mdash; feeling aroused to dissolve daily worry.</td></tr>
+                <tr><td><strong>Long Yusheng</strong> 龙榆生</td><td>1902&ndash;1966</td><td>Cipai prosody: Mantingfang = 95 chars, ten lines per counterpart, level rhymes, dense four-character lines</td><td>The woodcutter's verse matches the statute (dense four-character phrasing); Ming literacy in meters is on display.</td></tr>
+                <tr><td><strong>Miao Yue</strong> 缪钺</td><td>1904&ndash;1995</td><td>The nature of the <em>ci</em> form: "small text, light substance, narrow path, hidden realm"</td><td>The woodcutter's "chess-rotted, wood-hewn" is exactly small/light/narrow/hidden &mdash; and the novel keeps ci alive in the Ming "decline."</td></tr>
+            </table>
+
+            <h2>Four Realms Across the Four Nodes <span class="anchor">&#8596; line anchors</span></h2>
+            <ul>
+                <li><strong>Created realm &mdash; ch. 1, line 39 (the woodcutter).</strong> "Watching chess, the ax-handle rots; hewing wood, ding-ding... I sell fuel, buy wine, laugh freely, content myself." Not a depiction of real poverty but a constructed reclusive ideal &mdash; Wang Guowei's "created realm," anchored by the only spoken tune-name in the book.</li>
+                <li><strong>With-self realm &mdash; ch. 8, line 981 (the mission launched).</strong> The Buddha vows to send scripture east, "looking at things with my self" &mdash; the "great self" of a saviour, contrasting the woodcutter's "small self." The mission is with-self on a cosmic scale.</li>
+                <li><strong>No-self realm &mdash; ch. 64, line 4792 (the Tree-Spirit poetry gathering).</strong> At Thorn-Ridge, Tang Seng trades verses with pine, cypress, juniper, bamboo, apricot, plum, and cassia spirits &mdash; "looking at things with things," self and other dissolved. The spell is broken only when the apricot sprite presses marriage &mdash; the no-self realm is fragile in reality.</li>
+                <li><strong>Fulfilled realm &mdash; ch. 100, line 7085 (the five become perfected).</strong> From the woodcutter's created realm, through the Buddha's with-self and the trees' no-self, to apotheosis &mdash; the meter's four realms close into a ring.</li>
+            </ul>
+
+            <h2>Cultural Metaphor: The Woodcutter's Folkness <span class="anchor">&#8596; why it matters</span></h2>
+            <p>
+                Choosing a <em>woodcutter</em> as the meter's bearer is deliberate. In Chinese culture the woodcutter is the go-between of "secular and transcendent" &mdash; from the <em>Book of Songs</em>' "hewing wood, ding-ding" to the immortal-tale of Wang Zhi watching immortals play chess until his ax-handle rots. Wu Cheng'en lets a woodcutter sing Mantingfang, sinking the elite lyric into folk song: in the mid-late Ming, with rising urban culture, meters moved from the scholar's studio to the commoner's "heart-easing" recitation. The woodcutter even says the song was "taught me by an immortal" &mdash; folk belief fused with lyric culture. The book also opens a "meter-meets-fiction" conversation: by naming the tune aloud, it prefigures the later <em>Dream of the Red Chamber</em>'s use of lyric meters inside fiction.
+            </p>
+
+            <h2>Conclusion: The Named Origin of a Wordless Tradition <span class="anchor">&#8596; method</span></h2>
+            <p>
+                Mantingfang is the "origin point" of the novel's lyric reading precisely because it is the one meter spoken by name. From that anchor the Chinese专题 builds the full "created &rarr; with-self &rarr; no-self &rarr; fulfilled" path and closes the A6 three-essay cipai sequence (Xijiangyue &middot; Linjiangxian &middot; Mantingfang). For English readers the lesson is simple but striking: a woodcutter's offhand "this is called Mantingfang" is the key that unlocks a four-realm architecture running the length of the book.
+            </p>
+
+            <h2>Explore Further <span class="anchor">&#8596; cross-linked</span></h2>
+            <ul>
+                <li><a href="essay-cipai-xijiangyue.html">Xijiangyue</a> (E16) &amp; <a href="essay-cipai-linjiangxian.html">Linjiangxian</a> (E17) &mdash; the other two meters of the A6 cipai triad.</li>
+                <li><a href="essay-folk-belief.html">Popular Religion in the Novel</a> (E12) &mdash; the folk substrate behind the woodcutter's "immortal-taught" song.</li>
+                <li><a href="site-map.html">Site Map</a> &mdash; every English page, indexed by cluster.</li>
+                <li><a href="../../docs/05-诗词歌赋/西游与满庭芳词牌赏析专题.md">中文源文 (Chinese source)</a>.</li>
+            </ul>
+
+            <a class="nav-back" href="index.html">&#8592; Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+<a href="essay-cipai-xijiangyue.html">E16 Xijiangyue</a> &middot; <a href="essay-cipai-linjiangxian.html">E17 Linjiangxian</a> &middot; <a href="essay-folk-belief.html">E12 Folk Religion</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.3 W352 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W352
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>Xijiangyue: A Tiny Meter for Four Great Moments — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.03em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb">
+<a href="index.html">EN Home</a> &middot; <a href="essay-chapter-couplets.html">Essays</a> &middot; E16
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>Xijiangyue: A Tiny Meter for Four Great Moments</h1>
+        <div class="subtitle">ESSAY &middot; E16 &middot; POETRY</div>
+        <div class="tagline">How a 52-character lyric meter secretly structures birth, ordeal, discipline, and apotheosis.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+A curated English summary of the project's Chinese essay <strong>Xīyóu yǔ Xījiāngyuè Cípái Shǎngxī</strong> (A6 &middot; W226). Theorists, dates, line anchors, and metric specs are taken from that source; no figures are invented. This is a summary translation, not a full rendering.
+        </div>
+
+        <article>
+
+            <h2>Introduction: A Lyric Meter as a Hidden Spine <span class="anchor">&#8596; the prosody beneath the prose</span></h2>
+            <p>
+                The <em>Journey to the West</em> carries more than eight hundred poems; of these, only about twenty are written to a named <em>cipai</em> (词牌, a fixed lyric meter). The <strong>Xijiangyue</strong> (西江月, "Moon over the West River") is the classic <em>xiaoling</em> &mdash; the short lyric. Its prosody is exact: <em>shuangdiao</em> (双调, two Counterparts), fifty-two characters, four lines per counterpart, level-tone rhymes. The novel never prints the words "Xijiangyue" in its chapter titles, yet the <em>spirit</em> of that meter threads through four pivotal nodes &mdash; the stone monkey's birth, the Bagua furnace, the Band-Tightening spell, and the five pilgrims' apotheosis &mdash; tracing a covert path of <em>created realm &rarr; no-self realm &rarr; with-self realm &rarr; fulfilled realm</em>. This essay follows the project's Chinese专题 <em>Xīyóu yǔ Xījiāngyuè Cípái Shǎngxī</em> (A6 &middot; W226) in reading those four moments as a single lyric arc.
+            </p>
+
+            <h2>Four Theorists, Four Mirrors <span class="anchor">&#8596; a dialogue</span></h2>
+            <table>
+                <tr><th>Theorist</th><th>Dates</th><th>Signature idea</th><th>Mirror in the novel</th></tr>
+                <tr><td><strong>Wang Guowei</strong> 王国维</td><td>1877&ndash;1927</td><td>The "realm" theory (境界说): with-self / no-self / created / depicted realms</td><td>The four nodes are a complete realm-spectrum: birth (created) &rarr; furnace (no-self) &rarr; spell (with-self) &rarr; apotheosis (fulfilled).</td></tr>
+                <tr><td><strong>Ye Jiaying</strong> 叶嘉莹</td><td>1924&ndash;2024</td><td>"Evocation of feeling" (兴发感动) and the "beauty of weak virtue" (弱德之美)</td><td>The stone birth awakens wonder; the spell-bound pain embodies virtue kept under constraint &mdash; feeling aroused, not merely described.</td></tr>
+                <tr><td><strong>Long Yusheng</strong> 龙榆生</td><td>1902&ndash;1966</td><td>The science of <em>cipai</em> prosody (格律学)</td><td>The four nodes' rise&ndash;carry&ndash;turn&ndash;close rhythm answers the meter's four lines per counterpart; level/oblique tones mirror the plot's calm&ndash;motion&ndash;suffering&ndash;joy.</td></tr>
+                <tr><td><strong>Xia Chengtao</strong> 夏承焘</td><td>1900&ndash;1986</td><td>Ci-poetry history: Tang-Five Dynasties sprout &rarr; Song bloom &rarr; Yuan-Ming decline</td><td>The book is written in the Ming "decline" of <em>ci</em>, yet keeps the lyric spirit alive inside fiction &mdash; "preserving ci through the novel."</td></tr>
+            </table>
+
+            <h2>Four Realms Across the Four Nodes <span class="anchor">&#8596; line anchors</span></h2>
+            <ul>
+                <li><strong>Created realm &mdash; ch. 1, line 522 (stone monkey born).</strong> "A fairy stone, split, yields a stone egg; the wind makes it a stone monkey." This is Wang Guowei's <em>created realm</em>: not observed nature but an ideal construction &mdash; heaven-and-earth imagining a monkey into being.</li>
+                <li><strong>No-self realm &mdash; ch. 7, line 864 (the Bagua furnace).</strong> Forty-nine days in Laozi's furnace burn Wukong into the Fiery Eyes. He "looks at things with things," not knowing which is self and which is furnace &mdash; the textbook <em>no-self realm</em>.</li>
+                <li><strong>With-self realm &mdash; ch. 14, line 1393 (the Band-Tightening spell).</strong> Guanyin's spell lets Tang Seng discipline the mind-monkey: "I look at things with my self, so all things take my colour." The箍's pain is the <em>with-self realm</em> &mdash; and Ye Jiaying's "beauty of weak virtue" under constraint.</li>
+                <li><strong>Fulfilled realm &mdash; ch. 100, line 7085 (the five become perfected).</strong> Wukong, crowned Victorious Fighting Buddha, reaches up and the band is simply gone &mdash; with-self and no-self fused, created and depicted merged. The lyric closes on its final rhyme.</li>
+            </ul>
+
+            <h2>Cultural Metaphor: The Ming Decline of Ci, and Its Survival <span class="anchor">&#8596; why it matters</span></h2>
+            <p>
+                The novel appears in the mid-to-late Ming, exactly the period Xia Chengtao calls the "decline of ci": meters loosened, the song-form (qu) pulled talent away from lyric, and many poems lost their evocative charge. Yet Wu Cheng'en folds the <em>spirit</em> of Xijiangyue into narrative &mdash; a quiet "preserving ci through the novel." Three further echoes ring through the meter: the Ming "heart-school" (心学) of Wang Yangming maps onto the four realms (mind-as-principle, innate knowing, the unity of knowledge and action, fulfilled conscience); the three-teachings synthesis shows in the meter's two counterparts (Dao-Buddhist duality) and level rhymes (harmony); and the era's print boom spread <em>cipai</em> manuals even as it hollowed them out &mdash; Wu answers hollow form with living feeling.
+            </p>
+
+            <h2>Conclusion: A Lyric Hiding in Plain Sight <span class="anchor">&#8596; method</span></h2>
+            <p>
+                Read as a Xijiangyue, the novel's four great moments are not isolated spectacles but one fifty-two-character arc &mdash; birth, refinement, discipline, fulfillment. The Chinese专题 argues that the novel's poetry is best understood not as decoration but as a "form-rhythm axis" beside the "shape-axis" of its scenery verse. For English readers this means: when Wukong is born, burned, bound, and crowned, you are also hearing a four-line lyric the author never wrote down but never stopped singing.
+            </p>
+
+            <h2>Explore Further <span class="anchor">&#8596; cross-linked</span></h2>
+            <ul>
+                <li><a href="essay-scenery-poems.html">Original Scenery Poems</a> (E6) &mdash; the "shape-axis" that pairs with this "rhythm-axis."</li>
+                <li><a href="essay-chapter-couplets.html">The Hundred Couplets</a> (E9) &mdash; the seven-character couplets that frame every chapter.</li>
+                <li><a href="character-wukong.html">Sun Wukong</a> &mdash; the mind-monkey who lives all four realms.</li>
+                <li><a href="methodology.html">How to Read This Site</a> &mdash; the project's seven-part template and dual-index traceability.</li>
+                <li><a href="../../docs/05-诗词歌赋/西游与西江月词牌赏析专题.md">中文源文 (Chinese source)</a>.</li>
+            </ul>
+
+            <a class="nav-back" href="index.html">&#8592; Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+<a href="essay-scenery-poems.html">E6 Scenery Poems</a> &middot; <a href="essay-chapter-couplets.html">E9 Couplets</a> &middot; <a href="character-wukong.html">Sun Wukong</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.3 W352 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W352
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
