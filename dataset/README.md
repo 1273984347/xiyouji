@@ -14,7 +14,7 @@
 
 | 文件 | 数据键数 | 大小 | 主要键 |
 |------|---------|------|--------|
-| 81-hardships.json | 6 | 0.7 KB | total, by_cause, by_ending, by_difficulty, cross_cause_ending |
+| 81-hardships.json | 7 | 5.1 KB | total, by_cause, by_ending, by_difficulty, cross_cause_ending, hardships（81 条逐难明细：index/name/chapter/cause/ending/difficulty，源自 scripts/C_情节/hardships_81.py） |
 | ai-dialogue.json | 3 | 12.7 KB | celebrities, journey_quotes, quick_topics |
 | cave-estate.json | 4 | 12.2 KB | caves, by_owner_rank, by_region, top_luxury |
 | century-dialogue.json | 2 | 1.5 KB | triangle_dialogue, roundtable_topics |

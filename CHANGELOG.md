@@ -8,6 +8,11 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.2.97（2026-08-04）：W346 数据闭环——八十一难逐难明细填充
+
+- **`dataset/81-hardships.json` 数据闭环（W346）**：该数据集此前 `hardships` 数组为空（仅聚合轴 `by_cause`/`by_ending`/`by_difficulty`/`cross_cause_ending` 已填），属"半空"数据集。现从项目既有权威源 `scripts/C_情节/hardships_81.py`（世德堂本末尾灾难簿为骨架·参校近人整理）→ `scripts/output/data/hardships_81.json` 桥接 81 条逐难明细（index/name/chapter/cause/ending/difficulty）到 `hardships` 字段，前 80 难 index→name 与 `dataset/text-search.json` 第 99 回「菩萨灾难簿」原文逐难对齐。新增可重跑桥接脚本 `scripts/_build_81_hardships.py`，写入前断言四项聚合轴与既有值 100% 吻合（如来/观音安排 27·真正野怪 28·天界/西天坐骑下凡 16·人心自生魔障 10；被接走 49·被打死 25·被收编 7；悟空独立 42·搬救兵 39）。`dataset/README.md` 第 17 行登记键补 `hardships`、大小 0.7→5.1 KB。
+- **六文档同步已执行（v2.2.97 + W346）**：统一升 v2.2.97、W 标到 W346，verify_delivery 门禁全绿 ✅（中文内容计数 A1-A6 总 629 不变；dataset 仍 42 JSON，`81-hardships.json` 由半空变闭环不增计数）
+
 ### v2.2.96（2026-08-04）：W345 英文站扩张（A5/A6 三篇专题译介 + 入口与文档同步）
 
 - **英文站 A5/A6 三篇摘要页（W345）**：按 `site/en/` 既有"策展摘要、非全文翻译"约定（hero + source-note + article + footer 双索引 + 中文切换链接），新增 3 个英文 HTML 页，将 W344 的 3 篇 A5/A6 专题译介为非中文读者的精选入口—— `site/en/essay-zen-koan-vs-neidan.html`（禅宗公案顿悟 × 清代内丹渐修两种读法并置）、`site/en/essay-version-evolution.html`（南宋诗话—1592 世德堂本之间"失落的平话层"推考·明确标注推测/残存）、`site/en/essay-scenery-poems.html`（景物诗按"山水奇观/旅途即景/禅境灵域"三型分类赏析·例证逐句核对原著）。每页引文均来自已核对的中文源文。
