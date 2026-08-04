@@ -5,11 +5,11 @@
 
 ## Overview
 
-`site/en/` is the English-language subset of the main site at `site/`. It provides a curated entry point for non-Chinese readers: a landing page, a simplified data dashboard, a selected academic papers index, four data pages (the 81 tribulations, the pilgrims, the bestiary, and a 100-chapter map), thirty-two long-form essays in summary-translation form, five deep-dive character studies, a methodology reading-guide, a site map, and an English tour of all 85 visualizations. The full Chinese site remains the canonical edition; the English pages link back to it through Chinese↔English switch links.
+`site/en/` is the English-language subset of the main site at `site/`. It provides a curated entry point for non-Chinese readers: a landing page, a simplified data dashboard, a selected academic papers index, four data pages (the 81 tribulations, the pilgrims, the bestiary, and a 100-chapter map), thirty-six long-form essays in summary-translation form, five deep-dive character studies, a methodology reading-guide, a site map, and an English tour of all 85 visualizations. The full Chinese site remains the canonical edition; the English pages link back to it through Chinese↔English switch links.
 
 This subproject was created in W234-E4 (v2.2.40) as part of the AVES (Academic / Visualization / Essay / Site) fourth-direction batch. It was expanded in W345 (v2.2.95) with three new essays (E4–E6) drawn from the W344 quality-enhancement A5/A6 articles, growing the subset from 7 to 10 files. It was further expanded in W347 (v2.2.98) with four data pages (TRIBULATIONS · PILGRIMS · BESTIARY · CHAPTER-MAP) bridging the project's own datasets (81-hardships, pilgrim-team-*, monster-*, chapters-metadata), growing the subset from 10 to 14 files. It was expanded again in W348 (v2.2.99) with three scholarship essays (E7–E9: historical vs. fictional Xuanzang, Heaven as a Ming bureaucracy, the hundred chapter-couplets), a visualization tour (85 pages in eight clusters), a deep-dive on Sun Wukong, and a methodology reading-guide — growing the subset from 14 to 20 files. It was expanded once more in W349 (v2.3.0) with three pilgrim deep-dives (Tang Sanzang, Zhu Bajie, Sha Wujing) and an essay on Quanzhen Daoism (E10) reading the novel's allegorical layer as a Daoist inner-alchemy manual — growing the subset from 20 to 24 files. It was expanded in W350 (v2.3.1) with the fifth pilgrim deep-dive (Ao Lie, the White Dragon Horse) completing the five-pilgrim set, plus two religion essays — Chan Buddhism (E11) and popular religion (E12) — reading the novel's allegorical layer as a Buddhist mind-cultivation tale beneath a folk-religious substrate, growing the subset from 24 to 27 files. It was expanded in W351 (v2.3.2) with three culture essays (E13 the making of the novel, E14 the Ming in disguise, E15 three-teachings synthesis) and a Site Map indexing every English page by cluster — growing the subset from 27 to 31 files. It was expanded in W352 (v2.3.3) with four A6 lyric-meter (cipai) essays (E16 Xijiangyue, E17 Linjiangxian, E18 Mantingfang, E19 Shuidiaogetou) reading the novel's poetry through four theorists and four lyric realms — growing the subset from 31 to 35 files. It was expanded in W353 (v2.3.4) with four A5 Ming-institution essays (E20 the imperial exam, E21 the weisuo garrison, E22 the maritime ban, E23 three-realm justice) reading the novel's politics through Huang Rensong, Elman, Miyazaki, Weber, Gu Cheng, Yu Zhijia, Peng Yong, Fan Shuzhi, Li Qing, Timothy Brook, Qu Tongzu, Shiga Shūzō, and Terada Hiroaki — growing the subset from 35 to 39 files. It was expanded in W354 (v2.3.5) with four more A5 Ming-institution essays (E24 the Ming court, E25 the heavenly ledger, E26 the wei-so army, E27 ordination by decree), extending the "Ming mirror" series to politics, economy, military, and religion — growing the subset from 39 to 43 files. It was expanded in W355 (v2.3.6) with three A5 Ming-thought essays (E28 customs as governance, E29 from archaism to xinling, E30 the mind as cosmos), completing the eight-layer "Ming mirror" across politics, economy, deities, judiciary, military, exam, religion, and intellectual history — growing the subset from 43 to 46 files. It was expanded in W356 (v2.3.7) with two A6 poetry essays (E31 the opening verse as "constitutional" poetics, E33 the imagery lineage of stone·peach·bone·sutra through Pound, Eliot, Bachelard, and Liu Xie) — growing the subset from 46 to 48 files. Note: scenery-poem classification (the third A6 item) was already covered earlier by E6 "Original Scenery Poems," so no duplicate was produced.
 
-## File list (48 files)
+## File list (51 files)
 
 All files live under `d:\1\xiyouji\site\en\`.
 
@@ -64,6 +64,11 @@ All files live under `d:\1\xiyouji\site\en\`.
 | 43 | `essay-poetry-opening.html` | ~270 | Summary translation of `docs/05-诗词歌赋/开篇诗专题深化.md` (W182). The opening verse as "constitutional" poetics: three poetic coordinates (Wang Guowei's realm theory / Zhu Guangqian / Ye Jiaying), six frame couplets (chs. 1/7/8/14/22/100) folding the Three Teachings into eight characters, the Dao→Buddha→synthesis power arc, and a past-present table. |
 | 44 | `essay-poetry-imagery.html` | ~250 | Summary translation of `docs/05-诗词歌赋/西游诗词意象谱系专题.md` (W288). The imagery lineage: four imagery theorists (Pound / Eliot / Bachelard / Liu Xie) reading four images — stone-monkey, peach, white-bone, true-sutra — across Creation→Desire→Illusion→Awakening, with an East-meets-West table (Liu Xie c. 500 precedes Western Imagism by 1,400 years). |
 
+| 45 | `essay-character-fu.html` | ~250 | Summary translation of `docs/05-诗词歌赋/原著人物赋诗词赏析专题.md`. Character-fu as the novel's verse-machine: four fu-types (debut / transformation / enlightenment / apotheosis) read through Liu Xie, Zhong Rong, Sikong Tu, and Wang Guowei; Ming mirrors (Archaists / Gong'an xinling / opera song-speech). |
+| 46 | `essay-rhythm-analysis.html` | ~240 | Summary translation of `docs/05-诗词歌赋/西游诗词韵律分析专题.md`. Four dimensions of sound-law — tone-level, parallelism, rhythm, rounding-completion — through Wang Li, Qi Gong, Zhou Zhenfu, and Zhu Guangqian at four nodes (lines 522 / 864 / 1393 / 7085); the oblique-open / level-close closure. |
+| 47 | `essay-thematic-poetry.html` | ~230 | The project's own Journey-inspired "themed creations": four poems (Five-Element Mountain / Three Strikes on White Bone / True &amp; False Monkey King / Lingyun Ford) presented in faithful translation; "old bottle, new wine." |
+| 48 | `essay-original-poetry.html` | ~250 | Summary translation of `docs/05-诗词歌赋/原著诗词赏析.md`. Umbrella overview of the ~800 poems: four functions, thematic groupings, the hundred chapter-couplets, genre distribution (~6% / 37% / 10% / 25% / 4% / 6% / 5%), and a character-praise comparison. |
+
 ## Translation strategy
 
 - **Curated summaries, not full translations.** Each English page condenses its Chinese source rather than translating word-for-word. The aim is to preserve the core argument and signature analogies while fitting a manageable English reading length.
@@ -77,19 +82,19 @@ All files live under `d:\1\xiyouji\site\en\`.
 - `site/en/` is a **subset** of `site/`, not a fork. The English pages link outward to the main site's full visualizations (e.g. `../data/cognitive-psychology.html`, `../data/philosophy.html`) and to the original Chinese essays under `docs/06-个人随笔/`.
 - The main site (`site/index.html`, `site/dashboard.html`, `site/data/*.html`) remains the canonical, complete edition. The English subset offers a curated on-ramp for non-Chinese readers; it does not attempt to mirror every page.
 - The English dashboard's KPIs (`100 / 60 / 91 / 68 / 55`) match the project's current totals as of W234; they will be updated alongside the main site as the project grows.
-- Footer double-index links (`../../CHANGELOG.md` v2.3.7 W356 / `../../scripts/output/file-index.md` W356) appear on every English HTML page, matching the footer convention used across the main site.
+- Footer double-index links (`../../CHANGELOG.md` v2.3.8 W357 / `../../scripts/output/file-index.md` W357) appear on every English HTML page, matching the footer convention used across the main site.
 
 ## Verification
 
 Each English HTML page was verified to contain:
 
 1. A recognizable English title ("Journey to the West" or the corresponding section title).
-2. The footer double-index: `CHANGELOG.md v2.3.7 W356` and `file-index.md W356`.
+2. The footer double-index: `CHANGELOG.md v2.3.8 W357` and `file-index.md W357`.
 3. A Chinese↔English switch link pointing back to `../index.html` or the corresponding main-site page.
 
 ## Scope boundaries
 
-This subproject creates the 48 files listed above under `site/en/`. It does **not**:
+This subproject creates the 51 files listed above under `site/en/`. It does **not**:
 
 - Create `scripts/a11y_audit.py` (handled by a separate subagent).
 - Create `.github/workflows/` CI definitions (handled by a separate subagent).

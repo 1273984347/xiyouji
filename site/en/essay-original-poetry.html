@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>The Novel's Own Verse &mdash; Eight Hundred Poems in a Hundred Chapters</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2; --paper: #ffffff; --ink: #23201A; --ink-soft: #6B6455;
+            --accent: #c8463a; --accent-soft: #e9b885; --accent-2: #3a6b8c; --accent-3: #C9A063;
+            --accent-4: #6B8E5A; --rebel: #8c2a2a; --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8; min-height: 100vh; }
+        .hero { background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4; padding: 60px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+        .hero::after { content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%); pointer-events: none; }
+        .lang-switch { position: absolute; top: 18px; right: 24px; font-size: 0.85rem; z-index: 5; }
+        .lang-switch a { color: var(--accent-soft); text-decoration: none; padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35); border-radius: 4px; }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 { font-size: 2.1rem; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 8px; position: relative; z-index: 1; }
+        .hero .subtitle { font-size: 0.95rem; color: var(--accent-soft); letter-spacing: 0.25em; position: relative; z-index: 1; }
+        .hero .tagline { margin-top: 12px; font-size: 0.85rem; color: rgba(245, 233, 212, 0.65); font-style: italic; position: relative; z-index: 1; }
+        .breadcrumb { font-size: 0.82rem; color: var(--ink-soft); padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--line); }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container { max-width: 820px; margin: -30px auto 60px; padding: 0 24px; position: relative; z-index: 2; }
+        .source-note { background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+            padding: 16px 20px; box-shadow: var(--shadow); margin-bottom: 32px; font-size: 0.88rem; color: var(--ink-soft); }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 36px 40px; box-shadow: var(--shadow); }
+        article h2 { font-size: 1.35rem; color: var(--accent); margin: 28px 0 12px; padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft); letter-spacing: 0.03em; }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor { font-size: 0.78rem; color: var(--accent-2); font-family: "JetBrains Mono", monospace; margin-left: 8px; letter-spacing: 0.1em; font-weight: 400; }
+        article p { margin-bottom: 18px; font-size: 1rem; color: var(--ink); text-wrap: pretty; }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider { text-align: center; color: var(--accent-soft); margin: 28px 0; letter-spacing: 0.5em; font-size: 1rem; }
+        .nav-back { display: inline-block; margin-top: 28px; padding: 8px 16px; background: var(--accent);
+            color: #fff8ec; border-radius: 4px; text-decoration: none; font-size: 0.88rem; transition: background 0.15s; }
+        .nav-back:hover { background: var(--rebel); }
+        .related { margin-top: 24px; padding: 14px 18px; background: #fff8ec; border-left: 4px solid var(--accent-2); border-radius: 4px; font-size: 0.86rem; color: var(--ink-soft); }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        @media (max-width: 640px) { article { padding: 24px 20px; } }
+        footer { text-align: center; padding: 24px; color: var(--ink-soft); font-size: 0.85rem; border-top: 1px solid var(--line); margin-top: 40px; }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> &middot; <a href="dashboard.html">Dashboard</a> &middot; Essay 37
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">&#20013;&#25991;</a>
+        </div>
+        <h1>The Novel's Own Verse &mdash; Eight Hundred Poems in a Hundred Chapters</h1>
+        <div class="subtitle">ESSAY 37 &middot; SUMMARY TRANSLATION</div>
+        <div class="tagline">An umbrella overview of the ~800 poems: four functions, thematic groupings, the hundred chapter-couplets, genre distribution, and a character-praise comparison.</div>
+    </header>
+    <main class="container">
+        <div class="source-note">
+            A summary translation of <a href="../../docs/05-诗词歌赋/原著诗词赏析.md">原著诗词赏析.md</a>. the Chinese original surveys the novel's verse &mdash; preface / descriptive / closing / character-composed functions, thematic groupings, the hundred 7+7 chapter couplets, genre distribution (~800 poems, ~8 per chapter), and a character-praise comparison table. This essay is the companion overview to E6 / E31 / E33.
+        </div>
+        <article>
+
+            <h2>Eight Hundred Poems in a Hundred Chapters <span class="anchor">&#8596; overview</span></h2>
+            <p>
+                The novel carries some 800-plus poems (counts run higher by some tallies). They do four jobs: <strong>preface verse</strong> (opening a chapter, naming its theme), <strong>descriptive verse</strong> (portraying a person, scene, or fight), <strong>closing verse</strong> (summing, punctuating, leaving space), and <strong>character-composed verse</strong> (a figure declaiming). This essay is the umbrella overview that accompanies E6 (scenery poems), E31 (the opening verse), and E33 (the imagery lineage).
+            </p>
+
+            <h2>By Theme <span class="anchor">&#8596; cosmos &middot; praise &middot; landscape &middot; battle &middot; couplet</span></h2>
+            <p>
+                <strong>Cosmos &amp; opening</strong> (ch. 1): the seven-character regulated &ldquo;Before chaos parted&hellip;&rdquo; opens with the universe and lands on &ldquo;the Tale of Liberation that is the Journey to the West.&rdquo; Note &ldquo;the work of Creation's cyclic aeon&rdquo; &mdash; one <em>yu&aacute;n</em> = 129,600 years &mdash; and the self-referential wink (the poem is the book's own opener yet points you to read the &ldquo;Liberation Tale&rdquo;). <strong>Character praise</strong>: Wukong's paean rhymes on &ldquo;-ang&rdquo; (bright/resounding) and turns on the word &ldquo;proud&rdquo; &mdash; not one &ldquo;monkey&rdquo; in it, yet all monkey; Tang Monk's parallel-prose praise is still where Wukong's is motion. <strong>Landscape</strong>: the Water-Curtain Cave verse writes the &ldquo;misty haze&rdquo; that turns a wet cave into a fairy realm &mdash; the book never paints wet, always immortal. <strong>Battle</strong>: the Havoc verse is built on parallelism plus intertextuality, a stanza per combatant, inherited from Yuan drama's face-off songs. <strong>Closing</strong>: the ch. 1 close alternates verse and plain speech &mdash; the signature of the chapter-cycled novel.
+            </p>
+
+            <h2>The Hundred Chapter Couplets <span class="anchor">&#8596; 7+7 antithesis</span></h2>
+            <table>
+                <tr><th>Chapter</th><th>Upper line</th><th>Lower line</th><th>Beauty note</th></tr>
+                <tr><td>1</td><td>Spirit-root breeds, source-stream flows out</td><td>Mind-nature cultivates, the Great Way is born</td><td>source vs mind &mdash; the book's total thesis</td></tr>
+                <tr><td>7</td><td>From the Eight-Trigram Furnace the Great Sage escapes</td><td>Beneath the Five Elements Mountain the mind-ape is fixed</td><td>&ldquo;escape&rdquo; vs &ldquo;fix&rdquo; &mdash; release to restraint</td></tr>
+                <tr><td>27</td><td>The corpse-demon thrice toys with Tang the monk</td><td>The sage monk in wrath drives out the Monkey King</td><td>the white-bone crisis in one line</td></tr>
+                <tr><td>57</td><td>The true pilgrim complains at Mount Potalaka</td><td>The false Monkey King copies texts at Water-Curtain</td><td>true vs false, named in the couplet</td></tr>
+                <tr><td>100</td><td>Straight back to the Eastern Land</td><td>The Five Sages become perfected</td><td>return and perfection &mdash; fulfilment</td></tr>
+            </table>
+
+            <h2>What the Poems Do <span class="anchor">&#8596; narrative &middot; commentary &middot; ornament</span></h2>
+            <p>
+                They <strong>narrate</strong> (battle and journey in verse bear part of the plot &mdash; a vernacular-novel tradition of verse-prose alternation), they <strong>comment</strong> (the author's plain &ldquo;the poem says: good and evil are repaid in the end&rdquo; is a direct authorial voice), and they <strong>ornament</strong> (some exist only to deck a scene &mdash; the Ming novel's &ldquo;all genres aboard&rdquo;).
+            </p>
+
+            <h2>Counts &amp; a Comparison <span class="anchor">&#8596; distribution</span></h2>
+            <table>
+                <tr><th>Genre</th><th>Approx. share</th></tr>
+                <tr><td>Five-character quatrain</td><td>12%</td></tr>
+                <tr><td>Seven-character quatrain</td><td>37%</td></tr>
+                <tr><td>Five-character regulated</td><td>10%</td></tr>
+                <tr><td>Seven-character regulated</td><td>25%</td></tr>
+                <tr><td>Ci lyric</td><td>4%</td></tr>
+                <tr><td>Parallel-prose / fu</td><td>6%</td></tr>
+                <tr><td>Other</td><td>5%</td></tr>
+            </table>
+            <p>
+                By praise: Wukong's verse leans on &ldquo;gold / light / staff / pride&rdquo; (long); Tang Monk's on &ldquo;bearing / looks / clear brows&rdquo; (mid); Bajie's on &ldquo;long snout / big ears / comic clumsiness&rdquo; (short); Sha Wujing's on &ldquo;skull-necklace / precious staff&rdquo; (short); Guanyin's on &ldquo;kind brows / pure vase / willow&rdquo; (long); the Tathagata's on &ldquo;golden body / myriad forms / Spirit Mountain&rdquo; (mid).
+            </p>
+
+            <a class="nav-back" href="index.html">&larr; Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+<a href="essay-scenery-poems.html">E6 &middot; Scenery Poems</a> &middot; <a href="essay-poetry-opening.html">E31 &middot; Opening Verse</a> &middot; <a href="essay-poetry-imagery.html">E33 &middot; Imagery Lineage</a> &middot; <a href="essay-rhythm-analysis.html">E35 &middot; Rhythm</a>
+            </div>
+        </article>
+    </main>
+    <footer>
+        &copy; <span id="footer-year">2026</span> Journey to the West &middot; Annotated Project &middot; MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> &middot;
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.8 W357 &middot;
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W357
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
