@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>The Historical and the Fictional Xuanzang — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.03em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        /* gallery cards for visualizations page */
+        .cat { margin-top: 30px; }
+        .cat h2 { margin-top: 0; }
+        .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+        .vcard {
+            background: #fff8ec;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+        .vcard a { color: var(--accent-2); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .vcard a:hover { text-decoration: underline; }
+        .vcard p { font-size: 0.82rem; color: var(--ink-soft); margin: 4px 0 0; }
+        @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } article { padding: 24px 20px; } }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Essay E7
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>The Historical and the Fictional Xuanzang</h1>
+        <div class="subtitle">ESSAY E7 · SUMMARY TRANSLATION</div>
+        <div class="tagline">From a lone monk who smuggled himself west, to a divinely mandated pilgrim — how Ming authors rewrote a seventh-century traveler.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+            A summary translation of <a href="../../docs/04-文化与历史背景/历史玄奘与小说玄奘专题.md">docs/04-文化与历史背景/历史玄奘与小说玄奘专题.md</a>. The Chinese original contrasts the historical pilgrim Xuanzang (629–645) with his fictional counterpart (13th year of Zhenguan) across seven dimensions, arguing that every deviation is a Ming-era cultural projection rather than a "true vs. false" binary.
+        </div>
+
+        <article>
+            <h2>A Cultural Re-production <span class="anchor">↔ not true vs. false</span></h2>
+            <p>
+                The contrast between the historical and the fictional Xuanzang is not a matter of "real versus invented." It is a <strong>millennium-spanning cultural re-production</strong>. The same name carries two bodies of fact: a seventh-century monk whose westward journey is documented in imperial biography and his own travel record, and a Ming novel's pilgrim whose every step is ordained by Buddha, Guanyin, and the Tang emperor. Reading them side by side shows how a historical life was re-authored into a theological and political allegory.
+            </p>
+
+            <h2>Seven Dimensions <span class="anchor">↔ the comparison frame</span></h2>
+            <table>
+                <tr><th>Dimension</th><th>Historical (629–645)</th><th>Fictional (Zhenguan 13)</th></tr>
+                <tr><td>Origin</td><td>Chen family of Chenliu, Henan; elder brother Jingchang ordained first</td><td>Son of Chen Guangrui &amp; Yin Wenjiao; the "River-Float" foundling</td></tr>
+                <tr><td>Motive</td><td>Self-driven: resolve doctrinal doubts on Buddha-nature</td><td>Mandated: by Emperor Tai, Guanyin, and the Buddha's vow</td></tr>
+                <tr><td>Route</td><td>Western Regions, Central Asia, to Nālandā in India</td><td>Fictional nations — Baoxiang, Wuji, Chechi, Xiliang…</td></tr>
+                <tr><td>Companions</td><td>Largely alone; brief guides like the Turk Shibia-tuo</td><td>Four protectors: Wukong, Bajie, Wujing, the Dragon-horse</td></tr>
+                <tr><td>Ordeals</td><td>Physical: deserts, snows, border bans</td><td>Moral/heart: eighty-one tribulations, divine tests</td></tr>
+                <tr><td>Return</td><td>645, translates scriptures, dies a mortal</td><td>The Five Sages attain Buddhahood</td></tr>
+                <tr><td>Meaning</td><td>Climax of Sino-Indian cultural exchange</td><td>Syncretic (San-jiao) allegory of mind-cultivation</td></tr>
+            </table>
+
+            <h2>The Historical Xuanzang <span class="anchor">↔ smuggled west</span></h2>
+            <p>
+                In 629, with the border closed by an imperial <em>ban on exit</em>, Xuanzang slipped out of Chang'an mingled with refugees — a stark contrast to the novel's scene of the emperor personally seeing him off. Over seventeen years he reached <strong>Nālandā</strong>, studied the <em>Yogācārabhūmi</em> under <strong>Śīlabhadra</strong>, and won the "consciousness-only" debate at the assembly of King Harṣa. His return in 645 brought <strong>657 scripture rolls</strong>; he translated <strong>1,335 juan in 75 works</strong> (including the 600-juan <em>Mahāprajñāpāramitā</em>), founding the Faxiang-Weishi school. His own <strong><em>Great Tang Records on the Western Regions</em></strong> documents 138 kingdoms and remains a primary source for ancient Central and South Asian history.
+            </p>
+
+            <h2>The Fictional Xuanzang <span class="anchor">↔ divinely mandated</span></h2>
+            <p>
+                The novel moves the initiative from the monk to the heavens: at the Buddha's assembly Guanyin is sent to find a scripture-pilgrim; at the Water-Land Mass she reveals Xuanzang as the reincarnated <strong>Golden Cicada</strong>. His first ordeal (Chapter 13) is met by celestial rescue rather than lone survival; his return crowns him <strong>Candana Merit Buddha</strong> (Zhantan Gongde Fo). The historical scholar's "resolve doubts" becomes a predetermined mission — the pilgrim is chosen, not choosing.
+            </p>
+
+            <h2>Where They Diverge <span class="anchor">↔ five fault lines</span></h2>
+            <ul>
+                <li><strong>Motive:</strong> scholarly self-drive vs. political-theological commission.</li>
+                <li><strong>Companions:</strong> solitary awakening vs. a team enacting Ming "five-relations" ethics.</li>
+                <li><strong>Route:</strong> the real Silk Road vs. a mythical demon-geography.</li>
+                <li><strong>Ordeals:</strong> material hardship vs. trials of the heart.</li>
+                <li><strong>Return:</strong> a scholar's legacy vs. collective apotheosis.</li>
+            </ul>
+
+            <h2>Conclusion <span class="anchor">↔ Ming projections</span></h2>
+            <p>
+                Each deviation is a Ming literary projection: the Buddha-led mission mirrors the sinification of Buddhism; the emperor's commission mirrors the legitimation of secular authority; the heart-trials mirror the <em>xinxue</em> (Wang Yangming) emphasis on mind-cultivation. The fictional Xuanzang is less a distortion of history than a condensed statement of what the Ming imagination wanted a pilgrim to mean.
+            </p>
+
+            <a class="nav-back" href="index.html">← Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+                <a href="essay-divine-bureaucracy.html">E8 · Heaven Is a Yamen</a> · <a href="essay-chapter-couplets.html">E9 · The Hundred Couplets</a> · <a href="characters.html">The Pilgrims</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        © <span id="footer-year">2026</span> Journey to the West · Annotated Project · MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> ·
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.99 W348 ·
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W348
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

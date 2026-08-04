@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>How to Read This Site — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.03em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        /* gallery cards for visualizations page */
+        .cat { margin-top: 30px; }
+        .cat h2 { margin-top: 0; }
+        .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+        .vcard {
+            background: #fff8ec;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+        .vcard a { color: var(--accent-2); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .vcard a:hover { text-decoration: underline; }
+        .vcard p { font-size: 0.82rem; color: var(--ink-soft); margin: 4px 0 0; }
+        @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } article { padding: 24px 20px; } }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Methodology
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>How to Read This Site</h1>
+        <div class="subtitle">METHODOLOGY · READING GUIDE</div>
+        <div class="tagline">A hybrid, static-first annotated edition of Journey to the West — how it is built, and why you can trust the numbers.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+            An English orientation to the whole project. Grounded in <a href="../../DESIGN.md">DESIGN.md</a>, <a href="../../docs/10-方法论沉淀/README.md">docs/10-方法论沉淀/README.md</a>, and the six-document sync convention. Document counts were verified against the repository (2026-08-04).
+        </div>
+
+        <article>
+            <h2>What This Project Is <span class="anchor">↔ hybrid & static-first</span></h2>
+            <p>
+                This is a <strong>hybrid, deeply annotated edition</strong> of <em>Journey to the West</em> (Wu Cheng'en, 16th c.). "Hybrid" because it pairs a full Chinese commentary library with interactive data visualizations; "static-first" because the site is plain HTML + D3.js that opens directly via <code>file://</code> — no backend required for reading. The only external dependency is the D3 v7 CDN; every visualization either embeds its data or loads it locally, so the pages work offline.
+            </p>
+
+            <h2>The Content Map <span class="anchor">↔ 600+ Chinese documents</span></h2>
+            <p>The Chinese library is organized into thematic tracks (verified counts):</p>
+            <table>
+                <tr><th>Track</th><th>Scope</th><th>Docs</th></tr>
+                <tr><td>A1 · Chapter-by-chapter</td><td>All 100 chapters annotated</td><td>100</td></tr>
+                <tr><td>A2 · Essays</td><td>Personal reading notes</td><td>44</td></tr>
+                <tr><td>A3 · Characters</td><td>Deep character analyses</td><td>199</td></tr>
+                <tr><td>A4 · Thematic</td><td>Topical monographs (frozen)</td><td>201</td></tr>
+                <tr><td>A5 · Culture & History</td><td>Ming context, religion, institutions</td><td>24</td></tr>
+                <tr><td>A6 · Poetry</td><td>Verse and couplet studies</td><td>13</td></tr>
+                <tr><td>S · Methodology</td><td>Process docs & external sharing</td><td>~50</td></tr>
+            </table>
+            <p>The English subset (<code>site/en/</code>) is a <strong>curated bridge</strong>: summary-translation essays, data dashboards, and this guide — never a full translation.</p>
+
+            <h2>The Seven-Part A4 Template <span class="anchor">↔ how essays are built</span></h2>
+            <p>
+                Thematic monographs (A4) follow a fixed seven-part structure so readers always know where they are: framing → theoretical scaffold → source evidence → analysis → cross-references → caveats → conclusion. This discipline is what lets 200+ topical documents stay navigable rather than sprawling.
+            </p>
+
+            <h2>Visualization Design Language <span class="anchor">↔ classical rice-paper</span></h2>
+            <p>
+                The aesthetic is a <strong>"digital woodblock"</strong> — inspired by Ming block-print books, rice paper, cinnabar punctuation, and ink washes. Core tokens: paper <code>#faf7f2</code>, ink <code>#23201A</code>, cinnabar accent <code>#c8463a</code>, indigo <code>#3a6b8c</code>. Dashboard controls reuse a separate "Name That UI" component language, but recolored to the project's tokens — the two visual languages are kept strictly separate.
+            </p>
+
+            <h2>Dual-Index Traceability <span class="anchor">↔ never update one side</span></h2>
+            <p>
+                Every change is logged <strong>twice</strong>: <code>CHANGELOG.md</code> is the forward timeline (what shipped, in which version/W), and <code>scripts/output/file-index.md</code> is the reverse file index (which file, in which version/W). Updating only one is treated as a defect — the two must agree, which is what makes the project auditable across sessions.
+            </p>
+
+            <h2>Data Trust <span class="anchor">↔ zero fabrication</span></h2>
+            <p>
+                Numbers come from <code>dataset/*.json</code>, themselves bridged from the project's own authoritative generators (e.g. the 81-tribulation classification). A delivery gate (<code>scripts/verify_delivery.py</code>) enforces that all six canonical documents carry the same version/W, that no page references a W beyond the documented maximum (scope-drift check), and that declared counts stay consistent. The rule is simple: <strong>bridge existing data, never invent it.</strong>
+            </p>
+
+            <h2>How to Navigate <span class="anchor">↔ start here</span></h2>
+            <ul>
+                <li><a href="../index.html">site/index.html</a> — Chinese landing &amp; dashboard (<a href="../dashboard.html">dashboard.html</a>).</li>
+                <li><a href="index.html">site/en/index.html</a> — this English entry point.</li>
+                <li><a href="visualizations.html">Visualizations Tour</a> — the 85-page English gallery.</li>
+                <li><a href="tribulations.html">81 Tribulations</a> · <a href="characters.html">The Pilgrims</a> · <a href="bestiary.html">Bestiary</a> · <a href="chapters-map.html">100 Chapters Map</a> — the data dashboards.</li>
+            </ul>
+
+            <a class="nav-back" href="index.html">← Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+                <a href="visualizations.html">Visualizations Tour</a> · <a href="tribulations.html">81 Tribulations</a> · <a href="character-wukong.html">Sun Wukong</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        © <span id="footer-year">2026</span> Journey to the West · Annotated Project · MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> ·
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.99 W348 ·
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W348
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

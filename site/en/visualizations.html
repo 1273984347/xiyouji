@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#faf7f2">
+    <title>Visualizations — An English Tour — Annotated English Edition</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #faf7f2;
+            --paper: #ffffff;
+            --ink: #23201A;
+            --ink-soft: #6B6455;
+            --accent: #c8463a;
+            --accent-soft: #e9b885;
+            --accent-2: #3a6b8c;
+            --accent-3: #C9A063;
+            --accent-4: #6B8E5A;
+            --rebel: #8c2a2a;
+            --line: #d9cdb8;
+            --shadow: 0 1px 3px rgba(60, 40, 20, 0.08), 0 4px 12px rgba(60, 40, 20, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Noto Serif", "Source Han Serif SC", Georgia, serif;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .lang-switch {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 0.85rem;
+            z-index: 5;
+        }
+        .lang-switch a {
+            color: var(--accent-soft);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid rgba(245, 233, 212, 0.35);
+            border-radius: 4px;
+        }
+        .lang-switch a:hover { background: rgba(245, 233, 212, 0.15); color: #fff; }
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: rgba(245, 233, 212, 0.65);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 10px 24px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line);
+        }
+        .breadcrumb a { color: var(--accent-2); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .container {
+            max-width: 820px;
+            margin: -30px auto 60px;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+        .source-note {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+        .source-note strong { color: var(--accent); }
+        .source-note a { color: var(--accent-2); }
+        article {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+        article h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-soft);
+            letter-spacing: 0.03em;
+        }
+        article h2:first-child { margin-top: 0; }
+        article h2 .anchor {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            font-family: "JetBrains Mono", monospace;
+            margin-left: 8px;
+            letter-spacing: 0.1em;
+            font-weight: 400;
+        }
+        article p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            color: var(--ink);
+            text-wrap: pretty;
+        }
+        article p em { color: var(--accent-3); font-style: italic; }
+        article p strong { color: var(--accent); }
+        article ul { margin: 0 0 18px 22px; }
+        article li { margin-bottom: 8px; font-size: 1rem; }
+        article table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 0.92rem; }
+        article th, article td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        article th { background: #fff8ec; color: var(--accent-3); font-weight: 600; }
+        .divider {
+            text-align: center;
+            color: var(--accent-soft);
+            margin: 28px 0;
+            letter-spacing: 0.5em;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: #fff8ec;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: background 0.15s;
+        }
+        .nav-back:hover { background: var(--rebel); }
+        .related {
+            margin-top: 24px;
+            padding: 14px 18px;
+            background: #fff8ec;
+            border-left: 4px solid var(--accent-2);
+            border-radius: 4px;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+        .related a { color: var(--accent-2); text-decoration: none; margin: 0 4px; }
+        .related a:hover { text-decoration: underline; }
+        /* gallery cards for visualizations page */
+        .cat { margin-top: 30px; }
+        .cat h2 { margin-top: 0; }
+        .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+        .vcard {
+            background: #fff8ec;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+        .vcard a { color: var(--accent-2); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .vcard a:hover { text-decoration: underline; }
+        .vcard p { font-size: 0.82rem; color: var(--ink-soft); margin: 4px 0 0; }
+        @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } article { padding: 24px 20px; } }
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+        footer a { color: var(--accent-2); text-decoration: none; margin: 0 8px; }
+        footer a:hover { text-decoration: underline; }
+        .footer-index { margin-top: 6px; font-size: 0.78rem; color: var(--ink-soft); }
+    </style>
+<link rel="stylesheet" href="../tokens.css">
+<!-- W334-RESKIN -->
+</head>
+<body>
+    <nav class="breadcrumb">
+        <a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Guide
+    </nav>
+    <header class="hero">
+        <div class="lang-switch">
+            <a href="../index.html" lang="zh-CN">中文</a>
+        </div>
+        <h1>Visualizations — An English Tour</h1>
+        <div class="subtitle">GUIDE · 85 INTERACTIVE PAGES</div>
+        <div class="tagline">A categorized gallery of the project's D3.js visualizations, with what each shows and how to read it.</div>
+    </header>
+
+    <main class="container">
+        <div class="source-note">
+            A curated English index of the ~85 interactive visualizations under <a href="../data/">site/data/</a>. Each card links to the live page and summarizes its content. Groupings follow the project's own analytical tracks (tribulations, characters, monsters, narrative, poetics, systems, applied readings, meta-tools).
+        </div>
+
+        <article>
+            <h2>Why a Tour? <span class="anchor">↔ 85 pages, eight clusters</span></h2>
+            <p>
+                The Chinese site ships <strong>85 interactive D3.js pages</strong>. Most are pure-Chinese UI, which can daunt a non-Chinese reader. This page is an English <strong>gallery and reading guide</strong>: every entry links to the live visualization, with a one-line note on what it shows and how to read it. Pages open under <code>site/data/</code>; most need no server (they embed their data, or fetch locally).
+            </p>
+
+            <div class="cat"><h2>Tribulations & Journey Geography <span class="anchor">↔ 10 pages</span></h2>
+            <div class="cards">
+                <div class="vcard"><a href="../data/81-hardships.html">81 Tribulations · Table</a><p>Sortable table of all eighty-one calibrated trials with cause / ending / difficulty tags.</p></div>
+                <div class="vcard"><a href="../data/81-hardships-view.html">81 Tribulations · Gallery</a><p>Card gallery of the eighty-one trials.</p></div>
+                <div class="vcard"><a href="../data/hardship-heatmap.html">Tribulation Heatmap</a><p>Spatial and temporal density of the eighty-one tribulations.</p></div>
+                <div class="vcard"><a href="../data/hardship-difficulty-heatmap.html">Difficulty Heatmap</a><p>Which trials needed reinforcements vs. Wukong alone.</p></div>
+                <div class="vcard"><a href="../data/journey-map-interactive.html">Journey Map (Interactive)</a><p>Pan and zoom the pilgrimage route across real and mythic geography.</p></div>
+                <div class="vcard"><a href="../data/journey-route.html">Journey Route</a><p>The westward route as a linear sequence of nations and ordeals.</p></div>
+                <div class="vcard"><a href="../data/journey-geo-semiotics.html">Journey Geosemiotics</a><p>How place-names encode meaning along the road.</p></div>
+                <div class="vcard"><a href="../data/journey-spacetime.html">Journey Spacetime</a><p>Temporal and spatial compression of the pilgrimage.</p></div>
+                <div class="vcard"><a href="../data/timeline.html">Master Timeline</a><p>Chronology from the stone egg to the five sages' apotheosis.</p></div>
+                <div class="vcard"><a href="../data/chapter-stats.html">Chapter Statistics</a><p>Per-chapter metrics across the hundred chapters.</p></div>
+            </div></div>
+            <div class="cat"><h2>Characters & Teams <span class="anchor">↔ 13 pages</span></h2>
+            <div class="cards">
+                <div class="vcard"><a href="../data/character-appearance.html">Character Appearance</a><p>Visual descriptors and first-appearance chapters.</p></div>
+                <div class="vcard"><a href="../data/character-presence-timeline.html">Presence Timeline</a><p>When each major character appears across 100 chapters.</p></div>
+                <div class="vcard"><a href="../data/character-dynamic-network.html">Character Dynamic Network</a><p>Relationship graph among the main cast.</p></div>
+                <div class="vcard"><a href="../data/character-relationship-3d.html">Relationship 3D</a><p>Three-dimensional character relation space.</p></div>
+                <div class="vcard"><a href="../data/character-relationship-3d-view.html">Relationship 3D · View</a><p>Alternate viewer for the 3D relation space.</p></div>
+                <div class="vcard"><a href="../data/character-semantic-network.html">Semantic Network</a><p>Co-occurrence and semantic ties between figures.</p></div>
+                <div class="vcard"><a href="../data/character-sentiment-arc.html">Sentiment Arc</a><p>Emotional trajectory of key characters.</p></div>
+                <div class="vcard"><a href="../data/pilgrim-team-dynamic-network.html">Pilgrim Team Network</a><p>The five pilgrims as a team-interaction graph.</p></div>
+                <div class="vcard"><a href="../data/pilgrim-team-psychology-arc.html">Team Psychology Arc</a><p>Psychological evolution of the team over the journey.</p></div>
+                <div class="vcard"><a href="../data/guanyin-six-roles-network.html">Guanyin's Six Roles</a><p>Guanyin as project manager across six functional roles.</p></div>
+                <div class="vcard"><a href="../data/mbti-evolution.html">MBTI Evolution</a><p>Typological drift of characters over the narrative.</p></div>
+                <div class="vcard"><a href="../data/relationships.html">Relationships</a><p>Overview of interpersonal relations.</p></div>
+                <div class="vcard"><a href="../data/chapter-structure-graph.html">Chapter Structure Graph</a><p>How chapters cluster into narrative acts.</p></div>
+            </div></div>
+            <div class="cat"><h2>Monster Ecology <span class="anchor">↔ 7 pages</span></h2>
+            <div class="cards">
+                <div class="vcard"><a href="../data/monster-ecology-network.html">Ecology Network</a><p>Ecosystem relations among the demons.</p></div>
+                <div class="vcard"><a href="../data/monster-hierarchy-network.html">Hierarchy Network</a><p>Rank and status structure among demons.</p></div>
+                <div class="vcard"><a href="../data/monster-capability-radar.html">Capability Radar</a><p>Radar chart of demon powers.</p></div>
+                <div class="vcard"><a href="../data/monster-sociology.html">Monster Sociology</a><p>Social organization of the demon world.</p></div>
+                <div class="vcard"><a href="../data/monster-background.html">Monster Background</a><p>Origins of the demons — heavenly steeds, wild beasts, etc.</p></div>
+                <div class="vcard"><a href="../data/monster-female-network.html">Female Monster Network</a><p>The sub-network of female demons.</p></div>
+                <div class="vcard"><a href="../data/monster-victims-network.html">Victims Network</a><p>Who the demons preyed upon.</p></div>
+            </div></div>
+            <div class="cat"><h2>Narrative & Structure <span class="anchor">↔ 11 pages</span></h2>
+            <div class="cards">
+                <div class="vcard"><a href="../data/narrative-rhythm-curve.html">Narrative Rhythm Curve</a><p>Pacing curve across the hundred chapters.</p></div>
+                <div class="vcard"><a href="../data/narratology-12d-network.html">Narratology 12-D</a><p>Twelve-dimensional narratological relation network.</p></div>
+                <div class="vcard"><a href="../data/narratology-13d-network.html">Narratology 13-D</a><p>Thirteen-dimensional narratological relation network.</p></div>
+                <div class="vcard"><a href="../data/six-senses-narratology-network.html">Six-Senses Network</a><p>Narrative network via the six senses.</p></div>
+                <div class="vcard"><a href="../data/intertextuality-network.html">Intertextuality Network</a><p>Intertextual links to earlier texts.</p></div>
+                <div class="vcard"><a href="../data/deconstruction.html">Deconstruction</a><p>A deconstructive reading of the text.</p></div>
+                <div class="vcard"><a href="../data/counterfactual.html">Counterfactual</a><p>What-if scenarios for the plot.</p></div>
+                <div class="vcard"><a href="../data/text-evolution.html">Text Evolution</a><p>Evolution of the textual tradition.</p></div>
+                <div class="vcard"><a href="../data/text-search.html">Text Search</a><p>Full-text search across the novel.</p></div>
+                <div class="vcard"><a href="../data/linguistics.html">Linguistics</a><p>Linguistic analysis of the prose.</p></div>
+                <div class="vcard"><a href="../data/language-style-radar.html">Language Style Radar</a><p>Stylistic profile radar.</p></div>
+            </div></div>
+            <div class="cat"><h2>Poetics & Arts <span class="anchor">↔ 4 pages</span></h2>
+            <div class="cards">
+                <div class="vcard"><a href="../data/poetry-rhythm-analysis.html">Poetry Rhythm Analysis</a><p>Metrical analysis of the incorporated poems.</p></div>
+                <div class="vcard"><a href="../data/music-structure.html">Music Structure</a><p>Structure of the musical / song passages.</p></div>
+                <div class="vcard"><a href="../data/visual-art.html">Visual Art</a><p>Painting and imagery in the text.</p></div>
+                <div class="vcard"><a href="../data/aesthetics.html">Aesthetics</a><p>Aesthetic theory of the novel.</p></div>
+            </div></div>
+            <div class="cat"><h2>Systems & Cosmology <span class="anchor">↔ 9 pages</span></h2>
+            <div class="cards">
+                <div class="vcard"><a href="../data/heaven-power-network.html">Heaven Power Network</a><p>Power structure of the celestial court.</p></div>
+                <div class="vcard"><a href="../data/underworld-power-network.html">Underworld Power Network</a><p>Power structure of the diyu (hell).</p></div>
+                <div class="vcard"><a href="../data/theology-intervention-network.html">Theological Intervention</a><p>How gods intervene in the journey.</p></div>
+                <div class="vcard"><a href="../data/karma-reincarnation.html">Karma & Reincarnation</a><p>Karmic and rebirth mechanics.</p></div>
+                <div class="vcard"><a href="../data/magic-system.html">Magic System</a><p>The rules of the novel's magic.</p></div>
+                <div class="vcard"><a href="../data/power-resources.html">Power & Resources</a><p>Distribution of power and resources.</p></div>
+                <div class="vcard"><a href="../data/ming-political-thought-comparison.html">Ming Political Thought</a><p>The novel vs. Ming political thought.</p></div>
+                <div class="vcard"><a href="../data/jurisprudence.html">Jurisprudence</a><p>Legal themes in the text.</p></div>
+                <div class="vcard"><a href="../data/four-heavenly-kings-artifacts.html">Four Kings' Artifacts</a><p>The four guardians' signature weapons.</p></div>
+            </div></div>
+            <div class="cat"><h2>Applied & Modern Readings <span class="anchor">↔ 18 pages</span></h2>
+            <div class="cards">
+                <div class="vcard"><a href="../data/business-model.html">Business Model</a><p>The journey as a venture / operation.</p></div>
+                <div class="vcard"><a href="../data/workplace.html">Workplace</a><p>An office-politics reading of the team.</p></div>
+                <div class="vcard"><a href="../data/risk-project.html">Risk & Project</a><p>A project-management reading of the pilgrimage.</p></div>
+                <div class="vcard"><a href="../data/cognitive-psychology.html">Cognitive Psychology</a><p>A cognitive-science reading.</p></div>
+                <div class="vcard"><a href="../data/ethics-consumption.html">Ethics of Consumption</a><p>Themes of consumption and ethics.</p></div>
+                <div class="vcard"><a href="../data/philosophy.html">Philosophy</a><p>Philosophical readings.</p></div>
+                <div class="vcard"><a href="../data/social-media.html">Social Media</a><p>The novel reimagined through social media.</p></div>
+                <div class="vcard"><a href="../data/game-webnovel.html">Game & Webnovel</a><p>Game and web-novel adaptations.</p></div>
+                <div class="vcard"><a href="../data/ai-dialogue.html">AI Dialogue</a><p>Dialogues with AI about the text.</p></div>
+                <div class="vcard"><a href="../data/century-dialogue.html">Century Dialogue</a><p>Cross-century dialogue.</p></div>
+                <div class="vcard"><a href="../data/cross-time-danmaku.html">Cross-Time Danmaku</a><p>Bullet-comment style cross-era commentary.</p></div>
+                <div class="vcard"><a href="../data/famous-time-travel.html">Famous Time-Travel</a><p>Time-travel imaginings of famous figures.</p></div>
+                <div class="vcard"><a href="../data/cultural-misreading.html">Cultural Misreading</a><p>Cross-cultural misreadings of the novel.</p></div>
+                <div class="vcard"><a href="../data/criticism-history.html">Criticism History</a><p>History of reception and criticism.</p></div>
+                <div class="vcard"><a href="../data/global-pattern.html">Global Pattern</a><p>Global comparative patterns.</p></div>
+                <div class="vcard"><a href="../data/four-dimensional-research-network.html">4-D Research Network</a><p>A 4D map of research angles.</p></div>
+                <div class="vcard"><a href="../data/material-archaeology.html">Material Archaeology</a><p>Material-culture forensics in the text.</p></div>
+                <div class="vcard"><a href="../data/concept-device.html">Concept Device</a><p>The conceptual apparatus of the analysis.</p></div>
+            </div></div>
+            <div class="cat"><h2>Meta & Tools <span class="anchor">↔ 7 pages</span></h2>
+            <div class="cards">
+                <div class="vcard"><a href="../data/methodology-matrix.html">Methodology Matrix</a><p>Matrix of analytical methods used.</p></div>
+                <div class="vcard"><a href="../data/chart-design.html">Chart Design</a><p>Design system for the visualizations.</p></div>
+                <div class="vcard"><a href="../data/perf-canvas-rendering.html">Canvas Rendering Perf</a><p>Performance notes for canvas rendering.</p></div>
+                <div class="vcard"><a href="../data/graph-explorer.html">Graph Explorer</a><p>Generic graph exploration tool.</p></div>
+                <div class="vcard"><a href="../data/data-explorer.html">Data Explorer</a><p>Browse the underlying datasets.</p></div>
+                <div class="vcard"><a href="../data/search.html">Search</a><p>Site-wide search.</p></div>
+                <div class="vcard"><a href="../data/tag-cloud.html">Tag Cloud</a><p>Tag cloud of themes.</p></div>
+            </div></div>
+            <a class="nav-back" href="index.html">← Back to EN Home</a>
+            <div class="related">
+                <strong>Related:</strong>
+                <a href="tribulations.html">81 Tribulations</a> · <a href="bestiary.html">Bestiary</a> · <a href="character-wukong.html">Sun Wukong</a> · <a href="methodology.html">How to Read This Site</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        © <span id="footer-year">2026</span> Journey to the West · Annotated Project · MIT License
+        <div class="footer-index">
+            <a href="index.html">EN Home</a> ·
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.2.99 W348 ·
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W348
+        </div>
+    </footer>
+    <script>
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
