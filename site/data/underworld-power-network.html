@@ -2266,6 +2266,32 @@ window.addEventListener('resize', () => {
 // 启动
 main();
 </script>
+<script id="audit-labelavoid">
+(function(){
+  function avoid(){
+    document.querySelectorAll("svg").forEach(function(svg){
+      var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){var r=t.getBoundingClientRect();return r.width>0&&r.height>0;});
+      var R=ts.map(function(t){return t.getBoundingClientRect();});
+      for(var i=0;i<ts.length;i++)for(var j=i+1;j<ts.length;j++){
+        var a=R[i],b=R[j];
+        var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+        var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+        if(ix*iy<=0)continue;
+        var area=Math.min(a.width*a.height,b.width*b.height);
+        if(area>0 && (ix*iy)/area>0.5){
+          var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+          if(hide.style.display!=="none") hide.style.display="none";
+        }
+      }
+    });
+  }
+  window.__avoidOverlap=avoid;
+  function run(){try{avoid();}catch(e){}}
+  window.addEventListener("load",function(){
+    [3000,6000,9000,12000].forEach(function(ms){setTimeout(run,ms);});
+  });
+})();
+</script>
 </body>
 </html>
 </body>
