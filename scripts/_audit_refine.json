@@ -12,7 +12,7 @@
     "page": "81-hardships.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 3,
+    "overlapAxis": 0,
     "overlapContent": 0,
     "overlapSamples": [],
     "err": null
@@ -22,14 +22,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 1,
-    "overlapSamples": [
-      {
-        "a": "唐僧",
-        "b": "白龙马",
-        "ratio": 1
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -54,9 +48,20 @@
     "page": "cave-estate.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 11,
-    "overlapContent": 0,
-    "overlapSamples": [],
+    "overlapAxis": 12,
+    "overlapContent": 2,
+    "overlapSamples": [
+      {
+        "a": "竹节山",
+        "b": "东胜神洲",
+        "ratio": 0.46
+      },
+      {
+        "a": "青龙山",
+        "b": "乌斯藏国",
+        "ratio": 0.47
+      }
+    ],
     "err": null
   },
   {
@@ -163,24 +168,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 3,
-    "overlapSamples": [
-      {
-        "a": "💀",
-        "b": "S2",
-        "ratio": 0.63
-      },
-      {
-        "a": "👂",
-        "b": "S3",
-        "ratio": 1
-      },
-      {
-        "a": "🪭",
-        "b": "S4",
-        "ratio": 0.55
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -214,20 +203,9 @@
     "page": "criticism-history.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 0,
-    "overlapContent": 2,
-    "overlapSamples": [
-      {
-        "a": "道",
-        "b": "陈士斌 · 内丹金丹",
-        "ratio": 0.83
-      },
-      {
-        "a": "释·文",
-        "b": "现代学者 · 文学本位",
-        "ratio": 0.68
-      }
-    ],
+    "overlapAxis": 1,
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -252,7 +230,7 @@
     "page": "cultural-misreading.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 1,
+    "overlapAxis": 0,
     "overlapContent": 0,
     "overlapSamples": [],
     "err": null
@@ -271,13 +249,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 3,
-    "overlapContent": 2,
+    "overlapContent": 1,
     "overlapSamples": [
-      {
-        "a": "龙珠（鸟山明）",
-        "b": "花游记（韩国电视剧）",
-        "ratio": 0.54
-      },
       {
         "a": "魔法千字文（韩国漫画）",
         "b": "美猴王传奇（美国改编）",
@@ -300,17 +273,12 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 2,
+    "overlapContent": 1,
     "overlapSamples": [
       {
         "a": "10/10",
         "b": "如来佛祖",
         "ratio": 0.43
-      },
-      {
-        "a": "平顶山·莲…",
-        "b": "青龙山·玄…",
-        "ratio": 0.95
       }
     ],
     "err": null
@@ -320,37 +288,12 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 18,
+    "overlapContent": 3,
     "overlapSamples": [
-      {
-        "a": "李卓吾",
-        "b": "1 · 石猴出世",
-        "ratio": 0.57
-      },
-      {
-        "a": "5 · 大圣偷丹",
-        "b": "7 · 八卦炉中逃大圣",
-        "ratio": 0.77
-      },
       {
         "a": "8 · 佛祖定计",
         "b": "12 · 玄奘现身",
         "ratio": 0.45
-      },
-      {
-        "a": "22 · 收沙僧",
-        "b": "24 · 五庄观人参果",
-        "ratio": 0.76
-      },
-      {
-        "a": "24 · 五庄观人参果",
-        "b": "27 · 三打白骨精",
-        "ratio": 0.49
-      },
-      {
-        "a": "27 · 三打白骨精",
-        "b": "32 · 莲花洞金角银角",
-        "ratio": 0.7
       },
       {
         "a": "32 · 莲花洞金角银角",
@@ -358,29 +301,9 @@
         "ratio": 0.48
       },
       {
-        "a": "78 · 比丘国",
-        "b": "88 · 玉华州收徒",
-        "ratio": 0.62
-      },
-      {
         "a": "88 · 玉华州收徒",
         "b": "100 · 取经圆满",
         "ratio": 0.46
-      },
-      {
-        "a": "李卓吾",
-        "b": "胡适",
-        "ratio": 1
-      },
-      {
-        "a": "李卓吾",
-        "b": "毛泽东",
-        "ratio": 1
-      },
-      {
-        "a": "金圣叹",
-        "b": "鲁迅",
-        "ratio": 1
       }
     ],
     "err": null
@@ -441,24 +364,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 3,
-    "overlapSamples": [
-      {
-        "a": "金刚琢",
-        "b": "紧箍咒",
-        "ratio": 1
-      },
-      {
-        "a": "芭蕉扇（阳…",
-        "b": "阴阳二气瓶",
-        "ratio": 0.61
-      },
-      {
-        "a": "紫金红葫芦",
-        "b": "阴阳二气瓶",
-        "ratio": 0.41
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -466,14 +373,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 1,
-    "overlapSamples": [
-      {
-        "a": "西游记",
-        "b": "格列佛游记",
-        "ratio": 0.82
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -481,41 +382,15 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 5,
-    "overlapSamples": [
-      {
-        "a": "系缚",
-        "b": "熏习",
-        "ratio": 1
-      },
-      {
-        "a": "系缚",
-        "b": "现行",
-        "ratio": 0.77
-      },
-      {
-        "a": "解脱",
-        "b": "转依",
-        "ratio": 0.59
-      },
-      {
-        "a": "熏习",
-        "b": "现行",
-        "ratio": 0.77
-      },
-      {
-        "a": "现行",
-        "b": "声尘",
-        "ratio": 0.52
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
     "page": "guanyin-six-roles-network.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 1,
+    "overlapAxis": 0,
     "overlapContent": 0,
     "overlapSamples": [],
     "err": null
@@ -530,7 +405,7 @@
       {
         "a": "第80难",
         "b": "第81难",
-        "ratio": 0.65
+        "ratio": 0.64
       }
     ],
     "err": null
@@ -612,14 +487,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 1,
-    "overlapContent": 1,
-    "overlapSamples": [
-      {
-        "a": "Δ=1",
-        "b": "刑罚严重度",
-        "ratio": 0.98
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -653,7 +522,7 @@
     "page": "magic-system.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 2,
+    "overlapAxis": 0,
     "overlapContent": 0,
     "overlapSamples": [],
     "err": null
@@ -663,17 +532,12 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 11,
-    "overlapContent": 2,
+    "overlapContent": 1,
     "overlapSamples": [
       {
         "a": "金刚琢",
         "b": "九齿钉耙",
         "ratio": 0.45
-      },
-      {
-        "a": "金箍棒",
-        "b": "九齿钉耙",
-        "ratio": 0.65
       }
     ],
     "err": null
@@ -752,34 +616,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 4,
-    "overlapContent": 5,
-    "overlapSamples": [
-      {
-        "a": "红孩儿",
-        "b": "青狮精",
-        "ratio": 1
-      },
-      {
-        "a": "黑熊精",
-        "b": "铁扇公主",
-        "ratio": 1
-      },
-      {
-        "a": "黑熊精",
-        "b": "白象精",
-        "ratio": 1
-      },
-      {
-        "a": "牛魔王",
-        "b": "黄眉大王",
-        "ratio": 1
-      },
-      {
-        "a": "铁扇公主",
-        "b": "白象精",
-        "ratio": 1
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -857,14 +695,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 1,
-    "overlapSamples": [
-      {
-        "a": "张卡牌",
-        "b": "12 (因果) × 10 (法器) ",
-        "ratio": 0.58
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -907,13 +739,13 @@
     "page": "philosophy.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 2,
+    "overlapAxis": 0,
     "overlapContent": 1,
     "overlapSamples": [
       {
         "a": "4. 取经中期·平衡期",
         "b": "心性阶段（1 → 6 修心进程）",
-        "ratio": 0.44
+        "ratio": 0.47
       }
     ],
     "err": null
@@ -941,39 +773,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 6,
-    "overlapSamples": [
-      {
-        "a": "西江月",
-        "b": "临江仙",
-        "ratio": 0.82
-      },
-      {
-        "a": "西江月",
-        "b": "满庭芳",
-        "ratio": 0.64
-      },
-      {
-        "a": "西江月",
-        "b": "开篇诗",
-        "ratio": 0.46
-      },
-      {
-        "a": "临江仙",
-        "b": "满庭芳",
-        "ratio": 0.81
-      },
-      {
-        "a": "临江仙",
-        "b": "开篇诗",
-        "ratio": 0.62
-      },
-      {
-        "a": "满庭芳",
-        "b": "开篇诗",
-        "ratio": 0.8
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -981,24 +782,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 1,
-    "overlapContent": 3,
-    "overlapSamples": [
-      {
-        "a": "蟠桃（9000…",
-        "b": "唐僧肉",
-        "ratio": 1
-      },
-      {
-        "a": "人参果",
-        "b": "太乙真人莲藕化身",
-        "ratio": 0.77
-      },
-      {
-        "a": "太上老君仙丹",
-        "b": "九转金丹",
-        "ratio": 1
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -1015,19 +800,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 2,
-    "overlapSamples": [
-      {
-        "a": "#3",
-        "b": "#7",
-        "ratio": 1
-      },
-      {
-        "a": "#4",
-        "b": "#6",
-        "ratio": 1
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -1071,67 +845,17 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 1,
-    "overlapContent": 15,
+    "overlapContent": 2,
     "overlapSamples": [
-      {
-        "a": "元末·已佚  ·  已佚  ·  平",
-        "b": "《西游记杂剧》",
-        "ratio": 0.72
-      },
-      {
-        "a": "已佚·仅见于《永乐大典》残卷'魏徵斩",
-        "b": "元末明初·杨景贤  ·  24回  ",
-        "ratio": 0.99
-      },
       {
         "a": "世德堂本《西游记》",
         "b": "朱鼎臣本《唐三藏西游释厄传》",
         "ratio": 0.5
       },
       {
-        "a": "明万历20年·1592  ·  10",
-        "b": "朱鼎臣本《唐三藏西游释厄传》",
-        "ratio": 0.8
-      },
-      {
-        "a": "明万历20年·1592  ·  10",
-        "b": "杨闽斋本《西游记》",
-        "ratio": 0.67
-      },
-      {
-        "a": "现存最早的完整百回本·题'华阳洞天主",
-        "b": "明万历中后期  ·  10卷  · ",
-        "ratio": 0.96
-      },
-      {
         "a": "现存最早的完整百回本·题'华阳洞天主",
         "b": "删节本·加入唐僧出身故事（陈光蕊·江",
         "ratio": 0.42
-      },
-      {
-        "a": "现存最早的完整百回本·题'华阳洞天主",
-        "b": "明万历30年·1602  ·  10",
-        "ratio": 1
-      },
-      {
-        "a": "朱鼎臣本《唐三藏西游释厄传》",
-        "b": "杨闽斋本《西游记》",
-        "ratio": 0.87
-      },
-      {
-        "a": "明万历中后期  ·  10卷  · ",
-        "b": "明万历30年·1602  ·  10",
-        "ratio": 0.81
-      },
-      {
-        "a": "删节本·加入唐僧出身故事（陈光蕊·江",
-        "b": "明万历30年·1602  ·  10",
-        "ratio": 0.4
-      },
-      {
-        "a": "删节本·加入唐僧出身故事（陈光蕊·江",
-        "b": "世本的早期翻刻本·文字略异",
-        "ratio": 0.85
       }
     ],
     "err": null
@@ -1158,70 +882,9 @@
     "page": "timeline.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 5,
-    "overlapContent": 13,
-    "overlapSamples": [
-      {
-        "a": "玄奘西行",
-        "b": "大唐西域记",
-        "ratio": 0.88
-      },
-      {
-        "a": "亚东排印本",
-        "b": "人文社整理本",
-        "ratio": 0.68
-      },
-      {
-        "a": "人文社整理本",
-        "b": "新校注本",
-        "ratio": 0.87
-      },
-      {
-        "a": "新校注本",
-        "b": "数字化版本",
-        "ratio": 0.53
-      },
-      {
-        "a": "连环画普及",
-        "b": "铁扇公主动画",
-        "ratio": 0.93
-      },
-      {
-        "a": "铁扇公主动画",
-        "b": "央视西游记",
-        "ratio": 0.55
-      },
-      {
-        "a": "铁扇公主动画",
-        "b": "大话西游",
-        "ratio": 0.43
-      },
-      {
-        "a": "央视西游记",
-        "b": "大话西游",
-        "ratio": 0.99
-      },
-      {
-        "a": "央视西游记",
-        "b": "西游降魔篇",
-        "ratio": 0.68
-      },
-      {
-        "a": "央视西游记",
-        "b": "游戏与网文",
-        "ratio": 0.59
-      },
-      {
-        "a": "大话西游",
-        "b": "西游降魔篇",
-        "ratio": 0.85
-      },
-      {
-        "a": "大话西游",
-        "b": "游戏与网文",
-        "ratio": 0.75
-      }
-    ],
+    "overlapAxis": 1,
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -1238,19 +901,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 2,
-    "overlapSamples": [
-      {
-        "a": "No.5",
-        "b": "取经路径（按章节顺序）→ 灵山",
-        "ratio": 0.54
-      },
-      {
-        "a": "No.6",
-        "b": "取经路径（按章节顺序）→ 灵山",
-        "ratio": 0.54
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {

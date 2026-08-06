@@ -1,0 +1,806 @@
+[
+ {
+  "total": 8,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "81-hardships-view.html"
+ },
+ {
+  "total": 15,
+  "hidden": 3,
+  "hiddenRatio": 0.2,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "总计总计",
+   "总计总计",
+   "总计总计"
+  ],
+  "page": "81-hardships.html"
+ },
+ {
+  "total": 32,
+  "hidden": 1,
+  "hiddenRatio": 0.03,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "唐僧唐僧"
+  ],
+  "page": "aesthetics.html"
+ },
+ {
+  "total": 0,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "ai-dialogue.html"
+ },
+ {
+  "total": 121,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "business-model.html"
+ },
+ {
+  "total": 161,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "cave-estate.html"
+ },
+ {
+  "total": 0,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "century-dialogue.html"
+ },
+ {
+  "total": 72,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "chapter-stats.html"
+ },
+ {
+  "total": 149,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "chapter-structure-graph.html"
+ },
+ {
+  "total": 237,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "character-appearance.html"
+ },
+ {
+  "total": 14,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "character-dynamic-network.html"
+ },
+ {
+  "total": 114,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "character-presence-timeline.html"
+ },
+ {
+  "total": 0,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "character-relationship-3d-view.html"
+ },
+ {
+  "total": 0,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "character-relationship-3d.html"
+ },
+ {
+  "total": 54,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "character-semantic-network.html"
+ },
+ {
+  "total": 84,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "character-sentiment-arc.html"
+ },
+ {
+  "total": 129,
+  "hidden": 3,
+  "hiddenRatio": 0.02,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "S2S2",
+   "S3S3",
+   "S4S4"
+  ],
+  "page": "chart-design.html"
+ },
+ {
+  "total": 86,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "cognitive-psychology.html"
+ },
+ {
+  "total": 19,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "concept-device.html"
+ },
+ {
+  "total": 22,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "counterfactual.html"
+ },
+ {
+  "total": 55,
+  "hidden": 2,
+  "hiddenRatio": 0.04,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "道道",
+   "释·文释·文"
+  ],
+  "page": "criticism-history.html"
+ },
+ {
+  "total": 4,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "cross-time-danmaku.html"
+ },
+ {
+  "total": 121,
+  "hidden": 1,
+  "hiddenRatio": 0.01,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "总作品数总作品数"
+  ],
+  "page": "cultural-misreading.html"
+ },
+ {
+  "total": 8,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "data-explorer.html"
+ },
+ {
+  "total": 117,
+  "hidden": 1,
+  "hiddenRatio": 0.01,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "龙珠（鸟山明）龙珠（鸟山明）"
+  ],
+  "page": "deconstruction.html"
+ },
+ {
+  "total": 146,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "dialogue-sentiment.html"
+ },
+ {
+  "total": 203,
+  "hidden": 1,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "青龙山·玄…青龙山·玄…"
+  ],
+  "page": "ecology.html"
+ },
+ {
+  "total": 64,
+  "hidden": 10,
+  "hiddenRatio": 0.16,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "李卓吾李卓吾",
+   "5 · 大圣偷丹5 · 大圣偷丹",
+   "22 · 收沙僧22 · 收沙僧",
+   "27 · 三打白骨精27 · 三",
+   "78 · 比丘国78 · 比丘国",
+   "李卓吾李卓吾",
+   "鲁迅鲁迅",
+   "胡适胡适"
+  ],
+  "page": "emotional-heatmap.html"
+ },
+ {
+  "total": 53,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "ethics-consumption.html"
+ },
+ {
+  "total": 11,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "famous-time-travel.html"
+ },
+ {
+  "total": 159,
+  "hidden": 5,
+  "hiddenRatio": 0.03,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "L100",
+   "10.010.0",
+   "福柯福柯",
+   "热奈特热奈特",
+   "里柯尔里柯尔"
+  ],
+  "page": "four-dimensional-research-network.html"
+ },
+ {
+  "total": 29,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "four-heavenly-kings-artifacts.html"
+ },
+ {
+  "total": 114,
+  "hidden": 2,
+  "hiddenRatio": 0.02,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "阴阳二气瓶阴阳二气瓶",
+   "紧箍咒紧箍咒"
+  ],
+  "page": "game-webnovel.html"
+ },
+ {
+  "total": 33,
+  "hidden": 1,
+  "hiddenRatio": 0.03,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "西游记西游记"
+  ],
+  "page": "global-pattern.html"
+ },
+ {
+  "total": 40,
+  "hidden": 4,
+  "hiddenRatio": 0.1,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "解脱解脱",
+   "熏习熏习",
+   "现行现行",
+   "现行现行"
+  ],
+  "page": "graph-explorer.html"
+ },
+ {
+  "total": 104,
+  "hidden": 1,
+  "hiddenRatio": 0.01,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "10"
+  ],
+  "page": "guanyin-six-roles-network.html"
+ },
+ {
+  "total": 64,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "hardship-difficulty-heatmap.html"
+ },
+ {
+  "total": 49,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "hardship-heatmap.html"
+ },
+ {
+  "total": 76,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "heaven-power-network.html"
+ },
+ {
+  "total": 115,
+  "hidden": 3,
+  "hiddenRatio": 0.03,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "公元前6-公元4世纪",
+   "公元前5-公元3世纪公元前5-公",
+   "地理借用地理借用"
+  ],
+  "page": "intertextuality-network.html"
+ },
+ {
+  "total": 7,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "journey-geo-semiotics.html"
+ },
+ {
+  "total": 54,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "journey-map-interactive.html"
+ },
+ {
+  "total": 25,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "journey-route.html"
+ },
+ {
+  "total": 47,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "journey-spacetime.html"
+ },
+ {
+  "total": 128,
+  "hidden": 1,
+  "hiddenRatio": 0.01,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "Δ=1Δ=1"
+  ],
+  "page": "jurisprudence.html"
+ },
+ {
+  "total": 107,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "karma-reincarnation.html"
+ },
+ {
+  "total": 39,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "language-style-radar.html"
+ },
+ {
+  "total": 85,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "linguistics.html"
+ },
+ {
+  "total": 27,
+  "hidden": 2,
+  "hiddenRatio": 0.07,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "件件",
+   "件件"
+  ],
+  "page": "magic-system.html"
+ },
+ {
+  "total": 155,
+  "hidden": 1,
+  "hiddenRatio": 0.01,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "金箍棒金箍棒"
+  ],
+  "page": "material-archaeology.html"
+ },
+ {
+  "total": 151,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "mbti-evolution.html"
+ },
+ {
+  "total": 72,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "methodology-matrix.html"
+ },
+ {
+  "total": 70,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "ming-political-thought-comparison.html"
+ },
+ {
+  "total": 90,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "monster-background.html"
+ },
+ {
+  "total": 91,
+  "hidden": 4,
+  "hiddenRatio": 0.04,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "黑熊精黑熊精",
+   "牛魔王牛魔王",
+   "青狮精青狮精",
+   "白象精白象精"
+  ],
+  "page": "monster-capability-radar.html"
+ },
+ {
+  "total": 110,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "monster-ecology-network.html"
+ },
+ {
+  "total": 91,
+  "hidden": 16,
+  "hiddenRatio": 0.18,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "蜘蛛精四姐蜘蛛精四姐",
+   "第59回第59回",
+   "第60回",
+   "第72回第72回",
+   "第72回第72回",
+   "第72回第72回",
+   "第72回第72回",
+   "第72回第72回"
+  ],
+  "page": "monster-female-network.html"
+ },
+ {
+  "total": 93,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "monster-hierarchy-network.html"
+ },
+ {
+  "total": 90,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "monster-sociology.html"
+ },
+ {
+  "total": 51,
+  "hidden": 2,
+  "hiddenRatio": 0.04,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "88",
+   "第70回"
+  ],
+  "page": "monster-victims-network.html"
+ },
+ {
+  "total": 93,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "music-structure.html"
+ },
+ {
+  "total": 31,
+  "hidden": 1,
+  "hiddenRatio": 0.03,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "张卡牌张卡牌"
+  ],
+  "page": "narrative-experiment.html"
+ },
+ {
+  "total": 166,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "narrative-rhythm-curve.html"
+ },
+ {
+  "total": 98,
+  "hidden": 20,
+  "hiddenRatio": 0.2,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "时时",
+   "听听",
+   "触",
+   "视视",
+   "味味",
+   "六感",
+   "文文",
+   "知知"
+  ],
+  "page": "narratology-12d-network.html"
+ },
+ {
+  "total": 132,
+  "hidden": 45,
+  "hiddenRatio": 0.34,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "W161W161",
+   "W162W162",
+   "W164W164",
+   "W165W165",
+   "W168W168",
+   "W170W170",
+   "W171W171",
+   "W173W173"
+  ],
+  "page": "narratology-13d-network.html"
+ },
+ {
+  "total": 0,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "perf-canvas-rendering.html"
+ },
+ {
+  "total": 105,
+  "hidden": 2,
+  "hiddenRatio": 0.02,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "00",
+   "1010"
+  ],
+  "page": "philosophy.html"
+ },
+ {
+  "total": 19,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "pilgrim-team-dynamic-network.html"
+ },
+ {
+  "total": 146,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "pilgrim-team-psychology-arc.html"
+ },
+ {
+  "total": 98,
+  "hidden": 3,
+  "hiddenRatio": 0.03,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "西江月西江月",
+   "临江仙临江仙",
+   "满庭芳满庭芳"
+  ],
+  "page": "poetry-rhythm-analysis.html"
+ },
+ {
+  "total": 105,
+  "hidden": 3,
+  "hiddenRatio": 0.03,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "人参果人参果",
+   "唐僧肉唐僧肉",
+   "九转金丹九转金丹"
+  ],
+  "page": "power-resources.html"
+ },
+ {
+  "total": 255,
+  "hidden": 2,
+  "hiddenRatio": 0.01,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "1010",
+   "1010"
+  ],
+  "page": "relationships.html"
+ },
+ {
+  "total": 110,
+  "hidden": 2,
+  "hiddenRatio": 0.02,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "#3#3",
+   "#4#4"
+  ],
+  "page": "risk-project.html"
+ },
+ {
+  "total": 0,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "search.html"
+ },
+ {
+  "total": 78,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "six-senses-narratology-network.html"
+ },
+ {
+  "total": 47,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "social-media.html"
+ },
+ {
+  "total": 0,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "tag-cloud.html"
+ },
+ {
+  "total": 111,
+  "hidden": 10,
+  "hiddenRatio": 0.09,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "元末·已佚  ·  已佚  · ",
+   "元末明初·杨景贤  ·  24回",
+   "明万历20年·1592  ·  ",
+   "明万历中后期  ·  10卷  ",
+   "杨闽斋本《西游记》杨闽斋本《西游",
+   "明万历30年·1602  ·  ",
+   "世本的早期翻刻本·文字略异世本的",
+   "清乾隆·1753·张书绅评  ·"
+  ],
+  "page": "text-evolution.html"
+ },
+ {
+  "total": 0,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "text-search.html"
+ },
+ {
+  "total": 76,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "theological-intervention-network.html"
+ },
+ {
+  "total": 63,
+  "hidden": 10,
+  "hiddenRatio": 0.16,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "玄奘西行玄奘西行",
+   "亚东排印本亚东排印本",
+   "新校注本新校注本",
+   "19271927",
+   "连环画普及连环画普及",
+   "19861986",
+   "央视西游记央视西游记",
+   "大话西游大话西游"
+  ],
+  "page": "timeline.html"
+ },
+ {
+  "total": 73,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "underworld-power-network.html"
+ },
+ {
+  "total": 54,
+  "hidden": 2,
+  "hiddenRatio": 0.04,
+  "badHidden": 0,
+  "hiddenSamples": [
+   "No.5No.5",
+   "No.6No.6"
+  ],
+  "page": "visual-art.html"
+ },
+ {
+  "total": 75,
+  "hidden": 0,
+  "hiddenRatio": 0,
+  "badHidden": 0,
+  "hiddenSamples": [],
+  "page": "workplace.html"
+ }
+]
