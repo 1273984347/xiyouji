@@ -440,7 +440,7 @@ def graph_expand(query, hops=1, g=None):
 # 3. 双层检索聚合 + 生成
 # ============================================================
 
-def answer(query, top_k=5, hops=1, use_llm=False):
+def answer(query, top_k=5, hops=1, use_llm=False, history=None):
     """返回 {snippets, graph, draft}。use_llm=True 且配了 key 才真生成。"""
     index = build_index()
     snippets = retrieve(query, top_k=top_k, index=index)
@@ -456,6 +456,7 @@ def answer(query, top_k=5, hops=1, use_llm=False):
     }
     if use_llm and os.environ.get("LLM_API_KEY"):
         # 预留：真实 LLM 生成分支（需要联网 + key）。未配置时不会走到这里。
+        # history: 前端传来的最近对话轮次 [{role, text}]，接入 LLM 时拼接为上下文注入 prompt。
         result["llm_generated"] = None  # 见 README 升级路径
     return result
 
