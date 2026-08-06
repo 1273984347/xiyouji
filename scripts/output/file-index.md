@@ -9,6 +9,24 @@
 ---
 
 
+## W358 静态优先健壮性加固·前端自包含与交互增强（2026-08-05）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/inline_css.py | W358 | v2.3.9 新建·幂等 CSS 内联生成器·将 `../tokens.css`+`../system.css` `<link>` 内联为 `<style>` 块覆盖 `data/` 及子目录 136 个 HTML（含 `data/en/`）；`--dry` 预览、`--force` 重同步；单一事实源仍是 `site/tokens.css`/`site/system.css` |
+| site/data/graph-explorer.html | W358 | v2.3.9 多重加固：localStorage 持久化（选中图谱/筛选/搜索/节点/坐标）+ 节点「相关研究」跳 search.html?q= + 离线图集内联（删外部 graph-fallback.js src）+ flex 布局替换 calc(100vh) + `.no-side`/`.no-drill` 可折叠 + 大图降迭代性能兜底 |
+| site/static/js/rag-chat.js | W358 | v2.3.9 渡口问津升级：draft 渡口摘要改主回答（打字机）+ 来源 path 可点击 + 命中词 `<mark>` 高亮 + 历史 localStorage 持久化 + 发送带最近 4 轮 history 上下文 |
+| site/data/search.html | W358 | v2.3.9 新增 `?q=` 预填自搜，闭合图谱→文链路 |
+| scripts/rag/rag_server.py | W358 | v2.3.9 `/query` 解析 `history` 参数（json.loads 失败回退 None）并透传 `RAG.answer(history=...)`，向后兼容（默认 None） |
+| scripts/rag/xiyouji_rag.py | W358 | v2.3.9 `answer()` 新增 `history=None` 参数；LLM 占位分支注释：接入 LLM 时把 history 拼为上下文注入 prompt（档 B 待 LLM_API_KEY） |
+| site/data/81-hardships-view.html | W358 | v2.3.9 内联 `vis-tools.js`+`dataset-view.js`（消除外部 `../static/js` 不加载→停在「正在连接数据 API」的空白隐患；`</script>` 转义 `<\/script`） |
+| site/data/character-relationship-3d-view.html | W358 | v2.3.9 同 81-hardships-view·内联 vis-tools.js+dataset-view.js |
+| site/data/data-explorer.html | W358 | v2.3.9 内联 vis-tools.js（仅依赖 VisTools，不含 DatasetView） |
+| site/data/*.html（136 页·含 data/en/） | W358 | v2.3.9 由 scripts/inline_css.py 批量内联 tokens.css+system.css，彻底摆脱 `../` 外观依赖；D3 CDN 保留 |
+| scripts/bump_footer_version.py | W358 | v2.3.9 新建·幂等 footer 版本印章升 W358 脚本·三规则（①`CHANGELOG.md</a> v2.3.8 W357` 锚点 ②`file-index.md</a> W357` 锚点 ③`<footer>` 块内散文式 `v2.3.8 W357` prose）覆盖 en/ 51 页 + dukou-engine.html；`--dry` 预览 |
+| site/en/*.html（51 页）+ site/dukou-engine.html | W358 | v2.3.9 footer 版本印章由 v2.3.8 W357 升 v2.3.9 W358（en/ 页锚点+散文双印章 + dukou-engine 散文式 footer）；data/ 中文页 footer 无版本印章故不动 |
+| site/en/README.md | W358 | v2.3.9 footer 双索引版本示例同步 v2.3.9 W358（第 85/92 行描述与现状一致） |
+
 ## W357 英文站扩张（A6 诗词译介续·四篇 poetry essay 译介 + 入口与文档同步，2026-08-04）
 
 | 文件 | W | 说明 |
