@@ -8,6 +8,30 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
+### v2.3.9（2026-08-05）：W358 静态优先健壮性加固·前端自包含与交互增强（GitHub 参考落地·门面/骨架/灵魂三维度）
+
+> **W358 静态优先健壮性加固**
+> - **来源**：用户要求基于 GitHub 成熟项目参考（HKUDS/LightRAG、Open WebUI、zizhitongjian、aarontbt/d3-knowledge-graph）落地优化；逐层诊断发现前端「`../` 相对路径在预览服务器下 404」是空白与失样式的根因（graph-explorer 右侧空白、加载失败同源），系统性加固静态优先铁律，对齐「门面（文档/呈现）/骨架（代码/结构）/灵魂（价值/实用性）」三维评估。
+> - **执行**：
+>   - **A1 图谱探索器持久化**：`site/data/graph-explorer.html` 新增 `localStorage` 键 `xyj-graph-explorer`，持久化选中图谱/类型筛选/关系筛选/标签维度/搜索词/选中节点/全部节点坐标，刷新自动恢复（仅当 `saved.name===GRAPH_NAME` 才恢复筛选防串味）
+>   - **A2 节点深度链接 + search 预填**：图谱 drill 面板新增「相关研究」跳 `./search.html?q=<节点名>`；`site/data/search.html` 支持 `?q=` 预填自搜，闭合图→文链路
+>   - **A3 渡口问津升级（`site/static/js/rag-chat.js`）**：修复服务端 `draft`（渡口风格摘要）原未渲染 → 改为主回答（打字机逐字呈现）；来源 `path` 改为可点击链接跳源文档；命中词 `<mark>` 高亮；原已声明未用的 `STORAGE_KEY` 现持久化对话历史（刷新不丢）
+>   - **A4 多轮上下文前端补偿 + 后端接缝**：`rag-chat.js` 发送时带最近 4 轮本地历史（`history` 字段）；`scripts/rag/rag_server.py` `/query` 解析 `history` 并透传；`scripts/rag/xiyouji_rag.py` `answer()` 新增 `history=None` 参数（LLM 接入时拼为上下文）——**真正生效需 LLM_API_KEY（档 B 待办）**
+>   - **A5 图谱性能兜底（守零依赖铁律）**：`graph-explorer.html` 按规模降迭代（>200 节点 `iters=50`、拖拽中 `iters=4/12`），避免 O(n²) 仿真每帧全量重跑；**不引 `force-graph`**（违铁律）
+>   - **布局优化（graph-explorer）**：`flex column + .layout{flex:1;min-height:0}` 替换写死 `calc(100vh-56px)` 防纵向溢出；新增 `.no-side`（左侧栏可折叠 ✕ 按钮）与 `.no-drill`（右侧详情隐藏时折叠列）；`@media(max-width:780px)` 窄屏单列堆叠
+>   - **图谱空白修复**：`graph-explorer.html` 离线图集（`window.GRAPH_FALLBACK`+`GRAPH_LIST`·2 图 42 节点）**内联**进 HTML，删除外部 `../static/js/graph-fallback.js`，消除 `file://` 与预览服务器下 `../` 404 空白
+>   - **vis-tools 3 页同类加固**：`site/data/81-hardships-view.html`、`character-relationship-3d-view.html`、`data-explorer.html` 内联 `vis-tools.js`+`dataset-view.js`（18KB，`</script>` 转义 `<\/script` 防提前闭合），消除外部 `../static/js` 不加载→永远「正在连接数据 API」的空白隐患
+>   - **CSS 内联（136 页自包含）**：新建幂等生成器 `scripts/inline_css.py`，将 `../tokens.css`+`../system.css` 内联为 `<style>` 块覆盖 `data/` 及子目录全部 136 个 HTML（含 `data/en/`）；单一事实源仍是 `site/tokens.css`/`site/system.css`，改 CSS 后重跑脚本即全站同步；D3 CDN 保留不动（唯一 sanctioned 外部依赖）
+>   - **footer 版本印章同步 v2.3.9 W358**：新建幂等脚本 `scripts/bump_footer_version.py`（三规则：①`CHANGELOG.md</a> v2.3.8 W357` 锚点 ②`file-index.md</a> W357` 锚点 ③`<footer>` 块内散文式 `v2.3.8 W357` prose），将 en/ 51 页（锚点+散文双印章）+ `site/dukou-engine.html`（散文式 footer）升至 `v2.3.9 W358`；`site/en/README.md` 第 85/92 行版本示例同步；data/ 中文页 footer 无版本印章故不动
+> - **验证**：
+>   - JS 语法（`new Function`）：graph-explorer/search/rag-chat 三文件全 OK
+>   - Python `py_compile`：rag_server.py/xiyouji_rag.py/inline_css.py 全 OK
+>   - Node `vm` 浏览器等价全局模拟执行：三 vis-tools 页 `VisTools`/`DatasetView` 全局正确定义，无同步错误
+>   - 权威剔除 CSS 注释后验证：136 页**0** 真实 `<link>` 残留、0 style 标签不平衡
+>   - 本地站点服务器（`site/` 为根·8088）实测：`data/aesthetics.html`→200 含内联样式块与 `.topnav` 选择器
+>   - RAG 检索服务（8777）实测：`/query?q=孙悟空` 返回 BM25+图谱双检索真实片段，`draft/graph/snippets` 三前端消费字段齐全
+> - **状态**：已落地·静态优先铁律强化·`file://` 与任意预览姿势下零 `../` 依赖丢失；档 B 真实生成（LLM 调用）仍待 `LLM_API_KEY`
+
 ### v2.3.8（2026-08-04）：W357 英文站 A6 诗词译介续（四篇 poetry essay·site/en/ 47→51 文件）
 
 - **英文站新增 4 页（site/en/ 47→51 文件）**：essay-character-fu.html（E34·人物赋·四理论家 刘勰/钟嵘/司空图/王国维 + 四赋型 定像/变化/点化/封圣 line 522/864/1393/7085·明代镜像 前后七子/公安派/戏曲唱白）、essay-rhythm-analysis.html（E35·韵律分析·四理论家 王力/启功/周振甫/朱光潜 + 四维度 平仄/对仗/节奏/韵律圆成 line 522/864/1393/7085·仄起平收）、essay-thematic-poetry.html（E36·主题诗词创作·项目自身创作四首 五行山/三打白骨精/真假美猴王/凌云渡 忠实英译）、essay-original-poetry.html（E37·原著诗词赏析·约 800 首功能/主题/回目对联/体裁分布 6%/37%/10%/25%/4%/6%/5% + 人物赞对比）；按"策展摘要 + 中文源文回链 + 中文切换 + footer 双索引 v2.3.8 W357"约定
