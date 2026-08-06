@@ -1191,10 +1191,54 @@ td.num, th.num {
             EMBEDDED_DATA.network.nodes.forEach(n => visibleNodeIds.add(n.id));
             const visibleNodes = nodes.filter(n => visibleNodeIds.has(n.id));
 
+  // 性能：边层改 Canvas 叠加，避免每帧 N×4 几何属性写入触发 SVG 重排
+  var _svgEl = svg.node();
+  var _lcParent = _svgEl.parentNode;
+  if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
+  if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas'); if (_oc) _oc.remove(); }
+  var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var _lcW = _svgEl.clientWidth || 800, _lcH = _svgEl.clientHeight || 540;
+  var _vb = (_svgEl.getAttribute('viewBox') || '').split(/[\s,]+/);
+  var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_svgEl.getAttribute('width') || _lcW);
+  var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_svgEl.getAttribute('height') || _lcH);
+  var linkCanvas = document.createElement('canvas');
+  linkCanvas.className = 'link-canvas';
+  linkCanvas.width = Math.round(_lcW * _dpr);
+  linkCanvas.height = Math.round(_lcH * _dpr);
+  linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _svgEl.offsetLeft + 'px;top:' + _svgEl.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+  if (_lcParent) _lcParent.insertBefore(linkCanvas, _svgEl);
+  _svgEl.style.position = 'relative';
+  _svgEl.style.zIndex = '1';
+  var lctx = linkCanvas.getContext('2d');
+  lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
+  window.drawLinks = function drawLinks() {
+    var linkSels = window.__LINKSELS__ || [];
+    lctx.clearRect(0, 0, _cw, _ch);
+    for (var s = 0; s < linkSels.length; s++) {
+      var sel = linkSels[s], data = sel.data(), lines = sel.nodes();
+      for (var i = 0; i < data.length; i++) {
+        var d = data[i], el = lines[i];
+        if (!d || !d.source || d.source.x == null) continue;
+        lctx.beginPath();
+        lctx.moveTo(d.source.x, d.source.y);
+        lctx.lineTo(d.target.x, d.target.y);
+        lctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
+        lctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
+        var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
+        lctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
+        var da = el.getAttribute('stroke-dasharray');
+        lctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
+        lctx.stroke();
+      }
+    }
+    lctx.setLineDash([]);
+    lctx.globalAlpha = 1;
+  };
+
             linkG.selectAll("line").data(visibleLinks).join("line")
                 .attr("stroke", d => typeColor[d.type] || "#999")
                 .attr("stroke-width", d => Math.sqrt(d.value) * 1.2)
-                .attr("stroke-opacity", 0.5);
+                .attr("stroke-opacity", 0.5); linkG.selectAll("line").style('display','none'); (function(){ var __ls = (window.__LINKSELS__ = window.__LINKSELS__ || []); if (__ls.length === 0) __ls.push(linkG.selectAll("line")); else __ls[0] = linkG.selectAll("line"); })();
 
             sim.nodes(visibleNodes);
             sim.force("link").links(visibleLinks);
@@ -1229,8 +1273,7 @@ td.num, th.num {
         }
 
         sim.on("tick", () => {
-            linkG.selectAll("line").attr("x1", d => d.source.x).attr("y1", d => d.source.y)
-                .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+            window.drawLinks();
             nodeG.selectAll("g").attr("transform", d => `translate(${d.x},${d.y})`);
         });
 

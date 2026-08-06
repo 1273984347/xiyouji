@@ -33,6 +33,9 @@ const FILES = [
   'pilgrim-team-dynamic-network.html',
   'theological-intervention-network.html',
   'underworld-power-network.html',
+  'six-senses-narratology-network.html',         // added this batch
+  'journey-geo-semiotics.html',                  // added this batch
+  'monster-ecology-network.html',                // added this batch
   'relationships.html',                          // multi-svg: 3 force graphs
 ];
 
@@ -81,6 +84,8 @@ function url(f) { return 'file:///' + path.join(DATA, f).replace(/\\/g, '/'); }
         const cx = c.getAttribute('cx');
         if (/^translate\(/.test(t)) positioned++;
         else if (cx !== null && !isNaN(parseFloat(cx))) positioned++;
+        // group-positioned nodes: the parent <g> carries the translate
+        else { const p = c.parentElement; if (p && /^translate\(/.test(p.getAttribute('transform') || '')) positioned++; }
       });
       const lines = Array.from(document.querySelectorAll('svg line'));
       let hidden = 0;

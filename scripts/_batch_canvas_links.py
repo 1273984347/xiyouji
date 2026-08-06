@@ -56,6 +56,10 @@ TARGETS = [
     'pilgrim-team-dynamic-network.html',
     'theological-intervention-network.html',
     'underworld-power-network.html',
+    'cross-time-danmaku.html',
+    'journey-geo-semiotics.html',
+    'monster-ecology-network.html',
+    'six-senses-narratology-network.html',
 ]
 
 # Force-link creation: const X = SVG.append('g') [whitespace/newline] .selectAll('line')

@@ -21,14 +21,19 @@
 
 ## 3. 交付文件
 
-### 3.1 单 SVG 文件（13 + 1 pilot，共 14）
-注入脚本：`scripts/_batch_canvas_links.py`
+### 3.1 单 SVG 文件（14 + 3 本批追加 = 17）
+注入脚本：`scripts/_batch_canvas_links.py`（通用）+ `scripts/_batch_canvas_links_extra.py`（本批：journey/monster 创建写法特殊）
 - `heaven-power-network.html`（pilot，手动验证）
 - `character-dynamic-network.html`、`character-semantic-network.html`
 - `four-dimensional-research-network.html`、`guanyin-six-roles-network.html`
 - `intertextuality-network.html`、`monster-female-network.html`、`monster-hierarchy-network.html`
 - `monster-victims-network.html`、`narratology-12d-network.html`、`narratology-13d-network.html`
 - `pilgrim-team-dynamic-network.html`、`theological-intervention-network.html`、`underworld-power-network.html`
+- **本批追加**：`six-senses-narratology-network.html`、`journey-geo-semiotics.html`、`monster-ecology-network.html`
+  - 这 3 个前序被特意排除（已是节点 transform），但实测仍每帧写 `<line>` 几何 → 适用 canvas 边层。
+  - `journey`/`monster` 力边创建写法不匹配通用正则（journey: `append('g').attr(...).selectAll('line')`；monster: `linkG.selectAll('line').join('line')` 且 link 在筛选时**动态重建**）→ 用 extra 脚本针对性注入。
+  - **关键修复**：extra 脚本把 `drawLinks`/`__LINKSELS__` 挂到 `window`，因这俩文件的力边创建在嵌套函数、tick 在另一作用域，局部 `function drawLinks` 调用不到（初版报 `drawLinks is not defined`）。
+- **`cross-time-danmaku.html` 排除**：grep `x1` 实为常量线（`.attr("x1", origin[0])`），非力边；guard 拒得对，不优化。
 
 ### 3.2 多 SVG 文件（relationships.html，3 个独立力导向图）
 注入脚本：`scripts/_batch_canvas_links_multi.py`
@@ -52,8 +57,10 @@
 
 ### 5.1 运行时冒烟 — `scripts/_smoke_canvas.js`（全部 PASS）
 - 拦截 CDN d3 → 本地副本（`xiyouji-agent-web/node_modules/d3/dist/d3.min.js`），消除 headless 抖动。
-- 断言：无 pageerror；canvas 存在且有非空像素（边真实绘制）；节点 circle 已定位；SVG 力边 `display:none`。
-- 14 单 SVG + relationships（3 层）**ALL PASS**。relationships：3 canvas 全部绘制（32224 px 总计），809/833 节点定位，161/232 SVG 线隐藏（其余 71 为其他区块的网格/散点线，应保留可见）。
+- 断言：无 pageerror；canvas 存在且有非空像素（边真实绘制）；节点 circle 已定位（**含父 `<g>` 携带 transform 的组定位节点**）；SVG 力边 `display:none`。
+- **17 单 SVG + relationships（3 层）= 18 文件 ALL PASS**。
+- 冒烟修正：节点定位判定原只查 circle 自身 transform/cx，漏判「父 `<g>` 携带 translate」的组定位图（如 journey-geo-semiotics 假阴性）→ 现已补查父 `<g>` transform。
+- `six-senses` 基准 before/after（6000ms）：Layout 88→89（≈0）、**Paint 169→5（−97%）**、UpdateLayer 2212→2397（噪声级）、UpdateLayoutTree 88→90。Paint 暴跌证明边由「每帧 169 次 SVG line paint」变为「单 canvas 一次 paint」。
 
 ### 5.2 性能基准 — `scripts/_bench_canvas.js`（CDP trace）
 单图（four-dimensional）：Layout=89 → 与节点 transform 基线一致（不退化）。
