@@ -95,3 +95,6 @@ scratch/
 # 个人方法论沉淀（本地保留，不入库）
 docs/10-方法论沉淀/
 .workbuddy/
+
+# 独立子项目（Web Agent 应用，6万+ 文件，单独仓库，勿入库）
+xiyouji-agent-web/
