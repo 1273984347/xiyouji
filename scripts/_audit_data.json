@@ -1,0 +1,202 @@
+[
+  {
+    "page": "character-dynamic-network.html",
+    "hasJson": false,
+    "jsonNodes": null,
+    "jsonLinks": null,
+    "domCircles": 14,
+    "domLines": 12,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "relationships.html",
+    "hasJson": false,
+    "jsonNodes": null,
+    "jsonLinks": null,
+    "domCircles": 833,
+    "domLines": 232,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "six-senses-narratology-network.html",
+    "hasJson": true,
+    "jsonNodes": 35,
+    "jsonLinks": 40,
+    "domCircles": 70,
+    "domLines": 56,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "journey-geo-semiotics.html",
+    "hasJson": true,
+    "jsonNodes": 7,
+    "jsonLinks": 7,
+    "domCircles": 7,
+    "domLines": 7,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "monster-ecology-network.html",
+    "hasJson": true,
+    "jsonNodes": 31,
+    "jsonLinks": 42,
+    "domCircles": 52,
+    "domLines": 74,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "monster-hierarchy-network.html",
+    "hasJson": true,
+    "jsonNodes": 23,
+    "jsonLinks": 23,
+    "domCircles": 113,
+    "domLines": 51,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "monster-victims-network.html",
+    "hasJson": true,
+    "jsonNodes": 16,
+    "jsonLinks": 16,
+    "domCircles": 44,
+    "domLines": 28,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "monster-female-network.html",
+    "hasJson": true,
+    "jsonNodes": 17,
+    "jsonLinks": 32,
+    "domCircles": 99,
+    "domLines": 57,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "heaven-power-network.html",
+    "hasJson": true,
+    "jsonNodes": 20,
+    "jsonLinks": 27,
+    "domCircles": 109,
+    "domLines": 54,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "underworld-power-network.html",
+    "hasJson": true,
+    "jsonNodes": 19,
+    "jsonLinks": 20,
+    "domCircles": 106,
+    "domLines": 47,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "theological-intervention-network.html",
+    "hasJson": true,
+    "jsonNodes": 18,
+    "jsonLinks": 22,
+    "domCircles": 49,
+    "domLines": 42,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "pilgrim-team-dynamic-network.html",
+    "hasJson": true,
+    "jsonNodes": 5,
+    "jsonLinks": 10,
+    "domCircles": 10,
+    "domLines": 19,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "intertextuality-network.html",
+    "hasJson": true,
+    "jsonNodes": 12,
+    "jsonLinks": 22,
+    "domCircles": 55,
+    "domLines": 39,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "guanyin-six-roles-network.html",
+    "hasJson": true,
+    "jsonNodes": 33,
+    "jsonLinks": 34,
+    "domCircles": 80,
+    "domLines": 73,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "character-semantic-network.html",
+    "hasJson": false,
+    "jsonNodes": null,
+    "jsonLinks": null,
+    "domCircles": 32,
+    "domLines": 18,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "narratology-12d-network.html",
+    "hasJson": true,
+    "jsonNodes": 14,
+    "jsonLinks": 30,
+    "domCircles": 75,
+    "domLines": 44,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "narratology-13d-network.html",
+    "hasJson": true,
+    "jsonNodes": 16,
+    "jsonLinks": 32,
+    "domCircles": 106,
+    "domLines": 55,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "four-dimensional-research-network.html",
+    "hasJson": true,
+    "jsonNodes": 24,
+    "jsonLinks": 32,
+    "domCircles": 76,
+    "domLines": 67,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "character-relationship-3d.html",
+    "hasJson": true,
+    "jsonNodes": 22,
+    "jsonLinks": 32,
+    "domCircles": 0,
+    "domLines": 0,
+    "pageErrors": 0,
+    "domErr": null
+  },
+  {
+    "page": "cross-time-danmaku.html",
+    "hasJson": true,
+    "jsonNodes": 10,
+    "jsonLinks": 0,
+    "domCircles": 4,
+    "domLines": 3,
+    "pageErrors": 0,
+    "domErr": null
+  }
+]
