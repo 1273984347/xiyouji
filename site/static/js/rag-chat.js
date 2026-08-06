@@ -207,11 +207,71 @@
     return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
+  // 命中词高亮：先转义，再对查询词包裹 <mark>（转义后无非标签内容，安全）
+  function highlight(text, q) {
+    let out = escapeHtml(text);
+    const toks = (q || '').split(/\s+/).map(t => t.trim()).filter(t => t.length > 1);
+    toks.forEach(t => {
+      try {
+        const re = new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+        out = out.replace(re, '<mark>$1</mark>');
+      } catch (e) {}
+    });
+    return out;
+  }
+
+  // 打字机：逐字揭示（每次对当前切片整体转义，避免截断实体）
+  function typeText(el, text) {
+    let i = 0;
+    (function tick() {
+      if (i >= text.length) return;
+      el.innerHTML = escapeHtml(text.slice(0, i + 1));
+      i++;
+      messages.scrollTop = messages.scrollHeight;
+      setTimeout(tick, 10);
+    })();
+  }
+
+  // 源文档相对路径：project-root/docs/...（从 site/data/ 出发）
+  function docHref(path) {
+    if (!path) return null;
+    const p = String(path).replace(/\\/g, '/');
+    const idx = p.indexOf('/docs/');
+    const rel = idx >= 0 ? p.slice(idx + 1) : p;
+    return '../../' + rel;
+  }
+
+  // 对话历史持久化（STORAGE_KEY 已声明）
+  function pushHistory(role, text) {
+    try {
+      const h = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      h.push({ role, text });
+      if (h.length > 40) h = h.slice(-40);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(h));
+    } catch (e) {}
+  }
+  function loadHistory() {
+    try {
+      const h = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      if (!h.length) return;
+      const hint = messages.querySelector('.rag-msg-hint');
+      if (hint) hint.remove();
+      h.forEach(m => addMessage(m.role, escapeHtml(m.text)));
+    } catch (e) {}
+  }
+
   async function sendQuery() {
     const q = input.value.trim();
     if (!q) return;
 
+    // 多轮上下文（前端补偿，后端无状态）：取最近 4 轮作为 history 带给后端，
+    // 待 LLM 接入后后端即可据此注入对话上下文（无需 Key，提前接线）。
+    let prior = [];
+    try { prior = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch (e) {}
+    const ctx = prior.slice(-4).map(m => ({ role: m.role, text: (m.text || '').slice(0, 160) }));
+
     addMessage('user', escapeHtml(q));
+    pushHistory('user', q);
     input.value = '';
     sendBtn.disabled = true;
     sendBtn.textContent = '…';
@@ -227,34 +287,52 @@
     }
 
     try {
-      const res = await fetch(`${RAG_BASE}/query?q=${encodeURIComponent(q)}&k=5`, {
+      const qry = ctx.length
+        ? `${RAG_BASE}/query?q=${encodeURIComponent(q)}&k=5&history=${encodeURIComponent(JSON.stringify(ctx))}`
+        : `${RAG_BASE}/query?q=${encodeURIComponent(q)}&k=5`;
+      const res = await fetch(qry, {
         signal: AbortSignal.timeout(10000)
       });
       const data = await res.json();
 
-      let html = '';
-      // 文本片段（snippets 为 {path, score, excerpt} 对象数组）
-      if (data.snippets && data.snippets.length) {
-        html += data.snippets.map((s, i) => {
+      const bubble = addMessage('bot', '').querySelector('.rag-bubble');
+
+      // 主回答：优先「渡口风格摘要」draft；否则回退原始片段
+      const draft = (data.draft && data.draft.trim()) ? data.draft.trim() : '';
+      if (draft) {
+        typeText(bubble, draft);
+      } else if (data.snippets && data.snippets.length) {
+        bubble.innerHTML = data.snippets.map((s, i) => {
           const text = typeof s === 'string' ? s : (s.excerpt || s.path || '');
-          const score = s.score ? ` <small style="color:#9A9280">(${s.score.toFixed(1)})</small>` : '';
-          return `<strong>${i + 1}.</strong> ${escapeHtml(text.slice(0, 200))}${text.length > 200 ? '…' : ''}${score}`;
+          return `<strong>${i + 1}.</strong> ${highlight(text, q)}`;
         }).join('<br><br>');
       } else {
-        html += '未找到相关语料。换个问法试试？';
+        bubble.innerHTML = '未找到相关语料。换个问法试试？';
       }
 
-      const botMsg = addMessage('bot', html);
+      // 相关语料（高亮命中词）
+      if (data.snippets && data.snippets.length) {
+        const ex = document.createElement('div');
+        ex.className = 'rag-source';
+        ex.innerHTML = '📚 相关语料：' + data.snippets.slice(0, 3).map(s => {
+          const text = typeof s === 'string' ? s : (s.excerpt || '');
+          return '<div style="margin:4px 0;line-height:1.6">' + highlight(text.slice(0, 140), q) + (text.length > 140 ? '…' : '') + '</div>';
+        }).join('');
+        bubble.appendChild(ex);
+      }
 
-      // 来源标注（从 snippets 的 path 字段提取）
+      // 来源标注（可点击跳源文档）
       const sources = (data.snippets || [])
         .filter(s => typeof s === 'object' && s.path)
-        .map(s => s.path.replace(/\\/g, '/').split('/').pop());
+        .map(s => ({ name: s.path.replace(/\\/g, '/').split('/').pop(), href: docHref(s.path) }))
+        .filter((v, i, a) => a.findIndex(x => x.name === v.name) === i);
       if (sources.length) {
         const srcDiv = document.createElement('div');
         srcDiv.className = 'rag-source';
-        srcDiv.innerHTML = '📖 来源：' + sources.map(s => escapeHtml(s)).join(' · ');
-        botMsg.querySelector('.rag-bubble').appendChild(srcDiv);
+        srcDiv.innerHTML = '📖 来源：' + sources.map(s => s.href
+          ? `<a href="${s.href}" target="_blank" rel="noopener" style="color:#3a6b8c;text-decoration:none">${escapeHtml(s.name)} ↗</a>`
+          : escapeHtml(s.name)).join(' · ');
+        bubble.appendChild(srcDiv);
       }
 
       // 图谱三元组（{from, relation, to} 对象数组）
@@ -267,8 +345,13 @@
           const to = g.to || g[2] || '';
           return `<span>${escapeHtml(from.slice(0,12))} →${escapeHtml(rel)}→ ${escapeHtml(to.slice(0,12))}</span>`;
         }).join('');
-        botMsg.querySelector('.rag-bubble').appendChild(graphDiv);
+        bubble.appendChild(graphDiv);
       }
+
+      // 持久化本轮对话
+      const firstSnippet = (data.snippets && data.snippets[0])
+        ? (typeof data.snippets[0] === 'string' ? data.snippets[0] : (data.snippets[0].excerpt || '')) : '未找到相关语料。';
+      pushHistory('bot', draft || firstSnippet);
 
     } catch (e) {
       if (e.name === 'TimeoutError' || e.name === 'AbortError') {
@@ -285,6 +368,9 @@
     sendBtn.textContent = '问';
     messages.scrollTop = messages.scrollHeight;
   }
+
+  // 恢复历史对话
+  loadHistory();
 
   // 页面加载时静默检测服务状态（更新 fab 提示）
   checkHealth().then(() => {
