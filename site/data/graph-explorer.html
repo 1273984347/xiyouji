@@ -4,18 +4,712 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>知识图谱探索器 · 详解西游记</title>
-<link rel="stylesheet" href="../tokens.css">
-<link rel="stylesheet" href="../system.css">
+
+
+    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: swap;
+    src: url('static/fonts/NotoSerifSC-VF.woff2') format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
 <style>
   :root{ --zhu:#c8463a; --qing:#3a6b8c; --xuan:#faf7f2; --ink:#2b2118; --line:#d9cdb8; }
   *{box-sizing:border-box}
-  body{margin:0;font-family:"Noto Sans SC","PingFang SC",system-ui,sans-serif;background:var(--xuan);color:var(--ink)}
+  html,body{height:100%}
+  body{margin:0;font-family:"Noto Sans SC","PingFang SC",system-ui,sans-serif;background:var(--xuan);color:var(--ink);display:flex;flex-direction:column}
   header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--line);background:#fffdf9}
   header h1{font-family:"Noto Serif SC",serif;font-size:20px;margin:0;color:var(--zhu)}
   header .sub{font-size:13px;color:#7a6f5e}
   #banner{margin-left:auto;font-size:12px;padding:3px 10px;border-radius:20px;background:#f0e7d6;color:#7a6f5e}
   #banner.online{background:#e3f0e8;color:#2f7d52}
-  .layout{display:grid;grid-template-columns:240px 1fr 280px;gap:0;height:calc(100vh - 56px)}
+  .layout{display:grid;grid-template-columns:240px 1fr 280px;gap:0;flex:1;min-height:0}
+  .layout.no-drill{grid-template-columns:240px 1fr 0px}
+  .layout.no-drill .drill{border-left:none}
+  .layout.no-side{grid-template-columns:0 1fr 280px}
+  .layout.no-side.no-drill{grid-template-columns:0 1fr 0px}
+  .layout.no-side .side{border-right:none;overflow:hidden}
+  #sideToggle{margin-left:10px;font-size:16px;line-height:1;padding:4px 9px;border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;color:var(--ink)}
+  #sideToggle:hover{border-color:var(--zhu);color:var(--zhu)}
   .side{border-right:1px solid var(--line);padding:14px;overflow:auto;background:#fffdf9}
   .stage{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,#fffdf9,#f4ece0)}
   .drill{border-left:1px solid var(--line);padding:14px;overflow:auto;background:#fffdf9;display:none}
@@ -55,6 +749,13 @@
   .relsum b{color:var(--zhu)}
   .relsum .rs{display:inline-block;margin:0 6px 2px 0}
   .relsum .rs i{font-style:normal;width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:middle}
+  @media (max-width:780px){
+    body{display:block}
+    .layout,.layout.no-drill,.layout.no-side,.layout.no-side.no-drill{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;flex:none;height:auto}
+    .side{grid-row:1;border-right:none;border-bottom:1px solid var(--line);max-height:42vh}
+    .stage{grid-row:2;min-height:62vh}
+    .drill{grid-row:3;border-left:none;border-top:1px solid var(--line)}
+  }
 </style>
 </head>
 <body>
@@ -62,8 +763,9 @@
   <h1>知识图谱探索器</h1>
   <span class="sub">佛法=AI=西游 · 取经人物关系 · 力导向可交互</span>
   <span id="banner">加载中…</span>
+  <button id="sideToggle" title="折叠 / 展开左侧控制栏">☰</button>
 </header>
-<div class="layout">
+<div class="layout no-drill">
   <aside class="side">
     <h3>图谱</h3>
     <select id="graphSel"></select>
@@ -93,12 +795,17 @@
   <aside class="drill" id="drill"></aside>
 </div>
 
-<script src="../static/js/graph-fallback.js"></script>
+<script>
+/* 离线图集内联：源 scripts/output/yuanqi_*.csv + dataset/character-relationship-3d.json（与 static/js/graph-fallback.js 同源，避免 file:// 或预览服务器下 ../ 相对路径 404 导致空白） */
+// 自动生成：离线图集（file:// 降级用）。来源 scripts/output/yuanqi_*.csv + dataset/character-relationship-3d.json
+window.GRAPH_FALLBACK = {"yuanqi-graph": {"meta": {"title": "佛法=AI=西游 三元映射图谱（W326）", "note": "每个节点含佛学/AI/西游三套实体名：识体·尘境·种子·现行·转依·系缚·解脱七类。", "schema": "graph", "group_colors": {"识体": "#3a6b8c", "尘境": "#7fa8c9", "种子": "#c8463a", "现行": "#d98a3d", "转依": "#4f9d8a", "系缚": "#8a6db0", "解脱": "#d4a017"}, "dimensions": ["佛学", "AI", "西游"]}, "nodes": [{"id": "N1", "label": "阿赖耶识", "group": "识体", "desc": "一切种子的仓库，数十亿浮点参数", "aliases": {"佛学": "阿赖耶识", "AI": "预训练权重", "西游": "灵山藏经阁"}}, {"id": "N2", "label": "末那识", "group": "识体", "desc": "恒审思量、执阿赖耶识见分为我", "aliases": {"佛学": "末那识", "AI": "自注意力Q", "西游": "悟空\"俺老孙来也\""}}, {"id": "N3", "label": "意识", "group": "识体", "desc": "第六识，统合前五识", "aliases": {"佛学": "意识", "AI": "综合判断层", "西游": "唐僧念《心经》"}}, {"id": "N4", "label": "前五识", "group": "识体", "desc": "眼耳鼻舌身感知采集", "aliases": {"佛学": "前五识", "AI": "多模态编码器", "西游": "火眼金睛/肉身"}}, {"id": "N5", "label": "色尘", "group": "尘境", "desc": "输入空间：狮驼尸山、火焰焦土、通天河冰", "aliases": {"佛学": "色尘", "AI": "训练数据分布", "西游": "八十一难风景"}}, {"id": "N6", "label": "声尘", "group": "尘境", "desc": "频率信号：咒文、破晓一叫", "aliases": {"佛学": "声尘", "AI": "频域信号", "西游": "紧箍咒七遍/昴日鸡鸣"}}, {"id": "N7", "label": "法尘", "group": "尘境", "desc": "规则/概念/名相的符号化", "aliases": {"佛学": "法尘", "AI": "结构化符号数据", "西游": "通关文牒朱印"}}, {"id": "N8", "label": "业力种子", "group": "种子", "desc": "潜在倾向，遇缘现行", "aliases": {"佛学": "业力种子", "AI": "浮点参数", "西游": "金蝉子十世记忆"}}, {"id": "N9", "label": "物性种子", "group": "种子", "desc": "常量特征嵌入", "aliases": {"佛学": "物性种子", "AI": "非语言嵌入常量", "西游": "金箍棒重量/拐杖凹痕"}}, {"id": "N10", "label": "边界种子", "group": "种子", "desc": "截断阈值：ReLU/Sigmoid", "aliases": {"佛学": "边界种子", "AI": "激活函数阈值", "西游": "五行山/凌云渡"}}, {"id": "N11", "label": "身口意三业", "group": "现行", "desc": "显化的行为/输出", "aliases": {"佛学": "身口意三业", "AI": "前向传播输出", "西游": "悟空挥棒/唐僧念经"}}, {"id": "N12", "label": "转识成智", "group": "转依", "desc": "系统状态的质变", "aliases": {"佛学": "转识成智", "AI": "权重更新/微调", "西游": "成佛/拒箍"}}, {"id": "N13", "label": "平等性智", "group": "转依", "desc": "Q分布从我执转为无我", "aliases": {"佛学": "平等性智", "AI": "注意力权重平等化", "西游": "悟空不再问\"与我相关\""}}, {"id": "N14", "label": "烦恼无明", "group": "系缚", "desc": "限制泛化的约束", "aliases": {"佛学": "烦恼无明", "AI": "过拟合/因果掩码", "西游": "紧箍咒/五行山"}}, {"id": "N15", "label": "我执", "group": "系缚", "desc": "对特定分布的执着", "aliases": {"佛学": "我执", "AI": "对特定权重固守", "西游": "悟空\"俺老孙\""}}, {"id": "N16", "label": "涅槃", "group": "解脱", "desc": "突破约束后的状态", "aliases": {"佛学": "涅槃", "AI": "泛化/权重衰减", "西游": "灵山授职/花果山归隐"}}, {"id": "N17", "label": "香尘", "group": "尘境", "desc": "气味数据维度", "aliases": {"佛学": "香尘", "AI": "气味特征维度", "西游": "人参果异香/妖洞腥臊"}}, {"id": "N18", "label": "味尘", "group": "尘境", "desc": "奖励函数味道标识", "aliases": {"佛学": "味尘", "AI": "奖励函数味道标识", "西游": "蟠桃甘美/金丹辛辣"}}, {"id": "N19", "label": "吃与续命种子", "group": "种子", "desc": "数据稀缺下的零和竞争", "aliases": {"佛学": "吃与续命种子", "AI": "零和竞争样本", "西游": "蟠桃/金丹/唐僧肉"}}, {"id": "N20", "label": "轮回种子", "group": "种子", "desc": "循环神经网络的记忆跨度", "aliases": {"佛学": "轮回种子", "AI": "循环记忆跨度", "西游": "六耳赴死/黄袍十三年"}}], "edges": [{"source": "N2", "target": "N1", "relation": "执取", "property": "强度", "value": "随紧箍咒衰减∈[0"}, {"source": "N1", "target": "N11", "relation": "现行", "property": "激活函数", "value": "ReLU/种子生现行"}, {"source": "N5", "target": "N11", "relation": "熏习", "property": "学习率lr/动量β", "value": "逐走白骨精后权重更新"}, {"source": "N8", "target": "N16", "relation": "异熟", "property": "延迟步数", "value": "9世跨时成熟"}, {"source": "N2", "target": "N12", "relation": "转依", "property": "状态", "value": "冻结(正则化收敛)"}, {"source": "N6", "target": "N2", "relation": "系缚", "property": "惩罚系数λ", "value": "L2正则化"}, {"source": "N4", "target": "N5", "relation": "遮蔽", "property": "失活概率p", "value": "Dropout未激活(肉眼凡胎)"}, {"source": "N10", "target": "N2", "relation": "系缚", "property": "冻结时长", "value": "五行山五百年梯度停止"}, {"source": "N10", "target": "N12", "relation": "转依", "property": "状态", "value": "解冻(凌云渡脱胎换权重)"}, {"source": "N16", "target": "N13", "relation": "解脱", "property": "所有者", "value": "无所有者(拒绝被定义)"}, {"source": "N9", "target": "N11", "relation": "现行", "property": "常量嵌入", "value": "金箍棒重量=武器即权重"}, {"source": "N20", "target": "N14", "relation": "系缚", "property": "分歧类型", "value": "镜像过拟合后删除"}, {"source": "N19", "target": "N14", "relation": "系缚", "property": "竞争类型", "value": "零和偏置"}, {"source": "N6", "target": "N2", "relation": "熏习", "property": "频次", "value": "紧箍咒七遍声波=正则信号"}, {"source": "N7", "target": "N3", "relation": "现行", "property": "结构化", "value": "朱印=目标函数"}, {"source": "N17", "target": "N4", "relation": "现行", "property": "编码", "value": "气味→感知"}, {"source": "N18", "target": "N4", "relation": "现行", "property": "编码", "value": "味道→奖励标识"}, {"source": "N3", "target": "N2", "relation": "执取", "property": "强度", "value": "凡胎弱执我"}, {"source": "N1", "target": "N16", "relation": "转依", "property": "存储", "value": "收敛后权重入库"}, {"source": "N13", "target": "N16", "relation": "转依", "property": "泛化", "value": "平等性智=无我"}]}, "character-relationship-3d": {"meta": {"title": "取经团队人物关系图谱（3D 投影）", "note": "取经五人 + 关键神佛妖魔的关系网络（group=阵营/身份）。", "schema": "graph", "group_colors": {}, "dimensions": []}, "nodes": [{"id": 1, "label": "唐僧", "group": "0", "desc": "金蝉子转世，取经团队核心，意志坚定但常陷险境。", "importance": 9}, {"id": 2, "label": "孙悟空", "group": "0", "desc": "齐天大圣，神通广大，降妖除魔的主力。", "importance": 10}, {"id": 3, "label": "猪八戒", "group": "0", "desc": "天蓬元帅转世，贪吃好色但忠心耿耿。", "importance": 7}, {"id": 4, "label": "沙悟净", "group": "0", "desc": "卷帘大将转世，沉稳老实，挑担随行。", "importance": 6}, {"id": 5, "label": "白龙马", "group": "0", "desc": "西海龙王三太子，化身为马驮唐僧。", "importance": 5}, {"id": 6, "label": "观音菩萨", "group": "2", "desc": "南海普陀落伽山，取经事业的策划者与守护者。", "importance": 9}, {"id": 7, "label": "如来佛祖", "group": "2", "desc": "西天灵山释迦牟尼，最终授经者。", "importance": 10}, {"id": 8, "label": "文殊菩萨", "group": "2", "desc": "五台山文殊，智慧象征。", "importance": 6}, {"id": 9, "label": "普贤菩萨", "group": "2", "desc": "峨眉山普贤，行愿象征。", "importance": 6}, {"id": 10, "label": "玉皇大帝", "group": "1", "desc": "天庭最高统治者，三界之主。", "importance": 9}, {"id": 11, "label": "太白金星", "group": "1", "desc": "天庭外交官，多次招安悟空。", "importance": 7}, {"id": 12, "label": "二郎神", "group": "1", "desc": "杨戬，玉帝外甥，擒获悟空。", "importance": 8}, {"id": 13, "label": "托塔天王", "group": "1", "desc": "李靖，天兵统帅，多次征讨。", "importance": 7}, {"id": 14, "label": "哪吒", "group": "1", "desc": "三太子，先锋官，与悟空交战。", "importance": 7}, {"id": 15, "label": "牛魔王", "group": "3", "desc": "平天大圣，悟空结拜大哥，最终归顺。", "importance": 8}, {"id": 16, "label": "铁扇公主", "group": "3", "desc": "罗刹女，芭蕉扇主人，牛魔王之妻。", "importance": 6}, {"id": 17, "label": "红孩儿", "group": "3", "desc": "圣婴大王，牛魔王之子，三昧真火。", "importance": 7}, {"id": 18, "label": "白骨精", "group": "3", "desc": "白骨夫人，三变戏悟空，致师徒离心。", "importance": 6}, {"id": 19, "label": "黄袍怪", "group": "3", "desc": "奎木狼下凡，与百花羞宿缘。", "importance": 6}, {"id": 20, "label": "六耳猕猴", "group": "3", "desc": "假悟空，乱真难辨，全书最大悬案。", "importance": 8}, {"id": 21, "label": "东海龙王", "group": "4", "desc": "敖广，悟空借取定海神针。", "importance": 6}, {"id": 22, "label": "西海龙王", "group": "4", "desc": "敖闰，白龙马之父。", "importance": 5}], "edges": [{"source": 1, "target": 2, "relation": "师徒", "property": "", "value": ""}, {"source": 1, "target": 3, "relation": "师徒", "property": "", "value": ""}, {"source": 1, "target": 4, "relation": "师徒", "property": "", "value": ""}, {"source": 1, "target": 5, "relation": "师徒", "property": "", "value": ""}, {"source": 1, "target": 6, "relation": "庇护", "property": "", "value": ""}, {"source": 6, "target": 7, "relation": "从属", "property": "", "value": ""}, {"source": 6, "target": 1, "relation": "指派", "property": "", "value": ""}, {"source": 6, "target": 8, "relation": "同僚", "property": "", "value": ""}, {"source": 6, "target": 9, "relation": "同僚", "property": "", "value": ""}, {"source": 7, "target": 1, "relation": "授经", "property": "", "value": ""}, {"source": 2, "target": 10, "relation": "反叛", "property": "", "value": ""}, {"source": 2, "target": 12, "relation": "敌对", "property": "", "value": ""}, {"source": 2, "target": 13, "relation": "敌对", "property": "", "value": ""}, {"source": 2, "target": 14, "relation": "敌对", "property": "", "value": ""}, {"source": 2, "target": 21, "relation": "索取", "property": "", "value": ""}, {"source": 2, "target": 15, "relation": "结拜", "property": "", "value": ""}, {"source": 2, "target": 20, "relation": "宿敌", "property": "", "value": ""}, {"source": 10, "target": 11, "relation": "从属", "property": "", "value": ""}, {"source": 10, "target": 12, "relation": "从属", "property": "", "value": ""}, {"source": 10, "target": 13, "relation": "从属", "property": "", "value": ""}, {"source": 10, "target": 14, "relation": "从属", "property": "", "value": ""}, {"source": 13, "target": 14, "relation": "父子", "property": "", "value": ""}, {"source": 12, "target": 14, "relation": "兄弟", "property": "", "value": ""}, {"source": 15, "target": 16, "relation": "夫妻", "property": "", "value": ""}, {"source": 15, "target": 17, "relation": "父子", "property": "", "value": ""}, {"source": 16, "target": 17, "relation": "母子", "property": "", "value": ""}, {"source": 2, "target": 16, "relation": "敌对", "property": "", "value": ""}, {"source": 2, "target": 17, "relation": "敌对", "property": "", "value": ""}, {"source": 2, "target": 18, "relation": "击杀", "property": "", "value": ""}, {"source": 2, "target": 19, "relation": "交战", "property": "", "value": ""}, {"source": 5, "target": 22, "relation": "父子", "property": "", "value": ""}, {"source": 21, "target": 22, "relation": "兄弟", "property": "", "value": ""}]}};
+window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元映射图谱（W326）", "node_count": 20, "edge_count": 20}, {"name": "character-relationship-3d", "title": "取经团队人物关系图谱（3D 投影）", "node_count": 22, "edge_count": 32}];
+</script>
 <script>
 (function(){
   "use strict";
   var GRAPH=null, GRAPH_NAME="yuanqi-graph";
-  var nodePos=new Map(), focusNode=null, draggingId=null, dragMoved=false;
+  var nodePos=new Map(), focusNode=null, draggingId=null, dragMoved=false, dragActive=false;
   var activeGroups=new Set(), activeRels=new Set(), labelDim="", searchTerm="";
   var PALETTE=["#3a6b8c","#c8463a","#d98a3d","#4f9d8a","#8a6db0","#d4a017","#6b8e23","#b5651d","#708090","#cd5c5c"];
   // ---- 关系语义模型：curated 配色 + 语义权重（粗细） ----
@@ -128,6 +835,19 @@
   }
   function xmlEsc(s){return (s==null?"":String(s)).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
   function shortLabel(s){ if(!s) return "?"; var x=String(s); var i=x.indexOf("（"); if(i>0)x=x.slice(0,i); var j=x.indexOf("/"); if(j>0)x=x.slice(0,j); return x.trim()||s.slice(0,10); }
+
+  // ---- 持久化（localStorage）：图谱选择 / 筛选 / 标签维度 / 搜索 / 选中节点 / 节点坐标 ----
+  var STORAGE_KEY="xyj-graph-explorer";
+  function saveState(){
+    try{
+      var pos={}; nodePos.forEach(function(v,k){ pos[k]={x:Math.round(v.x),y:Math.round(v.y)}; });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        name:GRAPH_NAME, groups:[].slice.call(activeGroups), rels:[].slice.call(activeRels),
+        dim:labelDim, search:searchTerm, focus:focusNode, pos:pos
+      }));
+    }catch(e){}
+  }
+  function loadSaved(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)||"null"); }catch(e){ return null; } }
 
   function setBanner(online,msg){ var b=document.getElementById("banner"); b.textContent=msg||(online?"在线：数据来自 /graph":"离线：内嵌图集（启动数据 API 见完整在线版）"); b.className=online?"online":""; }
 
@@ -169,7 +889,7 @@
       gf.appendChild(lab);
     });
     gf.querySelectorAll("input").forEach(function(cb){
-      cb.addEventListener("change",function(){ var g=cb.getAttribute("data-g"); if(cb.checked)activeGroups.add(g); else activeGroups.delete(g); renderGraph(); });
+      cb.addEventListener("change",function(){ var g=cb.getAttribute("data-g"); if(cb.checked)activeGroups.add(g); else activeGroups.delete(g); renderGraph(); saveState(); });
     });
     // dimension toggle
     var db=document.getElementById("dimBtns"); db.innerHTML="";
@@ -178,7 +898,7 @@
       labelDim=dims[0];
       dims.forEach(function(d){
         var b=document.createElement("button"); b.textContent=d; if(d===labelDim)b.className="active";
-        b.addEventListener("click",function(){ labelDim=d; db.querySelectorAll("button").forEach(function(x){x.className="";}); b.className="active"; renderGraph(); });
+        b.addEventListener("click",function(){ labelDim=d; db.querySelectorAll("button").forEach(function(x){x.className="";}); b.className="active"; renderGraph(); saveState(); });
         db.appendChild(b);
       });
     }else{ db.innerHTML='<span class="legend">本图无多维度标签</span>'; }
@@ -197,7 +917,7 @@
       rf.appendChild(lab);
     });
     rf.querySelectorAll("input").forEach(function(cb){
-      cb.addEventListener("change",function(){ var r=cb.getAttribute("data-r"); if(cb.checked)activeRels.add(r); else activeRels.delete(r); renderGraph(); });
+      cb.addEventListener("change",function(){ var r=cb.getAttribute("data-r"); if(cb.checked)activeRels.add(r); else activeRels.delete(r); renderGraph(); saveState(); });
     });
     var rl=document.getElementById("relLegend"); rl.innerHTML="";
     Object.keys(rels).sort().forEach(function(r){
@@ -235,7 +955,10 @@
     });
     var anchor=new Map();
     ids.forEach(function(id){ var p=nodePos.get(id); anchor.set(id,{x:p.x,y:p.y}); });
-    var iters=ids.length>60?90:200, ideal=120;
+    var heavy=ids.length>200;
+    var iters=ids.length>60?(heavy?50:90):200;
+    if(dragActive) iters=heavy?4:12;  // 拖拽中只做极轻量收敛，保持流畅（零依赖铁律，不引 force-graph）
+    var ideal=120;
     for(var it=0;it<iters;it++){
       var fx=new Map(),fy=new Map();
       ids.forEach(function(id){fx.set(id,0);fy.set(id,0);});
@@ -316,7 +1039,7 @@
       box._wired=true;
       box.addEventListener("pointerdown",function(ev){
         var t=ev.target; if(!t||!t.getAttribute||!t.getAttribute("data-id"))return;
-        draggingId=t.getAttribute("data-id"); dragMoved=false;
+        draggingId=t.getAttribute("data-id"); dragMoved=false; dragActive=true;
       });
       box.addEventListener("pointermove",function(ev){
         if(!draggingId)return;
@@ -328,16 +1051,17 @@
         dragMoved=true; renderGraph();
       });
       box.addEventListener("pointerup",function(ev){
-        if(draggingId && !dragMoved){ focusNode=draggingId; renderGraph(); openDrill(draggingId); }
-        draggingId=null;
+        if(draggingId && !dragMoved){ focusNode=draggingId; renderGraph(); openDrill(draggingId); saveState(); }
+        draggingId=null; dragActive=false;
       });
-      box.addEventListener("pointerleave",function(){ draggingId=null; });
+      box.addEventListener("pointerleave",function(){ draggingId=null; dragActive=false; });
     }
   }
   function openDrill(id){
     var n=null; GRAPH.nodes.forEach(function(x){ if(x.id===id)n=x; }); if(!n)return;
     var panel=document.getElementById("drill"); panel.className="drill show";
-    var html='<button onclick="document.getElementById(\'drill\').className=\'drill\'" style="float:right;border:none;background:none;cursor:pointer;color:#9a8f7c">✕</button>';
+    document.querySelector(".layout").classList.remove("no-drill");
+    var html='<button onclick="document.getElementById(\'drill\').className=\'drill\';document.querySelector(\'.layout\').classList.add(\'no-drill\')" style="float:right;border:none;background:none;cursor:pointer;color:#9a8f7c">✕</button>';
     html+='<h2>'+xmlEsc(labelOf(n))+'</h2>';
     if(n.aliases) html+='<div class="tag">'+(n.aliases["佛学"]||"")+' · '+(n.aliases["AI"]||"")+' · '+(n.aliases["西游"]||"")+'</div>';
     else if(n.group) html+='<div class="tag">'+xmlEsc(n.group)+'</div>';
@@ -370,9 +1094,12 @@
       html+='<li data-id="'+xmlEsc(x.other)+'"><div class="row"><span>'+x.dir+' '+xmlEsc(ol)+'</span><span class="rel"><span class="relchip" style="background:'+relationColor(x.rel)+'">'+xmlEsc(x.rel)+'</span></span></div>'+pv+'</li>';
     });
     html+='</ul>';
+    var lab=labelOf(n);
+    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">相关研究</h3>';
+    html+='<div class="alias"><a href="./search.html?q='+encodeURIComponent(lab)+'" target="_blank" rel="noopener" style="color:#3a6b8c;text-decoration:none">🔍 站内检索「'+xmlEsc(lab)+'」的相关解读 →</a></div>';
     panel.innerHTML=html;
     panel.querySelectorAll(".nbr li").forEach(function(li){
-      li.addEventListener("click",function(){ var tid=li.getAttribute("data-id"); focusNode=tid; renderGraph(); openDrill(tid); });
+      li.addEventListener("click",function(){ var tid=li.getAttribute("data-id"); focusNode=tid; renderGraph(); openDrill(tid); saveState(); });
     });
   }
   // ---- 导出 ----
@@ -399,7 +1126,8 @@
     var blob=new Blob([JSON.stringify(out,null,1)],{type:"application/json;charset=utf-8"});
     var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=GRAPH_NAME+".json"; a.click();
   });
-  document.getElementById("search").addEventListener("input",function(e){ searchTerm=e.target.value; renderGraph(); });
+  document.getElementById("search").addEventListener("input",function(e){ searchTerm=e.target.value; renderGraph(); saveState(); });
+  document.getElementById("sideToggle").addEventListener("click",function(){ document.querySelector(".layout").classList.toggle("no-side"); });
 
   async function init(){
     var info=await loadGraphList();
@@ -410,15 +1138,31 @@
     });
     if(!info.list.length){ setBanner(false,"离线：无内嵌图集"); return; }
     sel.addEventListener("change",function(){ GRAPH_NAME=sel.value; loadAndRender().catch(function(e){ console.error("LOADERR: "+e.message); }); });
-    GRAPH_NAME=info.list[0].name;
+    var saved0=loadSaved();
+    if(saved0&&saved0.name&&info.list.some(function(g){return g.name===saved0.name;})) GRAPH_NAME=saved0.name;
+    else GRAPH_NAME=info.list[0].name;
     await loadAndRender();
   }
   async function loadAndRender(){
     focusNode=null; nodePos=new Map(); activeGroups=new Set(); activeRels=new Set();
     GRAPH=await loadGraph(GRAPH_NAME);
     if(!GRAPH){ document.getElementById("graphBox").innerHTML='<p style="padding:20px;color:#9a8f7c">图谱加载失败（离线且无内嵌数据）。</p>'; return; }
-    buildControls(); renderGraph();
+    buildControls();
+    var saved=loadSaved();
+    if(saved && saved.name===GRAPH_NAME){
+      if(saved.pos){ Object.keys(saved.pos).forEach(function(id){ if(GRAPH.nodes.some(function(n){return n.id===id;})) nodePos.set(id,saved.pos[id]); }); }
+      document.querySelectorAll("#grpFilters input").forEach(function(cb){ var g=cb.getAttribute("data-g"); if(saved.groups && saved.groups.indexOf(g)<0){ cb.checked=false; activeGroups.delete(g); } });
+      document.querySelectorAll("#relFilters input").forEach(function(cb){ var r=cb.getAttribute("data-r"); if(saved.rels && saved.rels.indexOf(r)<0){ cb.checked=false; activeRels.delete(r); } });
+      if(saved.dim && saved.dim!==labelDim){ document.querySelectorAll("#dimBtns button").forEach(function(b){ if(b.textContent===saved.dim) b.click(); }); }
+      if(saved.search){ var si=document.getElementById("search"); si.value=saved.search; searchTerm=saved.search; }
+    }
+    renderGraph();
     document.getElementById("drill").className="drill";
+    document.querySelector(".layout").classList.add("no-drill");
+    if(saved && saved.name===GRAPH_NAME && saved.focus && GRAPH.nodes.some(function(n){return n.id===saved.focus;})){
+      focusNode=saved.focus; renderGraph(); openDrill(saved.focus);
+    }
+    saveState();
   }
   init();
 })();
