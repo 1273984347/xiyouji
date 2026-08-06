@@ -2,7 +2,7 @@
 
 > 一座关于《西游记》的混合型解读项目 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前版本 v2.3.8（2026-08-04）**：W357 英文站 A6 诗词译介续（E34-E37 四篇 poetry essay·site/en/ 47→51 文件）+ W356 英文站 A6 诗词译介（E31 开篇诗 + E33 意象谱系·site/en/ 46→48 文件）+ W355 英文站明代制度丛续译介（E24-E27 四篇 Ming-institution essay·site/en/ 39→43 文件）+ W351 英文站三教/成书/明喻译介 + 站点地图（E13 成书背景 + E14 明代隐喻 + E15 三教合一 · site/en/ 31 文件）+ W350 英文站角色深度页收尾（白龙马深度页 + E11 佛教禅宗 + E12 民间信仰·site/en/ 27 文件）+ W349 英文站角色深度页扩张（取经三人组深度页·唐僧/八戒/沙僧 + E10 道教全真派专题译介·site/en/ 24 文件）+ W348 英文站四类扩张（E7-E9 译介 + 可视化英文导览 + 孙悟空深度页 + 方法论指南·site/en/ 20 文件）+ W347 英文站关键页扩张（四数据页·dataset 桥接·site/en/ 14 文件）+ W346 数据闭环（八十一难逐难明细填充 · `dataset/81-hardships.json` 由半空变闭环）+ W345 英文站扩张（A5/A6 三篇专题译介 + 入口与文档同步）+ W344 质量增强包（术语统一审计 + A1 逐回结构化元数据 + A5/A6 提质 + 项目说明版本残留修复）+ W342 A4 身份政治 gap-fill 等全部交付收尾 + W343 交付收尾（内容质量收口 + 工程化 CI 转绿）—— A1 逐回关联分析 footer 100/100 全覆盖（586 链接 0 断）+ 28 篇跨章 SD 源切片交叉引用 footer（155 链接 0 断）+ RAG 索引重建 675 文档全覆盖 + 内容空缺审计确认无宏观空缺；Security workflow eval 误报修复 + Screenshot Review 四连修复（空 baseline 误报 / 浏览器级噪声过滤 / 放松门槛·仅阻断未捕获异常与截图捕获失败 / 移动端表格溢出 CSS）+ 全 CI 转绿 — A1 逐回 100 回 + A2 随笔 44 篇 + A3 人物 199 篇 + A4 专题 201 篇 + A5 文化 24 篇 + A6 诗词 13 篇 + S1-S3 方法论/分享 50 篇 + 85 个可视化/交互页（133 维度）+ 全站设计系统（system.css·故宫×Linear）+ RAG 对话（渡口问津）+ dataset/ 42 个结构化 JSON（含 yuanqi-graph 三元映射图谱·新增 chapters-metadata.json）+ 本地 RAG 后端 + 数据 API 服务 + Playwright E2E + GitHub Actions 4 workflows + 英文站（site/en/ 51 文件）+ PWA 离线。
+> **当前版本 v2.3.9（2026-08-05）**：W358 静态优先健壮性加固·前端自包含与交互增强（GitHub 参考落地·门面/骨架/灵魂三维）+ W357 英文站 A6 诗词译介续（E34-E37 四篇 poetry essay·site/en/ 47→51 文件）+ W356 英文站 A6 诗词译介（E31 开篇诗 + E33 意象谱系·site/en/ 46→48 文件）+ W355 英文站明代制度丛续译介（E24-E27 四篇 Ming-institution essay·site/en/ 39→43 文件）+ W351 英文站三教/成书/明喻译介 + 站点地图（E13 成书背景 + E14 明代隐喻 + E15 三教合一 · site/en/ 31 文件）+ W350 英文站角色深度页收尾（白龙马深度页 + E11 佛教禅宗 + E12 民间信仰·site/en/ 27 文件）+ W349 英文站角色深度页扩张（取经三人组深度页·唐僧/八戒/沙僧 + E10 道教全真派专题译介·site/en/ 24 文件）+ W348 英文站四类扩张（E7-E9 译介 + 可视化英文导览 + 孙悟空深度页 + 方法论指南·site/en/ 20 文件）+ W347 英文站关键页扩张（四数据页·dataset 桥接·site/en/ 14 文件）+ W346 数据闭环（八十一难逐难明细填充 · `dataset/81-hardships.json` 由半空变闭环）+ W345 英文站扩张（A5/A6 三篇专题译介 + 入口与文档同步）+ W344 质量增强包（术语统一审计 + A1 逐回结构化元数据 + A5/A6 提质 + 项目说明版本残留修复）+ W342 A4 身份政治 gap-fill 等全部交付收尾 + W343 交付收尾（内容质量收口 + 工程化 CI 转绿）—— A1 逐回关联分析 footer 100/100 全覆盖（586 链接 0 断）+ 28 篇跨章 SD 源切片交叉引用 footer（155 链接 0 断）+ RAG 索引重建 675 文档全覆盖 + 内容空缺审计确认无宏观空缺；Security workflow eval 误报修复 + Screenshot Review 四连修复（空 baseline 误报 / 浏览器级噪声过滤 / 放松门槛·仅阻断未捕获异常与截图捕获失败 / 移动端表格溢出 CSS）+ 全 CI 转绿 — A1 逐回 100 回 + A2 随笔 44 篇 + A3 人物 199 篇 + A4 专题 201 篇 + A5 文化 24 篇 + A6 诗词 13 篇 + S1-S3 方法论/分享 50 篇 + 85 个可视化/交互页（133 维度）+ 全站设计系统（system.css·故宫×Linear）+ RAG 对话（渡口问津）+ dataset/ 42 个结构化 JSON（含 yuanqi-graph 三元映射图谱·新增 chapters-metadata.json）+ 本地 RAG 后端 + 数据 API 服务 + Playwright E2E + GitHub Actions 4 workflows + 英文站（site/en/ 51 文件）+ PWA 离线。
 > 详细变更见 [CHANGELOG.md](CHANGELOG.md)，历史归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
 
 ## 项目定位
@@ -92,6 +92,7 @@ xiyouji/
 ├── assets/                # 规划占位（图片、地图、字体，待建）
 ├── references/            # 规划占位（参考文献，待建）
 ├── tools/                 # 辅助工具（章节切分等）
+├── xiyouji-agent-web/     # Web Agent「西游记·渡口问津」·CodeBuddy Agent SDK·PROJECT_CWD 指向本项目·凭证 CODEBUDDY_API_KEY（与 scripts/rag 检索式生成并行）
 ├── README.md              # 本文件
 ├── STRUCTURE.md           # 目录结构详细说明
 ├── CHANGELOG.md           # 更新日志
