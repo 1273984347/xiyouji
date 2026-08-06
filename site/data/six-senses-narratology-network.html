@@ -1329,14 +1329,57 @@ function renderForce(networkData) {
     .alphaDecay(0.08).velocityDecay(0.5);  // 性能：更快收敛，减少无谓 tick
 
   // 结构链（感官间）
-  const structLink = svg.append('g').selectAll('.struct-link')
+    // 性能：边层改 Canvas 叠加，避免每帧 N×4 几何属性写入触发 SVG 重排
+  var _svgEl = svg.node();
+  var _lcParent = _svgEl.parentNode;
+  if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
+  if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas'); if (_oc) _oc.remove(); }
+  var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var _lcW = _svgEl.clientWidth || 800, _lcH = _svgEl.clientHeight || 540;
+  var _vb = (_svgEl.getAttribute('viewBox') || '').split(/[\s,]+/);
+  var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_svgEl.getAttribute('width') || _lcW);
+  var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_svgEl.getAttribute('height') || _lcH);
+  var linkCanvas = document.createElement('canvas');
+  linkCanvas.className = 'link-canvas';
+  linkCanvas.width = Math.round(_lcW * _dpr);
+  linkCanvas.height = Math.round(_lcH * _dpr);
+  linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _svgEl.offsetLeft + 'px;top:' + _svgEl.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+  if (_lcParent) _lcParent.insertBefore(linkCanvas, _svgEl);
+  _svgEl.style.position = 'relative';
+  _svgEl.style.zIndex = '1';
+  var lctx = linkCanvas.getContext('2d');
+  lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
+  var linkSels = [];
+  function drawLinks() {
+    lctx.clearRect(0, 0, _cw, _ch);
+    for (var s = 0; s < linkSels.length; s++) {
+      var sel = linkSels[s], data = sel.data(), lines = sel.nodes();
+      for (var i = 0; i < data.length; i++) {
+        var d = data[i], el = lines[i];
+        if (!d || !d.source || d.source.x == null) continue;
+        lctx.beginPath();
+        lctx.moveTo(d.source.x, d.source.y);
+        lctx.lineTo(d.target.x, d.target.y);
+        lctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
+        lctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
+        var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
+        lctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
+        var da = el.getAttribute('stroke-dasharray');
+        lctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
+        lctx.stroke();
+      }
+    }
+    lctx.setLineDash([]);
+    lctx.globalAlpha = 1;
+  }
+const structLink = svg.append('g').selectAll('.struct-link')
     .data(links.filter(l => l.type === '结构'))
     .enter().append('line')
     .attr('class', 'struct-link')
     .attr('stroke', '#8b4513')
     .attr('stroke-width', 2)
     .attr('stroke-opacity', 0.5)
-    .attr('stroke-dasharray', '6,3');
+    .attr('stroke-dasharray', '6,3'); structLink.style('display','none'); linkSels.push(structLink);
 
   // 理论家连接
   const theoristLink = svg.append('g').selectAll('.t-link')
@@ -1345,7 +1388,7 @@ function renderForce(networkData) {
     .attr('class', 't-link')
     .attr('stroke', '#d4c5a9')
     .attr('stroke-width', 1.2)
-    .attr('stroke-opacity', 0.55);
+    .attr('stroke-opacity', 0.55); theoristLink.style('display','none'); linkSels.push(theoristLink);
 
   // 性能优化：节点 + 标签合并为 <g class="node">，用 transform 定位
   // （GPU 合成，避免逐帧对 cx/cy/x/y 四次属性写入并触发重排）
@@ -1408,10 +1451,8 @@ function renderForce(networkData) {
   );
 
   sim.on('tick', () => {
-    structLink.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
-        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
-    theoristLink.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
-        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    drawLinks();;
+    drawLinks();;
     nodeG.attr('transform', d => `translate(${d.x},${d.y})`);
   });
 
