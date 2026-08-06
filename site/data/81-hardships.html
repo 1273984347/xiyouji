@@ -976,6 +976,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const svg = d3.select("#" + svgId);
         const width = +svg.attr("width");
         const height = +svg.attr("height");
+        // 加 viewBox 负边距，给外侧引线标签留空间（缩放后外侧标签不再被裁切）
+        svg.attr("viewBox", `-60 -60 ${width + 120} ${height + 120}`);
         const radius = Math.max(0, Math.min(width, height) / 2 - 14);
 
         svg.selectAll("*").remove();
@@ -1030,20 +1032,32 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .text("总计");
 
         // 切片标签
+        // 外侧引线标签（薄切片内侧白标签互相压 → 移到环外，带引线+百分比）
+        const _mid = d => (d.startAngle + d.endAngle) / 2;
+        const _pt = (r, a) => [r * Math.sin(a), -r * Math.cos(a)];
+        const _lblR = radius + 18;
+        g.selectAll("polyline.pie-lead")
+            .data(arcs)
+            .enter().append("polyline")
+            .attr("class", "pie-lead")
+            .attr("points", d => {
+                const a = _mid(d);
+                const p1 = _pt(radius * 0.9, a), p2 = _pt(_lblR - 4, a);
+                return `${p1[0]},${p1[1]} ${p2[0]},${p2[1]}`;
+            })
+            .style("fill", "none").style("stroke", "#bbb").style("stroke-width", 1);
         g.selectAll("text.label")
             .data(arcs)
             .enter()
             .append("text")
             .attr("class", "label")
-            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
-            .attr("text-anchor", "middle")
-            .style("font-size", "0.88rem")
+            .attr("transform", d => { const p = _pt(_lblR, _mid(d)); return `translate(${p[0]},${p[1]})`; })
+            .attr("dy", "0.35em")
+            .attr("text-anchor", d => _pt(_lblR, _mid(d))[0] < 0 ? "end" : "start")
+            .style("font-size", "0.72rem")
             .style("font-weight", "600")
-            .style("fill", "#fff")
-            .text(d => {
-                const pct = (d.data[1] / total * 100).toFixed(0);
-                return d.data[1] > 3 ? `${d.data[1]} · ${pct}%` : "";
-            });
+            .style("fill", "#23201A")
+            .text(d => { const pct = (d.data[1] / total * 100).toFixed(0); return `${d.data[1]} · ${pct}%`; });
 
         // 图例
         const legend = d3.select("#" + legendId);
@@ -1128,7 +1142,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             const sankeyLayout = d3.sankey()
                 .nodeWidth(18)
-                .nodePadding(20)
+                .nodePadding(30)
                 .extent([[10, 10], [width - 10, height - 10]]);
 
             const graph = sankeyLayout({
@@ -1172,7 +1186,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("y", d => (d.y1 + d.y0) / 2)
             .attr("dy", "0.35em")
             .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
-            .text(d => d.name);
+            .text(d => `${d.name}（${d.value} 难）`);
 
         // 列标题
         svg.append("text")
@@ -1326,5 +1340,42 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
     main();
     </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
 </body>
 </html>
