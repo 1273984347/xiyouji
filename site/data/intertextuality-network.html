@@ -916,6 +916,11 @@ header.hero .meta {
   .theorist-list { grid-template-columns: 1fr; }
 }
     </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
 </head>
 <body>
     <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
@@ -1329,7 +1334,7 @@ function renderForce(networkData) {
       .strength(d => d.type === '理论' ? 0.3 : 0.5))
     .force('charge', d3.forceManyBody().strength(d => d.type === 'target' ? -800 : (d.type === 'theorist' ? -200 : -400)))
     .force('center', d3.forceCenter(width / 2, height / 2))
-    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 8));
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 24));
 
   // 互文关系边（前置文本→西游记）
     // 性能：边层改 Canvas 叠加，避免每帧 N×4 几何属性写入触发 SVG 重排
