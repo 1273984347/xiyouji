@@ -4764,11 +4764,62 @@
             .force('collide', d3.forceCollide().radius(d => 14 + d.count * 3));
 
         // 边
-        const link = g.append('g').selectAll('line')
+          // 性能：边层改 Canvas 叠加（图 0）
+  (function(){
+    var _el = g.node();
+    var _anchor = _el;
+    while (_anchor && _anchor.tagName && _anchor.tagName.toLowerCase() !== 'svg') _anchor = _anchor.parentNode;
+    _anchor = _anchor || _el;
+    var _lcParent = _anchor.parentNode;
+    if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
+    if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas-0'); if (_oc) _oc.remove(); }
+    var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var _lcW = _anchor.clientWidth || 800, _lcH = _anchor.clientHeight || 540;
+    var _vb = (_anchor.getAttribute('viewBox') || '').split(/[\s,]+/);
+    var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_anchor.getAttribute('width') || _lcW);
+    var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_anchor.getAttribute('height') || _lcH);
+    var linkCanvas = document.createElement('canvas');
+    linkCanvas.className = 'link-canvas-0';
+    linkCanvas.width = Math.round(_lcW * _dpr);
+    linkCanvas.height = Math.round(_lcH * _dpr);
+    linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _anchor.offsetLeft + 'px;top:' + _anchor.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+    if (_lcParent) _lcParent.insertBefore(linkCanvas, _anchor);
+    _anchor.style.position = 'relative';
+    _anchor.style.zIndex = '1';
+    var lctx = linkCanvas.getContext('2d');
+    lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
+    if (typeof window.LINK_LAYERS === 'undefined') window.LINK_LAYERS = [];
+    var _layer = { ctx: lctx, cw: _cw, ch: _ch, sels: [] };
+    window.LINK_LAYERS.push(_layer);
+    window['drawLinks_' + 0] = function() {
+      var ly = _layer;
+      ly.ctx.clearRect(0, 0, ly.cw, ly.ch);
+      for (var s = 0; s < ly.sels.length; s++) {
+        var sel = ly.sels[s], data = sel.data(), lines = sel.nodes();
+        for (var k = 0; k < data.length; k++) {
+          var d = data[k], el = lines[k];
+          if (!d || !d.source || d.source.x == null) continue;
+          ly.ctx.beginPath();
+          ly.ctx.moveTo(d.source.x, d.source.y);
+          ly.ctx.lineTo(d.target.x, d.target.y);
+          ly.ctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
+          ly.ctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
+          var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
+          ly.ctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
+          var da = el.getAttribute('stroke-dasharray');
+          ly.ctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
+          ly.ctx.stroke();
+        }
+      }
+      ly.ctx.setLineDash([]);
+      ly.ctx.globalAlpha = 1;
+    };
+  })();
+const link = g.append('g').selectAll('line')
             .data(links).enter().append('line')
             .attr('stroke', '#b8a888')
             .attr('stroke-width', d => 1 + d.value * 1.2)
-            .attr('stroke-opacity', 0.6);
+            .attr('stroke-opacity', 0.6); link.style('display','none'); window.LINK_LAYERS[window.LINK_LAYERS.length-1].sels.push(link);
 
         // 节点组
         const node = g.append('g').selectAll('.force-node')
@@ -4805,9 +4856,7 @@
         }).on('mouseout', tooltip.hide);
 
         sim.on('tick', () => {
-            link
-                .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
-                .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+            drawLinks_0();;
             node.attr('transform', d => `translate(${d.x},${d.y})`);
         });
     }
@@ -5070,14 +5119,65 @@
                 .force('collide', d3.forceCollide().radius(d => 8 + Math.sqrt(d.count) * 1.5));
 
             // 边
-            const link = svg.append('g')
+              // 性能：边层改 Canvas 叠加（图 1）
+  (function(){
+    var _el = svg.node();
+    var _anchor = _el;
+    while (_anchor && _anchor.tagName && _anchor.tagName.toLowerCase() !== 'svg') _anchor = _anchor.parentNode;
+    _anchor = _anchor || _el;
+    var _lcParent = _anchor.parentNode;
+    if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
+    if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas-1'); if (_oc) _oc.remove(); }
+    var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var _lcW = _anchor.clientWidth || 800, _lcH = _anchor.clientHeight || 540;
+    var _vb = (_anchor.getAttribute('viewBox') || '').split(/[\s,]+/);
+    var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_anchor.getAttribute('width') || _lcW);
+    var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_anchor.getAttribute('height') || _lcH);
+    var linkCanvas = document.createElement('canvas');
+    linkCanvas.className = 'link-canvas-1';
+    linkCanvas.width = Math.round(_lcW * _dpr);
+    linkCanvas.height = Math.round(_lcH * _dpr);
+    linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _anchor.offsetLeft + 'px;top:' + _anchor.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+    if (_lcParent) _lcParent.insertBefore(linkCanvas, _anchor);
+    _anchor.style.position = 'relative';
+    _anchor.style.zIndex = '1';
+    var lctx = linkCanvas.getContext('2d');
+    lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
+    if (typeof window.LINK_LAYERS === 'undefined') window.LINK_LAYERS = [];
+    var _layer = { ctx: lctx, cw: _cw, ch: _ch, sels: [] };
+    window.LINK_LAYERS.push(_layer);
+    window['drawLinks_' + 1] = function() {
+      var ly = _layer;
+      ly.ctx.clearRect(0, 0, ly.cw, ly.ch);
+      for (var s = 0; s < ly.sels.length; s++) {
+        var sel = ly.sels[s], data = sel.data(), lines = sel.nodes();
+        for (var k = 0; k < data.length; k++) {
+          var d = data[k], el = lines[k];
+          if (!d || !d.source || d.source.x == null) continue;
+          ly.ctx.beginPath();
+          ly.ctx.moveTo(d.source.x, d.source.y);
+          ly.ctx.lineTo(d.target.x, d.target.y);
+          ly.ctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
+          ly.ctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
+          var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
+          ly.ctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
+          var da = el.getAttribute('stroke-dasharray');
+          ly.ctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
+          ly.ctx.stroke();
+        }
+      }
+      ly.ctx.setLineDash([]);
+      ly.ctx.globalAlpha = 1;
+    };
+  })();
+const link = svg.append('g')
                 .attr('stroke', '#999')
                 .attr('stroke-opacity', 0.5)
                 .selectAll('line')
                 .data(allEdges)
                 .join('line')
                 .attr('stroke-width', d => Math.max(0.5, Math.sqrt(d.weight) * 0.4))
-                .attr('stroke', d => d.weight >= 30 ? '#c8463a' : (d.weight >= 15 ? '#e9b885' : '#b8a98c'));
+                .attr('stroke', d => d.weight >= 30 ? '#c8463a' : (d.weight >= 15 ? '#e9b885' : '#b8a98c')); link.style('display','none'); window.LINK_LAYERS[window.LINK_LAYERS.length-1].sels.push(link);
 
             // 节点
             const node = svg.append('g')
@@ -5111,11 +5211,7 @@
             }).on('mouseout', () => tooltip.hide());
 
             simulation.on('tick', () => {
-                link
-                    .attr('x1', d => d.source.x)
-                    .attr('y1', d => d.source.y)
-                    .attr('x2', d => d.target.x)
-                    .attr('y2', d => d.target.y);
+                drawLinks_1();;
                 node
                     .attr('cx', d => d.x = Math.max(20, Math.min(width - 20, d.x)))
                     .attr('cy', d => d.y = Math.max(20, Math.min(height - 20, d.y)));
@@ -5392,10 +5488,61 @@
             .force('center', d3.forceCenter(W/2, H/2))
             .force('collide', d3.forceCollide().radius(25));
 
-        const link = svg.append('g').selectAll('line')
+          // 性能：边层改 Canvas 叠加（图 2）
+  (function(){
+    var _el = svg.node();
+    var _anchor = _el;
+    while (_anchor && _anchor.tagName && _anchor.tagName.toLowerCase() !== 'svg') _anchor = _anchor.parentNode;
+    _anchor = _anchor || _el;
+    var _lcParent = _anchor.parentNode;
+    if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
+    if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas-2'); if (_oc) _oc.remove(); }
+    var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var _lcW = _anchor.clientWidth || 800, _lcH = _anchor.clientHeight || 540;
+    var _vb = (_anchor.getAttribute('viewBox') || '').split(/[\s,]+/);
+    var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_anchor.getAttribute('width') || _lcW);
+    var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_anchor.getAttribute('height') || _lcH);
+    var linkCanvas = document.createElement('canvas');
+    linkCanvas.className = 'link-canvas-2';
+    linkCanvas.width = Math.round(_lcW * _dpr);
+    linkCanvas.height = Math.round(_lcH * _dpr);
+    linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _anchor.offsetLeft + 'px;top:' + _anchor.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+    if (_lcParent) _lcParent.insertBefore(linkCanvas, _anchor);
+    _anchor.style.position = 'relative';
+    _anchor.style.zIndex = '1';
+    var lctx = linkCanvas.getContext('2d');
+    lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
+    if (typeof window.LINK_LAYERS === 'undefined') window.LINK_LAYERS = [];
+    var _layer = { ctx: lctx, cw: _cw, ch: _ch, sels: [] };
+    window.LINK_LAYERS.push(_layer);
+    window['drawLinks_' + 2] = function() {
+      var ly = _layer;
+      ly.ctx.clearRect(0, 0, ly.cw, ly.ch);
+      for (var s = 0; s < ly.sels.length; s++) {
+        var sel = ly.sels[s], data = sel.data(), lines = sel.nodes();
+        for (var k = 0; k < data.length; k++) {
+          var d = data[k], el = lines[k];
+          if (!d || !d.source || d.source.x == null) continue;
+          ly.ctx.beginPath();
+          ly.ctx.moveTo(d.source.x, d.source.y);
+          ly.ctx.lineTo(d.target.x, d.target.y);
+          ly.ctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
+          ly.ctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
+          var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
+          ly.ctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
+          var da = el.getAttribute('stroke-dasharray');
+          ly.ctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
+          ly.ctx.stroke();
+        }
+      }
+      ly.ctx.setLineDash([]);
+      ly.ctx.globalAlpha = 1;
+    };
+  })();
+const link = svg.append('g').selectAll('line')
             .data(links).join('line')
             .attr('stroke', 'var(--ink-soft)').attr('stroke-opacity', 0.4)
-            .attr('stroke-width', d => Math.max(1, Math.min(d.weight / 3, 6)));
+            .attr('stroke-width', d => Math.max(1, Math.min(d.weight / 3, 6))); link.style('display','none'); window.LINK_LAYERS[window.LINK_LAYERS.length-1].sels.push(link);
 
         const node = svg.append('g').selectAll('circle')
             .data(nodes).join('circle')
@@ -5419,8 +5566,7 @@
             .attr('dx', 10).attr('dy', 3);
 
         sim.on('tick', () => {
-            link.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
-                .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+            drawLinks_2();;
             node.attr('cx', d => d.x).attr('cy', d => d.y);
             label.attr('x', d => d.x).attr('y', d => d.y);
         });
