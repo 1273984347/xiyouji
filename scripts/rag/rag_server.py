@@ -49,7 +49,14 @@ class Handler(BaseHTTPRequestHandler):
             query = q.get("q", [""])[0]
             top_k = int(q.get("k", ["5"])[0])
             hops = int(q.get("hops", ["1"])[0])
-            res = RAG.answer(query, top_k=top_k, hops=hops)
+            history = None
+            raw_h = q.get("history", [""])[0]
+            if raw_h:
+                try:
+                    history = json.loads(raw_h)
+                except Exception:
+                    history = None
+            res = RAG.answer(query, top_k=top_k, hops=hops, history=history)
             self._send(res)
             return
         if parsed.path == "/graph":
