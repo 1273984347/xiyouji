@@ -4,9 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W383），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W384），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.3.12（2026-08-07）：W384 V 方向可视化深化 + E 方向工程化门禁（dashboard KPI 数据更新 + 新增通关文牒驿路图 + P3 全站回归清零 + a11y 复扫修复·可视化 85→86）
+
+> **W384 V 方向可视化深化 + E 方向工程化门禁**
+> - **来源**：用户指令"继续推进 V E S2 顺序的落地执行"·V 与 E 阶段落地（S2 待下批）
+> - **执行**：
+>   - **V1 dashboard KPI 数据更新**：`site/dashboard.html` 数据中枢 40→42 数据集（3 处）·`site/static/js/datahub-index.js` 补 chapters-metadata 条目（index 41→42 = dataset 42 对齐）·`site/en/dashboard.html` KPI 更新（B CHARACTERS 60→211 / C THEMES 91→209 / D VISUALIZATIONS 68→85·E 学术论文 55 保持）·`site/en/README.md` KPI 注记（as of W234→v2.3.11 W383）·`site/data/search.html` 跨 40→42 数据集
+>   - **V3 新增可视化维度**：`site/data/customs-pass-route.html` 新建（通关文牒·取经驿路图·W383·基于 W370 明代驿递交通对照专题）·15 处涉关文地点时间线（长安发牒→灵山传经·验讫 9/未验 3/波折 1/传经不验 1·四态着色）+ 明代驿递×西游对照表（驿/递/铺/勘合/验引）+ 5 条驿路洞察·12 处 line 号全部 line_check.py 验证·F6 骨架 + 自包含（inline_css 内联）·可视化 85→86
+>   - **V-P3 全站最终回归收尾**：`_audit_refine.js` 全站 85 页回归（1440×900·40% 覆盖率标准）·content 文字重叠 16→**0 页**（philosophy 热力图轴副标题 h+44→h+58 避让旋转刻度 + jurisprudence 树图 nameOf 短标签映射·完整 desc 保留 tooltip/图例）·axis 0·clip 5 良性·evalErr 0·乱码 0·报告 `scripts/_audit_final_residual.md` 增补"七、W383 最终回归"段（保留 post5 历史结论为第六节）
+>   - **E1 门禁验证**：verify_delivery + pre-commit-validate 全绿·lint_links 死链 2→0（en/essay-ming-literary-thought.html E9 回链 essay-literary-couplets→essay-chapter-couplets + en/visualizations.html theology→theological-intervention-network 拼写）·security_scan high=6 全在 `scripts/_chk_*.js` 一次性页面诊断脚本（非站点运行代码·历史遗留·不在部署路径）·site/ 页面 XSS high=0
+>   - **E2 a11y 全站复扫**：40 条 WCAG 2.2 规则·P0=0·新页 customs-pass-route 0 问题·修复 mobile-index.html 9 处 E2-13（nav-card×6 + bottom-bar×3 补 aria-label）·剩余 P1：E2-18 滚动陷阱为误报（passive 滚动监听 + 独立 click scrollTo·非陷阱）+ en/ 页 .lang-switch a:hover 对比度 1.20:1（既有 hover 态问题·非本批引入）
+>   - **inline_css 补内联**：`site/data/relationships.html` 原漏内联·本次补上（-2 link → +688 内联 CSS·静态优先铁律闭环）
+> - **验证**：
+>   - P3 定向复验（refine 同款逻辑）：customs-pass-route / jurisprudence / philosophy 三页 overlap40pct=0
+>   - lint_links：2018 链接 0 broken·verify_delivery 六文档一致·a11y exit 0（无 P0）
+> - **状态**：已落地·E3 铁律 6 文档同步·可视化 85→86·A1-A6 计数不变（610 篇）·S2 方向待下批（W385）
 
 ### v2.3.11（2026-08-07）：W369-W383 A 方向内容扩容 15 篇（A5 文化背景续 5 篇 + A3 人物深化续 6 篇 + A4 主题专题续 4 篇·3 subagent 并行创作·主代理独立 line 号抽查 20 项全过·与 W359-W368 合并提交·A3 205→211 / A4 205→209 / A5 29→34）
 

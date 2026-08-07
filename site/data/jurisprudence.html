@@ -2025,7 +2025,8 @@ function renderTreemap(opts){
     };
     renderTreemap({
         svgId: 'chart-artifact-pie', data: pieData, legendId: 'legend-artifact-pie', tipId: 'tm-tooltip',
-        nameOf: d => d.label, valueOf: d => d.value, colorOf: d => color[d.key],
+        nameOf: d => ({private_pure:'纯私人财产', public_pure:'纯公有资产', mixed_ownership:'混合产权', delegated_use:'委托使用', usucaption:'使用即所有'})[d.key] || d.label,
+        valueOf: d => d.value, colorOf: d => color[d.key],
         htmlOf: (d, total) => `<strong>${d.label}</strong><div class="row">数量：<strong style="color:#e9b885">${d.value}</strong> 件（${((d.value/total)*100).toFixed(1)}%）</div>`
     });
 }

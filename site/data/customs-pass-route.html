@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>详解西游记 · 全站搜索</title>
-
-
-    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>通关文牒·取经驿路图 · 详解西游记</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -693,365 +696,244 @@ td.num, th.num {
 }
     </style>
 <style>
-  :root{--bg:#faf7f2;--paper:#fff;--ink:#23201A;--ink-soft:#6B6455;--accent:#c8463a;--accent-2:#3a6b8c;--line:#d9cdb8}
-  *{box-sizing:border-box}
-  body{margin:0;font-family:"Noto Serif SC","Songti SC",serif;color:var(--ink);background:var(--bg);line-height:1.6}
-  header.top{padding:22px 20px 14px;background:linear-gradient(135deg,#1a1410,#3a2820);color:#f5e9d4}
-  header.top h1{margin:0;font-size:22px}
-  header.top p{margin:6px 0 0;font-size:13px;opacity:.85}
-  .banner{margin:12px 16px;padding:10px 14px;border-radius:8px;font-size:13px;border:1px solid var(--line);background:#fff7ec}
-  .banner.offline{border-color:#d9b36b;background:#fdf3df}
-  .main{padding:0 16px 40px}
-  .meta{color:var(--ink-soft);font-size:13px;margin:10px 0 8px}
-  .keytabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
-  .keytab{padding:6px 12px;border:1px solid var(--line);border-radius:999px;cursor:pointer;font-size:13px;background:var(--paper)}
-  .keytab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .chartbox{margin:8px 0 14px;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px;display:none}
-  .chartbox h3{margin:4px 6px 8px;font-size:14px;color:var(--accent-2)}
-  .hint{color:var(--ink-soft);font-size:12px;margin-top:8px}
-  @media(max-width:720px){header.top h1{font-size:18px}}
-
-  .searchbar{display:flex;gap:8px;margin:12px 16px;align-items:center;flex-wrap:wrap}
-  .searchbar input{flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:15px;background:var(--paper)}
-  .searchbar .vt-btn{padding:9px 16px}
-</style>
-<style id="audit-halo">
-/* injected label-halo for overlap readability */
-svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
-svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
-</style>
+        /* 页面局部样式（W383·v2.3.11 新建·自包含，随 inline_css.py 内联） */
+        .pass-legend { display:flex; flex-wrap:wrap; gap:10px 18px; margin:10px 0 4px; font-size:13px; color:var(--ink-soft); }
+        .pass-legend span { display:inline-flex; align-items:center; gap:6px; }
+        .dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+        #pass-svg { width:100%; height:760px; display:block; margin:8px 0; }
+        #pass-svg .node-rect { rx:6px; }
+        #pass-svg text { font-family:var(--font-sans); }
+        #pass-svg .t-title { font-size:13px; font-weight:600; }
+        #pass-svg .t-sub { font-size:11px; fill:var(--ink-faint); }
+        #pass-svg .t-cite { font-family:var(--font-mono); font-size:10px; fill:var(--ink-faint); }
+        .pass-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+        .pass-table { border-collapse:collapse; width:100%; font-size:14px; }
+        .pass-table th, .pass-table td { border:1px solid var(--line); padding:8px 12px; text-align:left; vertical-align:top; }
+        .pass-table th { background:var(--paper-warm); font-weight:600; white-space:nowrap; }
+        .pass-table td:first-child { white-space:nowrap; font-weight:600; }
+        .status-pill { display:inline-block; padding:1px 8px; border-radius:10px; font-size:12px; color:#fff; white-space:nowrap; }
+        .st-issue { background:var(--chart-2); }
+        .st-pass { background:var(--chart-4); }
+        .st-unv { background:var(--chart-3); }
+        .st-trouble { background:var(--accent-3); }
+        .st-sutra { background:var(--rebel); }
+    </style>
 </head>
 <body>
-<header class="top">
-  <h1>详解西游记 · 全站搜索</h1>
-  <p>W338 数据 API 接入 · 在线跨 42 数据集递归检索（/search）· 离线 file:// 降级到内置数据集索引</p>
-</header>
-<div id="banner" class="banner">正在连接数据 API…</div>
-<div class="searchbar">
-  <input id="q" type="search" placeholder="搜索关键词，如：火焰山 / 孙悟空 / 如来" aria-label="搜索">
-  <button class="vt-btn" id="go">搜索</button>
-  <span class="hint">在线命中「数据集 + 片段」；离线仅按数据集名称/标题过滤。</span>
-</div>
-<div id="results"></div>
-<script src="../static/js/vis-tools.js"></script>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">数据看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">首页</a> / <a href="../dashboard.html">数据看板</a> / 通关文牒·取经驿路图</p>
+        <p class="kicker">数据可视化</p>
+        <h1>通关文牒·取经驿路图</h1>
+        <p class="subtitle">W383 · 基于 W370 明代驿递交通对照专题 · 通关文牒作为"帝国文书"的取经之路</p>
+        <p class="tagline">—— 一份关文，十五处城邦：验讫者九、未验者三、传经不验者一</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <nav class="breadcrumb" aria-label="面包屑">
+            <a href="../index.html">站点首页</a>
+            <span class="sep">›</span>
+            <a href="../dashboard.html">数据仪表盘</a>
+            <span class="sep">›</span>
+            <span>通关文牒·取经驿路图</span>
+        </nav>
+        <div class="notice" role="note">
+            <strong>数据说明</strong>：
+            <span class="mono">通关文牒</span>是取经路上贯穿全书的"帝国文书"（第12回太宗亲赐）——
+            每过一国倒换关文、盖印验照，把一场佛门修行纳入沿途各国的世俗主权。
+            本页按回目顺序标注 15 处涉及关文的城邦/州郡，验讫 / 未验 / 改容 / 传经四态着色。
+            <span class="mono">line 号</span>全部经 <code>scripts/audit/line_check.py</code> 验证（text-search.html 回内行号）。
+        </div>
+
+        <!-- 板块 1：KPI 概要栏 -->
+        <section class="kpi-row" aria-label="关文概要">
+            <div class="kpi-card">
+                <div class="num">15</div>
+                <div class="label">涉关文地点</div>
+                <div class="detail">长安发牒 → 灵山传经 · 跨 14 国/州郡</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">9</div>
+                <div class="label">验讫</div>
+                <div class="detail">宝象/乌鸡/车迟/女儿国/祭赛/朱紫/比丘/玉华/天竺</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">3</div>
+                <div class="label">未验</div>
+                <div class="detail">狮驼国（国破）/ 灭法国（改容）/ 金平府（灯节）</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">1</div>
+                <div class="label">传经不验</div>
+                <div class="detail">灵山无字真经 · 第100回关文复验闭环</div>
+            </div>
+        </section>
+
+        <!-- 板块 2：驿路时间线 -->
+        <section class="section" aria-labelledby="sec-pass">
+            <h2 id="sec-pass">① 通关文牒驿路时间线</h2>
+            <p>自长安发牒（第12回）至灵山传经（第98-100回），15 处地点按回目顺序纵向展开。绿色=验讫，赭金=未验/改容，赭石=波折，暗朱=传经不验。</p>
+            <div class="pass-legend" aria-label="状态图例">
+                <span><span class="dot" style="background:var(--chart-2)"></span>发牒（长安）</span>
+                <span><span class="dot" style="background:var(--chart-4)"></span>验讫倒换</span>
+                <span><span class="dot" style="background:var(--chart-3)"></span>未验/改容</span>
+                <span><span class="dot" style="background:var(--accent-3)"></span>波折</span>
+                <span><span class="dot" style="background:var(--rebel)"></span>传经不验</span>
+            </div>
+            <svg id="pass-svg" role="img" aria-labelledby="pt-title pt-desc">
+                <title id="pt-title">通关文牒取经驿路时间线</title>
+                <desc id="pt-desc">自长安至灵山 15 处涉关文地点的回目顺序时间线，按验讫/未验/波折/传经四态着色。</desc>
+            </svg>
+        </section>
+
+        <!-- 板块 3：明代驿递对照表 -->
+        <section class="section" aria-labelledby="sec-ming">
+            <h2 id="sec-ming">② 明代驿递制度 × 西游对照</h2>
+            <p>W370 以杨正泰《明代驿站考》+ 黄仁宇 + 布罗代尔 + 魏丕信为镜：明代驿递（驿/递/铺三级）与勘合火牌制度，是通关文牒的现实原型。</p>
+            <div class="pass-table-wrap">
+            <table class="pass-table" aria-label="明代驿递与西游对照">
+                <thead>
+                    <tr><th>明代驿递制度</th><th>功能</th><th>西游对应</th><th>文本证据（line 号）</th></tr>
+                </thead>
+                <tbody id="ming-table-body"></tbody>
+            </table>
+            </div>
+        </section>
+
+        <!-- 板块 4：驿路洞察 -->
+        <section class="section" aria-labelledby="sec-insight">
+            <h2 id="sec-insight">③ 驿路洞察</h2>
+            <div class="insight-box">
+                <span class="ib-tag">[发牒]</span>
+                <strong>第 12 回·帝国文书</strong>。太宗在化生寺水陆大会后亲赐通关文牒（第12回 line 51）——文牒是"朝廷名号"的物质化：此后师徒每到一国，"呈上关文、验引放行"即把取经纳入该国主权（W370 驿递-文书维度）。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[验讫]</span>
+                <strong>九国倒换·帝国网络</strong>。宝象（29）/乌鸡（37）/车迟（45）/女儿国（54）/祭赛（62）/朱紫（68）/比丘（78）/玉华（88）/天竺（93）九处验讫——倒换关文是"过境"的仪式，也是西游世界"列国并存"的空间秩序证明。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[国破]</span>
+                <strong>狮驼国·文牒无处验</strong>。第74回 line 41：狮驼国城被大鹏所占，国王臣僚遭戮——帝国文书在妖王疆域内失效，"无国可验"是取经路上最彻底的秩序悬置。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[改容]</span>
+                <strong>灭法国·身份被改</strong>。第84回 line 3/17：杀僧诏下，师徒剃发改名混出城——关文未验、身份先改：帝国文书的效力让位于生存策略。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[传经]</span>
+                <strong>灵山·传经不验</strong>。第98回传经（line 1）却得无字真经（line 43），阿傩迦叶索人事——经与牒在灵山分道：文牒管"人过境"，真经管"法过境"；第100回（line 7）关文复验、五圣成真（line 45），文牒使命闭环。
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.3.11 · W383 · 数据可视化 · 基于 W370 明代驿递交通对照专题</div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="../index.html">首页</a>
+            <a href="../dashboard.html">看板</a>
+            <a href="tag-cloud.html">标签云</a>
+            <a href="text-search.html">全文检索</a>
+        </nav>
+        <div class="footer-links">
+            <a href="../../CHANGELOG.md">CHANGELOG.md</a> v2.3.11 W383 ·
+            <a href="../../scripts/output/file-index.md">file-index.md</a> W383
+        </div>
+    </footer>
+
 <script>
-window.SEARCH_INDEX = [{"name": "81-hardships", "title": ""}, {"name": "ai-dialogue", "title": ""}, {"name": "cave-estate", "title": ""}, {"name": "century-dialogue", "title": ""}, {"name": "chapter-structure-graph", "title": "回目结构图谱"}, {"name": "character-relationship-3d", "title": "人物关系 3D 网络图"}, {"name": "concept-device", "title": ""}, {"name": "criticism-history", "title": ""}, {"name": "cross-time-danmaku", "title": ""}, {"name": "dashboard", "title": "数据仪表盘"}, {"name": "emotional-heatmap", "title": "情感热力图"}, {"name": "famous-time-travel", "title": ""}, {"name": "four-dimensional-research-network", "title": "西游四维研究网络图谱"}, {"name": "four-heavenly-kings-artifacts", "title": ""}, {"name": "guanyin-six-roles-network", "title": ""}, {"name": "heaven-power-network", "title": ""}, {"name": "intertextuality-network", "title": ""}, {"name": "journey-geo-semiotics", "title": ""}, {"name": "journey-map-interactive", "title": "取经路线交互式地图"}, {"name": "language-style-radar", "title": "语言风格雷达图"}, {"name": "magic-system", "title": ""}, {"name": "material-archaeology", "title": ""}, {"name": "ming-political-thought-comparison", "title": "明代政治思想对照图谱"}, {"name": "monster-capability-radar", "title": "妖怪能力雷达图"}, {"name": "monster-ecology-network", "title": "妖怪生态网络图谱"}, {"name": "monster-female-network", "title": ""}, {"name": "monster-hierarchy-network", "title": ""}, {"name": "monster-victims-network", "title": ""}, {"name": "music-structure", "title": ""}, {"name": "narratology-12d-network", "title": ""}, {"name": "narratology-13d-network", "title": ""}, {"name": "pilgrim-team-dynamic-network", "title": "取经团队动力学关系网络"}, {"name": "pilgrim-team-psychology-arc", "title": "取经团队心理变化曲线"}, {"name": "poetry-rhythm-analysis", "title": "诗词韵律分析图谱"}, {"name": "six-senses-narratology-network", "title": ""}, {"name": "text-evolution", "title": ""}, {"name": "text-search", "title": ""}, {"name": "theological-intervention-network", "title": "三教神学干预网络图谱"}, {"name": "timeline", "title": ""}, {"name": "underworld-power-network", "title": ""}];
-var API_OK = false;
+(function(){
+"use strict";
+// 数据源：W370 明代驿递交通对照专题 + 原著 text-search.html（line 号已 line_check.py 验证）
+const STATIONS = [
+  { ch:12, name:"长安·大唐", status:"issue", pill:"发牒", cite:"第12回 line 51", note:"太宗化生寺赐通关文牒" },
+  { ch:29, name:"宝象国", status:"pass", pill:"验讫", cite:"第29回 line 3", note:"呈递关文遇黄袍怪之乱" },
+  { ch:37, name:"乌鸡国", status:"pass", pill:"验讫", cite:"第37回 line 11", note:"乌鸡国倒换关文" },
+  { ch:45, name:"车迟国", status:"pass", pill:"验讫", cite:"第44回 line 15·45回 line 43", note:"斗法祈雨后倒换关文" },
+  { ch:54, name:"女儿国", status:"pass", pill:"验讫", cite:"第54回 line 13", note:"女王欲留婚，关文先验" },
+  { ch:62, name:"祭赛国", status:"pass", pill:"验讫", cite:"第62回 line 21", note:"扫塔辨冤后倒换关文" },
+  { ch:68, name:"朱紫国", status:"pass", pill:"验讫", cite:"第68回 line 3", note:"行医悬丝诊脉，倒换关文" },
+  { ch:74, name:"狮驼国", status:"unv", pill:"未验·国破", cite:"第74回 line 41", note:"大鹏占城，文牒无处可验" },
+  { ch:78, name:"比丘国", status:"pass", pill:"验讫", cite:"第78回 line 3", note:"救小儿剖心之灾后倒换" },
+  { ch:84, name:"灭法国", status:"unv", pill:"未验·改容", cite:"第84回 line 3·line 17", note:"杀僧诏下，剃发改名混出" },
+  { ch:88, name:"玉华县", status:"pass", pill:"州郡·验讫", cite:"第88回 line 9", note:"玉华王处验引、传艺三徒" },
+  { ch:91, name:"金平府", status:"unv", pill:"未验·灯节", cite:"第91回 line 7", note:"慈云寺观灯被犀精所掳" },
+  { ch:93, name:"天竺国", status:"pass", pill:"验讫", cite:"第93回 line 3", note:"假公主招亲，辨明后倒换" },
+  { ch:96, name:"铜台府", status:"trouble", pill:"波折", cite:"第96回 line 5·97回 line 31/67", note:"寇员外案，报官递解" },
+  { ch:98, name:"灵山", status:"sutra", pill:"传经不验", cite:"第98回 line 1/43·100回 line 7/45", note:"无字真经，五圣成真" }
+];
+const COLOR = { issue:"var(--chart-2)", pass:"var(--chart-4)", unv:"var(--chart-3)", trouble:"var(--accent-3)", sutra:"var(--rebel)" };
+const MING = [
+  { sys:"驿（马驿）", fn:"陆路馆驿·使臣换马供顿", xy:"馆驿投宿·驿丞验引", cite:"第14回 line 3 两界山" },
+  { sys:"递（水驿）", fn:"水路漕运·官船渡口", xy:"通天河/流沙河渡口", cite:"第22回 line 7 流沙河" },
+  { sys:"铺（急递铺）", fn:"公文飞报·昼夜接力", xy:"传旨飞报·妖怪哨探", cite:"第32回 line 57 巡山谎报" },
+  { sys:"勘合·火牌", fn:"出使凭证·验放通行", xy:"通关文牒·倒换关文", cite:"第12回 line 51 太宗赐牒" },
+  { sys:"验引", fn:"州县验引·放行出境", xy:"各国倒换关文仪式", cite:"第54回 line 13 女儿国" }
+];
 
-function setBanner(html, offline){var b=document.getElementById("banner");b.innerHTML=html;b.className="banner"+(offline?" offline":"");}
-
-function apiFetch(path){return fetch(path,{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});}
-
-function probe(){
-  apiFetch("/datasets").then(function(list){
-    API_OK=true;
-    setBanner("已连接数据 API · 共 "+list.length+" 个数据集 · 输入关键词跨集检索。",false);
-  }).catch(function(){
-    API_OK=false;
-    setBanner("离线模式（file://）：仅按内置数据集索引过滤。启动 <code>python scripts/api/api_server.py</code> 后通过 http://127.0.0.1:8787/data/search.html 访问可跨集递归检索。",true);
+function renderTimeline(){
+  const svg = d3.select("#pass-svg");
+  const W = svg.node().clientWidth || 900;
+  const rowH = 48, pad = 26;
+  const H = pad * 2 + STATIONS.length * rowH;
+  svg.attr("viewBox", "0 0 " + W + " " + H).attr("height", H);
+  svg.selectAll("*").remove();
+  const xNode = 210, xText = 250, xCite = W - 180;
+  const g = svg.append("g");
+  // 轴线
+  g.append("line").attr("x1", xNode).attr("x2", xNode).attr("y1", pad - 8).attr("y2", H - pad + 8)
+    .attr("stroke", "var(--line)").attr("stroke-width", 2).attr("stroke-dasharray", "4 4");
+  STATIONS.forEach(function(d, i){
+    const y = pad + i * rowH + 18;
+    // 节点
+    g.append("circle").attr("cx", xNode).attr("cy", y).attr("r", 9).attr("fill", COLOR[d.status])
+      .attr("stroke", "#fff").attr("stroke-width", 2);
+    // 文本
+    g.append("text").attr("x", xText).attr("y", y).attr("class", "t-title")
+      .attr("fill", "var(--ink)").text(d.ch + "回 · " + d.name);
+    g.append("text").attr("x", xText).attr("y", y + 17).attr("class", "t-sub")
+      .text(d.note);
+    g.append("text").attr("x", xCite).attr("y", y).attr("class", "t-cite")
+      .attr("text-anchor", "end").text(d.cite);
+    // 状态 pill
+    g.append("text").attr("x", xCite + 6).attr("y", y).attr("class", "t-sub")
+      .attr("fill", COLOR[d.status]).style("font-weight", 600).text(d.pill);
   });
 }
 
-function renderOffline(q){
-  var kw=q.toLowerCase();
-  var rows=window.SEARCH_INDEX.filter(function(d){
-    return (d.name+"").toLowerCase().indexOf(kw)>=0 || (d.title+"").toLowerCase().indexOf(kw)>=0;
-  }).map(function(d){return {数据集:d.name, 标题:d.title||"—", 模式:"离线索引"};});
-  VisTools.makeFilterableTable({
-    container:"#results",
-    columns:[{key:"数据集",label:"数据集"},{key:"标题",label:"标题"},{key:"模式",label:"模式"}],
-    rows:rows, searchKeys:["数据集","标题"],
-    onRowClick:function(row){
-      VisTools.openDrill(row.数据集,"<p>离线模式仅含数据集名称/标题。</p><p>启动数据 API 后访问 <code>/data/"+row.数据集+"-view.html</code> 或 <code>/dataset/"+row.数据集+"</code> 查看完整数据。</p>");
-    }
-  });
+function renderMing(){
+  const rows = MING.map(function(d){
+    return "<tr><td>" + d.sys + "</td><td>" + d.fn + "</td><td>" + d.xy + "</td><td>" + d.cite + "</td></tr>";
+  }).join("");
+  document.getElementById("ming-table-body").innerHTML = rows;
 }
 
-function renderOnline(q){
-  apiFetch("/search?q="+encodeURIComponent(q)).then(function(res){
-    var rows=[];
-    (res.results||[]).forEach(function(m){
-      var sample=(m.hits&&m.hits[0]&&m.hits[0].snippet)||"";
-      rows.push({数据集:m.dataset, 命中数:m.hit_count, 示例片段:sample});
-    });
-    if(!rows.length){document.getElementById("results").innerHTML="<p class='meta'>无命中。</p>";return;}
-    VisTools.makeFilterableTable({
-      container:"#results",
-      columns:[{key:"数据集",label:"数据集"},{key:"命中数",label:"命中数",sortable:true},{key:"示例片段",label:"示例片段"}],
-      rows:rows, searchKeys:["数据集","示例片段"],
-      onRowClick:function(row){
-        var m=(res.results||[]).find(function(x){return x.dataset===row.数据集;});
-        var h="<p><b>数据集：</b>"+row.数据集+" · <b>命中 "+row.命中数+" 处</b></p><table><tbody>";
-        (m.hits||[]).slice(0,12).forEach(function(hit){
-          h+="<tr><th>"+hit.path+"</th><td>"+hit.snippet+"</td></tr>";
-        });
-        h+="</tbody></table>";
-        VisTools.openDrill(row.数据集,h);
-      }
-    });
-  }).catch(function(){ renderOffline(q); });
+function main(){
+  renderTimeline();
+  renderMing();
 }
-
-function doSearch(){
-  var q=(document.getElementById("q").value||"").trim();
-  if(!q){return;}
-  if(API_OK) renderOnline(q); else renderOffline(q);
-}
-
-document.getElementById("go").addEventListener("click",doSearch);
-document.getElementById("q").addEventListener("keydown",function(e){if(e.key==="Enter")doSearch();});
-document.getElementById("q").addEventListener("input",function(){
-  var q=(this.value||"").trim();
-  if(q.length>=1 && !API_OK) renderOffline(q);
-});
-probe();
-
-// 支持 ?q= 预填（供图谱「相关研究」等深链跳转）
-(function(){
-  try{
-    var p=new URLSearchParams(location.search);
-    var q=p.get("q");
-    if(q){ var el=document.getElementById("q"); if(el){ el.value=q; doSearch(); } }
-  }catch(e){}
+window.__lastData = STATIONS;
+window.addEventListener("resize", (function(){
+  var t; return function(){ clearTimeout(t); t = setTimeout(renderTimeline, 250); };
+})());
+main();
 })();
 </script>
-<script id="audit-axisfix">
-(function(){
-  function fixAxes(){
-    try{
-      var svgs = document.querySelectorAll('svg');
-      svgs.forEach(function(svg){
-        var groups = svg.querySelectorAll('g');
-        groups.forEach(function(axisG){
-          if(!axisG.querySelector(':scope > .domain')) return;
-          var ticks = axisG.querySelectorAll(':scope > g.tick');
-          if(ticks.length < 6) return;
-          var bottom = false;
-          ticks.forEach(function(t){
-            var tr = t.getAttribute('transform') || '';
-            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
-            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
-          });
-          if(!bottom) return;
-          ticks.forEach(function(t){
-            var txt = t.querySelector('text');
-            if(!txt) return;
-            txt.style.transformBox = 'fill-box';
-            txt.style.transformOrigin = 'top center';
-            txt.style.transform = 'rotate(-38deg)';
-            txt.style.fontSize = '10px';
-            txt.style.fontWeight = '500';
-          });
-        });
-      });
-    }catch(e){ /* noop */ }
-  }
-  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
-  if(document.readyState === 'complete'){ run(); }
-  else { window.addEventListener('load', run); }
-})();
-</script>
-
-<script id="audit-axisfix2">
-(function(){
-  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
-  function fix(){
-    try{
-      document.querySelectorAll('svg').forEach(function(svg){
-        svg.querySelectorAll('g').forEach(function(g){
-          if(!g.querySelector(':scope > .domain')) return;
-          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
-          if(ticks.length<5) return;
-          var xs=[],ys=[];
-          ticks.forEach(function(t){
-            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
-            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
-          });
-          if(xs.length<3) return;
-          var vx=variance(xs), vy=variance(ys);
-          if(vx>vy){
-            // 水平(底部)轴：旋转 + 缩小
-            ticks.forEach(function(t){
-              var tx=t.querySelector('text'); if(!tx) return;
-              tx.style.transformBox='fill-box';
-              tx.style.transformOrigin='top center';
-              tx.style.transform='rotate(-40deg)';
-              tx.style.fontSize='10px';
-              tx.style.fontWeight='500';
-            });
-          } else {
-            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
-            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
-            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
-            var R=texts.map(function(t){return t.getBoundingClientRect();});
-            for(var i=0;i<texts.length;i++){
-              for(var j=i+1;j<texts.length;j++){
-                var a=R[i],b=R[j];
-                if(!a.width||!b.width) continue;
-                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
-                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
-                if(ix*iy<=0) continue;
-                var area=Math.min(a.width*a.height,b.width*b.height);
-                if(area>0 && (ix*iy)/area>0.5){
-                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
-                  if(hide.style.display!=='none') hide.style.display='none';
-                }
-              }
-            }
-          }
-        });
-      });
-    }catch(e){ /* noop */ }
-  }
-  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
-  if(document.readyState==='complete'){ run(); }
-  else { window.addEventListener('load', run); }
-})();
-</script>
-
-<script id="audit-labelavoid-all">
-(function(){
-  function avoid(){
-    try{
-      document.querySelectorAll("svg").forEach(function(svg){
-        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
-          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
-          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
-          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
-        });
-        var R=ts.map(function(t){return t.getBoundingClientRect();});
-        for(var i=0;i<ts.length;i++){
-          for(var j=i+1;j<ts.length;j++){
-            var a=R[i],b=R[j];
-            if(!a.width||!b.width) continue;
-            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
-            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
-            if(ix*iy<=0) continue;
-            var area=Math.min(a.width*a.height,b.width*b.height);
-            if(area>0 && (ix*iy)/area>0.5){
-              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
-              if(hide.style.display!=="none"){
-                // 加 title 保留全名（hover 可见）
-                if(!hide.querySelector(":scope > title")){
-                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
-                  ti.textContent=hide.textContent;
-                  hide.appendChild(ti);
-                }
-                hide.style.display="none";
-              }
-            }
-          }
-        }
-      });
-    }catch(e){ /* noop */ }
-  }
-  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
-  if(document.readyState==="complete"){ run(); }
-  else { window.addEventListener("load", run); }
-})();
-</script>
-<script id="audit-axisfix3">
-(function(){
-  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
-  function fix(){
-    try{
-      document.querySelectorAll('svg').forEach(function(svg){
-        svg.querySelectorAll('g').forEach(function(g){
-          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
-          if(ticks.length<5) return;
-          var xs=[],ys=[];
-          ticks.forEach(function(t){
-            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
-            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
-          });
-          if(xs.length<3) return;
-          var vx=variance(xs), vy=variance(ys);
-          if(vx>vy){
-            ticks.forEach(function(t){
-              var tx=t.querySelector('text'); if(!tx) return;
-              tx.style.transformBox='fill-box';
-              tx.style.transformOrigin='top center';
-              tx.style.transform='rotate(-40deg)';
-              tx.style.fontSize='10px';
-              tx.style.fontWeight='500';
-            });
-          } else {
-            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
-            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
-            var R=texts.map(function(t){return t.getBoundingClientRect();});
-            for(var i=0;i<texts.length;i++){
-              for(var j=i+1;j<texts.length;j++){
-                var a=R[i],b=R[j];
-                if(!a.width||!b.width) continue;
-                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
-                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
-                if(ix*iy<=0) continue;
-                var area=Math.min(a.width*a.height,b.width*b.height);
-                if(area>0 && (ix*iy)/area>0.5){
-                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
-                  if(hide.style.display!=='none') hide.style.display='none';
-                }
-              }
-            }
-          }
-        });
-      });
-    }catch(e){ /* noop */ }
-  }
-  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
-  if(document.readyState==='complete'){ run(); }
-  else { window.addEventListener('load', run); }
-})();
-</script>
-
-<script id="audit-axisfix4">
-(function(){
-  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
-  function bbox(t){return t.getBoundingClientRect();}
-  function fix(){
-    try{
-      document.querySelectorAll('svg').forEach(function(svg){
-        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
-        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
-        var axisNum=new Set();
-        var rows={},cols={};
-        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
-        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
-        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
-        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
-        for(var i=0;i<all.length;i++){
-          for(var j=i+1;j<all.length;j++){
-            var a=all[i],b=all[j];
-            var ra=bbox(a),rb=bbox(b);
-            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
-            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
-            var inter=ix*iy; if(inter<=0) continue;
-            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
-            if(area<=0||inter/area<0.4) continue;
-            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
-            var dup=ta&&ta===tb;
-            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
-            var aNum=NUM.test(ta),bNum=NUM.test(tb);
-            var act=false;
-            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
-            if(!act) continue;
-            var hide,keep;
-            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
-            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
-            if(hide.style.display!=='none'){
-              hide.setAttribute('data-axisfix4','1');
-              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
-              hide.style.display='none';
-            }
-          }
-        }
-      });
-    }catch(e){}
-  }
-  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
-  if(document.readyState==='complete')run();else window.addEventListener('load',run);
-})();
-</script>
-
 </body>
 </html>

@@ -41,7 +41,7 @@
 - 复核截图：`scripts/_audit_shots_fix2/`（19 个残留页全页 png，**未入库**，可整体删）
 - 早期全站截图：`scripts/_audit_shots/`（84 页）、`scripts/_audit_shots_fix/`（命名页 7 页）、`scripts/_shots/`（9 页）
 
-## 六、结论
+## 六、结论（post5·2026-08-07 早期）
 
 你原话"所有可视化图都有问题"。经两轮全站审计+修复：
 - **乱码**：0 例（自动扫描）；"缺字体类"需你人工看截图
@@ -49,3 +49,23 @@
 - **重叠**：内容标签 93→16（-83%）；轴数字刻度已旋转清晰
 - **我的 canvas 性能优化**：0 回归
 - **数据准确性**：自动 DOM↔JSON 比对不适用多图表同屏页；唯一干净单网络页 `journey-geo-semiotics` 7/7 吻合；语义准确性需你对照 `source/原文`
+
+## 七、W383 最终回归（2026-08-07·v2.3.11·V 方向 P3 收尾）
+
+> 全站 `_audit_refine.js` 最终回归（85 页·Playwright 1440×900·40% 覆盖率标准·d3 本地拦截），配合 W369-W383 新页 + dashboard KPI 更新后复跑。
+
+| 指标 | post5（前次） | W383 最终 | 说明 |
+|---|---|---|---|
+| content 文字重叠 | 16 处 / 10 页 | **0 页** | philosophy 轴副标题下移（h+44→h+58）+ jurisprudence 树图短标签（nameOf 映射），2 处残余清零 |
+| axis 数字重叠 | 49 处 | 0 页 | 旋转处理后不再触发（含新页） |
+| clip 容器裁切 | 5 良性 | 5 良性 | century-dialogue / cross-time-danmaku / ethics-consumption / journey-geo-semiotics / methodology-matrix·<40px 无数据丢失 |
+| evalErr | 0 | 0 | 全站无 JS 异常 |
+| 乱码 U+FFFD | 0 | 0 | 全站无替换符 |
+
+**新增页验证**：`site/data/customs-pass-route.html`（W383·通关文牒·取经驿路图）——smoke 0 JS 异常 / 0 重叠（含宽松 ix>1&&iy>1 标准）/ 表格 5 行 / 时间线 15 节点；line 号 12 处全部 line_check.py 验证。
+
+**结论**：P3 残留重叠正式清零（含宽松标准新页零重叠）。V 方向 dataviz 战役（P1 聚类 / P2 树图 / P3 标签）全轮收束。
+
+## 八、遗留说明（E 阶段记录）
+- security high=6 均在 `scripts/_chk_*.js`（一次性页面诊断脚本·非站点运行代码·历史遗留），不在部署路径；site/ 页面 XSS high=0
+- clip 5 处为良性容器裁切（<40px 视觉无损），维持接受
