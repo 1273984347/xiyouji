@@ -48,7 +48,7 @@
     "page": "cave-estate.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 12,
+    "overlapAxis": 0,
     "overlapContent": 2,
     "overlapSamples": [
       {
@@ -203,7 +203,7 @@
     "page": "criticism-history.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 1,
+    "overlapAxis": 0,
     "overlapContent": 0,
     "overlapSamples": [],
     "err": null
@@ -248,7 +248,7 @@
     "page": "deconstruction.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 3,
+    "overlapAxis": 0,
     "overlapContent": 1,
     "overlapSamples": [
       {
@@ -339,7 +339,7 @@
     "page": "four-dimensional-research-network.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 1,
+    "overlapAxis": 0,
     "overlapContent": 1,
     "overlapSamples": [
       {
@@ -468,7 +468,7 @@
     "page": "journey-route.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 9,
+    "overlapAxis": 0,
     "overlapContent": 0,
     "overlapSamples": [],
     "err": null
@@ -486,7 +486,7 @@
     "page": "jurisprudence.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 1,
+    "overlapAxis": 0,
     "overlapContent": 0,
     "overlapSamples": [],
     "err": null
@@ -531,7 +531,7 @@
     "page": "material-archaeology.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 11,
+    "overlapAxis": 0,
     "overlapContent": 1,
     "overlapSamples": [
       {
@@ -615,7 +615,7 @@
     "page": "monster-capability-radar.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 4,
+    "overlapAxis": 0,
     "overlapContent": 0,
     "overlapSamples": [],
     "err": null
@@ -624,7 +624,7 @@
     "page": "monster-ecology-network.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 2,
+    "overlapAxis": 0,
     "overlapContent": 0,
     "overlapSamples": [],
     "err": null
@@ -676,7 +676,7 @@
     "page": "monster-victims-network.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 1,
+    "overlapAxis": 0,
     "overlapContent": 0,
     "overlapSamples": [],
     "err": null
@@ -721,7 +721,7 @@
     "page": "narratology-13d-network.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 1,
+    "overlapAxis": 0,
     "overlapContent": 0,
     "overlapSamples": [],
     "err": null
@@ -781,7 +781,7 @@
     "page": "power-resources.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 1,
+    "overlapAxis": 0,
     "overlapContent": 0,
     "overlapSamples": [],
     "err": null
@@ -844,7 +844,7 @@
     "page": "text-evolution.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 1,
+    "overlapAxis": 0,
     "overlapContent": 2,
     "overlapSamples": [
       {
@@ -882,7 +882,7 @@
     "page": "timeline.html",
     "clipHidden": 0,
     "clipSamples": [],
-    "overlapAxis": 1,
+    "overlapAxis": 0,
     "overlapContent": 0,
     "overlapSamples": [],
     "err": null
