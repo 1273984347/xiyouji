@@ -54,3 +54,25 @@
 
 > 说明：全局重叠/clip/乱码数据待本轮全站回归审计（`_audit_refine.js`，后台运行中）完成后补全，
 > 本报告候选清单基于数据集结构静态分析 + 既有审计结论。
+
+## 五、实施状态（2026-08-07）
+
+### P1 聚类
+- 第一批（原清单可适用 2D 力导向 6 图 + 试点 1 图）：guanyin / monster-hierarchy / four-dimensional / heaven / underworld / theological / monster-ecology ✅
+- 第二批（原清单之外密集网络）：narratology-13d-network(22节点/8类) + six-senses-narratology-network(35节点/7感官) ✅ 注入 cluster-x/cluster-y 锚点，0 JS错误
+- 不适用项核实：character-relationship-3d 已是 3D 环形分簇；journey-map 地理地图；yuanqi-graph 无页面；character-dynamic-network 已自聚类；perf-canvas-rendering 为 500 节点压测 demo（聚类会破坏其目的）；其余网络节点 <20 不属密集网络。
+
+### P2 树图
+- 多类饼图→矩形树图：aesthetics(7风格流派) / deconstruction(7国) / cultural-misreading(6国) / global-pattern(8国) / game-webnovel(稀有度+元素 2饼) 共 **6 饼图** ✅ 注入统一 `renderTreemap` 助手（面积=占比，保留图例值+占比与 hover tooltip），验证 cells/legends 齐全、areaRatio≈0.99、0 JS错误。
+- **排除 karma-reincarnation**：其"饼图"实为 10 个独立案例实例（每个 karma_type 1 例，含 case_name/chapter/cause/effect 富 per-case tooltip），树图会丢失逐案细节，保留饼图。
+- 未做（边界，≤6 类且非主占比图）：jurisprudence(6) / four-heavenly-kings-artifacts(5) / 81-hardships(3×3类小饼) 等，可视需要再扩。
+
+### P2 延伸（2026-08-07 续）
+- **jurisprudence**：`renderArtifactPie`(5 类产权类型) → treemap ✅；`renderRegistryPie` 仅 2 类且带"37.5% 审计覆盖率(3/8)"中心头条、无图例容器，属二分类特殊 donut，**保留不动**（避免丢失定制头条语义，非"多类"）。
+- **81-hardships**：通用 `renderPie`(被 3 次调用) → treemap，覆盖 by_cause(4类) / by_ending(3类) / by_difficulty(2类) 共 **9 格** ✅；原外侧引线标签随树图取消（标签内显+图例即可读），零信息丢失。
+- **four-heavenly-kings-artifacts 核实无饼图**：1383 行 `d3.arc` 实为 chord 图（含 `d3.ribbon`），非饼/环图，本项不适用，跳过。
+- 注入守卫版 `renderTreemap`（根节点守卫，修正旧脚本源 `._inject_p2_treemaps.py` 仍缺守卫）→ 自包含 `.tm-tooltip` 样式与容器（`tipId:'tm-tooltip'`）。
+- 验证 `_verify_p2c.js`：jurisprudence cells=5/legends=5/areaRatio=0.99/tip 存在/jsErr=0；81-hardships cells=9/legends=9/areaRatio=0.99/tip 存在/jsErr=0。
+
+### P3 残留重叠清零（2026-08-07 续）
+- philosophy.html 仅剩 1 处 SVG 图内非数字文字轻触：`renderAllegoryPie` donut 中心"八十一难"(y=-8,14px) 与 "81"(y=18,24px) 垂直交叠 6px → 拉开间距(y=-14 / y=22)，零信息丢失。诊断 `_diag_content_philosophy.js` 复测 `overlaps=0`。
