@@ -225,6 +225,15 @@
     "err": null
   },
   {
+    "page": "customs-pass-route.html",
+    "clipHidden": 0,
+    "clipSamples": [],
+    "overlapAxis": 0,
+    "overlapContent": 0,
+    "overlapSamples": [],
+    "err": null
+  },
+  {
     "page": "data-explorer.html",
     "clipHidden": 0,
     "clipSamples": [],
@@ -436,8 +445,14 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 0,
-    "overlapSamples": [],
+    "overlapContent": 1,
+    "overlapSamples": [
+      {
+        "a": "混合产权（金刚琢·个人发明+公职务用",
+        "b": "使用即所有（金箍棒·悟空借走不还）1",
+        "ratio": 0.46
+      }
+    ],
     "err": null
   },
   {

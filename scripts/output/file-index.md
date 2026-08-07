@@ -9,6 +9,24 @@
 ---
 
 
+## W384 V 方向可视化深化 + E 方向工程化门禁（2026-08-07·v2.3.12）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/customs-pass-route.html | W384 | v2.3.12 新建·通关文牒·取经驿路图·基于 W370·15 处涉关文地点时间线+明代驿递对照表+5 洞察·可视化 85→86 |
+| site/dashboard.html | W384 | v2.3.12 修改·数据中枢 40→42 数据集（3 处）·KPI 数据更新 |
+| site/static/js/datahub-index.js | W384 | v2.3.12 修改·补 chapters-metadata 条目·index 41→42 对齐 dataset 42 |
+| site/en/dashboard.html | W384 | v2.3.12 修改·KPI 更新（60→211 / 91→209 / 68→85）·45+→41+ topic cards |
+| site/en/README.md | W384 | v2.3.12 修改·KPI 注记 as of W234→v2.3.11 W383 |
+| site/data/search.html | W384 | v2.3.12 修改·跨 40→42 数据集 |
+| site/data/philosophy.html | W384 | v2.3.12 修改·P3 清零·热力图轴副标题 h+44→h+58 |
+| site/data/jurisprudence.html | W384 | v2.3.12 修改·P3 清零·树图 nameOf 短标签（完整 desc 保留 tooltip/图例） |
+| site/data/relationships.html | W384 | v2.3.12 修改·inline_css 补内联（原漏）·静态优先闭环 |
+| site/mobile-index.html | W384 | v2.3.12 修改·a11y 修复 9 处 E2-13 补 aria-label |
+| site/en/essay-ming-literary-thought.html | W384 | v2.3.12 修改·死链修复 E9 回链 essay-literary-couplets→essay-chapter-couplets |
+| site/en/visualizations.html | W384 | v2.3.12 修改·死链修复 theology→theological-intervention-network |
+| scripts/_audit_final_residual.md | W384 | v2.3.12 修改·P3 最终回归报告增补（content 重叠 16→0 页） |
+
 ## W369-W383 A 方向内容扩容续 15 篇（2026-08-07·v2.3.11·与 W359-W368 合并提交）
 
 | 文件 | W | 说明 |
