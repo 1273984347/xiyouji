@@ -914,12 +914,12 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         <!-- 板块 2：词牌分布饼图 -->
         <section class="section" aria-labelledby="sec-pie">
-            <h2 id="sec-pie">① 词牌分布饼图</h2>
-            <p>将《西游记》全书诗词按 7 类划分：3 种词牌（西江月/临江仙/满庭芳）+ 开篇诗 + 回目对联（100 回）+ 人物赋 + 景物诗。回目对联数量最多（100 副），构成全书诗词骨架；词牌虽仅 3 种 3 首，却是韵律分析的核心样本。hover 扇区查看类别详情。</p>
+            <h2 id="sec-pie">① 词牌分布矩形树图</h2>
+            <p>将《西游记》全书诗词按 7 类划分：3 种词牌（西江月/临江仙/满庭芳）+ 开篇诗 + 回目对联（100 回）+ 人物赋 + 景物诗。回目对联数量最多（100 副），构成全书诗词骨架；词牌虽仅 3 种 3 首，却是韵律分析的核心样本。<strong>矩形树图以面积表示占比</strong>，色块越小代表该类数量越少（如 3 词牌各仅 1 首），hover 查看类别详情，图例列全部 7 类及占比。</p>
             <div class="chart-wrap">
                 <svg id="pie-svg" width="100%" height="420" role="img" aria-labelledby="pie-title pie-desc">
-                    <title id="pie-title">词牌分布饼图</title>
-                    <desc id="pie-desc">7 类诗词的占比分布。</desc>
+                    <title id="pie-title">词牌分布矩形树图</title>
+                    <desc id="pie-desc">7 类诗词的占比分布（矩形树图，面积=占比）。</desc>
                 </svg>
                 <div class="event-tip" id="pie-tip" role="tooltip"></div>
             </div>
@@ -1112,7 +1112,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const DUR = REDUCE_MOTION ? 0 : 600;
 
-    // ============= 板块 2：词牌分布饼图 =============
+    // ============= 板块 2：词牌分布矩形树图（treemap）=============
+    // P2 试点：7 类饼图 → 矩形树图，面积=占比，保留图例与 hover 占比，避免小扇区不可读
     function renderPie() {
         const svg = d3.select("#pie-svg");
         svg.selectAll("*").remove();
@@ -1120,82 +1121,71 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const width = Math.max(420, wrap.clientWidth || 760);
         const height = 420;
         svg.attr("viewBox", `0 0 ${width} ${height}`);
-        const radius = Math.min(width, height) / 2 - 60;
 
-        const g = svg.append("g").attr("transform", `translate(${width / 2},${height / 2})`);
+        const data = EMBEDDED_DATA.pie;
+        const total = d3.sum(data, d => d.value);
 
-        const pie = d3.pie().value(d => d.value).sort(null);
-        const arc = d3.arc().innerRadius(radius * 0.45).outerRadius(radius).padAngle(0.012);
-        const arcHover = d3.arc().innerRadius(radius * 0.45).outerRadius(radius + 10).padAngle(0.012);
-        const arcs = pie(EMBEDDED_DATA.pie);
+        const root = d3.hierarchy({ name: "root", children: data })
+            .sum(d => d.value)
+            .sort((a, b) => b.value - a.value);
+        d3.treemap().size([width, height]).paddingInner(3).round(true)(root);
 
         const tip = d3.select("#pie-tip");
         const wrapEl = wrap.parentElement;
 
-        g.selectAll("path")
-            .data(arcs)
+        const cells = svg.selectAll("g.tm-cell")
+            .data(root.leaves())
             .enter()
-            .append("path")
-            .attr("class", "pie-slice")
-            .attr("fill", (d, i) => PIE_COLORS[i % PIE_COLORS.length])
+            .append("g")
+            .attr("class", "tm-cell")
+            .attr("transform", d => `translate(${d.x0},${d.y0})`);
+
+        cells.append("rect")
+            .attr("width", d => Math.max(0, d.x1 - d.x0))
+            .attr("height", d => Math.max(0, d.y1 - d.y0))
+            .attr("fill", (d) => PIE_COLORS[data.indexOf(d.data) % PIE_COLORS.length])
             .attr("stroke", "#fff")
             .attr("stroke-width", 2)
             .style("opacity", 0)
             .on("mouseover", function(event, d) {
-                d3.select(this).transition().duration(150).attr("d", arcHover);
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">${d.data.name}</div>
                         <div class="tip-row">数量：<strong style="color:#e9b885">${d.data.value}</strong></div>
-                        <div class="tip-row">占比：<strong style="color:#e9b885">${(d.data.value / EMBEDDED_DATA.pie.reduce((a, b) => a + b.value, 0) * 100).toFixed(1)}%</strong></div>
-                        <div class="tip-meta">类别索引 ${d.index + 1}/7</div>`);
+                        <div class="tip-row">占比：<strong style="color:#e9b885">${((d.data.value / total) * 100).toFixed(1)}%</strong></div>`);
             })
             .on("mousemove", function(event) {
                 const rect = wrapEl.getBoundingClientRect();
                 tip.style("left", (event.clientX - rect.left + 14) + "px")
                     .style("top", (event.clientY - rect.top + 14) + "px");
             })
-            .on("mouseout", function() {
-                d3.select(this).transition().duration(150).attr("d", arc);
-                tip.style("opacity", 0);
-            })
-            .transition().duration(DUR).delay((d, i) => i * 70)
-            .style("opacity", 1)
-            .attrTween("d", function(d) {
-                const i = d3.interpolate({ startAngle: d.startAngle, endAngle: d.startAngle }, d);
-                return t => arc(i(t));
-            });
+            .on("mouseout", function() { tip.style("opacity", 0); })
+            .transition().duration(DUR).style("opacity", 1);
 
-        // 中心文字
-        g.append("text").attr("text-anchor", "middle").attr("dy", -8)
-            .style("font-size", "1.4em").style("font-weight", "700").style("fill", "#c8463a")
-            .text("7 类");
-        g.append("text").attr("text-anchor", "middle").attr("dy", 16)
-            .style("font-size", "0.85em").style("fill", "#C9A063")
-            .text("诗词总计 164");
-
-        // 标签
-        const labelArc = d3.arc().innerRadius(radius + 14).outerRadius(radius + 14);
-        g.selectAll("text.lbl")
-            .data(arcs)
-            .enter()
-            .append("text")
-            .attr("class", "lbl")
+        // 标签：仅当格子足够大，否则依赖图例 + hover
+        const showLbl = d => ((d.x1 - d.x0) > 48 && (d.y1 - d.y0) > 28);
+        cells.append("text")
+            .attr("x", d => (d.x1 - d.x0) / 2).attr("y", d => (d.y1 - d.y0) / 2 - 4)
             .attr("text-anchor", "middle")
-            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
-            .style("font-size", "0.78rem")
-            .style("fill", "#23201A")
-            .style("opacity", 0)
-            .text(d => d.data.name)
-            .transition().duration(DUR).delay((d, i) => i * 70 + 300)
-            .style("opacity", 1);
+            .style("font-size", "0.82rem").style("font-weight", "600")
+            .style("fill", "#fff").style("paint-order", "stroke")
+            .style("stroke", "rgba(0,0,0,0.35)").style("stroke-width", "3px")
+            .style("pointer-events", "none")
+            .text(d => showLbl(d) ? d.data.name : "");
+        cells.append("text")
+            .attr("x", d => (d.x1 - d.x0) / 2).attr("y", d => (d.y1 - d.y0) / 2 + 13)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.72rem")
+            .style("fill", "#fff").style("opacity", 0.92)
+            .style("pointer-events", "none")
+            .text(d => showLbl(d) ? `${d.data.value} · ${((d.data.value / total) * 100).toFixed(0)}%` : "");
 
-        // 图例
+        // 图例（保留全部 7 类 + 值 + 占比）
         const legend = d3.select("#pie-legend");
         legend.selectAll("*").remove();
-        EMBEDDED_DATA.pie.forEach((p, i) => {
+        data.forEach((p, i) => {
             const item = legend.append("div").attr("class", "lg-item");
             item.append("span").attr("class", "lg-swatch round").style("background", PIE_COLORS[i % PIE_COLORS.length]);
-            item.append("span").text(`${p.name}（${p.value}）`);
+            item.append("span").text(`${p.name}（${p.value}，${((p.value / total) * 100).toFixed(1)}%）`);
         });
     }
 
