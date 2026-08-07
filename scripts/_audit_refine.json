@@ -49,19 +49,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 2,
-    "overlapSamples": [
-      {
-        "a": "竹节山",
-        "b": "东胜神洲",
-        "ratio": 0.46
-      },
-      {
-        "a": "青龙山",
-        "b": "乌斯藏国",
-        "ratio": 0.47
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -249,14 +238,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 1,
-    "overlapSamples": [
-      {
-        "a": "魔法千字文（韩国漫画）",
-        "b": "美猴王传奇（美国改编）",
-        "ratio": 0.49
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -273,14 +256,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 1,
-    "overlapSamples": [
-      {
-        "a": "10/10",
-        "b": "如来佛祖",
-        "ratio": 0.43
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -288,24 +265,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 3,
-    "overlapSamples": [
-      {
-        "a": "8 · 佛祖定计",
-        "b": "12 · 玄奘现身",
-        "ratio": 0.45
-      },
-      {
-        "a": "32 · 莲花洞金角银角",
-        "b": "45 · 车迟国斗法",
-        "ratio": 0.48
-      },
-      {
-        "a": "88 · 玉华州收徒",
-        "b": "100 · 取经圆满",
-        "ratio": 0.46
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -340,14 +301,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 1,
-    "overlapSamples": [
-      {
-        "a": "权力政治",
-        "b": "马基雅维利",
-        "ratio": 0.41
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -400,14 +355,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 1,
-    "overlapSamples": [
-      {
-        "a": "第80难",
-        "b": "第81难",
-        "ratio": 0.64
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -532,14 +481,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 1,
-    "overlapSamples": [
-      {
-        "a": "金刚琢",
-        "b": "九齿钉耙",
-        "ratio": 0.45
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -634,24 +577,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 3,
-    "overlapSamples": [
-      {
-        "a": "蜘蛛精二姐",
-        "b": "蜘蛛精三姐",
-        "ratio": 0.48
-      },
-      {
-        "a": "蜘蛛精五姐",
-        "b": "蜘蛛精六姐",
-        "ratio": 0.48
-      },
-      {
-        "a": "蜘蛛精六姐",
-        "b": "蜘蛛精七妹",
-        "ratio": 0.48
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {
@@ -845,19 +772,8 @@
     "clipHidden": 0,
     "clipSamples": [],
     "overlapAxis": 0,
-    "overlapContent": 2,
-    "overlapSamples": [
-      {
-        "a": "世德堂本《西游记》",
-        "b": "朱鼎臣本《唐三藏西游释厄传》",
-        "ratio": 0.5
-      },
-      {
-        "a": "现存最早的完整百回本·题'华阳洞天主",
-        "b": "删节本·加入唐僧出身故事（陈光蕊·江",
-        "ratio": 0.42
-      }
-    ],
+    "overlapContent": 0,
+    "overlapSamples": [],
     "err": null
   },
   {

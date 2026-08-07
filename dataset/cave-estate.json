@@ -57,7 +57,7 @@
       "feature": "灵山脚下得道黄毛貂鼠，与佛门有渊源"
     },
     {
-      "name": "白虎洞",
+      "name": "波月洞",
       "owner": "黄袍怪",
       "owner_rank": "king",
       "chapter": 29,
@@ -237,7 +237,7 @@
       "feature": "弥勒佛司磬童子下凡，伪雷音寺规模最大"
     },
     {
-      "name": "驼罗庄陀罗寺",
+      "name": "稀柿衕",
       "owner": "蟒蛇精",
       "owner_rank": "general",
       "chapter": 67,
@@ -289,11 +289,11 @@
       "feature": "三魔王集团，狮驼国一国妖氛，规模空前"
     },
     {
-      "name": "比丘国柳树坡清华洞",
+      "name": "清华庄",
       "owner": "鹿精·比丘国丈",
       "owner_rank": "king",
       "chapter": 78,
-      "region": "比丘国·清华仙府",
+      "region": "比丘国·清华庄",
       "location": "比丘国都城外",
       "environment": "柳树成荫，清幽如仙",
       "furnishings": "仙府般清雅",
@@ -424,7 +424,7 @@
     {
       "region": "碗子山·波月洞",
       "luxury": 5,
-      "name": "白虎洞"
+      "name": "波月洞"
     },
     {
       "region": "平顶山·莲花洞",
@@ -474,7 +474,7 @@
     {
       "region": "七绝山·稀柿衕",
       "luxury": 2,
-      "name": "驼罗庄陀罗寺"
+      "name": "稀柿衕"
     },
     {
       "region": "盘丝岭·盘丝洞",
@@ -487,9 +487,9 @@
       "name": "狮驼洞"
     },
     {
-      "region": "比丘国·清华仙府",
+      "region": "比丘国·清华庄",
       "luxury": 6,
-      "name": "比丘国柳树坡清华洞"
+      "name": "清华庄"
     },
     {
       "region": "陷空山·无底洞",

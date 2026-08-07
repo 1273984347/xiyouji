@@ -1234,6 +1234,18 @@ const EMBEDDED_DATA = {
         .force("center", d3.forceCenter(width / 2, height / 2))
         .force("collision", d3.forceCollide().radius(d => d.size + 6));
 
+        // P1 推广：按 type 社区聚类（锚点均布+稳定收敛），不改数据语义
+        {
+            const _grp = Array.from(new Set(sim.nodes().map(d => d.type))).sort();
+            const _gx = {}, _gy = {};
+            _grp.forEach((g, i) => {
+                _gx[g] = width * (i + 1) / (_grp.length + 1);
+                _gy[g] = height * (0.38 + 0.24 * (i % 2));
+            });
+            sim.force("x", d3.forceX(d => (_gx[d.type] !== undefined ? _gx[d.type] : width / 2)).strength(0.14))
+                .force("y", d3.forceY(d => (_gy[d.type] !== undefined ? _gy[d.type] : height / 2)).strength(0.14));
+        }
+
       // 性能：边层改 Canvas 叠加，避免每帧 N×4 几何属性写入触发 SVG 重排
   var _svgEl = svg.node();
   var _lcParent = _svgEl.parentNode;
@@ -1804,6 +1816,55 @@ const link = svg.append("g").selectAll("line")
   }
   function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
   if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+<script id="audit-contentavoid">
+(function(){
+  var SKIP=/(tick|legend|title|axis|domain|cell|tooltip|axisfix|dark-halo|subtitle|grid|background|heat-col-label|heat-row-label)/i;
+  function fix(){
+    try{
+      // 1) 热力图列标签旋转 -42°（保留可见）
+      document.querySelectorAll('svg text.heat-col-label').forEach(function(t){
+        var x=+t.getAttribute('x')||0, y=+t.getAttribute('y')||0;
+        t.setAttribute('transform','rotate(-42 '+x+' '+y+')');
+        t.setAttribute('text-anchor','end');
+      });
+      // 2) 其余文字重叠：隐藏较小者 + 补 title
+      document.querySelectorAll('svg').forEach(function(svg){
+        var texts=[].slice.call(svg.querySelectorAll('text')).filter(function(t){
+          var c=t.getAttribute('class')||'';
+          if(SKIP.test(c)) return false;
+          var b=t.getBBox(); return b.width>0 && b.height>0;
+        });
+        for(var i=0;i<texts.length;i++){
+          for(var j=i+1;j<texts.length;j++){
+            var a=texts[i],b=texts[j];
+            var ra=a.getBBox(),rb=b.getBBox();
+            var ix=Math.max(0,Math.min(ra.x+ra.width,rb.x+rb.width)-Math.max(ra.x,rb.x));
+            var iy=Math.max(0,Math.min(ra.y+ra.height,rb.y+rb.height)-Math.max(ra.y,rb.y));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(), tb=(b.textContent||'').trim();
+            if(ta===tb){ // 完全重复：隐藏其一
+              if(a.style.display!=='none'){ a.setAttribute('data-cavoid','1'); if(!a.getAttribute('title')) a.setAttribute('title',ta); a.style.display='none'; }
+              continue;
+            }
+            var hide=(ra.width*ra.height<=rb.width*rb.height)?a:b;
+            var keep=(hide===a)?b:a;
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-cavoid','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000,14000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run(); else window.addEventListener('load',run);
 })();
 </script>
 
