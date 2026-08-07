@@ -1108,6 +1108,55 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script>
+
+function renderTreemap(opts){
+  var tipId=opts.tipId||'tooltip';
+  var svg=d3.select('#'+opts.svgId); svg.selectAll('*').remove();
+  var node=svg.node();
+  var W=(+svg.attr('width'))||(node.clientWidth||520);
+  var H=(+svg.attr('height'))||(node.clientHeight||420);
+  svg.attr('viewBox','0 0 '+W+' '+H);
+  var data=opts.data; if(!data||!data.length) return;
+  var total=d3.sum(data,opts.valueOf); if(!(total>0)) return;
+  var root=d3.hierarchy({children:data.map(function(d){return {d:d};})})
+    .sum(function(d){return (d&&d.d)?opts.valueOf(d.d):0;})
+    .sort(function(a,b){return b.value-a.value;});
+  d3.treemap().size([W,H]).paddingInner(2).round(true)(root);
+  var tip=d3.select('#'+tipId);
+  var g=svg.append('g');
+  var cell=g.selectAll('g.tm').data(root.leaves()).enter().append('g')
+    .attr('class','tm')
+    .attr('transform',function(d){return 'translate('+d.x0+','+d.y0+')';});
+  cell.append('rect')
+    .attr('width',function(d){return Math.max(0,d.x1-d.x0);})
+    .attr('height',function(d){return Math.max(0,d.y1-d.y0);})
+    .attr('fill',function(d){return opts.colorOf(d.data.d);})
+    .attr('stroke','#fff').attr('stroke-width',1)
+    .style('cursor','pointer')
+    .on('mouseover',function(ev,d){d3.select(this).attr('opacity',.85);tip.style('opacity',1).style('position','fixed').html(opts.htmlOf(d.data.d,total));})
+    .on('mousemove',function(ev){tip.style('left',(ev.clientX+14)+'px').style('top',(ev.clientY-10)+'px');})
+    .on('mouseout',function(){d3.select(this).attr('opacity',1);tip.style('opacity',0);});
+  cell.append('text').attr('x',6).attr('y',16).style('font-size','0.74rem').style('fill','#fff').style('pointer-events','none').style('font-weight','600')
+    .each(function(d){
+      var w=d.x1-d.x0,h=d.y1-d.y0,pct=opts.valueOf(d.data.d)/total*100;
+      if(w>60&&h>32){
+        var t=d3.select(this);
+        t.text(opts.nameOf(d.data.d));
+        t.append('tspan').attr('x',6).attr('dy','1.25em').style('font-weight','400').style('opacity',.85).text(pct.toFixed(1)+'%');
+      }
+    });
+  if(opts.legendId){
+    var lg=d3.select('#'+opts.legendId); lg.selectAll('*').remove();
+    data.slice().sort(function(a,b){return opts.valueOf(b)-opts.valueOf(a);}).forEach(function(d){
+      var pct=(opts.valueOf(d)/total*100).toFixed(1);
+      var row=lg.append('div').attr('class','tm-legend-item').style('display','flex').style('align-items','center').style('gap','6px').style('margin','3px 0').style('font-size','0.8rem');
+      row.append('span').style('width','12px').style('height','12px').style('border-radius','3px').style('background',opts.colorOf(d)).style('flex','0 0 auto');
+      row.append('span').text(opts.nameOf(d)+'  ·  '+opts.valueOf(d)+'  ·  '+pct+'%');
+    });
+  }
+}
+
+
     // ========== 嵌入式 fallback 数据（fetch 失败时使用） ==========
     const EMBEDDED_PILGRIMS = [
         {"name":"玄奘","work":"《大唐西域记》/《西游记》原型","author":"真实历史·玄奘自述","country":"中国·唐","year":"7世纪","destination":"印度·那烂陀寺","goal":"求取瑜伽师地论等真经","guide":"无（自力）","companions":"马匹·西域向导","trials":"沙漠迷路·雪山·盗匪·异国","duration":"17年","symbolic_meaning":"真实求法者·历史原型","influence":"《西游记》直接原型·中印文化交流史"},
@@ -1236,91 +1285,15 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     }
 
     // ========== 图表 3：文化圈分布饼图 ==========
-    function renderCountryPie(pilgrims) {
-        const svg = d3.select("#chart-country");
-        const width = +svg.attr("width");
-        const height = +svg.attr("height");
-        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
-
-        svg.selectAll("*").remove();
-        const g = svg.append("g")
-            .attr("transform", `translate(${width/2}, ${height/2})`);
-
-        // 按国家统计作品数
-        const countryCount = {};
-        pilgrims.forEach(p => {
-            countryCount[p.country] = (countryCount[p.country] || 0) + 1;
-        });
-        const data = Object.entries(countryCount);
-
-        const pie = d3.pie().value(d => d[1]).sort(null);
-        const arc = d3.arc()
-            .innerRadius(radius * 0.58)
-            .outerRadius(radius)
-            .cornerRadius(3);
-        const labelArc = d3.arc()
-            .innerRadius(radius * 0.82)
-            .outerRadius(radius * 0.82);
-
-        const arcs = pie(data);
-
-        // 切片
-        g.selectAll("path")
-            .data(arcs)
-            .enter()
-            .append("path")
-            .attr("fill", d => COUNTRY_COLORS[d.data[0]] || "#999")
-            .attr("stroke", "#fff")
-            .attr("stroke-width", 2)
-            .attr("d", arc)
-            .style("opacity", 0)
-            .transition()
-            .duration(800)
-            .delay((d, i) => i * 80)
-            .style("opacity", 1);
-
-        // 中心数字
-        const total = data.reduce((a, b) => a + b[1], 0);
-        g.append("text")
-            .attr("text-anchor", "middle")
-            .attr("dy", "0.35em")
-            .style("font-size", "1.8rem")
-            .style("font-weight", "600")
-            .style("fill", "#23201A")
-            .text(total);
-        g.append("text")
-            .attr("text-anchor", "middle")
-            .attr("dy", "2em")
-            .style("font-size", "0.72rem")
-            .style("fill", "#6B6455")
-            .text("文化圈");
-
-        // 切片标签
-        g.selectAll("text.label")
-            .data(arcs)
-            .enter()
-            .append("text")
-            .attr("class", "label")
-            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
-            .attr("text-anchor", "middle")
-            .style("font-size", "0.82rem")
-            .style("font-weight", "600")
-            .style("fill", "#fff")
-            .text(d => d.data[1]);
-
-        // 图例
-        const legend = d3.select("#legend-country");
-        legend.selectAll("*").remove();
-        legend.selectAll(".legend-item")
-            .data(data)
-            .enter()
-            .append("div")
-            .attr("class", "legend-item")
-            .html(d => `
-                <span class="legend-swatch" style="background:${COUNTRY_COLORS[d[0]] || '#999'}"></span>
-                <span>${d[0]}：${d[1]} 部</span>
-            `);
-    }
+    function renderCountryPie(pilgrims){
+  var countryCount={}; pilgrims.forEach(p=>{countryCount[p.country]=(countryCount[p.country]||0)+1;});
+  var data=Object.entries(countryCount);
+  renderTreemap({
+    svgId:'chart-country', data:data, legendId:'legend-country', tipId:'tooltip',
+    nameOf:d=>d[0], valueOf:d=>d[1], colorOf:d=>COUNTRY_COLORS[d[0]]||'#999',
+    htmlOf:(d,total)=>`<strong>${d[0]}</strong><div class="row">作品数：<strong style="color:#e9b885">${d[1]}</strong>（${((d[1]/total)*100).toFixed(1)}%）</div>`
+  });
+}
 
     // ========== 图表 4：时间轴 ==========
     function renderTimeline(pilgrims) {

@@ -1175,6 +1175,55 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <div class="tooltip" id="tooltip"></div>
 
     <script>
+
+function renderTreemap(opts){
+  var tipId=opts.tipId||'tooltip';
+  var svg=d3.select('#'+opts.svgId); svg.selectAll('*').remove();
+  var node=svg.node();
+  var W=(+svg.attr('width'))||(node.clientWidth||520);
+  var H=(+svg.attr('height'))||(node.clientHeight||420);
+  svg.attr('viewBox','0 0 '+W+' '+H);
+  var data=opts.data; if(!data||!data.length) return;
+  var total=d3.sum(data,opts.valueOf); if(!(total>0)) return;
+  var root=d3.hierarchy({children:data.map(function(d){return {d:d};})})
+    .sum(function(d){return (d&&d.d)?opts.valueOf(d.d):0;})
+    .sort(function(a,b){return b.value-a.value;});
+  d3.treemap().size([W,H]).paddingInner(2).round(true)(root);
+  var tip=d3.select('#'+tipId);
+  var g=svg.append('g');
+  var cell=g.selectAll('g.tm').data(root.leaves()).enter().append('g')
+    .attr('class','tm')
+    .attr('transform',function(d){return 'translate('+d.x0+','+d.y0+')';});
+  cell.append('rect')
+    .attr('width',function(d){return Math.max(0,d.x1-d.x0);})
+    .attr('height',function(d){return Math.max(0,d.y1-d.y0);})
+    .attr('fill',function(d){return opts.colorOf(d.data.d);})
+    .attr('stroke','#fff').attr('stroke-width',1)
+    .style('cursor','pointer')
+    .on('mouseover',function(ev,d){d3.select(this).attr('opacity',.85);tip.style('opacity',1).style('position','fixed').html(opts.htmlOf(d.data.d,total));})
+    .on('mousemove',function(ev){tip.style('left',(ev.clientX+14)+'px').style('top',(ev.clientY-10)+'px');})
+    .on('mouseout',function(){d3.select(this).attr('opacity',1);tip.style('opacity',0);});
+  cell.append('text').attr('x',6).attr('y',16).style('font-size','0.74rem').style('fill','#fff').style('pointer-events','none').style('font-weight','600')
+    .each(function(d){
+      var w=d.x1-d.x0,h=d.y1-d.y0,pct=opts.valueOf(d.data.d)/total*100;
+      if(w>60&&h>32){
+        var t=d3.select(this);
+        t.text(opts.nameOf(d.data.d));
+        t.append('tspan').attr('x',6).attr('dy','1.25em').style('font-weight','400').style('opacity',.85).text(pct.toFixed(1)+'%');
+      }
+    });
+  if(opts.legendId){
+    var lg=d3.select('#'+opts.legendId); lg.selectAll('*').remove();
+    data.slice().sort(function(a,b){return opts.valueOf(b)-opts.valueOf(a);}).forEach(function(d){
+      var pct=(opts.valueOf(d)/total*100).toFixed(1);
+      var row=lg.append('div').attr('class','tm-legend-item').style('display','flex').style('align-items','center').style('gap','6px').style('margin','3px 0').style('font-size','0.8rem');
+      row.append('span').style('width','12px').style('height','12px').style('border-radius','3px').style('background',opts.colorOf(d)).style('flex','0 0 auto');
+      row.append('span').text(opts.nameOf(d)+'  ·  '+opts.valueOf(d)+'  ·  '+pct+'%');
+    });
+  }
+}
+
+
     // ============================================================
     // 嵌入式 fallback 数据（fetch 失败时使用，与 JSON 文件一致）
     // ============================================================
@@ -1556,102 +1605,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // ============================================================
     // 图表 4：风格流派饼图
     // ============================================================
-    function renderPie(styles) {
-        const svg = d3.select("#chart-pie");
-        const W = +svg.attr("width");
-        const H = +svg.attr("height");
-        const radius = Math.max(0, Math.min(W, H) / 2 - 30);
-
-        svg.selectAll("*").remove();
-        const g = svg.append("g").attr("transform", `translate(${W/2},${H/2})`);
-
-        const total = d3.sum(styles, d => d.scenes_count);
-
-        const pie = d3.pie()
-            .value(d => d.scenes_count)
-            .sort((a, b) => b.scenes_count - a.scenes_count);
-
-        const arc = d3.arc()
-            .innerRadius(radius * 0.55)
-            .outerRadius(radius)
-            .cornerRadius(3)
-            .padAngle(0.015);
-
-        const labelArc = d3.arc()
-            .innerRadius(radius * 0.82)
-            .outerRadius(radius * 0.82);
-
-        const arcs = pie(styles);
-        const tooltip = d3.select("#tooltip");
-
-        g.selectAll("path")
-            .data(arcs)
-            .enter().append("path")
-            .attr("fill", d => d.data.color)
-            .attr("stroke", "#fff")
-            .attr("stroke-width", 1.5)
-            .attr("d", arc)
-            .style("cursor", "pointer")
-            .on("mouseover", function(ev, d) {
-                d3.select(this).attr("opacity", 0.85);
-                const pct = (d.data.scenes_count / total * 100).toFixed(1);
-                tooltip.style("opacity", 1)
-                    .html(`<strong>${d.data.school}</strong>
-                        <div class="row">${d.data.description}</div>
-                        <div class="row">特征：${d.data.feature}</div>
-                        <div class="row">场景数：<strong style="color:#e9b885">${d.data.scenes_count}</strong>（${pct}%）</div>`);
-            })
-            .on("mousemove", function(ev) {
-                tooltip.style("left", (ev.pageX + 14) + "px")
-                       .style("top", (ev.pageY - 10) + "px");
-            })
-            .on("mouseout", function() {
-                d3.select(this).attr("opacity", 1);
-                tooltip.style("opacity", 0);
-            });
-
-        // 中心数字
-        g.append("text").attr("class", "pie-center-val").text(total);
-        g.append("text").attr("class", "pie-center").attr("dy", "1.6em").text("场景总数");
-
-        // 外侧引线标签（薄切片内侧标签互相压 → 移到环外，带引线+百分比）
-        const _mid = d => (d.startAngle + d.endAngle) / 2;
-        const _pt = (r, a) => [r * Math.sin(a), -r * Math.cos(a)];
-        const _lblR = radius + 30;
-        g.selectAll(".pie-lead")
-            .data(arcs)
-            .enter().append("polyline")
-            .attr("class", "pie-lead")
-            .attr("points", d => {
-                const a = _mid(d);
-                const p1 = _pt(radius * 0.92, a), p2 = _pt(_lblR - 6, a);
-                return `${p1[0]},${p1[1]} ${p2[0]},${p2[1]}`;
-            })
-            .style("fill", "none")
-            .style("stroke", "#c9bda3")
-            .style("stroke-width", 1);
-        g.selectAll(".pie-label")
-            .data(arcs)
-            .enter().append("text")
-            .attr("class", "pie-label")
-            .attr("transform", d => { const p = _pt(_lblR, _mid(d)); return `translate(${p[0]},${p[1]})`; })
-            .attr("dy", "0.35em")
-            .attr("text-anchor", d => _pt(_lblR, _mid(d))[0] < 0 ? "end" : "start")
-            .style("font-size", "0.74rem")
-            .style("fill", "var(--ink)")
-            .style("font-weight", "600")
-            .text(d => `${d.data.school.split("·")[0]} ${d.data.scenes_count} (${(d.data.scenes_count / total * 100).toFixed(0)}%)`);
-
-        // 图例
-        const legend = d3.select("#legend-pie");
-        legend.selectAll("*").remove();
-        const sortedLegend = styles.slice().sort((a, b) => b.scenes_count - a.scenes_count);
-        sortedLegend.forEach(s => {
-            const item = legend.append("div").attr("class", "legend-item");
-            item.append("span").attr("class", "legend-swatch").style("background", s.color);
-            item.append("span").text(`${s.school} (${s.scenes_count})`);
-        });
-    }
+    function renderPie(styles){
+  renderTreemap({
+    svgId:'chart-pie', data:styles, legendId:'legend-pie', tipId:'tooltip',
+    nameOf:d=>d.school, valueOf:d=>d.scenes_count, colorOf:d=>d.color,
+    htmlOf:(d,total)=>`<strong>${d.school}</strong><div class="row">${d.description||''}</div><div class="row">特征：${d.feature||''}</div><div class="row">场景数：<strong style="color:#e9b885">${d.scenes_count}</strong>（${((d.scenes_count/total)*100).toFixed(1)}%）</div>`
+  });
+}
 
     // ============================================================
     // 图表 5：角色阶段卡片网格

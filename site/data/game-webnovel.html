@@ -1424,6 +1424,55 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script>
+
+function renderTreemap(opts){
+  var tipId=opts.tipId||'tooltip';
+  var svg=d3.select('#'+opts.svgId); svg.selectAll('*').remove();
+  var node=svg.node();
+  var W=(+svg.attr('width'))||(node.clientWidth||520);
+  var H=(+svg.attr('height'))||(node.clientHeight||420);
+  svg.attr('viewBox','0 0 '+W+' '+H);
+  var data=opts.data; if(!data||!data.length) return;
+  var total=d3.sum(data,opts.valueOf); if(!(total>0)) return;
+  var root=d3.hierarchy({children:data.map(function(d){return {d:d};})})
+    .sum(function(d){return (d&&d.d)?opts.valueOf(d.d):0;})
+    .sort(function(a,b){return b.value-a.value;});
+  d3.treemap().size([W,H]).paddingInner(2).round(true)(root);
+  var tip=d3.select('#'+tipId);
+  var g=svg.append('g');
+  var cell=g.selectAll('g.tm').data(root.leaves()).enter().append('g')
+    .attr('class','tm')
+    .attr('transform',function(d){return 'translate('+d.x0+','+d.y0+')';});
+  cell.append('rect')
+    .attr('width',function(d){return Math.max(0,d.x1-d.x0);})
+    .attr('height',function(d){return Math.max(0,d.y1-d.y0);})
+    .attr('fill',function(d){return opts.colorOf(d.data.d);})
+    .attr('stroke','#fff').attr('stroke-width',1)
+    .style('cursor','pointer')
+    .on('mouseover',function(ev,d){d3.select(this).attr('opacity',.85);tip.style('opacity',1).style('position','fixed').html(opts.htmlOf(d.data.d,total));})
+    .on('mousemove',function(ev){tip.style('left',(ev.clientX+14)+'px').style('top',(ev.clientY-10)+'px');})
+    .on('mouseout',function(){d3.select(this).attr('opacity',1);tip.style('opacity',0);});
+  cell.append('text').attr('x',6).attr('y',16).style('font-size','0.74rem').style('fill','#fff').style('pointer-events','none').style('font-weight','600')
+    .each(function(d){
+      var w=d.x1-d.x0,h=d.y1-d.y0,pct=opts.valueOf(d.data.d)/total*100;
+      if(w>60&&h>32){
+        var t=d3.select(this);
+        t.text(opts.nameOf(d.data.d));
+        t.append('tspan').attr('x',6).attr('dy','1.25em').style('font-weight','400').style('opacity',.85).text(pct.toFixed(1)+'%');
+      }
+    });
+  if(opts.legendId){
+    var lg=d3.select('#'+opts.legendId); lg.selectAll('*').remove();
+    data.slice().sort(function(a,b){return opts.valueOf(b)-opts.valueOf(a);}).forEach(function(d){
+      var pct=(opts.valueOf(d)/total*100).toFixed(1);
+      var row=lg.append('div').attr('class','tm-legend-item').style('display','flex').style('align-items','center').style('gap','6px').style('margin','3px 0').style('font-size','0.8rem');
+      row.append('span').style('width','12px').style('height','12px').style('border-radius','3px').style('background',opts.colorOf(d)).style('flex','0 0 auto');
+      row.append('span').text(opts.nameOf(d)+'  ·  '+opts.valueOf(d)+'  ·  '+pct+'%');
+    });
+  }
+}
+
+
     // ============================================================
     // 嵌入式 fallback 数据（fetch 失败时使用）
     // 数据源：scripts/output/data/{character_cards,artifact_panels,webnovel_adaptations,game_webnovel_summary}.json
@@ -1911,118 +1960,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // ============================================================
     // 渲染：稀有度分布饼图
     // ============================================================
-    function renderRarityPie(summary) {
-        const svg = d3.select("#rarity-pie-svg");
-        svg.selectAll("*").remove();
-        const el = document.getElementById("rarity-pie-svg");
-        const w = el.clientWidth || 500;
-        const h = 360;
-        svg.attr("viewBox", `0 0 ${w} ${h}`);
-
-        const cx = w / 2, cy = h / 2;
-        const radius = Math.max(0, Math.min(w, h) / 2 - 30);
-
-        const data = RARITY_ORDER
-            .filter(r => summary.rarity_distribution[r])
-            .map(r => ({ rarity: r, count: summary.rarity_distribution[r] }));
-        const total = d3.sum(data, d => d.count);
-
-        const pie = d3.pie().value(d => d.count).sort(null);
-        const arc = d3.arc().innerRadius(radius * 0.55).outerRadius(radius).padAngle(0.02);
-        const arcHover = d3.arc().innerRadius(radius * 0.55).outerRadius(radius + 8).padAngle(0.02);
-
-        const tip = d3.select("#rarity-tip");
-        const elParent = el.parentElement;
-
-        const g = svg.append("g").attr("transform", `translate(${cx},${cy})`);
-
-        const arcs = pie(data);
-        const paths = g.selectAll("path")
-            .data(arcs)
-            .enter()
-            .append("path")
-            .attr("fill", d => RARITY_COLORS[d.data.rarity])
-            .attr("stroke", "#fff")
-            .attr("stroke-width", 2)
-            .style("cursor", "pointer")
-            .style("opacity", 0)
-            .each(function(d) { this._current = { startAngle: 0, endAngle: 0 }; });
-
-        paths.transition()
-            .duration(800)
-            .ease(d3.easeCubicOut)
-            .style("opacity", 1)
-            .attrTween("d", function(d) {
-                const i = d3.interpolate(this._current, d);
-                this._current = i(1);
-                return t => arc(i(t));
-            });
-
-        paths.on("mouseover", function(e, d) {
-            d3.select(this).transition().duration(150).attr("d", arcHover);
-            tip.style("opacity", 1)
-                .html(`<div class="tip-title">${d.data.rarity} · 稀有度</div>` +
-                      `数量：<strong style="color:var(--accent-soft);">${d.data.count} 张</strong><br/>` +
-                      `占比：${(d.data.count / total * 100).toFixed(1)}%`);
-        })
-        .on("mousemove", function(e) {
-            const rect = elParent.getBoundingClientRect();
-            tip.style("left", (e.clientX - rect.left + 14) + "px")
-               .style("top", (e.clientY - rect.top - 10) + "px");
-        })
-        .on("mouseout", function() {
-            d3.select(this).transition().duration(150).attr("d", arc);
-            tip.style("opacity", 0);
-        });
-
-        // 中心文字
-        g.append("text")
-            .attr("text-anchor", "middle")
-            .attr("y", -6)
-            .style("font-size", "2rem")
-            .style("font-weight", "800")
-            .style("font-family", "JetBrains Mono, monospace")
-            .style("fill", "var(--accent)")
-            .text(total);
-        g.append("text")
-            .attr("text-anchor", "middle")
-            .attr("y", 18)
-            .style("font-size", "0.78rem")
-            .style("fill", "var(--ink-soft)")
-            .style("letter-spacing", "0.1em")
-            .text("TOTAL CARDS");
-
-        // 稀有度标签（外侧）
-        g.selectAll(".rarity-label")
-            .data(arcs)
-            .enter()
-            .append("text")
-            .attr("class", "rarity-label")
-            .attr("transform", d => {
-                const pos = arc.centroid(d);
-                const r = Math.sqrt(pos[0] * pos[0] + pos[1] * pos[1]);
-                const scale = (radius + 18) / r;
-                return `translate(${pos[0] * scale},${pos[1] * scale})`;
-            })
-            .attr("text-anchor", "middle")
-            .style("font-size", "0.78rem")
-            .style("font-weight", "700")
-            .style("font-family", "JetBrains Mono, monospace")
-            .style("fill", d => RARITY_COLORS[d.data.rarity])
-            .text(d => d.data.rarity);
-
-        // 渲染图例
-        const legend = d3.select("#rarity-legend");
-        legend.selectAll("*").remove();
-        legend.append("h4").text("稀有度图例 · 5 档");
-        RARITY_ORDER.forEach(r => {
-            const cnt = summary.rarity_distribution[r] || 0;
-            const item = legend.append("div").attr("class", "legend-item");
-            item.append("span").attr("class", "swatch").style("background", RARITY_COLORS[r]);
-            item.append("span").text(r + " 级");
-            item.append("span").attr("class", "li-val").text(cnt + " 张");
-        });
-    }
+    function renderRarityPie(summary){
+  var data=RARITY_ORDER.filter(r=>summary.rarity_distribution[r]).map(r=>({rarity:r,count:summary.rarity_distribution[r]}));
+  renderTreemap({
+    svgId:'rarity-pie-svg', data:data, legendId:'rarity-legend', tipId:'rarity-tip',
+    nameOf:d=>d.rarity, valueOf:d=>d.count, colorOf:d=>RARITY_COLORS[d.rarity],
+    htmlOf:(d,total)=>`<div class="tip-title">${d.rarity} · 稀有度</div>数量：<strong style="color:var(--accent-soft);">${d.count} 张</strong><br/>占比：${((d.count/total)*100).toFixed(1)}%`
+  });
+}
 
     // ============================================================
     // 渲染：战力排行条形图
@@ -2153,114 +2098,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // ============================================================
     // 渲染：元素分布圆环图
     // ============================================================
-    function renderElementDonut(summary) {
-        const svg = d3.select("#element-donut-svg");
-        svg.selectAll("*").remove();
-        const el = document.getElementById("element-donut-svg");
-        const w = el.clientWidth || 500;
-        const h = 360;
-        svg.attr("viewBox", `0 0 ${w} ${h}`);
-
-        const cx = w / 2, cy = h / 2;
-        const radius = Math.max(0, Math.min(w, h) / 2 - 30);
-
-        const data = Object.entries(summary.element_distribution)
-            .map(([k, v]) => ({ element: k, count: v }));
-        const total = d3.sum(data, d => d.count);
-
-        const pie = d3.pie().value(d => d.count).sort(null);
-        const arc = d3.arc().innerRadius(radius * 0.6).outerRadius(radius).padAngle(0.02);
-        const arcHover = d3.arc().innerRadius(radius * 0.6).outerRadius(radius + 8).padAngle(0.02);
-
-        const tip = d3.select("#element-tip");
-        const elParent = el.parentElement;
-        const g = svg.append("g").attr("transform", `translate(${cx},${cy})`);
-
-        const arcs = pie(data);
-        const paths = g.selectAll("path")
-            .data(arcs)
-            .enter()
-            .append("path")
-            .attr("fill", d => elemColor(d.data.element))
-            .attr("stroke", "#fff")
-            .attr("stroke-width", 2)
-            .style("cursor", "pointer")
-            .style("opacity", 0)
-            .each(function(d) { this._current = { startAngle: 0, endAngle: 0 }; });
-
-        paths.transition()
-            .duration(800)
-            .ease(d3.easeCubicOut)
-            .style("opacity", 1)
-            .attrTween("d", function(d) {
-                const i = d3.interpolate(this._current, d);
-                this._current = i(1);
-                return t => arc(i(t));
-            });
-
-        paths.on("mouseover", function(e, d) {
-            d3.select(this).transition().duration(150).attr("d", arcHover);
-            tip.style("opacity", 1)
-                .html(`<div class="tip-title">${d.data.element} · 元素属性</div>` +
-                      `数量：<strong style="color:var(--accent-soft);">${d.data.count} 张</strong><br/>` +
-                      `占比：${(d.data.count / total * 100).toFixed(1)}%`);
-        })
-        .on("mousemove", function(e) {
-            const rect = elParent.getBoundingClientRect();
-            tip.style("left", (e.clientX - rect.left + 14) + "px")
-               .style("top", (e.clientY - rect.top - 10) + "px");
-        })
-        .on("mouseout", function() {
-            d3.select(this).transition().duration(150).attr("d", arc);
-            tip.style("opacity", 0);
-        });
-
-        // 中心
-        g.append("text")
-            .attr("text-anchor", "middle").attr("y", -6)
-            .style("font-size", "1.8rem")
-            .style("font-weight", "800")
-            .style("font-family", "JetBrains Mono, monospace")
-            .style("fill", "var(--accent)")
-            .text(Object.keys(summary.element_distribution).length);
-        g.append("text")
-            .attr("text-anchor", "middle").attr("y", 18)
-            .style("font-size", "0.78rem")
-            .style("fill", "var(--ink-soft)")
-            .style("letter-spacing", "0.1em")
-            .text("ELEMENTS");
-
-        // 元素标签
-        g.selectAll(".elem-label")
-            .data(arcs)
-            .enter()
-            .append("text")
-            .attr("class", "elem-label")
-            .attr("transform", d => {
-                const pos = arc.centroid(d);
-                const r = Math.sqrt(pos[0] * pos[0] + pos[1] * pos[1]);
-                const scale = (radius + 18) / r;
-                return `translate(${pos[0] * scale},${pos[1] * scale})`;
-            })
-            .attr("text-anchor", "middle")
-            .style("font-size", "0.82rem")
-            .style("font-weight", "700")
-            .style("fill", d => elemColor(d.data.element))
-            .text(d => d.data.element + " " + d.data.count);
-
-        // 图例
-        const legend = d3.select("#element-legend");
-        legend.selectAll("*").remove();
-        legend.append("h4").text("元素图例 · " + Object.keys(summary.element_distribution).length + " 种");
-        Object.entries(summary.element_distribution)
-            .sort((a, b) => b[1] - a[1])
-            .forEach(([k, v]) => {
-                const item = legend.append("div").attr("class", "legend-item");
-                item.append("span").attr("class", "swatch").style("background", elemColor(k));
-                item.append("span").text(k + " 元素");
-                item.append("span").attr("class", "li-val").text(v + " 张");
-            });
-    }
+    function renderElementDonut(summary){
+  var data=Object.entries(summary.element_distribution).map(function(kv){return {element:kv[0],count:kv[1]};});
+  renderTreemap({
+    svgId:'element-donut-svg', data:data, legendId:'element-legend', tipId:'element-tip',
+    nameOf:d=>d.element, valueOf:d=>d.count, colorOf:d=>elemColor(d.element),
+    htmlOf:(d,total)=>`<div class="tip-title">${d.element} · 元素属性</div>数量：<strong style="color:var(--accent-soft);">${d.count} 张</strong><br/>占比：${((d.count/total)*100).toFixed(1)}%`
+  });
+}
 
     // ============================================================
     // 渲染：法宝装备面板表
