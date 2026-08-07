@@ -4,9 +4,20 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W387），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W388），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.3.16（2026-08-07）：W388 文档同步审查修复 + 存储优化（交接文档阻塞段过期修正·项目说明版本残留修复·.gitignore 排除 59MB 大文件）
+
+> **W388 文档审查整理**
+> - **来源**：用户要求审查交接文档与其他文件同步性 + 文档储存大小优化
+> - **执行**：
+>   - **过期信息修复**：交接文档「零、当前阻塞」段重写（原写"W358 未 commit/push"早已过期·现 HEAD 为 W387·工作树干净）·历史段收尾 W348 快照标注「历史快照」·`docs/00-导读/项目说明.md` 第 45 行"当前版本"v2.3.9 → v2.3.15（历史残留）
+>   - **存储优化**：`.gitignore` 新增 `scripts/output/rag_index.json`（RAG 索引构建产物 32.4MB·可由 source/原文 重建）+ `assets/fonts/source/`（字体源文件 26.7MB·web 仅用 site/static/fonts/*.woff2 优化子集）·`git rm --cached` 6 个文件（索引移除·本地保留）·git tracked 81.0MB → 21.9MB（-59MB）
+>   - **审查结论**：六文档版本号/计数一致（门禁全绿）·发现并修复 2 处历史残留（交接文档阻塞段 + 项目说明版本号）·历史版本段乱序（交接文档 W343-W358）为历史遗留，建议后续随归档迁移
+> - **验证**：pre-commit-validate + verify_delivery 全绿·本地文件保留确认（rag_index.json + ttf 仍在）·git tracked 1420 文件 21.9MB
+> - **状态**：已落地·E3 铁律 6 文档同步
 
 ### v2.3.15（2026-08-07）：W387 学术索引反哺 24 条（成书背景/版本演变/佛道思想 3 篇 docs 追加 21 处学术标注·学术论文索引 v1.3 反哺闭环）
 
