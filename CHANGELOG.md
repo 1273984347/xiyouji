@@ -8,14 +8,14 @@
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
-### v2.3.17（2026-08-07）：W389 遗留建议执行（交接文档历史段归档·阻塞段 HEAD 引用修正·项目说明第 45 行残留修复）
+### v2.3.17（2026-08-07）：W389 遗留建议执行（交接文档历史段归档·.git filter-repo 历史瘦身 241.7→32.8MB·阻塞段 HEAD 引用修正·项目说明第 45 行残留修复）
 
 > **W389 遗留建议执行·交接文档历史段归档**
 > - **来源**：用户指令"现在做遗留建议"（承接 W388 文档审查中提出的两条遗留建议）
 > - **执行**：
 >   - **建议 1·交接文档历史段归档**：交接文档.md 原 984 行 → 892 行·W343-W358 详细提交记录（92 行·含 W346/W342/W345/W347/W348/W349/W350/W351/W352/W353/W357/W358/W356/W355/W344/W343 乱序段）迁移至 交接文档-archive.md 新增「二、历史提交记录（W343-W358，v2.2.9x-v2.3.9）」段·archive 头部扩容说明更新（2026-08-07 扩容·W343-W358 追加）
 >   - **W388 残留修复**：交接文档「零、当前阻塞」段 HEAD 引用 W387 → W388（W388 已 commit·HEAD c604a0b）·项目说明.md 第 45 行"当前版本"v2.3.15 → v2.3.17（W388 只修到 v2.3.15 的残留）
->   - **建议 2·.git 历史瘦身（分析完成·未执行）**：pack-7a314f5 历史包 237.8MB（最大 blob 14.76MB 截图 PNG）·git filter-repo 重写历史风险高（重写全部提交哈希·共享仓库不可逆）·已用 .gitignore + git rm --cached（W388）排除未来大文件·待用户决策是否执行 filter-repo
+>   - **建议 2·.git 历史瘦身（已执行）**：pack 分析 241.7MB（最大 blob：rag_index.json 101MB + NotoSerifSC-var.ttf 25MB + mobile 截图 PNG 4-6.7MB）·用户确认执行 git filter-repo→`--strip-blobs-bigger-than 5M`（安全阈值：现役最大文件 woff2 3.5MB）+ `--invert-paths --path scripts/output/screenshots` 精确删除·.git 241.7MB → 32.8MB（-209MB·-86%）·备份 `D:\1\xiyouji-git-backup-20260807`（241.7MB）·force push 重写远端（4258b1e→69d9edd·全部提交哈希重写）·git fsck 全绿·现役文件完好（woff2/text-search/chapters-metadata）
 > - **验证**：Grep spot-check（交接文档 W343-W358 段已迁出·archive 已含段·六文档版本 v2.3.17 一致）·pre-commit-validate + verify_delivery 全绿
 > - **状态**：已落地·E3 铁律 6 文档同步
 

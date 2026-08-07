@@ -19,6 +19,7 @@
 | CHANGELOG.md | W389 | v2.3.17 修改·新增 W389 段·W### 规则 W001-W388→W001-W389 |
 | README.md | W389 | v2.3.17 修改·头部版本段 v2.3.16→v2.3.17 |
 | STRUCTURE.md | W389 | v2.3.17 修改·头部版本段 v2.3.16→v2.3.17 |
+| .git（历史包） | W389 | v2.3.17 filter-repo 重写·--strip-blobs-bigger-than 5M + 删 screenshots 路径·241.7→32.8MB·force push（提交哈希全部重写） |
 
 ## W388 文档审查整理（2026-08-07·v2.3.16）
 
