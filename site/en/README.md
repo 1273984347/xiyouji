@@ -82,14 +82,14 @@ All files live under `d:\1\xiyouji\site\en\`.
 - `site/en/` is a **subset** of `site/`, not a fork. The English pages link outward to the main site's full visualizations (e.g. `../data/cognitive-psychology.html`, `../data/philosophy.html`) and to the original Chinese essays under `docs/06-个人随笔/`.
 - The main site (`site/index.html`, `site/dashboard.html`, `site/data/*.html`) remains the canonical, complete edition. The English subset offers a curated on-ramp for non-Chinese readers; it does not attempt to mirror every page.
 - The English dashboard's KPIs (`100 / 60 / 91 / 68 / 55`) match the project's current totals as of W234; they will be updated alongside the main site as the project grows.
-- Footer double-index links (`../../CHANGELOG.md` v2.3.9 W358 / `../../scripts/output/file-index.md` W358) appear on every English HTML page, matching the footer convention used across the main site.
+- Footer double-index links (`../../CHANGELOG.md` v2.3.11 W383 / `../../scripts/output/file-index.md` W383) appear on every English HTML page, matching the footer convention used across the main site.
 
 ## Verification
 
 Each English HTML page was verified to contain:
 
 1. A recognizable English title ("Journey to the West" or the corresponding section title).
-2. The footer double-index: `CHANGELOG.md v2.3.9 W358` and `file-index.md W358`.
+2. The footer double-index: `CHANGELOG.md v2.3.11 W383` and `file-index.md W383`.
 3. A Chinese↔English switch link pointing back to `../index.html` or the corresponding main-site page.
 
 ## Scope boundaries
