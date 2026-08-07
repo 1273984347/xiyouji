@@ -1,7 +1,7 @@
-# Journey to the West · Annotated — English Edition (W356)
+# Journey to the West · Annotated — English Edition (W383)
 
 > i18n internationalization subproject of the main **Journey to the West · Annotated** project.
-> Version: v2.3.7 · W356 · 2026-08-04
+> Version: v2.3.11 · W383 · 2026-08-07
 
 ## Overview
 
