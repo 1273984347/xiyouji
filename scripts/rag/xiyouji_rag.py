@@ -39,6 +39,8 @@ import json
 import math
 import os
 import re
+import urllib.error
+import urllib.request
 
 # ---- 路径（相对本脚本：scripts/rag/xiyouji_rag.py → 项目根 = ../../）----
 _HERE = os.path.dirname(os.path.abspath(__file__))
@@ -47,6 +49,32 @@ DOCS_DIR = os.path.join(ROOT, "docs")
 NODES_CSV = os.path.join(ROOT, "scripts", "output", "yuanqi_nodes.csv")
 EDGES_CSV = os.path.join(ROOT, "scripts", "output", "yuanqi_edges.csv")
 INDEX_CACHE = os.path.join(ROOT, "scripts", "output", "rag_index.json")
+
+
+def _load_dotenv():
+    """极简 .env 加载（零依赖）：读项目根 .env 与 scripts/rag/.env，注入 os.environ。
+
+    已有环境变量优先（不覆盖）；仅支持 KEY=VALUE 行，忽略注释与空行。
+    """
+    for env_path in (os.path.join(ROOT, ".env"), os.path.join(_HERE, ".env")):
+        if not os.path.exists(env_path):
+            continue
+        try:
+            with open(env_path, encoding="utf-8") as _f:
+                for _ln in _f:
+                    _ln = _ln.strip()
+                    if not _ln or _ln.startswith("#") or "=" not in _ln:
+                        continue
+                    _k, _, _v = _ln.partition("=")
+                    _k = _k.strip()
+                    _v = _v.strip().strip('"').strip("'")
+                    if _k and _k not in os.environ:
+                        os.environ[_k] = _v
+        except Exception:
+            pass
+
+
+_load_dotenv()
 
 K1 = 1.5
 B = 0.75
@@ -436,11 +464,142 @@ def graph_expand(query, hops=1, g=None):
 
 
 # ============================================================
+# 2.5 LLM 生成（provider 化 Base URL · 双格式适配器）
+# ============================================================
+
+# provider → (内置默认端点, API 格式)。格式 ∈ {"openai" OpenAI 兼容 / "anthropic" 原生 messages}
+PROVIDER_ENDPOINTS = {
+    "openai":    ("https://api.openai.com/v1",                        "openai"),
+    "anthropic": ("https://api.anthropic.com/v1",                     "anthropic"),
+    "glm":       ("https://open.bigmodel.cn/api/paas/v4",             "openai"),
+    "kimi":      ("https://api.moonshot.cn/v1",                       "openai"),
+    "minimax":   ("https://api.minimaxi.com/v1",                      "openai"),
+    "deepseek":  ("https://api.deepseek.com/v1",                      "openai"),
+    "dashscope": ("https://dashscope.aliyuncs.com/compatible-mode/v1", "openai"),
+}
+# provider → 可覆盖其默认端点的专属变量名
+PROVIDER_BASE_URL_VAR = {
+    "openai": "OPENAI_BASE_URL",
+    "anthropic": "ANTHROPIC_BASE_URL",
+    "glm": "GLM_BASE_URL",
+    "kimi": "KIMI_BASE_URL",
+    "minimax": "MINIMAX_BASE_URL",
+    "deepseek": "DEEPSEEK_BASE_URL",
+    "dashscope": "DASHSCOPE_BASE_URL",
+}
+
+
+def _resolve_endpoint():
+    """解析最终 Base URL + API 格式。
+
+    优先级（区分代理 vs 原生）：
+      1. CUSTOM_LLM_BASE_URL 存在 → 代理/网关模式：统一 OpenAI 兼容格式（网关约定），
+         绕过对任何特定提供商 URL 的硬编码依赖；
+      2. 否则原生模式：按 LLM_PROVIDER 取专属变量（OPENAI_BASE_URL 等）覆盖内置默认。
+    返回 (base_url, api_format)。
+    """
+    custom = os.environ.get("CUSTOM_LLM_BASE_URL", "").strip().rstrip("/")
+    if custom:
+        return custom, "openai"
+    provider = os.environ.get("LLM_PROVIDER", "openai").strip().lower()
+    default_url, fmt = PROVIDER_ENDPOINTS.get(provider, PROVIDER_ENDPOINTS["openai"])
+    base = os.environ.get(PROVIDER_BASE_URL_VAR.get(provider, ""), "").strip().rstrip("/")
+    return (base or default_url), fmt
+
+
+def _llm_generate(query, snippets, triples, history=None):
+    """真实 LLM 生成（检索增强）：检索到的语料 + 图谱三元组绑定进 system prompt。"""
+    base, fmt = _resolve_endpoint()
+    model = os.environ.get("LLM_MODEL", "gpt-4o-mini").strip() or "gpt-4o-mini"
+    key = os.environ.get("LLM_API_KEY", "").strip()
+    if not key:
+        raise RuntimeError("缺少 LLM_API_KEY")
+
+    snip_txt = ""
+    for s in snippets[:5]:
+        snip_txt += f"\n- 《{s['path']}》\n  {s['excerpt'][:200]}"
+    tri_txt = ""
+    for t in triples[:8]:
+        tri_txt += f"\n- {t['from']} —{t['relation']}→ {t['to']}"
+        if t.get("value"):
+            tri_txt += f"（{t.get('property', '')}: {t['value']}）"
+
+    system = (
+        "你是「渡口问津」——《详解西游记》项目的 AI 解读助手。"
+        "严格基于以下检索到的项目语料与「佛法=AI」图谱作答，不编造语料外的具体引用；"
+        "回答保持渡口风格：克制、有洞察，像一位深读原著的引渡人。\n\n"
+        f"【检索到的语料片段】{snip_txt or '（无精确命中）'}\n\n"
+        f"【图谱三元组】{tri_txt or '（无图谱命中）'}"
+    )
+
+    messages = [{"role": "system", "content": system}]
+    if history:
+        for turn in history:
+            role = "assistant" if str(turn.get("role", "")).lower() == "bot" else "user"
+            text = str(turn.get("text", "")).strip()
+            if text:
+                messages.append({"role": role, "content": text})
+    messages.append({"role": "user", "content": query})
+
+    if fmt == "anthropic":
+        return _call_anthropic(base, model, key, messages)
+    return _call_openai(base, model, key, messages)
+
+
+def _call_openai(base, model, key, messages):
+    """OpenAI 兼容 /chat/completions（覆盖 openai/glm/kimi/minimax/deepseek/dashscope/自定义代理）。"""
+    body = json.dumps({"model": model, "messages": messages, "stream": False}).encode("utf-8")
+    req = urllib.request.Request(
+        base + "/chat/completions", data=body,
+        headers={"Content-Type": "application/json",
+                 "Authorization": "Bearer " + key},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            data = json.loads(r.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        # 读取 API 返回的错误体，便于诊断（模型名无效/余额/限流等）
+        detail = ""
+        try:
+            detail = e.read().decode("utf-8")[:300]
+        except Exception:
+            pass
+        raise RuntimeError(f"HTTP {e.code}：{detail or e.reason}") from e
+    msg = data["choices"][0]["message"]
+    # content 可能为空（如 DeepSeek reasoner 只回 reasoning_content）→ 回退兜底
+    return (msg.get("content") or msg.get("reasoning_content") or "").strip()
+
+
+def _call_anthropic(base, model, key, messages):
+    """Anthropic 原生 messages API：system 单独字段 + x-api-key 头。"""
+    system = next((m["content"] for m in messages if m["role"] == "system"), "")
+    conv = [m for m in messages if m["role"] != "system"]
+    body = json.dumps({
+        "model": model, "system": system, "max_tokens": 1024, "messages": conv,
+    }).encode("utf-8")
+    req = urllib.request.Request(
+        base + "/messages", data=body,
+        headers={"Content-Type": "application/json",
+                 "x-api-key": key,
+                 "anthropic-version": "2023-06-01"},
+    )
+    with urllib.request.urlopen(req, timeout=60) as r:
+        data = json.loads(r.read().decode("utf-8"))
+    return "".join(b.get("text", "") for b in data.get("content", [])).strip()
+
+
+# ============================================================
 # 3. 双层检索聚合 + 生成
 # ============================================================
 
-def answer(query, top_k=5, hops=1, use_llm=False, history=None):
-    """返回 {snippets, graph, draft}。use_llm=True 且配了 key 才真生成。"""
+def answer(query, top_k=5, hops=1, use_llm=None, history=None):
+    """返回 {snippets, graph, draft, llm_generated, llm_error}。
+
+    use_llm=None → 自动：配置了 LLM_API_KEY 即真实生成，否则回退渡口风格摘要；
+    use_llm=True → 强制生成（无 key 时 llm_error 说明）；
+    use_llm=False → 仅模板（零网络）。
+    history: 前端最近对话轮次 [{role, text}]，接入 LLM 时拼接为上下文注入 prompt。
+    """
     index = build_index()
     snippets = retrieve(query, top_k=top_k, index=index)
     g = load_graph()
@@ -452,11 +611,19 @@ def answer(query, top_k=5, hops=1, use_llm=False, history=None):
         "snippets": snippets,
         "graph": triples,
         "draft": draft,
+        "llm_generated": None,
+        "llm_error": None,
     }
-    if use_llm and os.environ.get("LLM_API_KEY"):
-        # 预留：真实 LLM 生成分支（需要联网 + key）。未配置时不会走到这里。
-        # history: 前端传来的最近对话轮次 [{role, text}]，接入 LLM 时拼接为上下文注入 prompt。
-        result["llm_generated"] = None  # 见 README 升级路径
+    key = os.environ.get("LLM_API_KEY", "").strip()
+    if use_llm is None:
+        use_llm = bool(key)
+    if use_llm and key:
+        try:
+            result["llm_generated"] = _llm_generate(query, snippets, triples, history)
+        except Exception as exc:
+            result["llm_error"] = f"LLM 生成失败：{exc}"
+    elif use_llm:
+        result["llm_error"] = "未配置 LLM_API_KEY，跳过真实生成"
     return result
 
 
@@ -496,7 +663,12 @@ def main():
     print("\n## 图谱三元组（W326）")
     for t in res["graph"][:6]:
         print(f"  {t['from']} —{t['relation']}→ {t['to']}  ({t['property']}: {t['value']})")
-    print("\n## 渡口风格摘要")
+    if res.get("llm_generated"):
+        print("\n## LLM 生成回答（渡口问津）")
+        print(res["llm_generated"])
+    if res.get("llm_error"):
+        print(f"\n## LLM 状态：{res['llm_error']}")
+    print("\n## 渡口风格摘要（模板回退）")
     print(res["draft"])
 
 

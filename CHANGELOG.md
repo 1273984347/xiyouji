@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W401），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W402），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
@@ -42,6 +42,19 @@
 > - **处置收尾**：build-test-deploy.yml **已删除**（真实缺口已并入 ci.yml，无增量价值）·pages.yml **已回退恢复 push 自动部署**（并行 session 曾将其改为仅 workflow_dispatch，会停掉已验证部署链路）·工作树干净
 > - **状态**：已落地·已 push（684617b）·CI 7 job 全绿（pytest-unit + agent-web-build 建置即绿）·build-test-deploy.yml 已删除
 > - **DRL 修复（2026-08-09 补跑）**：pytest-unit 由 `tests/unit` 扩为全量 `tests`（pytest.ini testpaths=tests + `--ignore=tests/e2e`，浏览器测试 test_narratology_render.py 移入 tests/e2e/，本地 321 passed）·移除 screenshots-regression/lighthouse-performance 两 job 无 pip 安装的 cache: pip 残留（同 W400 a11y 模式）·agent-web README Node 18+→20+ + package.json `engines.node>=20` 对齐 CI
+
+### v2.3.18（2026-08-09）：W402 档 B 真实 LLM 生成接通 — 渡口问津升级为生成式问答（provider 化 Base URL）
+
+> **W402 LLM 真实生成（provider 化 Base URL · 检索增强生成）**
+> - **来源**：用户确认项目核心目的「AI 产品验证」+ 持有 LLM_API_KEY；交接文档优先级零唯一阻塞「档 B RAG 真实生成」落地
+> - **执行**：
+>   - **xiyouji_rag.py**：provider 化配置（OPENAI/ANTHROPIC/GLM/KIMI/MINIMAX/DEEPSEEK/DASHSCOPE_BASE_URL + CUSTOM_LLM_BASE_URL 代理网关·区分代理/原生）·极简 .env 自动加载（零依赖·gitignored）·`_llm_generate()` 检索增强生成（system prompt 绑定语料片段+图谱三元组）·OpenAI 兼容 / Anthropic 原生 messages 双格式适配器 ·history 多轮上下文 ·DeepSeek content 空回退（reasoning_content 兜底）·HTTPError 错误体诊断
+>   - **answer()**：use_llm=None 自动（key 存在即生成）·llm_error 捕获·模板回退保持零依赖可用
+>   - **rag_server.py**：/query 默认参数即自动启用；**rag-chat.js**：渲染 llm_generated（优先）+ llm_error 提示 + history 持久化用生成回答
+>   - **新增 .env.rag.example**（全 provider 变量注释）·**scripts/rag/README.md** W402 同步 + provider 配置说明
+>   - **模型名更正**：DeepSeek 官方已停用 deepseek-chat/deepseek-reasoner（当前为 deepseek-v4-pro/deepseek-v4-flash·大小写敏感）——以 API 返回错误信息为准修正
+> - **验证**：py_compile 通过 · 无 key 模板回退正常 · CLI 真实生成成功（「紧箍咒 权力」→ LLM 生成回答 668 字符·结合福柯全景敞视/声学生物权力语料 + 图谱 L2 正则化三元组）·HTTP /query 返回 llm_generated + 多轮 history 生效（387 字符）·HTTP 400 错误体诊断命中模型名大小写问题 ·.env.md→.env 重命名后读取正常
+> - **状态**：已落地 · 未提交（待 E3 六文档同步后 commit）
 
 ### v2.3.17（2026-08-08）：W399 CI 触发修复 + SEO 域名补全 + rum-viewer 埋点查看页（并行 W390-W398 竞态清理后增量）
 

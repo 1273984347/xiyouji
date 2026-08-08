@@ -298,9 +298,19 @@
 
       const bubble = addMessage('bot', '').querySelector('.rag-bubble');
 
-      // 主回答：优先「渡口风格摘要」draft；否则回退原始片段
+      // 主回答：优先「LLM 生成」llm_generated；否则渡口风格摘要 draft；再回退原始片段
+      const llm = (data.llm_generated && data.llm_generated.trim()) ? data.llm_generated.trim() : '';
       const draft = (data.draft && data.draft.trim()) ? data.draft.trim() : '';
-      if (draft) {
+      if (llm) {
+        typeText(bubble, llm);
+        if (data.llm_error) {
+          const err = document.createElement('div');
+          err.className = 'rag-source';
+          err.style.color = '#C8463A';
+          err.textContent = '⚠️ ' + data.llm_error;
+          bubble.appendChild(err);
+        }
+      } else if (draft) {
         typeText(bubble, draft);
       } else if (data.snippets && data.snippets.length) {
         bubble.innerHTML = data.snippets.map((s, i) => {
@@ -352,7 +362,7 @@
       // 持久化本轮对话
       const firstSnippet = (data.snippets && data.snippets[0])
         ? (typeof data.snippets[0] === 'string' ? data.snippets[0] : (data.snippets[0].excerpt || '')) : '未找到相关语料。';
-      pushHistory('bot', draft || firstSnippet);
+      pushHistory('bot', llm || draft || firstSnippet);
 
     } catch (e) {
       if (e.name === 'TimeoutError' || e.name === 'AbortError') {
