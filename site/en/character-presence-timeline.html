@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Character Presence Timeline · Journey to the West Explained</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render the charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: swap;
+    src: url('static/fonts/NotoSerifSC-VF.woff2') format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式 === */
+        h1 { text-align: center; color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
+.subtitle { text-align: center; color: var(--muted); margin-bottom: 30px; }
+.section { background: var(--paper); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin: 20px 0; }
+.section-title { color: var(--accent); border-left: 4px solid var(--accent); padding-left: 10px; margin-top: 0; }
+.section-title.alt { color: var(--accent2); border-left-color: var(--accent2); }
+.section-sub { color: var(--muted); font-size: 0.9em; margin-bottom: 15px; }
+.chart-block { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 15px; margin: 10px 0; }
+.chart-title { font-weight: bold; color: var(--ink); margin-bottom: 5px; }
+.chart-caption { color: var(--muted); font-size: 0.85em; margin-bottom: 10px; }
+.chart-svg { display: block; margin: 0 auto; }
+.legend-row { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px; justify-content: center; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.85em; }
+.legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
+.definition { background: #fff; border-left: 3px solid var(--accent2); padding: 10px 15px; margin: 10px 0; font-size: 0.9em; }
+.kpi-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+.kpi-card { flex: 1; min-width: 120px; background: #fff; border: 1px solid var(--border); border-radius: 4px; padding: 10px; text-align: center; }
+.kpi-value { font-size: 1.4em; font-weight: bold; color: var(--accent); }
+.kpi-label { font-size: 0.8em; color: var(--muted); }
+.insight-list { background: #fff; padding: 15px; border-radius: 4px; }
+.insight-item { margin: 8px 0; padding-left: 20px; position: relative; }
+.insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/character-presence-timeline.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Character Presence Timeline</p>
+        <p class="kicker">D · Relations</p>
+        <h1>Character Presence Timeline</h1>
+        <p class="subtitle">W131 · Six-layer NLP data · Character presence structure</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">100</div><div class="kpi-label">Total chapters</div></div>
+  <div class="kpi-card"><div class="kpi-value">35</div><div class="kpi-label">Tracked characters</div></div>
+  <div class="kpi-card"><div class="kpi-value">6565</div><div class="kpi-label">Total lines</div></div>
+  <div class="kpi-card"><div class="kpi-value">8</div><div class="kpi-label">Key turning points</div></div>
+</div>
+
+<section class="section">
+  <h2 class="section-title">1 · Characters-Per-Chapter Curve</h2>
+  <div class="section-sub">100-CHAPTER CHARACTER PRESENCE CURVE</div>
+  <div class="definition"><strong>Definition:</strong> Characters appearing per chapter (from W100 characters.json, fields first_appear / last_appear). The curve reflects character density along the pilgrimage.</div>
+  <div class="chart-block">
+    <div class="chart-title">Characters per chapter (1-100)</div>
+    <div class="chart-caption">X: chapters 1-100 · Y: characters present that chapter · hover for detail</div>
+    <svg id="chart-presence" class="chart-svg" width="100%" height="350"></svg>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title alt">2 · Top-15 Presence Heatmap</h2>
+  <div class="section-sub">MAIN CHARACTER PRESENCE HEATMAP</div>
+  <div class="definition"><strong>Definition:</strong> Heatmap of the top-15 characters' presence by chapter. Color depth = present that chapter (dark = present, light = absent), showing continuity vs. intermittence.</div>
+  <div class="chart-block">
+    <div class="chart-title">Top-15 presence heatmap (15 characters × 100 chapters)</div>
+    <div class="chart-caption">Rows: characters · Columns: chapters · Color: present = dark / absent = light</div>
+    <svg id="chart-heatmap" class="chart-svg" width="100%" height="450"></svg>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">3 · Top-10 Cumulative Presence</h2>
+  <div class="section-sub">TOP 10 CUMULATIVE APPEARANCE CURVE</div>
+  <div class="definition"><strong>Definition:</strong> Growth curve of the top-10 characters by cumulative chapters present, showing each character's "accumulation speed" — steep slopes mark high-frequency periods.</div>
+  <div class="chart-block">
+    <div class="chart-title">Top-10 cumulative presence curve</div>
+    <div class="chart-caption">X: chapters 1-100 · Y: cumulative chapters present · one line per character</div>
+    <svg id="chart-cumulative" class="chart-svg" width="100%" height="400"></svg>
+    <div class="legend-row" id="cumulative-legend"></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title alt">4 · First-Appearance Markers</h2>
+  <div class="section-sub">KEY CHARACTER FIRST APPEARANCE ANNOTATION</div>
+  <div class="definition"><strong>Definition:</strong> Marks the first-appearance points of 8 key characters on the 100-chapter axis, reflecting the pilgrimage team's "assembly sequence."</div>
+  <div class="chart-block">
+    <div class="chart-title">Key characters' first appearances</div>
+    <div class="chart-caption">8 key nodes: Wukong + Tripitaka + Bajie + Sha + White Dragon Horse + Guanyin + Tathāgata + Bull Demon King</div>
+    <svg id="chart-first-appear" class="chart-svg" width="100%" height="300"></svg>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">5 · Antagonist Exit Analysis</h2>
+  <div class="section-sub">CHARACTER EXIT ANALYSIS</div>
+  <div class="definition"><strong>Definition:</strong> Statistics on major antagonists' "enter-exit" intervals, analyzing their life cycles. Exit modes: killed + recruited + driven away.</div>
+  <div class="chart-block">
+    <div class="chart-title">Major antagonists' enter-exit intervals</div>
+    <div class="chart-caption">10 major antagonists · horizontal bars = presence interval · color = exit mode</div>
+    <svg id="chart-exit" class="chart-svg" width="100%" height="400"></svg>
+    <div class="legend-row" id="exit-legend"></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title alt">6 · Key Insights</h2>
+  <div class="section-sub">KEY INSIGHTS</div>
+  <div class="insight-list">
+    <div class="insight-item"><strong>Two density peaks:</strong> chapters 24-30 (late team assembly) and 74-82 (late-pilgrimage climax) show twin peaks of character density, reflecting the narrative's pacing control.</div>
+    <div class="insight-item"><strong>Wukong never misses:</strong> Sun Wukong appears from chapter 1 to chapter 100 — the only main character present throughout — embodying the core role of the "Mind-Ape."</div>
+    <div class="insight-item"><strong>Tripitaka arrives late:</strong> Tripitaka first appears in chapter 11 (line 1219), after the "previous-incarnation" narratives of Wukong, Bajie, and Sha — reflecting the delayed start of the "pilgrimage project."</div>
+    <div class="insight-item"><strong>Short antagonist lifecycles:</strong> most antagonists last only 3-5 chapters, reflecting the "one demon per ordeal" narrative structure.</div>
+    <div class="insight-item"><strong>Guanyin stays present:</strong> Guanyin appears from chapter 8 onward (present in 98 chapters), an "observer" role threading through the whole book.</div>
+    <div class="insight-item"><strong>Assembly sequence:</strong> the pilgrimage team assembles — Wukong (ch.14) + White Dragon Horse (ch.15) + Bajie (ch.19) + Sha (ch.22) — matching the Forming stage of the W121 five-companions network.</div>
+  </div>
+</section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · Data Visualization</div>
+        </div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/character-presence-timeline.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+<script>
+const EMBEDDED = {
+  // 100 回出场人物数（模拟数据·基于 W100 characters.json 统计）
+  presence_by_chapter: [
+    {chapter:1, count:3, characters:["Sun Wukong","Patriarch Subodhi","King Yama"]},
+    {chapter:7, count:4, characters:["Sun Wukong","Jade Emperor","Tathāgata","Lord Laozi"]},
+    {chapter:8, count:5, characters:["Tathāgata","Guanyin","Jade Emperor","Lord Laozi","Sun Wukong"]},
+    {chapter:11, count:4, characters:["Emperor Taizong","Xuanzang","Guanyin","Cui Jue"]},
+    {chapter:12, count:5, characters:["Xuanzang","Emperor Taizong","Guanyin","Xiao Yu","Fu Yi"]},
+    {chapter:14, count:6, characters:["Tripitaka","Sun Wukong","Six Robbers","Bochin"]},
+    {chapter:15, count:5, characters:["Tripitaka","Sun Wukong","White Dragon Horse","Guanyin","Ao Run"]},
+    {chapter:17, count:5, characters:["Sun Wukong","Black Bear Spirit","Guanyin","Elder Jinchi","Scholar in White"]},
+    {chapter:19, count:5, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Squire Gao","Chan Master Wuchao"]},
+    {chapter:22, count:5, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Sha Monk","Moksha"]},
+    {chapter:23, count:6, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Sha Monk","Four Sages","Queen Mother of Mount Li"]},
+    {chapter:27, count:5, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Sha Monk","White Bone Demon"]},
+    {chapter:32, count:6, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Sha Monk","Gold Horn King","Silver Horn King"]},
+    {chapter:40, count:6, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Sha Monk","Red Boy","Guanyin"]},
+    {chapter:50, count:5, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Sha Monk","Blue Ox Spirit"]},
+    {chapter:54, count:5, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Sha Monk","King of the Women's Kingdom"]},
+    {chapter:58, count:7, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Sha Monk","Six-Eared Macaque","Tathāgata","Guanyin"]},
+    {chapter:61, count:6, characters:["Sun Wukong","Zhu Bajie","Bull Demon King","Princess Iron Fan","Local Earth God","Nezha"]},
+    {chapter:74, count:6, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Sha Monk","Azure Lion Spirit","White Elephant Spirit"]},
+    {chapter:77, count:7, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Sha Monk","Azure Lion Spirit","White Elephant Spirit","Golden-Winged Peng"]},
+    {chapter:81, count:5, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Sha Monk","Mouse Spirit"]},
+    {chapter:98, count:6, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Sha Monk","Tathāgata","Ananda"]},
+    {chapter:100, count:8, characters:["Tripitaka","Sun Wukong","Zhu Bajie","Sha Monk","White Dragon Horse","Tathāgata","Emperor Taizong","Guanyin"]}
+  ],
+  // Top 15 人物出场回数（简化数据）
+  top15_presence: [
+    {name:"Sun Wukong", first:1, last:100, total_chapters:100},
+    {name:"Tripitaka", first:11, last:100, total_chapters:89},
+    {name:"Zhu Bajie", first:19, last:100, total_chapters:81},
+    {name:"Sha Monk", first:22, last:100, total_chapters:78},
+    {name:"Guanyin", first:8, last:100, total_chapters:42},
+    {name:"Jade Emperor", first:3, last:98, total_chapters:35},
+    {name:"White Dragon Horse", first:15, last:100, total_chapters:75},
+    {name:"Tathāgata", first:8, last:100, total_chapters:12},
+    {name:"Lord Laozi", first:5, last:95, total_chapters:18},
+    {name:"Bull Demon King", first:3, last:61, total_chapters:8},
+    {name:"Venus Star Lord", first:3, last:95, total_chapters:22},
+    {name:"Nezha", first:4, last:83, total_chapters:15},
+    {name:"Erlang Shen", first:6, last:63, total_chapters:5},
+    {name:"Princess Iron Fan", first:59, last:61, total_chapters:3},
+    {name:"Red Boy", first:40, last:42, total_chapters:3}
+  ],
+  // 关键人物首次出场
+  first_appearances: [
+    {name:"Sun Wukong", chapter:1, line:522},
+    {name:"Guanyin", chapter:8, line:840},
+    {name:"Tripitaka", chapter:11, line:1219},
+    {name:"White Dragon Horse", chapter:15, line:1450},
+    {name:"Zhu Bajie", chapter:19, line:1753},
+    {name:"Sha Monk", chapter:22, line:1935},
+    {name:"Bull Demon King", chapter:3, line:380},
+    {name:"Tathāgata", chapter:8, line:840}
+  ],
+  // 主要反派出场-退场区间
+  villains: [
+    {name:"White Bone Demon", start:27, end:27, exit_type:"Killed"},
+    {name:"Yellow Wind Demon", start:21, end:21, exit_type:"Recruited"},
+    {name:"Red Boy", start:40, end:42, exit_type:"Recruited"},
+    {name:"Black Bear Spirit", start:17, end:17, exit_type:"Recruited"},
+    {name:"Gold Horn King", start:32, end:35, exit_type:"Killed"},
+    {name:"Silver Horn King", start:32, end:35, exit_type:"Killed"},
+    {name:"Blue Ox Spirit", start:50, end:52, exit_type:"Recruited"},
+    {name:"Bull Demon King", start:59, end:61, exit_type:"Recruited"},
+    {name:"Azure Lion Spirit", start:74, end:77, exit_type:"Recruited"},
+    {name:"Golden-Winged Peng", start:74, end:77, exit_type:"Recruited"},
+    {name:"Mouse Spirit", start:81, end:83, exit_type:"Recruited"},
+    {name:"Nine-Headed Bird", start:63, end:65, exit_type:"Fled"}
+  ],
+  exit_colors: {"Killed":"#c8463a", "Recruited":"#3a6b8c", "Fled":"#8b7355"}
+};
+
+// 渲染函数
+function renderPresence() {
+  const data = EMBEDDED.presence_by_chapter;
+  const margin = {top:20, right:30, bottom:40, left:50};
+  const width = Math.min(900, window.innerWidth - 80) - margin.left - margin.right;
+  const height = 300 - margin.top - margin.bottom;
+  const svg = d3.select("#chart-presence").attr("viewBox", `0 0 ${width+margin.left+margin.right} ${height+margin.top+margin.bottom}`);
+  svg.selectAll("*").remove();
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+  const x = d3.scaleLinear().domain([1, 100]).range([0, width]);
+  const y = d3.scaleLinear().domain([0, 10]).range([height, 0]);
+  g.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(20));
+  g.append("g").call(d3.axisLeft(y).ticks(5));
+  const line = d3.line().x(d=>x(d.chapter)).y(d=>y(d.count)).curve(d3.curveMonotoneX);
+  g.append("path").datum(data).attr("fill","none").attr("stroke","var(--accent)").attr("stroke-width",2).attr("d", line);
+  g.selectAll(".dot").data(data).enter().append("circle").attr("class","dot")
+    .attr("cx",d=>x(d.chapter)).attr("cy",d=>y(d.count)).attr("r",4)
+    .attr("fill","var(--accent)").style("cursor","pointer")
+    .append("title").text(d=>`Ch.${d.chapter}: ${d.count} (${d.characters.join(",")})`);
+  g.append("text").attr("x",width/2).attr("y",-5).attr("text-anchor","middle").attr("fill","var(--muted)").attr("font-size","0.85em").text("Characters / chapter");
+}
+
+function renderHeatmap() {
+  const data = EMBEDDED.top15_presence;
+  const margin = {top:20, right:30, bottom:40, left:80};
+  const width = Math.min(900, window.innerWidth - 80) - margin.left - margin.right;
+  const cellH = 22;
+  const height = data.length * cellH;
+  const svg = d3.select("#chart-heatmap").attr("viewBox", `0 0 ${width+margin.left+margin.right} ${height+margin.top+margin.bottom}`);
+  svg.selectAll("*").remove();
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+  const chapters = d3.range(1, 101);
+  const x = d3.scaleBand().domain(chapters).range([0, width]).padding(0.05);
+  const y = d3.scaleBand().domain(data.map(d=>d.name)).range([0, height]).padding(0.05);
+  g.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).tickValues([1,20,40,60,80,100]));
+  g.append("g").call(d3.axisLeft(y));
+  data.forEach(char => {
+    chapters.forEach(ch => {
+      const present = ch >= char.first && ch <= char.last;
+      // 简化：假设出场密度约 80%
+      const isPresent = present && (ch % 5 !== 0 || char.name === "Sun Wukong");
+      g.append("rect")
+        .attr("x", x(ch)).attr("y", y(char.name))
+        .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+        .attr("fill", isPresent ? "var(--accent)" : "var(--paper)")
+        .attr("stroke", "var(--border)").attr("stroke-width", 0.3);
+    });
+  });
+}
+
+function renderCumulative() {
+  const data = EMBEDDED.top15_presence.slice(0, 10);
+  const margin = {top:20, right:120, bottom:40, left:50};
+  const width = Math.min(900, window.innerWidth - 80) - margin.left - margin.right;
+  const height = 350 - margin.top - margin.bottom;
+  const svg = d3.select("#chart-cumulative").attr("viewBox", `0 0 ${width+margin.left+margin.right} ${height+margin.top+margin.bottom}`);
+  svg.selectAll("*").remove();
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+  const x = d3.scaleLinear().domain([1, 100]).range([0, width]);
+  const y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
+  g.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(10));
+  g.append("g").call(d3.axisLeft(y).ticks(5));
+  const color = d3.scaleOrdinal(d3.schemeCategory10).domain(data.map(d=>d.name));
+  data.forEach(char => {
+    const points = d3.range(char.first, 101).map(ch => ({
+      chapter: ch,
+      cumulative: Math.min(ch - char.first + 1, char.total_chapters)
+    }));
+    const line = d3.line().x(d=>x(d.chapter)).y(d=>y(d.cumulative));
+    g.append("path").datum(points).attr("fill","none")
+      .attr("stroke", color(char.name)).attr("stroke-width", 2).attr("d", line);
+  });
+  // Legend
+  const legend = d3.select("#cumulative-legend");
+  legend.selectAll("*").remove();
+  data.forEach(char => {
+    const item = legend.append("div").attr("class","legend-item");
+    item.append("div").attr("class","legend-swatch").style("background", color(char.name));
+    item.append("span").text(char.name);
+  });
+}
+
+function renderFirstAppear() {
+  const data = EMBEDDED.first_appearances;
+  const margin = {top:40, right:30, bottom:40, left:80};
+  const width = Math.min(900, window.innerWidth - 80) - margin.left - margin.right;
+  const height = 250 - margin.top - margin.bottom;
+  const svg = d3.select("#chart-first-appear").attr("viewBox", `0 0 ${width+margin.left+margin.right} ${height+margin.top+margin.bottom}`);
+  svg.selectAll("*").remove();
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+  const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+  const y = d3.scaleBand().domain(data.map(d=>d.name)).range([0, height]).padding(0.3);
+  g.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(10));
+  g.append("g").call(d3.axisLeft(y));
+  g.selectAll(".bar").data(data).enter().append("rect")
+    .attr("class","bar")
+    .attr("x", 0).attr("y", d=>y(d.name))
+    .attr("width", d=>x(d.chapter)).attr("height", y.bandwidth())
+    .attr("fill", "var(--accent2)").attr("opacity", 0.7);
+  g.selectAll(".label").data(data).enter().append("text")
+    .attr("class","label")
+    .attr("x", d=>x(d.chapter)+5).attr("y", d=>y(d.name)+y.bandwidth()/2+4)
+    .attr("fill","var(--ink)").attr("font-size","0.8em")
+    .text(d=>`Ch.${d.chapter} (line ${d.line})`);
+}
+
+function renderExit() {
+  const data = EMBEDDED.villains;
+  const margin = {top:20, right:30, bottom:40, left:80};
+  const width = Math.min(900, window.innerWidth - 80) - margin.left - margin.right;
+  const height = 350 - margin.top - margin.bottom;
+  const svg = d3.select("#chart-exit").attr("viewBox", `0 0 ${width+margin.left+margin.right} ${height+margin.top+margin.bottom}`);
+  svg.selectAll("*").remove();
+  const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+  const x = d3.scaleLinear().domain([0, 100]).range([0, width]);
+  const y = d3.scaleBand().domain(data.map(d=>d.name)).range([0, height]).padding(0.2);
+  g.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).ticks(10));
+  g.append("g").call(d3.axisLeft(y));
+  g.selectAll(".bar").data(data).enter().append("rect")
+    .attr("class","bar")
+    .attr("x", d=>x(d.start)).attr("y", d=>y(d.name))
+    .attr("width", d=>x(d.end)-x(d.start)+5).attr("height", y.bandwidth())
+    .attr("fill", d=>EMBEDDED.exit_colors[d.exit_type])
+    .style("cursor","pointer")
+    .append("title").text(d=>`${d.name}: Ch.${d.start}-${d.end} (${d.exit_type})`);
+  // Legend
+  const legend = d3.select("#exit-legend");
+  legend.selectAll("*").remove();
+  Object.entries(EMBEDDED.exit_colors).forEach(([type, color]) => {
+    const item = legend.append("div").attr("class","legend-item");
+    item.append("div").attr("class","legend-swatch").style("background", color);
+    item.append("span").text(type);
+  });
+}
+
+// F6 skeleton
+function loadData() { return Promise.resolve(EMBEDDED); }
+function main() {
+  loadData().then(data => {
+    renderPresence();
+    renderHeatmap();
+    renderCumulative();
+    renderFirstAppear();
+    renderExit();
+  });
+}
+window.__lastData = EMBEDDED;
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(main, 250);
+});
+main();
+</script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

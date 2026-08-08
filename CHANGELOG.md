@@ -20,6 +20,17 @@
 > - **验证**：逐页断言（每个替换 count 校验）+ 零可见 chrome CJK（仅保留「中文」回链标签与 regenerate 命令中的中文文件路径）+ 渲染脚本零 CJK（仅 console.warn / 正则 / 中文文件路径注释）
 > - **状态**：已落地·E3 铁律 6 文档同步（CHANGELOG + 交接文档 双核心）·batch3 续译 hardship-heatmap 等高流量 data 页
 >
+> **W396 英文站 batch3：三张核心可视化页英文化（2026-08-08）**
+> - **来源**：用户指令"继续"（承接 W395 batch2；第一性原理清单 #5 英文站·A 全量对等·分批）
+> - **执行**：
+>   - **site/en/hardship-heatmap.html（新）**：八十一难难度热力图英文版。译 chrome（标题/导航/面包屑/KPI/5 大板块/阶段筛选/图例/轴标签/关键洞察 5 段）+ 可见脚本标签（CAUSE_LABEL/STAGE_LABEL/STAGE_RANGE 四套字典 + 回目轴 tickFormat「前传→Prequel / 第N回→Ch.N」+ 热力/阶段柱/难度×起因 三段 tooltip + 81 难名转英文 + chapter 字段归一）
+>   - **site/en/character-presence-timeline.html（新）**：人物出场时间线英文版。译 chrome（标题/导航/KPI 6 卡/六板块/定义/图表标题说明/关键洞察 6 条）+ 可见脚本标签（by 章 tooltip + 首现标注 tooltip + 退场区间 tooltip + exit_type 三态 + 35+ 人物名转英文：孙悟空→Sun Wukong、如来→Tathāgata、观音→Guanyin、牛魔王→Bull Demon King 等）
+>   - **site/en/character-relationship-3d.html（新）**：人物关系 3D 网络图英文版（Three.js）。译 meta/KPI 5 卡（含 悟空→Wukong、唐僧→Tripitaka）+ 22 节点 desc 全译 + GROUP_NAMES 五阵营（取经团/天庭/佛门/妖界/龙族→Pilgrimage/Heaven/Buddhist/Demon/Dragon）+ 32 边 type 全译 + 信息面板 阵营/重要性/度数 + Three.js 失败提示
+>   - **en/visualizations.html**：3 张索引卡（Tribulation Heatmap / Presence Timeline / Relationship 3D）改指向 EN 版并附中文回链
+> - **验证**：逐页断言（每个替换 count 校验）+ 零可见 chrome CJK（仅保留「中文」回链标签与品牌印章）+ 渲染脚本零 CJK（仅 CSS token 注释/代码注释/console）；所有内联 D3/Three.js JS/CSS 保全
+> - **状态**：已落地·E3 铁律 6 文档同步（CHANGELOG + 交接文档 双核心）·剩余 data 可视化页（约 80+ 张）可按同模式续译
+>
+
 > **W389 遗留建议执行·交接文档历史段归档**
 > - **来源**：用户指令"现在做遗留建议"（承接 W388 文档审查中提出的两条遗留建议）
 > - **执行**：
