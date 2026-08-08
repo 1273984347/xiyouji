@@ -129,7 +129,8 @@
       <div class="rag-msg-hint">
         输入任何关于《西游记》的问题。<br>
         例如：「悟空为什么哭？」「紧箍咒和正则化有什么关系？」「狮驼岭有多难？」<br><br>
-        <small>需先启动本地 RAG 服务：<code>python scripts/rag/rag_server.py</code></small>
+        <small>需先启动本地 RAG 服务：<code>python scripts/rag/rag_server.py</code></small><br>
+        <small>或离线体验渡口写作引擎：<a href="dukou-engine.html" target="_blank" rel="noopener" style="color:#3A6B8C;text-decoration:none;">西游 · 渡口 →</a></small>
       </div>
     </div>
     <div class="rag-input-row">
@@ -279,7 +280,7 @@
     if (!serviceOnline) {
       await checkHealth();
       if (!serviceOnline) {
-        addMessage('error', '⚠️ RAG 服务未启动。<br>请在终端运行：<code>python scripts/rag/rag_server.py</code><br>然后刷新本页面重试。');
+        addMessage('error', '⚠️ RAG 服务未启动。<br>请在终端运行：<code>python scripts/rag/rag_server.py</code><br>然后刷新本页面重试。<br>或离线体验渡口写作引擎：<a href="dukou-engine.html" target="_blank" rel="noopener" style="color:#3A6B8C;">西游 · 渡口 →</a>');
         sendBtn.disabled = false;
         sendBtn.textContent = '问';
         return;

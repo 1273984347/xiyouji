@@ -64,6 +64,52 @@
             .stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .tools-grid { grid-template-columns: 1fr; }
         }
+
+        /* === 首屏提问框：问渡口 === */
+        .ask-hero {
+            margin: 0 clamp(24px, 6vw, 96px) 4px;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: clamp(24px, 4vw, 40px);
+            box-shadow: 0 6px 24px rgba(35,32,26,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        .ask-hero::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+            background: var(--accent);
+        }
+        .ask-hero .kicker { margin-bottom: 10px; }
+        .ask-hero h2 { margin: 0 0 6px; font-size: clamp(20px, 3vw, 28px); }
+        .ask-hero .ask-sub { color: var(--ink-soft); font-size: 14px; margin-bottom: 18px; }
+        .ask-form { display: flex; gap: 12px; max-width: 680px; }
+        .ask-form input {
+            flex: 1; font-family: var(--font-serif); font-size: 16px;
+            padding: 12px 16px; border: 1px solid var(--line); border-radius: 6px;
+            background: var(--bg); color: var(--ink); outline: none;
+        }
+        .ask-form input:focus { border-color: var(--accent); }
+        .ask-form button {
+            font-family: var(--font-serif); font-size: 15px; font-weight: 600;
+            padding: 12px 26px; border: none; border-radius: 6px; cursor: pointer;
+            background: var(--accent); color: #fff; white-space: nowrap;
+            transition: opacity .15s;
+        }
+        .ask-form button:hover { opacity: .9; }
+        .ask-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; max-width: 720px; }
+        .ask-chip {
+            font-size: 13px; color: var(--accent-2); cursor: pointer;
+            border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px;
+            background: var(--bg); transition: .15s; user-select: none;
+        }
+        .ask-chip:hover { border-color: var(--accent-2); background: #fff; }
+        .ask-note { margin-top: 14px; font-size: 12px; color: var(--ink-faint); }
+        .ask-note code { background: var(--paper-warm); padding: 1px 6px; border-radius: 4px; }
+        @media (max-width: 640px) {
+            .ask-form { flex-direction: column; }
+            .ask-form button { width: 100%; }
+        }
     </style>
     <script type="application/ld+json" src="structured-data.jsonld"></script>
     <meta name="description" content="详解西游记·明代吴承恩百回神魔小说的多维学术研究与可视化分析项目，覆盖人物深度分析、八十一难结构、取经地理路线、叙事学十三维网络等十大研究维度。">
@@ -118,6 +164,23 @@
             <path d="M0 95 L180 32 L340 82 L500 20 L680 88 L860 45 L1040 92 L1220 35 L1440 80" fill="none" stroke="var(--ink)" stroke-opacity="0.10" stroke-width="1.5"/>
             <path d="M0 110 L220 58 L400 105 L580 48 L780 104 L960 62 L1140 108 L1320 70 L1440 96" fill="none" stroke="var(--ink)" stroke-opacity="0.05" stroke-width="1"/>
         </svg>
+
+        <section class="ask-hero" aria-label="问渡口 · 首屏提问">
+            <p class="kicker">ASK · 渡口问津</p>
+            <h2>想问点什么？</h2>
+            <p class="ask-sub">输入任意西游人物、妖怪、器物或地名，渡口问津为你写一篇「被忽略者」的渡口档案。</p>
+            <form class="ask-form" id="askForm" autocomplete="off">
+                <input id="askInput" type="text" name="q" placeholder="例如：五行山下的牧童、紧箍咒、狮驼岭…" aria-label="提问内容">
+                <button type="submit">问渡口</button>
+            </form>
+            <div class="ask-chips" role="list">
+                <span class="ask-chip" role="listitem" data-q="五行山下的牧童">五行山下的牧童</span>
+                <span class="ask-chip" role="listitem" data-q="晾经石的裂痕">晾经石的裂痕</span>
+                <span class="ask-chip" role="listitem" data-q="陈家庄的晒经石">陈家庄的晒经石</span>
+                <span class="ask-chip" role="listitem" data-q="悟空为什么哭">悟空为什么哭</span>
+            </div>
+            <p class="ask-note">离线也能答（模板写作引擎）· 接入本地 RAG 后更聪明 · 你的提问会记入本地以便回访</p>
+        </section>
 
         <section class="stats" aria-label="项目数据概览">
             <div class="stat"><div class="num">100</div><div class="lbl">回 · 逐回解读</div></div>
@@ -242,6 +305,32 @@
       if (location.protocol.indexOf('http') === 0) {
         navigator.serviceWorker.register('sw.js').catch(function () { /* 离线降级，忽略 */ });
       }
+    </script>
+    <script>
+      // 首屏提问框 → 渡口问津引擎（离线可用）+ 本地反馈记录（闭环：无后端时唯一 sink）
+      (function () {
+        var form = document.getElementById('askForm');
+        var box = document.getElementById('askInput');
+        if (!form || !box) return;
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var q = (box.value || '').trim();
+          if (!q) { box.focus(); return; }
+          try {
+            var arr = JSON.parse(localStorage.getItem('xiyouji_asks') || '[]');
+            arr.push({ q: q, t: Date.now() });
+            if (arr.length > 200) arr = arr.slice(-200);
+            localStorage.setItem('xiyouji_asks', JSON.stringify(arr));
+          } catch (_) {}
+          window.location.href = 'dukou-engine.html?from=home&q=' + encodeURIComponent(q);
+        });
+        Array.prototype.forEach.call(document.querySelectorAll('.ask-chip'), function (chip) {
+          chip.addEventListener('click', function () {
+            box.value = chip.getAttribute('data-q') || chip.textContent;
+            box.focus();
+          });
+        });
+      })();
     </script>
 </body>
 </html>
