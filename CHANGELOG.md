@@ -19,6 +19,16 @@
 > - **验证**：Grep spot-check（交接文档 W343-W358 段已迁出·archive 已含段·六文档版本 v2.3.17 一致）·pre-commit-validate + verify_delivery 全绿
 > - **状态**：已落地·E3 铁律 6 文档同步
 
+> **W393 降级六文档同步（核心 2 + 辅助 4 自动）**
+> - **来源**：用户指令"继续"推进第一性原理清单 #4「生产端减负（降级六文档同步）」；诊断六文档同步在内容冻结后成为每次工程 W### 的纯手工税（README/STRUCTURE/项目说明版本号 + file-index 逐文件登记）
+> - **执行**：
+>   - **verify_delivery.py 分级**：拆为 CORE_DOCS（CHANGELOG.md / 交接文档.md，缺失 v/W 仍阻断）+ AUX_DOCS（README.md / STRUCTURE.md / 项目说明.md / scripts/output/file-index.md，缺失仅 WARN 不阻断）；保留范围漂移检测 + A4 计数一致性；脚本仅在核心 FAIL 时返回非 0，pre-commit 钩子天然只阻断核心
+>   - **新增 scripts/bump_version.py**：发布里程碑时一键把辅助 4 份版本号 + file-index 里程碑段补齐到 site/dukou-engine.html 页脚当前 v/W（零依赖·幂等）
+>   - **文档规范.md 重写**：「六文档同步的正确执行方式」改为 2 核心硬门禁 + 4 辅助 WARN + 里程碑 bump_version 一键同步
+>   - **dukou-engine.html 页脚对齐**：v2.3.11 W383（内容期后未 bump）→ v2.3.17 W393，消除页脚落后真实版本 6 个 W 的偏差
+> - **验证**：python scripts/verify_delivery.py 核心全部通过（辅助 WARN 不阻断）；实跑 bump_version.py 幂等补齐辅助 4 份；范围漂移 + A4 计数仍硬校验
+> - **状态**：已落地·降级六文档同步（E3 铁律收缩为 核心 2 硬门禁 + 辅助 4 WARN）
+
 ### v2.3.16（2026-08-07）：W388 文档同步审查修复 + 存储优化（交接文档阻塞段过期修正·项目说明版本残留修复·.gitignore 排除 59MB 大文件）
 
 > **W388 文档审查整理**
