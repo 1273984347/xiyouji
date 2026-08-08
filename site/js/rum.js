@@ -24,8 +24,12 @@
  *   - 全程 try/catch 错误处理，永不抛出影响业务
  *   - 单例模式，防止重复初始化
  *
- * 用法：在 HTML <head> 末尾引入 <script defer src="/js/rum.js"></script>
+ * 用法：在 HTML <head> 末尾引入（路径相对站点根，子路径部署也安全）：
+ *       <script defer src="js/rum.js"></script>            （站点根页）
+ *       <script defer src="../js/rum.js"></script>         （data/ en/ 等子目录页）
  *       可通过 window.__RUM_CONFIG__ 覆盖默认配置。
+ * 注意：GitHub Pages 无后端，/api/rum 会 404；开启 storeLocal 后数据
+ *       落 localStorage（rum_queue），可用于本地验证，未来接后端改 endpoint 即回流。
  */
 (function (window, document) {
   'use strict';
@@ -39,11 +43,13 @@
   // 配置（允许 window.__RUM_CONFIG__ 覆盖）
   // ---------------------------------------------------------------------------
   var DEFAULT_CONFIG = {
-    endpoint: '/api/rum',          // 上报地址
+    endpoint: '/api/rum',          // 上报地址（GitHub Pages 无后端，会 404）
     sampleRate: 1.0,               // 采样率 0~1（默认 100%）
     enableTBT: true,               // 是否采集 TBT（long-task）
     sendOnHidden: true,            // 页面隐藏时上报
     sendTimeoutMs: 4000,           // 最长等待上报窗口
+    storeLocal: true,              // 本地备援：写入 localStorage 环形队列（rum_queue）
+    localMax: 50,                  // 本地队列最大条数
     debug: false                   // 调试模式：输出 console 日志
   };
   var config = mergeConfig(DEFAULT_CONFIG, window.__RUM_CONFIG__ || {});
@@ -252,11 +258,47 @@
     return Math.round(v * p) / p;
   }
 
+  // ---------------------------------------------------------------------------
+  // 本地备援：GitHub Pages 无后端，/api/rum 会 404，先把数据落 localStorage
+  // 环形队列（rum_queue），未来接真实后端改 endpoint 即可回流，不丢数据。
+  // ---------------------------------------------------------------------------
+  function storeLocal(payload) {
+    if (!config.storeLocal || !window.localStorage) {
+      return;
+    }
+    try {
+      var key = 'rum_queue';
+      var queue;
+      try {
+        queue = JSON.parse(window.localStorage.getItem(key)) || [];
+      } catch (e) {
+        queue = [];
+      }
+      if (!Array.isArray(queue)) {
+        queue = [];
+      }
+      queue.push({ ts: Date.now(), payload: payload });
+      // 超出上限则丢弃最旧记录（环形）
+      if (queue.length > config.localMax) {
+        queue = queue.slice(queue.length - config.localMax);
+      }
+      window.localStorage.setItem(key, JSON.stringify(queue));
+      if (config.debug) {
+        console.log('[RUM] stored locally, queue size =', queue.length);
+      }
+    } catch (e) {
+      // 隐私模式 / 配额超限：静默降级，不影响业务
+    }
+  }
+
   function sendPayload(payload) {
     if (reported) {
       return;
     }
     reported = true;
+
+    // 1) 本地备援优先（即使上报失败也不丢数据）
+    storeLocal(payload);
 
     if (config.debug) {
       console.log('[RUM] send payload:', payload);
@@ -324,13 +366,27 @@
   // 兜底超时上报（避免长时间不 hidden 导致数据丢失）
   setTimeout(flush, config.sendTimeoutMs);
 
-  // 暴露调试接口（只读）
+  // 暴露调试接口（只读 + 本地队列查看/清空）
   window.__RUM__ = {
     config: config,
     getMetrics: function () {
       return JSON.parse(JSON.stringify(metrics));
     },
-    flush: flush
+    flush: flush,
+    getLocalQueue: function () {
+      try {
+        return JSON.parse(window.localStorage.getItem('rum_queue')) || [];
+      } catch (e) {
+        return [];
+      }
+    },
+    clearLocalQueue: function () {
+      try {
+        window.localStorage.removeItem('rum_queue');
+      } catch (e) {
+        // ignore
+      }
+    }
   };
 
 })(window, document);

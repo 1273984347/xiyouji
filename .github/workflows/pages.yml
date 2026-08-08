@@ -1,0 +1,51 @@
+name: Deploy Pages
+
+# W390 P0 · 部署静态站点到 GitHub Pages（site/ 目录）
+# 子路径 /xiyouji/ 已由 rum.js 相对路径 + .nojekyll 适配，无需 base href 改造。
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build & Upload
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # include-hidden-files 必须 true，否则 .nojekyll 会被默认排除导致 Jekyll 处理下划线文件
+          path: site
+          include-hidden-files: true
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+# FILE_INDEX: .github/workflows/pages.yml | W390 | P0 GitHub Pages 部署
