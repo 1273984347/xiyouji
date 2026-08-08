@@ -547,3 +547,13 @@
 | docs/00-导读/项目说明.md | W400 | 文档同步·头部版本行压缩至 ≤200 字符（423→162·A2 43→44 篇·可视化 80→86 页·待办计数 A3/A4/A5 更新） |
 | 交接文档.md | W400 | 文档同步·内部过期引用 12 处修复（W358→W400·v2.3.9→v2.3.18·A2 43→44/A3 199→211/A4 201→209/A5 20→34·site/data 85→86·英文站 7→65·页脚） |
 | 项目交接参考手册.md | W400 | 文档同步·版本 v2.3.8 W357→v2.3.18 W400·计数 A2/A3/A4/A5·可视化 85→86·英文站 51→65·发布待办标记完成 |
+
+## W401 CI 补齐 pytest + agent-web 构建（2026-08-08）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W401 | 新增 pytest-unit + agent-web-build job（5→7 job）·pytest tests/unit -q·npm ci + npm run build |
+| .gitignore | W401 | agent-web 由整目录忽略改为精细忽略（node_modules/dist/data/server 编译产物/vite.config 产物） |
+| xiyouji-agent-web/*（37 文件） | W401 | agent-web 源码入库（src/server/package*.json/vite/tsconfig 等·供 CI 构建验证） |
+| .github/workflows/README.md | W401 | ci.yml 7 job 说明·阈值·artifact·本地复现命令·双索引 W401 |
+| CHANGELOG.md | W401 | 新增 W401 版本段（四件套） |

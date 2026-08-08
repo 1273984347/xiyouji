@@ -101,5 +101,14 @@ scratch/
 docs/10-方法论沉淀/
 .workbuddy/
 
-# 独立子项目（Web Agent 应用，6万+ 文件，单独仓库，勿入库）
-xiyouji-agent-web/
+# Web Agent 子项目（xiyouji-agent-web）：源码入库以支持 CI 构建验证；
+# 仅忽略运行期产物与依赖（node_modules/dist/chat.db/tsc 编译产物）
+xiyouji-agent-web/node_modules/
+xiyouji-agent-web/dist/
+xiyouji-agent-web/data/
+xiyouji-agent-web/server/*.js
+xiyouji-agent-web/server/*.d.ts
+xiyouji-agent-web/vite.config.js
+xiyouji-agent-web/vite.config.d.ts
+xiyouji-agent-web/.env
+xiyouji-agent-web/*.tsbuildinfo
