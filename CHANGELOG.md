@@ -20,6 +20,14 @@
 >   - **a11y-audit pip cache 修复**：移除 `cache: pip`（a11y_audit.py 仅用标准库，job 不安装 pip 依赖，缓存目录不存在致 Post 步骤 ##[error] 使 windows/ubuntu py3.10-3.11 job 失败）
 > - **验证**：本地 ruff check scripts/ All checks passed·security_scan.py high=0·a11y_audit --dir site --quiet 正常·py_compile 13 核心脚本通过·GitHub Actions 全绿（CI 5 job + Security 4 job + Deploy Pages）
 > - **状态**：已落地·已 push（20abbea/29f5744）·CI/Security/Deploy 三 workflow 转绿
+>
+> **W400 补充·文档同步两轮（2026-08-08）**
+> - **来源**：用户"更新交接文档并同步更新其他文件内容"→ 交接文档头部虽已同步 v2.3.18 W400，但内部 12 处过期引用残留（W358/v2.3.9/计数/英文站 7 文件/页脚）；辅助文档版本行违反文档规范 ≤200 字符（实测 473/467/423）
+> - **执行**：
+>   - **第一轮·交接文档与六文档同步**（commit 947eaa0）：交接文档内部过期引用 12 处修复（W358→W400·v2.3.9→v2.3.18·A2 43→44/A3 199→211/A4 201→209/A5 20→34·site/data 85→86·英文站 7→65·接续编号 W358→W400·页脚 2026-08-04 W347→2026-08-08 W400）·README/STRUCTURE/项目说明头部计数同步（A2 43→44·site/data 85→86）·CHANGELOG 编号规则 W001-W399→W400·项目交接参考手册 v2.3.8 W357→v2.3.18 W400（计数/可视化/英文站/发布待办）·file-index W400 段补 5 行反向索引登记
+>   - **第二轮·辅助文档版本行压缩**（commit e681239）：README 473→160·STRUCTURE 467→157·项目说明 423→162 字符，统一为"版本号 + W400 里程碑关键词 + A1-A6 共 611 篇 + 86 可视化页 + 指向 CHANGELOG"，遵循文档规范版本描述规则
+> - **验证**：verify_delivery.py 全绿（核心 2 份含 v/W·A4 四文档含"201 篇"·无范围漂移）·A1-A6 求和 611 = 100+44+211+209+34+13 一致·E2 8 项 Grep 扫描确认历史归档条目（CHANGELOG W358 段/file-index 历史/archive）按 E2 判据保留未动
+> - **状态**：已落地·已 push（947eaa0/e681239）·工作树干净
 
 ### v2.3.17（2026-08-08）：W399 CI 触发修复 + SEO 域名补全 + rum-viewer 埋点查看页（并行 W390-W398 竞态清理后增量）
 
