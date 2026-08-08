@@ -8,7 +8,7 @@
 
 | 工作流 | 文件 | 触发条件 | 用途 |
 | --- | --- | --- | --- |
-| CI | [`ci.yml`](ci.yml) | `push` main + `pull_request` + `workflow_dispatch` | 5 job 门禁：截图存活烟测 / Lighthouse / a11y / dependency / ruff |
+| CI | [`ci.yml`](ci.yml) | `push` main + `pull_request` + `workflow_dispatch` | 7 job 门禁：截图存活烟测 / Lighthouse / a11y / dependency / ruff / pytest / agent-web 构建 |
 | Security | [`security.yml`](security.yml) | `push` main + `pull_request` | 4 job：npm-audit / pip-audit / CSP / XSS detect |
 | Deploy Pages | [`pages.yml`](pages.yml) | `push` main（site/** 变更） | GitHub Pages 部署 `./site` |
 | Lighthouse CI | [`perf.yml`](perf.yml) | `pull_request`（site/**）+ `workflow_dispatch` | LHCI LCP/CLS/TBT 性能预算断言 |
@@ -16,7 +16,7 @@
 
 > **W400 关键教训**：ci.yml 建置时仅 `pull_request` 触发，但项目工作流是直接 push main（无 PR），**CI 从未真正运行过**。W399 补 push 触发后首次运行暴露全部存量问题。**新 workflow 必须本地语法校验 + 确认触发条件匹配真实开发流。**
 
-## 2. ci.yml 五 job 说明
+## 2. ci.yml 七 job 说明
 
 ### Job 1 · `screenshots-regression`（页面存活烟测）
 
@@ -53,6 +53,20 @@
 - **W400 配置**：pyproject.toml `extend-exclude` 跳过 `_` 前缀一次性脚本 + `scripts/audit/archive`（与 security_scan.py 跳过逻辑一致）；全局忽略 UP031（printf 风格非错误）
 - **W400 移除 black --check**：存量 123/128 脚本从未 black 格式化，门禁从未通过；保留 ruff 语义门禁，格式统一由 ruff format 负责
 
+### Job 6 · `pytest-unit`（单元测试）
+
+- **运行环境**：`ubuntu-latest` + Python 3.12
+- **流程**：`pip install -r scripts/requirements.txt` → `python -m pytest tests/unit -q`（W401 补齐：原 ci.yml 五 job 未覆盖 Python 单元测试）
+- **本地验证**：`py -3 -m pytest tests/unit -q` → 112 passed（2026-08-08 实测）
+
+### Job 7 · `agent-web-build`（xiyouji-agent-web 前端构建）
+
+- **运行环境**：`ubuntu-latest` + Node 20
+- **流程**：`npm --prefix xiyouji-agent-web ci` → `npm run build`（`tsc -b && vite build`，仓库唯一编译目标）
+- **W401 前置**：agent-web 源码（37 文件）已入库；.gitignore 改为精细忽略（node_modules/dist/data/chat.db/tsc 编译产物 server/*.js|*.d.ts + vite.config.js|*.d.ts）
+- **artifact**：`agent-web-dist-${{ github.sha }}`（保留 30 天）
+- **本地验证**：`npm --prefix xiyouji-agent-web run build` → vite build 成功（7906 modules，2026-08-08 实测）
+
 ## 3. 触发条件矩阵
 
 | 事件 | 目标分支 | 触发工作流 | CI | Security | Deploy | Perf |
@@ -72,6 +86,7 @@
 | `lighthouse-report` | lighthouse-performance | JSON + HTML 审计报告 | 30 天 |
 | `a11y-report-*` | a11y-audit | a11y Markdown + JSON 报告 | 30 天 |
 | `pip-audit-report` | dependency-scan | pip 漏洞审计 JSON | 30 天 |
+| `agent-web-dist-${{ github.sha }}` | agent-web-build | xiyouji-agent-web 前端构建产物（dist/） | 30 天 |
 
 ## 5. 阈值与失败条件
 
@@ -84,6 +99,8 @@
 | XSS high 计数 | = 0 | security.yml xss-detect job 失败 |
 | pip-audit | 0 高危（--strict） | security.yml pip-audit job 失败 |
 | LHCI 预算 | LCP<2.5s / CLS<0.1 / TBT<300ms | perf.yml job 失败 |
+| pytest | 0 失败（tests/unit） | ci.yml pytest-unit job 失败 |
+| agent-web build | tsc + vite 退出码 0 | ci.yml agent-web-build job 失败 |
 
 ## 6. 本地复现命令
 
@@ -96,6 +113,12 @@ ruff check scripts/
 
 # 安全扫描（XSS high 归零验证）
 python scripts/security_scan.py --all --no-headers --no-sri --no-pip-audit
+
+# pytest 单元测试
+py -3 -m pytest tests/unit -q
+
+# agent-web 前端构建
+npm --prefix xiyouji-agent-web run build
 
 # Lighthouse 性能审计（需先启动 static server）
 python -m http.server 8000 --directory site
@@ -120,4 +143,4 @@ npx lighthouse http://localhost:8000/dashboard.html `
 ## 8. 双索引
 
 - [CHANGELOG.md](../../CHANGELOG.md) — v2.3.18 W400
-- [scripts/output/file-index.md](../../scripts/output/file-index.md) — W234-E1 / W399 / W400
+- [scripts/output/file-index.md](../../scripts/output/file-index.md) — W234-E1 / W399 / W400 / W401

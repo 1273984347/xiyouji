@@ -281,3 +281,50 @@ jobs:
           # 该门禁自建置起从未通过（CI 此前仅 pull_request 触发，从未运行）。
           # 保留 ruff（E/F/W/I/UP/B 语义检查）作为代码质量门禁，格式统一由 ruff format 负责。
           command: ruff check scripts/
+
+  pytest-unit:
+    name: Unit Tests (pytest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install Python deps
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run pytest (unit)
+        run: python -m pytest tests/unit -q
+
+  agent-web-build:
+    name: Agent Web Build (xiyouji-agent-web)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: xiyouji-agent-web/package-lock.json
+
+      - name: Install deps
+        run: npm --prefix xiyouji-agent-web ci
+
+      - name: Build (tsc -b && vite build)
+        run: npm --prefix xiyouji-agent-web run build
+
+      - name: Upload build artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-web-dist-${{ github.sha }}
+          path: xiyouji-agent-web/dist
+          if-no-files-found: ignore
+          retention-days: 30

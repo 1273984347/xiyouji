@@ -29,6 +29,18 @@
 > - **验证**：verify_delivery.py 全绿（核心 2 份含 v/W·A4 四文档含"201 篇"·无范围漂移）·A1-A6 求和 611 = 100+44+211+209+34+13 一致·E2 8 项 Grep 扫描确认历史归档条目（CHANGELOG W358 段/file-index 历史/archive）按 E2 判据保留未动
 > - **状态**：已落地·已 push（947eaa0/e681239）·工作树干净
 
+### v2.3.18（2026-08-08）：W401 CI 补齐 pytest 单元测试 + agent-web 前端构建 job（并行 session 遗留 workflow 审查处置）
+
+> **W401 CI 补齐（ci.yml 5→7 job + agent-web 源码入库）**
+> - **来源**：并行 session 创建 `build-test-deploy.yml`（untracked·W401 越界编号·部署段与 pages.yml 竞态·引用被 .gitignore 忽略的 agent-web 目录必然失败）——审查后保留该文件但**不启用**，将真实缺口（pytest 未入 CI + agent-web 构建未验证）合并进既有 ci.yml，避免第 7 个 workflow
+> - **执行**：
+>   - **ci.yml 新增 pytest-unit job**：`pip install -r scripts/requirements.txt` → `python -m pytest tests/unit -q`（补 ci.yml 五 job 未覆盖的 Python 单元测试缺口）
+>   - **ci.yml 新增 agent-web-build job**：`npm --prefix xiyouji-agent-web ci` → `npm run build`（`tsc -b && vite build`·仓库唯一编译目标）·上传 dist artifact（30 天保留）
+>   - **agent-web 源码入库**：.gitignore 由整目录忽略 `xiyouji-agent-web/` 改为精细忽略（node_modules/dist/data/chat.db/tsc 编译产物 server/*.js|*.d.ts + vite.config.js|*.d.ts）·37 文件 tracked（src/server/package*.json/vite/tsconfig 等）
+>   - **workflows/README.md 同步**：ci.yml 5→7 job 说明·pytest/agent-web 阈值·artifact·本地复现命令·双索引 W401
+> - **验证**：YAML 语法校验通过（7 job）·本地 `pytest tests/unit` 112 passed·本地 `npm run build` vite 7906 modules 成功·git ls-files 确认无运行期产物混入·E1 Grep spot-check（server/*.js·chat.db·node_modules 0 tracked）
+> - **状态**：已落地·待 push·build-test-deploy.yml 保留但未跟踪（用户决策：先不启用）
+
 ### v2.3.17（2026-08-08）：W399 CI 触发修复 + SEO 域名补全 + rum-viewer 埋点查看页（并行 W390-W398 竞态清理后增量）
 
 > **W399 CI 触发修复 + SEO 域名补全 + 埋点查看页（并行竞态增量）**
