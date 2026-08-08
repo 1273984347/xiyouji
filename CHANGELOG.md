@@ -4,9 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W389），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W399），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.3.17（2026-08-08）：W399 CI 触发修复 + SEO 域名补全 + rum-viewer 埋点查看页（并行 W390-W398 竞态清理后增量）
+
+> **W399 CI 触发修复 + SEO 域名补全 + 埋点查看页（并行竞态增量）**
+> - **来源**：用户指令"上线 deploy.yml 并启用埋点，先检查已做/未做与 workflow 问题"；执行中发现并行 session 已完成 W390-W398（部署 pages.yml + rum.js 注入 + W391-W398 英文站/导读/入口）并 push，本段仅登记并行遗漏的真实增量
+> - **执行**：
+>   - **ci.yml 触发修复**：原仅 `pull_request` 触发，但项目工作流为直接 push main（无 PR），**CI 从未真正运行过**→ 补 `push` main + `workflow_dispatch`（perf.yml 原有 workflow_dispatch，无需改）
+>   - **存活烟测替代缺失工具**：ci.yml screenshots-regression 原引用 `tools/screenshot-baseline.js`（仓库从未存在该文件→步骤必然失败走降级分支）→ 改为内联 Node 页面存活烟测（递归扫描 site/ 全部 158 个 HTML 逐个请求验证 200，本地实测 0 non-200）
+>   - **SEO 域名补全**：sitemap.xml 69 个 URL 补全域名前缀 `https://1273984347.github.io/xiyouji/`（GitHub Pages 子路径部署下原相对路径无效）·robots.txt Sitemap 指向补完整 URL
+>   - **rum-viewer 埋点查看页**：新增 `site/rum-viewer.html`（读取 localStorage rum_queue 展示 LCP/CLS/INP/TBT/FCP + 页面分布统计 + 清空按钮）——并行 W390 只注入 rum.js + storeLocal，未做查看页，本页补齐
+>   - **文档同步**：workflows/README.md 补 perf.yml/deploy.yml 行 + 触发矩阵 + artifact 表（随后因并行 pages.yml 命名差异回滚，改按 W398 现状登记）
+> - **验证**：YAML 三文件语法校验通过·本地 http.server 实测 6 关键页面 200·Node 烟测 158 页 0 非 200·E1 Grep spot-check 域名前缀 69 处全落地
+> - **状态**：已落地·核心文档同步（降级六文档同步 W393 后：CHANGELOG + 交接文档 双核心）·部署本身由并行 W390 完成（pages.yml）
 
 ### v2.3.17（2026-08-07）：W389 遗留建议执行（交接文档历史段归档·.git filter-repo 历史瘦身 241.7→32.8MB·阻塞段 HEAD 引用修正·项目说明第 45 行残留修复）
 

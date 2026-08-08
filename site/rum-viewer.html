@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>埋点数据查看 · 详解西游记</title>
+    <link rel="stylesheet" href="tokens.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            min-height: 100vh;
+            padding: 32px 24px 64px;
+        }
+        .wrap { max-width: 960px; margin: 0 auto; }
+        .hero { margin-bottom: 28px; }
+        .hero h1 { font-size: 26px; font-weight: 700; color: var(--dark, #3a2820); }
+        .hero .sub { color: var(--ink-soft, #6b6b6b); margin-top: 6px; font-size: 14px; }
+        .stat-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+        .stat {
+            background: var(--card, #fffdf8);
+            border: 1px solid var(--line, #e8e0d2);
+            border-radius: 10px;
+            padding: 14px 20px;
+            min-width: 150px;
+        }
+        .stat .num { font-size: 24px; font-weight: 700; color: #C8463A; }
+        .stat .lbl { font-size: 13px; color: var(--ink-soft, #6b6b6b); }
+        table { width: 100%; border-collapse: collapse; background: var(--card, #fffdf8); border: 1px solid var(--line, #e8e0d2); border-radius: 10px; overflow: hidden; }
+        th, td { padding: 10px 14px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--line, #e8e0d2); }
+        th { background: var(--dark, #3a2820); color: #f5efe4; font-weight: 600; }
+        tr:last-child td { border-bottom: none; }
+        .mono { font-family: var(--font-mono, monospace); font-size: 12px; }
+        .empty { color: var(--ink-soft, #6b6b6b); padding: 40px 20px; text-align: center; }
+        .note { margin-top: 20px; font-size: 13px; color: var(--ink-soft, #6b6b6b); border-left: 3px solid #C9A063; padding-left: 12px; }
+        .btn { display: inline-block; margin-top: 12px; padding: 8px 16px; border: 1px solid #C8463A; color: #C8463A; border-radius: 6px; background: transparent; cursor: pointer; font-size: 13px; }
+        .btn:hover { background: #C8463A; color: #fff; }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="hero">
+        <h1>埋点数据查看（RUM 本地队列）</h1>
+        <div class="sub">读取 localStorage「rum_queue」中由 <code>js/rum.js</code> 采集的 Core Web Vitals 数据。</div>
+    </div>
+
+    <div class="stat-row" id="stats"></div>
+    <table>
+        <thead><tr><th>时间</th><th>页面</th><th>LCP(s)</th><th>CLS</th><th>INP(s)</th><th>TBT(s)</th><th>FCP(s)</th><th>导航</th></tr></thead>
+        <tbody id="rows"></tbody>
+    </table>
+
+    <div class="note">
+        <b>说明</b>：GitHub Pages 为纯静态托管，rum.js 上报端点 <code>/api/rum</code> 会 404，
+        数据默认落 localStorage（storeLocal 已开启，环形队列上限 50 条）。
+        若未来接入自建后端或第三方统计，改 <code>window.__RUM_CONFIG__.endpoint</code> 即可回流。
+    </div>
+    <button class="btn" id="clearBtn">清空本地队列</button>
+
+    <script>
+    (function () {
+        var queue = [];
+        try { queue = JSON.parse(localStorage.getItem('rum_queue')) || []; } catch (e) { queue = []; }
+
+        var stats = document.getElementById('stats');
+        var rows = document.getElementById('rows');
+
+        var byPage = {};
+        var total = queue.length;
+        queue.forEach(function (item) {
+            var p = item.payload && item.payload.page ? item.payload.page : 'unknown';
+            byPage[p] = (byPage[p] || 0) + 1;
+        });
+        var topPage = Object.keys(byPage).sort(function (a, b) { return byPage[b] - byPage[a]; })[0] || '—';
+
+        var statHtml =
+            '<div class="stat"><div class="num">' + total + '</div><div class="lbl">采集条数</div></div>' +
+            '<div class="stat"><div class="num">' + Object.keys(byPage).length + '</div><div class="lbl">页面数</div></div>' +
+            '<div class="stat"><div class="num mono">' + topPage + '</div><div class="lbl">最常访问页面</div></div>';
+        stats.innerHTML = statHtml;
+
+        if (!queue.length) {
+            rows.innerHTML = '<tr><td colspan="8" class="empty">暂无埋点数据。访问其他页面后返回本页查看。</td></tr>';
+        } else {
+            var html = '';
+            queue.slice().reverse().forEach(function (item) {
+                var m = item.payload.metrics || {};
+                var d = new Date(item.ts || item.payload.ts || Date.now());
+                var time = d.toLocaleString('zh-CN', { hour12: false });
+                html += '<tr>' +
+                    '<td class="mono">' + time + '</td>' +
+                    '<td class="mono">' + item.payload.page + '</td>' +
+                    '<td>' + (m.lcp !== null && m.lcp !== undefined ? m.lcp.toFixed(2) : '—') + '</td>' +
+                    '<td>' + (m.cls !== null && m.cls !== undefined ? m.cls.toFixed(3) : '—') + '</td>' +
+                    '<td>' + (m.inp !== null && m.inp !== undefined ? m.inp.toFixed(2) : '—') + '</td>' +
+                    '<td>' + (m.tbt !== null && m.tbt !== undefined ? m.tbt.toFixed(2) : '—') + '</td>' +
+                    '<td>' + (m.fcp !== null && m.fcp !== undefined ? m.fcp.toFixed(2) : '—') + '</td>' +
+                    '<td class="mono">' + (item.payload.nav || '—') + '</td>' +
+                    '</tr>';
+            });
+            rows.innerHTML = html;
+        }
+
+        document.getElementById('clearBtn').addEventListener('click', function () {
+            localStorage.removeItem('rum_queue');
+            location.reload();
+        });
+    })();
+    </script>
+</div>
+</body>
+</html>

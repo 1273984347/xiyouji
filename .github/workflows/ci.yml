@@ -4,8 +4,11 @@ name: CI
 # 保留 W234 三轨（screenshots/lighthouse/a11y），新增 dependency-scan + code-quality
 # W264-E2 a11y 深化：a11y-audit 升级为 9 规则 WCAG 2.2 AA
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -46,8 +49,36 @@ jobs:
 
       - name: Run screenshot baseline
         id: screenshot-baseline
-        run: node tools/screenshot-baseline.js
-        continue-on-error: true  # 工具不存在时降级为提示，不阻断 a11y/lighthouse
+        # W390 修复：tools/screenshot-baseline.js 从未存在，原步骤必然失败走降级分支
+        # 改为内联 Node 脚本：扫描 site/ 全部 HTML，逐个请求验证 200（页面存活烟测）
+        run: |
+          node -e "
+          const fs = require('fs');
+          const path = require('path');
+          const http = require('http');
+          const pages = [];
+          (function walk(dir) {
+            for (const f of fs.readdirSync(dir)) {
+              const p = path.join(dir, f);
+              const st = fs.statSync(p);
+              if (st.isDirectory()) walk(p);
+              else if (f.endsWith('.html')) pages.push(p.replace(/[\\/]+/g, '/').replace(/^site\//, ''));
+            }
+          })('site');
+          const bad = [];
+          (async () => {
+            for (const pg of pages) {
+              await new Promise((res) => {
+                http.get('http://localhost:8000/' + pg, (r) => {
+                  if (r.statusCode !== 200) bad.push(pg + ' -> ' + r.statusCode);
+                  r.resume(); res();
+                }).on('error', (e) => { bad.push(pg + ' -> ' + e.message); res(); });
+              });
+            }
+            console.log('scanned ' + pages.length + ' html pages, ' + bad.length + ' non-200');
+            if (bad.length) { console.error(bad.join('\n')); process.exit(1); }
+          })();
+          "
 
       - name: Fallback screenshot scan (site/data/*.html)
         if: failure() || steps.screenshot-baseline.outcome != 'success'

@@ -8,6 +8,6 @@ Allow: /
 Disallow: /scripts/output/
 Disallow: /tests/e2e/current/
 
-# 站点地图
-Sitemap: /sitemap.xml
+# 站点地图（W390：补完整 URL，GitHub Pages 子路径部署）
+Sitemap: https://1273984347.github.io/xiyouji/sitemap.xml
 # FILE_INDEX: site/robots.txt | W236-E | E7 robots
