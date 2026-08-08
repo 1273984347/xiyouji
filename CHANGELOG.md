@@ -39,6 +39,14 @@
 >   - **en/visualizations.html**：3 张索引卡（Sentiment Arc / Chapter Statistics / Narrative Rhythm Curve）改指向 EN 版并附中文回链
 > - **验证**：逐页断言（每个替换 count 校验）+ 零可见 chrome CJK（仅保留「中文」回链标签、品牌印章「西游/详解」「详解西游记」与 `<title>` 后缀「· 详解西游记」）+ 渲染脚本零 CJK（仅 CSS token 注释/代码注释/HTML 注释/console）；全部内联 D3 JS/CSS 保全
 > - **状态**：已落地·E3 铁律 6 文档同步（CHANGELOG + 交接文档 双核心）·剩余 data 可视化页（约 80+ 张）可按同模式续译
+> **W398 英文站 batch5：两张地理可视化页英文化（2026-08-08）**
+> - **来源**：用户指令"继续"（承接 W397 batch4；第一性原理清单 #5 英文站·A 全量对等·分批）
+> - **执行**：
+>   - **site/en/journey-geo-semiotics.html（新）**：取经路径地理符号学英文版。译 chrome（标题/导航/面包屑/kicker/h1/三机制卡片/力导向图说明/页脚）+ 渲染脚本（EMBEDDED_DATA 7 节点 name/desc + NODE_LABELS 五类标签 + LINK_LABELS 五型标签 + 图例「节点类型/链接类型」+ 无数据/数据源提示 + NUM 正则「第N回→Ch.N」），保全内联 D3 JS/CSS，双向导航（EN ↔ 中文 journey-geo-semiotics.html）
+>   - **site/en/journey-route.html（新）**：取经全路程图英文版。译 chrome（标题/导航/面包屑/kicker/h1/tagline/KPI 4 卡/水平时间线/地理类型分布/完整地点列表/表格表头/路线段统计/段表表头/关键洞察/页脚）+ 耦合地理类型枚举整块转译（TYPE_COLORS 九键 + normalizeType + renderTypeExplain 七项 + EMBEDDED_MOCK 五地点 name/region/type/event 全译）以保配色与逻辑一致 + 渲染脚本（章节 tickFormat「第N回→Ch.N」/起止标注/饼心「地点总数」/路线段提示/关键洞察 4 条模板/嵌入 mock 提示/数据源提示 + NUM 正则），保全全部内联 D3 JS/CSS，双向导航
+>   - **en/visualizations.html**：2 张索引卡（Journey Route / Journey Geosemiotics）改指向 EN 版并附中文回链
+> - **验证**：逐页断言（每个替换 count 校验；注释碰撞修正：地理类型分布/完整地点列表/类型说明/关键洞察 改指完整标签元素以避与 HTML/脚本注释重复匹配）+ 零可见 chrome CJK（仅保留「中文」回链标签、品牌印章「西游/详解」「详解西游记」与 `<title>` 后缀「· 详解西游记」）+ 渲染脚本零 CJK（仅 CSS token 注释/代码注释/HTML 注释/console）；全部内联 D3 JS/CSS 保全
+> - **状态**：已落地·E3 铁律 6 文档同步（CHANGELOG + 交接文档 双核心）·character-dynamic-network 因渲染脚本内嵌 ~55 条中英混排事件/关系描述串（易碎）移出本批待专项深译；timeline/journey-spacetime/emotional-heatmap/hardship-difficulty-heatmap 等同属重页（脚本 CJK>190）后续按需
 >
 
 > **W389 遗留建议执行·交接文档历史段归档**
