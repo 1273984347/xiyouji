@@ -32,8 +32,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: pip
-          cache-dependency-path: scripts/requirements.txt
+          # W401 修复：本 job 不安装 pip 依赖（仅 npm playwright），移除 cache: pip 避免 Post 步骤缓存目录缺失报错（同 W400 a11y-audit 修复）
 
       - name: Install Playwright
         run: |
@@ -129,8 +128,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: pip
-          cache-dependency-path: scripts/requirements.txt
+          # W401 修复：本 job 不安装 pip 依赖（仅 npx lighthouse），移除 cache: pip 避免 Post 步骤缓存目录缺失报错（同 W400 a11y-audit 修复）
 
       - name: Start static server
         run: |
@@ -298,8 +296,10 @@ jobs:
       - name: Install Python deps
         run: pip install -r scripts/requirements.txt
 
-      - name: Run pytest (unit)
-        run: python -m pytest tests/unit -q
+      # W401 修复：tests/ 全量（pytest.ini testpaths=tests + --ignore=tests/e2e
+      # 排除需 playwright browser 的 test_narratology_render.py，由 screenshots-regression job 覆盖）
+      - name: Run pytest (unit + root tests)
+        run: python -m pytest tests -q
 
   agent-web-build:
     name: Agent Web Build (xiyouji-agent-web)

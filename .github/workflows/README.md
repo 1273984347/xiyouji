@@ -1,8 +1,9 @@
 # CI/CD 工作流说明
 
-> **W234-E1 CI/CD 化 → W399/W400 修复** — 西游记解读项目（`d:\1\xiyouji`，v2.3.18 W400）的 GitHub Actions 工作流层。
+> **W234-E1 CI/CD 化 → W399/W400/W401** — 西游记解读项目（`d:\1\xiyouji`，v2.3.18 W401）的 GitHub Actions 工作流层。
 > **W399**：ci.yml 补 push main 触发（此前仅 pull_request，项目直接 push main 无 PR → CI 从未运行）；sitemap/robots 域名补全；新增 rum-viewer。
 > **W400**：CI/Security 三 workflow 转绿（ruff 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复·black 门禁移除）。
+> **W401**：ci.yml 5→7 job（pytest-unit 全量 tests/ + agent-web-build）·agent-web 源码入库·移除 3 处无 pip 安装 job 的 cache: pip 残留·build-test-deploy.yml 弃用删除。
 
 ## 1. 工作流列表
 
@@ -56,8 +57,8 @@
 ### Job 6 · `pytest-unit`（单元测试）
 
 - **运行环境**：`ubuntu-latest` + Python 3.12
-- **流程**：`pip install -r scripts/requirements.txt` → `python -m pytest tests/unit -q`（W401 补齐：原 ci.yml 五 job 未覆盖 Python 单元测试）
-- **本地验证**：`py -3 -m pytest tests/unit -q` → 112 passed（2026-08-08 实测）
+- **流程**：`pip install -r scripts/requirements.txt` → `python -m pytest tests -q`（W401 补齐 + DRL 修复：原 ci.yml 五 job 未覆盖 Python 单元测试；pytest.ini `testpaths=tests` + `--ignore=tests/e2e`，浏览器测试移入 tests/e2e/ 由 screenshots-regression job 覆盖）
+- **本地验证**：`py -3 -m pytest tests -q` → 321 passed（2026-08-09 DRL 修复后实测）
 
 ### Job 7 · `agent-web-build`（xiyouji-agent-web 前端构建）
 
@@ -99,7 +100,7 @@
 | XSS high 计数 | = 0 | security.yml xss-detect job 失败 |
 | pip-audit | 0 高危（--strict） | security.yml pip-audit job 失败 |
 | LHCI 预算 | LCP<2.5s / CLS<0.1 / TBT<300ms | perf.yml job 失败 |
-| pytest | 0 失败（tests/unit） | ci.yml pytest-unit job 失败 |
+| pytest | 0 失败（tests 全量） | ci.yml pytest-unit job 失败 |
 | agent-web build | tsc + vite 退出码 0 | ci.yml agent-web-build job 失败 |
 
 ## 6. 本地复现命令
@@ -114,8 +115,8 @@ ruff check scripts/
 # 安全扫描（XSS high 归零验证）
 python scripts/security_scan.py --all --no-headers --no-sri --no-pip-audit
 
-# pytest 单元测试
-py -3 -m pytest tests/unit -q
+# pytest 单元测试（tests 全量，--ignore=tests/e2e 由 pytest.ini 内置）
+py -3 -m pytest tests -q
 
 # agent-web 前端构建
 npm --prefix xiyouji-agent-web run build
@@ -142,5 +143,5 @@ npx lighthouse http://localhost:8000/dashboard.html `
 
 ## 8. 双索引
 
-- [CHANGELOG.md](../../CHANGELOG.md) — v2.3.18 W400
+- [CHANGELOG.md](../../CHANGELOG.md) — v2.3.18 W401
 - [scripts/output/file-index.md](../../scripts/output/file-index.md) — W234-E1 / W399 / W400 / W401

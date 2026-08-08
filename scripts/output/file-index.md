@@ -552,7 +552,7 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
-| .github/workflows/ci.yml | W401 | 新增 pytest-unit + agent-web-build job（5→7 job）·pytest tests/unit -q·npm ci + npm run build |
+| .github/workflows/ci.yml | W401 | 新增 pytest-unit + agent-web-build job（5→7 job）·pytest tests 全量（--ignore=tests/e2e）·npm ci + npm run build |
 | .gitignore | W401 | agent-web 由整目录忽略改为精细忽略（node_modules/dist/data/server 编译产物/vite.config 产物） |
 | xiyouji-agent-web/*（37 文件） | W401 | agent-web 源码入库（src/server/package*.json/vite/tsconfig 等·供 CI 构建验证） |
 | .github/workflows/README.md | W401 | ci.yml 7 job 说明·阈值·artifact·本地复现命令·双索引 W401 |
