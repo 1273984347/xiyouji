@@ -548,6 +548,17 @@
 | 交接文档.md | W400 | 文档同步·内部过期引用 12 处修复（W358→W400·v2.3.9→v2.3.18·A2 43→44/A3 199→211/A4 201→209/A5 20→34·site/data 85→86·英文站 7→65·页脚） |
 | 项目交接参考手册.md | W400 | 文档同步·版本 v2.3.8 W357→v2.3.18 W400·计数 A2/A3/A4/A5·可视化 85→86·英文站 51→65·发布待办标记完成 |
 
+## W402 档 B 真实 LLM 生成接通（2026-08-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/rag/xiyouji_rag.py | W402 | provider 化 Base URL（7 厂商专属变量 + CUSTOM 代理网关·区分代理/原生）·极简 .env 自动加载·_llm_generate 检索增强生成·OpenAI/Anthropic 双格式适配器·answer() use_llm 自动模式 |
+| scripts/rag/rag_server.py | W402 | /query 默认参数自动启用 LLM·HTTPError 错误体诊断增强 |
+| site/static/js/rag-chat.js | W402 | 渲染 llm_generated（优先）+ llm_error 提示 + history 持久化用生成回答 |
+| scripts/rag/.env.rag.example | W402 | 全 provider 变量注释示例（新建） |
+| scripts/rag/README.md | W402 | W402 同步 + provider 配置说明段 |
+| CHANGELOG.md | W402 | 新增 W402 版本段（四件套） |
+
 ## W401 CI 补齐 pytest + agent-web 构建（2026-08-08）
 
 | 文件 | W | 说明 |

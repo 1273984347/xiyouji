@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.18（2026-08-08）— W401 CI 补齐 pytest 全量 + agent-web 构建 job（5→7）— A1-A6 共 611 篇 + 86 可视化页（A4 W342 gap-fill 199→201 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.18（2026-08-09）— W402 档 B 真实 LLM 生成接通（provider 化 Base URL）— A1-A6 共 611 篇 + 86 可视化页（A4 W342 gap-fill 199→201 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 顶层结构
 
