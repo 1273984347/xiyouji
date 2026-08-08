@@ -374,7 +374,12 @@ npm run test:e2e
 
 ## 授权
 
-见 [LICENSE](LICENSE)。
+本项目采用**双协议**授权：
+
+- **源代码**（Python/JavaScript/HTML 脚本、配置文件、可视化页代码部分、GitHub Actions workflows）：[MIT License](LICENSE)
+- **文本内容**（docs/ 下所有 Markdown 原创解读/随笔/人物/专题/文化/诗词、S1 方法论、S2 学术投稿候选、S2 外部分享）：[CC BY-NC 4.0](LICENSE-CONTENT.md)（署名-非商业性使用）
+
+《西游记》原著文本已进入公共领域；引用的外部网络解读版权归原作者，仅作索引与摘录，不纳入本项目协议。
 
 ---
 
