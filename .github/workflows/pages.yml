@@ -33,9 +33,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # include-hidden-files 必须 true，否则 .nojekyll 会被默认排除导致 Jekyll 处理下划线文件
+          # upload-pages-artifact 默认包含点文件（.nojekyll 已随 site/ 一同上传）
           path: site
-          include-hidden-files: true
 
   deploy:
     name: Deploy
