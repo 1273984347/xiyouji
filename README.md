@@ -2,7 +2,7 @@
 
 > 一座关于《西游记》的混合型解读项目 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前版本 v2.3.18（2026-08-08）**：W400 CI/安全 workflow 转绿（ruff 存量 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复·black 门禁移除） + W399（CI 触发修复+SEO 域名+rum-viewer 埋点查看页） + W398 英文站 batch5（journey-geo-semiotics / journey-route 两地理可视化页英文化） + W397 英文站 batch4（三可视化页 + 索引卡英文化） — A1 逐回 100 回 + A2 随笔 44 篇 + A3 人物深化 211 篇 + A4 主题专题 209 篇 + A5 文化 34 篇 + A6 诗词 13 篇（A4 W342 gap-fill 199→201 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)，历史归档见 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。
+> **当前版本 v2.3.18（2026-08-08）**：W400 CI/安全 workflow 转绿 + 英文站扩至 65 文件 — A1-A6 共 611 篇 + 86 可视化页（A4 W342 gap-fill 199→201 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 项目定位
 
