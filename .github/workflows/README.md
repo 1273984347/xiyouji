@@ -10,7 +10,7 @@
 | --- | --- | --- | --- |
 | CI | [`ci.yml`](ci.yml) | `push` main + `pull_request` + `workflow_dispatch` | 7 job 门禁：截图存活烟测 / Lighthouse / a11y / dependency / ruff / pytest / agent-web 构建 |
 | Security | [`security.yml`](security.yml) | `push` main + `pull_request` | 4 job：npm-audit / pip-audit / CSP / XSS detect |
-| Deploy Pages | [`pages.yml`](pages.yml) | `push` main（site/** 变更） | GitHub Pages 部署 `./site` |
+| Deploy Pages | [`pages.yml`](pages.yml) | `push` main（site/** 变更） | GitHub Pages 部署 `./site`（W401 决策：不采用 build-test-deploy.yml，避免部署竞态·已删除） |
 | Lighthouse CI | [`perf.yml`](perf.yml) | `pull_request`（site/**）+ `workflow_dispatch` | LHCI LCP/CLS/TBT 性能预算断言 |
 | Screenshot Review | [`screenshot-review.yml`](screenshot-review.yml) | `pull_request`（脚本变更） | Playwright 截图 + 布局审计 |
 

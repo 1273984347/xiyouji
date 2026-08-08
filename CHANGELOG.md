@@ -39,7 +39,8 @@
 >   - **agent-web 源码入库**：.gitignore 由整目录忽略 `xiyouji-agent-web/` 改为精细忽略（node_modules/dist/data/chat.db/tsc 编译产物 server/*.js|*.d.ts + vite.config.js|*.d.ts）·37 文件 tracked（src/server/package*.json/vite/tsconfig 等）
 >   - **workflows/README.md 同步**：ci.yml 5→7 job 说明·pytest/agent-web 阈值·artifact·本地复现命令·双索引 W401
 > - **验证**：YAML 语法校验通过（7 job）·本地 `pytest tests/unit` 112 passed·本地 `npm run build` vite 7906 modules 成功·git ls-files 确认无运行期产物混入·E1 Grep spot-check（server/*.js·chat.db·node_modules 0 tracked）
-> - **状态**：已落地·待 push·build-test-deploy.yml 保留但未跟踪（用户决策：先不启用）
+> - **处置收尾**：build-test-deploy.yml **已删除**（真实缺口已并入 ci.yml，无增量价值）·pages.yml **已回退恢复 push 自动部署**（并行 session 曾将其改为仅 workflow_dispatch，会停掉已验证部署链路）·工作树干净
+> - **状态**：已落地·已 push（684617b）·CI 7 job 全绿（pytest-unit + agent-web-build 建置即绿）·build-test-deploy.yml 不启用
 
 ### v2.3.17（2026-08-08）：W399 CI 触发修复 + SEO 域名补全 + rum-viewer 埋点查看页（并行 W390-W398 竞态清理后增量）
 
