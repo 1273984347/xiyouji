@@ -61,8 +61,13 @@
 </head>
 <body>
 <header>
-  <h1>西游 · 渡口</h1>
-  <p>无我写作引擎（原型）— 输入任意路人 / 器物 / 地名，生成一篇约 300 字"渡口档案"草稿</p>
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+    <div>
+      <h1>西游 · 渡口</h1>
+      <p>无我写作引擎（原型）— 输入任意路人 / 器物 / 地名，生成一篇约 300 字"渡口档案"草稿</p>
+    </div>
+    <a href="index.html" style="font-size:13px;color:var(--indigo);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:8px 14px;white-space:nowrap;margin-top:4px;">← 返回详解西游记首页</a>
+  </div>
 </header>
 <main>
   <div class="panel">
@@ -358,6 +363,25 @@ async function resetGraph(){
 }
 document.getElementById('rag').onclick = queryRAG;
 document.getElementById('graphReset').onclick = resetGraph;
+
+// ---- 首页 ?q= 直达：离线模板引擎即时生成（不依赖本地 RAG 后端）----
+(function () {
+  try {
+    var p = new URLSearchParams(location.search);
+    var q = (p.get('q') || '').trim();
+    if (q) {
+      document.getElementById('q').value = q;
+      document.getElementById('out').textContent = generate(q);
+      if (p.get('from') === 'home') {
+        var hint = document.getElementById('hint');
+        if (hint) {
+          hint.insertAdjacentText('afterbegin',
+            '〔来自首页提问 · 已用离线模板引擎生成草稿；点「检索真实语料」可调用本地 RAG 获得基于 672 篇语料的真实检索结果〕 ');
+        }
+      }
+    }
+  } catch (e) { /* URLSearchParams 不支持时静默忽略 */ }
+})();
 </script>
 </body>
 </html>
