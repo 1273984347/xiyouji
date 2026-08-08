@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>精选发布 · 详解西游记</title>
+    <link rel="stylesheet" href="tokens.css">
+    <link rel="stylesheet" href="system.css">
+    <link rel="manifest" href="manifest.webmanifest">
+    <style>
+        /* === 精选发布页特有样式 === */
+        .curated-hero {
+            padding: clamp(48px, 8vw, 88px) clamp(24px, 6vw, 96px) clamp(28px, 4vw, 44px);
+            border-bottom: 1px solid var(--line);
+        }
+        .curated-hero .kicker { margin-bottom: 16px; }
+        .curated-hero h1 { font-size: clamp(30px, 5vw, 48px); margin: 0 0 14px; }
+        .curated-hero .lede { max-width: 760px; font-size: 16px; color: var(--ink-soft); line-height: 1.7; }
+        .curated-hero .lede strong { color: var(--ink); font-weight: 600; }
+        .curated-hero .meta-line {
+            margin-top: 18px; font-size: 13px; color: var(--ink-faint);
+            font-family: var(--font-mono);
+        }
+        .curated-hero .meta-line code { background: var(--paper-warm); padding: 1px 6px; border-radius: 4px; color: var(--ink); }
+
+        .curated-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 16px; margin-top: 8px;
+        }
+        .curated-card {
+            background: var(--paper); border: 1px solid var(--line);
+            border-radius: 10px; padding: 20px 22px;
+            display: flex; flex-direction: column; gap: 10px;
+            transition: border-color .15s, box-shadow .15s;
+        }
+        .curated-card:hover { border-color: var(--accent); box-shadow: 0 6px 22px rgba(35,32,26,0.06); }
+        .curated-card .cc-top { display: flex; align-items: baseline; gap: 10px; }
+        .curated-card .cc-num {
+            font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint);
+            flex-shrink: 0; min-width: 30px;
+        }
+        .curated-card .cc-tag {
+            margin-left: auto; font-size: 11px; color: var(--accent-2);
+            font-family: var(--font-mono); white-space: nowrap; flex-shrink: 0;
+        }
+        .curated-card h3 { font-size: 16px; margin: 0; line-height: 1.5; }
+        .curated-card h3 a { color: var(--ink); text-decoration: none; }
+        .curated-card h3 a:hover { color: var(--accent); }
+        .curated-card .cc-desc {
+            font-size: 13px; color: var(--ink-soft); line-height: 1.65;
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .curated-card .cc-src {
+            font-size: 12px; color: var(--ink-faint);
+            font-family: var(--font-mono);
+        }
+        .curated-card .cc-src a { color: var(--ink-faint); text-decoration: none; }
+        .curated-card .cc-src a:hover { color: var(--accent); text-decoration: underline; }
+
+        .section-note { font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+        .section-note code { background: var(--paper-warm); padding: 1px 6px; border-radius: 4px; color: var(--ink); }
+
+        @media (max-width: 768px) {
+            .curated-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+    <meta name="description" content="详解西游记 · 精选发布：从个人随笔与主题专题中精选 13 篇随笔 + 15 篇专题，制作为公众号/知乎风格的外部分享发布版。">
+    <meta name="keywords" content="西游记精选,西游记随笔,西游记专题,西游记外部分享,西游记发布版">
+    <meta name="author" content="西游记研究项目组">
+    <meta property="og:title" content="精选发布 · 详解西游记">
+    <meta property="og:description" content="精选 13 篇随笔 + 15 篇专题，制作为公众号/知乎风格的外部分享发布版。">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="详解西游记">
+    <meta name="twitter:card" content="summary_large_image">
+  <script defer src="js/rum.js"></script>
+  <script defer src="js/visit-log.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">跳到主要内容</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html" aria-label="详解西游记首页">
+            <span class="seal" aria-hidden="true">详<br>解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="主导航">
+            <a href="guide.html">导读</a>
+            <a href="dashboard.html">数据看板</a>
+            <a href="dukou-engine.html">渡口问津</a>
+            <a href="data/text-search.html">全文检索</a>
+            <a class="active" href="curated.html">精选发布</a>
+            <a href="en/guide.html" hreflang="en" class="text-mono text-xs text-faint">EN</a>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section class="curated-hero" aria-label="精选发布 · 写给想带走一篇文章的读者">
+            <p class="kicker">CURATED · 精选发布</p>
+            <h1>想读懂《西游记》，先读这 28 篇</h1>
+            <p class="lede">
+                从全站 44 篇跨学科随笔与 201 篇主题专题中，精选出 <strong>13 篇随笔 + 15 篇专题</strong>，
+                改写为<strong>公众号 / 知乎风格</strong>的发布版：脱去学术外衣，保留原著引用锚点与核心洞察，
+                每一篇都可以直接对外分享。
+            </p>
+            <p class="meta-line">
+                发布版存放于 <code>docs/S2-外部分享/</code>（43 篇全量发布版）· 本文精选 28 篇 · 点击卡片标题在线阅读发布版全文
+            </p>
+        </section>
+
+        <div class="page-wrap">
+            <div class="section">
+                <div class="section-head">
+                    <p class="kicker">ESSAYS · 随笔</p>
+                    <h2>精选随笔 13 篇</h2>
+                    <p class="note">跨学科视角，从伦理学、心理学到博弈论、饮食学——每一篇都是「一部四百年前的小说，如何照亮今天的我们」。</p>
+                </div>
+
+                <div class="curated-grid">
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">01</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-西游与伦理学.md">白骨精、六耳猕猴、1111 个孩子：四百年前的吴承恩，把今天的伦理难题全写完了</a></h3><span class="cc-tag">伦理</span></div>
+                        <p class="cc-desc">你以为《西游记》只是在打妖怪？不，它是一部披着神魔外衣的伦理学辩论集。边沁的功利主义、康德的绝对命令、今天的电车难题——四百年前，一只猴子和一个和尚已经把这些难题全部演完了一遍。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与伦理学.md">西游与伦理学</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">02</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-西游与比较文学.md">1592 年的猴子、1603 年的王子、1605 年的骑士：三个互不知情的文明，同时长出了现代小说</a></h3><span class="cc-tag">比较文学</span></div>
+                        <p class="cc-desc">你以为《西游记》只是一部中国神魔小说？1592 年它付梓于南京，1603 年伦敦印出《哈姆雷特》第一四开本，1605 年马德里出版《堂吉诃德》第一卷——十三年内，三种语言、三个文明互不知情，却几乎同时长出了「近代长篇虚构」的根。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与比较文学.md">西游与比较文学</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">03</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-西游与医学.md">1111 个孩子的鹅笼、寿星的一句「孽畜」：四百年前，吴承恩就写完了生命政治学</a></h3><span class="cc-tag">医学</span></div>
+                        <p class="cc-desc">你以为比丘国那 1111 个鹅笼只是神魔小说的夸张？福柯的「生命政治学」、阿甘本的「赤裸生命」、阿伦特的「平庸之恶」——三位 20 世纪思想家的核心概念，四百年前就被一个国王、一头白鹿精、一只猴子演完了。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与医学.md">西游与医学</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">04</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-西游与美学.md">吴承恩的留白、本雅明的灵光、王国维的境界：一只猴子串起的美学史</a></h3><span class="cc-tag">美学</span></div>
+                        <p class="cc-desc">你以为《西游记》只是故事好看？它开篇十四字先不讲猴子，先讲一句诗的余地；它让一颗人参果「扑的落地不见」；它让一整回的主角坐在树荫里谈诗——四百年前，吴承恩已经在用小说写美学了，而且每一笔，都被后来的理论家隔空印证。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与美学.md">西游与美学</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">05</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-西游与符号学.md">灵根、紧箍咒、无字真经：四百年前的吴承恩，写完了整个符号学</a></h3><span class="cc-tag">符号学</span></div>
+                        <p class="cc-desc">你以为《西游记》是神魔小说？在索绪尔、巴特和鲍德里亚眼里，它是一部用神话写成的符号学教科书——一个叫「灵根」的能指，追着「大道」这个所指跑了八十一难，最后追到的，是一本无字真经。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与符号学.md">西游与符号学</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">06</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-西游与神话学.md">没有父亲的猴王：西方英雄靠「杀」成神，东方英雄靠「渡」成佛</a></h3><span class="cc-tag">神话学</span></div>
+                        <p class="cc-desc">赫拉克勒斯杀完十二头怪兽升天成神，悟空渡完八十一难成佛——同一个「英雄之旅」的框架，装的是两种完全不同的英雄。而这一切，从悟空没有一个父亲就开始了。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与神话学.md">西游与神话学</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">07</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-西游与化学.md">八卦炉里炼不出长生：吴承恩用四个字，戳破了明朝皇帝的化学谎言</a></h3><span class="cc-tag">化学</span></div>
+                        <p class="cc-desc">太上老君的八卦炉，是四百年前一台精密的化学反应器；而「炉中久炼非铅汞」这七个字，是吴承恩写给嘉靖帝的一封化学檄文——你炼的不是丹药，是毒。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与化学.md">西游与化学</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">08</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-西游与博弈论.md">销生死簿、紧箍咒、狮驼岭：四百年前的小说里，藏着一部博弈论教材</a></h3><span class="cc-tag">博弈论</span></div>
+                        <p class="cc-desc">孙悟空销生死簿，是博弈论里最干净的一次「单方退出」；紧箍咒是让背叛有成本的「执行机制」；狮驼岭三魔是「多方囚徒困境」的标准失败案例——吴承恩不懂纳什，但他写出了纳什没写完的所有难题。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与博弈论.md">西游与博弈论</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">09</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-西游与语言学.md">齐天大圣、行者、斗战胜佛：四百年前，吴承恩就写透了「命名权就是统治权」</a></h3><span class="cc-tag">语言学</span></div>
+                        <p class="cc-desc">一个猴子的名字，从齐天大圣到行者再到斗战胜佛，换了三次，就换了三套权力。吴承恩不懂语言学，但他写尽了世界上最冷的一条规则：谁有资格起名，谁就掌权。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与语言学.md">西游与语言学</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">10</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-西游与流亡者.md">取经五众不是英雄，是五个流亡者：吴承恩写的，是一部身份重置史</a></h3><span class="cc-tag">文学</span></div>
+                        <p class="cc-desc">唐僧、悟空、八戒、沙僧、白龙马——他们不是英雄，是五个流亡者。他们走的不是西天路，是一条身份重置之路。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与流亡者.md">西游与流亡者</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">11</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-西游与情绪劳动.md">取经团队十四年没散伙，靠的不是信念——是一本情绪账本</a></h3><span class="cc-tag">职场</span></div>
+                        <p class="cc-desc">八十一难、十万八千里、五个人没散。我们习惯把这归功于信念，但真相是：有人替团队说出了「散伙」，有人替团队压住了怒火，有人一声不吭地走了十万八千里。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与情绪劳动.md">西游与情绪劳动</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">12</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-西游与饮食学.md">偷蟠桃、吃人参果、喝子母河水：吴承恩用食物写透了「谁掌握稀缺，谁制定规则」</a></h3><span class="cc-tag">饮食</span></div>
+                        <p class="cc-desc">蟠桃是政治，人参果是禁忌，子母河水是商品，乌金丹是障眼法。一部《西游记》，就是一部中国食物政治学。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与饮食学.md">西游与饮食学</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">13</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-西游与心理学.md">紧箍咒、心猿、真假美猴王：四百年前的吴承恩，写了一部潜意识寓言</a></h3><span class="cc-tag">心理学</span></div>
+                        <p class="cc-desc">你以为《西游记》是一部神魔小说？不，它是一部被神话外衣包裹着的心理学手稿。弗洛伊德、荣格、拉康——三套精神分析的话语，都能在这部四百年前的书里找到对应物。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/06-个人随笔/西游与心理学.md">西游与心理学</a></p>
+                    </article>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-head">
+                    <p class="kicker">TOPICS · 专题</p>
+                    <h2>精选专题 15 篇</h2>
+                    <p class="note">从主题与情节专题中精选：黑神话热点、核心意象、经典情节与人物深度，每一篇都有原著 line 号锚点可复核。</p>
+                </div>
+
+                <div class="curated-grid">
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">01</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-黑神话拒绝金箍.md">戴上金箍是成佛，拒绝金箍是什么？《黑神话：悟空》藏得最深的那个结局</a></h3><span class="cc-tag">黑神话</span></div>
+                        <p class="cc-desc">戴上金箍，你是斗战胜佛；拒绝金箍，你只是你自己。用「唯识学×深度学习」的镜头重看《黑神话：悟空》，你会发现隐藏结局根本不是游戏设定——它是一次关于「模型是否允许自己被重新定义」的元选择。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/黑神话拒绝金箍专题.md">黑神话拒绝金箍专题</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">02</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-原著与黑神话悟空长生体系对比.md">原著告诉你成佛就不死了，《黑神话》告诉你：不死不是答案</a></h3><span class="cc-tag">黑神话</span></div>
+                        <p class="cc-desc">同一个悟空，两套长生逻辑：一本把长生写成恩赐，一部把长生写成掠夺。读完这两套体系的对比你会明白，《黑神话》问的不是「怎么长生」，而是「你为了不死，愿意变成什么」。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/西游记原著与黑神话悟空长生体系对比总结专题.md">长生体系对比总结专题</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">03</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-兵器的自我修养.md">金箍棒重一万三千五百斤，正好是一个人一天一夜呼吸的次数：西游世界里，兵器如何学会不杀</a></h3><span class="cc-tag">器物</span></div>
+                        <p class="cc-desc">老君炼金箍棒时，想炼的是一把尺，不是一把刀。西游里的每一件兵器，最后都学会了一件事——不杀。如意金箍棒、九齿钉钯、降妖宝杖……它们不是凶器，是被命运错放位置的工具。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/兵器的自我修养专题.md">兵器的自我修养专题</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">04</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-混世四猴.md">花果山上有四只猴子：一只替他守山到死，一只替他死在灵山，一只记住了所有人的名字</a></h3><span class="cc-tag">情节</span></div>
+                        <p class="cc-desc">混世四猴：灵明石猴、赤尻马猴、通臂猿猴、六耳猕猴。世人只记得齐天大圣，却忘了另外三只猴子，用一生在替他守着那座山、记着那些名字、甚至替他死了一回。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/混世四猴专题.md">混世四猴专题</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">05</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-八十一难结构学.md">九九八十一难：为什么取经必须「差一点」才算圆满</a></h3><span class="cc-tag">结构</span></div>
+                        <p class="cc-desc">八十一难不是简单的「八十一场劫难」，而是一套精密到令人头皮发麻的数字结构——「差八日」「少一难」这两处刻意的缺憾，才是整部《西游记》最深的用心。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/八十一难结构学专题.md">八十一难结构学专题</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">06</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-时间哲学.md">山中方七日，世上几千年：《西游记》里藏着四种时间，每一种都是权力</a></h3><span class="cc-tag">哲学</span></div>
+                        <p class="cc-desc">孙悟空被压了五百年，唐僧走了十四年，文殊的坐骑下凡才七天——而这几千年、五百年的落差背后，藏着一套精妙到令人脊背发凉的时间哲学。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/时间哲学专题.md">时间哲学专题</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">07</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-小妖生命史.md">三万个没有名字的妖怪：《西游记》里最被忽略的悲剧</a></h3><span class="cc-tag">底层</span></div>
+                        <p class="cc-desc">「一棒打死众妖散去」——这八个字里，藏着三万个没有名字的生命。他们被派去送死、被编进流水线、被内化出「必须有主人」的信仰，却从始至终没有一句临终之言被记录。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/小妖生命史专题.md">小妖生命史专题</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">08</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-大闹天宫英雄还是悲剧.md">大闹天宫，到底是英雄的史诗，还是个人的悲剧？</a></h3><span class="cc-tag">情节</span></div>
+                        <p class="cc-desc">孙悟空闹天宫，不是因为贪吃蟠桃，而是因为蟠桃会的名单上没有他——一场轰轰烈烈的造反，导火索只是一句「不曾听得说」。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/大闹天宫-英雄还是悲剧.md">大闹天宫-英雄还是悲剧</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">09</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-紧箍儿咒四百年回响.md">《西游记》最痛的意象：紧箍咒戴了四百年，为什么每个时代都读出了自己</a></h3><span class="cc-tag">意象</span></div>
+                        <p class="cc-desc">紧箍咒不是惩罚工具，而是一面镜子——明代人读出了修心，清代人读出了天命，二十世纪读出了枷锁，而我们这代人，读出了自己头上那个摘不掉的金箍。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/紧箍儿咒-四百年回响.md">紧箍儿咒-四百年回响</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">10</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-筋斗云与高铁速度焦虑.md">一个筋斗十万八千里，为什么孙悟空必须一步步走到西天？</a></h3><span class="cc-tag">现代</span></div>
+                        <p class="cc-desc">我们的工具在拼命缩短时间，我们的感受却在拼命失去时间——孙悟空的筋斗云悖论，就是我们这代人的高铁焦虑。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/筋斗云与高铁-速度焦虑.md">筋斗云与高铁-速度焦虑</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">11</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-蟠桃园体制内的秘密.md">让猴子管桃园：天庭最失败的岗位安排，藏着每个职场人的秘密</a></h3><span class="cc-tag">职场</span></div>
+                        <p class="cc-desc">悟空不是输给了玉帝，是输给了七仙女那句「不曾听得说」——蟠桃园里的三道门，我们每个人今天都还站在里面。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/蟠桃园-体制内的秘密.md">蟠桃园-体制内的秘密</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">12</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-真假美猴王二心之战.md">真假美猴王：那一棒打死的，其实是孙悟空自己</a></h3><span class="cc-tag">情节</span></div>
+                        <p class="cc-desc">如来没有说谁是真是假，因为两个都是真的——我们每个人的成长，都亲手打死过自己的「齐天大圣」。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/真假美猴王-二心之战.md">真假美猴王-二心之战</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">13</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-唐僧凡躯圣心.md">被骂了四百年「软弱」的唐僧，才是《西游记》里最勇敢的人</a></h3><span class="cc-tag">人物</span></div>
+                        <p class="cc-desc">他手无缚鸡之力，连一只老虎都打不过，怕了十四年，却一步都没停——整支取经团队里，只有唐僧是「替所有人害怕」的那一个。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/唐僧-凡躯圣心.md">唐僧-凡躯圣心</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">14</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-猪八戒不愿承认的自己.md">我们都不是孙悟空，我们都是猪八戒</a></h3><span class="cc-tag">人物</span></div>
+                        <p class="cc-desc">孙悟空是我们想成为的人，唐僧是我们知道应该成为的人，而猪八戒——是我们实际上最接近的人。贪吃、懒惰、好色、爱财、胆小、抱怨，却被硬塞进取经队伍，磕磕绊绊地走到了西天。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/猪八戒-不愿承认的自己.md">猪八戒-不愿承认的自己</a></p>
+                    </article>
+                    <article class="curated-card">
+                        <div class="cc-top"><span class="cc-num">15</span><h3><a href="https://github.com/1273984347/xiyouji/blob/main/docs/S2-外部分享/S2-发布-人参果人与欲望的关系.md">一颗长得像婴儿的果子，为什么让唐僧发抖、八戒吞枣、悟空毁树？</a></h3><span class="cc-tag">欲望</span></div>
+                        <p class="cc-desc">一万年才结三十个果子，闻一闻活三百六十岁，吃一个活四万七千年——面对同样的诱惑，回避、贪婪、越界、工具化，四种人生态度在五庄观里撞了个满怀。</p>
+                        <p class="cc-src">源：<a href="https://github.com/1273984347/xiyouji/blob/main/docs/03-主题与情节专题/人参果-人与欲望的关系.md">人参果-人与欲望的关系</a></p>
+                    </article>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-head">
+                    <p class="kicker">HOW TO USE</p>
+                    <h2>这些发布版怎么用</h2>
+                </div>
+                <p class="section-note">
+                    每篇发布版均为<strong>独立成文</strong>：标题为公众号风格、引言一句话抛核心洞察、正文分节带原著 <code>line</code> 号锚点（可回到原著复核）、结尾含互动提问与话题标签，可直接用于公众号 / 知乎 / 小红书等平台分享。
+                    全文发布版存放于仓库 <code>docs/S2-外部分享/</code>（43 篇），源解读在 <code>docs/06-个人随笔/</code> 与 <code>docs/03-主题与情节专题/</code>。
+                    若需用于商业用途，请注意文本内容采用 <a href="https://github.com/1273984347/xiyouji/blob/main/LICENSE-CONTENT.md" style="color:var(--accent-2);">CC BY-NC 4.0</a>（署名-非商业性使用）。
+                </p>
+            </div>
+
+            <div class="guide-cta" style="margin: clamp(24px,4vw,40px) 0; display:flex; flex-wrap:wrap; gap:14px;">
+                <a class="primary" href="index.html" style="font-family:var(--font-serif);font-size:15px;font-weight:600;padding:12px 24px;border-radius:6px;text-decoration:none;background:var(--accent);color:#fff;">← 返回首页</a>
+                <a class="ghost" href="guide.html" style="font-family:var(--font-serif);font-size:15px;font-weight:600;padding:12px 24px;border-radius:6px;text-decoration:none;border:1px solid var(--line);color:var(--ink);">读全站导读 →</a>
+                <a class="ghost" href="dashboard.html" style="font-family:var(--font-serif);font-size:15px;font-weight:600;padding:12px 24px;border-radius:6px;text-decoration:none;border:1px solid var(--line);color:var(--ink);">去看数据看板 →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">2026 · MIT License（代码）· CC BY-NC 4.0（文本）· 持续更新中</div>
+        </div>
+        <nav aria-label="页脚导航">
+            <a href="index.html">首页</a>
+            <a href="guide.html">导读</a>
+            <a href="dashboard.html">数据看板</a>
+            <a href="curated.html">精选发布</a>
+            <a href="en/guide.html">English</a>
+        </nav>
+    </footer>
+</body>
+</html>
