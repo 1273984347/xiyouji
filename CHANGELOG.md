@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W400），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W401），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
@@ -32,7 +32,7 @@
 ### v2.3.18（2026-08-08）：W401 CI 补齐 pytest 单元测试 + agent-web 前端构建 job（并行 session 遗留 workflow 审查处置）
 
 > **W401 CI 补齐（ci.yml 5→7 job + agent-web 源码入库）**
-> - **来源**：并行 session 创建 `build-test-deploy.yml`（untracked·W401 越界编号·部署段与 pages.yml 竞态·引用被 .gitignore 忽略的 agent-web 目录必然失败）——审查后保留该文件但**不启用**，将真实缺口（pytest 未入 CI + agent-web 构建未验证）合并进既有 ci.yml，避免第 7 个 workflow
+> - **来源**：并行 session 创建 `build-test-deploy.yml`（untracked·W401 越界编号·部署段与 pages.yml 竞态·引用被 .gitignore 忽略的 agent-web 目录必然失败）——审查后**弃用删除**（真实缺口已并入 ci.yml 后无增量价值），将真实缺口（pytest 未入 CI + agent-web 构建未验证）合并进既有 ci.yml，避免第 7 个 workflow
 > - **执行**：
 >   - **ci.yml 新增 pytest-unit job**：`pip install -r scripts/requirements.txt` → `python -m pytest tests/unit -q`（补 ci.yml 五 job 未覆盖的 Python 单元测试缺口）
 >   - **ci.yml 新增 agent-web-build job**：`npm --prefix xiyouji-agent-web ci` → `npm run build`（`tsc -b && vite build`·仓库唯一编译目标）·上传 dist artifact（30 天保留）
@@ -40,7 +40,8 @@
 >   - **workflows/README.md 同步**：ci.yml 5→7 job 说明·pytest/agent-web 阈值·artifact·本地复现命令·双索引 W401
 > - **验证**：YAML 语法校验通过（7 job）·本地 `pytest tests/unit` 112 passed·本地 `npm run build` vite 7906 modules 成功·git ls-files 确认无运行期产物混入·E1 Grep spot-check（server/*.js·chat.db·node_modules 0 tracked）
 > - **处置收尾**：build-test-deploy.yml **已删除**（真实缺口已并入 ci.yml，无增量价值）·pages.yml **已回退恢复 push 自动部署**（并行 session 曾将其改为仅 workflow_dispatch，会停掉已验证部署链路）·工作树干净
-> - **状态**：已落地·已 push（684617b）·CI 7 job 全绿（pytest-unit + agent-web-build 建置即绿）·build-test-deploy.yml 不启用
+> - **状态**：已落地·已 push（684617b）·CI 7 job 全绿（pytest-unit + agent-web-build 建置即绿）·build-test-deploy.yml 已删除
+> - **DRL 修复（2026-08-09 补跑）**：pytest-unit 由 `tests/unit` 扩为全量 `tests`（pytest.ini testpaths=tests + `--ignore=tests/e2e`，浏览器测试 test_narratology_render.py 移入 tests/e2e/，本地 321 passed）·移除 screenshots-regression/lighthouse-performance 两 job 无 pip 安装的 cache: pip 残留（同 W400 a11y 模式）·agent-web README Node 18+→20+ + package.json `engines.node>=20` 对齐 CI
 
 ### v2.3.17（2026-08-08）：W399 CI 触发修复 + SEO 域名补全 + rum-viewer 埋点查看页（并行 W390-W398 竞态清理后增量）
 

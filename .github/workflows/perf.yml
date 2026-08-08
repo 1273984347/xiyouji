@@ -40,8 +40,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: pip
-          cache-dependency-path: scripts/requirements.txt
+          # W401 修复：本 job 不安装 pip 依赖（仅 npm lhci），移除 cache: pip 避免 Post 步骤缓存目录缺失报错（同 W400 a11y-audit 修复）
 
       - name: Install Lighthouse CI
         run: npm install -g @lhci/cli@0.13.x

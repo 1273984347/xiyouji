@@ -60,5 +60,5 @@ npm run dev
 
 ## 环境要求
 
-- Node.js 18+
+- Node.js 20+（与 CI 构建环境对齐）
 - CodeBuddy API Key（https://www.codebuddy.cn）
