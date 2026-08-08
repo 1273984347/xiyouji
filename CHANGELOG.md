@@ -29,6 +29,16 @@
 > - **验证**：python scripts/verify_delivery.py 核心全部通过（辅助 WARN 不阻断）；实跑 bump_version.py 幂等补齐辅助 4 份；范围漂移 + A4 计数仍硬校验
 > - **状态**：已落地·降级六文档同步（E3 铁律收缩为 核心 2 硬门禁 + 辅助 4 WARN）
 
+> **W394 英文站 batch1：导读页 + 渡口引擎英文化（全量对等·分批）**
+> - **来源**：用户确认第一性原理清单 #5「英文站二选一」选 A 全量对等 + 同意分批；路线按主题对等（避免严格 1:1 重复造页）
+> - **执行**：
+>   - **新建 site/en/guide.html**：导读页英文版（7 类读者阅读路径 + 术语表 + 版本/引用说明），内联 CSS（复用 en 站 tokens+system 内联约定），rum 引用 `../js/rum.js`，双向导航（EN 入口 ↔ 中文 guide.html）
+>   - **新建 site/en/dukou-engine.html**：渡口写作引擎英文版，保全全部内联 JS 逻辑（力导向图谱/?q= 离线生成/RAG 桥接），仅译 UI 文本 + 生成内容常量（SENSORY/ROLE/LINE/TURN/CLOSE/RANDOMS）+ JS 注释，零 CJK 残留；返回链接指向 en/index.html
+>   - **en/index.html**：导航卡网格新增 Reading Guide + Ferry Crossing 两张卡，notice 说明英文站现含导读与写作引擎
+>   - **双向导航**：中文 guide.html 顶部/页脚 EN → en/guide.html；中文 dukou-engine.html 头部加「EN / 英文 →」链接 en/dukou-engine.html
+> - **验证**：node --check 通过（en/dukou-engine.html 内联 JS 语法 OK）；Python 装配脚本精确串替换（断言每个旧串存在）共 47 处；en/guide.html 标签平衡（7 卡片/34 链接/表格全闭合）；en/dukou-engine.html 全文件零 CJK 残留；inject_rum.py 幂等注入 145 页；全部站内链接指向真实文件
+> - **状态**：已落地·英文站 batch1（导览双页）上线；batch2（剩余 ~40 个 data 可视化/专题页英译）待用户验收后继续
+
 ### v2.3.16（2026-08-07）：W388 文档同步审查修复 + 存储优化（交接文档阻塞段过期修正·项目说明版本残留修复·.gitignore 排除 59MB 大文件）
 
 > **W388 文档审查整理**

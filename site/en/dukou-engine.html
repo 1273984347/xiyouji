@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferry Crossing · Journey to the West — Self-less Writing Engine (prototype)</title>
+<style>
+  :root{
+    --paper:#faf7f2; --ink:#2b2118; --cinnabar:#c8463a; --indigo:#3a6b8c;
+    --umber:#C9A063; --moss:#6B8E5A; --line:#d9cfc0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:"Noto Serif SC","Songti SC",serif;
+    background:var(--paper); color:var(--ink); line-height:1.8;
+  }
+  header{
+    padding:32px 24px 16px; border-bottom:2px solid var(--line);
+    background:linear-gradient(180deg,#f3ece0,#faf7f2);
+  }
+  header h1{margin:0; font-size:26px; color:var(--cinnabar); letter-spacing:2px;}
+  header p{margin:6px 0 0; color:var(--umber); font-size:13px;}
+  main{max-width:760px; margin:0 auto; padding:24px;}
+  .panel{
+    border:1px solid var(--line); border-radius:10px; padding:18px;
+    background:#fffdf9; margin-bottom:20px;
+  }
+  label{display:block; font-size:13px; color:var(--indigo); margin-bottom:8px;}
+  input[type=text]{
+    width:100%; padding:10px 12px; font-size:15px; font-family:inherit;
+    border:1px solid var(--line); border-radius:6px; background:#fff;
+  }
+  .row{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;}
+  button{
+    font-family:inherit; font-size:14px; padding:9px 18px; cursor:pointer;
+    border:1px solid var(--cinnabar); border-radius:6px; color:#fff;
+    background:var(--cinnabar); transition:.15s;
+  }
+  button.ghost{background:#fff; color:var(--indigo); border-color:var(--indigo);}
+  button:hover{opacity:.88;}
+  #out{
+    white-space:pre-wrap; font-size:15px; color:var(--ink);
+    border-left:4px solid var(--moss); padding:4px 0 4px 16px; min-height:120px;
+  }
+  .meta{font-size:12px; color:var(--umber); margin-top:10px;}
+  footer{
+    text-align:center; padding:20px; color:var(--umber); font-size:12px;
+    border-top:1px solid var(--line);
+  }
+  code{background:#f0e9dc; padding:1px 5px; border-radius:4px;}
+  #graphBox svg{background:#fffdf9; border-radius:6px;}
+  #graphBox text{font-family:"Noto Serif SC","Songti SC",serif;}
+  #graphBox .gnode{cursor:pointer; user-select:none;}
+  #graphBox .gnode:hover{opacity:.72;}
+  #graphBox .gnode.fx{font-weight:700;}
+</style>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../system.css">
+<!-- W334-RESKIN -->
+  <script defer src="../js/rum.js"></script>
+</head>
+<body>
+<header>
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+    <div>
+      <h1>Ferry Crossing &middot; Journey to the West</h1>
+      <p>Self-less writing engine (prototype) — enter any passer-by / object / place name to generate a ~300-character &ldquo;ferry dossier&rdquo; draft</p>
+    </div>
+    <a href="index.html" style="font-size:13px;color:var(--indigo);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:8px 14px;white-space:nowrap;margin-top:4px;">&larr; Back to English home</a>
+  </div>
+</header>
+<main>
+  <div class="panel">
+    <label for="q">Ferry entry (passer-by / object / place)</label>
+    <input id="q" type="text" placeholder="e.g. the cowherd below the Five-Element Mountain, the crack in the Sutra-Drying Stone, the scripture-drying rock at Chen Village…" />
+    <div class="row">
+      <button id="gen">Generate ferry dossier</button>
+      <button id="rand" class="ghost">Random ferry</button>
+      <button id="rag" class="ghost">Search real corpus</button>
+    </div>
+    <div class="meta" id="hint">By default a template engine (no external model called). If the local RAG service is running (<code>python scripts/rag/rag_server.py</code>), clicking &ldquo;Search real corpus&rdquo; returns real retrieval over 672 docs + the W326 graph (with a visualized relation graph); if not running, it automatically falls back to the template engine.</div>
+  </div>
+
+  <div class="panel">
+    <label>Ferry dossier (draft)</label>
+    <div id="out">&mdash; Type above, or click &ldquo;Random ferry&rdquo; &mdash;</div>
+  </div>
+
+  <div class="panel" id="graphPanel" style="display:none;">
+    <label>Buddhism = AI graph (W326 &middot; visualization &middot; from /graph)</label>
+    <div class="row" style="margin:6px 0 10px;">
+      <span class="meta" style="margin:0;">Click any node to expand its connections ·</span>
+      <button id="graphReset" class="ghost" style="font-size:12px;padding:2px 12px;">Reset graph</button>
+    </div>
+    <div id="graphBox"></div>
+  </div>
+</main>
+<footer>Buddhism = AI &middot; conditionality is the algorithm &middot; v2.3.17 W393 engineering wrap-up: deploy GitHub Pages + RUM metrics (W390) &middot; homepage &ldquo;Ask the Ferry&rdquo; box + offline-capable ferry engine (W391) &middot; site reading-guide layer guide.html + fix homepage dead links (W392) &middot; downgrade six-doc sync to 2-core + 4-aux auto &middot; bump_version.py (W393)</footer>
+
+<script>
+// ---- Ferry knowledge base (extracted from the project’s “Xiyoudu · flip-side” methodology) ----
+const SENSORY = [
+  "Fourteen layers of tongue-fur still carry the salt of a former life",
+  "The thermal oxide on the rake's shaft is the only growth ring this hand left",
+  "The scales no longer itch, but the fracture remains",
+  "Wind bent around the ravine, carrying the smell of rust and mugwort",
+  "Stalactites release compressed sword-sonic waves, rippling like tree rings",
+  "The lotus root's cut face weeps a faint, sweet greenness"
+];
+const ROLE = [
+  "He is not the protagonist; he is the latent variable that lets the protagonist pass",
+  "She never appears in a chapter title, yet breathes in every ordeal",
+  "It is a parameter defaulted to zero, but which is in fact not zero",
+  "They are the samples the model deleted directly from the training set"
+];
+const LINE = [
+  "(see W321 line 7012 Lingyun Ford: shedding the body is Dropout)",
+  "(see W323 Xiyoudu primal definition: the ferry person = latent variable)",
+  "(see W324 Annals of the Forgotten: dark data is the prior distribution)",
+  "(see W321 line 1393 Golden Hoop: the regularization term goes to zero after convergence)"
+];
+const TURN = [
+  "Turn it over: what was recorded as background is in fact the premise",
+  "Body-writing: the residual is never formatted; it is the only honest memory",
+  "Ferry viewpoint: beyond the loss, there are those counted into the denominator",
+  "Self-less writing: this is no one's biography, only a sojourn of data as it flows through this place"
+];
+const CLOSE = [
+  "He does not care about being remembered. He only let the pilgrimage road come true, once.",
+  "The scriptures got wet, the characters faded, but the stone remembered that stroke for him.",
+  "Years later, someone passing by smells the old-year scorched scent in the wind — that was him.",
+  "After the model converges, he remains a tiny drift."
+];
+
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+
+function generate(raw){
+  const name = (raw||"").trim() || "the nameless";
+  const s = pick(SENSORY), r = pick(ROLE), l = pick(LINE),
+        t = pick(TURN), c = pick(CLOSE);
+  const body =
+`[FERRY DOSSIER] ${name}
+
+${name}, ${r}.
+
+In the training log of the pilgrimage project, the mainstream narrative records only nodes that took part in forward propagation — demons, gods, master and disciples. Yet ${name} belongs to another class: an overlooked latent variable. Without him, the main characters' paths would not hold; it is simply that no one wrote his weight into the text.
+
+${s}. This is the residual left by body-writing — still faintly vibrating after training ends, because it lingered there long enough.
+
+${t}. ${l}.
+
+${c}`;
+  return body;
+}
+
+const RANDOMS = ["the cowherd below the Five-Element Mountain","the crack in the Sutra-Drying Stone","the scripture-drying rock at Chen Village","the nine skulls at the bottom of the Flowing-Sand River","the post nailed to the door","the weeping-red eyes on the Tongtian River bank","the seventh household on the north slope of Flame Mountain","a door in the empty city of Lion-Camel Ridge","the needle that is the weight of the Golden Cudgel","the earth a peach-wood staff was thrust into"];
+
+document.getElementById('gen').onclick = ()=>{
+  const v = document.getElementById('q').value;
+  document.getElementById('out').textContent = generate(v);
+};
+document.getElementById('rand').onclick = ()=>{
+  const v = RANDOMS[Math.floor(Math.random()*RANDOMS.length)];
+  document.getElementById('q').value = v;
+  document.getElementById('out').textContent = generate(v);
+};
+
+// ---- RAG bridge: calls local scripts/rag/rag_server.py; falls back to template engine on failure ----
+let graphState = { triples: [], seen: new Set(), seed: new Map() };
+let graphRootQuery = null;
+const nodePos = new Map();   // label -> {x,y}, cache across redraws, eliminating click jumps
+let graphFocus = null;       // current focus node label
+async function queryRAG(){
+  const v = document.getElementById('q').value.trim();
+  const out = document.getElementById('out');
+  if(!v){ out.textContent = 'Please enter a ferry entry (passer-by / object / place) first.'; return; }
+  out.textContent = 'Searching… (local RAG service http://127.0.0.1:8777)';
+  try{
+    const r = await fetch('http://127.0.0.1:8777/query?q=' + encodeURIComponent(v));
+    if(!r.ok) throw new Error('http '+r.status);
+    const data = await r.json();
+    renderRAG(v, data);
+  }catch(e){
+    document.getElementById('graphPanel').style.display='none';
+    out.textContent = generate(v) + '\n\n[Local RAG service not started; fell back to template engine. Start: python scripts/rag/rag_server.py]';
+  }
+}
+function renderRAG(name, data){
+  let s = '[Ferry retrieval dossier · RAG] ' + name + '\n\n';
+  if(data.snippets && data.snippets.length){
+    s += '— Corpus retrieval (BM25 · 672 docs) —\n';
+    data.snippets.forEach(x=>{
+      s += '· ' + x.path + '（score ' + x.score + '）\n';
+      if(x.excerpt) s += '  …' + x.excerpt.slice(0,90) + '…\n';
+    });
+  }
+  if(data.graph && data.graph.length){
+    s += '\n— Buddhism = AI graph (W326 · LightRAG graph layer) —\n';
+    data.graph.slice(0,4).forEach(t=>{
+      s += '· ' + t.from + ' —' + t.relation + '→ ' + t.to + '\n';
+    });
+  }
+  if(data.draft) s += '\n' + data.draft;
+  document.getElementById('out').textContent = s;
+  graphState = { triples: [], seen: new Set(), seed: new Map() };
+  graphRootQuery = name;
+  nodePos.clear(); graphFocus = null;
+  mergeTriples(data.graph || []);
+  renderGraph();
+}
+
+// ---- Graph visualization: pure-SVG simplified force-directed, zero deps (no D3 / CDN, works under file://) ----
+function shortLabel(s){
+  if(!s) return '?';
+  let x = s;
+  const i = x.indexOf('（'); if(i>0) x = x.slice(0,i);
+  const j = x.indexOf('/'); if(j>0) x = x.slice(0,j);
+  x = x.trim().replace(/^["'「『]/,'').replace(/["'」』]$/,'');
+  return x || s.slice(0,10);
+}
+function xmlEsc(s){ return (s||'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function mergeTriples(triples, parent){
+  (triples||[]).forEach(t=>{
+    const a = shortLabel(t.from), b = shortLabel(t.to);
+    if(!a || !b) return;
+    const key = a + ' ' + t.relation + ' ' + b;
+    if(graphState.seen.has(key)) return;
+    graphState.seen.add(key);
+    graphState.triples.push({a,b,rel:t.relation});
+    if(parent && parent!==a) graphState.seed.set(a, parent);
+    if(parent && parent!==b) graphState.seed.set(b, parent);
+  });
+}
+// Force-directed layout: cache node positions across redraws (nodePos); new nodes grow from parent, eliminating click jumps
+function layoutGraph(ids){
+  const W=760, H=420, cx=W/2, cy=H/2;
+  // 1) Initialize not-yet-placed nodes
+  let k=0;
+  ids.forEach(id=>{
+    if(nodePos.has(id)) return;
+    const p = graphState.seed.get(id);
+    if(p && nodePos.has(p)){
+      const ang = Math.random()*Math.PI*2;
+      nodePos.set(id, { x: nodePos.get(p).x + Math.cos(ang)*55, y: nodePos.get(p).y + Math.sin(ang)*55 });
+    }else{
+      const idx = nodePos.size + (k++);
+      const a = (Math.PI*2*idx)/Math.max(ids.length,1) - Math.PI/2;
+      const R = Math.min(W,H)/2 - 60;
+      nodePos.set(id, { x: cx + R*Math.cos(a), y: cy + R*Math.sin(a) });
+    }
+  });
+  // 2) Force-directed relaxation: repulsion + edge springs + center attraction + anchoring (keep old nodes stable, eliminate click jumps)
+  const anchor = new Map();
+  ids.forEach(id=>{ const p=nodePos.get(id); anchor.set(id,{x:p.x,y:p.y}); });
+  const iters = ids.length > 60 ? 90 : 160;
+  const ideal = 132;
+  for(let it=0; it<iters; it++){
+    const fx=new Map(), fy=new Map();
+    ids.forEach(id=>{ fx.set(id,0); fy.set(id,0); });
+    for(let i=0;i<ids.length;i++){
+      for(let j=i+1;j<ids.length;j++){
+        const a=nodePos.get(ids[i]), b=nodePos.get(ids[j]);
+        let dx=a.x-b.x, dy=a.y-b.y, d2=dx*dx+dy*dy; if(d2<1) d2=1;
+        const d=Math.sqrt(d2), rep=5200/d2, ux=dx/d, uy=dy/d;
+        fx.set(ids[i], fx.get(ids[i])+rep*ux); fy.set(ids[i], fy.get(ids[i])+rep*uy);
+        fx.set(ids[j], fx.get(ids[j])-rep*ux); fy.set(ids[j], fy.get(ids[j])-rep*uy);
+      }
+    }
+    graphState.triples.forEach(t=>{
+      const a=nodePos.get(t.a), b=nodePos.get(t.b); if(!a||!b) return;
+      let dx=b.x-a.x, dy=b.y-a.y, d=Math.sqrt(dx*dx+dy*dy)||1;
+      const f=(d-ideal)*0.06, ux=dx/d, uy=dy/d;
+      fx.set(t.a, fx.get(t.a)+f*ux); fy.set(t.a, fy.get(t.a)+f*uy);
+      fx.set(t.b, fx.get(t.b)-f*ux); fy.set(t.b, fy.get(t.b)-f*uy);
+    });
+    const cool = 1 - it/iters;
+    ids.forEach(id=>{
+      const p=nodePos.get(id), an=anchor.get(id);
+      fx.set(id, fx.get(id) + (cx-p.x)*0.012 + (an.x-p.x)*0.07);
+      fy.set(id, fy.get(id) + (cy-p.y)*0.012 + (an.y-p.y)*0.07);
+      p.x += Math.max(-16, Math.min(16, fx.get(id)*cool));
+      p.y += Math.max(-16, Math.min(16, fy.get(id)*cool));
+      p.x = Math.max(26, Math.min(W-26, p.x));
+      p.y = Math.max(26, Math.min(H-26, p.y));
+    });
+  }
+  return {W,H};
+}
+function renderGraph(){
+  const box = document.getElementById('graphBox');
+  const panel = document.getElementById('graphPanel');
+  const triples = graphState.triples;
+  if(!triples.length){ panel.style.display='none'; box.innerHTML=''; return; }
+  const deg = new Map();
+  triples.forEach(t=>{
+    deg.set(t.a,(deg.get(t.a)||0)+1); deg.set(t.b,(deg.get(t.b)||0)+1);
+  });
+  const ids=[...deg.keys()];
+  const {W,H} = layoutGraph(ids);
+  const maxDeg=Math.max(...ids.map(id=>deg.get(id)));
+  const minDeg=Math.min(...ids.map(id=>deg.get(id)));
+  const radiusOf = id=>{
+    const d=deg.get(id);
+    if(maxDeg===minDeg) return 7;
+    return 5 + (d-minDeg)/(maxDeg-minDeg)*9;   // map by degree, 5..14
+  };
+  const focusNbr = new Set();
+  if(graphFocus){ triples.forEach(t=>{ if(t.a===graphFocus) focusNbr.add(t.b); if(t.b===graphFocus) focusNbr.add(t.a); }); }
+  let svg=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:${W}px;">`;
+  svg+=`<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9c6b3f"/></marker></defs>`;
+  triples.forEach(e=>{
+    const p1=nodePos.get(e.a), p2=nodePos.get(e.b); if(!p1||!p2) return;
+    const ra=radiusOf(e.a), rb=radiusOf(e.b);
+    const dx=p2.x-p1.x, dy=p2.y-p1.y, d=Math.sqrt(dx*dx+dy*dy)||1;
+    const ux=dx/d, uy=dy/d;
+    const x1=p1.x+ux*ra, y1=p1.y+uy*ra, x2=p2.x-ux*(rb+5), y2=p2.y-uy*(rb+5);
+    const mx=(x1+x2)/2, my=(y1+y2)/2;
+    const isFocus = graphFocus && (e.a===graphFocus||e.b===graphFocus);
+    svg+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${isFocus?'#c8463a':'#bb8a5f'}" stroke-width="${isFocus?3:1.5}" opacity="${isFocus?0.95:0.6}" marker-end="url(#arr)"/>`;
+    svg+=`<text x="${mx.toFixed(1)}" y="${(my-4).toFixed(1)}" fill="#C9A063" font-size="11" text-anchor="middle">${xmlEsc(e.rel)}</text>`;
+  });
+  ids.forEach(id=>{
+    const p=nodePos.get(id); if(!p) return;
+    const r=radiusOf(id);
+    const isHub=(deg.get(id)===maxDeg&&maxDeg>1);
+    const isFocus=(id===graphFocus);
+    const isNbr=(graphFocus && focusNbr.has(id));
+    const fill=isFocus?'#d4a017':(isHub?'#c8463a':'#3a6b8c');
+    const stroke=isFocus?'#8a5a00':(isNbr?'#d4a017':'#fff');
+    const sw=isFocus?3:(isNbr?2:1.5);
+    const lab=id.length>9?id.slice(0,9)+'…':id;
+    svg+=`<circle class="gnode${isFocus?' fx':''}" data-label="${xmlEsc(id)}" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${r.toFixed(1)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
+    svg+=`<text class="gnode" data-label="${xmlEsc(id)}" x="${p.x.toFixed(1)}" y="${(p.y-r-5).toFixed(1)}" fill="#2b2118" font-size="12" text-anchor="middle">${xmlEsc(lab)}</text>`;
+  });
+  svg+='</svg>';
+  box.innerHTML=svg; panel.style.display='block';
+  box.querySelectorAll('.gnode').forEach(el=>{
+    el.addEventListener('click', ()=>{ const lbl=el.getAttribute('data-label'); graphFocus=lbl; renderGraph(); expandNode(lbl); });
+  });
+}
+async function expandNode(label){
+  if(!label) return;
+  try{
+    const r = await fetch('http://127.0.0.1:8777/graph?q=' + encodeURIComponent(label));
+    if(!r.ok) return;
+    const data = await r.json();
+    if(data.graph && data.graph.length){
+      mergeTriples(data.graph, label);
+      renderGraph();
+    }
+  }catch(e){ /* ignore click if service not started */ }
+}
+async function resetGraph(){
+  if(!graphRootQuery) return;
+  graphState = { triples: [], seen: new Set(), seed: new Map() };
+  nodePos.clear(); graphFocus = null;
+  try{
+    const r = await fetch('http://127.0.0.1:8777/graph?q=' + encodeURIComponent(graphRootQuery));
+    const data = await r.json();
+    mergeTriples(data.graph || []);
+    renderGraph();
+  }catch(e){}
+}
+document.getElementById('rag').onclick = queryRAG;
+document.getElementById('graphReset').onclick = resetGraph;
+
+// ---- Home ?q= direct: offline template engine generates instantly (no local RAG backend needed) ----
+(function () {
+  try {
+    var p = new URLSearchParams(location.search);
+    var q = (p.get('q') || '').trim();
+    if (q) {
+      document.getElementById('q').value = q;
+      document.getElementById('out').textContent = generate(q);
+      if (p.get('from') === 'home') {
+        var hint = document.getElementById('hint');
+        if (hint) {
+          hint.insertAdjacentText('afterbegin',
+            '[From homepage question · draft generated by offline template engine; click “Search real corpus” to call local RAG for real retrieval over 672 docs] ');
+        }
+      }
+    }
+  } catch (e) { /* silently ignore if URLSearchParams unsupported */ }
+})();
+</script>
+</body>
+</html>
