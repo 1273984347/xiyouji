@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Eighty-One Hardships · In-Depth Statistics — Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="../static/js/d3-sankey.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: swap;
+    src: url('static/fonts/NotoSerifSC-VF.woff2') format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式 === */
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 24px; align-items: start;
+        }
+        .chart-block { text-align: center; }
+        .legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; margin-top: 12px; font-size: 12px; }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
+        .insight-box {
+            background: var(--paper-warm); border-left: 3px solid var(--accent);
+            padding: 20px 24px; border-radius: 2px; margin-top: 16px;
+        }
+        .insight-box ul { list-style: none; }
+        .insight-box li { padding: 6px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong { color: var(--accent); }
+        .cross-table th, .cross-table td { border: 1px solid var(--line); padding: 8px 12px; text-align: center; white-space: nowrap; }
+        .cross-table th { background: var(--paper-warm); color: var(--accent-3); font-weight: 600; }
+        .cross-table td:first-child { background: var(--bg); font-weight: 500; text-align: left; white-space: normal; }
+        .cross-table .highlight { background: rgba(200, 70, 58, 0.08); color: var(--accent); font-weight: 600; }
+        .cross-table .zero { color: var(--ink-faint); opacity: 0.5; }
+        #sankey { width: 100%; height: 420px; display: block; }
+        .sankey-node rect { fill-opacity: 0.9; stroke: #fff; stroke-width: 1; }
+        .sankey-node text { font-size: 12px; fill: var(--ink); font-family: var(--font-serif); }
+        .sankey-link { fill: none; stroke-opacity: 0.4; transition: stroke-opacity 0.2s; }
+        .sankey-link:hover { stroke-opacity: 0.7; }
+        .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-bottom: 14px; font-size: 14px; }
+        .filter-row label { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-soft); }
+        .filter-row select { padding: 6px 10px; border: 1px solid var(--line); border-radius: 2px; background: var(--paper); color: var(--ink); font-size: 13px; cursor: pointer; }
+        .filter-row select:focus { outline: none; border-color: var(--accent); }
+        .filter-row button { padding: 6px 14px; border: 1px solid var(--line); border-radius: 2px; background: var(--paper); color: var(--ink-soft); font-size: 13px; cursor: pointer; transition: all 0.15s; }
+        .filter-row button:hover { border-color: var(--accent); color: var(--accent); }
+        .filter-count { color: var(--accent-2); font-size: 13px; margin-left: auto; font-family: var(--font-mono); }
+        .table-wrap { max-height: 600px; overflow-y: auto; }
+        .table-wrap::-webkit-scrollbar { width: 6px; height: 6px; }
+        .table-wrap::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+        .notice { background: var(--paper-warm); border-radius: 2px; padding: 10px 14px; font-size: 12px; color: var(--accent-3); margin-bottom: 20px; }
+        .notice code { font-family: var(--font-mono); font-size: 11px; }
+        /* section 容器（复用 chart-block 视觉） */
+        .section { background: var(--paper); border: 1px solid var(--line); border-radius: 3px; padding: clamp(20px, 3vw, 28px); margin-bottom: 24px; }
+        .section-title { font-family: var(--font-serif); font-size: 20px; font-weight: 600; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 2px solid var(--accent); display: inline-block; }
+        .section-sub { font-size: 13px; color: var(--ink-soft); margin-bottom: 20px; }
+        /* 完整清单表格 */
+        #hardship-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        #hardship-table thead th { background: var(--dark); color: var(--dark-text); padding: 10px 12px; text-align: left; position: sticky; top: 0; z-index: 1; font-weight: 500; font-size: 12px; letter-spacing: 0.04em; }
+        #hardship-table tbody tr { border-bottom: 1px solid var(--line); }
+        #hardship-table tbody tr:nth-child(even) { background: var(--bg); }
+        #hardship-table tbody tr:hover { background: rgba(200, 70, 58, 0.04); }
+        #hardship-table td { padding: 8px 12px; vertical-align: top; }
+        #hardship-table td.num { font-family: var(--font-mono); color: var(--accent-3); width: 50px; text-align: center; }
+        #hardship-table td.chapter { font-family: var(--font-mono); color: var(--ink-soft); width: 80px; text-align: center; }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 2px; font-size: 11px; font-weight: 500; color: #fff; white-space: nowrap; }
+        .empty-row { padding: 32px; text-align: center; color: var(--ink-soft); font-style: italic; }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html">
+            <span class="seal">JTTW<br>Notes</span>
+            <span class="wordmark">Annotated Journey to the West</span>
+        </a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/81-hardships.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · <a href="visualizations.html">Visualizations</a> · Eighty-One Hardships</p>
+        <p class="kicker">C · Plot</p>
+        <h1>Eighty-One Hardships: In-Depth Statistics</h1>
+        <p class="subtitle">EIGHTY-ONE HARDSHIPS · Cause × Ending × Difficulty — A Multi-Dimensional View</p>
+    </section>
+
+    <main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice" id="dataSource">
+            Data source: embedded build. (To load the latest data, from the <code>site/</code> directory run <code>py -m http.server 8000</code>)
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-grid">
+            <div class="kpi">
+                <div class="kpi-value">81</div>
+                <div class="kpi-label">The Eighty-One Trials</div>
+                <div class="kpi-desc">TOTAL</div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-value">4</div>
+                <div class="kpi-label">Tathāgata/Guanyin · Wild demons · Steeds · Inner demons</div>
+                <div class="kpi-desc">Cause categories</div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-value">49</div>
+                <div class="kpi-label">60.5% — "relations" dominate fate</div>
+                <div class="kpi-desc">Rescued</div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-value">39</div>
+                <div class="kpi-label">48.1% — Wukong is not omnipotent</div>
+                <div class="kpi-desc">Reinforcements called</div>
+            </div>
+        </div>
+
+        <!-- 三维分布 -->
+        <section class="section">
+            <h2 class="section-title">Three-Dimensional Distribution</h2>
+            <div class="section-sub">Statistics by three dimensions — cause, ending, difficulty. The central figure is the total.</div>
+
+            <div class="chart-row">
+                <div class="chart-block">
+                    <h3>By Cause</h3>
+                    <svg id="chart-cause" width="360" height="360"></svg>
+                    <div class="legend" id="legend-cause"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>By Ending</h3>
+                    <svg id="chart-ending" width="360" height="360"></svg>
+                    <div class="legend" id="legend-ending"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>By Difficulty</h3>
+                    <svg id="chart-difficulty" width="360" height="360"></svg>
+                    <div class="legend" id="legend-difficulty"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 交叉统计表 -->
+        <section class="section">
+            <h2 class="section-title">Cross-Tabulation: Cause × Ending</h2>
+            <div class="section-sub">Each row shows the distribution of the three endings under that cause. Note the "Heavenly / Western steeds incarnate" row — all 16 trials were rescued, 0 killed.<br><em>Note: this page counts "16 steed-incarnation trials" (trial-event unit) · monster-sociology counts "10 steed cases" (individual steed unit) · ecology counts "7 invasive species" (species-classification unit) · the three pages use different scopes</em></div>
+            <div class="table-wrap">
+                <table class="cross-table" id="cross-table">
+                    <thead>
+                        <tr>
+                            <th>Cause \ Ending</th>
+                            <th>Rescued (with backing)</th>
+                            <th>Killed (no backing)</th>
+                            <th>Subdued</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 桑基图 -->
+        <section class="section">
+            <h2 class="section-title">Sankey Diagram: Cause → Ending</h2>
+            <div class="section-sub">Flows from "Cause" (left) to "Ending" (right); band width equals the number of trials. Colors follow the cause categories.</div>
+            <svg id="sankey"></svg>
+        </section>
+
+        <!-- 八十一难完整清单 -->
+        <section class="section">
+            <h2 class="section-title">Complete List of the Eighty-One Hardships</h2>
+            <div class="section-sub">Use the filters below to combine cause / ending / difficulty.</div>
+            <div class="filter-row">
+                <label>Cause:
+                    <select id="filter-cause">
+                        <option value="">All</option>
+                    </select>
+                </label>
+                <label>Ending:
+                    <select id="filter-ending">
+                        <option value="">All</option>
+                    </select>
+                </label>
+                <label>Difficulty:
+                    <select id="filter-difficulty">
+                        <option value="">All</option>
+                    </select>
+                </label>
+                <button id="reset-filter" type="button">Reset</button>
+                <span class="filter-count" id="filter-count">Showing 0/0 trials</span>
+            </div>
+            <div class="table-wrap">
+                <table id="hardship-table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Name</th>
+                            <th>Chapter</th>
+                            <th>Cause</th>
+                            <th>Ending</th>
+                            <th>Difficulty</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hardship-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="insight-box">
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">Annotated Journey to the West</div>
+            <div class="footer-meta">v2.2.86 · W334 · <a href="../../docs/03-主题与情节专题/八十一难专题.md">Eighty-One Hardships (essay, 中文)</a></div>
+        </div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/81-hardships.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+    <script>
+
+function renderTreemap(opts){
+  var tipId=opts.tipId||'tooltip';
+  var svg=d3.select('#'+opts.svgId); svg.selectAll('*').remove();
+  var node=svg.node();
+  var W=(+svg.attr('width'))||(node.clientWidth||520);
+  var H=(+svg.attr('height'))||(node.clientHeight||420);
+  svg.attr('viewBox','0 0 '+W+' '+H);
+  var data=opts.data; if(!data||!data.length) return;
+  var total=d3.sum(data,opts.valueOf); if(!(total>0)) return;
+  var root=d3.hierarchy({children:data.map(function(d){return {d:d};})})
+    .sum(function(d){return (d&&d.d)?opts.valueOf(d.d):0;})
+    .sort(function(a,b){return b.value-a.value;});
+  d3.treemap().size([W,H]).paddingInner(2).round(true)(root);
+  var tip=d3.select('#'+tipId);
+  var g=svg.append('g');
+  var cell=g.selectAll('g.tm').data(root.leaves()).enter().append('g')
+    .attr('class','tm')
+    .attr('transform',function(d){return 'translate('+d.x0+','+d.y0+')';});
+  cell.append('rect')
+    .attr('width',function(d){return Math.max(0,d.x1-d.x0);})
+    .attr('height',function(d){return Math.max(0,d.y1-d.y0);})
+    .attr('fill',function(d){return opts.colorOf(d.data.d);})
+    .attr('stroke','#fff').attr('stroke-width',1)
+    .style('cursor','pointer')
+    .on('mouseover',function(ev,d){d3.select(this).attr('opacity',.85);tip.style('opacity',1).style('position','fixed').html(opts.htmlOf(d.data.d,total));})
+    .on('mousemove',function(ev){tip.style('left',(ev.clientX+14)+'px').style('top',(ev.clientY-10)+'px');})
+    .on('mouseout',function(){d3.select(this).attr('opacity',1);tip.style('opacity',0);});
+  cell.append('text').attr('x',6).attr('y',16).style('font-size','0.74rem').style('fill','#fff').style('pointer-events','none').style('font-weight','600')
+    .each(function(d){
+      var w=d.x1-d.x0,h=d.y1-d.y0,pct=opts.valueOf(d.data.d)/total*100;
+      if(w>60&&h>32){
+        var t=d3.select(this);
+        t.text(opts.nameOf(d.data.d));
+        t.append('tspan').attr('x',6).attr('dy','1.25em').style('font-weight','400').style('opacity',.85).text(pct.toFixed(1)+'%');
+      }
+    });
+  if(opts.legendId){
+    var lg=d3.select('#'+opts.legendId); lg.selectAll('*').remove();
+    data.slice().sort(function(a,b){return opts.valueOf(b)-opts.valueOf(a);}).forEach(function(d){
+      var pct=(opts.valueOf(d)/total*100).toFixed(1);
+      var row=lg.append('div').attr('class','tm-legend-item').style('display','flex').style('align-items','center').style('gap','6px').style('margin','3px 0').style('font-size','0.8rem');
+      row.append('span').style('width','12px').style('height','12px').style('border-radius','3px').style('background',opts.colorOf(d)).style('flex','0 0 auto');
+      row.append('span').text(opts.nameOf(d)+'  ·  '+opts.valueOf(d)+'  ·  '+pct+'%');
+    });
+  }
+}
+
+
+    // 嵌入式 fallback 数据（fetch 失败时使用）
+    const EMBEDDED_DATA = {
+        total: 81,
+        by_cause: {
+            "Tathāgata / Guanyin arranged": 27,
+            "True wild demons": 28,
+            "Heavenly / Western steeds incarnate": 16,
+            "Inner demonic obstacles": 10
+        },
+        by_ending: {
+            "Rescued (with backing)": 49,
+            "Killed (no backing)": 25,
+            "Subdued": 7
+        },
+        by_difficulty: {
+            "Wukong solved alone": 42,
+            "Needed reinforcements": 39
+        },
+        cross_cause_ending: {
+            "Tathāgata / Guanyin arranged": {"Rescued (with backing)": 23, "Killed (no backing)": 0, "Subdued": 4},
+            "True wild demons": {"Rescued (with backing)": 6, "Killed (no backing)": 19, "Subdued": 3},
+            "Heavenly / Western steeds incarnate": {"Rescued (with backing)": 16, "Killed (no backing)": 0, "Subdued": 0},
+            "Inner demonic obstacles": {"Rescued (with backing)": 4, "Killed (no backing)": 6, "Subdued": 0}
+        },
+        // 81 难完整清单：默认为空，由 ../scripts/output/data/hardships_81.json 提供
+        // 字段：n/name/chapter/cause/ending/difficulty
+        hardships: []
+    };
+
+    // 配色（与 dashboard.html 一致）
+    const CAUSE_COLORS = {
+        "Tathāgata / Guanyin arranged": "#c8463a",
+        "True wild demons": "#C9A063",
+        "Heavenly / Western steeds incarnate": "#3a6b8c",
+        "Inner demonic obstacles": "#6B8E5A"
+    };
+    const ENDING_COLORS = {
+        "Rescued (with backing)": "#e9b885",
+        "Killed (no backing)": "#c8463a",
+        "Subdued": "#6B8E5A"
+    };
+    const DIFFICULTY_COLORS = {
+        "Wukong solved alone": "#3a6b8c",
+        "Needed reinforcements": "#c8463a"
+    };
+
+    // 渲染饼图（比 dashboard 更大：360×360）
+    function renderPie(svgId, legendId, data, colorMap) {
+    const entries = Object.entries(data || {}).filter(kv => kv[1] > 0);
+    renderTreemap({
+        svgId: svgId, data: entries, legendId: legendId, tipId: 'tm-tooltip',
+        nameOf: d => d[0], valueOf: d => d[1], colorOf: d => (colorMap[d[0]] || '#999'),
+        htmlOf: (d, total) => `<strong>${d[0]}</strong><div class="row">Count: <strong style="color:#e9b885">${d[1]}</strong> trials (${((d[1]/total)*100).toFixed(1)}%）</div>`
+    });
+}
+
+    // 渲染交叉表
+    function renderCrossTable(crossData) {
+        const tbody = d3.select("#cross-table tbody");
+        tbody.selectAll("*").remove();
+        const rows = Object.entries(crossData);
+
+        rows.forEach(([cause, endings]) => {
+            const total = Object.values(endings).reduce((a, b) => a + b, 0);
+            const tr = tbody.append("tr");
+            tr.append("td").text(cause);
+            Object.entries(endings).forEach(([ending, count]) => {
+                const td = tr.append("td");
+                if (count === 0) {
+                    td.classed("zero", true).text("0");
+                } else if (count >= 15) {
+                    td.classed("highlight", true).text(count);
+                } else {
+                    td.text(count);
+                }
+            });
+            tr.append("td").style("font-weight", "600").text(total);
+        });
+    }
+
+    // 渲染桑基图（起因 → 结局）
+    function renderSankey(crossData) {
+        try {
+            if (typeof d3.sankey !== "function") {
+                console.warn("[renderSankey] d3.sankey 不可用，跳过桑基图渲染");
+                return;
+            }
+            const svg = d3.select("#sankey");
+            svg.selectAll("*").remove();
+
+            const containerEl = document.getElementById("sankey");
+            const width = Math.max(200, containerEl.clientWidth || 1100);
+            const height = 420;
+            svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+            const causes = Object.keys(crossData);
+            const endingsSet = new Set();
+            causes.forEach(c => Object.keys(crossData[c]).forEach(e => endingsSet.add(e)));
+            const endings = Array.from(endingsSet);
+
+            const nodes = [
+                ...causes.map(name => ({name, type: "cause"})),
+                ...endings.map(name => ({name, type: "ending"}))
+            ];
+            const links = [];
+            causes.forEach(c => {
+                Object.entries(crossData[c]).forEach(([e, count]) => {
+                    if (count > 0) {
+                        links.push({
+                            source: nodes.findIndex(n => n.name === c),
+                            target: nodes.findIndex(n => n.name === e),
+                            value: count,
+                            cause: c
+                        });
+                    }
+                });
+            });
+
+            const colorOf = (name, type) => {
+                if (type === "cause") return CAUSE_COLORS[name] || "#999";
+                return ENDING_COLORS[name] || "#999";
+            };
+
+            const sankeyLayout = d3.sankey()
+                .nodeWidth(18)
+                .nodePadding(30)
+                .extent([[10, 10], [width - 10, height - 10]]);
+
+            const graph = sankeyLayout({
+                nodes: nodes.map(d => Object.assign({}, d)),
+                links: links.map(d => Object.assign({}, d))
+            });
+
+        // 链接（流带）
+        svg.append("g")
+            .attr("fill", "none")
+            .selectAll("path")
+            .data(graph.links)
+            .enter()
+            .append("path")
+            .attr("class", "sankey-link")
+            .attr("d", d3.sankeyLinkHorizontal())
+            .attr("stroke", d => colorOf(d.cause, "cause"))
+            .attr("stroke-width", d => Math.max(1, d.width))
+            .append("title")
+            .text(d => `${d.source.name} → ${d.target.name}: ${d.value} trials`);
+
+        // 节点
+        const nodeG = svg.append("g")
+            .selectAll("g")
+            .data(graph.nodes)
+            .enter()
+            .append("g")
+            .attr("class", "sankey-node");
+
+        nodeG.append("rect")
+            .attr("x", d => d.x0)
+            .attr("y", d => d.y0)
+            .attr("height", d => Math.max(1, d.y1 - d.y0))
+            .attr("width",d => Math.max(0, d.x1 - d.x0))
+            .attr("fill", d => colorOf(d.name, d.type))
+            .append("title")
+            .text(d => `${d.name}: ${d.value} trials`);
+
+        nodeG.append("text")
+            .attr("x", d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+            .attr("y", d => (d.y1 + d.y0) / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", d => d.x0 < width / 2 ? "start" : "end")
+            .text(d => `${d.name} (${d.value} trials)`);
+
+        // 列标题
+        svg.append("text")
+            .attr("x", 16)
+            .attr("y", 24)
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455")
+            .style("letter-spacing", "0.1em")
+            .text("Cause");
+
+        svg.append("text")
+            .attr("x", width - 16)
+            .attr("y", 24)
+            .attr("text-anchor", "end")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455")
+            .style("letter-spacing", "0.1em")
+            .text("Outcome");
+        } catch (err) {
+            console.warn("[renderSankey] 渲染失败：", err.message);
+        }
+    }
+
+    // 渲染 81 难表格 + 筛选器
+    function renderTable(hardships) {
+        // 初始化筛选器选项
+        const causes = Array.from(new Set(hardships.map(h => h.cause))).filter(Boolean);
+        const endings = Array.from(new Set(hardships.map(h => h.ending))).filter(Boolean);
+        const difficulties = Array.from(new Set(hardships.map(h => h.difficulty))).filter(Boolean);
+
+        const fillSelect = (id, opts) => {
+            const sel = document.getElementById(id);
+            const cur = sel.value;
+            sel.innerHTML = '<option value="">All</option>' +
+                opts.map(o => `<option value="${o}">${o}</option>`).join("");
+            sel.value = cur;
+        };
+        fillSelect("filter-cause", causes);
+        fillSelect("filter-ending", endings);
+        fillSelect("filter-difficulty", difficulties);
+
+        function applyFilter() {
+            const fc = document.getElementById("filter-cause").value;
+            const fe = document.getElementById("filter-ending").value;
+            const fd = document.getElementById("filter-difficulty").value;
+            const filtered = hardships.filter(h => {
+                if (fc && h.cause !== fc) return false;
+                if (fe && h.ending !== fe) return false;
+                if (fd && h.difficulty !== fd) return false;
+                return true;
+            });
+
+            const tbody = d3.select("#hardship-tbody");
+            tbody.selectAll("*").remove();
+
+            if (filtered.length === 0) {
+                tbody.append("tr").append("td")
+                    .attr("colspan", 6)
+                    .attr("class", "empty-row")
+                    .text("No matches, or data not loaded (run via http server).");
+            } else {
+                filtered.forEach(h => {
+                    const tr = tbody.append("tr");
+                    tr.append("td").attr("class", "num").text(h.n ?? "—");
+                    tr.append("td").text(h.name ?? "—");
+                    tr.append("td").attr("class", "chapter").text(h.chapter ?? "—");
+                    tr.append("td").html(h.cause
+                        ? `<span class="tag" style="background:${CAUSE_COLORS[h.cause] || '#999'}">${h.cause}</span>`
+                        : "—");
+                    tr.append("td").html(h.ending
+                        ? `<span class="tag" style="background:${ENDING_COLORS[h.ending] || '#999'}">${h.ending}</span>`
+                        : "—");
+                    tr.append("td").html(h.difficulty
+                        ? `<span class="tag" style="background:${DIFFICULTY_COLORS[h.difficulty] || '#999'}">${h.difficulty}</span>`
+                        : "—");
+                });
+            }
+
+            document.getElementById("filter-count").textContent = `Showing ${filtered.length}/${hardships.length} trials`;
+        }
+
+        ["filter-cause", "filter-ending", "filter-difficulty"].forEach(id => {
+            document.getElementById(id).onchange = applyFilter;
+        });
+        document.getElementById("reset-filter").onclick = () => {
+            document.getElementById("filter-cause").value = "";
+            document.getElementById("filter-ending").value = "";
+            document.getElementById("filter-difficulty").value = "";
+            applyFilter();
+        };
+
+        applyFilter();
+    }
+
+    // 渲染关键洞察
+    function renderInsights(data) {
+        const insights = [
+            `All 16 steed-incarnation trials were <strong>rescued</strong>; not one was killed — revealing that demons "with deep backing" face almost zero cost of crime.`,
+            `Among the 28 true wild-demon trials, <strong>19 ended in death</strong> (67.9%) — unbackered demons have a very high mortality rate.`,
+            `Of the 27 Tathāgata/Guanyin-arranged trials, <strong>23 were rescued</strong>, 4 subdued, 0 killed — clearly "tests" in nature.`,
+            `Calling reinforcements occurred in 39 trials (48.1%), nearly half — <strong>Wukong is not omnipotent</strong>; the pilgrimage is a collaboration.`,
+            `Rescued: 49 trials (60.5%) vs killed: 25 (30.9%) — <strong>"connections" decide fate</strong> is the book's biggest hidden rule.`,
+            `Among the 10 inner-demonic trials, <strong>6 ended in death</strong> — inner demons have no external help; most are broken by the pilgrim's own realization.`
+        ];
+
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => {
+            ul.append("li").html(text);
+        });
+    }
+
+    // 加载数据（fetch 失败则用嵌入数据）
+    async function loadData() {
+        try {
+            const response = await fetch('../../scripts/output/data/hardships_81.json');
+            if (!response.ok) throw new Error('fetch failed');
+            const data = await response.json();
+            document.getElementById('dataSource').innerHTML =
+                'Data source: loaded live from <code>scripts/output/data/hardships_81.json</code> (http server mode)';
+            return data;
+        } catch (e) {
+            console.warn('[INFO] 使用嵌入数据：', e.message);
+            return EMBEDDED_DATA;
+        }
+    }
+
+    // 主流程
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        renderPie("chart-cause", "legend-cause", data.by_cause, CAUSE_COLORS);
+        renderPie("chart-ending", "legend-ending", data.by_ending, ENDING_COLORS);
+        renderPie("chart-difficulty", "legend-difficulty", data.by_difficulty, DIFFICULTY_COLORS);
+
+        renderCrossTable(data.cross_cause_ending);
+        renderSankey(data.cross_cause_ending);
+        renderTable(data.hardships || []);
+        renderInsights(data);
+    }
+
+    // 窗口尺寸变化时重绘桑基图
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) renderSankey(window.__lastData.cross_cause_ending);
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+
+<style>
+.tm-tooltip{position:fixed;background:rgba(26,20,16,.94);color:#f5e9d4;padding:8px 12px;border-radius:4px;font-size:.82rem;pointer-events:none;opacity:0;z-index:999;max-width:260px;line-height:1.45;}
+.tm-tooltip strong{color:#e9b885;display:block;margin-bottom:2px;}
+</style>
+<div class="tm-tooltip" id="tm-tooltip"></div>
+
+</body>
+</html>

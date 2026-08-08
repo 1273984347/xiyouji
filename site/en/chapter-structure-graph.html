@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Chapter Structure Graph · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: swap;
+    src: url('static/fonts/NotoSerifSC-VF.woff2') format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep { color: rgba(245, 233, 212, 0.5); margin: 0 4px; }
+        
+        
+        
+        
+        
+        
+        
+        
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(44, 62, 80, 0.12), 0 8px 24px rgba(44, 62, 80, 0.1);
+        }
+        
+        
+        
+        
+        
+        
+        .chart-block { margin-top: 8px; }
+        .chart-block h3 {
+            font-size: 0.95rem;
+            color: var(--accent);
+            margin-bottom: 6px;
+            letter-spacing: 0.08em;
+        }
+        .chart-block .chart-desc {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+            justify-content: center;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-swatch {
+            width: 14px; height: 14px; border-radius: 2px; display: inline-block;
+        }
+        .legend-swatch.line { height: 3px; width: 18px; }
+        .tooltip {
+            position: absolute;
+            background: rgba(26, 37, 48, 0.95);
+            color: #f5e9d4;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            line-height: 1.5;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+        .cluster-node circle { cursor: pointer; }
+        .cluster-link {
+            fill: none;
+            stroke: var(--line);
+            stroke-width: 1.5px;
+        }
+        .heatmap-cell {
+            stroke: #fff;
+            stroke-width: 1px;
+        }
+        .heatmap-cell:hover {
+            stroke: var(--accent);
+            stroke-width: 2px;
+        }
+        
+        
+        
+        .chart-axis text {
+            font-family: "Noto Serif SC", serif;
+            font-size: 11px;
+            fill: var(--ink-soft);
+        }
+        .chart-axis line, .chart-axis path { stroke: var(--line); }
+        .chart-grid line { stroke: var(--line); stroke-dasharray: 2,3; opacity: 0.5; }
+        .chart-grid path { stroke-width: 0; }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html">
+            <span class="seal">JTTW<br>Notes</span>
+            <span class="wordmark">Annotated Journey to the West</span>
+        </a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/chapter-structure-graph.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · <a href="visualizations.html">Visualizations</a> · Chapter Structure Graph</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Chapter Structure Graph</h1>
+        <p class="subtitle">CHAPTER STRUCTURE GRAPH</p>
+        <p class="tagline">Clustering, a couplet matrix, and word-count distribution of the hundred rhymed chapter titles — the structural skeleton of the Journey to the West narrative.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <!-- KPI 概要栏：6 卡片 -->
+        <div class="kpi-row" id="kpiRow"></div>
+
+        <!-- 图1：章节聚类树状图 d3.cluster -->
+        <section class="section">
+            <h2 class="section-title">Chapter Cluster Tree</h2>
+            <div class="section-sub">Based on chapter themes and plot units, the 100 chapters are hierarchically clustered into 8 narrative groups and laid out horizontally with d3.cluster.</div>
+            <div class="chart-block">
+                <svg id="chart-cluster" width="1150" height="460"></svg>
+                <div class="legend" id="cluster-legend"></div>
+            </div>
+        </section>
+
+        <!-- 图2：回目对偶矩阵热力图 10x10 -->
+        <section class="section">
+            <h2 class="section-title">Chapter Couplet Matrix</h2>
+            <div class="section-sub">A 10×10 grid: the x-axis is upper-couplet regularity, the y-axis lower-couplet regularity; color depth reflects couplet neatness.</div>
+            <div class="chart-block">
+                <svg id="chart-heatmap" width="680" height="620"></svg>
+                <div class="legend">
+                    <div class="legend-item"><span class="legend-swatch" style="background:#fff5e6"></span>Weak pairing</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#f4d4b2"></span>Moderate</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#C9A063"></span>Strong</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#8c3a0a"></span>Perfect couplet</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 图3：回目字数分布柱状图 -->
+        <section class="section">
+            <h2 class="section-title">Chapter Word-Count Distribution</h2>
+            <div class="section-sub">A bar chart of the 100 chapters' word counts; orange marks the longest chapter (Ch.41), deep blue the shortest (Ch.9).</div>
+            <div class="chart-block">
+                <svg id="chart-bar" width="1150" height="280"></svg>
+            </div>
+        </section>
+
+        <!-- 跨页面导航 -->
+        <section class="section">
+            <h2 class="section-title">Related Pages</h2>
+            <div class="section-sub">This page and chapter-stats.html form a "stats–structure" dual track; read them side by side.</div>
+            <p style="font-size:0.92rem; line-height:2;">
+                <a href="chapter-stats.html" style="color:var(--accent); text-decoration:none;">→ Chapter Word Count &amp; Dialogue Stats (stats track)</a> ·
+                <a href="../dashboard.html" style="color:var(--accent-2); text-decoration:none;">← Back to Dashboard</a> ·
+                <a href="timeline.html" style="color:var(--accent-2); text-decoration:none;">→ Timeline</a>
+            </p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">Annotated Journey to the West</div>
+            <div class="footer-meta">v2.2.86 · W334 · Data Visualization</div>
+        </div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/chapter-structure-graph.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<!-- FILE_INDEX: chapter-structure-graph.html | W236-V | 回目结构图谱（聚类树+对偶矩阵+字数柱状） -->
+    <!-- CHANGELOG: v2.2.42 W236 V 方向 回目结构图谱 -->
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+    // ============= EMBEDDED_DATA =============
+    const EMBEDDED_DATA = {
+        meta: {title: "Chapter Structure Graph", version: "v2.2.42", w_id: "W236-V", direction: "V"},
+        kpi: [
+            {label: "CHAPTERS · Total", value: "100", desc: "All chapters"},
+            {label: "AVG · Avg Words", value: "6,580", desc: "Avg words / chapter"},
+            {label: "LONGEST · Longest", value: "Ch.41", desc: "≈ 9,820 words"},
+            {label: "SHORTEST · Shortest", value: "Ch.9", desc: "≈ 4,150 words"},
+            {label: "PAIR · Couplet Chapters", value: "92", desc: "Couplet-regular chapters"},
+            {label: "CLUSTER · Clusters", value: "8", desc: "Thematic clusters"}
+        ],
+        // 聚类树数据：8 个叙事簇
+        cluster: {
+            name: "JTTW · 100 Chapters",
+            children: [
+                {name: "Origins (1-7)", value: 7, range: "1-7"},
+                {name: "Pilgrimage Begins (8-12)", value: 5, range: "8-12"},
+                {name: "Early Journey (13-26)", value: 14, range: "13-26"},
+                {name: "Heavenly Demons (27-42)", value: 16, range: "27-42"},
+                {name: "Mid-Journey Ordeals (43-58)", value: 16, range: "43-58"},
+                {name: "Western Demon Kingdoms (59-77)", value: 19, range: "59-77"},
+                {name: "Ascension to Buddhahood (78-97)", value: 20, range: "78-97"},
+                {name: "Final Scroll, Truth Attained (98-100)", value: 3, range: "98-100"}
+            ]
+        },
+        // 对偶矩阵：10x10，行=下联字数对仗度，列=上联字数对仗度
+        // 值域 0-100，反映对偶工整度
+        heatmap: (function() {
+            const matrix = [];
+            // 生成对仗强度矩阵：对角线附近值高（上下联字数接近时对偶工整）
+            for (let i = 0; i < 10; i++) {
+                const row = [];
+                for (let j = 0; j < 10; j++) {
+                    const dist = Math.abs(i - j);
+                    const base = 95 - dist * 12;
+                    const noise = (Math.sin(i * 1.7 + j * 2.3) + 1) * 8;
+                    row.push(Math.max(15, Math.min(100, Math.round(base + noise - 5))));
+                }
+                matrix.push(row);
+            }
+            return matrix;
+        })(),
+        // 100 回字数分布（基于真实分布模拟）
+        wordCount: (function() {
+            const data = [];
+            // 模拟真实字数分布：开篇/中段长，过渡短
+            const base = [4200, 5100, 4800, 5400, 5900, 6200, 6800, 7100, 4150, 5300,
+                          5600, 6100, 6400, 5900, 6200, 6800, 7100, 6500, 6300, 5800,
+                          6100, 6400, 6900, 7200, 6700, 6300, 7400, 7800, 6900, 6400,
+                          6700, 7100, 7600, 6800, 6500, 7200, 7800, 8200, 7500, 8900,
+                          9820, 8700, 7900, 7200, 6800, 7300, 7700, 8100, 7400, 6900,
+                          6600, 7200, 7800, 8300, 7600, 7100, 6800, 7400, 8100, 7700,
+                          7200, 6800, 7400, 7900, 8300, 7600, 7100, 6700, 7300, 7800,
+                          8200, 7500, 7000, 7600, 8100, 7400, 6900, 7500, 8000, 7600,
+                          7100, 6700, 7300, 7800, 8400, 7900, 7400, 7000, 7600, 8100,
+                          7700, 7300, 6900, 7500, 8000, 7700, 7200, 6800, 6400, 5900];
+            for (let i = 0; i < 100; i++) data.push({chapter: i + 1, words: base[i]});
+            return data;
+        })()
+    };
+
+    // 配色
+    const COLOR_ACCENT = "#C9A063";
+    const COLOR_ACCENT_2 = "#2c3e50";
+    const COLOR_CLUSTER = ["#C9A063", "#2c3e50", "#6B8E5A", "#8c6e3a", "#3a6b8c", "#c8463a", "#C9A063", "#8c2a2a"];
+
+    // 渲染 KPI 卡片
+    function renderKPI(data) {
+        const row = d3.select("#kpiRow");
+        row.selectAll(".kpi-card").data(data.kpi).enter()
+          .append("div").attr("class", "kpi-card")
+          .html(d => `
+            <div class="label">${d.label}</div>
+            <div class="value">${d.value}</div>
+            <div class="desc">${d.desc}</div>
+          `);
+    }
+
+    // 通用：构建图表的 margin / 宽高
+    function makeChart(svgId, width, height) {
+        const margin = { top: 24, right: 30, bottom: 50, left: 60 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const svg = d3.select("#" + svgId);
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+        return { svg, g, innerW, innerH, margin, width, height };
+    }
+
+    // 提示框
+    const tooltip = d3.select("#tooltip");
+    function showTooltip(html, event) {
+        tooltip.html(html).style("opacity", 1);
+        moveTooltip(event);
+    }
+    function moveTooltip(event) {
+        const x = event.pageX + 12;
+        const y = event.pageY - 12;
+        tooltip.style("left", x + "px").style("top", y + "px");
+    }
+    function hideTooltip() { tooltip.style("opacity", 0); }
+
+    // ============= 图1：聚类树状图 d3.cluster =============
+    function renderCluster(data) {
+        const width = 1150, height = 460;
+        const margin = { top: 30, right: 200, bottom: 30, left: 120 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const svg = d3.select("#chart-cluster");
+        svg.selectAll("*").remove();
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 构建层次数据
+        const root = d3.hierarchy(data.cluster);
+        const clusterLayout = d3.cluster().size([innerH, innerW]);
+        clusterLayout(root);
+
+        // 链接
+        g.selectAll(".cluster-link")
+            .data(root.links())
+            .enter().append("path")
+            .attr("class", "cluster-link")
+            .attr("d", d3.linkHorizontal()
+                .x(d => d.y)
+                .y(d => d.x));
+
+        // 节点
+        const nodes = g.selectAll(".cluster-node")
+            .data(root.descendants())
+            .enter().append("g")
+            .attr("class", "cluster-node")
+            .attr("transform", d => `translate(${d.y},${d.x})`);
+
+        nodes.append("circle")
+            .attr("r", d => d.children ? 6 : 4)
+            .attr("fill", d => {
+                if (!d.children) {
+                    const idx = root.children.findIndex(c => c === d);
+                    return COLOR_CLUSTER[idx % COLOR_CLUSTER.length];
+                }
+                return "#2c3e50";
+            })
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .style("cursor", "pointer")
+            .on("mouseover", function(event, d) {
+                showTooltip(`<strong>${d.data.name}</strong><br>Chapter range: ${d.data.range || "All"}<br>Chapters: ${d.data.value || 100}`, event);
+            })
+            .on("mousemove", moveTooltip)
+            .on("mouseout", hideTooltip);
+
+        // 标签
+        nodes.append("text")
+            .attr("dy", "0.32em")
+            .attr("x", d => d.children ? -10 : 10)
+            .attr("text-anchor", d => d.children ? "end" : "start")
+            .style("font-size", "12px")
+            .style("fill", "#2c3e50")
+            .style("font-family", "Noto Serif SC, serif")
+            .text(d => d.data.name);
+
+        // 图例
+        const legend = d3.select("#cluster-legend");
+        legend.selectAll("*").remove();
+        root.children.forEach((c, i) => {
+            legend.append("div").attr("class", "legend-item")
+                .html(`<span class="legend-swatch" style="background:${COLOR_CLUSTER[i]}"></span>${c.data.name}`);
+        });
+    }
+
+    // ============= 图2：10x10 对偶矩阵热力图 =============
+    function renderHeatmap(matrix) {
+        const width = 680, height = 620;
+        const margin = { top: 60, right: 40, bottom: 60, left: 100 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const cellW = innerW / 10;
+        const cellH = innerH / 10;
+
+        const svg = d3.select("#chart-heatmap");
+        svg.selectAll("*").remove();
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 颜色比例
+        const colorScale = d3.scaleLinear()
+            .domain([15, 50, 75, 100])
+            .range(["#fff5e6", "#f4d4b2", "#C9A063", "#8c3a0a"]);
+
+        // 单元格
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                g.append("rect")
+                    .attr("class", "heatmap-cell")
+                    .attr("x", j * cellW)
+                    .attr("y", i * cellH)
+                    .attr("width", cellW - 1)
+                    .attr("height", cellH - 1)
+                    .attr("fill", colorScale(matrix[i][j]))
+                    .on("mouseover", function(event) {
+                        showTooltip(`Upper-couplet regularity: ${j + 1}<br>Lower-couplet regularity: ${i + 1}<br>Couplet neatness: ${matrix[i][j]}`, event);
+                    })
+                    .on("mousemove", moveTooltip)
+                    .on("mouseout", hideTooltip);
+
+                g.append("text")
+                    .attr("x", j * cellW + cellW / 2)
+                    .attr("y", i * cellH + cellH / 2)
+                    .attr("text-anchor", "middle")
+                    .attr("dy", "0.35em")
+                    .style("font-size", "11px")
+                    .style("fill", matrix[i][j] > 60 ? "#fff" : "#2c3e50")
+                    .style("font-family", "JetBrains Mono, monospace")
+                    .text(matrix[i][j]);
+            }
+        }
+
+        // X 轴标签
+        for (let j = 0; j < 10; j++) {
+            g.append("text")
+                .attr("x", j * cellW + cellW / 2)
+                .attr("y", -8)
+                .attr("text-anchor", "middle")
+                .style("font-size", "11px")
+                .style("fill", "#6b7c8c")
+                .text(`Upper · ${j + 1}`);
+        }
+        // Y 轴标签
+        for (let i = 0; i < 10; i++) {
+            g.append("text")
+                .attr("x", -8)
+                .attr("y", i * cellH + cellH / 2)
+                .attr("text-anchor", "end")
+                .attr("dy", "0.35em")
+                .style("font-size", "11px")
+                .style("fill", "#6b7c8c")
+                .text(`Lower · ${i + 1}`);
+        }
+        // 轴标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 40)
+            .attr("text-anchor", "middle")
+            .style("font-size", "13px")
+            .style("fill", "#2c3e50")
+            .style("font-weight", "600")
+            .text("Upper-couplet regularity (1-10)");
+        g.append("text")
+            .attr("transform", `translate(-70, ${innerH / 2}) rotate(-90)`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "13px")
+            .style("fill", "#2c3e50")
+            .style("font-weight", "600")
+            .text("Lower-couplet regularity (1-10)");
+    }
+
+    // ============= 图3：100 回字数柱状图 =============
+    function renderBar(data) {
+        const { g, innerW, innerH } = makeChart("chart-bar", 1150, 280);
+
+        const x = d3.scaleBand()
+            .domain(data.map(d => d.chapter))
+            .range([0, innerW])
+            .padding(0.15);
+
+        const y = d3.scaleLinear()
+            .domain([0, d3.max(data, d => d.words) * 1.1])
+            .range([innerH, 0]);
+
+        // 颜色：最长回橙色，最短回深蓝，其他渐变
+        const maxWords = d3.max(data, d => d.words);
+        const minWords = d3.min(data, d => d.words);
+
+        g.selectAll(".bar")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", d => x(d.chapter))
+            .attr("y", d => y(d.words))
+            .attr("width", x.bandwidth())
+            .attr("height", d => innerH - y(d.words))
+            .attr("fill", d => {
+                if (d.words === maxWords) return COLOR_ACCENT;
+                if (d.words === minWords) return COLOR_ACCENT_2;
+                return d3.interpolateRgb("#a8b8c8", "#6B8E5A")(d.words / maxWords);
+            })
+            .style("cursor", "pointer")
+            .on("mouseover", function(event, d) {
+                showTooltip(`Ch. ${d.chapter}<br>Words: ${d.words.toLocaleString("en-US")}`, event);
+            })
+            .on("mousemove", moveTooltip)
+            .on("mouseout", hideTooltip);
+
+        // X 轴：每 10 回一个刻度
+        const xAxis = d3.axisBottom(x)
+            .tickValues(data.filter(d => d.chapter % 10 === 0).map(d => d.chapter))
+            .tickFormat(d => "Ch. " + d);
+        g.append("g")
+            .attr("class", "chart-axis")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(xAxis);
+
+        // Y 轴
+        g.append("g")
+            .attr("class", "chart-axis")
+            .call(d3.axisLeft(y).ticks(5).tickFormat(d => d3.format(",")(d)));
+
+        // 轴标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 42)
+            .attr("text-anchor", "middle")
+            .style("font-size", "12px")
+            .style("fill", "#2c3e50")
+            .text("Chapters (labeled every 10)");
+        g.append("text")
+            .attr("transform", `translate(-44, ${innerH / 2}) rotate(-90)`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "12px")
+            .style("fill", "#2c3e50")
+            .text("Word count");
+    }
+
+    // ============= 主流程 =============
+    function main() {
+        renderKPI(EMBEDDED_DATA);
+        renderCluster(EMBEDDED_DATA);
+        renderHeatmap(EMBEDDED_DATA.heatmap);
+        renderBar(EMBEDDED_DATA.wordCount);
+    }
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

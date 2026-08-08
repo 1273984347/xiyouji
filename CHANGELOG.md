@@ -10,6 +10,16 @@
 
 ### v2.3.17（2026-08-07）：W389 遗留建议执行（交接文档历史段归档·.git filter-repo 历史瘦身 241.7→32.8MB·阻塞段 HEAD 引用修正·项目说明第 45 行残留修复）
 
+> **W395 英文站 batch2：三张核心可视化页英文化（2026-08-08）**
+> - **来源**：用户指令"继续 batch 2"（承接 W394 batch1 导览双页；第一性原理清单 #5 英文站·A 全量对等·分批）
+> - **执行**：
+>   - **site/en/81-hardships.html（新）**：八十一难深度统计英文版。译 chrome（标题/导航/面包屑/KPI/三维分布/交叉表/桑基/完整清单/关键洞察/页脚）+ 可见脚本标签（起因·结局·难度分类 fallback 数据 + 桑基/交叉表 tooltip + 关键洞察 6 条 + 无匹配提示 + 筛选计数），保全全部内联 D3 JS/CSS；双向导航（EN ↔ 中文 81-hardships.html）
+>   - **site/en/chapter-structure-graph.html（新）**：回目结构图谱英文版。译 chrome + 渲染脚本（KPI 6 卡 label/desc + 8 叙事簇名 + 聚类树/对偶矩阵/字数分布轴标签与 tooltip + 坐标轴 tickFormat）
+>   - **site/en/character-appearance.html（新）**：人物出场频次与戏份分析英文版。15 个人物名统一转拼音（孙悟空→Sun Wukong、唐僧→Tang Sanzang、观音→Guanyin、如来→Tathāgata 等）+ KPI/Top15 条形/矩阵热力图/时间散点轴标签与 tooltip + 关键洞察 5 条全译
+>   - **en/visualizations.html**：3 张索引卡（81 Tribulations / Character Appearance / Chapter Structure Graph）改指向 EN 版并附中文回链
+> - **验证**：逐页断言（每个替换 count 校验）+ 零可见 chrome CJK（仅保留「中文」回链标签与 regenerate 命令中的中文文件路径）+ 渲染脚本零 CJK（仅 console.warn / 正则 / 中文文件路径注释）
+> - **状态**：已落地·E3 铁律 6 文档同步（CHANGELOG + 交接文档 双核心）·batch3 续译 hardship-heatmap 等高流量 data 页
+>
 > **W389 遗留建议执行·交接文档历史段归档**
 > - **来源**：用户指令"现在做遗留建议"（承接 W388 文档审查中提出的两条遗留建议）
 > - **执行**：
