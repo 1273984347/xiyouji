@@ -30,6 +30,16 @@
 > - **验证**：逐页断言（每个替换 count 校验）+ 零可见 chrome CJK（仅保留「中文」回链标签与品牌印章）+ 渲染脚本零 CJK（仅 CSS token 注释/代码注释/console）；所有内联 D3/Three.js JS/CSS 保全
 > - **状态**：已落地·E3 铁律 6 文档同步（CHANGELOG + 交接文档 双核心）·剩余 data 可视化页（约 80+ 张）可按同模式续译
 >
+> **W397 英文站 batch4：三张核心可视化页英文化（2026-08-08）**
+> - **来源**：用户指令"继续 batch 4"（承接 W396 batch3；第一性原理清单 #5 英文站·A 全量对等·分批）
+> - **执行**：
+>   - **site/en/character-sentiment-arc.html（新）**：人物情感弧线英文版。译 chrome（标题/导航/面包屑/定义/关键洞察）+ 渲染脚本（全局人物名 孙悟空→Sun Wukong、猪八戒→Zhu Bajie、唐僧→Tripitaka、沙僧→Sha Wujing、观音→Guanyin + tickFormat `第N回→Ch.N` + 6 条 inner phrase + 转折/定义标签），保全全部内联 D3 JS/CSS，双向导航（EN ↔ 中文 character-sentiment-arc.html）
+>   - **site/en/chapter-stats.html（新）**：章节字数与对话统计英文版。译 chrome（标题/导航/面包屑/KPI/图例/轴标签/页脚阅读指南链接）+ 渲染脚本（KPI 6 卡 label/desc + tickFormat `第N回→Ch.N` + 4 段 tooltip + mock 数据 `示例第N回→Sample Ch.N` 去尾随回 + 数据源/示例提示），保全 JS/CSS，双向导航
+>   - **site/en/narrative-rhythm-curve.html（新）**：叙事节奏曲线英文版。译 chrome（标题/导航/面包屑/kicker/h1/tagline/5 板块/图例/按钮/动态章回显示/相关页面/页脚）+ 渲染脚本（meta title + KPI 5 卡含 `第57回→Ch.57`/`第9回→Ch.9` + 9 转折点 name/desc 全译 + 热力图 10 行段名 + tooltip 模板 `第N回→Ch.N` + 轴标签 + tickFormat `第N回→Ch.N` + 动态章回显示 + NUM 正则去中文数），保全全部内联 D3 JS/CSS，双向导航
+>   - **en/visualizations.html**：3 张索引卡（Sentiment Arc / Chapter Statistics / Narrative Rhythm Curve）改指向 EN 版并附中文回链
+> - **验证**：逐页断言（每个替换 count 校验）+ 零可见 chrome CJK（仅保留「中文」回链标签、品牌印章「西游/详解」「详解西游记」与 `<title>` 后缀「· 详解西游记」）+ 渲染脚本零 CJK（仅 CSS token 注释/代码注释/HTML 注释/console）；全部内联 D3 JS/CSS 保全
+> - **状态**：已落地·E3 铁律 6 文档同步（CHANGELOG + 交接文档 双核心）·剩余 data 可视化页（约 80+ 张）可按同模式续译
+>
 
 > **W389 遗留建议执行·交接文档历史段归档**
 > - **来源**：用户指令"现在做遗留建议"（承接 W388 文档审查中提出的两条遗留建议）
