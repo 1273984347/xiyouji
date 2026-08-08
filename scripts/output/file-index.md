@@ -461,3 +461,61 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
+
+## W394 英文站 batch1 导览双页英文化（2026-08-08·v2.3.17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/guide.html | W394 | 新建·导读页英文版（7 类读者路径 + 术语表 + 版本/引用）·内联 CSS·双向导航 |
+| site/en/dukou-engine.html | W394 | 新建·渡口写作引擎英文版·保全内联 JS·零 CJK 残留 |
+| site/en/index.html | W394 | 修改·导航卡新增 Reading Guide + Ferry Crossing |
+| 交接文档.md | W394 | v2.3.17 同步·新增 W394 段 |
+| CHANGELOG.md | W394 | v2.3.17 同步·新增 W394 版本段 |
+
+## W395 英文站 batch2 三核心可视化页英文化（2026-08-08·v2.3.17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/81-hardships.html | W395 | 新建·八十一难深度统计英文版·保全内联 D3 JS/CSS·双向导航 |
+| site/en/chapter-structure-graph.html | W395 | 新建·回目结构图谱英文版·译 KPI/叙事簇/轴标签/tooltip |
+| site/en/character-appearance.html | W395 | 新建·人物出场频次英文版·15 人物名转拼音 |
+| site/en/visualizations.html | W395 | 修改·3 索引卡改指 EN 版 + 中文回链 |
+| 交接文档.md | W395 | v2.3.17 同步·新增 W395 段 |
+| CHANGELOG.md | W395 | v2.3.17 同步·新增 W395 版本段 |
+
+## W396 英文站 batch3 三可视化页英文化（2026-08-08·v2.3.17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/hardship-heatmap.html | W396 | 新建·八十一难难度热力图英文版 |
+| site/en/character-presence-timeline.html | W396 | 新建·人物出场时间线英文版·35+ 人物名转英文 |
+| site/en/character-relationship-3d.html | W396 | 新建·人物关系 3D 网络图英文版（Three.js） |
+| site/en/visualizations.html | W396 | 修改·3 索引卡改指 EN 版 + 中文回链 |
+| 交接文档.md | W396 | v2.3.17 同步·新增 W396 段 |
+| CHANGELOG.md | W396 | v2.3.17 同步·新增 W396 版本段 |
+
+## W397 英文站 batch4 三可视化页英文化（2026-08-08·v2.3.17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/character-sentiment-arc.html | W397 | 新建·人物情感弧线英文版 |
+| site/en/chapter-stats.html | W397 | 新建·章节字数与对话统计英文版 |
+| site/en/narrative-rhythm-curve.html | W397 | 新建·叙事节奏曲线英文版 |
+| site/en/visualizations.html | W397 | 修改·3 索引卡改指 EN 版 + 中文回链 |
+| 交接文档.md | W397 | v2.3.17 同步·新增 W397 段 |
+| CHANGELOG.md | W397 | v2.3.17 同步·新增 W397 版本段 |
+
+## W398 英文站 batch5 两地理可视化页英文化（2026-08-08·v2.3.17）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/journey-geo-semiotics.html | W398 | 新建·取经路径地理符号学英文版 |
+| site/en/journey-route.html | W398 | 新建·取经全路程图英文版·耦合地理类型枚举整块转译 |
+| site/en/character-semantic-network.html | W398 | 新建·人物语义关系网络英文版（batch5 一并入库） |
+| site/en/visualizations.html | W398 | 修改·2 索引卡改指 EN 版 + 中文回链 |
+| CHANGELOG.md | W398 | v2.3.17 同步·新增 W398 版本段 |
+| 交接文档.md | W398 | v2.3.17 同步·新增 W398 段 |
+| README.md | W398 | v2.3.17 同步·六文档同步补齐 W394-W398·版本段日期 2026-08-08 |
+| STRUCTURE.md | W398 | v2.3.17 同步·六文档同步补齐 W394-W398·版本段日期 2026-08-08 |
+| docs/00-导读/项目说明.md | W398 | v2.3.17 同步·六文档同步补齐 W394-W398·版本段日期 2026-08-08 |
+| scripts/output/file-index.md | W398 | v2.3.17 同步·新增 W394-W398 反向索引段 |
