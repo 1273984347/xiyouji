@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 inline_css.py — 将数据页的外部 ../tokens.css + ../system.css <link> 标签
 内联为 <style> 块，使页面自包含、彻底摆脱预览/部署环境下的 ../ 相对路径依赖。
@@ -35,7 +34,7 @@ def safe(css):
 
 
 def process(path, force, dry):
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         html = f.read()
 
     has_tokens_link = LINK_TOKENS in html
@@ -51,9 +50,9 @@ def process(path, force, dry):
         html = re.sub(r"<!-- %s.*?-->\s*<style>.*?</style>\s*" % re.escape(MARKER),
                       "", html, flags=re.S)
 
-    with open(TOKENS, "r", encoding="utf-8") as f:
+    with open(TOKENS, encoding="utf-8") as f:
         tokens = safe(f.read().strip())
-    with open(SYSTEM, "r", encoding="utf-8") as f:
+    with open(SYSTEM, encoding="utf-8") as f:
         system = safe(f.read().strip())
 
     inlined = (

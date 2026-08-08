@@ -21,7 +21,6 @@ import json
 import re
 from pathlib import Path
 
-
 # 1. 角色卡牌（抽卡游戏界面）
 # rarity: N / R / SR / SSR / UR
 # power: 战力数值（基准 100-10000）

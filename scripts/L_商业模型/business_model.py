@@ -21,7 +21,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 天庭 vs 灵山组织对比
 # 两大组织·13 个维度横向对照·揭示治理模式差异
 ORGANIZATION_COMPARISON = {

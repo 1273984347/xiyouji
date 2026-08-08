@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 bump_version.py — 降级六文档同步（W393）的辅助同步工具
 
@@ -15,11 +14,11 @@ bump_version.py — 降级六文档同步（W393）的辅助同步工具
 零依赖：仅标准库。幂等：重复运行不产生重复条目。
 """
 
+import argparse
+import datetime
 import os
 import re
 import sys
-import datetime
-import argparse
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(_HERE, ".."))
@@ -34,7 +33,7 @@ FILE_INDEX = os.path.join(ROOT, "scripts", "output", "file-index.md")
 
 def _read(p):
     try:
-        with open(p, "r", encoding="utf-8") as f:
+        with open(p, encoding="utf-8") as f:
             return f.read()
     except Exception:
         return ""

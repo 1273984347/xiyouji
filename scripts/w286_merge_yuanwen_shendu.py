@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 W286 任务脚本：
 1. 批量抓取古诗文网《西游记》100回完整原文，保存到 source/原文/分回/
@@ -8,13 +7,13 @@ W286 任务脚本：
    - ## 原文全文（从网上抓取的完整原著文本）
 """
 
-import os
 import re
 import sys
 import time
-import urllib.request
 import urllib.parse
+import urllib.request
 from pathlib import Path
+
 from bs4 import BeautifulSoup
 
 WORKSPACE = Path(r"d:\1\xiyouji")
@@ -47,7 +46,7 @@ def fetch_chapter(n: int) -> str:
             with urllib.request.urlopen(req, timeout=20) as resp:
                 raw = resp.read().decode("utf-8", errors="replace")
             break
-        except Exception as e:
+        except Exception:
             if attempt == 2:
                 raise
             time.sleep(2 * (attempt + 1))
@@ -179,7 +178,6 @@ def merge_into_md_files(shendu_idx: dict):
     print("=" * 60)
     md_files = sorted(ZHUIHUI_DIR.glob("第*.md"))
     updated = 0
-    skipped = 0
     no_yuanwen = []
     for md in md_files:
         # extract chapter number from filename 第NNN回-xxx.md

@@ -27,7 +27,6 @@ import json
 from collections import Counter
 from pathlib import Path
 
-
 # 八十一难清单（手工整理，以世德堂本末尾所列为骨架）
 # cause: arranged(如来/观音安排) / wild(真正野怪) / mount(天界/西天坐骑下凡) / mind(人心自生魔障)
 # ending: taken(被接走) / killed(被打死) / recruited(被收编)
@@ -210,21 +209,21 @@ def main():
         print(f"[OK] {key} 已写入：{out}")
 
     # 控制台汇总
-    print(f"\n=== 八十一难深度统计 ===")
+    print("\n=== 八十一难深度统计 ===")
     print(f"总数：{stats['total']} 难")
-    print(f"\n按起因分类：")
+    print("\n按起因分类：")
     for cause, count in stats["by_cause"].items():
         pct = count / stats["total"] * 100
         print(f"  {cause:<20} {count:3d} 难 ({pct:5.1f}%)")
-    print(f"\n按结局分类：")
+    print("\n按结局分类：")
     for ending, count in stats["by_ending"].items():
         pct = count / stats["total"] * 100
         print(f"  {ending:<20} {count:3d} 难 ({pct:5.1f}%)")
-    print(f"\n按难度分类：")
+    print("\n按难度分类：")
     for diff, count in stats["by_difficulty"].items():
         pct = count / stats["total"] * 100
         print(f"  {diff:<20} {count:3d} 难 ({pct:5.1f}%)")
-    print(f"\n交叉统计（起因 × 结局）：")
+    print("\n交叉统计（起因 × 结局）：")
     for cause, endings in stats["cross_cause_ending"].items():
         print(f"  {cause}:")
         for ending, count in endings.items():

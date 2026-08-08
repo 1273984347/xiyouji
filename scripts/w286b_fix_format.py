@@ -5,7 +5,6 @@ W286b 格式修复脚本：
 3. 删除旧的 .txt 文件和 temp_shendu 目录
 """
 import re
-import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -94,9 +93,9 @@ def convert_shendu():
     # 删除旧的 temp_shendu 目录
     try:
         OLD_SHENDU_DIR.rmdir()
-        print(f"[shendu] 已删除 temp_shendu 目录")
+        print("[shendu] 已删除 temp_shendu 目录")
     except OSError:
-        print(f"[shendu] temp_shendu 目录非空，未删除")
+        print("[shendu] temp_shendu 目录非空，未删除")
 
     print(f"[shendu] 转换 {count} 个 .txt → .md（temp_shendu → shendu）")
     return count

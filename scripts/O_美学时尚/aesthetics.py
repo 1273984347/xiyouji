@@ -22,9 +22,7 @@ aesthetics.py — 《西游记》美学与时尚演变
 
 import argparse
 import json
-from collections import Counter
 from pathlib import Path
-
 
 # 1. 角色服饰变迁（按出场阶段）
 CHARACTER_AESTHETICS = [

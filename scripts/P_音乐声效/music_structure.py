@@ -28,7 +28,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 声效图谱
 SOUNDS = [
     {"name": "金箍棒破空", "category": "兵器", "owner": "孙悟空", "sound_text": "呼呼作风响·崩崩似雷鸣", "intensity": 10, "frequency": "高频出现", "chapter_first": 3, "feature": "一万三千五百斤定海神针的破空声"},

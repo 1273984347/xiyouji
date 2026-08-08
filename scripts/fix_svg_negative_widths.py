@@ -14,10 +14,10 @@ Usage:
     # preview only, do not write
     python fix_svg_negative_widths.py --dry-run
 """
-from pathlib import Path
-import re
 import argparse
+import re
 import sys
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_TARGETS = list((ROOT / "site" / "data").glob("*.html")) + [ROOT / "site" / "dashboard.html"]

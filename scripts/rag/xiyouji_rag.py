@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 xiyouji_rag.py — 《详解西游记》本地 RAG 核心引擎（零依赖）
 
@@ -35,11 +34,11 @@ xiyouji_rag.py — 《详解西游记》本地 RAG 核心引擎（零依赖）
 可直接运行：python xiyouji_rag.py "五行山 牧童"
 """
 
-import os
-import re
 import csv
 import json
 import math
+import os
+import re
 
 # ---- 路径（相对本脚本：scripts/rag/xiyouji_rag.py → 项目根 = ../../）----
 _HERE = os.path.dirname(os.path.abspath(__file__))
@@ -193,7 +192,7 @@ def _load_docs():
             if fn.lower().endswith(".md"):
                 p = os.path.join(base, fn)
                 try:
-                    with open(p, "r", encoding="utf-8") as f:
+                    with open(p, encoding="utf-8") as f:
                         text = f.read()
                 except Exception:
                     continue
@@ -209,7 +208,7 @@ def build_index(force=False):
     """构建 BM25 索引；命中缓存且非 force 时直接载入。"""
     if (not force) and os.path.exists(INDEX_CACHE):
         try:
-            with open(INDEX_CACHE, "r", encoding="utf-8") as f:
+            with open(INDEX_CACHE, encoding="utf-8") as f:
                 cached = json.load(f)
             if cached.get("version") == INDEX_VERSION:
                 return cached
@@ -317,7 +316,7 @@ def retrieve(query, top_k=5, index=None):
         for idx in cand:
             rel = index["docs"][idx]["path"]
             try:
-                with open(os.path.join(ROOT, rel), "r", encoding="utf-8") as fh:
+                with open(os.path.join(ROOT, rel), encoding="utf-8") as fh:
                     txt = fh.read().lower()
             except Exception:
                 continue
@@ -343,12 +342,12 @@ def retrieve(query, top_k=5, index=None):
 def _excerpt(rel_path, qt, index=None):
     """取含最多查询词、且尽量贴近小标题的那一段作为摘录（带上下文）。"""
     try:
-        with open(os.path.join(ROOT, rel_path), "r", encoding="utf-8") as f:
+        with open(os.path.join(ROOT, rel_path), encoding="utf-8") as f:
             text = f.read()
     except Exception:
         return ""
     paras = re.split(r"\n\s*\n", text)
-    best, best_hit, best_head = "", 0, ""
+    best, best_hit = "", 0
     for p in paras:
         hit = sum(1 for t in qt if len(t) >= 2 and t in p)
         if hit > best_hit:
@@ -358,7 +357,7 @@ def _excerpt(rel_path, qt, index=None):
     # 找最近的上一个小标题作为上下文
     lines = text.splitlines()
     near_head = ""
-    for i, ln in enumerate(lines):
+    for _i, ln in enumerate(lines):
         if re.match(r'^#{1,6}\s', ln):
             near_head = re.sub(r'^#{1,6}\s*', '', ln).strip()
     head_ctx = f"【{near_head}】 " if near_head else ""

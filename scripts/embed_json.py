@@ -43,7 +43,6 @@ import shutil
 import sys
 from pathlib import Path
 
-
 # 匹配 const/let/var/window.EMBEDDED = {
 EMBEDDED_PATTERN = re.compile(
     r'(?:const|let|var)\s+EMBEDDED\s*=\s*\{|window\.EMBEDDED\s*=\s*\{'

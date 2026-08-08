@@ -25,7 +25,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 解构作品坐标轴
 DECONSTRUCTION_WORKS = [
     {

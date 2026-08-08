@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """perf_optimize.py - 全站性能优化脚本
 
 W265 E3 性能深化 · v2.2.47
@@ -22,7 +21,6 @@ W265 E3 性能深化 · v2.2.47
 """
 import argparse
 import gzip
-import json
 import re
 import sys
 from datetime import datetime
@@ -145,7 +143,8 @@ def optimize_lcp(html_dir):
 
         # 1) 添加 loading="lazy"（非首屏图）
         # 简单策略：对每个 <img> 标签若未声明 loading 且非首屏，则补 loading="lazy"
-        def _add_lazy(match):
+        # W400 修复：B023 —— 用默认参数捕获当前 text，避免闭包绑定循环变量
+        def _add_lazy(match, _text=text):
             full = match.group(0)
             if "loading=" in full:
                 return full
@@ -154,7 +153,7 @@ def optimize_lcp(html_dir):
             attrs_dict = {}
             for am in re.finditer(r'(\w[\w-]*)\s*=\s*"([^"]*)"', attrs_text):
                 attrs_dict[am.group(1).lower()] = am.group(2)
-            if _is_above_fold_image(attrs_dict, text):
+            if _is_above_fold_image(attrs_dict, _text):
                 return full
             stats["lazy_added"] += 1
             return f'<img{attrs_text} loading="lazy">'
@@ -163,7 +162,7 @@ def optimize_lcp(html_dir):
 
         # 2) 为首屏大图生成 preload（仅在 <head> 内追加一次）
         preload_lines = []
-        for line, attrs in parser.images:
+        for _line, attrs in parser.images:
             if _is_above_floor_image(attrs) and attrs.get("src"):
                 src = attrs["src"]
                 preload_lines.append(
@@ -609,8 +608,8 @@ def generate_report(stats_lcp=None, stats_canvas=None, stats_inline=None,
     md.append(f"# W265 E3 性能优化报告 · {VERSION}")
     md.append("")
     md.append(f"> 生成时间：{timestamp}")
-    md.append(f"> 工具：`scripts/perf_optimize.py` · W265 E3 性能深化")
-    md.append(f"> 字体子集化方案：参考 `scripts/font-subset-guide.md`")
+    md.append("> 工具：`scripts/perf_optimize.py` · W265 E3 性能深化")
+    md.append("> 字体子集化方案：参考 `scripts/font-subset-guide.md`")
     md.append("")
     md.append("## 1. LCP 优化模块（图片懒加载 + 资源预加载 + 字体子集化）")
     md.append("")
@@ -703,7 +702,7 @@ def main(argv=None):
         stats_defer = add_defer_async(target)
         stats_minify = minify_resources(target)
 
-    report = generate_report(
+    generate_report(
         stats_lcp=stats_lcp,
         stats_canvas=stats_canvas,
         stats_inline=stats_inline,

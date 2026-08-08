@@ -20,7 +20,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 法宝材质学
 # material science：金刚琢是合金钢·金箍棒是陨铁·芭蕉扇是复合材料
 ARTIFACT_MATERIALS = {

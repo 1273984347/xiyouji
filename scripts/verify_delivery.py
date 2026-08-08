@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 verify_delivery.py — 零依赖交付校验门禁（Senior Developer 设立）
 
@@ -20,10 +19,10 @@ verify_delivery.py — 零依赖交付校验门禁（Senior Developer 设立）
 退出码：核心 FAIL 1；仅辅助 WARN 0。可直接挂到 .git/hooks/pre-commit（辅助 WARN 不再阻断提交）。
 """
 
+import json
 import os
 import re
 import sys
-import json
 import urllib.request
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
@@ -51,7 +50,7 @@ EXPECT_A4 = "201 篇"  # W342 gap-fill（权力五联对照 W084 + 妖怪身份�
 
 def _read(p):
     try:
-        with open(p, "r", encoding="utf-8") as f:
+        with open(p, encoding="utf-8") as f:
             return f.read()
     except Exception:
         return ""

@@ -20,7 +20,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 天庭量刑经济学
 # sentencing economics：司法严重受"编制身份"和"政治需求"双重调节
 SENTENCING_ECONOMICS = {

@@ -24,7 +24,6 @@ site/index.html / dashboard.html / _template.html 已手工重写，不在本脚
 """
 import argparse
 import re
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent

@@ -60,12 +60,12 @@ W263-E1 CI/CD 深化配套：9 矩阵 × 3 OS 跨平台验证
 仅依赖 stdlib：argparse/re/json/pathlib/html.parser/datetime
 """
 import argparse
-import re
 import json
+import re
 import sys
-from pathlib import Path
-from html.parser import HTMLParser
 from datetime import datetime
+from html.parser import HTMLParser
+from pathlib import Path
 
 
 # ---------- 严重度等级 ----------
@@ -857,7 +857,6 @@ def rule_9_consistent_help(html_content, file_path):
 # ---------- 规则 10：ARIA live regions 验证（W271 E 方向深化） ----------
 def rule_10_aria_live(html_content, file_path):
     """验证动态更新内容（带 aria-live 属性）的设置是否正确"""
-    parser = _parse_html(html_content)
     findings = []
 
     # 检测动态更新内容：[aria-live], role="status", role="alert", role="log"
@@ -898,7 +897,6 @@ def rule_10_aria_live(html_content, file_path):
 # ---------- 规则 11：tabindex 顺序规则（W271 E 方向深化） ----------
 def rule_11_tabindex(html_content, file_path):
     """验证 tabindex > 0 不被使用（避免破坏自然 tab 顺序）"""
-    parser = _parse_html(html_content)
     findings = []
 
     # 查找所有 tabindex 属性
@@ -922,7 +920,6 @@ def rule_11_tabindex(html_content, file_path):
 # ---------- 规则 12：焦点陷阱规则（W271 E 方向深化） ----------
 def rule_12_focus_trap(html_content, file_path):
     """验证模态/对话框是否有焦点陷阱机制"""
-    parser = _parse_html(html_content)
     findings = []
 
     # 检测模态/对话框元素
@@ -1015,7 +1012,6 @@ def rule_14_skip_link(html_content, file_path):
 # ---------- 规则 15：标题层级规则（W271 E 方向深化） ----------
 def rule_15_heading_hierarchy(html_content, file_path):
     """验证标题层级不跳级（h1 → h2 → h3，不应出现 h1 → h3）"""
-    parser = _parse_html(html_content)
     findings = []
 
     # 提取所有标题（h1-h6）按出现顺序
@@ -1190,7 +1186,6 @@ def rule_19_color_only_info(html_content, file_path):
     WCAG 1.4.1 Use of Color：颜色不应作为唯一的信息载体。
     典型违规：class="error" 但无文本说明、仅靠红色边框提示错误。"""
     findings = []
-    parser = _parse_html(html_content)
 
     # 状态类名通常意味着用颜色区分状态
     state_class_re = re.compile(
@@ -1204,7 +1199,7 @@ def rule_19_color_only_info(html_content, file_path):
         state_class_hits.append((line_num, match.group(0)))
 
     # 对每个含状态类名的元素，检查是否有文本/aria-label/icon 辅助
-    for line_num, raw in state_class_hits:
+    for line_num, _raw in state_class_hits:
         # 提取该 class 所在标签的整段（粗略：取该行 + 后 2 行）
         lines = html_content.split("\n")
         context = "\n".join(lines[max(0, line_num - 1):min(len(lines), line_num + 2)])
@@ -1314,7 +1309,6 @@ def rule_21_reflow_focus(html_content, file_path):
     # 2. 固定宽度容器无响应式（width: XXXpx 且无 max-width/min-width 兜底）
     css_text = "\n".join(css for _, css in parser.style_blocks)
     fixed_width_count = 0
-    first_fixed_line = 0
     for selector, decls in _extract_css_rules(css_text):
         # 跳过媒体查询内的规则（已在响应式处理）
         if "@media" in selector:
@@ -1586,7 +1580,7 @@ def check_pause_stop_hide(html_content, file_path):
     css_text = "\n".join(css for _, css in parser.style_blocks)
     infinite_anim_count = 0
     first_anim_line = 0
-    for selector, decls in _extract_css_rules(css_text):
+    for _selector, decls in _extract_css_rules(css_text):
         if not re.search(r"animation\s*:", decls, re.I):
             continue
         if re.search(r"\binfinite\b", decls, re.I):

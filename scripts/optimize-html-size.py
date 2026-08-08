@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 W230 E3 · HTML 文件体积优化脚本
 ==================================================
@@ -22,13 +21,10 @@ W230 E3 · HTML 文件体积优化脚本
 
 from __future__ import annotations
 
-import os
 import re
 import sys
-import html
+from dataclasses import dataclass, field
 from pathlib import Path
-from dataclasses import dataclass, field, asdict
-from typing import Optional
 
 # ===== 路径配置 =====
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -264,7 +260,7 @@ def render_report(results: list[FileMetrics]) -> str:
     lines.append("")
     lines.append("> W230 E3 · 由 `scripts/optimize-html-size.py` 自动生成 · 不修改 HTML 源文件")
     lines.append("")
-    lines.append(f"- **扫描目录**：`site/data/`")
+    lines.append("- **扫描目录**：`site/data/`")
     lines.append(f"- **HTML 文件数**：{len(results)}")
     lines.append(f"- **总体积（原始）**：{format_kb(total_raw)}")
     lines.append(f"- **总体积（优化后预估）**：{format_kb(total_opt)}")

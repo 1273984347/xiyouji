@@ -25,7 +25,6 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
-
 # 洞府清单（手工整理，依据世德堂本回目描写）
 # rank: king(妖王级) / general(中将) / minion(小怪)
 # luxury: 1-10 综合分（环境+家当+势力+威胁）

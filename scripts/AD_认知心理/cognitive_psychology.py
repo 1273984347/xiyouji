@@ -20,7 +20,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 唐僧的可得性启发
 # availability heuristic：刚经历的事件 disproportionately 影响后续判断
 AVAILABILITY_HEURISTIC = {

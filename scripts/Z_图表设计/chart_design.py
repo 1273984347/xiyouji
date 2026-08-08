@@ -20,7 +20,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 八十一难因果多米诺骨牌阵列
 # 不按时间顺序·按因果链串联·每张骨牌倒下触发下一张
 DOMINO_CAUSALITY = {

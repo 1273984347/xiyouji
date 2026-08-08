@@ -12,7 +12,6 @@ character_network.py — 《西游记》人物共现网络
     py B_人物/character_network.py --characters 人物表.json --output output/data/character_network.json
 """
 
-import argparse
 import json
 import sys
 from collections import defaultdict

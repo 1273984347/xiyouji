@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 api_server.py — 《详解西游记》结构化数据 REST API（零依赖）
 
@@ -25,9 +24,9 @@ api_server.py — 《详解西游记》结构化数据 REST API（零依赖）
 默认监听 127.0.0.1:8787（参数可改端口）。CORS 允许跨域（前端 file:// 可用）。
 """
 
+import json
 import os
 import sys
-import json
 import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -50,7 +49,7 @@ def _list_datasets():
         p = os.path.join(DATASET_DIR, fn)
         size_kb = round(os.path.getsize(p) / 1024, 1)
         try:
-            with open(p, "r", encoding="utf-8") as f:
+            with open(p, encoding="utf-8") as f:
                 data = json.load(f)
             keys = list(data.keys()) if isinstance(data, dict) else []
             title = ""
@@ -67,7 +66,7 @@ def _load_dataset(name):
     if not os.path.exists(p):
         return None
     try:
-        with open(p, "r", encoding="utf-8") as f:
+        with open(p, encoding="utf-8") as f:
             return json.load(f)
     except Exception:
         return None

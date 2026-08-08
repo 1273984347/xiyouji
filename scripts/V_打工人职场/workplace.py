@@ -23,7 +23,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 取经项目复盘
 PROJECT_REVIEW = {
     "project_name": "大唐文化传播集团·西天取经战略项目",

@@ -99,15 +99,15 @@ def step4_checklist(target_version: str) -> None:
     print("\n" + "=" * 60)
     print(f"步骤 4/4: 发布动作 checklist (目标版本: {target_version})")
     print("=" * 60)
-    print("""
+    print(f"""
 发布前最后动作（人工执行）：
 
-  1. [ ] CHANGELOG.md 添加新版本段 `### {ver}` + W### ID + 四件套字段
+  1. [ ] CHANGELOG.md 添加新版本段 `### {target_version}` + W### ID + 四件套字段
   2. [ ] file-index.md 追加新版本条目（反向索引）
   3. [ ] README.md / STRUCTURE.md / 项目说明.md / 交接文档.md 头部版本号更新
          可运行：python scripts/sync_docs.py --fix
-  4. [ ] git commit -m "release: {ver}"
-  5. [ ] git tag {ver}
+  4. [ ] git commit -m "release: {target_version}"
+  5. [ ] git tag {target_version}
   6. [ ] git push && git push --tags
   7. [ ] （可选）更新 CHANGELOG-ARCHIVE.md（如旧版本归档）
 
@@ -116,7 +116,7 @@ def step4_checklist(target_version: str) -> None:
   python scripts/sync_docs.py --fix    # 自动修复版本号 + 统计
   python scripts/lint_links.py --all   # 链接校验
   python scripts/check_js_syntax.py --all  # JS 语法检查
-""".format(ver=target_version))
+""")
 
 
 def main():
@@ -148,7 +148,7 @@ def main():
         print(f"[READY] 发布前体检通过，可执行上方 checklist 发布 {target}")
         return 0
     else:
-        print(f"[BLOCK] 发布前体检未通过，请先修复上述问题")
+        print("[BLOCK] 发布前体检未通过，请先修复上述问题")
         return 1
 
 

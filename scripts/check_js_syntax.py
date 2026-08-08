@@ -14,12 +14,12 @@ When invoked with no arguments, defaults to --all behavior.
 
 Exit code: 0 if all scripts pass, 1 if any failure.
 """
-from pathlib import Path
+import argparse
+import os
 import re
 import subprocess
 import tempfile
-import os
-import argparse
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DATA_DIR = ROOT / "site" / "data"

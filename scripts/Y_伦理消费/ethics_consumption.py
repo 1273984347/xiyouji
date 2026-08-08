@@ -20,7 +20,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 坐骑权益保护协会年度报告
 MOUNT_RIGHTS_REPORT = {
     "organization_name": "三界坐骑权益保护协会",

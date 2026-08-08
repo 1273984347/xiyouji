@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 将站点 footer 版本印章从旧版本升到新版本（默认 v2.3.8 W357 -> v2.3.9 W358，可 --from/--to 指定）。
 

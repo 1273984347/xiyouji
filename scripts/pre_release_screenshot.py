@@ -236,7 +236,7 @@ def main():
 
     print("🚀 迭代发布前增强版截图审查")
     print(f"   时间：{datetime.now().isoformat(timespec='seconds')}")
-    print(f"   版本：v2.2.17")
+    print("   版本：v2.2.17")
 
     # 步骤 1: 截图
     if not args.report_only:

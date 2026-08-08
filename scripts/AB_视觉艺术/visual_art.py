@@ -19,7 +19,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 抽象数据雕塑《心经的物质形态》
 HEART_SUTRA_SCULPTURE = {
     "project_name": "心经的物质形态",

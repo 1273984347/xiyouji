@@ -21,7 +21,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 妖怪作案模式分类学
 # 按作案手法分为 5 类·统计案件数·代表案例·目标模式·成功率·侦破难度
 MONSTER_CRIME_PATTERNS = {

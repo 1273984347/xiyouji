@@ -19,7 +19,6 @@
 """
 import subprocess
 import sys
-from pathlib import Path
 
 # 需要检测 untracked 的交付物目录（相对项目根）
 DELIVERABLE_DIRS = [

@@ -6,10 +6,9 @@ Usage:
     # with extra HTML files to scan (relative to project root)
     python detect_unwrapped_tables.py --extra site/index.html
 """
-from pathlib import Path
-from html.parser import HTMLParser
-import re
 import argparse
+from html.parser import HTMLParser
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE_DATA = ROOT / "site" / "data"

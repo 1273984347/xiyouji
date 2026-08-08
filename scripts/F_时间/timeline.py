@@ -18,7 +18,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from utils.analyzer_base import run_analyzer
 
-
 # 关键事件锚点（手工整理，可扩展）
 KEY_EVENTS = [
     {"chapter": 1, "event": "石猴出世", "characters": ["孙悟空"]},
