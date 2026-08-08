@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>西游·渡口 — 无我写作引擎（原型）</title>
+<title>Ferry Crossing · Journey to the West — Self-less Writing Engine (prototype)</title>
 <style>
   :root{
     --paper:#faf7f2; --ink:#2b2118; --cinnabar:#c8463a; --indigo:#3a6b8c;
@@ -54,107 +54,106 @@
   #graphBox .gnode:hover{opacity:.72;}
   #graphBox .gnode.fx{font-weight:700;}
 </style>
-<link rel="stylesheet" href="tokens.css">
-<link rel="stylesheet" href="system.css">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../system.css">
 <!-- W334-RESKIN -->
-  <script defer src="js/rum.js"></script>
+  <script defer src="../js/rum.js"></script>
 </head>
 <body>
 <header>
   <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">
     <div>
-      <h1>西游 · 渡口</h1>
-      <p>无我写作引擎（原型）— 输入任意路人 / 器物 / 地名，生成一篇约 300 字"渡口档案"草稿</p>
+      <h1>Ferry Crossing &middot; Journey to the West</h1>
+      <p>Self-less writing engine (prototype) — enter any passer-by / object / place name to generate a ~300-character &ldquo;ferry dossier&rdquo; draft</p>
     </div>
-    <a href="index.html" style="font-size:13px;color:var(--indigo);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:8px 14px;white-space:nowrap;margin-top:4px;">← 返回详解西游记首页</a>
-    <a href="en/dukou-engine.html" style="font-size:13px;color:var(--indigo);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:8px 14px;white-space:nowrap;margin-top:4px;">EN / 英文 →</a>
+    <a href="index.html" style="font-size:13px;color:var(--indigo);text-decoration:none;border:1px solid var(--line);border-radius:6px;padding:8px 14px;white-space:nowrap;margin-top:4px;">&larr; Back to English home</a>
   </div>
 </header>
 <main>
   <div class="panel">
-    <label for="q">渡口入口（路人 / 器物 / 地名）</label>
-    <input id="q" type="text" placeholder="例如：五行山下的牧童、晾经石的裂痕、陈家庄的晒经石…" />
+    <label for="q">Ferry entry (passer-by / object / place)</label>
+    <input id="q" type="text" placeholder="e.g. the cowherd below the Five-Element Mountain, the crack in the Sutra-Drying Stone, the scripture-drying rock at Chen Village…" />
     <div class="row">
-      <button id="gen">生成渡口档案</button>
-      <button id="rand" class="ghost">随机一个渡口</button>
-      <button id="rag" class="ghost">检索真实语料</button>
+      <button id="gen">Generate ferry dossier</button>
+      <button id="rand" class="ghost">Random ferry</button>
+      <button id="rag" class="ghost">Search real corpus</button>
     </div>
-    <div class="meta" id="hint">默认是模板引擎（不调用外部模型）。若本地已启动 RAG 服务（<code>python scripts/rag/rag_server.py</code>），点「检索真实语料」会返回基于 672 篇文档 + W326 图谱的真实检索结果（含可视化关系图）；服务未启动则自动回退到模板引擎。</div>
+    <div class="meta" id="hint">By default a template engine (no external model called). If the local RAG service is running (<code>python scripts/rag/rag_server.py</code>), clicking &ldquo;Search real corpus&rdquo; returns real retrieval over 672 docs + the W326 graph (with a visualized relation graph); if not running, it automatically falls back to the template engine.</div>
   </div>
 
   <div class="panel">
-    <label>渡口档案（草稿）</label>
-    <div id="out">— 在上方输入，或点"随机一个渡口" —</div>
+    <label>Ferry dossier (draft)</label>
+    <div id="out">&mdash; Type above, or click &ldquo;Random ferry&rdquo; &mdash;</div>
   </div>
 
   <div class="panel" id="graphPanel" style="display:none;">
-    <label>佛法=AI 图谱（W326 · 可视化 · 来自 /graph）</label>
+    <label>Buddhism = AI graph (W326 &middot; visualization &middot; from /graph)</label>
     <div class="row" style="margin:6px 0 10px;">
-      <span class="meta" style="margin:0;">点击任意节点展开其关联 ·</span>
-      <button id="graphReset" class="ghost" style="font-size:12px;padding:2px 12px;">重置图谱</button>
+      <span class="meta" style="margin:0;">Click any node to expand its connections ·</span>
+      <button id="graphReset" class="ghost" style="font-size:12px;padding:2px 12px;">Reset graph</button>
     </div>
     <div id="graphBox"></div>
   </div>
 </main>
-<footer>佛法=AI · 缘起即算法 · v2.3.17 W393 工程化收口：部署 GitHub Pages + RUM 埋点（W390）· 首页首屏「问渡口」+ 渡口引擎离线可用（W391）· 站点导读层 guide.html + 修首页死链（W392）· 降级六文档同步 核心2+辅助4自动·bump_version.py（W393）</footer>
+<footer>Buddhism = AI &middot; conditionality is the algorithm &middot; v2.3.17 W393 engineering wrap-up: deploy GitHub Pages + RUM metrics (W390) &middot; homepage &ldquo;Ask the Ferry&rdquo; box + offline-capable ferry engine (W391) &middot; site reading-guide layer guide.html + fix homepage dead links (W392) &middot; downgrade six-doc sync to 2-core + 4-aux auto &middot; bump_version.py (W393)</footer>
 
 <script>
-// ---- 渡口知识库（抽取自项目西游渡·翻面方法论）----
+// ---- Ferry knowledge base (extracted from the project’s “Xiyoudu · flip-side” methodology) ----
 const SENSORY = [
-  "舌苔的十四层还带着前世的咸",
-  "钯柄的温差氧化层，是这只手留下的唯一年轮",
-  "鳞片不痒了，但裂还在",
-  "风从山坳里拐了个弯，带着铁锈与艾草的气味",
-  "石笋释放压缩的飞剑声波，年轮似的荡开",
-  "莲藕的断面渗出一点清甜的生涩"
+  "Fourteen layers of tongue-fur still carry the salt of a former life",
+  "The thermal oxide on the rake's shaft is the only growth ring this hand left",
+  "The scales no longer itch, but the fracture remains",
+  "Wind bent around the ravine, carrying the smell of rust and mugwort",
+  "Stalactites release compressed sword-sonic waves, rippling like tree rings",
+  "The lotus root's cut face weeps a faint, sweet greenness"
 ];
 const ROLE = [
-  "他不是主角，他是让主角得以通行的隐变量",
-  "她从不在回目里出现，却在每个难里呼吸",
-  "它是一段被默认值为零、其实不为零的参数",
-  "他们是被模型从训练集直接删除的样本"
+  "He is not the protagonist; he is the latent variable that lets the protagonist pass",
+  "She never appears in a chapter title, yet breathes in every ordeal",
+  "It is a parameter defaulted to zero, but which is in fact not zero",
+  "They are the samples the model deleted directly from the training set"
 ];
 const LINE = [
-  "（见 W321 line 7012 凌云渡：脱胎即 Dropout）",
-  "（见 W323 西游渡元定义：渡口的人=隐变量）",
-  "（见 W324 遗忘者列传：暗数据即先验分布）",
-  "（见 W321 line 1393 紧箍咒：正则项在收敛后归零）"
+  "(see W321 line 7012 Lingyun Ford: shedding the body is Dropout)",
+  "(see W323 Xiyoudu primal definition: the ferry person = latent variable)",
+  "(see W324 Annals of the Forgotten: dark data is the prior distribution)",
+  "(see W321 line 1393 Golden Hoop: the regularization term goes to zero after convergence)"
 ];
 const TURN = [
-  "翻一面看：被记为背景的，其实是前提",
-  "身体书写：残差不会被格式化，它是唯一诚实的存储器",
-  "渡口视角：在 loss 之外，还有人被计入了分母",
-  "无我写作：这不是谁的传记，是数据流经此处时的一次驻留"
+  "Turn it over: what was recorded as background is in fact the premise",
+  "Body-writing: the residual is never formatted; it is the only honest memory",
+  "Ferry viewpoint: beyond the loss, there are those counted into the denominator",
+  "Self-less writing: this is no one's biography, only a sojourn of data as it flows through this place"
 ];
 const CLOSE = [
-  "他不在乎被记住。他只是让取经的路，成立过一次。",
-  "经书湿了，字淡了，但石头替他记住了那一笔。",
-  "多年以后，有人路过，闻到风里旧年的焦味——那是他。",
-  "模型收敛之后，他仍是一处微小的漂移。"
+  "He does not care about being remembered. He only let the pilgrimage road come true, once.",
+  "The scriptures got wet, the characters faded, but the stone remembered that stroke for him.",
+  "Years later, someone passing by smells the old-year scorched scent in the wind — that was him.",
+  "After the model converges, he remains a tiny drift."
 ];
 
 function pick(a){return a[Math.floor(Math.random()*a.length)];}
 
 function generate(raw){
-  const name = (raw||"").trim() || "无名者";
+  const name = (raw||"").trim() || "the nameless";
   const s = pick(SENSORY), r = pick(ROLE), l = pick(LINE),
         t = pick(TURN), c = pick(CLOSE);
   const body =
-`【渡口档案】${name}
+`[FERRY DOSSIER] ${name}
 
-${name}，${r}。
+${name}, ${r}.
 
-在取经工程的训练日志里，主流叙事只记录参与前向传播的节点——妖、神、师徒。而${name}属于另一类：被忽略的隐变量。没有他，主要角色的路径不会成立，只是没有人把他的权重写进正文。
+In the training log of the pilgrimage project, the mainstream narrative records only nodes that took part in forward propagation — demons, gods, master and disciples. Yet ${name} belongs to another class: an overlooked latent variable. Without him, the main characters' paths would not hold; it is simply that no one wrote his weight into the text.
 
-${s}。这是身体书写留下的残差——训练结束后仍在微微振动，因为曾经在那里停留得足够长。
+${s}. This is the residual left by body-writing — still faintly vibrating after training ends, because it lingered there long enough.
 
-${t}。${l}。
+${t}. ${l}.
 
 ${c}`;
   return body;
 }
 
-const RANDOMS = ["五行山下的牧童","晾经石的裂痕","陈家庄的晒经石","流沙河底的九颗骷髅","钉在门上的桩","通天河岸哭红的眼","火焰山北坡的第七户","狮驼岭空城里的一扇门","金箍棒重量的那根针","桃木拐杖插进的泥"];
+const RANDOMS = ["the cowherd below the Five-Element Mountain","the crack in the Sutra-Drying Stone","the scripture-drying rock at Chen Village","the nine skulls at the bottom of the Flowing-Sand River","the post nailed to the door","the weeping-red eyes on the Tongtian River bank","the seventh household on the north slope of Flame Mountain","a door in the empty city of Lion-Camel Ridge","the needle that is the weight of the Golden Cudgel","the earth a peach-wood staff was thrust into"];
 
 document.getElementById('gen').onclick = ()=>{
   const v = document.getElementById('q').value;
@@ -166,16 +165,16 @@ document.getElementById('rand').onclick = ()=>{
   document.getElementById('out').textContent = generate(v);
 };
 
-// ---- RAG 桥接：调用本地 scripts/rag/rag_server.py，失败回退模板引擎 ----
+// ---- RAG bridge: calls local scripts/rag/rag_server.py; falls back to template engine on failure ----
 let graphState = { triples: [], seen: new Set(), seed: new Map() };
 let graphRootQuery = null;
-const nodePos = new Map();   // label -> {x,y}，跨重绘缓存，消除点击跳变
-let graphFocus = null;       // 当前焦点节点 label
+const nodePos = new Map();   // label -> {x,y}, cache across redraws, eliminating click jumps
+let graphFocus = null;       // current focus node label
 async function queryRAG(){
   const v = document.getElementById('q').value.trim();
   const out = document.getElementById('out');
-  if(!v){ out.textContent = '请先输入渡口入口（路人 / 器物 / 地名）。'; return; }
-  out.textContent = '检索中……（本地 RAG 服务 http://127.0.0.1:8777）';
+  if(!v){ out.textContent = 'Please enter a ferry entry (passer-by / object / place) first.'; return; }
+  out.textContent = 'Searching… (local RAG service http://127.0.0.1:8777)';
   try{
     const r = await fetch('http://127.0.0.1:8777/query?q=' + encodeURIComponent(v));
     if(!r.ok) throw new Error('http '+r.status);
@@ -183,20 +182,20 @@ async function queryRAG(){
     renderRAG(v, data);
   }catch(e){
     document.getElementById('graphPanel').style.display='none';
-    out.textContent = generate(v) + '\n\n〔本地 RAG 服务未启动，已回退到模板引擎。启动：python scripts/rag/rag_server.py〕';
+    out.textContent = generate(v) + '\n\n[Local RAG service not started; fell back to template engine. Start: python scripts/rag/rag_server.py]';
   }
 }
 function renderRAG(name, data){
-  let s = '【渡口检索档案 · RAG】' + name + '\n\n';
+  let s = '[Ferry retrieval dossier · RAG] ' + name + '\n\n';
   if(data.snippets && data.snippets.length){
-    s += '— 语料检索（BM25 · 672 篇 docs）—\n';
+    s += '— Corpus retrieval (BM25 · 672 docs) —\n';
     data.snippets.forEach(x=>{
       s += '· ' + x.path + '（score ' + x.score + '）\n';
       if(x.excerpt) s += '  …' + x.excerpt.slice(0,90) + '…\n';
     });
   }
   if(data.graph && data.graph.length){
-    s += '\n— 佛法=AI 图谱（W326 · LightRAG 图谱层）—\n';
+    s += '\n— Buddhism = AI graph (W326 · LightRAG graph layer) —\n';
     data.graph.slice(0,4).forEach(t=>{
       s += '· ' + t.from + ' —' + t.relation + '→ ' + t.to + '\n';
     });
@@ -210,7 +209,7 @@ function renderRAG(name, data){
   renderGraph();
 }
 
-// ---- 图谱可视化：纯 SVG 力导向简化版，零依赖（不引 D3 / CDN，适配 file://）----
+// ---- Graph visualization: pure-SVG simplified force-directed, zero deps (no D3 / CDN, works under file://) ----
 function shortLabel(s){
   if(!s) return '?';
   let x = s;
@@ -232,10 +231,10 @@ function mergeTriples(triples, parent){
     if(parent && parent!==b) graphState.seed.set(b, parent);
   });
 }
-// 力导向布局：跨重绘缓存节点位置（nodePos），新节点从父节点旁长出，消除点击跳变
+// Force-directed layout: cache node positions across redraws (nodePos); new nodes grow from parent, eliminating click jumps
 function layoutGraph(ids){
   const W=760, H=420, cx=W/2, cy=H/2;
-  // 1) 初始化尚未定位的节点
+  // 1) Initialize not-yet-placed nodes
   let k=0;
   ids.forEach(id=>{
     if(nodePos.has(id)) return;
@@ -250,7 +249,7 @@ function layoutGraph(ids){
       nodePos.set(id, { x: cx + R*Math.cos(a), y: cy + R*Math.sin(a) });
     }
   });
-  // 2) 力导向松弛：斥力 + 边弹簧 + 中心引力 + 锚定（维持旧节点稳定，消除点击跳变）
+  // 2) Force-directed relaxation: repulsion + edge springs + center attraction + anchoring (keep old nodes stable, eliminate click jumps)
   const anchor = new Map();
   ids.forEach(id=>{ const p=nodePos.get(id); anchor.set(id,{x:p.x,y:p.y}); });
   const iters = ids.length > 60 ? 90 : 160;
@@ -303,7 +302,7 @@ function renderGraph(){
   const radiusOf = id=>{
     const d=deg.get(id);
     if(maxDeg===minDeg) return 7;
-    return 5 + (d-minDeg)/(maxDeg-minDeg)*9;   // 5..14，按度数映射
+    return 5 + (d-minDeg)/(maxDeg-minDeg)*9;   // map by degree, 5..14
   };
   const focusNbr = new Set();
   if(graphFocus){ triples.forEach(t=>{ if(t.a===graphFocus) focusNbr.add(t.b); if(t.b===graphFocus) focusNbr.add(t.a); }); }
@@ -349,7 +348,7 @@ async function expandNode(label){
       mergeTriples(data.graph, label);
       renderGraph();
     }
-  }catch(e){ /* 服务未启动则忽略点击 */ }
+  }catch(e){ /* ignore click if service not started */ }
 }
 async function resetGraph(){
   if(!graphRootQuery) return;
@@ -365,7 +364,7 @@ async function resetGraph(){
 document.getElementById('rag').onclick = queryRAG;
 document.getElementById('graphReset').onclick = resetGraph;
 
-// ---- 首页 ?q= 直达：离线模板引擎即时生成（不依赖本地 RAG 后端）----
+// ---- Home ?q= direct: offline template engine generates instantly (no local RAG backend needed) ----
 (function () {
   try {
     var p = new URLSearchParams(location.search);
@@ -377,11 +376,11 @@ document.getElementById('graphReset').onclick = resetGraph;
         var hint = document.getElementById('hint');
         if (hint) {
           hint.insertAdjacentText('afterbegin',
-            '〔来自首页提问 · 已用离线模板引擎生成草稿；点「检索真实语料」可调用本地 RAG 获得基于 672 篇语料的真实检索结果〕 ');
+            '[From homepage question · draft generated by offline template engine; click “Search real corpus” to call local RAG for real retrieval over 672 docs] ');
         }
       }
     }
-  } catch (e) { /* URLSearchParams 不支持时静默忽略 */ }
+  } catch (e) { /* silently ignore if URLSearchParams unsupported */ }
 })();
 </script>
 </body>
