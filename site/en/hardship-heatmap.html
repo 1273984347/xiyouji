@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>81-Tribulation Difficulty Heatmap · Journey to the West Explained</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render the charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: swap;
+    src: url('static/fonts/NotoSerifSC-VF.woff2') format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .notice {
+            background: #fff8e7; border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        }
+        
+        
+        .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
+        
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
+        
+        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: var(--accent-2);
+            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 4px 0; transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        
+        .stage-switcher { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .stage-btn {
+            padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.9em;
+            font-family: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .stage-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .stage-btn:hover { background: var(--accent-soft); }
+        .stage-btn.active:hover { background: var(--accent); }
+        .heatmap-wrap { position: relative; overflow-x: auto; }
+        #heatmap-svg { display: block; min-width: 760px; }
+        .heat-cell { transition: opacity 0.2s; cursor: pointer; }
+        .heat-cell:hover { opacity: 0.72; }
+        .heat-tip, .bar-tip {
+            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
+            color: #f5e9d4; padding: 8px 12px; border-radius: 6px; font-size: 0.8rem;
+            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 280px;
+        }
+        .heat-tip .tip-title, .bar-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 4px; }
+        .heat-tip .tip-row, .bar-tip .tip-row { color: #d9cdb8; }
+        .heat-tip .tip-meta, .bar-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; margin-top: 4px; }
+        .legend-bar { display: flex; align-items: center; gap: 12px; margin-top: 12px; font-size: 0.82em; color: var(--ink-soft); flex-wrap: wrap; }
+        .legend-gradient {
+            width: 200px; height: 14px; border-radius: 3px;
+            background: linear-gradient(to right, #f5e9d4, #e9b885, #c8463a, #8c2a2a);
+        }
+        .legend-marks { display: flex; justify-content: space-between; width: 200px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: var(--ink-soft); margin-top: 2px; }
+        .bar-block { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 900px) { .bar-block { grid-template-columns: 1fr 1fr; } }
+        .bar-card { border: 1px solid var(--line); border-radius: 6px; padding: 14px; background: #fffdf8; }
+        .bar-card h3 { font-size: 0.98em; margin-bottom: 8px; color: var(--ink); }
+        .bar-card svg { width: 100%; height: 240px; display: block; }
+        .stage-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.88em; }
+        .stage-table th, .stage-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
+        .stage-table th { background: #fff8e7; color: var(--accent-3); font-weight: 600; }
+        .stage-table td.num { text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--accent); }
+        .cause-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; font-size: 0.86em; }
+        .cause-legend .legend-item {
+            display: flex; align-items: center; gap: 6px; padding: 4px 10px;
+            border-radius: 4px; background: #fff8e7;
+        }
+        .cause-legend .legend-item .swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+        .insight-box {
+            background: #fffdf8; border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+        }
+        .insight-box strong { color: var(--accent); font-weight: 700; }
+        .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
+        
+        
+        @media (prefers-reduced-motion: reduce) {  }
+        @media (max-width: 480px) {
+            
+            
+            
+            .stage-btn { padding: 6px 12px; font-size: 0.82em; }
+        }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/hardship-heatmap.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / 81-Tribulation Difficulty Heatmap</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>81-Tribulation Difficulty Heatmap</h1>
+        <p class="subtitle">D2A · The difficulty-score distribution and evolution of the 81 ordeals</p>
+        <p class="tagline">— The book's difficulty terrain, from the "4 Prequel ordeals" to the "Three Demons of Lion-Camel, 10/extreme"</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">EN Home</a>
+            <span class="sep">›</span>
+            <a href="dashboard.html">Dashboard</a>
+            <span class="sep">›</span>
+            <span>81-Tribulation Difficulty Heatmap</span>
+        </nav>
+        <div class="notice" role="note">
+            <strong>Difficulty-score key</strong>: a 4-dimension composite (1-10) — cause (descended mount +2 / mind-demon +1 / wild demon +0 / arranged -1) + ending (taken-away·with backing +2 / recruited +1 / killed +0) + resolution (call for help +5 / Wukong alone +1) + key-event bonus (Buddha/Guanyin intervene +2 / multi-chapter compound +1). Tiers: <span class="mono">1-3 Easy / 4-6 Medium / 7-8 Hard / 9-10 Extreme</span>.
+        </div>
+
+        <!-- 板块 1：KPI 概要栏 -->
+        <section class="kpi-row" aria-label="Difficulty summary">
+            <div class="kpi-card">
+                <div class="num">81</div>
+                <div class="label">Total ordeals</div>
+                <div class="detail">Prequel 4 + pilgrimage 77</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">5.5</div>
+                <div class="label">Avg difficulty score</div>
+                <div class="detail">Mid-upper · stdev 2.2</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">10</div>
+                <div class="label">Highest (extreme)</div>
+                <div class="detail">Ch.74 · Lion-Camel Blocked (three demons)</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">8</div>
+                <div class="label">Extreme count (9-10)</div>
+                <div class="detail">9.9% · clustered at ch.40/50/52/58/61/74/75</div>
+            </div>
+        </section>
+
+        <!-- 板块 2：主热力图（回目 × 难度系数） -->
+        <section class="section" aria-labelledby="sec-heatmap">
+            <h2 id="sec-heatmap">1 · Chapter × Difficulty-Score Heatmap</h2>
+            <p>Each cell is one ordeal. X-axis = chapter (Prequel / ch.1-100), Y-axis = difficulty score (1-10). Darker = harder. Click a cell for details.</p>
+            <div class="stage-switcher" role="tablist" aria-label="Stage filter">
+                <button class="stage-btn active" role="tab" aria-selected="true" data-stage="all">All 81 ordeals</button>
+                <button class="stage-btn" role="tab" aria-selected="false" data-stage="pre">Prequel 4</button>
+                <button class="stage-btn" role="tab" aria-selected="false" data-stage="early">Early ch.13-23</button>
+                <button class="stage-btn" role="tab" aria-selected="false" data-stage="mid">Mid ch.24-58</button>
+                <button class="stage-btn" role="tab" aria-selected="false" data-stage="late">Late ch.59-79</button>
+                <button class="stage-btn" role="tab" aria-selected="false" data-stage="end">Final ch.91-100</button>
+            </div>
+            <div class="heatmap-wrap">
+                <svg id="heatmap-svg" width="100%" height="420" role="img" aria-labelledby="heatmap-title heatmap-desc">
+                    <title id="heatmap-title">81-Tribulation Difficulty Heatmap</title>
+                    <desc id="heatmap-desc">Heatmap with chapter on the X-axis and difficulty score 1-10 on the Y-axis; color depth encodes difficulty.</desc>
+                </svg>
+                <div class="heat-tip" id="heat-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-bar" aria-label="Difficulty scale">
+                <span>Easy</span>
+                <div>
+                    <div class="legend-gradient"></div>
+                    <div class="legend-marks"><span>1</span><span>3</span><span>6</span><span>8</span><span>10</span></div>
+                </div>
+                <span>Extreme</span>
+            </div>
+        </section>
+
+        <!-- 板块 3：阶段平均难度柱状图 -->
+        <section class="section" aria-labelledby="sec-stage">
+            <h2 id="sec-stage">2 · Average Difficulty Across Five Stages</h2>
+            <p>Grouping the 81 ordeals into five pilgrimage stages and averaging each stage's score reveals a "low-mid-high-peak-fall" five-phase curve.</p>
+            <div class="bar-block">
+                <div class="bar-card">
+                    <h3>Average Difficulty by Stage (Bar)</h3>
+                    <svg id="stage-bar-svg" width="100%" height="240" role="img" aria-labelledby="stage-bar-title">
+                        <title id="stage-bar-title">Average Difficulty Score by Five Stages</title>
+                    </svg>
+                    <div class="bar-tip" id="stage-bar-tip" role="tooltip"></div>
+                </div>
+                <div class="bar-card">
+                    <h3>Stage Statistics Detail</h3>
+                    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+                    <table class="stage-table" aria-label="Stage statistics detail">
+                        <thead>
+                            <tr><th>Stage</th><th>Chapter range</th><th>Ordeals</th><th>Avg difficulty</th><th>Extreme</th></tr>
+                        </thead>
+                        <tbody id="stage-table-body"></tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 板块 4：难度 × 起因堆叠柱状图 -->
+        <section class="section" aria-labelledby="sec-cause">
+            <h2 id="sec-cause">3 · Difficulty Tier × Cause-Type Distribution</h2>
+            <p>Within each difficulty tier, stacked by cause type (Tathāgata/Guanyin-arranged, true wild demons, descended mounts, mind-demons). The 9-10 extreme tier is almost monopolized by "descended mounts."</p>
+            <div class="bar-card">
+                <h3>Difficulty-Tier Stacked Bars</h3>
+                <svg id="cause-bar-svg" width="100%" height="280" role="img" aria-labelledby="cause-bar-title">
+                    <title id="cause-bar-title">Difficulty Tier × Cause Type (Stacked)</title>
+                </svg>
+                <div class="bar-tip" id="cause-bar-tip" role="tooltip"></div>
+                <div class="cause-legend" id="cause-legend" aria-label="Cause-type legend"></div>
+            </div>
+        </section>
+
+        <!-- 板块 5：演变洞察 -->
+        <section class="section" aria-labelledby="sec-insight">
+            <h2 id="sec-insight">4 · Insights on the Difficulty Terrain</h2>
+            <div class="insight-box">
+                <span class="ib-tag">[Peak]</span>
+                <strong>Trial 74 — the Three Demons of Lion-Camel Ridge mark the book's peak difficulty (10)</strong>。The three demons — Azure Lion, White Elephant, and Golden-Winged Peng — are all mounts descended from the Buddha's court; Wukong is utterly defeated, and only Tathāgata himself, leading five hundred arhats, subdues Peng.This is the only ordeal requiring the Buddha's personal intervention, marking the pilgrimage's hardest test — the limit of Heaven's mobilization.
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Structure]</span>
+                <strong>"Descended mounts" monopolize the 9-10 extreme tier</strong>。Of the 8 extreme ordeals, 5 are descended mounts (Blue Ox of Gold-Bowl 9 / Even the Gods Cannot Subdue 9 / Three Demons of Lion-Camel 10 / Dark Clouds at the City 9 / Golden Gong in the Void 9)，Their shared trait: "high-ranking celestial mount + master reclaims it + taken-away ending." This confirms the "demon-backer theory" — a demon with connections is the hardest to beat.
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Curve]</span>
+                <strong>Difficulty follows a four-phase "low-rise-peak-fall" curve along the pilgrimage</strong>。Prequel's 4 ordeals average 2.5 (no combat)；Early (ch.13-23) average 3.6 (team-building, mostly recruiting disciples)；Mid (ch.24-58) average 6.8 (White Bone Demon thrice struck + false Monkey King + Flame Mountain — mind-demons and mounts interweave, difficulty climbs)；Late (ch.59-79) average 6.9 (Lion-Camel + Yuhua + Biqiu — mounts erupt in concentration, peak difficulty)；Final (ch.91-100) average 3.8 (return toward Buddhahood, back to low difficulty)。
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Contrast]</span>
+                <strong>"Mind-demons" split at the extremes</strong>。Among the 10 mind-demon ordeals, "White Bone Demon thrice struck / Wukong banished" (6) and "banished again" (7) are mid-level，but "the false macaque" (9 — Tathāgata unmasks the Six-Eared Macaque) reaches extreme。This reveals the unpredictability of "self-splitting" crises — a master-disciple quarrel is easily mended, but identity impersonation needs outside judgment.
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Coda]</span>
+                <strong>Ch.98-100's 14 ordeals drop off a cliff (average 3.4)</strong>。Lingyun Ford's rebirth, Scriptures Incomplete, Thunderclap at Buddha's Realm, Five Sages Attain the Truth — all "procedural passings" with no demon opposition.This echoes the book's "cultivating the mind" theme — once at Spirit Mountain, difficulty yields to the ritualized narrative of "perfecting the heart."
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · Data Visualization</div>
+        </div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/hardship-heatmap.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // EMBEDDED_DATA：81 难完整数据（含重构后的 difficulty_score 1-10）
+    // 数据源：scripts/C_情节/hardships_81.py + 难度系数综合评估
+    // 字段：n/name/chapter/chNum/cause(arranged/wild/mount/mind)/ending(taken/killed/recruited)/difficulty(solo/rescue)/score(1-10)/stage(pre/early/mid/late/end)
+    const EMBEDDED_DATA = [
+        {n:1, name:"Gold Cicada Demoted", chapter:"Prequel", chNum:0, cause:"arranged", ending:"taken", difficulty:"solo", score:3, stage:"pre"},
+        {n:2, name:"Peril at Birth", chapter:"Prequel", chNum:0, cause:"arranged", ending:"taken", difficulty:"solo", score:2, stage:"pre"},
+        {n:3, name:"Cast Adrift at Full Moon", chapter:"Prequel", chNum:0, cause:"arranged", ending:"taken", difficulty:"solo", score:2, stage:"pre"},
+        {n:4, name:"Seeking Kin, Avenging Wrong", chapter:"Prequel", chNum:0, cause:"arranged", ending:"taken", difficulty:"solo", score:3, stage:"pre"},
+        {n:5, name:"Tigers Beyond the Gate", chapter:"Ch.13", chNum:13, cause:"wild", ending:"killed", difficulty:"solo", score:2, stage:"early"},
+        {n:6, name:"Pitfall Losing a Companion", chapter:"Ch.13", chNum:13, cause:"wild", ending:"killed", difficulty:"solo", score:2, stage:"early"},
+        {n:7, name:"Atop Twin-Fork Ridge", chapter:"Ch.13", chNum:13, cause:"wild", ending:"killed", difficulty:"solo", score:2, stage:"early"},
+        {n:8, name:"Two-Worlds Mountain", chapter:"Ch.14", chNum:14, cause:"arranged", ending:"taken", difficulty:"solo", score:3, stage:"early"},
+        {n:9, name:"Steep Ravine, Changing Horse", chapter:"Ch.15", chNum:15, cause:"arranged", ending:"taken", difficulty:"solo", score:3, stage:"early"},
+        {n:10, name:"Burned by Night Fire", chapter:"Ch.16", chNum:16, cause:"wild", ending:"killed", difficulty:"solo", score:3, stage:"early"},
+        {n:11, name:"The Lost Kasaya", chapter:"Ch.16", chNum:16, cause:"wild", ending:"killed", difficulty:"rescue", score:6, stage:"early"},
+        {n:12, name:"Subduing Bajie", chapter:"Ch.19", chNum:19, cause:"arranged", ending:"recruited", difficulty:"solo", score:4, stage:"early"},
+        {n:13, name:"Blocked by Yellow Wind Demon", chapter:"Ch.21", chNum:21, cause:"wild", ending:"killed", difficulty:"rescue", score:6, stage:"early"},
+        {n:14, name:"Appealing to Lingji", chapter:"Ch.21", chNum:21, cause:"arranged", ending:"taken", difficulty:"rescue", score:5, stage:"early"},
+        {n:15, name:"Quicksand Hard to Cross", chapter:"Ch.22", chNum:22, cause:"arranged", ending:"recruited", difficulty:"solo", score:4, stage:"early"},
+        {n:16, name:"Winning Sha Monk", chapter:"Ch.22", chNum:22, cause:"arranged", ending:"recruited", difficulty:"solo", score:4, stage:"early"},
+        {n:17, name:"Four Sages Manifest", chapter:"Ch.23", chNum:23, cause:"arranged", ending:"taken", difficulty:"solo", score:3, stage:"early"},
+        {n:18, name:"At Five Villages Temple", chapter:"Ch.24", chNum:24, cause:"wild", ending:"taken", difficulty:"rescue", score:7, stage:"mid"},
+        {n:19, name:"Saving the Ginseng", chapter:"Ch.26", chNum:26, cause:"arranged", ending:"taken", difficulty:"rescue", score:7, stage:"mid"},
+        {n:20, name:"Banishing the Mind-Ape", chapter:"Ch.27", chNum:27, cause:"mind", ending:"killed", difficulty:"solo", score:6, stage:"mid"},
+        {n:21, name:"Scattered in Black Pine Forest", chapter:"Ch.28", chNum:28, cause:"mind", ending:"killed", difficulty:"solo", score:5, stage:"mid"},
+        {n:22, name:"Letter for Baoxiang", chapter:"Ch.29", chNum:29, cause:"mind", ending:"taken", difficulty:"rescue", score:6, stage:"mid"},
+        {n:23, name:"Tiger in the Throne Hall", chapter:"Ch.30", chNum:30, cause:"wild", ending:"killed", difficulty:"rescue", score:7, stage:"mid"},
+        {n:24, name:"Demons at Flat-Top Mountain", chapter:"Ch.32", chNum:32, cause:"mount", ending:"taken", difficulty:"rescue", score:8, stage:"mid"},
+        {n:25, name:"King of Wuji, Buddha Devotee", chapter:"Ch.36", chNum:36, cause:"mount", ending:"taken", difficulty:"rescue", score:6, stage:"mid"},
+        {n:26, name:"Demon in Disguise", chapter:"Ch.37", chNum:37, cause:"mount", ending:"taken", difficulty:"rescue", score:6, stage:"mid"},
+        {n:27, name:"Demon at Howl Mountain", chapter:"Ch.40", chNum:40, cause:"wild", ending:"recruited", difficulty:"rescue", score:9, stage:"mid"},
+        {n:28, name:"Wind Snatches the Sage", chapter:"Ch.41", chNum:41, cause:"wild", ending:"recruited", difficulty:"rescue", score:7, stage:"mid"},
+        {n:29, name:"Mind-Ape Afflicted", chapter:"Ch.41", chNum:41, cause:"wild", ending:"recruited", difficulty:"rescue", score:7, stage:"mid"},
+        {n:30, name:"Summoning a Sage to Quell Demon", chapter:"Ch.42", chNum:42, cause:"arranged", ending:"recruited", difficulty:"rescue", score:8, stage:"mid"},
+        {n:31, name:"Sinking in Black River", chapter:"Ch.43", chNum:43, cause:"wild", ending:"taken", difficulty:"rescue", score:6, stage:"mid"},
+        {n:32, name:"Hauling at Chechi", chapter:"Ch.44", chNum:44, cause:"wild", ending:"killed", difficulty:"solo", score:5, stage:"mid"},
+        {n:33, name:"The Great Wager", chapter:"Ch.45", chNum:45, cause:"wild", ending:"killed", difficulty:"solo", score:5, stage:"mid"},
+        {n:34, name:"Suppressing Dao, Exalting Buddhism", chapter:"Ch.46", chNum:46, cause:"wild", ending:"killed", difficulty:"solo", score:5, stage:"mid"},
+        {n:35, name:"Great Flood on Road", chapter:"Ch.47", chNum:47, cause:"mount", ending:"taken", difficulty:"rescue", score:7, stage:"mid"},
+        {n:36, name:"Falling into Heavenly River", chapter:"Ch.47", chNum:47, cause:"mount", ending:"taken", difficulty:"rescue", score:7, stage:"mid"},
+        {n:37, name:"Fish-Basket Appears", chapter:"Ch.49", chNum:49, cause:"arranged", ending:"taken", difficulty:"rescue", score:8, stage:"mid"},
+        {n:38, name:"Demon at Gold-Bowl Mountain", chapter:"Ch.50", chNum:50, cause:"mount", ending:"taken", difficulty:"rescue", score:9, stage:"mid"},
+        {n:39, name:"Even Gods Cannot Subdue", chapter:"Ch.52", chNum:52, cause:"mount", ending:"taken", difficulty:"rescue", score:9, stage:"mid"},
+        {n:40, name:"Asking Buddha the Root", chapter:"Ch.52", chNum:52, cause:"arranged", ending:"taken", difficulty:"rescue", score:8, stage:"mid"},
+        {n:41, name:"Poisoned Water", chapter:"Ch.53", chNum:53, cause:"wild", ending:"killed", difficulty:"rescue", score:6, stage:"mid"},
+        {n:42, name:"Detained for Marriage at Xiliang", chapter:"Ch.54", chNum:54, cause:"mind", ending:"taken", difficulty:"solo", score:4, stage:"mid"},
+        {n:43, name:"Torment in Pipa Cave", chapter:"Ch.55", chNum:55, cause:"wild", ending:"killed", difficulty:"rescue", score:7, stage:"mid"},
+        {n:44, name:"Banished Again", chapter:"Ch.57", chNum:57, cause:"mind", ending:"killed", difficulty:"solo", score:7, stage:"mid"},
+        {n:45, name:"False Macaque Unmasked", chapter:"Ch.58", chNum:58, cause:"mind", ending:"killed", difficulty:"rescue", score:9, stage:"mid"},
+        {n:46, name:"Blocked by Flame Mountain", chapter:"Ch.59", chNum:59, cause:"wild", ending:"taken", difficulty:"rescue", score:8, stage:"late"},
+        {n:47, name:"Seeking the Plantain Fan", chapter:"Ch.59", chNum:59, cause:"wild", ending:"taken", difficulty:"rescue", score:7, stage:"late"},
+        {n:48, name:"Binding the Demon King", chapter:"Ch.61", chNum:61, cause:"wild", ending:"taken", difficulty:"rescue", score:9, stage:"late"},
+        {n:49, name:"Sweeping Pagoda at Saicheng", chapter:"Ch.62", chNum:62, cause:"wild", ending:"killed", difficulty:"solo", score:5, stage:"late"},
+        {n:50, name:"Demons at Baolin", chapter:"Ch.65", chNum:65, cause:"mount", ending:"taken", difficulty:"rescue", score:7, stage:"late"},
+        {n:51, name:"Capturing the Sage", chapter:"Ch.65", chNum:65, cause:"mount", ending:"taken", difficulty:"rescue", score:7, stage:"late"},
+        {n:52, name:"Persimmon Gorge at Seven-Sin Mtn", chapter:"Ch.67", chNum:67, cause:"wild", ending:"killed", difficulty:"solo", score:4, stage:"late"},
+        {n:53, name:"Healing at Zhuzi Kingdom", chapter:"Ch.68", chNum:68, cause:"wild", ending:"taken", difficulty:"rescue", score:7, stage:"late"},
+        {n:54, name:"Saving the Suffering", chapter:"Ch.71", chNum:71, cause:"mount", ending:"taken", difficulty:"rescue", score:7, stage:"late"},
+        {n:55, name:"Quelling Demon, Recovering Queen", chapter:"Ch.71", chNum:71, cause:"mount", ending:"taken", difficulty:"rescue", score:7, stage:"late"},
+        {n:56, name:"Bajie Loses Composure", chapter:"Ch.72", chNum:72, cause:"wild", ending:"killed", difficulty:"solo", score:4, stage:"late"},
+        {n:57, name:"In the Spider Cave", chapter:"Ch.72", chNum:72, cause:"wild", ending:"killed", difficulty:"rescue", score:6, stage:"late"},
+        {n:58, name:"Bajie at Filth-Washing Spring", chapter:"Ch.72", chNum:72, cause:"wild", ending:"killed", difficulty:"solo", score:4, stage:"late"},
+        {n:59, name:"Expelling the Great Sage", chapter:"Ch.76", chNum:76, cause:"mind", ending:"killed", difficulty:"solo", score:7, stage:"late"},
+        {n:60, name:"Blocked at Lion-Camel", chapter:"Ch.74", chNum:74, cause:"mount", ending:"taken", difficulty:"rescue", score:10, stage:"late"},
+        {n:61, name:"Dark Clouds at the City", chapter:"Ch.75", chNum:75, cause:"mount", ending:"taken", difficulty:"rescue", score:9, stage:"late"},
+        {n:62, name:"Golden Gong in the Void", chapter:"Ch.75", chNum:75, cause:"mount", ending:"taken", difficulty:"rescue", score:9, stage:"late"},
+        {n:63, name:"Saving the Child at Biqiu", chapter:"Ch.78", chNum:78, cause:"mount", ending:"taken", difficulty:"rescue", score:7, stage:"late"},
+        {n:64, name:"Discerning the Demon", chapter:"Ch.79", chNum:79, cause:"mount", ending:"taken", difficulty:"rescue", score:7, stage:"late"},
+        {n:65, name:"Hunting the Rhinoceros", chapter:"Ch.91", chNum:91, cause:"wild", ending:"killed", difficulty:"rescue", score:7, stage:"end"},
+        {n:66, name:"Marriage at Tianzhu", chapter:"Ch.93", chNum:93, cause:"mind", ending:"taken", difficulty:"solo", score:5, stage:"end"},
+        {n:67, name:"Imprisoned at Tongtai", chapter:"Ch.97", chNum:97, cause:"mind", ending:"taken", difficulty:"solo", score:4, stage:"end"},
+        {n:68, name:"Shedding Mortal Coat at Lingyun Ford", chapter:"Ch.98", chNum:98, cause:"arranged", ending:"taken", difficulty:"solo", score:3, stage:"end"},
+        {n:69, name:"Scriptures Incomplete", chapter:"Ch.98", chNum:98, cause:"arranged", ending:"taken", difficulty:"solo", score:4, stage:"end"},
+        {n:70, name:"Pearls Hung", chapter:"Ch.98", chNum:98, cause:"arranged", ending:"taken", difficulty:"solo", score:3, stage:"end"},
+        {n:71, name:"Forming from Color", chapter:"Ch.99", chNum:99, cause:"arranged", ending:"taken", difficulty:"solo", score:3, stage:"end"},
+        {n:72, name:"Meeting a Beast", chapter:"Ch.99", chNum:99, cause:"wild", ending:"killed", difficulty:"solo", score:3, stage:"end"},
+        {n:73, name:"Wind, Snow and Ice", chapter:"Ch.99", chNum:99, cause:"arranged", ending:"taken", difficulty:"solo", score:3, stage:"end"},
+        {n:74, name:"Falling into Turtle's Lair", chapter:"Ch.99", chNum:99, cause:"arranged", ending:"taken", difficulty:"solo", score:4, stage:"end"},
+        {n:75, name:"Yin Demons' Plague", chapter:"Ch.99", chNum:99, cause:"mind", ending:"killed", difficulty:"solo", score:5, stage:"end"},
+        {n:76, name:"Old Turtle Capsizes", chapter:"Ch.99", chNum:99, cause:"arranged", ending:"taken", difficulty:"solo", score:4, stage:"end"},
+        {n:77, name:"Scriptures Not Yet Whole", chapter:"Ch.99", chNum:99, cause:"arranged", ending:"taken", difficulty:"solo", score:3, stage:"end"},
+        {n:78, name:"Thunderclap at Buddha's Realm", chapter:"Ch.98", chNum:98, cause:"arranged", ending:"taken", difficulty:"solo", score:5, stage:"end"},
+        {n:79, name:"Scriptures Spread to the World", chapter:"Ch.100", chNum:100, cause:"arranged", ending:"taken", difficulty:"solo", score:3, stage:"end"},
+        {n:80, name:"Return from Buddha's Realm", chapter:"Ch.100", chNum:100, cause:"arranged", ending:"taken", difficulty:"solo", score:3, stage:"end"},
+        {n:81, name:"Five Sages Attain Truth", chapter:"Ch.100", chNum:100, cause:"arranged", ending:"taken", difficulty:"solo", score:2, stage:"end"}
+    ];
+
+    const CAUSE_LABEL = {
+        arranged: "Tathagata/Guanyin-arranged",
+        wild: "True wild demon",
+        mount: "Descended celestial mount",
+        mind: "Mind-demon (self-born)"
+    };
+    const CAUSE_COLORS = {
+        arranged: "#3a6b8c",
+        wild: "#C9A063",
+        mount: "#c8463a",
+        mind: "#6B8E5A"
+    };
+    const STAGE_LABEL = {
+        pre: "Prequel",
+        early: "Early",
+        mid: "Mid",
+        late: "Late",
+        end: "Final"
+    };
+    const STAGE_RANGE = {
+        pre: "Prequel",
+        early: "ch.13-23",
+        mid: "ch.24-58",
+        late: "ch.59-79",
+        end: "ch.91-100"
+    };
+
+    // 全局：reduced-motion 检测
+    const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DUR = REDUCE_MOTION ? 0 : 800;
+
+    // 难度色阶（1-10）
+    function scoreColor(score) {
+        const scale = d3.scaleLinear()
+            .domain([1, 3, 6, 8, 10])
+            .range(["#f5e9d4", "#e9b885", "#d98060", "#c8463a", "#8c2a2a"])
+            .clamp(true);
+        return scale(score);
+    }
+
+    // ========= 板块 2：主热力图 =========
+    function renderHeatmap(stageFilter) {
+        const svg = d3.select("#heatmap-svg");
+        svg.selectAll("*").remove();
+
+        const data = stageFilter === "all"
+            ? EMBEDDED_DATA
+            : EMBEDDED_DATA.filter(d => d.stage === stageFilter);
+
+        const wrap = document.getElementById("heatmap-svg");
+        const width = Math.max(760, wrap.clientWidth || 760);
+        const height = 420;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 30, right: 20, bottom: 50, left: 50 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // X 轴：回目（前传 + 1-100），按数据中出现的回目排序
+        const chapters = Array.from(new Set(data.map(d => d.chNum))).sort((a, b) => a - b);
+        const xScale = d3.scaleBand()
+            .domain(chapters)
+            .range([0, innerW])
+            .padding(0.15);
+
+        // Y 轴：难度 1-10
+        const yScale = d3.scaleBand()
+            .domain([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+            .range([innerH, 0])
+            .padding(0.1);
+
+        // X 轴标签（每 10 回一个）
+        const xTicks = chapters.filter(c => c === 0 || c % 10 === 0 || c === 100);
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(xScale).tickValues(xTicks).tickFormat(d => d === 0 ? "Prequel" : `Ch.${d}`))
+            .selectAll("text")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6B6455");
+
+        g.append("g")
+            .call(d3.axisLeft(yScale).ticks(10))
+            .selectAll("text")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455");
+
+        // 轴标题
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 40)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Chapter");
+
+        g.append("text")
+            .attr("x", -innerH / 2).attr("y", -38)
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Difficulty score (1-10)");
+
+        // 同一回目多个难时，按难度堆叠偏移
+        const byChapter = d3.groups(data, d => d.chNum);
+        const cellW = xScale.bandwidth();
+        const cellH = yScale.bandwidth();
+
+        const tip = d3.select("#heat-tip");
+        byChapter.forEach(([chNum, items]) => {
+            items.forEach((d, i) => {
+                const cx = xScale(chNum) + (i % 2) * (cellW / 2.05);
+                const cy = yScale(d.score);
+                const w = items.length > 1 ? cellW / 2.1 : cellW;
+                g.append("rect")
+                    .attr("class", "heat-cell")
+                    .attr("x", cx)
+                    .attr("y", cy)
+                    .attr("width", w)
+                    .attr("height", cellH)
+                    .attr("fill", scoreColor(d.score))
+                    .attr("stroke", "#fff")
+                    .attr("stroke-width", 1)
+                    .style("opacity", 0)
+                    .on("mouseover", function(event) {
+                        d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
+                        tip.style("opacity", 1)
+                            .html(`<div class="tip-title">Trial ${d.n} · ${d.name}</div>
+                                <div class="tip-row">Chapter: ${d.chapter}</div>
+                                <div class="tip-row">Difficulty: <strong style="color:#e9b885">${d.score}</strong> / 10</div>
+                                <div class="tip-row">Cause: ${CAUSE_LABEL[d.cause]}</div>
+                                <div class="tip-row">Ending: ${d.ending === "taken" ? "Taken away (backing)" : d.ending === "killed" ? "Killed (no backing)" : "Recruited"}</div>
+                                <div class="tip-row">Resolution: ${d.difficulty === "solo" ? "Wukong alone" : "Reinforcements needed"}</div>
+                                <div class="tip-meta">Stage: ${STAGE_LABEL[d.stage]}</div>`);
+                    })
+                    .on("mousemove", function(event) {
+                        const rect = wrap.parentElement.getBoundingClientRect();
+                        tip.style("left", (event.clientX - rect.left + 12) + "px")
+                            .style("top", (event.clientY - rect.top + 12) + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
+                        tip.style("opacity", 0);
+                    })
+                    .transition()
+                    .duration(600)
+                    .delay((i) * 30)
+                    .style("opacity", 1);
+            });
+        });
+    }
+
+    // ========= 板块 3：阶段平均难度柱状图 + 表格 =========
+    function renderStageBar() {
+        const stages = ["pre", "early", "mid", "late", "end"];
+        const stageData = stages.map(s => {
+            const items = EMBEDDED_DATA.filter(d => d.stage === s);
+            const avg = items.length ? items.reduce((a, b) => a + b.score, 0) / items.length : 0;
+            const extreme = items.filter(d => d.score >= 9).length;
+            return { stage: s, label: STAGE_LABEL[s], range: STAGE_RANGE[s], count: items.length, avg: +avg.toFixed(2), extreme };
+        });
+
+        // 表格
+        const tbody = d3.select("#stage-table-body");
+        tbody.selectAll("*").remove();
+        stageData.forEach(d => {
+            const tr = tbody.append("tr");
+            tr.append("td").text(d.label);
+            tr.append("td").text(d.range);
+            tr.append("td").attr("class", "num").text(d.count);
+            tr.append("td").attr("class", "num").text(d.avg);
+            tr.append("td").attr("class", "num").text(d.extreme);
+        });
+
+        // 柱状图
+        const svg = d3.select("#stage-bar-svg");
+        svg.selectAll("*").remove();
+        const width = Math.max(300, svg.node().clientWidth || 360);
+        const height = 240;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 20, right: 16, bottom: 40, left: 36 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+        const x = d3.scaleBand().domain(stageData.map(d => d.label)).range([0, innerW]).padding(0.3);
+        const y = d3.scaleLinear().domain([0, 10]).range([innerH, 0]);
+
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+
+        g.append("g").call(d3.axisLeft(y).ticks(5))
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
+
+        const tip = d3.select("#stage-bar-tip");
+        g.selectAll("rect.bar")
+            .data(stageData)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", d => x(d.label))
+            .attr("y", innerH)
+            .attr("width", x.bandwidth())
+            .attr("height", 0)
+            .attr("fill", d => scoreColor(d.avg))
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1)
+            .on("mouseover", function(event, d) {
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${d.label} stage · ${d.range}</div>
+                        <div class="tip-row">Ordeals: ${d.count}</div>
+                        <div class="tip-row">Avg difficulty: <strong style="color:#e9b885">${d.avg}</strong> / 10</div>
+                        <div class="tip-row">Extreme (9-10): ${d.extreme}</div>`);
+            })
+            .on("mousemove", function(event) {
+                const rect = svg.node().parentElement.getBoundingClientRect();
+                tip.style("left", (event.clientX - rect.left + 12) + "px")
+                    .style("top", (event.clientY - rect.top + 12) + "px");
+            })
+            .on("mouseout", function() { tip.style("opacity", 0); })
+            .transition()
+            .duration(DUR)
+            .delay((d, i) => i * 100)
+            .attr("y", d => y(d.avg))
+            .attr("height", d => innerH - y(d.avg));
+
+        // 数值标签
+        g.selectAll("text.bar-val")
+            .data(stageData)
+            .enter()
+            .append("text")
+            .attr("class", "bar-val")
+            .attr("x", d => x(d.label) + x.bandwidth() / 2)
+            .attr("y", d => y(d.avg) - 6)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("font-weight", "600")
+            .style("fill", "#c8463a")
+            .style("opacity", 0)
+            .text(d => d.avg)
+            .transition()
+            .duration(DUR)
+            .delay((d, i) => i * 100 + 400)
+            .style("opacity", 1);
+    }
+
+    // ========= 板块 4：难度等级 × 起因堆叠柱状图 =========
+    function renderCauseStack() {
+        const svg = d3.select("#cause-bar-svg");
+        svg.selectAll("*").remove();
+        const width = Math.max(360, svg.node().clientWidth || 560);
+        const height = 280;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 20, right: 16, bottom: 50, left: 36 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const scores = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        const causes = ["arranged", "wild", "mount", "mind"];
+
+        // 堆叠数据
+        const stackData = scores.map(s => {
+            const row = { score: s };
+            causes.forEach(c => {
+                row[c] = EMBEDDED_DATA.filter(d => d.score === s && d.cause === c).length;
+            });
+            return row;
+        });
+
+        const stack = d3.stack().keys(causes);
+        const series = stack(stackData);
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+        const x = d3.scaleBand().domain(scores.map(s => s.toString())).range([0, innerW]).padding(0.2);
+        const yMax = d3.max(stackData, d => causes.reduce((a, c) => a + d[c], 0));
+        const y = d3.scaleLinear().domain([0, Math.max(1, yMax)]).range([innerH, 0]).nice();
+
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 38)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Difficulty score");
+
+        g.append("g").call(d3.axisLeft(y).ticks(4))
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
+
+        const tip = d3.select("#cause-bar-tip");
+        const layers = g.selectAll("g.layer")
+            .data(series)
+            .enter()
+            .append("g")
+            .attr("class", "layer")
+            .attr("fill", d => CAUSE_COLORS[d.key]);
+
+        layers.selectAll("rect")
+            .data(d => d)
+            .enter()
+            .append("rect")
+            .attr("class", "cause-rect")
+            .attr("x", d => x(d.data.score.toString()))
+            .attr("y", d => y(d[1]))
+            .attr("width", x.bandwidth())
+            .attr("height", d => y(d[0]) - y(d[1]))
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1)
+            .style("opacity", 0)
+            .on("mouseover", function(event, d) {
+                const causeKey = d3.select(this.parentNode).datum().key;
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">Difficulty ${d.data.score} · ${CAUSE_LABEL[causeKey]}</div>
+                        <div class="tip-row">Ordeals of this type: <strong style="color:#e9b885">${d[1] - d[0]}</strong></div>
+                        <div class="tip-row">Total at this tier: ${causes.reduce((a, c) => a + d.data[c], 0)} ordeals</div>`);
+            })
+            .on("mousemove", function(event) {
+                const rect = svg.node().parentElement.getBoundingClientRect();
+                tip.style("left", (event.clientX - rect.left + 12) + "px")
+                    .style("top", (event.clientY - rect.top + 12) + "px");
+            })
+            .on("mouseout", function() { tip.style("opacity", 0); })
+            .transition()
+            .duration(DUR)
+            .delay((d, i) => i * 60)
+            .style("opacity", 1);
+
+        // 图例
+        const legend = d3.select("#cause-legend");
+        legend.selectAll("*").remove();
+        causes.forEach(c => {
+            const item = legend.append("div").attr("class", "legend-item");
+            item.append("span").attr("class", "swatch").style("background", CAUSE_COLORS[c]);
+            item.append("span").text(CAUSE_LABEL[c]);
+        });
+    }
+
+    // ========= 初始化与交互 =========
+    let currentStage = "all";
+
+    function renderAll() {
+        renderHeatmap(currentStage);
+        renderStageBar();
+        renderCauseStack();
+    }
+
+    // 阶段切换按钮
+    document.querySelectorAll(".stage-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+            document.querySelectorAll(".stage-btn").forEach(b => {
+                b.classList.remove("active");
+                b.setAttribute("aria-selected", "false");
+            });
+            this.classList.add("active");
+            this.setAttribute("aria-selected", "true");
+            currentStage = this.dataset.stage;
+            renderHeatmap(currentStage);
+        });
+    });
+
+    // 初次渲染
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAll);
+    } else {
+        renderAll();
+    }
+
+    // 响应式 resize 重渲染（debounce 200ms）
+    let resizeTimer;
+    window.addEventListener("resize", function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(renderAll, 200);
+    });
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Character Relations 3D Network · Journey to the West Explained</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render the chart.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: swap;
+    src: url('static/fonts/NotoSerifSC-VF.woff2') format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep { color: rgba(245, 233, 212, 0.5); margin: 0 4px; }
+        
+        
+        
+        
+        
+        
+        
+        
+        .kpi-card:hover { transform: translateY(-2px); }
+        
+        
+        
+        
+        
+        
+        .chart-block { margin-top: 8px; }
+        #three-container { width: 100%; height: 600px; background: radial-gradient(circle at center, #2c3e50 0%, #1a2530 100%); border-radius: 8px; position: relative; overflow: hidden; cursor: grab; }
+        #three-container:active { cursor: grabbing; }
+        .controls-hint { position: absolute; top: 12px; left: 12px; background: rgba(0, 0, 0, 0.6); color: #f5e9d4; padding: 8px 12px; border-radius: 4px; font-size: 0.78rem; line-height: 1.6; pointer-events: none; }
+        .info-panel { position: absolute; top: 12px; right: 12px; background: rgba(255, 255, 255, 0.95); color: #2c3e50; padding: 16px 20px; border-radius: 6px; font-size: 0.85rem; line-height: 1.7; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); max-width: 280px; display: none; }
+        .info-panel h3 { color: #C9A063; margin-bottom: 8px; font-size: 1.0rem; }
+        .info-panel .meta { color: #6b7c8c; font-size: 0.78rem; margin-top: 8px; padding-top: 8px; border-top: 1px solid #d9cdb8; }
+        .info-panel .close { position: absolute; top: 6px; right: 10px; cursor: pointer; color: #6b7c8c; font-size: 1.1rem; }
+        .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font-size: 0.82rem; justify-content: center; }
+        .legend-item { display: flex; align-items: center; gap: 6px; color: #2c3e50; }
+        .legend-swatch { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="../index.html">
+            <span class="seal">西游<br>详解</span>
+            <span class="wordmark">详解西游记</span>
+        </a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/character-relationship-3d.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Character Relations 3D Network</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Character Relations 3D Network</h1>
+        <p class="subtitle">CHARACTER RELATIONSHIP 3D NETWORK</p>
+        <p class="tagline">A Three.js force-directed 3D network of 20+ nodes showing character relations in 3D — drag to rotate, scroll to zoom, click a node for details.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="kpi-row" id="kpiRow"></div>
+
+        <!-- 3D 网络图 -->
+        <section class="section">
+            <h2 class="section-title">Character Relations 3D Force-Directed Graph</h2>
+            <div class="section-sub">A Three.js 3D force-directed graph: 22 character nodes + 32 relation edges, colored by faction cluster. Drag to rotate, scroll to zoom, click a node for info.</div>
+            <div class="chart-block">
+                <div id="three-container">
+                    <div class="controls-hint">
+                        🖱 Drag: rotate view<br>
+                        🖱 Scroll: zoom<br>
+                        👆 Click node: view details
+                    </div>
+                    <div class="info-panel" id="infoPanel">
+                        <span class="close" id="infoClose">×</span>
+                        <h3 id="infoName"></h3>
+                        <div id="infoDesc"></div>
+                        <div class="meta" id="infoMeta"></div>
+                    </div>
+                </div>
+                <div class="legend">
+                    <div class="legend-item"><span class="legend-swatch" style="background:#C9A063"></span>Pilgrimage</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#3a6b8c"></span>Heaven</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#8c2a2a"></span>Buddhist</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#6B8E5A"></span>Demon realm</div>
+                    <div class="legend-item"><span class="legend-swatch" style="background:#C9A063"></span>Dragon clan</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Related pages</h2>
+            <div class="section-sub">This page pairs with character-dynamic-network.html as a "2D-3D" dual track; read them side by side.</div>
+            <p style="font-size:0.92rem; line-height:2;">
+                <a href="character-dynamic-network.html" style="color:var(--accent); text-decoration:none;">→ Character Dynamic Network (2D)</a> ·
+                <a href="dashboard.html" style="color:var(--accent-2); text-decoration:none;">← Back to Dashboard</a> ·
+                <a href="relationships.html" style="color:var(--accent-2); text-decoration:none;">→ Character Relations Overview</a>
+            </p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">详解西游记</div>
+            <div class="footer-meta">v2.2.86 · W334 · Data Visualization</div>
+        </div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/character-relationship-3d.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<!-- FILE_INDEX: character-relationship-3d.html | W236-V | V4 Three.js 3D 力导向图 -->
+    <!-- CHANGELOG: v2.2.42 W236 V4 技术升级 -->
+
+    <script>
+    // ============= EMBEDDED_DATA =============
+    const EMBEDDED_DATA = {
+        meta: {title: "Character Relations 3D Network", version: "v2.2.42", w_id: "W236-V", direction: "V4"},
+        kpi: [
+            {label: "NODES · count", value: "22", desc: "character nodes"},
+            {label: "EDGES · count", value: "32", desc: "relation edges"},
+            {label: "CLUSTERS · count", value: "5", desc: "faction clusters"},
+            {label: "CENTRALITY · highest", value: "Wukong", desc: "degree centrality 0.78"},
+            {label: "DEGREE · highest", value: "Tripitaka", desc: "degree 9"}
+        ],
+        // 22 个角色节点：id, name, group (0=取经团,1=天庭,2=佛门,3=妖界,4=龙族), importance (1-10), desc
+        nodes: [
+            {id: 1, name: "Tripitaka", group: 0, importance: 9, desc: "Reincarnation of Gold Cicada; core of the pilgrimage, resolute yet often in peril."},
+            {id: 2, name: "Sun Wukong", group: 0, importance: 10, desc: "The Great Sage Equal to Heaven; mighty, the main demon-subduer."},
+            {id: 3, name: "Zhu Bajie", group: 0, importance: 7, desc: "Reincarnation of Marshal Tianpeng; gluttonous and lustful yet loyal."},
+            {id: 4, name: "Sha Wujing", group: 0, importance: 6, desc: "Reincarnation of Curtain-Lifting General; steady and honest, carries the luggage."},
+            {id: 5, name: "White Dragon Horse", group: 0, importance: 5, desc: "Third prince of the West Sea Dragon King; transforms into a horse carrying Tripitaka."},
+            {id: 6, name: "Guanyin", group: 2, importance: 9, desc: "From Mount Putuo in the South Sea; planner and guardian of the pilgrimage."},
+            {id: 7, name: "Tathāgata", group: 2, importance: 10, desc: "Shakyamuni of Spirit Mountain in the West; ultimately bestows the scriptures."},
+            {id: 8, name: "Manjushri", group: 2, importance: 6, desc: "Manjushri of Mount Wutai; symbol of wisdom."},
+            {id: 9, name: "Samantabhadra", group: 2, importance: 6, desc: "Samantabhadra of Mount Emei; symbol of vows and conduct."},
+            {id: 10, name: "Jade Emperor", group: 1, importance: 9, desc: "Supreme ruler of Heaven; lord of the three realms."},
+            {id: 11, name: "Venus Star Lord", group: 1, importance: 7, desc: "Heaven's diplomat; amnestied Wukong several times."},
+            {id: 12, name: "Erlang Shen", group: 1, importance: 8, desc: "Yang Jian, nephew of the Jade Emperor; captured Wukong."},
+            {id: 13, name: "Pagoda-Bearing Heavenly King", group: 1, importance: 7, desc: "Li Jing, commander of the heavenly troops; campaigned against Wukong repeatedly."},
+            {id: 14, name: "Nezha", group: 1, importance: 7, desc: "Third prince; vanguard who fought Wukong."},
+            {id: 15, name: "Bull Demon King", group: 3, importance: 8, desc: "Great Sage Who Pacifies Heaven; Wukong's sworn elder brother; finally submits."},
+            {id: 16, name: "Princess Iron Fan", group: 3, importance: 6, desc: "Rakshasi; owner of the Plantain Fan; wife of Bull Demon King."},
+            {id: 17, name: "Red Boy", group: 3, importance: 7, desc: "Sage Infant King; son of Bull Demon King; Samadhi Fire."},
+            {id: 18, name: "White Bone Demon", group: 3, importance: 6, desc: "Lady White Bone; thrice disguised to trick Wukong, splitting master and disciple."},
+            {id: 19, name: "Yellow Robe Demon", group: 3, importance: 6, desc: "Kui Wood Wolf descended to earth; past bond with Baihuaxiu."},
+            {id: 20, name: "Six-Eared Macaque", group: 3, importance: 8, desc: "Fake Wukong; indistinguishable from the real; the book's greatest mystery."},
+            {id: 21, name: "East Sea Dragon King", group: 4, importance: 6, desc: "Ao Guang; from whom Wukong borrowed the Script-Anchor Needle."},
+            {id: 22, name: "West Sea Dragon King", group: 4, importance: 5, desc: "Ao Run; father of White Dragon Horse."}
+        ],
+        // 32 条关系边：source, target, type (师徒/结拜/父子/敌对/盟友/亲属/从属)
+        links: [
+            {source: 1, target: 2, type: ""Master-Disciple""},
+            {source: 1, target: 3, type: ""Master-Disciple""},
+            {source: 1, target: 4, type: ""Master-Disciple""},
+            {source: 1, target: 5, type: ""Master-Disciple""},
+            {source: 1, target: 6, type: ""Protector""},
+            {source: 6, target: 7, type: ""Subordinate""},
+            {source: 6, target: 1, type: ""Assigned""},
+            {source: 6, target: 8, type: ""Colleague""},
+            {source: 6, target: 9, type: ""Colleague""},
+            {source: 7, target: 1, type: ""Scripture-Bestower""},
+            {source: 2, target: 10, type: ""Rebel""},
+            {source: 2, target: 12, type: ""Enemy""},
+            {source: 2, target: 13, type: ""Enemy""},
+            {source: 2, target: 14, type: ""Enemy""},
+            {source: 2, target: 21, type: ""Demanded from""},
+            {source: 2, target: 15, type: ""Sworn Brothers""},
+            {source: 2, target: 20, type: ""Sworn Foe""},
+            {source: 10, target: 11, type: ""Subordinate""},
+            {source: 10, target: 12, type: ""Subordinate""},
+            {source: 10, target: 13, type: ""Subordinate""},
+            {source: 10, target: 14, type: ""Subordinate""},
+            {source: 13, target: 14, type: ""Father-Son""},
+            {source: 12, target: 14, type: ""Brothers""},
+            {source: 15, target: 16, type: ""Husband-Wife""},
+            {source: 15, target: 17, type: ""Father-Son""},
+            {source: 16, target: 17, type: ""Mother-Son""},
+            {source: 2, target: 16, type: ""Enemy""},
+            {source: 2, target: 17, type: ""Enemy""},
+            {source: 2, target: 18, type: ""Slew""},
+            {source: 2, target: 19, type: ""Fought""},
+            {source: 5, target: 22, type: ""Father-Son""},
+            {source: 21, target: 22, type: ""Brothers""}
+        ]
+    };
+
+    const GROUP_COLORS = [0xe67e22, 0x3a6b8c, 0x8c2a2a, 0x5a7a3a, 0x7a5230];
+    const GROUP_NAMES = ["Pilgrimage", "Heaven", "Buddhist", "Demon", "Dragon"];
+
+    // 渲染 KPI
+    function renderKPI(data) {
+        const kpiRow = document.getElementById("kpiRow");
+        data.kpi.forEach(k => {
+            const card = document.createElement("div");
+            card.className = "kpi-card";
+            card.innerHTML = `<div class="label">${k.label}</div><div class="value">${k.value}</div><div class="desc">${k.desc}</div>`;
+            kpiRow.appendChild(card);
+        });
+    }
+
+    // ============= Three.js 3D 力导向图 =============
+    let scene, camera, renderer, controls;
+    let nodeMeshes = [];
+    let linkLines = [];
+    let raycaster, mouse;
+    let nodePositions = [];
+    let velocity = [];
+    let selectedNode = null;
+
+    function init3D() {
+        const container = document.getElementById("three-container");
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+
+        // 场景
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1a2530);
+        scene.fog = new THREE.Fog(0x1a2530, 200, 600);
+
+        // 相机
+        camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 2000);
+        camera.position.set(0, 0, 280);
+
+        // 渲染器
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(w, h);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); // 性能：限制 DPR，避免视网膜屏 2-3x 过度绘制
+        container.appendChild(renderer.domElement);
+
+        // 光照
+        const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambient);
+        const pointLight = new THREE.PointLight(0xffffff, 1.0, 500);
+        pointLight.position.set(100, 100, 100);
+        scene.add(pointLight);
+        const pointLight2 = new THREE.PointLight(0xe67e22, 0.5, 500);
+        pointLight2.position.set(-100, -100, 100);
+        scene.add(pointLight2);
+
+        // OrbitControls（手动实现，避免外部依赖）
+        setupOrbitControls(container);
+
+        // 初始化节点位置（按聚类分组建圈）
+        const groupNodes = [[], [], [], [], []];
+        EMBEDDED_DATA.nodes.forEach(n => groupNodes[n.group].push(n));
+
+        nodePositions = [];
+        velocity = [];
+        EMBEDDED_DATA.nodes.forEach((node, i) => {
+            const groupIdx = node.group;
+            const groupSize = groupNodes[groupIdx].length;
+            const idxInGroup = groupNodes[groupIdx].indexOf(node);
+            // 每个聚类成一个环
+            const clusterRadius = 40 + groupIdx * 15;
+            const angleStep = (Math.PI * 2) / groupSize;
+            const angle = idxInGroup * angleStep + groupIdx * 0.5;
+            const clusterOffset = groupIdx * 60 - 120;
+            const axis = groupIdx % 2 === 0 ? "x" : "y";
+            let x, y, z;
+            if (axis === "x") {
+                x = clusterRadius * Math.cos(angle);
+                y = clusterOffset;
+                z = clusterRadius * Math.sin(angle);
+            } else {
+                x = clusterOffset;
+                y = clusterRadius * Math.cos(angle);
+                z = clusterRadius * Math.sin(angle);
+            }
+            nodePositions.push(new THREE.Vector3(x, y, z));
+            velocity.push(new THREE.Vector3(0, 0, 0));
+        });
+
+        // 创建节点
+        EMBEDDED_DATA.nodes.forEach((node, i) => {
+            const radius = 4 + node.importance * 0.8;
+            const geo = new THREE.SphereGeometry(radius, 32, 32);
+            const mat = new THREE.MeshPhongMaterial({
+                color: GROUP_COLORS[node.group],
+                shininess: 80,
+                specular: 0x444444
+            });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.copy(nodePositions[i]);
+            mesh.userData = { nodeIndex: i, node: node };
+            scene.add(mesh);
+            nodeMeshes.push(mesh);
+
+            // 节点光环（外圈）
+            const ringGeo = new THREE.RingGeometry(radius * 1.4, radius * 1.6, 32);
+            const ringMat = new THREE.MeshBasicMaterial({
+                color: GROUP_COLORS[node.group],
+                transparent: true,
+                opacity: 0.4,
+                side: THREE.DoubleSide
+            });
+            const ring = new THREE.Mesh(ringGeo, ringMat);
+            ring.position.copy(nodePositions[i]);
+            ring.lookAt(camera.position);
+            mesh.userData.ring = ring;
+            scene.add(ring);
+
+            // 文字标签（精灵）
+            const sprite = createTextSprite(node.name);
+            sprite.position.copy(nodePositions[i]);
+            sprite.position.y += radius + 8;
+            mesh.userData.label = sprite;
+            scene.add(sprite);
+        });
+
+        // 创建边
+        const lineMat = new THREE.LineBasicMaterial({
+            color: 0xaab8c8,
+            transparent: true,
+            opacity: 0.4
+        });
+        EMBEDDED_DATA.links.forEach(link => {
+            const geo = new THREE.BufferGeometry();
+            const positions = new Float32Array(6);
+            geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+            const line = new THREE.Line(geo, lineMat);
+            scene.add(line);
+            linkLines.push({ line: line, source: link.source, target: link.target, type: link.type });
+        });
+
+        // Raycaster
+        raycaster = new THREE.Raycaster();
+        mouse = new THREE.Vector2();
+
+        // 鼠标事件
+        container.addEventListener("click", onNodeClick);
+        container.addEventListener("mousemove", onNodeHover);
+
+        // 窗口调整
+        window.addEventListener("resize", onWindowResize);
+
+        // 关闭按钮
+        document.getElementById("infoClose").addEventListener("click", function() {
+            document.getElementById("infoPanel").style.display = "none";
+            if (selectedNode) {
+                selectedNode.material.emissive.setHex(0x000000);
+                selectedNode = null;
+            }
+        });
+
+        animate();
+    }
+
+    // 文字精灵
+    function createTextSprite(text) {
+        const canvas = document.createElement("canvas");
+        canvas.width = 256;
+        canvas.height = 64;
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "rgba(0, 0, 0, 0)";
+        ctx.fillRect(0, 0, 256, 64);
+        ctx.font = "bold 32px 'Noto Serif SC', serif";
+        ctx.fillStyle = "#f5e9d4";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(text, 128, 32);
+        const texture = new THREE.CanvasTexture(canvas);
+        const mat = new THREE.SpriteMaterial({ map: texture, transparent: true });
+        const sprite = new THREE.Sprite(mat);
+        sprite.scale.set(30, 8, 1);
+        return sprite;
+    }
+
+    // OrbitControls 手动实现
+    let isDragging = false;
+    let prevMouse = { x: 0, y: 0 };
+    let cameraTheta = 0;
+    let cameraPhi = Math.PI / 2;
+    let cameraRadius = 280;
+
+    function setupOrbitControls(container) {
+        container.addEventListener("mousedown", function(e) {
+            isDragging = true;
+            prevMouse.x = e.clientX;
+            prevMouse.y = e.clientY;
+        });
+        document.addEventListener("mouseup", function() { isDragging = false; });
+        document.addEventListener("mousemove", function(e) {
+            if (!isDragging) return;
+            const dx = e.clientX - prevMouse.x;
+            const dy = e.clientY - prevMouse.y;
+            cameraTheta -= dx * 0.005;
+            cameraPhi -= dy * 0.005;
+            cameraPhi = Math.max(0.1, Math.min(Math.PI - 0.1, cameraPhi));
+            prevMouse.x = e.clientX;
+            prevMouse.y = e.clientY;
+            updateCameraPosition();
+        });
+        container.addEventListener("wheel", function(e) {
+            e.preventDefault();
+            cameraRadius += e.deltaY * 0.3;
+            cameraRadius = Math.max(80, Math.min(600, cameraRadius));
+            updateCameraPosition();
+        });
+    }
+
+    function updateCameraPosition() {
+        camera.position.x = cameraRadius * Math.sin(cameraPhi) * Math.cos(cameraTheta);
+        camera.position.y = cameraRadius * Math.cos(cameraPhi);
+        camera.position.z = cameraRadius * Math.sin(cameraPhi) * Math.sin(cameraTheta);
+        camera.lookAt(0, 0, 0);
+    }
+
+    function onWindowResize() {
+        const container = document.getElementById("three-container");
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+    }
+
+    function onNodeClick(event) {
+        const container = document.getElementById("three-container");
+        const rect = container.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(nodeMeshes);
+
+        if (intersects.length > 0) {
+            const mesh = intersects[0].object;
+            const node = mesh.userData.node;
+
+            if (selectedNode) {
+                selectedNode.material.emissive.setHex(0x000000);
+            }
+            selectedNode = mesh;
+            mesh.material.emissive.setHex(0x442200);
+
+            // 显示信息面板
+            const panel = document.getElementById("infoPanel");
+            document.getElementById("infoName").textContent = node.name;
+            const groupIdx = node.group;
+            document.getElementById("infoDesc").innerHTML = node.desc;
+            // 计算度数
+            const degree = EMBEDDED_DATA.links.filter(l => l.source === node.id || l.target === node.id).length;
+            document.getElementById("infoMeta").innerHTML =
+                `Faction: ${GROUP_NAMES[groupIdx]}<br>` +
+                `Importance: ${node.importance}/10<br>` +
+                `Degree: ${degree}<br>` +
+                `ID：#${node.id}`;
+            panel.style.display = "block";
+        }
+    }
+
+    function onNodeHover(event) {
+        const container = document.getElementById("three-container");
+        const rect = container.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(nodeMeshes);
+        container.style.cursor = intersects.length > 0 ? "pointer" : "grab";
+    }
+
+    // 力导向模拟
+    function applyForces() {
+        const repulsion = 800;
+        const attraction = 0.005;
+        const damping = 0.85;
+        const idealLength = 50;
+
+        // 节点间斥力
+        for (let i = 0; i < nodePositions.length; i++) {
+            for (let j = i + 1; j < nodePositions.length; j++) {
+                const diff = new THREE.Vector3().subVectors(nodePositions[i], nodePositions[j]);
+                const dist = Math.max(0.1, diff.length());
+                const force = repulsion / (dist * dist);
+                diff.normalize().multiplyScalar(force);
+                velocity[i].add(diff);
+                velocity[j].sub(diff);
+            }
+        }
+
+        // 边的引力
+        linkLines.forEach(link => {
+            const i = link.source - 1;
+            const j = link.target - 1;
+            const diff = new THREE.Vector3().subVectors(nodePositions[j], nodePositions[i]);
+            const dist = Math.max(0.1, diff.length());
+            const force = (dist - idealLength) * attraction;
+            diff.normalize().multiplyScalar(force);
+            velocity[i].add(diff);
+            velocity[j].sub(diff);
+        });
+
+        // 更新位置
+        for (let i = 0; i < nodePositions.length; i++) {
+            velocity[i].multiplyScalar(damping);
+            // 限制速度
+            const maxSpeed = 2;
+            if (velocity[i].length() > maxSpeed) {
+                velocity[i].normalize().multiplyScalar(maxSpeed);
+            }
+            nodePositions[i].add(velocity[i]);
+            // 轻微回归中心
+            nodePositions[i].multiplyScalar(0.999);
+            // 更新 mesh 位置
+            nodeMeshes[i].position.copy(nodePositions[i]);
+            if (nodeMeshes[i].userData.ring) {
+                nodeMeshes[i].userData.ring.position.copy(nodePositions[i]);
+                nodeMeshes[i].userData.ring.lookAt(camera.position);
+            }
+            if (nodeMeshes[i].userData.label) {
+                const r = 4 + EMBEDDED_DATA.nodes[i].importance * 0.8;
+                nodeMeshes[i].userData.label.position.copy(nodePositions[i]);
+                nodeMeshes[i].userData.label.position.y += r + 8;
+            }
+        }
+
+        // 更新边
+        linkLines.forEach(link => {
+            const i = link.source - 1;
+            const j = link.target - 1;
+            const positions = link.line.geometry.attributes.position.array;
+            positions[0] = nodePositions[i].x;
+            positions[1] = nodePositions[i].y;
+            positions[2] = nodePositions[i].z;
+            positions[3] = nodePositions[j].x;
+            positions[4] = nodePositions[j].y;
+            positions[5] = nodePositions[j].z;
+            link.line.geometry.attributes.position.needsUpdate = true;
+        });
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        if (document.hidden) return;  // 性能：标签页隐藏时跳过物理与渲染
+        applyForces();
+        // 节点缓慢自转
+        nodeMeshes.forEach(mesh => {
+            mesh.rotation.y += 0.005;
+        });
+        renderer.render(scene, camera);
+    }
+
+    // ============= 主流程 =============
+    function main() {
+        renderKPI(EMBEDDED_DATA);
+        if (typeof THREE !== "undefined") {
+            init3D();
+            updateCameraPosition();
+        } else {
+            document.getElementById("three-container").innerHTML =
+                '<div style="color:#f5e9d4; padding:40px; text-align:center;">Three.js failed to load. Check your network.</div>';
+        }
+    }
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
