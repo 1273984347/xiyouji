@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W402），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W403），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
@@ -54,6 +54,21 @@
 >   - **新增 .env.rag.example**（全 provider 变量注释）·**scripts/rag/README.md** W402 同步 + provider 配置说明
 >   - **模型名更正**：DeepSeek 官方已停用 deepseek-chat/deepseek-reasoner（当前为 deepseek-v4-pro/deepseek-v4-flash·大小写敏感）——以 API 返回错误信息为准修正
 > - **验证**：py_compile 通过 · 无 key 模板回退正常 · CLI 真实生成成功（「紧箍咒 权力」→ LLM 生成回答 668 字符·结合福柯全景敞视/声学生物权力语料 + 图谱 L2 正则化三元组）·HTTP /query 返回 llm_generated + 多轮 history 生效（387 字符）·HTTP 400 错误体诊断命中模型名大小写问题 ·.env.md→.env 重命名后读取正常
+> - **状态**：已落地 · 未提交（待 E3 六文档同步后 commit）
+
+### v2.3.18（2026-08-09）：W403 访问数据接入 — localStorage 自建基线（零服务器·零注册）+ GoatCounter 升级路径保留
+
+> **W403 访问统计（约束：GitHub Pages 纯静态 + 用户零服务器 + 不注册外部服务）**
+> - **来源**：用户要求接入访问数据验证读者量；演进路径 Umami 自托管 → 零服务器方案 → GoatCounter（用户不愿注册）→ localStorage 自建基线
+> - **架构澄清**：GitHub Pages 无法运行 Umami 服务端（需 Node.js+DB 独立服务器）；集成 script 本身无技术障碍（外部 AI 回答证实），但卡点是无实例地址；CSP 事实澄清——site/_headers 有严格 CSP 但 GitHub Pages 不应用该文件（Netlify 约定），部署到 Netlify 才生效
+> - **执行**：
+>   - **site/js/visit-log.js**（新）：页面加载采集访问（时间戳/路径/来源/UA）→ localStorage「visit_log」上限 500 条 FIFO·隐私模式静默失败
+>   - **site/visit-viewer.html**（新）：查看/导出页（表格展示 + 导出 JSON + 清空）
+>   - **scripts/inject_visit_log.py**（新）：全站幂等注入（复用 W390 inject_rum 模式·相对路径·--check）·marker 精确匹配 script 标签闭合防伪幂等
+>   - **scripts/inject_goatcounter.py**（新·升级路径保留）：参数化 --site/.env GOATCOUNTER_SITE，未来注册后跑一次即切换外部统计
+>   - 全站 159 HTML 注入 visit-log.js
+> - **验证**：注入 159/159 幂等（--check 0 待注入）·相对路径 spot-check（根/一级子目录）·node --check 语法通过·伪幂等缺陷修正（visit-viewer 正文提及 visit-log.js 被宽 marker 误判，改精确匹配后真注入）
+> - **限制（诚实声明）**：localStorage 仅本浏览器可见，无法统计真实读者；真实跨访客统计待外部实例（GoatCounter/Umami Cloud）就绪
 > - **状态**：已落地 · 未提交（待 E3 六文档同步后 commit）
 
 ### v2.3.17（2026-08-08）：W399 CI 触发修复 + SEO 域名补全 + rum-viewer 埋点查看页（并行 W390-W398 竞态清理后增量）
