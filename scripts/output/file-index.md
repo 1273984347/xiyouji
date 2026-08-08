@@ -548,6 +548,17 @@
 | 交接文档.md | W400 | 文档同步·内部过期引用 12 处修复（W358→W400·v2.3.9→v2.3.18·A2 43→44/A3 199→211/A4 201→209/A5 20→34·site/data 85→86·英文站 7→65·页脚） |
 | 项目交接参考手册.md | W400 | 文档同步·版本 v2.3.8 W357→v2.3.18 W400·计数 A2/A3/A4/A5·可视化 85→86·英文站 51→65·发布待办标记完成 |
 
+## W403 访问数据接入（2026-08-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/js/visit-log.js | W403 | 本地访问采集（localStorage visit_log·上限 500 FIFO·隐私模式静默）·新建 |
+| site/visit-viewer.html | W403 | 查看/导出页（表格展示 + 导出 JSON + 清空）·新建 |
+| scripts/inject_visit_log.py | W403 | 全站幂等注入（复用 W390 inject_rum 模式·精确 marker 防伪幂等）·新建 |
+| scripts/inject_goatcounter.py | W403 | GoatCounter 升级路径保留（参数化 --site/.env）·新建 |
+| site/*.html（159 页） | W403 | 注入 visit-log.js tracking script |
+| CHANGELOG.md | W403 | 新增 W403 版本段（四件套） |
+
 ## W402 档 B 真实 LLM 生成接通（2026-08-09）
 
 | 文件 | W | 说明 |

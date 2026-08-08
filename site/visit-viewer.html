@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>访问记录 · 渡口问津</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+           max-width: 860px; margin: 24px auto; padding: 0 16px; line-height: 1.6; }
+    h1 { font-size: 22px; margin-bottom: 4px; }
+    .sub { color: #777; font-size: 13px; margin-bottom: 16px; }
+    .bar { margin-bottom: 14px; }
+    .bar button { margin-right: 8px; padding: 6px 14px; border: 1px solid #999; border-radius: 6px;
+                  background: transparent; cursor: pointer; }
+    .bar button:hover { background: rgba(0,0,0,.06); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { border-bottom: 1px solid #ddd; padding: 6px 8px; text-align: left; vertical-align: top; }
+    th { position: sticky; top: 0; background: #f5f5f5; }
+    .num { color: #666; font-size: 12px; margin-top: 10px; }
+    .empty { color: #999; padding: 40px 0; text-align: center; }
+    code { background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 4px; }
+  </style>
+  <script defer src="js/visit-log.js"></script>
+</head>
+<body>
+  <h1>访问记录</h1>
+  <div class="sub">读取 localStorage「visit_log」中由 <code>js/visit-log.js</code> 采集的本地访问记录。
+    <b>仅统计本浏览器</b>（localStorage 限制·无法统计真实读者）。外部统计接入后可导出后弃用。</div>
+
+  <div class="bar">
+    <button id="export">导出 JSON</button>
+    <button id="clear">清空记录</button>
+  </div>
+
+  <table>
+    <thead><tr><th>#</th><th>时间</th><th>路径</th><th>来源</th><th>UA 摘要</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+  <div class="num" id="count"></div>
+
+  <script>
+    (function () {
+      var KEY = 'visit_log';
+      function read() {
+        try { var v = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(v) ? v : []; }
+        catch (e) { return []; }
+      }
+      function fmt(t) {
+        var d = new Date(t);
+        function p(n) { return (n < 10 ? '0' : '') + n; }
+        return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' +
+               p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+      }
+      function esc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+      }
+      var rows = document.getElementById('rows');
+      var count = document.getElementById('count');
+      var data = read();
+      if (!data.length) {
+        rows.innerHTML = '<tr><td colspan="5" class="empty">暂无记录 — 打开本站任意页面后回到这里查看。</td></tr>';
+      } else {
+        var html = '';
+        data.slice().reverse().forEach(function (r, i) {
+          html += '<tr><td>' + (data.length - i) + '</td><td>' + fmt(r.t) + '</td><td>' +
+                  esc(r.p) + '</td><td>' + esc(r.r) + '</td><td>' + esc(r.u) + '</td></tr>';
+        });
+        rows.innerHTML = html;
+      }
+      count.textContent = '共 ' + data.length + ' 条记录（上限 500，FIFO）';
+
+      document.getElementById('export').addEventListener('click', function () {
+        var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'visit-log-' + new Date().toISOString().slice(0, 10) + '.json';
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
+      document.getElementById('clear').addEventListener('click', function () {
+        localStorage.removeItem(KEY);
+        rows.innerHTML = '<tr><td colspan="5" class="empty">已清空。</td></tr>';
+        count.textContent = '共 0 条记录';
+      });
+    })();
+  </script>
+</body>
+</html>
