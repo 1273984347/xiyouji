@@ -23,7 +23,6 @@ import json
 from collections import Counter
 from pathlib import Path
 
-
 # 取经路线地点清单（手工整理）
 # type: mountain(山) / water(水) / city(城) / cave(洞) / country(国) / temple(寺) / palace(宫)
 JOURNEY_ROUTE = [
@@ -160,14 +159,14 @@ def main():
         encoding="utf-8",
     )
     print(f"[OK] 取经路线数据已写入：{output_path}")
-    print(f"\n=== 取经路线汇总 ===")
+    print("\n=== 取经路线汇总 ===")
     print(f"  总地点数：{stats['total_places']}")
     print(f"  跨越地区数：{stats['total_regions']}")
     print(f"  回目范围：第 {stats['chapter_range']['start']} - {stats['chapter_range']['end']} 回")
-    print(f"\n按地理类型分布：")
+    print("\n按地理类型分布：")
     for t, c in stats["by_type"].items():
         print(f"  {t:<10} {c:3d} 处")
-    print(f"\n按地区分布（前 10 个）：")
+    print("\n按地区分布（前 10 个）：")
     for region, places in sorted(stats["by_region"].items(), key=lambda x: -len(x[1]))[:10]:
         print(f"  {region:<15} {len(places):3d} 处")
 

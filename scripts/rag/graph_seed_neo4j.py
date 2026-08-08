@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 graph_seed_neo4j.py — 把 W326 佛学-AI-西游 三元组导入 Neo4j（对齐 LightRAG Neo4j 后端）
 
@@ -18,9 +17,9 @@ LightRAG 原生支持 Neo4j 作为存储后端。本脚本让本项目的「佛�
 零依赖（仅标准库）。节点类型 / 关系类型 与原 W326《三维语义映射表》保持一致。
 """
 
-import os
 import csv
 import json
+import os
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(_HERE, "..", ".."))

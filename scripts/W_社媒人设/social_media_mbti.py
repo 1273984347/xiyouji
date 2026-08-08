@@ -20,7 +20,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 社媒人设
 SOCIAL_MEDIA_PROFILES = [
     {

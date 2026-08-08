@@ -1,15 +1,15 @@
-# -*- coding: utf-8 -*-
 """
 W286-FIX: 修复第069回、第099回原文缺失
 从古诗文网备用URL或其他可用源抓取，补充分回原文并重新合并
 """
 
-import urllib.request
-import urllib.parse
 import re
-from pathlib import Path
-from bs4 import BeautifulSoup
 import time
+import urllib.parse
+import urllib.request
+from pathlib import Path
+
+from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE_YW_SPLIT = ROOT / "source" / "原文" / "分回"

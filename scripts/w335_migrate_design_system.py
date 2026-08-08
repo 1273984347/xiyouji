@@ -13,9 +13,9 @@ w335_migrate_design_system.py — 批量迁移 site/data/*.html 到新设计系�
 幂等：已迁移的页面（含 system.css 链接）会被跳过。
 """
 
+import argparse
 import re
 import sys
-import argparse
 from pathlib import Path
 
 SITE_DATA = Path(__file__).resolve().parent.parent / "site" / "data"

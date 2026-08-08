@@ -20,7 +20,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 咒语的语言结构
 # incantation linguistics：紧箍咒梵语音译·五雷法道教术语·悟空骂人明代市井
 INCANTATION_LINGUISTICS = {

@@ -20,7 +20,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 SCENARIOS = [
     {
         "scenario": "和平共处假设",

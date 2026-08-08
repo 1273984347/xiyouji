@@ -80,7 +80,7 @@ def clean_and_fix_doc01(chapter: int, shendu_dir: Path):
 
             # 在 ## 原文全文 之前插入
             cleaned = cleaned.replace("## 原文全文", shendu_section + "## 原文全文")
-            print(f"[docs/01] 第099回.md 追加深度解读 SD075 ✓")
+            print("[docs/01] 第099回.md 追加深度解读 SD075 ✓")
 
     if cleaned != content:
         md_file.write_text(cleaned, encoding="utf-8")

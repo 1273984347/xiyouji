@@ -39,9 +39,8 @@ from pathlib import Path
 
 # 添加项目 scripts 目录到 sys.path（用于 import text_loader / aliases）
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils.text_loader import load_text, load_all_chapters
 from utils.aliases import CHARACTER_ALIASES as CHARACTERS
-
+from utils.text_loader import load_all_chapters, load_text
 
 # ====================================================================
 # 人物别名表已迁移至 utils/aliases.py（单一数据源）
@@ -249,7 +248,7 @@ def build_cooccurrence(
     edges = defaultdict(int)
     node_counts = defaultdict(int)
 
-    for num, title, text in chapters:
+    for _, _, text in chapters:
         if mode == "chapter":
             present = set()
             for canonical, _, _, _ in find_characters_in_text(text, alias_patterns):
@@ -322,7 +321,7 @@ def build_cooccurrence_timeline(
     binned_edges = defaultdict(int)
     pair_per_chapter = defaultdict(list)  # pair -> [(chapter, 1), ...]
 
-    for num, title, text in chapters:
+    for num, _title, text in chapters:
         present = set()
         for canonical, _, _, _ in find_characters_in_text(text, alias_patterns):
             present.add(canonical)
@@ -406,9 +405,9 @@ def build_character_stats(
     appear_in_chapters = {c: [] for c in characters}
     alias_usage = {c: Counter() for c in characters}
 
-    for num, title, text in chapters:
+    for num, _title, text in chapters:
         present_in_chapter = set()
-        for canonical, start, end, alias in find_characters_in_text(
+        for canonical, _start, _end, alias in find_characters_in_text(
             text, alias_patterns
         ):
             total_mentions[canonical] += 1

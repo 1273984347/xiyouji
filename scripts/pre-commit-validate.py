@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 pre-commit-validate.py — E3 收尾文档同步铁律·自动化校验门禁
 

@@ -18,7 +18,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 心猿心性曲线
 # 悟空心性的 6 阶段演变：嗔怒/傲慢/服从/平衡/觉悟/成佛
 MIND_MONKEY_CURVE = {

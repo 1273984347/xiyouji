@@ -23,7 +23,6 @@ import jieba
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from utils.analyzer_base import run_analyzer
 
-
 # 取经团队与高频虚词的停用词示例
 DEFAULT_STOPWORDS = {
     "的", "了", "是", "在", "他", "我", "你", "有", "这", "那",

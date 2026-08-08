@@ -63,7 +63,7 @@ def append_to_index(name: str, title: str, category: str) -> list[str]:
     返回追加的行（用于回滚或 dry-run 展示）。
     """
     if not INDEX.exists():
-        print(f"[WARN] site/index.html 不存在，跳过索引追加")
+        print("[WARN] site/index.html 不存在，跳过索引追加")
         return []
     text = INDEX.read_text(encoding="utf-8")
 
@@ -76,7 +76,7 @@ def append_to_index(name: str, title: str, category: str) -> list[str]:
 
     end_ul = text.find("</ul>", idx)
     if end_ul < 0:
-        print(f"[WARN] index.html 中未找到 </ul>，跳过索引追加")
+        print("[WARN] index.html 中未找到 </ul>，跳过索引追加")
         return []
 
     new_line = f'  <li><a href="data/{name}.html">{title}（{category}）</a></li>\n'

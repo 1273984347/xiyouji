@@ -21,7 +21,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 生死簿轮回流转图
 # 8 个生死簿被篡改/特殊处理的案例：character/original_fate/actual_fate/modifier/cause/chapter
 LIFE_DEATH_REGISTRY = {

@@ -23,7 +23,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 世界文学取经者家族
 PILGRIMS_FAMILY = [
     {

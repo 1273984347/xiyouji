@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """W267 E6 性能监控深化·Core Web Vitals 持续监控 + RUM + 警报 + 趋势 + 预算
 
 v2.2.47 · W267 · 在 W236-E 基础上深化：
@@ -40,7 +39,6 @@ import sys
 import time
 from datetime import datetime
 from pathlib import Path
-from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE_DIR = ROOT / "site"
@@ -592,11 +590,9 @@ def check_budget(budget):
                 continue
             ext = p.suffix.lower()
             size = p.stat().st_size
-            categorized = False
             for cat, exts in RESOURCE_EXT_MAP.items():
                 if ext in exts:
                     actual[cat] += size
-                    categorized = True
                     break
             # 所有文件计入 total（含未分类资源）
             actual["total"] += size
@@ -674,7 +670,7 @@ def build_report(results, scan_mode, duration, alerts=None, rum=None, trend=None
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     summary = {"total": len(results), "good": 0, "needs": 0, "poor": 0, "errors": 0}
     metric_stats = {m: {"good": 0, "needs": 0, "poor": 0} for m in THRESHOLDS}
-    for name, vitals in results.items():
+    for _name, vitals in results.items():
         if "error" in vitals:
             summary["errors"] += 1
             continue
@@ -692,7 +688,7 @@ def build_report(results, scan_mode, duration, alerts=None, rum=None, trend=None
 
     md = []
     md.append("# W267 Core Web Vitals 性能监控报告\n")
-    md.append(f"- 版本：v2.2.47 · W267 · E6 性能监控深化")
+    md.append("- 版本：v2.2.47 · W267 · E6 性能监控深化")
     md.append(f"- 扫描时间：{timestamp}")
     md.append(f"- 扫描模式：{scan_mode}")
     md.append(f"- 页面总数：{summary['total']}")

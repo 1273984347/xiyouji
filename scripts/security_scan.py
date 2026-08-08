@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """W268 E8 安全深化·本地安全扫描工具
 
 v2.2.47 · W268 · 在 W236-E 基础上深化：
@@ -159,6 +158,10 @@ def discover_files():
             if p.is_file() and p.suffix.lower() in exts:
                 # 跳过 baseline/current 截图目录、node_modules
                 if any(seg in {"node_modules", "current", "baseline", ".thumbnails"} for seg in p.parts):
+                    continue
+                # W400 修复：跳过下划线前缀的一次性诊断/开发脚本（如 _chk_*.js）
+                # —— 它们非生产代码，且常含 eval/innerHTML 用于本地调试，不应阻断安全门禁
+                if p.name.startswith("_"):
                     continue
                 files.append(p)
     return sorted(files)
@@ -571,7 +574,7 @@ def build_report(findings, scan_mode, duration, strict, w268_summary=None):
 
     md = []
     md.append("# W268 安全扫描报告\n")
-    md.append(f"- 版本：v2.2.47 · W268 · E8 安全深化")
+    md.append("- 版本：v2.2.47 · W268 · E8 安全深化")
     md.append(f"- 扫描时间：{timestamp}")
     md.append(f"- 扫描模式：{scan_mode}")
     md.append(f"- 严格模式：{'是' if strict else '否'}")

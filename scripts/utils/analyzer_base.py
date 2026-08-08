@@ -45,7 +45,7 @@ from pathlib import Path
 
 # 添加项目 scripts 目录到 sys.path（用于 import text_loader）
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from utils.text_loader import load_text, load_all_chapters
+from utils.text_loader import load_all_chapters, load_text
 
 
 def _default_input_dir() -> Path:

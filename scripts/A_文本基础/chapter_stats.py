@@ -23,7 +23,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from utils.analyzer_base import run_analyzer
 
-
 # 中文引号对（含直角引号、曲引号）
 DIALOGUE_PATTERN = re.compile(r'["“」』]([^"”」』]*)["”」』]')
 

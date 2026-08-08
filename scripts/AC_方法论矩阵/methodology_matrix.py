@@ -19,7 +19,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 西游式反派评估矩阵
 # X 轴：动机来源（0=纯粹求生 → 10=形而上的怨念）
 # Y 轴：资源丰度（0=草根单干 → 10=拥有跨三界背景）

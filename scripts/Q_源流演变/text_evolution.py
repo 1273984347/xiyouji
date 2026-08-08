@@ -30,7 +30,6 @@ import json
 from collections import Counter
 from pathlib import Path
 
-
 # 1. 版本进化树
 VERSIONS_TREE = [
     {

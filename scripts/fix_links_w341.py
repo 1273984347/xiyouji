@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 fix_links_w341.py — W341 死链巡检·机械修复（零依赖）
 

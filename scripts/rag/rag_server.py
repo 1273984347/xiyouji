@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 rag_server.py — 《详解西游记》本地 RAG 查询服务（零依赖）
 
@@ -19,9 +18,9 @@ dukou-engine.html 通过 fetch('http://127.0.0.1:8777/query?q=...') 调用；
 Neo4j 后端路径见 graph_seed_neo4j.py。完整 lightrag-hku 升级见 README.md。
 """
 
+import json
 import os
 import sys
-import json
 import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 

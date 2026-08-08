@@ -20,7 +20,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 取经风险评估表
 # 81 难按 PMBOK 风险分类
 RISK_ASSESSMENT = {

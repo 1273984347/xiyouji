@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 W390 · P0 埋点注入脚本
 
@@ -34,7 +33,7 @@ def compute_rel_src(html_path):
 
 
 def inject(html_path, check_only=False):
-    with open(html_path, "r", encoding="utf-8") as f:
+    with open(html_path, encoding="utf-8") as f:
         content = f.read()
 
     if MARKER in content:

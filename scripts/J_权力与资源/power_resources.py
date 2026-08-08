@@ -21,7 +21,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 三界权力结构图
 # 7 大势力：层级·leader·实权·名义权·资源控制·影响力评分 0-10
 POWER_STRUCTURE = {

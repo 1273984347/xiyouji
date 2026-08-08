@@ -8,9 +8,9 @@
 
 退出码：0 全部一致 / 1 有不一致
 """
+import argparse
 import re
 import sys
-import argparse
 from pathlib import Path
 
 # 项目根目录（脚本位于 scripts/ 下）
@@ -173,7 +173,8 @@ def rule_stats(latest_section, fix=False):
                         old_line = lines[ln - 1]
                         # 用反向引用替换：将 pat 第一个 group 的数字替换为 expected
                         new_line = pat.sub(
-                            lambda mm: mm.group(0).replace(mm.group(1), str(expected[key]), 1),
+                            # W400 修复：B023 —— lambda 默认参数捕获当前 key，避免绑定循环变量
+                            lambda mm, _key=key: mm.group(0).replace(mm.group(1), str(expected[_key]), 1),
                             old_line, count=1
                         )
                         if new_line != old_line:

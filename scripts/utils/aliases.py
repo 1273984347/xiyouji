@@ -32,7 +32,6 @@ aliases.py — 《西游记》人物别名表（单一数据源）
 
 from __future__ import annotations
 
-
 # ====================================================================
 # 人物别名表（35 位主要人物）
 # 数据源：scripts/B_人物/character_nlp.py 的 CHARACTERS 字典

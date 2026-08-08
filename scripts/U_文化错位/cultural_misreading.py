@@ -24,7 +24,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 翻译认知偏差
 TRANSLATION_BIAS = [
     {

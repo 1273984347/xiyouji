@@ -22,7 +22,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 势力分布图
 # 7 大势力：成员数·影响力·资源·与取经团队关系
 FACTION_DISTRIBUTION = {

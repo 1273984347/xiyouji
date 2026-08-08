@@ -20,7 +20,6 @@ import argparse
 import json
 from pathlib import Path
 
-
 # 1. 反取经桌游《灵山董事会》
 BOARD_GAME = {
     "game_name": "灵山董事会",

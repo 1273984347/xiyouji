@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """fix_links_w341_part2.py — 修复第一轮引入的回归 + 遗漏的机械断链。
 
 1. site/data 5 页 dashboard 链接修复时漏了闭合引号 -> 补回 "
