@@ -4,9 +4,21 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W413），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W414），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.3.29（2026-08-09）：W414 README 用户手册改造 — 普通读者入口 + 开发者分区两级引导
+
+> **W414 README 用户手册改造（普通读者视角·承接 W413 文件策略审查）**
+> - **来源**：用户指令"按这个思路把 README 改造成用户手册 + 开发者分区的引导结构"（前序讨论：面向普通读者 vs 开发者，"用户不会看"≠"没必要上传"，最优解是引导视线而非删文件）
+> - **执行（README 重构）**：
+>   - **普通读者专区**（置顶）：GitHub Pages 在线站点一键直达（https://1273984347.github.io/xiyouji/·gh api 实测确认）+ 内容导航表（10 大板块 + 86 可视化页 + 阅读指南/术语表/项目说明入口）+ 项目定位与数据维度全景表（133 维）+ 目标读者清单（8 类读者各给入口）
+>   - **开发者/维护者专区**（`<details>` 折叠）：目录结构（精简树）+ 运行分析脚本 + pytest/Playwright E2E + 截图审查 + 双索引（CHANGELOG/file-index W001-W414）+ 文档维护规范
+>   - **保留**：双协议授权（MIT + CC BY-NC 4.0）·学术引用（CITATION.cff）·贡献方式·"201 篇" A4 计数
+> - **执行（版本同步）**：bump_version 升 v2.3.29 W414（README/STRUCTURE/项目说明）+ site 页脚 4 个（dukou-engine/index/cross-time-danmaku/tag-cloud）+ 交接文档/项目概览/项目认知总览/项目交接参考手册 同步
+> - **验证**：verify_delivery 全绿（含"201 篇" A4 计数）·py_compile 无需（纯文档）
+> - **状态**：已落地·待 push·CI 验证（纯文档变更·CI 覆盖 html 页脚一致性）
 
 ### v2.3.28（2026-08-09）：W413 仓库文件策略审查 — 严格审查入库边界·个人文档/方法论/开发内部资产恢复入库
 

@@ -781,3 +781,21 @@
 | site/data/cross-time-danmaku.html | W413 | 修改·页脚 v2.3.27 W412→v2.3.28 W413 |
 | site/data/tag-cloud.html | W413 | 修改·页脚 v2.3.27 W412→v2.3.28 W413 |
 | scripts/output/file-index.md | W413 | W413 反向索引登记 |
+
+## W414 README 用户手册改造（2026-08-09·v2.3.29）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| README.md | W414 | 重构·用户手册 + 开发者分区两级引导（普通读者专区置顶：GitHub Pages 一键直达链接/内容导航表/数据维度全景/目标读者清单·开发者专区 details 折叠：目录/脚本/测试/截图审查/双索引/规范）·头部 v2.3.29 W414 |
+| STRUCTURE.md | W414 | 文档同步·头部 v2.3.28 W413→v2.3.29 W414 |
+| docs/00-导读/项目说明.md | W414 | 文档同步·头部 + 45 行当前版本 v2.3.28→v2.3.29 |
+| CHANGELOG.md | W414 | 新增 W414 版本段（四件套）·编号规则 W001-W413→W001-W414 |
+| 交接文档.md | W414 | 文档同步·头部/当前进度段/HEAD/W 编号 v2.3.29 W414·README 引用 v2.3.29·CHANGELOG 范围 W001-W414·接续 W415 |
+| 项目交接参考手册.md | W414 | 文档同步·头部 v2.3.29 W414 + 接续 W 编号 W415 |
+| 项目概览.md | W414 | 文档同步·头部/HEAD v2.3.29 W414 + W414 里程碑条目 |
+| 项目认知总览.md | W414 | 文档同步·头部/HEAD v2.3.29 W414 |
+| site/dukou-engine.html | W414 | 修改·页脚升 v2.3.29 W414（README 用户手册改造段） |
+| site/index.html | W414 | 修改·页脚 v2.3.28 W413→v2.3.29 W414 |
+| site/data/cross-time-danmaku.html | W414 | 修改·页脚 v2.3.28 W413→v2.3.29 W414 |
+| site/data/tag-cloud.html | W414 | 修改·页脚 v2.3.28 W413→v2.3.29 W414 |
+| scripts/output/file-index.md | W414 | W414 反向索引登记 |
