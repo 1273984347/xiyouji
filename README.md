@@ -1,35 +1,37 @@
-# 详解西游记
+# 📖 详解西游记
 
-> 一座关于《西游记》的混合型解读项目 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
+> 一源多形 · 数字人文可视化解读《西游记》100 回 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前版本 v2.3.29（2026-08-09）**：W414 README 用户手册改造（普通读者入口 + 开发者分区两级引导·在线站点一键直达·GitHub Pages 链接置顶）·A1-A6 共 611 篇 + 86 可视化页（A4 W342 gap-fill 199→201 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。 + W406（截图审查纳入发布流程） + W407（修数据路径代码异味） + W408（修 static 资源路径） + W409（文档同步刷新） + W410（npm 依赖审计补充） + W411（安全审计 P0-1/P1-1 处置） + W412（安全审计剩余项处置） + W413（仓库文件策略审查）
+> **当前版本 v2.3.30（2026-08-09）**：W415 README 视觉引导增量（徽章区 + 图标化速览 + 首页预览截图 + 反馈段）·A1-A6 共 611 篇 + 86 可视化页（A4 W342 gap-fill 199→201 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。 + W406（截图审查纳入发布流程） + W407（修数据路径代码异味） + W408（修 static 资源路径） + W409（文档同步刷新） + W410（npm 依赖审计补充） + W411（安全审计 P0-1/P1-1 处置） + W412（安全审计剩余项处置） + W413（仓库文件策略审查） + W414（README 用户手册改造）
+
+[![在线访问](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E8%AE%BF%E9%97%AE-%E7%AB%8B%E5%8D%B3%E4%BD%93%E9%AA%8C-brightgreen?style=for-the-badge&logo=githubpages&logoColor=white)](https://1273984347.github.io/xiyouji/)
+[![双协议授权](https://img.shields.io/badge/%E5%8F%8C%E5%8D%8F%E8%AE%AE-MIT%20%2B%20CC%20BY--NC%204.0-blue)](LICENSE)
+[![部署状态](https://img.shields.io/github/actions/workflow/status/1273984347/xiyouji/pages.yml?label=%E9%83%A8%E7%BD%B2%E7%8A%B6%E6%80%81)](.github/workflows/pages.yml)
 
 ---
 
 # 📖 普通读者专区
 
-## 🌐 在线站点（一键直达，无需任何技术操作）
+## 🚀 在线体验（推荐所有读者）
 
-### 👉 [**https://1273984347.github.io/xiyouji/**](https://1273984347.github.io/xiyouji/)
+**无需安装，点开即读** 👉 [**https://1273984347.github.io/xiyouji/**](https://1273984347.github.io/xiyouji/)
 
-所有解读文章与数据可视化页面的在线版本，浏览器直接打开即可阅读。
+![详解西游记 · 站点首页预览](assets/images/index-preview.png)
+
+*如果图片加载慢，请直接点击上方链接打开站点。*
 
 **本地浏览**：克隆仓库后双击 `site/index.html`（纯静态站点，支持 `file://` 协议直接打开，无需安装任何软件）。
 
-## 📚 内容导航
+## 🎁 你将会看到什么？
 
-| 内容 | 位置 | 说明 |
-|---|---|---|
-| 阅读指南 | [docs/00-导读/阅读指南.md](docs/00-导读/阅读指南.md) | 从哪里读起 |
-| 项目说明 | [docs/00-导读/项目说明.md](docs/00-导读/项目说明.md) | 项目状态与规模概览 |
-| 术语表 | [docs/00-导读/术语表.md](docs/00-导读/术语表.md) | "心猿""木母""黄婆"等内丹术语速查 |
-| 全书逐回解读 | [docs/01-全书逐回解读/](docs/01-全书逐回解读/) | 100 回逐回讲解（100/100 收束·含深度解读+原文全文） |
-| 人物深度分析 | [docs/02-人物深度分析/](docs/02-人物深度分析/) | 孙悟空/唐僧/八戒/沙僧/观音/妖怪谱系/女性角色等 |
-| 主题与情节专题 | [docs/03-主题与情节专题/](docs/03-主题与情节专题/) | 大闹天宫/八十一难/真假美猴王/取经团队动力学 |
-| 文化与历史背景 | [docs/04-文化与历史背景/](docs/04-文化与历史背景/) | 成书背景/佛道思想/明代社会隐喻/版本演变 |
-| 诗词歌赋 | [docs/05-诗词歌赋/](docs/05-诗词歌赋/) | 原著诗词赏析/回目对联/主题诗词创作 |
-| 个人随笔 | [docs/06-个人随笔/](docs/06-个人随笔/) | 现代视角解读/职场映射/时代变迁中的西游（44 篇） |
-| 数据可视化 | [site/data/](site/data/) | 86 个 D3.js 可视化/交互页（弹幕博物馆/情感热力图/AI 名人对话/原著检索等） |
+- 📖 **全书逐回解读**：100 回逐回讲解 + 深度解读 + 原文全文 → [docs/01-全书逐回解读/](docs/01-全书逐回解读/)
+- 🕸️ **人物深度分析**：孙悟空/唐僧/八戒/沙僧/观音/妖怪谱系/女性角色 → [docs/02-人物深度分析/](docs/02-人物深度分析/)
+- 🗺️ **主题与情节专题**：大闹天宫/八十一难/真假美猴王/取经团队动力学 → [docs/03-主题与情节专题/](docs/03-主题与情节专题/)
+- 📚 **文化与历史背景**：成书背景/佛道思想/明代社会隐喻/版本演变 → [docs/04-文化与历史背景/](docs/04-文化与历史背景/)
+- 📜 **诗词歌赋**：原著诗词赏析/回目对联/主题诗词创作 → [docs/05-诗词歌赋/](docs/05-诗词歌赋/)
+- 💭 **个人随笔**：现代视角解读/职场映射/时代变迁中的西游（44 篇）→ [docs/06-个人随笔/](docs/06-个人随笔/)
+- 📊 **数据可视化**：86 个 D3.js 可视化/交互页（弹幕博物馆/情感热力图/AI 名人对话/原著检索等）→ [site/data/](site/data/)
+- 🔍 **术语速查**："心猿""木母""黄婆"等内丹术语 → [术语表](docs/00-导读/术语表.md)
 
 > **双轨写作**：每篇文档开头以 `>轨标：大众普及 / 学术研究 / 教学讲解 / 个人创作` 标明轨别，读者可按需选择。
 
@@ -54,7 +56,7 @@
 
 ## 🎯 目标读者
 
-- **大众读者**：从本文档「在线站点」直达，或 `docs/00-导读/` 与 `site/` 之间穿梭
+- **大众读者**：从本文档「在线体验」直达，或 `docs/00-导读/` 与 `site/` 之间穿梭
 - **逐回解读读者**：`docs/01-全书逐回解读/` 100 回全覆盖（开篇·学艺·龙宫借宝·闹天宫·取经启动·组建·团队集结·决裂·中段斗法·整合·火焰山·狮驼岭·后期识魔·终回 + 批 1-13 补全）
 - **学术研究者**：重点看 `docs/02-04/` 与 `references/`；如对研究有帮助，请按 [CITATION.cff](CITATION.cff) 引用
 - **批评史研究者**：[criticism-history.html](site/data/criticism-history.html) 学术长卷（500 年解读流变·9 批评家·三教争辩·内丹密码）+ [concept-device.html](site/data/concept-device.html) 观念装置（三棱镜/收音机/莫比乌斯环/密码卡/弹幕重映/侦探墙）
@@ -72,6 +74,14 @@
 
 <details>
 <summary>点击展开：工程与维护文档</summary>
+
+## 技术栈
+
+- **可视化**：D3.js（数据图表）、Three.js（3D 页面）
+- **文本分析**：Python（词频/共现/情感/术语 NLP）
+- **前端**：原生 HTML/CSS/JS（纯静态·file:// 可直接打开）
+- **Web Agent**：CodeBuddy Agent SDK（`xiyouji-agent-web/`）
+- **CI/CD**：GitHub Actions（pytest/Playwright/Lighthouse/pip-audit/npm-audit）
 
 ## 目录结构
 
@@ -93,7 +103,7 @@ xiyouji/
 ├── site/                  # 可浏览的 HTML 站点（D3.js 驱动·index/dashboard/chapters/characters/themes/data/static）
 ├── scripts/               # Python 文本分析脚本（按 A-AH 34 类组织 + utils + output）
 ├── timeline/              # 时间线专题（取经路线、大事年表、人物时间线）
-├── assets/                # 字体源与静态资源
+├── assets/                # 字体源、图片等静态资源
 ├── references/            # 参考文献
 ├── tools/                 # 辅助工具（章节切分等）
 ├── mcp-server/            # MCP 服务（xiyouji_drl_spotcheck 等工具）
@@ -102,7 +112,7 @@ xiyouji/
 ├── .github/workflows/     # CI/Security/Deploy Pages/Lighthouse/截图审查
 ├── README.md              # 本文件（用户手册 + 开发者分区）
 ├── STRUCTURE.md           # 目录结构详细说明
-├── CHANGELOG.md           # 更新日志（W001-W414）
+├── CHANGELOG.md           # 更新日志（W001-W415）
 └── LICENSE                # 双协议授权声明
 ```
 
@@ -141,7 +151,7 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 
 ## 文档索引（双索引可追溯）
 
-- **正向索引（时间线）**：[CHANGELOG.md](CHANGELOG.md) — 按版本记录变更，每版本段标注唯一 W### ID（W001-W414）+ 四件套（来源/文件/验证/状态）。v0.1-v2.0.60 历史归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)
+- **正向索引（时间线）**：[CHANGELOG.md](CHANGELOG.md) — 按版本记录变更，每版本段标注唯一 W### ID（W001-W415）+ 四件套（来源/文件/验证/状态）。v0.1-v2.0.60 历史归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)
 - **反向索引（文件）**：[scripts/output/file-index.md](scripts/output/file-index.md) — 给定文件查改过几次、对应哪个 W 条目
 
 **W### 编号规则**：W001-W099 对应 v0.1-v2.0.72；W100+ 对应 v2.1.0+；新增 W 条目时同步更新两个索引。详细映射见 [CHANGELOG.md](CHANGELOG.md)。
@@ -176,6 +186,10 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 - **文本内容**（docs/ 下所有 Markdown 原创解读/随笔/人物/专题/文化/诗词、S1 方法论、S2 学术投稿候选、S2 外部分享）：[CC BY-NC 4.0](LICENSE-CONTENT.md)（署名-非商业性使用）
 
 《西游记》原著文本已进入公共领域；引用的外部网络解读版权归原作者，仅作索引与摘录，不纳入本项目协议。
+
+## 💬 反馈与建议
+
+如有问题、勘误或想法，欢迎提交 [Issue](https://github.com/1273984347/xiyouji/issues) 或在在线站点评论区留言。
 
 ---
 

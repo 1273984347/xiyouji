@@ -1,6 +1,6 @@
 # CI/CD 工作流说明
 
-> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414** — 西游记解读项目（`d:\1\xiyouji`，v2.3.29 W414）的 GitHub Actions 工作流层。
+> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415** — 西游记解读项目（`d:\1\xiyouji`，v2.3.30 W415）的 GitHub Actions 工作流层。
 > **W399**：ci.yml 补 push main 触发（此前仅 pull_request，项目直接 push main 无 PR → CI 从未运行）；sitemap/robots 域名补全；新增 rum-viewer。
 > **W400**：CI/Security 三 workflow 转绿（ruff 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复·black 门禁移除）。
 > **W401**：ci.yml 5→7 job（pytest-unit 全量 tests/ + agent-web-build）·agent-web 源码入库·移除 3 处无 pip 安装 job 的 cache: pip 残留·build-test-deploy.yml 弃用删除。
@@ -9,6 +9,7 @@
 > **W412**：安全审计剩余项处置（P0-2 禁运行时覆盖密钥/端点 + RAG 参数钳制/LLM 端点校验 + SSE 超时与断开清理 + DOMPurify 消毒 + 依赖锁定 + CORS 白名单·无 workflow 文件改动，agent-web-build job 覆盖构建回归）。
 > **W413**：仓库文件策略审查（严格审查入库边界·个人文档/方法论/开发内部资产恢复入库·字体源入库 +24MB·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W414**：README 用户手册改造（普通读者入口 + 开发者分区两级引导·无 workflow 文件改动，CI 全量验证涵盖）。
+> **W415**：README 视觉引导增量（徽章区 3 枚 + 图标化速览 + 首页预览截图 + 反馈段·无 workflow 文件改动，CI 全量验证涵盖）。
 
 ## 1. 工作流列表
 
