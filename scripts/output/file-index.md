@@ -758,3 +758,26 @@
 | CHANGELOG.md | W412 | 新增 W412 版本段（四件套）·编号规则 W001-W411→W001-W412·W411 状态行纠偏（已 push 9991982） |
 | 交接文档.md | W412 | 文档同步·当前进度段加 W412 里程碑·版本号列表/HEAD/W 编号·待办安全审计剩余项更新 |
 | scripts/output/file-index.md | W412 | W412 反向索引登记 |
+
+> 当前版本 v2.3.27（2026-08-09）
+
+## W413 仓库文件策略审查（2026-08-09·v2.3.28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| 交接文档.md / 交接文档-archive.md / 项目交接参考手册.md / 项目概览.md / 项目认知总览.md / 项目GitHub参考调研报告.md | W413 | 恢复入库·严格审查无敏感内容（初版 W413 曾 git rm --cached 转本地·用户改口"其他全部上传"后 git add 恢复 tracked） |
+| docs/_dev/（3 文件） | W413 | 恢复入库·开发内部资产无敏感内容 |
+| docs/_templates/（3 文件） | W413 | 恢复入库·模板资产无敏感内容 |
+| docs/superpowers/（11 文件） | W413 | 恢复入库·specs/plans 过程文档无敏感内容 |
+| docs/10-方法论沉淀/（14 篇） | W413 | 恢复入库·方法论沉淀无敏感内容（初版 W413 曾 gitignore） |
+| .gitignore | W413 | 修改·移除 W413 初版本地化规则（6 文档/方法论/_dev/_templates/superpowers）·保留 .workbuddy/ 与硬性排除规则（.env/审计档/依赖/构建产物/RAG 索引/基线） |
+| scripts/verify_delivery.py | W413 | 修改·CORE_DOCS 恢复 CHANGELOG + 交接文档两份硬门禁·移除 LOCAL_OPT_DOCS 逻辑·A4_DOCS 恢复 4 份 |
+| assets/fonts/source/（5 文件） | W413 | 入库·字体源 git add -f 强制入库（NotoSerifSC-var.ttf 24MB + JetBrainsMono ×2 + NotoSansSC woff2 ×2） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W413 | 文档同步·头部版本描述改 W413 修正（严格审查入库边界·全部恢复入库）·项目说明 45 行 v2.3.27→v2.3.28 |
+| CHANGELOG.md | W413 | 新增 W413 版本段（四件套）·编号规则 W001-W412→W001-W413 |
+| 交接文档.md | W413 | 文档同步·当前进度段加 W413 里程碑·HEAD/W 编号 v2.3.28 W413·README 引用 v2.3.28·CHANGELOG 范围 W001-W413 |
+| site/dukou-engine.html | W413 | 修改·页脚升 v2.3.28 W413（仓库文件策略审查段） |
+| site/index.html | W413 | 修改·页脚 v2.3.27 W412→v2.3.28 W413 |
+| site/data/cross-time-danmaku.html | W413 | 修改·页脚 v2.3.27 W412→v2.3.28 W413 |
+| site/data/tag-cloud.html | W413 | 修改·页脚 v2.3.27 W412→v2.3.28 W413 |
+| scripts/output/file-index.md | W413 | W413 反向索引登记 |

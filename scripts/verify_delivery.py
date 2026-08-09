@@ -29,6 +29,7 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(_HERE, ".."))  # scripts/.. = 项目根 xiyouji
 
 # 降级六文档同步（W393）：核心 2 份硬门禁，辅助 4 份仅 WARN 不阻断
+# W413 修正（2026-08-09）：严格审查后交接文档恢复入库（无敏感内容），恢复为核心硬门禁
 CORE_DOCS = [
     "CHANGELOG.md",
     "交接文档.md",
@@ -42,7 +43,7 @@ AUX_DOCS = [
 DOCS = CORE_DOCS + AUX_DOCS
 HTML = os.path.join(ROOT, "site", "dukou-engine.html")
 
-# 四份含 A4 计数语义的文档
+# 四份含 A4 计数语义的文档（W413 修正：交接文档恢复入库，恢复 4 份检查）
 A4_DOCS = ["README.md", "STRUCTURE.md",
            os.path.join("docs", "00-导读", "项目说明.md"), "交接文档.md"]
 EXPECT_A4 = "201 篇"  # W342 gap-fill（权力五联对照 W084 + 妖怪身份政治）后：199→201

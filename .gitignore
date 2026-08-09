@@ -85,20 +85,12 @@ hyperframes/.thumbnails/
 # 原著大文件（如体积过大）
 source/原文/西游记-全文.txt
 
-# 字体源文件（web 仅用 site/static/fonts/*.woff2 优化子集，ttf 可变字体源 24MB 本地保留）
-assets/fonts/source/
-
 # 个人草稿
 draft/
 scratch/
 
-# 个人 session 输出（本地保留，不入库）
-交接文档.md
-交接文档-archive.md
-人物*.txt
-
-# 个人方法论沉淀（本地保留，不入库）
-docs/10-方法论沉淀/
+# W413 修正（2026-08-09）：严格审查后恢复上传——6 个个人文档 + _dev/_templates/superpowers
+# + 方法论沉淀均无敏感内容，仅保留真正不能上传的（密钥/依赖/构建产物/敏感审计档）
 .workbuddy/
 
 # Web Agent 子项目（xiyouji-agent-web）：源码入库以支持 CI 构建验证；
