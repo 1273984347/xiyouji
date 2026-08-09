@@ -89,6 +89,8 @@ RULES = [
      r"AKIA[0-9A-Z]{16}", "high", {".py", ".js", ".yml", ".yaml", ".html"}),
     ("SEC-004", "私钥头部",
      r"-----BEGIN (RSA |EC |)PRIVATE KEY-----", "high", {".py", ".js", ".yml", ".yaml", ".txt"}),
+    ("SEC-005", "OpenAI 风格 API Key（sk- 前缀·覆盖 DeepSeek/Qwen 等）",
+     r"\bsk-[A-Za-z0-9_-]{16,}", "high", {".py", ".js", ".yml", ".yaml", ".html"}),
     # 不安全 API
     ("API-001", "exec 执行动态代码",
      r"\bexec\s*\(", "medium", {".py"}),

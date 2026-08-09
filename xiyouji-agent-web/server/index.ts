@@ -4,11 +4,7 @@ import { query, unstable_v2_createSession, unstable_v2_authenticate, PermissionR
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
 import { fileURLToPath } from "url";
-import { exec } from "child_process";
-import { promisify } from "util";
 import * as db from "./db.js";
-
-const execAsync = promisify(exec);
 
 // 待处理的权限请求
 interface PendingPermission {
@@ -64,6 +60,8 @@ if (AGENT_WEB_TOKEN) {
 const SAFE_PERMISSION_MODES = new Set(["default", "acceptEdits", "plan"]);
 // 仅当显式设置 AGENT_WEB_ALLOW_BYPASS=1 时启用 bypassPermissions（本地单人模式）
 const ALLOW_BYPASS = process.env.AGENT_WEB_ALLOW_BYPASS === "1";
+// P3-1：详细日志（工具输入/流消息）默认关闭，仅 AGENT_WEB_VERBOSE=1 时打印（防敏感信息泄露）
+const VERBOSE_LOG = process.env.AGENT_WEB_VERBOSE === "1";
 
 function sanitizePermissionMode(input: unknown): PermissionMode {
   if (typeof input === "string" && SAFE_PERMISSION_MODES.has(input)) return input as PermissionMode;
@@ -190,21 +188,24 @@ app.get("/api/check-login", async (req, res) => {
   res.json(response);
 });
 
-// 保存环境变量配置
+// 保存环境变量配置（P0-2 修复：禁运行时覆盖 API_KEY/BASE_URL——密钥与端点仅从服务端 .env 读取，重启生效）
 app.post("/api/save-env-config", (req, res) => {
   const { apiKey, authToken, internetEnv, baseUrl } = req.body;
-  
-  if (!apiKey && !authToken) {
-    return res.status(400).json({ error: '请至少配置 API Key 或 Auth Token' });
+
+  // P0-2：拒绝运行时覆盖密钥/端点（防密钥劫持 + SSRF；仅从服务端 .env 读取）
+  if (apiKey || baseUrl) {
+    return res.status(400).json({
+      error: "CODEBUDDY_API_KEY / CODEBUDDY_BASE_URL 禁止运行时覆盖（P0-2）：请在服务端 .env 配置后重启生效",
+      refused: ["CODEBUDDY_API_KEY", "CODEBUDDY_BASE_URL"],
+    });
   }
-  
+
+  if (!authToken && !internetEnv) {
+    return res.status(400).json({ error: '请至少配置 Auth Token 或网络环境' });
+  }
+
   const configuredVars: string[] = [];
-  
-  // 设置环境变量（仅在当前进程有效）
-  if (apiKey) {
-    process.env.CODEBUDDY_API_KEY = apiKey;
-    configuredVars.push('CODEBUDDY_API_KEY');
-  }
+
   if (authToken) {
     process.env.CODEBUDDY_AUTH_TOKEN = authToken;
     configuredVars.push('CODEBUDDY_AUTH_TOKEN');
@@ -213,18 +214,14 @@ app.post("/api/save-env-config", (req, res) => {
     process.env.CODEBUDDY_INTERNET_ENVIRONMENT = internetEnv;
     configuredVars.push('CODEBUDDY_INTERNET_ENVIRONMENT');
   }
-  if (baseUrl) {
-    process.env.CODEBUDDY_BASE_URL = baseUrl;
-    configuredVars.push('CODEBUDDY_BASE_URL');
-  }
-  
+
   // 清除模型缓存，以便重新获取
   cachedModels = [];
-  
-  res.json({ 
-    success: true, 
+
+  res.json({
+    success: true,
     message: `已设置: ${configuredVars.join(', ')}`,
-    note: '环境变量仅在当前服务器进程有效，重启后需要重新设置'
+    note: '环境变量仅在当前服务器进程有效，重启后需重新设置；API_KEY/BASE_URL 由服务端 .env 配置（P0-2）'
   });
 });
 
@@ -471,6 +468,37 @@ app.post("/api/chat", async (req, res) => {
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
 
+  // P2-3 修复：SSE 断开清理 + 总时长上限（防客户端断开后流继续运行、pending 权限请求悬挂）
+  let aborted = false;
+  const SSE_MAX_MS = 10 * 60 * 1000; // 10 分钟总时长上限
+  const sseTimer = setTimeout(() => {
+    if (aborted) return;
+    aborted = true;
+    pendingPermissions.forEach((p, rid) => {
+      if (p.sessionId === session.id) {
+        pendingPermissions.delete(rid);
+        p.reject(new Error("SSE 超时"));
+      }
+    });
+    try {
+      res.write(`data: ${JSON.stringify({ type: "error", message: "请求超时（10 分钟上限）" })}\n\n`);
+      res.end();
+    } catch { /* 客户端可能已断开 */ }
+  }, SSE_MAX_MS);
+  const abortStream = () => {
+    if (aborted) return;
+    aborted = true;
+    clearTimeout(sseTimer);
+    pendingPermissions.forEach((p, rid) => {
+      if (p.sessionId === session.id) {
+        pendingPermissions.delete(rid);
+        p.reject(new Error("客户端断开连接"));
+      }
+    });
+    try { res.end(); } catch { /* 已断开 */ }
+  };
+  req.on("close", abortStream);
+
   // 默认系统提示词（适配「详解西游记」xiyouji 项目）
   const defaultSystemPrompt = `你是「详解西游记」项目的专属智能助手，代号「渡口问津」。
 
@@ -494,7 +522,7 @@ app.post("/api/chat", async (req, res) => {
 - 涉及诗词、术语时参考 source/ 与 docs/00-导读/术语表.md。
 - 文件操作前先确认意图；写入新内容遵循项目文档规范。
 - 语气可带古典雅致，但表达务必清晰、准确、可操作。
-- 当前项目版本 v2.3.9（详见 README.md 顶部与 CHANGELOG.md）。`;
+- 当前项目版本 v2.3.26（详见 README.md 顶部与 CHANGELOG.md）。`;
 
   // 工作目录：已由 resolveWorkingDir 净化（P0-1，仅 PROJECT_CWD 内）
 
@@ -508,7 +536,7 @@ app.post("/api/chat", async (req, res) => {
     // 创建 canUseTool 回调
     const canUseTool: CanUseTool = async (toolName, input, options) => {
       console.log(`[Permission] Tool request: ${toolName}`);
-      console.log(`[Permission] Input:`, JSON.stringify(input, null, 2));
+      if (VERBOSE_LOG) console.log(`[Permission] Input:`, JSON.stringify(input, null, 2)); // P3-1
       
       // bypassPermissions 模式直接放行（仅当 AGENT_WEB_ALLOW_BYPASS=1 时经净化可达）
       if (effectivePermissionMode === 'bypassPermissions') {
@@ -600,7 +628,8 @@ app.post("/api/chat", async (req, res) => {
 
     // 处理流式响应
     for await (const msg of stream) {
-      console.log("[Stream] Message type:", msg.type, msg);
+      if (aborted) break; // P2-3：客户端断开/超时后停止消费与写入
+      if (VERBOSE_LOG) console.log("[Stream] Message type:", msg.type, msg); // P3-1
       
       // 处理 system 消息，获取 SDK 的 session_id
       if (msg.type === "system" && (msg as any).subtype === "init") {
@@ -627,7 +656,7 @@ app.post("/api/chat", async (req, res) => {
               currentToolId = block.id || uuidv4();
               const toolInput = (block as any).input || {};
               console.log(`[Stream] Tool use: id=${currentToolId}, name=${block.name}`);
-              console.log(`[Stream] Tool input:`, JSON.stringify(toolInput, null, 2));
+              if (VERBOSE_LOG) console.log(`[Stream] Tool input:`, JSON.stringify(toolInput, null, 2)); // P3-1
               
               const toolCall = { 
                 id: currentToolId, 
@@ -654,8 +683,10 @@ app.post("/api/chat", async (req, res) => {
         const content = msgAny.content;
         
         console.log(`[Stream] Tool result: tool_use_id=${toolId}, is_error=${isError}`);
-        console.log(`[Stream] Tool result content type:`, typeof content);
-        console.log(`[Stream] Tool result content:`, typeof content === 'string' ? content.slice(0, 500) : JSON.stringify(content, null, 2)?.slice(0, 500));
+        if (VERBOSE_LOG) { // P3-1：详细结果内容默认不打印
+          console.log(`[Stream] Tool result content type:`, typeof content);
+          console.log(`[Stream] Tool result content:`, typeof content === 'string' ? content.slice(0, 500) : JSON.stringify(content, null, 2)?.slice(0, 500));
+        }
         
         const tool = toolCalls.find(t => t.id === toolId) || toolCalls[toolCalls.length - 1];
         if (tool) {
@@ -684,6 +715,10 @@ app.post("/api/chat", async (req, res) => {
       }
     }
 
+    // P2-3：清理 SSE 定时器与 close 监听（正常完成路径）
+    clearTimeout(sseTimer);
+    req.off("close", abortStream);
+
     // 保存助手消息到数据库
     db.createMessage({
       id: assistantMessageId,
@@ -707,6 +742,8 @@ app.post("/api/chat", async (req, res) => {
     console.log(`[Chat] 请求完成 ✓`);
     res.end();
   } catch (error: any) {
+    clearTimeout(sseTimer); // P2-3：异常路径同样清理定时器与 close 监听
+    req.off("close", abortStream);
     console.error(`\n[Chat] ========== 错误 ==========`);
     console.error(`[Chat] Error Name:`, error?.name);
     console.error(`[Chat] Error Message:`, error?.message);

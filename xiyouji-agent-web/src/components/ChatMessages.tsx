@@ -1,6 +1,7 @@
 import { Loading } from 'tdesign-react';
 import { ChatMarkdown } from '@tdesign-react/chat';
 import { User, Bot } from 'lucide-react';
+import DOMPurify from 'dompurify'; // P2-6：ChatMarkdown 内部 html:true + unsafeHTML 无消毒，渲染前净化
 import { Message, Model, PermissionRequest, ContentBlock } from '../types';
 import { ToolCallsCollapse } from './ToolCallsCollapse';
 import { InlinePermissionCard } from './InlinePermissionCard';
@@ -46,7 +47,7 @@ export function ChatMessages({
           }}
         >
           <div className="chat-markdown">
-            <ChatMarkdown content={block.text} />
+            <ChatMarkdown content={DOMPurify.sanitize(block.text)} />
           </div>
           {isStreaming && isLast && (
             <span 
@@ -98,7 +99,7 @@ export function ChatMessages({
             }}
           >
             <div className="chat-markdown">
-              <ChatMarkdown content={message.content} />
+              <ChatMarkdown content={DOMPurify.sanitize(message.content)} />
             </div>
             {message.isStreaming && (
               <span 

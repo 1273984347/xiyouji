@@ -754,6 +754,11 @@ function probe(){
   });
 }
 
+// P2-5 修复：drill 数据拼串转义（数据集名/路径/片段来自检索数据）
+function escapeHtml(s){
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+
 function renderOffline(q){
   var kw=q.toLowerCase();
   var rows=window.SEARCH_INDEX.filter(function(d){
@@ -783,9 +788,9 @@ function renderOnline(q){
       rows:rows, searchKeys:["数据集","示例片段"],
       onRowClick:function(row){
         var m=(res.results||[]).find(function(x){return x.dataset===row.数据集;});
-        var h="<p><b>数据集：</b>"+row.数据集+" · <b>命中 "+row.命中数+" 处</b></p><table><tbody>";
+        var h="<p><b>数据集：</b>"+escapeHtml(row.数据集)+" · <b>命中 "+row.命中数+" 处</b></p><table><tbody>";
         (m.hits||[]).slice(0,12).forEach(function(hit){
-          h+="<tr><th>"+hit.path+"</th><td>"+hit.snippet+"</td></tr>";
+          h+="<tr><th>"+escapeHtml(hit.path)+"</th><td>"+escapeHtml(hit.snippet)+"</td></tr>";
         });
         h+="</tbody></table>";
         VisTools.openDrill(row.数据集,h);

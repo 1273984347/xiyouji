@@ -208,6 +208,13 @@
     return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
+  // 属性上下文转义（P1-2：href 等属性还需转义引号，防属性逃逸）
+  function escapeAttr(str) {
+    return String(str)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
   // 命中词高亮：先转义，再对查询词包裹 <mark>（转义后无非标签内容，安全）
   function highlight(text, q) {
     let out = escapeHtml(text);
@@ -341,7 +348,7 @@
         const srcDiv = document.createElement('div');
         srcDiv.className = 'rag-source';
         srcDiv.innerHTML = '📖 来源：' + sources.map(s => s.href
-          ? `<a href="${s.href}" target="_blank" rel="noopener" style="color:#3a6b8c;text-decoration:none">${escapeHtml(s.name)} ↗</a>`
+          ? `<a href="${escapeAttr(s.href)}" target="_blank" rel="noopener" style="color:#3a6b8c;text-decoration:none">${escapeHtml(s.name)} ↗</a>`
           : escapeHtml(s.name)).join(' · ');
         bubble.appendChild(srcDiv);
       }
