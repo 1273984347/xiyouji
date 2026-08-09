@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W407），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W408），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
@@ -120,6 +120,15 @@
 >   - 两 `-view` 页：`mount()` 加 `location.protocol === "file:"` 守卫，file:// 下直接走 `goOffline()`（EMBEDDED 离线示例），跳过 `/dataset/` 死 fetch；http(s) 下仍走 API 取完整数据（路径不改，避免破坏 API 模式）
 > - **验证**：Playwright 运行时审查——① dialogue-sentiment 经本地 HTTP 服务 `dialogue_sentiment.json` 返回 200、`window.__lastData.sentiment` 真实加载、6 个 SVG 渲染、0 pageerror；② 两 -view 页 file:// 下 `/dataset/` 请求 0 次、离线示例正常渲染、0 pageerror
 > - **状态**：已落地 · 待六文档同步后 commit（W407）
+
+### v2.3.23（2026-08-09）：W408 修 static 资源路径（P2 续）— site/data/*.html 内联 CSS 的 static/fonts|images 改 ../static/
+
+> **W408 内容向/工程化小修：P2 静态资源路径（待办1 复查收尾）**
+> - **来源**：W407 P1 视觉抽查时发现的 file:// 噪声之外的真实资源 404（dialogue-sentiment 等 data 页 6 个 static 404）；属既有、影响 86 页
+> - **根因**：`site/data/*.html`（含模板 `_shell.html`）内联 CSS 中 `@font-face { src: url('static/fonts/...') }` 与 `.hero { background-image: url('static/images/...') }` 使用相对 `site/data/` 的 `static/`，解析为 `site/data/static/...`（不存在）；目标资产在 `site/static/`。http 部署（GitHub Pages）下同样 404，因字体有系统 fallback 长期被掩盖
+> - **执行**：`scripts/_fix_static_paths.py` 批处理，正则 `(url\(['\"]|src=['\"]|href=['\"])static/` → `\1../static/`，仅改真实资源引用（url()/src=/href=），不动注释里的 `site/static/` 说明文字。覆盖 86 文件、516 处（每页 5 fonts + 1 image）
+> - **验证**：Playwright HTTP 模式（本地 server）加载 dialogue-sentiment / 81-hardships / graph-explorer / character-relationship-3d 4 页，static 资源失败 0、pageerror 0（W407 时 dialogue-sentiment 有 6 个 static 404，已归零）
+> - **状态**：已落地 · 待六文档同步后 commit（W408）
 
 ### v2.3.17（2026-08-08）：W399 CI 触发修复 + SEO 域名补全 + rum-viewer 埋点查看页（并行 W390-W398 竞态清理后增量）
 
