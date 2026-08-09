@@ -15,7 +15,7 @@
 > - **执行（P0-2 密钥劫持+SSRF 防护）**：
 >   - **server/index.ts** `/api/save-env-config`：apiKey/baseUrl 禁止运行时覆盖（400 拒绝 + refused 列表·仅从服务端 .env 读取）·**SettingsPage.tsx** 前端表单移除 API Key/Base URL 输入框（改提示"由服务端 .env 配置·重启生效·禁止运行时覆盖"）·提交体仅 {authToken, internetEnv}
 > - **执行（P1-2 静态站 XSS 转义）**：**site/static/js/rag-chat.js** 新增 escapeAttr（含引号转义·属性上下文）应用于来源链接 href·**dataset-view.js** 新增 escapeHtml 应用于 openRowDrill/renderObjectView/renderKey·**cross-time-danmaku.html/tag-cloud.html/search.html** 新增 escapeHtml 应用于 tooltip/popup/hit 等动态文本·**site/_headers** script-src 补 `https://d3js.org` 白名单（页面实际 D3 CDN·原白名单 cdn.jsdelivr.net 为死配置 0 引用·消除未来 Netlify/Cloudflare 部署时误伤）
-> - **执行（P1-3 辅助·密钥扫描）**：**security_scan.py** 新增 SEC-005 规则（sk- 前缀 16+ 字符·覆盖 DeepSeek/Qwen 等 OpenAI 风格 Key）·git 历史 `-S "sk-e8228e"` 与 `-S "LLM_API_KEY=sk-"` 均无命中（未入仓）·**轮换流程已就绪**：`.env` LLM_API_KEY（前缀 sk-e8228·35 字符）已确认 gitignore/未 tracked，待用户在 DeepSeek 控制台吊销旧 key 并生成新 key，新 key 到手后更新 `.env` 并验证 RAG 生成
+> - **执行（P1-3 辅助·密钥扫描）**：**security_scan.py** 新增 SEC-005 规则（sk- 前缀 16+ 字符·覆盖 DeepSeek/Qwen 等 OpenAI 风格 Key）·git 历史 `-S "sk-e8228e"` 与 `-S "LLM_API_KEY=sk-"` 均无命中（未入仓）·**轮换已落地（2026-08-09）**：旧 key（sk-e8228…）用户已在 DeepSeek 控制台吊销·新 key（sk-ba531…）已写入 `.env`（gitignore/未 tracked）·`_llm_generate` 直接调用 + RAG 服务 `/health`（675 文档）与 `/query`（5 snippets + 30 图谱三元组 + LLM 生成 731 字符·llm_error 空）HTTP 端到端验证通过
 > - **处置收尾（2026-08-09）**：**SECURITY-AUDIT-2026-08-09.md 已加密归档**（7z AES-256·-mhe=on 头加密·归档 SECURITY-AUDIT-2026-08-09.7z·明文已删除）·密码存本地 `SECURITY-AUDIT-2026-08-09.password`（.gitignore·不入库）·.gitignore 新增 .7z/.password 规则
 > - **执行（P1-4 版本统一）**：server/index.ts systemPrompt 硬编码 v2.3.9→v2.3.26（W411 顺带修复大部分）·site 页脚版本漂移修复（P3-5）·本次 bump v2.3.27 W412
 > - **执行（P2 边界加固）**：
