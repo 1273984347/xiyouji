@@ -4,9 +4,21 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W412），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W413），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.3.28（2026-08-09）：W413 仓库文件策略审查 — 严格审查入库边界·个人文档/方法论/开发内部资产恢复入库
+
+> **W413 仓库文件策略审查（严格审查：哪些文件不能上传，其余全部上传）**
+> - **来源**：用户指令"再去调研一下哪些文件是可以不用一起 push 到仓库的文件，哪些是必须一起跟随上传的文件，最后给我完整的方案让我选"→ 初步方案 A（6 个个人文档+3 目录转本地）→ 用户改口"你审查一下哪些文件不能上传，其他全部上传，严格审查"
+> - **执行（严格审查结论）**：全库 Grep 扫描无密钥命中（`.env` 已 gitignore 未 tracked）；6 个个人文档（交接文档.md/交接文档-archive.md/项目交接参考手册.md/项目概览.md/项目认知总览.md/项目GitHub参考调研报告.md）+ docs/_dev(3) + docs/_templates(3) + docs/superpowers(11) + docs/10-方法论沉淀(14) 逐一扫描均无敏感内容 → **撤销 W413 初版本地化决策，全部恢复入库**
+> - **执行（仅硬性排除·不能上传）**：`.env`（含 sk-ba531 密钥·gitignore）·SECURITY-AUDIT-2026-08-09.7z + .password（敏感审计档·gitignore）·node_modules/dist/__pycache__/venv/.vscode（依赖与构建产物·gitignore）·scripts/output/rag_index.json（32MB 可重建·gitignore）·scripts/output/figures 生成图/screenshots/tests 基线（可重建·gitignore）·.workbuddy/（gitignore）
+> - **执行（字体源入库）**：assets/fonts/source/ 5 文件（NotoSerifSC-var.ttf 24MB + JetBrainsMono ×2 + NotoSansSC woff2 ×2）`git add -f` 强制入库（.gitignore 原规则保留注释说明）
+> - **执行（verify_delivery.py 恢复）**：CORE_DOCS 恢复为 CHANGELOG.md + 交接文档.md 两份硬门禁（移除 W413 初版 LOCAL_OPT_DOCS 本地可选逻辑）·A4_DOCS 恢复 4 份（README/STRUCTURE/项目说明/交接文档）
+> - **执行（文档同步）**：README/STRUCTURE/项目说明/交接文档 头部版本描述统一为 W413 修正（严格审查入库边界）·site/dukou-engine.html 页脚 v2.3.28 W413（index/cross-time-danmaku/tag-cloud 三页页脚同步）·CHANGELOG 本段 + file-index W413 反向索引
+> - **验证**：`py_compile` verify_delivery.py 通过·verify_delivery 全绿（核心 FAIL 0）·git status 确认 6 文档+3 目录+方法论沉淀恢复 tracked（1565 项）
+> - **状态**：已落地·待 push·CI 验证（本段为 W413 首次提交）
 
 ### v2.3.27（2026-08-09）：W412 安全审计剩余项处置 — P0-2 密钥覆盖防护 + XSS 转义 + RAG/SSE 边界 + 依赖锁定
 
