@@ -18,7 +18,7 @@
 > - **执行（verify_delivery.py 恢复）**：CORE_DOCS 恢复为 CHANGELOG.md + 交接文档.md 两份硬门禁（移除 W413 初版 LOCAL_OPT_DOCS 本地可选逻辑）·A4_DOCS 恢复 4 份（README/STRUCTURE/项目说明/交接文档）
 > - **执行（文档同步）**：README/STRUCTURE/项目说明/交接文档 头部版本描述统一为 W413 修正（严格审查入库边界）·site/dukou-engine.html 页脚 v2.3.28 W413（index/cross-time-danmaku/tag-cloud 三页页脚同步）·CHANGELOG 本段 + file-index W413 反向索引
 > - **验证**：`py_compile` verify_delivery.py 通过·verify_delivery 全绿（核心 FAIL 0）·git status 确认 6 文档+3 目录+方法论沉淀恢复 tracked（1565 项）
-> - **状态**：已落地·待 push·CI 验证（本段为 W413 首次提交）
+> - **状态**：已落地·已 push（addbe18）·CI/Security/Deploy Pages/Screenshot Review 全绿（CI 14 job + Security 4 job）
 
 ### v2.3.27（2026-08-09）：W412 安全审计剩余项处置 — P0-2 密钥覆盖防护 + XSS 转义 + RAG/SSE 边界 + 依赖锁定
 
