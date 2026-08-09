@@ -4,9 +4,18 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W414），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W415），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.3.30（2026-08-09）：W415 README 视觉引导增量 — 徽章区 + 图标化速览 + 首页预览截图 + 反馈段
+
+> **W415 README 视觉引导增量（承接 W414 用户手册改造·吸收第三方模板 3 增量·修正 4 处错误）**
+> - **来源**：用户提供第三方 README 模板（徽章区/在线体验/内容速览/快速开始/details 折叠/反馈）→ 主代理评估：骨架已被 W414 覆盖，但 3 个增量有参考价值（徽章区/首页预览截图/反馈段）·4 处错误不照抄（URL `/site/` 后缀会 404·release 徽章不适用——仓库无 Releases·单协议错应为双协议·徽章语法残缺缺 `[![` 包裹）→ 用户选"落地增量 + 图标化速览"
+> - **执行（README 增量）**：顶部新增徽章区 3 枚 shields.io（在线访问 brightgreen 大按钮式·双协议授权 MIT + CC BY-NC 4.0·部署状态 pages.yml workflow）·「内容导航表」改为「🎁 你将会看到什么」8 条 emoji 图标化速览（📖逐回解读/🕸️人物分析/🗺️主题专题/📚文化背景/📜诗词/💭随笔/📊可视化/🔍术语表·各带链接）·在线体验区插入站点首页预览截图（assets/images/index-preview.png·Playwright 1280×900 截图 108.7KB·PNG 头校验通过·临时脚本已删）·底部新增「💬 反馈与建议」（issues 链接）·开发者/维护者专区新增「技术栈」段（D3.js/Three.js/Python/原生 HTML/CodeBuddy Agent SDK/GitHub Actions）
+> - **执行（版本同步）**：bump v2.3.30 W415（README/STRUCTURE/项目说明）+ site 页脚 4 个（dukou-engine/index/cross-time-danmaku/tag-cloud）+ 交接文档/项目概览/项目认知总览/项目交接参考手册/workflows README 同步
+> - **验证**：verify_delivery 全绿（含"201 篇" A4 计数）·index-preview.png PNG 头校验通过（108.7KB）
+> - **状态**：已落地·待 push·CI 验证
 
 ### v2.3.29（2026-08-09）：W414 README 用户手册改造 — 普通读者入口 + 开发者分区两级引导
 
