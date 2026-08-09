@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import express from "express";
-import { query, unstable_v2_createSession, unstable_v2_authenticate, PermissionResult, CanUseTool } from "@tencent-ai/agent-sdk";
+import { query, unstable_v2_createSession, unstable_v2_authenticate, PermissionResult, CanUseTool, PermissionMode } from "@tencent-ai/agent-sdk";
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -29,7 +29,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT: number = Number(process.env.PORT) || 3000;
 
 // 适配项目：详解西游记（xiyouji）
 // 默认工作目录指向项目根，Agent 可在其上读取 docs/、运行 scripts/、写入 dataset/ 等。
@@ -38,6 +38,47 @@ const PROJECT_CWD = process.env.PROJECT_CWD || 'D:/1/xiyouji';
 
 // Middleware
 app.use(express.json());
+
+// 安全头（与 site/_headers 一致：防点击劫持 / MIME 嗅探 / Referer 泄露，P0-1 修复）
+app.use((_req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Permissions-Policy", "geolocation=(), microphone=(), camera=()");
+  next();
+});
+
+// 可选认证（P0-1 修复）：设置 AGENT_WEB_TOKEN 后，所有 /api/* 需携带
+// x-agent-token 或 Authorization: Bearer <token>；未设置则保持本地免认证模式。
+const AGENT_WEB_TOKEN = process.env.AGENT_WEB_TOKEN || "";
+if (AGENT_WEB_TOKEN) {
+  app.use((req, res, next) => {
+    const auth = String(req.headers["x-agent-token"] || "").trim()
+      || String(req.headers.authorization || "").replace(/^Bearer\s+/i, "").trim();
+    if (auth === AGENT_WEB_TOKEN) return next();
+    res.status(401).json({ error: "未授权：请在请求头携带 AGENT_WEB_TOKEN（x-agent-token 或 Authorization: Bearer）" });
+  });
+}
+
+// P0-1 修复：权限模式白名单——外部请求体不可直接传入 bypassPermissions（防未授权 RCE）
+const SAFE_PERMISSION_MODES = new Set(["default", "acceptEdits", "plan"]);
+// 仅当显式设置 AGENT_WEB_ALLOW_BYPASS=1 时启用 bypassPermissions（本地单人模式）
+const ALLOW_BYPASS = process.env.AGENT_WEB_ALLOW_BYPASS === "1";
+
+function sanitizePermissionMode(input: unknown): PermissionMode {
+  if (typeof input === "string" && SAFE_PERMISSION_MODES.has(input)) return input as PermissionMode;
+  if (ALLOW_BYPASS && input === "bypassPermissions") return "bypassPermissions";
+  return "default";
+}
+
+// P0-1 修复：工作目录仅允许 PROJECT_CWD 内的路径（防目录穿越），非法输入回落 PROJECT_CWD
+function resolveWorkingDir(input: unknown): string {
+  const root = path.resolve(PROJECT_CWD);
+  if (typeof input !== "string" || !input.trim()) return root;
+  const candidate = path.resolve(input);
+  if (candidate === root || candidate.startsWith(root + path.sep)) return candidate;
+  return root;
+}
 
 // 缓存可用模型列表
 let cachedModels: Array<{ modelId: string; name: string; description?: string }> = [];
@@ -363,6 +404,10 @@ app.post("/api/permission-response", (req, res) => {
 // 发送消息并获取流式响应
 app.post("/api/chat", async (req, res) => {
   const { sessionId, message, model, systemPrompt, cwd, permissionMode } = req.body;
+
+  // P0-1 修复：工作目录仅允许 PROJECT_CWD 内 + 权限模式白名单净化（不信任请求体原值）
+  const workingDir = resolveWorkingDir(cwd);
+  const effectivePermissionMode = sanitizePermissionMode(permissionMode);
   
   // 请求日志
   console.log(`\n[Chat] ========== 新请求 ==========`);
@@ -451,23 +496,22 @@ app.post("/api/chat", async (req, res) => {
 - 语气可带古典雅致，但表达务必清晰、准确、可操作。
 - 当前项目版本 v2.3.9（详见 README.md 顶部与 CHANGELOG.md）。`;
 
-  // 工作目录：优先使用请求中的 cwd，否则使用项目默认目录
-  const workingDir = cwd || PROJECT_CWD;
+  // 工作目录：已由 resolveWorkingDir 净化（P0-1，仅 PROJECT_CWD 内）
 
   try {
     console.log(`[Chat] 调用 SDK query...`);
     console.log(`[Chat] - Model: ${selectedModel}`);
     console.log(`[Chat] - Resume: ${sdkSessionId || 'none'}`);
     console.log(`[Chat] - CWD: ${workingDir}`);
-    console.log(`[Chat] - PermissionMode: ${permissionMode || 'default'}`);
+    console.log(`[Chat] - PermissionMode: ${effectivePermissionMode}`);
     
     // 创建 canUseTool 回调
     const canUseTool: CanUseTool = async (toolName, input, options) => {
       console.log(`[Permission] Tool request: ${toolName}`);
       console.log(`[Permission] Input:`, JSON.stringify(input, null, 2));
       
-      // bypassPermissions 模式直接放行
-      if (permissionMode === 'bypassPermissions') {
+      // bypassPermissions 模式直接放行（仅当 AGENT_WEB_ALLOW_BYPASS=1 时经净化可达）
+      if (effectivePermissionMode === 'bypassPermissions') {
         console.log(`[Permission] Bypassing permissions for ${toolName}`);
         return { behavior: 'allow', updatedInput: input };
       }
@@ -525,7 +569,7 @@ app.post("/api/chat", async (req, res) => {
         model: selectedModel,
         maxTurns: 10,
         systemPrompt: systemPrompt || defaultSystemPrompt,
-        permissionMode: permissionMode || 'default',
+        permissionMode: effectivePermissionMode,
         canUseTool,
         ...(sdkSessionId ? { resume: sdkSessionId } : {})  // 使用 resume 恢复对话
       }
@@ -676,14 +720,14 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
-// 启动服务器
-app.listen(PORT, () => {
+// 启动服务器（P0-1 修复：仅绑定回环地址，默认不暴露到局域网/公网）
+app.listen(PORT, "127.0.0.1", () => {
   console.log(`
 ╔════════════════════════════════════════════╗
 ║                                            ║
 ║     ◉ API 服务器已启动                      ║
 ║                                            ║
-║     地址: http://localhost:${PORT}            ║
+║     地址: http://127.0.0.1:${PORT}            ║
 ║     数据库: SQLite (data/chat.db)          ║
 ║                                            ║
 ╚════════════════════════════════════════════╝

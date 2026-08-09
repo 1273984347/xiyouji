@@ -34,7 +34,7 @@ const DEFAULT_AGENT: CustomAgent = {
 - 当前项目版本 v2.3.9（详见 README.md 顶部与 CHANGELOG.md）。`,
   icon: 'BookOpen',
   color: '#c8463a',
-  permissionMode: 'bypassPermissions',
+  permissionMode: 'acceptEdits',  // P0-1 修复：默认不做 bypassPermissions（高危操作需人工确认）
   createdAt: new Date(),
   updatedAt: new Date(),
 };

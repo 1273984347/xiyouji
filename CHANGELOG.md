@@ -4,9 +4,21 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W410），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W411），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.3.26（2026-08-09）：W411 安全审计 P0-1/P1-1 处置 — Web Agent 鉴权加固 + MCP 路径白名单
+
+> **W411 SECURITY-AUDIT-2026-08-09 P0-1/P1-1 落地**
+> - **来源**：用户指令"继续处理报告中列出的 P0-1 和 P1-1 待办事项"——P0-1（Web Agent 默认 `bypassPermissions` + 零认证 + `0.0.0.0` 监听 → 未授权 RCE）·P1-1（MCP `xiyouji_drl_spotcheck` 等 4 工具未 `resolve()`/`is_relative_to()` 校验、接受 `../` → 任意文件读取 + 盲 oracle）
+> - **执行（P0-1 纵深防御）**：
+>   - **server/index.ts**：新增安全头中间件（X-Content-Type-Options/X-Frame-Options/Referrer-Policy/Permissions-Policy）·可选 token 认证（`AGENT_WEB_TOKEN` 环境变量，`x-agent-token` 或 `Authorization: Bearer`，设值后 `/api/*` 全鉴权 401）·权限白名单净化 `sanitizePermissionMode`（仅 default/acceptEdits/plan 直通；`bypassPermissions` 需 `AGENT_WEB_ALLOW_BYPASS=1` 否则回落 default）·工作目录白名单 `resolveWorkingDir`（`Path.resolve` + 前缀校验，越界回落 `PROJECT_CWD`）·`app.listen(PORT,"127.0.0.1")` 仅回环监听（原无 host 绑全网卡）
+>   - **useAgents.ts** 默认 Agent `permissionMode: 'bypassPermissions'→'acceptEdits'`（高危操作人工确认）·**vite.config.ts** `host: '0.0.0.0'→'127.0.0.1'`
+>   - **agent-web README** 安全提示重写（W411 加固段）·**.env.example** 补 `AGENT_WEB_TOKEN`/`AGENT_WEB_ALLOW_BYPASS` 注释
+> - **执行（P1-1 路径白名单）**：**mcp-server/xiyouji_mcp.py** 新增 `_resolve_within(root, p, what)`（`(root/p).resolve()` 后 `is_relative_to(root)` 校验，越界抛 `PathEscapeError`）·4 个接受路径的工具接入（xiyouji_drl_spotcheck/data_validate/lint_links/a11y_audit）·**tests/test_xiyouji_mcp.py** 新增 TestPathTraversal 6 个越界用例（`../` 与越界绝对路径）+ TestDrlSpotcheck ROOT 指向 tmp_path fixture
+> - **验证**：pytest tests 全量 **327 passed**（原 321 + MCP 新增 6）·`py_compile` mcp-server 通过·agent-web `npm run build` 成功（tsc + vite 8011 modules）·运行时验证（无 token 200 / 设 token 后 401/200/200·监听 127.0.0.1·bypass 净化 default·cwd 越界回落 PROJECT_CWD 均有日志佐证）·越界 6 用例全通过（`../secret`/越界绝对路径/跨目录 scan_dir 均拒绝）
+> - **状态**：已落地 · 待六文档同步后 commit（W411）
 
 ### v2.3.25（2026-08-09）：W410 npm 依赖审计补充 — agent-web 纳入 CI audit + 依赖链修复
 
@@ -17,7 +29,7 @@
 >   - **依赖链修复**（agent-web `package.json` overrides + 升级）：`@tdesign-react/chat@1.0.2`（已是最新）依赖 `tdesign-web-components@1.3.0-alpha.2` → 锁定旧 `cherry-markdown@0.11.0-alpha-2` → `mermaid@9.4.3` → `dompurify@2.4.3`（**5 high** XSS 链·无上游 fix）·`overrides` 强制 `cherry-markdown ^0.11.9`（该版无 mermaid 依赖）+ `mermaid ^11.16.1`（dompurify ^3.3.3/uuid ^11.1.0）+ `dompurify ^3.4.13` ·直接依赖 `uuid ^9.0.0→^11.1.1` + `@types/uuid ^9→^10`（消除最后 1 moderate·v3/v5/v6 buffer 漏洞·本项目仅 v4 不受影响）·`lucide-react 0.563.0→^1.31.0`（0.563.0 发布缺陷：typings 指向缺失的 `dist/lucide-react.d.ts` 致 TS7016 构建失败·1.x 类型完备）
 >   - **workflows/README.md 同步**：头部 W410 记录 + Security 描述（npm-audit 双目录）+ 阈值表（npm audit 0 high）+ 本地复现命令（双目录 audit）
 > - **验证**：本地 `npm audit --omit=dev --audit-level=high` **双目录 0 vulnerabilities**（scripts/ + agent-web/）·`npm run build` 成功（tsc + vite 8011 modules）·security.yml YAML 解析通过（npm-audit 5 step）
-> - **状态**：已落地 · 待六文档同步后 commit（W410）
+> - **状态**：已落地·已 push（6d94986/f02f1f7）·CI/Security 转绿
 
 ### v2.3.24（2026-08-09）：W409 文档同步刷新 — 交接文档内容纠偏 + 五文档版本叙述校准
 

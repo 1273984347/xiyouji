@@ -52,6 +52,11 @@ import xiyouji_mcp  # noqa: E402
 class TestDrlSpotcheck:
     """DRL spot-check 工具测试。"""
 
+    @pytest.fixture(autouse=True)
+    def _root_to_tmp(self, monkeypatch, tmp_path):
+        """P1-1 路径白名单修复：将 ROOT 指向 tmp_path，使 tmp 内文件合法。"""
+        monkeypatch.setattr(xiyouji_mcp, "ROOT", tmp_path)
+
     def test_replacement_ok(self, tmp_path):
         """修复已落地：old=0 + new>=1 → ok=True。"""
         f = tmp_path / "test.md"
@@ -368,6 +373,60 @@ class TestA11yAudit:
         result = xiyouji_mcp.xiyouji_a11y_audit(file=str(f))
         assert result["scanned_files"] == 1
         assert result["p0_count"] == 1
+
+
+# ===========================================================================
+# Tool 6: 路径越界防护（P1-1 修复回归）
+# ===========================================================================
+class TestPathTraversal:
+    """路径白名单：`../` 与越界绝对路径必须被拒绝，不得读取 ROOT 外文件。"""
+
+    def test_drl_spotcheck_parent_escape(self, tmp_path, monkeypatch):
+        """drl_spotcheck：file_path='../secret' → 拒绝。"""
+        monkeypatch.setattr(xiyouji_mcp, "ROOT", tmp_path)
+        result = xiyouji_mcp.xiyouji_drl_spotcheck(
+            file_path="../secret", old="a", new="b",
+        )
+        assert result["ok"] is False
+        assert "ERROR" in result["summary"]
+        assert "越界" in result["summary"]
+
+    def test_drl_spotcheck_abs_outside_root(self, tmp_path, monkeypatch):
+        """drl_spotcheck：ROOT 外的绝对路径 → 拒绝。"""
+        outside = tmp_path.parent / "outside.txt"
+        outside.write_text("secret", encoding="utf-8")
+        monkeypatch.setattr(xiyouji_mcp, "ROOT", tmp_path)
+        result = xiyouji_mcp.xiyouji_drl_spotcheck(
+            file_path=str(outside), old="a", new="b",
+        )
+        assert result["ok"] is False
+        assert "越界" in result["summary"]
+
+    def test_data_validate_parent_escape(self, tmp_path, monkeypatch):
+        """data_validate：file='../secret.json' → 拒绝。"""
+        monkeypatch.setattr(xiyouji_mcp, "OUTPUT_DATA", tmp_path)
+        result = xiyouji_mcp.xiyouji_data_validate(file="../secret.json")
+        assert result["ok"] is False
+        assert "越界" in result["issues"][0]["reason"]
+
+    def test_lint_links_parent_escape(self, tmp_path, monkeypatch):
+        """lint_links：scan_dir='../../' → 拒绝。"""
+        monkeypatch.setattr(xiyouji_mcp, "ROOT", tmp_path)
+        result = xiyouji_mcp.xiyouji_lint_links(scan_dir="../../")
+        assert result["ok"] is False
+        assert "越界" in result["message"]
+
+    def test_a11y_audit_dir_parent_escape(self, tmp_path, monkeypatch):
+        """a11y_audit：scan_dir='..' → 拒绝。"""
+        monkeypatch.setattr(xiyouji_mcp, "ROOT", tmp_path)
+        result = xiyouji_mcp.xiyouji_a11y_audit(scan_dir="..")
+        assert "ERROR" in result["message"]
+
+    def test_a11y_audit_file_parent_escape(self, tmp_path, monkeypatch):
+        """a11y_audit：file='../evil.html' → 拒绝。"""
+        monkeypatch.setattr(xiyouji_mcp, "ROOT", tmp_path)
+        result = xiyouji_mcp.xiyouji_a11y_audit(file="../evil.html")
+        assert "ERROR" in result["message"]
 
 
 if __name__ == "__main__":
