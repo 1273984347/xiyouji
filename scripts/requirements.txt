@@ -1,7 +1,8 @@
 # P2-7：固定精确版本（2026-08-09 本地实测），消除浮动版本供应链风险
+# W412 修正（2026-08-09）：Pillow 11.3.0→12.3.0（25 个 PYSEC-2026 漏洞·fix 12.3.0）·pytest 8.4.2→9.0.3（PYSEC-2026-1845·fix 9.0.3）——CI pip-audit 实测 26 漏洞归零
 jieba==0.42.1
-Pillow==11.3.0
+Pillow==12.3.0
 
 # dev dependencies
 ruff==0.15.15
-pytest==8.4.2
+pytest==9.0.3
