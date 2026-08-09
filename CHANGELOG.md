@@ -18,7 +18,7 @@
 >   - **保留**：双协议授权（MIT + CC BY-NC 4.0）·学术引用（CITATION.cff）·贡献方式·"201 篇" A4 计数
 > - **执行（版本同步）**：bump_version 升 v2.3.29 W414（README/STRUCTURE/项目说明）+ site 页脚 4 个（dukou-engine/index/cross-time-danmaku/tag-cloud）+ 交接文档/项目概览/项目认知总览/项目交接参考手册 同步
 > - **验证**：verify_delivery 全绿（含"201 篇" A4 计数）·py_compile 无需（纯文档）
-> - **状态**：已落地·待 push·CI 验证（纯文档变更·CI 覆盖 html 页脚一致性）
+> - **状态**：已落地·已 push（83a2d87）·CI/Security/Deploy Pages/Screenshot Review 全绿（纯文档变更·CI 14 job + Security 4 job）
 
 ### v2.3.28（2026-08-09）：W413 仓库文件策略审查 — 严格审查入库边界·个人文档/方法论/开发内部资产恢复入库
 
