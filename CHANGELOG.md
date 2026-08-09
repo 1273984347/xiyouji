@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W405），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W406），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
@@ -93,7 +93,20 @@
 >   - **docs/00-导读/访问统计方案.md（新）**：Umami vs GoatCounter 六维对比（开源协议/托管成本/自托管难度/脚本体积/数据保留/功能范围/隐私合规/数据所有权）·结论 GoatCounter 托管版唯一满足"免费+零服务器+真实跨访客"·GoatCounter 升级 7 步方案（注册→配置注入脚本→--check→CSP 兼容→DevTools/后台验证→localStorage 降级路径保留→数据导出）
 > - **验证**：27 篇 149-157 行（150-250 区间，5 篇 149 行差 1 行可接受）·主代理 spot-check 脱敏 Grep 全目录（70 篇）0 残留·抽查西游与性别政治格式齐备·方案文档基于官方页面事实（GoatCounter 官网免费/捐赠·Umami Cloud Hobby 10 万 events 免费额度）
 > - **限制（诚实声明）**：GoatCounter 托管版免费但依赖外部服务（gc.zgo.at）；localStorage 基线保留为降级路径
-> - **状态**：已落地 · 未提交（待 E3 六文档同步后 commit）
+> - **状态**：已落地 · 已提交（db84204）· CI/Security/Deploy Pages 三 workflow 全绿
+
+### v2.3.21（2026-08-09）：W406 截图审查纳入发布流程 — screenshot-review.yml 补 push main 触发 + batch_screenshots.js 良性过滤 file:// fetch 回退噪声
+
+> **W406 截图审查流程落地（待办 1 实际推进）**
+> - **来源**：用户指令"从待办 1（截图审查流程）入手实际推进"；项目认知总览.md 已完成存档；实测发现截图审查从未在真实发布路径运行 + --fail-on-issues 误判全红
+> - **根因**：
+>   - screenshot-review.yml 仅 `pull_request` 触发，而项目实际走「直接 push main、无 PR」（ci.yml 已于 W399 补 push）→ 该 workflow 从未在发布路径运行过
+>   - batch_screenshots.js 的 BENIGN_CONSOLE_RE 未覆盖 `Fetch API cannot load file:///...json`（file:// 协议下 fetch 本地 JSON 失败，自动回退 EMBEDDED_DATA，DESIGN §8.2 设计预期，非缺陷）→ 417 条 console error 全是此类噪声，--fail-on-issues 据此误判全红
+> - **执行**：
+>   - **screenshot-review.yml**：触发块新增 `push: branches: [main]` + paths（site/ 与三个脚本自身），对齐 ci.yml W399；头部注释补 W406 说明；FILE_INDEX 注释登记
+>   - **batch_screenshots.js**：BENIGN_CONSOLE_RE 新增 `/Failed to fetch/i` `/NetworkError/i` `/Fetch API cannot load file/i`（file:// fetch 回退 EMBEDDED_DATA 为设计预期，非缺陷）
+> - **验证**：node -e 复验正则——旧列表漏判 2/2（两类 file:// 噪声均未覆盖），新列表漏判 0/2 ✅；基线运行生成截图 + 双报告（本地切片命中沙箱回收站不可用环境限制，非项目缺陷，CI ubuntu 下 continue-on-error 不受影响，主截图 + 报告已成功）
+> - **状态**：已落地 · 待六文档同步后 commit（W406）· 截图审查自此在 push main 真实发布路径运行，--fail-on-issues 不再被 file:// 回退噪声误判
 
 ### v2.3.17（2026-08-08）：W399 CI 触发修复 + SEO 域名补全 + rum-viewer 埋点查看页（并行 W390-W398 竞态清理后增量）
 

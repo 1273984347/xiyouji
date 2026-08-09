@@ -649,3 +649,17 @@
 | xiyouji-agent-web/*（37 文件） | W401 | agent-web 源码入库（src/server/package*.json/vite/tsconfig 等·供 CI 构建验证） |
 | .github/workflows/README.md | W401 | ci.yml 7 job 说明·阈值·artifact·本地复现命令·双索引 W401 |
 | CHANGELOG.md | W401 | 新增 W401 版本段（四件套） |
+
+> 当前版本 v2.3.21（2026-08-09）
+
+## W406 截图审查纳入发布流程（2026-08-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/screenshot-review.yml | W406 | 触发块补 push main + paths（site/ 与三个脚本自身），对齐 ci.yml W399·头部注释补 W406 说明 |
+| scripts/batch_screenshots.js | W406 | BENIGN_CONSOLE_RE 补 /Failed to fetch/i /NetworkError/i /Fetch API cannot load file/i（file:// fetch 回退 EMBEDDED_DATA 为 DESIGN §8.2 设计预期，非缺陷·--fail-on-issues 不再误判全红） |
+| site/dukou-engine.html | W406 | 页脚版本升 v2.3.21 W406 + 补 W406 里程碑（W400/W390-W393 历史保留） |
+| CHANGELOG.md | W406 | 新增 W406 版本段（四件套）+ 编号规则 W001-W405→W406 |
+| 交接文档.md | W406 | 头部/HEAD/进度段/当前版本号段同步 v2.3.21 W406 |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W406 | bump_version 同步 v2.3.21 W406 |
+| 项目认知总览.md | W406 | 项目认知总览独立存档（背景/目标/技术栈/目录/模块职责/进度/待办/雷区） |
