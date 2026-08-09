@@ -750,6 +750,9 @@
 | scripts/security_scan.py | W412 | 修改·P1-3 新增 SEC-005 规则（sk- 前缀 16+ 字符·high·覆盖 DeepSeek/Qwen） |
 | scripts/api/api_server.py | W412 | 修改·P3-2 CORS 白名单（仅 127.0.0.1:8787/localhost:8787 + file:// null 回显·其余不带 CORS 头）·两处 `*` 均替换 |
 | site/index.html | W412 | 修改·P3-5 页脚 v2.3.27 W412 |
+| site/_headers | W412 | 修改·P1-2 补遗：script-src 补 https://d3js.org 白名单（页面实际 D3 CDN·原 cdn.jsdelivr.net 死配置 0 引用） |
+| .gitignore | W412 | 修改·新增 SECURITY-AUDIT-2026-08-09.7z/.password 忽略规则（加密归档不入库） |
+| SECURITY-AUDIT-2026-08-09.md | W412 | 加密归档·7z AES-256 -mhe=on → SECURITY-AUDIT-2026-08-09.7z·明文已删·密码存本地 .password（gitignore） |
 | site/dukou-engine.html | W412 | 修改·页脚升 v2.3.27 W412（安全审计剩余项处置段） |
 | README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W412 | 文档同步·bump_version 升 v2.3.27 W412·主描述改 W412 + 尾部补 W411（去重复 W412） |
 | CHANGELOG.md | W412 | 新增 W412 版本段（四件套）·编号规则 W001-W411→W001-W412·W411 状态行纠偏（已 push 9991982） |

@@ -112,3 +112,7 @@ xiyouji-agent-web/vite.config.js
 xiyouji-agent-web/vite.config.d.ts
 xiyouji-agent-web/.env
 xiyouji-agent-web/*.tsbuildinfo
+
+# 安全审计报告（加密归档·2026-08-09 W412·明文已删除）
+SECURITY-AUDIT-2026-08-09.7z
+SECURITY-AUDIT-2026-08-09.password
