@@ -677,4 +677,15 @@
 | 交接文档.md | W407 | 头部/HEAD/进度段/当前版本号段同步 v2.3.22 W407 |
 | README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W407 | bump_version 同步 v2.3.22 W407 |
 
-> 当前版本 v2.3.22（2026-08-09）
+> 当前版本 v2.3.23（2026-08-09）
+
+## W408 修 static 资源路径（P2 续）（2026-08-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/*.html（86 文件） | W408 | 内联 CSS @font-face/hero 的 static/fonts\|images 改 ../static/（516 处，静态资源 404 归零） |
+| scripts/_fix_static_paths.py | W408 | 批处理工具：正则 `(url\(['\"]\|src=\|href=)static/` → `../static/` |
+| site/dukou-engine.html | W408 | 页脚升 v2.3.23 W408 |
+| CHANGELOG.md | W408 | 新增 W408 段 + 编号规则 W001-W407→W408 |
+| 交接文档.md | W408 | 头部/HEAD/进度/版本号段同步 v2.3.23 W408 |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W408 | bump_version 同步 v2.3.23 W408 |
