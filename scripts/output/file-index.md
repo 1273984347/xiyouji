@@ -548,6 +548,16 @@
 | 交接文档.md | W400 | 文档同步·内部过期引用 12 处修复（W358→W400·v2.3.9→v2.3.18·A2 43→44/A3 199→211/A4 201→209/A5 20→34·site/data 85→86·英文站 7→65·页脚） |
 | 项目交接参考手册.md | W400 | 文档同步·版本 v2.3.8 W357→v2.3.18 W400·计数 A2/A3/A4/A5·可视化 85→86·英文站 51→65·发布待办标记完成 |
 
+## W410 npm 依赖审计补充 · agent-web 纳入 CI（2026-08-09·v2.3.25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/security.yml | W410 | 修改·npm-audit 扩至双目录（cache-dependency-path 补 agent-web lock·新增 agent-web 安装/audit 两 step·scripts/ 原逻辑保留） |
+| xiyouji-agent-web/package.json | W410 | 修改·overrides 强制 cherry-markdown ^0.11.9 / mermaid ^11.16.1 / dompurify ^3.4.13·uuid ^9.0.0→^11.1.1·@types/uuid ^9→^10·lucide-react ^0.563.0→^1.31.0 |
+| xiyouji-agent-web/package-lock.json | W410 | 修改·overrides/uuid/lucide 应用后重新解析（cherry-markdown 0.11.9·mermaid 11.16.1·dompurify 3.4.13·uuid 11.x·lucide 1.31） |
+| .github/workflows/README.md | W410 | 修改·头部 W410 记录 + Security 描述（npm-audit 双目录）+ 阈值表 + 本地复现命令（双目录 audit） |
+| CHANGELOG.md | W410 | 新增 W410 版本段（四件套）·编号规则 W001-W409→W001-W410 |
+
 ## W405 S2 分发第二批 27 篇随笔 + 访问统计方案（2026-08-09）
 
 | 文件 | W | 说明 |

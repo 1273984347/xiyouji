@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # E8-1 npm 依赖漏洞审计
+  # E8-1 npm 依赖漏洞审计（scripts/ + xiyouji-agent-web/，W410 补 agent-web 覆盖）
   npm-audit:
     name: npm audit (依赖漏洞)
     runs-on: ubuntu-latest
@@ -24,18 +24,30 @@ jobs:
         with:
           node-version: "20"
           cache: npm
-          cache-dependency-path: scripts/package-lock.json
+          cache-dependency-path: scripts/package-lock.json,xiyouji-agent-web/package-lock.json
 
-      - name: 安装依赖
+      - name: 安装依赖（scripts/）
         run: |
           if [ -f scripts/package.json ]; then npm --prefix scripts ci || npm --prefix scripts install; fi
 
-      - name: npm audit（生产依赖漏洞阻断）
+      - name: npm audit（scripts/ · 生产依赖漏洞阻断）
         run: |
           if [ -f scripts/package.json ]; then
             npm --prefix scripts audit --omit=dev --audit-level=high
           else
             echo "无 scripts/package.json，跳过 npm audit"
+          fi
+
+      - name: 安装依赖（xiyouji-agent-web/）
+        run: |
+          if [ -f xiyouji-agent-web/package.json ]; then npm --prefix xiyouji-agent-web ci || npm --prefix xiyouji-agent-web install; fi
+
+      - name: npm audit（xiyouji-agent-web/ · 生产依赖漏洞阻断）
+        run: |
+          if [ -f xiyouji-agent-web/package.json ]; then
+            npm --prefix xiyouji-agent-web audit --omit=dev --audit-level=high
+          else
+            echo "无 xiyouji-agent-web/package.json，跳过 npm audit"
           fi
 
   # E8-2 Python 依赖漏洞审计

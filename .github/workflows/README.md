@@ -1,16 +1,17 @@
 # CI/CD 工作流说明
 
-> **W234-E1 CI/CD 化 → W399/W400/W401** — 西游记解读项目（`d:\1\xiyouji`，v2.3.18 W401）的 GitHub Actions 工作流层。
+> **W234-E1 CI/CD 化 → W399/W400/W401/W410** — 西游记解读项目（`d:\1\xiyouji`，v2.3.25 W410）的 GitHub Actions 工作流层。
 > **W399**：ci.yml 补 push main 触发（此前仅 pull_request，项目直接 push main 无 PR → CI 从未运行）；sitemap/robots 域名补全；新增 rum-viewer。
 > **W400**：CI/Security 三 workflow 转绿（ruff 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复·black 门禁移除）。
 > **W401**：ci.yml 5→7 job（pytest-unit 全量 tests/ + agent-web-build）·agent-web 源码入库·移除 3 处无 pip 安装 job 的 cache: pip 残留·build-test-deploy.yml 弃用删除。
+> **W410**：security.yml npm-audit 扩至 agent-web（依赖链修复：overrides 强制 cherry-markdown 0.11.9/mermaid 11.16.1/dompurify 3.4.13·uuid 9→11·lucide-react 0.563→1.31，双目录 audit 0 漏洞）。
 
 ## 1. 工作流列表
 
 | 工作流 | 文件 | 触发条件 | 用途 |
 | --- | --- | --- | --- |
 | CI | [`ci.yml`](ci.yml) | `push` main + `pull_request` + `workflow_dispatch` | 7 job 门禁：截图存活烟测 / Lighthouse / a11y / dependency / ruff / pytest / agent-web 构建 |
-| Security | [`security.yml`](security.yml) | `push` main + `pull_request` | 4 job：npm-audit / pip-audit / CSP / XSS detect |
+| Security | [`security.yml`](security.yml) | `push` main + `pull_request` | 4 job：npm-audit（scripts/ + agent-web/ 双目录）/ pip-audit / CSP / XSS detect |
 | Deploy Pages | [`pages.yml`](pages.yml) | `push` main（site/** 变更） | GitHub Pages 部署 `./site`（W401 决策：不采用 build-test-deploy.yml，避免部署竞态·已删除） |
 | Lighthouse CI | [`perf.yml`](perf.yml) | `pull_request`（site/**）+ `workflow_dispatch` | LHCI LCP/CLS/TBT 性能预算断言 |
 | Screenshot Review | [`screenshot-review.yml`](screenshot-review.yml) | `pull_request`（脚本变更） | Playwright 截图 + 布局审计 |
@@ -99,6 +100,7 @@
 | ruff | 0 违规（scripts/ 生产脚本） | ci.yml code-quality job 失败 |
 | XSS high 计数 | = 0 | security.yml xss-detect job 失败 |
 | pip-audit | 0 高危（--strict） | security.yml pip-audit job 失败 |
+| npm audit（scripts/ + agent-web/） | 0 high（--omit=dev --audit-level=high） | security.yml npm-audit job 失败 |
 | LHCI 预算 | LCP<2.5s / CLS<0.1 / TBT<300ms | perf.yml job 失败 |
 | pytest | 0 失败（tests 全量） | ci.yml pytest-unit job 失败 |
 | agent-web build | tsc + vite 退出码 0 | ci.yml agent-web-build job 失败 |
@@ -120,6 +122,10 @@ py -3 -m pytest tests -q
 
 # agent-web 前端构建
 npm --prefix xiyouji-agent-web run build
+
+# npm 依赖漏洞审计（scripts/ + agent-web/ 双目录，与 security.yml npm-audit 一致）
+npm --prefix scripts audit --omit=dev --audit-level=high
+npm --prefix xiyouji-agent-web audit --omit=dev --audit-level=high
 
 # Lighthouse 性能审计（需先启动 static server）
 python -m http.server 8000 --directory site
