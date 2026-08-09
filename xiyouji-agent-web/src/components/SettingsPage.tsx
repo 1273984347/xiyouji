@@ -161,12 +161,12 @@ export function SettingsPage({
     }
   }, []);
   
-  // 保存环境变量配置
+  // 保存环境变量配置（P0-2：API_KEY/BASE_URL 由服务端 .env 配置，不在此提交）
   const saveEnvConfig = async () => {
-    // 至少需要配置一个有效的值
-    const hasAnyConfig = envConfig.apiKey.trim() || envConfig.authToken.trim();
+    // 至少需要配置一个有效的值（Auth Token 或网络环境）
+    const hasAnyConfig = envConfig.authToken.trim() || envConfig.internetEnv;
     if (!hasAnyConfig) {
-      MessagePlugin.warning('请至少配置 API Key 或 Auth Token');
+      MessagePlugin.warning('请至少配置 Auth Token 或网络环境');
       return;
     }
     
@@ -176,10 +176,8 @@ export function SettingsPage({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          apiKey: envConfig.apiKey.trim() || undefined,
           authToken: envConfig.authToken.trim() || undefined,
           internetEnv: envConfig.internetEnv || undefined,
-          baseUrl: envConfig.baseUrl.trim() || undefined,
         }),
       });
       
@@ -374,13 +372,12 @@ export function SettingsPage({
                     >
                       CODEBUDDY_API_KEY
                     </label>
-                    <Input
-                      type="password"
-                      size="small"
-                      value={envConfig.apiKey}
-                      onChange={(v) => setEnvConfig(prev => ({ ...prev, apiKey: v as string }))}
-                      placeholder="API 密钥（推荐）"
-                    />
+                    <div 
+                      className="text-xs"
+                      style={{ color: 'var(--td-text-color-placeholder)', lineHeight: '28px' }}
+                    >
+                      由服务端 .env 配置（重启生效·P0-2 禁止运行时覆盖）
+                    </div>
                   </div>
                   <div>
                     <label 
@@ -423,12 +420,12 @@ export function SettingsPage({
                     >
                       CODEBUDDY_BASE_URL
                     </label>
-                    <Input
-                      size="small"
-                      value={envConfig.baseUrl}
-                      onChange={(v) => setEnvConfig(prev => ({ ...prev, baseUrl: v as string }))}
-                      placeholder="自定义 URL（可选）"
-                    />
+                    <div 
+                      className="text-xs"
+                      style={{ color: 'var(--td-text-color-placeholder)', lineHeight: '28px' }}
+                    >
+                      由服务端 .env 配置（重启生效·P0-2 禁止运行时覆盖）
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">

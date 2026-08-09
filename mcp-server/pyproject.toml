@@ -4,7 +4,8 @@ version = "0.1.0"
 description = "《详解西游记》项目工程化工具 MCP Server"
 requires-python = ">=3.10"
 dependencies = [
-    "fastmcp>=0.1.0",
+    # P2-7：主版本范围锁（FastMCP 0.x API：FastMCP() + mcp.run()），防浮动到 3.x 大改版
+    "fastmcp>=0.1.0,<1.0",
 ]
 
 [project.scripts]

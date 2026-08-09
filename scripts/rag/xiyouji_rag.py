@@ -35,11 +35,13 @@ xiyouji_rag.py — 《详解西游记》本地 RAG 核心引擎（零依赖）
 """
 
 import csv
+import ipaddress
 import json
 import math
 import os
 import re
 import urllib.error
+import urllib.parse
 import urllib.request
 
 # ---- 路径（相对本脚本：scripts/rag/xiyouji_rag.py → 项目根 = ../../）----
@@ -493,9 +495,9 @@ def _resolve_endpoint():
     """解析最终 Base URL + API 格式。
 
     优先级（区分代理 vs 原生）：
-      1. CUSTOM_LLM_BASE_URL 存在 → 代理/网关模式：统一 OpenAI 兼容格式（网关约定），
-         绕过对任何特定提供商 URL 的硬编码依赖；
-      2. 否则原生模式：按 LLM_PROVIDER 取专属变量（OPENAI_BASE_URL 等）覆盖内置默认。
+     1. CUSTOM_LLM_BASE_URL 存在 → 代理/网关模式：统一 OpenAI 兼容格式（网关约定），
+        绕过对任何特定提供商 URL 的硬编码依赖；
+     2. 否则原生模式：按 LLM_PROVIDER 取专属变量（OPENAI_BASE_URL 等）覆盖内置默认。
     返回 (base_url, api_format)。
     """
     custom = os.environ.get("CUSTOM_LLM_BASE_URL", "").strip().rstrip("/")
@@ -507,9 +509,45 @@ def _resolve_endpoint():
     return (base or default_url), fmt
 
 
+# P2-2：私有/回环 IPv4 网段黑名单（防 SSRF 打内网/元数据服务）
+_PRIVATE_NETS = [
+    ipaddress.ip_network("10.0.0.0/8"),
+    ipaddress.ip_network("172.16.0.0/12"),
+    ipaddress.ip_network("192.168.0.0/16"),
+    ipaddress.ip_network("127.0.0.0/8"),
+]
+
+
+def _validate_endpoint(url):
+    """P2-2：校验 LLM 端点——仅 https://（本地回环 http 例外：localhost/127.0.0.1 本地代理）；
+    host 为显式 IP 时拒绝私有/回环网段（防运维误配 SSRF）。非法返回 False。"""
+    try:
+        parsed = urllib.parse.urlparse(url)
+    except Exception:
+        return False
+    if parsed.scheme != "https":
+        if parsed.scheme == "http" and parsed.hostname in ("localhost", "127.0.0.1", "::1"):
+            return True
+        return False
+    host = parsed.hostname
+    if not host:
+        return False
+    try:
+        addr = ipaddress.ip_address(host)
+    except ValueError:
+        return True  # 域名：运行时解析，不做 DNS 预解析（配置驱动场景，非攻击者输入）
+    return not any(addr in net for net in _PRIVATE_NETS)
+
+
 def _llm_generate(query, snippets, triples, history=None):
     """真实 LLM 生成（检索增强）：检索到的语料 + 图谱三元组绑定进 system prompt。"""
     base, fmt = _resolve_endpoint()
+    if not _validate_endpoint(base):  # P2-2：仅 https（本地回环 http 例外）+ 私有网段黑名单
+        raise ValueError(
+            "LLM_BASE_URL 不合法（P2-2）：仅允许 https://（本地回环 http://localhost|127.0.0.1 例外），"
+            "且 host 不得落在私有/回环网段。请检查 CUSTOM_LLM_BASE_URL 或 {provider}_BASE_URL。".format(
+                provider=os.environ.get("LLM_PROVIDER", "openai"))
+        )
     model = os.environ.get("LLM_MODEL", "gpt-4o-mini").strip() or "gpt-4o-mini"
     key = os.environ.get("LLM_API_KEY", "").strip()
     if not key:
@@ -534,10 +572,16 @@ def _llm_generate(query, snippets, triples, history=None):
 
     messages = [{"role": "system", "content": system}]
     if history:
+        # P2-1：history schema 纵深校验（与 rag_server 净化一致；非 dict/非法 role 跳过）
         for turn in history:
-            role = "assistant" if str(turn.get("role", "")).lower() == "bot" else "user"
+            if not isinstance(turn, dict):
+                continue
+            r = str(turn.get("role", "")).lower()
+            if r not in ("user", "assistant", "bot"):
+                continue
+            role = "assistant" if r == "bot" else r
             text = str(turn.get("text", "")).strip()
-            if text:
+            if text and len(text) <= 2000:
                 messages.append({"role": role, "content": text})
     messages.append({"role": "user", "content": query})
 

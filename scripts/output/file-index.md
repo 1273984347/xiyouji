@@ -727,3 +727,31 @@
 | site/dukou-engine.html | W409 | 页脚升 v2.3.24 W409 |
 | README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W409 | bump_version 同步 v2.3.24 W409（项目说明内部当前版本 v2.3.20→v2.3.24） |
 | scripts/output/file-index.md | W409 | W409 反向索引登记 |
+
+> 当前版本 v2.3.27（2026-08-09）
+
+## W412 安全审计剩余项处置（2026-08-09·v2.3.27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/index.ts | W412 | 修改·P0-2 save-env-config 拒运行时覆盖 apiKey/baseUrl（400+refused·仅服务端 .env 读取）·P1-4 systemPrompt v2.3.9→v2.3.26·P2-3 SSE 加固（aborted + 10 分钟 sseTimer 超时清理 + req.on close abortStream + Map 迭代改 forEach 修 TS2802）·P3-3 移除 exec/promisify/execAsync 死代码 |
+| xiyouji-agent-web/src/components/SettingsPage.tsx | W412 | 修改·P0-2 移除 API Key/Base URL 输入框（改提示"服务端 .env 配置·禁止运行时覆盖"）·提交体仅 {authToken, internetEnv} |
+| xiyouji-agent-web/src/components/ChatMessages.tsx | W412 | 修改·P2-6 两处 ChatMarkdown 渲染输入加 DOMPurify.sanitize（tdesign markdown html:true+unsafeHTML 无消毒实锤） |
+| xiyouji-agent-web/package.json | W412 | 修改·P2-6 新增 dompurify ^3.4.13 直接依赖 |
+| site/static/js/rag-chat.js | W412 | 修改·P1-2 新增 escapeAttr（含引号转义·属性上下文）应用于来源链接 href |
+| site/static/js/dataset-view.js | W412 | 修改·P1-2 新增 escapeHtml 应用于 openRowDrill/renderObjectView/renderKey |
+| site/data/cross-time-danmaku.html | W412 | 修改·P2-5 escapeHtml 应用于 hero tooltip/popup·P3-5 页脚 v2.3.27 W412 |
+| site/data/tag-cloud.html | W412 | 修改·P2-5 escapeHtml 应用于 tooltip·P3-5 页脚 v2.3.27 W412 |
+| site/data/search.html | W412 | 修改·P2-5 全局 escapeHtml 应用于 row 数据集/hit.path/hit.snippet |
+| scripts/rag/rag_server.py | W412 | 修改·P2-1 _clamp_int（top_k∈[1,50]·hops∈[1,3]）+ _sanitize_history（仅 list·≤20 条·role 白名单·text≤2000）·do_GET 与 /graph 接入 |
+| scripts/rag/xiyouji_rag.py | W412 | 修改·P2-2 _validate_endpoint（仅 https·http 仅 localhost/127.0.0.1/::1 例外·私有网段 10/172.16/192.168/127 拒绝）+ history 防御性过滤·_llm_generate 入口校验抛 ValueError |
+| scripts/requirements.txt | W412 | 修改·P2-7 固定 jieba==0.42.1/Pillow==11.3.0/ruff==0.15.15/pytest==8.4.2（本地实测） |
+| mcp-server/pyproject.toml | W412 | 修改·P2-7 fastmcp>=0.1.0,<1.0（防 3.x 大改版） |
+| scripts/security_scan.py | W412 | 修改·P1-3 新增 SEC-005 规则（sk- 前缀 16+ 字符·high·覆盖 DeepSeek/Qwen） |
+| scripts/api/api_server.py | W412 | 修改·P3-2 CORS 白名单（仅 127.0.0.1:8787/localhost:8787 + file:// null 回显·其余不带 CORS 头）·两处 `*` 均替换 |
+| site/index.html | W412 | 修改·P3-5 页脚 v2.3.27 W412 |
+| site/dukou-engine.html | W412 | 修改·页脚升 v2.3.27 W412（安全审计剩余项处置段） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W412 | 文档同步·bump_version 升 v2.3.27 W412·主描述改 W412 + 尾部补 W411（去重复 W412） |
+| CHANGELOG.md | W412 | 新增 W412 版本段（四件套）·编号规则 W001-W411→W001-W412·W411 状态行纠偏（已 push 9991982） |
+| 交接文档.md | W412 | 文档同步·当前进度段加 W412 里程碑·版本号列表/HEAD/W 编号·待办安全审计剩余项更新 |
+| scripts/output/file-index.md | W412 | W412 反向索引登记 |

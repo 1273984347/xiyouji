@@ -1104,7 +1104,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">v2.2.86 · W334 · 数据可视化</div>
+            <div class="footer-meta">v2.3.27 · W412 · 数据可视化</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>
@@ -1237,6 +1237,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // ============================================================
     // D3.js 标签云渲染
     // ============================================================
+    // P2-5 修复：tooltip 数据拼串转义（title/desc/tags 来自数据文件）
+    function escapeHtml(s) {
+      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
     const tooltip = d3.select("#tooltip");
 
     function fontSizeScale(size) {
@@ -1325,9 +1329,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     function showTooltip(event, d) {
         const cat = CATEGORY_CONFIG[d.category] || {label: d.category};
         tooltip.html(
-            '<div class="tt-title">' + d.title + '</div>' +
-            '<div class="tt-desc">' + d.desc + '</div>' +
-            '<div class="tt-meta">分类：' + cat.label + ' · 维度数：' + d.size + ' · 标签：' + d.tags.join("、") + '</div>'
+            '<div class="tt-title">' + escapeHtml(d.title) + '</div>' +
+            '<div class="tt-desc">' + escapeHtml(d.desc) + '</div>' +
+            '<div class="tt-meta">分类：' + escapeHtml(cat.label) + ' · 维度数：' + d.size + ' · 标签：' + escapeHtml(d.tags.join("、")) + '</div>'
         );
         tooltip.style("opacity", 1).attr("aria-hidden", "false");
         positionTooltip(event);

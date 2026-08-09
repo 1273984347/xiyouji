@@ -181,6 +181,15 @@ th{{background:#faf7f2}}a{{color:#3a6b8c}}.ep{{background:#faf7f2;border:1px sol
 
 
 class Handler(BaseHTTPRequestHandler):
+    # P3-2：CORS 白名单——仅回显 file://（Origin:null）与本地 API 源，其余不带 CORS 头
+    def _cors_origin(self):
+        origin = self.headers.get("Origin", "")
+        if origin == "null":
+            return "null"  # file:// 场景（浏览器以字面量 "null" 发送）
+        if origin in ("http://127.0.0.1:8787", "http://localhost:8787"):
+            return origin
+        return None
+
     def _send(self, obj, code=200, ctype="application/json; charset=utf-8"):
         if isinstance(obj, (dict, list)):
             body = json.dumps(obj, ensure_ascii=False).encode("utf-8")
@@ -189,7 +198,9 @@ class Handler(BaseHTTPRequestHandler):
             ctype = ctype or "application/octet-stream"
         self.send_response(code)
         self.send_header("Content-Type", ctype)
-        self.send_header("Access-Control-Allow-Origin", "*")
+        cors = self._cors_origin()
+        if cors:
+            self.send_header("Access-Control-Allow-Origin", cors)
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
@@ -276,7 +287,9 @@ class Handler(BaseHTTPRequestHandler):
                     body = f.read()
                 self.send_response(200)
                 self.send_header("Content-Type", self._ctype(static_path))
-                self.send_header("Access-Control-Allow-Origin", "*")
+                cors = self._cors_origin()
+                if cors:
+                    self.send_header("Access-Control-Allow-Origin", cors)
                 self.send_header("Content-Length", str(len(body)))
                 self.end_headers()
                 self.wfile.write(body)

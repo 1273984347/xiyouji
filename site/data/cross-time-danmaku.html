@@ -1035,7 +1035,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">v2.2.86 · W334 · 数据可视化 · <a href="../../docs/06-个人随笔/现代视角解读.md">现代视角解读</a></div>
+            <div class="footer-meta">v2.3.27 · W412 · 数据可视化 · <a href="../../docs/06-个人随笔/现代视角解读.md">现代视角解读</a></div>
         </div>
         <nav aria-label="页脚导航">
             <a href="../index.html">首页</a>
@@ -1293,6 +1293,10 @@ function renderHeroStarMap(profilesData) {
     const heroEl = document.querySelector(".hero");
     if (!heroEl) return;
     const svg = d3.select("#hero-canvas");
+    // P2-5 修复：tooltip/popup 数据拼串转义（name/role/quote 等来自数据文件）
+    function escapeHtml(s) {
+      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
     const tooltip = d3.select("#hero-tooltip");
     const width = heroEl.clientWidth;
     const height = heroEl.clientHeight;
@@ -1331,9 +1335,9 @@ function renderHeroStarMap(profilesData) {
     node.on("mouseenter", function(event, d) {
         tooltip.classed("visible", true).attr("aria-hidden", "false");
         tooltip.html(
-            `<div class="t-name">${d.name} · ${d.role}</div>` +
-            `<div class="t-quote">「${d.quote}」</div>` +
-            `<div class="t-modern">→ ${d.modern}</div>`
+            `<div class="t-name">${escapeHtml(d.name)} · ${escapeHtml(d.role)}</div>` +
+            `<div class="t-quote">「${escapeHtml(d.quote)}」</div>` +
+            `<div class="t-modern">→ ${escapeHtml(d.modern)}</div>`
         );
         positionTooltip(event);
     })
@@ -1479,9 +1483,9 @@ function renderWorldMap(criticsData) {
     }
     dotG.on("mouseenter", function(event, d) {
         popup.classed("visible", true).html(
-            `<div class="p-head">${d.flag} ${d.name} · ${d.country}</div>` +
-            `<div class="p-view">「${d.viewpoint}」</div>` +
-            `<div style="font-size:0.78rem;color:var(--accent-3);margin-top:6px;">代表作：${d.work}</div>`
+            `<div class="p-head">${escapeHtml(d.flag)} ${escapeHtml(d.name)} · ${escapeHtml(d.country)}</div>` +
+            `<div class="p-view">「${escapeHtml(d.viewpoint)}」</div>` +
+            `<div style="font-size:0.78rem;color:var(--accent-3);margin-top:6px;">代表作：${escapeHtml(d.work)}</div>`
         );
         positionPopup(event);
     })

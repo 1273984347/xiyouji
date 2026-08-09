@@ -45,12 +45,19 @@
     return cols.slice(0, 7).map(function (k) { return { key: k, label: k }; });
   }
 
+  // P1-2 修复：数据拼串统一转义（JSON 键/值/标签可能含 HTML 特殊字符，防注入 XSS）
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
   function openRowDrill(key, row) {
-    var html = "<p><b>所属键：</b>" + key + "</p><table><tbody>";
+    var html = "<p><b>所属键：</b>" + escapeHtml(key) + "</p><table><tbody>";
     Object.keys(row).forEach(function (k) {
       var v = row[k];
       if (v && typeof v === "object") v = JSON.stringify(v);
-      html += "<tr><th>" + k + "</th><td>" + String(v) + "</td></tr>";
+      html += "<tr><th>" + escapeHtml(k) + "</th><td>" + escapeHtml(String(v)) + "</td></tr>";
     });
     html += "</tbody></table>";
     global.VisTools.openDrill((row.name || row.label || key), html);
@@ -73,9 +80,9 @@
     var svg = '<svg id="chart" viewBox="0 0 520 ' + (entries.length * 34 + 10) + '" width="100%" style="max-width:560px">';
     entries.forEach(function (e, i) {
       var w = Math.round(((+e.value || 0) / max) * 360);
-      svg += '<text x="0" y="' + (i * 34 + 18) + '" font-size="12" fill="#23201A">' + e.label + "</text>";
+      svg += '<text x="0" y="' + (i * 34 + 18) + '" font-size="12" fill="#23201A">' + escapeHtml(String(e.label)) + "</text>";
       svg += '<rect x="120" y="' + (i * 34 + 6) + '" width="' + w + '" height="18" rx="3" fill="' + colors[i % colors.length] + '"/>';
-      svg += '<text x="' + (124 + w) + '" y="' + (i * 34 + 19) + '" font-size="11" fill="#6B6455">' + e.value + "</text>";
+      svg += '<text x="' + (124 + w) + '" y="' + (i * 34 + 19) + '" font-size="11" fill="#6B6455">' + escapeHtml(String(e.value)) + "</text>";
     });
     svg += "</svg>";
     document.getElementById(ids.chartTitleId).textContent = "分布：" + key;
@@ -99,7 +106,7 @@
     } else if (Array.isArray(value)) {
       renderArrayTable(key, value.map(function (v, i) { return { "#": i + 1, value: v }; }), ids.tableHostId);
     } else {
-      host.innerHTML = "<p class='meta'>" + key + "：<b>" + String(value) + "</b></p>";
+      host.innerHTML = "<p class='meta'>" + escapeHtml(key) + "：<b>" + escapeHtml(String(value)) + "</b></p>";
     }
   }
 

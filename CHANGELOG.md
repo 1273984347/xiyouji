@@ -4,9 +4,29 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W411），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W412），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.3.27（2026-08-09）：W412 安全审计剩余项处置 — P0-2 密钥覆盖防护 + XSS 转义 + RAG/SSE 边界 + 依赖锁定
+
+> **W412 SECURITY-AUDIT-2026-08-09 剩余项处置（P0-2/P1-2/P1-3 辅助/P1-4/P2-1/P2-2/P2-3/P2-4 核验/P2-6/P2-7/P3-1/P3-2/P3-3/P3-5）**
+> - **来源**：用户指令"列出剩余待办清单并评估优先级，按照优先级顺序和实际情况进行处理"——P0-2（/api/save-env-config 无认证→密钥劫持+SSRF）·P1-2（静态站 innerHTML XSS）·P1-3（吊销轮换密钥·辅助新增扫描规则）·P1-4（版本叙述统一）·P2 各项·P3 杂项
+> - **执行（P0-2 密钥劫持+SSRF 防护）**：
+>   - **server/index.ts** `/api/save-env-config`：apiKey/baseUrl 禁止运行时覆盖（400 拒绝 + refused 列表·仅从服务端 .env 读取）·**SettingsPage.tsx** 前端表单移除 API Key/Base URL 输入框（改提示"由服务端 .env 配置·重启生效·禁止运行时覆盖"）·提交体仅 {authToken, internetEnv}
+> - **执行（P1-2 静态站 XSS 转义）**：**site/static/js/rag-chat.js** 新增 escapeAttr（含引号转义·属性上下文）应用于来源链接 href·**dataset-view.js** 新增 escapeHtml 应用于 openRowDrill/renderObjectView/renderKey·**cross-time-danmaku.html/tag-cloud.html/search.html** 新增 escapeHtml 应用于 tooltip/popup/hit 等动态文本
+> - **执行（P1-3 辅助·密钥扫描）**：**security_scan.py** 新增 SEC-005 规则（sk- 前缀 16+ 字符·覆盖 DeepSeek/Qwen 等 OpenAI 风格 Key）·git 历史 `-S "sk-e8228e"` 与 `-S "LLM_API_KEY=sk-"` 均无命中（未入仓）·**密钥吊销轮换需用户在 DeepSeek 控制台操作（仅告知）**
+> - **执行（P1-4 版本统一）**：server/index.ts systemPrompt 硬编码 v2.3.9→v2.3.26（W411 顺带修复大部分）·site 页脚版本漂移修复（P3-5）·本次 bump v2.3.27 W412
+> - **执行（P2 边界加固）**：
+>   - **P2-1 rag_server.py 参数钳制**：新增 _clamp_int（top_k∈[1,50]·hops∈[1,3]）+ _sanitize_history（仅 list·≤20 条·role∈{user,assistant,bot}·text≤2000）·do_GET 与 /graph 接入
+>   - **P2-2 xiyouji_rag.py LLM 端点校验**：_validate_endpoint 仅 https（http 仅 localhost/127.0.0.1/::1 例外）·私有网段（10/172.16/192.168/127）拒绝·域名放行·_llm_generate 入口校验抛 ValueError·history 防御性过滤（9 组用例全通过）
+>   - **P2-3 server/index.ts SSE 加固**：aborted 标志 + 10 分钟总时长上限（sseTimer 超时清理 pendingPermissions 并写 error）+ req.on("close") 断开清理（abortStream）·流循环 if(aborted) break·正常/catch 路径均 clearTimeout + req.off("close")·两处 Map 迭代改 forEach（TS2802：tsconfig 无 downlevelIteration）
+>   - **P2-4 MCP 外链探测核验**：xiyouji_mcp.py 源码核验 urlopen 不存在·external 分支仅计数不请求 → **已缓解无需修改**
+>   - **P2-6 ChatMarkdown XSS 消毒**：node_modules 核验 tdesign-web-components chat-message markdown-content `options:{html:true}` + unsafeHTML 无消毒实锤 → **ChatMessages.tsx** 两处渲染输入加 DOMPurify.sanitize·package.json 新增 dompurify ^3.4.13 直接依赖
+>   - **P2-7 依赖版本锁定**：scripts/requirements.txt 固定 jieba==0.42.1/Pillow==11.3.0/ruff==0.15.15/pytest==8.4.2（本地实测）·mcp-server/pyproject.toml fastmcp>=0.1.0,<1.0（防 3.x 大改版）
+> - **执行（P3 杂项）**：P3-1 VERBOSE_LOG 门控 5 处调试日志（AGENT_WEB_VERBOSE=1 才输出）·P3-2 api_server.py CORS 白名单（file:// Origin==null 回显 "null"·仅 127.0.0.1:8787/localhost:8787 回显自身·其余不带 CORS 头·两处 `*` 均替换）·P3-3 移除未使用 exec/promisify/execAsync 死代码·P3-5 site 页脚版本漂移修复（index/cross-time-danmaku/tag-cloud）
+> - **验证**：pytest tests 全量 **327 passed**·py_compile 4 脚本通过·_validate_endpoint 9 组用例通过·security_scan.py --all 无 SEC-005 误报·agent-web npm run build 成功（tsc + vite·dompurify 直接依赖·修复 TS2802 Map 迭代 forEach）·verify_delivery 全绿
+> - **状态**：已落地 · 待六文档同步后 commit（W412）
 
 ### v2.3.26（2026-08-09）：W411 安全审计 P0-1/P1-1 处置 — Web Agent 鉴权加固 + MCP 路径白名单
 
@@ -18,7 +38,7 @@
 >   - **agent-web README** 安全提示重写（W411 加固段）·**.env.example** 补 `AGENT_WEB_TOKEN`/`AGENT_WEB_ALLOW_BYPASS` 注释
 > - **执行（P1-1 路径白名单）**：**mcp-server/xiyouji_mcp.py** 新增 `_resolve_within(root, p, what)`（`(root/p).resolve()` 后 `is_relative_to(root)` 校验，越界抛 `PathEscapeError`）·4 个接受路径的工具接入（xiyouji_drl_spotcheck/data_validate/lint_links/a11y_audit）·**tests/test_xiyouji_mcp.py** 新增 TestPathTraversal 6 个越界用例（`../` 与越界绝对路径）+ TestDrlSpotcheck ROOT 指向 tmp_path fixture
 > - **验证**：pytest tests 全量 **327 passed**（原 321 + MCP 新增 6）·`py_compile` mcp-server 通过·agent-web `npm run build` 成功（tsc + vite 8011 modules）·运行时验证（无 token 200 / 设 token 后 401/200/200·监听 127.0.0.1·bypass 净化 default·cwd 越界回落 PROJECT_CWD 均有日志佐证）·越界 6 用例全通过（`../secret`/越界绝对路径/跨目录 scan_dir 均拒绝）
-> - **状态**：已落地 · 待六文档同步后 commit（W411）
+> - **状态**：已落地·已 push（9991982）·CI/Security 转绿（W411）
 
 ### v2.3.25（2026-08-09）：W410 npm 依赖审计补充 — agent-web 纳入 CI audit + 依赖链修复
 
@@ -37,7 +57,7 @@
 > - **来源**：用户指令"更新交接文档并同步更新其他文件内容"
 > - **内容纠偏**：交接文档阻塞段 HEAD 引用 v2.3.21 W406→v2.3.23 W408；待办1「将增强版截图审查纳入迭代发布流程」[ ]→[x]（W406 已完成）；文件尾"最后更新"v2.3.20 W405→v2.3.23 W408；待办清单补英文站续译 / 真实读者量验证候选
 > - **五文档版本叙述校准**：项目说明.md 内部"当前版本"v2.3.20→v2.3.23（bump_version.py 仅更头部、内部字段漏更）；README/STRUCTURE/项目说明头部 + CHANGELOG + file-index 经 bump_version.py 同步至 W409
-> - **状态**：已落地 · 待六文档同步后 commit（W409）
+> - **状态**：已落地·已 push（06275f6）
 
 ### v2.3.18（2026-08-08）：W400 CI/安全 workflow 转绿（ruff 存量 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复）
 
@@ -137,7 +157,7 @@
 >   - **screenshot-review.yml**：触发块新增 `push: branches: [main]` + paths（site/ 与三个脚本自身），对齐 ci.yml W399；头部注释补 W406 说明；FILE_INDEX 注释登记
 >   - **batch_screenshots.js**：BENIGN_CONSOLE_RE 新增 `/Failed to fetch/i` `/NetworkError/i` `/Fetch API cannot load file/i`（file:// fetch 回退 EMBEDDED_DATA 为设计预期，非缺陷）
 > - **验证**：node -e 复验正则——旧列表漏判 2/2（两类 file:// 噪声均未覆盖），新列表漏判 0/2 ✅；基线运行生成截图 + 双报告（本地切片命中沙箱回收站不可用环境限制，非项目缺陷，CI ubuntu 下 continue-on-error 不受影响，主截图 + 报告已成功）
-> - **状态**：已落地 · 待六文档同步后 commit（W406）· 截图审查自此在 push main 真实发布路径运行，--fail-on-issues 不再被 file:// 回退噪声误判
+> - **状态**：已落地·已 push（b6ff352）· 截图审查自此在 push main 真实发布路径运行，--fail-on-issues 不再被 file:// 回退噪声误判
 
 ### v2.3.22（2026-08-09）：W407 修数据路径代码异味（P2）— dialogue-sentiment 补 ../../ 前缀 + 两 -view 页 file:// 跳过 /dataset/ 死 fetch
 
@@ -150,7 +170,7 @@
 >   - `dialogue-sentiment.html`：路径补 `../../` 前缀，与 80+ 页统一；http 模式正确解析 `scripts/output/data/dialogue_sentiment.json`
 >   - 两 `-view` 页：`mount()` 加 `location.protocol === "file:"` 守卫，file:// 下直接走 `goOffline()`（EMBEDDED 离线示例），跳过 `/dataset/` 死 fetch；http(s) 下仍走 API 取完整数据（路径不改，避免破坏 API 模式）
 > - **验证**：Playwright 运行时审查——① dialogue-sentiment 经本地 HTTP 服务 `dialogue_sentiment.json` 返回 200、`window.__lastData.sentiment` 真实加载、6 个 SVG 渲染、0 pageerror；② 两 -view 页 file:// 下 `/dataset/` 请求 0 次、离线示例正常渲染、0 pageerror
-> - **状态**：已落地 · 待六文档同步后 commit（W407）
+> - **状态**：已落地·已 push（2c0e152）
 
 ### v2.3.23（2026-08-09）：W408 修 static 资源路径（P2 续）— site/data/*.html 内联 CSS 的 static/fonts|images 改 ../static/
 
@@ -159,7 +179,7 @@
 > - **根因**：`site/data/*.html`（含模板 `_shell.html`）内联 CSS 中 `@font-face { src: url('static/fonts/...') }` 与 `.hero { background-image: url('static/images/...') }` 使用相对 `site/data/` 的 `static/`，解析为 `site/data/static/...`（不存在）；目标资产在 `site/static/`。http 部署（GitHub Pages）下同样 404，因字体有系统 fallback 长期被掩盖
 > - **执行**：`scripts/_fix_static_paths.py` 批处理，正则 `(url\(['\"]|src=['\"]|href=['\"])static/` → `\1../static/`，仅改真实资源引用（url()/src=/href=），不动注释里的 `site/static/` 说明文字。覆盖 86 文件、516 处（每页 5 fonts + 1 image）
 > - **验证**：Playwright HTTP 模式（本地 server）加载 dialogue-sentiment / 81-hardships / graph-explorer / character-relationship-3d 4 页，static 资源失败 0、pageerror 0（W407 时 dialogue-sentiment 有 6 个 static 404，已归零）
-> - **状态**：已落地 · 待六文档同步后 commit（W408）
+> - **状态**：已落地·已 push（bd32553）
 
 ### v2.3.17（2026-08-08）：W399 CI 触发修复 + SEO 域名补全 + rum-viewer 埋点查看页（并行 W390-W398 竞态清理后增量）
 

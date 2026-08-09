@@ -28,6 +28,40 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import xiyouji_rag as RAG
 
 
+def _clamp_int(raw, default, lo, hi):
+    """P2-1：解析整数并钳制到 [lo, hi]；非法输入回落 default（防 DoS/500）。"""
+    try:
+        v = int(raw)
+    except (TypeError, ValueError):
+        v = default
+    return max(lo, min(hi, v))
+
+
+def _sanitize_history(raw):
+    """P2-1：history schema 校验——仅允许 list、条目 role∈{user,assistant,bot}、
+    text 非空且 ≤2000 字符、条目数 ≤20；非法输入返回 None（防 prompt injection/超长）。"""
+    if not raw:
+        return None
+    try:
+        parsed = json.loads(raw)
+    except Exception:
+        return None
+    if not isinstance(parsed, list) or len(parsed) > 20:
+        return None
+    out = []
+    for turn in parsed:
+        if not isinstance(turn, dict):
+            continue
+        role = str(turn.get("role", "")).lower()
+        if role not in ("user", "assistant", "bot"):
+            continue
+        text = str(turn.get("text", "")).strip()
+        if not text or len(text) > 2000:
+            continue
+        out.append({"role": role, "text": text})
+    return out or None
+
+
 class Handler(BaseHTTPRequestHandler):
     def _send(self, obj, code=200):
         body = json.dumps(obj, ensure_ascii=False).encode("utf-8")
@@ -46,21 +80,15 @@ class Handler(BaseHTTPRequestHandler):
             return
         if parsed.path == "/query":
             query = q.get("q", [""])[0]
-            top_k = int(q.get("k", ["5"])[0])
-            hops = int(q.get("hops", ["1"])[0])
-            history = None
-            raw_h = q.get("history", [""])[0]
-            if raw_h:
-                try:
-                    history = json.loads(raw_h)
-                except Exception:
-                    history = None
+            top_k = _clamp_int(q.get("k", ["5"])[0], 5, 1, 50)          # P2-1：范围钳制防 DoS
+            hops = _clamp_int(q.get("hops", ["1"])[0], 1, 1, 3)          # P2-1：范围钳制防全图遍历
+            history = _sanitize_history(q.get("history", [""])[0])       # P2-1：schema 校验防注入/超长
             res = RAG.answer(query, top_k=top_k, hops=hops, history=history)
             self._send(res)
             return
         if parsed.path == "/graph":
             query = q.get("q", [""])[0]
-            triples = RAG.graph_expand(query, hops=int(q.get("hops", ["1"])[0]))
+            triples = RAG.graph_expand(query, hops=_clamp_int(q.get("hops", ["1"])[0], 1, 1, 3))
             self._send({"graph": triples})
             return
         self._send({"error": "not found"}, code=404)
