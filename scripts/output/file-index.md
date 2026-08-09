@@ -689,3 +689,15 @@
 | CHANGELOG.md | W408 | 新增 W408 段 + 编号规则 W001-W407→W408 |
 | 交接文档.md | W408 | 头部/HEAD/进度/版本号段同步 v2.3.23 W408 |
 | README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W408 | bump_version 同步 v2.3.23 W408 |
+
+> 当前版本 v2.3.24（2026-08-09）
+
+## W409 文档同步刷新（2026-08-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| 交接文档.md | W409 | 内容纠偏（HEAD 引用 W406→W408·待办1 截图审查 [ ]→[x]·文件尾最后更新 W405→W408）+ 版本号段/heading/加 W409 里程碑块 |
+| CHANGELOG.md | W409 | 新增 W409 段 + 编号规则 W001-W408→W409 |
+| site/dukou-engine.html | W409 | 页脚升 v2.3.24 W409 |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W409 | bump_version 同步 v2.3.24 W409（项目说明内部当前版本 v2.3.20→v2.3.24） |
+| scripts/output/file-index.md | W409 | W409 反向索引登记 |

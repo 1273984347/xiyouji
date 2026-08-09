@@ -4,9 +4,17 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W408），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W409），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.3.24（2026-08-09）：W409 文档同步刷新 — 交接文档内容纠偏 + 五文档版本叙述校准
+
+> **W409 文档同步刷新（与 W400 同类文档同步迭代）**
+> - **来源**：用户指令"更新交接文档并同步更新其他文件内容"
+> - **内容纠偏**：交接文档阻塞段 HEAD 引用 v2.3.21 W406→v2.3.23 W408；待办1「将增强版截图审查纳入迭代发布流程」[ ]→[x]（W406 已完成）；文件尾"最后更新"v2.3.20 W405→v2.3.23 W408；待办清单补英文站续译 / 真实读者量验证候选
+> - **五文档版本叙述校准**：项目说明.md 内部"当前版本"v2.3.20→v2.3.23（bump_version.py 仅更头部、内部字段漏更）；README/STRUCTURE/项目说明头部 + CHANGELOG + file-index 经 bump_version.py 同步至 W409
+> - **状态**：已落地 · 待六文档同步后 commit（W409）
 
 ### v2.3.18（2026-08-08）：W400 CI/安全 workflow 转绿（ruff 存量 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复）
 
