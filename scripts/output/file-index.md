@@ -663,3 +663,18 @@
 | 交接文档.md | W406 | 头部/HEAD/进度段/当前版本号段同步 v2.3.21 W406 |
 | README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W406 | bump_version 同步 v2.3.21 W406 |
 | 项目认知总览.md | W406 | 项目认知总览独立存档（背景/目标/技术栈/目录/模块职责/进度/待办/雷区） |
+
+## W407 修数据路径代码异味（P2）（2026-08-09）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/dialogue-sentiment.html | W407 | fetchJson 路径补 ../../ 前缀（`scripts/output/data/`→`../../scripts/output/data/`），与 80+ 页统一，http 模式正确解析 JSON |
+| site/data/81-hardships-view.html | W407 | mount() 加 file:// 守卫，跳过 /dataset/ 死 fetch 直走 EMBEDDED 离线示例（/dataset/ 为 api_server 挂载点，http 模式仍走 API） |
+| site/data/character-relationship-3d-view.html | W407 | 同 81-hardships-view：file:// 守卫跳过 /dataset/ 死 fetch |
+| scripts/_p1_viz_audit.js | W407 | 可复用可视化异常检测脚本（零尺寸 canvas/WebGL/SVG 空白/横向溢出，86 页全量） |
+| site/dukou-engine.html | W407 | 页脚版本升 v2.3.22 W407 + 补 W407 里程碑 |
+| CHANGELOG.md | W407 | 新增 W407 版本段（四件套）+ 编号规则 W001-W406→W407 |
+| 交接文档.md | W407 | 头部/HEAD/进度段/当前版本号段同步 v2.3.22 W407 |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W407 | bump_version 同步 v2.3.22 W407 |
+
+> 当前版本 v2.3.22（2026-08-09）

@@ -1137,18 +1137,25 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         renderKeyTabs(data, ids);
       }
 
-      apiFetch("/dataset/" + name).then(function (data) {
-        online = true;
-        setBanner(ids.bannerId, "已连接数据 API · 数据集 " + name + " 已加载。", false);
-        show(data);
-      }).catch(function () {
+      function goOffline() {
         if (fallback) {
           setBanner(ids.bannerId, "离线模式（file://）：展示内置示例。启动 <code>python scripts/api/api_server.py</code> 后通过 http://127.0.0.1:8787/data/" + name + "-view.html 访问可得完整数据。", true);
           show(fallback);
         } else {
           setBanner(ids.bannerId, "离线且无内置示例：请启动数据 API 后通过 http 访问。", true);
         }
-      });
+      }
+      // file:// 下数据 API 不可达（/dataset/ 为 api_server 挂载点），直接走离线示例，
+      // 避免发起必然失败的 fetch 产生控制台噪声；http(s) 下仍走 API 取完整数据。
+      if (location.protocol === "file:") {
+        goOffline();
+      } else {
+        apiFetch("/dataset/" + name).then(function (data) {
+          online = true;
+          setBanner(ids.bannerId, "已连接数据 API · 数据集 " + name + " 已加载。", false);
+          show(data);
+        }).catch(goOffline);
+      }
     }
   };
 

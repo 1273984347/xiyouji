@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W406），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W407），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
 
@@ -107,6 +107,19 @@
 >   - **batch_screenshots.js**：BENIGN_CONSOLE_RE 新增 `/Failed to fetch/i` `/NetworkError/i` `/Fetch API cannot load file/i`（file:// fetch 回退 EMBEDDED_DATA 为设计预期，非缺陷）
 > - **验证**：node -e 复验正则——旧列表漏判 2/2（两类 file:// 噪声均未覆盖），新列表漏判 0/2 ✅；基线运行生成截图 + 双报告（本地切片命中沙箱回收站不可用环境限制，非项目缺陷，CI ubuntu 下 continue-on-error 不受影响，主截图 + 报告已成功）
 > - **状态**：已落地 · 待六文档同步后 commit（W406）· 截图审查自此在 push main 真实发布路径运行，--fail-on-issues 不再被 file:// 回退噪声误判
+
+### v2.3.22（2026-08-09）：W407 修数据路径代码异味（P2）— dialogue-sentiment 补 ../../ 前缀 + 两 -view 页 file:// 跳过 /dataset/ 死 fetch
+
+> **W407 内容向/工程化小修：P2 数据路径代码异味（待办1 复查收尾）**
+> - **来源**：P1 视觉抽查（W407 候选）归类出的残留代码异味（scripts/output/screenshots/issue-triage.md §四）；用户确认落 W407 修 P2
+> - **根因**：
+>   - `dialogue-sentiment.html` 的 `fetchJson('scripts/output/data/dialogue_sentiment.json')` 缺 `../../` 前缀（从 `site/data/` 解析为 `site/data/scripts/output/data/...`，错误）；与 80+ 页的 `../../scripts/output/data/` 规范写法不一致
+>   - `81-hardships-view.html` / `character-relationship-3d-view.html` 用 `apiFetch("/dataset/" + name)` 绝对根路径；`/dataset/` 是 api_server（8787）挂载点，仅 http 模式可达，file:// 下必然失败——此前靠 EMBEDDED 回退掩盖，但会产生死 fetch 控制台噪声
+> - **执行**：
+>   - `dialogue-sentiment.html`：路径补 `../../` 前缀，与 80+ 页统一；http 模式正确解析 `scripts/output/data/dialogue_sentiment.json`
+>   - 两 `-view` 页：`mount()` 加 `location.protocol === "file:"` 守卫，file:// 下直接走 `goOffline()`（EMBEDDED 离线示例），跳过 `/dataset/` 死 fetch；http(s) 下仍走 API 取完整数据（路径不改，避免破坏 API 模式）
+> - **验证**：Playwright 运行时审查——① dialogue-sentiment 经本地 HTTP 服务 `dialogue_sentiment.json` 返回 200、`window.__lastData.sentiment` 真实加载、6 个 SVG 渲染、0 pageerror；② 两 -view 页 file:// 下 `/dataset/` 请求 0 次、离线示例正常渲染、0 pageerror
+> - **状态**：已落地 · 待六文档同步后 commit（W407）
 
 ### v2.3.17（2026-08-08）：W399 CI 触发修复 + SEO 域名补全 + rum-viewer 埋点查看页（并行 W390-W398 竞态清理后增量）
 
