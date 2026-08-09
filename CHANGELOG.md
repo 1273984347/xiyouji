@@ -4,9 +4,20 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W409），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W410），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.3.25（2026-08-09）：W410 npm 依赖审计补充 — agent-web 纳入 CI audit + 依赖链修复
+
+> **W410 npm 依赖审计补充（SECURITY-AUDIT-2026-08-09 遗漏 #1 落地）**
+> - **来源**：安全审计报告遗漏 #1「npm 依赖无审计覆盖」——security.yml npm-audit 仅扫 scripts/，`xiyouji-agent-web/` 生产依赖（express/@tencent-ai/agent-sdk/@tdesign-react/chat 等）既浮动版本又无 CI audit；用户指令"补充 npm 依赖审计，将 agent-web 纳入 CI 检查"
+> - **执行**：
+>   - **security.yml npm-audit 扩至双目录**：`cache-dependency-path` 补 `xiyouji-agent-web/package-lock.json`（逗号分隔双 lock）·新增「安装依赖（xiyouji-agent-web/）」+「npm audit（xiyouji-agent-web/）」两 step（`npm --prefix xiyouji-agent-web ci || install` + `audit --omit=dev --audit-level=high`）·scripts/ 原 audit 逻辑保留
+>   - **依赖链修复**（agent-web `package.json` overrides + 升级）：`@tdesign-react/chat@1.0.2`（已是最新）依赖 `tdesign-web-components@1.3.0-alpha.2` → 锁定旧 `cherry-markdown@0.11.0-alpha-2` → `mermaid@9.4.3` → `dompurify@2.4.3`（**5 high** XSS 链·无上游 fix）·`overrides` 强制 `cherry-markdown ^0.11.9`（该版无 mermaid 依赖）+ `mermaid ^11.16.1`（dompurify ^3.3.3/uuid ^11.1.0）+ `dompurify ^3.4.13` ·直接依赖 `uuid ^9.0.0→^11.1.1` + `@types/uuid ^9→^10`（消除最后 1 moderate·v3/v5/v6 buffer 漏洞·本项目仅 v4 不受影响）·`lucide-react 0.563.0→^1.31.0`（0.563.0 发布缺陷：typings 指向缺失的 `dist/lucide-react.d.ts` 致 TS7016 构建失败·1.x 类型完备）
+>   - **workflows/README.md 同步**：头部 W410 记录 + Security 描述（npm-audit 双目录）+ 阈值表（npm audit 0 high）+ 本地复现命令（双目录 audit）
+> - **验证**：本地 `npm audit --omit=dev --audit-level=high` **双目录 0 vulnerabilities**（scripts/ + agent-web/）·`npm run build` 成功（tsc + vite 8011 modules）·security.yml YAML 解析通过（npm-audit 5 step）
+> - **状态**：已落地 · 待六文档同步后 commit（W410）
 
 ### v2.3.24（2026-08-09）：W409 文档同步刷新 — 交接文档内容纠偏 + 五文档版本叙述校准
 
