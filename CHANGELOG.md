@@ -26,7 +26,7 @@
 >   - **P2-7 依赖版本锁定**：scripts/requirements.txt 固定 jieba==0.42.1/Pillow==11.3.0/ruff==0.15.15/pytest==8.4.2（本地实测）·mcp-server/pyproject.toml fastmcp>=0.1.0,<1.0（防 3.x 大改版）
 > - **执行（P3 杂项）**：P3-1 VERBOSE_LOG 门控 5 处调试日志（AGENT_WEB_VERBOSE=1 才输出）·P3-2 api_server.py CORS 白名单（file:// Origin==null 回显 "null"·仅 127.0.0.1:8787/localhost:8787 回显自身·其余不带 CORS 头·两处 `*` 均替换）·P3-3 移除未使用 exec/promisify/execAsync 死代码·P3-5 site 页脚版本漂移修复（index/cross-time-danmaku/tag-cloud）
 > - **验证**：pytest tests 全量 **327 passed**·py_compile 4 脚本通过·_validate_endpoint 9 组用例通过·security_scan.py --all 无 SEC-005 误报·agent-web npm run build 成功（tsc + vite·dompurify 直接依赖·修复 TS2802 Map 迭代 forEach）·verify_delivery 全绿
-> - **状态**：已落地 · 待六文档同步后 commit（W412）
+> - **状态**：已落地·已 commit（71fec80）·push 待网络恢复（github.com 连接失败）
 
 ### v2.3.26（2026-08-09）：W411 安全审计 P0-1/P1-1 处置 — Web Agent 鉴权加固 + MCP 路径白名单
 
