@@ -8,6 +8,8 @@ name: Screenshot Review
 #   3. slice_screenshots.py        — 截图切片为 800px 块，供像素级人工复核（非阻断，仅产物）
 #
 # 触发：
+#   - push main 且改动 site/ 或三个脚本自身时（W406 新增：本项目实际走「直接 push main、无 PR」，
+#     原仅 pull_request 触发导致审查在真实发布路径上从未运行，与 ci.yml(W399) 的 push 触发对齐）
 #   - PR 改动 site/ 或三个脚本自身时
 #   - 每周一次定期审查（防止 site/ 长期静默退化）
 #   - workflow_dispatch 手动触发
@@ -18,6 +20,14 @@ name: Screenshot Review
 #   - slice_screenshots.py 失败不阻断（产物缺失仅影响人工复核）
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'scripts/batch_screenshots.js'
+      - 'scripts/slice_screenshots.py'
+      - 'scripts/detect_unwrapped_tables.py'
+      - '.github/workflows/screenshot-review.yml'
   pull_request:
     branches: [main]
     paths:
@@ -138,4 +148,4 @@ jobs:
             scripts/output/screenshots/slices/
           if-no-files-found: ignore
           retention-days: 30
-# FILE_INDEX: .github/workflows/screenshot-review.yml | W298 | E1 截图审查 CI 化工作流
+# FILE_INDEX: .github/workflows/screenshot-review.yml | W406 | E1 截图审查触发修复：补 push main 触发（对齐 ci.yml W399），使审查在真实发布路径运行

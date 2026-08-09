@@ -31,6 +31,7 @@ const BENIGN_CONSOLE_RE = [
   /\/query|\/graph|\/datasets|\/api\/rum|\/health/i, // 后端端点，CI 无服务
   /Failed to fetch/i,
   /NetworkError/i,
+  /Fetch API cannot load file/i, // file:// 协议下 fetch 本地 JSON 失败，自动回退 EMBEDDED_DATA（DESIGN §8.2 设计预期），非缺陷
 ];
 function isBenignConsoleError(text) {
   return BENIGN_CONSOLE_RE.some((re) => re.test(text));
