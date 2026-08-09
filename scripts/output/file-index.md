@@ -745,7 +745,7 @@
 | site/data/search.html | W412 | 修改·P2-5 全局 escapeHtml 应用于 row 数据集/hit.path/hit.snippet |
 | scripts/rag/rag_server.py | W412 | 修改·P2-1 _clamp_int（top_k∈[1,50]·hops∈[1,3]）+ _sanitize_history（仅 list·≤20 条·role 白名单·text≤2000）·do_GET 与 /graph 接入 |
 | scripts/rag/xiyouji_rag.py | W412 | 修改·P2-2 _validate_endpoint（仅 https·http 仅 localhost/127.0.0.1/::1 例外·私有网段 10/172.16/192.168/127 拒绝）+ history 防御性过滤·_llm_generate 入口校验抛 ValueError |
-| scripts/requirements.txt | W412 | 修改·P2-7 固定 jieba==0.42.1/Pillow==11.3.0/ruff==0.15.15/pytest==8.4.2（本地实测） |
+| scripts/requirements.txt | W412 | 修改·P2-7 固定 jieba==0.42.1/ruff==0.15.15 + Pillow 11.3.0→12.3.0 + pytest 8.4.2→9.0.3（CI pip-audit 实测 26 漏洞归零） |
 | mcp-server/pyproject.toml | W412 | 修改·P2-7 fastmcp>=0.1.0,<1.0（防 3.x 大改版） |
 | scripts/security_scan.py | W412 | 修改·P1-3 新增 SEC-005 规则（sk- 前缀 16+ 字符·high·覆盖 DeepSeek/Qwen） |
 | scripts/api/api_server.py | W412 | 修改·P3-2 CORS 白名单（仅 127.0.0.1:8787/localhost:8787 + file:// null 回显·其余不带 CORS 头）·两处 `*` 均替换 |

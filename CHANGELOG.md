@@ -23,7 +23,7 @@
 >   - **P2-3 server/index.ts SSE 加固**：aborted 标志 + 10 分钟总时长上限（sseTimer 超时清理 pendingPermissions 并写 error）+ req.on("close") 断开清理（abortStream）·流循环 if(aborted) break·正常/catch 路径均 clearTimeout + req.off("close")·两处 Map 迭代改 forEach（TS2802：tsconfig 无 downlevelIteration）
 >   - **P2-4 MCP 外链探测核验**：xiyouji_mcp.py 源码核验 urlopen 不存在·external 分支仅计数不请求 → **已缓解无需修改**
 >   - **P2-6 ChatMarkdown XSS 消毒**：node_modules 核验 tdesign-web-components chat-message markdown-content `options:{html:true}` + unsafeHTML 无消毒实锤 → **ChatMessages.tsx** 两处渲染输入加 DOMPurify.sanitize·package.json 新增 dompurify ^3.4.13 直接依赖
->   - **P2-7 依赖版本锁定**：scripts/requirements.txt 固定 jieba==0.42.1/Pillow==11.3.0/ruff==0.15.15/pytest==8.4.2（本地实测）·mcp-server/pyproject.toml fastmcp>=0.1.0,<1.0（防 3.x 大改版）
+>   - **P2-7 依赖版本锁定**：scripts/requirements.txt 固定 jieba==0.42.1/Pillow==11.3.0/ruff==0.15.15/pytest==8.4.2（本地实测）·mcp-server/pyproject.toml fastmcp>=0.1.0,<1.0（防 3.x 大改版）·**CI 修正（push 后 pip-audit 实测）**：Pillow 11.3.0→12.3.0（25 个 PYSEC-2026 漏洞·fix 12.3.0）·pytest 8.4.2→9.0.3（PYSEC-2026-1845·fix 9.0.3）——26 漏洞归零
 > - **执行（P3 杂项）**：P3-1 VERBOSE_LOG 门控 5 处调试日志（AGENT_WEB_VERBOSE=1 才输出）·P3-2 api_server.py CORS 白名单（file:// Origin==null 回显 "null"·仅 127.0.0.1:8787/localhost:8787 回显自身·其余不带 CORS 头·两处 `*` 均替换）·P3-3 移除未使用 exec/promisify/execAsync 死代码·P3-5 site 页脚版本漂移修复（index/cross-time-danmaku/tag-cloud）
 > - **验证**：pytest tests 全量 **327 passed**·py_compile 4 脚本通过·_validate_endpoint 9 组用例通过·security_scan.py --all 无 SEC-005 误报·agent-web npm run build 成功（tsc + vite·dompurify 直接依赖·修复 TS2802 Map 迭代 forEach）·verify_delivery 全绿
 > - **状态**：已落地·已 commit（71fec80）·push 待网络恢复（github.com 连接失败）
