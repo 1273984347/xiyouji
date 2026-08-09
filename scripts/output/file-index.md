@@ -558,6 +558,22 @@
 | .github/workflows/README.md | W410 | 修改·头部 W410 记录 + Security 描述（npm-audit 双目录）+ 阈值表 + 本地复现命令（双目录 audit） |
 | CHANGELOG.md | W410 | 新增 W410 版本段（四件套）·编号规则 W001-W409→W001-W410 |
 
+## W411 安全审计 P0-1/P1-1 处置（2026-08-09·v2.3.26）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/server/index.ts | W411 | 修改·安全头中间件（X-Content-Type-Options/X-Frame-Options/Referrer-Policy/Permissions-Policy）·可选 token 认证（AGENT_WEB_TOKEN·x-agent-token/Bearer·设值后 /api/* 401）·权限白名单 sanitizePermissionMode（bypass 需 AGENT_WEB_ALLOW_BYPASS=1 否则回落 default）·工作目录白名单 resolveWorkingDir（越界回落 PROJECT_CWD）·app.listen(PORT,"127.0.0.1") 仅回环监听 |
+| xiyouji-agent-web/src/hooks/useAgents.ts | W411 | 修改·默认 Agent permissionMode 'bypassPermissions'→'acceptEdits' |
+| xiyouji-agent-web/vite.config.ts | W411 | 修改·dev server host '0.0.0.0'→'127.0.0.1' |
+| xiyouji-agent-web/README.md | W411 | 修改·安全提示重写（W411 加固段）·默认权限模式描述改 acceptEdits |
+| xiyouji-agent-web/.env.example | W411 | 修改·新增 AGENT_WEB_TOKEN / AGENT_WEB_ALLOW_BYPASS 注释 |
+| mcp-server/xiyouji_mcp.py | W411 | 修改·新增 _resolve_within + PathEscapeError 路径白名单（is_relative_to 校验）·4 工具接入（drl_spotcheck/data_validate/lint_links/a11y_audit） |
+| tests/test_xiyouji_mcp.py | W411 | 修改·TestPathTraversal 6 个越界用例 + TestDrlSpotcheck ROOT 指向 tmp_path fixture |
+| CHANGELOG.md | W411 | 新增 W411 版本段（四件套）·编号规则 W001-W410→W001-W411 |
+| 项目交接参考手册.md | W411 | 文档同步·版本 v2.3.24 W409→v2.3.26 W411·仓库已 push 至 W411 |
+| 项目认知总览.md | W411 | 文档同步·HEAD 引用 v2.3.24 W409→v2.3.26 W411 |
+| 项目概览.md | W411 | 文档同步·HEAD 引用 v2.3.24 W409→v2.3.26 W411（首次入库） |
+
 ## W405 S2 分发第二批 27 篇随笔 + 访问统计方案（2026-08-09）
 
 | 文件 | W | 说明 |

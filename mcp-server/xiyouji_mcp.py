@@ -47,6 +47,23 @@ OUTPUT_DATA = SCRIPTS / "output" / "data"
 DOCS_DIR = ROOT / "docs"
 SITE_DIR = ROOT / "site"
 
+
+class PathEscapeError(ValueError):
+    """路径越界：尝试访问项目根目录之外（P1-1 修复，防目录穿越任意文件读取）。"""
+
+
+def _resolve_within(root: Path, p: str | Path, what: str = "路径") -> Path:
+    """将 p 解析为 root 内的绝对路径；越界抛 PathEscapeError。
+
+    供各工具统一校验文件/目录参数，阻止 `../` 与越界绝对路径
+    （如 "../../etc/passwd"、".env" 相对根目录外的敏感文件）。
+    """
+    candidate = (root / Path(p)).resolve()
+    root_resolved = root.resolve()
+    if candidate != root_resolved and not candidate.is_relative_to(root_resolved):
+        raise PathEscapeError(f"{what}越界（仅允许 {root_resolved} 内）: {p}")
+    return candidate
+
 # ---------------------------------------------------------------------------
 # MCP Server
 # ---------------------------------------------------------------------------
@@ -99,9 +116,10 @@ def xiyouji_drl_spotcheck(
             "summary": str        # 人类可读总结
         }
     """
-    target = Path(file_path)
-    if not target.is_absolute():
-        target = ROOT / target
+    try:
+        target = _resolve_within(ROOT, file_path, "file_path")
+    except PathEscapeError as e:
+        return {"ok": False, "checks": [], "summary": f"ERROR: {e}"}
     checks: list[dict[str, Any]] = []
 
     if old is not None and new is not None:
@@ -220,7 +238,13 @@ def xiyouji_data_validate(
     }
 
     if file:
-        targets = [OUTPUT_DATA / file]
+        try:
+            targets = [_resolve_within(OUTPUT_DATA, file, "file")]
+        except PathEscapeError as e:
+            return {
+                "ok": False, "total": 0, "passed": 0, "failed": 1,
+                "issues": [{"file": str(file), "reason": str(e)}],
+            }
     else:
         targets = sorted(OUTPUT_DATA.glob("*.json"))
 
@@ -414,9 +438,18 @@ def xiyouji_lint_links(
             "message": str
         }
     """
-    target_dir = Path(scan_dir)
-    if not target_dir.is_absolute():
-        target_dir = ROOT / target_dir
+    try:
+        target_dir = _resolve_within(ROOT, scan_dir, "scan_dir")
+    except PathEscapeError as e:
+        return {
+            "ok": False,
+            "scanned_files": 0,
+            "total_links": 0,
+            "internal_links": 0,
+            "external_links": 0,
+            "broken": [],
+            "message": f"ERROR: {e}",
+        }
     if not target_dir.exists():
         return {
             "ok": False,
@@ -576,14 +609,24 @@ def xiyouji_a11y_audit(
         }
     """
     if file:
-        target = Path(file)
-        if not target.is_absolute():
-            target = ROOT / target
+        try:
+            target = _resolve_within(ROOT, file, "file")
+        except PathEscapeError as e:
+            return {
+                "ok": True, "scanned_files": 0,
+                "p0_count": 0, "p1_count": 0, "p2_count": 0,
+                "issues_by_file": [], "message": f"ERROR: {e}",
+            }
         html_files = [target] if target.exists() else []
     else:
-        target_dir = Path(scan_dir)
-        if not target_dir.is_absolute():
-            target_dir = ROOT / target_dir
+        try:
+            target_dir = _resolve_within(ROOT, scan_dir, "scan_dir")
+        except PathEscapeError as e:
+            return {
+                "ok": True, "scanned_files": 0,
+                "p0_count": 0, "p1_count": 0, "p2_count": 0,
+                "issues_by_file": [], "message": f"ERROR: {e}",
+            }
         html_files = sorted(target_dir.rglob("*.html")) if target_dir.exists() else []
 
     if not html_files:
