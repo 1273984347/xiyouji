@@ -16,7 +16,7 @@
 > - **执行（交接文档）**：「跨 session 接续流程」新增第 3 步「文件管控」引用文档规范 §11（11.1 必同步/11.2 禁修改）·后续步骤顺延
 > - **执行（版本同步）**：bump v2.3.31 W416（README/STRUCTURE/项目说明）+ site 页脚 4 个 + 交接文档/项目概览/项目认知总览/项目交接参考手册/workflows README 同步
 > - **验证**：verify_delivery 全绿（含"201 篇" A4 计数）
-> - **状态**：已落地·待 push·CI 验证
+> - **状态**：已落地·已 push（0a9046b）·CI/Security/Deploy Pages/Screenshot Review 全绿（纯文档变更·CI 15 job + Security 4 job）
 
 ### v2.3.30（2026-08-09）：W415 README 视觉引导增量 — 徽章区 + 图标化速览 + 首页预览截图 + 反馈段
 
