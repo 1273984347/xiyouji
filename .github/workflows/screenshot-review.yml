@@ -52,17 +52,17 @@ jobs:
     timeout-minutes: 25
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Node.js 20
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '20'
           cache: npm
           cache-dependency-path: scripts/package-lock.json
 
       - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.12'
           cache: pip
@@ -109,7 +109,7 @@ jobs:
 
       - name: Run batch screenshots (Playwright + layout assertions, blocking)
         id: batch-screenshots
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           max_attempts: 2
           timeout_minutes: 20
@@ -136,7 +136,7 @@ jobs:
 
       - name: Upload screenshot artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: screenshot-review-reports-${{ github.sha }}
           path: |

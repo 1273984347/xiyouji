@@ -48,6 +48,32 @@ A4_DOCS = ["README.md", "STRUCTURE.md",
            os.path.join("docs", "00-导读", "项目说明.md"), "交接文档.md"]
 EXPECT_A4 = "201 篇"  # W342 gap-fill（权力五联对照 W084 + 妖怪身份政治）后：199→201
 
+# 归档文件（W417 新增）：归档后旧 W### 仍纳入范围漂移可追溯扫描，避免误报
+ARCHIVE_DOCS = [
+    "CHANGELOG-ARCHIVE.md",
+    os.path.join("scripts", "output", "file-index-archive.md"),
+    "交接文档-archive.md",
+]
+
+# A1-A6 内容板块真实文件计数 vs README 声明（W417 新增，防计数声明失真）
+A_AREAS = [
+    ("A1 逐回解读", os.path.join("docs", "01-全书逐回解读")),
+    ("A2 个人随笔", os.path.join("docs", "06-个人随笔")),
+    ("A3 人物分析", os.path.join("docs", "02-人物深度分析")),
+    ("A4 主题专题", os.path.join("docs", "03-主题与情节专题")),
+    ("A5 文化背景", os.path.join("docs", "04-文化与历史背景")),
+    ("A6 诗词歌赋", os.path.join("docs", "05-诗词歌赋")),
+]
+
+
+def _count_content_md(area_dir):
+    """统计板块 .md 文件数，排除 README.md/.gitkeep 等非正文文件（各板块恰好 1 个 README.md）"""
+    p = os.path.join(ROOT, area_dir)
+    if not os.path.isdir(p):
+        return -1
+    return sum(1 for fn in os.listdir(p)
+               if fn.endswith(".md") and fn.lower() != "readme.md")
+
 
 def _read(p):
     try:
@@ -120,12 +146,15 @@ def main():
 
     # ---- 范围漂移检测 ----
     doc_w = [int(x) for x in re.findall(r"W(\d{3})", doc_all)]
+    # W417：归档文件纳入扫描——归档后旧 W### 仍可追溯，不因归档误报范围漂移
+    for a in ARCHIVE_DOCS:
+        doc_w += [int(x) for x in re.findall(r"W(\d{3})", _read(os.path.join(ROOT, a)))]
     max_w_doc = max(doc_w) if doc_w else 0
     if max_w_html > max_w_doc:
-        fail("范围漂移：%s 引用到 W%d，但六文档最高仅记到 W%d（疑似未记录的改动，需补记或回退）"
+        fail("范围漂移：%s 引用到 W%d，但六文档+归档最高仅记到 W%d（疑似未记录的改动，需补记或回退）"
              % (os.path.basename(HTML), max_w_html, max_w_doc))
     else:
-        ok("无范围漂移（html 最高 W%d ≤ 文档最高 W%d）" % (max_w_html, max_w_doc))
+        ok("无范围漂移（html 最高 W%d ≤ 文档+归档最高 W%d）" % (max_w_html, max_w_doc))
 
     # ---- A4 计数一致性 ----
     miss = []
@@ -137,6 +166,26 @@ def main():
         fail("A4 计数不一致（缺 '%s'）：%s" % (EXPECT_A4, ", ".join(miss)))
     else:
         ok("A4 计数一致（四份文档均含 '%s'）" % EXPECT_A4)
+
+    # ---- A1-A6 真实文件计数 vs README 声明（W417 新增，防计数声明失真）----
+    readme_txt = _read(os.path.join(ROOT, "README.md"))
+    m_cnt = re.search(r"共\s*(\d+)\s*篇", readme_txt)
+    actual_total = 0
+    for name, d in A_AREAS:
+        n = _count_content_md(d)
+        if n < 0:
+            warn("%s 目录缺失: %s" % (name, d))
+            continue
+        actual_total += n
+    if m_cnt:
+        declared = int(m_cnt.group(1))
+        if actual_total == declared:
+            ok("A1-A6 真实文件计数 %d 篇 == README 声明 %d 篇（排除各板块 README.md）" % (actual_total, declared))
+        else:
+            fail("A1-A6 真实文件计数 %d 篇 != README 声明 %d 篇（计数漂移，需同步 README 声明）"
+                 % (actual_total, declared))
+    else:
+        warn("README 未找到 '共 N 篇' 声明，跳过 A1-A6 计数校验")
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:

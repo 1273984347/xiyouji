@@ -2,7 +2,7 @@
 
 > 一源多形 · 数字人文可视化解读《西游记》100 回 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前版本 v2.3.31（2026-08-10）**：W416 文件管控清单标注（多 session / 多 Agent 协作·必同步 + 禁擅自修改显式化）·A1-A6 共 611 篇 + 86 可视化页（A4 W342 gap-fill 199→201 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。 + W406（截图审查纳入发布流程） + W407（修数据路径代码异味） + W408（修 static 资源路径） + W409（文档同步刷新） + W410（npm 依赖审计补充） + W411（安全审计 P0-1/P1-1 处置） + W412（安全审计剩余项处置） + W413（仓库文件策略审查） + W414（README 用户手册改造） + W415（README 视觉引导增量）
+> **当前版本 v2.3.32（2026-08-10）**：W417 文档健康治理（归档/计数校验/actions 升级/RAG 重建/bump 增强/LICENSE 边界/sitemap 补全）·A1-A6 共 611 篇 + 86 可视化页（A4 W342 gap-fill 199→201 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。 + W406（截图审查纳入发布流程） + W407（修数据路径代码异味） + W408（修 static 资源路径） + W409（文档同步刷新） + W410（npm 依赖审计补充） + W411（安全审计 P0-1/P1-1 处置） + W412（安全审计剩余项处置） + W413（仓库文件策略审查） + W414（README 用户手册改造） + W415（README 视觉引导增量） + W416（文件管控清单标注）
 
 [![在线访问](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E8%AE%BF%E9%97%AE-%E7%AB%8B%E5%8D%B3%E4%BD%93%E9%AA%8C-brightgreen?style=for-the-badge&logo=githubpages&logoColor=white)](https://1273984347.github.io/xiyouji/)
 [![双协议授权](https://img.shields.io/badge/%E5%8F%8C%E5%8D%8F%E8%AE%AE-MIT%20%2B%20CC%20BY--NC%204.0-blue)](LICENSE)
@@ -112,7 +112,7 @@ xiyouji/
 ├── .github/workflows/     # CI/Security/Deploy Pages/Lighthouse/截图审查
 ├── README.md              # 本文件（用户手册 + 开发者分区）
 ├── STRUCTURE.md           # 目录结构详细说明
-├── CHANGELOG.md           # 更新日志（W001-W416）
+├── CHANGELOG.md           # 更新日志（W001-W417）
 └── LICENSE                # 双协议授权声明
 ```
 
@@ -151,7 +151,7 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 
 ## 文档索引（双索引可追溯）
 
-- **正向索引（时间线）**：[CHANGELOG.md](CHANGELOG.md) — 按版本记录变更，每版本段标注唯一 W### ID（W001-W416）+ 四件套（来源/文件/验证/状态）。v0.1-v2.0.60 历史归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)
+- **正向索引（时间线）**：[CHANGELOG.md](CHANGELOG.md) — 按版本记录变更，每版本段标注唯一 W### ID（W001-W417）+ 四件套（来源/文件/验证/状态）。v0.1-v2.0.60 历史归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)
 - **反向索引（文件）**：[scripts/output/file-index.md](scripts/output/file-index.md) — 给定文件查改过几次、对应哪个 W 条目
 
 **W### 编号规则**：W001-W099 对应 v0.1-v2.0.72；W100+ 对应 v2.1.0+；新增 W 条目时同步更新两个索引。详细映射见 [CHANGELOG.md](CHANGELOG.md)。
@@ -182,8 +182,8 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 
 本项目采用**双协议**授权：
 
-- **源代码**（Python/JavaScript/HTML 脚本、配置文件、可视化页代码部分、GitHub Actions workflows）：[MIT License](LICENSE)
-- **文本内容**（docs/ 下所有 Markdown 原创解读/随笔/人物/专题/文化/诗词、S1 方法论、S2 学术投稿候选、S2 外部分享）：[CC BY-NC 4.0](LICENSE-CONTENT.md)（署名-非商业性使用）
+- **源代码与项目文档**（Python/JavaScript/HTML 脚本、配置文件、site/ 下 HTML/CSS/JS 的代码结构、GitHub Actions workflows、根级 README/STRUCTURE/CHANGELOG 等）：[MIT License](LICENSE)
+- **文本内容**（docs/ 下 A1-A6 内容板块与 07-09、S1 方法论、S2/S3/S4 学术投稿候选与外部分享；site/ 页面内渲染的上述原创解读文本）：[CC BY-NC 4.0](LICENSE-CONTENT.md)（署名-非商业性使用）
 
 《西游记》原著文本已进入公共领域；引用的外部网络解读版权归原作者，仅作索引与摘录，不纳入本项目协议。
 

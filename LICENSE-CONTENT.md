@@ -1,10 +1,10 @@
 # 文本内容许可证 — CC BY-NC 4.0
 
-本项目 `docs/` 下的所有 Markdown **文本内容**采用 **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** 授权。
+本项目 `docs/` 下各内容板块的 Markdown 原创**文本内容**采用 **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** 授权。
 
-适用内容：A1-A6 原创解读/随笔/人物/专题/文化/诗词、S1 方法论、S2 学术投稿候选、S2 外部分享。
+适用内容：A1-A6 内容板块（01 全书逐回解读 / 02 人物深度分析 / 03 主题与情节专题 / 04 文化与历史背景 / 05 诗词歌赋 / 06 个人随笔）、07-09（学以致用 / 提升认知 / 精神塑造）、S1 方法论沉淀、S2/S3/S4 学术投稿候选与外部分享。site/ 站点页面内渲染的上述原创解读文本同样适用本协议。
 
-> 源代码（Python/JavaScript/HTML 脚本、GitHub Actions workflows、配置文件、可视化页面代码部分）仍适用 [MIT License](LICENSE)。
+> 源代码（Python/JavaScript/HTML 脚本、GitHub Actions workflows、配置文件、site/ 下 HTML/CSS/JS 的代码结构）与根级项目文档（README/STRUCTURE/CHANGELOG/交接文档 等）仍适用 [MIT License](LICENSE)。
 
 ## 核心条款（中文摘要）
 
@@ -12,6 +12,7 @@
 - **非商业性（NC）**：**不得以主要意图获取商业利益或货币报酬的方式**行使上述权利。即他人可将内容用于学习、教学、非营利二次创作，但**不得用于销售、付费墙、商业产品、广告变现**等营利场景。
 - 原著《西游记》文本已进入公共领域，本项目引用部分不构成版权客体。
 - 引用的外部网络解读文章版权归原作者所有，本项目仅作索引与摘录，不纳入本协议。
+- `docs/` 下的导航与协作文档（00-导读 阅读指南/版本概览/文档规范/项目说明、_dev、_templates、superpowers 计划与规范等）为项目内部资产，与根级项目文档一并适用 [MIT License](LICENSE)，不适用本协议。
 
 ## 完整法律文本
 
