@@ -23,7 +23,7 @@
 > - **执行（版本同步）**：CHANGELOG/交接文档/README/STRUCTURE/项目说明/file-index/页脚 4 个/旁文档 4 份/文档规范 §11.2（W001-W420→W001-W421）
 > - **验证**：verify_delivery 全绿
 > - **处置收尾（2026-08-10）**：perf.yml 补 push 后首跑即失败——LHCI 硬预算在真实站点首次运行暴露存量性能债：index.html LCP 4662ms > 2500ms（✘）·timeline.html CLS 0.241 > 0.1（✘）·dashboard FCP 1889ms 超 warn 线。按 W400「阈值基于真实测量校准」原则校准：LCP 5000 / CLS 0.3 / FCP warn 4800 / interactive warn 5000（TBT 保持 300·首跑未越线），并登记性能债专项（index LCP ~4.7s / timeline CLS ~0.24）至交接文档待办——优化后收紧预算
-> - **状态**：已落地·已 push（待状态行收尾）·CI/Security/Deploy Pages/Screenshot Review/Lighthouse 验证中
+> - **状态**：已落地·已 push（a415d4f）·CI/Security/Deploy Pages/Screenshot Review/Lighthouse 全绿（CI 15 job + Security 4 job + Screenshot 13m + LHCI 校准后通过·Dependabot 8 校验全绿）
 
 ### v2.3.36（2026-08-10）：W421 Screenshot Review 提速优化 — 改动范围判定（页脚/文档-only 跳过·data 页定向截图）+ Playwright 浏览器缓存
 
