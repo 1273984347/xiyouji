@@ -418,3 +418,23 @@
 | .github/workflows/security.yml | W417 | v2.3.32 修改·actions 升级（checkout v7/setup-python v7 等） |
 | scripts/output/rag_index.json | W417 | v2.3.32 重建验证·删除后自动重建成功（32.39→35.26MB·gitignored 不提交） |
 | docs/00-导读/文档规范.md | W417 | v2.3.32 修改·§11.2 禁改范围 W001-W414→W001-W416 + 新增「误改后果」列·新增 §11.4 同步核对速查表（10 项勾选清单·W 完成后逐项核对） |
+
+## W418 内容质量深化（2026-08-10·v2.3.33）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/guide.html | W418 | v2.3.33 修改·修复 25 处 broken 链接（data/xxx.html 前缀错误）——EN 版存在指向同目录（chapter-stats/narrative-rhythm-curve/81-hardships/character-appearance/chapter-structure-graph）·无 EN 版回退中文原版 ../data/*.html 加 lang="zh-CN" 标注（text-search 等 20 处） |
+| site/en/character-relationship-3d.html | W418 | v2.3.33 修改·修复 2 处 broken（character-dynamic-network/relationships → ../data/ + lang="zh-CN"） |
+| site/en/chapter-structure-graph.html | W418 | v2.3.33 修改·修复 1 处 broken（timeline.html → ../data/timeline.html + lang="zh-CN"） |
+| site/en/narrative-rhythm-curve.html | W418 | v2.3.33 修改·修复 1 处 broken（timeline.html → ../data/timeline.html + lang="zh-CN"） |
+| docs/01-全书逐回解读/第0XX回-*.md（23 回） | W418 | v2.3.33 修改·补 `> 导航：` 引用行（返回导读/上一回/下一回/站点首页/通用可视化）——019/020/021/031/035/042/043/044/048/051/052/055/071/075/076/082/083/084/087/089/091/092/097 回·100 回导航全覆盖 |
+| site/dukou-engine.html | W418 | v2.3.33 修改·页脚插入 v2.3.33 W418 段（内容质量深化） |
+| site/index.html | W418 | v2.3.33 修改·页脚 v2.3.33 · W418 |
+| site/data/cross-time-danmaku.html | W418 | v2.3.33 修改·页脚 v2.3.33 · W418 |
+| site/data/tag-cloud.html | W418 | v2.3.33 修改·页脚 v2.3.33 · W418 |
+| CHANGELOG.md | W418 | v2.3.33 修改·新增 v2.3.33 W418 段·W### 编号规则 W001-W417→W001-W418 |
+| scripts/output/file-index.md | W418 | v2.3.33 修改·本段（W418 登记）·W417 历史段页脚 3 行恢复（bump 全局替换污染修复） |
+| README.md | W418 | v2.3.33 修改·版本行 v2.3.33 W418·W 范围 W001-W418 |
+| STRUCTURE.md | W418 | v2.3.33 修改·头部版本行 v2.3.33 W418 |
+| docs/00-导读/项目说明.md | W418 | v2.3.33 修改·头部 + "当前版本"行 v2.3.33 W418 |
+| 交接文档.md | W418 | v2.3.33 修改·头部/阻塞段 HEAD/当前进度 W418 里程碑/版本号列表 v2.3.33 + 接续编号（当前 W418·下一 W419） |

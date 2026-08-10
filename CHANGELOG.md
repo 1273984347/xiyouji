@@ -4,11 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W417），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W418），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.18+（W400）。
 
-### v2.3.32（2026-08-10）：W417 文档健康治理 — P0-P2 全优先级处置（归档/计数校验/actions 升级/RAG 重建/bump 增强/LICENSE 边界/sitemap 补全）
+### v2.3.33（2026-08-10）：W418 内容质量深化 — 全站死链巡检（en 站 29 broken 修复 + A1 逐回 100 回导航全覆盖）
+
+> **W418 内容质量深化（承接交接文档「二、候选清单」优先级零·用户选定"内容质量深化"方向）**
+> - **来源**：新接任 Agent 按流程调研后用户选定方向"内容质量深化（全站健康巡检：死链检测 + 术语统一 + A1 逐回交叉引用/结构化元数据）"
+> - **执行（全站死链检测）**：`python scripts/lint_links.py --dir docs/` 4623 链接 0 broken·`--dir site/` 2629 链接 **29 broken**——全部集中在 site/en/ 英文站（guide.html 25 处 + character-relationship-3d 2 处 + chapter-structure-graph/narrative-rhythm-curve 各 1 处·指向不存在的 site/en/data/*.html 与 timeline.html）
+> - **执行（en 站 broken 链接修复）**：按 visualizations.html 惯例修复 29 处——**EN 版存在指向同目录**（guide.html 中 chapter-stats/narrative-rhythm-curve/81-hardships/character-appearance/chapter-structure-graph 5 页）+ **无 EN 版回退中文原版 `../data/*.html` 加 `lang="zh-CN"` 标注**（text-search/character-dynamic-network/mbti-evolution/philosophy/counterfactual/monster-sociology/criticism-history/text-evolution/material-archaeology/data-explorer/timeline/poetry-rhythm-analysis/language-style-radar/deconstruction/tag-cloud/graph-explorer/cross-time-danmaku/century-dialogue/relationships 等·中文原版文件全部经 Glob 验证存在）·临时脚本精确替换后删除
+> - **执行（A1 逐回交叉引用补全）**：100 回中 23 回缺标准 `> 导航：` 引用行（13 回完全无导航 + 10 回仅有段落式「## 前后回导航」）——按第003回格式补「返回导读/上一回（第0XX回）/下一回/站点首页/人物关系/人物出场/哲学可视化」引用行（插于「## 深度解读」前·第071回插于「## 前后回」前）·100 回导航全覆盖 100/100
+> - **执行（验证）**：`lint_links --dir site/` 2629 链接 **0 broken**·`--dir docs/` 4784 链接 **0 broken**·`--dir docs/01-全书逐回解读/` 1640 链接 0 broken·Grep spot-check 新 href 落地（lang="zh-CN" 标注命中）
+> - **执行（版本同步）**：bump v2.3.33 W418（README/STRUCTURE/项目说明 + file-index + 交接文档 + CHANGELOG + 页脚 3 个）+ site/dukou-engine.html 页脚人工插入 + 旁文档 4 份同步
+> - **验证**：verify_delivery 全绿（待跑）
+> - **状态**：已落地·待 push
+> - **处置收尾（2026-08-10）**：bump_version 全局替换污染 file-index W417 历史段页脚 3 行（v2.3.33 W418 误入）——按 E2 判据恢复历史段原值（v2.3.32 · W417）+ 正确登记至 W418 段；README/STRUCTURE/项目说明三处版本行主描述被 bump 简化（W418 裸号）——人工补全 W418 主描述（内容质量深化：全站死链巡检 + A1 导航全覆盖）。
 
 > **W417 文档健康治理（承接用户"你认为还有我没发现或者没想到的潜在问题吗 → 按照优先级顺序全部处理"）**
 > - **来源**：用户评估潜在问题清单后指令"按照优先级顺序全部处理"（P0-3 高优先级 + P1-2 中优先级 + P2-2 低优先级）
