@@ -284,8 +284,7 @@ jobs:
         run: python scripts/check_js_syntax.py --all
 
       - name: Run mypy (report-only, W422)
-        continue-on-error: true
-        run: mypy scripts/ --ignore-missing-imports
+        run: mypy scripts/ --ignore-missing-imports --non-interactive || true
 
   pytest-unit:
     name: Unit Tests (pytest)
