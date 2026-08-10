@@ -19,17 +19,17 @@ jobs:
     name: Screenshots Regression (Playwright)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Node.js 20
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: "20"
           cache: npm
           cache-dependency-path: scripts/package-lock.json
 
       - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           # W401 修复：本 job 不安装 pip 依赖（仅 npm playwright），移除 cache: pip 避免 Post 步骤缓存目录缺失报错（同 W400 a11y-audit 修复）
@@ -93,7 +93,7 @@ jobs:
 
       - name: Upload screenshots artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: screenshots-${{ github.sha }}
           path: |
@@ -104,7 +104,7 @@ jobs:
 
       - name: Upload diff images on failure
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: screenshots-diff-${{ github.sha }}
           path: |
@@ -117,15 +117,15 @@ jobs:
     name: Lighthouse Performance (perf/a11y/bp/seo)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Node.js 20
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: "20"
 
       - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           # W401 修复：本 job 不安装 pip 依赖（仅 npx lighthouse），移除 cache: pip 避免 Post 步骤缓存目录缺失报错（同 W400 a11y-audit 修复）
@@ -138,7 +138,7 @@ jobs:
           curl -sSf http://localhost:8000/dashboard.html -o /dev/null
 
       - name: Run Lighthouse audit
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           max_attempts: 3
           timeout_minutes: 15
@@ -177,7 +177,7 @@ jobs:
 
       - name: Upload lighthouse report artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: lighthouse-report
           path: |
@@ -195,17 +195,17 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ["3.10", "3.11", "3.12"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
           # W400 修复：移除 cache: pip —— a11y_audit.py 仅用标准库，job 不安装 pip 依赖，
           # 缓存目录不存在导致 Post 步骤报 ##[error] 使 job 失败（windows/ubuntu py3.10-3.11 复现）
 
       - name: Run a11y audit (W264-E2 9 规则脚本)
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           max_attempts: 3
           timeout_minutes: 10
@@ -213,7 +213,7 @@ jobs:
 
       - name: Upload a11y report artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: a11y-report-${{ matrix.os }}-py${{ matrix.python-version }}
           path: |
@@ -226,10 +226,10 @@ jobs:
     name: Dependency Scan (pip-audit)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
@@ -239,7 +239,7 @@ jobs:
         run: pip install pip-audit
 
       - name: Run pip-audit
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           max_attempts: 3
           timeout_minutes: 10
@@ -247,7 +247,7 @@ jobs:
 
       - name: Upload pip-audit report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: pip-audit-report
           path: pip-audit-report.json
@@ -258,10 +258,10 @@ jobs:
     name: Code Quality (ruff + black)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
@@ -271,7 +271,7 @@ jobs:
         run: pip install ruff black
 
       - name: Run ruff check
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           max_attempts: 3
           timeout_minutes: 5
@@ -284,10 +284,10 @@ jobs:
     name: Unit Tests (pytest)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
@@ -305,10 +305,10 @@ jobs:
     name: Agent Web Build (xiyouji-agent-web)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Node.js 20
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: "20"
           cache: npm
@@ -322,7 +322,7 @@ jobs:
 
       - name: Upload build artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: agent-web-dist-${{ github.sha }}
           path: xiyouji-agent-web/dist

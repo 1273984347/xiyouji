@@ -10,8 +10,14 @@ bump_version.py — 降级六文档同步（W393）的辅助同步工具
   python scripts/bump_version.py                 # 自动从 site/dukou-engine.html 读 v/W，note 取 W 号
   python scripts/bump_version.py --note "W393 降级六文档同步"
   python scripts/bump_version.py --version v2.3.18 --w W393 --note "发布说明"
+  python scripts/bump_version.py --desc "W417 文档健康治理"   # 同时替换版本行主描述（W417 增强）
 
 零依赖：仅标准库。幂等：重复运行不产生重复条目。
+
+W417 增强（修复 W413/W414/W415 三次同模式踩坑）：
+  1) --desc 替换版本行主描述（此前只改版本号+追加 W，主描述仍是旧 W，需手动补）
+  2) 全文件 W001-W### 范围替换（README 开发者区/双索引等深处残留一次性清零）
+  3) 页脚 3 个简单页脚（index/cross-time-danmaku/tag-cloud）自动同步
 """
 
 import argparse
@@ -29,6 +35,14 @@ AUX_VERSION_DOCS = [
     os.path.join("docs", "00-导读", "项目说明.md"),
 ]
 FILE_INDEX = os.path.join(ROOT, "scripts", "output", "file-index.md")
+
+# W417 增强：W 范围替换 + 页脚 3 个简单页脚同步
+SYNC_DOCS = AUX_VERSION_DOCS + [FILE_INDEX,
+                                os.path.join(ROOT, "交接文档.md"),
+                                os.path.join(ROOT, "CHANGELOG.md"),
+                                os.path.join(ROOT, "site", "index.html"),
+                                os.path.join(ROOT, "site", "data", "cross-time-danmaku.html"),
+                                os.path.join(ROOT, "site", "data", "tag-cloud.html")]
 
 
 def _read(p):
@@ -53,11 +67,21 @@ def parse_footer():
     return m.group(1), "W" + m.group(2)
 
 
-def bump_version_line(c, old_ver, new_ver, w, note):
-    """替换「当前版本」行中的版本号，并确保含 W token（缺失则追加）。"""
+def bump_version_line(c, old_ver, new_ver, w, note, desc=None):
+    """替换「当前版本」行：版本号 + 主描述（--desc）+ 确保含 W token。"""
     def repl(mt):
         line = mt.group(0)
         line = line.replace("v" + old_ver, "v" + new_ver)
+        # 主描述替换（W417 增强）：把行首 "：W### 旧描述（…）" 换成新 W + desc（剥离 desc 的 W 前缀防重复）。
+        # 仅匹配首个括号（[^）\n] 禁跨括号嵌套），且不带 \s*· 后缀——避免吞掉 "）— A1-A6 共 611 篇（…201 篇）·" 等后续内容（W417 实测修复）
+        if desc and w not in line:
+            desc_clean = re.sub(r"^W\d{3}\s*", "", desc).strip()
+            line = re.sub(
+                r"([：:])\s*W\d{3}[^\n]*?（[^）\n]*?）",
+                lambda m2: m2.group(1) + " " + w + " " + desc_clean,
+                line,
+                count=1,
+            )
         if w not in line:
             line = line.rstrip() + " + " + w + ("（" + note + "）" if note else "") + "\n"
         return line
@@ -75,6 +99,7 @@ def main():
     ap.add_argument("--version", help="目标版本号，如 v2.3.18（缺省读页脚）")
     ap.add_argument("--w", help="目标 W 号，如 W393（缺省读页脚）")
     ap.add_argument("--note", default="", help="里程碑一句话说明")
+    ap.add_argument("--desc", default="", help="W417 增强：新版本行主描述（如 'W417 文档健康治理'）")
     args = ap.parse_args()
 
     if args.version and args.w:
@@ -84,6 +109,7 @@ def main():
         new_ver, w = parse_footer()
 
     note = args.note or w
+    desc = args.desc or note
     today = datetime.date.today().isoformat()
 
     # 从某份辅助文档的「当前版本」行推断旧版本号
@@ -97,15 +123,34 @@ def main():
         print("ERROR 无法推断旧版本号（辅助文档缺少「当前版本 vX.Y.Z」）")
         sys.exit(2)
 
+    old_w = str(int(w[1:]) - 1).zfill(3)
     changed = []
 
-    # 1) 三份版本文档：更新版本行 + 补 W token
+    # 0) W417 增强：全文件 W001-W### 范围替换 + 页脚 3 个 v/W 替换
+    for p in SYNC_DOCS:
+        c = _read(p)
+        if not c:
+            continue
+        c2 = c
+        # W001-W### 现役范围声明替换（W417 增强）：仅命中精确现役锚点，
+        # 绝不触碰历史描述（"W001-W087 已归档"/"W001-W099 对应"/W414 段内旧范围）
+        c2 = re.sub(r"W### ID（W001-W\d{3}）", "W### ID（W001-" + w + "）", c2)      # CHANGELOG 编号规则 + README 双索引
+        c2 = re.sub(r"# 更新日志（W001-W\d{3}）", "# 更新日志（W001-" + w + "）", c2)  # README 目录树
+        c2 = re.sub(r"正向时间线，W001-W\d{3}；", "正向时间线，W001-" + w + "；", c2)  # 交接文档 CHANGELOG 范围
+        # 页脚简单格式（index/cross-time-danmaku/tag-cloud）：v2.3.30 · W415
+        c2 = re.sub(r"v" + re.escape(old_ver) + r"\s*·\s*W" + old_w,
+                    "v" + new_ver + " · " + w, c2)
+        if c2 != c:
+            _write(p, c2)
+            changed.append(p)
+
+    # 1) 三份版本文档：更新版本行 + 补 W token + 主描述（--desc）
     for d in AUX_VERSION_DOCS:
         p = os.path.join(ROOT, d)
         c = _read(p)
         if not c:
             continue
-        new_c = bump_version_line(c, old_ver, new_ver, w, note)
+        new_c = bump_version_line(c, old_ver, new_ver, w, note, desc)
         if new_c != c:
             _write(p, new_c)
             changed.append(d)
@@ -127,6 +172,9 @@ def main():
         print("  - " + f)
     if not changed:
         print("  （辅助文档均已是最新 v%s %s，无改动）" % (new_ver, w))
+    print("提示（W417）：")
+    print("  - site/dukou-engine.html 页脚为长链格式，需人工在头部插入 v%s %s 段" % (new_ver, w))
+    print("  - 交接文档「Git HEAD」/版本号列表/接续编号（当前 W%s·下一 W%d）需人工核对" % (old_w, int(w[1:]) + 1))
 
 
 if __name__ == "__main__":
