@@ -57,6 +57,7 @@ function parseArgs(argv) {
     outputDir: path.join(ROOT, 'scripts', 'output', 'screenshots'),
     viewports: { ...DEFAULT_VIEWPORTS },
     extraPages: [...DEFAULT_EXTRA_PAGES],
+    onlyPages: null,
     failOnIssues: false,
   };
 
@@ -73,6 +74,9 @@ Options:
   --mobile WxH           Mobile viewport, e.g. 375x812 (default)
   --extra-pages LIST     Comma-separated "file:dir" pairs relative to project root,
                          e.g. "dashboard.html:site,index.html:site"
+  --only-pages LIST      Screenshot ONLY the given "file:dir" pages (replaces the full
+                         site/data scan; e.g. "index.html:site,81-hardships.html:site/data").
+                         Useful for CI targeted review of changed pages.
   --fail-on-issues       Exit with code 1 if any capture error, page error,
                          console error or layout issue is detected (CI mode).
   --help, -h             Show this help
@@ -90,6 +94,9 @@ Options:
         break;
       case '--extra-pages':
         config.extraPages = parseExtraPages(args[++i]);
+        break;
+      case '--only-pages':
+        config.onlyPages = parseExtraPages(args[++i]);
         break;
       case '--fail-on-issues':
         config.failOnIssues = true;
@@ -280,9 +287,16 @@ async function main() {
   const outDirs = { desktop: desktopDir, mobile: mobileDir };
 
   const dataPages = listPages();
-  const pages = allPages(config.extraPages);
-  const extraDesc = config.extraPages.map((p) => p.file).join(' + ');
-  console.log(`Found ${dataPages.length} visualization pages + ${config.extraPages.length} top-level pages (${extraDesc}).`);
+  const pages =
+    config.onlyPages && config.onlyPages.length
+      ? config.onlyPages
+      : allPages(config.extraPages);
+  if (config.onlyPages && config.onlyPages.length) {
+    console.log(`只截 ${config.onlyPages.length} 个指定页面: ${config.onlyPages.map((p) => p.file).join(', ')}`);
+  } else {
+    const extraDesc = config.extraPages.map((p) => p.file).join(' + ');
+    console.log(`Found ${dataPages.length} visualization pages + ${config.extraPages.length} top-level pages (${extraDesc}).`);
+  }
 
   let browser;
   try {
@@ -330,7 +344,7 @@ async function main() {
     '',
     `生成时间：${new Date().toLocaleString('zh-CN')}`,
     `可视化页面数：${dataPages.length} 个（site/data/*.html）`,
-    `顶层页面数：${config.extraPages.length} 个（${extraDesc}）`,
+    `顶层页面数：${config.extraPages.length} 个（${config.extraPages.map((p) => p.file).join(' + ')}）`,
     `视图口：desktop (${config.viewports.desktop.width}x${config.viewports.desktop.height}) + mobile (${config.viewports.mobile.width}x${config.viewports.mobile.height})`,
     '',
     '## 结果汇总',

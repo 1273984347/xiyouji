@@ -1,6 +1,6 @@
 name: Screenshot Review
 
-# W298 E1 截图审查 CI 化 · v2.2.59
+# W298 E1 截图审查 CI 化 · v2.2.59 · W421 提速优化（2026-08-10）
 #
 # 将三个截图审查脚本纳入 GitHub Actions CI：
 #   1. detect_unwrapped_tables.py — 静态扫描 HTML，检测未包裹 table（阻断）
@@ -13,6 +13,17 @@ name: Screenshot Review
 #   - PR 改动 site/ 或三个脚本自身时
 #   - 每周一次定期审查（防止 site/ 长期静默退化）
 #   - workflow_dispatch 手动触发
+#
+# W421 提速（用户反馈"每次版本 bump 都触发 13 分钟全量截图很浪费时间"）：
+#   - 「改动范围判定」步骤（Checkout 后立即执行）：
+#     * 仅改动页脚版本号（dukou-engine/index/cross-time-danmaku/tag-cloud）或非可视化文件
+#       （docs/scripts 除审查三件套/source/tests/根级文档等）→ 直接跳过，整个 job ~20s 完成
+#     * 仅改动 site/data/*.html → 定向截图：仅截变更页 + index/dashboard（~2-4 分钟）
+#     * 改动 site/static、assets、site 非页脚顶层页、审查脚本或本工作流 → 全量 88 页（保持原强度）
+#     * 未知路径保守按全量处理；schedule / workflow_dispatch 恒为全量
+#   - Playwright 浏览器缓存（key 跟随 scripts/package-lock.json），省去每次 ~2 分钟下载
+#   - 已知取舍：页脚 4 文件的真实布局改动也会被跳过（文件级判定无法区分"版本号行"与"布局行"），
+#     由每周定时全量审查 + PR 全量兜底覆盖；如需严格化可升级为 diff 内容级判定
 #
 # 失败阈值：
 #   - detect_unwrapped_tables.py 找到未包裹 table → exit 1 阻断
@@ -53,8 +64,87 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      # W421：改动范围判定 —— 页脚/文档-only 跳过，data 页变更定向，其余全量
+      - name: Determine screenshot scope (W421 skip / targeted / full)
+        id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          EVENT="${{ github.event_name }}"
+          if [ "$EVENT" = "push" ]; then
+            BEFORE="${{ github.event.before }}"
+            if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+              CHANGED=$(git diff --name-only HEAD~1 HEAD || true)
+            else
+              CHANGED=$(git diff --name-only "$BEFORE" "${{ github.sha }}")
+            fi
+          elif [ "$EVENT" = "pull_request" ]; then
+            CHANGED=$(git diff --name-only "${{ github.event.pull_request.base.sha }}...${{ github.sha }}")
+          else
+            # schedule / workflow_dispatch：恒为全量
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+            echo "scope=full" >> "$GITHUB_OUTPUT"
+            echo "## 截图审查：全量（$EVENT 触发）" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          NEEDED=false
+          SCOPE=skip
+          ONLY="index.html:site,dashboard.html:site"
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            case "$f" in
+              # 页脚版本号免审（版本 bump 常态；真实布局改动由每周全量 + PR 兜底）
+              site/dukou-engine.html|site/index.html|site/data/cross-time-danmaku.html|site/data/tag-cloud.html)
+                ;;
+              # 可视化数据页变更 → 定向截图（变更页 + 入口页）
+              site/data/*)
+                NEEDED=true
+                SCOPE=targeted
+                ONLY="$ONLY,${f##*/}:site/data"
+                ;;
+              # 影响全站布局/样式的变更 → 全量
+              site/*|assets/*|scripts/batch_screenshots.js|scripts/slice_screenshots.py|scripts/detect_unwrapped_tables.py|.github/workflows/screenshot-review.yml)
+                NEEDED=true
+                SCOPE=full
+                ;;
+              # 非可视化变更 → 免审
+              scripts/*|docs/*|source/*|dataset/*|references/*|timeline/*|tools/*|mcp-server/*|xiyouji-agent-web/*|hyperframes/*|tests/*|.github/*|*.md|Makefile|LICENSE*|CITATION.cff|CONTRIBUTING.md|pyproject.toml|pytest.ini|mypy.ini|.gitignore|.pre-commit-config.yaml|.eslintrc.json|.env.example)
+                ;;
+              # 未知路径：保守全量
+              *)
+                NEEDED=true
+                SCOPE=full
+                ;;
+            esac
+          done <<< "$CHANGED"
+
+          if [ "$NEEDED" = "true" ]; then
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+            echo "scope=$SCOPE" >> "$GITHUB_OUTPUT"
+            if [ "$SCOPE" = "targeted" ]; then
+              echo "only_pages=$ONLY" >> "$GITHUB_OUTPUT"
+            fi
+            echo "## 截图审查：$SCOPE" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+            echo "scope=skip" >> "$GITHUB_OUTPUT"
+            COUNT=$(printf '%s\n' "$CHANGED" | sed '/^$/d' | wc -l)
+            {
+              echo "## 截图审查：已跳过（W421）"
+              echo ""
+              echo "本次改动（$COUNT 个文件）仅涉及页脚版本号/非可视化文件，无需全量截图。"
+              echo ""
+              echo "触发条件：改动 site/data/*.html、site/static、assets、审查脚本或工作流自身。"
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: Set up Node.js 20
+        if: steps.scope.outputs.needed == 'true'
         uses: actions/setup-node@v7
         with:
           node-version: '20'
@@ -62,22 +152,33 @@ jobs:
           cache-dependency-path: scripts/package-lock.json
 
       - name: Set up Python 3.12
+        if: steps.scope.outputs.needed == 'true'
         uses: actions/setup-python@v7
         with:
           python-version: '3.12'
           cache: pip
           cache-dependency-path: scripts/requirements.txt
 
+      - name: Cache Playwright browsers (W421)
+        if: steps.scope.outputs.needed == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('scripts/package-lock.json') }}
+
       - name: Install Python deps (Pillow)
+        if: steps.scope.outputs.needed == 'true'
         run: pip install -r scripts/requirements.txt
 
       - name: Install Playwright
+        if: steps.scope.outputs.needed == 'true'
         run: |
           npm install playwright @playwright/test
           npx playwright install --with-deps chromium
 
       - name: Detect unwrapped tables (baseline diff, blocking on new entries)
         id: table-scan
+        if: steps.scope.outputs.needed == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -109,20 +210,26 @@ jobs:
 
       - name: Run batch screenshots (Playwright + layout assertions, blocking)
         id: batch-screenshots
+        if: steps.scope.outputs.needed == 'true'
         uses: nick-fields/retry@v4
         with:
           max_attempts: 2
           timeout_minutes: 20
-          command: node scripts/batch_screenshots.js --fail-on-issues
+          command: |
+            if [ "${{ steps.scope.outputs.scope }}" = "targeted" ]; then
+              node scripts/batch_screenshots.js --fail-on-issues --only-pages "${{ steps.scope.outputs.only_pages }}"
+            else
+              node scripts/batch_screenshots.js --fail-on-issues
+            fi
 
       - name: Slice screenshots (800px chunks, non-blocking)
         id: slice
-        if: always() && steps.batch-screenshots.outcome == 'success'
+        if: steps.batch-screenshots.outcome == 'success'
         continue-on-error: true
         run: python scripts/slice_screenshots.py
 
       - name: Summarize results
-        if: always()
+        if: steps.scope.outputs.needed == 'true'
         run: |
           echo "## W298 截图审查结果" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -135,7 +242,7 @@ jobs:
           echo "完整报告见 \`screenshot-review-reports\` artifact。" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload screenshot artifacts
-        if: always()
+        if: steps.scope.outputs.needed == 'true'
         uses: actions/upload-artifact@v7
         with:
           name: screenshot-review-reports-${{ github.sha }}
@@ -149,3 +256,4 @@ jobs:
           if-no-files-found: ignore
           retention-days: 30
 # FILE_INDEX: .github/workflows/screenshot-review.yml | W406 | E1 截图审查触发修复：补 push main 触发（对齐 ci.yml W399），使审查在真实发布路径运行
+# FILE_INDEX: .github/workflows/screenshot-review.yml | W421 | 提速优化：改动范围判定（页脚/文档-only 跳过·data 页定向截图）+ Playwright 浏览器缓存

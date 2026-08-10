@@ -4,9 +4,27 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W420），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W421），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.18+（W400）。
+
+### v2.3.36（2026-08-10）：W421 Screenshot Review 提速优化 — 改动范围判定（页脚/文档-only 跳过·data 页定向截图）+ Playwright 浏览器缓存
+
+> **W421 Screenshot Review 提速优化（承接用户反馈"为什么每次都要 Screenshot Review？很浪费时间怎么优化一下"）**
+> - **来源**：用户反馈每次版本 bump（页脚 4 文件）都触发 13 分钟全量 88 页截图审查很浪费时间
+> - **根因**：screenshot-review.yml 的 paths 过滤为 `site/**`——版本 bump 必然改 4 个 site 页脚 → 每次 W 都触发全量截图；batch_screenshots.js 串行截 88 页 × 2 视口（176 张全页截图 + 每页 2s D3 落定），batch 步骤约 8-9 分钟
+> - **执行（改动范围判定步骤）**：Checkout 后新增 "Determine screenshot scope"（bash diff 分类）：
+>   - 仅改动页脚 4 文件或非可视化文件（docs/scripts 除审查三件套/source/tests/根级文档等）→ **跳过**，job ~20s 完成（含 checkout + diff）
+>   - 仅改动 site/data/*.html → **定向截图**：只截变更页 + index/dashboard（~2-4 分钟）
+>   - 改动 site/static/assets/site 非页脚顶层页/审查脚本/工作流自身 → **全量** 88 页（保持原强度）；未知路径保守全量
+>   - schedule / workflow_dispatch 恒为全量（每周定时兜底）
+> - **执行（batch_screenshots.js --only-pages）**：新增 `--only-pages "file:dir,..."` 参数（替换全量页面列表）——本地实测 2 页 × 2 视口 4 张截图 ~14-20s；--help/汇总报告同步更新
+> - **执行（其他）**：Checkout 加 `fetch-depth: 0`（保证 `github.event.before`/`pull_request.base.sha` 本地可用，fetch-depth 1 时 git diff 会失败）·Playwright 浏览器缓存（actions/cache@v4·key 跟随 scripts/package-lock.json·省去每次 ~2 分钟下载）·跳过时 GITHUB_STEP_SUMMARY 输出原因
+> - **执行（已知取舍）**：页脚 4 文件的真实布局改动也会被跳过（文件级判定无法区分"版本号行"与"布局行"），由每周定时全量 + PR 兜底；如需严格化可升级为 diff 内容级判定（已在 workflow 头注释记录）
+> - **执行（验证）**：本地定向截图实测通过（4 张 PNG + 汇总报告正常）·判定逻辑 10 样例推演全对（页脚-only→skip·data 页→targeted·static/脚本/workflow/未知→full）·YAML 经 GitHub 推送校验（workflow 自身变更触发全量运行自验证）
+> - **执行（版本同步）**：CHANGELOG/交接文档/README/STRUCTURE/项目说明/file-index/页脚 4 个/旁文档 4 份/文档规范 §11.2（W001-W419→W001-W420）
+> - **验证**：verify_delivery 全绿
+> - **状态**：已落地·已 push（待状态行收尾）·CI/Security/Deploy Pages/Screenshot Review 验证中
 
 ### v2.3.35（2026-08-10）：W420 A1 内容质量深化 — 深度解读 100/100 补全（SD102/SD103）+ 56 回结构化元数据补齐 + 99 回导航错链修复
 
