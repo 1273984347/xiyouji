@@ -21,7 +21,7 @@
 > - **执行（P2-2 memory 过时描述修正 + sitemap 补全）**：project_memory E3 段"交接文档需 git add -f"过时描述修正（实测已 tracked 未被忽略）·sitemap.xml 补全漏收录页 69→154（en/ 全套 + 入口页 + data/ 内容页·排除模板/预览/统计页 7 个·XML 合法无断链）
 > - **执行（版本同步）**：bump v2.3.32 W417（README/STRUCTURE/项目说明 + file-index + 交接文档 + CHANGELOG + 页脚 3 个）+ site/dukou-engine.html 页脚人工插入 + site/index.html 页脚 + 旁文档 4 份同步
 > - **验证**：verify_delivery 全绿（含 A1-A6 真实文件计数 611 篇校验 + 归档文件范围漂移扫描）
-> - **状态**：已落地·已 push（本次 commit）·CI/Security/Deploy Pages/Screenshot Review 待验证
+> - **状态**：已落地·已 push（dafc336）·CI/Security/Deploy Pages/Screenshot Review 全绿（CI 15 job + Security 4 job·actions 升级后无 Node 20 告警）
 
 
 ### v2.3.31（2026-08-10）：W416 文件管控清单标注 — 多 session / 多 Agent 协作文件权限显式化
