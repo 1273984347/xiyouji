@@ -417,3 +417,4 @@
 | .github/workflows/screenshot-review.yml | W417 | v2.3.32 修改·actions 升级（upload-artifact v7 等） |
 | .github/workflows/security.yml | W417 | v2.3.32 修改·actions 升级（checkout v7/setup-python v7 等） |
 | scripts/output/rag_index.json | W417 | v2.3.32 重建验证·删除后自动重建成功（32.39→35.26MB·gitignored 不提交） |
+| docs/00-导读/文档规范.md | W417 | v2.3.32 修改·§11.2 禁改范围 W001-W414→W001-W416 + 新增「误改后果」列·新增 §11.4 同步核对速查表（10 项勾选清单·W 完成后逐项核对） |
