@@ -22,6 +22,7 @@
 > - **执行（版本同步）**：bump v2.3.32 W417（README/STRUCTURE/项目说明 + file-index + 交接文档 + CHANGELOG + 页脚 3 个）+ site/dukou-engine.html 页脚人工插入 + site/index.html 页脚 + 旁文档 4 份同步
 > - **验证**：verify_delivery 全绿（含 A1-A6 真实文件计数 611 篇校验 + 归档文件范围漂移扫描）
 > - **状态**：已落地·已 push（dafc336）·CI/Security/Deploy Pages/Screenshot Review 全绿（CI 15 job + Security 4 job·actions 升级后无 Node 20 告警）
+> - **处置收尾（2026-08-10）**：文档规范 §11 门禁清单表格化——§11.2 禁改范围 W001-W414→W001-W416（E2 深处残留：范围未随 W417 更新）+ 新增「误改后果」列（12 类禁改文件均附违反后果）；新增 §11.4 同步核对速查表（10 项勾选清单：6 核心 + 4 旁文档 + 4 页脚 + verify + CI 收尾·新 Agent 提交前逐项打勾）。同步检查结论：14 项同步文件（6 核心 + 4 旁 + 4 页脚）全部含 v2.3.32/W417 无遗漏。
 
 
 ### v2.3.31（2026-08-10）：W416 文件管控清单标注 — 多 session / 多 Agent 协作文件权限显式化
