@@ -15,7 +15,8 @@
 > - **执行（README 增量）**：顶部新增徽章区 3 枚 shields.io（在线访问 brightgreen 大按钮式·双协议授权 MIT + CC BY-NC 4.0·部署状态 pages.yml workflow）·「内容导航表」改为「🎁 你将会看到什么」8 条 emoji 图标化速览（📖逐回解读/🕸️人物分析/🗺️主题专题/📚文化背景/📜诗词/💭随笔/📊可视化/🔍术语表·各带链接）·在线体验区插入站点首页预览截图（assets/images/index-preview.png·Playwright 1280×900 截图 108.7KB·PNG 头校验通过·临时脚本已删）·底部新增「💬 反馈与建议」（issues 链接）·开发者/维护者专区新增「技术栈」段（D3.js/Three.js/Python/原生 HTML/CodeBuddy Agent SDK/GitHub Actions）
 > - **执行（版本同步）**：bump v2.3.30 W415（README/STRUCTURE/项目说明）+ site 页脚 4 个（dukou-engine/index/cross-time-danmaku/tag-cloud）+ 交接文档/项目概览/项目认知总览/项目交接参考手册/workflows README 同步
 > - **验证**：verify_delivery 全绿（含"201 篇" A4 计数）·index-preview.png PNG 头校验通过（108.7KB）
-> - **状态**：已落地·已 push（696fdd0）·CI/Security/Deploy Pages/Screenshot Review 全绿（纯文档变更·CI 15 job + Security 4 job）
+> - **处置收尾（2026-08-10·文档最新性审查）**：用户要求审查交接文档等是否全部最新 → 修复 5 处过时残留（交接文档 W414 段状态行"待 push"→已 push 83a2d87 全绿·W413 段验证行"（待跑）"→已跑·候选清单 RAG 阻塞"唯独阻塞"→标注 W402 已解除·待办 RAG [ ]→[x]·核心问题段补 W402 解除标注）+ 项目说明待办 2 处标记完成（v0.9.1 回归/截图审查 W406）·verify_delivery 全绿
+> - **状态**：已落地·已 push（696fdd0 + 审查修复 commit）·CI/Security/Deploy Pages/Screenshot Review 全绿（纯文档变更·CI 15 job + Security 4 job）
 
 ### v2.3.29（2026-08-09）：W414 README 用户手册改造 — 普通读者入口 + 开发者分区两级引导
 
