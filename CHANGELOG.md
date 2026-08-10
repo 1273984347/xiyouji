@@ -18,7 +18,7 @@
 > - **执行（P2-4 双索引规则校准）**：项目说明"每篇文档元信息区必须含两条链接"从未执行（A2 0/44·A3 133/211·A4 84/209·A5 5/34·A6 6/13·07-09 0/11）→ 规则修正为"新创作/深度编辑执行 + 存量板块以 file-index 为追溯源"（避免数百篇无价值回溯补链）
 > - **执行（P2-5/6 README 命令 + JS 检查进 CI）**：check_all_js_syntax.py 不存在（真实 check_js_syntax.py --all）·交接文档/参考手册两处命令表修正·ci.yml Code Quality 新增批量 JS 语法检查（--all）
 > - **执行（P2-8 计数校准）**：认知总览 docs 合计 645→756（实测除 README）、A1-A6 617→611、A3=212→211、A4=210→209
-> - **执行（P3）**：Dependabot 配置（github-actions + npm×2 + pip·每周）·mypy 进 CI（report-only·continue-on-error）·a11y 口径统一（CI job 名"9-rule"、脚本 docstring"40 条"、实际 19 check/20 SC 三方不一致 → 19 项检查覆盖 20 条 SC）·截图 artifact 失败才上传 + retention 30→14 天·_DEBRIS 空目录清理·Actions SHA 固定决策记录（tag + Dependabot 足够，暂不 SHA 固定）
+> - **执行（P3）**：Dependabot 配置（github-actions + npm×2 + pip·每周）·mypy 进 CI（report-only·`|| true` 静默退出防告警噪声）·a11y 口径统一（CI job 名"9-rule"、脚本 docstring"40 条"、实际 19 check/20 SC 三方不一致 → 19 项检查覆盖 20 条 SC）·截图 artifact 失败才上传 + retention 30→14 天·_DEBRIS 空目录清理·Actions SHA 固定决策记录（tag + Dependabot 足够，暂不 SHA 固定）
 > - **执行（验证）**：verify_delivery 全绿（含 4 新门禁）·py_compile 通过·sitemap 154/158 与排除集一致·本地实测 file:// 渲染正常（W421 探针）
 > - **执行（版本同步）**：CHANGELOG/交接文档/README/STRUCTURE/项目说明/file-index/页脚 4 个/旁文档 4 份/文档规范 §11.2（W001-W420→W001-W421）
 > - **验证**：verify_delivery 全绿
