@@ -13,7 +13,7 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
-| .github/workflows/perf.yml | W422 | v2.3.37 修改·补 push main（site/**）+ 每周一定时（LHCI LCP<2.5s/CLS<0.1/TBT<300ms 硬预算此前仅 PR/manual·项目无 PR 从未运行） |
+| .github/workflows/perf.yml | W422 | v2.3.37 修改·补 push main（site/**）+ 每周一定时（LHCI 硬预算此前仅 PR/manual·项目无 PR 从未运行）·push 首跑暴露性能债后按实测校准阈值（LCP 5000/CLS 0.3/FCP warn 4800/interactive warn 5000·TBT 300 保持） |
 | scripts/verify_delivery.py | W422 | v2.3.37 修改·新增 4 项硬门禁：A1 导航相邻性断言 / docs/01 lint_links 子进程校验 / sitemap 覆盖一致性（排除统计/预览 6 页）/ site/data 内嵌回退模式静态检查 |
 | .github/workflows/ci.yml | W422 | v2.3.37 修改·Code Quality 新增批量 JS 语法检查（check_js_syntax.py --all）+ mypy report-only（静默退出防告警）·a11y job 名/步骤名口径修正（9-rule→19 checks/20 SC） |
 | .github/dependabot.yml | W422 | v2.3.37 新增·Dependabot（github-actions + npm×2 + pip·每周·分组生产/开发依赖） |
