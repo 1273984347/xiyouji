@@ -19,7 +19,7 @@
 >   - 改动 site/static/assets/site 非页脚顶层页/审查脚本/工作流自身 → **全量** 88 页（保持原强度）；未知路径保守全量
 >   - schedule / workflow_dispatch 恒为全量（每周定时兜底）
 > - **执行（batch_screenshots.js --only-pages）**：新增 `--only-pages "file:dir,..."` 参数（替换全量页面列表）——本地实测 2 页 × 2 视口 4 张截图 ~14-20s；--help/汇总报告同步更新
-> - **执行（其他）**：Checkout 加 `fetch-depth: 0`（保证 `github.event.before`/`pull_request.base.sha` 本地可用，fetch-depth 1 时 git diff 会失败）·Playwright 浏览器缓存（actions/cache@v4·key 跟随 scripts/package-lock.json·省去每次 ~2 分钟下载）·跳过时 GITHUB_STEP_SUMMARY 输出原因
+> - **执行（其他）**：Checkout 加 `fetch-depth: 0`（保证 `github.event.before`/`pull_request.base.sha` 本地可用，fetch-depth 1 时 git diff 会失败）·Playwright 浏览器缓存（actions/cache@v6·key 跟随 scripts/package-lock.json·省去每次 ~2 分钟下载）·跳过时 GITHUB_STEP_SUMMARY 输出原因
 > - **执行（已知取舍）**：页脚 4 文件的真实布局改动也会被跳过（文件级判定无法区分"版本号行"与"布局行"），由每周定时全量 + PR 兜底；如需严格化可升级为 diff 内容级判定（已在 workflow 头注释记录）
 > - **执行（验证）**：本地定向截图实测通过（4 张 PNG + 汇总报告正常）·判定逻辑 10 样例推演全对（页脚-only→skip·data 页→targeted·static/脚本/workflow/未知→full）·YAML 经 GitHub 推送校验（workflow 自身变更触发全量运行自验证）
 > - **执行（版本同步）**：CHANGELOG/交接文档/README/STRUCTURE/项目说明/file-index/页脚 4 个/旁文档 4 份/文档规范 §11.2（W001-W419→W001-W420）

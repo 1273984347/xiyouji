@@ -161,7 +161,7 @@ jobs:
 
       - name: Cache Playwright browsers (W421)
         if: steps.scope.outputs.needed == 'true'
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('scripts/package-lock.json') }}

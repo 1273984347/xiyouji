@@ -12,7 +12,7 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
-| .github/workflows/screenshot-review.yml | W421 | v2.3.36 修改·新增 Determine screenshot scope 改动范围判定步骤（页脚 4 文件/文档-only 跳过·site/data 变更定向截图·static/assets/脚本/workflow 变更全量·schedule/dispatch 恒全量）+ checkout fetch-depth 0 + Playwright 浏览器缓存（actions/cache@v4·key 跟 package-lock）·跳过时 GITHUB_STEP_SUMMARY 输出原因 |
+| .github/workflows/screenshot-review.yml | W421 | v2.3.36 修改·新增 Determine screenshot scope 改动范围判定步骤（页脚 4 文件/文档-only 跳过·site/data 变更定向截图·static/assets/脚本/workflow 变更全量·schedule/dispatch 恒全量）+ checkout fetch-depth 0 + Playwright 浏览器缓存（actions/cache@v6·key 跟 package-lock）·跳过时 GITHUB_STEP_SUMMARY 输出原因 |
 | scripts/batch_screenshots.js | W421 | v2.3.36 修改·新增 --only-pages "file:dir,..." 参数（替换全量列表·定向截图）·--help/汇总报告同步·本地实测 2 页 × 2 视口 ~14-20s |
 | CHANGELOG.md | W421 | v2.3.36 修改·新增 v2.3.36 W421 段·W### 编号规则 W001-W420→W001-W421 |
 | scripts/output/file-index.md | W421 | v2.3.36 修改·本段（W421 登记） |
