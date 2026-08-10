@@ -4,9 +4,19 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W415），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W416），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.0.60（W001-W087）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.0.61+（W088）。
+
+### v2.3.31（2026-08-10）：W416 文件管控清单标注 — 多 session / 多 Agent 协作文件权限显式化
+
+> **W416 文件管控清单（承接用户"多 session 多 Agent 制作需标注必同步/禁修改文件"需求）**
+> - **来源**：用户指令"我认为这个项目是根据多 session 多 Agent 来进行制作，要标注清楚明白哪些文件是必须同步或不能擅自修改的"
+> - **执行（文档规范.md §11）**：新增「文件管控清单」章节——**11.1 必须同步的文件**（核心 2 份硬门禁：CHANGELOG/交接文档·辅助 4 份：README/STRUCTURE/项目说明/file-index·同步辅助：页脚 4 个 + 旁文档 4 份·附门禁列）+ **11.2 禁止擅自修改的文件**（CHANGELOG 历史段 W001-W414·归档 3 份 archive·.env 密钥·SECURITY-AUDIT 审计档·构建产物·可重建产物·门禁脚本 verify_delivery/pre-commit·memory 写入协议·字体源·bump_version 已知坑）+ **11.3 接手速查 6 步**（新 session/Agent 首读）
+> - **执行（交接文档）**：「跨 session 接续流程」新增第 3 步「文件管控」引用文档规范 §11（11.1 必同步/11.2 禁修改）·后续步骤顺延
+> - **执行（版本同步）**：bump v2.3.31 W416（README/STRUCTURE/项目说明）+ site 页脚 4 个 + 交接文档/项目概览/项目认知总览/项目交接参考手册/workflows README 同步
+> - **验证**：verify_delivery 全绿（含"201 篇" A4 计数）
+> - **状态**：已落地·待 push·CI 验证
 
 ### v2.3.30（2026-08-09）：W415 README 视觉引导增量 — 徽章区 + 图标化速览 + 首页预览截图 + 反馈段
 
