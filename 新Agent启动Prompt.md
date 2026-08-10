@@ -2,6 +2,7 @@
 
 > **用途**：新 session 启动时，将下方【正文】整段复制发给新 Agent，即可快速完成项目认知 + 规则约束。
 > **创建**：2026-08-10（W419 处置收尾·文档规范 §11 表格化配套）·当前 HEAD 版本见 [交接文档.md](交接文档.md)「一、当前进度」。
+> **更新**：2026-08-10 W419 补充——① bump_version 污染校验（W418/W419 复现 2 次）② 批量重写脚本最小化 diff（git restore 非必要改动）③ A1 SD 雷区（w286 脚本重跑会错位·禁止重跑）。
 > **配套**：[交接文档.md](交接文档.md)（进度中枢）/ [docs/00-导读/文档规范.md](docs/00-导读/文档规范.md) §11（文件管控）/ [scripts/output/file-index.md](scripts/output/file-index.md)（反向索引）。
 > 本文件是交接文档的「速用精简版」——若正文与交接文档/文档规范冲突，以后两者为准。
 
@@ -37,6 +38,9 @@
 - 每个文件修改后：Grep spot-check 验证落地（E1 铁律：声明 ≠ 落地，禁止假收敛）
 - 修改 memory（user_profile.md / project_memory.md）必须遵守：Read-before-Edit + Grep-verify-after-Edit + 集中写入点
 - 禁止擅改：CHANGELOG 历史段、归档 3 份、.env、SECURITY-AUDIT 档、verify_delivery.py、bump_version.py 等（见 §11.2）
+- 跑 bump_version.py 后：必须 Grep 校验 file-index 历史段未被全局替换污染（W418/W419 复现 2 次·E2 判据「历史条目保留旧值」·只信任 bump 改 README/STRUCTURE/项目说明版本行）
+- 批量重写型脚本（重建/批量编辑多个文件）改完后：先 `git diff --name-only` 对比改动范围，对"本应无变化"的文件 `git restore` 回退，仅保留真实修复目标（W419 经验·1-37/73-100 回非必要格式改动已回退）
+- 若涉及 A1 深度解读（SD001-SD101）改动：SD 编号≠原著回号（编号=创作序号）·源文件元数据注释在第三行（第一行是标题）——`w286_merge_yuanwen_shendu.py` 重跑会 fallback 按编号放置导致 SD 再次错位（W419 已归位 22 篇·40-72 回全覆盖）·**禁止重跑该合并脚本**；改动 SD 归位前先读交接文档 W419 段
 - 提交后 push，验证 CI/Security/Deploy Pages/Screenshot Review 全绿，然后做状态行收尾
 
 完成后把 W### 进展同步到交接文档「一、当前进度」+ 方法论沉淀（如有新经验）。
