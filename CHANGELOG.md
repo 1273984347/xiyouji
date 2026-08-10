@@ -19,7 +19,7 @@
 > - **执行（验证）**：全量核对 40-72 回 SD 分布全覆盖（56 回=SD101）·`lint_links --dir site/` 2629 链接 **0 broken**·Grep spot-check 源文件元数据/H1/关联行落地·1-37 与 73-100 回保持原样（脚本 rstrip 产生的非必要格式变化已 git restore 回退）
 > - **执行（版本同步）**：bump v2.3.34 W419（README/STRUCTURE/项目说明 + file-index + 交接文档 + CHANGELOG + 页脚 3 个）+ site/dukou-engine.html 页脚人工插入 + site/index.html 页脚 + 旁文档 4 份同步
 > - **验证**：verify_delivery 全绿
-> - **状态**：已落地
+> - **状态**：已落地·已 push（3e17477）·CI/Security/Deploy Pages/Screenshot Review 全绿（CI 15 job + Security 4 job）
 > - **处置收尾（2026-08-10）**：修复脚本 _w419_fix.py 第一版 parse_sec 衔接 bug（`## 深度解读` 前无空行·导航行被吞换行）导致第 43 回格式损坏——已修复 parse_sec 补换行 + 统一 `pre.rstrip()+"\n\n"` 拼接，git restore 全量回退后重跑修复；1-37/73-100 回"仅删多余空行"的非必要改动（E1 铁律：修复声明≠最小改动）git restore 回退，仅保留 38-72 回真实归位改动（35 个回文件 + 24 篇源文件 + SD101）；临时诊断/修复脚本（_w419_*.py/.txt）用后即删。
 
 ### v2.3.33（2026-08-10）：W418 内容质量深化 — 全站死链巡检（en 站 29 broken 修复 + A1 逐回 100 回导航全覆盖）
