@@ -25,7 +25,7 @@
 | CI | [`ci.yml`](ci.yml) | `push` main + `pull_request` + `workflow_dispatch` | 7 job 门禁：截图存活烟测 / Lighthouse / a11y / dependency / ruff / pytest / agent-web 构建 |
 | Security | [`security.yml`](security.yml) | `push` main + `pull_request` | 4 job：npm-audit（scripts/ + agent-web/ 双目录）/ pip-audit / CSP / XSS detect |
 | Deploy Pages | [`pages.yml`](pages.yml) | `push` main（site/** 变更） | GitHub Pages 部署 `./site`（W401 决策：不采用 build-test-deploy.yml，避免部署竞态·已删除） |
-| Lighthouse CI | [`perf.yml`](perf.yml) | `push` main（site/**）+ `pull_request` + 每周一 + `workflow_dispatch`（W422 补 push：原仅 PR 从不运行） | LHCI LCP/CLS/TBT 性能预算断言 |
+| Lighthouse CI | [`perf.yml`](perf.yml) | `push` main（site/**）+ `pull_request` + 每周一 + `workflow_dispatch`（W422 补 push：原仅 PR 从不运行·首跑暴露性能债后阈值已校准） | LHCI 性能预算断言（LCP≤5000/CLS≤0.3/TBT≤300） |
 | Screenshot Review | [`screenshot-review.yml`](screenshot-review.yml) | `push` main（site/** 或脚本/workflow 变更）+ `pull_request` + 每周一 + `workflow_dispatch`（W421：页脚/文档-only 跳过·data 页定向截图） | Playwright 截图 + 布局审计 |
 
 > **W400 关键教训**：ci.yml 建置时仅 `pull_request` 触发，但项目工作流是直接 push main（无 PR），**CI 从未真正运行过**。W399 补 push 触发后首次运行暴露全部存量问题。**新 workflow 必须本地语法校验 + 确认触发条件匹配真实开发流。**
