@@ -24,7 +24,7 @@
 > - **执行（验证）**：本地定向截图实测通过（4 张 PNG + 汇总报告正常）·判定逻辑 10 样例推演全对（页脚-only→skip·data 页→targeted·static/脚本/workflow/未知→full）·YAML 经 GitHub 推送校验（workflow 自身变更触发全量运行自验证）
 > - **执行（版本同步）**：CHANGELOG/交接文档/README/STRUCTURE/项目说明/file-index/页脚 4 个/旁文档 4 份/文档规范 §11.2（W001-W419→W001-W420）
 > - **验证**：verify_delivery 全绿
-> - **状态**：已落地·已 push（待状态行收尾）·CI/Security/Deploy Pages/Screenshot Review 验证中
+> - **状态**：已落地·已 push（e846954）·CI/Security/Deploy Pages/Screenshot Review 全绿（CI 15 job + Security 4 job + Screenshot 13m12s 无 Node 20 告警）
 
 ### v2.3.35（2026-08-10）：W420 A1 内容质量深化 — 深度解读 100/100 补全（SD102/SD103）+ 56 回结构化元数据补齐 + 99 回导航错链修复
 
