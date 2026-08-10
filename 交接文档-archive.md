@@ -1109,3 +1109,78 @@
 - （历史快照·W348 时期）全 CI 转绿：Security + Screenshot Review 全部 success（run 30829772934）
 
 （以上 W343-W358 为历史提交记录，当前状态见顶部「零、当前阻塞」与「一、当前进度」。）
+
+---
+
+## W422 归档段（2026-08-10）：W413-W418 里程碑 + 版本历史摘要
+
+- **v2.3.33 W418 内容质量深化（2026-08-10）**：
+  - **来源**：新接任 Agent 按流程调研（交接文档「二」候选清单·优先级零）后用户选定"内容质量深化"方向
+  - **全站死链巡检**：`lint_links --dir site/` 发现 **29 broken**（全在 site/en/·guide.html 25 处 + 其余 3 页 4 处·指向不存在的 en/data/*.html 与 timeline.html）→ 按 visualizations.html 惯例修复（EN 版存在→同目录·无 EN 版→回退中文原版 `../data/*.html` 加 `lang="zh-CN"` 标注）·修复后 site/ 2629 链接 0 broken + docs/ 4784 链接 0 broken
+  - **A1 逐回交叉引用补全**：23 回缺标准 `> 导航：` 引用行（13 回完全无导航 + 10 回仅段落式）→ 按第003回格式补全（返回导读/上一回/下一回/站点首页/通用可视化）·100 回导航全覆盖 100/100
+  - **验证**：lint_links 三目录 0 broken + Grep spot-check 新 href 落地
+  - **状态**：已落地·已 push（8d9a700）·CI/Security/Deploy Pages/Screenshot Review 全绿（CI 15 job + Security 4 job）
+
+- **v2.3.32 W417 文档健康治理（2026-08-10）**：
+  - **来源**：用户评估潜在问题清单后指令"按照优先级顺序全部处理"（P0-3 高优先级 + P1-2 中优先级 + P2-2 低优先级）
+  - **P0-1 文档健康指标归档**：CHANGELOG.md 136KB→39KB（W399 及更早迁移 CHANGELOG-ARCHIVE.md）+ file-index.md 87KB→32KB（W335-W389 段迁移 file-index-archive.md）+ 交接文档精简（删 W411 及更早概要·保留最近 5 版本段）——三文档均降达标
+  - **P0-2 verify_delivery 增强**：A1-A6 真实文件计数校验 vs README 声明（排除各板块 README.md·实测 611==611）+ 归档 3 件套纳入范围漂移扫描
+  - **P0-3 actions 升级**：全 workflow 48 处升级消除 Node 20 deprecation（checkout v7/setup-python v7/upload-pages-artifact v5 等）
+  - **P1-1 RAG 可重建性演练**：删除 rag_index.json → 自动重建成功（32.39→35.26MB）
+  - **P1-2 bump_version.py 增强**：--desc 主描述替换 + W001-W### 精确锚点范围替换 + 页脚 3 个自动同步（幂等测试通过）
+  - **P2-1 LICENSE 双协议边界补强**：LICENSE-CONTENT.md + README 授权段明确化（代码/项目文档 MIT vs 文本内容 CC BY-NC·补 07-09/S3/S4）
+  - **P2-2 memory 修正 + sitemap 补全**：project_memory E3"add -f"过时描述修正·sitemap 69→154 页（XML 合法无断链）
+  - **验证**：verify_delivery 全绿（含 611 篇计数校验）
+  - **状态**：已落地·已 push（dafc336）·CI/Security/Deploy Pages/Screenshot Review 全绿
+
+- **v2.3.31 W416 文件管控清单标注（2026-08-10）**：
+  - **来源**：用户指令"我认为这个项目是根据多 session 多 Agent 来进行制作，要标注清楚明白哪些文件是必须同步或不能擅自修改的"
+  - **执行**：docs/00-导读/文档规范.md 新增 §11 文件管控清单——11.1 必须同步的文件（核心 2 份硬门禁 CHANGELOG/交接文档 + 辅助 4 份 + 里程碑旁文档·附门禁列）/ 11.2 禁止擅自修改的文件（CHANGELOG 历史段/归档 3 份/.env 密钥/审计档/构建产物/门禁脚本/memory/字体源/已知坑）/ 11.3 接手速查 6 步；交接文档「跨 session 接续流程」新增第 3 步「文件管控」引用 §11
+  - **执行**：bump v2.3.31 W416（README/STRUCTURE/项目说明）+ site 页脚 4 个 + 交接文档/项目概览/项目认知总览/项目交接参考手册/workflows README 同步
+  - **验证**：verify_delivery 全绿
+  - **状态**：已落地·已 push（0a9046b）·CI/Security/Deploy Pages/Screenshot Review 全绿（纯文档变更·CI 15 job + Security 4 job）
+
+- **v2.3.30 W415 README 视觉引导增量（2026-08-09）**：
+  - **来源**：用户提供第三方 README 模板（徽章区/在线体验/内容速览/快速开始/details 折叠/反馈）→ 主代理评估：骨架已被 W414 覆盖，但 3 个增量有参考价值（徽章区/预览截图/反馈段）·修正 4 处错误（URL /site/ 后缀错·release 徽章不适用·单协议错·徽章语法残缺）→ 用户选"落地增量 + 图标化速览"
+  - **改造**：README 顶部新增徽章区（在线访问/双协议授权/部署状态 3 枚 shields.io 徽章）·「内容导航」表格改为「🎁 你将会看到什么」图标化速览（8 条 emoji + 短语 + 链接）·在线体验区插入站点首页预览截图（assets/images/index-preview.png·Playwright 生成 108.7KB）·底部新增「💬 反馈与建议」（issues 链接）·开发者区新增「技术栈」段
+  - **执行**：bump v2.3.30 W415（README/STRUCTURE/项目说明）+ site 页脚 4 个 + 交接文档/项目概览/项目认知总览/项目交接参考手册/workflows README 同步
+  - **验证**：verify_delivery 全绿·截图 PNG 头校验通过
+  - **状态**：已落地·已 push（696fdd0）·CI/Security/Deploy Pages/Screenshot Review 全绿（纯文档变更·CI 15 job + Security 4 job）
+
+- **v2.3.29 W414 README 用户手册改造（2026-08-09）**：
+  - **来源**：用户指令"按这个思路把 README 改造成用户手册 + 开发者分区的引导结构"（承接 W413 仓库文件策略审查后的读者视角讨论）
+  - **改造**：README 重构为「普通读者专区 + 开发者/维护者专区」两级结构——顶部 GitHub Pages 在线站点一键直达（https://1273984347.github.io/xiyouji/）·内容导航表（10 大板块 + 86 可视化页）·数据维度全景表·目标读者清单；工程维护内容（目录结构/脚本运行/测试/截图审查/双索引/文档规范）收进 `<details>` 折叠
+  - **执行**：bump_version 升 v2.3.29 W414（README/STRUCTURE/项目说明）+ site 页脚 4 个同步
+  - **验证**：verify_delivery 全绿·"201 篇" A4 计数保留
+  - **状态**：已落地·已 push（83a2d87）·CI/Security/Deploy Pages/Screenshot Review 全绿（纯文档变更·CI 14 job + Security 4 job）
+
+- **v2.3.28 W413 仓库文件策略审查（2026-08-09）**：
+  - **来源**：用户指令"再去调研一下哪些文件是可以不用一起 push 到仓库的文件，哪些是必须一起跟随上传的文件"+"你审查一下哪些文件不能上传，其他全部上传，严格审查"
+  - **严格审查结论**：全库扫描无密钥命中（.env 已 gitignore）；6 个个人文档（交接文档/交接文档-archive/项目交接参考手册/项目概览/项目认知总览/项目GitHub参考调研报告）+ docs/_dev(3) + docs/_templates(3) + docs/superpowers(11) + docs/10-方法论沉淀(14) 均无敏感内容 → **全部恢复入库**
+  - **仅硬性排除（不能上传）**：.env（含 sk-ba531 密钥）·SECURITY-AUDIT-2026-08-09.7z+.password（敏感审计档）·node_modules/dist/__pycache__/venv（依赖构建产物）·RAG 索引 32MB（可重建）·截图/测试基线（可重建）
+  - **字体源入库**：assets/fonts/source/ 5 文件（NotoSerifSC-var.ttf 24MB 等，git add -f）
+  - **verify_delivery.py 恢复**：交接文档恢复核心硬门禁（CORE_DOCS = CHANGELOG + 交接文档）·A4_DOCS 恢复 4 份
+  - **验证**：verify_delivery 全绿·py_compile 通过
+
+---
+
+## 六、版本历史摘要（v2.2.50+ 现役段，完整记录见 [CHANGELOG.md](CHANGELOG.md)）
+
+| 版本 | W ID | 日期 | 关键变更 |
+|---|---|---|---|
+| v2.1.6 | W106 | 2026-07-27 | W106 A4 Batch 17 取经声音政治学专题（基于 W088+W089 深化·阿塔利+巴特+福柯+乔姆斯基四位理论家·语音身份+噪音政治+沉默策略+声音规训四维度·与 W088/W089 形成"时间哲学+空间政治学+声音政治学"三层结构·7 个 line 号·A4 方向第 13 个新维度·Preflight 三轨验证第二十九次完整执行通过·DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=0/P3=0） |
+| v2.1.7 | W107 | 2026-07-27 | W107 A4 Batch 17 取经媒介考古学专题（基于 W088+W089+W106 深化·麦克卢汉+基特勒+本雅明+海德格尔四位理论家·经卷媒介+诏书媒介+镜像媒介+法器媒介四形态·与 W088/W089/W106 形成"时间哲学+空间政治学+声音政治学+媒介考古学"四层结构·7 个 line 号·A4 方向第 14 个新维度·Batch 17 收束篇·Preflight 三轨验证第三十次完整执行通过·DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=2（A2:2）/P3=0·按边际收益 gate 接受残留·与 W106 等专题保持一致） |
+| v2.1.5 | W105 | 2026-07-27 | W105 A4 Batch 17 取经神话政治学专题（基于 W084+W088 深化·列维-斯特劳斯+韦伯+阿甘本+巴丢四位理论家·神话叙事+政治合法性+主权象征+真理事件四维度·与 W084/W088 形成"权力对照+时间哲学+神话政治学"三层结构·7 个 line 号·A4 方向第 12 个新维度·E1 升级版铁律第 9 次复现·A4 方向连续第四次撞坑 W100→W103→W104→W105） |
+| v2.1.4 | W104 | 2026-07-27 | W104 A4 Batch 17 取经叙事经济学专题（基于 W086+W092 深化·马克思+西美尔+波德里亚+哈维四位理论家·货币流通+价值交换+劳动价值+叙事资本四维度·与 W086/W092 形成"概论+财政深化+叙事经济深化"三层结构·7 个 line 号·A4 方向第 11 个新维度·E1 升级版铁律第 8 次复现·A4 方向连续第三次撞坑 W100→W103→W104） |
+| v2.1.3 | W103 | 2026-07-27 | W103 D 方向·人物引语情感分析（基于 W100 pipeline 6565 条引语扩展·新增 POSITIVE_WORDS/NEGATIVE_WORDS 零依赖情感词典 + dialogue_sentiment.json 5 组数据 + dialogue-sentiment.html 6 Section + 5 D3.js 图表·全书分布 821/3800/1944）+ DRL R1b 主代理 spot-check 真收敛 P0=0/P1=0/P2=2(A2:2)/P3=0 + E1 升级版铁律第 7 次复现（D 方向 NLP pipeline 扩展连续第二次撞坑·W100→W103） |
+| v2.1.2 | W102 | 2026-07-27 | W102 D 方向·人物关系网络动态演化（基于 W100 pipeline 扩展·新增 build_cooccurrence_timeline 函数 + relationships.html Section 6 关系演化时间线·三个 D3.js 可视化·数据精简 741KB→105KB） |
+| v2.1.1 | W101 | 2026-07-27 | W101 A4 Batch 16 取经团队身体地理学专题（梅洛-庞蒂+福柯+巴特勒+德勒兹+阿甘本+列维纳斯六位理论家·四种身体形态+三重规训机制·与 W088+W089+W090 形成"时空身体"三元结构·E1 预防成功·A4 方向连续第六次零撞坑·Preflight 三轨验证第二十五次完整执行真收敛一次通过） |
+| v2.1.0 | W100 | 2026-07-27 | W100 BookNLP 集成·人物 NLP pipeline + 共现网络可视化（零依赖纯标准库·35 人物识别 + 6565 条引语归属 + 双维度共现网络 chapter_level/scene_level + relationships.html Section 5 力导向图·DRL R1b spot-check 真收敛 P2=1(A1:1)·E1 铁律预防成功） |
+| v2.0.72 | W091-W099 | 2026-07-27 | W091-W099 九篇专题批量落地（A4 心理学/妖怪经济学/风险管理 + A5 明代宗教政策/历史玄奘/明代风俗 + A6 开篇诗/回目对联 + D 地理符号学可视化）+ Preflight 三轨验证第十五至第二十三次完整执行 + E1 铁律 W091 撞坑后 W092-W099 连续 8 次预防成功 |
+| v2.0.63 | W090 | 2026-07-26 | A4 Batch 12 取经路径地理符号学专题（六分段路径 + 地理符号学三重机制 + 六位理论家·与 W088+W089 形成"时间-空间-路径"三维结构）+ E1 预防成功·A4 方向连续第五次零撞坑 |
+| v2.0.62 | W089 | 2026-07-26 | A4 Batch 11 空间政治学专题（四种空间形态 + 权力空间化三重机制 + 六位理论家·与 W088 时间哲学形成"时空对偶"经典哲学结构）+ E1 预防成功·A4 方向连续第四次零撞坑 |
+| v2.0.61 | W088 | 2026-07-26 | A4 Batch 10 时间哲学专题（四种时间形态 + 六位理论家对照）+ E1 预防成功·A4 方向连续第三次零撞坑 |
+
+完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（v2.2.50+ 现役段）+ [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)（v0.1-v2.0.60 历史归档段）。
+
+---

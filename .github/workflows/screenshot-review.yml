@@ -242,7 +242,7 @@ jobs:
           echo "完整报告见 \`screenshot-review-reports\` artifact。" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload screenshot artifacts
-        if: steps.scope.outputs.needed == 'true'
+        if: failure()
         uses: actions/upload-artifact@v7
         with:
           name: screenshot-review-reports-${{ github.sha }}
@@ -254,6 +254,6 @@ jobs:
             scripts/output/screenshots/mobile/
             scripts/output/screenshots/slices/
           if-no-files-found: ignore
-          retention-days: 30
+          retention-days: 14
 # FILE_INDEX: .github/workflows/screenshot-review.yml | W406 | E1 截图审查触发修复：补 push main 触发（对齐 ci.yml W399），使审查在真实发布路径运行
 # FILE_INDEX: .github/workflows/screenshot-review.yml | W421 | 提速优化：改动范围判定（页脚/文档-only 跳过·data 页定向截图）+ Playwright 浏览器缓存
