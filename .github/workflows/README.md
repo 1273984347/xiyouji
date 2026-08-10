@@ -1,6 +1,6 @@
 # CI/CD 工作流说明
 
-> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420** — 西游记解读项目（`d:\1\xiyouji`，v2.3.34 W419）的 GitHub Actions 工作流层。
+> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421** — 西游记解读项目（`d:\1\xiyouji`，v2.3.36 W421）的 GitHub Actions 工作流层。
 > **W399**：ci.yml 补 push main 触发（此前仅 pull_request，项目直接 push main 无 PR → CI 从未运行）；sitemap/robots 域名补全；新增 rum-viewer。
 > **W400**：CI/Security 三 workflow 转绿（ruff 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复·black 门禁移除）。
 > **W401**：ci.yml 5→7 job（pytest-unit 全量 tests/ + agent-web-build）·agent-web 源码入库·移除 3 处无 pip 安装 job 的 cache: pip 残留·build-test-deploy.yml 弃用删除。
@@ -13,6 +13,7 @@
 > **W416**：文件管控清单标注（文档规范 §11 必同步/禁擅自修改显式化·多 session/Agent 协作·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W417**：actions 全量升级消除 Node 20 deprecation（ci.yml/pages.yml/perf.yml/screenshot-review.yml/security.yml 共 48 处：checkout v7/setup-node v7/setup-python v7/upload-artifact v7/upload-pages-artifact v5/configure-pages v6/deploy-pages v5/nick-fields retry v4·gh api releases/latest 实测 2026-08-10）。
 > **W418**：内容质量深化（site/en/ 4 文件 29 broken 链接修复——EN 版存在指向同目录/无 EN 版回退中文原版 ../data/*.html 加 lang="zh-CN" 标注·A1 逐回解读 23 回补 `> 导航：` 引用行 100 回全覆盖·无 workflow 文件改动，CI 全量验证涵盖）。
+> **W421**：Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 恒全量 + batch_screenshots.js --only-pages + Playwright 浏览器缓存 + checkout fetch-depth 0）。
 > **W420**：A1 内容质量深化（深度解读 100/100 补全 + 56 回元数据补齐 + 99 回导航错链修复·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W419**：修复 A1 深度解读 SD 错位（22 篇 SD 编号≠真实回号归位·40-72 回全覆盖·源文件 24 篇元数据/H1/关联行修正·第 56 回补写 SD101·无 workflow 文件改动，CI 全量验证涵盖）。
 
@@ -24,7 +25,7 @@
 | Security | [`security.yml`](security.yml) | `push` main + `pull_request` | 4 job：npm-audit（scripts/ + agent-web/ 双目录）/ pip-audit / CSP / XSS detect |
 | Deploy Pages | [`pages.yml`](pages.yml) | `push` main（site/** 变更） | GitHub Pages 部署 `./site`（W401 决策：不采用 build-test-deploy.yml，避免部署竞态·已删除） |
 | Lighthouse CI | [`perf.yml`](perf.yml) | `pull_request`（site/**）+ `workflow_dispatch` | LHCI LCP/CLS/TBT 性能预算断言 |
-| Screenshot Review | [`screenshot-review.yml`](screenshot-review.yml) | `pull_request`（脚本变更） | Playwright 截图 + 布局审计 |
+| Screenshot Review | [`screenshot-review.yml`](screenshot-review.yml) | `push` main（site/** 或脚本/workflow 变更）+ `pull_request` + 每周一 + `workflow_dispatch`（W421：页脚/文档-only 跳过·data 页定向截图） | Playwright 截图 + 布局审计 |
 
 > **W400 关键教训**：ci.yml 建置时仅 `pull_request` 触发，但项目工作流是直接 push main（无 PR），**CI 从未真正运行过**。W399 补 push 触发后首次运行暴露全部存量问题。**新 workflow 必须本地语法校验 + 确认触发条件匹配真实开发流。**
 

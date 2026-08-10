@@ -8,6 +8,28 @@
 
 ---
 
+## W421 Screenshot Review 提速优化（2026-08-10·v2.3.36）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/screenshot-review.yml | W421 | v2.3.36 修改·新增 Determine screenshot scope 改动范围判定步骤（页脚 4 文件/文档-only 跳过·site/data 变更定向截图·static/assets/脚本/workflow 变更全量·schedule/dispatch 恒全量）+ checkout fetch-depth 0 + Playwright 浏览器缓存（actions/cache@v4·key 跟 package-lock）·跳过时 GITHUB_STEP_SUMMARY 输出原因 |
+| scripts/batch_screenshots.js | W421 | v2.3.36 修改·新增 --only-pages "file:dir,..." 参数（替换全量列表·定向截图）·--help/汇总报告同步·本地实测 2 页 × 2 视口 ~14-20s |
+| CHANGELOG.md | W421 | v2.3.36 修改·新增 v2.3.36 W421 段·W### 编号规则 W001-W420→W001-W421 |
+| scripts/output/file-index.md | W421 | v2.3.36 修改·本段（W421 登记） |
+| README.md | W421 | v2.3.36 修改·版本行 v2.3.36 W421 + 双索引 W 范围 W001-W421 |
+| STRUCTURE.md | W421 | v2.3.36 修改·头部版本行 v2.3.36 W421 |
+| docs/00-导读/项目说明.md | W421 | v2.3.36 修改·头部 + "当前版本"行 v2.3.36 W421 |
+| 交接文档.md | W421 | v2.3.36 修改·头部/阻塞段 HEAD/当前进度 W421 里程碑/版本号列表 v2.3.36 + 接续编号（当前 W421·下一 W422）+ 方法论沉淀（paths 过滤 vs diff 判定） |
+| site/dukou-engine.html | W421 | v2.3.36 修改·页脚插入 v2.3.36 W421 段 |
+| site/index.html | W421 | v2.3.36 修改·页脚 v2.3.36 · W421 |
+| site/data/cross-time-danmaku.html | W421 | v2.3.36 修改·页脚 v2.3.36 · W421 |
+| site/data/tag-cloud.html | W421 | v2.3.36 修改·页脚 v2.3.36 · W421 |
+| 项目概览.md | W421 | v2.3.36 修改·头部 HEAD v2.3.36 W421 + W421 里程碑行 |
+| 项目认知总览.md | W421 | v2.3.36 修改·头部 + 当前开发进度 HEAD v2.3.36 W421 |
+| 项目交接参考手册.md | W421 | v2.3.36 修改·头部版本 v2.3.36 W421 + 接续编号当前 W421·下一 W422 |
+| .github/workflows/README.md | W421 | v2.3.36 修改·头部 W 链加 W421 + W421 说明行 + Screenshot Review 触发矩阵更新 |
+| docs/00-导读/文档规范.md | W421 | v2.3.36 修改·§11.2 禁改范围 W001-W419→W001-W420（随 W421 校准·E2 深处残留） |
+
 ## W420 A1 内容质量深化（2026-08-10·v2.3.35）
 
 | 文件 | W | 说明 |
