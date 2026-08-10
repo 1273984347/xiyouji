@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.36（2026-08-10）— W421 Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·site/data 变更定向截图·static/脚本变更全量·Playwright 浏览器缓存）— A1-A6 共 611 篇 + 86 可视化页（A4 W342 gap-fill 199→201 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.37（2026-08-10）— W422 全量治理（perf.yml 补 push 触发·verify_delivery 新增导航/链接/sitemap/回退 4 门禁·文档健康归档·双索引规则校准·Dependabot/JS 检查/mypy/a11y 口径）— A1-A6 共 611 篇 + 86 可视化页（A4 W342 gap-fill 199→201 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 顶层结构
 

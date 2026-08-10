@@ -22,6 +22,7 @@ verify_delivery.py — 零依赖交付校验门禁（Senior Developer 设立）
 import json
 import os
 import re
+import subprocess
 import sys
 import urllib.request
 
@@ -186,6 +187,104 @@ def main():
                  % (actual_total, declared))
     else:
         warn("README 未找到 '共 N 篇' 声明，跳过 A1-A6 计数校验")
+
+    # ---- A1 导航相邻性断言（W422 新增：W418 只保证"每回有导航行"不保证指向相邻回）----
+    ch_dir = os.path.join(ROOT, "docs", "01-全书逐回解读")
+    nav_fail = []
+    if os.path.isdir(ch_dir):
+        for fn in sorted(os.listdir(ch_dir)):
+            m = re.match(r"^第(\d+)回-", fn)
+            if not m or not fn.endswith(".md"):
+                continue
+            num = int(m.group(1))
+            c = _read(os.path.join(ch_dir, fn))
+            nm = re.search(r"(?m)^>\s*导航：.*$", c)
+            if not nm:
+                nav_fail.append("第%d回 无导航行" % num)
+                continue
+            line = nm.group(0)
+            pm = re.search(r"\[上一回\]\(第(\d+)回", line)
+            xm = re.search(r"\[下一回\]\(第(\d+)回", line)
+            if num > 1:
+                if not pm or int(pm.group(1)) != num - 1:
+                    nav_fail.append("第%d回 上一回 -> %s（期望第%d回）" % (num, pm.group(1) if pm else "无", num - 1))
+            elif pm:
+                nav_fail.append("第1回 不应有上一回链接")
+            if num < 100:
+                if not xm or int(xm.group(1)) != num + 1:
+                    nav_fail.append("第%d回 下一回 -> %s（期望第%d回）" % (num, xm.group(1) if xm else "无", num + 1))
+            elif xm:
+                nav_fail.append("第100回 不应有下一回链接")
+    if nav_fail:
+        fail("A1 导航相邻性异常 %d 处（示例：%s）" % (len(nav_fail), nav_fail[0]))
+    else:
+        ok("A1 导航相邻性 100/100（上一回=N-1·下一回=N+1·第1回无上/第100回全书完）")
+
+    # ---- docs/01 链接校验（W422：W420 曾修复 66 死链，纳入门禁防回归）----
+    try:
+        r = subprocess.run(
+            [sys.executable, os.path.join(_HERE, "lint_links.py"),
+             "--dir", os.path.join(ROOT, "docs", "01-全书逐回解读")],
+            capture_output=True, text=True, timeout=180)
+        if r.returncode == 0:
+            ok("docs/01 链接校验通过（lint_links 0 broken）")
+        else:
+            tail = (r.stdout.splitlines()[-3:] + r.stderr.splitlines()[-3:])
+            fail("docs/01 存在 broken 链接（lint_links exit %d）：%s" % (r.returncode, " / ".join(tail)))
+    except Exception as e:
+        fail("docs/01 链接校验执行异常: %s" % e)
+
+    # ---- sitemap 覆盖校验（W422：防新增页面漏收录，W417 曾手工补 69→154）----
+    sm_txt = _read(os.path.join(ROOT, "site", "sitemap.xml"))
+    site_dir = os.path.join(ROOT, "site")
+    EXCLUDED_SM = {
+        "rum-viewer.html",
+        "visit-viewer.html",
+        "_template.html",
+        "data/81-hardships-view.html",
+        "data/character-relationship-3d-view.html",
+        "data/_shell.html",
+    }
+    if sm_txt and os.path.isdir(site_dir):
+        locs = set()
+        for m in re.finditer(r"<loc>([^<]+)</loc>", sm_txt):
+            u = m.group(1).strip().rstrip("/")
+            u = re.sub(r"^https?://[^/]+/", "", u)
+            u = u[len("xiyouji/"):] if u.startswith("xiyouji/") else u
+            locs.add(u if u else "index.html")
+        actual = set()
+        for root, _dirs, fnames in os.walk(site_dir):
+            for fn in fnames:
+                if fn.endswith(".html"):
+                    rel = os.path.relpath(os.path.join(root, fn), site_dir).replace("\\", "/")
+                    actual.add(rel)
+        expected = {x for x in actual if x not in EXCLUDED_SM}
+        miss = sorted(expected - locs)
+        extra = sorted(locs - expected)
+        if miss or extra:
+            fail("sitemap 与 site 不一致：缺 %d 页（%s）、多余 %d 页（%s）"
+                 % (len(miss), miss[:3], len(extra), extra[:3]))
+        else:
+            ok("sitemap 覆盖一致（%d 页，排除统计/预览页 %d 个）" % (len(locs), len(EXCLUDED_SM)))
+    else:
+        warn("sitemap.xml 或 site/ 缺失，跳过 sitemap 覆盖校验")
+
+    # ---- site/data 内嵌回退模式静态检查（W422：file:// 铁律的自动验证）----
+    data_dir = os.path.join(ROOT, "site", "data")
+    EMB_RE = re.compile(r"EMBEDDED_DATA|const\s+EMBEDDED|FALLBACK|INLINE|MOCK_DATA|const\s+data\s*=")
+    no_emb = []
+    data_count = 0
+    if os.path.isdir(data_dir):
+        for fn in sorted(os.listdir(data_dir)):
+            if fn.endswith(".html"):
+                data_count += 1
+                if not EMB_RE.search(_read(os.path.join(data_dir, fn))):
+                    no_emb.append(fn)
+    if no_emb:
+        fail("site/data 有 %d/%d 页缺内嵌回退模式（file:// 直开风险）：%s"
+             % (len(no_emb), data_count, ", ".join(no_emb[:5])))
+    else:
+        ok("site/data %d 页均含内嵌回退模式（EMBEDDED_DATA/EMBEDDED/FALLBACK/inline data）" % data_count)
 
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:

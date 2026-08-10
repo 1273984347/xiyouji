@@ -2499,7 +2499,7 @@ def _render_md(root, html_files, counts, all_findings):
 
 def main():
     ap = argparse.ArgumentParser(
-        description="a11y_audit.py - 全站可访问性审查（40 条 WCAG 2.2 完整规范规则）",
+        description="a11y_audit.py - 全站可访问性审查（19 项检查覆盖 20 条 WCAG 2.2 SC）",
     )
     ap.add_argument("--dir", type=Path, default=Path("site"), help="扫描目录（默认 site）")
     ap.add_argument("--format", choices=["md", "json"], default="md", help="输出格式（默认 md）")

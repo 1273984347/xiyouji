@@ -187,7 +187,7 @@ jobs:
           retention-days: 30
 
   a11y-audit:
-    name: A11y Audit (9-rule WCAG 2.2, ${{ matrix.os }}, py${{ matrix.python-version }})
+    name: A11y Audit (WCAG 2.2, 19 checks/20 SC, ${{ matrix.os }}, py${{ matrix.python-version }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -204,7 +204,7 @@ jobs:
           # W400 修复：移除 cache: pip —— a11y_audit.py 仅用标准库，job 不安装 pip 依赖，
           # 缓存目录不存在导致 Post 步骤报 ##[error] 使 job 失败（windows/ubuntu py3.10-3.11 复现）
 
-      - name: Run a11y audit (W264-E2 9 规则脚本)
+      - name: Run a11y audit (a11y_audit.py, W422 口径修正)
         uses: nick-fields/retry@v4
         with:
           max_attempts: 3
@@ -267,8 +267,8 @@ jobs:
           cache: pip
           cache-dependency-path: scripts/requirements.txt
 
-      - name: Install ruff and black
-        run: pip install ruff black
+      - name: Install ruff, black, mypy
+        run: pip install ruff black mypy
 
       - name: Run ruff check
         uses: nick-fields/retry@v4
@@ -279,6 +279,13 @@ jobs:
           # 该门禁自建置起从未通过（CI 此前仅 pull_request 触发，从未运行）。
           # 保留 ruff（E/F/W/I/UP/B 语义检查）作为代码质量门禁，格式统一由 ruff format 负责。
           command: ruff check scripts/
+
+      - name: Run inline JS syntax check (batch, W422)
+        run: python scripts/check_js_syntax.py --all
+
+      - name: Run mypy (report-only, W422)
+        continue-on-error: true
+        run: mypy scripts/ --ignore-missing-imports
 
   pytest-unit:
     name: Unit Tests (pytest)

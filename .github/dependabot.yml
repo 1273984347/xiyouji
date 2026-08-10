@@ -1,0 +1,40 @@
+# W422 新增：依赖与 Actions 自动更新（此前依赖更新全靠手工 audit）
+# 生态位：
+#   - github-actions：工作流 actions 标签更新（与 W417 "取 latest" 校准配合）
+#   - npm（scripts/ + xiyouji-agent-web/）：前端/工具链依赖（CI npm-audit 双目录兜底）
+#   - pip（scripts/requirements.txt）：Python 依赖（CI pip-audit 兜底）
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+
+  - package-ecosystem: "npm"
+    directory: "/scripts"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      production-deps:
+        dependency-type: "production"
+      development-deps:
+        dependency-type: "development"
+
+  - package-ecosystem: "npm"
+    directory: "/xiyouji-agent-web"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      production-deps:
+        dependency-type: "production"
+      development-deps:
+        dependency-type: "development"
+
+  - package-ecosystem: "pip"
+    directory: "/scripts"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
