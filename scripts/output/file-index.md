@@ -34,9 +34,9 @@
 | 项目交接参考手册.md | W422 | v2.3.37 修改·HEAD v2.3.37 W422 + 接续编号 W422·下一 W423 + check_js_syntax 命令修正 |
 | .github/workflows/README.md | W422 | v2.3.37 修改·W 链加 W422 + W422 说明行 + perf.yml 触发矩阵更新 |
 | site/dukou-engine.html | W422 | v2.3.37 修改·页脚插入 v2.3.37 W422 段 |
-| site/index.html | W422 | v2.3.37 修改·页脚 v2.3.37 · W422 |
-| site/data/cross-time-danmaku.html | W422 | v2.3.37 修改·页脚 v2.3.37 · W422 |
-| site/data/tag-cloud.html | W422 | v2.3.37 修改·页脚 v2.3.37 · W422 |
+| site/index.html | W422 | v2.3.37 修改·页脚 v2.3.38 · W423 |
+| site/data/cross-time-danmaku.html | W422 | v2.3.37 修改·页脚 v2.3.38 · W423 |
+| site/data/tag-cloud.html | W422 | v2.3.37 修改·页脚 v2.3.38 · W423 |
 | _DEBRIS_xiyouji_move | W422 | v2.3.37 删除·空 debris 目录（未跟踪）清理 |
 
 ## W421 Screenshot Review 提速优化（2026-08-10·v2.3.36）
@@ -155,3 +155,7 @@
 | docs/00-导读/文档规范.md | W419 | v2.3.34 修改·§11.2 禁改范围 W001-W414→W001-W418（随 W419 校准）+ 新增「误改后果」列（12 类禁改文件附违反后果）·新增 §11.4 同步核对速查表（10 项勾选清单） |
 | 新Agent启动Prompt.md | W419 | v2.3.34 新建 + 处置收尾补充·新 Agent 启动 prompt（交接文档速用精简版·可直接复制发送·含四步认知顺序 + §11 规则 + E1 铁律 + W419 三条新增铁律：bump 污染校验（W418/W419 复现 2 次）/ 批量重写最小化 diff（git restore 非必要改动）/ A1 SD 禁重跑合并脚本） |
 
+## W423 W423 性能债专项（2026-08-11）
+
+| 文件 | W | 说明 |
+|---|---|---|

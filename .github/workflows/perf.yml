@@ -13,12 +13,14 @@ name: Lighthouse CI
 # LCP/CLS/TBT 硬预算从未在真实发布路径运行（同 W399 ci.yml 触发缺失类问题）。补 push main
 # （site/** 或本 workflow 变更）+ 每周一定时，与 screenshot-review 节奏对齐。
 #
-# W422 阈值校准（2026-08-10·push 首跑实测校准，W400 "阈值基于真实测量" 原则）：
-#   - largest-contentful-paint 2500→5000：index.html 实测中位 4662ms（三次 4662-4730，D3 大 DOM 首页）
-#   - cumulative-layout-shift 0.1→0.3：timeline.html 实测 0.241（三次稳定）
-#   - first-contentful-paint/interactive warn 同步抬到实测上方（防每轮警告噪声）
-#   - total-blocking-time 保持 300（首跑未越线）
-#   性能债登记：index LCP ~4.7s / timeline CLS ~0.24 → 交接文档「四、待办」专项（收紧预算前先优化）
+# W423 阈值校准（2026-08-11·性能债专项优化后收紧）：
+#   - 根因修正：实测 LCP 元凶是 dashboard.html 在 <head> 同步加载 D3 CDN（非 index.html）；
+#     timeline / 3D 页同样在 head 同步加载 D3 / Three CDN。W423 将 D3 移出 head
+#     （dashboard 移到图表脚本前 / timeline·3D 改 defer），消除渲染阻塞。
+#   - CJK 字体（NotoSerifSC-VF 3.6MB）font-display: swap→optional，消除字体 swap 重排 CLS，
+#     并跳过首发 3.6MB 下载（LCP 同步受益）。
+#   - 预算收紧（基于优化后预期；CI 为权威实测门禁，若越线按实测再校准）：
+#     LCP 5000→4500 / CLS 0.3→0.2 / FCP warn 4800→4200 / interactive warn 5000→4500 / TBT 保持 300。
 
 on:
   push:
@@ -42,7 +44,7 @@ concurrency:
 
 jobs:
   lighthouse-ci:
-    name: Lighthouse CI (LCP < 2.5s / CLS < 0.1 / TBT < 300ms)
+    name: Lighthouse CI (LCP < 4.5s / CLS < 0.2 / TBT < 300ms)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -92,11 +94,11 @@ jobs:
               },
               "assert": {
                 "assertions": {
-                  "largest-contentful-paint": ["error", {"maxNumericValue": 5000}],
-                  "cumulative-layout-shift": ["error", {"maxNumericValue": 0.3}],
+                  "largest-contentful-paint": ["error", {"maxNumericValue": 4500}],
+                  "cumulative-layout-shift": ["error", {"maxNumericValue": 0.2}],
                   "total-blocking-time": ["error", {"maxNumericValue": 300}],
-                  "first-contentful-paint": ["warn", {"maxNumericValue": 4800}],
-                  "interactive": ["warn", {"maxNumericValue": 5000}]
+                  "first-contentful-paint": ["warn", {"maxNumericValue": 4200}],
+                  "interactive": ["warn", {"maxNumericValue": 4500}]
                 }
               },
               "upload": {
@@ -138,8 +140,8 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| 指标 | 阈值 | 来源 |" >> $GITHUB_STEP_SUMMARY
           echo "|------|------|------|" >> $GITHUB_STEP_SUMMARY
-          echo "| LCP  | < 2500 ms | WCAG / web.dev |" >> $GITHUB_STEP_SUMMARY
-          echo "| CLS  | < 0.1     | WCAG / web.dev |" >> $GITHUB_STEP_SUMMARY
+          echo "| LCP  | < 4500 ms | W423 收紧（web.dev 目标 2500） |" >> $GITHUB_STEP_SUMMARY
+          echo "| CLS  | < 0.2     | W423 收紧（web.dev 目标 0.1） |" >> $GITHUB_STEP_SUMMARY
           echo "| TBT  | < 300 ms  | WCAG / web.dev |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "完整报告已上传至 \`lighthouse-report\` artifact。" >> $GITHUB_STEP_SUMMARY
