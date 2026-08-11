@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-    <meta charset="UTF-Ch.8">
-    <meta name="viewport" content="width=device-width, initial-scale=Ch.1.Ch.0">
-    <meta name="theme-color" content="#FAFCh.7FCh.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
     <title>Geosemiotics of the Pilgrimage Route · 详解西游记</title>
-    <script src="https://dCh.3js.org/dCh.3.vCh.7.min.js"></script>
-    <noscript><p style="color:#CCh.8463A;padding:Ch.12px;">This page requires JavaScript to render the charts.</p></noscript>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render the charts.</p></noscript>
     
     
             <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
@@ -698,69 +698,69 @@ td.num, th.num {
 <style>
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .notice {
-            background: #fffCh.8ec;
-            border: Ch.1px solid var(--accent-soft);
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
             border-radius: var(--radius-md);
-            padding: Ch.12px Ch.16px;
-            font-size: Ch.0.Ch.85rem;
+            padding: 12px 16px;
+            font-size: 0.85rem;
             color: var(--accent-tertiary);
-            margin-bottom: var(--space-Ch.4);
-            line-height: Ch.1.Ch.7;
+            margin-bottom: var(--space-4);
+            line-height: 1.7;
         }
         .notice code {
-            background: #fCh.5eCh.9dCh.4;
+            background: #f5e9d4;
             color: var(--accent-primary);
-            padding: Ch.2px Ch.6px;
+            padding: 2px 6px;
             border-radius: var(--radius-sm);
             font-family: "JetBrains Mono", monospace;
-            font-size: Ch.0.Ch.82rem;
+            font-size: 0.82rem;
         }
         .card-row {
             display: grid;
-            grid-template-columns: repeat(Ch.3, Ch.1fr);
-            gap: var(--space-Ch.4);
-            margin-bottom: var(--space-Ch.6);
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
         }
         .mech-card {
             background: var(--paper);
-            border: Ch.1px solid var(--line);
+            border: 1px solid var(--line);
             border-radius: var(--radius-md);
-            padding: Ch.22px;
+            padding: 22px;
             box-shadow: var(--shadow-md);
-            border-top: Ch.4px solid var(--accent-primary);
+            border-top: 4px solid var(--accent-primary);
         }
         .mech-card.de-local { border-top-color: var(--accent-secondary); }
         .mech-card.re-local { border-top-color: var(--accent-quaternary); }
         .mech-card .step {
             font-family: "JetBrains Mono", monospace;
-            font-size: Ch.0.Ch.74rem;
-            letter-spacing: Ch.0.Ch.15em;
+            font-size: 0.74rem;
+            letter-spacing: 0.15em;
             color: var(--accent-primary);
-            margin-bottom: var(--space-Ch.2);
+            margin-bottom: var(--space-2);
         }
         .mech-card.de-local .step { color: var(--accent-secondary); }
         .mech-card.re-local .step { color: var(--accent-quaternary); }
-        .mech-card hCh.3 {
-            font-size: Ch.1.Ch.15rem;
-            margin-bottom: Ch.6px;
+        .mech-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 6px;
             color: var(--text-primary);
         }
         .mech-card .place {
-            font-size: Ch.0.Ch.88rem;
+            font-size: 0.88rem;
             color: var(--text-secondary);
-            margin-bottom: var(--space-Ch.3);
+            margin-bottom: var(--space-3);
             font-style: italic;
         }
         .mech-card .desc {
-            font-size: Ch.0.Ch.9rem;
+            font-size: 0.9rem;
             color: var(--text-secondary);
-            line-height: Ch.1.Ch.7;
+            line-height: 1.7;
         }
         .mech-card .ref {
-            margin-top: var(--space-Ch.3);
-            padding-top: var(--space-Ch.2);
-            border-top: Ch.1px dashed var(--line);
-            font-size: Ch.0.Ch.78rem;
+            margin-top: var(--space-3);
+            padding-top: var(--space-2);
+            border-top: 1px dashed var(--line);
+            font-size: 0.78rem;
             color: var(--text-muted);
             font-family: "JetBrains Mono", monospace;
         }
@@ -770,13 +770,13 @@ td.num, th.num {
         .graph-wrap {
             position: relative;
             background: var(--bg-secondary);
-            border: Ch.1px solid var(--line);
+            border: 1px solid var(--line);
             border-radius: var(--radius-md);
             overflow: hidden;
         }
         .graph-wrap svg {
             display: block;
-            width: Ch.100%;
+            width: 100%;
             height: auto;
             cursor: grab;
         }
@@ -785,127 +785,127 @@ td.num, th.num {
             position: absolute;
             pointer-events: none;
             background: var(--text-primary);
-            color: #fCh.5eCh.9dCh.4;
-            padding: Ch.10px Ch.12px;
+            color: #f5e9d4;
+            padding: 10px 12px;
             border-radius: var(--radius-sm);
-            font-size: Ch.0.Ch.82rem;
-            box-shadow: Ch.0 Ch.4px Ch.12px rgba(Ch.0, Ch.0, Ch.0, Ch.0.Ch.25);
-            opacity: Ch.0;
-            transition: opacity Ch.0.Ch.15s ease;
-            max-width: Ch.280px;
-            line-height: Ch.1.Ch.6;
-            z-index: Ch.10;
+            font-size: 0.82rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            max-width: 280px;
+            line-height: 1.6;
+            z-index: 10;
         }
         .tooltip strong { color: var(--accent-soft); }
         .tooltip .tip-meta {
-            margin-top: Ch.4px;
-            font-size: Ch.0.Ch.76rem;
-            color: rgba(Ch.245, Ch.233, Ch.212, Ch.0.Ch.7);
+            margin-top: 4px;
+            font-size: 0.76rem;
+            color: rgba(245, 233, 212, 0.7);
             font-family: "JetBrains Mono", monospace;
         }
         .legend {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: Ch.8px Ch.18px;
-            margin-top: var(--space-Ch.4);
-            font-size: Ch.0.Ch.84rem;
+            gap: 8px 18px;
+            margin-top: var(--space-4);
+            font-size: 0.84rem;
         }
         .legend-group {
             display: flex;
             flex-direction: column;
-            gap: Ch.6px;
-            padding: Ch.8px Ch.14px;
+            gap: 6px;
+            padding: 8px 14px;
             background: var(--bg-primary);
-            border: Ch.1px solid var(--line-soft);
+            border: 1px solid var(--line-soft);
             border-radius: var(--radius-sm);
         }
-        .legend-group hCh.5 {
-            font-size: Ch.0.Ch.74rem;
-            letter-spacing: Ch.0.Ch.1em;
+        .legend-group h5 {
+            font-size: 0.74rem;
+            letter-spacing: 0.1em;
             color: var(--text-muted);
-            font-weight: Ch.600;
-            margin-bottom: Ch.2px;
+            font-weight: 600;
+            margin-bottom: 2px;
         }
         .legend-item {
             display: flex;
             align-items: center;
-            gap: Ch.6px;
+            gap: 6px;
         }
         .legend-swatch {
-            width: Ch.14px;
-            height: Ch.14px;
-            border-radius: Ch.50%;
-            border: Ch.1.Ch.5px solid #fff;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 1.5px solid #fff;
         }
         .legend-line {
             display: inline-block;
-            width: Ch.22px;
-            height: Ch.0;
-            border-top-width: Ch.2px;
+            width: 22px;
+            height: 0;
+            border-top-width: 2px;
             border-top-style: solid;
         }
         .detail-panel {
-            margin-top: var(--space-Ch.4);
-            padding: var(--space-Ch.4);
-            background: linear-gradient(Ch.135deg, #fffCh.8ec Ch.0%, #fCh.5eCh.9dCh.4 Ch.100%);
-            border-left: Ch.4px solid var(--accent-primary);
+            margin-top: var(--space-4);
+            padding: var(--space-4);
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent-primary);
             border-radius: var(--radius-sm);
-            min-height: Ch.60px;
+            min-height: 60px;
         }
         .detail-panel .placeholder {
             color: var(--text-muted);
-            font-size: Ch.0.Ch.88rem;
+            font-size: 0.88rem;
             font-style: italic;
         }
-        .detail-panel hCh.4 {
+        .detail-panel h4 {
             color: var(--accent-primary);
-            font-size: Ch.1.Ch.05rem;
-            margin-bottom: var(--space-Ch.2);
+            font-size: 1.05rem;
+            margin-bottom: var(--space-2);
         }
         .detail-panel dl {
             display: grid;
-            grid-template-columns: auto Ch.1fr;
-            gap: Ch.4px Ch.14px;
-            font-size: Ch.0.Ch.88rem;
+            grid-template-columns: auto 1fr;
+            gap: 4px 14px;
+            font-size: 0.88rem;
             color: var(--text-secondary);
         }
         .detail-panel dt {
             color: var(--text-muted);
             font-family: "JetBrains Mono", monospace;
-            font-size: Ch.0.Ch.78rem;
+            font-size: 0.78rem;
         }
         
         
         
 
-        /* aCh.11y: 全局键盘焦点可见性 */
+        /* a11y: 全局键盘焦点可见性 */
         
 
-        /* 响应式：Ch.768px 平板 */
-        @media (max-width: Ch.768px) {
-            .card-row { grid-template-columns: Ch.1fr; }
+        /* 响应式：768px 平板 */
+        @media (max-width: 768px) {
+            .card-row { grid-template-columns: 1fr; }
             
             
             
             
         }
-        /* Ch.520px 窄屏 */
-        @media (max-width: Ch.520px) {
+        /* 520px 窄屏 */
+        @media (max-width: 520px) {
             .legend { flex-direction: column; align-items: stretch; }
-            .legend-group { padding: Ch.6px Ch.10px; }
+            .legend-group { padding: 6px 10px; }
         }
     </style>
 <style id="audit-halo">
 /* injected label-halo for overlap readability */
-svg text { paint-order: stroke; stroke: rgba(Ch.255,Ch.255,Ch.255,Ch.0.Ch.88); stroke-width: Ch.3px; stroke-linejoin: round; }
-svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 </style>
   <script defer src="../js/rum.js"></script>
   <script defer src="../js/visit-log.js"></script>
 </head>
 <body>
-    <a class="skip-link" href="#main" style="position:absolute;left:-Ch.9999px;top:Ch.0;background:var(--dark);color:var(--dark-text);padding:Ch.10px Ch.18px;z-index:Ch.100;">Skip to main content</a>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
 
     <header class="topnav">
         <a class="brand" href="../index.html">
@@ -924,47 +924,47 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
     <section class="hero">
         <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Geosemiotics of the Pilgrimage Route</p>
         <p class="kicker">Data Visualization</p>
-        <hCh.1>Geosemiotics of the Pilgrimage Route</hCh.1>
+        <h1>Geosemiotics of the Pilgrimage Route</h1>
         <p class="subtitle">GEO-SEMIOTICS OF THE PILGRIMAGE</p>
         <p class="tagline">Localization · Delocalization · Relocalization — Spatial Flow under a Triple Mechanism</p>
     </section>
 
-<main id="main" class="page-wrap" style="padding-top:Ch.32px;padding-bottom:Ch.64px;">
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
         <div class="notice" id="dataSource">
-            Data source: embedded version (to load the latest data, run in the <code>site/</code> directory: <code>py -m http.server Ch.8000</code>)
+            Data source: embedded version (to load the latest data, run in the <code>site/</code> directory: <code>py -m http.server 8000</code>)
         </div>
 
         <!-- Triple-column cards: the three mechanisms -->
         <div class="card-row">
             <article class="mech-card" role="article">
-                <div class="step">STEP Ch.01 · LOCALIZATION</div>
-                <hCh.3>Localization</hCh.3>
-                <div class="place">Mount Huaguo Water-Curtain Cave · Ch.Ch.1</div>
+                <div class="step">STEP 01 · LOCALIZATION</div>
+                <h3>Localization</h3>
+                <div class="place">Mount Huaguo Water-Curtain Cave · Ch.1</div>
                 <div class="desc">The Stone Monkey is born on Mount Huaguo, where its native terrain and ecology ground "self-nature" — the monkey completes its naming and crowning in this blessed cave-heaven; geography is identity. This is a primordial "localization": nature bestows meaning.</div>
-                <div class="ref">ref: Ch.Ch.1 line Ch.522-Ch.523</div>
+                <div class="ref">ref: Ch.1 line 522-523</div>
             </article>
             <article class="mech-card de-local" role="article">
-                <div class="step">STEP Ch.02 · DE-LOCALIZATION</div>
-                <hCh.3>Delocalization</hCh.3>
-                <div class="place">The pilgrimage route itself · from Ch.Ch.13</div>
-                <div class="desc">When Xuanzang leaves Chang'an, the Ch.108,Ch.000-li westward road suspends "place" — passing through Chechi, Zhuizi, Miefa and other kingdoms, geographic difference is compressed into a semiotic testing ground of ideology, body-politics, and sovereign violence.</div>
-                <div class="ref">ref: Ch.Ch.13 line Ch.1343-Ch.1346</div>
+                <div class="step">STEP 02 · DE-LOCALIZATION</div>
+                <h3>Delocalization</h3>
+                <div class="place">The pilgrimage route itself · from Ch.13</div>
+                <div class="desc">When Xuanzang leaves Chang'an, the 108,000-li westward road suspends "place" — passing through Chechi, Zhuizi, Miefa and other kingdoms, geographic difference is compressed into a semiotic testing ground of ideology, body-politics, and sovereign violence.</div>
+                <div class="ref">ref: Ch.13 line 1343-1346</div>
             </article>
             <article class="mech-card re-local" role="article">
-                <div class="step">STEP Ch.03 · RE-LOCALIZATION</div>
-                <hCh.3>Relocalization</hCh.3>
-                <div class="place">Return to Spirit Mountain–Eastern Land · Ch.Ch.98</div>
+                <div class="step">STEP 03 · RE-LOCALIZATION</div>
+                <h3>Relocalization</h3>
+                <div class="place">Return to Spirit Mountain–Eastern Land · Ch.98</div>
                 <div class="desc">After reaching Spirit Mountain and obtaining the scriptures, "Eastern Land" becomes the destination of return — meaning lands anew. This is not a return to the origin, but a re-encoding of what the journey gained into the homeland, forming a spiral closure of the sign.</div>
-                <div class="ref">ref: Ch.Ch.98 line Ch.7001</div>
+                <div class="ref">ref: Ch.98 line 7001</div>
             </article>
         </div>
 
         <!-- 力导向图主体 -->
         <section class="section">
-            <hCh.2 class="section-title">Three Mechanisms of Geosemiotics · Force-Directed Graph</hCh.2>
+            <h2 class="section-title">Three Mechanisms of Geosemiotics · Force-Directed Graph</h2>
             <div class="section-sub">Dots are geographic nodes, colored by type; lines represent route relations, with thickness and style distinguishing route semantics. Hover for details; click to expand the node detail panel.</div>
             <div class="graph-wrap" id="graphWrap">
-                <svg id="forceGraph" width="Ch.1120" height="Ch.560" role="img" aria-label="Force-directed graph of the pilgrimage-route geosemiotics"></svg>
+                <svg id="forceGraph" width="1120" height="560" role="img" aria-label="Force-directed graph of the pilgrimage-route geosemiotics"></svg>
                 <div class="tooltip" id="graphTip" role="tooltip"></div>
             </div>
             <div class="legend" id="graphLegend"></div>
@@ -977,7 +977,7 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">vCh.2.Ch.2.Ch.86 · WCh.334 · Data Visualization</div>
+            <div class="footer-meta">v2.2.86 · W334 · Data Visualization</div>
         </div>
         <nav aria-label="Footer">
             <a href="index.html">EN Home</a>
@@ -992,13 +992,13 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
     // ============== EMBEDDED_DATA（fallback 用） ==============
     const EMBEDDED_DATA = {
         nodes: [
-            { id: 'huaguo Mountain', name: 'Mount Huaguo Water-Curtain Cave', type: 'local', chapter: 'Ch.1', line: Ch.522, desc: 'Birth of the Stone Monkey · Localization Origin' },
-            { id: 'lingshan', name: 'Spirit Mountain', type: 'religious', chapter: 'Ch.8', line: Ch.981, desc: 'Buddha-realm Center · Pilgrimage End' },
-            { id: 'changan', name: 'Chang\'an', type: 'capital', chapter: 'Ch.13', line: Ch.1343, desc: 'Departure · Delocalization Origin' },
-            { id: 'chechi', name: 'Chechi Kingdom', type: 'transit', chapter: 'Ch.44', line: Ch.3443, desc: 'Transit Kingdom · Ideological Type' },
-            { id: 'zhuzi', name: 'Zhuizi Kingdom', type: 'transit', chapter: 'Ch.68', line: Ch.5041, desc: 'Transit Kingdom · Body-Politics Type' },
-            { id: 'mifa', name: 'Miefa Kingdom', type: 'transit', chapter: 'Ch.84', line: Ch.6137, desc: 'Transit Kingdom · Sovereign-Violence Type' },
-            { id: 'lingshan-return', name: 'Return to Spirit Mountain', type: 'return', chapter: 'Ch.98', line: Ch.7001, desc: 'Relocalization · Return to Eastern Land' }
+            { id: 'huaguo Mountain', name: 'Mount Huaguo Water-Curtain Cave', type: 'local', chapter: '1', line: 522, desc: 'Birth of the Stone Monkey · Localization Origin' },
+            { id: 'lingshan', name: 'Spirit Mountain', type: 'religious', chapter: '8', line: 981, desc: 'Buddha-realm Center · Pilgrimage End' },
+            { id: 'changan', name: 'Chang\'an', type: 'capital', chapter: '13', line: 1343, desc: 'Departure · Delocalization Origin' },
+            { id: 'chechi', name: 'Chechi Kingdom', type: 'transit', chapter: '44', line: 3443, desc: 'Transit Kingdom · Ideological Type' },
+            { id: 'zhuzi', name: 'Zhuizi Kingdom', type: 'transit', chapter: '68', line: 5041, desc: 'Transit Kingdom · Body-Politics Type' },
+            { id: 'mifa', name: 'Miefa Kingdom', type: 'transit', chapter: '84', line: 6137, desc: 'Transit Kingdom · Sovereign-Violence Type' },
+            { id: 'lingshan-return', name: 'Return to Spirit Mountain', type: 'return', chapter: '98', line: 7001, desc: 'Relocalization · Return to Eastern Land' }
         ],
         links: [
             { source: 'huaguo Mountain', target: 'changan', type: 'de-localization' },
@@ -1013,22 +1013,22 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
 
     // ============== 节点类型与链接样式 ==============
     const NODE_COLORS = {
-        local: '#cCh.8463a',         // 红 · 地方化
-        religious: '#dCh.4afCh.37',     // 金 · 宗教中心
-        capital: '#Ch.3aCh.6bCh.8c',       // 蓝 · 出发地
-        transit: '#Ch.8aCh.7560',       // 灰 · 途经
-        return: '#Ch.6BCh.8ECh.5A'         // 绿 · 重地方化
+        local: '#c8463a',         // 红 · 地方化
+        religious: '#d4af37',     // 金 · 宗教中心
+        capital: '#3a6b8c',       // 蓝 · 出发地
+        transit: '#8a7560',       // 灰 · 途经
+        return: '#6B8E5A'         // 绿 · 重地方化
     };
     const NODE_LABELS = {
         local: 'Localization', religious: 'Religious Center', capital: 'Departure Capital',
         transit: 'Transit Kingdom', return: 'Relocalization'
     };
     const LINK_STYLES = {
-        'de-localization': { color: '#Ch.3aCh.6bCh.8c', dash: 'Ch.6 Ch.4', width: Ch.2, label: 'Delocalization' },
-        'transit':         { color: '#Ch.8aCh.7560', dash: null,   width: Ch.1.Ch.5, label: 'Transit' },
-        'arrival':         { color: '#dCh.4afCh.37', dash: null,   width: Ch.3.Ch.5, label: 'Arrival' },
-        're-localization': { color: '#Ch.6BCh.8ECh.5A', dash: 'Ch.6 Ch.4', width: Ch.2, label: 'Relocalization' },
-        'return':          { color: '#cCh.8463a', dash: null,   width: Ch.3.Ch.5, label: 'Return' }
+        'de-localization': { color: '#3a6b8c', dash: '6 4', width: 2, label: 'Delocalization' },
+        'transit':         { color: '#8a7560', dash: null,   width: 1.5, label: 'Transit' },
+        'arrival':         { color: '#d4af37', dash: null,   width: 3.5, label: 'Arrival' },
+        're-localization': { color: '#6B8E5A', dash: '6 4', width: 2, label: 'Relocalization' },
+        'return':          { color: '#c8463a', dash: null,   width: 3.5, label: 'Return' }
     };
 
     let CURRENT_DATA = null;
@@ -1051,18 +1051,18 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
 
     // ============== 渲染图例 ==============
     function renderLegend() {
-        const legend = dCh.3.select("#graphLegend");
+        const legend = d3.select("#graphLegend");
         legend.selectAll("*").remove();
 
         const nodeGroup = legend.append("div").attr("class", "legend-group");
-        nodeGroup.append("hCh.5").text("Node Type");
+        nodeGroup.append("h5").text("Node Type");
         Object.entries(NODE_COLORS).forEach(([key, color]) => {
             nodeGroup.append("div").attr("class", "legend-item")
                 .html(`<span class="legend-swatch" style="background:${color}"></span><span>${NODE_LABELS[key]}</span>`);
         });
 
         const linkGroup = legend.append("div").attr("class", "legend-group");
-        linkGroup.append("hCh.5").text("Link Type");
+        linkGroup.append("h5").text("Link Type");
         Object.entries(LINK_STYLES).forEach(([key, s]) => {
             const lineStyle = s.dash
                 ? `border-top-style:dashed;border-top-color:${s.color};border-top-width:${s.width}px;`
@@ -1075,20 +1075,20 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
     // ============== 渲染力导向图 ==============
     function renderForceGraph(data) {
         const wrap = document.getElementById("graphWrap");
-        const svg = dCh.3.select("#forceGraph");
+        const svg = d3.select("#forceGraph");
         svg.selectAll("*").remove();
 
         // 空数据保护
-        if (!data || !data.nodes || data.nodes.length === Ch.0) {
-            svg.append("div").text("No data").style("padding", "Ch.20px");
+        if (!data || !data.nodes || data.nodes.length === 0) {
+            svg.append("div").text("No data").style("padding", "20px");
             return;
         }
 
-        const wrapWidth = wrap.clientWidth || Ch.1120;
-        const width = Math.max(Ch.320, wrapWidth);
-        const height = +svg.attr("height") || Ch.560;
+        const wrapWidth = wrap.clientWidth || 1120;
+        const width = Math.max(320, wrapWidth);
+        const height = +svg.attr("height") || 560;
 
-        svg.attr("viewBox", `Ch.0 Ch.0 ${width} ${height}`);
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
 
         // 深拷贝防止 mutation 污染原数据
         const nodes = data.nodes.map(d => ({ ...d }));
@@ -1097,8 +1097,8 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
         const g = svg.append("g");
 
         // zoom / pan
-        const zoom = dCh.3.zoom()
-            .scaleExtent([Ch.0.Ch.4, Ch.3])
+        const zoom = d3.zoom()
+            .scaleExtent([0.4, 3])
             .on("zoom", (event) => g.attr("transform", event.transform));
         svg.call(zoom);
 
@@ -1107,58 +1107,58 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
         Object.entries(LINK_STYLES).forEach(([key, s]) => {
             defs.append("marker")
                 .attr("id", `arrow-${key}`)
-                .attr("viewBox", "Ch.0 -Ch.5 Ch.10 Ch.10")
-                .attr("refX", Ch.18).attr("refY", Ch.0)
-                .attr("markerWidth", Ch.7).attr("markerHeight", Ch.7)
+                .attr("viewBox", "0 -5 10 10")
+                .attr("refX", 18).attr("refY", 0)
+                .attr("markerWidth", 7).attr("markerHeight", 7)
                 .attr("orient", "auto")
                 .append("path")
-                .attr("d", "MCh.0,-Ch.5LCh.10,Ch.0LCh.0,Ch.5")
+                .attr("d", "M0,-5L10,0L0,5")
                 .attr("fill", s.color);
         });
 
         // 链接
-  // 性能：边层改 Canvas 叠加，避免每帧 N×Ch.4 几何属性写入触发 SVG 重排
+  // 性能：边层改 Canvas 叠加，避免每帧 N×4 几何属性写入触发 SVG 重排
   var _svgEl = svg.node();
   var _lcParent = _svgEl.parentNode;
   if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
   if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas'); if (_oc) _oc.remove(); }
-  var _dpr = Math.min(window.devicePixelRatio || Ch.1, Ch.2);
-  var _lcW = _svgEl.clientWidth || Ch.800, _lcH = _svgEl.clientHeight || Ch.540;
+  var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var _lcW = _svgEl.clientWidth || 800, _lcH = _svgEl.clientHeight || 540;
   var _vb = (_svgEl.getAttribute('viewBox') || '').split(/[\s,]+/);
-  var _cw = (_vb.length === Ch.4) ? (+_vb[Ch.2]) : (+_svgEl.getAttribute('width') || _lcW);
-  var _ch = (_vb.length === Ch.4) ? (+_vb[Ch.3]) : (+_svgEl.getAttribute('height') || _lcH);
+  var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_svgEl.getAttribute('width') || _lcW);
+  var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_svgEl.getAttribute('height') || _lcH);
   var linkCanvas = document.createElement('canvas');
   linkCanvas.className = 'link-canvas';
   linkCanvas.width = Math.round(_lcW * _dpr);
   linkCanvas.height = Math.round(_lcH * _dpr);
-  linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:Ch.0;left:' + _svgEl.offsetLeft + 'px;top:' + _svgEl.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+  linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _svgEl.offsetLeft + 'px;top:' + _svgEl.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
   if (_lcParent) _lcParent.insertBefore(linkCanvas, _svgEl);
   _svgEl.style.position = 'relative';
-  _svgEl.style.zIndex = 'Ch.1';
-  var lctx = linkCanvas.getContext('Ch.2d');
+  _svgEl.style.zIndex = '1';
+  var lctx = linkCanvas.getContext('2d');
   lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
   window.drawLinks = function drawLinks() {
     var linkSels = window.__LINKSELS__ || [];
-    lctx.clearRect(Ch.0, Ch.0, _cw, _ch);
-    for (var s = Ch.0; s < linkSels.length; s++) {
+    lctx.clearRect(0, 0, _cw, _ch);
+    for (var s = 0; s < linkSels.length; s++) {
       var sel = linkSels[s], data = sel.data(), lines = sel.nodes();
-      for (var i = Ch.0; i < data.length; i++) {
+      for (var i = 0; i < data.length; i++) {
         var d = data[i], el = lines[i];
         if (!d || !d.source || d.source.x == null) continue;
         lctx.beginPath();
         lctx.moveTo(d.source.x, d.source.y);
         lctx.lineTo(d.target.x, d.target.y);
         lctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
-        lctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || Ch.1;
+        lctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
         var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
-        lctx.globalAlpha = parseFloat(so != null ? so : 'Ch.1') || Ch.1;
+        lctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
         var da = el.getAttribute('stroke-dasharray');
-        lctx.setLineDash(da && da !== 'none' && da !== 'Ch.0' ? da.split(',').map(Number) : []);
+        lctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
         lctx.stroke();
       }
     }
     lctx.setLineDash([]);
-    lctx.globalAlpha = Ch.1;
+    lctx.globalAlpha = 1;
   };
 
         const link = g.append("g").attr("class", "links")
@@ -1169,7 +1169,7 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
             .attr("stroke-width", d => LINK_STYLES[d.type].width)
             .attr("stroke-dasharray", d => LINK_STYLES[d.type].dash || null)
             .attr("marker-end", d => `url(#arrow-${d.type})`)
-            .attr("opacity", Ch.0.Ch.85); link.style('display','none'); (window.__LINKSELS__ = window.__LINKSELS__ || []).push(link);
+            .attr("opacity", 0.85); link.style('display','none'); (window.__LINKSELS__ = window.__LINKSELS__ || []).push(link);
 
         // 节点组
         const node = g.append("g").attr("class", "nodes")
@@ -1179,37 +1179,37 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
             .attr("class", "node")
             .style("cursor", "pointer")
             .attr("role", "button")
-            .attr("tabindex", Ch.0)
+            .attr("tabindex", 0)
             .attr("aria-label", d => `${d.name}：${d.desc}`);
 
-        const radius = Ch.14;
+        const radius = 14;
         node.append("circle")
-            .attr("r", Ch.0)
-            .attr("fill", d => NODE_COLORS[d.type] || '#Ch.999')
+            .attr("r", 0)
+            .attr("fill", d => NODE_COLORS[d.type] || '#999')
             .attr("stroke", "#fff")
-            .attr("stroke-width", Ch.2.Ch.5)
-            .transition().duration(Ch.500).delay((d, i) => i * Ch.80)
+            .attr("stroke-width", 2.5)
+            .transition().duration(500).delay((d, i) => i * 80)
             .attr("r", radius);
 
         node.append("text")
             .text(d => d.name)
-            .attr("x", Ch.0).attr("y", radius + Ch.16)
+            .attr("x", 0).attr("y", radius + 16)
             .attr("text-anchor", "middle")
-            .style("font-size", "Ch.0.Ch.82rem")
+            .style("font-size", "0.82rem")
             .style("font-family", "inherit")
             .style("fill", "var(--text-primary)")
-            .style("font-weight", Ch.600)
+            .style("font-weight", 600)
             .style("pointer-events", "none")
-            .style("opacity", Ch.0)
-            .transition().duration(Ch.400).delay((d, i) => i * Ch.80 + Ch.200)
-            .style("opacity", Ch.1);
+            .style("opacity", 0)
+            .transition().duration(400).delay((d, i) => i * 80 + 200)
+            .style("opacity", 1);
 
         // 力学模型
-        const simulation = dCh.3.forceSimulation(nodes)
-            .force("link", dCh.3.forceLink(links).id(d => d.id).distance(Ch.120).strength(Ch.0.Ch.5))
-            .force("charge", dCh.3.forceManyBody().strength(-Ch.420))
-            .force("center", dCh.3.forceCenter(width / Ch.2, height / Ch.2))
-            .force("collide", dCh.3.forceCollide().radius(radius * Ch.2.Ch.2));
+        const simulation = d3.forceSimulation(nodes)
+            .force("link", d3.forceLink(links).id(d => d.id).distance(120).strength(0.5))
+            .force("charge", d3.forceManyBody().strength(-420))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("collide", d3.forceCollide().radius(radius * 2.2));
 
         simulation.on("tick", () => {
             window.drawLinks();
@@ -1217,42 +1217,42 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
         });
 
         // 拖拽
-        const drag = dCh.3.drag()
+        const drag = d3.drag()
             .on("start", (event, d) => {
-                if (!event.active) simulation.alphaTarget(Ch.0.Ch.3).restart();
+                if (!event.active) simulation.alphaTarget(0.3).restart();
                 d.fx = d.x; d.fy = d.y;
             })
             .on("drag", (event, d) => { d.fx = event.x; d.fy = event.y; })
             .on("end", (event, d) => {
-                if (!event.active) simulation.alphaTarget(Ch.0);
+                if (!event.active) simulation.alphaTarget(0);
                 d.fx = null; d.fy = null;
             });
         node.call(drag);
 
         // tooltip & detail
-        const tip = dCh.3.select("#graphTip");
-        const panel = dCh.3.select("#detailPanel");
+        const tip = d3.select("#graphTip");
+        const panel = d3.select("#detailPanel");
 
         function showTip(event, d) {
-            dCh.3.select(this).select("circle").attr("r", radius + Ch.3).attr("stroke", "var(--accent-soft)");
+            d3.select(this).select("circle").attr("r", radius + 3).attr("stroke", "var(--accent-soft)");
             // XSS 防护：使用 .text() 处理用户内容；.html() 仅用于 EMBEDDED_DATA 内部已知字符串
-            tip.style("opacity", Ch.1)
+            tip.style("opacity", 1)
                 .html(`<div><strong>${d.name}</strong></div>
                        <div>${d.desc}</div>
                        <div class="tip-meta">${d.chapter} · line ${d.line}</div>`);
             const wrapRect = wrap.getBoundingClientRect();
-            const xCh.0 = event.clientX - wrapRect.left + Ch.14;
-            const yCh.0 = event.clientY - wrapRect.top + Ch.14;
-            tip.style("left", xCh.0 + "px").style("top", yCh.0 + "px");
+            const x0 = event.clientX - wrapRect.left + 14;
+            const y0 = event.clientY - wrapRect.top + 14;
+            tip.style("left", x0 + "px").style("top", y0 + "px");
         }
         function hideTip() {
-            dCh.3.select(this).select("circle").attr("r", radius).attr("stroke", "#fff");
-            tip.style("opacity", Ch.0);
+            d3.select(this).select("circle").attr("r", radius).attr("stroke", "#fff");
+            tip.style("opacity", 0);
         }
         function showDetail(event, d) {
             // XSS 防护：.text() for user content; .html() 仅 EMBEDDED_DATA
             panel.html("");
-            panel.append("hCh.4").text(d.name + " · " + NODE_LABELS[d.type]);
+            panel.append("h4").text(d.name + " · " + NODE_LABELS[d.type]);
             const dl = panel.append("dl");
             dl.append("dt").text("CHAPTER");
             dl.append("dd").text(d.chapter);
@@ -1267,8 +1267,8 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
         node.on("mouseover", showTip)
             .on("mousemove", function(event) {
                 const wrapRect = wrap.getBoundingClientRect();
-                tip.style("left", (event.clientX - wrapRect.left + Ch.14) + "px")
-                    .style("top", (event.clientY - wrapRect.top + Ch.14) + "px");
+                tip.style("left", (event.clientX - wrapRect.left + 14) + "px")
+                    .style("top", (event.clientY - wrapRect.top + 14) + "px");
             })
             .on("mouseout", hideTip)
             .on("click", showDetail)
@@ -1290,11 +1290,11 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
 
         const isMock = data === EMBEDDED_DATA;
         if (isMock) {
-            dCh.3.select("#dataSource").html(
+            d3.select("#dataSource").html(
                 `<strong>Currently showing embedded data (${data.nodes.length} nodes).</strong> To load the full dataset, generate <code>scripts/output/data/geo_semiotics.json</code> and refresh.`
             );
         } else {
-            dCh.3.select("#dataSource").html(
+            d3.select("#dataSource").html(
                 `Data source: loaded live from <code>scripts/output/data/geo_semiotics.json</code> (http server mode)`
             );
         }
@@ -1303,13 +1303,13 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
         renderForceGraph(data);
     }
 
-    // resize debounce Ch.250ms
+    // resize debounce 250ms
     let resizeTimer;
     window.addEventListener("resize", () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
             if (window.__lastData) main();
-        }, Ch.250);
+        }, 250);
     });
 
     main();
@@ -1318,15 +1318,15 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
 (function(){
   function avoid(){
     document.querySelectorAll("svg").forEach(function(svg){
-      var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){var r=t.getBoundingClientRect();return r.width>Ch.0&&r.height>Ch.0;});
+      var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){var r=t.getBoundingClientRect();return r.width>0&&r.height>0;});
       var R=ts.map(function(t){return t.getBoundingClientRect();});
-      for(var i=Ch.0;i<ts.length;i++)for(var j=i+Ch.1;j<ts.length;j++){
+      for(var i=0;i<ts.length;i++)for(var j=i+1;j<ts.length;j++){
         var a=R[i],b=R[j];
-        var ix=Math.max(Ch.0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
-        var iy=Math.max(Ch.0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
-        if(ix*iy<=Ch.0)continue;
+        var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+        var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+        if(ix*iy<=0)continue;
         var area=Math.min(a.width*a.height,b.width*b.height);
-        if(area>Ch.0 && (ix*iy)/area>Ch.0.Ch.5){
+        if(area>0 && (ix*iy)/area>0.5){
           var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
           if(hide.style.display!=="none") hide.style.display="none";
         }
@@ -1336,7 +1336,7 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
   window.__avoidOverlap=avoid;
   function run(){try{avoid();}catch(e){}}
   window.addEventListener("load",function(){
-    [Ch.3000,Ch.6000,Ch.9000,Ch.12000].forEach(function(ms){setTimeout(run,ms);});
+    [3000,6000,9000,12000].forEach(function(ms){setTimeout(run,ms);});
   });
 })();
 </script>
@@ -1350,12 +1350,12 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
         groups.forEach(function(axisG){
           if(!axisG.querySelector(':scope > .domain')) return;
           var ticks = axisG.querySelectorAll(':scope > g.tick');
-          if(ticks.length < Ch.6) return;
+          if(ticks.length < 6) return;
           var bottom = false;
           ticks.forEach(function(t){
             var tr = t.getAttribute('transform') || '';
             var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
-            if(m && Math.abs(parseFloat(m[Ch.2])) < Ch.0.Ch.5) bottom = true;
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
           });
           if(!bottom) return;
           ticks.forEach(function(t){
@@ -1363,36 +1363,36 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
             if(!txt) return;
             txt.style.transformBox = 'fill-box';
             txt.style.transformOrigin = 'top center';
-            txt.style.transform = 'rotate(-Ch.38deg)';
-            txt.style.fontSize = 'Ch.10px';
-            txt.style.fontWeight = 'Ch.500';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
           });
         });
       });
     }catch(e){ /* noop */ }
   }
-  function run(){ setTimeout(fixAxes, Ch.800); setTimeout(fixAxes, Ch.2600); }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
   if(document.readyState === 'complete'){ run(); }
   else { window.addEventListener('load', run); }
 })();
 </script>
 
-<script id="audit-axisfixCh.2">
+<script id="audit-axisfix2">
 (function(){
-  function variance(a){var m=a.reduce(function(s,v){return s+v;},Ch.0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},Ch.0)/a.length;}
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
   function fix(){
     try{
       document.querySelectorAll('svg').forEach(function(svg){
         svg.querySelectorAll('g').forEach(function(g){
           if(!g.querySelector(':scope > .domain')) return;
           var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
-          if(ticks.length<Ch.5) return;
+          if(ticks.length<5) return;
           var xs=[],ys=[];
           ticks.forEach(function(t){
             var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
-            if(m){xs.push(parseFloat(m[Ch.1]));ys.push(parseFloat(m[Ch.2]));}
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
           });
-          if(xs.length<Ch.3) return;
+          if(xs.length<3) return;
           var vx=variance(xs), vy=variance(ys);
           if(vx>vy){
             // 水平(底部)轴：旋转 + 缩小
@@ -1400,24 +1400,24 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
               var tx=t.querySelector('text'); if(!tx) return;
               tx.style.transformBox='fill-box';
               tx.style.transformOrigin='top center';
-              tx.style.transform='rotate(-Ch.40deg)';
-              tx.style.fontSize='Ch.10px';
-              tx.style.fontWeight='Ch.500';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
             });
           } else {
             // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
             var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
-            texts.forEach(function(tx){ tx.style.fontSize='Ch.9px'; });
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
             var R=texts.map(function(t){return t.getBoundingClientRect();});
-            for(var i=Ch.0;i<texts.length;i++){
-              for(var j=i+Ch.1;j<texts.length;j++){
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
                 var a=R[i],b=R[j];
                 if(!a.width||!b.width) continue;
-                var ix=Math.max(Ch.0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
-                var iy=Math.max(Ch.0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
-                if(ix*iy<=Ch.0) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
                 var area=Math.min(a.width*a.height,b.width*b.height);
-                if(area>Ch.0 && (ix*iy)/area>Ch.0.Ch.5){
+                if(area>0 && (ix*iy)/area>0.5){
                   var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
                   if(hide.style.display!=='none') hide.style.display='none';
                 }
@@ -1428,7 +1428,7 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
       });
     }catch(e){ /* noop */ }
   }
-  function run(){ setTimeout(fix,Ch.800); setTimeout(fix,Ch.2600); setTimeout(fix,Ch.5000); }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
   if(document.readyState==='complete'){ run(); }
   else { window.addEventListener('load', run); }
 })();
@@ -1442,23 +1442,23 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
         var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
           // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
           if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
-          var r=t.getBoundingClientRect(); return r.width>Ch.0&&r.height>Ch.0;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
         });
         var R=ts.map(function(t){return t.getBoundingClientRect();});
-        for(var i=Ch.0;i<ts.length;i++){
-          for(var j=i+Ch.1;j<ts.length;j++){
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
             var a=R[i],b=R[j];
             if(!a.width||!b.width) continue;
-            var ix=Math.max(Ch.0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
-            var iy=Math.max(Ch.0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
-            if(ix*iy<=Ch.0) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
             var area=Math.min(a.width*a.height,b.width*b.height);
-            if(area>Ch.0 && (ix*iy)/area>Ch.0.Ch.5){
+            if(area>0 && (ix*iy)/area>0.5){
               var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
               if(hide.style.display!=="none"){
                 // 加 title 保留全名（hover 可见）
                 if(!hide.querySelector(":scope > title")){
-                  var ti=document.createElementNS("http://www.wCh.3.org/Ch.2000/svg","title");
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
                   ti.textContent=hide.textContent;
                   hide.appendChild(ti);
                 }
@@ -1470,49 +1470,49 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
       });
     }catch(e){ /* noop */ }
   }
-  function run(){ [Ch.1200,Ch.3000,Ch.6000,Ch.9000,Ch.12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
   if(document.readyState==="complete"){ run(); }
   else { window.addEventListener("load", run); }
 })();
 </script>
-<script id="audit-axisfixCh.3">
+<script id="audit-axisfix3">
 (function(){
-  function variance(a){var m=a.reduce(function(s,v){return s+v;},Ch.0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},Ch.0)/a.length;}
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
   function fix(){
     try{
       document.querySelectorAll('svg').forEach(function(svg){
         svg.querySelectorAll('g').forEach(function(g){
           var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
-          if(ticks.length<Ch.5) return;
+          if(ticks.length<5) return;
           var xs=[],ys=[];
           ticks.forEach(function(t){
             var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
-            if(m){xs.push(parseFloat(m[Ch.1]));ys.push(parseFloat(m[Ch.2]));}
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
           });
-          if(xs.length<Ch.3) return;
+          if(xs.length<3) return;
           var vx=variance(xs), vy=variance(ys);
           if(vx>vy){
             ticks.forEach(function(t){
               var tx=t.querySelector('text'); if(!tx) return;
               tx.style.transformBox='fill-box';
               tx.style.transformOrigin='top center';
-              tx.style.transform='rotate(-Ch.40deg)';
-              tx.style.fontSize='Ch.10px';
-              tx.style.fontWeight='Ch.500';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
             });
           } else {
             var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
-            texts.forEach(function(tx){ tx.style.fontSize='Ch.9px'; });
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
             var R=texts.map(function(t){return t.getBoundingClientRect();});
-            for(var i=Ch.0;i<texts.length;i++){
-              for(var j=i+Ch.1;j<texts.length;j++){
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
                 var a=R[i],b=R[j];
                 if(!a.width||!b.width) continue;
-                var ix=Math.max(Ch.0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
-                var iy=Math.max(Ch.0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
-                if(ix*iy<=Ch.0) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
                 var area=Math.min(a.width*a.height,b.width*b.height);
-                if(area>Ch.0 && (ix*iy)/area>Ch.0.Ch.5){
+                if(area>0 && (ix*iy)/area>0.5){
                   var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
                   if(hide.style.display!=='none') hide.style.display='none';
                 }
@@ -1523,36 +1523,36 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
       });
     }catch(e){ /* noop */ }
   }
-  function run(){ setTimeout(fix,Ch.800); setTimeout(fix,Ch.2600); setTimeout(fix,Ch.5000); }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
   if(document.readyState==='complete'){ run(); }
   else { window.addEventListener('load', run); }
 })();
 </script>
 
-<script id="audit-axisfixCh.4">
+<script id="audit-axisfix4">
 (function(){
   var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
   function bbox(t){return t.getBoundingClientRect();}
   function fix(){
     try{
       document.querySelectorAll('svg').forEach(function(svg){
-        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>Ch.0&&r.height>Ch.0;});
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
         var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
         var axisNum=new Set();
         var rows={},cols={};
-        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/Ch.8)*Ch.8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/Ch.8)*Ch.8;cols[x]=cols[x]||[];cols[x].push(t);});
-        Object.keys(rows).forEach(function(k){if(rows[k].length>=Ch.3)rows[k].forEach(function(t){axisNum.add(t);});});
-        Object.keys(cols).forEach(function(k){if(cols[k].length>=Ch.3)cols[k].forEach(function(t){axisNum.add(t);});});
-        axisNum.forEach(function(t){t.style.fontSize='Ch.9px';t.style.fontWeight='Ch.500';});
-        for(var i=Ch.0;i<all.length;i++){
-          for(var j=i+Ch.1;j<all.length;j++){
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
             var a=all[i],b=all[j];
             var ra=bbox(a),rb=bbox(b);
-            var ix=Math.max(Ch.0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
-            var iy=Math.max(Ch.0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
-            var inter=ix*iy; if(inter<=Ch.0) continue;
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
             var area=Math.min(ra.width*ra.height,rb.width*rb.height);
-            if(area<=Ch.0||inter/area<Ch.0.Ch.4) continue;
+            if(area<=0||inter/area<0.4) continue;
             var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
             var dup=ta&&ta===tb;
             var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
@@ -1564,7 +1564,7 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
             if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
             else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
             if(hide.style.display!=='none'){
-              hide.setAttribute('data-axisfixCh.4','Ch.1');
+              hide.setAttribute('data-axisfix4','1');
               if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
               hide.style.display='none';
             }
@@ -1573,7 +1573,7 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
       });
     }catch(e){}
   }
-  function run(){[Ch.800,Ch.2600,Ch.5000,Ch.8000,Ch.11000].forEach(function(t){setTimeout(fix,t);});}
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
   if(document.readyState==='complete')run();else window.addEventListener('load',run);
 })();
 </script>
@@ -1582,9 +1582,9 @@ svg text.dark-halo { stroke: rgba(Ch.20,Ch.20,Ch.30,Ch.0.Ch.85); }
 </html>
 <!--
 > 轨标：可视化
-> 关联 W ID：WCh.099
-> 版本：vCh.2.Ch.0.Ch.72
-> 完成日期：Ch.2026-Ch.07-Ch.27
+> 关联 W ID：W099
+> 版本：v2.0.72
+> 完成日期：2026-07-27
 > Preflight 三轨验证：第二十三次完整执行（line 号归属 + 内容匹配 + chapter 归属 Grep num:N）
 -->
 </body>

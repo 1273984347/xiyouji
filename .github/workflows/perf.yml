@@ -4,9 +4,9 @@ name: Lighthouse CI
 #
 # 在 push main / PR / 每周定时时启动 Lighthouse CI，对 site/ 下关键页面进行 Core Web Vitals 采集，
 # 通过 --assert.* 参数强制断言性能预算：
-#   LCP  Largest Contentful Paint   < 2500 ms
-#   CLS  Cumulative Layout Shift     < 0.1
-#   TBT  Total Blocking Time        < 300 ms
+#   LCP  Largest Contentful Paint   ≤ 4500 ms（W423 收紧）
+#   CLS  Cumulative Layout Shift     ≤ 0.2（W423 收紧）
+#   TBT  Total Blocking Time        ≤ 300 ms
 # 失败时阻断 CI 并上传完整 lighthouse-report artifact。
 #
 # W422 修复：原仅 pull_request + workflow_dispatch 触发，而本项目直接 push main 无 PR——

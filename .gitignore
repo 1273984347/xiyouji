@@ -40,6 +40,9 @@ ENV/
 .venv/
 .env
 
+# Playwright 本地浏览器二进制（手动安装，~300MB，非源码）
+scripts/.pw-browsers/
+
 # 编辑器与系统
 .vscode/
 .idea/

@@ -47,7 +47,7 @@ HTML = os.path.join(ROOT, "site", "dukou-engine.html")
 # 四份含 A4 计数语义的文档（W413 修正：交接文档恢复入库，恢复 4 份检查）
 A4_DOCS = ["README.md", "STRUCTURE.md",
            os.path.join("docs", "00-导读", "项目说明.md"), "交接文档.md"]
-EXPECT_A4 = "201 篇"  # W342 gap-fill（权力五联对照 W084 + 妖怪身份政治）后：199→201
+EXPECT_A4 = "209 篇"  # 真实计数（W342 199→201 起步，W400 后实际 209）
 
 # 归档文件（W417 新增）：归档后旧 W### 仍纳入范围漂移可追溯扫描，避免误报
 ARCHIVE_DOCS = [
