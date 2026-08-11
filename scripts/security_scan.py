@@ -28,6 +28,7 @@ v2.2.47 · W268 · 在 W236-E 基础上深化：
 """
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
@@ -158,8 +159,8 @@ def discover_files():
             continue
         for p in root.rglob("*"):
             if p.is_file() and p.suffix.lower() in exts:
-                # 跳过 baseline/current 截图目录、node_modules
-                if any(seg in {"node_modules", "current", "baseline", ".thumbnails"} for seg in p.parts):
+                # 跳过 baseline/current 截图目录、node_modules、本地 Playwright 浏览器二进制
+                if any(seg in {"node_modules", "current", "baseline", ".thumbnails", ".pw-browsers"} for seg in p.parts):
                     continue
                 # W400 修复：跳过下划线前缀的一次性诊断/开发脚本（如 _chk_*.js）
                 # —— 它们非生产代码，且常含 eval/innerHTML 用于本地调试，不应阻断安全门禁
@@ -451,10 +452,27 @@ def _find_pip_audit():
 
 
 def _find_requirements_files():
-    """发现项目中的 requirements*.txt 文件。"""
+    """发现项目中的 requirements*.txt 文件（递归，跳过依赖/构建产物目录）。
+
+    W423 修正：原 ROOT.glob() 非递归扫描漏掉 scripts/requirements.txt，
+    导致回退扫描整个 Python 环境（103 个 (environment) high 假阳性 → E8-4 永久红）。
+    改为 os.walk + 剪枝，优先命中仓库内钉版依赖文件。
+    """
+    EXCLUDE_DIRS = {
+        "node_modules", ".venv", "venv", "dist", "build", ".git",
+        "__pycache__", ".pytest_cache", ".ruff_cache", ".pw-browsers",
+        "output", ".thumbnails", "current", "baseline",
+    }
     candidates = []
-    for pattern in ("requirements*.txt", "requirements/**/*.txt"):
-        candidates.extend(ROOT.glob(pattern))
+    for root, dirs, files in os.walk(ROOT):
+        dirs[:] = sorted(d for d in dirs if d not in EXCLUDE_DIRS)
+        for fn in files:
+            # requirements*.txt（如 requirements.txt / requirements-dev.txt）
+            # 或 requirements/ 子目录内的 *.txt（如 requirements/base.txt）
+            if fn.endswith(".txt") and (
+                fn.startswith("requirements") or Path(root).name == "requirements"
+            ):
+                candidates.append(Path(root) / fn)
     # 去重并排序
     seen = set()
     result = []

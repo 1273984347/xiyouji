@@ -9,6 +9,38 @@
 ---
 
 
+## W424 对抗性审查修正与全仓整理（2026-08-12·v2.3.39）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W424 | v2.3.39 修改·EXPECT_A4 "201 篇"→"209 篇"（A4 计数假绿门禁变真校验） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W424 | v2.3.39 修改·版本行 bump + A4 "199→201" parenthetical 统一 209·项目说明 :45 v2.3.37→v2.3.38 遗留同步 |
+| 交接文档.md | W424 | v2.3.39 修改·W422/W423 三处矛盾修复·HEAD/版本列表/页脚最后更新 bump 至 v2.3.39 W424 |
+| 项目概览.md / 项目认知总览.md / 项目交接参考手册.md | W424 | v2.3.39 修改·旁文档 3 份 bump（W424·下一 W425） |
+| docs/00-导读/文档规范.md | W424 | v2.3.39 修改·A4 门禁描述 "201 篇"→"209 篇"（两处） |
+| scripts/security_scan.py | W424 | v2.3.39 修改·_find_requirements_files 递归剪枝（命中 scripts/requirements.txt·不再扫环境 103 high）·discover_files 排除 .pw-browsers |
+| site/data/character-relationship-3d.html | W424 | v2.3.39 修改·主脚本加 defer（main() 早于 defer THREE 导致 3D 永不渲染） |
+| site/en/journey-geo-semiotics.html | W424 | v2.3.39 修改·机械移除 466 处 Ch. 腐蚀注入·lang zh-CN→en |
+| 新Agent启动Prompt.md | W424 | v2.3.39 修改·更新至 W423（四新门禁/性能预算/A4 209/security 修复） |
+| .github/workflows/README.md | W424 | v2.3.39 修改·预算数字三套统一 4500/0.2/300·触发矩阵补 Screenshot 列·版本 v2.3.38 W423 |
+| .github/workflows/perf.yml | W424 | v2.3.39 修改·头注释 2500/0.1→4500/0.2（与断言一致） |
+| DESIGN.md | W424 | v2.3.39 修改·"38 个可视化页"→"86 个可视化页面" |
+| scripts/_audit_data.json / _audit_hiddencount.json / _audit_refine.json / _audit_report.json | W424 | v2.3.39 删除·一次性审计原始数据（对应 .md 报告保留） |
+| scripts/output/screenshots/ | W424 | v2.3.39 清理·slices/mobile/desktop ~416MB 删除（保留 viz 证据）·过期报告 14 个删除 |
+| scripts/output/rag_index.json | W424 | v2.3.39 重建·35.3→35.8MB（含 08-11 全部文档改动·未入库） |
+
+## W423 性能债专项（2026-08-11·v2.3.38）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/perf.yml | W423 | v2.3.38 修改·LHCI 预算收紧 LCP 5000→4500·CLS 0.3→0.2·FCP warn 4800→4200·interactive warn 5000→4500·TBT 300 不变 |
+| site/tokens.css | W423 | v2.3.38 修改·3 套 CJK @font-face font-display swap→optional（CLS 根因）·JetBrains Mono 保持 swap |
+| site/data/*.html（86 页） | W423 | v2.3.38 修改·同源 CJK 字体 optional 替换·../static/fonts/ 路径零破坏 |
+| site/dashboard.html | W423 | v2.3.38 修改·head 同步 d3 移至 body 末尾（LCP 根因·~4.7s） |
+| site/data/timeline.html / site/data/character-relationship-3d.html | W423 | v2.3.38 修改·d3+Three defer（图表 run() 在 load 后执行） |
+| CHANGELOG.md / 交接文档.md / scripts/output/file-index.md | W423 | v2.3.38 修改·新增 W423 段与登记（本段） |
+
+
 ## W422 全量治理（2026-08-10·v2.3.37）
 
 | 文件 | W | 说明 |
@@ -155,7 +187,3 @@
 | docs/00-导读/文档规范.md | W419 | v2.3.34 修改·§11.2 禁改范围 W001-W414→W001-W418（随 W419 校准）+ 新增「误改后果」列（12 类禁改文件附违反后果）·新增 §11.4 同步核对速查表（10 项勾选清单） |
 | 新Agent启动Prompt.md | W419 | v2.3.34 新建 + 处置收尾补充·新 Agent 启动 prompt（交接文档速用精简版·可直接复制发送·含四步认知顺序 + §11 规则 + E1 铁律 + W419 三条新增铁律：bump 污染校验（W418/W419 复现 2 次）/ 批量重写最小化 diff（git restore 非必要改动）/ A1 SD 禁重跑合并脚本） |
 
-## W423 W423 性能债专项（2026-08-11）
-
-| 文件 | W | 说明 |
-|---|---|---|
