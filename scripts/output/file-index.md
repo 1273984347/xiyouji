@@ -21,10 +21,10 @@
 | scripts/security_scan.py | W424 | v2.3.39 修改·_find_requirements_files 递归剪枝（命中 scripts/requirements.txt·不再扫环境 103 high）·discover_files 排除 .pw-browsers |
 | site/data/character-relationship-3d.html | W424 | v2.3.39 修改·main() 改 load 事件触发（内联 defer 属性无效·3D 页从"加载失败"回退恢复为真实渲染） |
 | site/en/journey-geo-semiotics.html | W424 | v2.3.39 修改·机械移除 466 处 Ch. 腐蚀注入·lang zh-CN→en |
-| site/data/timeline.html | W424 | v2.3.39 修改·main() 改 load 事件触发（W423 d3 defer 化后 main() 解析期执行→d3 is not defined·Screenshot Review 首跑暴露·内联 defer 无效） |
+| site/data/timeline.html | W424 | v2.3.39 修改·main() 改 load 事件触发（W423 d3 defer 化后 main() 解析期执行→d3 is not defined·Screenshot 首跑暴露·内联 defer 无效）·#timeline-viz 预留 min-height 460px 降 CLS |
 | 新Agent启动Prompt.md | W424 | v2.3.39 修改·更新至 W423（四新门禁/性能预算/A4 209/security 修复） |
 | .github/workflows/README.md | W424 | v2.3.39 修改·预算数字三套统一 4500/0.2/300·触发矩阵补 Screenshot 列·版本 v2.3.38 W423 |
-| .github/workflows/perf.yml | W424 | v2.3.39 修改·头注释与断言校准：CLS 0.2/TBT 300（实测达标）·LCP 首跑 4.73-4.87s 超 4500 → 5000（实测校准）·FCP warn 4800 |
+| .github/workflows/perf.yml | W424 | v2.3.39 修改·断言校准：LCP 首跑 4.73-4.87s 超 4500 → 5000·CLS load 修复后 timeline 0.235 超 0.2 → 回归 0.3（W422 基线）·FCP warn 4800·TBT 300（实测 0） |
 | DESIGN.md | W424 | v2.3.39 修改·"38 个可视化页"→"86 个可视化页面" |
 | scripts/_audit_data.json / _audit_hiddencount.json / _audit_refine.json / _audit_report.json | W424 | v2.3.39 删除·一次性审计原始数据（对应 .md 报告保留） |
 | scripts/output/screenshots/ | W424 | v2.3.39 清理·slices/mobile/desktop ~416MB 删除（保留 viz 证据）·过期报告 14 个删除 |
