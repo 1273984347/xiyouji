@@ -26,7 +26,7 @@
 | CI | [`ci.yml`](ci.yml) | `push` main + `pull_request` + `workflow_dispatch` | 7 job 门禁：截图存活烟测 / Lighthouse / a11y / dependency / ruff / pytest / agent-web 构建 |
 | Security | [`security.yml`](security.yml) | `push` main + `pull_request` | 4 job：npm-audit（scripts/ + agent-web/ 双目录）/ pip-audit / CSP / XSS detect |
 | Deploy Pages | [`pages.yml`](pages.yml) | `push` main（site/** 变更） | GitHub Pages 部署 `./site`（W401 决策：不采用 build-test-deploy.yml，避免部署竞态·已删除） |
-| Lighthouse CI | [`perf.yml`](perf.yml) | `push` main（site/**）+ `pull_request` + 每周一 + `workflow_dispatch`（W422 补 push：原仅 PR 从不运行·首跑暴露性能债后阈值已校准） | LHCI 性能预算断言（LCP≤5000ms/CLS≤0.2/TBT≤300ms，W424 实测校准） |
+| Lighthouse CI | [`perf.yml`](perf.yml) | `push` main（site/**）+ `pull_request` + 每周一 + `workflow_dispatch`（W422 补 push：原仅 PR 从不运行·首跑暴露性能债后阈值已校准） | LHCI 性能预算断言（LCP≤5000ms/CLS≤0.3/TBT≤300ms，W424 实测校准） |
 | Screenshot Review | [`screenshot-review.yml`](screenshot-review.yml) | `push` main（site/** 或脚本/workflow 变更）+ `pull_request` + 每周一 + `workflow_dispatch`（W421：页脚/文档-only 跳过·data 页定向截图） | Playwright 截图 + 布局审计 |
 
 > **W400 关键教训**：ci.yml 建置时仅 `pull_request` 触发，但项目工作流是直接 push main（无 PR），**CI 从未真正运行过**。W399 补 push 触发后首次运行暴露全部存量问题。**新 workflow 必须本地语法校验 + 确认触发条件匹配真实开发流。**
@@ -47,7 +47,7 @@
 - **运行环境**：`ubuntu-latest` + Node 20 + Python 3.12
 - **流程**：启动 static server → `npx lighthouse http://localhost:8000/dashboard.html`（categories: performance/accessibility/best-practices/seo，`--throttling-method=simulate`）
 - **W400 门禁**：**Accessibility ≥ 0.95 硬门槛**；**Performance 降级为 warn**（`< 0.50` 才警告）——dashboard 为内容密集模板大页，CI 实测 0.550、本地 0.730 波动大，且 lantern 对大 DOM 页 FCP/LCP 有已知误差（All Frames not implemented）
-- **性能门禁承担者**：perf.yml（LHCI LCP≤5000ms / CLS≤0.2 / TBT≤300ms 预算断言，W424 实测校准）
+- **性能门禁承担者**：perf.yml（LHCI LCP≤5000ms / CLS≤0.3 / TBT≤300ms 预算断言，W424 实测校准）
 - **artifact**：`lighthouse-report`（保留 30 天）
 
 ### Job 3 · `a11y-audit`（a11y 审查，9 矩阵）
@@ -115,7 +115,7 @@
 | XSS high 计数 | = 0 | security.yml xss-detect job 失败 |
 | pip-audit | 0 高危（--strict） | security.yml pip-audit job 失败 |
 | npm audit（scripts/ + agent-web/） | 0 high（--omit=dev --audit-level=high） | security.yml npm-audit job 失败 |
-| LHCI 预算 | LCP≤5000ms / CLS≤0.2 / TBT≤300ms | perf.yml job 失败 |
+| LHCI 预算 | LCP≤5000ms / CLS≤0.3 / TBT≤300ms | perf.yml job 失败 |
 | pytest | 0 失败（tests 全量） | ci.yml pytest-unit job 失败 |
 | agent-web build | tsc + vite 退出码 0 | ci.yml agent-web-build job 失败 |
 
