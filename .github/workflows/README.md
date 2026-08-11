@@ -1,6 +1,6 @@
 # CI/CD 工作流说明
 
-> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423** — 西游记解读项目（`d:\1\xiyouji`，v2.3.38 W423）的 GitHub Actions 工作流层。
+> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424** — 西游记解读项目（`d:\1\xiyouji`，v2.3.39 W424）的 GitHub Actions 工作流层。
 > **W399**：ci.yml 补 push main 触发（此前仅 pull_request，项目直接 push main 无 PR → CI 从未运行）；sitemap/robots 域名补全；新增 rum-viewer。
 > **W400**：CI/Security 三 workflow 转绿（ruff 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复·black 门禁移除）。
 > **W401**：ci.yml 5→7 job（pytest-unit 全量 tests/ + agent-web-build）·agent-web 源码入库·移除 3 处无 pip 安装 job 的 cache: pip 残留·build-test-deploy.yml 弃用删除。
@@ -15,6 +15,7 @@
 > **W418**：内容质量深化（site/en/ 4 文件 29 broken 链接修复——EN 版存在指向同目录/无 EN 版回退中文原版 ../data/*.html 加 lang="zh-CN" 标注·A1 逐回解读 23 回补 `> 导航：` 引用行 100 回全覆盖·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W422**：全量治理（perf.yml 补 push 触发——LHCI 硬预算此前仅 PR 从未运行·verify_delivery 新增导航/链接/sitemap/回退 4 门禁·ci.yml 新增 JS 语法检查 + mypy report-only·Dependabot 配置·截图 artifact 失败才上传）。
 > **W423**：性能债专项（perf.yml LHCI 预算收紧 LCP 5000→4500·CLS 0.3→0.2·TBT 300 不变；CJK 字体 swap→optional·D3/Three 移出 head——无 workflow 结构改动，仅预算阈值更新）。
+> **W424**：性能债实测校准（push 首跑：LCP 4.73-4.87s 超 4500 → 预算回调 5000·timeline CLS 0.235 超 0.2 → 预算回归 0.3·FCP warn 4800·Screenshot 首跑暴露 timeline `d3 is not defined` + 内联 defer 无效 → 3D/时间线 `main()` 改 load 事件触发）。
 > **W421**：Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 恒全量 + batch_screenshots.js --only-pages + Playwright 浏览器缓存 + checkout fetch-depth 0）。
 > **W420**：A1 内容质量深化（深度解读 100/100 补全 + 56 回元数据补齐 + 99 回导航错链修复·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W419**：修复 A1 深度解读 SD 错位（22 篇 SD 编号≠真实回号归位·40-72 回全覆盖·源文件 24 篇元数据/H1/关联行修正·第 56 回补写 SD101·无 workflow 文件改动，CI 全量验证涵盖）。
@@ -163,5 +164,5 @@ npx lighthouse http://localhost:8000/dashboard.html `
 
 ## 8. 双索引
 
-- [CHANGELOG.md](../../CHANGELOG.md) — v2.3.38 W423
+- [CHANGELOG.md](../../CHANGELOG.md) — v2.3.39 W424
 - [scripts/output/file-index.md](../../scripts/output/file-index.md) — W234-E1 / W399 / W400 / W401
