@@ -4,9 +4,19 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W422），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W423），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.38（2026-08-11）：W423 性能债专项 — LHCI 预算收紧 + 渲染阻塞消除（CJK 字体 swap→optional·D3/Three 移出 head）
+
+> **W423 性能债专项（承接 W422 perf.yml 首跑暴露的存量性能债）**
+> - **来源**：W422 补 push 触发后 LHCI 首跑即失败——真实站点存量性能债暴露：index.html LCP 4662ms > 2500ms（✘）·timeline.html CLS 0.241 > 0.1（✘）·dashboard FCP 1889ms 超 warn 线。perflint 评估本地 Playwright 不可用（沙箱网络/锁限制），转为"高置信安全优化 + 保守预算收紧"，以 CI LHCI 为权威测量（perf.yml 失败不阻断 Pages 部署）
+> - **执行（CLS 根因·CJK 字体 swap→optional）**：3 套 CJK `@font-face`（Noto Serif SC 200/900、Noto Sans SC 400、Noto Sans SC 500）`font-display: swap`→`optional`（swap 在字体就绪后换入引发回流 CLS；optional 在 ~100ms 内未就绪则跳过下载·无换入回流）。JetBrains Mono（2 条）保持 swap（拉丁字体体积小·不影响 CLS）。tokens.css + 86 个 site/data/*.html 同源修改，`../static/fonts/` 路径零破坏（精确正则替换，未跑 inline_css.py 以防路径回归——W408 历史教训）
+> - **执行（LCP 根因·D3/Three 移出 head 渲染阻塞）**：dashboard.html `<head>` 同步 `<script src="d3.v7.min.js">`（实测 ~4.7s LCP 真凶·非 index.html）移至 `<body>` 末尾 vis-tools.js 前，保留执行序；timeline.html / character-relationship-3d.html 的 d3 + Three.js `<script>` 改 `defer`（图表 `run()` 均在 `load` 后执行·defer 安全）
+> - **执行（预算校准 perf.yml）**：断言 LCP 5000→4500·CLS 0.3→0.2·FCP warn 4800→4200·interactive warn 5000→4500·TBT 300 不变；job 名 / 摘要表同步更新；头注释根因更正（LCP 真凶=dashboard head 同步 D3，非 index；CLS 根因=3.6MB NotoSerifSC-VF.woff2 swap 回流，非动画）
+> - **验证**：Grep 抽查 site/data 字体路径 0 破坏（`url('static/fonts/` 命中 0·`../static/fonts/` 86 文件正确）·mono 仍 swap·tokens.css 3 CJK 条目 optional；dashboard/timeline/3d 脚本位置/defer 已核对；py_compile 关键脚本通过
+> - **状态**：已落地（待 commit/push）·CI/Security/Deploy Pages/Screenshot Review 待验证·LHCI 收紧后待测（本地无浏览器，以 CI 为准）
 
 ### v2.3.37（2026-08-10）：W422 全量治理 — P1-P3 优化落地（perf.yml 触发修复 + verify_delivery 四新门禁 + 文档健康归档 + 双索引规则校准 + Dependabot/JS 检查/mypy/a11y 口径）
 
