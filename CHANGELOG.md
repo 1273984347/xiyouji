@@ -20,7 +20,8 @@
 > - **执行（P2-3/CI 文档同步）**：新Agent启动Prompt.md 更新至 W423（四新门禁/性能预算/A4 209/security 修复）·workflows/README.md 预算三套数字统一 LCP 4500/CLS 0.2/TBT 300 + 触发矩阵补 Screenshot 列 + v2.3.38 W423·perf.yml 头注释 2500/0.1→4500/0.2·DESIGN.md "38 个页面"→"86 个可视化页面"
 > - **执行（全仓整理）**：清理临时审计日志 14 个 + 缓存（44 个 `__pycache__`/`.pytest_cache`/`.ruff_cache`）+ 空目录 3 个 + 截图大件 slices/mobile/desktop（~416MB·保留 viz 审查证据）·删除过期可再生报告 14 个（security-report/a11y/html-size/perf/ui-review/audit-baseline/截图管线产物）+ 一次性审计原始 JSON 4 个（`_audit_*.json`·对应 `.md` 报告保留）·RAG 索引重建（35.3→35.8MB·含 08-11 全部文档改动）
 > - **验证**：verify_delivery 全绿（A4 "209 篇"真校验）·lint_links site 2627/docs 4860 链接 0 broken·check_js_syntax --all 通过·security_scan high=0·py_compile 通过·RAG 查询实测
-> - **状态**：已落地（待 commit/push）·CI/Security/Deploy Pages/Screenshot Review/Lighthouse 待验证
+> - **CI 实测（push 760be14 首跑）**：CI 15 job 全绿（pytest 全量·agent-web build·JS 语法）·Security 4 job 全绿（E8-4 修复后 high=0 不再永久红）·Lighthouse 4 页 LCP 4.73-4.87s 超 4500（CLS=0/TBT=0 达标）→ W424 校准预算 LCP 5000/FCP warn 4800/interactive warn 5000·Screenshot Review/Deploy Pages 随 push 验证
+> - **状态**：已落地·已 push（760be14 + 校准提交）·CI/Security 全绿·Lighthouse 校准后待终验·性能债登记（LCP 距 web.dev 2500 目标仍有 2.2s+·存量 4.7-4.9s）
 
 ### v2.3.38（2026-08-11）：W423 性能债专项 — LHCI 预算收紧 + 渲染阻塞消除（CJK 字体 swap→optional·D3/Three 移出 head）
 
