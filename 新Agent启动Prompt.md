@@ -4,6 +4,7 @@
 > **创建**：2026-08-10（W419 处置收尾·文档规范 §11 表格化配套）·当前 HEAD 版本见 [交接文档.md](交接文档.md)「一、当前进度」。
 > **更新**：2026-08-10 W419 补充——① bump_version 污染校验（W418/W419 复现 2 次）② 批量重写脚本最小化 diff（git restore 非必要改动）③ A1 SD 雷区（w286 脚本重跑会错位·禁止重跑）。
 > **更新（2026-08-11 W423）**：① verify_delivery 四新门禁（A1 导航相邻性/docs/01 链接/sitemap 覆盖/site/data 回退模式）② 性能预算收紧（LHCI LCP 5000→4500·CLS 0.3→0.2·CJK 字体 swap→optional·D3/Three 移出 head）③ A4 计数门禁校准 **209 篇**（2026-08-11 修正）④ security 门禁修复（依赖审计只扫仓库 requirements*.txt，不再回退扫整个 Python 环境）。
+> **更新（2026-08-12 W424）**：① A4 计数门禁 209 篇落地（verify EXPECT_A4 201→209）② security_scan 依赖审计只扫仓库 requirements*.txt（不再回退扫环境·E8-4 不再永久红）③ 3D/时间线页 `main()` 改 `window load` 事件触发（**内联 `defer` 属性对无 src 脚本无效**——勿再依赖内联 defer）④ LHCI 预算实测校准 LCP ≤5000ms / CLS ≤0.3 / FCP warn 4800（W423 收紧值 4500/0.2 经 push 首跑实测后回调）·workflows README/DESIGN 同步。
 > **配套**：[交接文档.md](交接文档.md)（进度中枢）/ [docs/00-导读/文档规范.md](docs/00-导读/文档规范.md) §11（文件管控）/ [scripts/output/file-index.md](scripts/output/file-index.md)（反向索引）。
 > 本文件是交接文档的「速用精简版」——若正文与交接文档/文档规范冲突，以后两者为准。
 
@@ -44,10 +45,11 @@
 - 若涉及 A1 深度解读（SD001-SD101）改动：SD 编号≠原著回号（编号=创作序号）·源文件元数据注释在第三行（第一行是标题）——`w286_merge_yuanwen_shendu.py` 重跑会 fallback 按编号放置导致 SD 再次错位（W419 已归位 22 篇·40-72 回全覆盖）·**禁止重跑该合并脚本**；改动 SD 归位前先读交接文档 W419 段
 - 提交后 push，验证 CI/Security/Deploy Pages/Screenshot Review 全绿，然后做状态行收尾
 
-【W420-W423 治理要点（速记）】
+【W420-W424 治理要点（速记）】
 - **W420/W421**：A1 深度解读 100/100 补全（SD102/SD103）；导航必须指向**相邻回**（上一回=N-1·下一回=N+1·第 1 回无上·第 100 回全书完）——lint_links 只查链接存在、不查指向正确，链接质量类任务别只做 404 审计；Screenshot Review 已提速（改动范围判定 + `--only-pages`）
 - **W422**：verify_delivery 新增 4 门禁（A1 导航相邻性 / docs/01 链接 / sitemap 覆盖 154 页 / site/data 内嵌回退模式），提交前必须全绿；文档健康归档后 CHANGELOG 83 行·file-index 127 行·交接文档 556 行——新文档执行双索引、存量以 file-index 追溯
-- **W423**：性能预算收紧（LHCI LCP ≤4500ms / CLS ≤0.2 / TBT ≤300ms；CJK 字体 swap→optional·D3/Three 移出 head）——新页面/改动不要在 `<head>` 同步加载外部脚本，勿破坏渲染阻塞优化
+- **W423**：性能预算收紧（CJK 字体 swap→optional·D3/Three 移出 head）——新页面/改动不要在 `<head>` 同步加载外部脚本，勿破坏渲染阻塞优化
+- **W424**：对抗性审查修正与全仓整理——A4 计数门禁校准 **209 篇**·`security_scan.py` 依赖审计只扫仓库 `requirements*.txt`（不再回退扫环境）·3D/时间线页 `main()` 改 load 事件触发（**内联 defer 属性对无 src 脚本无效**）·**LHCI 现预算 LCP ≤5000ms / CLS ≤0.3 / TBT ≤300ms**（W423 收紧值 4500/0.2 经 push 首跑实测后回调·性能债登记）·workflows README/DESIGN 已同步
 - **遗留待办**：CSP 仍含 unsafe-inline（GitHub Pages 不消费 `_headers`，部署 Netlify/Cloudflare 后切换）；真实跨访客读者量未验证（GoatCounter / Netlify 待办）；A4/A5 部分文档缺 W### 出处 ID（回填时以 file-index 追溯）；A4 计数门禁已按 **209 篇** 校准
 - **安全门禁（2026-08-11 修正）**：`security_scan.py` 依赖审计只扫仓库 `requirements*.txt`（`scripts/requirements.txt`），不再回退扫整个 Python 环境——本地跑 `--all` 不应再出现 `(environment)` 高漏洞；若本地装了 `.pw-browsers/`（Playwright 浏览器），扫描已排除该目录
 
