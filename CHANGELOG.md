@@ -14,13 +14,13 @@
 > - **来源**：对 `scripts/output/adversarial-review-integrated-2026-08-11.md` 逐条实测核验——P0-1 A4 假绿、P1-1/1-2/1-3 版本漂移、P0-3 security 门禁、P0-4 3D 页、P1-6 EN 页腐蚀等成立；P0-2 记忆路径、P0-4 页数、P1-7 翻译缺口三处证据有误（核验更正，未按错误结论处置）
 > - **执行（P0-1 A4 计数假绿修复）**：`verify_delivery.py` `EXPECT_A4` "201 篇"→"209 篇"（真实计数 209）·README/STRUCTURE/项目说明/交接文档/文档规范/项目概览 6 处 "199→201" parenthetical 与门禁描述统一为 209——字符串存在性假绿门禁变为真校验
 > - **执行（P1-1/1-2/1-3 版本一致性）**：v2.3.38 日期 README/项目说明 08-10→08-11·项目说明 :45 v2.3.37→v2.3.38·交接文档 W422/W423 三处矛盾（:16/:353/:564）与页脚最后更新同步·旁文档 3 份 bump 至 v2.3.38 W423
-> - **执行（P0-4 3D 页脚本顺序修复）**：`site/data/character-relationship-3d.html` 主初始化脚本加 `defer`（`main()` 不再早于 defer 的 THREE 执行）——核验确认仅此 1 页真坏（`-view` 页为数据集查看页、EN 版无 defer 正常，报告称 2 页有误）
+> - **执行（P0-4 3D 页脚本顺序修复）**：`site/data/character-relationship-3d.html` 主流程 `main()` 改为 `window` `load` 事件触发（内联脚本的 `defer` 属性无效——HTML 规范仅对带 src 的外部脚本生效；初版加 defer 本地实测 canvas=0 后更正）——核验确认仅此 1 页真坏（`-view` 页为数据集查看页、EN 版无 defer 正常，报告称 2 页有误）
 > - **执行（P1-6 EN 页腐蚀修复）**：`site/en/journey-geo-semiotics.html` 机械移除 466 处 `Ch.` 注入（UTF-Ch.8→UTF-8·dCh.3js→d3js·hex/rgba 数值还原·CSS 单位还原）·`lang="zh-CN"`→`en`·残留 6 处合法章节引用（Ch.1/13/98）
 > - **执行（P0-3 security 门禁修复）**：`security_scan.py` `_find_requirements_files` 非递归 `ROOT.glob`→`os.walk` 递归剪枝（命中 `scripts/requirements.txt`，不再回退扫整个 Python 环境产生 103 个 `(environment)` high）·`discover_files` 排除 `.pw-browsers`（本地 Chromium 二进制 eval/innerHTML 假阳性）·实测 high 103→0·E8-2 仍为依赖严格门禁（未改）
 > - **执行（P2-3/CI 文档同步）**：新Agent启动Prompt.md 更新至 W423（四新门禁/性能预算/A4 209/security 修复）·workflows/README.md 预算三套数字统一 LCP 4500/CLS 0.2/TBT 300 + 触发矩阵补 Screenshot 列 + v2.3.38 W423·perf.yml 头注释 2500/0.1→4500/0.2·DESIGN.md "38 个页面"→"86 个可视化页面"
 > - **执行（全仓整理）**：清理临时审计日志 14 个 + 缓存（44 个 `__pycache__`/`.pytest_cache`/`.ruff_cache`）+ 空目录 3 个 + 截图大件 slices/mobile/desktop（~416MB·保留 viz 审查证据）·删除过期可再生报告 14 个（security-report/a11y/html-size/perf/ui-review/audit-baseline/截图管线产物）+ 一次性审计原始 JSON 4 个（`_audit_*.json`·对应 `.md` 报告保留）·RAG 索引重建（35.3→35.8MB·含 08-11 全部文档改动）
 > - **验证**：verify_delivery 全绿（A4 "209 篇"真校验）·lint_links site 2627/docs 4860 链接 0 broken·check_js_syntax --all 通过·security_scan high=0·py_compile 通过·RAG 查询实测
-> - **CI 实测（push 760be14 首跑）**：CI 15 job 全绿（pytest 全量·agent-web build·JS 语法）·Security 4 job 全绿（E8-4 修复后 high=0 不再永久红）·Lighthouse 4 页 LCP 4.73-4.87s 超 4500（CLS=0/TBT=0 达标）→ W424 校准预算 LCP 5000/FCP warn 4800/interactive warn 5000·Screenshot Review/Deploy Pages 随 push 验证
+> - **CI 实测（push 760be14 首跑）**：CI 15 job 全绿（pytest 全量·agent-web build·JS 语法）·Security 4 job 全绿（E8-4 修复后 high=0 不再永久红）·Lighthouse 4 页 LCP 4.73-4.87s 超 4500（CLS=0/TBT=0 达标）→ W424 校准预算 LCP 5000/FCP warn 4800/interactive warn 5000·Screenshot Review 首跑暴露 timeline.html `d3 is not defined`（W423 给 d3 加 defer 时 main() 仍在解析期执行→await 续体先于 d3 跑 renderKpis）→ main() 改 load 事件触发（内联 defer 无效·同 3D 页）·Deploy Pages 随 push 验证
 > - **状态**：已落地·已 push（760be14 + 校准提交）·CI/Security 全绿·Lighthouse 校准后待终验·性能债登记（LCP 距 web.dev 2500 目标仍有 2.2s+·存量 4.7-4.9s）
 
 ### v2.3.38（2026-08-11）：W423 性能债专项 — LHCI 预算收紧 + 渲染阻塞消除（CJK 字体 swap→optional·D3/Three 移出 head）

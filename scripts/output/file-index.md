@@ -19,8 +19,9 @@
 | 项目概览.md / 项目认知总览.md / 项目交接参考手册.md | W424 | v2.3.39 修改·旁文档 3 份 bump（W424·下一 W425） |
 | docs/00-导读/文档规范.md | W424 | v2.3.39 修改·A4 门禁描述 "201 篇"→"209 篇"（两处） |
 | scripts/security_scan.py | W424 | v2.3.39 修改·_find_requirements_files 递归剪枝（命中 scripts/requirements.txt·不再扫环境 103 high）·discover_files 排除 .pw-browsers |
-| site/data/character-relationship-3d.html | W424 | v2.3.39 修改·主脚本加 defer（main() 早于 defer THREE 导致 3D 永不渲染） |
+| site/data/character-relationship-3d.html | W424 | v2.3.39 修改·main() 改 load 事件触发（内联 defer 属性无效·3D 页从"加载失败"回退恢复为真实渲染） |
 | site/en/journey-geo-semiotics.html | W424 | v2.3.39 修改·机械移除 466 处 Ch. 腐蚀注入·lang zh-CN→en |
+| site/data/timeline.html | W424 | v2.3.39 修改·main() 改 load 事件触发（W423 d3 defer 化后 main() 解析期执行→d3 is not defined·Screenshot Review 首跑暴露·内联 defer 无效） |
 | 新Agent启动Prompt.md | W424 | v2.3.39 修改·更新至 W423（四新门禁/性能预算/A4 209/security 修复） |
 | .github/workflows/README.md | W424 | v2.3.39 修改·预算数字三套统一 4500/0.2/300·触发矩阵补 Screenshot 列·版本 v2.3.38 W423 |
 | .github/workflows/perf.yml | W424 | v2.3.39 修改·头注释与断言校准：CLS 0.2/TBT 300（实测达标）·LCP 首跑 4.73-4.87s 超 4500 → 5000（实测校准）·FCP warn 4800 |
