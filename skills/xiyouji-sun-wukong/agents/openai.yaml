@@ -1,0 +1,4 @@
+interface:
+  display_name: "System.Collections.Hashtable.dn"
+  short_description: "System.Collections.Hashtable.sd"
+  default_prompt: "System.Collections.Hashtable.dp"
