@@ -5,6 +5,7 @@
 > **更新**：2026-08-10 W419 补充——① bump_version 污染校验（W418/W419 复现 2 次）② 批量重写脚本最小化 diff（git restore 非必要改动）③ A1 SD 雷区（w286 脚本重跑会错位·禁止重跑）。
 > **更新（2026-08-11 W423）**：① verify_delivery 四新门禁（A1 导航相邻性/docs/01 链接/sitemap 覆盖/site/data 回退模式）② 性能预算收紧（LHCI LCP 5000→4500·CLS 0.3→0.2·CJK 字体 swap→optional·D3/Three 移出 head）③ A4 计数门禁校准 **209 篇**（2026-08-11 修正）④ security 门禁修复（依赖审计只扫仓库 requirements*.txt，不再回退扫整个 Python 环境）。
 > **更新（2026-08-12 W424）**：① A4 计数门禁 209 篇落地（verify EXPECT_A4 201→209）② security_scan 依赖审计只扫仓库 requirements*.txt（不再回退扫环境·E8-4 不再永久红）③ 3D/时间线页 `main()` 改 `window load` 事件触发（**内联 `defer` 属性对无 src 脚本无效**——勿再依赖内联 defer）④ LHCI 预算实测校准 LCP ≤5000ms / CLS ≤0.3 / FCP warn 4800（W423 收紧值 4500/0.2 经 push 首跑实测后回调）·workflows README/DESIGN 同步。
+> **更新（2026-08-13 W424 复盘沉淀批次）**：① SRI 加固（95 外部脚本标签 SHA-384）+ CSP 落地（159 页 meta·680 内联脚本哈希·script-src-attr `none`·**改内联脚本必须重跑 `python scripts/generate_csp.py`**）② 新增 check_corruption.py 门禁（""X"" 腐蚀 + d3 插件引用·挂 verify_delivery）③ EN 腐蚀第二波（""X"" 32 处 + 反引号 4 处）与 6 页 sankey 漏引修复 ④ check_js_syntax 已覆盖带属性脚本 ⑤ ci.yml server 启动重试（runner 抖动防误报）⑥ 方法论新增 7 条见交接文档「三、方法论沉淀」。
 > **配套**：[交接文档.md](交接文档.md)（进度中枢）/ [docs/00-导读/文档规范.md](docs/00-导读/文档规范.md) §11（文件管控）/ [scripts/output/file-index.md](scripts/output/file-index.md)（反向索引）。
 > 本文件是交接文档的「速用精简版」——若正文与交接文档/文档规范冲突，以后两者为准。
 
@@ -49,8 +50,19 @@
 - **W420/W421**：A1 深度解读 100/100 补全（SD102/SD103）；导航必须指向**相邻回**（上一回=N-1·下一回=N+1·第 1 回无上·第 100 回全书完）——lint_links 只查链接存在、不查指向正确，链接质量类任务别只做 404 审计；Screenshot Review 已提速（改动范围判定 + `--only-pages`）
 - **W422**：verify_delivery 新增 4 门禁（A1 导航相邻性 / docs/01 链接 / sitemap 覆盖 154 页 / site/data 内嵌回退模式），提交前必须全绿；文档健康归档后 CHANGELOG 83 行·file-index 127 行·交接文档 556 行——新文档执行双索引、存量以 file-index 追溯
 - **W423**：性能预算收紧（CJK 字体 swap→optional·D3/Three 移出 head）——新页面/改动不要在 `<head>` 同步加载外部脚本，勿破坏渲染阻塞优化
-- **W424**：对抗性审查修正与全仓整理——A4 计数门禁校准 **209 篇**·`security_scan.py` 依赖审计只扫仓库 `requirements*.txt`（不再回退扫环境）·3D/时间线页 `main()` 改 load 事件触发（**内联 defer 属性对无 src 脚本无效**）·**LHCI 现预算 LCP ≤5000ms / CLS ≤0.3 / TBT ≤300ms**（W423 收紧值 4500/0.2 经 push 首跑实测后回调·性能债登记）·workflows README/DESIGN 已同步
-- **遗留待办**：CSP 仍含 unsafe-inline（GitHub Pages 不消费 `_headers`，部署 Netlify/Cloudflare 后切换）；真实跨访客读者量未验证（GoatCounter / Netlify 待办）；A4/A5 部分文档缺 W### 出处 ID（回填时以 file-index 追溯）；A4 计数门禁已按 **209 篇** 校准
+- **W424**：对抗性审查修正与全仓整理——A4 计数门禁校准 **209 篇**·`security_scan.py` 依赖审计只扫仓库 `requirements*.txt`（不再回退扫环境）·3D/时间线页 `main()` 改 load 事件触发（**内联 defer 属性对无 src 脚本无效**）·**LHCI 现预算 LCP ≤5000ms / CLS ≤0.3 / TBT ≤300ms**（W423 收紧值 4500/0.2 经 push 首跑实测后回调·性能债登记）·workflows README/DESIGN 已同步·**SRI/CSP 已落地**（95 标签 SRI·159 页 meta CSP·680 哈希·script-src-attr none·改内联脚本必须重跑 generate_csp.py）·EN 腐蚀第二波修复（""X"" 32 处 + 反引号 4 处）·6 页 sankey 漏引修复·新增 check_corruption.py（腐蚀 + d3 插件引用门禁）
+- **遗留待办**：真实跨访客读者量未验证（GoatCounter 待办·CSP 已 W424 meta 落地，Netlify/CF 仅剩 HTTP 头增强）；A4/A5 部分文档缺 W### 出处 ID（回填时以 file-index 追溯）；A4 计数门禁已按 **209 篇** 校准
 - **安全门禁（2026-08-11 修正）**：`security_scan.py` 依赖审计只扫仓库 `requirements*.txt`（`scripts/requirements.txt`），不再回退扫整个 Python 环境——本地跑 `--all` 不应再出现 `(environment)` 高漏洞；若本地装了 `.pw-browsers/`（Playwright 浏览器），扫描已排除该目录
+
+【W424 复盘沉淀速记（2026-08-13·防再犯清单）】
+- 改内联脚本后必须重跑 `python scripts/generate_csp.py`（verify_delivery 的 CSP 门禁会拦）
+- 新门禁/新生成器：先跑**负样本自测**（构造坏文件确认能抓到）再全量
+- 浏览器安全机制（CSP/SRI/哈希）口径：真实 Chromium 对照实验为准，不凭规范记忆
+- 批量机械改动（CSP/SRI/字体/内嵌数据）：提交前本地全量实测（`node scripts/_csp_check.js` 设 CSP_ALL=1 全站约 10 分钟）+ CI Screenshot Review 双保险
+- 发现模式化腐蚀：按**模式全站扫描**，别按报告逐页修
+- 静默降级（console.warn 后跳过）会掩盖真实缺陷：降级须留页面可见标记
+- CI 失败先看日志分类：基建抖动（如 server 启动超时）直接 rerun，别改代码
+- 报告发布前校验引用的文件存在；已并入的历史底稿注明"未单独留存"
+- 协作偏好：一次做完不频繁中断·报告如实（E1）·`_` 工具不入库·skill 仅 GitHub 安装源不装本机
 
 完成后把 W### 进展同步到交接文档「一、当前进度」+ 方法论沉淀（如有新经验）。

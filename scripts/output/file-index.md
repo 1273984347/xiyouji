@@ -54,6 +54,12 @@
 | site/*.html（159 页） | W424 | v2.3.39 修改·CSP meta 注入：script-src 'self'+CDN+680 内联脚本 SHA-256 哈希·script-src-attr 'none'·style-src unsafe-inline·connect-src 放行本地 RAG（dukou-engine/index/dashboard） |
 | scripts/generate_csp.py | W424 | v2.3.39 新增·CSP 生成/注入/校验（幂等·--check 漂移门禁·Chrome 原始文本哈希口径·_template 排除） |
 | scripts/verify_delivery.py | W424 | v2.3.39 修改·新增 CSP 漂移门禁（subprocess 调 generate_csp --check） |
+| scripts/check_corruption.py | W424 | v2.3.39 新增·复盘沉淀门禁：R1 ""X"" 双引号翻倍腐蚀（site HTML）+ R2 d3 插件引用（d3.sankey 使用页必须引 d3-sankey.min.js）·挂 verify_delivery |
+| scripts/sync_docs.py | W424 | v2.3.39 修改·规则校准：规则 2 改聚合声明（611 篇/86 页/A4 209）·规则 3 归档边界取多段最大值（W416）·README 维度标题正则兼容粗体（此前静默 FAIL 无门禁捕获） |
+| scripts/verify_delivery.py | W424 | v2.3.39 修改·新增腐蚀/插件引用门禁（subprocess 调 check_corruption.py） |
+| .github/workflows/ci.yml | W424 | v2.3.39 修改·两处 static server 启动加 5 次重试（runner 偶发 3s 起不来误报防复发） |
+| 交接文档.md / 新Agent启动Prompt.md / docs/00-导读/访问统计方案.md / site/_headers | W424 | v2.3.39 修改·复盘沉淀同步：方法论新增 7 条·Prompt 更新至 W424 复盘沉淀速记·CSP 描述由"待部署切换"更新为"meta 已落地·_headers 仅 Netlify/CF 平台层" |
+| scripts/output/adversarial-review-integrated-2026-08-11.md | W424 | v2.3.39 修改·"整合来源"标注底稿未单独留存（报告引用完整性·复盘批次） |
 | site/data/graph-explorer.html | W424 | v2.3.39 修改·动态注入按钮的 onclick → addEventListener（CSP script-src-attr 'none' 前置） |
 | site/mobile-index.html | W424 | v2.3.39 修改·javascript:history.back() 链接 → 事件绑定 + href="#" |
 | site/en/character-relationship-3d.html | W424 | v2.3.39 修改·32 处 ""X"" 双引号翻倍腐蚀修复（EN 腐蚀第二波·CSP 实测暴露） |

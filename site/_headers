@@ -1,4 +1,8 @@
 # W268 v2.2.47 · E8 安全深化 · Netlify/Cloudflare 风格 HTTP 安全头配置
+# W424（2026-08-12）注记：严格 CSP 已由每页 <meta http-equiv="Content-Security-Policy">
+# 落地（159 页·脚本 SHA-256 哈希·scripts/generate_csp.py 生成·verify_delivery 门禁）。
+# 本文件仅供 Netlify/Cloudflare 平台层使用（GitHub Pages 不消费 _headers），
+# 白名单需与 meta CSP 保持同步（d3js/cdnjs·本地 RAG 127.0.0.1:8777）。
 # 文档：https://developers.cloudflare.com/pages/platform/headers/
 #       https://docs.netlify.com/routing/headers/
 #
@@ -10,7 +14,7 @@
 #   5. Permissions-Policy           限制浏览器功能（摄像头/麦克风/定位）
 
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net https://d3js.org; style-src 'self' 'unsafe-inline' cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' cdn.jsdelivr.net; connect-src 'self' https://api.github.com; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://d3js.org https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://api.github.com; base-uri 'self'; form-action 'self'
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin

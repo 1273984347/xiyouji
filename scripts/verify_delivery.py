@@ -318,6 +318,18 @@ def main():
     except Exception as e:
         warn("CSP 校验执行异常（W424）: %s" % e)
 
+    # ---- 腐蚀/插件引用门禁（W424 复盘沉淀：EN 腐蚀第二波 + sankey 漏引防复发）----
+    corr_py = os.path.join(_HERE, "check_corruption.py")
+    try:
+        r = subprocess.run([sys.executable, corr_py], capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("腐蚀/插件引用门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("腐蚀/插件引用门禁失败（exit %d）：%s" % (r.returncode, " / ".join(tail)))
+    except Exception as e:
+        warn("腐蚀/插件引用门禁执行异常（W424 复盘沉淀）: %s" % e)
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:
