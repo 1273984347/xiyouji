@@ -115,6 +115,36 @@
 - `Preflight与Subagent模板.md`：Preflight interface analysis（1/1 复现·Anthropic T14）+ Preflight fact verification（1/1 复现·xiyouji W058）+ Scope-lock constraint（1/1 复现·Anthropic T13）+ Subagent fallback 模式（3/3 复现·W067/W068/W069）+ 完整 subagent prompt 模板 + W069 新增约束（禁止编造 line 号）
 - `双索引可追溯改造.md`：CHANGELOG W### ID（正向时间线）+ file-index.md（反向文件索引）+ 双向链接字段 + 4 个使用场景（时间点→变更 / 文件→W### / 跨文件影响面追溯 / 改动后影响面扫描）+ file-index.md 结构 + CHANGELOG.md W### 段结构 + 维护规则
 
+### S2-外部分享/（W404 新增·内容分发）
+
+精选发布版内容（W404 精选 27 篇 + W405 第二批 27 篇随笔），面向外部分发。
+
+### S2-学术投稿/（W404 新增）
+
+学术论文投稿草稿（S2 阶段）。
+
+### S3-方法论外部分享/（S3 阶段）
+
+方法论外部分享内容。
+
+### S4-学术投稿/（S4 阶段）
+
+学术投稿（S4 阶段·待读者量验证后推进）。
+
+### superpowers/（开发过程档案）
+
+开发过程 spec/plan 档案（W233 等并行开发的规格与计划）。
+
+### _dev/（开发内部文档·不对外）
+
+开发内部推进计划/执行方案（v07v08 等）。
+
+### _templates/（内容模板）
+
+通用内容模板（article-template/handoff-checklist/validation-checklist）。
+
+> ⚠️ 注意：`article-template.md` 的六段式与线上人物/主题内容实际结构**脱节**（L1 贴合率 0%），新增内容以各类实际结构为准，勿直接套用。
+
 ## source/ 子目录
 
 ### 原文/

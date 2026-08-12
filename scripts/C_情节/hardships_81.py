@@ -179,7 +179,7 @@ def build_statistics(hardships: list) -> dict:
 
 def main():
     parser = argparse.ArgumentParser(description="《西游记》九九八十一难深度统计")
-    parser.add_argument("--output", required=True, help="输出目录路径")
+    parser.add_argument("--output", default="output/data/", help="输出目录路径（默认 output/data/，相对 scripts/；run_all 无参调用约定）")
     args = parser.parse_args()
 
     output_dir = Path(args.output)

@@ -87,7 +87,7 @@
 
 ```
 xiyouji/
-├── docs/                  # Markdown 文档主体（十大板块）
+├── docs/                  # Markdown 文档主体（18 个板块）
 │   ├── 00-导读/           # 项目说明、阅读指南、版本概览、术语表
 │   ├── 01-全书逐回解读/   # 100 回逐回解读
 │   ├── 02-人物深度分析/   # 主要人物谱系分析
@@ -98,7 +98,15 @@ xiyouji/
 │   ├── 07-学以致用/       # 学习路径、决策模型、领导力、危机应对
 │   ├── 08-提升认知/       # 角色思维模型、反事实训练、元认知地图
 │   ├── 09-精神塑造/       # 八十一难人生隐喻、自我整合、价值坐标系
-│   └── 10-方法论沉淀/     # DRL 真循环 / 三 skill 闭环 / E1 铁律 / 双索引改造
+│   ├── 10-方法论沉淀/     # DRL 真循环 / 三 skill 闭环 / E1 铁律 / 双索引改造
+│   ├── S2-外部分享/       # 内容分发·精选发布版（S2 阶段）
+│   ├── S2-学术投稿/       # 学术论文投稿（S2 阶段）
+│   ├── S3-方法论外部分享/ # 方法论外部分享（S3 阶段）
+│   ├── S4-学术投稿/       # 学术投稿（S4 阶段）
+│   ├── superpowers/       # 开发过程 spec/plan 档案
+│   ├── _dev/              # 开发内部文档（不对外）
+│   └── _templates/        # 内容模板（与线上结构脱节·勿直接套用）
+├── dataset/               # 结构化数据 JSON（可视化/API 数据源）
 ├── source/                # 原著与引用（原文/分回 + 学术论文索引/网络解读精选）
 ├── site/                  # 可浏览的 HTML 站点（D3.js 驱动·index/dashboard/chapters/characters/themes/data/static）
 ├── scripts/               # Python 文本分析脚本（按 A-AH 34 类组织 + utils + output）
@@ -106,6 +114,7 @@ xiyouji/
 ├── assets/                # 字体源、图片等静态资源
 ├── references/            # 参考文献
 ├── tools/                 # 辅助工具（章节切分等）
+├── hyperframes/           # HTML 视频实验产物（W200 遗留·待清理决策）
 ├── mcp-server/            # MCP 服务（xiyouji_drl_spotcheck 等工具）
 ├── tests/                 # pytest 测试 + Playwright E2E
 ├── xiyouji-agent-web/     # Web Agent「西游记·渡口问津」（CodeBuddy Agent SDK）

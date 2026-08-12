@@ -36,7 +36,7 @@
 【第 4 步：开始干活前的铁律】
 - 从交接文档「二、下一步方向候选清单」按优先级选方向
 - 每完成一个 W：严格按 §11.4 十项勾选清单同步全部文档，跑 verify_delivery.py 必须全绿
-- 提交前双重门禁：TodoWrite 逐项勾选 + pre-commit 自动跑 scripts/verify_delivery.py（临时跳过用 --no-verify 不推荐）
+- 提交前双重门禁：任务清单（TaskCreate 系列）逐项勾选 + pre-commit 自动跑 scripts/verify_delivery.py（临时跳过用 --no-verify 不推荐）
 - 每个文件修改后：Grep spot-check 验证落地（E1 铁律：声明 ≠ 落地，禁止假收敛）
 - 修改 memory（user_profile.md / project_memory.md）必须遵守：Read-before-Edit + Grep-verify-after-Edit + 集中写入点
 - 禁止擅改：CHANGELOG 历史段、归档 3 份、.env、SECURITY-AUDIT 档、verify_delivery.py、bump_version.py 等（见 §11.2）

@@ -146,7 +146,7 @@ def build_statistics(route: list) -> dict:
 
 def main():
     parser = argparse.ArgumentParser(description="《西游记》取经全路程图数据生成")
-    parser.add_argument("--output", required=True, help="输出 JSON 路径")
+    parser.add_argument("--output", default="output/data/journey_route.json", help="输出 JSON 路径（默认 output/data/journey_route.json，相对 scripts/；run_all 无参调用约定）")
     args = parser.parse_args()
 
     output_path = Path(args.output)
