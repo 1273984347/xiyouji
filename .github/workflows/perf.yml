@@ -86,7 +86,8 @@ jobs:
                   "http://localhost:8000/dashboard.html",
                   "http://localhost:8000/index.html",
                   "http://localhost:8000/data/timeline.html",
-                  "http://localhost:8000/data/character-relationship-3d.html"
+                  "http://localhost:8000/data/character-relationship-3d.html",
+                  "http://localhost:8000/data/text-search.html"
                 ],
                 "numberOfRuns": 3,
                 "settings": {
