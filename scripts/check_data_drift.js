@@ -10,6 +10,10 @@
  * 用法：node scripts/check_data_drift.js
  * 退出码：0 = 通过（或全部不可比）；1 = 发现漂移
  * 仅依赖 Node 标准库。不可比页面（无内嵌块/无对应 JSON）计为跳过，不阻断。
+ *
+ * v2（W424 扩展）：不再只认 fetch('...') 字面路径——页面常以 `base = '../../scripts/output/data/'`
+ * + `fetch(base + f)` / `fetch(path)` 形态加载，但文件名仍是字面量。故改为扫描页面源码中
+ * 引用的全部 *.json（指向 scripts/output/data 或 dataset），逐个与内嵌块比对顶层数组长度。
  */
 
 const fs = require('fs');
@@ -20,7 +24,9 @@ const DATA_DIR = path.join(ROOT, 'site', 'data');
 const DATASET_DIR = path.join(ROOT, 'dataset');
 
 const EMBED_RE = /const\s+(EMBEDDED_DATA|EMBEDDED)\s*=\s*(\{[\s\S]*?\n\s*\});/;
-const FETCH_RE = /fetch\(\s*['"]([^'"]+\.json)['"]\s*\)/;
+const FETCH_RE = /fetch\(\s*['"]([^'"]+\.json)['"]\s*\)/g;
+const JSON_REF_RE = /['"]([A-Za-z0-9_/.-]+\.json)['"]/g;
+const OUT_DATA_DIR = path.join(ROOT, 'scripts', 'output', 'data');
 
 /** 提取内嵌数据对象（数据字面量，安全求值）。解析失败返回 null。 */
 function extractEmbedded(html) {
@@ -51,6 +57,7 @@ function main() {
   const pages = fs.readdirSync(DATA_DIR).filter((f) => f.endsWith('.html')).sort();
   let comparable = 0;
   let skipped = 0;
+  let pairs = 0;
   const allIssues = [];
   const skips = [];
 
@@ -63,38 +70,65 @@ function main() {
       continue;
     }
 
-    // 1) 字面 fetch JSON 路径 → scripts/output/data/*
-    // 2) 无 fetch 的 -view 页 → dataset/<kebab>.json（apiFetch /dataset/）
-    let jsonPath = null;
-    const fm = html.match(FETCH_RE);
-    if (fm) {
-      const rel = fm[1].replace(/^\.\.\/\.\.\//, '').replace(/^\.\.\//, '');
-      jsonPath = path.join(ROOT, rel);
-    } else {
-      const name = pg.replace(/-view\.html$/, '').replace(/\.html$/, '');
-      const dset = path.join(DATASET_DIR, name + '.json');
-      if (fs.existsSync(dset)) jsonPath = dset;
+    // 收集候选 JSON：
+    // 1) 字面 fetch 路径（../.. 相对 → ROOT 绝对）
+    // 2) 页面源码中引用的全部 *.json（base-variable 形态的 fetch(base + f) 文件名仍是字面量）
+    // 3) -view 页 → dataset/<kebab>.json（apiFetch /dataset/）
+    const candidates = new Set();
+    for (const m of html.matchAll(FETCH_RE)) {
+      const rel = m[1].replace(/^\.\.\/\.\.\//, '').replace(/^\.\.\//, '');
+      candidates.add(path.join(ROOT, rel));
     }
-    if (!jsonPath || !fs.existsSync(jsonPath)) {
+    for (const m of html.matchAll(JSON_REF_RE)) {
+      const ref = m[1];
+      if (ref.startsWith('scripts/output/data/')) {
+        candidates.add(path.join(ROOT, ref));
+      } else if (ref.startsWith('dataset/')) {
+        candidates.add(path.join(ROOT, ref));
+      } else if (ref.includes('/')) {
+        // 相对引用（如 ../../scripts/output/data/xxx.json 或 output/data/xxx.json）
+        const cleaned = ref.replace(/^\.\.\/\.\.\//, '').replace(/^\.\.\//, '').replace(/^output\/data\//, 'scripts/output/data/');
+        if (cleaned.startsWith('scripts/output/data/') || cleaned.startsWith('dataset/')) {
+          candidates.add(path.join(ROOT, cleaned));
+        }
+      }
+    }
+    const name = pg.replace(/-view\.html$/, '').replace(/\.html$/, '');
+    const dset = path.join(DATASET_DIR, name + '.json');
+    if (fs.existsSync(dset)) candidates.add(dset);
+
+    const jsons = [...candidates].filter((p) => fs.existsSync(p));
+    if (!jsons.length) {
       skipped++;
       skips.push(`${pg} (无可比 JSON)`);
       continue;
     }
 
-    let json;
-    try {
-      json = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
-    } catch {
-      skipped++;
-      skips.push(`${pg} (JSON 解析失败: ${path.basename(jsonPath)})`);
-      continue;
+    let pageCompared = false;
+    for (const jp of jsons) {
+      let json;
+      try {
+        json = JSON.parse(fs.readFileSync(jp, 'utf-8'));
+      } catch {
+        continue;
+      }
+      pageCompared = true;
+      pairs++;
+      allIssues.push(...compareArrays(
+        `${pg.replace(/\.html$/, '')} ⇄ ${path.basename(jp)}`,
+        embedded,
+        json,
+      ));
     }
-
-    comparable++;
-    allIssues.push(...compareArrays(pg.replace(/\.html$/, ''), embedded, json));
+    if (pageCompared) {
+      comparable++;
+    } else {
+      skipped++;
+      skips.push(`${pg} (JSON 解析失败)`);
+    }
   }
 
-  console.log(`数据漂移检查：可比 ${comparable} 页 / 跳过 ${skipped} 页`);
+  console.log(`数据漂移检查：可比 ${comparable} 页（${pairs} 个 JSON 对比项）/ 跳过 ${skipped} 页`);
   if (skips.length && process.env.DEBUG) {
     skips.forEach((s) => console.log('  -', s));
   }
