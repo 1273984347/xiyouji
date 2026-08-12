@@ -35,7 +35,7 @@
 > - **执行（W424 外链检查修复）**：`lint_links.py` 修复两处误报——① 非 http(s) 协议（`javascript:`/`mailto:`/`file:` 等）不属外链直接跳过 ② URL 含非 ASCII（中文路径）先 `urllib.parse.quote` 百分号编码，避免 `urllib` ascii 编码错误把中文外链误判 broken——实测 site 2627 / docs 4860 链接 **0 broken**（此前 docs 报告中文外链误报）
 > - **验证**：verify_delivery 全绿（A4 "209 篇"真校验）·lint_links site 2627/docs 4860 链接 0 broken·check_js_syntax --all 通过·security_scan high=0·py_compile 通过·RAG 查询实测
 > - **CI 实测（push 760be14/f8f1a18 两轮）**：CI 15 job 全绿（pytest 全量·agent-web build·JS 语法）·Security 4 job 全绿（E8-4 修复后 high=0 不再永久红）·Deploy Pages 成功·Lighthouse 首跑 LCP 4.73-4.87s 超 4500 → 校准 5000（CLS/TBT 当时 0 达标）·Screenshot 首跑暴露 timeline.html `d3 is not defined`（W423 d3 defer 化后 main() 仍在解析期执行→await 续体先于 d3 跑 renderKpis）·同轮确认**内联 script 的 defer 属性无效**（3D 页初版 defer 修复本地实测 canvas=0）→ 两页 main() 改 window load 事件触发（本地实测 timeline svg 渲染·3D canvas=1）·load 修复后 timeline CLS 0.235 超 0.2（真实渲染固有位移）→ CLS 预算回归 W422 基线 0.3 + #timeline-viz 预留 min-height 460px
-> - **状态**：已落地·已 push（760be14/fc948b2/f8f1a18/4c28fce + SRI 批次提交·hash 回填见下条）·CI/Security/Deploy Pages/Screenshot Review/Lighthouse 全绿（LCP 5000/CLS 0.3 校准后通过）·性能债登记（LCP 距 web.dev 2500 目标 2.2s+·timeline CLS 0.235 距 0.1 目标 0.14·**SRI 已落地**·CSP 待治理）
+> - **状态**：已落地·已 push（760be14/fc948b2/f8f1a18/4c28fce/**1805bae**）·CI/Security/Deploy Pages/Screenshot Review/Lighthouse 全绿（LCP 5000/CLS 0.3 校准后通过·1805bae SRI 批次五流水线实测全绿）·性能债登记（LCP 距 web.dev 2500 目标 2.2s+·timeline CLS 0.235 距 0.1 目标 0.14·**SRI 已落地**·CSP 待治理）
 
 ### v2.3.38（2026-08-11）：W423 性能债专项 — LHCI 预算收紧 + 渲染阻塞消除（CJK 字体 swap→optional·D3/Three 移出 head）
 
