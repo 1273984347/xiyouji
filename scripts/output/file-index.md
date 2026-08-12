@@ -27,7 +27,7 @@
 | .github/workflows/perf.yml | W424 | v2.3.39 修改·断言校准：LCP 首跑 4.73-4.87s 超 4500 → 5000·CLS load 修复后 timeline 0.235 超 0.2 → 回归 0.3（W422 基线）·FCP warn 4800·TBT 300（实测 0） |
 | DESIGN.md | W424 | v2.3.39 修改·"38 个可视化页"→"86 个可视化页面" |
 | .pre-commit-config.yaml | W424 | v2.3.39 修改·补 verify-delivery 钩子 + 双门禁警告注释（防 pre-commit install 覆盖手动钩子后核心门禁静默消失） |
-| scripts/check_data_drift.js | W424 | v2.3.39 新增·M2 双源漂移检查（内嵌数据 vs fetch JSON 数组长度·挂 verify_delivery 门禁） |
+| scripts/check_data_drift.js | W424 | v2.3.39 新增·M2 双源漂移检查（内嵌数据 vs 引用 JSON 数组长度·v2 覆盖 base+f/变量 fetch 形态·挂 verify_delivery 门禁） |
 | site/data/81-hardships.html | W424 | v2.3.39 修改·内嵌 hardships 空数组 → 注入完整 81 项（线上 fetch 404 后回退空表的真实漂移修复） |
 | scripts/verify_delivery.py | W424 | v2.3.39 修改·新增数据漂移门禁（node scripts/check_data_drift.js） |
 | scripts/_audit_data.json / _audit_hiddencount.json / _audit_refine.json / _audit_report.json | W424 | v2.3.39 删除·一次性审计原始数据（对应 .md 报告保留） |
