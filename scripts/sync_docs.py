@@ -28,9 +28,10 @@ FILES = {
 
 HEADER_LINES = 50  # 头部扫描行数
 
-# 统计字段静态期望值（A1/A2 不变；A3/A4/A5/D 从 CHANGELOG 动态提取后覆盖）
-# 2026-07-31 修正：A6 从 2→9（05-诗词歌赋/ 实际 10 文件含 README.md = 9 篇）
-STATIC_EXPECTED = {"A1": 100, "A2": 43, "A6": 9}
+# 统计字段静态期望值（W424 复盘沉淀：三份文档头部现为聚合式声明——
+# "A1-A6 共 N 篇 + M 可视化页（A4 K 篇 已含）"，逐类计数行已移除；
+# AGG/VIZ/A4 与真实文件计数的一致性由 verify_delivery 兜底校验）
+STATIC_EXPECTED = {"AGG": 611, "VIZ": 86, "A4": 209}
 
 # CHANGELOG 最新版本段统计正则（提取最终值，支持 N→M 和 N 两种格式）
 CL_PATTERNS = {
@@ -40,19 +41,14 @@ CL_PATTERNS = {
     "D":  re.compile(r"D 可视化 (?:\d+→)?(\d+) 个"),
 }
 
-# 目标文件统计正则（README/STRUCTURE/项目说明 头部格式）
-# 2026-07-31 修正：A1/A2 正则兼容缩写格式（"A1 逐回" / "A2 随笔"）和完整格式（"A1 逐回解读" / "A2 个人随笔"）
+# 目标文件统计正则（README/STRUCTURE/项目说明 头部聚合声明格式，W424 复盘沉淀校准）
 TARGET_PATTERNS = {
-    "A1": re.compile(r"A1 逐回(?:解读)? (\d+) 回"),
-    "A2": re.compile(r"A2 (?:个人)?随笔 (\d+) 篇"),
-    "A3": re.compile(r"A3 人物深化 (\d+) 篇"),
-    "A4": re.compile(r"A4 主题专题 (\d+) 篇"),
-    "A5": re.compile(r"A5 文化背景 (\d+) 篇"),
-    "A6": re.compile(r"A6 诗词 (\d+) 篇"),
-    "D":  re.compile(r"(\d+) 个 D3\.js 可视化页面"),
+    "AGG": re.compile(r"A1-A6 共 (\d+) 篇"),
+    "VIZ": re.compile(r"(\d+) 可视化页"),
+    "A4":  re.compile(r"A4 (\d+) 篇 已含"),
 }
 
-UNIT = {"A1": "回", "A2": "篇", "A3": "篇", "A4": "篇", "A5": "篇", "A6": "篇", "D": "个"}
+UNIT = {"AGG": "篇", "VIZ": "个", "A3": "篇", "A4": "篇", "A5": "篇", "D": "个"}
 
 VERSION_RE = re.compile(r"^###\s+(v\d+\.\d+\.\d+)", re.MULTILINE)
 ANY_VER_RE = re.compile(r"v\d+\.\d+\.\d+")
@@ -189,10 +185,11 @@ def rule_stats(latest_section, fix=False):
 
 
 def detect_archive_boundary(cl_text):
-    """检测 CHANGELOG 归档边界（头部声明 W001-WXXX 已迁移至 archive）。
-    返回边界值（WXXX 的 XXX），未检测到返回 0。"""
-    m = re.search(r"W(\d{3})-W(\d{3})）已迁移", cl_text[:3000])
-    return int(m.group(2)) if m else 0
+    """检测 CHANGELOG 归档边界（可能多段：W001-W399 与 W400-W416 均已迁移）。
+    返回所有归档区间末端的最大值，未检测到返回 0。"""
+    # 只匹配归档句（"）已迁移" / "）段"），排除"编号规则（W001-W424）"这类非归档范围
+    ends = [int(m) for m in re.findall(r"W\d{3}-W(\d{3})）(?:已迁移|段)", cl_text[:3000])]
+    return max(ends) if ends else 0
 
 
 def rule_wids(cl_text):
@@ -259,7 +256,8 @@ def rule_fileindex_latest(cl_text):
 IN_PROGRESS_RE = re.compile(r"进行中")
 
 # README 数据维度全景段标题正则（主源：提取标题声明数）
-README_DIM_HEADER_RE = re.compile(r"##\s+数据维度全景[（(]\s*(\d+)\s*维")
+# W424 复盘沉淀：README 现为 `**数据维度全景（N 维）**：` 粗体段落（非 ## 标题），两种写法都接受
+README_DIM_HEADER_RE = re.compile(r"(?:##\s+|\*\*)?数据维度全景[（(]\s*(\d+)\s*维")
 
 # README 数据维度表格行正则（提取"维度数"列，支持 42 / 8+3 / 1 等格式）
 README_DIM_ROW_RE = re.compile(r"^\|[^|]*\|[^|]*\|\s*([\d+\-\s]+)\s*\|", re.MULTILINE)

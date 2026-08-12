@@ -41,10 +41,18 @@ jobs:
 
       - name: Start static server
         run: |
-          python -m http.server 8000 --directory site &
+          python -m http.server 8000 --directory site > server.log 2>&1 &
           echo $! > server.pid
-          sleep 3
-          curl -sSf http://localhost:8000/dashboard.html -o /dev/null
+          # W424 复盘沉淀：runner 偶发 3s 内起不来（CSP 批次首跑误报 1 次），改最多 5 次重试
+          for i in 1 2 3 4 5; do
+            if curl -sSf http://localhost:8000/dashboard.html -o /dev/null; then
+              echo "static server ready (attempt $i)"
+              exit 0
+            fi
+            sleep 3
+          done
+          cat server.log || true
+          exit 1
 
       - name: Run screenshot baseline
         id: screenshot-baseline
@@ -132,10 +140,18 @@ jobs:
 
       - name: Start static server
         run: |
-          python -m http.server 8000 --directory site &
+          python -m http.server 8000 --directory site > server.log 2>&1 &
           echo $! > server.pid
-          sleep 3
-          curl -sSf http://localhost:8000/dashboard.html -o /dev/null
+          # W424 复盘沉淀：runner 偶发 3s 内起不来（CSP 批次首跑误报 1 次），改最多 5 次重试
+          for i in 1 2 3 4 5; do
+            if curl -sSf http://localhost:8000/dashboard.html -o /dev/null; then
+              echo "static server ready (attempt $i)"
+              exit 0
+            fi
+            sleep 3
+          done
+          cat server.log || true
+          exit 1
 
       - name: Run Lighthouse audit
         uses: nick-fields/retry@v4
