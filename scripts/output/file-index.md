@@ -51,6 +51,16 @@
 | docs/03-主题与情节专题 + docs/04-文化与历史背景（161 篇） | W424 | v2.3.39 修改·W### 出处回填（git 创建提交溯源 100 篇 + 初始导入标注 34 篇·0 缺 W）·时间哲学专题空文件恢复 |
 | docs/01-全书逐回解读/第001回-灵根育孕源流出.md | W424 | v2.3.39 修改·数据指标"示例文本"占位 → 解读正文实测字数 |
 | site/*.html（94 页） | W424 | v2.3.39 修改·外部脚本 SRI 加固：95 个标签补 integrity（SHA-384·CDN 字节核对后计算）+ crossorigin（d3×93·three×2·含 defer 形态） |
+| site/*.html（159 页） | W424 | v2.3.39 修改·CSP meta 注入：script-src 'self'+CDN+680 内联脚本 SHA-256 哈希·script-src-attr 'none'·style-src unsafe-inline·connect-src 放行本地 RAG（dukou-engine/index/dashboard） |
+| scripts/generate_csp.py | W424 | v2.3.39 新增·CSP 生成/注入/校验（幂等·--check 漂移门禁·Chrome 原始文本哈希口径·_template 排除） |
+| scripts/verify_delivery.py | W424 | v2.3.39 修改·新增 CSP 漂移门禁（subprocess 调 generate_csp --check） |
+| site/data/graph-explorer.html | W424 | v2.3.39 修改·动态注入按钮的 onclick → addEventListener（CSP script-src-attr 'none' 前置） |
+| site/mobile-index.html | W424 | v2.3.39 修改·javascript:history.back() 链接 → 事件绑定 + href="#" |
+| site/en/character-relationship-3d.html | W424 | v2.3.39 修改·32 处 ""X"" 双引号翻倍腐蚀修复（EN 腐蚀第二波·CSP 实测暴露） |
+| site/en/character-appearance.html | W424 | v2.3.39 修改·4 处模板字符串缺失收尾反引号修复（EN 腐蚀第二波） |
+| site/data/magic-system.html 等 6 页 | W424 | v2.3.39 修改·补引 d3-sankey.min.js（桑基图从未渲染→实测 6/6 出图·magic-system 0→52 图形） |
+| scripts/check_js_syntax.py | W424 | v2.3.39 修改·SCRIPT_RE 覆盖带属性无 src 脚本（此前 <script> 精确匹配漏检） |
+| site/_template.html | W424 | v2.3.39 修改·移除 CSP meta（开发模板不入站·生成器跳过不注入） |
 | scripts/lint_links.py | W424 | v2.3.39 修改·外链检查修复：非 http(s) 协议跳过 + 非 ASCII URL 百分号编码（中文外链误报 broken 消除） |
 | scripts/output/adversarial-review-integrated-2026-08-11.md | W424 | v2.3.39 新增·对抗性审查整合总报告（2026-08-11·W424 逐条核验来源） |
 | scripts/output/agent-web-security-2026-08-11.md | W424 | v2.3.39 新增·xiyouji-agent-web 离线安全审查报告（2026-08-11） |

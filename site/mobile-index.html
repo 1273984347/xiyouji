@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-DUB6BBMhjuD+mEdeG4svLM4Sgd4gsQB03kvsve9l2o4=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta name="theme-color" content="#3a2820">
     <link rel="manifest" href="manifest.webmanifest">
@@ -543,7 +544,7 @@
             <span class="b-icon">☁️</span>
             <span>标签云</span>
         </a>
-        <a href="javascript:history.back()" aria-label="返回">
+        <a href="#" aria-label="返回">
             <span class="b-icon">←</span>
             <span>返回</span>
         </a>
@@ -565,6 +566,15 @@
         backTop.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+
+        // Back link（W425 CSP：javascript: URL 被 script-src-attr 'none' 拦截，改事件绑定）
+        const backLink = document.querySelector('a[aria-label="返回"]');
+        if (backLink) {
+            backLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                history.back();
+            });
+        }
 
         // Quick search (jump to tag-cloud with query)
         const searchInput = document.getElementById('quick-search');

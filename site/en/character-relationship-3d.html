@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-1VPyY9Zyh7HXb3slBHQACcnMU/Alpwi1VTc/H6MX2dg=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Relations 3D Network · Journey to the West Explained</title>
@@ -854,38 +855,38 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         ],
         // 32 条关系边：source, target, type (师徒/结拜/父子/敌对/盟友/亲属/从属)
         links: [
-            {source: 1, target: 2, type: ""Master-Disciple""},
-            {source: 1, target: 3, type: ""Master-Disciple""},
-            {source: 1, target: 4, type: ""Master-Disciple""},
-            {source: 1, target: 5, type: ""Master-Disciple""},
-            {source: 1, target: 6, type: ""Protector""},
-            {source: 6, target: 7, type: ""Subordinate""},
-            {source: 6, target: 1, type: ""Assigned""},
-            {source: 6, target: 8, type: ""Colleague""},
-            {source: 6, target: 9, type: ""Colleague""},
-            {source: 7, target: 1, type: ""Scripture-Bestower""},
-            {source: 2, target: 10, type: ""Rebel""},
-            {source: 2, target: 12, type: ""Enemy""},
-            {source: 2, target: 13, type: ""Enemy""},
-            {source: 2, target: 14, type: ""Enemy""},
-            {source: 2, target: 21, type: ""Demanded from""},
-            {source: 2, target: 15, type: ""Sworn Brothers""},
-            {source: 2, target: 20, type: ""Sworn Foe""},
-            {source: 10, target: 11, type: ""Subordinate""},
-            {source: 10, target: 12, type: ""Subordinate""},
-            {source: 10, target: 13, type: ""Subordinate""},
-            {source: 10, target: 14, type: ""Subordinate""},
-            {source: 13, target: 14, type: ""Father-Son""},
-            {source: 12, target: 14, type: ""Brothers""},
-            {source: 15, target: 16, type: ""Husband-Wife""},
-            {source: 15, target: 17, type: ""Father-Son""},
-            {source: 16, target: 17, type: ""Mother-Son""},
-            {source: 2, target: 16, type: ""Enemy""},
-            {source: 2, target: 17, type: ""Enemy""},
-            {source: 2, target: 18, type: ""Slew""},
-            {source: 2, target: 19, type: ""Fought""},
-            {source: 5, target: 22, type: ""Father-Son""},
-            {source: 21, target: 22, type: ""Brothers""}
+            {source: 1, target: 2, type: "Master-Disciple"},
+            {source: 1, target: 3, type: "Master-Disciple"},
+            {source: 1, target: 4, type: "Master-Disciple"},
+            {source: 1, target: 5, type: "Master-Disciple"},
+            {source: 1, target: 6, type: "Protector"},
+            {source: 6, target: 7, type: "Subordinate"},
+            {source: 6, target: 1, type: "Assigned"},
+            {source: 6, target: 8, type: "Colleague"},
+            {source: 6, target: 9, type: "Colleague"},
+            {source: 7, target: 1, type: "Scripture-Bestower"},
+            {source: 2, target: 10, type: "Rebel"},
+            {source: 2, target: 12, type: "Enemy"},
+            {source: 2, target: 13, type: "Enemy"},
+            {source: 2, target: 14, type: "Enemy"},
+            {source: 2, target: 21, type: "Demanded from"},
+            {source: 2, target: 15, type: "Sworn Brothers"},
+            {source: 2, target: 20, type: "Sworn Foe"},
+            {source: 10, target: 11, type: "Subordinate"},
+            {source: 10, target: 12, type: "Subordinate"},
+            {source: 10, target: 13, type: "Subordinate"},
+            {source: 10, target: 14, type: "Subordinate"},
+            {source: 13, target: 14, type: "Father-Son"},
+            {source: 12, target: 14, type: "Brothers"},
+            {source: 15, target: 16, type: "Husband-Wife"},
+            {source: 15, target: 17, type: "Father-Son"},
+            {source: 16, target: 17, type: "Mother-Son"},
+            {source: 2, target: 16, type: "Enemy"},
+            {source: 2, target: 17, type: "Enemy"},
+            {source: 2, target: 18, type: "Slew"},
+            {source: 2, target: 19, type: "Fought"},
+            {source: 5, target: 22, type: "Father-Son"},
+            {source: 21, target: 22, type: "Brothers"}
         ]
     };
 

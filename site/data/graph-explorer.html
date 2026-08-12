@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-yCXTnUMkHSnCvwT+endQT4WorLN/5SUrQzccMO16IZg=' 'sha256-tCVhRDcAKVIMY/TEOMElhF6WTezL+xEHURgswMvrnn4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>知识图谱探索器 · 详解西游记</title>
 
@@ -1068,7 +1069,7 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
     var n=null; GRAPH.nodes.forEach(function(x){ if(x.id===id)n=x; }); if(!n)return;
     var panel=document.getElementById("drill"); panel.className="drill show";
     document.querySelector(".layout").classList.remove("no-drill");
-    var html='<button onclick="document.getElementById(\'drill\').className=\'drill\';document.querySelector(\'.layout\').classList.add(\'no-drill\')" style="float:right;border:none;background:none;cursor:pointer;color:#9a8f7c">✕</button>';
+    var html='<button class="drill-close" style="float:right;border:none;background:none;cursor:pointer;color:#9a8f7c" aria-label="关闭">✕</button>';
     html+='<h2>'+xmlEsc(labelOf(n))+'</h2>';
     if(n.aliases) html+='<div class="tag">'+(n.aliases["佛学"]||"")+' · '+(n.aliases["AI"]||"")+' · '+(n.aliases["西游"]||"")+'</div>';
     else if(n.group) html+='<div class="tag">'+xmlEsc(n.group)+'</div>';
@@ -1105,6 +1106,8 @@ window.GRAPH_LIST = [{"name": "yuanqi-graph", "title": "佛法=AI=西游 三元�
     html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">相关研究</h3>';
     html+='<div class="alias"><a href="./search.html?q='+encodeURIComponent(lab)+'" target="_blank" rel="noopener" style="color:#3a6b8c;text-decoration:none">🔍 站内检索「'+xmlEsc(lab)+'」的相关解读 →</a></div>';
     panel.innerHTML=html;
+    var closeBtn=panel.querySelector(".drill-close");
+    if(closeBtn) closeBtn.addEventListener("click",function(){ panel.className="drill"; document.querySelector(".layout").classList.add("no-drill"); });
     panel.querySelectorAll(".nbr li").forEach(function(li){
       li.addEventListener("click",function(){ var tid=li.getAttribute("data-id"); focusNode=tid; renderGraph(); openDrill(tid); saveState(); });
     });

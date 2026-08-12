@@ -301,6 +301,23 @@ def main():
     except Exception as e:
         warn("数据漂移检查执行异常（W424 M2）: %s" % e)
 
+    # ---- CSP 漂移检查（W424：全站 CSP meta 必须与内联脚本哈希一致）----
+    # 改任何内联脚本后未重跑 generate_csp.py 会在此拦截（页面脚本会被 CSP 拦死）
+    csp_py = os.path.join(_HERE, "generate_csp.py")
+    try:
+        r = subprocess.run(
+            [sys.executable, csp_py, "--check"],
+            capture_output=True, text=True, timeout=180,
+        )
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("CSP 校验通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("CSP 漂移（exit %d）：%s（改内联脚本后须重跑 python scripts/generate_csp.py）"
+                 % (r.returncode, " / ".join(tail)))
+    except Exception as e:
+        warn("CSP 校验执行异常（W424）: %s" % e)
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:
