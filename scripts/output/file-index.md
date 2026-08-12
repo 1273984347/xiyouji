@@ -50,9 +50,13 @@
 | site/tokens.css + site/data/*.html(85) + site/en/*.html(65) | W424 | v2.3.39 修改·serif @font-face src → 共享微子集（dashboard 传输 5.4→2.2MB） |
 | docs/03-主题与情节专题 + docs/04-文化与历史背景（161 篇） | W424 | v2.3.39 修改·W### 出处回填（git 创建提交溯源 100 篇 + 初始导入标注 34 篇·0 缺 W）·时间哲学专题空文件恢复 |
 | docs/01-全书逐回解读/第001回-灵根育孕源流出.md | W424 | v2.3.39 修改·数据指标"示例文本"占位 → 解读正文实测字数 |
+| site/*.html（94 页） | W424 | v2.3.39 修改·外部脚本 SRI 加固：95 个标签补 integrity（SHA-384·CDN 字节核对后计算）+ crossorigin（d3×93·three×2·含 defer 形态） |
+| scripts/lint_links.py | W424 | v2.3.39 修改·外链检查修复：非 http(s) 协议跳过 + 非 ASCII URL 百分号编码（中文外链误报 broken 消除） |
+| scripts/output/adversarial-review-integrated-2026-08-11.md | W424 | v2.3.39 新增·对抗性审查整合总报告（2026-08-11·W424 逐条核验来源） |
+| scripts/output/agent-web-security-2026-08-11.md | W424 | v2.3.39 新增·xiyouji-agent-web 离线安全审查报告（2026-08-11） |
 | scripts/_audit_data.json / _audit_hiddencount.json / _audit_refine.json / _audit_report.json | W424 | v2.3.39 删除·一次性审计原始数据（对应 .md 报告保留） |
 | scripts/output/screenshots/ | W424 | v2.3.39 清理·slices/mobile/desktop ~416MB 删除（保留 viz 证据）·过期报告 14 个删除 |
-| scripts/output/rag_index.json | W424 | v2.3.39 重建·35.3→35.8MB（含 08-11 全部文档改动·未入库） |
+| scripts/output/rag_index.json | W424 | v2.3.39 重建·35.8MB（08-12 重建·含全文同步·未入库） |
 
 ## W423 性能债专项（2026-08-11·v2.3.38）
 
