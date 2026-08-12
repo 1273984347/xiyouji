@@ -32,6 +32,8 @@
 | scripts/verify_delivery.py | W424 | v2.3.39 修改·新增数据漂移门禁（node scripts/check_data_drift.js） |
 | tests/test_analyzer_smoke.py | W424 | v2.3.39 新增·M3 核心脚本 --help 冒烟（5 个 analyzer_base 系·jieba 缺失跳过 word_frequency） |
 | .github/workflows/ci.yml | W424 | v2.3.39 修改·新增 verify-delivery job（交付校验门禁·8 job） |
+| scripts/__init__.py / scripts/utils/__init__.py / scripts/B_人物/__init__.py | W424 | v2.3.39 新增·S1 regular package 化 |
+| scripts/audit/archive/w102_check_sanzang.py | W424 | v2.3.39 修改·sys.path 与数据路径改 __file__ 引导（消除 cwd 依赖） |
 | scripts/_audit_data.json / _audit_hiddencount.json / _audit_refine.json / _audit_report.json | W424 | v2.3.39 删除·一次性审计原始数据（对应 .md 报告保留） |
 | scripts/output/screenshots/ | W424 | v2.3.39 清理·slices/mobile/desktop ~416MB 删除（保留 viz 证据）·过期报告 14 个删除 |
 | scripts/output/rag_index.json | W424 | v2.3.39 重建·35.3→35.8MB（含 08-11 全部文档改动·未入库） |

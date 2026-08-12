@@ -1,10 +1,10 @@
 import sys
-sys.path.insert(0, 'scripts')
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from B_人物.character_nlp import extract_chapters_from_html
 import re
 
-chs = extract_chapters_from_html(Path('site/data/text-search.html'))
+chs = extract_chapters_from_html(Path(__file__).resolve().parents[3] / 'site/data/text-search.html')
 total = 0
 for num, title, text in chs:
     matches = re.findall(r'三藏共[^真]', text)
