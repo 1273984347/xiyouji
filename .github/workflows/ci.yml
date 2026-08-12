@@ -317,6 +317,11 @@ jobs:
         uses: actions/setup-python@v7
         with:
           python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install Python deps
+        run: pip install -r scripts/requirements.txt
 
       - name: Set up Node.js 20
         uses: actions/setup-node@v7
@@ -324,9 +329,11 @@ jobs:
           node-version: '20'
 
       # W424 新增：交付校验门禁（六文档版本 / A4 209 / 范围漂移 / 导航 / 链接 / sitemap / 回退 / 数据漂移）
-      # 注：数据漂移检查在 CI 中因 scripts/output/data/*.json 为生成物（未入库）可能全跳过，
-      #     以本地 pre-commit（.git/hooks/pre-commit + .pre-commit-config.yaml）为准；
-      #     其余检查均为仓库内真实校验。
+      # W424 落地：先 run_all 重新生成 scripts/output/data/*.json（生成物未入库），
+      #            再跑 verify_delivery——数据漂移检查在 CI 中真实生效（防脚本改了数据但页面未重嵌）。
+      - name: Regenerate output data (drift gate 前置)
+        run: python scripts/run_all.py
+
       - name: Run verify_delivery.py
         run: python scripts/verify_delivery.py
 

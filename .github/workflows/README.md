@@ -86,8 +86,8 @@
 ### Job 8 · `verify-delivery`（交付校验门禁，W424 新增）
 
 - **运行环境**：`ubuntu-latest` + Python 3.12 + Node 20
-- **流程**：`python scripts/verify_delivery.py`——六文档版本 / A4 209 计数 / 范围漂移 / A1 导航相邻性 / docs/01 链接 / sitemap 覆盖 / site/data 回退模式 / 数据漂移（check_data_drift.js）
-- **与 pre-commit 的关系**：本地 pre-commit 钩子（手动 .git/hooks/pre-commit + .pre-commit-config.yaml 双轨）已含等价检查；CI 兜底防 `--no-verify` 提交。数据漂移项在 CI 中因生成 JSON 未入库可能全跳过，以本地为准。
+- **流程**：`pip install -r scripts/requirements.txt` → `python scripts/run_all.py`（重新生成 scripts/output/data/*.json，生成物未入库）→ `python scripts/verify_delivery.py`——六文档版本 / A4 209 计数 / 范围漂移 / A1 导航相邻性 / docs/01 链接 / sitemap 覆盖 / site/data 回退模式 / 数据漂移（check_data_drift.js，CI 中真实生效）
+- **与 pre-commit 的关系**：本地 pre-commit 钩子（手动 .git/hooks/pre-commit + .pre-commit-config.yaml 双轨）已含等价检查；CI 兜底防 `--no-verify` 提交。run_all 的 2 个历史 FAIL（hardships_81/journey_route 缺 --output）已修默认值，34/34 全过。
 
 ## 3. 触发条件矩阵
 
