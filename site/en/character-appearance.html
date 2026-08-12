@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-/hrEE4tb0OLqEqXx58blovhxgTXuQUcP3bjQdxM1pQw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Appearances &amp; Screen Time · Annotated Journey to the West</title>
@@ -1505,10 +1506,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         const insights = [
             `<strong>${top.name}</strong> appears in ${top.appearances} chapters and is mentioned ${top.mentions.toLocaleString()} times — the heaviest screen time; its mentions are <strong>${(top.mentions / totalMentions * 100).toFixed(1)}%</strong> of the main cast total.`,
-            `<strong>Sun Wukong</strong>'s mentions are <strong>${wukongShare}%</strong> of the main cast total — the undisputed protagonist halo.,
-            `<strong>${earliest.name}</strong> first appears in chapter <strong>${earliest.chapter}</strong>, a key figure at the story's opening.,
-            `<strong>${latestFirst.name}</strong> first appears in chapter ${latestFirst.first_chapter}, the latest-debuting main character — a "finale" figure who only emerges late.,
-            `The top 5 by appearance frequency total <strong>${top5Apps}</strong> chapter-appearances; <strong>screen time is highly concentrated</strong> in the core cast.
+            `<strong>Sun Wukong</strong>'s mentions are <strong>${wukongShare}%</strong> of the main cast total — the undisputed protagonist halo.`,
+            `<strong>${earliest.name}</strong> first appears in chapter <strong>${earliest.chapter}</strong>, a key figure at the story's opening.`,
+            `<strong>${latestFirst.name}</strong> first appears in chapter ${latestFirst.first_chapter}, the latest-debuting main character — a "finale" figure who only emerges late.`,
+            `The top 5 by appearance frequency total <strong>${top5Apps}</strong> chapter-appearances; <strong>screen time is highly concentrated</strong> in the core cast.`,
         ];
 
         const ul = d3.select("#insights");

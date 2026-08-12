@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DATA_DIR = ROOT / "site" / "data"
 DASHBOARD_FILE = ROOT / "site" / "dashboard.html"
 
-SCRIPT_RE = re.compile(r"<script>(.*?)</script>", re.DOTALL)
+SCRIPT_RE = re.compile(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", re.DOTALL)
 
 
 def check_file(html_file: Path, errors: list, verbose: bool = False) -> int:
