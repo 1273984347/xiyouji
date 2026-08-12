@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 generate_csp.py — 全站 CSP（Content Security Policy）生成 / 注入 / 校验
 
@@ -121,7 +120,7 @@ def main():
         rel = os.path.relpath(path, ROOT).replace("\\", "/")
         if os.path.basename(path) in TEMPLATE_EXCLUDE:
             continue
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             html = f.read()
         # 本地 RAG 引擎放行：dukou-engine 直连 fetch，index/dashboard 经 rag-chat.js 探活
         needs_rag = "127.0.0.1:8777" in html or "rag-chat.js" in html
