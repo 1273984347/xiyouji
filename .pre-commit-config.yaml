@@ -2,6 +2,10 @@
 # 用途：git commit 时自动运行 ruff lint + 文档一致性校验
 # 安装：pip install pre-commit && pre-commit install
 # 跳过：git commit --no-verify
+#
+# ⚠️ 双门禁说明（W424）：本仓库当前实际生效的是【手动零依赖钩子】.git/hooks/pre-commit（运行 verify_delivery.py）。
+#    `pre-commit install` 会覆盖该手动钩子——本配置已含等价 verify-delivery 钩子，覆盖后核心门禁不丢失；
+#    未安装框架时以手动钩子为准。两套钩子功能重叠但互不冲突，勿重复安装/删除。
 
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -22,6 +26,15 @@ repos:
         pass_filenames: false
         always_run: true
         # 仅在 commit 时检查；如需自动修复用 `python scripts/sync_docs.py --fix`
+
+      - id: verify-delivery
+        name: 交付校验门禁 (verify_delivery.py)
+        entry: python scripts/verify_delivery.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        # 与手动钩子 .git/hooks/pre-commit 等价（六文档版本/A4 209 计数/范围漂移/导航/链接/sitemap/回退）
+        # W424 补入框架配置：防止 pre-commit install 覆盖手动钩子后核心门禁静默消失
 
       - id: drl-contracts
         name: DRL contract 批量验证 (drl_spotcheck.py --batch)
