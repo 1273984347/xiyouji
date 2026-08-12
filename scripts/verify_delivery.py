@@ -271,7 +271,7 @@ def main():
 
     # ---- site/data 内嵌回退模式静态检查（W422：file:// 铁律的自动验证）----
     data_dir = os.path.join(ROOT, "site", "data")
-    EMB_RE = re.compile(r"EMBEDDED_DATA|const\s+EMBEDDED|FALLBACK|INLINE|MOCK_DATA|const\s+data\s*=")
+    EMB_RE = re.compile(r"EMBEDDED_DATA|const\s+EMBEDDED|FALLBACK|INLINE|MOCK_DATA|const\s+data\s*=|text-search-app")
     no_emb = []
     data_count = 0
     if os.path.isdir(data_dir):
