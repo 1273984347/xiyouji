@@ -134,6 +134,12 @@ def check_internal(base_file, raw_url):
 
 def check_external(url, timeout=6):
     """外链 HTTP 探测：先 HEAD，失败则回退 GET。返回 (ok, info)。"""
+    # W424：非 http(s) 协议（javascript:/mailto:/file: 等）不属外链，直接视为通过
+    if not url.lower().startswith(("http://", "https://")):
+        return (True, "非 http(s)，跳过")
+    # W424：URL 含非 ASCII（中文路径）时先百分号编码，避免 urllib ascii 编码错误误报 broken
+    import urllib.parse as _up
+    url = _up.quote(url, safe=":/?#[]@!$&'()*+,;=%-._~")
     headers = {"User-Agent": "lint_links/1.0 (+stdlib)"}
     for method in ("HEAD", "GET"):
         try:
