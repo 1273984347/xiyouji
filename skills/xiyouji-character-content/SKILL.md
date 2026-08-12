@@ -1,0 +1,87 @@
+---
+name: xiyouji-character-content
+description: 创建、扩写与维护《详解西游记》项目的人物深度分析内容（docs/02-人物深度分析，A3 板块，211 篇）。覆盖四种模板家族——基础七段、人物外传、深化专题、方向二深化——并强制遵循项目元信息块（轨标/W###/创建日期/双索引链接）、CHANGELOG 与 file-index 双索引同步、verify_delivery 门禁与 E1 铁律。当用户要求撰写/修改西游记人物分析、人物外传、人物深化专题、方向二深化、人物谱系、人物索引或回目反链时使用；也用于创建英文人物页（site/en/character-*.html）前的内容核对。Use when creating or editing character-analysis content in the xiyouji repository.
+---
+
+# 西游记人物内容（xiyouji-character-content）
+
+为《详解西游记》仓库（`D:\1\xiyouji`）撰写/维护 A3 人物深度分析。目标是产出**符合项目实际结构与门禁**的内容，而不是"看起来像样"的泛文。
+
+## 工作流决策树
+
+先读目标目录与交接文档，再选家族：
+
+| 家族 | 文件命名 | 用途 | 触发 |
+|---|---|---|---|
+| 基础七段 | `孙悟空.md`（无后缀） | 人物主档案 | 新增/补全主要人物 |
+| 外传 | `白骨精外传.md` | 文学性个人创作 | 用户点名"外传/创作" |
+| 深化专题 | `孙悟空深化专题.md` | 学术化专题（理论框架+原著引证） | "深化/专题/研究" |
+| 方向二深化 | `二郎神-方向二深化.md` | 长篇创作散文（方向二） | "方向二/长文" |
+
+不确定时默认**基础七段**；先查 `docs/02-人物深度分析/` 是否已存在该人物（同名/外传/深化专题都算已存在）。
+
+## Step 1 · 定位与命名
+
+- 目录：`docs/02-人物深度分析/`。先 `Get-ChildItem` 确认目标人物是否已有文件，避免重复。
+- 命名按上表家族后缀；`README.md`、`人物谱系表.md`、合集（`蜘蛛精七姐妹合集专题.md`）不属于四家族，勿套模板。
+- 每个文件**恰好一个 H1**，与文件名一致。
+
+## Step 2 · 元信息块（blockquote，紧跟 H1）
+
+基础/外传/方向二用"轨标"式：
+
+```markdown
+> 轨标：教学讲解          （或个人创作）
+> 人物类别：取经团队 · 第一大弟子   （基础家族）
+> 数据指标：出场 100 回（全书），总提及 ~5000 次（待全量数据验证）
+```
+
+深化专题用"W 溯源"式：
+
+```markdown
+> W###·A3 方向第 N 个深化专题（系列名）
+> 基于 XXX 素材
+> 创建于 2026-MM-DD（vX.Y.Z 里程碑名）
+> 与 W### XXX + W### XXX 形成"XXX"体系
+```
+
+外传/方向二另加双索引链接块：
+
+```markdown
+> 双索引链接：
+> - 正向：[CHANGELOG.md](../../CHANGELOG.md) W### 段（待补）
+> - 反向：[file-index.md](../../scripts/output/file-index.md) 本文件条目（待补）
+```
+
+**W### 出处 ID 必须填真实值**——A4/A5 板块的历史教训是大量文档缺 W### 导致 file-index 无法追溯。写完后在 CHANGELOG 找到对应 W，替换"待补"。
+
+## Step 3 · 按家族模板撰写
+
+每种家族的完整骨架与真实示例见 [references/templates.md](references/templates.md)。要点：
+
+- **基础七段**：`一、出处与身世` → `二、性格弧线` → ...（一~六）→ footer 双索引。每段配**原著回目出处**（"第 1 回"），引文用原文。
+- **外传/方向二**：文学散文，允许想象，但**核心设定不得与原著矛盾**（如白骨精的出身不得与"三变"冲突）。
+- **深化专题**：必须有原著引文（标注回目）+ 理论框架 + 与既有深化专题的互链（`与 W152 天庭体系深化...形成体系`）。
+- **数据准确性**：引用数字（出场回数、提及次数）可标注"待全量数据验证"，不得编造精确统计。
+
+## Step 4 · 质量门禁（写完必查）
+
+逐项核对 [references/quality-gates.md](references/quality-gates.md) 的清单，至少执行：
+
+1. **Grep spot-check**（E1 铁律）：声称的 W###、链接、回目号逐条 Grep 验证落地，禁止"写了但没改到"。
+2. **相对链接**：从 `docs/02-人物深度分析/` 出发，`../../CHANGELOG.md`、`../../scripts/output/file-index.md`、`../01-全书逐回解读/第NNN回-*.md`（A1 反链）。
+3. **无占位符**：不留 `XXX`、`TBD`、空段；"待补"仅限双索引 W 段（且要在同一 W 内补上）。
+4. **同步**：新文件写入 `scripts/output/file-index.md`；若涉及新 W，同步 CHANGELOG/交接文档/README/STRUCTURE/项目说明（六文档）。
+5. **跑门禁**：`python scripts/verify_delivery.py` 全绿（含数据漂移检查）。
+
+## 反模式（勿做）
+
+- 不要按 `docs/_templates/article-template.md` 的六段式硬套——人物内容实际结构是上面四家族，模板文件已与线上脱节。
+- 不要重跑 `w286_merge_yuanwen_shendu.py`（SD 编号≠回号，重跑会错位）。
+- 不要改 CHANGELOG 历史段 / 归档 / verify_delivery.py / bump_version.py（见 文档规范 §11.2）。
+- 不要把 A4 主题专题的规范误用于 A3 人物。
+
+## 资源
+
+- [references/templates.md](references/templates.md) — 四家族模板骨架 + 真实示例（写前读）。
+- [references/quality-gates.md](references/quality-gates.md) — 门禁细则、双索引、禁改清单、术语（收尾核对时读）。
