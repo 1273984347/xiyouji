@@ -286,6 +286,21 @@ def main():
     else:
         ok("site/data %d 页均含内嵌回退模式（EMBEDDED_DATA/EMBEDDED/FALLBACK/inline data）" % data_count)
 
+    # ---- M2 双源漂移检查（W424：内嵌数据 vs scripts/output/data JSON 数组长度）----
+    # 防"内嵌副本为空/过期、线上 fetch 404 后回退到错误数据"（81-hardships 先例）
+    drift_js = os.path.join(ROOT, "scripts", "check_data_drift.js")
+    try:
+        r = subprocess.run(["node", drift_js], capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("数据漂移检查通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("数据漂移检查失败（exit %d）：%s" % (r.returncode, " / ".join(tail)))
+    except FileNotFoundError:
+        warn("node 不可用，跳过数据漂移检查（W424 M2）")
+    except Exception as e:
+        warn("数据漂移检查执行异常（W424 M2）: %s" % e)
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:
