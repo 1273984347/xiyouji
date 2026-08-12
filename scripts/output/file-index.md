@@ -46,6 +46,8 @@
 | scripts/C_情节/hardships_81.py / scripts/E_地理/journey_route.py | W424 | v2.3.39 修改·--output 改默认值（run_all 34/34 全过·M7 部分落地） |
 | docs/00-导读/文档规范.md / 新Agent启动Prompt.md | W424 | v2.3.39 修改·TodoWrite → 任务清单（TaskCreate 系列·P2-1 落地） |
 | .github/workflows/ci.yml | W424 | v2.3.39 修改·verify-delivery job 前置 run_all（数据漂移门禁 CI 真实生效） |
+| site/static/fonts/noto-serif-sc-shared.woff2 | W424 | v2.3.39 新增·全站共享衬线微子集（1,119 字形·405KB vs 3.5MB） |
+| site/tokens.css + site/data/*.html(85) + site/en/*.html(65) | W424 | v2.3.39 修改·serif @font-face src → 共享微子集（dashboard 传输 5.4→2.2MB） |
 | scripts/_audit_data.json / _audit_hiddencount.json / _audit_refine.json / _audit_report.json | W424 | v2.3.39 删除·一次性审计原始数据（对应 .md 报告保留） |
 | scripts/output/screenshots/ | W424 | v2.3.39 清理·slices/mobile/desktop ~416MB 删除（保留 viz 证据）·过期报告 14 个删除 |
 | scripts/output/rag_index.json | W424 | v2.3.39 重建·35.3→35.8MB（含 08-11 全部文档改动·未入库） |
