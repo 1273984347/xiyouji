@@ -307,6 +307,29 @@ jobs:
       - name: Run pytest (unit + root tests)
         run: python -m pytest tests -q
 
+  verify-delivery:
+    name: Delivery Gate (verify_delivery.py)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+
+      # W424 新增：交付校验门禁（六文档版本 / A4 209 / 范围漂移 / 导航 / 链接 / sitemap / 回退 / 数据漂移）
+      # 注：数据漂移检查在 CI 中因 scripts/output/data/*.json 为生成物（未入库）可能全跳过，
+      #     以本地 pre-commit（.git/hooks/pre-commit + .pre-commit-config.yaml）为准；
+      #     其余检查均为仓库内真实校验。
+      - name: Run verify_delivery.py
+        run: python scripts/verify_delivery.py
+
   agent-web-build:
     name: Agent Web Build (xiyouji-agent-web)
     runs-on: ubuntu-latest
