@@ -1,0 +1,4 @@
+interface:
+  display_name: "西游记角色知识库"
+  short_description: "基于原著与项目资料回答西游记人物问题并提供可溯源索引"
+  default_prompt: "回答《西游记》人物问题：身份/法宝/经历/关系/结局，并给出原著回目出处"
