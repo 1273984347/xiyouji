@@ -41,6 +41,7 @@
 | .github/workflows/perf.yml | W424 | v2.3.39 修改·LHCI URL 加入 text-search.html（5 页·LCP 1.9s 实测） |
 | skills/xiyouji-character-content/ | W424 | v2.3.39 新增·角色内容 skill（四家族模板+门禁+UI 元数据·可安装） |
 | skills/xiyouji-characters-knowledge/ | W424 | v2.3.39 新增·角色知识库 skill（211 角色名录+数据源+取证规范·可安装） |
+| skills/xiyouji-sun-wukong/ 等 5 个主角 skill | W424 | v2.3.39 新增·孙悟空/唐僧/猪八戒/沙僧/白龙马单人 skill（速查卡+关键回目+数据源+生产规则·可安装） |
 | scripts/_audit_data.json / _audit_hiddencount.json / _audit_refine.json / _audit_report.json | W424 | v2.3.39 删除·一次性审计原始数据（对应 .md 报告保留） |
 | scripts/output/screenshots/ | W424 | v2.3.39 清理·slices/mobile/desktop ~416MB 删除（保留 viz 证据）·过期报告 14 个删除 |
 | scripts/output/rag_index.json | W424 | v2.3.39 重建·35.3→35.8MB（含 08-11 全部文档改动·未入库） |
