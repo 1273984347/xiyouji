@@ -24,7 +24,7 @@
 
 | 工作流 | 文件 | 触发条件 | 用途 |
 | --- | --- | --- | --- |
-| CI | [`ci.yml`](ci.yml) | `push` main + `pull_request` + `workflow_dispatch` | 7 job 门禁：截图存活烟测 / Lighthouse / a11y / dependency / ruff / pytest / agent-web 构建 |
+| CI | [`ci.yml`](ci.yml) | `push` main + `pull_request` + `workflow_dispatch` | 8 job 门禁：截图存活烟测 / Lighthouse / a11y / dependency / ruff / pytest / agent-web 构建 / 交付校验 |
 | Security | [`security.yml`](security.yml) | `push` main + `pull_request` | 4 job：npm-audit（scripts/ + agent-web/ 双目录）/ pip-audit / CSP / XSS detect |
 | Deploy Pages | [`pages.yml`](pages.yml) | `push` main（site/** 变更） | GitHub Pages 部署 `./site`（W401 决策：不采用 build-test-deploy.yml，避免部署竞态·已删除） |
 | Lighthouse CI | [`perf.yml`](perf.yml) | `push` main（site/**）+ `pull_request` + 每周一 + `workflow_dispatch`（W422 补 push：原仅 PR 从不运行·首跑暴露性能债后阈值已校准） | LHCI 性能预算断言（LCP≤5000ms/CLS≤0.3/TBT≤300ms，W424 实测校准） |
@@ -83,6 +83,12 @@
 - **artifact**：`agent-web-dist-${{ github.sha }}`（保留 30 天）
 - **本地验证**：`npm --prefix xiyouji-agent-web run build` → vite build 成功（7906 modules，2026-08-08 实测）
 
+### Job 8 · `verify-delivery`（交付校验门禁，W424 新增）
+
+- **运行环境**：`ubuntu-latest` + Python 3.12 + Node 20
+- **流程**：`python scripts/verify_delivery.py`——六文档版本 / A4 209 计数 / 范围漂移 / A1 导航相邻性 / docs/01 链接 / sitemap 覆盖 / site/data 回退模式 / 数据漂移（check_data_drift.js）
+- **与 pre-commit 的关系**：本地 pre-commit 钩子（手动 .git/hooks/pre-commit + .pre-commit-config.yaml 双轨）已含等价检查；CI 兜底防 `--no-verify` 提交。数据漂移项在 CI 中因生成 JSON 未入库可能全跳过，以本地为准。
+
 ## 3. 触发条件矩阵
 
 | 事件 | 目标分支 | 触发工作流 | CI | Security | Deploy | Perf | Screenshot |
@@ -118,6 +124,7 @@
 | npm audit（scripts/ + agent-web/） | 0 high（--omit=dev --audit-level=high） | security.yml npm-audit job 失败 |
 | LHCI 预算 | LCP≤5000ms / CLS≤0.3 / TBT≤300ms | perf.yml job 失败 |
 | pytest | 0 失败（tests 全量） | ci.yml pytest-unit job 失败 |
+| verify_delivery | 六文档版本 / A4 209 / 范围漂移 / 导航 / 链接 / sitemap / 回退 / 数据漂移 | ci.yml verify-delivery job 失败 |
 | agent-web build | tsc + vite 退出码 0 | ci.yml agent-web-build job 失败 |
 
 ## 6. 本地复现命令
