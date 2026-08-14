@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-4LCzPxh1Fhvq58QgyVIHbUo6Whb346CdcCAKKufuvVA=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Theological Intervention Network · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    
+svg circle { will-change: transform; }
+</style>
+<style>
+        /* === 仅本页特有样式 === */
+        .container { max-width: 1280px; margin: 0 auto; padding: 24px 20px; }
+header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--accent-1); }
+h1 { font-size: 2.2em; margin: 8px 0 4px; color: var(--ink); letter-spacing: 4px; }
+.subtitle { font-size: 0.95em; color: var(--ink-soft); }
+.tagline { font-size: 0.88em; color: var(--accent-2); margin-top: 6px; font-style: italic; }
+.breadcrumb { font-size: 0.85em; color: var(--ink-soft); margin-bottom: 12px; }
+.breadcrumb a { color: var(--accent-2); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb .sep { margin: 0 6px; color: var(--line); }
+
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 28px; }
+.kpi-card { background: var(--paper-deep); border-left: 4px solid var(--accent-1); padding: 12px 16px; border-radius: 4px; }
+.kpi-card:nth-child(2) { border-left-color: var(--accent-2); }
+.kpi-card:nth-child(3) { border-left-color: var(--accent-3); }
+.kpi-card:nth-child(4) { border-left-color: var(--accent-4); }
+.kpi-card:nth-child(5) { border-left-color: var(--accent-1); }
+.kpi-value { font-size: 1.6em; font-weight: 700; color: var(--ink); font-family: "JetBrains Mono", monospace; }
+.kpi-label { font-size: 0.82em; color: var(--ink-soft); margin-top: 2px; }
+
+section { background: #fff8e7; border: 1px solid var(--line); border-radius: 6px; padding: 20px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+h2 { font-size: 1.4em; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px dashed var(--line); color: var(--ink); }
+h2 .en { font-size: 0.6em; color: var(--ink-soft); font-family: "JetBrains Mono", monospace; margin-left: 10px; }
+.lead { font-size: 0.95em; color: var(--ink-soft); margin: 0 0 14px; }
+.chart-area { background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 10px; }
+svg { display: block; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; font-size: 0.82em; color: var(--ink-soft); }
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+.theory-matrix { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+.theory-matrix th, .theory-matrix td { padding: 8px 10px; border: 1px solid var(--line); text-align: left; }
+.theory-matrix th { background: var(--paper-deep); font-weight: 600; }
+.theory-matrix tr:nth-child(even) { background: rgba(255,248,231,0.5); }
+
+footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+footer a { color: #e9b885; }
+footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
+footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/theological-intervention-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Theological Intervention Network</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Theological Intervention Network</h1>
+        <p class="subtitle">W278 · Five Intervention Types: Manifestation-Enlightenment-Trial-Subjugation-Ordination</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">EN Home</a><span class="sep">/</span>
+        <a href="dashboard.html">Dashboard</a><span class="sep">/</span>
+        <span>Theological Intervention Network</span>
+    </nav>
+
+    <header>
+        <h1>Theological Intervention Network</h1>
+        <div class="subtitle">W278 · V Direction · Cross-direction Integration Theme 3 · Religion and Theology</div>
+        <div class="tagline">Forms a monster–theology dual track with monster-ecology-network · forms a team–theology dual track with pilgrim-team-dynamics</div>
+    </header>
+
+    <div class="kpi-row">
+        <div class="kpi-card">
+            <div class="kpi-value">3</div>
+            <div class="kpi-label">Three Teachings Deities (Buddhist/Daoist/Confucian Mind)</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value">5</div>
+            <div class="kpi-label">Five Intervention Types (Manifestation/Enlightenment/Trial/Subjugation/Ordination)</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value">13</div>
+            <div class="kpi-label">Related Chapter line Numbers</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value">4</div>
+            <div class="kpi-label">Religious Theorists (Otto/Eliade/Tillich/Hick)</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value">3</div>
+            <div class="kpi-label">Three-axis Theology (Buddha-nature/Dao-nature/Mind-nature)</div>
+        </div>
+    </div>
+
+    <section>
+        <h2>I. Three Teachings Deity Intervention Network · D3.js Force-Directed Graph <span class="en">Force-directed Network</span></h2>
+        <p class="lead">3 Three Teachings deities (Guanyin/Tathāgata/Taishang Laojun) × 5 intervention types × 13 chapter line numbers; node size = intervention intensity, link weight = relationship strength</p>
+        <div class="chart-area">
+            <svg width="100%" height="560" id="network-svg" role="img" aria-label="Theological intervention network force-directed graph"></svg>
+        </div>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-1)"></div>Buddhist deities (Guanyin/Tathāgata)</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-2)"></div>Daoist deities (Taishang Laojun)</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-4)"></div>Mind-nature theological orientation</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--line)"></div>Intervention relationship links</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>II. Five-type Intervention Energy Flow · Sankey Diagram <span class="en">Five-type Intervention Sankey</span></h2>
+        <p class="lead">Three Teachings deities → five intervention types → key chapters · energy flows from deities through intervention types into specific episodes</p>
+        <div class="chart-area">
+            <svg width="100%" height="420" id="sankey-svg" role="img" aria-label="Five-type intervention energy flow Sankey diagram"></svg>
+        </div>
+    </section>
+
+    <section>
+        <h2>III. Three-religion Theology Radar Overlay <span class="en">Three-religion Theology Radar</span></h2>
+        <p class="lead">Buddha-nature/Dao-nature/Mind-nature three-axis theology × five intervention types · three-religion theological logic comparison</p>
+        <div class="chart-area">
+            <svg width="100%" height="500" id="radar-svg" role="img" aria-label="Three-religion theology radar overlay"></svg>
+        </div>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-1)"></div>Buddha-nature (Tathāgata/Guanyin)</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-2)"></div>Dao-nature (Taishang Laojun)</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-4)"></div>Mind-nature (the Three Teachings converge in the mind)</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>IV. Theological Intervention Timeline <span class="en">Theological Intervention Timeline</span></h2>
+        <p class="lead">Ch. 7 to Ch. 100 · 13 line numbers · the intervention mechanisms of the Three Teachings deities unfold chronologically along the pilgrimage route</p>
+        <div class="chart-area">
+            <svg width="100%" height="380" id="timeline-svg" role="img" aria-label="Theological intervention timeline"></svg>
+        </div>
+    </section>
+
+    <section>
+        <h2>V. Four Theorists × Five Intervention Types Matrix <span class="en">Theory Matrix</span></h2>
+        <p class="lead">Based on the W277 Theological Intervention Mechanism special study · the four-theorist framework of Otto/Eliade/Tillich/Hick</p>
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+        <table class="theory-matrix">
+            <thead>
+                <tr>
+                    <th>Theorist</th>
+                    <th>Core Concept</th>
+                    <th>Manifestation</th>
+                    <th>Enlightenment</th>
+                    <th>Trial</th>
+                    <th>Subjugation</th>
+                    <th>Ordination</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Otto</td>
+                    <td>Four Elements of the Sense of the Holy</td>
+                    <td>Creature-feeling + Omnipotence</td>
+                    <td>Sense of Mystery</td>
+                    <td>Duality of Awe</td>
+                    <td>Manifestation of Omnipotence</td>
+                    <td>Culmination of the Numinous</td>
+                </tr>
+                <tr>
+                    <td>Eliade</td>
+                    <td>Hierophany + Sacred Space</td>
+                    <td>Sanctification of Time and Space</td>
+                    <td>Symbolic Mediation</td>
+                    <td>Time of Theophany</td>
+                    <td>Sacred Space</td>
+                    <td>Apex of the Axis Mundi</td>
+                </tr>
+                <tr>
+                    <td>Tillich</td>
+                    <td>Ultimate Concern + Symbol</td>
+                    <td>Manifestation of Ultimate Concern</td>
+                    <td>Transmission of Theological Symbols</td>
+                    <td>Test of Concern Purity</td>
+                    <td>Concern Transcending Predicament</td>
+                    <td>Symbolic Fulfillment and Dissolution</td>
+                </tr>
+                <tr>
+                    <td>Hick</td>
+                    <td>Pluralism + The Real</td>
+                    <td>Collaborative Deity Manifestation</td>
+                    <td>Pluralistic Enlightenment</td>
+                    <td>One Mind, Many Distinctions</td>
+                    <td>Three Teachings Deity Collaboration</td>
+                    <td>Manifestation of Ultimate Reality</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <section>
+        <h2>VI. Three-axis Theology Spectrum <span class="en">Three-axis Theology Spectrum</span></h2>
+        <p class="lead">Buddha-nature (inherent manifestation) — Dao-nature (return to original nature) — Mind-nature (the Three Teachings converge in the mind) · the logical spectrum of three-axis theology</p>
+        <div class="chart-area">
+            <svg width="100%" height="280" id="spectrum-svg" role="img" aria-label="Three-axis theology spectrum diagram"></svg>
+        </div>
+    </section>
+</div>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/theological-intervention-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+<script>
+// ============= Embedded Data =============
+const EMBEDDED_DATA = {
+    meta: {title: "Theological Intervention Network", version: "v2.2.50", w_id: "W278", direction: "V", theme: "Cross-direction Integration Theme 3 · Religion and Theology"},
+    // 1. Force-directed Network
+    network: {
+        nodes: [
+            // 三教神祇
+            {id: "Guanyin", type: "deity", religion: "Buddhist", size: 28, color: "var(--accent-1)"},
+            {id: "Tathāgata", type: "deity", religion: "Buddhist", size: 30, color: "var(--accent-1)"},
+            {id: "Taishang Laojun", type: "deity", religion: "Daoist", size: 26, color: "var(--accent-2)"},
+            // 五型干预
+            {id: "Manifestation", type: "intervention", size: 22, color: "var(--accent-3)"},
+            {id: "Enlightenment", type: "intervention", size: 22, color: "var(--accent-3)"},
+            {id: "Trial", type: "intervention", size: 20, color: "var(--accent-3)"},
+            {id: "Subjugation", type: "intervention", size: 22, color: "var(--accent-3)"},
+            {id: "Ordination", type: "intervention", size: 20, color: "var(--accent-3)"},
+            // 关键回目
+            {id: "Ch. 8 · Preaching at Lingshan", type: "chapter", size: 16, color: "var(--accent-4)"},
+            {id: "Ch. 11 · Manifestation of the Scabby Monk", type: "chapter", size: 14, color: "var(--accent-4)"},
+            {id: "Ch. 14 · Enlightenment via the Tight Fillet", type: "chapter", size: 16, color: "var(--accent-4)"},
+            {id: "Ch. 7 · Trial in the Eight Trigrams Furnace", type: "chapter", size: 14, color: "var(--accent-4)"},
+            {id: "Ch. 42 · Subjugation of Red Boy", type: "chapter", size: 14, color: "var(--accent-4)"},
+            {id: "Ch. 52 · Subjugation of the Green Bull", type: "chapter", size: 14, color: "var(--accent-4)"},
+            {id: "Ch. 77 · Subjugation of the Roc", type: "chapter", size: 14, color: "var(--accent-4)"},
+            {id: "Ch. 58 · Discerning True from False", type: "chapter", size: 14, color: "var(--accent-4)"},
+            {id: "Ch. 98 · The Wordless Scriptures", type: "chapter", size: 16, color: "var(--accent-4)"},
+            {id: "Ch. 100 · The Five Attain Buddhahood", type: "chapter", size: 16, color: "var(--accent-4)"}
+        ],
+        links: [
+            // 神祇 → 干预型
+            {source: "Guanyin", target: "Manifestation", value: 3},
+            {source: "Guanyin", target: "Enlightenment", value: 4},
+            {source: "Guanyin", target: "Trial", value: 2},
+            {source: "Guanyin", target: "Subjugation", value: 3},
+            {source: "Tathāgata", target: "Manifestation", value: 3},
+            {source: "Tathāgata", target: "Enlightenment", value: 2},
+            {source: "Tathāgata", target: "Trial", value: 2},
+            {source: "Tathāgata", target: "Subjugation", value: 2},
+            {source: "Tathāgata", target: "Ordination", value: 4},
+            {source: "Taishang Laojun", target: "Trial", value: 3},
+            {source: "Taishang Laojun", target: "Subjugation", value: 2},
+            // 干预型 → 回目
+            {source: "Manifestation", target: "Ch. 8 · Preaching at Lingshan", value: 2},
+            {source: "Manifestation", target: "Ch. 11 · Manifestation of the Scabby Monk", value: 2},
+            {source: "Enlightenment", target: "Ch. 14 · Enlightenment via the Tight Fillet", value: 3},
+            {source: "Enlightenment", target: "Ch. 98 · The Wordless Scriptures", value: 3},
+            {source: "Trial", target: "Ch. 7 · Trial in the Eight Trigrams Furnace", value: 2},
+            {source: "Trial", target: "Ch. 58 · Discerning True from False", value: 2},
+            {source: "Subjugation", target: "Ch. 42 · Subjugation of Red Boy", value: 2},
+            {source: "Subjugation", target: "Ch. 52 · Subjugation of the Green Bull", value: 2},
+            {source: "Subjugation", target: "Ch. 77 · Subjugation of the Roc", value: 2},
+            {source: "Ordination", target: "Ch. 98 · The Wordless Scriptures", value: 2},
+            {source: "Ordination", target: "Ch. 100 · The Five Attain Buddhahood", value: 3}
+        ]
+    },
+    // 2. Sankey
+    sankey: {
+        nodes: [
+            {name: "Guanyin", color: "var(--accent-1)"},
+            {name: "Tathāgata", color: "var(--accent-1)"},
+            {name: "Taishang Laojun", color: "var(--accent-2)"},
+            {name: "Manifestation", color: "var(--accent-3)"},
+            {name: "Enlightenment", color: "var(--accent-3)"},
+            {name: "Trial", color: "var(--accent-3)"},
+            {name: "Subjugation", color: "var(--accent-3)"},
+            {name: "Ordination", color: "var(--accent-3)"},
+            {name: "Ch. 8", color: "var(--accent-4)"},
+            {name: "Ch. 11", color: "var(--accent-4)"},
+            {name: "Ch. 14", color: "var(--accent-4)"},
+            {name: "Ch. 98", color: "var(--accent-4)"},
+            {name: "Ch. 7", color: "var(--accent-4)"},
+            {name: "Ch. 58", color: "var(--accent-4)"},
+            {name: "Ch. 42", color: "var(--accent-4)"},
+            {name: "Ch. 52", color: "var(--accent-4)"},
+            {name: "Ch. 77", color: "var(--accent-4)"},
+            {name: "Ch. 100", color: "var(--accent-4)"}
+        ],
+        links: [
+            {source: 0, target: 3, value: 3},  // 观音→显化
+            {source: 0, target: 4, value: 4},  // 观音→点化
+            {source: 0, target: 5, value: 2},  // 观音→试炼
+            {source: 0, target: 6, value: 3},  // 观音→收服
+            {source: 1, target: 3, value: 3},  // 如来→显化
+            {source: 1, target: 4, value: 2},  // 如来→点化
+            {source: 1, target: 5, value: 2},  // 如来→试炼
+            {source: 1, target: 6, value: 2},  // 如来→收服
+            {source: 1, target: 7, value: 4},  // 如来→授记
+            {source: 2, target: 5, value: 3},  // 太上老君→试炼
+            {source: 2, target: 6, value: 2},  // 太上老君→收服
+            {source: 3, target: 8, value: 2},  // 显化→第8回
+            {source: 3, target: 9, value: 2},  // 显化→第11回
+            {source: 4, target: 10, value: 3}, // 点化→第14回
+            {source: 4, target: 11, value: 3}, // 点化→第98回
+            {source: 5, target: 12, value: 2}, // 试炼→第7回
+            {source: 5, target: 13, value: 2}, // 试炼→第58回
+            {source: 6, target: 14, value: 2}, // 收服→第42回
+            {source: 6, target: 15, value: 2}, // 收服→第52回
+            {source: 6, target: 16, value: 2}, // 收服→第77回
+            {source: 7, target: 11, value: 2}, // 授记→第98回
+            {source: 7, target: 17, value: 3}  // 授记→第100回
+        ]
+    },
+    // 3. Radar
+    radar: [
+        {name: "Buddha-nature", color: "var(--accent-1)", values: [5, 5, 3, 5, 5]},  // 显化/点化/试炼/收服/授记
+        {name: "Dao-nature", color: "var(--accent-2)", values: [2, 1, 5, 4, 1]},
+        {name: "Mind-nature", color: "var(--accent-4)", values: [4, 5, 4, 3, 5]}
+    ],
+    // 4. Timeline
+    timeline: [
+        {chapter: "Ch. 7", line: 720, deity: "Taishang Laojun", type: "Trial", desc: "Forty-nine days of refinement in the Eight Trigrams Furnace"},
+        {chapter: "Ch. 8", line: 838, deity: "Tathāgata/Guanyin", type: "Manifestation+Enlightenment", desc: "Preaching at Lingshan + enlightening the four by imperial decree"},
+        {chapter: "Ch. 11", line: 1178, deity: "Guanyin", type: "Manifestation", desc: "The scabby monk manifests in Chang’an"},
+        {chapter: "Ch. 14", line: 1441, deity: "Guanyin", type: "Enlightenment", desc: "The Tight Fillet Spell and the Mind-stilling Mantra"},
+        {chapter: "Ch. 23", line: 2211, deity: "Guanyin", type: "Trial", desc: "The Four Saints test the Chan mind"},
+        {chapter: "Ch. 26", line: 2501, deity: "Guanyin", type: "Manifestation", desc: "Healing the Ginseng Fruit Tree"},
+        {chapter: "Ch. 42", line: 1229, deity: "Guanyin", type: "Subjugation", desc: "Subduing Red Boy as the Sudhana Boy"},
+        {chapter: "Ch. 49", line: 1797, deity: "Guanyin", type: "Subjugation", desc: "Subduing the Goldfish Spirit"},
+        {chapter: "Ch. 52", line: 137, deity: "Taishang Laojun", type: "Subjugation", desc: "Subduing the Green Bull Spirit"},
+        {chapter: "Ch. 58", line: 1253, deity: "Tathāgata", type: "Trial", desc: "Discerning true and false Wukong · the two minds contend"},
+        {chapter: "Ch. 77", line: 135, deity: "Tathāgata", type: "Subjugation", desc: "Subduing the Roc of the Golden-Winged Eagle"},
+        {chapter: "Ch. 98", line: 4170, deity: "Tathāgata", type: "Ordination+Enlightenment", desc: "Ordination at Lingshan + the Wordless Scriptures"},
+        {chapter: "Ch. 100", line: 4396, deity: "Tathāgata", type: "Ordination", desc: "The five attain Buddhahood · the fillet dissolves on its own"}
+    ]
+};
+
+// ============= 1. Force-directed Network =============
+(function renderNetwork() {
+    const svg = d3.select("#network-svg");
+    const width = svg.node().clientWidth;
+    const height = 560;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+    const data = JSON.parse(JSON.stringify(EMBEDDED_DATA.network));
+    // Resolve color vars to hex for rendering
+    const colorMap = {
+        "var(--accent-1)": "#a83232",
+        "var(--accent-2)": "#2d6a4f",
+        "var(--accent-3)": "#1e3a8a",
+        "var(--accent-4)": "#b8860b",
+        "var(--line)": "#c9b896"
+    };
+    data.nodes.forEach(n => n.color = colorMap[n.color] || n.color);
+
+    const sim = d3.forceSimulation(data.nodes).alphaDecay(0.08).velocityDecay(0.5)
+        .force("link", d3.forceLink(data.links).id(d => d.id).distance(d => d.value * 30 + 60))
+        .force("charge", d3.forceManyBody().strength(-400))
+        .force("center", d3.forceCenter(width/2, height/2))
+        .force("collision", d3.forceCollide().radius(d => d.size + 4));
+
+        // P1 推广：按 type 社区聚类（锚点均布+稳定收敛），不改数据语义
+        {
+            const _grp = Array.from(new Set(sim.nodes().map(d => d.type))).sort();
+            const _gx = {}, _gy = {};
+            _grp.forEach((g, i) => {
+                _gx[g] = width * (i + 1) / (_grp.length + 1);
+                _gy[g] = height * (0.38 + 0.24 * (i % 2));
+            });
+            sim.force("x", d3.forceX(d => (_gx[d.type] !== undefined ? _gx[d.type] : width / 2)).strength(0.14))
+                .force("y", d3.forceY(d => (_gy[d.type] !== undefined ? _gy[d.type] : height / 2)).strength(0.14));
+        }
+
+      // 性能：边层改 Canvas 叠加，避免每帧 N×4 几何属性写入触发 SVG 重排
+  var _svgEl = svg.node();
+  var _lcParent = _svgEl.parentNode;
+  if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
+  if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas'); if (_oc) _oc.remove(); }
+  var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var _lcW = _svgEl.clientWidth || 800, _lcH = _svgEl.clientHeight || 540;
+  var _vb = (_svgEl.getAttribute('viewBox') || '').split(/[\s,]+/);
+  var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_svgEl.getAttribute('width') || _lcW);
+  var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_svgEl.getAttribute('height') || _lcH);
+  var linkCanvas = document.createElement('canvas');
+  linkCanvas.className = 'link-canvas';
+  linkCanvas.width = Math.round(_lcW * _dpr);
+  linkCanvas.height = Math.round(_lcH * _dpr);
+  linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _svgEl.offsetLeft + 'px;top:' + _svgEl.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+  if (_lcParent) _lcParent.insertBefore(linkCanvas, _svgEl);
+  _svgEl.style.position = 'relative';
+  _svgEl.style.zIndex = '1';
+  var lctx = linkCanvas.getContext('2d');
+  lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
+  var linkSels = [];
+  function drawLinks() {
+    lctx.clearRect(0, 0, _cw, _ch);
+    for (var s = 0; s < linkSels.length; s++) {
+      var sel = linkSels[s], data = sel.data(), lines = sel.nodes();
+      for (var i = 0; i < data.length; i++) {
+        var d = data[i], el = lines[i];
+        if (!d || !d.source || d.source.x == null) continue;
+        lctx.beginPath();
+        lctx.moveTo(d.source.x, d.source.y);
+        lctx.lineTo(d.target.x, d.target.y);
+        lctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
+        lctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
+        var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
+        lctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
+        var da = el.getAttribute('stroke-dasharray');
+        lctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
+        lctx.stroke();
+      }
+    }
+    lctx.setLineDash([]);
+    lctx.globalAlpha = 1;
+  }
+const link = svg.append("g").selectAll("line")
+        .data(data.links).enter().append("line")
+        .attr("stroke", "#c9b896")
+        .attr("stroke-width", d => Math.sqrt(d.value))
+        .attr("opacity", 0.6); link.style('display','none'); linkSels.push(link);
+
+    const node = svg.append("g").selectAll("circle")
+        .data(data.nodes).enter().append("circle")
+        .attr("r", d => d.size / 2)
+        .attr("fill", d => d.color)
+        .attr("stroke", "#23201A")
+        .attr("stroke-width", 1.5)
+        .call(d3.drag()
+            .on("start", (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+            .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
+            .on("end", (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+        );
+
+    const label = svg.append("g").selectAll("text")
+        .data(data.nodes).enter().append("text")
+        .text(d => d.id)
+        .attr("font-size", d => d.type === "deity" ? "13px" : (d.type === "intervention" ? "12px" : "10px"))
+        .attr("font-weight", d => d.type === "deity" ? 700 : (d.type === "intervention" ? 600 : 400))
+        .attr("fill", "#23201A")
+        .attr("text-anchor", "middle")
+        .attr("dy", d => d.size / 2 + 14);
+
+    sim.on("tick", () => {
+        drawLinks();;
+        node.attr('transform', d => `translate(${d.x},${d.y})`);
+        label.attr('transform', d => `translate(${d.x},${d.y})`);
+    });
+})();
+
+// ============= 2. Sankey (Simplified bar-based) =============
+(function renderSankey() {
+    const svg = d3.select("#sankey-svg");
+    const width = svg.node().clientWidth;
+    const height = 420;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+    const data = EMBEDDED_DATA.sankey;
+    const pad = 20;
+    const colW = (width - pad * 2) / 3;
+
+    // Compute node positions per column
+    const colCounts = [3, 5, 10]; // 3 deities, 5 interventions, 10 chapters (some duplicate)
+    const nodePos = {};
+    ["Guanyin", "Tathāgata", "Taishang Laojun"].forEach((n, i) => nodePos[n] = {x: pad + colW * 0.5, y: pad + (height - pad*2) * (i + 0.5) / 3});
+    ["Manifestation", "Enlightenment", "Trial", "Subjugation", "Ordination"].forEach((n, i) => nodePos[n] = {x: pad + colW * 1.5, y: pad + (height - pad*2) * (i + 0.5) / 5});
+
+    // Group chapters - aggregate by chapter name
+    const chapterList = ["Ch. 8", "Ch. 11", "Ch. 14", "Ch. 98", "Ch. 7", "Ch. 58", "Ch. 42", "Ch. 52", "Ch. 77", "Ch. 100"];
+    chapterList.forEach((n, i) => nodePos[n] = {x: pad + colW * 2.5, y: pad + (height - pad*2) * (i + 0.5) / 10});
+
+    const colorMap = {
+        "Guanyin": "#a83232", "Tathāgata": "#a83232", "Taishang Laojun": "#2d6a4f",
+        "Manifestation": "#1e3a8a", "Enlightenment": "#1e3a8a", "Trial": "#1e3a8a", "Subjugation": "#1e3a8a", "Ordination": "#1e3a8a"
+    };
+    chapterList.forEach(c => colorMap[c] = "#b8860b");
+
+    // Draw links as curves
+    data.links.forEach(l => {
+        const src = data.nodes[l.source];
+        const tgt = data.nodes[l.target];
+        const s = nodePos[src.name];
+        const t = nodePos[tgt.name];
+        if (!s || !t) return;
+        const midX = (s.x + t.x) / 2;
+        svg.append("path")
+            .attr("d", `M${s.x + 30},${s.y} C${midX},${s.y} ${midX},${t.y} ${t.x - 30},${t.y}`)
+            .attr("fill", "none")
+            .attr("stroke", colorMap[src.name])
+            .attr("stroke-width", Math.sqrt(l.value) * 2)
+            .attr("opacity", 0.4);
+    });
+
+    // Draw nodes
+    Object.entries(nodePos).forEach(([name, pos]) => {
+        svg.append("rect")
+            .attr("x", pos.x - 30)
+            .attr("y", pos.y - 10)
+            .attr("width", 60)
+            .attr("height", 20)
+            .attr("fill", colorMap[name])
+            .attr("rx", 3);
+        svg.append("text")
+            .attr("x", pos.x)
+            .attr("y", pos.y + 4)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#fff")
+            .attr("font-size", "11px")
+            .attr("font-weight", 600)
+            .text(name);
+    });
+})();
+
+// ============= 3. Radar Chart =============
+(function renderRadar() {
+    const svg = d3.select("#radar-svg");
+    const width = svg.node().clientWidth;
+    const height = 500;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const cx = width / 2;
+    const cy = height / 2;
+    const r = Math.min(width, height) / 2 - 60;
+    const axes = ["Manifestation", "Enlightenment", "Trial", "Subjugation", "Ordination"];
+
+    const colorMap = {
+        "var(--accent-1)": "#a83232",
+        "var(--accent-2)": "#2d6a4f",
+        "var(--accent-4)": "#b8860b"
+    };
+
+    // Background circles
+    [0.2, 0.4, 0.6, 0.8, 1.0].forEach(scale => {
+        const pts = axes.map((_, i) => {
+            const a = (i / axes.length) * 2 * Math.PI - Math.PI / 2;
+            return [cx + r * scale * Math.cos(a), cy + r * scale * Math.sin(a)];
+        });
+        svg.append("polygon")
+            .attr("points", pts.map(p => p.join(",")).join(" "))
+            .attr("fill", "none")
+            .attr("stroke", "#c9b896")
+            .attr("stroke-dasharray", "2,2");
+    });
+
+    // Axes
+    axes.forEach((ax, i) => {
+        const a = (i / axes.length) * 2 * Math.PI - Math.PI / 2;
+        svg.append("line")
+            .attr("x1", cx).attr("y1", cy)
+            .attr("x2", cx + r * Math.cos(a))
+            .attr("y2", cy + r * Math.sin(a))
+            .attr("stroke", "#c9b896");
+        svg.append("text")
+            .attr("x", cx + (r + 20) * Math.cos(a))
+            .attr("y", cy + (r + 20) * Math.sin(a) + 4)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "13px")
+            .attr("font-weight", 600)
+            .attr("fill", "#23201A")
+            .text(ax);
+    });
+
+    // Data
+    EMBEDDED_DATA.radar.forEach(m => {
+        const color = colorMap[m.color];
+        const pts = m.values.map((v, i) => {
+            const a = (i / axes.length) * 2 * Math.PI - Math.PI / 2;
+            const scale = v / 5;
+            return [cx + r * scale * Math.cos(a), cy + r * scale * Math.sin(a)];
+        });
+        svg.append("polygon")
+            .attr("points", pts.map(p => p.join(",")).join(" "))
+            .attr("fill", color)
+            .attr("fill-opacity", 0.15)
+            .attr("stroke", color)
+            .attr("stroke-width", 2);
+        pts.forEach(p => {
+            svg.append("circle")
+                .attr("cx", p[0]).attr("cy", p[1])
+                .attr("r", 4)
+                .attr("fill", color);
+        });
+    });
+})();
+
+// ============= 4. Timeline =============
+(function renderTimeline() {
+    const svg = d3.select("#timeline-svg");
+    const width = svg.node().clientWidth;
+    const height = 380;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const pad = 40;
+    const data = EMBEDDED_DATA.timeline;
+
+    const xScale = d3.scaleLinear()
+        .domain([0, data.length - 1])
+        .range([pad, width - pad]);
+
+    const typeColor = {
+        "Manifestation": "#1e3a8a", "Enlightenment": "#1e3a8a", "Trial": "#1e3a8a",
+        "Subjugation": "#1e3a8a", "Ordination": "#1e3a8a", "Ordination+Enlightenment": "#a83232",
+        "Manifestation+Enlightenment": "#a83232"
+    };
+
+    // Baseline
+    svg.append("line")
+        .attr("x1", pad).attr("y1", height / 2)
+        .attr("x2", width - pad).attr("y2", height / 2)
+        .attr("stroke", "#c9b896")
+        .attr("stroke-width", 2);
+
+    data.forEach((d, i) => {
+        const x = xScale(i);
+        const y = height / 2;
+        const isAbove = i % 2 === 0;
+        const offset = isAbove ? -80 : 80;
+        const color = typeColor[d.type] || "#1e3a8a";
+
+        // Connecting line
+        svg.append("line")
+            .attr("x1", x).attr("y1", y)
+            .attr("x2", x).attr("y2", y + offset)
+            .attr("stroke", color)
+            .attr("stroke-width", 1.5);
+
+        // Node
+        svg.append("circle")
+            .attr("cx", x).attr("cy", y)
+            .attr("r", 6)
+            .attr("fill", color)
+            .attr("stroke", "#23201A")
+            .attr("stroke-width", 1.5);
+
+        // Label box
+        const labelY = y + offset;
+        svg.append("rect")
+            .attr("x", x - 55).attr("y", labelY - 20)
+            .attr("width", 110).attr("height", 40)
+            .attr("fill", "#fff8e7")
+            .attr("stroke", color)
+            .attr("rx", 3);
+        svg.append("text")
+            .attr("x", x).attr("y", labelY - 6)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "10px")
+            .attr("font-weight", 700)
+            .attr("fill", "#23201A")
+            .text(`${d.chapter} · ${d.type}`);
+        svg.append("text")
+            .attr("x", x).attr("y", labelY + 8)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "9px")
+            .attr("fill", "#5c4a35")
+            .text(d.deity);
+    });
+})();
+
+// ============= 5. Spectrum (Three-axis Theology) =============
+(function renderSpectrum() {
+    const svg = d3.select("#spectrum-svg");
+    const width = svg.node().clientWidth;
+    const height = 280;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const pad = 60;
+
+    // Three axes: 佛性论 - 道性论 - 心性论
+    const axes = [
+        {name: "Buddha-nature", x: pad + (width - pad * 2) * 0.15, color: "#a83232", desc: "Inherent manifestation"},
+        {name: "Mind-nature", x: pad + (width - pad * 2) * 0.5, color: "#b8860b", desc: "The Three Teachings converge in the mind"},
+        {name: "Dao-nature", x: pad + (width - pad * 2) * 0.85, color: "#2d6a4f", desc: "Return to original nature"}
+    ];
+
+    // Spectrum line
+    svg.append("line")
+        .attr("x1", pad).attr("y1", height / 2)
+        .attr("x2", width - pad).attr("y2", height / 2)
+        .attr("stroke", "#c9b896")
+        .attr("stroke-width", 3);
+
+    axes.forEach(a => {
+        svg.append("circle")
+            .attr("cx", a.x).attr("cy", height / 2)
+            .attr("r", 16)
+            .attr("fill", a.color)
+            .attr("stroke", "#23201A")
+            .attr("stroke-width", 2);
+        svg.append("text")
+            .attr("x", a.x).attr("y", height / 2 - 30)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "16px")
+            .attr("font-weight", 700)
+            .attr("fill", a.color)
+            .text(a.name);
+        svg.append("text")
+            .attr("x", a.x).attr("y", height / 2 + 40)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "12px")
+            .attr("fill", "#5c4a35")
+            .text(a.desc);
+    });
+
+    // Endpoints labels
+    svg.append("text")
+        .attr("x", pad).attr("y", height / 2 + 70)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "11px")
+        .attr("font-style", "italic")
+        .attr("fill", "#5c4a35")
+        .text("Buddhist deities dominant");
+    svg.append("text")
+        .attr("x", width - pad).attr("y", height / 2 + 70)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "11px")
+        .attr("font-style", "italic")
+        .attr("fill", "#5c4a35")
+        .text("Daoist deities dominant");
+    svg.append("text")
+        .attr("x", width / 2).attr("y", height / 2 + 70)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "11px")
+        .attr("font-style", "italic")
+        .attr("fill", "#5c4a35")
+        .text("Ultimate convergence of the Three Teachings");
+})();
+</script>
+<script id="audit-labelavoid">
+(function(){
+  function avoid(){
+    document.querySelectorAll("svg").forEach(function(svg){
+      var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){var r=t.getBoundingClientRect();return r.width>0&&r.height>0;});
+      var R=ts.map(function(t){return t.getBoundingClientRect();});
+      for(var i=0;i<ts.length;i++)for(var j=i+1;j<ts.length;j++){
+        var a=R[i],b=R[j];
+        var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+        var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+        if(ix*iy<=0)continue;
+        var area=Math.min(a.width*a.height,b.width*b.height);
+        if(area>0 && (ix*iy)/area>0.5){
+          var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+          if(hide.style.display!=="none") hide.style.display="none";
+        }
+      }
+    });
+  }
+  window.__avoidOverlap=avoid;
+  function run(){try{avoid();}catch(e){}}
+  window.addEventListener("load",function(){
+    [3000,6000,9000,12000].forEach(function(ms){setTimeout(run,ms);});
+  });
+})();
+</script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
