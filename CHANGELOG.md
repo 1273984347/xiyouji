@@ -4,9 +4,18 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W425），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W426），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.41（2026-08-14）：W426 GoatCounter 自托管修复 — gc.zgo.at 大陆 DNS 污染 → count.js 本地自托管
+
+> **来源**：验证发现 gc.zgo.at（GoatCounter 脚本 CDN）在大陆被 DNS 污染（本地解析 IP 随机漂移 108.160.x→52.58.x→88.191.x，HTTPS 连接全失败），脚本无法加载、PV 无法采集；而 goatcounter.com 计数端点（Hetzner 65.21.71.180）与后台均可达。
+> - **执行（抓取）**：从 GoatCounter 官方仓库 `arp242/goatcounter` 的 `public/count.js` 抓取脚本（ISC 协议·9213 字节），落地 `site/static/js/goatcounter.js`。
+> - **执行（本地化）**：全站 160 页脚本 src 由 `//gc.zgo.at/count.js` 改为按页面深度的本地相对路径（顶层 `static/js/`、data/en 层 `../static/js/`），计数仍回传 `goatcounter.com/count`。
+> - **执行（配套）**：`generate_csp.py` 从外部脚本白名单移除 `gc.zgo.at`（脚本转 'self'）；`inject_goatcounter.py` 支持本地路径幂等重跑；`site/_headers` 同步；CSP 重生成 159 页 0 漂移。
+> - **验证（线上实测）**：GitHub Pages 部署成功（run 31797180544）·线上 `static/js/goatcounter.js` HTTP 200（9213 字节）·CSP 无 gc.zgo.at 且放行计数端点·`verify_delivery.py` 核心全绿。
+> - **状态**：已落地·已 push（9e009dc）。
 
 ### v2.3.40（2026-08-14）：W425 GoatCounter 真实跨访客统计接入 — 全站 160 页注入 + CSP 白名单 + _headers 同步
 

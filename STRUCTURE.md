@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.40（2026-08-14）— W425 GoatCounter 真实跨访客统计接入（全站 160 页注入 + CSP 白名单 + _headers 同步）— A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.41（2026-08-14）— W426 GoatCounter 自托管修复（gc.zgo.at 大陆 DNS 污染 → count.js 本地自托管）— A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 顶层结构
 

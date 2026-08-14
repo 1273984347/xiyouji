@@ -8,6 +8,18 @@
 
 ---
 
+## W426 GoatCounter 自托管修复（2026-08-14·v2.3.41）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/static/js/goatcounter.js | W426 | v2.3.41 新增·从 arp242/goatcounter public/count.js 抓取（ISC·9213 字节）本地自托管 |
+| site/**/*.html（160 页） | W426 | v2.3.41 修改·脚本 src 由 //gc.zgo.at/count.js 改为按页面深度的本地相对路径 + CSP 重生成（移除 gc.zgo.at 白名单） |
+| scripts/generate_csp.py | W426 | v2.3.41 修改·EXTERNAL_SCRIPT_HOSTS 移除 gc.zgo.at（脚本转 'self'）·GOATCOUNTER_COUNT_ORIGIN 保留 |
+| scripts/inject_goatcounter.py | W426 | v2.3.41 修改·build_tag 占位符 + inject 内按页面深度计算本地相对路径（幂等可重跑） |
+| site/_headers | W426 | v2.3.41 修改·Netlify/CF CSP 移除 gc.zgo.at（script-src）·计数端点保留 |
+| site/dukou-engine.html | W426 | v2.3.41 修改·页脚 v2.3.40 W425 → v2.3.41 W426（长链页脚头部插入） |
+
+
 ## W425 GoatCounter 真实跨访客统计接入（2026-08-14·v2.3.40）
 
 | 文件 | W | 说明 |
