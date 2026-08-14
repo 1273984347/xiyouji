@@ -1,0 +1,2466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-2w8fvEcmAl+9ZSkou39XMN9++j2QOMHOjbOwdBF4CXE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Philosophy and Mind · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · single source of truth: site/tokens.css, site/system.css · re-sync: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        
+        
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        
+        
+        
+        
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+        }
+        table.data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 8px;
+            padding: 22px 24px;
+            margin-top: 14px;
+        }
+        .insight-box .box-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed var(--accent-soft);
+        }
+        .insight-box .box-content {
+            font-size: 0.95rem;
+            color: var(--ink);
+            line-height: 1.85;
+        }
+        .insight-box .box-content strong { color: var(--accent); }
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .map-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .map-card.alt { border-left-color: var(--accent-4); }
+        .map-card.alt2 { border-left-color: var(--accent-3); }
+        .map-card.alt3 { border-left-color: var(--accent); }
+        .map-card .map-label {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .map-card.alt .map-label { color: var(--accent-4); }
+        .map-card.alt2 .map-label { color: var(--accent-3); }
+        .map-card.alt3 .map-label { color: var(--accent); }
+        .map-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .map-card .map-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .map-card .map-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 16px;
+            grid-column: 1 / -1;
+        }
+        .summary-card .map-label {
+            color: var(--accent);
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .summary-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--ink);
+        }
+        .summary-card .map-row {
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 280px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .
+        .
+        .
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        .narrative {
+            font-size: 0.92rem;
+            line-height: 1.85;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .narrative strong { color: var(--ink); font-weight: 600; }
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        /* heatmap cell */
+        .heat-cell {
+            transition: opacity 0.15s;
+            cursor: pointer;
+        }
+        .heat-cell:hover { opacity: 0.7; }
+        @media (max-width: 720px) {
+            
+            
+            
+            
+            .map-grid { grid-template-columns: 1fr; }
+            table.data-table { font-size: 0.78rem; }
+            table.data-table th, table.data-table td { padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            
+            
+            
+            
+            .chart-block { padding: 12px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/philosophy.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Philosophy and Mind · A Cultivation Allegory of the Mind-Monkey and Thought-Horse</p>
+        <p class="kicker">G · Philosophy</p>
+        <h1>Philosophy and Mind · A Cultivation Allegory of the Mind-Monkey and Thought-Horse</h1>
+        <p class="subtitle">PHILOSOPHY &amp; MIND CULTIVATION OF XIYOUJI</p>
+        <p class="tagline">Indulgence → Suppression → Awakening → Enlightenment — a cultivation allegory of taming the mind-monkey and thought-horse.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="dashboard.html">Dashboard</a>
+            <span class="sep">/</span>
+            <a href="index.html">EN Home</a>
+            <span class="sep">/</span>
+            <span class="current">Philosophy and Mind</span>
+        </nav>
+
+        <div class="notice">
+            This page is generated from the G-series "Philosophy and Mind" scripts and contains 3 JSON datasets: the Mind-Monkey Nature Curve, the Cultivation Allegory Map, and overall statistics. All charts support hover tooltips.
+        </div>
+
+        <!-- Introduction -->
+        <section class="section">
+            <h2 class="section-title">Introduction · Journey to the West as a Cultivation Allegory</h2>
+            <div class="section-sub">INTRODUCTION · Xiyouji as a Cultivation Allegory</div>
+            <p style="font-size:0.95rem;line-height:1.8;color:var(--ink);margin-bottom:14px;">
+                Journey to the West is not merely a divine-monster adventure novel, but a complete <strong>cultivation allegory</strong>. This page dissects its philosophical essence along two dimensions:
+                the <strong style="color:var(--accent);">Mind-Monkey Nature Curve</strong> (Wukong's 6-stage mind-nature evolution) and
+                the <strong style="color:var(--accent-2);">Cultivation Allegory Map</strong> (the 81 hardships mapped to 8 Buddhist mind-nature trials).
+                Core proposition: the so-called scripture quest is really the process of <strong style="color:var(--accent-4);">taming the mind-monkey and thought-horse</strong>.
+            </p>
+
+            <p class="narrative">
+                <strong>Core thesis:</strong> the true protagonist of Journey to the West is not Tang Sanzang but <strong>Wukong's "mind"</strong>.
+                The so-called "mind-monkey" is the restless, agitated mind of Buddhist terminology — Wukong's 6-stage mind-nature evolution (indulgence → suppression → awakening → enlightenment)
+                fully presents an ordinary person's mind-cultivation journey from indulgence to enlightenment.
+                The 81 hardships are not external calamities but the <strong>externalization of inner obstacles</strong> —
+                each monster corresponds to one inner obstacle (greed / anger / ignorance / pride / doubt / lust / fame / death), and each demon-subduing is an act of breaking a mental attachment.
+            </p>
+
+            <p class="narrative">
+                <strong>Dual perspective:</strong> this page presents this cultivation allegory through two complementary dimensions:
+                the <strong style="color:var(--accent);">micro perspective</strong> — Wukong's individual 5-dimension mind-nature evolution (anger / pride / greed / wisdom / restraint);
+                the <strong style="color:var(--accent-2);">macro perspective</strong> — the overall mapping of the 81 hardships to 8 kinds of mind-nature trials.
+                The two are linked by the <strong style="color:var(--accent-3);">Heart Sutra of Chapter 19</strong> as the intellectual through-line —
+                the Heart Sutra teaches "emptiness", the 81 hardships teach "breaking attachment", and "form is not different from emptiness" means breaking attachment and returning to truth.
+            </p>
+
+            <div style="margin-bottom:18px;">
+                <span class="data-badge">3 JSON datasets</span>
+                <span class="data-badge">6 mind-nature stages</span>
+                <span class="data-badge">8 allegory categories</span>
+                <span class="data-badge">81 hardship mappings</span>
+                <span class="data-badge">5 mind-nature dimensions</span>
+                <span class="data-badge">Heart Sutra taught in Ch. 19</span>
+                <span class="data-badge">4 charts</span>
+                <span class="data-badge">D3.js v7</span>
+                <span class="data-badge">fetch + EMBEDDED fallback</span>
+            </div>
+
+            <div class="map-grid">
+                <div class="map-card alt3">
+                    <div class="map-label">CONCEPT 1</div>
+                    <div class="map-title">Mind-Monkey Nature Curve</div>
+                    <div class="map-row">Wukong's 6-stage mind-nature evolution (birth → havoc → submission → balance → awakening → buddhahood) · 5 dimensions: anger / pride / greed / wisdom / restraint.</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label">CONCEPT 2</div>
+                    <div class="map-title">Cultivation Allegory Map</div>
+                    <div class="map-row">The 81 hardships map to 8 Buddhist mind-nature trials (greed / anger / ignorance / pride / doubt / lust / fame / death); each hardship is an act of breaking a mental attachment.</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label">CORE INSIGHT</div>
+                    <div class="map-title">Mind-Nature Cultivation · Not an Adventure Story</div>
+                    <div class="map-row">The 81 hardships correspond to the "eighty-one aspects" of the Duoxin Jing; the Heart Sutra (taught in Ch. 19) is the book's intellectual through-line, not an adventure story.</div>
+                </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+                Data source: 3 JSON outputs generated by the scripts/G_Philosophy/ directory; this page automatically falls back to the inlined EMBEDDED data when fetch fails, and supports double-click opening via the file:// protocol.
+            </p>
+        </section>
+
+        <!-- KPI cards -->
+        <div class="kpi-row" id="kpiRow">
+            <div class="kpi-card">
+                <div class="label">MIND PHASES</div>
+                <div class="value">6 stages</div>
+                <div class="desc">Mind-monkey evolution: birth → havoc → submission → balance → awakening → buddhahood</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">ALLEGORY · CATEGORIES</div>
+                <div class="value">8 categories</div>
+                <div class="desc">The 81 hardships map to 8 Buddhist mind-nature trials (greed / anger / ignorance / pride / doubt / lust / fame / death)</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">HARDSHIPS · 81 TRIALS</div>
+                <div class="value">81 hardships</div>
+                <div class="desc">Total mind-nature trials; anger is most frequent (15 times), fame the least (7 times)</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">HEART SUTRA · CHAPTER</div>
+                <div class="value">Ch. 19</div>
+                <div class="desc">The Heart Sutra taught by Wuchao Chan Master is the pilgrimage team's guiding intellectual through-line</div>
+            </div>
+        </div>
+
+        <p class="narrative" style="background:#fdfaf4;border-left:4px solid var(--accent-soft);padding:14px 18px;border-radius:0 6px 6px 0;margin-bottom:24px;">
+            <strong>KPI overview notes:</strong>
+            <strong style="color:var(--accent);">6 mind-nature stages</strong> — Wukong's complete mind-cultivation arc from "birth of the Stone Monkey" to "buddhahood as the Victorious Fighting Buddha",
+            each stage corresponding to a different mind state (5-dimension scores of anger / pride / greed / wisdom / restraint);
+            <strong style="color:var(--accent-2);">8 allegory categories</strong> — the 81 hardships are divided into 8 kinds of Buddhist mind-nature trials,
+            corresponding to the Three Poisons (greed / anger / ignorance) + Five Hindrances (pride / doubt) + Five Desires (lust / fame) + life-and-death;
+            <strong style="color:var(--accent-4);">81 hardships</strong> — the total number of mind-nature trials,
+            corresponding to the "eighty-one aspects" of the Duoxin Jing, not a coincidence;
+            <strong style="color:var(--accent-3);">The Heart Sutra of Ch. 19</strong> — taught by Wuchao Chan Master,
+            the book's intellectual through-line; "form is not different from emptiness, emptiness is not different from form" means breaking attachment and returning to truth.
+        </p>
+
+        <!-- Section 1: Mind-Monkey Nature Curve -->
+        <section class="section">
+            <h2 class="section-title">One · Mind-Monkey Nature Curve</h2>
+            <div class="section-sub">MIND MONKEY CURVE · Wukong's 6-stage mind-nature evolution (5 dimensions)</div>
+            <div class="definition" id="def-monkey">
+                <strong>Definition:</strong> mind-monkey and thought-horse — a Buddhist term for the restless, agitated mind; the evolution of Wukong's "mind-monkey" is the core mind-cultivation process of the whole book. The mind-nature curve takes the four-stage form "indulgence → suppression → awakening → enlightenment" — not simple linearity, but a spiral ascent.
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>5-dimension scoring system:</strong> anger_level (anger · 0-10) / pride_level (pride · 0-10) / greed_level (greed · 0-10) /
+                wisdom_level (wisdom · 0-10) / restraint_level (restraint · 0-10).
+                Key turning point: the <strong style="color:var(--accent);">Six-Eared Macaque incident (Ch. 58)</strong> is the true-vs-false Monkey King = subduing the two minds, the mind-nature turning point of the whole book.
+                Wukong's path from "Great Sage Equal to Heaven" to "Victorious Fighting Buddha" is the mind-cultivation process from <strong style="color:var(--accent-2);">"ego-attachment" to "no-self"</strong>.
+            </p>
+
+            <p class="narrative">
+                <strong>Reading the four stages:</strong>
+                <strong style="color:var(--accent);">Indulgence</strong> (birth + Havoc in Heaven) — the natural true mind, through indulgence, reaches an anger peak (anger 9) and must be suppressed under Five Elements Mountain;
+                <strong style="color:var(--accent-3);">Suppression</strong> (early pilgrimage · submission) — tamed by the Tight-Fillet Spell, the mind-monkey is constrained by external force but anger still erupts (anger 7);
+                <strong style="color:var(--accent-2);">Awakening</strong> (mid-pilgrimage · balance) — the Six-Eared Macaque incident subdues the two minds, and wisdom begins to grow (wisdom 7);
+                <strong style="color:var(--accent-4);">Enlightenment</strong> (awakening stage + buddhahood) — the mind-monkey unifies, turning from external constraint to inner self-awareness, until the tight fillet falls off by itself and buddhahood is reached.
+            </p>
+
+            <p class="narrative">
+                <strong>Not simple linearity, but a spiral ascent:</strong> the core feature of the mind-nature curve is <strong>spiral ascent</strong>, not linear decline —
+                at Havoc in Heaven wisdom_level actually drops to 4 (indulgence clouds wisdom); in early pilgrimage restraint_level is only 4 (external force, not internalized);
+                only after the Six-Eared Macaque incident do wisdom and restraint leap together (7→9, 7→9) — this is the inner transformation after "subduing the two minds",
+                not the continuation of external constraint. At final buddhahood, anger=0, wisdom=10, restraint=10, reaching the ultimate balance of mind-nature.
+            </p>
+
+            <p class="narrative">
+                <strong>Key turning point · the Six-Eared Macaque incident (Ch. 58):</strong>
+                the true-vs-false Monkey King = subduing the two minds, the mind-nature turning point of the whole book. Before this, Wukong's practice is passive (tamed by the external Tight-Fillet Spell, restraint only 1→4);
+                after this, Wukong begins to <strong>actively internalize</strong> executive control (restraint leaps 4→7→9→10).
+                This turn reveals the essence of mind-cultivation — <strong style="color:var(--accent);">true awakening begins with "subduing the two minds"</strong>,
+                that is, no more inner contradiction and division; the mind-monkey unifies, turning from external constraint to inner self-awareness.
+                This is the beginning of "thoroughly subduing the mind-monkey", not its endpoint.
+            </p>
+
+            <!-- Chart 1: 5-dimension line chart -->
+            <div class="chart-block">
+                <div class="chart-title">Mind-Monkey Nature: 6 Stages · 5-Dimension Evolution Line Chart</div>
+                <div class="chart-caption">X axis: 6 mind-nature stages / Y axis: 0-10 / 5 lines: anger / pride / greed / wisdom / restraint</div>
+                <svg id="chart-monkey-line" class="chart-svg" width="100%" height="420"></svg>
+                <div class="legend-row" id="line-legend">
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent);"></span>Anger (anger_level)</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-3);"></span>Pride (pride_level)</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-2);"></span>Greed (greed_level)</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-4);"></span>Wisdom (wisdom_level)</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--ink-soft);"></span>Restraint (restraint_level)</span>
+                </div>
+            </div>
+
+            <!-- Chart 3: mind-nature dimension heatmap -->
+            <div class="chart-block">
+                <div class="chart-title">Mind-Nature Dimension Evolution Heatmap (6 stages × 5 dimensions)</div>
+                <div class="chart-caption">Rows: 6 mind-nature stages / Columns: 5 dimensions / color depth indicates value (dark = high, light = low) · hover to see exact values</div>
+                <svg id="chart-monkey-heat" class="chart-svg" width="100%" height="340"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:#fdfaf4;"></span>0-2 Low</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;opacity:0.5;"></span>3-4 Medium-low</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;"></span>5-6 Medium</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#c8463a;opacity:0.7;"></span>7-8 Medium-high</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#c8463a;"></span>9-10 High</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">Detailed Table of the 6 Mind-Nature Stages</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="phase-table">
+                    <thead>
+                        <tr>
+                            <th>Stage</th>
+                            <th>Chapter</th>
+                            <th>Mind State</th>
+                            <th>Anger</th>
+                            <th>Pride</th>
+                            <th>Greed</th>
+                            <th>Wisdom</th>
+                            <th>Restraint</th>
+                            <th>Key Event</th>
+                            <th>Allegory Symbol</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Mind-Nature Curve Analysis</h3>
+            <ol class="insights-list" id="monkey-insights-list"></ol>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Philosophical Insights (six)</h3>
+            <ol class="insights-list" id="philosophical-insights-list"></ol>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Modern Parallels · Modern Mapping of Mind-Nature Cultivation</h3>
+            <div class="map-grid" id="modern-grid">
+                <div class="map-card alt3">
+                    <div class="map-label">ANGER MANAGEMENT</div>
+                    <div class="map-title">Modern Emotion Management</div>
+                    <div class="map-row">The training process from impulse to restraint — corresponding to Wukong's anger_pattern 2→9→7→5→3→0 decline.</div>
+                    <div class="map-row"><strong>Corresponding stages:</strong> Havoc in Heaven → early pilgrimage → buddhahood</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label">EGO DISSOLUTION</div>
+                    <div class="map-title">Chan Meditation / Mindfulness</div>
+                    <div class="map-row">Awareness training from "ego-attachment" to "no-self" — corresponding to the steady decline of pride_pattern 3→10→8→6→4→1.</div>
+                    <div class="map-row"><strong>Core:</strong> from "Great Sage Equal to Heaven" to "Victorious Fighting Buddha"</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label">EXTERNAL → INTERNAL</div>
+                    <div class="map-title">Internalizing Discipline</div>
+                    <div class="map-row">The shift from external rule-constraint to inner self-awareness — corresponding to the spiral ascent of restraint_pattern 1→1→4→7→9→10.</div>
+                    <div class="map-row"><strong>Mark:</strong> the fillet falling off by itself = complete internalization</div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="box-title">Key Insight · The Spiral Ascent of Mind-Monkey Cultivation</div>
+                <div class="box-content" id="monkey-insight-box">
+                    <p>What the mind-nature curve descends in is not <strong>"ability"</strong> but <strong>"anger"</strong> — Wukong's power grows stronger after buddhahood.</p>
+                    <p style="margin-top:8px;">Mind-cultivation is not eliminating desire but <strong>transforming desire</strong>: anger→courage, pride→confidence, greed→aspiration. This is the spiral-ascent process of "the mind-monkey unified, turning from external constraint to inner self-awareness".</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Cultivation Allegory Map -->
+        <section class="section">
+            <h2 class="section-title alt-2">Two · Cultivation Allegory Map</h2>
+            <div class="section-sub">CULTIVATION ALLEGORY · the 81 hardships mapped to 8 Buddhist mind-nature trials</div>
+            <div class="definition" id="def-allegory">
+                <strong>Definition:</strong> the 81 hardships are not mere calamities but 81 kinds of mind-nature trials, corresponding to the mind-cultivation sequence of the Duoxin Jing. The whole book is a "taming-the-mind-monkey-and-thought-horse" cultivation allegory, not a simple adventure story.
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>The 8 allegory categories:</strong> Greed Test (12) / Anger Test (15) / Ignorance Test (10) / Pride Test (8) /
+                Suspicion Test (9) / Lust Test (11) / Fame Test (7) / Life-Death Test (9) · totaling <strong style="color:var(--accent);">81 hardships</strong>.
+                Wukong primarily practices <strong style="color:var(--accent);">anger</strong> (15 hardships), Bajie primarily practices <strong style="color:var(--accent-3);">lust</strong> (11 hardships),
+                Tang Sanzang primarily practices <strong style="color:var(--accent-2);">ignorance</strong> (10 hardships) — each character corresponds to a different mind-nature trial.
+            </p>
+
+            <p class="narrative">
+                <strong>Buddhist mapping of the 8 allegory categories:</strong>
+                <strong style="color:var(--accent);">Three Poisons</strong> (greed / anger / ignorance · 37 hardships) — the foremost Buddhist poisons, the most fundamental mind-nature obstacles, corresponding to an ordinary person's most basic attachments;
+                <strong style="color:var(--accent-3);">Five Hindrances</strong> (pride / doubt · 17 hardships) — among the Buddhist five hindrances, covering the true mind and obstructing awakening;
+                <strong style="color:var(--accent-2);">Five Desires</strong> (lust / fame · 18 hardships) — among the Buddhist five desires, attachment to external things;
+                <strong style="color:var(--accent-4);">Life-and-death</strong> (9 hardships) — in Buddhism birth and death are the great matter, the fear of and attachment to life and death.
+            </p>
+
+            <p class="narrative">
+                <strong>The logic of the primary-practice division:</strong> each character's mind-nature shortcoming determines their primary trial —
+                Wukong is by nature <strong style="color:var(--accent);">prone to anger</strong> (anger_pattern peak 9), so he faces the most anger trials (15 hardships · 18.5%);
+                Bajie is by nature <strong style="color:var(--accent-3);">lustful and greedy</strong>, so he faces the most lust trials (11 hardships · 13.6%);
+                Tang Sanzang is by nature <strong style="color:var(--accent-2);">unable to see the truth</strong>, so he faces the most ignorance trials (10 hardships · 12.3%).
+                This division reveals the <strong>personalized design</strong> of the cultivation allegory — each character's hardships are mind-nature trials tailored to them.
+            </p>
+
+            <p class="narrative">
+                <strong>The asymmetry of the hardship-count distribution:</strong> the distribution of the 81 hardships is asymmetric —
+                anger trials are the most frequent (15 hardships · 18.5%), fame trials the least (7 hardships · 8.6%), a 2.1× difference.
+                This asymmetry reveals <strong>the distribution of the pilgrimage team's mind-nature shortcomings</strong>:
+                anger is Wukong's primary practice, hence the most trials; fame is an area where the team is already detached, hence the fewest.
+                The Three Poisons (greed / anger / ignorance) total 37 hardships, 45.7% — confirming the Buddhist doctrine that "the Three Poisons are the fundamental afflictions",
+                and embodying Xiyouji's cultivation-allegory design centered on "breaking the Three Poisons".
+            </p>
+
+            <div class="map-grid">
+                <div class="map-card alt3">
+                    <div class="map-label">HEART SUTRA</div>
+                    <div class="map-title">Prajñāpāramitā Heart Sutra</div>
+                    <div class="map-row"><strong>Chapter:</strong> Ch. 19, taught by Wuchao Chan Master</div>
+                    <div class="map-row"><strong>Role:</strong> the pilgrimage team's "guiding thought"; Tang Sanzang recites the Heart Sutra daily</div>
+                    <div class="map-row"><strong>Core:</strong> "form is not different from emptiness, emptiness is not different from form; form is emptiness, emptiness is form"</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label">ALLEGORY PATTERN</div>
+                    <div class="map-title">The Heart Sutra and the 81 Hardships</div>
+                    <div class="map-row"><strong>Heart Sutra:</strong> teaches "emptiness"</div>
+                    <div class="map-row"><strong>81 hardships:</strong> teach "breaking attachment"</div>
+                    <div class="map-row"><strong>Meaning:</strong> breaking attachment to form (external things) and returning to emptiness (the true mind)</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label">CORE FINDINGS</div>
+                    <div class="map-title">Primary Mind-Nature Distribution</div>
+                    <div class="map-row"><strong>Wukong:</strong> 15 anger trials (the most)</div>
+                    <div class="map-row"><strong>Bajie:</strong> 11 lust trials</div>
+                    <div class="map-row"><strong>Tang Sanzang:</strong> 10 ignorance trials, often deceived through not seeing the truth</div>
+                </div>
+            </div>
+
+            <!-- Chart 2: 8-category bar chart -->
+            <div class="chart-block">
+                <div class="chart-title">Cultivation Allegory: 8 Categories · Hardship-Count Bar Chart (with mind-obstacle labels)</div>
+                <div class="chart-caption">X axis: 8 categories (greed / anger / ignorance / pride / doubt / lust / fame / death) / Y axis: hardship count / color by mind-obstacle type / mind-obstacle labels above bars</div>
+                <svg id="chart-allegory-bar" class="chart-svg" width="100%" height="420"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>Three Poisons (greed / anger / ignorance)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-3);"></span>Five Hindrances (pride / doubt)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>Five Desires (lust / fame)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>Life-and-death</span>
+                </div>
+            </div>
+
+            <!-- Chart 4: 81 hardships by category donut -->
+            <div class="chart-block">
+                <div class="chart-title">Share of the 81 Hardships by Allegory Category · Donut Chart</div>
+                <div class="chart-caption">Proportion of 8 categories · 81 hardships total · hover to see each category's count and mind obstacle</div>
+                <svg id="chart-allegory-pie" class="chart-svg" width="100%" height="420"></svg>
+                <div class="legend-row" id="pie-legend"></div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">Detailed Table of the 8 Allegory Categories</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="allegory-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>English Name</th>
+                            <th>Count</th>
+                            <th>Mind Obstacle</th>
+                            <th>Buddhist Counterpart</th>
+                            <th>Cultivation Goal</th>
+                            <th>Representative Hardships</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Core Findings of the Cultivation Allegory</h3>
+            <ol class="insights-list" id="allegory-insights-list"></ol>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">The Correspondence between the Heart Sutra and the 81 Hardships</h3>
+            <div class="definition" style="border-left-color:var(--accent-2);background:#f0f6fa;">
+                <strong style="color:var(--accent-2);">Prajñāpāramitā Heart Sutra · Ch. 19, taught by Wuchao Chan Master</strong><br>
+                <em style="color:var(--ink-soft);">"form is not different from emptiness, emptiness is not different from form; form is emptiness, emptiness is form"</em>
+            </div>
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:14px;line-height:1.8;">
+                The Heart Sutra is the pilgrimage team's <strong>"guiding thought"</strong>, and Tang Sanzang recites it daily. The Heart Sutra teaches <strong style="color:var(--accent-2);">"emptiness"</strong>,
+                while the 81 hardships teach <strong style="color:var(--accent);">"breaking attachment"</strong> — the two form a correspondence.
+                The Heart Sutra's <strong>"eighty-one aspects"</strong> correspond to the 81 hardships, and its <strong>"breaking attachment and returning to truth"</strong> corresponds to the mind-cultivation sequence.
+                Each hardship is a breaking of attachment to "form (external things)", returning to emptiness (the true mind).
+            </p>
+
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label">SUTRA NAME</div>
+                    <div class="map-title">Prajñāpāramitā Heart Sutra</div>
+                    <div class="map-row"><strong>Sanskrit:</strong> Prajñāpāramitā Hṛdaya</div>
+                    <div class="map-row"><strong>Status:</strong> the shortest Mahāyāna Buddhist scripture, 260 characters</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label">SUTRA CHAPTER</div>
+                    <div class="map-title">Ch. 19 · Taught by Wuchao Chan Master</div>
+                    <div class="map-row"><strong>Teacher:</strong> Wuchao Chan Master</div>
+                    <div class="map-row"><strong>Recipient:</strong> Tang Sanzang</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label">SUTRA ROLE</div>
+                    <div class="map-title">Guiding Intellectual Through-line</div>
+                    <div class="map-row"><strong>Role:</strong> the pilgrimage team recites the Heart Sutra daily</div>
+                    <div class="map-row"><strong>Significance:</strong> Xiyouji's intellectual through-line, not an adventure story</div>
+                </div>
+                <div class="summary-card">
+                    <div class="map-label">ALLEGORY MEANING</div>
+                    <div class="map-title">Breaking Attachment and Returning to Truth · From Form to Emptiness</div>
+                    <div class="map-row">
+                        The Heart Sutra teaches <strong>"emptiness"</strong> (all dharmas lack self-nature), while the 81 hardships teach <strong>"breaking attachment"</strong> (breaking attachment to external things) —
+                        the two correspond through the transformation of "form (external things) → emptiness (the true mind)".
+                        The 81 hardships are the practical cultivation sequence of <strong style="color:var(--accent);">"form is not different from emptiness"</strong> —
+                        each hardship breaks one attachment, each returns to the one truth, culminating in buddhahood (complete return to emptiness).
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="box-title">Key Insight · The 81 Hardships = the Mind-Cultivation Sequence</div>
+                <div class="box-content" id="allegory-insight-box">
+                    <p>The "count" of the 81 hardships corresponds to the <strong>"eighty-one aspects"</strong> of the Duoxin Jing — not a coincidence.</p>
+                    <p style="margin-top:8px;">The whole of Xiyouji is <strong>not an adventure story</strong>, but a "taming-the-mind-monkey-and-thought-horse" cultivation allegory — each hardship corresponds to a breaking of mental attachment, each monster to an inner obstacle.</p>
+                    <p style="margin-top:8px;">The Heart Sutra (Ch. 19) is the <strong>intellectual through-line</strong>, the 81 hardships are the <strong>practical cultivation sequence</strong>, and together they form the cultivation system of "form is emptiness, breaking attachment and returning to truth".</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Synthesis -->
+        <section class="section">
+            <h2 class="section-title alt-3">Three · Synthesis · The Philosophical Essence of Xiyouji</h2>
+            <div class="section-sub">SYNTHESIS · The Philosophical Essence of Xiyouji</div>
+
+            <p style="font-size:0.95rem;line-height:1.85;color:var(--ink);margin-bottom:18px;">
+                Observed across two dimensions, the philosophical essence of Journey to the West is <strong>"mind-nature cultivation"</strong> — breaking through greed, anger, ignorance, pride, and doubt via the 81 hardships to return to the original mind.
+                The mind-monkey curve reveals Wukong's mind-nature evolution (indulgence → suppression → awakening → enlightenment), and the Cultivation Allegory Map reveals the correspondence between the 81 hardships and Buddhist mind-nature trials.
+                Together they point to a deeper proposition: <strong style="color:var(--accent);">the so-called scripture quest is really the process of taming the mind-monkey and thought-horse</strong>.
+            </p>
+
+            <p class="narrative">
+                <strong>Cross-validation:</strong> the <strong>micro perspective</strong> of the mind-monkey curve and the <strong>macro perspective</strong> of the Cultivation Allegory Map corroborate each other —
+                Wukong's anger_pattern (2→9→7→5→3→0) corresponds to anger trials having the highest share of the 81 hardships (15 hardships · 18.5%),
+                confirming that Wukong primarily practices anger; Tang Sanzang's "not seeing the truth" corresponds to ignorance trials (10 hardships · 12.3%), confirming his primary practice of ignorance.
+                This micro-macro correspondence is not coincidence but <strong>the careful design of the cultivation allegory</strong>.
+            </p>
+
+            <p class="narrative">
+                <strong>The Heart Sutra as the intellectual through-line:</strong> the Heart Sutra taught by Wuchao Chan Master in Ch. 19 is the book's intellectual through-line.
+                The Heart Sutra teaches <strong style="color:var(--accent-2);">"emptiness"</strong> (all dharmas lack self-nature), the 81 hardships teach <strong style="color:var(--accent);">"breaking attachment"</strong> (breaking attachment to external things) —
+                the two form the transformation path of "form (external things) → emptiness (the true mind)".
+                The "count" of the 81 hardships corresponds to the "eighty-one aspects" of the Duoxin Jing, confirming the careful arrangement of the "mind-cultivation sequence".
+                Final buddhahood = complete return to emptiness = the fillet falling off by itself = the mind-monkey subdued — this is <strong>the ultimate goal of mind-nature cultivation</strong>.
+            </p>
+
+            <p class="narrative">
+                <strong>Mind-cultivation = transforming desire, not eliminating it:</strong> this is Xiyouji's deepest philosophical proposition.
+                What the mind-nature curve descends in is not "ability" but "anger" — Wukong's power grows stronger after buddhahood (wisdom 10 · restraint 10).
+                Mind-cultivation is not eliminating desire but <strong>transforming desire</strong>: anger→courage, pride→confidence, greed→aspiration.
+                The Tight-Fillet Spell is external force; true liberation is the fillet falling off by itself (buddhahood) — the shift from external discipline to inner self-awareness,
+                which constitutes the core proposition that "subduing the mind-monkey = transforming the mind-monkey, not eliminating it".
+            </p>
+
+            <p class="narrative">
+                <strong>Three-layer meaning structure:</strong> the philosophical essence of Xiyouji revealed on this page can be summarized in three layers —
+                the <strong style="color:var(--accent);">surface layer</strong>: a divine-monster adventure story (the team fetches scriptures from the West, subduing demons and monsters);
+                the <strong style="color:var(--accent-2);">middle layer</strong>: a mind-nature cultivation allegory (81 hardships = the mind-cultivation sequence, each monster = an inner obstacle);
+                the <strong style="color:var(--accent-4);">deep layer</strong>: an exposition of Heart Sutra thought ("form is not different from emptiness, emptiness is not different from form" = breaking attachment and returning to truth = subduing the mind-monkey).
+                These three layers together form the complete philosophical system of Journey to the West as a "cultivation allegory".
+            </p>
+
+            <div class="map-grid">
+                <div class="map-card alt3">
+                    <div class="map-label" style="color:var(--accent);">FINDING 1 · MIND-NATURE CURVE</div>
+                    <div class="map-title">Indulgence → Suppression → Awakening · a four-stage spiral ascent</div>
+                    <div class="map-row">anger_pattern 2→9→7→5→3→0 · wisdom_pattern 5→4→6→7→9→10 · Havoc in Heaven is the anger peak, returning to zero at buddhahood.</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">FINDING 2 · ALLEGORY MAPPING</div>
+                    <div class="map-title">The 81 Hardships = the Mind-Cultivation Sequence</div>
+                    <div class="map-row">8 kinds of mind-nature trials (greed, anger, ignorance, pride, doubt, lust, fame, death) totaling 81 hardships, corresponding to the eighty-one aspects of the Duoxin Jing — not a coincidence.</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">FINDING 3 · PRIMARY-PRACTICE DIVISION</div>
+                    <div class="map-title">Three Characters, Each Cultivating One Mind-Nature</div>
+                    <div class="map-row">Wukong primarily practices anger (15 hardships), Bajie lust (11 hardships), Tang Sanzang ignorance (10 hardships) — each corresponds to a different breaking of mental attachment.</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-3);">FINDING 4 · THE PATH OF INTERNALIZATION</div>
+                    <div class="map-title">From External Constraint to Inner Self-Awareness</div>
+                    <div class="map-row">restraint_pattern 1→1→4→7→9→10 · the Tight-Fillet Spell is external force; true liberation is the fillet falling off by itself (buddhahood) — the shift from external discipline to inner self-awareness.</div>
+                </div>
+                <div class="summary-card">
+                    <div class="map-label">META INSIGHT</div>
+                    <div class="map-title">Mind-Cultivation = Transforming Desire, Not Eliminating It</div>
+                    <div class="map-row">
+                        What the mind-nature curve descends in is not <strong>"ability"</strong> but <strong>"anger"</strong> — Wukong's power grows stronger after buddhahood.
+                        Mind-cultivation is not eliminating desire but <strong>transforming desire</strong>: anger→courage, pride→confidence, greed→aspiration.
+                        This is Xiyouji's deepest philosophical proposition: <strong style="color:var(--accent);">subduing the mind-monkey = transforming the mind-monkey, not eliminating it</strong>.
+                        The 81 hardships are the <strong>practical cultivation sequence</strong> of this transformation, and the Heart Sutra is its <strong>guiding thought</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Philosophical core proposition -->
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Philosophical Core Proposition · Overall Statistics</h3>
+            <div class="map-grid">
+                <div class="map-card alt3">
+                    <div class="map-label">PHILOSOPHICAL CORE</div>
+                    <div class="map-title">Mind-Nature Cultivation · Returning to the Original Mind</div>
+                    <div class="map-row">The philosophical essence of Xiyouji is <strong>"mind-nature cultivation"</strong> — breaking through greed, anger, ignorance, pride, and doubt via the 81 hardships to return to the original mind.</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label">DATA POINTS</div>
+                    <div class="map-title">14 Data Points · 2 Core Concepts</div>
+                    <div class="map-row"><strong>Concept 1:</strong> the Mind-Monkey Nature Curve (6 stages · 5 dimensions)</div>
+                    <div class="map-row"><strong>Concept 2:</strong> the Cultivation Allegory Map (8 categories · 81 hardships)</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label">KEY FINDINGS</div>
+                    <div class="map-title">4 Key Findings</div>
+                    <div class="map-row"><strong>1:</strong> the mind-monkey curve's 6 stages: indulgence → suppression → awakening; the Six-Eared Macaque is the key turning point</div>
+                    <div class="map-row"><strong>2:</strong> the 81 hardships map to 8 Buddhist mind-nature trials, with anger the most frequent (15 times)</div>
+                    <div class="map-row"><strong>3:</strong> the Cultivation Allegory Map reveals Xiyouji as a "mind-nature cultivation allegory", not an adventure story</div>
+                    <div class="map-row"><strong>4:</strong> the Heart Sutra (taught in Ch. 19) is the book's intellectual through-line</div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="box-title">Synthesis · Xiyouji = a Cultivation Allegory</div>
+                <div class="box-content">
+                    <p>Journey to the West is not a divine-monster adventure novel, but a complete <strong>cultivation allegory</strong>.</p>
+                    <p style="margin-top:8px;">The <strong>Mind-Monkey Nature Curve</strong> reveals Wukong's <strong>indulgence → suppression → awakening → enlightenment</strong> four-stage spiral ascent from "Great Sage Equal to Heaven" to "Victorious Fighting Buddha"; its essence is the mind-cultivation process from "ego-attachment" to "no-self".</p>
+                    <p style="margin-top:8px;">The <strong>Cultivation Allegory Map</strong> reveals that the 81 hardships map to 8 Buddhist mind-nature trials (greed / anger / ignorance / pride / doubt / lust / fame / death), each hardship an act of breaking mental attachment.</p>
+                    <p style="margin-top:8px;">Together they point to a deeper proposition: <strong style="color:var(--accent);">the so-called scripture quest is really the process of taming the mind-monkey and thought-horse</strong> — and the so-called buddhahood is really the inner self-awareness of <strong style="color:var(--accent-2);">the fillet falling off by itself</strong>.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/04-文化与历史背景/佛道思想.md">Buddhist-Daoist Thought (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/philosophy.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<!-- FILE_INDEX: philosophy.html | W313-V3 | footer-cross completion -->
+    <!-- CHANGELOG: v2.2.65 W313 V3 cross-page navigation enhancement -->
+
+    <!-- ===== EMBEDDED FALLBACK DATA ===== -->
+    <!--
+        All JSON data on this page is embedded as EMBEDDED objects as a fallback when fetch fails.
+        When opened via file://, fetch fails and the EMBEDDED data is used automatically.
+        When opened via http(s)://, ../../scripts/output/data/*.json is fetched first.
+        Data source: 3 JSON files generated by scripts/G_哲学与心性/.
+    -->
+    <script>
+    const EMBEDDED = {
+        mind_monkey: {
+            "concept_name": "Mind-Monkey Nature Curve",
+            "english_name": "Mind Monkey Curve",
+            "definition": "Mind-monkey and thought-horse: a Buddhist term for the restless, agitated mind; the evolution of Wukong's 'mind-monkey' is the core mind-cultivation process of the book",
+            "six_phases": [
+                {"phase": "1. Birth of the Stone Monkey", "chapter": "Ch. 1", "mind_state": "Innocent, without anger or greed", "anger_level": 2, "pride_level": 3, "greed_level": 2, "wisdom_level": 5, "restraint_level": 1, "key_event": "Born and made king, seeks immortals and the Way", "allegory_symbol": "An uncarved jade, the natural true mind"},
+                {"phase": "2. Havoc in Heaven", "chapter": "Ch. 2-7", "mind_state": "Anger blazing, pride at its peak", "anger_level": 9, "pride_level": 10, "greed_level": 7, "wisdom_level": 4, "restraint_level": 1, "key_event": "Steals elixir pills and peaches, wreaks havoc in Heaven, styles himself Great Sage Equal to Heaven", "allegory_symbol": "The mind-monkey runs wild and must be suppressed under Five Elements Mountain"},
+                {"phase": "3. Early Pilgrimage · Submission", "chapter": "Ch. 8-27", "mind_state": "Forced into submission, anger erupts often", "anger_level": 7, "pride_level": 8, "greed_level": 4, "wisdom_level": 6, "restraint_level": 4, "key_event": "Expelled after thrice beating the White Bone Demon, grows resentful", "allegory_symbol": "Tamed by the Tight-Fillet Spell, the mind-monkey constrained by external force"},
+                {"phase": "4. Mid-Pilgrimage · Balance", "chapter": "Ch. 28-58", "mind_state": "Learns restraint, but still erupts", "anger_level": 5, "pride_level": 6, "greed_level": 3, "wisdom_level": 7, "restraint_level": 7, "key_event": "The Six-Eared Macaque incident, the mind-monkey's civil war", "allegory_symbol": "True and False Monkey Kings, subduing the two minds"},
+                {"phase": "5. Late Pilgrimage · Awakening", "chapter": "Ch. 59-99", "mind_state": "Anger recedes, wisdom grows", "anger_level": 3, "pride_level": 4, "greed_level": 2, "wisdom_level": 9, "restraint_level": 9, "key_event": "Teaches disciples in Yuhua Prefecture, awakens to the Way in the Kingdom of Tianzhu", "allegory_symbol": "The mind-monkey unified, turning from external constraint to inner self-awareness"},
+                {"phase": "6. Buddhahood · Victorious Fighting Buddha", "chapter": "Ch. 100", "mind_state": "Mind-monkey fully subdued, buddhahood attained", "anger_level": 0, "pride_level": 1, "greed_level": 0, "wisdom_level": 10, "restraint_level": 10, "key_event": "Titled Victorious Fighting Buddha, the tight fillet falls off by itself", "allegory_symbol": "Mind-monkey thoroughly subdued, mind-cultivation complete"}
+            ],
+            "curve_analysis": {
+                "total_phases": 6,
+                "anger_pattern": "2→9→7→5→3→0: a U-shaped decline; Havoc in Heaven is the anger peak, returning to zero at buddhahood",
+                "pride_pattern": "3→10→8→6→4→1: a steady decline; pride is Wukong's greatest 'ego-attachment'",
+                "wisdom_pattern": "5→4→6→7→9→10: wisdom drops at Havoc in Heaven, then grows steadily along the pilgrimage",
+                "restraint_pattern": "1→1→4→7→9→10: the transformation from external constraint to inner self-awareness",
+                "turning_point": "The Six-Eared Macaque incident (Ch. 58): the true and false Monkey Kings = subduing the two minds, the mind-nature turning point of the whole book",
+                "core_insight": "The mind-monkey curve is a four-stage 'indulgence → suppression → awakening → enlightenment', not simple linearity but a spiral ascent"
+            },
+            "philosophical_insights": [
+                "Mind-monkey (anger) + thought-horse (greed) = the ordinary mind; subduing both = buddhahood",
+                "The Tight-Fillet Spell is external force; true liberation is the fillet falling off by itself (buddhahood)",
+                "The Six-Eared Macaque is Wukong's second mind; killing him = subduing one's own second mind",
+                "Wukong's journey from 'Great Sage Equal to Heaven' to 'Victorious Fighting Buddha' is a mind-cultivation process from 'ego-attachment' to 'no-self'",
+                "What the mind-nature curve descends in is not 'ability' but 'anger' — Wukong's power grows stronger after buddhahood",
+                "Mind-cultivation is not eliminating desire but transforming it: anger→courage, pride→confidence, greed→aspiration"
+            ],
+            "modern_parallel": {
+                "anger_management": "Modern emotion management: training from impulse to restraint",
+                "ego_dissolution": "Chan meditation / mindfulness: awareness training from 'ego-attachment' to 'no-self'",
+                "external_to_internal": "Internalizing discipline: the shift from external rules to inner self-awareness"
+            }
+        },
+        cultivation: {
+            "concept_name": "Cultivation Allegory Map",
+            "english_name": "Cultivation Allegory Map",
+            "definition": "The 81 hardships are not mere calamities but 81 kinds of mind-nature trials, corresponding to the mind-cultivation sequence of the Duoxin Jing",
+            "allegory_categories": [
+                {"category": "Greed Test", "english_name": "Greed Test", "count": 12, "representative_hardships": ["Four Sages Test the Mind of Chan", "Stealing the Ginseng Fruit at Wuzhuang", "Goldfish Spirit", "Rat Spirit"], "mind_obstacle": "greed (avarice, craving)", "buddhist_counterpart": "the poison of greed, foremost of the Three Poisons", "cultivation_goal": "renounce greed, be content"},
+                {"category": "Anger Test", "english_name": "Anger Test", "count": 15, "representative_hardships": ["Thrice Beating the White Bone Demon", "Red Boy", "Six-Eared Macaque", "Yellow-Robed Monster"], "mind_obstacle": "anger (rage, fury)", "buddhist_counterpart": "the poison of anger, second of the Three Poisons", "cultivation_goal": "renounce anger, be compassionate"},
+                {"category": "Ignorance Test", "english_name": "Ignorance Test", "count": 10, "representative_hardships": ["King of Wuji", "Contest of Magic in Chechi", "Bhikṣu Kingdom", "Miefa Kingdom"], "mind_obstacle": "ignorance (delusion, unknowing)", "buddhist_counterpart": "the poison of ignorance, third of the Three Poisons", "cultivation_goal": "break ignorance, attain wisdom"},
+                {"category": "Pride Test", "english_name": "Pride Test", "count": 8, "representative_hardships": ["Havoc in Heaven (prequel)", "Green Ox Spirit of Jindou Mountain", "Lion-Camel Ridge", "Nine-Headed Lion Sage"], "mind_obstacle": "pride (arrogance, ego-attachment)", "buddhist_counterpart": "pride, one of the Five Hindrances", "cultivation_goal": "renounce pride, be humble"},
+                {"category": "Suspicion Test", "english_name": "Suspicion Test", "count": 9, "representative_hardships": ["Wukong expelled after thrice beating the White Bone Demon", "Yellow-Robed Monster returns to Flower-Fruit Mountain", "Six-Eared Macaque"], "mind_obstacle": "doubt (suspicion, distrust)", "buddhist_counterpart": "doubt, one of the Five Hindrances", "cultivation_goal": "cut off doubt, right faith"},
+                {"category": "Lust Test", "english_name": "Lust Test", "count": 11, "representative_hardships": ["Kingdom of Women", "Spider Cave", "Bottomless Cave", "Jade Rabbit Spirit"], "mind_obstacle": "lust (desire, sensuality)", "buddhist_counterpart": "sensual desire, one of the Five Desires", "cultivation_goal": "renounce lust, be pure"},
+                {"category": "Fame Test", "english_name": "Fame Test", "count": 7, "representative_hardships": ["Praying for rain in Chechi", "Healing in Zhuzi Kingdom", "Teaching disciples in Yuhua Prefecture"], "mind_obstacle": "fame (renown, reputation)", "buddhist_counterpart": "fame and material gain", "cultivation_goal": "renounce fame, be detached"},
+                {"category": "Life-Death Test", "english_name": "Life-Death Test", "count": 9, "representative_hardships": ["Tongtian River", "Flaming Mountains", "Lion-Camel Kingdom", "Bottomless Cave"], "mind_obstacle": "death (fear of death, dread)", "buddhist_counterpart": "birth and death are the great matter", "cultivation_goal": "transcend birth and death"}
+            ],
+            "allegory_summary": {
+                "total_categories": 8,
+                "total_hardships_mapped": 81,
+                "most_frequent_test": "Anger Test (15 times), corresponding to Wukong's primary mind-nature",
+                "least_frequent_test": "Fame Test (7 times), corresponding to the pilgrimage team's already-detached disposition",
+                "core_findings": [
+                    "The 'count' of the 81 hardships corresponds to the 'eighty-one aspects' of the Duoxin Jing",
+                    "Wukong's primary practice is anger (15 hardships), Bajie's primary practice is lust (11 hardships)",
+                    "Tang Sanzang's primary practice is ignorance (10 hardships), often deceived through not seeing the truth",
+                    "The whole book is a cultivation allegory of 'taming the mind-monkey and thought-horse', not a simple adventure story"
+                ]
+            },
+            "heart_sutra_connection": {
+                "sutra_name": "Prajñāpāramitā Heart Sutra",
+                "sutra_chapter": "Ch. 19, taught by Wuchao Chan Master",
+                "sutra_role": "The Heart Sutra is the pilgrimage team's 'guiding thought'; Tang Sanzang recites it daily",
+                "allegory_pattern": "The Heart Sutra teaches 'emptiness', the 81 hardships teach 'breaking attachment'; the two correspond",
+                "key_quote": "Form is not different from emptiness, emptiness is not different from form; form is emptiness, emptiness is form",
+                "allegory_meaning": "Breaking attachment to form (external things) and returning to emptiness (the true mind)"
+            }
+        },
+        summary: {
+            "concept_name": "Philosophy and Mind Overall Statistics",
+            "total_concepts": 2,
+            "concept_list": ["Mind-Monkey Nature Curve", "Cultivation Allegory Map"],
+            "total_data_points": 14,
+            "key_findings": [
+                "The mind-monkey curve's 6 stages: indulgence→suppression→awakening; the Six-Eared Macaque is the key turning point",
+                "The 81 hardships map to 8 Buddhist mind-nature trials, with anger the most frequent (15 times)",
+                "The Cultivation Allegory Map reveals Xiyouji to be a 'mind-nature cultivation allegory', not an adventure story",
+                "The Heart Sutra (taught in Ch. 19) is the book's intellectual through-line"
+            ],
+            "philosophical_core": "The philosophical essence of Xiyouji is 'mind-nature cultivation': breaking through greed, anger, ignorance, pride, and doubt via the 81 hardships to return to the original mind"
+        }
+    };
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('[fallback] ' + path + ' → embedded data:', e.message);
+            return fallback;
+        }
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== Main render =====
+    async function main() {
+        const baseUrl = '../../scripts/output/data/';
+        const [mindMonkey, cultivation, summary] = await Promise.all([
+            loadJson(baseUrl + 'mind_monkey_curve.json', EMBEDDED.mind_monkey),
+            loadJson(baseUrl + 'cultivation_allegory.json', EMBEDDED.cultivation),
+            loadJson(baseUrl + 'philosophy_summary.json', EMBEDDED.summary)
+        ]);
+        window.__lastData = { mindMonkey, cultivation, summary };
+
+        renderMonkeyLine(mindMonkey);
+        renderMonkeyHeat(mindMonkey);
+        renderPhaseTable(mindMonkey);
+        renderMonkeyInsights(mindMonkey);
+        renderPhilosophicalInsights(mindMonkey);
+        renderAllegoryBar(cultivation);
+        renderAllegoryPie(cultivation);
+        renderAllegoryTable(cultivation);
+        renderAllegoryInsights(cultivation);
+    }
+
+    // ===== Chart 1: Mind-Monkey Nature 5-dimension line chart =====
+    function renderMonkeyLine(data) {
+        const svg = d3.select('#chart-monkey-line');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 420;
+        const m = {top: 30, right: 30, bottom: 80, left: 50};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const phases = data.six_phases;
+
+        const dims = [
+            {key: 'anger_level', label: 'Anger', color: '#c8463a'},
+            {key: 'pride_level', label: 'Pride', color: '#C9A063'},
+            {key: 'greed_level', label: 'Greed', color: '#3a6b8c'},
+            {key: 'wisdom_level', label: 'Wisdom', color: '#6B8E5A'},
+            {key: 'restraint_level', label: 'Restraint', color: '#6B6455'}
+        ];
+
+        const x = d3.scalePoint().domain(phases.map(d => d.phase)).range([0, w]).padding(0.4);
+        const y = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
+            .selectAll('text')
+            .style('font-size', '10px')
+            .attr('transform', 'rotate(-15)')
+            .style('text-anchor', 'end');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5));
+
+        // axis label
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -36)
+            .attr('text-anchor', 'middle')
+            .text('Mind-nature dimension score (0-10)');
+
+        // one line per dimension
+        dims.forEach(dim => {
+            // line generator for current dim
+            const lineGen = d3.line()
+                .x(d => x(d.phase))
+                .y(d => y(d[dim.key]))
+                .curve(d3.curveMonotoneX);
+
+            g.append('path').datum(phases)
+                .attr('fill', 'none')
+                .attr('stroke', dim.color)
+                .attr('stroke-width', 2.5)
+                .attr('d', lineGen);
+
+            g.selectAll('.pt-' + dim.key)
+                .data(phases).enter().append('circle')
+                .attr('class', 'pt-' + dim.key)
+                .attr('cx', d => x(d.phase))
+                .attr('cy', d => y(d[dim.key]))
+                .attr('r', 5)
+                .attr('fill', dim.color)
+                .attr('stroke', '#fff')
+                .attr('stroke-width', 1.5)
+                .style('cursor', 'pointer')
+                .on('mouseover', (e, d) => {
+                    tooltip.show(
+                        `<strong style="color:${dim.color}">${dim.label} · ${dim.key}</strong><br>` +
+                        `Phase: ${d.phase}<br>` +
+                        `Chapter: ${d.chapter}<br>` +
+                        `Mind state: ${d.mind_state}<br>` +
+                        `Score: <strong>${d[dim.key]} / 10</strong><br>` +
+                        `Key event: ${d.key_event}<br>` +
+                        `<em>${d.allegory_symbol}</em>`, e);
+                })
+                .on('mouseout', tooltip.hide);
+
+            // endpoint value labels
+            const last = phases[phases.length - 1];
+            g.append('text')
+                .attr('x', x(last.phase) + 8)
+                .attr('y', y(last[dim.key]) + 3)
+                .style('font-size', '10px')
+                .style('font-weight', '600')
+                .attr('fill', dim.color)
+                .text(last[dim.key]);
+        });
+
+        // Six-Eared Macaque turning-point annotation (stage 4 · balance)
+        const turningPhase = phases[3];
+        if (turningPhase) {
+            const tx = x(turningPhase.phase);
+            g.append('rect')
+                .attr('x', tx - 30).attr('y', -8)
+                .attr('width', 60).attr('height', h + 16)
+                .attr('fill', '#e9b885').attr('opacity', 0.2);
+            g.append('text')
+                .attr('x', tx).attr('y', -14)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#C9A063')
+                .style('font-size', '10px').style('font-weight', '600')
+                .text('▼ Six-Eared Macaque turning point');
+        }
+    }
+
+    // ===== Chart 3: Mind-nature dimension heatmap =====
+    function renderMonkeyHeat(data) {
+        const svg = d3.select('#chart-monkey-heat');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 340;
+        const m = {top: 30, right: 30, bottom: 50, left: 130};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const phases = data.six_phases;
+
+        const dims = [
+            {key: 'anger_level', label: 'Anger'},
+            {key: 'pride_level', label: 'Pride'},
+            {key: 'greed_level', label: 'Greed'},
+            {key: 'wisdom_level', label: 'Wisdom'},
+            {key: 'restraint_level', label: 'Restraint'}
+        ];
+
+        const x = d3.scaleBand().domain(phases.map(d => d.phase)).range([0, w]).padding(0.08);
+        const y = d3.scaleBand().domain(dims.map(d => d.label)).range([0, h]).padding(0.08);
+
+        // color scale - low = light, high = dark
+        const colorScale = d3.scaleLinear()
+            .domain([0, 2, 4, 6, 8, 10])
+            .range(['#fdfaf4', '#f0e0c0', '#e9b885', '#d99560', '#c8463a', '#7a1f12'])
+            .clamp(true);
+
+        // X axis
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
+            .selectAll('text')
+            .style('font-size', '10px')
+            .attr('transform', 'rotate(-12)')
+            .style('text-anchor', 'end');
+
+        // Y axis
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).tickSize(0).tickPadding(8))
+            .selectAll('text')
+            .style('font-size', '11px');
+
+        // draw cells
+        const cellData = [];
+        phases.forEach(phase => {
+            dims.forEach(dim => {
+                cellData.push({
+                    phase: phase.phase,
+                    chapter: phase.chapter,
+                    dimLabel: dim.label,
+                    dimKey: dim.key,
+                    value: phase[dim.key],
+                    mind_state: phase.mind_state,
+                    key_event: phase.key_event
+                });
+            });
+        });
+
+        g.selectAll('.heat-cell')
+            .data(cellData).enter().append('rect')
+            .attr('class', 'heat-cell')
+            .attr('x', d => x(d.phase))
+            .attr('y', d => y(d.dimLabel))
+            .attr('width', x.bandwidth())
+            .attr('height', y.bandwidth())
+            .attr('fill', d => colorScale(d.value))
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 1.5)
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>${d.dimLabel}</strong><br>` +
+                    `Phase: ${d.phase}<br>` +
+                    `Chapter: ${d.chapter}<br>` +
+                    `Score: <strong style="color:${colorScale(d.value)}">${d.value} / 10</strong><br>` +
+                    `Mind state: ${d.mind_state}<br>` +
+                    `Key event: ${d.key_event}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // in-cell values
+        g.selectAll('.heat-val')
+            .data(cellData).enter().append('text')
+            .attr('class', 'heat-val')
+            .attr('x', d => x(d.phase) + x.bandwidth() / 2)
+            .attr('y', d => y(d.dimLabel) + y.bandwidth() / 2 + 4)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '12px')
+            .style('font-weight', '700')
+            .attr('fill', d => d.value >= 6 ? '#fff' : '#23201A')
+            .style('pointer-events', 'none')
+            .text(d => d.value);
+
+        // axis label
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 58)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '11px')
+            .text('Mind-nature stages (1 → 6 mind-cultivation progression)');
+    }
+
+    function renderPhaseTable(data) {
+        const tbody = d3.select('#phase-table tbody');
+        const rows = tbody.selectAll('tr').data(data.six_phases).enter().append('tr');
+        rows.append('td').html(d => '<strong>' + d.phase + '</strong>');
+        rows.append('td').text(d => d.chapter);
+        rows.append('td').text(d => d.mind_state);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.anger_level + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-3);">' + d.pride_level + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-2);">' + d.greed_level + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-4);">' + d.wisdom_level + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--ink-soft);">' + d.restraint_level + '</strong>');
+        rows.append('td').text(d => d.key_event);
+        rows.append('td').html(d => '<em>' + d.allegory_symbol + '</em>');
+    }
+
+    function renderMonkeyInsights(data) {
+        const list = d3.select('#monkey-insights-list');
+        const items = [
+            `anger_pattern ${data.curve_analysis.anger_pattern}`,
+            `pride_pattern ${data.curve_analysis.pride_pattern}`,
+            `wisdom_pattern ${data.curve_analysis.wisdom_pattern}`,
+            `restraint_pattern ${data.curve_analysis.restraint_pattern}`,
+            `Turning point: ${data.curve_analysis.turning_point}`,
+            `Core insight: ${data.curve_analysis.core_insight}`
+        ];
+        list.selectAll('li').data(items).enter().append('li').text(d => d);
+    }
+
+    // render philosophical insights (six)
+    function renderPhilosophicalInsights(data) {
+        const list = d3.select('#philosophical-insights-list');
+        list.selectAll('li').data(data.philosophical_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Chart 2: Cultivation Allegory 8-category bar chart =====
+    function renderAllegoryBar(data) {
+        const svg = d3.select('#chart-allegory-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 420;
+        const m = {top: 30, right: 60, bottom: 60, left: 100};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const cats = data.allegory_categories;
+
+        // color mapping by mind-obstacle type
+        const colorMap = {
+            'Greed Test': '#c8463a', 'Anger Test': '#c8463a', 'Ignorance Test': '#c8463a',  // Three Poisons - red
+            'Pride Test': '#C9A063', 'Suspicion Test': '#C9A063',  // Five Hindrances - brown
+            'Lust Test': '#3a6b8c', 'Fame Test': '#3a6b8c',  // Five Desires - blue
+            'Life-Death Test': '#6B8E5A'  // life-and-death - green
+        };
+        const colorOf = (englishName) => colorMap[englishName] || '#C9A063';
+
+        const x = d3.scaleLinear().domain([0, d3.max(cats, d => d.count) + 2]).range([0, w]);
+        const y = d3.scaleBand().domain(cats.map(d => d.category)).range([0, h]).padding(0.2);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(x.ticks(6))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', d => x(d)).attr('x2', d => x(d))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).tickSize(0).tickPadding(8))
+            .selectAll('text').style('font-size', '11px');
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(6));
+
+        // axis label
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 44)
+            .attr('text-anchor', 'middle')
+            .text('Count');
+
+        // bars
+        g.selectAll('.bar')
+            .data(cats).enter().append('rect')
+            .attr('class', 'bar')
+            .attr('x', 0)
+            .attr('y', d => y(d.category))
+            .attr('width', d => x(d.count))
+            .attr('height', y.bandwidth())
+            .attr('fill', d => colorOf(d.english_name))
+            .attr('stroke', '#fff').attr('stroke-width', 1)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong style="color:${colorOf(d.english_name)}">${d.category}</strong> · ${d.english_name}<br>` +
+                    `Count: <strong>${d.count}</strong> / 81<br>` +
+                    `Mind obstacle: ${d.mind_obstacle}<br>` +
+                    `Buddhist counterpart: ${d.buddhist_counterpart}<br>` +
+                    `Cultivation goal: ${d.cultivation_goal}<br>` +
+                    `Representative hardships: ${d.representative_hardships.join(' · ')}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // value + mind-obstacle label
+        g.selectAll('.bar-val')
+            .data(cats).enter().append('text')
+            .attr('class', 'bar-val')
+            .attr('x', d => x(d.count) + 6)
+            .attr('y', d => y(d.category) + y.bandwidth() / 2 + 1)
+            .attr('dominant-baseline', 'middle')
+            .style('font-size', '11px')
+            .style('font-weight', '600')
+            .attr('fill', '#23201A')
+            .text(d => d.count + ' · ' + d.mind_obstacle);
+    }
+
+    // ===== Chart 4: 81 hardships by category donut =====
+    function renderAllegoryPie(data) {
+        const svg = d3.select('#chart-allegory-pie');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 420;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const cats = data.allegory_categories;
+        const total = d3.sum(cats, d => d.count);
+
+        const colorMap = {
+            'Greed Test': '#c8463a', 'Anger Test': '#a8362e', 'Ignorance Test': '#7a1f12',
+            'Pride Test': '#C9A063', 'Suspicion Test': '#9a7250',
+            'Lust Test': '#3a6b8c', 'Fame Test': '#5a8bac',
+            'Life-Death Test': '#6B8E5A'
+        };
+        const colorOf = (englishName) => colorMap[englishName] || '#C9A063';
+
+        const cx = W / 2 - 60, cy = H / 2;
+        const radius = Math.max(0, Math.min(W, H) / 2 - 40);
+        const innerR = radius * 0.55;
+
+        const pie = d3.pie().value(d => d.count).sort(null);
+        const arcGen = d3.arc().innerRadius(innerR).outerRadius(radius).padAngle(0.012).cornerRadius(3);
+        const arcHover = d3.arc().innerRadius(innerR).outerRadius(radius + 8).padAngle(0.012).cornerRadius(3);
+
+        const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+        const arcs = pie(cats);
+
+        // slices
+        g.selectAll('.slice')
+            .data(arcs).enter().append('path')
+            .attr('class', 'slice')
+            .attr('d', arcGen)
+            .attr('fill', d => colorOf(d.data.english_name))
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(e, d) {
+                d3.select(this).transition().duration(120).attr('d', arcHover);
+                const pct = (d.data.count / total * 100).toFixed(1);
+                tooltip.show(
+                    `<strong style="color:${colorOf(d.data.english_name)}">${d.data.category}</strong> · ${d.data.english_name}<br>` +
+                    `Count: <strong>${d.data.count}</strong> / ${total} (${pct}%)<br>` +
+                    `Mind obstacle: ${d.data.mind_obstacle}<br>` +
+                    `Cultivation goal: ${d.data.cultivation_goal}<br>` +
+                    `Representative hardships: ${d.data.representative_hardships.join(' · ')}`, e);
+            })
+            .on('mouseout', function() {
+                d3.select(this).transition().duration(120).attr('d', arcGen);
+                tooltip.hide();
+            });
+
+        // center text
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', -14)
+            .style('font-size', '14px')
+            .style('fill', '#6B6455')
+            .text('81 Hardships');
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', 22)
+            .style('font-size', '24px')
+            .style('font-weight', '700')
+            .style('fill', '#c8463a')
+            .text('81');
+
+        // slice labels
+        const labelArc = d3.arc().innerRadius(radius + 14).outerRadius(radius + 14);
+        g.selectAll('.slice-label')
+            .data(arcs).enter().append('text')
+            .attr('class', 'slice-label')
+            .attr('transform', d => {
+                const pos = labelArc.centroid(d);
+                return `translate(${pos[0]},${pos[1]})`;
+            })
+            .attr('text-anchor', d => {
+                const mid = (d.startAngle + d.endAngle) / 2;
+                return mid < Math.PI ? 'start' : 'end';
+            })
+            .style('font-size', '11px')
+            .style('fill', '#23201A')
+            .text(d => d.data.count);
+
+        // custom legend (right side)
+        const legendG = svg.append('g')
+            .attr('transform', `translate(${W - 200}, 40)`);
+        const legendItems = cats.map((c, i) => ({
+            label: c.category + ' (' + c.count + ')',
+            color: colorOf(c.english_name)
+        }));
+        const itemH = 22;
+        legendG.selectAll('.leg-item')
+            .data(legendItems).enter().append('g')
+            .attr('class', 'leg-item')
+            .attr('transform', (d, i) => `translate(0, ${i * itemH})`);
+        legendG.selectAll('.leg-item').append('rect')
+            .attr('x', 0).attr('y', 0)
+            .attr('width', 14).attr('height', 14)
+            .attr('fill', d => d.color)
+            .attr('rx', 2);
+        legendG.selectAll('.leg-item').append('text')
+            .attr('x', 20).attr('y', 11)
+            .style('font-size', '11px')
+            .style('fill', '#23201A')
+            .text(d => d.label);
+    }
+
+    function renderAllegoryTable(data) {
+        const tbody = d3.select('#allegory-table tbody');
+        const rows = tbody.selectAll('tr').data(data.allegory_categories).enter().append('tr');
+        rows.append('td').html(d => '<strong>' + d.category + '</strong>');
+        rows.append('td').text(d => d.english_name);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.count + '</strong>');
+        rows.append('td').text(d => d.mind_obstacle);
+        rows.append('td').text(d => d.buddhist_counterpart);
+        rows.append('td').text(d => d.cultivation_goal);
+        rows.append('td').html(d => d.representative_hardships.map(h => '<span class="data-badge">' + h + '</span>').join(' '));
+    }
+
+    function renderAllegoryInsights(data) {
+        const list = d3.select('#allegory-insights-list');
+        const items = data.allegory_summary.core_findings.concat([
+            `Total: ${data.allegory_summary.total_categories} categories · ${data.allegory_summary.total_hardships_mapped} hardships mapped`,
+            `Most frequent test: ${data.allegory_summary.most_frequent_test}`,
+            `Least frequent test: ${data.allegory_summary.least_frequent_test}`
+        ]);
+        list.selectAll('li').data(items).enter().append('li').text(d => d);
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+<script id="audit-contentavoid">
+(function(){
+  var SKIP=/(tick|legend|title|axis|domain|cell|tooltip|axisfix|dark-halo|subtitle|grid|background|heat-col-label|heat-row-label)/i;
+  function fix(){
+    try{
+      // 1) 热力图列标签旋转 -42°（保留可见）
+      document.querySelectorAll('svg text.heat-col-label').forEach(function(t){
+        var x=+t.getAttribute('x')||0, y=+t.getAttribute('y')||0;
+        t.setAttribute('transform','rotate(-42 '+x+' '+y+')');
+        t.setAttribute('text-anchor','end');
+      });
+      // 2) 其余文字重叠：隐藏较小者 + 补 title
+      document.querySelectorAll('svg').forEach(function(svg){
+        var texts=[].slice.call(svg.querySelectorAll('text')).filter(function(t){
+          var c=t.getAttribute('class')||'';
+          if(SKIP.test(c)) return false;
+          var b=t.getBBox(); return b.width>0 && b.height>0;
+        });
+        for(var i=0;i<texts.length;i++){
+          for(var j=i+1;j<texts.length;j++){
+            var a=texts[i],b=texts[j];
+            var ra=a.getBBox(),rb=b.getBBox();
+            var ix=Math.max(0,Math.min(ra.x+ra.width,rb.x+rb.width)-Math.max(ra.x,rb.x));
+            var iy=Math.max(0,Math.min(ra.y+ra.height,rb.y+rb.height)-Math.max(ra.y,rb.y));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(), tb=(b.textContent||'').trim();
+            if(ta===tb){ // 完全重复：隐藏其一
+              if(a.style.display!=='none'){ a.setAttribute('data-cavoid','1'); if(!a.getAttribute('title')) a.setAttribute('title',ta); a.style.display='none'; }
+              continue;
+            }
+            var hide=(ra.width*ra.height<=rb.width*rb.height)?a:b;
+            var keep=(hide===a)?b:a;
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-cavoid','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000,14000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run(); else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

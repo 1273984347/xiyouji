@@ -8,6 +8,14 @@
 
 ---
 
+## W433 英文站续译 batch11（2026-08-14·v2.3.48）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/four-dimensional-research-network.html / four-heavenly-kings-artifacts.html / monster-ecology-network.html / philosophy.html / concept-device.html | W433 | v2.3.48 新增·并行 subagent 英文化 5 页（_validate_en.py 全过） |
+| site/sitemap.xml | W433 | v2.3.48 修改·补 5 个 en 页（172→177 页） |
+| site/**/*.html（5 页） | W433 | v2.3.48 修改·generate_csp.py 重生成 CSP（182 页·828 内联哈希） |
+
 ## W432 英文站续译 batch10（2026-08-14·v2.3.47）
 
 | 文件 | W | 说明 |
