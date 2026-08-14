@@ -8,6 +8,15 @@
 
 ---
 
+## W425 GoatCounter 真实跨访客统计接入（2026-08-14·v2.3.40）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/generate_csp.py | W425 | v2.3.40 修改·EXTERNAL_SCRIPT_HOSTS 追加 gc.zgo.at + connect-src 全站追加 GOATCOUNTER_COUNT_ORIGIN 1273984347.goatcounter.com |
+| site/_headers | W425 | v2.3.40 修改·Netlify/CF CSP 白名单同步 gc.zgo.at（script-src）+ 1273984347.goatcounter.com（connect-src） |
+| site/**/*.html（160 页） | W425 | v2.3.40 批量注入 GoatCounter 计数脚本（`</head>` 前）+ 159 页 CSP 重生成（680 内联哈希 0 漂移·_template 按约定排除） |
+| site/dukou-engine.html | W425 | v2.3.40 修改·页脚 v2.3.39 W424 → v2.3.40 W425（长链页脚头部插入） |
+
 
 ## W424 对抗性审查修正与全仓整理（2026-08-12·v2.3.39）
 
