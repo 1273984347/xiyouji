@@ -8,6 +8,14 @@
 
 ---
 
+## W430 英文站续译 batch8（2026-08-14·v2.3.45）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/perf-canvas-rendering.html | W430 | v2.3.45 新增·D3.js 大数据集渲染优化页英文化（_validate_en.py 通过） |
+| site/sitemap.xml | W430 | v2.3.45 修改·补 1 个 en 页（162→163 页） |
+| site/**/*.html（1 页） | W430 | v2.3.45 修改·generate_csp.py 重生成 CSP（168 页·737 内联哈希） |
+
 ## W429 英文站续译 batch7（2026-08-14·v2.3.44）
 
 | 文件 | W | 说明 |

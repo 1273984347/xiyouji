@@ -4,9 +4,17 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W429），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W430），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.45（2026-08-14）：W430 英文站续译 batch8 — 新增 1 张可视化页英文化
+
+> **来源**：延续待办「英文站续译」batch8（页中文串已升至 120+，单页独立成批），复用 _extract_strings.py + _validate_en.py 工具链。
+> - **执行（英文化 1 页）**：新增 site/en/perf-canvas-rendering（D3.js 大数据集渲染优化·SVG vs Canvas 性能对比实验台）；重建 EN 导航/页脚 + 翻译 chrome/script 字面量（50+ 角色名 + 渲染优化技术说明 + 代码注释 + 洞察文案）。
+> - **执行（配套）**：generate_csp.py 重生成 168 页（737 内联哈希 0 漂移）·sitemap 补 1 页（162→163）。
+> - **验证**：_validate_en.py 通过（chrome=whitelist-only·script=0）·lint_links 2901 链接 0 broken·verify_delivery 核心全绿。
+> - **状态**：已落地·待 commit/push。
 
 ### v2.3.44（2026-08-14）：W429 英文站续译 batch7 — 新增 3 张可视化页英文化
 
