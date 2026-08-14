@@ -4,9 +4,17 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W431），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W432），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.47（2026-08-14）：W432 英文站续译 batch10 — 并行 subagent 新增 5 张可视化页英文化
+
+> **来源**：延续待办「英文站续译」batch10（并行 subagent 拆页·每 agent 1 页·统一下发 EN 模板 + 角色名对照表 + _validate_en.py 校验）。
+> - **执行（英文化 5 页）**：新增 site/en/pilgrim-team-dynamic-network（取经团队动力学网络）/ counterfactual（反事实推断）/ ming-political-thought-comparison（明代政治思想对照）/ monster-background（妖怪背景）/ cultural-misreading（文化误读）；重建/翻译 EN 导航/页脚 + chrome/script 字面量。
+> - **执行（配套）**：generate_csp.py 重生成 177 页（794 内联哈希 0 漂移）·sitemap 补 5 页（167→172）。
+> - **验证**：_validate_en.py 5 页全过（chrome=whitelist-only·script=0）·lint_links 3057 链接 0 broken·verify_delivery 核心全绿。
+> - **状态**：已落地·待 commit/push。
 
 ### v2.3.46（2026-08-14）：W431 英文站续译 batch9 — 并行 subagent 新增 4 张可视化页英文化
 

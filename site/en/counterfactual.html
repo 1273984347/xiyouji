@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-TCQeLB4deHzVf+MVBlJ2A5Uj7WYw2qBVl51ZZHP+L5g=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Counterfactual Inference · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        
+        
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        
+        
+        
+        
+        
+        /* 场景卡片网格 */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+            gap: 18px;
+        }
+        .scenario-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 18px 18px 16px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.18s, box-shadow 0.18s;
+        }
+        .scenario-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(60, 40, 20, 0.12);
+        }
+        .scenario-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .scenario-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.35;
+        }
+        .scenario-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: flex-end;
+            flex-shrink: 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: #fff;
+            white-space: nowrap;
+            font-family: "JetBrains Mono", monospace;
+            letter-spacing: 0.04em;
+        }
+        .badge.validity-high { background: var(--accent); }
+        .badge.validity-medium { background: var(--accent-soft); color: var(--accent-3); }
+        .badge.category {
+            background: transparent;
+            color: var(--ink-soft);
+            border: 1px solid var(--line);
+            font-size: 0.7rem;
+        }
+        .scenario-row {
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            line-height: 1.55;
+        }
+        .scenario-row .row-label {
+            color: var(--accent);
+            font-weight: 600;
+            margin-right: 4px;
+            font-size: 0.78rem;
+            letter-spacing: 0.06em;
+        }
+        .scenario-row .row-text {
+            color: var(--ink);
+        }
+        .scenario-conclusion {
+            margin-top: auto;
+            padding: 10px 12px;
+            background: #fff8ec;
+            border: 1px dashed var(--accent-soft);
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--accent-3);
+            line-height: 1.55;
+        }
+        .scenario-conclusion .row-label {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 2px;
+        }
+        /* 图表通用 */
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        #chart-category {
+            width: 100%;
+            height: 400px;
+            display: block;
+        }
+        /* Core Conclusion */
+        .core-conclusion-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 24px 28px;
+            border-radius: 4px;
+            position: relative;
+        }
+        .core-conclusion-box .quote-mark {
+            position: absolute;
+            top: -8px;
+            left: 16px;
+            font-size: 3.2rem;
+            color: var(--accent);
+            opacity: 0.25;
+            font-family: serif;
+            line-height: 1;
+        }
+        .core-conclusion-box .core-text {
+            font-size: 1.05rem;
+            color: var(--ink);
+            line-height: 1.8;
+            margin-top: 8px;
+        }
+        .core-conclusion-box .core-text strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .core-conclusion-box .core-tag {
+            display: inline-block;
+            margin-top: 14px;
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            letter-spacing: 0.15em;
+            font-family: "JetBrains Mono", monospace;
+        }
+        /* Key Insights */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            display: flex;
+            gap: 10px;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li .marker {
+            color: var(--accent);
+            font-weight: 600;
+            flex-shrink: 0;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        
+        
+        /* 移动端微调 */
+        @media (max-width: 640px) {
+            
+            .scenario-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/counterfactual.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Counterfactual Inference · Annotated Journey to the West</p>
+        <p class="kicker">T · Counterfactual Inference</p>
+        <h1>Counterfactual Inference · Annotated Journey to the West</h1>
+        <p class="subtitle">WHAT IF... ?</p>
+        <p class="tagline">If all the demons with backing never descended to the mortal realm, how much would the Eighty-One Tribulations shrink?</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice" id="dataSource">
+            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">SCENARIOS</div>
+                <div class="value">10</div>
+                <div class="desc">Total counterfactual scenarios</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">HIGH</div>
+                <div class="value">7</div>
+                <div class="desc">Strong inferences grounded in the original text</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">MEDIUM</div>
+                <div class="value">3</div>
+                <div class="desc">Weaker inferences affected by multiple variables</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">CATEGORIES</div>
+                <div class="value">6</div>
+                <div class="desc">Structural / Oversight / Weapon / Replacement / Cybernetics / Plot</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：场景卡片网格 -->
+        <section class="section">
+            <h2 class="section-title">Counterfactual Scenarios in Detail</h2>
+            <div class="section-sub">10 counterfactual hypotheses · border color-coded by category · each card shows if / then / calculation / journey impact / doctrine impact / conclusion.</div>
+            <div class="scenario-grid" id="scenario-grid"></div>
+        </section>
+
+        <!-- 图表 2 & 3：可信度饼图 + 类别柱状图 -->
+        <section class="section">
+            <h2 class="section-title">Validity and Category Distribution</h2>
+            <div class="section-sub">Left: high / medium validity share; right: scenario counts across the 6 counterfactual categories.</div>
+            <div class="chart-row">
+                <div class="chart-block">
+                    <h3>Validity Distribution</h3>
+                    <svg id="chart-validity" width="360" height="360"></svg>
+                    <div class="legend" id="legend-validity"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>Category Distribution (sorted by scenario count)</h3>
+                    <svg id="chart-category"></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- 图表 4：Core Conclusion -->
+        <section class="section">
+            <h2 class="section-title">Core Conclusion</h2>
+            <div class="section-sub">Summary judgment from counterfactual_summary.json.</div>
+            <div class="core-conclusion-box">
+                <span class="quote-mark">"</span>
+                <div class="core-text" id="core-conclusion-text"></div>
+                <span class="core-tag">CORE CONCLUSION</span>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="section-sub">Four structural judgments distilled from the 10 counterfactual inferences.</div>
+            <div class="insight-box">
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/08-提升认知/反事实训练.md">Counterfactual Training (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/counterfactual.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    /* ============================================================
+       嵌入式 fallback 数据（fetch 失败时使用，与 JSON 源一致）
+       ============================================================ */
+    const EMBEDDED_SCENARIOS = [
+        {
+            scenario: "Peaceful Coexistence Hypothesis",
+            if: "If all demons with backing (mounts descended to the mortal realm + those tied to Vulture Peak) never descended",
+            then: "The Eighty-One Tribulations would shrink to about 38",
+            calculation: "16 mount-descension tribulations + several Vulture Peak-linked tribulations + 27 arranged by Tathāgata ≈ 43 tribulations removed",
+            impact_on_journey: "The pilgrimage would shorten from 14 years to about 6, and the 'nine nines' of the Eighty-One Tribulations could not hold",
+            impact_on_doctrine: "Tathāgata's declaration, 'in my Western Continent there is neither greed nor killing,' would waver · Vulture Peak would admit to its own 'family business'",
+            conclusion: "Tathāgata must 'arrange' obstacles to fulfill the 'nine-nines number' · demons with backing are the pilgrimage's 'necessary accompaniment'",
+            counterfactual_validity: "high",
+            category: "Structural Hypothesis"
+        },
+        {
+            scenario: "Transparent Oversight Hypothesis",
+            if: "If the covert guardians (the Six Ding and Six Jia, the Five-Direction Guardians, the Day-Value Merit Officer, and the Day- and Night-Traveling Deities) turned their secret protection overt and live-streamed the whole journey",
+            then: "Demons would not dare attack · the pilgrimage would be nearly effortless",
+            calculation: "Secret trial vs. public performance · the nature of the trial would be fundamentally different",
+            impact_on_journey: "All Eighty-One Tribulations would dissolve · no demon would dare challenge Heaven's overt guard",
+            impact_on_doctrine: "The trials would lose meaning · spiritual cultivation could not hold · the Buddhist 'trial' is essentially 'invisible, covert supervision'",
+            conclusion: "Secret trials are a necessary condition for spiritual cultivation · making them transparent renders them void",
+            counterfactual_validity: "medium",
+            category: "Oversight Hypothesis"
+        },
+        {
+            scenario: "The Yin-Yang Two-Energy Vase · The Ultimate Experiment",
+            if: "If the Yin-Yang Two-Energy Vase held a peak-power Sun Wukong plus Erlang Shen",
+            then: "About one shichen and three quarters to dissolve into pulp (per the original text) · Erlang Shen might dissolve faster",
+            calculation: "A peak-power Wukong drills through with his three life-saving hairs · without them he would dissolve into pulp in one shichen and three quarters · Erlang Shen has his third eye but no such hairs · about one shichen to dissolve",
+            impact_on_journey: "If the Great Peng had captured Wukong with the vase at Lion-Camel Ridge, the pilgrimage party would need outside rescue · Tathāgata would have to descend in person",
+            impact_on_doctrine: "A top-tier treasure can one-shot even top immortals and Buddhas · but it requires a 'causality' trigger condition",
+            conclusion: "The Yin-Yang Two-Energy Vase is a cosmic-grade rule weapon · it can only be broken when its owner (the Great Peng / Tathāgata) descends in person",
+            counterfactual_validity: "high",
+            category: "Weapon Experiment"
+        },
+        {
+            scenario: "Replacing Wukong Hypothesis",
+            if: "If Wukong were replaced by Erlang Shen",
+            then: "The pilgrimage would get easier · but the meaning of spiritual cultivation would change",
+            calculation: "Erlang Shen's third eye sees through illusions · his martial power equals Wukong's · but he lacks the Seventy-Two Transformations' flexibility, wears no Tight Fillet, and is not bound by Tang Sanzang",
+            impact_on_journey: "Thrice-Beating the White-Bone Demon would not happen (Erlang Shen would see through and kill her outright · Tang Sanzang could not restrain him) · the True and False Monkey King episode would not happen",
+            impact_on_doctrine: "The monkey-mind would be uncontrollable · with no Tight-Fillet Spell to bind him · Buddhism lacks control over a 'heavenly general' · a new control mechanism would be needed",
+            conclusion: "Wukong's 'demon-immortal' identity plus the Tight-Fillet Spell is the key to the cybernetic model · changing the executor means rebuilding the control system",
+            counterfactual_validity: "high",
+            category: "Replacement Hypothesis"
+        },
+        {
+            scenario: "Replacing Wukong · Nezha",
+            if: "If Wukong were replaced by Nezha",
+            then: "Nezha is more directly controlled by the Heavenly Court · the pilgrimage's independence would decline",
+            calculation: "Nezha's lotus incarnation is immune to demonic influence · but his lotus body wears no Tight Fillet and holds no awe for Tang Sanzang",
+            impact_on_journey: "Demon-subduing efficiency would rise · but Tang Sanzang could not restrain Nezha · conflicts would intensify",
+            impact_on_doctrine: "Heaven would intervene too deeply · losing the quality of 'the pilgrimage as a folk spiritual practice'",
+            conclusion: "Nezha is too 'Heavenly-Court-ified' · unfit to serve as the pilgrimage's actuator",
+            counterfactual_validity: "medium",
+            category: "Replacement Hypothesis"
+        },
+        {
+            scenario: "No Tight-Fillet Spell Hypothesis",
+            if: "If Tang Sanzang stopped chanting the Tight-Fillet Spell · or if the spell failed",
+            then: "Wukong would be uncontrolled · he might beat Tang Sanzang to death or abandon the party",
+            calculation: "In the original text Wukong is expelled three times as Tang Sanzang chants the spell · each time through the spell's negative-feedback suppression · without it Wukong would act freely",
+            impact_on_journey: "The pilgrimage party would lose its actuator · Tang Sanzang would be beaten to death or abandoned · the pilgrimage would fail",
+            impact_on_doctrine: "The Tight-Fillet Spell is the 'negative-feedback suppression signal' in the cybernetic model · it is indispensable",
+            conclusion: "The Tight-Fillet Spell is the core stabilizer of the pilgrimage's automatic control system",
+            counterfactual_validity: "high",
+            category: "Cybernetics Hypothesis"
+        },
+        {
+            scenario: "No White-Bone Demon Hypothesis",
+            if: "If the White-Bone Demon (a wild demon with no backing) never descended",
+            then: "Thrice-Beating the White-Bone Demon would not happen · Wukong would not be expelled · but later trials would shift",
+            calculation: "Thrice-Beating the White-Bone Demon is the key 'actuator deviation from setpoint' event · Wukong is expelled for excessive killing intent · this event drives the team's spiritual upgrade",
+            impact_on_journey: "The pilgrimage party loses one spiritual trial · the later Yellow-Robed Demon and True and False Monkey King episodes might not occur",
+            impact_on_doctrine: "The key turning point of 'the monkey-mind returning to the right path' would be lost · spiritual cultivation would be incomplete",
+            conclusion: "The White-Bone Demon episode is the occasion for the 'actuator's self-correction' · it is indispensable",
+            counterfactual_validity: "high",
+            category: "Plot Hypothesis"
+        },
+        {
+            scenario: "Tathāgata Does Not Arrange Hypothesis",
+            if: "If Tathāgata did not proactively arrange the 27 tribulations (Golden Horn and Silver Horn / Red Boy / the Heaven-Reaching River, etc.)",
+            then: "The Eighty-One Tribulations would shrink to 54 · the pilgrimage would take half as long",
+            calculation: "Most of the 27 tribulations Tathāgata arranges involve demons 'with backing' · these are the pilgrimage's 'obligatory waypoints'",
+            impact_on_journey: "The pilgrimage would become fragmented · without the complete 'nine nines' number · losing the solemnity of the Buddhist system's design",
+            impact_on_doctrine: "Tathāgata's 'arrangement' is the pilgrimage's core design · without it the pilgrimage cannot be completed",
+            conclusion: "Tathāgata is the pilgrimage's chief architect · without arrangement there is no pilgrimage",
+            counterfactual_validity: "high",
+            category: "Structural Hypothesis"
+        },
+        {
+            scenario: "Bull Demon King Submits Hypothesis",
+            if: "If the Bull Demon King willingly submitted to Buddhism (and mended his old friendship with Wukong)",
+            then: "The three tribulations at Flaming Mountain / Palm-Leaf Cave / Accumulated-Thunder Mountain would dissolve · about 5 tribulations removed",
+            calculation: "The Bull Demon King's family of three (Princess Iron Fan / Red Boy / the Immortal Ruyi) is the core of the Flaming Mountain arc · if the Bull King submits, the whole family follows",
+            impact_on_journey: "The Flaming Mountain arc would be simplified · losing the classic narrative of 'Borrowing the Palm-Leaf Fan Three Times'",
+            impact_on_doctrine: "The Bull Demon King represents 'an old friend among the demon kings' · his submission requires both 'force' and 'moral persuasion' · it cannot be simplified",
+            conclusion: "The Bull Demon King arc is an 'old-friend trial' · it cannot be omitted",
+            counterfactual_validity: "medium",
+            category: "Plot Hypothesis"
+        },
+        {
+            scenario: "Golden-Winged Great Peng Does Not Descend Hypothesis",
+            if: "If the Golden-Winged Great Peng (brother of the Buddha-Mother Peacock King) never descended",
+            then: "The Lion-Camel Ridge arc would be simplified · losing the pilgrimage's greatest trial",
+            calculation: "Lion-Camel Ridge is the hardest of the Eighty-One Tribulations · the Great Peng is the greatest demon king · if he did not descend, the Green Lion and White Elephant would have no master",
+            impact_on_journey: "The Lion-Camel Ridge arc might not occur · or its difficulty would fall sharply",
+            impact_on_doctrine: "The Great Peng is the supreme trial of the 'Buddhist family business' · Tathāgata descends in person to subdue him · it cannot be omitted",
+            conclusion: "The Great Peng is the pilgrimage's 'ultimate trial' · the key node in Tathāgata's 'house-cleaning of the Buddhist order'",
+            counterfactual_validity: "high",
+            category: "Structural Hypothesis"
+        }
+    ];
+
+    const EMBEDDED_SUMMARY = {
+        total_scenarios: 10,
+        high_validity: 7,
+        medium_validity: 3,
+        categories: ["Replacement Hypothesis", "Oversight Hypothesis", "Cybernetics Hypothesis", "Structural Hypothesis", "Plot Hypothesis", "Weapon Experiment"],
+        core_conclusion: "The Eighty-One Tribulations are Tathāgata's carefully designed 'trial engineering' · any single-point hypothesis would shake the integrity of the 'nine-nines number'. Demons with backing (mounts / Vulture Peak connections) are the 'necessary accompaniment', and wild demons with no backing are the 'occasions for spiritual awakening' — neither can be missing."
+    };
+
+    /* ============================================================
+       配色（与 dashboard / 81-hardships 一致 + 类别扩展）
+       ============================================================ */
+    const CATEGORY_COLORS = {
+        "Structural Hypothesis": "#c8463a",
+        "Oversight Hypothesis":   "#3a6b8c",
+        "Weapon Experiment":      "#C9A063",
+        "Replacement Hypothesis": "#6B8E5A",
+        "Cybernetics Hypothesis": "#e9b885",
+        "Plot Hypothesis":        "#6B6455"
+    };
+    const VALIDITY_COLORS = {
+        "high":   "#c8463a",
+        "medium": "#e9b885"
+    };
+    const VALIDITY_LABEL = {
+        "high":   "High validity",
+        "medium": "Medium validity"
+    };
+
+    /* ============================================================
+       渲染 1：场景卡片网格
+       ============================================================ */
+    function renderScenarios(scenarios) {
+        const grid = d3.select("#scenario-grid");
+        grid.selectAll("*").remove();
+
+        const card = grid.selectAll(".scenario-card")
+            .data(scenarios)
+            .enter()
+            .append("div")
+            .attr("class", "scenario-card")
+            .style("border-left-color", d => CATEGORY_COLORS[d.category] || "var(--accent)");
+
+        // 头部：名称 + 徽章
+        const head = card.append("div").attr("class", "scenario-head");
+        head.append("div").attr("class", "scenario-name").text(d => d.scenario);
+        const badges = head.append("div").attr("class", "scenario-badges");
+        badges.append("span")
+            .attr("class", d => "badge validity-" + d.counterfactual_validity)
+            .text(d => VALIDITY_LABEL[d.counterfactual_validity] || d.counterfactual_validity);
+        badges.append("span")
+            .attr("class", "badge category")
+            .text(d => d.category);
+
+        // 字段
+        const fieldDefs = [
+            { key: "if",                  label: "IF" },
+            { key: "then",                label: "THEN" },
+            { key: "calculation",         label: "CALC" },
+            { key: "impact_on_journey",   label: "Journey" },
+            { key: "impact_on_doctrine",  label: "Doctrine" }
+        ];
+        fieldDefs.forEach(f => {
+            const row = card.append("div").attr("class", "scenario-row");
+            row.append("span").attr("class", "row-label").text(f.label);
+            row.append("span").attr("class", "row-text").text(d => d[f.key]);
+        });
+
+        // 结论（底部高亮）
+        const concl = card.append("div").attr("class", "scenario-conclusion");
+        concl.append("span").attr("class", "row-label").text("CONCLUSION");
+        concl.append("span").text(d => d.conclusion);
+    }
+
+    /* ============================================================
+       渲染 2：可信度饼图
+       ============================================================ */
+    function renderValidityPie(summary) {
+        const data = {
+            "High validity": summary.high_validity,
+            "Medium validity": summary.medium_validity
+        };
+        const colorMap = {
+            "High validity": VALIDITY_COLORS.high,
+            "Medium validity": VALIDITY_COLORS.medium
+        };
+
+        const svg = d3.select("#chart-validity");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${width/2}, ${height/2})`);
+
+        const pie = d3.pie().value(d => d[1]).sort(null);
+        const arc = d3.arc()
+            .innerRadius(radius * 0.58)
+            .outerRadius(radius)
+            .cornerRadius(3);
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.82)
+            .outerRadius(radius * 0.82);
+
+        const arcs = pie(Object.entries(data));
+
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => colorMap[d.data[0]] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 120)
+            .style("opacity", 1);
+
+        const total = Object.values(data).reduce((a, b) => a + b, 0);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "0.35em")
+            .style("font-size", "1.8rem")
+            .style("font-weight", "600")
+            .style("fill", "#23201A")
+            .text(total);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "2em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6B6455")
+            .text("Total scenarios");
+
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.88rem")
+            .style("font-weight", "600")
+            .style("fill", d => d.data[0] === "High validity" ? "#fff" : "#C9A063")
+            .text(d => {
+                const pct = (d.data[1] / total * 100).toFixed(0);
+                return `${d.data[1]} · ${pct}%`;
+            });
+
+        const legend = d3.select("#legend-validity");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(Object.entries(data))
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `
+                <span class="legend-swatch" style="background:${colorMap[d[0]] || '#999'}"></span>
+                <span>${d[0]}: ${d[1]} scenarios</span>
+            `);
+    }
+
+    /* ============================================================
+       渲染 3：类别分布柱状图（按场景数排序）
+       ============================================================ */
+    function renderCategoryBar(scenarios) {
+        const counts = d3.rollup(scenarios, v => v.length, d => d.category);
+        const data = Array.from(counts, ([category, count]) => ({ category, count }))
+            .sort((a, b) => b.count - a.count);
+
+        const svg = d3.select("#chart-category");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("chart-category");
+        const width = containerEl.clientWidth || 720;
+        const height = 400;
+        const margin = { top: 24, right: 24, bottom: 70, left: 48 };
+        const innerW = Math.max(120, width - margin.left - margin.right);
+        const innerH = Math.max(120, height - margin.top - margin.bottom);
+
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        const x = d3.scaleBand()
+            .domain(data.map(d => d.category))
+            .range([0, innerW])
+            .padding(0.35);
+
+        const yMax = d3.max(data, d => d.count) || 1;
+        const y = d3.scaleLinear()
+            .domain([0, yMax + 1])
+            .range([innerH, 0]);
+
+        // 坐标轴
+        g.append("g")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
+            .selectAll("text")
+            .style("font-size", "0.82rem")
+            .style("fill", "#23201A")
+            .attr("transform", "rotate(-18)")
+            .style("text-anchor", "end");
+
+        g.append("g")
+            .call(d3.axisLeft(y).ticks(Math.min(yMax + 1, 6)).tickSize(-innerW).tickPadding(6))
+            .call(g2 => g2.select(".domain").remove())
+            .call(g2 => g2.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-opacity", 0.55))
+            .selectAll("text")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455");
+
+        // 柱
+        const bars = g.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", d => x(d.category))
+            .attr("y", innerH)
+            .attr("width",Math.max(0, x.bandwidth()))
+            .attr("height", 0)
+            .attr("fill", d => CATEGORY_COLORS[d.category] || "#999")
+            .attr("rx", 3);
+
+        bars.transition()
+            .duration(700)
+            .delay((d, i) => i * 80)
+            .attr("y", d => y(d.count))
+            .attr("height", d => innerH - y(d.count));
+
+        // 数值标签
+        g.selectAll(".bar-label")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "bar-label")
+            .attr("x", d => x(d.category) + x.bandwidth() / 2)
+            .attr("y", d => y(d.count) - 6)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem")
+            .style("font-weight", "600")
+            .style("fill", "#23201A")
+            .text(d => d.count);
+
+        // 标题
+        svg.append("text")
+            .attr("x", width / 2)
+            .attr("y", 14)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455")
+            .style("letter-spacing", "0.08em")
+            .text(`Total ${data.length} categories · ${d3.sum(data, d => d.count)} scenarios`);
+    }
+
+    /* ============================================================
+       渲染 4：Core Conclusion
+       ============================================================ */
+    function renderCoreConclusion(summary) {
+        const text = summary.core_conclusion || "";
+        // 高亮关键短语
+        const highlighted = text
+            .replace(/'trial engineering'/g, "<strong>'trial engineering'</strong>")
+            .replace(/'nine-nines number'/g, "<strong>'nine-nines number'</strong>")
+            .replace(/'necessary accompaniment'/g, "<strong>'necessary accompaniment'</strong>")
+            .replace(/'occasions for spiritual awakening'/g, "<strong>'occasions for spiritual awakening'</strong>");
+        d3.select("#core-conclusion-text").html(highlighted);
+    }
+
+    /* ============================================================
+       渲染 5：Key Insights
+       ============================================================ */
+    function renderInsights() {
+        const insights = [
+            "The Eighty-One Tribulations are Tathāgata's carefully designed <strong>'trial engineering'</strong>; any single-point hypothesis would shake the integrity of the <strong>'nine-nines number'</strong>.",
+            "The <strong>Tight-Fillet Spell</strong> is the core stabilizer of the cybernetic model; without it the pilgrimage fails.",
+            "The <strong>Great Peng</strong> is the key node in the Buddhist order's 'house-cleaning'; Tathāgata descends in person to subdue it.",
+            "Secret trials are a necessary condition for spiritual cultivation; <strong>transparency</strong> renders them void."
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach((text, i) => {
+            ul.append("li")
+                .html(`<span class="marker">${String(i + 1).padStart(2, "0")}</span><span>${text}</span>`);
+        });
+    }
+
+    /* ============================================================
+       数据加载（fetch 失败则用嵌入数据）
+       ============================================================ */
+    async function loadData() {
+        try {
+            const [r1, r2] = await Promise.all([
+                fetch('../../scripts/output/data/counterfactual_scenarios.json'),
+                fetch('../../scripts/output/data/counterfactual_summary.json')
+            ]);
+            if (!r1.ok || !r2.ok) throw new Error('fetch failed');
+            const scenarios = await r1.json();
+            const summary = await r2.json();
+            document.getElementById('dataSource').innerHTML =
+                'Data source: loaded live from <code>scripts/output/data/counterfactual_*.json</code> (running in http server mode)';
+            return { scenarios, summary };
+        } catch (e) {
+            console.warn('[INFO] Using embedded data:', e.message);
+            return { scenarios: EMBEDDED_SCENARIOS, summary: EMBEDDED_SUMMARY };
+        }
+    }
+
+    /* ============================================================
+       主流程
+       ============================================================ */
+    async function main() {
+        const { scenarios, summary } = await loadData();
+        window.__lastData = { scenarios, summary };
+
+        renderScenarios(scenarios);
+        renderValidityPie(summary);
+        renderCategoryBar(scenarios);
+        renderCoreConclusion(summary);
+        renderInsights();
+
+        // 生成时间戳
+        const genTime = document.getElementById('gen-time');
+        const ts = new Date();
+        const pad = n => String(n).padStart(2, '0');
+        if (genTime) genTime.textContent = `Data generated: ${ts.getFullYear()}-${pad(ts.getMonth() + 1)}-${pad(ts.getDate())} ${pad(ts.getHours())}:${pad(ts.getMinutes())}`;
+    }
+
+    // 窗口尺寸变化时重绘柱状图
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) renderCategoryBar(window.__lastData.scenarios);
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
