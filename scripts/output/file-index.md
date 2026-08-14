@@ -8,6 +8,14 @@
 
 ---
 
+## W431 英文站续译 batch9（2026-08-14·v2.3.46）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/timeline.html / monster-capability-radar.html / journey-map-interactive.html / character-relationship-3d-view.html | W431 | v2.3.46 新增·并行 subagent 英文化 4 页（_validate_en.py 全过） |
+| site/sitemap.xml | W431 | v2.3.46 修改·补 4 个 en 页（163→167 页） |
+| site/**/*.html（4 页） | W431 | v2.3.46 修改·generate_csp.py 重生成 CSP（172 页·763 内联哈希） |
+
 ## W430 英文站续译 batch8（2026-08-14·v2.3.45）
 
 | 文件 | W | 说明 |
