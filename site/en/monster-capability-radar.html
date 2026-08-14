@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-fjYzW1xLQ3HF540mLdo6aODkv4AnCehb8gIkYW4kQFU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Monster Capability Radar · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— Background / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体Background: 宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区Background */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        @font-face {
+            font-family: "Noto Serif SC"; src: local("Noto Serif SC"), local("Source Han Serif SC");
+            font-display: optional;
+        }
+        @font-face {
+            font-family: "JetBrains Mono"; src: local("JetBrains Mono"), local("Fira Code");
+            font-display: swap;
+        }
+        
+        
+        
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .cross-page-nav {
+            background: #fff8e7; border: 1px solid var(--line); border-left: 4px solid var(--accent);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.86em; border-radius: 4px;
+            color: var(--ink-soft); line-height: 1.9;
+        }
+        .cross-page-nav a { color: var(--accent-2); text-decoration: none; padding: 2px 4px; border-radius: 2px; }
+        .cross-page-nav a:hover { background: var(--accent-soft); color: var(--ink); }
+        .cross-page-nav a.active { color: var(--accent); font-weight: 700; background: rgba(200,70,58,0.08); }
+        .cross-page-nav .nav-label { font-family: "JetBrains Mono", monospace; color: var(--accent-3); font-weight: 700; margin-right: 8px; }
+        .notice {
+            background: #fff8e7; border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        }
+        
+        
+        .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
+        
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
+        
+        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: var(--accent-2);
+            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 4px 0; transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        
+        .monster-switcher { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+        .monster-btn {
+            padding: 6px 12px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.82em;
+            font-family: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .monster-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .monster-btn:hover { background: var(--accent-soft); }
+        .monster-btn.active:hover { background: var(--accent); }
+        .chart-wrap { position: relative; overflow-x: auto; }
+        #radar-svg, #bar-svg, #scatter-svg, #sankey-svg { display: block; }
+        #radar-svg { min-width: 720px; }
+        #bar-svg, #scatter-svg { min-width: 880px; }
+        #sankey-svg { min-width: 880px; }
+        .radar-tip, .bar-tip, .scatter-tip {
+            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
+            color: #f5e9d4; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem;
+            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 320px;
+        }
+        .radar-tip .tip-title, .bar-tip .tip-title, .scatter-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
+        .radar-tip .tip-row, .bar-tip .tip-row, .scatter-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
+        .radar-tip .tip-meta, .bar-tip .tip-meta, .scatter-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
+        .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
+        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
+        .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 2px; }
+        .insight-box {
+            background: #fffdf8; border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+        }
+        .insight-box strong { color: var(--accent); font-weight: 700; }
+        .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
+        .extreme-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px; }
+        .extreme-card {
+            background: linear-gradient(135deg, #fffdf8 0%, #fff8e7 100%);
+            border: 1px solid var(--line); border-radius: 8px; padding: 18px;
+            box-shadow: var(--shadow); position: relative; overflow: hidden;
+        }
+        .extreme-card::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(to right, var(--accent), var(--accent-2));
+        }
+        .extreme-card .ex-label { font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: var(--accent-3); font-weight: 700; letter-spacing: 0.05em; }
+        .extreme-card .ex-monster { font-size: 1.4em; color: var(--accent); font-weight: 700; margin-top: 4px; }
+        .extreme-card .ex-value { font-size: 0.95em; color: var(--ink); margin-top: 6px; font-weight: 600; }
+        .extreme-card .ex-desc { font-size: 0.8em; color: var(--ink-soft); margin-top: 6px; }
+        
+        
+        footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
+        footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
+        @media (prefers-reduced-motion: reduce) {  }
+        @media (max-width: 480px) {
+            
+            
+            
+            .monster-btn { padding: 5px 9px; font-size: 0.76em; }
+        }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html">
+            <span class="seal">JTTW<br>Notes</span>
+            <span class="wordmark">Annotated Journey to the West</span>
+        </a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/monster-capability-radar.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Monster Capability Radar</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Monster Capability Radar</h1>
+        <p class="subtitle">W233-3 · V3 · Forms a level-capability dual dimension with monster-hierarchy-network</p>
+        <p class="tagline">—— 15 representative demons × 5 capability dimensions (Magic Power / Strategy / Artifact / Background / Ending) with translucent overlays · origin→ending Sankey flow</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">EN Home</a>
+            <span class="sep">›</span>
+            <a href="dashboard.html">Dashboard</a>
+            <span class="sep">›</span>
+            <span>Monster Capability Radar</span>
+        </nav>
+        <nav class="cross-page-nav" aria-label="Cross-page navigation">
+            <span class="nav-label">Cross-page navigation:</span>
+            <a href="../data/ming-political-thought-comparison.html" lang="zh-CN">Ming Political Thought Comparison</a> ·
+            <a href="../data/pilgrim-team-psychology-arc.html" lang="zh-CN">Pilgrim Team Psychology</a> ·
+            <a href="../data/monster-capability-radar.html" lang="zh-CN" class="active">Monster Capability Radar</a> ·
+            <a href="../data/poetry-rhythm-analysis.html" lang="zh-CN">Poetry Rhythm Analysis</a> ·
+            <a href="dashboard.html">Back to Dashboard</a>
+        </nav>
+        <div class="notice" role="note">
+            <strong>Capability Dimensions</strong>:
+            <span class="mono">Magic Power</span> (1-10 · direct reflection of combat strength) ·
+            <span class="mono">Strategy</span> (1-10 · schemes and deception) ·
+            <span class="mono">Artifact</span> (1-10 · number and power of magical artifacts) ·
+            <span class="mono">Background</span> (1-10 · origin level and backing) ·
+            <span class="mono">Ending</span> (1-10 · quality of outcome; 6+ good ending, 1-2 tragic). 15 demons × 5 dimensions = 75 data points.
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <section class="kpi-row" aria-label="Demon capability overview">
+            <div class="kpi-card">
+                <div class="num">15</div>
+                <div class="label">Representative Demons</div>
+                <div class="detail">White Bone Demon → King of Spiritual Touch · spans 60 chapters</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">5</div>
+                <div class="label">Capability Dimensions</div>
+                <div class="detail">Magic Power / Strategy / Artifact / Background / Ending</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">4</div>
+                <div class="label">Origin Categories</div>
+                <div class="detail">Heaven / Buddhist Realm / Mortal Realm / Wild</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">4</div>
+                <div class="label">Ending Categories</div>
+                <div class="detail">Recruited / Killed / Escaped / Recalled</div>
+            </div>
+        </section>
+
+        <!-- Section 1：15 妖怪雷达图叠加 -->
+        <section class="section" aria-labelledby="sec-radar">
+            <h2 id="sec-radar">① 15-Demon Capability Radar Overlay</h2>
+            <p>Rendered with D3.js radarChart. The 5-dimensional capabilities of 15 demons (Magic Power / Strategy / Artifact / Background / Ending) are overlaid as translucent polygons; click a demon name to toggle highlighting. The overlay reveals two archetypal demon types: "high-strategy, no-background" (White Bone Demon / Six-Eared Macaque) and "high-background, all-dimension" (Golden-Winged Roc / Yellow Brow King).</p>
+            <div class="monster-switcher" id="radar-switcher" role="group" aria-label="Demon switcher"></div>
+            <div class="chart-wrap">
+                <svg id="radar-svg" width="100%" height="560" role="img" aria-labelledby="radar-title radar-desc">
+                    <title id="radar-title">15-Demon Capability Radar Overlay</title>
+                    <desc id="radar-desc">Radar overlay of 15 demons across 5 capability dimensions, shown as translucent polygons.</desc>
+                </svg>
+                <div class="radar-tip" id="radar-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="radar-legend" aria-label="Demon legend"></div>
+        </section>
+
+        <!-- Section 2：能力对比柱状图 -->
+        <section class="section" aria-labelledby="sec-bar">
+            <h2 id="sec-bar">② Five-Dimension Capability Ranking Bar Chart</h2>
+            <p>Statistics for the highest-scoring demon and the average across the five capability dimensions. "Magic Power" has the highest ceiling (10 points · Golden-Winged Roc), while "Ending" has the lowest average (4.7 points) — of the 15 demons, 6 have an ending score of ≤2, so the demon group's overall "good-ending rate" is under 40%.</p>
+            <div class="chart-wrap">
+                <svg id="bar-svg" width="100%" height="420" role="img" aria-labelledby="bar-title bar-desc">
+                    <title id="bar-title">Five-Dimension Capability Comparison Bar Chart</title>
+                    <desc id="bar-desc">Comparison of the highest and average scores across the five dimensions.</desc>
+                </svg>
+                <div class="bar-tip" id="bar-tip" role="tooltip"></div>
+            </div>
+        </section>
+
+        <!-- Section 3：妖怪能力散点图 -->
+        <section class="section" aria-labelledby="sec-scatter">
+            <h2 id="sec-scatter">③ Magic Power vs. Ending Scatter Plot</h2>
+            <p>The horizontal axis is Magic Power (1-10) and the vertical axis is Ending (1-10). The distribution of the 15 demons reveals an inverse trend: "the higher the magic power, the worse the ending" — Six-Eared Macaque (Magic Power 9 / Ending 1) and Golden-Winged Roc (Magic Power 10 / Ending 6) form a stark contrast. The red dashed line is the average-ending reference line.</p>
+            <div class="chart-wrap">
+                <svg id="scatter-svg" width="100%" height="480" role="img" aria-labelledby="sc-title sc-desc">
+                    <title id="sc-title">Magic Power vs. Ending Scatter Plot</title>
+                    <desc id="sc-desc">Distribution of 15 demons in the two-dimensional space of Magic Power and Ending.</desc>
+                </svg>
+                <div class="scatter-tip" id="scatter-tip" role="tooltip"></div>
+            </div>
+        </section>
+
+        <!-- Section 4：妖怪分类桑基图 -->
+        <section class="section" aria-labelledby="sec-sankey">
+            <h2 id="sec-sankey">④ Demon Classification Sankey Diagram (Origin → Ending)</h2>
+            <p>The left side has four origin categories (Heaven / Buddhist Realm / Mortal Realm / Wild) and the right side has four ending categories (Recruited / Killed / Escaped / Recalled). The flow reveals that "demons from Heaven and the Buddhist Realm were mostly recruited (9)", while "wild and mortal-realm demons were mostly killed (7)" — endings are tightly coupled with origins, and background determines fate.</p>
+            <div class="chart-wrap">
+                <svg id="sankey-svg" width="100%" height="460" role="img" aria-labelledby="sk-title sk-desc">
+                    <title id="sk-title">Demon Origin-Ending Sankey Diagram</title>
+                    <desc id="sk-desc">Flow from the four origin categories on the left to the four ending categories on the right.</desc>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Section 5：能力 KPI 极值卡片 -->
+        <section class="section" aria-labelledby="sec-extreme">
+            <h2 id="sec-extreme">⑤ Capability Extremes KPI Cards</h2>
+            <p>Four extreme demons: Strongest Magic Power (Golden-Winged Roc · the Tathāgata's own uncle), Most Strategic (Six-Eared Macaque · an indistinguishable fake Wukong), Most Tragic (Six-Eared Macaque · dies as soon as the Tathāgata sees through him), and Luckiest (Red Boy · recruited as the Boy of Wealth). Strategy and Ending form a stark contrast.</p>
+            <div class="extreme-grid" id="extreme-grid"></div>
+            <div class="insight-box" style="margin-top:16px;">
+                <span class="ib-tag">[Contrast]</span>
+                <strong>Six-Eared Macaque: "second in strategy, worst in ending"</strong>. A 9/10 Strategy paired with a 1/10 Ending — he could impersonate Wukong and deceive the entire pilgrimage team and the gods of Heaven, yet he could not fool the Tathāgata Buddha. "Strategy" fails before absolute power, the sharpest irony in the whole book.
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Recruited]</span>
+                <strong>The "luckiest" Red Boy was no weakling</strong>. With Magic Power 8 / Strategy 7, Red Boy was taken in by Guanyin as the Boy of Wealth — appearing "subdued" while actually "attaining enlightenment". This contrasts with White Bone Demon (Magic Power 4 / Ending 2) — the prerequisite for being recruited is "being useful".
+            </div>
+        </section>
+
+        <!-- Section 6：跨页面导航 + footer -->
+        <section class="section" aria-labelledby="sec-cross">
+            <h2 id="sec-cross">⑥ Cross-Page Navigation · Level-Capability Dual Dimension</h2>
+            <p>This page, together with <a href="../data/monster-hierarchy-network.html" style="color:var(--accent);" lang="zh-CN">monster-hierarchy-network.html</a> (W194 Monster Hierarchy Network), forms a "level-capability" dual dimension: the former presents the hierarchical structure and subordination of demons, while this page presents a multi-dimensional capability comparison. Reading them together, one can see that "high level does not guarantee high capability, and high capability does not guarantee a good ending."</p>
+            <nav class="cross-page-nav" aria-label="Related pages">
+                <span class="nav-label">Related pages:</span>
+                <a href="../data/monster-hierarchy-network.html" lang="zh-CN">Monster Hierarchy Network (W194)</a> ·
+                <a href="../data/hardship-difficulty-heatmap.html" lang="zh-CN">81 Tribulations Difficulty Heatmap (W229-1)</a> ·
+                <a href="../data/journey-spacetime.html" lang="zh-CN">Journey Spacetime Dual Axis (W229-2)</a> ·
+                <a href="../data/character-dynamic-network.html" lang="zh-CN">Character Relationship Dynamic Network (W229-3)</a> ·
+                <a href="dashboard.html">Dashboard</a>
+            </nav>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">Annotated Journey to the West</div>
+            <div class="footer-meta">v2.2.86 · W334 · Data Visualization</div>
+        </div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/monster-capability-radar.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // ============= EMBEDDED_DATA =============
+    const EMBEDDED_DATA = {
+        meta: {title: "Monster Capability Radar", version: "v2.2.39", w_id: "W233-3", direction: "V3"},
+        kpi: [
+            {label: "Representative Demons", value: 15, unit: "demons"},
+            {label: "Capability Dimensions", value: 5, unit: "dimensions"},
+            {label: "Origin Categories", value: 4, unit: "categories"},
+            {label: "Ending Categories", value: 4, unit: "categories"}
+        ],
+        radar: [
+            {monster: "White Bone Demon", magic: 4, strategy: 9, artifact: 2, background: 1, ending: 2},
+            {monster: "Yellow Robe Demon", magic: 7, strategy: 5, artifact: 6, background: 8, ending: 5},
+            {monster: "Red Boy", magic: 8, strategy: 7, artifact: 7, background: 8, ending: 6},
+            {monster: "Black Bear Demon", magic: 7, strategy: 5, artifact: 4, background: 5, ending: 6},
+            {monster: "Silver Horn King", magic: 8, strategy: 6, artifact: 9, background: 8, ending: 5},
+            {monster: "Spider Demon", magic: 5, strategy: 6, artifact: 5, background: 4, ending: 2},
+            {monster: "Scorpion Demon", magic: 9, strategy: 6, artifact: 7, background: 5, ending: 2},
+            {monster: "Six-Eared Macaque", magic: 9, strategy: 9, artifact: 6, background: 2, ending: 1},
+            {monster: "Bull Demon King", magic: 9, strategy: 7, artifact: 7, background: 7, ending: 6},
+            {monster: "Princess Iron Fan", magic: 7, strategy: 6, artifact: 9, background: 7, ending: 6},
+            {monster: "Golden-Winged Roc", magic: 10, strategy: 9, artifact: 7, background: 9, ending: 6},
+            {monster: "Yellow Brow King", magic: 9, strategy: 6, artifact: 9, background: 8, ending: 6},
+            {monster: "Green Lion Demon", magic: 8, strategy: 5, artifact: 6, background: 8, ending: 6},
+            {monster: "White Elephant Demon", magic: 7, strategy: 5, artifact: 6, background: 8, ending: 6},
+            {monster: "King of Spiritual Touch", magic: 7, strategy: 6, artifact: 5, background: 7, ending: 2}
+        ],
+        bar: [
+            {dimension: "Magic Power", max: 10, monster: "Golden-Winged Roc", avg: 7.6},
+            {dimension: "Strategy", max: 9, monster: "White Bone Demon / Six-Eared Macaque / Golden-Winged Roc", avg: 6.5},
+            {dimension: "Artifact", max: 9, monster: "Silver Horn King / Princess Iron Fan / Yellow Brow King", avg: 6.5},
+            {dimension: "Background", max: 9, monster: "Golden-Winged Roc", avg: 6.4},
+            {dimension: "Ending", max: 6, monster: "Red Boy / Black Bear Demon / Bull Demon King, etc.", avg: 4.7}
+        ],
+        scatter: [
+            {monster: "White Bone Demon", magic: 4, ending: 2},
+            {monster: "Yellow Robe Demon", magic: 7, ending: 5},
+            {monster: "Red Boy", magic: 8, ending: 6},
+            {monster: "Black Bear Demon", magic: 7, ending: 6},
+            {monster: "Silver Horn King", magic: 8, ending: 5},
+            {monster: "Spider Demon", magic: 5, ending: 2},
+            {monster: "Scorpion Demon", magic: 9, ending: 2},
+            {monster: "Six-Eared Macaque", magic: 9, ending: 1},
+            {monster: "Bull Demon King", magic: 9, ending: 6},
+            {monster: "Princess Iron Fan", magic: 7, ending: 6},
+            {monster: "Golden-Winged Roc", magic: 10, ending: 6},
+            {monster: "Yellow Brow King", magic: 9, ending: 6},
+            {monster: "Green Lion Demon", magic: 8, ending: 6},
+            {monster: "White Elephant Demon", magic: 7, ending: 6},
+            {monster: "King of Spiritual Touch", magic: 7, ending: 2}
+        ],
+        sankey: {
+            nodes: [
+                {name: "Heaven"}, {name: "Buddhist Realm"}, {name: "Mortal Realm"}, {name: "Wild"},
+                {name: "Recruited"}, {name: "Killed"}, {name: "Escaped"}, {name: "Recalled"}
+            ],
+            links: [
+                {source: 0, target: 4, value: 5},
+                {source: 0, target: 5, value: 2},
+                {source: 1, target: 4, value: 4},
+                {source: 1, target: 6, value: 1},
+                {source: 2, target: 5, value: 3},
+                {source: 3, target: 5, value: 4},
+                {source: 3, target: 7, value: 1}
+            ]
+        },
+        kpi_extreme: [
+            {label: "Strongest Magic Power", monster: "Golden-Winged Roc", value: "10/10", desc: "The Tathāgata's own uncle · subdued by the Buddha leading five hundred arhats in person"},
+            {label: "Most Strategic", monster: "Six-Eared Macaque", value: "9/10", desc: "An indistinguishable fake Wukong · deceived the gods of Heaven"},
+            {label: "Most Tragic", monster: "Six-Eared Macaque", value: "Ending 1/10", desc: "Seen through by the Tathāgata and killed with one blow by Wukong"},
+            {label: "Luckiest", monster: "Red Boy", value: "Recruited as the Boy of Wealth", desc: "Taken in by Guanyin as an attendant · attained enlightenment"}
+        ]
+    };
+
+    // 维度配置
+    const DIMENSIONS = [
+        {key: "magic",      label: "Magic Power", color: "#c8463a"},
+        {key: "strategy",   label: "Strategy", color: "#3a6b8c"},
+        {key: "artifact",   label: "Artifact", color: "#C9A063"},
+        {key: "background", label: "Background", color: "#6B8E5A"},
+        {key: "ending",     label: "Ending", color: "#b8862a"}
+    ];
+
+    // 15 妖怪配色（柔和循环）
+    const MONSTER_COLORS = [
+        "#c8463a","#3a6b8c","#C9A063","#6B8E5A","#b8862a",
+        "#8c2a2a","#2c5573","#6b4030","#4a6a2a","#a06d2a",
+        "#d98060","#5a8caf","#9a6e4a","#7a9c5a","#c49a4a"
+    ];
+
+    const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DUR = REDUCE_MOTION ? 0 : 600;
+    let highlightedMonster = null;
+
+    // ============= Section 1：雷达图叠加 =============
+    function renderRadar() {
+        const svg = d3.select("#radar-svg");
+        svg.selectAll("*").remove();
+
+        const wrap = document.getElementById("radar-svg");
+        const width = Math.max(720, wrap.clientWidth || 720);
+        const height = 560;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const cx = width / 2, cy = height / 2 + 10;
+        const radius = Math.min(width, height) / 2 - 80;
+        const levels = 10;
+
+        // 网格圆
+        for (let i = 1; i <= levels; i++) {
+            const r = radius * i / levels;
+            const pts = DIMENSIONS.map((d, di) => {
+                const ang = -Math.PI / 2 + di * 2 * Math.PI / DIMENSIONS.length;
+                return [cx + r * Math.cos(ang), cy + r * Math.sin(ang)];
+            });
+            svg.append("polygon")
+                .attr("points", pts.map(p => p.join(",")).join(" "))
+                .attr("fill", "none")
+                .attr("stroke", "#e9b885")
+                .attr("stroke-width", 0.6)
+                .attr("stroke-dasharray", i === levels ? "none" : "2,3")
+                .attr("opacity", 0.5);
+        }
+
+        // 轴线 + 标签
+        DIMENSIONS.forEach((dim, di) => {
+            const ang = -Math.PI / 2 + di * 2 * Math.PI / DIMENSIONS.length;
+            const ex = cx + radius * Math.cos(ang);
+            const ey = cy + radius * Math.sin(ang);
+            svg.append("line")
+                .attr("x1", cx).attr("y1", cy)
+                .attr("x2", ex).attr("y2", ey)
+                .attr("stroke", "#d9cdb8")
+                .attr("stroke-width", 0.8);
+            // 维度标签
+            const lx = cx + (radius + 28) * Math.cos(ang);
+            const ly = cy + (radius + 28) * Math.sin(ang);
+            svg.append("text")
+                .attr("x", lx).attr("y", ly)
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .style("font-size", "0.95rem")
+                .style("font-weight", "700")
+                .style("fill", dim.color)
+                .text(dim.label);
+        });
+
+        // 中心点
+        svg.append("circle")
+            .attr("cx", cx).attr("cy", cy).attr("r", 2)
+            .attr("fill", "#C9A063");
+
+        // 15 妖怪多边形叠加
+        const tip = d3.select("#radar-tip");
+        const wrapEl = wrap.parentElement;
+        const monsterPolys = [];
+
+        EMBEDDED_DATA.radar.forEach((m, mi) => {
+            const pts = DIMENSIONS.map((dim, di) => {
+                const ang = -Math.PI / 2 + di * 2 * Math.PI / DIMENSIONS.length;
+                const r = radius * m[dim.key] / 10;
+                return [cx + r * Math.cos(ang), cy + r * Math.sin(ang)];
+            });
+            const poly = svg.append("polygon")
+                .attr("points", pts.map(p => p.join(",")).join(" "))
+                .attr("fill", MONSTER_COLORS[mi])
+                .attr("fill-opacity", highlightedMonster === m.monster ? 0.55 : 0.18)
+                .attr("stroke", MONSTER_COLORS[mi])
+                .attr("stroke-width", highlightedMonster === m.monster ? 2.5 : 1)
+                .attr("stroke-opacity", highlightedMonster === m.monster ? 1 : 0.6)
+                .style("cursor", "pointer")
+                .on("mouseover", function(event) {
+                    d3.select(this).attr("fill-opacity", 0.55).attr("stroke-width", 2.5);
+                    tip.style("opacity", 1)
+                        .html(`<div class="tip-title">${m.monster}</div>
+                            <div class="tip-row">Magic Power: <strong style="color:#e9b885">${m.magic}/10</strong></div>
+                            <div class="tip-row">Strategy: <strong style="color:#e9b885">${m.strategy}/10</strong></div>
+                            <div class="tip-row">Artifact: <strong style="color:#e9b885">${m.artifact}/10</strong></div>
+                            <div class="tip-row">Background: <strong style="color:#e9b885">${m.background}/10</strong></div>
+                            <div class="tip-row">Ending: <strong style="color:#e9b885">${m.ending}/10</strong></div>
+                            <div class="tip-meta">Total ${m.magic + m.strategy + m.artifact + m.background + m.ending}/50 · Index ${mi + 1}/15</div>`);
+                })
+                .on("mousemove", function(event) {
+                    const rect = wrapEl.getBoundingClientRect();
+                    tip.style("left", (event.clientX - rect.left + 14) + "px")
+                        .style("top", (event.clientY - rect.top + 14) + "px");
+                })
+                .on("mouseout", function() {
+                    const isHL = highlightedMonster === m.monster;
+                    d3.select(this)
+                        .attr("fill-opacity", isHL ? 0.55 : 0.18)
+                        .attr("stroke-width", isHL ? 2.5 : 1);
+                    tip.style("opacity", 0);
+                })
+                .on("click", function() {
+                    highlightedMonster = highlightedMonster === m.monster ? null : m.monster;
+                    renderRadar();
+                    renderSwitcher();
+                });
+            monsterPolys.push(poly);
+        });
+
+        renderRadarLegend();
+    }
+
+    function renderRadarLegend() {
+        const legend = d3.select("#radar-legend");
+        legend.selectAll("*").remove();
+        EMBEDDED_DATA.radar.forEach((m, mi) => {
+            const item = legend.append("div").attr("class", "lg-item")
+                .style("cursor", "pointer")
+                .style("background", highlightedMonster === m.monster ? MONSTER_COLORS[mi] : "#fff8e7")
+                .style("color", highlightedMonster === m.monster ? "#fff" : "var(--ink-soft)")
+                .on("click", function() {
+                    highlightedMonster = highlightedMonster === m.monster ? null : m.monster;
+                    renderRadar();
+                    renderSwitcher();
+                });
+            item.append("span").attr("class", "lg-swatch").style("background", MONSTER_COLORS[mi]);
+            item.append("span").text(m.monster);
+        });
+    }
+
+    function renderSwitcher() {
+        const sw = d3.select("#radar-switcher");
+        sw.selectAll("*").remove();
+        EMBEDDED_DATA.radar.forEach((m, mi) => {
+            sw.append("button")
+                .attr("class", "monster-btn" + (highlightedMonster === m.monster ? " active" : ""))
+                .style("border-left", `3px solid ${MONSTER_COLORS[mi]}`)
+                .text(m.monster)
+                .on("click", function() {
+                    highlightedMonster = highlightedMonster === m.monster ? null : m.monster;
+                    renderRadar();
+                    renderSwitcher();
+                });
+        });
+    }
+
+    // ============= Section 2：能力对比柱状图 =============
+    function renderBar() {
+        const svg = d3.select("#bar-svg");
+        svg.selectAll("*").remove();
+
+        const wrap = document.getElementById("bar-svg");
+        const width = Math.max(880, wrap.clientWidth || 880);
+        const height = 420;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 30, right: 60, bottom: 80, left: 50 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const data = EMBEDDED_DATA.bar;
+        const x0 = d3.scaleBand().domain(data.map(d => d.dimension)).range([0, innerW]).padding(0.25);
+        const x1 = d3.scaleBand().domain(["max", "avg"]).range([0, x0.bandwidth()]).padding(0.1);
+        const y = d3.scaleLinear().domain([0, 10]).range([innerH, 0]);
+
+        // 轴
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x0))
+            .selectAll("text").style("font-size", "0.88rem").style("fill", "#23201A").style("font-weight", "600");
+        g.append("g").call(d3.axisLeft(y).ticks(10))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 50)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Capability Dimensions");
+
+        // 柱
+        const tip = d3.select("#bar-tip");
+        const wrapEl = wrap.parentElement;
+        const colors = { max: "#c8463a", avg: "#3a6b8c" };
+
+        data.forEach(d => {
+            ["max", "avg"].forEach(k => {
+                const val = d[k];
+                g.append("rect")
+                    .attr("x", x0(d.dimension) + x1(k))
+                    .attr("y", innerH)
+                    .attr("width", x1.bandwidth())
+                    .attr("height", 0)
+                    .attr("fill", colors[k])
+                    .attr("stroke", "#fff")
+                    .attr("stroke-width", 1)
+                    .on("mouseover", function(event) {
+                        d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 1.5);
+                        tip.style("opacity", 1)
+                            .html(`<div class="tip-title">${d.dimension} · ${k === "max" ? "Highest Score" : "Average Score"}</div>
+                                <div class="tip-row">Value: <strong style="color:#e9b885">${val}/10</strong></div>
+                                <div class="tip-row">Representative demon: <strong style="color:#e9b885">${d.monster}</strong></div>
+                                <div class="tip-meta">${k === "max" ? "Dimension Ceiling" : "15-Demon Average"} · ${d.dimension}</div>`);
+                    })
+                    .on("mousemove", function(event) {
+                        const rect = wrapEl.getBoundingClientRect();
+                        tip.style("left", (event.clientX - rect.left + 14) + "px")
+                            .style("top", (event.clientY - rect.top + 14) + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
+                        tip.style("opacity", 0);
+                    })
+                    .transition()
+                    .duration(DUR)
+                    .delay(data.indexOf(d) * 80 + (k === "max" ? 0 : 60))
+                    .attr("y", y(val))
+                    .attr("height", innerH - y(val));
+            });
+            // 数值标签
+            g.append("text")
+                .attr("x", x0(d.dimension) + x1("max") + x1.bandwidth() / 2)
+                .attr("y", y(d.max) - 6)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.78rem").style("font-weight", "700").style("fill", "#c8463a")
+                .style("opacity", 0)
+                .text(d.max)
+                .transition().duration(DUR).delay(data.indexOf(d) * 80 + 300).style("opacity", 1);
+            g.append("text")
+                .attr("x", x0(d.dimension) + x1("avg") + x1.bandwidth() / 2)
+                .attr("y", y(d.avg) - 6)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.78rem").style("font-weight", "700").style("fill", "#3a6b8c")
+                .style("opacity", 0)
+                .text(d.avg)
+                .transition().duration(DUR).delay(data.indexOf(d) * 80 + 360).style("opacity", 1);
+        });
+
+        // 图例
+        g.append("rect").attr("x", innerW - 140).attr("y", 0).attr("width", 14).attr("height", 14).attr("fill", "#c8463a");
+        g.append("text").attr("x", innerW - 120).attr("y", 11).style("font-size", "0.82rem").style("fill", "#23201A").text("Highest Score");
+        g.append("rect").attr("x", innerW - 70).attr("y", 0).attr("width", 14).attr("height", 14).attr("fill", "#3a6b8c");
+        g.append("text").attr("x", innerW - 50).attr("y", 11).style("font-size", "0.82rem").style("fill", "#23201A").text("Average Score");
+    }
+
+    // ============= Section 3：散点图 =============
+    function renderScatter() {
+        const svg = d3.select("#scatter-svg");
+        svg.selectAll("*").remove();
+
+        const wrap = document.getElementById("scatter-svg");
+        const width = Math.max(880, wrap.clientWidth || 880);
+        const height = 480;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 30, right: 40, bottom: 60, left: 60 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear().domain([3, 11]).range([0, innerW]);
+        const y = d3.scaleLinear().domain([0, 7.5]).range([innerH, 0]);
+
+        // 轴
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(8).tickFormat(d => d))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+        g.append("g").call(d3.axisLeft(y).ticks(7))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Magic Power (1-10)");
+        g.append("text")
+            .attr("x", -innerH / 2).attr("y", -42)
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Ending (1-10)");
+
+        // Ending average参考线
+        const avgEnding = 4.7;
+        g.append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", y(avgEnding)).attr("y2", y(avgEnding))
+            .attr("stroke", "#c8463a")
+            .attr("stroke-dasharray", "5,4")
+            .attr("stroke-width", 1.5)
+            .attr("opacity", 0.6);
+        g.append("text")
+            .attr("x", innerW - 4).attr("y", y(avgEnding) - 6)
+            .attr("text-anchor", "end")
+            .style("font-size", "0.74rem").style("fill", "#c8463a").style("font-weight", "600")
+            .text(`Ending average ${avgEnding}`);
+
+        // 散点
+        const tip = d3.select("#scatter-tip");
+        const wrapEl = wrap.parentElement;
+        g.selectAll("circle.dot")
+            .data(EMBEDDED_DATA.scatter)
+            .enter()
+            .append("circle")
+            .attr("class", "dot")
+            .attr("cx", d => x(d.magic))
+            .attr("cy", d => y(d.ending))
+            .attr("r", 0)
+            .attr("fill", (d, i) => MONSTER_COLORS[i])
+            .attr("fill-opacity", 0.7)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1.5)
+            .style("cursor", "pointer")
+            .on("mouseover", function(event, d) {
+                d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2.5).attr("r", 9);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${d.monster}</div>
+                        <div class="tip-row">Magic Power: <strong style="color:#e9b885">${d.magic}/10</strong></div>
+                        <div class="tip-row">Ending: <strong style="color:#e9b885">${d.ending}/10</strong></div>
+                        <div class="tip-row">${d.ending <= 2 ? "Tragic ending (killed/escaped)" : d.ending >= 6 ? "Good ending (recruited/escaped)" : "Moderate ending"}</div>
+                        <div class="tip-meta">Magic Power − Ending gap ${d.magic - d.ending > 0 ? "+" : ""}${(d.magic - d.ending).toFixed(0)}</div>`);
+            })
+            .on("mousemove", function(event) {
+                const rect = wrapEl.getBoundingClientRect();
+                tip.style("left", (event.clientX - rect.left + 14) + "px")
+                    .style("top", (event.clientY - rect.top + 14) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1.5).attr("r", 7);
+                tip.style("opacity", 0);
+            })
+            .transition()
+            .duration(DUR)
+            .delay((d, i) => i * 40)
+            .attr("r", 7);
+
+        // 妖怪标签
+        g.selectAll("text.dot-label")
+            .data(EMBEDDED_DATA.scatter)
+            .enter()
+            .append("text")
+            .attr("class", "dot-label")
+            .attr("x", d => x(d.magic))
+            .attr("y", d => y(d.ending) - 12)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.72rem")
+            .style("fill", "#23201A")
+            .style("font-weight", "600")
+            .style("opacity", 0)
+            .text(d => d.monster)
+            .transition()
+            .duration(DUR)
+            .delay((d, i) => i * 40 + 300)
+            .style("opacity", 0.85);
+    }
+
+    // ============= Section 4：桑基图 =============
+    function renderSankey() {
+        const svg = d3.select("#sankey-svg");
+        svg.selectAll("*").remove();
+
+        const wrap = document.getElementById("sankey-svg");
+        const width = Math.max(880, wrap.clientWidth || 880);
+        const height = 460;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const nodes = EMBEDDED_DATA.sankey.nodes.map((n, i) => ({...n, index: i}));
+        const links = EMBEDDED_DATA.sankey.links.map(l => ({
+            source: nodes[l.source],
+            target: nodes[l.target],
+            value: l.value
+        }));
+
+        // 简化版桑基：左右两列节点 + 流向带
+        const leftNodes = nodes.slice(0, 4);
+        const rightNodes = nodes.slice(4, 8);
+        const totalLeft = d3.sum(links, d => d.value);
+        const nodePadding = 18;
+        const nodeHeight = (innerH - nodePadding * (leftNodes.length - 1)) / leftNodes.length;
+
+        // 计算每个节点的流总量
+        const nodeFlow = {};
+        nodes.forEach(n => { nodeFlow[n.name] = 0; });
+        links.forEach(l => {
+            nodeFlow[l.source.name] += l.value;
+            nodeFlow[l.target.name] += l.value;
+        });
+
+        // 左侧节点位置
+        let leftY = 0;
+        leftNodes.forEach(n => {
+            n.x = 0; n.y = leftY; n.w = 28;
+            n.h = nodeHeight;
+            leftY += nodeHeight + nodePadding;
+        });
+        // 右侧节点位置
+        let rightY = 0;
+        const rightH = (innerH - nodePadding * (rightNodes.length - 1)) / rightNodes.length;
+        rightNodes.forEach(n => {
+            n.x = innerW - 28; n.y = rightY; n.w = 28;
+            n.h = rightH;
+            rightY += rightH + nodePadding;
+        });
+
+        const ORIGIN_COLORS = ["#c8463a", "#3a6b8c", "#C9A063", "#6B8E5A"];
+        const END_COLORS = ["#6B8E5A", "#8c2a2a", "#b8862a", "#3a6b8c"];
+
+        // 绘制流向带（贝塞尔）
+        // 累计每节点已用高度
+        const usedTop = {};
+        nodes.forEach(n => usedTop[n.name] = 0);
+
+        links.forEach((l, li) => {
+            const sY = l.source.y + usedTop[l.source.name] * l.source.h / nodeFlow[l.source.name];
+            const sH = l.value * l.source.h / nodeFlow[l.source.name];
+            const tY = l.target.y + usedTop[l.target.name] * l.target.h / nodeFlow[l.target.name];
+            const tH = l.value * l.target.h / nodeFlow[l.target.name];
+            usedTop[l.source.name] += l.value;
+            usedTop[l.target.name] += l.value;
+
+            const sx0 = l.source.x + l.source.w;
+            const sx1 = l.target.x;
+            const midX = (sx0 + sx1) / 2;
+            const path = `M${sx0},${sY} C${midX},${sY} ${midX},${tY} ${sx1},${tY} L${sx1},${tY + tH} C${midX},${tY + tH} ${midX},${sY + sH} ${sx0},${sY + sH} Z`;
+
+            g.append("path")
+                .attr("d", path)
+                .attr("fill", ORIGIN_COLORS[l.source.index])
+                .attr("fill-opacity", 0.35)
+                .attr("stroke", ORIGIN_COLORS[l.source.index])
+                .attr("stroke-width", 0.5)
+                .style("cursor", "pointer")
+                .on("mouseover", function() {
+                    d3.select(this).attr("fill-opacity", 0.6);
+                })
+                .on("mouseout", function() {
+                    d3.select(this).attr("fill-opacity", 0.35);
+                })
+                .append("title")
+                .text(`${l.source.name} → ${l.target.name}: ${l.value} demons`);
+        });
+
+        // 绘制节点矩形
+        leftNodes.forEach((n, i) => {
+            g.append("rect")
+                .attr("x", n.x).attr("y", n.y)
+                .attr("width", n.w).attr("height", n.h)
+                .attr("fill", ORIGIN_COLORS[i])
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 1);
+            g.append("text")
+                .attr("x", n.x - 8).attr("y", n.y + n.h / 2)
+                .attr("text-anchor", "end")
+                .attr("dominant-baseline", "middle")
+                .style("font-size", "0.92rem")
+                .style("font-weight", "700")
+                .style("fill", ORIGIN_COLORS[i])
+                .text(n.name);
+            g.append("text")
+                .attr("x", n.x - 8).attr("y", n.y + n.h / 2 + 16)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.74rem")
+                .style("fill", "#6B6455")
+                .style("font-family", "JetBrains Mono, monospace")
+                .text(`(${nodeFlow[n.name]})`);
+        });
+
+        rightNodes.forEach((n, i) => {
+            g.append("rect")
+                .attr("x", n.x).attr("y", n.y)
+                .attr("width", n.w).attr("height", n.h)
+                .attr("fill", END_COLORS[i])
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 1);
+            g.append("text")
+                .attr("x", n.x + n.w + 8).attr("y", n.y + n.h / 2)
+                .attr("text-anchor", "start")
+                .attr("dominant-baseline", "middle")
+                .style("font-size", "0.92rem")
+                .style("font-weight", "700")
+                .style("fill", END_COLORS[i])
+                .text(n.name);
+            g.append("text")
+                .attr("x", n.x + n.w + 8).attr("y", n.y + n.h / 2 + 16)
+                .attr("text-anchor", "start")
+                .style("font-size", "0.74rem")
+                .style("fill", "#6B6455")
+                .style("font-family", "JetBrains Mono, monospace")
+                .text(`(${nodeFlow[n.name]})`);
+        });
+
+        // 标题
+        g.append("text")
+            .attr("x", 0).attr("y", -6)
+            .style("font-size", "0.85rem")
+            .style("fill", "#C9A063")
+            .style("font-weight", "700")
+            .text("Origin (left) → Ending (right)");
+    }
+
+    // ============= Section 5：Extreme KPI 卡片 =============
+    function renderExtreme() {
+        const grid = d3.select("#extreme-grid");
+        grid.selectAll("*").remove();
+        EMBEDDED_DATA.kpi_extreme.forEach((k, i) => {
+            const card = grid.append("div").attr("class", "extreme-card");
+            card.append("div").attr("class", "ex-label").text(`[${k.label}] · Extreme ${i + 1}/4`);
+            card.append("div").attr("class", "ex-monster").text(k.monster);
+            card.append("div").attr("class", "ex-value").text(k.value);
+            card.append("div").attr("class", "ex-desc").text(k.desc);
+        });
+    }
+
+    // ============= 初始化 =============
+    function renderAll() {
+        renderSwitcher();
+        renderRadar();
+        renderBar();
+        renderScatter();
+        renderSankey();
+        renderExtreme();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAll);
+    } else {
+        renderAll();
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(renderAll, 250);
+    });
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
