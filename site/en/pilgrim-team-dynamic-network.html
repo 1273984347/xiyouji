@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-TZo8K0BVLqUSKyBIl8gDUkFFhm7z/PAU4UpYapZJuBI=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Pilgrim Team Dynamics Network · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    
+svg circle { will-change: transform; }
+</style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        @font-face {
+            font-family: "Noto Serif SC";
+            font-style: normal;
+            font-weight: 400 900;
+            src: local("Noto Serif SC"), local("Source Han Serif SC");
+        }
+        @font-face {
+            font-family: "JetBrains Mono";
+            font-style: normal;
+            font-weight: 400 700;
+            src: local("JetBrains Mono"), local("Fira Code");
+        }
+        
+        
+        
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .cross-page-nav {
+            background: #fffdf8; border: 1px solid var(--line); border-radius: 6px;
+            padding: 10px 16px; margin-bottom: 20px; font-size: 0.88em; color: var(--ink-soft);
+        }
+        .cross-page-nav a { color: var(--accent-2); text-decoration: none; padding: 2px 4px; border-radius: 3px; }
+        .cross-page-nav a:hover { background: #fff8e7; color: var(--accent); }
+        .cross-page-nav a.active { color: var(--accent); font-weight: 700; background: #fff8e7; }
+        .notice {
+            background: #fff8e7; border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        }
+        
+        
+        .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
+        
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
+        
+        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: var(--accent-2);
+            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 4px 0; transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        
+        .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; padding: 12px 16px; background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; }
+        .control-row .ctrl-label { font-size: 0.88em; color: var(--ink-soft); font-weight: 600; }
+        .ctrl-btn { background: var(--paper); border: 1px solid var(--line); color: var(--ink); padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 0.88em; }
+        .ctrl-btn:hover { background: #fff8e7; border-color: var(--accent-soft); }
+        .ctrl-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .chart-wrap { background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; padding: 16px; margin-top: 12px; }
+        .legend-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; font-size: 0.85em; color: var(--ink-soft); }
+        .legend-row .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-row .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .node-card { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 14px; margin-top: 12px; }
+        .node-card h3 { color: var(--accent); margin-bottom: 6px; font-size: 1.05em; }
+        .node-card .role-tag { display: inline-block; background: var(--accent-soft); color: var(--ink); padding: 2px 8px; border-radius: 3px; font-size: 0.78em; margin-right: 4px; margin-bottom: 4px; }
+        .node-card .role-tag.missing { background: #f0d0c0; color: var(--rebel); }
+        .phase-timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 16px; }
+        .phase-card { background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; padding: 12px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .phase-card:hover { border-color: var(--accent-soft); }
+        .phase-card.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .phase-card .phase-name { font-weight: 700; font-size: 0.92em; margin-bottom: 4px; }
+        .phase-card .phase-range { font-size: 0.78em; opacity: 0.85; }
+        .alignment-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.88em; }
+        .alignment-table th, .alignment-table td { padding: 8px 12px; border: 1px solid var(--line); text-align: left; }
+        .alignment-table th { background: #fff8e7; color: var(--accent); font-weight: 600; }
+        .alignment-table .align-high { color: var(--accent-4); font-weight: 600; }
+        .alignment-table .align-mid { color: var(--accent-3); }
+        .alignment-table .align-low { color: var(--rebel); font-weight: 600; }
+        .footer-idx { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 12px; text-align: left; }
+        @media (min-width: 760px) { .footer-idx { grid-template-columns: 1fr 1fr; } }
+        .footer-idx .idx-block { background: rgba(245,233,212,0.06); border: 1px solid rgba(233,184,133,0.2); border-radius: 6px; padding: 10px 14px; }
+        .footer-idx .idx-block h4 { color: #f5e9d4; font-size: 0.82em; margin-bottom: 6px; font-weight: 700; }
+        .footer-idx .idx-block p { color: #e9b885; font-size: 0.78em; line-height: 1.6; margin: 0; }
+        .footer-idx .idx-block a { color: #e9b885; text-decoration: underline; }
+        
+        
+        .svg-tooltip { position: absolute; pointer-events: none; background: var(--ink); color: #f5e9d4; padding: 6px 10px; border-radius: 4px; font-size: 0.82em; opacity: 0; transition: opacity 0.15s; }
+        .svg-tooltip.visible { opacity: 0.95; }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/pilgrim-team-dynamic-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Pilgrim Team Dynamics Network</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Pilgrim Team Dynamics Network</h1>
+        <p class="subtitle">W270 · First V5 page · Cross-Direction Integration Project Theme 1 · Forms a four-direction integration with the W269 A document + W271 E script + W272 S essay</p>
+        <p class="tagline">First integrated visualization of the Belbin team-role theory + Tuckman team-development model + group dynamics</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">EN Home</a>
+            <span class="sep">›</span>
+            <a href="dashboard.html">Dashboard</a>
+            <span class="sep">›</span>
+            <span>Pilgrim Team Dynamics Network</span>
+        </nav>
+        <nav class="cross-page-nav" aria-label="Cross-page navigation">
+            Related pages:
+            <a href="../data/pilgrim-team-psychology-arc.html" lang="zh-CN">Pilgrim Team Psychology Arc</a> ·
+            <a href="../data/character-dynamic-network.html" lang="zh-CN">Character Relationship Network</a> ·
+            <a href="../data/character-sentiment-arc.html" lang="zh-CN">Character Sentiment Arc</a> ·
+            <a href="../data/ming-political-thought-comparison.html" lang="zh-CN">Ming Political Thought Comparison</a>
+        </nav>
+        <div class="notice">
+            <strong>This is the first page of the V5 sub-direction</strong> · Upgraded from the W233 V3 Pilgrim Team Psychology Arc · Expanded from a "psychology arc" to a two-layer "relationship network + theoretical framework" · Integrates the three Belbin/Tuckman/group-dynamics theoretical frameworks · Forms a "document-visualization" intertext with the W269 A document "Pilgrim Team Dynamics Deep-Dive".
+        </div>
+
+        <!-- KPI 卡片 -->
+        <section class="kpi-row" aria-label="Core metrics">
+            <div class="kpi-card">
+                <div class="num">5</div>
+                <div class="label">Team members</div>
+                <div class="detail">Tang Sanzang / Wukong / Bajie / Sha Wujing / White Dragon Horse</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">9</div>
+                <div class="label">Belbin roles</div>
+                <div class="detail">8/9 covered · missing the Monitor Evaluator</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">4</div>
+                <div class="label">Tuckman stages</div>
+                <div class="detail">Forming / Storming / Norming / Performing + Adjourning</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">3</div>
+                <div class="label">Major conflicts</div>
+                <div class="detail">White-Bone Demon / Real vs. Fake Monkey King / Six Robbers</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">14</div>
+                <div class="label">Years on the journey</div>
+                <div class="detail">Zhenguan 13 to Zhenguan 27</div>
+            </div>
+        </section>
+
+        <!-- 板块 1：Belbin 角色雷达图 -->
+        <section class="section" aria-labelledby="sec-belbin">
+            <h2 id="sec-belbin">① Belbin Nine-Role Coverage Radar</h2>
+            <p>The pilgrim team's 5 members cover 8 of the 9 Belbin roles, missing only the "Monitor Evaluator" — precisely the root cause of the team repeatedly falling into the "Wukong decides, Tang Sanzang vetoes" conflict. No one calmly evaluates options, causing decision-making to oscillate.</p>
+            <div class="chart-wrap">
+                <svg id="belbin-radar" width="100%" height="460" role="img" aria-labelledby="belbin-title belbin-desc">
+                    <title id="belbin-title">Belbin Nine-Role Coverage Radar Chart</title>
+                    <desc id="belbin-desc">A radar comparison of the five pilgrim team members' coverage across the nine Belbin roles.</desc>
+                </svg>
+                <div class="svg-tooltip" id="belbin-tip"></div>
+            </div>
+            <div class="legend-row" id="belbin-legend" aria-label="Role legend"></div>
+        </section>
+
+        <!-- 板块 2：五成员关系网络 force-directed -->
+        <section class="section" aria-labelledby="sec-network">
+            <h2 id="sec-network">② Five-Member Relationship Network (D3.js force-directed)</h2>
+            <p>Node size represents the number of Belbin roles (Wukong 3 roles / Tang Sanzang 2 / Bajie 2 / Sha Wujing 2 / White Dragon Horse 1); edge thickness represents interaction intensity (conflict intensity + cooperation intensity). Click a node to expand its role card.</p>
+            <div class="control-row" role="group" aria-label="Network controls">
+                <span class="ctrl-label">View mode:</span>
+                <button class="ctrl-btn active" id="mode-all" aria-pressed="true">All relationships</button>
+                <button class="ctrl-btn" id="mode-conflict" aria-pressed="false">Conflict relationships</button>
+                <button class="ctrl-btn" id="mode-coop" aria-pressed="false">Cooperation relationships</button>
+                <button class="ctrl-btn" id="reset-network">↺ Reset layout</button>
+            </div>
+            <div class="chart-wrap">
+                <svg id="network-svg" width="100%" height="520" role="img" aria-labelledby="network-title network-desc">
+                    <title id="network-title">Five-Member Relationship Network</title>
+                    <desc id="network-desc">A force-directed relationship network of the five members: Tang Sanzang, Wukong, Bajie, Sha Wujing, and the White Dragon Horse.</desc>
+                </svg>
+                <div class="svg-tooltip" id="network-tip"></div>
+            </div>
+            <div id="node-detail" class="node-card" aria-live="polite">
+                <h3>Click a node to view role details</h3>
+                <p>Select a node to view its Belbin role positioning, Tuckman stage traits, and group-dynamics position.</p>
+            </div>
+        </section>
+
+        <!-- 板块 3：Tuckman 四阶段时间线 -->
+        <section class="section" aria-labelledby="sec-tuckman">
+            <h2 id="sec-tuckman">③ Tuckman's Five Stages of Team Development</h2>
+            <p>The pilgrim team's five Tuckman stages: Forming (15 chapters) / Storming (38 chapters) / Norming (23 chapters) / Performing (19 chapters) / Adjourning (1 chapter). The storming stage is abnormally long because the team was forcibly assembled by external forces and lacked a shared value foundation.</p>
+            <div class="phase-timeline" id="phase-timeline" role="tablist" aria-label="Tuckman stage timeline">
+                <div class="phase-card active" data-phase="forming" role="tab" aria-selected="true" tabindex="0">
+                    <div class="phase-name">Forming</div>
+                    <div class="phase-range">Chapters 8–22 · 15 chapters</div>
+                </div>
+                <div class="phase-card" data-phase="storming" role="tab" aria-selected="false" tabindex="0">
+                    <div class="phase-name">Storming</div>
+                    <div class="phase-range">Chapters 22–59 · 38 chapters</div>
+                </div>
+                <div class="phase-card" data-phase="norming" role="tab" aria-selected="false" tabindex="0">
+                    <div class="phase-name">Norming</div>
+                    <div class="phase-range">Chapters 59–81 · 23 chapters</div>
+                </div>
+                <div class="phase-card" data-phase="performing" role="tab" aria-selected="false" tabindex="0">
+                    <div class="phase-name">Performing</div>
+                    <div class="phase-range">Chapters 81–99 · 19 chapters</div>
+                </div>
+                <div class="phase-card" data-phase="adjourning" role="tab" aria-selected="false" tabindex="0">
+                    <div class="phase-name">Adjourning</div>
+                    <div class="phase-range">Chapter 100 · 1 chapter</div>
+                </div>
+            </div>
+            <div id="phase-detail" class="node-card" aria-live="polite" style="margin-top:16px;"></div>
+        </section>
+
+        <!-- 板块 4：群体动力学冲突机制 -->
+        <section class="section" aria-labelledby="sec-dynamic">
+            <h2 id="sec-dynamic">④ Group Dynamics: Goal-Alignment Analysis</h2>
+            <p>The five members' surface goals align (the pilgrimage), but their deep motivations diverge. Only Tang Sanzang has high goal alignment; Bajie's is lowest. This "surface consensus / deep divergence" structure is the root cause of group-dynamics conflict. Every time Bajie proposes splitting the luggage, a deep motivation (returning to lay life) rises to the surface.</p>
+            <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+            <table class="alignment-table" aria-label="Goal-alignment analysis table">
+                <thead>
+                    <tr>
+                        <th scope="col">Member</th>
+                        <th scope="col">Surface goal</th>
+                        <th scope="col">Deep motivation</th>
+                        <th scope="col">Alignment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Tang Sanzang</td><td>Pilgrimage</td><td>Faith (repaying kindness + spreading the Dharma)</td><td class="align-high">High</td></tr>
+                    <tr><td>Wukong</td><td>Pilgrimage</td><td>Atonement (escape Five Elements Mountain)</td><td class="align-mid">Medium</td></tr>
+                    <tr><td>Bajie</td><td>Pilgrimage</td><td>Return to lay life (back to Gao Village)</td><td class="align-low">Low</td></tr>
+                    <tr><td>Sha Wujing</td><td>Pilgrimage</td><td>Remission of guilt (avoid the flying-sword impalement)</td><td class="align-mid">Medium</td></tr>
+                    <tr><td>White Dragon Horse</td><td>Pilgrimage</td><td>Resurrection (escape the death penalty)</td><td class="align-mid">Medium</td></tr>
+                </tbody>
+            </table>
+            </div>
+            <p style="margin-top:14px;"><strong>Key finding</strong>: The decision triangle (Tang Sanzang → Wukong → Bajie) overlaps with the conflict triangle (Tang Sanzang vs. Wukong → Bajie echoes) — Wukong is both the executor and the conflict party. This role overlap means every execution by Wukong may trigger conflict.</p>
+            <p style="margin-top:8px;"><strong>Power structure</strong>: The separation of external legitimacy (Guanyin / Tathāgata's commission → Tang Sanzang) from internal legitimacy (greatest ability → Wukong) is the power-structure root cause of the "White-Bone Demon" conflict.</p>
+        </section>
+
+        <!-- 板块 5：跨方向整合说明 -->
+        <section class="section" aria-labelledby="sec-integration">
+            <h2 id="sec-integration">⑤ Cross-Direction Integration Project Theme 1</h2>
+            <p>This page is the V-direction output of <strong>Cross-Direction Integration Project Theme 1 (Pilgrim Team Dynamics)</strong>.</p>
+            <p>The four-direction integration outputs:</p>
+            <ul style="margin-left:20px; color:var(--ink-soft); font-size:0.9em;">
+                <li><strong>W269 A direction</strong>: <a href="../../docs/02-人物深度分析/取经团队动力学深化专题.md">Pilgrim Team Dynamics Deep-Dive</a> · Belbin + Tuckman + group-dynamics frameworks</li>
+                <li><strong>W270 V direction</strong>: this page · force-directed relationship network + nine-role radar + five-stage timeline</li>
+                <li><strong>W271 E direction</strong>: a11y deepening (WCAG 2.2 SC 2.4.13 visible focus + screen reader + keyboard navigation)</li>
+                <li><strong>W272 S direction</strong>: psychology interdisciplinary analysis essay (team-dynamics perspective · 2000 characters)</li>
+            </ul>
+            <p style="margin-top:10px;">This page and pilgrim-team-psychology-arc.html form a two-layer "psychology arc / relationship network" structure. The psychology arc focuses on individual psychological evolution, while the relationship network (this page) focuses on members' interaction structure. Observing the two layers together reveals that the storming phase (ch22-59) is the key hub where the two layers resonate.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/pilgrim-team-dynamic-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // ============= EMBEDDED_DATA =============
+    const EMBEDDED_DATA = {
+        meta: {title: "Pilgrim Team Dynamics Network", version: "v2.2.48", w_id: "W270", direction: "V5"},
+        kpi: [
+            {label: "Team members", value: 5, unit: "members"},
+            {label: "Belbin roles", value: 9, unit: "roles"},
+            {label: "Tuckman stages", value: 4, unit: "stages"},
+            {label: "Major conflicts", value: 3, unit: "conflicts"},
+            {label: "Years on the journey", value: 14, unit: "years"}
+        ],
+        belbin: [
+            {character: "Tang Sanzang", coordinator: 9, completer: 7, shaper: 3, plant: 4, specialist: 2, ri: 3, tw: 5, me: 2, implementer: 4},
+            {character: "Wukong", coordinator: 4, completer: 3, shaper: 9, plant: 8, specialist: 9, ri: 6, tw: 4, me: 3, implementer: 5},
+            {character: "Bajie", coordinator: 3, completer: 2, shaper: 4, plant: 3, specialist: 4, ri: 8, tw: 8, me: 3, implementer: 4},
+            {character: "Sha Wujing", coordinator: 3, completer: 7, shaper: 2, plant: 2, specialist: 3, ri: 3, tw: 6, me: 2, implementer: 9},
+            {character: "White Dragon Horse", coordinator: 2, completer: 3, shaper: 2, plant: 2, specialist: 8, ri: 2, tw: 4, me: 2, implementer: 5}
+        ],
+        network: {
+            nodes: [
+                {id: "Tang Sanzang", roles: 2, color: "#c8463a", belbin: "Coordinator + Completer", tuckman: "Goal clarification", dynamic: "External legitimacy"},
+                {id: "Wukong", roles: 3, color: "#8c2a2a", belbin: "Shaper + Plant + Specialist", tuckman: "Driving action", dynamic: "Internal legitimacy"},
+                {id: "Bajie", roles: 2, color: "#C9A063", belbin: "Resource Investigator + Teamworker", tuckman: "Lightening the mood", dynamic: "Motivational divergence"},
+                {id: "Sha Wujing", roles: 2, color: "#6B8E5A", belbin: "Implementer + Completer", tuckman: "Steady execution", dynamic: "Silent buffer"},
+                {id: "White Dragon Horse", roles: 1, color: "#3a6b8c", belbin: "Specialist", tuckman: "Acting in crisis", dynamic: "Role rigidification"}
+            ],
+            links: [
+                {source: "Tang Sanzang", target: "Wukong", conflict: 9, coop: 6, label: "Authority vs. capability"},
+                {source: "Tang Sanzang", target: "Bajie", conflict: 3, coop: 5, label: "Discipline vs. wavering"},
+                {source: "Tang Sanzang", target: "Sha Wujing", conflict: 1, coop: 7, label: "Leadership vs. execution"},
+                {source: "Tang Sanzang", target: "White Dragon Horse", conflict: 1, coop: 4, label: "Riding"},
+                {source: "Wukong", target: "Bajie", conflict: 5, coop: 8, label: "Frontline vs. support"},
+                {source: "Wukong", target: "Sha Wujing", conflict: 2, coop: 7, label: "Frontline vs. guarding the master"},
+                {source: "Wukong", target: "White Dragon Horse", conflict: 1, coop: 3, label: "Rare interaction"},
+                {source: "Bajie", target: "Sha Wujing", conflict: 2, coop: 6, label: "Marginal interaction"},
+                {source: "Bajie", target: "White Dragon Horse", conflict: 1, coop: 2, label: "Rare interaction"},
+                {source: "Sha Wujing", target: "White Dragon Horse", conflict: 1, coop: 3, label: "Silent parallelism"}
+            ]
+        },
+        phases: {
+            forming: {name: "Forming", range: "Chapters 8–22 · 15 chapters", feature: "Guanyin assembles the team and all five members are in place. Members' understanding of the team goal is vague (Wukong = atonement, Bajie = stumbled in, Sha Wujing = redemption). Formed on the surface, not yet formed at depth.", key_events: ["Ch. 8 Guanyin is commissioned to seek the scripture pilgrim", "Ch. 14 Wukong is received at Five Elements Mountain", "Ch. 15 the White Dragon Horse is received at Eagle's Sorrow Gorge", "Ch. 19 Bajie is received at Gao Village", "Ch. 22 Sha Wujing is received at the Flowing Sands River"]},
+            storming: {name: "Storming", range: "Chapters 22–59 · 38 chapters", feature: "Three major conflicts in quick succession. Each conflict brings deep-seated motivations to the surface. Conflict is not a sign of team failure but the necessary process through which a team builds trust — yet the pilgrim team's storming phase dragged on too long, because the absence of a Monitor Evaluator role meant conflicts could not be calmly mediated.", key_events: ["Ch. 14 the Six Robbers conflict", "Ch. 27 the White-Bone Demon conflict", "Ch. 57–58 the Real vs. Fake Monkey King conflict"]},
+            norming: {name: "Norming", range: "Chapters 59–81 · 23 chapters", feature: "Role boundaries clarify. Wukong no longer challenges Tang Sanzang's authority, and Tang Sanzang no longer lightly banishes his disciple. But the divergence in deep motivations remains unresolved — this is the fragility of the norming phase.", key_events: ["Ch. 59–61 borrowing the fan at Flaming Mountain", "Ch. 65–66 Little Thunderclap Monastery", "Ch. 75–77 Lion-Camel Ridge"]},
+            performing: {name: "Performing", range: "Chapters 81–99 · 19 chapters", feature: "The team shifts from passive reaction to proactive execution. But the cost of the performing phase is role rigidification — the White Dragon Horse falls completely silent, and Sha Wujing is thoroughly marginalized. Efficiency is achieved at the expense of members' potential.", key_events: ["Ch. 88 teaching disciples in Yuhua Prefecture", "Ch. 93–95 the Jade Hare of the Tianzhu Kingdom", "Ch. 98 shedding the shell at the Cloud-Piercing Ford"]},
+            adjourning: {name: "Adjourning", range: "Chapter 100 · 1 chapter", feature: "The team dissolves immediately after the goal is achieved. This is because the team is task-oriented (the pilgrimage), not relationship-oriented — once the task is complete, the relationship ends.", key_events: ["Ch. 100 the five saints attain enlightenment"]}
+        }
+    };
+
+    // ============= Belbin 雷达图 =============
+    (function renderBelbinRadar() {
+        const svg = d3.select("#belbin-radar");
+        const tip = d3.select("#belbin-tip");
+        const width = +svg.attr("width") || 800;
+        const height = +svg.attr("height");
+        const cx = width / 2, cy = height / 2;
+        const radius = Math.min(width, height) / 2 - 60;
+        const roles = ["coordinator", "completer", "shaper", "plant", "specialist", "ri", "tw", "me", "implementer"];
+        const roleLabels = ["Coordinator", "Completer", "Shaper", "Plant", "Specialist", "Resource Investigator", "Teamworker", "Monitor Evaluator", "Implementer"];
+        const colors = {"Tang Sanzang": "#c8463a", "Wukong": "#8c2a2a", "Bajie": "#C9A063", "Sha Wujing": "#6B8E5A", "White Dragon Horse": "#3a6b8c"};
+        const levels = [2, 4, 6, 8, 10];
+        const g = svg.append("g").attr("transform", `translate(${cx},${cy})`);
+
+        // 网格圆
+        levels.forEach(lv => {
+            const r = (lv / 10) * radius;
+            g.append("circle").attr("r", r).attr("fill", "none").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "3,3");
+            g.append("text").attr("y", -r).attr("text-anchor", "middle").attr("font-size", "10px").attr("fill", "#6B6455").text(lv);
+        });
+
+        // 轴线 + 标签
+        roles.forEach((role, i) => {
+            const angle = (i / roles.length) * 2 * Math.PI - Math.PI / 2;
+            const x2 = Math.cos(angle) * radius, y2 = Math.sin(angle) * radius;
+            g.append("line").attr("x1", 0).attr("y1", 0).attr("x2", x2).attr("y2", y2).attr("stroke", "#d9cdb8");
+            const lx = Math.cos(angle) * (radius + 24), ly = Math.sin(angle) * (radius + 24);
+            g.append("text").attr("x", lx).attr("y", ly).attr("text-anchor", "middle").attr("dominant-baseline", "middle")
+                .attr("font-size", "11px").attr("fill", "#23201A").text(roleLabels[i]);
+        });
+
+        // 角色多边形
+        EMBEDDED_DATA.belbin.forEach(d => {
+            const points = roles.map((role, i) => {
+                const angle = (i / roles.length) * 2 * Math.PI - Math.PI / 2;
+                const val = d[role];
+                const r = (val / 10) * radius;
+                return [Math.cos(angle) * r, Math.sin(angle) * r];
+            });
+            g.append("polygon").attr("points", points.map(p => p.join(",")).join(" "))
+                .attr("fill", colors[d.character]).attr("fill-opacity", 0.12)
+                .attr("stroke", colors[d.character]).attr("stroke-width", 1.8)
+                .style("cursor", "pointer")
+                .on("mouseover", (e) => {
+                    tip.classed("visible", true).html(`<strong>${d.character}</strong>`);
+                })
+                .on("mousemove", (e) => {
+                    tip.style("left", (e.pageX + 10) + "px").style("top", (e.pageY - 10) + "px");
+                })
+                .on("mouseout", () => tip.classed("visible", false));
+        });
+
+        // 图例
+        const legend = d3.select("#belbin-legend");
+        Object.entries(colors).forEach(([name, color]) => {
+            legend.append("div").attr("class", "legend-item").html(
+                `<span class="legend-dot" style="background:${color}"></span>${name}`
+            );
+        });
+    })();
+
+    // ============= 关系网络 force-directed =============
+    let networkSimulation, networkSvg;
+    (function renderNetwork() {
+        networkSvg = d3.select("#network-svg");
+        const tip = d3.select("#network-tip");
+        const width = networkSvg.node().getBoundingClientRect().width;
+        const height = +networkSvg.attr("height");
+        const data = JSON.parse(JSON.stringify(EMBEDDED_DATA.network));
+
+        networkSimulation = d3.forceSimulation(data.nodes).alphaDecay(0.08).velocityDecay(0.5)
+            .force("charge", d3.forceManyBody().strength(-800))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("link", d3.forceLink(data.links).id(d => d.id).distance(d => 120 + (10 - Math.max(d.conflict, d.coop)) * 10))
+            .force("collide", d3.forceCollide(d => 25 + d.roles * 6));
+
+          // 性能：边层改 Canvas 叠加，避免每帧 N×4 几何属性写入触发 SVG 重排
+  var _svgEl = networkSvg.node();
+  var _lcParent = _svgEl.parentNode;
+  if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
+  if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas'); if (_oc) _oc.remove(); }
+  var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var _lcW = _svgEl.clientWidth || 800, _lcH = _svgEl.clientHeight || 540;
+  var _vb = (_svgEl.getAttribute('viewBox') || '').split(/[\s,]+/);
+  var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_svgEl.getAttribute('width') || _lcW);
+  var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_svgEl.getAttribute('height') || _lcH);
+  var linkCanvas = document.createElement('canvas');
+  linkCanvas.className = 'link-canvas';
+  linkCanvas.width = Math.round(_lcW * _dpr);
+  linkCanvas.height = Math.round(_lcH * _dpr);
+  linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _svgEl.offsetLeft + 'px;top:' + _svgEl.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+  if (_lcParent) _lcParent.insertBefore(linkCanvas, _svgEl);
+  _svgEl.style.position = 'relative';
+  _svgEl.style.zIndex = '1';
+  var lctx = linkCanvas.getContext('2d');
+  lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
+  var linkSels = [];
+  function drawLinks() {
+    lctx.clearRect(0, 0, _cw, _ch);
+    for (var s = 0; s < linkSels.length; s++) {
+      var sel = linkSels[s], data = sel.data(), lines = sel.nodes();
+      for (var i = 0; i < data.length; i++) {
+        var d = data[i], el = lines[i];
+        if (!d || !d.source || d.source.x == null) continue;
+        lctx.beginPath();
+        lctx.moveTo(d.source.x, d.source.y);
+        lctx.lineTo(d.target.x, d.target.y);
+        lctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
+        lctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
+        var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
+        lctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
+        var da = el.getAttribute('stroke-dasharray');
+        lctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
+        lctx.stroke();
+      }
+    }
+    lctx.setLineDash([]);
+    lctx.globalAlpha = 1;
+  }
+const link = networkSvg.append("g").selectAll("line").data(data.links).enter().append("line")
+            .attr("stroke", "#d9cdb8").attr("stroke-width", d => Math.max(d.conflict, d.coop) * 0.6); link.style('display','none'); linkSels.push(link);
+
+        const node = networkSvg.append("g").selectAll("circle").data(data.nodes).enter().append("circle")
+            .attr("r", d => 18 + d.roles * 5).attr("fill", d => d.color).attr("stroke", "#fff").attr("stroke-width", 2)
+            .style("cursor", "pointer").attr("tabindex", 0);
+
+        const label = networkSvg.append("g").selectAll("text").data(data.nodes).enter().append("text")
+            .text(d => d.id).attr("text-anchor", "middle").attr("font-size", "13px").attr("fill", "#fff").attr("font-weight", "700")
+            .style("pointer-events", "none").attr("dy", 4);
+
+        node.on("click", (e, d) => showNodeDetail(d))
+            .on("mouseover", (e, d) => {
+                tip.classed("visible", true).html(`<strong>${d.id}</strong> · ${d.belbin}`);
+            })
+            .on("mousemove", (e) => tip.style("left", (e.pageX + 10) + "px").style("top", (e.pageY - 10) + "px"))
+            .on("mouseout", () => tip.classed("visible", false));
+
+        networkSimulation.on("tick", () => {
+            drawLinks();;
+            node.attr('transform', d => `translate(${d.x},${d.y})`);
+            label.attr('transform', d => `translate(${d.x},${d.y})`);
+        });
+
+        // 视图切换
+        function switchMode(mode) {
+            link.attr("stroke", d => {
+                if (mode === "conflict") return d.conflict > d.coop ? "#c8463a" : "#e8dfd0";
+                if (mode === "coop") return d.coop > d.conflict ? "#6B8E5A" : "#e8dfd0";
+                return "#d9cdb8";
+            }).attr("stroke-width", d => {
+                if (mode === "conflict") return d.conflict * 0.8;
+                if (mode === "coop") return d.coop * 0.8;
+                return Math.max(d.conflict, d.coop) * 0.6;
+            });
+        }
+        d3.select("#mode-all").on("click", function() { switchMode("all"); setActiveMode(this); });
+        d3.select("#mode-conflict").on("click", function() { switchMode("conflict"); setActiveMode(this); });
+        d3.select("#mode-coop").on("click", function() { switchMode("coop"); setActiveMode(this); });
+        function setActiveMode(btn) {
+            d3.selectAll(".control-row .ctrl-btn").classed("active", false).attr("aria-pressed", "false");
+            d3.select(btn).classed("active", true).attr("aria-pressed", "true");
+        }
+
+        d3.select("#reset-network").on("click", () => {
+            data.nodes.forEach(n => { n.x = null; n.y = null; n.vx = null; n.vy = null; });
+            networkSimulation.alpha(1).restart();
+        });
+    })();
+
+    function showNodeDetail(d) {
+        const detail = d3.select("#node-detail");
+        const roles = d.belbin.split("+");
+        const roleTags = roles.map(r => `<span class="role-tag">${r}</span>`).join("");
+        detail.html(`
+            <h3>${d.id}</h3>
+            <p><strong>Belbin roles</strong>: ${roleTags}</p>
+            <p><strong>Tuckman stage traits</strong>: ${d.tuckman}</p>
+            <p><strong>Group-dynamics position</strong>: ${d.dynamic}</p>
+            <p><strong>Belbin weakness</strong>: ${getShortboard(d.id)}</p>
+        `);
+    }
+    function getShortboard(name) {
+        const map = {
+            "Tang Sanzang": "The Coordinator requires authority. Tang Sanzang's authority comes from external legitimacy (Guanyin's commission) rather than internal legitimacy (personal ability) — which causes Wukong to continually challenge it.",
+            "Wukong": "The Shaper is prone to impatience and defiance of superiors. Three expulsions (the Six Robbers / the White-Bone Demon / the Real vs. Fake Monkey King) all stemmed from the Shaper role in excess — pushing too hard and challenging the Coordinator's authority.",
+            "Bajie": "The Resource Investigator is prone to wavering and lust. He repeatedly proposes splitting the luggage. The Teamworker tends to avoid conflict — when Wukong clashes with Tang Sanzang, he usually stays silent or sides with Tang Sanzang.",
+            "Sha Wujing": "The Implementer tends to lack initiative and speak little. Across the 100 chapters he has very few lines and never speaks up on key decisions. This is the knock-on effect of the team lacking a Monitor Evaluator.",
+            "White Dragon Horse": "The Specialist has little screen time and is passive. Across 100 chapters he acts on his own initiative only once, in Chapter 30. This is the extreme case of team role rigidification — the Specialist is locked into a transport function."
+        };
+        return map[name] || "";
+    }
+
+    // ============= Tuckman 阶段时间线 =============
+    (function renderPhases() {
+        const phases = EMBEDDED_DATA.phases;
+        const detail = d3.select("#phase-detail");
+        function showPhase(key) {
+            const p = phases[key];
+            const events = p.key_events.map(e => `<li>${e}</li>`).join("");
+            detail.html(`
+                <h3>${p.name}</h3>
+                <p><strong>Chapter range</strong>: ${p.range}</p>
+                <p><strong>Stage traits</strong>: ${p.feature}</p>
+                <p><strong>Key events</strong>:</p>
+                <ul style="margin-left:20px; color:var(--ink-soft); font-size:0.88em;">${events}</ul>
+            `);
+            d3.selectAll(".phase-card").classed("active", false).attr("aria-selected", "false");
+            d3.select(`.phase-card[data-phase="${key}"]`).classed("active", true).attr("aria-selected", "true");
+        }
+        d3.selectAll(".phase-card").on("click", function() {
+            showPhase(this.getAttribute("data-phase"));
+        }).on("keydown", function(e) {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                showPhase(this.getAttribute("data-phase"));
+            }
+        });
+        showPhase("forming");
+    })();
+    </script>
+<script id="audit-labelavoid">
+(function(){
+  function avoid(){
+    document.querySelectorAll("svg").forEach(function(svg){
+      var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){var r=t.getBoundingClientRect();return r.width>0&&r.height>0;});
+      var R=ts.map(function(t){return t.getBoundingClientRect();});
+      for(var i=0;i<ts.length;i++)for(var j=i+1;j<ts.length;j++){
+        var a=R[i],b=R[j];
+        var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+        var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+        if(ix*iy<=0)continue;
+        var area=Math.min(a.width*a.height,b.width*b.height);
+        if(area>0 && (ix*iy)/area>0.5){
+          var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+          if(hide.style.display!=="none") hide.style.display="none";
+        }
+      }
+    });
+  }
+  window.__avoidOverlap=avoid;
+  function run(){try{avoid();}catch(e){}}
+  window.addEventListener("load",function(){
+    [3000,6000,9000,12000].forEach(function(ms){setTimeout(run,ms);});
+  });
+})();
+</script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

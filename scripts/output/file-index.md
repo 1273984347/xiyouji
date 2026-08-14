@@ -8,6 +8,14 @@
 
 ---
 
+## W432 英文站续译 batch10（2026-08-14·v2.3.47）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/pilgrim-team-dynamic-network.html / counterfactual.html / ming-political-thought-comparison.html / monster-background.html / cultural-misreading.html | W432 | v2.3.47 新增·并行 subagent 英文化 5 页（_validate_en.py 全过） |
+| site/sitemap.xml | W432 | v2.3.47 修改·补 5 个 en 页（167→172 页） |
+| site/**/*.html（5 页） | W432 | v2.3.47 修改·generate_csp.py 重生成 CSP（177 页·794 内联哈希） |
+
 ## W431 英文站续译 batch9（2026-08-14·v2.3.46）
 
 | 文件 | W | 说明 |
