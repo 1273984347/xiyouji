@@ -8,6 +8,14 @@
 
 ---
 
+## W428 英文站续译 batch6（2026-08-14·v2.3.43）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/century-dialogue.html / data-explorer.html / language-style-radar.html / famous-time-travel.html / search.html | W428 | v2.3.43 新增·5 张可视化页英文化（EN 导航/页脚重建 + chrome/script 翻译·_validate_en.py 全过） |
+| site/sitemap.xml | W428 | v2.3.43 修改·补 5 个 en 页（154→159 页） |
+| site/**/*.html（5 页） | W428 | v2.3.43 修改·generate_csp.py 重生成 CSP（164 页·711 内联哈希） |
+
 ## W427 内容质量残留清理（2026-08-14·v2.3.42）
 
 | 文件 | W | 说明 |

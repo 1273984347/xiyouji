@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- W236-E E7 SEO 基础设施·sitemap·154 页面（W417 补全漏收录页） -->
+<!-- W236-E E7 SEO 基础设施·sitemap·159 页面（W427 英文站 batch6 新增 5 页） -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://1273984347.github.io/xiyouji/curated.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/dashboard.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
@@ -90,7 +90,8 @@
   <url><loc>https://1273984347.github.io/xiyouji/en/81-hardships.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/academic-papers.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/bestiary.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://1273984347.github.io/xiyouji/en/chapter-stats.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://1273984347.github.io/xiyouji/en/century-dialogue.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://1273984347.github.io/xiyouji/en/chapter-stats.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/chapter-structure-graph.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/chapters-map.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/character-appearance.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -105,7 +106,8 @@
   <url><loc>https://1273984347.github.io/xiyouji/en/character-wukong.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/characters.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/dashboard.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://1273984347.github.io/xiyouji/en/dukou-engine.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://1273984347.github.io/xiyouji/en/data-explorer.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://1273984347.github.io/xiyouji/en/dukou-engine.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/essay-ai-era.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/essay-buddhist-chan.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/essay-chapter-couplets.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -142,14 +144,17 @@
   <url><loc>https://1273984347.github.io/xiyouji/en/essay-three-teachings.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/essay-version-evolution.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/essay-zen-koan-vs-neidan.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://1273984347.github.io/xiyouji/en/guide.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://1273984347.github.io/xiyouji/en/famous-time-travel.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://1273984347.github.io/xiyouji/en/guide.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/hardship-heatmap.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/index.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/journey-geo-semiotics.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/journey-route.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://1273984347.github.io/xiyouji/en/methodology.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://1273984347.github.io/xiyouji/en/language-style-radar.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://1273984347.github.io/xiyouji/en/methodology.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/narrative-rhythm-curve.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://1273984347.github.io/xiyouji/en/site-map.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+    <url><loc>https://1273984347.github.io/xiyouji/en/search.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://1273984347.github.io/xiyouji/en/site-map.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/tribulations.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/visualizations.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/guide.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
