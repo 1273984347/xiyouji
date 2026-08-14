@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-//ro7ExtXftlDCuY7g5urUa0rKfE0p7Y2hJqwyLJeKA=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Four-dimensional Research Network · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    
+svg circle { will-change: transform; }
+</style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+    .cross-page-nav {
+        background: var(--paper-card); border: 1px solid var(--line); border-left: 4px solid var(--cinnabar);
+        padding: 12px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 4px;
+    }
+    .cross-page-nav a { color: var(--indigo); margin-right: 16px; text-decoration: none; }
+    .cross-page-nav a:hover { text-decoration: underline; }
+    
+    
+    .kpi-card.power { border-top-color: var(--indigo); }
+    .kpi-card.culture { border-top-color: var(--gold); }
+    .kpi-card.time { border-top-color: var(--jade); }
+    .kpi-card.chart { border-top-color: var(--ink); }
+    .kpi-card .kpi-label { font-size: 0.82em; color: var(--ink-soft); margin-bottom: 4px; }
+    .kpi-card .kpi-value { font-size: 1.7em; font-weight: 700; color: var(--ink); font-family: "JetBrains Mono", monospace; }
+    .kpi-card .kpi-note { font-size: 0.75em; color: var(--ink-soft); margin-top: 4px; }
+    
+    .section h2 {
+        font-size: 1.4em; color: var(--ink); margin-bottom: 6px;
+        border-bottom: 2px solid var(--line); padding-bottom: 8px;
+    }
+    .section h2 .badge {
+        display: inline-block; font-size: 0.6em; padding: 2px 8px; border-radius: 10px;
+        margin-left: 8px; vertical-align: middle; color: #fff;
+    }
+    .section h2 .badge.cinnabar { background: var(--cinnabar); }
+    .section h2 .badge.indigo { background: var(--indigo); }
+    .section h2 .badge.gold { background: var(--gold); }
+    .section h2 .badge.jade { background: var(--jade); }
+    .section h2 .en { font-size: 0.6em; color: var(--ink-soft); font-family: "JetBrains Mono", monospace; margin-left: 10px; }
+    .section .lead { color: var(--ink-soft); font-size: 0.92em; margin-bottom: 14px; }
+    .chart-box { width: 100%; overflow-x: auto; background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 8px; }
+    .chart-box svg { display: block; margin: 0 auto; }
+    .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; font-size: 0.85em; justify-content: center; color: var(--ink-soft); }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
+    
+    
+    
+    footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
+    footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
+    @media (max-width: 768px) {
+        
+        
+    }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/four-dimensional-research-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Four-dimensional Research Network</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Four-dimensional Research Network</h1>
+        <p class="subtitle">Four-dimensional Research Network · Cultivation-Mind × Power-Politics × Cultural-Memory × Time-Narrative</p>
+        <p class="tagline">W282 · Direction V · Cross-direction Integration Theme 4 · Four-dimensional Research Integration Map</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">EN Home</a><span class="sep">›</span>
+        <a href="dashboard.html">Dashboard</a><span class="sep">›</span>
+        <a href="four-dimensional-research-network.html">Four-dimensional Research Network</a>
+    </nav>
+
+    <div class="cross-page-nav">
+        <a href="dashboard.html">← Back to Dashboard</a>
+        <a href="../data/theological-intervention-network.html" lang="zh-CN">View Theological Intervention Network →</a>
+        <a href="../data/monster-ecology-network.html" lang="zh-CN">View Monster Ecology Network →</a>
+    </div>
+
+    <div class="kpi-row">
+        <div class="kpi-card">
+            <div class="kpi-label">Research Dimensions</div>
+            <div class="kpi-value">4</div>
+            <div class="kpi-note">Cultivation-Mind / Power-Politics / Cultural-Memory / Time-Narrative</div>
+        </div>
+        <div class="kpi-card power">
+            <div class="kpi-label">Theorists</div>
+            <div class="kpi-value">12</div>
+            <div class="kpi-note">3 per dimension: Wang Yangming / Freud / Jung, etc.</div>
+        </div>
+        <div class="kpi-card culture">
+            <div class="kpi-label">Key line numbers</div>
+            <div class="kpi-value">8</div>
+            <div class="kpi-note">Ch. 1 line 1 to Ch. 100 line 9140</div>
+        </div>
+        <div class="kpi-card time">
+            <div class="kpi-label">Visualizations</div>
+            <div class="kpi-value">5</div>
+            <div class="kpi-note">Radar / Heatmap / Network / Timeline / Spectrum</div>
+        </div>
+    </div>
+
+    <!-- 1. Four-dimensional radar chart -->
+    <section class="section">
+        <h2>1. Four-dimensional Research Radar Overlay <span class="badge cinnabar">Mind</span><span class="badge indigo">Power</span><span class="badge gold">Memory</span><span class="badge jade">Time</span><span class="en">Radar Overlay</span></h2>
+        <p class="lead">4 dimensions × 5 indicators (Theoretical Depth / Textual Evidence / Modern Relevance / Cross-dimension Resonance / Pedagogical Value) · radar overlay comparison</p>
+        <div class="chart-box">
+            <svg width="100%" height="500" id="radar-svg" role="img" aria-label="Four-dimensional research radar overlay"></svg>
+        </div>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--cinnabar)"></div>Cultivation-Mind (Wang Yangming / Freud / Jung)</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--indigo)"></div>Power-Politics (Foucault / Weber / Machiavelli)</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--gold)"></div>Cultural-Memory (Assmann / Halbwachs / Jauss)</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--jade)"></div>Time-Narrative (Heidegger / Genette / Ricoeur)</div>
+        </div>
+    </section>
+
+    <!-- 2. 12 theorists × 4 dimensions matrix heatmap -->
+    <section class="section">
+        <h2>2. 12 Theorists × 4 Dimensions Contribution Heatmap <span class="en">Contribution Heatmap</span></h2>
+        <p class="lead">Contribution of 12 theorists across 4 dimensions (0–10) · the main diagonal marks each theorist's home-dimension high contribution, with cross-dimension resonance visible on the off-diagonal</p>
+        <div class="chart-box">
+            <svg width="100%" height="460" id="heatmap-svg" role="img" aria-label="12 theorists × 4 dimensions contribution heatmap"></svg>
+        </div>
+    </section>
+
+    <!-- 3. Four-dimensional integration network -->
+    <section class="section">
+        <h2>3. Four-dimensional Integration Network · Force-directed Graph <span class="en">Force-directed Network</span></h2>
+        <p class="lead">4 dimension nodes + 12 theorist nodes + 8 line-number nodes · node size = association strength, edge thickness = resonance strength</p>
+        <div class="chart-box">
+            <svg width="100%" height="620" id="network-svg" role="img" aria-label="Four-dimensional integration force-directed network"></svg>
+        </div>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--cinnabar)"></div>Cultivation-Mind dimension</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--indigo)"></div>Power-Politics dimension</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--gold)"></div>Cultural-Memory dimension</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--jade)"></div>Time-Narrative dimension</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:var(--ink-soft)"></div>line-number nodes</div>
+        </div>
+    </section>
+
+    <!-- 4. 100-chapter four-dimensional intensity timeline -->
+    <section class="section">
+        <h2>4. 100-Chapter Four-dimensional Intensity Timeline · Stacked Area Chart <span class="en">Stacked Area Timeline</span></h2>
+        <p class="lead">100 chapters along the pilgrimage route · 4-dimension narrative intensity over time · 11 sample points reveal the four-dimensional resonance rhythm</p>
+        <div class="chart-box">
+            <svg width="100%" height="440" id="timeline-svg" role="img" aria-label="100-chapter four-dimensional intensity stacked area chart"></svg>
+        </div>
+    </section>
+
+    <!-- 5. Four-dimensional spectrum -->
+    <section class="section">
+        <h2>5. Four-dimensional Research Spectrum · Polar Chart <span class="en">Polar Spectrum</span></h2>
+        <p class="lead">Cultivation-Mind—Power-Politics—Cultural-Memory—Time-Narrative four-axis spectrum · 12 theorists placed along their home axis, radial distance = cross-dimension resonance</p>
+        <div class="chart-box">
+            <svg width="100%" height="540" id="spectrum-svg" role="img" aria-label="Four-dimensional research spectrum polar chart"></svg>
+        </div>
+    </section>
+</div>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/four-dimensional-research-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+// ============= Embedded Data =============
+const EMBEDDED_DATA = {
+    meta: {title: "Four-dimensional Research Network", version: "v2.2.51", w_id: "W282", direction: "V", theme: "Cross-direction Integration Theme 4 · Four-dimensional Research Integration"},
+    dimensions: [
+        {key: "mind",     name: "Cultivation-Mind", en: "Cultivation-Mind",    color: "#c8392c"},
+        {key: "power",    name: "Power-Politics", en: "Power-Politics",      color: "#2c5f7c"},
+        {key: "culture",  name: "Cultural-Memory", en: "Cultural-Memory",     color: "#c89b3c"},
+        {key: "time",     name: "Time-Narrative", en: "Time-Narrative",      color: "#6B8E5A"}
+    ],
+    indicators: ["Theoretical Depth", "Textual Evidence", "Modern Relevance", "Cross-dimension Resonance", "Pedagogical Value"],
+    // 1. Radar data
+    radar: [
+        {name: "Cultivation-Mind", color: "#c8392c", values: [5, 5, 4, 4, 5]},
+        {name: "Power-Politics", color: "#2c5f7c", values: [4, 5, 5, 4, 4]},
+        {name: "Cultural-Memory", color: "#c89b3c", values: [4, 4, 5, 5, 4]},
+        {name: "Time-Narrative", color: "#6B8E5A", values: [5, 4, 4, 5, 5]}
+    ],
+    // 2. Heatmap: 12 theorists × 4 dimensions
+    theorists: [
+        {name: "Wang Yangming",    dim: "mind",    values: {mind: 10, power: 4, culture: 5, time: 3}},
+        {name: "Freud",  dim: "mind",    values: {mind: 9,  power: 2, culture: 4, time: 3}},
+        {name: "Jung",      dim: "mind",    values: {mind: 9,  power: 3, culture: 6, time: 4}},
+        {name: "Foucault",      dim: "power",   values: {mind: 4,  power: 10, culture: 7, time: 5}},
+        {name: "Weber",      dim: "power",   values: {mind: 3,  power: 9, culture: 5, time: 3}},
+        {name: "Machiavelli", dim: "power",   values: {mind: 2,  power: 10, culture: 4, time: 2}},
+        {name: "Assmann",    dim: "culture", values: {mind: 3,  power: 5, culture: 10, time: 6}},
+        {name: "Halbwachs",  dim: "culture", values: {mind: 2,  power: 4, culture: 9,  time: 5}},
+        {name: "Jauss",      dim: "culture", values: {mind: 3,  power: 2, culture: 9,  time: 4}},
+        {name: "Heidegger",  dim: "time",    values: {mind: 6,  power: 3, culture: 5,  time: 10}},
+        {name: "Genette",    dim: "time",    values: {mind: 2,  power: 2, culture: 4,  time: 10}},
+        {name: "Ricoeur",    dim: "time",    values: {mind: 5,  power: 3, culture: 6,  time: 10}}
+    ],
+    // 3. Network: 4 dimensions + 12 theorists + 8 line nodes
+    network: {
+        nodes: [
+            // 4 dimension nodes
+            {id: "Cultivation-Mind", type: "dim", dim: "mind",    size: 32, color: "#c8392c"},
+            {id: "Power-Politics", type: "dim", dim: "power",   size: 32, color: "#2c5f7c"},
+            {id: "Cultural-Memory", type: "dim", dim: "culture", size: 32, color: "#c89b3c"},
+            {id: "Time-Narrative", type: "dim", dim: "time",    size: 32, color: "#6B8E5A"},
+            // 12 theorists
+            {id: "Wang Yangming",    type: "theorist", dim: "mind",    size: 18, color: "#c8392c"},
+            {id: "Freud",  type: "theorist", dim: "mind",    size: 18, color: "#c8392c"},
+            {id: "Jung",      type: "theorist", dim: "mind",    size: 18, color: "#c8392c"},
+            {id: "Foucault",      type: "theorist", dim: "power",   size: 18, color: "#2c5f7c"},
+            {id: "Weber",      type: "theorist", dim: "power",   size: 18, color: "#2c5f7c"},
+            {id: "Machiavelli", type: "theorist", dim: "power",   size: 18, color: "#2c5f7c"},
+            {id: "Assmann",    type: "theorist", dim: "culture", size: 18, color: "#c89b3c"},
+            {id: "Halbwachs",  type: "theorist", dim: "culture", size: 18, color: "#c89b3c"},
+            {id: "Jauss",      type: "theorist", dim: "culture", size: 18, color: "#c89b3c"},
+            {id: "Heidegger",  type: "theorist", dim: "time",    size: 18, color: "#6B8E5A"},
+            {id: "Genette",    type: "theorist", dim: "time",    size: 18, color: "#6B8E5A"},
+            {id: "Ricoeur",    type: "theorist", dim: "time",    size: 18, color: "#6B8E5A"},
+            // 8 line nodes
+            {id: "L1·Birth of the Stone Monkey",    type: "line", line: 1,    chapter: "Ch. 1",   desc: "Birth of the Stone Monkey",   size: 14, color: "#6B6455"},
+            {id: "L722·Havoc in Heaven",  type: "line", line: 722,  chapter: "Ch. 7",   desc: "Havoc in Heaven",   size: 14, color: "#6B6455"},
+            {id: "L1441·Mind-Ape Returned to the Right Path", type: "line", line: 1441, chapter: "Ch. 14",  desc: "Mind-Ape Returned to the Right Path",   size: 14, color: "#6B6455"},
+            {id: "L1519·The Tight-Fillet Spell",   type: "line", line: 1519, chapter: "Ch. 14",  desc: "The Tight-Fillet Spell",     size: 14, color: "#6B6455"},
+            {id: "L3200·Thrice Beating the White Bone Demon", type: "line", line: 3200, chapter: "Ch. 27",  desc: "Thrice Beating the White Bone Demon", size: 14, color: "#6B6455"},
+            {id: "L6800·True and False Monkey King", type: "line", line: 6800, chapter: "Ch. 58",  desc: "True and False Monkey King", size: 14, color: "#6B6455"},
+            {id: "L9100·Crossing at Lingyun Ferry",    type: "line", line: 9100, chapter: "Ch. 98",  desc: "Crossing at Lingyun Ferry",     size: 14, color: "#6B6455"},
+            {id: "L9140·Victorious Fighting Buddha",  type: "line", line: 9140, chapter: "Ch. 100", desc: "Victorious Fighting Buddha",   size: 14, color: "#6B6455"}
+        ],
+        links: [
+            // Dimension → its 3 theorists
+            {source: "Cultivation-Mind", target: "Wang Yangming",    value: 4},
+            {source: "Cultivation-Mind", target: "Freud",  value: 4},
+            {source: "Cultivation-Mind", target: "Jung",      value: 4},
+            {source: "Power-Politics", target: "Foucault",      value: 4},
+            {source: "Power-Politics", target: "Weber",      value: 4},
+            {source: "Power-Politics", target: "Machiavelli", value: 4},
+            {source: "Cultural-Memory", target: "Assmann",    value: 4},
+            {source: "Cultural-Memory", target: "Halbwachs",  value: 4},
+            {source: "Cultural-Memory", target: "Jauss",      value: 4},
+            {source: "Time-Narrative", target: "Heidegger",  value: 4},
+            {source: "Time-Narrative", target: "Genette",    value: 4},
+            {source: "Time-Narrative", target: "Ricoeur",    value: 4},
+            // Theorist → line nodes (cross-dimension resonance)
+            {source: "Wang Yangming",   target: "L1441·Mind-Ape Returned to the Right Path", value: 3},
+            {source: "Jung",     target: "L1·Birth of the Stone Monkey",    value: 3},
+            {source: "Freud", target: "L1519·The Tight-Fillet Spell",   value: 3},
+            {source: "Foucault",    target: "L722·Havoc in Heaven",  value: 4},
+            {source: "Machiavelli", target: "L722·Havoc in Heaven", value: 3},
+            {source: "Weber",    target: "L1519·The Tight-Fillet Spell",   value: 2},
+            {source: "Assmann",  target: "L3200·Thrice Beating the White Bone Demon", value: 3},
+            {source: "Halbwachs", target: "L3200·Thrice Beating the White Bone Demon", value: 3},
+            {source: "Jauss",    target: "L9140·Victorious Fighting Buddha",  value: 3},
+            {source: "Heidegger", target: "L6800·True and False Monkey King", value: 4},
+            {source: "Genette",  target: "L6800·True and False Monkey King", value: 3},
+            {source: "Ricoeur",  target: "L9100·Crossing at Lingyun Ferry",    value: 3},
+            {source: "Ricoeur",  target: "L9140·Victorious Fighting Buddha",  value: 3},
+            // Dimension → line nodes (direct ties)
+            {source: "Cultivation-Mind", target: "L9100·Crossing at Lingyun Ferry",    value: 3},
+            {source: "Cultivation-Mind", target: "L9140·Victorious Fighting Buddha",  value: 3},
+            {source: "Power-Politics", target: "L722·Havoc in Heaven",  value: 3},
+            {source: "Cultural-Memory", target: "L1·Birth of the Stone Monkey",    value: 2},
+            {source: "Cultural-Memory", target: "L9140·Victorious Fighting Buddha",  value: 2},
+            {source: "Time-Narrative", target: "L1·Birth of the Stone Monkey",    value: 3},
+            {source: "Time-Narrative", target: "L9100·Crossing at Lingyun Ferry",    value: 2}
+        ]
+    },
+    // 4. 100-chapter timeline (11 sample points)
+    timeline: [
+        {chapter: 1,   mind: 8,  power: 3, culture: 7, time: 9},
+        {chapter: 10,  mind: 7,  power: 8, culture: 5, time: 6},
+        {chapter: 20,  mind: 6,  power: 6, culture: 5, time: 5},
+        {chapter: 30,  mind: 8,  power: 5, culture: 6, time: 5},
+        {chapter: 40,  mind: 6,  power: 7, culture: 6, time: 6},
+        {chapter: 50,  mind: 7,  power: 6, culture: 7, time: 7},
+        {chapter: 60,  mind: 9,  power: 7, culture: 7, time: 8},
+        {chapter: 70,  mind: 7,  power: 6, culture: 8, time: 7},
+        {chapter: 80,  mind: 7,  power: 5, culture: 8, time: 7},
+        {chapter: 90,  mind: 8,  power: 6, culture: 9, time: 8},
+        {chapter: 100, mind: 10, power: 7, culture: 10, time: 10}
+    ],
+    // 5. Polar spectrum: theorists placed on their dim-axis at radial distance = cross-resonance
+    polarExtra: [
+        // {theorist, axis: dimKey, r: 0-1 (relative), crossResonance: 0-10}
+        {theorist: "Wang Yangming",    axis: "mind",    r: 0.85, cross: 7},
+        {theorist: "Freud",  axis: "mind",    r: 0.65, cross: 5},
+        {theorist: "Jung",      axis: "mind",    r: 0.75, cross: 8},
+        {theorist: "Foucault",      axis: "power",   r: 0.90, cross: 9},
+        {theorist: "Weber",      axis: "power",   r: 0.75, cross: 6},
+        {theorist: "Machiavelli", axis: "power",   r: 0.95, cross: 5},
+        {theorist: "Assmann",    axis: "culture", r: 0.90, cross: 9},
+        {theorist: "Halbwachs",  axis: "culture", r: 0.80, cross: 7},
+        {theorist: "Jauss",      axis: "culture", r: 0.70, cross: 6},
+        {theorist: "Heidegger",  axis: "time",    r: 0.95, cross: 9},
+        {theorist: "Genette",    axis: "time",    r: 0.85, cross: 6},
+        {theorist: "Ricoeur",    axis: "time",    r: 0.90, cross: 8}
+    ]
+};
+
+// ============= 1. Radar Chart =============
+(function renderRadar() {
+    const svg = d3.select("#radar-svg");
+    const width = svg.node().clientWidth;
+    const height = 500;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const cx = width / 2, cy = height / 2;
+    const r = Math.min(width, height) / 2 - 70;
+    const axes = EMBEDDED_DATA.indicators;
+    const levels = 5;
+
+    // Background polygons
+    for (let lv = 1; lv <= levels; lv++) {
+        const scale = lv / levels;
+        const pts = axes.map((_, i) => {
+            const a = (i / axes.length) * 2 * Math.PI - Math.PI / 2;
+            return [cx + r * scale * Math.cos(a), cy + r * scale * Math.sin(a)];
+        });
+        svg.append("polygon")
+            .attr("points", pts.map(p => p.join(",")).join(" "))
+            .attr("fill", "none")
+            .attr("stroke", "#c9b896")
+            .attr("stroke-dasharray", lv === levels ? "0" : "2,3");
+    }
+    // Axes lines + labels
+    axes.forEach((ax, i) => {
+        const a = (i / axes.length) * 2 * Math.PI - Math.PI / 2;
+        svg.append("line")
+            .attr("x1", cx).attr("y1", cy)
+            .attr("x2", cx + r * Math.cos(a))
+            .attr("y2", cy + r * Math.sin(a))
+            .attr("stroke", "#c9b896");
+        svg.append("text")
+            .attr("x", cx + (r + 22) * Math.cos(a))
+            .attr("y", cy + (r + 22) * Math.sin(a) + 4)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "13px")
+            .attr("font-weight", 600)
+            .attr("fill", "#2c2416")
+            .text(ax);
+    });
+    // Data polygons
+    EMBEDDED_DATA.radar.forEach(m => {
+        const pts = m.values.map((v, i) => {
+            const a = (i / axes.length) * 2 * Math.PI - Math.PI / 2;
+            const scale = v / 5;
+            return [cx + r * scale * Math.cos(a), cy + r * scale * Math.sin(a)];
+        });
+        svg.append("polygon")
+            .attr("points", pts.map(p => p.join(",")).join(" "))
+            .attr("fill", m.color)
+            .attr("fill-opacity", 0.15)
+            .attr("stroke", m.color)
+            .attr("stroke-width", 2);
+        pts.forEach(p => {
+            svg.append("circle")
+                .attr("cx", p[0]).attr("cy", p[1])
+                .attr("r", 4)
+                .attr("fill", m.color)
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 1);
+        });
+    });
+    // Center label
+    svg.append("text")
+        .attr("x", cx).attr("y", cy - 6)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "11px")
+        .attr("fill", "#6B6455")
+        .text("4D Radar");
+    svg.append("text")
+        .attr("x", cx).attr("y", cy + 10)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "10px")
+        .attr("fill", "#6B6455")
+        .attr("font-family", "JetBrains Mono, monospace")
+        .text("5 indicators × 4 dims");
+})();
+
+// ============= 2. Heatmap (12 theorists × 4 dimensions) =============
+(function renderHeatmap() {
+    const svg = d3.select("#heatmap-svg");
+    const width = svg.node().clientWidth;
+    const height = 460;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const padL = 110, padR = 40, padT = 60, padB = 40;
+    const cellW = (width - padL - padR) / 4;
+    const cellH = (height - padT - padB) / 12;
+    const dims = EMBEDDED_DATA.dimensions;
+    const theorists = EMBEDDED_DATA.theorists;
+
+    // Color scale: dim contribution 0-10 → intensity along dim color
+    const dimColors = {mind: "#c8392c", power: "#2c5f7c", culture: "#c89b3c", time: "#6B8E5A"};
+    function colorFor(dimKey, value) {
+        const base = d3.rgb(dimColors[dimKey]);
+        const intensity = value / 10;
+        // mix with paper background
+        const bg = d3.rgb("#fff8e7");
+        const r = Math.round(bg.r + (base.r - bg.r) * intensity);
+        const g = Math.round(bg.g + (base.g - bg.g) * intensity);
+        const b = Math.round(bg.b + (base.b - bg.b) * intensity);
+        return `rgb(${r},${g},${b})`;
+    }
+
+    // Column headers
+    dims.forEach((d, j) => {
+        svg.append("rect")
+            .attr("x", padL + j * cellW)
+            .attr("y", padT - 36)
+            .attr("width", cellW).attr("height", 28)
+            .attr("fill", d.color)
+            .attr("rx", 3);
+        svg.append("text")
+            .attr("x", padL + j * cellW + cellW / 2)
+            .attr("y", padT - 18)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#fff")
+            .attr("font-size", "12px")
+            .attr("font-weight", 700)
+            .text(d.name);
+    });
+
+    // Row labels + cells
+    theorists.forEach((t, i) => {
+        const y = padT + i * cellH;
+        // Row label with home-dim color stripe
+        svg.append("rect")
+            .attr("x", padL - 8)
+            .attr("y", y)
+            .attr("width", 4)
+            .attr("height", cellH)
+            .attr("fill", dimColors[t.dim]);
+        svg.append("text")
+            .attr("x", padL - 14)
+            .attr("y", y + cellH / 2 + 4)
+            .attr("text-anchor", "end")
+            .attr("font-size", "12px")
+            .attr("fill", "#2c2416")
+            .attr("font-weight", t.dim ? 600 : 400)
+            .text(t.name);
+        // Cells
+        dims.forEach((d, j) => {
+            const v = t.values[d.key];
+            const x = padL + j * cellW;
+            svg.append("rect")
+                .attr("x", x + 2)
+                .attr("y", y + 2)
+                .attr("width", cellW - 4)
+                .attr("height", cellH - 4)
+                .attr("fill", colorFor(d.key, v))
+                .attr("stroke", "#c9b896")
+                .attr("stroke-width", 0.5);
+            svg.append("text")
+                .attr("x", x + cellW / 2)
+                .attr("y", y + cellH / 2 + 4)
+                .attr("text-anchor", "middle")
+                .attr("font-size", "12px")
+                .attr("font-weight", v >= 8 ? 700 : (v >= 5 ? 500 : 400))
+                .attr("fill", v >= 7 ? "#fff" : "#2c2416")
+                .text(v);
+        });
+    });
+
+    // Color legend
+    const legendY = height - 22;
+    svg.append("text")
+        .attr("x", padL).attr("y", legendY)
+        .attr("font-size", "11px")
+        .attr("fill", "#6B6455")
+        .text("Contribution: ");
+    [0, 2, 4, 6, 8, 10].forEach((v, i) => {
+        const x = padL + 60 + i * 30;
+        svg.append("rect")
+            .attr("x", x).attr("y", legendY - 12)
+            .attr("width", 26).attr("height", 12)
+            .attr("fill", colorFor("mind", v))
+            .attr("stroke", "#c9b896")
+            .attr("stroke-width", 0.5);
+        svg.append("text")
+            .attr("x", x + 13).attr("y", legendY - 16)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "9px")
+            .attr("fill", "#6B6455")
+            .text(v);
+    });
+})();
+
+// ============= 3. Force-directed Network =============
+(function renderNetwork() {
+    const svg = d3.select("#network-svg");
+    const width = svg.node().clientWidth;
+    const height = 620;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+    const data = JSON.parse(JSON.stringify(EMBEDDED_DATA.network));
+
+    const sim = d3.forceSimulation(data.nodes).alphaDecay(0.08).velocityDecay(0.5)
+        .force("link", d3.forceLink(data.links).id(d => d.id)
+            .distance(d => d.source.type === "dim" && d.target.type === "theorist" ? 70 :
+                          d.target.type === "line" ? 90 : 80)
+            .strength(d => d.value === 4 ? 0.5 : 0.25))
+        .force("charge", d3.forceManyBody().strength(d => d.type === "dim" ? -600 : -200))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .force("collision", d3.forceCollide().radius(d => d.size + 6));
+
+        // P1 推广：按 type 社区聚类（锚点均布+稳定收敛），不改数据语义
+        {
+            const _grp = Array.from(new Set(sim.nodes().map(d => d.type))).sort();
+            const _gx = {}, _gy = {};
+            _grp.forEach((g, i) => {
+                _gx[g] = width * (i + 1) / (_grp.length + 1);
+                _gy[g] = height * (0.38 + 0.24 * (i % 2));
+            });
+            sim.force("x", d3.forceX(d => (_gx[d.type] !== undefined ? _gx[d.type] : width / 2)).strength(0.14))
+                .force("y", d3.forceY(d => (_gy[d.type] !== undefined ? _gy[d.type] : height / 2)).strength(0.14));
+        }
+
+      // 性能：边层改 Canvas 叠加，避免每帧 N×4 几何属性写入触发 SVG 重排
+  var _svgEl = svg.node();
+  var _lcParent = _svgEl.parentNode;
+  if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
+  if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas'); if (_oc) _oc.remove(); }
+  var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var _lcW = _svgEl.clientWidth || 800, _lcH = _svgEl.clientHeight || 540;
+  var _vb = (_svgEl.getAttribute('viewBox') || '').split(/[\s,]+/);
+  var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_svgEl.getAttribute('width') || _lcW);
+  var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_svgEl.getAttribute('height') || _lcH);
+  var linkCanvas = document.createElement('canvas');
+  linkCanvas.className = 'link-canvas';
+  linkCanvas.width = Math.round(_lcW * _dpr);
+  linkCanvas.height = Math.round(_lcH * _dpr);
+  linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _svgEl.offsetLeft + 'px;top:' + _svgEl.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+  if (_lcParent) _lcParent.insertBefore(linkCanvas, _svgEl);
+  _svgEl.style.position = 'relative';
+  _svgEl.style.zIndex = '1';
+  var lctx = linkCanvas.getContext('2d');
+  lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
+  var linkSels = [];
+  function drawLinks() {
+    lctx.clearRect(0, 0, _cw, _ch);
+    for (var s = 0; s < linkSels.length; s++) {
+      var sel = linkSels[s], data = sel.data(), lines = sel.nodes();
+      for (var i = 0; i < data.length; i++) {
+        var d = data[i], el = lines[i];
+        if (!d || !d.source || d.source.x == null) continue;
+        lctx.beginPath();
+        lctx.moveTo(d.source.x, d.source.y);
+        lctx.lineTo(d.target.x, d.target.y);
+        lctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
+        lctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
+        var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
+        lctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
+        var da = el.getAttribute('stroke-dasharray');
+        lctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
+        lctx.stroke();
+      }
+    }
+    lctx.setLineDash([]);
+    lctx.globalAlpha = 1;
+  }
+const link = svg.append("g").selectAll("line")
+        .data(data.links).enter().append("line")
+        .attr("stroke", d => {
+            const s = typeof d.source === "object" ? d.source : data.nodes.find(n => n.id === d.source);
+            return s && s.color ? s.color : "#c9b896";
+        })
+        .attr("stroke-width", d => Math.sqrt(d.value) * 1.4)
+        .attr("opacity", 0.45); link.style('display','none'); linkSels.push(link);
+
+    const node = svg.append("g").selectAll("circle")
+        .data(data.nodes).enter().append("circle")
+        .attr("r", d => d.size / 2)
+        .attr("fill", d => d.color)
+        .attr("stroke", "#2c2416")
+        .attr("stroke-width", d => d.type === "dim" ? 2 : 1.2)
+        .call(d3.drag()
+            .on("start", (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+            .on("drag", (e, d) => { d.fx = e.x; d.fy = e.y; })
+            .on("end", (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+        );
+
+    const label = svg.append("g").selectAll("text")
+        .data(data.nodes).enter().append("text")
+        .text(d => d.id)
+        .attr("font-size", d => d.type === "dim" ? "14px" : (d.type === "theorist" ? "11px" : "9px"))
+        .attr("font-weight", d => d.type === "dim" ? 700 : (d.type === "theorist" ? 600 : 400))
+        .attr("fill", d => d.type === "dim" ? d.color : "#2c2416")
+        .attr("text-anchor", "middle")
+        .attr("dy", d => d.size / 2 + 13);
+
+    sim.on("tick", () => {
+        drawLinks();;
+        node.attr('transform', d => `translate(${d.x},${d.y})`);
+        label.attr('transform', d => `translate(${d.x},${d.y})`);
+    });
+})();
+
+// ============= 4. Stacked Area Timeline =============
+(function renderTimeline() {
+    const svg = d3.select("#timeline-svg");
+    const width = svg.node().clientWidth;
+    const height = 440;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const pad = {l: 60, r: 30, t: 30, b: 50};
+    const innerW = width - pad.l - pad.r;
+    const innerH = height - pad.t - pad.b;
+
+    const data = EMBEDDED_DATA.timeline;
+    const dims = EMBEDDED_DATA.dimensions;
+    const stack = d3.stack()
+        .keys(dims.map(d => d.key))
+        .order(d3.stackOrderNone)
+        .offset(d3.stackOffsetNone);
+    const series = stack(data);
+
+    const x = d3.scaleLinear()
+        .domain([1, 100])
+        .range([pad.l, pad.l + innerW]);
+    // Each dim value up to 10, stacked 4 dims → max ~ 40
+    const y = d3.scaleLinear()
+        .domain([0, 40])
+        .range([pad.t + innerH, pad.t]);
+
+    const area = d3.area()
+        .x(d => x(d.data.chapter))
+        .y0(d => y(d[0]))
+        .y1(d => y(d[1]))
+        .curve(d3.curveMonotoneX);
+
+    // Axes
+    svg.append("g")
+        .attr("transform", `translate(0,${pad.t + innerH})`)
+        .call(d3.axisBottom(x).ticks(10).tickFormat(d => "Ch. " + d))
+        .selectAll("text")
+        .attr("font-size", "10px");
+    svg.append("g")
+        .attr("transform", `translate(${pad.l},0)`)
+        .call(d3.axisLeft(y).ticks(8))
+        .selectAll("text")
+        .attr("font-size", "10px");
+
+    // Axis labels
+    svg.append("text")
+        .attr("x", pad.l + innerW / 2)
+        .attr("y", height - 8)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "11px")
+        .attr("fill", "#6B6455")
+        .text("Chapter (pilgrimage route chronology)");
+    svg.append("text")
+        .attr("x", 16).attr("y", pad.t + innerH / 2)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "11px")
+        .attr("fill", "#6B6455")
+        .attr("transform", `rotate(-90,16,${pad.t + innerH / 2})`)
+        .text("Four-dimension intensity (stacked)");
+
+    // Areas
+    series.forEach((s, i) => {
+        const dim = dims[i];
+        svg.append("path")
+            .datum(s)
+            .attr("fill", dim.color)
+            .attr("fill-opacity", 0.78)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 0.5)
+            .attr("d", area);
+    });
+
+    // Legend
+    const legendG = svg.append("g")
+        .attr("transform", `translate(${pad.l + 12},${pad.t + 8})`);
+    dims.forEach((d, i) => {
+        const g = legendG.append("g").attr("transform", `translate(${i * 110},0)`);
+        g.append("rect").attr("width", 14).attr("height", 14).attr("fill", d.color).attr("rx", 2);
+        g.append("text").attr("x", 20).attr("y", 11).attr("font-size", "11px").attr("fill", "#2c2416").text(d.name);
+    });
+
+    // Sample point markers (line markers at key chapters)
+    const keyChapters = [1, 7, 14, 27, 58, 98, 100];
+    keyChapters.forEach(ch => {
+        svg.append("line")
+            .attr("x1", x(ch)).attr("y1", pad.t)
+            .attr("x2", x(ch)).attr("y2", pad.t + innerH)
+            .attr("stroke", "#2c2416")
+            .attr("stroke-width", 0.5)
+            .attr("stroke-dasharray", "3,3")
+            .attr("opacity", 0.35);
+        svg.append("text")
+            .attr("x", x(ch))
+            .attr("y", pad.t + innerH + 16)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "9px")
+            .attr("fill", "#2c2416")
+            .attr("font-weight", 600)
+            .text("L" + ch);
+    });
+})();
+
+// ============= 5. Polar Spectrum =============
+(function renderSpectrum() {
+    const svg = d3.select("#spectrum-svg");
+    const width = svg.node().clientWidth;
+    const height = 540;
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    const cx = width / 2, cy = height / 2;
+    const r = Math.min(width, height) / 2 - 70;
+    const dims = EMBEDDED_DATA.dimensions;
+    const extra = EMBEDDED_DATA.polarExtra;
+
+    // Concentric rings
+    [0.25, 0.5, 0.75, 1.0].forEach(scale => {
+        svg.append("circle")
+            .attr("cx", cx).attr("cy", cy)
+            .attr("r", r * scale)
+            .attr("fill", "none")
+            .attr("stroke", "#c9b896")
+            .attr("stroke-dasharray", scale === 1.0 ? "0" : "2,3");
+    });
+    // Ring labels
+    [0.25, 0.5, 0.75, 1.0].forEach(scale => {
+        svg.append("text")
+            .attr("x", cx + 4).attr("y", cy - r * scale + 12)
+            .attr("font-size", "9px")
+            .attr("fill", "#6B6455")
+            .attr("font-family", "JetBrains Mono, monospace")
+            .text((scale * 10).toFixed(1));
+    });
+
+    // 4 axes
+    dims.forEach((d, i) => {
+        const a = (i / dims.length) * 2 * Math.PI - Math.PI / 2;
+        svg.append("line")
+            .attr("x1", cx).attr("y1", cy)
+            .attr("x2", cx + r * Math.cos(a))
+            .attr("y2", cy + r * Math.sin(a))
+            .attr("stroke", d.color)
+            .attr("stroke-width", 2.5);
+        // Axis label box
+        const lx = cx + (r + 30) * Math.cos(a);
+        const ly = cy + (r + 30) * Math.sin(a);
+        svg.append("rect")
+            .attr("x", lx - 38).attr("y", ly - 12)
+            .attr("width", 76).attr("height", 24)
+            .attr("fill", d.color)
+            .attr("rx", 4);
+        svg.append("text")
+            .attr("x", lx).attr("y", ly + 4)
+            .attr("text-anchor", "middle")
+            .attr("fill", "#fff")
+            .attr("font-size", "12px")
+            .attr("font-weight", 700)
+            .text(d.name);
+    });
+
+    // Theorist nodes placed on their dim-axis at radial distance = r × relative
+    extra.forEach(t => {
+        const dimIdx = dims.findIndex(d => d.key === t.axis);
+        const a = (dimIdx / dims.length) * 2 * Math.PI - Math.PI / 2;
+        const px = cx + r * t.r * Math.cos(a);
+        const py = cy + r * t.r * Math.sin(a);
+        const color = dims[dimIdx].color;
+        // Resonance ring (size = cross resonance)
+        svg.append("circle")
+            .attr("cx", px).attr("cy", py)
+            .attr("r", 4 + t.cross * 0.6)
+            .attr("fill", color)
+            .attr("fill-opacity", 0.25)
+            .attr("stroke", color)
+            .attr("stroke-width", 0.5);
+        // Node
+        svg.append("circle")
+            .attr("cx", px).attr("cy", py)
+            .attr("r", 5)
+            .attr("fill", color)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1.2);
+        // Label (rotate to read outward)
+        const labelOffset = 14;
+        const lx = px + labelOffset * Math.cos(a);
+        const ly = py + labelOffset * Math.sin(a);
+        svg.append("text")
+            .attr("x", lx).attr("y", ly)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "11px")
+            .attr("font-weight", 600)
+            .attr("fill", "#2c2416")
+            .text(t.theorist);
+    });
+
+    // Center hub
+    svg.append("circle")
+        .attr("cx", cx).attr("cy", cy)
+        .attr("r", 12)
+        .attr("fill", "#2c2416");
+    svg.append("text")
+        .attr("x", cx).attr("y", cy + 4)
+        .attr("text-anchor", "middle")
+        .attr("fill", "#f5e9d4")
+        .attr("font-size", "10px")
+        .attr("font-weight", 700)
+        .text("4D");
+
+    // Legend (resonance ring scale)
+    const legX = 16, legY = height - 36;
+    svg.append("text")
+        .attr("x", legX).attr("y", legY)
+        .attr("font-size", "10px")
+        .attr("fill", "#6B6455")
+        .text("Resonance ring = cross-dimension resonance");
+    [5, 7, 9].forEach((v, i) => {
+        const x = legX + 130 + i * 50;
+        svg.append("circle")
+            .attr("cx", x + 8).attr("cy", legY - 4)
+            .attr("r", 4 + v * 0.6)
+            .attr("fill", "#c89b3c")
+            .attr("fill-opacity", 0.25)
+            .attr("stroke", "#c89b3c");
+        svg.append("text")
+            .attr("x", x + 22).attr("y", legY)
+            .attr("font-size", "10px")
+            .attr("fill", "#6B6455")
+            .text(v);
+    });
+})();
+</script>
+<script id="audit-labelavoid">
+(function(){
+  function avoid(){
+    document.querySelectorAll("svg").forEach(function(svg){
+      var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){var r=t.getBoundingClientRect();return r.width>0&&r.height>0;});
+      var R=ts.map(function(t){return t.getBoundingClientRect();});
+      for(var i=0;i<ts.length;i++)for(var j=i+1;j<ts.length;j++){
+        var a=R[i],b=R[j];
+        var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+        var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+        if(ix*iy<=0)continue;
+        var area=Math.min(a.width*a.height,b.width*b.height);
+        if(area>0 && (ix*iy)/area>0.5){
+          var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+          if(hide.style.display!=="none") hide.style.display="none";
+        }
+      }
+    });
+  }
+  window.__avoidOverlap=avoid;
+  function run(){try{avoid();}catch(e){}}
+  window.addEventListener("load",function(){
+    [3000,6000,9000,12000].forEach(function(ms){setTimeout(run,ms);});
+  });
+})();
+</script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+<script id="audit-contentavoid">
+(function(){
+  var SKIP=/(tick|legend|title|axis|domain|cell|tooltip|axisfix|dark-halo|subtitle|grid|background|heat-col-label|heat-row-label)/i;
+  function fix(){
+    try{
+      // 1) 热力图列标签旋转 -42°（保留可见）
+      document.querySelectorAll('svg text.heat-col-label').forEach(function(t){
+        var x=+t.getAttribute('x')||0, y=+t.getAttribute('y')||0;
+        t.setAttribute('transform','rotate(-42 '+x+' '+y+')');
+        t.setAttribute('text-anchor','end');
+      });
+      // 2) 其余文字重叠：隐藏较小者 + 补 title
+      document.querySelectorAll('svg').forEach(function(svg){
+        var texts=[].slice.call(svg.querySelectorAll('text')).filter(function(t){
+          var c=t.getAttribute('class')||'';
+          if(SKIP.test(c)) return false;
+          var b=t.getBBox(); return b.width>0 && b.height>0;
+        });
+        for(var i=0;i<texts.length;i++){
+          for(var j=i+1;j<texts.length;j++){
+            var a=texts[i],b=texts[j];
+            var ra=a.getBBox(),rb=b.getBBox();
+            var ix=Math.max(0,Math.min(ra.x+ra.width,rb.x+rb.width)-Math.max(ra.x,rb.x));
+            var iy=Math.max(0,Math.min(ra.y+ra.height,rb.y+rb.height)-Math.max(ra.y,rb.y));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(), tb=(b.textContent||'').trim();
+            if(ta===tb){ // 完全重复：隐藏其一
+              if(a.style.display!=='none'){ a.setAttribute('data-cavoid','1'); if(!a.getAttribute('title')) a.setAttribute('title',ta); a.style.display='none'; }
+              continue;
+            }
+            var hide=(ra.width*ra.height<=rb.width*rb.height)?a:b;
+            var keep=(hide===a)?b:a;
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-cavoid','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000,14000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run(); else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
