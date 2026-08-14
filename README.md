@@ -2,7 +2,7 @@
 
 > 一源多形 · 数字人文可视化解读《西游记》100 回 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前版本 v2.3.40（2026-08-14）**： W425 GoatCounter 真实跨访客统计接入·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> **当前版本 v2.3.41（2026-08-14）**： W426 GoatCounter 自托管修复·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 [![在线访问](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E8%AE%BF%E9%97%AE-%E7%AB%8B%E5%8D%B3%E4%BD%93%E9%AA%8C-brightgreen?style=for-the-badge&logo=githubpages&logoColor=white)](https://1273984347.github.io/xiyouji/)
 [![双协议授权](https://img.shields.io/badge/%E5%8F%8C%E5%8D%8F%E8%AE%AE-MIT%20%2B%20CC%20BY--NC%204.0-blue)](LICENSE)
@@ -121,7 +121,7 @@ xiyouji/
 ├── .github/workflows/     # CI/Security/Deploy Pages/Lighthouse/截图审查
 ├── README.md              # 本文件（用户手册 + 开发者分区）
 ├── STRUCTURE.md           # 目录结构详细说明
-├── CHANGELOG.md           # 更新日志（W001-W425）
+├── CHANGELOG.md           # 更新日志（W001-W426）
 └── LICENSE                # 双协议授权声明
 ```
 
@@ -160,7 +160,7 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 
 ## 文档索引（双索引可追溯）
 
-- **正向索引（时间线）**：[CHANGELOG.md](CHANGELOG.md) — 按版本记录变更，每版本段标注唯一 W### ID（W001-W425）+ 四件套（来源/文件/验证/状态）。v0.1-v2.0.60 历史归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)
+- **正向索引（时间线）**：[CHANGELOG.md](CHANGELOG.md) — 按版本记录变更，每版本段标注唯一 W### ID（W001-W426）+ 四件套（来源/文件/验证/状态）。v0.1-v2.0.60 历史归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)
 - **反向索引（文件）**：[scripts/output/file-index.md](scripts/output/file-index.md) — 给定文件查改过几次、对应哪个 W 条目
 
 **W### 编号规则**：W001-W099 对应 v0.1-v2.0.72；W100+ 对应 v2.1.0+；新增 W 条目时同步更新两个索引。详细映射见 [CHANGELOG.md](CHANGELOG.md)。
