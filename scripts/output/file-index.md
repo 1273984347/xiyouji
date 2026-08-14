@@ -8,6 +8,14 @@
 
 ---
 
+## W436 英文站续译 batch14（2026-08-14·v2.3.51）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/narrative-experiment.html / journey-spacetime.html / methodology-matrix.html / workplace.html / text-evolution.html | W436 | v2.3.51 新增·并行 subagent 英文化 5 页（_validate_en.py 全过） |
+| site/sitemap.xml | W436 | v2.3.51 修改·补 5 个 en 页（187→192 页） |
+| site/**/*.html（5 页） | W436 | v2.3.51 修改·generate_csp.py 重生成 CSP（197 页·924 内联哈希） |
+
 ## W435 英文站续译 batch13（2026-08-14·v2.3.50）
 
 | 文件 | W | 说明 |

@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-AArFWrDD8eItzDGx2EPMpNLarselqebycwssOmXvGHY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-A6/L9JNAs8eGjdDf7Zl31L7NqD+ZkDqHVxz7FjODhrY=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Methodology Matrix · Villain Evaluation &amp; Rescue ROI · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        
+        @media (max-width: 900px) {
+            
+        }
+        
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-deep);
+        }
+        
+        
+        
+        
+        
+        
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .design-purpose {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 14px 18px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 0.92rem;
+            color: var(--ink);
+            line-height: 1.75;
+        }
+        .design-purpose strong { color: var(--accent); }
+        /* 轴说明栏 */
+        .axes-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 720px) {
+            .axes-row { grid-template-columns: 1fr; }
+        }
+        .axis-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 16px;
+        }
+        .axis-card .axis-name {
+            color: var(--accent);
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 4px;
+        }
+        .axis-card .axis-desc {
+            font-size: 0.85rem;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+        .axis-card .axis-bands {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 8px;
+            font-size: 0.75rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .axis-card .axis-bands span {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            padding: 1px 6px;
+        }
+        /* 散点矩阵 */
+        .chart-wrap {
+            position: relative;
+            background: #fffdf8;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 24px;
+        }
+        #matrix-svg {
+            width: 100%;
+            height: 560px;
+            display: block;
+        }
+        .matrix-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            max-width: 320px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+            line-height: 1.6;
+        }
+        .matrix-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; font-size: 0.92rem; }
+        .matrix-tip .tip-row { color: #e9b885; font-size: 0.78rem; margin-top: 2px; }
+        .matrix-tip .tip-divider { border-top: 1px dashed rgba(233, 184, 133, 0.4); margin: 6px 0; }
+        /* 象限统计卡片 */
+        .quadrant-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        @media (max-width: 900px) {
+            .quadrant-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .quadrant-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px;
+            border-top: 4px solid var(--accent);
+            transition: transform 0.15s, box-shadow 0.15s;
+            position: relative;
+            overflow: hidden;
+        }
+        .quadrant-card::before {
+            content: "";
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.05;
+        }
+        .quadrant-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-deep);
+        }
+        .quadrant-card .qc-name {
+            font-size: 0.82rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 2px;
+        }
+        .quadrant-card .qc-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+        .quadrant-card .qc-range {
+            font-size: 0.75rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 6px;
+        }
+        .quadrant-card .qc-desc {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            line-height: 1.55;
+            margin-bottom: 10px;
+            min-height: 50px;
+        }
+        .quadrant-card .qc-count {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--accent);
+            font-family: "JetBrains Mono", monospace;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .quadrant-card .qc-outcome {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            font-style: italic;
+            border-top: 1px dashed var(--line);
+            padding-top: 8px;
+        }
+        /* 反派表格 */
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+        }
+        .data-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 10px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        .data-table tbody tr {
+            border-bottom: 1px solid var(--line);
+        }
+        .data-table tbody tr:nth-child(even) { background: var(--bg); }
+        .data-table tbody tr:hover { background: #fff8ec; }
+        .data-table td {
+            padding: 9px 12px;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        .data-table td.num {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent-3);
+            text-align: center;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .data-table td.mono {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--ink);
+            white-space: nowrap;
+        }
+        .quad-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            color: #fff;
+            white-space: nowrap;
+            letter-spacing: 0.05em;
+        }
+        .phase-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            color: #fff;
+            white-space: nowrap;
+            letter-spacing: 0.05em;
+        }
+        /* ROI 公式 */
+        .formula-box {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
+            color: #f5e9d4;
+            border-radius: 8px;
+            padding: 24px 22px;
+            margin-bottom: 22px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .formula-box::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(232, 184, 133, 0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .formula-label {
+            font-size: 0.78rem;
+            color: var(--accent-soft);
+            letter-spacing: 0.25em;
+            margin-bottom: 8px;
+            font-family: "JetBrains Mono", monospace;
+            position: relative;
+            z-index: 1;
+        }
+        .formula-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #f5e9d4;
+            line-height: 1.7;
+            font-family: "JetBrains Mono", "Noto Serif SC", monospace;
+            position: relative;
+            z-index: 1;
+        }
+        .formula-text .num-color { color: var(--accent-soft); }
+        .formula-text .den-color { color: #d4a78f; }
+        .formula-text .op { color: #8a7a6a; margin: 0 4px; }
+        /* ROI 组件卡片 */
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        @media (max-width: 900px) {
+            .components-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .component-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+            border-left: 3px solid var(--accent);
+        }
+        .component-card .cc-key {
+            font-size: 0.74rem;
+            color: var(--accent);
+            font-family: "JetBrains Mono", monospace;
+            letter-spacing: 0.05em;
+            margin-bottom: 2px;
+        }
+        .component-card .cc-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .component-card .cc-range {
+            font-size: 0.72rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 6px;
+        }
+        .component-card .cc-desc {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            line-height: 1.55;
+        }
+        .component-card.numerator { border-left-color: var(--accent-4); }
+        .component-card.denominator { border-left-color: var(--accent); }
+        /* ROI 表格配色 */
+        .roi-cell {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .roi-high { color: #6B8E5A; background: #f0f5e8; }
+        .roi-mid { color: var(--accent-2); background: #e8eff5; }
+        .roi-low { color: var(--accent); background: #fbeae5; }
+        /* ROI 折线图 */
+        #roi-trend-svg {
+            width: 100%;
+            height: 420px;
+            display: block;
+        }
+        .roi-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            max-width: 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+            line-height: 1.6;
+        }
+        .roi-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        /* 阶段对比卡片 */
+        .phase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        @media (max-width: 800px) {
+            .phase-grid { grid-template-columns: 1fr; }
+        }
+        .phase-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            position: relative;
+        }
+        .phase-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-deep);
+        }
+        .phase-card .pc-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .phase-card .pc-range {
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 8px;
+        }
+        .phase-card .pc-char {
+            font-size: 0.84rem;
+            color: var(--ink);
+            margin-bottom: 10px;
+            line-height: 1.6;
+            min-height: 50px;
+        }
+        .phase-card .pc-roi {
+            font-size: 1.6rem;
+            font-weight: 600;
+            font-family: "JetBrains Mono", monospace;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .phase-card .pc-count {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 8px;
+        }
+        .phase-card .pc-insight {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            font-style: italic;
+            border-top: 1px dashed var(--line);
+            padding-top: 8px;
+            line-height: 1.55;
+        }
+        /* 应用场景 */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 800px) {
+            .scenario-grid { grid-template-columns: 1fr; }
+        }
+        .scenario-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 18px;
+            border-left: 4px solid var(--accent-2);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .scenario-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-deep);
+        }
+        .scenario-card .sc-icon {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+        }
+        .scenario-card .sc-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent-2);
+            margin-bottom: 6px;
+        }
+        .scenario-card .sc-desc {
+            font-size: 0.85rem;
+            color: var(--ink);
+            line-height: 1.7;
+        }
+        /* 洞察栏 */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .insight-box ol, .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box ol {
+            counter-reset: insight-counter;
+        }
+        .insight-box ol li {
+            counter-increment: insight-counter;
+            padding: 8px 0 8px 32px;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            position: relative;
+        }
+        .insight-box ol li::before {
+            content: counter(insight-counter, decimal-leading-zero);
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .insight-box ul li {
+            padding: 8px 0 8px 22px;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            position: relative;
+        }
+        .insight-box ul li::before {
+            content: "▸";
+            position: absolute;
+            left: 4px;
+            top: 8px;
+            color: var(--accent);
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        /* 图例 */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 18px;
+            margin-top: 14px;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            display: inline-block;
+            border: 1px solid var(--line);
+        }
+        
+        
+        
+        footer .gen-time {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html">
+            <span class="seal">JTTW<br>Notes</span>
+            <span class="wordmark">Annotated Journey to the West</span>
+        </a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/methodology-matrix.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Methodology Matrix · Villain Evaluation &amp; Rescue ROI</p>
+        <p class="kicker">AC · Methodology Matrix</p>
+        <h1>Methodology Matrix · Villain Evaluation &amp; Rescue ROI</h1>
+        <p class="subtitle">METHODOLOGY · MATRIX</p>
+        <p class="tagline">A ready-to-use toolkit for analyzing any other IP</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice" id="dataSource">
+            Data source: embedded build. (To load the latest data, from the <code>site/</code> directory run <code>py -m http.server 8000</code>)
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">VILLAINS · Villains</div>
+                <div class="value">15<span style="font-size:1rem;color:var(--ink-soft);"> total</span></div>
+                <div class="desc">Villain evaluation samples</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">QUADRANTS · Quadrants</div>
+                <div class="value">4<span style="font-size:1rem;color:var(--ink-soft);"> types</span></div>
+                <div class="desc">Motivation × resources matrix categories</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">RESCUE CASES · Cases</div>
+                <div class="value">10<span style="font-size:1rem;color:var(--ink-soft);"> times</span></div>
+                <div class="desc">Reinforcement ROI analysis</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">AVG ROI · Average</div>
+                <div class="value" style="color:var(--accent-2);">3.52</div>
+                <div class="desc">Average ROI across 10 cases</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">MAX ROI · Highest</div>
+                <div class="value" style="color:var(--accent-4);">5.25</div>
+                <div class="desc">Yellow Wind Demon · Lingji case</div>
+            </div>
+        </div>
+
+        <!-- 1. 反派评估矩阵 -->
+        <section class="section">
+            <h2 class="section-title">Villain Evaluation Matrix · 2D Scatter Plot</h2>
+            <div class="section-sub">Plots all 15 monsters precisely onto a motivation × resources matrix, revealing the underlying law that affiliation decides fate.</div>
+
+            <div class="design-purpose" id="design-purpose"></div>
+
+            <div class="axes-row" id="axes-row"></div>
+
+            <h3 style="font-size:1rem;color:var(--accent-2);margin-bottom:10px;letter-spacing:0.05em;">Motivation × Resources Scatter Matrix</h3>
+            <div class="chart-wrap">
+                <svg id="matrix-svg"></svg>
+                <div class="matrix-tip" id="matrix-tip"></div>
+            </div>
+            <div class="legend" id="matrix-legend"></div>
+
+            <h3 style="font-size:1rem;color:var(--accent-2);margin:24px 0 10px;letter-spacing:0.05em;">Quadrant Stat Cards</h3>
+            <div class="quadrant-grid" id="quadrant-grid"></div>
+
+            <h3 style="font-size:1rem;color:var(--accent-2);margin:24px 0 10px;letter-spacing:0.05em;">Matrix Insights</h3>
+            <div class="insight-box">
+                <h4>Reading "Affiliation Decides Fate" from the Matrix Distribution</h4>
+                <ol id="matrix-insights"></ol>
+            </div>
+        </section>
+
+        <!-- 2. 反派位置表 -->
+        <section class="section">
+            <h2 class="section-title">Villain Position Table · 15 Rows</h2>
+            <div class="section-sub">Grouped and colored by quadrant, listing each monster's motivation analysis, resource analysis, outcome, and author's strategy.</div>
+            <div class="table-wrap">
+                <table class="data-table" id="villain-table">
+                    <thead>
+                        <tr>
+                            <th>Monster</th>
+                            <th>Chapter</th>
+                            <th>x motivation</th>
+                            <th>y resources</th>
+                            <th>Quadrant</th>
+                            <th>Motivation analysis</th>
+                            <th>Resource analysis</th>
+                            <th>Outcome</th>
+                            <th>Author's strategy</th>
+                        </tr>
+                    </thead>
+                    <tbody id="villain-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 3. 搬救兵 ROI 分析 -->
+        <section class="section">
+            <h2 class="section-title">Reinforcement ROI Analysis · Core Section</h2>
+            <div class="section-sub">ROI evaluation of 10 reinforcement cases · a 5-component formula · a 3-phase comparison.</div>
+
+            <h3 style="font-size:1rem;color:var(--accent-2);margin-bottom:10px;letter-spacing:0.05em;">ROI Formula</h3>
+            <div class="formula-box">
+                <div class="formula-label">RETURN ON INVESTMENT · Return on Investment</div>
+                <div class="formula-text">
+                    ROI = <span class="op">(</span><span class="num-color">Problem-solving efficiency</span><span class="op">×</span><span class="num-color">Favor spent</span><span class="op">×</span><span class="num-color">Marginal cost of next request</span><span class="op">)</span>
+                    <span class="op">/</span>
+                    <span class="op">(</span><span class="den-color">Time spent</span><span class="op">×</span><span class="den-color">Reputation loss</span><span class="op">)</span>
+                </div>
+            </div>
+
+            <div class="components-grid" id="components-grid"></div>
+
+            <h3 style="font-size:1rem;color:var(--accent-2);margin:24px 0 10px;letter-spacing:0.05em;">ROI Case Table · 10 Rows</h3>
+            <div class="table-wrap">
+                <table class="data-table" id="roi-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Monster</th>
+                            <th>Chapter</th>
+                            <th>Rescuer</th>
+                            <th>Phase</th>
+                            <th>eff</th>
+                            <th>favor</th>
+                            <th>marg</th>
+                            <th>time</th>
+                            <th>rep</th>
+                            <th>ROI</th>
+                            <th>Interpretation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="roi-tbody"></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1rem;color:var(--accent-2);margin:24px 0 10px;letter-spacing:0.05em;">ROI Trend Chart</h3>
+            <div class="chart-wrap">
+                <svg id="roi-trend-svg"></svg>
+                <div class="roi-tip" id="roi-tip"></div>
+            </div>
+            <div class="legend" id="roi-legend"></div>
+
+            <h3 style="font-size:1rem;color:var(--accent-2);margin:24px 0 10px;letter-spacing:0.05em;">Phase Comparison Cards</h3>
+            <div class="phase-grid" id="phase-grid"></div>
+
+            <h3 style="font-size:1rem;color:var(--accent-2);margin:24px 0 10px;letter-spacing:0.05em;">ROI Insights</h3>
+            <div class="insight-box">
+                <h4>Wukong's Growth Curve, Seen through ROI Evolution</h4>
+                <ol id="roi-insights"></ol>
+            </div>
+        </section>
+
+        <!-- 4. 应用场景 -->
+        <section class="section">
+            <h2 class="section-title">Use Cases · Methodology Transfer</h2>
+            <div class="section-sub">This "villain matrix + reinforcement ROI" framework transfers directly to the story analysis of any "help-seeking" protagonist.</div>
+            <div class="scenario-grid" id="scenario-grid"></div>
+        </section>
+
+        <!-- 5. 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="insight-box">
+                <h4>Methodology Matrix · Five Core Conclusions</h4>
+                <ul id="key-insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">Annotated Journey to the West</div>
+            <div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/07-学以致用/决策模型.md">Decision Model (essay, Chinese)</a></div>
+        </div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/methodology-matrix.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // ===== Embedded fallback data (used when fetch fails) =====
+    const EMBEDDED = {
+        villain_matrix: {
+            matrix_name: "Journey to the West Villain Evaluation Matrix",
+            design_purpose: "Plots every monster in the book precisely onto a <strong>motivation × resources</strong> matrix, revealing the underlying law that <strong>affiliation decides fate</strong>: monsters with backing all return to their posts, while rootless nobodies are all killed or flee.",
+            axes: {
+                x_axis: {
+                    name: "Source of motivation",
+                    range: [0, 10],
+                    direction: "0=pure survival → 10=metaphysical grudge",
+                    bands: [
+                        { range: "0-2", label: "Instinctive survival" },
+                        { range: "3-4", label: "Profit-driven" },
+                        { range: "5-6", label: "Will to power" },
+                        { range: "7-8", label: "Usurping the order" },
+                        { range: "9-10", label: "Metaphysical grudge" }
+                    ]
+                },
+                y_axis: {
+                    name: "Resource abundance",
+                    range: [0, 10],
+                    direction: "0=lone rootless operator → 10=cross-realm backing",
+                    bands: [
+                        { range: "0-2", label: "Rootless lone operator" },
+                        { range: "3-4", label: "Minor-demon followers" },
+                        { range: "5-6", label: "Mountain warlord" },
+                        { range: "7-8", label: "Heavenly-court ties" },
+                        { range: "9-10", label: "Cross-realm backing" }
+                    ]
+                }
+            },
+            quadrants: [
+                {
+                    id: "left_top", name: "Top-left", label: "Strong backing + metaphysical",
+                    x_range: "x: 7-10", y_range: "y: 7-10",
+                    description: "Top-tier backing + metaphysical motive — a rare top-tier villain, the only one in the book.",
+                    example_count: 1, typical_outcome: "Taken in personally by senior Buddhist figures",
+                    color: "#7a3a8c", visual: "top-right"
+                },
+                {
+                    id: "right_top", name: "Top-right", label: "Strong backing + survival",
+                    x_range: "x: 0-6", y_range: "y: 7-10",
+                    description: "Heavenly/Buddhist establishment + mission-driven — a mountain-warlord type shielded by affiliation.",
+                    example_count: 7, typical_outcome: "Reclaimed by their patron and restored to their post",
+                    color: "#3a6b8c", visual: "top-left"
+                },
+                {
+                    id: "left_bottom", name: "Bottom-left", label: "Weak backing + survival",
+                    x_range: "x: 0-6", y_range: "y: 0-6",
+                    description: "Rootless lone operator + instinctive survival — the classic cannon fodder, 40% of the book.",
+                    example_count: 6, typical_outcome: "Killed or driven to flee",
+                    color: "#c8463a", visual: "bottom-left"
+                },
+                {
+                    id: "right_bottom", name: "Bottom-right", label: "Weak backing + metaphysical",
+                    x_range: "x: 7-10", y_range: "y: 0-6",
+                    description: "Rootless origin + metaphysical motive — an inner-demon villain, the only one in the book.",
+                    example_count: 1, typical_outcome: "Killed (externalized inner demon)",
+                    color: "#C9A063", visual: "bottom-right"
+                }
+            ],
+            villain_positions: [
+                { monster: "White Bone Demon", chapter: "Ch. 27", x_motivation: 2, y_resource: 1, quadrant: "left_bottom",
+                  motivation_analysis: "Pure survival · cannibalism to extend life", resource_analysis: "No backing · no weapon · three lone transformations",
+                  outcome: "Killed", author_strategy: "Highlights the tension between Wukong's discerning eyes and Tang Sanzang's failure to see through the demon" },
+                { monster: "Yellow Robe Demon", chapter: "Ch. 28–30", x_motivation: 3, y_resource: 8, quadrant: "right_top",
+                  motivation_analysis: "Covets Baihuaxiu · driven by lust", resource_analysis: "Kui Wood Wolf descended to earth · a member of the 28 Mansions",
+                  outcome: "Reclaimed by the Jade Emperor", author_strategy: "Shows the protective power of heavenly-court affiliation" },
+                { monster: "Gold Horn & Silver Horn", chapter: "Ch. 32–35", x_motivation: 4, y_resource: 8, quadrant: "right_top",
+                  motivation_analysis: "Sent down on orders · mission-driven", resource_analysis: "Taishang Laojun's furnace boys · five magic treasures",
+                  outcome: "Reclaimed by Laojun", author_strategy: "Shows how treasure-wielding villains overpower by resources" },
+                { monster: "Red Boy", chapter: "Ch. 40–42", x_motivation: 5, y_resource: 7, quadrant: "right_top",
+                  motivation_analysis: "Carved out a territory · seeks immortality by eating Tang Sanzang", resource_analysis: "Son of the Bull Demon King · Samadhi Fire",
+                  outcome: "Taken by Guanyin as the Boy of Good Wealth", author_strategy: "Shows the rivalry between Buddhist and demon backing in winning him over" },
+                { monster: "Green Ox Demon", chapter: "Ch. 50–52", x_motivation: 3, y_resource: 9, quadrant: "right_top",
+                  motivation_analysis: "Seized the mountain and kidnapped people · classic profit type", resource_analysis: "Taishang Laojun's mount · the Diamond Snare",
+                  outcome: "Reclaimed by Laojun", author_strategy: "Shows a hierarchy where treasures trump martial force" },
+                { monster: "Six-Eared Macaque", chapter: "Ch. 56–58", x_motivation: 9, y_resource: 3, quadrant: "right_bottom",
+                  motivation_analysis: "Contends for the pilgrimage · usurps identity", resource_analysis: "No backing · relies only on identical appearance and skill",
+                  outcome: "Trapped under the Buddha's alms bowl · beaten to death by Wukong", author_strategy: "Externalized inner demon · the true-false distinction" },
+                { monster: "Great Peng, the Golden-Winged Roc", chapter: "Ch. 74–77", x_motivation: 9, y_resource: 10, quadrant: "left_top",
+                  motivation_analysis: "Avenges his sister + seeks immortality by eating Tang Sanzang", resource_analysis: "The Buddha's uncle · ruler of Lion-Camel Kingdom",
+                  outcome: "Subdued by the Buddha in person", author_strategy: "Shows the logic by which a top-tier Buddhist villain submits" },
+                { monster: "Yellow-Browed Demon", chapter: "Ch. 65–66", x_motivation: 6, y_resource: 8, quadrant: "right_top",
+                  motivation_analysis: "Impersonates the Buddha · usurps at Little Thunderclap Temple", resource_analysis: "Maitreya's boy · the Golden Cymbals and the Human-Seed Pouch",
+                  outcome: "Reclaimed by Maitreya", author_strategy: "Shows that usurpers within the establishment are still handled by it" },
+                { monster: "Scorpion Demon", chapter: "Ch. 54–55", x_motivation: 4, y_resource: 4, quadrant: "left_bottom",
+                  motivation_analysis: "Abducts Tang Sanzang for pleasure · driven by desire", resource_analysis: "Independent at Pipa Cave · the Horse-Felling Sting",
+                  outcome: "Taken by the Mao Sun Star Officer (the Rooster Star)", author_strategy: "Shows the folk logic of the Five Phases (rooster conquers scorpion)" },
+                { monster: "Spider Demons", chapter: "Ch. 72–73", x_motivation: 3, y_resource: 3, quadrant: "left_bottom",
+                  motivation_analysis: "Cannibalism to extend life · hold the mountain as their own", resource_analysis: "Seven sisters on their own · no backing",
+                  outcome: "Killed", author_strategy: "Shows the collective fate of female rootless villains" },
+                { monster: "Nine-Headed Bug", chapter: "Ch. 62–63", x_motivation: 4, y_resource: 5, quadrant: "left_bottom",
+                  motivation_analysis: "Steals the Buddha's relic · profit-driven", resource_analysis: "Consort of Bibo Lake · has demon followers",
+                  outcome: "Fled to the North Sea after Erlang Shen bit off one of its heads", author_strategy: "A rare escape case · leaves room for a sequel" },
+                { monster: "Green-Maned Lion Demon", chapter: "Ch. 74–77", x_motivation: 5, y_resource: 8, quadrant: "right_top",
+                  motivation_analysis: "Impersonates the King of Crow-Rooster · usurps the throne", resource_analysis: "Manjushri's mount",
+                  outcome: "Reclaimed by Manjushri", author_strategy: "Shows the usurpation template of a bodhisattva's mount" },
+                { monster: "Rat Demon", chapter: "Ch. 80–83", x_motivation: 5, y_resource: 7, quadrant: "right_top",
+                  motivation_analysis: "Abducts Tang Sanzang to be her husband · desire", resource_analysis: "Adopted daughter of Heavenly King Li · the Bottomless Cave of Sunken Void Mountain",
+                  outcome: "Reclaimed by Heavenly King Li and his sons", author_strategy: "Shows the protective role of kinship-based affiliation" },
+                { monster: "Bear Mountain Lord", chapter: "Ch. 13", x_motivation: 2, y_resource: 2, quadrant: "left_bottom",
+                  motivation_analysis: "Cannibal instinct · waylays at Twin-Fork Ridge", resource_analysis: "A mountain demon · partners with General Tiger",
+                  outcome: "Killed", author_strategy: "Early cannon fodder for the pilgrimage party · foreshadows the need for a team" },
+                { monster: "General Tiger", chapter: "Ch. 13", x_motivation: 2, y_resource: 2, quadrant: "left_bottom",
+                  motivation_analysis: "Cannibal instinct · waylays at Twin-Fork Ridge", resource_analysis: "A mountain tiger demon · partners with Bear Mountain Lord",
+                  outcome: "Killed", author_strategy: "Early cannon fodder for the pilgrimage party · rescued by Taibai Jinxing" }
+            ],
+            matrix_insights: [
+                "Bottom-left holds 40% · all killed or driven to flee — <strong>the fate of rootless cannon fodder</strong>",
+                "Top-right holds 47% · all reclaimed by their patrons — <strong>the affiliation-as-amulet effect</strong>",
+                "Top-left has just 1 case (Great Peng, the Golden-Winged Roc) · taken in by senior Buddhists — <strong>the submission logic of a top-tier villain</strong>",
+                "Bottom-right has just 1 case (Six-Eared Macaque) · the lone example of an <strong>inner-demon villain</strong>",
+                "Affiliation decides fate — this is the <strong>underlying law</strong> of the book's villain evaluation"
+            ]
+        },
+        rescue_roi: {
+            analysis_name: "Return on Investment of Calling for Reinforcements",
+            formula: "ROI = (Problem-solving efficiency × Favor spent × Marginal cost of the next request) / (Time spent × Reputation loss)",
+            components: [
+                { key: "efficiency", name: "Problem-solving efficiency", range: "0-10", description: "How efficiently the reinforcements dispatch the demon · 10=instant kill · 1=long back-and-forth", type: "numerator" },
+                { key: "favor_cost", name: "Favor spent", range: "0-10", description: "The scale of favors drawn on · 10=a top bodhisattva or celestial in person · 1=minor deities", type: "numerator" },
+                { key: "marginal_cost", name: "Marginal cost of next request", range: "0-10", description: "Prospects for long-term cooperation · 10=sustainable requests · 1=one-off expenditure", type: "numerator" },
+                { key: "time_cost", name: "Time spent", range: "0-10", description: "The time cost from deciding to ask for help to resolving the problem · 10=extremely long · 1=instant", type: "denominator" },
+                { key: "reputation_loss", name: "Reputation loss", range: "0-10", description: "How much asking for help damages one's prestige · 10=severe loss · 1=none", type: "denominator" }
+            ],
+            rescue_cases: [
+                { n: 1, monster: "Black Bear Demon", chapter: "Ch. 17", rescuer: "Guanyin", rescue_phase: "Early · instinctive",
+                  components: { efficiency: 8, favor_cost: 9, marginal_cost: 4, time_cost: 8, reputation_loss: 9 },
+                  roi_score: 2.4, roi_interpretation: "Deploying Guanyin in person was too costly · severe loss of prestige",
+                  analysis: "The very first request for reinforcements summoned Guanyin in person · highly efficient but extremely costly · and Guanyin became a standing dependency thereafter." },
+                { n: 2, monster: "Yellow Wind Demon", chapter: "Ch. 21", rescuer: "Lingji", rescue_phase: "Early · instinctive",
+                  components: { efficiency: 9, favor_cost: 4, marginal_cost: 7, time_cost: 3, reputation_loss: 3 },
+                  roi_score: 5.25, roi_interpretation: "The right remedy · a small cost solves a big problem",
+                  analysis: "Bodhisattva Lingji is the specific counter to Yellow Wind · the right remedy · low time cost and small reputation loss · the highest ROI." },
+                { n: 3, monster: "Red Boy", chapter: "Ch. 42", rescuer: "Guanyin", rescue_phase: "Middle · learning",
+                  components: { efficiency: 9, favor_cost: 8, marginal_cost: 6, time_cost: 5, reputation_loss: 5 },
+                  roi_score: 4.17, roi_interpretation: "First proactive request to Guanyin · establishes long-term cooperation",
+                  analysis: "Wukong learns to ask for help proactively · Guanyin takes Red Boy as the Boy of Good Wealth · a long-term partnership is built." },
+                { n: 4, monster: "Green Ox Demon", chapter: "Ch. 52", rescuer: "Laojun", rescue_phase: "Middle · learning",
+                  components: { efficiency: 7, favor_cost: 10, marginal_cost: 3, time_cost: 9, reputation_loss: 8 },
+                  roi_score: 2.68, roi_interpretation: "Deploys top-tier resources to handle Laojun's own mount",
+                  analysis: "The Diamond Snare stole every deity's weapon · ultimately Laojun had to descend in person · severe loss of prestige." },
+                { n: 5, monster: "Scorpion Demon", chapter: "Ch. 55", rescuer: "Mao Sun Star Officer", rescue_phase: "Middle · learning",
+                  components: { efficiency: 8, favor_cost: 5, marginal_cost: 7, time_cost: 4, reputation_loss: 5 },
+                  roi_score: 3.5, roi_interpretation: "Five-Phase countering · precise matching",
+                  analysis: "Guanyin points the way · the Mao Sun Star Officer's rooster conquers the scorpion · precise Five-Phase matching." },
+                { n: 6, monster: "Bull Demon King", chapter: "Ch. 61", rescuer: "Nezha + heavenly troops", rescue_phase: "Middle · learning",
+                  components: { efficiency: 7, favor_cost: 10, marginal_cost: 2, time_cost: 10, reputation_loss: 9 },
+                  roi_score: 1.8, roi_interpretation: "Old friends turned foes · heavenly siege · the highest cost",
+                  analysis: "Three attempts at the Plantain Fan plus a heavenly siege · old friends turned foes · the longest time and greatest prestige loss." },
+                { n: 7, monster: "Yellow-Browed Demon", chapter: "Ch. 66", rescuer: "Maitreya", rescue_phase: "Late · actuary",
+                  components: { efficiency: 8, favor_cost: 8, marginal_cost: 5, time_cost: 5, reputation_loss: 5 },
+                  roi_score: 3.75, roi_interpretation: "An internal Buddhist matter · handled in a closed loop",
+                  analysis: "Maitreya Buddha came in person to reclaim him · handled internally within the Buddhist camp · Wukong learns to find the right person." },
+                { n: 8, monster: "The Three Demons of Lion-Camel Ridge", chapter: "Ch. 77", rescuer: "the Tathagata", rescue_phase: "Late · actuary",
+                  components: { efficiency: 10, favor_cost: 9, marginal_cost: 5, time_cost: 2, reputation_loss: 4 },
+                  roi_score: 5.0, roi_interpretation: "Top-tier resources resolve a top-tier crisis · extremely efficient",
+                  analysis: "Tathagata Buddha came in person · all three demons were taken · the most efficient solution to a top-tier crisis." },
+                { n: 9, monster: "Rat Demon", chapter: "Ch. 83", rescuer: "Heavenly King Li", rescue_phase: "Late · actuary",
+                  components: { efficiency: 8, favor_cost: 7, marginal_cost: 6, time_cost: 5, reputation_loss: 5 },
+                  roi_score: 3.33, roi_interpretation: "An adopted daughter returns to her father · a heavenly family matter",
+                  analysis: "Heavenly King Li's adopted daughter returns to her father · a classic case of kinship-based affiliation." },
+                { n: 10, monster: "Nine-Headed Lion", chapter: "Ch. 90", rescuer: "Taiyi", rescue_phase: "Late · actuary",
+                  components: { efficiency: 9, favor_cost: 7, marginal_cost: 6, time_cost: 4, reputation_loss: 6 },
+                  roi_score: 3.33, roi_interpretation: "Nine-Headed Lion answers his master's call · no resistance",
+                  analysis: "One call from Taiyi the Merciful Celestial and he submits · no resistance · high efficiency." }
+            ],
+            phase_analysis: [
+                { phase: "Early · instinctive", chapter_range: "Ch. 13–22", characteristic: "Fight first, ask only when losing",
+                  avg_roi: 3.83, rescue_count: 2, insight: "Instinctive requests · draws on top-tier resources but with weak cost awareness" },
+                { phase: "Middle · learning", chapter_range: "Ch. 40–61", characteristic: "Begins precise matching · but still has costly cases",
+                  avg_roi: 3.04, rescue_count: 4, insight: "Learning requests · starts calculating ROI but is not yet adept" },
+                { phase: "Late · actuary", chapter_range: "Ch. 65–90", characteristic: "The right remedy · stable ROI",
+                  avg_roi: 3.85, rescue_count: 4, insight: "Actuary-style requests · stable ROI · mature resource management" }
+            ],
+            roi_insights: [
+                "<strong>The Yellow Wind Demon case</strong> proves: the right remedy beats resource rank · even a minor bodhisattva can instantly dispatch a great demon",
+                "<strong>The Bull Demon King case</strong> proves: old friends turned foes + a heavenly siege = the highest cost · the emotional cost is the dearest",
+                "<strong>A late-stage ROI rebound</strong>: Wukong rises from 1.8 (Bull Demon King) to 5.0 (Lion-Camel Ridge) as he learns to calculate",
+                "<strong>Guanyin becomes the standing rescuer</strong>: diminishing marginal cost · first 2.4 → second 4.17 → third outright recruitment",
+                "<strong>The Lion-Camel Ridge case</strong>: a top-tier crisis + top-tier reinforcements = peak efficiency · the Tathagata arrives in person and instantly takes all three demons"
+            ],
+            application_scenarios: [
+                { scenario: "Harry Potter", icon: "⚡", description: "Harry's <strong>Dumbledore help-seeking pattern</strong>: every problem requires the headmaster himself, but after his death Harry must face Voldemort alone. ROI starts at its peak and ends at zero." },
+                { scenario: "The Lord of the Rings", icon: "💍", description: "Frodo's <strong>Gandalf help-seeking pattern</strong>: Gandalf intervenes only at critical moments, and Frodo must complete the main task on his own. The most balanced ROI." },
+                { scenario: "Workplace · managing up", icon: "💼", description: "<strong>Managing upward resources</strong>: precisely match problems to a superior's domain of competence, avoid deploying top-tier resources on small problems, and build a sustainable help-seeking relationship." },
+                { scenario: "Startup · investor support", icon: "🚀", description: "<strong>Seeking investor support</strong>: early investors retain value in later rounds, and long-term partnership beats a one-off ask · diminishing marginal cost." }
+            ]
+        },
+        summary: {
+            villain_count: 15,
+            quadrant_count: 4,
+            left_bottom_count: 6,
+            right_top_count: 7,
+            rescue_cases: 10,
+            avg_roi: 3.52,
+            max_roi: 5.25
+        }
+    };
+
+    // ===== Color mapping =====
+    const QUADRANT_COLORS = {
+        "left_top": "#7a3a8c",      // strong backing + metaphysical · purple
+        "right_top": "#3a6b8c",     // strong backing + survival · blue
+        "left_bottom": "#c8463a",   // weak backing + survival · red
+        "right_bottom": "#C9A063"   // weak backing + metaphysical · brown
+    };
+    const QUADRANT_LABELS = {
+        "left_top": "Top-left · strong backing + metaphysical",
+        "right_top": "Top-right · strong backing + survival",
+        "left_bottom": "Bottom-left · weak backing + survival",
+        "right_bottom": "Bottom-right · weak backing + metaphysical"
+    };
+    const PHASE_COLORS = {
+        "Early · instinctive": "#c8463a",
+        "Middle · learning": "#d97706",
+        "Late · actuary": "#6B8E5A"
+    };
+
+    // ===== Render: design purpose =====
+    function renderDesignPurpose(purpose) {
+        document.getElementById("design-purpose").innerHTML = purpose;
+    }
+
+    // ===== Render: axis explanations =====
+    function renderAxes(axes) {
+        const sel = d3.select("#axes-row");
+        sel.selectAll("*").remove();
+        [axes.x_axis, axes.y_axis].forEach(ax => {
+            const card = sel.append("div").attr("class", "axis-card");
+            card.append("div").attr("class", "axis-name").text("AXIS · " + ax.name.toUpperCase());
+            card.append("div").attr("class", "axis-desc").text(ax.direction);
+            const bands = card.append("div").attr("class", "axis-bands");
+            ax.bands.forEach(b => {
+                bands.append("span").text(b.range + " " + b.label);
+            });
+        });
+    }
+
+    // ===== Render: scatter matrix (core) =====
+    function renderMatrix(data) {
+        const svg = d3.select("#matrix-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("matrix-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 560;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 40, right: 80, bottom: 60, left: 70 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+
+        const x = d3.scaleLinear().domain([0, 10]).range([0, innerW]);
+        const y = d3.scaleLinear().domain([0, 10]).range([innerH, 0]);
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // translucent quadrant backgrounds (visual position: low-x left, high-y up)
+        // visual bottom-left (x:0-5, y:0-5) = weak backing + survival = red = data "left_bottom"
+        // visual top-left (x:0-5, y:5-10) = strong backing + survival = blue = data "right_top"
+        // visual bottom-right (x:5-10, y:0-5) = weak backing + metaphysical = brown = data "right_bottom"
+        // visual top-right (x:5-10, y:5-10) = strong backing + metaphysical = purple = data "left_top"
+        const visualQuads = [
+            { vx: 0, vy: 0, vw: 5, vh: 5, color: QUADRANT_COLORS.left_bottom, label: "Bottom-left · weak backing + survival", count: 0 },
+            { vx: 0, vy: 5, vw: 5, vh: 5, color: QUADRANT_COLORS.right_top, label: "Top-right · strong backing + survival", count: 0 },
+            { vx: 5, vy: 0, vw: 5, vh: 5, color: QUADRANT_COLORS.right_bottom, label: "Bottom-right · weak backing + metaphysical", count: 0 },
+            { vx: 5, vy: 5, vw: 5, vh: 5, color: QUADRANT_COLORS.left_top, label: "Top-left · strong backing + metaphysical", count: 0 }
+        ];
+
+        // count monsters per visual quadrant (from x/y data, not the quadrant field)
+        data.villain_positions.forEach(v => {
+            const xInLow = v.x_motivation < 5;
+            const yInLow = v.y_resource < 5;
+            if (xInLow && yInLow) visualQuads[0].count++;
+            else if (xInLow && !yInLow) visualQuads[1].count++;
+            else if (!xInLow && yInLow) visualQuads[2].count++;
+            else visualQuads[3].count++;
+        });
+
+        // quadrant backgrounds
+        visualQuads.forEach(q => {
+            g.append("rect")
+                .attr("x", x(q.vx))
+                .attr("y", y(q.vy + q.vh))
+                .attr("width",Math.max(0, x(q.vw) - x(0)))
+                .attr("height", y(0) - y(q.vh))
+                .attr("fill", q.color)
+                .attr("opacity", 0.10)
+                .attr("stroke", q.color)
+                .attr("stroke-opacity", 0.25)
+                .attr("stroke-dasharray", "4,4");
+        });
+
+        // quadrant labels (4 corners)
+        const labelPositions = [
+            { x: 0.2, y: 0.4, anchor: "start", q: visualQuads[0] },     // bottom-left
+            { x: 0.2, y: 9.8, anchor: "start", q: visualQuads[1] },     // top-left
+            { x: 9.8, y: 0.4, anchor: "end", q: visualQuads[2] },       // bottom-right
+            { x: 9.8, y: 9.8, anchor: "end", q: visualQuads[3] }        // top-right
+        ];
+        labelPositions.forEach(p => {
+            const lg = g.append("g").attr("transform", `translate(${x(p.x)},${y(p.y)})`);
+            lg.append("text")
+                .attr("text-anchor", p.anchor)
+                .style("font-size", "0.82rem")
+                .style("font-weight", "600")
+                .style("fill", p.q.color)
+                .text(p.q.label);
+            lg.append("text")
+                .attr("text-anchor", p.anchor)
+                .attr("dy", 16)
+                .style("font-size", "0.74rem")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "var(--ink-soft)")
+                .text("Count: " + p.q.count);
+        });
+
+        // center dividing lines
+        g.append("line")
+            .attr("x1", x(5)).attr("x2", x(5))
+            .attr("y1", 0).attr("y2", innerH)
+            .attr("stroke", "var(--line)").attr("stroke-dasharray", "3,3").attr("opacity", 0.6);
+        g.append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", y(5)).attr("y2", y(5))
+            .attr("stroke", "var(--line)").attr("stroke-dasharray", "3,3").attr("opacity", 0.6);
+
+        // X axis
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(10).tickFormat(d => d))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
+
+        // Y axis
+        g.append("g")
+            .call(d3.axisLeft(y).ticks(10).tickFormat(d => d))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
+
+        // axis labels
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 44)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.86rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent-3)")
+            .text("X · Source of motivation (0=pure survival → 10=metaphysical grudge)");
+
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerH / 2)
+            .attr("y", -52)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.86rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent-3)")
+            .text("Y · Resource abundance (0=lone rootless operator → 10=cross-realm backing)");
+
+        // grid lines
+        g.append("g")
+            .selectAll("line")
+            .data([1, 2, 3, 4, 6, 7, 8, 9])
+            .enter()
+            .append("line")
+            .attr("x1", d => x(d)).attr("x2", d => x(d))
+            .attr("y1", 0).attr("y2", innerH)
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "2,3")
+            .attr("opacity", 0.4);
+        g.append("g")
+            .selectAll("line")
+            .data([1, 2, 3, 4, 6, 7, 8, 9])
+            .enter()
+            .append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", d => y(d)).attr("y2", d => y(d))
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "2,3")
+            .attr("opacity", 0.4);
+
+        // scatter points (monsters)
+        const tip = d3.select("#matrix-tip");
+
+        // handle overlapping points (slight offset)
+        const positionMap = {};
+        data.villain_positions.forEach(v => {
+            const key = v.x_motivation + "-" + v.y_resource;
+            if (!positionMap[key]) positionMap[key] = [];
+            positionMap[key].push(v);
+        });
+        const offsetted = [];
+        data.villain_positions.forEach(v => {
+            const key = v.x_motivation + "-" + v.y_resource;
+            const group = positionMap[key];
+            const idx = group.indexOf(v);
+            const total = group.length;
+            const offset = (idx - (total - 1) / 2) * 0.18;
+            offsetted.push({
+                ...v,
+                _x: v.x_motivation + offset,
+                _y: v.y_resource + (idx % 2 === 0 ? 0 : -0.18)
+            });
+        });
+
+        g.selectAll(".villain-dot")
+            .data(offsetted)
+            .enter()
+            .append("circle")
+            .attr("class", "villain-dot")
+            .attr("cx", d => x(d._x))
+            .attr("cy", d => y(d._y))
+            .attr("r", 0)
+            .attr("fill", d => QUADRANT_COLORS[d.quadrant])
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .style("cursor", "pointer")
+            .transition()
+            .delay((d, i) => 200 + i * 60)
+            .duration(500)
+            .ease(d3.easeBackOut)
+            .attr("r", 8);
+
+        // monster name labels (small text)
+        g.selectAll(".villain-label")
+            .data(offsetted)
+            .enter()
+            .append("text")
+            .attr("class", "villain-label")
+            .attr("x", d => x(d._x))
+            .attr("y", d => y(d._y) - 14)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.76rem")
+            .style("font-weight", "600")
+            .style("fill", d => QUADRANT_COLORS[d.quadrant])
+            .style("opacity", 0)
+            .style("pointer-events", "none")
+            .text(d => d.monster)
+            .transition()
+            .delay((d, i) => 500 + i * 60)
+            .duration(400)
+            .style("opacity", 1);
+
+        // rebind events (after animation)
+        g.selectAll(".villain-dot")
+            .on("mouseover", function(e, d) {
+                d3.select(this).transition().duration(150).attr("r", 12);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${d.monster} · ${d.chapter}</div>` +
+                          `<div class="tip-row">motivation x=${d.x_motivation} · resources y=${d.y_resource}</div>` +
+                          `<div class="tip-row">Quadrant: ${QUADRANT_LABELS[d.quadrant]}</div>` +
+                          `<div class="tip-divider"></div>` +
+                          `<div><strong style="color:var(--accent-soft);">Motivation analysis</strong><br/>${d.motivation_analysis}</div>` +
+                          `<div style="margin-top:4px;"><strong style="color:var(--accent-soft);">Resource analysis</strong><br/>${d.resource_analysis}</div>` +
+                          `<div class="tip-divider"></div>` +
+                          `<div><strong style="color:var(--accent-soft);">Outcome</strong>: ${d.outcome}</div>` +
+                          `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;"><strong>Author's strategy</strong>: ${d.author_strategy}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = el.parentElement.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).transition().duration(150).attr("r", 8);
+                tip.style("opacity", 0);
+            });
+
+        // render legend
+        renderMatrixLegend();
+    }
+
+    function renderMatrixLegend() {
+        const sel = d3.select("#matrix-legend");
+        sel.selectAll("*").remove();
+        const items = [
+            { color: QUADRANT_COLORS.left_top, label: "Top-left · strong backing + metaphysical" },
+            { color: QUADRANT_COLORS.right_top, label: "Top-right · strong backing + survival" },
+            { color: QUADRANT_COLORS.left_bottom, label: "Bottom-left · weak backing + survival" },
+            { color: QUADRANT_COLORS.right_bottom, label: "Bottom-right · weak backing + metaphysical" }
+        ];
+        items.forEach(it => {
+            const d = sel.append("div").attr("class", "legend-item");
+            d.append("span").attr("class", "legend-swatch").style("background", it.color).style("opacity", "0.7");
+            d.append("span").text(it.label);
+        });
+    }
+
+    // ===== Render: quadrant stat cards =====
+    function renderQuadrantCards(quadrants) {
+        const sel = d3.select("#quadrant-grid");
+        sel.selectAll("*").remove();
+        quadrants.forEach(q => {
+            const card = sel.append("div").attr("class", "quadrant-card")
+                .style("border-top-color", q.color);
+            card.append("div").attr("class", "qc-name").style("color", q.color).text("QUADRANT · " + q.name.toUpperCase());
+            card.append("div").attr("class", "qc-label").text(q.label);
+            card.append("div").attr("class", "qc-range").text(q.x_range + " · " + q.y_range);
+            card.append("div").attr("class", "qc-desc").text(q.description);
+            card.append("div").attr("class", "qc-count").style("color", q.color).text(q.example_count);
+            card.append("div").attr("class", "qc-outcome").text("Typical outcome: " + q.typical_outcome);
+        });
+    }
+
+    // ===== Render: matrix insights =====
+    function renderMatrixInsights(insights) {
+        const ol = d3.select("#matrix-insights");
+        ol.selectAll("*").remove();
+        insights.forEach(t => ol.append("li").html(t));
+    }
+
+    // ===== Render: villain position table =====
+    function renderVillainTable(villains) {
+        const tbody = d3.select("#villain-tbody");
+        tbody.selectAll("*").remove();
+        // group order by quadrant: left_top → right_top → left_bottom → right_bottom
+        const order = ["left_top", "right_top", "left_bottom", "right_bottom"];
+        const sorted = villains.slice().sort((a, b) => {
+            const oa = order.indexOf(a.quadrant);
+            const ob = order.indexOf(b.quadrant);
+            if (oa !== ob) return oa - ob;
+            return b.y_resource - a.y_resource;
+        });
+        sorted.forEach(v => {
+            const tr = tbody.append("tr");
+            tr.append("td").html(`<strong>${v.monster}</strong>`);
+            tr.append("td").attr("class", "mono").text(v.chapter);
+            tr.append("td").attr("class", "num").text(v.x_motivation);
+            tr.append("td").attr("class", "num").text(v.y_resource);
+            tr.append("td").html(`<span class="quad-badge" style="background:${QUADRANT_COLORS[v.quadrant]}">${QUADRANT_LABELS[v.quadrant]}</span>`);
+            tr.append("td").text(v.motivation_analysis);
+            tr.append("td").text(v.resource_analysis);
+            tr.append("td").text(v.outcome);
+            tr.append("td").style("color", "var(--ink-soft)").style("font-style", "italic").text(v.author_strategy);
+        });
+    }
+
+    // ===== Render: ROI component cards =====
+    function renderComponents(components) {
+        const sel = d3.select("#components-grid");
+        sel.selectAll("*").remove();
+        components.forEach(c => {
+            const card = sel.append("div").attr("class", "component-card " + c.type);
+            card.append("div").attr("class", "cc-key").text(c.key.toUpperCase() + (c.type === "numerator" ? " · numerator" : " · denominator"));
+            card.append("div").attr("class", "cc-name").text(c.name);
+            card.append("div").attr("class", "cc-range").text("Range " + c.range);
+            card.append("div").attr("class", "cc-desc").text(c.description);
+        });
+    }
+
+    // ===== Render: ROI case table =====
+    function renderRoiTable(cases) {
+        const tbody = d3.select("#roi-tbody");
+        tbody.selectAll("*").remove();
+        cases.forEach(c => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "num").text(c.n);
+            tr.append("td").html(`<strong>${c.monster}</strong>`);
+            tr.append("td").attr("class", "mono").text(c.chapter);
+            tr.append("td").text(c.rescuer);
+            tr.append("td").html(`<span class="phase-badge" style="background:${PHASE_COLORS[c.rescue_phase]}">${c.rescue_phase}</span>`);
+            tr.append("td").attr("class", "num").text(c.components.efficiency);
+            tr.append("td").attr("class", "num").text(c.components.favor_cost);
+            tr.append("td").attr("class", "num").text(c.components.marginal_cost);
+            tr.append("td").attr("class", "num").text(c.components.time_cost);
+            tr.append("td").attr("class", "num").text(c.components.reputation_loss);
+            const roiCls = c.roi_score >= 4.0 ? "roi-high" : c.roi_score >= 3.0 ? "roi-mid" : "roi-low";
+            tr.append("td").attr("class", "roi-cell " + roiCls).text(c.roi_score.toFixed(2));
+            tr.append("td").style("color", "var(--ink-soft)").style("font-size", "0.78rem").text(c.roi_interpretation);
+        });
+    }
+
+    // ===== Render: ROI line chart (core) =====
+    function renderRoiTrend(cases, phases) {
+        const svg = d3.select("#roi-trend-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("roi-trend-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 420;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 40, right: 50, bottom: 70, left: 60 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+
+        const x = d3.scaleLinear().domain([0.5, cases.length + 0.5]).range([0, innerW]);
+        const y = d3.scaleLinear().domain([0, 6]).range([innerH, 0]);
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // phase background bands (by case index)
+        const phaseRanges = {};
+        cases.forEach((c, i) => {
+            if (!phaseRanges[c.rescue_phase]) phaseRanges[c.rescue_phase] = { start: i + 1, end: i + 1 };
+            else phaseRanges[c.rescue_phase].end = i + 1;
+        });
+        Object.entries(phaseRanges).forEach(([phase, range]) => {
+            const color = PHASE_COLORS[phase];
+            g.append("rect")
+                .attr("x", x(range.start - 0.5))
+                .attr("y", 0)
+                .attr("width",Math.max(0, x(range.end + 0.5) - x(range.start - 0.5)))
+                .attr("height", innerH)
+                .attr("fill", color)
+                .attr("opacity", 0.08);
+            // phase labels
+            g.append("text")
+                .attr("x", (x(range.start - 0.5) + x(range.end + 0.5)) / 2)
+                .attr("y", -14)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.82rem")
+                .style("font-weight", "600")
+                .style("fill", color)
+                .text(phase);
+        });
+
+        // X axis (by case number)
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(cases.length).tickFormat(d => {
+                const idx = Math.round(d) - 1;
+                if (idx < 0 || idx >= cases.length) return "";
+                return cases[idx].monster;
+            }))
+            .selectAll("text")
+            .style("font-size", "0.72rem")
+            .style("fill", "var(--ink-soft)")
+            .attr("transform", "rotate(-25)")
+            .style("text-anchor", "end");
+
+        // Y axis
+        g.append("g")
+            .call(d3.axisLeft(y).ticks(6).tickFormat(d => d.toFixed(1)))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
+
+        // axis labels
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerH / 2)
+            .attr("y", -44)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.86rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent-3)")
+            .text("ROI score");
+
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 58)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.86rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent-3)")
+            .text("Reinforcement cases (in chapter order)");
+
+        // grid lines
+        g.append("g")
+            .selectAll("line")
+            .data([1, 2, 3, 4, 5])
+            .enter()
+            .append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", d => y(d)).attr("y2", d => y(d))
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "3,3")
+            .attr("opacity", 0.5);
+
+        // average ROI line
+        const avgRoi = cases.reduce((s, c) => s + c.roi_score, 0) / cases.length;
+        g.append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", y(avgRoi)).attr("y2", y(avgRoi))
+            .attr("stroke", "var(--accent-3)")
+            .attr("stroke-dasharray", "6,3")
+            .attr("opacity", 0.6);
+        g.append("text")
+            .attr("x", innerW - 4)
+            .attr("y", y(avgRoi) - 6)
+            .attr("text-anchor", "end")
+            .style("font-size", "0.74rem")
+            .style("fill", "var(--accent-3)")
+            .style("font-style", "italic")
+            .text("Average ROI " + avgRoi.toFixed(2));
+
+        // find max and min points
+        const maxCase = cases.reduce((a, b) => a.roi_score > b.roi_score ? a : b);
+        const minCase = cases.reduce((a, b) => a.roi_score < b.roi_score ? a : b);
+
+        // the line
+        const line = d3.line()
+            .x((d, i) => x(i + 1))
+            .y(d => y(d.roi_score))
+            .curve(d3.curveMonotoneX);
+
+        const path = g.append("path")
+            .datum(cases)
+            .attr("fill", "none")
+            .attr("stroke", "var(--accent)")
+            .attr("stroke-width", 3)
+            .attr("d", line);
+
+        // path animation
+        const totalLen = path.node().getTotalLength();
+        path.attr("stroke-dasharray", totalLen)
+            .attr("stroke-dashoffset", totalLen)
+            .transition()
+            .duration(1500)
+            .ease(d3.easeCubicOut)
+            .attr("stroke-dashoffset", 0);
+
+        // data points
+        const tip = d3.select("#roi-tip");
+        g.selectAll(".roi-dot")
+            .data(cases)
+            .enter()
+            .append("circle")
+            .attr("class", "roi-dot")
+            .attr("cx", (d, i) => x(i + 1))
+            .attr("cy", d => y(d.roi_score))
+            .attr("r", 0)
+            .attr("fill", d => PHASE_COLORS[d.rescue_phase])
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .style("cursor", "pointer")
+            .transition()
+            .delay((d, i) => 200 + i * 100)
+            .duration(400)
+            .ease(d3.easeBackOut)
+            .attr("r", 7);
+
+        // rebind events
+        g.selectAll(".roi-dot")
+            .on("mouseover", function(e, d) {
+                d3.select(this).transition().duration(150).attr("r", 11);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${d.monster} · ${d.chapter}</div>` +
+                          `<div style="color:#e9b885;font-size:0.78rem;">Rescuer: ${d.rescuer} · ${d.rescue_phase}</div>` +
+                          `<div style="margin-top:4px;">ROI：<strong style="color:var(--accent-soft);">${d.roi_score.toFixed(2)}</strong></div>` +
+                          `<div style="margin-top:4px;font-size:0.78rem;">${d.roi_interpretation}</div>` +
+                          `<div class="tip-divider"></div>` +
+                          `<div style="font-size:0.78rem;color:#e9b885;">eff=${d.components.efficiency} · favor=${d.components.favor_cost} · marg=${d.components.marginal_cost}</div>` +
+                          `<div style="font-size:0.78rem;color:#e9b885;">time=${d.components.time_cost} · rep=${d.components.reputation_loss}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = el.parentElement.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).transition().duration(150).attr("r", 7);
+                tip.style("opacity", 0);
+            });
+
+        // label the max point
+        const maxIdx = cases.indexOf(maxCase);
+        g.append("text")
+            .attr("x", x(maxIdx + 1))
+            .attr("y", y(maxCase.roi_score) - 14)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent-4)")
+            .style("opacity", 0)
+            .text("Max " + maxCase.roi_score.toFixed(2))
+            .transition().delay(1600).duration(400)
+            .style("opacity", 1);
+        g.append("circle")
+            .attr("cx", x(maxIdx + 1))
+            .attr("cy", y(maxCase.roi_score))
+            .attr("r", 12)
+            .attr("fill", "none")
+            .attr("stroke", "var(--accent-4)")
+            .attr("stroke-width", 2)
+            .style("opacity", 0)
+            .transition().delay(1600).duration(400)
+            .style("opacity", 1);
+
+        // label the min point
+        const minIdx = cases.indexOf(minCase);
+        g.append("text")
+            .attr("x", x(minIdx + 1))
+            .attr("y", y(minCase.roi_score) + 22)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent)")
+            .style("opacity", 0)
+            .text("Min " + minCase.roi_score.toFixed(2))
+            .transition().delay(1800).duration(400)
+            .style("opacity", 1);
+        g.append("circle")
+            .attr("cx", x(minIdx + 1))
+            .attr("cy", y(minCase.roi_score))
+            .attr("r", 12)
+            .attr("fill", "none")
+            .attr("stroke", "var(--accent)")
+            .attr("stroke-width", 2)
+            .style("opacity", 0)
+            .transition().delay(1800).duration(400)
+            .style("opacity", 1);
+
+        // legend
+        renderRoiLegend();
+    }
+
+    function renderRoiLegend() {
+        const sel = d3.select("#roi-legend");
+        sel.selectAll("*").remove();
+        Object.entries(PHASE_COLORS).forEach(([phase, color]) => {
+            const d = sel.append("div").attr("class", "legend-item");
+            d.append("span").attr("class", "legend-swatch").style("background", color).style("opacity", "0.6");
+            d.append("span").text(phase);
+        });
+        sel.append("div").attr("class", "legend-item")
+            .html("<span style='width:18px;height:3px;background:var(--accent);display:inline-block;'></span><span>ROI trend curve</span>");
+        sel.append("div").attr("class", "legend-item")
+            .html("<span style='width:18px;height:0;border-top:2px dashed var(--accent-3);display:inline-block;'></span><span>Average ROI</span>");
+    }
+
+    // ===== Render: phase comparison cards =====
+    function renderPhaseCards(phases) {
+        const sel = d3.select("#phase-grid");
+        sel.selectAll("*").remove();
+        phases.forEach(p => {
+            const color = PHASE_COLORS[p.phase];
+            const card = sel.append("div").attr("class", "phase-card")
+                .style("border-top", `4px solid ${color}`);
+            card.append("div").attr("class", "pc-name").style("color", color).text(p.phase);
+            card.append("div").attr("class", "pc-range").text(p.chapter_range);
+            card.append("div").attr("class", "pc-char").text("Traits: " + p.characteristic);
+            const roi = card.append("div").attr("class", "pc-roi").style("color", color).text(p.avg_roi.toFixed(2));
+            card.append("div").attr("class", "pc-count").text("Cases: " + p.rescue_count + " · average ROI");
+            card.append("div").attr("class", "pc-insight").text(p.insight);
+        });
+    }
+
+    // ===== Render: ROI insights =====
+    function renderRoiInsights(insights) {
+        const ol = d3.select("#roi-insights");
+        ol.selectAll("*").remove();
+        insights.forEach(t => ol.append("li").html(t));
+    }
+
+    // ===== Render: application scenarios =====
+    function renderScenarios(scenarios) {
+        const sel = d3.select("#scenario-grid");
+        sel.selectAll("*").remove();
+        scenarios.forEach(s => {
+            const card = sel.append("div").attr("class", "scenario-card");
+            card.append("div").attr("class", "sc-icon").text(s.icon);
+            card.append("div").attr("class", "sc-name").text(s.scenario);
+            card.append("div").attr("class", "sc-desc").html(s.description);
+        });
+    }
+
+    // ===== Render: key insights =====
+    function renderKeyInsights() {
+        const insights = [
+            "The villain matrix reveals <strong>affiliation decides fate</strong> · monsters with backing all return to their posts · those without are all killed or driven to flee.",
+            "Bottom-left quadrant monsters hold <strong>40%</strong> · all killed or driven to flee · the typical <strong>bottom-tier cannon fodder</strong>.",
+            "<strong>Great Peng, the Golden-Winged Roc</strong> is the sole top-left-quadrant top-tier villain · subdued by the Tathagata in person · the highest-standard disposal in the book.",
+            "Wukong goes from fight-first to instant errand-runner · his ROI rises from <strong>2.4</strong> (Black Bear Demon) to <strong>5.0</strong> (Lion-Camel Ridge) as he learns to calculate his requests.",
+            "This methodology transfers directly to the story analysis of <strong>any help-seeking protagonist</strong> · such as Harry Potter, The Lord of the Rings, the workplace, and startups."
+        ];
+        const ul = d3.select("#key-insights");
+        ul.selectAll("*").remove();
+        insights.forEach(t => ul.append("li").html(t));
+    }
+
+    // ===== Data loading =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error("fetch failed: " + path);
+            return await res.json();
+        } catch (e) {
+            console.warn("[INFO] using embedded data for", path, ":", e.message);
+            return fallback;
+        }
+    }
+
+    async function loadAll() {
+        const [vm, rr, sm] = await Promise.all([
+            loadJson("../../scripts/output/data/villain_matrix.json", EMBEDDED.villain_matrix),
+            loadJson("../../scripts/output/data/rescue_roi.json", EMBEDDED.rescue_roi),
+            loadJson("../../scripts/output/data/methodology_summary.json", EMBEDDED.summary)
+        ]);
+        return { villain_matrix: vm, rescue_roi: rr, summary: sm };
+    }
+
+    // ===== Main flow =====
+    async function main() {
+        const data = await loadAll();
+        window.__data = data;
+
+        // detect whether data is embedded
+        const isEmbedded = (data.villain_matrix === EMBEDDED.villain_matrix);
+        if (!isEmbedded) {
+            document.getElementById("dataSource").innerHTML =
+                "Data source: loaded live from <code>scripts/output/data/</code> (running in http server mode)";
+        }
+
+        renderDesignPurpose(data.villain_matrix.design_purpose);
+        renderAxes(data.villain_matrix.axes);
+        renderMatrix(data.villain_matrix);
+        renderQuadrantCards(data.villain_matrix.quadrants);
+        renderMatrixInsights(data.villain_matrix.matrix_insights);
+        renderVillainTable(data.villain_matrix.villain_positions);
+
+        renderComponents(data.rescue_roi.components);
+        renderRoiTable(data.rescue_roi.rescue_cases);
+        renderRoiTrend(data.rescue_roi.rescue_cases, data.rescue_roi.phase_analysis);
+        renderPhaseCards(data.rescue_roi.phase_analysis);
+        renderRoiInsights(data.rescue_roi.roi_insights);
+
+        renderScenarios(data.rescue_roi.application_scenarios);
+        renderKeyInsights();
+
+        // generation time
+        const _gt = document.getElementById("gen-time"); if (_gt) _gt.textContent = "Data generated: " + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
+    }
+
+    // redraw on window resize
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__data) {
+                renderMatrix(window.__data.villain_matrix);
+                renderRoiTrend(window.__data.rescue_roi.rescue_cases, window.__data.rescue_roi.phase_analysis);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // horizontal (bottom) axis: rotate + shrink
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // vertical (left) axis: shrink + hide smaller overlapping labels
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // exclude axis ticks, legend, title, axis labels, heatmap cells, tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // add <title> to keep the full name (visible on hover)
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-2fkG0Q7rdVpn9PB3QIO5Yysnoz8pU44AO/0TFNHtMx8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Workplace Buzzwords · Annotated Journey to the West</title>
+    <script defer src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        
+        @media (max-width: 720px) {
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        /* 项目复盘卡片 */
+        .project-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .meta-item {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 10px 14px;
+        }
+        .meta-item .k {
+            font-size: 0.75rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 2px;
+        }
+        .meta-item .v {
+            font-size: 0.95rem;
+            color: var(--ink);
+            font-weight: 600;
+        }
+        #milestone-svg {
+            width: 100%;
+            height: 200px;
+            display: block;
+        }
+        .milestone-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            max-width: 240px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        /* 效能曲线 */
+        #effectiveness-svg {
+            width: 100%;
+            height: 420px;
+            display: block;
+        }
+        .eff-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            max-width: 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .eff-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        /* 差旅行程表 */
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        #trip-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+        #trip-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 10px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        #trip-table tbody tr {
+            border-bottom: 1px solid var(--line);
+        }
+        #trip-table tbody tr:nth-child(even) { background: var(--bg); }
+        #trip-table tbody tr:hover { background: #fff8ec; }
+        #trip-table td {
+            padding: 9px 12px;
+            vertical-align: top;
+        }
+        #trip-table td.num {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent-3);
+            width: 60px;
+            text-align: center;
+            font-weight: 600;
+        }
+        #trip-table td.delay {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent);
+            text-align: center;
+            font-weight: 600;
+            width: 90px;
+        }
+        .alert-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fff;
+            white-space: nowrap;
+            letter-spacing: 0.05em;
+        }
+        /* 简历卡片 */
+        .resume-basic {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin-bottom: 20px;
+        }
+        .resume-basic h3 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+        .resume-basic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 8px 24px;
+            font-size: 0.88rem;
+        }
+        .resume-basic-grid .field { color: var(--ink-soft); }
+        .resume-basic-grid .field strong { color: var(--ink); }
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .work-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent-2);
+            border-radius: 6px;
+            padding: 14px 16px;
+        }
+        .work-card .wc-company {
+            color: var(--accent-2);
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 2px;
+        }
+        .work-card .wc-position {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+        .work-card .wc-duration {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 8px;
+        }
+        .work-card .wc-ach {
+            font-size: 0.85rem;
+            color: var(--ink);
+            margin-bottom: 6px;
+            line-height: 1.6;
+        }
+        .work-card .wc-reason {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            font-style: italic;
+            border-top: 1px dashed var(--line);
+            padding-top: 6px;
+        }
+        #skill-svg {
+            width: 100%;
+            height: 260px;
+            display: block;
+            margin-bottom: 24px;
+        }
+        .interview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 16px;
+        }
+        .interview-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 18px;
+            position: relative;
+        }
+        .interview-card .ic-emoji {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            font-size: 1.4rem;
+        }
+        .interview-card .ic-q {
+            color: var(--accent);
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            letter-spacing: 0.05em;
+        }
+        .interview-card .ic-question {
+            font-size: 0.88rem;
+            color: var(--ink);
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .interview-card .ic-a-label {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            margin-bottom: 2px;
+        }
+        .interview-card .ic-answer {
+            font-size: 0.84rem;
+            color: var(--ink-soft);
+            line-height: 1.65;
+            background: #fff;
+            border-left: 2px solid var(--accent-soft);
+            padding: 8px 10px;
+            border-radius: 0 4px 4px 0;
+        }
+        .interview-card .ic-note {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--accent-4);
+            font-style: italic;
+        }
+        /* 黑话词典 */
+        .buzzword-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+            gap: 14px;
+        }
+        .buzzword-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px 16px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            position: relative;
+            overflow: hidden;
+        }
+        .buzzword-card::before {
+            content: "";
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--accent);
+        }
+        .buzzword-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(60, 40, 20, 0.12);
+        }
+        .buzzword-card .bw-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            gap: 8px;
+        }
+        .buzzword-card .bw-word {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .buzzword-card .bw-cat {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 8px;
+            background: var(--accent-soft);
+            color: var(--accent-3);
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        .buzzword-card .bw-meaning {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+        }
+        .buzzword-card .bw-usage {
+            font-size: 0.84rem;
+            color: var(--ink);
+            background: var(--bg);
+            border-radius: 4px;
+            padding: 8px 10px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        .buzzword-card .bw-usage::before {
+            content: "西游用法 · ";
+            color: var(--accent-3);
+            font-style: normal;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+        /* 洞察栏 */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        
+        
+        footer .gen-time {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html">
+            <span class="seal">JTTW<br>Notes</span>
+            <span class="wordmark">Annotated Journey to the West</span>
+        </a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/workplace.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Workplace Buzzwords</p>
+        <p class="kicker">V · Workplace</p>
+        <h1>Workplace Buzzwords</h1>
+        <p class="subtitle">WORKPLACE &amp; BUZZWORDS</p>
+        <p class="tagline">14 Years of Mandatory Team-Building · 5 Promoted to Buddhahood · A+ Project Retrospective</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice" id="dataSource">
+            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">DURATION · Project Duration</div>
+                <div class="value">14<span style="font-size:1rem;color:var(--ink-soft);"> years</span></div>
+                <div class="desc">Zhenguan Years 13–27 · Mandatory Team-Building</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">TEAM · Team Size</div>
+                <div class="value">5<span style="font-size:1rem;color:var(--ink-soft);"> members</span></div>
+                <div class="desc">Tang Sanzang · Wukong · Bajie · Sha Wujing · White Dragon Horse</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">DELIVERY · Deliverable</div>
+                <div class="value">5048<span style="font-size:1rem;color:var(--ink-soft);"> scrolls</span></div>
+                <div class="desc">Mahāyāna Sutras · Delivered at Lingshan</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">RATING · Final Rating</div>
+                <div class="value" style="color:var(--accent);">A+</div>
+                <div class="desc">Five Saints Attain Buddhahood · Merit Complete</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：Scripture-Fetching Project Retrospective Card -->
+        <section class="section">
+            <h2 class="section-title">Scripture-Fetching Project Retrospective Card</h2>
+            <div class="section-sub">Project code TANG-XIYOU-14Y, spanning 14 years, with 5 milestones from initiation to closure.</div>
+            <div class="project-meta" id="project-meta"></div>
+            <h3 style="font-size:1rem;color:var(--accent-2);margin-bottom:10px;letter-spacing:0.05em;">Milestone Timeline</h3>
+            <div style="position:relative;">
+                <svg id="milestone-svg"></svg>
+                <div class="milestone-tip" id="milestone-tip"></div>
+            </div>
+        </section>
+
+        <!-- 图表 2：团队效能曲线（核心） -->
+        <section class="section">
+            <h2 class="section-title">Team Effectiveness Curve · Core Metrics</h2>
+            <div class="section-sub">Four-stage effectiveness evolution across Forming → Storming → Norming → Performing; dots mark key spike events — hover for details.</div>
+            <div style="position:relative;">
+                <svg id="effectiveness-svg"></svg>
+                <div class="eff-tip" id="eff-tip"></div>
+            </div>
+            <div class="legend" style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin-top:14px;font-size:0.82rem;">
+                <div style="display:flex;align-items:center;gap:6px;">
+                    <span style="width:18px;height:3px;background:var(--accent);display:inline-block;"></span>
+                    <span>Phase effectiveness curve</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                    <span style="width:12px;height:12px;background:var(--accent-2);border-radius:50%;display:inline-block;"></span>
+                    <span>Phase points (Forming/Storming/Norming/Performing)</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                    <span style="width:12px;height:12px;background:var(--accent-4);border-radius:50%;display:inline-block;border:2px solid var(--accent);"></span>
+                    <span>Spike events</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 图表 3：The Eighty-One Tribulations Travel Itinerary -->
+        <section class="section">
+            <h2 class="section-title">The Eighty-One Tribulations Travel Itinerary</h2>
+            <div class="section-sub">12 representative trips, sorted by alert level (Yellow &lt; Orange &lt; Red &lt; SSS), with weather and delay days.</div>
+            <div class="table-wrap">
+                <table id="trip-table">
+                    <thead>
+                        <tr>
+                            <th>Tribulation No.</th>
+                            <th>Travel Item</th>
+                            <th>Location</th>
+                            <th>Alert Level</th>
+                            <th>Weather</th>
+                            <th>Remarks</th>
+                            <th>Delay (days)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="trip-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 图表 4：悟空简历卡片 -->
+        <section class="section">
+            <h2 class="section-title">Sun Wukong · Resume Card</h2>
+            <div class="section-sub">Tech lead's resume: basic info + 3 work experiences + 5 skills + 3 stress-interview questions.</div>
+            <div id="resume-basic" class="resume-basic"></div>
+            <h3 style="font-size:1rem;color:var(--accent-2);margin-bottom:10px;letter-spacing:0.05em;">Work Experience</h3>
+            <div class="work-grid" id="work-grid"></div>
+            <h3 style="font-size:1rem;color:var(--accent-2);margin-bottom:10px;letter-spacing:0.05em;">Skills Bar Chart</h3>
+            <svg id="skill-svg"></svg>
+            <h3 style="font-size:1rem;color:var(--accent-2);margin-bottom:10px;letter-spacing:0.05em;">Stress-Interview Q&A</h3>
+            <div class="interview-grid" id="interview-grid"></div>
+        </section>
+
+        <!-- 图表 5：互联网黑话词典 -->
+        <section class="section">
+            <h2 class="section-title">Internet Corporate Jargon Dictionary · 15 Terms</h2>
+            <div class="section-sub">Each term includes a Chinese definition, a Journey to the West usage example, and a category badge — cross-referenced against the scripture project's context.</div>
+            <div class="buzzword-grid" id="buzzword-grid"></div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="insight-box">
+                <h4>Viewing the Scripture Project from a Worker's Perspective</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">Annotated Journey to the West</div>
+            <div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/07-学以致用/领导力.md">Leadership (essay, Chinese)</a></div>
+        </div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/workplace.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // ===== 嵌入式 fallback 数据（fetch 失败时使用）=====
+    const EMBEDDED = {
+        project_review: {
+            project_name: "Tang Dynasty Cultural Communications Group · Journey to the West Strategic Project",
+            project_code: "TANG-XIYOU-14Y",
+            duration_years: 14,
+            sponsor: "Li Shimin (Emperor Taizong of Tang)",
+            pm: "Tang Sanzang (Project Manager)",
+            tech_lead: "Sun Wukong (Tech Lead)",
+            team_size: 5,
+            deliverables: "5048 Scrolls of the Mahāyāna Sutras",
+            milestones: [
+                { phase: "Initiation", year: "Zhenguan Year 13", event: "Water-Land Assembly · Tang Sanzang Commissioned", kpi: "Project Initiation" },
+                { phase: "Team Assembly", year: "Zhenguan Years 13–14", event: "Recruited Wukong · White Dragon · Bajie · Sha Wujing", kpi: "Team of 5 Complete" },
+                { phase: "Execution", year: "Zhenguan Years 14–26", event: "The Eighty-One Tribulations", kpi: "Difficulty 81/81" },
+                { phase: "Delivery", year: "Zhenguan Year 27", event: "Sutras at Lingshan · Rebirth at Lingyun Ferry", kpi: "5048 Scrolls of Sutras" },
+                { phase: "Closure", year: "Zhenguan Year 27", event: "Return East · Five Saints Attain Buddhahood", kpi: "5 Promoted to Buddhahood" }
+            ],
+            final_review: { rating: "A+", comment: "Delivered in full · 5 promoted · sutras to Chang'an · merit complete" }
+        },
+        team_effectiveness: {
+            phases: [
+                { phase: "Forming · Founding Stage", chapter_range: "12-22", effectiveness: 5, feature: "Team assembled · members joined with baggage · settling in" },
+                { phase: "Storming · Conflict Stage", chapter_range: "23-58", effectiveness: 4, feature: "White-Bone Demon battles · Wukong expelled · True vs. False Monkey King · team trust crisis" },
+                { phase: "Norming · Normalization", chapter_range: "59-90", effectiveness: 8, feature: "Flaming Mountain · Little Thunderclap · Lion-Camel Ridge · collaboration matures" },
+                { phase: "Performing · Peak Performance", chapter_range: "91-100", effectiveness: 10, feature: "Azure Dragon Mountain · Tianzhu · Lingyun Ferry · Five Saints Attain Buddhahood" }
+            ],
+            spike_points: [
+                { chapter: 30, event: "Wukong returns to the rescue · Tang Sanzang turned into a tiger", spike: 2, note: "First return after Storming · trust rebuilt" },
+                { chapter: 58, event: "True and False Monkey King distinguished", spike: 3, note: "Storming ends · entering Norming" },
+                { chapter: 77, event: "Lion-Camel Ridge · Tathāgata descends personally", spike: 5, note: "Performing begins · team synergy peaks" },
+                { chapter: 98, event: "Lingyun Ferry · complete transformation", spike: 10, note: "Performing peak · Five Saints Attain Buddhahood" }
+            ]
+        },
+        trip_report: [
+            { n: 5, hardship: "Encountered a Tiger Outside the City", location: "Shuangcha Ridge", alert_level: "Yellow", weather: "Mountain forest · tiger's roar", remark: "Recommend a mountain-forest allowance", delay_days: 1 },
+            { n: 11, hardship: "Lost the Kasaya", location: "Guanyin Monastery · Black Wind Mountain", alert_level: "Orange", weather: "Night fire · demonic aura", remark: "Equipment (kasaya) lost; recommend purchasing insurance", delay_days: 3 },
+            { n: 17, hardship: "Black Bear Spirit Blocks the Road", location: "Black Wind Cave", alert_level: "Orange", weather: "Black miasma pervades", remark: "Requires Sister Guanyin to mediate in person", delay_days: 2 },
+            { n: 27, hardship: "Three Battles with the White-Bone Demon", location: "White Tiger Ridge", alert_level: "Red", weather: "White-bone yin aura", remark: "Team infighting · the executor was expelled", delay_days: 7 },
+            { n: 41, hardship: "Red Boy · Samādhi Fire", location: "Fire-Cloud Cave, Mount Hao", alert_level: "Red · Extreme Heat", weather: "Extreme-heat red alert", remark: "Recommend a heat allowance", delay_days: 5 },
+            { n: 47, hardship: "Tongtian River · Goldfish Spirit", location: "Tongtian River", alert_level: "Red · Flood", weather: "Walking on ice · then a flood", remark: "Force majeure (flood) encountered; trip delayed", delay_days: 4 },
+            { n: 50, hardship: "Gold-Bangle Cave · Vajra Snare", location: "Mount Jindou", alert_level: "Red", weather: "A myriad golden rays", remark: "The gods' weapons were snared · requires Laojun to descend", delay_days: 6 },
+            { n: 59, hardship: "Borrowing the Plantain Fan Thrice", location: "Flaming Mountain · Plantain Cave", alert_level: "Red · Extreme Heat", weather: "Eight hundred li of Flaming Mountain", remark: "Extreme heat · recommend heat allowance + heat-relief supplies", delay_days: 8 },
+            { n: 65, hardship: "Little Thunderclap Monastery · Yellow-Browed Demon", location: "Little Western Paradise", alert_level: "Red · False Buddha", weather: "False Buddha's halo", remark: "All the gods trapped in the Human-Seed Pouch · requires Maitreya to descend", delay_days: 7 },
+            { n: 74, hardship: "The Three Demon Kings of Lion-Camel Ridge", location: "Lion-Camel Ridge · Lion-Camel Kingdom", alert_level: "SSS · Citywide Emergency", weather: "Skulls piled like a ridge", remark: "Citywide state of emergency · SSS alert level · Tathāgata descends", delay_days: 12 },
+            { n: 82, hardship: "Bottomless Cave · Rat Spirit", location: "Mount Xiankong", alert_level: "Red", weather: "Black miasma over the mountain", remark: "Adopted daughter of Heavenly King Li · requires ancestral tablet mediation", delay_days: 4 },
+            { n: 91, hardship: "Azure Dragon Mountain · Three Rhinoceroses", location: "Azure Dragon Mountain", alert_level: "Orange", weather: "Chilling cold light", remark: "Stole 50,000 jin of aromatic oil · requires the Four Stars to subdue", delay_days: 5 }
+        ],
+        wukong_resume: {
+            basic_info: {
+                name: "Sun Wukong", alias: "Great Sage Equal to Heaven · Victorious Fighting Buddha",
+                birthplace: "Flower-Fruit Mountain, East Pūrvavideha Continent",
+                education: "Three-Star Cave of the Slanting Moon, Mount Lingtai Fangcun (Patriarch Bodhi's Academy)",
+                major: "Seventy-Two Earthly Transformations · Somersault Cloud",
+                phone: "Golden-Banded Staff hotline (direct dial, 13,500 jin)"
+            },
+            work_experience: [
+                { company: "Heavenly Court Group", position: "Bimawen (Head of the Imperial Stables)", duration: "Half a month", achievements: "Managed a thousand heavenly horses · established standardized feeding procedures", reason_for_leave: "Role mismatched with ability · seeking greater challenges" },
+                { company: "Heavenly Court Group · Great Sage Residence", position: "Great Sage Equal to Heaven (no specific duties · retained on payroll)", duration: "Several months", achievements: "Planned and executed a disruptive stress test against a large multinational group (the Heavenly Court), driving a full upgrade of its security systems and organizational structure", reason_for_leave: "After the stress test · frozen for 500 years by the Five Elements Mountain project" },
+                { company: "Tang Dynasty Cultural Communications Group · Scripture-Fetching Project", position: "Tech Lead (Eldest Senior Brother)", duration: "14 years", achievements: "Led the resolution of 60+ technical challenges among the Eighty-One Tribulations · summoned reinforcements 30+ times · ensured delivery", reason_for_leave: "Project closure · promoted to Victorious Fighting Buddha" }
+            ],
+            skills: [
+                { skill: "Seventy-Two Earthly Transformations", level: "Expert", note: "Avoids the three calamities · myriad transformations" },
+                { skill: "Somersault Cloud", level: "Expert", note: "108,000 li per somersault · cross-continental travel" },
+                { skill: "Fiery Golden Eyes", level: "Senior", note: "Sees through demons' true forms · but vulnerable to smoke" },
+                { skill: "Summoning Reinforcements", level: "Master", note: "Heavenly Court / Lingshan / South Sea · full-domain resource dispatch" },
+                { skill: "Golden-Banded Staff", level: "Expert", note: "13,500 jin · grows and shrinks at will" }
+            ],
+            stress_interview: [
+                { question: "You once resigned over a management-philosophy clash with your direct supervisor (Tang Sanzang), returning to Flower-Fruit Mountain after the White-Bone Demon affair. How would you ensure a healthy supervisor-subordinate relationship in your new role?", wukong_answer: "That resignation was a necessary period of reflection. I later realized there was an execution-boundary issue between my supervisor's 'no-kill' baseline and my 'exterminate evil' executor. After the True and False Monkey King incident, I learned to 'align' goals with my supervisor before acting, to avoid misjudgment. The Tight-Fillet Spell also served as an external execution-control mechanism that helped me curb my impulses.", emoji_note: "A bitter smile while wearing the Tight-Fillet Spell" },
+                { question: "Your 'stress test' of the Heavenly Court (Havoc in Heaven) caused serious consequences. How do you explain this 'trial and error'?", wukong_answer: "That was a misplaced need for personal value and institutional recognition. At the time I did not realize the Heavenly Court's bureaucracy could not accommodate an unestablished 'self-proclaimed Great Sage Equal to Heaven' identity. That trial and error taught me that realizing value within a system requires a compliant path, not violent confrontation.", emoji_note: "Scratching his head with an awkward smile" },
+                { question: "You frequently 'summon reinforcements.' How do you assess your ability to solve problems independently?", wukong_answer: "Summoning reinforcements is a mature expression of resource dispatch. Early on I leaned toward 'fight first, ask later'; later I learned to precisely calculate the ROI of calling for help: problem-solving efficiency × favors consumed ÷ time spent × prestige lost. I handle independently what can be handled independently (such as the White-Bone Demon or the Three Immortals of Chechi); for demons with powerful backing (such as Red Boy or the Gold-Bangle Cave), reinforcements are a must — a rational choice in organizational behavior.", emoji_note: "Resting his chin on his hand, analyzing seriously" }
+            ]
+        },
+        internet_buzzwords: [
+            { buzzword: "Alignment", chinese_meaning: "To align · to synchronize", xiyou_usage: "Tang Sanzang calls a team meeting: 'We must align on the mountain today — this mountain has a demonic aura.'", category: "Meeting Jargon" },
+            { buzzword: "Empowerment", chinese_meaning: "To grant capability", xiyou_usage: "Guanyin gives Wukong three life-saving hairs: 'I have come specially to empower you.'", category: "Resource Support" },
+            { buzzword: "Underlying Logic", chinese_meaning: "Fundamental principle", xiyou_usage: "Tathāgata explains to Wukong: 'The underlying logic of your Havoc in Heaven is actually a misplaced need for personal value and institutional recognition.'", category: "Methodology" },
+            { buzzword: "Granularity", chinese_meaning: "Degree of detail", xiyou_usage: "Wukong reports: 'The granularity of the Lion-Camel Ridge demons is too coarse — three fiend kings seized the whole city.'", category: "Reporting Jargon" },
+            { buzzword: "Handle", chinese_meaning: "Point of leverage", xiyou_usage: "Wukong to Bajie: 'Your rake is the handle — don't drop it!'", category: "Execution Jargon" },
+            { buzzword: "Closed Loop", chinese_meaning: "Complete cycle", xiyou_usage: "Tathāgata: 'The scripture-fetching project must form a closed loop — all eighty-one tribulations are indispensable.'", category: "Methodology" },
+            { buzzword: "Approach", chinese_meaning: "Strategy and method", xiyou_usage: "Wukong: 'This demon's approach is transformation plus brute force; if that fails, summon reinforcements.'", category: "Execution Jargon" },
+            { buzzword: "Sedimentation", chinese_meaning: "Accumulation", xiyou_usage: "Tang Sanzang: 'After 14 years of scripture-fetching, we must sediment 5,048 scrolls of true scripture.'", category: "Methodology" },
+            { buzzword: "Mental Model", chinese_meaning: "Cognitive structure", xiyou_usage: "Tathāgata: 'A restless mind and wandering will mean the mental model is not yet corrected — the Tight-Fillet Spell is needed as external intervention.'", category: "Methodology" },
+            { buzzword: "Agile Development", chinese_meaning: "Rapid iteration", xiyou_usage: "Wukong: 'First scout the situation, then summon reinforcements — that is the essence of agile development.'", category: "Execution Jargon" },
+            { buzzword: "MVP", chinese_meaning: "Minimum viable product", xiyou_usage: "Guanyin: 'First recruit one disciple as a trial — this is an MVP; expand the team once it works.'", category: "Project Jargon" },
+            { buzzword: "OKR", chinese_meaning: "Objectives and key results", xiyou_usage: "Tathāgata sets the OKRs: O = successful scripture retrieval; KR1 = the Eighty-One Tribulations; KR2 = completed in 14 years; KR3 = 5 people promoted.", category: "Project Jargon" },
+            { buzzword: "Managing Up", chinese_meaning: "Managing one's superiors", xiyou_usage: "Wukong: 'Master, stop trying to send me away — this is called managing up.'", category: "Workplace Jargon" },
+            { buzzword: "Break Through", chinese_meaning: "Resolve thoroughly", xiyou_usage: "Wukong: 'This time we'll break through Lion-Camel Ridge completely — leave no lingering trouble.'", category: "Execution Jargon" },
+            { buzzword: "Reuse", chinese_meaning: "Repeated use", xiyou_usage: "Wukong: 'The Tight-Fillet Spell has too high a reuse rate — it gets recited every time.'", category: "Methodology" }
+        ]
+    };
+
+    // ===== 配色映射 =====
+    const ALERT_COLORS = {
+        "Yellow": "#e9b885",
+        "Orange": "#d97706",
+        "Red": "#c8463a",
+        "Red · Extreme Heat": "#c8463a",
+        "Red · Flood": "#c8463a",
+        "Red · False Buddha": "#c8463a",
+        "SSS · Citywide Emergency": "#1a1410"
+    };
+    const ALERT_RANK = {
+        "Yellow": 1, "Orange": 2, "Red": 3, "Red · Extreme Heat": 3,
+        "Red · Flood": 3, "Red · False Buddha": 3, "SSS · Citywide Emergency": 4
+    };
+    const SKILL_LEVEL_VALUE = { "Junior": 2, "Intermediate": 4, "Senior": 6, "Expert": 8, "Master": 10 };
+    const PHASE_COLORS = ["#3a6b8c", "#c8463a", "#C9A063", "#6B8E5A"];
+    const CAT_COLORS = {
+        "Meeting Jargon": "#3a6b8c", "Resource Support": "#6B8E5A", "Methodology": "#C9A063",
+        "Reporting Jargon": "#c8463a", "Execution Jargon": "#d97706", "Project Jargon": "#1a1410", "Workplace Jargon": "#C9A063"
+    };
+
+    // ===== 渲染：项目复盘卡片 =====
+    function renderProjectMeta(p) {
+        const meta = d3.select("#project-meta");
+        meta.selectAll("*").remove();
+        const items = [
+            { k: "PROJECT · Project Name", v: p.project_name },
+            { k: "CODE · Code Name", v: p.project_code },
+            { k: "DURATION · Duration", v: p.duration_years + " years" },
+            { k: "SPONSOR · Sponsor", v: p.sponsor },
+            { k: "PM · Project Manager", v: p.pm },
+            { k: "TECH LEAD · Tech Lead", v: p.tech_lead },
+            { k: "TEAM · Team", v: p.team_size + " members" },
+            { k: "DELIVERY · Delivery", v: p.deliverables },
+            { k: "RATING · Rating", v: p.final_review.rating + " · " + p.final_review.comment }
+        ];
+        items.forEach(it => {
+            const div = meta.append("div").attr("class", "meta-item");
+            div.append("div").attr("class", "k").text(it.k);
+            div.append("div").attr("class", "v").text(it.v);
+        });
+    }
+
+    function renderMilestone(milestones) {
+        const svg = d3.select("#milestone-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("milestone-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 200;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 50, right: 40, bottom: 50, left: 40 };
+        const innerW = w - margin.left - margin.right;
+        const cy = h / 2;
+
+        // 主轴
+        svg.append("line")
+            .attr("x1", margin.left).attr("x2", w - margin.right)
+            .attr("y1", cy).attr("y2", cy)
+            .attr("stroke", "var(--line)").attr("stroke-width", 2);
+
+        const xStep = innerW / (milestones.length - 1);
+        const tip = d3.select("#milestone-tip");
+
+        milestones.forEach((m, i) => {
+            const x = margin.left + xStep * i;
+            const g = svg.append("g").attr("transform", `translate(${x},${cy})`);
+
+            // 节点圆
+            g.append("circle")
+                .attr("r", 8)
+                .attr("fill", "var(--accent)")
+                .attr("stroke", "#fff").attr("stroke-width", 2)
+                .style("cursor", "pointer")
+                .on("mouseover", function(e) {
+                    d3.select(this).transition().duration(150).attr("r", 11);
+                    tip.style("opacity", 1)
+                        .html(`<strong style="color:var(--accent-soft);">${m.phase}</strong><br/>` +
+                              `<span style="font-size:0.78rem;color:#e9b885;">${m.year}</span><br/>` +
+                              `${m.event}<br/>` +
+                              `<span style="color:var(--accent-soft);">KPI: ${m.kpi}</span>`);
+                })
+                .on("mousemove", function(e) {
+                    const rect = el.parentElement.getBoundingClientRect();
+                    tip.style("left", (e.clientX - rect.left + 14) + "px")
+                       .style("top", (e.clientY - rect.top - 10) + "px");
+                })
+                .on("mouseout", function() {
+                    d3.select(this).transition().duration(150).attr("r", 8);
+                    tip.style("opacity", 0);
+                });
+
+            // 阶段名（上方）
+            g.append("text")
+                .attr("y", -22)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.82rem")
+                .style("font-weight", "600")
+                .style("fill", "var(--accent-2)")
+                .text(m.phase);
+
+            // 年份（下方）
+            g.append("text")
+                .attr("y", 28)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.75rem")
+                .style("fill", "var(--accent-3)")
+                .style("font-family", "JetBrains Mono, monospace")
+                .text(m.year);
+
+            // 事件（更下方）
+            const lines = m.event.split("·");
+            lines.forEach((ln, j) => {
+                g.append("text")
+                    .attr("y", 44 + j * 14)
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "0.75rem")
+                    .style("fill", "var(--ink-soft)")
+                    .text(ln);
+            });
+        });
+    }
+
+    // ===== 渲染：团队效能曲线 =====
+    function renderEffectiveness(data) {
+        const svg = d3.select("#effectiveness-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("effectiveness-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 420;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 40, right: 40, bottom: 60, left: 50 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+
+        const phases = data.phases;
+        const spikes = data.spike_points;
+
+        // 解析章节范围中点
+        phases.forEach(p => {
+            const [a, b] = p.chapter_range.split("-").map(Number);
+            p._mid = (a + b) / 2;
+            p._start = a;
+            p._end = b;
+        });
+
+        const xMin = 12, xMax = 100;
+        const x = d3.scaleLinear().domain([xMin, xMax]).range([0, innerW]);
+        const y = d3.scaleLinear().domain([0, 11]).range([innerH, 0]);
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 阶段背景带
+        phases.forEach((p, i) => {
+            g.append("rect")
+                .attr("x", x(p._start))
+                .attr("y", 0)
+                .attr("width",Math.max(0, x(p._end) - x(p._start)))
+                .attr("height", innerH)
+                .attr("fill", PHASE_COLORS[i])
+                .attr("opacity", 0.06);
+        });
+
+        // 阶段标签
+        phases.forEach((p, i) => {
+            g.append("text")
+                .attr("x", x(p._mid))
+                .attr("y", -16)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.82rem")
+                .style("font-weight", "600")
+                .style("fill", PHASE_COLORS[i])
+                .text(p.phase);
+            g.append("text")
+                .attr("x", x(p._mid))
+                .attr("y", -2)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.7rem")
+                .style("fill", "var(--ink-soft)")
+                .style("font-family", "JetBrains Mono, monospace")
+                .text("Ch. " + p.chapter_range);
+        });
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(10).tickFormat(d => "Ch. " + d))
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "var(--ink-soft)");
+
+        // Y 轴
+        g.append("g")
+            .call(d3.axisLeft(y).ticks(10).tickFormat(d => d))
+            .selectAll("text").style("font-size", "0.75rem").style("fill", "var(--ink-soft)");
+
+        // 轴标签
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerH / 2)
+            .attr("y", -38)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "var(--accent-3)")
+            .text("Effectiveness Score");
+
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 44)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "var(--accent-3)")
+            .text("Chapters (Project Timeline)");
+
+        // 网格线
+        g.append("g")
+            .selectAll("line")
+            .data([2, 4, 6, 8, 10])
+            .enter()
+            .append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", d => y(d)).attr("y2", d => y(d))
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "3,3")
+            .attr("opacity", 0.5);
+
+        // 主效能曲线（阶段点）
+        const line = d3.line()
+            .x(d => x(d._mid))
+            .y(d => y(d.effectiveness))
+            .curve(d3.curveMonotoneX);
+
+        const path = g.append("path")
+            .datum(phases)
+            .attr("fill", "none")
+            .attr("stroke", "var(--accent)")
+            .attr("stroke-width", 3)
+            .attr("d", line);
+
+        // 路径动画
+        const totalLen = path.node().getTotalLength();
+        path.attr("stroke-dasharray", totalLen)
+            .attr("stroke-dashoffset", totalLen)
+            .transition()
+            .duration(1500)
+            .ease(d3.easeCubicOut)
+            .attr("stroke-dashoffset", 0);
+
+        // 阶段点
+        g.selectAll(".phase-dot")
+            .data(phases)
+            .enter()
+            .append("circle")
+            .attr("class", "phase-dot")
+            .attr("cx", d => x(d._mid))
+            .attr("cy", d => y(d.effectiveness))
+            .attr("r", 7)
+            .attr("fill", "var(--accent-2)")
+            .attr("stroke", "#fff").attr("stroke-width", 2)
+            .style("opacity", 0)
+            .transition().delay(800).duration(400)
+            .style("opacity", 1);
+
+        // 阶段点标注（效能值）
+        g.selectAll(".eff-label")
+            .data(phases)
+            .enter()
+            .append("text")
+            .attr("class", "eff-label")
+            .attr("x", d => x(d._mid))
+            .attr("y", d => y(d.effectiveness) - 14)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent)")
+            .style("opacity", 0)
+            .text(d => d.effectiveness)
+            .transition().delay(1000).duration(400)
+            .style("opacity", 1);
+
+        // Spike 点
+        const tip = d3.select("#eff-tip");
+        g.selectAll(".spike-dot")
+            .data(spikes)
+            .enter()
+            .append("circle")
+            .attr("class", "spike-dot")
+            .attr("cx", d => x(d.chapter))
+            .attr("cy", d => y(d.spike))
+            .attr("r", 9)
+            .attr("fill", "var(--accent-4)")
+            .attr("stroke", "var(--accent)").attr("stroke-width", 2.5)
+            .style("cursor", "pointer")
+            .style("opacity", 0)
+            .transition().delay(1400).duration(500)
+            .style("opacity", 1);
+
+        // 重新绑定事件（动画后）
+        g.selectAll(".spike-dot")
+            .on("mouseover", function(e, d) {
+                d3.select(this).transition().duration(150).attr("r", 12);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">Ch. ${d.chapter} · ${d.event}</div>` +
+                          `<div>Spike value: <strong style="color:var(--accent-soft);">+${d.spike}</strong></div>` +
+                          `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">${d.note}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = el.parentElement.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).transition().duration(150).attr("r", 9);
+                tip.style("opacity", 0);
+            });
+
+        // Spike 点标注（飙升值）
+        g.selectAll(".spike-label")
+            .data(spikes)
+            .enter()
+            .append("text")
+            .attr("class", "spike-label")
+            .attr("x", d => x(d.chapter))
+            .attr("y", d => y(d.spike) + 22)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent-4)")
+            .style("opacity", 0)
+            .text(d => "+" + d.spike)
+            .transition().delay(1600).duration(400)
+            .style("opacity", 1);
+    }
+
+    // ===== 渲染：差旅行程表 =====
+    function renderTripTable(trips) {
+        const sorted = trips.slice().sort((a, b) => {
+            const ra = ALERT_RANK[a.alert_level] || 0;
+            const rb = ALERT_RANK[b.alert_level] || 0;
+            if (ra !== rb) return ra - rb;
+            return (a.n || 0) - (b.n || 0);
+        });
+
+        const tbody = d3.select("#trip-tbody");
+        tbody.selectAll("*").remove();
+        sorted.forEach(t => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "num").text("No. " + t.n);
+            tr.append("td").text(t.hardship);
+            tr.append("td").text(t.location);
+            tr.append("td").html(`<span class="alert-badge" style="background:${ALERT_COLORS[t.alert_level] || '#999'}">${t.alert_level}</span>`);
+            tr.append("td").text(t.weather);
+            tr.append("td").text(t.remark);
+            tr.append("td").attr("class", "delay").text("+" + t.delay_days);
+        });
+    }
+
+    // ===== 渲染：悟空简历 =====
+    function renderResumeBasic(info) {
+        const sel = d3.select("#resume-basic");
+        sel.selectAll("*").remove();
+        sel.append("h3").text("Basic Info · " + info.basic_info.name);
+        const grid = sel.append("div").attr("class", "resume-basic-grid");
+        const fields = [
+            { k: "Alias", v: info.basic_info.alias },
+            { k: "Birthplace", v: info.basic_info.birthplace },
+            { k: "Education", v: info.basic_info.education },
+            { k: "Major", v: info.basic_info.major },
+            { k: "Contact", v: info.basic_info.phone }
+        ];
+        fields.forEach(f => {
+            const d = grid.append("div").attr("class", "field");
+            d.html(`<span style="color:var(--accent-3);font-size:0.78rem;">${f.k}</span><br/><strong>${f.v}</strong>`);
+        });
+    }
+
+    function renderWorkExperience(exp) {
+        const sel = d3.select("#work-grid");
+        sel.selectAll("*").remove();
+        exp.forEach(w => {
+            const card = sel.append("div").attr("class", "work-card");
+            card.append("div").attr("class", "wc-company").text(w.company);
+            card.append("div").attr("class", "wc-position").text(w.position);
+            card.append("div").attr("class", "wc-duration").text("⏱ " + w.duration);
+            card.append("div").attr("class", "wc-ach").text("Achievements: " + w.achievements);
+            card.append("div").attr("class", "wc-reason").text("Left: " + w.reason_for_leave);
+        });
+    }
+
+    function renderSkills(skills) {
+        const svg = d3.select("#skill-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("skill-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 260;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 20, right: 80, bottom: 20, left: 130 };
+        const innerW = w - margin.left - margin.right;
+        const barH = 28;
+        const gap = 14;
+        const totalH = skills.length * (barH + gap) - gap;
+        svg.attr("viewBox", `0 0 ${w} ${Math.max(h, totalH + margin.top + margin.bottom)}`);
+
+        const maxY = 10;
+        const x = d3.scaleLinear().domain([0, maxY]).range([0, innerW]);
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        skills.forEach((s, i) => {
+            const yPos = i * (barH + gap);
+            const val = SKILL_LEVEL_VALUE[s.level] || 5;
+            const color = val >= 9 ? "var(--accent)" : val >= 7 ? "var(--accent-3)" : "var(--accent-2)";
+
+            // 技能名
+            g.append("text")
+                .attr("x", -12)
+                .attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.86rem")
+                .style("font-weight", "600")
+                .style("fill", "var(--ink)")
+                .text(s.skill);
+
+            // 背景轨道
+            g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",Math.max(0, innerW)).attr("height", barH)
+                .attr("fill", "#faf7f2")
+                .attr("stroke", "var(--line)")
+                .attr("rx", 4);
+
+            // 数值条
+            g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",0).attr("height", barH)
+                .attr("fill", color)
+                .attr("rx", 4)
+                .transition()
+                .delay(i * 120).duration(800)
+                .ease(d3.easeCubicOut)
+                .attr("width",Math.max(0, x(val)));
+
+            // 等级标签
+            g.append("text")
+                .attr("x", x(val) + 8)
+                .attr("y", yPos + barH / 2 + 4)
+                .style("font-size", "0.82rem")
+                .style("font-weight", "600")
+                .style("fill", color)
+                .text(s.level);
+
+            // 注释（小字）
+            g.append("text")
+                .attr("x", innerW)
+                .attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.72rem")
+                .style("fill", "var(--ink-soft)")
+                .style("font-style", "italic")
+                .text(s.note);
+        });
+    }
+
+    function renderInterview(interviews) {
+        const sel = d3.select("#interview-grid");
+        sel.selectAll("*").remove();
+        interviews.forEach((iv, i) => {
+            const card = sel.append("div").attr("class", "interview-card");
+            card.append("div").attr("class", "ic-emoji").text("😎");
+            card.append("div").attr("class", "ic-q").text("Q" + (i + 1) + " · Stress Interview");
+            card.append("div").attr("class", "ic-question").text(iv.question);
+            card.append("div").attr("class", "ic-a-label").text("A · Wukong's Answer:");
+            card.append("div").attr("class", "ic-answer").text(iv.wukong_answer);
+            card.append("div").attr("class", "ic-note").text("🎭 " + iv.emoji_note);
+        });
+    }
+
+    // ===== 渲染：黑话词典 =====
+    function renderBuzzwords(words) {
+        const sel = d3.select("#buzzword-grid");
+        sel.selectAll("*").remove();
+        words.forEach(b => {
+            const card = sel.append("div").attr("class", "buzzword-card");
+            card.style("border-left-color", CAT_COLORS[b.category] || "var(--accent)");
+            const head = card.append("div").attr("class", "bw-head");
+            head.append("div").attr("class", "bw-word").text(b.buzzword);
+            head.append("div").attr("class", "bw-cat").style("background", CAT_COLORS[b.category] || "var(--accent-soft)")
+                .style("color", "#fff").text(b.category);
+            card.append("div").attr("class", "bw-meaning").text("Meaning: " + b.chinese_meaning);
+            card.append("div").attr("class", "bw-usage").text(b.xiyou_usage);
+        });
+    }
+
+    // ===== 渲染：Key Insights =====
+    function renderInsights() {
+        const insights = [
+            `The scripture-fetching project was a <strong>14-year mandatory team-building exercise</strong>; the team went through the full Forming → Storming → Norming → Performing cycle and delivered with a final A+ rating.`,
+            `After the White-Bone Demon affair (ch. 27), team effectiveness hit its lowest point; <strong>after the True and False Monkey King (ch. 58), it spiked +3 into the Norming stage</strong>, proving that "crisis is opportunity".`,
+            `The Lion-Camel Ridge alert was <strong>SSS level</strong>, requiring Tathāgata to descend in person; Flaming Mountain and Red Boy were extreme heat, <strong>requiring heat allowances</strong>.`,
+            `Wukong's resume highlight: <strong>planning a Heavenly Court stress test that drove security and organizational upgrades</strong>, and 30+ reinforcements that demonstrate resource-dispatch ability.`,
+            `The jargon dictionary reveals <strong>"Alignment / Closed Loop / Empowerment / Handle"</strong> and 15 other internet terms, each with a matching scene in the scripture-fetching project.`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(t => ul.append("li").html(t));
+    }
+
+    // ===== 数据加载 =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error("fetch failed: " + path);
+            return await res.json();
+        } catch (e) {
+            console.warn("[INFO] Using embedded data for", path, ":", e.message);
+            return fallback;
+        }
+    }
+
+    async function loadAll() {
+        const [pr, te, tr, wr, ib] = await Promise.all([
+            loadJson("../../scripts/output/data/project_review.json", EMBEDDED.project_review),
+            loadJson("../../scripts/output/data/team_effectiveness.json", EMBEDDED.team_effectiveness),
+            loadJson("../../scripts/output/data/trip_report.json", EMBEDDED.trip_report),
+            loadJson("../../scripts/output/data/wukong_resume.json", EMBEDDED.wukong_resume),
+            loadJson("../../scripts/output/data/internet_buzzwords.json", EMBEDDED.internet_buzzwords)
+        ]);
+        return { project_review: pr, team_effectiveness: te, trip_report: tr, wukong_resume: wr, internet_buzzwords: ib };
+    }
+
+    // ===== 主流程 =====
+    async function main() {
+        const data = await loadAll();
+        window.__data = data;
+
+        // 如果 fetch 成功，更新数据源提示
+        if (data.project_review === EMBEDDED.project_review) {
+            // 仍是嵌入数据
+        } else {
+            document.getElementById("dataSource").innerHTML =
+                "Data source: loaded live from <code>scripts/output/data/</code> (running in http server mode)";
+        }
+
+        renderProjectMeta(data.project_review);
+        renderMilestone(data.project_review.milestones);
+        renderEffectiveness(data.team_effectiveness);
+        renderTripTable(data.trip_report);
+        renderResumeBasic(data.wukong_resume);
+        renderWorkExperience(data.wukong_resume.work_experience);
+        renderSkills(data.wukong_resume.skills);
+        renderInterview(data.wukong_resume.stress_interview);
+        renderBuzzwords(data.internet_buzzwords);
+        renderInsights();
+
+        // 生成时间
+        const genTimeEl = document.getElementById("gen-time");
+        if (genTimeEl) genTimeEl.textContent =
+            "Data generated: " + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
+    }
+
+    // 窗口缩放重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__data) {
+                renderMilestone(window.__data.project_review.milestones);
+                renderEffectiveness(window.__data.team_effectiveness);
+                renderSkills(window.__data.wukong_resume.skills);
+            }
+        }, 250);
+    });
+
+    // 性能：D3 改为 defer 加载，DOM 就绪后再启动渲染（不阻塞首屏）
+    window.addEventListener('DOMContentLoaded', main);
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>

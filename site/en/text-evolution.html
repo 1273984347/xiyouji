@@ -1,0 +1,2292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-zl/j5l8z5lQZHh2hbvm6mu8U2GdIYb6MNV/gn2JOZno=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-vt76EEGWGv+V7bP8QH22CncOAq6rUkCLnyQCoZ5GG4s=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Text Evolution · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep {
+            margin: 0 8px;
+            color: var(--ink-soft);
+            opacity: 0.6;
+        }
+        
+        @media (max-width: 768px) {
+            
+        }
+        
+        .kpi-card:nth-child(2) { border-top-color: var(--accent-2); }
+        .kpi-card:nth-child(3) { border-top-color: var(--accent-3); }
+        .kpi-card:nth-child(4) { border-top-color: var(--accent-4); }
+        
+        .kpi-card:nth-child(2) .label { color: var(--accent-2); }
+        .kpi-card:nth-child(3) .label { color: var(--accent-3); }
+        .kpi-card:nth-child(4) .label { color: var(--accent-4); }
+        
+        
+        
+        
+        
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: #f5e9d4;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        /* ===== Chart 1: Evolution Tree ===== */
+        #evolution-tree {
+            width: 100%;
+            height: 760px;
+            display: block;
+        }
+        .tree-node circle {
+            stroke: #fff;
+            stroke-width: 2;
+            cursor: pointer;
+            transition: r 0.2s;
+        }
+        .tree-node circle:hover { stroke-width: 3; }
+        .tree-node text.v-name {
+            font-size: 0.92rem;
+            font-weight: 600;
+            fill: var(--ink);
+        }
+        .tree-node text.v-meta {
+            font-size: 0.74rem;
+            fill: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .tree-node text.v-feature {
+            font-size: 0.78rem;
+            fill: var(--ink-soft);
+        }
+        .tree-link {
+            stroke: var(--line);
+            stroke-width: 1.5;
+            fill: none;
+        }
+        .tree-axis line, .tree-axis path {
+            stroke: var(--line);
+        }
+        .tree-axis text {
+            font-size: 0.72rem;
+            fill: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .layer-band text {
+            font-size: 0.72rem;
+            fill: var(--ink-soft);
+            font-style: italic;
+        }
+
+        /* ===== Chart 2: Evolution Paths ===== */
+        .evo-path-row {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 20px;
+            padding: 14px 0;
+            border-bottom: 1px dashed var(--line);
+            align-items: start;
+        }
+        @media (max-width: 600px) {
+            .evo-path-row { grid-template-columns: 1fr; gap: 8px; }
+            .evo-key { grid-column: 1; }
+        }
+        .evo-path-row:last-child { border-bottom: none; }
+        .evo-element {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.98rem;
+        }
+        .evo-element .evo-arrow {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-weight: 400;
+            margin-top: 2px;
+            font-style: italic;
+        }
+        .evo-flow {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px 8px;
+            min-width: 0;
+        }
+        .evo-step {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 14px;
+            padding: 5px 12px;
+            font-size: 0.84rem;
+            color: var(--ink);
+            white-space: nowrap;
+        }
+        .evo-step.last {
+            white-space: normal;
+            max-width: 100%;
+            overflow-wrap: anywhere;
+        }
+        .evo-step.first {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+        .evo-step.last {
+            background: var(--accent-4);
+            color: #fff;
+            border-color: var(--accent-4);
+            font-weight: 600;
+        }
+        .evo-arrow {
+            color: var(--accent-3);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .evo-key {
+            grid-column: 2;
+            margin-top: 6px;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            padding: 6px 10px;
+            background: var(--bg);
+            border-left: 3px solid var(--accent-2);
+            border-radius: 0 4px 4px 0;
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+        .evo-key strong { color: var(--accent-2); }
+
+        /* ===== Chart 3: Author Table ===== */
+        .author-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 0.88rem;
+        }
+        .author-table th, .author-table td {
+            border: 1px solid var(--line);
+            padding: 12px 14px;
+            vertical-align: top;
+            text-align: left;
+        }
+        .author-table th {
+            background: #1a1410;
+            color: #f5e9d4;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            font-size: 0.84rem;
+            position: sticky;
+            top: 0;
+        }
+        .author-table td.name {
+            background: var(--bg);
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 1rem;
+            width: 90px;
+        }
+        .author-table td.identity {
+            color: var(--ink-soft);
+            font-size: 0.84rem;
+            width: 160px;
+        }
+        .author-table td.lifetime {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent-3);
+            font-size: 0.82rem;
+            width: 110px;
+        }
+        .author-table td.score { width: 140px; }
+        .score-bar {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 4px;
+        }
+        .score-cell {
+            width: 10px;
+            height: 16px;
+            background: var(--line);
+            border-radius: 2px;
+        }
+        .score-cell.filled { background: var(--accent); }
+        .score-cell.filled.mid { background: var(--accent-soft); }
+        .score-num {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .author-table td.status {
+            font-size: 0.82rem;
+            color: var(--accent-2);
+            font-style: italic;
+            width: 160px;
+        }
+        .author-table td.evidence {
+            font-size: 0.82rem;
+            line-height: 1.55;
+        }
+        .author-table td.evidence.for { color: var(--accent-4); }
+        .author-table td.evidence.against { color: var(--accent); }
+        .author-table td.evidence ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .author-table td.evidence li {
+            padding: 2px 0 2px 14px;
+            position: relative;
+        }
+        .author-table td.evidence.for li::before {
+            content: "＋";
+            position: absolute;
+            left: 0;
+            color: var(--accent-4);
+            font-weight: 600;
+        }
+        .author-table td.evidence.against li::before {
+            content: "－";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ===== Chart 4: Commentary Pie + Quotes Grid ===== */
+        #commentary-pie {
+            max-width: 100%;
+        }
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-top: 28px;
+        }
+        .quote-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 18px;
+            background: linear-gradient(180deg, #fffdf8 0%, #faf7f2 100%);
+            border-top: 3px solid var(--accent);
+        }
+        .quote-card .qc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--line);
+        }
+        .quote-card .qc-name {
+            font-weight: 600;
+            color: var(--ink);
+            font-size: 1rem;
+        }
+        .quote-card .qc-year {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+        }
+        .quote-card .qc-feature {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        .quote-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .quote-card li {
+            padding: 4px 0 4px 18px;
+            position: relative;
+            font-size: 0.88rem;
+            color: var(--ink);
+            line-height: 1.5;
+        }
+        .quote-card li::before {
+            content: "「";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .quote-card li::after {
+            content: "」";
+            color: var(--accent);
+        }
+
+        /* ===== Chart 5: Stacked Bar ===== */
+        #commentary-stacked {
+            width: 100%;
+            height: 380px;
+            display: block;
+        }
+        .stacked-axis text, .stacked-axis line, .stacked-axis path {
+            font-size: 0.78rem;
+            fill: var(--ink-soft);
+            stroke: var(--line);
+        }
+        .stacked-bar {
+            transition: opacity 0.2s;
+        }
+        .stacked-bar:hover { opacity: 0.85; }
+
+        
+        
+        
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/text-evolution.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · Text Evolution</p>
+        <p class="kicker">Q · Text Evolution</p>
+        <h1>Text Evolution</h1>
+        <p class="subtitle">VERSIONS · AUTHORS · COMMENTARY</p>
+        <p class="tagline">An archaeological stratigraphy of the text: from the Southern Song pilgrimage tales to the Qing dynasty Neidan commentary editions, four centuries of literary DNA sequencing.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice" id="dataSource">
+            Data source: embedded build. (To load the latest data, from the <code>site/</code> directory run <code>py -m http.server 8000</code>)
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">VERSIONS · Editions</div>
+                <div class="value">10</div>
+                <div class="desc">Southern Song shihua → Qing Yuanzhi, spanning four centuries</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">VARIANTS · Plot Variants</div>
+                <div class="value">6</div>
+                <div class="desc">Monkey Mind · Bajie · Origin · Havoc in Heaven · 81 Tribulations · Sha Wujing</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">AUTHORS · Candidate Authors</div>
+                <div class="value">4</div>
+                <div class="desc">Wu Cheng'en · Qiu Chuji · Li Chunfang · Master of Huayang Cavern-Heaven</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">COMMENTARY · Critical Annotation</div>
+                <div class="value">5·6100</div>
+                <div class="desc">5 commentators with 6,100 comments spanning 400 years</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：Version Evolution Tree -->
+        <section class="section">
+            <h2 class="section-title">Version Evolution Tree</h2>
+            <div class="section-sub">A vertical timeline showing 10 versions, colored by archaeological layer. Layer 1 Song-Yuan huaben → Layer 7 Qing Yuanzhi edition; nodes are labeled with version, date, chapter count, and features.</div>
+            <svg id="evolution-tree"></svg>
+            <div class="legend" id="legend-layers"></div>
+        </section>
+
+        <!-- 图表 2：Plot Evolution Paths -->
+        <section class="section">
+            <h2 class="section-title">Plot Evolution Paths</h2>
+            <div class="section-sub">Six core plot variants; each row's flow diagram shows first_appear → evolution_path → key_change. <strong style="color:var(--accent)">Red</strong> marks first appearance, <strong style="color:var(--accent-4)">green</strong> marks the definitive form.</div>
+            <div id="evolution-paths"></div>
+        </section>
+
+        <!-- 图表 3：Author Debate Matrix -->
+        <section class="section">
+            <h2 class="section-title">Author Debate Matrix</h2>
+            <div class="section-sub">Four candidate authors compared; match_score 1–10 quantifies the match. Score bars: red = support points, light = unscored.</div>
+            <div style="overflow-x:auto;">
+                <table class="author-table" id="author-table">
+                    <thead>
+                        <tr>
+                            <th>Candidate Author</th>
+                            <th>Identity</th>
+                            <th>Life Dates</th>
+                            <th>Match Score</th>
+                            <th>Current Consensus</th>
+                            <th>Supporting Evidence</th>
+                            <th>Counter-Evidence</th>
+                        </tr>
+                    </thead>
+                    <tbody id="author-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 图表 4：Commentator Danmaku Network -->
+        <section class="section">
+            <h2 class="section-title">Commentator Danmaku Network</h2>
+            <div class="section-sub">Five commentators shown as a pie chart by commentary_count share, with a grid of classic-quote cards below (representative remarks from each commentator).</div>
+            <div class="chart-row">
+                <div class="chart-block">
+                    <h3>Share of Comments</h3>
+                    <svg id="commentary-pie" width="380" height="380"></svg>
+                    <div class="legend" id="legend-commentators"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>Total Comments Distribution</h3>
+                    <svg id="commentary-count-bar" width="380" height="380"></svg>
+                </div>
+            </div>
+            <div class="quotes-grid" id="quotes-grid"></div>
+        </section>
+
+        <!-- 图表 5：Commentary Type Distribution (Stacked) -->
+        <section class="section">
+            <h2 class="section-title">Commentary Type Distribution (Stacked)</h2>
+            <div class="section-sub">Five commentators × five commentary types (Praise / Invective / Elucidation / Textual Criticism / Exegesis) as a horizontal stacked bar chart. Note that Liu Yiming's Original Intent leads in all five categories.</div>
+            <svg id="commentary-stacked"></svg>
+            <div class="legend" id="legend-types"></div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="insight-box">
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/04-文化与历史背景/版本演变.md">Textual Evolution (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/text-evolution.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    /* ==========================================================
+       嵌入式 fallback 数据（fetch 失败时使用）
+       ========================================================== */
+    const EMBEDDED_DATA = {
+        summary: {
+            total_versions: 10,
+            total_variants: 6,
+            total_authors: 4,
+            total_commentators: 5,
+            total_commentary_count: 6100,
+            commentary_by_type: {
+                "Praise": 1100, "Invective": 340, "Elucidation": 2250,
+                "Textual Criticism": 1450, "Exegesis": 960
+            },
+            earliest_version: "The Tale of the Tang Tripitaka's Pilgrimage for Scriptures",
+            latest_qing_version: "The Original Intent of the Journey West (Xiyou yuanzhi)"
+        },
+        versions: [
+            { "version": "The Tale of the Tang Tripitaka's Pilgrimage for Scriptures", "year": "Southern Song · c. 13th century", "type": "huaben (storybook)", "chapters": 17, "feature": "The earliest extant Journey-to-the-West story: the embryonic Tripitaka pilgrimage, the first appearance of the Monkey Pilgrim, and the Deep-Sand Spirit (prototype of Sha Wujing)", "key_role_introduction": ["Monkey Pilgrim","Deep-Sand Spirit"], "missing_elements": ["Bajie","Sha Wujing finalized","Havoc in Heaven"], "archaeological_layer": "Layer 1 · Song-Yuan huaben" },
+            { "version": "Journey to the West Zaju (Variety Play)", "year": "Late Yuan–early Ming · Yang Jingxian", "type": "zaju (variety play)", "chapters": 24, "feature": "Dramatization of the Journey story: Zhu Bajie first takes shape; Red Boy, Princess Iron Fan, and the Women's Kingdom appear", "key_role_introduction": ["Zhu Bajie","Red Boy","Princess Iron Fan"], "missing_elements": ["Sha Wujing finalized","Scale of Havoc in Heaven"], "archaeological_layer": "Layer 2 · Late Yuan–early Ming zaju" },
+            { "version": "Journey to the West Pinghua (Plain Tale)", "year": "Late Yuan · lost", "type": "pinghua (plain tale)", "chapters": null, "feature": "Lost; known only from the 'Wei Zheng Beheads the Dragon' fragment in the Yongle Encyclopedia and citations in the Korean Pak T'ongsa ŏnhae", "key_role_introduction": ["Chechi Kingdom Contest"], "missing_elements": ["complete text"], "archaeological_layer": "Layer 2 · Late Yuan pinghua" },
+            { "version": "Shidetang Edition of Journey to the West", "year": "Ming Wanli 20 · 1592", "type": "100-chapter novel", "chapters": 100, "feature": "The earliest complete hundred-chapter edition; inscribed 'collated by the Master of Huayang Cavern-Heaven'; lays the textual foundation of Journey to the West", "key_role_introduction": ["the complete Five Pilgrims","the Eighty-one Tribulations"], "missing_elements": ["Tang Sanzang's origin story (chs. 9–12 added in Qing editions)"], "archaeological_layer": "Layer 3 · Ming Wanli Shidetang" },
+            { "version": "Yang Minzhai Edition of Journey to the West", "year": "Ming Wanli 30 · 1602", "type": "100-chapter novel", "chapters": 100, "feature": "An early reprint of the Shidetang edition with minor textual differences", "key_role_introduction": [], "missing_elements": [], "archaeological_layer": "Layer 4 · Ming Wanli Yang Minzhai" },
+            { "version": "Zhu Dingchen's Edition of the Tang Tripitaka's Westward Deliverance", "year": "Mid-to-late Wanli, Ming dynasty", "type": "abridged edition", "chapters": "10 juan", "feature": "An abridged edition that adds Tang Sanzang's origin story (Chen Guangrui · Jiangliu'er)", "key_role_introduction": ["the Chen Guangrui story"], "missing_elements": ["a complete hundred chapters"], "archaeological_layer": "Layer 4 · Ming Wanli Zhu Dingchen" },
+            { "version": "Journey to the West: The Book of Realizing the Way (Zhengdao shu)", "year": "Qing Kangxi · 1663 · annotated by Wang Xiangxu", "type": "commentary edition", "chapters": 100, "feature": "First to interpret the Journey through 'Realization of the Way'; inserts Tang Sanzang's origin story as Chapter 9; attributes the commentary to Qiu Chuji", "key_role_introduction": ["Tang Sanzang's origin entering the main text"], "missing_elements": [], "archaeological_layer": "Layer 5 · Qing Zhengdao (Path of Realization)" },
+            { "version": "The True Interpretation of the Journey West (Xiyou zhenquan)", "year": "Qing Kangxi · 1696 · annotated by Chen Shibin", "type": "commentary edition", "chapters": 100, "feature": "Annotated by Chen Shibin; interprets the Journey through the Golden Elixir; the most popular Qing commentary edition", "key_role_introduction": [], "missing_elements": [], "archaeological_layer": "Layer 6 · Qing Zhenquan (True Interpretation)" },
+            { "version": "New Commentary on Journey to the West (Xinshuo)", "year": "Qing Qianlong · 1753 · annotated by Zhang Shushen", "type": "commentary edition", "chapters": 100, "feature": "Annotated by Zhang Shushen; interprets the Journey through Confucianism; argues that the Great Learning, Doctrine of the Mean, and Analects are its inner doctrine", "key_role_introduction": [], "missing_elements": [], "archaeological_layer": "Layer 6 · Qing Xinshuo (New Commentary)" },
+            { "version": "The Original Intent of the Journey West (Xiyou yuanzhi)", "year": "Qing Qianlong · 1753 · annotated by Liu Yiming", "type": "commentary edition", "chapters": 100, "feature": "Annotated by Liu Yiming of the Daoist Longmen lineage; the most systematic Neidan (inner-alchemy) interpretation of the Journey", "key_role_introduction": [], "missing_elements": [], "archaeological_layer": "Layer 7 · Qing Yuanzhi (Original Intent)" }
+        ],
+        variants: [
+            { "element": "The Monkey Mind image", "evolution": "Monkey Pilgrim → Sun Wukong", "first_appear": "The Tale of the Tang Tripitaka's Pilgrimage for Scriptures · Monkey Pilgrim · White-Robed Scholar", "evolution_path": "Monkey Pilgrim (Song) → Sun the Pilgrim (Yuan zaju) → Great Sage Equal to Heaven, Sun Wukong (Shidetang)", "key_change": "In the Shidetang edition the 'Monkey Mind' image is complete: Patriarch Subhuti transmits the seventy-two transformations, and Havoc in Heaven reaches unprecedented scale", "chapter_first": 1 },
+            { "element": "Zhu Bajie · carrying the load", "evolution": "none → Bajie carries → Sha Wujing carries", "first_appear": "Journey to the West Zaju · Zhu Bajie's first appearance", "evolution_path": "Zaju Bajie → early Shidetang chapters Bajie carries → later Shidetang chapters shifts to Sha Wujing", "key_change": "Across the hundred chapters of Shidetang, Bajie carries before Sha Wujing is recruited (ch. 22), after which the duty gradually shifts", "chapter_first": 18 },
+            { "element": "Tang Sanzang's origin story", "evolution": "none → separate account → into the main text", "first_appear": "Absent from the Shidetang edition; first added in the Zhu Dingchen edition", "evolution_path": "Shidetang lacks it → Zhu Dingchen adds the 'Deliverance' → the Zhengdao book inserts it into the main text as Chapter 9", "key_change": "The Chen Guangrui · Jiangliu'er story enters the main text only in the Qing; most modern editions follow the Qing editions", "chapter_first": 9 },
+            { "element": "Scale of Havoc in Heaven", "evolution": "simple → elaborate", "first_appear": "The Tale of the Tang Tripitaka's Pilgrimage for Scriptures · brief", "evolution_path": "No Havoc in Heaven in the shihua → brief in the zaju → 'Great Sage Equal to Heaven' in the pinghua → grand narrative of chs. 1–7 in the Shidetang edition", "key_change": "The Shidetang edition first expands 'Havoc in Heaven' into seven chapters, establishing the opening structure of the book", "chapter_first": 1 },
+            { "element": "the Eighty-one Tribulations", "evolution": "none → present", "first_appear": "Shidetang edition · ch. 99, Guanyin's tally", "evolution_path": "No fixed number in earlier stories → the Shidetang edition's ch. 99 lists the 'Eighty-one Tribulations' in full", "key_change": "The Shidetang edition first systematizes the 'Eighty-one Tribulations', establishing the structural completeness of the pilgrimage", "chapter_first": 99 },
+            { "element": "Sha Wujing finalized", "evolution": "Deep-Sand Spirit → Sha the Monk", "first_appear": "The Tale of the Tang Tripitaka's Pilgrimage for Scriptures · Deep-Sand Spirit", "evolution_path": "Deep-Sand Spirit (Song) → Sha the Monk (Shidetang), with the Curtain-Lifting General backstory fixed", "key_change": "In the Shidetang edition Sha Wujing's identity is complete: the Curtain-Lifting General demoted to earth, with a necklace of nine skulls", "chapter_first": 22 }
+        ],
+        authors: [
+            { "candidate": "Wu Cheng'en", "identity": "Ming · Shanyang County, Huai'an Prefecture · Vice-magistrate of Changxing", "lifetime": "c. 1500–1582", "social_network": ["Shen Kun (zhuangyuan · in-law)","Li Chunfang (possible fellow townsman)","Xu Zhongxing"], "evidence_for": ["The Tianqi-era Huai'an Prefecture Gazetteer records 'Wu Cheng'en's Journey to the West'","Lu Xun's A Brief History of Chinese Fiction accepts it","Some dialect features match Huai'an speech"], "evidence_against": ["The Gazetteer's 'Journey to the West' does not specify its genre and may be a travelogue","Wu Cheng'en's collected works contain no related Daoist terminology","Late-Ming dialect was not a single Huai'an speech"], "match_score": 7, "current_status": "Mainstream acceptance, but scholarly debate continues" },
+            { "candidate": "Qiu Chuji", "identity": "Yuan · founder of the Longmen lineage of Quanzhen Daoism", "lifetime": "1148-1227", "social_network": ["Genghis Khan","Yin Zhiping","Li Zhichang"], "evidence_for": ["Claimed by the Qing Zhengdao Book of the Journey West","Quanzhen terminology pervades the book","Qiu Chuji's westward journey to meet Genghis Khan resembles a pilgrimage"], "evidence_against": ["Qiu Chuji died in 1227 while the Shidetang edition was printed in 1592, over three hundred years later","The hundred-chapter book's language is Ming-dynasty, not early Yuan","Qiu Chuji's Journey to the West of the Perfected Changchun is a travelogue, not a novel"], "match_score": 3, "current_status": "Largely refuted; a forced attribution by Qing commentary editions" },
+            { "candidate": "Li Chunfang", "identity": "Ming · Senior Grand Secretary · posthumously named Wending", "lifetime": "1511-1585", "social_network": ["Yan Song","Xu Jie","Zhang Juzheng","Wu Cheng'en (dubious)"], "evidence_for": ["'Master of Huayang Cavern-Heaven' — Li Chunfang's sobriquet was 'the Man of Huayang Cavern'","Mount Mao's Huayang Cavern — Li Chunfang's ties to the Maoshan Daoist tradition","His Senior Grand Secretary status closely matches the depth of the palace depictions"], "evidence_against": ["No direct evidence","A Grand Secretary would hardly have signed a popular novel"], "match_score": 6, "current_status": "A hypothesis gaining ground in recent years with growing support" },
+            { "candidate": "Master of Huayang Cavern-Heaven", "identity": "Named collator of the Shidetang edition", "lifetime": "c. Ming Jiajing–Wanli", "social_network": ["the Shidetang publishing house"], "evidence_for": ["The Shidetang edition's original title page bears the most direct attribution","Possibly linked to Li Chunfang, or a pen name"], "evidence_against": ["Named as 'collator', not 'author'","Possibly a pen name of the publisher or an editor"], "match_score": 5, "current_status": "Either a pen name of Li Chunfang or a publisher's editor" }
+        ],
+        commentators: [
+            { "name": "Li Zhuowu", "identity": "Ming · Li Zhi · thinker", "lifetime": "1527-1602", "work": "Mr. Li Zhuowu's Criticism of Journey to the West", "year": "c. 1590s", "commentary_count": 800, "commentary_types": { "Praise": 250, "Invective": 80, "Elucidation": 200, "Textual Criticism": 100, "Exegesis": 170 }, "classic_quotes": ["Wonderful! Wonderful! Wonderful!","How extraordinary!","This is the central theme of the whole book.","Pedantic! Detestable!","Infuriating!"], "feature": "The most famous Ming commentary; curses 'pedantic scholars' and points to the 'childlike mind' doctrine", "layer": "Late Ming · earliest commentary edition" },
+            { "name": "Wang Xiangxu", "identity": "Qing · commentator of the Zhengdao Book of the Journey West", "lifetime": "Early Qing · c. 17th century", "work": "Journey to the West: The Book of Realizing the Way (Zhengdao shu)", "year": "1663", "commentary_count": 600, "commentary_types": { "Praise": 100, "Invective": 30, "Elucidation": 350, "Textual Criticism": 100, "Exegesis": 20 }, "classic_quotes": ["This chapter is the grand theme of realizing the Way.","Monkey-mind and horse-intent lie in a single thought.","The great Way is utterly simple; this shows it clearly."], "feature": "First to interpret the Journey through 'Realization of the Way'; attributes it to Qiu Chuji", "layer": "Early Qing · founder of the Path-of-Realization school" },
+            { "name": "Chen Shibin", "identity": "Qing · commentator of the True Interpretation of the Journey West", "lifetime": "Qing Kangxi · c. late 17th century", "work": "The True Interpretation of the Journey West (Xiyou zhenquan)", "year": "1696", "commentary_count": 1200, "commentary_types": { "Praise": 200, "Invective": 50, "Elucidation": 500, "Textual Criticism": 250, "Exegesis": 200 }, "classic_quotes": ["This is the great Way of the Golden Elixir.","Heart-fire and kidney-water: this shows it clearly.","The stages of cultivation are evidenced in this chapter."], "feature": "The most popular Qing commentary; interprets the Journey through the Golden Elixir", "layer": "Mid-Qing · representative of the Golden-Elixir school" },
+            { "name": "Liu Yiming", "identity": "Qing · Daoist Longmen lineage · Wuyuanzi", "lifetime": "1734-1821", "work": "The Original Intent of the Journey West (Xiyou yuanzhi)", "year": "1753", "commentary_count": 2000, "commentary_types": { "Praise": 300, "Invective": 100, "Elucidation": 800, "Textual Criticism": 500, "Exegesis": 300 }, "classic_quotes": ["The original intent of the Journey lies in the dual cultivation of nature and life.","This chapter speaks plainly of the 'fire phases'.","The monkey-mind returns to the right; the six thieves vanish."], "feature": "The most systematic Neidan reading of the Journey; annotated all 100 chapters with far-reaching influence", "layer": "Mid-Qing · culmination of the Neidan school" },
+            { "name": "Zhang Shushen", "identity": "Qing · commentator of the New Commentary on Journey to the West", "lifetime": "Qing Qianlong · c. 18th century", "work": "New Commentary on Journey to the West (Xinshuo)", "year": "1753", "commentary_count": 1500, "commentary_types": { "Praise": 250, "Invective": 80, "Elucidation": 400, "Textual Criticism": 500, "Exegesis": 270 }, "classic_quotes": ["The intent of the Journey lies in the Great Learning and the Doctrine of the Mean.","The monkey-mind is the human heart.","This chapter shows the unity of Confucianism, Buddhism, and Daoism."], "feature": "Interprets the Journey through Confucianism; advocates the 'unity of the three teachings'; a distinctive perspective", "layer": "Mid-Qing · representative of the Confucian school" }
+        ]
+    };
+
+    /* ==========================================================
+       配色映射
+       ========================================================== */
+    const LAYER_COLORS = {
+        "L1": "#c8463a",
+        "L2": "#e9b885",
+        "L3": "#3a6b8c",
+        "L4": "#C9A063",
+        "L5": "#6B8E5A",
+        "L6": "#8c6d3a",
+        "L7": "#6b4a8c"
+    };
+    const LAYER_LABELS = [
+        { key: "L1", label: "Layer 1 · Song-Yuan huaben" },
+        { key: "L2", label: "Layer 2 · Late Yuan–early Ming (zaju · pinghua)" },
+        { key: "L3", label: "Layer 3 · Ming Wanli Shidetang" },
+        { key: "L4", label: "Layer 4 · Ming Wanli reprints · abridged editions" },
+        { key: "L5", label: "Layer 5 · Qing Zhengdao (Path of Realization)" },
+        { key: "L6", label: "Layer 6 · Qing Xinshuo · Zhenquan" },
+        { key: "L7", label: "Layer 7 · Qing Yuanzhi (Original Intent)" }
+    ];
+    const COMMENTATOR_COLORS = {
+        "Li Zhuowu": "#c8463a",
+        "Wang Xiangxu": "#3a6b8c",
+        "Chen Shibin": "#C9A063",
+        "Liu Yiming": "#6B8E5A",
+        "Zhang Shushen": "#8c6d3a"
+    };
+    const TYPE_COLORS = {
+        "Praise": "#c8463a",
+        "Invective": "#C9A063",
+        "Elucidation": "#3a6b8c",
+        "Textual Criticism": "#6B8E5A",
+        "Exegesis": "#e9b885"
+    };
+
+    /* ==========================================================
+       工具：年份解析
+       ========================================================== */
+    function parseYear(yearStr) {
+        if (!yearStr) return 1500;
+        const m4 = yearStr.match(/(\d{4})/);
+        if (m4) return parseInt(m4[1]);
+        const mC = yearStr.match(/(\d+)(?:st|nd|rd|th)?\s*century/);
+        if (mC) return parseInt(mC[1]) * 100;
+        if (yearStr.includes("Late Yuan–early Ming")) return 1370;
+        if (yearStr.includes("Late Yuan")) return 1360;
+        if (yearStr.includes("Wanli")) return 1600;
+        if (yearStr.includes("Southern Song")) return 1200;
+        if (yearStr.includes("Yuan")) return 1360;
+        return 1500;
+    }
+    function layerKey(layerStr) {
+        const m = layerStr.match(/Layer\s*(\d)/);
+        return m ? "L" + m[1] : "L3";
+    }
+
+    /* ==========================================================
+       图表 1：Version Evolution Tree（纵向时间轴）
+       ========================================================== */
+    function renderEvolutionTree(versions) {
+        const svg = d3.select("#evolution-tree");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("evolution-tree");
+        const width = Math.max(200, containerEl.clientWidth || 1100);
+        const height = 760;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 30, right: 40, bottom: 40, left: 180 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        // 解析年份并排序
+        const data = versions.map(v => ({
+            ...v,
+            yearNum: parseYear(v.year),
+            lkey: layerKey(v.archaeological_layer)
+        })).sort((a, b) => a.yearNum - b.yearNum);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Y 比例尺（按年份）
+        const yExtent = d3.extent(data, d => d.yearNum);
+        const yPad = (yExtent[1] - yExtent[0]) * 0.08;
+        const y = d3.scaleLinear()
+            .domain([yExtent[0] - yPad, yExtent[1] + yPad])
+            .range([0, innerH]);
+
+        // 时间轴（左侧）
+        g.append("g")
+            .attr("class", "tree-axis")
+            .attr("transform", `translate(${-20},0)`)
+            .call(d3.axisLeft(y)
+                .tickValues([1200, 1300, 1400, 1500, 1600, 1700, 1800])
+                .tickFormat(d => d + ""))
+            .call(g => g.select(".domain").remove());
+
+        // 主时间线
+        const lineX = 30;
+        g.append("line")
+            .attr("class", "tree-link")
+            .attr("x1", lineX)
+            .attr("x2", lineX)
+            .attr("y1", 0)
+            .attr("y2", innerH)
+            .attr("stroke", "#d9cdb8")
+            .attr("stroke-width", 2);
+
+        // 层位背景带（左侧色条）
+        const layerBands = LAYER_LABELS.map((ll, i) => {
+            const layerVersions = data.filter(d => d.lkey === ll.key);
+            if (layerVersions.length === 0) return null;
+            const yMin = d3.min(layerVersions, d => y(d.yearNum));
+            const yMax = d3.max(layerVersions, d => y(d.yearNum));
+            return { ...ll, yMin, yMax };
+        }).filter(Boolean);
+
+        // 层位标签（左外侧）
+        const layerLabelG = g.append("g").attr("class", "layer-band");
+        layerLabelG.selectAll("g")
+            .data(layerBands)
+            .enter()
+            .append("g")
+            .attr("transform", d => `translate(${-160},${(d.yMin + d.yMax) / 2})`)
+            .each(function(d) {
+                const sel = d3.select(this);
+                sel.append("rect")
+                    .attr("x", -10)
+                    .attr("y", -10)
+                    .attr("width",4)
+                    .attr("height", 20)
+                    .attr("fill", LAYER_COLORS[d.key] || "#999");
+                sel.append("text")
+                    .attr("x", 0)
+                    .attr("y", 0)
+                    .attr("dy", "0.35em")
+                    .style("font-size", "0.72rem")
+                    .style("fill", "#6B6455")
+                    .style("font-style", "italic")
+                    .text(d.label);
+            });
+
+        // 版本节点
+        const nodeG = g.selectAll(".tree-node")
+            .data(data)
+            .enter()
+            .append("g")
+            .attr("class", "tree-node")
+            .attr("transform", d => `translate(${lineX},${y(d.yearNum)})`);
+
+        // 连接线（节点到右侧文字）
+        nodeG.append("path")
+            .attr("class", "tree-link")
+            .attr("d", d => `M0,0 L30,0 L40,0`)
+            .attr("stroke", d => LAYER_COLORS[d.lkey] || "#999")
+            .attr("stroke-width", 1.5)
+            .attr("fill", "none");
+
+        // 节点圆
+        nodeG.append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", 8)
+            .attr("fill", d => LAYER_COLORS[d.lkey] || "#999")
+            .append("title")
+            .text(d => `${d.version}（${d.year}）`);
+
+        // 节点内层小白圆（视觉层次）
+        nodeG.append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", 3)
+            .attr("fill", "#fff");
+
+        // 版本名
+        nodeG.append("text")
+            .attr("class", "v-name")
+            .attr("x", 50)
+            .attr("y", -6)
+            .text(d => d.version);
+
+        // 元信息：年代 ·  ch.数 · 类型
+        nodeG.append("text")
+            .attr("class", "v-meta")
+            .attr("x", 50)
+            .attr("y", 8)
+            .text(d => {
+                let ch;
+                if (d.chapters === null || d.chapters === undefined) ch = "lost";
+                else if (typeof d.chapters === "number") ch = d.chapters + " ch.";
+                else ch = d.chapters;
+                return `${d.year}  ·  ${ch}  ·  ${d.type}`;
+            });
+
+        // 特征描述（自动截断）
+        nodeG.append("text")
+            .attr("class", "v-feature")
+            .attr("x", 50)
+            .attr("y", 22)
+            .text(d => {
+                const maxLen = Math.floor((innerW - 60) / 7.5);
+                let txt = d.feature;
+                if (txt.length > maxLen) txt = txt.slice(0, maxLen - 1) + "…";
+                return txt;
+            });
+
+        // 顶部标题
+        g.append("text")
+            .attr("x", lineX)
+            .attr("y", -20)
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455")
+            .style("letter-spacing", "0.1em")
+            .text("↑ Earliest");
+
+        g.append("text")
+            .attr("x", lineX)
+            .attr("y", innerH + 28)
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455")
+            .style("letter-spacing", "0.1em")
+            .text("↓ Latest");
+
+        // 图例
+        const legend = d3.select("#legend-layers");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(LAYER_LABELS)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `
+                <span class="legend-swatch" style="background:${LAYER_COLORS[d.key]}"></span>
+                <span>${d.label}</span>
+            `);
+    }
+
+    /* ==========================================================
+       图表 2：Plot Evolution Paths（HTML 流程图）
+       ========================================================== */
+    function renderEvolutionPaths(variants) {
+        const container = d3.select("#evolution-paths");
+        container.selectAll("*").remove();
+
+        variants.forEach(v => {
+            const row = container.append("div").attr("class", "evo-path-row");
+
+            const left = row.append("div").attr("class", "evo-element");
+            left.text(v.element);
+            left.append("span")
+                .attr("class", "evo-arrow")
+                .text(v.evolution);
+
+            const flow = row.append("div").attr("class", "evo-flow");
+            // first_appear
+            flow.append("div").attr("class", "evo-step first").text(v.first_appear);
+            flow.append("span").attr("class", "evo-arrow").text("→");
+
+            // evolution_path 拆分
+            const pathParts = v.evolution_path.split("→").map(s => s.trim()).filter(Boolean);
+            pathParts.forEach((part, i) => {
+                flow.append("div").attr("class", "evo-step").text(part);
+                if (i < pathParts.length - 1) {
+                    flow.append("span").attr("class", "evo-arrow").text("→");
+                }
+            });
+            flow.append("span").attr("class", "evo-arrow").text("→");
+            // key_change (last)
+            flow.append("div").attr("class", "evo-step last").text(v.key_change);
+
+            // 注脚：首现 ch.目
+            const key = row.append("div").attr("class", "evo-key");
+            key.html(`<strong>First-appearance chapter: </strong>ch. ${v.chapter_first} · ${v.evolution}`);
+        });
+    }
+
+    /* ==========================================================
+       图表 3：Author Debate Matrix（HTML 表格）
+       ========================================================== */
+    function renderAuthorTable(authors) {
+        const tbody = d3.select("#author-tbody");
+        tbody.selectAll("*").remove();
+
+        authors.forEach(a => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "name").text(a.candidate);
+            tr.append("td").attr("class", "identity").text(a.identity);
+            tr.append("td").attr("class", "lifetime").text(a.lifetime);
+
+            // 匹配度色块进度条
+            const scoreTd = tr.append("td").attr("class", "score");
+            const bar = scoreTd.append("div").attr("class", "score-bar");
+            for (let i = 0; i < 10; i++) {
+                bar.append("div")
+                    .attr("class", "score-cell" + (i < a.match_score ? " filled" : "") + (i < a.match_score && i >= 5 ? " mid" : ""));
+            }
+            scoreTd.append("div").attr("class", "score-num").text(`${a.match_score} / 10`);
+
+            tr.append("td").attr("class", "status").text(a.current_status);
+
+            const forTd = tr.append("td").attr("class", "evidence for");
+            const forUl = forTd.append("ul");
+            a.evidence_for.forEach(e => forUl.append("li").text(e));
+
+            const againstTd = tr.append("td").attr("class", "evidence against");
+            const againstUl = againstTd.append("ul");
+            a.evidence_against.forEach(e => againstUl.append("li").text(e));
+        });
+    }
+
+    /* ==========================================================
+       图表 4-A：批点者饼图（按 commentary_count 占比）
+       ========================================================== */
+    function renderCommentaryPie(commentators) {
+        const svg = d3.select("#commentary-pie");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${width/2}, ${height/2})`);
+
+        const pie = d3.pie().value(d => d.commentary_count).sort(null);
+        const arc = d3.arc()
+            .innerRadius(radius * 0.55)
+            .outerRadius(radius)
+            .cornerRadius(3);
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.82)
+            .outerRadius(radius * 0.82);
+
+        const arcs = pie(commentators);
+
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => COMMENTATOR_COLORS[d.data.name] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 100)
+            .style("opacity", 1);
+
+        const total = d3.sum(commentators, d => d.commentary_count);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "-0.2em")
+            .style("font-size", "1.8rem")
+            .style("font-weight", "600")
+            .style("fill", "#23201A")
+            .text(total);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "1.6em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6B6455")
+            .text("Total comments");
+
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.84rem")
+            .style("font-weight", "600")
+            .style("fill", "#fff")
+            .each(function(d) {
+                const lines = [d.data.name, `${d.data.commentary_count}·${(d.data.commentary_count / total * 100).toFixed(0)}%`];
+                const sel = d3.select(this);
+                lines.forEach((line, i) => {
+                    sel.append("tspan")
+                        .attr("x", 0)
+                        .attr("dy", i === 0 ? "-0.2em" : "1.2em")
+                        .text(line);
+                });
+            });
+
+        // 图例
+        const legend = d3.select("#legend-commentators");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(commentators)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `
+                <span class="legend-swatch" style="background:${COMMENTATOR_COLORS[d.name] || '#999'}"></span>
+                <span>${d.name}：${d.commentary_count} 条</span>
+            `);
+    }
+
+    /* ==========================================================
+       图表 4-B：批点者评论数条形图
+       ========================================================== */
+    function renderCommentaryCountBar(commentators) {
+        const svg = d3.select("#commentary-count-bar");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const margin = { top: 20, right: 30, bottom: 50, left: 80 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const sorted = [...commentators].sort((a, b) => a.commentary_count - b.commentary_count);
+        const y = d3.scaleBand()
+            .domain(sorted.map(d => d.name))
+            .range([0, innerH])
+            .padding(0.25);
+        const x = d3.scaleLinear()
+            .domain([0, d3.max(commentators, d => d.commentary_count) * 1.1])
+            .range([0, innerW]);
+
+        // 坐标轴
+        g.append("g")
+            .attr("class", "stacked-axis")
+            .call(d3.axisLeft(y))
+            .call(g => g.select(".domain").remove());
+        g.append("g")
+            .attr("class", "stacked-axis")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(5));
+
+        // 条
+        g.selectAll("rect.bar")
+            .data(sorted)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", 0)
+            .attr("y", d => y(d.name))
+            .attr("height", y.bandwidth())
+            .attr("width",d => Math.max(0, x(d.commentary_count)))
+            .attr("fill", d => COMMENTATOR_COLORS[d.name] || "#999")
+            .attr("rx", 3)
+            .style("opacity", 0)
+            .transition()
+            .duration(700)
+            .delay((d, i) => i * 80)
+            .style("opacity", 0.9);
+
+        // 数值标签
+        g.selectAll("text.value")
+            .data(sorted)
+            .enter()
+            .append("text")
+            .attr("class", "value")
+            .attr("x", d => x(d.commentary_count) + 6)
+            .attr("y", d => y(d.name) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .style("font-size", "0.82rem")
+            .style("fill", "#23201A")
+            .style("font-weight", "600")
+            .text(d => d.commentary_count);
+
+        // 轴标签
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 38)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455")
+            .text("Number of comments");
+    }
+
+    /* ==========================================================
+       图表 4-C：经典语录卡片网格
+       ========================================================== */
+    function renderQuotesGrid(commentators) {
+        const grid = d3.select("#quotes-grid");
+        grid.selectAll("*").remove();
+
+        commentators.forEach(c => {
+            const card = grid.append("div")
+                .attr("class", "quote-card")
+                .style("border-top-color", COMMENTATOR_COLORS[c.name] || "#c8463a");
+
+            const header = card.append("div").attr("class", "qc-header");
+            header.append("div").attr("class", "qc-name").text(c.name);
+            header.append("div").attr("class", "qc-year").text(`${c.year} · ${c.commentary_count} comments`);
+
+            card.append("div").attr("class", "qc-feature").text(c.feature);
+
+            const ul = card.append("ul");
+            (c.classic_quotes || []).forEach(q => ul.append("li").text(q));
+        });
+    }
+
+    /* ==========================================================
+       图表 5：评论类型堆叠条形图
+       ========================================================== */
+    function renderStackedBar(commentators) {
+        const svg = d3.select("#commentary-stacked");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("commentary-stacked");
+        const width = Math.max(200, containerEl.clientWidth || 1100);
+        const height = 380;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 20, right: 40, bottom: 50, left: 100 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const types = ["Praise", "Invective", "Elucidation", "Textual Criticism", "Exegesis"];
+        const stacked = d3.stack()
+            .keys(types)
+            .value((d, key) => (d.commentary_types && d.commentary_types[key]) || 0);
+
+        const series = stacked(commentators);
+        // 为每个段附加 key，便于在 title / 标签中访问
+        series.forEach(layer => {
+            layer.forEach(seg => { seg.typeKey = layer.key; });
+        });
+
+        const y = d3.scaleBand()
+            .domain(commentators.map(d => d.name))
+            .range([0, innerH])
+            .padding(0.3);
+        const x = d3.scaleLinear()
+            .domain([0, d3.max(commentators, d => {
+                return types.reduce((s, t) => s + ((d.commentary_types && d.commentary_types[t]) || 0), 0);
+            }) * 1.05])
+            .range([0, innerW]);
+
+        // 坐标轴
+        g.append("g")
+            .attr("class", "stacked-axis")
+            .call(d3.axisLeft(y))
+            .call(g => g.select(".domain").remove());
+        g.append("g")
+            .attr("class", "stacked-axis")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(8));
+
+        // 堆叠段
+        const layerG = g.selectAll(".stack-layer")
+            .data(series)
+            .enter()
+            .append("g")
+            .attr("class", "stack-layer")
+            .attr("fill", d => TYPE_COLORS[d.key] || "#999");
+
+        layerG.selectAll("rect")
+            .data(d => d)
+            .enter()
+            .append("rect")
+            .attr("class", "stacked-bar")
+            .attr("x", d => x(d[0]))
+            .attr("y", d => y(d.data.name))
+            .attr("height", y.bandwidth())
+            .attr("width",d => Math.max(0, x(d[1]) - x(d[0])))
+            .attr("rx", 2)
+            .append("title")
+            .text(d => {
+                const val = (d.data.commentary_types && d.data.commentary_types[d.typeKey]) || 0;
+                return `${d.data.name} · ${d.typeKey}：${val}`;
+            });
+
+        // 数值标签（仅显示足够宽的段）
+        layerG.selectAll("text")
+            .data(d => d)
+            .enter()
+            .append("text")
+            .attr("x", d => (x(d[0]) + x(d[1])) / 2)
+            .attr("y", d => y(d.data.name) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.74rem")
+            .style("fill", "#fff")
+            .style("font-weight", "600")
+            .text(d => {
+                const val = (d.data.commentary_types && d.data.commentary_types[d.typeKey]) || 0;
+                const w = x(d[1]) - x(d[0]);
+                return w > 30 ? val : "";
+            });
+
+        // 轴标签
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 38)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455")
+            .text("Number of comments (stacked by type)");
+
+        // 图例
+        const legend = d3.select("#legend-types");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(types)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(t => `
+                <span class="legend-swatch" style="background:${TYPE_COLORS[t]}"></span>
+                <span>${t}</span>
+            `);
+    }
+
+    /* ==========================================================
+       Key Insights
+       ========================================================== */
+    function renderInsights() {
+        const insights = [
+            `The Shidetang edition (1592) is the <strong>foundation of the hundred-chapter text</strong>, the first to record the "Eighty-one Tribulations" in full; only the Qing commentary editions (the Zhengdao Book, 1663) inserted <strong>Tang Sanzang's origin story</strong> (Chen Guangrui · Jiangliu'er) into the main text as Chapter 9.`,
+            `The Qiu Chuji hypothesis has been <strong>refuted</strong> — Qiu died in 1227 while the Shidetang edition was printed in 1592, over three hundred years apart; the Travels to the West of the Perfected Changchun is in fact a travelogue, not a novel. <strong>Wu Cheng'en</strong> remains the mainstream attribution (match_score=7), but the Li Chunfang hypothesis (6) has gained ground in recent years.`,
+            `Liu Yiming's Original Intent of the Journey West (1753) offers the <strong>most systematic Neidan reading</strong>; he annotated all 100 chapters, and his <strong>2,000 comments</strong> lead the five commentators, with 800 elucidation remarks alone making up four-tenths of his total — the culmination of the Neidan school.`,
+            `The five commentators produced <strong>6,100 comments</strong> in all, spanning some 160 years from the late Ming (Li Zhuowu, 1590s) to the mid-Qing (Liu Yiming and Zhang Shushen, 1753), forming a <strong>"reading group" that stretched across four centuries</strong>.`,
+            `Commentary-type distribution: <strong>elucidation leads decisively with 2,250 comments (37%)</strong>, showing that the annotators' core aim was to "reveal the central theme"; <strong>invective totals only 340</strong>, with Li Zhuowu (80) the most caustic.`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => ul.append("li").html(text));
+    }
+
+    /* ==========================================================
+       数据加载（fetch 失败则用嵌入数据）
+       ========================================================== */
+    const fetchStatus = { anyFetched: false };
+    async function fetchJson(path, fallbackKey) {
+        try {
+            const response = await fetch(path);
+            if (!response.ok) throw new Error('fetch failed: ' + path);
+            fetchStatus.anyFetched = true;
+            return await response.json();
+        } catch (e) {
+            console.warn('[INFO] Using embedded data (' + fallbackKey + '): ', e.message);
+            return EMBEDDED_DATA[fallbackKey];
+        }
+    }
+
+    async function loadData() {
+        const base = '../../scripts/output/data/';
+        const [versions, variants, authors, commentators, summary] = await Promise.all([
+            fetchJson(base + 'versions_tree.json', 'versions'),
+            fetchJson(base + 'versions_variants.json', 'variants'),
+            fetchJson(base + 'authors_debate.json', 'authors'),
+            fetchJson(base + 'commentary_danmaku.json', 'commentators'),
+            fetchJson(base + 'commentary_summary.json', 'summary')
+        ]);
+
+        if (fetchStatus.anyFetched) {
+            document.getElementById('dataSource').innerHTML =
+                'Data source: loaded live from <code>scripts/output/data/</code> (running in http server mode)';
+        }
+
+        return { versions, variants, authors, commentators, summary };
+    }
+
+    /* ==========================================================
+       主流程
+       ========================================================== */
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        renderEvolutionTree(data.versions);
+        renderEvolutionPaths(data.variants);
+        renderAuthorTable(data.authors);
+        renderCommentaryPie(data.commentators);
+        renderCommentaryCountBar(data.commentators);
+        renderQuotesGrid(data.commentators);
+        renderStackedBar(data.commentators);
+        renderInsights();
+
+        // 生成时间
+        const _gt = document.getElementById("gen-time"); if (_gt) _gt.textContent = 'Data generated: ' + new Date().toISOString().slice(0, 19).replace('T', ' ') + ' (embedded build)';
+    }
+
+    // 响应式重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderEvolutionTree(window.__lastData.versions);
+                renderStackedBar(window.__lastData.commentators);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+ ch.?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+<script id="audit-contentavoid">
+(function(){
+  var SKIP=/(tick|legend|title|axis|domain|cell|tooltip|axisfix|dark-halo|subtitle|grid|background|heat-col-label|heat-row-label)/i;
+  function fix(){
+    try{
+      // 1) 热力图列标签旋转 -42°（保留可见）
+      document.querySelectorAll('svg text.heat-col-label').forEach(function(t){
+        var x=+t.getAttribute('x')||0, y=+t.getAttribute('y')||0;
+        t.setAttribute('transform','rotate(-42 '+x+' '+y+')');
+        t.setAttribute('text-anchor','end');
+      });
+      // 2) 其余文字重叠：隐藏较小者 + 补 title
+      document.querySelectorAll('svg').forEach(function(svg){
+        var texts=[].slice.call(svg.querySelectorAll('text')).filter(function(t){
+          var c=t.getAttribute('class')||'';
+          if(SKIP.test(c)) return false;
+          var b=t.getBBox(); return b.width>0 && b.height>0;
+        });
+        for(var i=0;i<texts.length;i++){
+          for(var j=i+1;j<texts.length;j++){
+            var a=texts[i],b=texts[j];
+            var ra=a.getBBox(),rb=b.getBBox();
+            var ix=Math.max(0,Math.min(ra.x+ra.width,rb.x+rb.width)-Math.max(ra.x,rb.x));
+            var iy=Math.max(0,Math.min(ra.y+ra.height,rb.y+rb.height)-Math.max(ra.y,rb.y));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(), tb=(b.textContent||'').trim();
+            if(ta===tb){ // 完全重复：隐藏其一
+              if(a.style.display!=='none'){ a.setAttribute('data-cavoid','1'); if(!a.getAttribute('title')) a.setAttribute('title',ta); a.style.display='none'; }
+              continue;
+            }
+            var hide=(ra.width*ra.height<=rb.width*rb.height)?a:b;
+            var keep=(hide===a)?b:a;
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-cavoid','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000,14000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run(); else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
