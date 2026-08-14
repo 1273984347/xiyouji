@@ -4,9 +4,18 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W426），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W427），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.42（2026-08-14）：W427 内容质量残留清理 — A4/A5 轨标补齐 78 篇 + BOM 清理 21 文件 + 陈旧产物处置
+
+> **来源**：按待办「内容质量深化」项系统核查（lint_links 2792 链接 0 broken·术语审计繁简/OCR 残留 0·占位符已清·A1「关联分析/对应原著」100/100），确认大部分已在 W344/W418-W424 完成；剩余真实残留为 A4/A5 轨标缺失 + A4 21 文件 UTF-8 BOM + 上 session 6 个陈旧产物。
+> - **执行（轨标补齐）**：A4「西游与X/叙事学/批评/主义/美学/神话学/生态学/心理学/精神分析等」53 篇 + A5「明代制度对照/西游与X」25 篇共 78 篇补 `> 轨标：学术研究`（按 README「每篇开头标轨别」约定 + 既有轨标分布校准）；A4 30 篇议论性随笔/数据表/讲座类轨别存疑，列入待人工判定（不擅自标注）。
+> - **执行（BOM 清理）**：A4 21 文件开头 UTF-8 BOM（U+FEFF）移除，标题解析恢复正常、git diff 消除整行误报。
+> - **处置收尾（陈旧产物）**：保留 `scripts/quality_review.py`（内容质量抽样审查工具·未入库·L1 启发式待修正）；其余 5 个临时产物（_csp_check.js/_p1_viz_audit_http.js/_viz_screenshot.js/output/quality_raw.json/根目录 ink-mountains-hero png）移至回收站（可恢复）。
+> - **验证**：BOM 残留 0·轨标插入位置抽查正确·lint_links 2792 链接 0 broken（重跑）·verify_delivery 全绿。
+> - **状态**：已落地·待 commit/push。
 
 ### v2.3.41（2026-08-14）：W426 GoatCounter 自托管修复 — gc.zgo.at 大陆 DNS 污染 → count.js 本地自托管
 
