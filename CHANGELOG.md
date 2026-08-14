@@ -4,9 +4,17 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W427），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W428），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.43（2026-08-14）：W428 英文站续译 batch6 — 新增 5 张可视化页英文化
+
+> **来源**：按待办「英文站续译」推进 batch6（优先低脆度页 script CJK ≤ 40），复用 scripts/_extract_strings.py + _validate_en.py 工具链。
+> - **执行（英文化 5 页）**：新增 site/en/century-dialogue（世纪对话）/ data-explorer（数据浏览器）/ language-style-radar（语言风格雷达图）/ famous-time-travel（名人穿越入戏）/ search（全站搜索）；每页重建 EN 导航/页脚（EN Home/Dashboard/Visualizations/中文 back-link）+ 翻译 chrome 文本与 script 字面量（含人物名/维度标签/数据集标题/空态文案/console 日志）。
+> - **执行（配套）**：generate_csp.py 重生成 164 页（711 内联哈希 0 漂移）·sitemap 补 5 页（154→159）·language-style-radar 相关页跨链指向 ../data/ 中文原版（en 版未译前避免死链）。
+> - **验证**：_validate_en.py 5 页全过（chrome=whitelist-only·script=0）·lint_links 2851 链接 0 broken·verify_delivery 核心全绿。
+> - **状态**：已落地·待 commit/push。
 
 ### v2.3.42（2026-08-14）：W427 内容质量残留清理 — A4/A5 轨标补齐 78 篇 + BOM 清理 21 文件 + 陈旧产物处置
 
