@@ -8,6 +8,14 @@
 
 ---
 
+## W429 英文站续译 batch7（2026-08-14·v2.3.44）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/text-search.html / 81-hardships-view.html / mbti-evolution.html | W429 | v2.3.44 新增·3 张可视化页英文化（_validate_en.py 全过） |
+| site/sitemap.xml | W429 | v2.3.44 修改·补 3 个 en 页（159→162 页） |
+| site/**/*.html（3 页） | W429 | v2.3.44 修改·generate_csp.py 重生成 CSP（167 页·731 内联哈希） |
+
 ## W428 英文站续译 batch6（2026-08-14·v2.3.43）
 
 | 文件 | W | 说明 |
