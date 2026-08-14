@@ -8,6 +8,14 @@
 
 ---
 
+## W434 英文站续译 batch12（2026-08-14·v2.3.49）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/theological-intervention-network.html / criticism-history.html / global-pattern.html / cross-time-danmaku.html / character-dynamic-network.html | W434 | v2.3.49 新增·并行 subagent 英文化 5 页（含易碎页·_validate_en.py 全过） |
+| site/sitemap.xml | W434 | v2.3.49 修改·补 5 个 en 页（177→182 页） |
+| site/**/*.html（5 页） | W434 | v2.3.49 修改·generate_csp.py 重生成 CSP（187 页·860 内联哈希） |
+
 ## W433 英文站续译 batch11（2026-08-14·v2.3.48）
 
 | 文件 | W | 说明 |

@@ -1,0 +1,2444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-4NbzHH33rClYMREOBNZ0bzJRgOA6p1y8+J6fV/6/z/Y=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Criticism Through Time · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep { margin: 0 8px; color: var(--ink-soft); opacity: 0.6; }
+
+        
+        @media (max-width: 768px) {  }
+        
+        .kpi-card:nth-child(2) { border-top-color: var(--accent-2); }
+        .kpi-card:nth-child(3) { border-top-color: var(--accent-3); }
+        .kpi-card:nth-child(4) { border-top-color: var(--accent-4); }
+        
+        .kpi-card:nth-child(2) .label { color: var(--accent-2); }
+        .kpi-card:nth-child(3) .label { color: var(--accent-3); }
+        .kpi-card:nth-child(4) .label { color: var(--accent-4); }
+        
+        
+
+        
+        
+        
+        .section-sub strong { color: var(--accent); font-weight: 600; }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 18px;
+            margin-top: 14px;
+            font-size: 0.84rem;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+        /* ===== Chart 1: 解读河流图 ===== */
+        #river-chart {
+            width: 100%;
+            height: 560px;
+            display: block;
+        }
+        .river-axis text, .river-axis line, .river-axis path {
+            font-size: 0.78rem;
+            fill: var(--ink-soft);
+            stroke: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .river-zone-label {
+            font-size: 0.82rem;
+            fill: var(--ink-soft);
+            font-style: italic;
+        }
+        .river-stream {
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .river-node circle.river-dot {
+            stroke: #fff;
+            stroke-width: 2.5;
+            cursor: pointer;
+            transition: r 0.18s, stroke-width 0.18s;
+        }
+        .river-node:hover circle.river-dot { stroke-width: 3.5; }
+        .river-node text.river-name {
+            font-size: 0.92rem;
+            font-weight: 600;
+            fill: var(--ink);
+            pointer-events: none;
+        }
+        .river-node text.river-year {
+            font-size: 0.7rem;
+            fill: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            pointer-events: none;
+        }
+        .river-tooltip {
+            position: absolute;
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 12px 14px;
+            border-radius: 6px;
+            font-size: 0.84rem;
+            line-height: 1.55;
+            max-width: 320px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+            border: 1px solid var(--accent-soft);
+            z-index: 10;
+        }
+        .river-tooltip .rt-name { color: var(--accent-soft); font-weight: 600; font-size: 0.95rem; }
+        .river-tooltip .rt-meta { color: rgba(245,233,212,0.7); font-size: 0.76rem; margin-bottom: 6px; font-family: "JetBrains Mono", monospace; }
+        .river-tooltip .rt-quote { color: var(--accent-soft); font-style: italic; margin: 4px 0 6px; }
+
+        /* ===== Chart 2: 三教争辩三角形 ===== */
+        #triangle-chart {
+            width: 100%;
+            height: 520px;
+            display: block;
+        }
+        .tri-vertex-label {
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-anchor: middle;
+        }
+        .tri-vertex-sub {
+            font-size: 0.78rem;
+            fill: var(--ink-soft);
+            text-anchor: middle;
+            font-style: italic;
+        }
+        .tri-arg {
+            font-size: 0.82rem;
+            fill: var(--ink);
+        }
+        .tri-center-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            fill: var(--accent);
+            text-anchor: middle;
+            letter-spacing: 0.15em;
+        }
+        .tri-center-sub {
+            font-size: 0.72rem;
+            fill: var(--ink-soft);
+            text-anchor: middle;
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        /* ===== Chart 3: 作者悬疑推理图 ===== */
+        .detective-wall {
+            position: relative;
+            padding: 10px 0;
+        }
+        .detective-header {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 22px;
+            border-left: 4px solid var(--accent);
+        }
+        .detective-header strong { color: var(--accent-soft); }
+        .candidate-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+        @media (max-width: 768px) { .candidate-grid { grid-template-columns: 1fr; } }
+        .candidate-card {
+            background: linear-gradient(180deg, #fffdf8 0%, #faf7f2 100%);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 18px;
+            border-top: 3px solid var(--accent-3);
+            position: relative;
+        }
+        .candidate-card.main { border-top-color: var(--accent); }
+        .candidate-card.rejected { border-top-color: var(--ink-soft); opacity: 0.92; }
+        .candidate-card .cc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--line);
+        }
+        .candidate-card .cc-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .candidate-card.main .cc-name { color: var(--accent); }
+        .candidate-card .cc-meta {
+            font-size: 0.74rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .candidate-card .cc-identity {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .candidate-card .cc-status {
+            display: inline-block;
+            font-size: 0.74rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--accent-soft);
+            color: var(--accent-3);
+            margin-bottom: 10px;
+        }
+        .candidate-card.main .cc-status { background: var(--accent); color: #fff; }
+        .candidate-card.rejected .cc-status { background: var(--ink-soft); color: #fff; }
+        .evidence-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.8rem;
+        }
+        .evidence-col h5 {
+            font-size: 0.76rem;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid var(--line);
+        }
+        .evidence-col.for h5 { color: var(--accent-4); }
+        .evidence-col.against h5 { color: var(--accent); }
+        .evidence-col ul { list-style: none; padding: 0; margin: 0; }
+        .evidence-col li {
+            padding: 3px 0 3px 14px;
+            position: relative;
+            line-height: 1.5;
+            font-size: 0.78rem;
+        }
+        .evidence-col.for li::before {
+            content: "＋";
+            position: absolute; left: 0;
+            color: var(--accent-4); font-weight: 600;
+        }
+        .evidence-col.against li::before {
+            content: "－";
+            position: absolute; left: 0;
+            color: var(--accent); font-weight: 600;
+        }
+        .red-string {
+            position: absolute;
+            background: var(--accent);
+            height: 1px;
+            transform-origin: 0 0;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        /* ===== Chart 4: 内丹密码破译表 ===== */
+        .alchemy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            font-size: 0.88rem;
+        }
+        .alchemy-table th, .alchemy-table td {
+            border: 1px solid var(--line);
+            padding: 12px 14px;
+            vertical-align: top;
+            text-align: left;
+        }
+        .alchemy-table th {
+            background: #1a1410;
+            color: #f5e9d4;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            font-size: 0.84rem;
+        }
+        .alchemy-table th.alchemy-th-plot { border-right: 3px solid var(--accent); }
+        .alchemy-table td.plot {
+            background: var(--bg);
+            font-weight: 600;
+            color: var(--accent-3);
+            width: 36%;
+            border-right: 3px solid var(--accent);
+        }
+        .alchemy-table td.plot .plot-arrow {
+            display: block;
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            font-weight: 400;
+            margin-top: 3px;
+            font-style: italic;
+        }
+        .alchemy-table td.decoded {
+            color: var(--ink);
+            line-height: 1.6;
+        }
+        .alchemy-table td.decoded .decoded-key {
+            color: var(--accent-2);
+            font-weight: 600;
+        }
+        .alchemy-table td.source {
+            font-size: 0.76rem;
+            color: var(--accent-4);
+            font-family: "JetBrains Mono", monospace;
+            width: 22%;
+            background: #fffdf8;
+            font-style: italic;
+        }
+
+        /* ===== Chart 5: Lu Xun祛魅手术刀 ===== */
+        .scalpel-stage {
+            position: relative;
+            background: linear-gradient(180deg, #fffdf8 0%, #f5e9d4 100%);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 30px 20px;
+            min-height: 420px;
+            overflow: hidden;
+        }
+        #scalpel-svg {
+            width: 100%;
+            height: 420px;
+            display: block;
+        }
+        .scalpel-note {
+            margin-top: 18px;
+            background: var(--paper);
+            border-left: 4px solid var(--accent);
+            padding: 14px 18px;
+            font-size: 0.88rem;
+            color: var(--ink);
+            line-height: 1.7;
+            border-radius: 0 4px 4px 0;
+        }
+        .scalpel-note strong { color: var(--accent); }
+        .scalpel-note em { color: var(--accent-2); font-style: italic; }
+        @keyframes wordFloat {
+            0%   { opacity: 0; transform: scale(0.6); }
+            20%  { opacity: 1; transform: scale(1); }
+            80%  { opacity: 1; transform: scale(1.08); }
+            100% { opacity: 0; transform: scale(1.15); }
+        }
+        .scalpel-word {
+            transform-origin: center center;
+            transform-box: fill-box;
+            animation: wordFloat 5s ease-in-out infinite;
+        }
+        .scalpel-blade {
+            animation: bladeCut 6s ease-in-out infinite;
+            transform-origin: center;
+            transform-box: fill-box;
+        }
+        @keyframes bladeCut {
+            0%, 30% { transform: translateX(0) rotate(-12deg); }
+            50%     { transform: translateX(120px) rotate(-12deg); }
+            70%, 100% { transform: translateX(0) rotate(-12deg); }
+        }
+        .text-crack {
+            animation: crackOpen 6s ease-in-out infinite;
+        }
+        @keyframes crackOpen {
+            0%, 30% { opacity: 0; }
+            50%, 70% { opacity: 1; }
+            80%, 100% { opacity: 0.4; }
+        }
+
+        /* ===== Insight Box ===== */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 22px 26px;
+            border-radius: 4px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            letter-spacing: 0.05em;
+        }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong { color: var(--accent); font-weight: 600; }
+        .insight-box li em { color: var(--accent-2); font-style: italic; }
+
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: #f5e9d4;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        
+        
+        
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/criticism-history.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Criticism Through Time</p>
+        <p class="kicker">Q+ · Criticism History</p>
+        <h1>Criticism Through Time</h1>
+        <p class="subtitle">Ming and Qing to the Present · Five Centuries of Shifting Interpretive Currents</p>
+        <p class="tagline">Turning five centuries of Journey to the West criticism into an object of scrutiny — from Li Zhi's "childlike heart" to Jin Hezai's rebellion, three rivers converge in a single original text.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice" id="dataSource">
+            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">TIMESPAN · Span</div>
+                <div class="value">500+ years</div>
+                <div class="desc">1592 Shidetang edition published → 2020s contemporary rewritings</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">CRITICS · Critics</div>
+                <div class="value">9 critics</div>
+                <div class="desc">Li Zhi · Chen Shibin · Liu Yiming · Zhang Shushen · Lu Xun · Hu Shi · Nan Huai-Chin · Dai Jinhua · Jin Hezai</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">PARADIGMS · Paradigms</div>
+                <div class="value">3 major</div>
+                <div class="desc">Inner Alchemy · Game/Social Critique · Rebel-Deconstruction</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">DEBATE · Three Teachings Debate</div>
+                <div class="value">3 teachings</div>
+                <div class="desc">Confucian · Daoist · Buddhist · Literary — four schools, each holding its own line</div>
+            </div>
+        </div>
+
+        <!-- 核心可视化 1：解读河流图 -->
+        <section class="section">
+            <h2 class="section-title">River of Interpretations</h2>
+            <div class="section-sub">
+                The horizontal axis is time (1500s–2020s) and the vertical axis is interpretive tendency: <strong>top</strong> = Inner Alchemy / Neidan, <strong>middle</strong> = Social Critique / Literary, <strong>bottom</strong> = Game / Deconstruction / Rebellion.
+                Three main currents — <strong style="color:var(--accent-2)">Inner Alchemy school (blue-green)</strong> · <strong style="color:var(--accent-3)">Literary school (ochre)</strong> · <strong style="color:var(--rebel)">Rebel school (dark red)</strong> — converge in a single original text.
+                Nine critics are the nodes; hover to reveal each one's core argument and representative quote.
+            </div>
+            <svg id="river-chart"></svg>
+            <div class="legend" id="river-legend"></div>
+            <div class="river-tooltip" id="river-tooltip"></div>
+        </section>
+
+        <!-- 核心可视化 2：三教争辩三角形 -->
+        <section class="section">
+            <h2 class="section-title">Triangle of Three Teachings</h2>
+            <div class="section-sub">
+                An equilateral triangle layout: top <strong>Confucian (Zhang Shushen · Great Learning, Rectifying the Mind)</strong>, lower left <strong>Daoist (Chen Shibin · Inner Alchemy, Golden Elixir)</strong>, lower right <strong>Buddhist-Literary (modern scholars · literary approach)</strong>.
+                At the center is the <strong>original text</strong> of Journey to the West — each school claims to hold the "one true reading," yet its polysemy arises precisely from this refusal to converge.
+            </div>
+            <svg id="triangle-chart"></svg>
+        </section>
+
+        <!-- 核心可视化 3：作者悬疑推理图 -->
+        <section class="section">
+            <h2 class="section-title">The Author Whodunit</h2>
+            <div class="section-sub">
+                Four candidates (echoing <a href="../data/text-evolution.html" lang="zh-CN" style="color:var(--accent-2)">Text Evolution</a>, this page takes a criticism-history perspective):
+                <strong>Wu Cheng'en / Qiu Chuji / Li Chunfang / Master of Huayang Grotto-Heaven</strong>. Detective-wall visual: red lines connect the evidence nodes.
+                Top anchor: <strong>Hu Shi 1923 Textual Study of Journey to the West → infers Wu Cheng'en</strong>, endorsed by Lu Xun's A Brief History of Chinese Fiction.
+            </div>
+            <div class="detective-wall">
+                <div class="detective-header">
+                    📌 <strong>Hu Shi 1923 Textual Study of Journey to the West</strong>, citing the Tianqi-era Huai'an Prefecture Gazetteer, was the first to use modern empirical methods to <strong>infer Wu Cheng'en</strong>; Lu Xun's A Brief History of Chinese Fiction endorsed it, and it became the century-long consensus — yet this conclusion has been challenged again in the 21st century.
+                </div>
+                <div class="candidate-grid" id="candidate-grid"></div>
+            </div>
+        </section>
+
+        <!-- 核心可视化 4：内丹密码破译表 -->
+        <section class="section">
+            <h2 class="section-title">The Alchemy Cipher</h2>
+            <div class="section-sub">
+                Two-column comparison: <strong>left</strong> is the original plot, <strong>right</strong> is the Inner Alchemy school's reading. Chen Shibin's True Meaning of Journey to the West and Liu Yiming's Original Intent of Journey to the West read every plot point as a metaphor for <strong style="color:var(--accent-2)">the stages of inner-alchemy cultivation</strong>.
+                This "cipher book" nearly turned Journey to the West into a "diagram of the Golden Elixir Way" during the Qing dynasty.
+            </div>
+            <div style="overflow-x:auto;">
+                <table class="alchemy-table" id="alchemy-table">
+                    <thead>
+                        <tr>
+                            <th class="alchemy-th-plot">Original Plot</th>
+                            <th>Inner-Alchemy Reading</th>
+                            <th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody id="alchemy-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 核心可视化 5：Lu Xun祛魅手术刀 -->
+        <section class="section">
+            <h2 class="section-title">Lu Xun's Scalpel</h2>
+            <div class="section-sub">
+                Lu Xun uses a scalpel to cut open the text of Journey to the West, stripping away the Qing-era accretions of the "Golden Elixir Way" and exposing the dynamic emergence of its core vocabulary — repositioning it as a <strong>novel of gods and demons</strong>.
+                Yet demystification itself is also a kind of <strong style="color:var(--accent)">re-enchantment</strong>: swapping "Golden Elixir" for "human feelings" is still another reading.
+            </div>
+            <div class="scalpel-stage">
+                <svg id="scalpel-svg" viewBox="0 0 900 420" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+            <div class="scalpel-note">
+                <strong>Lu Xun, A Brief History of Chinese Fiction (1923)</strong>: "<em>The author was by nature fond of humor and jest, so that even when recounting bizarre and illusory events he would mix in words that bring a smile, making gods and demons all have human feelings, and spirits too versed in the ways of the world…</em>"
+                — With the four words "a work of play," he set the tone, rescuing Journey to the West from the accretions of the "Golden Elixir Way" and placing it among <em>novels of gods and demons</em>.
+                This cut opened up the cipher book of the Qing Inner Alchemy school, yet it also inaugurated the hegemony of another reading.
+            </div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">Insights</h2>
+            <div class="insight-box">
+                <h4>The history of criticism itself is the object under scrutiny</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/04-文化与历史背景/版本演变.md">Text Evolution (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/criticism-history.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    /* ==========================================================
+       EMBEDDED_FALLBACK 数据（fetch 失败时使用 · file:// 必可用）
+       ========================================================== */
+    const EMBEDDED_DATA = {
+        summary: {
+            timespan_years: "500+",
+            start_year: 1592,
+            end_year: 2020,
+            critics_count: 9,
+            paradigms_count: 3,
+            religions_debate: 3
+        },
+        streams: [
+            {
+                key: "zhengdao",
+                label: "Inner Alchemy school",
+                color: "#3a6b8c",
+                desc: "Reads Journey to the West through the Golden Elixir Way, treating every plot point as a metaphor for the stages of inner-alchemy cultivation",
+                path: ["Chen Shibin", "Liu Yiming", "Nan Huai-Chin"]
+            },
+            {
+                key: "literary",
+                label: "Literary school",
+                color: "#C9A063",
+                desc: "Reads from a literary standpoint and social critique, stripping away allegorical accretions and returning to the text",
+                path: ["Li Zhi", "Lu Xun", "Hu Shi", "Dai Jinhua"]
+            },
+            {
+                key: "rebel",
+                label: "Rebel / Deconstruction school",
+                color: "#8c2a2a",
+                desc: "Rewrites Journey to the West in an anti-heroic, authority-deconstructing posture, resisting every canonical reading",
+                path: ["Li Zhi", "Jin Hezai"]
+            }
+        ],
+        critics: [
+            {
+                name: "Li Zhi", alias: "Li Zhuowu",
+                era: "1527-1602", year: 1590,
+                school: "Doctrine of the Childlike Mind",
+                streams: ["literary", "rebel"],
+                position: { x: 1590, y: 0.45 },
+                quote: "The finest writing under heaven is that which has never failed to spring from the childlike mind.",
+                core_argument: "Taking the doctrine of the childlike mind as his standard, he affirmed the literariness of Journey to the West and anticipated the theory of play; he is also the common source of the later literary and rebel readings — the two hidden currents of 500 years of criticism both flow out from him.",
+                works: "Critique of Journey to the West by Master Li Zhuowu (c. 1590s)"
+            },
+            {
+                name: "Chen Shibin", alias: "Wuyizi",
+                era: "Qing · Kangxi reign", year: 1696,
+                school: "Golden Elixir Way",
+                streams: ["zhengdao"],
+                position: { x: 1696, y: 0.06 },
+                quote: "This is the Golden Elixir Way. The fire of the heart and the water of the kidneys are clearly distinguished in it.",
+                core_argument: "Reading Journey to the West through the Golden Elixir Way, he treated every plot point as a metaphor for the stages of inner-alchemy cultivation. The True Meaning of Journey to the West was the most popular Qing commentary and established the orthodoxy of the Inner Alchemy school.",
+                works: "The True Meaning of Journey to the West (1696)"
+            },
+            {
+                name: "Liu Yiming", alias: "Wuyuanzi",
+                era: "1734-1821", year: 1753,
+                school: "Dual Cultivation of Nature and Life",
+                streams: ["zhengdao"],
+                position: { x: 1753, y: 0.02 },
+                quote: "The original intent of Journey to the West lies in the dual cultivation of nature and life. When the mind-monkey returns to the right path, the six thieves vanish without a trace.",
+                core_argument: "A successor of the Daoist Longmen lineage. His 100-chapter chapter-by-chapter commentary, The Original Intent of Journey to the West, is the most systematic and comprehensive alchemical reading, hugely influential and the high point of the Inner Alchemy school.",
+                works: "The Original Intent of Journey to the West (1753)"
+            },
+            {
+                name: "Zhang Shushen", alias: "Master of the New Commentary",
+                era: "Qing · Qianlong reign", year: 1753,
+                school: "Great Learning, Rectifying the Mind",
+                streams: [],
+                position: { x: 1753, y: 0.34 },
+                quote: "The intent of Journey to the West lies in the Great Learning and the Doctrine of the Mean. The mind-monkey is none other than the human mind.",
+                core_argument: "Reading Journey to the West through Confucianism, he advocated the 'harmony of the Three Teachings' while returning to Confucianism as the root, taking the rectification of the mind and sincerity of the will from the Great Learning and the Doctrine of the Mean as the book's overall framework. He stood alone, rivaling the Inner Alchemy school.",
+                works: "New Commentary on Journey to the West (1753)"
+            },
+            {
+                name: "Lu Xun", alias: "",
+                era: "1881-1936", year: 1923,
+                school: "Novel of Gods and Demons",
+                streams: ["literary"],
+                position: { x: 1923, y: 0.5 },
+                quote: "Gods and demons all have human feelings; spirits too are versed in the ways of the world.",
+                core_argument: "A Brief History of Chinese Fiction stripped away the alchemical accretions, positioned Journey to the West as a 'novel of gods and demons', and advanced the 'theory of play', pioneering modern literary research. This demystifying surgery shaped a century of scholarship.",
+                works: "A Brief History of Chinese Fiction (1923)"
+            },
+            {
+                name: "Hu Shi", alias: "",
+                era: "1891-1962", year: 1923,
+                school: "Evidential Research",
+                streams: ["literary"],
+                position: { x: 1923, y: 0.56 },
+                quote: "Journey to the West is a work of play.",
+                core_argument: "The Textual Study of Journey to the West used empirical methods to establish Wu Cheng'en as the author, advancing the 'work of play' thesis and, together with Lu Xun, laying the foundation of the modern scholarly paradigm. The 'Wu Cheng'en hypothesis' thus became the century-long consensus.",
+                works: "Textual Study of Journey to the West (1923)"
+            },
+            {
+                name: "Nan Huai-Chin", alias: "",
+                era: "1918-2012", year: 1976,
+                school: "Cultivation Metaphor",
+                streams: ["zhengdao"],
+                position: { x: 1976, y: 0.12 },
+                quote: "Journey to the West is an allegory of spiritual cultivation; every ordeal is a gate to pass.",
+                core_argument: "Blending the Three Teachings, he read Journey to the West as a metaphor of cultivation, letting the Ming-Qing Inner Alchemy reading echo across the generations and linking traditional alchemical Daoism with modern spiritual practice. He is the contemporary continuation of the Inner Alchemy school.",
+                works: "Teachings on Journey to the West and cultivation (1970s–2000s)"
+            },
+            {
+                name: "Dai Jinhua", alias: "",
+                era: "1959—", year: 1995,
+                school: "Cultural Critique",
+                streams: ["literary"],
+                position: { x: 1995, y: 0.5 },
+                quote: "To reread the classics is to reread ourselves.",
+                core_argument: "Rereading Journey to the West through cultural studies and gender critique, she extends the literary approach into ideological criticism. She is the contemporary continuation of Lu Xun's demystification and a contemporary variation of the literary school.",
+                works: "Contemporary cultural studies · works on rereading the classics"
+            },
+            {
+                name: "Jin Hezai", alias: "",
+                era: "1977—", year: 2000,
+                school: "Rebel-Deconstruction",
+                streams: ["rebel"],
+                position: { x: 2000, y: 0.95 },
+                quote: "I will not let this sky cover my eyes again; I will not let this earth bury my heart again.",
+                core_argument: "Wukong Biography rewrites the pilgrimage, responding to the classic in an anti-heroic, authority-deconstructing posture. It is a reaction against Lu Xun's literary approach and an echo across generations of the Ming-Qing Inner Alchemy reading — the rebel school finally converges into a long river.",
+                works: "Wukong Biography (2000)"
+            }
+        ],
+        triangle: {
+            vertices: [
+                {
+                    key: "ru", label: "Confucian", sub: "Zhang Shushen · Great Learning, Rectifying the Mind",
+                    pos: "top",
+                    args: [
+                        "The intent of Journey to the West lies in the Great Learning and the Doctrine of the Mean",
+                        "The mind-monkey is the human mind · rectifying the mind, making the will sincere",
+                        "The Three Teachings in harmony · returning to Confucianism"
+                    ]
+                },
+                {
+                    key: "dao", label: "Daoist", sub: "Chen Shibin · Inner Alchemy, Golden Elixir",
+                    pos: "bl",
+                    args: [
+                        "Every plot point = a stage of inner-alchemy cultivation",
+                        "The Eight Trigrams Furnace = the elixir field · the Golden-Banded Staff = true intent",
+                        "The Golden Elixir Way · dual cultivation of nature and life"
+                    ]
+                },
+                {
+                    key: "wen", label: "Buddhist-Literary", sub: "Modern scholars · literary approach",
+                    pos: "br",
+                    args: [
+                        "A work of play · a novel of gods and demons",
+                        "Gods and demons all have human feelings · spirits too know the ways of the world",
+                        "Authorship research · close reading"
+                    ]
+                }
+            ]
+        },
+        candidates: [
+            {
+                name: "Wu Cheng'en",
+                identity: "Ming · Shanyang County, Huai'an Prefecture · Vice-magistrate of Changxing",
+                lifetime: "c. 1500–1582",
+                status: "Mainstream acceptance · a century-long consensus",
+                type: "main",
+                evidence_for: [
+                    "Tianqi-era Huai'an Prefecture Gazetteer records 'Wu Cheng'en, Journey to the West'",
+                    "Hu Shi's 1923 Textual Study infers it · Lu Xun's Brief History endorses it",
+                    "Dialect usage partly matches Huai'an speech"
+                ],
+                evidence_against: [
+                    "'Journey to the West' is not marked as fiction · may be a travelogue",
+                    "Wu Cheng'en's collected works contain no relevant Daoist terminology",
+                    "No second record among his fellow literati corroborates it",
+                    "Scholarship in the 21st century has renewed doubts"
+                ],
+                pushed_by: "Hu Shi · Lu Xun (1923)"
+            },
+            {
+                name: "Qiu Chuji",
+                identity: "Yuan · founder of the Longmen lineage of Quanzhen Daoism",
+                lifetime: "1148—1227",
+                status: "Largely refuted · an accretion of Qing commentaries",
+                type: "rejected",
+                evidence_for: [
+                    "Argued by the Qing-era Proof of the Way in Journey to the West",
+                    "Quanzhen terminology pervades the whole book",
+                    "Qiu Chuji's westward journey to meet Genghis Khan · resembles a pilgrimage"
+                ],
+                evidence_against: [
+                    "Qiu died in 1227; the Shidetang edition was printed in 1592 — over 300 years apart",
+                    "The hundred-chapter text's language is Ming, not early Yuan",
+                    "The Travels of Qiu Changchun is actually a travelogue, not a novel"
+                ],
+                pushed_by: "Wang Xiangxu · Chen Shibin · Liu Yiming (the Inner Alchemy school)"
+            },
+            {
+                name: "Li Chunfang",
+                identity: "Ming · Senior Grand Secretary · posthumous title Wending",
+                lifetime: "1511—1585",
+                status: "A hypothesis gaining traction in recent years · growing support",
+                type: "candidate",
+                evidence_for: [
+                    "Master of Huayang Grotto-Heaven — Li Chunfang styled himself 'Man of Huayang Grotto-Heaven'",
+                    "Huayang Grotto on Mount Mao · Li Chunfang's ties to the Maoshan Daoist lineage",
+                    "His Grand Secretary status closely matches the depth of the court descriptions"
+                ],
+                evidence_against: [
+                    "No direct evidence",
+                    "A Grand Secretary would hardly sign a popular novel",
+                    "The documentary chain is still incomplete"
+                ],
+                pushed_by: "Recent scholars (21st century)"
+            },
+            {
+                name: "Master of Huayang Grotto-Heaven",
+                identity: "The proofreader credited in the Shidetang edition",
+                lifetime: "c. Ming Jiajing–Wanli reigns",
+                status: "Possibly a pseudonym of Li Chunfang · or a publishing-house editor",
+                type: "candidate",
+                evidence_for: [
+                    "The original attribution in the Shidetang edition · the most direct signature",
+                    "May be connected to Li Chunfang · or a pseudonym"
+                ],
+                evidence_against: [
+                    "A 'proofreader,' not an 'author'",
+                    "Possibly a pseudonym of a bookseller or editor",
+                    "The pseudonym cannot be traced to a real person"
+                ],
+                pushed_by: "Original attribution in the Shidetang edition (1592)"
+            }
+        ],
+        alchemy: [
+            {
+                plot: "The Monkey Smelted in the Eight Trigrams Furnace",
+                arrow: "Forty-nine days · smelted into Fiery Golden Eyes",
+                decoded: "<span class='decoded-key'>Smelting true yang in the body's elixir field</span>. The Eight Trigrams = Qian, Kan, Gen, Zhen, Xun, Li, Kun, Dui, corresponding to the Five Phases' firing stages in the human body; the monkey is the true yang in the heart, which must be smelted to become adamantine and indestructible.",
+                source: "Wuyizi, The True Meaning of Journey to the West"
+            },
+            {
+                plot: "Fiery Golden Eyes",
+                arrow: "Seeing through the demons' disguises",
+                decoded: "<span class='decoded-key'>The true-yang energy produced by cultivation</span>. The golden eyes = inner radiance turned inward, able to perceive the emptiness of the Five Skandhas and illuminate the true nature of demons (deluded thoughts).",
+                source: "Wuyuanzi, The Original Intent of Journey to the West"
+            },
+            {
+                plot: "The Golden-Banded Staff · 13,500 catties",
+                arrow: "Shrinks or grows at will · hidden in the ear",
+                decoded: "<span class='decoded-key'>Primal energy · true intent</span>. 13,500 = the number of breaths a person takes in a day and night; hiding in the ear = the kidney opens its orifice at the ear, so true intent is stored in the Kan position.",
+                source: "Wuyizi, The True Meaning of Journey to the West"
+            },
+            {
+                plot: "Havoc in Heaven",
+                arrow: "Great Sage Equal to Heaven battles a hundred thousand celestial soldiers",
+                decoded: "<span class='decoded-key'>The unruly mind-monkey</span>. Before the mind-monkey is tamed it indulges desire and disrupts heaven, symbolizing the blazing delusions of early practice; the Buddha's five fingers = the Five Phases Mountain, which gathers the mind through concentration.",
+                source: "Wuyuanzi, The Original Intent of Journey to the West"
+            },
+            {
+                plot: "The Pilgrimage Road · 108,000 li",
+                arrow: "Fourteen years · returning to Chang'an",
+                decoded: "<span class='decoded-key'>The journey of mind-cultivation</span>. 108,000 = the distance of Wukong's somersault cloud, meaning it can be reached in a single thought; fourteen years = fourteen years of firing stages, symbolizing the number of the ninefold-cycled elixir.",
+                source: "Wuyizi, The True Meaning of Journey to the West"
+            },
+            {
+                plot: "The Eighty-One Ordeals",
+                arrow: "Guanyin tallies them up · one ordeal short, made up at the end",
+                decoded: "<span class='decoded-key'>The tribulations of cultivation</span>. Nine = the extreme of the yang number, and nine nines are eighty-one = the extreme of yang fire; the one missing ordeal is made up, symbolizing that when the firing stages are complete, merit is finally achieved.",
+                source: "Wuyuanzi, The Original Intent of Journey to the West"
+            }
+        ],
+        lu_xun_words: [
+            { text: "Gods and demons all have human feelings", weight: 1.0 },
+            { text: "Spirits too are versed in the ways of the world", weight: 0.95 },
+            { text: "A work of play",     weight: 0.9 },
+            { text: "Words that bring a smile",     weight: 0.85 },
+            { text: "Novel of gods and demons",     weight: 1.0 }
+        ]
+    };
+
+    /* ==========================================================
+       工具：年份缩写
+       ========================================================== */
+    function yearShort(y) {
+        if (y < 1600) return `${y}`;
+        if (y < 1700) return `${y}`;
+        return `${y}`;
+    }
+
+    /* ==========================================================
+       图表 1：解读河流图
+       ========================================================== */
+    function renderRiverChart(critics, streams) {
+        const svg = d3.select("#river-chart");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("river-chart");
+        const width = Math.max(200, containerEl.clientWidth || 1100);
+        const height = 560;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 50, right: 60, bottom: 50, left: 60 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // X 比例尺：时间 1500s → 2020s
+        const xMin = 1580, xMax = 2010;
+        const x = d3.scaleLinear()
+            .domain([xMin, xMax])
+            .range([0, innerW]);
+
+        // Y 比例尺：0=上(证道) 0.5=中(文学) 1=下(反叛)
+        const y = d3.scaleLinear()
+            .domain([0, 1])
+            .range([0, innerH]);
+
+        // 三带背景
+        const zoneData = [
+            { y0: 0.0, y1: 0.28, label: "Inner Alchemy · Neidan",  color: "rgba(58,107,140,0.06)" },
+            { y0: 0.28, y1: 0.62, label: "Social Critique · Literary", color: "rgba(122,82,48,0.06)" },
+            { y0: 0.62, y1: 1.0, label: "Game · Deconstruction · Rebellion", color: "rgba(140,42,42,0.06)" }
+        ];
+        g.selectAll(".river-zone")
+            .data(zoneData)
+            .enter()
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", d => y(d.y0))
+            .attr("width",Math.max(0, innerW))
+            .attr("height", d => y(d.y1) - y(d.y0))
+            .attr("fill", d => d.color);
+
+        g.selectAll(".river-zone-label")
+            .data(zoneData)
+            .enter()
+            .append("text")
+            .attr("class", "river-zone-label")
+            .attr("x", 8)
+            .attr("y", d => y(d.y0) + 16)
+            .text(d => d.label);
+
+        // X 轴：5 个时段节点
+        const tickValues = [1592, 1696, 1753, 1923, 2000];
+        const tickLabels = ["1592 Shidetang", "1696 True Meaning", "1753 Original Intent / New Commentary", "1923 Lu Xun / Hu Shi", "2000 Wukong Biography"];
+        const xAxis = d3.axisBottom(x)
+            .tickValues(tickValues)
+            .tickFormat((d, i) => tickLabels[i])
+            .tickSize(6);
+
+        g.append("g")
+            .attr("class", "river-axis")
+            .attr("transform", `translate(0,${innerH + 6})`)
+            .call(xAxis)
+            .call(g => g.select(".domain").remove())
+            .selectAll("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "1.1em");
+
+        // 5 个时段节点的竖虚线
+        g.selectAll(".river-tick-line")
+            .data(tickValues)
+            .enter()
+            .append("line")
+            .attr("x1", d => x(d))
+            .attr("x2", d => x(d))
+            .attr("y1", 0)
+            .attr("y2", innerH)
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "3,4")
+            .attr("opacity", 0.5);
+
+        // 流派：以 critic.name 为节点，绘制平滑曲线
+        const criticByName = {};
+        critics.forEach(c => criticByName[c.name] = c);
+
+        streams.forEach(stream => {
+            const pts = stream.path
+                .map(n => criticByName[n])
+                .filter(c => c)
+                .map(c => ({ x: x(c.position.x), y: y(c.position.y), critic: c }));
+
+            if (pts.length < 2) return;
+
+            // 平滑曲线
+            const lineGen = d3.line()
+                .x(d => d.x)
+                .y(d => d.y)
+                .curve(d3.curveMonotoneX);
+
+            // 河流主体（粗半透明）
+            g.append("path")
+                .datum(pts)
+                .attr("class", "river-stream")
+                .attr("d", lineGen)
+                .attr("stroke", stream.color)
+                .attr("stroke-width", 18)
+                .attr("opacity", 0.22);
+
+            // 中线（细实线）
+            g.append("path")
+                .datum(pts)
+                .attr("class", "river-stream")
+                .attr("d", lineGen)
+                .attr("stroke", stream.color)
+                .attr("stroke-width", 2.5)
+                .attr("opacity", 0.7);
+        });
+
+        // 9 critic nodes
+        const tooltip = d3.select("#river-tooltip");
+
+        const nodeG = g.selectAll(".river-node")
+            .data(critics)
+            .enter()
+            .append("g")
+            .attr("class", "river-node")
+            .attr("transform", d => `translate(${x(d.position.x)},${y(d.position.y)})`)
+            .style("cursor", "pointer");
+
+        // 节点光晕
+        nodeG.append("circle")
+            .attr("r", 12)
+            .attr("fill", d => {
+                const cs = d.streams || [];
+                if (cs.length === 0) return "var(--accent-3)";
+                const map = { zhengdao: "#3a6b8c", literary: "#C9A063", rebel: "#8c2a2a" };
+                return map[cs[0]] || "#C9A063";
+            })
+            .attr("opacity", 0.18);
+
+        // 节点圆点
+        nodeG.append("circle")
+            .attr("class", "river-dot")
+            .attr("r", 8)
+            .attr("fill", d => {
+                const cs = d.streams || [];
+                if (cs.length === 0) return "#C9A063";
+                const map = { zhengdao: "#3a6b8c", literary: "#C9A063", rebel: "#8c2a2a" };
+                return map[cs[0]] || "#C9A063";
+            })
+            .on("mouseover", function(event, d) {
+                d3.select(this).attr("r", 10);
+                tooltip.style("opacity", 1);
+                const streamLabels = (d.streams && d.streams.length)
+                    ? d.streams.map(s => {
+                        const map = { zhengdao: "Inner Alchemy school", literary: "Literary school", rebel: "Rebel school" };
+                        return map[s] || s;
+                    }).join(" · ")
+                    : "Independent (Confucian school)";
+                tooltip.html(`
+                    <div class="rt-name">${d.name}${d.alias ? " (" + d.alias + ")" : ""}</div>
+                    <div class="rt-meta">${d.era} · ${d.school} · ${streamLabels}</div>
+                    <div class="rt-quote">"${d.quote}"</div>
+                    <div>${d.core_argument}</div>
+                    <div class="rt-meta" style="margin-top:6px;">Representative work: ${d.works}</div>
+                `);
+            })
+            .on("mousemove", function(event) {
+                const stageRect = document.querySelector("#river-chart").parentElement.getBoundingClientRect();
+                let left = event.clientX - stageRect.left + 14;
+                let top = event.clientY - stageRect.top + 14;
+                if (left + 340 > stageRect.width) left = event.clientX - stageRect.left - 340;
+                if (top + 220 > stageRect.height) top = event.clientY - stageRect.top - 220;
+                tooltip.style("left", left + "px").style("top", top + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("r", 8);
+                tooltip.style("opacity", 0);
+            });
+
+        // 节点标签（名字 + 年代）
+        nodeG.append("text")
+            .attr("class", "river-name")
+            .attr("x", 0)
+            .attr("y", -16)
+            .attr("text-anchor", "middle")
+            .text(d => d.name);
+
+        // 图例
+        const legend = d3.select("#river-legend");
+        legend.selectAll("*").remove();
+        streams.forEach(s => {
+            legend.append("div")
+                .attr("class", "legend-item")
+                .html(`
+                    <span class="legend-swatch" style="background:${s.color};opacity:0.55;"></span>
+                    <span><strong style="color:${s.color}">${s.label}</strong> —— ${s.desc}</span>
+                `);
+        });
+        // 独立派图例
+        legend.append("div")
+            .attr("class", "legend-item")
+            .html(`
+                <span class="legend-swatch" style="background:#C9A063;border-radius:50%;"></span>
+                <span>Independent · Confucian school (Zhang Shushen)</span>
+            `);
+    }
+
+    /* ==========================================================
+       图表 2：三教争辩三角形
+       ========================================================== */
+    function renderTriangleChart(tri) {
+        const svg = d3.select("#triangle-chart");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("triangle-chart");
+        const width = containerEl.clientWidth || 900;
+        const height = 520;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const cx = width / 2;
+        const cy = height / 2 + 10;
+        const R = Math.min(width, height) * 0.36;
+
+        // 等边三角形三顶点
+        const vertices = {
+            top: { x: cx, y: cy - R, label: "Confucian", sub: "Zhang Shushen · Great Learning, Rectifying the Mind", color: "#C9A063", args: tri.vertices[0].args },
+            bl:  { x: cx - R * Math.sin(Math.PI / 3), y: cy + R * Math.cos(Math.PI / 3), label: "Daoist", sub: "Chen Shibin · Inner Alchemy, Golden Elixir", color: "#3a6b8c", args: tri.vertices[1].args },
+            br:  { x: cx + R * Math.sin(Math.PI / 3), y: cy + R * Math.cos(Math.PI / 3), label: "Buddhist-Literary", sub: "Modern scholars · literary approach", color: "#c8463a", args: tri.vertices[2].args }
+        };
+
+        // 三角形三条边
+        const triPts = [vertices.top, vertices.bl, vertices.br];
+        svg.append("polygon")
+            .attr("points", triPts.map(p => `${p.x},${p.y}`).join(" "))
+            .attr("fill", "rgba(217,205,184,0.18)")
+            .attr("stroke", "var(--line)")
+            .attr("stroke-width", 2)
+            .attr("stroke-dasharray", "6,4");
+
+        // 三顶点向中心连线
+        triPts.forEach(p => {
+            svg.append("line")
+                .attr("x1", p.x).attr("y1", p.y)
+                .attr("x2", cx).attr("y2", cy)
+                .attr("stroke", p.color)
+                .attr("stroke-width", 1.5)
+                .attr("opacity", 0.4)
+                .attr("stroke-dasharray", "3,5");
+        });
+
+        // 中心圆：原典
+        const centerR = 46;
+        svg.append("circle")
+            .attr("cx", cx).attr("cy", cy)
+            .attr("r", centerR)
+            .attr("fill", "#fffdf8")
+            .attr("stroke", "var(--accent)")
+            .attr("stroke-width", 2.5);
+        svg.append("circle")
+            .attr("cx", cx).attr("cy", cy)
+            .attr("r", centerR + 6)
+            .attr("fill", "none")
+            .attr("stroke", "var(--accent)")
+            .attr("stroke-width", 1)
+            .attr("opacity", 0.35);
+        svg.append("text")
+            .attr("class", "tri-center-text")
+            .attr("x", cx).attr("y", cy - 4)
+            .text("Original Text");
+        svg.append("text")
+            .attr("class", "tri-center-sub")
+            .attr("x", cx).attr("y", cy + 16)
+            .text("Journey to the West");
+
+        // 三顶点圆 + 标签
+        triPts.forEach((p, i) => {
+            // 顶点圆
+            svg.append("circle")
+                .attr("cx", p.x).attr("cy", p.y)
+                .attr("r", 28)
+                .attr("fill", p.color)
+                .attr("opacity", 0.92)
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 2);
+            svg.append("text")
+                .attr("class", "tri-vertex-label")
+                .attr("x", p.x).attr("y", p.y + 6)
+                .attr("fill", "#fff")
+                .text(p.label);
+
+            // 顶点副标题（向外）
+            const offsetMap = {
+                0: { dx: 0, dy: -48, anchor: "middle" },     // top
+                1: { dx: -52, dy: 8,  anchor: "end" },       // bl
+                2: { dx: 52,  dy: 8,  anchor: "start" }      // br
+            };
+            const off = offsetMap[i];
+            svg.append("text")
+                .attr("class", "tri-vertex-sub")
+                .attr("x", p.x + off.dx).attr("y", p.y + off.dy)
+                .attr("text-anchor", off.anchor)
+                .attr("fill", p.color)
+                .style("font-weight", "600")
+                .style("font-size", "0.9rem")
+                .text(p.sub);
+
+            // 论点（每个顶点 2-3 条）
+            const argsOffsetMap = {
+                0: { startX: p.x, startY: p.y - 70, stepY: -20, anchor: "middle" },  // top: 向上排列
+                1: { startX: p.x - 50, startY: p.y + 30, stepY: 20, anchor: "end" }, // bl: 向下左排列
+                2: { startX: p.x + 50, startY: p.y + 30, stepY: 20, anchor: "start" } // br: 向下右排列
+            };
+            const ao = argsOffsetMap[i];
+            p.args.forEach((arg, j) => {
+                // 论点小圆点
+                svg.append("circle")
+                    .attr("cx", i === 0 ? ao.startX - 6 : (i === 1 ? ao.startX + 6 : ao.startX - 6))
+                    .attr("cy", ao.startY + j * ao.stepY - 4)
+                    .attr("r", 3)
+                    .attr("fill", p.color);
+                svg.append("text")
+                    .attr("class", "tri-arg")
+                    .attr("x", ao.startX)
+                    .attr("y", ao.startY + j * ao.stepY)
+                    .attr("text-anchor", ao.anchor)
+                    .text(arg);
+            });
+        });
+
+        // 底部说明
+        svg.append("text")
+            .attr("x", cx)
+            .attr("y", height - 14)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("fill", "var(--ink-soft)")
+            .style("font-style", "italic")
+            .text("Each school claims the “one true reading” — its polysemy arises precisely from this refusal to converge");
+    }
+
+    /* ==========================================================
+       图表 3：作者悬疑推理图（侦探墙）
+       ========================================================== */
+    function renderCandidateWall(candidates) {
+        const grid = d3.select("#candidate-grid");
+        grid.selectAll("*").remove();
+
+        candidates.forEach(c => {
+            const card = grid.append("div")
+                .attr("class", `candidate-card ${c.type}`);
+
+            const head = card.append("div").attr("class", "cc-head");
+            head.append("div").attr("class", "cc-name").text(c.name);
+            head.append("div").attr("class", "cc-meta").text(c.lifetime);
+
+            card.append("div").attr("class", "cc-identity").text(c.identity);
+            card.append("div").attr("class", "cc-status").text(c.status);
+
+            const ev = card.append("div").attr("class", "evidence-block");
+
+            const forCol = ev.append("div").attr("class", "evidence-col for");
+            forCol.append("h5").text("Supporting evidence +");
+            const ulF = forCol.append("ul");
+            c.evidence_for.forEach(e => ulF.append("li").text(e));
+
+            const againstCol = ev.append("div").attr("class", "evidence-col against");
+            againstCol.append("h5").text("Opposing evidence -");
+            const ulA = againstCol.append("ul");
+            c.evidence_against.forEach(e => ulA.append("li").text(e));
+
+            card.append("div")
+                .style("margin-top", "10px")
+                .style("padding-top", "8px")
+                .style("border-top", "1px dashed var(--line)")
+                .style("font-size", "0.76rem")
+                .style("color", "var(--accent-2)")
+                .style("font-style", "italic")
+                .html(`<strong>Proposed by: </strong>${c.pushed_by}`);
+        });
+
+        // 在卡片之间添加红线装饰（侦探墙视觉）
+        // 用 SVG overlay 在 grid 之上画几条装饰性红线
+        setTimeout(() => {
+            const wall = document.querySelector(".detective-wall");
+            const existing = wall.querySelector(".detective-overlay");
+            if (existing) existing.remove();
+            const overlay = document.createElement("div");
+            overlay.className = "detective-overlay";
+            overlay.style.position = "absolute";
+            overlay.style.inset = "0";
+            overlay.style.pointerEvents = "none";
+            overlay.style.zIndex = "0";
+            const wallRect = wall.getBoundingClientRect();
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svgEl = document.createElementNS(svgNS, "svg");
+            svgEl.setAttribute("width", wallRect.width);
+            svgEl.setAttribute("height", wallRect.height);
+            svgEl.style.position = "absolute";
+            svgEl.style.top = "0";
+            svgEl.style.left = "0";
+            // 在候选卡片之间画几条装饰性红线
+            const cards = wall.querySelectorAll(".candidate-card");
+            if (cards.length >= 2) {
+                const r0 = cards[0].getBoundingClientRect();
+                const r1 = cards[cards.length - 1].getBoundingClientRect();
+                const lines = [
+                    [r0.left - wallRect.left + r0.width / 2, r0.top - wallRect.top + r0.height / 2,
+                     r1.left - wallRect.left + r1.width / 2, r1.top - wallRect.top + r1.height / 2]
+                ];
+                // 在第一张卡内部连一条线到主"Wu Cheng'en"标签
+                lines.forEach(([x1, y1, x2, y2]) => {
+                    const ln = document.createElementNS(svgNS, "line");
+                    ln.setAttribute("x1", x1); ln.setAttribute("y1", y1);
+                    ln.setAttribute("x2", x2); ln.setAttribute("y2", y2);
+                    ln.setAttribute("stroke", "#c8463a");
+                    ln.setAttribute("stroke-width", "1");
+                    ln.setAttribute("opacity", "0.25");
+                    ln.setAttribute("stroke-dasharray", "4,4");
+                    svgEl.appendChild(ln);
+                });
+            }
+            overlay.appendChild(svgEl);
+            wall.style.position = "relative";
+            wall.appendChild(overlay);
+        }, 50);
+    }
+
+    /* ==========================================================
+       图表 4：内丹密码破译表
+       ========================================================== */
+    function renderAlchemyTable(rows) {
+        const tbody = d3.select("#alchemy-tbody");
+        tbody.selectAll("*").remove();
+        rows.forEach(r => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "plot")
+                .html(`${r.plot}<span class="plot-arrow">${r.arrow}</span>`);
+            tr.append("td").attr("class", "decoded").html(r.decoded);
+            tr.append("td").attr("class", "source").text(r.source);
+        });
+    }
+
+    /* ==========================================================
+       图表 5：Lu Xun祛魅手术刀（动态文字云）
+       ========================================================== */
+    function renderScalpel(words) {
+        const svg = d3.select("#scalpel-svg");
+        svg.selectAll("*").remove();
+
+        const W = 900, H = 420;
+
+        // 文本块（被切开的《西游记》）
+        const blockX = 120, blockY = 90, blockW = 660, blockH = 240;
+        // 左半块
+        svg.append("rect")
+            .attr("x", blockX).attr("y", blockY)
+            .attr("width",Math.max(0, blockW / 2 - 6)).attr("height", blockH)
+            .attr("fill", "#fffdf8")
+            .attr("stroke", "var(--accent-3)")
+            .attr("stroke-width", 1.5)
+            .attr("rx", 4);
+        // 右半块
+        svg.append("rect")
+            .attr("x", blockX + blockW / 2 + 6).attr("y", blockY)
+            .attr("width",Math.max(0, blockW / 2 - 6)).attr("height", blockH)
+            .attr("fill", "#fffdf8")
+            .attr("stroke", "var(--accent-3)")
+            .attr("stroke-width", 1.5)
+            .attr("rx", 4);
+
+        // 文本块上的"金丹大道"附会文字（被切开）
+        svg.append("text")
+            .attr("x", blockX + blockW / 2).attr("y", blockY + 50)
+            .attr("text-anchor", "middle")
+            .style("font-size", "1.3rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent-3)")
+            .style("letter-spacing", "0.1em")
+            .text("The Golden Elixir Way · stages of inner-alchemy cultivation");
+        svg.append("text")
+            .attr("x", blockX + blockW / 2).attr("y", blockY + 90)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.86rem")
+            .style("fill", "var(--ink-soft)")
+            .style("font-style", "italic")
+            .text("(an accreted layer of the Qing Inner Alchemy school — awaiting demystification)");
+        svg.append("text")
+            .attr("x", blockX + blockW / 2).attr("y", blockY + 150)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.8rem")
+            .style("fill", "var(--ink-soft)")
+            .style("font-family", '"JetBrains Mono", monospace')
+            .text("Eight Trigrams Furnace = elixir field · Golden-Banded Staff = true intent · Eighty-One Ordeals = firing stages");
+
+        // 裂缝
+        const crackX = blockX + blockW / 2;
+        const crackPath = `M ${crackX} ${blockY - 10} L ${crackX - 6} ${blockY + 40} L ${crackX + 8} ${blockY + 100} L ${crackX - 4} ${blockY + 160} L ${crackX + 6} ${blockY + blockH + 10}`;
+        svg.append("path")
+            .attr("d", crackPath)
+            .attr("stroke", "var(--accent)")
+            .attr("stroke-width", 2.5)
+            .attr("fill", "none")
+            .attr("class", "text-crack")
+            .attr("opacity", 0.7);
+
+        // 手术刀（SVG 绘制）
+        const scalpelG = svg.append("g")
+            .attr("class", "scalpel-blade")
+            .attr("transform", `translate(${crackX - 30}, ${blockY + blockH / 2}) rotate(-12)`);
+        // 刀柄
+        scalpelG.append("rect")
+            .attr("x", -60).attr("y", -5)
+            .attr("width",50).attr("height", 10)
+            .attr("fill", "var(--accent-3)")
+            .attr("rx", 2);
+        // 刀身
+        scalpelG.append("polygon")
+            .attr("points", "-10,-5 30,-2 30,2 -10,5")
+            .attr("fill", "#e8e8e8")
+            .attr("stroke", "var(--ink-soft)")
+            .attr("stroke-width", 1);
+        // 刀刃高光
+        scalpelG.append("line")
+            .attr("x1", -8).attr("y1", -3)
+            .attr("x2", 28).attr("y2", -1)
+            .attr("stroke", "#ffffff")
+            .attr("stroke-width", 1.2)
+            .attr("opacity", 0.8);
+        // Lu Xun标签
+        scalpelG.append("text")
+            .attr("x", -35).attr("y", -14)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.74rem")
+            .style("fill", "var(--accent)")
+            .style("font-weight", "600")
+            .style("font-family", '"JetBrains Mono", monospace')
+            .text("Lu Xun 1923");
+
+        // 露出的核心词汇（动态浮现）
+        // 5 个词环绕在文本块下方
+        const wordPositions = [
+            { x: 200, y: 380, delay: 0,   color: "var(--accent)", size: "1.5rem" },
+            { x: 360, y: 390, delay: 1.0, color: "var(--accent-2)", size: "1.4rem" },
+            { x: 520, y: 380, delay: 2.0, color: "var(--accent-3)", size: "1.5rem" },
+            { x: 680, y: 390, delay: 3.0, color: "var(--accent-4)", size: "1.4rem" },
+            { x: 450, y: 350, delay: 4.0, color: "var(--rebel)", size: "1.6rem" }
+        ];
+        words.forEach((w, i) => {
+            const pos = wordPositions[i] || wordPositions[0];
+            svg.append("text")
+                .attr("class", "scalpel-word")
+                .attr("x", pos.x)
+                .attr("y", pos.y)
+                .attr("text-anchor", "middle")
+                .style("font-size", pos.size)
+                .style("font-weight", "600")
+                .style("fill", pos.color)
+                .style("letter-spacing", "0.08em")
+                .style("animation-delay", `${pos.delay}s`)
+                .text(w.text);
+        });
+
+        // 顶部小标注
+        svg.append("text")
+            .attr("x", W / 2).attr("y", 30)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.9rem")
+            .style("fill", "var(--ink)")
+            .style("font-weight", "600")
+            .text("The demystification surgery · 1923 · Beijing");
+        svg.append("text")
+            .attr("x", W / 2).attr("y", 50)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.76rem")
+            .style("fill", "var(--ink-soft)")
+            .style("font-style", "italic")
+            .text("“Make gods and demons all have human feelings, spirits too versed in the ways of the world” — revealing the core vocabulary of the literary approach");
+    }
+
+    /* ==========================================================
+       关键洞察
+       ========================================================== */
+    function renderInsights() {
+        const insights = [
+            `The essence of 500 years of criticism: <strong>there is no "true reading," only each era's rewriting of the text in its own language</strong>. The Ming spoke of mind and nature through the Golden Elixir, the Qing used inner alchemy to argue orthodoxy, the Republic founded a discipline on textual research, and the present uses deconstruction to oppose authority — every age sees itself in Journey to the West.`,
+            `The paradox of the Three Teachings debate: each school claims the "<strong>one true reading</strong>" — the Confucians take the Great Learning and the Doctrine of the Mean as their framework, the Daoists take the Golden Elixir as their bone, the literary school takes play as their body. Yet the polysemy of Journey to the West <em>arises precisely from this refusal to converge</em>; to force a convergence is to suffocate the text.`,
+            `Lu Xun's demystification is itself a kind of <strong>re-enchantment</strong> — replacing the "Golden Elixir Way" with "the ways of the world," replacing "alchemical scripture" with "a novel of gods and demons" is still another reading. The scalpel of demystification cut through the accreted layers, but it also drew a new canonical boundary.`,
+            `Contemporary rebellion (<strong>Jin Hezai's Wukong Biography</strong>) is a reaction against Lu Xun's literary approach, and also an <em>echo across generations</em> of the Ming-Qing Inner Alchemy reading — it re-acknowledges Journey to the West as a book of cultivation, only swapping the "Golden Elixir" for "freedom" and "the self."`,
+            `<strong>Li Zhi's double identity</strong>: he is at once the source of the literary school (the doctrine of the childlike heart · literariness) and the source of the rebel school (the theory of play · deconstruction); the two hidden currents of 500 years of criticism both flow out from him. A single thought he had in 1590 grew into two rivers by the year 2000.`,
+            `<strong>The Möbius strip metaphor</strong>: the most extreme literary play (Lu Xun · Hu Shi) and the most abstruse philosophical reflection (Chen Shibin · Liu Yiming) may be two sides of the same coin. When Jin Hezai writes "I will not let this sky cover my eyes again," he reaches across 250 years to clasp hands with Wuyuanzi's "the mind-monkey returns to the right path."`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => ul.append("li").html(text));
+    }
+
+    /* ==========================================================
+       数据加载（fetch 失败则用嵌入数据）
+       ========================================================== */
+    const fetchStatus = { anyFetched: false };
+    async function fetchJson(path, fallbackKey) {
+        try {
+            const response = await fetch(path);
+            if (!response.ok) throw new Error('fetch failed: ' + path);
+            fetchStatus.anyFetched = true;
+            return await response.json();
+        } catch (e) {
+            console.warn('[INFO] using embedded data (' + fallbackKey + '):', e.message);
+            return EMBEDDED_DATA[fallbackKey];
+        }
+    }
+
+    async function loadData() {
+        const base = '../../scripts/output/data/';
+        const [critics, streams, triangle, candidates, alchemy, lu_xun_words] = await Promise.all([
+            fetchJson(base + 'criticism_critics.json', 'critics'),
+            fetchJson(base + 'criticism_streams.json', 'streams'),
+            fetchJson(base + 'criticism_triangle.json', 'triangle'),
+            fetchJson(base + 'criticism_candidates.json', 'candidates'),
+            fetchJson(base + 'criticism_alchemy.json', 'alchemy'),
+            fetchJson(base + 'criticism_luxun_words.json', 'lu_xun_words')
+        ]);
+
+        if (fetchStatus.anyFetched) {
+            document.getElementById('dataSource').innerHTML =
+                'Data source: loaded live from <code>scripts/output/data/</code> (running in http server mode)';
+        }
+
+        return { critics, streams, triangle, candidates, alchemy, lu_xun_words };
+    }
+
+    /* ==========================================================
+       主流程
+       ========================================================== */
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        renderRiverChart(data.critics, data.streams);
+        renderTriangleChart(data.triangle);
+        renderCandidateWall(data.candidates);
+        renderAlchemyTable(data.alchemy);
+        renderScalpel(data.lu_xun_words);
+        renderInsights();
+    }
+
+    // 响应式重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderRiverChart(window.__lastData.critics, window.__lastData.streams);
+                renderTriangleChart(window.__lastData.triangle);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
