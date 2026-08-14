@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-z0O2/h9Sd+ANqRXub/x8t00GEL3nCPerpoC3+QR2DdY=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Monster-Victim Network · W143 D · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <script src="../static/js/d3-sankey.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    
+svg circle { will-change: transform; }
+</style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        /* Hero */
+header
+header
+header
+header.hero .meta {
+  color: #b8a888;
+  font-size: 0.85em;
+  margin-top: 10px;
+}
+
+/* Section */
+
+.section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+
+.definition {
+  background: #f5efe4;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.94em;
+  border-radius: 2px;
+}
+
+/* KPI */
+
+.kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
+.kpi-label { color: var(--muted); font-size: 0.84em; margin-top: 4px; }
+
+/* Victim cards grid (Section 1) */
+.victims-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+.victim-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.victim-card:hover, .victim-card:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  outline: none;
+}
+.victim-card .v-name {
+  font-size: 1.25em;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.victim-card .v-tag {
+  font-size: 0.84em;
+  color: var(--accent-3);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+.victim-card .v-row {
+  font-size: 0.86em;
+  color: var(--ink);
+  margin-top: 4px;
+}
+.victim-card .v-row.muted { color: var(--muted); }
+.victim-card .v-wound {
+  font-size: 0.84em;
+  color: var(--accent);
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+}
+.swatch-bar {
+  height: 4px;
+  border-radius: 2px;
+  margin: 8px 0;
+  width: 60%;
+}
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.chart-caption { color: var(--muted); font-size: 0.84em; margin-bottom: 12px; }
+.chart-svg {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.84em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: rgba(44,36,24,0.95);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.84em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 280px;
+}
+
+/* Insight */
+.insight-list { list-style: none; }
+.insight-list li {
+  background: #f5efe4;
+  margin: 8px 0;
+  padding: 12px 15px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 2px;
+}
+.insight-list li strong { color: var(--accent); }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; }
+.node-circle:hover { stroke: var(--accent); stroke-width: 2px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .victims-grid { grid-template-columns: 1fr; }
+  header
+  header
+  
+  
+}
+@media (max-width: 520px) {
+  .victims-grid { grid-template-columns: 1fr; }
+  
+  
+  header
+}
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/monster-victims-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Monster-Victim Network</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Monster-Victim Network</h1>
+        <p class="subtitle">MONSTER VICTIMS · TRAUMA NETWORK ATLAS</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">Victim Groups</div></div>
+  <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">Trauma Types</div></div>
+  <div class="kpi-card"><div class="kpi-value">3</div><div class="kpi-label">Recycling Harm</div></div>
+  <div class="kpi-card"><div class="kpi-value">5</div><div class="kpi-label">Trauma Dimensions</div></div>
+  <div class="kpi-card"><div class="kpi-value">3</div><div class="kpi-label">Silent Bystanders</div></div>
+  <div class="kpi-card"><div class="kpi-value">9</div><div class="kpi-label">Narrative Chapters</div></div>
+</div>
+
+<!-- Section 1: 四受害者概览 -->
+<section class="section">
+  <h2 class="section-title">I · Monster-Victim Overview</h2>
+  <div class="section-sub">FOUR VICTIMS OVERVIEW</div>
+  <div class="definition">
+    <strong>Definition:</strong> Four kinds of victims that the Journey narrative either "borrowed" or "left out of account" — the Gold & Silver Horn Kings who descended to earth as boys (borrowed suffering), Sai Taisui who bit through the iron tether (refusing to be ridden again), the Golden Sage Lady in her brown robe (a gender victim), and the Chen Village boy and girl sacrificed into salt crystals (offerings to the King of Spiritual Inspiration). They fall respectively into identity trauma, existential trauma, gender trauma, and sacrifice trauma, forming the silent spectrum of victims beneath the demon narrative.
+  </div>
+  <div class="victims-grid" id="victims-grid"></div>
+</section>
+
+<!-- Section 2: 力导向图 -->
+<section class="section">
+  <h2 class="section-title alt">II · Victim-Perpetrator-Bystander Relationship Force-Directed Graph</h2>
+  <div class="section-sub">VICTIM-PERPETRATOR-BYSTANDER FORCE-DIRECTED GRAPH</div>
+  <div class="definition">
+    <strong>Definition:</strong> Centered on the four victims, the graph radiates outward to perpetrators, bystanders, and rescuers. Edge thickness represents relationship strength, and node color represents type. Guanyin appears in several cases at once — as the "borrower" of the Gold & Silver Horn Kings, the "rider" of Sai Taisui, and the recycler in the case of the boy and girl and the King of Spiritual Inspiration — forming the most intricate "hub of silence".
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Victim-Perpetrator-Bystander-Rescuer Force-Directed Graph</div>
+    <div class="chart-caption">Center = victim · red edge = harm · gray edge = bystander · blue edge = rescue · node size = degree · hover for details</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="560"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3: 桑基图 -->
+<section class="section">
+  <h2 class="section-title alt-2">III · Trauma Type-Victim-Perpetrator-Bystander Sankey Diagram</h2>
+  <div class="section-sub">TRAUMA-TYPE → VICTIM → PERPETRATOR → BYSTANDER SANKEY</div>
+  <div class="definition">
+    <strong>Definition:</strong> The Sankey diagram shows four layers of flow: trauma type → victim → perpetrator → bystander. Flow thickness corresponds to event weight. The visualization reveals how "borrowed suffering" and "silent crime" set out from the trauma type, pass through the victim's body into the perpetrator's hands, and finally settle into the bystanders' silence.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Trauma Type → Victim → Perpetrator → Bystander Four-Layer Sankey Diagram</div>
+    <div class="chart-caption">Left to right: trauma type → victim → perpetrator → bystander · flow = event weight · hover to highlight paths</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="520"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4: 雷达图 -->
+<section class="section">
+  <h2 class="section-title">IV · Four-Victim Trauma-Dimension Radar Chart</h2>
+  <div class="section-sub">FOUR VICTIMS · FIVE TRAUMA DIMENSIONS RADAR</div>
+  <div class="definition">
+    <strong>Definition:</strong> Five dimensions assess the four victims — Body (intensity of physical harm) / Mind (psychic deprivation) / Society (ruptured bonds) / Law (absence of accountability and trial) / Narrative (visibility of being told). The larger the radar area, the heavier the victim's trauma load. The boy and girl score highest on bodily trauma; the Golden Sage Lady scores highest on psychological trauma.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Four Victims, Five-Dimension Radar Chart (Body / Mind / Society / Law / Narrative)</div>
+    <div class="chart-caption">Four victims × 5 dimensions · values 0-10 · hover for details</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="500"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5: 时间线 -->
+<section class="section">
+  <h2 class="section-title alt">V · Victim Fate Timeline</h2>
+  <div class="section-sub">VICTIM FATE TIMELINE</div>
+  <div class="definition">
+    <strong>Definition:</strong> The trauma and recovery nodes of the four victims are arranged in narrative order. From the portrait posters of Pingding Mountain in Chapter 32, to the Golden Sage Lady's return home in Chapter 71, to Guanyin weaving the bamboo basket in Chapter 49 — the timeline traces the full arc of "borrowed → harmed → recycled → silenced", along with the occasional recovery point of "rescued → self-healing".
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Four Victims' Fate Timeline</div>
+    <div class="chart-caption">X axis: chapter order · Y axis: four victims on separate tracks · color: stage (trauma / recovery) · hover for details</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="440"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6: 关键洞察 -->
+<section class="section">
+  <h2 class="section-title alt-2">VI · Key Insights</h2>
+  <div class="section-sub">KEY INSIGHTS</div>
+  <ul class="insight-list">
+    <li><strong>Borrowed suffering:</strong> The Gold & Silver Horn Kings did not run away and were not banished from Heaven; they were examiner props that Taishang Laojun, at Guanyin's request to "borrow three times", transformed into demons. The examiner is no demon — the examiner is a prop. Suffering was designed, arranged, and taken back. This is the sharpest example of the ethical dilemma of the Journey's "eighty-one ordeals": the pit you claw out of with your life was dug by someone else in advance.</li>
+    <li><strong>Silent crime:</strong> For three years Sai Taisui never touched the Golden Sage Lady, never went out, never expanded, never ate people — what he stole was not the power of the Purple-Gold Bell but the right "not to be ridden". Yet biting through the iron tether and fleeing to earth was itself a "symmetrical revenge" against Guanyin — seizing the king's queen to symbolically reclaim his own confiscated "exclusive possession". When Guanyin finally put the halter back on him, he did not bite a second time.</li>
+    <li><strong>Rebellion of the brown robe:</strong> Immortal Ziyang's brown robe protected the Golden Sage Lady's chastity, and also stripped away her right to "consent" — for three years she could not touch her own face, could not hold her own shoulders and weep at night. The barbs fell off, but the tactile amnesia remained; the robe came off, but the other brown robe that had grown inside her body no immortal could take away. The end of the chastity protection was not reunion, but a king who had learned to speak from three zhang away.</li>
+    <li><strong>Crystallization of tears:</strong> Each year Chen Village offered a boy and a girl to the King of Spiritual Inspiration (a goldfish from Guanyin's lotus pond) — nine years, eighteen children, and every packet of realgar in the village had passed through the same pair of hands. After Wukong rescued them, the King of Spiritual Inspiration was never tried; Guanyin quietly collected him in a bamboo basket — the creator recycling her own creation, the most "privately settled" stroke in the whole Journey. Nine years of tears crystallized into salt, and the brine seeped into the village's foundation, lasting longer than the demon itself.</li>
+    <li><strong>Guanyin's "hub of silence":</strong> Guanyin appears in three of the four cases — the "borrower" of the Gold & Silver Horn Kings, the "rider" of Sai Taisui, and the "creator-recycler" of the King of Spiritual Inspiration. She is both the upstream end of the harm chain and the endpoint of the rescue chain. The logic of "private settlement" runs throughout: none of the offenders was ever publicly tried, and all were reabsorbed into better positions. The cost of maintaining order is that the victims' stories get pressed into the margins of loan notes and rejected memorials.</li>
+    <li><strong>The misalignment of victim and narrative:</strong> After the Gold & Silver Horn Kings turned to water no one cared; Sai Taisui was ridden back beneath the lotus throne and never had three years again; the Golden Sage Lady returned home and could not learn to be touched; and after the boy and girl were rescued, the salt crystals still lay in the village's foundation. What was "rescued" from the victims was only their bodies; the narrative's echoes remained in the objects — the silk thread at the gourd's mouth, the tooth marks on the iron chain, the fallen barbs of the brown robe, the salt crystals at the bottom of the realgar jar.</li>
+  </ul>
+</section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/monster-victims-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+</div>
+
+<script>
+// ============================================================
+// EMBEDDED DATA —— 妖怪受害者数据
+// ============================================================
+const EMBEDDED_DATA = {
+  // Section 1: 四受害者卡片
+  victims: [
+    {
+      name: "Gold & Silver Horn Kings", type: "Identity Trauma", chapter: "Ch. 32-35",
+      perpetrator: "Taishang Laojun (lender)", bystander: "Guanyin", rescuer: "—",
+      fate: "Recycled by Laojun", color: "#c8463a", key: "jin",
+      tag: "Borrowed Suffering · Boys Descend to Earth",
+      wound: "Examiner props preparing with portrait posters; after turning to water, their souls were reclaimed by Laojun",
+      desc: "Guanyin borrowed them from Taishang Laojun three times, transforming them into demons to test the pilgrimage team's resolve. Borrowed suffering, borrowed people."
+    },
+    {
+      name: "Sai Taisui", type: "Existential Trauma", chapter: "Ch. 70-71",
+      perpetrator: "Guanyin (Purple-Gold Bell)", bystander: "King of Zhuzi", rescuer: "Wukong",
+      fate: "Halter returned by Guanyin", color: "#8b7355", key: "sai",
+      tag: "Stole the Purple-Gold Bell · Refusing to Be Ridden · A Quiet Demon",
+      wound: "Bit through the iron chain · A neck that stopped hurting for three years · Wore the Purple-Gold Bell at his waist as an ID",
+      desc: "The Golden-Haired Hou bit through the iron chain beneath Guanyin's lotus throne, snatched the Purple-Gold Bell, seized the Lady, and shut himself away for three years. What he stole was not the bell but the right not to be ridden."
+    },
+    {
+      name: "Golden Sage Lady", type: "Gender Trauma", chapter: "Ch. 70-71",
+      perpetrator: "Sai Taisui", bystander: "King of Zhuzi", rescuer: "Immortal Ziyang",
+      fate: "Returned home wearing the brown robe", color: "#3a6b8c", key: "gong",
+      tag: "The One in the Brown Robe · Gender Victim",
+      wound: "Three years in the brown robe · Tactile amnesia · Internalizing a three-zhang distance",
+      desc: "Immortal Ziyang gifted her the brown robe to protect her chastity, yet it also stripped away her right to consent. For three years she could not touch her own face. The barbs fell away, but the tactile nerves had not yet awakened."
+    },
+    {
+      name: "Chen Village Boy & Girl", type: "Sacrifice Trauma", chapter: "Ch. 47-49",
+      perpetrator: "King of Spiritual Inspiration", bystander: "Guanyin", rescuer: "Wukong",
+      fate: "Rescued by Wukong", color: "#5a4a6b", key: "tong",
+      tag: "Offerings to the King of Spiritual Inspiration · Tears Crystallized into Salt",
+      wound: "Nine years of offerings · Eighteen children's lives · All the village's realgar from the same hands",
+      desc: "The King of Spiritual Inspiration of the Tongtian River (a goldfish from Guanyin's lotus pond) demanded a boy and a girl each year. Nine years of cost crystallized into salt, seeping into the village's foundation."
+    }
+  ],
+  // Section 2: 力导向图节点与边
+  network: {
+    nodes: [
+      // 受害者（中心）
+      { id: "Gold & Silver Horn Kings", type: "victim", sub: "Identity Trauma" },
+      { id: "Sai Taisui", type: "victim", sub: "Existential Trauma" },
+      { id: "Golden Sage Lady", type: "victim", sub: "Gender Trauma" },
+      { id: "Boy & Girl", type: "victim", sub: "Sacrifice Trauma" },
+      // 施害者
+      { id: "Taishang Laojun", type: "perpetrator", sub: "Lender" },
+      { id: "Guanyin", type: "perpetrator", sub: "Rider / Borrower" },
+      { id: "King of Spiritual Inspiration", type: "perpetrator", sub: "Goldfish" },
+      // 旁观者
+      { id: "King of Zhuzi", type: "bystander", sub: "Husband" },
+      // 救援者
+      { id: "Wukong", type: "rescuer", sub: "Rescuer" },
+      { id: "Immortal Ziyang", type: "rescuer", sub: "Gave the brown robe" },
+      // 章节节点
+      { id: "Ch. 32-35", type: "chapter" },
+      { id: "Ch. 70-71", type: "chapter" },
+      { id: "Ch. 47-49", type: "chapter" }
+    ],
+    links: [
+      // Gold & Silver Horn Kings
+      { source: "Gold & Silver Horn Kings", target: "Taishang Laojun", weight: 9, kind: "perpetrate" },
+      { source: "Gold & Silver Horn Kings", target: "Guanyin", weight: 8, kind: "bystander" },
+      { source: "Gold & Silver Horn Kings", target: "Ch. 32-35", weight: 6, kind: "chapter" },
+      // Sai Taisui
+      { source: "Sai Taisui", target: "Guanyin", weight: 10, kind: "perpetrate" },
+      { source: "Sai Taisui", target: "King of Zhuzi", weight: 6, kind: "bystander" },
+      { source: "Sai Taisui", target: "Wukong", weight: 5, kind: "rescue" },
+      { source: "Sai Taisui", target: "Ch. 70-71", weight: 6, kind: "chapter" },
+      // Golden Sage Lady
+      { source: "Golden Sage Lady", target: "Sai Taisui", weight: 10, kind: "perpetrate" },
+      { source: "Golden Sage Lady", target: "King of Zhuzi", weight: 7, kind: "bystander" },
+      { source: "Golden Sage Lady", target: "Immortal Ziyang", weight: 8, kind: "rescue" },
+      { source: "Golden Sage Lady", target: "Ch. 70-71", weight: 6, kind: "chapter" },
+      // Boy & Girl
+      { source: "Boy & Girl", target: "King of Spiritual Inspiration", weight: 10, kind: "perpetrate" },
+      { source: "Boy & Girl", target: "Wukong", weight: 7, kind: "rescue" },
+      { source: "Boy & Girl", target: "Guanyin", weight: 6, kind: "bystander" },
+      { source: "Boy & Girl", target: "Ch. 47-49", weight: 6, kind: "chapter" }
+    ]
+  },
+  // Section 3: 桑基图（创伤类型 → 受害者 → 施害者 → 旁观者）
+  sankey: {
+    nodes: [
+      { name: "Identity Trauma", cat: 0 }, { name: "Existential Trauma", cat: 0 },
+      { name: "Gender Trauma", cat: 0 }, { name: "Sacrifice Trauma", cat: 0 },
+      { name: "Gold & Silver Horn Kings", cat: 1 }, { name: "Sai Taisui", cat: 1 },
+      { name: "Golden Sage Lady", cat: 1 }, { name: "Boy & Girl", cat: 1 },
+      { name: "Taishang Laojun", cat: 2 }, { name: "Guanyin", cat: 2 },
+      { name: "Sai Taisui (Perpetrator)", cat: 2 }, { name: "King of Spiritual Inspiration", cat: 2 },
+      { name: "Guanyin (Bystander)", cat: 3 }, { name: "King of Zhuzi", cat: 3 },
+      { name: "King of Zhuzi (Bystander)", cat: 3 }, { name: "Guanyin (Recycler)", cat: 3 }
+    ],
+    links: [
+      // 创伤类型 → 受害者
+      { source: "Identity Trauma", target: "Gold & Silver Horn Kings", value: 8 },
+      { source: "Existential Trauma", target: "Sai Taisui", value: 7 },
+      { source: "Gender Trauma", target: "Golden Sage Lady", value: 9 },
+      { source: "Sacrifice Trauma", target: "Boy & Girl", value: 10 },
+      // 受害者 → 施害者
+      { source: "Gold & Silver Horn Kings", target: "Taishang Laojun", value: 6 },
+      { source: "Sai Taisui", target: "Guanyin", value: 7 },
+      { source: "Golden Sage Lady", target: "Sai Taisui (Perpetrator)", value: 8 },
+      { source: "Boy & Girl", target: "King of Spiritual Inspiration", value: 9 },
+      // 受害者 → 旁观者（直接或间接）
+      { source: "Gold & Silver Horn Kings", target: "Guanyin (Bystander)", value: 3 },
+      { source: "Sai Taisui", target: "King of Zhuzi (Bystander)", value: 4 },
+      { source: "Golden Sage Lady", target: "King of Zhuzi", value: 5 },
+      { source: "Boy & Girl", target: "Guanyin (Recycler)", value: 4 },
+      // 施害者 → 旁观者
+      { source: "Taishang Laojun", target: "Guanyin (Bystander)", value: 3 },
+      { source: "Guanyin", target: "King of Zhuzi (Bystander)", value: 2 },
+      { source: "Sai Taisui (Perpetrator)", target: "King of Zhuzi", value: 4 },
+      { source: "King of Spiritual Inspiration", target: "Guanyin (Recycler)", value: 4 }
+    ]
+  },
+  // Section 4: 雷达图（4 受害者 × 5 维度）
+  radar: [
+    { victim: "Gold & Silver Horn Kings",       Body: 6, Mind: 9, Society: 7, Law: 3, Narrative: 8 },
+    { victim: "Sai Taisui",         Body: 4, Mind: 8, Society: 5, Law: 3, Narrative: 7 },
+    { victim: "Golden Sage Lady",     Body: 8, Mind: 10, Society: 9, Law: 6, Narrative: 9 },
+    { victim: "Boy & Girl",       Body: 10, Mind: 8, Society: 8, Law: 4, Narrative: 6 }
+  ],
+  // Section 5: 时间线
+  timeline: [
+    { order: 1, chapter: 32, victim: "Gold & Silver Horn Kings", stage: "trauma", event: "Preparing with portrait posters", desc: "Sent minor demons to patrol the mountain with portraits, calling out names — whoever answered was sucked into the gourd. Examiner-style preparation, unique in the Journey." },
+    { order: 2, chapter: 34, victim: "Gold & Silver Horn Kings", stage: "trauma", event: "Xuanzang recites the Heart Sutra in the cellar", desc: "Xuanzang, bound in the cellar of Lotus Cave, recited the Heart Sutra in fear — the sutra was upgraded from a daily lesson to an emergency measure." },
+    { order: 3, chapter: 35, victim: "Gold & Silver Horn Kings", stage: "recycle", event: "Recycled by Laojun", desc: "Taishang Laojun's testimony that he 'lent three times'. The examiner was taken back, turned into two silver moths beside the alchemy furnace." },
+    { order: 4, chapter: 47, victim: "Chen Village Boy & Girl", stage: "trauma", event: "King of Spiritual Inspiration demands offerings", desc: "Each year the King of Spiritual Inspiration of the Tongtian River demanded a boy and a girl — nine years, eighteen lives, all the village's realgar from the same source." },
+    { order: 5, chapter: 48, victim: "Chen Village Boy & Girl", stage: "rescue", event: "Wukong transforms to take the place of offerings", desc: "Wukong turned into the girl and Bajie into the boy to stand in for Chen Village's sacrifice. A contest on the ice exposed the King of Spiritual Inspiration." },
+    { order: 6, chapter: 49, victim: "Chen Village Boy & Girl", stage: "recycle", event: "Guanyin collects the goldfish in a bamboo basket", desc: "Guanyin wove a bamboo basket and came to the Tongtian River in person; the goldfish was quietly taken away — the creator recycling her creation, with no public trial." },
+    { order: 7, chapter: 70, victim: "Sai Taisui", stage: "trauma", event: "Bites through the iron chain and seizes the Lady", desc: "The Golden-Haired Hou bit through the iron chain beneath Guanyin's lotus throne, snatched the Purple-Gold Bell, and carried the Golden Sage Lady back to Qilin Mountain." },
+    { order: 8, chapter: 70, victim: "Golden Sage Lady", stage: "trauma", event: "Immortal Ziyang gifts the brown robe", desc: "The brown robe was covered in barbs; during the three years of captivity any touch drew blood. Chastity was preserved, and the right to touch was taken away." },
+    { order: 9, chapter: 70, victim: "Golden Sage Lady", stage: "trauma", event: "Three years of asking about meals from three zhang away", desc: "Each day Sai Taisui asked from three zhang away what the Lady wanted to eat, then answered himself and went to hunt river deer — the reverse projection of a domesticated creature." },
+    { order: 10, chapter: 71, victim: "Sai Taisui", stage: "recycle", event: "Halter returned by Guanyin", desc: "When Guanyin came to collect him, Sai Taisui knelt quietly. It was not submission — it was that 'those three years were the only time his neck did not hurt'." },
+    { order: 11, chapter: 71, victim: "Golden Sage Lady", stage: "rescue", event: "The brown robe's barbs fall away", desc: "Immortal Ziyang chanted a spell to retract the barbs, but tactile amnesia is harder to mend than chastity. She learned to carry honey water and gaze at Qilin Mountain." }
+  ]
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W143] Using embedded data (' + fallbackKey + '): ', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const victims = await fetchJson(base + 'monster-victims.json', 'victims');
+  return {
+    victims: Array.isArray(victims) ? victims : (victims.victims || EMBEDDED_DATA.victims),
+    network: EMBEDDED_DATA.network,
+    sankey: EMBEDDED_DATA.sankey,
+    radar: EMBEDDED_DATA.radar,
+    timeline: EMBEDDED_DATA.timeline
+  };
+}
+
+// ============================================================
+// Section 1: 受害者概览卡片
+// ============================================================
+function renderOverview(victims) {
+  const grid = d3.select('#victims-grid');
+  grid.html('');
+  if (!victims || victims.length === 0) {
+    grid.append('div').attr('class', 'empty-state').text('No data');
+    return;
+  }
+  const card = grid.selectAll('.victim-card')
+    .data(victims)
+    .enter()
+    .append('div')
+    .attr('class', 'victim-card')
+    .attr('role', 'button')
+    .attr('tabindex', '0')
+    .attr('aria-label', d => d.name + ' · ' + d.type)
+    .style('border-top', d => '4px solid ' + d.color);
+
+  card.append('div').attr('class', 'v-name').text(d => d.name);
+  card.append('div').attr('class', 'swatch-bar').style('background', d => d.color);
+  card.append('div').attr('class', 'v-tag').text(d => '"' + d.tag + '"');
+  card.append('div').attr('class', 'v-row muted').text(d => 'Chapter: ' + d.chapter);
+  card.append('div').attr('class', 'v-row').text(d => 'Trauma type: ' + d.type);
+  card.append('div').attr('class', 'v-row').text(d => 'Perpetrator: ' + d.perpetrator);
+  card.append('div').attr('class', 'v-row muted').text(d => 'Bystander: ' + d.bystander);
+  card.append('div').attr('class', 'v-row muted').text(d => 'Outcome: ' + d.fate);
+  card.append('div').attr('class', 'v-wound').text(d => 'Wound: ' + d.wound);
+
+  // 键盘 a11y
+  card.on('keydown', function(e, d) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showVictimTooltip(e, d);
+    }
+  });
+  card.on('click', function(e, d) { showVictimTooltip(e, d); });
+}
+
+function showVictimTooltip(event, d) {
+  let tip = d3.select('.tooltip');
+  if (tip.empty()) {
+    tip = d3.select('body').append('div').attr('class', 'tooltip');
+  }
+  tip.html('')
+    .style('opacity', 0.95)
+    .style('left', (event.pageX + 10) + 'px')
+    .style('top', (event.pageY - 28) + 'px');
+  // 用 .html() 仅插入可信 EMBEDDED_DATA 的 name，其余用 .text()
+  tip.append('div').html('<strong>' + d.name + '</strong>');
+  tip.append('div').text('Tag: ' + d.tag);
+  tip.append('div').text('Chapter: ' + d.chapter);
+  tip.append('div').text('Perpetrator: ' + d.perpetrator);
+  tip.append('div').text('Bystander: ' + d.bystander);
+  tip.append('div').text('Rescuer: ' + d.rescuer);
+  tip.append('div').text('Outcome: ' + d.fate);
+  tip.append('div').text(d.desc);
+  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3500);
+}
+
+// ============================================================
+// Section 2: 受害者-施害者-旁观者力导向图
+// ============================================================
+function renderForce(networkData) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 280).attr('fill', '#8a7a6a').text('No data');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 560;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  // 受害者颜色映射
+  const victimColors = {};
+  EMBEDDED_DATA.victims.forEach(v => { victimColors[v.name] = v.color; });
+
+  // 类型颜色
+  const typeColors = {
+    victim: '#23201A',
+    perpetrator: '#c8463a',
+    bystander: '#8a7a6a',
+    rescuer: '#3a6b8c',
+    chapter: '#d4c4a8'
+  };
+  // 关系边颜色
+  const kindColors = {
+    perpetrate: '#c8463a',
+    bystander: '#8a7a6a',
+    rescue: '#3a6b8c',
+    chapter: '#d4c4a8'
+  };
+
+  // 深拷贝避免 mutation + 初始随机抖动（防止 forceCollide 同位置除零 NaN）
+  const cx = width / 2, cy = height / 2;
+  const nodes = networkData.nodes.map((d, i) => ({
+    ...d,
+    x: cx + (Math.random() - 0.5) * 40,
+    y: cy + (Math.random() - 0.5) * 40
+  }));
+  const links = networkData.links.map(d => ({ ...d }));
+
+  // 节点半径
+  function nodeRadius(d) {
+    if (d.type === 'victim') return 18;
+    if (d.type === 'perpetrator') return 14;
+    if (d.type === 'chapter') return 8;
+    return 11;
+  }
+  function nodeFill(d) {
+    if (d.type === 'victim') return victimColors[d.id] || typeColors.victim;
+    return typeColors[d.type] || '#8b7355';
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes).alphaDecay(0.08).velocityDecay(0.5)
+    .force('link', d3.forceLink(links).id(d => d.id).distance(d => 80 + (10 - d.weight) * 4).strength(d => 0.08 + d.weight * 0.02))
+    .force('charge', d3.forceManyBody().strength(d => d.type === 'victim' ? -500 : -160))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 24));
+
+  // 边
+    // 性能：边层改 Canvas 叠加，避免每帧 N×4 几何属性写入触发 SVG 重排
+  var _svgEl = svg.node();
+  var _lcParent = _svgEl.parentNode;
+  if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
+  if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas'); if (_oc) _oc.remove(); }
+  var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var _lcW = _svgEl.clientWidth || 800, _lcH = _svgEl.clientHeight || 540;
+  var _vb = (_svgEl.getAttribute('viewBox') || '').split(/[\s,]+/);
+  var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_svgEl.getAttribute('width') || _lcW);
+  var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_svgEl.getAttribute('height') || _lcH);
+  var linkCanvas = document.createElement('canvas');
+  linkCanvas.className = 'link-canvas';
+  linkCanvas.width = Math.round(_lcW * _dpr);
+  linkCanvas.height = Math.round(_lcH * _dpr);
+  linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _svgEl.offsetLeft + 'px;top:' + _svgEl.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+  if (_lcParent) _lcParent.insertBefore(linkCanvas, _svgEl);
+  _svgEl.style.position = 'relative';
+  _svgEl.style.zIndex = '1';
+  var lctx = linkCanvas.getContext('2d');
+  lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
+  var linkSels = [];
+  function drawLinks() {
+    lctx.clearRect(0, 0, _cw, _ch);
+    for (var s = 0; s < linkSels.length; s++) {
+      var sel = linkSels[s], data = sel.data(), lines = sel.nodes();
+      for (var i = 0; i < data.length; i++) {
+        var d = data[i], el = lines[i];
+        if (!d || !d.source || d.source.x == null) continue;
+        lctx.beginPath();
+        lctx.moveTo(d.source.x, d.source.y);
+        lctx.lineTo(d.target.x, d.target.y);
+        lctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
+        lctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
+        var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
+        lctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
+        var da = el.getAttribute('stroke-dasharray');
+        lctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
+        lctx.stroke();
+      }
+    }
+    lctx.setLineDash([]);
+    lctx.globalAlpha = 1;
+  }
+const link = svg.append('g').selectAll('line')
+    .data(links)
+    .enter().append('line')
+    .attr('stroke', d => kindColors[d.kind] || '#d4c4a8')
+    .attr('stroke-width', d => Math.sqrt(d.weight) * 1.5)
+    .attr('stroke-opacity', 0.55); link.style('display','none'); linkSels.push(link);
+
+  // 节点
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', nodeFill)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      const typeLabel = { victim: 'Victim', perpetrator: 'Perpetrator', bystander: 'Bystander', rescuer: 'Rescuer', chapter: 'Chapter' }[d.type] || d.type;
+      tooltip.append('div').html('<strong>' + d.id + '</strong>');
+      tooltip.append('div').text('Type: ' + typeLabel + (d.sub ? '(' + d.sub + ')' : ''));
+      const connected = links.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('Links: ' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 拖拽
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  // 标签
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => d.type === 'victim' ? 4 : -14)
+    .attr('font-weight', d => d.type === 'victim' || d.type === 'perpetrator' ? 700 : 400)
+    .attr('font-size', d => d.type === 'victim' ? 13 : d.type === 'perpetrator' ? 11 : 10)
+    .attr('fill', d => d.type === 'victim' ? '#23201A' : '#5a4a3a')
+    .text(d => d.id);
+
+  sim.on('tick', () => {
+    drawLinks();;
+    node.attr('transform', d => `translate(${d.x || 0},${d.y || 0})`);
+    label.attr('transform', d => `translate(${d.x || 0},${d.y || 0})`);
+  });
+
+  // 图例
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const legendItems = [
+    { label: 'Victim (center)', color: '#23201A' },
+    { label: 'Perpetrator', color: '#c8463a' },
+    { label: 'Bystander', color: '#8a7a6a' },
+    { label: 'Rescuer', color: '#3a6b8c' },
+    { label: 'Chapter', color: '#d4c4a8' }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch').style('background', item.color);
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: 创伤类型-受害者-施害者-旁观者桑基图
+// ============================================================
+function renderSankey(sankeyData) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyData || !sankeyData.nodes || sankeyData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#8a7a6a').text('No data');
+    return;
+  }
+
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#c8463a')
+      .text('d3-sankey not loaded; please check your network');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 520;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+  // 颜色：按 cat 分层（0创伤类型/1受害者/2施害者/3旁观者）
+  const catColors = ['#8b7355', '#c8463a', '#3a6b8c', '#8a7a6a'];
+  const victimColors = {};
+  EMBEDDED_DATA.victims.forEach(v => { victimColors[v.name] = v.color; });
+
+  // 深拷贝
+  const nodes = sankeyData.nodes.map(d => ({ ...d }));
+  const links = sankeyData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(16)
+    .nodePadding(10)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 链接
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => {
+      if (d.source.cat === 1) return victimColors[d.source.name] || catColors[1];
+      return catColors[d.source.cat] || '#8b7355';
+    })
+    .attr('stroke-width', d => Math.max(1, d.width))
+    .attr('stroke-opacity', 0.4)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.7);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('Flow weight: ' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.4);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => d.x1 - d.x0)
+    .attr('height', d => Math.max(1, d.y1 - d.y0))
+    .attr('fill', d => {
+      if (d.cat === 1) return victimColors[d.name] || catColors[1];
+      return catColors[d.cat] || '#8b7355';
+    })
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      const catLabel = ['Trauma Type', 'Victim', 'Perpetrator', 'Bystander'][d.cat] || '';
+      tooltip.append('div').text('Layer: ' + catLabel);
+      tooltip.append('div').text('Inflow: ' + (d.targetLinks || []).length + ' · Outflow: ' + (d.sourceLinks || []).length);
+      tooltip.append('div').text('Total flow: ' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点标签
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '11px')
+    .attr('fill', '#23201A')
+    .text(d => d.name);
+
+  // 图例
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const layers = ['Trauma Type', 'Victim', 'Perpetrator', 'Bystander'];
+  layers.forEach((layer, i) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', catColors[i]);
+    item.append('span').text(layer);
+  });
+}
+
+// ============================================================
+// Section 4: 四受害者创伤维度雷达图
+// ============================================================
+function renderRadar(radarData) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!radarData || radarData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 200).attr('fill', '#8a7a6a').text('No data');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 500;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const dimensions = ['Body', 'Mind', 'Society', 'Law', 'Narrative'];
+  const victimColors = {};
+  EMBEDDED_DATA.victims.forEach(v => { victimColors[v.name] = v.color; });
+
+  const cx = width / 2;
+  const cy = height / 2 + 10;
+  const radius = Math.min(width, height) / 2 - 80;
+  const levels = 5;
+
+  // 背景同心五边形
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d4c4a8')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // 轴线 + 标签
+  dimensions.forEach((dim, i) => {
+    const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d4c4a8')
+      .attr('stroke-width', 1);
+    const labelR = radius + 25;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', '#23201A')
+      .text(dim);
+  });
+
+  // 数值刻度
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6)
+      .attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '10px')
+      .attr('fill', '#8a7a6a')
+      .text(lvl * 2);
+  }
+
+  // tooltip
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 每个受害者一个多边形
+  radarData.forEach(victim => {
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      const r = radius * (victim[dim] / 10);
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    const color = victimColors[victim.victim] || '#8b7355';
+
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.18)
+      .attr('stroke', color)
+      .attr('stroke-width', 2)
+      .style('cursor', 'pointer')
+      .on('mouseover', function(e) {
+        d3.select(this).attr('fill-opacity', 0.35);
+        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.html('');
+        tooltip.append('div').html('<strong>' + victim.victim + '</strong>');
+        dimensions.forEach(dim => {
+          tooltip.append('div').text(dim + ': ' + victim[dim] + ' / 10');
+        });
+      })
+      .on('mousemove', function(e) {
+        tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('fill-opacity', 0.18);
+        tooltip.transition().duration(400).style('opacity', 0);
+      });
+
+    // 顶点圆
+    points.forEach((p) => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 3.5)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 1);
+    });
+  });
+
+  // 图例
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  radarData.forEach(victim => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', victimColors[victim.victim]);
+    item.append('span').text(victim.victim);
+  });
+}
+
+// ============================================================
+// Section 5: 受害者命运时间线
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 200).attr('fill', '#8a7a6a').text('No data');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 440;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const victimNames = EMBEDDED_DATA.victims.map(v => v.name);
+  const victimColors = {};
+  EMBEDDED_DATA.victims.forEach(v => { victimColors[v.name] = v.color; });
+
+  const margin = { top: 30, right: 40, bottom: 70, left: 110 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  // X 轴：回目
+  const xMin = d3.min(timelineData, d => d.chapter) - 1;
+  const xMax = d3.max(timelineData, d => d.chapter) + 1;
+  const xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, innerW]);
+
+  // Y 轴：四受害者分轨
+  const yScale = d3.scaleBand()
+    .domain(victimNames)
+    .range([0, innerH])
+    .padding(0.3);
+
+  // 阶段颜色
+  const stageColors = {
+    trauma: '#c8463a',
+    rescue: '#3a6b8c',
+    recycle: '#8b7355'
+  };
+
+  // tooltip
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 背景行
+  victimNames.forEach(name => {
+    g.append('rect')
+      .attr('x', 0)
+      .attr('y', yScale(name))
+      .attr('width', innerW)
+      .attr('height', yScale.bandwidth())
+      .attr('fill', victimColors[name])
+      .attr('fill-opacity', 0.06);
+  });
+
+  // X 轴节点段（按回目聚类）
+  const timeNodes = [
+    { label: 'Gold & Silver Horn Kings case (Ch. 32-35)', range: [32, 35] },
+    { label: 'Tongtian River case (Ch. 47-49)', range: [47, 49] },
+    { label: 'Zhuzi Kingdom case (Ch. 70-71)', range: [70, 71] }
+  ];
+  timeNodes.forEach(node => {
+    const x1 = xScale(node.range[0] - 0.5);
+    const x2 = xScale(node.range[1] + 0.5);
+    g.append('rect')
+      .attr('x', x1)
+      .attr('y', innerH + 8)
+      .attr('width', x2 - x1)
+      .attr('height', 18)
+      .attr('fill', '#f5efe4')
+      .attr('stroke', '#d4c4a8')
+      .attr('stroke-width', 1)
+      .attr('rx', 3);
+    g.append('text')
+      .attr('x', (x1 + x2) / 2)
+      .attr('y', innerH + 22)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '11px')
+      .attr('font-weight', '600')
+      .attr('fill', '#23201A')
+      .text(node.label);
+  });
+
+  // 连线（同一受害者的创伤串联）
+  victimNames.forEach(name => {
+    const vEvents = timelineData.filter(d => d.victim === name).sort((a, b) => a.chapter - b.chapter);
+    if (vEvents.length > 1) {
+      const line = d3.line()
+        .x(d => xScale(d.chapter))
+        .y(d => yScale(d.victim) + yScale.bandwidth() / 2)
+        .curve(d3.curveMonotoneX);
+      g.append('path')
+        .datum(vEvents)
+        .attr('fill', 'none')
+        .attr('stroke', victimColors[name])
+        .attr('stroke-width', 1.5)
+        .attr('stroke-opacity', 0.5)
+        .attr('stroke-dasharray', '4,3')
+        .attr('d', line);
+    }
+  });
+
+  // 事件节点
+  g.selectAll('.event-node')
+    .data(timelineData)
+    .enter()
+    .append('circle')
+    .attr('class', 'event-node')
+    .attr('cx', d => xScale(d.chapter))
+    .attr('cy', d => yScale(d.victim) + yScale.bandwidth() / 2)
+    .attr('r', 11)
+    .attr('fill', d => stageColors[d.stage] || '#8a7a6a')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('r', 14);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.victim + '</strong>');
+      tooltip.append('div').text('Chapter: ' + d.chapter + '');
+      tooltip.append('div').text('Stage: ' + ({ trauma: 'Trauma', rescue: 'Rescue', recycle: 'Recycle' }[d.stage] || d.stage));
+      tooltip.append('div').text('Event: ' + d.event);
+      tooltip.append('div').text(d.desc);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('r', 11);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 事件序号
+  g.selectAll('.event-label')
+    .data(timelineData)
+    .enter()
+    .append('text')
+    .attr('class', 'event-label')
+    .attr('x', d => xScale(d.chapter))
+    .attr('y', d => yScale(d.victim) + yScale.bandwidth() / 2)
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
+    .attr('font-size', '10px')
+    .attr('font-weight', '700')
+    .attr('fill', '#fff')
+    .attr('pointer-events', 'none')
+    .text(d => d.order);
+
+  // Y 轴标签（受害者名）
+  victimNames.forEach(name => {
+    g.append('text')
+      .attr('x', -12)
+      .attr('y', yScale(name) + yScale.bandwidth() / 2)
+      .attr('text-anchor', 'end')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', victimColors[name])
+      .text(name);
+  });
+
+  // X 轴
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).tickFormat(d => 'Ch. ' + d + ''))
+    .selectAll('text').attr('font-size', '11px');
+
+  // 轴标题
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 50)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a6a')
+    .text('Chapter order');
+
+  // 图例：阶段
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  const stages = [
+    { label: 'Trauma', color: stageColors.trauma },
+    { label: 'Rescue', color: stageColors.rescue },
+    { label: 'Recycle', color: stageColors.recycle }
+  ];
+  stages.forEach(s => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', s.color);
+    item.append('span').text(s.label);
+  });
+}
+
+// ============================================================
+// main：调度所有渲染函数
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      'Data source: loaded live from <code>scripts/output/data/</code> (http server mode)';
+  }
+
+  renderOverview(data.victims);
+  renderForce(data.network);
+  renderSankey(data.sankey);
+  renderRadar(data.radar);
+  renderTimeline(data.timeline);
+}
+
+// 响应式重绘（debounce 250ms）
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderOverview(data.victims);
+      renderForce(data.network);
+      renderSankey(data.sankey);
+      renderRadar(data.radar);
+      renderTimeline(data.timeline);
+    }
+  }, 250);
+});
+
+// 启动
+main();
+</script>
+<script id="audit-labelavoid">
+(function(){
+  function avoid(){
+    document.querySelectorAll("svg").forEach(function(svg){
+      var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){var r=t.getBoundingClientRect();return r.width>0&&r.height>0;});
+      var R=ts.map(function(t){return t.getBoundingClientRect();});
+      for(var i=0;i<ts.length;i++)for(var j=i+1;j<ts.length;j++){
+        var a=R[i],b=R[j];
+        var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+        var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+        if(ix*iy<=0)continue;
+        var area=Math.min(a.width*a.height,b.width*b.height);
+        if(area>0 && (ix*iy)/area>0.5){
+          var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+          if(hide.style.display!=="none") hide.style.display="none";
+        }
+      }
+    });
+  }
+  window.__avoidOverlap=avoid;
+  function run(){try{avoid();}catch(e){}}
+  window.addEventListener("load",function(){
+    [3000,6000,9000,12000].forEach(function(ms){setTimeout(run,ms);});
+  });
+})();
+</script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

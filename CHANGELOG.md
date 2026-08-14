@@ -4,9 +4,17 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W434），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W435），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.50（2026-08-14）：W435 英文站续译 batch13 — 并行 subagent 新增 5 张可视化页英文化
+
+> **来源**：延续待办「英文站续译」batch13（并行 subagent 拆页·两页 agent 静默失败后重派补齐）。
+> - **执行（英文化 5 页）**：新增 site/en/deconstruction（解构）/ six-senses-narratology-network（六感叙事学网络）/ monster-victims-network（妖怪受害者网络）/ social-media（社媒人设）/ cognitive-psychology（认知心理）；重建/翻译 EN 导航/页脚 + chrome/script 字面量。
+> - **执行（配套）**：generate_csp.py 重生成 192 页（893 内联哈希 0 漂移）·sitemap 补 5 页（182→187）。
+> - **验证**：_validate_en.py 5 页全过（chrome=whitelist-only·script=0）·lint_links 3303 链接 0 broken·verify_delivery 核心全绿。
+> - **状态**：已落地·待 commit/push。
 
 ### v2.3.49（2026-08-14）：W434 英文站续译 batch12 — 并行 subagent 新增 5 张可视化页英文化
 

@@ -1,0 +1,2226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-+MQVqtFuOwB1opCxGnstE3+Li4NqBDZBXDs4khYBX4g=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Social Media Persona · MBTI Personality Map · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        /* ===== Hero 区 ===== */
+        
+        
+        
+        
+        
+        /* ===== 容器与面包屑 ===== */
+        
+        
+        
+        
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: rgba(200, 70, 58, 0.08);
+            padding: 1px 5px;
+            border-radius: 3px;
+            color: var(--accent);
+        }
+        /* ===== KPI 概要栏 ===== */
+        
+        @media (max-width: 720px) {  }
+        
+        
+        
+        
+        /* ===== Section 通用 ===== */
+        
+        
+        
+        /* ===== 社媒人设卡片网格 ===== */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+            gap: 18px;
+        }
+        .profile-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 18px 20px;
+            box-shadow: var(--shadow);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .profile-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        .pc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .pc-character {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: 0.05em;
+        }
+        .platform-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        .pc-account {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.8rem;
+            color: var(--accent-3);
+            margin-bottom: 8px;
+        }
+        .pc-followers {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1.1;
+            margin-bottom: 2px;
+        }
+        .pc-followers .unit {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-weight: 500;
+            margin-left: 4px;
+            letter-spacing: 0.1em;
+        }
+        .pc-bio {
+            font-size: 0.85rem;
+            color: var(--ink);
+            line-height: 1.6;
+            margin: 10px 0;
+            padding: 8px 10px;
+            background: var(--bg);
+            border-left: 2px solid var(--accent-soft);
+            border-radius: 0 4px 4px 0;
+        }
+        .pc-pinned {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            line-height: 1.6;
+            margin-bottom: 10px;
+            padding: 8px 10px;
+            background: #fff8ec;
+            border-radius: 4px;
+            display: flex;
+            gap: 6px;
+            align-items: flex-start;
+        }
+        .pc-pinned svg {
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .pc-pinned-text { flex: 1; }
+        .pc-pinned-text .pin-label {
+            display: block;
+            font-size: 0.72rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 2px;
+        }
+        .pc-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .pc-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.72rem;
+            background: rgba(122, 82, 48, 0.08);
+            color: var(--accent-3);
+            border: 1px solid var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .pc-feature {
+            font-size: 0.8rem;
+            color: var(--accent-3);
+            font-style: italic;
+            margin-bottom: 8px;
+            padding-top: 6px;
+            border-top: 1px dashed var(--line);
+        }
+        .pc-feature::before {
+            content: "特色 · ";
+            font-style: normal;
+            font-weight: 600;
+            color: var(--accent-4);
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+        }
+        .pc-interaction {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: auto;
+            padding-top: 8px;
+            border-top: 1px dashed var(--line);
+        }
+        .pc-interaction .ic-label {
+            font-size: 0.72rem;
+            color: var(--accent-2);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+        /* ===== MBTI 雷达图 ===== */
+        .radar-wrap {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 24px;
+            align-items: start;
+        }
+        @media (max-width: 860px) { .radar-wrap { grid-template-columns: 1fr; } }
+        #radar-svg {
+            width: 100%;
+            height: 460px;
+            display: block;
+        }
+        .radar-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+        .radar-legend h4 {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 6px;
+            letter-spacing: 0.1em;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--ink);
+            padding: 4px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .legend-item:hover { background: rgba(200, 70, 58, 0.06); }
+        .legend-item .swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            flex-shrink: 0;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .legend-item .li-mbti {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+            color: var(--accent-3);
+            font-size: 0.78rem;
+            margin-left: auto;
+        }
+        .radar-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            max-width: 260px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .radar-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        /* ===== 职场适配度条形图 ===== */
+        #fit-svg {
+            width: 100%;
+            height: 420px;
+            display: block;
+        }
+        .fit-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            max-width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .fit-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        /* ===== MBTI 强弱项对比表 ===== */
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        #mbti-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+            min-width: 720px;
+        }
+        #mbti-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 11px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        #mbti-table tbody tr { border-bottom: 1px solid var(--line); }
+        #mbti-table tbody tr:nth-child(even) { background: var(--bg); }
+        #mbti-table tbody tr:hover { background: #fff8ec; }
+        #mbti-table td { padding: 10px 12px; vertical-align: top; }
+        #mbti-table td.col-char { font-weight: 600; color: var(--ink); width: 90px; }
+        #mbti-table td.col-mbti {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 700;
+            color: var(--accent);
+            width: 110px;
+        }
+        #mbti-table td.col-mbti .mbti-label {
+            display: block;
+            font-family: "Noto Serif SC", serif;
+            font-weight: 500;
+            color: var(--ink-soft);
+            font-size: 0.78rem;
+            margin-top: 2px;
+        }
+        #mbti-table td.col-strength {
+            background: rgba(90, 122, 58, 0.08);
+            border-left: 3px solid var(--accent-4);
+        }
+        #mbti-table td.col-weakness {
+            background: rgba(200, 70, 58, 0.08);
+            border-left: 3px solid var(--accent);
+        }
+        #mbti-table td.col-note {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            font-style: italic;
+        }
+        .trait-chip {
+            display: inline-block;
+            padding: 2px 6px;
+            margin: 1px 2px;
+            font-size: 0.74rem;
+            border-radius: 4px;
+            background: #fff;
+            border: 1px solid var(--line);
+        }
+        .trait-chip.s { color: var(--accent-4); border-color: var(--accent-4); }
+        .trait-chip.w { color: var(--accent); border-color: var(--accent); }
+        /* ===== 关键洞察 ===== */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: 9px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .insight-box li > div { min-width: 0; flex: 1; overflow-wrap: anywhere; }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li .idx {
+            flex-shrink: 0;
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.85rem;
+            min-width: 24px;
+        }
+        .insight-box li strong { color: var(--accent); font-weight: 600; }
+        /* ===== Footer ===== */
+        
+        
+        
+        footer .gen-time {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/social-media.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · <a href="visualizations.html">Visualizations</a> · Social Media Persona · MBTI Personality Map</p>
+        <p class="kicker">W · Social Media Persona</p>
+        <h1>Social Media Persona · MBTI Personality Map</h1>
+        <p class="subtitle">SOCIAL MEDIA &amp; MBTI</p>
+        <p class="tagline">When the Journey to the West characters opened social media accounts</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice" id="dataSource">
+            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory).
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">PROFILES · Social Media Persona</div>
+                <div class="value">7</div>
+                <div class="desc">7 characters across 7 platforms</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">MBTI · Personality Type</div>
+                <div class="value">8</div>
+                <div class="desc">Covers the full spectrum of 8 MBTI types</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">PLATFORMS · Platforms</div>
+                <div class="value">7</div>
+                <div class="desc">Xiaohongshu / Douyin / Weibo / WeChat Official Account / Late-night Alt / Zhihu / Bilibili</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">AVG FIT · Average Fit</div>
+                <div class="value" style="color:var(--accent);">7.88<span style="font-size:1rem;color:var(--ink-soft);"> /10</span></div>
+                <div class="desc">Best: Tathāgata, INTJ, 10/10</div>
+            </div>
+        </div>
+
+        <!-- 板块 1：社媒人设卡片网格 -->
+        <section class="section">
+            <h2 class="section-title">Social Media Persona Card Grid</h2>
+            <div class="section-sub">Seven Journey to the West characters join seven platforms; each card&#8217;s left border color matches the character&#8217;s primary platform tone.</div>
+            <div class="profile-grid" id="profile-grid"></div>
+        </section>
+
+        <!-- 板块 2：MBTI 雷达图 -->
+        <section class="section">
+            <h2 class="section-title">MBTI Eight-Dimension Radar Chart</h2>
+            <div class="section-sub">Splits the four MBTI letters into 8 independent axes (E/I/S/N/T/F/J/P); each axis scores 0 or 1, with 8 characters overlaid for comparison.</div>
+            <div class="radar-wrap">
+                <div style="position:relative;">
+                    <svg id="radar-svg"></svg>
+                    <div class="radar-tip" id="radar-tip"></div>
+                </div>
+                <div class="radar-legend" id="radar-legend">
+                    <h4>Character legend</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- 板块 3：职场适配度条形图 -->
+        <section class="section">
+            <h2 class="section-title">Workplace Fit Bar Chart</h2>
+            <div class="section-sub">8 characters sorted by workplace_fit in descending order; I-types cool / E-types warm; hover to see each character&#8217;s role and notes.</div>
+            <div style="position:relative;">
+                <svg id="fit-svg"></svg>
+                <div class="fit-tip" id="fit-tip"></div>
+            </div>
+        </section>
+
+        <!-- 板块 4：MBTI 强弱项对比表 -->
+        <section class="section">
+            <h2 class="section-title">MBTI Strengths &amp; Weaknesses Comparison Table</h2>
+            <div class="section-sub">8 rows &times; 5 columns; strengths (green) vs weaknesses (red), with role notes.</div>
+            <div class="table-wrap">
+                <table id="mbti-table">
+                    <thead>
+                        <tr>
+                            <th>Character</th>
+                            <th>MBTI</th>
+                            <th>Strengths (top 2)</th>
+                            <th>Weaknesses (top 2)</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mbti-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 板块 5：关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="insight-box">
+                <h4>The Journey to the West Team&#8217;s Personality Map Through MBTI</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">Annotated Journey to the West</div>
+            <div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/02-人物深度分析/孙悟空.md">Sun Wukong In-Depth Analysis (essay, Chinese)</a></div>
+        </div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/social-media.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // ============================================================
+    // 嵌入式 fallback 数据（fetch 失败时使用）
+    // 数据源：scripts/output/data/{social_media_profiles,mbti_characters,social_media_summary}.json
+    // ============================================================
+    const EMBEDDED = {
+        social_media_profiles: [
+            {
+                character: "Tang Sanzang",
+                platform: "Xiaohongshu",
+                account_name: "@Royal Brother Monk · Tang Pilgrimage Vlog",
+                follower_count: "128.5w",
+                content_tags: ["Zen photography", "Vegetarian food reviews", "Team management", "vlog"],
+                bio: "Reincarnation of the Golden Cicada · Sandalwood Merit Buddha · vegetarian · 14-year hiking veteran",
+                pinned_post: "[14-year hiking vlog · finale] Fetching the scriptures at Spirit Mountain · reborn at the Cloud-Crossing Ford · thanks to 5 team members · the true scriptures are now in Chang’an · #pilgrimagevlog #hiking #vegetarian",
+                typical_posts: [
+                    "Today’s Zen photography: morning mist at Shuangcha Ridge · #zen #morning #pilgrimagevlog",
+                    "Vegetarian review: a meat-free remake of Gao Village braised pork · a bit too oily, 2 stars",
+                    "Team management: how to handle a rebellious employee who won’t follow orders? Favorites updated",
+                    "Help: my disciple killed someone again, what do I do? Urgent — waiting online"
+                ],
+                feature: "A three-track blogger of Zen aesthetics + team management + vegetarian reviews",
+                interaction_style: "Replies to every comment · wins people over with patience"
+            },
+            {
+                character: "Zhu Bajie",
+                platform: "Douyin",
+                account_name: "@Marshal Tianpeng Turns Entrepreneur",
+                follower_count: "568.9w",
+                content_tags: ["Mukbang", "Cheesy love songs", "Chang’e", "Comedy"],
+                bio: "Former Marshal Tianpeng · now the pilgrimage team’s morale officer · heir to Gao Village braised pork",
+                pinned_post: "[Gao Village braised pork remake] The secret is · a · little · bit · of · love · #mukbang #braisedpork #gaovillage",
+                typical_posts: [
+                    "Mukbang: a fish feast at Tongtian River · this fish spirit is so fresh · #mukbang #seafood",
+                    "Cheesy love-song lipsync: “Sister Chang’e, listen to me...” · #cheesylovesongs #chang’e",
+                    "A long-distance duet with Sister Chang’e (always rejected) · attempt #1087",
+                    "Breakup vlog: bullied by Wukong again today · I want to go back to Gao Village"
+                ],
+                feature: "Mukbang + cheesy love songs + professional rejectee",
+                interaction_style: "Plays pitiful in the comments · fishes for likes and follows"
+            },
+            {
+                character: "Sun Wukong",
+                platform: "Weibo",
+                account_name: "@Sun Wukong, Great Sage Equal to Heaven (Verified)",
+                follower_count: "2890w",
+                content_tags: ["Fraud-busting", "Victorious Fighting Buddha", "Flower-Fruit Mountain", "The good old days"],
+                bio: "Monkey King of Flower-Fruit Mountain · Victorious Fighting Buddha · former Great Sage Equal to Heaven · verified account · impostors will be dealt with",
+                pinned_post: "[The good old days] Old photos from back when I wrecked the Heavenly Palace · one somersault covers 108,000 li · #goodolddays #havocinheaven",
+                typical_posts: [
+                    "Fraud alert: someone’s impersonating me again · photo 1 is real, photo 2 is fake · stay sharp",
+                    "Promoting my junior brother Sha’s new book: The Art of Shouldering a Pole · 20% off for a limited time",
+                    "Repost: kiwifruit harvest at Flower-Fruit Mountain · home-grown · pesticide-free · link in bio",
+                    "Today’s monster: the White Bone Demon tried to scam me again · handled · rest easy"
+                ],
+                feature: "Fraud-busting + Flower-Fruit Mountain e-commerce + promoting teammates",
+                interaction_style: "Aloof · occasionally engages · verifies before reposting"
+            },
+            {
+                character: "Sha Wujing",
+                platform: "WeChat Official Account",
+                account_name: "Sha Wujing · The Pole Carrier Speaks",
+                follower_count: "32.4w",
+                content_tags: ["Pole carrying", "Logistics", "Workplace", "Silence"],
+                bio: "Former Curtain-Raising General · now the pilgrimage team’s logistics director · author of The Art of Shouldering a Pole",
+                pinned_post: "[New book] The Art of Shouldering a Pole: 14 Years of Experience · 20% off · click to buy",
+                typical_posts: [
+                    "Workplace: “Master has been captured by a monster” — the shortest ISFJ work report ever",
+                    "Logistics: today’s pole-carrying distance · 100 li · luggage intact · nothing lost",
+                    "The power of silence: why don’t I speak? Because speaking is useless",
+                    "Ad: Flower-Fruit Mountain kiwifruit · grown by my senior brother · link in bio"
+                ],
+                feature: "Low-key + workplace tips + published author",
+                interaction_style: "Rarely engages · occasionally replies “mm”"
+            },
+            {
+                character: "White Dragon Horse",
+                platform: "Late-night Alt (platform unknown)",
+                account_name: "@(Anonymous)",
+                follower_count: "8w",
+                content_tags: ["Side profile", "Gloomy", "Hoof", "Late night"],
+                bio: "(No bio)",
+                pinned_post: "(No pinned post)",
+                typical_posts: [
+                    "(Posting a gloomy-filtered side-profile photo at night) caption: Hoof.",
+                    "(Posting a gloomy-filtered side-profile photo at night) caption: Hoof..",
+                    "(Posting a gloomy-filtered side-profile photo at night) caption: Hoof...",
+                    "(Posting a gloomy-filtered side-profile photo at night) caption: Hoof....."
+                ],
+                feature: "Late-night emo · only posts side profiles · only says “hoof”",
+                interaction_style: "Never interacts · only posts “hoof”"
+            },
+            {
+                character: "Guanyin",
+                platform: "Zhihu",
+                account_name: "@Guanyin the Great · Answerer",
+                follower_count: "560w",
+                content_tags: ["Resolving doubts", "Fetching the scriptures", "Buddhist dharma", "Secret protection"],
+                bio: "Mount Potalaka of the South Sea · the greatly merciful and compassionate Guanyin Bodhisattva · silent investor in the pilgrimage project",
+                pinned_post: "[Answer] How should we assess the Tang Sanzang party’s pilgrimage project? — Followed · 32k upvotes",
+                typical_posts: [
+                    "Answer: how to handle a rebellious employee on your team? — Give them a Tightening Fillet · recite daily",
+                    "Answer: what if a monster has powerful backing? — Find its master · don’t fight it head-on",
+                    "Answer: does Tang Sanzang’s flesh really grant immortality? — Rumors · debunked",
+                    "Answer: why do I always step in last? — Timing · timing · timing"
+                ],
+                feature: "Professional answerer + pilgrimage project investor",
+                interaction_style: "Professional and rigorous · steps in only at the last moment"
+            },
+            {
+                character: "Tathāgata",
+                platform: "Bilibili",
+                account_name: "@Tathāgata · Spirit Mountain Uploader",
+                follower_count: "5000w",
+                content_tags: ["Buddhist dharma", "Cosmos", "Creation", "Spirit Mountain"],
+                bio: "Top uploader of Spirit Mountain · chief designer of the journey west · 50M followers",
+                pinned_post: "[Sermon from Spirit Mountain] Episode 1 · What is the nature of the cosmos? · Followed",
+                typical_posts: [
+                    "Vlog: Five-Finger Mountain · the full record of suppressing the Great Sage Equal to Heaven · #creation",
+                    "Tutorial: how to handle a Great Sage Equal to Heaven with one hand",
+                    "Livestream: the real vs. fake Monkey King · let me judge",
+                    "Vlog: Thunderclap Monastery of Spirit Mountain · the scripture handover ceremony · #complete"
+                ],
+                feature: "Cosmic-level uploader + creation tutorials",
+                interaction_style: "Aloof · occasional livestreams · one word settles everything"
+            }
+        ],
+        mbti_characters: [
+            {
+                character: "Tang Sanzang", mbti: "INFJ", mbti_label: "Advocate",
+                role: "Project manager · baseline",
+                trait: "A steadfast idealist who leads the team through conviction",
+                strength: ["Firm conviction", "Strong moral influence", "Goal-oriented", "Moral exemplar"],
+                weakness: ["Prone to self-conflict", "Calamity at every step", "Poor judge of character", "Easily deceived by appearances"],
+                workplace_fit: 7,
+                note: "His flaw is severe self-conflict and calamity at every step — the classic INFJ “over-idealization” trap"
+            },
+            {
+                character: "Sun Wukong", mbti: "ENTP", mbti_label: "Debater",
+                role: "Tech lead · executor",
+                trait: "Brilliant, loves challenges, anti-bureaucratic",
+                strength: ["Exceptional intellect", "Adaptable", "Creative problem-solving", "Resource coordination"],
+                weakness: ["Anti-bureaucratic", "Loathes routine", "Argues with leadership", "Impulsive and quick-tempered"],
+                workplace_fit: 9,
+                note: "Often debates the “underlying logic” of the pilgrimage with his leader (Tang Sanzang) — typical ENTP behavior"
+            },
+            {
+                character: "Zhu Bajie", mbti: "ESFP", mbti_label: "Entertainer",
+                role: "Morale booster · logistics",
+                trait: "The team’s morale booster, lives in the moment, food and fun first",
+                strength: ["Lifts the mood", "Smooths relationships", "Lives in the moment", "Stress-resilient (quit and move on)"],
+                weakness: ["Lazy", "Gluttonous", "Lustful", "Quits at the first setback"],
+                workplace_fit: 5,
+                note: "Quitting is his ultimate defense of the ESFP “live in the moment” ethos"
+            },
+            {
+                character: "Sha Wujing", mbti: "ISFJ", mbti_label: "Defender",
+                role: "Logistics director · guardian",
+                trait: "A loyal, dependable guardian who quietly shoulders all logistics",
+                strength: ["Loyal and reliable", "Quietly devoted", "Consistent output", "No complaints"],
+                weakness: ["Lacks initiative", "Poor communicator", "Low visibility", "Passive follower"],
+                workplace_fit: 8,
+                note: "The classic line “Master has been captured by a monster” is the shortest ISFJ work report ever"
+            },
+            {
+                character: "White Dragon Horse", mbti: "ISTP", mbti_label: "Virtuoso",
+                role: "Silent executor",
+                trait: "A silent doer; says little, acts decisively at critical moments",
+                strength: ["Decisive at critical moments", "Hands-on ability", "Composed", "Pragmatic"],
+                weakness: ["Poor communicator", "Nearly invisible", "Emotionally reserved", "Overlooked"],
+                workplace_fit: 7,
+                note: "One kick saves the team — the classic ISTP critical-moment rescue"
+            },
+            {
+                character: "Guanyin", mbti: "ENFJ", mbti_label: "Protagonist",
+                role: "Project investor · mentor",
+                trait: "Skilled at guiding, quietly supportive, a persuasive leader",
+                strength: ["Guidance", "Judges character well", "Resource coordination", "Big-picture thinking"],
+                weakness: ["Over-involved", "Acts only at the last moment", "Opaque with information"],
+                workplace_fit: 9,
+                note: "A classic mentor figure who protects from the shadows and acts only when absolutely necessary"
+            },
+            {
+                character: "Tathāgata", mbti: "INTJ", mbti_label: "Architect",
+                role: "Chief architect",
+                trait: "Strategist, chief architect, systems thinker",
+                strength: ["Strategic vision", "Systems design", "Decisiveness", "Authority"],
+                weakness: ["Overly aloof", "Detached", "Information monopoly"],
+                workplace_fit: 10,
+                note: "The master architect of the eighty-one trials — a model of INTJ systems thinking"
+            },
+            {
+                character: "Jade Emperor", mbti: "ESTJ", mbti_label: "Executive",
+                role: "Heavenly Court CEO",
+                trait: "Order keeper, manager, embodiment of bureaucracy",
+                strength: ["Order keeping", "Management", "Authority", "Resource allocation"],
+                weakness: ["Bureaucratic", "Poor staffing", "Reactive"],
+                workplace_fit: 8,
+                note: "The embodiment of the Heavenly Court’s hierarchy — the archetypal ESTJ manager"
+            }
+        ],
+        social_media_summary: {
+            total_profiles: 7,
+            total_mbti: 8,
+            platforms: ["Xiaohongshu", "Douyin", "Weibo", "WeChat Official Account", "Late-night Alt (platform unknown)", "Zhihu", "Bilibili"],
+            mbti_types: ["INFJ", "ENTP", "ESFP", "ISFJ", "ISTP", "ENFJ", "INTJ", "ESTJ"],
+            avg_workplace_fit: 7.88,
+            best_fit: "Tathāgata"
+        }
+    };
+
+    // ============================================================
+    // 配色映射
+    // ============================================================
+    // 卡片左边框色（按角色/平台）
+    const PROFILE_BORDER = {
+        "Tang Sanzang": "#c8463a",
+        "Zhu Bajie": "#23201A",
+        "Sun Wukong": "#e9b885",
+        "Sha Wujing": "#3a6b8c",
+        "White Dragon Horse": "#6B6455",
+        "Guanyin": "#C9A063",
+        "Tathāgata": "#6B8E5A"
+    };
+    // 平台徽章背景色
+    const PLATFORM_BADGE = {
+        "Xiaohongshu": "#c8463a",
+        "Douyin": "#23201A",
+        "Weibo": "#e9b885",
+        "WeChat Official Account": "#3a6b8c",
+        "Late-night Alt (platform unknown)": "#6B6455",
+        "Zhihu": "#C9A063",
+        "Bilibili": "#6B8E5A"
+    };
+    // 8 个角色雷达图配色（与卡片左边框色呼应，玉帝补一个色）
+    const MBTI_COLORS = {
+        "Tang Sanzang": "#c8463a",
+        "Sun Wukong": "#e9b885",
+        "Zhu Bajie": "#5a4030",
+        "Sha Wujing": "#3a6b8c",
+        "White Dragon Horse": "#6B6455",
+        "Guanyin": "#C9A063",
+        "Tathāgata": "#6B8E5A",
+        "Jade Emperor": "#d97706"
+    };
+    // 条形图 I 系冷色 / E 系暖色
+    function fitColor(mbti) {
+        if (!mbti) return "#C9A063";
+        return mbti.charAt(0) === "I"
+            ? "#3a6b8c"  // I 系：冷蓝
+            : "#c8463a"; // E 系：暖红
+    }
+    // 八维雷达图轴定义
+    const RADAR_AXES = ["E", "N", "F", "P", "I", "S", "T", "J"];
+    // 把 MBTI 4 字母拆成 8 轴值（命中的轴=1，其余=0）
+    function mbtiToRadar(mbti) {
+        const map = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+        for (const ch of mbti) map[ch] = 1;
+        return RADAR_AXES.map(a => map[a]);
+    }
+
+    // ============================================================
+    // 数据加载
+    // ============================================================
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error("fetch failed: " + path);
+            return await res.json();
+        } catch (e) {
+            console.warn("[INFO] using embedded data for", path, ":", e.message);
+            return fallback;
+        }
+    }
+    async function loadAll() {
+        const [profiles, mbti, summary] = await Promise.all([
+            loadJson("../../scripts/output/data/social_media_profiles.json", EMBEDDED.social_media_profiles),
+            loadJson("../../scripts/output/data/mbti_characters.json", EMBEDDED.mbti_characters),
+            loadJson("../../scripts/output/data/social_media_summary.json", EMBEDDED.social_media_summary)
+        ]);
+        return { profiles, mbti, summary };
+    }
+
+    // ============================================================
+    // 渲染：社媒人设卡片网格
+    // ============================================================
+    function renderProfiles(profiles) {
+        const grid = d3.select("#profile-grid");
+        grid.selectAll("*").remove();
+        profiles.forEach(p => {
+            const borderColor = PROFILE_BORDER[p.character] || "var(--accent)";
+            const badgeColor = PLATFORM_BADGE[p.platform] || "var(--accent-3)";
+            const card = grid.append("div")
+                .attr("class", "profile-card")
+                .style("border-left-color", borderColor);
+
+            // 头部：角色名 + 平台徽章
+            const head = card.append("div").attr("class", "pc-head");
+            head.append("div").attr("class", "pc-character").text(p.character);
+            head.append("div")
+                .attr("class", "platform-badge")
+                .style("background", badgeColor)
+                .text(p.platform);
+
+            // 账号名
+            card.append("div").attr("class", "pc-account").text(p.account_name);
+
+            // 粉丝数
+            const fol = card.append("div").attr("class", "pc-followers");
+            fol.append("span").text(p.follower_count);
+            fol.append("span").attr("class", "unit").text("FOLLOWERS · Fans");
+
+            // 简介
+            card.append("div").attr("class", "pc-bio").text(p.bio);
+
+            // 置顶帖（SVG 图钉 + 文本）
+            const pin = card.append("div").attr("class", "pc-pinned");
+            pin.append(() => d3.create("svg").attr("width",14).attr("height", 14).attr("viewBox", "0 0 24 24")
+                .append("path")
+                .attr("fill", "#c8463a")
+                .attr("d", "M16 3l5 5-3 3-2-2-7 7v4l-2 2-3-3 2-2h4l7-7-2-2z").node());
+            const pinText = pin.append("div").attr("class", "pc-pinned-text");
+            pinText.append("span").attr("class", "pin-label").text("PINNED · Pinned");
+            pinText.append("span").text(p.pinned_post);
+
+            // 标签 chips
+            const tagsDiv = card.append("div").attr("class", "pc-tags");
+            p.content_tags.forEach(t => {
+                tagsDiv.append("span").attr("class", "pc-tag").text("#" + t);
+            });
+
+            // 特色
+            card.append("div").attr("class", "pc-feature").text(p.feature);
+
+            // 互动风格
+            const inter = card.append("div").attr("class", "pc-interaction");
+            inter.append("span").attr("class", "ic-label").text("INTERACTION ·");
+            inter.append("span").text(p.interaction_style);
+        });
+    }
+
+    // ============================================================
+    // 渲染：MBTI 八维雷达图
+    // ============================================================
+    function renderRadar(mbtiList) {
+        const svg = d3.select("#radar-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("radar-svg");
+        const w = el.clientWidth || 700;
+        const h = 460;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const cx = w / 2;
+        const cy = h / 2;
+        const radius = Math.max(0, Math.min(w, h) / 2 - 60);
+        const axes = RADAR_AXES;  // 8 轴
+        const n = axes.length;
+        const levels = [0.25, 0.5, 0.75, 1.0];
+
+        const angle = (i) => (i * 2 * Math.PI / n) - Math.PI / 2;
+
+        // 同心多边形网格
+        levels.forEach((lv, li) => {
+            const pts = axes.map((_, i) => {
+                const r = radius * lv;
+                return [cx + r * Math.cos(angle(i)), cy + r * Math.sin(angle(i))];
+            });
+            svg.append("polygon")
+                .attr("points", pts.map(p => p.join(",")).join(" "))
+                .attr("fill", li === levels.length - 1 ? "#faf7f2" : "none")
+                .attr("stroke", "var(--line)")
+                .attr("stroke-width", 1)
+                .attr("stroke-dasharray", li === levels.length - 1 ? "none" : "3,3")
+                .attr("opacity", 0.7);
+        });
+
+        // 轴线 + 标签
+        axes.forEach((ax, i) => {
+            const x2 = cx + radius * Math.cos(angle(i));
+            const y2 = cy + radius * Math.sin(angle(i));
+            svg.append("line")
+                .attr("x1", cx).attr("y1", cy)
+                .attr("x2", x2).attr("y2", y2)
+                .attr("stroke", "var(--line)")
+                .attr("stroke-width", 1)
+                .attr("opacity", 0.6);
+
+            // 标签
+            const labelR = radius + 24;
+            const lx = cx + labelR * Math.cos(angle(i));
+            const ly = cy + labelR * Math.sin(angle(i));
+            // 配对色：E/I 红/蓝、S/N 棕/橙、T/F 灰/绿、J/P 深浅
+            const axisColor = {
+                E: "#c8463a", I: "#3a6b8c",
+                N: "#e9b885", S: "#C9A063",
+                T: "#6B6455", F: "#6B8E5A",
+                J: "#23201A", P: "#d97706"
+            };
+            svg.append("circle")
+                .attr("cx", lx).attr("cy", ly).attr("r", 11)
+                .attr("fill", axisColor[ax])
+                .attr("opacity", 0.85);
+            svg.append("text")
+                .attr("x", lx).attr("y", ly + 4)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.82rem")
+                .style("font-weight", "700")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "#fff")
+                .text(ax);
+        });
+
+        // 中心点
+        svg.append("circle")
+            .attr("cx", cx).attr("cy", cy).attr("r", 3)
+            .attr("fill", "var(--ink-soft)");
+
+        // 每个角色的多边形
+        const tip = d3.select("#radar-tip");
+        const elParent = el.parentElement;
+        mbtiList.forEach((m, idx) => {
+            const values = mbtiToRadar(m.mbti);
+            const color = MBTI_COLORS[m.character] || "#C9A063";
+            const pts = values.map((v, i) => {
+                const r = radius * v;
+                return [cx + r * Math.cos(angle(i)), cy + r * Math.sin(angle(i))];
+            });
+            // 因为值是 0/1，多边形会比较"方"——给一个最小半径让 0 也有可见点
+            const ptsVisible = values.map((v, i) => {
+                const r = radius * (v === 0 ? 0.06 : v);
+                return [cx + r * Math.cos(angle(i)), cy + r * Math.sin(angle(i))];
+            });
+
+            const poly = svg.append("polygon")
+                .attr("points", ptsVisible.map(p => p.join(",")).join(" "))
+                .attr("fill", color)
+                .attr("fill-opacity", 0.12)
+                .attr("stroke", color)
+                .attr("stroke-width", 2)
+                .style("cursor", "pointer")
+                .style("opacity", 0)
+                .attr("class", "radar-poly poly-" + idx);
+
+            poly.transition()
+                .delay(200 + idx * 120)
+                .duration(500)
+                .style("opacity", 1);
+
+            // 命中轴的顶点圆
+            values.forEach((v, i) => {
+                if (v === 1) {
+                    svg.append("circle")
+                        .attr("cx", pts[i][0])
+                        .attr("cy", pts[i][1])
+                        .attr("r", 4)
+                        .attr("fill", color)
+                        .attr("stroke", "#fff")
+                        .attr("stroke-width", 1.5)
+                        .style("opacity", 0)
+                        .transition()
+                        .delay(500 + idx * 120)
+                        .duration(300)
+                        .style("opacity", 1);
+                }
+            });
+
+            poly.on("mouseover", function(e) {
+                d3.select(this).attr("fill-opacity", 0.35).attr("stroke-width", 3);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${m.character} · ${m.mbti} · ${m.mbti_label}</div>` +
+                          `<div>Role: ${m.role}</div>` +
+                          `<div style="margin-top:4px;color:#e9b885;font-size:0.78rem;">Hit axes: ${m.mbti.split("").join(" / ")}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = elParent.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("fill-opacity", 0.12).attr("stroke-width", 2);
+                tip.style("opacity", 0);
+            });
+        });
+
+        // 渲染图例
+        const legend = d3.select("#radar-legend");
+        legend.selectAll("*").remove();
+        legend.append("h4").text("Character legend · 8 characters");
+        mbtiList.forEach((m, idx) => {
+            const color = MBTI_COLORS[m.character] || "#C9A063";
+            const item = legend.append("div").attr("class", "legend-item")
+                .attr("tabindex", "0")
+                .on("mouseover", function() {
+                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.35).attr("stroke-width", 3);
+                })
+                .on("mouseout", function() {
+                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.12).attr("stroke-width", 2);
+                })
+                .on("focus", function() {
+                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.35).attr("stroke-width", 3);
+                })
+                .on("blur", function() {
+                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.12).attr("stroke-width", 2);
+                });
+            item.append("span").attr("class", "swatch").style("background", color);
+            item.append("span").text(m.character);
+            item.append("span").attr("class", "li-mbti").text(m.mbti);
+        });
+    }
+
+    // ============================================================
+    // 渲染：职场适配度水平条形图
+    // ============================================================
+    function renderFitChart(mbtiList) {
+        const svg = d3.select("#fit-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("fit-svg");
+        const margin = { top: 24, right: 180, bottom: 30, left: 130 };
+        const w = Math.max(el.clientWidth || 1100, margin.left + margin.right + 120);
+        const h = 420;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const sorted = mbtiList.slice().sort((a, b) => b.workplace_fit - a.workplace_fit);
+        const innerW = w - margin.left - margin.right;
+        const barH = 28;
+        const gap = 14;
+        const totalH = sorted.length * (barH + gap) - gap;
+        const innerH = Math.max(totalH, 200);
+        svg.attr("viewBox", `0 0 ${w} ${Math.max(h, innerH + margin.top + margin.bottom)}`);
+
+        const x = d3.scaleLinear().domain([0, 10]).range([0, innerW]);
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 网格线
+        g.append("g")
+            .selectAll("line")
+            .data([2, 4, 6, 8, 10])
+            .enter()
+            .append("line")
+            .attr("x1", d => x(d)).attr("x2", d => x(d))
+            .attr("y1", -4).attr("y2", innerH + 4)
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "3,3")
+            .attr("opacity", 0.5);
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH + 6})`)
+            .call(d3.axisBottom(x).ticks(10).tickFormat(d => d))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
+
+        // X 轴标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 38)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.8rem")
+            .style("fill", "var(--accent-3)")
+            .text("Workplace Fit (0-10)");
+
+        const tip = d3.select("#fit-tip");
+        const elParent = el.parentElement;
+
+        sorted.forEach((m, i) => {
+            const yPos = i * (barH + gap);
+            const val = m.workplace_fit;
+            const color = fitColor(m.mbti);
+
+            // 角色名（左侧）
+            g.append("text")
+                .attr("x", -12)
+                .attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.92rem")
+                .style("font-weight", "600")
+                .style("fill", "var(--ink)")
+                .text(m.character);
+
+            // 背景轨道
+            g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",Math.max(0, innerW)).attr("height", barH)
+                .attr("fill", "#faf7f2")
+                .attr("stroke", "var(--line)")
+                .attr("rx", 4);
+
+            // 数值条
+            const bar = g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",0).attr("height", barH)
+                .attr("fill", color)
+                .attr("rx", 4)
+                .style("cursor", "pointer")
+                .attr("class", "fit-bar");
+
+            bar.transition()
+                .delay(i * 100).duration(800)
+                .ease(d3.easeCubicOut)
+                .attr("width",Math.max(0, x(val)));
+
+            // MBTI 类型 + 数值（条内）
+            g.append("text")
+                .attr("x", x(val) - 8)
+                .attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.82rem")
+                .style("font-weight", "700")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "#fff")
+                .style("opacity", 0)
+                .text(m.mbti + " " + val + "/10")
+                .transition().delay(i * 100 + 600).duration(400)
+                .style("opacity", 1);
+
+            // role 标注（条右侧）
+            g.append("text")
+                .attr("x", x(val) + 8)
+                .attr("y", yPos + barH / 2 + 4)
+                .style("font-size", "0.78rem")
+                .style("fill", "var(--ink-soft)")
+                .style("font-style", "italic")
+                .style("opacity", 0)
+                .text(m.role)
+                .transition().delay(i * 100 + 700).duration(400)
+                .style("opacity", 1);
+
+            // 交互
+            bar.on("mouseover", function(e) {
+                d3.select(this).attr("fill", d3.color(color).darker(0.6));
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${m.character} · ${m.mbti} · ${m.mbti_label}</div>` +
+                          `<div>Role: ${m.role}</div>` +
+                          `<div>Fit: <strong style="color:var(--accent-soft);">${val}/10</strong></div>` +
+                          `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">${m.note}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = elParent.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("fill", color);
+                tip.style("opacity", 0);
+            });
+        });
+
+        // 图例（I 系冷色 / E 系暖色）
+        const legendG = svg.append("g")
+            .attr("transform", `translate(${w - margin.right + 20}, ${margin.top})`);
+        legendG.append("text")
+            .attr("x", 0).attr("y", 0)
+            .style("font-size", "0.82rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent-3)")
+            .text("Color legend");
+        const legendItems = [
+            { color: "#3a6b8c", label: "I type (introverted)" },
+            { color: "#c8463a", label: "E type (extroverted)" }
+        ];
+        legendItems.forEach((it, i) => {
+            const ly = 18 + i * 20;
+            legendG.append("rect")
+                .attr("x", 0).attr("y", ly)
+                .attr("width",14).attr("height", 14)
+                .attr("fill", it.color)
+                .attr("rx", 2);
+            legendG.append("text")
+                .attr("x", 20).attr("y", ly + 11)
+                .style("font-size", "0.78rem")
+                .style("fill", "var(--ink)")
+                .text(it.label);
+        });
+    }
+
+    // ============================================================
+    // 渲染：MBTI 强弱项对比表
+    // ============================================================
+    function renderMbtiTable(mbtiList) {
+        const tbody = d3.select("#mbti-tbody");
+        tbody.selectAll("*").remove();
+        mbtiList.forEach(m => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "col-char").text(m.character);
+            const mbtiTd = tr.append("td").attr("class", "col-mbti");
+            mbtiTd.append("span").text(m.mbti);
+            mbtiTd.append("span").attr("class", "mbti-label").text(m.mbti_label);
+
+            // 优势（前 2 条）
+            const sTd = tr.append("td").attr("class", "col-strength");
+            m.strength.slice(0, 2).forEach(s => {
+                sTd.append("span").attr("class", "trait-chip s").text(s);
+            });
+
+            // 弱项（前 2 条）
+            const wTd = tr.append("td").attr("class", "col-weakness");
+            m.weakness.slice(0, 2).forEach(s => {
+                wTd.append("span").attr("class", "trait-chip w").text(s);
+            });
+
+            tr.append("td").attr("class", "col-note").text(m.note);
+        });
+    }
+
+    // ============================================================
+    // 渲染：关键洞察
+    // ============================================================
+    function renderInsights() {
+        const insights = [
+            `<span class="idx">01</span><div><strong>Tathāgata · INTJ · fit 10/10, a perfect score</strong> — master architect of the eighty-one trials — yet INTJ accounts for just 2 of 8 (25%), a rare strategic mind.</div>`,
+            `<span class="idx">02</span><div><strong>Zhu Bajie’s ESFP scores just 5/10, the lowest of all</strong> — quitting is his ultimate defense of “living in the moment” — a classic ESFP trap.</div>`,
+            `<span class="idx">03</span><div>The team’s E/I balance: <strong>3 extroverts (Sun Wukong / Zhu Bajie / Guanyin) + 5 introverts (Tang Sanzang / Sha Wujing / White Dragon Horse / Tathāgata / Jade Emperor)</strong> — introspective types lead, extroverts execute.</div>`,
+            `<span class="idx">04</span><div>Sha Wujing’s ISFJ and Zhu Bajie’s ESFP form a <strong>steady/lively yin-yang complement</strong> — one quietly carries the pole, the other lifts the mood — the glue of the team.</div>`,
+            `<span class="idx">05</span><div>Master and disciples cover the full MBTI spectrum: <strong>8 types, one-to-one coverage</strong> (INFJ/ENTP/ESFP/ISFJ/ISTP/ENFJ/INTJ/ESTJ) — a near-perfect team sample.</div>`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(t => ul.append("li").html(t));
+    }
+
+    // ============================================================
+    // 主流程
+    // ============================================================
+    async function main() {
+        const data = await loadAll();
+        window.__data = data;
+
+        // 数据源提示
+        if (data.profiles === EMBEDDED.social_media_profiles) {
+            // 仍是嵌入数据
+        } else {
+            document.getElementById("dataSource").innerHTML =
+                "Data source: loaded live from <code>scripts/output/data/</code> (running in http server mode)";
+        }
+
+        renderProfiles(data.profiles);
+        renderRadar(data.mbti);
+        renderFitChart(data.mbti);
+        renderMbtiTable(data.mbti);
+        renderInsights();
+
+        // 生成时间
+        const _gt = document.getElementById("gen-time"); if (_gt) _gt.textContent = "Data generated at: " + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
+    }
+
+    // 窗口缩放重绘（仅 D3 图表）
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__data) {
+                renderRadar(window.__data.mbti);
+                renderFitChart(window.__data.mbti);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
