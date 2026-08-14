@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-G4N0Fd/p6lDF5ubSW9+JMxxc/NjLTfZSDKfPR5dJaZM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Cave Estate Archive · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        
+        @media (max-width: 720px) {
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .chart-full {
+            margin-top: 8px;
+        }
+        .chart-full svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        /* Data table */
+        .table-wrap {
+            overflow-x: auto;
+            max-height: 640px;
+            overflow-y: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        .table-wrap::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .table-wrap::-webkit-scrollbar-thumb {
+            background: var(--accent-soft);
+            border-radius: 4px;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+        .data-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 10px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }
+        .data-table thead th.sortable:hover {
+            color: var(--accent-soft);
+        }
+        .data-table thead th .sort-ind {
+            font-size: 0.7rem;
+            margin-left: 4px;
+            color: var(--accent-soft);
+        }
+        .data-table thead th.no-sort {
+            cursor: default;
+        }
+        .data-table tbody tr {
+            border-bottom: 1px solid var(--line);
+        }
+        .data-table tbody tr:nth-child(even) {
+            background: var(--bg);
+        }
+        .data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .data-table td {
+            padding: 8px 12px;
+            vertical-align: top;
+        }
+        .data-table td.num {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent-3);
+            text-align: right;
+            white-space: nowrap;
+        }
+        .data-table td.chapter {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--ink-soft);
+            text-align: center;
+            white-space: nowrap;
+        }
+        .data-table td.luxury-cell {
+            text-align: center;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .luxury-bar {
+            display: inline-block;
+            width: 38px;
+            height: 8px;
+            border-radius: 2px;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #fff;
+            white-space: nowrap;
+        }
+        .tag.king { background: var(--accent); }
+        .tag.general { background: var(--accent-2); }
+        .tag.feature {
+            background: transparent;
+            color: var(--ink-soft);
+            border: 1px dashed var(--line);
+            font-size: 0.74rem;
+        }
+        
+        
+        
+        .footer-meta {
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            opacity: 0.7;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/cave-estate.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Cave Estate Archive</p>
+        <p class="kicker">M · Cave Estate</p>
+        <h1>Cave Estate Archive</h1>
+        <p class="subtitle">CAVE ESTATE · JOURNEY TO THE WEST</p>
+        <p class="tagline">22 cave-mansions · 110,010 minions · 19 Demon-King rank · 3 General rank</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice" id="dataSource">
+            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>xiyouji/</code> directory, then visit <code>http://localhost:8000/site/data/cave-estate.html</code>)
+        </div>
+
+        <!-- KPI Summary Bar -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">TOTAL · Total Cave-Mansions</div>
+                <div class="value">22</div>
+                <div class="desc">Spread across 22 regions, one per region</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">LUXURY · Mean Luxury Score</div>
+                <div class="value">6.68</div>
+                <div class="desc">Out of 10; median 7</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">MINIONS · Total Minions</div>
+                <div class="value">110,010</div>
+                <div class="desc">Lion-Camel Cave alone holds 48,000 (43.6%)</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">MAX · Perfect-Score Cave-Mansions</div>
+                <div class="value">2</div>
+                <div class="desc">Minor Thunderclap Monastery · Lion-Camel Cave tied at luxury 10</div>
+            </div>
+        </div>
+
+        <!-- Chart 1: Luxury Distribution -->
+        <section class="section">
+            <h2 class="section-title">Luxury Distribution</h2>
+            <div class="section-sub">The 22 cave-mansions are sorted by luxury in descending order; the deeper the red, the higher the luxury.</div>
+            <div class="chart-full">
+                <svg id="chart-luxury"></svg>
+            </div>
+            <div class="legend" id="legend-luxury"></div>
+        </section>
+
+        <!-- Charts 2 & 3: cave-master rank pie + regional distribution -->
+        <section class="section">
+            <h2 class="section-title">Cave-Master Rank · Regional Distribution</h2>
+            <div class="section-sub">Left: the proportion of Demon-King-rank vs. General-rank cave masters; right: each region's cave-mansion luxury (one cave-mansion per region; bar length = luxury).</div>
+            <div class="chart-row">
+                <div class="chart-block">
+                    <h3>Cave-Master Rank Proportion</h3>
+                    <svg id="chart-rank" width="360" height="360"></svg>
+                    <div class="legend" id="legend-rank"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>Cave-Mansion Luxury by Region</h3>
+                    <svg id="chart-region" width="640" height="540"></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chart 4: Minion Count Comparison -->
+        <section class="section">
+            <h2 class="section-title">Minion Count Comparison (log scale)</h2>
+            <div class="section-sub">Because Lion-Camel Cave's 48,000 and Rabbit Warren's 0 differ so greatly, a log10 scale is used. Zero values are shown with a separate marker.</div>
+            <div class="chart-full">
+                <svg id="chart-minions"></svg>
+            </div>
+        </section>
+
+        <!-- Cave-Mansion Detail Table -->
+        <section class="section">
+            <h2 class="section-title">Cave-Mansion Detail Archive</h2>
+            <div class="section-sub">Click a column header to sort by that column (sortable by Chapter / Luxury / Minions; click again to toggle ascending/descending).</div>
+            <div class="table-wrap">
+                <table class="data-table" id="cave-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-key="chapter" role="button" tabindex="0">Chapter<span class="sort-ind"></span></th>
+                            <th class="no-sort">Cave-Mansion</th>
+                            <th class="no-sort">Cave Master</th>
+                            <th class="no-sort">Rank</th>
+                            <th class="no-sort">Region</th>
+                            <th class="no-sort">Sphere of Influence</th>
+                            <th class="sortable" data-key="minions_count" role="button" tabindex="0">Minions<span class="sort-ind"></span></th>
+                            <th class="sortable" data-key="luxury" role="button" tabindex="0">Luxury<span class="sort-ind"></span></th>
+                            <th class="no-sort">Feature</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cave-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="insight-box">
+                <h4>A Cave-Mansion Is the Family Fortune</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/02-人物深度分析/妖怪谱系深度分析.md">Monster Genealogy In-Depth Analysis (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/cave-estate.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // ===== Embedded fallback data (used if fetch fails; contents from scripts/output/data/*.json) =====
+    const EMBEDDED_DATA = {
+        caves: [
+            { "name": "Water Curtain Cave", "owner": "Sun Wukong", "owner_rank": "king", "chapter": 1, "region": "Pūrvavideha Continent · Flower-Fruit Mountain", "location": "the very summit of Flower-Fruit Mountain", "environment": "A waterfall veils the entrance; a stone tablet is inscribed “Blessed Land of Flower-Fruit Mountain, Grotto-Heaven of Water Curtain Cave,” and inside are stone seats, stone beds, stone pots and stone stoves.", "furnishings": "Stone seats, stone beds, stone stools, stone basins and stone bowls, all naturally formed.", "treasures": "The stone tablet, the iron-plank bridge, and the waterfall's heavenly curtain.", "minions_count": 47000, "subordinates": ["Four Stalwart Generals · Marshals Ma and Liu", "demon kings of the seventy-two caves"], "territory": "the whole of Flower-Fruit Mountain", "luxury": 7, "feature": "A heaven-born stone cave where the Great Sage Equaling Heaven rose to power." },
+            { "name": "Black Wind Cave", "owner": "Black Bear Demon", "owner_rank": "king", "chapter": 17, "region": "Kingdom of Ussa · Black Wind Mountain", "location": "Black Wind Cave on Black Wind Mountain", "environment": "High mountains and deep ravines, black mist swirling, pines and cypresses in groves.", "furnishings": "Spacious inside, furnished with stone stools and a meditation couch.", "treasures": "The Brocade Kasaya (stolen from Guanyin's monastery).", "minions_count": 200, "subordinates": ["White-Robed Scholar · Snake Demon", "Lingxuzi · Wolf Demon"], "territory": "a hundred li around Black Wind Mountain", "luxury": 6, "feature": "A rare “Chan-practicing” type among demon kings, able to discuss the Way and expound scriptures." },
+            { "name": "Yellow Wind Cave", "owner": "Yellow Wind Demon", "owner_rank": "king", "chapter": 21, "region": "Yellow Wind Ridge · Yellow Wind Cave", "location": "deep in Yellow Wind Ridge", "environment": "Yellow sand blots out the sun; jagged rocks abound.", "furnishings": "A deep cave-mansion with a demon-king's throne.", "treasures": "The Samadhi Divine Wind (a spell, not a treasure).", "minions_count": 500, "subordinates": ["Tiger Vanguard"], "territory": "Yellow Wind Ridge", "luxury": 5, "feature": "A yellow-furred marten that attained the Way at the foot of Spirit Mountain, with ties to the Buddhist order." },
+            { "name": "Wave-Moon Cave", "owner": "Yellow-Robe Demon", "owner_rank": "king", "chapter": 29, "region": "Bowl Mountain · Wave-Moon Cave", "location": "deep in Bowl Mountain", "environment": "The mountain crouches like a tiger; moonlight shimmers on the ripples.", "furnishings": "A lavish cave-mansion with a “Hundred-Flowers Pavilion.”", "treasures": "None (relies on a Heavenly Court background).", "minions_count": 50, "subordinates": ["demon soldiers"], "territory": "Bowl Mountain", "luxury": 5, "feature": "Kui Wood Wolf of the Heavenly Court descended to earth and took the “princess,” the daughter of the King of Precious Elephant Kingdom, as his wife." },
+            { "name": "Lotus Cave on Flat-Top Mountain", "owner": "Golden Horn King · Silver Horn King", "owner_rank": "king", "chapter": 33, "region": "Flat-Top Mountain · Lotus Cave", "location": "the highest peak of Flat-Top Mountain", "environment": "The mountain is shaped like an inverted lotus, often sealed in cloud and mist.", "furnishings": "A vast cave-mansion with “red-lacquered wooden stools” and “gold-lacquered tables.”", "treasures": "the Purple-Gold Red Gourd, the White-Jade Pure Vase, the Seven-Star Sword, the Plantain Fan and the Golden-Lasso Rope.", "minions_count": 800, "subordinates": ["Fine-Spirit Devil · Clever Insect", "Bashan Tiger · Yihai Dragon", "Old Demon Crone"], "territory": "the whole of Flat-Top Mountain", "luxury": 9, "feature": "Lord Lao's pill-refining page boys descended to earth, with the most lavish magical-treasure setup." },
+            { "name": "Fire-Cloud Cave of Mount Hao", "owner": "Red Boy", "owner_rank": "king", "chapter": 41, "region": "Mount Hao · Withered-Pine Gorge · Fire-Cloud Cave", "location": "Withered-Pine Gorge on Mount Hao", "environment": "Pines withered and the gorge dry, with searing heat rising.", "furnishings": "The cave interior is crimson, as if on fire.", "treasures": "True Samadhi Fire (an innate spell).", "minions_count": 100, "subordinates": ["Six Stalwart Generals · Mist-in-Clouds · Cloud-in-Mist"], "territory": "six hundred li of Mount Hao", "luxury": 7, "feature": "Son of the Bull Demon King, a juvenile demon king who can unleash True Samadhi Fire." },
+            { "name": "Turtle Mansion of the Tongtian River", "owner": "King of Inspiration", "owner_rank": "king", "chapter": 47, "region": "Tongtian River · Turtle Mansion", "location": "the bed of the Tongtian River", "environment": "Crystal palace halls, with waves for a roof.", "furnishings": "A crystal throne and coral trees.", "treasures": "The Nine-Petal Bronze Hammer.", "minions_count": 300, "subordinates": ["Mottled Mandarin-Fish Crone"], "territory": "the whole Tongtian River", "luxury": 6, "feature": "A goldfish from Guanyin's lotus pond that demands boys and girls to eat." },
+            { "name": "Jindou Cave", "owner": "One-Horned Rhinoceros King", "owner_rank": "king", "chapter": 50, "region": "Mount Jindou · Jindou Cave", "location": "the sunny side of Mount Jindou", "environment": "Ten thousand golden rays, a thousand streams of auspicious vapor.", "furnishings": "The cave-mansion seems cast of gold.", "treasures": "The Diamond Snare (a treasure of Lord Lao).", "minions_count": 50, "subordinates": [], "territory": "Mount Jindou", "luxury": 8, "feature": "Lord Lao's green ox descended to earth; the Diamond Snare snared away all the gods' weapons." },
+            { "name": "Pipa Cave", "owner": "Scorpion Demon", "owner_rank": "king", "chapter": 54, "region": "Kingdom of Women · Pipa Cave", "location": "on West Liang Mountain outside the capital of the Kingdom of Women", "environment": "Poisonous vapor swirling; the cave is shaped like a pipa.", "furnishings": "Lavish as palace chambers.", "treasures": "Three-Pronged Steel Fork · Horse-Toppling Poison Sting (an innate spell).", "minions_count": 30, "subordinates": ["maidservant captains and handmaids"], "territory": "the outskirts of the Kingdom of Women", "luxury": 5, "feature": "A venomous Scorpion Demon that stung the Buddha and whom even Guanyin dares not approach." },
+            { "name": "Plantain Cave of Emerald-Cloud Mountain", "owner": "Princess Iron Fan · Bull Demon King", "owner_rank": "king", "chapter": 59, "region": "Emerald-Cloud Mountain · Plantain Cave", "location": "the summit of Emerald-Cloud Mountain", "environment": "Emerald green covering the mountain, wreathed in cloud and mist.", "furnishings": "A deep and secluded cave-mansion with “cinnabar lattice” and “gold-lacquered tables and stools.”", "treasures": "The Plantain Fan (one fan sends one flying eighty-four thousand li).", "minions_count": 200, "subordinates": ["maidservant girls"], "territory": "Emerald-Cloud Mountain + eight hundred li of Flaming Mountain", "luxury": 9, "feature": "Owned by the Rākṣasī; her fan quenched the great fire of Flaming Mountain." },
+            { "name": "Cloud-Touching Cave of Thunder-Hoard Mountain", "owner": "Bull Demon King · Princess Jade-Face", "owner_rank": "king", "chapter": 60, "region": "Thunder-Hoard Mountain · Cloud-Touching Cave", "location": "the summit of Thunder-Hoard Mountain", "environment": "Clouds scrape the Milky Way; heaped thunder forms the peak.", "furnishings": "Relics of the Princess of Ten Thousand Saints, halls full of pearls and jade.", "treasures": "The Bull King's Golden-Eyed Beast.", "minions_count": 300, "subordinates": ["Jade-Faced Fox · lesser demons"], "territory": "Thunder-Hoard Mountain", "luxury": 8, "feature": "The Bull Demon King's mistress's residence, the legacy of the “Ten-Thousand-Year Fox King.”" },
+            { "name": "Jade-Wave Pool of Boulder Mountain", "owner": "Nine-Headed Son-in-Law · Dragon King of Ten Thousand Saints", "owner_rank": "king", "chapter": 62, "region": "Boulder Mountain · Jade-Wave Pool", "location": "the pool bed beneath Boulder Mountain", "environment": "A deep pool of jade-green water, with pearls by the ten-thousand measures.", "furnishings": "Crystal palaces with coral railings.", "treasures": "The Buddha's relic (śarīra) · Nine-Leaf Lingzhi Herb.", "minions_count": 500, "subordinates": ["Ben'erba · Babo'erben"], "territory": "the pool bed of Boulder Mountain", "luxury": 9, "feature": "A dragon-palace-style cave-mansion; the Princess of Ten Thousand Saints stole the Buddha's śarīra relic." },
+            { "name": "Minor Thunderclap Monastery", "owner": "Yellow-Browed Boy", "owner_rank": "king", "chapter": 65, "region": "Little Western Heaven · Minor Thunderclap Monastery", "location": "the false-Buddha ground of Little Western Heaven", "environment": "A solemn temple appearance, with false Buddha statues standing in rows.", "furnishings": "The precious hall of the false Thunderclap Monastery.", "treasures": "Golden Cymbals · Seedbag of Humankind · Wolf-Tooth Club.", "minions_count": 5000, "subordinates": ["five thousand lesser demons"], "territory": "a hundred li of Little Western Heaven", "luxury": 10, "feature": "Maitreya Buddha's stone-chime page descended to earth; the false Thunderclap Monastery is the largest in scale." },
+            { "name": "Rotten-Persimmon Lane", "owner": "Python Demon", "owner_rank": "general", "chapter": 67, "region": "Seven-Wonders Mountain · Rotten-Persimmon Lane", "location": "deep within Rotten-Persimmon Lane", "environment": "The stench of persimmons fills the sky; snakes and pythons coil there.", "furnishings": "None (a wild snake's den).", "treasures": "None", "minions_count": 0, "subordinates": [], "territory": "Rotten-Persimmon Lane on Seven-Wonders Mountain", "luxury": 2, "feature": "A great python that has not cultivated a human form; “Rotten-Persimmon Lane” is unbearably foul." },
+            { "name": "Silk-Web Cave", "owner": "Spider Demon · Seven Sisters", "owner_rank": "general", "chapter": 72, "region": "Silk-Web Ridge · Silk-Web Cave", "location": "a shady spot on Silk-Web Ridge", "environment": "Silk webs fill the sky; a gloomy, ghostly air.", "furnishings": "Stone tables and stools, with a bath at “Purgation Spring.”", "treasures": "The silk-thread magic web.", "minions_count": 30, "subordinates": ["seven sons · bee · wasp · horsefly"], "territory": "Yellow-Flower Monastery on Silk-Web Ridge", "luxury": 5, "feature": "Seven sisters live together, fellow disciples of the Hundred-Eyed Demon of Yellow-Flower Monastery." },
+            { "name": "Lion-Camel Cave", "owner": "Azure Lion · White Elephant · Great Roc", "owner_rank": "king", "chapter": 74, "region": "Lion-Camel Ridge · Lion-Camel Cave · Lion-Camel Kingdom", "location": "eight hundred li of Lion-Camel Ridge", "environment": "“Skulls heaped like a ridge, bones like a forest,” with blood reeking to the sky.", "furnishings": "“Human flesh for food, human bones for fuel.”", "treasures": "The Yin-Yang Two-Qi Vase (the Great Roc's).", "minions_count": 48000, "subordinates": ["forty-seven to forty-eight thousand lesser demons · over a hundred spirits"], "territory": "eight hundred li of Lion-Camel Ridge + Lion-Camel Kingdom", "luxury": 10, "feature": "A three-demon-king conglomerate; a whole kingdom of demon atmosphere on an unprecedented scale." },
+            { "name": "Qinghua Manor", "owner": "Deer Demon · State Preceptor of the Bhikṣu Kingdom", "owner_rank": "king", "chapter": 78, "region": "Bhikṣu Kingdom · Qinghua Manor", "location": "outside the capital of the Bhikṣu Kingdom", "environment": "Willows cast shade; serene and otherworldly as a fairyland.", "furnishings": "Elegant as an immortal's residence.", "treasures": "The Coiled-Dragon Staff.", "minions_count": 50, "subordinates": [], "territory": "the capital of the Bhikṣu Kingdom", "luxury": 6, "feature": "The white deer mount of the Old Man of the South Pole descended to earth, intending to use 1,111 children's hearts and livers." },
+            { "name": "Bottomless Cave of Sunken-Empty Mountain", "owner": "Golden-Nosed White-Haired Mouse Demon", "owner_rank": "king", "chapter": 82, "region": "Sunken-Empty Mountain · Bottomless Cave", "location": "the deep bottom of Sunken-Empty Mountain", "environment": "“Black vapor covers the mountain; the bottom cannot be fathomed.”", "furnishings": "Inside the cave there is another “grotto-heaven,” with spirit tablets for the Pagoda-Bearing Heavenly King Li and his daughter.", "treasures": "None (relies on a Spirit Mountain background).", "minions_count": 200, "subordinates": ["several lesser demons"], "territory": "Sunken-Empty Mountain", "luxury": 7, "feature": "Sworn daughter of the Pagoda-Bearing Heavenly King Li; she stole the crystal lamp oil at Spirit Mountain." },
+            { "name": "Linked-Circle Cave of Hidden-Mist Mountain", "owner": "Flower-Skinned Leopard Demon", "owner_rank": "king", "chapter": 85, "region": "Hidden-Mist Mountain · Linked-Circle Cave", "location": "deep in Hidden-Mist Mountain", "environment": "Mist that never clears all year.", "furnishings": "Six linked gates, layer upon layer of mechanisms.", "treasures": "Fake human heads (a false-surrender ruse).", "minions_count": 200, "subordinates": ["Iron-Backed Grey Wolf · lesser demons"], "territory": "Hidden-Mist Mountain", "luxury": 5, "feature": "A hidden leopard of the Southern Mountains who used the “Plum-Blossom Splitting” scheme to feign defeat against Wukong." },
+            { "name": "Nine-Curve Winding Cave", "owner": "Nine-Spirits Primordial Sage", "owner_rank": "king", "chapter": 89, "region": "Bamboo-Joint Mountain · Nine-Curve Winding Cave", "location": "the summit of Bamboo-Joint Mountain", "environment": "Bamboo shadows swaying; the cave-mansion winds through nine turns.", "furnishings": "Nine winding links, unfathomably deep.", "treasures": "The Nine-Headed Dharma Body.", "minions_count": 6000, "subordinates": ["Yellow Lion · Suan Lion · Suanni · Tuan Elephant · Bai Ze · Fuli · Nao Lion · Snow Lion · Tuan Lion"], "territory": "Bamboo-Joint Mountain · Yuhua Prefecture", "luxury": 8, "feature": "The nine-headed lion mount of the Heavenly Venerable Taiyi, “Nine-Spirits Primordial Sage” commands the demons." },
+            { "name": "Dark-Splendor Cave of Green-Dragon Mountain", "owner": "Cold-Dispeller · Heat-Dispeller · Dust-Dispeller", "owner_rank": "king", "chapter": 91, "region": "Green-Dragon Mountain · Dark-Splendor Cave", "location": "the sunny side of Green-Dragon Mountain", "environment": "Dark mountain rock, gleaming with cold light.", "furnishings": "The cave-mansion is like a rhinoceros-horn palace.", "treasures": "Rhinoceros horns (the source of their perfumed oil).", "minions_count": 500, "subordinates": ["lesser demons"], "territory": "Green-Dragon Mountain · Jinping Prefecture", "luxury": 7, "feature": "Three rhinoceros demons disguised as the Buddha to steal perfumed oil, consuming fifty thousand jin a year." },
+            { "name": "Rabbit Warren of Mount Maoying", "owner": "Jade Rabbit Demon", "owner_rank": "general", "chapter": 95, "region": "Mount Maoying · Three Rabbit Warrens", "location": "five peaks and three warrens of Mount Maoying", "environment": "The mountain is shaped like a rabbit, with five peaks and three warrens.", "furnishings": "None (a natural rabbit warren).", "treasures": "The Medicine-Pounding Pestle.", "minions_count": 0, "subordinates": [], "territory": "Mount Maoying", "luxury": 3, "feature": "The Jade Rabbit of the Moon Palace, who sought to take Tang Sanzang as her mate." }
+        ],
+        by_owner_rank: [
+            { "rank": "king", "label": "Demon-King rank", "count": 19 },
+            { "rank": "general", "label": "General rank", "count": 3 }
+        ],
+        by_region: [
+            { "region": "Pūrvavideha Continent · Flower-Fruit Mountain", "luxury": 7, "name": "Water Curtain Cave" },
+            { "region": "Kingdom of Ussa · Black Wind Mountain", "luxury": 6, "name": "Black Wind Cave" },
+            { "region": "Yellow Wind Ridge · Yellow Wind Cave", "luxury": 5, "name": "Yellow Wind Cave" },
+            { "region": "Bowl Mountain · Wave-Moon Cave", "luxury": 5, "name": "Wave-Moon Cave" },
+            { "region": "Flat-Top Mountain · Lotus Cave", "luxury": 9, "name": "Lotus Cave on Flat-Top Mountain" },
+            { "region": "Mount Hao · Withered-Pine Gorge · Fire-Cloud Cave", "luxury": 7, "name": "Fire-Cloud Cave of Mount Hao" },
+            { "region": "Tongtian River · Turtle Mansion", "luxury": 6, "name": "Turtle Mansion of the Tongtian River" },
+            { "region": "Mount Jindou · Jindou Cave", "luxury": 8, "name": "Jindou Cave" },
+            { "region": "Kingdom of Women · Pipa Cave", "luxury": 5, "name": "Pipa Cave" },
+            { "region": "Emerald-Cloud Mountain · Plantain Cave", "luxury": 9, "name": "Plantain Cave of Emerald-Cloud Mountain" },
+            { "region": "Thunder-Hoard Mountain · Cloud-Touching Cave", "luxury": 8, "name": "Cloud-Touching Cave of Thunder-Hoard Mountain" },
+            { "region": "Boulder Mountain · Jade-Wave Pool", "luxury": 9, "name": "Jade-Wave Pool of Boulder Mountain" },
+            { "region": "Little Western Heaven · Minor Thunderclap Monastery", "luxury": 10, "name": "Minor Thunderclap Monastery" },
+            { "region": "Seven-Wonders Mountain · Rotten-Persimmon Lane", "luxury": 2, "name": "Rotten-Persimmon Lane" },
+            { "region": "Silk-Web Ridge · Silk-Web Cave", "luxury": 5, "name": "Silk-Web Cave" },
+            { "region": "Lion-Camel Ridge · Lion-Camel Cave · Lion-Camel Kingdom", "luxury": 10, "name": "Lion-Camel Cave" },
+            { "region": "Bhikṣu Kingdom · Qinghua Manor", "luxury": 6, "name": "Qinghua Manor" },
+            { "region": "Sunken-Empty Mountain · Bottomless Cave", "luxury": 7, "name": "Bottomless Cave of Sunken-Empty Mountain" },
+            { "region": "Hidden-Mist Mountain · Linked-Circle Cave", "luxury": 5, "name": "Linked-Circle Cave of Hidden-Mist Mountain" },
+            { "region": "Bamboo-Joint Mountain · Nine-Curve Winding Cave", "luxury": 8, "name": "Nine-Curve Winding Cave" },
+            { "region": "Green-Dragon Mountain · Dark-Splendor Cave", "luxury": 7, "name": "Dark-Splendor Cave of Green-Dragon Mountain" },
+            { "region": "Mount Maoying · Three Rabbit Warrens", "luxury": 3, "name": "Rabbit Warren of Mount Maoying" }
+        ],
+        top_luxury: [
+            { "rank": 1, "name": "Minor Thunderclap Monastery", "owner": "Yellow-Browed Boy", "luxury": 10, "chapter": 65, "feature": "Maitreya Buddha's stone-chime page descended to earth; the false Thunderclap Monastery is the largest in scale." },
+            { "rank": 2, "name": "Lion-Camel Cave", "owner": "Azure Lion · White Elephant · Great Roc", "luxury": 10, "chapter": 74, "feature": "A three-demon-king conglomerate; a whole kingdom of demon atmosphere on an unprecedented scale." },
+            { "rank": 3, "name": "Lotus Cave on Flat-Top Mountain", "owner": "Golden Horn King · Silver Horn King", "luxury": 9, "chapter": 33, "feature": "Lord Lao's pill-refining page boys descended to earth, with the most lavish magical-treasure setup." },
+            { "rank": 4, "name": "Plantain Cave of Emerald-Cloud Mountain", "owner": "Princess Iron Fan · Bull Demon King", "luxury": 9, "chapter": 59, "feature": "Owned by the Rākṣasī; her fan quenched the great fire of Flaming Mountain." },
+            { "rank": 5, "name": "Jade-Wave Pool of Boulder Mountain", "owner": "Nine-Headed Son-in-Law · Dragon King of Ten Thousand Saints", "luxury": 9, "chapter": 62, "feature": "A dragon-palace-style cave-mansion; the Princess of Ten Thousand Saints stole the Buddha's śarīra relic." }
+        ]
+    };
+
+    // ===== Colors =====
+    const RANK_COLORS = {
+        "king": "#c8463a",
+        "general": "#3a6b8c"
+    };
+    const RANK_LABEL = {
+        "king": "Demon-King rank",
+        "general": "General rank"
+    };
+
+    // Luxury color gradient (2 → 10, from light to deep red)
+    const LUXURY_COLOR = d3.scaleLinear()
+        .domain([2, 5, 7, 9, 10])
+        .range(["#e9b885", "#d9a168", "#c8463a", "#8b0000", "#5c0000"])
+        .interpolate(d3.interpolateRgb);
+
+    // ===== Utility functions =====
+    function formatNum(n) {
+        return d3.format(",")(n);
+    }
+
+    // ===== Chart 1: luxury distribution horizontal bar chart =====
+    function renderLuxuryChart(caves) {
+        const svg = d3.select("#chart-luxury");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("chart-luxury");
+        const width = Math.min(containerEl.clientWidth || 1100, 1180);
+        const barH = 26;
+        const barGap = 4;
+        const margin = { top: 16, right: 80, bottom: 36, left: 180 };
+        const height = caves.length * (barH + barGap) + margin.top + margin.bottom;
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const data = caves.slice().sort((a, b) => b.luxury - a.luxury);
+
+        const x = d3.scaleLinear()
+            .domain([0, 10])
+            .range([0, innerW]);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        // X axis
+        g.append("g")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(d3.axisBottom(x).ticks(10).tickSize(-innerH).tickPadding(8))
+            .call(gn => gn.select(".domain").remove())
+            .call(gn => gn.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "2,3"))
+            .selectAll("text")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455");
+
+        // X-axis title
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 30)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455")
+            .text("Luxury (out of 10)");
+
+        // Bars
+        const bars = g.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("g")
+            .attr("transform", (d, i) => `translate(0, ${i * (barH + barGap)})`);
+
+        bars.append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width",0)
+            .attr("height", barH)
+            .attr("fill", d => LUXURY_COLOR(d.luxury))
+            .attr("rx", 3)
+            .style("opacity", 0.92)
+            .transition()
+            .duration(700)
+            .delay((d, i) => i * 30)
+            .attr("width",d => Math.max(0, Math.max(2, x(d.luxury))));
+
+        // Cave-mansion name (left label)
+        bars.append("text")
+            .attr("x", -8)
+            .attr("y", barH / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "end")
+            .style("font-size", "0.82rem")
+            .style("fill", "#23201A")
+            .text(d => d.name);
+
+        // Value labels
+        bars.append("text")
+            .attr("x", d => x(d.luxury) + 6)
+            .attr("y", barH / 2)
+            .attr("dy", "0.35em")
+            .style("font-size", "0.78rem")
+            .style("font-weight", "600")
+            .style("fill", "#C9A063")
+            .style("font-family", "JetBrains Mono, monospace")
+            .text(d => d.luxury);
+
+        // tooltip
+        bars.append("title")
+            .text(d => `${d.name} (Chapter ${d.chapter})\nOwner: ${d.owner}\nLuxury: ${d.luxury}/10\nMinions: ${formatNum(d.minions_count)}`);
+
+        // Legend
+        const legend = d3.select("#legend-luxury");
+        legend.selectAll("*").remove();
+        const legendData = [
+            { label: "Low (2-4)", color: LUXURY_COLOR(3) },
+            { label: "Medium (5-6)", color: LUXURY_COLOR(5) },
+            { label: "High (7-8)", color: LUXURY_COLOR(7) },
+            { label: "Very high (9)", color: LUXURY_COLOR(9) },
+            { label: "Perfect (10)", color: LUXURY_COLOR(10) }
+        ];
+        legend.selectAll(".legend-item")
+            .data(legendData)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `<span class="legend-swatch" style="background:${d.color}"></span><span>${d.label}</span>`);
+    }
+
+    // ===== Chart 2: cave-master rank pie chart =====
+    function renderRankPie(rankData) {
+        const svg = d3.select("#chart-rank");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${width/2}, ${height/2})`);
+
+        const pie = d3.pie().value(d => d.count).sort(null);
+        const arc = d3.arc()
+            .innerRadius(radius * 0.58)
+            .outerRadius(radius)
+            .cornerRadius(3);
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.82)
+            .outerRadius(radius * 0.82);
+
+        const arcs = pie(rankData);
+
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => RANK_COLORS[d.data.rank] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 120)
+            .style("opacity", 1);
+
+        // Center number
+        const total = d3.sum(rankData, d => d.count);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "0.35em")
+            .style("font-size", "1.8rem")
+            .style("font-weight", "600")
+            .style("fill", "#23201A")
+            .text(total);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "2em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6B6455")
+            .text("Total cave-mansions");
+
+        // Slice labels
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.88rem")
+            .style("font-weight", "600")
+            .style("fill", "#fff")
+            .text(d => `${d.data.count} · ${(d.data.count / total * 100).toFixed(0)}%`);
+
+        // Legend
+        const legend = d3.select("#legend-rank");
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(rankData)
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `<span class="legend-swatch" style="background:${RANK_COLORS[d.rank]}"></span><span>${d.label}: ${d.count}</span>`);
+    }
+
+    // ===== Chart 3: luxury by region =====
+    function renderRegionChart(regionData) {
+        const svg = d3.select("#chart-region");
+        svg.selectAll("*").remove();
+
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const margin = { top: 16, right: 24, bottom: 90, left: 24 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        // Sort by luxury descending
+        const data = regionData.slice().sort((a, b) => b.luxury - a.luxury);
+
+        const x = d3.scaleBand()
+            .domain(data.map(d => d.region))
+            .range([0, innerW])
+            .padding(0.25);
+
+        const y = d3.scaleLinear()
+            .domain([0, 10])
+            .range([innerH, 0]);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        // Y axis
+        g.append("g")
+            .call(d3.axisLeft(y).ticks(5).tickSize(-innerW).tickPadding(6))
+            .call(gn => gn.select(".domain").remove())
+            .call(gn => gn.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "2,3"))
+            .selectAll("text")
+            .style("font-size", "0.74rem")
+            .style("fill", "#6B6455");
+
+        // Bars
+        g.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", d => x(d.region))
+            .attr("y", innerH)
+            .attr("width",Math.max(0, x.bandwidth()))
+            .attr("height", 0)
+            .attr("fill", d => LUXURY_COLOR(d.luxury))
+            .attr("rx", 2)
+            .style("opacity", 0.92)
+            .transition()
+            .duration(700)
+            .delay((d, i) => i * 25)
+            .attr("y", d => y(d.luxury))
+            .attr("height", d => innerH - y(d.luxury));
+
+        // Value labels
+        g.selectAll(".val")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "val")
+            .attr("x", d => x(d.region) + x.bandwidth() / 2)
+            .attr("y", d => y(d.luxury) - 4)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.7rem")
+            .style("font-weight", "600")
+            .style("fill", "#C9A063")
+            .style("font-family", "JetBrains Mono, monospace")
+            .text(d => d.luxury);
+
+        // X-axis labels (rotated)
+        g.append("g")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(d3.axisBottom(x).tickSize(0))
+            .call(gn => gn.select(".domain").remove())
+            .selectAll("text")
+            .style("font-size", "0.66rem")
+            .style("fill", "#6B6455")
+            .attr("transform", "rotate(-55)")
+            .style("text-anchor", "end")
+            .text(d => { const p = String(d).split("·")[0]; return p.length > 4 ? p.slice(0, 4) + "…" : p; });
+
+        // tooltip
+        g.selectAll(".tip")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "tip")
+            .attr("x", d => x(d.region))
+            .attr("y", d => y(d.luxury))
+            .attr("width",Math.max(0, x.bandwidth()))
+            .attr("height", d => innerH - y(d.luxury))
+            .attr("fill", "transparent")
+            .style("pointer-events", "all")
+            .append("title")
+            .text(d => `${d.region}\nCave-mansion: ${d.name}\nLuxury: ${d.luxury}/10`);
+    }
+
+    // ===== Chart 4: minion count comparison (log scale) =====
+    function renderMinionsChart(caves) {
+        const svg = d3.select("#chart-minions");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("chart-minions");
+        const width = Math.min(containerEl.clientWidth || 1100, 1180);
+        const margin = { top: 24, right: 40, bottom: 90, left: 80 };
+        const height = 560;
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const data = caves.slice().sort((a, b) => b.minions_count - a.minions_count);
+
+        // log scale: treat 0 as 0.5
+        const maxVal = d3.max(data, d => d.minions_count) || 1;
+        const x = d3.scaleLog()
+            .domain([1, maxVal * 1.1])
+            .range([0, innerW])
+            .clamp(true);
+
+        const y = d3.scaleBand()
+            .domain(data.map(d => d.name))
+            .range([0, innerH])
+            .padding(0.2);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+        // Grid lines + X axis
+        const tickVals = [1, 10, 100, 1000, 10000, 50000];
+        g.append("g")
+            .attr("transform", `translate(0, ${innerH})`)
+            .call(d3.axisBottom(x)
+                .tickValues(tickVals)
+                .tickFormat(d => formatNum(+d))
+                .tickSize(-innerH)
+                .tickPadding(8))
+            .call(gn => gn.select(".domain").remove())
+            .call(gn => gn.selectAll(".tick line").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "2,3"))
+            .selectAll("text")
+            .style("font-size", "0.74rem")
+            .style("fill", "#6B6455")
+            .style("font-family", "JetBrains Mono, monospace");
+
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 56)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#6B6455")
+            .text("Number of minions (log10 scale)");
+
+        // Y axis
+        g.append("g")
+            .call(d3.axisLeft(y).tickSize(0))
+            .call(gn => gn.select(".domain").remove())
+            .selectAll("text")
+            .style("font-size", "0.78rem")
+            .style("fill", "#23201A");
+
+        // Bars (0 values use a 1px starting mark)
+        g.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("x", 1)
+            .attr("y", d => y(d.name))
+            .attr("width",0)
+            .attr("height", y.bandwidth())
+            .attr("fill", d => d.minions_count === 0 ? "#d9cdb8" : LUXURY_COLOR(d.luxury))
+            .attr("rx", 2)
+            .style("opacity", 0.9)
+            .transition()
+            .duration(700)
+            .delay((d, i) => i * 25)
+            .attr("width",d => Math.max(0, d.minions_count === 0 ? 3 : Math.max(2, x(d.minions_count) - 1)));
+
+        // Value labels
+        g.selectAll(".val")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "val")
+            .attr("x", d => d.minions_count === 0 ? 8 : x(d.minions_count) + 6)
+            .attr("y", d => y(d.name) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .style("font-size", "0.74rem")
+            .style("font-weight", "600")
+            .style("fill", "#C9A063")
+            .style("font-family", "JetBrains Mono, monospace")
+            .text(d => d.minions_count === 0 ? "0 (no minions)" : formatNum(d.minions_count));
+
+        // tooltip
+        g.selectAll(".tip")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "tip")
+            .attr("x", 0)
+            .attr("y", d => y(d.name))
+            .attr("width",Math.max(0, innerW))
+            .attr("height", y.bandwidth())
+            .attr("fill", "transparent")
+            .style("pointer-events", "all")
+            .append("title")
+            .text(d => `${d.name} (Chapter ${d.chapter})\nOwner: ${d.owner}\nMinions: ${formatNum(d.minions_count)}`);
+    }
+
+    // ===== Table rendering and sorting =====
+    let tableState = {
+        key: "luxury",
+        dir: "desc"
+    };
+
+    function renderTable(caves) {
+        const sortKeys = ["chapter", "luxury", "minions_count"];
+        const headers = d3.selectAll("#cave-table thead th.sortable");
+
+        // Update sort indicators
+        headers.each(function() {
+            const th = d3.select(this);
+            const key = th.attr("data-key");
+            const ind = th.select(".sort-ind");
+            if (key === tableState.key) {
+                ind.text(tableState.dir === "asc" ? "▲" : "▼");
+            } else {
+                ind.text("");
+            }
+        });
+
+        const sorted = caves.slice().sort((a, b) => {
+            const dir = tableState.dir === "asc" ? 1 : -1;
+            const av = a[tableState.key];
+            const bv = b[tableState.key];
+            if (typeof av === "number" && typeof bv === "number") {
+                return (av - bv) * dir;
+            }
+            return String(av).localeCompare(String(bv), "zh-CN") * dir;
+        });
+
+        const tbody = d3.select("#cave-tbody");
+        tbody.selectAll("*").remove();
+
+        sorted.forEach(c => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "chapter").text(`Chapter ${c.chapter}`);
+            tr.append("td").style("font-weight", "600").text(c.name);
+            tr.append("td").text(c.owner);
+            tr.append("td").html(`<span class="tag ${c.owner_rank}">${RANK_LABEL[c.owner_rank]}</span>`);
+            tr.append("td").text(c.region);
+            tr.append("td").text(c.territory);
+            tr.append("td").attr("class", "num").text(c.minions_count === 0 ? "0" : formatNum(c.minions_count));
+            tr.append("td").attr("class", "luxury-cell")
+                .html(() => {
+                    const w = (c.luxury / 10) * 38;
+                    return `<span class="luxury-bar" style="width:${w}px;background:${LUXURY_COLOR(c.luxury)}"></span>${c.luxury}/10`;
+                });
+            tr.append("td").html(`<span class="tag feature">${c.feature}</span>`);
+        });
+
+        // Sort on header click
+        d3.selectAll("#cave-table thead th.sortable").on("click", function() {
+            const key = d3.select(this).attr("data-key");
+            if (tableState.key === key) {
+                tableState.dir = tableState.dir === "asc" ? "desc" : "asc";
+            } else {
+                tableState.key = key;
+                tableState.dir = key === "chapter" ? "asc" : "desc";
+            }
+            renderTable(caves);
+        }).on("keydown", function(event) {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                this.click();
+            }
+        });
+    }
+
+    // ===== Key insights =====
+    function renderInsights(caves) {
+        const totalMinions = d3.sum(caves, d => d.minions_count);
+        const topLuxury = caves.filter(c => c.luxury === 10);
+        const topCave = caves.find(c => c.name === "Lion-Camel Cave");
+        const pingding = caves.find(c => c.name === "Lotus Cave on Flat-Top Mountain");
+
+        const insights = [
+            `Only <strong>two</strong> cave-mansions have a perfect luxury score (10): <strong>Minor Thunderclap Monastery</strong> (the Maitreya boy's false-Buddha ground) and <strong>Lion-Camel Cave</strong> (the three-demon-king conglomerate) tie for first, both sharing the background of “descending to earth from beneath a Buddha or deity.”`,
+            `<strong>Lion-Camel Cave's 48,000 minions</strong> make up <strong>43.6%</strong> of all 110,010 minions — an unprecedented scale, and “skulls heaped like a ridge, bones like a forest” is no empty boast. Together with Water Curtain Cave's 47,000, the two caves account for 86.7%.`,
+            `<strong>Lotus Cave on Flat-Top Mountain has the most lavish magical treasures</strong>: the Purple-Gold Red Gourd, the White-Jade Pure Vase, the Seven-Star Sword, the Plantain Fan and the Golden-Lasso Rope are all present — Lord Lao's pill-refining page boys descended to earth with a setup unmatched in the whole book.`,
+            `Minion numbers are sharply polarized: <strong>four cave-mansions (the Python Demon's and the Jade Rabbit Demon's) have zero minions</strong>, while <strong>five cave-mansions exceed a thousand</strong> (Lion-Camel Cave, Water Curtain Cave, Nine-Curve Winding Cave, Minor Thunderclap Monastery) — the demon kings' spheres of influence differ enormously.`,
+            `<strong>Demon-King-rank masters hold 19 cave-mansions vs. only 3 for General rank</strong> (the Python Demon, the Spider Demon, the Jade Rabbit Demon); Journey to the West cave-mansions are essentially monopolized by “Demon-King rank.” General-rank ones are mostly “not yet human-shaped” or “communal spirits.”`,
+            `The 22 cave-mansions are spread across <strong>22 different regions</strong>, with no region holding more than one — the demon kings of Journey to the West each “carved out a realm,” claiming their own mountain.`
+        ];
+
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => {
+            ul.append("li").html(text);
+        });
+    }
+
+    // ===== Data loading (uses embedded data if fetch fails) =====
+    async function loadData() {
+        try {
+            const [caveRes, regionRes, rankRes, luxuryRes] = await Promise.all([
+                fetch('../../scripts/output/data/cave_estate.json'),
+                fetch('../../scripts/output/data/cave_by_region.json'),
+                fetch('../../scripts/output/data/cave_by_owner_rank.json'),
+                fetch('../../scripts/output/data/cave_top_luxury.json')
+            ]);
+            if (!caveRes.ok) throw new Error('fetch failed');
+            const caves = await caveRes.json();
+            const by_region_raw = await regionRes.json();
+            const by_owner_rank = await rankRes.json();
+            const top_luxury = await luxuryRes.json();
+
+            // Convert by_region to [{region, luxury, name}] form
+            const by_region = by_region_raw.map(g => ({
+                region: g.region,
+                luxury: g.caves[0].luxury,
+                name: g.caves[0].name
+            }));
+
+            document.getElementById('dataSource').innerHTML =
+                'Data source: loaded live from <code>scripts/output/data/cave_*.json</code> (http server mode)';
+            return { caves, by_region, by_owner_rank, top_luxury };
+        } catch (e) {
+            console.warn('[INFO] Using embedded data: ', e.message);
+            return EMBEDDED_DATA;
+        }
+    }
+
+    // ===== Main flow =====
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        renderLuxuryChart(data.caves);
+        renderRankPie(data.by_owner_rank);
+        renderRegionChart(data.by_region);
+        renderMinionsChart(data.caves);
+        renderTable(data.caves);
+        renderInsights(data.caves);
+
+        // footer meta
+        const meta = document.getElementById('footer-meta'); if (!meta) return;
+        if (data.caves && data.caves.length) {
+            meta.textContent = `Data generated: embedded version · cave_estate.json · ${data.caves.length} cave-mansions`;
+        }
+    }
+
+    // Responsive redraw
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderLuxuryChart(window.__lastData.caves);
+                renderMinionsChart(window.__lastData.caves);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+<script id="audit-contentavoid">
+(function(){
+  var SKIP=/(tick|legend|title|axis|domain|cell|tooltip|axisfix|dark-halo|subtitle|grid|background|heat-col-label|heat-row-label)/i;
+  function fix(){
+    try{
+      // 1) 热力图列标签旋转 -42°（保留可见）
+      document.querySelectorAll('svg text.heat-col-label').forEach(function(t){
+        var x=+t.getAttribute('x')||0, y=+t.getAttribute('y')||0;
+        t.setAttribute('transform','rotate(-42 '+x+' '+y+')');
+        t.setAttribute('text-anchor','end');
+      });
+      // 2) 其余文字重叠：隐藏较小者 + 补 title
+      document.querySelectorAll('svg').forEach(function(svg){
+        var texts=[].slice.call(svg.querySelectorAll('text')).filter(function(t){
+          var c=t.getAttribute('class')||'';
+          if(SKIP.test(c)) return false;
+          var b=t.getBBox(); return b.width>0 && b.height>0;
+        });
+        for(var i=0;i<texts.length;i++){
+          for(var j=i+1;j<texts.length;j++){
+            var a=texts[i],b=texts[j];
+            var ra=a.getBBox(),rb=b.getBBox();
+            var ix=Math.max(0,Math.min(ra.x+ra.width,rb.x+rb.width)-Math.max(ra.x,rb.x));
+            var iy=Math.max(0,Math.min(ra.y+ra.height,rb.y+rb.height)-Math.max(ra.y,rb.y));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(), tb=(b.textContent||'').trim();
+            if(ta===tb){ // 完全重复：隐藏其一
+              if(a.style.display!=='none'){ a.setAttribute('data-cavoid','1'); if(!a.getAttribute('title')) a.setAttribute('title',ta); a.style.display='none'; }
+              continue;
+            }
+            var hide=(ra.width*ra.height<=rb.width*rb.height)?a:b;
+            var keep=(hide===a)?b:a;
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-cavoid','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000,14000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run(); else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
