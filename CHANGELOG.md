@@ -4,9 +4,17 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W428），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W429），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.44（2026-08-14）：W429 英文站续译 batch7 — 新增 3 张可视化页英文化
+
+> **来源**：延续待办「英文站续译」batch7（次低脆度页），复用 _extract_strings.py + _validate_en.py 工具链。
+> - **执行（英文化 3 页）**：新增 site/en/text-search（原著全文检索·纯 chrome 翻译）/ 81-hardships-view（八十一难可交互视图·工具页）/ mbti-evolution（取经团队 MBTI 动态演变图）；每页按既有 EN 导航/页脚模板重建 + 翻译 chrome/script 字面量（阶段名/角色名/维度标签/洞察文案/vis-tools UI）。
+> - **执行（配套）**：generate_csp.py 重生成 167 页（731 内联哈希 0 漂移）·sitemap 补 3 页（159→162）。
+> - **验证**：_validate_en.py 3 页全过（chrome=whitelist-only·script=0）·lint_links 2886 链接 0 broken·verify_delivery 核心全绿。
+> - **状态**：已落地·待 commit/push。
 
 ### v2.3.43（2026-08-14）：W428 英文站续译 batch6 — 新增 5 张可视化页英文化
 

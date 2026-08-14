@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-JzIVAHE68t3M5R96Dja98zw/ypCpw9lnGBsPtiYC2YY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Pilgrimage Team MBTI Evolution · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .notice {
+            background: #fff8e7; border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        }
+        
+        
+        .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
+        
+        
+        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: var(--accent-2);
+            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 4px 0; transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        
+        .stage-switcher { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .stage-btn {
+            padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.9em;
+            font-family: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .stage-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .stage-btn:hover { background: var(--accent-soft); }
+        .stage-btn.active:hover { background: var(--accent); }
+        .radar-wrap { display: grid; grid-template-columns: 1fr 280px; gap: 24px; align-items: start; }
+        @media (max-width: 860px) { .radar-wrap { grid-template-columns: 1fr; } }
+        #radar-svg { width: 100%; height: auto; display: block; }
+        .radar-container { position: relative; }
+        .radar-tip, .heat-tip {
+            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
+            color: #f5e9d4; padding: 8px 12px; border-radius: 6px; font-size: 0.8rem;
+            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 260px;
+        }
+        .radar-tip .tip-title, .heat-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 4px; }
+        .legend h4 { color: var(--accent-3); margin-bottom: 10px; font-size: 1em; }
+        .legend-item {
+            display: flex; align-items: center; gap: 8px; padding: 6px 8px;
+            border-radius: 4px; cursor: pointer; font-size: 0.88em; transition: background 0.2s;
+        }
+        .legend-item:hover, .legend-item:focus { background: #fff8e7; }
+        .legend-item .swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+        .legend-item .li-name { font-weight: 600; min-width: 56px; }
+        .legend-item .li-mbti { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent); }
+        .legend-item .li-dom { color: var(--ink-soft); font-size: 0.8em; margin-left: auto; font-family: "JetBrains Mono", monospace; }
+        .small-multiples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px; }
+        .sm-card { border: 1px solid var(--line); border-radius: 6px; padding: 14px; background: #fffdf8; }
+        .sm-card h4 { font-size: 0.95em; margin-bottom: 2px; color: var(--ink); }
+        .sm-card .sm-mbti { font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: var(--accent); margin-bottom: 6px; display: inline-block; }
+        .sm-card svg { width: 100%; height: 160px; display: block; }
+        .sm-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; font-size: 0.72em; color: var(--ink-soft); }
+        .sm-legend span { display: flex; align-items: center; gap: 3px; }
+        .sm-legend i { width: 14px; height: 2.5px; display: inline-block; border-radius: 1px; }
+        .heatmap-wrap { position: relative; overflow-x: auto; }
+        #heatmap-svg { display: block; min-width: 580px; }
+        .heat-cell { transition: opacity 0.2s; cursor: pointer; }
+        .heat-cell:hover { opacity: 0.72; }
+        .insight-box {
+            background: #fffdf8; border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+        }
+        .insight-box strong { color: var(--accent); font-weight: 700; }
+        .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
+        
+        
+        @media (prefers-reduced-motion: reduce) {  }
+        @media (max-width: 480px) {
+            
+            
+            
+            .stage-btn { padding: 6px 12px; font-size: 0.82em; }
+        }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html">
+            <span class="seal">JTTW<br>Notes</span>
+            <span class="wordmark">Annotated Journey to the West</span>
+        </a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/mbti-evolution.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> · <a href="dashboard.html">Dashboard</a> · <a href="visualizations.html">Visualizations</a> · Pilgrimage Team MBTI Evolution</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Pilgrimage Team MBTI Evolution</h1>
+        <p class="subtitle">Journey Team · MBTI Dynamic Evolution</p>
+        <p class="tagline">— fourteen years on the road: five personalities grinding, clashing, harmonizing, and completing</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice">
+            <strong>Data note:</strong>Personality drift for the five pilgrimage-team members across four narrative stages is encoded on the eight MBTI dimensions (E/I/S/N/T/F/J/P), each scored 0-10.
+            Stage boundaries follow chapters: Formation (Ch. 8-22), Conflict (Ch. 27-58), Harmony (Ch. 59-90), Consummation (Ch. 91-100).
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card"><div class="num">5</div><div class="label">Pilgrimage team members</div></div>
+            <div class="kpi-card"><div class="num">4</div><div class="label">Narrative evolution stages</div></div>
+            <div class="kpi-card"><div class="num">8</div><div class="label">MBTI cognitive dimensions</div></div>
+            <div class="kpi-card"><div class="num">14</div><div class="label">years on the journey</div></div>
+        </div>
+
+        <!-- 板块 1：阶段切换雷达图 -->
+        <section class="section">
+            <h2>Panel 1 · Stage-Switching Radar</h2>
+            <p>Click a button below to switch narrative stage; the five-person radar overlay smoothly transitions to that stage's personality snapshot. Defaults to "Formation".</p>
+            <div class="stage-switcher" role="tablist" aria-label="阶段切换">
+                <button class="stage-btn active" data-stage="0" role="tab" aria-selected="true">Formation (Ch. 8-22)</button>
+                <button class="stage-btn" data-stage="1" role="tab" aria-selected="false">Conflict (Ch. 27-58)</button>
+                <button class="stage-btn" data-stage="2" role="tab" aria-selected="false">Harmony (Ch. 59-90)</button>
+                <button class="stage-btn" data-stage="3" role="tab" aria-selected="false">Consummation (Ch. 91-100)</button>
+            </div>
+            <div class="radar-wrap">
+                <div class="radar-container">
+                    <svg id="radar-svg" aria-label="5 人 MBTI 雷达叠加图"></svg>
+                    <div class="radar-tip" id="radar-tip"></div>
+                </div>
+                <div class="legend" id="radar-legend"></div>
+            </div>
+        </section>
+
+        <!-- 板块 2：维度演变折线图 small multiples -->
+        <section class="section">
+            <h2>Panel 2 · Dimension Evolution Lines</h2>
+            <p>One chart per person; 4 lines show how the 4 dimension-pair differences (E-I / S-N / T-F / J-P) change across stages. Difference &gt; 0 leans toward the left trait, &lt; 0 leans right, and approaching 0 means the pair tends toward balance.</p>
+            <div class="small-multiples" id="sm-grid"></div>
+        </section>
+
+        <!-- 板块 3：阶段 × 维度热力图 -->
+        <section class="section">
+            <h2>Panel 3 · Stage × Dimension Heatmap</h2>
+            <p>5 rows (characters) × 16 columns (4 stages × 4 dimension pairs). Color depth = absolute dimension difference: dark = strong preference, light = approaching balance. Hover for exact values.</p>
+            <div class="heatmap-wrap">
+                <svg id="heatmap-svg" aria-label="阶段维度热力图"></svg>
+                <div class="heat-tip" id="heat-tip"></div>
+            </div>
+        </section>
+
+        <!-- 板块 4：演变洞察 -->
+        <section class="section">
+            <h2>Panel 4 · Evolution Insights</h2>
+            <div id="insights-list"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <div class="footer-brand">Annotated Journey to the West</div>
+            <div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/03-主题与情节专题/取经团队动力学.md">Pilgrimage Team Dynamics (essay, Chinese)</a></div>
+        </div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/mbti-evolution.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // ============================================================
+    // EMBEDDED DATA：5 人 × 4 阶段 × 8 维度
+    // ============================================================
+    const EMBEDDED = {
+        stages: ["Formation (Ch. 8-22)", "Conflict (Ch. 27-58)", "Harmony (Ch. 59-90)", "Consummation (Ch. 91-100)"],
+        stagesShort: ["Formation", "Conflict", "Harmony", "Consummation"],
+        dimensions: ["E","I","S","N","T","F","J","P"],
+        dimPairs: [
+            { a: "E", b: "I", label: "E-I", color: "#c8463a" },
+            { a: "S", b: "N", label: "S-N", color: "#3a6b8c" },
+            { a: "T", b: "F", label: "T-F", color: "#C9A063" },
+            { a: "J", b: "P", label: "J-P", color: "#6B8E5A" }
+        ],
+        characters: [
+            {
+                name: "Sun Wukong", mbti: "ENTP", color: "#e9b885",
+                stages: [
+                    {stage: "Formation", chapters: "8-22", dims: {E:7,I:3,S:3,N:7,T:7,F:3,J:2,P:8}, dominant: "Ne-Ti", note: "Anti-bureaucratic · havoc-making legacy"},
+                    {stage: "Conflict", chapters: "27-58", dims: {E:6,I:4,S:4,N:6,T:6,F:4,J:3,P:7}, dominant: "Ne-Fe", note: "Expelled after the Three Strikes · begins to learn empathy"},
+                    {stage: "Harmony", chapters: "59-90", dims: {E:6,I:4,S:5,N:5,T:7,F:3,J:4,P:6}, dominant: "Ti-Ne", note: "Calling reinforcements becomes the norm · team collaboration"},
+                    {stage: "Consummation", chapters: "91-100", dims: {E:5,I:5,S:5,N:5,T:6,F:4,J:6,P:4}, dominant: "Ti-Fe", note: "Becomes a Buddha · edge dulled · J/P flips"}
+                ]
+            },
+            {
+                name: "Tang Sanzang", mbti: "INFJ", color: "#c8463a",
+                stages: [
+                    {stage: "Formation", chapters: "8-22", dims: {E:3,I:7,S:4,N:6,T:3,F:7,J:8,P:2}, dominant: "Ni-Fe", note: "Compassion · fear · dependence"},
+                    {stage: "Conflict", chapters: "27-58", dims: {E:3,I:7,S:5,N:5,T:4,F:6,J:8,P:2}, dominant: "Ni-Ti", note: "Deceived repeatedly · S up N down · T up"},
+                    {stage: "Harmony", chapters: "59-90", dims: {E:4,I:6,S:5,N:5,T:5,F:5,J:7,P:3}, dominant: "Ni-Fe", note: "Trusts Wukong · F down T up"},
+                    {stage: "Consummation", chapters: "91-100", dims: {E:4,I:6,S:5,N:5,T:6,F:4,J:8,P:2}, dominant: "Ni-Ti", note: "Becomes a Buddha · rationalized · T keeps rising"}
+                ]
+            },
+            {
+                name: "Zhu Bajie", mbti: "ESFP", color: "#5a4030",
+                stages: [
+                    {stage: "Formation", chapters: "8-22", dims: {E:8,I:2,S:7,N:3,T:2,F:8,J:2,P:8}, dominant: "Se-Fi", note: "Gluttonous and lustful · disband-minded"},
+                    {stage: "Conflict", chapters: "27-58", dims: {E:7,I:3,S:7,N:3,T:3,F:7,J:3,P:7}, dominant: "Se-Fi", note: "Slightly restrained · J ticks up"},
+                    {stage: "Harmony", chapters: "59-90", dims: {E:6,I:4,S:7,N:3,T:4,F:6,J:4,P:6}, dominant: "Se-Te", note: "Joins battles · T up F down"},
+                    {stage: "Consummation", chapters: "91-100", dims: {E:5,I:5,S:6,N:4,T:5,F:5,J:5,P:5}, dominant: "Se-Fi", note: "Altar Cleanser · tends toward balance"}
+                ]
+            },
+            {
+                name: "Sha Wujing", mbti: "ISFJ", color: "#3a6b8c",
+                stages: [
+                    {stage: "Formation", chapters: "8-22", dims: {E:2,I:8,S:8,N:2,T:4,F:6,J:8,P:2}, dominant: "Si-Fe", note: "Carries the luggage · silent · loyal"},
+                    {stage: "Conflict", chapters: "27-58", dims: {E:2,I:8,S:8,N:2,T:4,F:6,J:8,P:2}, dominant: "Si-Fe", note: "Almost unchanged · the stabilizer"},
+                    {stage: "Harmony", chapters: "59-90", dims: {E:3,I:7,S:7,N:3,T:5,F:5,J:7,P:3}, dominant: "Si-Te", note: "Slightly more proactive · E up"},
+                    {stage: "Consummation", chapters: "91-100", dims: {E:3,I:7,S:7,N:3,T:5,F:5,J:8,P:2}, dominant: "Si-Fe", note: "Golden-body Arhat · returns to his true nature"}
+                ]
+            },
+            {
+                name: "White Dragon Horse", mbti: "ISTP", color: "#6B6455",
+                stages: [
+                    {stage: "Formation", chapters: "8-22", dims: {E:2,I:8,S:7,N:3,T:7,F:3,J:3,P:7}, dominant: "Ti-Se", note: "Turned into a horse · silent · executor"},
+                    {stage: "Conflict", chapters: "27-58", dims: {E:3,I:7,S:7,N:3,T:7,F:3,J:3,P:7}, dominant: "Ti-Se", note: "Ch. 30 Yellow-Robe Demon event reveals human form · E up"},
+                    {stage: "Harmony", chapters: "59-90", dims: {E:3,I:7,S:7,N:3,T:7,F:3,J:4,P:6}, dominant: "Ti-Se", note: "Continuously proactive · J up P down"},
+                    {stage: "Consummation", chapters: "91-100", dims: {E:3,I:7,S:7,N:3,T:7,F:3,J:5,P:5}, dominant: "Ti-Se", note: "Eight-Branch Heavenly Dragon · J up"}
+                ]
+            }
+        ],
+        insights: [
+            "Sun Wukong's J/P flip (P8→P4, J2→J6): the journey is a history of discipline, from "anti-bureaucrat" to "Buddha" — the most rebellious person was ground into the most rule-abiding",
+            "Tang Sanzang's T/F convergence (F7→F4, T3→T6): from compassion to reason, after being deceived repeatedly he learns to judge, and upon attaining Buddhahood compassion and wisdom are balanced",
+            "Zhu Bajie's E/I convergence (E8→E5, I2→I5): from flamboyant to restrained, the disband-mind eventually accepts the organization",
+            "Sha Wujing barely changes: the team's stabilizer; the ISFJ guardian's true nature runs throughout — the price of stability is no growth",
+            "The White Dragon Horse only reveals human form at Ch. 30: the ISTP virtuoso's "silent execution" is only seen after the Yellow-Robe Demon incident"
+        ]
+    };
+
+    // ============================================================
+    // 全局：reduced-motion 检测
+    // ============================================================
+    const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DUR = REDUCE_MOTION ? 0 : 800;
+
+    // ============================================================
+    // 板块 1：阶段切换雷达图
+    // ============================================================
+    const radarState = { paths: [], vertexGroups: [], stageIdx: 0 };
+
+    function initRadar() {
+        const svg = d3.select("#radar-svg");
+        const el = document.getElementById("radar-svg");
+        const w = Math.max(el.clientWidth || 500, 320);
+        const h = 460;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+        svg.selectAll("*").remove();
+
+        const cx = w / 2, cy = h / 2;
+        const radius = Math.min(w, h) / 2 - 56;
+        const dims = EMBEDDED.dimensions;
+        const n = dims.length;
+        const angle = (i) => (i * 2 * Math.PI / n) - Math.PI / 2;
+        const rScale = d3.scaleLinear().domain([0, 8]).range([0, radius]);
+
+        // 网格圆
+        [2, 4, 6, 8].forEach(v => {
+            svg.append("circle")
+                .attr("cx", cx).attr("cy", cy).attr("r", rScale(v))
+                .attr("fill", "none").attr("stroke", "var(--line)")
+                .attr("stroke-dasharray", "2,3").attr("opacity", 0.5);
+            svg.append("text")
+                .attr("x", cx + 4).attr("y", cy - rScale(v) + 12)
+                .style("font-size", "0.68rem").style("fill", "var(--ink-soft)")
+                .text(v);
+        });
+
+        // 轴线 + 标签
+        dims.forEach((d, i) => {
+            const x2 = cx + radius * Math.cos(angle(i));
+            const y2 = cy + radius * Math.sin(angle(i));
+            svg.append("line")
+                .attr("x1", cx).attr("y1", cy)
+                .attr("x2", x2).attr("y2", y2)
+                .attr("stroke", "var(--line)").attr("opacity", 0.5);
+            const lx = cx + (radius + 22) * Math.cos(angle(i));
+            const ly = cy + (radius + 22) * Math.sin(angle(i));
+            svg.append("text")
+                .attr("x", lx).attr("y", ly)
+                .attr("text-anchor", "middle").attr("dominant-baseline", "middle")
+                .style("font-size", "0.9rem").style("font-weight", "bold")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "var(--accent-3)").text(d);
+        });
+
+        const lineGen = d3.lineRadial()
+            .radius(d => rScale(d))
+            .angle((d, i) => angle(i))
+            .curve(d3.curveCardinalClosed);
+
+        const tip = d3.select("#radar-tip");
+        const elParent = el.parentElement;
+
+        EMBEDDED.characters.forEach((char, idx) => {
+            const values = dims.map(d => char.stages[0].dims[d]);
+            const color = char.color;
+
+            const path = svg.append("path")
+                .datum(values)
+                .attr("d", lineGen)
+                .attr("transform", `translate(${cx},${cy})`)
+                .attr("fill", color)
+                .attr("fill-opacity", 0.12)
+                .attr("stroke", color)
+                .attr("stroke-width", 2)
+                .style("cursor", "pointer")
+                .attr("class", "radar-poly poly-" + idx);
+
+            const vg = svg.append("g").attr("class", "vertex-group poly-" + idx);
+            values.forEach((v, i) => {
+                vg.append("circle")
+                    .attr("cx", cx + rScale(v) * Math.cos(angle(i)))
+                    .attr("cy", cy + rScale(v) * Math.sin(angle(i)))
+                    .attr("r", 3.5)
+                    .attr("fill", color)
+                    .attr("stroke", "#fff").attr("stroke-width", 1.5);
+            });
+
+            path.on("mouseover", function(e) {
+                d3.select(this).attr("fill-opacity", 0.35).attr("stroke-width", 3);
+                const sd = char.stages[radarState.stageIdx];
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${char.name} · ${char.mbti}</div>` +
+                          `<div>Stage: ${sd.stage} (Ch. ${sd.chapters})</div>` +
+                          `<div>Dominant: ${sd.dominant}</div>` +
+                          `<div style="margin-top:4px;color:#e9b885;font-size:0.78rem;">${sd.note}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = elParent.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("fill-opacity", 0.12).attr("stroke-width", 2);
+                tip.style("opacity", 0);
+            });
+
+            radarState.paths.push(path);
+            radarState.vertexGroups.push(vg);
+        });
+
+        radarState.angle = angle;
+        radarState.rScale = rScale;
+        radarState.cx = cx;
+        radarState.cy = cy;
+        radarState.lineGen = lineGen;
+
+        renderLegend(0);
+    }
+
+    function updateRadar(stageIdx) {
+        radarState.stageIdx = stageIdx;
+        const dims = EMBEDDED.dimensions;
+        const angle = radarState.angle;
+        const rScale = radarState.rScale;
+        const cx = radarState.cx, cy = radarState.cy;
+
+        EMBEDDED.characters.forEach((char, idx) => {
+            const values = dims.map(d => char.stages[stageIdx].dims[d]);
+            radarState.paths[idx]
+                .datum(values)
+                .transition()
+                .duration(DUR)
+                .attr("d", radarState.lineGen);
+
+            radarState.vertexGroups[idx].selectAll("circle")
+                .data(values)
+                .transition()
+                .duration(DUR)
+                .attr("cx", (v, i) => cx + rScale(v) * Math.cos(angle(i)))
+                .attr("cy", (v, i) => cy + rScale(v) * Math.sin(angle(i)));
+        });
+
+        renderLegend(stageIdx);
+    }
+
+    function renderLegend(stageIdx) {
+        const legend = d3.select("#radar-legend");
+        legend.selectAll("*").remove();
+        legend.append("h4").text("Character legend · 5 members");
+        EMBEDDED.characters.forEach((char, idx) => {
+            const sd = char.stages[stageIdx];
+            const item = legend.append("div").attr("class", "legend-item")
+                .attr("tabindex", "0")
+                .attr("role", "button")
+                .attr("aria-label", `${char.name} ${char.mbti} dominant ${sd.dominant}`)
+                .on("mouseover", function() {
+                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.35).attr("stroke-width", 3);
+                })
+                .on("mouseout", function() {
+                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.12).attr("stroke-width", 2);
+                })
+                .on("focus", function() {
+                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.35).attr("stroke-width", 3);
+                })
+                .on("blur", function() {
+                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.12).attr("stroke-width", 2);
+                });
+            item.append("span").attr("class", "swatch").style("background", char.color);
+            item.append("span").attr("class", "li-name").text(char.name);
+            item.append("span").attr("class", "li-mbti").text(char.mbti);
+            item.append("span").attr("class", "li-dom").text(sd.dominant);
+        });
+    }
+
+    // ============================================================
+    // 板块 2：维度演变折线图 small multiples
+    // ============================================================
+    function renderSmallMultiples() {
+        const grid = d3.select("#sm-grid");
+        grid.selectAll("*").remove();
+        const stages = EMBEDDED.stagesShort;
+        const pairs = EMBEDDED.dimPairs;
+
+        EMBEDDED.characters.forEach(char => {
+            const card = grid.append("div").attr("class", "sm-card");
+            card.append("h4").text(char.name);
+            card.append("span").attr("class", "sm-mbti").text(char.mbti);
+
+            const svg = card.append("svg").attr("viewBox", "0 0 240 160");
+            const margin = { top: 12, right: 12, bottom: 28, left: 28 };
+            const w = 240 - margin.left - margin.right;
+            const h = 160 - margin.top - margin.bottom;
+            const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+            const x = d3.scalePoint().domain(stages).range([0, w]).padding(0.5);
+            const y = d3.scaleLinear().domain([-8, 8]).range([h, 0]);
+
+            // 0 基线
+            g.append("line")
+                .attr("x1", 0).attr("x2", w)
+                .attr("y1", y(0)).attr("y2", y(0))
+                .attr("stroke", "var(--line)").attr("stroke-dasharray", "3,3");
+
+            // X 轴
+            g.append("g")
+                .attr("transform", `translate(0,${h})`)
+                .call(d3.axisBottom(x).tickSize(0))
+                .selectAll("text").style("font-size", "0.6rem").style("fill", "var(--ink-soft)");
+
+            // Y 轴
+            g.append("g")
+                .call(d3.axisLeft(y).ticks(4).tickSize(-w))
+                .selectAll("text").style("font-size", "0.6rem").style("fill", "var(--ink-soft)");
+            g.select(".domain").attr("stroke", "var(--line)");
+            g.selectAll(".tick line").attr("stroke", "var(--line)").attr("opacity", 0.4);
+
+            const lineGen = d3.line()
+                .x((d, i) => x(stages[i]))
+                .y(d => y(d));
+
+            pairs.forEach(pair => {
+                const diffs = char.stages.map(s => s.dims[pair.a] - s.dims[pair.b]);
+                g.append("path")
+                    .datum(diffs)
+                    .attr("d", lineGen)
+                    .attr("fill", "none")
+                    .attr("stroke", pair.color)
+                    .attr("stroke-width", 2);
+                diffs.forEach((d, i) => {
+                    g.append("circle")
+                        .attr("cx", x(stages[i]))
+                        .attr("cy", y(d))
+                        .attr("r", 2.5)
+                        .attr("fill", pair.color);
+                });
+            });
+
+            // 图例
+            const lg = card.append("div").attr("class", "sm-legend");
+            pairs.forEach(pair => {
+                const sp = lg.append("span");
+                sp.append("i").style("background", pair.color);
+                sp.append("text").text(pair.label);
+            });
+        });
+    }
+
+    // ============================================================
+    // 板块 3：阶段 × 维度热力图
+    // ============================================================
+    function renderHeatmap() {
+        const svg = d3.select("#heatmap-svg");
+        const el = document.getElementById("heatmap-svg");
+        const w = Math.max(el.clientWidth || 700, 580);
+        const marginLeft = 70, marginTop = 60, cellGap = 2;
+        const nStages = 4, nPairs = 4;
+        const nCols = nStages * nPairs;
+        const cellW = Math.max((w - marginLeft - 20) / nCols, 24);
+        const cellH = 34;
+        const h = marginTop + EMBEDDED.characters.length * (cellH + cellGap) + 20;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+        svg.selectAll("*").remove();
+
+        const stages = EMBEDDED.stagesShort;
+        const pairs = EMBEDDED.dimPairs;
+
+        // 颜色比例：差值绝对值 0-8
+        const colorScale = d3.scaleSequential(d3.interpolateYlOrRd).domain([0, 8]);
+
+        // 顶部阶段标签
+        stages.forEach((st, si) => {
+            const xStart = marginLeft + si * nPairs * (cellW + cellGap);
+            svg.append("text")
+                .attr("x", xStart + (nPairs * (cellW + cellGap) - cellGap) / 2)
+                .attr("y", marginTop - 28)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.82rem").style("font-weight", "bold")
+                .style("fill", "var(--accent-3)").text(st);
+            // 阶段分隔线
+            if (si > 0) {
+                svg.append("line")
+                    .attr("x1", xStart - cellGap).attr("x2", xStart - cellGap)
+                    .attr("y1", marginTop - 16).attr("y2", h - 10)
+                    .attr("stroke", "var(--line)").attr("stroke-width", 1.5);
+            }
+        });
+
+        // 维度对标签
+        pairs.forEach((pair, pi) => {
+            svg.append("text")
+                .attr("x", marginLeft + pi * (cellW + cellGap) + cellW / 2)
+                .attr("y", marginTop - 10)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.68rem").style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "var(--ink-soft)").text(pair.label);
+        });
+
+        const tip = d3.select("#heat-tip");
+        const elParent = el.parentElement;
+
+        // 数据单元格
+        EMBEDDED.characters.forEach((char, ri) => {
+            const yStart = marginTop + ri * (cellH + cellGap);
+            // 行标签
+            svg.append("text")
+                .attr("x", marginLeft - 8)
+                .attr("y", yStart + cellH / 2)
+                .attr("text-anchor", "end")
+                .attr("dominant-baseline", "middle")
+                .style("font-size", "0.82rem").style("font-weight", "600")
+                .style("fill", "var(--ink)").text(char.name);
+            svg.append("text")
+                .attr("x", marginLeft - 8)
+                .attr("y", yStart + cellH / 2 + 12)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.66rem").style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "var(--accent)").text(char.mbti);
+
+            stages.forEach((st, si) => {
+                const sd = char.stages[si];
+                pairs.forEach((pair, pi) => {
+                    const diff = sd.dims[pair.a] - sd.dims[pair.b];
+                    const absDiff = Math.abs(diff);
+                    const cx = marginLeft + (si * nPairs + pi) * (cellW + cellGap);
+                    const cell = svg.append("rect")
+                        .attr("class", "heat-cell")
+                        .attr("x", cx)
+                        .attr("y", yStart)
+                        .attr("width", cellW)
+                        .attr("height", cellH)
+                        .attr("fill", colorScale(absDiff))
+                        .attr("stroke", "#fff").attr("stroke-width", 1);
+
+                    // 差值数字
+                    svg.append("text")
+                        .attr("x", cx + cellW / 2)
+                        .attr("y", yStart + cellH / 2)
+                        .attr("text-anchor", "middle")
+                        .attr("dominant-baseline", "middle")
+                        .style("font-size", "0.68rem")
+                        .style("font-family", "JetBrains Mono, monospace")
+                        .style("font-weight", "600")
+                        .style("fill", absDiff > 4 ? "#fff" : "var(--ink)")
+                        .style("pointer-events", "none")
+                        .text((diff > 0 ? "+" : "") + diff);
+
+                    cell.on("mouseover", function(e) {
+                        tip.style("opacity", 1)
+                            .html(`<div class="tip-title">${char.name} · ${st}</div>` +
+                                  `<div>${pair.label} = ${pair.a}(${sd.dims[pair.a]}) − ${pair.b}(${sd.dims[pair.b]}) = <strong style="color:#e9b885;">${diff > 0 ? "+" : ""}${diff}</strong></div>` +
+                                  `<div style="margin-top:3px;color:#e9b885;font-size:0.76rem;">${sd.note}</div>`);
+                    })
+                    .on("mousemove", function(e) {
+                        const rect = elParent.getBoundingClientRect();
+                        tip.style("left", (e.clientX - rect.left + 14) + "px")
+                           .style("top", (e.clientY - rect.top - 10) + "px");
+                    })
+                    .on("mouseout", function() {
+                        tip.style("opacity", 0);
+                    });
+                });
+            });
+        });
+
+        // 颜色图例
+        const legendW = 180, legendH = 10;
+        const legendX = marginLeft, legendY = h - 6;
+        const legendG = svg.append("g").attr("transform", `translate(${legendX},${legendY})`);
+        const legendScale = d3.scaleLinear().domain([0, 8]).range([0, legendW]);
+        const ticks = [0, 2, 4, 6, 8];
+        ticks.forEach(t => {
+            legendG.append("rect")
+                .attr("x", legendScale(t)).attr("y", 0)
+                .attr("width", legendW / (ticks.length - 1))
+                .attr("height", legendH)
+                .attr("fill", colorScale(t))
+                .attr("opacity", 0.9);
+            legendG.append("text")
+                .attr("x", legendScale(t)).attr("y", legendH + 10)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.64rem").style("fill", "var(--ink-soft)")
+                .text(t);
+        });
+        legendG.append("text")
+            .attr("x", legendW + 8).attr("y", legendH / 2)
+            .attr("dominant-baseline", "middle")
+            .style("font-size", "0.68rem").style("fill", "var(--ink-soft)")
+            .text("Absolute dimension difference (darker = stronger preference)");
+    }
+
+    // ============================================================
+    // 板块 4：演变洞察
+    // ============================================================
+    function renderInsights() {
+        const list = d3.select("#insights-list");
+        list.selectAll("*").remove();
+        EMBEDDED.insights.forEach((text, idx) => {
+            // 加粗关键数字
+            const bolded = text
+                .replace(/([A-Z]\d+→[A-Z]\d+(?:,\s*[A-Z]\d+→[A-Z]\d+)?)/g, '<strong>$1</strong>')
+                .replace(/(14\s*年)/g, '<strong>$1</strong>')
+                .replace(/(第\s*30\s*回)/g, '<strong>$1</strong>')
+                .replace(/(ISFJ)/g, '<strong>$1</strong>')
+                .replace(/(ISTP)/g, '<strong>$1</strong>');
+            const box = list.append("div").attr("class", "insight-box");
+            box.append("span").attr("class", "ib-tag").text(`#${idx + 1}`);
+            box.append("span").html(bolded);
+        });
+    }
+
+    // ============================================================
+    // 初始化 + 事件绑定
+    // ============================================================
+    function init() {
+        initRadar();
+        renderSmallMultiples();
+        renderHeatmap();
+        renderInsights();
+
+        // 阶段切换按钮
+        document.querySelectorAll('.stage-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const stageIdx = parseInt(btn.dataset.stage, 10);
+                document.querySelectorAll('.stage-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-selected', 'false');
+                });
+                btn.classList.add('active');
+                btn.setAttribute('aria-selected', 'true');
+                updateRadar(stageIdx);
+            });
+        });
+
+        // 窗口缩放时重绘（防抖）
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                initRadar();
+                renderHeatmap();
+            }, 250);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
