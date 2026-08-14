@@ -3,7 +3,8 @@
 generate_csp.py — 全站 CSP（Content Security Policy）生成 / 注入 / 校验
 
 为 site/**/*.html 逐页生成并注入 <meta http-equiv="Content-Security-Policy">：
-  - script-src 'self' + d3js.org/cdnjs（外部脚本白名单，与 SRI 加固同源）
+  - script-src 'self' + d3js.org/cdnjs/gc.zgo.at（外部脚本白名单，与 SRI 加固同源；
+      gc.zgo.at 为 GoatCounter 计数脚本，W425 接入）
       + 该页全部内联 <script> 的 SHA-256 哈希（无 'unsafe-inline' / 'unsafe-eval'；
       全站 0 eval 已核；graph-explorer / mobile-index 的动态 onclick 与
       javascript: URL 已改事件绑定，脚本可严格哈希化）
@@ -12,7 +13,8 @@ generate_csp.py — 全站 CSP（Content Security Policy）生成 / 注入 / 校
       样式注入风险显著低于脚本，且全站 766 处 @font-face / 1636 处 style 属性
       哈希化不可维护）
   - img-src / font-src 'self'（全站资源本地化后无外部图片/字体）
-  - connect-src 'self'（dukou-engine 两页追加本地 RAG 引擎 127.0.0.1:8777）
+  - connect-src 'self'（dukou-engine 两页追加本地 RAG 引擎 127.0.0.1:8777；
+      全站追加 GoatCounter 计数端点 1273984347.goatcounter.com）
   - object-src 'none' · base-uri 'self' · form-action 'self' · frame-src 'none'
 
 用法：
@@ -38,8 +40,10 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 项目根
 SITE = os.path.join(ROOT, "site")
 
-EXTERNAL_SCRIPT_HOSTS = ["https://d3js.org", "https://cdnjs.cloudflare.com"]
+EXTERNAL_SCRIPT_HOSTS = ["https://d3js.org", "https://cdnjs.cloudflare.com", "https://gc.zgo.at"]
 RAG_ORIGIN = "http://127.0.0.1:8777"
+# GoatCounter 计数端点（W425 接入真实跨访客统计）：count.js 回传 PV 到此源
+GOATCOUNTER_COUNT_ORIGIN = "https://1273984347.goatcounter.com"
 # 开发模板（不入站、不入 sitemap）：不注入 CSP，避免模板占位内容干扰哈希门禁
 TEMPLATE_EXCLUDE = {"_template.html"}
 
@@ -74,9 +78,9 @@ def build_policy(html, needs_rag):
     parts.append("img-src 'self'")
     parts.append("font-src 'self'")
     if needs_rag:
-        parts.append("connect-src 'self' %s" % RAG_ORIGIN)
+        parts.append("connect-src 'self' %s %s" % (RAG_ORIGIN, GOATCOUNTER_COUNT_ORIGIN))
     else:
-        parts.append("connect-src 'self'")
+        parts.append("connect-src 'self' %s" % GOATCOUNTER_COUNT_ORIGIN)
     parts.append("object-src 'none'")
     parts.append("base-uri 'self'")
     parts.append("form-action 'self'")

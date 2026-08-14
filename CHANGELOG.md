@@ -4,9 +4,19 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W424），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W425），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.40（2026-08-14）：W425 GoatCounter 真实跨访客统计接入 — 全站 160 页注入 + CSP 白名单 + _headers 同步
+
+> **来源**：用户完成 GoatCounter 注册（site code `1273984347`），按 [访问统计方案](../../docs/00-导读/访问统计方案.md) 第 2-4 步把 W403 就绪的注入脚本落地，切换 localStorage 自建基线到真实跨访客统计。
+> - **执行（注入）**：`scripts/inject_goatcounter.py --site 1273984347` 全站 `site/**/*.html` 160 页 `</head>` 前注入 GoatCounter 计数脚本（幂等，0 重复）。
+> - **执行（CSP 白名单）**：`scripts/generate_csp.py` 外部脚本白名单 `EXTERNAL_SCRIPT_HOSTS` 追加 `https://gc.zgo.at`；新增 `GOATCOUNTER_COUNT_ORIGIN = "https://1273984347.goatcounter.com"`，`connect-src` 全站追加该计数端点——否则 W424 严格 CSP 会把 `//gc.zgo.at/count.js` 拦死、统计白注入。
+> - **执行（CSP 重生成）**：重跑 `generate_csp.py` 159 页（`_template.html` 按既有约定排除）·内联脚本哈希 680 个·`--check` 零漂移。
+> - **执行（平台层同步）**：`site/_headers` 的 Netlify/Cloudflare CSP 白名单同步加 `gc.zgo.at`（script-src）与 `1273984347.goatcounter.com`（connect-src）。
+> - **验证**：`verify_delivery.py` 核心全绿（CSP 校验 159 页 0 漂移·腐蚀/插件门禁 0 硬错误·数据漂移可比 47 页·sitemap 154 页一致·A1 导航 100/100·A1-A6 真实计数 611==611）。
+> - **状态**：已落地·待 commit/push（页脚 v2.3.40 W425）。
 
 ### v2.3.39（2026-08-12）：W424 对抗性审查修正与全仓整理 — A4 门禁校准 209·3D/EN 页修复·security 门禁修复·CI 文档同步·产物清理
 
