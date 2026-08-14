@@ -8,6 +8,14 @@
 
 ---
 
+## W437 英文站续译 batch15（2026-08-14·v2.3.52）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/business-model.html / intertextuality-network.html / risk-project.html / power-resources.html / cave-estate.html | W437 | v2.3.52 新增·并行 subagent 英文化 5 页（_validate_en.py 全过） |
+| site/sitemap.xml | W437 | v2.3.52 修改·补 5 个 en 页（192→197 页） |
+| site/**/*.html（5 页） | W437 | v2.3.52 修改·generate_csp.py 重生成 CSP（202 页·956 内联哈希） |
+
 ## W436 英文站续译 batch14（2026-08-14·v2.3.51）
 
 | 文件 | W | 说明 |

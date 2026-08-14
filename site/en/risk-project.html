@@ -1,0 +1,2661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-vc6yqghXRhttd7f7YIlpVSZp4OKF2V+eHjt6d0dqnPY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Risk Assessment &amp; Project Management · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        
+        
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        
+        
+        
+        
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        /* 表格 */
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+        }
+        table.data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.76rem;
+            font-weight: 600;
+        }
+        .pill-high { background: #f8d8d2; color: var(--accent); }
+        .pill-mid  { background: #fce8c8; color: var(--accent-3); }
+        .pill-low  { background: #d8e8d2; color: var(--accent-4); }
+        .pill-info { background: #d4e2ec; color: var(--accent-2); }
+        .icon-correct {
+            color: var(--accent-4);
+            font-weight: 700;
+        }
+        .icon-mid {
+            color: var(--accent-3);
+            font-weight: 700;
+        }
+        .icon-info {
+            color: var(--accent-2);
+            font-weight: 700;
+        }
+        /* 洞察列表 */
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 16px 18px;
+            margin: 16px 0;
+            font-size: 0.92rem;
+            color: var(--ink);
+            line-height: 1.85;
+        }
+        .insight-box .ib-label {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .insight-box strong { color: var(--ink); font-weight: 600; }
+        /* 角色卡片 */
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .char-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .char-card.c-tang { border-top-color: var(--accent); }
+        .char-card.c-wukong { border-top-color: var(--accent-2); }
+        .char-card.c-bajie { border-top-color: var(--accent-soft); }
+        .char-card.c-sha { border-top-color: var(--accent-4); }
+        .char-card.c-long { border-top-color: var(--accent-3); }
+        .char-card.c-guanyin { border-top-color: #a04060; }
+        .char-card.c-buddha { border-top-color: #4a3a6b; }
+        .char-card.c-jade { border-top-color: #8a7a3a; }
+        .char-card .char-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .char-card .char-mbti {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .char-card .char-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .char-card .char-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        /* 维度卡片 */
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .map-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .map-card.alt { border-left-color: var(--accent-4); }
+        .map-card.alt2 { border-left-color: var(--accent-3); }
+        .map-card .map-label {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .map-card.alt .map-label { color: var(--accent-4); }
+        .map-card.alt2 .map-label { color: var(--accent-3); }
+        .map-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .map-card .map-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .map-card .map-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 16px;
+            grid-column: 1 / -1;
+        }
+        .summary-card .map-label {
+            color: var(--accent);
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .summary-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--ink);
+        }
+        .summary-card .map-row {
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+        /* tooltip */
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 280px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .
+        .
+        .
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        /* axis 文字 */
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        .narrative {
+            font-size: 0.92rem;
+            line-height: 1.85;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .narrative strong { color: var(--ink); font-weight: 600; }
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        /* milestone list */
+        .milestone-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 12px;
+        }
+        .milestone-list li {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.9rem;
+        }
+        .milestone-list li:last-child { border-bottom: none; }
+        .milestone-list .ms-year {
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-weight: 600;
+        }
+        .milestone-list .ms-text strong { color: var(--ink); }
+        .milestone-list .ms-text .ms-chap {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin-top: 2px;
+        }
+        @media (max-width: 720px) {
+            
+            
+            
+            
+            .map-grid { grid-template-columns: 1fr; }
+            .char-grid { grid-template-columns: 1fr; }
+            table.data-table { font-size: 0.78rem; }
+            table.data-table th, table.data-table td { padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            
+            
+            
+            
+            .chart-block { padding: 12px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/risk-project.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Risk Assessment &amp; Project Management · Annotated Journey to the West</p>
+        <p class="kicker">H · Risk &amp; Project</p>
+        <h1>Risk Assessment &amp; Project Management · Annotated Journey to the West</h1>
+        <p class="subtitle">DATA-DRIVEN RISK ASSESSMENT &amp; PROJECT MANAGEMENT OF XIYOUJI</p>
+        <p class="tagline">From 81 tribulations to 5,048 scrolls — a living textbook of project management and risk governance.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="container">
+        <nav class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a>
+            <span class="sep">/</span>
+            <a href="index.html">EN Home</a>
+            <span class="sep">/</span>
+            <span class="current">Risk Assessment &amp; Project Management</span>
+        </nav>
+
+        <div class="notice">
+            This page is generated from the H-class &ldquo;Risk Assessment &amp; Project Management&rdquo; script and loads four JSON datasets: Risk Assessment / KPIs &amp; Milestones / MBTI Personality / Overall Statistics. All charts support hover tooltips.
+        </div>
+
+        <!-- 研究方法论 -->
+        <section class="section">
+            <h2 class="section-title">Introduction · A Three-Dimensional Lens on Project Risk</h2>
+            <div class="section-sub">INTRODUCTION · Three-Dimensional Risk Lens on the 14-Year Pilgrimage Project</div>
+            <p style="font-size:0.95rem;line-height:1.8;color:var(--ink);margin-bottom:14px;">
+                The pilgrimage in <em>Journey to the West</em> can be viewed as a long-term project spanning <strong>14 years</strong>, covering <strong>108,000 li</strong>, and enduring <strong>81 tribulations</strong>.
+                This page analyzes the <strong>project-management science</strong> behind this mythic narrative from three dimensions:
+                <strong style="color:var(--accent);">PMBOK Risk Assessment</strong> (5 risk categories &times; 10 major crises),
+                <strong style="color:var(--accent-2);">KPIs &amp; Milestones</strong> (7 KPIs all achieved · 8 milestones),
+                <strong style="color:var(--accent-4);">MBTI Team Profile</strong> (8 roles &times; 4 personality dimensions).
+            </p>
+
+            <div style="margin-bottom:18px;">
+                <span class="data-badge">4 JSON datasets</span>
+                <span class="data-badge">5 risk categories</span>
+                <span class="data-badge">10 individual risks</span>
+                <span class="data-badge">7 KPIs</span>
+                <span class="data-badge">8 milestones</span>
+                <span class="data-badge">8 MBTI roles</span>
+                <span class="data-badge">14-year project cycle</span>
+                <span class="data-badge">D3.js v7</span>
+                <span class="data-badge">fetch + EMBEDDED fallback</span>
+            </div>
+
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">DIMENSION 1</div>
+                    <div class="map-title">Risk Assessment</div>
+                    <div class="map-row">5 risk categories · monster attacks 58% (47/81 tribulations) · 10 individual crises · overall risk score 7.2 / 10 · medium-high.</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">DIMENSION 2</div>
+                    <div class="map-title">KPIs &amp; Milestones</div>
+                    <div class="map-row">7 KPIs all achieved (5 achieved / 1 medium / 1 informational) · 8 milestones across 14 years · delivered on time, on budget, and in scope.</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">DIMENSION 3</div>
+                    <div class="map-title">MBTI Personality Atlas</div>
+                    <div class="map-row">8 roles covering 8 MBTI types · average fit 8.25 · team lacks INTP/ENTJ · strong complementarity but missing critical thinking.</div>
+                </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+                Data source: four JSON outputs under the AD_H &ldquo;Risk Assessment &amp; Project Management&rdquo; scripts directory; if fetch fails the page automatically falls back to inline EMBEDDED data, and supports double-click opening via the file:// protocol.
+            </p>
+        </section>
+
+        <!-- KPI 卡片 -->
+        <div class="kpi-row" id="kpiRow">
+            <div class="kpi-card">
+                <div class="label">RISK · 5 Risk Categories</div>
+                <div class="value">5 categories</div>
+                <div class="desc">Monster attacks (58%) / Natural / Political / Temptation / Internal team</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">KPI · 7 Metrics</div>
+                <div class="value">7 / 7 achieved</div>
+                <div class="desc">5 achieved · 1 medium (13 backup calls) · 1 informational (1,200 alms stops)</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">MILESTONE · 8 Milestones</div>
+                <div class="value">14 years</div>
+                <div class="desc">Departs in Zhenguan 13 → returns in Zhenguan 27 · 8 key milestone nodes</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">MBTI · 8 Roles</div>
+                <div class="value">avg 8.25</div>
+                <div class="desc">8 MBTI types · 5 roles with perfect score 9 · Jade Emperor lowest at 6</div>
+            </div>
+        </div>
+
+        <!-- Section 1: Risk Assessment -->
+        <section class="section">
+            <h2 class="section-title">I · Risk Assessment · The 81-Tribulation Project Risk Map</h2>
+            <div class="section-sub">RISK ASSESSMENT · PMBOK Framework on 81 Tribulations</div>
+            <div class="definition" id="def-risk">
+                <strong>Definition:</strong> Following the PMBOK risk-management framework, the 81 tribulations are framed as project risks:
+                <strong>risk identification</strong> (5 categories) · <strong>probability assessment</strong> (high/medium/low) ·
+                <strong>impact assessment</strong> (severe/moderate/extreme) · <strong>response strategy</strong> (mitigate/accept/avoid).
+                Overall risk score 7.2 / 10 · medium-high · but effectively neutralized through the backup strategy.
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>Core conclusion:</strong> Monster attacks are the primary risk (58%) but can be reduced to manageable through backup calls;
+                internal team risk has the lowest probability (6%) but extreme impact (Wukong expelled · project halted);
+                temptation risk is rare (10%) but highly destructive · <strong style="color:var(--accent);">one failure ends the project</strong>;
+                political risk stems from cultural conflict and is resolved through travel permits; natural-environment risk is uncontrollable but moderate in impact · pass through directly.
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">Fig. 1 · Top 10 Individual Risks: Probability &times; Impact Scatter Plot</div>
+                <div class="chart-caption">X axis: probability (0-10) · Y axis: impact (0-10) · bubble size = score (prob&times;impact) · color = &radic;(prob&times;impact) from light to dark</div>
+                <svg id="chart-risk-scatter" class="chart-svg" width="100%" height="440"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;"></span>Low risk &radic;score &lt; 5</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#c8463a;"></span>Medium risk 5-7</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#7a1a1a;"></span>High risk &gt; 7</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent);"></span>Risk threshold line score=50</span>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">Fig. 2 · 5 Risk Categories: Count / Avg Probability / Avg Impact Grouped Bar Chart</div>
+                <div class="chart-caption">X axis: 5 risk categories · Y axis left: count · Y axis right: avg_probability / avg_impact (%) · three grouped bars</div>
+                <svg id="chart-category-bar" class="chart-svg" width="100%" height="420"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>count (tribulations)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>avg_probability (%)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>avg_impact (0-10 normalized)</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">5 Risk Categories — Detail Table</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="risk-cat-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Category</th>
+                            <th>English</th>
+                            <th>Count</th>
+                            <th>Probability</th>
+                            <th>Impact</th>
+                            <th>Response Strategy</th>
+                            <th>Representative Cases</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="insight-box">
+                <span class="ib-label">RISK INSIGHT · Key Insight</span>
+                <strong>The uneven distribution of risk categories</strong> reveals the nature of project risk:
+                <strong style="color:var(--accent);">Monster attacks</strong> account for 58% but are &ldquo;mitigable&rdquo; (resolved via backup);
+                <strong style="color:var(--accent-2);">Internal team risk</strong> has only 6% probability but &ldquo;extreme&rdquo; impact —
+                a classic <strong>low-probability, high-impact</strong> black-swan event (e.g., Wukong expelled at White Bone Demon · the Six-Eared Macaque);
+                <strong style="color:var(--accent-3);">Temptation risk</strong> is a <strong>&ldquo;single-veto&rdquo;</strong> risk ·
+                one failure ends the project (Womanland / Spider Cave). The three risks demand different response strategies:
+                <strong>mitigate</strong> (monsters) · <strong>avoid</strong> (temptation) · <strong>accept</strong> (nature).
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Risk Assessment Insights</h3>
+            <ol class="insights-list" id="risk-insights-list"></ol>
+        </section>
+
+        <!-- Section 2: KPIs and Milestones -->
+        <section class="section">
+            <h2 class="section-title alt-2">II · KPIs &amp; Milestones · Measuring a 14-Year Project's Success</h2>
+            <div class="section-sub">KPIs &amp; MILESTONES · Project Success Metrics</div>
+            <div class="definition" id="def-kpi">
+                <strong>Definition:</strong> Following PMBOK project management: the key performance indicators (KPIs) and milestones of the 14-year pilgrimage project.
+                <strong>Project scope</strong>: Chang'an to Vulture Peak, 108,000 li · 81 tribulations · 5,048 scrolls of scripture.
+                <strong>Project sponsors</strong>: Tathāgata (Sponsor) · Guanyin (Executive Director) · Tang Sanzang (Project Manager).
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>Project fundamentals:</strong> Project manager Tang Sanzang · technical lead Wukong · outreach Zhu Bajie · logistics Sha Wujing · transport White Dragon Horse ·
+                zero budget (alms + patrons) · 14-year schedule (Zhenguan 13-27).
+                <strong style="color:var(--accent-2);">7 KPIs all achieved</strong> · on time · on budget · in scope.
+                Key success factors: <strong>Guanyin's 13 rescues</strong> · <strong>the tightening band restraining Wukong</strong>.
+                Largest realized risk: Wukong expelled at White Bone Demon · but successfully resolved.
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">Fig. 3 · 14-Year Milestone Timeline (8 Key Nodes)</div>
+                <div class="chart-caption">X axis: project year 1-14 · Y axis: milestone sequence · node size = importance · red = crisis milestone · blue = team formation · green = project progress</div>
+                <svg id="chart-milestone-timeline" class="chart-svg" width="100%" height="380"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>Crisis milestone (team risk)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>Team-formation node</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>Project-progress node</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-3);"></span>Project completion</span>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">Fig. 4 · 7-KPI Completion Status Donut Chart</div>
+                <div class="chart-caption">Achieved (5 items · 71.4%) vs medium (1 item · 14.3%) vs informational (1 item · 14.3%) · center shows overall completion rate</div>
+                <svg id="chart-kpi-pie" class="chart-svg" width="100%" height="380"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>✓ Achieved (5 items)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>△ Medium (1 item · backup)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>— Informational (1 item · alms)</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">7-KPI Status Table</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="kpi-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>KPI</th>
+                            <th>Target</th>
+                            <th>Actual</th>
+                            <th>Status</th>
+                            <th>Linked Milestone</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">8 Milestones — Detail</h3>
+            <ul class="milestone-list" id="milestone-list"></ul>
+
+            <div class="insight-box">
+                <span class="ib-label">KPI INSIGHT · Key Insight</span>
+                <strong>The key to project success lies not in hard metrics but in soft power.</strong>
+                Six of the seven KPIs — hard metrics (progress / tribulations / scrolls / survival rate / schedule / backup calls) — were all achieved,
+                but the <strong style="color:var(--accent);">key success factor</strong> was &ldquo;<strong>Guanyin's timely rescue</strong>&rdquo; (13 times)
+                and &ldquo;<strong>the tightening band restraining Wukong</strong>&rdquo; —
+                the former an <strong>external resource-dispatch</strong> capability, the latter a <strong>core-talent management</strong> capability.
+                This reveals a project-management paradox: <strong>a zero-budget team completed a 14-year mega-project through resource dispatch and talent management</strong>.
+                The largest risk, &ldquo;<strong style="color:var(--accent-2);">Wukong expelled at White Bone Demon</strong>&rdquo;, materialized but was successfully resolved,
+                and the incident became a <strong>turning point in team building</strong>.
+                Lessons learned note: &ldquo;team building requires early integration; the core technology (Wukong) is irreplaceable; external help is a vital resource.&rdquo;
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">KPI &amp; Milestone Insights</h3>
+            <ol class="insights-list" id="kpi-insights-list"></ol>
+        </section>
+
+        <!-- Section 3: MBTI Personality Atlas -->
+        <section class="section">
+            <h2 class="section-title alt-3">III · MBTI Personality Atlas · The 8-Role Team Profile</h2>
+            <div class="section-sub">MBTI PERSONALITY ATLAS · Team Composition &amp; Personality Fit</div>
+            <div class="definition" id="def-mbti">
+                <strong>Definition:</strong> MBTI (Myers-Briggs Type Indicator): 4 dimensions and 8 preferences combine into 16 personality types.
+                <strong>E/I</strong> (Extraversion/Introversion) · <strong>S/N</strong> (Sensing/Intuition) ·
+                <strong>T/F</strong> (Thinking/Feeling) · <strong>J/P</strong> (Judging/Perceiving).
+                The 8 roles cover 8 MBTI types · average fit 8.25 · 5 roles score 9 · Jade Emperor lowest at 6.
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>Team profile:</strong> The 5 pilgrims = INFJ (Tang Sanzang) + ENTP (Wukong) + ESFP (Zhu Bajie) + ISFJ (Sha Wujing) + ISTP (White Dragon Horse) ·
+                covering 5 types with <strong style="color:var(--accent-4);">strong complementarity</strong>.
+                The 3 external overseers = ENFJ (Guanyin) + INTJ (Tathāgata) + ESTJ (Jade Emperor) ·
+                forming a triangle of &ldquo;<strong style="color:var(--accent);">idealistic vision</strong> + <strong>technical innovation</strong> + <strong>execution assurance</strong>&rdquo;.
+                The team lacks INTP (Logician) / ENTJ (Commander) · <strong style="color:var(--accent-2);">lacking strategic + critical thinking</strong> —
+                which explains the repeated decision failures (e.g., Wukong expelled at White Bone Demon).
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">Fig. 5 · 8-Role MBTI Fit Radar (4 Dimensions · 8 Overlapping Profiles)</div>
+                <div class="chart-caption">4 axes: E (Extraversion) / N (Intuition) / F (Feeling) / P (Perceiving) · values 0-10 · 8 overlapping role polygons · the fuller the shape, the more extraverted and intuitive</div>
+                <svg id="chart-mbti-radar" class="chart-svg" width="100%" height="540"></svg>
+                <div class="legend-row" id="mbti-legend">
+                    <span class="legend-item"><span class="legend-swatch" style="background:#c8463a;"></span>Tang Sanzang INFJ</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#3a6b8c;"></span>Wukong ENTP</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;"></span>Zhu Bajie ESFP</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#6B8E5A;"></span>Sha Wujing ISFJ</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#C9A063;"></span>White Dragon Horse ISTP</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#a04060;"></span>Guanyin ENFJ</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#4a3a6b;"></span>Tathāgata INTJ</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:#8a7a3a;"></span>Jade Emperor ESTJ</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8-Role MBTI Detail Table</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="mbti-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Role</th>
+                            <th>MBTI</th>
+                            <th>Type Name</th>
+                            <th>Fit</th>
+                            <th>E</th>
+                            <th>I</th>
+                            <th>S</th>
+                            <th>N</th>
+                            <th>T</th>
+                            <th>F</th>
+                            <th>J</th>
+                            <th>P</th>
+                            <th>Team Strength</th>
+                            <th>Weakness</th>
+                            <th>Career Fit</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8-Role Personality Cards</h3>
+            <div class="char-grid" id="mbti-char-grid"></div>
+
+            <div class="insight-box">
+                <span class="ib-label">MBTI INSIGHT · Key Insight</span>
+                <strong>The two sides of team complementarity.</strong>
+                The 8 roles cover 8 MBTI types — seemingly highly diverse, yet with a <strong style="color:var(--accent);">structural absence</strong>:
+                <strong>No INTP (Logician)</strong> — no one can deliver purely rational critique, so decisions are repeatedly swayed by emotion;
+                <strong>No ENTJ (Commander)</strong> — no forceful strategic command; Tang Sanzang is project manager (INFJ) but lacks command temperament,
+                and Wukong (ENTP) is agile but anti-authority and unwilling to take command.
+                These two missing MBTI types are <strong style="color:var(--accent-2);">the cognitive root of the project's decision failures</strong> —
+                &ldquo;Wukong expelled at White Bone Demon&rdquo; could have been avoided from an INTJ perspective,
+                and &ldquo;the forced marriage in Womanland&rdquo; should have been avoided outright from an INTP perspective. The team's &ldquo;<strong>complementarity</strong>&rdquo; instead became
+                a &ldquo;<strong>structural blind spot</strong>&rdquo;.
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">MBTI Personality Insights</h3>
+            <ol class="insights-list" id="mbti-insights-list"></ol>
+        </section>
+
+        <!-- 综合结论 -->
+        <section class="section">
+            <h2 class="section-title">IV · Synthesis · The Cognitive Architecture of Project Success</h2>
+            <div class="section-sub">SYNTHESIS · The Cognitive Architecture of Project Success</div>
+
+            <p style="font-size:0.95rem;line-height:1.85;color:var(--ink);margin-bottom:18px;">
+                Viewed across the three dimensions, the pilgrimage project in <em>Journey to the West</em> presents a <strong>counterintuitive model of success</strong>:
+                an overall risk score of 7.2 (medium-high) · all 7 KPIs achieved · 14 years completed on schedule · all five pilgrims attain Buddhahood.
+                This cognitive architecture of success rests on <strong>three complementary mechanisms</strong>:
+                <strong style="color:var(--accent);">risk mitigation</strong> (the backup strategy) ·
+                <strong style="color:var(--accent-2);">talent constraint</strong> (the tightening band) ·
+                <strong style="color:var(--accent-4);">personality complementarity</strong> (5 MBTI types collaborating).
+                Yet a <strong>structural blind spot</strong> remains — the lack of INTP/ENTJ causes frequent decision failures,
+                as confirmed by &ldquo;<strong>Wukong expelled at White Bone Demon</strong>&rdquo; (the largest risk, realized).
+            </p>
+
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">FINDING 1 · Risk Structure</div>
+                    <div class="map-title">Frequent monster attacks · but mitigable</div>
+                    <div class="map-row">47/81 tribulations are monster attacks (58%), but they are effectively neutralized through the backup strategy (Guanyin's 13 rescues). The true black swan is the 6%-probability internal team risk.</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">FINDING 2 · Project Success</div>
+                    <div class="map-title">Zero budget · 14 years · all KPIs achieved</div>
+                    <div class="map-row">No cash budget, supported by 1,200 alms stops + patron donations; 14 years completed on schedule, all 7 KPIs achieved. The key lies in resource dispatch (Guanyin) and core-talent management (the tightening band restraining Wukong).</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">FINDING 3 · Team Profile</div>
+                    <div class="map-title">8 complementary MBTI types · but missing INTP/ENTJ</div>
+                    <div class="map-row">8 roles covering 8 MBTI types, avg fit 8.25, 5 with perfect scores. But missing strategic command (ENTJ) and logical critique (INTP) — the cognitive root of decision failures.</div>
+                </div>
+                <div class="summary-card">
+                    <div class="map-label">META INSIGHT</div>
+                    <div class="map-title">The essence of project management: risk governance &times; talent governance &times; cognitive governance</div>
+                    <div class="map-row">
+                        The three dimensions converge on a deeper conclusion: the project's success lies not in <strong>eliminating risk</strong>
+                        but in <strong style="color:var(--accent);">governing risk</strong> —
+                        monster attacks are mitigated through backup (risk mitigation),
+                        team splits are restrained by the tightening band (talent governance),
+                        and decision failures are countered by 5-type MBTI complementarity (cognitive diversity).
+                        At the same time, &ldquo;<strong>missing INTP/ENTJ</strong>&rdquo; reveals the <strong style="color:var(--accent-2);">limits of cognitive complementarity</strong> —
+                        complementarity does not mean no blind spots, and diversity does not mean no weaknesses. This is the deepest lesson of <em>Journey to the West</em> as a living textbook of project management.
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Overall Project Insights (4 Findings)</h3>
+            <ol class="insights-list" id="overall-insights-list"></ol>
+        </section>
+    </div>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/07-学以致用/危机应对.md">Crisis Response (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/risk-project.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<!-- FILE_INDEX: risk-project.html | W313-V3 | footer-cross 补全 -->
+    <!-- CHANGELOG: v2.2.65 W313 V3 跨页面导航增强 -->
+
+    <!-- ===== EMBEDDED FALLBACK DATA ===== -->
+    <!--
+        本页所有 JSON 数据均嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback。
+        在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据。
+        在 http(s):// 协议下打开时，优先 fetch ../../scripts/output/data/*.json。
+        数据源：scripts/AD_H_Risk Assessment与项目管理/ 生成的 4 份 JSON。
+    -->
+    <script>
+    const EMBEDDED = {
+        risk: {
+            "concept_name": "Pilgrimage Risk Assessment",
+            "english_name": "Pilgrimage Risk Assessment",
+            "definition": "Following the PMBOK risk-management framework: risk identification / probability assessment / impact assessment / response strategy, framing the 81 tribulations as project risks",
+            "risk_categories": [
+                {"category": "Monster Attack Risk", "english_name": "Monster Attack Risk", "count": 47, "probability": "High (58% of tribulations)", "impact": "Severe (team scattered / Tang Sanzang captured)", "response_strategy": "Mitigate: Wukong fights + backup calls", "representative_cases": ["White Bone Demon", "Red Boy", "Yellow-Robe Demon", "Gold and Silver Horn"]},
+                {"category": "Environmental Risk", "english_name": "Environmental Risk", "count": 9, "probability": "Medium (11%)", "impact": "Moderate (delays / resource drain)", "response_strategy": "Accept: pass through directly or detour", "representative_cases": ["Flaming Mountain", "Tongtian River", "Flowing Sands River", "Thorn Ridge"]},
+                {"category": "Political / Diplomatic Risk", "english_name": "Political Risk", "count": 12, "probability": "Medium (15%)", "impact": "Severe (misunderstood by kings / risk of execution)", "response_strategy": "Mitigate: travel permits + disguise", "representative_cases": ["Cheshi Kingdom", "Biqiu Kingdom", "Miefa Kingdom", "Yuhua Prefecture"]},
+                {"category": "Temptation / Moral Risk", "english_name": "Temptation Risk", "count": 8, "probability": "Medium (10%)", "impact": "Extreme (breaks the pilgrimage vow)", "response_strategy": "Avoid: refuse directly or detour", "representative_cases": ["Womanland", "Spider Cave", "Bottomless Cave", "Four Sages Testing the Mind"]},
+                {"category": "Internal Team Risk", "english_name": "Internal Team Risk", "count": 5, "probability": "Low (6%)", "impact": "Extreme (team split)", "response_strategy": "Mitigate: Guanyin mediation + the tightening band", "representative_cases": ["Wukong expelled at White Bone Demon", "Six-Eared Macaque", "True vs. False Tang Sanzang"]}
+            ],
+            "top_risks": [
+                {"rank": 1, "risk": "Wukong expelled at White Bone Demon", "probability": 8, "impact": 10, "score": 80},
+                {"rank": 2, "risk": "Six-Eared Macaque team split", "probability": 4, "impact": 10, "score": 40},
+                {"rank": 3, "risk": "Three demons besiege at Lion-Camel Ridge", "probability": 6, "impact": 9, "score": 54},
+                {"rank": 4, "risk": "Womanland queen's forced marriage", "probability": 7, "impact": 8, "score": 56},
+                {"rank": 5, "risk": "Flaming Mountain without the Palm-Leaf Fan", "probability": 6, "impact": 8, "score": 48},
+                {"rank": 6, "risk": "Red Boy's Samadhi Fire", "probability": 7, "impact": 8, "score": 56},
+                {"rank": 7, "risk": "Yellow-Robe Demon disguises to capture Tang Sanzang", "probability": 6, "impact": 9, "score": 54},
+                {"rank": 8, "risk": "Yellow-Brow Demon at Little Thunderclap Temple", "probability": 5, "impact": 9, "score": 45},
+                {"rank": 9, "risk": "Vajra Ring captures weapons at Jindou Mountain", "probability": 6, "impact": 7, "score": 42},
+                {"rank": 10, "risk": "Drowning in Tongtian River", "probability": 4, "impact": 9, "score": 36}
+            ],
+            "risk_matrix": {
+                "high_probability_high_impact": ["Wukong expelled at White Bone Demon", "Red Boy's Samadhi Fire"],
+                "high_probability_low_impact": ["Drowning in Tongtian River", "Lost at Thorn Ridge"],
+                "low_probability_high_impact": ["Six-Eared Macaque", "Womanland forced marriage"],
+                "low_probability_low_impact": ["minor lesser demons"],
+                "overall_risk_score": 7.2,
+                "risk_management_verdict": "Medium-high · but effectively neutralized through the backup strategy · the project ultimately succeeds"
+            },
+            "risk_insights": [
+                "Monster attacks are the primary risk (58%) but can be reduced to manageable through backup calls",
+                "Internal team risk has the lowest probability but the most severe impact (expelling Wukong)",
+                "Temptation risk is rare but destructive · one failure ends the project",
+                "Political risk mostly stems from cultural conflict, resolved via travel permits",
+                "Natural-environment risk is uncontrollable but moderate in impact · pass through directly"
+            ]
+        },
+        kpi: {
+            "concept_name": "Pilgrimage KPIs and Milestones",
+            "english_name": "KPIs and Milestones",
+            "definition": "Following PMBOK project management: key performance indicators and milestones of the 14-year pilgrimage project",
+            "project_basics": {
+                "project_name": "Western Pilgrimage Strategic Project",
+                "project_sponsor": "Tathāgata (Sponsor) + Guanyin (Executive Director)",
+                "project_manager": "Tang Sanzang (Project Manager)",
+                "project_team": "Wukong (Technical Lead) + Zhu Bajie (Outreach) + Sha Wujing (Logistics) + White Dragon Horse (Transport)",
+                "project_duration": "14 years",
+                "project_budget": "No cash budget · supported by alms + patrons",
+                "project_scope": "From Chang'an to Vulture Peak · 108,000 li · 81 tribulations"
+            },
+            "kpis": [
+                {"kpi_name": "Completion progress", "target": "100%", "actual": "100%", "status": "✓ Achieved", "milestone": "Chapter 100 · scriptures obtained at Vulture Peak · conferred Buddhist titles"},
+                {"kpi_name": "Tribulation count", "target": "81 tribulations", "actual": "81 tribulations", "status": "✓ Achieved", "milestone": "Fall into Tongtian River completes the 81st tribulation"},
+                {"kpi_name": "Scroll count", "target": "5,048 scrolls", "actual": "5,048 scrolls", "status": "✓ Achieved", "milestone": "Scriptures taken from the Vulture Peak library · Ananda and Kasyapa solicit bribes (HR bribery risk)"},
+                {"kpi_name": "Team survival rate", "target": "100%", "actual": "100%", "status": "✓ Achieved", "milestone": "All five attain Buddhahood / titles"},
+                {"kpi_name": "Schedule", "target": "14 years", "actual": "14 years", "status": "✓ Achieved", "milestone": "Departs in Zhenguan 13 · returns in Zhenguan 27"},
+                {"kpi_name": "Alms-begging stops", "target": "Not set", "actual": "~1,200 times", "status": "— Informational", "milestone": "1-2 meals daily · begging along the way"},
+                {"kpi_name": "Backup calls", "target": "Not set", "actual": "13 times (external help)", "status": "△ Medium", "milestone": "Primary helper: Guanyin (3 times)"}
+            ],
+            "milestones": [
+                {"year": "1", "milestone": "Departure · Zhenguan 13", "chapter": "Chapter 12"},
+                {"year": "2", "milestone": "Recruit Wukong · recruit White Dragon Horse", "chapter": "Chapters 14/15"},
+                {"year": "3", "milestone": "Recruit Zhu Bajie · recruit Sha Wujing", "chapter": "Chapters 18/22"},
+                {"year": "5", "milestone": "White Bone Demon · the team's first crisis", "chapter": "Chapter 27"},
+                {"year": "7", "milestone": "Flaming Mountain · project halfway", "chapter": "Chapters 59-61"},
+                {"year": "10", "milestone": "Lion-Camel Ridge · hardest trial", "chapter": "Chapters 74-77"},
+                {"year": "13", "milestone": "Reach Vulture Peak · obtain scriptures", "chapter": "Chapter 98"},
+                {"year": "14", "milestone": "Return to Chang'an · confer titles · project complete", "chapter": "Chapter 100"}
+            ],
+            "project_summary": {
+                "overall_status": "✓ Successfully completed",
+                "on_time": true,
+                "on_budget": true,
+                "on_scope": true,
+                "key_success_factor": "Guanyin's timely rescue (13 times) · the tightening band restraining Wukong",
+                "key_risk_realized": "Wukong expelled at White Bone Demon (largest risk) · but successfully resolved",
+                "lessons_learned": "Team building requires early integration · core technology (Wukong) is irreplaceable · external help is a vital resource"
+            }
+        },
+        mbti: {
+            "concept_name": "MBTI Personality Atlas",
+            "english_name": "MBTI Personality Atlas",
+            "definition": "MBTI (Myers-Briggs Type Indicator): 4 dimensions and 8 preferences combine into 16 personality types",
+            "mbti_dimensions": [
+                {"dimension": "E/I", "full": "Extraversion/Introversion", "description": "Energy source: outer world vs inner world"},
+                {"dimension": "S/N", "full": "Sensing/Intuition", "description": "Information gathering: concrete detail vs abstract possibility"},
+                {"dimension": "T/F", "full": "Thinking/Feeling", "description": "Decision-making: logical analysis vs values/feeling"},
+                {"dimension": "J/P", "full": "Judging/Perceiving", "description": "Lifestyle: planned decisiveness vs flexible openness"}
+            ],
+            "character_mbti": [
+                {"character": "Tang Sanzang", "mbti_type": "INFJ", "type_name": "Advocate", "fit_score": 9, "dimensions": {"E": 3, "I": 7, "S": 4, "N": 6, "T": 3, "F": 7, "J": 8, "P": 2}, "core_traits": ["Idealistic", "Steadfast faith", "Prone to inner turmoil", "Compassionate"], "strength_in_team": "Guardian of the project vision", "weakness": "Overly trusting · easily deceived by demons", "career_fit": "Religious leader / Educator / Counselor"},
+                {"character": "Sun Wukong", "mbti_type": "ENTP", "type_name": "Debater", "fit_score": 9, "dimensions": {"E": 7, "I": 3, "S": 3, "N": 7, "T": 7, "F": 3, "J": 2, "P": 8}, "core_traits": ["Brilliant intellect", "Challenges authority", "Anti-bureaucratic", "Adaptable"], "strength_in_team": "Technical core · problem solver", "weakness": "Quick-tempered · resists restraint · needs the tightening band", "career_fit": "Entrepreneur / Tech innovator / Lawyer"},
+                {"character": "Zhu Bajie", "mbti_type": "ESFP", "type_name": "Entertainer", "fit_score": 8, "dimensions": {"E": 8, "I": 2, "S": 7, "N": 3, "T": 2, "F": 8, "J": 2, "P": 8}, "core_traits": ["Lives in the moment", "Mood-maker", "Food, drink and pleasure", "Quick to quit"], "strength_in_team": "Team lubricant · external liaison", "weakness": "Weak execution · greedy · easily tempted", "career_fit": "Entertainment / Sales / Livestream host"},
+                {"character": "Sha Wujing", "mbti_type": "ISFJ", "type_name": "Defender", "fit_score": 9, "dimensions": {"E": 2, "I": 8, "S": 8, "N": 2, "T": 4, "F": 6, "J": 8, "P": 2}, "core_traits": ["Loyal and reliable", "Executes quietly", "Logistics support", "Inexpressive"], "strength_in_team": "Perfectionist executor · steadies morale", "weakness": "Lacks innovation · passive responder", "career_fit": "Administration / Nurse / Teacher / Logistics"},
+                {"character": "White Dragon Horse", "mbti_type": "ISTP", "type_name": "Virtuoso", "fit_score": 7, "dimensions": {"E": 2, "I": 8, "S": 7, "N": 3, "T": 7, "F": 3, "J": 3, "P": 7}, "core_traits": ["Quiet and diligent", "Acts at critical moments", "Hands-on skill", "Low-key"], "strength_in_team": "Silent expert · saves the day at critical moments", "weakness": "Low contribution visibility · easily overlooked", "career_fit": "Engineer / Mechanic / Operative"},
+                {"character": "Guanyin", "mbti_type": "ENFJ", "type_name": "Protagonist", "fit_score": 9, "dimensions": {"E": 7, "I": 3, "S": 4, "N": 6, "T": 3, "F": 7, "J": 7, "P": 3}, "core_traits": ["Idealism + leadership", "Skilled at persuasion", "Project executive director"], "strength_in_team": "External coordinator · key rescuer", "weakness": "Overly tolerant (e.g., Red Boy)", "career_fit": "NGO leader / Diplomat"},
+                {"character": "Tathāgata", "mbti_type": "INTJ", "type_name": "Architect", "fit_score": 9, "dimensions": {"E": 2, "I": 8, "S": 2, "N": 8, "T": 8, "F": 2, "J": 9, "P": 1}, "core_traits": ["Strategic thinking", "Holistic control", "Project sponsor", "Aloof"], "strength_in_team": "Strategist · resource dispatcher", "weakness": "Too detached · does not intervene directly", "career_fit": "Corporate strategist / Scientist / Philosopher"},
+                {"character": "Jade Emperor", "mbti_type": "ESTJ", "type_name": "Executive", "fit_score": 6, "dimensions": {"E": 6, "I": 4, "S": 7, "N": 3, "T": 6, "F": 4, "J": 9, "P": 1}, "core_traits": ["Maintains order", "Traditionalist", "Authoritarian", "Conservative"], "strength_in_team": "Nominal overseer", "weakness": "Lacks strategic vision · reactive", "career_fit": "Traditional enterprise CEO / Government official"}
+            ],
+            "mbti_stats": {
+                "total_characters": 8,
+                "avg_fit_score": 8.25,
+                "best_fit": "Tang Sanzang INFJ / Wukong ENTP / Sha Wujing ISFJ / Guanyin ENFJ / Tathāgata INTJ (all 9)",
+                "worst_fit": "Jade Emperor ESTJ (6 · overly conservative)",
+                "team_composition": "INFJ + ENTP + ESFP + ISFJ + ISTP · 5 types · strong complementarity",
+                "missing_types": "INTP (Logician) / ENTJ (Commander) · team lacks strategic + critical thinking"
+            }
+        },
+        summary: {
+            "concept_name": "Risk & Project Overall Statistics",
+            "total_concepts": 3,
+            "concept_list": ["Risk Assessment", "KPIs and Milestones", "MBTI Personality Atlas"],
+            "total_data_points": 20,
+            "key_findings": [
+                "5 risk categories · monster attacks 58% · reducible to manageable via backup",
+                "All 7 KPIs achieved · the 14-year project completed successfully",
+                "8 roles, avg MBTI fit 8.25 · team lacks INTP/ENTJ",
+                "The essence of project management: resolving project risk through Guanyin's rescues + the tightening band"
+            ]
+        }
+    };
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('[fallback] ' + path + ' → embedded data:', e.message);
+            return fallback;
+        }
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== Helpers =====
+    // 解析概率字符串中的百分比
+    function parseProb(s) {
+        const m = String(s).match(/(\d+)%/);
+        return m ? parseInt(m[1]) : 0;
+    }
+    // 解析影响等级为 0-10 数值
+    function parseImpact(s) {
+        if (s.indexOf('Extreme') >= 0) return 10;
+        if (s.indexOf('Severe') >= 0) return 8;
+        if (s.indexOf('Moderate') >= 0) return 5;
+        if (s.indexOf('Low') >= 0) return 3;
+        return 5;
+    }
+    function statusPill(status) {
+        if (status.indexOf('Achieved') >= 0) return '<span class="pill pill-high">' + status + '</span>';
+        if (status.indexOf('Medium') >= 0) return '<span class="pill pill-mid">' + status + '</span>';
+        if (status.indexOf('Informational') >= 0) return '<span class="pill pill-info">' + status + '</span>';
+        return '<span class="pill">' + status + '</span>';
+    }
+
+    // ===== Main render =====
+    async function main() {
+        const baseUrl = '../../scripts/output/data/';
+        const [risk, kpi, mbti, summary] = await Promise.all([
+            loadJson(baseUrl + 'risk_assessment.json', EMBEDDED.risk),
+            loadJson(baseUrl + 'kpi_milestones.json', EMBEDDED.kpi),
+            loadJson(baseUrl + 'mbti_personality.json', EMBEDDED.mbti),
+            loadJson(baseUrl + 'risk_project_summary.json', EMBEDDED.summary)
+        ]);
+        window.__lastData = { risk, kpi, mbti, summary };
+
+        // Section 1: Risk Assessment
+        renderRiskScatter(risk);
+        renderCategoryBar(risk);
+        renderRiskCatTable(risk);
+        renderRiskInsights(risk);
+
+        // Section 2: KPIs and Milestones
+        renderMilestoneTimeline(kpi);
+        renderKpiPie(kpi);
+        renderKpiTable(kpi);
+        renderMilestoneList(kpi);
+        renderKpiInsights(kpi);
+
+        // Section 3: MBTI Personality Atlas
+        renderMbtiRadar(mbti);
+        renderMbtiTable(mbti);
+        renderMbtiCharCards(mbti);
+        renderMbtiInsights(mbti);
+
+        // Section 4: 综合结论
+        renderOverallInsights(summary);
+    }
+
+    // ===== Section 1.1: 风险概率×影响散点图 =====
+    function renderRiskScatter(data) {
+        const svg = d3.select('#chart-risk-scatter');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 440;
+        const m = {top: 40, right: 40, bottom: 60, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const risks = data.top_risks;
+
+        const x = d3.scaleLinear().domain([0, 10]).range([0, w]);
+        const y = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // 颜色 = sqrt(prob × impact)
+        const maxSqrt = d3.max(risks, d => Math.sqrt(d.probability * d.impact));
+        const colorScale = d3.scaleLinear()
+            .domain([0, maxSqrt / 2, maxSqrt])
+            .range(['#e9b885', '#c8463a', '#7a1a1a']);
+        const rScale = d3.scaleSqrt().domain([0, 80]).range([0, 26]);
+
+        // 网格
+        g.append('g').selectAll('line.grid')
+            .data(x.ticks(10))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', d => x(d)).attr('x2', d => x(d))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '2,3');
+        g.append('g').selectAll('line.gridy')
+            .data(y.ticks(10))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '2,3');
+
+        // 风险阈值线 score = 50 (即 prob*impact = 50, y = 50/x)
+        const thresholdData = d3.range(0.5, 10.5, 0.1).map(px => ({px, py: 50 / px}));
+        const line = d3.line()
+            .x(d => x(d.px))
+            .y(d => y(d.py))
+            .curve(d3.curveMonotoneX);
+        g.append('path')
+            .datum(thresholdData)
+            .attr('fill', 'none')
+            .attr('stroke', '#c8463a')
+            .attr('stroke-width', 1.5)
+            .attr('stroke-dasharray', '6,4')
+            .attr('opacity', 0.7)
+            .attr('d', line);
+        g.append('text')
+            .attr('x', x(9.5)).attr('y', y(50 / 9.5) - 8)
+            .attr('text-anchor', 'end')
+            .style('font-size', '10px')
+            .style('fill', '#c8463a')
+            .style('font-weight', '600')
+            .text('Risk threshold score=50');
+
+        // 坐标轴
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(10));
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(10));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 44)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#c8463a')
+            .text('probability (0-10)');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#c8463a')
+            .text('impact (0-10)');
+
+        // 散点
+        g.selectAll('.risk-dot')
+            .data(risks).enter().append('circle')
+            .attr('class', 'risk-dot')
+            .attr('cx', d => x(d.probability))
+            .attr('cy', d => y(d.impact))
+            .attr('r', d => rScale(d.score))
+            .attr('fill', d => colorScale(Math.sqrt(d.probability * d.impact)))
+            .attr('fill-opacity', 0.7)
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>#${d.rank} · ${d.risk}</strong><br>` +
+                    `Probability: ${d.probability} / 10<br>` +
+                    `Impact: ${d.impact} / 10<br>` +
+                    `Risk score: ${d.score} (prob × impact)<br>` +
+                    `√score：${Math.sqrt(d.score).toFixed(2)}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 标签（rank + 名称简短）
+        g.selectAll('.risk-label')
+            .data(risks).enter().append('text')
+            .attr('class', 'risk-label')
+            .attr('x', d => x(d.probability))
+            .attr('y', d => y(d.impact) - rScale(d.score) - 4)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10px')
+            .style('font-weight', '600')
+            .style('fill', '#23201A')
+            .text(d => '#' + d.rank);
+    }
+
+    // ===== Section 1.2: 5 类别分组条形图 =====
+    function renderCategoryBar(data) {
+        const svg = d3.select('#chart-category-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 420;
+        const m = {top: 40, right: 60, bottom: 80, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const cats = data.risk_categories.map(c => ({
+            name: c.category,
+            count: c.count,
+            prob: parseProb(c.probability),
+            impact: parseImpact(c.impact)
+        }));
+
+        const x0 = d3.scaleBand().domain(cats.map(d => d.name)).range([0, w]).padding(0.25);
+        const x1 = d3.scaleBand().domain(['count', 'prob', 'impact']).range([0, x0.bandwidth()]).padding(0.08);
+        const yL = d3.scaleLinear().domain([0, d3.max(cats, d => d.count) * 1.15]).range([h, 0]);
+        const yR = d3.scaleLinear().domain([0, 100]).range([h, 0]);
+
+        // 网格
+        g.append('g').selectAll('line.grid')
+            .data(yL.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => yL(d)).attr('y2', d => yL(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // 坐标轴
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x0).tickSize(0).tickPadding(10))
+            .selectAll('text')
+            .style('font-size', '11px')
+            .call(wrapText, 12);
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(yL).ticks(5));
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(${w},0)`)
+            .call(d3.axisRight(yR).ticks(5).tickFormat(d => d + '%'));
+
+        // 轴标签
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#c8463a')
+            .text('count (tribulations)');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h / 2).attr('y', w + 52)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#3a6b8c')
+            .text('avg_probability / avg_impact (%)');
+
+        const colors = {
+            'count': '#c8463a',
+            'prob': '#3a6b8c',
+            'impact': '#6B8E5A'
+        };
+        const labels = {
+            'count': 'Count',
+            'prob': 'Avg probability',
+            'impact': 'Avg impact'
+        };
+        const yMaps = {
+            'count': yL,
+            'prob': yR,
+            'impact': d => yR(d * 10)  // impact 0-10 → 0-100%
+        };
+
+        const groups = g.selectAll('.cat-group')
+            .data(cats).enter().append('g')
+            .attr('class', 'cat-group')
+            .attr('transform', d => `translate(${x0(d.name)},0)`);
+
+        groups.selectAll('rect')
+            .data(d => ['count', 'prob', 'impact'].map(k => ({
+                key: k, value: d[k], cat: d
+            })))
+            .enter().append('rect')
+            .attr('x', d => x1(d.key))
+            .attr('y', d => yMaps[d.key](d.value))
+            .attr('width', x1.bandwidth())
+            .attr('height', d => h - yMaps[d.key](d.value))
+            .attr('fill', d => colors[d.key])
+            .attr('stroke', '#fff').attr('stroke-width', 1)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                const display = d.key === 'count' ? d.value + ' tribulations'
+                    : (d.key === 'prob' ? d.value + '%' : d.value + ' / 10');
+                tooltip.show(
+                    `<strong>${d.cat.name}</strong><br>` +
+                    `${labels[d.key]}：<strong>${display}</strong><br>` +
+                    `Raw count: ${d.cat.count} / 81 tribulations`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 柱顶数值
+        groups.selectAll('.bar-val')
+            .data(d => ['count', 'prob', 'impact'].map(k => ({
+                key: k, value: d[k]
+            })))
+            .enter().append('text')
+            .attr('class', 'bar-val')
+            .attr('x', d => x1(d.key) + x1.bandwidth() / 2)
+            .attr('y', d => yMaps[d.key](d.value) - 4)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10px')
+            .style('fill', '#23201A')
+            .style('font-weight', '600')
+            .text(d => d.key === 'count' ? d.value : (d.key === 'prob' ? d.value + '%' : d.value));
+    }
+
+    // wrap text helper
+    function wrapText(selection, maxLen) {
+        selection.each(function() {
+            const t = d3.select(this);
+            const text = t.text();
+            if (text.length > maxLen) {
+                t.text(text.substring(0, maxLen) + '…');
+            }
+        });
+    }
+
+    function renderRiskCatTable(data) {
+        const tbody = d3.select('#risk-cat-table tbody');
+        const rows = tbody.selectAll('tr').data(data.risk_categories).enter().append('tr');
+        rows.append('td').text((d, i) => i + 1);
+        rows.append('td').html(d => '<strong>' + d.category + '</strong>');
+        rows.append('td').text(d => d.english_name);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.count + '</strong>');
+        rows.append('td').html(d => {
+            const lvl = d.probability.indexOf('High') >= 0 ? 'pill-high' : (d.probability.indexOf('Low') >= 0 ? 'pill-low' : 'pill-mid');
+            return '<span class="pill ' + lvl + '">' + d.probability + '</span>';
+        });
+        rows.append('td').html(d => {
+            const lvl = d.impact.indexOf('Extreme') >= 0 ? 'pill-high' : (d.impact.indexOf('Severe') >= 0 ? 'pill-mid' : 'pill-low');
+            return '<span class="pill ' + lvl + '">' + d.impact + '</span>';
+        });
+        rows.append('td').text(d => d.response_strategy);
+        rows.append('td').text(d => d.representative_cases.join(' · '));
+    }
+
+    function renderRiskInsights(data) {
+        const list = d3.select('#risk-insights-list');
+        list.selectAll('li').data(data.risk_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 2.1: 里程碑时间线 =====
+    function renderMilestoneTimeline(data) {
+        const svg = d3.select('#chart-milestone-timeline');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 380;
+        const m = {top: 50, right: 40, bottom: 70, left: 50};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const ms = data.milestones.map(d => ({
+            year: +d.year,
+            label: d.milestone,
+            chapter: d.chapter
+        }));
+
+        const x = d3.scaleLinear().domain([0, 15]).range([0, w]);
+        const y = d3.scaleLinear().domain([0, 9]).range([h, 0]);
+
+        // 类型分类
+        const typeOf = (label) => {
+            const l = label.toLowerCase();
+            if (l.indexOf('crisis') >= 0) return 'crisis';
+            if (l.indexOf('recruit') >= 0) return 'team';
+            if (l.indexOf('complete') >= 0 || l.indexOf('reach') >= 0) return 'finish';
+            return 'progress';
+        };
+        const colorMap = {
+            'crisis': '#c8463a',
+            'team': '#3a6b8c',
+            'progress': '#6B8E5A',
+            'finish': '#C9A063'
+        };
+        const sizeMap = { 'crisis': 12, 'team': 9, 'progress': 8, 'finish': 13 };
+
+        // 网格
+        g.append('g').selectAll('line.gridx')
+            .data(d3.range(1, 15))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', d => x(d)).attr('x2', d => x(d))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '2,3');
+
+        // 时间线主轴
+        g.append('line')
+            .attr('x1', x(1)).attr('x2', x(14))
+            .attr('y1', y(5)).attr('y2', y(5))
+            .attr('stroke', '#C9A063')
+            .attr('stroke-width', 3)
+            .attr('stroke-linecap', 'round');
+
+        // 坐标轴
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(14).tickFormat(d => 'Y' + d));
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(0).tickSize(0));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 44)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#C9A063')
+            .text('project year (Zhenguan 13-27)');
+
+        // 节点：奇数索引向上·偶数向下·避免重叠
+        ms.forEach((d, i) => {
+            const upDown = i % 2 === 0 ? -1 : 1;
+            const yPos = y(5) + upDown * 40;
+            const t = typeOf(d.label);
+            const c = colorMap[t];
+            const r = sizeMap[t];
+
+            // 连接线
+            g.append('line')
+                .attr('x1', x(d.year)).attr('x2', x(d.year))
+                .attr('y1', y(5)).attr('y2', yPos)
+                .attr('stroke', c)
+                .attr('stroke-width', 1.5)
+                .attr('stroke-dasharray', '3,3');
+
+            // 节点圆
+            g.append('circle')
+                .attr('cx', x(d.year))
+                .attr('cy', yPos)
+                .attr('r', r)
+                .attr('fill', c)
+                .attr('stroke', '#fff')
+                .attr('stroke-width', 2)
+                .style('cursor', 'pointer')
+                .on('mouseover', (e) => {
+                    tooltip.show(
+                        `<strong>Y${d.year} · ${d.label}</strong><br>` +
+                        `Chapter: ${d.chapter}<br>` +
+                        `Type: ${t === 'crisis' ? 'Crisis milestone' : (t === 'team' ? 'Team formation' : (t === 'finish' ? 'Project completion' : 'Project progress'))}`, e);
+                })
+                .on('mouseout', tooltip.hide);
+
+            // 标签
+            g.append('text')
+                .attr('x', x(d.year))
+                .attr('y', yPos + upDown * (r + 4) * (upDown < 0 ? -1 : 1))
+                .attr('text-anchor', 'middle')
+                .attr('dominant-baseline', upDown < 0 ? 'auto' : 'hanging')
+                .style('font-size', '10px')
+                .style('font-weight', '600')
+                .style('fill', c)
+                .text(d.label);
+        });
+
+        // 项目过半标注
+        g.append('line')
+            .attr('x1', x(7)).attr('x2', x(7))
+            .attr('y1', 0).attr('y2', h)
+            .attr('stroke', '#c8463a')
+            .attr('stroke-width', 1)
+            .attr('stroke-dasharray', '4,4')
+            .attr('opacity', 0.5);
+        g.append('text')
+            .attr('x', x(7) + 4)
+            .attr('y', 12)
+            .style('font-size', '10px')
+            .style('fill', '#c8463a')
+            .style('font-weight', '600')
+            .text('Project halfway Y7');
+    }
+
+    // ===== Section 2.2: KPI 饼图 =====
+    function renderKpiPie(data) {
+        const svg = d3.select('#chart-kpi-pie');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 700;
+        const W = Math.max(containerW, 500), H = 380;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${W / 2},${H / 2})`);
+
+        // 分类
+        const kpis = data.kpis;
+        const achieved = kpis.filter(k => k.status.indexOf('Achieved') >= 0).length;
+        const mid = kpis.filter(k => k.status.indexOf('Medium') >= 0).length;
+        const info = kpis.filter(k => k.status.indexOf('Informational') >= 0).length;
+        const pieData = [
+            {label: '✓ Achieved', value: achieved, color: '#c8463a'},
+            {label: '△ Medium', value: mid, color: '#e9b885'},
+            {label: '— Informational', value: info, color: '#3a6b8c'}
+        ];
+
+        const radius = Math.max(0, Math.min(W, H) / 2 - 60);
+        const arc = d3.arc().innerRadius(radius * 0.55).outerRadius(radius);
+        const labelArc = d3.arc().innerRadius(radius * 0.9).outerRadius(radius * 0.9);
+        const pie = d3.pie().value(d => d.value).sort(null);
+
+        const arcs = g.selectAll('.arc')
+            .data(pie(pieData)).enter().append('g')
+            .attr('class', 'arc');
+
+        arcs.append('path')
+            .attr('d', arc)
+            .attr('fill', d => d.data.color)
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 3)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>${d.data.label}</strong><br>` +
+                    `Count: ${d.data.value} / ${kpis.length} items<br>` +
+                    `Share: ${(d.data.value / kpis.length * 100).toFixed(1)}%<br>` +
+                    `Representative KPIs: ${kpis.filter(k => (d.data.label.indexOf('Achieved') >= 0 ? k.status.indexOf('Achieved') >= 0 : (d.data.label.indexOf('Medium') >= 0 ? k.status.indexOf('Medium') >= 0 : k.status.indexOf('Informational') >= 0))).map(k => k.kpi_name).join(' · ')}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 外部标签
+        arcs.append('text')
+            .attr('transform', d => `translate(${labelArc.centroid(d)})`)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '12px')
+            .style('font-weight', '600')
+            .style('fill', '#23201A')
+            .text(d => d.data.label + ' ' + d.data.value);
+
+        // 中心文字
+        const achieveRate = (achieved / kpis.length * 100).toFixed(1);
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('dy', '-8')
+            .style('font-size', '28px')
+            .style('font-weight', '700')
+            .style('fill', '#c8463a')
+            .text(achieveRate + '%');
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('dy', '18')
+            .style('font-size', '12px')
+            .style('fill', '#6B6455')
+            .text('Completion rate · ' + achieved + '/' + kpis.length + ' KPI');
+    }
+
+    function renderKpiTable(data) {
+        const tbody = d3.select('#kpi-table tbody');
+        const rows = tbody.selectAll('tr').data(data.kpis).enter().append('tr');
+        rows.append('td').text((d, i) => i + 1);
+        rows.append('td').html(d => '<strong>' + d.kpi_name + '</strong>');
+        rows.append('td').text(d => d.target);
+        rows.append('td').text(d => d.actual);
+        rows.append('td').html(d => statusPill(d.status));
+        rows.append('td').text(d => d.milestone);
+    }
+
+    function renderMilestoneList(data) {
+        const list = d3.select('#milestone-list');
+        const items = list.selectAll('li')
+            .data(data.milestones)
+            .enter().append('li');
+        items.append('div')
+            .attr('class', 'ms-year')
+            .text(d => 'Y' + d.year);
+        items.append('div')
+            .attr('class', 'ms-text')
+            .html(d => '<strong>' + d.milestone + '</strong><span class="ms-chap">' + d.chapter + '</span>');
+    }
+
+    function renderKpiInsights(data) {
+        const insights = [
+            `Of the 7 KPIs, ${data.kpis.filter(k => k.status.indexOf('Achieved') >= 0).length} achieved · on time over 14 years · on budget (zero cash budget) · in scope (108,000 li)`,
+            `Largest realized risk: ${data.project_summary.key_risk_realized} · but successfully resolved · became a team-building turning point`,
+            `Key success factor: ${data.project_summary.key_success_factor}`,
+            `Project lessons learned: ${data.project_summary.lessons_learned}`,
+            `13 backup calls (external help) are the key external resource behind the project's success · primary helper Guanyin (3 times)`
+        ];
+        const list = d3.select('#kpi-insights-list');
+        list.selectAll('li').data(insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 3.1: MBTI 雷达图 =====
+    function renderMbtiRadar(data) {
+        const svg = d3.select('#chart-mbti-radar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 700;
+        const W = Math.max(containerW, 600), H = 540;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const cx = W / 2, cy = H / 2 + 10;
+        const radius = Math.max(0, Math.min(W, H) / 2 - 80);
+        const levels = 5;
+        // 4 轴：E / N / F / P（外向/直觉/情感/感知）
+        const dims = ['E', 'N', 'F', 'P'];
+        const dimLabels = ['E Extraversion', 'N Intuition', 'F Feeling', 'P Perceiving'];
+        const nDims = dims.length;
+
+        const colorMap = {
+            'Tang Sanzang': '#c8463a',
+            'Sun Wukong': '#3a6b8c',
+            'Zhu Bajie': '#e9b885',
+            'Sha Wujing': '#6B8E5A',
+            'White Dragon Horse': '#C9A063',
+            'Guanyin': '#a04060',
+            'Tathāgata': '#4a3a6b',
+            'Jade Emperor': '#8a7a3a'
+        };
+
+        const angle = (i) => (i * 2 * Math.PI / nDims) - Math.PI / 2;
+
+        // 网格
+        const gridG = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+        for (let lv = 1; lv <= levels; lv++) {
+            const r = radius * lv / levels;
+            const pts = dims.map((_, i) => [r * Math.cos(angle(i)), r * Math.sin(angle(i))]);
+            gridG.append('polygon')
+                .attr('points', pts.map(p => p.join(',')).join(' '))
+                .attr('fill', 'none')
+                .attr('stroke', '#d9cdb8')
+                .attr('stroke-dasharray', lv === levels ? '0' : '3,3');
+        }
+        // 刻度
+        for (let lv = 1; lv <= levels; lv++) {
+            const r = radius * lv / levels;
+            gridG.append('text')
+                .attr('x', 4).attr('y', -r + 3)
+                .style('font-size', '10px')
+                .attr('fill', '#6B6455')
+                .text((lv * 2).toString());
+        }
+
+        // 轴线 + 轴标签
+        dims.forEach((d, i) => {
+            const x2 = radius * Math.cos(angle(i));
+            const y2 = radius * Math.sin(angle(i));
+            gridG.append('line')
+                .attr('x1', 0).attr('y1', 0)
+                .attr('x2', x2).attr('y2', y2)
+                .attr('stroke', '#d9cdb8');
+            const lx = (radius + 36) * Math.cos(angle(i));
+            const ly = (radius + 36) * Math.sin(angle(i));
+            gridG.append('text')
+                .attr('x', lx).attr('y', ly)
+                .attr('text-anchor', 'middle')
+                .attr('dominant-baseline', 'middle')
+                .style('font-size', '13px')
+                .style('font-weight', '600')
+                .attr('fill', '#23201A')
+                .text(dimLabels[i]);
+        });
+
+        // 数据多边形
+        const rScale = d3.scaleLinear().domain([0, 10]).range([0, radius]);
+
+        data.character_mbti.forEach(member => {
+            const pts = dims.map((d, i) => {
+                const v = member.dimensions[d];
+                return [rScale(v) * Math.cos(angle(i)), rScale(v) * Math.sin(angle(i))];
+            });
+            const poly = gridG.append('polygon')
+                .attr('points', pts.map(p => p.join(',')).join(' '))
+                .attr('fill', colorMap[member.character])
+                .attr('fill-opacity', 0.10)
+                .attr('stroke', colorMap[member.character])
+                .attr('stroke-width', 2)
+                .style('cursor', 'pointer');
+            poly.on('mouseover', (e) => {
+                poly.attr('fill-opacity', 0.35);
+                const dimList = dims.map(d => `${d}: ${member.dimensions[d]}`).join(' / ');
+                tooltip.show(
+                    `<strong style="color:${colorMap[member.character]}">${member.character}</strong> · ${member.mbti_type} · ${member.type_name}<br>` +
+                    `Fit: ${member.fit_score} / 10<br>` +
+                    `<em>${member.strength_in_team}</em><br>` +
+                    dimList, e);
+            }).on('mouseout', () => {
+                poly.attr('fill-opacity', 0.10);
+                tooltip.hide();
+            });
+            // 顶点
+            pts.forEach((p, i) => {
+                gridG.append('circle')
+                    .attr('cx', p[0]).attr('cy', p[1])
+                    .attr('r', 3)
+                    .attr('fill', colorMap[member.character])
+                    .attr('stroke', '#fff').attr('stroke-width', 1)
+                    .style('pointer-events', 'none');
+            });
+        });
+
+        // 平均适配度圆
+        const avgR = rScale(data.mbti_stats.avg_fit_score);
+        gridG.append('circle')
+            .attr('cx', 0).attr('cy', 0)
+            .attr('r', avgR)
+            .attr('fill', 'none')
+            .attr('stroke', '#6B6455')
+            .attr('stroke-dasharray', '6,4')
+            .attr('stroke-width', 1.5);
+        gridG.append('text')
+            .attr('x', avgR * Math.SQRT1_2 + 4)
+            .attr('y', -avgR * Math.SQRT1_2 - 4)
+            .style('font-size', '10px').style('fill', '#6B6455')
+            .text(`avg fit ${data.mbti_stats.avg_fit_score}`);
+    }
+
+    function renderMbtiTable(data) {
+        const tbody = d3.select('#mbti-table tbody');
+        const rows = tbody.selectAll('tr').data(data.character_mbti).enter().append('tr');
+        rows.append('td').text((d, i) => i + 1);
+        rows.append('td').html(d => '<strong>' + d.character + '</strong>');
+        rows.append('td').html(d => '<code>' + d.mbti_type + '</code>');
+        rows.append('td').text(d => d.type_name);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.fit_score + '</strong>');
+        rows.append('td').text(d => d.dimensions.E);
+        rows.append('td').text(d => d.dimensions.I);
+        rows.append('td').text(d => d.dimensions.S);
+        rows.append('td').text(d => d.dimensions.N);
+        rows.append('td').text(d => d.dimensions.T);
+        rows.append('td').text(d => d.dimensions.F);
+        rows.append('td').text(d => d.dimensions.J);
+        rows.append('td').text(d => d.dimensions.P);
+        rows.append('td').text(d => d.strength_in_team);
+        rows.append('td').text(d => d.weakness);
+        rows.append('td').text(d => d.career_fit);
+    }
+
+    function renderMbtiCharCards(data) {
+        const colorClass = {
+            'Tang Sanzang': 'c-tang', 'Sun Wukong': 'c-wukong', 'Zhu Bajie': 'c-bajie',
+            'Sha Wujing': 'c-sha', 'White Dragon Horse': 'c-long',
+            'Guanyin': 'c-guanyin', 'Tathāgata': 'c-buddha', 'Jade Emperor': 'c-jade'
+        };
+        const grid = d3.select('#mbti-char-grid');
+        const cards = grid.selectAll('.char-card')
+            .data(data.character_mbti).enter()
+            .append('div')
+            .attr('class', d => 'char-card ' + (colorClass[d.character] || ''));
+        cards.append('div').attr('class', 'char-name').text(d => d.character);
+        cards.append('div').attr('class', 'char-mbti').text(d => d.mbti_type + ' · ' + d.type_name + ' · Fit ' + d.fit_score + ' / 10');
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>Core traits:</strong>' + d.core_traits.join(' · '));
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>Team strength:</strong>' + d.strength_in_team);
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>Weakness:</strong>' + d.weakness);
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>Career fit:</strong>' + d.career_fit);
+    }
+
+    function renderMbtiInsights(data) {
+        const stats = data.mbti_stats;
+        const insights = [
+            `Average fit across 8 roles ${stats.avg_fit_score} / 10 · 5 roles scored a perfect 9`,
+            `Best fit: ${stats.best_fit}`,
+            `Lowest fit: ${stats.worst_fit}`,
+            `Team composition: ${stats.team_composition}`,
+            `Structural absence: ${stats.missing_types} — the cognitive root of decision failures`
+        ];
+        const list = d3.select('#mbti-insights-list');
+        list.selectAll('li').data(insights).enter().append('li').text(d => d);
+    }
+
+    function renderOverallInsights(summary) {
+        const list = d3.select('#overall-insights-list');
+        list.selectAll('li').data(summary.key_findings).enter().append('li').text(d => d);
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

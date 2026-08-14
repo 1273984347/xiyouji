@@ -1,0 +1,2526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-yDSkGKX+8Zs5rhXUkwMqiYcxtw+GL4XhxHzf+IGSK7g=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-nCOsMMA6WKiGC1L1PgATSTP6eptvgXa7Uyqpl5xkyf8=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Intertextuality Network · W172 · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    
+svg circle { will-change: transform; }
+</style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        /* Hero */
+header
+header
+header
+header
+header.hero .meta {
+  color: var(--hero-meta);
+  font-size: 0.85em;
+  margin-top: 10px;
+  position: relative;
+}
+
+/* Section */
+
+.section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+
+.definition {
+  background: var(--paper);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.94em;
+  border-radius: 2px;
+}
+
+/* KPI */
+
+.kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
+.kpi-label { color: var(--muted); font-size: 0.84em; margin-top: 4px; }
+
+/* 前置文本概览卡片网格 */
+.texts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 16px;
+}
+.text-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 14px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.text-card:hover, .text-card:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  outline: none;
+}
+.text-card .text-name {
+  font-size: 1.05em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.text-card .text-tag {
+  font-size: 0.8em;
+  color: var(--accent-2);
+  margin-bottom: 6px;
+}
+.text-card .text-stats {
+  font-size: 0.82em;
+  color: var(--muted);
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border);
+}
+.swatch-bar {
+  height: 4px;
+  border-radius: 2px;
+  margin: 6px auto;
+  width: 60%;
+}
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.chart-caption { color: var(--muted); font-size: 0.84em; margin-bottom: 12px; }
+.chart-svg {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.84em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: var(--tooltip-bg);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.84em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 300px;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; }
+.node-circle:hover { stroke: var(--accent); stroke-width: 2px; }
+
+/* Summary table */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 0.88em;
+  background: #fff;
+  border: 1px solid var(--border);
+}
+.summary-table th {
+  background: var(--table-header);
+  color: var(--ink);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-3);
+  cursor: pointer;
+  user-select: none;
+}
+.summary-table th:hover { background: var(--accent-3); color: #fff; }
+.summary-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.summary-table tr:nth-child(even) td { background: var(--table-stripe); }
+.summary-table tr:hover td { background: #f5efe4; }
+.summary-table .type-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.theorist-block {
+  margin-top: 18px;
+}
+.theorist-block h3 {
+  font-size: 1.1em;
+  color: var(--accent-2);
+  margin-bottom: 8px;
+  border-left: 3px solid var(--accent-3);
+  padding-left: 8px;
+}
+.theorist-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+.theorist-item {
+  background: var(--paper);
+  padding: 10px 12px;
+  border-radius: 4px;
+  border-left: 3px solid var(--border);
+  font-size: 0.86em;
+}
+.theorist-item .t-name { font-weight: 600; color: var(--ink); }
+.theorist-item .t-sense { color: var(--muted); font-size: 0.9em; margin-top: 2px; }
+.theorist-item .t-work { color: var(--accent-2); font-size: 0.85em; margin-top: 2px; }
+
+/* Matrix cell */
+.matrix-cell { cursor: pointer; }
+.matrix-cell:hover { stroke: var(--accent); stroke-width: 2px; }
+
+/* Insight */
+.insight-list { list-style: none; }
+.insight-list li {
+  background: var(--paper);
+  margin: 8px 0;
+  padding: 12px 15px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 2px;
+}
+.insight-list li strong { color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .texts-grid { grid-template-columns: repeat(2, 1fr); }
+  header
+  header
+  
+  
+  .summary-table { font-size: 0.8em; }
+  .summary-table th, .summary-table td { padding: 7px 8px; }
+}
+@media (max-width: 520px) {
+  .texts-grid { grid-template-columns: 1fr; }
+  
+  
+  header
+  .theorist-list { grid-template-columns: 1fr; }
+}
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/intertextuality-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Intertextuality Network</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Intertextuality Network</h1>
+        <p class="subtitle">INTERTEXTUALITY NETWORK</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">Precursor Texts</div></div>
+  <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">Intertextuality Theorists</div></div>
+  <div class="kpi-card"><div class="kpi-value">5</div><div class="kpi-label">Genette's Intertextual Types</div></div>
+  <div class="kpi-card"><div class="kpi-value">5</div><div class="kpi-label">Intertextual Strength Dimensions</div></div>
+  <div class="kpi-card"><div class="kpi-value">2200+</div><div class="kpi-label">Intertextual Span (years)</div></div>
+  <div class="kpi-card"><div class="kpi-value">1</div><div class="kpi-label">Target Text (Journey to the West)</div></div>
+</div>
+
+<!-- Section 1: Overview and Force-Directed Graph -->
+<section class="section" id="overview">
+  <h2 class="section-title">I · Intertextuality Network Overview</h2>
+  <div class="section-sub">OVERVIEW: INTERTEXTUALITY FORCE-DIRECTED GRAPH</div>
+  <div class="definition">
+    <strong>Definition: </strong>Intertextuality was proposed by Kristeva in 1966; it holds that any text is an absorption and transformation of other texts. This graph centers on <em>Journey to the West</em> and radiates outward to seven precursor texts (the Scripture-Fetching Tale, Great Tang Records on the Western Regions, Biography of the Tripitaka Master, Paktongsa Ŏnhae, Journey to the West Zaju, the Buddhist Canon, and the Daoist Canon), connecting four intertextuality theorists (Kristeva, Barthes, Genette, Riffaterre) into a "precursor text – target text – theorist" tripartite network. Node colors distinguish type, and each edge is labeled with one of Genette's five types.
+  </div>
+  <div class="texts-grid" id="texts-grid"></div>
+  <div class="chart-block" style="margin-top:24px;">
+    <div class="chart-title">Intertextuality Force-Directed Graph (center = Journey to the West · outer ring = precursor texts + theorists · edges = intertextual relation types)</div>
+    <div class="chart-caption">Node color: by text type · node size = degree · edge color = intertextual type · draggable</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="640"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 2: Intertextual-Type Matrix -->
+<section class="section" id="matrix">
+  <h2 class="section-title alt">II · Genette's Five Types × Precursor Texts Matrix</h2>
+  <div class="section-sub">MATRIX: GENETTE'S FIVE TYPES × PRECURSOR TEXTS</div>
+  <div class="definition">
+    <strong>Definition: </strong>In <em>Palimpsestes</em> (1982), Genette divides transtextual relations into five types: Citation, Allusion, Commentary, Transformation, and Translation. The matrix chart uses the seven precursor texts as rows and the five types as columns, with color intensity representing intertextual strength (0–3). The Scripture-Fetching Tale is strongest on "Transformation" (the shaping of the Sun Wukong figure), while the Buddhist and Daoist canons are strongest on "Allusion" (the permeation of ideas and themes).
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Genette's Five Types × Precursor Texts Heat Matrix</div>
+    <div class="chart-caption">Rows: 7 precursor texts · columns: 5 intertextual types · color depth = strength 0–3 · hover for details</div>
+    <svg id="chart-matrix" class="chart-svg" width="100%" height="500"></svg>
+    <div class="legend-row" id="matrix-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3: Intertextual-Strength Radar -->
+<section class="section" id="radar">
+  <h2 class="section-title alt-2">III · Precursor Text Intertextual-Strength Radar</h2>
+  <div class="section-sub">RADAR: FIVE INTERTEXTUAL DIMENSIONS PER TEXT</div>
+  <div class="definition">
+    <strong>Definition: </strong>Each precursor text's intertextual strength relative to <em>Journey to the West</em> is assessed on five dimensions: Structure (narrative framework), Theme (core ideas), Character (characterization), Plot (story events), and Language (word and phrase allusions). The larger the radar area, the more strongly the text shaped Journey to the West. The Scripture-Fetching Tale and the Journey to the West Zaju are strongest on "Character" and "Plot", while Paktongsa Ŏnhae stands out on "Language".
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Seven Precursor Texts Intertextual-Strength Radar (5 dimensions)</div>
+    <div class="chart-caption">7 texts × 5 dimensions · values normalized 0–100 · hover for details</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="580"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4: Intertextual Timeline -->
+<section class="section" id="timeline">
+  <h2 class="section-title">IV · Precursor Text → Journey to the West Intertextual Timeline</h2>
+  <div class="section-sub">TIMELINE: PRECURSOR TEXTS THROUGH THE AGES</div>
+  <div class="definition">
+    <strong>Definition: </strong>The eight texts (including Journey to the West itself) are arranged chronologically, with each text's completion era and main intertextual type marked. The span runs from the 6th century BCE (Dao De Jing) to the 17th century (Paktongsa Ŏnhae), covering more than 2,200 years. Color distinguishes text type, and node size reflects intertextual strength, revealing the textual genealogy and intertextual accumulation that preceded the compilation of Journey to the West.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Precursor Text → Journey to the West Intertextual Timeline</div>
+    <div class="chart-caption">X axis: era · nodes: text colors · size = intertextual strength · hover to see intertextual type</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="500"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5: Theorist-Perspective Sankey -->
+<section class="section" id="theorists">
+  <h2 class="section-title alt">V · Four Theorists Intertextuality Sankey Diagram</h2>
+  <div class="section-sub">SANKEY: FOUR THEORISTS × THEORY DIMENSIONS × APPLICATIONS</div>
+  <div class="definition">
+    <strong>Definition: </strong>The Sankey diagram shows a three-layer flow: four theorists → theory dimensions → Journey to the West applications. Kristeva's "intertextuality" maps to the Journey to the West precursor-text network; Barthes's "death of the author" maps to the Wu Cheng'en authorship question; Genette's "five types" map to the citation and transformation in Journey to the West; and Riffaterre's "hypertextuality" maps to Journey to the West as a hypertext. Flow thickness corresponds to each theory's application weight in Journey to the West studies.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Theorist–Theory Dimension–Journey to the West Application Three-Layer Sankey</div>
+    <div class="chart-caption">Left to right: four theorists → theory dimensions → Journey to the West applications · flow = theory application weight · hover to highlight paths</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="600"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6: Summary Table -->
+<section class="section" id="summary">
+  <h2 class="section-title alt-2">VI · Intertextual Relations Summary Table</h2>
+  <div class="section-sub">SUMMARY: INTERTEXTUAL RELATIONS TABLE</div>
+  <div class="definition">
+    <strong>Definition: </strong>This table summarizes the complete data for the seven precursor texts — text type, completion era, main intertextual type, five-dimension intertextual strength, and composite intertextuality index. Below is a list of the four intertextuality theorists grouped by school, completing the knowledge network of the W172 intertextuality graph. Table headers are clickable to sort; this corresponds to the W169 intertextuality narratology topic.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Precursor Text Intertextual Relations Summary Table (click headers to sort)</div>
+    <div class="chart-caption">7 texts × 9 fields · click headers to sort · hover to highlight</div>
+    <div id="summary-table-wrap"></div>
+  </div>
+  <div class="theorist-block">
+    <h3>List of the Four Intertextuality Theorists</h3>
+    <div id="theorist-list" class="theorist-list"></div>
+  </div>
+</section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/intertextuality-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+</div>
+
+<script>
+// ============================================================
+// EMBEDDED DATA — intertextuality network data (W172)
+// ============================================================
+const EMBEDDED_DATA = {
+  intertextuality: {
+    // precursor texts (7) + Journey to the West (target text)
+    texts: [
+      { id: "dtshq", name: "Great Tang Scripture-Fetching Tale", type: "Song–Yuan vernacular tale", era: "c. 13th century", year: 1250, strength: 92, color: "#8B4513", desc: "Earliest prototype of Journey to the West; prototype of the Sun Wukong figure" },
+      { id: "dtxyj", name: "Great Tang Records on the Western Regions", type: "geographical treatise", era: "646", year: 646, strength: 75, color: "#A0522D", desc: "Dictated by Xuanzang, written by Bianji; a geographical record of the Western Regions" },
+      { id: "dcessfzz", name: "Biography of the Tripitaka Master of Great Ci'en Temple", type: "biography", era: "688", year: 688, strength: 80, color: "#CD853F", desc: "By Huili and Yancong; a biography of Xuanzang" },
+      { id: "ptssj", name: "Paktongsa Ŏnhae", type: "Chinese-language textbook", era: "c. 1670", year: 1670, strength: 65, color: "#DAA520", desc: "A Korean Chinese-language textbook annotating Journey to the West stories" },
+      { id: "xyzj", name: "Journey to the West Zaju", type: "Yuan–Ming zaju", era: "c. 1390", year: 1390, strength: 88, color: "#B8860B", desc: "By Yang Jingxian; a Yuan–Ming zaju on the Journey to the West story" },
+      { id: "fod", name: "Buddhist Canon", type: "religious classics", era: "5th c. BCE – 3rd c. CE", year: 100, strength: 85, color: "#D2691E", desc: "Lotus Sutra, Avatamsaka Sutra, Vimalakirti Sutra, etc." },
+      { id: "daod", name: "Daoist Canon", type: "religious classics", era: "6th c. BCE – 4th c. CE", year: -400, strength: 82, color: "#BC8F8F", desc: "Dao De Jing, Zhuangzi, Baopuzi, etc." },
+      { id: "xyj", name: "Journey to the West", type: "novel", era: "1592 (Shidetang ed.)", year: 1592, strength: 100, color: "#8b4513", desc: "Target text, compiled by Wu Cheng'en (?)" }
+    ],
+    // theorist nodes (4)
+    theorists: [
+      { id: "kristeva", name: "Kristeva", enName: "Julia Kristeva", nationality: "France–Bulgaria", theory: "Intertextuality", works: "Word, Dialogue and Novel (1966) · Sēmeiōtikē (1969)", activeYears: "1966–", color: "#5a3828", school: "post-structuralism" },
+      { id: "barthes", name: "Barthes", enName: "Roland Barthes", nationality: "France", theory: "Death of the Author / text theory", works: "The Death of the Author (1968) · The Pleasure of the Text (1973)", activeYears: "1968–1980", color: "#6b4226", school: "post-structuralism" },
+      { id: "genette", name: "Genette", enName: "Gérard Genette", nationality: "France", theory: "five types of transtextuality", works: "Palimpsestes (1982) · Narrative Discourse (1972)", activeYears: "1972–2004", color: "#8a7a5a", school: "structuralist narratology" },
+      { id: "riffaterre", name: "Riffaterre", enName: "Michael Riffaterre", nationality: "France–United States", theory: "Hypertextuality", works: "La Production du texte (1978) · Hypertext (1981)", activeYears: "1966–1987", color: "#A0522D", school: "structuralist poetics" }
+    ],
+    // nodes (force-directed graph: precursor texts + theorists + Journey to the West)
+    nodes: [
+      // Journey to the West target text
+      { id: "xyj", name: "Journey to the West", type: "target", color: "#8b4513" },
+      // precursor text nodes (7)
+      { id: "dtshq", name: "Great Tang Scripture-Fetching Tale", type: "text", subtype: "Song–Yuan vernacular tale", era: "c. 13th century", color: "#8B4513" },
+      { id: "dtxyj", name: "Great Tang Records on the Western Regions", type: "text", subtype: "geographical treatise", era: "646", color: "#A0522D" },
+      { id: "dcessfzz", name: "Biography of the Tripitaka Master of Great Ci'en Temple", type: "text", subtype: "biography", era: "688", color: "#CD853F" },
+      { id: "ptssj", name: "Paktongsa Ŏnhae", type: "text", subtype: "Chinese-language textbook", era: "c. 1670", color: "#DAA520" },
+      { id: "xyzj", name: "Journey to the West Zaju", type: "text", subtype: "Yuan–Ming zaju", era: "c. 1390", color: "#B8860B" },
+      { id: "fod", name: "Buddhist Canon", type: "text", subtype: "religious classics", era: "5th c. BCE – 3rd c. CE", color: "#D2691E" },
+      { id: "daod", name: "Daoist Canon", type: "text", subtype: "religious classics", era: "6th c. BCE – 4th c. CE", color: "#BC8F8F" },
+      // theorist nodes (4)
+      { id: "kristeva", name: "Kristeva", type: "theorist", color: "#5a3828" },
+      { id: "barthes", name: "Barthes", type: "theorist", color: "#6b4226" },
+      { id: "genette", name: "Genette", type: "theorist", color: "#8a7a5a" },
+      { id: "riffaterre", name: "Riffaterre", type: "theorist", color: "#A0522D" }
+    ],
+    // edges (intertextual relations, 16)
+    links: [
+      // precursor texts → Journey to the West (7, labeled with intertextual type)
+      { source: "dtshq", target: "xyj", type: "Transformation", strength: 92 },
+      { source: "dtxyj", target: "xyj", type: "Citation", strength: 75 },
+      { source: "dcessfzz", target: "xyj", type: "Transformation", strength: 80 },
+      { source: "ptssj", target: "xyj", type: "Citation", strength: 65 },
+      { source: "xyzj", target: "xyj", type: "Transformation", strength: 88 },
+      { source: "fod", target: "xyj", type: "Allusion", strength: 85 },
+      { source: "daod", target: "xyj", type: "Allusion", strength: 82 },
+      // between precursor texts (4, textual genealogy)
+      { source: "dtxyj", target: "dcessfzz", type: "Commentary", strength: 70 },
+      { source: "dtshq", target: "xyzj", type: "Transformation", strength: 75 },
+      { source: "xyzj", target: "ptssj", type: "Citation", strength: 60 },
+      { source: "fod", target: "dtxyj", type: "Allusion", strength: 65 },
+      // theorists → Journey to the West (4, theory application)
+      { source: "kristeva", target: "xyj", type: "Theory", strength: 90 },
+      { source: "barthes", target: "xyj", type: "Theory", strength: 85 },
+      { source: "genette", target: "xyj", type: "Theory", strength: 95 },
+      { source: "riffaterre", target: "xyj", type: "Theory", strength: 80 },
+      // between theorists (1, school affiliation)
+      { source: "kristeva", target: "barthes", type: "Theory", strength: 75 }
+    ],
+    // Genette's five types × precursor texts matrix (strength 0–3)
+    matrix: [
+      // five types: Citation, Allusion, Commentary, Transformation, Translation
+      { text: "Great Tang Scripture-Fetching Tale", Citation: 3, Allusion: 2, Commentary: 1, Transformation: 3, Translation: 2 },
+      { text: "Great Tang Records on the Western Regions", Citation: 3, Allusion: 1, Commentary: 2, Transformation: 1, Translation: 2 },
+      { text: "Biography of the Tripitaka Master of Great Ci'en Temple", Citation: 2, Allusion: 1, Commentary: 2, Transformation: 3, Translation: 2 },
+      { text: "Paktongsa Ŏnhae", Citation: 3, Allusion: 0, Commentary: 1, Transformation: 0, Translation: 1 },
+      { text: "Journey to the West Zaju", Citation: 2, Allusion: 2, Commentary: 0, Transformation: 3, Translation: 1 },
+      { text: "Buddhist Canon", Citation: 1, Allusion: 3, Commentary: 2, Transformation: 2, Translation: 1 },
+      { text: "Daoist Canon", Citation: 1, Allusion: 3, Commentary: 1, Transformation: 2, Translation: 1 }
+    ],
+    // radar data (5 intertextual-strength dimensions per precursor text, 0–100)
+    radar: [
+      { text: "Great Tang Scripture-Fetching Tale", Structure: 85, Theme: 90, Character: 95, Plot: 88, Language: 70 },
+      { text: "Great Tang Records on the Western Regions", Structure: 60, Theme: 75, Character: 50, Plot: 40, Language: 65 },
+      { text: "Biography of the Tripitaka Master of Great Ci'en Temple", Structure: 70, Theme: 80, Character: 85, Plot: 65, Language: 60 },
+      { text: "Paktongsa Ŏnhae", Structure: 30, Theme: 40, Character: 30, Plot: 25, Language: 95 },
+      { text: "Journey to the West Zaju", Structure: 80, Theme: 85, Character: 75, Plot: 82, Language: 60 },
+      { text: "Buddhist Canon", Structure: 50, Theme: 90, Character: 70, Plot: 45, Language: 75 },
+      { text: "Daoist Canon", Structure: 55, Theme: 85, Character: 65, Plot: 50, Language: 70 }
+    ],
+    // timeline data (8 texts including Journey to the West)
+    timeline: [
+      { text: "Daoist Canon", era: "6th c. BCE – 4th c. CE", year: -500, interType: "Theme Inheritance", type: "religious classics", strength: 82, color: "#BC8F8F" },
+      { text: "Buddhist Canon", era: "5th c. BCE – 3rd c. CE", year: -400, interType: "Theme Inheritance", type: "religious classics", strength: 85, color: "#D2691E" },
+      { text: "Great Tang Records on the Western Regions", era: "646", year: 646, interType: "Geographical Borrowing", type: "geographical treatise", strength: 75, color: "#A0522D" },
+      { text: "Biography of the Tripitaka Master of Great Ci'en Temple", era: "688", year: 688, interType: "Character Transformation", type: "biography", strength: 80, color: "#CD853F" },
+      { text: "Great Tang Scripture-Fetching Tale", era: "c. 13th century", year: 1250, interType: "Plot Rewriting", type: "huaben", strength: 92, color: "#8B4513" },
+      { text: "Journey to the West Zaju", era: "c. 1390", year: 1390, interType: "Structure Inheritance", type: "drama", strength: 88, color: "#B8860B" },
+      { text: "Journey to the West", era: "1592", year: 1592, interType: "Compilation", type: "novel", strength: 100, color: "#8b4513" },
+      { text: "Paktongsa Ŏnhae", era: "c. 1670", year: 1670, interType: "Overseas Transmission", type: "textbook", strength: 65, color: "#DAA520" }
+    ],
+    // theorist sankey data: theorist → theory dimension → Journey to the West application
+    sankey: [
+      // theorist → theory dimension
+      { source: "Kristeva", target: "Intertextuality", value: 4 },
+      { source: "Kristeva", target: "Dialogism", value: 3 },
+      { source: "Kristeva", target: "Symbolization", value: 3 },
+      { source: "Barthes", target: "Death of the Author", value: 4 },
+      { source: "Barthes", target: "Text Weaving", value: 4 },
+      { source: "Barthes", target: "Birth of the Reader", value: 3 },
+      { source: "Genette", target: "Citation Type", value: 3 },
+      { source: "Genette", target: "Transformation Type", value: 4 },
+      { source: "Genette", target: "Translation Type", value: 2 },
+      { source: "Riffaterre", target: "Hypertextuality", value: 4 },
+      { source: "Riffaterre", target: "Reader Response", value: 3 },
+      // theory dimension → Journey to the West application
+      { source: "Intertextuality", target: "Journey to the West precursor-text network", value: 3 },
+      { source: "Dialogism", target: "master–disciple polyphonic dialogue", value: 3 },
+      { source: "Symbolization", target: "Journey to the West symbolic system", value: 2 },
+      { source: "Death of the Author", target: "the Wu Cheng'en authorship question", value: 3 },
+      { source: "Text Weaving", target: "Journey to the West citation network", value: 4 },
+      { source: "Birth of the Reader", target: "readers interpreting Journey to the West", value: 3 },
+      { source: "Citation Type", target: "Journey to the West citing Buddhist and Daoist classics", value: 3 },
+      { source: "Transformation Type", target: "Journey to the West transforming the scripture-fetching tale", value: 4 },
+      { source: "Translation Type", target: "Journey to the West linguistic transposition", value: 2 },
+      { source: "Hypertextuality", target: "Journey to the West as hypertext", value: 4 },
+      { source: "Reader Response", target: "readers decoding Journey to the West", value: 3 }
+    ]
+  }
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W172] using embedded data (' + fallbackKey + '): ', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const intertextuality = await fetchJson(base + 'intertextuality-network.json', 'intertextuality');
+  const it = intertextuality.intertextuality || intertextuality;
+  return {
+    texts: it.texts || EMBEDDED_DATA.intertextuality.texts,
+    theorists: it.theorists || EMBEDDED_DATA.intertextuality.theorists,
+    network: it.nodes ? { nodes: it.nodes, links: it.links } : { nodes: EMBEDDED_DATA.intertextuality.nodes, links: EMBEDDED_DATA.intertextuality.links },
+    matrix: it.matrix || EMBEDDED_DATA.intertextuality.matrix,
+    radar: it.radar || EMBEDDED_DATA.intertextuality.radar,
+    timeline: it.timeline || EMBEDDED_DATA.intertextuality.timeline,
+    sankey: it.sankey || EMBEDDED_DATA.intertextuality.sankey
+  };
+}
+
+// intertextual-type color lookup
+const TYPE_COLORS = {
+  'Citation': '#8B4513',
+  'Allusion': '#A0522D',
+  'Commentary': '#CD853F',
+  'Transformation': '#D2691E',
+  'Translation': '#BC8F8F',
+  'Theory': '#5a3828',
+  'Geographical Borrowing': '#A0522D',
+  'Theme Inheritance': '#D2691E',
+  'Character Transformation': '#CD853F',
+  'Plot Rewriting': '#D2691E',
+  'Structure Inheritance': '#8B4513',
+  'Compilation': '#8b4513',
+  'Overseas Transmission': '#DAA520'
+};
+
+function typeColor(type) {
+  return TYPE_COLORS[type] || '#8a7a5a';
+}
+
+// ============================================================
+// Section 1: overview cards + force-directed graph
+// ============================================================
+function renderOverview(texts) {
+  const grid = d3.select('#texts-grid');
+  grid.html('');
+  if (!texts || texts.length === 0) {
+    grid.append('div').attr('class', 'empty-state').text('No data');
+    return;
+  }
+  // exclude Journey to the West itself; show only precursor texts (7)
+  const precursors = texts.filter(t => t.id !== 'xyj');
+  const card = grid.selectAll('.text-card')
+    .data(precursors)
+    .enter()
+    .append('div')
+    .attr('class', 'text-card')
+    .attr('role', 'button')
+    .attr('tabindex', '0')
+    .attr('aria-label', d => d.name + ' · ' + d.type)
+    .each(function(d) { d3.select(this).style('border-top', '4px solid ' + d.color); });
+
+  card.append('div').attr('class', 'text-name').text(d => d.name);
+  card.append('div').attr('class', 'swatch-bar').each(function(d) { d3.select(this).style('background', d.color); });
+  card.append('div').attr('class', 'text-tag').text(d => d.type + ' · ' + d.era);
+  card.append('div').attr('class', 'text-stats').text(d => 'Intertextual strength ' + d.strength + ' · ' + d.desc);
+
+  // keyboard a11y
+  card.on('keydown', function(e, d) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showTextTooltip(e, d);
+    }
+  });
+  card.on('click', function(e, d) { showTextTooltip(e, d); });
+}
+
+function showTextTooltip(event, d) {
+  let tip = d3.select('.tooltip');
+  if (tip.empty()) {
+    tip = d3.select('body').append('div').attr('class', 'tooltip');
+  }
+  tip.html('')
+    .style('opacity', 0.95)
+    .style('left', (event.pageX + 10) + 'px')
+    .style('top', (event.pageY - 28) + 'px');
+  tip.append('div').html('<strong>' + d.name + '</strong>');
+  tip.append('div').text('Type: ' + d.type);
+  tip.append('div').text('Era: ' + d.era);
+  tip.append('div').text('Intertextual strength: ' + d.strength);
+  tip.append('div').text('Description: ' + d.desc);
+  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3000);
+}
+
+function renderForce(networkData) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 320).attr('fill', '#8a7a5a').text('No data');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 640;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  // deep-copy nodes to avoid mutation
+  const nodes = networkData.nodes.map(d => ({ ...d }));
+  const links = networkData.links.map(d => ({ ...d }));
+
+  function nodeRadius(d) {
+    if (d.type === 'target') return 22;
+    if (d.type === 'theorist') return 12;
+    return 15; // precursor text node
+  }
+  function nodeFill(d) {
+    return d.color || '#8b4513';
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes).alphaDecay(0.08).velocityDecay(0.5)
+    .force('link', d3.forceLink(links).id(d => d.id)
+      .distance(d => d.type === 'Theory' ? 180 : 120)
+      .strength(d => d.type === 'Theory' ? 0.3 : 0.5))
+    .force('charge', d3.forceManyBody().strength(d => d.type === 'target' ? -800 : (d.type === 'theorist' ? -200 : -400)))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 24));
+
+  // intertextual relation edges (precursor text → Journey to the West)
+    // performance: render the edge layer on a Canvas overlay to avoid per-frame SVG relayout
+  var _svgEl = svg.node();
+  var _lcParent = _svgEl.parentNode;
+  if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
+  if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas'); if (_oc) _oc.remove(); }
+  var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var _lcW = _svgEl.clientWidth || 800, _lcH = _svgEl.clientHeight || 540;
+  var _vb = (_svgEl.getAttribute('viewBox') || '').split(/[\s,]+/);
+  var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_svgEl.getAttribute('width') || _lcW);
+  var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_svgEl.getAttribute('height') || _lcH);
+  var linkCanvas = document.createElement('canvas');
+  linkCanvas.className = 'link-canvas';
+  linkCanvas.width = Math.round(_lcW * _dpr);
+  linkCanvas.height = Math.round(_lcH * _dpr);
+  linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _svgEl.offsetLeft + 'px;top:' + _svgEl.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+  if (_lcParent) _lcParent.insertBefore(linkCanvas, _svgEl);
+  _svgEl.style.position = 'relative';
+  _svgEl.style.zIndex = '1';
+  var lctx = linkCanvas.getContext('2d');
+  lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
+  var linkSels = [];
+  function drawLinks() {
+    lctx.clearRect(0, 0, _cw, _ch);
+    for (var s = 0; s < linkSels.length; s++) {
+      var sel = linkSels[s], data = sel.data(), lines = sel.nodes();
+      for (var i = 0; i < data.length; i++) {
+        var d = data[i], el = lines[i];
+        if (!d || !d.source || d.source.x == null) continue;
+        lctx.beginPath();
+        lctx.moveTo(d.source.x, d.source.y);
+        lctx.lineTo(d.target.x, d.target.y);
+        lctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
+        lctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
+        var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
+        lctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
+        var da = el.getAttribute('stroke-dasharray');
+        lctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
+        lctx.stroke();
+      }
+    }
+    lctx.setLineDash([]);
+    lctx.globalAlpha = 1;
+  }
+const relLink = svg.append('g').selectAll('.rel-link')
+    .data(links.filter(l => l.type !== 'Theory'))
+    .enter().append('line')
+    .attr('class', 'rel-link')
+    .attr('stroke', d => typeColor(d.type))
+    .attr('stroke-width', d => 1 + (d.strength || 50) / 50)
+    .attr('stroke-opacity', 0.55); relLink.style('display','none'); linkSels.push(relLink);
+
+  // theorist connections
+  const theoryLink = svg.append('g').selectAll('.t-link')
+    .data(links.filter(l => l.type === 'Theory'))
+    .enter().append('line')
+    .attr('class', 't-link')
+    .attr('stroke', '#8a7a5a')
+    .attr('stroke-width', 1.2)
+    .attr('stroke-opacity', 0.5)
+    .attr('stroke-dasharray', '4,3'); theoryLink.style('display','none'); linkSels.push(theoryLink);
+
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', nodeFill)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      if (d.type === 'target') {
+        tooltip.append('div').html('<strong>Journey to the West</strong>');
+        tooltip.append('div').text('Type: target text');
+        tooltip.append('div').text('Era: 1592 (Shidetang ed.)');
+      } else if (d.type === 'theorist') {
+        const th = EMBEDDED_DATA.intertextuality.theorists.find(t => t.id === d.id);
+        tooltip.append('div').html('<strong>' + d.name + '</strong>');
+        tooltip.append('div').text('Type: intertextuality theorist');
+        if (th) {
+          tooltip.append('div').text('Theory: ' + th.theory);
+          tooltip.append('div').text('Representative works: ' + th.works);
+        }
+      } else {
+        const tx = EMBEDDED_DATA.intertextuality.texts.find(t => t.id === d.id);
+        tooltip.append('div').html('<strong>《' + d.name + '》</strong>');
+        tooltip.append('div').text('Type: ' + (d.subtype || 'Precursor text'));
+        tooltip.append('div').text('Era: ' + (d.era || ''));
+        if (tx) {
+          tooltip.append('div').text('Intertextual strength: ' + tx.strength);
+          tooltip.append('div').text('Description: ' + tx.desc);
+        }
+      }
+      const connected = links.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('Connected edges: ' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // drag
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => d.type === 'target' ? 4 : (d.type === 'theorist' ? -18 : -22))
+    .attr('font-weight', d => d.type === 'target' ? 700 : (d.type === 'theorist' ? 600 : 500))
+    .attr('font-size', d => d.type === 'target' ? 14 : (d.type === 'theorist' ? 11 : 11))
+    .attr('fill', d => d.type === 'target' ? '#1a1410' : '#5a3828')
+    .text(d => d.name);
+
+  sim.on('tick', () => {
+    drawLinks();;
+    drawLinks();;
+    node.attr('transform', d => `translate(${d.x},${d.y})`);
+    label.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+
+  // legend
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const legendItems = [
+    { label: 'Journey to the West (target text)', color: '#8b4513' },
+    { label: 'Precursor text node', color: '#6b4226' },
+    { label: 'Theorist node', color: '#8a7a5a' },
+    { label: 'Intertextual relation edge', color: '#8B4513' },
+    { label: 'Theory application edge (dashed)', color: '#8a7a5a', dashed: true }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch')
+      .each(function() { d3.select(this).style('background', item.color).style('border', item.dashed ? '2px dashed #8a7a5a' : 'none'); });
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 2: Genette's five types × precursor texts matrix (heatmap)
+// ============================================================
+function renderMatrix(matrixData) {
+  const svg = d3.select('#chart-matrix');
+  svg.selectAll('*').remove();
+  if (!matrixData || matrixData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 250).attr('fill', '#8a7a5a').text('No data');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 500;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 60, right: 40, bottom: 60, left: 200 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const types = ['Citation', 'Allusion', 'Commentary', 'Transformation', 'Translation'];
+  const texts = matrixData.map(d => d.text);
+
+  const xScale = d3.scaleBand().domain(types).range([0, innerW]).padding(0.1);
+  const yScale = d3.scaleBand().domain(texts).range([0, innerH]).padding(0.1);
+
+  // color scale (0–3 strength)
+  const colorScale = d3.scaleSequential()
+    .domain([0, 3])
+    .interpolator(d3.interpolateRgb('#efe7d6', '#8b4513'));
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // cells
+  const cells = g.selectAll('.matrix-cell')
+    .data(matrixData.flatMap(row =>
+      types.map(t => ({ text: row.text, type: t, value: row[t] }))
+    ))
+    .enter()
+    .append('rect')
+    .attr('class', 'matrix-cell')
+    .attr('x', d => xScale(d.type))
+    .attr('y', d => yScale(d.text))
+    .attr('width', xScale.bandwidth())
+    .attr('height', yScale.bandwidth())
+    .attr('fill', d => colorScale(d.value))
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.text + ' × ' + d.type + '</strong>');
+      tooltip.append('div').text('Intertextual strength: ' + d.value + ' / 3');
+      const level = d.value === 0 ? 'None' : (d.value === 1 ? 'Weak' : (d.value === 2 ? 'Medium' : 'Strong'));
+      tooltip.append('div').text('Intensity level: ' + level);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // in-cell values
+  g.selectAll('.matrix-value')
+    .data(matrixData.flatMap(row =>
+      types.map(t => ({ text: row.text, type: t, value: row[t] }))
+    ))
+    .enter()
+    .append('text')
+    .attr('class', 'matrix-value')
+    .attr('x', d => xScale(d.type) + xScale.bandwidth() / 2)
+    .attr('y', d => yScale(d.text) + yScale.bandwidth() / 2)
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
+    .attr('font-size', '14px')
+    .attr('font-weight', '600')
+    .attr('fill', d => d.value > 1.5 ? '#fff' : '#1a1410')
+    .text(d => d.value);
+
+  // X-axis labels (top)
+  g.selectAll('.x-label')
+    .data(types)
+    .enter()
+    .append('text')
+    .attr('class', 'x-label')
+    .attr('x', d => xScale(d) + xScale.bandwidth() / 2)
+    .attr('y', -12)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '13px')
+    .attr('font-weight', '600')
+    .attr('fill', '#1a1410')
+    .text(d => d);
+
+  // Y-axis labels (left)
+  g.selectAll('.y-label')
+    .data(texts)
+    .enter()
+    .append('text')
+    .attr('class', 'y-label')
+    .attr('x', -12)
+    .attr('y', d => yScale(d) + yScale.bandwidth() / 2)
+    .attr('text-anchor', 'end')
+    .attr('dy', '0.35em')
+    .attr('font-size', '12px')
+    .attr('fill', '#1a1410')
+    .text(d => d);
+
+  // axis titles
+  g.append('text')
+    .attr('x', innerW / 2)
+    .attr('y', -40)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '13px')
+    .attr('font-weight', '600')
+    .attr('fill', '#5a3828')
+    .text('Genette’s Five Types →');
+
+  g.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -innerH / 2)
+    .attr('y', -160)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '13px')
+    .attr('font-weight', '600')
+    .attr('fill', '#5a3828')
+    .text('← Precursor Texts');
+
+  // legend (color gradient)
+  const legend = d3.select('#matrix-legend');
+  legend.html('');
+  const legendData = [
+    { label: 'None (0)', color: colorScale(0) },
+    { label: 'Weak (1)', color: colorScale(1) },
+    { label: 'Medium (2)', color: colorScale(2) },
+    { label: 'Strong (3)', color: colorScale(3) }
+  ];
+  legendData.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', item.color); });
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: intertextual-strength radar (7 precursor texts × 5 dimensions)
+// ============================================================
+function renderRadar(radarData) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!radarData || radarData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 290).attr('fill', '#8a7a5a').text('No data');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 580;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const dimensions = ['Structure', 'Theme', 'Character', 'Plot', 'Language'];
+  const textColors = {};
+  EMBEDDED_DATA.intertextuality.texts.forEach(t => { textColors[t.name] = t.color; });
+
+  // normalization: map each dimension to 0–100
+  const maxes = {};
+  dimensions.forEach(dim => {
+    maxes[dim] = d3.max(radarData, d => d[dim]) || 100;
+  });
+
+  const cx = width / 2;
+  const cy = height / 2 + 10;
+  const radius = Math.min(width, height) / 2 - 110;
+  const levels = 5;
+
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  // background concentric polygons
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // axes + labels
+  dimensions.forEach((dim, i) => {
+    const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1);
+    const labelR = radius + 32;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', '#1a1410')
+      .text(dim);
+  });
+
+  // numeric ticks
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6).attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '10px')
+      .attr('fill', '#8a7a5a')
+      .text(lvl * 20);
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // one polygon per precursor text
+  radarData.forEach(role => {
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      const normalized = (role[dim] / 100) * 10;
+      const rr = radius * (normalized / 10);
+      return [Math.cos(angle) * rr, Math.sin(angle) * rr];
+    });
+    const color = textColors[role.text] || '#8b4513';
+
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.1)
+      .attr('stroke', color)
+      .attr('stroke-width', 2)
+      .style('cursor', 'pointer')
+      .on('mouseover', function(e) {
+        d3.select(this).attr('fill-opacity', 0.3);
+        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.html('');
+        tooltip.append('div').html('<strong>《' + role.text + '》</strong>');
+        dimensions.forEach(dim => {
+          tooltip.append('div').text(dim + ': ' + role[dim]);
+        });
+      })
+      .on('mousemove', function(e) {
+        tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('fill-opacity', 0.1);
+        tooltip.transition().duration(400).style('opacity', 0);
+      });
+
+    // vertex circles
+    points.forEach((p) => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 3.5)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 1);
+    });
+  });
+
+  // legend
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  radarData.forEach(role => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', textColors[role.text] || '#8b4513'); });
+    item.append('span').text(role.text);
+  });
+}
+
+// ============================================================
+// Section 4: intertextual timeline
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 250).attr('fill', '#8a7a5a').text('No data');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 500;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 50, right: 60, bottom: 90, left: 70 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  // X axis: year (linear scale with offset to handle negative values)
+  const sorted = timelineData.slice().sort((a, b) => a.year - b.year);
+  const yearMin = d3.min(sorted, d => d.year);
+  const yearMax = d3.max(sorted, d => d.year);
+  const xScale = d3.scaleLinear()
+    .domain([yearMin - 100, yearMax + 100])
+    .range([0, innerW]);
+
+  // Y axis: intertextual strength
+  const yScale = d3.scaleLinear()
+    .domain([0, 110])
+    .range([innerH, 0]);
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // background grid
+  g.append('g')
+    .attr('class', 'grid')
+    .call(d3.axisLeft(yScale).tickSize(-innerW).tickFormat('').ticks(5))
+    .selectAll('line').attr('stroke', '#d4c5a9').attr('stroke-dasharray', '3,3').attr('opacity', 0.4);
+  g.select('.grid .domain').attr('stroke', 'none');
+
+  // main timeline (horizontal)
+  g.append('line')
+    .attr('x1', 0).attr('y1', innerH)
+    .attr('x2', innerW).attr('y2', innerH)
+    .attr('stroke', '#8b4513')
+    .attr('stroke-width', 2);
+
+  // text nodes
+  g.selectAll('.text-node')
+    .data(sorted)
+    .enter()
+    .append('circle')
+    .attr('class', 'text-node')
+    .attr('cx', d => xScale(d.year))
+    .attr('cy', d => yScale(d.strength))
+    .attr('r', d => 6 + d.strength / 12)
+    .attr('fill', d => d.color)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2.5)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>《' + d.text + '》</strong>');
+      tooltip.append('div').text('Era: ' + d.era);
+      tooltip.append('div').text('Type: ' + d.type);
+      tooltip.append('div').text('Intertextual type: ' + d.interType);
+      tooltip.append('div').text('Intertextual strength: ' + d.strength);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2.5);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // text labels (above nodes)
+  g.selectAll('.text-label')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'text-label')
+    .attr('x', d => xScale(d.year))
+    .attr('y', d => yScale(d.strength) - 18)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .attr('fill', d => d.color)
+    .text(d => d.text);
+
+  // era labels (below the X axis)
+  g.selectAll('.year-label')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'year-label')
+    .attr('x', d => xScale(d.year))
+    .attr('y', innerH + 24)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '10px')
+    .attr('fill', '#5a3828')
+    .text(d => d.era);
+
+  // intertextual-type labels (second row below nodes)
+  g.selectAll('.type-label')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'type-label')
+    .attr('x', d => xScale(d.year))
+    .attr('y', innerH + 40)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '9px')
+    .attr('fill', '#8a7a5a')
+    .text(d => d.interType);
+
+  // X axis
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).ticks(6).tickFormat(d => {
+      if (d < 0) return Math.abs(d) + ' BCE';
+      return d + ' CE';
+    }))
+    .selectAll('text').attr('font-size', '10px');
+
+  // Y axis
+  g.append('g')
+    .call(d3.axisLeft(yScale).ticks(5).tickFormat(d => d))
+    .selectAll('text').attr('font-size', '10px');
+
+  // axis titles
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 70)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a5a')
+    .text('Completion era (6th c. BCE – 17th c. CE)');
+  g.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -innerH / 2).attr('y', -50)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a5a')
+    .text('Intertextual strength (0–100)');
+
+  // legend
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  const typeGroups = {};
+  timelineData.forEach(d => { typeGroups[d.type] = d.color; });
+  Object.entries(typeGroups).forEach(([type, color]) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', color); });
+    item.append('span').text(type);
+  });
+}
+
+// ============================================================
+// Section 5: theorist-perspective Sankey diagram
+// ============================================================
+function buildSankeyGraph(linkData) {
+  // three layers: theorist (0) / theory dimension (1) / Journey to the West application (2)
+  const theoristNames = EMBEDDED_DATA.intertextuality.theorists.map(t => t.name);
+  const applicationNames = new Set(linkData.filter(l => !theoristNames.includes(l.source)).map(l => l.target));
+  const dimensionNames = new Set();
+  linkData.forEach(l => {
+    if (theoristNames.includes(l.source)) dimensionNames.add(l.target);
+  });
+  const sources = new Set(linkData.map(l => l.source));
+  const nodeMap = new Map();
+  linkData.forEach(l => {
+    if (!nodeMap.has(l.source)) {
+      const cat = theoristNames.includes(l.source) ? 0 : 1;
+      nodeMap.set(l.source, { name: l.source, cat });
+    }
+    if (!nodeMap.has(l.target)) {
+      const cat = sources.has(l.target) ? 1 : 2;
+      nodeMap.set(l.target, { name: l.target, cat });
+    }
+  });
+  return {
+    nodes: Array.from(nodeMap.values()),
+    links: linkData.map(l => ({ source: l.source, target: l.target, value: l.value }))
+  };
+}
+
+function renderSankey(sankeyLinkData) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyLinkData || sankeyLinkData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 300).attr('fill', '#8a7a5a').text('No data');
+    return;
+  }
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 300).attr('fill', '#8b4513')
+      .text('d3-sankey not loaded; check ../static/js/d3-sankey.min.js');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 600;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+
+  const theoristColors = {};
+  EMBEDDED_DATA.intertextuality.theorists.forEach(t => { theoristColors[t.name] = t.color; });
+  const catColors = ['#5a3828', '#6b4226', '#8b4513'];
+
+  const graphData = buildSankeyGraph(sankeyLinkData);
+  // deep-copy to avoid mutation
+  const nodes = graphData.nodes.map(d => ({ ...d }));
+  const links = graphData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(16)
+    .nodePadding(10)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // links
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => {
+      // use the source node's category color
+      if (d.source.cat === 0) return theoristColors[d.source.name] || catColors[0];
+      return catColors[d.source.cat] || '#8a7a5a';
+    })
+    .attr('stroke-width', d => Math.max(1, d.width))
+    .attr('stroke-opacity', 0.4)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.75);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('Theory application weight: ' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.4);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // nodes
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => Math.max(1, d.x1 - d.x0))
+    .attr('height', d => Math.max(1, d.y1 - d.y0))
+    .attr('fill', d => {
+      if (d.cat === 0) return theoristColors[d.name] || catColors[0];
+      return catColors[d.cat] || '#8a7a5a';
+    })
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      const catLabel = ['Theorist', 'Theory dimension', 'Journey to the West application'][d.cat] || '';
+      tooltip.append('div').text('Layer: ' + catLabel);
+      tooltip.append('div').text('Inflow: ' + (d.targetLinks || []).length + ' · Outflow: ' + (d.sourceLinks || []).length);
+      tooltip.append('div').text('Total flow: ' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // node labels
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '11px')
+    .attr('fill', '#1a1410')
+    .text(d => d.name);
+
+  // legend
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const layers = ['Intertextuality theorists', 'Theory dimension', 'Journey to the West application'];
+  layers.forEach((layer, i) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', catColors[i]); });
+    item.append('span').text(layer);
+  });
+}
+
+// ============================================================
+// Section 6: summary table + theorist list
+// ============================================================
+let summarySortState = { key: null, asc: true };
+
+function renderSummary(texts, theorists, radarData) {
+  const wrap = d3.select('#summary-table-wrap');
+  wrap.html('');
+  if (!texts || texts.length === 0) {
+    wrap.append('div').attr('class', 'empty-state').text('No data');
+    return;
+  }
+
+  // exclude Journey to the West itself, merge radar data
+  const precursors = texts.filter(t => t.id !== 'xyj').map(t => {
+    const radar = (radarData || []).find(r => r.text === t.name) || {};
+    const total = (radar.Structure || 0) + (radar.Theme || 0) + (radar.Character || 0) + (radar.Plot || 0) + (radar.Language || 0);
+    return {
+      ...t,
+      Structure: radar.Structure || 0,
+      Theme: radar.Theme || 0,
+      Character: radar.Character || 0,
+      Plot: radar.Plot || 0,
+      Language: radar.Language || 0,
+      composite: Math.round(total / 5)
+    };
+  });
+
+  const columns = [
+    { key: 'name', label: 'Precursor Text' },
+    { key: 'type', label: 'Text Type' },
+    { key: 'era', label: 'Completion Era' },
+    { key: 'Structure', label: 'Structure Borrowing' },
+    { key: 'Theme', label: 'Theme Inheritance' },
+    { key: 'Character', label: 'Character Transformation' },
+    { key: 'Plot', label: 'Plot Rewriting' },
+    { key: 'Language', label: 'Language Citation' },
+    { key: 'composite', label: 'Composite Intertextuality' }
+  ];
+
+  const table = wrap.append('table').attr('class', 'summary-table');
+  const thead = table.append('thead').append('tr');
+  columns.forEach(col => {
+    thead.append('th')
+      .text(col.label)
+      .attr('role', 'button')
+      .attr('tabindex', '0')
+      .on('click', function() { sortSummary(col.key); })
+      .on('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sortSummary(col.key); }
+      });
+  });
+  const tbody = table.append('tbody');
+
+  function drawRows(data) {
+    tbody.html('');
+    const rows = tbody.selectAll('tr')
+      .data(data)
+      .enter()
+      .append('tr')
+      .attr('role', 'row')
+      .attr('tabindex', '0');
+
+    rows.each(function(d) {
+      const tr = d3.select(this);
+      const td1 = tr.append('td');
+      td1.append('span').attr('class', 'type-dot').each(function() { d3.select(this).style('background', d.color); });
+      td1.append('span').text(d.name);
+      tr.append('td').text(d.type);
+      tr.append('td').text(d.era);
+      tr.append('td').text(d.Structure);
+      tr.append('td').text(d.Theme);
+      tr.append('td').text(d.Character);
+      tr.append('td').text(d.Plot);
+      tr.append('td').text(d.Language);
+      const tdLast = tr.append('td');
+      tdLast.append('strong').text(d.composite);
+    });
+  }
+
+  window.sortSummary = function(key) {
+    if (summarySortState.key === key) {
+      summarySortState.asc = !summarySortState.asc;
+    } else {
+      summarySortState.key = key;
+      summarySortState.asc = true;
+    }
+    const sorted = precursors.slice().sort((a, b) => {
+      const va = a[key], vb = b[key];
+      if (typeof va === 'number' && typeof vb === 'number') {
+        return summarySortState.asc ? va - vb : vb - va;
+      }
+      return summarySortState.asc
+        ? String(va).localeCompare(String(vb), 'en')
+        : String(vb).localeCompare(String(va), 'en');
+    });
+    drawRows(sorted);
+  };
+
+  drawRows(precursors);
+
+  // theorist list
+  const theoristList = d3.select('#theorist-list');
+  theoristList.html('');
+  if (!theorists || theorists.length === 0) {
+    theoristList.append('div').attr('class', 'empty-state').text('No theorist data');
+    return;
+  }
+  const items = theoristList.selectAll('.theorist-item')
+    .data(theorists)
+    .enter()
+    .append('div')
+    .attr('class', 'theorist-item')
+    .each(function(d) {
+      d3.select(this).style('border-left-color', d.color);
+      d3.select(this).append('div').attr('class', 't-name').text(d.enName);
+      d3.select(this).append('div').attr('class', 't-sense').text(d.school + ' · ' + d.theory);
+      d3.select(this).append('div').attr('class', 't-work').text(d.works);
+      d3.select(this).append('div').attr('class', 't-sense').text('Active: ' + d.activeYears + ' · ' + d.nationality);
+    });
+}
+
+// ============================================================
+// main: dispatch all render functions
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      'Data source: loaded live from <code>scripts/output/data/</code> (http server mode)';
+  }
+
+  renderOverview(data.texts);
+  renderForce(data.network);
+  renderMatrix(data.matrix);
+  renderRadar(data.radar);
+  renderTimeline(data.timeline);
+  renderSankey(data.sankey);
+  renderSummary(data.texts, data.theorists, data.radar);
+}
+
+// responsive redraw (debounced 250ms)
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderOverview(data.texts);
+      renderForce(data.network);
+      renderMatrix(data.matrix);
+      renderRadar(data.radar);
+      renderTimeline(data.timeline);
+      renderSankey(data.sankey);
+      renderSummary(data.texts, data.theorists, data.radar);
+    }
+  }, 250);
+});
+
+// start
+main();
+</script>
+<script id="audit-labelavoid">
+(function(){
+  function avoid(){
+    document.querySelectorAll("svg").forEach(function(svg){
+      var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){var r=t.getBoundingClientRect();return r.width>0&&r.height>0;});
+      var R=ts.map(function(t){return t.getBoundingClientRect();});
+      for(var i=0;i<ts.length;i++)for(var j=i+1;j<ts.length;j++){
+        var a=R[i],b=R[j];
+        var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+        var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+        if(ix*iy<=0)continue;
+        var area=Math.min(a.width*a.height,b.width*b.height);
+        if(area>0 && (ix*iy)/area>0.5){
+          var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+          if(hide.style.display!=="none") hide.style.display="none";
+        }
+      }
+    });
+  }
+  window.__avoidOverlap=avoid;
+  function run(){try{avoid();}catch(e){}}
+  window.addEventListener("load",function(){
+    [3000,6000,9000,12000].forEach(function(ms){setTimeout(run,ms);});
+  });
+})();
+</script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // horizontal (bottom) axis: rotate + shrink
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // vertical (left) axis: shrink + hide smaller overlapping labels
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // exclude axis ticks, legend, title, axis labels, heatmap cells, tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // add title to preserve the full name (visible on hover)
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
