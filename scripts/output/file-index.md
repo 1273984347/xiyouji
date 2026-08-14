@@ -8,6 +8,14 @@
 
 ---
 
+## W435 英文站续译 batch13（2026-08-14·v2.3.50）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/deconstruction.html / six-senses-narratology-network.html / monster-victims-network.html / social-media.html / cognitive-psychology.html | W435 | v2.3.50 新增·并行 subagent 英文化 5 页（_validate_en.py 全过） |
+| site/sitemap.xml | W435 | v2.3.50 修改·补 5 个 en 页（182→187 页） |
+| site/**/*.html（5 页） | W435 | v2.3.50 修改·generate_csp.py 重生成 CSP（192 页·893 内联哈希） |
+
 ## W434 英文站续译 batch12（2026-08-14·v2.3.49）
 
 | 文件 | W | 说明 |

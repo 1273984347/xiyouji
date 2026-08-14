@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-gpZrfHuO6KJFP9IeJ7RImLLN+9vhllVMYYtW1ES8WI0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Cognitive Psychology · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        
+        
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        
+        
+        
+        
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        /* 表格 */
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+        }
+        table.data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .icon-correct {
+            color: var(--accent-4);
+            font-weight: 700;
+        }
+        .icon-wrong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        /* 洞察列表 */
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        /* 雷达图角色卡片 */
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .char-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .char-card.c-tang { border-top-color: var(--accent-2); }
+        .char-card.c-bajie { border-top-color: var(--accent-soft); }
+        .char-card.c-sha { border-top-color: var(--accent-4); }
+        .char-card.c-long { border-top-color: var(--accent-3); }
+        .char-card .char-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .char-card .char-profile {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+        }
+        .char-card .char-score {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .char-card .char-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .char-card .char-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        /* 神经科学 / Modern Parallels 卡片 */
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .map-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .map-card.alt { border-left-color: var(--accent-4); }
+        .map-card.alt2 { border-left-color: var(--accent-3); }
+        .map-card .map-label {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .map-card.alt .map-label { color: var(--accent-4); }
+        .map-card.alt2 .map-label { color: var(--accent-3); }
+        .map-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .map-card .map-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .map-card .map-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 16px;
+            grid-column: 1 / -1;
+        }
+        .summary-card .map-label {
+            color: var(--accent);
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .summary-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--ink);
+        }
+        .summary-card .map-row {
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+        /* tooltip */
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 280px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .
+        .
+        .
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        /* axis 文字 */
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        /* code 样式 */
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        /* 叙事段落 */
+        .narrative {
+            font-size: 0.92rem;
+            line-height: 1.85;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .narrative strong { color: var(--ink); font-weight: 600; }
+        /* 数据来源徽章 */
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        @media (max-width: 720px) {
+            
+            
+            
+            
+            .map-grid { grid-template-columns: 1fr; }
+            .char-grid { grid-template-columns: 1fr; }
+            table.data-table { font-size: 0.78rem; }
+            table.data-table th, table.data-table td { padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            
+            
+            
+            
+            .chart-block { padding: 12px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/cognitive-psychology.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Cognitive Psychology · The Pilgrimage Team's Decision Science</p>
+        <p class="kicker">AD · Cognitive Psychology</p>
+        <h1>Cognitive Psychology · The Pilgrimage Team's Decision Science</h1>
+        <p class="subtitle">DATA-DRIVEN COGNITIVE PSYCHOLOGY OF XIYOUJI</p>
+        <p class="tagline">From availability bias to external executive control — a living textbook of cognitive psychology.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="container">
+        <nav class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a>
+            <span class="sep">/</span>
+            <a href="index.html">EN Home</a>
+            <span class="sep">/</span>
+            <span class="current">Cognitive Psychology</span>
+        </nav>
+
+        <div class="notice">
+            This page is generated from the AD-class "Cognitive Psychology" script and contains 4 JSON datasets: availability heuristic, cognitive flexibility, executive control, and overall statistics. All charts support hover tooltips.
+        </div>
+
+        <!-- 研究方法论 -->
+        <section class="section">
+            <h2 class="section-title">Introduction · A Three-Dimensional Lens on Cognitive Psychology</h2>
+            <div class="section-sub">INTRODUCTION · Three-Dimensional Cognitive Lens on Xiyouji</div>
+            <p style="font-size:0.95rem;line-height:1.8;color:var(--ink);margin-bottom:14px;">
+                Journey to the West is not only a novel of gods and demons but a living <strong>cognitive psychology textbook</strong>. This page dissects the pilgrimage team's decision science from three dimensions:
+                <strong style="color:var(--accent);">the availability heuristic</strong>(Tang Sanzang's cognitive bias),
+                <strong style="color:var(--accent-2);">cognitive flexibility</strong>(the team's ability to hold multiple hypotheses),
+                <strong style="color:var(--accent-4);">external executive control</strong>(the Golden Hoop Mantra as cognitive intervention).
+            </p>
+
+            <div style="margin-bottom:18px;">
+                <span class="data-badge">4 JSON datasets</span>
+                <span class="data-badge">3 cognitive dimensions</span>
+                <span class="data-badge">4-stage evolution</span>
+                <span class="data-badge">5 members × 6 dimensions</span>
+                <span class="data-badge">6 Golden Hoop Mantra cases</span>
+                <span class="data-badge">3-stage executive control</span>
+                <span class="data-badge">D3.js v7</span>
+                <span class="data-badge">fetch + EMBEDDED fallback</span>
+            </div>
+
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">DIMENSION 1</div>
+                    <div class="map-title">Availability Heuristic</div>
+                    <div class="map-row">Tang Sanzang's White Bone Demon episode establishes the "beautiful woman / old man = demon" cognitive anchor, with trust oscillating 8→3→5→8 across 4 stages.</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">DIMENSION 2</div>
+                    <div class="map-title">Cognitive Flexibility</div>
+                    <div class="map-row">A 5-member × 6-dimension radar chart: Wukong scores highest at 9.0 and Bajie lowest at 3.5; the team average of 5.6 is sustained by Wukong.</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">DIMENSION 3</div>
+                    <div class="map-title">Executive Control</div>
+                    <div class="map-row">The Golden Hoop Mantra as external cognitive intervention: 6 cases show prefrontal activation of 5–9 and limbic inhibition of 4–8, with success rising from 60% to 100% across 3 stages.</div>
+                </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+                Data source: scripts/AD_Cognitive-Psychology/cognitive_psychology.py · generates 4 JSON outputs; when fetch fails, this page automatically falls back to the inlined EMBEDDED data, and supports double-click opening via the file:// protocol.
+            </p>
+        </section>
+
+        <!-- KPI 卡片 -->
+        <div class="kpi-row" id="kpiRow">
+            <div class="kpi-card">
+                <div class="label">AVAILABILITY · 4 Stages</div>
+                <div class="value">4 Stages</div>
+                <div class="desc">Tang Sanzang's availability-heuristic evolution (Early → Turning point → Middle → Late)</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">FLEXIBILITY · Wukong vs Bajie</div>
+                <div class="value">9.0 vs 3.5</div>
+                <div class="desc">Highest vs lowest cognitive flexibility (team average 5.6)</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">EXECUTIVE · Golden Hoop Mantra</div>
+                <div class="value">6 Cases</div>
+                <div class="desc">Golden Hoop Mantra external-executive-control samples (Chapters 14/27/38/41/56/71)</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">SUCCESS · Early vs Late</div>
+                <div class="value">60% → 100%</div>
+                <div class="desc">Executive-control success-rate evolution (Early 60% / Middle 75% / Late 100%)</div>
+            </div>
+        </div>
+
+        <!-- Section 1: 唐僧的可得性启发 -->
+        <section class="section">
+            <h2 class="section-title">I · Tang Sanzang's Availability Heuristic</h2>
+            <div class="section-sub">AVAILABILITY HEURISTIC · recently experienced events disproportionately influence later judgments</div>
+            <div class="definition" id="def-availability">
+                <strong>Definition:</strong>Availability heuristic: people judge how frequently or probably an event occurs by how easily they can recall examples of it; events just experienced disproportionately influence later judgments.
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>Core case:</strong>Because Tang Sanzang had just been deceived by the White Bone Demon, he thereafter presumed that any beautiful woman or old man was a demon — a textbook case of availability bias.
+                Tang Sanzang's availability bias is<strong style="color:var(--accent);">"reversed"</strong>—he never doubts strangers, only Wukong.
+                The White Bone Demon episode (Chapter 27) is the cognitive turning point, but Tang Sanzang's misattribution reinforced the bias, which was still not fully corrected by the Rat Demon episode in Chapter 80.
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">Tang Sanzang's Trust vs Suspicion over 4 Stages (dual-Y-axis line chart)</div>
+                <div class="chart-caption">X axis: 4 stages / left Y: trust_wukong (red line) / right Y: suspicion_level (blue line) / White Bone Demon turning point annotated</div>
+                <svg id="chart-availability" class="chart-svg" width="100%" height="380"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent);"></span>Trust in Wukong · trust_wukong</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-2);"></span>Suspicion · suspicion_level</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>White Bone Demon turning point marker</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">4-Stage Evolution Table</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="phase-table">
+                    <thead>
+                        <tr>
+                            <th>Stage</th>
+                            <th>Chapter range</th>
+                            <th>Trait</th>
+                            <th>Representative event</th>
+                            <th>Cognitive bias</th>
+                            <th>Trust</th>
+                            <th>Suspicion</th>
+                            <th>Key quote</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">5-Case Comparison Table</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="cases-table">
+                    <thead>
+                        <tr>
+                            <th>Case</th>
+                            <th>Chapter</th>
+                            <th>Tang Sanzang's judgment</th>
+                            <th>Reality</th>
+                            <th>Wukong's judgment</th>
+                            <th>Correct?</th>
+                            <th>Cognitive error</th>
+                            <th>Consequence</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Cognitive Insights</h3>
+            <ol class="insights-list" id="insights-list"></ol>
+        </section>
+
+        <!-- Section 2: 团队认知灵活性雷达图 -->
+        <section class="section">
+            <h2 class="section-title alt-2">II · Team Cognitive Flexibility Radar</h2>
+            <div class="section-sub">COGNITIVE FLEXIBILITY · the ability to hold multiple hypotheses and switch between them</div>
+            <div class="definition" id="def-flexibility">
+                <strong>Definition:</strong>Cognitive flexibility: the ability to hold multiple hypotheses simultaneously and switch quickly in response to new information. Core case: Wukong can hold the two hypotheses "this is a demon" and "this is a mortal" simultaneously and switch rapidly, whereas Bajie can only anchor on the single hypothesis "this is a beautiful woman".
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>6-Dimension scoring system:</strong>Hypothesis diversity (holding multiple hypotheses)/ Switching speed (responding to new information)/ Information integration (fusing multiple sources)/
+                Cognitive inhibition (suppressing instinctive reactions)/ Experience transfer (transferring past experience)/ Abstract thinking (extracting general rules).
+                The team average <strong style="color:var(--accent);">5.6</strong>  is heavily dependent on Wukong's <strong>9.0</strong>  to sustain, while
+                Bajie's <strong>3.5</strong>  is the cognitive weak point; Tang Sanzang is firm in belief but low in flexibility — the root of the cognitive conflict.
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">5-Member × 6-Dimension Cognitive Flexibility Radar Chart</div>
+                <div class="chart-caption">6 dimensions: Hypothesis diversity / Switching speed / Information integration / Cognitive inhibition / Experience transfer / Abstract thinking (each 0–10 points)</div>
+                <svg id="chart-radar" class="chart-svg" width="100%" height="520"></svg>
+                <div class="legend-row" id="radar-legend">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>Sun Wukong 9.0</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>Tang Sanzang 4.3</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>Zhu Bajie 3.5</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>Sha Wujing 5.0</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-3);"></span>White Dragon Horse 6.2</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--ink-soft);"></span>Team average 5.6</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">5-Character Cognitive Profile Cards</h3>
+            <div class="char-grid" id="char-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Cognitive Flexibility Insights</h3>
+            <ol class="insights-list" id="flex-insights-list"></ol>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">6-Dimension Scoring Comparison Table</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="flex-table">
+                    <thead>
+                        <tr>
+                            <th>Character</th>
+                            <th>Hypothesis Diversity</th>
+                            <th>Switching Speed</th>
+                            <th>Information Integration</th>
+                            <th>Cognitive Inhibition</th>
+                            <th>Experience Transfer</th>
+                            <th>Abstract Thinking</th>
+                            <th>Flexibility score</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 3: 紧箍咒外部执行控制 -->
+        <section class="section">
+            <h2 class="section-title alt-3">III · The Golden Hoop Mantra as External Executive Control</h2>
+            <div class="section-sub">EXECUTIVE CONTROL · the prefrontal cortex's ability to inhibit limbic-system impulses</div>
+            <div class="definition" id="def-executive">
+                <strong>Definition:</strong>Executive control: the prefrontal cortex's ability to inhibit limbic-system impulses; when the emotional system (limbic system) is about to erupt, external intervention is needed to activate the prefrontal cortex. Core case: the Golden Hoop Mantra is the earliest case of "external cognitive intervention".
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>Neuroscience mapping:</strong>When Wukong's emotional system (limbic system + amygdala) is about to erupt, Tang Sanzang forcibly activates his
+                <strong style="color:var(--accent-2);">prefrontal cortex</strong>, making him suppress his impulses. This is the earliest in the history of cognitive development
+                <strong>"external cognitive intervention"</strong>case, akin to a hybrid of modern CBT, neurofeedback, and meditation training.
+                The 6 cases show the mantra's intensity falling gradually from 9 (peak · Chapter 27) to 2 (Chapter 71), indicating that<strong style="color:var(--accent);">external control gradually internalizes into self-control</strong>.
+            </p>
+
+            <h3 style="font-size:1.05rem;margin:8px 0 12px;color:var(--ink);">Neuroscience Mapping</h3>
+            <div class="map-grid" id="neuro-grid">
+                <div class="map-card">
+                    <div class="map-label">PREFRONTAL CORTEX</div>
+                    <div class="map-title">Prefrontal Cortex</div>
+                    <div class="map-row"><strong>Function:</strong>Rational decision-making · impulse inhibition · goal direction</div>
+                    <div class="map-row"><strong>Wukong equivalent:</strong>The pilgrimage goal · protecting Tang Sanzang · not taking life</div>
+                    <div class="map-row"><strong>Activation method:</strong>Stimulation by the Golden Hoop Mantra</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label">LIMBIC SYSTEM</div>
+                    <div class="map-title">Limbic System</div>
+                    <div class="map-row"><strong>Function:</strong>Emotional response · fight-or-flight · instinct-driven</div>
+                    <div class="map-row"><strong>Wukong equivalent:</strong>Anger · combativeness · the impulse to kill</div>
+                    <div class="map-row"><strong>Trigger:</strong>Demon provocations · Tang Sanzang's misunderstandings · feeling wronged</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label">AMYGDALA</div>
+                    <div class="map-title">Amygdala</div>
+                    <div class="map-row"><strong>Function:</strong>Processing of fear and anger</div>
+                    <div class="map-row"><strong>Wukong equivalent:</strong>Anger toward demons</div>
+                    <div class="map-row"><strong>Regulation:</strong>The Golden Hoop Mantra activates the prefrontal cortex to inhibit the amygdala</div>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">6-Case Mantra Intensity · Prefrontal Activation · Limbic Inhibition (grouped bar chart)</div>
+                <div class="chart-caption">X axis: 6 case chapters / Y axis: 0–10 / three bar groups: Mantra intensity / Prefrontal activation / Limbic inhibition</div>
+                <svg id="chart-mantra-bar" class="chart-svg" width="100%" height="380"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>mantra_intensity · Mantra Intensity</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>prefrontal_activation · Prefrontal Activation</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>limbic_inhibition · Limbic Inhibition</span>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">3-Stage Executive Control Evolution (line + success-rate shaded band)</div>
+                <div class="chart-caption">X axis: Early / Middle / Late / Y axis: avg_intensity (7→4→2) / shaded band shows success_rate (60%/75%/100%)</div>
+                <svg id="chart-evolution" class="chart-svg" width="100%" height="360"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent);"></span>avg_intensity · Average Intensity</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);opacity:0.6;"></span>success_rate · Success Rate (shaded band)</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">3-Stage Evolution Table</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="evo-table">
+                    <thead>
+                        <tr>
+                            <th>Stage</th>
+                            <th>Chapter range</th>
+                            <th>Trait</th>
+                            <th>Avg intensity</th>
+                            <th>Success rate</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">6-Case Detail Table</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="mantra-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Chapter</th>
+                            <th>Context</th>
+                            <th>Trigger event</th>
+                            <th>Intensity</th>
+                            <th>Prefrontal</th>
+                            <th>Limbic inhibition</th>
+                            <th>Emotion</th>
+                            <th>Cognitive effect</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Modern Parallels</h3>
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label">CBT</div>
+                    <div class="map-title">Cognitive Behavioral Therapy</div>
+                    <div class="map-row">Cognitive behavioral therapy · changes behavior patterns through verbal intervention.</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label">NEUROFEEDBACK</div>
+                    <div class="map-title">Neurofeedback Training</div>
+                    <div class="map-row">Neurofeedback training · trains the brain to self-regulate through external signals.</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label">MEDITATION</div>
+                    <div class="map-title">Meditation Training</div>
+                    <div class="map-row">Meditation training · activates the prefrontal cortex · inhibits the amygdala.</div>
+                </div>
+                <div class="summary-card">
+                    <div class="map-label">WUKONG CASE</div>
+                    <div class="map-title">The Golden Hoop Mantra = the earliest hybrid of CBT + neurofeedback + meditation training</div>
+                    <div class="map-row">A classic case of cognitive development from external control to internalized control: high intensity establishes the mechanism early → gradual adaptation in the middle → almost disused by the late phase, as Wukong has fully internalized executive control.</div>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Executive Control Insights</h3>
+            <ol class="insights-list" id="exec-insights-list"></ol>
+        </section>
+
+        <!-- 综合结论 -->
+        <section class="section">
+            <h2 class="section-title">IV · Synthesis · The Pilgrimage Team's Cognitive Development Arc</h2>
+            <div class="section-sub">SYNTHESIS · The Cognitive Arc of the Pilgrimage Team</div>
+
+            <p style="font-size:0.95rem;line-height:1.85;color:var(--ink);margin-bottom:18px;">
+                Viewed across the three dimensions, Journey to the West presents a complete <strong>cognitive development arc</strong>:
+                Tang Sanzang's availability bias moves from over-trust → over-suspicion → gradual correction (4 stages); the team's cognitive flexibility depends heavily on Wukong (9.0),
+                while the weak point is Bajie (3.5); the Golden Hoop Mantra as external executive control completes the full evolution from external intervention to self-internalization (60%→100%).
+            </p>
+
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">FINDING 1 · Bias Correction</div>
+                    <div class="map-title">Tang Sanzang corrects extremely slowly, but the correction is real</div>
+                    <div class="map-row">trust_wukong 8→3→5→8 shows a U-shaped regression. Even by Chapter 80 the error rate is still 60%, but the direction is correct.</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-2);">FINDING 2 · Team Dependence</div>
+                    <div class="map-title">Cognitive load is over-concentrated on Wukong</div>
+                    <div class="map-row">In the team average of 5.6, Wukong contributes +3.4; without Wukong the team average is only 4.75. Bajie's 3.5 is a structural weak point.</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-4);">FINDING 3 · Internalization Path</div>
+                    <div class="map-title">The mantra's declining intensity marks internalization</div>
+                    <div class="map-row">The intensity decline 7→4→2 is inversely proportional to the success-rate increase 60%→75%→100%, proving that external control can be internalized.</div>
+                </div>
+                <div class="summary-card">
+                    <div class="map-label">META INSIGHT</div>
+                    <div class="map-title">The Trust Problem of Cognitive Tools · Tang Sanzang distrusts the Fiery Golden Eyes</div>
+                    <div class="map-row">
+                        The three dimensions together point to a deeper theme: <strong>trust in cognitive tools</strong>. Wukong's Fiery Golden Eyes are the strongest cognitive tool,
+                        but Tang Sanzang distrusts the tool and trusts his intuition ("all beings are good") — the root of the conflict between availability bias and executive control.
+                        The essence of the Golden Hoop Mantra is using one tool (the spell) to correct the distrust of another tool (the Fiery Golden Eyes) — this constitutes Journey to the West's deepest cognitive paradox.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/08-提升认知/角色思维模型.md">Character Mind Models (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/cognitive-psychology.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<!-- ===== EMBEDDED FALLBACK DATA ===== -->
+    <!--
+        本页所有 JSON 数据均嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback。
+        在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据。
+        在 http(s):// 协议下打开时，优先 fetch ../../scripts/output/data/*.json。
+        数据源：scripts/AD_认知心理/cognitive_psychology.py 生成的 4 份 JSON。
+    -->
+    <script>
+    const EMBEDDED = {
+        availability: {
+            "concept_name": "Tang Sanzang's Availability Heuristic",
+            "english_name": "Tang Monk's Availability Heuristic",
+            "cognitive_definition": "Availability heuristic: people judge how frequently or probably an event occurs by how easily they can recall examples of it; events just experienced disproportionately influence later judgments.",
+            "core_case": "Because Tang Sanzang had just been deceived by the White Bone Demon, he thereafter presumed that any beautiful woman or old man was a demon — a textbook case of availability bias.",
+            "tang_monk_evolution": [
+                {"phase": "Early · Innocent Phase", "chapter_range": "Chapters 1–26", "characteristic": "Trusts all beings and is unwilling to take life", "representative_event": "Wukong kills the Six Robbers; Tang Sanzang is furious", "cognitive_bias": "None · over-trusting", "trust_wukong": 8, "suspicion_level": 2, "key_quote": "We are monastics; do not take any life"},
+                {"phase": "Turning Point · the White Bone Demon", "chapter_range": "Chapter 27", "characteristic": "The White Bone Demon's three transformations (maiden / old woman / old man) successfully deceive Tang Sanzang; Wukong is banished", "representative_event": "Thrice Beats the White Bone Demon; Tang Sanzang chants the Golden Hoop Mantra and banishes Wukong", "cognitive_bias": "First establishes the belief that 'a beautiful woman may be a demon'", "trust_wukong": 3, "suspicion_level": 6, "key_quote": "You monkey, you are plainly killing and destroying life"},
+                {"phase": "Middle · Peak of Availability Bias", "chapter_range": "Chapters 28–50", "characteristic": "Presumes any beautiful woman or old man is a demon; over-suspicious", "representative_event": "Red Boy turns into a child; Tang Sanzang believes him", "cognitive_bias": "Availability bias, but reversed: he doubts only Wukong, never others", "trust_wukong": 5, "suspicion_level": 7, "key_quote": "If there is a demon, Wukong, you must strike it down"},
+                {"phase": "Late · Cognitive Correction", "chapter_range": "Chapters 51–100", "characteristic": "After many episodes, begins to trust Wukong's judgment", "representative_event": "After the Red Boy incident, Tang Sanzang gradually trusts Wukong", "cognitive_bias": "Availability bias corrected, but still occasionally flares up", "trust_wukong": 8, "suspicion_level": 4, "key_quote": "Wukong, tell me — is it a demon or not?"}
+            ],
+            "comparative_cases": [
+                {"case": "The White Bone Demon's three transformations", "chapter": "Chapter 27", "tang_monk_judgment": "Believes they are mortals", "actual": "Demons", "judgment_correct": false, "cognitive_error": "No prior; over-trusting", "wukong_judgment": "Demons (Fiery Golden Eyes)", "consequence": "Wukong is banished; Tang Sanzang meets the Yellow Robe Demon"},
+                {"case": "Red Boy turns into a child", "chapter": "Chapter 40", "tang_monk_judgment": "Believes he is a child", "actual": "Demons", "judgment_correct": false, "cognitive_error": "Failed to learn from the White Bone Demon; still over-trusting", "wukong_judgment": "Demons", "consequence": "Tang Sanzang is captured; Wukong seeks Guanyin's help"},
+                {"case": "Gold Horn and Silver Horn transform", "chapter": "Chapters 32–35", "tang_monk_judgment": "Half believing, half doubting", "actual": "Demons", "judgment_correct": false, "cognitive_error": "Availability bias · beginning to doubt", "wukong_judgment": "Demons", "consequence": "Wukong sees through them; danger turns to safety"},
+                {"case": "The ghost of the Black Rooster Kingdom's king", "chapter": "Chapters 37–39", "tang_monk_judgment": "Believes it is a ghost", "actual": "A real ghost", "judgment_correct": true, "cognitive_error": "None", "wukong_judgment": "A real ghost", "consequence": "Wukong revives the king"},
+                {"case": "The Rat Demon transforms", "chapter": "Chapters 80–83", "tang_monk_judgment": "Believes she is a virtuous maiden", "actual": "Demons", "judgment_correct": false, "cognitive_error": "Bias still not fully corrected even late in the journey", "wukong_judgment": "Demons", "consequence": "Tang Sanzang is captured; Wukong seeks Heavenly King Li's help"}
+            ],
+            "cognitive_insights": [
+                "Tang Sanzang's availability bias is 'reversed': he never doubts strangers, only Wukong",
+                "The White Bone Demon episode is the cognitive turning point, but Tang Sanzang's misattribution (blaming Wukong) reinforced the bias",
+                "Availability bias leaves Tang Sanzang's judgment error rate at 60% even late in the journey",
+                "Tang Sanzang's cognitive correction is extremely slow; even by Chapter 80 it is still incomplete",
+                "Wukong's Fiery Golden Eyes are a cognitive tool, but Tang Sanzang distrusts the tool — the root of the cognitive conflict"
+            ]
+        },
+        flexibility: {
+            "concept_name": "Team Cognitive Flexibility Radar",
+            "english_name": "Team Cognitive Flexibility Radar",
+            "cognitive_definition": "Cognitive flexibility: the ability to hold multiple hypotheses simultaneously and switch quickly in response to new information.",
+            "core_case": "Wukong can hold the two hypotheses 'this is a demon' and 'this is a mortal' simultaneously and switch rapidly, whereas Bajie can only anchor on the single hypothesis 'this is a beautiful woman'.",
+            "team_members": [
+                {"character": "Sun Wukong", "cognitive_profile": "High flexibility · dual-hypothesis switching", "dimensions": {"Hypothesis Diversity": 9, "Switching Speed": 10, "Information Integration": 9, "Cognitive Inhibition": 8, "Experience Transfer": 10, "Abstract Thinking": 8}, "flexibility_score": 9.0, "key_strength": "Fiery Golden Eyes + 72 Transformations · holds multiple hypotheses at once", "key_weakness": "Overconfident · occasionally overlooks the mortal possibility", "representative_case": "Thrice Beats the White Bone Demon · simultaneously holds the two hypotheses 'is a demon' and 'looks human'"},
+                {"character": "Tang Sanzang", "cognitive_profile": "Low flexibility · anchors on a single hypothesis", "dimensions": {"Hypothesis Diversity": 3, "Switching Speed": 4, "Information Integration": 5, "Cognitive Inhibition": 3, "Experience Transfer": 4, "Abstract Thinking": 7}, "flexibility_score": 4.3, "key_strength": "Firm in belief · unmoved by appearances", "key_weakness": "Over-anchored on the 'all beings are good' hypothesis · ignores counter-evidence", "representative_case": "Thrice Beats the White Bone Demon · clings to the 'is a mortal' hypothesis"},
+                {"character": "Zhu Bajie", "cognitive_profile": "Low flexibility · anchors on instinctive hypotheses", "dimensions": {"Hypothesis Diversity": 4, "Switching Speed": 3, "Information Integration": 4, "Cognitive Inhibition": 2, "Experience Transfer": 5, "Abstract Thinking": 3}, "flexibility_score": 3.5, "key_strength": "Sharp instincts · senses danger", "key_weakness": "Anchored on the 'beautiful woman / good food' hypothesis · cannot switch", "representative_case": "The Four Sages' Test of Zen Mind · clings to the 'beautiful woman' hypothesis"},
+                {"character": "Sha Wujing", "cognitive_profile": "Moderate flexibility · follower type", "dimensions": {"Hypothesis Diversity": 5, "Switching Speed": 5, "Information Integration": 5, "Cognitive Inhibition": 6, "Experience Transfer": 5, "Abstract Thinking": 4}, "flexibility_score": 5.0, "key_strength": "Steady · follows the prevailing judgment", "key_weakness": "Lacks independent judgment · over-relies on Wukong", "representative_case": "'Master has been captured by a demon' — the follower's report"},
+                {"character": "White Dragon Horse", "cognitive_profile": "High flexibility at critical moments", "dimensions": {"Hypothesis Diversity": 6, "Switching Speed": 8, "Information Integration": 6, "Cognitive Inhibition": 7, "Experience Transfer": 5, "Abstract Thinking": 5}, "flexibility_score": 6.2, "key_strength": "Can switch at critical moments · acts decisively", "key_weakness": "Usually silent · lacks proactive judgment", "representative_case": "The Yellow Robe Demon episode · decisively transforms into a palace maid to attempt an assassination"}
+            ],
+            "team_avg_flexibility": 5.6,
+            "flexibility_insights": [
+                "Wukong's flexibility of 9.0 makes him the team's cognitive core",
+                "Bajie's flexibility of 3.5 is the lowest — the team's cognitive weak point",
+                "The team's overall flexibility of 5.6 is sustained by Wukong",
+                "Tang Sanzang is firm in belief but low in flexibility — the root of the team's cognitive conflict",
+                "The White Dragon Horse is usually silent but can switch at critical moments — a latent cognitive resource"
+            ]
+        },
+        executive: {
+            "concept_name": "The Golden Hoop Mantra as External Executive Control",
+            "english_name": "Golden Hoop Mantra as External Executive Control",
+            "cognitive_definition": "Executive control: the prefrontal cortex's ability to inhibit limbic-system impulses; when the emotional system (limbic system) is about to erupt, external intervention is needed to activate the prefrontal cortex.",
+            "core_case": "When Wukong's emotional system (limbic system) is about to erupt, Tang Sanzang forcibly activates his prefrontal cortex through verbal stimulation (the Golden Hoop Mantra), making him suppress his impulses — the earliest case of 'external cognitive intervention'.",
+            "neuroscience_mapping": {
+                "prefrontal_cortex": {"function": "Rational decision-making · impulse inhibition · goal direction", "wukong_equivalent": "The pilgrimage goal · protecting Tang Sanzang · not taking life", "activation_method": "Stimulation by the Golden Hoop Mantra"},
+                "limbic_system": {"function": "Emotional response · fight-or-flight · instinct-driven", "wukong_equivalent": "Anger · combativeness · the impulse to kill", "trigger": "Demon provocations · Tang Sanzang's misunderstandings · feeling wronged"},
+                "amygdala": {"function": "Processing of fear and anger", "wukong_equivalent": "Anger toward demons", "regulation": "The Golden Hoop Mantra activates the prefrontal cortex to inhibit the amygdala"}
+            },
+            "mantra_cases": [
+                {"n": 1, "chapter": "Chapter 14", "context": "First use · Wukong kills the Six Robbers", "trigger_event": "Wukong kills; Tang Sanzang scolds him; Wukong wants to leave", "mantra_intensity": 5, "prefrontal_activation": 8, "limbic_inhibition": 7, "outcome": "Wukong yields in pain and stays for the pilgrimage", "cognitive_effect": "First establishes the 'external executive control' mechanism", "wukong_emotion": "Anger · humiliation"},
+                {"n": 2, "chapter": "Chapter 27", "context": "Thrice Beats the White Bone Demon", "trigger_event": "Wukong kills the White Bone Demon; Tang Sanzang disbelieves him", "mantra_intensity": 9, "prefrontal_activation": 9, "limbic_inhibition": 8, "outcome": "Wukong is banished, but his prefrontal cortex has been activated", "cognitive_effect": "Executive control over-applied · drives Wukong away", "wukong_emotion": "Anger · grievance"},
+                {"n": 3, "chapter": "Chapter 38", "context": "Rescuing the king of the Black Rooster Kingdom", "trigger_event": "Wukong wants to strike the demon; Tang Sanzang cautions him", "mantra_intensity": 3, "prefrontal_activation": 6, "limbic_inhibition": 5, "outcome": "Wukong restrains himself and switches to outwitting the enemy", "cognitive_effect": "Mild stimulation · activates the prefrontal cortex · switches to strategy", "wukong_emotion": "Restraint · rationality"},
+                {"n": 4, "chapter": "Chapter 41", "context": "Red Boy's Samadhi Fire", "trigger_event": "Wukong is burned and wants to force a breakthrough", "mantra_intensity": 4, "prefrontal_activation": 7, "limbic_inhibition": 6, "outcome": "Wukong seeks Guanyin's help", "cognitive_effect": "Executive control teaches Wukong to seek help", "wukong_emotion": "Calm · seeking help"},
+                {"n": 5, "chapter": "Chapter 56", "context": "Wukong kills the bandits", "trigger_event": "Wukong kills; Tang Sanzang scolds him", "mantra_intensity": 8, "prefrontal_activation": 9, "limbic_inhibition": 8, "outcome": "Wukong is banished; the Six-Eared Macaque episode ensues", "cognitive_effect": "Executive control over-applied · triggers an inner-demon eruption", "wukong_emotion": "Anger · inner demon"},
+                {"n": 6, "chapter": "Chapter 71", "context": "Rescuing the queen of the Zhu Zi Kingdom", "trigger_event": "Wukong wants to kill the demon; Tang Sanzang cautions him", "mantra_intensity": 2, "prefrontal_activation": 5, "limbic_inhibition": 4, "outcome": "Wukong restrains himself and switches to a stratagem", "cognitive_effect": "Mild reminder · Wukong has internalized executive control", "wukong_emotion": "Restraint · strategy"}
+            ],
+            "mantra_evolution": {
+                "early_phase": {"chapters": "Chapters 14–30", "characteristic": "High intensity, frequent use · establishes the mechanism", "avg_intensity": 7, "success_rate": "60% · 3 successes, 2 failures"},
+                "middle_phase": {"chapters": "Chapters 31–58", "characteristic": "Moderate use · Wukong gradually adapts", "avg_intensity": 4, "success_rate": "75% · 3 successes, 1 failure"},
+                "late_phase": {"chapters": "Chapters 59–100", "characteristic": "Light use · Wukong has internalized executive control", "avg_intensity": 2, "success_rate": "100% · essentially no longer needed"}
+            },
+            "executive_control_insights": [
+                "The Golden Hoop Mantra is the earliest case of 'external cognitive intervention', akin to modern cognitive behavioral therapy (CBT)",
+                "In the early phase the mantra is intense, establishing the executive-control mechanism",
+                "In the middle phase the mantra's intensity drops; Wukong begins to internalize executive control",
+                "In the late phase the mantra is hardly used; Wukong has fully internalized it",
+                "This is a classic case of cognitive development: from external control to internalized control"
+            ],
+            "modern_parallel": {
+                "cbt": "Cognitive behavioral therapy · changes behavior patterns through verbal intervention",
+                "neurofeedback": "Neurofeedback training · trains the brain to self-regulate through external signals",
+                "meditation": "Meditation training · activates the prefrontal cortex · inhibits the amygdala",
+                "wukong_case": "The Golden Hoop Mantra = the earliest hybrid of CBT + neurofeedback + meditation training"
+            }
+        },
+        summary: {
+            "availability_phases": 4,
+            "availability_cases": 5,
+            "cognitive_team_members": 5,
+            "team_avg_flexibility": 5.6,
+            "highest_flexibility": "Sun Wukong",
+            "lowest_flexibility": "Zhu Bajie",
+            "mantra_cases": 6,
+            "mantra_phases": 3
+        }
+    };
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('[fallback] ' + path + ' → embedded data:', e.message);
+            return fallback;
+        }
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== Main render =====
+    async function main() {
+        const baseUrl = '../../scripts/output/data/';
+        const [availability, flexibility, executive, summary] = await Promise.all([
+            loadJson(baseUrl + 'availability_heuristic.json', EMBEDDED.availability),
+            loadJson(baseUrl + 'cognitive_flexibility.json', EMBEDDED.flexibility),
+            loadJson(baseUrl + 'executive_control.json', EMBEDDED.executive),
+            loadJson(baseUrl + 'cognitive_psychology_summary.json', EMBEDDED.summary)
+        ]);
+        window.__lastData = { availability, flexibility, executive, summary };
+
+        renderAvailability(availability);
+        renderCasesTable(availability);
+        renderInsights(availability);
+        renderPhaseTable(availability);
+        renderRadar(flexibility);
+        renderCharCards(flexibility);
+        renderFlexInsights(flexibility);
+        renderFlexTable(flexibility);
+        renderMantraBar(executive);
+        renderEvolution(executive);
+        renderEvoTable(executive);
+        renderMantraTable(executive);
+        renderExecInsights(executive);
+    }
+
+    // ===== Section 1: 可得性启发 双 Y 轴折线图 =====
+    function renderAvailability(data) {
+        const svg = d3.select('#chart-availability');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 600), H = 380;
+        const m = {top: 30, right: 70, bottom: 60, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const phases = data.tang_monk_evolution;
+        const labels = phases.map(d => d.phase);
+
+        const x = d3.scalePoint().domain(labels).range([0, w]).padding(0.5);
+        const y1 = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+        const y2 = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y1.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y1(d)).attr('y2', d => y1(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
+            .selectAll('text').style('font-size', '11px');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y1).ticks(5));
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(${w},0)`)
+            .call(d3.axisRight(y2).ticks(5));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--accent)')
+            .text('Trust (trust_wukong)');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', w + 52)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--accent-2)')
+            .text('Suspicion (suspicion_level)');
+
+        // line generators
+        const line1 = d3.line().x(d => x(d.phase)).y(d => y1(d.trust_wukong)).curve(d3.curveMonotoneX);
+        const line2 = d3.line().x(d => x(d.phase)).y(d => y2(d.suspicion_level)).curve(d3.curveMonotoneX);
+
+        // 信任度 line
+        g.append('path').datum(phases)
+            .attr('fill', 'none')
+            .attr('stroke', '#c8463a')
+            .attr('stroke-width', 2.5)
+            .attr('d', line1);
+        g.append('path').datum(phases)
+            .attr('fill', 'none')
+            .attr('stroke', '#3a6b8c')
+            .attr('stroke-width', 2.5)
+            .attr('d', line2);
+
+        // points + tooltip
+        g.selectAll('.pt-trust')
+            .data(phases).enter().append('circle')
+            .attr('class', 'pt-trust')
+            .attr('cx', d => x(d.phase)).attr('cy', d => y1(d.trust_wukong))
+            .attr('r', 6).attr('fill', '#c8463a').attr('stroke', '#fff').attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>${d.phase}</strong><br>` +
+                    `Chapter: ${d.chapter_range}<br>` +
+                    `Trust in Wukong: ${d.trust_wukong} / 10<br>` +
+                    `Suspicion: ${d.suspicion_level} / 10<br>` +
+                    `Trait: ${d.characteristic}<br>` +
+                    `<em>"${d.key_quote}"</em>`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        g.selectAll('.pt-susp')
+            .data(phases).enter().append('circle')
+            .attr('class', 'pt-susp')
+            .attr('cx', d => x(d.phase)).attr('cy', d => y2(d.suspicion_level))
+            .attr('r', 6).attr('fill', '#3a6b8c').attr('stroke', '#fff').attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>${d.phase}</strong><br>` +
+                    `Chapter: ${d.chapter_range}<br>` +
+                    `Suspicion: ${d.suspicion_level} / 10<br>` +
+                    `Trust in Wukong: ${d.trust_wukong} / 10<br>` +
+                    `Representative event: ${d.representative_event}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // White Bone Demon turning point marker
+        const baiPhase = phases[1];
+        const bx = x(baiPhase.phase);
+        g.append('rect')
+            .attr('x', bx - 30).attr('y', -10)
+            .attr('width', 60).attr('height', h + 20)
+            .attr('fill', '#e9b885').attr('opacity', 0.18);
+        g.append('text')
+            .attr('x', bx).attr('y', -16)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#C9A063')
+            .style('font-size', '11px').style('font-weight', '600')
+            .text('▼ White Bone Demon turning point');
+    }
+
+    function renderCasesTable(data) {
+        const tbody = d3.select('#cases-table tbody');
+        const rows = tbody.selectAll('tr').data(data.comparative_cases).enter().append('tr');
+        rows.append('td').text(d => d.case);
+        rows.append('td').text(d => d.chapter);
+        rows.append('td').text(d => d.tang_monk_judgment);
+        rows.append('td').text(d => d.actual);
+        rows.append('td').text(d => d.wukong_judgment);
+        rows.append('td').html(d => d.judgment_correct
+            ? '<span class="icon-correct">✓</span>'
+            : '<span class="icon-wrong">✗</span>');
+        rows.append('td').text(d => d.cognitive_error);
+        rows.append('td').text(d => d.consequence);
+    }
+
+    function renderInsights(data) {
+        const list = d3.select('#insights-list');
+        list.selectAll('li').data(data.cognitive_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 2: 雷达图 =====
+    function renderRadar(data) {
+        const svg = d3.select('#chart-radar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 700;
+        const W = Math.max(containerW, 500), H = 520;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const cx = W / 2, cy = H / 2 + 10;
+        const radius = Math.max(0, Math.min(W, H) / 2 - 70);
+        const levels = 5;
+        const dims = Object.keys(data.team_members[0].dimensions);
+        const nDims = dims.length;
+
+        const colorMap = {
+            'Sun Wukong': '#c8463a',
+            'Tang Sanzang': '#3a6b8c',
+            'Zhu Bajie': '#e9b885',
+            'Sha Wujing': '#6B8E5A',
+            'White Dragon Horse': '#C9A063'
+        };
+
+        // 角度
+        const angle = (i) => (i * 2 * Math.PI / nDims) - Math.PI / 2;
+
+        // 网格圆
+        const gridG = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+        for (let lv = 1; lv <= levels; lv++) {
+            const r = radius * lv / levels;
+            const pts = dims.map((_, i) => [r * Math.cos(angle(i)), r * Math.sin(angle(i))]);
+            gridG.append('polygon')
+                .attr('points', pts.map(p => p.join(',')).join(' '))
+                .attr('fill', 'none')
+                .attr('stroke', '#d9cdb8')
+                .attr('stroke-dasharray', lv === levels ? '0' : '3,3');
+        }
+        // 刻度数字
+        for (let lv = 1; lv <= levels; lv++) {
+            const r = radius * lv / levels;
+            gridG.append('text')
+                .attr('x', 4).attr('y', -r + 3)
+                .style('font-size', '10px')
+                .attr('fill', '#6B6455')
+                .text((lv * 2).toString());
+        }
+
+        // 轴线
+        dims.forEach((d, i) => {
+            const x2 = radius * Math.cos(angle(i));
+            const y2 = radius * Math.sin(angle(i));
+            gridG.append('line')
+                .attr('x1', 0).attr('y1', 0)
+                .attr('x2', x2).attr('y2', y2)
+                .attr('stroke', '#d9cdb8');
+            // 轴标签
+            const lx = (radius + 28) * Math.cos(angle(i));
+            const ly = (radius + 28) * Math.sin(angle(i));
+            gridG.append('text')
+                .attr('x', lx).attr('y', ly)
+                .attr('text-anchor', 'middle')
+                .attr('dominant-baseline', 'middle')
+                .style('font-size', '12px')
+                .style('font-weight', '600')
+                .attr('fill', '#23201A')
+                .text(d);
+        });
+
+        // 数据多边形
+        const rScale = d3.scaleLinear().domain([0, 10]).range([0, radius]);
+
+        data.team_members.forEach(member => {
+            const pts = dims.map((d, i) => {
+                const v = member.dimensions[d];
+                return [rScale(v) * Math.cos(angle(i)), rScale(v) * Math.sin(angle(i))];
+            });
+            const poly = gridG.append('polygon')
+                .attr('points', pts.map(p => p.join(',')).join(' '))
+                .attr('fill', colorMap[member.character])
+                .attr('fill-opacity', 0.18)
+                .attr('stroke', colorMap[member.character])
+                .attr('stroke-width', 2)
+                .style('cursor', 'pointer');
+            poly.on('mouseover', (e) => {
+                poly.attr('fill-opacity', 0.4);
+                const dimList = dims.map(d => `${d}: ${member.dimensions[d]}`).join('<br>');
+                tooltip.show(
+                    `<strong style="color:${colorMap[member.character]}">${member.character}</strong> · flexibility ${member.flexibility_score}<br>` +
+                    `<em>${member.cognitive_profile}</em><br>` +
+                    dimList, e);
+            }).on('mouseout', () => {
+                poly.attr('fill-opacity', 0.18);
+                tooltip.hide();
+            });
+            // 顶点
+            pts.forEach((p, i) => {
+                gridG.append('circle')
+                    .attr('cx', p[0]).attr('cy', p[1])
+                    .attr('r', 3.5)
+                    .attr('fill', colorMap[member.character])
+                    .attr('stroke', '#fff').attr('stroke-width', 1.5)
+                    .style('pointer-events', 'none');
+            });
+        });
+
+        // 团队均值圆
+        const avgR = rScale(data.team_avg_flexibility);
+        gridG.append('circle')
+            .attr('cx', 0).attr('cy', 0)
+            .attr('r', avgR)
+            .attr('fill', 'none')
+            .attr('stroke', '#6B6455')
+            .attr('stroke-dasharray', '6,4')
+            .attr('stroke-width', 1.5);
+        gridG.append('text')
+            .attr('x', avgR * Math.SQRT1_2 + 4)
+            .attr('y', -avgR * Math.SQRT1_2 - 4)
+            .style('font-size', '10px').style('fill', '#6B6455')
+            .text(`Team average ${data.team_avg_flexibility}`);
+    }
+
+    function renderCharCards(data) {
+        const colorClass = {
+            'Sun Wukong': '', 'Tang Sanzang': 'c-tang', 'Zhu Bajie': 'c-bajie',
+            'Sha Wujing': 'c-sha', 'White Dragon Horse': 'c-long'
+        };
+        const grid = d3.select('#char-grid');
+        const cards = grid.selectAll('.char-card')
+            .data(data.team_members).enter()
+            .append('div')
+            .attr('class', d => 'char-card ' + (colorClass[d.character] || ''));
+        cards.append('div').attr('class', 'char-name').text(d => d.character);
+        cards.append('div').attr('class', 'char-profile').text(d => d.cognitive_profile);
+        cards.append('div').attr('class', 'char-score').text(d => 'Flexibility score ' + d.flexibility_score + ' / 10');
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>Strengths:</strong> ' + d.key_strength);
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>Weaknesses:</strong> ' + d.key_weakness);
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>Representative case:</strong> ' + d.representative_case);
+    }
+
+    function renderFlexInsights(data) {
+        const list = d3.select('#flex-insights-list');
+        list.selectAll('li').data(data.flexibility_insights).enter().append('li').text(d => d);
+    }
+
+    function renderFlexTable(data) {
+        const tbody = d3.select('#flex-table tbody');
+        const rows = tbody.selectAll('tr').data(data.team_members).enter().append('tr');
+        rows.append('td').html(d => '<strong>' + d.character + '</strong>');
+        rows.append('td').text(d => d.dimensions['Hypothesis Diversity']);
+        rows.append('td').text(d => d.dimensions['Switching Speed']);
+        rows.append('td').text(d => d.dimensions['Information Integration']);
+        rows.append('td').text(d => d.dimensions['Cognitive Inhibition']);
+        rows.append('td').text(d => d.dimensions['Experience Transfer']);
+        rows.append('td').text(d => d.dimensions['Abstract Thinking']);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.flexibility_score + '</strong>');
+    }
+
+    // ===== Section 3: 紧箍咒分组条形图 =====
+    function renderMantraBar(data) {
+        const svg = d3.select('#chart-mantra-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 380;
+        const m = {top: 30, right: 30, bottom: 60, left: 50};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const cases = data.mantra_cases;
+
+        const x0 = d3.scaleBand().domain(cases.map(d => d.chapter)).range([0, w]).padding(0.2);
+        const x1 = d3.scaleBand().domain(['mantra_intensity', 'prefrontal_activation', 'limbic_inhibition']).range([0, x0.bandwidth()]).padding(0.05);
+        const y = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x0).tickSize(0).tickPadding(10))
+            .selectAll('text').style('font-size', '11px');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5));
+
+        // axis label
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 48)
+            .attr('text-anchor', 'middle')
+            .text('Chapter');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -36)
+            .attr('text-anchor', 'middle')
+            .text('Intensity (0-10)');
+
+        const colors = {
+            'mantra_intensity': '#c8463a',
+            'prefrontal_activation': '#3a6b8c',
+            'limbic_inhibition': '#6B8E5A'
+        };
+        const labels = {
+            'mantra_intensity': 'Mantra Intensity',
+            'prefrontal_activation': 'Prefrontal Activation',
+            'limbic_inhibition': 'Limbic Inhibition'
+        };
+
+        const groups = g.selectAll('.case-group')
+            .data(cases).enter().append('g')
+            .attr('class', 'case-group')
+            .attr('transform', d => `translate(${x0(d.chapter)},0)`);
+
+        groups.selectAll('rect')
+            .data(d => ['mantra_intensity', 'prefrontal_activation', 'limbic_inhibition'].map(k => ({
+                key: k, value: d[k], case: d
+            })))
+            .enter().append('rect')
+            .attr('x', d => x1(d.key))
+            .attr('y', d => y(d.value))
+            .attr('width', x1.bandwidth())
+            .attr('height', d => h - y(d.value))
+            .attr('fill', d => colors[d.key])
+            .attr('stroke', '#fff').attr('stroke-width', 1)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>${d.case.chapter}</strong> · ${d.case.context}<br>` +
+                    `${labels[d.key]}: <strong>${d.value}</strong> / 10<br>` +
+                    `Trigger: ${d.case.trigger_event}<br>` +
+                    `Emotion: ${d.case.wukong_emotion}<br>` +
+                    `Result: ${d.case.outcome}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 在柱顶标数值
+        groups.selectAll('.bar-val')
+            .data(d => ['mantra_intensity', 'prefrontal_activation', 'limbic_inhibition'].map(k => ({
+                key: k, value: d[k]
+            })))
+            .enter().append('text')
+            .attr('class', 'bar-val')
+            .attr('x', d => x1(d.key) + x1.bandwidth() / 2)
+            .attr('y', d => y(d.value) - 4)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10px')
+            .style('fill', '#23201A')
+            .text(d => d.value);
+    }
+
+    // ===== Section 3: 3 阶段演变 =====
+    function renderEvolution(data) {
+        const svg = d3.select('#chart-evolution');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 360;
+        const m = {top: 30, right: 60, bottom: 60, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const evo = data.mantra_evolution;
+        const phases = [
+            {key: 'Early', label: 'Early · ' + evo.early_phase.chapters, intensity: evo.early_phase.avg_intensity, success: 60},
+            {key: 'Middle', label: 'Middle · ' + evo.middle_phase.chapters, intensity: evo.middle_phase.avg_intensity, success: 75},
+            {key: 'Late', label: 'Late · ' + evo.late_phase.chapters, intensity: evo.late_phase.avg_intensity, success: 100}
+        ];
+
+        const x = d3.scalePoint().domain(phases.map(d => d.key)).range([0, w]).padding(0.5);
+        const yI = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+        const yS = d3.scaleLinear().domain([0, 100]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(yI.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => yI(d)).attr('y2', d => yI(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // 成功率阴影带（基于右轴）
+        const areaGen = d3.area()
+            .x(d => x(d.key))
+            .y0(d => yS(d.success))
+            .y1(h)
+            .curve(d3.curveMonotoneX);
+        g.append('path')
+            .datum(phases)
+            .attr('d', areaGen)
+            .attr('fill', '#e9b885')
+            .attr('fill-opacity', 0.35);
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
+            .selectAll('text').style('font-size', '11px');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(yI).ticks(5));
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(${w},0)`)
+            .call(d3.axisRight(yS).ticks(5).tickFormat(d => d + '%'));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#c8463a')
+            .text('avg_intensity Average Intensity (0-10)');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', w + 50)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#C9A063')
+            .text('success_rate Success Rate (0-100%)');
+
+        // 强度折线
+        const line = d3.line().x(d => x(d.key)).y(d => yI(d.intensity)).curve(d3.curveMonotoneX);
+        g.append('path').datum(phases)
+            .attr('fill', 'none')
+            .attr('stroke', '#c8463a')
+            .attr('stroke-width', 3)
+            .attr('d', line);
+
+        // 点 + tooltip
+        g.selectAll('.pt-evo')
+            .data(phases).enter().append('circle')
+            .attr('class', 'pt-evo')
+            .attr('cx', d => x(d.key)).attr('cy', d => yI(d.intensity))
+            .attr('r', 7).attr('fill', '#c8463a').attr('stroke', '#fff').attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                const evoKey = d.key === 'Early' ? 'early_phase' : (d.key === 'Middle' ? 'middle_phase' : 'late_phase');
+                const ph = evo[evoKey];
+                tooltip.show(
+                    `<strong>${d.label}</strong><br>` +
+                    `Average intensity: ${ph.avg_intensity} / 10<br>` +
+                    `Success rate: ${ph.success_rate}<br>` +
+                    `Trait: ${ph.characteristic}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 数值标签
+        g.selectAll('.val-evo')
+            .data(phases).enter().append('text')
+            .attr('class', 'val-evo')
+            .attr('x', d => x(d.key)).attr('y', d => yI(d.intensity) - 12)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '11px').style('font-weight', '600')
+            .attr('fill', '#c8463a')
+            .text(d => 'Intensity ' + d.intensity);
+
+        // 成功率标签
+        g.selectAll('.val-success')
+            .data(phases).enter().append('text')
+            .attr('class', 'val-success')
+            .attr('x', d => x(d.key)).attr('y', d => yS(d.success) + 14)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '11px').style('font-weight', '600')
+            .attr('fill', '#C9A063')
+            .text(d => d.success + '%');
+    }
+
+    function renderMantraTable(data) {
+        const tbody = d3.select('#mantra-table tbody');
+        const rows = tbody.selectAll('tr').data(data.mantra_cases).enter().append('tr');
+        rows.append('td').text(d => d.n);
+        rows.append('td').text(d => d.chapter);
+        rows.append('td').text(d => d.context);
+        rows.append('td').text(d => d.trigger_event);
+        rows.append('td').text(d => d.mantra_intensity);
+        rows.append('td').text(d => d.prefrontal_activation);
+        rows.append('td').text(d => d.limbic_inhibition);
+        rows.append('td').text(d => d.wukong_emotion);
+        rows.append('td').text(d => d.cognitive_effect);
+        rows.append('td').text(d => d.outcome);
+    }
+
+    function renderPhaseTable(data) {
+        const tbody = d3.select('#phase-table tbody');
+        const rows = tbody.selectAll('tr').data(data.tang_monk_evolution).enter().append('tr');
+        rows.append('td').html(d => '<strong>' + d.phase + '</strong>');
+        rows.append('td').text(d => d.chapter_range);
+        rows.append('td').text(d => d.characteristic);
+        rows.append('td').text(d => d.representative_event);
+        rows.append('td').text(d => d.cognitive_bias);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.trust_wukong + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-2);">' + d.suspicion_level + '</strong>');
+        rows.append('td').html(d => '<em>"' + d.key_quote + '"</em>');
+    }
+
+    function renderEvoTable(data) {
+        const tbody = d3.select('#evo-table tbody');
+        const evo = data.mantra_evolution;
+        const rows = [
+            {phase: 'Early', obj: evo.early_phase},
+            {phase: 'Middle', obj: evo.middle_phase},
+            {phase: 'Late', obj: evo.late_phase}
+        ];
+        const trs = tbody.selectAll('tr').data(rows).enter().append('tr');
+        trs.append('td').html(d => '<strong>' + d.phase + '</strong>');
+        trs.append('td').text(d => d.obj.chapters);
+        trs.append('td').text(d => d.obj.characteristic);
+        trs.append('td').html(d => '<strong style="color:var(--accent);">' + d.obj.avg_intensity + ' / 10</strong>');
+        trs.append('td').text(d => d.obj.success_rate);
+    }
+
+    function renderExecInsights(data) {
+        const list = d3.select('#exec-insights-list');
+        list.selectAll('li').data(data.executive_control_insights).enter().append('li').text(d => d);
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
