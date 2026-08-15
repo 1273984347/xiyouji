@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-/hrEE4tb0OLqEqXx58blovhxgTXuQUcP3bjQdxM1pQw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-trdbhJzW7K3O79B8UpY1sxj1fyUtsSSI75xkcgYA49A=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Appearances &amp; Screen Time · Annotated Journey to the West</title>
@@ -946,7 +946,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">Annotated Journey to the West</div>
-            <div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/02-人物深度分析/人物谱系表.md">Character Lineage (essay, 中文)</a></div>
+            <div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/02-人物深度分析/人物谱系表.md">Character Lineage (essay, in Chinese)</a></div>
         </div>
         <nav aria-label="Footer">
             <a href="index.html">EN Home</a>
@@ -1529,10 +1529,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 'Data source: loaded live from <code>scripts/output/data/character_appearance.json</code> (http server mode)';
             return data;
         } catch (e) {
-            console.log('[INFO] 使用嵌入式 mock 数据：', e.message);
+            console.log('[INFO] using embedded mock data:', e.message);
             const mock = buildMockData();
             document.getElementById('dataSource').innerHTML =
-                'Data source: <strong>embedded mock data</strong> (fallback state). Run <code>py B_人物/character_appearance.py --input ../source/原文/分回/ --output output/data/character_appearance.json</code> to generate the full dataset';
+                'Data source: <strong>embedded mock data</strong> (fallback state). Run <code>py B_Characters/character_appearance.py --input ../source/original-text/by-chapter/ --output output/data/character_appearance.json</code> to generate the full dataset';
             return mock;
         }
     }
