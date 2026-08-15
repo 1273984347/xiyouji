@@ -4,9 +4,18 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W446），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W447），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.62（2026-08-14）：W447 工具目录治理 — 英化工具链转正 + 45 个一次性脚本归档 + README
+
+> **来源**：完整校验后的工具盘点——scripts/ 目录 135 个 .py 混杂常驻工具与历史一次性脚本，核心英化工具带下划线前缀被误认为一次性。
+> - **执行（转正）**：scripts/_extract_strings.py → extract_strings.py、scripts/_validate_en.py → validate_en.py（去下划线·docstring 更新·交接文档/项目概览 24 处旧引用同步）。
+> - **执行（归档）**：45 个历史一次性脚本（w286_*/w334_*/w335_*/fix_links_w341*/_inject_*/_fix_*/_batch_*/_scan_*/_build_*/_check_*/_audit_*/_standardize_*/_add_analysis_links*/_annotate_*/_diag_tick/_perf_edit/_batch_transform_d3/fix_svg_negative_widths）git mv 至 scripts/archive/，保留 git 历史。
+> - **执行（README）**：scripts/README.md 补充 archive 说明 + extract_strings.py/validate_en.py 登记。
+> - **验证**：verify_delivery 核心全绿·generate_csp --check 0 漂移·lint_links 3930 链接 0 broken·改名后 validate_en.py/extract_strings.py smoke test 通过。
+> - **状态**：已落地·待 commit/push。
 
 ### v2.3.61（2026-08-14）：W446 英文站旧页 CJK 残留清理 — 52 页全过 _validate_en.py
 

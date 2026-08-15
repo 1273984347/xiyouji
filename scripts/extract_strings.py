@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Dump every chrome text node and every CJK-bearing script literal from a data viz HTML.
-Usage: python scripts/_extract_strings.py <name> ...
+Usage: python scripts/extract_strings.py <name> ...
 Reads site/data/<name>.html, prints:
   ## CHROME  <segment>
   ## SCRIPT  <literal>

@@ -8,6 +8,15 @@
 
 ---
 
+## W447 工具目录治理（2026-08-14·v2.3.62）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/extract_strings.py / validate_en.py | W447 | v2.3.62 改名（原 _extract_strings.py/_validate_en.py 去下划线转正） |
+| scripts/archive/（45 个） | W447 | v2.3.62 新增·历史一次性脚本归档（git mv 保留历史） |
+| scripts/README.md | W447 | v2.3.62 修改·补 archive 说明 + 转正工具登记 |
+| 交接文档.md / 项目概览.md | W447 | v2.3.62 修改·24 处旧工具名引用同步 |
+
 ## W446 英文站旧页 CJK 残留清理（2026-08-14·v2.3.61）
 
 | 文件 | W | 说明 |

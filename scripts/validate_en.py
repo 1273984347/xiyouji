@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Validate an EN viz page: chrome CJK must be whitelist-only; script CJK must be 0.
-Usage: python scripts/_validate_en.py <path-to-en-html>
+Usage: python scripts/validate_en.py <path-to-en-html>
 Exit non-zero on violation. Prints details.
 """
 import re, sys, os

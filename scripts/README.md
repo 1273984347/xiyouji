@@ -3,6 +3,7 @@
 > 本目录承载《西游记》文本分析脚本与可视化站点工程化工具。
 > 数据分析脚本按 A-AH 34 类分目录组织，详见 [STRUCTURE.md](../STRUCTURE.md)。
 > 根级工具脚本（截图审查 / 静态检查 / 批量修复）登记在本文件。
+> **历史一次性脚本已归档至 [`archive/`](archive/)（45 个，W446 治理），保留 git 历史备查，不再参与日常工作流。**
 
 ## 根级工具脚本
 
@@ -12,7 +13,8 @@
 |:---|:---|:---|
 | `check_js_syntax.py` | 检查 HTML 内联 JS 语法（单文件 + 批量两种模式） | `python check_js_syntax.py site/data/cave-estate.html` / `python check_js_syntax.py --all` |
 | `detect_unwrapped_tables.py` | 静态扫描无横向滚动容器的 `<table>`（表格溢出双轨检查之一） | `python detect_unwrapped_tables.py` |
-| `fix_svg_negative_widths.py` | 批量修复 SVG 负宽度/负半径 class-level pattern | `python fix_svg_negative_widths.py --dry-run` |
+| `extract_strings.py` | 穷举 viz 页 chrome 文本节点 + script CJK 字面量（英文站翻译前置枚举·W446 转正去下划线） | `python scripts/extract_strings.py <name>` |
+| `validate_en.py` | 校验 EN 页 chrome CJK 白名单 + script CJK=0（英文站翻译门禁·W446 转正去下划线） | `python scripts/validate_en.py <path>` |
 | `slice_screenshots.py` | 将全页截图按固定高度切片（Pillow，默认 800px） | `python slice_screenshots.py --output-dir output/screenshots` |
 | `embed_json.py` | 统一 JSON 数据嵌入 HTML（EMBEDDED_DATA fallback 模式） | `python embed_json.py site/data/foo.html output/data/foo.json` |
 | `lint_links.py` | 链接校验（HTML href/src + Markdown [text] (url) 形式）+ 自动修复 | `python lint_links.py --all` / `python lint_links.py --fix` |
