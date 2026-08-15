@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-BPog+/qtf0ZHt/rPa763iu+3bwO95hoYImoXky484pk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Site-Wide Tag Cloud · Visualization Navigation Hub · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        /* Hero */
+        
+        
+        
+        .hero p {
+            font-size: 1rem;
+            color: #d9c9a8;
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .hero .stats {
+            margin-top: 18px;
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        .hero .stats span {
+            font-size: 0.92rem;
+            color: #e9d8b8;
+        }
+        .hero .stats b {
+            color: #f0c878;
+            font-weight: 600;
+            font-size: 1.15rem;
+        }
+        /* Container */
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 24px;
+            padding: 10px;
+            background: var(--paper);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        .tab-btn {
+            font-family: inherit;
+            font-size: 0.92rem;
+            padding: 8px 16px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            color: var(--ink);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            line-height: 1.4;
+        }
+        .tab-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .tab-btn[aria-pressed="true"] {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            box-shadow: 0 2px 6px rgba(200, 70, 58, 0.3);
+        }
+        .tab-btn .count {
+            font-size: 0.78rem;
+            opacity: 0.75;
+            margin-left: 2px;
+        }
+        /* Search */
+        .search-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .search-box {
+            width: 100%;
+            max-width: 560px;
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 12px 16px 12px 42px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--paper);
+            color: var(--ink);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-box input:focus {
+            border-color: var(--accent-2);
+            box-shadow: 0 0 0 3px rgba(58, 107, 140, 0.12);
+        }
+        .search-box::before {
+            content: "🔍";
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            opacity: 0.5;
+        }
+        .search-hint {
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-top: 6px;
+        }
+        /* Tag cloud */
+        .cloud-section {
+            background: var(--paper);
+            border-radius: 12px;
+            padding: 32px 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+        }
+        
+        
+        #tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 6px 10px;
+            min-height: 200px;
+            padding: 16px 0;
+        }
+        .tag-item {
+            font-family: inherit;
+            cursor: pointer;
+            line-height: 1.5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            display: inline-block;
+            user-select: none;
+            border-bottom: 2px solid transparent;
+        }
+        .tag-item:hover {
+            background: rgba(0,0,0,0.04);
+            border-bottom-color: currentColor;
+            transform: translateY(-2px);
+        }
+        .tag-item.active {
+            background: rgba(200, 70, 58, 0.1);
+            border-bottom-color: var(--accent);
+        }
+        .tag-item.dimmed {
+            opacity: 0.25;
+        }
+        /* Category colors */
+        .cat-a-l { color: var(--accent); }
+        .cat-m-u { color: var(--accent-2); }
+        .cat-v-ah { color: var(--accent-3); }
+        .cat-q-series { color: var(--accent-4); }
+        .cat-d-nlp { color: var(--accent-5); }
+        .cat-v-new { color: var(--accent-6); }
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px dashed var(--line);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        /* Tooltip */
+        #tooltip {
+            position: fixed;
+            z-index: 1000;
+            background: rgba(26, 20, 16, 0.96);
+            color: #f5e9d4;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            max-width: 320px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            line-height: 1.5;
+        }
+        #tooltip .tt-title {
+            font-weight: 600;
+            color: #f0c878;
+            margin-bottom: 4px;
+        }
+        #tooltip .tt-desc {
+            color: #d9c9a8;
+        }
+        #tooltip .tt-meta {
+            font-size: 0.76rem;
+            color: #a89878;
+            margin-top: 6px;
+        }
+        /* Recommendations */
+        .rec-section {
+            background: var(--paper);
+            border-radius: 12px;
+            padding: 32px 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+        }
+        .rec-context {
+            text-align: center;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            margin-bottom: 20px;
+        }
+        .rec-context b {
+            color: var(--accent);
+        }
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .rec-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px;
+            background: var(--bg);
+            text-decoration: none;
+            color: var(--ink);
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .rec-card:hover {
+            border-color: var(--accent-2);
+            box-shadow: 0 4px 12px rgba(58, 107, 140, 0.15);
+            transform: translateY(-3px);
+        }
+        .rec-card .rc-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--accent-2);
+        }
+        .rec-card .rc-desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            line-height: 1.5;
+        }
+        .rec-card .rc-meta {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .rec-card .rc-size {
+            background: var(--accent);
+            color: #fff;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+        }
+        .rec-empty {
+            text-align: center;
+            color: var(--ink-soft);
+            padding: 24px;
+            font-size: 0.9rem;
+        }
+        /* Footer */
+        
+        
+        
+        footer p {
+            margin-bottom: 6px;
+        }
+        .footer-index {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid #3a2820;
+            font-size: 0.78rem;
+            color: #a89878;
+        }
+        .footer-cross {
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: #a89878;
+        }
+        .footer-cross a {
+            color: #c8a878;
+        }
+        /* Responsive */
+        @media (max-width: 640px) {
+            
+            
+            
+            .cloud-section, .rec-section { padding: 20px 14px; }
+            .tab-btn { padding: 6px 12px; font-size: 0.85rem; }
+            .rec-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 375px) {
+            
+            
+            
+            
+            .cloud-section, .rec-section { padding: 16px 10px; }
+            .tab-row { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; padding-bottom: 4px; }
+            .tab-btn { padding: 8px 14px; font-size: 0.82rem; flex-shrink: 0; min-height: 36px; }
+            .rec-grid { grid-template-columns: 1fr; gap: 10px; }
+            .rec-card { padding: 12px 10px; }
+            .search-input { font-size: 14px; padding: 10px 12px; }
+            .tag-cloud { height: 320px !important; }
+            .tag-cloud svg text { font-size: 11px; }
+        }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/tag-cloud.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Site-Wide Tag Cloud · Visualization Navigation Hub</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Site-Wide Tag Cloud · Visualization Navigation Hub</h1>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <!-- 分类筛选 Tabs -->
+        <nav class="tabs" role="tablist" aria-label="Category filter">
+            <button class="tab-btn" data-cat="all" aria-pressed="true" role="tab">All <span class="count" id="cnt-all"></span></button>
+            <button class="tab-btn" data-cat="a-l" aria-pressed="false" role="tab">A-L Foundation <span class="count" id="cnt-a-l"></span></button>
+            <button class="tab-btn" data-cat="m-u" aria-pressed="false" role="tab">M-U Extension <span class="count" id="cnt-m-u"></span></button>
+            <button class="tab-btn" data-cat="v-ah" aria-pressed="false" role="tab">V-AH Interdisciplinary <span class="count" id="cnt-v-ah"></span></button>
+            <button class="tab-btn" data-cat="q-series" aria-pressed="false" role="tab">Q Series <span class="count" id="cnt-q-series"></span></button>
+            <button class="tab-btn" data-cat="d-nlp" aria-pressed="false" role="tab">D NLP <span class="count" id="cnt-d-nlp"></span></button>
+            <button class="tab-btn" data-cat="v-new" aria-pressed="false" role="tab">V New Dimensions <span class="count" id="cnt-v-new"></span></button>
+        </nav>
+
+        <!-- 搜索框 -->
+        <div class="search-wrap">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search by keyword: title, tags, description..." aria-label="Search tags">
+            </div>
+        </div>
+        <p class="search-hint">Matches page titles, tag words, and description text</p>
+
+        <!-- 标签云主体 -->
+        <section class="cloud-section" aria-label="Tag cloud">
+            <h2 class="section-title">Tag Cloud Navigation</h2>
+            <p class="section-sub">Tag size reflects data-dimension count · color indicates category · click to jump to the page</p>
+            <div id="tag-cloud" role="navigation" aria-label="Site-wide tag cloud"></div>
+            <div class="legend" aria-hidden="false">
+                <div class="legend-item"><span class="legend-dot" style="background:#c8463a"></span>A-L Foundation</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#3a6b8c"></span>M-U Extension</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#C9A063"></span>V-AH Interdisciplinary</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#6B8E5A"></span>Q Series</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#8a5a8c"></span>D NLP</div>
+                <div class="legend-item"><span class="legend-dot" style="background:#c89a3a"></span>V New Dimensions</div>
+            </div>
+        </section>
+
+        <!-- 智能推荐 -->
+        <section class="rec-section" aria-label="Related Pages">
+            <h2 class="section-title">Related Pages</h2>
+            <p class="section-sub">Click any tag in the cloud to show same-category recommendations here</p>
+            <p class="rec-context" id="rec-context">Currently showing: <b>Popular</b> (the 5 pages with the most data dimensions)</p>
+            <div class="rec-grid" id="rec-grid"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/tag-cloud.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<!-- FILE_INDEX: tag-cloud.html | W313-V3 | 标签云全站导航 -->
+    <!-- CHANGELOG: v2.2.65 W313 V3 跨页面导航增强 -->
+
+    <div id="tooltip" role="tooltip" aria-hidden="true"></div>
+
+    <script>
+    // ============================================================
+    // EMBEDDED_DATA: metadata for all 79 HTML pages under site/data/
+    // Fields: file, title, category, tags, size (data-dimension count), desc
+    // ============================================================
+    const EMBEDDED_DATA = [
+        // ===== A-L Foundation (9) =====
+        {file:"dashboard.html", title:"Data Dashboard", category:"a-l", tags:["Overview", "Navigation", "Dashboard", "KPI"], size:10, desc:"Site-wide data visualization overview dashboard with KPI summary"},
+        {file:"relationships.html", title:"Character Relationships", category:"a-l", tags:["Character Relations", "Master-Disciple", "Network Graph", "Three Realms"], size:8, desc:"Overview of the character relationship network in Journey to the West and the pilgrim team structure"},
+        {file:"philosophy.html", title:"Philosophy and Mind", category:"a-l", tags:["Mind Monkey", "Mind Cultivation", "Six-Eared Macaque", "Two Minds"], size:6, desc:"Mind-monkey stages, the mind-cultivation allegory, and the Six-Eared Macaque as a two-minds metaphor"},
+        {file:"risk-project.html", title:"Risk & Project Management", category:"a-l", tags:["Risk", "Project", "Eighty-One Hardships", "Pilgrimage"], size:7, desc:"Risk analysis and control for the scripture-seeking project"},
+        {file:"monster-sociology.html", title:"Monster Sociology", category:"a-l", tags:["Monster", "Society", "Class", "Organization"], size:7, desc:"Social class structure and organizational forms of monsters"},
+        {file:"power-resources.html", title:"Power & Resources", category:"a-l", tags:["Power", "Resources", "Magical Treasures", "Heaven"], size:6, desc:"Distribution of power and resources across the Three Realms and their rivalry"},
+        {file:"karma-reincarnation.html", title:"Fate & Reincarnation", category:"a-l", tags:["Karma", "Reincarnation", "Karmic Retribution", "Past Life"], size:6, desc:"Analysis of the karma, retribution, and reincarnation system"},
+        {file:"business-model.html", title:"Business Model", category:"a-l", tags:["Business", "Model", "Economy", "Transaction"], size:5, desc:"The business model and economic logic of the pilgrim team"},
+        {file:"cave-estate.html", title:"Cave Estate Archive", category:"a-l", tags:["Cave", "Estate", "Space", "Territory"], size:5, desc:"Spatial distribution of monster caves and territorial economy"},
+        // ===== M-U Extension (9) =====
+        {file:"magic-system.html", title:"Magic System", category:"m-u", tags:["Magic", "System", "Supernatural Powers", "Transformation"], size:8, desc:"A complete overview of the magic and supernatural-power system in Journey to the West"},
+        {file:"aesthetics.html", title:"Aesthetic Fashion Evolution", category:"m-u", tags:["Aesthetics", "Taste", "Artistic Conception", "Classical"], size:6, desc:"Analysis of the aesthetic and artistic conception of Journey to the West"},
+        {file:"music-structure.html", title:"Music, Sound & Rhythm", category:"m-u", tags:["Music", "Structure", "Rhythm", "Tempo"], size:5, desc:"The musical structure and rhythm of the text"},
+        {file:"text-evolution.html", title:"Text Evolution", category:"m-u", tags:["Text", "Evolution", "Versions", "Textual Criticism"], size:7, desc:"Evolution and variation of Journey to the West text versions"},
+        {file:"deconstruction.html", title:"Deconstruction", category:"m-u", tags:["Deconstruction", "Postmodern", "Text", "Subversion"], size:6, desc:"A postmodern deconstructionist analysis"},
+        {file:"global-pattern.html", title:"Global Pilgrim Family", category:"m-u", tags:["Global", "Pattern", "Structure", "Narrative"], size:7, desc:"Extraction of global narrative patterns across the whole book"},
+        {file:"counterfactual.html", title:"Counterfactual Inference", category:"m-u", tags:["Counterfactual", "Hypothesis", "Inference", "Possible Worlds"], size:6, desc:"Counterfactual historical inference and hypothetical analysis"},
+        {file:"cultural-misreading.html", title:"Cultural Misreading", category:"m-u", tags:["Culture", "Misreading", "Cross-Cultural", "Reception"], size:5, desc:"Cross-cultural misreading phenomena and reception history"},
+        {file:"methodology-matrix.html", title:"Methodology Matrix", category:"m-u", tags:["Methodology", "Matrix", "Research", "Framework"], size:8, desc:"Research methodology matrix and multi-dimensional frameworks"},
+        // ===== V-AH Interdisciplinary (12) =====
+        {file:"workplace.html", title:"Workplace", category:"v-ah", tags:["Workplace", "Working", "Team", "Management"], size:7, desc:"A workplace-ecology reading of the pilgrim team"},
+        {file:"social-media.html", title:"Social Media Persona", category:"v-ah", tags:["Social", "Media", "Network", "Communication"], size:6, desc:"Communication analysis from a social-media perspective"},
+        {file:"game-webnovel.html", title:"Game & Web Novel", category:"v-ah", tags:["Game", "Web Novel", "Interaction", "Narrative"], size:6, desc:"Analysis of narrative mechanics in games and web novels"},
+        {file:"ethics-consumption.html", title:"Ethics & Consumption", category:"v-ah", tags:["Ethics", "Consumption", "Morality", "Capital"], size:5, desc:"A critique of ethics and consumer culture"},
+        {file:"chart-design.html", title:"Chart Design", category:"v-ah", tags:["Chart", "Design", "Visualization", "Standards"], size:7, desc:"Data chart design standards and best practices"},
+        {file:"narrative-experiment.html", title:"Narrative Experiment", category:"v-ah", tags:["Narrative", "Experiment", "Innovation", "Form"], size:6, desc:"Innovative experiments in narrative form"},
+        {file:"visual-art.html", title:"Visual Art", category:"v-ah", tags:["Visual", "Art", "Image", "Color"], size:6, desc:"Visual art expression and image analysis"},
+        {file:"cognitive-psychology.html", title:"Cognitive Psychology", category:"v-ah", tags:["Cognition", "Psychology", "Cognitive Science", "Mind"], size:7, desc:"A cognitive-psychology reading"},
+        {file:"ecology.html", title:"Ecology", category:"v-ah", tags:["Ecology", "Environment", "Nature", "System"], size:5, desc:"Environmental systems from an ecological perspective"},
+        {file:"jurisprudence.html", title:"Jurisprudence", category:"v-ah", tags:["Jurisprudence", "Law", "Justice", "Order"], size:6, desc:"Justice and order from a jurisprudential perspective"},
+        {file:"material-archaeology.html", title:"Material Archaeology", category:"v-ah", tags:["Material", "Archaeology", "Artifact", "Objects"], size:5, desc:"Artifact analysis in material archaeology"},
+        {file:"linguistics.html", title:"Linguistics", category:"v-ah", tags:["Language", "Linguistics", "Semantics", "Grammar"], size:7, desc:"Linguistics and semantic analysis"},
+        // ===== Q Series (9) =====
+        {file:"criticism-history.html", title:"Criticism Through Time", category:"q-series", tags:["Criticism", "History", "Review", "Reception History"], size:7, desc:"The history of Journey to the West criticism and its evolving reviews"},
+        {file:"cross-time-danmaku.html", title:"Cross-Time Danmaku", category:"q-series", tags:["Danmaku", "Cross-Time", "Interaction", "Comments"], size:6, desc:"Cross-time danmaku interactive commentary"},
+        {file:"concept-device.html", title:"Concept Devices", category:"q-series", tags:["Concept", "Device", "Tools", "Method"], size:5, desc:"Conceptual devices and analytical tools"},
+        {file:"emotional-heatmap.html", title:"Emotional Heatmap", category:"q-series", tags:["Emotion", "Heatmap", "Sentiment", "Visualization"], size:7, desc:"Emotional heatmap visualization"},
+        {file:"timeline.html", title:"Interactive Timeline", category:"q-series", tags:["Timeline", "Chronology", "Annals", "Events"], size:8, desc:"A chronological timeline of Journey to the West events"},
+        {file:"ai-dialogue.html", title:"AI Dialogue", category:"q-series", tags:["AI", "Dialogue", "Intelligent", "Generation"], size:6, desc:"AI dialogue generation and interaction"},
+        {file:"text-search.html", title:"Full-Text Search", category:"q-series", tags:["Search", "Lookup", "Text", "Index"], size:7, desc:"Full-text search system and indexing"},
+        {file:"century-dialogue.html", title:"Century Dialogue", category:"q-series", tags:["Century", "Dialogue", "Cross-Era", "Thought"], size:5, desc:"Cross-century intellectual dialogue"},
+        {file:"famous-time-travel.html", title:"Famous Time Travel", category:"q-series", tags:["Famous Figures", "Time Travel", "Spacetime", "Encounter"], size:5, desc:"Time-travel encounters of famous figures"},
+        // ===== D NLP (11) =====
+        {file:"character-sentiment-arc.html", title:"Character Sentiment Arc", category:"d-nlp", tags:["Character", "Sentiment", "Arc", "NLP"], size:8, desc:"NLP analysis of character sentiment arcs"},
+        {file:"character-semantic-network.html", title:"Character Semantic Network", category:"d-nlp", tags:["Character", "Semantics", "Network", "NLP"], size:7, desc:"Construction of the character semantic network"},
+        {file:"character-presence-timeline.html", title:"Character Presence Timeline", category:"d-nlp", tags:["Character", "Appearance", "Timeline", "NLP"], size:7, desc:"Tracking character presence across the timeline"},
+        {file:"character-appearance.html", title:"Character Appearances", category:"d-nlp", tags:["Character", "Appearance", "Entrances", "Frequency"], size:6, desc:"Analysis of character appearance frequency"},
+        {file:"dialogue-sentiment.html", title:"Dialogue Sentiment", category:"d-nlp", tags:["Dialogue", "Sentiment", "Analysis", "NLP"], size:7, desc:"Dialogue sentiment analysis and polarity"},
+        {file:"character-dynamic-network.html", title:"Character Dynamic Network", category:"d-nlp", tags:["Character", "Dynamic", "Network", "Temporal"], size:8, desc:"Temporal dynamic network of characters"},
+        {file:"character-relationship-3d.html", title:"Character Relations 3D", category:"d-nlp", tags:["Character", "Relations", "3D", "Stereoscopic"], size:8, desc:"3D character relationship network visualization"},
+        {file:"narrative-rhythm-curve.html", title:"Narrative Rhythm Curve", category:"d-nlp", tags:["Narrative", "Rhythm", "Curve", "Cadence"], size:7, desc:"Narrative rhythm curve analysis"},
+        {file:"language-style-radar.html", title:"Language Style Radar", category:"d-nlp", tags:["Language", "Style", "Radar", "Features"], size:6, desc:"Language style radar chart"},
+        {file:"chapter-structure-graph.html", title:"Chapter Structure Graph", category:"d-nlp", tags:["Chapter", "Structure", "Graph", "NLP"], size:7, desc:"Chapter structure graph analysis"},
+        {file:"chapter-stats.html", title:"Chapter Stats", category:"d-nlp", tags:["Chapter", "Statistics", "Data", "Word Count"], size:6, desc:"Chapter statistics and word-count distribution"},
+        // ===== V New Dimensions (29) =====
+        {file:"journey-map-interactive.html", title:"Interactive Journey Map", category:"v-new", tags:["Pilgrimage", "Route", "Interactive", "Map"], size:9, desc:"Interactive map of the pilgrimage route"},
+        {file:"journey-spacetime.html", title:"Pilgrimage Spacetime", category:"v-new", tags:["Pilgrimage", "Spacetime", "Spacetime Diagram", "Dimensions"], size:8, desc:"Dimensional analysis of the pilgrimage spacetime"},
+        {file:"journey-route.html", title:"Journey Route", category:"v-new", tags:["Pilgrimage", "Route", "Geography", "Trajectory"], size:7, desc:"The geographical trajectory of the pilgrimage route"},
+        {file:"journey-geo-semiotics.html", title:"Journey Geosemiotics", category:"v-new", tags:["Pilgrimage", "Geography", "Semiotics", "Space"], size:6, desc:"A geosemiotic reading of the pilgrimage route"},
+        {file:"hardship-heatmap.html", title:"Hardship Heatmap", category:"v-new", tags:["Hardship", "Heatmap", "Eighty-One Hardships", "Distribution"], size:8, desc:"Heatmap of hardship distribution"},
+        {file:"hardship-difficulty-heatmap.html", title:"Hardship Difficulty Heatmap", category:"v-new", tags:["Hardship", "Difficulty", "Heatmap", "Level"], size:7, desc:"Heatmap of hardship difficulty levels"},
+        {file:"81-hardships.html", title:"Eighty-One Hardships", category:"v-new", tags:["Eighty-One Hardships", "Hardship", "81", "Tribulations"], size:9, desc:"A complete overview of the Eighty-One Hardships"},
+        {file:"mbti-evolution.html", title:"MBTI Evolution", category:"v-new", tags:["MBTI", "Personality", "Evolution", "Temperament"], size:7, desc:"MBTI personality evolution trajectories of the characters"},
+        {file:"monster-capability-radar.html", title:"Monster Capability Radar", category:"v-new", tags:["Monster", "Capability", "Radar", "Combat Power"], size:7, desc:"Monster capability radar chart"},
+        {file:"monster-victims-network.html", title:"Monster-Victim Network", category:"v-new", tags:["Monster", "Victim", "Network", "Harm"], size:6, desc:"Network of monster-victim relationships"},
+        {file:"monster-female-network.html", title:"Monster Female Network", category:"v-new", tags:["Female Monster", "Monster", "Network", "Gender"], size:6, desc:"Relationship network of female monster characters"},
+        {file:"monster-background.html", title:"Monster Background", category:"v-new", tags:["Monster", "Background", "Origin", "Lineage"], size:6, desc:"Analysis of monster backgrounds and origins"},
+        {file:"monster-hierarchy-network.html", title:"Monster Hierarchy", category:"v-new", tags:["Monster", "Hierarchy", "Network", "Class"], size:7, desc:"Monster hierarchy and class network"},
+        {file:"heaven-power-network.html", title:"Heaven Power Network", category:"v-new", tags:["Heaven", "Power", "Network", "Deities"], size:8, desc:"Power relationship network of Heaven"},
+        {file:"underworld-power-network.html", title:"Underworld Power Network", category:"v-new", tags:["Underworld", "Power", "Network", "Yama"], size:7, desc:"Underworld power relationship network"},
+        {file:"guanyin-six-roles-network.html", title:"Guanyin Six Roles Network", category:"v-new", tags:["Guanyin", "Roles", "Network", "Salvation"], size:6, desc:"The six-role network of Guanyin"},
+        {file:"four-heavenly-kings-artifacts.html", title:"Four Heavenly Kings Artifacts", category:"v-new", tags:["Four Heavenly Kings", "Artifacts", "Weapons", "Protection"], size:5, desc:"Artifacts and weapons of the Four Heavenly Kings"},
+        {file:"pilgrim-team-psychology-arc.html", title:"Pilgrim Team Psychology Arc", category:"v-new", tags:["Pilgrimage", "Team", "Psychology", "Arc"], size:7, desc:"The psychological arc of the pilgrim team"},
+        {file:"pilgrim-team-dynamic-network.html", title:"Pilgrim Team Dynamics Network", category:"v-new", tags:["Pilgrimage", "Team", "Dynamic", "Network"], size:8, desc:"Dynamic relationship network of the pilgrim team"},
+        {file:"six-senses-narratology-network.html", title:"Six-Senses Narratology Network", category:"v-new", tags:["Six Senses", "Narratology", "Network", "Senses"], size:7, desc:"Six-senses narratology network analysis"},
+        {file:"narratology-12d-network.html", title:"12D Narratology Network", category:"v-new", tags:["Narratology", "12D", "Network", "Multi-dimensional"], size:9, desc:"Twelve-dimension narratology network"},
+        {file:"narratology-13d-network.html", title:"13D Narratology Network", category:"v-new", tags:["Narratology", "13D", "Network", "Multi-dimensional"], size:9, desc:"Thirteen-dimension narratology network"},
+        {file:"intertextuality-network.html", title:"Intertextuality Network", category:"v-new", tags:["Intertextuality", "Text", "Network", "Citation"], size:7, desc:"Intertextual citation network"},
+        {file:"monster-ecology-network.html", title:"Monster Ecology Network", category:"v-new", tags:["Monster", "Ecology", "Network", "Habitat"], size:7, desc:"Monster ecology and habitat network"},
+        {file:"theological-intervention-network.html", title:"Theological Intervention Network", category:"v-new", tags:["Theology", "Intervention", "Network", "Gods and Buddhas"], size:7, desc:"Theological intervention network"},
+        {file:"four-dimensional-research-network.html", title:"Four-Dimensional Research Network", category:"v-new", tags:["Four-Dimensional", "Research", "Network", "Framework"], size:8, desc:"Four-dimensional research framework network"},
+        {file:"ming-political-thought-comparison.html", title:"Ming Political Thought Comparison", category:"v-new", tags:["Ming Dynasty", "Politics", "Thought", "Comparison"], size:6, desc:"Comparative analysis of Ming political thought"},
+        {file:"poetry-rhythm-analysis.html", title:"Poetry Rhythm Analysis", category:"v-new", tags:["Poetry", "Rhythm", "Analysis", "Prosody"], size:6, desc:"Analysis of poetry rhythm and prosody"},
+        {file:"perf-canvas-rendering.html", title:"Canvas Rendering Performance", category:"v-new", tags:["Canvas", "Performance", "Rendering", "Optimization"], size:6, desc:"High-performance Canvas rendering optimization"},
+    ];
+
+    // ============================================================
+    // Category configuration
+    // ============================================================
+    const CATEGORY_CONFIG = {
+        "a-l":      {label:"A-L Foundation",     color:"#c8463a", cls:"cat-a-l"},
+        "m-u":      {label:"M-U Extension",    color:"#3a6b8c", cls:"cat-m-u"},
+        "v-ah":     {label:"V-AH Interdisciplinary",  color:"#C9A063", cls:"cat-v-ah"},
+        "q-series": {label:"Q Series",      color:"#6B8E5A", cls:"cat-q-series"},
+        "d-nlp":    {label:"D NLP",  color:"#8a5a8c", cls:"cat-d-nlp"},
+        "v-new":    {label:"V New Dimensions",   color:"#c89a3a", cls:"cat-v-new"}
+    };
+
+    // ============================================================
+    // State management
+    // ============================================================
+    let state = {
+        activeCategory: "all",
+        searchQuery: "",
+        selectedFile: null,
+        filteredData: []
+    };
+
+    // ============================================================
+    // D3.js tag cloud rendering
+    // ============================================================
+    // P2-5 fix: escape tooltip data concatenation (title/desc/tags come from the data file)
+    function escapeHtml(s) {
+      return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+    const tooltip = d3.select("#tooltip");
+
+    function fontSizeScale(size) {
+        // size range 5-10 maps to 12px-28px
+        const min = 5, max = 10;
+        const fmin = 12, fmax = 28;
+        const ratio = (size - min) / (max - min);
+        return fmin + ratio * (fmax - fmin);
+    }
+
+    function filterData() {
+        let data = EMBEDDED_DATA;
+        if (state.activeCategory !== "all") {
+            data = data.filter(d => d.category === state.activeCategory);
+        }
+        if (state.searchQuery) {
+            const q = state.searchQuery.toLowerCase();
+            data = data.filter(d =>
+                d.title.toLowerCase().includes(q) ||
+                d.desc.toLowerCase().includes(q) ||
+                d.tags.some(t => t.toLowerCase().includes(q)) ||
+                d.file.toLowerCase().includes(q)
+            );
+        }
+        state.filteredData = data;
+        return data;
+    }
+
+    function renderTagCloud() {
+        const data = filterData();
+        const cloud = d3.select("#tag-cloud");
+
+        // Bind data
+        const tags = cloud.selectAll(".tag-item")
+            .data(data, d => d.file);
+
+        tags.exit()
+            .transition().duration(200)
+            .style("opacity", 0)
+            .remove();
+
+        const enter = tags.enter()
+            .append("span")
+            .attr("class", d => "tag-item " + (CATEGORY_CONFIG[d.category] || {cls:""}).cls)
+            .style("font-size", d => fontSizeScale(d.size) + "px")
+            .style("opacity", 0)
+            .text(d => d.title)
+            .attr("role", "link")
+            .attr("tabindex", "0")
+            .attr("aria-label", d => d.title + ": " + d.desc)
+            .attr("data-file", d => d.file);
+
+        enter.merge(tags)
+            .classed("active", d => d.file === state.selectedFile)
+            .transition().duration(300)
+            .style("opacity", 1)
+            .style("font-size", d => fontSizeScale(d.size) + "px");
+
+        // Event binding
+        enter.merge(tags)
+            .on("click", (event, d) => {
+                event.preventDefault();
+                handleTagClick(d);
+            })
+            .on("mouseenter", (event, d) => {
+                showTooltip(event, d);
+            })
+            .on("mousemove", (event) => {
+                positionTooltip(event);
+            })
+            .on("mouseleave", () => {
+                hideTooltip();
+            })
+            .on("keydown", (event, d) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    handleTagClick(d);
+                }
+            });
+
+        // Update stats
+        d3.select("#stat-shown").text(data.length);
+        d3.select("#stat-total").text(EMBEDDED_DATA.length);
+    }
+
+    function showTooltip(event, d) {
+        const cat = CATEGORY_CONFIG[d.category] || {label: d.category};
+        tooltip.html(
+            '<div class="tt-title">' + escapeHtml(d.title) + '</div>' +
+            '<div class="tt-desc">' + escapeHtml(d.desc) + '</div>' +
+            '<div class="tt-meta">Category: ' + escapeHtml(cat.label) + ' · Dimensions: ' + d.size + ' · Tags: ' + escapeHtml(d.tags.join(", ")) + '</div>'
+        );
+        tooltip.style("opacity", 1).attr("aria-hidden", "false");
+        positionTooltip(event);
+    }
+
+    function positionTooltip(event) {
+        const tt = document.getElementById("tooltip");
+        const rect = tt.getBoundingClientRect();
+        let x = event.clientX + 14;
+        let y = event.clientY + 14;
+        if (x + rect.width > window.innerWidth) x = event.clientX - rect.width - 14;
+        if (y + rect.height > window.innerHeight) y = event.clientY - rect.height - 14;
+        tooltip.style("left", x + "px").style("top", y + "px");
+    }
+
+    function hideTooltip() {
+        tooltip.style("opacity", 0).attr("aria-hidden", "true");
+    }
+
+    // ============================================================
+    // Tag click: navigate + smart recommendations
+    // ============================================================
+    function handleTagClick(d) {
+        state.selectedFile = d.file;
+        renderTagCloud();
+        renderRecommendations(d);
+        // Navigate to the corresponding page
+        window.location.href = d.file;
+    }
+
+    // ============================================================
+    // Smart recommendation rendering
+    // ============================================================
+    function renderRecommendations(selected) {
+        const grid = d3.select("#rec-grid");
+        const context = d3.select("#rec-context");
+
+        let recs;
+        if (selected) {
+            // Other pages in the same category, top 5 by size descending
+            recs = EMBEDDED_DATA
+                .filter(d => d.category === selected.category && d.file !== selected.file)
+                .sort((a, b) => b.size - a.size)
+                .slice(0, 5);
+            const cat = CATEGORY_CONFIG[selected.category] || {label: selected.category};
+            context.html('Currently showing: same-category recommendations related to <b>' + selected.title + '</b> (' + cat.label + ')');
+        } else {
+            // Initial: the 5 pages with the largest size
+            recs = EMBEDDED_DATA
+                .slice()
+                .sort((a, b) => b.size - a.size)
+                .slice(0, 5);
+            context.html('Currently showing: <b>Popular</b> (the 5 pages with the most data dimensions)');
+        }
+
+        grid.selectAll(".rec-card").remove();
+
+        if (recs.length === 0) {
+            grid.append("div").attr("class", "rec-empty").text("No related recommendations");
+            return;
+        }
+
+        const cards = grid.selectAll(".rec-card")
+            .data(recs)
+            .enter()
+            .append("a")
+            .attr("class", d => "rec-card")
+            .attr("href", d => d.file)
+            .attr("aria-label", d => "Recommended page: " + d.title);
+
+        cards.append("div").attr("class", "rc-title").text(d => d.title);
+        cards.append("div").attr("class", "rc-desc").text(d => d.desc);
+        cards.append("div").attr("class", "rc-meta").html(d => {
+            const cat = CATEGORY_CONFIG[d.category] || {label: d.category};
+            return '<span>' + cat.label + '</span><span class="rc-size">Dimensions ' + d.size + '</span>';
+        });
+    }
+
+    // ============================================================
+    // Category filter tabs
+    // ============================================================
+    function setupTabs() {
+        d3.selectAll(".tab-btn").on("click", function() {
+            const cat = this.getAttribute("data-cat");
+            state.activeCategory = cat;
+            d3.selectAll(".tab-btn").attr("aria-pressed", "false");
+            this.setAttribute("aria-pressed", "true");
+            renderTagCloud();
+        });
+
+        // Initialize counts
+        const counts = {};
+        EMBEDDED_DATA.forEach(d => { counts[d.category] = (counts[d.category]||0) + 1; });
+        d3.select("#cnt-all").text("(" + EMBEDDED_DATA.length + ")");
+        Object.keys(CATEGORY_CONFIG).forEach(cat => {
+            d3.select("#cnt-" + cat).text("(" + (counts[cat]||0) + ")");
+        });
+    }
+
+    // ============================================================
+    // Search box
+    // ============================================================
+    function setupSearch() {
+        const input = document.getElementById("search-input");
+        let debounceTimer;
+        input.addEventListener("input", () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                state.searchQuery = input.value.trim();
+                renderTagCloud();
+            }, 200);
+        });
+    }
+
+    // ============================================================
+    // Count total tags
+    // ============================================================
+    function countTags() {
+        const tagSet = new Set();
+        EMBEDDED_DATA.forEach(d => d.tags.forEach(t => tagSet.add(t)));
+        d3.select("#stat-tags").text(tagSet.size);
+    }
+
+    // ============================================================
+    // Keyboard navigation: left/right arrows move between tags
+    // ============================================================
+    function setupKeyboardNav() {
+        const cloud = document.getElementById("tag-cloud");
+        cloud.addEventListener("keydown", (e) => {
+            const items = Array.from(cloud.querySelectorAll(".tag-item"));
+            const idx = items.indexOf(document.activeElement);
+            if (idx === -1) return;
+            if (e.key === "ArrowRight" && idx < items.length - 1) {
+                e.preventDefault();
+                items[idx + 1].focus();
+            } else if (e.key === "ArrowLeft" && idx > 0) {
+                e.preventDefault();
+                items[idx - 1].focus();
+            }
+        });
+    }
+
+    // ============================================================
+    // Touch interaction (V4 mobile · W314)
+    // ============================================================
+    function setupTouchNav() {
+        const cloudEl = document.querySelector(".tag-cloud");
+        if (!cloudEl) return;
+        const svg = cloudEl.querySelector("svg");
+        if (!svg) return;
+        let isDragging = false;
+        let startX = 0, startY = 0;
+        let scrollLeft = 0, scrollTop = 0;
+        // Drag-to-pan tags (for viewing overflow on mobile)
+        svg.style.cursor = "grab";
+        svg.addEventListener("touchstart", (e) => {
+            if (e.touches.length !== 1) return;
+            isDragging = true;
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            scrollLeft = window.scrollX;
+            scrollTop = window.scrollY;
+            svg.style.cursor = "grabbing";
+        }, { passive: true });
+        svg.addEventListener("touchmove", (e) => {
+            if (!isDragging || e.touches.length !== 1) return;
+            const dx = e.touches[0].clientX - startX;
+            const dy = e.touches[0].clientY - startY;
+            if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 8) {
+                // Leave vertical scrolling to the browser
+                isDragging = false;
+                svg.style.cursor = "grab";
+                return;
+            }
+        }, { passive: true });
+        svg.addEventListener("touchend", () => {
+            isDragging = false;
+            svg.style.cursor = "grab";
+        }, { passive: true });
+        // Prevent long-press text selection on tags
+        svg.querySelectorAll("text").forEach(t => {
+            t.style.userSelect = "none";
+            t.style.webkitUserSelect = "none";
+        });
+    }
+
+    // Handle URL ?q= search parameter (from mobile-index.html redirect)
+    function handleSearchQuery() {
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get("q");
+        if (!q) return;
+        const input = document.getElementById("tag-search");
+        if (input) {
+            input.value = q;
+            // Trigger the input event to activate search filtering
+            input.dispatchEvent(new Event("input", { bubbles: true }));
+            // Scroll to the search box
+            input.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    }
+
+    // ============================================================
+    // Initialize
+    // ============================================================
+    function init() {
+        setupTabs();
+        setupSearch();
+        countTags();
+        renderTagCloud();
+        renderRecommendations(null);
+        setupKeyboardNav();
+        setupTouchNav();
+        handleSearchQuery();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init);
+    } else {
+        init();
+    }
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

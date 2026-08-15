@@ -4,9 +4,17 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W443），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W444），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.59（2026-08-14）：W444 英文站续译 tag-cloud — 全站标签云导航页英文化
+
+> **来源**：延续待办「英文站续译」，tag-cloud（全站导航页）单独处理（relationships 留最后）。
+> - **执行（英文化 1 页）**：新增 site/en/tag-cloud（全站标签云·可视化导航中心）；翻译 42 chrome 节点 + ~494 script 字面量（79 页面标题/79 描述/316 标签/6 分类标签/14 状态文案），页面标题与已有 EN 页对齐。
+> - **执行（配套）**：generate_csp.py 重生成 231 页（1138 内联哈希 0 漂移）·sitemap 补 1 页（225→226）。
+> - **验证**：_validate_en.py 通过（chrome=whitelist-only·script=0）·lint_links 3913 链接 0 broken·verify_delivery 核心全绿。
+> - **状态**：已落地·待 commit/push。
 
 ### v2.3.58（2026-08-14）：W443 英文站续译 batch21 — 并行 subagent 新增 3 张可视化页英文化
 
