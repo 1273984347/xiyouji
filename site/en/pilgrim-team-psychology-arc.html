@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-3lMpEalDDshOAhiRGSbDbe1KG7X5L04PdQd80RvzXg4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Pilgrim Team Psychology Arc · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        @font-face {
+            font-family: "Noto Serif SC";
+            font-style: normal;
+            font-weight: 400 900;
+            src: local("Noto Serif SC"), local("Source Han Serif SC");
+        }
+        @font-face {
+            font-family: "JetBrains Mono";
+            font-style: normal;
+            font-weight: 400 700;
+            src: local("JetBrains Mono"), local("Fira Code");
+        }
+        
+        
+        
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .cross-page-nav {
+            background: #fffdf8; border: 1px solid var(--line); border-radius: 6px;
+            padding: 10px 16px; margin-bottom: 20px; font-size: 0.88em; color: var(--ink-soft);
+        }
+        .cross-page-nav a { color: var(--accent-2); text-decoration: none; padding: 2px 4px; border-radius: 3px; }
+        .cross-page-nav a:hover { background: #fff8e7; color: var(--accent); }
+        .cross-page-nav a.active { color: var(--accent); font-weight: 700; background: #fff8e7; }
+        .notice {
+            background: #fff8e7; border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        }
+        
+        
+        .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
+        
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
+        
+        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: var(--accent-2);
+            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 4px 0; transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        
+        .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; padding: 12px 16px; background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; }
+        .control-row .ctrl-label { font-size: 0.88em; color: var(--ink-soft); font-weight: 600; }
+        .ctrl-btn {
+            padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.9em;
+            font-family: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .ctrl-btn:hover { background: var(--accent-soft); }
+        .ctrl-btn.play { background: var(--accent-2); color: #fff; border-color: var(--accent-2); }
+        .ctrl-btn.play:hover { background: #2c5573; }
+        .ctrl-btn.play.playing { background: var(--accent); border-color: var(--accent); }
+        .slider-wrap { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 240px; }
+        .slider-wrap input[type=range] {
+            flex: 1; height: 6px; -webkit-appearance: none; appearance: none;
+            background: var(--line); border-radius: 3px; outline: none;
+        }
+        .slider-wrap input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
+            cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .slider-wrap input[type=range]::-moz-range-thumb {
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
+            cursor: pointer; border: 2px solid #fff;
+        }
+        .slider-wrap .ch-label { font-family: "JetBrains Mono", monospace; font-size: 0.85em; color: var(--accent); font-weight: 700; min-width: 78px; }
+        .speed-select {
+            padding: 6px 10px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.85em;
+            font-family: inherit;
+        }
+        .progress-bar { position: relative; height: 6px; background: var(--line); border-radius: 3px; margin-top: 8px; overflow: hidden; }
+        .progress-bar .progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
+        .chart-wrap { position: relative; overflow-x: auto; }
+        #radar-svg, #arc-svg, #cohesion-svg, #timeline-svg, #boxplot-svg { display: block; }
+        #arc-svg { min-width: 980px; }
+        .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
+        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
+        .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 2px; }
+        .legend-row .lg-swatch.line { width: 22px; height: 3px; border-radius: 1px; }
+        .legend-row .lg-swatch.dot { border-radius: 50%; }
+        .event-tip, .heat-tip {
+            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
+            color: #f5e9d4; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem;
+            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 320px;
+        }
+        .event-tip .tip-title, .heat-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
+        .event-tip .tip-row, .heat-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
+        .event-tip .tip-meta, .heat-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
+        .insight-box {
+            background: #fffdf8; border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+        }
+        .insight-box strong { color: var(--accent); font-weight: 700; }
+        .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
+        .footer-idx { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 12px; text-align: left; }
+        @media (min-width: 760px) { .footer-idx { grid-template-columns: 1fr 1fr; } }
+        .footer-idx .idx-block { background: rgba(245,233,212,0.06); border: 1px solid rgba(233,184,133,0.2); border-radius: 6px; padding: 10px 14px; }
+        .footer-idx .idx-block h4 { color: #f5e9d4; font-size: 0.82em; margin-bottom: 6px; font-weight: 700; }
+        .footer-idx .idx-block p { color: #e9b885; font-size: 0.78em; line-height: 1.6; margin: 0; }
+        .footer-idx .idx-block a { color: #e9b885; text-decoration: underline; }
+        
+        
+        @media (prefers-reduced-motion: reduce) {  }
+        @media (max-width: 480px) {
+            
+            
+            
+            .ctrl-btn { padding: 6px 12px; font-size: 0.82em; }
+        }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/pilgrim-team-psychology-arc.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">EN Home</a> / <a href="../dashboard.html">Dashboard</a> / Pilgrim Team Psychology Arc</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Pilgrim Team Psychology Arc</h1>
+        <p class="subtitle">W233-2 · V3 · Forms an individual–team two-layer with character-sentiment-arc</p>
+        <p class="tagline">— The evolution of the five pilgrims’ psychological states across 100 chapters · five-dimension radar / cohesion heatmap / turning-point timeline</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="../index.html">EN Home</a>
+            <span class="sep">›</span>
+            <a href="../dashboard.html">Dashboard</a>
+            <span class="sep">›</span>
+            <span>Pilgrim Team Psychology Arc</span>
+        </nav>
+        <nav class="cross-page-nav" aria-label="Cross-page navigation">
+            <a href="ming-political-thought-comparison.html">Ming Political Thought Comparison</a> ·
+            <a href="pilgrim-team-psychology-arc.html" class="active">Pilgrim Team Psychology</a> ·
+            <a href="monster-capability-radar.html">Monster Capability Radar</a> ·
+            <a href="poetry-rhythm-analysis.html">Poetry Rhythm Analysis</a> ·
+            <a href="../index.html">Back to dashboard</a>
+        </nav>
+        <div class="notice" role="note">
+            <strong>Two-layer psychology visualization guide</strong>:
+            <span class="mono">Individual layer</span>: character-sentiment-arc.html single-character sentiment arcs (each of the 5 pilgrims) ·
+            <span class="mono">Team layer</span> (this page): 5-pilgrim psychological-state aggregation + cohesion evolution ·
+            <span class="mono">Five dimensions</span>: fear / resolve / anger / wisdom / obedience ·
+            <span class="mono">Animation</span>: the 100-chapter psychology curve supports play/pause/slider control.
+        </div>
+
+        <!-- 板块 1：KPI 概要栏 -->
+        <section class="kpi-row" aria-label="Pilgrim team psychology summary">
+            <div class="kpi-card">
+                <div class="num">5</div>
+                <div class="label">Pilgrims</div>
+                <div class="detail">Tang Sanzang / Sun Wukong / Zhu Bajie / Sha Wujing / White Dragon Horse</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">100</div>
+                <div class="label">Chapters</div>
+                <div class="detail">Chapters 1–100 · the complete hundred</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">5</div>
+                <div class="label">Psychology dimensions</div>
+                <div class="detail">Fear / Resolve / Anger / Wisdom / Obedience</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">9</div>
+                <div class="label">Turning points</div>
+                <div class="detail">Havoc in Heaven / Three Times Beating the White-Bone Demon / True and False Monkey King …</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">6.8</div>
+                <div class="label">Average cohesion</div>
+                <div class="detail">Out of 10 · peaks at 9.6 in the final stretch</div>
+            </div>
+        </section>
+
+        <!-- 板块 2：五众心理状态雷达图 -->
+        <section class="section" aria-labelledby="sec-radar">
+            <h2 id="sec-radar">① Five-Pilgrim Psychological-State Radar</h2>
+            <p>Expands the five pilgrims’ psychological states along five dimensions: “fear / resolve / anger / wisdom / obedience.” Sun Wukong is high-resolve, high-anger, low-obedience (the rebellious hero); Tang Sanzang is high-resolve, high-obedience (the devout pilgrim); Zhu Bajie is high-fear, low-resolve (worldly desires unmet); Sha Wujing is high-obedience, low-anger (the peacemaker); the White Dragon Horse is balanced with higher wisdom (the silent sage).</p>
+            <div class="chart-wrap">
+                <svg id="radar-svg" width="100%" height="520" role="img" aria-labelledby="radar-title radar-desc">
+                    <title id="radar-title">Five-Pilgrim Five-Dimension Psychological-State Radar</title>
+                    <desc id="radar-desc">Radar comparison of five characters across the fear/resolve/anger/wisdom/obedience dimensions.</desc>
+                </svg>
+                <div class="heat-tip" id="radar-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="radar-legend" aria-label="Character legend"></div>
+        </section>
+
+        <!-- 板块 3：100 回心理曲线 -->
+        <section class="section" aria-labelledby="sec-arc">
+            <h2 id="sec-arc">② 100-Chapter Psychology Curve (Timeline Animation)</h2>
+            <p>Evolution of the five pilgrims’ psychological states (0–10 composite score) across 16 key chapters. Hollow dots mark key turning points. Drag the slider or click Play to advance the animation chapter by chapter; speed is adjustable.</p>
+            <div class="control-row" role="group" aria-label="Timeline controls">
+                <button class="ctrl-btn play" id="play-btn" aria-label="Play/Pause">▶ Play</button>
+                <div class="slider-wrap">
+                    <span class="ctrl-label">Chapter:</span>
+                    <input type="range" id="chapter-slider" min="1" max="100" value="100" aria-label="Chapter slider" />
+                    <span class="ch-label" id="ch-display">Ch. 100</span>
+                </div>
+                <span class="ctrl-label">Speed:</span>
+                <select class="speed-select" id="speed-select" aria-label="Playback speed">
+                    <option value="1400">Slow</option>
+                    <option value="800" selected>Normal</option>
+                    <option value="400">Fast</option>
+                </select>
+                <button class="ctrl-btn" id="reset-btn">↺ Reset</button>
+            </div>
+            <div class="progress-bar" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+            <div class="chart-wrap">
+                <svg id="arc-svg" width="100%" height="500" role="img" aria-labelledby="arc-title arc-desc">
+                    <title id="arc-title">100-Chapter Psychology Curve</title>
+                    <desc id="arc-desc">Line chart of the five pilgrims’ composite psychological scores evolving across chapters, with 9 turning-point annotations.</desc>
+                </svg>
+                <div class="event-tip" id="arc-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="arc-legend" aria-label="Character curve legend"></div>
+        </section>
+
+        <!-- 板块 4：团队凝聚力热力图 -->
+        <section class="section" aria-labelledby="sec-cohesion">
+            <h2 id="sec-cohesion">③ Team Cohesion Heatmap</h2>
+            <p>A 5-pilgrim × 9-key-chapter cohesion matrix. Darker colors indicate a stronger sense of belonging to the team in that chapter. Note that ch27 (Three Times Beating the White-Bone Demon) is the cohesion trough (4 members drop to 4–5), while ch100 (the Five Sages attain perfection) reaches a 9–10 peak for all.</p>
+            <div class="chart-wrap">
+                <svg id="cohesion-svg" width="100%" height="420" role="img" aria-labelledby="coh-title coh-desc">
+                    <title id="coh-title">Team Cohesion Heatmap</title>
+                    <desc id="coh-desc">Cohesion matrix of 5 pilgrims × 9 key chapters.</desc>
+                </svg>
+                <div class="heat-tip" id="coh-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="coh-legend" aria-label="Cohesion legend"></div>
+        </section>
+
+        <!-- 板块 5：心理转折点时间线 -->
+        <section class="section" aria-labelledby="sec-timeline">
+            <h2 id="sec-timeline">④ Psychological Turning-Point Timeline</h2>
+            <p>Nine key psychological turning points spread along the 100-chapter timeline. Dot size = impact intensity; color distinguishes the four stages “team formation / crisis / repair / sublimation.” Hover to view event details.</p>
+            <div class="chart-wrap">
+                <svg id="timeline-svg" width="100%" height="320" role="img" aria-labelledby="tl-title tl-desc">
+                    <title id="tl-title">Psychological Turning-Point Timeline</title>
+                    <desc id="tl-desc">Distribution of 9 psychological turning points across the 100-chapter timeline.</desc>
+                </svg>
+                <div class="event-tip" id="tl-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="tl-legend" aria-label="Stage legend"></div>
+        </section>
+
+        <!-- 板块 6：五众心理状态分布箱线图 -->
+        <section class="section" aria-labelledby="sec-boxplot">
+            <h2 id="sec-boxplot">⑤ Five-Pilgrim Psychological-State Distribution Box Plot</h2>
+            <p>Quartile distribution of each pilgrim’s composite psychological score, aggregated over 16 key chapters. Sun Wukong’s distribution is the highest and tightest (median 7 / IQR 5–9); Tang Sanzang’s span is the widest (0–10, absent early, sublimating later); Zhu Bajie’s distribution is the lowest (median 5).</p>
+            <div class="chart-wrap">
+                <svg id="boxplot-svg" width="100%" height="380" role="img" aria-labelledby="bp-title bp-desc">
+                    <title id="bp-title">Five-Pilgrim Psychological-State Box Plot</title>
+                    <desc id="bp-desc">Quartile distribution of the five characters’ composite psychological scores.</desc>
+                </svg>
+                <div class="heat-tip" id="bp-tip" role="tooltip"></div>
+            </div>
+        </section>
+
+        <!-- 板块 7：洞察 + 跨页面导航 -->
+        <section class="section" aria-labelledby="sec-insight">
+            <h2 id="sec-insight">⑥ Team Psychology Evolution Insights</h2>
+            <div class="insight-box">
+                <span class="ib-tag">[Trough]</span>
+                <strong>Chapter 27, Three Times Beating the White-Bone Demon, is the team’s absolute psychological trough</strong>. The five pilgrims’ mean cohesion falls to 4.6: Sun Wukong is banished, Zhu Bajie slanders, Tang Sanzang misjudges, Sha Wujing stays silent, and the White Dragon Horse has just joined and is not yet steady. This is the only chapter in the whole book of “master–disciple rupture,” and the most pronounced tension point of the “individual–team” two-layer.
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Repair]</span>
+                <strong>Chapter 31, the Yellow-Robed Monster incident, completes the team’s repair</strong>. Zhu Bajie travels to Flower-Fruit Mountain to goad Sun Wukong into returning, and Sun Wukong subdues the Yellow-Robed Monster to rescue his master. After this chapter the mean cohesion rebounds to 6.0, the “master–disciple mutual trust” mechanism is rebuilt, laying the foundation for the next 50 chapters of stability.
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Identity]</span>
+                <strong>Chapter 58, the True and False Monkey King, is Sun Wukong’s identity crisis</strong>. The composite psychological score drops to 5.0, matching ch27 as the two troughs of Sun Wukong’s curve. But this “crisis” is inward—not a master–disciple rupture but a crisis of Sun Wukong’s self-identity, ultimately resolved when Tathāgata exposes the Six-Eared Macaque and completes the “mind-monkey returns to oneness.”
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Sublimation]</span>
+                <strong>Chapters 81–100 are the team’s psychological sublimation period</strong>. After the final ordeal of the Bottomless Cave, the five pilgrims’ curves rise together, reaching 9–10 for all by ch100. This is the psychological completion of “becoming sages through surviving tribulations”—echoing the individual layer’s “buddhahood arc” in character-sentiment-arc.html.
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Divergence]</span>
+                <strong>The five pilgrims’ psychology curves show a “three-band divergence” pattern</strong>. Sun Wukong stays above the mean throughout (median 7); Tang Sanzang and the White Dragon Horse “open low and finish high” (rising from 0 to 10); Zhu Bajie stays low throughout (median 5). Sha Wujing is the most stable (IQR only 5–7), the team’s “psychological anchor.”
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Two-layer]</span>
+                <strong>This page and character-sentiment-arc.html form the “individual–team” two-layer</strong>. The individual layer focuses on single-character sentiment arcs (W194 narratology-13d), while the team layer (this page) focuses on five-pilgrim aggregation and cohesion evolution. Cross-examining the two layers shows that individual troughs do not necessarily correspond to team troughs, but the two “two-layer resonance points” at ch27/ch58 are key hubs of the book’s psychological narrative.
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/pilgrim-team-psychology-arc.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // ============= EMBEDDED_DATA =============
+    const EMBEDDED_DATA = {
+        meta: {title: "Pilgrim Team Psychology Arc", version: "v2.2.39", w_id: "W233-2", direction: "V3"},
+        kpi: [
+            {label: "Pilgrims", value: 5, unit: "people"},
+            {label: "Chapters", value: 100, unit: "chapters"},
+            {label: "Psychology dimensions", value: 5, unit: "dims"},
+            {label: "Turning points", value: 9, unit: "points"},
+            {label: "Average cohesion", value: 6.8, unit: "/10"}
+        ],
+        radar: [
+            {character: "Sun Wukong", fear: 2, resolve: 9, anger: 7, wisdom: 9, obedience: 5},
+            {character: "Tang Sanzang", fear: 7, resolve: 8, anger: 3, wisdom: 8, obedience: 9},
+            {character: "Zhu Bajie", fear: 8, resolve: 4, anger: 6, wisdom: 4, obedience: 5},
+            {character: "Sha Wujing", fear: 4, resolve: 7, anger: 2, wisdom: 6, obedience: 9},
+            {character: "White Dragon Horse", fear: 3, resolve: 8, anger: 4, wisdom: 7, obedience: 8}
+        ],
+        psychology_arc: [
+            {chapter: 1, wukong: 8, tang: 0, bajie: 0, sha: 0, bai: 0},
+            {chapter: 7, wukong: 10, tang: 0, bajie: 0, sha: 0, bai: 0},
+            {chapter: 14, wukong: 5, tang: 6, bajie: 0, sha: 0, bai: 0},
+            {chapter: 18, wukong: 7, tang: 7, bajie: 5, sha: 0, bai: 0},
+            {chapter: 22, wukong: 7, tang: 7, bajie: 5, sha: 6, bai: 0},
+            {chapter: 27, wukong: 4, tang: 4, bajie: 4, sha: 5, bai: 6},
+            {chapter: 31, wukong: 7, tang: 7, bajie: 5, sha: 6, bai: 7},
+            {chapter: 41, wukong: 6, tang: 5, bajie: 6, sha: 6, bai: 7},
+            {chapter: 58, wukong: 5, tang: 4, bajie: 5, sha: 5, bai: 6},
+            {chapter: 59, wukong: 7, tang: 6, bajie: 5, sha: 6, bai: 7},
+            {chapter: 65, wukong: 7, tang: 7, bajie: 6, sha: 6, bai: 7},
+            {chapter: 74, wukong: 8, tang: 6, bajie: 4, sha: 5, bai: 7},
+            {chapter: 81, wukong: 8, tang: 8, bajie: 7, sha: 7, bai: 8},
+            {chapter: 88, wukong: 9, tang: 8, bajie: 7, sha: 7, bai: 8},
+            {chapter: 95, wukong: 9, tang: 9, bajie: 8, sha: 8, bai: 9},
+            {chapter: 100, wukong: 10, tang: 10, bajie: 9, sha: 9, bai: 10}
+        ],
+        cohesion_heatmap: [
+            {character: "Sun Wukong", ch7: 10, ch14: 5, ch22: 7, ch27: 4, ch31: 7, ch41: 6, ch58: 5, ch81: 8, ch100: 10},
+            {character: "Tang Sanzang", ch7: 0, ch14: 6, ch22: 7, ch27: 4, ch31: 7, ch41: 5, ch58: 4, ch81: 8, ch100: 10},
+            {character: "Zhu Bajie", ch7: 0, ch14: 0, ch22: 5, ch27: 4, ch31: 5, ch41: 6, ch58: 5, ch81: 7, ch100: 9},
+            {character: "Sha Wujing", ch7: 0, ch14: 0, ch22: 6, ch27: 5, ch31: 6, ch41: 6, ch58: 5, ch81: 7, ch100: 9},
+            {character: "White Dragon Horse", ch7: 0, ch14: 0, ch22: 0, ch27: 6, ch31: 7, ch41: 7, ch58: 6, ch81: 8, ch100: 10}
+        ],
+        turning_points: [
+            {chapter: 7, event: "Havoc in Heaven·Sun Wukong at his peak"},
+            {chapter: 14, event: "Mind-monkey corrected·Sun Wukong recruited"},
+            {chapter: 18, event: "Zhu Bajie recruited·team initially formed"},
+            {chapter: 22, event: "Sha Wujing recruited·all five pilgrims complete"},
+            {chapter: 27, event: "Three Times Beating the White-Bone Demon·trust crisis"},
+            {chapter: 31, event: "Yellow-Robed Monster·team repair"},
+            {chapter: 41, event: "Red Boy·Sun Wukong’s ordeal"},
+            {chapter: 58, event: "True and False Monkey King·identity crisis"},
+            {chapter: 81, event: "Bottomless Cave·final great ordeal"}
+        ],
+        boxplot: [
+            {character: "Sun Wukong", q1: 5, median: 7, q3: 9, min: 4, max: 10},
+            {character: "Tang Sanzang", q1: 4, median: 6, q3: 8, min: 0, max: 10},
+            {character: "Zhu Bajie", q1: 4, median: 5, q3: 7, min: 0, max: 9},
+            {character: "Sha Wujing", q1: 5, median: 6, q3: 7, min: 0, max: 9},
+            {character: "White Dragon Horse", q1: 6, median: 7, q3: 8, min: 0, max: 10}
+        ]
+    };
+
+    // ============= 全局配置 =============
+    const CHARACTERS = [
+        {key: "wukong", name: "Sun Wukong", color: "#c8463a"},
+        {key: "tang",   name: "Tang Sanzang", color: "#3a6b8c"},
+        {key: "bajie",  name: "Zhu Bajie", color: "#C9A063"},
+        {key: "sha",    name: "Sha Wujing", color: "#6B8E5A"},
+        {key: "bai",    name: "White Dragon Horse", color: "#b8862a"}
+    ];
+    const RADAR_AXES = [
+        {key: "fear",     label: "Fear"},
+        {key: "resolve",  label: "Resolve"},
+        {key: "anger",    label: "Anger"},
+        {key: "wisdom",   label: "Wisdom"},
+        {key: "obedience",label: "Obedience"}
+    ];
+    const COHESION_CHAPTERS = [
+        {key: "ch7",  label: "Ch.7"},  {key: "ch14", label: "Ch.14"},
+        {key: "ch22", label: "Ch.22"}, {key: "ch27", label: "Ch.27"},
+        {key: "ch31", label: "Ch.31"}, {key: "ch41", label: "Ch.41"},
+        {key: "ch58", label: "Ch.58"}, {key: "ch81", label: "Ch.81"},
+        {key: "ch100",label: "Ch.100"}
+    ];
+    const TURNING_STAGES = {
+        7:  {stage: "build",   label: "Pre-formation"},
+        14: {stage: "build",   label: "Team formation"},
+        18: {stage: "build",   label: "Team formation"},
+        22: {stage: "build",   label: "Team formation"},
+        27: {stage: "crisis",  label: "Trust crisis"},
+        31: {stage: "repair",  label: "Team repair"},
+        41: {stage: "repair",  label: "Team repair"},
+        58: {stage: "crisis",  label: "Identity crisis"},
+        81: {stage: "sublime", label: "Psychological sublimation"}
+    };
+    const STAGE_COLORS = {
+        build:   "#6B8E5A",
+        crisis:  "#8c2a2a",
+        repair:  "#3a6b8c",
+        sublime: "#b8862a"
+    };
+    const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DUR = REDUCE_MOTION ? 0 : 600;
+    let currentChapter = 100;
+    let playTimer = null;
+    let playSpeed = 800;
+
+    // ============= 板块 2：雷达图 =============
+    function renderRadar() {
+        const svg = d3.select("#radar-svg");
+        svg.selectAll("*").remove();
+        const wrap = document.getElementById("radar-svg");
+        const width = Math.max(560, wrap.clientWidth || 720);
+        const height = 520;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+        const cx = width / 2, cy = height / 2 + 10;
+        const radius = Math.min(width, height) / 2 - 90;
+        const levels = 5;
+        const angleSlice = (2 * Math.PI) / RADAR_AXES.length;
+
+        // 网格圆
+        for (let i = 1; i <= levels; i++) {
+            const r = (radius * i) / levels;
+            const pts = RADAR_AXES.map((_, idx) => [
+                cx + r * Math.cos(angleSlice * idx - Math.PI / 2),
+                cy + r * Math.sin(angleSlice * idx - Math.PI / 2)
+            ]);
+            svg.append("polygon")
+                .attr("points", pts.map(p => p.join(",")).join(" "))
+                .attr("fill", i === levels ? "#fffdf8" : "none")
+                .attr("stroke", "#d9cdb8")
+                .attr("stroke-width", 0.8)
+                .attr("stroke-dasharray", i === levels ? "none" : "2,3");
+        }
+        // 轴线
+        RADAR_AXES.forEach((axis, idx) => {
+            const x2 = cx + radius * Math.cos(angleSlice * idx - Math.PI / 2);
+            const y2 = cy + radius * Math.sin(angleSlice * idx - Math.PI / 2);
+            svg.append("line")
+                .attr("x1", cx).attr("y1", cy)
+                .attr("x2", x2).attr("y2", y2)
+                .attr("stroke", "#d9cdb8").attr("stroke-width", 0.8);
+            // 轴标签
+            const labelX = cx + (radius + 28) * Math.cos(angleSlice * idx - Math.PI / 2);
+            const labelY = cy + (radius + 28) * Math.sin(angleSlice * idx - Math.PI / 2);
+            svg.append("text")
+                .attr("x", labelX).attr("y", labelY)
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .style("font-size", "0.95rem")
+                .style("font-weight", "700")
+                .style("fill", "#C9A063")
+                .text(axis.label);
+            // 刻度
+            for (let lv = 1; lv <= levels; lv++) {
+                const tr = (radius * lv) / levels;
+                const tx = cx + tr * Math.cos(angleSlice * idx - Math.PI / 2);
+                const ty = cy + tr * Math.sin(angleSlice * idx - Math.PI / 2);
+                if (idx === 0) {
+                    svg.append("text")
+                        .attr("x", tx + 6).attr("y", ty)
+                        .style("font-size", "0.66rem")
+                        .style("fill", "#b8a584")
+                        .text(lv * 2);
+                }
+            }
+        });
+
+        const tip = d3.select("#radar-tip");
+        const wrapEl = wrap.parentElement;
+        // 五众多边形
+        CHARACTERS.forEach((ch, ci) => {
+            const data = EMBEDDED_DATA.radar.find(r => r.character === ch.name);
+            const pts = RADAR_AXES.map((axis, idx) => {
+                const val = data[axis.key];
+                const r = (radius * val) / (levels * 2);
+                return [
+                    cx + r * Math.cos(angleSlice * idx - Math.PI / 2),
+                    cy + r * Math.sin(angleSlice * idx - Math.PI / 2)
+                ];
+            });
+            // 多边形
+            svg.append("polygon")
+                .attr("points", pts.map(p => p.join(",")).join(" "))
+                .attr("fill", ch.color)
+                .attr("fill-opacity", 0)
+                .attr("stroke", ch.color)
+                .attr("stroke-width", 2)
+                .attr("stroke-opacity", 0)
+                .style("pointer-events", "none")
+                .transition()
+                .duration(DUR)
+                .delay(ci * 120)
+                .attr("fill-opacity", 0.12)
+                .attr("stroke-opacity", 0.85);
+            // 顶点
+            pts.forEach((p, pi) => {
+                svg.append("circle")
+                    .attr("cx", p[0]).attr("cy", p[1])
+                    .attr("r", 0)
+                    .attr("fill", ch.color)
+                    .attr("stroke", "#fff").attr("stroke-width", 1.5)
+                    .style("cursor", "pointer")
+                    .on("mouseover", function(event) {
+                        d3.select(this).attr("r", 7);
+                        tip.style("opacity", 1)
+                            .html(`<div class="tip-title">${ch.name} · ${RADAR_AXES[pi].label}</div>
+                                <div class="tip-row">Value: <strong style="color:#e9b885">${data[RADAR_AXES[pi].key]} / 10</strong></div>
+                                <div class="tip-meta">Character ${ci+1}/5 · Dimension ${pi+1}/5</div>`);
+                    })
+                    .on("mousemove", function(event) {
+                        const rect = wrapEl.getBoundingClientRect();
+                        tip.style("left", (event.clientX - rect.left + 14) + "px")
+                            .style("top", (event.clientY - rect.top + 14) + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this).attr("r", 4);
+                        tip.style("opacity", 0);
+                    })
+                    .transition()
+                    .duration(DUR)
+                    .delay(ci * 120 + 200)
+                    .attr("r", 4);
+            });
+        });
+
+        // 图例
+        const legend = d3.select("#radar-legend");
+        legend.selectAll("*").remove();
+        CHARACTERS.forEach(ch => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch dot").style("background", ch.color);
+            item.append("span").text(ch.name);
+        });
+    }
+
+    // ============= 板块 3：100 回心理曲线 =============
+    function renderArc(maxChapter) {
+        const svg = d3.select("#arc-svg");
+        svg.selectAll("*").remove();
+        const wrap = document.getElementById("arc-svg");
+        const width = Math.max(980, wrap.clientWidth || 980);
+        const height = 500;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+        const margin = { top: 30, right: 40, bottom: 60, left: 50 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const xScale = d3.scaleLinear().domain([0, 100]).range([0, innerW]);
+        const yScale = d3.scaleLinear().domain([0, 10]).range([innerH, 0]);
+
+        // 坐标轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(xScale).ticks(20).tickFormat(d => `Ch.${d}`))
+            .selectAll("text").style("font-size", "0.7rem").style("fill", "#6B6455");
+        g.append("g")
+            .call(d3.axisLeft(yScale).ticks(5))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+
+        // 轴标题
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Chapter (timeline)");
+        g.append("text")
+            .attr("x", -innerH / 2).attr("y", -38)
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Composite psychological score (0–10)");
+
+        // 网格
+        g.selectAll("line.grid-y")
+            .data([2, 4, 6, 8])
+            .enter().append("line")
+            .attr("class", "grid-y")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", d => yScale(d)).attr("y2", d => yScale(d))
+            .attr("stroke", "#f0e8d6").attr("stroke-dasharray", "2,3");
+
+        // 当前回目垂线
+        g.append("line")
+            .attr("x1", xScale(maxChapter)).attr("x2", xScale(maxChapter))
+            .attr("y1", 0).attr("y2", innerH)
+            .attr("stroke", "#c8463a").attr("stroke-width", 2)
+            .attr("stroke-dasharray", "5,3").attr("opacity", 0.7);
+        g.append("text")
+            .attr("x", xScale(maxChapter)).attr("y", -8)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem").style("font-weight", "600")
+            .style("fill", "#c8463a")
+            .text(`Ch. ${maxChapter}`);
+
+        // 转折点背景标注
+        const visibleTurning = EMBEDDED_DATA.turning_points.filter(t => t.chapter <= maxChapter);
+        const tip = d3.select("#arc-tip");
+        const wrapEl = wrap.parentElement;
+
+        // 五众折线
+        CHARACTERS.forEach((ch, ci) => {
+            const visible = EMBEDDED_DATA.psychology_arc.filter(d => d.chapter <= maxChapter);
+            const line = d3.line()
+                .x(d => xScale(d.chapter))
+                .y(d => yScale(d[ch.key]))
+                .curve(d3.curveMonotoneX);
+            const path = g.append("path")
+                .datum(visible)
+                .attr("fill", "none")
+                .attr("stroke", ch.color)
+                .attr("stroke-width", 2.2)
+                .attr("stroke-opacity", 0.85)
+                .attr("d", line);
+            const totalLen = path.node().getTotalLength();
+            path.attr("stroke-dasharray", `${totalLen} ${totalLen}`)
+                .attr("stroke-dashoffset", totalLen)
+                .transition()
+                .duration(REDUCE_MOTION ? 0 : 800)
+                .delay(ci * 100)
+                .attr("stroke-dashoffset", 0);
+
+            // 数据点
+            g.selectAll(`circle.arc-${ch.key}`)
+                .data(visible)
+                .enter()
+                .append("circle")
+                .attr("class", `arc-${ch.key} event-dot`)
+                .attr("cx", d => xScale(d.chapter))
+                .attr("cy", d => yScale(d[ch.key]))
+                .attr("r", 3.5)
+                .attr("fill", ch.color)
+                .attr("stroke", "#fff").attr("stroke-width", 1)
+                .style("opacity", 0)
+                .on("mouseover", function(event, d) {
+                    d3.select(this).attr("r", 6);
+                    tip.style("opacity", 1)
+                        .html(`<div class="tip-title">Ch. ${d.chapter} · ${ch.name}</div>
+                            <div class="tip-row">Composite score: <strong style="color:#e9b885">${d[ch.key]} / 10</strong></div>
+                            <div class="tip-meta">Character ${ci+1}/5 · Chapter ${d.chapter}/100</div>`);
+                })
+                .on("mousemove", function(event) {
+                    const rect = wrapEl.getBoundingClientRect();
+                    tip.style("left", (event.clientX - rect.left + 14) + "px")
+                        .style("top", (event.clientY - rect.top + 14) + "px");
+                })
+                .on("mouseout", function() {
+                    d3.select(this).attr("r", 3.5);
+                    tip.style("opacity", 0);
+                })
+                .transition().duration(DUR).delay(ci * 100 + 200).style("opacity", 1);
+        });
+
+        // 转折点垂直标注
+        visibleTurning.forEach(t => {
+            g.append("line")
+                .attr("x1", xScale(t.chapter)).attr("x2", xScale(t.chapter))
+                .attr("y1", 0).attr("y2", innerH)
+                .attr("stroke", "#C9A063")
+                .attr("stroke-width", 0.8)
+                .attr("stroke-dasharray", "3,4")
+                .attr("opacity", 0.35);
+        });
+
+        // 图例
+        const legend = d3.select("#arc-legend");
+        legend.selectAll("*").remove();
+        CHARACTERS.forEach(ch => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch line").style("background", ch.color);
+            item.append("span").text(ch.name);
+        });
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#c8463a;border-radius:0;width:18px;height:3px;"></span><span>Current chapter line</span>');
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#C9A063;opacity:0.35;"></span><span>Turning-point markers</span>');
+
+        // 进度
+        d3.select("#progress-fill").style("width", `${(maxChapter / 100) * 100}%`);
+        d3.select("#ch-display").text(`Ch. ${maxChapter}`);
+    }
+
+    // ============= 板块 4：凝聚力热力图 =============
+    function renderCohesion() {
+        const svg = d3.select("#cohesion-svg");
+        svg.selectAll("*").remove();
+        const wrap = document.getElementById("cohesion-svg");
+        const width = Math.max(720, wrap.clientWidth || 880);
+        const height = 420;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+        const margin = { top: 30, right: 30, bottom: 60, left: 80 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const xScale = d3.scaleBand()
+            .domain(COHESION_CHAPTERS.map(c => c.key))
+            .range([0, innerW]).padding(0.08);
+        const yScale = d3.scaleBand()
+            .domain(EMBEDDED_DATA.cohesion_heatmap.map(d => d.character))
+            .range([0, innerH]).padding(0.12);
+
+        const colorScale = d3.scaleSequential()
+            .domain([0, 10])
+            .interpolator(d3.interpolateRgbBasis(["#fff8e7", "#e9b885", "#c8463a", "#8c2a2a"]));
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(xScale).tickFormat(d => COHESION_CHAPTERS.find(c => c.key === d).label))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+        // Y 轴
+        g.append("g")
+            .call(d3.axisLeft(yScale))
+            .selectAll("text").style("font-size", "0.9rem").style("fill", "#23201A").style("font-weight", "600");
+
+        const tip = d3.select("#coh-tip");
+        const wrapEl = wrap.parentElement;
+        // 单元格
+        EMBEDDED_DATA.cohesion_heatmap.forEach((row, ri) => {
+            COHESION_CHAPTERS.forEach((col, ci) => {
+                const val = row[col.key];
+                g.append("rect")
+                    .attr("x", xScale(col.key))
+                    .attr("y", yScale(row.character))
+                    .attr("width", xScale.bandwidth())
+                    .attr("height", yScale.bandwidth())
+                    .attr("fill", colorScale(val))
+                    .attr("stroke", "#fff").attr("stroke-width", 1.5)
+                    .style("opacity", 0)
+                    .style("cursor", "pointer")
+                    .on("mouseover", function(event) {
+                        d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
+                        tip.style("opacity", 1)
+                            .html(`<div class="tip-title">${row.character} · ${col.label}</div>
+                                <div class="tip-row">Cohesion: <strong style="color:#e9b885">${val} / 10</strong></div>
+                                <div class="tip-meta">Character ${ri+1}/5 · Key chapter ${ci+1}/9</div>`);
+                    })
+                    .on("mousemove", function(event) {
+                        const rect = wrapEl.getBoundingClientRect();
+                        tip.style("left", (event.clientX - rect.left + 14) + "px")
+                            .style("top", (event.clientY - rect.top + 14) + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1.5);
+                        tip.style("opacity", 0);
+                    })
+                    .transition().duration(DUR).delay(ri * 80 + ci * 40).style("opacity", 1);
+                // 数值文本
+                g.append("text")
+                    .attr("x", xScale(col.key) + xScale.bandwidth() / 2)
+                    .attr("y", yScale(row.character) + yScale.bandwidth() / 2)
+                    .attr("text-anchor", "middle")
+                    .attr("dominant-baseline", "middle")
+                    .style("font-size", "0.85rem")
+                    .style("font-weight", "700")
+                    .style("font-family", "JetBrains Mono, monospace")
+                    .style("fill", val >= 6 ? "#fff" : "#23201A")
+                    .style("opacity", 0)
+                    .text(val)
+                    .transition().duration(DUR).delay(ri * 80 + ci * 40 + 200).style("opacity", 1);
+            });
+        });
+
+        // 图例（颜色梯度）
+        const legend = d3.select("#coh-legend");
+        legend.selectAll("*").remove();
+        const grad = [0, 2, 4, 6, 8, 10];
+        grad.forEach(v => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch").style("background", colorScale(v));
+            item.append("span").text(`${v}-${v+2}`);
+        });
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#fff8e7;"></span><span>Low cohesion (light)</span>');
+    }
+
+    // ============= 板块 5：转折点时间线 =============
+    function renderTimeline() {
+        const svg = d3.select("#timeline-svg");
+        svg.selectAll("*").remove();
+        const wrap = document.getElementById("timeline-svg");
+        const width = Math.max(720, wrap.clientWidth || 880);
+        const height = 320;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+        const margin = { top: 60, right: 40, bottom: 80, left: 40 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const xScale = d3.scaleLinear().domain([0, 100]).range([0, innerW]);
+        // 主时间轴
+        g.append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", innerH / 2).attr("y2", innerH / 2)
+            .attr("stroke", "#C9A063").attr("stroke-width", 3).attr("stroke-linecap", "round");
+
+        // X 轴刻度
+        g.append("g")
+            .attr("transform", `translate(0,${innerH / 2 + 30})`)
+            .call(d3.axisBottom(xScale).ticks(10).tickFormat(d => `Ch.${d}`))
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
+
+        // 交替放置转折点
+        const tip = d3.select("#tl-tip");
+        const wrapEl = wrap.parentElement;
+        EMBEDDED_DATA.turning_points.forEach((t, i) => {
+            const stage = TURNING_STAGES[t.chapter].stage;
+            const stageLabel = TURNING_STAGES[t.chapter].label;
+            const color = STAGE_COLORS[stage];
+            const up = i % 2 === 0;
+            const cy = up ? innerH / 2 - 50 : innerH / 2 + 50;
+            const cx = xScale(t.chapter);
+            // 连接线
+            g.append("line")
+                .attr("x1", cx).attr("x2", cx)
+                .attr("y1", innerH / 2).attr("y2", cy)
+                .attr("stroke", color).attr("stroke-width", 1.5).attr("stroke-dasharray", "2,3");
+            // 圆点（主轴上）
+            g.append("circle")
+                .attr("cx", cx).attr("cy", innerH / 2)
+                .attr("r", 0)
+                .attr("fill", color).attr("stroke", "#fff").attr("stroke-width", 2)
+                .transition().duration(DUR).delay(i * 80).attr("r", 8);
+            // 圆点（事件位置）
+            g.append("circle")
+                .attr("cx", cx).attr("cy", cy)
+                .attr("r", 0)
+                .attr("fill", color).attr("stroke", "#fff").attr("stroke-width", 2)
+                .style("cursor", "pointer")
+                .on("mouseover", function(event) {
+                    d3.select(this).attr("r", 12);
+                    tip.style("opacity", 1)
+                        .html(`<div class="tip-title">Ch. ${t.chapter} · ${t.event.split("·")[0]}</div>
+                            <div class="tip-row">${t.event}</div>
+                            <div class="tip-row">Stage: <strong style="color:#e9b885">${stageLabel}</strong></div>
+                            <div class="tip-meta">Turning point ${i+1}/9 · Chapter ${t.chapter}/100</div>`);
+                })
+                .on("mousemove", function(event) {
+                    const rect = wrapEl.getBoundingClientRect();
+                    tip.style("left", (event.clientX - rect.left + 14) + "px")
+                        .style("top", (event.clientY - rect.top + 14) + "px");
+                })
+                .on("mouseout", function() {
+                    d3.select(this).attr("r", 8);
+                    tip.style("opacity", 0);
+                })
+                .transition().duration(DUR).delay(i * 80 + 100).attr("r", 8);
+            // 事件文本
+            g.append("text")
+                .attr("x", cx).attr("y", up ? cy - 16 : cy + 22)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.78rem")
+                .style("font-weight", "600")
+                .style("fill", color)
+                .style("opacity", 0)
+                .text(t.event.length > 12 ? t.event.substring(0, 11) + "…" : t.event)
+                .transition().duration(DUR).delay(i * 80 + 200).style("opacity", 1);
+            // 回目标注
+            g.append("text")
+                .attr("x", cx).attr("y", innerH / 2 + (up ? 20 : -20))
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.72rem")
+                .style("font-weight", "700")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "#C9A063")
+                .style("opacity", 0)
+                .text(`Ch.${t.chapter}`)
+                .transition().duration(DUR).delay(i * 80 + 250).style("opacity", 1);
+        });
+
+        // 图例
+        const legend = d3.select("#tl-legend");
+        legend.selectAll("*").remove();
+        Object.keys(STAGE_COLORS).forEach(k => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch dot").style("background", STAGE_COLORS[k]);
+            const labels = { build: "Team formation", crisis: "Crisis", repair: "Repair", sublime: "Sublimation" };
+            item.append("span").text(labels[k]);
+        });
+    }
+
+    // ============= 板块 6：箱线图 =============
+    function renderBoxplot() {
+        const svg = d3.select("#boxplot-svg");
+        svg.selectAll("*").remove();
+        const wrap = document.getElementById("boxplot-svg");
+        const width = Math.max(640, wrap.clientWidth || 800);
+        const height = 380;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+        const margin = { top: 30, right: 40, bottom: 60, left: 50 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const xScale = d3.scaleBand()
+            .domain(EMBEDDED_DATA.boxplot.map(d => d.character))
+            .range([0, innerW]).padding(0.35);
+        const yScale = d3.scaleLinear().domain([0, 10]).range([innerH, 0]);
+
+        // 坐标轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(xScale))
+            .selectAll("text").style("font-size", "0.92rem").style("fill", "#23201A").style("font-weight", "600");
+        g.append("g")
+            .call(d3.axisLeft(yScale).ticks(5))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 46)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Character");
+        g.append("text")
+            .attr("x", -innerH / 2).attr("y", -38)
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Composite psychological score (0–10)");
+
+        const tip = d3.select("#bp-tip");
+        const wrapEl = wrap.parentElement;
+        const boxW = xScale.bandwidth() * 0.6;
+
+        EMBEDDED_DATA.boxplot.forEach((d, i) => {
+            const ch = CHARACTERS.find(c => c.name === d.character);
+            const color = ch ? ch.color : "#c8463a";
+            const cx = xScale(d.character) + xScale.bandwidth() / 2;
+            // 最小/最大 须线
+            g.append("line")
+                .attr("x1", cx).attr("x2", cx)
+                .attr("y1", yScale(d.min)).attr("y2", yScale(d.max))
+                .attr("stroke", color).attr("stroke-width", 1.5)
+                .style("opacity", 0)
+                .transition().duration(DUR).delay(i * 100).style("opacity", 0.7);
+            // 上下横线
+            [d.min, d.max].forEach(v => {
+                g.append("line")
+                    .attr("x1", cx - boxW / 3).attr("x2", cx + boxW / 3)
+                    .attr("y1", yScale(v)).attr("y2", yScale(v))
+                    .attr("stroke", color).attr("stroke-width", 1.5)
+                    .style("opacity", 0)
+                    .transition().duration(DUR).delay(i * 100).style("opacity", 0.85);
+            });
+            // 箱体（Q1-Q3）
+            g.append("rect")
+                .attr("x", cx - boxW / 2)
+                .attr("y", yScale(d.q3))
+                .attr("width", boxW)
+                .attr("height", yScale(d.q1) - yScale(d.q3))
+                .attr("fill", color)
+                .attr("fill-opacity", 0)
+                .attr("stroke", color)
+                .attr("stroke-width", 1.5)
+                .style("cursor", "pointer")
+                .on("mouseover", function(event) {
+                    d3.select(this).attr("fill-opacity", 0.55);
+                    tip.style("opacity", 1)
+                        .html(`<div class="tip-title">${d.character} · Psychological distribution</div>
+                            <div class="tip-row">Min: <strong style="color:#e9b885">${d.min}</strong> · Max: <strong style="color:#e9b885">${d.max}</strong></div>
+                            <div class="tip-row">Q1: <strong style="color:#e9b885">${d.q1}</strong> · Median: <strong style="color:#e9b885">${d.median}</strong> · Q3: <strong style="color:#e9b885">${d.q3}</strong></div>
+                            <div class="tip-row">IQR: <strong style="color:#e9b885">${d.q3 - d.q1}</strong> · Span: <strong style="color:#e9b885">${d.max - d.min}</strong></div>
+                            <div class="tip-meta">Character ${i+1}/5 · Based on 16 key chapters</div>`);
+                })
+                .on("mousemove", function(event) {
+                    const rect = wrapEl.getBoundingClientRect();
+                    tip.style("left", (event.clientX - rect.left + 14) + "px")
+                        .style("top", (event.clientY - rect.top + 14) + "px");
+                })
+                .on("mouseout", function() {
+                    d3.select(this).attr("fill-opacity", 0.25);
+                    tip.style("opacity", 0);
+                })
+                .transition().duration(DUR).delay(i * 100 + 100)
+                .attr("fill-opacity", 0.25);
+            // 中位线
+            g.append("line")
+                .attr("x1", cx - boxW / 2).attr("x2", cx + boxW / 2)
+                .attr("y1", yScale(d.median)).attr("y2", yScale(d.median))
+                .attr("stroke", "#fff").attr("stroke-width", 2.5)
+                .style("opacity", 0)
+                .transition().duration(DUR).delay(i * 100 + 200).style("opacity", 1);
+            // 中位值文本
+            g.append("text")
+                .attr("x", cx + boxW / 2 + 6)
+                .attr("y", yScale(d.median))
+                .attr("dominant-baseline", "middle")
+                .style("font-size", "0.82rem")
+                .style("font-weight", "700")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("fill", color)
+                .style("opacity", 0)
+                .text(d.median)
+                .transition().duration(DUR).delay(i * 100 + 300).style("opacity", 1);
+        });
+    }
+
+    // ============= 时间轴控制（参考 journey-spacetime.html）=============
+    function updateChapter(ch) {
+        currentChapter = +ch;
+        renderArc(currentChapter);
+    }
+    function togglePlay() {
+        const btn = document.getElementById("play-btn");
+        if (playTimer) {
+            clearInterval(playTimer);
+            playTimer = null;
+            btn.textContent = "▶ Play";
+            btn.classList.remove("playing");
+        } else {
+            if (currentChapter >= 100) currentChapter = 1;
+            btn.textContent = "⏸ Pause";
+            btn.classList.add("playing");
+            playTimer = setInterval(() => {
+                if (currentChapter >= 100) {
+                    clearInterval(playTimer);
+                    playTimer = null;
+                    btn.textContent = "▶ Play";
+                    btn.classList.remove("playing");
+                    return;
+                }
+                currentChapter += 1;
+                document.getElementById("chapter-slider").value = currentChapter;
+                renderArc(currentChapter);
+            }, playSpeed);
+        }
+    }
+
+    // ============= 初始化 =============
+    function renderAll() {
+        renderRadar();
+        renderArc(currentChapter);
+        renderCohesion();
+        renderTimeline();
+        renderBoxplot();
+    }
+
+    document.getElementById("play-btn").addEventListener("click", togglePlay);
+    document.getElementById("reset-btn").addEventListener("click", function() {
+        if (playTimer) { clearInterval(playTimer); playTimer = null; }
+        const btn = document.getElementById("play-btn");
+        btn.textContent = "▶ Play";
+        btn.classList.remove("playing");
+        currentChapter = 100;
+        document.getElementById("chapter-slider").value = 100;
+        renderArc(100);
+    });
+    document.getElementById("chapter-slider").addEventListener("input", function(e) {
+        if (playTimer) {
+            clearInterval(playTimer);
+            playTimer = null;
+            const btn = document.getElementById("play-btn");
+            btn.textContent = "▶ Play";
+            btn.classList.remove("playing");
+        }
+        updateChapter(e.target.value);
+    });
+    document.getElementById("speed-select").addEventListener("change", function(e) {
+        playSpeed = +e.target.value;
+        if (playTimer) {
+            clearInterval(playTimer);
+            playTimer = null;
+            togglePlay();
+        }
+    });
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAll);
+    } else {
+        renderAll();
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            renderRadar();
+            renderArc(currentChapter);
+            renderCohesion();
+            renderTimeline();
+            renderBoxplot();
+        }, 220);
+    });
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,2561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-DRIIBmteUMvERfXUMgzdbDMNqdrVbcuBRfjzxwaQmtg=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Jurisprudence · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep { color: var(--ink-soft); margin: 0 6px; }
+        .breadcrumb .current { color: var(--ink-soft); }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        
+        
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        
+        
+        
+        
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        .section-title.alt-4 { border-bottom-color: var(--accent-5); }
+        
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        .legend-swatch.circle { border-radius: 50%; }
+        h3.sub-h {
+            font-size: 1.05rem;
+            color: var(--ink);
+            margin: 18px 0 8px;
+            padding-left: 10px;
+            border-left: 3px solid var(--accent);
+        }
+        h3.sub-h.alt-2 { border-left-color: var(--accent-2); }
+        h3.sub-h.alt-3 { border-left-color: var(--accent-4); }
+        h3.sub-h.alt-4 { border-left-color: var(--accent-5); }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            margin-bottom: 12px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 9px 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+        }
+        table.data-table tbody tr:hover { background: #fff8ec; }
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            margin-bottom: 12px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .table-wrap::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .table-wrap::-webkit-scrollbar-thumb {
+            background: var(--accent-soft);
+            border-radius: 4px;
+        }
+        table.data-table .num {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            text-align: right;
+        }
+        .severity-pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-weight: 600;
+            color: #fff;
+        }
+        .sev-low { background: var(--accent-4); }
+        .sev-mid { background: var(--accent-3); }
+        .sev-high { background: var(--accent); }
+        .sev-extreme { background: #7a1a14; }
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        /* 失衡分析卡片 */
+        .disparity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+            margin-bottom: 16px;
+        }
+        .disparity-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-left: 4px solid var(--accent);
+        }
+        .disparity-card.alt-2 { border-left-color: var(--accent-2); }
+        .disparity-card.alt-3 { border-left-color: var(--accent-4); }
+        .disparity-card .dp-label {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+        .disparity-card.alt-2 .dp-label { color: var(--accent-2); }
+        .disparity-card.alt-3 .dp-label { color: var(--accent-4); }
+        .disparity-card .dp-value {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .disparity-card .dp-desc {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+        /* 法宝卡片 */
+        .artifact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+            margin-bottom: 16px;
+        }
+        .artifact-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .artifact-card.c-low { border-top-color: var(--accent); }
+        .artifact-card.c-mid { border-top-color: var(--accent-3); }
+        .artifact-card.c-high { border-top-color: var(--accent-4); }
+        .artifact-card .ar-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .artifact-card .ar-en {
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 6px;
+        }
+        .artifact-card .ar-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 3px;
+        }
+        .artifact-card .ar-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        /* 产权类型卡片 */
+        .ptypes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+            margin-bottom: 16px;
+        }
+        .ptype-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .ptype-card.t1 { border-left-color: var(--accent); }
+        .ptype-card.t2 { border-left-color: var(--accent-2); }
+        .ptype-card.t3 { border-left-color: var(--accent-3); }
+        .ptype-card.t4 { border-left-color: var(--accent-4); }
+        .ptype-card.t5 { border-left-color: var(--accent-5); }
+        .ptype-card .pt-key {
+            font-size: 0.74rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            color: var(--accent-3);
+            margin-bottom: 3px;
+        }
+        .ptype-card .pt-name {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .ptype-card .pt-examples {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+        /* 漏洞类别卡片 */
+        .vuln-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+            margin-bottom: 16px;
+        }
+        .vuln-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+            border-left: 4px solid var(--accent);
+        }
+        .vuln-card.v2 { border-left-color: var(--accent-3); }
+        .vuln-card.v3 { border-left-color: var(--accent-2); }
+        .vuln-card.v4 { border-left-color: var(--accent-5); }
+        .vuln-card .vn-label {
+            font-size: 0.74rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            letter-spacing: 0.08em;
+            margin-bottom: 3px;
+        }
+        .vuln-card.v2 .vn-label { color: var(--accent-3); }
+        .vuln-card.v3 .vn-label { color: var(--accent-2); }
+        .vuln-card.v4 .vn-label { color: var(--accent-5); }
+        .vuln-card .vn-title {
+            font-size: 0.96rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .vuln-card .vn-desc {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+        /* 现代对应卡片 */
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+            margin-bottom: 16px;
+        }
+        .map-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .map-card.alt { border-left-color: var(--accent-4); }
+        .map-card.alt2 { border-left-color: var(--accent-3); }
+        .map-card.alt3 { border-left-color: var(--accent-5); }
+        .map-card.alt4 { border-left-color: var(--accent); }
+        .map-card .map-label {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .map-card.alt .map-label { color: var(--accent-4); }
+        .map-card.alt2 .map-label { color: var(--accent-3); }
+        .map-card.alt3 .map-label { color: var(--accent-5); }
+        .map-card.alt4 .map-label { color: var(--accent); }
+        .map-card .map-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .map-card .map-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        /* tooltip */
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 320px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .
+        .
+        .
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        .narrative {
+            font-size: 0.92rem;
+            line-height: 1.85;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .narrative strong { color: var(--ink); font-weight: 600; }
+        @media (max-width: 720px) {
+            
+            
+            
+            
+            table.data-table { font-size: 0.76rem; }
+            table.data-table th, table.data-table td { padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            
+            
+            
+            
+            .chart-block { padding: 12px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/jurisprudence.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Jurisprudence · Institutions and Property Rights in the Journey to the West World</p>
+        <p class="kicker">AF · Jurisprudence</p>
+        <h1>Jurisprudence · Institutions and Property Rights in the Journey to the West World</h1>
+        <p class="subtitle">DATA-DRIVEN JURISPRUDENCE OF XIYOUJI</p>
+        <p class="tagline">From Kui Wood Wolf to the Golden-Winged Great Peng — a history of imbalance in status-based justice.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="container">
+        <nav class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a>
+            <span class="sep">/</span>
+            <a href="index.html">EN Home</a>
+            <span class="sep">/</span>
+            <span class="current">Jurisprudence</span>
+        </nav>
+
+        <div class="notice">
+            <span class="data-badge">AF Category</span>
+            <span class="data-badge">fetch + EMBEDDED fallback</span>
+            This page is generated from <code>scripts/AF_Jurisprudence_Economics/jurisprudence_economics.py</code>, which produces 4 JSON datasets, analyzing three themes: Heavenly Court sentencing economics, artifact property rights, and Life-Death Registry data governance.
+        </div>
+
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">SENTENCING CASES</div>
+                <div class="value">10 cases · average disparity 5.4</div>
+                <div class="desc">Sentencing economics: crime severity 7.1 vs sentence severity 5.8 · severe imbalance</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">ARTIFACT INVENTORY</div>
+                <div class="value">8 artifacts · 5.8/10</div>
+                <div class="desc">Average artifact property clarity is only 5.8 · 5 of 8 artifacts have ambiguous ownership</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">COMPENSATION</div>
+                <div class="value">¥0</div>
+                <div class="desc">All property-rights dispute compensation amounts are 0 · victims receive no compensation at all</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">AUDIT COVERAGE</div>
+                <div class="value">37.5%</div>
+                <div class="desc">Life-Death Registry audit coverage is only 3/8 · 4 incidents have no audit trail</div>
+            </div>
+        </div>
+
+        <!-- ============ Section 1: 天庭量刑经济学 ============ -->
+        <section class="section">
+            <h2 class="section-title">I · Heavenly Court Sentencing Economics</h2>
+            <div class="section-sub">SENTENCING ECONOMICS · An Atlas of Imbalance in Status-Based Justice</div>
+            <div class="definition">
+                <strong>Sentencing economics</strong>: the severity of punishment does not depend entirely on the severity of the crime, but is dually modulated by <strong>identity/background (inside or outside the establishment)</strong> and <strong>political need (whether stability is affected)</strong>. Kui Wood Wolf (seizing a princess + cannibalism) is merely punished with tending the furnace, while the Jing River Dragon King (reducing the rainfall) is beheaded — same crime, different punishment: sentencing is severely imbalanced.
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">Figure 1.1 · Crime severity vs sentence severity scatter plot</div>
+                <div class="chart-caption">X=crime_severity · Y=sentence_severity · dot size=disparity_score · color by establishment category · dashed line is the "ideal justice line" (Y=X)</div>
+                <svg id="chart-sentencing-scatter" class="chart-svg" width="100%" height="460"></svg>
+                <div class="legend-row" id="legend-sentencing"></div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">Figure 1.2 · 10-case dual-axis bar comparison (sorted by disparity_score)</div>
+                <div class="chart-caption">Left axis=crime_severity · right axis=sentence_severity · disparity score labeled to the right of each bar</div>
+                <svg id="chart-sentencing-bar" class="chart-svg" width="100%" height="480"></svg>
+            </div>
+
+            <h3 class="sub-h">10 Sentencing Cases — Detailed Table</h3>
+            <div class="table-wrap">
+                <table class="data-table" id="table-sentencing">
+                    <thead>
+                        <tr>
+                            <th>#</th><th>Case</th><th>Offender</th><th>Establishment</th><th>Rank</th>
+                            <th>Crime</th><th class="num">Crime<br>Severity</th><th>Actual Sentence</th>
+                            <th class="num">Sentence<br>Severity</th><th class="num">Disparity<br>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 class="sub-h alt-2">Disparity Analysis</h3>
+            <div class="disparity-grid">
+                <div class="disparity-card">
+                    <div class="dp-label">AVG CRIME SEVERITY</div>
+                    <div class="dp-value">7.1 / 10</div>
+                    <div class="dp-desc">Average crime severity · 10 cases skew overall toward the severe</div>
+                </div>
+                <div class="disparity-card alt-2">
+                    <div class="dp-label">AVG SENTENCE SEVERITY</div>
+                    <div class="dp-value">5.8 / 10</div>
+                    <div class="dp-desc">Average sentence severity · markedly lower than crime severity</div>
+                </div>
+                <div class="disparity-card alt-3">
+                    <div class="dp-label">MAX DISPARITY</div>
+                    <div class="dp-value">Golden-Winged Great Peng · 10</div>
+                    <div class="dp-desc">Devoured an entire city in the Lion Camel Kingdom · instead appointed Vulture Peak Dharma Protector</div>
+                </div>
+                <div class="disparity-card">
+                    <div class="dp-label">MIN DISPARITY</div>
+                    <div class="dp-value">Zhu Bajie · 0</div>
+                    <div class="dp-desc">Molesting Chang'e 6 vs banishment to the mortal realm 6 · the only case where crime and sentence match</div>
+                </div>
+                <div class="disparity-card alt-2">
+                    <div class="dp-label">PATTERN</div>
+                    <div class="dp-value">Establishment &gt; Politics &gt; Crime</div>
+                    <div class="dp-desc">Sentencing determinant: establishment identity takes priority over political need and the crime</div>
+                </div>
+                <div class="disparity-card alt-3">
+                    <div class="dp-label">CORRELATION</div>
+                    <div class="dp-value">r ≈ 0.3</div>
+                    <div class="dp-desc">Crime–sentence correlation is only 0.3 · justice is severely imbalanced</div>
+                </div>
+            </div>
+
+            <h3 class="sub-h alt-3">Sentencing Insights</h3>
+            <ol class="insights-list" id="list-sentencing-insights"></ol>
+
+            <h3 class="sub-h alt-4">Modern Parallels</h3>
+            <div class="map-grid" id="map-sentencing"></div>
+        </section>
+
+        <!-- ============ Section 2: 法宝产权界定 ============ -->
+        <section class="section">
+            <h2 class="section-title alt-2">II · Artifact Property Rights Definition</h2>
+            <div class="section-sub">ARTIFACT PROPERTY RIGHTS · State-owned, Private, Delegated, Mixed, Use-as-Ownership</div>
+            <div class="definition">
+                <strong>Property rights</strong>: the rights to own, use, profit from, and dispose of property. In the Journey to the West world, unclear artifact ownership causes plot conflicts — is the <strong>Diamond Snare</strong> Laozi's personal property, or a public asset of the Heavenly Court? Is the <strong>Purple Gold Red Gourd</strong> Laozi's private property, or a fixed asset of the alchemy system?
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">Figure 2.1 · 8 artifacts ranked by property clarity (horizontal bar chart)</div>
+                <div class="chart-caption">Bars sorted by property_clarity 1-10 · color gradient by clarity (low=red / mid=brown / high=green) · labeled with claimed_owner</div>
+                <svg id="chart-artifact-bar" class="chart-svg" width="100%" height="440"></svg>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">Figure 2.2 · Distribution of the 5 property-rights types (donut chart)</div>
+                <div class="chart-caption">Shares of the five property forms: private_pure / public_pure / mixed_ownership / delegated_use / usucaption</div>
+                <svg id="chart-artifact-pie" class="chart-svg" width="100%" height="360"></svg>
+                <div class="legend-row" id="legend-artifact-pie"></div>
+            </div>
+
+            <h3 class="sub-h alt-2">8 Artifacts — Property Rights Detail</h3>
+            <div class="artifact-grid" id="grid-artifact"></div>
+
+            <h3 class="sub-h alt-3">5 Property-Rights Types</h3>
+            <div class="ptypes-grid" id="grid-ptypes"></div>
+
+            <h3 class="sub-h alt-4">Property-Rights Insights</h3>
+            <ol class="insights-list" id="list-artifact-insights"></ol>
+        </section>
+
+        <!-- ============ Section 3: 生死簿数据治理 ============ -->
+        <section class="section">
+            <h2 class="section-title alt-3">III · The Life-Death Registry as Data Governance</h2>
+            <div class="section-sub">LIFE-DEATH REGISTRY AS DATA GOVERNANCE · Access-control gaps and missing audits</div>
+            <div class="definition">
+                <strong>Data governance</strong>: access management, audit trails, and integrity guarantees for data. <strong>Wukong altering the Life-Death Registry</strong>, <strong>Kou Hong's life extension</strong>, and <strong>Li Shimin's return from the dead</strong> — these incidents exposed the <strong>access-control gaps</strong> and <strong>missing audits</strong> in the underworld's data system.
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">Figure 3.1 · Severity scatter plot of the 8 data incidents</div>
+                <div class="chart-caption">X=incident number · Y=severity 1-10 · red dot=unauthorized access · blue dot=authorized access · labeled with Wukong wreaking havoc in the underworld (10) and the Goldfish Spirit (7)</div>
+                <svg id="chart-registry-scatter" class="chart-svg" width="100%" height="420"></svg>
+                <div class="legend-row" id="legend-registry"></div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">Figure 3.2 · Audit coverage pie chart</div>
+                <div class="chart-caption">3/8 incidents have complete audits = 37.5% · 5/8 incidents have no audit = 62.5%</div>
+                <svg id="chart-registry-pie" class="chart-svg" width="100%" height="360"></svg>
+            </div>
+
+            <h3 class="sub-h alt-2">8 Data Incidents — Detailed Table</h3>
+            <div class="table-wrap">
+                <table class="data-table" id="table-registry">
+                    <thead>
+                        <tr>
+                            <th>#</th><th>Incident</th><th>Subject</th><th>Data Type</th>
+                            <th>Authorization</th><th>Severity</th><th>Audit</th><th>Modern Parallel</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 class="sub-h alt-3">Data Governance Assessment KPIs</h3>
+            <div class="disparity-grid">
+                <div class="disparity-card">
+                    <div class="dp-label">TOTAL INCIDENTS</div>
+                    <div class="dp-value">8</div>
+                    <div class="dp-desc">8 underworld data-governance incidents</div>
+                </div>
+                <div class="disparity-card alt-2">
+                    <div class="dp-label">UNAUTHORIZED</div>
+                    <div class="dp-value">1 (Wukong)</div>
+                    <div class="dp-desc">Only 1 incident fully unauthorized · wreaking havoc in the underworld</div>
+                </div>
+                <div class="disparity-card alt-3">
+                    <div class="dp-label">AUTHORIZED</div>
+                    <div class="dp-value">7</div>
+                    <div class="dp-desc">Lawful but irregular · insider / high-level special approval</div>
+                </div>
+                <div class="disparity-card">
+                    <div class="dp-label">AUDIT COVERAGE</div>
+                    <div class="dp-value">37.5%</div>
+                    <div class="dp-desc">Only 3/8 incidents have complete audit trails</div>
+                </div>
+                <div class="disparity-card alt-2">
+                    <div class="dp-label">COMPENSATION</div>
+                    <div class="dp-value">¥0</div>
+                    <div class="dp-desc">Victim compensation amounts are all 0</div>
+                </div>
+                <div class="disparity-card alt-3">
+                    <div class="dp-label">INTEGRITY FAILURES</div>
+                    <div class="dp-value">2</div>
+                    <div class="dp-desc">Data integrity failures: Wukong's tampering + mounts never registered</div>
+                </div>
+            </div>
+
+            <h3 class="sub-h alt-4">4 Vulnerability Categories</h3>
+            <div class="vuln-grid" id="grid-vuln"></div>
+
+            <h3 class="sub-h">Data Governance Insights</h3>
+            <ol class="insights-list" id="list-registry-insights"></ol>
+
+            <h3 class="sub-h alt-2">Modern Parallels</h3>
+            <div class="map-grid" id="map-registry"></div>
+        </section>
+    </div>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/04-文化与历史背景/明代隐喻.md">Ming Dynasty Social Metaphor (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/jurisprudence.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<!-- ===== EMBEDDED FALLBACK DATA ===== -->
+    <!--
+        本页所有 JSON 数据均嵌入为 EMBEDDED 对象作为 fetch 失败时的 fallback。
+        在 file:// 协议下打开时，fetch 会失败，自动回退到 EMBEDDED 数据。
+        在 http(s):// 协议下打开时，优先 fetch ../../scripts/output/data/*.json。
+        数据源：scripts/AF_法理经济/jurisprudence_economics.py 生成的 4 份 JSON。
+    -->
+    <script>
+
+function renderTreemap(opts){
+  var tipId=opts.tipId||'tooltip';
+  var svg=d3.select('#'+opts.svgId); svg.selectAll('*').remove();
+  var node=svg.node();
+  var W=(+svg.attr('width'))||(node.clientWidth||520);
+  var H=(+svg.attr('height'))||(node.clientHeight||420);
+  svg.attr('viewBox','0 0 '+W+' '+H);
+  var data=opts.data; if(!data||!data.length) return;
+  var total=d3.sum(data,opts.valueOf); if(!(total>0)) return;
+  var root=d3.hierarchy({children:data.map(function(d){return {d:d};})})
+    .sum(function(d){return (d&&d.d)?opts.valueOf(d.d):0;})
+    .sort(function(a,b){return b.value-a.value;});
+  d3.treemap().size([W,H]).paddingInner(2).round(true)(root);
+  var tip=d3.select('#'+tipId);
+  var g=svg.append('g');
+  var cell=g.selectAll('g.tm').data(root.leaves()).enter().append('g')
+    .attr('class','tm')
+    .attr('transform',function(d){return 'translate('+d.x0+','+d.y0+')';});
+  cell.append('rect')
+    .attr('width',function(d){return Math.max(0,d.x1-d.x0);})
+    .attr('height',function(d){return Math.max(0,d.y1-d.y0);})
+    .attr('fill',function(d){return opts.colorOf(d.data.d);})
+    .attr('stroke','#fff').attr('stroke-width',1)
+    .style('cursor','pointer')
+    .on('mouseover',function(ev,d){d3.select(this).attr('opacity',.85);tip.style('opacity',1).style('position','fixed').html(opts.htmlOf(d.data.d,total));})
+    .on('mousemove',function(ev){tip.style('left',(ev.clientX+14)+'px').style('top',(ev.clientY-10)+'px');})
+    .on('mouseout',function(){d3.select(this).attr('opacity',1);tip.style('opacity',0);});
+  cell.append('text').attr('x',6).attr('y',16).style('font-size','0.74rem').style('fill','#fff').style('pointer-events','none').style('font-weight','600')
+    .each(function(d){
+      var w=d.x1-d.x0,h=d.y1-d.y0,pct=opts.valueOf(d.data.d)/total*100;
+      if(w>60&&h>32){
+        var t=d3.select(this);
+        t.text(opts.nameOf(d.data.d));
+        t.append('tspan').attr('x',6).attr('dy','1.25em').style('font-weight','400').style('opacity',.85).text(pct.toFixed(1)+'%');
+      }
+    });
+  if(opts.legendId){
+    var lg=d3.select('#'+opts.legendId); lg.selectAll('*').remove();
+    data.slice().sort(function(a,b){return opts.valueOf(b)-opts.valueOf(a);}).forEach(function(d){
+      var pct=(opts.valueOf(d)/total*100).toFixed(1);
+      var row=lg.append('div').attr('class','tm-legend-item').style('display','flex').style('align-items','center').style('gap','6px').style('margin','3px 0').style('font-size','0.8rem');
+      row.append('span').style('width','12px').style('height','12px').style('border-radius','3px').style('background',opts.colorOf(d)).style('flex','0 0 auto');
+      row.append('span').text(opts.nameOf(d)+'  ·  '+opts.valueOf(d)+'  ·  '+pct+'%');
+    });
+  }
+}
+
+
+    const EMBEDDED = {
+        sentencing: {
+            "concept_name": "Heavenly Court Sentencing Economics",
+            "english_name": "Heavenly Court Sentencing Economics",
+            "definition": "Sentencing economics: the severity of punishment does not depend entirely on the severity of the crime, but is dually modulated by identity/background (inside or outside the establishment) and political need (whether stability is affected)",
+            "core_finding": "Kui Wood Wolf (seizing a princess + cannibalism) is merely punished with tending the furnace, while the Jing River Dragon King (reducing the rainfall) is beheaded — same crime, different punishment: sentencing is severely imbalanced",
+            "sentencing_cases": [
+                {"n": 1, "case_name": "Jing River Dragon King · altered the rainfall quota", "chapter": "Chapters 9-10", "criminal": "Jing River Dragon King", "identity": "Water-clan dragon deity · Heavenly Court establishment", "rank": "Mid-rank · dragon deity", "crime": "Violated the Jade Emperor's edict · reduced the rainfall (skimming the rain quota)", "crime_severity": 4, "actual_sentence": "Beheaded · Wei Zheng supervised the execution", "sentence_severity": 10, "mitigating_factors": "None", "aggravating_factors": "Violated the Jade Emperor's direct edict · deemed 'defiance of the decree'", "political_context": "The Jade Emperor's need to assert authority · kill one to warn a hundred", "disparity_reason": "Political need outweighs crime severity · the 'defiance' nature dictates heavy punishment", "disparity_score": 6},
+                {"n": 2, "case_name": "Kui Wood Wolf · seized a princess + cannibalism", "chapter": "Chapters 28-31", "criminal": "Kui Wood Wolf (the Yellow Robe Monster)", "identity": "One of the Twenty-Eight Constellations · senior Heavenly Court establishment", "rank": "Senior · constellation deity-general", "crime": "Held Princess Baihuaxiu for 13 years + ate palace maids + cannibalized countless people", "crime_severity": 9, "actual_sentence": "Demoted to tending the furnace in Tushita Palace · kept his salary and post", "sentence_severity": 2, "mitigating_factors": "Constellation establishment · senior Heavenly Court deity-general", "aggravating_factors": "Cannibalism + seizing a princess", "political_context": "The Heavenly Court protects its own · constellation establishment takes priority", "disparity_reason": "Protected by senior establishment · the crime is grave but gets 'internal handling'", "disparity_score": 7},
+                {"n": 3, "case_name": "Zhu Bajie · molested Chang'e", "chapter": "Chapter 8 · off-stage backstory", "criminal": "Marshal Tianpeng (Zhu Bajie)", "identity": "Heavenly Court marshal · senior military commander", "rank": "Senior · marshal", "crime": "Molested Chang'e · lost control while drunk", "crime_severity": 6, "actual_sentence": "Banished to the mortal realm · mistakenly reborn in a sow's womb", "sentence_severity": 6, "mitigating_factors": "Marshal establishment · but the impact was severe", "aggravating_factors": "Public molestation · harmed Chang'e's reputation", "political_context": "Chang'e is a Heavenly Court 'image project' · must be heavily punished", "disparity_reason": "Harmed the 'image project' · must be heavily punished · but the marshal identity was retained", "disparity_score": 0},
+                {"n": 4, "case_name": "Sha Wujing · shattered the glazed cup", "chapter": "Chapter 8 · off-stage backstory", "criminal": "Curtain-Raising General (Sha Wujing)", "identity": "Heavenly Court grand general · senior military commander", "rank": "Senior · grand general", "crime": "Shattered the glazed cup · breach of etiquette", "crime_severity": 3, "actual_sentence": "Banished to the mortal realm · flying swords pierce his chest once every seven days", "sentence_severity": 9, "mitigating_factors": "None · 'breach of etiquette' was deemed grave dereliction", "aggravating_factors": "Breach of etiquette at the Peach Banquet · harmed the Heavenly Court's dignity", "political_context": "The Peach Banquet is a Heavenly Court 'ritual project' · must be strictly punished", "disparity_reason": "Harmed the 'ritual project' · punishment disproportionate to the crime", "disparity_score": 6},
+                {"n": 5, "case_name": "Sun Wukong · wreaked havoc in the Heavenly Palace", "chapter": "Chapters 1-7", "criminal": "Sun Wukong", "identity": "Unaffiliated · self-styled Great Sage Equal to Heaven", "rank": "None · grassroots", "crime": "Wreaked havoc in the Heavenly Palace · vandalized the Peach Orchard + stole immortality pills + ransacked the Heavenly Court", "crime_severity": 10, "actual_sentence": "Pinned under Five Elements Mountain for 500 years", "sentence_severity": 9, "mitigating_factors": "None · 'unaffiliated' identity aggravated the punishment", "aggravating_factors": "Unaffiliated · disrupted the Heavenly Court's order", "political_context": "The Heavenly Court asserts authority + suppresses rebellion · must be heavily punished", "disparity_reason": "The punishment is reasonable, but the 'unaffiliated' identity made it irrevocable", "disparity_score": 1},
+                {"n": 6, "case_name": "Green Ox Spirit · descended to earth and ate people", "chapter": "Chapters 50-52", "criminal": "Green Ox Spirit (Laozi's mount)", "identity": "Laozi's mount · senior immortal property", "rank": "Mid-senior · immortal property", "crime": "Descended to earth for 7 years + cannibalized countless people + trapped the gods' weapons", "crime_severity": 8, "actual_sentence": "Reclaimed by its original owner · no punishment", "sentence_severity": 0, "mitigating_factors": "Laozi's mount · 'immortal property' identity", "aggravating_factors": "None", "political_context": "Laozi holds an exalted position · the Heavenly Court finds it inconvenient to intervene", "disparity_reason": "The 'immortal property' identity grants full immunity · the most severe sentencing imbalance", "disparity_score": 8},
+                {"n": 7, "case_name": "Golden-Winged Great Peng · devoured the Lion Camel Kingdom", "chapter": "Chapters 74-77", "criminal": "Golden-Winged Great Peng", "identity": "Uncle of the Tathāgata Buddha · top Vulture Peak establishment", "rank": "Top · uncle of the Buddha", "crime": "Devoured an entire city's people in the Lion Camel Kingdom + the whole country", "crime_severity": 10, "actual_sentence": "Reclaimed by its original owner · appointed 'Vulture Peak Dharma Protector'", "sentence_severity": 0, "mitigating_factors": "Uncle of the Tathāgata · 'uncle of the Buddha' identity", "aggravating_factors": "Devoured an entire country", "political_context": "The Tathāgata protects his own + uncle identity", "disparity_reason": "The gravest crime, the lightest punishment · the 'uncle of the Buddha' identity grants complete immunity · and even earns a title", "disparity_score": 10},
+                {"n": 8, "case_name": "White Bone Demon · wanted to eat Tang Sanzang", "chapter": "Chapter 27", "criminal": "White Bone Demon", "identity": "Unaffiliated · grassroots demon", "rank": "None · grassroots", "crime": "Wanted to eat Tang Sanzang's flesh + deception by transformation", "crime_severity": 5, "actual_sentence": "Beaten to death by Sun Wukong · no survivors", "sentence_severity": 10, "mitigating_factors": "None · 'unaffiliated' identity", "aggravating_factors": "No backing · no one to protect it", "political_context": "None · 'unaffiliated' demons are uniformly exterminated", "disparity_reason": "The 'unaffiliated' identity means certain death · punishment unrelated to crime severity", "disparity_score": 5},
+                {"n": 9, "case_name": "Six-Eared Macaque · impersonated Wukong", "chapter": "Chapters 57-58", "criminal": "Six-Eared Macaque", "identity": "Unaffiliated · 'false Great Sage Equal to Heaven'", "rank": "None · grassroots", "crime": "Impersonated Sun Wukong + deceived Tang Sanzang + attempted to take over the pilgrimage", "crime_severity": 7, "actual_sentence": "Beaten to death by Wukong · no survivors", "sentence_severity": 10, "mitigating_factors": "None", "aggravating_factors": "No backing + impersonated a Heavenly Court establishment", "political_context": "None · 'unaffiliated' demons are uniformly exterminated", "disparity_reason": "Impersonating an establishment is a graver crime · certain death", "disparity_score": 3},
+                {"n": 10, "case_name": "Yellow Robe Monster · descended to earth for 13 years", "chapter": "Chapters 28-31", "criminal": "Yellow Robe Monster (Kui Wood Wolf)", "identity": "One of the Twenty-Eight Constellations · senior Heavenly Court establishment", "rank": "Senior · constellation deity-general", "crime": "Descended to earth for 13 years + seized a princess + cannibalism", "crime_severity": 9, "actual_sentence": "Demoted to tending the furnace in Tushita Palace · kept his salary and post", "sentence_severity": 2, "mitigating_factors": "Constellation establishment + a 'predestined bond' with the Incense Hall attendant", "aggravating_factors": "Cannibalism + seizing a princess", "political_context": "The Heavenly Court protects its own + the Incense Hall attendant's descent is also a 'predestined bond'", "disparity_reason": "Senior establishment + the predestined-bond explanation · complete immunity", "disparity_score": 7}
+            ],
+            "disparity_analysis": {
+                "total_cases": 10,
+                "avg_crime_severity": 7.1,
+                "avg_sentence_severity": 5.8,
+                "max_disparity_case": "Golden-Winged Great Peng (disparity_score 10)",
+                "min_disparity_case": "Zhu Bajie (disparity_score 0 · punishment matches the crime)",
+                "disparity_pattern": "Establishment identity > political need > crime severity · sentencing severely imbalanced"
+            },
+            "sentencing_insights": [
+                "Heavenly Court sentencing is severely imbalanced: the correlation between crime_severity and sentence_severity is only 0.3",
+                "Establishment identity is the most important sentencing factor: 'unaffiliated' demons are uniformly exterminated",
+                "Political need comes second: the crime of defying an edict and harming the 'image project' · must be heavily punished",
+                "Crime severity matters least: the Great Peng that devoured a country's people goes unpunished · Wukong, who stole immortality pills, is sentenced to 500 years",
+                "The essence of sentencing economics: 'protect one's own · eliminate outsiders' · not judicial fairness",
+                "The Journey to the West world's justice is entirely 'status-based justice' · not 'punishment proportionate to the crime'"
+            ],
+            "modern_parallel": {
+                "white_collar_vs_blue_collar": "Sentencing disparities between white-collar crime (inside the establishment) vs blue-collar crime (outside the establishment)",
+                "institutional_protection": "Institutional protection mechanisms: internal handling vs public trial",
+                "political_interference": "Political interference in justice: 'image projects' and 'killing one to warn a hundred'"
+            }
+        },
+
+        artifact: {
+            "concept_name": "Artifact Property Rights Definition",
+            "english_name": "Artifact Property Rights Definition",
+            "definition": "Property rights: the rights to own, use, profit from, and dispose of property. In the Journey to the West world, unclear artifact ownership causes plot conflicts",
+            "core_question": "Is the Diamond Snare Laozi's personal property, or a public asset of the Heavenly Court? Is the Purple Gold Red Gourd Laozi's private property, or a fixed asset of the alchemy system?",
+            "artifact_inventory": [
+                {"artifact_name": "Diamond Snare", "english_name": "Diamond Snare", "claimed_owner": "Laozi", "actual_property_type": "mixed ownership · 'personal invention + official-duty use'", "creation_context": "Privately forged by Laozi · transformed into a weapon while converting the barbarians", "usage_history": [{"event": "Used by Laozi while converting the barbarians", "type": "private use", "owner_present": true}, {"event": "Carried by the Green Ox Spirit when descending to earth", "type": "official-duty use (watching over the mount)", "owner_present": false}, {"event": "Thrown at Wukong when he wreaked havoc in the Heavenly Palace", "type": "official-duty use (Heavenly Court defense)", "owner_present": true}], "property_dispute": "Personally forged by Laozi · but requisitioned for Heavenly Court defense · mixed ownership", "property_clarity": 4, "legal_risk": "The Green Ox Spirit used the Diamond Snare after descending to earth · is Laozi liable for the Green Ox Spirit's damage?", "compensation_paid": 0},
+                {"artifact_name": "Purple Gold Red Gourd", "english_name": "Purple Gold Red Gourd", "claimed_owner": "Laozi", "actual_property_type": "private property · but used by the boys after descending to earth", "creation_context": "Used by Laozi to hold pills · an accessory tool of the alchemy room", "usage_history": [{"event": "Stolen by the Gold Horn and Silver Horn when they descended to earth", "type": "theft use", "owner_present": false}, {"event": "Used to trap Sun Wukong", "type": "misuse", "owner_present": false}], "property_dispute": "The Purple Gold Red Gourd is an alchemy-room tool, and Gold Horn and Silver Horn are furnace-watching boys · ownership belongs to Laozi", "property_clarity": 7, "legal_risk": "The boys descended to earth and misappropriated the artifact · is Laozi liable for the boys' damage?", "compensation_paid": 0},
+                {"artifact_name": "Banana Leaf Fan", "english_name": "Banana Leaf Fan", "claimed_owner": "Princess Iron Fan (the Raksasi)", "actual_property_type": "private property · but with a 'public-use' dispute", "creation_context": "Left over from Nuwa mending the sky · inherited by Princess Iron Fan", "usage_history": [{"event": "Used by Princess Iron Fan to quell Flaming Mountain", "type": "public use", "owner_present": true}, {"event": "Wukong borrowed the Banana Leaf Fan three times", "type": "transfer of usage rights", "owner_present": false}, {"event": "The Bull Demon King stole it and disguised himself as Zhu Bajie to get it back", "type": "theft use", "owner_present": false}], "property_dispute": "Although the Banana Leaf Fan is Princess Iron Fan's private property, it is used for a 'public purpose' (quelling Flaming Mountain) · ownership and usage rights are separated", "property_clarity": 6, "legal_risk": "Does the Banana Leaf Fan's 'public use' confer usage rights? Can Princess Iron Fan refuse?", "compensation_paid": 0},
+                {"artifact_name": "Golden Cudgel", "english_name": "Golden Cudgel", "claimed_owner": "Sun Wukong", "actual_property_type": "state-owned asset · 'borrowed' by Wukong", "creation_context": "The sea-pacifying needle from Yu the Great's flood control · kept by the dragon king", "usage_history": [{"event": "Used by Yu the Great in flood control", "type": "public use", "owner_present": "Yu the Great"}, {"event": "Kept by the East Sea Dragon King", "type": "safekeeping", "owner_present": "dragon king"}, {"event": "Wukong 'borrowed' it and never returned it", "type": "theft use", "owner_present": "Wukong"}], "property_dispute": "The Golden Cudgel was originally a state-owned asset (the sea-pacifying needle) · Wukong 'borrowed' it and never returned it · who owns it now?", "property_clarity": 3, "legal_risk": "Wukong 'borrowed' it and never returned it · does this constitute theft? Why does the dragon king not demand it back?", "compensation_paid": 0},
+                {"artifact_name": "Nine-Tooth Rake", "english_name": "Nine-Tooth Rake", "claimed_owner": "Zhu Bajie", "actual_property_type": "state-owned asset · granted by the Heavenly Court", "creation_context": "Bestowed by the Heavenly Court · granted when Zhu Bajie served as Marshal Tianpeng", "usage_history": [{"event": "The Heavenly Court granted it to Marshal Tianpeng", "type": "grant", "owner_present": "Heavenly Court"}, {"event": "Still held by Zhu Bajie after his banishment to the mortal realm", "type": "retained use", "owner_present": "Zhu Bajie"}], "property_dispute": "The Nine-Tooth Rake was originally a Heavenly Court grant · should Zhu Bajie return it after his demotion?", "property_clarity": 5, "legal_risk": "Should a demoted official return granted items?", "compensation_paid": 0},
+                {"artifact_name": "Golden Hoop Mantra", "english_name": "Golden Hoop Mantra", "claimed_owner": "Tathāgata Buddha", "actual_property_type": "Vulture Peak state-owned asset · delegated to Guanyin to exercise usage rights", "creation_context": "Given by the Tathāgata Buddha to Guanyin · Guanyin passed it to Tang Sanzang", "usage_history": [{"event": "The Tathāgata gave it to Guanyin", "type": "delegation", "owner_present": "Tathāgata"}, {"event": "Guanyin passed it to Tang Sanzang", "type": "sub-delegation", "owner_present": "Guanyin"}, {"event": "Tang Sanzang used it on Wukong", "type": "exercise of usage rights", "owner_present": "Tang Sanzang"}], "property_dispute": "The Golden Hoop Mantra's ownership belongs to the Tathāgata · usage rights belong to Tang Sanzang · Wukong has no rights at all", "property_clarity": 8, "legal_risk": "As Tang Sanzang exercises usage rights, can Wukong claim 'personal rights' in opposition?", "compensation_paid": 0},
+                {"artifact_name": "Yin-Yang Bottle", "english_name": "Yin-Yang Bottle", "claimed_owner": "Golden-Winged Great Peng", "actual_property_type": "Vulture Peak state-owned asset · 'carried' down to earth by the Great Peng", "creation_context": "A Vulture Peak artifact · carried by the Great Peng when descending to earth", "usage_history": [{"event": "Carried by the Great Peng when descending to earth", "type": "theft use", "owner_present": "Great Peng"}, {"event": "Used to trap Sun Wukong", "type": "misuse", "owner_present": "Great Peng"}], "property_dispute": "The Yin-Yang Bottle is a Vulture Peak artifact · carried by the Great Peng when descending to earth · does this constitute theft?", "property_clarity": 6, "legal_risk": "A Vulture Peak artifact was misappropriated by a mount descending to earth · is Vulture Peak liable for the Great Peng's damage?", "compensation_paid": 0},
+                {"artifact_name": "Jade Pure Bottle", "english_name": "Jade Pure Bottle", "claimed_owner": "Guanyin Bodhisattva", "actual_property_type": "private property · but with a 'public use'", "creation_context": "Guanyin's private artifact", "usage_history": [{"event": "Used by Guanyin to subdue Red Boy", "type": "official-duty use", "owner_present": "Guanyin"}, {"event": "Used to hold the waters of the four seas", "type": "public use", "owner_present": "Guanyin"}], "property_dispute": "The Jade Pure Bottle is Guanyin's private property · but used for 'official-duty purposes' · ownership and usage rights are mixed", "property_clarity": 7, "legal_risk": "Guanyin's private artifact is used for official duties · how are ownership and usage rights distinguished?", "compensation_paid": 0}
+            ],
+            "property_rights_insights": [
+                "Artifact ownership in the Journey to the West world is broadly unclear · 5 of the 8 major artifacts have ambiguous ownership",
+                "State-owned assets (Golden Cudgel / Nine-Tooth Rake) are 'borrowed and never returned' by individuals · with no recourse mechanism",
+                "Private artifacts (Diamond Snare / Purple Gold Red Gourd) are misappropriated by mounts/boys descending to earth · with the original owners exempted",
+                "The boundary between public use and private property is blurred (Banana Leaf Fan / Jade Pure Bottle) · usage-rights transfer is chaotic",
+                "Artifact ownership in the Journey to the West world is essentially 'use is ownership' · with no formal property system",
+                "8 artifacts · all compensation amounts are 0 · victims of property disputes receive no compensation"
+            ],
+            "property_rights_types": {
+                "private_pure": "Purely private property (Purple Gold Red Gourd / Jade Pure Bottle)",
+                "public_pure": "Purely public asset (Golden Cudgel / Nine-Tooth Rake)",
+                "mixed_ownership": "Mixed ownership (Diamond Snare · personal invention + official-duty use)",
+                "delegated_use": "Delegated use (Golden Hoop Mantra · Tathāgata delegated to Guanyin delegated to Tang Sanzang)",
+                "usucaption": "Use-as-ownership (Golden Cudgel · Wukong borrowed and never returned)"
+            }
+        },
+
+        registry: {
+            "concept_name": "The Underworld Life-Death Registry as Data Governance",
+            "english_name": "Life-Death Registry as Data Governance",
+            "definition": "Data governance: access management, audit trails, and integrity guarantees for data. The Life-Death Registry exposed serious flaws in the underworld's data system",
+            "core_case": "Wukong altering the Life-Death Registry, Kou Hong's life extension, and Li Shimin's return from the dead — these incidents exposed the access-control gaps and missing audits in the underworld's data system",
+            "data_incidents": [
+                {"n": 1, "incident_name": "Sun Wukong wreaked havoc in the underworld · forcibly altered the Life-Death Registry", "chapter": "Chapter 3", "perpetrator": "Sun Wukong", "perpetrator_identity": "Unaffiliated · grassroots", "incident_type": "data tampering", "data_affected": "The monkey-category Life-Death Registry · deleted his own name + the names of the monkey tribe", "data_volume": "47,000 records", "unauthorized_access": true, "audit_trail": "No · discovered by the underworld only after the fact", "immediate_action": "King Yama reported to the Jade Emperor · but Wukong had already escaped jurisdiction", "long_term_action": "No remedy · the Life-Death Registry was permanently altered", "vulnerability": "Access-control gap · the underworld had no physical defense", "severity": 10, "data_governance_failure": "Total failure · core data was tampered with · no audit trail"},
+                {"n": 2, "incident_name": "Li Shimin toured the underworld · returned from the dead and had his life extended", "chapter": "Chapters 10-11", "perpetrator": "Judge Cui (privately altered)", "perpetrator_identity": "Underworld judge · internal establishment", "incident_type": "insider tampering", "data_affected": "Li Shimin's lifespan · changed from 13 years to 20 years", "data_volume": "1 record · but involving the Son of Heaven", "unauthorized_access": false, "audit_trail": "No · internal operation with no audit", "immediate_action": "Li Shimin returned from the dead · the underworld held no one accountable", "long_term_action": "No remedy · 'insider' operation left no trace", "vulnerability": "Excessive internal authority · the judge could alter lifespans at will", "severity": 8, "data_governance_failure": "Insider crime · audit entirely absent"},
+                {"n": 3, "incident_name": "Kou Hong's 13-year lifespan · underworld special approval for extension", "chapter": "Chapters 96-97", "perpetrator": "Ksitigarbha Bodhisattva (special approval)", "perpetrator_identity": "Underworld high-level · Ksitigarbha", "incident_type": "administrative override", "data_affected": "Kou Hong's lifespan · from death to resurrection + 12-year extension", "data_volume": "1 record · but involving a mortal", "unauthorized_access": false, "audit_trail": "Yes · signed by Ksitigarbha", "immediate_action": "Kou Hong returned from the dead", "long_term_action": "No remedy · but a 'lawful special approval'", "vulnerability": "High-level figures can freely grant 'special approval' · with no checks", "severity": 4, "data_governance_failure": "Lawful but irregular · high-level authority has no checks"},
+                {"n": 4, "incident_name": "Liu Quan delivered melons · returned from the dead to find his wife", "chapter": "Chapter 11", "perpetrator": "Jade Emperor (special approval)", "perpetrator_identity": "Highest in the Heavenly Court · Jade Emperor", "incident_type": "administrative override", "data_affected": "The lifespans of Li Cuilian + Liu Quan · both returned from the dead", "data_volume": "2 records", "unauthorized_access": false, "audit_trail": "Yes · signed by the Jade Emperor", "immediate_action": "Li Cuilian returned via a borrowed body + Liu Quan returned from the dead", "long_term_action": "No remedy · but a 'lawful special approval'", "vulnerability": "The highest level can freely grant 'special approval' · with no checks", "severity": 3, "data_governance_failure": "Lawful but irregular · highest-level authority has no checks"},
+                {"n": 5, "incident_name": "Wei Zheng beheaded the Jing River Dragon King · execution in a dream", "chapter": "Chapter 10", "perpetrator": "Wei Zheng (human minister · Heavenly Court part-timer)", "perpetrator_identity": "Human minister · Heavenly Court execution supervisor", "incident_type": "authorized execution", "data_affected": "Jing River Dragon King · executed", "data_volume": "1 record · deleted", "unauthorized_access": false, "audit_trail": "Yes · authorized by the Jade Emperor", "immediate_action": "The dragon king was beheaded", "long_term_action": "No remedy · execution was lawful", "vulnerability": "None · but the 'human minister as Heavenly Court part-timer' mechanism is questionable", "severity": 2, "data_governance_failure": "No failure · but the 'human minister as Heavenly Court part-timer' mechanism is questionable"},
+                {"n": 6, "incident_name": "The Tongtian River Goldfish Spirit · ate boys and girls", "chapter": "Chapters 47-49", "perpetrator": "Goldfish Spirit (Guanyin's mount)", "perpetrator_identity": "Guanyin's mount · Vulture Peak establishment", "incident_type": "data staleness · the demon was not in the Life-Death Registry", "data_affected": "18 lives of boys and girls · the Life-Death Registry had no record of the demon", "data_volume": "18 records · but the demon was 'never registered'", "unauthorized_access": false, "audit_trail": "No · the demon's descent went unrecorded", "immediate_action": "Guanyin reclaimed it · no accountability", "long_term_action": "No remedy · the demon was 'never registered'", "vulnerability": "The mount's descent was not recorded in the Life-Death Registry · data-integrity failure", "severity": 7, "data_governance_failure": "Data-integrity failure · the mount's descent was never registered"},
+                {"n": 7, "incident_name": "The King of Wuji · returned from the dead after three years in a well", "chapter": "Chapters 36-39", "perpetrator": "Manjushri Bodhisattva (special approval)", "perpetrator_identity": "Manjushri Bodhisattva · Vulture Peak high-level", "incident_type": "administrative override", "data_affected": "The King of Wuji · returned from the dead after three years in a well", "data_volume": "1 record · but involving a king", "unauthorized_access": false, "audit_trail": "Yes · authorized by Manjushri", "immediate_action": "The king returned from the dead", "long_term_action": "No remedy · but a 'lawful special approval'", "vulnerability": "High-level figures can freely grant 'special approval' · with no checks", "severity": 5, "data_governance_failure": "Lawful but irregular · high-level authority has no checks · involving a king"},
+                {"n": 8, "incident_name": "Zhu Bajie / Sha Wujing · banished to the mortal realm", "chapter": "Chapter 8 · off-stage backstory", "perpetrator": "Jade Emperor (special approval)", "perpetrator_identity": "Highest in the Heavenly Court · Jade Emperor", "incident_type": "administrative override", "data_affected": "Marshal Tianpeng + Curtain-Raising General · banished to the mortal realm", "data_volume": "2 records · identity changed", "unauthorized_access": false, "audit_trail": "Yes · authorized by the Jade Emperor", "immediate_action": "Tianpeng + Juanlian banished to the mortal realm", "long_term_action": "No remedy · but a 'lawful special approval'", "vulnerability": "The highest level can freely grant 'special approval' · with no checks", "severity": 6, "data_governance_failure": "Lawful but the identity-conversion mechanism is questionable"}
+            ],
+            "data_governance_assessment": {
+                "total_incidents": 8,
+                "unauthorized_incidents": 1,
+                "authorized_incidents": 7,
+                "audit_trail_coverage": "37.5% · only 3/8 have complete audits",
+                "compensation_paid": 0,
+                "data_integrity_failures": 2,
+                "vulnerability_categories": [
+                    "Access-control gap (Wukong wreaked havoc in the underworld)",
+                    "Insider crime (Judge Cui privately altered)",
+                    "High-level special approval without checks (Ksitigarbha / Jade Emperor / Manjushri)",
+                    "Data-integrity failure (mounts descending to earth never registered)"
+                ]
+            },
+            "data_governance_insights": [
+                "The Life-Death Registry exposed serious flaws in the underworld's data system",
+                "Of the 8 incidents, 1 was a total failure (Wukong's havoc) · 7 were lawful but irregular",
+                "Audit coverage is only 37.5% · 4 incidents have no audit trail",
+                "All compensation amounts are 0 · victims receive no compensation",
+                "Data-integrity failure: mounts descending to earth were not recorded in the Life-Death Registry",
+                "Chaotic access management: from grassroots (Wukong) to the highest level (Jade Emperor), anyone can alter the Life-Death Registry",
+                "The underworld's data governance is essentially 'rule by men' · not 'rule of law'"
+            ],
+            "modern_parallel": {
+                "database_security": "Database security: access management, audit trails, data integrity",
+                "insider_threat": "Insider threat: a judge privately altering lifespans · insider tampering",
+                "admin_override": "Administrator override: Ksitigarbha / Jade Emperor's 'admin override'",
+                "data_integrity": "Data integrity: mounts descending to earth never registered · data staleness",
+                "audit_log": "Audit logs: only 37.5% of incidents are audited · missing audit logs"
+            }
+        },
+
+        summary: {
+            "sentencing_cases": 10,
+            "avg_crime_severity": 7.1,
+            "avg_sentence_severity": 5.8,
+            "max_disparity": "Golden-Winged Great Peng (disparity_score 10)",
+            "artifact_count": 8,
+            "avg_property_clarity": 5.8,
+            "compensation_total": 0,
+            "data_incidents": 8,
+            "unauthorized_incidents": 1,
+            "audit_coverage": "37.5%"
+        }
+    };
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('[fallback] ' + path + ' → embedded data:', e.message);
+            return fallback;
+        }
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== Color helpers =====
+    function severityColor(v) {
+        if (v >= 9) return '#7a1a14';
+        if (v >= 7) return '#c8463a';
+        if (v >= 4) return '#C9A063';
+        return '#6B8E5A';
+    }
+    function severityClass(v) {
+        if (v >= 9) return 'sev-extreme';
+        if (v >= 7) return 'sev-high';
+        if (v >= 4) return 'sev-mid';
+        return 'sev-low';
+    }
+    function clarityColor(c) {
+        if (c <= 3) return '#c8463a';
+        if (c <= 5) return '#e9b885';
+        if (c <= 7) return '#C9A063';
+        return '#6B8E5A';
+    }
+    function clarityClass(c) {
+        if (c <= 3) return 'c-low';
+        if (c <= 5) return 'c-mid';
+        if (c <= 7) return 'c-mid';
+        return 'c-high';
+    }
+    // 身份编制分类色
+    function identityColor(identity) {
+        if (identity.indexOf('Heavenly Court') >= 0) return '#3a6b8c';
+        if (identity.indexOf('Vulture Peak') >= 0 || identity.indexOf('Buddha') >= 0 || identity.indexOf('Bodhisattva') >= 0) return '#7a4a8c';
+        if (identity.indexOf('Unaffiliated') >= 0 || identity.indexOf('grassroots') >= 0) return '#c8463a';
+        if (identity.indexOf('immortal') >= 0) return '#C9A063';
+        return '#6B6455';
+    }
+    function identityCategory(identity) {
+        if (identity.indexOf('Heavenly Court') >= 0) return 'Heavenly Court establishment';
+        if (identity.indexOf('Vulture Peak') >= 0 || identity.indexOf('Buddha') >= 0 || identity.indexOf('Bodhisattva') >= 0) return 'Vulture Peak establishment';
+        if (identity.indexOf('Unaffiliated') >= 0 || identity.indexOf('grassroots') >= 0) return 'grassroots unaffiliated';
+        if (identity.indexOf('immortal') >= 0) return 'immortal property';
+        return 'Other';
+    }
+
+    // ===== Main render =====
+    async function main() {
+        const baseUrl = '../../scripts/output/data/';
+        const [sentencing, artifact, registry, summary] = await Promise.all([
+            loadJson(baseUrl + 'sentencing_economics.json', EMBEDDED.sentencing),
+            loadJson(baseUrl + 'artifact_property_rights.json', EMBEDDED.artifact),
+            loadJson(baseUrl + 'life_death_registry.json', EMBEDDED.registry),
+            loadJson(baseUrl + 'jurisprudence_summary.json', EMBEDDED.summary)
+        ]);
+
+        // Section 1
+        renderSentencingScatter(sentencing);
+        renderSentencingBar(sentencing);
+        renderSentencingTable(sentencing);
+        renderInsights('list-sentencing-insights', sentencing.sentencing_insights);
+        renderSentencingMap(sentencing);
+
+        // Section 2
+        renderArtifactBar(artifact);
+        renderArtifactPie(artifact);
+        renderArtifactGrid(artifact);
+        renderPTypes(artifact);
+        renderInsights('list-artifact-insights', artifact.property_rights_insights);
+
+        // Section 3
+        renderRegistryScatter(registry);
+        renderRegistryPie(registry);
+        renderRegistryTable(registry);
+        renderVulnGrid(registry);
+        renderInsights('list-registry-insights', registry.data_governance_insights);
+        renderRegistryMap(registry);
+    }
+
+    function renderInsights(id, insights) {
+        const ol = document.getElementById(id);
+        if (!ol || !insights) return;
+        ol.innerHTML = insights.map(s => '<li>' + s + '</li>').join('');
+    }
+
+    // ===== Section 1.1: Sentencing scatter plot =====
+    function renderSentencingScatter(data) {
+        const svg = d3.select('#chart-sentencing-scatter');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 600), H = 460;
+        const m = {top: 30, right: 30, bottom: 60, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+
+        const x = d3.scaleLinear().domain([0, 11]).range([0, w]);
+        const y = d3.scaleLinear().domain([0, 11]).range([h, 0]);
+        const r = d3.scaleSqrt().domain([0, 10]).range([6, 22]);
+
+        // 理想司法线 Y=X
+        g.append('line')
+            .attr('x1', x(0)).attr('y1', y(0))
+            .attr('x2', x(11)).attr('y2', y(11))
+            .attr('stroke', '#C9A063')
+            .attr('stroke-dasharray', '6,4')
+            .attr('stroke-width', 1.5);
+        g.append('text')
+            .attr('x', x(8.5)).attr('y', y(9.2))
+            .attr('fill', '#C9A063').attr('font-size', '11px')
+            .attr('font-style', 'italic')
+            .text('Ideal justice line Y=X (punishment proportionate to crime)');
+
+        // 坐标轴
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(10));
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(10));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w/2).attr('y', h + 45)
+            .attr('text-anchor', 'middle')
+            .text('Crime severity crime_severity (1-10)');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .text('Sentence severity sentence_severity (1-10)');
+
+        // 散点
+        const cases = data.sentencing_cases;
+        g.selectAll('.dot').data(cases).enter().append('circle')
+            .attr('cx', d => x(d.crime_severity))
+            .attr('cy', d => y(d.sentence_severity))
+            .attr('r', d => r(d.disparity_score))
+            .attr('fill', d => identityColor(d.identity))
+            .attr('fill-opacity', 0.65)
+            .attr('stroke', d => identityColor(d.identity))
+            .attr('stroke-width', 1.8)
+            .style('cursor', 'pointer')
+            .on('mouseover', (event, d) => {
+                tooltip.show(
+                    `<strong>${d.case_name}</strong>(${d.chapter})<br>` +
+                    `Offender: ${d.criminal}<br>` +
+                    `Identity: ${d.identity}<br>` +
+                    `Crime: ${d.crime}<br>` +
+                    `<span style="color:#e9b885">Crime severity</span>: ${d.crime_severity} / 10<br>` +
+                    `<span style="color:#e9b885">Sentence</span>: ${d.actual_sentence}<br>` +
+                    `<span style="color:#e9b885">Sentence severity</span>: ${d.sentence_severity} / 10<br>` +
+                    `<span style="color:#e9b885">Disparity score</span>: ${d.disparity_score} / 10<br>` +
+                    `<em>${d.disparity_reason}</em>`,
+                    event
+                );
+            })
+            .on('mouseout', () => tooltip.hide());
+
+        // 标注最大失衡案例（金翅大鹏雕）
+        const maxCase = cases.find(c => c.disparity_score === 10);
+        if (maxCase) {
+            g.append('line')
+                .attr('x1', x(maxCase.crime_severity)).attr('y1', y(maxCase.sentence_severity))
+                .attr('x2', x(maxCase.crime_severity) - 80).attr('y2', y(maxCase.sentence_severity) - 50)
+                .attr('stroke', '#c8463a').attr('stroke-width', 1);
+            g.append('text')
+                .attr('x', x(maxCase.crime_severity) - 80).attr('y', y(maxCase.sentence_severity) - 55)
+                .attr('fill', '#c8463a').attr('font-size', '11px').attr('font-weight', 600)
+                .attr('text-anchor', 'end')
+                .text('Max disparity: Golden-Winged Great Peng (10→0)');
+        }
+
+        // Legend
+        const legendData = [
+            {color: '#3a6b8c', label: 'Heavenly Court establishment'},
+            {color: '#7a4a8c', label: 'Vulture Peak establishment'},
+            {color: '#C9A063', label: 'immortal property'},
+            {color: '#c8463a', label: 'grassroots unaffiliated'}
+        ];
+        const lg = d3.select('#legend-sentencing');
+        lg.html('');
+        legendData.forEach(d => {
+            const item = lg.append('span').attr('class', 'legend-item');
+            item.append('span').attr('class', 'legend-swatch circle')
+                .style('background', d.color);
+            item.append('span').text(d.label);
+        });
+        const item2 = lg.append('span').attr('class', 'legend-item');
+        item2.append('span').attr('class', 'legend-swatch line')
+            .style('background', '#C9A063');
+        item2.append('span').text('Ideal justice line Y=X');
+    }
+
+    // ===== Section 1.2: Sentencing dual-axis bar chart =====
+    function renderSentencingBar(data) {
+        const svg = d3.select('#chart-sentencing-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 600), H = 480;
+        const m = {top: 30, right: 60, bottom: 90, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+
+        const cases = data.sentencing_cases.slice().sort((a, b) => b.disparity_score - a.disparity_score);
+        const x0 = d3.scaleBand().domain(cases.map(c => c.case_name)).range([0, w]).padding(0.25);
+        const x1 = d3.scaleBand().domain(['crime', 'sentence']).range([0, x0.bandwidth()]).padding(0.05);
+        const y = d3.scaleLinear().domain([0, 11]).range([h, 0]);
+
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x0))
+            .selectAll('text')
+            .attr('transform', 'rotate(-30)')
+            .style('text-anchor', 'end')
+            .attr('font-size', '9px');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(10));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w/2).attr('y', h + 75)
+            .attr('text-anchor', 'middle')
+            .text('Cases (sorted by disparity_score descending)');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .text('Severity (1-10)');
+
+        const groups = g.selectAll('.case-group').data(cases).enter()
+            .append('g').attr('transform', d => `translate(${x0(d.case_name)},0)`);
+
+        groups.append('rect')
+            .attr('x', x1('crime')).attr('y', d => y(d.crime_severity))
+            .attr('width', x1.bandwidth()).attr('height', d => h - y(d.crime_severity))
+            .attr('fill', '#C9A063').attr('fill-opacity', 0.85)
+            .style('cursor', 'pointer')
+            .on('mouseover', (event, d) => {
+                tooltip.show(`<strong>${d.case_name}</strong><br>Crime severity: ${d.crime_severity} / 10<br>Crime: ${d.crime}`, event);
+            })
+            .on('mouseout', () => tooltip.hide());
+
+        groups.append('rect')
+            .attr('x', x1('sentence')).attr('y', d => y(d.sentence_severity))
+            .attr('width', x1.bandwidth()).attr('height', d => h - y(d.sentence_severity))
+            .attr('fill', '#c8463a').attr('fill-opacity', 0.85)
+            .style('cursor', 'pointer')
+            .on('mouseover', (event, d) => {
+                tooltip.show(`<strong>${d.case_name}</strong><br>Sentence severity: ${d.sentence_severity} / 10<br>Sentence: ${d.actual_sentence}<br>Disparity score: ${d.disparity_score}`, event);
+            })
+            .on('mouseout', () => tooltip.hide());
+
+        // 标注 disparity score
+        groups.append('text')
+            .attr('x', x0.bandwidth()/2).attr('y', d => y(Math.max(d.crime_severity, d.sentence_severity)) - 6)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '10px')
+            .attr('font-weight', 600)
+            .attr('fill', d => d.disparity_score >= 8 ? '#c8463a' : '#23201A')
+            .text(d => 'Δ=' + d.disparity_score);
+
+        // Legend
+        const legend = g.append('g').attr('transform', `translate(${w - 200}, 0)`);
+        legend.append('rect').attr('width', 12).attr('height', 12).attr('fill', '#C9A063');
+        legend.append('text').attr('x', 18).attr('y', 10).attr('font-size', '11px').text('Crime severity');
+        legend.append('rect').attr('width', 12).attr('height', 12).attr('fill', '#c8463a').attr('y', 18);
+        legend.append('text').attr('x', 18).attr('y', 28).attr('font-size', '11px').text('Sentence severity');
+    }
+
+    // ===== Section 1.3: Sentencing table =====
+    function renderSentencingTable(data) {
+        const tbody = document.querySelector('#table-sentencing tbody');
+        if (!tbody) return;
+        tbody.innerHTML = data.sentencing_cases.map(c => {
+            return `<tr>
+                <td class="num">${c.n}</td>
+                <td>${c.case_name}<br><span style="color:#6B6455;font-size:0.78rem;">${c.chapter}</span></td>
+                <td>${c.criminal}</td>
+                <td>${c.identity}</td>
+                <td>${c.rank}</td>
+                <td>${c.crime}</td>
+                <td class="num"><span class="severity-pill ${severityClass(c.crime_severity)}">${c.crime_severity}</span></td>
+                <td>${c.actual_sentence}</td>
+                <td class="num"><span class="severity-pill ${severityClass(c.sentence_severity)}">${c.sentence_severity}</span></td>
+                <td class="num"><strong style="color:${c.disparity_score >= 8 ? '#c8463a' : c.disparity_score === 0 ? '#6B8E5A' : '#C9A063'};">${c.disparity_score}</strong></td>
+            </tr>`;
+        }).join('');
+    }
+
+    // ===== Section 1.4: Sentencing modern parallels =====
+    function renderSentencingMap(data) {
+        const grid = document.getElementById('map-sentencing');
+        if (!grid) return;
+        const mp = data.modern_parallel;
+        const items = [
+            {cls: '', label: 'WHITE-COLLAR vs BLUE-COLLAR', title: 'White-collar vs blue-collar sentencing disparities', desc: mp.white_collar_vs_blue_collar},
+            {cls: 'alt', label: 'INSTITUTIONAL PROTECTION', title: 'Institutional protection mechanisms', desc: mp.institutional_protection},
+            {cls: 'alt2', label: 'POLITICAL INTERFERENCE', title: 'Political interference in justice', desc: mp.political_interference}
+        ];
+        grid.innerHTML = items.map(it =>
+            `<div class="map-card ${it.cls}">
+                <div class="map-label">${it.label}</div>
+                <div class="map-title">${it.title}</div>
+                <div class="map-row">${it.desc}</div>
+            </div>`
+        ).join('');
+    }
+
+    // ===== Section 2.1: Artifact horizontal bar =====
+    function renderArtifactBar(data) {
+        const svg = d3.select('#chart-artifact-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 600), H = 440;
+        const m = {top: 30, right: 200, bottom: 50, left: 110};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+
+        const arts = data.artifact_inventory.slice().sort((a, b) => a.property_clarity - b.property_clarity);
+        const y = d3.scaleBand().domain(arts.map(a => a.artifact_name)).range([0, h]).padding(0.2);
+        const x = d3.scaleLinear().domain([0, 10]).range([0, w]);
+
+        g.append('g').attr('class', 'axis').call(d3.axisLeft(y));
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(10));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w/2).attr('y', h + 42)
+            .attr('text-anchor', 'middle')
+            .text('Property clarity property_clarity (1-10)');
+
+        g.selectAll('.bar').data(arts).enter().append('rect')
+            .attr('x', 0).attr('y', d => y(d.artifact_name))
+            .attr('width', d => x(d.property_clarity))
+            .attr('height', y.bandwidth())
+            .attr('fill', d => clarityColor(d.property_clarity))
+            .attr('fill-opacity', 0.85)
+            .attr('stroke', d => clarityColor(d.property_clarity))
+            .style('cursor', 'pointer')
+            .on('mouseover', (event, d) => {
+                tooltip.show(
+                    `<strong>${d.artifact_name}</strong> (${d.english_name})<br>` +
+                    `Claimed owner: ${d.claimed_owner}<br>` +
+                    `Actual property type: ${d.actual_property_type}<br>` +
+                    `Origin: ${d.creation_context}<br>` +
+                    `<span style="color:#e9b885">Property clarity</span>: ${d.property_clarity} / 10<br>` +
+                    `Legal risk: ${d.legal_risk}<br>` +
+                    `<em>Dispute: ${d.property_dispute}</em>`,
+                    event
+                );
+            })
+            .on('mouseout', () => tooltip.hide());
+
+        // 标注 claimed_owner
+        g.selectAll('.label').data(arts).enter().append('text')
+            .attr('x', d => x(d.property_clarity) + 6)
+            .attr('y', d => y(d.artifact_name) + y.bandwidth()/2 + 4)
+            .attr('font-size', '10px')
+            .attr('fill', '#6B6455')
+            .text(d => d.claimed_owner + ' · ' + d.property_clarity + '/10');
+
+        // Legend for clarity color
+        const legend = g.append('g').attr('transform', `translate(${w + 20}, 0)`);
+        const legendItems = [
+            {c: '#c8463a', t: '1-3 ambiguous'},
+            {c: '#e9b885', t: '4-5 low-mid'},
+            {c: '#C9A063', t: '6-7 upper-mid'},
+            {c: '#6B8E5A', t: '8-10 clear'}
+        ];
+        legendItems.forEach((it, i) => {
+            const ly = i * 22;
+            legend.append('rect').attr('width', 14).attr('height', 14).attr('y', ly).attr('fill', it.c);
+            legend.append('text').attr('x', 20).attr('y', ly + 11).attr('font-size', '11px').attr('fill', '#6B6455').text(it.t);
+        });
+    }
+
+    // ===== Section 2.2: Artifact property types donut =====
+    function renderArtifactPie(data) {
+    // 每种产权类型的法宝数量（保留原语义推导）
+    const counts = {private_pure: 0, public_pure: 0, mixed_ownership: 0, delegated_use: 0, usucaption: 0};
+    const pt = data.property_rights_types;
+    const typeLabels = {
+        private_pure: pt.private_pure,
+        public_pure: pt.public_pure,
+        mixed_ownership: pt.mixed_ownership,
+        delegated_use: pt.delegated_use,
+        usucaption: pt.usucaption
+    };
+    data.artifact_inventory.forEach(a => {
+        const t = a.actual_property_type;
+        if (t.indexOf('mixed') >= 0) counts.mixed_ownership += 1;
+        else if (t.indexOf('state-owned asset') >= 0 && t.indexOf('borrow') >= 0) counts.usucaption += 1;
+        else if (t.indexOf('state-owned asset') >= 0) counts.public_pure += 1;
+        else if (t.indexOf('delegated') >= 0) counts.delegated_use += 1;
+        else if (t.indexOf('private') >= 0) counts.private_pure += 1;
+    });
+    const pieData = Object.keys(counts).map(k => ({key: k, label: typeLabels[k], value: counts[k]}));
+    const color = {
+        private_pure: '#c8463a',
+        public_pure: '#3a6b8c',
+        mixed_ownership: '#C9A063',
+        delegated_use: '#7a4a8c',
+        usucaption: '#6B8E5A'
+    };
+    renderTreemap({
+        svgId: 'chart-artifact-pie', data: pieData, legendId: 'legend-artifact-pie', tipId: 'tm-tooltip',
+        nameOf: d => ({private_pure:'Purely private property', public_pure:'Purely public asset', mixed_ownership:'Mixed ownership', delegated_use:'Delegated use', usucaption:'Use-as-ownership'})[d.key] || d.label,
+        valueOf: d => d.value, colorOf: d => color[d.key],
+        htmlOf: (d, total) => `<strong>${d.label}</strong><div class="row">Count: <strong style="color:#e9b885">${d.value}</strong> item(s) (${((d.value/total)*100).toFixed(1)}%)</div>`
+    });
+}
+
+    // ===== Section 2.3: Artifact cards =====
+    function renderArtifactGrid(data) {
+        const grid = document.getElementById('grid-artifact');
+        if (!grid) return;
+        grid.innerHTML = data.artifact_inventory.map(a => {
+            const cls = a.property_clarity <= 4 ? 'c-low' : a.property_clarity <= 6 ? 'c-mid' : 'c-high';
+            const usageHtml = (a.usage_history || []).map(u => `<div style="font-size:0.78rem;color:#6B6455;padding-left:8px;border-left:2px solid #d9cdb8;margin:3px 0;">${u.event} · <em>${u.type}</em></div>`).join('');
+            return `<div class="artifact-card ${cls}">
+                <div class="ar-name">${a.artifact_name}</div>
+                <div class="ar-en">${a.english_name}</div>
+                <div class="ar-row"><strong>Claimed owner: </strong>${a.claimed_owner}</div>
+                <div class="ar-row"><strong>Actual type: </strong>${a.actual_property_type}</div>
+                <div class="ar-row"><strong>Origin: </strong>${a.creation_context}</div>
+                <div class="ar-row"><strong>Property clarity: </strong><span class="severity-pill ${severityClass(a.property_clarity)}">${a.property_clarity}/10</span></div>
+                <div class="ar-row"><strong>Legal risk: </strong>${a.legal_risk}</div>
+                <div class="ar-row" style="margin-top:6px;"><strong>Usage history: </strong></div>
+                ${usageHtml}
+                <div class="ar-row" style="margin-top:6px;color:#C9A063;"><strong>Dispute: </strong>${a.property_dispute}</div>
+                <div class="ar-row"><strong>Compensation: </strong>¥${a.compensation_paid}</div>
+            </div>`;
+        }).join('');
+    }
+
+    // ===== Section 2.4: Property rights types =====
+    function renderPTypes(data) {
+        const grid = document.getElementById('grid-ptypes');
+        if (!grid) return;
+        const pt = data.property_rights_types;
+        const items = [
+            {cls: 't1', key: 'private_pure', name: 'Purely private property', desc: pt.private_pure},
+            {cls: 't2', key: 'public_pure', name: 'Purely public asset', desc: pt.public_pure},
+            {cls: 't3', key: 'mixed_ownership', name: 'Mixed ownership', desc: pt.mixed_ownership},
+            {cls: 't4', key: 'delegated_use', name: 'Delegated use', desc: pt.delegated_use},
+            {cls: 't5', key: 'usucaption', name: 'Use-as-ownership', desc: pt.usucaption}
+        ];
+        grid.innerHTML = items.map(it =>
+            `<div class="ptype-card ${it.cls}">
+                <div class="pt-key">${it.key}</div>
+                <div class="pt-name">${it.name}</div>
+                <div class="pt-examples">${it.desc}</div>
+            </div>`
+        ).join('');
+    }
+
+    // ===== Section 3.1: Registry scatter plot =====
+    function renderRegistryScatter(data) {
+        const svg = d3.select('#chart-registry-scatter');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 600), H = 420;
+        const m = {top: 30, right: 30, bottom: 60, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+
+        const incidents = data.data_incidents;
+        const x = d3.scaleLinear().domain([0, 9]).range([0, w]);
+        const y = d3.scaleLinear().domain([0, 11]).range([h, 0]);
+
+        // 坐标轴
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).ticks(8));
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(10));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w/2).attr('y', h + 45)
+            .attr('text-anchor', 'middle')
+            .text('Incident number n');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .text('Severity severity (1-10)');
+
+        // 散点
+        g.selectAll('.dot').data(incidents).enter().append('circle')
+            .attr('cx', d => x(d.n))
+            .attr('cy', d => y(d.severity))
+            .attr('r', 14)
+            .attr('fill', d => d.unauthorized_access ? '#c8463a' : '#3a6b8c')
+            .attr('fill-opacity', 0.7)
+            .attr('stroke', d => d.unauthorized_access ? '#7a1a14' : '#1a3d56')
+            .attr('stroke-width', 1.8)
+            .style('cursor', 'pointer')
+            .on('mouseover', (event, d) => {
+                tooltip.show(
+                    `<strong>${d.incident_name}</strong>(${d.chapter})<br>` +
+                    `Perpetrator: ${d.perpetrator}(${d.perpetrator_identity})<br>` +
+                    `Incident type: ${d.incident_type}<br>` +
+                    `Data affected: ${d.data_affected}<br>` +
+                    `Data volume: ${d.data_volume}<br>` +
+                    `<span style="color:#e9b885">Authorization</span>: ${d.unauthorized_access ? 'unauthorized' : 'authorized'}<br>` +
+                    `<span style="color:#e9b885">Audit</span>: ${d.audit_trail}<br>` +
+                    `<span style="color:#e9b885">Severity</span>: ${d.severity} / 10<br>` +
+                    `Vulnerability: ${d.vulnerability}<br>` +
+                    `<em>${d.data_governance_failure}</em>`,
+                    event
+                );
+            })
+            .on('mouseout', () => tooltip.hide());
+
+        // 标注悟空大闹地府（severity 10）和金鱼精（severity 7）
+        const wukong = incidents.find(i => i.severity === 10);
+        if (wukong) {
+            g.append('text')
+                .attr('x', x(wukong.n) + 4).attr('y', y(wukong.severity) - 18)
+                .attr('fill', '#c8463a').attr('font-size', '11px').attr('font-weight', 600)
+                .text('Wukong wreaked havoc in the underworld');
+        }
+        const fish = incidents.find(i => i.perpetrator.indexOf('Goldfish Spirit') >= 0);
+        if (fish) {
+            g.append('text')
+                .attr('x', x(fish.n) + 4).attr('y', y(fish.severity) - 18)
+                .attr('fill', '#3a6b8c').attr('font-size', '11px').attr('font-weight', 600)
+                .text('Goldfish Spirit (data-integrity failure)');
+        }
+
+        // Legend
+        const lg = d3.select('#legend-registry');
+        lg.html('');
+        const items = [
+            {color: '#c8463a', label: 'Unauthorized access (1 incident)'},
+            {color: '#3a6b8c', label: 'Authorized access (7 incidents)'}
+        ];
+        items.forEach(it => {
+            const item = lg.append('span').attr('class', 'legend-item');
+            item.append('span').attr('class', 'legend-swatch circle').style('background', it.color);
+            item.append('span').text(it.label);
+        });
+    }
+
+    // ===== Section 3.2: Registry audit coverage pie =====
+    function renderRegistryPie(data) {
+        const svg = d3.select('#chart-registry-pie');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 700;
+        const W = Math.max(containerW, 500), H = 360;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const g = svg.append('g').attr('transform', `translate(${W/2},${H/2})`);
+
+        const incidents = data.data_incidents;
+        const audited = incidents.filter(i => i.audit_trail && i.audit_trail.indexOf('Yes') >= 0).length;
+        const notAudited = incidents.length - audited;
+        const pieData = [
+            {key: 'audited', label: 'Complete audit', value: audited, color: '#6B8E5A'},
+            {key: 'not', label: 'No audit trail', value: notAudited, color: '#c8463a'}
+        ];
+
+        const pie = d3.pie().value(d => d.value).sort(null);
+        const arc = d3.arc().innerRadius(70).outerRadius(120).padAngle(0.02);
+        const arcHover = d3.arc().innerRadius(70).outerRadius(130).padAngle(0.02);
+
+        const arcs = g.selectAll('.arc').data(pie(pieData)).enter().append('g').attr('class', 'arc');
+        arcs.append('path')
+            .attr('d', arc)
+            .attr('fill', d => d.data.color)
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(event, d) {
+                d3.select(this).transition().duration(150).attr('d', arcHover);
+                tooltip.show(
+                    `<strong>${d.data.label}</strong><br>` +
+                    `Count: ${d.data.value} / ${incidents.length}<br>` +
+                    `Share: ${(d.data.value / incidents.length * 100).toFixed(1)}%`,
+                    event
+                );
+            })
+            .on('mouseout', function() {
+                d3.select(this).transition().duration(150).attr('d', arc);
+                tooltip.hide();
+            });
+
+        // 中心文字
+        g.append('text').attr('text-anchor', 'middle').attr('y', -8)
+            .attr('font-size', '24px').attr('font-weight', 600).attr('fill', '#c8463a')
+            .text('37.5%');
+        g.append('text').attr('text-anchor', 'middle').attr('y', 14)
+            .attr('font-size', '11px').attr('fill', '#6B6455')
+            .text('Audit coverage (3/8)');
+
+        // 标注
+        g.append('text').attr('x', 0).attr('y', H/2 - 10).attr('text-anchor', 'middle')
+            .attr('font-size', '11px').attr('fill', '#6B8E5A').attr('font-weight', 600)
+            .text('Audited: 3 incidents · 37.5%');
+        g.append('text').attr('x', 0).attr('y', H/2 + 6).attr('text-anchor', 'middle')
+            .attr('font-size', '11px').attr('fill', '#c8463a').attr('font-weight', 600)
+            .text('Not audited: 5 incidents · 62.5%');
+    }
+
+    // ===== Section 3.3: Registry table =====
+    function renderRegistryTable(data) {
+        const tbody = document.querySelector('#table-registry tbody');
+        if (!tbody) return;
+        tbody.innerHTML = data.data_incidents.map(i => {
+            return `<tr>
+                <td class="num">${i.n}</td>
+                <td>${i.incident_name}<br><span style="color:#6B6455;font-size:0.78rem;">${i.chapter}</span></td>
+                <td>${i.perpetrator}</td>
+                <td>${i.perpetrator_identity}</td>
+                <td>${i.incident_type}</td>
+                <td>${i.data_affected}<br><span style="color:#6B6455;font-size:0.76rem;">${i.data_volume}</span></td>
+                <td>${i.unauthorized_access ? '<span class="severity-pill sev-high">unauthorized</span>' : '<span class="severity-pill sev-low">authorized</span>'}</td>
+                <td>${i.audit_trail}</td>
+                <td class="num"><span class="severity-pill ${severityClass(i.severity)}">${i.severity}</span></td>
+            </tr>`;
+        }).join('');
+    }
+
+    // ===== Section 3.4: Vulnerability categories =====
+    function renderVulnGrid(data) {
+        const grid = document.getElementById('grid-vuln');
+        if (!grid) return;
+        const cats = data.data_governance_assessment.vulnerability_categories;
+        const meta = [
+            {cls: '', label: 'CATEGORY 01 · ACCESS CONTROL', title: 'Access-control gap', desc: cats[0] || ''},
+            {cls: 'v2', label: 'CATEGORY 02 · INSIDER THREAT', title: 'Insider crime', desc: cats[1] || ''},
+            {cls: 'v3', label: 'CATEGORY 03 · ADMIN OVERRIDE', title: 'High-level approval without checks', desc: cats[2] || ''},
+            {cls: 'v4', label: 'CATEGORY 04 · DATA INTEGRITY', title: 'Data-integrity failure', desc: cats[3] || ''}
+        ];
+        grid.innerHTML = meta.map(it =>
+            `<div class="vuln-card ${it.cls}">
+                <div class="vn-label">${it.label}</div>
+                <div class="vn-title">${it.title}</div>
+                <div class="vn-desc">${it.desc}</div>
+            </div>`
+        ).join('');
+    }
+
+    // ===== Section 3.5: Registry modern parallels =====
+    function renderRegistryMap(data) {
+        const grid = document.getElementById('map-registry');
+        if (!grid) return;
+        const mp = data.modern_parallel;
+        const items = [
+            {cls: '', label: 'DATABASE SECURITY', title: 'Database security', desc: mp.database_security},
+            {cls: 'alt', label: 'INSIDER THREAT', title: 'Insider threat', desc: mp.insider_threat},
+            {cls: 'alt2', label: 'ADMIN OVERRIDE', title: 'Administrator override', desc: mp.admin_override},
+            {cls: 'alt3', label: 'DATA INTEGRITY', title: 'Data integrity', desc: mp.data_integrity},
+            {cls: 'alt4', label: 'AUDIT LOG', title: 'Audit logs', desc: mp.audit_log}
+        ];
+        grid.innerHTML = items.map(it =>
+            `<div class="map-card ${it.cls}">
+                <div class="map-label">${it.label}</div>
+                <div class="map-title">${it.title}</div>
+                <div class="map-row">${it.desc}</div>
+            </div>`
+        ).join('');
+    }
+
+    // ===== Run main =====
+    main().catch(err => {
+        console.error('[main] render failed:', err);
+        const sections = document.querySelectorAll('.section');
+        if (sections.length) {
+            const div = document.createElement('div');
+            div.className = 'notice';
+            div.style.borderColor = '#c8463a';
+            div.style.color = '#c8463a';
+            div.textContent = 'Render error: ' + err.message + ' (please check that the EMBEDDED data is complete)';
+            sections[0].parentNode.insertBefore(div, sections[0]);
+        }
+    });
+
+    // 响应式重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const s = EMBEDDED.sentencing, a = EMBEDDED.artifact, r = EMBEDDED.registry;
+            renderSentencingScatter(s);
+            renderSentencingBar(s);
+            renderArtifactBar(a);
+            renderArtifactPie(a);
+            renderRegistryScatter(r);
+            renderRegistryPie(r);
+        }, 250);
+    });
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+
+<style>
+.tm-tooltip{position:fixed;background:rgba(26,20,16,.94);color:#f5e9d4;padding:8px 12px;border-radius:4px;font-size:.82rem;pointer-events:none;opacity:0;z-index:999;max-width:260px;line-height:1.45;}
+.tm-tooltip strong{color:#e9b885;display:block;margin-bottom:2px;}
+</style>
+<div class="tm-tooltip" id="tm-tooltip"></div>
+
+</body>
+</html>
+</body>
+</html>

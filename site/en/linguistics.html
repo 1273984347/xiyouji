@@ -1,0 +1,2677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-a/XvVkA/vfYoU+fsD306/hRrjEnDUpuBO7CK4dvFGx0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Linguistics · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current { color: var(--ink-soft); }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        
+        
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        
+        
+        
+        
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+        }
+        table.data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        /* 咒语卡片 */
+        .incantation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .inc-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .inc-card.dom-taoist { border-top-color: var(--accent-soft); }
+        .inc-card.dom-ming { border-top-color: var(--accent-2); }
+        .inc-card.dom-classical { border-top-color: var(--accent-4); }
+        .inc-card .inc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+        .inc-card .inc-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .inc-card .inc-no {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.78rem;
+            color: var(--accent);
+        }
+        .inc-card .inc-en {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+        .inc-card .inc-raw {
+            background: #fff;
+            border-left: 3px solid var(--accent-soft);
+            padding: 6px 10px;
+            font-size: 0.9rem;
+            color: var(--ink);
+            margin: 6px 0;
+            font-style: italic;
+        }
+        .inc-card .inc-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .inc-card .inc-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .inc-card .inc-feats {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-top: 4px;
+            padding-left: 14px;
+        }
+        .inc-card .inc-feats li {
+            list-style: disc;
+            margin-bottom: 2px;
+        }
+        .inc-card .inc-prop {
+            margin-top: 6px;
+            display: flex;
+            height: 10px;
+            border-radius: 3px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+        }
+        .inc-card .inc-prop span {
+            display: inline-block;
+            height: 100%;
+        }
+        /* 对话卡片 */
+        .pair-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .pair-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-left: 4px solid var(--accent);
+        }
+        .pair-card.pd-mid { border-left-color: var(--accent-soft); }
+        .pair-card.pd-low { border-left-color: var(--accent-4); }
+        .pair-card .pair-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+        .pair-card .pair-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .pair-card .pair-pd {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.88rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .pair-card .pair-rel {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+        }
+        .pair-card .pair-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .pair-card .pair-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .pair-card .pair-evo {
+            margin-top: 6px;
+            font-size: 0.82rem;
+            padding: 4px 8px;
+            background: #fff;
+            border-radius: 3px;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+        }
+        .pair-card .pair-dlg {
+            margin-top: 8px;
+            padding: 6px 8px;
+            background: #fff;
+            border-left: 2px solid var(--accent-soft);
+            font-size: 0.82rem;
+        }
+        .pair-card .pair-dlg .dlg-ch {
+            color: var(--accent-3);
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .pair-card .pair-dlg .dlg-text {
+            color: var(--ink);
+            font-style: italic;
+            display: block;
+            margin: 2px 0;
+        }
+        .pair-card .pair-dlg .dlg-feats {
+            color: var(--ink-soft);
+            font-size: 0.76rem;
+        }
+        /* MBTI 卡片 */
+        .mbti-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .mbti-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .mbti-card.m-entp { border-top-color: var(--accent); }
+        .mbti-card.m-infj { border-top-color: var(--accent-2); }
+        .mbti-card.m-esfp { border-top-color: var(--accent-soft); }
+        .mbti-card.m-isfj { border-top-color: var(--accent-4); }
+        .mbti-card .mbti-tag {
+            font-size: 0.78rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .mbti-card.m-entp .mbti-tag { color: var(--accent); }
+        .mbti-card.m-infj .mbti-tag { color: var(--accent-2); }
+        .mbti-card.m-esfp .mbti-tag { color: var(--accent-3); }
+        .mbti-card.m-isfj .mbti-tag { color: var(--accent-4); }
+        .mbti-card .mbti-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .mbti-card .mbti-strategy {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+        /* 角色身份卡片 */
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .char-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .char-card.c-buddhist { border-top-color: var(--accent); }
+        .char-card.c-daoist { border-top-color: var(--accent-soft); }
+        .char-card.c-confucian { border-top-color: var(--accent-2); }
+        .char-card.c-folk { border-top-color: var(--accent-4); }
+        .char-card.c-mixed { border-top-color: var(--accent-3); }
+        .char-card .char-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .char-card .char-profile {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+        }
+        .char-card .char-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .char-card .char-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .char-card .char-scores {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            margin-top: 6px;
+        }
+        .char-card .char-scores .score-cell {
+            text-align: center;
+            background: #fff;
+            padding: 4px 2px;
+            border-radius: 3px;
+            border: 1px solid var(--line);
+        }
+        .char-card .char-scores .score-cell .score-label {
+            font-size: 0.7rem;
+            color: var(--ink-soft);
+            display: block;
+        }
+        .char-card .char-scores .score-cell .score-val {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: var(--accent);
+        }
+        .char-card .char-vocab {
+            margin-top: 8px;
+            font-size: 0.82rem;
+        }
+        .char-card .char-vocab .vocab-label {
+            color: var(--accent-3);
+            font-size: 0.76rem;
+            margin-bottom: 2px;
+        }
+        .char-card .char-vocab .vocab-list {
+            color: var(--ink);
+        }
+        /* 比例条 mini bar */
+        .prop-bar {
+            display: flex;
+            height: 8px;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 4px;
+            border: 1px solid var(--line);
+        }
+        .prop-bar span {
+            display: inline-block;
+            height: 100%;
+        }
+        /* tooltip */
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 320px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .
+        .
+        .
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .map-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .map-card.alt { border-left-color: var(--accent-4); }
+        .map-card.alt2 { border-left-color: var(--accent-3); }
+        .map-card .map-label {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .map-card.alt .map-label { color: var(--accent-4); }
+        .map-card.alt2 .map-label { color: var(--accent-3); }
+        .map-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .map-card .map-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .map-card .map-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        @media (max-width: 720px) {
+            
+            
+            
+            
+            .map-grid, .incantation-grid, .pair-grid, .char-grid, .mbti-grid { grid-template-columns: 1fr; }
+            table.data-table { font-size: 0.78rem; }
+            table.data-table th, table.data-table td { padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            
+            
+            
+            
+            .chart-block { padding: 12px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+        <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/linguistics.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Linguistics · Incantations · Power Distance · Identity</p>
+        <p class="kicker">AH · Linguistics</p>
+        <h1>Linguistics · Incantations · Power Distance · Identity</h1>
+        <p class="subtitle">DATA-DRIVEN LINGUISTICS OF XIYOUJI</p>
+        <p class="tagline">From the Sanskrit of the Golden Hoop Mantra to Wukong's marketplace cursing — a linguistic map of Three-Teachings synthesis.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="container">
+        <nav class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a>
+            <span class="sep">/</span>
+            <a href="index.html">EN Home</a>
+            <span class="sep">/</span>
+            <span class="current">Linguistics</span>
+        </nav>
+
+        <div class="notice">
+            This page is generated from the AH-type "Linguistics" script and contains 4 JSON datasets: incantation linguistics, conversational power distance, language-identity map, and overall statistics. All charts support hover tooltips.
+        </div>
+
+        <!-- 导言 -->
+        <section class="section">
+            <h2 class="section-title">Introduction · A Linguistic Map of Three-Teachings Synthesis</h2>
+            <div class="section-sub">INTRODUCTION · Linguistic Map of Three-Teachings Synthesis</div>
+                        <p style="font-size:0.95rem;line-height:1.8;color:var(--ink);margin-bottom:14px;">
+                Journey to the West is a linguistic specimen of <strong>Three-Teachings synthesis</strong>: the <strong style="color:var(--accent);">Sanskrit transliteration</strong> of the Golden Hoop Mantra, the <strong style="color:var(--accent-3);">Daoist terminology</strong> of the Five Thunder Spell, the <strong style="color:var(--accent-2);">Ming-dynasty marketplace speech</strong> of the Body-Freezing Spell, and the <strong style="color:var(--accent-4);">Buddhist Classical Chinese</strong> of the Buddha's sermon — four linguistic sources coexist.
+                This page analyzes three dimensions: the linguistic structure of incantations, the power distance of dialogue, and the language identity of characters.
+            </p>
+            <div style="margin-bottom:18px;">
+                <span class="data-badge">4 JSON datasets</span>
+                <span class="data-badge">8 incantations × 4 linguistic sources</span>
+                <span class="data-badge">5 dialogue pairs × 19 representative dialogues</span>
+                <span class="data-badge">8 characters × 4 religious identities</span>
+                <span class="data-badge">4 MBTI language strategies</span>
+                <span class="data-badge">3 categories · 7 insights × 3</span>
+                <span class="data-badge">D3.js v7</span>
+                <span class="data-badge">fetch + EMBEDDED fallback</span>
+            </div>
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent);">DIMENSION 1</div>
+                    <div class="map-title">The Linguistic Structure of Incantations · Incantation Linguistics</div>
+                    <div class="map-row">8 incantations cover Sanskrit transliteration (Golden Hoop Mantra) / Daoist terminology (Five Thunder Spell) / Ming marketplace speech (Body-Freezing Spell) / Buddhist Classical Chinese (Buddha's sermon), with 2 of each of the 4 sources.</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-4);">DIMENSION 2</div>
+                    <div class="map-title">Conversational Power Distance · Power Distance</div>
+                    <div class="map-row">Tang Sanzang→Wukong 8/10 imperative vs Wukong→Bajie 3/10 banter; the 4 main dialogue pairs evolve across 4 stages, reflecting master-disciple closeness.</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-3);">DIMENSION 3</div>
+                    <div class="map-title">Language Identity Map · Language Identity</div>
+                    <div class="map-row">An identity radar of 8 characters × 4 teachings (Buddhist/Daoist/Confucian/Folk), with the Buddha at 10 for Buddhism, Laojun at 10 for Daoism, the Jade Emperor at 10 for Confucianism, and Bajie at 10 for folk belief.</div>
+                </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+                Data source: scripts/AH_Linguistics/linguistics.py · generates 4 JSON outputs in total; on fetch failure this page automatically falls back to the inline EMBEDDED data, supporting double-click opening via the file:// protocol.
+            </p>
+        </section>
+
+        <!-- KPI 卡片 -->
+        <div class="kpi-row" id="kpiRow">
+            <div class="kpi-card">
+                <div class="label">INCANTATIONS · Incantations</div>
+                <div class="value">8 incantations</div>
+                <div class="desc">4 linguistic sources (Sanskrit/Daoist/Ming/Classical)</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">DIALOGUES · Dialogues</div>
+                <div class="value">5 dialogue pairs</div>
+                <div class="desc">19 representative dialogues · 4-stage evolution</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">IDENTITY · Identity</div>
+                <div class="value">8 characters</div>
+                <div class="desc">4 religious identities (Buddhist/Daoist/Confucian/Folk)</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">CLASSICAL · Classical</div>
+                <div class="value">38.75%</div>
+                <div class="desc">highest average Classical share (avg classical_chinese)</div>
+            </div>
+        </div>
+
+        <!-- Section 1: 咒语的语言结构 -->
+        <section class="section">
+            <h2 class="section-title">I · The Linguistic Structure of Incantations</h2>
+            <div class="section-sub">INCANTATION LINGUISTIC STRUCTURE · Sanskrit / Daoist / Marketplace / Classical — Four Sources Coexist</div>
+            <div class="definition" id="def-incantation">
+                <strong>Definition:</strong>Incantation linguistics: the linguistic sources, lexical composition, and phonetic features of incantations, reflecting religious and cultural fusion. The 8 incantations cover Sanskrit loanwords, Daoist terminology, Ming marketplace speech, and Buddhist Classical Chinese — four source types.
+            </div>
+
+                        <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>Key finding:</strong> The Golden Hoop Mantra "Oṃ Maṇi Padme Hūṃ" is a Sanskrit transliteration · the Five Thunder Spell "as swift as the law commands" is a Han-Chinese Daoist term ·
+                Wukong's curses "impudent fiend, beast, don't you run" are Ming marketplace speech — three linguistic sources reflecting <strong style="color:var(--accent);">Three-Teachings synthesis</strong>.
+                Source statistics: sanskrit_dominant=2 / taoist_dominant=2 / ming_dominant=2 / classical_dominant=2 · four sources in balance.
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">8 Incantations · 4 Linguistic Source Share Stacked Bar Chart</div>
+                <div class="chart-caption">X-axis: 8 incantations / Y-axis: share 0-100% (red=Sanskrit, yellow=Daoist, blue=Ming, green=Classical) / labels each incantation's dominant source</div>
+                <svg id="chart-incantation-stacked" class="chart-svg" width="100%" height="400"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>Sanskrit loanword</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>Daoist terminology</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>Ming colloquial</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>Classical</span>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">4 Linguistic Sources · Total Share Donut Chart</div>
+                <div class="chart-caption">Based on avg_sanskrit=20% / avg_taoist=16.25% / avg_ming=28.75% / avg_classical=35% (average of 8 incantations)</div>
+                <svg id="chart-incantation-donut" class="chart-svg" width="100%" height="360"></svg>
+                <div class="legend-row" id="donut-legend"></div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8 Incantation Cards</h3>
+            <div class="incantation-grid" id="incantation-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Language Source Statistics KPI</h3>
+            <div class="kpi-row" id="srcStatKpi"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Linguistics Insights</h3>
+            <ol class="insights-list" id="incantation-insights"></ol>
+        </section>
+
+        <!-- Section 2: 对话的权力距离 -->
+        <section class="section">
+            <h2 class="section-title alt-2">II · Conversational Power Distance</h2>
+            <div class="section-sub">CONVERSATIONAL POWER DISTANCE · Imperative vs Banter vs Deferential</div>
+            <div class="definition" id="def-power-distance">
+                <strong>Definition:</strong>Power distance: the hierarchical distance reflected in dialogue · high power distance uses the imperative · low power distance uses banter. Tang Sanzang to Wukong is 8/10 imperative · Wukong to Bajie is 3/10 banter · Wukong to the Tang Monk is 3/10 deferential.
+            </div>
+
+                        <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>Key finding:</strong> Tang Sanzang→Wukong is high power distance (imperative) · Wukong→Bajie is low power distance (banter) ·
+                quantifying the evolution of master-disciple closeness. Tang Sanzang→Wukong evolves 10→9→6→4 · power distance gradually declines · the relationship grows warm;
+                Bajie→Wukong evolves 1→6→4 · from provocation to honorific · rising then falling.
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">5 Dialogue Pairs · Power Distance Comparison Bar Chart</div>
+                <div class="chart-caption">X-axis: 5 dialogue pairs (speaker→listener) / Y-axis: power_distance (0-10) / color graded by distance (green=low, yellow=mid, red=high)</div>
+                <svg id="chart-pd-bar" class="chart-svg" width="100%" height="360"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>Low distance 0-3 (banter)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>Mid distance 4-6 (polite)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>High distance 7-10 (imperative)</span>
+                </div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">4 Main Dialogue Pairs · Power Distance Evolution Curves</div>
+                <div class="chart-caption">X-axis: 4 stages (representative dialogues) / Y-axis: power_distance_reflected (0-10) / 4 lines: Tang Sanzang→Wukong / Wukong→Bajie / Wukong→Tang Monk / Bajie→Wukong</div>
+                <svg id="chart-pd-evolution" class="chart-svg" width="100%" height="380"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent);"></span>Tang Sanzang→Wukong (imperative)</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-2);"></span>Wukong→Bajie (banter)</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-4);"></span>Wukong→Tang Monk (deferential)</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-3);"></span>Bajie→Wukong (fluctuating)</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">5 Dialogue Pair Cards</h3>
+            <div class="pair-grid" id="pair-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">MBTI Language Strategies</h3>
+            <div class="mbti-grid" id="mbti-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Power Distance Insights</h3>
+            <ol class="insights-list" id="pd-insights"></ol>
+        </section>
+
+        <!-- Section 3: 语言身份认同图谱 -->
+        <section class="section">
+            <h2 class="section-title alt-3">III · The Map of Language Identity</h2>
+            <div class="section-sub">LANGUAGE IDENTITY MAP · 8 Characters × 4 Religious Identities</div>
+            <div class="definition" id="def-identity">
+                <strong>Definition:</strong>Language identity: quantifying a character's cultural identity through their linguistic features, reflecting Three-Teachings synthesis. The Buddha leans scriptural · Laojun leans Daoist · the Jade Emperor leans Confucian · Bajie leans folk · a four-way fusion.
+            </div>
+
+                        <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>Key finding:</strong> Tang Sanzang's language leans Buddhist (many Sanskrit loanwords) · Wukong leans Daoist + colloquial · Bajie leans colloquial · Sha Wujing leans classical · the Buddha leans scriptural · the gods lean Daoist.
+                Statistics: buddhist_dominant=3 / daoist_dominant=2 / confucian_dominant=1 / folk_dominant=1 / mixed=1 · Buddhism predominates.
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">8 Characters × 4 Religious Identity Radar Chart</div>
+                <div class="chart-caption">4 dimensions: Buddhist / Daoist / Confucian / Folk (each 0-10 points) / one polygon per character · color-coded</div>
+                <svg id="chart-identity-radar" class="chart-svg" width="100%" height="560"></svg>
+                <div class="legend-row" id="radar-legend"></div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">8 Characters × 4 Linguistic Source Share Stacked Bar Chart</div>
+                <div class="chart-caption">X-axis: 8 characters / Y-axis: 0-100% (red=Sanskrit, yellow=Daoist, blue=Ming, green=Classical, stacked)</div>
+                <svg id="chart-identity-stacked" class="chart-svg" width="100%" height="400"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>Sanskrit loanword</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>Daoist terminology</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>Ming marketplace speech</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>Classical Chinese</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8-Character Language Identity Table</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="identity-table">
+                    <thead>
+                        <tr>
+                            <th>Character</th>
+                            <th>Language Identity</th>
+                            <th>Sanskrit%</th>
+                            <th>Daoist%</th>
+                            <th>Ming%</th>
+                            <th>Classical%</th>
+                            <th>Buddhist%</th>
+                            <th>Cultural Identity</th>
+                            <th>Bud</th>
+                            <th>Dao</th>
+                            <th>Conf</th>
+                            <th>Folk</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">8-Character Representative Vocabulary & Identity Cards</h3>
+            <div class="char-grid" id="char-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Language Classification Statistics</h3>
+            <div class="kpi-row" id="idStatKpi"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Identity Insights</h3>
+            <ol class="insights-list" id="identity-insights"></ol>
+        </section>
+    </div>
+    </main>
+
+        <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/04-文化与历史背景/佛道思想.md">Buddhist and Daoist Thought (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/linguistics.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // ===== EMBEDDED fallback data（与 4 份 JSON 完全一致）=====
+    const EMBEDDED = {
+    incantation: {
+        "concept_name": "The Linguistic Structure of Incantations",
+        "english_name": "Incantation Linguistic Structure",
+        "definition": "Incantation linguistics: the linguistic sources, lexical composition, and phonetic features of incantations, reflecting religious and cultural fusion",
+        "core_finding": "The Golden Hoop Mantra 'Oṃ Maṇi Padme Hūṃ' is a Sanskrit transliteration; the Five Thunder Spell is a Han-Chinese Daoist term; Wukong's cursing 'impudent fiend' is Ming-dynasty colloquial speech — three linguistic sources reflecting Three-Teachings synthesis",
+        "incantations": [
+            {"n":1,"incantation_name":"Golden Hoop Mantra","english_name":"Golden Hoop Mantra","user":"Tang Sanzang","target":"Sun Wukong","raw_text":"Oṃ Maṇi Padme Hūṃ","language_source":"Sanskrit transliteration · Buddhist mantra","language_classification":"Sanskrit loanword","phonetic_analysis":{"sanskrit_original":"Oṃ Maṇi Padme Hūṃ","chinese_transliteration":"Oṃ Maṇi Padme Hūṃ","meaning":"Taking refuge in the Jewel of the Lotus · accomplishing all","phonetic_features":"Alternating nasals and vowels · easy for continuous recitation"},"linguistic_features":["Sanskrit transliteration · non-Chinese vocabulary","Short syllables · easy for rapid recitation","No literal meaning · a purely phonetic mantra","Repeated recitation produces a hypnotic effect"],"religious_origin":"Esoteric Buddhist mantra · the Six-Syllable Great Bright Mantra","function_mechanism":"Phonetic stimulus plus the physical tightening of the golden hoop — a dual effect","cultural_significance":"The spread of Sanskrit in China · reflecting the Sinicization of Buddhism","language_proportion":{"sanskrit_loanword":100,"taoist_term":0,"ming_colloquial":0,"classical_chinese":0}},
+            {"n":2,"incantation_name":"Five Thunder Spell","english_name":"Five Thunder Spell","user":"Three Immortals of Chechi Kingdom / Celestial Masters Daoism","target":"Summons the Thunder Department","raw_text":"As swift as the law commands · Five Thunders, come at once · Decree!","language_source":"Han-Chinese Daoist terminology · official ritual language","language_classification":"Daoist terminology + Classical Chinese imperative","phonetic_analysis":{"chinese_original":"As swift as the law commands · Five Thunders, come at once · Decree","meaning":"Execute as swiftly as a decree · let the five thunders arrive · a command","phonetic_features":"Imperative, short and forceful, closing with the word 'decree'"},"linguistic_features":["Classical Chinese imperative · 'as swift as the law commands' is Han-dynasty officialese","Daoist terminology · 'five thunders' refers to the five directions of the Thunder Department","The character 'decree' is an imperial command word","Structure: execution directive + content + command ending"],"religious_origin":"Celestial Masters Daoism · Way of the Five Pecks of Rice · Daoist ritual arts","function_mechanism":"Official-style command plus divine invocation · a structured spell","cultural_significance":"Daoism inherits the Han-dynasty officialese tradition, importing secular power structures into the divine realm","language_proportion":{"sanskrit_loanword":0,"taoist_term":60,"ming_colloquial":0,"classical_chinese":40}},
+            {"n":3,"incantation_name":"Body-Freezing Spell","english_name":"Body-Freezing Spell","user":"Sun Wukong","target":"Lesser demons / mortals","raw_text":"Stop! · Don't move!","language_source":"Ming-dynasty colloquial speech · brief command","language_classification":"Ming colloquial","phonetic_analysis":{"chinese_original":"Stop! · Don't move!","meaning":"Stop · don't move","phonetic_features":"Short, direct, unadorned"},"linguistic_features":["Colloquial speech · no Classical Chinese ornament","Imperative · terse","No religious terminology · purely folk","Structure: verb + negator + verb"],"religious_origin":"Folk sorcery · informal belief","function_mechanism":"Folk sorcery · terse language · relies on magical power","cultural_significance":"Reflects the force of Ming-dynasty folk speech · contrasted with Buddhist and Daoist terminology","language_proportion":{"sanskrit_loanword":0,"taoist_term":0,"ming_colloquial":100,"classical_chinese":0}},
+            {"n":4,"incantation_name":"Water-Avoiding Spell","english_name":"Water-Avoiding Spell","user":"Sun Wukong / Zhu Bajie","target":"Parts the waters","raw_text":"Close! · Water!","language_source":"Simplified Daoist terminology · one-character spell","language_classification":"Simplified Daoist terminology","phonetic_analysis":{"chinese_original":"Close · water","meaning":"Close · water","phonetic_features":"Single characters · the strongest command"},"linguistic_features":["One-character spell · extremely minimal","Simplified Daoist terminology","Unadorned · pure command","Structure: verb + noun"],"religious_origin":"Daoist · water-parting art","function_mechanism":"Magical power injection plus a one-character command · highly efficient","cultural_significance":"Reflects the popularization of Daoist terminology, from complex to simple","language_proportion":{"sanskrit_loanword":0,"taoist_term":70,"ming_colloquial":30,"classical_chinese":0}},
+            {"n":5,"incantation_name":"Summoning Spell (calling for reinforcements)","english_name":"Summoning Spell","user":"Sun Wukong","target":"Deities of the Heavenly Court / Spirit Mountain","raw_text":"Namo Guanshiyin Bodhisattva · Namo all Buddhas of the ten directions and three times · your disciple Sun Wukong has a request","language_source":"Buddhist terminology + Han-Chinese self-deprecation","language_classification":"Buddhist terminology + Classical Chinese self-deprecation","phonetic_analysis":{"chinese_original":"Namo Guanshiyin Bodhisattva · your disciple Sun Wukong has a request","meaning":"Taking refuge in Guanshiyin Bodhisattva · your disciple Sun Wukong has a request","phonetic_features":"Religious opening + self-deprecation + request"},"linguistic_features":["Opens with Buddhist terminology · 'namo' is a Sanskrit transliteration","Han-Chinese self-deprecation · 'disciple' is a Buddhist form of address","Supplicatory, not imperative","Structure: religious invocation + self-deprecation + request"],"religious_origin":"Buddhism · Guanyin devotion","function_mechanism":"Religious invocation + polite request · a gentle summoning","cultural_significance":"Reflects the spread of Buddhism in the Ming dynasty · the popularization of Guanyin devotion","language_proportion":{"sanskrit_loanword":30,"taoist_term":0,"ming_colloquial":30,"classical_chinese":40}},
+            {"n":6,"incantation_name":"Wukong's Taunts (provoking demons)","english_name":"Wukong's Verbal Provocation","user":"Sun Wukong","target":"demons","raw_text":"Impudent fiend! · Beast! · Don't you run! · Take a blow from old Sun!","language_source":"Ming-dynasty colloquial speech · martial-storyteller style","language_classification":"Ming colloquial + martial storytelling","phonetic_analysis":{"chinese_original":"Impudent fiend · beast · don't you run · take a blow from old Sun","meaning":"Rogue demon · beast · don't leave · take my blow","phonetic_features":"Terse, imperative, provocative"},"linguistic_features":["Colloquial insults · 'impudent fiend' is Ming-dynasty street language","Martial-storyteller style · 'don't you run' is common in storytelling","The self-reference 'old Sun' is a folk form of address","Structure: insult + command + threat"],"religious_origin":"None · folk martial style","function_mechanism":"Psychological intimidation and provocation · not an actual spell","cultural_significance":"Reflects the blending of Ming storytelling and street culture · Sun Wukong as a folk hero","language_proportion":{"sanskrit_loanword":0,"taoist_term":0,"ming_colloquial":80,"classical_chinese":20}},
+            {"n":7,"incantation_name":"Tang Monk's Admonition (Buddhist precepts)","english_name":"Tang Monk's Admonition","user":"Tang Sanzang","target":"Sun Wukong","raw_text":"Wukong, do not take life · we are monks · let compassion guide us","language_source":"Buddhist precept language · Classical Chinese","language_classification":"Buddhist terminology + Classical Chinese","phonetic_analysis":{"chinese_original":"Wukong, do not take life · we are monks · let compassion guide us","meaning":"Wukong, do not take life · we are monks · let compassion guide us","phonetic_features":"Classical Chinese · slow · didactic"},"linguistic_features":["Buddhist terminology · 'monk', 'compassion'","Classical Chinese · 'must not' is a classical negation","Didactic · slow","Structure: address + precept + identity + principle"],"religious_origin":"Buddhist precepts · compassion","function_mechanism":"Moral exhortation plus identity reinforcement · gentle restraint","cultural_significance":"Reflects the Classical-Chinese style of Buddhist precepts · contrasted with street speech","language_proportion":{"sanskrit_loanword":10,"taoist_term":0,"ming_colloquial":20,"classical_chinese":70}},
+            {"n":8,"incantation_name":"Buddha's Sermon (scriptural language)","english_name":"Buddha's Sermon","user":"Tathāgata Buddha","target":"all Buddhas and Bodhisattvas","raw_text":"Form is not different from emptiness · emptiness is not different from form · form is emptiness · emptiness is form","language_source":"Buddhist scriptural translation language · Xuanzang's Heart Sutra","language_classification":"Buddhist Classical Chinese","phonetic_analysis":{"chinese_original":"Form is not different from emptiness · emptiness is not different from form · form is emptiness · emptiness is form","meaning":"Form (matter) is not different from emptiness · emptiness is not different from form","phonetic_features":"Parallelism · repetition · rhythm"},"linguistic_features":["Scriptural translation · Xuanzang's style","Neat parallelism · easy to memorize","Strong rhythm · suited to chanting","Structure: form/emptiness parallelism + four-line cycle"],"religious_origin":"Prajñāpāramitā Heart Sutra · translated by Xuanzang","function_mechanism":"Scriptural recitation · dharma assembly ritual","cultural_significance":"Reflects Xuanzang's translation style · the pinnacle of Buddhist scriptural Sinicization","language_proportion":{"sanskrit_loanword":20,"taoist_term":0,"ming_colloquial":0,"classical_chinese":80}}
+        ],
+        "language_source_stats": {
+            "total_incantations": 8,
+            "sanskrit_dominant": 2,
+            "taoist_dominant": 2,
+            "ming_colloquial_dominant": 2,
+            "classical_chinese_dominant": 2,
+            "avg_sanskrit_proportion": 20.0,
+            "avg_taoist_proportion": 16.25,
+            "avg_ming_colloquial_proportion": 28.75,
+            "avg_classical_chinese_proportion": 35.0
+        },
+        "linguistic_insights": [
+            "Eight incantations reflect Three-Teachings synthesis: Sanskrit (Buddhist) + Daoist terminology (Daoist) + colloquial speech (folk)",
+            "The Golden Hoop Mantra is the only purely Sanskrit transliteration, reflecting the esoteric Buddhist mantra tradition",
+            "The Five Thunder Spell combines Daoist terminology with Classical Chinese officialese, reflecting Daoism's inheritance of Han-dynasty bureaucratic prose",
+            "Wukong's taunts are Ming-dynasty street speech, reflecting Sun Wukong's folk-hero image",
+            "The Tang Monk's admonition is Buddhist precept language in Classical Chinese, reflecting his monastic identity",
+            "The Buddha's sermon is in Xuanzang's translation style, the pinnacle of Buddhist scriptural Sinicization",
+            "The diversity of linguistic sources reflects the Three-Teachings synthesis of Journey to the West"
+        ]
+    },
+    power_distance: {
+        "concept_name": "Conversational Power Distance",
+        "english_name": "Conversational Power Distance",
+        "definition": "Power distance: the hierarchical distance reflected in dialogue · high power distance uses the imperative · low power distance uses banter",
+        "core_finding": "Tang Sanzang to Wukong is high power distance (imperative) · Wukong to Bajie is low power distance (banter) · quantifying the evolution of master-disciple closeness",
+        "dialogue_pairs": [
+            {"speaker":"Tang Sanzang","listener":"Sun Wukong","relationship":"Master-disciple · master to disciple","power_distance":8,"politeness_level":5,"formality":7,"representative_dialogues":[{"chapter":"Chapter 14","context":"Wukong kills the six bandits","tang_monk_speech":"You monkey, how utterly outrageous! So fierce and stubborn — you are no disciple of mine; be off with you!","linguistic_features":["Imperative · 'be off with you'","Derogatory address · 'you monkey'","Threat to sever ties"],"power_distance_reflected":9},{"chapter":"Chapter 27","context":"Thrice beating the White Bone Demon","tang_monk_speech":"You monkey, this is plainly murder! I will not keep you as my disciple; be off with you!","linguistic_features":["Imperative","Derogatory address","Expulsion from the master's tutelage"],"power_distance_reflected":10},{"chapter":"Chapter 38","context":"Rescuing the king of Wuji Kingdom","tang_monk_speech":"Wukong, be careful and do not take his life.","linguistic_features":["Supplicatory · 'do be careful'","Gentle · 'do not'","Instruction retained"],"power_distance_reflected":6},{"chapter":"Chapter 80","context":"The rat-spirit incident","tang_monk_speech":"Wukong, do you say it is a demon?","linguistic_features":["Interrogative","Equal · 'you say'","Expression of trust"],"power_distance_reflected":4}],"evolution_pattern":"10→9→6→4 · power distance gradually declines · master-disciple relationship grows close"},
+            {"speaker":"Sun Wukong","listener":"Zhu Bajie","relationship":"Senior-junior brother · senior to junior","power_distance":3,"politeness_level":2,"formality":2,"representative_dialogues":[{"chapter":"Chapter 18","context":"Winning Bajie at Gao Village","wukong_speech":"Idiot, do you recognize old Sun?","linguistic_features":["Banter · 'idiot'","Self-reference · 'old Sun'","Affectionate"],"power_distance_reflected":3},{"chapter":"Chapter 32","context":"Scouting Mount Pingding","wukong_speech":"Bajie, you lazy idiot! Go scout the mountain at once!","linguistic_features":["Imperative · 'go at once'","Banter · 'idiot'","Elder-brother scolding"],"power_distance_reflected":4},{"chapter":"Chapter 41","context":"The Red Boy incident","wukong_speech":"Idiot, don't cry! Master has been captured by demons — we must rescue him!","linguistic_features":["Consoling · 'don't cry'","Encouraging · 'we must rescue him'","Brotherly affection"],"power_distance_reflected":2},{"chapter":"Chapter 76","context":"The great battle at Lion-Camel Ridge","wukong_speech":"Bajie, you idiot, caught again? Watch old Sun come to your rescue!","linguistic_features":["Banter","Rescue","Elder-brother protection"],"power_distance_reflected":3}],"evolution_pattern":"3→4→2→3 · low power distance · brotherly banter predominates"},
+            {"speaker":"Sun Wukong","listener":"Tang Sanzang","relationship":"Disciple to master · disciple to master","power_distance":3,"politeness_level":8,"formality":6,"representative_dialogues":[{"chapter":"Chapter 14","context":"First conflict","wukong_speech":"Master, I meant well — you should not judge me so harshly!","linguistic_features":["Honorific · 'Master'","Defense · 'I meant well'","Deference retained"],"power_distance_reflected":2},{"chapter":"Chapter 27","context":"Thrice beating the White Bone Demon · expelled","wukong_speech":"Master, I will go back then — but do not recite that Golden Hoop Mantra!","linguistic_features":["Honorific","Request · 'do not recite it'","Hurt"],"power_distance_reflected":3},{"chapter":"Chapter 57","context":"Before the true and false Monkey Kings","wukong_speech":"Master, I have not taken life — why do you drive me away again?","linguistic_features":["Honorific","Protest · 'why drive me away again'","Hurt"],"power_distance_reflected":2},{"chapter":"Chapter 88","context":"Taking disciples in Yuhua Prefecture","wukong_speech":"Master, these two princes have a karmic affinity — you may take them as disciples.","linguistic_features":["Honorific","Suggestion · 'they have affinity'","Equal consultation"],"power_distance_reflected":1}],"evolution_pattern":"2→3→2→1 · Wukong's power distance to the Tang Monk stays low · deference predominates"},
+            {"speaker":"Zhu Bajie","listener":"Sun Wukong","relationship":"Junior to senior · junior to senior","power_distance":4,"politeness_level":4,"formality":3,"representative_dialogues":[{"chapter":"Chapter 18","context":"First meeting","bajie_speech":"You Bimawen, the monkey who once wrecked the Heavenly Palace!","linguistic_features":["Derogatory · 'Bimawen'","Provocation","Disrespectful"],"power_distance_reflected":1},{"chapter":"Chapter 32","context":"Shirking on mountain patrol","bajie_speech":"Brother, I'm going, I'm going!","linguistic_features":["Honorific · 'brother'","Obedience","Wheedling"],"power_distance_reflected":6},{"chapter":"Chapter 41","context":"The Red Boy incident · Wukong is burned","bajie_speech":"Brother, are you dead?","linguistic_features":["Honorific","Concern","Blunt"],"power_distance_reflected":4},{"chapter":"Chapter 76","context":"Lion-Camel Ridge · Wukong is swallowed","bajie_speech":"Brother, you've died in there! Let's disband!","linguistic_features":["Honorific","Disbanding · ESFP behavior","Despair"],"power_distance_reflected":3}],"evolution_pattern":"1→6→4→3 · from provocation to honorific · power distance rises then falls"},
+            {"speaker":"Sha Wujing","listener":"Sun Wukong + Zhu Bajie","relationship":"Junior to seniors · junior to seniors","power_distance":5,"politeness_level":9,"formality":7,"representative_dialogues":[{"chapter":"Chapter 22","context":"First meeting","shaseng_speech":"Brother, I beg you to save me!","linguistic_features":["Honorific · 'brother'","Request · 'I beg'","Polite"],"power_distance_reflected":7},{"chapter":"Chapter 27","context":"Thrice beating the White Bone Demon","shaseng_speech":"Elder brother, Master is right — do be patient.","linguistic_features":["Honorific · 'elder brother'","Pacifying","Neutral"],"power_distance_reflected":5},{"chapter":"Chapter 56","context":"Wukong is expelled","shaseng_speech":"Elder brother, you go on — I will persuade Master.","linguistic_features":["Honorific","Consoling","Buffering"],"power_distance_reflected":4}],"evolution_pattern":"7→5→4 · Sha Wujing's power distance to his seniors gradually declines · but deference remains"}
+        ],
+        "power_distance_insights": [
+            "Tang Sanzang to Wukong has the highest power distance (8/10) · imperative predominates",
+            "Wukong to Bajie has low power distance (3/10) · banter predominates",
+            "Wukong to the Tang Monk has the lowest power distance (3/10) · deference predominates · yet equal",
+            "Bajie to Wukong moves from provocation (1) to honorific (6) · power distance rises then falls",
+            "Sha Wujing to his seniors has medium power distance (5/10) · politeness predominates",
+            "Power-distance evolution reflects master-disciple closeness: Tang Sanzang→Wukong gradually warms · Wukong→Bajie stays close",
+            "ISFJ Sha Wujing is most polite · ENTP Wukong is most bantering · INFJ Tang Sanzang is most imperative · ESFP Bajie is most changeable"
+        ],
+        "linguistic_strategy_by_mbti": {
+            "INFJ_TangSanzang": "Imperative · classical · didactic (high power distance)",
+            "ENTP_Wukong": "Bantering · colloquial · flexibly switching (low power distance)",
+            "ESFP_Bajie": "Changeable · wheedling · emotional (fluctuating power distance)",
+            "ISFJ_ShaWujing": "Polite · classical · gentle (medium power distance)"
+        }
+    },
+    language_identity: {
+        "concept_name": "Language Identity Map",
+        "english_name": "Language Identity Map",
+        "definition": "Language identity: quantifying a character's cultural identity through their linguistic features, reflecting Three-Teachings synthesis",
+        "core_finding": "Tang Sanzang's language leans Buddhist (many Sanskrit loanwords) · Wukong leans Daoist + colloquial · Bajie leans colloquial · Sha Wujing leans classical · the Buddha leans scriptural · the gods lean Daoist",
+        "character_language_profiles": [
+            {"character":"Tang Sanzang","language_identity":"Buddhist monk + Confucian scholar","sanskrit_loanword_proportion":25,"taoist_term_proportion":5,"ming_colloquial_proportion":20,"classical_chinese_proportion":50,"buddhist_term_proportion":30,"representative_vocabulary":["Namo","compassion","monk","precepts","excellent","Amitābha"],"language_features":["Many Buddhist terms · 'namo', 'compassion'","Predominantly classical · 'we', 'must not'","Confucian cultivation · 'do not take life'","Didactic · slow"],"cultural_identity":"Buddhist monk + Confucian scholar · cultural orthodoxy","identity_score_buddhist":9,"identity_score_daoist":1,"identity_score_confucian":7,"identity_score_folk":2},
+            {"character":"Sun Wukong","language_identity":"Daoist adept + street martial artist","sanskrit_loanword_proportion":10,"taoist_term_proportion":35,"ming_colloquial_proportion":40,"classical_chinese_proportion":15,"buddhist_term_proportion":10,"representative_vocabulary":["old Sun","impudent fiend","beast","don't you run","Water-Avoiding Spell","Five Thunder Spell"],"language_features":["Colloquial · 'old Sun', 'impudent fiend'","Daoist terminology · 'Water-Avoiding Spell', 'Five Thunder Spell'","Martial storytelling · 'don't you run', 'take my blow'","Flexibly switching · Buddhist or Daoist as needed"],"cultural_identity":"Daoist adept + street martial artist · folk hero","identity_score_buddhist":4,"identity_score_daoist":8,"identity_score_confucian":2,"identity_score_folk":9},
+            {"character":"Zhu Bajie","language_identity":"Common man of the marketplace + Daoist warrior","sanskrit_loanword_proportion":5,"taoist_term_proportion":20,"ming_colloquial_proportion":60,"classical_chinese_proportion":15,"buddhist_term_proportion":10,"representative_vocabulary":["old Pig","brother","disband","back to Gao Village","Chang'e","vegetarian meal"],"language_features":["Predominantly colloquial · 'old Pig', 'brother'","Emotional · 'disband', 'back to Gao Village'","Daoist vestige · 'Marshal Tianpeng'","No classical cultivation"],"cultural_identity":"Common man + Daoist warrior · the most worldly","identity_score_buddhist":3,"identity_score_daoist":6,"identity_score_confucian":1,"identity_score_folk":10},
+            {"character":"Sha Wujing","language_identity":"Confucian guardian + Buddhist","sanskrit_loanword_proportion":15,"taoist_term_proportion":10,"ming_colloquial_proportion":30,"classical_chinese_proportion":45,"buddhist_term_proportion":20,"representative_vocabulary":["elder brother","Master","I beg","senior brother","excellent","Amitābha"],"language_features":["Predominantly classical · 'I beg', 'senior brother'","Buddhist terminology · 'excellent'","Polite · honorific","ISFJ guardian style"],"cultural_identity":"Confucian guardian + Buddhist · the most traditional","identity_score_buddhist":7,"identity_score_daoist":2,"identity_score_confucian":8,"identity_score_folk":4},
+            {"character":"Tathāgata Buddha","language_identity":"Supreme Buddhist + philosophical dialectic","sanskrit_loanword_proportion":40,"taoist_term_proportion":0,"ming_colloquial_proportion":0,"classical_chinese_proportion":60,"buddhist_term_proportion":70,"representative_vocabulary":["Namo","form is not different from emptiness","emptiness is not different from form","Prajñāpāramitā","Bodhi","Nirvāṇa"],"language_features":["Scriptural classical · 'form is not different from emptiness'","Sanskrit loanword · 'Prajñāpāramitā'","Philosophical dialectic · 'emptiness', 'form'","Solemn · slow"],"cultural_identity":"Supreme Buddhist + philosophical dialectic · the most sacred","identity_score_buddhist":10,"identity_score_daoist":0,"identity_score_confucian":3,"identity_score_folk":0},
+            {"character":"Guanyin Bodhisattva","language_identity":"Buddhist compassion + Confucian propriety","sanskrit_loanword_proportion":30,"taoist_term_proportion":5,"ming_colloquial_proportion":15,"classical_chinese_proportion":50,"buddhist_term_proportion":50,"representative_vocabulary":["Namo","excellent","compassion","universal deliverance","all beings","Prajñā"],"language_features":["Buddhist terminology · 'universal deliverance', 'all beings'","Confucian propriety · 'excellent'","Classical · solemn","Compassionate · consoling"],"cultural_identity":"Buddhist compassion + Confucian propriety · a fusion","identity_score_buddhist":9,"identity_score_daoist":1,"identity_score_confucian":6,"identity_score_folk":2},
+            {"character":"Taishang Laojun","language_identity":"Supreme Daoist + Daoist philosophy","sanskrit_loanword_proportion":0,"taoist_term_proportion":70,"ming_colloquial_proportion":5,"classical_chinese_proportion":25,"buddhist_term_proportion":0,"representative_vocabulary":["Dao","nothingness","qi","alchemy","golden elixir","talismans","yin-yang"],"language_features":["Daoist terminology · 'Dao', 'nothingness', 'qi'","Daoist philosophy · 'yin-yang'","Classical · concise","Alchemy · 'golden elixir'"],"cultural_identity":"Supreme Daoist + Daoist philosophy · the most esoteric","identity_score_buddhist":0,"identity_score_daoist":10,"identity_score_confucian":4,"identity_score_folk":1},
+            {"character":"Jade Emperor","language_identity":"Heavenly bureaucrat + Confucian sovereign","sanskrit_loanword_proportion":5,"taoist_term_proportion":20,"ming_colloquial_proportion":15,"classical_chinese_proportion":60,"buddhist_term_proportion":5,"representative_vocabulary":["approve the memorial","imperial edict","minister","pardon","decree","thus decreed"],"language_features":["Official classical · 'approve the memorial', 'imperial edict'","Confucian sovereign · 'minister', 'pardon'","Imperative · 'decree'","Bureaucratic institutional language"],"cultural_identity":"Heavenly bureaucrat + Confucian sovereign · the most orthodox","identity_score_buddhist":1,"identity_score_daoist":4,"identity_score_confucian":10,"identity_score_folk":1}
+        ],
+        "language_identity_insights": [
+            "The language-identity map of eight characters clearly reflects Three-Teachings synthesis",
+            "Tang Sanzang / the Buddha / Guanyin lean Buddhist · high language identity (Buddhist 7-10 points)",
+            "Wukong / Laojun lean Daoist · but Wukong is more colloquialized (Daoist 8-10 points · colloquial 9 points)",
+            "Bajie is the most colloquialized (colloquial 10 points) · the most worldly",
+            "Sha Wujing / the Jade Emperor lean Confucian · but Sha Wujing is Buddhist-ized (Confucian 8 points)",
+            "Character language identity correlates with MBTI: INFJ Tang Sanzang leans Buddhist · ENTP Wukong leans Daoist + colloquial · ESFP Bajie leans colloquial · ISFJ Sha Wujing leans Confucian",
+            "The language-identity map reflects the Three-Teachings synthesis of Journey to the West: Buddhist + Daoist + Confucian + folk · a four-way fusion"
+        ],
+        "language_classification_stats": {
+            "total_characters": 8,
+            "buddhist_dominant": 3,
+            "daoist_dominant": 2,
+            "confucian_dominant": 1,
+            "folk_dominant": 1,
+            "mixed": 1,
+            "avg_sanskrit_proportion": 16.25,
+            "avg_taoist_proportion": 21.25,
+            "avg_ming_colloquial_proportion": 23.75,
+            "avg_classical_chinese_proportion": 38.75
+        }
+    },
+    summary: {
+        "incantations": 8,
+        "language_sources": 4,
+        "dialogue_pairs": 5,
+        "total_representative_dialogues": 19,
+        "character_profiles": 8,
+        "avg_sanskrit_proportion": 16.25,
+        "avg_classical_chinese_proportion": 38.75
+    }
+};
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('[fallback] ' + path + ' → embedded data:', e.message);
+            return fallback;
+        }
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== Color palettes =====
+    const LANG_COLORS = {
+        sanskrit: '#c8463a',
+        taoist: '#e9b885',
+        ming: '#3a6b8c',
+        classical: '#6B8E5A'
+    };
+    const CHAR_COLORS = {
+        'Tang Sanzang': '#3a6b8c',
+        'Sun Wukong': '#c8463a',
+        'Zhu Bajie': '#e9b885',
+        'Sha Wujing': '#6B8E5A',
+        'Tathāgata Buddha': '#C9A063',
+        'Guanyin Bodhisattva': '#c8463a',
+        'Taishang Laojun': '#e9b885',
+        'Jade Emperor': '#3a6b8c'
+    };
+
+    // ===== Main render =====
+    async function main() {
+        const baseUrl = '../../scripts/output/data/';
+        const [incantation, power, identity, summary] = await Promise.all([
+            loadJson(baseUrl + 'incantation_linguistics.json', EMBEDDED.incantation),
+            loadJson(baseUrl + 'power_distance.json', EMBEDDED.power_distance),
+            loadJson(baseUrl + 'language_identity.json', EMBEDDED.language_identity),
+            loadJson(baseUrl + 'linguistics_summary.json', EMBEDDED.summary)
+        ]);
+        window.__lastData = { incantation, power, identity, summary };
+
+        renderIncantationStacked(incantation);
+        renderIncantationDonut(incantation);
+        renderIncantationCards(incantation);
+        renderSrcStatKpi(incantation);
+        renderIncantationInsights(incantation);
+        renderPdBar(power);
+        renderPdEvolution(power);
+        renderPairCards(power);
+        renderMbtiCards(power);
+        renderPdInsights(power);
+        renderIdentityRadar(identity);
+        renderIdentityStacked(identity);
+        renderIdentityTable(identity);
+        renderCharCards(identity);
+        renderIdStatKpi(identity);
+        renderIdentityInsights(identity);
+    }
+
+    // ===== Section 1-1: 咒语堆叠条形图 =====
+    function renderIncantationStacked(data) {
+        const svg = d3.select('#chart-incantation-stacked');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 400;
+        const m = {top: 30, right: 30, bottom: 80, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const incs = data.incantations.map(d => ({ ...d, ...d.language_proportion }));
+        const keys = ['sanskrit_loanword', 'taoist_term', 'ming_colloquial', 'classical_chinese'];
+        const keyLabels = {sanskrit_loanword:'Sanskrit', taoist_term:'Daoist', ming_colloquial:'Ming', classical_chinese:'Classical'};
+
+        const stack = d3.stack().keys(keys).offset(d3.stackOffsetExpand);
+        const series = stack(incs);
+
+        const x = d3.scaleBand().domain(incs.map(d => d.incantation_name)).range([0, w]).padding(0.25);
+        const y = d3.scaleLinear().domain([0, 1]).range([h, 0]);
+        const color = d3.scaleOrdinal().domain(keys).range([LANG_COLORS.sanskrit, LANG_COLORS.taoist, LANG_COLORS.ming, LANG_COLORS.classical]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
+            .selectAll('text')
+            .style('font-size', '11px')
+            .attr('transform', 'rotate(-20)')
+            .style('text-anchor', 'end');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('.0%')));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#23201A')
+            .text('Language source share');
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w/2).attr('y', h + 60)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#23201A')
+            .text('Incantation name');
+
+        // stacked bars
+        g.append('g').selectAll('g')
+            .data(series)
+            .enter().append('g')
+            .attr('fill', d => color(d.key))
+            .selectAll('rect')
+            .data(d => d)
+            .enter().append('rect')
+            .attr('x', d => x(d.data.incantation_name))
+            .attr('y', d => y(d[1]))
+            .attr('height', d => Math.max(0, y(d[0]) - y(d[1])))
+            .attr('width', x.bandwidth())
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                const k = e.target.parentNode.__data__.key;
+                tooltip.show(
+                    `<strong>${d.data.incantation_name}</strong><br>` +
+                    `Language source: ${d.data.language_source}<br>` +
+                    `${keyLabels[k]}: ${d.data.language_proportion[k]}%<br>` +
+                    `<em>"${d.data.raw_text}"</em>`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 主导来源标注
+        incs.forEach(d => {
+            const prop = d.language_proportion;
+            let max = -1, maxKey = '';
+            Object.keys(prop).forEach(k => { if (prop[k] > max) { max = prop[k]; maxKey = k; }});
+            const labelMap = {sanskrit_loanword:'Sanskrit', taoist_term:'Daoist', ming_colloquial:'Ming', classical_chinese:'Classical'};
+            g.append('text')
+                .attr('x', x(d.incantation_name) + x.bandwidth()/2)
+                .attr('y', -6)
+                .attr('text-anchor', 'middle')
+                .style('font-size', '10px')
+                .style('font-weight', '600')
+                .attr('fill', color(maxKey))
+                .text('Main: ' + labelMap[maxKey] + ' ' + max + '%');
+        });
+    }
+
+    // ===== Section 1-2: 咒语语言来源环形图 =====
+    function renderIncantationDonut(data) {
+        const svg = d3.select('#chart-incantation-donut');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 600;
+        const W = Math.max(containerW, 400), H = 360;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const cx = W/2, cy = H/2, r = Math.max(0, Math.min(W, H)/2 - 40), rIn = r * 0.55;
+
+        const stats = data.language_source_stats;
+        const donutData = [
+            {key:'sanskrit', label:'Sanskrit loanword', value: stats.avg_sanskrit_proportion, color: LANG_COLORS.sanskrit},
+            {key:'taoist', label:'Daoist terminology', value: stats.avg_taoist_proportion, color: LANG_COLORS.taoist},
+            {key:'ming', label:'Ming colloquial', value: stats.avg_ming_colloquial_proportion, color: LANG_COLORS.ming},
+            {key:'classical', label:'Classical Chinese', value: stats.avg_classical_chinese_proportion, color: LANG_COLORS.classical}
+        ];
+
+        const pie = d3.pie().value(d => d.value).sort(null);
+        const arc = d3.arc().innerRadius(rIn).outerRadius(r).padAngle(0.02);
+        const arcHover = d3.arc().innerRadius(rIn).outerRadius(r + 8).padAngle(0.02);
+
+        const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+        const arcs = g.selectAll('path').data(pie(donutData)).enter().append('path')
+            .attr('fill', d => d.data.color)
+            .attr('d', arc)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                d3.select(e.target).transition().duration(150).attr('d', arcHover);
+                tooltip.show(
+                    `<strong>${d.data.label}</strong><br>` +
+                    `Average share: ${d.data.value}%<br>` +
+                    `Dominant incantation: ${d.data.key === 'sanskrit' ? 'Golden Hoop Mantra / Summoning Spell' : (d.data.key === 'taoist' ? 'Five Thunder Spell / Water-Avoiding Spell' : (d.data.key === 'ming' ? 'Body-Freezing Spell / Wukong’s Taunts' : 'Tang Monk’s Admonition / Buddha’s Sermon'))}`, e);
+            })
+            .on('mouseout', (e) => {
+                d3.select(e.target).transition().duration(150).attr('d', arc);
+                tooltip.hide();
+            });
+
+        // 中心文字
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', -8)
+            .style('font-size', '14px')
+            .style('font-weight', '600')
+            .style('fill', '#23201A')
+            .text('8 incantations');
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', 12)
+            .style('font-size', '11px')
+            .style('fill', '#6B6455')
+            .text('4 sources in balance');
+
+        // 标注
+        arcs.each(function(d) {
+            const centroid = arc.centroid(d);
+            d3.select(this.parentNode).append('text')
+                .attr('x', centroid[0])
+                .attr('y', centroid[1])
+                .attr('text-anchor', 'middle')
+                .attr('dy', '0.35em')
+                .style('font-size', '11px')
+                .style('font-weight', '600')
+                .style('fill', '#fff')
+                .text(d.data.value + '%');
+        });
+
+        // legend
+        const legendEl = d3.select('#donut-legend');
+        legendEl.selectAll('*').remove();
+        legendEl.selectAll('.legend-item')
+            .data(donutData)
+            .enter().append('span')
+            .attr('class', 'legend-item')
+            .html(d => `<span class="legend-swatch" style="background:${d.color};"></span>${d.label} ${d.value}%`);
+    }
+
+    // ===== Section 1-3: 咒语卡片 =====
+    function renderIncantationCards(data) {
+        const grid = d3.select('#incantation-grid');
+        const cards = grid.selectAll('.inc-card').data(data.incantations).enter().append('div');
+        cards.each(function(d) {
+            const card = d3.select(this);
+            const prop = d.language_proportion;
+            let max = -1, maxKey = '';
+            Object.keys(prop).forEach(k => { if (prop[k] > max) { max = prop[k]; maxKey = k; }});
+            const domClass = maxKey === 'sanskrit_loanword' ? '' :
+                             (maxKey === 'taoist_term' ? 'dom-taoist' :
+                             (maxKey === 'ming_colloquial' ? 'dom-ming' : 'dom-classical'));
+            card.attr('class', 'inc-card ' + domClass);
+            card.html(`
+                <div class="inc-head">
+                    <div class="inc-name">${d.incantation_name}</div>
+                    <div class="inc-no">No.${d.n}</div>
+                </div>
+                <div class="inc-en">${d.english_name} · User: ${d.user} → ${d.target}</div>
+                <div class="inc-raw">"${d.raw_text}"</div>
+                <div class="inc-row"><strong>Language source:</strong>${d.language_source}</div>
+                <div class="inc-row"><strong>Classification:</strong>${d.language_classification}</div>
+                <div class="inc-row"><strong>Phonetics:</strong>${d.phonetic_analysis.phonetic_features}（${d.phonetic_analysis.meaning}）</div>
+                <ul class="inc-feats">${d.linguistic_features.map(f => `<li>${f}</li>`).join('')}</ul>
+                <div class="inc-row"><strong>Religious origin:</strong>${d.religious_origin}</div>
+                <div class="inc-row"><strong>Function:</strong>${d.function_mechanism}</div>
+                <div class="inc-row"><strong>Cultural significance:</strong>${d.cultural_significance}</div>
+                <div class="prop-bar">
+                    <span style="width:${prop.sanskrit_loanword}%;background:${LANG_COLORS.sanskrit};"></span>
+                    <span style="width:${prop.taoist_term}%;background:${LANG_COLORS.taoist};"></span>
+                    <span style="width:${prop.ming_colloquial}%;background:${LANG_COLORS.ming};"></span>
+                    <span style="width:${prop.classical_chinese}%;background:${LANG_COLORS.classical};"></span>
+                </div>
+                <div style="font-size:0.75rem;color:var(--ink-soft);margin-top:3px;font-family:'JetBrains Mono',monospace;">
+                    Skt ${prop.sanskrit_loanword}% · Dao ${prop.taoist_term}% · Ming ${prop.ming_colloquial}% · Class ${prop.classical_chinese}%
+                </div>
+            `);
+        });
+    }
+
+    // ===== Section 1-4: Language Source Statistics KPI =====
+    function renderSrcStatKpi(data) {
+        const s = data.language_source_stats;
+        const items = [
+            {label:'SANSKRIT DOMINANT', value: s.sanskrit_dominant, desc:'Sanskrit-dominant incantations (Golden Hoop Mantra / Summoning Spell)', cls:''},
+            {label:'TAOIST DOMINANT', value: s.taoist_dominant, desc:'Daoist-dominant incantations (Five Thunder Spell / Water-Avoiding Spell)', cls:'alt-2'},
+            {label:'MING DOMINANT', value: s.ming_colloquial_dominant, desc:'Ming-dominant incantations (Body-Freezing Spell / Wukong’s Taunts)', cls:'alt-3'},
+            {label:'CLASSICAL DOMINANT', value: s.classical_chinese_dominant, desc:'Classical-dominant incantations (Tang Monk’s Admonition / Buddha’s Sermon)', cls:'alt-4'}
+        ];
+        const row = d3.select('#srcStatKpi');
+        row.selectAll('*').remove();
+        items.forEach(it => {
+            row.append('div')
+                .attr('class', 'kpi-card ' + it.cls)
+                .html(`<div class="label">${it.label}</div><div class="value">${it.value}</div><div class="desc">${it.desc}</div>`);
+        });
+    }
+
+    // ===== Section 1-5: 咒语洞察 =====
+    function renderIncantationInsights(data) {
+        const list = d3.select('#incantation-insights');
+        list.selectAll('li').data(data.linguistic_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 2-1: 权力距离条形图 =====
+    function renderPdBar(data) {
+        const svg = d3.select('#chart-pd-bar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 360;
+        const m = {top: 30, right: 30, bottom: 60, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const pairs = data.dialogue_pairs;
+        const labels = pairs.map(d => `${d.speaker}→${d.listener}`);
+
+        const x = d3.scaleBand().domain(labels).range([0, w]).padding(0.3);
+        const y = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        const colorScale = d3.scaleLinear().domain([0, 5, 10]).range([LANG_COLORS.classical, LANG_COLORS.taoist, LANG_COLORS.sanskrit]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
+            .selectAll('text')
+            .style('font-size', '11px')
+            .attr('transform', 'rotate(-15)')
+            .style('text-anchor', 'end');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#23201A')
+            .text('power_distance (0-10)');
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w/2).attr('y', h + 50)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#23201A')
+            .text('Dialogue pairs (speaker → listener)');
+
+        // bars
+        g.selectAll('.bar-pd')
+            .data(pairs).enter().append('rect')
+            .attr('class', 'bar-pd')
+            .attr('x', d => x(`${d.speaker}→${d.listener}`))
+            .attr('y', d => y(d.power_distance))
+            .attr('width', x.bandwidth())
+            .attr('height', d => h - y(d.power_distance))
+            .attr('fill', d => colorScale(d.power_distance))
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 1)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>${d.speaker} → ${d.listener}</strong><br>` +
+                    `Relationship: ${d.relationship}<br>` +
+                    `Power distance: ${d.power_distance} / 10<br>` +
+                    `Politeness: ${d.politeness_level} / 10<br>` +
+                    `Formality: ${d.formality} / 10<br>` +
+                    `Evolution: ${d.evolution_pattern}`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // 数值
+        g.selectAll('.val-pd')
+            .data(pairs).enter().append('text')
+            .attr('class', 'val-pd')
+            .attr('x', d => x(`${d.speaker}→${d.listener}`) + x.bandwidth()/2)
+            .attr('y', d => y(d.power_distance) - 6)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '12px')
+            .style('font-weight', '600')
+            .attr('fill', '#23201A')
+            .text(d => d.power_distance);
+    }
+
+    // ===== Section 2-2: 权力距离演变折线图 =====
+    function renderPdEvolution(data) {
+        const svg = d3.select('#chart-pd-evolution');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 380;
+        const m = {top: 30, right: 30, bottom: 70, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        // 4 main pairs (exclude 沙僧)
+        const pairs = data.dialogue_pairs.slice(0, 4);
+        const colors = [LANG_COLORS.sanskrit, LANG_COLORS.ming, LANG_COLORS.classical, '#C9A063'];
+
+        // stage labels: 阶段 1-4
+        const stageCount = 4;
+        const stageLabels = ['Stage 1', 'Stage 2', 'Stage 3', 'Stage 4'];
+
+        const x = d3.scalePoint().domain(stageLabels).range([0, w]).padding(0.5);
+        const y = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
+            .selectAll('text').style('font-size', '11px');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#23201A')
+            .text('power_distance_reflected (0-10)');
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w/2).attr('y', h + 50)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#23201A')
+            .text('Evolution stages (representative dialogues in chapter order)');
+
+        // lines
+        const line = d3.line()
+            .x((d, i) => x(stageLabels[i]))
+            .y(d => y(d.power_distance_reflected))
+            .curve(d3.curveMonotoneX);
+
+        pairs.forEach((p, idx) => {
+            const dlg = p.representative_dialogues;
+            g.append('path')
+                .datum(dlg)
+                .attr('fill', 'none')
+                .attr('stroke', colors[idx])
+                .attr('stroke-width', 2.5)
+                .attr('d', line);
+            g.selectAll('.pt-ev-' + idx)
+                .data(dlg).enter().append('circle')
+                .attr('class', 'pt-ev-' + idx)
+                .attr('cx', (d, i) => x(stageLabels[i]))
+                .attr('cy', d => y(d.power_distance_reflected))
+                .attr('r', 6)
+                .attr('fill', colors[idx])
+                .attr('stroke', '#fff')
+                .attr('stroke-width', 2)
+                .style('cursor', 'pointer')
+                .on('mouseover', (e, d) => {
+                    tooltip.show(
+                        `<strong>${p.speaker} → ${p.listener}</strong><br>` +
+                        `${d.chapter} · ${d.context}<br>` +
+                        `Power distance: ${d.power_distance_reflected} / 10<br>` +
+                        `<em>"${d.tang_monk_speech || d.wukong_speech || d.bajie_speech || d.shaseng_speech || ''}"</em><br>` +
+                        `Features: ${d.linguistic_features.join(', ')}`, e);
+                })
+                .on('mouseout', tooltip.hide);
+        });
+    }
+
+    // ===== Section 2-3: 对话对卡片 =====
+    function renderPairCards(data) {
+        const grid = d3.select('#pair-grid');
+        const cards = grid.selectAll('.pair-card').data(data.dialogue_pairs).enter().append('div');
+        cards.each(function(d) {
+            const card = d3.select(this);
+            const cls = d.power_distance >= 7 ? '' : (d.power_distance >= 4 ? 'pd-mid' : 'pd-low');
+            card.attr('class', 'pair-card ' + cls);
+            const dlgs = d.representative_dialogues.map(dlg => {
+                const sp = dlg.tang_monk_speech || dlg.wukong_speech || dlg.bajie_speech || dlg.shaseng_speech || '';
+                return `<div class="pair-dlg">
+                    <div class="dlg-ch">${dlg.chapter} · ${dlg.context} · PD=${dlg.power_distance_reflected}</div>
+                    <span class="dlg-text">"${sp}"</span>
+                    <div class="dlg-feats">${dlg.linguistic_features.join(' · ')}</div>
+                </div>`;
+            }).join('');
+            card.html(`
+                <div class="pair-head">
+                    <div class="pair-name">${d.speaker} → ${d.listener}</div>
+                    <div class="pair-pd">PD ${d.power_distance}/10</div>
+                </div>
+                <div class="pair-rel">${d.relationship}</div>
+                <div class="pair-row"><strong>Politeness:</strong> ${d.politeness_level}/10 · <strong>Formality:</strong> ${d.formality}/10</div>
+                <div class="pair-evo">Evolution: ${d.evolution_pattern}</div>
+                ${dlgs}
+            `);
+        });
+    }
+
+    // ===== Section 2-4: MBTI 卡片 =====
+    function renderMbtiCards(data) {
+        const grid = d3.select('#mbti-grid');
+        const items = [
+            {tag:'INFJ', name:'Tang Sanzang', strategy: data.linguistic_strategy_by_mbti.INFJ_TangSanzang, cls:'m-infj'},
+            {tag:'ENTP', name:'Wukong', strategy: data.linguistic_strategy_by_mbti.ENTP_Wukong, cls:'m-entp'},
+            {tag:'ESFP', name:'Bajie', strategy: data.linguistic_strategy_by_mbti.ESFP_Bajie, cls:'m-esfp'},
+            {tag:'ISFJ', name:'Sha Wujing', strategy: data.linguistic_strategy_by_mbti.ISFJ_ShaWujing, cls:'m-isfj'}
+        ];
+        grid.selectAll('*').remove();
+        items.forEach(it => {
+            grid.append('div')
+                .attr('class', 'mbti-card ' + it.cls)
+                .html(`<div class="mbti-tag">${it.tag} · ${it.name}</div>
+                    <div class="mbti-name">${it.name} Language Strategy</div>
+                    <div class="mbti-strategy">${it.strategy}</div>`);
+        });
+    }
+
+    // ===== Section 2-5: Power Distance Insights =====
+    function renderPdInsights(data) {
+        const list = d3.select('#pd-insights');
+        list.selectAll('li').data(data.power_distance_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 3-1: 身份雷达图 =====
+    function renderIdentityRadar(data) {
+        const svg = d3.select('#chart-identity-radar');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 800;
+        const W = Math.max(containerW, 600), H = 560;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const cx = W/2, cy = H/2 + 10;
+        const radius = Math.max(0, Math.min(W, H)/2 - 90);
+        const levels = 5;
+        const dims = ['identity_score_buddhist', 'identity_score_daoist', 'identity_score_confucian', 'identity_score_folk'];
+        const dimLabels = ['Buddhist', 'Daoist', 'Confucian', 'Folk'];
+        const nDims = dims.length;
+        const angle = (i) => (i * 2 * Math.PI / nDims) - Math.PI / 2;
+
+        const chars = data.character_language_profiles;
+        const gridG = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+        // 网格圆
+        for (let lv = 1; lv <= levels; lv++) {
+            const r = radius * lv / levels;
+            const pts = dims.map((_, i) => [r * Math.cos(angle(i)), r * Math.sin(angle(i))]);
+            gridG.append('polygon')
+                .attr('points', pts.map(p => p.join(',')).join(' '))
+                .attr('fill', 'none')
+                .attr('stroke', '#e8ddc8')
+                .attr('stroke-width', 1);
+            // 刻度
+            gridG.append('text')
+                .attr('x', -8)
+                .attr('y', -r)
+                .attr('text-anchor', 'end')
+                .style('font-size', '9px')
+                .style('fill', '#6B6455')
+                .text((lv * 2).toString());
+        }
+        // 轴线
+        dims.forEach((_, i) => {
+            const x2 = radius * Math.cos(angle(i));
+            const y2 = radius * Math.sin(angle(i));
+            gridG.append('line')
+                .attr('x1', 0).attr('y1', 0)
+                .attr('x2', x2).attr('y2', y2)
+                .attr('stroke', '#d9cdb8')
+                .attr('stroke-width', 1);
+            // 轴标签
+            gridG.append('text')
+                .attr('x', (radius + 24) * Math.cos(angle(i)))
+                .attr('y', (radius + 24) * Math.sin(angle(i)))
+                .attr('text-anchor', 'middle')
+                .attr('dy', '0.35em')
+                .style('font-size', '13px')
+                .style('font-weight', '600')
+                .style('fill', '#23201A')
+                .text(dimLabels[i]);
+        });
+
+        // 多边形
+        chars.forEach((c, idx) => {
+            const pts = dims.map((k, i) => {
+                const v = c[k];
+                const r = radius * v / 10;
+                return [r * Math.cos(angle(i)), r * Math.sin(angle(i))];
+            });
+            const color = CHAR_COLORS[c.character] || '#888';
+            gridG.append('polygon')
+                .attr('points', pts.map(p => p.join(',')).join(' '))
+                .attr('fill', color)
+                .attr('fill-opacity', 0.08)
+                .attr('stroke', color)
+                .attr('stroke-width', 1.5)
+                .style('cursor', 'pointer')
+                .on('mouseover', (e) => {
+                    tooltip.show(
+                        `<strong>${c.character}</strong><br>` +
+                        `Identity: ${c.language_identity}<br>` +
+                        `Buddhist: ${c.identity_score_buddhist} / Daoist: ${c.identity_score_daoist}<br>` +
+                        `Confucian: ${c.identity_score_confucian} / Folk: ${c.identity_score_folk}<br>` +
+                        `<em>${c.cultural_identity}</em>`, e);
+                })
+                .on('mouseout', tooltip.hide);
+            // 顶点圆点
+            pts.forEach(p => {
+                gridG.append('circle')
+                    .attr('cx', p[0]).attr('cy', p[1])
+                    .attr('r', 3)
+                    .attr('fill', color);
+            });
+        });
+
+        // legend
+        const legendEl = d3.select('#radar-legend');
+        legendEl.selectAll('*').remove();
+        legendEl.selectAll('.legend-item')
+            .data(chars)
+            .enter().append('span')
+            .attr('class', 'legend-item')
+            .html(c => `<span class="legend-swatch" style="background:${CHAR_COLORS[c.character]};"></span>${c.character}`);
+    }
+
+    // ===== Section 3-2: 身份堆叠条形图 =====
+    function renderIdentityStacked(data) {
+        const svg = d3.select('#chart-identity-stacked');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 400;
+        const m = {top: 30, right: 30, bottom: 80, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const chars = data.character_language_profiles;
+        const keys = ['sanskrit_loanword_proportion', 'taoist_term_proportion', 'ming_colloquial_proportion', 'classical_chinese_proportion'];
+        const keyLabels = {sanskrit_loanword_proportion:'Sanskrit', taoist_term_proportion:'Daoist', ming_colloquial_proportion:'Ming', classical_chinese_proportion:'Classical'};
+
+        const stack = d3.stack().keys(keys).offset(d3.stackOffsetExpand);
+        const series = stack(chars);
+
+        const x = d3.scaleBand().domain(chars.map(d => d.character)).range([0, w]).padding(0.25);
+        const y = d3.scaleLinear().domain([0, 1]).range([h, 0]);
+        const color = d3.scaleOrdinal().domain(keys).range([LANG_COLORS.sanskrit, LANG_COLORS.taoist, LANG_COLORS.ming, LANG_COLORS.classical]);
+
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(8))
+            .selectAll('text')
+            .style('font-size', '11px')
+            .attr('transform', 'rotate(-20)')
+            .style('text-anchor', 'end');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('.0%')));
+
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#23201A')
+            .text('Language source share');
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w/2).attr('y', h + 60)
+            .attr('text-anchor', 'middle')
+            .attr('fill', '#23201A')
+            .text('Character');
+
+        g.append('g').selectAll('g')
+            .data(series)
+            .enter().append('g')
+            .attr('fill', d => color(d.key))
+            .selectAll('rect')
+            .data(d => d)
+            .enter().append('rect')
+            .attr('x', d => x(d.data.character))
+            .attr('y', d => y(d[1]))
+            .attr('height', d => Math.max(0, y(d[0]) - y(d[1])))
+            .attr('width', x.bandwidth())
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                const k = e.target.parentNode.__data__.key;
+                tooltip.show(
+                    `<strong>${d.data.character}</strong><br>` +
+                    `Identity: ${d.data.language_identity}<br>` +
+                    `${keyLabels[k]}: ${d.data[k]}%<br>` +
+                    `<em>${d.data.cultural_identity}</em>`, e);
+            })
+            .on('mouseout', tooltip.hide);
+    }
+
+    // ===== Section 3-3: 身份表格 =====
+    function renderIdentityTable(data) {
+        const tbody = d3.select('#identity-table tbody');
+        const rows = tbody.selectAll('tr').data(data.character_language_profiles).enter().append('tr');
+        rows.append('td').html(d => '<strong>' + d.character + '</strong>');
+        rows.append('td').text(d => d.language_identity);
+        rows.append('td').html(d => '<span style="color:var(--accent);">' + d.sanskrit_loanword_proportion + '%</span>');
+        rows.append('td').html(d => '<span style="color:var(--accent-3);">' + d.taoist_term_proportion + '%</span>');
+        rows.append('td').html(d => '<span style="color:var(--accent-2);">' + d.ming_colloquial_proportion + '%</span>');
+        rows.append('td').html(d => '<span style="color:var(--accent-4);">' + d.classical_chinese_proportion + '%</span>');
+        rows.append('td').text(d => d.buddhist_term_proportion + '%');
+        rows.append('td').text(d => d.cultural_identity);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.identity_score_buddhist + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-3);">' + d.identity_score_daoist + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-2);">' + d.identity_score_confucian + '</strong>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-4);">' + d.identity_score_folk + '</strong>');
+    }
+
+    // ===== Section 3-4: 角色卡片 =====
+    function renderCharCards(data) {
+        const grid = d3.select('#char-grid');
+        const cards = grid.selectAll('.char-card').data(data.character_language_profiles).enter().append('div');
+        cards.each(function(d) {
+            const card = d3.select(this);
+            // determine dominant identity
+            const scores = [
+                {k:'buddhist', v:d.identity_score_buddhist},
+                {k:'daoist', v:d.identity_score_daoist},
+                {k:'confucian', v:d.identity_score_confucian},
+                {k:'folk', v:d.identity_score_folk}
+            ];
+            scores.sort((a, b) => b.v - a.v);
+            const dom = scores[0].k;
+            // 检查 mixed（最高只比次高高 1 分以内）
+            const cls = (scores[0].v - scores[1].v <= 1) ? 'c-mixed' :
+                        (dom === 'buddhist' ? 'c-buddhist' :
+                        (dom === 'daoist' ? 'c-daoist' :
+                        (dom === 'confucian' ? 'c-confucian' : 'c-folk')));
+            card.attr('class', 'char-card ' + cls);
+            card.html(`
+                <div class="char-name">${d.character}</div>
+                <div class="char-profile">${d.language_identity}</div>
+                <div class="char-row"><strong>Cultural identity:</strong> ${d.cultural_identity}</div>
+                <div class="prop-bar">
+                    <span style="width:${d.sanskrit_loanword_proportion}%;background:${LANG_COLORS.sanskrit};"></span>
+                    <span style="width:${d.taoist_term_proportion}%;background:${LANG_COLORS.taoist};"></span>
+                    <span style="width:${d.ming_colloquial_proportion}%;background:${LANG_COLORS.ming};"></span>
+                    <span style="width:${d.classical_chinese_proportion}%;background:${LANG_COLORS.classical};"></span>
+                </div>
+                <div style="font-size:0.75rem;color:var(--ink-soft);margin-top:3px;font-family:'JetBrains Mono',monospace;">
+                    Skt ${d.sanskrit_loanword_proportion}% · Dao ${d.taoist_term_proportion}% · Ming ${d.ming_colloquial_proportion}% · Class ${d.classical_chinese_proportion}% · Buddhist ${d.buddhist_term_proportion}%
+                </div>
+                <div class="char-scores">
+                    <div class="score-cell"><span class="score-label">Buddhist</span><span class="score-val" style="color:var(--accent);">${d.identity_score_buddhist}</span></div>
+                    <div class="score-cell"><span class="score-label">Daoist</span><span class="score-val" style="color:var(--accent-3);">${d.identity_score_daoist}</span></div>
+                    <div class="score-cell"><span class="score-label">Confucian</span><span class="score-val" style="color:var(--accent-2);">${d.identity_score_confucian}</span></div>
+                    <div class="score-cell"><span class="score-label">Folk</span><span class="score-val" style="color:var(--accent-4);">${d.identity_score_folk}</span></div>
+                </div>
+                <div class="char-vocab">
+                    <div class="vocab-label">Representative vocabulary:</div>
+                    <div class="vocab-list">${d.representative_vocabulary.map(v => '<code>' + v + '</code>').join(' ')}</div>
+                </div>
+                <div style="margin-top:6px;font-size:0.78rem;color:var(--ink-soft);">
+                    ${d.language_features.map(f => '· ' + f).join('<br>')}
+                </div>
+            `);
+        });
+    }
+
+    // ===== Section 3-5: 身份统计 KPI =====
+    function renderIdStatKpi(data) {
+        const s = data.language_classification_stats;
+        const items = [
+            {label:'BUDDHIST DOMINANT', value: s.buddhist_dominant, desc:'Buddhist-dominant (Tang Sanzang / Buddha / Guanyin)', cls:''},
+            {label:'DAOIST DOMINANT', value: s.daoist_dominant, desc:'Daoist-dominant (Wukong / Laojun)', cls:'alt-2'},
+            {label:'CONFUCIAN DOMINANT', value: s.confucian_dominant, desc:'Confucian-dominant (Jade Emperor)', cls:'alt-3'},
+            {label:'FOLK DOMINANT', value: s.folk_dominant, desc:'Folk-dominant (Bajie)', cls:'alt-4'},
+            {label:'MIXED', value: s.mixed, desc:'Mixed identity (Sha Wujing)', cls:'alt-2'},
+            {label:'AVG CLASSICAL', value: s.avg_classical_chinese_proportion + '%', desc:'Highest average Classical share', cls:'alt-3'}
+        ];
+        const row = d3.select('#idStatKpi');
+        row.selectAll('*').remove();
+        items.forEach(it => {
+            row.append('div')
+                .attr('class', 'kpi-card ' + it.cls)
+                .html(`<div class="label">${it.label}</div><div class="value">${it.value}</div><div class="desc">${it.desc}</div>`);
+        });
+    }
+
+    // ===== Section 3-6: 身份洞察 =====
+    function renderIdentityInsights(data) {
+        const list = d3.select('#identity-insights');
+        list.selectAll('li').data(data.language_identity_insights).enter().append('li').text(d => d);
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

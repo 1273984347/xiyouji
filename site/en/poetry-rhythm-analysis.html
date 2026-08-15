@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Ne51jr82L1lt0ypEWBYi4R3UI6itUd2KAlfrpofTJQg=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Poetry Rhythm Analysis Atlas · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        @font-face {
+            font-family: "Noto Serif SC";
+            src: local("Noto Serif SC"), local("Source Han Serif SC"), local("Songti SC");
+            font-weight: 400 700; font-display: optional;
+        }
+        @font-face {
+            font-family: "JetBrains Mono";
+            src: local("JetBrains Mono"), local("Fira Code"), local("Consolas");
+            font-weight: 400 700; font-display: swap;
+        }
+        
+        
+        
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .cross-page-nav {
+            font-size: 0.86em; color: var(--ink-soft); margin-bottom: 18px;
+            padding: 10px 14px; background: #fff8e7; border-left: 4px solid var(--accent-2);
+            border-radius: 0 4px 4px 0;
+        }
+        .cross-page-nav a { color: var(--accent-2); text-decoration: none; }
+        .cross-page-nav a:hover { text-decoration: underline; }
+        .cross-page-nav a.active { color: var(--accent); font-weight: 700; }
+        .notice {
+            background: #fff8e7; border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        }
+        
+        
+        .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
+        
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
+        
+        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: var(--accent-2);
+            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 4px 0; transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        
+        .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; padding: 12px 16px; background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; }
+        .control-row .ctrl-label { font-size: 0.88em; color: var(--ink-soft); font-weight: 600; }
+        .ctrl-btn {
+            padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.9em;
+            font-family: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .ctrl-btn:hover { background: var(--accent-soft); }
+        .ctrl-btn.play { background: var(--accent-2); color: #fff; border-color: var(--accent-2); }
+        .ctrl-btn.play:hover { background: #2c5573; }
+        .ctrl-btn.play.playing { background: var(--accent); border-color: var(--accent); }
+        .slider-wrap { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 240px; }
+        .slider-wrap input[type=range] {
+            flex: 1; height: 6px; -webkit-appearance: none; appearance: none;
+            background: var(--line); border-radius: 3px; outline: none;
+        }
+        .slider-wrap input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
+            cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .slider-wrap input[type=range]::-moz-range-thumb {
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
+            cursor: pointer; border: 2px solid #fff;
+        }
+        .slider-wrap .seg-label { font-family: "JetBrains Mono", monospace; font-size: 0.85em; color: var(--accent); font-weight: 700; min-width: 110px; }
+        .speed-select {
+            padding: 6px 10px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.85em;
+            font-family: inherit;
+        }
+        .chart-wrap { position: relative; overflow-x: auto; }
+        #pie-svg, #heatmap-svg, #timeline-svg, #stacked-svg { display: block; }
+        #pie-svg { min-width: 420px; }
+        #heatmap-svg, #timeline-svg, #stacked-svg { min-width: 980px; }
+        .heat-cell, .pie-slice, .tl-bar, .stack-rect { cursor: pointer; transition: opacity 0.2s; }
+        .heat-cell:hover, .pie-slice:hover, .tl-bar:hover, .stack-rect:hover { opacity: 0.78; }
+        .event-tip {
+            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
+            color: #f5e9d4; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem;
+            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 320px;
+        }
+        .event-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
+        .event-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
+        .event-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
+        .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
+        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
+        .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 2px; }
+        .legend-row .lg-swatch.round { border-radius: 50%; }
+        .progress-bar { position: relative; height: 6px; background: var(--line); border-radius: 3px; margin-top: 8px; overflow: hidden; }
+        .progress-bar .progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
+        .insight-box {
+            background: #fffdf8; border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+        }
+        .insight-box strong { color: var(--accent); font-weight: 700; }
+        .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
+        .box-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 900px) { .box-grid { grid-template-columns: 1fr 1fr; } }
+        .box-card { border: 1px solid var(--line); border-radius: 6px; padding: 14px; background: #fffdf8; }
+        .box-card h3 { font-size: 0.98em; margin-bottom: 8px; color: var(--ink); }
+        .box-card svg { width: 100%; height: 200px; display: block; }
+        .cross-page-section { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 28px; margin-bottom: 28px; box-shadow: var(--shadow); }
+        .cross-page-section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .cross-page-section .nav-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 12px; margin-top: 12px; }
+        .cross-page-section .nav-list li { padding: 10px 14px; background: #fff8e7; border-left: 3px solid var(--accent-2); border-radius: 0 4px 4px 0; font-size: 0.9em; }
+        .cross-page-section .nav-list a { color: var(--accent-2); text-decoration: none; font-weight: 600; }
+        .cross-page-section .nav-list a:hover { text-decoration: underline; }
+        .cross-page-section .nav-list .desc { display: block; color: var(--ink-soft); font-size: 0.82em; margin-top: 4px; font-weight: 400; }
+        
+        
+        footer .idx-row { margin: 6px 0; }
+        footer .idx-label { color: #b8a584; font-family: "JetBrains Mono", monospace; font-size: 0.82em; margin-right: 6px; }
+        @media (prefers-reduced-motion: reduce) {  }
+        @media (max-width: 480px) {
+            
+            
+            
+            .ctrl-btn { padding: 6px 12px; font-size: 0.82em; }
+        }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+        <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/poetry-rhythm-analysis.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+        <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">EN Home</a> / <a href="../dashboard.html">Dashboard</a> / Poetry Rhythm Analysis Atlas</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Poetry Rhythm Analysis Atlas</h1>
+        <p class="subtitle">W233-4 · V3 · Paired with the 7 A6 poetry documents in a text–visualization dual track</p>
+        <p class="tagline">— 3 cipai (tune patterns) · 2 ping-ze tone types · 5 layers · full coverage of 100 chapters</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="../index.html">EN Home</a>
+            <span class="sep">›</span>
+            <a href="../dashboard.html">Dashboard</a>
+            <span class="sep">›</span>
+            <span>Poetry Rhythm Analysis Atlas</span>
+        </nav>
+        <nav class="cross-page-nav" aria-label="Cross-page navigation">
+            <a href="ming-political-thought-comparison.html">Ming Political Thought Comparison</a> ·
+            <a href="pilgrim-team-psychology-arc.html">Pilgrim Team Psychology</a> ·
+            <a href="monster-capability-radar.html">Monster Capability Radar</a> ·
+            <a href="poetry-rhythm-analysis.html" class="active">Poetry Rhythm Analysis</a> ·
+            <a href="../index.html">Back to dashboard</a>
+        </nav>
+        <div class="notice" role="note">
+            <strong>Dual-Track Note</strong>: This page is the visualization supplement to the 7 A6 poetry documents, paired with
+            <span class="mono">docs/06-poetry/</span> to form a "text–visualization" dual track.
+            <span class="mono">cipai (tune pattern)</span> (Xijiangyue / Linjiangxian / Mantingfang) ·
+            <span class="mono">ping-ze (level/oblique)</span> (level/oblique tones) ·
+            <span class="mono">five layers</span> (opening/chapter-title/character/scenery/cipai) ·
+            <span class="mono">timeline</span>: 100 chapters in 10 segments, with play/pause/slider controls (cf. W229 spacetime dual-axis).
+        </div>
+
+        <!-- 板块 1：KPI 概要栏 -->
+        <section class="kpi-row" aria-label="Poetry overview">
+            <div class="kpi-card">
+                <div class="num">7</div>
+                <div class="label">A6 poetry documents</div>
+                <div class="detail">docs/06-poetry/ · 7 special topics</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">3</div>
+                <div class="label">Cipai count</div>
+                <div class="detail">Xijiangyue / Linjiangxian / Mantingfang</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">2</div>
+                <div class="label">Tone types</div>
+                <div class="detail">Level / oblique · binary prosody</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">5</div>
+                <div class="label">Five poetry layers</div>
+                <div class="detail">Opening / Chapter-title / Character / Scenery / Cipai</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">100</div>
+                <div class="label">Chapter coverage</div>
+                <div class="detail">Chapters 1–100 · full coverage</div>
+            </div>
+        </section>
+
+        <!-- 板块 2：词牌分布饼图 -->
+        <section class="section" aria-labelledby="sec-pie">
+            <h2 id="sec-pie">① Cipai Distribution Treemap</h2>
+            <p>Across the whole of Journey to the West, the poems fall into 7 categories: 3 cipai (Xijiangyue / Linjiangxian / Mantingfang) + opening poems + chapter couplets (100 chapters) + character fu + scenery poems. Chapter couplets are the most numerous (100), forming the skeleton of the book’s poetry; the cipai—only 3 patterns, 3 poems—are the core sample for prosodic analysis. <strong>The treemap uses area for share</strong>: the smaller a block, the fewer poems in that category (e.g., each cipai has just 1 poem); hover for category details, and the legend lists all 7 categories with their shares.</p>
+            <div class="chart-wrap">
+                <svg id="pie-svg" width="100%" height="420" role="img" aria-labelledby="pie-title pie-desc">
+                    <title id="pie-title">Cipai Distribution Treemap</title>
+                    <desc id="pie-desc">Share distribution of the 7 poetry categories (treemap, area = share).</desc>
+                </svg>
+                <div class="event-tip" id="pie-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="pie-legend" aria-label="Cipai category legend"></div>
+        </section>
+
+        <!-- 板块 3：平仄韵脚分布热力图 -->
+        <section class="section" aria-labelledby="sec-heat">
+            <h2 id="sec-heat">② Ping-ze Rhyme-Tone Distribution Heatmap</h2>
+            <p>A matrix of the 7 A6 poetry samples × the level/oblique binary of rhyme tones. Color depth shows the percentage of level-tone or oblique-tone characters in each poem. "Mantingfang" has the highest level-tone share (72%, the most serene), "chapter couplets" are the most balanced (50/50, neatly antithetical), and "opening poems" lean oblique (40%, strongly rhythmic).</p>
+            <div class="chart-wrap">
+                <svg id="heatmap-svg" width="100%" height="360" role="img" aria-labelledby="hm-title hm-desc">
+                    <title id="hm-title">Ping-ze Rhyme-Tone Distribution Heatmap</title>
+                    <desc id="hm-desc">Percentage matrix of the 7 poems × level/oblique tones.</desc>
+                </svg>
+                <div class="event-tip" id="heat-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="heat-legend" aria-label="Ping-ze share legend"></div>
+        </section>
+
+        <!-- 板块 4：诗词在 100 回分布时间线（带动画） -->
+        <section class="section" aria-labelledby="sec-timeline">
+            <h2 id="sec-timeline">③ Poem Distribution Timeline Across 100 Chapters</h2>
+            <p>Split the 100 chapters into 10 segments (10 chapters each) and count poems per segment. The first segment (chapters 1–10, opening concentration) and the last (chapters 91–100, homeward summary) are the densest, with the middle segments relatively even. Click "Play" to advance the animation segment by segment, or drag the slider to jump manually (cf. the W229 spacetime dual-axis animation pattern).</p>
+            <div class="control-row" role="group" aria-label="Timeline controls">
+                <button class="ctrl-btn play" id="play-btn" aria-label="Play/Pause">▶ Play</button>
+                <div class="slider-wrap">
+                    <span class="ctrl-label">Segment:</span>
+                    <input type="range" id="seg-slider" min="1" max="10" value="10" aria-label="Segment slider" />
+                    <span class="seg-label" id="seg-display">Segment 10 · 91-100</span>
+                </div>
+                <span class="ctrl-label">Speed:</span>
+                <select class="speed-select" id="speed-select" aria-label="Playback speed">
+                    <option value="1100">Slow</option>
+                    <option value="650" selected>Normal</option>
+                    <option value="320">Fast</option>
+                </select>
+                <button class="ctrl-btn" id="reset-btn">↺ Reset</button>
+            </div>
+            <div class="progress-bar" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+            <div class="chart-wrap">
+                <svg id="timeline-svg" width="100%" height="380" role="img" aria-labelledby="tl-title tl-desc">
+                    <title id="tl-title">Poem Distribution Timeline Across 100 Chapters</title>
+                    <desc id="tl-desc">Bar chart of poem counts across 10 chapter-range segments, with playback animation.</desc>
+                </svg>
+                <div class="event-tip" id="tl-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="tl-legend" aria-label="Timeline legend"></div>
+        </section>
+
+        <!-- 板块 5：诗词五层次堆叠图 -->
+        <section class="section" aria-labelledby="sec-stacked">
+            <h2 id="sec-stacked">④ Five Poetry Layers Stacked Chart</h2>
+            <p>Stack the poems in the 10 chapter ranges by 5 layers: opening poem (kaipian) / chapter couplet (huimu) / character fu (renwu) / scenery poem (jingwu) / cipai. Chapter couplets are a constant 10 per segment (one per chapter), forming a stable base; scenery poems and character fu fluctuate through the middle, reflecting narrative density; cipai appear only in the first and last segments (Xijiangyue at the opening, Mantingfang at the close).</p>
+            <div class="chart-wrap">
+                <svg id="stacked-svg" width="100%" height="440" role="img" aria-labelledby="st-title st-desc">
+                    <title id="st-title">Five Poetry Layers Stacked Chart</title>
+                    <desc id="st-desc">Stacked bar chart of the 5 poetry layers across 10 chapter-range segments.</desc>
+                </svg>
+                <div class="event-tip" id="stack-tip" role="tooltip"></div>
+            </div>
+            <div class="legend-row" id="stack-legend" aria-label="Five-layer legend"></div>
+        </section>
+
+        <!-- 板块 6：韵律特征 KPI 卡片 + 箱线图 -->
+        <section class="section" aria-labelledby="sec-box">
+            <h2 id="sec-box">⑤ Prosodic Feature Distribution Box Plot</h2>
+            <p>Statistical distribution of the "level-tone share" across the 7 A6 poetry samples (min/Q1/median/Q3/max). Box height reflects dispersion, and the middle line is the median. The cipai group (Xijiangyue / Linjiangxian / Mantingfang) has the highest median level-tone share and the smallest dispersion (most regular prosody); chapter couplets are the most tightly clustered (neat antithesis); opening poems are the most dispersed (strong narrative causes fluctuation).</p>
+            <div class="box-grid">
+                <div class="box-card">
+                    <h3>Box Plot of Level-Tone Share Across 7 Poems</h3>
+                    <svg id="box-svg"></svg>
+                </div>
+                <div class="box-card">
+                    <h3>Prosodic Feature Highlights</h3>
+                    <div class="insight-box">
+                        <span class="ib-tag">[Cipai]</span>
+                        <strong>All three cipai have level-tone share ≥ 68%</strong>. Mantingfang leads at 72%, Linjiangxian follows at 68%, and Xijiangyue at 70%. Cipai emphasize level/oblique alternation, and level-tone dominance reads as serene and elegant.
+                    </div>
+                    <div class="insight-box">
+                        <span class="ib-tag">[Couplet]</span>
+                        <strong>Chapter couplets hold a perfect 50/50 level/oblique balance</strong>. All 100 couplets are strictly antithetical with opposed tones—the book’s "standard reference frame" for prosody.
+                    </div>
+                    <div class="insight-box">
+                        <span class="ib-tag">[Opening]</span>
+                        <strong>The opening poem is 60% level / 40% oblique</strong>. The oblique tilt creates a solemn narrative tone, matching the epic opening keynote of "before chaos parted, heaven and earth were troubled."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 板块 7：跨页面导航 -->
+        <section class="cross-page-section" aria-labelledby="sec-nav">
+            <h2 id="sec-nav">⑥ Cross-Page Navigation · W233 V3 Four Parallel Pages</h2>
+            <p>This page is the fourth of the W233 V-direction four parallel pages; together with Ming Political Thought Comparison, Pilgrim Team Psychology, and Monster Capability Radar it forms the V3-direction four-page matrix. Click the links below to jump.</p>
+            <ul class="nav-list">
+                <li><a href="ming-political-thought-comparison.html">Ming Political Thought Comparison →</a><span class="desc">W233-1 · Political-thought dimension comparison</span></li>
+                <li><a href="pilgrim-team-psychology-arc.html">Pilgrim Team Psychology →</a><span class="desc">W233-2 · Team psychology arc</span></li>
+                <li><a href="monster-capability-radar.html">Monster Capability Radar →</a><span class="desc">W233-3 · Monster capability multi-dimensional radar</span></li>
+                <li><a href="poetry-rhythm-analysis.html">Poetry Rhythm Analysis (this page)</a><span class="desc">W233-4 · Paired with the 7 A6 poetry documents</span></li>
+                <li><a href="../data/narratology-13d-network.html" lang="zh-CN">W194 Narratology 13-Dimensional →</a><span class="desc">Cross-doc · Narratology 13-dimensional network</span></li>
+                <li><a href="hardship-difficulty-heatmap.html">W229 V2 Difficulty Heatmap →</a><span class="desc">Cross-doc · One of three W229 V2 pages</span></li>
+                <li><a href="journey-spacetime.html">W229 V2 Spacetime Dual-Axis →</a><span class="desc">Cross-doc · Timeline animation reference for this page</span></li>
+                <li><a href="character-dynamic-network.html">W229 V2 Dynamic Network →</a><span class="desc">Cross-doc · Third of three W229 V2 pages</span></li>
+            </ul>
+        </section>
+    </main>
+
+        <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/poetry-rhythm-analysis.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // ============= EMBEDDED_DATA =============
+    const EMBEDDED_DATA = {
+      meta: {title: "Poetry Rhythm Analysis Atlas", version: "v2.2.39", w_id: "W233-4", direction: "V3"},
+      kpi: [
+        {label: "A6 poetry documents", value: 7, unit: "articles"},
+        {label: "Cipai count", value: 3, unit: "patterns"},
+        {label: "Tone types", value: 2, unit: "types"},
+        {label: "Five poetry layers", value: 5, unit: "layers"},
+        {label: "Chapter coverage", value: 100, unit: "chapters"}
+      ],
+      pie: [
+        {name: "Xijiangyue", value: 1},
+        {name: "Linjiangxian", value: 1},
+        {name: "Mantingfang", value: 1},
+        {name: "Opening poem", value: 1},
+        {name: "Chapter couplet", value: 100},
+        {name: "Character fu", value: 20},
+        {name: "Scenery poem", value: 40}
+      ],
+      heatmap: [
+        {poem: "Opening poem", ping: 60, ze: 40},
+        {poem: "Chapter couplet", ping: 50, ze: 50},
+        {poem: "Character fu", ping: 55, ze: 45},
+        {poem: "Scenery poem", ping: 65, ze: 35},
+        {poem: "Xijiangyue", ping: 70, ze: 30},
+        {poem: "Linjiangxian", ping: 68, ze: 32},
+        {poem: "Mantingfang", ping: 72, ze: 28}
+      ],
+      timeline: [
+        {chapter_range: "1-10", count: 12},
+        {chapter_range: "11-20", count: 8},
+        {chapter_range: "21-30", count: 10},
+        {chapter_range: "31-40", count: 9},
+        {chapter_range: "41-50", count: 11},
+        {chapter_range: "51-60", count: 8},
+        {chapter_range: "61-70", count: 10},
+        {chapter_range: "71-80", count: 9},
+        {chapter_range: "81-90", count: 7},
+        {chapter_range: "91-100", count: 14}
+      ],
+      stacked: [
+        {range: "1-10", kaipian: 1, huimu: 10, renwu: 2, jingwu: 4, cipai: 1},
+        {range: "11-20", kaipian: 0, huimu: 10, renwu: 1, jingwu: 4, cipai: 0},
+        {range: "21-30", kaipian: 0, huimu: 10, renwu: 3, jingwu: 3, cipai: 0},
+        {range: "31-40", kaipian: 0, huimu: 10, renwu: 2, jingwu: 4, cipai: 0},
+        {range: "41-50", kaipian: 0, huimu: 10, renwu: 2, jingwu: 5, cipai: 0},
+        {range: "51-60", kaipian: 0, huimu: 10, renwu: 1, jingwu: 4, cipai: 0},
+        {range: "61-70", kaipian: 0, huimu: 10, renwu: 2, jingwu: 5, cipai: 0},
+        {range: "71-80", kaipian: 0, huimu: 10, renwu: 2, jingwu: 4, cipai: 0},
+        {range: "81-90", kaipian: 0, huimu: 10, renwu: 1, jingwu: 3, cipai: 0},
+        {range: "91-100", kaipian: 0, huimu: 10, renwu: 4, jingwu: 6, cipai: 1}
+      ],
+      boxplot: [
+        {poem: "Opening poem", q1: 50, median: 60, q3: 70, min: 40, max: 80},
+        {poem: "Chapter couplet", q1: 45, median: 50, q3: 55, min: 40, max: 60},
+        {poem: "Character fu", q1: 50, median: 55, q3: 60, min: 45, max: 65},
+        {poem: "Scenery poem", q1: 55, median: 65, q3: 75, min: 50, max: 80},
+        {poem: "Xijiangyue", q1: 65, median: 70, q3: 75, min: 60, max: 80},
+        {poem: "Linjiangxian", q1: 63, median: 68, q3: 73, min: 58, max: 78},
+        {poem: "Mantingfang", q1: 67, median: 72, q3: 77, min: 62, max: 82}
+      ]
+    };
+
+    // 配色（古典宣纸风）
+    const PIE_COLORS = ["#c8463a", "#3a6b8c", "#C9A063", "#6B8E5A", "#e9b885", "#b8862a", "#8c2a2a"];
+    const LAYER_COLORS = { kaipian: "#c8463a", huimu: "#e9b885", renwu: "#C9A063", jingwu: "#6B8E5A", cipai: "#3a6b8c" };
+    const LAYER_LABELS = { kaipian: "Opening poem", huimu: "Chapter couplet", renwu: "Character fu", jingwu: "Scenery poem", cipai: "Cipai (tune pattern)" };
+    const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DUR = REDUCE_MOTION ? 0 : 600;
+
+    // ============= 板块 2：词牌分布矩形树图（treemap）=============
+    // P2 试点：7 类饼图 → 矩形树图，面积=占比，保留图例与 hover 占比，避免小扇区不可读
+    function renderPie() {
+        const svg = d3.select("#pie-svg");
+        svg.selectAll("*").remove();
+        const wrap = document.getElementById("pie-svg");
+        const width = Math.max(420, wrap.clientWidth || 760);
+        const height = 420;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const data = EMBEDDED_DATA.pie;
+        const total = d3.sum(data, d => d.value);
+
+        const root = d3.hierarchy({ name: "root", children: data })
+            .sum(d => d.value)
+            .sort((a, b) => b.value - a.value);
+        d3.treemap().size([width, height]).paddingInner(3).round(true)(root);
+
+        const tip = d3.select("#pie-tip");
+        const wrapEl = wrap.parentElement;
+
+        const cells = svg.selectAll("g.tm-cell")
+            .data(root.leaves())
+            .enter()
+            .append("g")
+            .attr("class", "tm-cell")
+            .attr("transform", d => `translate(${d.x0},${d.y0})`);
+
+        cells.append("rect")
+            .attr("width", d => Math.max(0, d.x1 - d.x0))
+            .attr("height", d => Math.max(0, d.y1 - d.y0))
+            .attr("fill", (d) => PIE_COLORS[data.indexOf(d.data) % PIE_COLORS.length])
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .style("opacity", 0)
+            .on("mouseover", function(event, d) {
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${d.data.name}</div>
+                        <div class="tip-row">Count: <strong style="color:#e9b885">${d.data.value}</strong></div>
+                        <div class="tip-row">Share: <strong style="color:#e9b885">${((d.data.value / total) * 100).toFixed(1)}%</strong></div>`);
+            })
+            .on("mousemove", function(event) {
+                const rect = wrapEl.getBoundingClientRect();
+                tip.style("left", (event.clientX - rect.left + 14) + "px")
+                    .style("top", (event.clientY - rect.top + 14) + "px");
+            })
+            .on("mouseout", function() { tip.style("opacity", 0); })
+            .transition().duration(DUR).style("opacity", 1);
+
+        // 标签：仅当格子足够大，否则依赖图例 + hover
+        const showLbl = d => ((d.x1 - d.x0) > 48 && (d.y1 - d.y0) > 28);
+        cells.append("text")
+            .attr("x", d => (d.x1 - d.x0) / 2).attr("y", d => (d.y1 - d.y0) / 2 - 4)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem").style("font-weight", "600")
+            .style("fill", "#fff").style("paint-order", "stroke")
+            .style("stroke", "rgba(0,0,0,0.35)").style("stroke-width", "3px")
+            .style("pointer-events", "none")
+            .text(d => showLbl(d) ? d.data.name : "");
+        cells.append("text")
+            .attr("x", d => (d.x1 - d.x0) / 2).attr("y", d => (d.y1 - d.y0) / 2 + 13)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.72rem")
+            .style("fill", "#fff").style("opacity", 0.92)
+            .style("pointer-events", "none")
+            .text(d => showLbl(d) ? `${d.data.value} · ${((d.data.value / total) * 100).toFixed(0)}%` : "");
+
+        // 图例（保留全部 7 类 + 值 + 占比）
+        const legend = d3.select("#pie-legend");
+        legend.selectAll("*").remove();
+        data.forEach((p, i) => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch round").style("background", PIE_COLORS[i % PIE_COLORS.length]);
+            item.append("span").text(`${p.name} (${p.value}, ${((p.value / total) * 100).toFixed(1)}%)`);
+        });
+    }
+
+    // ============= 板块 3：平仄热力图 =============
+    function renderHeatmap() {
+        const svg = d3.select("#heatmap-svg");
+        svg.selectAll("*").remove();
+        const wrap = document.getElementById("heatmap-svg");
+        const width = Math.max(980, wrap.clientWidth || 980);
+        const height = 360;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 40, right: 30, bottom: 60, left: 110 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const poems = EMBEDDED_DATA.heatmap.map(d => d.poem);
+        const tones = ["ping", "ze"];
+        const toneLabels = { ping: "Level tone", ze: "Oblique tone" };
+
+        const x = d3.scaleBand().domain(tones).range([0, innerW]).padding(0.15);
+        const y = d3.scaleBand().domain(poems).range([0, innerH]).padding(0.12);
+        const color = d3.scaleSequential(t => d3.interpolateRgb("#fff8e7", "#c8463a")(t)).domain([0, 100]);
+
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).tickFormat(d => toneLabels[d]))
+            .selectAll("text").style("font-size", "0.85rem").style("fill", "#23201A").style("font-weight", "600");
+
+        g.append("g").call(d3.axisLeft(y))
+            .selectAll("text").style("font-size", "0.85rem").style("fill", "#23201A");
+
+        g.append("text").attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle").style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Tone type");
+
+        const tip = d3.select("#heat-tip");
+        const wrapEl = wrap.parentElement;
+
+        EMBEDDED_DATA.heatmap.forEach((row, ri) => {
+            tones.forEach((t, ti) => {
+                const val = row[t];
+                g.append("rect")
+                    .attr("class", "heat-cell")
+                    .attr("x", x(t)).attr("y", y(row.poem))
+                    .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+                    .attr("fill", color(val)).attr("stroke", "#fff").attr("stroke-width", 1.5)
+                    .style("opacity", 0)
+                    .on("mouseover", function(event) {
+                        d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
+                        tip.style("opacity", 1)
+                            .html(`<div class="tip-title">${row.poem} · ${toneLabels[t]}</div>
+                                <div class="tip-row">Share: <strong style="color:#e9b885">${val}%</strong></div>
+                                <div class="tip-row">Level tone ${row.ping}% / Oblique tone ${row.ze}%</div>
+                                <div class="tip-meta">Sample index ${ri + 1}/7</div>`);
+                    })
+                    .on("mousemove", function(event) {
+                        const rect = wrapEl.getBoundingClientRect();
+                        tip.style("left", (event.clientX - rect.left + 14) + "px")
+                            .style("top", (event.clientY - rect.top + 14) + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1.5);
+                        tip.style("opacity", 0);
+                    })
+                    .transition().duration(DUR).delay(ri * 60 + ti * 30)
+                    .style("opacity", 1);
+
+                g.append("text")
+                    .attr("x", x(t) + x.bandwidth() / 2).attr("y", y(row.poem) + y.bandwidth() / 2 + 5)
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "0.92rem").style("font-weight", "700")
+                    .style("fill", val > 55 ? "#fff" : "#23201A")
+                    .style("opacity", 0)
+                    .text(val + "%")
+                    .transition().duration(DUR).delay(ri * 60 + ti * 30 + 200)
+                    .style("opacity", 1);
+            });
+        });
+
+        // 图例
+        const legend = d3.select("#heat-legend");
+        legend.selectAll("*").remove();
+        [0, 25, 50, 75, 100].forEach(v => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch").style("background", color(v));
+            item.append("span").text(v + "%");
+        });
+    }
+
+    // ============= 板块 4：时间线柱状图（带动画） =============
+    let currentSeg = 10;
+    let playTimer = null;
+    let playSpeed = 650;
+
+    function renderTimeline(maxSeg) {
+        const svg = d3.select("#timeline-svg");
+        svg.selectAll("*").remove();
+        const wrap = document.getElementById("timeline-svg");
+        const width = Math.max(980, wrap.clientWidth || 980);
+        const height = 380;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 30, right: 30, bottom: 60, left: 50 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const data = EMBEDDED_DATA.timeline;
+        const x = d3.scaleBand().domain(data.map(d => d.chapter_range)).range([0, innerW]).padding(0.25);
+        const yMax = d3.max(data, d => d.count) || 1;
+        const y = d3.scaleLinear().domain([0, Math.max(1, yMax)]).range([innerH, 0]).nice();
+
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+
+        g.append("g").call(d3.axisLeft(y).ticks(5))
+            .selectAll("text").style("font-size", "0.75rem").style("fill", "#6B6455");
+
+        g.append("text").attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle").style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Chapter range (10 segments)");
+
+        // 当前段垂线
+        const segIdx = maxSeg - 1;
+        g.append("rect")
+            .attr("x", x(data[segIdx].chapter_range) - 4)
+            .attr("y", 0).attr("width", x.bandwidth() + 8).attr("height", innerH)
+            .attr("fill", "#fff8e7").attr("stroke", "#e9b885").attr("stroke-dasharray", "3,3").attr("opacity", 0.7);
+
+        const tip = d3.select("#tl-tip");
+        const wrapEl = wrap.parentElement;
+
+        g.selectAll("rect.tl-bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "tl-bar")
+            .attr("x", d => x(d.chapter_range))
+            .attr("y", innerH)
+            .attr("width", x.bandwidth())
+            .attr("height", 0)
+            .attr("fill", (d, i) => i <= segIdx ? "#c8463a" : "#e9b885")
+            .attr("stroke", "#fff").attr("stroke-width", 1)
+            .on("mouseover", function(event, d) {
+                d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">Chapter ${d.chapter_range}</div>
+                        <div class="tip-row">Poem count: <strong style="color:#e9b885">${d.count}</strong></div>
+                        <div class="tip-row">Segment ${data.indexOf(d) + 1}/10</div>
+                        <div class="tip-meta">Range ${d.chapter_range} chapters</div>`);
+            })
+            .on("mousemove", function(event) {
+                const rect = wrapEl.getBoundingClientRect();
+                tip.style("left", (event.clientX - rect.left + 14) + "px")
+                    .style("top", (event.clientY - rect.top + 14) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
+                tip.style("opacity", 0);
+            })
+            .transition().duration(DUR).delay((d, i) => i * 40)
+            .attr("y", d => y(d.count))
+            .attr("height", d => innerH - y(d.count));
+
+        g.selectAll("text.bar-val")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "bar-val")
+            .attr("x", d => x(d.chapter_range) + x.bandwidth() / 2)
+            .attr("y", d => y(d.count) - 6)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem").style("font-weight", "700").style("fill", "#c8463a")
+            .style("opacity", 0)
+            .text(d => d.count)
+            .transition().duration(DUR).delay((d, i) => i * 40 + 250)
+            .style("opacity", (d, i) => i <= segIdx ? 1 : 0.4);
+
+        // 进度
+        d3.select("#progress-fill").style("width", `${(maxSeg / 10) * 100}%`);
+        d3.select("#seg-display").text(`Segment ${maxSeg} · ${data[maxSeg - 1].chapter_range}`);
+
+        // 图例
+        const legend = d3.select("#tl-legend");
+        legend.selectAll("*").remove();
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#c8463a;"></span><span>Played segments</span>');
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#e9b885;"></span><span>Unplayed segments</span>');
+        legend.append("div").attr("class", "lg-item")
+            .html('<span class="lg-swatch" style="background:#fff8e7;border:1px dashed #e9b885;"></span><span>Current segment</span>');
+    }
+
+    function togglePlay() {
+        const btn = document.getElementById("play-btn");
+        if (playTimer) {
+            clearInterval(playTimer); playTimer = null;
+            btn.textContent = "▶ Play"; btn.classList.remove("playing");
+        } else {
+            if (currentSeg >= 10) currentSeg = 1;
+            btn.textContent = "⏸ Pause"; btn.classList.add("playing");
+            playTimer = setInterval(() => {
+                if (currentSeg >= 10) {
+                    clearInterval(playTimer); playTimer = null;
+                    btn.textContent = "▶ Play"; btn.classList.remove("playing");
+                    return;
+                }
+                currentSeg += 1;
+                document.getElementById("seg-slider").value = currentSeg;
+                renderTimeline(currentSeg);
+            }, playSpeed);
+        }
+    }
+
+    document.getElementById("play-btn").addEventListener("click", togglePlay);
+    document.getElementById("reset-btn").addEventListener("click", function() {
+        if (playTimer) { clearInterval(playTimer); playTimer = null; }
+        const btn = document.getElementById("play-btn");
+        btn.textContent = "▶ Play"; btn.classList.remove("playing");
+        currentSeg = 10;
+        document.getElementById("seg-slider").value = 10;
+        renderTimeline(10);
+    });
+    document.getElementById("seg-slider").addEventListener("input", function(e) {
+        if (playTimer) {
+            clearInterval(playTimer); playTimer = null;
+            const btn = document.getElementById("play-btn");
+            btn.textContent = "▶ Play"; btn.classList.remove("playing");
+        }
+        currentSeg = +e.target.value;
+        renderTimeline(currentSeg);
+    });
+    document.getElementById("speed-select").addEventListener("change", function(e) {
+        playSpeed = +e.target.value;
+        if (playTimer) { clearInterval(playTimer); playTimer = null; togglePlay(); }
+    });
+
+    // ============= 板块 5：五层次堆叠图 =============
+    function renderStacked() {
+        const svg = d3.select("#stacked-svg");
+        svg.selectAll("*").remove();
+        const wrap = document.getElementById("stacked-svg");
+        const width = Math.max(980, wrap.clientWidth || 980);
+        const height = 440;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 30, right: 30, bottom: 60, left: 50 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const data = EMBEDDED_DATA.stacked;
+        const keys = ["kaipian", "huimu", "renwu", "jingwu", "cipai"];
+        const stack = d3.stack().keys(keys);
+        const series = stack(data);
+
+        const x = d3.scaleBand().domain(data.map(d => d.range)).range([0, innerW]).padding(0.25);
+        const yMax = d3.max(data, d => d.kaipian + d.huimu + d.renwu + d.jingwu + d.cipai) || 1;
+        const y = d3.scaleLinear().domain([0, Math.max(1, yMax)]).range([innerH, 0]).nice();
+
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+
+        g.append("g").call(d3.axisLeft(y).ticks(6))
+            .selectAll("text").style("font-size", "0.75rem").style("fill", "#6B6455");
+
+        g.append("text").attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle").style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Chapter range (10 segments)");
+        g.append("text").attr("x", -innerH / 2).attr("y", -38)
+            .attr("text-anchor", "middle").attr("transform", "rotate(-90)")
+            .style("font-size", "0.85rem").style("fill", "#C9A063").text("Poem count (stacked)");
+
+        const tip = d3.select("#stack-tip");
+        const wrapEl = wrap.parentElement;
+
+        series.forEach((layer, li) => {
+            g.selectAll("rect.stack-" + li)
+                .data(layer)
+                .enter()
+                .append("rect")
+                .attr("class", "stack-rect stack-" + li)
+                .attr("x", d => x(d.data.range))
+                .attr("y", innerH)
+                .attr("width", x.bandwidth())
+                .attr("height", 0)
+                .attr("fill", LAYER_COLORS[layer.key])
+                .attr("stroke", "#fff").attr("stroke-width", 1)
+                .on("mouseover", function(event, d) {
+                    d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
+                    const val = d.data[layer.key];
+                    tip.style("opacity", 1)
+                        .html(`<div class="tip-title">${d.data.range} chapters · ${LAYER_LABELS[layer.key]}</div>
+                            <div class="tip-row">Count: <strong style="color:#e9b885">${val}</strong></div>
+                            <div class="tip-row">Opening ${d.data.kaipian} / Chapter-title ${d.data.huimu} / Character ${d.data.renwu} / Scenery ${d.data.jingwu} / Cipai ${d.data.cipai}</div>
+                            <div class="tip-meta">Layer ${li + 1}/5 · ${layer.key}</div>`);
+                })
+                .on("mousemove", function(event) {
+                    const rect = wrapEl.getBoundingClientRect();
+                    tip.style("left", (event.clientX - rect.left + 14) + "px")
+                        .style("top", (event.clientY - rect.top + 14) + "px");
+                })
+                .on("mouseout", function() {
+                    d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
+                    tip.style("opacity", 0);
+                })
+                .transition().duration(DUR).delay((d, i) => i * 50 + li * 120)
+                .attr("y", d => y(d[1]))
+                .attr("height", d => y(d[0]) - y(d[1]));
+        });
+
+        // 图例
+        const legend = d3.select("#stack-legend");
+        legend.selectAll("*").remove();
+        keys.forEach(k => {
+            const item = legend.append("div").attr("class", "lg-item");
+            item.append("span").attr("class", "lg-swatch").style("background", LAYER_COLORS[k]);
+            item.append("span").text(LAYER_LABELS[k]);
+        });
+    }
+
+    // ============= 板块 6：箱线图 =============
+    function renderBoxplot() {
+        const svg = d3.select("#box-svg");
+        svg.selectAll("*").remove();
+        const wrap = svg.node().parentElement;
+        const width = Math.max(320, wrap.clientWidth || 460);
+        const height = 200;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 16, right: 16, bottom: 50, left: 40 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const data = EMBEDDED_DATA.boxplot;
+        const x = d3.scaleBand().domain(data.map(d => d.poem)).range([0, innerW]).padding(0.3);
+        const y = d3.scaleLinear().domain([35, 85]).range([innerH, 0]);
+
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text").style("font-size", "0.62rem").style("fill", "#6B6455")
+            .attr("transform", "rotate(-18)").style("text-anchor", "end");
+
+        g.append("g").call(d3.axisLeft(y).ticks(4))
+            .selectAll("text").style("font-size", "0.68rem").style("fill", "#6B6455");
+
+        data.forEach((d, i) => {
+            const cx = x(d.poem) + x.bandwidth() / 2;
+            const boxW = x.bandwidth() * 0.6;
+            // 须线
+            g.append("line").attr("x1", cx).attr("x2", cx)
+                .attr("y1", y(d.min)).attr("y2", y(d.max))
+                .attr("stroke", "#C9A063").attr("stroke-width", 1);
+            g.append("line").attr("x1", cx - boxW / 3).attr("x2", cx + boxW / 3)
+                .attr("y1", y(d.min)).attr("y2", y(d.min))
+                .attr("stroke", "#C9A063").attr("stroke-width", 1);
+            g.append("line").attr("x1", cx - boxW / 3).attr("x2", cx + boxW / 3)
+                .attr("y1", y(d.max)).attr("y2", y(d.max))
+                .attr("stroke", "#C9A063").attr("stroke-width", 1);
+            // 箱体
+            g.append("rect")
+                .attr("x", cx - boxW / 2).attr("y", y(d.q3))
+                .attr("width", boxW).attr("height", y(d.q1) - y(d.q3))
+                .attr("fill", PIE_COLORS[i % PIE_COLORS.length]).attr("opacity", 0.55)
+                .attr("stroke", "#23201A").attr("stroke-width", 1)
+                .style("opacity", 0)
+                .transition().duration(DUR).delay(i * 80)
+                .style("opacity", 0.55);
+            // 中位线
+            g.append("line").attr("x1", cx - boxW / 2).attr("x2", cx + boxW / 2)
+                .attr("y1", y(d.median)).attr("y2", y(d.median))
+                .attr("stroke", "#c8463a").attr("stroke-width", 2.5)
+                .style("opacity", 0)
+                .transition().duration(DUR).delay(i * 80 + 200).style("opacity", 1);
+            // 中位数标签
+            g.append("text").attr("x", cx).attr("y", y(d.median) - 4)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.72rem").style("font-weight", "700").style("fill", "#c8463a")
+                .style("opacity", 0)
+                .text(d.median)
+                .transition().duration(DUR).delay(i * 80 + 300).style("opacity", 1);
+        });
+    }
+
+    // ============= 初始化 =============
+    function renderAll() {
+        renderPie();
+        renderHeatmap();
+        renderTimeline(currentSeg);
+        renderStacked();
+        renderBoxplot();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAll);
+    } else {
+        renderAll();
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(renderAll, 200);
+    });
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
