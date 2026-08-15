@@ -1,0 +1,2495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-8pTbNSoUt9tnVFp968IEzgR2FMuSNPWjZM8qCGpKHCE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Fate & Reincarnation · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep {
+            color: var(--ink-soft);
+            margin: 0 6px;
+        }
+        .breadcrumb .current {
+            color: var(--ink-soft);
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        
+        
+        .kpi-card.alt-2 { border-top-color: var(--accent-2); }
+        .kpi-card.alt-3 { border-top-color: var(--accent-4); }
+        .kpi-card.alt-4 { border-top-color: var(--accent-3); }
+        
+        .kpi-card.alt-2 .label { color: var(--accent-2); }
+        .kpi-card.alt-3 .label { color: var(--accent-4); }
+        .kpi-card.alt-4 .label { color: var(--accent-3); }
+        
+        
+        
+        
+        .section-title.alt-2 { border-bottom-color: var(--accent-2); }
+        .section-title.alt-3 { border-bottom-color: var(--accent-4); }
+        .section-title.alt-4 { border-bottom-color: var(--accent-3); }
+        
+        .definition {
+            background: #fdfaf4;
+            border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+        }
+        .definition strong { color: var(--ink); }
+        .chart-block {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .chart-caption {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 12px;
+        }
+        .chart-svg {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 10px;
+            font-size: 0.84rem;
+            justify-content: center;
+        }
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--ink-soft);
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .legend-swatch.line {
+            width: 18px;
+            height: 3px;
+            border-radius: 1px;
+        }
+        /* 表格 */
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        table.data-table th,
+        table.data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        table.data-table thead th {
+            background: #f5ede0;
+            color: var(--accent-3);
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.05em;
+        }
+        table.data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .icon-correct {
+            color: var(--accent-4);
+            font-weight: 700;
+        }
+        .icon-wrong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        /* 洞察列表 */
+        .insights-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: insight;
+        }
+        .insights-list li {
+            counter-increment: insight;
+            padding: 12px 16px 12px 48px;
+            position: relative;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+        .insights-list li:last-child { border-bottom: none; }
+        .insights-list li::before {
+            content: counter(insight, decimal-leading-zero);
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: var(--accent);
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        /* 角色卡片 */
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .char-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent);
+        }
+        .char-card.c-tian { border-top-color: var(--accent-2); }
+        .char-card.c-ren { border-top-color: var(--accent-4); }
+        .char-card.c-xiuluo { border-top-color: var(--accent-3); }
+        .char-card.c-chusheng { border-top-color: var(--accent); }
+        .char-card.c-egui { border-top-color: var(--accent-soft); }
+        .char-card.c-diyu { border-top-color: #4a2018; }
+        .char-card .char-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .char-card .char-profile {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+        }
+        .char-card .char-score {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .char-card .char-row {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .char-card .char-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        /* 概念映射卡片 */
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .map-card {
+            background: #fdfaf4;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 16px;
+            border-left: 4px solid var(--accent-2);
+        }
+        .map-card.alt { border-left-color: var(--accent-4); }
+        .map-card.alt2 { border-left-color: var(--accent-3); }
+        .map-card.alt3 { border-left-color: var(--accent); }
+        .map-card .map-label {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .map-card.alt .map-label { color: var(--accent-4); }
+        .map-card.alt2 .map-label { color: var(--accent-3); }
+        .map-card.alt3 .map-label { color: var(--accent); }
+        .map-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .map-card .map-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 4px;
+        }
+        .map-card .map-row strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5ede0 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 16px;
+            grid-column: 1 / -1;
+        }
+        .summary-card .map-label {
+            color: var(--accent);
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin-bottom: 4px;
+        }
+        .summary-card .map-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--ink);
+        }
+        .summary-card .map-row {
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+        /* tooltip */
+        .d3-tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background: rgba(28, 22, 16, 0.92);
+            color: #f5e9d4;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            max-width: 320px;
+            line-height: 1.5;
+            z-index: 100;
+        }
+        .
+        .
+        .
+        .source-list {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        /* axis 文字 */
+        .axis text { fill: var(--ink-soft); font-size: 11px; }
+        .axis line, .axis path { stroke: var(--line); }
+        .axis-label {
+            fill: var(--ink);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        /* code 样式 */
+        code {
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            background: #f0e6d2;
+            color: var(--accent-3);
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        /* 叙事段落 */
+        .narrative {
+            font-size: 0.92rem;
+            line-height: 1.85;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .narrative strong { color: var(--ink); font-weight: 600; }
+        /* 数据来源徽章 */
+        .data-badge {
+            display: inline-block;
+            background: #f5ede0;
+            color: var(--accent-3);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: "JetBrains Mono", "Consolas", monospace;
+            margin: 0 4px 4px 0;
+            border: 1px solid var(--line);
+        }
+        /* 桑基图节点 */
+        .sankey-node rect {
+            stroke: var(--ink);
+            stroke-width: 1;
+        }
+        .sankey-link {
+            fill: none;
+            stroke-opacity: 0.45;
+        }
+        /* 金字塔层 */
+        .pyramid-layer {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .pyramid-layer:hover { opacity: 0.85; }
+        @media (max-width: 720px) {
+            
+            
+            
+            
+            .map-grid { grid-template-columns: 1fr; }
+            .char-grid { grid-template-columns: 1fr; }
+            table.data-table { font-size: 0.78rem; }
+            table.data-table th, table.data-table td { padding: 6px 8px; }
+        }
+        @media (max-width: 480px) {
+            
+            
+            
+            
+            .chart-block { padding: 12px; }
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/karma-reincarnation.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Fate & Reincarnation · The Hidden Rules of Karmic Flow</p>
+        <p class="kicker">K · Fate & Reincarnation</p>
+        <h1>Fate & Reincarnation · The Hidden Rules of Karmic Flow</h1>
+        <p class="subtitle">DATA-DRIVEN KARMA & REINCARNATION OF XIYOUJI</p>
+        <p class="tagline">Karma outweighs Heaven's decree and the registers — an epic of cause and effect that can be transformed.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="container">
+        <nav class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a>
+            <span class="sep">/</span>
+            <a href="index.html">EN Home</a>
+            <span class="sep">/</span>
+            <span class="current">Fate & Reincarnation</span>
+        </nav>
+
+        <div class="notice">
+            This page is generated from the K-class "Fate & Reincarnation" script and contains 4 JSON datasets: Life-and-Death Register Tampering, the Law of Karma and Retribution, the Six Realms of Samsara, and overall statistics. All charts support hover tooltips.
+        </div>
+
+        <!-- Research methodology -->
+        <section class="section">
+            <h2 class="section-title">Introduction · A Four-Dimensional Lens on Fate & Reincarnation</h2>
+            <div class="section-sub">INTRODUCTION · Four-Dimensional Lens on Karma & Samsara</div>
+            <p style="font-size:0.95rem;line-height:1.8;color:var(--ink);margin-bottom:14px;">
+                Journey to the West is not a simple "determinism" story; it is a <strong>karmic epic that can be transformed</strong>. This page analyzes its view of fate and reincarnation through four dimensions:
+                <strong style="color:var(--accent);">Life-and-Death Register Tampering</strong> (an 87.5% governance gap rate in the Underworld),
+                <strong style="color:var(--accent-2);">the Law of Karma and Retribution</strong> (10 cases, 7 attaining the true fruit),
+                <strong style="color:var(--accent-4);">the Six Realms of Samsara</strong> (all 5 pilgrims transcending),
+                <strong style="color:var(--accent-3);">overall statistics</strong> (karma outweighing Heaven's decree and the registers).
+            </p>
+
+            <div style="margin-bottom:18px;">
+                <span class="data-badge">4 JSON datasets</span>
+                <span class="data-badge">4 core concepts</span>
+                <span class="data-badge">8 register-tampering cases</span>
+                <span class="data-badge">10 karma cases</span>
+                <span class="data-badge">6 realms of samsara</span>
+                <span class="data-badge">24 data points</span>
+                <span class="data-badge">D3.js v7</span>
+                <span class="data-badge">fetch + EMBEDDED fallback</span>
+            </div>
+
+            <div class="map-grid">
+                <div class="map-card alt3">
+                    <div class="map-label" style="color:var(--accent);">DIMENSION 1</div>
+                    <div class="map-title">Life-and-Death Register Tampering · Life-Death Registry</div>
+                    <div class="map-row">8 tampering cases; only 1 was carried out by the book; an 87.5% governance gap rate; three kinds of tamperers: self-deletion / judges' private edits / King Yama's special grants.</div>
+                </div>
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent-2);">DIMENSION 2</div>
+                    <div class="map-title">The Law of Karma and Retribution · Karma Law</div>
+                    <div class="map-row">10 cases; 10 types of karma; 7 ultimately attaining the true fruit; the view of karma is "transformable," not fixed.</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-4);">DIMENSION 3</div>
+                    <div class="map-title">The Six Realms of Samsara · Samsara Wheel</div>
+                    <div class="map-row">A 6-realm samsara structure; the 5 pilgrims were originally heavenly deities demoted to the mortal world; all ultimately transcended samsara to become Buddhas and attain the true fruit.</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-3);">DIMENSION 4</div>
+                    <div class="map-title">Overall Statistics · Synthesis</div>
+                    <div class="map-row">Karma outweighs Heaven's decree and the registers, but transformation comes at a cost: atonement / recruitment / reform / cultivation.</div>
+                </div>
+            </div>
+            <p style="font-size:0.88rem;color:var(--ink-soft);font-style:italic;margin-top:8px;">
+                Data source: scripts/K_Fate-Reincarnation/karma_reincarnation.py · generates 4 JSON outputs; this page automatically falls back to the embedded EMBEDDED data when fetch fails, and supports double-click opening via the file:// protocol.
+            </p>
+        </section>
+
+        <!-- KPI cards -->
+        <div class="kpi-row" id="kpiRow">
+            <div class="kpi-card">
+                <div class="label">REGISTRY · Register Tampering</div>
+                <div class="value">8 cases</div>
+                <div class="desc">The Underworld's Book of Life and Death tampered with / specially handled (Ch. 3-97)</div>
+            </div>
+            <div class="kpi-card alt-2">
+                <div class="label">KARMA · Karma Cases</div>
+                <div class="value">10 cases</div>
+                <div class="desc">10 types of karma; 7 ultimately attaining the true fruit (Ch. 7-100)</div>
+            </div>
+            <div class="kpi-card alt-3">
+                <div class="label">SAMSARA · Six Realms of Samsara</div>
+                <div class="value">6 realms</div>
+                <div class="desc">Deva / Human / Asura / Animal / Preta / Hell</div>
+            </div>
+            <div class="kpi-card alt-4">
+                <div class="label">GOVERNANCE · Governance Gap Rate</div>
+                <div class="value">87.5%</div>
+                <div class="desc">Only 1 of 8 cases was carried out by the book; the other 7 were special cases</div>
+            </div>
+        </div>
+
+        <!-- Section 1: Life-and-Death Register Tampering -->
+        <section class="section">
+            <h2 class="section-title">I · The Life-and-Death Register Tampering Flow</h2>
+            <div class="section-sub">LIFE-DEATH REGISTRY · The Hidden Rule That Karma Outweighs the Registers</div>
+            <div class="definition" id="def-registry">
+                <strong>Definition:</strong>The Underworld's Book of Life and Death is the hub of the reincarnation system, yet it has been repeatedly tampered with or specially handled, exposing a "loophole" mechanism through which karma can be intervened; every alteration corresponds to a karmic connection. In the original text the register is by no means immutable; there are three kinds of tamperers: self-deletion (Wukong) / judges' private edits (Judge Cui) / King Yama's special grants (Liu Quan / Kou Hong) — embodying the hidden rule that "karma outweighs the registers."
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>Key finding:</strong> Of the 8 cases, only <strong style="color:var(--accent);">the Jing River Dragon King</strong> was executed according to the book; the other 7 were all "tampering/special cases" — showing karma ranks above the registers.
+                <strong style="color:var(--accent-2);">Li Shimin's 20 extra years of life</strong> is the story's master inciting incident; without it there is no pilgrimage project;
+                <strong style="color:var(--accent-4);">Wukong's forcible deletion of his death record</strong> is the first "tampering," foreshadowing the later havoc in Heaven and marking the starting point of the Heavenly Court's governance collapse.
+                The governance gap rate reaches <strong style="color:var(--accent);">87.5%</strong> — revealing the Underworld does not execute purely by the book.
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">Timeline of Life-and-Death Register Tampering Cases (8 cases, ordered by chapter, with modifier labels)</div>
+                <div class="chart-caption">X axis: chapter order / Y axis: impact_severity severity 0-10 / dots: tampering cases / labels: modifier (tamperer)</div>
+                <svg id="chart-registry-timeline" class="chart-svg" width="100%" height="400"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>Tampering cases (by impact_severity)</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-2);"></span>Severity trend line</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>Impact scope shadow</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">Detailed Table of the 8 Register-Tampering Cases</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="registry-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Character</th>
+                            <th>Chapter</th>
+                            <th>Original fate</th>
+                            <th>Actual fate</th>
+                            <th>Tamperer</th>
+                            <th>Cause</th>
+                            <th>Severity</th>
+                            <th>Scope</th>
+                            <th>Long-term consequence</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Tampering-Type Distribution Cards</h3>
+            <div class="map-grid" id="tamper-types-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Register Insights</h3>
+            <ol class="insights-list" id="registry-insights-list"></ol>
+        </section>
+
+        <!-- Section 2: The Law of Karma and Retribution -->
+        <section class="section">
+            <h2 class="section-title alt-2">II · The Law of Karma and Retribution</h2>
+            <div class="section-sub">KARMA LAW · Good is rewarded with good, evil with evil; as is the cause, so is the fruit</div>
+            <div class="definition" id="def-karma">
+                <strong>Definition:</strong>The Journey to the West world follows the karmic law "good is rewarded with good, evil with evil, and as is the cause so is the fruit." The types of cause and effect fall into ten categories: punishment for disobedience / retribution in kind / benevolent transformation / atonement / cultivation through reincarnation / retribution for lust / punishment for negligence / predestined marriage / tribulation testing / reform. Karma outweighs Heaven's decree — the Jade Emperor's edict can be overturned by karma; karma outweighs the registers — the Book of Life and Death can be changed but karma cannot be escaped.
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>Core pattern across 10 cases:</strong> of the 10 cases, <strong style="color:var(--accent);">7 ultimately attain the true fruit or reform</strong> — showing the Journey to the West view of karma is "transformable," not fixed.
+                <strong style="color:var(--accent-2);">Wrongful accusation is repaid in kind</strong> — the King of Wuji drowned a monk for 3 days and was pushed into a well for 3 years, a ratio of 1:365;
+                <strong style="color:var(--accent-4);">the retribution for lust is heaviest</strong> — Bajie, after flirting with Chang'e, was wrongly cast into the animal realm;
+                <strong style="color:var(--accent-3);">even negligence is severely punished</strong> — Sha Wujing, after shattering a glass goblet, was demoted to the mortal world, showing the Heavenly Court's rites are strict.
+                Yet fixed karma (such as the Womanland love trial) cannot be changed — the tribulation cannot be avoided, only refused.
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">Pie Chart of Karma-Retribution Types (10 cases, grouped by karma_type, proportions)</div>
+                <div class="chart-caption">10 karma_type categories, 1 case each, 10% each; distinguished by color; hover shows case details</div>
+                <svg id="chart-karma-pie" class="chart-svg" width="100%" height="460"></svg>
+                <div class="legend-row" id="karma-pie-legend"></div>
+            </div>
+
+            <div class="chart-block">
+                <div class="chart-title">Sankey Diagram of Karma Transformation Paths (cause→effect, 10 cases, showing how karma transforms)</div>
+                <div class="chart-caption">Left nodes: karma_type (10 kinds) / right nodes: rebirth_destination (6 kinds) / link width = number of cases</div>
+                <svg id="chart-karma-sankey" class="chart-svg" width="100%" height="560"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>Karma-type nodes</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>Rebirth-destination nodes</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-soft);"></span>Karma-transformation links</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">Detailed Table of the 10 Karma Cases</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="karma-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Case</th>
+                            <th>Chapter</th>
+                            <th>Cause</th>
+                            <th>Effect</th>
+                            <th>Karma type</th>
+                            <th>Rebirth destination</th>
+                            <th>Karma principle</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Rebirth-Destination Distribution Cards</h3>
+            <div class="map-grid" id="rebirth-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Karma Insights</h3>
+            <ol class="insights-list" id="karma-insights-list"></ol>
+        </section>
+
+        <!-- Section 3: Six Realms of Samsara -->
+        <section class="section">
+            <h2 class="section-title alt-3">III · The Six Realms of Samsara</h2>
+            <div class="section-sub">SAMSARA WHEEL · All beings flow with karma; immortals and Buddha-retinues can leap beyond samsara</div>
+            <div class="definition" id="def-samsara">
+                <strong>Definition:</strong>The Buddhist six realms of samsara are the Deva, Human, Asura, Animal, Preta, and Hell realms. All beings flow with karma; the Journey to the West world is built on this, but "immortal-and-Buddha retinues" and "those who attain the true fruit through the pilgrimage" can leap beyond samsara. Among the six realms, Deva and Human are good, Asura is half-good, and Animal, Preta, and Hell are the three evil realms. Karma determines one's destination, while cultivation can transcend it.
+            </div>
+
+            <p style="font-size:0.92rem;color:var(--ink);margin-bottom:18px;line-height:1.8;">
+                <strong>The pilgrimage team's samsara specialness:</strong> 4 of the 5 members were originally heavenly deities demoted to the mortal world (animal realm / water ogre) ·
+                <strong style="color:var(--accent);">ultimately all transcended samsara</strong> to become Buddhas and attain the true fruit.
+                <strong style="color:var(--accent-2);">The animal realm is a good place for atonement</strong> — Bajie, Wujing, and the White Dragon Horse all transcended via the animal realm;
+                <strong style="color:var(--accent-4);">the human realm is the best place for cultivation</strong> — Tang Sanzang lived 10 lives in the human realm before becoming a Buddha;
+                <strong style="color:var(--accent-3);">the Deva realm is not final</strong> — when devas' blessings are exhausted they still fall, and must cultivate to transcend.
+            </p>
+
+            <div class="chart-block">
+                <div class="chart-title">Hierarchy of the 6 Realms (pyramid, ordered by good-to-evil, annotated with in_pilgrim_team)</div>
+                <div class="chart-caption">Top: Deva realm (most good) / bottom: Hell realm (most evil) / colors gradiate from good to evil / annotates each realm's count in the pilgrimage team</div>
+                <svg id="chart-samsara-pyramid" class="chart-svg" width="100%" height="500"></svg>
+                <div class="legend-row">
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>Good realms (Deva, Human)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>Half-good realm (Asura)</span>
+                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>Evil realms (Animal, Preta, Hell)</span>
+                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--accent-3);"></span>Pilgrim-team count annotation</span>
+                </div>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">Detailed Table of the 6 Realms</h3>
+            <div style="overflow-x:auto;">
+                <table class="data-table" id="samsara-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Realm</th>
+                                                        <th>Population</th>
+                            <th>Entry criteria</th>
+                            <th>Exit criteria</th>
+                            <th>Duration</th>
+                            <th>Characteristics</th>
+                            <th>Pilgrim team</th>
+                            <th>Notable cases</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:1.05rem;margin:18px 0 8px;color:var(--ink);">Feature Cards of the 6 Realms</h3>
+            <div class="char-grid" id="realm-grid"></div>
+
+            <h3 style="font-size:1.05rem;margin:22px 0 8px;color:var(--ink);">Samsara Insights</h3>
+            <ol class="insights-list" id="samsara-insights-list"></ol>
+        </section>
+
+        <!-- Synthesis -->
+        <section class="section">
+            <h2 class="section-title alt-4">IV · Synthesis · The Transformable View of Fate</h2>
+            <div class="section-sub">SYNTHESIS · The Transformable Karma of Xiyouji</div>
+
+            <p style="font-size:0.95rem;line-height:1.85;color:var(--ink);margin-bottom:18px;">
+                Observed across four dimensions, Journey to the West presents a distinctive <strong>transformable view of fate</strong>:
+                the register is not absolute (7 of 8 cases altered, an 87.5% gap rate), karma-and-retribution is not fixed (7 of 10 cases attain the true fruit),
+                samsara is not eternal punishment (all 5 transcended), and fate is not predestined (karma outweighs Heaven's decree and the registers).
+                Yet transformation has a price — <strong>atonement · recruitment · reform · cultivation</strong> — this is the hidden rule of the Journey to the West worldview.
+            </p>
+
+            <div class="map-grid">
+                <div class="map-card alt3">
+                    <div class="map-label" style="color:var(--accent);">FINDING 1 · Karma Outweighs the Registers</div>
+                    <div class="map-title">The register is a "reference book," not an "absolute book"</div>
+                    <div class="map-row">Of the 8 cases only the Jing River Dragon King was executed by the book; the other 7 were all "special cases" — showing karmic connections can take priority over the registers, with an 87.5% Underworld governance gap rate.</div>
+                </div>
+                <div class="map-card">
+                    <div class="map-label" style="color:var(--accent-2);">FINDING 2 · Karma Outweighs Heaven's Decree</div>
+                    <div class="map-title">The Jade Emperor's edict can be overturned by karma</div>
+                    <div class="map-row">The Jing River Dragon King violated the Jade Emperor's edict by changing the timing and amount of rain; though he defied the edict, his execution was the result of karma, not pure heavenly decree — showing karma takes priority over Heaven's decree.</div>
+                </div>
+                <div class="map-card alt">
+                    <div class="map-label" style="color:var(--accent-4);">FINDING 3 · Karma Can Be Transformed</div>
+                    <div class="map-title">Evil karma can be transformed through four paths</div>
+                    <div class="map-row">Of the 10 karma cases, 7 ultimately attain the true fruit; the transformation paths: atonement (Wukong's 500 years) / recruitment (Red Boy) / reform (the Bull Demon King) / cultivation (Tang Sanzang's 9 lives).</div>
+                </div>
+                <div class="map-card alt2">
+                    <div class="map-label" style="color:var(--accent-3);">FINDING 4 · Fixed Karma Cannot Be Changed</div>
+                    <div class="map-title">Tribulation testing is the boundary of karma</div>
+                    <div class="map-row">The Womanland marriage never happened; Tang Sanzang and the Queen of Womanland's karmic bond was unfinished, but fixed karma took priority — showing that while karma can be transformed, fixed karma (tribulations) cannot be changed: the boundary of the karma worldview.</div>
+                </div>
+                <div class="summary-card">
+                    <div class="map-label">META INSIGHT</div>
+                    <div class="map-title">Fate and reincarnation reveal Journey to the West as a story of "transformable karma"</div>
+                    <div class="map-row">
+                        The four lenses point to one deep theme: <strong>karma can be transformed, but at a cost</strong>.
+                        The register can be changed but needs a karmic connection (Li Shimin's extended life, Wukong's forcible deletion) · evil karma can be redeemed but must be repaid (Wukong's 500 years, Tang Sanzang's 9 lives) ·
+                        samsara can be transcended but needs cultivation (all 5 pilgrims attain the true fruit) · yet fixed karma cannot be changed (the Womanland love trial).
+                        This forms Journey to the West's deepest philosophy of fate: <strong>karma outweighs Heaven's decree and the registers, but karma has boundaries</strong>.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/04-文化与历史背景/佛道思想.md">Buddhist & Daoist Thought (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/karma-reincarnation.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<!-- ===== EMBEDDED FALLBACK DATA ===== -->
+    <!--
+        All JSON data on this page is embedded as EMBEDDED objects to fall back on when fetch fails.
+        When opened via the file:// protocol, fetch fails and the page automatically falls back to EMBEDDED data.
+        When opened via the http(s):// protocol, it first fetches ../../scripts/output/data/*.json.
+        Data source: the 4 JSON files generated by scripts/K_命运与轮回/karma_reincarnation.py.
+    -->
+    <script>
+    const EMBEDDED = {
+        registry: {
+            "concept_name": "Life-and-Death Register Reincarnation Flow",
+            "english_name": "Life-Death Registry Reincarnation Flow",
+            "definition": "The Underworld's Book of Life and Death is the hub of the reincarnation system, yet it has been repeatedly tampered with or specially handled, exposing a 'loophole' mechanism through which karma can be intervened; every alteration corresponds to a karmic connection",
+            "core_principle": "In the original text the register is by no means immutable; there are three kinds of tamperers: self-deletion (Wukong) / judges' private edits (Judge Cui) / King Yama's special grants (Liu Quan / Kou Hong) — embodying the hidden rule that 'karma outweighs the registers'",
+            "cases": [
+                {"n": 1, "character": "Sun Wukong", "identity": "Handsome Monkey King of Flower-Fruit Mountain, a grassroots figure with no official establishment", "original_fate": "Soul register no. 1350, allotted a lifespan of 342 years, to die a natural death", "actual_fate": "Forcibly deleted his death record, crossing out his own and all monkey-kind names, escaping samsara, and extending his life until he became a Buddha after the pilgrimage", "modifier": "Sun Wukong (self-deletion, forcible erasure of death record)", "cause": "Seeking immortality; dissatisfied with his lifespan after returning from Daoist study, he crossed out his own name and those of the Flower-Fruit Mountain monkeys", "chapter": "Ch. 3", "impact_severity": 10, "data_volume_affected": "47,000 monkey-kind records", "long_term_consequence": "The monkey tribe also left the Underworld's jurisdiction; the register was permanently altered with no remedy"},
+                {"n": 2, "character": "Li Shimin", "identity": "Taizong Emperor of the Great Tang", "original_fate": "His lifespan ended in the 13th year of the Zhenguan era; he was fated to die while touring the Underworld", "actual_fate": "Judge Cui privately changed 'Zhenguan 13' to 'Zhenguan 33,' extending his life by 20 years and returning his soul to the living", "modifier": "Judge Cui (Underworld judge, internal staff, private alteration)", "cause": "Wei Zheng, an old friend of Judge Cui, pleaded via dream; Li Shimin toured the Underworld and saw virtuous souls amassing merit", "chapter": "Ch. 10-11", "impact_severity": 7, "data_volume_affected": "1 record (an emperor's fate)", "long_term_consequence": "Li Shimin returned to life and held the Land-and-Water Assembly, launching the pilgrimage project — the story's master inciting incident"},
+                {"n": 3, "character": "Kou Hong (Squire Kou)", "identity": "Squire Kou of Diling County, Tongtai Prefecture, who fed ten thousand monks", "original_fate": "His lifespan was not yet up; kicked to death by robbers, his soul returned to the Underworld", "actual_fate": "King Yama granted his soul's return, extending his life by 12 years — one extra cycle for the Great Tang", "modifier": "Kṣitigarbha Bodhisattva / King Yama (special grant) + Wukong's intercession in the Underworld", "cause": "Merit from feeding ten thousand monks; mistakenly killed by robbers, his wronged soul filed a complaint", "chapter": "Ch. 97", "impact_severity": 5, "data_volume_affected": "1 record", "long_term_consequence": "Squire Kou's soul returned — showing the Underworld has a special channel for 'good people' and karma can be earned"},
+                {"n": 4, "character": "Liu Quan", "identity": "Liu Quan of Junzhou, who hanged himself after his wife Li Cuilian was suspected over a golden hairpin she gave to a monk", "original_fate": "Entered the Underworld delivering melons on behalf of the dead; fated to die in the melon-delivery task", "actual_fate": "King Yama investigated and found both spouses had immortal lifespans, granting both return to life; Li Cuilian was reborn by borrowing the corpse of Li Shimin's sister Li Yuying", "modifier": "King Yama (special grant, after examining karma)", "cause": "Merit for delivering melons; both deaths were wrongful, so King Yama specially granted a double return", "chapter": "Ch. 11", "impact_severity": 4, "data_volume_affected": "2 records (a couple's double return)", "long_term_consequence": "The couple reunited — showing the Underworld has a 'special soul-return' channel that is not systematized but handled case-by-case by karma"},
+                {"n": 5, "character": "Jing River Dragon King", "identity": "Dragon lord of the Jing River outside Chang'an, of the water-kind", "original_fate": "Should not have died; fated to live out his natural years", "actual_fate": "Defied the edict by altering the timing and amount of rain; executed by Wei Zheng in a dream at the Dragon-Slaying Terrace, his dragon head falling onto a Chang'an street", "modifier": "Wei Zheng (execution supervisor, human-and-divine official)", "cause": "Bet with Yuan Shoucheng and violated the Jade Emperor's edict on rain timing and amount, breaking heavenly law", "chapter": "Ch. 9-10", "impact_severity": 8, "data_volume_affected": "1 record (but triggered the Tang king's later Underworld tour)", "long_term_consequence": "The Dragon King's ghost haunted Li Shimin, causing his Underworld tour — the second major inciting incident of the pilgrimage project"},
+                {"n": 6, "character": "King of Wuji", "identity": "Ruler of Wuji, murdered in a well three years earlier", "original_fate": "Should not have died; pushed into the Eight-Treasure Glass Well and wrongfully dead for three years", "actual_fate": "Suffered three years at the bottom of the well; Wukong fetched a soul-returning elixir and used the well water to revive him, restoring him to the throne", "modifier": "Sun Wukong (fetched the elixir) + Bajie (carried the body from the well) + Manjushri Bodhisattva (tacitly let the green-maned lion act)", "cause": "Three years earlier the King of Wuji had drowned an incarnation of Manjushri for three days, incurring retribution in kind", "chapter": "Ch. 37-39", "impact_severity": 6, "data_volume_affected": "1 record (three years at the well bottom)", "long_term_consequence": "After returning to life he converted to Buddhism — revealing that wrongful retribution must be repaid 'in kind'"},
+                {"n": 7, "character": "King of Inspiration (Goldfish Spirit)", "identity": "A goldfish in Guanyin's lotus pond who surfaced daily to hear sutras and became a spirit", "original_fate": "Originally a bodhisattva's pet, outside the register of life and death and beyond the six realms", "actual_fate": "Descended on his own to the Tongtian River, becoming King of Inspiration, demanding boy-and-girl sacrifices and devouring countless people over 9 years", "modifier": "The Goldfish Spirit descended on its own (without Guanyin's instruction); Guanyin retrieved it back to the lotus pond", "cause": "Enlightened by hearing sutras, became a spirit and descended, using sacrifice as a pretext to seize bodies and eat people", "chapter": "Ch. 47-49", "impact_severity": 7, "data_volume_affected": "18 boys and girls of Chen Village over 9 years; fated to reincarnate by the register, but their bodies were seized and consumed", "long_term_consequence": "Guanyin retrieved it with a basket, outside the reincarnation system — revealing 'immortal-and-Buddha retinues' hold extra-legal power"},
+                {"n": 8, "character": "Zhu Bajie · Sha Wujing (combined case)", "identity": "Marshal Tianpeng · General Curtain-Lifter (martial deities of the Heavenly Court)", "original_fate": "Originally orthodox deities of the Heavenly Court, enjoying heavenly stipends and outside samsara", "actual_fate": "Zhu Bajie, for flirting with Chang'e, was demoted and wrongly cast into a sow's womb; Sha Wujing, for shattering a glass goblet, was demoted and pierced by a flying sword once every seven days", "modifier": "Jade Emperor (demotion decree)", "cause": "Bajie, drunk at the Peach Banquet, flirted with Chang'e; Wujing accidentally shattered a glass goblet at the Peach Banquet", "chapter": "Ch. 8 / Ch. 22", "impact_severity": 6, "data_volume_affected": "2 records (two deities demoted to the mortal world)", "long_term_consequence": "The two became core members of the pilgrimage team — revealing demotion is an 'atonement + training' mechanism, not pure punishment"}
+            ],
+            "registry_stats": {
+                "total_cases": 8,
+                "tampering_types": {
+                    "Self-deletion (forcible erasure)": 1,
+                    "Judge's private alteration": 1,
+                    "King Yama's special grant": 2,
+                    "Heavenly execution (beheading/demotion)": 2,
+                    "Mount descending to the world (seizing bodies/usurping)": 1,
+                    "Immortal-Buddha recruitment": 1
+                },
+                "modifying_party": ["Sun Wukong", "Judge Cui", "King Yama", "Wei Zheng", "Manjushri / green-maned lion", "Goldfish Spirit", "Jade Emperor"],
+                "common_pattern": "The register is not immutable; every tamperer has a corresponding 'karmic connection' — karma outweighs the registers",
+                "governance_gap": "Only 1 of 8 cases (the Jing River Dragon King) was executed by the book; the other 7 were 'special cases' — an 87.5% Underworld governance gap rate"
+            },
+            "registry_insights": [
+                "In the Underworld the register is a 'reference book,' not an 'absolute book'; karmic connections can take priority over the registers",
+                "Of the 8 cases only the 'Jing River Dragon King' was executed by the book; the rest were 'tampering/special cases' — showing karma ranks above the registers",
+                "Li Shimin's 20 extra years of life is the story's master inciting incident; without it there is no pilgrimage project",
+                "Wukong's forcible deletion of his death record is the first 'tampering,' foreshadowing the havoc in Heaven and marking the start of the Heavenly Court's governance collapse",
+                "The soul-returns of Kou Hong and Liu Quan reveal the Underworld's 'special channel for good people,' not pure by-the-book execution",
+                "The Goldfish Spirit case reveals 'immortal-and-Buddha retinues' hold extra-legal power and can bypass the register"
+            ]
+        },
+        karma: {
+            "concept_name": "The Law of Karma and Retribution",
+            "english_name": "Karma Law of Cause and Effect",
+            "definition": "The Journey to the West world follows the karmic law 'good is rewarded with good, evil with evil, and as is the cause so is the fruit.' The types of cause and effect fall into ten categories: punishment for disobedience / retribution in kind / benevolent transformation / atonement / cultivation through reincarnation / retribution for lust / punishment for negligence / predestined marriage / tribulation testing / reform",
+            "core_principle": "Karma outweighs Heaven's decree — the Jade Emperor's edict can be overturned by karma (e.g., the Jing River Dragon King's execution was karma's due); karma outweighs the registers (the register can be changed but karma cannot be escaped)",
+            "cases": [
+                {"n": 1, "case_name": "The Jing River Dragon King Defies and Is Executed", "cause": "Bet with Yuan Shoucheng, violated the Jade Emperor's edict, and altered the rain timing and amount", "effect": "Wei Zheng executed him in a dream at the Dragon-Slaying Terrace; his head fell onto a Chang'an street and his ghost haunted Li Shimin, causing his Underworld tour", "karma_type": "Punishment for disobedience", "rebirth_destination": "Returned to a heavenly constellation", "chapter": "Ch. 9-10", "karma_principle": "Heaven's decree can change, karma cannot be escaped; disobedience brings immediate retribution"},
+                {"n": 2, "case_name": "The King of Wuji's 3 Years in a Well", "cause": "Three years earlier the King of Wuji bound an incarnation of Manjushri (as a monk) and soaked him in the imperial river for three days", "effect": "Manjushri's mount, the green-maned lion, pushed the king into the Eight-Treasure Glass Well, where he wrongfully died for three years", "karma_type": "Retribution in kind", "rebirth_destination": "Returned to the human realm", "chapter": "Ch. 37-39", "karma_principle": "You soaked me three days, I push you three years — wrongful retribution repaid in kind"},
+                {"n": 3, "case_name": "Red Boy's Arson and Capture", "cause": "Burned Wukong with Samadhi true fire, harmed countless lives, and wanted to eat Tang Sanzang", "effect": "Guanyin subdued him with a lotus platform formed from heavenly blades, taking him as the Wealth-Bestowing Boy, never again entering samsara", "karma_type": "Benevolent transformation", "rebirth_destination": "Bodhisattva's retinue", "chapter": "Ch. 41-42", "karma_principle": "Evil karma can be transformed by higher karma; recruitment is 'evil karma turned to good fruit'"},
+                {"n": 4, "case_name": "Wukong's Havoc and 500 Years under a Mountain", "cause": "Wreaked havoc in the Heavenly Palace, stole peaches and elixirs, disrupted the Peach Banquet, and made himself the Heavenly Court's enemy", "effect": "The Tathāgata pressed him under Five Elements Mountain for 500 years, eating iron pellets when hungry and drinking molten copper when thirsty", "karma_type": "Punishment and atonement", "rebirth_destination": "Became a Buddha", "chapter": "Ch. 7 / Ch. 14", "karma_principle": "Great evil requires great atonement; 500 years repaid it, and after atonement he attained the true fruit"},
+                {"n": 5, "case_name": "Tang Sanzang's 9 Lifetimes of Cultivation", "cause": "Golden Cicada slighted the Dharma and was demoted to the mortal world by the Tathāgata", "effect": "His first 9 lives as a monk were all devoured by Sha Wujing at the Flowing Sands River, their skulls hung on Wujing's neck; in the 10th life Xuanzang completed the pilgrimage", "karma_type": "Cultivation through reincarnation", "rebirth_destination": "Became a Buddha", "chapter": "Ch. 8 / Ch. 22 / Ch. 100", "karma_principle": "Past-life karma is repaid in this life; 9 lives of hardship prepared the 10th life's Buddhahood"},
+                {"n": 6, "case_name": "Bajie's Flirtation and Demotion", "cause": "Drunk at the Peach Banquet, flirted with Chang'e; with lust rising, he knocked over the Dipper-and-Ox Palace", "effect": "The Jade Emperor demoted him to the mortal world, where he was wrongly cast into a sow's womb, became ugly, and turned demon at Cloud-Tunnel Cave on Mount Fuling", "karma_type": "Retribution for lust", "rebirth_destination": "Attained the true fruit (Envoy/Arhat)", "chapter": "Ch. 8 / Ch. 19 / Ch. 100", "karma_principle": "Lust breeds retribution for lust; wrongly cast into the animal realm, he attained the true fruit after atonement"},
+                {"n": 7, "case_name": "Sha Wujing's Shattered Goblet and Demotion", "cause": "Accidentally shattered a glass goblet at the Peach Banquet — a breach of ritual", "effect": "The Jade Emperor demoted him to the mortal world, where a flying sword pierced his chest every seven days; he became an ogre at the Flowing Sands River and ate passing travelers", "karma_type": "Punishment for negligence", "rebirth_destination": "Attained the true fruit (Envoy/Arhat)", "chapter": "Ch. 22 / Ch. 100", "karma_principle": "The Heavenly Court's rites are strict; even an accident is heavily punished, yet after atonement he attained the true fruit"},
+                {"n": 8, "case_name": "The Yellow-Robed Demon's 13 Years", "cause": "Kui Mulang eloped with the Jade Maiden of the Incense Hall, and both descended to the world as demons", "effect": "Kui Mulang was demoted to the world as the Yellow-Robed Demon, had a 13-year marriage with Princess Baihuaxiu, and ate people and did evil", "karma_type": "Predestined marriage", "rebirth_destination": "Returned to a heavenly constellation", "chapter": "Ch. 28-31", "karma_principle": "The karma of adultery attracted a 13-year predestined marriage; once the retribution ended, each returned to their proper place"},
+                {"n": 9, "case_name": "The Womanland Marriage That Never Was", "cause": "Tang Sanzang and the Queen of Womanland had unfinished karmic bonds, but a tribulation test lay ahead, so marriage was impossible", "effect": "Tang Sanzang feigned marriage to obtain the passport; a scorpion spirit abducted him, and the Queen of Womanland was left alone in her chamber", "karma_type": "Tribulation testing", "rebirth_destination": "Became a Buddha", "chapter": "Ch. 53-55", "karma_principle": "The pilgrim faces a love trial, but fixed karma takes priority; the tribulation cannot be avoided, only refused"},
+                {"n": 10, "case_name": "The Bull Demon King's Submission", "cause": "Family troubles with Rākṣasī, defeat in magical combat with Wukong, encirclement by the gods, and desperation on all sides", "effect": "The Bull Demon King revealed his true form as a great white bull, was subdued by Nezha, and submitted to the Heavenly Court and Vulture Peak", "karma_type": "Reform", "rebirth_destination": "Submitted as an orthodox deity's retinue", "chapter": "Ch. 60-61", "karma_principle": "Those with deep evil karma are subdued by force and reformed; not voluntary, but ultimately good fruit"}
+            ],
+            "karma_stats": {
+                "total_cases": 10,
+                "karma_type_distribution": {
+                    "Punishment for disobedience": 1, "Retribution in kind": 1, "Benevolent transformation": 1, "Punishment and atonement": 1, "Cultivation through reincarnation": 1,
+                    "Retribution for lust": 1, "Punishment for negligence": 1, "Predestined marriage": 1, "Tribulation testing": 1, "Reform": 1
+                },
+                "rebirth_destinations": {
+                    "Became a Buddha": 3, "Attained the true fruit (Envoy/Arhat)": 2, "Bodhisattva's retinue": 1,
+                    "Returned to a heavenly constellation": 2, "Returned to the human realm": 1, "Submitted as an orthodox deity's retinue": 1
+                },
+                "common_pattern": "7 of the 10 cases ultimately 'attain the true fruit or reform' — showing the Journey to the West view of karma is 'transformable,' not fixed",
+                "karma_balance": "Evil karma can be transformed through 'atonement, recruitment, and forcible reform,' but fixed karma (such as the Womanland love trial) cannot be changed"
+            },
+            "karma_insights": [
+                "The Journey to the West view of karma is 'transformable,' not 'fixed'; 7 of 10 cases ultimately attain the true fruit",
+                "Karma outweighs Heaven's decree; though the Jing River Dragon King defied the Jade Emperor, his execution was karma's due",
+                "Karma outweighs the registers; the register can be changed but karma cannot be escaped — Tang Sanzang still had to repay karma across 9 lives",
+                "Wrongful retribution is repaid in kind; the King of Wuji soaked a monk 3 days and was pushed into a well 3 years — a 1:365 ratio",
+                "Retribution for lust is heaviest; Bajie's flirtation with Chang'e cast him into the animal realm — lust breeding retribution for lust",
+                "Even negligence is heavily punished; Sha Wujing's shattered goblet demoted him — showing the Heavenly Court's rites are strict",
+                "Tribulations cannot be changed but can be avoided; the Womanland marriage was a tribulation test, not fixed karma"
+            ]
+        },
+        samsara: {
+            "concept_name": "The Six Realms of Samsara",
+            "english_name": "Six Realms Samsara Wheel",
+            "definition": "The Buddhist six realms of samsara: Deva, Human, Asura, Animal, Preta, and Hell. All beings flow with karma; the Journey to the West world is built on this, but 'immortal-and-Buddha retinues' and 'those who attain the true fruit through the pilgrimage' can leap beyond samsara",
+            "core_principle": "Among the six realms, Deva and Human are good, Asura is half-good, and Animal, Preta, and Hell are the three evil realms. Karma determines one's destination, while cultivation can transcend it",
+            "realms": [
+                {"n": 1, "name": "Deva Realm", "english_name": "Deva Realm", "population": "The gods and Buddhas of heaven, countless devas", "entry_criteria": "Highest-grade ten good deeds, or complete cultivation, or the return of an orthodox deity to position", "exit_criteria": "Falls when blessings are exhausted, or flows with karma when heavenly lifespan ends", "duration": "One or more kalpas — extremely long", "notable_cases": ["Jade Emperor", "Lord Lao", "Tathāgata Buddha", "Heavenly officials", "Guanyin Bodhisattva"], "characteristics": "Devas enjoy great blessings, but are still within samsara — not final liberation", "in_pilgrim_team": 0},
+                {"n": 2, "name": "Human Realm", "english_name": "Human Realm", "population": "The beings of the mortal world — humans across the four great continents", "entry_criteria": "Middle-grade good deeds, keeping the five precepts, or rebirth after a deva's blessings are exhausted", "exit_criteria": "Flows with karma, reborn according to karma, or transcends through cultivation", "duration": "A single life of several decades to a century — brief", "notable_cases": ["Li Shimin", "Tang Sanzang (9 lives)", "Chen Guangrui", "Yin Wenjiao", "Squire Kou", "Liu Quan"], "characteristics": "The human realm is half joy and half suffering, easiest for cultivation, and a necessary condition for Buddhahood", "in_pilgrim_team": 1},
+                {"n": 3, "name": "Asura Realm", "english_name": "Asura Realm", "population": "The asuras, with heavenly fortune but not heavenly virtue", "entry_criteria": "Good deeds tainted by anger, or cultivation with success but an untamed temper", "exit_criteria": "Anger turned to good can ascend to heaven; heavy anger falls to the evil realms", "duration": "Long-lived, but blessings are finite", "notable_cases": ["Great Peng Golden-Winged Roc (retinue of the Peacock Bodhisattva, Buddha-mother)", "some demon lineages"], "characteristics": "Asuras are warlike, always contending with heaven — a realm of fortune without virtue", "in_pilgrim_team": 0},
+                {"n": 4, "name": "Animal Realm", "english_name": "Animal Realm", "population": "Birds, beasts, water-creatures, insects, and all manner of demons", "entry_criteria": "Low-grade evil deeds, ignorance, lust breeding retribution for lust, or negligence drawing heavy punishment", "exit_criteria": "Reborn when karma is exhausted, or recruited and reformed", "duration": "Indefinite, according to the length of karma", "notable_cases": ["Zhu Bajie wrongly cast into a sow's womb", "Sha Wujing, river ogre of the Flowing Sands", "White Dragon Horse", "various demons", "Jing River Dragon King's karmic flow"], "characteristics": "The animal realm is ignorant and often driven — a good place for atonement", "in_pilgrim_team": 3},
+                {"n": 5, "name": "Preta Realm", "english_name": "Preta Realm", "population": "The pretas, with huge bellies and thin throats, always tormented by hunger and thirst", "entry_criteria": "Middle-grade evil deeds, greed and stinginess, or heavy greed in life", "exit_criteria": "Reborn when karma is exhausted, or delivered through rites", "duration": "Long, always tormented by hunger and thirst", "notable_cases": ["After Meng Po's soup, past lives forgotten; lonely ghosts on the Yellow Springs road"], "characteristics": "The preta realm is greedy and stingy, always craving and never obtaining — the fruit of greed", "in_pilgrim_team": 0},
+                {"n": 6, "name": "Hell Realm", "english_name": "Hell Realm", "population": "Suffering beings, tormented according to the severity of their sins", "entry_criteria": "Highest-grade evil deeds, the five gravest offenses and ten evils, or grave breaches of heavenly law", "exit_criteria": "Released when karma is exhausted, or delivered by Kṣitigarbha Bodhisattva", "duration": "Long — measured in kalpas, the longest", "notable_cases": ["Eighteen Levels of Hell", "copper pillar and iron bed", "mountain of knives and sea of fire", "sawing hell"], "characteristics": "The hell realm is the most bitter, released only when karma is exhausted — the ultimate fruit of evil karma", "in_pilgrim_team": 0}
+            ],
+            "samsara_stats": {
+                "total_realms": 6,
+                "good_realms": ["Deva Realm", "Human Realm"],
+                "neutral_realm": ["Asura Realm"],
+                "evil_realms": ["Animal Realm", "Preta Realm", "Hell Realm"],
+                "pilgrim_team_distribution": {"Deva Realm": 0, "Human Realm": 1, "Asura Realm": 0, "Animal Realm": 3, "Preta Realm": 0, "Hell Realm": 0, "Transcended samsara (attained true fruit)": 5},
+                "escape_paths": ["Attained the true fruit through pilgrimage", "Recruited as bodhisattva retinue", "Conversion to Buddhism", "Forcible reform"],
+                "common_pattern": "4 of the 5 pilgrims were originally heavenly deities demoted to the mortal world (animal realm / water ogre); ultimately all transcended samsara"
+            },
+            "samsara_insights": [
+                "The pilgrimage team is the special case of 'leaping beyond samsara'; all 5 ultimately became Buddhas or attained the true fruit, transcending the six realms",
+                "The animal realm is a good place for atonement; Bajie, Wujing, and the White Dragon Horse all transcended via the animal realm",
+                "The human realm is the best place for cultivation; Tang Sanzang lived 10 lives in the human realm before becoming a Buddha",
+                "The Deva realm is not final; when devas' blessings are exhausted they still fall, and must cultivate to transcend",
+                "The Asura realm is a realm of 'fortune without virtue,' corresponding to some demon lineages",
+                "The Preta and Hell realms are the ultimate fruit of evil karma, but one may leave when karma is exhausted — not eternal punishment"
+            ]
+        },
+        summary: {
+            "concept_name": "Overall Statistics on Fate and Reincarnation",
+            "total_concepts": 4,
+            "concept_list": ["Life-and-Death Register Reincarnation Flow", "The Law of Karma and Retribution", "The Six Realms of Samsara", "Overall Statistics"],
+            "total_data_points": 24,
+            "key_findings": [
+                "8 register-tampering cases; only 1 (the Jing River Dragon King) was executed by the book — an 87.5% Underworld governance gap rate",
+                "10 karma cases; 7 ultimately attain the true fruit — showing the view of karma is 'transformable'",
+                "Across the 6 realms of samsara, all 5 pilgrims ultimately transcended samsara to become Buddhas and attain the true fruit",
+                "Karma outweighs Heaven's decree and the registers — the hidden rule of the Journey to the West worldview"
+            ],
+            "cross_concept_insight": "Fate and reincarnation reveal Journey to the West as a story of 'transformable karma,' not 'unalterable destiny' — but transformation has a cost (atonement, recruitment, reform, cultivation)",
+            "key_numbers": {
+                "life_death_cases": 8, "karma_cases": 10, "samsara_realms": 6,
+                "wukong_age_at_death": 342, "li_shimin_extended_years": 20,
+                "wukong_mountain_years": 500, "tang_monk_incarnations": 10,
+                "wujing_flying_sword_cycle_days": 7, "baoxiang_kingdom_years": 13,
+                "child_sacrifices_per_year_tongtian_river": 2
+            },
+            "thematic_summary": {
+                "View of fate": "Karma outweighs Heaven's decree and the registers, but can be transformed through cultivation / recruitment / reform",
+                "View of samsara": "The six realms are the basic framework, but 'immortal-and-Buddha retinues' and 'those who attain the true fruit through the pilgrimage' can leap beyond samsara",
+                "View of retribution": "Good is rewarded with good, evil with evil, as is the cause so is the fruit — but evil karma can be transformed through atonement",
+                "View of cultivation": "The human realm is the best place for cultivation; the pilgrimage is a compound mechanism of atonement + training + attaining the true fruit"
+            }
+        }
+    };
+
+    // ===== loadJson: fetch first, fallback to EMBEDDED =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return await res.json();
+        } catch (e) {
+            console.warn('[fallback] ' + path + ' → embedded data:', e.message);
+            return fallback;
+        }
+    }
+
+    // ===== Tooltip helper =====
+    function makeTooltip() {
+        const tip = d3.select('body').append('div')
+            .attr('class', 'd3-tooltip')
+            .style('opacity', 0);
+        return {
+            show: function(html, event) {
+                tip.html(html)
+                   .style('left', (event.pageX + 12) + 'px')
+                   .style('top', (event.pageY - 18) + 'px')
+                   .style('opacity', 1);
+            },
+            hide: function() { tip.style('opacity', 0); }
+        };
+    }
+    const tooltip = makeTooltip();
+
+    // ===== Main render =====
+    async function main() {
+        const baseUrl = '../../scripts/output/data/';
+        const [registry, karma, samsara, summary] = await Promise.all([
+            loadJson(baseUrl + 'karma_life_death_registry.json', EMBEDDED.registry),
+            loadJson(baseUrl + 'karma_law.json', EMBEDDED.karma),
+            loadJson(baseUrl + 'samsara_wheel.json', EMBEDDED.samsara),
+            loadJson(baseUrl + 'karma_reincarnation_summary.json', EMBEDDED.summary)
+        ]);
+        window.__lastData = { registry, karma, samsara, summary };
+
+        renderRegistryTimeline(registry);
+        renderRegistryTable(registry);
+        renderTamperTypes(registry);
+        renderRegistryInsights(registry);
+        renderKarmaPie(karma);
+        renderKarmaSankey(karma);
+        renderKarmaTable(karma);
+        renderRebirthGrid(karma);
+        renderKarmaInsights(karma);
+        renderSamsaraPyramid(samsara);
+        renderSamsaraTable(samsara);
+        renderRealmCards(samsara);
+        renderSamsaraInsights(samsara);
+    }
+
+    // ===== Section 1: Life-and-Death Register tampering timeline =====
+    function renderRegistryTimeline(data) {
+        const svg = d3.select('#chart-registry-timeline');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 700), H = 400;
+        const m = {top: 50, right: 60, bottom: 90, left: 60};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const cases = data.cases;
+
+        // Use n as the ordinal index (by order of appearance)
+        const x = d3.scalePoint().domain(cases.map(d => 'Case ' + d.n)).range([0, w]).padding(0.4);
+        const y = d3.scaleLinear().domain([0, 10]).range([h, 0]);
+
+        // grid
+        g.append('g').selectAll('line.grid')
+            .data(y.ticks(5))
+            .enter().append('line')
+            .attr('class', 'grid')
+            .attr('x1', 0).attr('x2', w)
+            .attr('y1', d => y(d)).attr('y2', d => y(d))
+            .attr('stroke', '#e8ddc8').attr('stroke-dasharray', '3,3');
+
+        // Impact scope shadow (based on impact_severity)
+        const areaGen = d3.area()
+            .x(d => x('Case ' + d.n))
+            .y0(d => y(d.impact_severity))
+            .y1(h)
+            .curve(d3.curveMonotoneX);
+        g.append('path')
+            .datum(cases)
+            .attr('d', areaGen)
+            .attr('fill', '#e9b885')
+            .attr('fill-opacity', 0.25);
+
+        // axes
+        g.append('g').attr('class', 'axis')
+            .attr('transform', `translate(0,${h})`)
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
+            .selectAll('text').style('font-size', '11px');
+        g.append('g').attr('class', 'axis')
+            .call(d3.axisLeft(y).ticks(5));
+
+        // axis labels
+        g.append('text').attr('class', 'axis-label')
+            .attr('x', w / 2).attr('y', h + 70)
+            .attr('text-anchor', 'middle')
+            .text('Tampering case number (by chapter order)');
+        g.append('text').attr('class', 'axis-label')
+            .attr('transform', 'rotate(-90)')
+            .attr('x', -h/2).attr('y', -42)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'var(--accent)')
+            .text('impact_severity severity (0-10)');
+
+        // Trend line
+        const line = d3.line().x(d => x('Case ' + d.n)).y(d => y(d.impact_severity)).curve(d3.curveMonotoneX);
+        g.append('path').datum(cases)
+            .attr('fill', 'none')
+            .attr('stroke', '#3a6b8c')
+            .attr('stroke-width', 2)
+            .attr('stroke-dasharray', '5,3')
+            .attr('d', line);
+
+        // Dots + tooltip
+        g.selectAll('.pt-case')
+            .data(cases).enter().append('circle')
+            .attr('class', 'pt-case')
+            .attr('cx', d => x('Case ' + d.n))
+            .attr('cy', d => y(d.impact_severity))
+            .attr('r', 9)
+            .attr('fill', '#c8463a')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2.5)
+            .style('cursor', 'pointer')
+            .on('mouseover', (e, d) => {
+                tooltip.show(
+                    `<strong>Case ${d.n} · ${d.character}</strong><br>` +
+                    `Chapter: ${d.chapter}<br>` +
+                    `Severity: <strong style="color:#e9b885">${d.impact_severity} / 10</strong><br>` +
+                    `Tamperer: ${d.modifier}<br>` +
+                    `Original fate: ${d.original_fate}<br>` +
+                    `Actual fate: ${d.actual_fate}<br>` +
+                    `Scope: ${d.data_volume_affected}<br>` +
+                    `<em>Long-term: ${d.long_term_consequence}</em>`, e);
+            })
+            .on('mouseout', tooltip.hide);
+
+        // Modifier labels (above each dot)
+        g.selectAll('.lbl-mod')
+            .data(cases).enter().append('text')
+            .attr('class', 'lbl-mod')
+            .attr('x', d => x('Case ' + d.n))
+            .attr('y', d => y(d.impact_severity) - 16)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '9.5px')
+            .style('fill', '#C9A063')
+            .style('font-weight', '600')
+            .text(d => d.modifier.split('(')[0].trim());
+
+        // Severity value labels
+        g.selectAll('.lbl-val')
+            .data(cases).enter().append('text')
+            .attr('class', 'lbl-val')
+            .attr('x', d => x('Case ' + d.n))
+            .attr('y', d => y(d.impact_severity) + 4)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10px')
+            .style('fill', '#fff')
+            .style('font-weight', '700')
+            .text(d => d.impact_severity);
+
+        // Chapter labels (below the X axis)
+        g.selectAll('.lbl-chap')
+            .data(cases).enter().append('text')
+            .attr('class', 'lbl-chap')
+            .attr('x', d => x('Case ' + d.n))
+            .attr('y', h + 28)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10px')
+            .style('fill', '#6B6455')
+            .text(d => d.chapter);
+
+        // Character name labels
+        g.selectAll('.lbl-char')
+            .data(cases).enter().append('text')
+            .attr('class', 'lbl-char')
+            .attr('x', d => x('Case ' + d.n))
+            .attr('y', h + 44)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10.5px')
+            .style('font-weight', '600')
+            .style('fill', '#23201A')
+            .text(d => d.character);
+    }
+
+    function renderRegistryTable(data) {
+        const tbody = d3.select('#registry-table tbody');
+        const rows = tbody.selectAll('tr').data(data.cases).enter().append('tr');
+        rows.append('td').text(d => d.n);
+        rows.append('td').html(d => '<strong>' + d.character + '</strong>');
+        rows.append('td').text(d => d.chapter);
+        rows.append('td').text(d => d.original_fate);
+        rows.append('td').text(d => d.actual_fate);
+        rows.append('td').text(d => d.modifier);
+        rows.append('td').text(d => d.cause);
+        rows.append('td').html(d => '<strong style="color:var(--accent);">' + d.impact_severity + ' / 10</strong>');
+        rows.append('td').text(d => d.data_volume_affected);
+        rows.append('td').text(d => d.long_term_consequence);
+    }
+
+    function renderTamperTypes(data) {
+        const grid = d3.select('#tamper-types-grid');
+        const types = Object.entries(data.registry_stats.tampering_types);
+        const colorMap = ['#c8463a', '#3a6b8c', '#6B8E5A', '#C9A063', '#e9b885', '#a85a3a'];
+        const cards = grid.selectAll('.map-card').data(types).enter()
+            .append('div')
+            .attr('class', 'map-card')
+            .style('border-left-color', (d, i) => colorMap[i % colorMap.length]);
+        cards.append('div').attr('class', 'map-label').text(d => 'TYPE ' + (types.indexOf(d) + 1));
+        cards.append('div').attr('class', 'map-title').text(d => d[0]);
+        cards.append('div').attr('class', 'map-row').html(d => '<strong>Cases: </strong>' + d[1]);
+        cards.append('div').attr('class', 'map-row').html(d => '<strong>Share: </strong>' + (d[1] / 8 * 100).toFixed(1) + '%');
+    }
+
+    function renderRegistryInsights(data) {
+        const list = d3.select('#registry-insights-list');
+        list.selectAll('li').data(data.registry_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 2: Karma-retribution pie chart =====
+    function renderKarmaPie(data) {
+        const svg = d3.select('#chart-karma-pie');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 700;
+        const W = Math.max(containerW, 600), H = 460;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const cx = W / 2, cy = H / 2 + 10;
+        const radius = Math.max(0, Math.min(W, H) / 2 - 80);
+
+        const cases = data.cases;
+        // Group by karma_type
+        const types = Array.from(new Set(cases.map(d => d.karma_type)));
+        const colorScale = d3.scaleOrdinal()
+            .domain(types)
+            .range(['#c8463a', '#3a6b8c', '#6B8E5A', '#C9A063', '#e9b885',
+                    '#a85a3a', '#6b8e9c', '#8b6b3a', '#4a7a5c', '#9c5a4a']);
+
+        const pie = d3.pie().value(d => 1).sort(null);
+        const arc = d3.arc().innerRadius(0).outerRadius(radius);
+        const arcHover = d3.arc().innerRadius(0).outerRadius(radius + 12);
+        const arcLabel = d3.arc().innerRadius(radius + 20).outerRadius(radius + 20);
+
+        const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+        const slices = g.selectAll('.slice')
+            .data(pie(cases)).enter().append('g')
+            .attr('class', 'slice');
+
+        slices.append('path')
+            .attr('d', arc)
+            .attr('fill', d => colorScale(d.data.karma_type))
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2)
+            .style('cursor', 'pointer')
+            .on('mouseover', function(e, d) {
+                d3.select(this).transition().duration(150).attr('d', arcHover);
+                tooltip.show(
+                    `<strong>${d.data.case_name}</strong><br>` +
+                    `Karma type: <strong style="color:${colorScale(d.data.karma_type)}">${d.data.karma_type}</strong><br>` +
+                    `Chapter: ${d.data.chapter}<br>` +
+                    `<strong>Cause: </strong>${d.data.cause}<br>` +
+                    `<strong>Effect: </strong>${d.data.effect}<br>` +
+                    `<strong>Destination: </strong>${d.data.rebirth_destination}<br>` +
+                    `<em>Principle: ${d.data.karma_principle}</em>`, e);
+            })
+            .on('mouseout', function() {
+                d3.select(this).transition().duration(150).attr('d', arc);
+                tooltip.hide();
+            });
+
+        // Labels: karma_type + case name
+        slices.append('text')
+            .attr('transform', d => `translate(${arcLabel.centroid(d)})`)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10px')
+            .style('font-weight', '600')
+            .style('fill', '#23201A')
+            .text(d => d.data.karma_type)
+            .style('pointer-events', 'none');
+
+        // Center label
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', -8)
+            .style('font-size', '14px')
+            .style('font-weight', '700')
+            .style('fill', '#c8463a')
+            .text('10 karma types');
+        g.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', 14)
+            .style('font-size', '11px')
+            .style('fill', '#6B6455')
+            .text('1 case each · 10% each');
+
+        // legend
+        const legend = d3.select('#karma-pie-legend');
+        legend.selectAll('*').remove();
+        types.forEach((t, i) => {
+            const item = legend.append('span').attr('class', 'legend-item');
+            item.append('span').attr('class', 'legend-swatch').style('background', colorScale(t));
+            item.append('span').text(t + ' · 1 case');
+        });
+    }
+
+    // ===== Section 2: Karma-transformation Sankey =====
+    function renderKarmaSankey(data) {
+        const svg = d3.select('#chart-karma-sankey');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 900;
+        const W = Math.max(containerW, 800), H = 560;
+        const m = {top: 30, right: 140, bottom: 30, left: 140};
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const cases = data.cases;
+
+        // Left nodes: karma_type (10 kinds)
+        const leftNodes = Array.from(new Set(cases.map(d => d.karma_type)));
+        // Right nodes: rebirth_destination (6 kinds)
+        const rightNodes = Array.from(new Set(cases.map(d => d.rebirth_destination)));
+
+        const nodeH = Math.min(36, (h - 20) / Math.max(leftNodes.length, rightNodes.length) - 4);
+        const nodeGap = (h - leftNodes.length * nodeH) / (leftNodes.length - 1);
+
+        const leftColor = d3.scaleOrdinal()
+            .domain(leftNodes)
+            .range(['#c8463a', '#3a6b8c', '#6B8E5A', '#C9A063', '#e9b885',
+                    '#a85a3a', '#6b8e9c', '#8b6b3a', '#4a7a5c', '#9c5a4a']);
+        const rightColor = d3.scaleOrdinal()
+            .domain(rightNodes)
+            .range(['#c8463a', '#3a6b8c', '#6B8E5A', '#C9A063', '#e9b885', '#a85a3a']);
+
+        // Left node positions
+        const leftPos = {};
+        leftNodes.forEach((n, i) => {
+            leftPos[n] = i * (nodeH + nodeGap);
+        });
+        // Right node positions
+        const rightPos = {};
+        const rightGap = (h - rightNodes.length * nodeH) / (rightNodes.length - 1);
+        rightNodes.forEach((n, i) => {
+            rightPos[n] = i * (nodeH + rightGap);
+        });
+
+        // Title
+        g.append('text')
+            .attr('x', 0).attr('y', -10)
+            .attr('text-anchor', 'start')
+            .style('font-size', '12px')
+            .style('font-weight', '700')
+            .style('fill', '#c8463a')
+            .text('Left: karma_type (10 kinds)');
+        g.append('text')
+            .attr('x', w).attr('y', -10)
+            .attr('text-anchor', 'end')
+            .style('font-size', '12px')
+            .style('font-weight', '700')
+            .style('fill', '#3a6b8c')
+            .text('Right: rebirth_destination (6 kinds)');
+
+        // Links (Bézier curves)
+        const linkWidth = nodeH * 0.85;
+        cases.forEach((c, i) => {
+            const ly = leftPos[c.karma_type] + nodeH / 2;
+            const ry = rightPos[c.rebirth_destination] + nodeH / 2;
+            const lx = 0, rx = w;
+            const midX = w / 2;
+            const path = `M ${lx} ${ly - linkWidth/2}
+                          C ${midX} ${ly - linkWidth/2}, ${midX} ${ry - linkWidth/2}, ${rx} ${ry - linkWidth/2}
+                          L ${rx} ${ry + linkWidth/2}
+                          C ${midX} ${ry + linkWidth/2}, ${midX} ${ly + linkWidth/2}, ${lx} ${ly + linkWidth/2}
+                          Z`;
+            g.append('path')
+                .attr('class', 'sankey-link')
+                .attr('d', path)
+                .attr('fill', leftColor(c.karma_type))
+                .attr('stroke', leftColor(c.karma_type))
+                .attr('stroke-width', 0.5)
+                .style('cursor', 'pointer')
+                .on('mouseover', function(e) {
+                    d3.select(this).attr('stroke-opacity', 1).attr('stroke-width', 1.5);
+                    tooltip.show(
+                        `<strong>${c.case_name}</strong><br>` +
+                        `Karma type: <strong style="color:${leftColor(c.karma_type)}">${c.karma_type}</strong> → <strong style="color:${rightColor(c.rebirth_destination)}">${c.rebirth_destination}</strong><br>` +
+                        `Chapter: ${c.chapter}<br>` +
+                        `<strong>Cause: </strong>${c.cause}<br>` +
+                        `<strong>Effect: </strong>${c.effect}<br>` +
+                        `<em>Principle: ${c.karma_principle}</em>`, e);
+                })
+                .on('mouseout', function() {
+                    d3.select(this).attr('stroke-opacity', 0.45).attr('stroke-width', 0.5);
+                    tooltip.hide();
+                });
+        });
+
+        // Left nodes
+        leftNodes.forEach((n) => {
+            const ng = g.append('g').attr('class', 'sankey-node')
+                .style('cursor', 'pointer');
+            ng.append('rect')
+                .attr('x', -110).attr('y', leftPos[n])
+                .attr('width', 110).attr('height', nodeH)
+                .attr('fill', leftColor(n))
+                .attr('rx', 3);
+            ng.append('text')
+                .attr('x', -55).attr('y', leftPos[n] + nodeH / 2 + 4)
+                .attr('text-anchor', 'middle')
+                .style('font-size', '11px')
+                .style('font-weight', '600')
+                .style('fill', '#fff')
+                .text(n);
+            ng.on('mouseover', (e) => {
+                const matched = cases.filter(c => c.karma_type === n);
+                const casesHtml = matched.map(c => '· ' + c.case_name + ' → ' + c.rebirth_destination).join('<br>');
+                tooltip.show(
+                    `<strong style="color:${leftColor(n)}">${n}</strong> · karma type<br>` +
+                    `Cases: <strong>${matched.length}</strong><br>` +
+                    `<em>Related cases: </em><br>${casesHtml}`, e);
+            }).on('mouseout', tooltip.hide);
+        });
+
+        // Right nodes
+        rightNodes.forEach((n) => {
+            const count = cases.filter(c => c.rebirth_destination === n).length;
+            const ng = g.append('g').attr('class', 'sankey-node')
+                .style('cursor', 'pointer');
+            ng.append('rect')
+                .attr('x', 0).attr('y', rightPos[n])
+                .attr('width', 110).attr('height', nodeH)
+                .attr('fill', rightColor(n))
+                .attr('rx', 3);
+            ng.append('text')
+                .attr('x', 55).attr('y', rightPos[n] + nodeH / 2 + 4)
+                .attr('text-anchor', 'middle')
+                .style('font-size', '10.5px')
+                .style('font-weight', '600')
+                .style('fill', '#fff')
+                .text(n + ' (' + count + ')');
+            ng.on('mouseover', (e) => {
+                const matched = cases.filter(c => c.rebirth_destination === n);
+                const casesHtml = matched.map(c => '· ' + c.case_name + ' ← ' + c.karma_type).join('<br>');
+                tooltip.show(
+                    `<strong style="color:${rightColor(n)}">${n}</strong> · rebirth destination<br>` +
+                    `Cases: <strong>${count}</strong> / 10<br>` +
+                    `Share: <strong>${(count / 10 * 100).toFixed(0)}%</strong><br>` +
+                    `<em>Related cases: </em><br>${casesHtml}`, e);
+            }).on('mouseout', tooltip.hide);
+        });
+
+        // Central note
+        g.append('text')
+            .attr('x', w / 2).attr('y', h + 22)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '11px')
+            .style('fill', '#6B6455')
+            .style('font-style', 'italic')
+            .text('Each link = 1 karma case · how karma flows from cause (karma_type) to fruit (rebirth_destination)');
+    }
+
+    function renderKarmaTable(data) {
+        const tbody = d3.select('#karma-table tbody');
+        const rows = tbody.selectAll('tr').data(data.cases).enter().append('tr');
+        rows.append('td').text(d => d.n);
+        rows.append('td').html(d => '<strong>' + d.case_name + '</strong>');
+        rows.append('td').text(d => d.chapter);
+        rows.append('td').text(d => d.cause);
+        rows.append('td').text(d => d.effect);
+        rows.append('td').html(d => '<code>' + d.karma_type + '</code>');
+        rows.append('td').html(d => '<strong style="color:var(--accent-2);">' + d.rebirth_destination + '</strong>');
+        rows.append('td').text(d => d.karma_principle);
+    }
+
+    function renderRebirthGrid(data) {
+        const grid = d3.select('#rebirth-grid');
+        const dests = Object.entries(data.karma_stats.rebirth_destinations);
+        const colorMap = ['#c8463a', '#3a6b8c', '#6B8E5A', '#C9A063', '#e9b885', '#a85a3a'];
+        const cards = grid.selectAll('.map-card').data(dests).enter()
+            .append('div')
+            .attr('class', 'map-card alt')
+            .style('border-left-color', (d, i) => colorMap[i % colorMap.length]);
+        cards.append('div').attr('class', 'map-label').text(d => 'DESTINATION ' + (dests.indexOf(d) + 1));
+        cards.append('div').attr('class', 'map-title').text(d => d[0]);
+        cards.append('div').attr('class', 'map-row').html(d => '<strong>Cases: </strong>' + d[1] + ' / 10');
+        cards.append('div').attr('class', 'map-row').html(d => '<strong>Share: </strong>' + (d[1] / 10 * 100).toFixed(0) + '%');
+    }
+
+    function renderKarmaInsights(data) {
+        const list = d3.select('#karma-insights-list');
+        list.selectAll('li').data(data.karma_insights).enter().append('li').text(d => d);
+    }
+
+    // ===== Section 3: Six Realms pyramid =====
+    function renderSamsaraPyramid(data) {
+        const svg = d3.select('#chart-samsara-pyramid');
+        svg.selectAll('*').remove();
+        const containerW = svg.node().clientWidth || 800;
+        const W = Math.max(containerW, 700), H = 500;
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+
+        const g = svg.append('g').attr('transform', `translate(0, 20)`);
+        const realms = data.realms;
+        // From top to bottom: Deva → Hell
+        const orderedRealms = realms; // Data already ordered by n: n=1 Deva ... n=6 Hell
+
+        const layerH = 60;
+        const layerGap = 12;
+        const totalH = orderedRealms.length * layerH + (orderedRealms.length - 1) * layerGap;
+        const cx = W / 2;
+        const maxWidth = W * 0.85;
+        const minWidth = 90;
+
+        // Color mapping: good realms (blue) / half-good (green) / evil (red)
+        const colorMap = {
+            'Deva Realm': '#3a6b8c',
+            'Human Realm': '#5a8aac',
+            'Asura Realm': '#6B8E5A',
+            'Animal Realm': '#c8463a',
+            'Preta Realm': '#a85a3a',
+            'Hell Realm': '#7a2818'
+        };
+
+        // Title
+        g.append('text')
+            .attr('x', cx).attr('y', -4)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '13px')
+            .style('font-weight', '700')
+            .style('fill', '#23201A')
+            .text('Six realms hierarchy (top most good · bottom most evil)');
+
+        orderedRealms.forEach((r, i) => {
+            const layerY = 20 + i * (layerH + layerGap);
+            const widthRatio = (orderedRealms.length - i) / orderedRealms.length;
+            const layerW = minWidth + (maxWidth - minWidth) * widthRatio;
+            const halfW = layerW / 2;
+            // Stepped pyramid: each layer widens downward
+            const nextWidthRatio = (orderedRealms.length - i - 1) / orderedRealms.length;
+            const nextLayerW = minWidth + (maxWidth - minWidth) * nextWidthRatio;
+            const nextHalfW = nextLayerW / 2;
+
+            // Trapezoid path
+            const path = `M ${cx - halfW} ${layerY}
+                          L ${cx + halfW} ${layerY}
+                          L ${cx + nextHalfW} ${layerY + layerH}
+                          L ${cx - nextHalfW} ${layerY + layerH}
+                          Z`;
+
+            const layerG = g.append('g')
+                .attr('class', 'pyramid-layer')
+                .style('cursor', 'pointer');
+
+            layerG.append('path')
+                .attr('d', path)
+                .attr('fill', colorMap[r.name])
+                .attr('fill-opacity', 0.78)
+                .attr('stroke', '#fff')
+                .attr('stroke-width', 2);
+
+            // Central label: realm name
+            layerG.append('text')
+                .attr('x', cx).attr('y', layerY + layerH / 2 - 4)
+                .attr('text-anchor', 'middle')
+                .style('font-size', '15px')
+                .style('font-weight', '700')
+                .style('fill', '#fff')
+                .text(r.name);
+
+            // Pilgrim-team count annotation (right)
+            const teamBadge = r.in_pilgrim_team > 0
+                ? `Pilgrim team: ${r.in_pilgrim_team}`
+                : 'Pilgrim team: 0';
+            layerG.append('text')
+                .attr('x', cx + halfW + 12).attr('y', layerY + layerH / 2 + 4)
+                .attr('text-anchor', 'start')
+                .style('font-size', '11px')
+                .style('font-weight', '600')
+                .style('fill', r.in_pilgrim_team > 0 ? '#C9A063' : '#9c9080')
+                .text('● ' + teamBadge);
+
+            // Ordinal annotation (left)
+            layerG.append('text')
+                .attr('x', cx - halfW - 12).attr('y', layerY + layerH / 2 + 4)
+                .attr('text-anchor', 'end')
+                .style('font-size', '11px')
+                .style('font-weight', '600')
+                .style('fill', '#C9A063')
+                .text('Lv ' + r.n);
+
+            layerG.on('mouseover', (e) => {
+                layerG.select('path').attr('fill-opacity', 0.95);
+                const cases = r.notable_cases.map(c => '· ' + c).join('<br>');
+                tooltip.show(
+                    `<strong style="color:${colorMap[r.name]}">${r.name}</strong><br>` +
+                    `<strong>Population: </strong>${r.population}<br>` +
+                    `<strong>Entry: </strong>${r.entry_criteria}<br>` +
+                    `<strong>Exit: </strong>${r.exit_criteria}<br>` +
+                    `<strong>Duration: </strong>${r.duration}<br>` +
+                    `<strong>Pilgrim team: </strong>${r.in_pilgrim_team} members<br>` +
+                    `<strong>Characteristics: </strong>${r.characteristics}<br>` +
+                    `<em>Notable cases: </em><br>${cases}`, e);
+            }).on('mouseout', () => {
+                layerG.select('path').attr('fill-opacity', 0.78);
+                tooltip.hide();
+            });
+        });
+
+        // Good/evil divide annotation
+        const dividerY = 20 + 2 * (layerH + layerGap) + layerH / 2 + layerGap;
+        g.append('line')
+            .attr('x1', 30).attr('x2', W - 30)
+            .attr('y1', dividerY).attr('y2', dividerY)
+            .attr('stroke', '#c8463a')
+            .attr('stroke-dasharray', '5,3')
+            .attr('stroke-width', 1)
+            .attr('opacity', 0.5);
+        g.append('text')
+            .attr('x', W - 30).attr('y', dividerY - 4)
+            .attr('text-anchor', 'end')
+            .style('font-size', '10px')
+            .style('fill', '#c8463a')
+            .style('font-style', 'italic')
+            .text('Good/evil divide ↓');
+
+        // Top "transcend samsara" annotation
+        g.append('text')
+            .attr('x', cx).attr('y', 14)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10.5px')
+            .style('fill', '#C9A063')
+            .style('font-style', 'italic')
+            .text('↑ Complete cultivation transcends samsara');
+
+        // Bottom "most evil" annotation
+        g.append('text')
+            .attr('x', cx).attr('y', 20 + orderedRealms.length * (layerH + layerGap) + 14)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '10.5px')
+            .style('fill', '#7a2818')
+            .style('font-style', 'italic')
+            .text('↓ Most evil · released only when karma is exhausted · not eternal punishment');
+    }
+
+    function renderSamsaraTable(data) {
+        const tbody = d3.select('#samsara-table tbody');
+        const rows = tbody.selectAll('tr').data(data.realms).enter().append('tr');
+        rows.append('td').text(d => d.n);
+        rows.append('td').html(d => '<strong>' + d.name + '</strong>');
+        rows.append('td').text(d => d.population);
+        rows.append('td').text(d => d.entry_criteria);
+        rows.append('td').text(d => d.exit_criteria);
+        rows.append('td').text(d => d.duration);
+        rows.append('td').text(d => d.characteristics);
+        rows.append('td').html(d => d.in_pilgrim_team > 0
+            ? '<span class="icon-correct">● ' + d.in_pilgrim_team + '</span>'
+            : '<span style="color:var(--ink-soft);">0</span>');
+        rows.append('td').text(d => d.notable_cases.join(' · '));
+    }
+
+    function renderRealmCards(data) {
+        const colorClass = {
+            'Deva Realm': 'c-tian',
+            'Human Realm': 'c-ren',
+            'Asura Realm': 'c-xiuluo',
+            'Animal Realm': 'c-chusheng',
+            'Preta Realm': 'c-egui',
+            'Hell Realm': 'c-diyu'
+        };
+        const grid = d3.select('#realm-grid');
+        const cards = grid.selectAll('.char-card')
+            .data(data.realms).enter()
+            .append('div')
+            .attr('class', d => 'char-card ' + (colorClass[d.name] || ''));
+        cards.append('div').attr('class', 'char-name').text(d => d.name);
+        cards.append('div').attr('class', 'char-profile').text(d => d.population);
+        cards.append('div').attr('class', 'char-score').text(d => 'Pilgrim team ' + d.in_pilgrim_team + ' · duration ' + d.duration);
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>Entry: </strong>' + d.entry_criteria);
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>Exit: </strong>' + d.exit_criteria);
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>Characteristics: </strong>' + d.characteristics);
+        cards.append('div').attr('class', 'char-row').html(d => '<strong>Representative: </strong>' + d.notable_cases.join(' · '));
+    }
+
+    function renderSamsaraInsights(data) {
+        const list = d3.select('#samsara-insights-list');
+        list.selectAll('li').data(data.samsara_insights).enter().append('li').text(d => d);
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) main();
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

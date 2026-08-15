@@ -1,0 +1,2547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-uy8QfDE1ZNIucWhRNA4OcZroMm12WlOUvaliiFTFfQE=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Underworld Power Network · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <script src="../static/js/d3-sankey.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    
+svg circle { will-change: transform; }
+</style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        /* Hero */
+header
+header
+header
+header
+header.hero .meta {
+  color: #b8a888;
+  font-size: 0.85em;
+  margin-top: 10px;
+  position: relative; z-index: 1;
+}
+
+/* Section */
+
+.section-title.alt { color: var(--accent-2); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+
+.definition {
+  background: #fdfaf0;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.92em;
+  border-radius: 0 4px 4px 0;
+  color: var(--ink-soft);
+  line-height: 1.75;
+}
+.definition strong { color: var(--ink); }
+
+/* KPI */
+
+.kpi-card.alt { border-top-color: var(--accent-2); }
+.kpi-card.alt-2 { border-top-color: var(--accent-3); }
+.kpi-card.alt-3 { border-top-color: var(--r-bodhi); }
+.kpi-value {
+  font-size: 1.85em;
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.kpi-card.alt .kpi-value { color: var(--accent-2); }
+.kpi-card.alt-2 .kpi-value { color: var(--accent-3); }
+.kpi-card.alt-3 .kpi-value { color: var(--r-bodhi); }
+.kpi-label {
+  color: var(--muted);
+  font-size: 0.84em;
+  margin-top: 4px;
+}
+
+/* 角色类别卡片 */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+.role-card {
+  background: #fdfaf0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 14px;
+  border-top: 4px solid var(--accent);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.role-card:hover, .role-card:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(58, 40, 32, 0.14);
+  outline: none;
+}
+.role-card.r-king { border-top-color: var(--r-king); }
+.role-card.r-judge { border-top-color: var(--r-judge); }
+.role-card.r-bodhi { border-top-color: var(--r-bodhi); }
+.role-card.r-mortal { border-top-color: var(--r-mortal); }
+.role-card.r-mount { border-top-color: var(--r-mount); }
+.role-card.r-buddha { border-top-color: var(--r-buddha); }
+.role-card .r-name {
+  font-size: 1.15em;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.role-card .r-tag {
+  font-size: 0.78em;
+  color: var(--accent-3);
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.role-card .r-desc {
+  font-size: 0.86em;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+.role-card .r-ex {
+  font-size: 0.82em;
+  color: var(--muted);
+  font-style: italic;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+}
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title {
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+  font-size: 1.02em;
+}
+.chart-caption {
+  color: var(--muted);
+  font-size: 0.84em;
+  margin-bottom: 12px;
+}
+.chart-svg {
+  background: #fffdf6;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.84em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; color: var(--ink-soft); }
+.legend-swatch {
+  width: 14px; height: 14px; border-radius: 2px; display: inline-block;
+}
+.legend-swatch.line { width: 18px; height: 3px; border-radius: 1px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: rgba(26, 20, 16, 0.95);
+  color: #fff;
+  padding: 9px 12px;
+  border-radius: 4px;
+  font-size: 0.84em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 280px;
+  line-height: 1.55;
+}
+.tooltip div + div { margin-top: 4px; }
+
+/* Insight list */
+.insight-list { list-style: none; padding: 0; counter-reset: insight; }
+.insight-list li {
+  counter-increment: insight;
+  background: #fdfaf0;
+  margin: 10px 0;
+  padding: 12px 16px 12px 48px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 0 4px 4px 0;
+  position: relative;
+  font-size: 0.92em;
+  color: var(--ink-soft);
+}
+.insight-list li:last-child { border-bottom: none; }
+.insight-list li::before {
+  content: counter(insight, decimal-leading-zero);
+  position: absolute;
+  left: 14px; top: 12px;
+  color: var(--accent);
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+.insight-list li strong { color: var(--accent); font-weight: 600; }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; }
+.node-circle:hover, .node-circle:focus { stroke: var(--accent); stroke-width: 3px; outline: none; }
+
+/* Dashboard section */
+.dash-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  margin-top: 14px;
+}
+.dash-panel {
+  background: #fdfaf0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px;
+}
+.dash-panel h4 {
+  font-size: 1em;
+  color: var(--accent-2);
+  margin-bottom: 10px;
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 6px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .role-grid { grid-template-columns: repeat(2, 1fr); }
+  .dash-grid { grid-template-columns: 1fr; }
+  header
+  header
+  
+  
+}
+@media (max-width: 520px) {
+  .role-grid { grid-template-columns: 1fr; }
+  
+  
+  header
+}
+
+footer code {
+  background: #fdfaf0;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  color: var(--accent);
+}
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/underworld-power-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Underworld Power Network</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Underworld Power Network</h1>
+        <p class="subtitle">UNDERWORLD POWER NETWORK · DIYU HIERARCHY ATLAS</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">10</div><div class="kpi-label">Ten Yama Kings</div></div>
+  <div class="kpi-card alt"><div class="kpi-value">16</div><div class="kpi-label">Underworld Core Characters</div></div>
+  <div class="kpi-card alt-2"><div class="kpi-value">20</div><div class="kpi-label">Power-Relationship Edges</div></div>
+  <div class="kpi-card alt-3"><div class="kpi-value">4</div><div class="kpi-label">Cross-Realm Systems</div></div>
+  <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">Key Underworld Events</div></div>
+  <div class="kpi-card alt"><div class="kpi-value">5</div><div class="kpi-label">Ability Dimensions</div></div>
+  <div class="kpi-card alt-2"><div class="kpi-value">100</div><div class="kpi-label">Chapter Span</div></div>
+</div>
+
+<!-- Section 1: Overview (Underworld system) -->
+<section class="section" aria-labelledby="s1-title">
+  <h2 class="section-title" id="s1-title">One · Underworld Power System Overview</h2>
+  <div class="section-sub">UNDERWORLD SYSTEM OVERVIEW · DIYU BUREAUCRACY</div>
+  <div class="definition">
+    <strong>Definition:</strong> In the world of <em>Journey to the West</em>, the Underworld is not a single judicial body but a composite system of five layers — "the Ten Yama Kings' bureaucracy + Judge Cui's execution + Kṣitigarbha's oversight + the mortal-realm bridge + Buddhist reception."
+    <strong>The Ten Yama Kings</strong> — Qinguang, Chujiang, Songdi, Wuguan, Yanluo, Biancheng, Taishan, Dushi, Pingdeng, and Zhuanlun try souls by their sins in separate courts and form the bureaucratic core of the Underworld;
+    <strong>Judge Cui (Cui Jue)</strong> — keeper of the Ledger of Life and Death, who at Wei Zheng's private request extends Emperor Taizong's lifespan; he is the most critical executive hub of the Underworld;
+    <strong>Kṣitigarbha Bodhisattva</strong> — the Buddhist realm's representative stationed in hell, who vowed "not to attain Buddhahood until hell is empty" and oversees rather than interferes in the trials;
+    <strong>The Mortal-Realm Bridge</strong> — Wei Zheng (the dragon-slayer) and Liu Quan (the melon-bearer) pass between the yin and yang worlds in the flesh or in dreams, forming the interface between the Underworld and the living world;
+    <strong>Buddhist Reception</strong> — Di Ting (Kṣitigarbha's mount) and the Welcoming Buddha (Lingyun Ferry) carry out the handoff between the Underworld and Lingshan.
+    The core political-science paradox of the Underworld system: nominally independent of Heaven, it is in reality penetrated by both Heaven (Wei Zheng beheads the dragon in a dream at the Jade Emperor's command) and Lingshan (Kṣitigarbha's oversight).
+  </div>
+  <div class="role-grid" id="role-grid"></div>
+</section>
+
+<!-- Section 2: Underworld power force-directed graph -->
+<section class="section" aria-labelledby="s2-title">
+  <h2 class="section-title alt" id="s2-title">Two · Underworld Power Force-Directed Graph</h2>
+  <div class="section-sub">FORCE-DIRECTED GRAPH · NODE SIZE = POWER · COLOR = ROLE TYPE</div>
+  <div class="definition">
+    <strong>Definition:</strong> Treats the 14 core Underworld figures as nodes; node size maps to "power strength (power 1–10)" and color maps to "role type".
+    There are five edge types: <strong>Hierarchy</strong> (the ranking among the Ten Yama Kings), <strong>Subordination</strong> (Judge Cui dispatched by the Ten Yama Kings), <strong>Oversight</strong> (Kṣitigarbha Bodhisattva's religious oversight of the Ten Yama Kings), <strong>Cross-realm</strong> (Wei Zheng's private channel to Heaven), and <strong>Affiliation</strong> (Liu Quan's bodily affiliation with the mortal realm).
+    The force-directed graph directly reveals five topological forms: "the Ten Yama Kings clustered in hierarchy, Judge Cui executing from the center, Kṣitigarbha Bodhisattva overseeing from above, Wei Zheng crossing to Heaven, and Liu Quan as the single point connecting to the mortal realm."
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Underworld Power Force-Directed Graph (19 nodes / 20 edges)</div>
+    <div class="chart-caption">Node size = power strength · color = role type · edge color = relation type · draggable · hover for details</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="560" role="img" aria-label="Underworld power force-directed graph"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3: Underworld-Heaven-Lingshan-mortal realm Sankey diagram -->
+<section class="section" aria-labelledby="s3-title">
+  <h2 class="section-title alt-2" id="s3-title">Three · Underworld–Heaven–Lingshan–Mortal Realm Sankey Diagram</h2>
+  <div class="section-sub">SANKEY · UNDERWORLD ↔ HEAVEN ↔ LINGSHAN ↔ YANG-REALM</div>
+  <div class="definition">
+    <strong>Definition:</strong> The Sankey diagram shows the power flows between the Underworld and the three realms. <strong>The Underworld system</strong> forms the left column (the Ten Yama Kings, Judge Cui, Kṣitigarbha, Wei Zheng, Liu Quan);
+    <strong>the connected systems</strong> form the right column (Heaven, Lingshan, the mortal realm, and the Underworld itself).
+    The flows reveal a political-science law of the Underworld system in <em>Journey to the West</em>: the Underworld is not an independent kingdom — the Ten Yama Kings are penetrated by both Heaven's establishment and Lingshan's oversight, and Judge Cui opens a back door to the mortal realm through private relationships,
+    while Kṣitigarbha, in his Buddhist identity, sits in hell yet "will not attain Buddhahood until hell is empty" — the Underworld's "independence" is relative; in essence it is the buffer zone where Heaven, Lingshan, and the mortal realm contend.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Underworld → Heaven / Lingshan / Mortal Realm Sankey Diagram</div>
+    <div class="chart-caption">Left: Underworld-system roles · Right: linked three-realm systems · flow = relation strength · hover to highlight paths</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="520" role="img" aria-label="Underworld three-realm Sankey diagram"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4: Underworld character ability radar chart -->
+<section class="section" aria-labelledby="s4-title">
+  <h2 class="section-title" id="s4-title">Four · Underworld Character Ability Radar Chart</h2>
+  <div class="section-sub">RADAR · 5 DIMENSIONS · JUDGMENT / EXECUTION / MAGIC / MERCY / INDEPENDENCE</div>
+  <div class="definition">
+    <strong>Definition:</strong> Evaluates the comprehensive ability of Underworld figures across five dimensions — <strong>Judgment</strong> (the authority to pass sentence on souls' sins), <strong>Execution</strong> (the ability to carry out verdicts), <strong>Magic Power</strong> (supernatural transformations and martial arts), <strong>Compassion</strong> (pity toward the souls and the mortal realm), and <strong>Independence</strong> (the degree of freedom from Heaven's and Lingshan's interference).
+    The larger the radar area, the greater the figure's overall Underworld power. Kṣitigarbha Bodhisattva has the largest area but low independence (Buddhist oversight); the Ten Yama Kings have full Judgment but low Magic Power; Judge Cui has the lowest independence (subject to double requests); Wei Zheng has the highest independence (beheading the dragon in a dream as Heaven's envoy).
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Underworld Character Five-Dimension Ability Radar Chart (16 figures overlaid)</div>
+    <div class="chart-caption">Values 0–10 · click the legend to toggle · hover for details</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="540" role="img" aria-label="Underworld character ability radar chart"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5: Underworld events timeline -->
+<section class="section" aria-labelledby="s5-title">
+  <h2 class="section-title alt" id="s5-title">Five · Underworld Events Timeline</h2>
+  <div class="section-sub">UNDERWORLD EVENTS TIMELINE · BY CHAPTER ORDER</div>
+  <div class="definition">
+    <strong>Definition:</strong> Arranges the 7 key Underworld events in chapter order and displays them on separate tracks by the nature of each event.
+    Each node marks a key event (erasing names / beheading the dragon / touring the Underworld / delivering melons / the Well Dragon King / Di Ting discerning the false / attaining perfection), and color distinguishes the stage: <strong>Conflict</strong> (a direct clash with the mortal realm), <strong>Communication</strong> (negotiation between the yin and yang worlds), and <strong>Resolution</strong> (final closure).
+    The timeline presents a three-part rhythm: "dense early (the Chapter 3–11 Emperor Taizong Underworld arc), sparse in the middle (only the Well Dragon King and Di Ting), and a closing convergence (Chapter 100, when the Five Saints attain perfection and cross between yin and yang)."
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Underworld Events Timeline (Chapters 3–100)</div>
+    <div class="chart-caption">X axis: chapter sequence · Y axis: event stage tracks · node color: stage · hover for details</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="460" role="img" aria-label="Underworld events timeline"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6: Key insights -->
+<section class="section" aria-labelledby="s6-title">
+  <h2 class="section-title alt-2" id="s6-title">Six · Key Insights on the Underworld System</h2>
+  <div class="section-sub">DASHBOARD · KEY INSIGHTS + STATISTICS</div>
+  <div class="definition">
+    <strong>Definition:</strong> The dashboard aggregates the core indicators of the Underworld system: distribution by role type, share by connected system, count by event stage, comprehensive ability comparison, power strength Top 5, cross-chapter span, and more.
+    Using a combination of "stat cards + small charts," it condenses the scattered information of the first five sections into a comparable overview and distills three core political-science insights about the Underworld.
+  </div>
+  <div class="kpi-row" id="dash-kpi-row"></div>
+  <div class="dash-grid">
+    <div class="dash-panel">
+      <h4>Underworld Power Strength Top 5 (bar chart)</h4>
+      <svg id="chart-bar-top" class="chart-svg" width="100%" height="280" role="img" aria-label="Underworld power strength top 5"></svg>
+    </div>
+    <div class="dash-panel">
+      <h4>Event Stage Distribution (donut chart)</h4>
+      <svg id="chart-donut" class="chart-svg" width="100%" height="280" role="img" aria-label="Underworld event stage distribution donut chart"></svg>
+    </div>
+  </div>
+  <ul class="insight-list" style="margin-top: 18px;">
+    <li><strong>The Underworld's independence is relative:</strong> Although Kṣitigarbha Bodhisattva vowed "not to attain Buddhahood until hell is empty," he is in essence Lingshan's religious oversight of the Underworld; although Judge Cui holds the Ledger of Life and Death, he privately alters Emperor Taizong's lifespan at Wei Zheng's request — the Underworld judges nominally independently, yet is in reality penetrated by both Heaven's establishment (Wei Zheng beheads the dragon in a dream at the Jade Emperor's command) and Lingshan's oversight (Kṣitigarbha stationed there).</li>
+    <li><strong>Judge Cui is the political hub of the Underworld:</strong> Among the 14 Underworld figures, Judge Cui simultaneously connects three parties — the Ten Yama Kings (subordination), the mortal realm (Wei Zheng's request), and the emperor (the private lifespan alteration) — making him the mediating node of the Underworld's power network. His presence lets "private requests" pierce the "bureaucratic trial" — the largest institutional loophole in the Underworld system of <em>Journey to the West</em>.</li>
+    <li><strong>Underworld events cluster at the beginning and the end:</strong> Of the 7 key events, 5 are concentrated in Chapters 3–11 (the Emperor Taizong Underworld arc + Wukong erasing names + Liu Quan delivering melons), while 2 are spread across Chapter 58 and Chapter 100. This distribution reveals that in the pilgrimage narrative the Underworld is a "starting device" (establishing the rules of the Ledger of Life and Death) and an "ending device" (the Five Saints attaining perfection and crossing between yin and yang), while it is almost absent in the middle — its dramatic function is structural rather than procedural.</li>
+  </ul>
+</section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/underworld-power-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+</div>
+
+<script>
+// ============================================================
+// EMBEDDED DATA — Underworld power-relationship data
+// ============================================================
+const EMBEDDED_DATA = {
+  // Six role-type overview
+  hierarchy: [
+    {
+      key: "king", name: "Ten Yama Kings", tag: "TEN KINGS",
+      color: "#c8463a",
+      desc: "The bureaucratic core of the Underworld, which tries souls by their sins in separate courts. King Qinguang conducts the first review, and the souls are tried in sequence from King Chujiang down to King Zhuanlun, with King Yanluo at the center.",
+      examples: "King Qinguang · King Chujiang · King Songdi · King Wuguan · King Yanluo · King Biancheng · King Taishan · King Dushi · King Pingdeng · King Zhuanlun"
+    },
+    {
+      key: "judge", name: "Judge Cui (Cui Jue)", tag: "JUDGE CUI",
+      color: "#c9a961",
+      desc: "Keeper of the Ledger of Life and Death, subordinate to the Ten Yama Kings. He privately alters Emperor Taizong's lifespan at Wei Zheng's request — the most critical executive hub of the Underworld.",
+      examples: "Cui Jue · Judge Cui"
+    },
+    {
+      key: "bodhi", name: "Kṣitigarbha Bodhisattva", tag: "KSITIGARBHA",
+      color: "#3a6b8c",
+      desc: "The Buddhist realm's representative stationed in hell, who vowed 'not to attain Buddhahood until hell is empty.' He oversees the Underworld without interfering in its trials — Buddhism's religious penetration of the Underworld.",
+      examples: "Kṣitigarbha Bodhisattva"
+    },
+    {
+      key: "mortal", name: "Mortal-Realm Bridge", tag: "YANG-BRIDGE",
+      color: "#6b8e6f",
+      desc: "Passes between the yin and yang worlds in the flesh or in dreams, serving as the interface between the Underworld and the mortal realm. Wei Zheng beheads a dragon in his dream, and Liu Quan delivers melons and is revived.",
+      examples: "Wei Zheng (the dragon-slayer) · Liu Quan (the melon-bearer)"
+    },
+    {
+      key: "mount", name: "Di Ting", tag: "DI-TING",
+      color: "#8a5a8a",
+      desc: "Mount of Kṣitigarbha Bodhisattva, able to discern the truth of all things. In the true-and-false Monkey King incident of Chapter 58, he sees through the Six-Eared Macaque but dares not speak.",
+      examples: "Di Ting"
+    },
+    {
+      key: "buddha", name: "the Welcoming Buddha", tag: "RECEPTION BUDDHA",
+      color: "#b8902a",
+      desc: "The welcoming Buddha of Lingyun Ferry, who ferries Tang Sanzang across to be reborn. A junction node between the Underworld and Lingshan, marking the pilgrim's crossing between yin and yang.",
+      examples: "the Welcoming Buddha"
+    }
+  ],
+
+  // Section 2: force-directed graph nodes and edges
+  network: {
+    nodes: [
+      // Ten Yama Kings (first five courts)
+      { id: "King Qinguang", type: "Yama King", power: 7, chapter: 10 },
+      { id: "King Chujiang", type: "Yama King", power: 6, chapter: 10 },
+      { id: "King Songdi", type: "Yama King", power: 6, chapter: 10 },
+      { id: "King Wuguan", type: "Yama King", power: 6, chapter: 10 },
+      { id: "King Yanluo", type: "Yama King", power: 8, chapter: 10 },
+      // Ten Yama Kings (last five courts)
+      { id: "King Biancheng", type: "Yama King", power: 6, chapter: 10 },
+      { id: "King Taishan", type: "Yama King", power: 6, chapter: 10 },
+      { id: "King Dushi", type: "Yama King", power: 6, chapter: 10 },
+      { id: "King Pingdeng", type: "Yama King", power: 6, chapter: 10 },
+      { id: "King Zhuanlun", type: "Yama King", power: 7, chapter: 10 },
+      // Judge Cui
+      { id: "Judge Cui", type: "Judge", power: 8, chapter: 10 },
+      // Kṣitigarbha Bodhisattva
+      { id: "Kṣitigarbha Bodhisattva", type: "Bodhisattva", power: 9, chapter: 58 },
+      // Mortal-realm figures
+      { id: "Wei Zheng", type: "Mortal", power: 7, chapter: 10 },
+      { id: "Liu Quan", type: "Mortal", power: 4, chapter: 11 },
+      // Mount
+      { id: "Di Ting", type: "Mount", power: 7, chapter: 58 },
+      // Buddha
+      { id: "the Welcoming Buddha", type: "Buddha", power: 9, chapter: 100 },
+      // Heaven hub nodes (edge endpoints)
+      { id: "the Jade Emperor", type: "Heaven", power: 10, chapter: 0 },
+      { id: "Tathāgata", type: "Heaven", power: 10, chapter: 0 },
+      // Emperor Taizong of the mortal realm (edge endpoint)
+      { id: "Emperor Taizong", type: "Mortal", power: 6, chapter: 10 }
+    ],
+    links: [
+      // Hierarchy - the ranking among the Ten Yama Kings (tried in sequence from Qinguang to Zhuanlun)
+      { source: "King Qinguang", target: "King Chujiang", type: "Hierarchy" },
+      { source: "King Chujiang", target: "King Songdi", type: "Hierarchy" },
+      { source: "King Songdi", target: "King Wuguan", type: "Hierarchy" },
+      { source: "King Wuguan", target: "King Yanluo", type: "Hierarchy" },
+      { source: "King Yanluo", target: "King Biancheng", type: "Hierarchy" },
+      { source: "King Biancheng", target: "King Taishan", type: "Hierarchy" },
+      { source: "King Taishan", target: "King Dushi", type: "Hierarchy" },
+      { source: "King Dushi", target: "King Pingdeng", type: "Hierarchy" },
+      { source: "King Pingdeng", target: "King Zhuanlun", type: "Hierarchy" },
+      // Subordination - Judge Cui dispatched by the Ten Yama Kings (direct relation to King Yanluo)
+      { source: "Judge Cui", target: "King Yanluo", type: "Subordination" },
+      { source: "Judge Cui", target: "King Qinguang", type: "Subordination" },
+      // Oversight - Kṣitigarbha's religious oversight of the Ten Yama Kings
+      { source: "Kṣitigarbha Bodhisattva", target: "King Yanluo", type: "Oversight" },
+      { source: "Kṣitigarbha Bodhisattva", target: "King Zhuanlun", type: "Oversight" },
+      // Cross-realm - Wei Zheng's private channel to Heaven
+      { source: "Wei Zheng", target: "the Jade Emperor", type: "Cross-realm" },
+      { source: "Wei Zheng", target: "Judge Cui", type: "Cross-realm" },
+      { source: "Wei Zheng", target: "Emperor Taizong", type: "Cross-realm" },
+      // Affiliation - Liu Quan's bodily affiliation with the mortal realm
+      { source: "Liu Quan", target: "Emperor Taizong", type: "Affiliation" },
+      { source: "Liu Quan", target: "Judge Cui", type: "Affiliation" },
+      // Buddhist handoff - Di Ting with Kṣitigarbha, the Welcoming Buddha with Tathāgata
+      { source: "Di Ting", target: "Kṣitigarbha Bodhisattva", type: "Subordination" },
+      { source: "the Welcoming Buddha", target: "Tathāgata", type: "Cross-realm" }
+    ]
+  },
+
+  // Section 3: Sankey diagram (Underworld → three-realm handoff)
+  sankey: {
+    nodes: [
+      // Underworld system (left column)
+      { name: "Ten Yama Kings", cat: 0 },
+      { name: "Judge Cui", cat: 0 },
+      { name: "Kṣitigarbha Bodhisattva", cat: 0 },
+      { name: "Wei Zheng", cat: 0 },
+      { name: "Liu Quan", cat: 0 },
+      { name: "Di Ting", cat: 0 },
+      // Connected systems (right column)
+      { name: "Heaven", cat: 1 },
+      { name: "Lingshan", cat: 1 },
+      { name: "Mortal", cat: 1 },
+      { name: "Underworld itself", cat: 1 }
+    ],
+    links: [
+      // Ten Yama Kings → connected systems
+      { source: "Ten Yama Kings", target: "Heaven", value: 5 },      // under Heaven's establishment
+      { source: "Ten Yama Kings", target: "Lingshan", value: 3 },      // under Kṣitigarbha's oversight
+      { source: "Ten Yama Kings", target: "Underworld itself", value: 8 },  // internal hierarchy
+      // Judge Cui → connected systems
+      { source: "Judge Cui", target: "Underworld itself", value: 4 },    // executes the Ledger of Life and Death
+      { source: "Judge Cui", target: "Mortal", value: 3 },        // privately alters the emperor's lifespan
+      // Kṣitigarbha → connected systems
+      { source: "Kṣitigarbha Bodhisattva", target: "Lingshan", value: 6 },    // Buddhism stationed in hell
+      { source: "Kṣitigarbha Bodhisattva", target: "Underworld itself", value: 2 },// oversees the Underworld
+      // Wei Zheng → connected systems
+      { source: "Wei Zheng", target: "Heaven", value: 4 },          // beheads the dragon in a dream at the Jade Emperor's command
+      { source: "Wei Zheng", target: "Mortal", value: 3 },          // Emperor Taizong's minister
+      // Liu Quan → connected systems
+      { source: "Liu Quan", target: "Mortal", value: 2 },          // delivers melons and returns to life
+      { source: "Liu Quan", target: "Underworld itself", value: 2 },      // offers melons to the Underworld
+      // Di Ting → connected systems
+      { source: "Di Ting", target: "Lingshan", value: 2 }           // Kṣitigarbha's mount
+    ]
+  },
+
+  // Section 4: radar chart (14 figures × 5 dimensions)
+  // Dimensions: Judgment / Execution / Magic Power / Compassion / Independence
+  radar: [
+    { name: "King Qinguang",     type: "Yama King", Judgment: 9, Execution: 7, "Magic Power": 5, Compassion: 4, Independence: 5 },
+    { name: "King Yanluo",     type: "Yama King", Judgment: 10, Execution: 8, "Magic Power": 6, Compassion: 4, Independence: 5 },
+    { name: "King Zhuanlun",     type: "Yama King", Judgment: 8, Execution: 8, "Magic Power": 6, Compassion: 5, Independence: 5 },
+    { name: "King Chujiang",     type: "Yama King", Judgment: 7, Execution: 6, "Magic Power": 4, Compassion: 5, Independence: 5 },
+    { name: "King Songdi",     type: "Yama King", Judgment: 7, Execution: 6, "Magic Power": 4, Compassion: 5, Independence: 5 },
+    { name: "King Wuguan",     type: "Yama King", Judgment: 7, Execution: 6, "Magic Power": 4, Compassion: 5, Independence: 5 },
+    { name: "King Biancheng",     type: "Yama King", Judgment: 7, Execution: 6, "Magic Power": 4, Compassion: 5, Independence: 5 },
+    { name: "King Taishan",     type: "Yama King", Judgment: 7, Execution: 6, "Magic Power": 4, Compassion: 5, Independence: 5 },
+    { name: "King Dushi",     type: "Yama King", Judgment: 7, Execution: 6, "Magic Power": 4, Compassion: 5, Independence: 5 },
+    { name: "King Pingdeng",     type: "Yama King", Judgment: 7, Execution: 6, "Magic Power": 4, Compassion: 5, Independence: 5 },
+    { name: "Judge Cui",     type: "Judge", Judgment: 6, Execution: 9, "Magic Power": 5, Compassion: 6, Independence: 3 },
+    { name: "Kṣitigarbha Bodhisattva", type: "Bodhisattva", Judgment: 7, Execution: 5, "Magic Power": 10, Compassion: 10, Independence: 4 },
+    { name: "Wei Zheng",       type: "Mortal", Judgment: 5, Execution: 8, "Magic Power": 7, Compassion: 6, Independence: 9 },
+    { name: "Liu Quan",       type: "Mortal", Judgment: 2, Execution: 5, "Magic Power": 2, Compassion: 8, Independence: 7 },
+    { name: "Di Ting",       type: "Mount", Judgment: 4, Execution: 6, "Magic Power": 8, Compassion: 6, Independence: 3 },
+    { name: "the Welcoming Buddha",   type: "Buddha", Judgment: 4, Execution: 5, "Magic Power": 9, Compassion: 9, Independence: 6 }
+  ],
+
+  // Section 5: timeline (7 events in chapter order)
+  timeline: [
+    { order: 1, chapter: 3,  actor: "Sun Wukong",   stage: "conflict", event: "Erasing the Ledger", desc: "Wukong wreaks havoc in the Underworld, forcibly erases the monkey names from the Ledger of Life and Death, and strikes out the names of his kind. The Ten Yama Kings report to Heaven, and the Jade Emperor offers him amnesty." },
+    { order: 2, chapter: 10, actor: "Wei Zheng",     stage: "conflict", event: "Beheading the Dragon in a Dream", desc: "Wei Zheng beheads the Jing River Dragon King in his dream; the dragon's vengeful spirit harasses Emperor Taizong, leading to the emperor's tour of the Underworld." },
+    { order: 3, chapter: 10, actor: "Emperor Taizong",   stage: "comm",     event: "Touring the Underworld",   desc: "The emperor's soul tours the Underworld; at Wei Zheng's request, Judge Cui secretly extends his lifespan by twelve years. After returning to life, he holds the Great Water-and-Land Assembly." },
+    { order: 4, chapter: 11, actor: "Liu Quan",     stage: "comm",     event: "Delivering Melons and Returning to Life", desc: "Liu Quan, at the emperor's command, offers melons and fruit to the Underworld. The Ten Yama Kings praise his loyalty and grant him and his wife Li Cuilian a return to life." },
+    { order: 5, chapter: 38, actor: "the Well Dragon King",   stage: "fate",     event: "the Crow-Cock Kingdom Well Dragon", desc: "The king of the Crow-Cock Kingdom is pushed into a well for three years, and the Well Dragon King preserves his body from decay — an illustration of the Underworld's water-system branch function." },
+    { order: 6, chapter: 58, actor: "Di Ting",     stage: "comm",     event: "Discerning the True and False Monkey King", desc: "The true and false Monkey King bring their quarrel to the Underworld. Although Di Ting discerns the Six-Eared Macaque, he fears the havoc it would cause and keeps silent, advising them to seek Tathāgata's help." },
+    { order: 7, chapter: 100,actor: "the Welcoming Buddha", stage: "fate",    event: "Rebirth at Lingyun Ferry", desc: "The Welcoming Buddha ferries Tang Sanzang across Lingyun Ferry in a bottomless boat; Sanzang is reborn, the Five Saints attain perfection, and the boundary between yin and yang is crossed." }
+  ],
+
+  // Section 6: dashboard statistics
+  summary: {
+    byType: [
+      { type: "Yama King", count: 10, avgPower: 6.4 },
+      { type: "Judge", count: 1, avgPower: 8.0 },
+      { type: "Bodhisattva", count: 1, avgPower: 9.0 },
+      { type: "Mortal", count: 2, avgPower: 5.5 },
+      { type: "Mount", count: 1, avgPower: 7.0 },
+      { type: "Buddha", count: 1, avgPower: 9.0 }
+    ],
+    byRealm: [
+      { realm: "Underworld itself", count: 11 },
+      { realm: "Heaven", count: 4 },
+      { realm: "Lingshan", count: 3 },
+      { realm: "Mortal", count: 3 }
+    ],
+    byStage: [
+      { stage: "Conflict", count: 2 },
+      { stage: "Communication", count: 3 },
+      { stage: "Resolution", count: 2 }
+    ],
+    topPower: [
+      { name: "Kṣitigarbha Bodhisattva", power: 9, type: "Bodhisattva" },
+      { name: "the Welcoming Buddha",   power: 9, type: "Buddha" },
+      { name: "King Yanluo",     power: 8, type: "Yama King" },
+      { name: "Judge Cui",     power: 8, type: "Judge" },
+      { name: "King Qinguang",     power: 7, type: "Yama King" }
+    ],
+    metrics: {
+      totalCharacters: 16,
+      totalLinks: 20,
+      avgPower: 6.6,
+      maxSpan: 97,             // Chapters 3–100 span
+      kingInternalRate: "45%", // 9/20 Yama-King hierarchy relations internally
+      crossRealmRate: "20%"    // 4/20 cross-realm relation share
+    }
+  }
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W151] using embedded data (' + fallbackKey + '): ', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const hierarchy = await fetchJson(base + 'underworld-hierarchy.json', 'hierarchy');
+  return {
+    hierarchy: Array.isArray(hierarchy) ? hierarchy : (hierarchy.hierarchy || EMBEDDED_DATA.hierarchy),
+    network: EMBEDDED_DATA.network,
+    sankey: EMBEDDED_DATA.sankey,
+    radar: EMBEDDED_DATA.radar,
+    timeline: EMBEDDED_DATA.timeline,
+    summary: EMBEDDED_DATA.summary
+  };
+}
+
+// ============================================================
+// Section 1: six role-type cards
+// ============================================================
+function renderHierarchy(hierarchy) {
+  const grid = d3.select('#role-grid');
+  grid.html('');
+  if (!hierarchy || hierarchy.length === 0) {
+    grid.append('div').attr('class', 'empty-state').text('No data available');
+    return;
+  }
+  const card = grid.selectAll('.role-card')
+    .data(hierarchy)
+    .enter()
+    .append('div')
+    .attr('class', d => 'role-card r-' + d.key)
+    .attr('role', 'button')
+    .attr('tabindex', '0')
+    .attr('aria-label', d => d.name + ' · ' + d.tag);
+
+  card.append('div').attr('class', 'r-name').text(d => d.name);
+  card.append('div').attr('class', 'r-tag').text(d => d.tag);
+  card.append('div').attr('class', 'r-desc').text(d => d.desc);
+  card.append('div').attr('class', 'r-ex').text(d => 'Examples: ' + d.examples);
+
+  card.on('keydown', function(e, d) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showRoleTooltip(e, d);
+    }
+  });
+  card.on('click', function(e, d) { showRoleTooltip(e, d); });
+}
+
+function showRoleTooltip(event, d) {
+  let tip = d3.select('.tooltip');
+  if (tip.empty()) tip = d3.select('body').append('div').attr('class', 'tooltip');
+  tip.html('')
+    .style('opacity', 0.95)
+    .style('left', (event.pageX + 10) + 'px')
+    .style('top', (event.pageY - 28) + 'px');
+  // .html() is only used for trusted EMBEDDED_DATA; use .text() otherwise
+  tip.append('div').html('<strong>' + d.name + '</strong> · ' + d.tag);
+  tip.append('div').text(d.desc);
+  tip.append('div').text('Representative figures: ' + d.examples);
+  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3500);
+}
+
+// ============================================================
+// Section 2: Underworld power force-directed graph
+// ============================================================
+function renderForce(networkData) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 280).attr('fill', '#8a7c6a').text('No data available');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 560;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const typeColors = {
+    "Yama King": "#c8463a",
+    "Judge": "#c9a961",
+    "Bodhisattva": "#3a6b8c",
+    "Mortal": "#6b8e6f",
+    "Mount": "#8a5a8a",
+    "Buddha": "#b8902a",
+    "Heaven": "#5a3828"
+  };
+  const linkColors = {
+    "Hierarchy": "#c8463a",
+    "Subordination": "#c9a961",
+    "Oversight": "#3a6b8c",
+    "Cross-realm": "#6b8e6f",
+    "Affiliation": "#8a5a8a"
+  };
+
+  const nodes = networkData.nodes.map(d => ({ ...d }));
+  const links = networkData.links.map(d => ({ ...d }));
+
+  function nodeRadius(d) {
+    if (d.type === "Heaven") return 14;
+    return 6 + d.power * 1.4;
+  }
+  function nodeFill(d) {
+    return typeColors[d.type] || '#8a7c6a';
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes).alphaDecay(0.08).velocityDecay(0.5)
+    .force('link', d3.forceLink(links).id(d => d.id)
+      .distance(d => d.type === "Oversight" ? 140 : d.type === "Cross-realm" ? 120 : d.type === "Hierarchy" ? 60 : 80)
+      .strength(d => d.type === "Hierarchy" ? 0.7 : d.type === "Subordination" ? 0.5 : 0.2))
+    .force('charge', d3.forceManyBody().strength(d => d.type === "Heaven" ? -400 : d.type === "Bodhisattva" || d.type === "Buddha" ? -350 : -180))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 24));
+
+    // P1 enhancement: cluster by type community (even anchors + stable convergence), without changing data semantics
+    {
+        const _grp = Array.from(new Set(sim.nodes().map(d => d.type))).sort();
+        const _gx = {}, _gy = {};
+        _grp.forEach((g, i) => {
+            _gx[g] = width * (i + 1) / (_grp.length + 1);
+            _gy[g] = height * (0.38 + 0.24 * (i % 2));
+        });
+        sim.force("x", d3.forceX(d => (_gx[d.type] !== undefined ? _gx[d.type] : width / 2)).strength(0.14))
+            .force("y", d3.forceY(d => (_gy[d.type] !== undefined ? _gy[d.type] : height / 2)).strength(0.14));
+    }
+
+  // Edges
+    // Performance: draw the edge layer on a Canvas overlay to avoid per-frame N×4 geometry writes triggering SVG reflow
+  var _svgEl = svg.node();
+  var _lcParent = _svgEl.parentNode;
+  if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
+  if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas'); if (_oc) _oc.remove(); }
+  var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var _lcW = _svgEl.clientWidth || 800, _lcH = _svgEl.clientHeight || 540;
+  var _vb = (_svgEl.getAttribute('viewBox') || '').split(/[\s,]+/);
+  var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_svgEl.getAttribute('width') || _lcW);
+  var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_svgEl.getAttribute('height') || _lcH);
+  var linkCanvas = document.createElement('canvas');
+  linkCanvas.className = 'link-canvas';
+  linkCanvas.width = Math.round(_lcW * _dpr);
+  linkCanvas.height = Math.round(_lcH * _dpr);
+  linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _svgEl.offsetLeft + 'px;top:' + _svgEl.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+  if (_lcParent) _lcParent.insertBefore(linkCanvas, _svgEl);
+  _svgEl.style.position = 'relative';
+  _svgEl.style.zIndex = '1';
+  var lctx = linkCanvas.getContext('2d');
+  lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
+  var linkSels = [];
+  function drawLinks() {
+    lctx.clearRect(0, 0, _cw, _ch);
+    for (var s = 0; s < linkSels.length; s++) {
+      var sel = linkSels[s], data = sel.data(), lines = sel.nodes();
+      for (var i = 0; i < data.length; i++) {
+        var d = data[i], el = lines[i];
+        if (!d || !d.source || d.source.x == null) continue;
+        lctx.beginPath();
+        lctx.moveTo(d.source.x, d.source.y);
+        lctx.lineTo(d.target.x, d.target.y);
+        lctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
+        lctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
+        var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
+        lctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
+        var da = el.getAttribute('stroke-dasharray');
+        lctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
+        lctx.stroke();
+      }
+    }
+    lctx.setLineDash([]);
+    lctx.globalAlpha = 1;
+  }
+const link = svg.append('g').selectAll('line')
+    .data(links)
+    .enter().append('line')
+    .attr('stroke', d => linkColors[d.type] || '#d9cdb8')
+    .attr('stroke-width', d => d.type === "Hierarchy" ? 2.5 : d.type === "Subordination" ? 2 : 1.2)
+    .attr('stroke-opacity', 0.55)
+    .attr('stroke-dasharray', d => d.type === "Cross-realm" ? "6,3" : d.type === "Oversight" ? "4,2" : "0"); link.style('display','none'); linkSels.push(link);
+
+  // Nodes
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', nodeFill)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .attr('tabindex', 0)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.id + '</strong>');
+      tooltip.append('div').text('Category: ' + d.type);
+      if (d.type !== "Heaven") {
+        tooltip.append('div').text('Power strength: ' + d.power + ' / 10');
+        tooltip.append('div').text('First appearance: Chapter ' + d.chapter);
+      }
+      const connected = links.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('Connected edges: ' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  // Labels
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => (d.type === "Heaven" || d.type === "Bodhisattva" || d.type === "Buddha") ? -22 : -1 * (nodeRadius(d) + 24))
+    .attr('font-weight', d => (d.type === "Heaven" || d.type === "Bodhisattva" || d.type === "Buddha") ? 700 : 500)
+    .attr('font-size', d => (d.type === "Heaven" || d.type === "Bodhisattva" || d.type === "Buddha") ? 12 : 11)
+    .attr('fill', d => d.type === "Heaven" ? '#5a3828' : d.type === "Bodhisattva" ? '#3a6b8c' : '#1a1410')
+    .text(d => d.id);
+
+  sim.on('tick', () => {
+    drawLinks();;
+    node.attr('transform', d => `translate(${d.x},${d.y})`);
+    label.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+
+  // Legend
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const typeLegend = [
+    { label: 'Ten Yama Kings', color: typeColors["Yama King"] },
+    { label: 'Judge Cui', color: typeColors["Judge"] },
+    { label: 'Kṣitigarbha Bodhisattva', color: typeColors["Bodhisattva"] },
+    { label: 'Mortal', color: typeColors["Mortal"] },
+    { label: 'Di Ting (Mount)', color: typeColors["Mount"] },
+    { label: 'the Welcoming Buddha', color: typeColors["Buddha"] },
+    { label: 'Heaven Hub', color: typeColors["Heaven"] }
+  ];
+  const linkLegend = [
+    { label: 'Hierarchy', color: linkColors["Hierarchy"], dash: '0' },
+    { label: 'Subordination', color: linkColors["Subordination"], dash: '0' },
+    { label: 'Oversight', color: linkColors["Oversight"], dash: '4,2' },
+    { label: 'Cross-realm', color: linkColors["Cross-realm"], dash: '6,3' },
+    { label: 'Affiliation', color: linkColors["Affiliation"], dash: '0' }
+  ];
+  typeLegend.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch').style('background', item.color);
+    li.append('span').text(item.label);
+  });
+  linkLegend.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch line')
+      .style('background', item.color)
+      .style('background-image', item.dash === '0' ? 'none' :
+        `repeating-linear-gradient(to right, ${item.color} 0 4px, transparent 4px 7px)`);
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: Underworld → three-realm Sankey diagram
+// ============================================================
+function renderSankey(sankeyData) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyData || !sankeyData.nodes || sankeyData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#8a7c6a').text('No data available');
+    return;
+  }
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#c8463a')
+      .text('d3-sankey failed to load; please check your network');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 520;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 30, right: 20, bottom: 20, left: 20 };
+  const catColors = ['#c8463a', '#3a6b8c'];
+  const nodeColors = {
+    "Ten Yama Kings": "#c8463a", "Judge Cui": "#c9a961", "Kṣitigarbha Bodhisattva": "#3a6b8c",
+    "Wei Zheng": "#6b8e6f", "Liu Quan": "#6b8e6f", "Di Ting": "#8a5a8a",
+    "Heaven": "#5a3828", "Lingshan": "#b8902a",
+    "Mortal": "#6b8e6f", "Underworld itself": "#c8463a"
+  };
+
+  const nodes = sankeyData.nodes.map(d => ({ ...d }));
+  const links = sankeyData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(18)
+    .nodePadding(14)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // Links
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => nodeColors[d.source.name] || catColors[d.source.cat])
+    .attr('stroke-width', d => Math.max(2, d.width))
+    .attr('stroke-opacity', 0.45)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.75);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('Relation strength: ' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.45);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // Nodes
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => d.x1 - d.x0)
+    .attr('height', d => Math.max(2, d.y1 - d.y0))
+    .attr('fill', d => nodeColors[d.name] || catColors[d.cat])
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      tooltip.append('div').text('Layer: ' + (d.cat === 0 ? 'Underworld-system roles' : 'Linked three-realm systems'));
+      tooltip.append('div').text('Total relations: ' + d.value);
+      tooltip.append('div').text('Inflow: ' + (d.targetLinks || []).length + ' · Outflow: ' + (d.sourceLinks || []).length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .attr('fill', '#1a1410')
+    .text(d => d.name);
+
+  // Column titles
+  svg.append('text')
+    .attr('x', margin.left + 4).attr('y', 18)
+    .attr('font-size', '13px').attr('font-weight', '700')
+    .attr('fill', '#c8463a').text('Underworld-system roles');
+  svg.append('text')
+    .attr('x', width - margin.right - 4).attr('y', 18)
+    .attr('text-anchor', 'end')
+    .attr('font-size', '13px').attr('font-weight', '700')
+    .attr('fill', '#3a6b8c').text('Linked three-realm systems');
+
+  // Legend
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const legendItems = [
+    { label: 'Ten Yama Kings', color: '#c8463a' },
+    { label: 'Judge Cui', color: '#c9a961' },
+    { label: 'Kṣitigarbha Bodhisattva', color: '#3a6b8c' },
+    { label: 'Mortal', color: '#6b8e6f' },
+    { label: 'Di Ting', color: '#8a5a8a' },
+    { label: 'Heaven', color: '#5a3828' },
+    { label: 'Lingshan', color: '#b8902a' },
+    { label: 'Underworld itself', color: '#c8463a' }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch').style('background', item.color);
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 4: Underworld character ability radar chart
+// ============================================================
+function renderRadar(radarData) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!radarData || radarData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 200).attr('fill', '#8a7c6a').text('No data available');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 540;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const dimensions = ['Judgment', 'Execution', 'Magic Power', 'Compassion', 'Independence'];
+  const typeColors = {
+    "Yama King": "#c8463a",
+    "Judge": "#c9a961",
+    "Bodhisattva": "#3a6b8c",
+    "Mortal": "#6b8e6f",
+    "Mount": "#8a5a8a",
+    "Buddha": "#b8902a"
+  };
+
+  const cx = width / 2;
+  const cy = height / 2;
+  const radius = Math.min(width, height) / 2 - 80;
+  const levels = 5;
+
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  // Concentric pentagons
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d9cdb8')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // Axes + dimension labels
+  dimensions.forEach((dim, i) => {
+    const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d9cdb8')
+      .attr('stroke-width', 1);
+    const labelR = radius + 28;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', '#1a1410')
+      .text(dim);
+  });
+
+  // Value ticks
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6).attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '10px')
+      .attr('fill', '#8a7c6a')
+      .text(lvl * 2);
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // Radar polygons
+  radarData.forEach((m, idx) => {
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      const r = radius * (m[dim] / 10);
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    const color = typeColors[m.type] || '#8a7c6a';
+
+    const poly = gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.08)
+      .attr('stroke', color)
+      .attr('stroke-width', 1.5)
+      .attr('stroke-opacity', 0.7)
+      .style('cursor', 'pointer')
+      .attr('class', 'radar-poly idx-' + idx);
+
+    poly.on('mouseover', function(e) {
+      d3.select(this).attr('fill-opacity', 0.3).attr('stroke-width', 2.5);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + m.name + '</strong> · ' + m.type);
+      dimensions.forEach(dim => {
+        tooltip.append('div').text(dim + ': ' + m[dim] + ' / 10');
+      });
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('fill-opacity', 0.08).attr('stroke-width', 1.5);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+    // Vertex circles
+    points.forEach(p => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 2.5)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 0.8)
+        .attr('pointer-events', 'none');
+    });
+  });
+
+  // Legend (aggregated by type, click to toggle)
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  const typeAgg = {};
+  radarData.forEach(m => {
+    if (!typeAgg[m.type]) typeAgg[m.type] = { count: 0, color: typeColors[m.type] };
+    typeAgg[m.type].count++;
+  });
+  Object.keys(typeAgg).forEach(type => {
+    const item = legend.append('div').attr('class', 'legend-item')
+      .style('cursor', 'pointer')
+      .attr('role', 'button')
+      .attr('tabindex', '0')
+      .attr('aria-label', 'Toggle ' + type + ' display');
+    item.append('div').attr('class', 'legend-swatch').style('background', typeAgg[type].color);
+    item.append('span').text(type + ' (' + typeAgg[type].count + ')');
+    item.on('click', function() {
+      const active = !d3.select(this).classed('inactive');
+      d3.select(this).classed('inactive', active);
+      d3.selectAll('.radar-poly').each(function() {
+        const cls = d3.select(this).attr('class');
+        const idx = +cls.match(/idx-(\d+)/)[1];
+        if (radarData[idx].type === type) {
+          d3.select(this).style('display', active ? 'none' : null);
+        }
+      });
+    });
+  });
+}
+
+// ============================================================
+// Section 5: Underworld events timeline
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 200).attr('fill', '#8a7c6a').text('No data available');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 460;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const stageOrder = ["conflict", "comm", "fate"];
+  const stageColors = {
+    conflict: "#c8463a",   // Conflict - cinnabar
+    comm: "#3a6b8c",       // Communication - indigo
+    fate: "#5a3828"        // Resolution - dark ink
+  };
+  const stageLabels = { conflict: "Conflict", comm: "Communication", fate: "Resolution" };
+  const stageChinese = { conflict: "Conflict", comm: "Communication", fate: "Resolution" };
+
+  const margin = { top: 30, right: 30, bottom: 60, left: 90 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const xMin = 0;
+  const xMax = 105;
+  const xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, innerW]);
+
+  const yScale = d3.scaleBand()
+    .domain(stageOrder)
+    .range([0, innerH])
+    .padding(0.3);
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // Background rows
+  stageOrder.forEach(name => {
+    g.append('rect')
+      .attr('x', 0)
+      .attr('y', yScale(name))
+      .attr('width', innerW)
+      .attr('height', yScale.bandwidth())
+      .attr('fill', stageColors[name])
+      .attr('fill-opacity', 0.06);
+  });
+
+  // Connecting lines (linking the same figure's events)
+  const actors = Array.from(new Set(timelineData.map(d => d.actor)));
+  actors.forEach(actor => {
+    const vEvents = timelineData.filter(d => d.actor === actor).sort((a, b) => a.chapter - b.chapter);
+    if (vEvents.length > 1) {
+      const line = d3.line()
+        .x(d => xScale(d.chapter))
+        .y(d => yScale(d.stage) + yScale.bandwidth() / 2)
+        .curve(d3.curveMonotoneX);
+      g.append('path')
+        .datum(vEvents)
+        .attr('fill', 'none')
+        .attr('stroke', stageColors[vEvents[0].stage])
+        .attr('stroke-width', 1.5)
+        .attr('stroke-opacity', 0.5)
+        .attr('stroke-dasharray', '4,3')
+        .attr('d', line);
+    }
+  });
+
+  // Event nodes
+  g.selectAll('.event-node')
+    .data(timelineData)
+    .enter()
+    .append('circle')
+    .attr('class', 'event-node')
+    .attr('cx', d => xScale(d.chapter))
+    .attr('cy', d => yScale(d.stage) + yScale.bandwidth() / 2)
+    .attr('r', 10)
+    .attr('fill', d => stageColors[d.stage] || '#8a7c6a')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('r', 13);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.actor + '</strong> · ' + stageLabels[d.stage]);
+      tooltip.append('div').text('Chapter: ' + d.chapter);
+      tooltip.append('div').text('Stage: ' + stageLabels[d.stage]);
+      tooltip.append('div').text('Event: ' + d.event);
+      tooltip.append('div').text(d.desc);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('r', 10);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // Ordinal labels
+  g.selectAll('.event-label')
+    .data(timelineData)
+    .enter()
+    .append('text')
+    .attr('class', 'event-label')
+    .attr('x', d => xScale(d.chapter))
+    .attr('y', d => yScale(d.stage) + yScale.bandwidth() / 2)
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
+    .attr('font-size', '10px')
+    .attr('font-weight', '700')
+    .attr('fill', '#fff')
+    .attr('pointer-events', 'none')
+    .text(d => d.order);
+
+  // Y-axis labels
+  stageOrder.forEach(name => {
+    g.append('text')
+      .attr('x', -12)
+      .attr('y', yScale(name) + yScale.bandwidth() / 2)
+      .attr('text-anchor', 'end')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', stageColors[name])
+      .text(stageChinese[name]);
+  });
+
+  // X axis
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).tickFormat(d => 'Ch.' + d))
+    .selectAll('text').attr('font-size', '11px');
+
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 45)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7c6a')
+    .text('Chapter sequence');
+
+  // Legend
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  const stages = [
+    { label: 'Conflict (conflict)', color: stageColors.conflict },
+    { label: 'Communication (comm)', color: stageColors.comm },
+    { label: 'Resolution (fate)', color: stageColors.fate }
+  ];
+  stages.forEach(s => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').style('background', s.color);
+    item.append('span').text(s.label);
+  });
+}
+
+// ============================================================
+// Section 6: key-insight dashboard
+// ============================================================
+function renderDashboard(summary) {
+  const kpiRow = d3.select('#dash-kpi-row');
+  kpiRow.html('');
+  if (!summary || !summary.metrics) {
+    kpiRow.append('div').attr('class', 'empty-state').text('No data available');
+    return;
+  }
+  const m = summary.metrics;
+  const kpis = [
+    { label: 'Total Underworld characters', value: m.totalCharacters, cls: '' },
+    { label: 'Power-Relationship Edges', value: m.totalLinks, cls: 'alt' },
+    { label: 'Average power', value: m.avgPower, cls: 'alt-2' },
+    { label: 'Chapter span', value: m.maxSpan + ' ch.', cls: 'alt-3' },
+    { label: 'Intra-Yama-King relation rate', value: m.kingInternalRate, cls: '' },
+    { label: 'Cross-realm relation rate', value: m.crossRealmRate, cls: 'alt' }
+  ];
+  kpis.forEach(k => {
+    const card = kpiRow.append('div').attr('class', 'kpi-card ' + k.cls);
+    card.append('div').attr('class', 'kpi-value').text(k.value);
+    card.append('div').attr('class', 'kpi-label').text(k.label);
+  });
+
+  renderTopBar(summary.topPower);
+  renderDonut(summary.byStage);
+}
+
+function renderTopBar(topPower) {
+  const svg = d3.select('#chart-bar-top');
+  svg.selectAll('*').remove();
+  if (!topPower || topPower.length === 0) {
+    svg.append('text').attr('x', 120).attr('y', 120).attr('fill', '#8a7c6a').text('No data available');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 500;
+  const height = 280;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 30, bottom: 30, left: 90 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const typeColors = {
+    "Yama King": "#c8463a", "Judge": "#c9a961", "Bodhisattva": "#3a6b8c",
+    "Mortal": "#6b8e6f", "Mount": "#8a5a8a", "Buddha": "#b8902a"
+  };
+
+  const xScale = d3.scaleLinear()
+    .domain([0, 10])
+    .range([0, innerW]);
+  const yScale = d3.scaleBand()
+    .domain(topPower.map(d => d.name))
+    .range([0, innerH])
+    .padding(0.3);
+
+  // Bars
+  g.selectAll('.bar')
+    .data(topPower)
+    .enter()
+    .append('rect')
+    .attr('class', 'bar')
+    .attr('x', 0)
+    .attr('y', d => yScale(d.name))
+    .attr('width', d => xScale(d.power))
+    .attr('height', yScale.bandwidth())
+    .attr('fill', d => typeColors[d.type] || '#8a7c6a')
+    .attr('rx', 3);
+
+  // Values
+  g.selectAll('.bar-label')
+    .data(topPower)
+    .enter()
+    .append('text')
+    .attr('class', 'bar-label')
+    .attr('x', d => xScale(d.power) + 6)
+    .attr('y', d => yScale(d.name) + yScale.bandwidth() / 2)
+    .attr('dy', '0.35em')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .attr('fill', '#1a1410')
+    .text(d => d.power);
+
+  // Y axis
+  g.append('g')
+    .call(d3.axisLeft(yScale))
+    .selectAll('text').attr('font-size', '12px');
+
+  // X axis
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).ticks(5))
+    .selectAll('text').attr('font-size', '11px');
+}
+
+function renderDonut(byStage) {
+  const svg = d3.select('#chart-donut');
+  svg.selectAll('*').remove();
+  if (!byStage || byStage.length === 0) {
+    svg.append('text').attr('x', 120).attr('y', 120).attr('fill', '#8a7c6a').text('No data available');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 400;
+  const height = 280;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const stageColors = {
+    "Conflict": "#c8463a", "Communication": "#3a6b8c", "Resolution": "#5a3828"
+  };
+
+  const radius = Math.min(width, height) / 2 - 30;
+  const cx = width / 2;
+  const cy = height / 2;
+
+  const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  const pie = d3.pie().value(d => d.count).sort(null);
+  const arc = d3.arc()
+    .innerRadius(radius * 0.55)
+    .outerRadius(radius)
+    .cornerRadius(3);
+
+  const arcs = pie(byStage);
+
+  g.selectAll('path')
+    .data(arcs)
+    .enter()
+    .append('path')
+    .attr('d', arc)
+    .attr('fill', d => stageColors[d.data.stage] || '#8a7c6a')
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer');
+
+  // Center value
+  const total = d3.sum(byStage, d => d.count);
+  g.append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dy', '-0.2em')
+    .attr('font-size', '24px')
+    .attr('font-weight', '700')
+    .attr('fill', '#1a1410')
+    .text(total);
+  g.append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dy', '1.6em')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7c6a')
+    .text('Total events');
+
+  // Labels
+  const labelArc = d3.arc()
+    .innerRadius(radius * 0.9)
+    .outerRadius(radius * 0.9);
+
+  g.selectAll('.donut-label')
+    .data(arcs)
+    .enter()
+    .append('text')
+    .attr('class', 'donut-label')
+    .attr('transform', d => `translate(${labelArc.centroid(d)})`)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .attr('fill', '#1a1410')
+    .text(d => d.data.stage + ' ' + d.data.count);
+}
+
+// ============================================================
+// main: dispatches all render functions
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      'Data source: loaded live from <code>scripts/output/data/</code> (http server mode)';
+  }
+
+  renderHierarchy(data.hierarchy);
+  renderForce(data.network);
+  renderSankey(data.sankey);
+  renderRadar(data.radar);
+  renderTimeline(data.timeline);
+  renderDashboard(data.summary);
+}
+
+// Responsive redraw (250ms debounce)
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderHierarchy(data.hierarchy);
+      renderForce(data.network);
+      renderSankey(data.sankey);
+      renderRadar(data.radar);
+      renderTimeline(data.timeline);
+      renderDashboard(data.summary);
+    }
+  }, 250);
+});
+
+// Start
+main();
+</script>
+<script id="audit-labelavoid">
+(function(){
+  function avoid(){
+    document.querySelectorAll("svg").forEach(function(svg){
+      var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){var r=t.getBoundingClientRect();return r.width>0&&r.height>0;});
+      var R=ts.map(function(t){return t.getBoundingClientRect();});
+      for(var i=0;i<ts.length;i++)for(var j=i+1;j<ts.length;j++){
+        var a=R[i],b=R[j];
+        var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+        var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+        if(ix*iy<=0)continue;
+        var area=Math.min(a.width*a.height,b.width*b.height);
+        if(area>0 && (ix*iy)/area>0.5){
+          var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+          if(hide.style.display!=="none") hide.style.display="none";
+        }
+      }
+    });
+  }
+  window.__avoidOverlap=avoid;
+  function run(){try{avoid();}catch(e){}}
+  window.addEventListener("load",function(){
+    [3000,6000,9000,12000].forEach(function(ms){setTimeout(run,ms);});
+  });
+})();
+</script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

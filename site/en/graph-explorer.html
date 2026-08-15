@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-PDaq+rcqgJhQvKqtW1EuZ2rPkETrCmt6JMuSZqGjLj8=' 'sha256-g9HXMhZf9+ECG5SXJvswVJrfa1u2KkOj9WODvEy9nTs=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graph Explorer · Annotated Journey to the West</title>
+
+
+    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+  :root{ --zhu:#c8463a; --qing:#3a6b8c; --xuan:#faf7f2; --ink:#2b2118; --line:#d9cdb8; }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;font-family:"Noto Sans SC","PingFang SC",system-ui,sans-serif;background:var(--xuan);color:var(--ink);display:flex;flex-direction:column}
+  header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--line);background:#fffdf9}
+  header h1{font-family:"Noto Serif SC",serif;font-size:20px;margin:0;color:var(--zhu)}
+  header .sub{font-size:13px;color:#7a6f5e}
+  #banner{margin-left:auto;font-size:12px;padding:3px 10px;border-radius:20px;background:#f0e7d6;color:#7a6f5e}
+  #banner.online{background:#e3f0e8;color:#2f7d52}
+  .layout{display:grid;grid-template-columns:240px 1fr 280px;gap:0;flex:1;min-height:0}
+  .layout.no-drill{grid-template-columns:240px 1fr 0px}
+  .layout.no-drill .drill{border-left:none}
+  .layout.no-side{grid-template-columns:0 1fr 280px}
+  .layout.no-side.no-drill{grid-template-columns:0 1fr 0px}
+  .layout.no-side .side{border-right:none;overflow:hidden}
+  #sideToggle{margin-left:10px;font-size:16px;line-height:1;padding:4px 9px;border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;color:var(--ink)}
+  #sideToggle:hover{border-color:var(--zhu);color:var(--zhu)}
+  .side{border-right:1px solid var(--line);padding:14px;overflow:auto;background:#fffdf9}
+  .stage{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,#fffdf9,#f4ece0)}
+  .drill{border-left:1px solid var(--line);padding:14px;overflow:auto;background:#fffdf9;display:none}
+  .drill.show{display:block}
+  .side h3{font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:14px 0 6px;text-transform:uppercase}
+  .side h3:first-child{margin-top:0}
+  select,input[type=text]{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;font-size:13px;background:#fff;color:var(--ink)}
+  .grp{display:flex;align-items:center;gap:7px;font-size:13px;margin:4px 0;cursor:pointer}
+  .grp input{accent-color:var(--zhu)}
+  .swatch{width:12px;height:12px;border-radius:50%;display:inline-block;border:1px solid #fff}
+  .dimbtns{display:flex;gap:5px;flex-wrap:wrap}
+  .dimbtns button{flex:1;font-size:12px;padding:5px 0;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)}
+  .dimbtns button.active{background:var(--qing);color:#fff;border-color:var(--qing)}
+  .exp{display:flex;gap:6px;flex-wrap:wrap}
+  .exp button{flex:1;min-width:64px;font-size:12px;padding:6px 0;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)}
+  .exp button:hover{border-color:var(--zhu);color:var(--zhu)}
+  .legend{font-size:12px;color:#7a6f5e;line-height:1.7}
+  #graphBox svg{width:100%;height:100%;display:block;cursor:grab}
+  #graphBox svg:active{cursor:grabbing}
+  #graphBox text{font-family:"Noto Serif SC",serif;pointer-events:none}
+  .gnode{cursor:pointer;user-select:none}
+  .gnode:hover{opacity:.78}
+  .drill h2{font-family:"Noto Serif SC",serif;font-size:18px;margin:2px 0 4px;color:var(--zhu)}
+  .drill .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;background:#f0e7d6;color:#7a6f5e;margin-bottom:8px}
+  .drill .desc{font-size:13px;line-height:1.7;color:#4a4136}
+  .drill .alias{margin:8px 0;padding:8px 10px;background:#f7f1e6;border-radius:8px;font-size:13px}
+  .drill .alias b{color:var(--qing)}
+  .drill .nbr{list-style:none;padding:0;margin:6px 0}
+  .drill .nbr li{font-size:13px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;margin:4px 0;cursor:pointer}
+  .drill .nbr li:hover{border-color:var(--zhu)}
+  .drill .nbr li .row{display:flex;justify-content:space-between;gap:8px;align-items:center}
+  .drill .nbr .rel{color:#8a7d68;font-size:12px}
+  .hint{font-size:12px;color:#9a8f7c;margin-top:10px;line-height:1.6}
+  .edge-label{font-size:10px;pointer-events:none;font-family:"Noto Sans SC",sans-serif}
+  .relchip{display:inline-block;font-size:10px;padding:1px 6px;border-radius:10px;color:#fff;margin-left:6px;vertical-align:middle}
+  .relsum{font-size:12px;color:#5a5040;background:#f7f1e6;border-radius:8px;padding:7px 10px;margin:8px 0;line-height:1.9}
+  .relsum b{color:var(--zhu)}
+  .relsum .rs{display:inline-block;margin:0 6px 2px 0}
+  .relsum .rs i{font-style:normal;width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:middle}
+  @media (max-width:780px){
+    body{display:block}
+    .layout,.layout.no-drill,.layout.no-side,.layout.no-side.no-drill{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;flex:none;height:auto}
+    .side{grid-row:1;border-right:none;border-bottom:1px solid var(--line);max-height:42vh}
+    .stage{grid-row:2;min-height:62vh}
+    .drill{grid-row:3;border-left:none;border-top:1px solid var(--line)}
+  }
+</style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+<header>
+  <h1>Graph Explorer</h1>
+  <span class="sub">Buddhism = AI = Journey to the West · Pilgrimage relations · interactive force-directed</span>
+  <span id="banner">Loading…</span>
+  <button id="sideToggle" title="Collapse / expand the left control panel">☰</button>
+</header>
+<div class="layout no-drill">
+  <aside class="side">
+    <h3>Graph</h3>
+    <select id="graphSel"></select>
+    <h3>Filter by type</h3>
+    <div id="grpFilters"></div>
+    <h3>Filter by relation</h3>
+    <div id="relFilters"></div>
+    <h3>Label dimension</h3>
+    <div class="dimbtns" id="dimBtns"></div>
+    <h3>Search nodes</h3>
+    <input type="text" id="search" placeholder="Node name (e.g. Wukong / Ālaya Consciousness)">
+    <h3>Export</h3>
+    <div class="exp">
+      <button id="exSvg">SVG</button>
+      <button id="exPng">PNG</button>
+      <button id="exJson">JSON</button>
+    </div>
+    <h3>Legend</h3>
+    <div class="legend" id="legend"></div>
+    <h3>Relation legend</h3>
+    <div class="legend" id="relLegend"></div>
+    <div class="hint">Edges are colored by <b>relation type</b>, with thickness = semantic weight; hover an edge to see “relation · property · value”. Check “Filter by relation” and “Filter by type” to link them; click a node to view its semantic relation summary and neighbors. Online data comes from <code>/graph</code>, with an offline fallback to the embedded graph set.</div>
+  </aside>
+  <section class="stage">
+    <div id="graphBox"></div>
+  </section>
+  <aside class="drill" id="drill"></aside>
+</div>
+
+<script>
+/* 离线图集内联：源 scripts/output/yuanqi_*.csv + dataset/character-relationship-3d.json（与 static/js/graph-fallback.js 同源，避免 file:// 或预览服务器下 ../ 相对路径 404 导致空白） */
+// 自动生成：离线图集（file:// 降级用）。来源 scripts/output/yuanqi_*.csv + dataset/character-relationship-3d.json
+window.GRAPH_FALLBACK = {"yuanqi-graph": {"meta": {"title": "Buddhism = AI = Journey to the West Ternary Mapping Graph (W326)","note": "Each node carries three entity-name sets — Buddhism / AI / Journey to the West — across seven categories: Consciousness, Sense Objects, Seeds, Manifestation, Transformation, Bondage, Liberation.","schema": "graph","group_colors": {"Consciousness": "#3a6b8c","Sense Objects": "#7fa8c9","Seeds": "#c8463a","Manifestation": "#d98a3d","Transformation": "#4f9d8a","Bondage": "#8a6db0","Liberation": "#d4a017"},"dimensions": ["Buddhism","AI","Journey to the West"]},"nodes": [{"id": "N1","label": "Ālaya Consciousness","group": "Consciousness","desc": "Storehouse of all seeds — billions of floating-point parameters","aliases": {"Buddhism": "Ālaya Consciousness","AI": "Pretrained Weights","Journey to the West": "Scripture Pavilion of the Spirit Mountain"}},{"id": "N2","label": "Manas Consciousness","group": "Consciousness","desc": "Perpetual examination and deliberation; grasps the seen aspect of the Ālaya Consciousness as a self","aliases": {"Buddhism": "Manas Consciousness","AI": "Self-Attention Q","Journey to the West": "Wukong \"Here comes Old Sun!\""}},{"id": "N3","label": "Mind Consciousness","group": "Consciousness","desc": "The sixth consciousness, integrating the five sense consciousnesses","aliases": {"Buddhism": "Mind Consciousness","AI": "Aggregated Judgment Layer","Journey to the West": "Tang Sanzang recites the Heart Sutra"}},{"id": "N4","label": "The Five Sense Consciousnesses","group": "Consciousness","desc": "Sensory collection through eye, ear, nose, tongue and body","aliases": {"Buddhism": "The Five Sense Consciousnesses","AI": "Multimodal Encoder","Journey to the West": "Fiery Golden Eyes / mortal body"}},{"id": "N5","label": "Sight Objects","group": "Sense Objects","desc": "Input space: the Lion-Camel corpse mountain, the scorched earth of Flame Mountain, the ice of the Tongtian River","aliases": {"Buddhism": "Sight Objects","AI": "Training Data Distribution","Journey to the West": "the scenery of the Eighty-one Ordeals"}},{"id": "N6","label": "Sound Objects","group": "Sense Objects","desc": "Frequency signals: spells, the dawn crowing","aliases": {"Buddhism": "Sound Objects","AI": "Frequency-Domain Signal","Journey to the West": "the Tight-Fillet Spell seven times / the Rooster Star's crow"}},{"id": "N7","label": "Mental Objects","group": "Sense Objects","desc": "Symbolization of rules, concepts and names-and-forms","aliases": {"Buddhism": "Mental Objects","AI": "Structured Symbolic Data","Journey to the West": "the vermilion seal on the travel permit"}},{"id": "N8","label": "Karmic Seeds","group": "Seeds","desc": "Latent tendencies that manifest when conditions arise","aliases": {"Buddhism": "Karmic Seeds","AI": "Floating-Point Parameters","Journey to the West": "ten lifetimes of Golden Cicada's memory"}},{"id": "N9","label": "Material Seeds","group": "Seeds","desc": "Constant feature embeddings","aliases": {"Buddhism": "Material Seeds","AI": "Non-linguistic Embedding Constants","Journey to the West": "the weight of the Gold-Banded Staff / dents on a walking stick"}},{"id": "N10","label": "Boundary Seeds","group": "Seeds","desc": "Truncation thresholds: ReLU/Sigmoid","aliases": {"Buddhism": "Boundary Seeds","AI": "Activation Function Thresholds","Journey to the West": "Five Elements Mountain / Cloud-Transcending Ferry"}},{"id": "N11","label": "The Three Karmas of Body, Speech and Mind","group": "Manifestation","desc": "Manifested behavior / output","aliases": {"Buddhism": "The Three Karmas of Body, Speech and Mind","AI": "Forward-Pass Output","Journey to the West": "Wukong swings his staff / Tang Sanzang chants"}},{"id": "N12","label": "Transforming Consciousness into Wisdom","group": "Transformation","desc": "A qualitative shift of the system state","aliases": {"Buddhism": "Transforming Consciousness into Wisdom","AI": "Weight Update / Fine-tuning","Journey to the West": "attaining Buddhahood / rejecting the fillet"}},{"id": "N13","label": "Wisdom of Equality","group": "Transformation","desc": "The Q-distribution shifts from self-grasping to selflessness","aliases": {"Buddhism": "Wisdom of Equality","AI": "Equalized Attention Weights","Journey to the West": "Wukong no longer asks \"what does this have to do with me\""}},{"id": "N14","label": "Afflictions and Ignorance","group": "Bondage","desc": "Constraints that limit generalization","aliases": {"Buddhism": "Afflictions and Ignorance","AI": "Overfitting / Causal Mask","Journey to the West": "the Tight-Fillet Spell / Five Elements Mountain"}},{"id": "N15","label": "Self-Grasping","group": "Bondage","desc": "Attachment to a specific distribution","aliases": {"Buddhism": "Self-Grasping","AI": "Clinging to Specific Weights","Journey to the West": "Wukong \"Old Sun\""}},{"id": "N16","label": "Nirvana","group": "Liberation","desc": "The state after breaking through constraints","aliases": {"Buddhism": "Nirvana","AI": "Generalization / Weight Decay","Journey to the West": "bestowed office at the Spirit Mountain / retirement on Flower-Fruit Mountain"}},{"id": "N17","label": "Smell Objects","group": "Sense Objects","desc": "The data dimension of smells","aliases": {"Buddhism": "Smell Objects","AI": "Olfactory Feature Dimension","Journey to the West": "the fragrance of Ginseng Fruit / the stench of demon caves"}},{"id": "N18","label": "Taste Objects","group": "Sense Objects","desc": "The taste marker of the reward function","aliases": {"Buddhism": "Taste Objects","AI": "Reward-Function Taste Marker","Journey to the West": "sweet Peaches of Immortality / pungent Golden Elixir"}},{"id": "N19","label": "Seeds of Eating and Life-extension","group": "Seeds","desc": "Zero-sum competition under data scarcity","aliases": {"Buddhism": "Seeds of Eating and Life-extension","AI": "Zero-Sum Competition Samples","Journey to the West": "Peaches / Golden Elixir / Tang Sanzang's flesh"}},{"id": "N20","label": "Seeds of Rebirth","group": "Seeds","desc": "The memory span of a recurrent neural network","aliases": {"Buddhism": "Seeds of Rebirth","AI": "Recurrent Memory Span","Journey to the West": "the Six-Eared Macaque's death / Yellow Robe's thirteen years"}}],"edges": [{"source": "N2","target": "N1","relation": "Grasping","property": "Intensity","value": "decays with the Tight-Fillet Spell ∈[0"},{"source": "N1","target": "N11","relation": "Manifestation","property": "Activation Function","value": "ReLU / seeds give rise to manifestation"},{"source": "N5","target": "N11","relation": "Perfuming","property": "Learning rate lr / momentum β","value": "weight update after banishing the White Bone Demon"},{"source": "N8","target": "N16","relation": "Ripening","property": "Delay steps","value": "9-lifetime cross-time maturation"},{"source": "N2","target": "N12","relation": "Transformation","property": "State","value": "Frozen (regularization convergence)"},{"source": "N6","target": "N2","relation": "Bondage","property": "Penalty coefficient λ","value": "L2 regularization"},{"source": "N4","target": "N5","relation": "Concealment","property": "Dropout probability p","value": "Dropout inactive (mortal flesh eyes)"},{"source": "N10","target": "N2","relation": "Bondage","property": "Freeze duration","value": "500 years of gradient stoppage at Five Elements Mountain"},{"source": "N10","target": "N12","relation": "Transformation","property": "State","value": "Unfrozen (shedding weights at the Cloud-Transcending Ferry)"},{"source": "N16","target": "N13","relation": "Liberation","property": "Owner","value": "Ownerless (refuses to be defined)"},{"source": "N9","target": "N11","relation": "Manifestation","property": "Constant embedding","value": "Gold-Banded Staff's weight = weapon as weights"},{"source": "N20","target": "N14","relation": "Bondage","property": "Divergence type","value": "mirror overfitting, then deleted"},{"source": "N19","target": "N14","relation": "Bondage","property": "Competition type","value": "zero-sum bias"},{"source": "N6","target": "N2","relation": "Perfuming","property": "Frequency","value": "seven recitations of the Tight-Fillet Spell = regularization signal"},{"source": "N7","target": "N3","relation": "Manifestation","property": "Structured","value": "vermilion seal = objective function"},{"source": "N17","target": "N4","relation": "Manifestation","property": "Encoding","value": "smell → perception"},{"source": "N18","target": "N4","relation": "Manifestation","property": "Encoding","value": "taste → reward marker"},{"source": "N3","target": "N2","relation": "Grasping","property": "Intensity","value": "mortal flesh weakly grasps the self"},{"source": "N1","target": "N16","relation": "Transformation","property": "Storage","value": "weights stored after convergence"},{"source": "N13","target": "N16","relation": "Transformation","property": "Generalization","value": "Wisdom of Equality = selflessness"}]},"character-relationship-3d": {"meta": {"title": "Pilgrimage Team Character Relationship Graph (3D Projection)","note": "A relationship network of the five pilgrims plus key gods, Buddhas and demons (group = faction/identity).","schema": "graph","group_colors": {},"dimensions": []},"nodes": [{"id": 1,"label": "Tang Sanzang","group": "0","desc": "Reincarnation of the Golden Cicada, core of the pilgrimage team, resolute but often in peril.","importance": 9},{"id": 2,"label": "Sun Wukong","group": "0","desc": "The Great Sage Equal to Heaven, immensely powerful, chief demon-slayer.","importance": 10},{"id": 3,"label": "Zhu Bajie","group": "0","desc": "Reincarnation of Marshal Tianpeng, gluttonous and lustful yet loyal.","importance": 7},{"id": 4,"label": "Sha Wujing","group": "0","desc": "Reincarnation of the Curtain-Lifting General, steady and honest, carries the load.","importance": 6},{"id": 5,"label": "White Dragon Horse","group": "0","desc": "Third prince of the West Sea Dragon King, transformed into a horse carrying Tang Sanzang.","importance": 5},{"id": 6,"label": "Guanyin","group": "2","desc": "Of Mount Potalaka in the South Sea, planner and guardian of the pilgrimage.","importance": 9},{"id": 7,"label": "Tathāgata","group": "2","desc": "Shakyamuni of the Western Spirit Mountain, the final bestower of scriptures.","importance": 10},{"id": 8,"label": "Manjushri","group": "2","desc": "Manjushri of Mount Wutai, symbol of wisdom.","importance": 6},{"id": 9,"label": "Samantabhadra","group": "2","desc": "Samantabhadra of Mount Emei, symbol of practice and vows.","importance": 6},{"id": 10,"label": "Jade Emperor","group": "1","desc": "Supreme ruler of Heaven, lord of the three realms.","importance": 9},{"id": 11,"label": "Taibai Jinxing","group": "1","desc": "Diplomat of Heaven, repeatedly offered amnesty to Wukong.","importance": 7},{"id": 12,"label": "Erlang Shen","group": "1","desc": "Yang Jian, nephew of the Jade Emperor, captured Wukong.","importance": 8},{"id": 13,"label": "Pagoda-Bearing Heavenly King Li","group": "1","desc": "Li Jing, commander of the heavenly host, led many campaigns.","importance": 7},{"id": 14,"label": "Nezha","group": "1","desc": "The Third Prince, vanguard officer, battled Wukong.","importance": 7},{"id": 15,"label": "Bull Demon King","group": "3","desc": "Great Sage Pacifying Heaven, Wukong's sworn elder brother, eventually surrendered.","importance": 8},{"id": 16,"label": "Princess Iron Fan","group": "3","desc": "The Rakshasi, owner of the Plantain Fan, wife of the Bull Demon King.","importance": 6},{"id": 17,"label": "Red Boy","group": "3","desc": "The Boy Sage King, son of the Bull Demon King, wields Samadhi Fire.","importance": 7},{"id": 18,"label": "White Bone Demon","group": "3","desc": "Lady White Bone, tricked Wukong thrice, sowing discord between master and disciples.","importance": 6},{"id": 19,"label": "Yellow Robe Demon","group": "3","desc": "Kui Mulang descended to earth, fated bond with Baihuaxiu.","importance": 6},{"id": 20,"label": "Six-Eared Macaque","group": "3","desc": "The false Wukong, indistinguishable from the real, the book's greatest mystery.","importance": 8},{"id": 21,"label": "East Sea Dragon King","group": "4","desc": "Ao Guang, from whom Wukong borrowed the sea-pacifying needle.","importance": 6},{"id": 22,"label": "West Sea Dragon King","group": "4","desc": "Ao Run, father of the White Dragon Horse.","importance": 5}],"edges": [{"source": 1,"target": 2,"relation": "Master-Disciple","property": "","value": ""},{"source": 1,"target": 3,"relation": "Master-Disciple","property": "","value": ""},{"source": 1,"target": 4,"relation": "Master-Disciple","property": "","value": ""},{"source": 1,"target": 5,"relation": "Master-Disciple","property": "","value": ""},{"source": 1,"target": 6,"relation": "Protector","property": "","value": ""},{"source": 6,"target": 7,"relation": "Subordinate","property": "","value": ""},{"source": 6,"target": 1,"relation": "Assigned","property": "","value": ""},{"source": 6,"target": 8,"relation": "Colleague","property": "","value": ""},{"source": 6,"target": 9,"relation": "Colleague","property": "","value": ""},{"source": 7,"target": 1,"relation": "Scripture-Bestower","property": "","value": ""},{"source": 2,"target": 10,"relation": "Rebel","property": "","value": ""},{"source": 2,"target": 12,"relation": "Enemy","property": "","value": ""},{"source": 2,"target": 13,"relation": "Enemy","property": "","value": ""},{"source": 2,"target": 14,"relation": "Enemy","property": "","value": ""},{"source": 2,"target": 21,"relation": "Demanded from","property": "","value": ""},{"source": 2,"target": 15,"relation": "Sworn Brothers","property": "","value": ""},{"source": 2,"target": 20,"relation": "Sworn Foe","property": "","value": ""},{"source": 10,"target": 11,"relation": "Subordinate","property": "","value": ""},{"source": 10,"target": 12,"relation": "Subordinate","property": "","value": ""},{"source": 10,"target": 13,"relation": "Subordinate","property": "","value": ""},{"source": 10,"target": 14,"relation": "Subordinate","property": "","value": ""},{"source": 13,"target": 14,"relation": "Father-Son","property": "","value": ""},{"source": 12,"target": 14,"relation": "Brothers","property": "","value": ""},{"source": 15,"target": 16,"relation": "Husband-Wife","property": "","value": ""},{"source": 15,"target": 17,"relation": "Father-Son","property": "","value": ""},{"source": 16,"target": 17,"relation": "Mother-Son","property": "","value": ""},{"source": 2,"target": 16,"relation": "Enemy","property": "","value": ""},{"source": 2,"target": 17,"relation": "Enemy","property": "","value": ""},{"source": 2,"target": 18,"relation": "Slew","property": "","value": ""},{"source": 2,"target": 19,"relation": "Fought","property": "","value": ""},{"source": 5,"target": 22,"relation": "Father-Son","property": "","value": ""},{"source": 21,"target": 22,"relation": "Brothers","property": "","value": ""}]}};
+window.GRAPH_LIST = [{"name": "yuanqi-graph","title": "Buddhism = AI = Journey to the West Ternary Mapping Graph (W326)","node_count": 20,"edge_count": 20},{"name": "character-relationship-3d","title": "Pilgrimage Team Character Relationship Graph (3D Projection)","node_count": 22,"edge_count": 32}];
+</script>
+<script>
+(function(){
+  "use strict";
+  var GRAPH=null, GRAPH_NAME="yuanqi-graph";
+  var nodePos=new Map(), focusNode=null, draggingId=null, dragMoved=false, dragActive=false;
+  var activeGroups=new Set(), activeRels=new Set(), labelDim="", searchTerm="";
+  var PALETTE=["#3a6b8c","#c8463a","#d98a3d","#4f9d8a","#8a6db0","#d4a017","#6b8e23","#b5651d","#708090","#cd5c5c"];
+  // ---- 关系语义模型：curated 配色 + 语义权重（粗细） ----
+  // 三元映射（佛法=AI=西游）八类关系
+  var RELATION_COLORS={
+    "Grasping":"#c0392b","Manifestation":"#e67e22","Perfuming":"#16a085","Ripening":"#8e44ad",
+    "Transformation":"#27ae60","Bondage":"#7f5af0","Concealment":"#5d8aa8","Liberation":"#d4a017",
+    // Pilgrimage character relations
+    "Master-Disciple":"#c0392b","Scripture-Bestower":"#e67e22","Father-Son":"#8e44ad","Mother-Son":"#9b59b6",
+    "Brothers":"#16a085","Sworn Brothers":"#1abc9c","Husband-Wife":"#e84393","Colleague":"#2980b9",
+    "Subordinate":"#34495e","Assigned":"#7f8c8d","Protector":"#27ae60","Enemy":"#d63031",
+    "Sworn Foe":"#b33939","Fought":"#e17055","Slew":"#6c2e2e","Rebel":"#d35400","Demanded from":"#95a5a6"
+  };
+  var RELATION_WEIGHT={
+    "Grasping":2.0,"Manifestation":1.6,"Perfuming":2.0,"Ripening":2.2,"Transformation":3.0,"Bondage":2.6,"Concealment":1.5,"Liberation":3.0,
+    "Master-Disciple":2.4,"Scripture-Bestower":1.8,"Father-Son":2.6,"Mother-Son":2.4,"Brothers":2.2,"Sworn Brothers":2.2,"Husband-Wife":2.2,
+    "Colleague":1.4,"Subordinate":1.8,"Assigned":1.4,"Protector":1.8,"Enemy":2.6,"Sworn Foe":2.8,"Fought":2.2,"Slew":3.0,"Rebel":2.4,"Demanded from":1.6
+  };
+  function relationColor(r){ if(RELATION_COLORS[r]) return RELATION_COLORS[r]; var h=0; for(var i=0;i<(r||"").length;i++) h=(h*37+r.charCodeAt(i))>>>0; return PALETTE[h%PALETTE.length]; }
+  function relationWeight(r){ return RELATION_WEIGHT[r]!=null?RELATION_WEIGHT[r]:1.6; }
+  function edgeRel(e){ return e.relation||e.type||""; }
+
+  function colorFor(group, map){
+    if(map && map[group]) return map[group];
+    var h=0; for(var i=0;i<group.length;i++) h=(h*31+group.charCodeAt(i))>>>0;
+    return PALETTE[h%PALETTE.length];
+  }
+  function xmlEsc(s){return (s==null?"":String(s)).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function shortLabel(s){ if(!s) return "?"; var x=String(s); var i=x.indexOf("（"); if(i>0)x=x.slice(0,i); var j=x.indexOf("/"); if(j>0)x=x.slice(0,j); return x.trim()||s.slice(0,10); }
+
+  // ---- 持久化（localStorage）：图谱选择 / 筛选 / 标签维度 / 搜索 / 选中节点 / 节点坐标 ----
+  var STORAGE_KEY="xyj-graph-explorer";
+  function saveState(){
+    try{
+      var pos={}; nodePos.forEach(function(v,k){ pos[k]={x:Math.round(v.x),y:Math.round(v.y)}; });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        name:GRAPH_NAME, groups:[].slice.call(activeGroups), rels:[].slice.call(activeRels),
+        dim:labelDim, search:searchTerm, focus:focusNode, pos:pos
+      }));
+    }catch(e){}
+  }
+  function loadSaved(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)||"null"); }catch(e){ return null; } }
+
+  function setBanner(online,msg){ var b=document.getElementById("banner"); b.textContent=msg||(online?"Online: data from /graph":"Offline: embedded graph set (start the data API for the full online version)"); b.className=online?"online":""; }
+
+  async function loadGraphList(){
+    try{
+      var r=await fetch("/graph"); if(!r.ok) throw 0;
+      var list=await r.json();
+      return {online:true, list:list};
+    }catch(e){
+      var fb=window.GRAPH_LIST||[];
+      return {online:false, list:fb};
+    }
+  }
+  async function loadGraph(name){
+    try{
+      var r=await fetch("/graph/"+name); if(!r.ok) throw 0;
+      var g=await r.json(); setBanner(true); return normalizeGraph(g);
+    }catch(e){
+      var fb=window.GRAPH_FALLBACK&&window.GRAPH_FALLBACK[name];
+      setBanner(false); return fb?normalizeGraph(fb):null;
+    }
+  }
+  function normalizeGraph(g){
+    if(!g||!g.nodes) return g;
+    g.nodes.forEach(function(n){ if(n.id!=null) n.id=String(n.id); });
+    (g.edges||[]).forEach(function(e){ if(e.source!=null) e.source=String(e.source); if(e.target!=null) e.target=String(e.target); });
+    return g;
+  }
+
+  function buildControls(){
+    var meta=GRAPH.meta||{};
+    // group filters
+    var groups={}; GRAPH.nodes.forEach(function(n){ if(n.group) groups[n.group]=(groups[n.group]||0)+1; });
+    var gf=document.getElementById("grpFilters"); gf.innerHTML="";
+    Object.keys(groups).sort().forEach(function(g){
+      activeGroups.add(g);
+      var lab=document.createElement("label"); lab.className="grp";
+      lab.innerHTML='<input type="checkbox" checked data-g="'+xmlEsc(g)+'"><span class="swatch" style="background:'+colorFor(g,meta.group_colors)+'"></span>'+xmlEsc(g)+' <span style="color:#9a8f7c">('+groups[g]+')</span>';
+      gf.appendChild(lab);
+    });
+    gf.querySelectorAll("input").forEach(function(cb){
+      cb.addEventListener("change",function(){ var g=cb.getAttribute("data-g"); if(cb.checked)activeGroups.add(g); else activeGroups.delete(g); renderGraph(); saveState(); });
+    });
+    // dimension toggle
+    var db=document.getElementById("dimBtns"); db.innerHTML="";
+    var dims=meta.dimensions||[];
+    if(dims.length){
+      labelDim=dims[0];
+      dims.forEach(function(d){
+        var b=document.createElement("button"); b.textContent=d; if(d===labelDim)b.className="active";
+        b.addEventListener("click",function(){ labelDim=d; db.querySelectorAll("button").forEach(function(x){x.className="";}); b.className="active"; renderGraph(); saveState(); });
+        db.appendChild(b);
+      });
+    }else{ db.innerHTML='<span class="legend">This graph has no multi-dimensional labels</span>'; }
+    // legend
+    var lg=document.getElementById("legend"); lg.innerHTML="";
+    Object.keys(groups).sort().forEach(function(g){
+      lg.innerHTML+='<div><span class="swatch" style="background:'+colorFor(g,meta.group_colors)+'"></span> '+xmlEsc(g)+'</div>';
+    });
+    // 关系筛选 + 关系图例
+    var rels={}; GRAPH.edges.forEach(function(e){ var r=edgeRel(e); if(r) rels[r]=(rels[r]||0)+1; });
+    var rf=document.getElementById("relFilters"); rf.innerHTML="";
+    Object.keys(rels).sort().forEach(function(r){
+      activeRels.add(r);
+      var lab=document.createElement("label"); lab.className="grp";
+      lab.innerHTML='<input type="checkbox" checked data-r="'+xmlEsc(r)+'"><span class="swatch" style="background:'+relationColor(r)+'"></span>'+xmlEsc(r)+' <span style="color:#9a8f7c">('+rels[r]+')</span>';
+      rf.appendChild(lab);
+    });
+    rf.querySelectorAll("input").forEach(function(cb){
+      cb.addEventListener("change",function(){ var r=cb.getAttribute("data-r"); if(cb.checked)activeRels.add(r); else activeRels.delete(r); renderGraph(); saveState(); });
+    });
+    var rl=document.getElementById("relLegend"); rl.innerHTML="";
+    Object.keys(rels).sort().forEach(function(r){
+      rl.innerHTML+='<div><span class="swatch" style="background:'+relationColor(r)+'"></span> '+xmlEsc(r)+' <span style="color:#9a8f7c"> · weight '+relationWeight(r).toFixed(1)+'</span></div>';
+    });
+  }
+
+  function labelOf(n){
+    if(labelDim && n.aliases && n.aliases[labelDim]) return n.aliases[labelDim];
+    return n.label||n.id;
+  }
+  function visibleSet(){
+    var vis=new Set();
+    GRAPH.nodes.forEach(function(n){
+      var okG=activeGroups.has(n.group);
+      var okS=true;
+      if(searchTerm){
+        var hay=[n.label||"",n.id].concat(n.aliases?Object.values(n.aliases):[]).join(" ");
+        okS=hay.toLowerCase().indexOf(searchTerm.toLowerCase())>=0;
+      }
+      if(okG&&okS) vis.add(n.id);
+    });
+    return vis;
+  }
+  function layout(ids, edges){
+    var W=900,H=560,cx=W/2,cy=H/2;
+    var k=0;
+    ids.forEach(function(id){
+      if(nodePos.has(id)) return;
+      var ang=Math.random()*Math.PI*2;
+      var idx=nodePos.size+(k++);
+      var a=(Math.PI*2*idx)/Math.max(ids.length,1)-Math.PI/2;
+      var R=Math.min(W,H)/2-70;
+      nodePos.set(id,{x:cx+R*Math.cos(a),y:cy+R*Math.sin(a)});
+    });
+    var anchor=new Map();
+    ids.forEach(function(id){ var p=nodePos.get(id); anchor.set(id,{x:p.x,y:p.y}); });
+    var heavy=ids.length>200;
+    var iters=ids.length>60?(heavy?50:90):200;
+    if(dragActive) iters=heavy?4:12;  // 拖拽中只做极轻量收敛，保持流畅（零依赖铁律，不引 force-graph）
+    var ideal=120;
+    for(var it=0;it<iters;it++){
+      var fx=new Map(),fy=new Map();
+      ids.forEach(function(id){fx.set(id,0);fy.set(id,0);});
+      for(var i=0;i<ids.length;i++)for(var j=i+1;j<ids.length;j++){
+        var a=nodePos.get(ids[i]),b=nodePos.get(ids[j]);
+        var dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy; if(d2<1)d2=1;
+        var d=Math.sqrt(d2),rep=6200/d2,ux=dx/d,uy=dy/d;
+        fx.set(ids[i],fx.get(ids[i])+rep*ux); fy.set(ids[i],fy.get(ids[i])+rep*uy);
+        fx.set(ids[j],fx.get(ids[j])-rep*ux); fy.set(ids[j],fy.get(ids[j])-rep*uy);
+      }
+      edges.forEach(function(e){
+        var a=nodePos.get(e.source),b=nodePos.get(e.target); if(!a||!b)return;
+        var dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)||1;
+        var f=(d-ideal)*0.05,ux=dx/d,uy=dy/d;
+        fx.set(e.source,fx.get(e.source)+f*ux); fy.set(e.source,fy.get(e.source)+f*uy);
+        fx.set(e.target,fx.get(e.target)-f*ux); fy.set(e.target,fy.get(e.target)-f*uy);
+      });
+      var cool=1-it/iters;
+      ids.forEach(function(id){
+        var p=nodePos.get(id),an=anchor.get(id);
+        fx.set(id,fx.get(id)+(cx-p.x)*0.01+(an.x-p.x)*0.085);
+        fy.set(id,fy.get(id)+(cy-p.y)*0.01+(an.y-p.y)*0.085);
+        p.x+=Math.max(-18,Math.min(18,fx.get(id)*cool));
+        p.y+=Math.max(-18,Math.min(18,fy.get(id)*cool));
+        p.x=Math.max(28,Math.min(W-28,p.x)); p.y=Math.max(28,Math.min(H-28,p.y));
+      });
+    }
+    return {W:W,H:H};
+  }
+  function renderGraph(){
+    if(!GRAPH){return;}
+    var vis=visibleSet();
+    var edges=GRAPH.edges.filter(function(e){return vis.has(e.source)&&vis.has(e.target)&&activeRels.has(edgeRel(e));});
+    var ids=[];
+    vis.forEach(function(id){ ids.push(id); });
+    if(!ids.length){ document.getElementById("graphBox").innerHTML='<p style="padding:20px;color:#9a8f7c">No matching nodes — adjust the filters.</p>'; return; }
+    var dims=layout(ids,edges);
+    var deg=new Map(); edges.forEach(function(e){ deg.set(e.source,(deg.get(e.source)||0)+1); deg.set(e.target,(deg.get(e.target)||0)+1); });
+    var maxDeg=Math.max.apply(null,ids.map(function(i){return deg.get(i)||0;})), minDeg=Math.min.apply(null,ids.map(function(i){return deg.get(i)||0;}));
+    function rad(id){ var d=deg.get(id)||0; if(maxDeg===minDeg)return 8; return 6+(d-minDeg)/(maxDeg-minDeg)*10; }
+    var meta=GRAPH.meta||{}, nmap={};
+    GRAPH.nodes.forEach(function(n){ nmap[n.id]=n; });
+    var focusNbr=new Set();
+    if(focusNode){ edges.forEach(function(e){ if(e.source===focusNode)focusNbr.add(e.target); if(e.target===focusNode)focusNbr.add(e.source); }); }
+    var svg='<svg viewBox="0 0 '+dims.W+' '+dims.H+'" preserveAspectRatio="xMidYMid meet">';
+    svg+='<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9c6b3f"/></marker></defs>';
+    edges.forEach(function(e){
+      var p1=nodePos.get(e.source),p2=nodePos.get(e.target); if(!p1||!p2)return;
+      var ra=rad(e.source),rb=rad(e.target);
+      var dx=p2.x-p1.x,dy=p2.y-p1.y,d=Math.sqrt(dx*dx+dy*dy)||1,ux=dx/d,uy=dy/d;
+      var x1=p1.x+ux*ra,y1=p1.y+uy*ra,x2=p2.x-ux*(rb+6),y2=p2.y-uy*(rb+6);
+      var mx=(x1+x2)/2,my=(y1+y2)/2;
+      var rel=edgeRel(e), rc=relationColor(rel), rw=relationWeight(rel);
+      var isF=focusNode&&(e.source===focusNode||e.target===focusNode);
+      var isDim=focusNode&&!isF;
+      var w=(isF?2.4:1.1)+rw*0.45;
+      var op=isF?0.95:(isDim?0.10:0.5);
+      svg+='<line x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'" stroke="'+rc+'" stroke-width="'+w.toFixed(2)+'" opacity="'+op+'" marker-end="url(#arr)">';
+      var tip=rel+(e.property?(" · "+e.property):"")+(e.value?(" · "+e.value):"");
+      svg+='<title>'+xmlEsc(tip)+'</title></line>';
+      if(rel && (isF||!focusNode)){
+        svg+='<text class="edge-label" x="'+mx.toFixed(1)+'" y="'+(my-3).toFixed(1)+'" fill="'+rc+'" text-anchor="middle" opacity="'+(isF?1:0.7)+'">'+xmlEsc(rel)+'</text>';
+      }
+    });
+    ids.forEach(function(id){
+      var p=nodePos.get(id),n=nmap[id]; if(!p||!n)return;
+      var r=rad(id), isHub=(deg.get(id)===maxDeg&&maxDeg>1), isF=(id===focusNode), isN=!isF&&focusNode&&focusNbr.has(id);
+      var fill=isF?"#d4a017":(isHub?"#c8463a":colorFor(n.group,meta.group_colors));
+      var stroke=isF?"#8a5a00":(isN?"#d4a017":"#fff"), sw=isF?3:(isN?2:1.5);
+      var lab=labelOf(n); if(lab.length>9)lab=lab.slice(0,9)+"…";
+      svg+='<circle class="gnode" data-id="'+xmlEsc(id)+'" cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'"/>';
+      svg+='<text class="gnode" data-id="'+xmlEsc(id)+'" x="'+p.x.toFixed(1)+'" y="'+(p.y-r-5).toFixed(1)+'" fill="#2b2118" font-size="12" text-anchor="middle">'+xmlEsc(lab)+'</text>';
+    });
+    svg+='</svg>';
+    var box=document.getElementById("graphBox"); box.innerHTML=svg;
+    // 拖拽/点击统一由 box 容器承接（box 在重渲染间持续存在，避免 SVG 替换丢失监听）
+    if(!box._wired){
+      box._wired=true;
+      box.addEventListener("pointerdown",function(ev){
+        var t=ev.target; if(!t||!t.getAttribute||!t.getAttribute("data-id"))return;
+        draggingId=t.getAttribute("data-id"); dragMoved=false; dragActive=true;
+      });
+      box.addEventListener("pointermove",function(ev){
+        if(!draggingId)return;
+        var svgEl=box.querySelector("svg"); if(!svgEl)return;
+        var pt=svgEl.createSVGPoint(); pt.x=ev.clientX; pt.y=ev.clientY;
+        var loc=pt.matrixTransform(svgEl.getScreenCTM().inverse());
+        var p=nodePos.get(draggingId); if(!p)return;
+        p.x=Math.max(28,Math.min(dims.W-28,loc.x)); p.y=Math.max(28,Math.min(dims.H-28,loc.y));
+        dragMoved=true; renderGraph();
+      });
+      box.addEventListener("pointerup",function(ev){
+        if(draggingId && !dragMoved){ focusNode=draggingId; renderGraph(); openDrill(draggingId); saveState(); }
+        draggingId=null; dragActive=false;
+      });
+      box.addEventListener("pointerleave",function(){ draggingId=null; dragActive=false; });
+    }
+  }
+  function openDrill(id){
+    var n=null; GRAPH.nodes.forEach(function(x){ if(x.id===id)n=x; }); if(!n)return;
+    var panel=document.getElementById("drill"); panel.className="drill show";
+    document.querySelector(".layout").classList.remove("no-drill");
+    var html='<button class="drill-close" style="float:right;border:none;background:none;cursor:pointer;color:#9a8f7c" aria-label="Close">✕</button>';
+    html+='<h2>'+xmlEsc(labelOf(n))+'</h2>';
+    if(n.aliases) html+='<div class="tag">'+(n.aliases["Buddhism"]||"")+' · '+(n.aliases["AI"]||"")+' · '+(n.aliases["Journey to the West"]||"")+'</div>';
+    else if(n.group) html+='<div class="tag">'+xmlEsc(n.group)+'</div>';
+    if(n.desc) html+='<div class="desc">'+xmlEsc(n.desc)+'</div>';
+    if(n.aliases){
+      html+='<div class="alias"><b>Buddhism</b> '+xmlEsc(n.aliases["Buddhism"]||"")+'</div>';
+      html+='<div class="alias"><b>AI</b> '+xmlEsc(n.aliases["AI"]||"")+'</div>';
+      html+='<div class="alias"><b>Journey to the West</b> '+xmlEsc(n.aliases["Journey to the West"]||"")+'</div>';
+    }
+    var nbrs=[];
+    GRAPH.edges.forEach(function(e){
+      if(e.source===id) nbrs.push({other:e.target,rel:edgeRel(e),dir:"→",property:e.property,value:e.value});
+      else if(e.target===id) nbrs.push({other:e.source,rel:edgeRel(e),dir:"←",property:e.property,value:e.value});
+    });
+    // 语义关系汇总：按关系类型计数
+    var relCount={}; nbrs.forEach(function(x){ if(x.rel) relCount[x.rel]=(relCount[x.rel]||0)+1; });
+    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">Semantic relation summary ('+nbrs.length+' relations)</h3>';
+    html+='<div class="relsum">';
+    Object.keys(relCount).sort().forEach(function(r){
+      html+='<span class="rs"><i style="background:'+relationColor(r)+'"></i><b>'+xmlEsc(r)+'</b>×'+relCount[r]+'</span>';
+    });
+    html+='</div>';
+    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">Neighbors and relations</h3>';
+    html+='<ul class="nbr">';
+    nbrs.forEach(function(x){
+      var on=null; GRAPH.nodes.forEach(function(y){ if(y.id===x.other)on=y; });
+      var ol=on?labelOf(on):x.other;
+      var pv='';
+      if(x.property||x.value) pv='<div style="font-size:11px;color:#8a7d68;margin-top:3px">'+xmlEsc(x.property||"")+(x.property&&x.value?" · ":"")+xmlEsc(x.value||"")+'</div>';
+      html+='<li data-id="'+xmlEsc(x.other)+'"><div class="row"><span>'+x.dir+' '+xmlEsc(ol)+'</span><span class="rel"><span class="relchip" style="background:'+relationColor(x.rel)+'">'+xmlEsc(x.rel)+'</span></span></div>'+pv+'</li>';
+    });
+    html+='</ul>';
+    var lab=labelOf(n);
+    html+='<h3 style="font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:12px 0 4px">Related research</h3>';
+    html+='<div class="alias"><a href="./search.html?q='+encodeURIComponent(lab)+'" target="_blank" rel="noopener" style="color:#3a6b8c;text-decoration:none">🔍 Site search for “'+xmlEsc(lab)+'” interpretations →</a></div>';
+    panel.innerHTML=html;
+    var closeBtn=panel.querySelector(".drill-close");
+    if(closeBtn) closeBtn.addEventListener("click",function(){ panel.className="drill"; document.querySelector(".layout").classList.add("no-drill"); });
+    panel.querySelectorAll(".nbr li").forEach(function(li){
+      li.addEventListener("click",function(){ var tid=li.getAttribute("data-id"); focusNode=tid; renderGraph(); openDrill(tid); saveState(); });
+    });
+  }
+  // ---- 导出 ----
+  function svgString(){ var s=document.querySelector("#graphBox svg"); return s?new XMLSerializer().serializeToString(s):""; }
+  document.getElementById("exSvg").addEventListener("click",function(){
+    var s=svgString(); if(!s)return; var blob=new Blob([s],{type:"image/svg+xml;charset=utf-8"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=GRAPH_NAME+".svg"; a.click();
+  });
+  document.getElementById("exPng").addEventListener("click",function(){
+    var s=svgString(); if(!s)return;
+    var img=new Image(); var svg64="data:image/svg+xml;base64,"+btoa(unescape(encodeURIComponent(s)));
+    img.onload=function(){
+      var c=document.createElement("canvas"); var vb=(document.querySelector("#graphBox svg").getAttribute("viewBox")||"0 0 900 560").split(" ");
+      c.width=+vb[2]||900; c.height=+vb[3]||560; var ctx=c.getContext("2d");
+      ctx.fillStyle="#fffdf9"; ctx.fillRect(0,0,c.width,c.height); ctx.drawImage(img,0,0,c.width,c.height);
+      c.toBlob(function(blob){ var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=GRAPH_NAME+".png"; a.click(); });
+    };
+    img.src=svg64;
+  });
+  document.getElementById("exJson").addEventListener("click",function(){
+    var vis=visibleSet(); var out={name:GRAPH_NAME,meta:GRAPH.meta,
+      nodes:GRAPH.nodes.filter(function(n){return vis.has(n.id);}),
+      edges:GRAPH.edges.filter(function(e){return vis.has(e.source)&&vis.has(e.target);})};
+    var blob=new Blob([JSON.stringify(out,null,1)],{type:"application/json;charset=utf-8"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=GRAPH_NAME+".json"; a.click();
+  });
+  document.getElementById("search").addEventListener("input",function(e){ searchTerm=e.target.value; renderGraph(); saveState(); });
+  document.getElementById("sideToggle").addEventListener("click",function(){ document.querySelector(".layout").classList.toggle("no-side"); });
+
+  async function init(){
+    var info=await loadGraphList();
+    var sel=document.getElementById("graphSel");
+    sel.innerHTML="";
+    info.list.forEach(function(g){
+      var o=document.createElement("option"); o.value=g.name; o.textContent=g.title+" ("+g.node_count+" nodes/"+g.edge_count+" edges)"; sel.appendChild(o);
+    });
+    if(!info.list.length){ setBanner(false,"Offline: no embedded graph set"); return; }
+    sel.addEventListener("change",function(){ GRAPH_NAME=sel.value; loadAndRender().catch(function(e){ console.error("LOADERR: "+e.message); }); });
+    var saved0=loadSaved();
+    if(saved0&&saved0.name&&info.list.some(function(g){return g.name===saved0.name;})) GRAPH_NAME=saved0.name;
+    else GRAPH_NAME=info.list[0].name;
+    await loadAndRender();
+  }
+  async function loadAndRender(){
+    focusNode=null; nodePos=new Map(); activeGroups=new Set(); activeRels=new Set();
+    GRAPH=await loadGraph(GRAPH_NAME);
+    if(!GRAPH){ document.getElementById("graphBox").innerHTML='<p style="padding:20px;color:#9a8f7c">Graph failed to load (offline with no embedded data).</p>'; return; }
+    buildControls();
+    var saved=loadSaved();
+    if(saved && saved.name===GRAPH_NAME){
+      if(saved.pos){ Object.keys(saved.pos).forEach(function(id){ if(GRAPH.nodes.some(function(n){return n.id===id;})) nodePos.set(id,saved.pos[id]); }); }
+      document.querySelectorAll("#grpFilters input").forEach(function(cb){ var g=cb.getAttribute("data-g"); if(saved.groups && saved.groups.indexOf(g)<0){ cb.checked=false; activeGroups.delete(g); } });
+      document.querySelectorAll("#relFilters input").forEach(function(cb){ var r=cb.getAttribute("data-r"); if(saved.rels && saved.rels.indexOf(r)<0){ cb.checked=false; activeRels.delete(r); } });
+      if(saved.dim && saved.dim!==labelDim){ document.querySelectorAll("#dimBtns button").forEach(function(b){ if(b.textContent===saved.dim) b.click(); }); }
+      if(saved.search){ var si=document.getElementById("search"); si.value=saved.search; searchTerm=saved.search; }
+    }
+    renderGraph();
+    document.getElementById("drill").className="drill";
+    document.querySelector(".layout").classList.add("no-drill");
+    if(saved && saved.name===GRAPH_NAME && saved.focus && GRAPH.nodes.some(function(n){return n.id===saved.focus;})){
+      focusNode=saved.focus; renderGraph(); openDrill(saved.focus);
+    }
+    saveState();
+  }
+  init();
+})();
+</script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>

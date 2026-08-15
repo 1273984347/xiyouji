@@ -8,6 +8,14 @@
 
 ---
 
+## W440 英文站续译 batch18（2026-08-14·v2.3.55）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/karma-reincarnation.html / underworld-power-network.html / graph-explorer.html / narratology-12d-network.html / chart-design.html | W440 | v2.3.55 新增·并行 subagent 英文化 5 页（含工具页 graph-explorer·_validate_en.py 全过） |
+| site/sitemap.xml | W440 | v2.3.55 修改·补 5 个 en 页（207→212 页） |
+| site/**/*.html（5 页） | W440 | v2.3.55 修改·generate_csp.py 重生成 CSP（217 页·1054 内联哈希） |
+
 ## W439 英文站续译 batch17（2026-08-14·v2.3.54）
 
 | 文件 | W | 说明 |
