@@ -4,9 +4,17 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W439），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W440），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.55（2026-08-14）：W440 英文站续译 batch18 — 并行 subagent 新增 5 张可视化页英文化
+
+> **来源**：延续待办「英文站续译」batch18（并行 subagent 拆页）。
+> - **执行（英文化 5 页）**：新增 site/en/karma-reincarnation（因果轮回）/ underworld-power-network（地府权力网络）/ graph-explorer（图谱探索器·工具页）/ narratology-12d-network（十二维叙事学网络）/ chart-design（图表设计）；重建/翻译 EN 导航/页脚 + chrome/script 字面量。
+> - **执行（配套）**：generate_csp.py 重生成 217 页（1054 内联哈希 0 漂移）·sitemap 补 5 页（207→212）。
+> - **验证**：_validate_en.py 5 页全过（chrome=whitelist-only·script=0）·lint_links 3679 链接 0 broken·verify_delivery 核心全绿。
+> - **状态**：已落地·待 commit/push。
 
 ### v2.3.54（2026-08-14）：W439 英文站续译 batch17 — 并行 subagent 新增 5 张可视化页英文化
 
