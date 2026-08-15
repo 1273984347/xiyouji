@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-QUtDezFGB1yCWG7mI6lgAN2H1fvkgNhj/Yx4XvgWW/s=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Emotional Heatmap · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep { margin: 0 8px; color: var(--ink-soft); opacity: 0.6; }
+
+        
+        @media (max-width: 768px) {  }
+        
+        .kpi-card:nth-child(2) { border-top-color: var(--accent-2); }
+        .kpi-card:nth-child(3) { border-top-color: var(--accent-3); }
+        .kpi-card:nth-child(4) { border-top-color: var(--accent-4); }
+        
+        .kpi-card:nth-child(2) .label { color: var(--accent-2); }
+        .kpi-card:nth-child(3) .label { color: var(--accent-3); }
+        .kpi-card:nth-child(4) .label { color: var(--accent-4); }
+        
+        
+
+        
+        
+        
+        .section-sub strong { color: var(--accent); font-weight: 600; }
+        .section-sub .pos { color: var(--accent-4); font-weight: 600; }
+        .section-sub .neu { color: var(--accent-3); font-weight: 600; }
+        .section-sub .neg { color: var(--accent); font-weight: 600; }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 18px;
+            margin-bottom: 16px;
+            font-size: 0.84rem;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; min-width: 0; }
+        .legend-swatch { width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0; }
+        .legend-grad {
+            width: 90px; height: 12px; border-radius: 2px; flex-shrink: 0;
+            background: linear-gradient(90deg, rgba(44,36,24,0.18), rgba(44,36,24,1));
+        }
+
+        /* ===== Chart 1: 热力图矩阵 ===== */
+        .heatmap-wrap {
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 6px;
+        }
+        #heatmap-svg {
+            display: block;
+            min-width: 720px;
+            width: 100%;
+            height: auto;
+        }
+        .heat-cell {
+            stroke: #fff;
+            stroke-width: 1.2;
+            cursor: pointer;
+            transition: stroke-width 0.15s, transform 0.15s;
+        }
+        .heat-cell:hover { stroke-width: 2.5; }
+        .heat-row-label {
+            font-size: 0.86rem;
+            font-weight: 600;
+            fill: var(--ink);
+        }
+        .heat-row-label.dim { fill: var(--ink-soft); opacity: 0.5; }
+        .heat-row-label.active { fill: var(--accent); }
+        .heat-col-label {
+            font-size: 0.74rem;
+            fill: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .heat-cell.dim { opacity: 0.18 !important; }
+        .heat-cell.active { stroke: var(--ink); stroke-width: 2; }
+        .heat-row-band {
+            fill: var(--accent-soft);
+            opacity: 0.16;
+            pointer-events: none;
+        }
+        .heat-tooltip {
+            position: absolute;
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 12px 14px;
+            border-radius: 6px;
+            font-size: 0.84rem;
+            line-height: 1.55;
+            max-width: 340px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+            border: 1px solid var(--accent-soft);
+            z-index: 10;
+        }
+        .heat-tooltip .ht-scholar { color: var(--accent-soft); font-weight: 600; font-size: 0.96rem; }
+        .heat-tooltip .ht-meta { color: rgba(245,233,212,0.7); font-size: 0.76rem; margin: 2px 0 6px; font-family: "JetBrains Mono", monospace; }
+        .heat-tooltip .ht-pill {
+            display: inline-block;
+            font-size: 0.72rem;
+            padding: 1px 7px;
+            border-radius: 10px;
+            margin-right: 6px;
+            color: #fff;
+        }
+        .ht-pill.positive { background: var(--accent-4); }
+        .ht-pill.neutral  { background: var(--accent-3); }
+        .ht-pill.negative { background: var(--accent); }
+        .heat-tooltip .ht-quote { color: var(--accent-soft); font-style: italic; margin-top: 6px; overflow-wrap: anywhere; }
+
+        /* ===== Chart 2: 情感波动曲线 ===== */
+        .curves-wrap {
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 6px;
+        }
+        #curves-svg {
+            display: block;
+            min-width: 720px;
+            width: 100%;
+            height: auto;
+        }
+        .curves-axis text, .curves-axis line, .curves-axis path {
+            font-size: 0.76rem;
+            fill: var(--ink-soft);
+            stroke: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .curve-seg {
+            fill: none;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+        }
+        .curve-seg.dim { opacity: 0.12; }
+        .curve-dot {
+            stroke: #fff;
+            stroke-width: 1.2;
+            cursor: pointer;
+            transition: r 0.15s;
+        }
+        .curve-dot:hover { r: 5; }
+        .curve-dot.dim { opacity: 0.15; }
+        .curve-end-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+        .curve-end-label.dim { opacity: 0.18; }
+        .curves-tooltip {
+            position: absolute;
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            max-width: 300px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+            border: 1px solid var(--accent-soft);
+            z-index: 10;
+        }
+        .curves-tooltip .ct-name { color: var(--accent-soft); font-weight: 600; }
+
+        /* ===== Chart 3: 名人卡片 ===== */
+        .scholar-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(min(260px, 100%), 1fr));
+            gap: 16px;
+        }
+        @media (max-width: 1040px) { .scholar-grid { grid-template-columns: repeat(2, minmax(min(280px, 100%), 1fr)); } }
+        @media (max-width: 520px)  { .scholar-grid { grid-template-columns: 1fr; } }
+        .scholar-card {
+            background: linear-gradient(180deg, #fffdf8 0%, #faf7f2 100%);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px 18px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--accent-3);
+            cursor: pointer;
+            position: relative;
+            min-width: 0;
+            transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+            overflow-wrap: anywhere;
+        }
+        .scholar-card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(60,40,20,0.12); }
+        .scholar-card.active { border-color: var(--accent); border-top-color: var(--accent); box-shadow: 0 0 0 2px var(--accent), var(--shadow); }
+        .scholar-card .sc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--line);
+            gap: 8px;
+        }
+        .scholar-card .sc-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--ink);
+            min-width: 0;
+        }
+        .scholar-card.active .sc-name { color: var(--accent); }
+        .scholar-card .sc-era {
+            font-size: 0.72rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+            flex-shrink: 0;
+        }
+        .scholar-card .sc-school {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        .scholar-card .sc-motto {
+            font-size: 0.82rem;
+            color: var(--accent-2);
+            line-height: 1.55;
+            margin-bottom: 10px;
+            padding: 6px 8px;
+            background: rgba(58,107,140,0.06);
+            border-left: 2px solid var(--accent-2);
+            border-radius: 0 3px 3px 0;
+            overflow-wrap: anywhere;
+        }
+        .sc-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            font-size: 0.74rem;
+        }
+        .sc-stat { text-align: center; padding: 4px 0; }
+        .sc-stat .num { font-size: 1rem; font-weight: 600; display: block; }
+        .sc-stat.pos .num { color: var(--accent-4); }
+        .sc-stat.neu .num { color: var(--accent-3); }
+        .sc-stat.neg .num { color: var(--accent); }
+        .sc-stat .lbl { color: var(--ink-soft); font-size: 0.7rem; }
+        .sc-avg {
+            margin-top: 8px;
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            text-align: right;
+        }
+        .sc-hint {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            font-size: 0.66rem;
+            color: var(--ink-soft);
+            opacity: 0.5;
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        /* ===== Insight Box ===== */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 22px 26px;
+            border-radius: 4px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            letter-spacing: 0.05em;
+        }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong { color: var(--accent); font-weight: 600; }
+        .insight-box li em { color: var(--accent-2); font-style: italic; }
+
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+            overflow-wrap: anywhere;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: #f5e9d4;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .interaction-hint {
+            margin-top: 14px;
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            text-align: center;
+            overflow-wrap: anywhere;
+        }
+        .interaction-hint kbd {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 3px;
+            padding: 1px 6px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.78rem;
+            color: var(--ink);
+        }
+
+        footer.
+        footer.
+        footer.
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/emotional-heatmap.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Emotional Heatmap · Annotated Journey to the West</p>
+        <p class="kicker">Q+++ · Emotional Heatmap</p>
+        <h1>Emotional Heatmap · Annotated Journey to the West</h1>
+        <p class="subtitle">EMOTIONAL HEATMAP</p>
+        <p class="tagline">Eight critics' emotional fluctuations across the eighty-one ordeals — all at a glance.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <nav class="breadcrumb">
+            <a href="dashboard.html">Dashboard</a>
+            <span class="sep">›</span>
+            <span>Emotional Heatmap</span>
+        </nav>
+
+        <div class="notice" id="dataSource">
+            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory). Quotes marked "historical" are real documents; those marked "pastiche" are composed following the intellectual thread.
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">SCHOLARS · Critics</div>
+                <div class="value">8</div>
+                <div class="desc">Li Zhuowu · Jin Shengtan · Lu Xun · Hu Shi · Mao Zedong · Lin Yutang · Qian Zhongshu · Guo Moruo</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">HARDSHIPS · Selected Chapters</div>
+                <div class="value">20</div>
+                <div class="desc">Ch. 1 / 2 / 5 / 7 / 8 / 12 / 14 / 17 / 22 / 24 / 27 / 32 / 45 / 53 / 59 / 65 / 74 / 78 / 88 / 100</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">REACTIONS · Emotional Responses</div>
+                <div class="value">160</div>
+                <div class="desc">8 × 20 matrix · each cell holds sentiment / intensity / quote</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">POLARITY · Sentiment Polarity</div>
+                <div class="value">3</div>
+                <div class="desc">Positive (green) · Neutral (yellow) · Negative (red) · intensity 1–10 mapped to opacity</div>
+            </div>
+        </div>
+
+        <!-- 核心可视化 1：热力图矩阵 -->
+        <section class="section device">
+            <h2 class="section-title">Heatmap Matrix</h2>
+            <div class="section-sub">
+                The horizontal axis is the 20 selected chapters (in chapter order); the vertical axis is the 8 critics. Each cell's color maps to <span class="pos">sentiment polarity</span> (positive = green / neutral = yellow / negative = red),
+                while its opacity maps to <strong>reaction intensity</strong> (1–10, the deeper the stronger). <strong>Hover</strong> a cell to see its quote tooltip; <strong>click</strong> a cell or a scholar card below to lock/unlock the row highlight.
+            </div>
+            <div class="legend">
+                <div class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span><span>positive</span></div>
+                <div class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span><span>neutral</span></div>
+                <div class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span><span>negative</span></div>
+                <div class="legend-item"><span class="legend-grad"></span><span>intensity low → high</span></div>
+            </div>
+            <div class="heatmap-wrap">
+                <svg id="heatmap-svg" role="img" aria-labelledby="heatmap-title"><title id="heatmap-title">Emotional heatmap: reaction-intensity matrix of 8 figures × 20 ordeals; hover a cell to see the quote</title></svg>
+            </div>
+            <div class="heat-tooltip" id="heat-tooltip"></div>
+            <div class="interaction-hint">
+                Tip: <kbd>hover</kbd> a cell to see its quote · <kbd>click</kbd> a scholar card or cell to lock the row highlight · click again to unlock
+            </div>
+        </section>
+
+        <!-- 核心可视化 2：情感波动曲线 -->
+        <section class="section device">
+            <h2 class="section-title">Sentiment Curves</h2>
+            <div class="section-sub">
+                One polyline per figure; the horizontal axis is the 20 ordeal numbers, the vertical axis is reaction intensity (1–10). Each <strong>segment's color</strong> maps to that segment's sentiment polarity,
+                and the <strong>endpoint dots</strong> use the same color mapping. The line-end label is the scholar's name. <strong>Hover</strong> a dot to see details.
+            </div>
+            <div class="curves-wrap">
+                <svg id="curves-svg" role="img" aria-labelledby="curves-title"><title id="curves-title">Sentiment curves: one polyline per figure; horizontal axis 20 ordeal numbers, vertical axis reaction intensity 1-10; hover a dot for details</title></svg>
+            </div>
+            <div class="curves-tooltip" id="curves-tooltip"></div>
+        </section>
+
+        <!-- 核心可视化 3：名人卡片 -->
+        <section class="section device">
+            <h2 class="section-title">Scholar Cards</h2>
+            <div class="section-sub">
+                8 cards, each with name · dates · school · representative saying, plus the <span class="pos">positive</span> / <span class="neu">neutral</span> / <span class="neg">negative</span> counts and average intensity across the 20 ordeals.
+                <strong>Hover</strong> highlights the corresponding heatmap row; <strong>click</strong> locks the highlight (keyboard <kbd>Enter</kbd> / <kbd>Space</kbd> also supported).
+            </div>
+            <div class="scholar-grid" id="scholar-grid"></div>
+        </section>
+
+        <!-- 关键洞察 -->
+        <section class="section">
+            <h2 class="section-title">Insights</h2>
+            <div class="insight-box">
+                <h4>One text, eight heartbeats</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../data/criticism-history.html">The Long Scroll of Criticism History (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/emotional-heatmap.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    /* ==========================================================
+       EMBEDDED_FALLBACK 数据（fetch 失败时使用 · file:// 必可用）
+       8 位名人 × 20 难 = 160 条情感反应
+       引文标注「史料」者为真实文献，「拟作」者为依思想脉络拟写
+       ========================================================== */
+    const EMBEDDED_DATA = {
+        meta: {
+            title: "Emotional Heatmap",
+            scholar_count: 8,
+            hardship_count: 20,
+            reaction_count: 160
+        },
+        scholars: [
+            { key: "lizhuowu",     name: "Li Zhuowu",    era: "1527-1602", school: "Childlike Mind",        color: "#C9A063", motto: "The finest writing under heaven has never failed to spring from the childlike mind." },
+            { key: "jinshengtan",  name: "Jin Shengtan", era: "1608-1661", school: "Books of Genius",       color: "#3a6b8c", motto: "The wonder of writing lies wholly in having no fixed method." },
+            { key: "luxun",        name: "Lu Xun",       era: "1881-1936", school: "Gods-and-Demons Novel", color: "#c8463a", motto: "Gods and demons all have human feeling; spirits and monsters too know the ways of the world." },
+            { key: "hushi",        name: "Hu Shi",       era: "1891-1962", school: "Textual Research",      color: "#6B8E5A", motto: "Journey to the West is a work of play." },
+            { key: "maozedong",    name: "Mao Zedong",   era: "1893-1976", school: "Revolutionary Allegory", color: "#8c2a2a", motto: "Today we hail the Great Sage Sun, for the demon mist has come again." },
+            { key: "linyutang",    name: "Lin Yutang",   era: "1895-1976", school: "Leisure and Humor",     color: "#b88a3a", motto: "Wukong is the embodiment of Chinese freedom." },
+            { key: "qianzhongshu", name: "Qian Zhongshu", era: "1910-1998", school: "Broad Erudition",      color: "#6B6455", motto: "Journey to the West is a deep repository of what the Master did not speak of." },
+            { key: "guomoruo",     name: "Guo Moruo",    era: "1892-1978", school: "Romantic Revolution",   color: "#b85a3a", motto: "Man and monster reversed, right and wrong confused; merciful to the enemy, harsh to friends." }
+        ],
+        hardships: [
+            { idx: 1,  chapter: 1,   title: "The Stone Monkey Is Born",                    subtitle: "The spiritual root conceives, its source flows forth" },
+            { idx: 2,  chapter: 2,   title: "Wukong Learns the Arts",                      subtitle: "Awakening to Bodhi's true subtle doctrine" },
+            { idx: 3,  chapter: 5,   title: "The Great Sage Steals the Elixir",            subtitle: "The Great Sage disrupts the peach banquet and steals the elixir" },
+            { idx: 4,  chapter: 7,   title: "The Great Sage Escapes the Eight Trigrams Furnace", subtitle: "The Great Sage escapes the Eight Trigrams Furnace" },
+            { idx: 5,  chapter: 8,   title: "The Buddha Lays a Plan",                      subtitle: "Our Buddha creates scriptures to convey the ultimate bliss" },
+            { idx: 6,  chapter: 12,  title: "Xuanzang Appears",                            subtitle: "The Tang emperor, in sincerity, holds the great assembly" },
+            { idx: 7,  chapter: 14,  title: "Subduing Wukong",                             subtitle: "The mind-ape returns to the right, the six thieves vanish" },
+            { idx: 8,  chapter: 17,  title: "The Black Bear Spirit",                       subtitle: "Sun the Pilgrim wreaks havoc on Black Wind Mountain" },
+            { idx: 9,  chapter: 22,  title: "Subduing Sha Wujing",                         subtitle: "Bajie fights fiercely at Flowing Sand River" },
+            { idx: 10, chapter: 24,  title: "The Ginseng Fruit of Five Villages Monastery", subtitle: "The great immortal of Long Life Mountain detains an old friend" },
+            { idx: 11, chapter: 27,  title: "Thrice Beating the White Bone Demon",         subtitle: "The corpse demon thrice deceives Tang Sanzang" },
+            { idx: 12, chapter: 32,  title: "The Gold and Silver Horns of Lotus Cave",     subtitle: "On Flat-Top Mountain the time-keeper delivers a message" },
+            { idx: 13, chapter: 45,  title: "The Contest of Magic in Chechi Kingdom",      subtitle: "The Great Sage leaves his name at the Three Pure Ones temple" },
+            { idx: 14, chapter: 53,  title: "The Woman's Kingdom",                         subtitle: "The Chan master eats and conceives a ghost-child" },
+            { idx: 15, chapter: 59,  title: "Flaming Mountain",                            subtitle: "Tang Sanzang's road is blocked at Flaming Mountain" },
+            { idx: 16, chapter: 65,  title: "The Yellow-Browed Demon",                     subtitle: "The evil spirit falsely sets up a Lesser Thunderclap" },
+            { idx: 17, chapter: 74,  title: "Lion Camel Ridge",                            subtitle: "Changgeng reports the demon chief's ferocity" },
+            { idx: 18, chapter: 78,  title: "Bhiksu Kingdom",                              subtitle: "The bhiksu pities the children and dispatches a dark spirit" },
+            { idx: 19, chapter: 88,  title: "Taking Disciples in Yuhua Prefecture",        subtitle: "The Chan master reaches Yuhua and holds a Dharma assembly" },
+            { idx: 20, chapter: 100, title: "The Scripture Quest Fulfilled",               subtitle: "Returning to the East by the direct route, the five saints attain true form" }
+        ],
+        reactions: [
+            /* Li Zhuowu */
+            { scholar: "Li Zhuowu", chapter: 1,   hardship: "The Stone Monkey Is Born", sentiment: "positive", intensity: 9, quote: "A heaven-born stone monkey, pure childlike mind. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 2,   hardship: "Wukong Learns the Arts", sentiment: "positive", intensity: 8, quote: "A heart that seeks the Way — the truth of the childlike mind. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 5,   hardship: "The Great Sage Steals the Elixir", sentiment: "positive", intensity: 9, quote: "Stealing elixir and peach — playfulness to the utmost, childlike mind to the utmost. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 7,   hardship: "The Great Sage Escapes the Eight Trigrams Furnace", sentiment: "positive", intensity: 8, quote: "The furnace forges fiery eyes and golden pupils; the childlike mind is not burned away. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 8,   hardship: "The Buddha Lays a Plan", sentiment: "neutral", intensity: 5, quote: "The Tathagata's single palm stills the mind-ape — a playful stroke of the author. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 12,   hardship: "Xuanzang Appears", sentiment: "neutral", intensity: 4, quote: "The origin of the scripture quest — passing narrative. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 14,   hardship: "Subduing Wukong", sentiment: "negative", intensity: 7, quote: "The mind-ape returns to the right; the childlike mind is everywhere restrained — lamentable. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 17,   hardship: "The Black Bear Spirit", sentiment: "neutral", intensity: 5, quote: "The black bear steals the cassock — mere worldly sentiment. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 22,   hardship: "Subduing Sha Wujing", sentiment: "neutral", intensity: 5, quote: "All three disciples assembled — formulaic writing. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 24,   hardship: "The Ginseng Fruit of Five Villages Monastery", sentiment: "positive", intensity: 7, quote: "Toppling the ginseng-fruit tree — the childlike mind dares. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 27,   hardship: "Thrice Beating the White Bone Demon", sentiment: "positive", intensity: 8, quote: "Seeing through the demon — the childlike mind is not deceived. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 32,   hardship: "The Gold and Silver Horns of Lotus Cave", sentiment: "positive", intensity: 7, quote: "Winning the treasures by wit — playful brushwork. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 45,   hardship: "The Contest of Magic in Chechi Kingdom", sentiment: "positive", intensity: 8, quote: "Winning the magic contest over the demon priests — the childlike mind is fearless. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 53,   hardship: "The Woman's Kingdom", sentiment: "positive", intensity: 9, quote: "Hard to break the pass of love; the childlike mind shows true feeling. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 59,   hardship: "Flaming Mountain", sentiment: "positive", intensity: 7, quote: "Borrowing the fan to steer the wind — the delight of play. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 65,   hardship: "The Yellow-Browed Demon", sentiment: "neutral", intensity: 5, quote: "The ordeal of the Lesser Thunderclap — even the Buddha turns demon. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 74,   hardship: "Lion Camel Ridge", sentiment: "neutral", intensity: 5, quote: "Three demons joined in force — an allegory of the worldly. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 78,   hardship: "Bhiksu Kingdom", sentiment: "positive", intensity: 7, quote: "Saving the one thousand one hundred and eleven children — the childlike mind's great compassion. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 88,   hardship: "Taking Disciples in Yuhua Prefecture", sentiment: "neutral", intensity: 5, quote: "Taking disciples and transmitting the Dharma — plain writing. (pastiche)" },
+            { scholar: "Li Zhuowu", chapter: 100,   hardship: "The Scripture Quest Fulfilled", sentiment: "negative", intensity: 6, quote: "The mind-ape submits and becomes Buddha — the sorrow of the childlike mind. (pastiche)" },
+            /* Jin Shengtan */
+            { scholar: "Jin Shengtan", chapter: 1,   hardship: "The Stone Monkey Is Born", sentiment: "positive", intensity: 8, quote: "A striking opening — the wonder of writing lies wholly in having no fixed rule. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 2,   hardship: "Wukong Learns the Arts", sentiment: "positive", intensity: 7, quote: "The apprenticeship passage — rigorously disciplined composition. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 5,   hardship: "The Great Sage Steals the Elixir", sentiment: "positive", intensity: 8, quote: "Unrestrained brushwork — the hand of a Book of Genius. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 7,   hardship: "The Great Sage Escapes the Eight Trigrams Furnace", sentiment: "positive", intensity: 8, quote: "The Eight Trigrams Furnace passage — perfectly judged heat. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 8,   hardship: "The Buddha Lays a Plan", sentiment: "neutral", intensity: 5, quote: "The Tathagata lays a plan — a turn in the narrative. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 12,   hardship: "Xuanzang Appears", sentiment: "neutral", intensity: 4, quote: "The great Land-and-Water assembly — nothing remarkable. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 14,   hardship: "Subduing Wukong", sentiment: "neutral", intensity: 5, quote: "The mind-ape returns to the right — the narrative gathers itself. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 17,   hardship: "The Black Bear Spirit", sentiment: "neutral", intensity: 5, quote: "The Black Wind Mountain passage — plain and solid writing. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 22,   hardship: "Subduing Sha Wujing", sentiment: "neutral", intensity: 4, quote: "Taking a disciple at Flowing Sand River — formulaic. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 24,   hardship: "The Ginseng Fruit of Five Villages Monastery", sentiment: "positive", intensity: 7, quote: "The ginseng fruit at Five Villages Monastery — a wonderfully fanciful construction. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 27,   hardship: "Thrice Beating the White Bone Demon", sentiment: "positive", intensity: 9, quote: "Thrice Beating the White Bone Demon — the very height of literary art. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 32,   hardship: "The Gold and Silver Horns of Lotus Cave", sentiment: "positive", intensity: 8, quote: "The Gold and Silver Horns — a narrative full of twists. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 45,   hardship: "The Contest of Magic in Chechi Kingdom", sentiment: "positive", intensity: 8, quote: "The magic-contest passage — the author's mind at its most original. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 53,   hardship: "The Woman's Kingdom", sentiment: "positive", intensity: 7, quote: "The Woman's Kingdom passage — gentle, exquisite sentiment. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 59,   hardship: "Flaming Mountain", sentiment: "positive", intensity: 8, quote: "Borrowing the palm-leaf fan thrice — narrative momentum like a rising tide. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 65,   hardship: "The Yellow-Browed Demon", sentiment: "neutral", intensity: 6, quote: "The Lesser Thunderclap — the meaning slightly repetitive. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 74,   hardship: "Lion Camel Ridge", sentiment: "positive", intensity: 7, quote: "The three demons of Lion Camel Ridge — a grand spectacle of writing. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 78,   hardship: "Bhiksu Kingdom", sentiment: "positive", intensity: 7, quote: "Saving the children of Bhiksu — a compassionate literary mind. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 88,   hardship: "Taking Disciples in Yuhua Prefecture", sentiment: "neutral", intensity: 5, quote: "Taking disciples in Yuhua Prefecture — the narrative gradually eases. (pastiche)" },
+            { scholar: "Jin Shengtan", chapter: 100,   hardship: "The Scripture Quest Fulfilled", sentiment: "neutral", intensity: 5, quote: "Becoming Buddha and patriarch — a complete ending but short on marvel. (pastiche)" },
+            /* Lu Xun */
+            { scholar: "Lu Xun", chapter: 1,   hardship: "The Stone Monkey Is Born", sentiment: "positive", intensity: 7, quote: "The stone monkey is born transformed — gods and demons all have human feeling. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 2,   hardship: "Wukong Learns the Arts", sentiment: "neutral", intensity: 5, quote: "The apprenticeship passage — one sees the stone of another mountain. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 5,   hardship: "The Great Sage Steals the Elixir", sentiment: "positive", intensity: 7, quote: "The author's temperament was again fond of farce, so that even amid matters of transformation and illusion... (historical)" },
+            { scholar: "Lu Xun", chapter: 7,   hardship: "The Great Sage Escapes the Eight Trigrams Furnace", sentiment: "positive", intensity: 8, quote: "Gods and demons all have human feeling; spirits and monsters too know the ways of the world. (historical)" },
+            { scholar: "Lu Xun", chapter: 8,   hardship: "The Buddha Lays a Plan", sentiment: "neutral", intensity: 5, quote: "The Tathagata stilling the mind-ape — a structural necessity of the author. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 12,   hardship: "Xuanzang Appears", sentiment: "neutral", intensity: 4, quote: "The origin of the scripture quest — history and fiction interwoven. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 14,   hardship: "Subduing Wukong", sentiment: "negative", intensity: 6, quote: "The mind-ape returns to the right; from here on it loses its wild nature. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 17,   hardship: "The Black Bear Spirit", sentiment: "neutral", intensity: 5, quote: "The black-bear-spirit passage — also versed in the ways of the world. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 22,   hardship: "Subduing Sha Wujing", sentiment: "neutral", intensity: 4, quote: "The three disciples all gathered — a structural inevitability. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 24,   hardship: "The Ginseng Fruit of Five Villages Monastery", sentiment: "positive", intensity: 6, quote: "The Five Villages Monastery passage — often mixed with jesting words. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 27,   hardship: "Thrice Beating the White Bone Demon", sentiment: "negative", intensity: 7, quote: "Tang Sanzang is muddled — a counterexample to the gods-and-demons knowing the ways of the world. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 32,   hardship: "The Gold and Silver Horns of Lotus Cave", sentiment: "neutral", intensity: 5, quote: "The Lotus Cave passage — also a work of play. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 45,   hardship: "The Contest of Magic in Chechi Kingdom", sentiment: "positive", intensity: 7, quote: "The magic contest of Chechi — satirizing the rivalry of Buddhism and Daoism. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 53,   hardship: "The Woman's Kingdom", sentiment: "positive", intensity: 7, quote: "The Woman's Kingdom passage — the utmost in worldly human feeling. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 59,   hardship: "Flaming Mountain", sentiment: "neutral", intensity: 6, quote: "The Flaming Mountain passage — also playful brushwork. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 65,   hardship: "The Yellow-Browed Demon", sentiment: "neutral", intensity: 5, quote: "The Lesser Thunderclap — a stock device of the gods-and-demons novel. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 74,   hardship: "Lion Camel Ridge", sentiment: "neutral", intensity: 5, quote: "Lion Camel Ridge — both gods-and-demons and worldly wisdom. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 78,   hardship: "Bhiksu Kingdom", sentiment: "positive", intensity: 7, quote: "Saving the children in Bhiksu Kingdom — worldly human feeling. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 88,   hardship: "Taking Disciples in Yuhua Prefecture", sentiment: "neutral", intensity: 4, quote: "Yuhua Prefecture — the writing grows weary. (pastiche)" },
+            { scholar: "Lu Xun", chapter: 100,   hardship: "The Scripture Quest Fulfilled", sentiment: "neutral", intensity: 5, quote: "Becoming Buddha and patriarch — a playful conclusion. (pastiche)" },
+            /* Hu Shi */
+            { scholar: "Hu Shi", chapter: 1,   hardship: "The Stone Monkey Is Born", sentiment: "neutral", intensity: 5, quote: "The Stone Monkey's birth — rich in mythological color. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 2,   hardship: "Wukong Learns the Arts", sentiment: "neutral", intensity: 4, quote: "The apprenticeship passage — unremarkable. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 5,   hardship: "The Great Sage Steals the Elixir", sentiment: "neutral", intensity: 5, quote: "The elixir-stealing passage — a work of play. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 7,   hardship: "The Great Sage Escapes the Eight Trigrams Furnace", sentiment: "neutral", intensity: 5, quote: "The Eight Trigrams Furnace — also playful brushwork. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 8,   hardship: "The Buddha Lays a Plan", sentiment: "neutral", intensity: 4, quote: "The Buddha's plan — a structural necessity. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 12,   hardship: "Xuanzang Appears", sentiment: "neutral", intensity: 5, quote: "Xuanzang appears — history and fiction interwoven. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 14,   hardship: "Subduing Wukong", sentiment: "neutral", intensity: 5, quote: "The subduing of Wukong — a structural necessity of the author. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 17,   hardship: "The Black Bear Spirit", sentiment: "neutral", intensity: 4, quote: "The black-bear-spirit passage — plain. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 22,   hardship: "Subduing Sha Wujing", sentiment: "neutral", intensity: 4, quote: "Taking a disciple at Flowing Sand River — formulaic. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 24,   hardship: "The Ginseng Fruit of Five Villages Monastery", sentiment: "neutral", intensity: 5, quote: "Five Villages Monastery — also a work of play. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 27,   hardship: "Thrice Beating the White Bone Demon", sentiment: "neutral", intensity: 5, quote: "Thrice Beating the White Bone Demon — a work of play. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 32,   hardship: "The Gold and Silver Horns of Lotus Cave", sentiment: "neutral", intensity: 4, quote: "Lotus Cave — also play. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 45,   hardship: "The Contest of Magic in Chechi Kingdom", sentiment: "neutral", intensity: 5, quote: "Chechi Kingdom — satirical writing. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 53,   hardship: "The Woman's Kingdom", sentiment: "positive", intensity: 6, quote: "The Woman's Kingdom — feeling glimpsed within the play. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 59,   hardship: "Flaming Mountain", sentiment: "neutral", intensity: 5, quote: "Flaming Mountain — playful brushwork. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 65,   hardship: "The Yellow-Browed Demon", sentiment: "neutral", intensity: 4, quote: "The Yellow-Browed Demon — also a stock formula. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 74,   hardship: "Lion Camel Ridge", sentiment: "neutral", intensity: 4, quote: "Lion Camel Ridge — tediously long. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 78,   hardship: "Bhiksu Kingdom", sentiment: "neutral", intensity: 5, quote: "Bhiksu Kingdom — also play. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 88,   hardship: "Taking Disciples in Yuhua Prefecture", sentiment: "neutral", intensity: 4, quote: "Yuhua Prefecture — plain. (pastiche)" },
+            { scholar: "Hu Shi", chapter: 100,   hardship: "The Scripture Quest Fulfilled", sentiment: "positive", intensity: 6, quote: "Journey to the West is a work of play. (historical)" },
+            /* Mao Zedong */
+            { scholar: "Mao Zedong", chapter: 1,   hardship: "The Stone Monkey Is Born", sentiment: "positive", intensity: 9, quote: "The stone monkey rebels — to rebel is justified. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 2,   hardship: "Wukong Learns the Arts", sentiment: "positive", intensity: 8, quote: "Wukong learns the arts — arming the mind. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 5,   hardship: "The Great Sage Steals the Elixir", sentiment: "positive", intensity: 9, quote: "Havoc in Heaven — to rebel is justified. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 7,   hardship: "The Great Sage Escapes the Eight Trigrams Furnace", sentiment: "positive", intensity: 10, quote: "The golden monkey rouses his thousand-catty cudgel; the jade firmament is cleansed of ten thousand li of dust. (historical)" },
+            { scholar: "Mao Zedong", chapter: 8,   hardship: "The Buddha Lays a Plan", sentiment: "negative", intensity: 6, quote: "The Buddha's suppression — an allegory of the reactionaries. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 12,   hardship: "Xuanzang Appears", sentiment: "neutral", intensity: 4, quote: "Xuanzang appears — a passing scene. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 14,   hardship: "Subduing Wukong", sentiment: "negative", intensity: 7, quote: "The mind-ape is tamed — a pity. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 17,   hardship: "The Black Bear Spirit", sentiment: "positive", intensity: 7, quote: "The black bear passage — an allegory of struggle. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 22,   hardship: "Subduing Sha Wujing", sentiment: "neutral", intensity: 5, quote: "The three disciples band together. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 24,   hardship: "The Ginseng Fruit of Five Villages Monastery", sentiment: "neutral", intensity: 5, quote: "Five Villages Monastery — a passing scene. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 27,   hardship: "Thrice Beating the White Bone Demon", sentiment: "positive", intensity: 10, quote: "Today we hail the Great Sage Sun, for the demon mist has come again. (historical)" },
+            { scholar: "Mao Zedong", chapter: 32,   hardship: "The Gold and Silver Horns of Lotus Cave", sentiment: "positive", intensity: 7, quote: "The wits duel at Lotus Cave — worth learning from. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 45,   hardship: "The Contest of Magic in Chechi Kingdom", sentiment: "positive", intensity: 8, quote: "Shattering superstition, fighting to the end. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 53,   hardship: "The Woman's Kingdom", sentiment: "neutral", intensity: 5, quote: "The beautiful-woman pass — beware the sugar-coated bullet. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 59,   hardship: "Flaming Mountain", sentiment: "positive", intensity: 9, quote: "Flaming Mountain — an allegory of the people's struggle. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 65,   hardship: "The Yellow-Browed Demon", sentiment: "positive", intensity: 7, quote: "The Yellow-Browed Demon — beware false revolution. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 74,   hardship: "Lion Camel Ridge", sentiment: "positive", intensity: 8, quote: "Lion Camel Ridge — an allegory of the three great mountains. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 78,   hardship: "Bhiksu Kingdom", sentiment: "positive", intensity: 8, quote: "Saving the little ones — save the children. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 88,   hardship: "Taking Disciples in Yuhua Prefecture", sentiment: "neutral", intensity: 5, quote: "Yuhua Prefecture — a passing scene. (pastiche)" },
+            { scholar: "Mao Zedong", chapter: 100,   hardship: "The Scripture Quest Fulfilled", sentiment: "neutral", intensity: 6, quote: "Becoming Buddha and patriarch — the revolution succeeds but compromises. (pastiche)" },
+            /* Lin Yutang */
+            { scholar: "Lin Yutang", chapter: 1,   hardship: "The Stone Monkey Is Born", sentiment: "positive", intensity: 8, quote: "The Stone Monkey's birth — the embodiment of freedom. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 2,   hardship: "Wukong Learns the Arts", sentiment: "positive", intensity: 7, quote: "The apprenticeship passage — the beginning of the quest for freedom. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 5,   hardship: "The Great Sage Steals the Elixir", sentiment: "positive", intensity: 8, quote: "Stealing the elixir — humor at its height. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 7,   hardship: "The Great Sage Escapes the Eight Trigrams Furnace", sentiment: "positive", intensity: 7, quote: "The Eight Trigrams Furnace — freedom is not burned away. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 8,   hardship: "The Buddha Lays a Plan", sentiment: "neutral", intensity: 5, quote: "The Buddha's plan — the author's structure. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 12,   hardship: "Xuanzang Appears", sentiment: "neutral", intensity: 4, quote: "Xuanzang's passing scene. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 14,   hardship: "Subduing Wukong", sentiment: "negative", intensity: 5, quote: "The mind-ape is tamed — freedom restrained. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 17,   hardship: "The Black Bear Spirit", sentiment: "neutral", intensity: 5, quote: "The black bear spirit — an allegory of the worldly. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 22,   hardship: "Subduing Sha Wujing", sentiment: "neutral", intensity: 4, quote: "The three disciples all assembled. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 24,   hardship: "The Ginseng Fruit of Five Villages Monastery", sentiment: "positive", intensity: 7, quote: "Five Villages Monastery — a delightful construction of humor. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 27,   hardship: "Thrice Beating the White Bone Demon", sentiment: "positive", intensity: 7, quote: "Thrice Beating the White Bone Demon — keen discernment of character. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 32,   hardship: "The Gold and Silver Horns of Lotus Cave", sentiment: "neutral", intensity: 5, quote: "Lotus Cave — playful brushwork. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 45,   hardship: "The Contest of Magic in Chechi Kingdom", sentiment: "positive", intensity: 7, quote: "Chechi Kingdom — humorous satire. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 53,   hardship: "The Woman's Kingdom", sentiment: "positive", intensity: 8, quote: "The Woman's Kingdom — human feeling at its finest. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 59,   hardship: "Flaming Mountain", sentiment: "positive", intensity: 7, quote: "Flaming Mountain — the delight of quick wit. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 65,   hardship: "The Yellow-Browed Demon", sentiment: "neutral", intensity: 5, quote: "The Yellow-Browed Demon — a passing scene. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 74,   hardship: "Lion Camel Ridge", sentiment: "neutral", intensity: 5, quote: "Lion Camel Ridge — drawn out. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 78,   hardship: "Bhiksu Kingdom", sentiment: "positive", intensity: 6, quote: "Saving the children — a compassionate brush. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 88,   hardship: "Taking Disciples in Yuhua Prefecture", sentiment: "neutral", intensity: 5, quote: "Yuhua Prefecture — plain. (pastiche)" },
+            { scholar: "Lin Yutang", chapter: 100,   hardship: "The Scripture Quest Fulfilled", sentiment: "neutral", intensity: 5, quote: "Becoming Buddha — a leisurely conclusion. (pastiche)" },
+            /* Qian Zhongshu */
+            { scholar: "Qian Zhongshu", chapter: 1,   hardship: "The Stone Monkey Is Born", sentiment: "neutral", intensity: 6, quote: "The stone monkey born transformed — one of those the Master did not speak of. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 2,   hardship: "Wukong Learns the Arts", sentiment: "positive", intensity: 6, quote: "Learning the arts — again one sees the stone of another mountain. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 5,   hardship: "The Great Sage Steals the Elixir", sentiment: "neutral", intensity: 5, quote: "Stealing the elixir — also play. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 7,   hardship: "The Great Sage Escapes the Eight Trigrams Furnace", sentiment: "positive", intensity: 7, quote: "The Eight Trigrams Furnace — a deep repository of what the Master did not speak of. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 8,   hardship: "The Buddha Lays a Plan", sentiment: "neutral", intensity: 5, quote: "The Buddha's plan — structure. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 12,   hardship: "Xuanzang Appears", sentiment: "neutral", intensity: 5, quote: "Xuanzang appears — historical fact blended in. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 14,   hardship: "Subduing Wukong", sentiment: "neutral", intensity: 5, quote: "Subduing Wukong — a structural necessity. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 17,   hardship: "The Black Bear Spirit", sentiment: "neutral", intensity: 4, quote: "The black bear — flat writing. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 22,   hardship: "Subduing Sha Wujing", sentiment: "neutral", intensity: 4, quote: "Subduing Sha Wujing — formula. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 24,   hardship: "The Ginseng Fruit of Five Villages Monastery", sentiment: "positive", intensity: 7, quote: "Five Villages Monastery — the art of learned allusion. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 27,   hardship: "Thrice Beating the White Bone Demon", sentiment: "neutral", intensity: 6, quote: "The thrice-beating — an allegory of worldly wisdom. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 32,   hardship: "The Gold and Silver Horns of Lotus Cave", sentiment: "neutral", intensity: 5, quote: "Lotus Cave — also uses allusion. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 45,   hardship: "The Contest of Magic in Chechi Kingdom", sentiment: "positive", intensity: 7, quote: "Chechi Kingdom — satirical writing. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 53,   hardship: "The Woman's Kingdom", sentiment: "positive", intensity: 7, quote: "The Woman's Kingdom — an allegory of erudition. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 59,   hardship: "Flaming Mountain", sentiment: "neutral", intensity: 6, quote: "Flaming Mountain — also uses allusion. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 65,   hardship: "The Yellow-Browed Demon", sentiment: "neutral", intensity: 5, quote: "The Yellow-Browed Demon — also a stock formula. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 74,   hardship: "Lion Camel Ridge", sentiment: "positive", intensity: 6, quote: "Lion Camel Ridge — an allegory of the age. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 78,   hardship: "Bhiksu Kingdom", sentiment: "positive", intensity: 7, quote: "Bhiksu Kingdom — satire at its sharpest. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 88,   hardship: "Taking Disciples in Yuhua Prefecture", sentiment: "neutral", intensity: 5, quote: "Yuhua Prefecture — plain. (pastiche)" },
+            { scholar: "Qian Zhongshu", chapter: 100,   hardship: "The Scripture Quest Fulfilled", sentiment: "neutral", intensity: 5, quote: "Becoming Buddha — a leisurely closing stroke. (pastiche)" },
+            /* Guo Moruo */
+            { scholar: "Guo Moruo", chapter: 1,   hardship: "The Stone Monkey Is Born", sentiment: "positive", intensity: 9, quote: "The Stone Monkey's birth — the beginning of romance. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 2,   hardship: "Wukong Learns the Arts", sentiment: "positive", intensity: 8, quote: "Learning the arts — a romanticist's brush. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 5,   hardship: "The Great Sage Steals the Elixir", sentiment: "positive", intensity: 9, quote: "Stealing the elixir — romantic rebellion. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 7,   hardship: "The Great Sage Escapes the Eight Trigrams Furnace", sentiment: "positive", intensity: 10, quote: "The Eight Trigrams Furnace — romanticism at its peak. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 8,   hardship: "The Buddha Lays a Plan", sentiment: "negative", intensity: 6, quote: "The Buddha's suppression — an allegory of reaction. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 12,   hardship: "Xuanzang Appears", sentiment: "neutral", intensity: 4, quote: "Xuanzang's passing scene. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 14,   hardship: "Subduing Wukong", sentiment: "negative", intensity: 7, quote: "The mind-ape is tamed — the sorrow of romance. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 17,   hardship: "The Black Bear Spirit", sentiment: "neutral", intensity: 5, quote: "The black bear — a passing scene. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 22,   hardship: "Subduing Sha Wujing", sentiment: "neutral", intensity: 5, quote: "The three disciples assemble. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 24,   hardship: "The Ginseng Fruit of Five Villages Monastery", sentiment: "neutral", intensity: 6, quote: "Five Villages Monastery — romance slightly dimmed. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 27,   hardship: "Thrice Beating the White Bone Demon", sentiment: "negative", intensity: 9, quote: "Man and monster reversed, right and wrong confused; merciful to the enemy, harsh to friends. (historical)" },
+            { scholar: "Guo Moruo", chapter: 32,   hardship: "The Gold and Silver Horns of Lotus Cave", sentiment: "neutral", intensity: 5, quote: "Lotus Cave — plain. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 45,   hardship: "The Contest of Magic in Chechi Kingdom", sentiment: "positive", intensity: 7, quote: "Chechi Kingdom — romantic struggle. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 53,   hardship: "The Woman's Kingdom", sentiment: "positive", intensity: 7, quote: "The Woman's Kingdom — a romantic brush. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 59,   hardship: "Flaming Mountain", sentiment: "positive", intensity: 8, quote: "Flaming Mountain — romance at its height. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 65,   hardship: "The Yellow-Browed Demon", sentiment: "neutral", intensity: 5, quote: "The Yellow Brow — a passing scene. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 74,   hardship: "Lion Camel Ridge", sentiment: "positive", intensity: 7, quote: "Lion Camel Ridge — an allegory of struggle. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 78,   hardship: "Bhiksu Kingdom", sentiment: "positive", intensity: 8, quote: "Saving the children — romantic compassion. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 88,   hardship: "Taking Disciples in Yuhua Prefecture", sentiment: "neutral", intensity: 5, quote: "Yuhua Prefecture — plain. (pastiche)" },
+            { scholar: "Guo Moruo", chapter: 100,   hardship: "The Scripture Quest Fulfilled", sentiment: "positive", intensity: 7, quote: "Becoming Buddha — a romantic conclusion. (pastiche)" },
+        ]
+    };
+
+    /* ==========================================================
+       全局状态：高亮学者（持久）+ 悬停学者（瞬时）
+       ========================================================== */
+    const state = {
+        highlightedScholar: null,   // click 锁定
+        hoveredScholar: null        // hover 瞬时
+    };
+
+    function sentimentColor(s) {
+        if (s === "positive") return "var(--accent-4)";
+        if (s === "neutral")  return "var(--accent-soft)";
+        return "var(--accent)";     // negative
+    }
+    function sentimentLabel(s) {
+        if (s === "positive") return "Positive";
+        if (s === "neutral")  return "Neutral";
+        return "Negative";
+    }
+    // 当前生效高亮（hover 优先于 click 锁定）
+    function activeScholar() {
+        return state.hoveredScholar || state.highlightedScholar;
+    }
+
+    /* ==========================================================
+       工具：按 (scholar, hardship) 索引 reactions
+       ========================================================== */
+    function indexReactions(reactions) {
+        const map = {};
+        reactions.forEach(r => {
+            const key = r.scholar + "|" + r.chapter;
+            map[key] = r;
+        });
+        return map;
+    }
+
+    /* ==========================================================
+       图表 1：热力图矩阵
+       ========================================================== */
+    function renderHeatmap(scholars, hardships, reactions) {
+        if (!scholars || !hardships || !reactions || scholars.length === 0 || hardships.length === 0 || reactions.length === 0) {
+            d3.select("#heatmap-svg").selectAll("*").remove();
+            d3.select("#heatmap-svg").append("text").text("No data");
+            return;
+        }
+        const svg = d3.select("#heatmap-svg");
+        svg.selectAll("*").remove();
+
+        const idxMap = indexReactions(reactions);
+
+        const cellW = 36, cellH = 38;
+        const margin = { top: 110, right: 24, bottom: 24, left: 96 };
+        const width = margin.left + cellW * hardships.length + margin.right;
+        const height = margin.top + cellH * scholars.length + margin.bottom;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 行带（高亮时显示）
+        scholars.forEach((s, si) => {
+            g.append("rect")
+                .attr("class", "heat-row-band")
+                .attr("data-scholar-band", s.key)
+                .attr("x", -8)
+                .attr("y", si * cellH - 2)
+                .attr("width", cellW * hardships.length + 16)
+                .attr("height", cellH)
+                .attr("opacity", 0);
+        });
+
+        // 单元格
+        const tooltip = d3.select("#heat-tooltip");
+        scholars.forEach((s, si) => {
+            hardships.forEach((h, hi) => {
+                const r = idxMap[s.name + "|" + h.chapter];
+                if (!r) return;
+                const opacity = 0.22 + (r.intensity - 1) / 9 * 0.78;
+                g.append("rect")
+                    .attr("class", "heat-cell")
+                    .attr("data-scholar", s.key)
+                    .attr("data-hardship", h.idx)
+                    .attr("x", hi * cellW + 1)
+                    .attr("y", si * cellH + 1)
+                    .attr("width", cellW - 2)
+                    .attr("height", cellH - 2)
+                    .attr("rx", 3)
+                    .attr("fill", sentimentColor(r.sentiment))
+                    .attr("opacity", opacity)
+                    .attr("data-base-opacity", opacity)
+                    .on("mouseover", function(event) {
+                        tooltip.style("opacity", 1);
+                        tooltip.html(
+                            `<div class="ht-scholar">${s.name}</div>` +
+                            `<div class="ht-meta">Ch. ${r.chapter} · ${h.title}</div>` +
+                            `<span class="ht-pill ${r.sentiment}">${sentimentLabel(r.sentiment)}</span>` +
+                            `<span class="ht-meta" style="display:inline;">intensity ${r.intensity}/10</span>` +
+                            `<div class="ht-quote">「${r.quote}」</div>`
+                        );
+                        // 瞬时高亮该行
+                        state.hoveredScholar = s.key;
+                        applyHeatmapHighlight();
+                    })
+                    .on("mousemove", function(event) {
+                        const stage = document.querySelector("#heatmap-svg").parentElement.parentElement;
+                        const rect = stage.getBoundingClientRect();
+                        let left = event.clientX - rect.left + 14;
+                        let top = event.clientY - rect.top + 14;
+                        if (left + 360 > rect.width) left = event.clientX - rect.left - 360;
+                        if (top + 220 > rect.height) top = event.clientY - rect.top - 220;
+                        tooltip.style("left", left + "px").style("top", top + "px");
+                    })
+                    .on("mouseout", function() {
+                        tooltip.style("opacity", 0);
+                        state.hoveredScholar = null;
+                        applyHeatmapHighlight();
+                    })
+                    .on("click", function() {
+                        state.highlightedScholar = (state.highlightedScholar === s.key) ? null : s.key;
+                        applyAllHighlight();
+                    });
+            });
+        });
+
+        // 行标签
+        scholars.forEach((s, si) => {
+            g.append("text")
+                .attr("class", "heat-row-label")
+                .attr("data-scholar-label", s.key)
+                .attr("x", -14)
+                .attr("y", si * cellH + cellH / 2)
+                .attr("dy", "0.32em")
+                .attr("text-anchor", "end")
+                .text(s.name);
+        });
+
+        // 列标签（旋转）：长标签易重叠，改为章回数字 + <title> 存全名（零信息丢）
+        hardships.forEach((h, hi) => {
+            g.append("text")
+                .attr("class", "heat-col-label")
+                .attr("x", hi * cellW + cellW / 2)
+                .attr("y", -10)
+                .attr("transform", `rotate(-50, ${hi * cellW + cellW / 2}, -10)`)
+                .attr("text-anchor", "end")
+                .text(`${h.chapter}`)
+                .append("title")
+                .text(`${h.chapter} · ${h.title}`);
+        });
+
+        applyHeatmapHighlight();
+    }
+
+    // 仅刷新热力图高亮（不重建）
+    function applyHeatmapHighlight() {
+        const active = activeScholar();
+        d3.selectAll(".heat-cell")
+            .classed("dim", function() {
+                return active && d3.select(this).attr("data-scholar") !== active;
+            })
+            .classed("active", function() {
+                return active && d3.select(this).attr("data-scholar") === active;
+            });
+        d3.selectAll(".heat-row-label")
+            .classed("dim", function() {
+                return active && d3.select(this).attr("data-scholar-label") !== active;
+            })
+            .classed("active", function() {
+                return active && d3.select(this).attr("data-scholar-label") === active;
+            });
+        d3.selectAll(".heat-row-band")
+            .attr("opacity", function() {
+                if (!active) return 0;
+                return d3.select(this).attr("data-scholar-band") === active ? 0.32 : 0;
+            });
+    }
+
+    /* ==========================================================
+       图表 2：情感波动曲线
+       ========================================================== */
+    function renderCurves(scholars, hardships, reactions) {
+        if (!scholars || !hardships || !reactions || scholars.length === 0 || hardships.length === 0 || reactions.length === 0) {
+            d3.select("#curves-svg").selectAll("*").remove();
+            d3.select("#curves-svg").append("text").text("No data");
+            return;
+        }
+        const svg = d3.select("#curves-svg");
+        svg.selectAll("*").remove();
+
+        const idxMap = indexReactions(reactions);
+
+        const margin = { top: 30, right: 90, bottom: 60, left: 56 };
+        const wrap = document.querySelector("#curves-svg").parentElement.parentElement;
+        const rawW = Math.max(720, wrap ? wrap.clientWidth - 4 : 1000);
+        const width = rawW;
+        const height = 420;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear()
+            .domain([1, hardships.length])
+            .range([0, innerW]);
+
+        const y = d3.scaleLinear()
+            .domain([0, 10])
+            .range([innerH, 0]);
+
+        // X 轴
+        g.append("g")
+            .attr("class", "curves-axis")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).tickFormat(d => "·" + d).ticks(hardships.length))
+            .call(g => g.select(".domain").remove());
+
+        // Y 轴
+        g.append("g")
+            .attr("class", "curves-axis")
+            .call(d3.axisLeft(y).ticks(5))
+            .call(g => g.select(".domain").remove());
+
+        // 轴标签
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 42)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.8rem").style("fill", "var(--ink-soft)")
+            .text("Ordeal no. (1–20, by chapter)");
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerH / 2).attr("y", -42)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.8rem").style("fill", "var(--ink-soft)")
+            .text("Reaction intensity (1–10)");
+
+        // 横向网格虚线
+        const yTicks = [2, 4, 6, 8, 10];
+        g.selectAll(".curves-grid")
+            .data(yTicks)
+            .enter()
+            .append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", d => y(d)).attr("y2", d => y(d))
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "2,4")
+            .attr("opacity", 0.6);
+
+        const tooltip = d3.select("#curves-tooltip");
+
+        // 8 条曲线，每条按段着色
+        scholars.forEach(s => {
+            const pts = hardships.map(h => {
+                const r = idxMap[s.name + "|" + h.chapter];
+                if (!r) return null;
+                return { x: x(h.idx), y: y(r.intensity), h: h, r: r, scholar: s };
+            }).filter(p => p);
+
+            // 段（每两个相邻点一段，颜色 = 起点的 sentiment）
+            for (let i = 0; i < pts.length - 1; i++) {
+                g.append("line")
+                    .attr("class", "curve-seg")
+                    .attr("data-scholar", s.key)
+                    .attr("x1", pts[i].x).attr("y1", pts[i].y)
+                    .attr("x2", pts[i + 1].x).attr("y2", pts[i + 1].y)
+                    .attr("stroke", sentimentColor(pts[i].r.sentiment));
+            }
+
+            // 点
+            pts.forEach(p => {
+                g.append("circle")
+                    .attr("class", "curve-dot")
+                    .attr("data-scholar", s.key)
+                    .attr("cx", p.x)
+                    .attr("cy", p.y)
+                    .attr("r", 3.4)
+                    .attr("fill", sentimentColor(p.r.sentiment))
+                    .on("mouseover", function(event) {
+                        d3.select(this).attr("r", 5.5);
+                        tooltip.style("opacity", 1);
+                        tooltip.html(
+                            `<div class="ct-name">${s.name} <span style="color:rgba(245,233,212,0.6);font-size:0.78rem;">· Ch. ${p.r.chapter} ${p.h.title}</span></div>` +
+                            `<div style="margin-top:4px;"><span class="ht-pill ${p.r.sentiment}">${sentimentLabel(p.r.sentiment)}</span>` +
+                            `<span style="color:rgba(245,233,212,0.7);font-size:0.78rem;font-family:'JetBrains Mono',monospace;"> intensity ${p.r.intensity}/10</span></div>` +
+                            `<div style="color:var(--accent-soft);font-style:italic;margin-top:4px;overflow-wrap:anywhere;">「${p.r.quote}」</div>`
+                        );
+                        state.hoveredScholar = s.key;
+                        applyCurvesHighlight();
+                        applyHeatmapHighlight();
+                    })
+                    .on("mousemove", function(event) {
+                        const stage = document.querySelector("#curves-svg").parentElement.parentElement;
+                        const rect = stage.getBoundingClientRect();
+                        let left = event.clientX - rect.left + 14;
+                        let top = event.clientY - rect.top + 14;
+                        if (left + 320 > rect.width) left = event.clientX - rect.left - 320;
+                        if (top + 200 > rect.height) top = event.clientY - rect.top - 200;
+                        tooltip.style("left", left + "px").style("top", top + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this).attr("r", 3.4);
+                        tooltip.style("opacity", 0);
+                        state.hoveredScholar = null;
+                        applyCurvesHighlight();
+                        applyHeatmapHighlight();
+                    });
+            });
+
+            // 线尾标签
+            if (pts.length > 0) {
+                const last = pts[pts.length - 1];
+                g.append("text")
+                    .attr("class", "curve-end-label")
+                    .attr("data-scholar-label", s.key)
+                    .attr("x", last.x + 8)
+                    .attr("y", last.y)
+                    .attr("dy", "0.32em")
+                    .attr("fill", s.color)
+                    .text(s.name);
+            }
+        });
+
+        applyCurvesHighlight();
+    }
+
+    function applyCurvesHighlight() {
+        const active = activeScholar();
+        d3.selectAll(".curve-seg")
+            .classed("dim", function() {
+                return active && d3.select(this).attr("data-scholar") !== active;
+            });
+        d3.selectAll(".curve-dot")
+            .classed("dim", function() {
+                return active && d3.select(this).attr("data-scholar") !== active;
+            });
+        d3.selectAll(".curve-end-label")
+            .classed("dim", function() {
+                return active && d3.select(this).attr("data-scholar-label") !== active;
+            });
+    }
+
+    /* ==========================================================
+       图表 3：名人卡片
+       ========================================================== */
+    function renderScholarCards(scholars, hardships, reactions) {
+        if (!scholars || scholars.length === 0) {
+            d3.select("#scholar-grid").append("div").text("No data");
+            return;
+        }
+        const grid = d3.select("#scholar-grid");
+        grid.selectAll("*").remove();
+
+        const idxMap = indexReactions(reactions);
+
+        scholars.forEach(s => {
+            const card = grid.append("div")
+                .attr("class", "scholar-card")
+                .attr("data-scholar-card", s.key)
+                .attr("role", "button")
+                .attr("tabindex", "0")
+                .attr("aria-label", `${s.name}: ${s.school} — click to highlight this row`)
+                .style("border-top-color", s.color);
+
+            // 计数
+            const counts = { positive: 0, neutral: 0, negative: 0 };
+            let sum = 0, n = 0;
+            hardships.forEach(h => {
+                const r = idxMap[s.name + "|" + h.chapter];
+                if (r) {
+                    counts[r.sentiment]++;
+                    sum += r.intensity;
+                    n++;
+                }
+            });
+            const avg = n > 0 ? (sum / n).toFixed(2) : "—";
+
+            card.append("div").attr("class", "sc-hint").text("hover/click");
+            const head = card.append("div").attr("class", "sc-head");
+            head.append("div").attr("class", "sc-name").text(s.name);
+            head.append("div").attr("class", "sc-era").text(s.era);
+
+            card.append("div").attr("class", "sc-school").text(s.school);
+            card.append("div").attr("class", "sc-motto").text(`「${s.motto}」`);
+
+            const stats = card.append("div").attr("class", "sc-stats");
+            stats.append("div").attr("class", "sc-stat pos")
+                .html(`<span class="num">${counts.positive}</span><span class="lbl">Positive</span>`);
+            stats.append("div").attr("class", "sc-stat neu")
+                .html(`<span class="num">${counts.neutral}</span><span class="lbl">Neutral</span>`);
+            stats.append("div").attr("class", "sc-stat neg")
+                .html(`<span class="num">${counts.negative}</span><span class="lbl">Negative</span>`);
+
+            card.append("div").attr("class", "sc-avg").text(`avg intensity · ${avg}`);
+
+            // 交互：hover（瞬时）+ click（锁定）+ 键盘
+            card.on("mouseover", function() {
+                state.hoveredScholar = s.key;
+                applyAllHighlight();
+            })
+            .on("mouseout", function() {
+                state.hoveredScholar = null;
+                applyAllHighlight();
+            })
+            .on("click", function() {
+                state.highlightedScholar = (state.highlightedScholar === s.key) ? null : s.key;
+                applyAllHighlight();
+            })
+            .on("keydown", function(event) {
+                if (event.key === "Enter" || event.key === " " || event.key === "Spacebar") {
+                    event.preventDefault();
+                    state.highlightedScholar = (state.highlightedScholar === s.key) ? null : s.key;
+                    applyAllHighlight();
+                }
+            });
+        });
+
+        applyCardsHighlight();
+    }
+
+    function applyCardsHighlight() {
+        const active = activeScholar();
+        d3.selectAll(".scholar-card")
+            .classed("active", function() {
+                return active && d3.select(this).attr("data-scholar-card") === active;
+            });
+    }
+
+    function applyAllHighlight() {
+        applyHeatmapHighlight();
+        applyCurvesHighlight();
+        applyCardsHighlight();
+    }
+
+    /* ==========================================================
+       关键洞察
+       ========================================================== */
+    function renderInsights() {
+        const insights = [
+            `<strong>Li Zhuowu and Mao Zedong</strong> share the excitement over "rebellion" — the former, in the name of the <em>childlike mind</em>, praises the Great Sage for stealing the elixir; the latter, in the name of <em>revolution</em>, cries "Today we hail the Great Sage Sun." Four centuries apart, the two give the chart's highest-intensity reactions (9–10) at the Eight Trigrams Furnace ordeal.`,
+            `<strong>Hu Shi's "all-neutral" curve</strong> is the flattest of the eight — with the four words "a work of play" he sets the tone, and almost every ordeal is pressed back into the neutral 4–6 band. This is precisely the <strong>emotional flattening</strong> that followed the 1923 textual-research school's disenchantment, set against Lu Xun's contemporaneous negative drift.`,
+            `<strong>Thrice Beating the White Bone Demon (Ch. 27)</strong> is the most divisive ordeal: Mao Zedong gives +10 (revolutionary vigilance), Guo Moruo −9 (indignation at man and monster reversed), Lu Xun −7 (Tang Sanzang muddled), and Hu Shi a neutral 5. One text, <em>four heartbeats</em>.`,
+            `<strong>The 1961 exchange between Mao Zedong and Guo Moruo</strong> is plainly visible on the heatmap: at Ch. 27 both reach extreme intensity but with opposite polarity — Guo Moruo is furious at Tang Sanzang, "he deserves a thousand cuts," while Mao answers, "the monk is foolish but can still be taught." Their two curves <strong>cross here but point opposite ways</strong>.`,
+            `<strong>Jin Shengtan's pastiche curve</strong> is a sample of a purely literary stance — he never actually commented on the book, yet by his "Books of Genius" standard all 20 ordeals lean positive/neutral, with intensity clustering at 5–9. He gives <strong>Ch. 27, Thrice Beating the White Bone Demon</strong> the chart's highest positive intensity (9), calling it "the very height of literary art."`,
+            `<strong>Qian Zhongshu's low volatility</strong> is the most scholar-like — across the 20 ordeals, 12 neutral, 6 positive, 2 negative, average intensity 5.3. His "deep repository of what the Master did not speak of" stance makes him <em>refuse emotional involvement</em>, forming, with Lin Yutang's leisurely fluctuation (average 5.9), two kinds of "distance."`,
+            `<strong>Subduing Wukong (Ch. 14)</strong> is the focal point of negativity — Li Zhuowu, Lu Xun, Mao Zedong, Lin Yutang and Guo Moruo all give it negative. The mind-ape returning to the right is read by five schools at once as <strong>freedom tamed</strong> — a rare consensus in five hundred years of criticism.`,
+            `<strong>The Scripture Quest Fulfilled (Ch. 100)</strong> is the most divided: Guo Moruo and Hu Shi give positive, Li Zhuowu negative (the sorrow of the childlike mind), Mao Zedong neutral (the revolution succeeds but compromises). <em>The ending is not a terminus but the ultimate touchstone of each school's stance</em>.`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => ul.append("li").html(text));
+    }
+
+    /* ==========================================================
+       数据加载（fetch 失败则用嵌入数据）
+       ========================================================== */
+    const fetchStatus = { anyFetched: false };
+    async function fetchJson(path, fallbackKey) {
+        try {
+            const response = await fetch(path);
+            if (!response.ok) throw new Error('fetch failed: ' + path);
+            fetchStatus.anyFetched = true;
+            return await response.json();
+        } catch (e) {
+            console.warn('[INFO] using embedded data (' + fallbackKey + '):', e.message);
+            return EMBEDDED_DATA[fallbackKey];
+        }
+    }
+
+    async function loadData() {
+        const base = '../../scripts/output/data/';
+        const [scholars, hardships, reactions] = await Promise.all([
+            fetchJson(base + 'emotional_scholars.json', 'scholars'),
+            fetchJson(base + 'emotional_hardships.json', 'hardships'),
+            fetchJson(base + 'emotional_reactions.json', 'reactions')
+        ]);
+
+        if (fetchStatus.anyFetched) {
+            document.getElementById('dataSource').innerHTML =
+                'Data source: loaded live from <code>scripts/output/data/</code> (running in http server mode). Quotes marked "historical" are real documents; those marked "pastiche" are composed following the intellectual thread.';
+        }
+
+        return { scholars, hardships, reactions };
+    }
+
+    /* ==========================================================
+       主流程
+       ========================================================== */
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        renderHeatmap(data.scholars, data.hardships, data.reactions);
+        renderCurves(data.scholars, data.hardships, data.reactions);
+        renderScholarCards(data.scholars, data.hardships, data.reactions);
+        renderInsights();
+    }
+
+    // 响应式重绘（防抖 250ms）
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderHeatmap(window.__lastData.scholars, window.__lastData.hardships, window.__lastData.reactions);
+                renderCurves(window.__lastData.scholars, window.__lastData.hardships, window.__lastData.reactions);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+<script id="audit-contentavoid">
+(function(){
+  var SKIP=/(tick|legend|title|axis|domain|cell|tooltip|axisfix|dark-halo|subtitle|grid|background|heat-col-label|heat-row-label)/i;
+  function fix(){
+    try{
+      // 1) 热力图列标签旋转 -42°（保留可见）
+      document.querySelectorAll('svg text.heat-col-label').forEach(function(t){
+        var x=+t.getAttribute('x')||0, y=+t.getAttribute('y')||0;
+        t.setAttribute('transform','rotate(-42 '+x+' '+y+')');
+        t.setAttribute('text-anchor','end');
+      });
+      // 2) 其余文字重叠：隐藏较小者 + 补 title
+      document.querySelectorAll('svg').forEach(function(svg){
+        var texts=[].slice.call(svg.querySelectorAll('text')).filter(function(t){
+          var c=t.getAttribute('class')||'';
+          if(SKIP.test(c)) return false;
+          var b=t.getBBox(); return b.width>0 && b.height>0;
+        });
+        for(var i=0;i<texts.length;i++){
+          for(var j=i+1;j<texts.length;j++){
+            var a=texts[i],b=texts[j];
+            var ra=a.getBBox(),rb=b.getBBox();
+            var ix=Math.max(0,Math.min(ra.x+ra.width,rb.x+rb.width)-Math.max(ra.x,rb.x));
+            var iy=Math.max(0,Math.min(ra.y+ra.height,rb.y+rb.height)-Math.max(ra.y,rb.y));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(), tb=(b.textContent||'').trim();
+            if(ta===tb){ // 完全重复：隐藏其一
+              if(a.style.display!=='none'){ a.setAttribute('data-cavoid','1'); if(!a.getAttribute('title')) a.setAttribute('title',ta); a.style.display='none'; }
+              continue;
+            }
+            var hide=(ra.width*ra.height<=rb.width*rb.height)?a:b;
+            var keep=(hide===a)?b:a;
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-cavoid','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000,14000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run(); else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

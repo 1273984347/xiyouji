@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- W236-E E7 SEO 基础设施·sitemap·222 页面（W442 英文站 batch20 新增 5 页） -->
+<!-- W236-E E7 SEO 基础设施·sitemap·225 页面（W443 英文站 batch21 新增 3 页） -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://1273984347.github.io/xiyouji/curated.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/dashboard.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
@@ -126,6 +126,7 @@
   <url><loc>https://1273984347.github.io/xiyouji/en/dialogue-sentiment.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://1273984347.github.io/xiyouji/en/dukou-engine.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
     <url><loc>https://1273984347.github.io/xiyouji/en/ecology.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://1273984347.github.io/xiyouji/en/emotional-heatmap.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://1273984347.github.io/xiyouji/en/essay-ai-era.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/essay-buddhist-chan.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://1273984347.github.io/xiyouji/en/essay-chapter-couplets.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -185,6 +186,7 @@
 <url><loc>https://1273984347.github.io/xiyouji/en/language-style-radar.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
       <url><loc>https://1273984347.github.io/xiyouji/en/linguistics.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://1273984347.github.io/xiyouji/en/magic-system.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://1273984347.github.io/xiyouji/en/material-archaeology.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://1273984347.github.io/xiyouji/en/mbti-evolution.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://1273984347.github.io/xiyouji/en/methodology.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
           <url><loc>https://1273984347.github.io/xiyouji/en/methodology-matrix.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -200,6 +202,7 @@
 <url><loc>https://1273984347.github.io/xiyouji/en/narrative-experiment.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://1273984347.github.io/xiyouji/en/narrative-rhythm-curve.html</loc><lastmod>2026-08-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
         <url><loc>https://1273984347.github.io/xiyouji/en/narratology-12d-network.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://1273984347.github.io/xiyouji/en/narratology-13d-network.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://1273984347.github.io/xiyouji/en/perf-canvas-rendering.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
     <url><loc>https://1273984347.github.io/xiyouji/en/philosophy.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://1273984347.github.io/xiyouji/en/pilgrim-team-dynamic-network.html</loc><lastmod>2026-08-14</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>

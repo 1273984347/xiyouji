@@ -1,0 +1,2483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-S2EwDO8Nu4zFT4ijUr/+EtS6S25+W8orXn6y+3/gn1s=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Seventeen-Dimension Narratology Network · W191 · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    
+svg circle { will-change: transform; }
+</style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        html { -webkit-tap-highlight-color: rgba(122, 74, 42, 0.15); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Nav */
+nav.nav {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 18px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-size: 0.88em;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+nav.nav a {
+  color: var(--accent-2);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+nav.nav a:hover { background: var(--accent); color: #fff; }
+
+/* Hero */
+header
+header
+header
+header
+header.hero .meta {
+  color: var(--hero-meta);
+  font-size: 0.82em;
+  margin-top: 10px;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* Section */
+
+.section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+
+.definition {
+  background: var(--paper);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.92em;
+  border-radius: 2px;
+  line-height: 1.8;
+  overflow-wrap: break-word;
+}
+
+/* KPI */
+
+.kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
+.kpi-label { color: var(--muted); font-size: 0.82em; margin-top: 4px; }
+
+/* 十六维概览卡片网格 */
+.dims-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 16px;
+}
+.dim-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 12px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.dim-card:hover, .dim-card:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  outline: none;
+}
+.dim-card .dim-num {
+  font-size: 0.76em;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+.dim-card .dim-name {
+  font-size: 1.3em;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 4px 0;
+}
+.dim-card .dim-eng {
+  font-size: 0.74em;
+  color: var(--muted);
+  margin-bottom: 4px;
+  font-style: italic;
+}
+.dim-card .dim-cat {
+  font-size: 0.8em;
+  color: var(--accent-2);
+  margin-bottom: 6px;
+}
+.dim-card .dim-theorists {
+  font-size: 0.78em;
+  color: var(--ink);
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border);
+  line-height: 1.5;
+}
+.swatch-bar {
+  height: 4px;
+  border-radius: 2px;
+  margin: 6px auto;
+  width: 60%;
+}
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.chart-caption { color: var(--muted); font-size: 0.82em; margin-bottom: 12px; }
+.chart-svg {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.82em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: var(--tooltip-bg);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.82em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 320px;
+  overflow-wrap: break-word;
+  line-height: 1.6;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; touch-action: manipulation; }
+.node-circle:hover { stroke: var(--accent); stroke-width: 2px; }
+
+/* Summary table */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 0.84em;
+  background: #fff;
+  border: 1px solid var(--border);
+}
+.summary-table th {
+  background: var(--table-stripe);
+  color: var(--ink);
+  padding: 9px 10px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-3);
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  font-variant-numeric: tabular-nums;
+}
+.summary-table th:hover { background: var(--accent-3); color: #fff; }
+.summary-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.summary-table tr:nth-child(even) td { background: var(--table-stripe); }
+.summary-table tr:hover td { background: #f5efe4; }
+.summary-table .type-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Theorist block */
+.theorist-block { margin-top: 22px; }
+.theorist-block h3 {
+  font-size: 1.1em;
+  color: var(--accent-2);
+  margin-bottom: 10px;
+  border-left: 3px solid var(--accent-3);
+  padding-left: 8px;
+}
+.theorist-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+.theorist-item {
+  background: var(--paper);
+  padding: 10px 12px;
+  border-radius: 4px;
+  border-left: 3px solid var(--border);
+  font-size: 0.84em;
+}
+.theorist-item .t-name { font-weight: 600; color: var(--ink); }
+.theorist-item .t-sense { color: var(--muted); font-size: 0.92em; margin-top: 2px; }
+.theorist-item .t-work { color: var(--accent-2); font-size: 0.88em; margin-top: 2px; }
+
+/* Insight */
+.insight-list { list-style: none; }
+.insight-list li {
+  background: var(--paper);
+  margin: 8px 0;
+  padding: 12px 15px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 2px;
+}
+.insight-list li strong { color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dims-grid { grid-template-columns: repeat(2, 1fr); }
+  header
+  header
+  
+  
+  .summary-table { font-size: 0.76em; }
+  .summary-table th, .summary-table td { padding: 6px 7px; }
+  nav.nav { font-size: 0.82em; }
+}
+@media (max-width: 520px) {
+  .dims-grid { grid-template-columns: 1fr; }
+  
+  
+  header
+  .theorist-list { grid-template-columns: 1fr; }
+}
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/narratology-13d-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="../index.html">EN Home</a> / <a href="../dashboard.html">Dashboard</a> / Seventeen-Dimension Narratology Network</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Seventeen-Dimension Narratology Network</h1>
+        <p class="subtitle">NARRATOLOGY 17-DIMENSION NETWORK</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<nav class="nav">
+  <a href="#overview">Overview</a>
+  <a href="#force">Force-Directed Graph</a>
+  <a href="#sankey">Sankey Diagram</a>
+  <a href="#radar">Radar Chart</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#summary">Summary Table</a>
+</nav>
+
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">17</div><div class="kpi-label">Narratology Dimensions</div></div>
+  <div class="kpi-card"><div class="kpi-value">64</div><div class="kpi-label">Related Theorists</div></div>
+  <div class="kpi-card"><div class="kpi-value">28</div><div class="kpi-label">Dimension Links</div></div>
+  <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">Dimension Categories</div></div>
+  <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">New Dimensions</div></div>
+  <div class="kpi-card"><div class="kpi-value">W161-W185</div><div class="kpi-label">Topic Range</div></div>
+</div>
+
+<!-- Section 1: 概览 -->
+<section class="section" id="overview">
+  <h2 class="section-title">I · Thirteen-Dimension Narratology Framework Overview</h2>
+  <div class="section-sub">OVERVIEW: 13-DIMENSION NARRATOLOGY FRAMEWORK</div>
+  <div class="definition">
+    <strong>Definition:</strong>The thirteen-dimension narratology network integrates the W161–W174 twelve-dimension narratology topics with the four new W182–W185 dimensions (Affective Narratology, Historical Narratology, Meta-Narratology, Unreliable Narration), dividing the narratological study of Journey to the West into sixteen interrelated dimensions grouped under seven categories: Seven-Sense Narratology (Time/Space/Auditory/Olfactory/Tactile/Visual/Gustatory), Textual Narratology (Intertext/Rhetoric/Cognitive), Gender Narratology, Cultural Narratology, Affective Narratology, Historical Narratology, and Meta-Narratology (Metanarrative/Unreliable). It builds on the W168 Six-Senses Narratology and the W175 Twelve-Dimension Narratology to realize the theoretical expansion "seven senses → twelve dimensions → thirteen dimensions", constructing a complete narratological analysis network covering space-time, the senses, intertextuality, rhetoric, cognition, gender, the postcolonial, affect, history, and metanarrative.
+  </div>
+  <div class="dims-grid" id="dims-grid"></div>
+</section>
+
+<!-- Section 2: 力导向图 -->
+<section class="section" id="force">
+  <h2 class="section-title alt">II · Thirteen-Dimension Narratology Force-Directed Graph</h2>
+  <div class="section-sub">FORCE-DIRECTED GRAPH: 16 DIMENSIONS &amp; 28 INTER-DIMENSION EDGES</div>
+  <div class="definition">
+    <strong>Definition:</strong>The force-directed graph takes the sixteen narratology dimensions as nodes; node color distinguishes the seven categories (seven-sense steel blue / textual olive green / gender twilight purple / cultural ochre orange / affective vermilion / historical deep chestnut / metanarrative deep indigo), and node size reflects academic value. Edges between dimensions are labeled with relation type (Spatio-Sensory / Theoretical-Textual / Cross-Domain), and edge thickness corresponds to connection strength. It reveals the internal structure of thirteen-dimension narratology — the seven-sense dimensions cluster tightly, the textual-theoretical dimensions connect laterally, and the four new W182–W185 dimensions form a vertical chain "Affective → Historical → Metanarrative → Unreliable".
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Thirteen-Dimension Narratology Force-Directed Graph (16 dimension nodes + 28 edges · draggable)</div>
+    <div class="chart-caption">Node color: dimension category · node size = academic impact · edge color = relation type · edge thickness = connection strength</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="680"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3: 桑基图 -->
+<section class="section" id="sankey">
+  <h2 class="section-title alt-2">III · Dimension → Theorist → Application Three-Layer Sankey Diagram</h2>
+  <div class="section-sub">SANKEY: DIMENSIONS → THEORISTS → APPLICATIONS</div>
+  <div class="definition">
+    <strong>Definition:</strong>The Sankey diagram shows a three-layer flow: sixteen dimensions → related theorists → Journey to the West application cases. Each dimension connects to its representative theorist (e.g., "Time" to Genette, "Space" to Bakhtin, "Intertext" to Kristeva, "Affective" to Faber, "Historical" to Hayden White, "Metanarrative" to Patricia Waugh), and theorists flow onward to concrete Journey to the West application cases. Flow thickness corresponds to a theory’s application weight in Journey to the West studies, revealing the path of conversion from abstract theory to textual analysis.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Dimension-Theorist-Application Three-Layer Sankey Diagram</div>
+    <div class="chart-caption">Left to right: sixteen dimensions → related theorists → Journey to the West application cases · flow = theory application weight · hover to highlight paths</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="660"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4: 雷达图 -->
+<section class="section" id="radar">
+  <h2 class="section-title">IV · Thirteen-Dimension Narratology Radar Chart (4 Metrics)</h2>
+  <div class="section-sub">RADAR: 16 DIMENSIONS × 4 METRICS</div>
+  <div class="definition">
+    <strong>Definition:</strong>The radar chart evaluates each narratology dimension on four metrics: theoretical depth (maturity of the theoretical system), JTTW application (coverage of Journey to the West textual analysis), term count (size of the core terminology), and academic impact (research contribution and influence). The larger the radar area, the stronger the dimension’s overall standing in the thirteen-dimension narratology framework. Intertextuality (Intertext), Temporal Narratology (Time), and Unreliable Narration perform most strongly overall, while the tactile and olfactory dimensions are emerging growth points.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Sixteen-Dimension × Four-Metric Radar Chart (theoretical depth + JTTW application + term count + academic impact)</div>
+    <div class="chart-caption">16 dimensions × 4 metrics · values 1–10 · hover for details</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="640"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5: 时间线 -->
+<section class="section" id="timeline">
+  <h2 class="section-title alt">V · W161–W185 Narratology Framework Evolution Timeline</h2>
+  <div class="section-sub">TIMELINE: NARRATOLOGY FRAMEWORK EVOLUTION</div>
+  <div class="definition">
+    <strong>Definition:</strong>Arranged by creation time, the W161–W185 narratology topics (including the W168/W172/W175 visualization milestones) annotate each topic’s number, dimension, and academic value. The time span runs from W161 (Temporal Narratology, 2025-03) to W186 (this network, 2026-07), tracing the framework evolution path "seven-sense foundation → theoretical expansion → cross-fertilization → four new dimensions". W186, this network, is the culminating synthesis node. Node size reflects academic value, and color distinguishes dimension category.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">W161–W186 Narratology Framework Creation Timeline</div>
+    <div class="chart-caption">X axis: creation time · nodes: dimension color · size = academic impact · hover for details</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="540"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6: 汇总表 -->
+<section class="section" id="summary">
+  <h2 class="section-title alt-2">VI · Thirteen-Dimension Narratology Full Summary Table</h2>
+  <div class="section-sub">SUMMARY: 16-DIMENSION NARRATOLOGY TABLE</div>
+  <div class="definition">
+    <strong>Definition:</strong>Summarizes complete data for the sixteen narratology dimensions — number, dimension name, English full name, category, related theorists, term count, application cases, and four-metric scores (theoretical depth / JTTW application / term count / academic impact). Below is the theorist list grouped by school, forming the complete knowledge network of the W186 thirteen-dimension narratology network. Table headers are clickable to sort, corresponding to the W161–W185 narratology topics.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Sixteen-Dimension Full Summary Table (click headers to sort)</div>
+    <div class="chart-caption">16 dimensions × 10 fields · click headers to sort · hover to highlight</div>
+    <div id="summary-table-wrap"></div>
+  </div>
+  <div class="theorist-block">
+    <h3>Related Theorists List (grouped by dimension)</h3>
+    <div id="theorist-list" class="theorist-list"></div>
+  </div>
+</section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/narratology-13d-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+</main>
+
+<script>
+// ============================================================
+// EMBEDDED DATA —— 十三维叙事学关系图谱数据（W186）
+// 整合 W161-W174 十二维 + W182-W185 新增四维 = 16 维度
+// ============================================================
+const EMBEDDED_DATA = {
+  narratology: {
+    // 十六维度节点（W161-W167 七感 + W169/W170/W171 文本 + W173 性别 + W174 文化 + W182-W185 新增四维）
+    dimensions: [
+      { id: "W161", code: "W161", dim: "Time", name: "Temporal Narratology", english: "Temporal Narratology", category: "Seven-Sense Narratology", theorists: ["Genette", "Rimmon-Kenan", "Bal", "Fludernik"], termCount: 8, cases: "Pilgrimage time structure, sequence of the 81 ordeals, flashback narration", theoryDepth: 9, textCoverage: 8, academicValue: 9, color: "#4a6b8a", 日期: "2025-03-10", 日期戳: 20250310 },
+      { id: "W162", code: "W162", dim: "Space", name: "Spatial Narratology", english: "Spatial Narratology", category: "Seven-Sense Narratology", theorists: ["Bakhtin", "Frank", "Zoran", "Ryan"], termCount: 7, cases: "Three-realm spatial structure, pilgrimage route, chronotope", theoryDepth: 9, textCoverage: 8, academicValue: 9, color: "#4a6b8a", 日期: "2025-03-15", 日期戳: 20250315 },
+      { id: "W163", code: "W163", dim: "Auditory", name: "Auditory Narratology", english: "Auditory Narratology", category: "Seven-Sense Narratology", theorists: ["Merleau-Ponty", "Goodman", "Brown", "Iser"], termCount: 6, cases: "Mantra soundscape, thunder and Sanskrit chants, Sun Wukong's roar", theoryDepth: 7, textCoverage: 7, academicValue: 7, color: "#5a7b9a", 日期: "2025-03-22", 日期戳: 20250322 },
+      { id: "W164", code: "W164", dim: "Olfactory", name: "Olfactory Narratology", english: "Olfactory Narratology", category: "Seven-Sense Narratology", theorists: ["Jim Drobnick", "Rachel Herz", "David Howes", "Corbin"], termCount: 5, cases: "Demonic aura description, immortal aura recognition, worldly-smell markers", theoryDepth: 6, textCoverage: 6, academicValue: 6, color: "#6a8baa", 日期: "2025-03-28", 日期戳: 20250328 },
+      { id: "W165", code: "W165", dim: "Tactile", name: "Tactile Narratology", english: "Tactile Narratology", category: "Seven-Sense Narratology", theorists: ["Mark Johnson", "Constance Classen", "Elaine Scarry", "Patricia Kramer"], termCount: 5, cases: "Golden Cudgel tactility, skin description, touch transformations", theoryDepth: 6, textCoverage: 5, academicValue: 6, color: "#7a9bba", 日期: "2025-04-05", 日期戳: 20250405 },
+      { id: "W166", code: "W166", dim: "Visual", name: "Visual Narratology", english: "Visual Narratology", category: "Seven-Sense Narratology", theorists: ["Mieke Bal", "Kukkonen", "Haynes", "Nelson"], termCount: 7, cases: "Visual illusion, Fiery Golden Eyes, transformation-scene focus", theoryDepth: 8, textCoverage: 8, academicValue: 8, color: "#5a7b9a", 日期: "2025-04-12", 日期戳: 20250412 },
+      { id: "W167", code: "W167", dim: "Gustatory", name: "Gustatory Narratology", english: "Gustatory Narratology", category: "Seven-Sense Narratology", theorists: ["Carol Korsmeyer", "Ansley Clark", "Simon Frude", "David Sutton"], termCount: 5, cases: "Peaches, ginseng fruit, vegetarian meals, celestial wine gustatory metaphors", theoryDepth: 6, textCoverage: 6, academicValue: 6, color: "#6a8baa", 日期: "2025-04-19", 日期戳: 20250419 },
+      { id: "W169", code: "W169", dim: "Intertext", name: "Intertextual Narratology", english: "Intertextual Narratology", category: "Textual Narratology", theorists: ["Kristeva", "Barthes", "Genette", "Riffaterre"], termCount: 9, cases: "Intertext with pilgrimage verse-tales, covert use of Buddhist-Daoist classics, zaju adaptation", theoryDepth: 10, textCoverage: 9, academicValue: 10, color: "#6B8E5A", 日期: "2025-05-03", 日期戳: 20250503 },
+      { id: "W170", code: "W170", dim: "Rhetoric", name: "Rhetorical Narratology", english: "Rhetorical Narratology", category: "Textual Narratology", theorists: ["Booth", "Phelan", "Rabinowitz", "Lanser"], termCount: 8, cases: "Metaphor system, ironic narration, rhetorical ethics", theoryDepth: 9, textCoverage: 8, academicValue: 9, color: "#6a8a4a", 日期: "2025-05-10", 日期戳: 20250510 },
+      { id: "W171", code: "W171", dim: "Cognitive", name: "Cognitive Narratology", english: "Cognitive Narratology", category: "Textual Narratology", theorists: ["Herman", "Ryan", "Palmer", "Jahn"], termCount: 7, cases: "Character minds, reader cognition, storyworld construction", theoryDepth: 9, textCoverage: 8, academicValue: 9, color: "#7a9a5a", 日期: "2025-05-17", 日期戳: 20250517 },
+      { id: "W173", code: "W173", dim: "Gender", name: "Feminist Narratology", english: "Feminist Narratology", category: "Gender Narratology", theorists: ["Lanser", "Warhol", "Fuss", "Kaplan"], termCount: 6, cases: "Womanland, the Spider Spirit, Princess Iron Fan, the Jade Hare Spirit", theoryDepth: 8, textCoverage: 8, academicValue: 8, color: "#7a4a7a", 日期: "2025-05-31", 日期戳: 20250531 },
+      { id: "W174", code: "W174", dim: "Postcolonial", name: "Postcolonial Narratology", english: "Postcolonial Narratology", category: "Cultural Narratology", theorists: ["Said", "Spivak", "Bhabha", "Lefevere"], termCount: 6, cases: "Cross-cultural reading, Orientalism, critique of cultural hegemony", theoryDepth: 8, textCoverage: 7, academicValue: 8, color: "#C76838", 日期: "2025-06-07", 日期戳: 20250607 },
+      { id: "W182", code: "W182", dim: "Affective", name: "Affective Narratology", english: "Affective Narratology", category: "Affective Narratology", theorists: ["Pamela Faber", "Raymond Williams", "Cixous", "Tomkins"], termCount: 7, cases: "Structures of feeling, sentimental narration, Sun Wukong's wrath, Tang Sanzang's compassion", theoryDepth: 9, textCoverage: 9, academicValue: 9, color: "#9a3a3a", 日期: "2026-06-15", 日期戳: 20260615 },
+      { id: "W183", code: "W183", dim: "Historical", name: "Historical Narratology", english: "Historical Narratology", category: "Historical Narratology", theorists: ["Hayden White", "Ankersmit", "Paul Ricoeur", "Koselleck"], termCount: 7, cases: "Historical narrativization, Ming remonstrator context, layered accretion of pilgrimage history", theoryDepth: 9, textCoverage: 8, academicValue: 9, color: "#7a4a2a", 日期: "2026-06-22", 日期戳: 20260622 },
+      { id: "W184", code: "W184", dim: "Metanarrative", name: "Meta-Narratology", english: "Meta-Narratology", category: "Meta-Narratology", theorists: ["Patricia Waugh", "Linda Hutcheon", "McHale", "Fludernik"], termCount: 7, cases: "Metanarrative exposure, narrative-frame self-reflexivity, storyteller intrusion", theoryDepth: 8, textCoverage: 8, academicValue: 8, color: "#2a3a5a", 日期: "2026-06-29", 日期戳: 20260629 },
+      { id: "W185", code: "W185", dim: "Unreliable", name: "Unreliable Narration", english: "Unreliable Narration", category: "Meta-Narratology", theorists: ["Wayne Booth", "James Phelan", "Tamar Yacobi", "Ansgar Nünning"], termCount: 7, cases: "Unreliable narrator, Sun Wukong's self-reporting bias, omniscient point-of-view gaps", theoryDepth: 9, textCoverage: 9, academicValue: 9, color: "#3a4a6a", 日期: "2026-07-05", 日期戳: 20260705 }
+    ],
+    // 外部关联节点（非十六维度但参与关联边）
+    externalNodes: [
+      { id: "W141", dim: "Trauma", name: "Trauma Narrative", category: "Related Topic", color: "#8a7a5a" },
+      { id: "W137", dim: "Subaltern", name: "Subaltern Narrative", category: "Related Topic", color: "#8a7a5a" },
+      { id: "W145", dim: "Myth", name: "Myth Narrative", category: "Related Topic", color: "#8a7a5a" },
+      { id: "W180", dim: "Intellectual History", name: "Intellectual History", category: "Related Topic", color: "#8a7a5a" },
+      { id: "W177", dim: "Reception", name: "Reception Aesthetics", category: "Related Topic", color: "#8a7a5a" },
+      { id: "W124", dim: "Ethics", name: "Ethical Narrative", category: "Related Topic", color: "#8a7a5a" }
+    ],
+    // 维度间关联边（28 条）
+    links: [
+      { source: "W161", target: "W162", type: "Spatio-Sensory", 强度: 88 },
+      { source: "W161", target: "W163", type: "Spatio-Sensory", 强度: 78 },
+      { source: "W163", target: "W164", type: "Spatio-Sensory", 强度: 82 },
+      { source: "W164", target: "W165", type: "Spatio-Sensory", 强度: 76 },
+      { source: "W165", target: "W166", type: "Spatio-Sensory", 强度: 80 },
+      { source: "W166", target: "W167", type: "Spatio-Sensory", 强度: 76 },
+      { source: "W167", target: "W169", type: "Theoretical-Textual", 强度: 72 },
+      { source: "W169", target: "W170", type: "Theoretical-Textual", 强度: 88 },
+      { source: "W170", target: "W171", type: "Theoretical-Textual", 强度: 82 },
+      { source: "W171", target: "W173", type: "Theoretical-Textual", 强度: 75 },
+      { source: "W173", target: "W174", type: "Theoretical-Textual", 强度: 80 },
+      { source: "W174", target: "W182", type: "Cross-Domain", 强度: 78 },
+      { source: "W182", target: "W183", type: "Cross-Domain", 强度: 85 },
+      { source: "W183", target: "W184", type: "Cross-Domain", 强度: 82 },
+      { source: "W184", target: "W185", type: "Cross-Domain", 强度: 88 },
+      { source: "W182", target: "W141", type: "Cross-Domain", 强度: 70 },
+      { source: "W182", target: "W137", type: "Cross-Domain", 强度: 68 },
+      { source: "W173", target: "W137", type: "Cross-Domain", 强度: 65 },
+      { source: "W174", target: "W145", type: "Cross-Domain", 强度: 72 },
+      { source: "W184", target: "W169", type: "Theoretical-Textual", 强度: 78 },
+      { source: "W185", target: "W170", type: "Theoretical-Textual", 强度: 85 },
+      { source: "W185", target: "W171", type: "Theoretical-Textual", 强度: 80 },
+      { source: "W183", target: "W161", type: "Cross-Domain", 强度: 76 },
+      { source: "W182", target: "W173", type: "Cross-Domain", 强度: 74 },
+      { source: "W183", target: "W180", type: "Cross-Domain", 强度: 70 },
+      { source: "W184", target: "W177", type: "Cross-Domain", 强度: 72 },
+      { source: "W182", target: "W161", type: "Cross-Domain", 强度: 68 },
+      { source: "W185", target: "W124", type: "Cross-Domain", 强度: 75 }
+    ],
+    // 桑基图数据：维度 → 理论家 → 应用案例
+    sankey: [
+      { source: "Time", target: "Genette", value: 4 },
+      { source: "Space", target: "Bakhtin", value: 4 },
+      { source: "Auditory", target: "Merleau-Ponty", value: 3 },
+      { source: "Olfactory", target: "Drobnick", value: 3 },
+      { source: "Tactile", target: "Johnson", value: 3 },
+      { source: "Visual", target: "Mieke Bal", value: 3 },
+      { source: "Gustatory", target: "Korsmeyer", value: 3 },
+      { source: "Intertext", target: "Kristeva", value: 4 },
+      { source: "Rhetoric", target: "Booth", value: 4 },
+      { source: "Cognitive", target: "Herman", value: 4 },
+      { source: "Gender", target: "Lanser", value: 4 },
+      { source: "Postcolonial", target: "Said", value: 4 },
+      { source: "Affective", target: "Faber", value: 4 },
+      { source: "Historical", target: "Hayden White", value: 4 },
+      { source: "Metanarrative", target: "Waugh", value: 4 },
+      { source: "Unreliable", target: "Phelan", value: 4 },
+      { source: "Genette", target: "Journey time structure", value: 4 },
+      { source: "Bakhtin", target: "Three-realm chronotope", value: 4 },
+      { source: "Merleau-Ponty", target: "Mantra soundscape", value: 3 },
+      { source: "Drobnick", target: "Demonic aura olfactory marker", value: 3 },
+      { source: "Johnson", target: "Golden Cudgel tactility", value: 3 },
+      { source: "Mieke Bal", target: "Visual illusion focus", value: 3 },
+      { source: "Korsmeyer", target: "Peach gustatory metaphor", value: 3 },
+      { source: "Kristeva", target: "Intertextual network construction", value: 4 },
+      { source: "Booth", target: "Metaphorical rhetorical system", value: 4 },
+      { source: "Herman", target: "Character mind modeling", value: 4 },
+      { source: "Lanser", target: "Female character voice", value: 4 },
+      { source: "Said", target: "Cross-cultural reading", value: 4 },
+      { source: "Faber", target: "Structure of feeling analysis", value: 4 },
+      { source: "Hayden White", target: "Historical narrativization", value: 4 },
+      { source: "Waugh", target: "Metanarrative exposure", value: 4 },
+      { source: "Phelan", target: "Unreliable narrator", value: 4 }
+    ],
+    // 桑基图理论家层节点配色映射
+    sankeyTheoristColors: {
+      "Genette": "#4a6b8a", "Bakhtin": "#4a6b8a", "Merleau-Ponty": "#5a7b9a", "Drobnick": "#6a8baa",
+      "Johnson": "#7a9bba", "Mieke Bal": "#5a7b9a", "Korsmeyer": "#6a8baa", "Kristeva": "#6B8E5A",
+      "Booth": "#6a8a4a", "Herman": "#7a9a5a", "Lanser": "#7a4a7a", "Said": "#C76838",
+      "Faber": "#9a3a3a", "Hayden White": "#7a4a2a", "Waugh": "#2a3a5a", "Phelan": "#3a4a6a"
+    },
+    // 理论家清单（16 位代表）
+    theorists: [
+      { id: "genette", name: "Genette", 英文名: "Gérard Genette", 国籍: "France", 理论: "Narrative time / transtextuality", 代表作: "Narrative Discourse (1972) · Palimpsests (1982)", 活跃年代: "1972-2004", color: "#4a6b8a", 学派: "Structuralist narratology", 关联维度: "Time·Intertext" },
+      { id: "bakhtin", name: "Bakhtin", 英文名: "Mikhail Bakhtin", 国籍: "Soviet Union", 理论: "Chronotope / dialogism", 代表作: "Rabelais and His World (1965) · The Dialogic Imagination (1975)", 活跃年代: "1929-1975", color: "#4a6b8a", 学派: "Bakhtin school", 关联维度: "Space" },
+      { id: "merleau", name: "Merleau-Ponty", 英文名: "Maurice Merleau-Ponty", 国籍: "France", 理论: "Phenomenology of perception / bodily audition", 代表作: "Phenomenology of Perception (1945)", 活跃年代: "1945-1961", color: "#5a7b9a", 学派: "Phenomenology", 关联维度: "Auditory" },
+      { id: "drobnick", name: "Drobnick", 英文名: "Jim Drobnick", 国籍: "Canada", 理论: "Olfactory aesthetics", 代表作: "The Smell Culture Reader (2006)", 活跃年代: "2000-", color: "#6a8baa", 学派: "Sensory studies", 关联维度: "Olfactory" },
+      { id: "johnson", name: "Mark Johnson", 英文名: "Mark Johnson", 国籍: "United States", 理论: "Bodily metaphor / tactile cognition", 代表作: "Philosophy in the Flesh (1999)", 活跃年代: "1980-", color: "#7a9bba", 学派: "Cognitive linguistics", 关联维度: "Tactile" },
+      { id: "bal", name: "Mieke Bal", 英文名: "Mieke Bal", 国籍: "Netherlands", 理论: "Visual narrative / focalization analysis", 代表作: "Narratology (1985) · Looking In (2001)", 活跃年代: "1977-", color: "#5a7b9a", 学派: "Postclassical narratology", 关联维度: "Visual" },
+      { id: "kuen", name: "Carol Korsmeyer", 英文名: "Carol Korsmeyer", 国籍: "United States", 理论: "Gustatory aesthetics / philosophy of the senses", 代表作: "Making Sense of Taste (1999)", 活跃年代: "1990-", color: "#6a8baa", 学派: "Aesthetics/philosophy", 关联维度: "Gustatory" },
+      { id: "kristeva", name: "Kristeva", 英文名: "Julia Kristeva", 国籍: "France–Bulgaria", 理论: "Intertextuality", 代表作: "Word, Dialogue and Novel (1966) · Séméiotikè (1969)", 活跃年代: "1966-", color: "#6B8E5A", 学派: "Poststructuralism", 关联维度: "Intertext" },
+      { id: "booth", name: "Wayne Booth", 英文名: "Wayne Booth", 国籍: "United States", 理论: "Narrative rhetoric / implied author", 代表作: "The Rhetoric of Fiction (1961)", 活跃年代: "1961-2005", color: "#6a8a4a", 学派: "Chicago school", 关联维度: "Rhetoric·Unreliable" },
+      { id: "phelan", name: "James Phelan", 英文名: "James Phelan", 国籍: "United States", 理论: "Rhetorical narrative / unreliable narration", 代表作: "Narrative as Rhetoric (1996)", 活跃年代: "1981-", color: "#3a4a6a", 学派: "Postclassical narratology", 关联维度: "Rhetoric·Unreliable" },
+      { id: "herman", name: "David Herman", 英文名: "David Herman", 国籍: "United States", 理论: "Cognitive narratology / story logic", 代表作: "Story Logic (2002) · Basic Elements of Narrative (2009)", 活跃年代: "1997-", color: "#7a9a5a", 学派: "Postclassical narratology", 关联维度: "Cognitive" },
+      { id: "lanser", name: "Susan Lanser", 英文名: "Susan Lanser", 国籍: "United States", 理论: "Feminist narratology / narrative authority", 代表作: "Fictions of Authority (1992)", 活跃年代: "1981-", color: "#7a4a7a", 学派: "Feminist Narratology", 关联维度: "Gender·Rhetoric" },
+      { id: "said", name: "Edward Said", 英文名: "Edward Said", 国籍: "United States–Palestine", 理论: "Orientalism / postcolonial", 代表作: "Orientalism (1978) · Culture and Imperialism (1993)", 活跃年代: "1978-2003", color: "#C76838", 学派: "Postcolonial criticism", 关联维度: "Postcolonial" },
+      { id: "faber", name: "Pamela Faber", 英文名: "Pamela Faber", 国籍: "United States", 理论: "Affective narrative / structures of feeling", 代表作: "Affective Narratology (2018)", 活跃年代: "2010-", color: "#9a3a3a", 学派: "Affect studies", 关联维度: "Affective" },
+      { id: "white", name: "Hayden White", 英文名: "Hayden White", 国籍: "United States", 理论: "Metahistory / historical narrative", 代表作: "Metahistory (1973) · Tropics of Discourse (1978)", 活跃年代: "1966-2018", color: "#7a4a2a", 学派: "Historical Narratology", 关联维度: "Historical" },
+      { id: "waugh", name: "Patricia Waugh", 英文名: "Patricia Waugh", 国籍: "United Kingdom", 理论: "Metafiction / metanarrative", 代表作: "Metafiction (1984)", 活跃年代: "1984-", color: "#2a3a5a", 学派: "Meta-Narratology", 关联维度: "Metanarrative" }
+    ],
+    // 时间线数据（W161-W186 含可视化里程碑，共 20 项）
+    timeline: [
+      { 编号: "W161", dim: "Time", 专题: "Temporal Narratology", 类型: "Topic", 类别: "Seven-Sense Narratology", academicValue: 9, 日期: "2025-03-10", 日期戳: 20250310, color: "#4a6b8a" },
+      { 编号: "W162", dim: "Space", 专题: "Spatial Narratology", 类型: "Topic", 类别: "Seven-Sense Narratology", academicValue: 9, 日期: "2025-03-15", 日期戳: 20250315, color: "#4a6b8a" },
+      { 编号: "W163", dim: "Auditory", 专题: "Auditory Narratology", 类型: "Topic", 类别: "Seven-Sense Narratology", academicValue: 7, 日期: "2025-03-22", 日期戳: 20250322, color: "#5a7b9a" },
+      { 编号: "W164", dim: "Olfactory", 专题: "Olfactory Narratology", 类型: "Topic", 类别: "Seven-Sense Narratology", academicValue: 6, 日期: "2025-03-28", 日期戳: 20250328, color: "#6a8baa" },
+      { 编号: "W165", dim: "Tactile", 专题: "Tactile Narratology", 类型: "Topic", 类别: "Seven-Sense Narratology", academicValue: 6, 日期: "2025-04-05", 日期戳: 20250405, color: "#7a9bba" },
+      { 编号: "W166", dim: "Visual", 专题: "Visual Narratology", 类型: "Topic", 类别: "Seven-Sense Narratology", academicValue: 8, 日期: "2025-04-12", 日期戳: 20250412, color: "#5a7b9a" },
+      { 编号: "W167", dim: "Gustatory", 专题: "Gustatory Narratology", 类型: "Topic", 类别: "Seven-Sense Narratology", academicValue: 6, 日期: "2025-04-19", 日期戳: 20250419, color: "#6a8baa" },
+      { 编号: "W168", dim: "Six Senses", 专题: "Six-Senses Narratology Network", 类型: "Visualization", 类别: "Seven-Sense Narratology", academicValue: 8, 日期: "2025-04-26", 日期戳: 20250426, color: "#6b4226" },
+      { 编号: "W169", dim: "Intertext", 专题: "Intertextual Narratology", 类型: "Topic", 类别: "Textual Narratology", academicValue: 10, 日期: "2025-05-03", 日期戳: 20250503, color: "#6B8E5A" },
+      { 编号: "W170", dim: "Rhetoric", 专题: "Rhetorical Narratology", 类型: "Topic", 类别: "Textual Narratology", academicValue: 9, 日期: "2025-05-10", 日期戳: 20250510, color: "#6a8a4a" },
+      { 编号: "W171", dim: "Cognitive", 专题: "Cognitive Narratology", 类型: "Topic", 类别: "Textual Narratology", academicValue: 9, 日期: "2025-05-17", 日期戳: 20250517, color: "#7a9a5a" },
+      { 编号: "W172", dim: "Intertext", 专题: "Intertextuality Network", 类型: "Visualization", 类别: "Textual Narratology", academicValue: 9, 日期: "2025-05-24", 日期戳: 20250524, color: "#6B8E5A" },
+      { 编号: "W173", dim: "Gender", 专题: "Feminist Narratology", 类型: "Topic", 类别: "Gender Narratology", academicValue: 8, 日期: "2025-05-31", 日期戳: 20250531, color: "#7a4a7a" },
+      { 编号: "W174", dim: "Postcolonial", 专题: "Postcolonial Narratology", 类型: "Topic", 类别: "Cultural Narratology", academicValue: 8, 日期: "2025-06-07", 日期戳: 20250607, color: "#C76838" },
+      { 编号: "W175", dim: "Twelve-Dim", 专题: "Twelve-Dimension Narratology Network", 类型: "Visualization", 类别: "Integration", academicValue: 9, 日期: "2025-07-28", 日期戳: 20250728, color: "#8b4513" },
+      { 编号: "W182", dim: "Affective", 专题: "Affective Narratology", 类型: "Topic", 类别: "Affective Narratology", academicValue: 9, 日期: "2026-06-15", 日期戳: 20260615, color: "#9a3a3a" },
+      { 编号: "W183", dim: "Historical", 专题: "Historical Narratology", 类型: "Topic", 类别: "Historical Narratology", academicValue: 9, 日期: "2026-06-22", 日期戳: 20260622, color: "#7a4a2a" },
+      { 编号: "W184", dim: "Metanarrative", 专题: "Meta-Narratology", 类型: "Topic", 类别: "Meta-Narratology", academicValue: 8, 日期: "2026-06-29", 日期戳: 20260629, color: "#2a3a5a" },
+      { 编号: "W185", dim: "Unreliable", 专题: "Unreliable Narration", 类型: "Topic", 类别: "Meta-Narratology", academicValue: 9, 日期: "2026-07-05", 日期戳: 20260705, color: "#3a4a6a" },
+      { 编号: "W186", dim: "Thirteen-Dim", 专题: "Thirteen-Dimension Narratology Network", 类型: "Visualization", 类别: "Integration", academicValue: 10, 日期: "2026-07-28", 日期戳: 20260728, color: "#8b4513" }
+    ]
+  }
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  // file:// 协议下尝试 fetch 外部 JSON；http(s):// 协议下直接用嵌入数据（避免跨路径 404）
+  if (location.protocol !== 'file:') {
+    return EMBEDDED_DATA[fallbackKey];
+  }
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W191] Using embedded data (' + fallbackKey + ')：', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const narratology = await fetchJson(base + 'narratology-13d-network.json', 'narratology');
+  const nr = narratology.narratology || narratology;
+  return {
+    dimensions: nr.dimensions || EMBEDDED_DATA.narratology.dimensions,
+    externalNodes: nr.externalNodes || EMBEDDED_DATA.narratology.externalNodes,
+    links: nr.links || EMBEDDED_DATA.narratology.links,
+    sankey: nr.sankey || EMBEDDED_DATA.narratology.sankey,
+    sankeyTheoristColors: nr.sankeyTheoristColors || EMBEDDED_DATA.narratology.sankeyTheoristColors,
+    theorists: nr.theorists || EMBEDDED_DATA.narratology.theorists,
+    timeline: nr.timeline || EMBEDDED_DATA.narratology.timeline
+  };
+}
+
+// 关联类型颜色查表
+const TYPE_COLORS = {
+  'Spatio-Sensory': '#8B4513',
+  'Theoretical-Textual': '#5a3828',
+  'Cross-Domain': '#7a4a2a'
+};
+
+function typeColor(type) {
+  return TYPE_COLORS[type] || '#8a7a5a';
+}
+
+// 维度类别配色查表
+const CATEGORY_COLORS = {
+  'Seven-Sense Narratology': '#4a6b8a',
+  'Textual Narratology': '#6B8E5A',
+  'Gender Narratology': '#7a4a7a',
+  'Cultural Narratology': '#C76838',
+  'Affective Narratology': '#9a3a3a',
+  'Historical Narratology': '#7a4a2a',
+  'Meta-Narratology': '#2a3a5a',
+  'Related Topic': '#8a7a5a',
+  'Integration': '#8b4513'
+};
+
+// ============================================================
+// Section 1: 十六维概览卡片
+// ============================================================
+function renderOverview(dimensions) {
+  const grid = d3.select('#dims-grid');
+  grid.html('');
+  if (!dimensions || dimensions.length === 0) {
+    grid.append('div').attr('class', 'empty-state').text('No data');
+    return;
+  }
+  const card = grid.selectAll('.dim-card')
+    .data(dimensions)
+    .enter()
+    .append('div')
+    .attr('class', 'dim-card')
+    .attr('role', 'button')
+    .attr('tabindex', '0')
+    .each(function(d) { d3.select(this).style('border-top', '4px solid ' + d.color); });
+
+  card.append('div').attr('class', 'dim-num').text(d => d.code);
+  card.append('div').attr('class', 'dim-name').text(d => d.dim);
+  card.append('div').attr('class', 'swatch-bar').each(function(d) { d3.select(this).style('background', d.color); });
+  card.append('div').attr('class', 'dim-cat').text(d => d.category);
+  card.append('div').attr('class', 'dim-eng').text(d => d.english);
+  card.append('div').attr('class', 'dim-theorists').text(d => d.theorists.join(', '));
+
+  card.on('keydown', function(e, d) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      showDimTooltip(e, d);
+    }
+  });
+  card.on('click', function(e, d) { showDimTooltip(e, d); });
+}
+
+function showDimTooltip(event, d) {
+  let tip = d3.select('.tooltip');
+  if (tip.empty()) {
+    tip = d3.select('body').append('div').attr('class', 'tooltip');
+  }
+  tip.html('')
+    .style('opacity', 0.95)
+    .style('left', (event.pageX + 10) + 'px')
+    .style('top', (event.pageY - 28) + 'px');
+  tip.append('div').html('<strong>' + d.code + ' · ' + d.dim + ' (' + d.name + ')</strong>');
+  tip.append('div').text('English: ' + d.english);
+  tip.append('div').text('Category: ' + d.category);
+  tip.append('div').text('Theorists: ' + d.theorists.join(', '));
+  tip.append('div').text('Core terms: ' + d.termCount);
+  tip.append('div').text('Application cases: ' + d.cases);
+  tip.append('div').text('Theoretical depth: ' + d.theoryDepth + ' · JTTW application: ' + d.textCoverage);
+  tip.append('div').text('Academic impact: ' + d.academicValue);
+  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3500);
+}
+
+// ============================================================
+// Section 2: 力导向关系图（16 维度节点 + 6 外部节点 + 28 关联边）
+// ============================================================
+function renderForce(dimensions, externalNodes, links) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!dimensions || dimensions.length === 0 || !links || links.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 340).attr('fill', '#8a7a5a').text('No data');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 680;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  // 合并维度节点与外部关联节点
+  const dimNodes = dimensions.map(d => ({ ...d, isExternal: false }));
+  const extNodes = (externalNodes || []).map(d => ({ ...d, isExternal: true, academicValue: 5 }));
+  const nodes = dimNodes.concat(extNodes);
+
+  // 深拷贝避免 mutation
+  const linkData = links.map(d => ({ ...d }));
+
+  function nodeRadius(d) {
+    if (d.isExternal) return 10;
+    return 14 + (d.academicValue || 7) * 1.5;
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes).alphaDecay(0.08).velocityDecay(0.5)
+    .force('link', d3.forceLink(linkData).id(d => d.id)
+      .distance(d => 130)
+      .strength(d => 0.35))
+    .force('charge', d3.forceManyBody().strength(-480))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 24))
+
+  // [P1聚类] 按分组字段(parent||id||category||type)做社区聚类锚点
+  .force('cluster-x', d3.forceX(d => {
+                const key = (d.parent || d.id || d.category || d.type || '');
+                if (!window.__clusterOrder) {
+                    window.__clusterOrder = Array.from(new Set(nodes.map(n => (n.parent || n.id || n.category || n.type || '')).filter(Boolean)));
+                }
+                const idx = window.__clusterOrder.indexOf(key);
+                return (width / (window.__clusterOrder.length + 1)) * (idx + 1);
+            }).strength(0.16))
+            .force('cluster-y', d3.forceY(height / 2).strength(0.06));
+  // 关联边
+    // 性能：边层改 Canvas 叠加，避免每帧 N×4 几何属性写入触发 SVG 重排
+  var _svgEl = svg.node();
+  var _lcParent = _svgEl.parentNode;
+  if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
+  if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas'); if (_oc) _oc.remove(); }
+  var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var _lcW = _svgEl.clientWidth || 800, _lcH = _svgEl.clientHeight || 540;
+  var _vb = (_svgEl.getAttribute('viewBox') || '').split(/[\s,]+/);
+  var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_svgEl.getAttribute('width') || _lcW);
+  var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_svgEl.getAttribute('height') || _lcH);
+  var linkCanvas = document.createElement('canvas');
+  linkCanvas.className = 'link-canvas';
+  linkCanvas.width = Math.round(_lcW * _dpr);
+  linkCanvas.height = Math.round(_lcH * _dpr);
+  linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _svgEl.offsetLeft + 'px;top:' + _svgEl.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+  if (_lcParent) _lcParent.insertBefore(linkCanvas, _svgEl);
+  _svgEl.style.position = 'relative';
+  _svgEl.style.zIndex = '1';
+  var lctx = linkCanvas.getContext('2d');
+  lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
+  var linkSels = [];
+  function drawLinks() {
+    lctx.clearRect(0, 0, _cw, _ch);
+    for (var s = 0; s < linkSels.length; s++) {
+      var sel = linkSels[s], data = sel.data(), lines = sel.nodes();
+      for (var i = 0; i < data.length; i++) {
+        var d = data[i], el = lines[i];
+        if (!d || !d.source || d.source.x == null) continue;
+        lctx.beginPath();
+        lctx.moveTo(d.source.x, d.source.y);
+        lctx.lineTo(d.target.x, d.target.y);
+        lctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
+        lctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
+        var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
+        lctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
+        var da = el.getAttribute('stroke-dasharray');
+        lctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
+        lctx.stroke();
+      }
+    }
+    lctx.setLineDash([]);
+    lctx.globalAlpha = 1;
+  }
+const link = svg.append('g').selectAll('.rel-link')
+    .data(linkData)
+    .enter().append('line')
+    .attr('class', 'rel-link')
+    .attr('stroke', d => typeColor(d.type))
+    .attr('stroke-width', d => 1.2 + (d.强度 || 50) / 40)
+    .attr('stroke-opacity', 0.5)
+    .attr('stroke-dasharray', d => d.type === 'Cross-Domain' ? '5,3' : '0'); link.style('display','none'); linkSels.push(link);
+
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', d => d.color)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2.5)
+    .attr('stroke-dasharray', d => d.isExternal ? '3,2' : '0')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3.5);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      if (d.isExternal) {
+        tooltip.append('div').html('<strong>' + d.id + ' · ' + d.dim + ' (related topic)</strong>');
+        tooltip.append('div').text('Topic: ' + d.name);
+      } else {
+        tooltip.append('div').html('<strong>' + d.code + ' · ' + d.dim + '</strong>');
+        tooltip.append('div').text('Topic: ' + d.name);
+        tooltip.append('div').text('Category: ' + d.category);
+        tooltip.append('div').text('Theorists: ' + d.theorists.join(', '));
+        tooltip.append('div').text('Core terms: ' + d.termCount);
+        tooltip.append('div').text('Application cases: ' + d.cases);
+        tooltip.append('div').text('Academic impact: ' + d.academicValue);
+      }
+      const connected = linkData.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('Edges: ' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2.5);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 拖拽
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => d.isExternal ? 22 : -4)
+    .attr('font-weight', 700)
+    .attr('font-size', d => d.isExternal ? '10px' : '13px')
+    .attr('fill', d => d.isExternal ? '#8a7a5a' : '#1a1410')
+    .text(d => d.dim);
+
+  const numLabel = svg.append('g').selectAll('.num-label')
+    .data(nodes.filter(d => !d.isExternal))
+    .enter().append('text')
+    .attr('class', 'num-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', 16)
+    .attr('font-size', '9px')
+    .attr('fill', '#fff')
+    .attr('font-weight', 600)
+    .attr('pointer-events', 'none')
+    .text(d => d.code.replace('W', ''));
+
+  sim.on('tick', () => {
+    drawLinks();;
+    node.attr('transform', d => `translate(${d.x},${d.y})`);
+    label.attr('transform', d => `translate(${d.x},${d.y})`);
+    numLabel.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+
+  // 图例
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const legendItems = [
+    { label: 'Seven-Sense Narratology (Time/Space/Auditory/Olfactory/Tactile/Visual/Gustatory)', color: '#4a6b8a' },
+    { label: 'Textual Narratology (Intertext/Rhetoric/Cognitive)', color: '#6B8E5A' },
+    { label: 'Gender Narratology', color: '#7a4a7a' },
+    { label: 'Cultural Narratology', color: '#C76838' },
+    { label: 'Affective Narratology', color: '#9a3a3a' },
+    { label: 'Historical Narratology', color: '#7a4a2a' },
+    { label: 'Meta-Narratology (Metanarrative/Unreliable)', color: '#2a3a5a' },
+    { label: 'Related Topic (external)', color: '#8a7a5a' },
+    { label: 'Spatio-Sensory edge', color: '#8B4513' },
+    { label: 'Theoretical-Textual edge', color: '#5a3828' },
+    { label: 'Cross-Domain edge (dashed)', color: '#7a4a2a' }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch')
+      .each(function() { d3.select(this).style('background', item.color); });
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: 桑基图（维度 → 理论家 → 应用案例）
+// ============================================================
+function buildSankeyGraph(linkData, dimensions) {
+  const dimNames = dimensions.map(d => d.dim);
+  const sources = new Set(linkData.map(l => l.source));
+  const nodeMap = new Map();
+  linkData.forEach(l => {
+    if (!nodeMap.has(l.source)) {
+      const cat = dimNames.includes(l.source) ? 0 : 1;
+      nodeMap.set(l.source, { name: l.source, cat });
+    }
+    if (!nodeMap.has(l.target)) {
+      const cat = sources.has(l.target) ? 1 : 2;
+      nodeMap.set(l.target, { name: l.target, cat });
+    }
+  });
+  return {
+    nodes: Array.from(nodeMap.values()),
+    links: linkData.map(l => ({ source: l.source, target: l.target, value: l.value }))
+  };
+}
+
+function renderSankey(sankeyLinkData, dimensions, theoristColors) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyLinkData || sankeyLinkData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 330).attr('fill', '#8a7a5a').text('No data');
+    return;
+  }
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 330).attr('fill', '#8b4513')
+      .text('d3-sankey not loaded; check ../static/js/d3-sankey.min.js');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 660;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+
+  // 维度配色
+  const dimColors = {};
+  dimensions.forEach(d => { dimColors[d.dim] = d.color; });
+
+  const catColors = ['#4a6b8a', '#8a7a5a', '#8b4513'];
+
+  const graphData = buildSankeyGraph(sankeyLinkData, dimensions);
+  // 深拷贝避免 mutation
+  const nodes = graphData.nodes.map(d => ({ ...d }));
+  const links = graphData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(16)
+    .nodePadding(7)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 链接
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => {
+      if (d.source.cat === 0) return dimColors[d.source.name] || catColors[0];
+      if (d.source.cat === 1) return (theoristColors && theoristColors[d.source.name]) || catColors[1];
+      return catColors[d.source.cat] || '#8a7a5a';
+    })
+    .attr('stroke-width', d => Math.max(1, d.width))
+    .attr('stroke-opacity', 0.4)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.75);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('Theory application weight: ' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.4);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => Math.max(1, d.x1 - d.x0))
+    .attr('height', d => Math.max(1, d.y1 - d.y0))
+    .attr('fill', d => {
+      if (d.cat === 0) return dimColors[d.name] || catColors[0];
+      if (d.cat === 1) return (theoristColors && theoristColors[d.name]) || catColors[1];
+      return catColors[d.cat] || '#8a7a5a';
+    })
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      const catLabel = ['Narratology Dimension', 'Related Theorists', 'JTTW Application Case'][d.cat] || '';
+      tooltip.append('div').text('Layer: ' + catLabel);
+      tooltip.append('div').text('Inflow: ' + (d.targetLinks || []).length + ' · Outflow: ' + (d.sourceLinks || []).length);
+      tooltip.append('div').text('Total flow: ' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 节点标签
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '11px')
+    .attr('fill', '#1a1410')
+    .text(d => d.name);
+
+  // 图例
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const layers = ['Narratology Dimension', 'Related Theorists', 'JTTW Application Case'];
+  layers.forEach((layer, i) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', catColors[i]); });
+    item.append('span').text(layer);
+  });
+}
+
+// ============================================================
+// Section 4: 雷达图（16 维度 × 4 指标）
+// ============================================================
+function renderRadar(dimensions) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!dimensions || dimensions.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 320).attr('fill', '#8a7a5a').text('No data');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 640;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const metrics = [
+    { key: 'theoryDepth', label: 'Theoretical Depth' },
+    { key: 'textCoverage', label: 'JTTW Application' },
+    { key: 'termCount', label: 'Term Count' },
+    { key: 'academicValue', label: 'Academic Impact' }
+  ];
+  const dimColors = {};
+  dimensions.forEach(d => { dimColors[d.dim] = d.color; });
+
+  const cx = width / 2;
+  const cy = height / 2 + 10;
+  const radius = Math.min(width, height) / 2 - 120;
+  const levels = 10;
+
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  // 背景同心多边形
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = metrics.map((dim, i) => {
+      const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // 轴线 + 标签
+  metrics.forEach((metric, i) => {
+    const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1);
+    const labelR = radius + 32;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '13px')
+      .attr('font-weight', '600')
+      .attr('fill', '#1a1410')
+      .text(metric.label);
+  });
+
+  // 数值刻度
+  for (let lvl = 2; lvl <= levels; lvl += 2) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6).attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '9px')
+      .attr('fill', '#8a7a5a')
+      .text(lvl);
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 每个维度一个多边形
+  dimensions.forEach(dim => {
+    const points = metrics.map((metric, i) => {
+      const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
+      const val = dim[metric.key] || 0;
+      const rr = radius * (val / 10);
+      return [Math.cos(angle) * rr, Math.sin(angle) * rr];
+    });
+    const color = dimColors[dim.dim] || '#8b4513';
+
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.06)
+      .attr('stroke', color)
+      .attr('stroke-width', 1.5)
+      .style('cursor', 'pointer')
+      .on('mouseover', function(e) {
+        d3.select(this).attr('fill-opacity', 0.25);
+        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.html('');
+        tooltip.append('div').html('<strong>' + dim.code + ' · ' + dim.dim + ' (' + dim.name + ')</strong>');
+        metrics.forEach(metric => {
+          tooltip.append('div').text(metric.label + ': ' + dim[metric.key]);
+        });
+      })
+      .on('mousemove', function(e) {
+        tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('fill-opacity', 0.06);
+        tooltip.transition().duration(400).style('opacity', 0);
+      });
+
+    // 顶点圆
+    points.forEach((p) => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 2.5)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 1)
+        .attr('pointer-events', 'none');
+    });
+  });
+
+  // 图例
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  dimensions.forEach(dim => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', dimColors[dim.dim] || '#8b4513'); });
+    item.append('span').text(dim.code + ' ' + dim.dim);
+  });
+}
+
+// ============================================================
+// Section 5: 时间线（W161-W186 含可视化里程碑）
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 270).attr('fill', '#8a7a5a').text('No data');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 540;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 50, right: 60, bottom: 100, left: 70 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  const sorted = timelineData.slice().sort((a, b) => a.日期戳 - b.日期戳);
+  const dateMin = d3.min(sorted, d => d.日期戳);
+  const dateMax = d3.max(sorted, d => d.日期戳);
+  const xScale = d3.scaleLinear()
+    .domain([dateMin - 2000, dateMax + 2000])
+    .range([0, innerW]);
+
+  const yScale = d3.scaleLinear()
+    .domain([5, 11])
+    .range([innerH, 0]);
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // 背景网格
+  g.append('g')
+    .attr('class', 'grid')
+    .call(d3.axisLeft(yScale).tickSize(-innerW).tickFormat('').ticks(5))
+    .selectAll('line').attr('stroke', '#d4c5a9').attr('stroke-dasharray', '3,3').attr('opacity', 0.4);
+  g.select('.grid .domain').attr('stroke', 'none');
+
+  // 主时间线（水平）
+  g.append('line')
+    .attr('x1', 0).attr('y1', innerH)
+    .attr('x2', innerW).attr('y2', innerH)
+    .attr('stroke', '#8b4513')
+    .attr('stroke-width', 2);
+
+  // 年份分割线（2025→2026）
+  const yearBoundary = 20260101;
+  g.append('line')
+    .attr('x1', xScale(yearBoundary)).attr('y1', 0)
+    .attr('x2', xScale(yearBoundary)).attr('y2', innerH)
+    .attr('stroke', '#C76838')
+    .attr('stroke-width', 1.5)
+    .attr('stroke-dasharray', '6,4')
+    .attr('opacity', 0.5);
+  g.append('text')
+    .attr('x', xScale(yearBoundary)).attr('y', -10)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '10px')
+    .attr('fill', '#C76838')
+    .attr('font-weight', '600')
+    .text('2025 → 2026 four new dimensions');
+
+  // 节点
+  g.selectAll('.tl-node')
+    .data(sorted)
+    .enter()
+    .append('circle')
+    .attr('class', 'tl-node')
+    .attr('cx', d => xScale(d.日期戳))
+    .attr('cy', d => yScale(d.academicValue))
+    .attr('r', d => 4 + d.academicValue / 2.5)
+    .attr('fill', d => d.color)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3.5);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.编号 + ' · ' + d.dim + '</strong>');
+      tooltip.append('div').text('Topic: ' + d.专题);
+      tooltip.append('div').text('Type: ' + d.类型);
+      tooltip.append('div').text('Category: ' + d.类别);
+      tooltip.append('div').text('Created: ' + d.日期);
+      tooltip.append('div').text('Academic impact: ' + d.academicValue);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // 编号标签（节点上方）
+  g.selectAll('.tl-num')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'tl-num')
+    .attr('x', d => xScale(d.日期戳))
+    .attr('y', d => yScale(d.academicValue) - 14)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '9px')
+    .attr('font-weight', '700')
+    .attr('fill', d => d.color)
+    .text(d => d.编号);
+
+  // 维度标签（X 轴下方）
+  g.selectAll('.tl-dim')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'tl-dim')
+    .attr('x', d => xScale(d.日期戳))
+    .attr('y', innerH + 20)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '10px')
+    .attr('font-weight', '600')
+    .attr('fill', '#1a1410')
+    .text(d => d.dim);
+
+  // 日期标签（X 轴下方第二行）
+  g.selectAll('.tl-date')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'tl-date')
+    .attr('x', d => xScale(d.日期戳))
+    .attr('y', innerH + 34)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '7px')
+    .attr('fill', '#8a7a5a')
+    .text(d => d.日期.slice(2, 7));
+
+  // X 轴
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).ticks(8).tickFormat(d => {
+      const s = String(d);
+      if (s.length === 8) return s.slice(0, 4) + '-' + s.slice(4, 6);
+      return s;
+    }))
+    .selectAll('text').attr('font-size', '9px');
+
+  // Y 轴
+  g.append('g')
+    .call(d3.axisLeft(yScale).ticks(5).tickFormat(d => d))
+    .selectAll('text').attr('font-size', '10px');
+
+  // 轴标题
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 60)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '11px')
+    .attr('fill', '#8a7a5a')
+    .text('Creation time (W161 Time → W186 Thirteen-Dimension synthesis · seven-sense foundation → theoretical expansion → cross-fertilization → four new dimensions)');
+  g.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -innerH / 2).attr('y', -50)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '11px')
+    .attr('fill', '#8a7a5a')
+    .text('Academic impact (5-10)');
+
+  // 图例
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  const catGroups = {};
+  timelineData.forEach(d => { if (!catGroups[d.类别]) catGroups[d.类别] = d.color; });
+  Object.entries(catGroups).forEach(([cat, color]) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', color); });
+    item.append('span').text(cat);
+  });
+}
+
+// ============================================================
+// Section 6: 汇总表 + 理论家清单
+// ============================================================
+let summarySortState = { key: null, asc: true };
+
+function renderSummary(dimensions, theorists) {
+  const wrap = d3.select('#summary-table-wrap');
+  wrap.html('');
+  if (!dimensions || dimensions.length === 0) {
+    wrap.append('div').attr('class', 'empty-state').text('No data');
+    return;
+  }
+
+  const rows = dimensions.map(d => ({ ...d }));
+
+  const columns = [
+    { key: 'code', label: 'No.' },
+    { key: 'dim', label: 'Dimension' },
+    { key: 'name', label: 'Topic Full Name' },
+    { key: 'english', label: 'English' },
+    { key: 'category', label: 'Category' },
+    { key: 'theorists', label: 'Related Theorists' },
+    { key: 'termCount', label: 'Term Count' },
+    { key: 'cases', label: 'JTTW Application Case' },
+    { key: 'theoryDepth', label: 'Theoretical Depth' },
+    { key: 'textCoverage', label: 'JTTW Application' },
+    { key: 'academicValue', label: 'Academic Impact' }
+  ];
+
+  const table = wrap.append('table').attr('class', 'summary-table');
+  const thead = table.append('thead').append('tr');
+  columns.forEach(col => {
+    thead.append('th')
+      .text(col.label)
+      .attr('role', 'button')
+      .attr('tabindex', '0')
+      .on('click', function() { sortSummary(col.key); })
+      .on('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sortSummary(col.key); }
+      });
+  });
+  const tbody = table.append('tbody');
+
+  function drawRows(data) {
+    tbody.html('');
+    const trs = tbody.selectAll('tr')
+      .data(data)
+      .enter()
+      .append('tr')
+      .attr('role', 'row')
+      .attr('tabindex', '0');
+
+    trs.each(function(d) {
+      const tr = d3.select(this);
+      const tdNum = tr.append('td');
+      tdNum.append('span').attr('class', 'type-dot').each(function() { d3.select(this).style('background', d.color); });
+      tdNum.append('span').text(d.code);
+      tr.append('td').append('strong').text(d.dim);
+      tr.append('td').text(d.name);
+      tr.append('td').text(d.english);
+      tr.append('td').text(d.category);
+      tr.append('td').text(d.theorists.join(', '));
+      tr.append('td').text(d.termCount);
+      tr.append('td').text(d.cases);
+      tr.append('td').text(d.theoryDepth);
+      tr.append('td').text(d.textCoverage);
+      tr.append('td').append('strong').text(d.academicValue);
+    });
+  }
+
+  window.sortSummary = function(key) {
+    if (summarySortState.key === key) {
+      summarySortState.asc = !summarySortState.asc;
+    } else {
+      summarySortState.key = key;
+      summarySortState.asc = true;
+    }
+    const sorted = rows.slice().sort((a, b) => {
+      let va = a[key], vb = b[key];
+      if (Array.isArray(va)) va = va.join('');
+      if (Array.isArray(vb)) vb = vb.join('');
+      if (typeof va === 'number' && typeof vb === 'number') {
+        return summarySortState.asc ? va - vb : vb - va;
+      }
+      return summarySortState.asc
+        ? String(va).localeCompare(String(vb), 'zh-CN')
+        : String(vb).localeCompare(String(va), 'zh-CN');
+    });
+    drawRows(sorted);
+  };
+
+  drawRows(rows);
+
+  // 理论家清单
+  const theoristList = d3.select('#theorist-list');
+  theoristList.html('');
+  if (!theorists || theorists.length === 0) {
+    theoristList.append('div').attr('class', 'empty-state').text('No theorist data');
+    return;
+  }
+  const items = theoristList.selectAll('.theorist-item')
+    .data(theorists)
+    .enter()
+    .append('div')
+    .attr('class', 'theorist-item')
+    .each(function(d) {
+      d3.select(this).style('border-left-color', d.color);
+      d3.select(this).append('div').attr('class', 't-name').text(d.name + ' · ' + d.英文名);
+      d3.select(this).append('div').attr('class', 't-sense').text(d.学派 + ' · ' + d.理论);
+      d3.select(this).append('div').attr('class', 't-work').text(d.代表作);
+      d3.select(this).append('div').attr('class', 't-sense').text('Dimensions: ' + d.关联维度 + ' · Active: ' + d.活跃年代 + ' · ' + d.国籍);
+    });
+}
+
+// ============================================================
+// main：调度所有渲染函数
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      'Data source: loaded live from <code>scripts/output/data/</code> (http server mode)';
+  }
+
+  renderOverview(data.dimensions);
+  renderForce(data.dimensions, data.externalNodes, data.links);
+  renderSankey(data.sankey, data.dimensions, data.sankeyTheoristColors);
+  renderRadar(data.dimensions);
+  renderTimeline(data.timeline);
+  renderSummary(data.dimensions, data.theorists);
+}
+
+// 响应式重绘（debounce 250ms）
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderOverview(data.dimensions);
+      renderForce(data.dimensions, data.externalNodes, data.links);
+      renderSankey(data.sankey, data.dimensions, data.sankeyTheoristColors);
+      renderRadar(data.dimensions);
+      renderTimeline(data.timeline);
+      renderSummary(data.dimensions, data.theorists);
+    }
+  }, 250);
+});
+
+// 启动
+main();
+</script>
+<script id="audit-labelavoid">
+(function(){
+  function avoid(){
+    document.querySelectorAll("svg").forEach(function(svg){
+      var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){var r=t.getBoundingClientRect();return r.width>0&&r.height>0;});
+      var R=ts.map(function(t){return t.getBoundingClientRect();});
+      for(var i=0;i<ts.length;i++)for(var j=i+1;j<ts.length;j++){
+        var a=R[i],b=R[j];
+        var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+        var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+        if(ix*iy<=0)continue;
+        var area=Math.min(a.width*a.height,b.width*b.height);
+        if(area>0 && (ix*iy)/area>0.5){
+          var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+          if(hide.style.display!=="none") hide.style.display="none";
+        }
+      }
+    });
+  }
+  window.__avoidOverlap=avoid;
+  function run(){try{avoid();}catch(e){}}
+  window.addEventListener("load",function(){
+    [3000,6000,9000,12000].forEach(function(ms){setTimeout(run,ms);});
+  });
+})();
+</script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
