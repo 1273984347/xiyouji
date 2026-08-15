@@ -1,0 +1,2518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-vvy9i2j1gnZ3GUOmDeCxLQg9NAK6swr3ZzoPy7jYNDw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Ethics & Consumption · Mount Rights and Monster IPOs · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code { font-family: "JetBrains Mono", monospace; color: var(--accent); }
+        
+        @media (max-width: 980px) {  }
+        @media (max-width: 480px) {  }
+        
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(60, 40, 20, 0.14);
+        }
+        
+        
+        
+        
+        
+        
+        .sub-h {
+            font-size: 1rem;
+            color: var(--accent-2);
+            margin: 18px 0 10px;
+            letter-spacing: 0.05em;
+            padding-left: 8px;
+            border-left: 3px solid var(--accent-2);
+        }
+        /* 协会信息卡 */
+        .org-card {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin-bottom: 16px;
+        }
+        .org-card h3 { color: var(--accent); font-size: 1.15rem; margin-bottom: 6px; }
+        .org-card .org-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 6px 24px;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        .org-card .field { color: var(--ink-soft); }
+        .org-card .field strong { color: var(--ink); }
+        .org-card .mission {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.6);
+            border-left: 3px solid var(--accent);
+            font-size: 0.86rem;
+            font-style: italic;
+            color: var(--accent-3);
+        }
+        /* 统计小卡 */
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+            text-align: center;
+        }
+        .stat-card .k {
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 4px;
+        }
+        .stat-card .v {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--ink);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .stat-card .n {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            margin-top: 2px;
+        }
+        /* finding 卡片 */
+        .finding-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .finding-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 14px 18px;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .finding-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(60, 40, 20, 0.12);
+        }
+        .finding-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+        .finding-head .fid {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            letter-spacing: 0.08em;
+        }
+        .finding-head .ftitle {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+            flex: 1;
+        }
+        .sev-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.05em;
+        }
+        .sev-extreme { background: var(--accent); }
+        .sev-high { background: #d97706; }
+        .sev-mid { background: #b88c2a; }
+        .finding-desc {
+            font-size: 0.88rem;
+            color: var(--ink);
+            line-height: 1.65;
+            margin-bottom: 8px;
+        }
+        .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+        .chip {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+        }
+        .finding-meta {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+        }
+        /* case study */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .case-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px 16px;
+            border-top: 3px solid var(--accent-2);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .case-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(60, 40, 20, 0.12);
+        }
+        .case-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+            gap: 8px;
+        }
+        .case-id {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.74rem;
+            color: var(--accent-2);
+            letter-spacing: 0.08em;
+        }
+        .case-mount {
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .case-owner {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+        }
+        .case-row {
+            font-size: 0.84rem;
+            margin-bottom: 6px;
+            line-height: 1.6;
+        }
+        .case-row .lbl {
+            color: var(--accent-3);
+            font-weight: 600;
+            margin-right: 4px;
+        }
+        .case-resolution {
+            background: var(--bg);
+            border-left: 2px solid var(--accent-soft);
+            padding: 6px 10px;
+            font-size: 0.82rem;
+            margin: 6px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .case-outcome {
+            font-size: 0.82rem;
+            color: var(--accent);
+            font-style: italic;
+            border-top: 1px dashed var(--line);
+            padding-top: 6px;
+            margin-top: 6px;
+        }
+        /* recommendations */
+        .rec-list {
+            counter-reset: rec;
+            list-style: none;
+            padding: 0;
+        }
+        .rec-list li {
+            counter-increment: rec;
+            position: relative;
+            padding: 10px 12px 10px 44px;
+            margin-bottom: 8px;
+            background: var(--bg);
+            border-left: 3px solid var(--accent-4);
+            border-radius: 0 4px 4px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .rec-list li::before {
+            content: counter(rec, decimal-leading-zero);
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.9rem;
+            color: var(--accent-4);
+            font-weight: 600;
+        }
+        /* 探店评分榜 */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: 14px;
+        }
+        .food-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px 16px;
+            position: relative;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .food-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(60, 40, 20, 0.12);
+        }
+        .food-card.best { border-top: 3px solid var(--gold); }
+        .food-card.zero {
+            border: 1px solid var(--accent);
+            border-left: 4px solid var(--accent);
+            background: #fff7f5;
+        }
+        .food-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
+            gap: 8px;
+        }
+        .food-loc {
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.3;
+        }
+        .food-chapter {
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            margin-top: 2px;
+        }
+        .rating-big {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1;
+            text-align: right;
+            white-space: nowrap;
+        }
+        .food-type {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--accent-soft);
+            color: var(--accent-3);
+            border-radius: 10px;
+            font-size: 0.74rem;
+            margin: 4px 0;
+        }
+        .food-dish {
+            font-size: 0.88rem;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        .food-dish .lbl {
+            color: var(--accent-3);
+            font-size: 0.76rem;
+            margin-right: 4px;
+        }
+        .food-review {
+            font-size: 0.84rem;
+            color: var(--ink);
+            font-style: italic;
+            background: var(--bg);
+            border-left: 3px solid var(--accent-soft);
+            padding: 8px 10px;
+            border-radius: 0 4px 4px 0;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        .food-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            align-items: center;
+        }
+        .veg-badge {
+            display: inline-block;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+        .veg-yes { background: var(--accent-4); color: #fff; }
+        .veg-no { background: var(--accent); color: #fff; }
+        .zero-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+        .best-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--gold);
+            color: #fff;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+        /* D3 图表 */
+        .chart-wrap {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px;
+        }
+        #food-bar-svg, #ipo-scatter-svg {
+            width: 100%;
+            display: block;
+        }
+        .chart-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            max-width: 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .chart-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        /* IPO 招股书 */
+        .ipo-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 20px 22px;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow);
+            transition: transform 0.15s, box-shadow 0.15s;
+            position: relative;
+            overflow: hidden;
+        }
+        .ipo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 18px rgba(60, 40, 20, 0.14);
+        }
+        .ipo-card.biggest {
+            border: 2px solid var(--accent-3);
+            background: linear-gradient(135deg, #fffdf8 0%, #fff8ec 100%);
+        }
+        .ipo-card.biggest::before {
+            content: "最大 IPO";
+            position: absolute;
+            top: 10px;
+            right: -32px;
+            background: var(--accent-3);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 3px 36px;
+            transform: rotate(35deg);
+            font-family: "JetBrains Mono", monospace;
+            letter-spacing: 0.05em;
+        }
+        .ipo-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .ipo-name { font-size: 1.2rem; font-weight: 600; color: var(--ink); }
+        .ipo-ticker {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.85rem;
+            color: var(--accent-2);
+            background: #f0f4f8;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .ipo-year {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+        .ipo-mgmt {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .ipo-mgmt .mi {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 0.82rem;
+        }
+        .ipo-mgmt .mi .role {
+            color: var(--accent);
+            font-size: 0.72rem;
+            font-family: "JetBrains Mono", monospace;
+            letter-spacing: 0.05em;
+        }
+        .ipo-mgmt .mi .name { color: var(--ink); font-weight: 600; }
+        .ipo-biz { font-size: 0.88rem; margin-bottom: 10px; line-height: 1.65; }
+        .ipo-biz .lbl { color: var(--accent-3); font-weight: 600; margin-right: 4px; }
+        .ipo-market {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.86rem;
+            margin-bottom: 12px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .ipo-market .lbl { color: var(--accent-soft); margin-right: 6px; }
+        .fin-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        @media (max-width: 640px) { .fin-row { grid-template-columns: repeat(2, 1fr); } }
+        .fin-cell {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 8px 10px;
+            text-align: center;
+        }
+        .fin-cell .k {
+            font-size: 0.68rem;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 2px;
+        }
+        .fin-cell .v {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--ink);
+            font-family: "JetBrains Mono", monospace;
+            line-height: 1.3;
+        }
+        .ipo-sub-h {
+            font-size: 0.82rem;
+            color: var(--accent-2);
+            margin: 10px 0 6px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .ipo-outcome {
+            background: linear-gradient(135deg, #c8463a 0%, #8c2820 100%);
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin: 14px 0 10px;
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .ipo-outcome .failed-stamp {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            background: #fff;
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 4px;
+            border: 2px dashed var(--accent);
+            white-space: nowrap;
+        }
+        .ipo-outcome .ot-text {
+            font-size: 0.88rem;
+            line-height: 1.55;
+            flex: 1;
+        }
+        .ipo-lesson {
+            background: #fff8ec;
+            border-left: 3px solid var(--accent-3);
+            padding: 8px 12px;
+            font-size: 0.84rem;
+            font-style: italic;
+            color: var(--accent-3);
+            border-radius: 0 4px 4px 0;
+            line-height: 1.6;
+        }
+        .ipo-lesson::before {
+            content: "投资人教训 · ";
+            color: var(--accent);
+            font-weight: 600;
+            font-style: normal;
+        }
+        .warn-item {
+            font-size: 0.84rem;
+            color: var(--ink);
+            padding: 3px 0 3px 22px;
+            position: relative;
+            line-height: 1.55;
+        }
+        .warn-item::before {
+            content: "⚠";
+            position: absolute;
+            left: 4px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .use-list {
+            counter-reset: use;
+            list-style: none;
+            padding: 0;
+        }
+        .use-list li {
+            counter-increment: use;
+            padding: 4px 0 4px 28px;
+            position: relative;
+            font-size: 0.84rem;
+            line-height: 1.55;
+            color: var(--ink);
+        }
+        .use-list li::before {
+            content: counter(use);
+            position: absolute;
+            left: 0;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: var(--accent-3);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+        }
+        /* 洞察栏 */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .insight-box h4 { color: var(--accent); font-size: 1rem; margin-bottom: 10px; }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong { color: var(--accent); font-weight: 600; }
+        
+        
+        
+        footer .gen-time {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/ethics-consumption.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Ethics & Consumption · Mount Rights and Monster IPOs</p>
+        <p class="kicker">Y · Ethics & Consumption</p>
+        <h1>Ethics & Consumption · Mount Rights and Monster IPOs</h1>
+        <p class="subtitle">ETHICS &amp; CONSUMPTION</p>
+        <p class="tagline">When modern ethics shines on the Three Realms of Journey to the West</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice" id="dataSource">
+            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">FINDINGS · Rights Findings</div>
+                <div class="value">5<span style="font-size:1rem;color:var(--ink-soft);"> items</span></div>
+                <div class="desc">Mount Rights Protection Association annual report</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">CASES · Mount Cases</div>
+                <div class="value">4<span style="font-size:1rem;color:var(--ink-soft);"> cases</span></div>
+                <div class="desc">Green Ox Demon · Nine-Headed Lion · Golden-Haired Hou · White Dragon Horse</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">FOOD VLOG · Food Reviews</div>
+                <div class="value">12<span style="font-size:1rem;color:var(--ink-soft);"> places</span></div>
+                <div class="desc">Tang Sanzang's 14-year journey food-tasting record</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">AVG RATING · Average Rating</div>
+                <div class="value" style="color:var(--accent-2);">5.5</div>
+                <div class="desc">Out of 10 · three zero-score shops drag down the average</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">MONSTER IPO · Monster IPOs</div>
+                <div class="value" style="color:var(--accent);">5<span style="font-size:1rem;color:var(--ink-soft);"> / 5 failed</span></div>
+                <div class="desc">Demon economy model is unsustainable</div>
+            </div>
+        </div>
+
+        <!-- 坐骑权益保护协会·年度报告 -->
+        <section class="section">
+            <h2 class="section-title">Three Realms Mount Rights Protection Association · Annual Report</h2>
+            <div class="section-sub">Zhenguan Year 27 · systematically tracked 16 heavenly mounts that descended to earth · disclosed 5 major findings · 4 typical cases · 5 legislative recommendations.</div>
+
+            <div class="org-card" id="org-card"></div>
+
+            <h3 class="sub-h">Key Statistics</h3>
+            <div class="stat-row" id="stat-row"></div>
+
+            <h3 class="sub-h">Five Core Findings</h3>
+            <div class="finding-grid" id="finding-grid"></div>
+
+            <h3 class="sub-h">Four Typical Cases</h3>
+            <div class="case-grid" id="case-grid"></div>
+
+            <h3 class="sub-h">Five Legislative Recommendations</h3>
+            <ol class="rec-list" id="rec-list"></ol>
+        </section>
+
+        <!-- 唐僧探店 VLOG 评分榜 -->
+        <section class="section">
+            <h2 class="section-title">Tang Sanzang Food Vlog · 12-Place Rating Board</h2>
+            <div class="section-sub">14 years on the journey · 12 restaurant tasting records · gold marks full-score shops · red border marks zero-score shops (Cave of Silken Webs · Bhiksu Kingdom · Bottomless Cave).</div>
+            <div class="food-grid" id="food-grid"></div>
+        </section>
+
+        <!-- 探店评分分布图 -->
+        <section class="section">
+            <h2 class="section-title">Tang Sanzang Food Rating Distribution · Horizontal Bar Chart</h2>
+            <div class="section-sub">12 places sorted by descending rating · colors correspond to rating tiers (gold / green / blue / orange / red).</div>
+            <div class="chart-wrap" style="position:relative;">
+                <svg id="food-bar-svg"></svg>
+                <div class="chart-tip" id="food-tip"></div>
+            </div>
+        </section>
+
+        <!-- 妖怪 IPO 招股书 -->
+        <section class="section">
+            <h2 class="section-title">Monster Startup IPO Prospectus · 5 Companies</h2>
+            <div class="section-sub">Simulated real prospectus style · discloses management team · financial summary · risk factors · use of proceeds and IPO outcome · Lion Camel Ridge Group is the largest IPO (48,000 employees).</div>
+            <div id="ipo-list"></div>
+        </section>
+
+        <!-- IPO 失败率散点图 -->
+        <section class="section">
+            <h2 class="section-title">Monster IPO Failure Rate vs. Employee Count · Scatter Plot</h2>
+            <div class="section-sub">x = employees (log scale) · y = annual revenue (lives) · all 5 failed · all marked in red.</div>
+            <div class="chart-wrap" style="position:relative;">
+                <svg id="ipo-scatter-svg"></svg>
+                <div class="chart-tip" id="ipo-tip"></div>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="insight-box">
+                <h4>Examining the Three Realms of Journey to the West Through a Modern Ethics Lens</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/09-精神塑造/价值坐标系.md">Value Coordinate System (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/ethics-consumption.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // ===== 嵌入式 fallback 数据（fetch 失败时使用）=====
+    const EMBEDDED = {
+        mount_rights_report: {
+            organization_name: "Three Realms Mount Rights Protection Association",
+            founded_year: "During the Great Tang Zhenguan era",
+            annual_report_year: "Zhenguan Year 27",
+            ceo: "Former Director of the Heavenly Imperial Stables",
+            mission: "Protect the mounts of the Three Realms from demon seizure · advance legislation on mount labor rights",
+            key_findings: [
+                {
+                    finding_id: "F001",
+                    title: "Class-A war criminals kept as pets",
+                    description: "Demons have long seized Heavenly mounts and kept Class-A war criminals (e.g., the Green Ox Demon and the Nine-Headed Lion) as pets, seriously violating the mounts' autonomy.",
+                    implicated_monsters: [
+                        "Green Ox Demon (mount of Taishang Laojun)",
+                        "Nine-Headed Lion (mount of Taiyi Jiuku Tianzun)",
+                        "Yellow-Toothed Elephant (mount of Samantabhadra)",
+                        "Golden-Haired Hou (mount of Guanyin)"
+                    ],
+                    severity: "High",
+                    duration_years: "Average 3-50 years"
+                },
+                {
+                    finding_id: "F002",
+                    title: "Forced labor and exploitation",
+                    description: "Mounts were used by demons to patrol mountains, guard gates, and transport plundered goods — with no rest days, no pay, and severely excessive working hours.",
+                    implicated_monsters: [
+                        "White Dragon Horse (forced to carry Tang Sanzang at Eagle's Sorrow Gorge)",
+                        "Azure Lion (Lion Camel Ridge)"
+                    ],
+                    severity: "High",
+                    duration_years: "Entire duration"
+                },
+                {
+                    finding_id: "F003",
+                    title: "Identity theft",
+                    description: "Demons impersonated mounts to infiltrate the mortal world, damaging the mounts' reputation and causing some mounts to be held accountable by Heaven.",
+                    implicated_monsters: [
+                        "Yellow-Robed Demon (Kui Mulang of the 28 Mansions descended to earth)",
+                        "Goldfish Demon (escaped from Guanyin's lotus pond)"
+                    ],
+                    severity: "Medium",
+                    duration_years: "1-3 years"
+                },
+                {
+                    finding_id: "F004",
+                    title: "Loss of wages and benefits",
+                    description: "After descending to earth, Heavenly mounts had their wages suspended and social insurance halted; upon returning to Heaven they could not make back payments, affecting their retirement benefits.",
+                    implicated_monsters: ["All descended mounts"],
+                    severity: "Medium",
+                    duration_years: "Entire duration"
+                },
+                {
+                    finding_id: "F005",
+                    title: "Psychological harm and trauma",
+                    description: "Some mounts were used by demons for improper purposes (such as abducting children or eating people) and required long-term psychological counseling after returning to Heaven.",
+                    implicated_monsters: [
+                        "Azure Lion (man-eater)",
+                        "Yellow-Toothed Elephant (man-eater)",
+                        "Golden-Winged Great Peng (man-eater)"
+                    ],
+                    severity: "Extreme",
+                    duration_years: "Long-term, irreversible"
+                }
+            ],
+            case_studies: [
+                {
+                    case_id: "C001",
+                    mount: "Green Ox Demon",
+                    original_owner: "Taishang Laojun",
+                    incident: "The Green Ox sneaked down to earth while its boy attendant slept, seized a mountain as king, and used the Vajra Ring to collect every weapon.",
+                    duration: "About 3 years",
+                    victims: "Wukong · the celestial troops and generals · the weapons of many deities",
+                    resolution: "Taishang Laojun came in person and retrieved it with the Banana Leaf Fan",
+                    compensation_claim: "Heaven should bear supervisory responsibility and compensate the harmed mortal commoners.",
+                    outcome: "The Green Ox returned to Heaven and continued as a mount, with no real punishment."
+                },
+                {
+                    case_id: "C002",
+                    mount: "Nine-Headed Lion",
+                    original_owner: "Taiyi Jiuku Tianzun",
+                    incident: "The Nine-Headed Lion descended to earth, subdued six lion grandsons, and came into conflict with Yuhua Prefecture.",
+                    duration: "About 1 year",
+                    victims: "the people of Yuhua Prefecture · Wukong and his master's party",
+                    resolution: "Taiyi Jiuku Tianzun came in person to retrieve it.",
+                    compensation_claim: "The Nine-Headed Lion itself does not eat people, but it tolerated its lion grandsons' misdeeds and should bear joint liability.",
+                    outcome: "The Nine-Headed Lion returned to Heaven; the six lions were beaten to death."
+                },
+                {
+                    case_id: "C003",
+                    mount: "Golden-Haired Hou",
+                    original_owner: "Guanyin (the Bodhisattva)",
+                    incident: "The Golden-Haired Hou descended to earth as a demon, abducted the queen of the Zhuzi Kingdom, and stayed away for three years.",
+                    duration: "3 years",
+                    victims: "the queen of the Zhuzi Kingdom · the people of the Zhuzi Kingdom",
+                    resolution: "Guanyin came in person to retrieve it.",
+                    compensation_claim: "Guanyin should bear responsibility for lax discipline, and the Zhuzi Kingdom should receive state compensation.",
+                    outcome: "The Golden-Haired Hou returned to the South Sea and continued as a mount, with no real punishment."
+                },
+                {
+                    case_id: "C004",
+                    mount: "White Dragon Horse",
+                    original_owner: "Dragon King of the Western Sea (its father)",
+                    incident: "The third prince of the Western Sea Dragon King was demoted for setting fire to the palace's bright pearl and was transformed into a white horse to carry Tang Sanzang for 14 years.",
+                    duration: "14 years",
+                    victims: "None (voluntary atonement)",
+                    resolution: "Ultimately became one of the Eight Classes of Divine Beings and attained a Bodhisattva rank.",
+                    compensation_claim: "The White Dragon Horse is one of the few voluntary mounts, but after 14 years without pay it should receive back wages.",
+                    outcome: "The White Dragon Horse was granted the rank of the Eight Classes of Divine Beings and restored to dragon form."
+                }
+            ],
+            recommendations: [
+                "Heaven should establish a mount archive system recording each mount's descents and returns.",
+                "Mount descents should be filed in advance, and mounts should wear GPS tracking devices.",
+                "During a mount's descent, wages should continue and social insurance should keep being paid.",
+                "For damages caused by demons impersonating mounts, Heaven should compensate first and then seek recovery from the demons.",
+                "Establish a mount psychological counseling mechanism, with mandatory psychological assessment after returning to Heaven."
+            ],
+            statistics: {
+                total_mounts_recorded: 16,
+                mounts_descended: 16,
+                mounts_returned: 16,
+                mounts_punished: 0,
+                average_descent_duration_years: 5.2,
+                total_victims_estimate: "about 12,000 people",
+                compensation_paid: "0 yuan"
+            }
+        },
+        tang_monk_food_vlog: [
+            { location: "Huasheng Temple, Chang'an", chapter: "Chapter 12", restaurant_type: "Royal Vegetarian Banquet", signature_dish: "Shiitake Tofu in Golden Broth", rating: 9.5, tang_monk_review: "A royal banquet with carefully selected ingredients and refined cooking, but somewhat extravagant and contrary to the ascetic spirit.", price_level: "¥¥¥¥¥", vegetarian_friendly: true, monks_present: 1200, tags: ["Royal","Banquet","High-end","Before departure"], photo_count: 12, vlog_views: "89w" },
+            { location: "Hunter's Home, Double-Fork Ridge", chapter: "Chapter 13", restaurant_type: "Mortal household", signature_dish: "Wild Mushroom Soup (forced to eat meat)", rating: 2.0, tang_monk_review: "The hunter insisted on meat — folks, this is a fasting-violation scene, zero points.", price_level: "¥", vegetarian_friendly: false, monks_present: 0, tags: ["Vow broken","Hunter","Mortal","Early"], photo_count: 3, vlog_views: "45w" },
+            { location: "Wuzhuang Abbey", chapter: "Chapters 24-26", restaurant_type: "Daoist immortal's residence", signature_dish: "Ginseng Fruit (Cao Huan Dan)", rating: 10.0, tang_monk_review: "Zhenyuan the Great Immortal's Ginseng Fruit banquet — ripens once every ten thousand years; a sniff adds 360 years, a bite adds 47,000, but this humble monk dared not eat.", price_level: "Priceless", vegetarian_friendly: true, monks_present: 2, tags: ["Daoist","Immortal fruit","Zhenyuanzi","High standard"], photo_count: 8, vlog_views: "320w" },
+            { location: "Royal Palace, Baoxiang Kingdom", chapter: "Chapters 29-30", restaurant_type: "Foreign royal palace", signature_dish: "Western-Region Flatbread (vegetarian version)", rating: 7.5, tang_monk_review: "Exotic flavor — flatbread with grapes, distinctive, but lacking Zen spirit.", price_level: "¥¥¥¥", vegetarian_friendly: true, monks_present: 0, tags: ["Foreign","Palace","Flatbread","Western Region"], photo_count: 5, vlog_views: "67w" },
+            { location: "Gao Village", chapter: "Chapters 18-19", restaurant_type: "Folk wedding banquet", signature_dish: "Gao Village Braised Pork Replica (vegetarian)", rating: 5.0, tang_monk_review: "Elder Gao was warm, but the whole village eats braised pork — the vegetarian replica was a bit greasy, 2 stars.", price_level: "¥¥", vegetarian_friendly: true, monks_present: 0, tags: ["Folk","Wedding","Vegetarian replica","Medium"], photo_count: 4, vlog_views: "120w" },
+            { location: "Cave of Silken Webs", chapter: "Chapters 72-73", restaurant_type: "Monster restaurant", signature_dish: "Spider Demon's Cordyceps Human-Flesh Buns", rating: 0.0, tang_monk_review: "Folks, this absolutely crossed my red line — this place gets zero points today. Human-flesh buns, made by spider demons, a total violation of the vows. Call the police now.", price_level: "¥¥¥", vegetarian_friendly: false, monks_present: 0, tags: ["Monster","Human flesh","Vow broken","Zero points","Call police"], photo_count: 0, vlog_views: "580w" },
+            { location: "Bhiksu Kingdom", chapter: "Chapters 78-79", restaurant_type: "Demon medicinal cuisine", signature_dish: "Children's hearts and livers as a medicinal guide", rating: 0.0, tang_monk_review: "Folks, this absolutely crossed my red line — this place gets zero points today. Using children's hearts and livers as a medicinal guide is utterly inhuman; it must be shut down.", price_level: "¥¥¥¥", vegetarian_friendly: false, monks_present: 0, tags: ["Demon","Medicinal guide","Children","Zero points","Must be banned"], photo_count: 0, vlog_views: "890w" },
+            { location: "Miefa Kingdom", chapter: "Chapter 84", restaurant_type: "Mortal government office", signature_dish: "Miefa Kingdom Court Vegetarian Banquet", rating: 7.0, tang_monk_review: "After the king repented he held a vegetarian banquet in thanks — well-prepared, but still coerced and lacking sincerity.", price_level: "¥¥¥", vegetarian_friendly: true, monks_present: 0, tags: ["Repentance","Court banquet","Mortal"], photo_count: 4, vlog_views: "34w" },
+            { location: "Royal Palace, Tianzhu", chapter: "Chapters 93-95", restaurant_type: "Tianzhu royal palace", signature_dish: "Tianzhu Vegetarian Curry", rating: 8.5, tang_monk_review: "Near Vulture Peak, Tianzhu flavor, fragrant vegetarian curry — finally authentic vegetarian food.", price_level: "¥¥¥¥", vegetarian_friendly: true, monks_present: 0, tags: ["Tianzhu","Curry","Palace","Near Vulture Peak"], photo_count: 7, vlog_views: "210w" },
+            { location: "Leiyin Temple, Vulture Peak", chapter: "Chapter 98", restaurant_type: "Buddhist land immortal's feast", signature_dish: "Ullambana offering bestowed by the Buddha", rating: 10.0, tang_monk_review: "Finally at Vulture Peak — the Buddha personally bestowed the Ullambana offering, ending 14 years of asceticism in a perfect finish.", price_level: "Priceless", vegetarian_friendly: true, monks_present: 500, tags: ["Buddhist land","Immortal's feast","Perfection","Vulture Peak"], photo_count: 15, vlog_views: "1500w" },
+            { location: "Bottomless Cave", chapter: "Chapters 80-83", restaurant_type: "Demon cave residence", signature_dish: "Mouse Demon's Forced-Marriage Banquet", rating: 0.0, tang_monk_review: "Folks, the Mouse Demon is forcing marriage — this is coercion, not dining. Zero points, and call the police.", price_level: "¥", vegetarian_friendly: false, monks_present: 0, tags: ["Demon","Forced marriage","Zero points","Call police"], photo_count: 0, vlog_views: "420w" },
+            { location: "Zhuzi Kingdom", chapter: "Chapters 68-71", restaurant_type: "Foreign court", signature_dish: "Zhuzi King's Post-Illness Nourishing Vegetarian Broth", rating: 6.5, tang_monk_review: "After the king recovered he granted a light, stomach-friendly broth, but court vegetarian dishes lack the earthy warmth of common cooking.", price_level: "¥¥¥", vegetarian_friendly: true, monks_present: 0, tags: ["Foreign","Court","Recovered","Broth"], photo_count: 5, vlog_views: "56w" }
+        ],
+        monster_ipo: [
+            {
+                company_name: "Lion Camel Ridge Group", ticker: "STD：LION", ipo_year: "Zhenguan Year 19",
+                ceo: "Azure Lion", cto: "Yellow-Toothed Elephant", cmo: "Golden-Winged Great Peng (Tathāgata’s uncle, powerful backing)",
+                core_business: "Human-body processing and redistribution",
+                business_model: "Monopolizes an 800-li region around Lion Camel Ridge · collects tolls · processes human bodies · trains demon troops",
+                market_cap: "about 47,000 lives/year",
+                revenue_source: ["Tolls (mortal merchants)","Human-body processing (cannibalism)","Demon troop mercenaries (supplied to other mountains)","Weapon forging (melting down mortal weapons)"],
+                competitive_advantage: ["Three demons allied · top-tier combat power","The Golden-Winged Great Peng is Tathāgata’s uncle · strong political backing","Lion Camel Cave is impregnable · SSS defense rating","Already monopolizes an 800-li region · a regional oligopoly"],
+                risk_factors: ["The pilgrimage party is about to arrive (P0 risk)","Though the Golden-Winged Great Peng is Tathāgata’s uncle, Tathāgata enforces the law strictly","The human-body processing business violates Heavenly law and may be shut down","Demon troop training is costly with a long training cycle"],
+                financials: { year_revenue: "47,000 lives", year_profit: "30,000 lives (64% net margin)", cash_reserve: "800-li territory", debt_ratio: "30%", employee_count: 48000, subsidiaries: ["Little Wind Scout Company","Lion Camel Cave Guard Battalion","Steamer Processing Workshop"] },
+                use_of_proceeds: ["Expand troops and prepare for war · respond to the pilgrimage party","Expand the steamer processing workshop · increase daily throughput","Bribe Heavenly officials · seek political asylum","Develop new magic treasures · counter Wukong"],
+                ipo_outcome: "Failed — destroyed by the pilgrimage party; the three demons were taken away by Manjushri, Samantabhadra, and Tathāgata; the group went bankrupt and was liquidated.",
+                investor_lesson: "Do not invest in demon enterprises that violate Heavenly law, especially those at risk from the pilgrimage party."
+            },
+            {
+                company_name: "Fire Cloud Cave Foods", ticker: "STD：FIRE", ipo_year: "Zhenguan Year 14",
+                ceo: "Red Boy (the Holy Infant King)", cto: "None", cmo: "None",
+                core_business: "Samadhi Fire processing · fire-attribute food R&D",
+                business_model: "Uses the Samadhi Fire to refine pills, forge weapons, and process food, radiating over 600 li of Mount Hao.",
+                market_cap: "about 8,000 lives/year",
+                revenue_source: ["Samadhi Fire pill refining (immortal pills)","Fire-attribute weapon forging","Mountain and land god offerings (forced)","Kidnapping and extortion of mortal children"],
+                competitive_advantage: ["Exclusive patent on the Samadhi Fire · cannot be replicated","Special advantage against Wukong, who fears smoke","Parents are the Bull Demon King and Princess Iron Fan · powerful family influence"],
+                risk_factors: ["The pilgrimage party is about to arrive (P0)","Estranged parents · aid may not arrive in time","Though the Samadhi Fire is powerful, it is countered by Guanyin’s Samadhi Fire","Single-person management team · CEO Red Boy is young (about 300 years old)"],
+                financials: { year_revenue: "8,000 lives", year_profit: "6,000 lives", cash_reserve: "600 li of Mount Hao", debt_ratio: "20%", employee_count: 200, subsidiaries: ["Mount Hao Guard Battalion","Pill Refining Workshop","Fire Cloud Spear Factory"] },
+                use_of_proceeds: ["Expand the pill refining workshop","Develop new fire-attribute magic treasures","Bribe the Bull Demon King · seek family protection"],
+                ipo_outcome: "Failed — Red Boy was taken in by Guanyin as the Boy of Sudhana (Shancai); the group’s assets were liquidated.",
+                investor_lesson: "Demon enterprises with a single, young management team are extremely risky — do not blindly trust family power."
+            },
+            {
+                company_name: "Tongtian River Transport", ticker: "STD：RIVER", ipo_year: "Zhenguan Year 17",
+                ceo: "Linggan Great King (the Goldfish Demon)", cto: "None", cmo: "None",
+                core_business: "Tongtian River ferry service · boy-and-girl sacrificial trade",
+                business_model: "Monopolizes Tongtian River ferry service and forces Chen Village to offer up one boy and one girl each year.",
+                market_cap: "about 200 lives/year",
+                revenue_source: ["Ferry fees (mortal merchants)","Boy-and-girl offerings (one pair per year)","Aquatic clan tribute (fish and shrimp)"],
+                competitive_advantage: ["Tongtian River ferry monopoly","Escaped from Guanyin’s lotus pond · strong backing","Strong in water combat, weak on land"],
+                risk_factors: ["The pilgrimage party is about to arrive (P0)","Though Guanyin’s backing is strong, Guanyin enforces the law strictly","The boy-and-girl trade violates Heavenly law","Business halts during winter ice"],
+                financials: { year_revenue: "200 lives", year_profit: "150 lives", cash_reserve: "800 li of the Tongtian River", debt_ratio: "10%", employee_count: 50, subsidiaries: ["Aquatic Clan Scout Company","Frozen-Period Guard Team"] },
+                use_of_proceeds: ["Expand the underwater cave residence","Develop ice-breaking magic treasures","Bribe the Heavenly water gods"],
+                ipo_outcome: "Failed — the Linggan Great King was taken away by Guanyin; the group went bankrupt.",
+                investor_lesson: "Demon enterprises dependent on a single trade good (boy-and-girl offerings) are extremely risky — do not invest in highly seasonal demon enterprises."
+            },
+            {
+                company_name: "Bottomless Cave Real Estate", ticker: "STD：MOUSE", ipo_year: "Zhenguan Year 22",
+                ceo: "Golden-Nosed White-Haired Mouse Demon (the Half-Guanyin)", cto: "None", cmo: "None",
+                core_business: "Bottomless Cave real estate development · forced-marriage service",
+                business_model: "Monopolizes the Bottomless Cave, abducts Tang Sanzang to force marriage, seeking immortality.",
+                market_cap: "1 Tang Sanzang (theoretically priceless)",
+                revenue_source: ["Bottomless Cave real estate rental","Forced marriage to Tang Sanzang (potential immortality gains)","Plunder of mortal children"],
+                competitive_advantage: ["The Bottomless Cave is unfathomably deep · top-tier defense","Adopted daughter of the Pagoda-Bearing Heavenly King Li Jing · strong backing","First-rate abduction ability"],
+                risk_factors: ["The pilgrimage party is about to arrive (P0)","Forcing marriage on Tang Sanzang violates Heavenly law","Adoptive father Li Jing, the Pagoda-Bearing Heavenly King, enforces the law strictly","Single business model · over-reliant on Tang Sanzang"],
+                financials: { year_revenue: "100 lives", year_profit: "80 lives", cash_reserve: "Bottomless Cave (unfathomably deep)", debt_ratio: "15%", employee_count: 30, subsidiaries: ["Bottomless Cave Guard Battalion","Forced-Marriage Planning Department"] },
+                use_of_proceeds: ["Expand the Bottomless Cave","Develop abduction magic treasures","Bribe adoptive father Li the Heavenly King"],
+                ipo_outcome: "Failed — taken away by the Pagoda-Bearing Heavenly King Li Jing; the group went bankrupt.",
+                investor_lesson: "Demon enterprises dependent on a single customer (Tang Sanzang) are extremely risky — even adoptive-father backing is unreliable."
+            },
+            {
+                company_name: "Flaming Mountains Energy", ticker: "STD：FLAME", ipo_year: "Zhenguan Year 25",
+                ceo: "Bull Demon King (major shareholder)", cto: "Princess Iron Fan (CTO · holder of the Banana Leaf Fan)", cmo: "Jade-Faced Fox (CMO · public relations)",
+                core_business: "Flaming Mountains thermal energy development · Banana Leaf Fan fire-extinguishing service",
+                business_model: "Monopolizes 800 li of the Flaming Mountains · provides fire-extinguishing service · collects Banana Leaf Fan rental fees.",
+                market_cap: "800-li thermal energy resources",
+                revenue_source: ["Flaming Mountains tolls","Banana Leaf Fan fire-extinguishing rent (once a year)","Princess Iron Fan’s mansion hospitality","Bull Demon King’s violent services (contracted enforcers)"],
+                competitive_advantage: ["Exclusive possession of the Banana Leaf Fan · cannot be replicated","The Bull Demon King is first of the Seven Great Sages · top-tier combat power","The 800-li Flaming Mountains are a natural barrier","Husband-and-wife management team (CEO + CTO)"],
+                risk_factors: ["The pilgrimage party is about to arrive (P0)","Broken marriage · CEO and CTO infighting","The Bull Demon King’s concubine Jade-Faced Fox distracts from management","Risk of the Banana Leaf Fan being stolen (Wukong once swindled it)"],
+                financials: { year_revenue: "5,000 lives + 5,000 taels of gold", year_profit: "4,000 lives + 4,000 taels of gold", cash_reserve: "800 li of the Flaming Mountains + the Banana Leaf Fan", debt_ratio: "40%", employee_count: 500, subsidiaries: ["Flaming Mountains Guard Battalion","Banana Leaf Fan Rental Department","Green Cloud Mountain Guesthouse"] },
+                use_of_proceeds: ["Develop new fire-extinguishing magic treasures","Resolve the couple’s infighting (acquire the Jade-Faced Fox)","Expand troops and prepare for war"],
+                ipo_outcome: "Failed — the Bull Demon King was subdued by Nezha; the Banana Leaf Fan was lent out to extinguish the fire; the group went bankrupt.",
+                investor_lesson: "A husband-and-wife management team carries extremely high infighting risk — do not invest in demon enterprises dependent on a single magic treasure."
+            }
+        ],
+        ethics_consumption_summary: {
+            mount_rights_findings: 5,
+            mount_rights_cases: 4,
+            total_mounts_recorded: 16,
+            food_vlog_entries: 12,
+            avg_food_rating: 5.5,
+            best_food: "Wuzhuang Abbey",
+            worst_food: "Cave of Silken Webs",
+            monster_ipos: 5,
+            all_ipo_failed: true,
+            biggest_ipo: "Lion Camel Ridge Group"
+        }
+    };
+
+    // ===== 评分颜色映射 =====
+    function ratingColor(r) {
+        if (r >= 10) return "#d4af37";
+        if (r >= 8) return "#6B8E5A";
+        if (r >= 6) return "#3a6b8c";
+        if (r >= 4) return "#e9b885";
+        return "#c8463a";
+    }
+    function ratingLabel(r) {
+        if (r >= 10) return "Full score";
+        if (r >= 8) return "Excellent";
+        if (r >= 6) return "Medium";
+        if (r >= 4) return "Fair";
+        return "Zero / Very poor";
+    }
+    function sevClass(s) {
+        if (s === "Extreme") return "sev-extreme";
+        if (s === "High") return "sev-high";
+        return "sev-mid";
+    }
+
+    // ===== 渲染：协会信息卡 =====
+    function renderOrgCard(org) {
+        const sel = d3.select("#org-card");
+        sel.selectAll("*").remove();
+        sel.append("h3").text(org.organization_name + " · " + org.annual_report_year);
+        const meta = sel.append("div").attr("class", "org-meta");
+        const fields = [
+            { k: "Founded Year", v: org.founded_year },
+            { k: "CEO", v: org.ceo },
+            { k: "Report Year", v: org.annual_report_year },
+            { k: "Mounts Covered", v: org.statistics.total_mounts_recorded + " mounts" }
+        ];
+        fields.forEach(f => {
+            meta.append("div").attr("class", "field")
+                .html(`<span style="color:var(--accent-3);font-size:0.78rem;">${f.k}</span><br/><strong>${f.v}</strong>`);
+        });
+        sel.append("div").attr("class", "mission").text("Mission · " + org.mission);
+    }
+
+    // ===== 渲染：统计小卡 =====
+    function renderStats(s) {
+        const sel = d3.select("#stat-row");
+        sel.selectAll("*").remove();
+        const items = [
+            { k: "TOTAL · Mounts Recorded", v: s.total_mounts_recorded, n: "mounts" },
+            { k: "DESCENDED · Descended", v: s.mounts_descended, n: "mounts (100%)" },
+            { k: "RETURNED · Returned", v: s.mounts_returned, n: "mounts (100%)" },
+            { k: "PUNISHED · Punished", v: s.mounts_punished, n: "mounts (0%)" },
+            { k: "AVG DURATION · Avg Descent", v: s.average_descent_duration_years, n: "years" },
+            { k: "VICTIMS · Victims Est.", v: s.total_victims_estimate, n: "people" },
+            { k: "COMPENSATION · Paid", v: s.compensation_paid, n: "Heavenly law enforcement failure" }
+        ];
+        items.forEach(it => {
+            const d = sel.append("div").attr("class", "stat-card");
+            d.append("div").attr("class", "k").text(it.k);
+            d.append("div").attr("class", "v").text(it.v);
+            d.append("div").attr("class", "n").text(it.n);
+        });
+    }
+
+    // ===== 渲染：5 条 findings =====
+    function renderFindings(findings) {
+        const sel = d3.select("#finding-grid");
+        sel.selectAll("*").remove();
+        findings.forEach(f => {
+            const card = sel.append("div").attr("class", "finding-card");
+            card.style("border-left-color", f.severity === "Extreme" ? "var(--accent)" : f.severity === "High" ? "#d97706" : "#b88c2a");
+            const head = card.append("div").attr("class", "finding-head");
+            head.append("div").attr("class", "fid").text(f.finding_id);
+            head.append("div").attr("class", "ftitle").text(f.title);
+            head.append("div").attr("class", "sev-badge " + sevClass(f.severity)).text("Severity · " + f.severity);
+            card.append("div").attr("class", "finding-desc").text(f.description);
+            const chips = card.append("div").attr("class", "chips");
+            f.implicated_monsters.forEach(m => chips.append("span").attr("class", "chip").text(m));
+            card.append("div").attr("class", "finding-meta").text("⏱ Duration: " + f.duration_years);
+        });
+    }
+
+    // ===== 渲染：4 个 case studies =====
+    function renderCases(cases) {
+        const sel = d3.select("#case-grid");
+        sel.selectAll("*").remove();
+        cases.forEach(c => {
+            const card = sel.append("div").attr("class", "case-card");
+            const head = card.append("div").attr("class", "case-head");
+            head.append("div").attr("class", "case-id").text(c.case_id);
+            head.append("div").attr("class", "case-mount").text(c.mount);
+            card.append("div").attr("class", "case-owner").text("Original owner: " + c.original_owner);
+            card.append("div").attr("class", "case-row").html(`<span class="lbl">Incident: </span>${c.incident}`);
+            card.append("div").attr("class", "case-row").html(`<span class="lbl">Duration: </span>${c.duration}`);
+            card.append("div").attr("class", "case-row").html(`<span class="lbl">Victims: </span>${c.victims}`);
+            card.append("div").attr("class", "case-resolution").html(`<span class="lbl" style="color:var(--accent-2);">Resolution: </span>${c.resolution}`);
+            card.append("div").attr("class", "case-resolution").html(`<span class="lbl" style="color:var(--accent-3);">Claim: </span>${c.compensation_claim}`);
+            card.append("div").attr("class", "case-outcome").text("Outcome: " + c.outcome);
+        });
+    }
+
+    // ===== 渲染：5 条 recommendations =====
+    function renderRecs(recs) {
+        const sel = d3.select("#rec-list");
+        sel.selectAll("*").remove();
+        recs.forEach(r => sel.append("li").text(r));
+    }
+
+    // ===== 渲染：12 家探店评分榜 =====
+    function renderFoodGrid(foods) {
+        const sel = d3.select("#food-grid");
+        sel.selectAll("*").remove();
+        // 按评分降序
+        const sorted = foods.slice().sort((a, b) => b.rating - a.rating);
+        sorted.forEach(f => {
+            const isBest = f.rating >= 10;
+            const isZero = f.rating <= 0;
+            const card = sel.append("div").attr("class", "food-card" + (isBest ? " best" : "") + (isZero ? " zero" : ""));
+            const head = card.append("div").attr("class", "food-head");
+            const left = head.append("div");
+            left.append("div").attr("class", "food-loc").html(f.location + (isBest ? '<span class="best-tag">Full score</span>' : '') + (isZero ? '<span class="zero-tag">Folks, zero points</span>' : ''));
+            left.append("div").attr("class", "food-chapter").text(f.chapter);
+            head.append("div").attr("class", "rating-big").style("color", ratingColor(f.rating)).text(f.rating.toFixed(1));
+            card.append("div").attr("class", "food-type").text(f.restaurant_type);
+            card.append("div").attr("class", "food-dish").html(`<span class="lbl">Signature dish: </span>${f.signature_dish}`);
+            card.append("div").attr("class", "food-review").text('"' + f.tang_monk_review + '"');
+            const meta = card.append("div").attr("class", "food-meta");
+            meta.append("span").text("Price: " + f.price_level);
+            meta.append("span").attr("class", "veg-badge " + (f.vegetarian_friendly ? "veg-yes" : "veg-no")).text(f.vegetarian_friendly ? "Vegetarian" : "Meat");
+            meta.append("span").text("👁 " + f.vlog_views);
+            meta.append("span").text("📷 " + f.photo_count);
+            meta.append("span").text("Monks " + f.monks_present + " people");
+        });
+    }
+
+    // ===== 渲染：探店评分横向条形图 =====
+    function renderFoodBar(foods) {
+        const svg = d3.select("#food-bar-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("food-bar-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const sorted = foods.slice().sort((a, b) => b.rating - a.rating);
+        const h = sorted.length * 36 + 40;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 16, right: 60, bottom: 24, left: 130 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+        const barH = 22;
+        const gap = (innerH - barH * sorted.length) / (sorted.length - 1);
+
+        const x = d3.scaleLinear().domain([0, 10]).range([0, innerW]);
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 网格线
+        [2, 4, 6, 8, 10].forEach(v => {
+            g.append("line")
+                .attr("x1", x(v)).attr("x2", x(v))
+                .attr("y1", 0).attr("y2", innerH)
+                .attr("stroke", "var(--line)")
+                .attr("stroke-dasharray", "3,3")
+                .attr("opacity", 0.6);
+            g.append("text")
+                .attr("x", x(v)).attr("y", -4)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.7rem")
+                .style("fill", "var(--ink-soft)")
+                .style("font-family", "JetBrains Mono, monospace")
+                .text(v);
+        });
+
+        const tip = d3.select("#food-tip");
+
+        sorted.forEach((f, i) => {
+            const y = i * (barH + gap);
+            const color = ratingColor(f.rating);
+
+            // 地点标签
+            g.append("text")
+                .attr("x", -10)
+                .attr("y", y + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.82rem")
+                .style("font-weight", "600")
+                .style("fill", "var(--ink)")
+                .text(f.location);
+
+            // 背景轨道
+            g.append("rect")
+                .attr("x", 0).attr("y", y)
+                .attr("width",Math.max(0, innerW)).attr("height", barH)
+                .attr("fill", "#faf7f2")
+                .attr("stroke", "var(--line)")
+                .attr("rx", 3);
+
+            // 数值条
+            g.append("rect")
+                .attr("x", 0).attr("y", y)
+                .attr("width",0).attr("height", barH)
+                .attr("fill", color)
+                .attr("rx", 3)
+                .style("cursor", "pointer")
+                .transition()
+                .delay(i * 80).duration(700)
+                .ease(d3.easeCubicOut)
+                .attr("width",Math.max(0, x(f.rating)));
+
+            // 评分数字
+            g.append("text")
+                .attr("x", x(f.rating) + 6)
+                .attr("y", y + barH / 2 + 4)
+                .style("font-size", "0.82rem")
+                .style("font-weight", "600")
+                .style("fill", color)
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("opacity", 0)
+                .text(f.rating.toFixed(1))
+                .transition().delay(i * 80 + 600).duration(300)
+                .style("opacity", 1);
+
+            // 交互层
+            g.append("rect")
+                .attr("x", 0).attr("y", y)
+                .attr("width",Math.max(0, innerW)).attr("height", barH)
+                .attr("fill", "transparent")
+                .style("cursor", "pointer")
+                .on("mouseover", function(e) {
+                    tip.style("opacity", 1)
+                        .html(`<div class="tip-title">${f.location} · ${f.chapter}</div>` +
+                              `<div>Type: ${f.restaurant_type}</div>` +
+                              `<div>Signature dish: ${f.signature_dish}</div>` +
+                              `<div>Rating: <strong style="color:var(--accent-soft);">${f.rating.toFixed(1)}</strong> · ${ratingLabel(f.rating)}</div>` +
+                              `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">"${f.tang_monk_review}"</div>`);
+                })
+                .on("mousemove", function(e) {
+                    const rect = el.parentElement.getBoundingClientRect();
+                    tip.style("left", (e.clientX - rect.left + 14) + "px")
+                       .style("top", (e.clientY - rect.top - 10) + "px");
+                })
+                .on("mouseout", function() { tip.style("opacity", 0); });
+        });
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(5))
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "var(--ink-soft)");
+    }
+
+    // ===== 渲染：5 家 IPO 招股书 =====
+    function renderIpoList(ipos, biggestName) {
+        const sel = d3.select("#ipo-list");
+        sel.selectAll("*").remove();
+        ipos.forEach(ipo => {
+            const isBig = ipo.company_name === biggestName;
+            const card = sel.append("div").attr("class", "ipo-card" + (isBig ? " biggest" : ""));
+
+            // 头部
+            const head = card.append("div").attr("class", "ipo-head");
+            head.append("div").attr("class", "ipo-name").text(ipo.company_name);
+            const headRight = head.append("div");
+            headRight.append("span").attr("class", "ipo-ticker").text(ipo.ticker);
+            headRight.append("span").attr("class", "ipo-year").text(" · " + ipo.ipo_year);
+
+            // 管理团队
+            card.append("div").attr("class", "ipo-sub-h").text("Management Team");
+            const mgmt = card.append("div").attr("class", "ipo-mgmt");
+            [{ role: "CEO", name: ipo.ceo }, { role: "CTO", name: ipo.cto }, { role: "CMO", name: ipo.cmo }].forEach(m => {
+                const mi = mgmt.append("div").attr("class", "mi");
+                mi.append("div").attr("class", "role").text(m.role);
+                mi.append("div").attr("class", "name").text(m.name);
+            });
+
+            // 业务
+            card.append("div").attr("class", "ipo-biz").html(`<span class="lbl">Core business: </span>${ipo.core_business}`);
+            card.append("div").attr("class", "ipo-biz").html(`<span class="lbl">Business model: </span>${ipo.business_model}`);
+
+            // 市值
+            card.append("div").attr("class", "ipo-market").html(`<span class="lbl">MARKET CAP · Market cap: </span>${ipo.market_cap}`);
+
+            // 财务摘要
+            card.append("div").attr("class", "ipo-sub-h").text("Financial Summary");
+            const fin = card.append("div").attr("class", "fin-row");
+            const finItems = [
+                { k: "Revenue", v: ipo.financials.year_revenue },
+                { k: "Profit", v: ipo.financials.year_profit },
+                { k: "Cash Reserves", v: ipo.financials.cash_reserve },
+                { k: "Debt Ratio", v: ipo.financials.debt_ratio }
+            ];
+            finItems.forEach(it => {
+                const c = fin.append("div").attr("class", "fin-cell");
+                c.append("div").attr("class", "k").text(it.k);
+                c.append("div").attr("class", "v").text(it.v);
+            });
+            card.append("div").attr("class", "ipo-biz").html(`<span class="lbl">Employees: </span>${ipo.financials.employee_count} people · Subsidiaries: ${ipo.financials.subsidiaries.join(" · ")}`);
+
+            // 营收来源
+            card.append("div").attr("class", "ipo-sub-h").text("Revenue Sources");
+            const revChips = card.append("div").attr("class", "chips");
+            ipo.revenue_source.forEach(r => revChips.append("span").attr("class", "chip").text(r));
+
+            // 竞争优势
+            card.append("div").attr("class", "ipo-sub-h").text("Competitive Advantages");
+            const advChips = card.append("div").attr("class", "chips");
+            ipo.competitive_advantage.forEach(a => advChips.append("span").attr("class", "chip").style("background", "#eef5e8").style("color", "var(--accent-4)").style("border-color", "var(--accent-4)").text(a));
+
+            // 风险因素
+            card.append("div").attr("class", "ipo-sub-h").text("Risk Factors");
+            const riskDiv = card.append("div");
+            ipo.risk_factors.forEach(r => riskDiv.append("div").attr("class", "warn-item").text(r));
+
+            // 募资用途
+            card.append("div").attr("class", "ipo-sub-h").text("Use of Proceeds");
+            const ul = card.append("ol").attr("class", "use-list");
+            ipo.use_of_proceeds.forEach(u => ul.append("li").text(u));
+
+            // IPO 结局
+            const out = card.append("div").attr("class", "ipo-outcome");
+            out.append("div").attr("class", "failed-stamp").text("FAILED");
+            out.append("div").attr("class", "ot-text").text(ipo.ipo_outcome);
+
+            // 投资人教训
+            card.append("div").attr("class", "ipo-lesson").text(ipo.investor_lesson);
+        });
+    }
+
+    // ===== 渲染：IPO 散点图 =====
+    function renderIpoScatter(ipos) {
+        const svg = d3.select("#ipo-scatter-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("ipo-scatter-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 460;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 30, right: 40, bottom: 60, left: 70 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+
+        // 提取数值
+        const data = ipos.map(ipo => ({
+            name: ipo.company_name,
+            ticker: ipo.ticker,
+            emp: ipo.financials.employee_count,
+            // 营收提取数字部分（人命数）
+            rev: extractRevenueNum(ipo.financials.year_revenue),
+            revText: ipo.financials.year_revenue,
+            empText: ipo.financials.employee_count + " people",
+            outcome: ipo.ipo_outcome
+        }));
+
+        const x = d3.scaleLog().domain([20, 60000]).range([0, innerW]);
+        const y = d3.scaleLog().domain([50, 60000]).range([innerH, 0]);
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 网格
+        g.append("g")
+            .selectAll("line")
+            .data([100, 1000, 10000])
+            .enter()
+            .append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", d => y(d)).attr("y2", d => y(d))
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "3,3")
+            .attr("opacity", 0.5);
+
+        g.append("g")
+            .selectAll("line")
+            .data([100, 1000, 10000])
+            .enter()
+            .append("line")
+            .attr("x1", d => x(d)).attr("x2", d => x(d))
+            .attr("y1", 0).attr("y2", innerH)
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "3,3")
+            .attr("opacity", 0.5);
+
+        // X 轴
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).tickValues([30, 100, 1000, 10000, 50000]).tickFormat(d => d >= 1000 ? (d / 1000) + "k" : d))
+            .selectAll("text").style("font-size", "0.75rem").style("fill", "var(--ink-soft)");
+
+        // Y 轴
+        g.append("g")
+            .call(d3.axisLeft(y).tickValues([100, 1000, 10000, 50000]).tickFormat(d => d >= 1000 ? (d / 1000) + "k" : d))
+            .selectAll("text").style("font-size", "0.75rem").style("fill", "var(--ink-soft)");
+
+        // 轴标签
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("fill", "var(--accent-3)")
+            .text("Employees (log scale)");
+
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerH / 2).attr("y", -52)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("fill", "var(--accent-3)")
+            .text("Annual revenue / lives (log scale)");
+
+        // 标题
+        svg.append("text")
+            .attr("x", w / 2).attr("y", 18)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.88rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--accent)")
+            .text("5 Monster IPOs · all failed (marked in red)");
+
+        const tip = d3.select("#ipo-tip");
+
+        // 散点
+        g.selectAll(".ipo-dot")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("class", "ipo-dot")
+            .attr("cx", d => x(d.emp))
+            .attr("cy", d => y(d.rev))
+            .attr("r", 0)
+            .attr("fill", "var(--accent)")
+            .attr("stroke", "#fff").attr("stroke-width", 2)
+            .style("cursor", "pointer")
+            .transition().delay((d, i) => i * 120).duration(500)
+            .ease(d3.easeBackOut)
+            .attr("r", d => d.name === "Lion Camel Ridge Group" ? 14 : 10);
+
+        // 公司名标注
+        g.selectAll(".ipo-label")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "ipo-label")
+            .attr("x", d => x(d.emp))
+            .attr("y", d => y(d.rev) - 18)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--ink)")
+            .style("opacity", 0)
+            .text(d => d.name)
+            .transition().delay((d, i) => i * 120 + 400).duration(400)
+            .style("opacity", 1);
+
+        // 重新绑定交互
+        g.selectAll(".ipo-dot")
+            .on("mouseover", function(e, d) {
+                d3.select(this).transition().duration(150).attr("r", d.name === "Lion Camel Ridge Group" ? 17 : 13);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${d.name}</div>` +
+                          `<div>Code: ${d.ticker}</div>` +
+                          `<div>Employees: <strong style="color:var(--accent-soft);">${d.empText}</strong></div>` +
+                          `<div>Annual revenue: <strong style="color:var(--accent-soft);">${d.revText}</strong></div>` +
+                          `<div style="margin-top:4px;color:#ffb;">${d.outcome}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = el.parentElement.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function(e, d) {
+                d3.select(this).transition().duration(150).attr("r", d.name === "Lion Camel Ridge Group" ? 14 : 10);
+                tip.style("opacity", 0);
+            });
+
+        // 图例
+        const legend = svg.append("g").attr("transform", `translate(${w - 200},${h - 28})`);
+        legend.append("circle")
+            .attr("cx", 8).attr("cy", 0).attr("r", 6)
+            .attr("fill", "var(--accent)")
+            .attr("stroke", "#fff").attr("stroke-width", 2);
+        legend.append("text")
+            .attr("x", 22).attr("y", 4)
+            .style("font-size", "0.78rem")
+            .style("fill", "var(--ink-soft)")
+            .text("Failed IPOs (5/5 = 100%)");
+    }
+
+    // 从营收字符串中提取数字部分（人命数）
+    function extractRevenueNum(s) {
+        const m = String(s).match(/(\d+)/);
+        return m ? parseInt(m[1]) : 100;
+    }
+
+    // ===== 渲染：Key Insights =====
+    function renderInsights() {
+        const insights = [
+            `<strong>16 mounts descended, none punished</strong> — Heavenly law enforcement is selectively blind: 100% return rate, 0% punishment rate.`,
+            `Around <strong>12,000 victims · 0 yuan compensation</strong> — Heavenly mount oversight exists in name only, and victims have no recourse.`,
+            `Tang Sanzang’s 0-point shops are all monster restaurants (<strong>Cave of Silken Webs · Bhiksu Kingdom · Bottomless Cave</strong>) — the fasting-violation breaking point: human flesh / medicinal guide / forced marriage all cross the red line.`,
+            `<strong>All 5 monster IPOs failed</strong> — the demon economy model is unsustainable, and the P0 risk (the pilgrimage party) is the biggest killer.`,
+            `The Lion Camel Ridge Group had the <strong>largest workforce of 48,000</strong> but still went bankrupt from pilgrimage-party risk — managing "political risk" is the lifeblood of a demon enterprise.`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(t => ul.append("li").html(t));
+    }
+
+    // ===== 数据加载 =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error("fetch failed: " + path);
+            return await res.json();
+        } catch (e) {
+            console.warn("[INFO] using embedded data for", path, ":", e.message);
+            return fallback;
+        }
+    }
+
+    async function loadAll() {
+        const [mrr, tmfv, mi, ecs] = await Promise.all([
+            loadJson("../../scripts/output/data/mount_rights_report.json", EMBEDDED.mount_rights_report),
+            loadJson("../../scripts/output/data/tang_monk_food_vlog.json", EMBEDDED.tang_monk_food_vlog),
+            loadJson("../../scripts/output/data/monster_ipo.json", EMBEDDED.monster_ipo),
+            loadJson("../../scripts/output/data/ethics_consumption_summary.json", EMBEDDED.ethics_consumption_summary)
+        ]);
+        return { mount_rights_report: mrr, tang_monk_food_vlog: tmfv, monster_ipo: mi, summary: ecs };
+    }
+
+    // ===== 主流程 =====
+    async function main() {
+        const data = await loadAll();
+        window.__data = data;
+
+        // 数据源提示
+        const usedEmbedded = (data.mount_rights_report === EMBEDDED.mount_rights_report);
+        if (!usedEmbedded) {
+            document.getElementById("dataSource").innerHTML =
+                "Data source: live-loaded from <code>scripts/output/data/</code> (running in http server mode)";
+        }
+
+        renderOrgCard(data.mount_rights_report);
+        renderStats(data.mount_rights_report.statistics);
+        renderFindings(data.mount_rights_report.key_findings);
+        renderCases(data.mount_rights_report.case_studies);
+        renderRecs(data.mount_rights_report.recommendations);
+        renderFoodGrid(data.tang_monk_food_vlog);
+        renderFoodBar(data.tang_monk_food_vlog);
+        renderIpoList(data.monster_ipo, data.summary.biggest_ipo);
+        renderIpoScatter(data.monster_ipo);
+        renderInsights();
+
+        const _gt = document.getElementById("gen-time"); if (_gt) _gt.textContent = "Data generated at: " + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
+    }
+
+    // 窗口缩放重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__data) {
+                renderFoodBar(window.__data.tang_monk_food_vlog);
+                renderIpoScatter(window.__data.monster_ipo);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
