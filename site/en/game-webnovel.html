@@ -1,0 +1,2741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-iGM4ABQHqWcEaRxpRKh5T7RCma+rXCowLC1flof2oqM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Game &amp; Web Novel · Character Card Power System · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        /* ===== Hero 区 ===== */
+        
+        
+        
+        
+        
+        /* ===== 容器与面包屑 ===== */
+        
+        
+        
+        
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: rgba(200, 70, 58, 0.08);
+            padding: 1px 5px;
+            border-radius: 3px;
+            color: var(--accent);
+        }
+        /* ===== KPI 概要栏 ===== */
+        
+        @media (max-width: 960px) {  }
+        
+        
+        
+        
+        /* ===== Section 通用 ===== */
+        
+        
+        
+        /* ===== 角色卡牌墙 ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+        @media (max-width: 960px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .card-grid { grid-template-columns: 1fr; } }
+        .char-card {
+            background: var(--paper);
+            border: 2px solid var(--line);
+            border-radius: 10px;
+            padding: 14px 16px;
+            box-shadow: var(--shadow);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .char-card.rarity-UR { border-color: var(--rarity-ur); box-shadow: 0 0 12px rgba(212, 175, 55, 0.25), var(--shadow); }
+        .char-card.rarity-SSR { border-color: var(--rarity-ssr); box-shadow: 0 0 8px rgba(155, 89, 182, 0.18), var(--shadow); }
+        .char-card.rarity-SR { border-color: var(--rarity-sr); }
+        .char-card.rarity-R { border-color: var(--rarity-r); }
+        .char-card.rarity-N { border-color: var(--rarity-n); }
+        .char-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(60, 40, 20, 0.18);
+        }
+        .char-card.rarity-UR:hover { box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45); border-color: var(--rarity-ur); }
+        .char-card.rarity-SSR:hover { box-shadow: 0 8px 24px rgba(155, 89, 182, 0.35); border-color: var(--rarity-ssr); }
+        .char-card.rarity-SR:hover { box-shadow: 0 8px 24px rgba(58, 107, 140, 0.35); border-color: var(--rarity-sr); }
+        .char-card.rarity-R:hover { box-shadow: 0 8px 24px rgba(90, 122, 58, 0.35); border-color: var(--rarity-r); }
+        .char-card.rarity-N:hover { box-shadow: 0 8px 24px rgba(107, 94, 77, 0.35); border-color: var(--rarity-n); }
+        .cc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .cc-rarity {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            line-height: 1;
+        }
+        .cc-rarity.UR { color: var(--rarity-ur); text-shadow: 0 0 6px rgba(212, 175, 55, 0.4); }
+        .cc-rarity.SSR { color: var(--rarity-ssr); }
+        .cc-rarity.SR { color: var(--rarity-sr); }
+        .cc-rarity.R { color: var(--rarity-r); }
+        .cc-rarity.N { color: var(--rarity-n); }
+        .cc-elem {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.05em;
+        }
+        .cc-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-top: 2px;
+        }
+        .cc-title {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        .cc-power {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 2px;
+        }
+        .cc-power-label {
+            font-size: 0.7rem;
+            color: var(--ink-soft);
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .cc-stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+        .cc-stat-row {
+            display: grid;
+            grid-template-columns: 38px 1fr 38px;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+        }
+        .cc-stat-label {
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+        }
+        .cc-stat-track {
+            height: 6px;
+            background: var(--bg);
+            border-radius: 3px;
+            border: 1px solid var(--line);
+            overflow: hidden;
+        }
+        .cc-stat-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.6s ease;
+        }
+        .cc-stat-val {
+            text-align: right;
+            color: var(--ink);
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+            font-size: 0.7rem;
+        }
+        .cc-skills {
+            margin-bottom: 8px;
+        }
+        .cc-skill {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            font-size: 0.76rem;
+            color: var(--ink);
+            padding: 3px 0;
+            border-bottom: 1px dashed var(--line);
+            line-height: 1.5;
+        }
+        .cc-skill:last-child { border-bottom: none; }
+        .cc-skill-cost {
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.68rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .cc-skill-text { flex: 1; }
+        .cc-skill-name { font-weight: 600; color: var(--ink); }
+        .cc-skill-type {
+            display: inline-block;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.64rem;
+            background: rgba(122, 82, 48, 0.1);
+            color: var(--accent-3);
+            margin-left: 4px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .cc-passive {
+            font-size: 0.74rem;
+            color: var(--accent-3);
+            background: #fff8ec;
+            border-left: 2px solid var(--accent-soft);
+            padding: 5px 8px;
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        .cc-passive::before {
+            content: "被动 · ";
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.7rem;
+        }
+        .cc-acq {
+            font-size: 0.72rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-top: auto;
+            padding-top: 6px;
+            border-top: 1px dashed var(--line);
+        }
+        .cc-acq::before { content: "📜 "; font-style: normal; }
+        /* ===== D3 图表容器 ===== */
+        .chart-wrap {
+            position: relative;
+            width: 100%;
+        }
+        .chart-wrap svg { width: 100%; display: block; }
+        .pie-wrap {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 24px;
+            align-items: center;
+        }
+        @media (max-width: 860px) { .pie-wrap { grid-template-columns: 1fr; } }
+        #rarity-pie-svg { height: 360px; }
+        #power-bar-svg { height: 480px; }
+        #element-donut-svg { height: 360px; }
+        #artifact-scatter-svg { height: 440px; }
+        #webnovel-bar-svg { height: 420px; }
+        .pie-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+        .pie-legend h4 {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 6px;
+            letter-spacing: 0.1em;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--ink);
+            padding: 4px 6px;
+            border-radius: 4px;
+        }
+        .legend-item .swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            flex-shrink: 0;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .legend-item .li-val {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 700;
+            color: var(--accent-3);
+            margin-left: auto;
+        }
+        .chart-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            max-width: 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .chart-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        /* ===== 法宝表格 ===== */
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        #artifact-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+            min-width: 880px;
+        }
+        #artifact-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 11px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        #artifact-table tbody tr { border-bottom: 1px solid var(--line); }
+        #artifact-table tbody tr:nth-child(even) { background: var(--bg); }
+        #artifact-table tbody tr:hover { background: #fff8ec; }
+        #artifact-table td { padding: 10px 12px; vertical-align: top; }
+        #artifact-table td.col-name { font-weight: 600; color: var(--ink); }
+        #artifact-table td.col-name .en {
+            display: block;
+            font-size: 0.72rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+        #artifact-table td.col-stat {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        #artifact-table td.col-stat .stat-key {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--ink-soft);
+            font-weight: 500;
+            font-style: italic;
+        }
+        .rarity-pill {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 10px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: #fff;
+            font-family: "JetBrains Mono", monospace;
+            letter-spacing: 0.05em;
+        }
+        .elem-chip {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.72rem;
+            color: #fff;
+            font-weight: 600;
+        }
+        /* ===== 网文卡片网格 ===== */
+        .novel-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 960px) { .novel-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .novel-grid { grid-template-columns: 1fr; } }
+        .novel-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--accent-2);
+            border-radius: 8px;
+            padding: 14px 16px;
+            box-shadow: var(--shadow);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .novel-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        .novel-card.top-pick {
+            border-left-color: var(--rarity-ur);
+            background: linear-gradient(135deg, #fff8ec 0%, #ffffff 60%);
+        }
+        .top-badge {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            background: linear-gradient(135deg, #d4af37, #e9b885);
+            color: #1a1410;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            box-shadow: 0 2px 6px rgba(212, 175, 55, 0.4);
+        }
+        .nc-genre {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+            letter-spacing: 0.05em;
+        }
+        .nc-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1.3;
+            margin-bottom: 4px;
+            padding-right: 90px;
+        }
+        .nc-protagonist {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            margin-bottom: 8px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .nc-protagonist::before { content: "主角 · "; color: var(--ink-soft); }
+        .nc-block {
+            font-size: 0.8rem;
+            color: var(--ink);
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+        .nc-block .lbl {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            margin-bottom: 1px;
+            font-family: "JetBrains Mono", monospace;
+        }
+        .nc-quote {
+            font-size: 0.8rem;
+            color: var(--accent-3);
+            font-style: italic;
+            background: var(--bg);
+            border-left: 2px solid var(--accent-soft);
+            padding: 6px 10px;
+            border-radius: 0 4px 4px 0;
+            margin: 8px 0;
+            line-height: 1.6;
+            position: relative;
+        }
+        .nc-quote::before {
+            content: "❝ ";
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+        .nc-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: auto;
+            padding-top: 8px;
+            border-top: 1px dashed var(--line);
+            gap: 8px;
+        }
+        .nc-bottom-left {
+            flex: 1;
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            line-height: 1.5;
+        }
+        .nc-bottom-left .sp { color: var(--accent-3); font-weight: 600; }
+        .nc-score {
+            flex-shrink: 0;
+            text-align: right;
+        }
+        .nc-score-val {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.6rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .nc-score-unit {
+            font-size: 0.7rem;
+            color: var(--ink-soft);
+            font-family: "JetBrains Mono", monospace;
+        }
+        /* ===== 关键洞察 ===== */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .insight-box ul { list-style: none; padding-left: 0; }
+        .insight-box li {
+            padding: 9px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li .idx {
+            flex-shrink: 0;
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.85rem;
+            min-width: 24px;
+        }
+        .insight-box li strong { color: var(--accent); font-weight: 600; }
+        /* ===== Footer ===== */
+        
+        
+        
+        footer .gen-time {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/game-webnovel.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Game &amp; Web Novel · Character Card Power System</p>
+        <p class="kicker">X · Game &amp; Web Novel</p>
+        <h1>Game &amp; Web Novel · Character Card Power System</h1>
+        <p class="subtitle">GAME &amp; WEBNOVEL</p>
+        <p class="tagline">When Journey to the West characters become gacha SSR cards and web novel protagonists</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice" id="dataSource">
+            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
+        </div>
+
+        <!-- KPI Summary Bar -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">CARDS · Character Cards</div>
+                <div class="value">12<span style="font-size:0.9rem;color:var(--ink-soft);"> cards</span></div>
+                <div class="desc">UR×2 SSR×5 SR×2 R×2 N×1</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">ARTIFACTS · Artifacts</div>
+                <div class="value">10<span style="font-size:0.9rem;color:var(--ink-soft);"> items</span></div>
+                <div class="desc">UR×2 SSR×5 SR×2 R×1</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">WEBNOVELS · Web Novels</div>
+                <div class="value">9<span style="font-size:0.9rem;color:var(--ink-soft);"> works</span></div>
+                <div class="desc">9 major genre adaptations</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">AVG POWER · Average Power</div>
+                <div class="value" style="color:var(--accent);">6358</div>
+                <div class="desc">mean of 12 cards</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">POWER RANGE · Power Range</div>
+                <div class="value" style="font-size:1.4rem;color:var(--accent-3);">800–10000</div>
+                <div class="desc">White Bone Demon → Tathāgata Buddha</div>
+            </div>
+        </div>
+
+        <!-- Section 1: Character Card Wall -->
+        <section class="section">
+            <h2 class="section-title">Character Card Wall · 12 cards</h2>
+            <div class="section-sub">Graded by rarity (UR/SSR/SR/R/N) border colors — UR gold glow, SSR purple glow. Hover a card to see the animation.</div>
+            <div class="card-grid" id="card-grid"></div>
+        </section>
+
+        <!-- Section 2: Rarity Distribution Pie Chart -->
+        <section class="section">
+            <h2 class="section-title">Rarity Distribution Pie Chart</h2>
+            <div class="section-sub">12 cards distributed by UR/SSR/SR/R/N counts, with the total shown in the center.</div>
+            <div class="pie-wrap">
+                <div class="chart-wrap" style="position:relative;">
+                    <svg id="rarity-pie-svg"></svg>
+                    <div class="chart-tip" id="rarity-tip"></div>
+                </div>
+                <div class="pie-legend" id="rarity-legend">
+                    <h4>Rarity Legend</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Power Ranking Bar Chart -->
+        <section class="section">
+            <h2 class="section-title">Power Ranking Bar Chart</h2>
+            <div class="section-sub">12 characters sorted by power in descending order; bars colored by rarity, with the top 3 highlighted with a gold border.</div>
+            <div class="chart-wrap" style="position:relative;">
+                <svg id="power-bar-svg"></svg>
+                <div class="chart-tip" id="power-tip"></div>
+            </div>
+        </section>
+
+        <!-- Section 4: Element Distribution Donut Chart -->
+        <section class="section">
+            <h2 class="section-title">Element Distribution Donut Chart</h2>
+            <div class="section-sub">12 cards distributed across 10 elements (Metal Wood Water Fire Earth Thunder Wind Light Dark Heart).</div>
+            <div class="pie-wrap">
+                <div class="chart-wrap" style="position:relative;">
+                    <svg id="element-donut-svg"></svg>
+                    <div class="chart-tip" id="element-tip"></div>
+                </div>
+                <div class="pie-legend" id="element-legend">
+                    <h4>Element Legend</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Artifact Equipment Panel Table -->
+        <section class="section">
+            <h2 class="section-title">Artifact Equipment Panel Table · 10 items</h2>
+            <div class="section-sub">The ten great artifacts of Journey to the West, with rarity, owner, element, primary stat values, and counter relationships.</div>
+            <div class="table-wrap">
+                <table id="artifact-table">
+                    <thead>
+                        <tr>
+                            <th>Artifact</th>
+                            <th>Rarity</th>
+                            <th>Owner</th>
+                            <th>Element</th>
+                            <th>Primary Stat</th>
+                            <th>Effect</th>
+                            <th>Counter</th>
+                        </tr>
+                    </thead>
+                    <tbody id="artifact-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 6: Artifact Ladder Scatter Plot -->
+        <section class="section">
+            <h2 class="section-title">Artifact Ladder Scatter Plot</h2>
+            <div class="section-sub">x-axis = ATK · y-axis = Control · dot size = primary stat total. The top-right corner holds the top control-type artifacts.</div>
+            <div class="chart-wrap" style="position:relative;">
+                <svg id="artifact-scatter-svg"></svg>
+                <div class="chart-tip" id="scatter-tip"></div>
+            </div>
+        </section>
+
+        <!-- Section 7: Web Novel Genre Adaptation Card Grid -->
+        <section class="section">
+            <h2 class="section-title">Web Novel Genre Adaptation Cards · 9 works</h2>
+            <div class="section-sub">9 major genres reimagining Journey to the West, with the highest-popularity web novel highlighted at the top (🏆 9/10 Quit-the-Team).</div>
+            <div class="novel-grid" id="novel-grid"></div>
+        </section>
+
+        <!-- Section 8: Web Novel Popularity Ranking Bar Chart -->
+        <section class="section">
+            <h2 class="section-title">Web Novel Popularity Ranking Bar Chart</h2>
+            <div class="section-sub">9 web novels sorted by popularity score in descending order; bars colored by score (gold ≥8.5 / purple ≥7.5 / blue ≥6.5 / gray <6.5).</div>
+            <div class="chart-wrap" style="position:relative;">
+                <svg id="webnovel-bar-svg"></svg>
+                <div class="chart-tip" id="novel-tip"></div>
+            </div>
+        </section>
+
+        <!-- Section 9: Key Insights -->
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="insight-box">
+                <h4>The Journey to the West Universe from the Gacha and Web Novel Perspective</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/02-人物深度分析/孙悟空.md">Sun Wukong In-Depth Analysis (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/game-webnovel.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+
+function renderTreemap(opts){
+  var tipId=opts.tipId||'tooltip';
+  var svg=d3.select('#'+opts.svgId); svg.selectAll('*').remove();
+  var node=svg.node();
+  var W=(+svg.attr('width'))||(node.clientWidth||520);
+  var H=(+svg.attr('height'))||(node.clientHeight||420);
+  svg.attr('viewBox','0 0 '+W+' '+H);
+  var data=opts.data; if(!data||!data.length) return;
+  var total=d3.sum(data,opts.valueOf); if(!(total>0)) return;
+  var root=d3.hierarchy({children:data.map(function(d){return {d:d};})})
+    .sum(function(d){return (d&&d.d)?opts.valueOf(d.d):0;})
+    .sort(function(a,b){return b.value-a.value;});
+  d3.treemap().size([W,H]).paddingInner(2).round(true)(root);
+  var tip=d3.select('#'+tipId);
+  var g=svg.append('g');
+  var cell=g.selectAll('g.tm').data(root.leaves()).enter().append('g')
+    .attr('class','tm')
+    .attr('transform',function(d){return 'translate('+d.x0+','+d.y0+')';});
+  cell.append('rect')
+    .attr('width',function(d){return Math.max(0,d.x1-d.x0);})
+    .attr('height',function(d){return Math.max(0,d.y1-d.y0);})
+    .attr('fill',function(d){return opts.colorOf(d.data.d);})
+    .attr('stroke','#fff').attr('stroke-width',1)
+    .style('cursor','pointer')
+    .on('mouseover',function(ev,d){d3.select(this).attr('opacity',.85);tip.style('opacity',1).style('position','fixed').html(opts.htmlOf(d.data.d,total));})
+    .on('mousemove',function(ev){tip.style('left',(ev.clientX+14)+'px').style('top',(ev.clientY-10)+'px');})
+    .on('mouseout',function(){d3.select(this).attr('opacity',1);tip.style('opacity',0);});
+  cell.append('text').attr('x',6).attr('y',16).style('font-size','0.74rem').style('fill','#fff').style('pointer-events','none').style('font-weight','600')
+    .each(function(d){
+      var w=d.x1-d.x0,h=d.y1-d.y0,pct=opts.valueOf(d.data.d)/total*100;
+      if(w>60&&h>32){
+        var t=d3.select(this);
+        t.text(opts.nameOf(d.data.d));
+        t.append('tspan').attr('x',6).attr('dy','1.25em').style('font-weight','400').style('opacity',.85).text(pct.toFixed(1)+'%');
+      }
+    });
+  if(opts.legendId){
+    var lg=d3.select('#'+opts.legendId); lg.selectAll('*').remove();
+    data.slice().sort(function(a,b){return opts.valueOf(b)-opts.valueOf(a);}).forEach(function(d){
+      var pct=(opts.valueOf(d)/total*100).toFixed(1);
+      var row=lg.append('div').attr('class','tm-legend-item').style('display','flex').style('align-items','center').style('gap','6px').style('margin','3px 0').style('font-size','0.8rem');
+      row.append('span').style('width','12px').style('height','12px').style('border-radius','3px').style('background',opts.colorOf(d)).style('flex','0 0 auto');
+      row.append('span').text(opts.nameOf(d)+'  ·  '+opts.valueOf(d)+'  ·  '+pct+'%');
+    });
+  }
+}
+
+
+    // ============================================================
+    // Embedded fallback data (used when fetch fails)
+    // Data source: scripts/output/data/{character_cards,artifact_panels,webnovel_adaptations,game_webnovel_summary}.json
+    // ============================================================
+    const EMBEDDED = {
+        character_cards: [
+            {
+                character: "Sun Wukong", title: "Great Sage Equal to Heaven · Victorious Fighting Buddha", rarity: "UR", element: "Metal",
+                power: 9800, hp: 9500, atk: 9800, def: 8500, spd: 9900,
+                skills: [
+                    { name: "72 Transformations", cost: 5, effect: "Transform · dodge +50% · lasts 3 turns", type: "buff" },
+                    { name: "Somersault Cloud", cost: 3, effect: "First strike · ignores terrain · guaranteed hit", type: "move" },
+                    { name: "Ruyi Jingu Bang · Sea-Calming Needle", cost: 8, effect: "Physical damage ×3 · breaks defense", type: "attack" },
+                    { name: "Fiery Golden Eyes", cost: 2, effect: "See through · pierces all disguise and illusion", type: "skill" }
+                ],
+                passive: "Havoc in Heaven — immune to first hit · once per battle",
+                acquisition: "Limited banner · Five Elements Mountain seal-lifting commemoration",
+                lore: "Born from a magic stone on Flower-Fruit Mountain · Havoc in Heaven · escorted the pilgrimage · finally became the Victorious Fighting Buddha"
+            },
+            {
+                character: "Tathāgata Buddha", title: "Western Paradise · Supreme Lord", rarity: "UR", element: "Light",
+                power: 10000, hp: 9999, atk: 9500, def: 9999, spd: 7000,
+                skills: [
+                    { name: "Five Elements Mountain Crush", cost: 10, effect: "Ignores enemy defense · directly strips 500 years of turns", type: "attack" },
+                    { name: "Boundless Dharma", cost: 8, effect: "Full-field cleanse · removes all buffs/debuffs", type: "buff" },
+                    { name: "Buddha Land in the Palm", cost: 6, effect: "Seals the target in the palm · cannot act", type: "control" }
+                ],
+                passive: "Rule-type — all battle outcomes are judged by Tathāgata",
+                acquisition: "Spirit Mountain supreme ritual · only 1 per server",
+                lore: "Supreme lord of the Western Paradise · chief architect of the 81 ordeals"
+            },
+            {
+                character: "Guanyin Bodhisattva", title: "South Sea Putuo · Great Mercy", rarity: "SSR", element: "Water",
+                power: 8200, hp: 8500, atk: 7800, def: 8800, spd: 8000,
+                skills: [
+                    { name: "Pure Vase Nectar", cost: 5, effect: "Restores 50% HP to the whole team · removes debuffs", type: "heal" },
+                    { name: "Golden Hoop Mantra", cost: 4, effect: "Forces control on a single ENTP-type character for 3 turns", type: "control" },
+                    { name: "Three Life-Saving Hairs", cost: 3, effect: "Grants teammates a revive item · usable 3 times", type: "buff" }
+                ],
+                passive: "Hidden protection — auto-triggers a shield when a teammate’s HP < 30%",
+                acquisition: "South Sea Putuo limited banner",
+                lore: "The merciful Guanyin Bodhisattva · secret investor in the pilgrimage project"
+            },
+            {
+                character: "Erlang Shen Yang Jian", title: "Manifested Sage Erlang", rarity: "SSR", element: "Thunder",
+                power: 8800, hp: 8200, atk: 9000, def: 8000, spd: 9200,
+                skills: [
+                    { name: "Heavenly Eye", cost: 4, effect: "Pierces all disguise and transformation · lasts 5 turns", type: "skill" },
+                    { name: "Eight-Nine Mystic Art", cost: 6, effect: "Rival of the 72 Transformations · adds Thunder damage", type: "attack" },
+                    { name: "Howling Celestial Hound", cost: 3, effect: "Summons the Howling Celestial Hound to bite the target · cannot act for 2 turns", type: "control" }
+                ],
+                passive: "Heaven’s strongest war god — +30% damage against demon enemies",
+                acquisition: "Guanjiangkou limited · Heavenly Legion banner",
+                lore: "Nephew of the Jade Emperor · once fought Wukong to a 300-round draw"
+            },
+            {
+                character: "Tang Sanzang", title: "Candana Merit Buddha · reincarnation of the Golden Cicada", rarity: "SR", element: "Heart",
+                power: 1500, hp: 1500, atk: 800, def: 1200, spd: 3000,
+                skills: [
+                    { name: "Golden Hoop Mantra Recitation", cost: 2, effect: "Forces control on Wukong-type characters · but 0 damage", type: "control" },
+                    { name: "Chant the Heart Sutra", cost: 3, effect: "Purges all debuffs · but requires 1 turn of chanting", type: "heal" },
+                    { name: "Call for Guanyin", cost: 5, effect: "Summons Guanyin to the rescue · 5-turn cooldown", type: "summon" }
+                ],
+                passive: "Golden Cicada reincarnation — 100% triggers a plot rescue when defeated by a demon",
+                acquisition: "Default card · gifted at the start",
+                lore: "Reincarnation of the Golden Cicada · 14 years of walking to fetch the scriptures · finally became the Candana Merit Buddha"
+            },
+            {
+                character: "Zhu Bajie", title: "Marshal Tianpeng · Altar Cleanser", rarity: "SR", element: "Earth",
+                power: 4200, hp: 6000, atk: 4500, def: 5500, spd: 3000,
+                skills: [
+                    { name: "36 Transformations", cost: 3, effect: "Transform · but 50% failure rate", type: "buff" },
+                    { name: "Nine-Tooth Rake", cost: 4, effect: "Physical damage ×1.5 · -50% damage vs female demons", type: "attack" },
+                    { name: "Gao Village Braised Pork", cost: 2, effect: "Restores 30% HP · but attack -20% · lasts 3 turns", type: "heal" }
+                ],
+                passive: "Marshal Tianpeng — 50% chance to defect when facing a female demon",
+                acquisition: "Gao Village story unlock",
+                lore: "Former Marshal Tianpeng · banished for flirting with Chang’e · later the team’s comic relief"
+            },
+            {
+                character: "Sha Wujing", title: "Curtain-Raising General · Golden-Body Arhat", rarity: "R", element: "Water",
+                power: 3200, hp: 4500, atk: 3200, def: 5000, spd: 3500,
+                skills: [
+                    { name: "Demon-Subduing Staff", cost: 3, effect: "Steady physical damage ×1.2", type: "attack" },
+                    { name: "Pole-Carrying Art", cost: 1, effect: "Raises the team’s carrying capacity · but no combat effect", type: "buff" },
+                    { name: "Master’s been captured by demons!", cost: 2, effect: "Notifies the whole team · but no actual damage", type: "skill" }
+                ],
+                passive: "Silent devotion — steadily restores 5% HP every turn",
+                acquisition: "Flowing Sands River story unlock",
+                lore: "Former Curtain-Raising General · banished for shattering a crystal goblet · silently carried the luggage for 14 years"
+            },
+            {
+                character: "White Dragon Horse", title: "Third Prince of the West Sea Dragon King · Eight-Part Heavenly Dragon", rarity: "R", element: "Water",
+                power: 3800, hp: 5000, atk: 3500, def: 4500, spd: 4000,
+                skills: [
+                    { name: "Transform into a White Horse", cost: 0, effect: "Becomes Tang Sanzang’s mount · cannot fight", type: "passive" },
+                    { name: "A Kick", cost: 5, effect: "Clutch rescue · ×3 damage vs the Yellow-Robed Demon", type: "attack" },
+                    { name: "Dragon Roar", cost: 3, effect: "Intimidates low-level demons for 2 turns", type: "control" }
+                ],
+                passive: "Clutch rescue — force-activated when the plot triggers",
+                acquisition: "Eagle Sorrow Stream story unlock",
+                lore: "Third Prince of the West Sea Dragon King · banished for burning the palace pearl · transformed into a white horse to carry Tang Sanzang"
+            },
+            {
+                character: "Bull Demon King", title: "Great Sage Pacifying Heaven · foremost of the Seven Great Sages", rarity: "SSR", element: "Earth",
+                power: 8500, hp: 9500, atk: 8800, def: 8500, spd: 6000,
+                skills: [
+                    { name: "72 Transformations (Bull version)", cost: 5, effect: "Transform · on par with Wukong", type: "buff" },
+                    { name: "Iron Cudgel", cost: 6, effect: "Physical damage ×2.5 · breaks defense", type: "attack" },
+                    { name: "Borrowed Banana Fan", cost: 8, effect: "Must be borrowed first · otherwise ineffective", type: "attack" }
+                ],
+                passive: "Foremost of the Seven Great Sages — +50% damage vs Wukong-type characters",
+                acquisition: "Flaming Mountain story-limited",
+                lore: "Wukong’s sworn elder brother · Great Sage Pacifying Heaven · finally subdued by Nezha"
+            },
+            {
+                character: "Red Boy", title: "Holy Infant King · Sudhana", rarity: "SSR", element: "Fire",
+                power: 7800, hp: 6500, atk: 8500, def: 6000, spd: 8800,
+                skills: [
+                    { name: "Samadhi True Fire", cost: 6, effect: "Continuous burn damage for 5 turns · special effect vs Wukong", type: "attack" },
+                    { name: "Fire-Cloud Spear", cost: 4, effect: "Physical + fire damage ×1.8", type: "attack" },
+                    { name: "Transform into a Handsome Boy", cost: 3, effect: "Disguise · tricks the enemy into trusting him", type: "control" }
+                ],
+                passive: "Samadhi True Fire — immune to all fire damage · +30% damage vs Wukong-type",
+                acquisition: "Mount Hao Fire-Cloud Cave limited",
+                lore: "Son of the Bull Demon King and Princess Iron Fan · unbeatable Samadhi True Fire · finally subdued by Guanyin"
+            },
+            {
+                character: "Six-Eared Macaque", title: "False Monkey King · inner demon", rarity: "SSR", element: "Dark",
+                power: 9700, hp: 9400, atk: 9700, def: 8500, spd: 9900,
+                skills: [
+                    { name: "72 Transformations (Copy)", cost: 5, effect: "Fully copies the target’s skill", type: "buff" },
+                    { name: "Ruyi Jingu Bang (fake)", cost: 8, effect: "Physical damage ×3 · but at 90% power", type: "attack" },
+                    { name: "Even Diting Cannot Tell", cost: 4, effect: "Disguise · -50% detection rate", type: "control" }
+                ],
+                passive: "Inner demon — +50% damage vs Wukong-type · and immune to the Golden Hoop Mantra",
+                acquisition: "True and False Monkey King story-limited",
+                lore: "Wukong’s inner-demon avatar · identical to Wukong · finally exposed by Tathāgata"
+            },
+            {
+                character: "White Bone Demon", title: "Lady White Bone · wild monster", rarity: "N", element: "Dark",
+                power: 800, hp: 500, atk: 900, def: 400, spd: 1500,
+                skills: [
+                    { name: "Three Transformations (maiden / old woman / old man)", cost: 2, effect: "Disguise · 30% detection rate", type: "control" },
+                    { name: "Corpse-Shedding Art", cost: 1, effect: "Feigns death to escape · no actual damage", type: "skill" }
+                ],
+                passive: "Wild monster — one-shotted by Wukong (but Wukong gets driven away)",
+                acquisition: "White Tiger Ridge story · beginner tutorial",
+                lore: "White Tiger Ridge wild monster · craved Tang Sanzang’s flesh for immortality · three transformations exposed by Wukong"
+            }
+        ],
+        artifact_panels: [
+            {
+                name: "Diamond Bracelet", english_name: "Golden Ring", rarity: "SSR",
+                owner: "Taishang Laojun → Green Ox Demon", element: "Metal",
+                stats: { atk: 0, def: 0, control: 9999 },
+                effect: "Can collect all of the enemy’s offensive artifacts and weapons · but ineffective against the Banana Fan",
+                counter: "Banana Fan (counter)",
+                background: "Forged by Taishang Laojun during his westward journey · refined from kun steel",
+                battle_impact: "Changes Heaven’s combat meta: single-artifact builds are obsolete · group tactics required",
+                popularity: "Once widespread, all demons relying on a single artifact lost their jobs"
+            },
+            {
+                name: "Golden-Hooped Rod", english_name: "Ruyi Jingu Bang", rarity: "UR",
+                owner: "Yu the Great → East Sea Dragon King → Sun Wukong", element: "Metal",
+                stats: { atk: 9800, def: 0, control: 0 },
+                effect: "Physical damage ×3 · can grow or shrink · weighs 13,500 jin",
+                counter: "None (but collected by the Diamond Bracelet)",
+                background: "The sea-calming needle from Yu the Great’s flood control · later kept in the East Sea Dragon Palace",
+                battle_impact: "The strongest single-target melee weapon · unbeatable at close range",
+                popularity: "Wukong-exclusive · cannot be duplicated"
+            },
+            {
+                name: "Banana Fan (Yang)", english_name: "Banana Fan (Yang)", rarity: "SSR",
+                owner: "Princess Iron Fan", element: "Wind",
+                stats: { atk: 0, def: 0, control: 9500 },
+                effect: "One fan blows 84,000 li · nothing can withstand it · special attack vs the Diamond Bracelet",
+                counter: "Wind-Calming Pill (one-time counter)",
+                background: "A wisp of lunar leaf from behind Kunlun Mountain, born at the dawn of chaos",
+                battle_impact: "Core of the group-displacement build · can reshape the battlefield",
+                popularity: "Depends on the wielder’s power · low adoption"
+            },
+            {
+                name: "Purple Gold Gourd", english_name: "Purple Gold Gourd", rarity: "SSR",
+                owner: "Taishang Laojun → Golden Horn & Silver Horn", element: "Dark",
+                stats: { atk: 0, def: 0, control: 9000 },
+                effect: "Answer to your name and turn to pus in a matter of hours",
+                counter: "A false name (e.g. 'Sun the Pilgrim' 'Pilgrim Sun')",
+                background: "Condensed from the golden qi emitted by the gourd during Laojun’s westward journey",
+                battle_impact: "Single-target sure kill · but requires knowing the true name",
+                popularity: "Circulates within Heaven · demons must steal to obtain it"
+            },
+            {
+                name: "Yin-Yang Bottle", english_name: "Yin-Yang Bottle", rarity: "SSR",
+                owner: "Golden-Winged Roc", element: "Light",
+                stats: { atk: 0, def: 0, control: 9300 },
+                effect: "Sealed in the bottle · turns to slurry in hours · Wukong must use Guanyin’s three hairs to break free",
+                counter: "Guanyin’s life-saving hairs (one-time break)",
+                background: "Condensed from the dual qi of yin and yang · exclusive to the Golden-Winged Roc",
+                battle_impact: "Single-target sure kill · but effect halved against top-tier UR cards",
+                popularity: "Demon-exclusive · 0% adoption"
+            },
+            {
+                name: "Nine-Tooth Rake", english_name: "Nine-Tooth Rake", rarity: "SR",
+                owner: "Zhu Bajie", element: "Earth",
+                stats: { atk: 4500, def: 0, control: 0 },
+                effect: "Physical damage ×1.5 · -50% damage vs female demons",
+                counter: "None",
+                background: "Forged by Heaven’s divine hammer · originally Marshal Tianpeng’s tally of command",
+                battle_impact: "Stable output · but heavily affected by emotions",
+                popularity: "Bajie-exclusive · cannot be traded"
+            },
+            {
+                name: "Demon-Subduing Staff", english_name: "Demon-Subduing Staff", rarity: "R",
+                owner: "Sha Wujing", element: "Water",
+                stats: { atk: 3200, def: 0, control: 0 },
+                effect: "Physical damage ×1.2 · stable output, no variation",
+                counter: "None",
+                background: "Made from Wu Gang’s osmanthus tree · crafted by Lu Ban",
+                battle_impact: "Stable · but lacks burst",
+                popularity: "Sha Wujing-exclusive"
+            },
+            {
+                name: "Golden Hoop Mantra", english_name: "Golden Hoop Mantra", rarity: "UR",
+                owner: "Guanyin → Tang Sanzang", element: "Heart",
+                stats: { atk: 0, def: 0, control: 10000 },
+                effect: "100% control over ENTP-type characters (Wukong) · cannot be resisted",
+                counter: "None (unless 100 li away from Tang Sanzang)",
+                background: "Gifted by Guanyin · designed specifically to control Wukong",
+                battle_impact: "Overturns the team’s power structure · Tang Sanzang flips from weak to strong",
+                popularity: "A management artifact · but only 1 in all three realms"
+            },
+            {
+                name: "Fiery Golden Eyes", english_name: "Fiery Golden Eyes", rarity: "SSR",
+                owner: "Sun Wukong", element: "Fire",
+                stats: { atk: 0, def: 0, control: 0, perception: 9500 },
+                effect: "Sees through all illusion and transformation · but sensitive to smoke",
+                counter: "Smoke (e.g. the smoke of Red Boy’s Samadhi True Fire)",
+                background: "Forged for 49 days in the Eight Trigrams Furnace · side effect is fear of smoke",
+                battle_impact: "Core of the intelligence build · changes battlefield information transparency",
+                popularity: "Wukong-exclusive · cannot be duplicated"
+            },
+            {
+                name: "Three Life-Saving Hairs", english_name: "Three Life-Saving Hairs", rarity: "SR",
+                owner: "Guanyin → Sun Wukong", element: "Heart",
+                stats: { atk: 0, def: 0, control: 0, rescue: 3 },
+                effect: "Can transform into any item · 3 uses total",
+                counter: "None",
+                background: "An emergency rescue item gifted by Guanyin",
+                battle_impact: "A life-saving item · but with limited uses",
+                popularity: "Limited · only 3 in all three realms"
+            }
+        ],
+        webnovel_adaptations: [
+            {
+                genre: "Son-in-Law", title: "Journey to the West: Starting as the Son-in-Law of Gao Village", protagonist: "Zhu Bajie",
+                setting: "Gao Village",
+                premise: "A modern programmer transmigrates into Zhu Bajie · immediately recruited as a son-in-law by Old Gao · and must pretend not to know martial arts before the beautiful Cuilan",
+                core_plothook: "Uses modern business knowledge to transform Gao Village · becomes the local tycoon · but must dodge Wukong’s recruitment",
+                selling_point: "Comedy + slice-of-life farming + business warfare in one",
+                target_audience: "Urban-fiction fans · readers who want something light",
+                popularity_estimate: "Medium (7.5/10)",
+                key_quote: "Me, Marshal Tianpeng, the former Supreme Commander of the Navy — now a son-in-law?"
+            },
+            {
+                genre: "Quit-the-Team", title: "Fetch scriptures? I quit — Monkey wants to lie flat", protagonist: "Sun Wukong",
+                setting: "Flower-Fruit Mountain",
+                premise: "Banished back to Flower-Fruit Mountain by Tang Sanzang · this time Wukong truly quits · and starts a K-12 education system for his monkey descendants",
+                core_plothook: "Chaos breaks out across the three realms · the gods beg him to return · but Wukong says 'I’m retired — leave me alone'",
+                selling_point: "Lie-flat power fantasy + education + anti-tradition",
+                target_audience: "996 workers · the anti-rat-race crowd",
+                popularity_estimate: "High (9/10) · resonates with the current mood",
+                key_quote: "Go back just because you say so? I just bought a school-district house on Flower-Fruit Mountain"
+            },
+            {
+                genre: "Inner Voice", title: "Great Tang Pilgrim: The Emperor Can Hear My Inner Voice", protagonist: "Tang Sanzang",
+                setting: "Chang’an → the West",
+                premise: "Li Shimin can hear Tang Sanzang’s inner voice · discovering that this sworn brother grumbles daily about the long road and many demons",
+                core_plothook: "Li Shimin secretly arranges rescues along the way · throwing Guanyin’s script into chaos · and rewriting the pilgrimage project",
+                selling_point: "Power fantasy + script-flipping + roast comedy",
+                target_audience: "Power-fantasy readers · fans of meta jokes",
+                popularity_estimate: "High (8.5/10)",
+                key_quote: "[Inner voice] Where the heck is this place? Why are there more demons than people?"
+            },
+            {
+                genre: "System", title: "Journey to the West: I Have a Tribulation System", protagonist: "Sha Wujing",
+                setting: "Flowing Sands River → the pilgrimage road",
+                premise: "Sha Wujing awakens a tribulation system · leveling up with each ordeal · and climbs from the quietest disciple to the strongest",
+                core_plothook: "System quest rewards let Sha Wujing grow stronger in silence · ultimately surpassing Wukong",
+                selling_point: "Comeback + stat-driven + hidden powerhouse",
+                target_audience: "Stat nerds · comeback-story fans",
+                popularity_estimate: "Medium-high (8/10)",
+                key_quote: "Ding! Host completed the 'Carry the Luggage 10,000 km' achievement · Reward: Constitution +10"
+            },
+            {
+                genre: "Rebirth", title: "Reborn as Tang Sanzang’s Elder Brother", protagonist: "Chen Guangrui (revived)",
+                setting: "Hong River → Chang’an",
+                premise: "Revived, Chen Guangrui is reborn to before the pilgrimage begins · and resolves to protect his younger brother Tang Sanzang first",
+                core_plothook: "With memories of his past life · he remaps the pilgrimage route · turning 81 ordeals into 30",
+                selling_point: "Fate-changing + brotherhood + strategy",
+                target_audience: "Rebirth-fiction fans · readers who enjoy family bonds",
+                popularity_estimate: "Medium (7/10)",
+                key_quote: "Xuanzang, big brother will never let you die at a demon’s hands this time"
+            },
+            {
+                genre: "Villain", title: "Journey to the West: I, the Six-Eared Macaque, Should Have Become a Buddha", protagonist: "Six-Eared Macaque",
+                setting: "Spirit Mountain → Flower-Fruit Mountain",
+                premise: "Retells the true-and-false Monkey King from the Six-Eared Macaque’s view · revealing he was Wukong’s other half · killed with one strike by Tathāgata",
+                core_plothook: "Reborn to before the true-and-false Monkey King incident · this time he’ll be himself, not a stand-in",
+                selling_point: "Villain’s point of view + anti-hero + philosophical",
+                target_audience: "Deep readers · fans of the villain’s perspective",
+                popularity_estimate: "Medium-high (8/10)",
+                key_quote: "Why does he become a Buddha while I get killed? I’m the real Sun Wukong"
+            },
+            {
+                genre: "Harem", title: "Journey to the West: Return of Tianpeng", protagonist: "Zhu Bajie",
+                setting: "Heaven → the mortal world",
+                premise: "Marshal Tianpeng is reborn · this time not flirting with Chang’e · but winning back every goddess through real action",
+                core_plothook: "Wins over Chang’e, Gao Cuilan, the Jade Rabbit Spirit, and the Spider Spirit · building the ultimate harem",
+                selling_point: "Power fantasy + harem + rebirth",
+                target_audience: "Harem-fiction fans · the power-fantasy crowd",
+                popularity_estimate: "Medium (6/10) · crowded lane",
+                key_quote: "Everything I missed in my past life — I’ll have it all in this one"
+            },
+            {
+                genre: "Invincible", title: "Journey to the West: I, Tathāgata, Invincible from the Start", protagonist: "Tathāgata Buddha",
+                setting: "Spirit Mountain → the three realms",
+                premise: "Tells the behind-the-scenes design of the 81 ordeals from Tathāgata’s view · every ordeal arranged by his own hand",
+                core_plothook: "Readers watch the show alongside Tathāgata · enjoying how his own script unfolds",
+                selling_point: "God’s-eye view + invincible power fantasy + behind-the-scenes",
+                target_audience: "Sophisticated readers · who enjoy watching the protagonist control everything",
+                popularity_estimate: "Medium (7/10) · high entry barrier",
+                key_quote: "Wukong, this ordeal is a growth lesson I designed for you"
+            },
+            {
+                genre: "Infinite Flow", title: "Journey to the West Instance: Farming Monsters on Spirit Mountain", protagonist: "Original protagonist",
+                setting: "Infinite space",
+                premise: "The protagonist is pulled into a Journey to the West instance world · and must clear all 81 ordeal instances to return to reality",
+                core_plothook: "Each instance has special rules · the protagonist must crack them to clear it",
+                selling_point: "Infinite flow + puzzle-solving + Journey to the West theme",
+                target_audience: "Infinite-flow fans · puzzle lovers",
+                popularity_estimate: "Medium-high (8/10)",
+                key_quote: "Instance · Flaming Mountain · S-rank difficulty · 5% survival rate"
+            }
+        ],
+        game_webnovel_summary: {
+            total_cards: 12,
+            total_artifacts: 10,
+            total_webnovels: 9,
+            rarity_distribution: { UR: 2, SSR: 5, SR: 2, R: 2, N: 1 },
+            element_distribution: { "Metal": 1, "Light": 1, "Water": 3, "Thunder": 1, "Heart": 1, "Earth": 2, "Fire": 1, "Dark": 2 },
+            avg_power: 6358.3,
+            max_power: 10000,
+            min_power: 800,
+            webnovel_genres: ["Son-in-Law", "Quit-the-Team", "Inner Voice", "System", "Rebirth", "Villain", "Harem", "Invincible", "Infinite Flow"],
+            best_webnovel: "Fetch scriptures? I quit — Monkey wants to lie flat"
+        }
+    };
+
+    // ============================================================
+    // Color mapping
+    // ============================================================
+    const RARITY_COLORS = {
+        UR: "#d4af37", SSR: "#8A6D3B", SR: "#3a6b8c", R: "#6B8E5A", N: "#6B6455"
+    };
+    const RARITY_ORDER = ["UR", "SSR", "SR", "R", "N"];
+    const ELEMENT_COLORS = {
+        "Metal": "#d4af37", "Wood": "#6B8E5A", "Water": "#3a6b8c", "Fire": "#c8463a",
+        "Earth": "#C9A063", "Thunder": "#8A6D3B", "Wind": "#a8c97f", "Light": "#C9A063",
+        "Dark": "#23201A", "Heart": "#e91e63"
+    };
+    // Web novel genre colors
+    const GENRE_COLORS = {
+        "Son-in-Law": "#C9A063", "Quit-the-Team": "#c8463a", "Inner Voice": "#e91e63",
+        "System": "#3a6b8c", "Rebirth": "#6B8E5A", "Villain": "#23201A",
+        "Harem": "#d97706", "Invincible": "#d4af37", "Infinite Flow": "#8A6D3B"
+    };
+    // Power bar chart colored by rarity
+    function rarityColor(r) { return RARITY_COLORS[r] || "#C9A063"; }
+    // Element colors
+    function elemColor(e) { return ELEMENT_COLORS[e] || "#C9A063"; }
+    // Web novel popularity score colors
+    function scoreColor(s) {
+        if (s >= 8.5) return "#d4af37";
+        if (s >= 7.5) return "#8A6D3B";
+        if (s >= 6.5) return "#3a6b8c";
+        return "#6B6455";
+    }
+    // Parse the number from the popularity_estimate string
+    function parseScore(s) {
+        const m = String(s).match(/(\d+(?:\.\d+)?)/);
+        return m ? parseFloat(m[1]) : 0;
+    }
+
+    // ============================================================
+    // Data loading
+    // ============================================================
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error("fetch failed: " + path);
+            return await res.json();
+        } catch (e) {
+            console.warn("[INFO] Using embedded data for", path, ":", e.message);
+            return fallback;
+        }
+    }
+    async function loadAll() {
+        const [cards, artifacts, novels, summary] = await Promise.all([
+            loadJson("../../scripts/output/data/character_cards.json", EMBEDDED.character_cards),
+            loadJson("../../scripts/output/data/artifact_panels.json", EMBEDDED.artifact_panels),
+            loadJson("../../scripts/output/data/webnovel_adaptations.json", EMBEDDED.webnovel_adaptations),
+            loadJson("../../scripts/output/data/game_webnovel_summary.json", EMBEDDED.game_webnovel_summary)
+        ]);
+        return { cards, artifacts, novels, summary };
+    }
+
+    // ============================================================
+    // Render: character card wall
+    // ============================================================
+    function renderCards(cards) {
+        const grid = d3.select("#card-grid");
+        grid.selectAll("*").remove();
+        cards.forEach(c => {
+            const card = grid.append("div")
+                .attr("class", "char-card rarity-" + c.rarity);
+
+            // Header: rarity + element
+            const head = card.append("div").attr("class", "cc-head");
+            head.append("div").attr("class", "cc-rarity " + c.rarity).text(c.rarity);
+            head.append("div")
+                .attr("class", "cc-elem")
+                .style("background", elemColor(c.element))
+                .text(c.element);
+
+            // Name + title
+            card.append("div").attr("class", "cc-name").text(c.character);
+            card.append("div").attr("class", "cc-title").text(c.title);
+
+            // Power
+            const pw = card.append("div").attr("class", "cc-power")
+                .style("color", elemColor(c.element))
+                .text(c.power.toLocaleString());
+            card.append("div").attr("class", "cc-power-label").text("POWER · Power");
+
+            // 4-stat bar chart
+            const stats = card.append("div").attr("class", "cc-stats");
+            const statData = [
+                { label: "HP", val: c.hp, color: "#c8463a" },
+                { label: "ATK", val: c.atk, color: "#d97706" },
+                { label: "DEF", val: c.def, color: "#3a6b8c" },
+                { label: "SPD", val: c.spd, color: "#6B8E5A" }
+            ];
+            const maxStat = 10000;
+            statData.forEach(s => {
+                const row = stats.append("div").attr("class", "cc-stat-row");
+                row.append("div").attr("class", "cc-stat-label").text(s.label);
+                const track = row.append("div").attr("class", "cc-stat-track");
+                track.append("div").attr("class", "cc-stat-fill")
+                    .style("background", s.color)
+                    .style("width", "0%")
+                    .transition().duration(700).ease(d3.easeCubicOut)
+                    .style("width", (s.val / maxStat * 100) + "%");
+                row.append("div").attr("class", "cc-stat-val").text(s.val);
+            });
+
+            // Skills (first 3)
+            const sk = card.append("div").attr("class", "cc-skills");
+            c.skills.slice(0, 3).forEach(s => {
+                const sr = sk.append("div").attr("class", "cc-skill");
+                sr.append("div").attr("class", "cc-skill-cost").text(s.cost);
+                const txt = sr.append("div").attr("class", "cc-skill-text");
+                txt.append("span").attr("class", "cc-skill-name").text(s.name);
+                txt.append("span").attr("class", "cc-skill-type").text(s.type);
+            });
+
+            // Passive
+            card.append("div").attr("class", "cc-passive").text(c.passive);
+
+            // Acquisition
+            card.append("div").attr("class", "cc-acq").text(c.acquisition);
+        });
+    }
+
+    // ============================================================
+    // Render: rarity distribution pie chart
+    // ============================================================
+    function renderRarityPie(summary){
+  var data=RARITY_ORDER.filter(r=>summary.rarity_distribution[r]).map(r=>({rarity:r,count:summary.rarity_distribution[r]}));
+  renderTreemap({
+    svgId:'rarity-pie-svg', data:data, legendId:'rarity-legend', tipId:'rarity-tip',
+    nameOf:d=>d.rarity, valueOf:d=>d.count, colorOf:d=>RARITY_COLORS[d.rarity],
+    htmlOf:(d,total)=>`<div class="tip-title">${d.rarity} · Rarity</div>Count: <strong style="color:var(--accent-soft);">${d.count} cards</strong><br/>Share: ${((d.count/total)*100).toFixed(1)}%`
+  });
+}
+
+    // ============================================================
+    // Render: power ranking bar chart
+    // ============================================================
+    function renderPowerBar(cards) {
+        const svg = d3.select("#power-bar-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("power-bar-svg");
+        const margin = { top: 24, right: 100, bottom: 40, left: 110 };
+        const w = Math.max(el.clientWidth || 1100, margin.left + margin.right + 120);
+        const sorted = cards.slice().sort((a, b) => b.power - a.power);
+        const n = sorted.length;
+        const barH = 28, gap = 10;
+        const innerW = w - margin.left - margin.right;
+        const totalH = n * (barH + gap) - gap;
+        const h = Math.max(480, totalH + margin.top + margin.bottom);
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+        const innerH = totalH;
+
+        const x = d3.scaleLinear().domain([0, 11000]).range([0, innerW]);
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Grid lines
+        g.append("g").selectAll("line")
+            .data([2000, 4000, 6000, 8000, 10000])
+            .enter().append("line")
+            .attr("x1", d => x(d)).attr("x2", d => x(d))
+            .attr("y1", -4).attr("y2", innerH + 4)
+            .attr("stroke", "var(--line)")
+            .attr("stroke-dasharray", "3,3")
+            .attr("opacity", 0.5);
+
+        // X axis
+        g.append("g")
+            .attr("transform", `translate(0,${innerH + 6})`)
+            .call(d3.axisBottom(x).ticks(6).tickFormat(d => d.toLocaleString()))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
+
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 36)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.8rem").style("fill", "var(--accent-3)")
+            .text("POWER · Power Value");
+
+        const tip = d3.select("#power-tip");
+        const elParent = el.parentElement;
+
+        sorted.forEach((c, i) => {
+            const yPos = i * (barH + gap);
+            const isTop3 = i < 3;
+            const color = rarityColor(c.rarity);
+
+            // Character name (left)
+            g.append("text")
+                .attr("x", -12).attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.86rem")
+                .style("font-weight", "600")
+                .style("fill", isTop3 ? "var(--accent)" : "var(--ink)")
+                .text(c.character);
+
+            // Background track
+            g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",Math.max(0, innerW)).attr("height", barH)
+                .attr("fill", "var(--bg)")
+                .attr("stroke", isTop3 ? "var(--rarity-ur)" : "var(--line)")
+                .attr("stroke-width", isTop3 ? 1.5 : 1)
+                .attr("rx", 4);
+
+            // Value bar
+            const bar = g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",0).attr("height", barH)
+                .attr("fill", color)
+                .attr("rx", 4)
+                .style("cursor", "pointer")
+                .attr("class", "power-bar");
+
+            bar.transition()
+                .delay(i * 80).duration(800)
+                .ease(d3.easeCubicOut)
+                .attr("width",Math.max(0, x(c.power)));
+
+            // In-bar text: rarity + value
+            g.append("text")
+                .attr("x", x(c.power) - 8).attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.8rem")
+                .style("font-weight", "700")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "#fff")
+                .style("opacity", 0)
+                .text(c.rarity + " " + c.power.toLocaleString())
+                .transition().delay(i * 80 + 600).duration(400).style("opacity", 1);
+
+            // Top 3 medal/number
+            if (isTop3) {
+                const medal = ["🥇", "🥈", "🥉"][i];
+                g.append("text")
+                    .attr("x", x(c.power) + 8).attr("y", yPos + barH / 2 + 4)
+                    .style("font-size", "0.95rem")
+                    .style("opacity", 0)
+                    .text(medal)
+                    .transition().delay(i * 80 + 700).duration(400).style("opacity", 1);
+            }
+
+            bar.on("mouseover", function(e) {
+                d3.select(this).attr("fill", d3.color(color).darker(0.6));
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${c.character} · ${c.rarity} · ${c.element}</div>` +
+                          `<div>Title: ${c.title}</div>` +
+                          `<div>Power: <strong style="color:var(--accent-soft);">${c.power.toLocaleString()}</strong></div>` +
+                          `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">${c.lore}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = elParent.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("fill", color);
+                tip.style("opacity", 0);
+            });
+        });
+    }
+
+    // ============================================================
+    // Render: element distribution donut chart
+    // ============================================================
+    function renderElementDonut(summary){
+  var data=Object.entries(summary.element_distribution).map(function(kv){return {element:kv[0],count:kv[1]};});
+  renderTreemap({
+    svgId:'element-donut-svg', data:data, legendId:'element-legend', tipId:'element-tip',
+    nameOf:d=>d.element, valueOf:d=>d.count, colorOf:d=>elemColor(d.element),
+    htmlOf:(d,total)=>`<div class="tip-title">${d.element} · Element</div>Count: <strong style="color:var(--accent-soft);">${d.count} cards</strong><br/>Share: ${((d.count/total)*100).toFixed(1)}%`
+  });
+}
+
+    // ============================================================
+    // Render: artifact equipment panel table
+    // ============================================================
+    function renderArtifactTable(artifacts) {
+        const tbody = d3.select("#artifact-tbody");
+        tbody.selectAll("*").remove();
+        artifacts.forEach(a => {
+            const tr = tbody.append("tr");
+            // Artifact name
+            const nameTd = tr.append("td").attr("class", "col-name");
+            nameTd.append("span").text(a.name);
+            nameTd.append("span").attr("class", "en").text(a.english_name);
+            // Rarity
+            tr.append("td").html(`<span class="rarity-pill" style="background:${RARITY_COLORS[a.rarity]}">${a.rarity}</span>`);
+            // Owner
+            tr.append("td").text(a.owner);
+            // Element
+            tr.append("td").html(`<span class="elem-chip" style="background:${elemColor(a.element)}">${a.element}</span>`);
+            // Primary stat
+            const stats = a.stats;
+            let mainKey = "atk", mainVal = stats.atk;
+            if (stats.control && stats.control > mainVal) { mainKey = "control"; mainVal = stats.control; }
+            if (stats.perception && stats.perception > mainVal) { mainKey = "perception"; mainVal = stats.perception; }
+            if (stats.rescue !== undefined && mainKey === "atk" && mainVal === 0) { mainKey = "rescue"; mainVal = stats.rescue; }
+            const statTd = tr.append("td").attr("class", "col-stat");
+            statTd.append("span").text(mainVal.toLocaleString());
+            statTd.append("span").attr("class", "stat-key").text(mainKey);
+            // Effect (truncated at 50 chars)
+            const effTd = tr.append("td");
+            const eff = a.effect.length > 50 ? a.effect.slice(0, 50) + "…" : a.effect;
+            effTd.style("font-size", "0.82rem").style("color", "var(--ink)").text(eff);
+            // Counter
+            tr.append("td").style("font-size", "0.78rem").style("color", "var(--accent-3)").style("font-style", "italic").text(a.counter);
+        });
+    }
+
+    // ============================================================
+    // Render: artifact ladder scatter plot
+    // ============================================================
+    function renderArtifactScatter(artifacts) {
+        const svg = d3.select("#artifact-scatter-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("artifact-scatter-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 440;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 40, right: 40, bottom: 60, left: 70 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+
+        // Compute each artifact’s atk / control / total stats
+        const data = artifacts.map(a => {
+            const s = a.stats;
+            const atk = s.atk || 0;
+            const ctrl = s.control || 0;
+            const total = (s.atk || 0) + (s.def || 0) + (s.control || 0) +
+                          (s.perception || 0) + (s.rescue || 0);
+            return {
+                name: a.name, rarity: a.rarity, owner: a.owner,
+                atk: atk, control: ctrl, total: total,
+                effect: a.effect
+            };
+        });
+
+        const x = d3.scaleLinear().domain([-500, 11000]).range([0, innerW]);
+        const y = d3.scaleLinear().domain([-500, 11000]).range([innerH, 0]);
+        const r = d3.scaleLinear().domain([0, 12000]).range([6, 30]);
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Grid
+        g.append("g").selectAll("line")
+            .data([0, 2500, 5000, 7500, 10000])
+            .enter().append("line")
+            .attr("x1", d => x(d)).attr("x2", d => x(d))
+            .attr("y1", 0).attr("y2", innerH)
+            .attr("stroke", "var(--line)").attr("stroke-dasharray", "3,3").attr("opacity", 0.5);
+        g.append("g").selectAll("line")
+            .data([0, 2500, 5000, 7500, 10000])
+            .enter().append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", d => y(d)).attr("y2", d => y(d))
+            .attr("stroke", "var(--line)").attr("stroke-dasharray", "3,3").attr("opacity", 0.5);
+
+        // X / Y axes
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x).ticks(6).tickFormat(d => d >= 0 ? d.toLocaleString() : ""))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
+        g.append("g")
+            .call(d3.axisLeft(y).ticks(6).tickFormat(d => d >= 0 ? d.toLocaleString() : ""))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
+
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 42)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem").style("fill", "var(--accent-3)")
+            .text("ATK · Attack");
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerH / 2).attr("y", -50)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem").style("fill", "var(--accent-3)")
+            .text("CONTROL · Control");
+
+        const tip = d3.select("#scatter-tip");
+        const elParent = el.parentElement;
+
+        // Scatter dots
+        g.selectAll(".scatter-dot")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("class", "scatter-dot")
+            .attr("cx", d => x(d.atk))
+            .attr("cy", d => y(d.control))
+            .attr("r", 0)
+            .attr("fill", d => RARITY_COLORS[d.rarity])
+            .attr("fill-opacity", 0.65)
+            .attr("stroke", d => RARITY_COLORS[d.rarity])
+            .attr("stroke-width", 2)
+            .style("cursor", "pointer")
+            .transition().delay((d, i) => i * 80).duration(500)
+            .attr("r", d => r(d.total));
+
+        g.selectAll(".scatter-dot")
+            .on("mouseover", function(e, d) {
+                d3.select(this).attr("fill-opacity", 0.9);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${d.name} · ${d.rarity}</div>` +
+                          `<div>Owner: ${d.owner}</div>` +
+                          `<div>ATK：<strong style="color:var(--accent-soft);">${d.atk.toLocaleString()}</strong> · ` +
+                          `CTRL：<strong style="color:var(--accent-soft);">${d.control.toLocaleString()}</strong></div>` +
+                          `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">${d.effect}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = elParent.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("fill-opacity", 0.65);
+                tip.style("opacity", 0);
+            });
+
+        // Label each artifact name
+        g.selectAll(".scatter-label")
+            .data(data)
+            .enter()
+            .append("text")
+            .attr("class", "scatter-label")
+            .attr("x", d => x(d.atk))
+            .attr("y", d => y(d.control) - r(d.total) - 4)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.72rem")
+            .style("font-weight", "600")
+            .style("fill", "var(--ink)")
+            .style("opacity", 0)
+            .text(d => d.name.length > 5 ? d.name.slice(0, 5) + "…" : d.name)
+            .transition().delay((d, i) => i * 80 + 400).duration(400)
+            .style("opacity", 1);
+    }
+
+    // ============================================================
+    // Render: web novel genre adaptation card grid
+    // ============================================================
+    function renderNovels(novels, summary) {
+        const grid = d3.select("#novel-grid");
+        grid.selectAll("*").remove();
+        // Find the highest popularity
+        let maxScore = -1, maxTitle = "";
+        novels.forEach(n => {
+            const s = parseScore(n.popularity_estimate);
+            if (s > maxScore) { maxScore = s; maxTitle = n.title; }
+        });
+        novels.forEach(n => {
+            const score = parseScore(n.popularity_estimate);
+            const isTop = n.title === maxTitle;
+            const card = grid.append("div")
+                .attr("class", "novel-card" + (isTop ? " top-pick" : ""));
+            if (isTop) {
+                card.append("div").attr("class", "top-badge").text("🏆 Top Pick");
+            }
+            card.append("div")
+                .attr("class", "nc-genre")
+                .style("background", GENRE_COLORS[n.genre] || "var(--accent-3)")
+                .text(n.genre);
+            card.append("div").attr("class", "nc-title").text(n.title);
+            card.append("div").attr("class", "nc-protagonist").text(n.protagonist + " · " + n.setting);
+
+            const premise = card.append("div").attr("class", "nc-block");
+            premise.append("span").attr("class", "lbl").text("PREMISE · Setup");
+            premise.append("span").text(n.premise);
+
+            const hook = card.append("div").attr("class", "nc-block");
+            hook.append("span").attr("class", "lbl").text("HOOK · Hook");
+            hook.append("span").text(n.core_plothook);
+
+            card.append("div").attr("class", "nc-quote").text(n.key_quote);
+
+            const bottom = card.append("div").attr("class", "nc-bottom");
+            const bl = bottom.append("div").attr("class", "nc-bottom-left");
+            bl.append("div").html(`<span class="sp">Selling point</span> · ${n.selling_point}`);
+            bl.append("div").html(`<span class="sp">Audience</span> · ${n.target_audience}`);
+            const sc = bottom.append("div").attr("class", "nc-score");
+            sc.append("div").attr("class", "nc-score-val").style("color", scoreColor(score)).text(score.toFixed(1));
+            sc.append("div").attr("class", "nc-score-unit").text("/ 10");
+        });
+    }
+
+    // ============================================================
+    // Render: web novel popularity ranking bar chart
+    // ============================================================
+    function renderNovelBar(novels) {
+        const svg = d3.select("#webnovel-bar-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("webnovel-bar-svg");
+        const margin = { top: 24, right: 130, bottom: 40, left: 200 };
+        const w = Math.max(el.clientWidth || 1100, margin.left + margin.right + 120);
+        const data = novels.map(n => ({
+            ...n, score: parseScore(n.popularity_estimate)
+        })).sort((a, b) => b.score - a.score);
+        const n = data.length;
+        const barH = 30, gap = 10;
+        const innerW = w - margin.left - margin.right;
+        const totalH = n * (barH + gap) - gap;
+        const h = Math.max(420, totalH + margin.top + margin.bottom);
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+        const innerH = totalH;
+
+        const x = d3.scaleLinear().domain([0, 10]).range([0, innerW]);
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Grid
+        g.append("g").selectAll("line")
+            .data([2, 4, 6, 8, 10])
+            .enter().append("line")
+            .attr("x1", d => x(d)).attr("x2", d => x(d))
+            .attr("y1", -4).attr("y2", innerH + 4)
+            .attr("stroke", "var(--line)").attr("stroke-dasharray", "3,3").attr("opacity", 0.5);
+
+        g.append("g")
+            .attr("transform", `translate(0,${innerH + 6})`)
+            .call(d3.axisBottom(x).ticks(10).tickFormat(d => d))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "var(--ink-soft)");
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 36)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.8rem").style("fill", "var(--accent-3)")
+            .text("POPULARITY · Popularity Score (0-10)");
+
+        const tip = d3.select("#novel-tip");
+        const elParent = el.parentElement;
+
+        data.forEach((nv, i) => {
+            const yPos = i * (barH + gap);
+            const color = scoreColor(nv.score);
+
+            // Title (left)
+            g.append("text")
+                .attr("x", -12).attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.82rem")
+                .style("font-weight", "600")
+                .style("fill", "var(--ink)")
+                .text(nv.title.length > 16 ? nv.title.slice(0, 16) + "…" : nv.title);
+
+            // Track
+            g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",Math.max(0, innerW)).attr("height", barH)
+                .attr("fill", "var(--bg)")
+                .attr("stroke", "var(--line)")
+                .attr("rx", 4);
+
+            // Value bar
+            const bar = g.append("rect")
+                .attr("x", 0).attr("y", yPos)
+                .attr("width",0).attr("height", barH)
+                .attr("fill", color)
+                .attr("rx", 4)
+                .style("cursor", "pointer");
+
+            bar.transition()
+                .delay(i * 80).duration(800)
+                .ease(d3.easeCubicOut)
+                .attr("width",Math.max(0, x(nv.score)));
+
+            // In-bar: genre + score
+            g.append("text")
+                .attr("x", x(nv.score) - 8).attr("y", yPos + barH / 2 + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.8rem")
+                .style("font-weight", "700")
+                .style("font-family", "JetBrains Mono, monospace")
+                .style("fill", "#fff")
+                .style("opacity", 0)
+                .text(nv.genre + " " + nv.score.toFixed(1))
+                .transition().delay(i * 80 + 600).duration(400).style("opacity", 1);
+
+            // Right side: protagonist
+            g.append("text")
+                .attr("x", x(nv.score) + 8).attr("y", yPos + barH / 2 + 4)
+                .style("font-size", "0.78rem")
+                .style("fill", "var(--ink-soft)")
+                .style("font-style", "italic")
+                .style("opacity", 0)
+                .text(nv.protagonist)
+                .transition().delay(i * 80 + 700).duration(400).style("opacity", 1);
+
+            bar.on("mouseover", function(e) {
+                d3.select(this).attr("fill", d3.color(color).darker(0.6));
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">${nv.title}</div>` +
+                          `<div>Genre: ${nv.genre} · Protagonist: ${nv.protagonist}</div>` +
+                          `<div>Popularity: <strong style="color:var(--accent-soft);">${nv.score.toFixed(1)}/10</strong></div>` +
+                          `<div style="margin-top:4px;font-size:0.78rem;color:#e9b885;">${nv.key_quote}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = elParent.getBoundingClientRect();
+                tip.style("left", (e.clientX - rect.left + 14) + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function() {
+                d3.select(this).attr("fill", color);
+                tip.style("opacity", 0);
+            });
+        });
+    }
+
+    // ============================================================
+    // Render: key insights
+    // ============================================================
+    function renderInsights() {
+        const insights = [
+            `<span class="idx">01</span><div><strong>Tathāgata UR perfect 10000</strong> · only 1 per server · Spirit Mountain supreme ritual limited · rule-type passive "all battle outcomes judged by Tathāgata" — essentially an un-drawable "NPC card".</div>`,
+            `<span class="idx">02</span><div><strong>Six-Eared Macaque SSR power 9700</strong> · nearly a Wukong clone (just 100 points lower) · but one rarity tier lower · and its passive "immune to the Golden Hoop Mantra" is a hard counter to Wukong — the inner-demon premise perfectly realized on a card.</div>`,
+            `<span class="idx">03</span><div><strong>Golden Hoop Mantra control 10000</strong> · the strongest control-type artifact · designed specifically to counter ENTP Wukong · UR rarity but only 1 in all three realms · overturns the team’s power structure.</div>`,
+            `<span class="idx">04</span><div><strong>Quit-the-Team web novel 9/10 highest popularity</strong> · taps into the current "anti-rat-race, lie-flat" mood · "I just bought a school-district house on Flower-Fruit Mountain" became the year’s golden quote.</div>`,
+            `<span class="idx">05</span><div><strong>White Bone Demon N card power 800</strong> · the only tutorial-level demon · but its passive "one-shotted by Wukong (yet Wukong gets driven away)" — a model of plot-kill mechanic design.</div>`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(t => ul.append("li").html(t));
+    }
+
+    // ============================================================
+    // Main flow
+    // ============================================================
+    async function main() {
+        const data = await loadAll();
+        window.__data = data;
+
+        // Data source notice
+        if (data.cards === EMBEDDED.character_cards) {
+            // Embedded data
+        } else {
+            document.getElementById("dataSource").innerHTML =
+                "Data source: loaded live from <code>scripts/output/data/</code> (running in http server mode)";
+        }
+
+        renderCards(data.cards);
+        renderRarityPie(data.summary);
+        renderPowerBar(data.cards);
+        renderElementDonut(data.summary);
+        renderArtifactTable(data.artifacts);
+        renderArtifactScatter(data.artifacts);
+        renderNovels(data.novels, data.summary);
+        renderNovelBar(data.novels);
+        renderInsights();
+
+        const _gt = document.getElementById("gen-time"); if (_gt) _gt.textContent = "Data generated at: " + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
+    }
+
+    // Redraw D3 charts on window resize
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__data) {
+                renderRarityPie(window.__data.summary);
+                renderPowerBar(window.__data.cards);
+                renderElementDonut(window.__data.summary);
+                renderArtifactScatter(window.__data.artifacts);
+                renderNovelBar(window.__data.novels);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

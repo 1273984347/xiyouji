@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-eT6JieAsfgcckGEwcvgDE44twt8pEgenGJ47KBBgXGc=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Monster Female Network · W181 · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    
+svg circle { will-change: transform; }
+</style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        /* Hero */
+header
+header
+header
+header
+header.hero .meta {
+  color: var(--hero-meta);
+  font-size: 0.85em;
+  margin-top: 10px;
+  position: relative;
+}
+
+/* Section */
+
+.section-title.alt { color: var(--accent); border-left-color: var(--accent-2); }
+.section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
+
+.definition {
+  background: var(--paper);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-left: 3px solid var(--accent-3);
+  font-size: 0.94em;
+  border-radius: 2px;
+}
+
+/* KPI */
+
+.kpi-value { font-size: 1.7em; color: var(--accent); font-weight: 700; }
+.kpi-label { color: var(--muted); font-size: 0.84em; margin-top: 4px; }
+
+/* Chart */
+.chart-block { margin: 18px 0; }
+.chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.chart-caption { color: var(--muted); font-size: 0.84em; margin-bottom: 12px; }
+.chart-svg {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+  justify-content: center;
+  font-size: 0.84em;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: var(--tooltip-bg);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.84em;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 300px;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.node-label { font-size: 11px; fill: var(--ink); pointer-events: none; }
+.node-circle { cursor: pointer; }
+.node-circle:hover { stroke: var(--accent); stroke-width: 2px; }
+
+/* Summary table */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 0.84em;
+  background: #fff;
+  border: 1px solid var(--border);
+}
+.summary-table th {
+  background: var(--border);
+  color: var(--ink);
+  padding: 10px 10px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-3);
+  cursor: pointer;
+  user-select: none;
+}
+.summary-table th:hover { background: var(--accent-3); color: #fff; }
+.summary-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.summary-table tr:nth-child(even) td { background: var(--table-stripe); }
+.summary-table tr:hover td { background: #f5efe4; }
+.summary-table .type-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Insight */
+.insight-list { list-style: none; }
+.insight-list li {
+  background: var(--paper);
+  margin: 8px 0;
+  padding: 12px 15px;
+  border-left: 3px solid var(--accent-2);
+  border-radius: 2px;
+}
+.insight-list li strong { color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  header
+  header
+  
+  
+  .summary-table { font-size: 0.78em; }
+  .summary-table th, .summary-table td { padding: 6px 7px; }
+}
+@media (max-width: 520px) {
+  
+  
+  header
+}
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/monster-female-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Monster Female Network</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Monster Female Network</h1>
+        <p class="subtitle">MONSTER FEMALE NETWORK</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+<div class="kpi-row">
+  <div class="kpi-card"><div class="kpi-value">17</div><div class="kpi-label">Total Nodes</div></div>
+  <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">Spider Sisters</div></div>
+  <div class="kpi-card"><div class="kpi-value">7</div><div class="kpi-label">Other Female Demons</div></div>
+  <div class="kpi-card"><div class="kpi-value">3</div><div class="kpi-label">Collectors</div></div>
+  <div class="kpi-card"><div class="kpi-value">32</div><div class="kpi-label">Relationship Links</div></div>
+  <div class="kpi-card"><div class="kpi-value">4</div><div class="kpi-label">Assessment Dimensions</div></div>
+</div>
+
+<!-- Section 1: Title and Introduction -->
+<section class="section" id="intro">
+  <h2 class="section-title">I · Introduction to the Female Demon Network</h2>
+  <div class="section-sub">INTRODUCTION: MONSTER FEMALE NETWORK</div>
+  <div class="definition">
+    <strong>Definition:</strong> The Monster Female Network centers on 14 female demons in <em>Journey to the West</em>, joined by three female deity collectors (Bodhisattva Pilanpo, Bodhisattva Guanyin, and Old Mother of Lishan), forming a three-layer network of "seven Spider Sisters — lone demons — female deities". The seven Spider Sisters are the only female-demon group in the novel to appear as a sisterhood (Chapters 72–73, Pansi Cave), forming a sisterly community that is close within and distant without; the other seven female demons are scattered across the whole pilgrimage (Chapters 27–95), either trapped by desire (the Scorpion Demon, Apricot Fairy, and Rat Demon), fighting over a husband (Princess Iron Fan and the Jade-Faced Fox), or disguising themselves by shape-shifting (the White Bone Demon and the Jade Rabbit Demon) — reflecting the Ming novel’s double imagining of female desire and danger. The three female deities, as collectors and subduers, form a mirror image of "orthodox women" set against the demons. This chart uses five views — force-directed, Sankey, radar, timeline, and summary — continuing the W155/W151 power-relations series and corresponding to the W173 feminist-narratology topic.
+  </div>
+  <ul class="insight-list">
+    <li><strong>Group type:</strong> the seven Spider Sisters are a "kinship community" (living, bathing, and plotting together in Pansi Cave); the other seven are "lone demons", linked only loosely by karma, geography, or enmity.</li>
+    <li><strong>Fate:</strong> of the 14 female demons, 10 are destroyed (the seven Spider Sisters + Scorpion Demon + White Bone Demon + Jade-Faced Fox + Apricot Fairy), and only 3 reach a returned/recruited/cultivated ending (Jade Rabbit Demon, Rat Demon, Princess Iron Fan) — a destruction rate of 71.4%.</li>
+    <li><strong>Role of the collectors:</strong> Bodhisattva Pilanpo (whose son the Pleiades Star Lord killed the Scorpion Demon, and who subdued the Centipede Demon at Sun Wukong’s request), Bodhisattva Guanyin (who referred the Rat Demon to Li the Pagoda-Bearer), and Old Mother of Lishan (who once disguised herself as a mother and daughters to test the pilgrims) form the mirror image of "orthodox women".</li>
+    <li><strong>Four dimensions:</strong> scoring on autonomy, combat, wisdom, and tragedy shows Princess Iron Fan highest overall (tragedy 75); the Seventh Spider Sister is the youngest yet the most tragic (70); the collectors score very high on wisdom but very low on tragedy (15–25).</li>
+  </ul>
+</section>
+
+<!-- Section 2: Force-Directed Graph -->
+<section class="section" id="force">
+  <h2 class="section-title alt">II · Force-Directed Graph of the Female Demon Group</h2>
+  <div class="section-sub">FORCE-DIRECTED GRAPH: 17 NODES × 32 EDGES</div>
+  <div class="definition">
+    <strong>Definition:</strong> The force-directed graph takes 17 nodes (seven Spider Sisters + seven lone demons + three collectors) as vertices and 32 links as relations. Links fall into four types: sisterly bond (within the seven Spider Sisters), rival co-wives (Princess Iron Fan – Jade-Faced Fox), neighboring kin (geographically adjacent female demons), and recruitment (female deity → female demon). Node color marks group type (Spider Demon / Loner Demon / Collector), node size reflects degree, and link thickness reflects relationship strength.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Force-Directed Graph of the Female Demon Group (17 nodes · 32 links · draggable)</div>
+    <div class="chart-caption">Node color: group type · node size = degree · link color = relation type · link thickness = strength · hover for details</div>
+    <svg id="chart-force" class="chart-svg" width="100%" height="680"></svg>
+    <div class="legend-row" id="force-legend"></div>
+  </div>
+</section>
+
+<!-- Section 3: Sankey Diagram -->
+<section class="section" id="sankey">
+  <h2 class="section-title alt-2">III · Sankey Diagram of the Female Demons’ Fates</h2>
+  <div class="section-sub">SANKEY: 14 MONSTERS × EXECUTORS × FATE TYPES</div>
+  <div class="definition">
+    <strong>Definition:</strong> The Sankey diagram shows three layers of flow: 14 female demons → fate executors → outcome types. The executors fall into six kinds: Sun Wukong, Zhu Bajie, the Pleiades Star Lord (son of Pilanpo), the Taiyin Star Lord, Li the Pagoda-Bearer, and self-cultivation; the outcomes are grouped into four types: destroyed, returned, recruited, and cultivated. Flow thickness reflects the number of female demons. It reveals the narrative rule that destruction dominates the female demons’ fate, with returned/recruited/cultivated making up only 21.4%.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Three-Layer Sankey: Female Demon – Executor – Outcome</div>
+    <div class="chart-caption">Left to right: 14 female demons → 6 executors → 4 outcome types · flow = demon count · hover to highlight paths</div>
+    <svg id="chart-sankey" class="chart-svg" width="100%" height="640"></svg>
+    <div class="legend-row" id="sankey-legend"></div>
+  </div>
+</section>
+
+<!-- Section 4: Radar Chart -->
+<section class="section" id="radar">
+  <h2 class="section-title">IV · Four-Dimension Radar Chart of the Female Demons</h2>
+  <div class="section-sub">RADAR: AUTONOMY × COMBAT × WISDOM × TRAGEDY</div>
+  <div class="definition">
+    <strong>Definition:</strong> Each female figure (including the collectors) is assessed on four dimensions: autonomy (capacity for independent action and decision), combat (martial and magical strength), wisdom (stratagem and adaptability), and tragedy (degree of misfortune). The larger the radar area, the more pronounced the overall profile. Princess Iron Fan is the most balanced and highly tragic; the Scorpion Demon is the strongest in combat (88); Bodhisattva Guanyin has the highest wisdom (98) and the lowest tragedy (15).
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Four-Dimension Radar Chart of 17 Female Figures (Autonomy / Combat / Wisdom / Tragedy)</div>
+    <div class="chart-caption">17 figures × 4 dimensions · values 0–100 · hover for details</div>
+    <svg id="chart-radar" class="chart-svg" width="100%" height="620"></svg>
+    <div class="legend-row" id="radar-legend"></div>
+  </div>
+</section>
+
+<!-- Section 5: Timeline -->
+<section class="section" id="timeline">
+  <h2 class="section-title alt">V · Timeline of the Female Demons’ Appearances and Fates</h2>
+  <div class="section-sub">TIMELINE: APPEARANCE × FATE BY CHAPTER</div>
+  <div class="definition">
+    <strong>Definition:</strong> The appearances and fates of the 14 female demons are arranged by chapter. The earliest appearance is the White Bone Demon (Chapter 27) and the latest the Jade Rabbit Demon (Chapter 95), a span of 68 chapters. Node size reflects the four-dimension composite score, and color distinguishes group type. It reveals the distribution density of female demons across the pilgrimage — dense in the middle and late sections (Chapters 55–95), while the early section (Chapters 27–60) is dominated by lone demons.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Timeline of the Female Demons’ Appearances and Fates</div>
+    <div class="chart-caption">X axis: chapter · node size = composite score · color = group type · hover for fate</div>
+    <svg id="chart-timeline" class="chart-svg" width="100%" height="540"></svg>
+    <div class="legend-row" id="timeline-legend"></div>
+  </div>
+</section>
+
+<!-- Section 6: Summary Table -->
+<section class="section" id="summary">
+  <h2 class="section-title alt-2">VI · Complete Summary Table of 17 Nodes</h2>
+  <div class="section-sub">SUMMARY: 17 NODES COMPLETE TABLE</div>
+  <div class="definition">
+    <strong>Definition:</strong> Summarizes the complete data of the 17 nodes (seven Spider Sisters + seven lone demons + three collectors) — group type, chapter, dwelling, fate, four-dimension scores, and composite score. The header is clickable for sorting. It corresponds to the full knowledge network of W181 Monster Female Network, continuing the W179 Spider Sisters collection and the W173 feminist-narratology topic.
+  </div>
+  <div class="chart-block">
+    <div class="chart-title">Complete Summary Table of 17 Nodes (click header to sort)</div>
+    <div class="chart-caption">17 nodes × 10 fields · click header to sort · hover to highlight</div>
+    <div id="summary-table-wrap"></div>
+  </div>
+</section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/monster-female-network.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+</div>
+
+<script>
+// ============================================================
+// EMBEDDED DATA — Monster Female Network (W181)
+// Sources: W179 Spider Sisters collection + W173 feminist narratology + Journey to the West text
+// ============================================================
+const EMBEDDED_DATA = {
+  monsterFemale: {
+    // 17 nodes: seven Spider Sisters (7) + seven lone demons (7) + three collectors (3)
+    nodes: [
+      // Seven Spider Sisters (7 nodes · Chapters 72-73 · Pansi Cave)
+      { id: "sp1", name: "Eldest Spider Sister", type: "spider", color: "#8B0000", chapter: 72, dwelling: "Pansi Cave", fate: "Destroyed by Sun Wukong", autonomy: 70, combat: 65, wisdom: 75, tragedy: 60, profile: "Eldest of the seven Spider Sisters, mistress of Pansi Cave, leading her sisters" },
+      { id: "sp2", name: "Second Spider Sister", type: "spider", color: "#A52A2A", chapter: 72, dwelling: "Pansi Cave", fate: "Destroyed by Sun Wukong", autonomy: 60, combat: 60, wisdom: 65, tragedy: 65, profile: "Second Spider Sister, right behind the eldest" },
+      { id: "sp3", name: "Third Spider Sister", type: "spider", color: "#B22222", chapter: 72, dwelling: "Pansi Cave", fate: "Destroyed by Sun Wukong", autonomy: 65, combat: 62, wisdom: 68, tragedy: 62, profile: "Third Spider Sister, the mediator among them" },
+      { id: "sp4", name: "Fourth Spider Sister", type: "spider", color: "#CD5C5C", chapter: 72, dwelling: "Pansi Cave", fate: "Destroyed by Sun Wukong", autonomy: 58, combat: 58, wisdom: 62, tragedy: 63, profile: "Fourth Spider Sister" },
+      { id: "sp5", name: "Fifth Spider Sister", type: "spider", color: "#DC143C", chapter: 72, dwelling: "Pansi Cave", fate: "Destroyed by Sun Wukong", autonomy: 55, combat: 55, wisdom: 60, tragedy: 65, profile: "Fifth Spider Sister" },
+      { id: "sp6", name: "Sixth Spider Sister", type: "spider", color: "#FF6347", chapter: 72, dwelling: "Pansi Cave", fate: "Destroyed by Sun Wukong", autonomy: 52, combat: 52, wisdom: 58, tragedy: 68, profile: "Sixth Spider Sister" },
+      { id: "sp7", name: "Seventh Spider Sister", type: "spider", color: "#FF7F50", chapter: 72, dwelling: "Pansi Cave", fate: "Destroyed by Sun Wukong", autonomy: 48, combat: 48, wisdom: 55, tragedy: 70, profile: "Seventh Spider Sister, the youngest and most tragic" },
+      // Other female demons (7 nodes · scattered across the journey)
+      { id: "bg", name: "White Bone Demon", type: "loner", color: "#A9A9A9", chapter: 27, dwelling: "White Tiger Ridge", fate: "Destroyed by Sun Wukong", autonomy: 78, combat: 60, wisdom: 82, tragedy: 50, profile: "Lady White Bone, defeated in the 'three strikes' episode, disguised as three households" },
+      { id: "xz", name: "Scorpion Demon", type: "loner", color: "#800080", chapter: 55, dwelling: "Pipa Cave, Poison-Foe Mountain", fate: "Destroyed by the Pleiades Star Lord", autonomy: 85, combat: 88, wisdom: 72, tragedy: 65, profile: "Mistress of Pipa Cave, whose venomous sting once wounded the Tathagata Buddha" },
+      { id: "ts", name: "Princess Iron Fan", type: "loner", color: "#5a3828", chapter: 59, dwelling: "Plantain Cave, Emerald Cloud Mountain", fate: "Returned to the righteous path", autonomy: 90, combat: 80, wisdom: 85, tragedy: 75, profile: "Wife of the Bull Demon King, mother of Red Boy, wielder of the Plantain Fan" },
+      { id: "ym", name: "Jade-Faced Fox", type: "loner", color: "#FFC0CB", chapter: 60, dwelling: "Moyun Cave", fate: "Destroyed by Zhu Bajie", autonomy: 55, combat: 50, wisdom: 60, tragedy: 75, profile: "Daughter of the Ten-Thousand-Year Fox King, concubine of the Bull Demon King" },
+      { id: "xx", name: "Apricot Fairy", type: "loner", color: "#FFB6C1", chapter: 64, dwelling: "Wood Immortals' Hermitage, Thorn Ridge", fate: "Destroyed by Zhu Bajie", autonomy: 70, combat: 45, wisdom: 68, tragedy: 80, profile: "An apricot tree turned fairy, refined and amorous, versed in poetry with the spirits of the Wood Immortals' Hermitage" },
+      { id: "ls", name: "Rat Demon", type: "loner", color: "#696969", chapter: 82, dwelling: "Bottomless Cave, Hollow Mountain", fate: "Recruited by Heaven", autonomy: 82, combat: 72, wisdom: 80, tragedy: 60, profile: "The gold-nosed white-haired Rat Demon, sworn daughter of Li the Pagoda-Bearer" },
+      { id: "yt", name: "Jade Rabbit Demon", type: "loner", color: "#DAA520", chapter: 95, dwelling: "Tianzhu (India)", fate: "Returned to the Moon Palace", autonomy: 75, combat: 70, wisdom: 78, tragedy: 55, profile: "The Jade Rabbit of the Moon Palace, descended to earth disguised as a Tianzhu princess seeking a husband" },
+      // Collectors (3 nodes · female deities)
+      { id: "plp", name: "Bodhisattva Pilanpo", type: "collector", color: "#D2691E", chapter: 73, dwelling: "Thousand-Flower Cave, Purple Cloud Mountain", fate: "Collector", autonomy: 95, combat: 85, wisdom: 92, tragedy: 20, profile: "Subdued the Hundred-Eye Demon Lord (the Centipede Demon); mother of the Pleiades Star Lord" },
+      { id: "gy", name: "Bodhisattva Guanyin", type: "collector", color: "#BC8F8F", chapter: 0, dwelling: "Mount Potalaka, South Sea", fate: "Collector", autonomy: 98, combat: 90, wisdom: 98, tragedy: 15, profile: "Guanyin of the South Sea, protector of the scripture-seeking pilgrims" },
+      { id: "lsL", name: "Old Mother of Lishan", type: "collector", color: "#A0522D", chapter: 23, dwelling: "Mount Li", fate: "Collector", autonomy: 96, combat: 82, wisdom: 95, tragedy: 25, profile: "Old Mother of Lishan, once disguised as mother and daughters to test the pilgrims' Zen hearts" }
+    ],
+    // 32 links: sisterly bond + rival co-wives + neighboring kin + recruitment
+    links: [
+      // Sisterly bond chain among the Spider Sisters (6)
+      { source: "sp1", target: "sp2", type: "Sisterly Bond", strength: 90 },
+      { source: "sp2", target: "sp3", type: "Sisterly Bond", strength: 90 },
+      { source: "sp3", target: "sp4", type: "Sisterly Bond", strength: 90 },
+      { source: "sp4", target: "sp5", type: "Sisterly Bond", strength: 90 },
+      { source: "sp5", target: "sp6", type: "Sisterly Bond", strength: 90 },
+      { source: "sp6", target: "sp7", type: "Sisterly Bond", strength: 90 },
+      // Eldest Spider Sister's leadership (3)
+      { source: "sp1", target: "sp3", type: "Leadership", strength: 75 },
+      { source: "sp1", target: "sp5", type: "Leadership", strength: 70 },
+      { source: "sp1", target: "sp7", type: "Leadership", strength: 65 },
+      // Cross-links among the Spider Sisters (2)
+      { source: "sp3", target: "sp5", type: "Sisterly Bond", strength: 80 },
+      { source: "sp5", target: "sp7", type: "Sisterly Bond", strength: 75 },
+      // Among the female demons (7)
+      { source: "ts", target: "ym", type: "Rival Co-Wives", strength: 85 },
+      { source: "sp1", target: "xz", type: "Neighboring Kin", strength: 65 },
+      { source: "ts", target: "sp1", type: "Demoness Exemplar", strength: 60 },
+      { source: "yt", target: "sp7", type: "Moon-Spider Silk", strength: 55 },
+      { source: "ls", target: "xz", type: "Cave Neighbors", strength: 60 },
+      { source: "bg", target: "xx", type: "Minor Demons Alike", strength: 50 },
+      { source: "ts", target: "xx", type: "Refined Kin", strength: 55 },
+      // Collectors → female demons (7)
+      { source: "plp", target: "xz", type: "Recruitment Link", strength: 80 },
+      { source: "plp", target: "sp1", type: "Subjugation Link", strength: 75 },
+      { source: "gy", target: "ls", type: "Heavenly Referral", strength: 85 },
+      { source: "gy", target: "sp7", type: "Enlightenment", strength: 70 },
+      { source: "gy", target: "yt", type: "Moon Palace Mediation", strength: 75 },
+      { source: "lsL", target: "sp3", type: "Guidance", strength: 65 },
+      { source: "lsL", target: "ts", type: "Guidance", strength: 70 },
+      // Among the collectors (3)
+      { source: "plp", target: "gy", type: "Bodhisattva Companions", strength: 70 },
+      { source: "gy", target: "lsL", type: "Bodhisattva Companions", strength: 75 },
+      { source: "plp", target: "lsL", type: "Bodhisattva Companions", strength: 65 },
+      // Supplementary links (4)
+      { source: "ym", target: "xz", type: "Venomous Neighbors", strength: 55 },
+      { source: "yt", target: "xx", type: "Immortal Kin", strength: 60 },
+      { source: "bg", target: "yt", type: "Shape-Shifting Kin", strength: 50 },
+      { source: "gy", target: "sp4", type: "Enlightenment", strength: 60 }
+    ],
+    // Sankey data: female demon → executor → fate type
+    sankey: [
+      // Female demon → executor (14)
+      { source: "Eldest Spider Sister", target: "Sun Wukong", value: 1 },
+      { source: "Second Spider Sister", target: "Sun Wukong", value: 1 },
+      { source: "Third Spider Sister", target: "Sun Wukong", value: 1 },
+      { source: "Fourth Spider Sister", target: "Sun Wukong", value: 1 },
+      { source: "Fifth Spider Sister", target: "Sun Wukong", value: 1 },
+      { source: "Sixth Spider Sister", target: "Sun Wukong", value: 1 },
+      { source: "Seventh Spider Sister", target: "Sun Wukong", value: 1 },
+      { source: "White Bone Demon", target: "Sun Wukong", value: 1 },
+      { source: "Scorpion Demon", target: "Pleiades Star Lord", value: 1 },
+      { source: "Apricot Fairy", target: "Zhu Bajie", value: 1 },
+      { source: "Jade-Faced Fox", target: "Zhu Bajie", value: 1 },
+      { source: "Jade Rabbit Demon", target: "Taiyin Star Lord", value: 1 },
+      { source: "Rat Demon", target: "Li the Pagoda-Bearer", value: 1 },
+      { source: "Princess Iron Fan", target: "Self-Cultivation", value: 1 },
+      // Executor → fate type (6)
+      { source: "Sun Wukong", target: "Destroyed", value: 8 },
+      { source: "Zhu Bajie", target: "Destroyed", value: 2 },
+      { source: "Pleiades Star Lord", target: "Destroyed", value: 1 },
+      { source: "Taiyin Star Lord", target: "Returned", value: 1 },
+      { source: "Li the Pagoda-Bearer", target: "Recruited", value: 1 },
+      { source: "Self-Cultivation", target: "Cultivation", value: 1 }
+    ],
+    // Radar data (17 roles × 4 dimensions, 0-100)
+    radar: [
+      { name: "Eldest Spider Sister", autonomy: 70, combat: 65, wisdom: 75, tragedy: 60 },
+      { name: "Second Spider Sister", autonomy: 60, combat: 60, wisdom: 65, tragedy: 65 },
+      { name: "Third Spider Sister", autonomy: 65, combat: 62, wisdom: 68, tragedy: 62 },
+      { name: "Fourth Spider Sister", autonomy: 58, combat: 58, wisdom: 62, tragedy: 63 },
+      { name: "Fifth Spider Sister", autonomy: 55, combat: 55, wisdom: 60, tragedy: 65 },
+      { name: "Sixth Spider Sister", autonomy: 52, combat: 52, wisdom: 58, tragedy: 68 },
+      { name: "Seventh Spider Sister", autonomy: 48, combat: 48, wisdom: 55, tragedy: 70 },
+      { name: "White Bone Demon", autonomy: 78, combat: 60, wisdom: 82, tragedy: 50 },
+      { name: "Scorpion Demon", autonomy: 85, combat: 88, wisdom: 72, tragedy: 65 },
+      { name: "Princess Iron Fan", autonomy: 90, combat: 80, wisdom: 85, tragedy: 75 },
+      { name: "Jade-Faced Fox", autonomy: 55, combat: 50, wisdom: 60, tragedy: 75 },
+      { name: "Apricot Fairy", autonomy: 70, combat: 45, wisdom: 68, tragedy: 80 },
+      { name: "Rat Demon", autonomy: 82, combat: 72, wisdom: 80, tragedy: 60 },
+      { name: "Jade Rabbit Demon", autonomy: 75, combat: 70, wisdom: 78, tragedy: 55 },
+      { name: "Bodhisattva Pilanpo", autonomy: 95, combat: 85, wisdom: 92, tragedy: 20 },
+      { name: "Bodhisattva Guanyin", autonomy: 98, combat: 90, wisdom: 98, tragedy: 15 },
+      { name: "Old Mother of Lishan", autonomy: 96, combat: 82, wisdom: 95, tragedy: 25 }
+    ],
+    // Timeline data (14 female demons by chapter, excluding collectors)
+    timeline: [
+      { name: "White Bone Demon", chapter: 27, chapterName: "Chapter 27", fate: "Sun Wukong's three strikes", groupType: "Loner Demon", color: "#A9A9A9", score: 67 },
+      { name: "Scorpion Demon", chapter: 55, chapterName: "Chapter 55", fate: "Destroyed by the Pleiades Star Lord", groupType: "Loner Demon", color: "#800080", score: 78 },
+      { name: "Princess Iron Fan", chapter: 59, chapterName: "Chapter 59", fate: "Returned to the righteous path", groupType: "Loner Demon", color: "#5a3828", score: 82 },
+      { name: "Jade-Faced Fox", chapter: 60, chapterName: "Chapter 60", fate: "Destroyed by Zhu Bajie", groupType: "Loner Demon", color: "#FFC0CB", score: 60 },
+      { name: "Apricot Fairy", chapter: 64, chapterName: "Chapter 64", fate: "Destroyed by Zhu Bajie", groupType: "Loner Demon", color: "#FFB6C1", score: 66 },
+      { name: "Eldest Spider Sister", chapter: 72, chapterName: "Chapter 72", fate: "Destroyed by Sun Wukong", groupType: "Spider Demon", color: "#8B0000", score: 67 },
+      { name: "Second Spider Sister", chapter: 72, chapterName: "Chapter 72", fate: "Destroyed by Sun Wukong", groupType: "Spider Demon", color: "#A52A2A", score: 62 },
+      { name: "Third Spider Sister", chapter: 72, chapterName: "Chapter 72", fate: "Destroyed by Sun Wukong", groupType: "Spider Demon", color: "#B22222", score: 64 },
+      { name: "Fourth Spider Sister", chapter: 72, chapterName: "Chapter 72", fate: "Destroyed by Sun Wukong", groupType: "Spider Demon", color: "#CD5C5C", score: 60 },
+      { name: "Fifth Spider Sister", chapter: 72, chapterName: "Chapter 72", fate: "Destroyed by Sun Wukong", groupType: "Spider Demon", color: "#DC143C", score: 59 },
+      { name: "Sixth Spider Sister", chapter: 72, chapterName: "Chapter 72", fate: "Destroyed by Sun Wukong", groupType: "Spider Demon", color: "#FF6347", score: 57 },
+      { name: "Seventh Spider Sister", chapter: 72, chapterName: "Chapter 72", fate: "Destroyed by Sun Wukong", groupType: "Spider Demon", color: "#FF7F50", score: 55 },
+      { name: "Rat Demon", chapter: 82, chapterName: "Chapter 82", fate: "Recruited by Heaven", groupType: "Loner Demon", color: "#696969", score: 73 },
+      { name: "Jade Rabbit Demon", chapter: 95, chapterName: "Chapter 95", fate: "Returned to the Moon Palace", groupType: "Loner Demon", color: "#DAA520", score: 70 }
+    ]
+  }
+};
+
+// ============================================================
+// F6 skeleton: fetchJson → loadData → main → renderXxx × N → cache → resize
+// ============================================================
+const fetchStatus = { anyFetched: false };
+
+async function fetchJson(path, fallbackKey) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error('fetch failed: ' + path);
+    fetchStatus.anyFetched = true;
+    return await response.json();
+  } catch (e) {
+    console.warn('[W181] using embedded data (' + fallbackKey + '): ', e.message);
+    return EMBEDDED_DATA[fallbackKey];
+  }
+}
+
+async function loadData() {
+  const base = '../../scripts/output/data/';
+  const mf = await fetchJson(base + 'monster-female-network.json', 'monsterFemale');
+  const data = mf.monsterFemale || mf;
+  return {
+    nodes: data.nodes || EMBEDDED_DATA.monsterFemale.nodes,
+    network: { nodes: data.nodes || EMBEDDED_DATA.monsterFemale.nodes, links: data.links || EMBEDDED_DATA.monsterFemale.links },
+    sankey: data.sankey || EMBEDDED_DATA.monsterFemale.sankey,
+    radar: data.radar || EMBEDDED_DATA.monsterFemale.radar,
+    timeline: data.timeline || EMBEDDED_DATA.monsterFemale.timeline
+  };
+}
+
+// Relation type color lookup
+const RELATION_COLORS = {
+  'Sisterly Bond': '#8B0000',
+  'Leadership': '#A52A2A',
+  'Rival Co-Wives': '#5a3828',
+  'Neighboring Kin': '#6b4226',
+  'Demoness Exemplar': '#8B4513',
+  'Moon-Spider Silk': '#DAA520',
+  'Cave Neighbors': '#696969',
+  'Minor Demons Alike': '#A9A9A9',
+  'Refined Kin': '#FFB6C1',
+  'Recruitment Link': '#D2691E',
+  'Subjugation Link': '#D2691E',
+  'Heavenly Referral': '#BC8F8F',
+  'Enlightenment': '#A0522D',
+  'Moon Palace Mediation': '#DAA520',
+  'Guidance': '#A0522D',
+  'Bodhisattva Companions': '#8a7a5a',
+  'Venomous Neighbors': '#800080',
+  'Immortal Kin': '#FFC0CB',
+  'Shape-Shifting Kin': '#A9A9A9'
+};
+
+function relationColor(type) {
+  return RELATION_COLORS[type] || '#8a7a5a';
+}
+
+// ============================================================
+// Section 2: Force-directed graph
+// ============================================================
+function renderForce(networkData) {
+  const svg = d3.select('#chart-force');
+  svg.selectAll('*').remove();
+  if (!networkData || !networkData.nodes || networkData.nodes.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 340).attr('fill', '#8a7a5a').text('No data available');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 680;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  // Deep-copy nodes to avoid mutation
+  const nodes = networkData.nodes.map(d => ({ ...d }));
+  const links = networkData.links.map(d => ({ ...d }));
+
+  function nodeRadius(d) {
+    if (d.type === 'collector') return 18;
+    if (d.type === 'spider') return 13;
+    return 14; // lone demon nodes
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  const sim = d3.forceSimulation(nodes).alphaDecay(0.08).velocityDecay(0.5)
+    .force('link', d3.forceLink(links).id(d => d.id)
+      .distance(d => {
+        if (d.type === 'Bodhisattva Companions') return 200;
+        if (d.type === 'Sisterly Bond' || d.type === 'Leadership') return 70;
+        if (d.type === 'Recruitment Link' || d.type === 'Subjugation Link' || d.type === 'Heavenly Referral' || d.type === 'Enlightenment' || d.type === 'Moon Palace Mediation' || d.type === 'Guidance') return 160;
+        return 130;
+      })
+      .strength(d => {
+        if (d.type === 'Sisterly Bond') return 0.8;
+        if (d.type === 'Leadership') return 0.5;
+        if (d.type === 'Bodhisattva Companions') return 0.2;
+        return 0.4;
+      }))
+    .force('charge', d3.forceManyBody().strength(d => d.type === 'collector' ? -600 : (d.type === 'spider' ? -200 : -350)))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 24));
+
+  // Sisterly/leadership links (solid)
+    // Performance: links drawn on a Canvas overlay to avoid per-frame N×4 geometry writes triggering SVG reflow
+  var _svgEl = svg.node();
+  var _lcParent = _svgEl.parentNode;
+  if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
+  if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas'); if (_oc) _oc.remove(); }
+  var _dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var _lcW = _svgEl.clientWidth || 800, _lcH = _svgEl.clientHeight || 540;
+  var _vb = (_svgEl.getAttribute('viewBox') || '').split(/[\s,]+/);
+  var _cw = (_vb.length === 4) ? (+_vb[2]) : (+_svgEl.getAttribute('width') || _lcW);
+  var _ch = (_vb.length === 4) ? (+_vb[3]) : (+_svgEl.getAttribute('height') || _lcH);
+  var linkCanvas = document.createElement('canvas');
+  linkCanvas.className = 'link-canvas';
+  linkCanvas.width = Math.round(_lcW * _dpr);
+  linkCanvas.height = Math.round(_lcH * _dpr);
+  linkCanvas.style.cssText = 'position:absolute;pointer-events:none;z-index:0;left:' + _svgEl.offsetLeft + 'px;top:' + _svgEl.offsetTop + 'px;width:' + _lcW + 'px;height:' + _lcH + 'px;';
+  if (_lcParent) _lcParent.insertBefore(linkCanvas, _svgEl);
+  _svgEl.style.position = 'relative';
+  _svgEl.style.zIndex = '1';
+  var lctx = linkCanvas.getContext('2d');
+  lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
+  var linkSels = [];
+  function drawLinks() {
+    lctx.clearRect(0, 0, _cw, _ch);
+    for (var s = 0; s < linkSels.length; s++) {
+      var sel = linkSels[s], data = sel.data(), lines = sel.nodes();
+      for (var i = 0; i < data.length; i++) {
+        var d = data[i], el = lines[i];
+        if (!d || !d.source || d.source.x == null) continue;
+        lctx.beginPath();
+        lctx.moveTo(d.source.x, d.source.y);
+        lctx.lineTo(d.target.x, d.target.y);
+        lctx.strokeStyle = el.getAttribute('stroke') || '#bbb';
+        lctx.lineWidth = parseFloat(el.getAttribute('stroke-width')) || 1;
+        var so = el.getAttribute('stroke-opacity'); if (so == null) so = el.getAttribute('opacity');
+        lctx.globalAlpha = parseFloat(so != null ? so : '1') || 1;
+        var da = el.getAttribute('stroke-dasharray');
+        lctx.setLineDash(da && da !== 'none' && da !== '0' ? da.split(',').map(Number) : []);
+        lctx.stroke();
+      }
+    }
+    lctx.setLineDash([]);
+    lctx.globalAlpha = 1;
+  }
+const kinshipLink = svg.append('g').selectAll('.kin-link')
+    .data(links.filter(l => l.type === 'Sisterly Bond' || l.type === 'Leadership'))
+    .enter().append('line')
+    .attr('class', 'kin-link')
+    .attr('stroke', d => relationColor(d.type))
+    .attr('stroke-width', d => 1 + (d.strength || 50) / 40)
+    .attr('stroke-opacity', 0.6); kinshipLink.style('display','none'); linkSels.push(kinshipLink);
+
+  // Rival/neighbor links (medium solid)
+  const rivalLink = svg.append('g').selectAll('.rival-link')
+    .data(links.filter(l => ['Rival Co-Wives', 'Neighboring Kin', 'Demoness Exemplar', 'Moon-Spider Silk', 'Cave Neighbors', 'Minor Demons Alike', 'Refined Kin', 'Venomous Neighbors', 'Immortal Kin', 'Shape-Shifting Kin'].includes(l.type)))
+    .enter().append('line')
+    .attr('class', 'rival-link')
+    .attr('stroke', d => relationColor(d.type))
+    .attr('stroke-width', d => 1 + (d.strength || 50) / 60)
+    .attr('stroke-opacity', 0.45); rivalLink.style('display','none'); linkSels.push(rivalLink);
+
+  // Recruitment links (dashed)
+  const tamingLink = svg.append('g').selectAll('.taming-link')
+    .data(links.filter(l => ['Recruitment Link', 'Subjugation Link', 'Heavenly Referral', 'Enlightenment', 'Moon Palace Mediation', 'Guidance', 'Bodhisattva Companions'].includes(l.type)))
+    .enter().append('line')
+    .attr('class', 'taming-link')
+    .attr('stroke', d => relationColor(d.type))
+    .attr('stroke-width', d => 1 + (d.strength || 50) / 60)
+    .attr('stroke-opacity', 0.55)
+    .attr('stroke-dasharray', '5,3'); tamingLink.style('display','none'); linkSels.push(tamingLink);
+
+  const node = svg.append('g').selectAll('circle')
+    .data(nodes)
+    .enter().append('circle')
+    .attr('class', 'node-circle')
+    .attr('r', nodeRadius)
+    .attr('fill', d => d.color)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      const typeLabel = d.type === 'spider' ? 'Spider Demons' : (d.type === 'loner' ? 'Loner Demons' : 'Collectors');
+      tooltip.append('div').text('Group: ' + typeLabel);
+      if (d.chapter) tooltip.append('div').text('Chapter: ' + d.chapter);
+      tooltip.append('div').text('Dwelling: ' + (d.dwelling || '—'));
+      tooltip.append('div').text('Fate: ' + (d.fate || '—'));
+      if (d.profile) tooltip.append('div').text('Profile: ' + d.profile);
+      const connected = links.filter(l =>
+        (l.source.id || l.source) === d.id || (l.target.id || l.target) === d.id
+      );
+      tooltip.append('div').text('Links: ' + connected.length);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // Dragging
+  node.call(d3.drag()
+    .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+  );
+
+  const label = svg.append('g').selectAll('text')
+    .data(nodes)
+    .enter().append('text')
+    .attr('class', 'node-label')
+    .attr('text-anchor', 'middle')
+    .attr('dy', d => d.type === 'collector' ? 4 : -22)
+    .attr('font-weight', d => d.type === 'collector' ? 700 : 500)
+    .attr('font-size', d => d.type === 'collector' ? 13 : 11)
+    .attr('fill', d => d.type === 'collector' ? '#1a1410' : '#5a3828')
+    .text(d => d.name);
+
+  sim.on('tick', () => {
+    drawLinks();;
+    drawLinks();;
+    drawLinks();;
+    node.attr('transform', d => `translate(${d.x},${d.y})`);
+    label.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+
+  // Legend
+  const legend = d3.select('#force-legend');
+  legend.html('');
+  const legendItems = [
+    { label: 'Spider Demons (7 sisters)', color: '#8B0000' },
+    { label: 'Loner Demons (7 nodes)', color: '#5a3828' },
+    { label: 'Collectors (female deities)', color: '#D2691E' },
+    { label: 'Sisterly bond / leadership (solid)', color: '#8B0000' },
+    { label: 'Rival / neighbor relations (solid)', color: '#6b4226' },
+    { label: 'Recruitment / enlightenment (dashed)', color: '#D2691E', dashed: true }
+  ];
+  legendItems.forEach(item => {
+    const li = legend.append('div').attr('class', 'legend-item');
+    li.append('div').attr('class', 'legend-swatch')
+      .each(function() { d3.select(this).style('background', item.color).style('border', item.dashed ? '2px dashed #8a7a5a' : 'none'); });
+    li.append('span').text(item.label);
+  });
+}
+
+// ============================================================
+// Section 3: Sankey diagram
+// ============================================================
+function buildSankeyGraph(linkData) {
+  // Three layers: female demon (0) / executor (1) / fate type (2)
+  const monsterNames = EMBEDDED_DATA.monsterFemale.nodes
+    .filter(n => n.type !== 'collector')
+    .map(n => n.name);
+  const executorNames = new Set();
+  const fateNames = new Set();
+  linkData.forEach(l => {
+    if (monsterNames.includes(l.source)) executorNames.add(l.target);
+  });
+  linkData.forEach(l => {
+    if (executorNames.has(l.source)) fateNames.add(l.target);
+  });
+  const sources = new Set(linkData.map(l => l.source));
+  const nodeMap = new Map();
+  linkData.forEach(l => {
+    if (!nodeMap.has(l.source)) {
+      const cat = monsterNames.includes(l.source) ? 0 : 1;
+      nodeMap.set(l.source, { name: l.source, cat });
+    }
+    if (!nodeMap.has(l.target)) {
+      const cat = sources.has(l.target) ? 1 : 2;
+      nodeMap.set(l.target, { name: l.target, cat });
+    }
+  });
+  return {
+    nodes: Array.from(nodeMap.values()),
+    links: linkData.map(l => ({ source: l.source, target: l.target, value: l.value }))
+  };
+}
+
+function renderSankey(sankeyLinkData) {
+  const svg = d3.select('#chart-sankey');
+  svg.selectAll('*').remove();
+  if (!sankeyLinkData || sankeyLinkData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 320).attr('fill', '#8a7a5a').text('No data available');
+    return;
+  }
+  if (typeof d3.sankey === 'undefined') {
+    svg.append('text').attr('x', 200).attr('y', 320).attr('fill', '#8b4513')
+      .text('d3-sankey not loaded; please check ../static/js/d3-sankey.min.js');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 640;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+
+  // Node colors: demons by individual color, executors neutral, outcomes by fate type
+  const monsterColors = {};
+  EMBEDDED_DATA.monsterFemale.nodes.forEach(n => { monsterColors[n.name] = n.color; });
+  const executorColors = {
+    'Sun Wukong': '#8B4513',
+    'Zhu Bajie': '#CD853F',
+    'Pleiades Star Lord': '#D2691E',
+    'Taiyin Star Lord': '#DAA520',
+    'Li the Pagoda-Bearer': '#6b4226',
+    'Self-Cultivation': '#8a7a5a'
+  };
+  const fateColors = {
+    'Destroyed': '#8b0000',
+    'Returned': '#DAA520',
+    'Recruited': '#6b4226',
+    'Cultivation': '#8B4513'
+  };
+  const catColors = ['#5a3828', '#8B4513', '#D2691E'];
+
+  function nodeColor(d) {
+    if (d.cat === 0) return monsterColors[d.name] || catColors[0];
+    if (d.cat === 1) return executorColors[d.name] || catColors[1];
+    return fateColors[d.name] || catColors[2];
+  }
+
+  const graphData = buildSankeyGraph(sankeyLinkData);
+  const nodes = graphData.nodes.map(d => ({ ...d }));
+  const links = graphData.links.map(d => ({ ...d }));
+
+  const sankeyGen = d3.sankey()
+    .nodeId(d => d.name)
+    .nodeWidth(16)
+    .nodePadding(8)
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+
+  const graph = sankeyGen({ nodes, links });
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // Links
+  svg.append('g').selectAll('path')
+    .data(graph.links)
+    .enter().append('path')
+    .attr('d', d3.sankeyLinkHorizontal())
+    .attr('fill', 'none')
+    .attr('stroke', d => nodeColor(d.source))
+    .attr('stroke-width', d => Math.max(2, d.width))
+    .attr('stroke-opacity', 0.4)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke-opacity', 0.75);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
+      tooltip.append('div').text('Flow: ' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-opacity', 0.4);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // Nodes
+  const node = svg.append('g').selectAll('g')
+    .data(graph.nodes)
+    .enter().append('g')
+    .style('cursor', 'pointer');
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('width', d => Math.max(1, d.x1 - d.x0))
+    .attr('height', d => Math.max(1, d.y1 - d.y0))
+    .attr('fill', nodeColor)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      const catLabel = ['Female Demons', 'Executors', 'Fate Types'][d.cat] || '';
+      tooltip.append('div').text('Level: ' + catLabel);
+      tooltip.append('div').text('Inflow: ' + (d.targetLinks || []).length + ' · Outflow: ' + (d.sourceLinks || []).length);
+      tooltip.append('div').text('Total flow: ' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // Node labels
+  node.append('text')
+    .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+    .attr('font-size', '11px')
+    .attr('fill', '#1a1410')
+    .text(d => d.name);
+
+  // Legend
+  const legend = d3.select('#sankey-legend');
+  legend.html('');
+  const layers = ['Female Demons (14)', 'Executors (6 types)', 'Fate Types (4 types)'];
+  layers.forEach((layer, i) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', catColors[i]); });
+    item.append('span').text(layer);
+  });
+}
+
+// ============================================================
+// Section 4: Radar chart (17 roles × 4 dimensions)
+// ============================================================
+function renderRadar(radarData) {
+  const svg = d3.select('#chart-radar');
+  svg.selectAll('*').remove();
+  if (!radarData || radarData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 310).attr('fill', '#8a7a5a').text('No data available');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 620;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const dimensions = [
+    { key: 'autonomy', label: 'Autonomy' },
+    { key: 'combat', label: 'Combat' },
+    { key: 'wisdom', label: 'Wisdom' },
+    { key: 'tragedy', label: 'Tragedy' }
+  ];
+  const roleColors = {};
+  EMBEDDED_DATA.monsterFemale.nodes.forEach(n => { roleColors[n.name] = n.color; });
+
+  const cx = width / 2;
+  const cy = height / 2 + 10;
+  const radius = Math.min(width, height) / 2 - 110;
+  const levels = 5;
+
+  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+
+  // Background concentric polygons
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    });
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', 'none')
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
+  }
+
+  // Axes + labels
+  dimensions.forEach((dim, i) => {
+    const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+    gBg.append('line')
+      .attr('x1', 0).attr('y1', 0)
+      .attr('x2', Math.cos(angle) * radius)
+      .attr('y2', Math.sin(angle) * radius)
+      .attr('stroke', '#d4c5a9')
+      .attr('stroke-width', 1);
+    const labelR = radius + 32;
+    gBg.append('text')
+      .attr('x', Math.cos(angle) * labelR)
+      .attr('y', Math.sin(angle) * labelR)
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('font-size', '14px')
+      .attr('font-weight', '600')
+      .attr('fill', '#1a1410')
+      .text(dim.label);
+  });
+
+  // Numeric scale
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const r = radius * lvl / levels;
+    gBg.append('text')
+      .attr('x', -6).attr('y', -r)
+      .attr('text-anchor', 'end')
+      .attr('font-size', '10px')
+      .attr('fill', '#8a7a5a')
+      .text(lvl * 20);
+  }
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // One polygon per role
+  radarData.forEach(role => {
+    const points = dimensions.map((dim, i) => {
+      const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
+      const rr = radius * (role[dim.key] / 100);
+      return [Math.cos(angle) * rr, Math.sin(angle) * rr];
+    });
+    const color = roleColors[role.name] || '#8b4513';
+
+    gBg.append('polygon')
+      .attr('points', points.map(p => p.join(',')).join(' '))
+      .attr('fill', color)
+      .attr('fill-opacity', 0.08)
+      .attr('stroke', color)
+      .attr('stroke-width', 1.8)
+      .style('cursor', 'pointer')
+      .on('mouseover', function(e) {
+        d3.select(this).attr('fill-opacity', 0.3);
+        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.html('');
+        tooltip.append('div').html('<strong>' + role.name + '</strong>');
+        dimensions.forEach(dim => {
+          tooltip.append('div').text(dim.label + ': ' + role[dim.key]);
+        });
+        const total = dimensions.reduce((sum, dim) => sum + role[dim.key], 0);
+        tooltip.append('div').text('Composite score: ' + Math.round(total / 4));
+      })
+      .on('mousemove', function(e) {
+        tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('fill-opacity', 0.08);
+        tooltip.transition().duration(400).style('opacity', 0);
+      });
+
+    // Vertex circles
+    points.forEach((p) => {
+      gBg.append('circle')
+        .attr('cx', p[0]).attr('cy', p[1])
+        .attr('r', 3)
+        .attr('fill', color)
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 1);
+    });
+  });
+
+  // Legend (grouped)
+  const legend = d3.select('#radar-legend');
+  legend.html('');
+  const groups = [
+    { label: 'Spider Demons (7 sisters)', color: '#8B0000' },
+    { label: 'Loner Demons (7 nodes)', color: '#5a3828' },
+    { label: 'Collectors (3 deities)', color: '#D2691E' }
+  ];
+  groups.forEach(g => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', g.color); });
+    item.append('span').text(g.label);
+  });
+}
+
+// ============================================================
+// Section 5: Timeline
+// ============================================================
+function renderTimeline(timelineData) {
+  const svg = d3.select('#chart-timeline');
+  svg.selectAll('*').remove();
+  if (!timelineData || timelineData.length === 0) {
+    svg.append('text').attr('x', 200).attr('y', 270).attr('fill', '#8a7a5a').text('No data available');
+    return;
+  }
+
+  const width = +svg.node().clientWidth || 800;
+  const height = 540;
+  svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+  const margin = { top: 50, right: 50, bottom: 100, left: 70 };
+  const innerW = width - margin.left - margin.right;
+  const innerH = height - margin.top - margin.bottom;
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  // X axis: chapter
+  const sorted = timelineData.slice().sort((a, b) => a.chapter - b.chapter);
+  const chapterMin = d3.min(sorted, d => d.chapter);
+  const chapterMax = d3.max(sorted, d => d.chapter);
+  const xScale = d3.scaleLinear()
+    .domain([chapterMin - 5, chapterMax + 5])
+    .range([0, innerW]);
+
+  // Y axis: composite score
+  const yScale = d3.scaleLinear()
+    .domain([0, 100])
+    .range([innerH, 0]);
+
+  const tooltip = d3.select('body').selectAll('.tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
+    : d3.select('.tooltip');
+
+  // Background grid
+  g.append('g')
+    .attr('class', 'grid')
+    .call(d3.axisLeft(yScale).tickSize(-innerW).tickFormat('').ticks(5))
+    .selectAll('line').attr('stroke', '#d4c5a9').attr('stroke-dasharray', '3,3').attr('opacity', 0.4);
+  g.select('.grid .domain').attr('stroke', 'none');
+
+  // Main timeline (horizontal)
+  g.append('line')
+    .attr('x1', 0).attr('y1', innerH)
+    .attr('x2', innerW).attr('y2', innerH)
+    .attr('stroke', '#8b4513')
+    .attr('stroke-width', 2);
+
+  // Nodes
+  g.selectAll('.text-node')
+    .data(sorted)
+    .enter()
+    .append('circle')
+    .attr('class', 'text-node')
+    .attr('cx', d => xScale(d.chapter))
+    .attr('cy', d => yScale(d.score))
+    .attr('r', d => 6 + d.score / 14)
+    .attr('fill', d => d.color)
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 2.5)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
+      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.name + '</strong>');
+      tooltip.append('div').text('Appearance: ' + d.chapterName);
+      tooltip.append('div').text('Type: ' + d.groupType);
+      tooltip.append('div').text('Fate: ' + d.fate);
+      tooltip.append('div').text('Composite score: ' + d.score);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2.5);
+      tooltip.transition().duration(400).style('opacity', 0);
+    });
+
+  // Node labels
+  g.selectAll('.text-label')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'text-label')
+    .attr('x', d => xScale(d.chapter))
+    .attr('y', d => yScale(d.score) - 18)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '10px')
+    .attr('font-weight', '600')
+    .attr('fill', d => d.color)
+    .text(d => d.name);
+
+  // Chapter labels (below X axis)
+  g.selectAll('.chapter-label')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'chapter-label')
+    .attr('x', d => xScale(d.chapter))
+    .attr('y', innerH + 24)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '9px')
+    .attr('fill', '#5a3828')
+    .text(d => 'Ch. ' + d.chapter);
+
+  // Fate labels (second row below nodes)
+  g.selectAll('.fate-label')
+    .data(sorted)
+    .enter()
+    .append('text')
+    .attr('class', 'fate-label')
+    .attr('x', d => xScale(d.chapter))
+    .attr('y', innerH + 40)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '8px')
+    .attr('fill', '#8a7a5a')
+    .text(d => d.fate);
+
+  // X axis
+  g.append('g')
+    .attr('transform', `translate(0,${innerH})`)
+    .call(d3.axisBottom(xScale).ticks(8).tickFormat(d => 'Ch. ' + d))
+    .selectAll('text').attr('font-size', '10px');
+
+  // Y axis
+  g.append('g')
+    .call(d3.axisLeft(yScale).ticks(5).tickFormat(d => d))
+    .selectAll('text').attr('font-size', '10px');
+
+  // Axis titles
+  g.append('text')
+    .attr('x', innerW / 2).attr('y', innerH + 80)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a5a')
+    .text('Chapters (Ch. 27 \u2013 Ch. 95, spanning 68 chapters)');
+  g.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -innerH / 2).attr('y', -50)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('fill', '#8a7a5a')
+    .text('Four-dimension composite score (0\u2013100)');
+
+  // Legend
+  const legend = d3.select('#timeline-legend');
+  legend.html('');
+  const typeGroups = {};
+  timelineData.forEach(d => { typeGroups[d.groupType] = d.color; });
+  Object.entries(typeGroups).forEach(([type, color]) => {
+    const item = legend.append('div').attr('class', 'legend-item');
+    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', color); });
+    item.append('span').text(type);
+  });
+}
+
+// ============================================================
+// Section 6: Summary table
+// ============================================================
+let summarySortState = { key: null, asc: true };
+
+function renderSummary(nodes) {
+  const wrap = d3.select('#summary-table-wrap');
+  wrap.html('');
+  if (!nodes || nodes.length === 0) {
+    wrap.append('div').attr('class', 'empty-state').text('No data available');
+    return;
+  }
+
+  // Compute composite score
+  const rows = nodes.map(n => {
+    const total = (n.autonomy || 0) + (n.combat || 0) + (n.wisdom || 0) + (n.tragedy || 0);
+    return {
+      ...n,
+      composite: Math.round(total / 4)
+    };
+  });
+
+  const columns = [
+    { key: 'name', label: 'Name' },
+    { key: 'type', label: 'Group' },
+    { key: 'chapter', label: 'Chapter' },
+    { key: 'dwelling', label: 'Dwelling' },
+    { key: 'fate', label: 'Fate' },
+    { key: 'autonomy', label: 'Autonomy' },
+    { key: 'combat', label: 'Combat' },
+    { key: 'wisdom', label: 'Wisdom' },
+    { key: 'tragedy', label: 'Tragedy' },
+    { key: 'composite', label: 'Composite' }
+  ];
+
+  const typeLabel = { spider: 'Spider Demons', loner: 'Loner Demons', collector: 'Collectors' };
+
+  const table = wrap.append('table').attr('class', 'summary-table');
+  const thead = table.append('thead').append('tr');
+  columns.forEach(col => {
+    thead.append('th')
+      .text(col.label)
+      .attr('role', 'button')
+      .attr('tabindex', '0')
+      .on('click', function() { sortSummary(col.key); })
+      .on('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sortSummary(col.key); }
+      });
+  });
+  const tbody = table.append('tbody');
+
+  function drawRows(data) {
+    tbody.html('');
+    const trs = tbody.selectAll('tr')
+      .data(data)
+      .enter()
+      .append('tr')
+      .attr('role', 'row')
+      .attr('tabindex', '0');
+
+    trs.each(function(d) {
+      const tr = d3.select(this);
+      const td1 = tr.append('td');
+      td1.append('span').attr('class', 'type-dot').each(function() { d3.select(this).style('background', d.color); });
+      td1.append('span').text(d.name);
+      tr.append('td').text(typeLabel[d.type] || d.type);
+      tr.append('td').text(d.chapter ? 'Ch. ' + d.chapter : '—');
+      tr.append('td').text(d.dwelling || '—');
+      tr.append('td').text(d.fate || '—');
+      tr.append('td').text(d.autonomy);
+      tr.append('td').text(d.combat);
+      tr.append('td').text(d.wisdom);
+      tr.append('td').text(d.tragedy);
+      const tdLast = tr.append('td');
+      tdLast.append('strong').text(d.composite);
+    });
+  }
+
+  window.sortSummary = function(key) {
+    if (summarySortState.key === key) {
+      summarySortState.asc = !summarySortState.asc;
+    } else {
+      summarySortState.key = key;
+      summarySortState.asc = true;
+    }
+    const sorted = rows.slice().sort((a, b) => {
+      const va = a[key], vb = b[key];
+      if (typeof va === 'number' && typeof vb === 'number') {
+        return summarySortState.asc ? va - vb : vb - va;
+      }
+      return summarySortState.asc
+        ? String(va).localeCompare(String(vb), 'en')
+        : String(vb).localeCompare(String(va), 'en');
+    });
+    drawRows(sorted);
+  };
+
+  drawRows(rows);
+}
+
+// ============================================================
+// main: dispatch all render functions
+// ============================================================
+async function main() {
+  const data = await loadData();
+  window.__lastData = data;
+
+  if (fetchStatus.anyFetched) {
+    document.getElementById('dataSource').innerHTML =
+      'Data source: loaded live from <code>scripts/output/data/</code> (http server mode)';
+  }
+
+  renderForce(data.network);
+  renderSankey(data.sankey);
+  renderRadar(data.radar);
+  renderTimeline(data.timeline);
+  renderSummary(data.nodes);
+}
+
+// Responsive redraw (debounce 250ms)
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    if (window.__lastData) {
+      const data = window.__lastData;
+      renderForce(data.network);
+      renderSankey(data.sankey);
+      renderRadar(data.radar);
+      renderTimeline(data.timeline);
+      renderSummary(data.nodes);
+    }
+  }, 250);
+});
+
+// Boot
+main();
+
+</script>
+<script id="audit-labelavoid">
+(function(){
+  function avoid(){
+    document.querySelectorAll("svg").forEach(function(svg){
+      var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){var r=t.getBoundingClientRect();return r.width>0&&r.height>0;});
+      var R=ts.map(function(t){return t.getBoundingClientRect();});
+      for(var i=0;i<ts.length;i++)for(var j=i+1;j<ts.length;j++){
+        var a=R[i],b=R[j];
+        var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+        var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+        if(ix*iy<=0)continue;
+        var area=Math.min(a.width*a.height,b.width*b.height);
+        if(area>0 && (ix*iy)/area>0.5){
+          var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+          if(hide.style.display!=="none") hide.style.display="none";
+        }
+      }
+    });
+  }
+  window.__avoidOverlap=avoid;
+  function run(){try{avoid();}catch(e){}}
+  window.addEventListener("load",function(){
+    [3000,6000,9000,12000].forEach(function(ms){setTimeout(run,ms);});
+  });
+})();
+</script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+<script id="audit-contentavoid">
+(function(){
+  var SKIP=/(tick|legend|title|axis|domain|cell|tooltip|axisfix|dark-halo|subtitle|grid|background|heat-col-label|heat-row-label)/i;
+  function fix(){
+    try{
+      // 1) 热力图列标签旋转 -42°（保留可见）
+      document.querySelectorAll('svg text.heat-col-label').forEach(function(t){
+        var x=+t.getAttribute('x')||0, y=+t.getAttribute('y')||0;
+        t.setAttribute('transform','rotate(-42 '+x+' '+y+')');
+        t.setAttribute('text-anchor','end');
+      });
+      // 2) 其余文字重叠：隐藏较小者 + 补 title
+      document.querySelectorAll('svg').forEach(function(svg){
+        var texts=[].slice.call(svg.querySelectorAll('text')).filter(function(t){
+          var c=t.getAttribute('class')||'';
+          if(SKIP.test(c)) return false;
+          var b=t.getBBox(); return b.width>0 && b.height>0;
+        });
+        for(var i=0;i<texts.length;i++){
+          for(var j=i+1;j<texts.length;j++){
+            var a=texts[i],b=texts[j];
+            var ra=a.getBBox(),rb=b.getBBox();
+            var ix=Math.max(0,Math.min(ra.x+ra.width,rb.x+rb.width)-Math.max(ra.x,rb.x));
+            var iy=Math.max(0,Math.min(ra.y+ra.height,rb.y+rb.height)-Math.max(ra.y,rb.y));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(), tb=(b.textContent||'').trim();
+            if(ta===tb){ // 完全重复：隐藏其一
+              if(a.style.display!=='none'){ a.setAttribute('data-cavoid','1'); if(!a.getAttribute('title')) a.setAttribute('title',ta); a.style.display='none'; }
+              continue;
+            }
+            var hide=(ra.width*ra.height<=rb.width*rb.height)?a:b;
+            var keep=(hide===a)?b:a;
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-cavoid','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000,14000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run(); else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
