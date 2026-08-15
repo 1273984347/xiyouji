@@ -8,6 +8,14 @@
 
 ---
 
+## W438 英文站续译 batch16（2026-08-14·v2.3.53）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/hardship-difficulty-heatmap.html / aesthetics.html / magic-system.html / visual-art.html / guanyin-six-roles-network.html | W438 | v2.3.53 新增·并行 subagent 英文化 5 页（_validate_en.py 全过） |
+| site/sitemap.xml | W438 | v2.3.53 修改·补 5 个 en 页（197→202 页） |
+| site/**/*.html（5 页） | W438 | v2.3.53 修改·generate_csp.py 重生成 CSP（207 页·988 内联哈希） |
+
 ## W437 英文站续译 batch15（2026-08-14·v2.3.52）
 
 | 文件 | W | 说明 |

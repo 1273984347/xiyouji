@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-sgrZdsiI+gMD6RJSIKy4SUR9zAEtV93+LqvGYI/j8Vo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Eighty-One Hardships Multi-Dimensional Difficulty Heatmap · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        .notice {
+            background: #fff8e7; border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        }
+        
+        
+        .kpi-card .num { font-size: 2em; font-weight: bold; color: var(--accent); line-height: 1.2; }
+        
+        .kpi-card .detail { color: var(--ink-soft); font-size: 0.78em; margin-top: 4px; }
+        
+        .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
+        .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
+        .skip-link {
+            position: absolute; top: -40px; left: 0; background: var(--accent-2);
+            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 4px 0; transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        
+        .dim-switcher { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .dim-btn {
+            padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
+            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.9em;
+            font-family: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .dim-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .dim-btn:hover { background: var(--accent-soft); }
+        .dim-btn.active:hover { background: var(--accent); }
+        .heatmap-wrap { position: relative; overflow-x: auto; }
+        #heatmap-svg { display: block; min-width: 980px; }
+        .heat-cell { transition: opacity 0.2s; cursor: pointer; }
+        .heat-cell:hover { opacity: 0.72; }
+        .heat-tip {
+            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
+            color: #f5e9d4; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem;
+            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 320px;
+        }
+        .heat-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
+        .heat-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
+        .heat-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
+        .legend-bar { display: flex; align-items: center; gap: 12px; margin-top: 16px; font-size: 0.82em; color: var(--ink-soft); flex-wrap: wrap; }
+        .legend-block { display: flex; align-items: center; gap: 4px; }
+        .legend-swatch { width: 18px; height: 14px; border-radius: 2px; display: inline-block; }
+        .matrix-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
+        .matrix-legend .ml-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
+        .matrix-legend .ml-swatch { width: 14px; height: 14px; border-radius: 2px; }
+        .insight-box {
+            background: #fffdf8; border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+        }
+        .insight-box strong { color: var(--accent); font-weight: 700; }
+        .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
+        .dim-stat-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.88em; }
+        .dim-stat-table th, .dim-stat-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
+        .dim-stat-table th { background: #fff8e7; color: var(--accent-3); font-weight: 600; }
+        .dim-stat-table td.num { text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--accent); }
+        .stat-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 900px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+        .stat-card { border: 1px solid var(--line); border-radius: 6px; padding: 14px; background: #fffdf8; }
+        .stat-card h3 { font-size: 0.98em; margin-bottom: 8px; color: var(--ink); }
+        .stat-card svg { width: 100%; height: 220px; display: block; }
+        
+        
+        @media (prefers-reduced-motion: reduce) {  }
+        @media (max-width: 480px) {
+            
+            
+            
+            .dim-btn { padding: 6px 12px; font-size: 0.82em; }
+        }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/hardship-difficulty-heatmap.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Eighty-One Hardships Multi-Dimensional Difficulty Heatmap</p>
+        <p class="kicker">Data Visualization</p>
+        <h1>Eighty-One Hardships Multi-Dimensional Difficulty Heatmap</h1>
+        <p class="subtitle">D2A+ · Battle Duration / Rescue Count / Treasure Use / Difficulty Level — four-dimension matrix deepening</p>
+        <p class="tagline">— On top of the original difficulty score, four difficulty dimensions are layered to render a "terrain map" of how each of the 81 trials is hard.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Site Home</a>
+            <span class="sep">›</span>
+            <a href="dashboard.html">Dashboard</a>
+            <span class="sep">›</span>
+            <span>Eighty-One Hardships Multi-Dimensional Difficulty Heatmap</span>
+        </nav>
+        <div class="notice" role="note">
+            <strong>Four-Dimension Legend</strong>:
+            <span class="mono">Battle Duration</span> (Short: resolved in one chapter / Mid: spans 2-3 chapters / Long: spans 4+ chapters) ·
+            <span class="mono">Rescue Count</span> (0 = Wukong alone / 1 = one rescue call / 2 = two / 3+ = three or more) ·
+            <span class="mono">Treasure Use</span> (None / borrowed divine treasure / self-made or owned treasure) ·
+            <span class="mono">Difficulty Level</span> (Easy 1-3 / Mid 4-6 / Hard 7-8 / Extreme 9-10).
+        </div>
+
+        <!-- Block 1: KPI overview -->
+        <section class="kpi-row" aria-label="Difficulty Overview">
+            <div class="kpi-card">
+                <div class="num">81</div>
+                <div class="label">Total Hardships</div>
+                <div class="detail">Prequel 4 + Pilgrimage 77</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">8</div>
+                <div class="label">Extreme Hardships (9-10 pts)</div>
+                <div class="detail">9.9% · concentrated at Lion-Camel Ridge / Gold Helmet Mountain / Mount Hao</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">47</div>
+                <div class="label">Total Rescue Calls</div>
+                <div class="detail">Incl. 38 rescues + 9 treasure borrows</div>
+            </div>
+            <div class="kpi-card">
+                <div class="num">5.5</div>
+                <div class="label">Average Difficulty Score</div>
+                <div class="detail">Upper-mid · std dev 2.2</div>
+            </div>
+        </section>
+
+        <!-- Block 2: main matrix heatmap (81 hardships × 4 dimensions) -->
+        <section class="section" aria-labelledby="sec-matrix">
+            <h2 id="sec-matrix">① 81 Hardships × 4 Dimensions Matrix Heatmap</h2>
+            <p>The X axis shows the 81 hardships (in chapter order, from prequel 1-4 through Chapter 100); the Y axis shows the four difficulty dimensions. Each cell's color encodes the intensity of that dimension's value. Click a dimension button to switch the view; hover a cell to see that hardship's details.</p>
+            <div class="dim-switcher" role="tablist" aria-label="Dimension Switcher">
+                <button class="dim-btn active" role="tab" aria-selected="true" data-dim="level">Difficulty Level</button>
+                <button class="dim-btn" role="tab" aria-selected="false" data-dim="duration">Battle Duration</button>
+                <button class="dim-btn" role="tab" aria-selected="false" data-dim="rescue">Rescue Count</button>
+                <button class="dim-btn" role="tab" aria-selected="false" data-dim="treasure">Treasure Use</button>
+            </div>
+            <div class="heatmap-wrap">
+                <svg id="heatmap-svg" width="100%" height="460" role="img" aria-labelledby="hm-title hm-desc">
+                    <title id="hm-title">81 Hardships Multi-Dimensional Heatmap Matrix</title>
+                    <desc id="hm-desc">X axis: 81 hardships; Y axis: 4 dimensions; color depth indicates intensity.</desc>
+                </svg>
+                <div class="heat-tip" id="heat-tip" role="tooltip"></div>
+            </div>
+            <div class="matrix-legend" id="matrix-legend" aria-label="Dimension Value Legend"></div>
+        </section>
+
+        <!-- Block 3: dimension statistics -->
+        <section class="section" aria-labelledby="sec-stat">
+            <h2 id="sec-stat">② Four-Dimension Distribution Statistics</h2>
+            <p>Distribution of the 81 hardships across the four dimensions. Note that "Rescue Count" and "Difficulty Level" are tightly coupled, while "Battle Duration" is polarized (mostly Short/Long, fewer in the middle).</p>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <h3>Difficulty Level Distribution</h3>
+                    <svg id="stat-level-svg"></svg>
+                </div>
+                <div class="stat-card">
+                    <h3>Battle Duration Distribution</h3>
+                    <svg id="stat-duration-svg"></svg>
+                </div>
+                <div class="stat-card">
+                    <h3>Rescue Count Distribution</h3>
+                    <svg id="stat-rescue-svg"></svg>
+                </div>
+                <div class="stat-card">
+                    <h3>Treasure Use Distribution</h3>
+                    <svg id="stat-treasure-svg"></svg>
+                </div>
+            </div>
+            <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+            <table class="dim-stat-table" aria-label="Dimension Cross Statistics">
+                <thead>
+                    <tr><th>Difficulty Level</th><th>Count</th><th>Avg. Battle Duration</th><th>Avg. Rescue Count</th><th>Treasure Use Rate</th><th>Representative Hardship</th></tr>
+                </thead>
+                <tbody id="cross-table-body"></tbody>
+            </table>
+            </div>
+        </section>
+
+        <!-- Block 4: cross-dimensional insights -->
+        <section class="section" aria-labelledby="sec-insight">
+            <h2 id="sec-insight">③ Four-Dimension Cross Insights</h2>
+            <div class="insight-box">
+                <span class="ib-tag">[Coupling]</span>
+                <strong>Rescue Count and Difficulty Level are tightly coupled</strong>. Among the 8 extreme hardships, 7 have a rescue count ≥ 2, while 21 of the 24 easy hardships have a rescue count of 0. "Calling for backup" is the most direct proxy for difficulty — whether a trial can be resolved independently sets the ceiling on its difficulty.
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Polarization]</span>
+                <strong>Battle Duration is polarized</strong>. Short (resolved in one chapter) accounts for 41 hardships (50.6%), Long (4+ chapters) for 18 (22.2%), with only 22 in the middle. This echoes the "opening-development-turn-conclusion" structure of Ming chapter novels — key plotlines unfold over many chapters, while transitional episodes pass in a single chapter.
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Treasure]</span>
+                <strong>Borrowed divine treasures cluster in the extreme tier</strong>. Of the 9 borrows, 6 occur in the 9-10 extreme tier — Princess Iron Fan's banana-leaf fan requires Lingji Bodhisattva's Wind-Fixing Pill, and the Green Ox Demon requires the Tathāgata's hint about the Diamond Bracelet's origin. Borrowing a treasure is essentially "the gods and Buddhas intervening indirectly."
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Exception]</span>
+                <strong>Thrice-Beating the White-Bone Demon (Ch. 27) is a counterexample of "low rescue, high difficulty"</strong>. Difficulty 6 but rescue count 0 — the White-Bone Demon has no backing and Wukong resolves it alone, yet the "master-disciple infighting" inner-demon dimension is extremely high, forming a classic "easy to defeat, hard to pass" inner-demon trial.
+            </div>
+            <div class="insight-box">
+                <span class="ib-tag">[Peak]</span>
+                <strong>The three Lion-Camel Ridge demons (Ch. 74) top all four dimensions</strong>. Difficulty 10 / Long duration / 3+ rescues / borrowed treasure — this is the novel's only "all-four-peak" trial. The Buddha personally leads the five hundred Arhats to subdue the Roc, marking the absolute limit of celestial mobilization against a pilgrimage trial.
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/hardship-difficulty-heatmap.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // EMBEDDED_DATA: multi-dimensional data for the 81 hardships
+    // Fields: n/name/chapter/chNum/score/stage/duration(short/mid/long)/rescueCount(0/1/2/3)/treasure(none/borrow/self)/level(easy/mid/hard/extreme)/monster/rescuer
+    const EMBEDDED_DATA = [
+        {n:1, name:"Golden Cicada Demoted", chapter:"Prequel", chNum:0, score:3, stage:"pre", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"—", rescuer:"—"},
+        {n:2, name:"Killed at Birth", chapter:"Prequel", chNum:0, score:2, stage:"pre", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"—", rescuer:"—"},
+        {n:3, name:"Cast into the River at Full Moon", chapter:"Prequel", chNum:0, score:2, stage:"pre", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"—", rescuer:"—"},
+        {n:4, name:"Seeking Kin and Avenging Wrongs", chapter:"Prequel", chNum:0, score:3, stage:"pre", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"—", rescuer:"—"},
+        {n:5, name:"Tiger Outside the City", chapter:"Ch. 13", chNum:13, score:2, stage:"early", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"General Yin", rescuer:"—"},
+        {n:6, name:"Falling into the Pit", chapter:"Ch. 13", chNum:13, score:2, stage:"early", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"Bear Mountain Lord / Special Recluse", rescuer:"—"},
+        {n:7, name:"On the Double-Fork Ridge", chapter:"Ch. 13", chNum:13, score:2, stage:"early", duration:"short", rescueCount:1, treasure:"none", level:"easy", monster:"General Yin", rescuer:"Taibai Jinxing"},
+        {n:8, name:"At Two-World Mountain", chapter:"Ch. 14", chNum:14, score:3, stage:"early", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"the Six Robbers", rescuer:"—"},
+        {n:9, name:"Changing Horses at the Steep Ravine", chapter:"Ch. 15", chNum:15, score:3, stage:"early", duration:"short", rescueCount:1, treasure:"none", level:"easy", monster:"Western Sea Dragon Prince", rescuer:"Guanyin"},
+        {n:10, name:"Burned at Night", chapter:"Ch. 16", chNum:16, score:3, stage:"early", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"Black Bear Demon", rescuer:"—"},
+        {n:11, name:"Losing the Cassock", chapter:"Ch. 16", chNum:16, score:6, stage:"early", duration:"mid", rescueCount:2, treasure:"borrow", level:"mid", monster:"Black Bear Demon", rescuer:"Guanyin"},
+        {n:12, name:"Subduing Bajie", chapter:"Ch. 19", chNum:19, score:4, stage:"early", duration:"short", rescueCount:0, treasure:"self", level:"mid", monster:"Zhu Bajie", rescuer:"—"},
+        {n:13, name:"Blocked by the Yellow Wind Demon", chapter:"Ch. 21", chNum:21, score:6, stage:"early", duration:"mid", rescueCount:1, treasure:"borrow", level:"mid", monster:"Yellow Wind Demon", rescuer:"Lingji Bodhisattva"},
+        {n:14, name:"Petitioning Lingji", chapter:"Ch. 21", chNum:21, score:5, stage:"early", duration:"short", rescueCount:1, treasure:"none", level:"mid", monster:"Yellow Wind Demon", rescuer:"Lingji Bodhisattva"},
+        {n:15, name:"Crossing the Flowing Sands", chapter:"Ch. 22", chNum:22, score:4, stage:"early", duration:"short", rescueCount:1, treasure:"none", level:"mid", monster:"Sha Wujing", rescuer:"Guanyin"},
+        {n:16, name:"Gaining Sha Wujing", chapter:"Ch. 22", chNum:22, score:4, stage:"early", duration:"short", rescueCount:0, treasure:"none", level:"mid", monster:"Sha Wujing", rescuer:"—"},
+        {n:17, name:"The Four Sages Manifest", chapter:"Ch. 23", chNum:23, score:3, stage:"early", duration:"short", rescueCount:1, treasure:"none", level:"easy", monster:"the Four Sages' Manifestation", rescuer:"Guanyin and others"},
+        {n:18, name:"In Wuzhuang Monastery", chapter:"Ch. 24", chNum:24, score:7, stage:"mid", duration:"long", rescueCount:2, treasure:"borrow", level:"hard", monster:"Great Immortal Zhenyuan", rescuer:"Guanyin"},
+        {n:19, name:"Reviving the Ginseng Tree", chapter:"Ch. 26", chNum:26, score:7, stage:"mid", duration:"mid", rescueCount:1, treasure:"borrow", level:"hard", monster:"Great Immortal Zhenyuan", rescuer:"Guanyin"},
+        {n:20, name:"Banishing the Mind-Ape", chapter:"Ch. 27", chNum:27, score:6, stage:"mid", duration:"short", rescueCount:0, treasure:"none", level:"mid", monster:"White-Bone Demon", rescuer:"—"},
+        {n:21, name:"Separated in the Black Pine Forest", chapter:"Ch. 28", chNum:28, score:5, stage:"mid", duration:"short", rescueCount:0, treasure:"none", level:"mid", monster:"Yellow-Robe Demon", rescuer:"—"},
+        {n:22, name:"Delivering a Letter in Precious Elephant Kingdom", chapter:"Ch. 29", chNum:29, score:6, stage:"mid", duration:"mid", rescueCount:1, treasure:"none", level:"mid", monster:"Yellow-Robe Demon", rescuer:"Bajie / Sha Wujing"},
+        {n:23, name:"Turning into a Tiger at the Golden Hall", chapter:"Ch. 30", chNum:30, score:7, stage:"mid", duration:"mid", rescueCount:1, treasure:"none", level:"hard", monster:"Yellow-Robe Demon", rescuer:"Sun Wukong"},
+        {n:24, name:"Demons at Flat-Top Mountain", chapter:"Ch. 32", chNum:32, score:8, stage:"mid", duration:"long", rescueCount:2, treasure:"borrow", level:"hard", monster:"Gold Horn / Silver Horn Kings", rescuer:"Taishang Laojun"},
+        {n:25, name:"Worshipping the Buddha in the Crow-Cock Kingdom", chapter:"Ch. 36", chNum:36, score:6, stage:"mid", duration:"mid", rescueCount:1, treasure:"none", level:"mid", monster:"Green-Maned Lion", rescuer:"Manjushri"},
+        {n:26, name:"Transformed by the Demon", chapter:"Ch. 37", chNum:37, score:6, stage:"mid", duration:"short", rescueCount:1, treasure:"none", level:"mid", monster:"Green-Maned Lion", rescuer:"Manjushri"},
+        {n:27, name:"Demons at Mount Hao", chapter:"Ch. 40", chNum:40, score:9, stage:"mid", duration:"long", rescueCount:3, treasure:"borrow", level:"extreme", monster:"Red Boy", rescuer:"Guanyin"},
+        {n:28, name:"The Saintly Monk Seized by Wind", chapter:"Ch. 41", chNum:41, score:7, stage:"mid", duration:"mid", rescueCount:2, treasure:"self", level:"hard", monster:"Red Boy", rescuer:"Guanyin"},
+        {n:29, name:"The Mind-Ape Harmed", chapter:"Ch. 41", chNum:41, score:7, stage:"mid", duration:"short", rescueCount:1, treasure:"self", level:"hard", monster:"Red Boy", rescuer:"Guanyin"},
+        {n:30, name:"Petitioning the Sage to Subdue the Demon", chapter:"Ch. 42", chNum:42, score:8, stage:"mid", duration:"mid", rescueCount:1, treasure:"borrow", level:"hard", monster:"Red Boy", rescuer:"Guanyin"},
+        {n:31, name:"Sunk in the Black River", chapter:"Ch. 43", chNum:43, score:6, stage:"mid", duration:"short", rescueCount:1, treasure:"none", level:"mid", monster:"the Tuo Dragon", rescuer:"Western Sea Dragon Prince"},
+        {n:32, name:"Hauling at Chechi", chapter:"Ch. 44", chNum:44, score:5, stage:"mid", duration:"mid", rescueCount:0, treasure:"none", level:"mid", monster:"Tiger-Strength / Deer-Strength / Goat-Strength Immortals", rescuer:"—"},
+        {n:33, name:"The Great Gambling Contest", chapter:"Ch. 45", chNum:45, score:5, stage:"mid", duration:"short", rescueCount:0, treasure:"self", level:"mid", monster:"Tiger-Strength / Deer-Strength / Goat-Strength Immortals", rescuer:"—"},
+        {n:34, name:"Suppressing Daoism, Promoting Buddhism", chapter:"Ch. 46", chNum:46, score:5, stage:"mid", duration:"short", rescueCount:0, treasure:"none", level:"mid", monster:"Tiger-Strength / Deer-Strength / Goat-Strength Immortals", rescuer:"—"},
+        {n:35, name:"Great Floods on the Road", chapter:"Ch. 47", chNum:47, score:7, stage:"mid", duration:"mid", rescueCount:1, treasure:"none", level:"hard", monster:"King Inspiration", rescuer:"Guanyin"},
+        {n:36, name:"Falling into the Heavenly River", chapter:"Ch. 47", chNum:47, score:7, stage:"mid", duration:"short", rescueCount:1, treasure:"none", level:"hard", monster:"King Inspiration", rescuer:"Guanyin"},
+        {n:37, name:"Revealed in the Fish Basket", chapter:"Ch. 49", chNum:49, score:8, stage:"mid", duration:"mid", rescueCount:1, treasure:"borrow", level:"hard", monster:"King Inspiration", rescuer:"Guanyin"},
+        {n:38, name:"Demons at Gold Helmet Mountain", chapter:"Ch. 50", chNum:50, score:9, stage:"mid", duration:"long", rescueCount:3, treasure:"borrow", level:"extreme", monster:"Green Ox Demon", rescuer:"Tathāgata / Taishang Laojun"},
+        {n:39, name:"Unsubduable by All Heaven", chapter:"Ch. 52", chNum:52, score:9, stage:"mid", duration:"mid", rescueCount:3, treasure:"borrow", level:"extreme", monster:"Green Ox Demon", rescuer:"Taishang Laojun"},
+        {n:40, name:"Asking the Buddha for the Origin", chapter:"Ch. 52", chNum:52, score:8, stage:"mid", duration:"short", rescueCount:1, treasure:"none", level:"hard", monster:"Green Ox Demon", rescuer:"Tathāgata"},
+        {n:41, name:"Poisoned by the Water", chapter:"Ch. 53", chNum:53, score:6, stage:"mid", duration:"mid", rescueCount:1, treasure:"borrow", level:"mid", monster:"Immortal Ruyi", rescuer:"—"},
+        {n:42, name:"Detained by Marriage in the Western Liang Kingdom", chapter:"Ch. 54", chNum:54, score:4, stage:"mid", duration:"short", rescueCount:0, treasure:"none", level:"mid", monster:"the Woman Kingdom Queen", rescuer:"—"},
+        {n:43, name:"Suffering in the Pipa Cave", chapter:"Ch. 55", chNum:55, score:7, stage:"mid", duration:"mid", rescueCount:2, treasure:"borrow", level:"hard", monster:"Scorpion Demon", rescuer:"the Pleiades Star Officer"},
+        {n:44, name:"Banishing the Mind-Ape Again", chapter:"Ch. 57", chNum:57, score:7, stage:"mid", duration:"short", rescueCount:0, treasure:"none", level:"hard", monster:"Six-Eared Macaque", rescuer:"—"},
+        {n:45, name:"Telling the Macaques Apart", chapter:"Ch. 58", chNum:58, score:9, stage:"mid", duration:"long", rescueCount:3, treasure:"none", level:"extreme", monster:"Six-Eared Macaque", rescuer:"Tathāgata"},
+        {n:46, name:"Blocked at the Flaming Mountain", chapter:"Ch. 59", chNum:59, score:8, stage:"late", duration:"long", rescueCount:2, treasure:"borrow", level:"hard", monster:"Princess Iron Fan", rescuer:"Lingji Bodhisattva / Pagoda-Bearing Heavenly King"},
+        {n:47, name:"Seeking the Banana-Leaf Fan", chapter:"Ch. 59", chNum:59, score:7, stage:"late", duration:"mid", rescueCount:1, treasure:"borrow", level:"hard", monster:"Princess Iron Fan", rescuer:"Lingji Bodhisattva"},
+        {n:48, name:"Binding the Demon King", chapter:"Ch. 61", chNum:61, score:9, stage:"late", duration:"long", rescueCount:3, treasure:"borrow", level:"extreme", monster:"Bull Demon King", rescuer:"Nezha / Pagoda-Bearing Heavenly King"},
+        {n:49, name:"Sweeping the Pagoda in the Tournament City", chapter:"Ch. 62", chNum:62, score:5, stage:"late", duration:"mid", rescueCount:1, treasure:"none", level:"mid", monster:"Nine-Headed Insect", rescuer:"Erlang Shen"},
+        {n:50, name:"Demons at the Precious Grove", chapter:"Ch. 65", chNum:65, score:7, stage:"late", duration:"mid", rescueCount:2, treasure:"none", level:"hard", monster:"Yellow-Browed King", rescuer:"Maitreya"},
+        {n:51, name:"Capturing the Saintly Monk", chapter:"Ch. 65", chNum:65, score:7, stage:"late", duration:"short", rescueCount:1, treasure:"none", level:"hard", monster:"Yellow-Browed King", rescuer:"Maitreya"},
+        {n:52, name:"The Rotten Persimmons of Seven-Peril Mountain", chapter:"Ch. 67", chNum:67, score:4, stage:"late", duration:"short", rescueCount:0, treasure:"self", level:"mid", monster:"Python Demon", rescuer:"—"},
+        {n:53, name:"Practicing Medicine in the Purple Kingdom", chapter:"Ch. 68", chNum:68, score:7, stage:"late", duration:"mid", rescueCount:1, treasure:"borrow", level:"hard", monster:"Sai Taisui", rescuer:"Guanyin"},
+        {n:54, name:"Saving the Ailing", chapter:"Ch. 71", chNum:71, score:7, stage:"late", duration:"short", rescueCount:1, treasure:"borrow", level:"hard", monster:"Sai Taisui", rescuer:"Guanyin"},
+        {n:55, name:"Subduing the Demon and Rescuing the Queen", chapter:"Ch. 71", chNum:71, score:7, stage:"late", duration:"short", rescueCount:1, treasure:"none", level:"hard", monster:"Sai Taisui", rescuer:"Guanyin"},
+        {n:56, name:"Bajie Loses His Wits", chapter:"Ch. 72", chNum:72, score:4, stage:"late", duration:"short", rescueCount:0, treasure:"none", level:"mid", monster:"Spider Demons", rescuer:"—"},
+        {n:57, name:"In the Silk-Cave", chapter:"Ch. 72", chNum:72, score:6, stage:"late", duration:"mid", rescueCount:1, treasure:"none", level:"mid", monster:"Spider Demons", rescuer:"Centipede Demon (Hundred-Eyes Demon Lord)"},
+        {n:58, name:"Bajie at the Bathing Spring", chapter:"Ch. 72", chNum:72, score:4, stage:"late", duration:"short", rescueCount:0, treasure:"none", level:"mid", monster:"Spider Demons", rescuer:"—"},
+        {n:59, name:"Expelling the Great Sage", chapter:"Ch. 76", chNum:76, score:7, stage:"late", duration:"short", rescueCount:0, treasure:"none", level:"hard", monster:"the Three Lion-Camel Demons", rescuer:"—"},
+        {n:60, name:"Blocked at Lion-Camel Ridge", chapter:"Ch. 74", chNum:74, score:10, stage:"late", duration:"long", rescueCount:3, treasure:"borrow", level:"extreme", monster:"Green Lion / White Elephant / Roc", rescuer:"Tathāgata"},
+        {n:61, name:"Dark Clouds over the City", chapter:"Ch. 75", chNum:75, score:9, stage:"late", duration:"mid", rescueCount:2, treasure:"borrow", level:"extreme", monster:"Golden-Winged Roc", rescuer:"Tathāgata"},
+        {n:62, name:"The Golden Turtle Soaring Aloft", chapter:"Ch. 75", chNum:75, score:9, stage:"late", duration:"mid", rescueCount:2, treasure:"borrow", level:"extreme", monster:"Golden-Winged Roc", rescuer:"Tathāgata"},
+        {n:63, name:"Saving the Children in Bhiksu", chapter:"Ch. 78", chNum:78, score:7, stage:"late", duration:"mid", rescueCount:1, treasure:"none", level:"hard", monster:"White Deer Demon", rescuer:"the Star of Longevity"},
+        {n:64, name:"Discerning the Evil Spirit", chapter:"Ch. 79", chNum:79, score:7, stage:"late", duration:"short", rescueCount:1, treasure:"none", level:"hard", monster:"White-Faced Fox", rescuer:"the Star of Longevity"},
+        {n:65, name:"Chasing the Rhinoceros", chapter:"Ch. 91", chNum:91, score:7, stage:"end", duration:"mid", rescueCount:2, treasure:"none", level:"hard", monster:"the Three Rhinoceros Demons", rescuer:"the Four Wood-Bird Stars"},
+        {n:66, name:"Encountering Marriage in India", chapter:"Ch. 93", chNum:93, score:5, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"mid", monster:"Jade Rabbit Demon", rescuer:"—"},
+        {n:67, name:"Imprisoned in the Copper Terrace Prefecture", chapter:"Ch. 97", chNum:97, score:4, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"mid", monster:"Diling County", rescuer:"—"},
+        {n:68, name:"Shedding the Mortal Body at the Cloud-Reaching Ferry", chapter:"Ch. 98", chNum:98, score:3, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"—", rescuer:"the Welcoming Buddha"},
+        {n:69, name:"Scriptures Obtained but Incomplete", chapter:"Ch. 98", chNum:98, score:4, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"mid", monster:"—", rescuer:"—"},
+        {n:70, name:"The Hanging Pearls", chapter:"Ch. 98", chNum:98, score:3, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"—", rescuer:"—"},
+        {n:71, name:"Taking Form in Separate Colors", chapter:"Ch. 99", chNum:99, score:3, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"—", rescuer:"—"},
+        {n:72, name:"Encountering Wild Beasts", chapter:"Ch. 99", chNum:99, score:3, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"—", rescuer:"—"},
+        {n:73, name:"Wind, Snow, and Bitter Ice", chapter:"Ch. 99", chNum:99, score:3, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"—", rescuer:"—"},
+        {n:74, name:"Falling into the Turtle's Den", chapter:"Ch. 99", chNum:99, score:4, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"mid", monster:"—", rescuer:"—"},
+        {n:75, name:"Haunted by Yin Demons", chapter:"Ch. 99", chNum:99, score:5, stage:"end", duration:"short", rescueCount:1, treasure:"none", level:"mid", monster:"Yin Demons", rescuer:"the Vajra Guardians"},
+        {n:76, name:"The Old Turtle Drops Them into the Water", chapter:"Ch. 99", chNum:99, score:4, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"mid", monster:"the Old Turtle", rescuer:"—"},
+        {n:77, name:"Scriptures Not Yet Complete", chapter:"Ch. 99", chNum:99, score:3, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"—", rescuer:"—"},
+        {n:78, name:"The Buddha's Land and Thunderclap Monastery", chapter:"Ch. 98", chNum:98, score:5, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"mid", monster:"—", rescuer:"—"},
+        {n:79, name:"Scriptures Spread Across the World", chapter:"Ch. 100", chNum:100, score:3, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"—", rescuer:"—"},
+        {n:80, name:"Returning from the Buddha's Land", chapter:"Ch. 100", chNum:100, score:3, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"—", rescuer:"—"},
+        {n:81, name:"The Five Sages Attain the Way", chapter:"Ch. 100", chNum:100, score:2, stage:"end", duration:"short", rescueCount:0, treasure:"none", level:"easy", monster:"—", rescuer:"—"}
+    ];
+
+    // Dimension configuration
+    const DIM_CONFIG = {
+        level: {
+            label: "Difficulty Level",
+            values: ["easy", "mid", "hard", "extreme"],
+            valueLabels: { easy: "Easy", mid: "Mid", hard: "Hard", extreme: "Extreme" },
+            colors: { easy: "#7a9c5a", mid: "#e9b885", hard: "#d98060", extreme: "#8c2a2a" }
+        },
+        duration: {
+            label: "Battle Duration",
+            values: ["short", "mid", "long"],
+            valueLabels: { short: "Short", mid: "Mid", long: "Long" },
+            colors: { short: "#a8c4a0", mid: "#e9b885", long: "#c8463a" }
+        },
+        rescue: {
+            label: "Rescue Count",
+            values: [0, 1, 2, 3],
+            valueLabels: { 0: "0", 1: "1", 2: "2", 3: "3+" },
+            colors: { 0: "#7a9c5a", 1: "#e9b885", 2: "#d98060", 3: "#8c2a2a" }
+        },
+        treasure: {
+            label: "Treasure Use",
+            values: ["none", "borrow", "self"],
+            valueLabels: { none: "None", borrow: "Borrowed", self: "Self-made" },
+            colors: { none: "#d4c4a8", borrow: "#c8463a", self: "#3a6b8c" }
+        }
+    };
+
+    const STAGE_LABEL = { pre: "Prequel", early: "Early", mid: "Middle", late: "Late", end: "Final" };
+    const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DUR = REDUCE_MOTION ? 0 : 600;
+
+    function dimValue(d, dim) {
+        return d[dim];
+    }
+
+    function dimColor(dim, val) {
+        return DIM_CONFIG[dim].colors[val] || "#d4c4a8";
+    }
+
+    // ========= Block 2: main matrix heatmap =========
+    let currentDim = "level";
+
+    function renderHeatmap(dim) {
+        const svg = d3.select("#heatmap-svg");
+        svg.selectAll("*").remove();
+
+        const wrap = document.getElementById("heatmap-svg");
+        const width = Math.max(980, wrap.clientWidth || 980);
+        const height = 460;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 60, right: 24, bottom: 60, left: 110 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // X axis: 81 hardships (in n order)
+        const xScale = d3.scaleBand()
+            .domain(EMBEDDED_DATA.map(d => d.n))
+            .range([0, innerW])
+            .padding(0.08);
+
+        // Y axis: 4 dimensions
+        const dims = ["level", "duration", "rescue", "treasure"];
+        const yScale = d3.scaleBand()
+            .domain(dims)
+            .range([0, innerH])
+            .padding(0.15);
+
+        // X axis labels (every 10 hardships + boundaries)
+        const xTicks = EMBEDDED_DATA.filter(d => d.n % 10 === 0 || d.n === 1 || d.n === 81).map(d => d.n);
+        g.append("g")
+            .attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(xScale).tickValues(xTicks).tickFormat(d => `#${d}`))
+            .selectAll("text")
+            .style("font-size", "0.7rem")
+            .style("fill", "#6B6455");
+
+        // Y axis labels
+        const yLabels = ["Difficulty Level", "Battle Duration", "Rescue Count", "Treasure Use"];
+        g.append("g")
+            .call(d3.axisLeft(yScale).tickFormat((d, i) => yLabels[i]))
+            .selectAll("text")
+            .style("font-size", "0.82rem")
+            .style("fill", "#23201A")
+            .style("font-weight", "600");
+
+        // Axis titles
+        g.append("text")
+            .attr("x", innerW / 2).attr("y", innerH + 44)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Eighty-One Hardships (in chapter order)");
+
+        g.append("text")
+            .attr("x", -innerH / 2).attr("y", -90)
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .style("font-size", "0.85rem").style("fill", "#C9A063")
+            .text("Difficulty Dimensions");
+
+        // Highlight the current dimension's row
+        g.append("rect")
+            .attr("x", -6).attr("y", yScale(dim))
+            .attr("width", innerW + 12).attr("height", yScale.bandwidth())
+            .attr("fill", "#fff8e7")
+            .attr("stroke", "#e9b885")
+            .attr("stroke-dasharray", "3,3")
+            .attr("opacity", 0.7);
+
+        const tip = d3.select("#heat-tip");
+        const cellW = xScale.bandwidth();
+        const cellH = yScale.bandwidth();
+
+        // Draw the 81×4 matrix
+        dims.forEach((d, di) => {
+            EMBEDDED_DATA.forEach((item, ni) => {
+                const val = dimValue(item, d);
+                const isCurrent = d === dim;
+                g.append("rect")
+                    .attr("class", "heat-cell")
+                    .attr("x", xScale(item.n))
+                    .attr("y", yScale(d))
+                    .attr("width", cellW)
+                    .attr("height", cellH)
+                    .attr("fill", dimColor(d, val))
+                    .attr("stroke", "#fff")
+                    .attr("stroke-width", 0.5)
+                    .style("opacity", 0)
+                    .on("mouseover", function(event) {
+                        d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 1.5);
+                        const valLabel = DIM_CONFIG[d].valueLabels[val] || val;
+                        tip.style("opacity", 1)
+                            .html(`<div class="tip-title">Hardship ${item.n} · ${item.name}</div>
+                                <div class="tip-row">Chapter: ${item.chapter} (${STAGE_LABEL[item.stage]})</div>
+                                <div class="tip-row">Monster/Opponent: <strong style="color:#e9b885">${item.monster}</strong></div>
+                                <div class="tip-row">Current dimension: <strong style="color:#e9b885">${DIM_CONFIG[d].label} = ${valLabel}</strong></div>
+                                <div class="tip-row">Difficulty score: <strong style="color:#e9b885">${item.score}/10</strong> · Level ${DIM_CONFIG.level.valueLabels[item.level]}</div>
+                                <div class="tip-row">Battle duration: ${DIM_CONFIG.duration.valueLabels[item.duration]} / ${item.rescueCount} rescues</div>
+                                <div class="tip-row">Treasure: ${DIM_CONFIG.treasure.valueLabels[item.treasure]}</div>
+                                <div class="tip-row">Rescuer: <strong style="color:#e9b885">${item.rescuer}</strong></div>
+                                <div class="tip-meta">Stage: ${STAGE_LABEL[item.stage]} · Composite ${item.score}/10</div>`);
+                    })
+                    .on("mousemove", function(event) {
+                        const rect = wrap.parentElement.getBoundingClientRect();
+                        tip.style("left", (event.clientX - rect.left + 14) + "px")
+                            .style("top", (event.clientY - rect.top + 14) + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this).attr("stroke", "#fff").attr("stroke-width", 0.5);
+                        tip.style("opacity", 0);
+                    })
+                    .transition()
+                    .duration(DUR)
+                    .delay((di * 30 + ni * 4))
+                    .style("opacity", isCurrent ? 0.92 : 0.45);
+            });
+        });
+
+        // Update the legend
+        renderMatrixLegend(dim);
+    }
+
+    function renderMatrixLegend(dim) {
+        const cfg = DIM_CONFIG[dim];
+        const legend = d3.select("#matrix-legend");
+        legend.selectAll("*").remove();
+        cfg.values.forEach(v => {
+            const item = legend.append("div").attr("class", "ml-item");
+            item.append("span").attr("class", "ml-swatch").style("background", cfg.colors[v]);
+            item.append("span").text(cfg.valueLabels[v]);
+        });
+        legend.append("div").attr("class", "ml-item")
+            .html('<span class="ml-swatch" style="background:#fff8e7;border:1px dashed #e9b885;"></span><span>Current highlighted row</span>');
+        legend.append("div").attr("class", "ml-item")
+            .html('<span class="ml-swatch" style="background:#d4c4a8;opacity:0.45;"></span><span>Other dimensions (dimmed)</span>');
+    }
+
+    // ========= Block 3: dimension distribution statistics =========
+    function renderStatBar(selector, dim) {
+        const svg = d3.select(selector);
+        svg.selectAll("*").remove();
+        const cfg = DIM_CONFIG[dim];
+        const width = Math.max(280, svg.node().clientWidth || 360);
+        const height = 220;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const margin = { top: 16, right: 16, bottom: 50, left: 32 };
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const counts = cfg.values.map(v => ({
+            value: v,
+            label: cfg.valueLabels[v],
+            count: EMBEDDED_DATA.filter(d => d[dim] === v).length,
+            color: cfg.colors[v]
+        }));
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+        const x = d3.scaleBand().domain(counts.map(c => c.label)).range([0, innerW]).padding(0.3);
+        const yMax = d3.max(counts, c => c.count) || 1;
+        const y = d3.scaleLinear().domain([0, Math.max(1, yMax)]).range([innerH, 0]).nice();
+
+        g.append("g").attr("transform", `translate(0,${innerH})`)
+            .call(d3.axisBottom(x))
+            .selectAll("text").style("font-size", "0.78rem").style("fill", "#6B6455");
+
+        g.append("g").call(d3.axisLeft(y).ticks(4))
+            .selectAll("text").style("font-size", "0.72rem").style("fill", "#6B6455");
+
+        g.selectAll("rect.bar")
+            .data(counts)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", d => x(d.label))
+            .attr("y", innerH)
+            .attr("width", x.bandwidth())
+            .attr("height", 0)
+            .attr("fill", d => d.color)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 1)
+            .transition()
+            .duration(DUR)
+            .delay((d, i) => i * 80)
+            .attr("y", d => y(d.count))
+            .attr("height", d => innerH - y(d.count));
+
+        g.selectAll("text.bar-val")
+            .data(counts)
+            .enter()
+            .append("text")
+            .attr("class", "bar-val")
+            .attr("x", d => x(d.label) + x.bandwidth() / 2)
+            .attr("y", d => y(d.count) - 5)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.82rem")
+            .style("font-weight", "600")
+            .style("fill", "#c8463a")
+            .style("opacity", 0)
+            .text(d => d.count)
+            .transition()
+            .duration(DUR)
+            .delay((d, i) => i * 80 + 300)
+            .style("opacity", 1);
+    }
+
+    function renderCrossTable() {
+        const levels = ["easy", "mid", "hard", "extreme"];
+        const durationMap = { short: 1, mid: 2, long: 3 };
+        const tbody = d3.select("#cross-table-body");
+        tbody.selectAll("*").remove();
+        const reps = {
+            easy: "Hardship 1 · Golden Cicada Demoted",
+            mid: "Hardship 32 · Hauling at Chechi",
+            hard: "Hardship 50 · Demons at the Precious Grove",
+            extreme: "Hardship 74 · Blocked at Lion-Camel Ridge"
+        };
+        levels.forEach(lv => {
+            const items = EMBEDDED_DATA.filter(d => d.level === lv);
+            const avgDur = items.length ? (items.reduce((a, b) => a + durationMap[b.duration], 0) / items.length).toFixed(2) : 0;
+            const avgRes = items.length ? (items.reduce((a, b) => a + b.rescueCount, 0) / items.length).toFixed(2) : 0;
+            const treaRate = items.length ? ((items.filter(d => d.treasure !== "none").length / items.length) * 100).toFixed(0) : 0;
+            const tr = tbody.append("tr");
+            tr.append("td").html(`<strong style="color:${DIM_CONFIG.level.colors[lv]}">${DIM_CONFIG.level.valueLabels[lv]}</strong>`);
+            tr.append("td").attr("class", "num").text(items.length);
+            tr.append("td").attr("class", "num").text(avgDur);
+            tr.append("td").attr("class", "num").text(avgRes);
+            tr.append("td").attr("class", "num").text(treaRate + "%");
+            tr.append("td").text(reps[lv]);
+        });
+    }
+
+    // ========= Initialization & interaction =========
+    function renderAll() {
+        renderHeatmap(currentDim);
+        renderStatBar("#stat-level-svg", "level");
+        renderStatBar("#stat-duration-svg", "duration");
+        renderStatBar("#stat-rescue-svg", "rescue");
+        renderStatBar("#stat-treasure-svg", "treasure");
+        renderCrossTable();
+    }
+
+    // Dimension switching
+    document.querySelectorAll(".dim-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+            document.querySelectorAll(".dim-btn").forEach(b => {
+                b.classList.remove("active");
+                b.setAttribute("aria-selected", "false");
+            });
+            this.classList.add("active");
+            this.setAttribute("aria-selected", "true");
+            currentDim = this.dataset.dim;
+            renderHeatmap(currentDim);
+        });
+    });
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", renderAll);
+    } else {
+        renderAll();
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(renderAll, 200);
+    });
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+<script id="audit-contentavoid">
+(function(){
+  var SKIP=/(tick|legend|title|axis|domain|cell|tooltip|axisfix|dark-halo|subtitle|grid|background|heat-col-label|heat-row-label)/i;
+  function fix(){
+    try{
+      // 1) 热力图列标签旋转 -42°（保留可见）
+      document.querySelectorAll('svg text.heat-col-label').forEach(function(t){
+        var x=+t.getAttribute('x')||0, y=+t.getAttribute('y')||0;
+        t.setAttribute('transform','rotate(-42 '+x+' '+y+')');
+        t.setAttribute('text-anchor','end');
+      });
+      // 2) 其余文字重叠：隐藏较小者 + 补 title
+      document.querySelectorAll('svg').forEach(function(svg){
+        var texts=[].slice.call(svg.querySelectorAll('text')).filter(function(t){
+          var c=t.getAttribute('class')||'';
+          if(SKIP.test(c)) return false;
+          var b=t.getBBox(); return b.width>0 && b.height>0;
+        });
+        for(var i=0;i<texts.length;i++){
+          for(var j=i+1;j<texts.length;j++){
+            var a=texts[i],b=texts[j];
+            var ra=a.getBBox(),rb=b.getBBox();
+            var ix=Math.max(0,Math.min(ra.x+ra.width,rb.x+rb.width)-Math.max(ra.x,rb.x));
+            var iy=Math.max(0,Math.min(ra.y+ra.height,rb.y+rb.height)-Math.max(ra.y,rb.y));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(), tb=(b.textContent||'').trim();
+            if(ta===tb){ // 完全重复：隐藏其一
+              if(a.style.display!=='none'){ a.setAttribute('data-cavoid','1'); if(!a.getAttribute('title')) a.setAttribute('title',ta); a.style.display='none'; }
+              continue;
+            }
+            var hide=(ra.width*ra.height<=rb.width*rb.height)?a:b;
+            var keep=(hide===a)?b:a;
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-cavoid','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000,14000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run(); else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

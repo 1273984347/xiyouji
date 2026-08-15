@@ -2,7 +2,7 @@
 
 > 一源多形 · 数字人文可视化解读《西游记》100 回 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前版本 v2.3.52（2026-08-14）**： W437 英文站续译 batch15（并行 subagent 新增 5 页英文化）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> **当前版本 v2.3.53（2026-08-14）**： W438 英文站续译 batch16（并行 subagent 新增 5 页英文化）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 [![在线访问](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E8%AE%BF%E9%97%AE-%E7%AB%8B%E5%8D%B3%E4%BD%93%E9%AA%8C-brightgreen?style=for-the-badge&logo=githubpages&logoColor=white)](https://1273984347.github.io/xiyouji/)
 [![双协议授权](https://img.shields.io/badge/%E5%8F%8C%E5%8D%8F%E8%AE%AE-MIT%20%2B%20CC%20BY--NC%204.0-blue)](LICENSE)
