@@ -8,6 +8,14 @@
 
 ---
 
+## W442 英文站续译 batch20（2026-08-14·v2.3.57）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/poetry-rhythm-analysis.html / customs-pass-route.html / pilgrim-team-psychology-arc.html / jurisprudence.html / linguistics.html | W442 | v2.3.57 新增·并行 subagent 英文化 5 页（_validate_en.py 全过） |
+| site/sitemap.xml | W442 | v2.3.57 修改·补 5 个 en 页（217→222 页） |
+| site/**/*.html（5 页） | W442 | v2.3.57 修改·generate_csp.py 重生成 CSP（227 页·1111 内联哈希） |
+
 ## W441 英文站续译 batch19（2026-08-14·v2.3.56）
 
 | 文件 | W | 说明 |
