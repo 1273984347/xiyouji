@@ -8,6 +8,14 @@
 
 ---
 
+## W443 英文站续译 batch21（2026-08-14·v2.3.58）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/narratology-13d-network.html / emotional-heatmap.html / material-archaeology.html | W443 | v2.3.58 新增·并行 subagent 英文化 3 页（_validate_en.py 全过） |
+| site/sitemap.xml | W443 | v2.3.58 修改·补 3 个 en 页（222→225 页） |
+| site/**/*.html（3 页） | W443 | v2.3.58 修改·generate_csp.py 重生成 CSP（230 页·1132 内联哈希） |
+
 ## W442 英文站续译 batch20（2026-08-14·v2.3.57）
 
 | 文件 | W | 说明 |
