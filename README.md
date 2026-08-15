@@ -118,10 +118,11 @@ xiyouji/
 ├── mcp-server/            # MCP 服务（xiyouji_drl_spotcheck 等工具）
 ├── tests/                 # pytest 测试 + Playwright E2E
 ├── xiyouji-agent-web/     # Web Agent「西游记·渡口问津」（CodeBuddy Agent SDK）
+├── skills/                # 项目级 playbook skill（version-bump/en-translation/s4-submission/character-content/characters-knowledge/5 单人角色）
 ├── .github/workflows/     # CI/Security/Deploy Pages/Lighthouse/截图审查
 ├── README.md              # 本文件（用户手册 + 开发者分区）
 ├── STRUCTURE.md           # 目录结构详细说明
-├── CHANGELOG.md           # 更新日志（W001-W426）
+├── CHANGELOG.md           # 更新日志（W001-W447）
 └── LICENSE                # 双协议授权声明
 ```
 

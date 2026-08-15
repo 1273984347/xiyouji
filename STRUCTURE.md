@@ -16,6 +16,7 @@
 | `references/` | 参考文献索引 |
 | `tools/` | 辅助工具脚本（章节切分等） |
 | `xiyouji-agent-web/` | Web Agent「西游记·渡口问津」·CodeBuddy Agent SDK·`PROJECT_CWD=D:/1/xiyouji` 直接对话/检索 docs/ + 跑 scripts/ + 写 dataset/·凭证 `CODEBUDDY_API_KEY`（与 scripts/rag 档B 检索式生成并行·详见其 README） |
+| `skills/` | 项目级 playbook skill（10 个：version-bump / s4-submission / en-translation / character-content / characters-knowledge / 5 个单人角色），详见 [skills/](skills/) |
 | `README.md` | 项目说明 |
 | `STRUCTURE.md` | 本文件 |
 | `CHANGELOG.md` | 更新日志 |
