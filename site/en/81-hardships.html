@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-qon2N6jIf9IVQEa/DUbGnzbyi9lojmElfo82/eni4QM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-N8id+K8Jt9LlG4NewgCxrIdJtwoNdS7qhkopcwy0PvM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Eighty-One Hardships · In-Depth Statistics — Annotated Journey to the West</title>
@@ -918,7 +918,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <footer class="site-footer">
         <div>
             <div class="footer-brand">Annotated Journey to the West</div>
-            <div class="footer-meta">v2.2.86 · W334 · <a href="../../docs/03-主题与情节专题/八十一难专题.md">Eighty-One Hardships (essay, 中文)</a></div>
+            <div class="footer-meta">v2.2.86 · W334 · <a href="../../docs/03-主题与情节专题/八十一难专题.md">Eighty-One Hardships (essay, in Chinese)</a></div>
         </div>
         <nav aria-label="Footer">
             <a href="index.html">EN Home</a>
@@ -1062,7 +1062,7 @@ function renderTreemap(opts){
     function renderSankey(crossData) {
         try {
             if (typeof d3.sankey !== "function") {
-                console.warn("[renderSankey] d3.sankey 不可用，跳过桑基图渲染");
+                console.warn("[renderSankey] d3.sankey unavailable, skipping Sankey render");
                 return;
             }
             const svg = d3.select("#sankey");
@@ -1167,7 +1167,7 @@ function renderTreemap(opts){
             .style("letter-spacing", "0.1em")
             .text("Outcome");
         } catch (err) {
-            console.warn("[renderSankey] 渲染失败：", err.message);
+            console.warn("[renderSankey] render failed:", err.message);
         }
     }
 
@@ -1270,7 +1270,7 @@ function renderTreemap(opts){
                 'Data source: loaded live from <code>scripts/output/data/hardships_81.json</code> (http server mode)';
             return data;
         } catch (e) {
-            console.warn('[INFO] 使用嵌入数据：', e.message);
+            console.warn('[INFO] using embedded data:', e.message);
             return EMBEDDED_DATA;
         }
     }

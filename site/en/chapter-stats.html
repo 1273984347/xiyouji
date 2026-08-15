@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-pnZZyJQ2HpsZrKM13unziPFgaub6HzZaJuNYL/kS2Og=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ep5DEMGbfghcip0a/xTt15y9XnKmoM5TE2a9gIcGdbc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Chapter Length & Dialogue Stats · 详解西游记</title>
@@ -1306,7 +1306,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 'Data source: live from <code>../../scripts/output/data/chapter_stats.json</code> (http server mode) · <strong>' + data.total_chapters + '</strong> chapters';
             return { data, isMock: false };
         } catch (e) {
-            console.log('[INFO] 使用 mock 数据：', e.message);
+            console.log('[INFO] using mock data:', e.message);
             return { data: MOCK_DATA, isMock: true };
         }
     }
@@ -1319,7 +1319,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         if (isMock) {
             document.getElementById('dataSource').innerHTML =
                 '⚠️ <strong>Currently showing sample data</strong> (10-chapter mock); real data not loaded. Generate it as follows:' +
-                '<span class="cmd-block">cd scripts\npy -m http.server 8000   # 在 site/ 目录运行以启用 fetch\npy A_文本基础/chapter_stats.py --input ../source/原文/分回/ --output output/data/chapter_stats.json</span>';
+                '<span class="cmd-block">cd scripts\npy -m http.server 8000   # run from the site/ directory to enable fetch\npy A_Text_Basics/chapter_stats.py --input ../source/original-text/by-chapter/ --output output/data/chapter_stats.json</span>';
         }
 
         renderKPI(data);

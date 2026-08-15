@@ -8,6 +8,13 @@
 
 ---
 
+## W446 英文站旧页 CJK 残留清理（2026-08-14·v2.3.61）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/ 52 个旧页（81-hardships/bestiary/chapters-map/tribulations/essay-*/character-*/guide/index/dashboard/methodology/site-map 等） | W446 | v2.3.61 修改·清理 408 条 CJK 违规（console 消息/中文文件名/学术括号注/未译正文） |
+| site/**/*.html（3 页） | W446 | v2.3.61 修改·generate_csp.py 重生成 CSP（232 页·1145 内联哈希） |
+
 ## W445 英文站续译 relationships（2026-08-14·v2.3.60）
 
 | 文件 | W | 说明 |
