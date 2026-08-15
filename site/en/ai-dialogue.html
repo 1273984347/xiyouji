@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-47HHm7t/jxVbSvoSb9eb4uBy2YNEC3orAIpFO1Spt1w=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>AI Celebrity Dialogue · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            font-family: "JetBrains Mono", monospace;
+            background: #f5e9d4;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .device {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 32px 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 28px;
+            scroll-margin-top: 20px;
+        }
+        .device-title {
+            font-size: 1.45rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+        .device-desc {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-bottom: 16px;
+        }
+
+        /* 对话布局 */
+        .chat-layout {
+            display: grid;
+            grid-template-columns: minmax(min(260px, 100%), 260px) 1fr;
+            gap: 20px;
+            min-width: 0;
+        }
+        @media (max-width: 768px) {
+            .chat-layout { grid-template-columns: 1fr; }
+            .celebrity-list {
+                display: flex !important;
+                flex-direction: row !important;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                gap: 10px;
+                padding-bottom: 10px;
+            }
+            .celebrity-card { min-width: 180px; flex-shrink: 0; }
+        }
+        @media (max-width: 520px) {
+            .device { padding: 20px 16px; }
+            .message .bubble { max-width: 88%; }
+            
+            .chat-history { max-height: 380px; padding: 12px; }
+            .input-area { padding: 10px 12px; }
+            .input-area button { padding: 10px 14px; font-size: 0.82rem; }
+        }
+
+        /* 名人列表 */
+        .celebrity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 0;
+        }
+        .celebrity-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: border-color 0.2s, transform 0.15s, background 0.2s;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+        .celebrity-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+        .celebrity-card:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+        .celebrity-card.active { border-color: var(--accent); background: #fff8ec; }
+        .celebrity-card .avatar {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff8ec;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+        }
+        .celebrity-card.active .avatar { background: var(--accent-soft); border-color: var(--accent); }
+        .celebrity-card .info { min-width: 0; flex: 1; overflow-wrap: anywhere; }
+        .celebrity-card .name { font-size: 0.98rem; font-weight: 600; color: var(--ink); }
+        .celebrity-card .meta { font-size: 0.74rem; color: var(--ink-soft); }
+        .celebrity-card .style-tag {
+            font-size: 0.7rem;
+            color: var(--accent-3);
+            background: #fff8ec;
+            padding: 1px 6px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-top: 3px;
+            overflow-wrap: anywhere;
+        }
+
+        /* 对话区 */
+        .chat-area {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            min-height: 520px;
+        }
+        .chat-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-width: 0;
+        }
+        .chat-header .active-name { color: var(--accent); font-weight: 600; }
+        .chat-history {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            max-height: 460px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            min-width: 0;
+        }
+        .chat-empty {
+            text-align: center;
+            color: var(--ink-soft);
+            padding: 50px 20px;
+            font-style: italic;
+            font-size: 0.88rem;
+        }
+        .message { display: flex; gap: 10px; min-width: 0; }
+        .message.user { flex-direction: row-reverse; }
+        .message .msg-avatar {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff8ec;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+        }
+        .message.user .msg-avatar {
+            background: var(--accent-2);
+            color: #fff;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+        .message .bubble {
+            min-width: 0;
+            max-width: 78%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+        .message.user .bubble {
+            background: var(--accent-2);
+            color: #fff;
+            border-top-right-radius: 2px;
+        }
+        .message.celebrity .bubble {
+            background: #fff8ec;
+            color: var(--ink);
+            border-top-left-radius: 2px;
+            border: 1px solid var(--accent-soft);
+        }
+        .message.celebrity .bubble .name-line {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .message.celebrity .bubble .quote-text {
+            font-size: 0.92rem;
+            line-height: 1.75;
+            overflow-wrap: anywhere;
+        }
+        .message.user .bubble .quote-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+        .message.celebrity .bubble .source-line {
+            font-size: 0.72rem;
+            color: var(--ink-soft);
+            margin-top: 6px;
+            font-style: italic;
+            border-top: 1px dashed var(--line);
+            padding-top: 4px;
+        }
+
+        /* 快捷话题 */
+        .quick-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px 16px;
+            border-top: 1px solid var(--line);
+            background: #faf7f2;
+            min-width: 0;
+        }
+        .quick-topics-label {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            width: 100%;
+            margin-bottom: 2px;
+        }
+        .topic-btn {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+            font-family: inherit;
+        }
+        .topic-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .topic-btn:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+
+        /* 输入区 */
+        .input-area {
+            display: flex;
+            gap: 8px;
+            padding: 12px 16px;
+            border-top: 1px solid var(--line);
+            background: var(--paper);
+            min-width: 0;
+        }
+        .input-area input {
+            flex: 1;
+            min-width: 0;
+            padding: 10px 14px;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            color: var(--ink);
+            background: var(--bg);
+        }
+        .input-area input:focus { outline: none; border-color: var(--accent); }
+        .input-area button {
+            padding: 10px 18px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+        .input-area button:hover { background: var(--rebel); }
+        .input-area 
+
+        /* 机制说明 */
+        .how-it-works {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+            gap: 16px;
+        }
+        .how-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px 16px;
+            box-shadow: var(--shadow);
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+        .how-card h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .how-card .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.78rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .how-card p {
+            font-size: 0.84rem;
+            color: var(--ink-soft);
+            line-height: 1.7;
+        }
+
+        .source-list {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+            margin-top: 40px;
+        }
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/ai-dialogue.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / AI Celebrity Dialogue</p>
+        <p class="kicker">Q+++ · AI Dialogue</p>
+        <h1>AI Celebrity Dialogue</h1>
+        <p class="subtitle">AI DIALOGUE</p>
+        <p class="tagline">A conversation across five centuries of critics, matching celebrity quotes by keyword.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+    <nav class="breadcrumb"><a href="dashboard.html">Dashboard</a> → AI Celebrity Dialogue</nav>
+
+    <div class="notice" id="dataSource">
+        A pure front-end preset Q&A library — no backend, no API calls — matching celebrity quotes by keyword. Quotes blend authentic historical material with pastiches in their style, for thought experiments only.
+    </div>
+
+    <section class="device">
+        <h2 class="device-title">Celebrity Dialogue Room</h2>
+        <p class="device-desc">Click a celebrity card on the left to switch who you are talking to, or type directly and let the system auto-match the most fitting critic's reply. Press Enter to send; click a topic for quick input.</p>
+        <div id="chat-layout" class="chat-layout">
+            <div id="celebrity-list" class="celebrity-list" role="list" aria-label="Celebrity list"></div>
+            <div class="chat-area">
+                <div class="chat-header">
+                    <span>Currently talking with: <span id="active-name" class="active-name">Auto-match</span></span>
+                    <span style="font-size:0.78rem;">Rounds: <span id="msg-count">0</span></span>
+                </div>
+                <div id="chat-history" class="chat-history" aria-live="polite" aria-label="Chat history"></div>
+                <div id="quick-topics" class="quick-topics"></div>
+                <div class="input-area">
+                    <input type="text" id="chat-input"
+                           placeholder="Type your question and press Enter to send (e.g., Too tired at work, want to lie flat)"
+                           aria-label="Chat input" />
+                    <button id="send-btn" type="button">Send</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="device">
+        <h2 class="device-title">How the Dialogue Works</h2>
+        <div class="how-it-works">
+            <div class="how-card">
+                <h3><span class="step-num">1</span>Tokenization</h3>
+                <p>User input is split into tokens by punctuation and spaces, forming the matching basis. Chinese uses substring-inclusion matching, so no tokenizer is needed.</p>
+            </div>
+            <div class="how-card">
+                <h3><span class="step-num">2</span>Match a Celebrity</h3>
+                <p>Tokens are compared one by one against the keywords arrays of the six celebrities; whoever has the most hits wins. Celebrity keywords carry higher weight than reply keywords.</p>
+            </div>
+            <div class="how-card">
+                <h3><span class="step-num">3</span>Pick a Reply</h3>
+                <p>Within that celebrity's replies, a second match runs on each reply's own keywords; the top-scoring ones are picked at random, and the same reply is never repeated.</p>
+            </div>
+            <div class="how-card">
+                <h3><span class="step-num">4</span>Fallback When No Match</h3>
+                <p>Returns a generic reply plus a random celebrity's Journey to the West quote, so the conversation never runs dry — every celebrity has a Journey-to-the-West perspective.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization</div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/ai-dialogue.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+/* EMBEDDED_DATA: embedded preset Q&A library (fallback when fetch fails; always usable on file://)
+   Contains celebrities[6] (id/name/era/avatar/style/keywords/replies) + journey_quotes + quick_topics
+   Quotes marked "historical" are genuine texts; those marked "pastiche" are written in the thinker's spirit */
+const EMBEDDED_DATA = {
+    celebrities: [
+        {
+            id: "luxun", name: "Lu Xun", era: "Republican era", avatar: "🧑‍🎓", style: "Cold and incisive",
+            keywords: ["resistance", "authority", "oppression", "freedom", "revolution"],
+            replies: [
+                { keywords: ["work", "tired", "lie flat", "involution", "996", "pressure"],
+                  quote: "May Chinese youth cast off their coldness and simply keep moving upward; do not heed the self-defeating. Those who can work, work; those who can speak, speak. Give off whatever heat you have, shed whatever light you can.",
+                  source: "Hot Wind: Random Thoughts No. 41" },
+                { keywords: ["authority", "leader", "boss", "rules", "system", "parents"],
+                  quote: "Has it always been so? Then does that make it right?",
+                  source: "A Madman's Diary" },
+                { keywords: ["AI", "artificial intelligence", "machine", "technology", "algorithm", "replace"],
+                  quote: "There is no road on the ground to begin with; it only becomes a road because many people have walked it. If a machine learns to walk, that road was still first taught by people — what is feared is that people themselves forget to step forward.",
+                  source: "Pastiche in Lu Xun's style" },
+                { keywords: ["life", "meaning", "alive", "value", "lost", "direction"],
+                  quote: "Despair is as much an illusion as hope itself.",
+                  source: "Wild Grass: Hope" },
+                { keywords: ["social", "media", "persona", "performance", "Moments", "image"],
+                  quote: "Wear a mask too long and it grows into your face; to take it off again you would have to tear away skin and bone.",
+                  source: "Pastiche in Lu Xun's style" },
+                { keywords: ["involution", "competition", "rat race", "rivalry", "way out", "homogenization"],
+                  quote: "If we do not erupt in silence, we shall perish in silence.",
+                  source: "In Memory of Liu Hezhen" },
+                { keywords: ["freedom", "resistance", "oppression", "revolution", "struggle"],
+                  quote: "The truly brave man dares to face a bleak life head-on and dares to look squarely at the dripping blood.",
+                  source: "In Memory of Liu Hezhen" },
+                { keywords: ["Journey to the West", "Sun Wukong", "Havoc in Heaven", "pilgrimage", "golden headband"],
+                  quote: "The episode of Sun Wukong's Havoc in Heaven best shows the spirit of resistance; his later taming by the golden headband is just like how the young are co-opted by old ritual doctrine.",
+                  source: "Pastiche in Lu Xun's style" }
+            ]
+        },
+        {
+            id: "hushi", name: "Hu Shi", era: "Republican era", avatar: "🧓", style: "Pragmatic and rational",
+            keywords: ["reform", "gradualism", "empiricism", "science", "pragmatism"],
+            replies: [
+                { keywords: ["work", "tired", "lie flat", "involution", "996", "pressure"],
+                  quote: "Advance one inch and you have one inch of joy; do one thing and you gain one thing of solidity. If lying flat can buy a clear mind, it is not without merit as a method — only do not let it become a habit.",
+                  source: "Pastiche in Hu Shi's style" },
+                { keywords: ["authority", "leader", "boss", "rules", "system", "parents"],
+                  quote: "Bold hypotheses, careful verification — so too with authority: do not follow blindly, do not trust lightly, accept only the evidence.",
+                  source: "Pastiche in Hu Shi's style (adapted from \"Methods and Materials of Scholarship\")" },
+                { keywords: ["AI", "artificial intelligence", "machine", "technology", "algorithm", "replace"],
+                  quote: "Questions of science and technology must be settled by evidence; do not begin with a heart full of fear. What is to be feared is not that machines grow clever, but that people grow lazy.",
+                  source: "Pastiche in Hu Shi's style" },
+                { keywords: ["life", "meaning", "alive", "value", "lost", "direction"],
+                  quote: "Life has no meaning in itself; it has whatever meaning you are able to give it. Rather than brood over what life is for, better to do one concrete thing.",
+                  source: "What Is the Meaning of Life?" },
+                { keywords: ["social", "media", "persona", "performance", "Moments", "image"],
+                  quote: "In scholarship, question where there seems to be no doubt; in life, do not doubt where there is doubt. The same goes for persona — the less you put on, the more genuine you are.",
+                  source: "Pastiche in Hu Shi's style" },
+                { keywords: ["involution", "competition", "rat race", "rivalry", "way out", "homogenization"],
+                  quote: "Why fear that truth is boundless? Advance one inch and you have one inch of joy. Let others race; walk your own road.",
+                  source: "Pastiche in Hu Shi's style (adapted from \"Hu Shi's Study Abroad Diary\")" },
+                { keywords: ["freedom", "reform", "gradualism", "empiricism", "tolerance"],
+                  quote: "Tolerance is more important than freedom itself — without tolerance, there is no freedom.",
+                  source: "Tolerance and Freedom" },
+                { keywords: ["Journey to the West", "pilgrimage", "Wu Cheng'en", "textual research", "fairy tale"],
+                  quote: "Journey to the West is a fairy tale of the highest order; one may verify the facts of its composition, but there is no need to hunt for allegory everywhere.",
+                  source: "A Study of Journey to the West" }
+            ]
+        },
+        {
+            id: "maozedong", name: "Mao Zedong", era: "Modern era", avatar: "🧑‍✈️", style: "Grand strategy",
+            keywords: ["struggle", "strategy", "masses", "practice", "revolution"],
+            replies: [
+                { keywords: ["work", "tired", "lie flat", "involution", "996", "pressure"],
+                  quote: "Hard work is like a load set before us, testing whether we dare take it up. The heavier the load, the more it tempers a person.",
+                  source: "Pastiche in Mao's idiom (adapted from \"On the Chongqing Negotiations\")" },
+                { keywords: ["authority", "leader", "boss", "rules", "system", "parents"],
+                  quote: "To rebel is justified — wherever there is oppression, there is resistance.",
+                  source: "Pastiche in Mao's idiom" },
+                { keywords: ["AI", "artificial intelligence", "machine", "technology", "algorithm", "replace"],
+                  quote: "Weapons are an important factor in war, but not the decisive factor; the decisive factor is people, not things. However strong an algorithm, it is still only a tool.",
+                  source: "Pastiche in Mao's idiom (adapted from \"On Protracted War\")" },
+                { keywords: ["life", "meaning", "alive", "value", "lost", "direction"],
+                  quote: "A person needs a little spirit — to serve the people is the great meaning of life. Cut off from the masses, meaning becomes empty talk.",
+                  source: "Pastiche in Mao's idiom" },
+                { keywords: ["social", "media", "persona", "performance", "Moments", "image"],
+                  quote: "Study well and make progress every day — less empty talk, more real work, and your persona stands on its own. Say too much empty talk and you come to believe it yourself, and that is dangerous.",
+                  source: "Pastiche in Mao's idiom" },
+                { keywords: ["involution", "competition", "rat race", "rivalry", "way out", "struggle"],
+                  quote: "To struggle against Heaven is boundless joy; to struggle against Earth is boundless joy; to struggle against people is boundless joy.",
+                  source: "Self-Encouragement in Struggle" },
+                { keywords: ["revolution", "strategy", "masses", "practice", "struggle"],
+                  quote: "Strategically we should despise the enemy; tactically we should take the enemy seriously.",
+                  source: "Problems of Strategy in China's Revolutionary War" },
+                { keywords: ["Journey to the West", "Sun Wukong", "Havoc in Heaven", "Jade Emperor", "rebellion"],
+                  quote: "Sun Wukong's Havoc in Heaven is a revolt against bureaucratic privilege; that whole apparatus of the Jade Emperor is nothing but Chiang Kai-shek up in the sky.",
+                  source: "Pastiche in Mao's reading" }
+            ]
+        },
+        {
+            id: "linyutang", name: "Lin Yutang", era: "Republican era", avatar: "🧑‍🎨", style: "Humorous and easy-going",
+            keywords: ["humor", "leisure", "moderation", "life", "human nature"],
+            replies: [
+                { keywords: ["work", "tired", "lie flat", "involution", "996", "pressure"],
+                  quote: "In life, sometimes you laugh at others and sometimes others laugh at you — to rest when tired is plain common sense; why force yourself to hold on.",
+                  source: "Pastiche in Lin Yutang's style" },
+                { keywords: ["authority", "leader", "boss", "rules", "system", "parents"],
+                  quote: "Humor is a kind of wisdom; before authority it teaches us to be neither servile nor offensive, but simply to dismiss it with a smile.",
+                  source: "Pastiche in Lin Yutang's style" },
+                { keywords: ["AI", "artificial intelligence", "machine", "technology", "algorithm", "replace"],
+                  quote: "A machine can calculate everything under the sun, yet the one thing it cannot calculate is humor — what makes us human is precisely that unprofitable laugh.",
+                  source: "Pastiche in Lin Yutang's style" },
+                { keywords: ["life", "meaning", "alive", "value", "lost", "direction"],
+                  quote: "Life is merely thus — enjoy it as you go. You are always the protagonist of your own story; do not always play a supporting role in someone else's drama.",
+                  source: "Life Is Merely Thus" },
+                { keywords: ["social", "media", "persona", "performance", "Moments", "image"],
+                  quote: "Once you build a persona, you lose your authenticity; better to be an interesting idler, and then you are at ease. Everything in Moments is a play — the performers tire, and so do the audience.",
+                  source: "Pastiche in Lin Yutang's style" },
+                { keywords: ["involution", "competition", "rat race", "rivalry", "way out", "homogenization"],
+                  quote: "Leisure is not laziness but an art of living — when you cannot keep racing, why not brew a pot of tea and watch the clouds drift and gather.",
+                  source: "Pastiche in Lin Yutang's style" },
+                { keywords: ["humor", "moderation", "life", "human nature", "leisure"],
+                  quote: "The origin of humor is the tragedy of life — only when you can laugh at yourself is it true humor.",
+                  source: "On Humor" },
+                { keywords: ["Journey to the West", "Zhu Bajie", "pilgrimage", "human nature", "lovable"],
+                  quote: "Bajie is lovable precisely because he does not pretend; greedy and lustful, he is human nature in its truest form, far more endearing than the sages who are full of high-sounding principle.",
+                  source: "Pastiche in Lin Yutang's style" }
+            ]
+        },
+        {
+            id: "qianzhongshu", name: "Qian Zhongshu", era: "Modern era", avatar: "🧑‍🏫", style: "Erudite and witty",
+            keywords: ["satire", "intellect", "textual research", "metaphor", "literati"],
+            replies: [
+                { keywords: ["work", "tired", "lie flat", "involution", "996", "pressure"],
+                  quote: "There are only two kinds of people in the world: given a bunch of grapes, some pick the best to eat first, while others save the best for last — the former are optimists, the latter pessimists, yet both must first have grapes to eat.",
+                  source: "Fortress Besieged" },
+                { keywords: ["authority", "leader", "boss", "rules", "system", "parents"],
+                  quote: "Authority is authority not because its words are always true, but because someone in its position is flattered. The moment no one flatters it, it is no different from any passer-by.",
+                  source: "Pastiche in Qian Zhongshu's style" },
+                { keywords: ["AI", "artificial intelligence", "machine", "technology", "algorithm", "replace"],
+                  quote: "If AI could write poetry, its verse would be like MSG dissolved in water — fresh, to be sure, but without the original flavor of the ingredients.",
+                  source: "Pastiche in Qian Zhongshu's style" },
+                { keywords: ["life", "meaning", "alive", "value", "lost", "direction"],
+                  quote: "Those outside the city want to rush in, and those inside want to flee — the meaning of life, for the most part, lies in this coming and going.",
+                  source: "Fortress Besieged" },
+                { keywords: ["social", "media", "persona", "performance", "Moments", "image"],
+                  quote: "A persona is like a stage costume: wear it long enough and you forget your true face. Moments is the Scholars of today — everyone is a Fan Jin passing the exams.",
+                  source: "Pastiche in Qian Zhongshu's style" },
+                { keywords: ["involution", "competition", "rat race", "rivalry", "way out", "homogenization"],
+                  quote: "Scholars have despised one another since ancient times; what we now call involution is merely old wine in a new bottle — mutual disdain wearing a new face.",
+                  source: "Pastiche in Qian Zhongshu's style" },
+                { keywords: ["satire", "intellect", "textual research", "metaphor", "literati"],
+                  quote: "Metaphor is the highest rhetoric of literature and the highest game of intellect — the likeness of two things lies in their distance; bring them too close and it ceases to be metaphor.",
+                  source: "Pastiche in Qian Zhongshu's style (adapted from \"Limited Views\")" },
+                { keywords: ["Journey to the West", "single bell", "textual research", "Wu Cheng'en", "detail"],
+                  quote: "The \"single bell\" (yikou zhong) of Chapter 40 in Journey to the West is a sleeveless outer garment, not a temple bell; most readers misread it — and therein lies the joy of textual research.",
+                  source: "Pastiche in Qian Zhongshu's textual research" }
+            ]
+        },
+        {
+            id: "guomoruo", name: "Guo Moruo", era: "Modern era", avatar: "🧑‍🎤", style: "Romantic and impassioned",
+            keywords: ["romantic", "passion", "epic", "turning point", "rebirth"],
+            replies: [
+                { keywords: ["work", "tired", "lie flat", "involution", "996", "pressure"],
+                  quote: "The phoenix must pass through fierce flames before its nirvana — the weariness of youth is the pain of rebirth, yet after the pain comes the dawn.",
+                  source: "Pastiche in Guo Moruo's style" },
+                { keywords: ["authority", "leader", "boss", "rules", "system", "parents"],
+                  quote: "We must overthrow all the old idols and shatter all the old frames — the Jade Emperor above and King Yama below alike belong on the list of those to be struck down.",
+                  source: "Pastiche in Guo Moruo's style" },
+                { keywords: ["AI", "artificial intelligence", "machine", "technology", "algorithm", "replace"],
+                  quote: "Technological progress is like the heavenly dog devouring the moon: the old world must be swallowed whole, and the new world must be reborn from the flames.",
+                  source: "Pastiche in Guo Moruo's style" },
+                { keywords: ["life", "meaning", "alive", "value", "lost", "direction"],
+                  quote: "Our drifting life is like a lone boat on a vast sea — but with a lighthouse, we dare sail toward the storm.",
+                  source: "Pastiche in Guo Moruo's style (adapted from \"The Goddesses\")" },
+                { keywords: ["social", "media", "persona", "performance", "Moments", "image"],
+                  quote: "A persona is like the painted face on a stage — red, white, black, or flowery, they are all masks. Better to tear off the mask and be a naked human being.",
+                  source: "Pastiche in Guo Moruo's style" },
+                { keywords: ["involution", "competition", "rat race", "rivalry", "way out", "homogenization"],
+                  quote: "To burn in fierce flame is a trivial thing; only a soul that has been tempered may speak of victory. The rat race is the furnace, and people are the iron.",
+                  source: "Pastiche in Guo Moruo's style" },
+                { keywords: ["romantic", "passion", "epic", "rebirth", "turning point"],
+                  quote: "We want rebirth, we want creation, we want to rise from the flames like the phoenix in its nirvana!",
+                  source: "The Goddesses: The Nirvana of the Phoenix" },
+                { keywords: ["Journey to the West", "Sun Wukong", "Havoc in Heaven", "rebellion", "kindling"],
+                  quote: "Sun Wukong is China's Prometheus: what he stole is the kindling of the celestial court, and what it lights is the human world.",
+                  source: "Pastiche in Guo Moruo's style" }
+            ]
+        }
+    ],
+    journey_quotes: [
+        { celebrity: "Lu Xun", avatar: "🧑‍🎓", era: "Republican era",
+          quote: "Journey to the West is full of gods and demons on the page, yet between the lines are written the words \"ritual doctrine devours people.\" Wukong's golden headband is a shackle clamped onto thought itself.",
+          source: "Pastiche in Lu Xun's style" },
+        { celebrity: "Hu Shi", avatar: "🧓", era: "Republican era",
+          quote: "The study of Journey to the West should begin from the genealogy of its editions; do not strain after political allegory — first get the facts straight.",
+          source: "Pastiche in Hu Shi's style" },
+        { celebrity: "Mao Zedong", avatar: "🧑‍✈️", era: "Modern era",
+          quote: "The four pilgrims — Tang Sanzang and his disciples — are a revolutionary contingent: there is a united front, there is struggle, there is division, and there is final victory.",
+          source: "Pastiche in Mao's reading" },
+        { celebrity: "Lin Yutang", avatar: "🧑‍🎨", era: "Republican era",
+          quote: "Read Journey to the West as you would sip tea — do not take it too seriously. Bajie's simple honesty and Wukong's monkey nature are life in its most genuine form.",
+          source: "Pastiche in Lin Yutang's style" },
+        { celebrity: "Qian Zhongshu", avatar: "🧑‍🏫", era: "Modern era",
+          quote: "The genius of Journey to the West lies in writing truth through absurdity: every demon is the ways of the world, every god and Buddha is merely human feeling, and a single brush links the three teachings.",
+          source: "Pastiche in Qian Zhongshu's style" },
+        { celebrity: "Guo Moruo", avatar: "🧑‍🎤", era: "Modern era",
+          quote: "Journey to the West is an epic, and Sun Wukong is the incarnation of rebellion; his golden staff shattered the old order of the celestial court.",
+          source: "Pastiche in Guo Moruo's style" }
+    ],
+    quick_topics: [
+        "Too tired at work, want to lie flat",
+        "Will AI replace humans?",
+        "How to face authority?",
+        "What is the meaning of life?",
+        "Social media personas",
+        "What to do about involution"
+    ]
+};
+
+// ===== State =====
+const state = {
+    activeCelebrityId: null,        // null = auto-match
+    chatHistory: [],                // { role, text/quote, celebrity, avatar, era, source }
+    usedReplies: {}                 // { celebrityId: Set<replyIndex> }
+};
+
+const fetchStatus = { anyFetched: false };
+
+// ===== F6 skeleton: fetchJson → loadData → main → renderXxx =====
+async function fetchJson(path, fallbackKey) {
+    try {
+        const response = await fetch(path);
+        if (!response.ok) throw new Error('fetch failed: ' + path);
+        fetchStatus.anyFetched = true;
+        return await response.json();
+    } catch (e) {
+        console.warn('[INFO] using embedded data (' + fallbackKey + '):', e.message);
+        return EMBEDDED_DATA[fallbackKey];
+    }
+}
+
+async function loadData() {
+    // Pure front-end preset Q&A library; fetch will fail, auto-falling back to EMBEDDED_DATA
+    const base = '../../scripts/output/data/';
+    const [celebrities, journeyQuotes, quickTopics] = await Promise.all([
+        fetchJson(base + 'v08_ai_celebrities.json', 'celebrities'),
+        fetchJson(base + 'v08_ai_journey_quotes.json', 'journey_quotes'),
+        fetchJson(base + 'v08_ai_quick_topics.json', 'quick_topics')
+    ]);
+    return { celebrities, journeyQuotes, quickTopics };
+}
+
+// ===== Tokenization & matching logic =====
+function tokenize(text) {
+    if (!text) return [];
+    // Split by punctuation and spaces (Chinese + English punctuation)
+    return text.split(/[\s，。！？、；：""''（）()【】《》.,!?;:'"\-—…]+/).filter(t => t.length > 0);
+}
+
+function matchCelebrity(text, celebrities) {
+    if (!text || !celebrities) return null;
+    let bestCeleb = null;
+    let bestScore = 0;
+    celebrities.forEach(celeb => {
+        let score = 0;
+        // Celebrity's own keywords carry high weight (2 points)
+        celeb.keywords.forEach(kw => {
+            if (text.includes(kw)) score += 2;
+        });
+        // Each reply's keywords carry low weight (1 point), to refine the celebrity profile
+        celeb.replies.forEach(reply => {
+            reply.keywords.forEach(kw => {
+                if (text.includes(kw)) score += 1;
+            });
+        });
+        if (score > bestScore) {
+            bestScore = score;
+            bestCeleb = celeb;
+        }
+    });
+    return bestCeleb && bestScore > 0 ? bestCeleb : null;
+}
+
+function pickReply(celebrity, text) {
+    if (!state.usedReplies[celebrity.id]) state.usedReplies[celebrity.id] = new Set();
+    const used = state.usedReplies[celebrity.id];
+
+    // Score each reply
+    const scored = celebrity.replies.map((reply, idx) => {
+        let score = 0;
+        reply.keywords.forEach(kw => {
+            if (text.includes(kw)) score += 3;
+        });
+        return { reply, idx, score };
+    });
+
+    // Filter out used replies; if all used, reset
+    let available = scored.filter(s => !used.has(s.idx));
+    if (available.length === 0) {
+        used.clear();
+        available = scored;
+    }
+
+    // Sort by descending score; pick randomly among the highest; if no match, pick randomly among all available
+    available.sort((a, b) => b.score - a.score);
+    const maxScore = available[0].score;
+    const pool = maxScore > 0 ? available.filter(s => s.score === maxScore) : available;
+    const picked = pool[Math.floor(Math.random() * pool.length)];
+    used.add(picked.idx);
+    return picked.reply;
+}
+
+function getFallbackReply(journeyQuotes) {
+    const generic = "This is a question worth pondering — let me respond through the lens of Journey to the West...";
+    const quotes = journeyQuotes && journeyQuotes.length > 0 ? journeyQuotes : EMBEDDED_DATA.journey_quotes;
+    const picked = quotes[Math.floor(Math.random() * quotes.length)];
+    return {
+        celebrity: picked.celebrity,
+        avatar: picked.avatar,
+        era: picked.era,
+        quote: generic + "\n\n" + picked.quote,
+        source: picked.source
+    };
+}
+
+// ===== Render functions =====
+function renderCelebrityList(celebrities) {
+    const container = d3.select("#celebrity-list");
+    container.selectAll("*").remove();
+    if (!celebrities || celebrities.length === 0) {
+        container.append("div").text("No celebrity data")
+            .style("color", "var(--ink-soft)").style("text-align", "center").style("padding", "40px 20px");
+        return;
+    }
+
+    // Auto-match card
+    const autoCard = container.append("div")
+        .attr("class", "celebrity-card" + (state.activeCelebrityId === null ? " active" : ""))
+        .attr("role", "button").attr("tabindex", "0")
+        .attr("aria-label", "Auto-match mode")
+        .attr("aria-pressed", state.activeCelebrityId === null ? "true" : "false")
+        .on("click", () => selectCelebrity(null))
+        .on("keydown", function(event) {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                selectCelebrity(null);
+            }
+        });
+    autoCard.append("div").attr("class", "avatar").text("🎲");
+    const autoInfo = autoCard.append("div").attr("class", "info");
+    autoInfo.append("div").attr("class", "name").text("Auto-match");
+    autoInfo.append("div").attr("class", "meta").text("System picks the most fitting critic");
+
+    // Celebrity cards
+    celebrities.forEach(celeb => {
+        const card = container.append("div")
+            .attr("class", "celebrity-card" + (state.activeCelebrityId === celeb.id ? " active" : ""))
+            .attr("role", "button").attr("tabindex", "0")
+            .attr("aria-label", "Select celebrity " + celeb.name)
+            .attr("aria-pressed", state.activeCelebrityId === celeb.id ? "true" : "false")
+            .on("click", () => selectCelebrity(celeb.id))
+            .on("keydown", function(event) {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    selectCelebrity(celeb.id);
+                }
+            });
+        card.append("div").attr("class", "avatar").text(celeb.avatar);
+        const info = card.append("div").attr("class", "info");
+        info.append("div").attr("class", "name").text(celeb.name);
+        info.append("div").attr("class", "meta").text(celeb.era + " · " + celeb.style);
+        info.append("div").attr("class", "style-tag").text("Keywords: " + celeb.keywords.slice(0, 3).join("/"));
+    });
+}
+
+function renderQuickTopics(topics) {
+    const container = d3.select("#quick-topics");
+    container.selectAll("*").remove();
+    if (!topics || topics.length === 0) {
+        container.append("div").text("No quick topics")
+            .style("color", "var(--ink-soft)").style("font-size", "0.8rem");
+        return;
+    }
+    container.append("div").attr("class", "quick-topics-label").text("Quick topics: ");
+    topics.forEach(topic => {
+        container.append("button")
+            .attr("class", "topic-btn")
+            .attr("type", "button")
+            .text(topic)
+            .on("click", () => {
+                const input = document.getElementById("chat-input");
+                input.value = topic;
+                sendMessage(topic);
+            });
+    });
+}
+
+function renderChatHistory() {
+    const container = d3.select("#chat-history");
+    container.selectAll("*").remove();
+
+    if (!state.chatHistory || state.chatHistory.length === 0) {
+        container.append("div")
+            .attr("class", "chat-empty")
+            .text("The dialogue has not started yet. Click a topic button below or type your question to converse across time with six critics.");
+        document.getElementById("msg-count").textContent = "0";
+        return;
+    }
+
+    state.chatHistory.forEach(msg => {
+        const messageDiv = container.append("div")
+            .attr("class", "message " + msg.role);
+        messageDiv.append("div")
+            .attr("class", "msg-avatar")
+            .text(msg.role === "user" ? "Me" : (msg.avatar || "👤"));
+        const bubble = messageDiv.append("div").attr("class", "bubble");
+        if (msg.role === "celebrity") {
+            bubble.append("div").attr("class", "name-line")
+                .text(msg.celebrity + " · " + msg.era);
+            bubble.append("div").attr("class", "quote-text").text(msg.quote);
+            bubble.append("div").attr("class", "source-line").text("—— " + msg.source);
+        } else {
+            bubble.append("div").attr("class", "quote-text").text(msg.text);
+        }
+    });
+
+    // Scroll to bottom
+    const history = document.getElementById("chat-history");
+    history.scrollTop = history.scrollHeight;
+
+    // Update round count (user message count)
+    const rounds = state.chatHistory.filter(m => m.role === "user").length;
+    document.getElementById("msg-count").textContent = rounds;
+}
+
+// ===== Interaction handlers =====
+function selectCelebrity(id) {
+    state.activeCelebrityId = id;
+    const nameEl = document.getElementById("active-name");
+    if (id === null) {
+        nameEl.textContent = "Auto-match";
+    } else {
+        const celeb = EMBEDDED_DATA.celebrities.find(c => c.id === id);
+        nameEl.textContent = celeb ? celeb.name : "Auto-match";
+    }
+    renderCelebrityList(window.__lastData ? window.__lastData.celebrities : EMBEDDED_DATA.celebrities);
+}
+
+function sendMessage(text, data) {
+    if (!text || !text.trim()) return;
+    text = text.trim();
+    const celebrities = (data && data.celebrities) || (window.__lastData && window.__lastData.celebrities) || EMBEDDED_DATA.celebrities;
+    const journeyQuotes = (data && data.journeyQuotes) || (window.__lastData && window.__lastData.journeyQuotes) || EMBEDDED_DATA.journey_quotes;
+
+    // Add user message (.text() prevents XSS)
+    state.chatHistory.push({ role: "user", text: text });
+
+    // Determine reply celebrity: use if selected, else auto-match
+    let celebrity = null;
+    if (state.activeCelebrityId) {
+        celebrity = celebrities.find(c => c.id === state.activeCelebrityId);
+    }
+    if (!celebrity) {
+        celebrity = matchCelebrity(text, celebrities);
+    }
+
+    let replyData;
+    if (celebrity) {
+        const reply = pickReply(celebrity, text);
+        replyData = {
+            celebrity: celebrity.name,
+            avatar: celebrity.avatar,
+            era: celebrity.era,
+            quote: reply.quote,
+            source: reply.source
+        };
+    } else {
+        replyData = getFallbackReply(journeyQuotes);
+    }
+
+    state.chatHistory.push({ role: "celebrity", ...replyData });
+    renderChatHistory();
+}
+
+// ===== Event binding =====
+function setupEventHandlers() {
+    const input = document.getElementById("chat-input");
+    const sendBtn = document.getElementById("send-btn");
+
+    input.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            const text = input.value;
+            input.value = "";
+            sendMessage(text);
+        }
+    });
+
+    sendBtn.addEventListener("click", function() {
+        const text = input.value;
+        input.value = "";
+        sendMessage(text);
+        input.focus();
+    });
+}
+
+// ===== Main flow =====
+async function main() {
+    const data = await loadData();
+    window.__lastData = data;
+    if (fetchStatus.anyFetched) {
+        document.getElementById('dataSource').innerHTML =
+            'Data source: loaded live from <code>scripts/output/data/</code> (running in http server mode)';
+    }
+    renderCelebrityList(data.celebrities);
+    renderQuickTopics(data.quickTopics);
+    renderChatHistory();
+    setupEventHandlers();
+}
+
+// resize debounce 250ms
+let resizeTimer;
+window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        if (window.__lastData) {
+            renderCelebrityList(window.__lastData.celebrities);
+            renderChatHistory();
+        }
+    }, 250);
+});
+
+main();
+</script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
