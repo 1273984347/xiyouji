@@ -4,9 +4,16 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W452），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W453），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.68（2026-08-16）：W453 移除评论.txt — 外部锐评原始文本退役
+
+> **来源**：用户确认 评论.txt 内容已无用——四段批评的可操作结论已全部落地（W448-W452），CHANGELOG / 交接文档 保留来源标注，文件无任何链接引用，git 历史可恢复。
+> - **执行（删除）**：git rm 评论.txt（保留 git 历史可恢复）。
+> - **验证**：verify_delivery 全绿（A1-A6 611 / A4 209 / 学术研究 105 显式引用）·lint_links 无断链（该文件无链接引用）·generate_csp 零漂移。
+> - **状态**：已落地·待 commit/push。
 
 ### v2.3.67（2026-08-16）：W452 学术研究显式引用补齐 — 105 篇头部 > 引用 + verify 门禁
 
