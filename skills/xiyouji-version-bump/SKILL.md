@@ -1,7 +1,7 @@
 ---
 name: xiyouji-version-bump
 description: 西游记项目（D:\1\xiyouji）版本 bump 与六文档同步标准流程 playbook。步骤：预检记录规模描述 → 改 dukou-engine 长链页脚 → 写 CHANGELOG/交接文档/file-index → 跑 bump_version.py → 手动补回规模描述（bump_version.py --desc 会吞掉版本行的"共 611 篇"/"A4 209 篇"，导致 verify_delivery 报 FAIL）→ verify_delivery 全绿 → git add -u → commit/push。当用户要求"版本 bump"、"升版本"、"W 批次同步"、"六文档同步"、"发新版本"、"version bump"、"W### 提交"时触发。
-version: 1.0.0
+version: 1.0.1
 ---
 
 # 西游记项目版本 Bump 与六文档同步
@@ -83,11 +83,15 @@ cd /d/1/xiyouji && python scripts/bump_version.py --desc "W新 <描述>" --note 
 
 脚本会读 footer（第 1 步已改），同步 README/STRUCTURE/项目说明 的版本行、W 范围，以及 index/cross-time-danmaku/tag-cloud 简单页脚。**它不会**写 CHANGELOG 完整条目，也**不会**改 dukou-engine footer（这两样靠前面手写）。
 
-### 第 6 步：手动补回规模描述（陷阱，必做）
+### 第 6 步：手动修复版本行（陷阱，必做）
 
 `bump_version.py --desc` 会**吞掉版本行里的规模描述**（如 `A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）`），同时**日期保持旧值**。若不补回，`verify_delivery` 会报 FAIL（`A4 计数不一致（缺 '209 篇'）`）。
 
-手动补回 `README.md`、`STRUCTURE.md`、`docs/00-导读/项目说明.md` 三处版本行的规模描述，并把日期改成当前日期。规模描述以第 0 步预检记下的原文为准，不要凭空编。
+跑完脚本后逐处核改三份文档的版本行，共三个子项：
+
+1. **补回规模描述 + 日期**：`README.md`、`STRUCTURE.md`、`docs/00-导读/项目说明.md` 三处版本行的规模描述被吞、日期停留旧值，需手动补回并改成当天。规模描述以第 0 步预检记下的原文为准，不要凭空编。
+2. **重写 STRUCTURE.md 版本行（修复畸形尾巴）**：bump 对 STRUCTURE.md 版本行的处理是**追加** ` + W4xx（W4xx 描述）` 到行尾，而非替换旧 W 描述（旧描述滞留、新描述残缺）。整行重写为干净格式：`> 当前版本：v2.3.XX（date）— W4xx <描述> — A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。`
+3. **核改项目说明 :45 第二处版本行**：`docs/00-导读/项目说明.md` 第 45 行附近有第二处 `- **当前版本**：vX.Y.Z（date）— ...` 行（头部版本行之外），bump **完全不更新**它，需手动核改版本号与日期。
 
 ### 第 7 步：verify_delivery 全绿
 
@@ -111,6 +115,8 @@ cd /d/1/xiyouji && git status --short | grep '^??'   # 确认 untracked 未入�
 
 - **跳过第 0 步预检**：没记下当前规模描述原文就跑 bump，第 6 步只能凭记忆补，极易补错数字导致 verify_delivery FAIL。预检是强制前置。
 - **bump_version.py --desc 吞规模描述**：这是最常踩的坑。跑脚本后必须手动补回 README/STRUCTURE/项目说明 三处规模描述，否则 verify_delivery FAIL。
+- **STRUCTURE 版本行追加畸形尾巴**：bump 对 STRUCTURE.md 版本行是**追加** ` + W4xx（W4xx 描述）` 而非替换旧描述（旧 W 描述滞留、新描述残缺），需重写整行，否则版本行格式畸形且描述错误。
+- **项目说明 :45 第二处版本行漏改**：`docs/00-导读/项目说明.md` 第 45 行附近的 `- **当前版本**：...` 行（头部版本行之外的第二处）bump **完全不更新**，需手动核改版本号 + 日期。
 - **日期不更新**：bump_version 不刷新版本行日期，需手动改成当天。
 - **顺序不能乱**：footer 必须先改，脚本才读得到新 v/W；CHANGELOG/交接文档/file-index 的完整条目脚本不会代写。
 - **git add -u 而非 git add .**：避免把「工具不入库」的 untracked 文件误提交。
@@ -122,6 +128,7 @@ cd /d/1/xiyouji && git status --short | grep '^??'   # 确认 untracked 未入�
 - [ ] dukou-engine footer 已插入新 v/W
 - [ ] 六文档均已更新且版本一致
 - [ ] 三处版本行规模描述已补回、日期正确
+- [ ] STRUCTURE 版本行无「+ W4xx」畸形尾巴、项目说明第二处「当前版本」行已核改
 - [ ] `verify_delivery.py` 全绿，无 FAIL
 - [ ] `git add -u` 后 untracked 文件仍未被暂存
 - [ ] commit 已建、push 到 origin main 成功
