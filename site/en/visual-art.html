@@ -1,0 +1,2538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-x9FLg3BkJeBBeAZjbYS5FJtw8pLLNltKEo2ViqtP3k8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Visual Art · The Material Form of the Heart Sutra & Scent Map · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .breadcrumb .sep { margin: 0 6px; color: var(--line); }
+        
+        @media (max-width: 920px) {
+            
+        }
+        @media (max-width: 560px) {
+            
+        }
+        
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-deep);
+        }
+        .kpi-card.gold { border-top-color: var(--gold); }
+        .kpi-card.blue { border-top-color: var(--accent-2); }
+        .kpi-card.green { border-top-color: var(--accent-4); }
+        .kpi-card.brown { border-top-color: var(--accent-3); }
+        
+        .kpi-card.gold .label { color: var(--accent-3); }
+        .kpi-card.blue .label { color: var(--accent-2); }
+        .kpi-card.green .label { color: var(--accent-4); }
+        .kpi-card.brown .label { color: var(--accent-3); }
+        
+        
+        
+        
+        
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        /* 项目介绍卡 */
+        .project-intro {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border: 1px solid var(--accent-soft);
+            border-radius: 8px;
+            padding: 22px 26px;
+            margin-bottom: 20px;
+        }
+        .project-intro h3 {
+            color: var(--accent);
+            font-size: 1.15rem;
+            margin-bottom: 4px;
+            letter-spacing: 0.04em;
+        }
+        .project-intro .english-name {
+            font-size: 0.78rem;
+            color: var(--accent-3);
+            letter-spacing: 0.15em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 12px;
+        }
+        .project-intro .intro-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+            gap: 10px 20px;
+            font-size: 0.88rem;
+            margin-top: 10px;
+        }
+        .project-intro .intro-field .k {
+            color: var(--accent-3);
+            font-size: 0.74rem;
+            letter-spacing: 0.08em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 2px;
+        }
+        .project-intro .intro-field .v {
+            color: var(--ink);
+            font-weight: 500;
+        }
+        .project-intro .intro-block {
+            grid-column: 1 / -1;
+            margin-top: 6px;
+        }
+        /* 艺术宣言引用块 */
+        .artistic-statement {
+            background: linear-gradient(135deg, #1a1410 0%, #3a2820 100%);
+            color: #f5e9d4;
+            border-radius: 8px;
+            padding: 24px 28px;
+            margin: 18px 0;
+            border-left: 4px solid var(--gold);
+            position: relative;
+        }
+        .artistic-statement::before {
+            content: "“";
+            position: absolute;
+            left: 16px;
+            top: 4px;
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.4;
+            font-family: serif;
+            line-height: 1;
+        }
+        .artistic-statement .label {
+            color: var(--gold);
+            font-size: 0.74rem;
+            letter-spacing: 0.18em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 36px;
+        }
+        .artistic-statement .text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            font-style: italic;
+            padding-left: 36px;
+            color: #f5e9d4;
+        }
+        /* 设计规格表 */
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+            gap: 12px;
+            margin: 18px 0;
+        }
+        .spec-item {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--gold);
+            border-radius: 6px;
+            padding: 10px 14px;
+        }
+        .spec-item .k {
+            font-size: 0.72rem;
+            color: var(--accent-3);
+            letter-spacing: 0.1em;
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 3px;
+        }
+        .spec-item .v {
+            font-size: 0.9rem;
+            color: var(--ink);
+            font-weight: 500;
+        }
+        /* 心经波纹图 */
+        #wave-svg {
+            width: 100%;
+            height: 480px;
+            display: block;
+            background: linear-gradient(180deg, #1a1410 0%, #2a1f18 100%);
+            border-radius: 8px;
+            margin: 14px 0;
+        }
+        .wave-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(255, 248, 236, 0.97);
+            color: var(--ink);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            max-width: 260px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .wave-tip .tip-title {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .wave-tip .tip-emotion {
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.78rem;
+            margin-top: 4px;
+        }
+        .wave-tip .tip-phrase {
+            color: var(--accent-3);
+            font-style: italic;
+            margin-top: 4px;
+            font-size: 0.78rem;
+        }
+        /* 通用卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+            margin-top: 16px;
+        }
+        @media (max-width: 1100px) {
+            .card-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 720px) {
+            .card-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .card-grid { grid-template-columns: 1fr; }
+        }
+        /* 诵经记录卡片 */
+        .chant-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            border-top: 3px solid var(--accent-2);
+            position: relative;
+            overflow: hidden;
+        }
+        .chant-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-deep);
+        }
+        .chant-card.amp-high { border-top-color: var(--accent); }
+        .chant-card.amp-mid { border-top-color: #d97706; }
+        .chant-card.amp-low { border-top-color: var(--accent-2); }
+        .chant-card .ch-n {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            opacity: 0.6;
+        }
+        .chant-card .ch-chapter {
+            font-size: 0.74rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 2px;
+            letter-spacing: 0.05em;
+        }
+        .chant-card .ch-location {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+        .chant-card .ch-context {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin-bottom: 8px;
+            line-height: 1.55;
+        }
+        .chant-card .ch-amp {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .chant-card .ch-amp-bar {
+            display: inline-block;
+            height: 6px;
+            border-radius: 3px;
+            vertical-align: middle;
+        }
+        .chant-card .ch-emotion {
+            font-size: 0.78rem;
+            color: var(--accent-2);
+            margin-bottom: 6px;
+            font-style: italic;
+        }
+        .chant-card .ch-emotion .arrow {
+            color: var(--accent-3);
+            margin: 0 4px;
+        }
+        .chant-card .ch-phrase {
+            font-size: 0.76rem;
+            color: var(--accent-3);
+            font-style: italic;
+            border-top: 1px dashed var(--line);
+            padding-top: 6px;
+            line-height: 1.5;
+        }
+        /* 气味地点卡片 */
+        .scent-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            border-left: 4px solid var(--accent);
+            position: relative;
+        }
+        .scent-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-deep);
+        }
+        .scent-card.cat-immortal { border-left-color: var(--accent-4); }
+        .scent-card.cat-danger { border-left-color: var(--accent); }
+        .scent-card.cat-desolate { border-left-color: var(--ink-soft); }
+        .scent-card .sc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+        .scent-card .sc-n {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.72rem;
+            color: var(--ink-soft);
+        }
+        .scent-card .sc-cat {
+            font-size: 0.66rem;
+            padding: 2px 7px;
+            border-radius: 8px;
+            color: #fff;
+            white-space: nowrap;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        .sc-cat.cat-immortal { background: var(--accent-4); }
+        .sc-cat.cat-danger { background: var(--accent); }
+        .sc-cat.cat-desolate { background: var(--ink-soft); }
+        .scent-card .sc-location {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+        .scent-card .sc-meta {
+            font-size: 0.72rem;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+            margin-bottom: 8px;
+        }
+        .scent-card .sc-profile {
+            font-size: 0.86rem;
+            color: var(--accent-3);
+            font-weight: 500;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            background: #fff8ec;
+            border-radius: 4px;
+            padding: 6px 8px;
+        }
+        .scent-card .sc-notes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        .scent-card .sc-notes .chip {
+            font-size: 0.7rem;
+            padding: 2px 7px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            color: var(--ink-soft);
+        }
+        .scent-card .sc-intensity {
+            font-size: 0.74rem;
+            margin-bottom: 6px;
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+        }
+        .scent-card .sc-stars {
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+        .scent-card .sc-mood {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+        .scent-card .sc-desc {
+            font-size: 0.78rem;
+            color: var(--ink);
+            border-left: 2px solid var(--accent-soft);
+            padding-left: 8px;
+            margin-bottom: 8px;
+            line-height: 1.55;
+            font-style: italic;
+        }
+        .scent-card .sc-formula {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3px;
+            font-size: 0.72rem;
+            background: var(--bg);
+            border-radius: 4px;
+            padding: 6px 8px;
+            border: 1px dashed var(--line);
+        }
+        .scent-card .sc-formula .note-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 6px;
+        }
+        .scent-card .sc-formula .note-label {
+            color: var(--accent-3);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.68rem;
+        }
+        .scent-card .sc-formula .note-val {
+            color: var(--ink);
+            text-align: right;
+        }
+        /* 类别分组徽章 */
+        .category-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 16px 0 6px;
+            font-size: 0.84rem;
+        }
+        .category-row .cat-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 14px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            color: var(--ink-soft);
+        }
+        .category-row .cat-pill .dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            display: inline-block;
+        }
+        .category-row .cat-pill.immortal .dot { background: var(--accent-4); }
+        .category-row .cat-pill.danger .dot { background: var(--accent); }
+        .category-row .cat-pill.desolate .dot { background: var(--ink-soft); }
+        /* 取经路径气味流 */
+        #scent-flow-svg {
+            width: 100%;
+            height: 280px;
+            display: block;
+            background: linear-gradient(180deg, #faf7f2 0%, #fff8ec 100%);
+            border-radius: 8px;
+            margin-top: 14px;
+        }
+        .scent-tip {
+            position: absolute;
+            pointer-events: none;
+            background: rgba(26, 20, 16, 0.95);
+            color: #f5e9d4;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            max-width: 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+        }
+        .scent-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+        .scent-tip .tip-meta { color: #e9b885; font-size: 0.74rem; font-family: "JetBrains Mono", monospace; }
+        /* 视觉艺术构想卡 */
+        .idea-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            border-top: 3px solid var(--accent-3);
+            position: relative;
+        }
+        .idea-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-deep);
+        }
+        .idea-card .id-n {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 1.4rem;
+            color: var(--accent-soft);
+            opacity: 0.5;
+            font-weight: 700;
+        }
+        .idea-card .id-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+            padding-right: 32px;
+        }
+        .idea-card .id-form {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 8px;
+            background: var(--accent-soft);
+            color: var(--accent-3);
+            margin-bottom: 8px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+        .idea-card .id-concept {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        .idea-card .id-innovation {
+            font-size: 0.8rem;
+            color: var(--accent);
+            background: #fff8ec;
+            border-left: 2px solid var(--accent);
+            padding: 6px 8px;
+            border-radius: 0 4px 4px 0;
+            line-height: 1.55;
+            font-style: italic;
+        }
+        .idea-card .id-innovation::before {
+            content: "★ 创新 · ";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 0.72rem;
+            color: var(--accent-3);
+        }
+        /* 洞察栏 */
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        /* 小标题 */
+        .sub-h {
+            font-size: 1rem;
+            color: var(--accent-2);
+            margin: 18px 0 8px;
+            letter-spacing: 0.05em;
+            border-left: 3px solid var(--accent-2);
+            padding-left: 10px;
+        }
+        
+        
+        
+        footer .gen-time {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            color: var(--line);
+            font-family: "JetBrains Mono", monospace;
+        }
+        /* 图例 */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 18px;
+            margin-top: 14px;
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+        }
+        .legend .lg-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend .lg-dot {
+            width: 12px; height: 12px; border-radius: 50%;
+            display: inline-block;
+        }
+        .legend .lg-line {
+            width: 22px; height: 3px; display: inline-block; border-radius: 2px;
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/visual-art.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Visual Art · The Material Form of the Heart Sutra & Scent Map</p>
+        <p class="kicker">AB · Visual Art</p>
+        <h1>Visual Art · The Material Form of the Heart Sutra & Scent Map</h1>
+        <p class="subtitle">VISUAL &amp; ART</p>
+        <p class="tagline">Turning Journey to the West into a distinctive visual language and sensory experience</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice" id="dataSource">
+            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">CHANTINGS · Chantings</div>
+                <div class="value">10<span style="font-size:1rem;color:var(--ink-soft);"> times</span></div>
+                <div class="desc">Heart Sutra chanting records</div>
+            </div>
+            <div class="kpi-card gold">
+                <div class="label">MAX AMP · Max Amplitude</div>
+                <div class="value">1.2</div>
+                <div class="desc">Bhiksu Kingdom · deepest trough</div>
+            </div>
+            <div class="kpi-card green">
+                <div class="label">SCENTS · Scent Locations</div>
+                <div class="value">10<span style="font-size:1rem;color:var(--ink-soft);"> sites</span></div>
+                <div class="desc">Scent nodes along the pilgrimage route</div>
+            </div>
+            <div class="kpi-card brown">
+                <div class="label">CATEGORIES · Scent Categories</div>
+                <div class="value">3<span style="font-size:1rem;color:var(--ink-soft);"> types</span></div>
+                <div class="desc">Immortal · Danger · Desolate</div>
+            </div>
+            <div class="kpi-card blue">
+                <div class="label">IDEAS · Visual Ideas</div>
+                <div class="value">10<span style="font-size:1rem;color:var(--ink-soft);"> ideas</span></div>
+                <div class="desc">Visual art project ideas</div>
+            </div>
+        </div>
+
+        <!-- 板块 1：心经物质形态数据雕塑 -->
+        <section class="section">
+            <h2 class="section-title">The Material Form of the Heart Sutra · Data Sculpture</h2>
+            <div class="section-sub">Material Form of the Heart Sutra · Presenting the emotional fluctuations of the sutra chanting in wave form on an exhibition wall using an extremely fine gold thread</div>
+
+            <div class="project-intro" id="project-intro"></div>
+
+            <div class="artistic-statement" id="artistic-statement"></div>
+
+            <h3 class="sub-h">Sculpture Design Specifications</h3>
+            <div class="spec-grid" id="spec-grid"></div>
+
+            <h3 class="sub-h">Core Visualization · Heart Sutra Wave Chart (gold-thread wave + heart-shaped void projection)</h3>
+            <div style="position:relative;">
+                <svg id="wave-svg"></svg>
+                <div class="wave-tip" id="wave-tip"></div>
+            </div>
+            <div class="legend">
+                <div class="lg-item"><span class="lg-line" style="background:#d4af37;box-shadow:0 0 6px #d4af37;"></span><span>Gold-thread wave (fine gold thread 0.5mm)</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:#d4af37;"></span><span>Wave points (chanting records)</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:#c8463a;"></span><span>Deep trough (high amplitude)</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:#f0d878;"></span><span>Return to zero (Buddhahood at Spirit Mountain)</span></div>
+                <div class="lg-item"><span style="font-size:1.1rem;color:#d4af37;">♡</span><span>Heart-shaped void projection</span></div>
+            </div>
+
+            <h3 class="sub-h">Chanting Record Card Grid (10 chantings · 5 × 2)</h3>
+            <div class="card-grid" id="chant-grid"></div>
+        </section>
+
+        <!-- 板块 2：西游记气味地图 -->
+        <section class="section">
+            <h2 class="section-title">Scent Map of Journey to the West · Olfactory Art</h2>
+            <div class="section-sub">Scent Map of Journey to the West · Designing unique scents for key locations along the pilgrimage route</div>
+
+            <div class="project-intro" id="scent-intro"></div>
+
+            <div class="category-row">
+                <span class="cat-pill immortal"><span class="dot"></span>Immortal (3 sites) · Flower-Fruit Mountain · Five Villages Monastery · Spirit Mountain</span>
+                <span class="cat-pill danger"><span class="dot"></span>Danger (5 sites) · White Tiger Ridge · Flaming Mountain · Spider Silk Cave · Lion-Camel Ridge · Bottomless Cave</span>
+                <span class="cat-pill desolate"><span class="dot"></span>Desolate (2 sites) · Five Elements Mountain · Flowing Sands River</span>
+            </div>
+
+            <h3 class="sub-h">Scent Location Card Grid (10 locations · 5 × 2)</h3>
+            <div class="card-grid" id="scent-grid"></div>
+
+            <h3 class="sub-h">Pilgrimage Route Scent Flow (D3.js path visualization)</h3>
+            <div style="position:relative;">
+                <svg id="scent-flow-svg"></svg>
+                <div class="scent-tip" id="scent-tip"></div>
+            </div>
+            <div class="legend">
+                <div class="lg-item"><span class="lg-line" style="background:var(--accent-3);"></span><span>Pilgrimage route</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:var(--accent-4);"></span><span>Immortal</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:var(--accent);"></span><span>Danger</span></div>
+                <div class="lg-item"><span class="lg-dot" style="background:var(--ink-soft);"></span><span>Desolate</span></div>
+                <div class="lg-item"><span>Dot size = scent intensity</span></div>
+            </div>
+        </section>
+
+        <!-- 板块 3：视觉艺术构想库 -->
+        <section class="section">
+            <h2 class="section-title">Visual Art Idea Library · 10 Project Ideas</h2>
+            <div class="section-sub">Visual Art Ideas · Installation Art / Data Visualization / Stereoscopic Projection / Light Art / Specimen Gallery / Sand Painting / Three-Screen Installation / Calligraphy / Ecological Installation / Photography</div>
+            <div class="card-grid" id="idea-grid"></div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="insight-box">
+                <h4>Journey to the West Through the Lens of Visual Art</h4>
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/05-诗词歌赋/原著诗词赏析.md">Original Poetry Appreciation (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/visual-art.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // ===== 嵌入式 fallback 数据（fetch 失败时使用）=====
+    const EMBEDDED = {
+        heart_sutra_sculpture: {
+            project_name: "The Material Form of the Heart Sutra",
+            english_name: "Material Form of the Heart Sutra",
+            art_form: "Abstract Data Sculpture · Installation Art",
+            core_concept: "Count the times Tang Sanzang chants the “Heart Sutra” throughout Journey to the West, along with their scenes and the emotional fluctuations of the surrounding plot, then present them in wave form on an exhibition wall using an extremely fine gold thread",
+            design_principle: "The crests represent the calm after chanting; the troughs represent the extreme fear encountered around the chanting; the gold thread ultimately winds into a giant “heart”-shaped void projection",
+            deeper_meaning: "This is a physical model of “how faith resists external shocks”",
+            sutra_chanting_records: [
+                { n: 1, chapter: "Ch. 19", location: "Futu Mountain", context: "The Crow's Nest Chan Master transmits the “Heart Sutra” to Tang Sanzang · first contact", pre_emotion: "Anticipation · Curiosity", post_emotion: "Shock · Awakening", wave_amplitude: 0.3, wave_direction: "rise", key_phrase: "Form is not other than emptiness; emptiness is not other than form" },
+                { n: 2, chapter: "Ch. 20", location: "Yellow Wind Ridge", context: "Meets the Yellow Wind Monster · Wukong's eyes are injured · Tang Sanzang chants and prays", pre_emotion: "Fear · Worry", post_emotion: "Slightly calmed · still worried", wave_amplitude: 0.7, wave_direction: "trough", key_phrase: "Mind free of hindrances; because of no hindrances" },
+                { n: 3, chapter: "Ch. 27", location: "White Tiger Ridge", context: "Thrice defeats the White Bone Demon · Wukong is banished · Tang Sanzang chants alone", pre_emotion: "Anger · Sorrow", post_emotion: "Remorse · Loneliness", wave_amplitude: 1.0, wave_direction: "deep trough", key_phrase: "Without terror; far from inverted delusions" },
+                { n: 4, chapter: "Ch. 36", location: "Black Rooster Kingdom", context: "Rescues the Black Rooster king · stays the night at Baolin Monastery · Tang Sanzang chants to soothe", pre_emotion: "Anxiety · Fatigue", post_emotion: "Calm · Resolute", wave_amplitude: 0.4, wave_direction: "rise", key_phrase: "Ultimate nirvana" },
+                { n: 5, chapter: "Ch. 47", location: "Heaven-Reaching River", context: "Blocked at the Heaven-Reaching River · stays the night at Chen Village · Tang Sanzang chants to seek passage", pre_emotion: "Anxiety · Helplessness", post_emotion: "Slightly calmed · Hopeful", wave_amplitude: 0.6, wave_direction: "trough", key_phrase: "Prajñāpāramitā" },
+                { n: 6, chapter: "Ch. 62", location: "Jisai Kingdom", context: "Sweeps the pagoda in Jisai Kingdom · chants at midnight · meets the Nine-Headed Insect", pre_emotion: "Solemn · Calm", post_emotion: "Disturbed · Alert", wave_amplitude: 0.5, wave_direction: "rise then fall", key_phrase: "All Buddhas of the three times, by relying on Prajñāpāramitā" },
+                { n: 7, chapter: "Ch. 78", location: "Bhiksu Kingdom", context: "Saves the children's hearts and livers · Tang Sanzang chants in anger", pre_emotion: "Anger · Compassion", post_emotion: "Resolute · Compassionate", wave_amplitude: 1.2, wave_direction: "deep trough then peak", key_phrase: "No suffering, origin, cessation, or path; no wisdom and no attainment" },
+                { n: 8, chapter: "Ch. 85", location: "Dharma-Destroying Kingdom", context: "The Dharma-Destroying Kingdom kills monks · Tang Sanzang disguises himself · chants the Heart Sutra at night", pre_emotion: "Fear · Disguise", post_emotion: "Calm · Prayer", wave_amplitude: 0.9, wave_direction: "trough", key_phrase: "Mind free of hindrances; because of no hindrances" },
+                { n: 9, chapter: "Ch. 93", location: "India", context: "Near Spirit Mountain · the Indian princess seeks a husband · Tang Sanzang chants to steady his mind", pre_emotion: "Vacillation · Fatigue", post_emotion: "Resolute · Complete", wave_amplitude: 0.3, wave_direction: "rise", key_phrase: "Anuttarā-samyak-saṃbodhi" },
+                { n: 10, chapter: "Ch. 98", location: "Thunderclap Monastery at Spirit Mountain", context: "Arrives at Spirit Mountain · sheds his mortal body at the Lingyun Crossing · Tang Sanzang chants for the last time", pre_emotion: "Complete · Moved", post_emotion: "Buddhahood · Selflessness", wave_amplitude: 0.0, wave_direction: "return to zero", key_phrase: "Gate gate pāragate" }
+            ],
+            wave_statistics: {
+                total_chantings: 10,
+                max_amplitude: 1.2,
+                min_amplitude: 0.0,
+                avg_amplitude: 0.59,
+                deepest_valley: "Bhiksu Kingdom · saving the children's hearts and livers",
+                highest_peak: "Spirit Mountain · Buddhahood, return to zero",
+                trend: "The wave gradually flattens, finally returning to zero, reflecting the maturation of the mind"
+            },
+            sculpture_design: {
+                material: "Extremely fine gold thread (0.5mm diameter)",
+                wall_size: "12m × 4m exhibition wall",
+                wave_length: "Each segment about 1.2m · corresponding to one chanting",
+                color: "Pure gold · 95% luster",
+                lighting: "Top light + side light · giving the gold thread a faint shadow",
+                projection: "The gold thread ultimately winds into a “heart”-shaped void · projected onto the floor",
+                interaction: "As viewers approach, the heart-shaped void flickers like breathing"
+            },
+            artistic_statement: "Faith is not unchanging calm, but a repeated tug-of-war between fear and stability; the gold thread's wave is the materialization of that tug-of-war"
+        },
+        scent_map: {
+            project_name: "Scent Map of Journey to the West",
+            english_name: "Scent Map of Journey to the West",
+            art_form: "Sensory Map · Olfactory Art",
+            core_concept: "Designing unique scents for key locations along the pilgrimage route · an extraordinarily unique sensory reading experience",
+            presentation_method: "A long-scroll map with a scratch-and-sniff fragrance card beside each location, or a QR code linking to a custom fragrance formula",
+            locations: [
+                { n: 1, location: "Flower-Fruit Mountain", chapter: "Ch. 1", geography: "Pūrvavideha Continent · a famous mountain in the sea", scent_profile: "Water vapor · the sweetness of peaches · the animal musk of the monkey troop", scent_notes: ["Salt of the sea", "Sweet ripe peaches", "Ape musk", "Fresh morning dew"], intensity: 4, mood: "Vibrant · primally wild", key_description: "Newborn Sun Wukong frolics with ten thousand monkeys · the Water Curtain Cave waterfall · peach blossoms across the mountain", fragrance_formula: { top_note: "Sea breeze · peach fragrance", middle_note: "Macaque musk · fresh grass", base_note: "Damp rock" } },
+                { n: 2, location: "Five Elements Mountain", chapter: "Ch. 14", geography: "Aparagodānīya Continent · Mount Liangjie", scent_profile: "Cold hard rock · dust · 500 years of solitude", scent_notes: ["Icy rock", "Dust", "Rust", "Withered grass"], intensity: 3, mood: "Oppressive · lonely · waiting", key_description: "Wukong imprisoned for 500 years · only iron pellets and molten copper · sandstorms fill the sky", fragrance_formula: { top_note: "Dust · cold wind", middle_note: "Rock · rust", base_note: "Withered grass · desolation" } },
+                { n: 3, location: "Flowing Sands River", chapter: "Ch. 22", geography: "Aparagodānīya Continent · 800 li of flowing sand", scent_profile: "Turbid river water · sand and soil · dampness", scent_notes: ["Turbid vapor", "Wet sand", "Fishy smell", "River mud"], intensity: 3, mood: "Desolate · dangerous", key_description: "Sha Wujing holds sway · the water is only 1m deep but full of traps", fragrance_formula: { top_note: "Wet sand · river wind", middle_note: "Fishy · river mud", base_note: "Rotten grass" } },
+                { n: 4, location: "Five Villages Monastery", chapter: "Ch. 24-26", geography: "Longevity Mountain · Five Villages Monastery", scent_profile: "Immortal herbs · ginseng fruit · Daoist temple sandalwood", scent_notes: ["Daoist temple sandalwood", "Sweet ginseng fruit", "Immortal herbs", "Fresh dew"], intensity: 5, mood: "Immortal realm · solemn", key_description: "Zhenyuanzi's Daoist temple · ten-thousand-year-old ginseng fruit tree · brimming with immortal aura", fragrance_formula: { top_note: "Ginseng fruit · fresh dew", middle_note: "Daoist temple sandalwood · immortal herbs", base_note: "Cloud mist · aloeswood" } },
+                { n: 5, location: "White Tiger Ridge", chapter: "Ch. 27", geography: "Aparagodānīya Continent · a barren mountain", scent_profile: "Dry bones · decay · chilling wind", scent_notes: ["Dry bones", "Rotting flesh", "Chilling wind", "Wild grass"], intensity: 5, mood: "Terrifying · gloomy", key_description: "The White Bone Demon's territory · bones everywhere · gusts of chilling wind", fragrance_formula: { top_note: "Chilling wind · rotten grass", middle_note: "Dry bones · rotting flesh", base_note: "The breath of the underworld" } },
+                { n: 6, location: "Flaming Mountain", chapter: "Ch. 59-61", geography: "Aparagodānīya Continent · 800 li of flames", scent_profile: "Scorching mineral char · sweat · hot dry waves", scent_notes: ["Scorched earth", "Sulfur", "Sweat", "Heat waves"], intensity: 5, mood: "Scorching · searing · yearning", key_description: "800 li of flames · nothing grows · the Pilgrim borrows the palm-leaf fan three times", fragrance_formula: { top_note: "Heat waves · scorched earth", middle_note: "Sulfur · minerals", base_note: "Sweat · smoke" } },
+                { n: 7, location: "Spider Silk Cave", chapter: "Ch. 72-73", geography: "Aparagodānīya Continent · Silk-Winding Ridge", scent_profile: "Damp earthy mustiness · the faint sweetness of insect pheromones · decaying silk", scent_notes: ["Damp earth", "Insect pheromones", "Rotting silk", "Spider webs"], intensity: 4, mood: "Eerie · alluring · dangerous", key_description: "The lair of seven spider spirits · webs everywhere · heavy dampness", fragrance_formula: { top_note: "Spider webs · dampness", middle_note: "Insect pheromones · rotting silk", base_note: "Earthy mustiness" } },
+                { n: 8, location: "Lion-Camel Ridge", chapter: "Ch. 74-77", geography: "Aparagodānīya Continent · 800-li Lion-Camel Ridge", scent_profile: "Blood · bones · terror", scent_notes: ["Blood", "Human bones", "Rotting flesh", "Rusty weapons"], intensity: 5, mood: "Terror · death · despair", key_description: "Three demons devour humans for 800 li · mountains of human bones · blood reeks to the sky", fragrance_formula: { top_note: "Blood · putrid stench", middle_note: "Human bones · rusty weapons", base_note: "The aura of death" } },
+                { n: 9, location: "Bottomless Cave", chapter: "Ch. 80-83", geography: "Aparagodānīya Continent · Hollow Mountain", scent_profile: "Dampness · floral fragrance · rats · the mustiness of deep underground", scent_notes: ["Musty smell", "Rat musk", "Floral fragrance (disguise)", "Dampness"], intensity: 4, mood: "Wily · seductive · coercive", key_description: "The rat spirit's lair · a floral disguise · damp and musty within", fragrance_formula: { top_note: "Floral fragrance · cloying sweetness", middle_note: "Dampness · rat musk", base_note: "Must and rot" } },
+                { n: 10, location: "Thunderclap Monastery at Spirit Mountain", chapter: "Ch. 98", geography: "Aparagodānīya Continent · Spirit Mountain", scent_profile: "Sandalwood · the herbal scent of palm-leaf sutras · a pure, clean scent of “nothingness”", scent_notes: ["Sandalwood", "Palm-leaf herbs", "Gold powder", "Pure air"], intensity: 5, mood: "Solemn · complete · selfless", key_description: "A holy land of the Buddha · palm-leaf sutra fragrance · glittering gold powder · air of utmost purity", fragrance_formula: { top_note: "Sandalwood · palm-leaf", middle_note: "Gold powder · pure air", base_note: "Nothingness · purity" } }
+            ],
+            scent_categories: {
+                "Immortal": ["Flower-Fruit Mountain", "Five Villages Monastery", "Thunderclap Monastery at Spirit Mountain"],
+                "Danger": ["White Tiger Ridge", "Flaming Mountain", "Spider Silk Cave", "Lion-Camel Ridge", "Bottomless Cave"],
+                "Desolate": ["Five Elements Mountain", "Flowing Sands River"]
+            },
+            presentation_innovation: "Scratch-and-sniff fragrance cards + QR-code formulas · letting readers enter the world of Journey to the West through smell"
+        },
+        visual_art_summary: {
+            sutra_chantings: 10,
+            max_wave_amplitude: 1.2,
+            deepest_valley: "Bhiksu Kingdom · saving the children's hearts and livers",
+            scent_locations: 10,
+            scent_categories: 3,
+            visual_art_ideas: 10
+        },
+        visual_art_ideas: [
+            { n: 1, idea_name: "Eighty-One Ordeals Installation Wall", art_form: "Installation Art · Interactive Wall", concept: "A 12m wall with 81 frames of varying sizes, arranged in the chronological order of the eighty-one ordeals, each frame containing different visual elements (gold thread, ashes, bloodstains, fragments)", innovation: "Express the intensity of each ordeal through visual density, and the nature of each disaster through material" },
+            { n: 2, idea_name: "Wukong's Emotion ECG", art_form: "Data Visualization · Dynamic ECG", concept: "Turn Wukong's emotional fluctuations across 100 chapters into an ECG · red crests for anger, blue troughs for sorrow, green flat lines for calm", innovation: "Visualize abstract emotion through medical symbols" },
+            { n: 3, idea_name: "Three Realms Map Stereoscopic Projection", art_form: "Stereoscopic Projection · Installation", concept: "Stereoscopically project the three layers of Heaven, the human world, and the Underworld · use translucent gauze screens · separate each layer with smoke effects", innovation: "Break the flat limitation of traditional maps · make the three realms visible in three dimensions" },
+            { n: 4, idea_name: "Golden Cudgel Light Column", art_form: "Light Art · Sculpture", concept: "A 10m-tall Golden Cudgel light column · internal LEDs glow according to Wukong's combat power · atomized water sprays from the top", innovation: "Shape the material form of a mythic weapon with light and mist" },
+            { n: 5, idea_name: "Demon Specimen Gallery", art_form: "Specimen Gallery · Installation", concept: "Turn the demons of the 81 ordeals into specimens · each with a detailed “species card” noting habitat, diet, background, and combat power", innovation: "Present the absurdity of demons with museum solemnity · producing a striking contrast" },
+            { n: 6, idea_name: "Pilgrimage Route Sand Painting", art_form: "Sand Painting · Dynamic", concept: "Render the pilgrimage route as a sand painting · sand color varies by region · green grassland, yellow desert, red Flaming Mountain", innovation: "The fluidity of sand painting expresses the twists and turns of the pilgrimage road" },
+            { n: 7, idea_name: "Dialogue of the Three Teachings", art_form: "Three-Screen Installation · Dialogue", concept: "Three screens represent Buddhism, Daoism, and Confucianism · each features its representative (Tathāgata, Laozi, Confucius) · use AI to let them converse", innovation: "Let the three schools' ideas engage in contemporary dialogue · break traditional barriers" },
+            { n: 8, idea_name: "Heart Sutra Calligraphy Scroll", art_form: "Calligraphy · Installation", concept: "Write the full text of the “Heart Sutra” in calligraphy on a 100m scroll · the size of each section is proportional to the emotional intensity of Tang Sanzang's chanting", innovation: "Present inner fluctuation through the visual changes of calligraphy" },
+            { n: 9, idea_name: "Demon Ecosphere Bottle", art_form: "Ecological Installation · Miniature Landscape", concept: "Each demon is made into an ecosphere bottle · containing a miniature demon, its lair, minions, and environment", innovation: "Present the demons' living conditions through miniature landscapes" },
+            { n: 10, idea_name: "Pilgrimage Team Group Photo", art_form: "Photography · Installation", concept: "Photograph the five pilgrimage team members in a “group photo” · each in the same pose at different times and places · composite them into one", innovation: "Break the limits of time · compress 14 years of pilgrimage into a single photo" }
+        ]
+    };
+
+    // ===== 类别与配色映射 =====
+    // scent_category 判定（基于 scent_categories 反查）
+    function getScentCategory(location, scent_categories) {
+        for (const cat in scent_categories) {
+            if (scent_categories[cat].includes(location)) {
+                return cat;
+            }
+        }
+        return "Unknown";
+    }
+    const CAT_CLASS_MAP = {
+        "Immortal": "cat-immortal",
+        "Danger": "cat-danger",
+        "Desolate": "cat-desolate"
+    };
+    const CAT_COLOR_MAP = {
+        "Immortal": "#6B8E5A",
+        "Danger": "#c8463a",
+        "Desolate": "#6B6455"
+    };
+
+    // 视觉艺术构想 art_form 配色
+    const IDEA_FORM_COLOR = {
+        "Installation Art · Interactive Wall": "#c8463a",
+        "Data Visualization · Dynamic ECG": "#3a6b8c",
+        "Stereoscopic Projection · Installation": "#C9A063",
+        "Light Art · Sculpture": "#d4af37",
+        "Specimen Gallery · Installation": "#6B8E5A",
+        "Sand Painting · Dynamic": "#d97706",
+        "Three-Screen Installation · Dialogue": "#3a6b8c",
+        "Calligraphy · Installation": "#C9A063",
+        "Ecological Installation · Miniature Landscape": "#6B8E5A",
+        "Photography · Installation": "#23201A"
+    };
+
+    // ===== 渲染：心经项目介绍 =====
+    function renderSutraIntro(data) {
+        const sel = d3.select("#project-intro");
+        sel.selectAll("*").remove();
+        sel.append("h3").text(data.project_name);
+        sel.append("div").attr("class", "english-name").text(data.english_name);
+        const grid = sel.append("div").attr("class", "intro-row");
+        const fields = [
+            { k: "ART FORM · Art Form", v: data.art_form },
+            { k: "DESIGN · Design Principle", v: data.design_principle },
+            { k: "MEANING · Deeper Meaning", v: data.deeper_meaning }
+        ];
+        fields.forEach(f => {
+            const d = grid.append("div").attr("class", "intro-field");
+            d.append("div").attr("class", "k").text(f.k);
+            d.append("div").attr("class", "v").text(f.v);
+        });
+        grid.append("div").attr("class", "intro-field intro-block")
+            .html(`<div class="k">CORE CONCEPT · Core Concept</div><div class="v">${data.core_concept}</div>`);
+    }
+
+    function renderArtisticStatement(text) {
+        const sel = d3.select("#artistic-statement");
+        sel.selectAll("*").remove();
+        sel.append("div").attr("class", "label").text("ARTISTIC STATEMENT · Artistic Statement");
+        sel.append("div").attr("class", "text").text(text);
+    }
+
+    function renderSpecGrid(spec) {
+        const sel = d3.select("#spec-grid");
+        sel.selectAll("*").remove();
+        const items = [
+            { k: "MATERIAL · Material", v: spec.material },
+            { k: "WALL · Wall Size", v: spec.wall_size },
+            { k: "WAVE · Wave Length", v: spec.wave_length },
+            { k: "COLOR · Color", v: spec.color },
+            { k: "LIGHTING · Lighting", v: spec.lighting },
+            { k: "PROJECTION · Projection", v: spec.projection },
+            { k: "INTERACTION · Interaction", v: spec.interaction }
+        ];
+        items.forEach(it => {
+            const d = sel.append("div").attr("class", "spec-item");
+            d.append("div").attr("class", "k").text(it.k);
+            d.append("div").attr("class", "v").text(it.v);
+        });
+    }
+
+    // ===== 渲染：心经波纹图（核心 D3.js 可视化）=====
+    function renderWaveChart(records) {
+        const svg = d3.select("#wave-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("wave-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 480;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 50, right: 60, bottom: 90, left: 60 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+
+        const x = d3.scaleLinear()
+            .domain([0, records.length - 1])
+            .range([0, innerW - 80]); // 留出空间给心形末端
+        const y = d3.scaleLinear()
+            .domain([-0.2, 1.4])
+            .range([innerH, 0]);
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 背景网格（金色淡线）
+        for (let i = 0; i <= 5; i++) {
+            const yy = (innerH / 5) * i;
+            g.append("line")
+                .attr("x1", 0).attr("x2", innerW)
+                .attr("y1", yy).attr("y2", yy)
+                .attr("stroke", "#d4af37")
+                .attr("stroke-opacity", 0.08)
+                .attr("stroke-dasharray", "2,4");
+        }
+
+        // 中线（amplitude=0 平静线）
+        g.append("line")
+            .attr("x1", 0).attr("x2", innerW)
+            .attr("y1", y(0)).attr("y2", y(0))
+            .attr("stroke", "#d4af37")
+            .attr("stroke-opacity", 0.25)
+            .attr("stroke-dasharray", "4,4");
+
+        // 计算每个波点的 x、y
+        records.forEach((r, i) => {
+            r._x = x(i);
+            r._y = y(r.wave_amplitude);
+        });
+
+        // 生成波形：在两点之间加一个波峰（amplitude 的反向·即"心安"为波峰高位）
+        // 设计逻辑：amplitude 越大 → 波谷越深（向下）；amplitude 越小 → 越接近基线（向上波峰）
+        // 我们以 y(amplitude) 为节点·曲线带波动
+        const lineGen = d3.line()
+            .x(d => d._x)
+            .y(d => d._y)
+            .curve(d3.curveCatmullRom.alpha(0.6));
+
+        // 金线发光阴影
+        const defs = svg.append("defs");
+        const filter = defs.append("filter")
+            .attr("id", "gold-glow")
+            .attr("x", "-20%").attr("y", "-20%")
+            .attr("width","140%").attr("height", "140%");
+        filter.append("feGaussianBlur")
+            .attr("stdDeviation", "3")
+            .attr("result", "coloredBlur");
+        const merge = filter.append("feMerge");
+        merge.append("feMergeNode").attr("in", "coloredBlur");
+        merge.append("feMergeNode").attr("in", "SourceGraphic");
+
+        // 主金线
+        const path = g.append("path")
+            .datum(records)
+            .attr("fill", "none")
+            .attr("stroke", "#d4af37")
+            .attr("stroke-width", 2.5)
+            .attr("stroke-linecap", "round")
+            .attr("filter", "url(#gold-glow)")
+            .attr("d", lineGen);
+
+        // 路径动画
+        const totalLen = path.node().getTotalLength();
+        path.attr("stroke-dasharray", totalLen)
+            .attr("stroke-dashoffset", totalLen)
+            .transition()
+            .duration(1800)
+            .ease(d3.easeCubicOut)
+            .attr("stroke-dashoffset", 0);
+
+        // 心形末端（在波形末端汇聚成心形）
+        const heartCenterX = innerW - 30;
+        const heartCenterY = y(0);
+        const heartScale = 1.4;
+        // 心形 SVG path（参考提示）
+        const heartPath = "M12,21.35l-1.45-1.32C5.4,15.36,2,12.28,2,8.5 C2,5.42,4.42,3,7.5,3c1.74,0,3.41,0.81,4.5,2.09C13.09,3.81,14.76,3,16.5,3 C19.58,3,22,5.42,22,8.5c0,3.78-3.4,6.86-8.55,11.54L12,21.35z";
+
+        // 连接线（从最后一个波点到心形）
+        g.append("path")
+            .datum([
+                { _x: records[records.length - 1]._x, _y: records[records.length - 1]._y },
+                { _x: heartCenterX - 12 * heartScale, _y: heartCenterY }
+            ])
+            .attr("fill", "none")
+            .attr("stroke", "#d4af37")
+            .attr("stroke-width", 2)
+            .attr("stroke-opacity", 0.7)
+            .attr("filter", "url(#gold-glow)")
+            .attr("d", d3.line().x(d => d._x).y(d => d._y).curve(d3.curveBasis))
+            .style("opacity", 0)
+            .transition().delay(1500).duration(600)
+            .style("opacity", 1);
+
+        // 心形轮廓（金色）
+        g.append("path")
+            .attr("d", heartPath)
+            .attr("transform", `translate(${heartCenterX - 12 * heartScale},${heartCenterY - 10 * heartScale}) scale(${heartScale})`)
+            .attr("fill", "none")
+            .attr("stroke", "#d4af37")
+            .attr("stroke-width", 2.2)
+            .attr("filter", "url(#gold-glow)")
+            .style("opacity", 0)
+            .transition().delay(1800).duration(800)
+            .style("opacity", 1);
+
+        // 心形呼吸闪烁动画
+        g.append("path")
+            .attr("d", heartPath)
+            .attr("transform", `translate(${heartCenterX - 12 * heartScale},${heartCenterY - 10 * heartScale}) scale(${heartScale})`)
+            .attr("fill", "#d4af37")
+            .attr("fill-opacity", 0)
+            .style("animation", "heart-breath 2.4s ease-in-out infinite");
+
+        // 添加 keyframes 心形呼吸动画
+        const styleEl = document.createElement("style");
+        styleEl.textContent = `
+            @keyframes heart-breath {
+                0%, 100% { fill-opacity: 0; }
+                50% { fill-opacity: 0.35; }
+            }
+        `;
+        document.head.appendChild(styleEl);
+
+        // 心形下方标签
+        g.append("text")
+            .attr("x", heartCenterX)
+            .attr("y", heartCenterY + 28 * heartScale)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#d4af37")
+            .style("letter-spacing", "0.15em")
+            .style("font-family", "'Noto Serif SC', serif")
+            .style("opacity", 0)
+            .text("Heart")
+            .transition().delay(2200).duration(400)
+            .style("opacity", 1);
+
+        // 波点 + tooltip
+        const tip = d3.select("#wave-tip");
+        g.selectAll(".wave-dot")
+            .data(records)
+            .enter()
+            .append("circle")
+            .attr("class", "wave-dot")
+            .attr("cx", d => d._x)
+            .attr("cy", d => d._y)
+            .attr("r", 0)
+            .attr("fill", d => d.wave_amplitude >= 1.0 ? "#c8463a" : d.wave_amplitude >= 0.5 ? "#e9b885" : "#f0d878")
+            .attr("stroke", "#d4af37")
+            .attr("stroke-width", 1.5)
+            .style("cursor", "pointer")
+            .style("filter", "drop-shadow(0 0 4px rgba(212,175,55,0.6))")
+            .transition().delay((d, i) => 200 + i * 150).duration(400)
+            .attr("r", d => d.wave_amplitude >= 1.0 ? 7 : 5);
+
+        g.selectAll(".wave-dot")
+            .on("mouseover", function(e, d) {
+                d3.select(this).transition().duration(150).attr("r", 9);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">Chanting ${d.n} · ${d.chapter}</div>` +
+                          `<div>${d.location} · ${d.context}</div>` +
+                          `<div class="tip-emotion">${d.pre_emotion} <span style="color:var(--accent);">→</span> ${d.post_emotion}</div>` +
+                          `<div class="tip-emotion">Amplitude ${d.wave_amplitude} · ${d.wave_direction}</div>` +
+                          `<div class="tip-phrase">"${d.key_phrase}"</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = el.parentElement.getBoundingClientRect();
+                let left = e.clientX - rect.left + 14;
+                if (left + 260 > rect.width) left = e.clientX - rect.left - 270;
+                tip.style("left", left + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function(e, d) {
+                d3.select(this).transition().duration(150)
+                    .attr("r", d.wave_amplitude >= 1.0 ? 7 : 5);
+                tip.style("opacity", 0);
+            });
+
+        // 波点标签（chapter + location）
+        g.selectAll(".wave-label-top")
+            .data(records)
+            .enter()
+            .append("text")
+            .attr("class", "wave-label-top")
+            .attr("x", d => d._x)
+            .attr("y", d => d._y - 14)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.72rem")
+            .style("fill", "#e9b885")
+            .style("font-family", "'JetBrains Mono', monospace")
+            .style("opacity", 0)
+            .text(d => d.chapter.replace("Ch. ", ""))
+            .transition().delay((d, i) => 400 + i * 150).duration(400)
+            .style("opacity", 0.9);
+
+        g.selectAll(".wave-label-bottom")
+            .data(records)
+            .enter()
+            .append("text")
+            .attr("class", "wave-label-bottom")
+            .attr("x", d => d._x)
+            .attr("y", d => d._y + 20)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#f5e9d4")
+            .style("font-weight", "600")
+            .style("opacity", 0)
+            .text(d => d.location)
+            .transition().delay((d, i) => 500 + i * 150).duration(400)
+            .style("opacity", 1);
+
+        // X 轴标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 70)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#e9b885")
+            .style("letter-spacing", "0.05em")
+            .text("Chanting order (by chapter) → heart-shaped void projection");
+
+        // Y 轴标题
+        g.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -innerH / 2)
+            .attr("y", -42)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.78rem")
+            .style("fill", "#e9b885")
+            .style("letter-spacing", "0.05em")
+            .text("Wave Amplitude (deep trough = fear · flat = calm)");
+
+        // Y 轴刻度
+        [0, 0.3, 0.6, 0.9, 1.2].forEach(v => {
+            g.append("text")
+                .attr("x", -10)
+                .attr("y", y(v) + 4)
+                .attr("text-anchor", "end")
+                .style("font-size", "0.7rem")
+                .style("fill", "#e9b885")
+                .style("font-family", "'JetBrains Mono', monospace")
+                .text(v.toFixed(1));
+            g.append("line")
+                .attr("x1", -4).attr("x2", 0)
+                .attr("y1", y(v)).attr("y2", y(v))
+                .attr("stroke", "#d4af37")
+                .attr("stroke-opacity", 0.4);
+        });
+
+        // 标注：最深波谷
+        const deepest = records.find(r => r.wave_amplitude === 1.2);
+        if (deepest) {
+            g.append("text")
+                .attr("x", deepest._x)
+                .attr("y", deepest._y + 36)
+                .attr("text-anchor", "middle")
+                .style("font-size", "0.7rem")
+                .style("fill", "#c8463a")
+                .style("font-style", "italic")
+                .style("opacity", 0)
+                .text("↓ Deepest trough")
+                .transition().delay(1800).duration(400)
+                .style("opacity", 1);
+        }
+
+        // 标注：归零
+        const lastRec = records[records.length - 1];
+        g.append("text")
+            .attr("x", lastRec._x)
+            .attr("y", lastRec._y - 30)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.7rem")
+            .style("fill", "#f0d878")
+            .style("font-style", "italic")
+            .style("opacity", 0)
+            .text("Return to zero · Buddhahood")
+            .transition().delay(2000).duration(400)
+            .style("opacity", 1);
+    }
+
+    // ===== 渲染：诵经记录卡片 =====
+    function renderChantCards(records) {
+        const sel = d3.select("#chant-grid");
+        sel.selectAll("*").remove();
+        records.forEach(r => {
+            const cls = r.wave_amplitude > 1.0 ? "amp-high" : r.wave_amplitude >= 0.5 ? "amp-mid" : "amp-low";
+            const ampColor = r.wave_amplitude > 1.0 ? "#c8463a" : r.wave_amplitude >= 0.5 ? "#d97706" : "#3a6b8c";
+            const ampPct = (r.wave_amplitude / 1.2) * 100;
+            const card = sel.append("div").attr("class", `chant-card ${cls}`);
+            card.append("div").attr("class", "ch-n").text("#" + r.n);
+            card.append("div").attr("class", "ch-chapter").text(r.chapter + " · " + r.wave_direction);
+            card.append("div").attr("class", "ch-location").text(r.location);
+            card.append("div").attr("class", "ch-context").text(r.context);
+            card.append("div").attr("class", "ch-amp")
+                .html(`<span style="color:${ampColor};">Amplitude ${r.wave_amplitude.toFixed(1)}</span>` +
+                      `<span class="ch-amp-bar" style="width:${ampPct}%;background:${ampColor};"></span>`);
+            card.append("div").attr("class", "ch-emotion")
+                .html(`${r.pre_emotion}<span class="arrow">→</span>${r.post_emotion}`);
+            card.append("div").attr("class", "ch-phrase").text("“" + r.key_phrase + "”");
+        });
+    }
+
+    // ===== 渲染：气味地图介绍 =====
+    function renderScentIntro(data) {
+        const sel = d3.select("#scent-intro");
+        sel.selectAll("*").remove();
+        sel.append("h3").text(data.project_name);
+        sel.append("div").attr("class", "english-name").text(data.english_name);
+        const grid = sel.append("div").attr("class", "intro-row");
+        const fields = [
+            { k: "ART FORM · Art Form", v: data.art_form },
+            { k: "PRESENTATION · Presentation Method", v: data.presentation_method }
+        ];
+        fields.forEach(f => {
+            const d = grid.append("div").attr("class", "intro-field");
+            d.append("div").attr("class", "k").text(f.k);
+            d.append("div").attr("class", "v").text(f.v);
+        });
+        grid.append("div").attr("class", "intro-field intro-block")
+            .html(`<div class="k">CORE CONCEPT · Core Concept</div><div class="v">${data.core_concept}</div>`);
+        grid.append("div").attr("class", "intro-field intro-block")
+            .html(`<div class="k">INNOVATION · Innovation</div><div class="v">${data.presentation_innovation}</div>`);
+    }
+
+    // ===== 渲染：气味地点卡片 =====
+    function renderScentCards(locations, scent_categories) {
+        const sel = d3.select("#scent-grid");
+        sel.selectAll("*").remove();
+        locations.forEach(loc => {
+            const cat = getScentCategory(loc.location, scent_categories);
+            const catClass = CAT_CLASS_MAP[cat] || "cat-desolate";
+            const catColor = CAT_COLOR_MAP[cat] || "#6B6455";
+            const card = sel.append("div").attr("class", `scent-card ${catClass}`);
+            const head = card.append("div").attr("class", "sc-head");
+            head.append("div").attr("class", "sc-n").text("No." + loc.n);
+            head.append("div").attr("class", `sc-cat ${catClass}`).text(cat);
+            card.append("div").attr("class", "sc-location").text(loc.location);
+            card.append("div").attr("class", "sc-meta").text(loc.chapter + " · " + loc.geography);
+            card.append("div").attr("class", "sc-profile").text(loc.scent_profile);
+
+            const notesDiv = card.append("div").attr("class", "sc-notes");
+            loc.scent_notes.forEach(n => {
+                notesDiv.append("span").attr("class", "chip").text(n);
+            });
+
+            // intensity 星标
+            const stars = "★".repeat(loc.intensity) + "☆".repeat(5 - loc.intensity);
+            card.append("div").attr("class", "sc-intensity")
+                .html(`<span style="color:var(--ink-soft);">Intensity</span> <span class="sc-stars">${stars}</span> <span style="color:var(--ink-soft);">${loc.intensity}/5</span>`);
+
+            card.append("div").attr("class", "sc-mood").text("· " + loc.mood);
+            card.append("div").attr("class", "sc-desc").text(loc.key_description);
+
+            // fragrance_formula
+            const formula = card.append("div").attr("class", "sc-formula");
+            formula.append("div").attr("class", "note-row")
+                .html(`<span class="note-label">Top Note</span><span class="note-val">${loc.fragrance_formula.top_note}</span>`);
+            formula.append("div").attr("class", "note-row")
+                .html(`<span class="note-label">Middle Note</span><span class="note-val">${loc.fragrance_formula.middle_note}</span>`);
+            formula.append("div").attr("class", "note-row")
+                .html(`<span class="note-label">Base Note</span><span class="note-val">${loc.fragrance_formula.base_note}</span>`);
+        });
+    }
+
+    // ===== 渲染：取经路径气味流 =====
+    function renderScentFlow(locations, scent_categories) {
+        const svg = d3.select("#scent-flow-svg");
+        svg.selectAll("*").remove();
+        const el = document.getElementById("scent-flow-svg");
+        const w = Math.max(200, el.clientWidth || 1100);
+        const h = 280;
+        svg.attr("viewBox", `0 0 ${w} ${h}`);
+
+        const margin = { top: 30, right: 50, bottom: 70, left: 50 };
+        const innerW = w - margin.left - margin.right;
+        const innerH = h - margin.top - margin.bottom;
+
+        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // X 轴：地点序号
+        const x = d3.scaleLinear()
+            .domain([0, locations.length - 1])
+            .range([0, innerW]);
+
+        // Y 轴：使用 intensity，但加入随机起伏模拟"路径"
+        const y = d3.scaleLinear()
+            .domain([0, 6])
+            .range([innerH, 0]);
+
+        // 为每个地点生成 y（基于 intensity + 微妙波浪）
+        locations.forEach((loc, i) => {
+            loc._x = x(i);
+            loc._y = y(loc.intensity) + (i % 2 === 0 ? -15 : 15);
+            // 限制范围
+            loc._y = Math.max(20, Math.min(innerH - 20, loc._y));
+            loc._cat = getScentCategory(loc.location, scent_categories);
+            loc._color = CAT_COLOR_MAP[loc._cat] || "#6B6455";
+        });
+
+        // 路径（曲线）
+        const lineGen = d3.line()
+            .x(d => d._x)
+            .y(d => d._y)
+            .curve(d3.curveCatmullRom.alpha(0.5));
+
+        // 路径阴影带
+        const areaGen = d3.area()
+            .x(d => d._x)
+            .y0(innerH)
+            .y1(d => d._y)
+            .curve(d3.curveCatmullRom.alpha(0.5));
+
+        const areaPath = g.append("path")
+            .datum(locations)
+            .attr("fill", "var(--accent-soft)")
+            .attr("fill-opacity", 0.15)
+            .attr("d", areaGen);
+
+        const path = g.append("path")
+            .datum(locations)
+            .attr("fill", "none")
+            .attr("stroke", "var(--accent-3)")
+            .attr("stroke-width", 2.2)
+            .attr("stroke-dasharray", "6,4")
+            .attr("d", lineGen);
+
+        // 路径动画
+        const totalLen = path.node().getTotalLength();
+        path.attr("stroke-dasharray", totalLen + " 6")
+            .attr("stroke-dashoffset", totalLen)
+            .transition()
+            .duration(1500)
+            .ease(d3.easeCubicOut)
+            .attr("stroke-dashoffset", 0)
+            .on("end", function() {
+                d3.select(this).attr("stroke-dasharray", "6,4");
+            });
+
+        // 起点终点标记
+        g.append("text")
+            .attr("x", locations[0]._x)
+            .attr("y", locations[0]._y - 22)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.74rem")
+            .style("fill", "var(--accent-3)")
+            .style("font-weight", "600")
+            .style("opacity", 0)
+            .text("Start · Chang'an")
+            .transition().delay(200).duration(400).style("opacity", 1);
+
+        g.append("text")
+            .attr("x", locations[locations.length - 1]._x)
+            .attr("y", locations[locations.length - 1]._y - 22)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.74rem")
+            .style("fill", "var(--accent)")
+            .style("font-weight", "600")
+            .style("opacity", 0)
+            .text("End · Spirit Mountain")
+            .transition().delay(1400).duration(400).style("opacity", 1);
+
+        // 圆点（按 intensity 大小·按 category 颜色）
+        const tip = d3.select("#scent-tip");
+        g.selectAll(".scent-dot")
+            .data(locations)
+            .enter()
+            .append("circle")
+            .attr("class", "scent-dot")
+            .attr("cx", d => d._x)
+            .attr("cy", d => d._y)
+            .attr("r", 0)
+            .attr("fill", d => d._color)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .style("cursor", "pointer")
+            .style("filter", "drop-shadow(0 1px 3px rgba(0,0,0,0.2))")
+            .transition().delay((d, i) => 300 + i * 100).duration(400)
+            .attr("r", d => 4 + d.intensity * 1.6);
+
+        g.selectAll(".scent-dot")
+            .on("mouseover", function(e, d) {
+                d3.select(this).transition().duration(150)
+                    .attr("r", 4 + d.intensity * 1.6 + 3);
+                tip.style("opacity", 1)
+                    .html(`<div class="tip-title">No.${d.n} · ${d.location}</div>` +
+                          `<div class="tip-meta">${d.chapter} · ${d.geography}</div>` +
+                          `<div style="margin-top:4px;">${d.scent_profile}</div>` +
+                          `<div style="margin-top:4px;color:#e9b885;font-style:italic;">${d.key_description}</div>` +
+                          `<div class="tip-meta" style="margin-top:4px;">Intensity ${d.intensity}/5 · ${d._cat}</div>`);
+            })
+            .on("mousemove", function(e) {
+                const rect = el.parentElement.getBoundingClientRect();
+                let left = e.clientX - rect.left + 14;
+                if (left + 280 > rect.width) left = e.clientX - rect.left - 290;
+                tip.style("left", left + "px")
+                   .style("top", (e.clientY - rect.top - 10) + "px");
+            })
+            .on("mouseout", function(e, d) {
+                d3.select(this).transition().duration(150)
+                    .attr("r", 4 + d.intensity * 1.6);
+                tip.style("opacity", 0);
+            });
+
+        // 地点标签
+        g.selectAll(".scent-label")
+            .data(locations)
+            .enter()
+            .append("text")
+            .attr("class", "scent-label")
+            .attr("x", d => d._x)
+            .attr("y", d => d._y + (d._y > innerH / 2 ? -16 : 22))
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.74rem")
+            .style("font-weight", "600")
+            .style("fill", d => d._color)
+            .style("opacity", 0)
+            .text(d => d.location)
+            .transition().delay((d, i) => 400 + i * 100).duration(400)
+            .style("opacity", 1);
+
+        // X 轴：地点序号
+        g.selectAll(".scent-n-label")
+            .data(locations)
+            .enter()
+            .append("text")
+            .attr("class", "scent-n-label")
+            .attr("x", d => d._x)
+            .attr("y", innerH + 50)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.7rem")
+            .style("fill", "var(--ink-soft)")
+            .style("font-family", "'JetBrains Mono', monospace")
+            .style("opacity", 0)
+            .text(d => "No." + d.n)
+            .transition().delay((d, i) => 500 + i * 100).duration(400)
+            .style("opacity", 0.8);
+
+        // 标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", -12)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.85rem")
+            .style("fill", "var(--accent-3)")
+            .style("font-weight", "600")
+            .text("Pilgrimage Route Scent Flow · 10 scent nodes · dot size = intensity · color = category");
+
+        // X 轴标题
+        g.append("text")
+            .attr("x", innerW / 2)
+            .attr("y", innerH + 60)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.76rem")
+            .style("fill", "var(--ink-soft)")
+            .text("Pilgrimage route (by chapter order) → Spirit Mountain");
+    }
+
+    // ===== 渲染：视觉艺术构想库 =====
+    function renderIdeas(ideas) {
+        const sel = d3.select("#idea-grid");
+        sel.selectAll("*").remove();
+        ideas.forEach(idea => {
+            const color = IDEA_FORM_COLOR[idea.art_form] || "var(--accent-3)";
+            const card = sel.append("div").attr("class", "idea-card")
+                .style("border-top-color", color);
+            card.append("div").attr("class", "id-n").text(idea.n);
+            card.append("div").attr("class", "id-name").text(idea.idea_name);
+            card.append("div").attr("class", "id-form")
+                .style("background", color)
+                .style("color", "#fff")
+                .text(idea.art_form);
+            card.append("div").attr("class", "id-concept").text(idea.concept);
+            card.append("div").attr("class", "id-innovation").text(idea.innovation);
+        });
+    }
+
+    // ===== 渲染：Key Insights =====
+    function renderInsights() {
+        const insights = [
+            `Faith is not unchanging calm · <strong>but a repeated tug-of-war between fear and stability</strong> · the gold thread's wave is the materialization of that tug-of-war.`,
+            `The Heart Sutra wave chart reveals Tang Sanzang's emotional growth curve: <strong>from the troughs (White Tiger Ridge / Bhiksu Kingdom) to return-to-zero (Buddhahood at Spirit Mountain)</strong> · the amplitude falls from 1.2 → 0.0 · reflecting the maturation of the mind.`,
+            `The scent map turns the abstract pilgrimage <strong>into a tangible olfactory experience</strong> · 10 locations are presented through scent_profile + fragrance_formula with three fragrance layers.`,
+            `Spirit Mountain's “pure scent of nothingness” is the ultimate realm of faith: <strong>base_note is “nothingness · purity”</strong> · echoing Flower-Fruit Mountain's “damp rock” from beginning to end.`,
+            `Danger-type scents account for <strong>50% (5/10)</strong> · showing that the pilgrimage road is full of sensory shocks and trials · the “danger density” of sight and smell runs throughout.`
+        ];
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(t => ul.append("li").html(t));
+    }
+
+    // ===== 数据加载 =====
+    async function loadJson(path, fallback) {
+        try {
+            const res = await fetch(path);
+            if (!res.ok) throw new Error("fetch failed: " + path);
+            return await res.json();
+        } catch (e) {
+            console.warn("[INFO] Using embedded data for", path, ":", e.message);
+            return fallback;
+        }
+    }
+
+    async function loadAll() {
+        const [hs, sm, vs] = await Promise.all([
+            loadJson("../../scripts/output/data/heart_sutra_sculpture.json", EMBEDDED.heart_sutra_sculpture),
+            loadJson("../../scripts/output/data/scent_map.json", EMBEDDED.scent_map),
+            loadJson("../../scripts/output/data/visual_art_summary.json", EMBEDDED.visual_art_summary)
+        ]);
+        return {
+            heart_sutra: hs,
+            scent_map: sm,
+            summary: vs,
+            visual_art_ideas: EMBEDDED.visual_art_ideas  // 视觉艺术构想仅在 EMBEDDED 中
+        };
+    }
+
+    // ===== 主流程 =====
+    async function main() {
+        const data = await loadAll();
+        window.__data = data;
+
+        // 数据源提示
+        const usingEmbedded = (data.heart_sutra === EMBEDDED.heart_sutra_sculpture);
+        if (!usingEmbedded) {
+            document.getElementById("dataSource").innerHTML =
+                "Data source: loaded live from <code>scripts/output/data/</code> (running in http server mode)";
+        } else {
+            document.getElementById("dataSource").innerHTML =
+                "Data source: embedded data (file:// protocol · fetch unavailable · reading hardcoded JSON directly)";
+        }
+
+        // 渲染心经板块
+        renderSutraIntro(data.heart_sutra);
+        renderArtisticStatement(data.heart_sutra.artistic_statement);
+        renderSpecGrid(data.heart_sutra.sculpture_design);
+        renderWaveChart(data.heart_sutra.sutra_chanting_records);
+        renderChantCards(data.heart_sutra.sutra_chanting_records);
+
+        // 渲染气味地图板块
+        renderScentIntro(data.scent_map);
+        renderScentCards(data.scent_map.locations, data.scent_map.scent_categories);
+        renderScentFlow(data.scent_map.locations, data.scent_map.scent_categories);
+
+        // 渲染视觉艺术构想
+        renderIdeas(data.visual_art_ideas);
+
+        // Key Insights
+        renderInsights();
+
+        // 生成时间
+        const _gt = document.getElementById("gen-time"); if (_gt) _gt.textContent = "Data generated at: " + new Date().toISOString().slice(0, 19).replace("T", " ") + " (Asia/Shanghai)";
+    }
+
+    // 窗口缩放重绘
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__data) {
+                renderWaveChart(window.__data.heart_sutra.sutra_chanting_records);
+                renderScentFlow(window.__data.scent_map.locations, window.__data.scent_map.scent_categories);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-TmMUmOdFaNHc4wpvGORKm+4oTKZtkCFlErXBDxc7hAI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FAF7F0">
+    <title>Magic System · Annotated Journey to the West</title>
+    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <script src="../static/js/d3-sankey.min.js"></script>
+    <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
+    
+    
+        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+    <style>
+/*
+ * tokens.css — 西游记可视化站点公共设计令牌
+ * ----------------------------------------------
+ * v2 · W334 新中式·数字雅集（2026-08-02）
+ * 全站统一设计令牌 + 字体分层 + hero 覆写层。
+ *
+ * 引用方式（必须放在页面内联 <style> 之后，确保级联覆盖）：
+ *   <link rel="stylesheet" href="../tokens.css">  (data/ 子目录页面)
+ *   <link rel="stylesheet" href="tokens.css">      (site/ 根页面)
+ *
+ * 设计原则：
+ *   - 宣纸暖白为底、墨褐为骨，朱砂为唯一彩色强调
+ *   - 标题宋体 / 正文黑体 / 数字等宽，三层字体分工
+ *   - 0-2px 圆角、无厚重阴影、1px 发丝线分隔、大留白
+ *   - 图表五色雅集色板：朱砂/靛蓝/赭金/苔绿/米灰（+ 赭石备用）
+ */
+
+/* ===== 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖） ===== */
+/* 字体文件位于 site/static/fonts/，由 scripts/w334_font_subset.py 生成（~3,700 字） */
+/* 思源宋体为可变字重（wght 200-900），标题/正文按需取重 */
+@font-face {
+    font-family: 'Noto Serif SC';
+    font-style: normal;
+    font-weight: 200 900;
+    font-display: optional;
+    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'Noto Sans SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+}
+
+:root {
+    color-scheme: light;
+
+    /* —— 背景 / 纸张 —— */
+    --bg: #FAF7F0;            /* 页面整体背景：宣纸暖白 */
+    --paper: #FFFFFF;         /* 卡片 / section 内容区背景 */
+    --paper-warm: #F1EBDD;    /* 暖调浅底：注条 / 徽band底 */
+    --dark: #221D16;          /* 玄墨深色区块（开篇诗 / 深色节奏段） */
+    --dark-text: #F2EBDC;     /* 深色区块上的文字 */
+
+    /* —— 文字 —— */
+    --ink: #23201A;           /* 主文字：墨 */
+    --ink-soft: #6B6455;      /* 次级文字：浅墨 */
+    --ink-faint: #9A9280;     /* 三级文字：淡墨（meta / 编号） */
+
+    /* —— 主辅配色（朱砂单点强调） —— */
+    --accent: #C8463A;        /* 主强调色：朱砂红（全站唯一彩色强调） */
+    --accent-soft: #E9B885;   /* 浅赭金：徽章底 / 渐变高光 */
+    --accent-2: #3A6B8C;      /* 靛蓝：链接 / 数据 meta / 第二系列 */
+    --accent-3: #8A6D3B;      /* 赭石：提示文字 / 第三系列 */
+    --accent-4: #6B8E5A;      /* 苔绿：正向数据 / 第四系列 */
+    --rebel: #8C2A2A;         /* 反派 / 警示色：暗朱红 */
+
+    /* —— 图表五色雅集色板（W334 图表规范） —— */
+    --chart-1: #C8463A;       /* 朱砂 */
+    --chart-2: #3A6B8C;       /* 靛蓝 */
+    --chart-3: #C9A063;       /* 赭金 */
+    --chart-4: #6B8E5A;       /* 苔绿 */
+    --chart-5: #D8CFBC;       /* 米灰 */
+    --chart-6: #8A6D3B;       /* 赭石（备用第 6 系列） */
+
+    /* —— 分隔线 —— */
+    --line: #E5DFD0;          /* 发丝线：浅米褐 */
+
+    /* —— 阴影（克制，仅卡片浮起用） —— */
+    --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+
+    /* —— 字体三层分工 —— */
+    --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+    --font-sans: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Menlo', monospace;
+}
+
+/* ===== 字体分层（W334：标题宋 / 正文黑 / 数字等宽） ===== */
+/* 覆写各页面内联 body serif 栈：正文与 UI 改黑体，标题保留宋体 */
+body {
+    font-family: var(--font-sans);
+}
+h1, h2, h3, h4, h5,
+.section-title, .card h2, .chart-block h3,
+.quick-links h3, .three-layer-card h3 {
+    font-family: var(--font-serif);
+}
+
+/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
+/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
+.hero {
+    background: #221D16;
+}
+.hero::after {
+    background: radial-gradient(circle at 70% 30%, rgba(201, 160, 99, 0.14), transparent 60%);
+}
+
+/* ===== 选区与焦点细节 ===== */
+::selection {
+    background: rgba(200, 70, 58, 0.16);
+}
+
+/*
+ * system.css — 详解西游记 · 全站组件设计系统
+ * ----------------------------------------------
+ * 故宫数字馆藏 × Linear 信息密度
+ *
+ * 层级关系：
+ *   tokens.css  → 设计令牌（变量层）
+ *   system.css  → 组件样式（结构层）← 本文件
+ *   页面内联    → 仅图表/数据特有样式
+ *
+ * 引用方式（放在 tokens.css 之后）：
+ *   <link rel="stylesheet" href="../system.css">  (data/ 子目录)
+ *   <link rel="stylesheet" href="system.css">      (site/ 根)
+ */
+
+/* ===== 重置与基础 ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+    -webkit-tap-highlight-color: rgba(200, 70, 58, 0.12);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+img, svg { display: block; max-width: 100%; }
+::selection { background: rgba(200, 70, 58, 0.14); }
+
+/* ===== 排版层级 ===== */
+h1, h2, h3, h4, h5 { font-family: var(--font-serif); color: var(--ink); line-height: 1.25; }
+h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
+h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
+h4 { font-size: 18px; font-weight: 500; }
+.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.text-muted { color: var(--ink-soft); }
+.text-faint { color: var(--ink-faint); }
+.text-accent { color: var(--accent); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; letter-spacing: 0.04em; }
+.kicker {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ===== 布局容器 ===== */
+.page-wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 6vw, 96px);
+}
+.section {
+    padding: clamp(48px, 7vw, 88px) 0;
+}
+.section + .section {
+    border-top: 1px solid var(--line);
+}
+.section-head {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-head .kicker { margin-bottom: 12px; }
+.section-head h2 { margin-bottom: 8px; }
+.section-head .note { font-size: 15px; color: var(--ink-soft); max-width: 640px; }
+
+/* ===== 顶部导航 ===== */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 96px);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(250, 247, 240, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 50;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.seal {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
+}
+.wordmark {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+}
+.topnav nav {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.topnav nav a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.15s;
+    white-space: nowrap;
+}
+.topnav nav a:hover { color: var(--accent); }
+.topnav nav a.active { color: var(--ink); font-weight: 500; }
+@media (max-width: 768px) {
+    .topnav { padding: 16px 20px; }
+    .topnav nav { gap: 16px; }
+    .topnav nav a { font-size: 13px; }
+    .wordmark { font-size: 16px; }
+}
+
+/* ===== Hero（数据页通用） ===== */
+.hero {
+    background: var(--dark);
+    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
+    position: relative;
+    overflow: hidden;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
+    pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
+.hero h1 {
+    color: var(--dark-text);
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+.hero .subtitle {
+    font-size: 14px;
+    color: rgba(242, 235, 220, 0.7);
+    letter-spacing: 0.06em;
+}
+.hero .tagline {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(242, 235, 220, 0.5);
+    font-style: italic;
+}
+/* Hero 内面包屑 */
+.hero .breadcrumb {
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.45);
+}
+.hero .breadcrumb a { color: rgba(242, 235, 220, 0.6); }
+.hero .breadcrumb a:hover { color: var(--accent-soft); }
+
+/* ===== 卡片 ===== */
+.card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 28px);
+    transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card .card-kicker {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+}
+.card h3 { font-size: 20px; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--ink-soft); }
+.card .card-meta {
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+
+/* ===== KPI 数字卡 ===== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+.kpi:hover { border-color: var(--accent); }
+.kpi .kpi-value {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.kpi .kpi-label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.kpi .kpi-desc {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-faint);
+}
+
+/* ===== 图表容器 ===== */
+.chart-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(20px, 3vw, 32px);
+    margin-bottom: 24px;
+}
+.chart-block h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.chart-block .chart-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+}
+.chart-block svg { width: 100%; height: auto; }
+/* 图表内 D3 元素统一样式 */
+.chart-block .axis text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--ink-faint);
+}
+.chart-block .axis line,
+.chart-block .axis path {
+    stroke: var(--line);
+}
+.chart-block .grid line {
+    stroke: var(--line);
+    stroke-opacity: 0.5;
+}
+
+/* ===== 表格 ===== */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+/* 数据摘要表容器：摘要表 th 使用 white-space:nowrap，列数多时 Intrinsic 宽度
+   超过移动端父容器（375px 视口下内容区约 285px），表会横向溢出被截断。
+   设为横向滚动容器，使宽表在手机上可滑动查看，同时消除 CI layout 断言的
+   table-overflow 告警（direct parent 的 overflow-x 命中 auto 即视为可滚动）。 */
+#summary-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+thead {
+    background: var(--paper-warm);
+}
+th {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.5); }
+td.num, th.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+/* ===== 标签/徽章 ===== */
+.badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    border: 1px solid;
+}
+.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
+.badge-blue { color: var(--accent-2); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
+.badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
+.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
+
+/* ===== 按钮 ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: #b33d32; }
+
+/* ===== 页脚 ===== */
+.site-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px clamp(24px, 6vw, 96px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-footer .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+}
+.site-footer .footer-meta {
+    font-size: 12px;
+    color: var(--ink-faint);
+}
+.site-footer nav {
+    display: flex;
+    gap: 20px;
+}
+.site-footer nav a {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+.site-footer nav a:hover { color: var(--accent); }
+
+/* ===== 深色节奏段（引文/分隔） ===== */
+.dark-band {
+    background: var(--dark);
+    color: var(--dark-text);
+    padding: clamp(56px, 8vw, 96px) clamp(24px, 6vw, 160px);
+    text-align: center;
+}
+.dark-band .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 24px;
+}
+.dark-band blockquote {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(18px, 2.4vw, 26px);
+    line-height: 1.9;
+}
+.dark-band .attr {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgba(242, 235, 220, 0.5);
+    letter-spacing: 0.08em;
+}
+
+/* ===== 档案索引表（首页九卷） ===== */
+.index-table { width: 100%; }
+.index-row {
+    display: grid;
+    grid-template-columns: 32px 220px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+}
+.index-row:hover { background: rgba(255, 255, 255, 0.6); }
+.index-row .no {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+.index-row .name {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 18px;
+}
+.index-row .desc { font-size: 14px; color: var(--ink-soft); }
+.index-row .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-2);
+    text-align: right;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .index-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .index-row .no { display: none; }
+    .index-row .desc { grid-column: 1 / -1; }
+}
+
+/* ===== 筛选 Tab ===== */
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.filter-tab {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab[aria-pressed="true"],
+.filter-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+/* ===== 搜索框 ===== */
+.search-box {
+    position: relative;
+    max-width: 400px;
+}
+.search-box input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--paper);
+    color: var(--ink);
+    transition: border-color 0.15s;
+}
+.search-box input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+.search-box::before {
+    content: "搜";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--ink-faint);
+}
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+.empty-state p { font-size: 15px; }
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .site-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+    .topnav nav { display: none; }
+}
+
+/* ===== 打印 ===== */
+@media print {
+    .topnav, .site-footer, .filter-tabs, .search-box { display: none; }
+    body { background: #fff; }
+    .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
+}
+    </style>
+<style>
+        /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        .kpi-card:nth-child(2) { border-top-color: var(--accent-2); }
+        .kpi-card:nth-child(3) { border-top-color: var(--accent-3); }
+        .kpi-card:nth-child(4) { border-top-color: var(--accent-4); }
+        
+        .kpi-card:nth-child(2) .label { color: var(--accent-2); }
+        .kpi-card:nth-child(3) .label { color: var(--accent-3); }
+        .kpi-card:nth-child(4) .label { color: var(--accent-4); }
+        
+        .kpi-card .value .unit {
+            font-size: 0.95rem;
+            color: var(--ink-soft);
+            font-weight: 400;
+            margin-left: 4px;
+        }
+        
+        
+        
+        
+        .energy-law {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--gold);
+            padding: 14px 18px;
+            border-radius: 4px;
+            margin-bottom: 18px;
+            font-size: 0.92rem;
+            color: var(--accent-3);
+            font-style: italic;
+        }
+        .energy-law strong { color: var(--accent); font-style: normal; }
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        .chart-block {
+            text-align: center;
+        }
+        .chart-block h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+        }
+        .chart-block svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.82rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .legend-swatch {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+        /* Sankey */
+        #sankey {
+            width: 100%;
+            height: 500px;
+            display: block;
+        }
+        .sankey-node rect {
+            fill-opacity: 0.9;
+            stroke: #fff;
+            stroke-width: 1;
+        }
+        .sankey-node text {
+            font-size: 0.8rem;
+            fill: var(--ink);
+            font-family: "Noto Serif SC", serif;
+        }
+        .sankey-link {
+            fill: none;
+            stroke-opacity: 0.45;
+            transition: stroke-opacity 0.2s;
+        }
+        .sankey-link:hover {
+            stroke-opacity: 0.78;
+        }
+        .sankey-col-label {
+            font-size: 0.8rem;
+            fill: var(--ink-soft);
+            letter-spacing: 0.15em;
+            font-weight: 600;
+        }
+        /* Budget chart */
+        #budget-chart {
+            width: 100%;
+            height: 240px;
+            display: block;
+        }
+        #consumers-chart {
+            width: 100%;
+            height: 260px;
+            display: block;
+        }
+        .budget-bar text {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.82rem;
+            fill: var(--ink);
+        }
+        /* Data tables */
+        .data-table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+        .data-table-wrap::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .data-table-wrap::-webkit-scrollbar-thumb {
+            background: var(--accent-soft);
+            border-radius: 4px;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+        .data-table thead th {
+            background: #1a1410;
+            color: #f5e9d4;
+            padding: 10px 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        .data-table tbody tr {
+            border-bottom: 1px solid var(--line);
+        }
+        .data-table tbody tr:nth-child(even) {
+            background: var(--bg);
+        }
+        .data-table tbody tr:hover {
+            background: #fff8ec;
+        }
+        .data-table td {
+            padding: 9px 12px;
+            vertical-align: top;
+        }
+        .data-table td.name {
+            font-weight: 600;
+            color: var(--accent-3);
+            white-space: nowrap;
+        }
+        .data-table td.num {
+            font-family: "JetBrains Mono", monospace;
+            color: var(--accent);
+            text-align: center;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #fff;
+            white-space: nowrap;
+        }
+        .rank-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: "JetBrains Mono", monospace;
+            color: #fff;
+        }
+        .rank-S\+ { background: #c8463a; }
+        .rank-S { background: #d4a857; }
+        .rank-A\+ { background: #6B8E5A; }
+        .intensity-bar {
+            display: inline-block;
+            height: 8px;
+            border-radius: 2px;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        .budget-detail {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .budget-detail h4 {
+            font-size: 0.95rem;
+            color: var(--accent-3);
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px dashed var(--line);
+        }
+        .budget-detail ul {
+            list-style: none;
+            padding: 0;
+        }
+        .budget-detail li {
+            padding: 4px 0;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .budget-detail li .amt {
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+        .budget-detail .note {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            font-style: italic;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 4px;
+            margin-top: 16px;
+        }
+        .insight-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .insight-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--line);
+            font-size: 0.92rem;
+        }
+        .insight-box li:last-child { border-bottom: none; }
+        .insight-box li strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .notice {
+            background: #fff8ec;
+            border: 1px solid var(--accent-soft);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.82rem;
+            color: var(--accent-3);
+            margin-bottom: 16px;
+        }
+        .notice code {
+            background: rgba(200, 70, 58, 0.1);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+        }
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+        
+        
+        
+        @media (max-width: 768px) {
+            
+            
+        }
+    
+/* W042 a11y: 全局键盘焦点可见性 */
+    </style>
+<style id="audit-halo">
+/* injected label-halo for overlap readability */
+svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
+</style>
+  <script defer src="../js/rum.js"></script>
+  <script defer src="../js/visit-log.js"></script>
+  <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:0;background:var(--dark);color:var(--dark-text);padding:10px 18px;z-index:100;">Skip to main content</a>
+
+    <header class="topnav">
+        <a class="brand" href="index.html"><span class="seal">JTTW<br>Notes</span><span class="wordmark">Annotated Journey to the West</span></a>
+        <nav aria-label="Main">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/magic-system.html" lang="zh-CN">中文</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p class="breadcrumb"><a href="index.html">EN Home</a> / <a href="dashboard.html">Dashboard</a> / Magic System</p>
+        <p class="kicker">N · Magic &amp; Arrays</p>
+        <h1>Magic System</h1>
+        <p class="subtitle">MAGIC · ARRAY · ENERGY CONSERVATION</p>
+        <p class="tagline">5 cultivation arts · 5 fire spells · 6 arrays · 8 magic treasures — the First Law of Mana Conservation: energy is never destroyed, only cycling through the three states of source-transit-consumption.</p>
+    </section>
+
+<main id="main" class="page-wrap" style="padding-top:32px;padding-bottom:64px;">
+        <div class="notice" id="dataSource">
+            Data source: embedded version (to load the latest data, run <code>py -m http.server 8000</code> in the <code>site/</code> directory)
+        </div>
+
+        <!-- KPI 概要栏 -->
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="label">CULTIVATION · Cultivation Systems</div>
+                <div class="value">5<span class="unit">arts</span></div>
+                <div class="desc">Seventy-Two Earthly Transformations · Thirty-Six Heavenly Transformations · True Samadhi Fire · Somersault Cloud · Fiery Golden Eyes</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">ARRAY · Arrays</div>
+                <div class="value">6<span class="unit">arrays</span></div>
+                <div class="desc">Chechi Rain Altar · Pansi Cobweb · Lion-Camel Myriad Demons · Vajra Ring · Golden Cymbals &amp; Human Seed Pouch · Bottomless Cave</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">TREASURE · Magic Treasures</div>
+                <div class="value">8<span class="unit">items</span></div>
+                <div class="desc">S+ rank × 5 · S rank × 2 · A+ rank × 1</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">SURPLUS · Heavenly Court Annual Surplus</div>
+                <div class="value">9249<span class="unit">Peach Units</span></div>
+                <div class="desc">92.49% surplus rate · whoever controls the peach resource controls power</div>
+            </div>
+        </div>
+
+        <!-- 图表 1：Mana Energy Conservation Sankey Diagram -->
+        <section class="section">
+            <h2 class="section-title">Mana Energy Conservation Sankey Diagram</h2>
+            <div class="section-sub">Source (5) → Transit (4) → Consumption (5); the width of each flow band corresponds to energy units. Gold = source · teal-blue = transit · cinnabar = consumption.</div>
+            <div class="energy-law" id="energy-law"></div>
+            <svg id="sankey"></svg>
+            <div class="legend">
+                <div class="legend-item"><span class="legend-swatch" style="background:#d4a857"></span>Source (Production)</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#3a6b8c"></span>Transit (Immortal Ranks)</div>
+                <div class="legend-item"><span class="legend-swatch" style="background:#c8463a"></span>Consumption (Spells)</div>
+            </div>
+        </section>
+
+        <!-- 图表 2：天庭年度能量预算 -->
+        <section class="section">
+            <h2 class="section-title">Heavenly Court Annual Energy Budget</h2>
+            <div class="section-sub">Revenue (cinnabar) · expense (teal-blue) · surplus (grass-green), all converted to Peach Energy Units. Surplus rate 92.49%.</div>
+            <svg id="budget-chart"></svg>
+            <div class="budget-detail">
+                <div>
+                    <h4>Revenue Breakdown (original units)</h4>
+                    <ul id="revenue-list"></ul>
+                </div>
+                <div>
+                    <h4>Expense Breakdown (original units)</h4>
+                    <ul id="expense-list"></ul>
+                </div>
+            </div>
+            <h4 style="margin-top:24px;font-size:0.95rem;color:var(--accent-3);">Top 6 Energy Consumers · energy cost per casting</h4>
+            <svg id="consumers-chart"></svg>
+        </section>
+
+        <!-- 图表 3：Cultivation Systems Compared表 -->
+        <section class="section">
+            <h2 class="section-title">Cultivation Systems Compared</h2>
+            <div class="section-sub">Seventy-Two Earthly Transformations vs Thirty-Six Heavenly Transformations vs True Samadhi Fire vs Somersault Cloud vs Fiery Golden Eyes.</div>
+            <div class="data-table-wrap">
+                <table class="data-table" id="cultivation-table">
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Practitioner</th>
+                            <th>Origin</th>
+                            <th>Count</th>
+                            <th>Strengths</th>
+                            <th>Weaknesses</th>
+                            <th>Nemesis</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 图表 4：Fire Spells Compared表 -->
+        <section class="section">
+            <h2 class="section-title">Fire Spells Compared</h2>
+            <div class="section-sub">5 fire spells × intensity rating (1-10), with origin · range · weakness · combat record.</div>
+            <div class="data-table-wrap">
+                <table class="data-table" id="fire-table">
+                    <thead>
+                        <tr>
+                            <th>Fire Spell</th>
+                            <th>Wielder</th>
+                            <th>Origin</th>
+                            <th>Intensity</th>
+                            <th>Range</th>
+                            <th>Weakness</th>
+                            <th>Combat Record</th>
+                            <th>Chapter</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 图表 5：阵法表格 -->
+        <section class="section">
+            <h2 class="section-title">Array Analysis</h2>
+            <div class="section-sub">6 arrays × chapter · cave-master · type · principle · weakness · outcome.</div>
+            <div class="data-table-wrap">
+                <table class="data-table" id="array-table">
+                    <thead>
+                        <tr>
+                            <th>Array</th>
+                            <th>Chapter</th>
+                            <th>Cave Master</th>
+                            <th>Type</th>
+                            <th>Principle</th>
+                            <th>Weakness</th>
+                            <th>Outcome</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 图表 6：Magic Treasure Power-Core Classification饼图 -->
+        <section class="section">
+            <h2 class="section-title">Magic Treasure Power-Core Classification</h2>
+            <div class="section-sub">8 magic treasures classified on two axes: weapon type, and whether they depend on the wielder's mana.</div>
+            <div class="two-col-grid">
+                <div class="chart-block">
+                    <h3>By Weapon Type</h3>
+                    <svg id="treasure-cat-pie" width="340" height="340"></svg>
+                    <div class="legend" id="treasure-cat-legend"></div>
+                </div>
+                <div class="chart-block">
+                    <h3>By Whether Wielder-Mana Dependent</h3>
+                    <svg id="treasure-driven-pie" width="340" height="340"></svg>
+                    <div class="legend" id="treasure-driven-legend"></div>
+                </div>
+            </div>
+            <h4 style="margin-top:24px;font-size:0.95rem;color:var(--accent-3);">Full Treasure Spectrum</h4>
+            <div class="data-table-wrap">
+                <table class="data-table" id="treasure-table">
+                    <thead>
+                        <tr>
+                            <th>Treasure</th>
+                            <th>Wielder</th>
+                            <th>Category</th>
+                            <th>Power Core</th>
+                            <th>Principle</th>
+                            <th>Mana-Dependent</th>
+                            <th>Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="section">
+            <h2 class="section-title">Key Insights</h2>
+            <div class="insight-box">
+                <ul id="insights"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div><div class="footer-brand">Annotated Journey to the West</div><div class="footer-meta">v2.2.86 · W334 · Data Visualization · <a href="../../docs/04-文化与历史背景/佛道思想.md">Buddhist &amp; Daoist Thought (essay, Chinese)</a></div></div>
+        <nav aria-label="Footer">
+            <a href="index.html">EN Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="visualizations.html">Visualizations</a>
+            <a href="../data/magic-system.html" lang="zh-CN">中文</a>
+        </nav>
+    </footer>
+
+<script>
+    // ========== Embedded fallback data (used when fetch fails) ==========
+    const EMBEDDED_DATA = {
+        magic_system: [
+            {"name":"Seventy-Two Earthly Transformations","alias":"Earthly-number · seventy-two transformations","practitioner":"Sun Wukong (taught by Patriarch Subodhi)","origin":"Patriarch Subodhi · Mount Lingtai Fangcun · the Cave of the Slanting Moon and Three Stars","nature":"Transformation art · avoiding the three calamities","count":72,"philosophy":"Earthly in number, of yin nature; governs transformation and concealment — avoiding calamity and hiding one's true form","pros":"Infinite transformations; can avoid the three calamities (thunder / fire / wind)","cons":"Tail feathers hard to hide (turning into a temple leaves the tail exposed); a transformed object cannot exceed its original form","rival":"Thirty-Six Heavenly Transformations","chapter_first":2},
+            {"name":"Thirty-Six Heavenly Transformations","alias":"Heavenly-number · thirty-six transformations","practitioner":"Zhu Bajie (teacher unclear, possibly the Zhenwu Emperor or the Mysterious Maiden)","origin":"Unclear (tied to his rank as Marshal Tianpeng)","nature":"Transformation art · mastery of origin","count":36,"philosophy":"Heavenly in number, of yang nature; governs the true transformation of origin, with deep mana","pros":"Pure transformations; strong power of origin","cons":"Fewer in number; inflexible in the heat of battle","rival":"Seventy-Two Earthly Transformations","chapter_first":19},
+            {"name":"True Samadhi Fire","alias":"True Samadhi Fire · innate fire","practitioner":"Red Boy (cultivated innately)","origin":"Innate fire-qi · self-cultivation","nature":"Spell · innate true fire","count":1,"philosophy":"Samadhi means the unity of essence, breath and spirit; its true fire is beyond compare with ordinary fire","pros":"Water cannot douse it; its smoke can wound; Wukong cannot approach","cons":"Fears the willow water of Guanyin's vase and the East Sea Dragon King's water","rival":"Mortal Fire","chapter_first":41},
+            {"name":"Somersault Cloud","alias":"The art of cloud-soaring","practitioner":"Sun Wukong (taught by Patriarch Subodhi)","origin":"Patriarch Subodhi · Mount Lingtai Fangcun","nature":"Cloud-soaring · movement spell","count":1,"philosophy":"One somersault covers one hundred and eight thousand li","pros":"Extreme speed; can cross continents","cons":"Cannot carry others (except himself) for long","rival":"None (one of a kind)","chapter_first":2},
+            {"name":"Fiery Golden Eyes","alias":"Fiery Golden Eyes · ocular art","practitioner":"Sun Wukong (forged in the Eight Trigrams Furnace)","origin":"Taishang Laojun's Eight Trigrams Furnace · wind and smoke at the Xun position","nature":"Ocular art · seeing through illusions","count":1,"philosophy":"Smoked into being in the Eight Trigrams Furnace; can recognize demons and tell true from false","pros":"Sees through a demon's true form","cons":"Fears smoke (Red Boy's smoke can blind)","rival":"None","chapter_first":7}
+        ],
+        magic_fire: [
+            {"name":"True Samadhi Fire","owner":"Red Boy","origin":"Innate cultivation · unity of essence, breath and spirit","intensity":10,"range":"Short-to-mid range · smoke wounds","weakness":"The willow water of Guanyin's vase · the Four Seas Dragon Kings' water","kills":"No direct victories; forced Sun Wukong back","chapter":41},
+            {"name":"Six-Ding Divine Fire","owner":"Taishang Laojun · Eight Trigrams Furnace","origin":"Six-Ding Divine Fire · civil and martial flames","intensity":10,"range":"Within the furnace · extremely wide range","weakness":"Nothing can counter it (Wukong escaped at the Xun position)","kills":"Can smelt Wukong for seven-times-seven forty-nine days without killing him","chapter":7},
+            {"name":"Mortal Fire","owner":"The mortal world · hearth fire of humankind","origin":"Fire from ordinary fuel","intensity":1,"range":"Close range · confined to the stove","weakness":"Doused by plain water","kills":"None","chapter":16},
+            {"name":"Yin Fire","owner":"Flaming Mountains · underground fire","origin":"Wukong kicked over the Eight Trigrams Furnace; its fire-bricks fell to earth","intensity":8,"range":"The eight-hundred-li Flaming Mountains","weakness":"The Palm-Leaf Fan · forty-nine fan-strokes","kills":"Burns and harms people","chapter":59},
+            {"name":"Samadhi Divine Wind","owner":"Yellow Wind Demon","origin":"A yellow-furred marten that attained the Way at Spirit Mountain","intensity":7,"range":"A hundred li · can blind Wukong's eyes","weakness":"Bodhisattva Lingji's Wind-Stilling Pill · Flying Dragon Staff","kills":"No direct victories","chapter":21}
+        ],
+        magic_energy_sankey: {
+            "nodes":[
+                {"name":"Sun-Moon Essence","category":"Source","value":100},
+                {"name":"Golden Elixir · Laojun","category":"Source","value":90},
+                {"name":"Peaches of Immortality · Queen Mother","category":"Source","value":95},
+                {"name":"Ginseng Fruit · Zhenyuan","category":"Source","value":98},
+                {"name":"Meditation Merit · Tathagata","category":"Source","value":85},
+                {"name":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","category":"Transit"},
+                {"name":"Earthly Immortals (Zhenyuan · Wuzhuang Monastery)","category":"Transit"},
+                {"name":"Demon Immortals (Wukong · Bull King · Peng)","category":"Transit"},
+                {"name":"Mortal Immortals (the pilgrims)","category":"Transit"},
+                {"name":"Longevity Extension","category":"Consumption"},
+                {"name":"Transformations · Seventy-Two Changes","category":"Consumption"},
+                {"name":"Cloud-Soaring · Somersault Cloud","category":"Consumption"},
+                {"name":"Treasure Powering","category":"Consumption"},
+                {"name":"Combat Spells","category":"Consumption"}
+            ],
+            "links":[
+                {"source":"Sun-Moon Essence","target":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","value":30},
+                {"source":"Sun-Moon Essence","target":"Earthly Immortals (Zhenyuan · Wuzhuang Monastery)","value":25},
+                {"source":"Sun-Moon Essence","target":"Demon Immortals (Wukong · Bull King · Peng)","value":45},
+                {"source":"Golden Elixir · Laojun","target":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","value":50},
+                {"source":"Golden Elixir · Laojun","target":"Demon Immortals (Wukong · Bull King · Peng)","value":40},
+                {"source":"Peaches of Immortality · Queen Mother","target":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","value":60},
+                {"source":"Peaches of Immortality · Queen Mother","target":"Demon Immortals (Wukong · Bull King · Peng)","value":35},
+                {"source":"Ginseng Fruit · Zhenyuan","target":"Earthly Immortals (Zhenyuan · Wuzhuang Monastery)","value":60},
+                {"source":"Ginseng Fruit · Zhenyuan","target":"Mortal Immortals (the pilgrims)","value":38},
+                {"source":"Meditation Merit · Tathagata","target":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","value":35},
+                {"source":"Meditation Merit · Tathagata","target":"Mortal Immortals (the pilgrims)","value":50},
+                {"source":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","target":"Longevity Extension","value":90},
+                {"source":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","target":"Treasure Powering","value":60},
+                {"source":"Celestial Immortals (Jade Emperor · Laojun · Tathagata)","target":"Combat Spells","value":25},
+                {"source":"Earthly Immortals (Zhenyuan · Wuzhuang Monastery)","target":"Longevity Extension","value":70},
+                {"source":"Earthly Immortals (Zhenyuan · Wuzhuang Monastery)","target":"Combat Spells","value":15},
+                {"source":"Demon Immortals (Wukong · Bull King · Peng)","target":"Transformations · Seventy-Two Changes","value":80},
+                {"source":"Demon Immortals (Wukong · Bull King · Peng)","target":"Cloud-Soaring · Somersault Cloud","value":40},
+                {"source":"Demon Immortals (Wukong · Bull King · Peng)","target":"Combat Spells","value":50},
+                {"source":"Mortal Immortals (the pilgrims)","target":"Longevity Extension","value":60},
+                {"source":"Mortal Immortals (the pilgrims)","target":"Combat Spells","value":28}
+            ],
+            "energy_law":"First Law of Mana Conservation: energy is never destroyed, only flowing among the three states of 'source-transit-consumption'. Source production is constant; those who over-consume must be replenished from the source, or their mana runs dry.",
+            "tianting_budget":{
+                "title":"Heavenly Court Annual Energy Budget",
+                "revenue":[
+                    {"source":"Peach Orchard","amount":9000,"unit":"Peach Energy Units","note":"9,000 peach trees, in three grades — early, middle and late"},
+                    {"source":"Golden Elixir of Tushita Palace","amount":720,"unit":"Golden Elixir","note":"One furnace a day; annual output 360 × 2"},
+                    {"source":"Ginseng Fruit of Wuzhuang Monastery","amount":30,"unit":"Ginseng Fruit","note":"Ripens once every 30 years, 30 fruits"},
+                    {"source":"Incense Offerings of the Mortal World","amount":99999,"unit":"Incense Units","note":"Tribute from the whole realm"}
+                ],
+                "expense":[
+                    {"target":"Immortals' Stipends · Longevity Extension","amount":5000,"unit":"Peach Units"},
+                    {"target":"Heavenly Soldiers' Upkeep","amount":1500,"unit":"Peach Units"},
+                    {"target":"Treasure Maintenance","amount":200,"unit":"Golden Elixir"},
+                    {"target":"Heavenly Court Operations","amount":80000,"unit":"Incense Units"}
+                ],
+                "surplus":9249,
+                "surplus_unit":"Peach Units",
+                "note":"Can retain a surplus of 9,249 Peach Energy Units in reserve (about 92.49%) — showing the Heavenly Court is a mana-surplus institution; whoever controls the peach resource controls power."
+            },
+            "top_consumers":[
+                {"consumer":"Sun Wukong","consumption_per_act":80,"act":"Seventy-Two Transformations","note":"The larger the transformed object, the greater the energy cost"},
+                {"consumer":"Sun Wukong","consumption_per_act":60,"act":"Somersault Cloud · one somersault","note":"High-speed displacement of 108,000 li"},
+                {"consumer":"Erlang Shen","consumption_per_act":75,"act":"Third Eye Manifestation · transformation tracking","note":"The third eye drains energy continuously"},
+                {"consumer":"Bull Demon King","consumption_per_act":90,"act":"Revealing true form · white bull","note":"A thousand-zhang white bull · mana surge"},
+                {"consumer":"Peng","consumption_per_act":70,"act":"Yin-Yang Two-Qi Vase powering","note":"A causal-law weapon · enormous energy cost"},
+                {"consumer":"Guanyin","consumption_per_act":95,"act":"Vase willow water · quenching Samadhi Fire","note":"High-order divine power · one decisive strike"}
+            ]
+        },
+        magic_arrays: [
+            {"name":"Rain-Praying Altar of Chechi","chapter":45,"owner":"Tiger-Strength Immortal · Deer-Strength Immortal · Antelope-Strength Immortal","type":"Priestly array · Five-Thunder Rite","structure":"Three-tier altar · command tokens · talisman water · divine-general edicts","principle":"Commands the gods to bring rain through the Five-Thunder Rite, relying on the Heavenly Court's orthodox talisman-edict system","weakness":"Wukong impersonated false gods · disrupted the Cloud and Rain Bureaus · edicts never left the altar","result":"Tiger-Strength's rain prayer failed · the three immortals died","feature":"A typical orthodox Daoist rain altar, connecting to the Heavenly Court's Cloud and Rain Bureaus through talisman edicts"},
+            {"name":"Cobweb Array of Pansi Cave","chapter":72,"owner":"The seven Spider-Spirit sisters","type":"Natural array · silk-web blockade","structure":"Sky-filling spider silk · sticking and binding the pilgrims","principle":"The seven sisters' innate silk web — whatever mortal thing touches it sticks fast","weakness":"Wukong's Golden-Banded Staff tangled the silk · easily broken","result":"Array broken · the seven sisters fled to Yellow-Flower Monastery","feature":"Cultivated jointly by the seven sisters; the silk-web array forms a dome covering the surroundings of Pansi Cave"},
+            {"name":"Myriad-Demon Array of Lion-Camel Ridge","chapter":74,"owner":"Green Lion · White Elephant · Great Peng","type":"Human-wave array · 47,000-48,000 lesser demons","structure":"Eight-hundred-li Lion-Camel Ridge · Lion-Camel Cave · Lion-Camel Kingdom","principle":"Intercepts the pilgrims with massed demon formations · big and small demons each assigned roles","weakness":"None (backed by the overwhelming strength of the three demon kings)","result":"Wukong was captured in the Yin-Yang Two-Qi Vase · later broke the vase · ultimately Tathagata descended in person","feature":"The largest demon array in scale; its demon count rivals the heavenly hosts"},
+            {"name":"Jindou Cave · Vajra Ring Array","chapter":50,"owner":"One-Horned Rhinoceros King","type":"Treasure array · a single device sucks in weapons","structure":"One ring takes ten thousand weapons","principle":"The Vajra Ring's causal law · snares all the gods' weapons","weakness":"Cannot capture Wukong himself · required Taishang Laojun to descend in person","result":"All the gods' weapons were snared · Wukong left empty-handed · finally Laojun subdued it","feature":"A causal-law weapon · breaking the principle that 'weapons can win'"},
+            {"name":"Minor Thunderclap Monastery · Golden Cymbals · Human Seed Pouch","chapter":65,"owner":"Yellow-Browed Boy","type":"Composite array · the Golden Cymbals trap people · the Human Seed Pouch gathers the crowd","structure":"A trap set in a false Buddha hall · the Golden Cymbals and Human Seed Pouch work in tandem","principle":"The Golden Cymbals trapped Wukong · the Human Seed Pouch took the Twenty-Eight Mansions · all the gods entered the pouch","weakness":"The Golden Dragon of Kang's horn broke the cymbals · Maitreya descended to reclaim the pouch","result":"All the heavenly generals were captured · Maitreya subdued them","feature":"A causal-law weapon · part of Maitreya Buddha's treasury; a single page-boy could trap the gods"},
+            {"name":"Bottomless Cave · Spirit-Tablet House Guard","chapter":82,"owner":"Golden-Nosed White-Haired Mouse Demon","type":"Spirit-tablet array · honoring the Pagoda-Bearing Heavenly King Li and his daughter","structure":"Spirit tablets for Heavenly King Li and Nezha placed deep in the cave","principle":"Worships the father-daughter tablets · seeks protection through their bond","weakness":"Wukong found the tablets · lodged a complaint in Heaven · Heavenly King Li descended in person","result":"The tablets became evidence against her · Heavenly King Li captured the girl","feature":"A rare case of self-protection via 'divine status' · exploiting a father-daughter bond to resist the law"}
+        ],
+        magic_treasures: [
+            {"name":"Vajra Ring","owner":"One-Horned Rhinoceros King (originally Taishang Laojun's)","category":"Causal-Law Weapon","power_source":"Cosmic Rule Engine","principle":"Snares all things · independent of the wielder's mana · with an embedded 'binding rule'","user_driven":false,"evidence":"The One-Horned Rhinoceros's own mana is not top-tier, yet it can snare Wukong's Golden-Banded Staff, the gods' weapons, Nezha's weapons, even water and fire","rank":"S+"},
+            {"name":"Purple-Gold Red Gourd","owner":"Golden Horn King · Silver Horn King (originally Taishang Laojun's)","category":"Causal-Law Weapon · answering one's name brings death","power_source":"Cosmic Rule Engine · name-binding","principle":"Call the name and it answers; whoever answers enters the gourd and dissolves into pus and blood","user_driven":false,"evidence":"Wukong was once trapped by the false name 'Zhe Xingsun' · dissolved into pus and blood · escaped by means of a false name","rank":"S+"},
+            {"name":"Human Seed Pouch","owner":"Yellow-Browed Boy (originally Maitreya Buddha's)","category":"Causal-Law Weapon · area capture","power_source":"Cosmic Rule Engine · spatial binding","principle":"Open the pouch · people enter · none of the gods can escape","user_driven":false,"evidence":"Took the Twenty-Eight Mansions · the Five-Direction Guardians · Wukong too was nearly captured · saved only by Maitreya's descent","rank":"S+"},
+            {"name":"Yin-Yang Two-Qi Vase","owner":"Golden-Winged Great Peng","category":"Causal-Law Weapon · dissolution","power_source":"Cosmic Rule Engine · yin-yang dissolution","principle":"Enter the vase · within a short span one is reduced to pulp","user_driven":false,"evidence":"Wukong entered the vase · relied on Guanyin's three life-saving hairs · bored through and destroyed it","rank":"S+"},
+            {"name":"Palm-Leaf Fan","owner":"Princess Iron Fan · the Rakshasi","category":"Elemental Weapon · wind-type","power_source":"A heaven-and-earth spirit-treasure · the innate primal qi","principle":"One fan-stroke sends wind 84,000 li · quenches the Flaming Mountains","user_driven":true,"evidence":"The Rakshasi's own mana is middling, yet the fan made her a local hegemon","rank":"S"},
+            {"name":"Golden-Banded Staff","owner":"Sun Wukong","category":"Physical Weapon · heavy weapon","power_source":"The Sea-Pacifying Needle left by Yu the Great for flood control · an innate spirit-treasure","principle":"13,500 jin · shrinks or grows at will","user_driven":true,"evidence":"Driven by Wukong's mana · its upper power limit is set by the wielder","rank":"S"},
+            {"name":"Nine-Toothed Rake","owner":"Zhu Bajie","category":"Physical Weapon · divine weapon","power_source":"Forged by Taishang Laojun · bestowed by the Jade Emperor","principle":"Nine teeth · divine radiance · can build mountains","user_driven":true,"evidence":"Limited by Bajie's mana · the rake's power is never fully realized","rank":"A+"},
+            {"name":"Tight-Fillet Spell","owner":"Guanyin → Tang Sanzang","category":"Causal-Law Weapon · control","power_source":"Cosmic Rule Engine · mind-binding","principle":"Recite the spell and it tightens · splitting headache · a control actuator","user_driven":false,"evidence":"Tang Sanzang, a mere mortal, can recite it · independent of the wielder's mana · acts directly on Wukong","rank":"S+"}
+        ]
+    };
+
+    // ========== Color palette ==========
+    const SANKEY_COLORS = {
+        "Source": "#d4a857",
+        "Transit": "#3a6b8c",
+        "Consumption": "#c8463a"
+    };
+    const TREASURE_CAT_COLORS = {
+        "Causal-Law Weapon": "#c8463a",
+        "Elemental Weapon": "#6B8E5A",
+        "Physical Weapon": "#C9A063"
+    };
+    const DRIVEN_COLORS = {
+        "Wielder-Mana Dependent": "#3a6b8c",
+        "Cosmic Rule Engine": "#d4a857"
+    };
+    const INTENSITY_COLORS = d3.scaleLinear()
+        .domain([1, 5, 8, 10])
+        .range(["#e9b885", "#d4a857", "#c8463a", "#8c1a10"])
+        .clamp(true);
+
+    // ========== Render the mana-conservation Sankey diagram ==========
+    function renderSankey(data) {
+        try {
+            if (typeof d3.sankey !== "function") {
+                console.warn("[renderSankey] d3.sankey unavailable, skipping Sankey rendering");
+                return;
+            }
+            const svg = d3.select("#sankey");
+            svg.selectAll("*").remove();
+
+        const width = 1100;
+        const height = 500;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        // name → index map
+        const nodeNameToIndex = {};
+        data.nodes.forEach((n, i) => { nodeNameToIndex[n.name] = i; });
+
+        const nodes = data.nodes.map(n => ({
+            name: n.name,
+            category: n.category,
+            value: n.value
+        }));
+        const links = data.links.map(l => ({
+            source: l.source,
+            target: l.target,
+            value: l.value
+        }));
+
+        const colorOf = (node) => SANKEY_COLORS[node.category] || "#999";
+
+        // initialize the sankey layout (set nodePadding + extent first, then update layout)
+        const sankeyLayout = d3.sankey()
+            .nodeId(d => d.name)
+            .nodeWidth(18)
+            .nodePadding(20)
+            .extent([[140, 24], [width - 140, height - 24]]);
+
+        // apply layout to get a graph with coordinates (only draw after layout)
+        const graph = sankeyLayout({
+            nodes: nodes.map(d => Object.assign({}, d)),
+            links: links.map(d => Object.assign({}, d))
+        });
+
+        // create a gradient for each link (source→target color transition)
+        const defs = svg.append("defs");
+        graph.links.forEach((d, i) => {
+            const grad = defs.append("linearGradient")
+                .attr("id", `sankey-grad-${i}`)
+                .attr("gradientUnits", "userSpaceOnUse")
+                .attr("x1", d.source.x1)
+                .attr("x2", d.target.x0);
+            grad.append("stop")
+                .attr("offset", "0%")
+                .attr("stop-color", colorOf(d.source));
+            grad.append("stop")
+                .attr("offset", "100%")
+                .attr("stop-color", colorOf(d.target));
+        });
+
+        // draw links (flow bands)
+        svg.append("g")
+            .attr("fill", "none")
+            .selectAll("path")
+            .data(graph.links)
+            .enter()
+            .append("path")
+            .attr("class", "sankey-link")
+            .attr("d", d3.sankeyLinkHorizontal())
+            .attr("stroke", (d, i) => `url(#sankey-grad-${i})`)
+            .attr("stroke-width", d => Math.max(1, d.width))
+            .append("title")
+            .text(d => `${d.source.name} → ${d.target.name}: ${d.value} energy units`);
+
+        // draw nodes
+        const nodeG = svg.append("g")
+            .selectAll("g")
+            .data(graph.nodes)
+            .enter()
+            .append("g")
+            .attr("class", "sankey-node");
+
+        nodeG.append("rect")
+            .attr("x", d => d.x0)
+            .attr("y", d => d.y0)
+            .attr("height", d => Math.max(1, d.y1 - d.y0))
+            .attr("width",d => Math.max(0, d.x1 - d.x0))
+            .attr("fill", d => colorOf(d))
+            .append("title")
+            .text(d => `${d.name} (${d.category}): ${d.value} energy units`);
+
+        // node labels (source on the left, consumption on the right, transit near whichever side is closer)
+        nodeG.append("text")
+            .attr("x", d => {
+                if (d.category === "Source") return d.x0 - 8;
+                if (d.category === "Consumption") return d.x1 + 8;
+                return d.x0 < width / 2 ? d.x1 + 8 : d.x0 - 8;
+            })
+            .attr("y", d => (d.y1 + d.y0) / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", d => {
+                if (d.category === "Source") return "end";
+                if (d.category === "Consumption") return "start";
+                return d.x0 < width / 2 ? "start" : "end";
+            })
+            .text(d => d.name);
+
+        // column headings
+        const cols = [
+            {label: "Source · Production", x: 24, anchor: "start"},
+            {label: "Transit · Immortal Ranks", x: width / 2, anchor: "middle"},
+            {label: "Consumption · Spells", x: width - 24, anchor: "end"}
+        ];
+        svg.append("g")
+            .selectAll("text")
+            .data(cols)
+            .enter()
+            .append("text")
+            .attr("class", "sankey-col-label")
+            .attr("x", d => d.x)
+            .attr("y", 14)
+            .attr("text-anchor", d => d.anchor)
+            .text(d => d.label);
+        } catch (err) {
+            console.warn("[renderSankey] rendering failed:", err.message);
+        }
+    }
+
+    // ========== Render the Heavenly Court annual budget bar chart ==========
+    function renderBudgetChart(budget) {
+        const svg = d3.select("#budget-chart");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("budget-chart");
+        const margin = {top: 20, right: 120, bottom: 30, left: 100};
+        const width = Math.max(containerEl.clientWidth || 900, margin.left + margin.right + 100);
+        const height = 240;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        // surplus rate 92.49% → derive total revenue/expense (converted to Peach Units)
+        const totalRevenue = Math.round(budget.surplus / 0.9249);
+        const totalExpense = totalRevenue - budget.surplus;
+
+        const bars = [
+            {label: "Annual Revenue", value: totalRevenue, color: "#c8463a", unit: "Peach Units"},
+            {label: "Annual Expense", value: totalExpense, color: "#3a6b8c", unit: "Peach Units"},
+            {label: "Annual Surplus", value: budget.surplus, color: "#6B8E5A", unit: "Peach Units"}
+        ];
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear()
+            .domain([0, totalRevenue * 1.1])
+            .range([0, innerW]);
+
+        const y = d3.scaleBand()
+            .domain(bars.map(b => b.label))
+            .range([0, innerH])
+            .padding(0.35);
+
+        // bars
+        g.selectAll(".budget-bar")
+            .data(bars)
+            .enter()
+            .append("rect")
+            .attr("class", "budget-bar")
+            .attr("x", 0)
+            .attr("y", d => y(d.label))
+            .attr("height", y.bandwidth())
+            .attr("width",0)
+            .attr("fill", d => d.color)
+            .attr("rx", 3)
+            .transition()
+            .duration(700)
+            .delay((d, i) => i * 120)
+            .attr("width",d => Math.max(0, x(d.value)));
+
+        // value labels
+        g.selectAll(".budget-label")
+            .data(bars)
+            .enter()
+            .append("text")
+            .attr("class", "budget-label")
+            .attr("x", d => x(d.value) + 8)
+            .attr("y", d => y(d.label) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .style("opacity", 0)
+            .text(d => `${d.value.toLocaleString()} ${d.unit}`)
+            .transition()
+            .duration(400)
+            .delay((d, i) => i * 120 + 600)
+            .style("opacity", 1);
+
+        // Y-axis labels
+        g.selectAll(".budget-ylabel")
+            .data(bars)
+            .enter()
+            .append("text")
+            .attr("class", "budget-ylabel")
+            .attr("x", -12)
+            .attr("y", d => y(d.label) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "end")
+            .style("font-size", "0.9rem")
+            .style("fill", "#23201A")
+            .style("font-weight", "600")
+            .text(d => d.label);
+
+        // revenue/expense detail lists
+        const revList = d3.select("#revenue-list");
+        revList.selectAll("*").remove();
+        budget.revenue.forEach(r => {
+            const li = revList.append("li");
+            li.append("span").text(r.source);
+            li.append("span").attr("class", "amt").text(`${r.amount.toLocaleString()} ${r.unit}`);
+            li.append("span").attr("class", "note").text(r.note);
+        });
+
+        const expList = d3.select("#expense-list");
+        expList.selectAll("*").remove();
+        budget.expense.forEach(e => {
+            const li = expList.append("li");
+            li.append("span").text(e.target);
+            li.append("span").attr("class", "amt").text(`${e.amount.toLocaleString()} ${e.unit}`);
+        });
+    }
+
+    // ========== Render the top 6 energy consumers ==========
+    function renderConsumersChart(consumers) {
+        const svg = d3.select("#consumers-chart");
+        svg.selectAll("*").remove();
+
+        const containerEl = document.getElementById("consumers-chart");
+        const margin = {top: 16, right: 180, bottom: 24, left: 130};
+        const width = Math.max(containerEl.clientWidth || 900, margin.left + margin.right + 100);
+        const height = 260;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const innerW = width - margin.left - margin.right;
+        const innerH = height - margin.top - margin.bottom;
+
+        const sorted = [...consumers].sort((a, b) => b.consumption_per_act - a.consumption_per_act);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const x = d3.scaleLinear()
+            .domain([0, d3.max(sorted, d => d.consumption_per_act) * 1.1])
+            .range([0, innerW]);
+
+        const y = d3.scaleBand()
+            .domain(sorted.map(d => d.consumer + " — " + d.act))
+            .range([0, innerH])
+            .padding(0.25);
+
+        // bars
+        g.selectAll(".consumer-bar")
+            .data(sorted)
+            .enter()
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", d => y(d.consumer + " — " + d.act))
+            .attr("height", y.bandwidth())
+            .attr("width",0)
+            .attr("fill", d => INTENSITY_COLORS(d.consumption_per_act))
+            .attr("rx", 2)
+            .transition()
+            .duration(600)
+            .delay((d, i) => i * 80)
+            .attr("width",d => Math.max(0, x(d.consumption_per_act)));
+
+        // value labels
+        g.selectAll(".consumer-label")
+            .data(sorted)
+            .enter()
+            .append("text")
+            .attr("x", d => x(d.consumption_per_act) + 6)
+            .attr("y", d => y(d.consumer + " — " + d.act) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .style("font-size", "0.82rem")
+            .style("font-family", "JetBrains Mono, monospace")
+            .style("fill", "#c8463a")
+            .style("font-weight", "600")
+            .style("opacity", 0)
+            .text(d => `${d.consumption_per_act} units · ${d.note}`)
+            .transition()
+            .duration(300)
+            .delay((d, i) => i * 80 + 500)
+            .style("opacity", 1);
+
+        // Y-axis
+        g.selectAll(".consumer-ylabel")
+            .data(sorted)
+            .enter()
+            .append("text")
+            .attr("x", -10)
+            .attr("y", d => y(d.consumer + " — " + d.act) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "end")
+            .style("font-size", "0.82rem")
+            .style("fill", "#23201A")
+            .text(d => `${d.consumer} — ${d.act}`);
+    }
+
+    // ========== Render the cultivation-systems comparison table ==========
+    function renderCultivationTable(systems) {
+        const tbody = d3.select("#cultivation-table tbody");
+        tbody.selectAll("*").remove();
+
+        systems.forEach(s => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "name").text(s.name);
+            tr.append("td").text(s.practitioner);
+            tr.append("td").text(s.origin);
+            tr.append("td").attr("class", "num").text(s.count);
+            tr.append("td").text(s.pros);
+            tr.append("td").text(s.cons);
+            tr.append("td").text(s.rival);
+        });
+    }
+
+    // ========== Render the fire-spell comparison table ==========
+    function renderFireTable(fires) {
+        const tbody = d3.select("#fire-table tbody");
+        tbody.selectAll("*").remove();
+
+        fires.forEach(f => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "name").text(f.name);
+            tr.append("td").text(f.owner);
+            tr.append("td").text(f.origin);
+            // intensity: color bar + number
+            const intensityTd = tr.append("td").attr("class", "num");
+            intensityTd.append("span")
+                .attr("class", "intensity-bar")
+                .style("width", (f.intensity * 12) + "px")
+                .style("background", INTENSITY_COLORS(f.intensity));
+            intensityTd.append("span").text(" " + f.intensity + "/10");
+            tr.append("td").text(f.range);
+            tr.append("td").text(f.weakness);
+            tr.append("td").text(f.kills);
+            tr.append("td").attr("class", "num").text("Ch. " + f.chapter);
+        });
+    }
+
+    // ========== Render the array table ==========
+    function renderArrayTable(arrays) {
+        const tbody = d3.select("#array-table tbody");
+        tbody.selectAll("*").remove();
+
+        arrays.forEach(a => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "name").text(a.name);
+            tr.append("td").attr("class", "num").text("Ch. " + a.chapter);
+            tr.append("td").text(a.owner);
+            tr.append("td").text(a.type);
+            tr.append("td").text(a.principle);
+            tr.append("td").text(a.weakness);
+            tr.append("td").text(a.result);
+        });
+    }
+
+    // ========== Render treasure classification pie charts + treasure table ==========
+    function renderTreasureCharts(treasures) {
+        // normalize categories (take the broad class before the ·)
+        const catCount = {};
+        treasures.forEach(t => {
+            const cat = t.category.split("·")[0];
+            catCount[cat] = (catCount[cat] || 0) + 1;
+        });
+
+        // group by whether they depend on the wielder's mana
+        const drivenCount = {
+            "Cosmic Rule Engine": treasures.filter(t => !t.user_driven).length,
+            "Wielder-Mana Dependent": treasures.filter(t => t.user_driven).length
+        };
+
+        renderPie("treasure-cat-pie", "treasure-cat-legend", catCount, TREASURE_CAT_COLORS, "items");
+        renderPie("treasure-driven-pie", "treasure-driven-legend", drivenCount, DRIVEN_COLORS, "items");
+
+        // full treasure spectrum table
+        const tbody = d3.select("#treasure-table tbody");
+        tbody.selectAll("*").remove();
+
+        treasures.forEach(t => {
+            const tr = tbody.append("tr");
+            tr.append("td").attr("class", "name").text(t.name);
+            tr.append("td").text(t.owner);
+            tr.append("td").text(t.category);
+            tr.append("td").text(t.power_source);
+            tr.append("td").text(t.principle);
+            tr.append("td").html(t.user_driven
+                ? '<span class="tag" style="background:#3a6b8c">Mana-Dependent</span>'
+                : '<span class="tag" style="background:#d4a857">Rule Engine</span>');
+            const rankClass = "rank-" + t.rank;
+            tr.append("td").html(`<span class="rank-badge ${rankClass}">${t.rank}</span>`);
+        });
+    }
+
+    // ========== Generic pie chart renderer ==========
+    function renderPie(svgId, legendId, data, colorMap, unitLabel) {
+        const svg = d3.select("#" + svgId);
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+        const radius = Math.max(0, Math.min(width, height) / 2 - 14);
+
+        svg.selectAll("*").remove();
+        const g = svg.append("g")
+            .attr("transform", `translate(${width/2}, ${height/2})`);
+
+        const pie = d3.pie()
+            .value(d => d[1])
+            .sort(null);
+
+        const arc = d3.arc()
+            .innerRadius(radius * 0.58)
+            .outerRadius(radius)
+            .cornerRadius(3);
+
+        const labelArc = d3.arc()
+            .innerRadius(radius * 0.82)
+            .outerRadius(radius * 0.82);
+
+        const arcs = pie(Object.entries(data));
+
+        // slices
+        g.selectAll("path")
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("fill", d => colorMap[d.data[0]] || "#999")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("d", arc)
+            .style("opacity", 0)
+            .transition()
+            .duration(800)
+            .delay((d, i) => i * 100)
+            .style("opacity", 1);
+
+        // center number
+        const total = Object.values(data).reduce((a, b) => a + b, 0);
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "0.35em")
+            .style("font-size", "1.8rem")
+            .style("font-weight", "600")
+            .style("fill", "#23201A")
+            .text(total);
+
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", "2em")
+            .style("font-size", "0.72rem")
+            .style("fill", "#6B6455")
+            .text(unitLabel || "Total");
+
+        // slice labels
+        g.selectAll("text.label")
+            .data(arcs)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+            .attr("text-anchor", "middle")
+            .style("font-size", "0.88rem")
+            .style("font-weight", "600")
+            .style("fill", "#fff")
+            .text(d => {
+                const pct = (d.data[1] / total * 100).toFixed(0);
+                return d.data[1] > 0 ? `${d.data[1]} · ${pct}%` : "";
+            });
+
+        // legend
+        const legend = d3.select("#" + legendId);
+        legend.selectAll("*").remove();
+        legend.selectAll(".legend-item")
+            .data(Object.entries(data))
+            .enter()
+            .append("div")
+            .attr("class", "legend-item")
+            .html(d => `
+                <span class="legend-swatch" style="background:${colorMap[d[0]] || '#999'}"></span>
+                <span>${d[0]}: ${d[1]} ${unitLabel || ""}</span>
+            `);
+    }
+
+    // ========== Key insights ==========
+    function renderInsights() {
+        const insights = [
+            `The Heavenly Court's annual energy budget surplus is <strong>9,249 Peach Units</strong> (92.49% surplus rate) — whoever controls the peach resource controls power; the Heavenly Court is a net mana-surplus institution.`,
+            `<strong>All S+-rank treasures (Vajra Ring / Purple-Gold Red Gourd / Human Seed Pouch / Yin-Yang Two-Qi Vase / Tight-Fillet Spell) are Cosmic Rule Engines</strong>, independent of the wielder's mana — Tang Sanzang, a mere mortal, can suppress Wukong just by reciting the Tight-Fillet Spell.`,
+            `Lion-Camel Cave's <strong>Myriad-Demon Array of 48,000 lesser demons rivals the heavenly hosts in scale</strong>, the largest demon array in the whole book, requiring Tathagata to descend in person to quell.`,
+            `Jindou Cave's <strong>Vajra Ring is a classic "strategic-material plunder" weapon</strong> (snares the gods' weapons), breaking the "weapons can win" principle and leaving Wukong empty-handed and helpless.`,
+            `Of the 8 magic treasures, <strong>5 are Causal-Law Weapons (62.5%)</strong>, and 3 depend on the wielder's mana (elemental/physical) — the higher the rank, the more a treasure's power detaches from its wielder.`,
+            `First Law of Mana Conservation: energy flows through the three states of <strong>Source → Transit → Consumption</strong>, and the Demon Immortals (Wukong · Bull King · Peng) are the main consumption end of transformation and cloud-soaring.`,
+            `Top energy consumer: <strong>Guanyin's vase willow water at 95 units per use</strong> > Bull Demon King's true-form revelation 90 > Wukong's Seventy-Two Transformations 80 — high-order divine powers settle things in one strike but cost enormous energy.`,
+            `Two fire spells score a perfect 10: <strong>True Samadhi Fire and Six-Ding Divine Fire tie for the top rank</strong>, but Samadhi Fire fears Guanyin's pure water, while Six-Ding Divine Fire is almost uncheckable (Wukong escaped via the Xun-position wind and smoke).`
+        ];
+
+        const ul = d3.select("#insights");
+        ul.selectAll("*").remove();
+        insights.forEach(text => {
+            ul.append("li").html(text);
+        });
+    }
+
+    // ========== Data loading (fall back to embedded data if fetch fails) ==========
+    async function loadData() {
+        const base = "../../scripts/output/data/";
+        const files = ["magic_system.json", "magic_fire.json", "magic_energy_sankey.json", "magic_arrays.json", "magic_treasures_power.json"];
+        try {
+            const results = await Promise.all(files.map(f => fetch(base + f).then(r => {
+                if (!r.ok) throw new Error(r.status);
+                return r.json();
+            })));
+            document.getElementById("dataSource").innerHTML =
+                "Data source: loaded live from <code>scripts/output/data/</code> (http server mode)";
+            return {
+                magic_system: results[0],
+                magic_fire: results[1],
+                magic_energy_sankey: results[2],
+                magic_arrays: results[3],
+                magic_treasures: results[4]
+            };
+        } catch (e) {
+            console.warn("[INFO] using embedded data:", e.message);
+            return EMBEDDED_DATA;
+        }
+    }
+
+    // ========== Main flow ==========
+    async function main() {
+        const data = await loadData();
+        window.__lastData = data;
+
+        // energy-conservation law text
+        d3.select("#energy-law").html(
+            "<strong>⚖ " + data.magic_energy_sankey.energy_law + "</strong>"
+        );
+
+        // Sankey diagram (core)
+        renderSankey(data.magic_energy_sankey);
+
+        // Heavenly Court budget
+        renderBudgetChart(data.magic_energy_sankey.tianting_budget);
+        renderConsumersChart(data.magic_energy_sankey.top_consumers);
+
+        // cultivation systems table
+        renderCultivationTable(data.magic_system);
+
+        // fire spells table
+        renderFireTable(data.magic_fire);
+
+        // arrays table
+        renderArrayTable(data.magic_arrays);
+
+        // treasure pies + table
+        renderTreasureCharts(data.magic_treasures);
+
+        // key insights
+        renderInsights();
+
+        // generated time
+        const now = new Date();
+        const _gt = document.getElementById("gen-time"); if (_gt) _gt.textContent = "Data generated: " + now.getFullYear() + "-" +
+            String(now.getMonth() + 1).padStart(2, "0") + "-" +
+            String(now.getDate()).padStart(2, "0") + " " +
+            String(now.getHours()).padStart(2, "0") + ":" +
+            String(now.getMinutes()).padStart(2, "0");
+    }
+
+    // redraw the Sankey diagram on window resize
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (window.__lastData) {
+                renderSankey(window.__lastData.magic_energy_sankey);
+                renderBudgetChart(window.__lastData.magic_energy_sankey.tianting_budget);
+                renderConsumersChart(window.__lastData.magic_energy_sankey.top_consumers);
+            }
+        }, 250);
+    });
+
+    main();
+    </script>
+<script id="audit-axisfix">
+(function(){
+  function fixAxes(){
+    try{
+      var svgs = document.querySelectorAll('svg');
+      svgs.forEach(function(svg){
+        var groups = svg.querySelectorAll('g');
+        groups.forEach(function(axisG){
+          if(!axisG.querySelector(':scope > .domain')) return;
+          var ticks = axisG.querySelectorAll(':scope > g.tick');
+          if(ticks.length < 6) return;
+          var bottom = false;
+          ticks.forEach(function(t){
+            var tr = t.getAttribute('transform') || '';
+            var m = tr.match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m && Math.abs(parseFloat(m[2])) < 0.5) bottom = true;
+          });
+          if(!bottom) return;
+          ticks.forEach(function(t){
+            var txt = t.querySelector('text');
+            if(!txt) return;
+            txt.style.transformBox = 'fill-box';
+            txt.style.transformOrigin = 'top center';
+            txt.style.transform = 'rotate(-38deg)';
+            txt.style.fontSize = '10px';
+            txt.style.fontWeight = '500';
+          });
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fixAxes, 800); setTimeout(fixAxes, 2600); }
+  if(document.readyState === 'complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix2">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          if(!g.querySelector(':scope > .domain')) return;
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            // 水平(底部)轴：旋转 + 缩小
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            // 垂直(左侧)轴：缩小 + 隐藏重叠较小者
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-labelavoid-all">
+(function(){
+  function avoid(){
+    try{
+      document.querySelectorAll("svg").forEach(function(svg){
+        var ts=[].slice.call(svg.querySelectorAll("text")).filter(function(t){
+          // 排除轴刻度、图例、标题、轴标签、热力格子、tooltip
+          if(t.closest && t.closest(".tick, .legend, .axis, .domain, .title, .cell, .tooltip, .axis-label")) return false;
+          var r=t.getBoundingClientRect(); return r.width>0&&r.height>0;
+        });
+        var R=ts.map(function(t){return t.getBoundingClientRect();});
+        for(var i=0;i<ts.length;i++){
+          for(var j=i+1;j<ts.length;j++){
+            var a=R[i],b=R[j];
+            if(!a.width||!b.width) continue;
+            var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+            var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+            if(ix*iy<=0) continue;
+            var area=Math.min(a.width*a.height,b.width*b.height);
+            if(area>0 && (ix*iy)/area>0.5){
+              var hide=(a.width*a.height<=(b.width*b.height))?ts[i]:ts[j];
+              if(hide.style.display!=="none"){
+                // 加 title 保留全名（hover 可见）
+                if(!hide.querySelector(":scope > title")){
+                  var ti=document.createElementNS("http://www.w3.org/2000/svg","title");
+                  ti.textContent=hide.textContent;
+                  hide.appendChild(ti);
+                }
+                hide.style.display="none";
+              }
+            }
+          }
+        }
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ [1200,3000,6000,9000,12000].forEach(function(ms){ setTimeout(avoid,ms); }); }
+  if(document.readyState==="complete"){ run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<script id="audit-axisfix3">
+(function(){
+  function variance(a){var m=a.reduce(function(s,v){return s+v;},0)/a.length;return a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length;}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        svg.querySelectorAll('g').forEach(function(g){
+          var ticks=[].slice.call(g.querySelectorAll(':scope > g.tick'));
+          if(ticks.length<5) return;
+          var xs=[],ys=[];
+          ticks.forEach(function(t){
+            var m=(t.getAttribute('transform')||'').match(/translate\(\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\)/);
+            if(m){xs.push(parseFloat(m[1]));ys.push(parseFloat(m[2]));}
+          });
+          if(xs.length<3) return;
+          var vx=variance(xs), vy=variance(ys);
+          if(vx>vy){
+            ticks.forEach(function(t){
+              var tx=t.querySelector('text'); if(!tx) return;
+              tx.style.transformBox='fill-box';
+              tx.style.transformOrigin='top center';
+              tx.style.transform='rotate(-40deg)';
+              tx.style.fontSize='10px';
+              tx.style.fontWeight='500';
+            });
+          } else {
+            var texts=ticks.map(function(t){return t.querySelector('text');}).filter(Boolean);
+            texts.forEach(function(tx){ tx.style.fontSize='9px'; });
+            var R=texts.map(function(t){return t.getBoundingClientRect();});
+            for(var i=0;i<texts.length;i++){
+              for(var j=i+1;j<texts.length;j++){
+                var a=R[i],b=R[j];
+                if(!a.width||!b.width) continue;
+                var ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left));
+                var iy=Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top));
+                if(ix*iy<=0) continue;
+                var area=Math.min(a.width*a.height,b.width*b.height);
+                if(area>0 && (ix*iy)/area>0.5){
+                  var hide=(a.width*a.height<=(b.width*b.height))?texts[i]:texts[j];
+                  if(hide.style.display!=='none') hide.style.display='none';
+                }
+              }
+            }
+          }
+        });
+      });
+    }catch(e){ /* noop */ }
+  }
+  function run(){ setTimeout(fix,800); setTimeout(fix,2600); setTimeout(fix,5000); }
+  if(document.readyState==='complete'){ run(); }
+  else { window.addEventListener('load', run); }
+})();
+</script>
+
+<script id="audit-axisfix4">
+(function(){
+  var NUM=/^(第?\d+回?|\d+(\.\d+)?|\d+%?|W\d+)$/;
+  function bbox(t){return t.getBoundingClientRect();}
+  function fix(){
+    try{
+      document.querySelectorAll('svg').forEach(function(svg){
+        var all=[].slice.call(svg.querySelectorAll('text')).filter(function(t){var r=bbox(t);return r.width>0&&r.height>0;});
+        var nums=all.filter(function(t){return NUM.test((t.textContent||'').trim());});
+        var axisNum=new Set();
+        var rows={},cols={};
+        nums.forEach(function(t){var r=bbox(t);var y=Math.round(r.top/8)*8;rows[y]=rows[y]||[];rows[y].push(t);var x=Math.round(r.left/8)*8;cols[x]=cols[x]||[];cols[x].push(t);});
+        Object.keys(rows).forEach(function(k){if(rows[k].length>=3)rows[k].forEach(function(t){axisNum.add(t);});});
+        Object.keys(cols).forEach(function(k){if(cols[k].length>=3)cols[k].forEach(function(t){axisNum.add(t);});});
+        axisNum.forEach(function(t){t.style.fontSize='9px';t.style.fontWeight='500';});
+        for(var i=0;i<all.length;i++){
+          for(var j=i+1;j<all.length;j++){
+            var a=all[i],b=all[j];
+            var ra=bbox(a),rb=bbox(b);
+            var ix=Math.max(0,Math.min(ra.right,rb.right)-Math.max(ra.left,rb.left));
+            var iy=Math.max(0,Math.min(ra.bottom,rb.bottom)-Math.max(ra.top,rb.top));
+            var inter=ix*iy; if(inter<=0) continue;
+            var area=Math.min(ra.width*ra.height,rb.width*rb.height);
+            if(area<=0||inter/area<0.4) continue;
+            var ta=(a.textContent||'').trim(),tb=(b.textContent||'').trim();
+            var dup=ta&&ta===tb;
+            var aAxis=axisNum.has(a),bAxis=axisNum.has(b);
+            var aNum=NUM.test(ta),bNum=NUM.test(tb);
+            var act=false;
+            if(dup)act=true; else if(aAxis||bAxis)act=true; else if(aNum&&bNum)act=true;
+            if(!act) continue;
+            var hide,keep;
+            if(dup){ hide=(ta.length<=tb.length)?a:b; keep=(hide===a)?b:a; }
+            else { hide=(ra.width*ra.height<=rb.width*rb.height)?a:b; keep=(hide===a)?b:a; }
+            if(hide.style.display!=='none'){
+              hide.setAttribute('data-axisfix4','1');
+              if(!hide.getAttribute('title')) hide.setAttribute('title',(hide.textContent||'').trim());
+              hide.style.display='none';
+            }
+          }
+        }
+      });
+    }catch(e){}
+  }
+  function run(){[800,2600,5000,8000,11000].forEach(function(t){setTimeout(fix,t);});}
+  if(document.readyState==='complete')run();else window.addEventListener('load',run);
+})();
+</script>
+
+</body>
+</html>
+</body>
+</html>
