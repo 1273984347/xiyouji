@@ -107,6 +107,10 @@
         .ask-chip:hover { border-color: var(--accent-2); background: #fff; }
         .ask-note { margin-top: 14px; font-size: 12px; color: var(--ink-faint); }
         .ask-note code { background: var(--paper-warm); padding: 1px 6px; border-radius: 4px; }
+        .curated-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;
+        }
+        .curated-grid .card p { margin-top: 6px; }
         @media (max-width: 640px) {
             .ask-form { flex-direction: column; }
             .ask-form button { width: 100%; }
@@ -187,10 +191,70 @@
 
         <section class="stats" aria-label="项目数据概览">
             <div class="stat"><div class="num">100</div><div class="lbl">回 · 逐回解读</div></div>
-            <div class="stat"><div class="num">625</div><div class="lbl">篇 · 研究文档</div></div>
-            <div class="stat"><div class="num">80</div><div class="lbl">个 · 可视化页面</div></div>
-            <div class="stat"><div class="num">133</div><div class="lbl">维 · 数据维度</div></div>
+            <div class="stat"><div class="num">611</div><div class="lbl">篇 · 研究文档</div></div>
+            <div class="stat"><div class="num">86</div><div class="lbl">个 · 可视化页面</div></div>
+            <div class="stat"><div class="num">55</div><div class="lbl">条 · 学术引用</div></div>
         </section>
+
+        <div class="page-wrap">
+            <div class="section">
+                <div class="section-head">
+                    <p class="kicker">CURATED</p>
+                    <h2>精选必看</h2>
+                    <p class="note">八个入口先睹为快；全部 86 页见数据看板，另有 133 维数据实验（含趣味跨界）。</p>
+                </div>
+                <div class="curated-grid">
+                    <a class="card" href="data/chapter-structure-graph.html">
+                        <p class="card-kicker">G · CHAPTER GRAPH</p>
+                        <h3>百回结构图谱</h3>
+                        <p>100 回篇幅起伏、八十一难分布一眼看全。</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                    </a>
+                    <a class="card" href="data/character-dynamic-network.html">
+                        <p class="card-kicker">N · CHARACTER NETWORK</p>
+                        <h3>人物动态网络</h3>
+                        <p>三界人物关系与共现随时间流动。</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                    </a>
+                    <a class="card" href="data/journey-spacetime.html">
+                        <p class="card-kicker">R · JOURNEY SPACETIME</p>
+                        <h3>取经时空</h3>
+                        <p>十万八千里路线与十四年时间并置呈现。</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                    </a>
+                    <a class="card" href="data/narratology-13d-network.html">
+                        <p class="card-kicker">N · NARRATOLOGY 13D</p>
+                        <h3>叙事学十三维</h3>
+                        <p>全书叙事机制的十三维网络。</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                    </a>
+                    <a class="card" href="data/criticism-history.html">
+                        <p class="card-kicker">H · CRITICISM 500Y</p>
+                        <h3>批评史长卷</h3>
+                        <p>五百年解读流变、九批评家、三教争辩。</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                    </a>
+                    <a class="card" href="data/emotional-heatmap.html">
+                        <p class="card-kicker">E · EMOTIONAL HEATMAP</p>
+                        <h3>情感热力图</h3>
+                        <p>八批评家 × 二十难的情感温度。</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                    </a>
+                    <a class="card" href="data/cross-time-danmaku.html">
+                        <p class="card-kicker">D · DANMAKU MUSEUM</p>
+                        <h3>跨时空弹幕</h3>
+                        <p>从明清到当代的名人弹幕博物馆。</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                    </a>
+                    <a class="card" href="data/text-search.html">
+                        <p class="card-kicker">S · TEXT SEARCH</p>
+                        <h3>原著全文检索</h3>
+                        <p>七十万字原著，100 回逐字可查。</p>
+                        <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入 →</p>
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <div class="page-wrap">
             <div class="section">
@@ -274,15 +338,15 @@
                     <a class="card" href="dashboard.html">
                         <p class="card-kicker">D · DATA DASHBOARD</p>
                         <h3>数据看板</h3>
-                        <p>55 张 KPI 卡片总览项目全貌，80 个 D3.js / Three.js 可视化页面一屏直达，附全站搜索浮层。</p>
-                        <p class="card-meta">55 KPI · 80 PAGES · SITE SEARCH</p>
+                        <p>55 张 KPI 卡片总览项目全貌，86 个 D3.js / Three.js 可视化页面一屏直达，附全站搜索浮层。</p>
+                        <p class="card-meta">55 KPI · 86 PAGES · SITE SEARCH</p>
                         <p class="text-sm" style="color:var(--accent-2);margin-top:12px;">进入看板 →</p>
                     </a>
                     <div class="tools-side">
                         <a class="card" href="data/tag-cloud.html">
                             <p class="card-kicker">N · TAG CLOUD</p>
                             <h3>标签云</h3>
-                            <p>全站 80 个页面的标签导航中心，同分类智能推荐。</p>
+                            <p>全站 86 个页面的标签导航中心，同分类智能推荐。</p>
                         </a>
                         <a class="card" href="data/text-search.html">
                             <p class="card-kicker">S · TEXT SEARCH</p>
@@ -298,7 +362,7 @@
     <footer class="site-footer">
         <div>
             <div class="footer-brand">详解西游记</div>
-            <div class="footer-meta">2026 · MIT License · 持续更新中 · v2.3.38 W423 性能债专项（LHCI 预算收紧：LCP 5000→4500·CLS 0.3→0.2·CJK 字体 swap→optional·D3/Three 移出 head）· v2.3.37 W422 全量治理（perf 触发修复·verify 四门禁·文档归档）· v2.3.36 W421 Screenshot Review 提速优化（页脚/文档-only 跳过·定向截图）· v2.3.35 W420 A1 内容质量深化（深度解读 100/100·56 回元数据补齐·导航错链修复）· v2.3.34 W419 修复 A1 深度解读 SD 错位（22 篇 SD 归位·40-72 回全覆盖·第 56 回补写 SD101）</div>
+            <div class="footer-meta">2026 · MIT License · 持续更新中 · v2.3.67 · W452 学术研究显式引用门禁 · v2.3.67 · W452 学术研究引用审计 · v2.3.65 · W450 统计口径统一与轨标体系 · v2.3.38 W423 性能债专项（LHCI 预算收紧：LCP 5000→4500·CLS 0.3→0.2·CJK 字体 swap→optional·D3/Three 移出 head）· v2.3.37 W422 全量治理（perf 触发修复·verify 四门禁·文档归档）· v2.3.36 W421 Screenshot Review 提速优化（页脚/文档-only 跳过·定向截图）· v2.3.35 W420 A1 内容质量深化（深度解读 100/100·56 回元数据补齐·导航错链修复）· v2.3.34 W419 修复 A1 深度解读 SD 错位（22 篇 SD 归位·40-72 回全覆盖·第 56 回补写 SD101）</div>
         </div>
         <nav aria-label="页脚导航">
             <a href="index.html">首页</a>

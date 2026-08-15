@@ -10,7 +10,7 @@
 | `交接文档.md` | 顶部 `> 最后更新：`；阻塞段 `零、当前阻塞`；`## 一、当前进度（...`；`### 已完成里程碑概要`；`### 当前版本号`（含 Git HEAD / W### 已用到 / 下一版本段）；文末 `最后更新：` |
 | `README.md` | `> **当前版本 vX.Y.Z（date）**：...` |
 | `STRUCTURE.md` | `> 当前版本：vX.Y.Z（date）— ...` |
-| `docs/00-导读/项目说明.md` | 头部 `> 当前版本 vX.Y.Z（date）：...` 及 `- **当前版本**：...` |
+| `docs/00-导读/项目说明.md` | 头部 `> 当前版本 vX.Y.Z（date）：...` 及 :45 附近的第二处 `- **当前版本**：...`（bump 漏改，需手动核改版本号 + 日期） |
 | `scripts/output/file-index.md` | 顶部 `---` 之后、旧 `## WXXX ...` 之前 |
 
 ## 长链页脚格式（dukou-engine.html）
@@ -77,10 +77,10 @@ cd /d/1/xiyouji && grep -h "当前版本" README.md STRUCTURE.md docs/00-导读/
 
 - 入口：`python scripts/bump_version.py [--version X.Y.Z] [--w WXXX] [--desc "..."] [--note "..."]`
 - 默认从 `site/dukou-engine.html` footer parse 当前 v/W。
-- `--desc`：替换版本行的主描述 → **吞掉规模描述**。
+- `--desc`：替换版本行的主描述 → **吞掉规模描述**；对 STRUCTURE.md 版本行是**追加** ` + W4xx（W4xx 描述）` 畸形尾巴而非替换旧描述（W448 实测），需手动重写整行。
 - `--note`：设置 file-index 里程碑标题（缺省用 w）。
 - 会同步：SYNC_DOCS（README/STRUCTURE/项目说明/file-index/交接文档/CHANGELOG 的 W 范围 + index/cross-time-danmaku/tag-cloud 简单页脚）、AUX_VERSION_DOCS（README/STRUCTURE/项目说明 版本行）。
-- **不会**：写 CHANGELOG 完整条目、改 dukou-engine footer、更新日期。
+- **不会**：写 CHANGELOG 完整条目、改 dukou-engine footer、更新日期、更新 `docs/00-导读/项目说明.md` 的 `- **当前版本**：` 第二处版本行（:45 附近，需手动核改）。
 
 ## verify_delivery.py 门禁口径
 

@@ -188,6 +188,28 @@ def main():
     else:
         warn("README 未找到 '共 N 篇' 声明，跳过 A1-A6 计数校验")
 
+    # ---- 学术研究 轨显式引用门禁（W452 新增：可核查引用硬性化）----
+    acad_total = 0
+    acad_missing = []
+    for r, _, fns in os.walk(os.path.join(ROOT, "docs")):
+        for fn in fns:
+            if not fn.endswith(".md"):
+                continue
+            c = _read(os.path.join(r, fn))
+            m = re.search(r"^> 轨标：([^\r\n]+)", c, re.M)
+            if not m or m.group(1).strip() != "学术研究":
+                continue
+            acad_total += 1
+            if not re.search(r"^> 引用：.*学术论文索引", c, re.M):
+                acad_missing.append(os.path.join(r, fn))
+    if acad_total == 0:
+        warn("未发现 学术研究 轨文档，跳过显式引用门禁")
+    elif acad_missing:
+        fail("学术研究 轨文档 %d 篇缺显式引用（缺 '> 引用：' 学术论文索引 链接）：%s"
+             % (len(acad_missing), ", ".join(acad_missing[:5])))
+    else:
+        ok("学术研究 轨文档 %d 篇均含显式引用（> 引用：学术论文索引 链接）" % acad_total)
+
     # ---- A1 导航相邻性断言（W422 新增：W418 只保证"每回有导航行"不保证指向相邻回）----
     ch_dir = os.path.join(ROOT, "docs", "01-全书逐回解读")
     nav_fail = []

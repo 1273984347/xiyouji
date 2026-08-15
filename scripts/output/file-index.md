@@ -8,6 +8,18 @@
 
 ---
 
+## W449 冗余文档清理（2026-08-16·v2.3.64）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| 项目概览.md / 项目认知总览.md / 项目交接参考手册.md | W449 | v2.3.64 删除·判定与 交接文档.md 冗余（git rm·保留历史可恢复） |
+| README.md | W449 | v2.3.64 修改·链接改指 交接文档.md |
+| docs/00-导读/文档规范.md | W449 | v2.3.64 修改·§11.1/§11.4 旁文档 4→1（已先行提交） |
+| scripts/output/file-index.md | W449 | v2.3.64 修改·移除 10 条三冗余文档反向索引 |
+| MEMORY.md | W449 | v2.3.64 修改·修订陈旧 W423（未 push/无远端）记忆 + 英文站 138 页 + 空 legacy 目录 |
+| site/dukou-engine.html | W449 | v2.3.64 修改·页脚 prepend v2.3.64 W449 |
+| CHANGELOG.md / 交接文档.md | W449 | v2.3.64 修改·W449 四件套条目 + 交接同步 |
+
 ## W448 外部锐评回应治理（2026-08-16·v2.3.63）
 
 | 文件 | W | 说明 |
@@ -26,7 +38,7 @@
 | scripts/extract_strings.py / validate_en.py | W447 | v2.3.62 改名（原 _extract_strings.py/_validate_en.py 去下划线转正） |
 | scripts/archive/（45 个） | W447 | v2.3.62 新增·历史一次性脚本归档（git mv 保留历史） |
 | scripts/README.md | W447 | v2.3.62 修改·补 archive 说明 + 转正工具登记 |
-| 交接文档.md / 项目概览.md | W447 | v2.3.62 修改·24 处旧工具名引用同步 |
+| 交接文档.md | W447 | v2.3.62 修改·24 处旧工具名引用同步 |
 
 ## W446 英文站旧页 CJK 残留清理（2026-08-14·v2.3.61）
 
@@ -217,7 +229,6 @@
 | scripts/verify_delivery.py | W424 | v2.3.39 修改·EXPECT_A4 "201 篇"→"209 篇"（A4 计数假绿门禁变真校验） |
 | README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W424 | v2.3.39 修改·版本行 bump + A4 "199→201" parenthetical 统一 209·项目说明 :45 v2.3.37→v2.3.38 遗留同步 |
 | 交接文档.md | W424 | v2.3.39 修改·W422/W423 三处矛盾修复·HEAD/版本列表/页脚最后更新 bump 至 v2.3.39 W424 |
-| 项目概览.md / 项目认知总览.md / 项目交接参考手册.md | W424 | v2.3.39 修改·旁文档 3 份 bump（W424·下一 W425） |
 | docs/00-导读/文档规范.md | W424 | v2.3.39 修改·A4 门禁描述 "201 篇"→"209 篇"（两处） |
 | scripts/security_scan.py | W424 | v2.3.39 修改·_find_requirements_files 递归剪枝（命中 scripts/requirements.txt·不再扫环境 103 high）·discover_files 排除 .pw-browsers |
 | site/data/character-relationship-3d.html | W424 | v2.3.39 修改·main() 改 load 事件触发（内联 defer 属性无效·3D 页从"加载失败"回退恢复为真实渲染） |
@@ -307,9 +318,6 @@
 | STRUCTURE.md | W422 | v2.3.37 修改·头部版本行 v2.3.37 W422 |
 | docs/00-导读/项目说明.md | W422 | v2.3.37 修改·版本行 ×2 + 双索引链接规则校准（新创作执行·存量以 file-index 追溯） |
 | docs/00-导读/文档规范.md | W422 | v2.3.37 修改·§11.2 禁改范围 W001-W420→W001-W421 |
-| 项目认知总览.md | W422 | v2.3.37 修改·计数校准（docs 756/A1-A6 611/A3=211/A4=209）+ HEAD v2.3.37 W422 |
-| 项目概览.md | W422 | v2.3.37 修改·HEAD v2.3.37 W422 + W422 里程碑行 |
-| 项目交接参考手册.md | W422 | v2.3.37 修改·HEAD v2.3.37 W422 + 接续编号 W422·下一 W423 + check_js_syntax 命令修正 |
 | .github/workflows/README.md | W422 | v2.3.37 修改·W 链加 W422 + W422 说明行 + perf.yml 触发矩阵更新 |
 | site/dukou-engine.html | W422 | v2.3.37 修改·页脚插入 v2.3.37 W422 段 |
 | site/index.html | W422 | v2.3.37 修改·页脚 v2.3.38 · W423 |
@@ -333,9 +341,6 @@
 | site/index.html | W421 | v2.3.36 修改·页脚 v2.3.36 · W421 |
 | site/data/cross-time-danmaku.html | W421 | v2.3.36 修改·页脚 v2.3.36 · W421 |
 | site/data/tag-cloud.html | W421 | v2.3.36 修改·页脚 v2.3.36 · W421 |
-| 项目概览.md | W421 | v2.3.36 修改·头部 HEAD v2.3.36 W421 + W421 里程碑行 |
-| 项目认知总览.md | W421 | v2.3.36 修改·头部 + 当前开发进度 HEAD v2.3.36 W421 |
-| 项目交接参考手册.md | W421 | v2.3.36 修改·头部版本 v2.3.36 W421 + 接续编号当前 W421·下一 W422 |
 | .github/workflows/README.md | W421 | v2.3.36 修改·头部 W 链加 W421 + W421 说明行 + Screenshot Review 触发矩阵更新 |
 | docs/00-导读/文档规范.md | W421 | v2.3.36 修改·§11.2 禁改范围 W001-W419→W001-W420（随 W421 校准·E2 深处残留） |
 
@@ -357,9 +362,6 @@
 | site/index.html | W420 | v2.3.35 修改·页脚 v2.3.35 · W420 |
 | site/data/cross-time-danmaku.html | W420 | v2.3.35 修改·页脚 v2.3.35 · W420 |
 | site/data/tag-cloud.html | W420 | v2.3.35 修改·页脚 v2.3.35 · W420 |
-| 项目概览.md | W420 | v2.3.35 修改·头部 HEAD v2.3.35 W420 + W420 里程碑行 |
-| 项目认知总览.md | W420 | v2.3.35 修改·头部 + 当前开发进度 HEAD v2.3.35 W420 |
-| 项目交接参考手册.md | W420 | v2.3.35 修改·头部版本 v2.3.35 W420 + 接续编号当前 W420·下一 W421 |
 | .github/workflows/README.md | W420 | v2.3.35 修改·头部 W 链加 W420 + W420 说明行 |
 | docs/00-导读/文档规范.md | W420 | v2.3.35 修改·§11.2 禁改范围 W001-W418→W001-W419（随 W420 校准·E2 深处残留） |
 
@@ -433,3 +435,56 @@
 | docs/00-导读/文档规范.md | W419 | v2.3.34 修改·§11.2 禁改范围 W001-W414→W001-W418（随 W419 校准）+ 新增「误改后果」列（12 类禁改文件附违反后果）·新增 §11.4 同步核对速查表（10 项勾选清单） |
 | 新Agent启动Prompt.md | W419 | v2.3.34 新建 + 处置收尾补充·新 Agent 启动 prompt（交接文档速用精简版·可直接复制发送·含四步认知顺序 + §11 规则 + E1 铁律 + W419 三条新增铁律：bump 污染校验（W418/W419 复现 2 次）/ 批量重写最小化 diff（git restore 非必要改动）/ A1 SD 禁重跑合并脚本） |
 
+> 当前版本 v2.3.65（2026-08-16）
+
+## W450 统计口径统一与轨标体系（2026-08-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/00-导读/统计口径说明.md | W450 | v2.3.65 新增·对外数字唯一口径来源（611 篇/86 页/133 维/55 引用/版本语义） |
+| site/index.html | W450 | v2.3.65 修改·stats 625→611、80→86、133→55 学术引用 + 新增「精选必看」8 卡 + dashboard/tag-cloud 文案 80→86 |
+| site/dashboard.html | W450 | v2.3.65 修改·「80 个可视化页面」→86 |
+| README.md | W450 | v2.3.65 修改·双轨写作补 跨界趣谈 + 统计口径链接 + 133 维口径注 |
+| docs/00-导读/文档规范.md | W450 | v2.3.65 修改·新增 §4.5 轨标体系与准入 |
+| docs/03-主题与情节专题/*.md（33 篇） | W450 | v2.3.65 修改·轨标 学术研究→跨界趣谈（现代学科趣味透镜·仅现役首行，4 篇历史追溯块保持原值） |
+| LICENSE-CONTENT.md | W450 | v2.3.65 修改·新增纯 AI 输出不主张著作权条款 |
+| site/dukou-engine.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html | W450 | v2.3.65 修改·页脚 prepend v2.3.65 W450 |
+| CHANGELOG.md / 交接文档.md | W450 | v2.3.65 修改·W450 四件套条目 + 交接同步 |
+| scripts/output/file-index.md | W450 | v2.3.65 修改·W450 现役索引段 |
+
+## W451 学术研究引用审计（2026-08-16·v2.3.66）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/02-人物深度分析/人物谱系表.md 等 9 篇 | W451 | v2.3.66 修改·轨标 学术研究→教学讲解（引用审计：无论文/专著/版本/理论框架出处） |
+| docs/00-导读/文档规范.md | W451 | v2.3.66 修改·§4.5 学术研究定义收紧（仅凭文本证据不算引用）+ 历史注 W451 |
+| README.md | W451 | v2.3.66 修改·版本行主描述 W451 |
+| site/dukou-engine.html / site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html | W451 | v2.3.66 修改·页脚 prepend v2.3.66 W451 |
+| CHANGELOG.md / 交接文档.md | W451 | v2.3.66 修改·W451 四件套条目 + 交接同步 |
+| scripts/output/file-index.md | W451 | v2.3.66 修改·W451 现役索引段 |
+
+## W452 学术研究显式引用补齐（2026-08-16·v2.3.67）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/02-05 现役「学术研究」文档（105 篇） | W452 | v2.3.67 修改·轨标行后补 `> 引用：` 显式链接 学术论文索引 |
+| scripts/verify_delivery.py | W452 | v2.3.67 修改·新增「学术研究 轨显式引用门禁」（首行轨标=学术研究 必须含 > 引用：学术论文索引） |
+| docs/00-导读/文档规范.md | W452 | v2.3.67 修改·§4.5 准入规则补第 4 条（头部 > 引用：机器校验）+ 历史注 W452 |
+| README.md | W452 | v2.3.67 修改·版本行主描述 W452 |
+| site/dukou-engine.html / site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html | W452 | v2.3.67 修改·页脚 prepend v2.3.67 W452 |
+| CHANGELOG.md / 交接文档.md | W452 | v2.3.67 修改·W452 四件套条目 + 交接同步 |
+| scripts/output/file-index.md | W452 | v2.3.67 修改·W452 现役索引段 |
+
+> 当前版本 v2.3.66（2026-08-16）
+
+## W451 学术研究引用审计（2026-08-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+> 当前版本 v2.3.67（2026-08-16）
+
+## W452 学术研究显式引用门禁（2026-08-16）
+
+| 文件 | W | 说明 |
+|---|---|---|
