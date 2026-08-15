@@ -4,9 +4,17 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W444），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W445），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.60（2026-08-14）：W445 英文站续译 relationships — 全站英文化收官
+
+> **来源**：延续待办「英文站续译」最后 1 页（relationships 关系网络·5703 条脚本中文），单独处理。
+> - **执行（英文化 1 页）**：新增 site/en/relationships（关系网络·三界势力拓扑）；翻译 325 chrome 节点 + 5703 script 字面量（341 去重），覆盖势力/法宝克制/搬救兵/贝尔宾角色/人物共现 5 份内嵌数据 + 共现时间线。
+> - **执行（配套）**：generate_csp.py 重生成 232 页（1145 内联哈希 0 漂移）·sitemap 补 1 页（226→227）。
+> - **验证**：_validate_en.py 通过（chrome=whitelist-only·script=0）·lint_links 3930 链接 0 broken·verify_delivery 核心全绿。
+> - **状态**：已落地·待 commit/push。**英文站 site/data 86 张可视化页已全部英文化**。
 
 ### v2.3.59（2026-08-14）：W444 英文站续译 tag-cloud — 全站标签云导航页英文化
 

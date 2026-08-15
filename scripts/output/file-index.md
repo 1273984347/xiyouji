@@ -8,6 +8,14 @@
 
 ---
 
+## W445 英文站续译 relationships（2026-08-14·v2.3.60）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/relationships.html | W445 | v2.3.60 新增·关系网络页英文化（5703 script 字面量·341 去重·_validate_en.py 通过）·英文站 86 页全量完成 |
+| site/sitemap.xml | W445 | v2.3.60 修改·补 1 个 en 页（226→227 页） |
+| site/**/*.html（1 页） | W445 | v2.3.60 修改·generate_csp.py 重生成 CSP（232 页·1145 内联哈希） |
+
 ## W444 英文站续译 tag-cloud（2026-08-14·v2.3.59）
 
 | 文件 | W | 说明 |
