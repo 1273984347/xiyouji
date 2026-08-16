@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-OeAkhQj3hcFgWMV6olOcEMZ+zONl1r3QAl71ifB10ag=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-k+o2S+sKtY8/uQU0akXpIWjEaCMuDzXwF7NfkkcCe6s=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>人物关系动态网络 · 详解西游记</title>
@@ -755,6 +755,14 @@ svg circle { will-change: transform; }
             cursor: pointer; border: 2px solid #fff;
         }
         .stage-display { font-family: "JetBrains Mono", monospace; font-size: 0.9em; color: var(--accent); font-weight: 700; min-width: 110px; }
+        .neighborhood-mode {
+            position: absolute; top: 12px; right: 12px; z-index: 6;
+            background: rgba(44,36,24,0.92); color: #f5e9d4; font-size: 0.82rem;
+            padding: 8px 12px; border-radius: 6px; pointer-events: none;
+            border: 1px solid var(--accent-soft); box-shadow: var(--shadow);
+        }
+        .chapter-ctrl .ctrl-label { min-width: 4.5em; }
+        .chapter-ctrl .stage-btn { min-width: 64px; text-align: center; }
         .chart-wrap { position: relative; }
         #network-svg { display: block; width: 100%; min-height: 580px; background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; }
         .node-circle { cursor: pointer; transition: stroke 0.2s; }
@@ -881,7 +889,18 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <span class="stage-display" id="stage-display">阶段一 1-25</span>
                 </div>
             </div>
+            <div class="control-row chapter-ctrl" role="group" aria-label="回目进度">
+                <div class="slider-wrap">
+                    <span class="ctrl-label">回目进度：</span>
+                    <input type="range" id="chapter-slider" min="1" max="100" value="1" aria-label="回目进度滑块" />
+                    <span class="stage-display" id="chapter-display">第 1 回</span>
+                </div>
+                <button class="stage-btn" id="btn-play" type="button">播放</button>
+                <button class="stage-btn" id="btn-pause" type="button">暂停</button>
+                <button class="stage-btn" id="btn-reset" type="button">重置</button>
+            </div>
             <div class="chart-wrap">
+                <div class="neighborhood-mode" id="neighborhood-tag" hidden>邻域模式</div>
                 <svg id="network-svg" width="100%" height="620" role="img" aria-labelledby="net-title net-desc">
                     <title id="net-title">人物关系动态网络图</title>
                     <desc id="net-desc">35 节点 50 边的力导向图，按阶段切换显示活跃关系。</desc>
@@ -1110,7 +1129,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .range([1, 5]);
 
         // 力导向
-        simulation = d3.forceSimulation(activeNodes).alphaDecay(0.08).velocityDecay(0.5)
+        simulation = d3.forceSimulation(activeNodes).alphaDecay(0.05).velocityDecay(0.5)
             .force("link", d3.forceLink(activeEdges).id(d => d.id)
                 .distance(d => 70 + (10 - d.weight) * 4)
                 .strength(d => 0.05 + d.weight * 0.02))
@@ -1123,6 +1142,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         // 边
           // 性能：边层改 Canvas 叠加，避免每帧 N×4 几何属性写入触发 SVG 重排
   var _svgEl = svg.node();
+  _activeEdges = activeEdges;
   var _lcParent = _svgEl.parentNode;
   if (_lcParent && getComputedStyle(_lcParent).position === 'static') _lcParent.style.position = 'relative';
   if (_lcParent) { var _oc = _lcParent.querySelector('canvas.link-canvas'); if (_oc) _oc.remove(); }
@@ -1141,14 +1161,15 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   _svgEl.style.zIndex = '1';
   var lctx = linkCanvas.getContext('2d');
   lctx.scale(_dpr * _lcW / _cw, _dpr * _lcH / _ch);
-  var linkSels = [];
+  _linkSels = [];
   function drawLinks() {
     lctx.clearRect(0, 0, _cw, _ch);
-    for (var s = 0; s < linkSels.length; s++) {
-      var sel = linkSels[s], data = sel.data(), lines = sel.nodes();
+    for (var s = 0; s < _linkSels.length; s++) {
+      var sel = _linkSels[s], data = sel.data(), lines = sel.nodes();
       for (var i = 0; i < data.length; i++) {
         var d = data[i], el = lines[i];
         if (!d || !d.source || d.source.x == null) continue;
+        if (d._hidden) continue;
         lctx.beginPath();
         lctx.moveTo(d.source.x, d.source.y);
         lctx.lineTo(d.target.x, d.target.y);
@@ -1164,6 +1185,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     lctx.setLineDash([]);
     lctx.globalAlpha = 1;
   }
+  window._drawLinks = drawLinks;
 const link = svg.append("g")
             .selectAll("line")
             .data(activeEdges)
@@ -1171,8 +1193,8 @@ const link = svg.append("g")
             .append("line")
             .attr("stroke", d => REL_TYPES[d.type].color)
             .attr("stroke-width", d => wScale(d.weight))
-            .attr("stroke-opacity", 0.65)
-            .attr("stroke-dasharray", d => d.type === "kin" ? "4,3" : "none"); link.style('display','none'); linkSels.push(link);
+            .attr("stroke-opacity", d => _opScale(d.weight))
+            .attr("stroke-dasharray", d => d.type === "kin" ? "4,3" : "none"); link.style('display','none'); _linkSels.push(link);
 
         // 节点
         const tip = d3.select("#network-tip");
@@ -1190,10 +1212,13 @@ const link = svg.append("g")
             .on("mouseover", function(event, d) {
                 d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2.5);
                 // 高亮关联边
-                link.attr("stroke-opacity", e =>
-                    (e.source.id || e.source) === d.id || (e.target.id || e.target) === d.id ? 0.95 : 0.15
-                ).attr("stroke-width", e =>
-                    (e.source.id || e.source) === d.id || (e.target.id || e.target) === d.id
+                link.attr("stroke-opacity", e => {
+                    if (e._hidden) return 0.05;
+                    const linked = _linkedTo(e, d.id);
+                    if (linked) return 0.95;
+                    return (neighborhoodNode && !_linkedTo(e, neighborhoodNode)) ? 0.1 : 0.15;
+                }).attr("stroke-width", e =>
+                    _linkedTo(e, d.id)
                     ? wScale(e.weight) + 1.5 : wScale(e.weight)
                 );
                 // 统计该节点在此阶段的关系
@@ -1215,8 +1240,12 @@ const link = svg.append("g")
             })
             .on("mouseout", function() {
                 d3.select(this).attr("stroke", "#fff").attr("stroke-width", 2);
-                link.attr("stroke-opacity", 0.65)
-                    .attr("stroke-width", d => wScale(d.weight));
+                link.attr("stroke-opacity", e => {
+                    let op = _opScale(e.weight || 1);
+                    if (e._hidden) op = 0.05;
+                    else if (neighborhoodNode && !_linkedTo(e, neighborhoodNode)) op = 0.1;
+                    return op;
+                }).attr("stroke-width", e => wScale(e.weight));
                 tip.style("opacity", 0);
             })
             .call(d3.drag()
@@ -1229,7 +1258,16 @@ const link = svg.append("g")
                     if (!event.active) simulation.alphaTarget(0);
                     d.fx = null; d.fy = null;
                 })
-            );
+            )
+            .on("click", function(event, d) {
+                // B2：点击节点进入/切换/退出邻域模式（d3-drag 拖拽后会自动抑制 click）
+                if (neighborhoodNode === d.id) {
+                    exitNeighborhood();
+                } else {
+                    enterNeighborhood(d.id);
+                }
+            });
+            _nodeSel = node;
 
         // 节点标签
         const label = svg.append("g")
@@ -1260,6 +1298,9 @@ const link = svg.append("g")
 
         // 更新 KPI
         updateKPI(stage, activeNodes, activeEdges);
+
+        // B1/B2：重绘后应用当前回目 + 邻域状态的显隐/透明度
+        applyVisibility();
     }
 
     function renderNetworkLegend() {
@@ -1343,6 +1384,10 @@ const link = svg.append("g")
         });
         // 同步滑块
         document.getElementById("stage-slider").value = currentStage;
+        // B1：阶段切换时回目同步到该阶段起始章节，避免回目超出阶段范围导致空白
+        stopPlayback();
+        currentChapter = STAGE_RANGES[currentStage].from;
+        updateChapterDisplay();
         // 停止旧仿真
         if (simulation) {
             simulation.stop();
@@ -1361,10 +1406,155 @@ const link = svg.append("g")
         setStage(e.target.value);
     });
 
+    // ============= B1 回目进度 / B2 邻域模式 / B3 边权重透明度 =============
+    // 全局状态
+    let currentChapter = 1;        // 当前回目 1-100
+    let neighborhoodNode = null;   // 邻域中心节点 id（null = 未激活）
+    let playTimer = null;          // 播放定时器
+    let _nodeSel = null;           // 当前节点 selection（renderNetwork 内维护）
+    let _linkSels = [];            // 当前边 selection 列表（Canvas 绘制用）
+    let _activeEdges = [];         // 当前活跃边数据
+
+    // B3：边透明度按权重同向映射 0.3-1.0（强边更实）
+    const _opScale = d3.scaleLinear().domain([1, 10]).range([0.3, 1.0]);
+
+    // B1：启发式推算每条边的 firstChapter/lastChapter
+    // 数据无章节字段时，按活跃阶段区间映射：min(stages) → 阶段起始回目，max(stages) → 阶段结束回目
+    EDGES.forEach(e => {
+        if (e.firstChapter == null || e.lastChapter == null) {
+            const minS = Math.min.apply(null, e.stages);
+            const maxS = Math.max.apply(null, e.stages);
+            e.firstChapter = STAGE_RANGES[minS].from;
+            e.lastChapter = STAGE_RANGES[maxS].to;
+        }
+    });
+
+    // 工具：判断边是否连接到某节点（source/target 可能是字符串或 forceLink 转换后的对象）
+    function _linkedTo(d, nodeId) {
+        const s = (d.source && d.source.id) || d.source;
+        const t = (d.target && d.target.id) || d.target;
+        return s === nodeId || t === nodeId;
+    }
+
+    // B1：当前回目是否展示该边
+    function _edgeInChapter(d) {
+        const from = d.firstChapter != null ? d.firstChapter : 1;
+        const to = d.lastChapter != null ? d.lastChapter : 100;
+        return currentChapter >= from && currentChapter <= to;
+    }
+
+    // B2：节点是否属于邻域（中心节点本身或一度邻接）
+    function _isNeighborNode(d, center) {
+        if (d.id === center) return true;
+        return _activeEdges.some(e => _linkedTo(e, d.id) && _linkedTo(e, center));
+    }
+
+    // B1/B2/B3：统一应用当前回目 + 邻域状态的显隐与透明度
+    function applyVisibility() {
+        if (_linkSels) {
+            _linkSels.forEach(sel => {
+                sel.each(function(d) {
+                    d._hidden = !_edgeInChapter(d);
+                    const el = this;
+                    let op = _opScale(d.weight || 1);
+                    if (d._hidden) {
+                        op = 0.05;
+                    } else if (neighborhoodNode && !_linkedTo(d, neighborhoodNode)) {
+                        op = 0.1;
+                    }
+                    el.setAttribute("stroke-opacity", op);
+                });
+            });
+        }
+        if (_nodeSel) {
+            _nodeSel.each(function(d) {
+                const dim = neighborhoodNode && !_isNeighborNode(d, neighborhoodNode);
+                this.setAttribute("opacity", dim ? 0.15 : 1);
+            });
+        }
+        if (window._drawLinks) window._drawLinks();
+    }
+
+    // B2：进入邻域模式
+    function enterNeighborhood(id) {
+        neighborhoodNode = id;
+        applyVisibility();
+        const tag = document.getElementById("neighborhood-tag");
+        if (tag) {
+            tag.textContent = "邻域模式：" + id + "（Esc 退出）";
+            tag.hidden = false;
+        }
+    }
+
+    // B2：退出邻域模式
+    function exitNeighborhood() {
+        if (!neighborhoodNode) return;
+        neighborhoodNode = null;
+        applyVisibility();
+        const tag = document.getElementById("neighborhood-tag");
+        if (tag) tag.hidden = true;
+    }
+
+    // B1：更新回目显示与滑块
+    function updateChapterDisplay() {
+        const disp = document.getElementById("chapter-display");
+        if (disp) disp.textContent = "第 " + currentChapter + " 回";
+        const slider = document.getElementById("chapter-slider");
+        if (slider) slider.value = currentChapter;
+    }
+
+    // B1：设置回目并应用过滤
+    function setChapter(n) {
+        currentChapter = Math.max(1, Math.min(100, Math.round(+n)));
+        updateChapterDisplay();
+        applyVisibility();
+    }
+
+    // B1：播放（每 800ms +1 回目）
+    function startPlayback() {
+        stopPlayback();
+        playTimer = setInterval(() => {
+            if (currentChapter >= 100) {
+                stopPlayback();
+                return;
+            }
+            setChapter(currentChapter + 1);
+        }, 800);
+    }
+    function stopPlayback() {
+        if (playTimer) {
+            clearInterval(playTimer);
+            playTimer = null;
+        }
+    }
+    // B1：重置回第 1 回（并回到第一阶段，避免回目 1 下无活跃边）
+    function resetChapter() {
+        stopPlayback();
+        setChapter(1);
+        if (currentStage !== 1) setStage(1);
+        else applyVisibility();
+    }
+
+    // B1/B2：绑定控件事件（全部用 addEventListener，无 inline handler）
+    function initChapterControls() {
+        const slider = document.getElementById("chapter-slider");
+        const btnPlay = document.getElementById("btn-play");
+        const btnPause = document.getElementById("btn-pause");
+        const btnReset = document.getElementById("btn-reset");
+        if (slider) slider.addEventListener("input", function(e) { stopPlayback(); setChapter(e.target.value); });
+        if (btnPlay) btnPlay.addEventListener("click", startPlayback);
+        if (btnPause) btnPause.addEventListener("click", stopPlayback);
+        if (btnReset) btnReset.addEventListener("click", resetChapter);
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") exitNeighborhood();
+        });
+    }
+
     // ============= 初始化 =============
     function renderAll() {
         renderNetwork(currentStage);
         renderRelTable();
+        initChapterControls();
     }
 
     if (document.readyState === "loading") {

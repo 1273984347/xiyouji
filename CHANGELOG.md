@@ -4,9 +4,29 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W453），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W455），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.70（2026-08-16）：W455 方案 B/C/D 三个可视化页面深化 — 交互能力增强·零新入口
+
+> **来源**：V2 维度方案阶段 2（docs/00-导读/V2可视化维度方案.md）— 按 3 个并行 subagent 同步深化，每个 subagent 只编辑单一目标文件并自验 PASS。
+> - **执行（方案 B · character-dynamic-network.html）**：① 1-100 回目进度条 `<input type="range" id="chapter-slider">` + 三个按钮 `#btn-play`/`#btn-pause`/`#btn-reset`，按 cooccurrence 章节字段使关系边随回目推进逐条出现/消失（800ms/步）；② 邻域模式 — 点击节点进入一度邻接子图（邻域外 opacity 0.15），ESC 或再点退出，UI 角落 `.neighborhood-mode` 标签；③ 边权重叠加线宽 1-5px + 透明度 0.3-1.0（保留原颜色映射）。d3-force 加 `alphaDecay(0.05).velocityDecay(0.5)` 加速收敛。
+> - **执行（方案 C · hardship-difficulty-heatmap.html）**：① 点击单元格钻取 `<div id="hardship-detail">`（结局类型/是否搬救兵/求助次数·ESC/再点/关闭按钮均可关）；② `#hardships-table` 81 行清单表 ↔ 热力图双向联动（cell `.linked` 描边 + 行 `.highlight` 底色）；③ `#sort-by-difficulty`/`#sort-by-chapter`/`#sort-by-outcome` 三按钮重排 X 轴（激活态 `.active`）。
+> - **执行（方案 D · journey-spacetime.html）**：① 双轴联动 — 时间轴滑块拖动时地图侧对应章节 N±1 节点同步高亮（`.highlighted` 描边 + 加粗），反向 hover/click 地图节点时间轴同步高亮；② 节点点击跳转 `<a href="../docs/01-全书逐回解读/第NNN回-*.md" target="_blank">`（按 `data-chapter` 首数字提取回号）；③ 段路叠加里程/耗时刻度（两节点连线中点 `<text>` 标注 X 月，`paint-order: stroke` 白底半透明）。
+> - **验证**：三页 smoke 自检（_smoke_batch.js 兼容 + 各自 feature-level 断言）全部 PASS；generate_csp.py 重哈希 0 漂移；lint_links.py 3960 链接 0 broken；verify_delivery.py 核心全绿。
+> - **状态**：已落地·待 commit/push。
+
+### v2.3.69（2026-08-16）：W454 方案 A 西游地理 3D 可视化 — 新增 journey-geo-3d.html（Three.js r128）
+
+> **来源**：V2 维度方案阶段 1（docs/00-导读/V2可视化维度方案.md）— 全站无 3D 地理页（3D 仅 character-relationship-3d / narratology-13d-network，皆人物/叙事网络），本批次为唯一全新维度。
+> - **执行（页面 · site/data/journey-geo-3d.html 新建）**：Three.js r128（cdnjs+SRI sha384，引入方式逐行参照 character-relationship-3d.html 第 5 行）+ 手动 `setupOrbitControls`（复用既有 3D 页球坐标模式，禁外部 OrbitControls 模块）+ 程序化示意地形（value-noise/fbm·零外部依赖；**顶点色 [0,1] 浮点区间修正**——首版写为 byte(0-255) 被钳到全白，后修）+ CatmullRom 路线 TubeGeometry + 河流 Tube + 17 节点 SphereGeometry + CanvasTexture Sprite 标签（奇偶交替 y 偏移避重叠）+ Raycaster 选中（拖拽守卫·点击距离 >5px 不触发选中）+ 路线高亮/地形透明切换 + file:// 可用 + `fetch + EMBEDDED fallback`（file:// / GitHub Pages 下自动回退内嵌数据）；页面 CSS 改用 `<link rel="stylesheet" href="../tokens.css">` + `../system.css`（**首版内联 ~17KB tokens+system 拼接受 CSS 注释字面 `<style>` 字符串干扰，最终改为外链更可靠**）。图例标注"地形为程序化示意，非真实地理高程"。
+> - **执行（数据 · scripts/output/data/journey_geo_3d.json 新建）**：17 节点含 lon/lat/category/chapter/duration/desc；分类按主导势力归属（人间 4 · 妖界 9 · 天庭 3 · 灵山 1 = 17，节点着色 朱砂/赭金/靛蓝/苔绿 对应图表四色板）。
+> - **执行（索引）**：site/data/tag-cloud.html 新增西游地理 3D 条目（`category:"v-new"` size:8 tags 含"3D"/"立体"/"纵深"）；site/sitemap.xml 新增 `data/journey-geo-3d.html` URL；page footer "v2.3.69 · W454 · 数据可视化"。
+> - **执行（脚本）**：scripts/_smoke_geo3d.js 新建（Playwright 专用 3D 页冒烟：asserts nodes>0 / canvas 渲染 / 无 pageerror）。
+> - **验证**：`_smoke_geo3d.js` PASS（nodes=17 / canvas 1264x620 / threeOk=true / errs=0）；Playwright 截屏目检地形为正常棕褐（顶点色修正后）、路线金线 + 河流靛蓝 + 节点按分类着色 + 文字标签清晰可读；`generate_csp.py` 注入 1 页 CSP（`--check` 0 漂移）。
+> - **EN 版策略**：按方案默认仅中文版，本批 EN 暂缓（待读者量验证后视情况推进）。已在 交接文档 显式记录"V2 仅中文版、EN 暂缓"。
+> - **状态**：已落地·待 commit/push。
 
 ### v2.3.68（2026-08-16）：W453 移除评论.txt — 外部锐评原始文本退役
 

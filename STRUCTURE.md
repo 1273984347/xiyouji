@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.68（2026-08-16）— W449 冗余文档清理（git rm 删除三冗余文档 + 依赖清理）·W448 外部锐评回应治理（STRUCTURE 归档 + 版本号语义说明 + AI 生成披露）— A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。 + W450（统计口径统一与轨标体系） + W451（学术研究引用审计） + W452（学术研究显式引用门禁） + W453（移除评论.txt）
+> 当前版本：v2.3.70（2026-08-16）— W455 方案 B/C/D 三个可视化深化（character-dynamic-network 回目进度条 + 邻域模式 + 边权重；hardship-difficulty-heatmap 单元格钻取 + 双向联动 + 三排序；journey-spacetime 双轴联动 + 节点跳转 A1 回目 + 段路耗时）·W454 方案 A 西游地理 3D 可视化（journey-geo-3d.html 新建：Three.js r128 + 手动 OrbitControls + 程序化示意地形 + 17 节点 Sphere + CatmullRom 路线 Tube + 河流 Tube + 路线高亮/地形透明）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 顶层结构
 

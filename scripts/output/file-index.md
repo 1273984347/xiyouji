@@ -505,3 +505,29 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
+
+> 当前版本 v2.3.70（2026-08-16）
+
+## W455 方案 B/C/D 三个可视化深化（2026-08-16·v2.3.70）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/character-dynamic-network.html | W455 | v2.3.70 修改·1-100 回目进度条播放关系边 + 邻域模式（点击节点一度邻接+ESC 退出）+ 边权重线宽 1-5px + 透明度 0.3-1.0 |
+| site/data/hardship-difficulty-heatmap.html | W455 | v2.3.70 修改·单元格钻取详情面板（结局类型/搬救兵/求助次数）+ 81 行清单 ↔ 热力图双向联动 + 难度/章节/结局三排序 |
+| site/data/journey-spacetime.html | W455 | v2.3.70 修改·双轴联动（时间轴 ↔ 地图节点 `.highlighted` 同步高亮）+ 节点跳转 A1 回目解读 `<a target="_blank">` + 段路叠加耗时刻度 |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W455 | v2.3.70 修改·版本行 v2.3.70 W455 主描述 |
+| site/dukou-engine.html | W455 | v2.3.70 修改·页脚 prepend v2.3.70 W455 + v2.3.69 W454 段 |
+| scripts/output/file-index.md | W455 | v2.3.70 修改·W454 + W455 现役索引段 |
+
+## W454 方案 A 西游地理 3D 可视化（2026-08-16·v2.3.69）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/journey-geo-3d.html | W454 | v2.3.69 新建·Three.js r128（cdnjs+SRI）+ 手动 setupOrbitControls + 程序化示意地形（value-noise/fbm·零依赖）+ CatmullRom 路线 Tube + 河流 Tube + 17 节点 Sphere + CanvasTexture Sprite 标签 + Raycaster 选中 + 路线高亮/地形透明切换 + file:// 可用 + EMBEDDED 回退 |
+| scripts/output/data/journey_geo_3d.json | W454 | v2.3.69 新建·17 节点含 lon/lat/category/chapter/duration/desc；分类按主导势力归属（人间 4·妖界 9·天庭 3·灵山 1） |
+| scripts/_smoke_geo3d.js | W454 | v2.3.69 新建·3D 页专用冒烟（asserts nodes>0 / canvas / 无 pageerror） |
+| site/data/tag-cloud.html | W454 | v2.3.69 修改·新增西游地理 3D 条目（v-new·size:8） |
+| site/sitemap.xml | W454 | v2.3.69 修改·新增 data/journey-geo-3d.html URL |
+| site/dukou-engine.html | W454 | v2.3.69 修改·页脚 prepend v2.3.69 W454 段 |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W454 | v2.3.69 修改·版本行 v2.3.69 W454 段 |
+| scripts/output/file-index.md | W454 | v2.3.69 修改·W454 现役索引段 |
