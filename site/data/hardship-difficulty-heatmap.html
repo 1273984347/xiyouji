@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-gywrmBNwyIN4hqsA7dc0n0IsR8WWsS0j+GU1z9B0Chc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-otygD0HOMh+zziCaerdT7aDPbx76TmSuAOpSCe9D314=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c=' 'sha256-YHc/fcXFPWaqwCvUwbdl84rLPCi3AJXu3duz4XeksN8='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>八十一难多维度难度热力图 · 详解西游记</title>
@@ -770,8 +770,33 @@ td.num, th.num {
         .stat-card { border: 1px solid var(--line); border-radius: 6px; padding: 14px; background: #fffdf8; }
         .stat-card h3 { font-size: 0.98em; margin-bottom: 8px; color: var(--ink); }
         .stat-card svg { width: 100%; height: 220px; display: block; }
-        
-        
+        /* ===== 方案 C 深化：排序切换 / 详情面板 / 双向联动 ===== */
+        .sort-switcher { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+        .sort-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+        .sort-btn.active:hover { color: #fff; }
+        .hardship-detail {
+            background: #fff5e6; border: 1px solid #f4d4b2; border-left: 4px solid var(--accent-3);
+            border-radius: 6px; padding: 14px 18px; margin-top: 14px; font-size: 0.88rem;
+            line-height: 1.8; display: none;
+        }
+        .hardship-detail.visible { display: block; }
+        .hd-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+        .hd-head h4 { color: var(--accent-3); margin-bottom: 6px; font-size: 1rem; }
+        .hd-close {
+            border: none; background: transparent; cursor: pointer; font-size: 1.15rem;
+            color: var(--ink-faint); line-height: 1; padding: 2px 8px; border-radius: 3px;
+        }
+        .hd-close:hover { color: var(--accent); background: rgba(200, 70, 58, 0.08); }
+        .hd-row { margin-bottom: 4px; }
+        .hd-row .hd-label { display: inline-block; min-width: 74px; color: var(--ink-faint); font-size: 0.8em; }
+        .hd-row.hd-sub { font-size: 0.84em; color: var(--ink-soft); }
+        #heatmap-svg .heat-cell.linked { stroke: var(--accent); stroke-width: 2.5px; }
+        #hardships-table { cursor: pointer; }
+        #hardships-table tbody tr { cursor: pointer; transition: background 0.15s; }
+        #hardships-table tbody tr.highlight td { background: rgba(200, 70, 58, 0.10); }
+        #hardships-table tbody tr.highlight td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+        #hardships-table tbody tr:hover td { background: rgba(255, 255, 255, 0.5); }
+        #hardships-table tbody tr.highlight:hover td { background: rgba(200, 70, 58, 0.10); }
         @media (prefers-reduced-motion: reduce) {  }
         @media (max-width: 480px) {
             
@@ -863,12 +888,24 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <button class="dim-btn" role="tab" aria-selected="false" data-dim="rescue">求助次数</button>
                 <button class="dim-btn" role="tab" aria-selected="false" data-dim="treasure">法宝使用</button>
             </div>
+            <div class="sort-switcher" role="group" aria-label="排序切换">
+                <button type="button" class="btn sort-btn active" id="sort-by-chapter">按章节</button>
+                <button type="button" class="btn sort-btn" id="sort-by-difficulty">按难度</button>
+                <button type="button" class="btn sort-btn" id="sort-by-outcome">按结局</button>
+            </div>
             <div class="heatmap-wrap">
                 <svg id="heatmap-svg" width="100%" height="460" role="img" aria-labelledby="hm-title hm-desc">
                     <title id="hm-title">81 难多维度热力图矩阵</title>
                     <desc id="hm-desc">横轴 81 难，纵轴 4 维度，颜色深浅表示强度。</desc>
                 </svg>
                 <div class="heat-tip" id="heat-tip" role="tooltip"></div>
+            </div>
+            <div class="hardship-detail" id="hardship-detail" role="dialog" aria-label="该难详情">
+                <div class="hd-head">
+                    <h4 id="hd-title"></h4>
+                    <button type="button" class="hd-close" id="hd-close" aria-label="关闭详情">×</button>
+                </div>
+                <div id="hd-body"></div>
             </div>
             <div class="matrix-legend" id="matrix-legend" aria-label="维度取值图例"></div>
         </section>
@@ -927,6 +964,20 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="insight-box">
                 <span class="ib-tag">[峰值]</span>
                 <strong>狮驼岭三魔（第 74 回）四维全顶</strong>。难度 10 / 时长长 / 求助 3+ / 法宝借用——这是全书唯一"四维皆顶"的难关。佛祖亲率五百罗汉降伏大鹏，标志取经难度的天界动员极限。
+            </div>
+        </section>
+
+        <!-- 板块 4：八十一难清单（C2 与热力图双向联动） -->
+        <section class="section" aria-labelledby="sec-list">
+            <h2 id="sec-list">④ 八十一难清单（与热力图联动）</h2>
+            <p>hover / 点击清单行或热力图单元格，两侧同步高亮；点击任一侧打开该难详情。</p>
+            <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+                <table id="hardships-table" aria-label="八十一难清单">
+                    <thead>
+                        <tr><th class="num">难序</th><th>名称</th><th>章节</th><th>难度等级</th><th>结局类型</th><th>是否搬救兵</th></tr>
+                    </thead>
+                    <tbody id="hardships-table-body"></tbody>
+                </table>
             </div>
         </section>
     </main>
@@ -1077,6 +1128,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     function renderHeatmap(dim) {
         const svg = d3.select("#heatmap-svg");
         svg.selectAll("*").remove();
+        // 方案 C3：排序支持——window.__hmData 存在时按排序后的难序绘制
+        const dataArr = (window.__hmData && window.__hmData.length === EMBEDDED_DATA.length) ? window.__hmData : EMBEDDED_DATA;
 
         const wrap = document.getElementById("heatmap-svg");
         const width = Math.max(980, wrap.clientWidth || 980);
@@ -1090,9 +1143,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const g = svg.append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
-        // X 轴：81 难（按 n 顺序）
+        // X 轴：81 难（按当前排序）
         const xScale = d3.scaleBand()
-            .domain(EMBEDDED_DATA.map(d => d.n))
+            .domain(dataArr.map(d => d.n))
             .range([0, innerW])
             .padding(0.08);
 
@@ -1104,7 +1157,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .padding(0.15);
 
         // X 轴标签（每 10 难一个 + 边界）
-        const xTicks = EMBEDDED_DATA.filter(d => d.n % 10 === 0 || d.n === 1 || d.n === 81).map(d => d.n);
+        const xTicks = dataArr.filter(d => d.n % 10 === 0 || d.n === 1 || d.n === 81).map(d => d.n);
         g.append("g")
             .attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(xScale).tickValues(xTicks).tickFormat(d => `第${d}难`))
@@ -1150,11 +1203,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         // 绘制 81×4 矩阵
         dims.forEach((d, di) => {
-            EMBEDDED_DATA.forEach((item, ni) => {
+            dataArr.forEach((item, ni) => {
                 const val = dimValue(item, d);
                 const isCurrent = d === dim;
                 g.append("rect")
                     .attr("class", "heat-cell")
+                    .attr("data-n", item.n)
+                    .attr("data-dim", d)
                     .attr("x", xScale(item.n))
                     .attr("y", yScale(d))
                     .attr("width", cellW)
@@ -1627,6 +1682,170 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
   }
   function run(){[800,2600,5000,8000,11000,14000].forEach(function(t){setTimeout(fix,t);});}
   if(document.readyState==='complete')run(); else window.addEventListener('load',run);
+})();
+</script>
+
+<script id="heatmap-enhance">
+// ========= 方案 C 深化：C1 详情面板 · C2 双向联动 · C3 排序切换 =========
+(function () {
+    // EMBEDDED_DATA/DIM_CONFIG/currentDim 为主 script 顶层 const/let，
+    // 不挂 window 属性，须直接引用全局标识符（跨 script 共享全局词法作用域）。
+    var EMB = (typeof EMBEDDED_DATA !== "undefined") ? EMBEDDED_DATA : window.EMBEDDED_DATA;
+    var svg = document.getElementById("heatmap-svg");
+    var detailEl = document.getElementById("hardship-detail");
+    var tbody = document.getElementById("hardships-table-body");
+    if (!EMB || !svg || !detailEl || !tbody) return;
+
+    // —— 结局类型：优先点名覆写，其余按数据启发式推断 ——
+    var OUTCOME_LABEL = { subdued: "被收服", converted: "皈依", expelled: "被驱逐", departed: "自行离去", other: "其他" };
+    var OUTCOME_ORDER = { subdued: 0, converted: 1, expelled: 2, departed: 3, other: 4 };
+    var OUTCOME_OVERRIDE = {
+        42: "departed",  // 女儿国国王：非妖怪，计脱身离去
+        66: "subdued",   // 玉兔精：太阴星官收服
+        67: "departed",  // 铜台府监禁：凡人冤狱
+        76: "departed"   // 老鼋落水：渡河劫难，非妖战
+    };
+    function inferOutcome(d) {
+        if (OUTCOME_OVERRIDE[d.n]) return OUTCOME_OVERRIDE[d.n];
+        if (!d.monster || d.monster === "—") return "departed";   // 无妖怪：自然/结缘之难
+        if (/猪八戒|沙僧|西海龙子/.test(d.monster)) return "converted"; // 收徒皈依
+        if (d.rescuer && d.rescuer !== "—") return "subdued";     // 神佛出手 → 被收服
+        return "expelled";                                         // 悟空独力驱逐/除灭
+    }
+
+    // —— C3 排序 ——
+    function sortedData(mode) {
+        var arr = EMB.slice();
+        if (mode === "difficulty") {
+            arr.sort(function (a, b) { return b.score - a.score; });   // 难度 高→低
+        } else if (mode === "chapter") {
+            arr.sort(function (a, b) {                                 // 章节 1→100，前传置末
+                if (!a.chNum && !b.chNum) return 0;
+                if (!a.chNum) return 1;
+                if (!b.chNum) return -1;
+                return a.chNum - b.chNum;
+            });
+        } else if (mode === "outcome") {
+            arr.sort(function (a, b) {                                 // 结局类型分组
+                var ka = OUTCOME_ORDER[inferOutcome(a)]; if (ka === undefined) ka = 4;
+                var kb = OUTCOME_ORDER[inferOutcome(b)]; if (kb === undefined) kb = 4;
+                return ka - kb;
+            });
+        }
+        return arr;
+    }
+    function applySort(mode) {
+        window.__hmData = sortedData(mode);
+        closeDetail();
+        if (typeof renderHeatmap === "function") renderHeatmap(currentDim);
+    }
+
+    // —— C1 详情面板 ——
+    var currentN = null;
+    function byN(n) { return EMB.find(function (d) { return d.n === n; }); }
+    function highlightCells(n, on) {
+        document.querySelectorAll('#heatmap-svg .heat-cell[data-n="' + n + '"]').forEach(function (c) {
+            c.classList.toggle("linked", on);
+        });
+    }
+    function highlightRow(n, on) {
+        var tr = document.querySelector('#hardships-table tbody tr[data-n="' + n + '"]');
+        if (tr) tr.classList.toggle("highlight", on);
+    }
+    function openDetail(n) {
+        var item = byN(n);
+        if (!item) return;
+        document.getElementById("hd-title").textContent = "第 " + item.n + " 难 · " + item.name;
+        document.getElementById("hd-body").innerHTML =
+            '<div class="hd-row"><span class="hd-label">章节范围</span>' + item.chapter +
+            (item.chNum ? "（第 " + item.chNum + " 回）" : "") + "</div>" +
+            '<div class="hd-row"><span class="hd-label">难度等级</span>' + item.score + "/10 · " +
+            DIM_CONFIG.level.valueLabels[item.level] + "</div>" +
+            '<div class="hd-row"><span class="hd-label">结局类型</span>' + OUTCOME_LABEL[inferOutcome(item)] + "</div>" +
+            '<div class="hd-row"><span class="hd-label">是否搬救兵</span>未知（无 isRescue 字段）</div>' +
+            '<div class="hd-row hd-sub"><span class="hd-label">求助次数</span>' + item.rescueCount +
+            " 次 · 求助对象：" + item.rescuer + "</div>" +
+            '<div class="hd-row hd-sub"><span class="hd-label">妖怪/对手</span>' + item.monster + "</div>" +
+            '<div class="hd-row hd-sub"><span class="hd-label">时长 / 法宝</span>' +
+            DIM_CONFIG.duration.valueLabels[item.duration] + " / " +
+            DIM_CONFIG.treasure.valueLabels[item.treasure] + "</div>";
+        detailEl.classList.add("visible");
+        currentN = n;
+        highlightCells(n, true);
+        highlightRow(n, true);
+    }
+    function closeDetail() {
+        detailEl.classList.remove("visible");
+        if (currentN !== null) {
+            highlightCells(currentN, false);
+            highlightRow(currentN, false);
+            currentN = null;
+        }
+    }
+
+    // —— C1：点击单元格开/关详情；ESC / 关闭按钮关闭 ——
+    svg.addEventListener("click", function (e) {
+        var cell = e.target.closest ? e.target.closest(".heat-cell") : null;
+        if (!cell) return;
+        var n = +cell.getAttribute("data-n");
+        if (currentN === n) closeDetail();
+        else openDetail(n);
+    });
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeDetail();
+    });
+    document.getElementById("hd-close").addEventListener("click", closeDetail);
+
+    // —— C2：热力图 → 清单表（hover 联动高亮） ——
+    svg.addEventListener("mouseover", function (e) {
+        var cell = e.target.closest ? e.target.closest(".heat-cell") : null;
+        if (cell) highlightRow(+cell.getAttribute("data-n"), true);
+    });
+    svg.addEventListener("mouseout", function (e) {
+        var cell = e.target.closest ? e.target.closest(".heat-cell") : null;
+        if (cell) highlightRow(+cell.getAttribute("data-n"), false);
+    });
+
+    // —— C2：清单表 → 热力图（hover/click 联动） ——
+    tbody.addEventListener("mouseover", function (e) {
+        var tr = e.target.closest ? e.target.closest("tr[data-n]") : null;
+        if (tr) highlightCells(+tr.getAttribute("data-n"), true);
+    });
+    tbody.addEventListener("mouseout", function (e) {
+        var tr = e.target.closest ? e.target.closest("tr[data-n]") : null;
+        if (tr) highlightCells(+tr.getAttribute("data-n"), false);
+    });
+    tbody.addEventListener("click", function (e) {
+        var tr = e.target.closest ? e.target.closest("tr[data-n]") : null;
+        if (!tr) return;
+        var n = +tr.getAttribute("data-n");
+        if (currentN === n) closeDetail();
+        else openDetail(n);
+    });
+
+    // —— C2：渲染清单表（固定按难序 n 排列，联动按 data-n 匹配） ——
+    EMB.forEach(function (d) {
+        var tr = document.createElement("tr");
+        tr.setAttribute("data-n", d.n);
+        tr.innerHTML =
+            '<td class="num">' + d.n + "</td>" +
+            "<td>" + d.name + "</td>" +
+            "<td>" + d.chapter + "</td>" +
+            "<td>" + d.score + "/10 · " + DIM_CONFIG.level.valueLabels[d.level] + "</td>" +
+            "<td>" + OUTCOME_LABEL[inferOutcome(d)] + "</td>" +
+            "<td>未知</td>";
+        tbody.appendChild(tr);
+    });
+
+    // —— C3：排序按钮 ——
+    var sortBtns = document.querySelectorAll(".sort-btn");
+    sortBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            sortBtns.forEach(function (b) { b.classList.remove("active"); });
+            btn.classList.add("active");
+            applySort(btn.id.replace("sort-by-", ""));
+        });
+    });
 })();
 </script>
 
