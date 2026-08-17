@@ -90,6 +90,17 @@
 
     /* —— 阴影（克制，仅卡片浮起用） —— */
     --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+    --shadow-lift: 0 2px 6px rgba(35, 32, 26, 0.08), 0 8px 24px rgba(35, 32, 26, 0.08);
+
+    /* —— 动效令牌（W460 墨韵动效体系：时长三级 + 缓动三系） —— */
+    /* 时长：fast 即时反馈 / base 状态变化 / slow 入场编排（克制雅致，不上弹跳） */
+    --dur-fast: 150ms;        /* 按压、toggle、色彩切换 */
+    --dur-base: 250ms;        /* hover、行高亮、tooltip */
+    --dur-slow: 500ms;        /* 卡片入场、区块 reveal */
+    /* 缓动：内容抵达用 ease-out 系；弃用裸 ease 关键字 */
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);      /* 均匀精致·默认 */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);       /* 果断自信·大位移入场 */
+    --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);   /* 往返对称·展开收起 */
 
     /* —— 字体三层分工 —— */
     --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;

@@ -4,9 +4,18 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W459），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W460），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.75（2026-08-17）：W460 墨韵全站动效体系 — P0 基础层 + 样板 6 页（W-a/W-b 批）
+
+> **来源**：用户诉求「前端不够好看，尤其图表表格，增加 UX 动效」。经 uicraft skill（animate/motion-design/critique/optimize 四参考）+ 现状取证（50/85 页 .duration() 时长 400/600/1200ms 混用、全站 0 处 IntersectionObserver、动效零令牌）形成 v2.1 精确方案：P0 令牌/表格/组件 → P1-A 样板 6 页 → W-c~f 分批推广 78 页 → W-g P2+DESIGN.md §5 重写。风格基线「克制雅致」（反馈≤150ms/状态≤250ms/入场≤500ms，禁弹跳，白名单例外仅 hero 600ms 与 count-up 900ms）。
+> - **执行（W-a·P0 基础层·2 源文件→inline_css --force 同步 225 页）**：`tokens.css` 新增动效令牌（`--dur-fast/base/slow` 三级时长 + `--ease-out-quart/expo` + `--ease-in-out-soft` 三系缓动 + `--shadow-lift` 浮起阴影）；`system.css` 六组升级——① 表格行 hover 暖纸底 + 左缘 2px 朱砂指示条（inset box-shadow）+ 数字列加深（blanket）② opt-in `.table-anim` 行入场 stagger（`--row-i` 驱动·min() 封顶第 12 行 220ms·纯 CSS animation 终态可见 fail-open）③ opt-in `.table-wrap--sticky`（行数>30 表格·thead sticky 65vh）④ `.btn:active` 按压 scale(0.97) ⑤ `.kpi`/`.card` hover 上浮+`--shadow-lift`、`.search-box`/`.card` 裸 ease 补齐 R4 ⑥ `.link-ink` 下划线生长工具类 + `.chart-tooltip` 全站统一 tooltip 类（宣纸底+发丝边+`.visible` 类切换）。EN 站 138 页同步生效。
+> - **执行（W-b·样板 6 页）**：`index.html`+`dashboard.html` stats/KPI count-up（900ms easeOutExpo·IntersectionObserver threshold 0.5 触发一次即 unobserve·纯数字正则过滤文本型跳过·HTML 内终值 fail-open）；`chapter-stats`/`character-appearance`/`81-hardships`/`emotional-heatmap` 四页 D3 入场编排统一（轴 200ms→网格 100+300ms→数据标记 500ms stagger 步长 8ms 封顶 400ms·统一 `d3.easeCubicOut`·折线 draw-in 按 `getTotalLength()<3000` 判定否则淡入·treemap scale 0.92→1·热力图对角波浪 (si+hi)×20 封顶）+ tooltip 全面收编 `.chart-tooltip`（tipShow/tipMove/tipHide·视口钳制防溢出·暗底金色标题→宣纸朱砂）+ 81 难表（81 行>30）启用 sticky + 交叉表/难表 `--row-i` 行入场 + 全部渲染函数 `animate` 参数化：`ANIMATE` 首帧门控（resize 重渲染直达终态不重播）+ `matchMedia('(prefers-reduced-motion: reduce)')` 双守卫（D3 transition 不受 CSS 全局覆写控制·JS 侧显式关断）。
+> - **验证**：generate_csp 重算三轮（6 页脚本新增/改注释）233 页 1149 哈希 0 漂移；check_js_syntax 232 文件；check_structure 232 文件 630 块；lint_links 4122 链接 0 broken；verify_delivery 核心全绿×3；Playwright 定制断言 **20/20**（①hover 指示条+暖底 ②柱 stagger 入场中/完成 ③tooltip 统一类宣纸底 ④count-up 中间值+终值 100/611/86/55 ⑤resize×3 无动画重放 ⑥reduced-motion 无编排直达完整 ⑦KPI 终值 ⑧⑨pageerror=0）；critique 评分门禁 **33/40≥28 且动效无 P0/P1**（docs/superpowers/w-b-critique.md·P2×2 留 W-c：fetch 无 loading 态/图表页 KPI 无 count-up）；test_smoke 89/89；视觉回归 4 失败经 **stash 差分法**判定为 D3 动画截图时序噪声（失败集两轮随机互换）+ index 基线过期（两轮数字完全相同），与本批无因果。
+> - **过程缺陷（已修复·防复发）**：① W 编号撞号——初版注释写 W459 与已占用批次冲突，定点 9 文件 65 处改 W460 + 重同步/重算 CSP；② E20 并行 Edit 竞态复现一次（同文件两 Edit 并行后者覆盖前者，串行重发修复）；③ 断言时机两次误判（load 时序 + stats 初始视口外 IO 未触发——断言须先 scrollIntoView）；④ addInitScript 被页面 CSP 拦截（须 DCL 后 evaluate）。
+> - **状态**：已落地·随本 commit 提交。待续：W-c（16 网络页·前置 3 页性能基线）→ W-d/W-e（40 页）→ W-f（22 页·覆盖等式=0）→ W-g（P2 三页 + DESIGN.md §5 重写）→ 六文档收尾。
 
 ### v2.3.74（2026-08-17）：W459 V2 审查收尾 — D2 死链修复 + 动态链接门禁 + 方案回写
 

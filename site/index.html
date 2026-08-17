@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-T2TkfpRzSV72cvH/xxLzhJPGdTmPpOS0th6Fzzowp6E='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-T2TkfpRzSV72cvH/xxLzhJPGdTmPpOS0th6Fzzowp6E=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>详解西游记 · 项目导航</title>
@@ -408,6 +408,40 @@
             box.focus();
           });
         });
+      })();
+    </script>
+    <script>
+      // 墨韵动效（W460）：stats 数字 count-up（900ms easeOutExpo，白名单例外②）
+      // fail-open：HTML 内已是终值；reduced-motion / IO 不可用 / 异常时保持终值不动
+      (function () {
+        var els = Array.prototype.filter.call(
+          document.querySelectorAll('.stats .num'),
+          function (el) { return /^\d+$/.test((el.textContent || '').trim()); }
+        );
+        if (!els.length) return;
+        var reduced = false;
+        try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) {}
+        if (reduced || !('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
+        try {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              io.unobserve(e.target);
+              var el = e.target;
+              var target = parseInt(el.textContent.trim(), 10) || 0;
+              var t0 = null, DUR = 900;
+              function frame(ts) {
+                if (t0 === null) t0 = ts;
+                var t = Math.min((ts - t0) / DUR, 1);
+                var v = (t >= 1) ? target : Math.round(target * (1 - Math.pow(2, -10 * t)));
+                el.textContent = String(v);
+                if (t < 1) requestAnimationFrame(frame);
+              }
+              requestAnimationFrame(frame);
+            });
+          }, { threshold: 0.5 });
+          els.forEach(function (el) { io.observe(el); });
+        } catch (_) { /* fail-open：保持终值 */ }
       })();
     </script>
 </body>
