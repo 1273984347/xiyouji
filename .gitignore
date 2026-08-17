@@ -66,6 +66,7 @@ scripts/output/rag_index.json
 # 临时报告（file-index.md 保留入库，其他可重新生成）
 scripts/output/a11y-report.*
 scripts/output/audit-baseline.md
+scripts/output/diag-*.json
 scripts/output/drl-*.md
 scripts/output/html-size-report.md
 scripts/output/perf-report.md
