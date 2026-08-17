@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-xnP0cp1alfhDwn+gPqBEj5all5wSdlMoDa4mGe51amk=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-yXhh+xQz2XKYpNMrRYcjV3U+3IMSi7gruiQGNObzHr8=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪女性群体关系图 · W181 · 详解西游记</title>
@@ -822,17 +822,7 @@ header.hero .meta {
 .legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
 
 /* Tooltip */
-.tooltip {
-  position: absolute;
-  background: var(--tooltip-bg);
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 0.84em;
-  pointer-events: none;
-  z-index: 100;
-  max-width: 300px;
-}
+/* 墨韵（W461）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
 
 /* Empty state */
 .empty-state {
@@ -1273,9 +1263,9 @@ function renderForce(networkData) {
     return 14; // 孤妖节点
   }
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   const sim = d3.forceSimulation(nodes).alphaDecay(0.08).velocityDecay(0.5)
     .force('link', d3.forceLink(links).id(d => d.id)
@@ -1376,7 +1366,7 @@ const kinshipLink = svg.append('g').selectAll('.kin-link')
     .attr('stroke-width', 2)
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.name + '</strong>');
       const typeLabel = d.type === 'spider' ? '蜘蛛精系' : (d.type === 'loner' ? '孤妖系' : '收编者');
@@ -1395,7 +1385,7 @@ const kinshipLink = svg.append('g').selectAll('.kin-link')
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   // 拖拽
@@ -1533,9 +1523,9 @@ function renderSankey(sankeyLinkData) {
 
   const graph = sankeyGen({ nodes, links });
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   // 链接
   svg.append('g').selectAll('path')
@@ -1549,7 +1539,7 @@ function renderSankey(sankeyLinkData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke-opacity', 0.75);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
       tooltip.append('div').text('流量：' + d.value);
@@ -1559,7 +1549,7 @@ function renderSankey(sankeyLinkData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke-opacity', 0.4);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   // 节点
@@ -1578,7 +1568,7 @@ function renderSankey(sankeyLinkData) {
     .attr('stroke-width', 1)
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.name + '</strong>');
       const catLabel = ['女妖', '执行者', '结局类型'][d.cat] || '';
@@ -1591,7 +1581,7 @@ function renderSankey(sankeyLinkData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   // 节点标签
@@ -1688,9 +1678,9 @@ function renderRadar(radarData) {
       .text(lvl * 20);
   }
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   // 每个角色一个多边形
   radarData.forEach(role => {
@@ -1710,7 +1700,7 @@ function renderRadar(radarData) {
       .style('cursor', 'pointer')
       .on('mouseover', function(e) {
         d3.select(this).attr('fill-opacity', 0.3);
-        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.classed('visible', true);
         tooltip.html('');
         tooltip.append('div').html('<strong>' + role.名字 + '</strong>');
         dimensions.forEach(dim => {
@@ -1724,7 +1714,7 @@ function renderRadar(radarData) {
       })
       .on('mouseout', function() {
         d3.select(this).attr('fill-opacity', 0.08);
-        tooltip.transition().duration(400).style('opacity', 0);
+        tooltip.classed('visible', false);
       });
 
     // 顶点圆
@@ -1787,9 +1777,9 @@ function renderTimeline(timelineData) {
     .domain([0, 100])
     .range([innerH, 0]);
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   // 背景网格
   g.append('g')
@@ -1820,7 +1810,7 @@ function renderTimeline(timelineData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.名字 + '</strong>');
       tooltip.append('div').text('出场：' + d.回目名);
@@ -1833,7 +1823,7 @@ function renderTimeline(timelineData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2.5);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   // 节点标签

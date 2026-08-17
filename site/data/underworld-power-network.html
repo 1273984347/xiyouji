@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-28JBMEb7exZTVt9Tw6qg8NAEiuPP33qMXxcfKb+rfto=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Yn0+dkZ/Hf9zoNWyAknNvDd21dv8KuNqxaAsEiJRj1c=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>地府权力关系图 - 西游数据可视化 · 详解西游记</title>
@@ -907,18 +907,7 @@ header.hero .meta {
 .legend-swatch.line { width: 18px; height: 3px; border-radius: 1px; }
 
 /* Tooltip */
-.tooltip {
-  position: absolute;
-  background: rgba(26, 20, 16, 0.95);
-  color: #fff;
-  padding: 9px 12px;
-  border-radius: 4px;
-  font-size: 0.84em;
-  pointer-events: none;
-  z-index: 100;
-  max-width: 280px;
-  line-height: 1.55;
-}
+/* 墨韵（W461）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
 .tooltip div + div { margin-top: 4px; }
 
 /* Insight list */
@@ -1452,8 +1441,8 @@ function renderHierarchy(hierarchy) {
 }
 
 function showRoleTooltip(event, d) {
-  let tip = d3.select('.tooltip');
-  if (tip.empty()) tip = d3.select('body').append('div').attr('class', 'tooltip');
+  let tip = d3.select('.chart-tooltip');
+  if (tip.empty()) tip = d3.select('body').append('div').attr('class', 'chart-tooltip');
   tip.html('')
     .style('opacity', 0.95)
     .style('left', (event.pageX + 10) + 'px')
@@ -1462,7 +1451,7 @@ function showRoleTooltip(event, d) {
   tip.append('div').html('<strong>' + d.name + '</strong> · ' + d.tag);
   tip.append('div').text(d.desc);
   tip.append('div').text('代表角色：' + d.examples);
-  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3500);
+  setTimeout(() => tip.classed('visible', false), 3500);
 }
 
 // ============================================================
@@ -1508,9 +1497,9 @@ function renderForce(networkData) {
     return typeColors[d.type] || '#8a7c6a';
   }
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   const sim = d3.forceSimulation(nodes).alphaDecay(0.08).velocityDecay(0.5)
     .force('link', d3.forceLink(links).id(d => d.id)
@@ -1596,7 +1585,7 @@ const link = svg.append('g').selectAll('line')
     .attr('tabindex', 0)
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 3);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.id + '</strong>');
       tooltip.append('div').text('类别：' + d.type);
@@ -1614,7 +1603,7 @@ const link = svg.append('g').selectAll('line')
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   node.call(d3.drag()
@@ -1715,9 +1704,9 @@ function renderSankey(sankeyData) {
 
   const graph = sankeyGen({ nodes, links });
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   // 链接
   svg.append('g').selectAll('path')
@@ -1731,7 +1720,7 @@ function renderSankey(sankeyData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke-opacity', 0.75);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
       tooltip.append('div').text('关系强度：' + d.value);
@@ -1741,7 +1730,7 @@ function renderSankey(sankeyData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke-opacity', 0.45);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   // 节点
@@ -1760,7 +1749,7 @@ function renderSankey(sankeyData) {
     .attr('stroke-width', 1)
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#c8463a').attr('stroke-width', 2);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.name + '</strong>');
       tooltip.append('div').text('层级：' + (d.cat === 0 ? '地府体系角色' : '对接三界体系'));
@@ -1772,7 +1761,7 @@ function renderSankey(sankeyData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   node.append('text')
@@ -1895,9 +1884,9 @@ function renderRadar(radarData) {
       .text(lvl * 2);
   }
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   // 雷达多边形
   radarData.forEach((m, idx) => {
@@ -1920,7 +1909,7 @@ function renderRadar(radarData) {
 
     poly.on('mouseover', function(e) {
       d3.select(this).attr('fill-opacity', 0.3).attr('stroke-width', 2.5);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + m.name + '</strong> · ' + m.type);
       dimensions.forEach(dim => {
@@ -1932,7 +1921,7 @@ function renderRadar(radarData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('fill-opacity', 0.08).attr('stroke-width', 1.5);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
     // 顶点圆
@@ -2016,9 +2005,9 @@ function renderTimeline(timelineData) {
     .range([0, innerH])
     .padding(0.3);
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   // 背景行
   stageOrder.forEach(name => {
@@ -2066,7 +2055,7 @@ function renderTimeline(timelineData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('r', 13);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.actor + '</strong> · ' + stageLabels[d.stage]);
       tooltip.append('div').text('回目：第' + d.chapter + '回');
@@ -2079,7 +2068,7 @@ function renderTimeline(timelineData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('r', 10);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   // 序号

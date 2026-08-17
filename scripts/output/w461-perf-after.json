@@ -1,0 +1,23 @@
+{
+  "intertextuality-network": {
+    "settleMs": 2205,
+    "fps": 60,
+    "longTasks": 2,
+    "pageerrors": 0,
+    "loadToMeasureMs": 7213
+  },
+  "narratology-13d-network": {
+    "settleMs": 2215,
+    "fps": 61,
+    "longTasks": 2,
+    "pageerrors": 0,
+    "loadToMeasureMs": 7223
+  },
+  "heaven-power-network": {
+    "settleMs": 2215,
+    "fps": 61,
+    "longTasks": 3,
+    "pageerrors": 0,
+    "loadToMeasureMs": 7223
+  }
+}

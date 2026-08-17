@@ -853,8 +853,7 @@ td.num, th.num {
         .footer-idx .idx-block a { color: #e9b885; text-decoration: underline; }
         
         
-        .svg-tooltip { position: absolute; pointer-events: none; background: var(--ink); color: #f5e9d4; padding: 6px 10px; border-radius: 4px; font-size: 0.82em; opacity: 0; transition: opacity 0.15s; }
-        .svg-tooltip.visible { opacity: 0.95; }
+        /* 墨韵（W461）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
     </style>
 <style id="audit-halo">
 /* injected label-halo for overlap readability */
@@ -946,7 +945,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="belbin-title">Belbin 九角色覆盖度雷达图</title>
                     <desc id="belbin-desc">取经团队五成员在 Belbin 九角色上的覆盖度雷达对比。</desc>
                 </svg>
-                <div class="svg-tooltip" id="belbin-tip"></div>
+                <div class="chart-tooltip" id="belbin-tip"></div>
             </div>
             <div class="legend-row" id="belbin-legend" aria-label="角色图例"></div>
         </section>
@@ -967,7 +966,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="network-title">五成员关系网络</title>
                     <desc id="network-desc">唐僧/悟空/八戒/沙僧/白龙马五成员的 force-directed 关系网络图。</desc>
                 </svg>
-                <div class="svg-tooltip" id="network-tip"></div>
+                <div class="chart-tooltip" id="network-tip"></div>
             </div>
             <div id="node-detail" class="node-card" aria-live="polite">
                 <h3>点击节点查看角色详情</h3>

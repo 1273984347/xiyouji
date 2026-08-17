@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.75（2026-08-17）— W460 墨韵全站动效体系 P0+样板批（motion tokens + 表格/组件动效 225 页同步 + count-up + D3 编排统一 + tooltip 收编）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.76（2026-08-17）— W461 墨韵 W-c 网络页批（16 页 tooltip 收编 + KPI count-up 两页）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 顶层结构
 
