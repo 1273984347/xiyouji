@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-aKiBnZAk+t9UdaCm1gu0MdKGKarFs9l0H0+zNEAgkmQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-vGbwP+HWcLwDJK6FIaLmkikmTIp2CJ+kegTMmyeZe0k=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>图表设计 · 详解西游记</title>
@@ -1381,6 +1381,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
     // ============================================================
     // 嵌入式 fallback 数据（fetch 失败时使用，与 JSON 完全一致）
     // ============================================================
@@ -1895,7 +1898,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         spiralPath.attr("stroke-dasharray", totalLen)
             .attr("stroke-dashoffset", totalLen)
             .transition()
-            .duration(1800)
+            .duration(MOYUN_RM?0:600)
             .ease(d3.easeCubicOut)
             .attr("stroke-dashoffset", 0);
 
@@ -1904,7 +1907,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("cx", cx).attr("cy", cy).attr("r", 5)
             .attr("fill", "var(--ink)")
             .style("opacity", 0)
-            .transition().delay(1800).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:1800).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
         svg.append("text")
             .attr("x", cx).attr("y", cy - 12)
@@ -1914,7 +1917,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("fill", "var(--ink)")
             .style("opacity", 0)
             .text("启程")
-            .transition().delay(1900).duration(400).style("opacity", 1);
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:1900).duration(MOYUN_RM?0:400).style("opacity", 1);
 
         // 最外圈标注"成佛"
         const lastStage = data.spiral_stages[data.spiral_stages.length - 1];
@@ -1927,13 +1930,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("fill", lastStage._color)
             .style("opacity", 0)
             .text("成佛")
-            .transition().delay(2000).duration(400).style("opacity", 1);
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:2000).duration(MOYUN_RM?0:400).style("opacity", 1);
 
         // 阶段点 + 偏移线 + 标注
         const tip = d3.select("#spiral-tip");
         data.spiral_stages.forEach((s, i) => {
             const g = svg.append("g").attr("opacity", 0);
-            g.transition().delay(1500 + i * 200).duration(400).attr("opacity", 1);
+            g.transition().duration(MOYUN_RM?0:250).delay(1500 + i * 200).duration(MOYUN_RM?0:400).attr("opacity", 1);
 
             // 悟空偏移线（沿径向向外·红）
             const wkLen = s.wukong_offset * offsetScale;
@@ -1964,7 +1967,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("stroke", "#fff").attr("stroke-width", 2)
                 .style("cursor", "pointer")
                 .on("mouseover", function(e) {
-                    d3.select(this).transition().duration(150).attr("r", 9);
+                    d3.select(this).transition().duration(MOYUN_RM?0:150).attr("r", 9);
                     tip.style("opacity", 1).html(
                         `<div class="tip-title">${s.stage_id} · ${s.stage_name}</div>` +
                         `<div style="font-size:0.76rem;color:#e9b885;">${s.chapter_range} · 第 ${s.loop_number} 圈</div>` +
@@ -1979,7 +1982,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                        .style("top", (e.clientY - rect.top - 10) + "px");
                 })
                 .on("mouseout", function() {
-                    d3.select(this).transition().duration(150).attr("r", 6);
+                    d3.select(this).transition().duration(MOYUN_RM?0:150).attr("r", 6);
                     tip.style("opacity", 0);
                 });
 
@@ -2295,7 +2298,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("stroke-width", 1.5)
             .attr("stroke-dasharray", "3,2")
             .attr("opacity", 0)
-            .transition().delay(800).duration(500)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:800).duration(MOYUN_RM?0:500)
             .attr("opacity", 0.7);
 
         // 主圆点
@@ -2305,14 +2308,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("r", 0)
             .attr("fill", d => MONSTER_COLORS[d.monster])
             .attr("stroke", "#fff").attr("stroke-width", 2)
-            .transition().delay((d, i) => 200 + i * 120).duration(500)
+            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 200 + i * 120).duration(MOYUN_RM?0:500)
             .ease(d3.easeBackOut)
             .attr("r", d => (d.monster === "白骨精" || d.monster === "青牛精") ? 11 : 8);
 
         // 重新绑定事件
         pointG
             .on("mouseover", function(e, d) {
-                d3.select(this).select("circle:nth-child(2)").transition().duration(150).attr("r", 14);
+                d3.select(this).select("circle:nth-child(2)").transition().duration(MOYUN_RM?0:150).attr("r", 14);
                 tip.style("opacity", 1).html(
                     `<div class="tip-title">${d.monster}</div>` +
                     `<div>类别 · ${d.category}</div>` +
@@ -2328,7 +2331,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                    .style("top", (e.clientY - rect.top - 10) + "px");
             })
             .on("mouseout", function(e, d) {
-                d3.select(this).select("circle:nth-child(2)").transition().duration(150)
+                d3.select(this).select("circle:nth-child(2)").transition().duration(MOYUN_RM?0:150)
                     .attr("r", d => (d.monster === "白骨精" || d.monster === "青牛精") ? 11 : 8);
                 tip.style("opacity", 0);
             });
@@ -2342,7 +2345,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("fill", d => MONSTER_COLORS[d.monster])
             .style("opacity", 0)
             .text(d => d.monster)
-            .transition().delay((d, i) => 600 + i * 120).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 600 + i * 120).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // 平均线
@@ -2354,7 +2357,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("fill", "var(--accent-3)")
             .attr("stroke", "#fff").attr("stroke-width", 1.5)
             .style("opacity", 0)
-            .transition().delay(1200).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:1200).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
         g.append("text")
             .attr("x", x(avgStress) + 10).attr("y", y(avgEase) - 8)
@@ -2363,7 +2366,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-style", "italic")
             .style("opacity", 0)
             .text(`均值 (${avgStress.toFixed(2)}, ${avgEase.toFixed(2)})`)
-            .transition().delay(1300).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:1300).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
     }
 
@@ -2703,7 +2706,5 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>

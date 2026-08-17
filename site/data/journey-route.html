@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-H/S1yWnEFM2kpypjtChhVOPDJ2kah66xF2uffXEdkKw=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-wkgNuiczyNu/ynPyVk6H2+QBJ9qHz1QaslY9RLVIFwY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>详解西游记 · 取经全路程图 · 详解西游记</title>
@@ -1144,6 +1144,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
     // ============== 地理类型配色 ==============
     const TYPE_COLORS = {
         "山": "#6B8E5A",
@@ -1350,7 +1353,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("opacity", 0.85);
 
             dot.transition()
-                .duration(400)
+                .duration(MOYUN_RM?0:400)
                 .delay(i * 25)
                 .attr("r", 7);
 
@@ -1448,7 +1451,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("d", arc)
             .style("opacity", 0)
             .transition()
-            .duration(800)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 100)
             .style("opacity", 1);
 
@@ -1979,7 +1982,5 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>

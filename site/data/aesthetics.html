@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-1YlpzJSAYtyRMR5y4s377FDDAR3Bq1+ee5GTWchYQ4A=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-FCw8jz7FCr1LqIkQw/mcsf54De14uT3feYiA6tQOeIg=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>美学时尚演变 · 详解西游记</title>
@@ -870,29 +870,14 @@ td.num, th.num {
             font-family: "JetBrains Mono", monospace;
             font-size: 0.85em;
         }
-        /* Tooltip */
-        .tooltip {
-            position: absolute;
-            background: rgba(26, 20, 16, 0.94);
-            color: #f5e9d4;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 0.82rem;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.15s;
-            max-width: 260px;
-            line-height: 1.5;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 100;
-        }
-        .tooltip strong {
-            color: var(--accent-soft);
+        /* 墨韵（W462）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
+        .chart-tooltip strong {
+            color: var(--accent);
             display: block;
             margin-bottom: 2px;
         }
-        .tooltip .row {
-            color: rgba(245, 233, 212, 0.78);
+        .chart-tooltip .row {
+            color: var(--ink-soft);
             font-size: 0.78rem;
         }
         /* Color spectrum grid */
@@ -1246,7 +1231,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         </nav>
     </footer>
 
-<div class="tooltip" id="tooltip"></div>
+<div class="chart-tooltip" id="tooltip"></div>
 
     <script>
 
@@ -1549,13 +1534,13 @@ function renderTreemap(opts){
                 .style("cursor", "pointer")
                 .on("mouseover", function(ev, d) {
                     d3.select(this).attr("r", 7);
-                    tooltip.style("opacity", 1)
+                    tooltip.classed("visible", true)
                         .html(`<strong>${s.name} · ${d.stage}</strong>
                             <div class="row">回目：第 ${d.chapter} 回</div>
                             <div class="row">服饰：${d.look}</div>
                             <div class="row">色彩：${d.color}</div>
                             <div class="row">风格：${d.style}</div>
-                            <div class="row">时尚等级：<strong style="color:#e9b885">${d.fashion_level}/10</strong></div>`);
+                            <div class="row">时尚等级：<strong style="color:var(--accent)">${d.fashion_level}/10</strong></div>`);
                 })
                 .on("mousemove", function(ev) {
                     tooltip
@@ -1564,7 +1549,7 @@ function renderTreemap(opts){
                 })
                 .on("mouseout", function() {
                     d3.select(this).attr("r", 5);
-                    tooltip.style("opacity", 0);
+                    tooltip.classed("visible", false);
                 });
 
             // 直接标签：终点
@@ -1657,19 +1642,19 @@ function renderTreemap(opts){
             bar.text(s.scene);
             bar.style("cursor", "pointer")
                 .on("mouseover", function(ev) {
-                    tooltip.style("opacity", 1)
+                    tooltip.classed("visible", true)
                         .html(`<strong>${s.scene}</strong>
                             <div class="row">回目：第 ${s.chapter} 回</div>
                             <div class="row">风格：${s.style}</div>
                             <div class="row">色彩：${s.colors.join(" · ")}</div>
                             <div class="row">特征：${s.feature}</div>
-                            <div class="row">美学等级：<strong style="color:#e9b885">${s.level}/10</strong></div>`);
+                            <div class="row">美学等级：<strong style="color:var(--accent)">${s.level}/10</strong></div>`);
                 })
                 .on("mousemove", function(ev) {
                     tooltip.style("left", (ev.pageX + 14) + "px")
                            .style("top", (ev.pageY - 10) + "px");
                 })
-                .on("mouseout", function() { tooltip.style("opacity", 0); });
+                .on("mouseout", function() { tooltip.classed("visible", false); });
 
             row.append("div").attr("class", "scene-meta").text(s.style);
             row.append("div").attr("class", "scene-chapter").text("第" + s.chapter + "回");
@@ -1683,7 +1668,7 @@ function renderTreemap(opts){
   renderTreemap({
     svgId:'chart-pie', data:styles, legendId:'legend-pie', tipId:'tooltip',
     nameOf:d=>d.school, valueOf:d=>d.scenes_count, colorOf:d=>d.color,
-    htmlOf:(d,total)=>`<strong>${d.school}</strong><div class="row">${d.description||''}</div><div class="row">特征：${d.feature||''}</div><div class="row">场景数：<strong style="color:#e9b885">${d.scenes_count}</strong>（${((d.scenes_count/total)*100).toFixed(1)}%）</div>`
+    htmlOf:(d,total)=>`<strong>${d.school}</strong><div class="row">${d.description||''}</div><div class="row">特征：${d.feature||''}</div><div class="row">场景数：<strong style="color:var(--accent)">${d.scenes_count}</strong>（${((d.scenes_count/total)*100).toFixed(1)}%）</div>`
   });
 }
 
@@ -2031,7 +2016,48 @@ function renderTreemap(opts){
 })();
 </script>
 
-</body>
-</html>
+<script>
+// 墨韵动效（W462）：KPI 数字 count-up（900ms easeOutExpo·IO 触发一次·白名单例外②；支持千分位格式）
+// fail-open：元素已含终值；浮点/文本型 value 与 reduced-motion / IO 不可用 / 异常时保持终值
+// 注意：KPI 元素多在 loadData() 之后才建，须轮询等待（上限 5s）
+(function () {
+    var reduced = false;
+    try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) {}
+    if (reduced || !('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
+    var t0 = Date.now();
+    (function waitEls() {
+        var els = Array.prototype.filter.call(
+            document.querySelectorAll('.kpi-card .value'),
+            function (el) { return /^[\d,]+$/.test((el.textContent || '').trim()); }
+        );
+        if (!els.length) {
+            if (Date.now() - t0 < 5000) return setTimeout(waitEls, 100);
+            return;
+        }
+        try {
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (!e.isIntersecting) return;
+                    io.unobserve(e.target);
+                    var el = e.target;
+                    var raw = el.textContent.trim();
+                    var target = parseInt(raw.replace(/,/g, ''), 10) || 0;
+                    var s0 = null, DUR = 900;
+                    function frame(ts) {
+                        if (s0 === null) s0 = ts;
+                        var t = Math.min((ts - s0) / DUR, 1);
+                        var v = (t >= 1) ? target : Math.round(target * (1 - Math.pow(2, -10 * t)));
+                        el.textContent = v.toLocaleString("zh-CN");
+                        if (t < 1) requestAnimationFrame(frame);
+                        else el.textContent = raw;
+                    }
+                    requestAnimationFrame(frame);
+                });
+            }, { threshold: 0.5 });
+            els.forEach(function (el) { io.observe(el); });
+        } catch (_) { /* fail-open：保持终值 */ }
+    })();
+})();
+</script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-nQVn02/x78/LCnh8eSyp5wxFWl0lCFLlmf04cA3HB/4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-GXG24UD2Y/sbpkUQcpmOb50MPHCXVsyhGC9PNPy4MD8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪后台论 · 详解西游记</title>
@@ -1049,19 +1049,7 @@ td.num, th.num {
             text-decoration: none;
         }
         footer a:hover { text-decoration: underline; }
-        .tooltip {
-            position: absolute;
-            background: rgba(44, 36, 24, 0.95);
-            color: #f5e9d4;
-            padding: 6px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.15s;
-            max-width: 280px;
-            z-index: 100;
-        }
+        /* 墨韵（W462）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
         @media (max-width: 768px) {
             
             
@@ -1252,9 +1240,12 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <a href="text-search.html">全文检索</a>
         </nav>
     </footer>
-<div class="tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
+<div class="chart-tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
 
     <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
     const EMBEDDED = {
         background: {
             concept_name: "妖怪后台论",
@@ -1373,11 +1364,11 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 tip.html(html)
                    .style('left', (event.pageX + 12) + 'px')
                    .style('top', (event.pageY - 18) + 'px')
-                   .style('opacity', 1)
+                   .classed('visible', true)
                    .attr('aria-hidden', 'false');
             },
             hide: function() {
-                tip.style('opacity', 0).attr('aria-hidden', 'true');
+                tip.classed('visible', false).attr('aria-hidden', 'true');
             }
         };
     }
@@ -1585,7 +1576,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr('fill-opacity', 0.8)
             .style('cursor', 'pointer')
             .transition()
-            .duration(800)
+            .duration(MOYUN_RM?0:600)
             .attr('y', d => y(d.value))
             .attr('height', d => h - y(d.value));
 
@@ -2010,7 +2001,5 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>

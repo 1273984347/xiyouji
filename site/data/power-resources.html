@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-5YD8s1mm5BBX1pZGPM4aILnHJmnecbhbQlUuL2sLbqc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Z/KeLiSjVB8hianNKxqD+O+oSHJzmv4PqpihyrRI6pU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>权力与资源 · 详解西游记</title>
@@ -1503,6 +1503,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         数据源：scripts/J_权力与资源/ 生成的 4 份 JSON。
     -->
     <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
     // ===== EMBEDDED 数据结构说明 =====
     // structure: 7 factions × {name, tier, leader, nominal_power, actual_power, influence, resource_control[4], power_gap, color}
     // promotion: 8 promotion_paths × {path, requirement, duration, success_rate, cases, tier_target}
@@ -2362,7 +2365,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr('stroke-width', 2)
             .style('cursor', 'pointer')
             .on('mouseover', function(e, d) {
-                d3.select(this).transition().duration(120).attr('d', arcHover);
+                d3.select(this).transition().duration(MOYUN_RM?0:120).attr('d', arcHover);
                 tooltip.show(
                     `<strong style="color:${FACTION_COLORS[d.data.faction]}">${d.data.faction}</strong><br>` +
                     `资源数：<strong>${d.data.count}</strong> / ${total} 项<br>` +
@@ -2370,7 +2373,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     `资源：${d.data.resources.join(' / ')}`, e);
             })
             .on('mouseout', function() {
-                d3.select(this).transition().duration(120).attr('d', arc);
+                d3.select(this).transition().duration(MOYUN_RM?0:120).attr('d', arc);
                 tooltip.hide();
             });
 
@@ -2687,7 +2690,5 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>

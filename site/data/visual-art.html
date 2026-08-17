@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-YGKQKSQd+zIS35hICdHvXUrhqEhxezb12LziaF8sAQY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-vWwxtzGs6SrSyR51O/NHyq/HxXf3haMSS9RXXXbDfjg=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>视觉艺术 · 心经物质形态与气味地图 · 详解西游记</title>
@@ -1516,6 +1516,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
     // ===== 嵌入式 fallback 数据（fetch 失败时使用）=====
     const EMBEDDED = {
         heart_sutra_sculpture: {
@@ -1769,7 +1772,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         path.attr("stroke-dasharray", totalLen)
             .attr("stroke-dashoffset", totalLen)
             .transition()
-            .duration(1800)
+            .duration(MOYUN_RM?0:600)
             .ease(d3.easeCubicOut)
             .attr("stroke-dashoffset", 0);
 
@@ -1793,7 +1796,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("filter", "url(#gold-glow)")
             .attr("d", d3.line().x(d => d._x).y(d => d._y).curve(d3.curveBasis))
             .style("opacity", 0)
-            .transition().delay(1500).duration(600)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:1500).duration(MOYUN_RM?0:600)
             .style("opacity", 1);
 
         // 心形轮廓（金色）
@@ -1805,7 +1808,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("stroke-width", 2.2)
             .attr("filter", "url(#gold-glow)")
             .style("opacity", 0)
-            .transition().delay(1800).duration(800)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:1800).duration(MOYUN_RM?0:600)
             .style("opacity", 1);
 
         // 心形呼吸闪烁动画
@@ -1837,7 +1840,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-family", "'Noto Serif SC', serif")
             .style("opacity", 0)
             .text("心")
-            .transition().delay(2200).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:2200).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // 波点 + tooltip
@@ -1855,12 +1858,12 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("stroke-width", 1.5)
             .style("cursor", "pointer")
             .style("filter", "drop-shadow(0 0 4px rgba(212,175,55,0.6))")
-            .transition().delay((d, i) => 200 + i * 150).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 200 + i * 150).duration(MOYUN_RM?0:400)
             .attr("r", d => d.wave_amplitude >= 1.0 ? 7 : 5);
 
         g.selectAll(".wave-dot")
             .on("mouseover", function(e, d) {
-                d3.select(this).transition().duration(150).attr("r", 9);
+                d3.select(this).transition().duration(MOYUN_RM?0:150).attr("r", 9);
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">第 ${d.n} 次 · ${d.chapter}</div>` +
                           `<div>${d.location} · ${d.context}</div>` +
@@ -1876,7 +1879,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                    .style("top", (e.clientY - rect.top - 10) + "px");
             })
             .on("mouseout", function(e, d) {
-                d3.select(this).transition().duration(150)
+                d3.select(this).transition().duration(MOYUN_RM?0:150)
                     .attr("r", d.wave_amplitude >= 1.0 ? 7 : 5);
                 tip.style("opacity", 0);
             });
@@ -1895,7 +1898,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-family", "'JetBrains Mono', monospace")
             .style("opacity", 0)
             .text(d => d.chapter.replace("第 ", "").replace(" 回", ""))
-            .transition().delay((d, i) => 400 + i * 150).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 400 + i * 150).duration(MOYUN_RM?0:400)
             .style("opacity", 0.9);
 
         g.selectAll(".wave-label-bottom")
@@ -1911,7 +1914,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-weight", "600")
             .style("opacity", 0)
             .text(d => d.location)
-            .transition().delay((d, i) => 500 + i * 150).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 500 + i * 150).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // X 轴标题
@@ -1964,7 +1967,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("font-style", "italic")
                 .style("opacity", 0)
                 .text("↓ 最深波谷")
-                .transition().delay(1800).duration(400)
+                .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:1800).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
         }
 
@@ -1979,7 +1982,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-style", "italic")
             .style("opacity", 0)
             .text("归零·成佛")
-            .transition().delay(2000).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:2000).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
     }
 
@@ -2134,7 +2137,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         path.attr("stroke-dasharray", totalLen + " 6")
             .attr("stroke-dashoffset", totalLen)
             .transition()
-            .duration(1500)
+            .duration(MOYUN_RM?0:600)
             .ease(d3.easeCubicOut)
             .attr("stroke-dashoffset", 0)
             .on("end", function() {
@@ -2151,7 +2154,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-weight", "600")
             .style("opacity", 0)
             .text("起点 · 长安")
-            .transition().delay(200).duration(400).style("opacity", 1);
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:200).duration(MOYUN_RM?0:400).style("opacity", 1);
 
         g.append("text")
             .attr("x", locations[locations.length - 1]._x)
@@ -2162,7 +2165,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-weight", "600")
             .style("opacity", 0)
             .text("终点 · 灵山")
-            .transition().delay(1400).duration(400).style("opacity", 1);
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:1400).duration(MOYUN_RM?0:400).style("opacity", 1);
 
         // 圆点（按 intensity 大小·按 category 颜色）
         const tip = d3.select("#scent-tip");
@@ -2179,12 +2182,12 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("stroke-width", 2)
             .style("cursor", "pointer")
             .style("filter", "drop-shadow(0 1px 3px rgba(0,0,0,0.2))")
-            .transition().delay((d, i) => 300 + i * 100).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 300 + i * 100).duration(MOYUN_RM?0:400)
             .attr("r", d => 4 + d.intensity * 1.6);
 
         g.selectAll(".scent-dot")
             .on("mouseover", function(e, d) {
-                d3.select(this).transition().duration(150)
+                d3.select(this).transition().duration(MOYUN_RM?0:150)
                     .attr("r", 4 + d.intensity * 1.6 + 3);
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">No.${d.n} · ${d.location}</div>` +
@@ -2201,7 +2204,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                    .style("top", (e.clientY - rect.top - 10) + "px");
             })
             .on("mouseout", function(e, d) {
-                d3.select(this).transition().duration(150)
+                d3.select(this).transition().duration(MOYUN_RM?0:150)
                     .attr("r", 4 + d.intensity * 1.6);
                 tip.style("opacity", 0);
             });
@@ -2220,7 +2223,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("fill", d => d._color)
             .style("opacity", 0)
             .text(d => d.location)
-            .transition().delay((d, i) => 400 + i * 100).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 400 + i * 100).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // X 轴：地点序号
@@ -2237,7 +2240,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-family", "'JetBrains Mono', monospace")
             .style("opacity", 0)
             .text(d => "No." + d.n)
-            .transition().delay((d, i) => 500 + i * 100).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay((d, i) => 500 + i * 100).duration(MOYUN_RM?0:400)
             .style("opacity", 0.8);
 
         // 标题
@@ -2608,7 +2611,48 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
+<script>
+// 墨韵动效（W462）：KPI 数字 count-up（900ms easeOutExpo·IO 触发一次·白名单例外②；支持千分位格式）
+// fail-open：元素已含终值；浮点/文本型 value 与 reduced-motion / IO 不可用 / 异常时保持终值
+// 注意：KPI 元素多在 loadData() 之后才建，须轮询等待（上限 5s）
+(function () {
+    var reduced = false;
+    try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) {}
+    if (reduced || !('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
+    var t0 = Date.now();
+    (function waitEls() {
+        var els = Array.prototype.filter.call(
+            document.querySelectorAll('.kpi-card .value'),
+            function (el) { return /^[\d,]+$/.test((el.textContent || '').trim()); }
+        );
+        if (!els.length) {
+            if (Date.now() - t0 < 5000) return setTimeout(waitEls, 100);
+            return;
+        }
+        try {
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (!e.isIntersecting) return;
+                    io.unobserve(e.target);
+                    var el = e.target;
+                    var raw = el.textContent.trim();
+                    var target = parseInt(raw.replace(/,/g, ''), 10) || 0;
+                    var s0 = null, DUR = 900;
+                    function frame(ts) {
+                        if (s0 === null) s0 = ts;
+                        var t = Math.min((ts - s0) / DUR, 1);
+                        var v = (t >= 1) ? target : Math.round(target * (1 - Math.pow(2, -10 * t)));
+                        el.textContent = v.toLocaleString("zh-CN");
+                        if (t < 1) requestAnimationFrame(frame);
+                        else el.textContent = raw;
+                    }
+                    requestAnimationFrame(frame);
+                });
+            }, { threshold: 0.5 });
+            els.forEach(function (el) { io.observe(el); });
+        } catch (_) { /* fail-open：保持终值 */ }
+    })();
+})();
+</script>
 </body>
 </html>

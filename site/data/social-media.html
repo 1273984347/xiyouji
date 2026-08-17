@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-oE6fdLg2bzUFSDn+mHyO9W7hEa1wTWRRPylGLrSQ09U=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-j6teJAbSMVg76VM5TpjQURQbNIztUiWnR3lBEWSGuGk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>社媒人设 · MBTI 人格图谱 · 详解西游记</title>
@@ -1298,6 +1298,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
     // ============================================================
     // 嵌入式 fallback 数据（fetch 失败时使用）
     // 数据源：scripts/output/data/{social_media_profiles,mbti_characters,social_media_summary}.json
@@ -1740,9 +1743,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("opacity", 0)
                 .attr("class", "radar-poly poly-" + idx);
 
-            poly.transition()
+            poly.transition().duration(MOYUN_RM?0:250)
                 .delay(200 + idx * 120)
-                .duration(500)
+                .duration(MOYUN_RM?0:500)
                 .style("opacity", 1);
 
             // 命中轴的顶点圆
@@ -1756,9 +1759,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                         .attr("stroke", "#fff")
                         .attr("stroke-width", 1.5)
                         .style("opacity", 0)
-                        .transition()
+                        .transition().duration(MOYUN_RM?0:250)
                         .delay(500 + idx * 120)
-                        .duration(300)
+                        .duration(MOYUN_RM?0:300)
                         .style("opacity", 1);
                 }
             });
@@ -1892,8 +1895,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("cursor", "pointer")
                 .attr("class", "fit-bar");
 
-            bar.transition()
-                .delay(i * 100).duration(800)
+            bar.transition().duration(MOYUN_RM?0:250)
+                .delay(i * 100).duration(MOYUN_RM?0:600)
                 .ease(d3.easeCubicOut)
                 .attr("width",Math.max(0, x(val)));
 
@@ -1908,7 +1911,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("fill", "#fff")
                 .style("opacity", 0)
                 .text(m.mbti + " " + val + "/10")
-                .transition().delay(i * 100 + 600).duration(400)
+                .transition().duration(MOYUN_RM?0:250).delay(i * 100 + 600).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // role 标注（条右侧）
@@ -1920,7 +1923,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("font-style", "italic")
                 .style("opacity", 0)
                 .text(m.role)
-                .transition().delay(i * 100 + 700).duration(400)
+                .transition().duration(MOYUN_RM?0:250).delay(i * 100 + 700).duration(MOYUN_RM?0:400)
                 .style("opacity", 1);
 
             // 交互
@@ -2293,7 +2296,5 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>
