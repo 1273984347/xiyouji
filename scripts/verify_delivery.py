@@ -390,6 +390,18 @@ def main():
     except Exception as e:
         warn("动态链接门禁执行异常（W459）: %s" % e)
 
+    # ---- 治理文档维护契约门禁（2026-08-18：防追加式乱写·WARN 起步，不阻断提交）----
+    gov_py = os.path.join(_HERE, "check_governance_docs.py")
+    try:
+        r = subprocess.run([sys.executable, gov_py], capture_output=True, text=True, timeout=60)
+        tail = (r.stdout.splitlines()[-4:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("治理文档维护契约通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            warn("治理文档维护契约告警（exit %d）：%s" % (r.returncode, " / ".join(tail[:4])))
+    except Exception as e:
+        warn("治理文档维护契约门禁执行异常: %s" % e)
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:
