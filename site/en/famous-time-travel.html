@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-zSWZRwjOAu/rvIFZrFM3W4XjMcZclHaX7ieSZOmI5uQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-qktgpC/4Bl2j0qzo3SNJWQAztcJrYeL132Yj0BBMpxI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Famous Time Travel · Annotated Journey to the West</title>
-    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+    <script src="../static/js/d3.v7.min.js"></script>
     <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
     
     
@@ -37,7 +37,7 @@
     font-style: normal;
     font-weight: 200 900;
     font-display: optional;
-    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+    src: url('../static/fonts/noto-serif-sc-shared.woff2') format('woff2-variations');
 }
 @font-face {
     font-family: 'Noto Sans SC';
@@ -875,13 +875,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 const EMBEDDED_DATA = {
     travel_identities: [
         { celebrity_id: "lu_xun", celebrity_name: "Lu Xun", original_role: "Founder of the gods-and-demons novel",
-          travel_role: "Chronicler of Flower-Fruit Mountain", would_do: "Writes "An Account of the Demon World" to expose Heaven's dark secrets" },
+          travel_role: "Chronicler of Flower-Fruit Mountain", would_do: "Writes ”An Account of the Demon World” to expose Heaven's dark secrets" },
         { celebrity_id: "hu_shi", celebrity_name: "Hu Shi", original_role: "High Fairy-Tale School",
           travel_role: "Pilgrimage Team Advisor", would_do: "Stop over-analyzing — just keep moving!" },
         { celebrity_id: "mao_zedong", celebrity_name: "Mao Zedong", original_role: "Level-10 JTTW Scholar",
           travel_role: "Wukong's Political Commissar", would_do: "We must establish our own base area!" },
         { celebrity_id: "qian_zhongshu", celebrity_name: "Qian Zhongshu", original_role: "Detail Obsessive",
-          travel_role: "Chechi Kingdom Referee", would_do: "Corrects the common-sense error about "Yikouzhong"" },
+          travel_role: "Chechi Kingdom Referee", would_do: "Corrects the common-sense error about ”Yikouzhong”" },
         { celebrity_id: "lin_yutang", celebrity_name: "Lin Yutang", original_role: "Anatomist of Human Nature",
           travel_role: "Gao Village Psychologist", would_do: "Gives Bajie desire-management counseling" },
         { celebrity_id: "chen_yinke", celebrity_name: "Chen Yinke", original_role: "Textual Criticism School",
@@ -889,10 +889,10 @@ const EMBEDDED_DATA = {
     ],
     scene_illustrations: [
         { scene_id: "luxun_underworld", character: "Lu Xun", setting: "Underworld Reform Observer",
-          judgment: "I opened this Book of Life and Death and examined it — on every crooked page were the four words "destined by Heaven". I could not sleep, and read carefully into the night until, between the lines, I made out the words — the whole book was filled with two words: "eat people"!",
+          judgment: "I opened this Book of Life and Death and examined it — on every crooked page were the four words ”destined by Heaven”. I could not sleep, and read carefully into the night until, between the lines, I made out the words — the whole book was filled with two words: ”eat people”!",
           svg_description: "Lu Xun stands in the Hall of Yama, glaring coldly at the Book of Life and Death line art" },
         { scene_id: "qian_postcard", character: "Qian Zhongshu", setting: "Three Realms Verification Inspector",
-          judgment: "He writes to Wu Cheng'en to correct the Song-dynasty porcelain vase at a demon king's banquet (it did not exist in the Tang dynasty), and to CCTV director Yang Jie to illustrate that a "Yikouzhong" is a cloak — two humorous "correction letters" as postcards.",
+          judgment: "He writes to Wu Cheng'en to correct the Song-dynasty porcelain vase at a demon king's banquet (it did not exist in the Tang dynasty), and to CCTV director Yang Jie to illustrate that a ”Yikouzhong” is a cloak — two humorous ”correction letters” as postcards.",
           svg_description: "Two humorous correction postcards" }
     ]
 };

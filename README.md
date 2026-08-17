@@ -2,7 +2,7 @@
 
 > 一源多形 · 数字人文可视化解读《西游记》100 回 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前版本 v2.3.70（2026-08-16）**： W455 方案 B/C/D 三个可视化深化（character-dynamic-network 1-100 回目进度条播放关系边 + 邻域模式 + 边权重双编码；hardship-difficulty-heatmap 单元格钻取 + 表↔热力图双向联动 + 难度/章节/结局三排序；journey-spacetime 双轴联动 + 节点跳转 A1 回目解读 + 段路耗时刻度）·W454 方案 A 西游地理 3D 可视化（journey-geo-3d.html 新建：Three.js r128 + 手动 setupOrbitControls + 程序化示意地形 + 17 节点 Sphere + CatmullRom 路线 Tube + 河流 Tube + 路线高亮/地形透明切换）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> **当前版本 v2.3.73（2026-08-16）**： W458 防回归门禁体系落地·W454 方案 A 西游地理 3D 可视化（journey-geo-3d.html 新建：Three.js r128 + 手动 setupOrbitControls + 程序化示意地形 + 17 节点 Sphere + CatmullRom 路线 Tube + 河流 Tube + 路线高亮/地形透明切换）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 >
 > **版本号说明**：本项目的 `vX.Y.Z` 是**内容发布批次编号，不适用 SemVer 兼容性承诺**——站点无 API、无下游依赖方，每个发布批次（W###）递增 patch 位。MAJOR/MINOR 位对应内容阶段（v2.x = 内容体系成熟期）。判断"这个版本改了什么"请看 [CHANGELOG.md](CHANGELOG.md)，不要从版本号推断兼容性。
 
@@ -128,7 +128,7 @@ xiyouji/
 ├── .github/workflows/     # CI/Security/Deploy Pages/Lighthouse/截图审查
 ├── README.md              # 本文件（用户手册 + 开发者分区）
 ├── STRUCTURE.md           # 目录结构详细说明
-├── CHANGELOG.md           # 更新日志（W001-W455）
+├── CHANGELOG.md           # 更新日志（W001-W458）
 └── LICENSE                # 双协议授权声明
 ```
 
@@ -167,7 +167,7 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 
 ## 文档索引（双索引可追溯）
 
-- **正向索引（时间线）**：[CHANGELOG.md](CHANGELOG.md) — 按版本记录变更，每版本段标注唯一 W### ID（W001-W455）+ 四件套（来源/文件/验证/状态）。v0.1-v2.0.60 历史归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)
+- **正向索引（时间线）**：[CHANGELOG.md](CHANGELOG.md) — 按版本记录变更，每版本段标注唯一 W### ID（W001-W458）+ 四件套（来源/文件/验证/状态）。v0.1-v2.0.60 历史归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)
 - **反向索引（文件）**：[scripts/output/file-index.md](scripts/output/file-index.md) — 给定文件查改过几次、对应哪个 W 条目
 
 **W### 编号规则**：W001-W099 对应 v0.1-v2.0.72；W100+ 对应 v2.1.0+；新增 W 条目时同步更新两个索引。详细映射见 [CHANGELOG.md](CHANGELOG.md)。

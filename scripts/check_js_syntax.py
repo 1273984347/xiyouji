@@ -22,10 +22,25 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+SITE_ROOT = ROOT / "site"
 DEFAULT_DATA_DIR = ROOT / "site" / "data"
 DASHBOARD_FILE = ROOT / "site" / "dashboard.html"
 
+# W457 扩展：默认 --all 递归扫描 site/ 全站（根 + data + en），
+# 排除下划线前缀模板（_shell.html/_template.html 含 {{PAGE_TITLE}} 占位符，node --check 会误报）。
+EXCLUDE_PREFIX = "_"
+
 SCRIPT_RE = re.compile(r"<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>", re.DOTALL)
+
+
+def collect_site_html_files(root_dir: Path) -> list:
+    """递归收集 site/ 下全部 .html，排除下划线前缀模板。"""
+    files = []
+    for dirpath, _dirs, fnames in os.walk(root_dir):
+        for fn in sorted(fnames):
+            if fn.endswith(".html") and not fn.startswith(EXCLUDE_PREFIX):
+                files.append(Path(dirpath) / fn)
+    return files
 
 
 def check_file(html_file: Path, errors: list, verbose: bool = False) -> int:
@@ -118,24 +133,30 @@ def main():
 
     else:
         # Batch mode (default when no --file)
+        # W457：全站模式委托 node 单进程版（vm.Script 批量编译，秒级）；
+        # 原「每块 spawn node --check」机制在 233 页规模下 120s 内跑不完。
+        node_js = ROOT / "scripts" / "check_js_syntax.js"
+        if not args.dir and node_js.exists():
+            r = subprocess.run(["node", str(node_js)], capture_output=False)
+            raise SystemExit(r.returncode)
+
         if args.dir:
             d = Path(args.dir)
             if not d.is_absolute():
                 d = ROOT / args.dir
             target_dir = d
+            html_files = collect_html_files(target_dir)
+            if not html_files:
+                print(f"[FAIL] no HTML files found under {target_dir}")
+                raise SystemExit(1)
+            print(f"Scanning {len(html_files)} HTML file(s) under {target_dir}\n")
         else:
-            target_dir = DEFAULT_DATA_DIR
+            html_files = collect_site_html_files(SITE_ROOT)
+            if not html_files:
+                print(f"[FAIL] no HTML files found under {SITE_ROOT}")
+                raise SystemExit(1)
+            print(f"Scanning {len(html_files)} HTML file(s) under {SITE_ROOT}\n")
 
-        if not target_dir.exists() or not target_dir.is_dir():
-            print(f"[FAIL] directory not found: {target_dir}")
-            raise SystemExit(1)
-
-        html_files = collect_html_files(target_dir)
-        if not html_files:
-            print(f"[FAIL] no HTML files found under {target_dir}")
-            raise SystemExit(1)
-
-        print(f"Scanning {len(html_files)} HTML file(s) under {target_dir}\n")
         for html_file in html_files:
             check_file(html_file, errors)
 

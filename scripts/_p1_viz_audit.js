@@ -32,7 +32,7 @@ async function auditPage(page, file) {
   await page.waitForTimeout(2200);
 
   const data = await page.evaluate(() => {
-    const out = { canvases: [], svgs: [], overflow: null };
+    const out = { canvases: [], svgs: [], overflow: null, styleBroken: false };
     const webglIds = [];
     document.querySelectorAll('canvas').forEach(c => {
       const r = c.getBoundingClientRect();
@@ -59,6 +59,12 @@ async function auditPage(page, file) {
       if (el.scrollWidth - el.clientWidth > 4) clipped.push({ cls: el.getAttribute('class'), over: el.scrollWidth - el.clientWidth });
     });
     out.clipped = clipped;
+    // W457 补：样式生效断言——整页 CSS 裸奔（url 括号笔误致 bad-url 吞块）时 body 背景透明 + 主 style 块规则骤减
+    const cs = getComputedStyle(document.body);
+    const mainStyle = document.querySelector('style');
+    let mainRules = -1;
+    try { mainRules = mainStyle && mainStyle.sheet ? mainStyle.sheet.cssRules.length : -1; } catch (e) {}
+    out.styleBroken = cs.backgroundColor === 'rgba(0, 0, 0, 0)' && mainRules <= 1;
     return out;
   });
 
@@ -67,6 +73,8 @@ async function auditPage(page, file) {
   const flags = [];
   // 零尺寸 canvas
   data.canvases.filter(c => c.zero).forEach(c => flags.push('zero-size-canvas#' + c.id));
+  // W457 补：样式裸奔（整页 CSS 未生效）
+  if (data.styleBroken) flags.push('style-broken');
   // WebGL 失败
   data.canvases.filter(c => /webgl|three|gl/i.test((c.id||'')+' '+((c.cls)||'')) && c.glOk === false).forEach(c => flags.push('webgl-fail#' + c.id));
   // SVG 空白（仅对可视化候选页判定为缺陷；其余仅记录）
