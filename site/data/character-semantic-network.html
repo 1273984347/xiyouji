@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-JIerHaJ50zzdT6kNlxAzC8byI9JCQaC7D3DCvWlq3Vw=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-0z93MuHNzTiLdO35Bq1o/tnvU+2Ng23h8iTsG+UlHWc=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>人物语义网络可视化 · 详解西游记</title>
@@ -796,7 +796,7 @@ header .meta { color: var(--accent-3); font-size: 0.9em; margin-top: 8px; }
 .node-label { font-size: 11px; fill: var(--fg); pointer-events: none; }
 .node-circle { cursor: pointer; }
 .node-circle:hover { stroke: var(--accent); stroke-width: 2px; }
-.tooltip { position: absolute; background: rgba(44,36,24,0.95); color: #fff; padding: 8px 12px; border-radius: 4px; font-size: 0.85em; pointer-events: none; z-index: 100; max-width: 280px; }
+/* 墨韵（W461）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
 footer { text-align: center; margin-top: 40px; padding: 20px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85em; }
     </style>
 <style id="audit-halo">
@@ -1112,7 +1112,7 @@ function renderForce(selector, nodes, links, colorMap, groupKey, height) {
   const width = +svg.attr('width') || 800;
   svg.attr('viewBox', `0 0 ${width} ${height}`);
   svg.selectAll('*').remove();
-  const tooltip = d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0);
+  const tooltip = d3.select('body').append('div').attr('class', 'chart-tooltip');
 
   const sim = d3.forceSimulation(nodes).alphaDecay(0.08).velocityDecay(0.5)
     .force('link', d3.forceLink(links).id(d => d.id).distance(80).strength(d => 0.1 + d.weight * 0.02))
@@ -1168,10 +1168,10 @@ const link = svg.append('g').selectAll('line').data(links).enter().append('line'
   const node = svg.append('g').selectAll('circle').data(nodes).enter().append('circle')
     .attr('class', 'node-circle').attr('r', d => 8 + (d.id.length > 2 ? 2 : 0))
     .attr('fill', d => colorMap[d[groupKey]] || '#8b7355')
-    .on('mouseover', (e,d) => { tooltip.transition().duration(200).style('opacity', .9);
+    .on('mouseover', (e,d) => { tooltip.classed('visible', true);
       tooltip.html(`<strong>${d.id}</strong><br>分组: ${d[groupKey]}`); })
     .on('mousemove', e => tooltip.style('left', (e.pageX+10)+'px').style('top', (e.pageY-28)+'px'))
-    .on('mouseout', () => tooltip.transition().duration(500).style('opacity', 0));
+    .on('mouseout', () => tooltip.classed('visible', false));
 
   const label = svg.append('g').selectAll('text').data(nodes).enter().append('text')
     .attr('class', 'node-label').attr('text-anchor', 'middle').attr('dy', -12).text(d => d.id);

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-tcDTlH6aC3tlRzXdsgijTxZeYLXktAy3ew+NLAL71uA=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ugkEvygncdCqXFsjoJ9ykEvqqjWRumJ0mWqsDSbGE0o=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>十二维叙事学关系图谱 · W175 · 详解西游记</title>
@@ -873,17 +873,7 @@ header.hero .meta {
 .legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
 
 /* Tooltip */
-.tooltip {
-  position: absolute;
-  background: var(--tooltip-bg);
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 0.84em;
-  pointer-events: none;
-  z-index: 100;
-  max-width: 300px;
-}
+/* 墨韵（W461）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
 
 /* Empty state */
 .empty-state {
@@ -1346,9 +1336,9 @@ function renderOverview(dimensions) {
 }
 
 function showDimTooltip(event, d) {
-  let tip = d3.select('.tooltip');
+  let tip = d3.select('.chart-tooltip');
   if (tip.empty()) {
-    tip = d3.select('body').append('div').attr('class', 'tooltip');
+    tip = d3.select('body').append('div').attr('class', 'chart-tooltip');
   }
   tip.html('')
     .style('opacity', 0.95)
@@ -1361,7 +1351,7 @@ function showDimTooltip(event, d) {
   tip.append('div').text('应用案例：' + d.案例);
   tip.append('div').text('理论深度：' + d.理论深度 + ' · 文本覆盖：' + d.文本覆盖);
   tip.append('div').text('跨专题关联：' + d.跨专题关联 + ' · 学术价值：' + d.学术价值);
-  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3500);
+  setTimeout(() => tip.classed('visible', false), 3500);
 }
 
 // ============================================================
@@ -1387,9 +1377,9 @@ function renderForce(dimensions, links) {
     return 14 + (d.学术价值 || 70) / 10;
   }
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   const sim = d3.forceSimulation(nodes).alphaDecay(0.08).velocityDecay(0.5)
     .force('link', d3.forceLink(linkData).id(d => d.id)
@@ -1461,7 +1451,7 @@ const link = svg.append('g').selectAll('.rel-link')
     .attr('stroke-width', 2.5)
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3.5);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.编号 + ' · ' + d.维度 + '</strong>');
       tooltip.append('div').text('专题：' + d.专题);
@@ -1480,7 +1470,7 @@ const link = svg.append('g').selectAll('.rel-link')
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2.5);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   // 拖拽
@@ -1602,9 +1592,9 @@ function renderSankey(sankeyLinkData, dimensions, theoristColors) {
 
   const graph = sankeyGen({ nodes, links });
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   // 链接
   svg.append('g').selectAll('path')
@@ -1622,7 +1612,7 @@ function renderSankey(sankeyLinkData, dimensions, theoristColors) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke-opacity', 0.75);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
       tooltip.append('div').text('理论应用权重：' + d.value);
@@ -1632,7 +1622,7 @@ function renderSankey(sankeyLinkData, dimensions, theoristColors) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke-opacity', 0.4);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   // 节点
@@ -1655,7 +1645,7 @@ function renderSankey(sankeyLinkData, dimensions, theoristColors) {
     .attr('stroke-width', 1)
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.name + '</strong>');
       const catLabel = ['叙事学维度', '关联理论家', '西游应用案例'][d.cat] || '';
@@ -1668,7 +1658,7 @@ function renderSankey(sankeyLinkData, dimensions, theoristColors) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   // 节点标签
@@ -1765,9 +1755,9 @@ function renderRadar(dimensions) {
       .text(lvl * 20);
   }
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   // 每个维度一个多边形
   dimensions.forEach(dim => {
@@ -1788,7 +1778,7 @@ function renderRadar(dimensions) {
       .style('cursor', 'pointer')
       .on('mouseover', function(e) {
         d3.select(this).attr('fill-opacity', 0.28);
-        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.classed('visible', true);
         tooltip.html('');
         tooltip.append('div').html('<strong>' + dim.编号 + ' · ' + dim.维度 + '（' + dim.专题 + '）</strong>');
         metrics.forEach(metric => {
@@ -1800,7 +1790,7 @@ function renderRadar(dimensions) {
       })
       .on('mouseout', function() {
         d3.select(this).attr('fill-opacity', 0.08);
-        tooltip.transition().duration(400).style('opacity', 0);
+        tooltip.classed('visible', false);
       });
 
     // 顶点圆
@@ -1857,9 +1847,9 @@ function renderTimeline(timelineData) {
     .domain([60, 100])
     .range([innerH, 0]);
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   // 背景网格
   g.append('g')
@@ -1890,7 +1880,7 @@ function renderTimeline(timelineData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3.5);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.编号 + ' · ' + d.维度 + '</strong>');
       tooltip.append('div').text('专题：' + d.专题);
@@ -1904,7 +1894,7 @@ function renderTimeline(timelineData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2.5);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   // 编号标签（节点上方）

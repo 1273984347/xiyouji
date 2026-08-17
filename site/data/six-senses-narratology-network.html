@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-w2W1AWgCOwM4sJjlRi5CCSq22e0w8IAzAHw0CT13oZM=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-4RlnRML0dFvw2Db4OsALjpb6/1CTQR11U6+xmcctgo8=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>六感叙事学关系图谱 · W168 · 详解西游记</title>
@@ -867,17 +867,7 @@ header.hero .meta {
 .legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
 
 /* Tooltip */
-.tooltip {
-  position: absolute;
-  background: var(--tooltip-bg);
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 0.84em;
-  pointer-events: none;
-  z-index: 100;
-  max-width: 300px;
-}
+/* 墨韵（W461）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
 
 /* Empty state */
 .empty-state {
@@ -1341,9 +1331,9 @@ function renderOverview(senses) {
 }
 
 function showSenseTooltip(event, d) {
-  let tip = d3.select('.tooltip');
+  let tip = d3.select('.chart-tooltip');
   if (tip.empty()) {
-    tip = d3.select('body').append('div').attr('class', 'tooltip');
+    tip = d3.select('body').append('div').attr('class', 'chart-tooltip');
   }
   tip.html('')
     .style('opacity', 0.95)
@@ -1356,7 +1346,7 @@ function showSenseTooltip(event, d) {
   tip.append('div').text('案例数：' + d.案例数);
   tip.append('div').text('引用度：' + d.引用度);
   tip.append('div').text('理论年代：' + d.理论年代);
-  setTimeout(() => tip.transition().duration(400).style('opacity', 0), 3000);
+  setTimeout(() => tip.classed('visible', false), 3000);
 }
 
 // ============================================================
@@ -1394,9 +1384,9 @@ function renderForce(networkData) {
     return d.color || '#8b4513';
   }
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   const sim = d3.forceSimulation(nodes)
     .force('link', d3.forceLink(links).id(d => d.id)
@@ -1495,7 +1485,7 @@ const structLink = svg.append('g').selectAll('.struct-link')
     .attr('stroke-width', 2)
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 3);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       if (d.type === 'theorist') {
         const parent = nodes.find(n => n.id === d.parent);
@@ -1520,7 +1510,7 @@ const structLink = svg.append('g').selectAll('.struct-link')
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 2);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   nodeG.append('text')
@@ -1639,9 +1629,9 @@ function renderRadar(radarData) {
       .text(lvl * 2);
   }
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   // 每个感官一个多边形
   radarData.forEach(role => {
@@ -1663,7 +1653,7 @@ function renderRadar(radarData) {
       .style('cursor', 'pointer')
       .on('mouseover', function(e) {
         d3.select(this).attr('fill-opacity', 0.35);
-        tooltip.transition().duration(200).style('opacity', 0.95);
+        tooltip.classed('visible', true);
         tooltip.html('');
         tooltip.append('div').html('<strong>' + role.sense + '叙事学</strong>');
         dimensions.forEach(dim => {
@@ -1675,7 +1665,7 @@ function renderRadar(radarData) {
       })
       .on('mouseout', function() {
         d3.select(this).attr('fill-opacity', 0.12);
-        tooltip.transition().duration(400).style('opacity', 0);
+        tooltip.classed('visible', false);
       });
 
     // 顶点圆
@@ -1761,9 +1751,9 @@ function renderSankey(sankeyLinkData) {
 
   const graph = sankeyGen({ nodes, links });
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   // 链接
   svg.append('g').selectAll('path')
@@ -1780,7 +1770,7 @@ function renderSankey(sankeyLinkData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke-opacity', 0.75);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.source.name + ' → ' + d.target.name + '</strong>');
       tooltip.append('div').text('流量权重：' + d.value);
@@ -1790,7 +1780,7 @@ function renderSankey(sankeyLinkData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke-opacity', 0.4);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   // 节点
@@ -1812,7 +1802,7 @@ function renderSankey(sankeyLinkData) {
     .attr('stroke-width', 1)
     .on('mouseover', function(e, d) {
       d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.name + '</strong>');
       const catLabel = ['感官', '四层结构', '西游案例'][d.cat] || '';
@@ -1825,7 +1815,7 @@ function renderSankey(sankeyLinkData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   // 节点标签
@@ -1884,9 +1874,9 @@ function renderTimeline(timelineData) {
     .domain([yearMin - 50, yearMax + 50])
     .range([innerH, 0]);
 
-  const tooltip = d3.select('body').selectAll('.tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'tooltip').style('opacity', 0)
-    : d3.select('.tooltip');
+  const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
+    : d3.select('.chart-tooltip');
 
   // 背景网格
   g.append('g')
@@ -1931,7 +1921,7 @@ function renderTimeline(timelineData) {
     .style('cursor', 'pointer')
     .on('mouseover', function(e, d) {
       d3.select(this).attr('r', 15);
-      tooltip.transition().duration(200).style('opacity', 0.95);
+      tooltip.classed('visible', true);
       tooltip.html('');
       tooltip.append('div').html('<strong>' + d.专题 + ' · ' + d.感官 + '叙事学</strong>');
       tooltip.append('div').text('创建：' + d.创建);
@@ -1943,7 +1933,7 @@ function renderTimeline(timelineData) {
     })
     .on('mouseout', function() {
       d3.select(this).attr('r', 12);
-      tooltip.transition().duration(400).style('opacity', 0);
+      tooltip.classed('visible', false);
     });
 
   // 专题标签（X 轴下方）

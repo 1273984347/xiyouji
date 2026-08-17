@@ -4,9 +4,20 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W460），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W461），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.76（2026-08-17）：W461 墨韵 W-c 网络页批 — 16 页 tooltip 收编 + KPI count-up 补齐（P2×1）
+
+> **来源**：W460 墨韵方案 W-c 批（16 个 forceSimulation 网络页·T2 模式：允许 tooltip 统一 + hover 高亮，禁止入场 stagger 防 force tick 冲突）+ critique 留置 P2 处置（P2-2 图表页 KPI count-up 落地；P2-1 fetch loading 态经边际收益评估延期至 W-g——网络页数据以 EMBEDDED 同步渲染为主无实际空白等待期，批量改 10 页 fetch 流程侵入高收益低）。
+> - **执行（分型收编）**：16 页按 tooltip 实现分四型——**A 组 10 页**（guanyin/heaven/intertextuality/monster-hierarchy/monster-victims/monster-female/underworld/six-senses/narratology-12d/narratology-13d·d3 动态创建 `attr('class','tooltip')` + `transition().duration().style('opacity',0.9x)` 显隐）：CSS `.tooltip{}` 盒样式块删除 + 创建类名改 `chart-tooltip`（含查询选择器）+ 显隐改 `.classed('visible')`（52 处显/57 处隐）；**B 组 1 页**（character-semantic·同构 `.9` 简写变体）同规则；**C 组 2 页**（character-dynamic 静态 `network-tip` 富结构/pilgrim-team-dynamic 静态 `svg-tooltip`×2）：div 类换 `chart-tooltip`（id 保留·JS 按查不变）+ 派生选择器改 id 作用域 + 宣纸底配色重映射（金 #e9b885→朱砂/淡墨系）；**D 组 3 页**（four-dimensional-research/monster-ecology/theological-intervention）原生无 tooltip 无 hover——本批不新增功能（T2 范围纪律），豁免记录。
+> - **执行（P2-2 count-up）**：chapter-stats（千分位格式 value 如 62,800·动画中间值 toLocaleString·终值精确还原原文）+ character-appearance（纯数字过滤·文本型 value 如首现人名跳过）各追加 count-up 脚本；修复一处时序 bug——`main()` 为 async，count-up 同步执行时 renderKPI 尚未建元素致 els 为空直接退出，改为轮询等待（100ms×50 上限 5s·fail-open 保持终值）。
+> - **验证（门禁）**：generate_csp 重算三轮共 15 页（11+1 批量 / 2 count-up / 1 belbin）233 页 1149 哈希 0 漂移；check_js_syntax 232 文件；check_structure 232 文件 630 块；lint_links 4122 链接 0 broken；verify_delivery 核心全绿；16 页 `.duration(N)` 全部 ≤600。
+> - **验证（运行时）**：Playwright 断言 **48/48**（16 页 pageerror=0 + 节点渲染>0 + 旧 tooltip 类清零 + 13 页 hover 触发后 `.chart-tooltip.visible` 宣纸底 rgb(255,255,255)；hover 用 dispatchEvent 触发——物理 hover 被邻域高亮层/topnav 遮挡拦截）；count-up 断言两页 animated=true（first=0·千分位/人名过滤正确）。
+> - **验证（性能基线·改前/改后）**：intertextuality settle 2206→2205ms·FPS 61→60（-1.6%≤5%）·longTask 2→2；narratology-13d 2208→2215ms（+0.3%）·61→61·2→2；heaven-power 2208→2215ms（+0.3%）·61→61·3→3——**三项判据全过，tooltip 收编零性能回归**（基线存档 scripts/output/w461-perf-{before,after}.json）。
+> - **过程缺陷（已修复）**：① 批量正则误伤防护——显隐替换前 grep 上下文确认 `classed('visible')` 全部作用于 tooltip/tip 变量（0 误伤）；② C 组 pilgrim 漏改第二个 tooltip（belbin-tip）被「旧类清零」断言捕获后补改——断言先行价值实证；③ count-up async 时序 bug（见上）；④ Playwright 物理 hover 不可靠（遮挡层拦截）改 dispatchEvent。
+> - **状态**：已落地·随本 commit 提交。墨韵累计：W460（P0+样板 6 页）+ W461（网络 13/16 页+P2-2）→ 待续 W-d/W-e（40 统计页）→ W-f（22 页·覆盖等式=0）→ W-g（P2 三页 + .chart-loading 类 + DESIGN.md §5 重写）。
 
 ### v2.3.75（2026-08-17）：W460 墨韵全站动效体系 — P0 基础层 + 样板 6 页（W-a/W-b 批）
 

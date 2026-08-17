@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-k+o2S+sKtY8/uQU0akXpIWjEaCMuDzXwF7NfkkcCe6s=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-z1YxsPhguM9/2Z8nSwYigEc7GeUFJtImxVedYlNuSAU=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>人物关系动态网络 · 详解西游记</title>
@@ -837,14 +837,11 @@ td.num, th.num {
         .node-circle:hover { stroke: #23201A; stroke-width: 2.5px; }
         .node-label { font-size: 12px; fill: var(--ink); pointer-events: none; font-weight: 600; }
         .node-label.dim { fill: #b8a584; font-weight: 400; }
-        .network-tip {
-            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
-            color: #f5e9d4; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem;
-            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 320px;
-        }
-        .network-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
-        .network-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
-        .network-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
+        /* 墨韵（W461）：tooltip 盒样式统一采用 system.css .chart-tooltip；以下内部结构样式改宣纸底配色 */
+        #network-tip .tip-title { font-weight: bold; color: var(--accent); margin-bottom: 6px; font-size: 0.95rem; }
+        #network-tip .tip-row { color: var(--ink); line-height: 1.5; }
+        #network-tip .tip-row strong { color: var(--accent-3); }
+        #network-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: var(--ink-soft); margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--line); }
         .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
         .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
         .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 50%; }
@@ -973,7 +970,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="net-title">人物关系动态网络图</title>
                     <desc id="net-desc">35 节点 50 边的力导向图，按阶段切换显示活跃关系。</desc>
                 </svg>
-                <div class="network-tip" id="network-tip" role="tooltip"></div>
+                <div class="chart-tooltip" id="network-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="network-legend" aria-label="图例"></div>
         </section>
@@ -1293,11 +1290,11 @@ const link = svg.append("g")
                 const myEdges = activeEdges.filter(e =>
                     (e.source.id || e.source) === d.id || (e.target.id || e.target) === d.id
                 );
-                tip.style("opacity", 1)
+                tip.classed("visible", true)
                     .html(`<div class="tip-title">${d.id}</div>
-                        <div class="tip-row">阵营：<strong style="color:#e9b885">${FACTIONS[d.faction].label}</strong></div>
-                        <div class="tip-row">出场频次：<strong style="color:#e9b885">${d.freq}</strong></div>
-                        <div class="tip-row">本阶段关系数：<strong style="color:#e9b885">${myEdges.length}</strong></div>
+                        <div class="tip-row">阵营：<strong>${FACTIONS[d.faction].label}</strong></div>
+                        <div class="tip-row">出场频次：<strong>${d.freq}</strong></div>
+                        <div class="tip-row">本阶段关系数：<strong>${myEdges.length}</strong></div>
                         <div class="tip-row">活跃阶段：${d.stages.map(s => "阶段" + s).join(" / ")}</div>
                         <div class="tip-meta">${STAGE_RANGES[stage].name} · ${STAGE_RANGES[stage].desc}</div>`);
             })
@@ -1314,7 +1311,7 @@ const link = svg.append("g")
                     else if (neighborhoodNode && !_linkedTo(e, neighborhoodNode)) op = 0.1;
                     return op;
                 }).attr("stroke-width", e => wScale(e.weight));
-                tip.style("opacity", 0);
+                tip.classed("visible", false);
             })
             .call(d3.drag()
                 .on("start", (event, d) => {
