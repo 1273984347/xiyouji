@@ -4,11 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W463），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W476），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
+
+### v2.3.79（2026-08-18）：W476 Phase E0 纸感轻立体宪改 + tokens v3 — 视觉高级感升级轨（Phase E）启动批
+
+> **来源**：用户指令「在 Phase 3 路线图基础上写全面美化升级方案」→ 产出 [Phase E 路线图](docs/superpowers/plans/2026-08-18-phase-e-visual-elevation-roadmap.md)（W476–W483 预排编号·六维度：色彩/排版/深度/微交互/组件/响应式）→ 用户「确认三问」：① 采纳「纸感轻立体」方向 ② 暗色模式纳入 E7 ③ W465 归档判定冻结本轨于 E1 完成态。本批执行 E0（取证 + 宪改 + 令牌层）。编号说明：Phase E 为并行轨，W476-W483 已在方案预排，不与 Phase 3 W464-W475 顺位冲突。
+> - **执行（E0 探针取证·P1-P6）**：`scripts/_e0_probe.py`（一次性诊断·不入门禁）扫 233 页——P1 页面内联裸色 hex 9336 + rgb 6986 = 16322 处（232/233 页·图表数据色为豁免主体）；P2 transition 形态 var(--dur-*) 1568 vs 裸 1452（0.15s×884/0.2s×248 为主·全部 ≤600ms 无违规·初报「15s×10」为 `.15s` 正则误判）；P3 根页实为 8 页 + _template（方案「9 根页」口径修正·tag-cloud/search 在 data/·6 用户可见根页结构异质）；P4 Noto Sans SC 两档未子集化（771KB/页·最大字体重量点·E1/E5 候选优化）；P5 tokens+system = 24.6KB/页内联 225 页·增量预算确立；P6 公共组件选择器重复面 .hero/.section/footer 227 页·.topnav/.card 225 页·.site-footer/.chart-tooltip 224 页——E2/E3「页面内联只减不增」主攻面。产出 [E0 探针报告](docs/superpowers/plans/2026-08-18-phase-e-e0-probe-report.md)。
+> - **执行（DESIGN.md §4A 宪改）**：新增「纸感轻立体体系」章（8 节）——4A.1 演进声明（三不变：宣纸底/墨骨/朱砂单点·三引入：海拔/白名单渐变/排版节奏）；4A.2 四级海拔（--elev-0~4·墨色低 alpha·hover 升一级·禁硬编码阴影）；4A.3 渐变白名单仅三处（hero 玄墨微渐变/主按钮朱砂微渐变/骨架 shimmer·其余禁渐变）；4A.4 排版阶梯（1.25 大三度·--text-step-0~5 + fluid hero）；4A.5 圆角边框（--radius-sm~pill·卡片 md/弹层 lg/pill 仅 tab 系）；4A.6 断点系统（640/768/1024/1280/1536·最小验收 375px）；4A.7 微交互清单（按钮/卡片/链接/导航/滚动显现·时长取 §5 契约档·禁 bounce/旋转/循环/parallax）；4A.8 体积预算红线（tokens ≤+2KB·system ≤+6KB）。§1.1 同步演进指针；§5 动效契约不动。
+> - **执行（tokens.css v2→v3）**：新增 v3 令牌层——--elev-0~4 海拔（1/2 复用 --shadow/--shadow-lift）；--radius-sm 2/md 6/lg 10/pill 999 + --border-hairline/--border-accent；色阶派生 --accent-deep #AF3F34（700 档静态 hex 兜底老浏览器）+ --accent-tint/-wash 与 --ink-tint（color-mix 派生·失效退透明无害）；语义功能色 --ok/--warn/--danger/--info + 各 -bg 档；排版 --text-step-0~5 + --text-hero clamp + --leading×3。增量 +2035B（5715→7750B）≤ +2KB 预算。
+> - **执行（传播）**：`inline_css.py --force` 同步 225 页（data 87 + en 138）；site 根页 `<link>` 实时引用自动跟随。抽查 data/81-hardships + en/index + data/tag-cloud 见 --elev-4/--text-step-5。
+> - **文件**：DESIGN.md、site/tokens.css、site/data+en 225 页（inline_css 重内联）、docs/superpowers/plans/（Phase E 路线图 v1.1 + E0 探针报告 2 份新增）、scripts/_e0_probe.py（untracked 诊断工具·`_` 前缀不入库）、六文档。
+> - **验证**：check_structure 232 文件 630 块通过；check_js_syntax 232 文件通过；generate_csp --check 233 页 1173 哈希 0 漂移（纯样式改动不涉脚本哈希）；lint_links 4122 链接 0 broken；verify_delivery 核心全绿（611 计数/A4 209/A1 相邻性/sitemap 228/回退模式/数据漂移/腐蚀/动态链接）。
+> - **状态**：已落地·随本 commit 提交。E0 收口·下一批 E1（system.css v2 + 6 用户可见根页模板化·W477）。
 
 ### v2.3.78（2026-08-17）：W463 墨韵 W-g 收尾固化 + W-f 扫尾批 — DESIGN.md §5 动效宪法 + loading/fade-in 落地（墨韵系列收官）
 
