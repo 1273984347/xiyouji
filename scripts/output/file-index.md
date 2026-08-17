@@ -598,3 +598,10 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
+
+> 当前版本 v2.3.78（2026-08-17）
+
+## W463 墨韵系列收官：DESIGN.md §5 重写为九节强制契约（时长三档/RM 双守卫/tooltip/count-up/loading/性能红线）+ system.css .chart-loading/.chart-fade-in 225 页同步 + P2-1 loading 接入 6 页（MutationObserver 自移除·search 语义不符回退）+ W-f fade-in 3 页 + text-search 豁免——86 页动效全覆盖覆盖等式归零；两 bug 断言驱动修复；CSP 1173 哈希 0 漂移 + verify 全绿（2026-08-17）
+
+| 文件 | W | 说明 |
+|---|---|---|

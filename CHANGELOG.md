@@ -4,9 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W462），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W463），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.78（2026-08-17）：W463 墨韵 W-g 收尾固化 + W-f 扫尾批 — DESIGN.md §5 动效宪法 + loading/fade-in 落地（墨韵系列收官）
+
+> **来源**：墨韵方案 W-g（P2 处置 + DESIGN.md §5 重写）与 W-f（9 页非 D3 扫尾）合批执行——用户指令「先开工 W-g 把规范写进 DESIGN.md，开始 W-f 扫尾」。两批共享 system.css 新类与验证管道，覆盖等式归零：16（W-c）+57（W-d/e）+9（W-f）= 82 推广页 + 4 样板页 + index/dashboard = 86 全量。
+> - **执行（W-g·DESIGN.md §5 动效规范重写·5.1-5.3 → 5.1-5.9）**：时长预算三档（反馈 ≤150/状态 ≤250/入场 ≤600）+ 白名单例外仅 hero 600ms 与 count-up 900ms；缓动令牌单一事实源；**RM 双守卫**（调用点级 MOYUN_RM 包裹 + prototype 级 patch·W462 实测背书）；tooltip 契约（.chart-tooltip/.classed('visible')/宣纸底语义色/禁暗底金色）；count-up 契约（IO 一次/千分位/终值还原/fail-open 铁律）；表格动效 opt-in；**fetch loading 态**（.chart-loading·EMBEDDED 同步页禁接入防闪烁）；性能红线（transform/opacity only·forceSimulation 禁入场 stagger·改动后必跑 CSP/结构门禁）。
+> - **执行（W-g·system.css 两新类 + inline_css --force 225 页同步）**：`.chart-loading`（呼吸底块 + 朱砂 spinner·RM 停帧可见）与 `.chart-fade-in`（500ms 一次性淡入微上移·RM 直接可见）。
+> - **执行（W-g P2-1 + W-f 合流·loading 接入 6 页）**：fetch 主导页取证 7 页（5 无回退 + 2 FALLBACK），实际接入 6 页——**容器形态 4 页**（81-hardships-view/character-relationship-3d-view/data-explorer 插 #chartHost·graph-explorer 插 #graphBox）+ **svg 兄弟形态 2 页**（chapter-stats/character-appearance 各 3 个静态 svg 前插骨架·共 11 个 loading div）；统一 MutationObserver 自移除脚本（svg 出现子元素/容器出现非骨架子元素即移除·8s 超时兜底）。**search 回退**：#results 初始为待输入空态非加载态，接入语义不成立，撤回。
+> - **执行（W-f·fade-in 3 页 + 豁免）**：character-relationship-3d/journey-geo-3d（three 容器 #three-container）+ perf-canvas-rendering（canvas#canvas-render）挂 `.chart-fade-in` 首帧淡入；text-search 纯静态检索页零动效点纯豁免。
+> - **过程缺陷（两 bug·断言驱动修复）**：① svg 兄弟形态方向写反——loading 在 svg **前**应查 `nextElementSibling`（初版误写 previousElementSibling 恒 null→骨架永挂）；② **microtask 时序**——脚本块间 microtask 队列清空，file:// 下 mock 回退渲染可先于 body 尾 observer 脚本完成，之后无变化永不触发——修复为 observer 注册前**初始检查**（已渲染直接移除）。两 bug 均由 Playwright 断言（fin=3≠0）捕获后逐层定位（CSP 嫌疑排除→DOM 结构取证→脚本块时序推演）。
+> - **验证（门禁）**：generate_csp 重算三轮（7+7+6 页）·233 页 1173 哈希 0 漂移；check_js_syntax 232 文件；check_structure 630 块；lint_links 4122 链接 0 broken；verify_delivery 核心全绿。
+> - **验证（运行时·file://）**：6 loading 页骨架全部自移除（chapter-stats content=285/character-appearance content=1007 渲染完整）；3 fade-in 页动画中间态 opacity<1 → 1 后 canvas 渲染正常；RM 下 loading 停帧可见/fade-in animation=none 直达 opacity=1；pageerror=0。http 模式抽测 chapter-stats mock 回退正常（数据未生成属页面原有提示·与 loading 无关）。
+> - **范围纪律记录**：character-relationship-3d-view 为 API 视图页，file:// 下 chartHost 无渲染（页面固有行为），骨架 8s 超时后移除回原状、http API 模式真实生效；data-explorer chartbox 初始 display:none（选择数据集后显示），骨架在隐藏容器内无视觉影响。
+> - **状态**：已落地·随本 commit 提交。**墨韵系列收官**：W460（P0 基础层+样板 6 页）→ W461（网络 16 页）→ W462（统计 57 页+卫生 154 页）→ W463（固化+扫尾 9 页）——86 可视化页动效全覆盖，规范沉淀 DESIGN.md §5。
 
 ### v2.3.77（2026-08-17）：W462 墨韵 W-d/W-e 统计页批 — 57 页动效规范化 + tooltip 收编 + count-up 18 页 + 全站 body 去重
 
@@ -20,6 +33,7 @@
 > - **过程缺陷（已修复）**：① 计数预期表 2 处误差（hexGold 多 1）——复核均为合法 tooltip/正文链接上下文（金→朱砂提升宣纸底对比度），脚本行为正确；② ai-dialogue/century-dialogue svg=0 为对话类页面正常形态（body 853/633 字符·div 59/31·0 pageerror），非渲染失败。
 > - **范围纪律记录**：20 静态 D3 页中 11 页纯豁免（无 tooltip/count-up/transition——仅享 P0 CSS 层 + body 去重）；入场编排分层（轴→网格→标记 stagger）维持 W-b 样板级实现，批量页仅做时长归一 + RM 守卫 + tooltip/count-up 接入，全量编排升级列 W-g 后续候选；EN 站 JS 级动效未做（CSS 级 P0 已 225 页同步）。
 > - **状态**：已落地·随本 commit 提交。墨韵累计：W460（P0+样板 6 页）+ W461（网络 16 页）+ W462（统计 57 页 + 卫生 154 页）→ 待续 W-f（9 页非 D3·覆盖等式=0）→ W-g（P2 三页 + .chart-loading 类 + DESIGN.md §5 重写）。
+
 
 ### v2.3.76（2026-08-17）：W461 墨韵 W-c 网络页批 — 16 页 tooltip 收编 + KPI count-up 补齐（P2×1）
 
