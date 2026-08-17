@@ -425,19 +425,81 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 
 ---
 
-## 5. 动画与交互
+## 5. 动画与交互（墨韵动效规范 · W460-W463 固化）
 
-### 5.1 过渡时长
+> 本章为全站动效的**强制性契约**（源自墨韵体系 W460-W463 的实践收敛）。新页面开发、既有页面改造均须遵守；门禁以本章为审查口径。
 
-| 元素 | 时长 | 缓动 |
+### 5.1 时长预算（三档 + 白名单例外）
+
+| 档位 | 预算 | 适用 |
 |:---|:---|:---|
-| kpi-card hover | 0.2s | ease |
-| filter-tab hover/active | 0.2s | ease |
-| search input focus | 0.2s | ease |
-| clear-btn hover | 0.15s | ease |
-| 卡片过滤进入 | 0.25s | ease |
+| 反馈 | ≤150ms | hover 指示条、按钮按压、tooltip 显隐 |
+| 状态 | ≤250ms | 过滤切换、tab 激活、卡片过滤进入 |
+| 入场 | ≤600ms | 图表标记入场、行 stagger、路径 draw-in |
 
-### 5.2 卡片过滤动画
+**白名单例外**（仅此两处，新增须走规范变更）：
+- hero 区强调动效：600ms
+- KPI count-up：900ms（`easeOutExpo`·`1 - 2^(-10t)`）
+
+全站硬指标：`d3 .duration(N)` 数字形态 N ≤ 600（路径 draw-in 的 3000/1800/1500 旧值已全部归一，见 W462）；`.transition()` 裸调用必须显式 `.duration()`。
+
+### 5.2 缓动令牌（tokens.css 单一事实源）
+
+```css
+--dur-fast: 150ms;   --dur-base: 250ms;   --dur-slow: 500ms;
+--ease-out-quart;    --ease-out-expo;     --ease-in-out-soft;
+--shadow-lift;       /* 卡片浮起阴影 */
+```
+
+禁止裸 `ease`/`linear` 新增使用；D3 侧统一 `d3.easeCubicOut`（入场）/`d3.easeCubicInOut`（状态）。
+
+### 5.3 reduced-motion 双守卫（强制）
+
+D3 transition **不受** CSS `prefers-reduced-motion` 全局覆写控制，必须 JS 侧显式短路：
+
+- **调用点级**（默认）：`.duration(MOYUN_RM?0:N)` / `.delay(MOYUN_RM?0:N)`，页面首个含 transition 的内联块顶部注入 `var MOYUN_RM` 守卫（matchMedia 检测 + try/catch fail-open）。
+- **prototype 级**（表达式形态页专用）：`.duration(DUR)`/`.delay(i*80)` 等变量/表达式调用点正则不可达时，patch `d3.transition.prototype.duration/delay` 归零（W462 实测有效·try/catch fail-open）。
+
+CSS 侧动效由 system.css 全局 `@media (prefers-reduced-motion: reduce)` 覆写兜底。
+
+### 5.4 Tooltip 契约（全站统一）
+
+- **类名**：`.chart-tooltip`（system.css 定义：宣纸底 `var(--paper)` + 发丝边 + `--shadow-lift` + 250ms opacity 过渡）。**禁止**页面私有 `.tooltip{}` 盒样式块。
+- **显隐**：`.classed('visible', true/false)` 切换（CSS `.visible{opacity:1}`）。禁止 `transition().style('opacity', 0.9x)` 动态显隐。
+- **静态 div 形态**：`<div class="chart-tooltip" id="xxx">`（id 保留·JS 查询不变）；派生选择器（`.tip-title`/`.tip-row`/`.tip-meta`/`strong`）挂 `.chart-tooltip` 作用域。
+- **配色映射**：tooltip 内文字一律宣纸底语义色——强调 `var(--accent)`（朱砂）、正文 `var(--ink)`、次要 `var(--ink-soft)`/`var(--ink-faint)`。禁止暗底金/奶油色（#e9b885/#f4d4b2/#d9cdb8 等·W461/W462 已全量重映射）。
+- **移动/钳制**：跟随 mousemove，`left/top` 需视口钳制防溢出。
+
+### 5.5 KPI count-up 契约
+
+- 触发：IntersectionObserver threshold 0.5，触发一次即 unobserve。
+- 动画：900ms easeOutExpo，千分位 `toLocaleString('zh-CN')`，**终值精确还原原文**。
+- 过滤：仅纯数字/千分位（`/^[\d,]+$/`）；浮点、文本型 value（如人名）跳过。
+- 时序：KPI 元素在 `await loadData()` 之后创建的，count-up 须轮询等待（100ms×50·上限 5s）。
+- **fail-open 铁律**：HTML 内已含终值文本；reduced-motion / IO 不可用 / 任何异常时保持终值静态显示。
+
+### 5.6 表格动效（opt-in）
+
+- 行 hover：暖纸底 + 左缘 2px 朱砂指示条（inset box-shadow）——全局默认。
+- 行入场 stagger：`.table-anim` opt-in 类（`--row-i` 驱动·第 12 行起 220ms 封顶·纯 CSS animation 终态可见）。
+- 长表 sticky：`.table-wrap--sticky`（行数 > 30 启用·thead sticky 65vh）。
+
+### 5.7 fetch loading 态（.chart-loading）
+
+fetch 主导页（无 EMBEDDED 同步回退）在数据到达前于图表区显示骨架：
+
+- 类：`.chart-loading`（system.css：呼吸底块·纯 CSS animation·RM 下停帧可见）。
+- 移除时机：数据 render 前 `remove()`；fetch 失败且无回退时替换为错误提示（不永久骨架）。
+- fail-open：EMBEDDED 同步渲染页（全站绝大多数）**不接**此类——无空白等待期，接入反而引入闪烁（W461 边际收益评估结论）。
+
+### 5.8 动画性能红线
+
+- 只动 `transform` / `opacity`；禁止布局属性（width/height/top/left）参与动画。
+- `will-change` 仅在必要元素上设置，动画结束移除。
+- forceSimulation 页禁入场 stagger（与 force tick 冲突）；resize 重渲染直达终态不重播（ANIMATE 首帧门控）。
+- 批量改动后必跑：`generate_csp.py`（改内联脚本）+ `check_structure.py`（改 CSS）+ duration ≤600 扫描。
+
+### 5.9 卡片过滤动画（保留：dashboard 老契约）
 
 ```css
 .kpi-card.filter-enter {
@@ -451,11 +513,6 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 
 - 过滤后重新进入视口的卡片播放淡入动画。
 - 隐藏卡片使用 `.hidden { display: none; }`，不参与动画。
-
-### 5.3 动画性能
-
-- 优先使用 `transform` 和 `opacity`，避免触发布局重排。
-- 复杂动画（如 D3 force simulation、CSS keyframes）需设置 `will-change` 仅在必要元素上。
 
 ---
 

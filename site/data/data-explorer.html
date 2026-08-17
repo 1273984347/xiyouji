@@ -2,12 +2,12 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-EFIIEpgmVg2zBbOhjheM9j9650pnOpoXWTeTbUnbGU8=' 'sha256-Yy0cY+UN8rz3vgneypSfvQfzZINoVNVe8J766QKvEZU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-EFIIEpgmVg2zBbOhjheM9j9650pnOpoXWTeTbUnbGU8=' 'sha256-Yy0cY+UN8rz3vgneypSfvQfzZINoVNVe8J766QKvEZU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-FkrMsyEk6gw4RzzmydExD6nUxXFvhs82kklVhe79grk='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>详解西游记 · 数据浏览器</title>
 
 
-            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -553,6 +553,57 @@ td.num, th.num {
 }
 .chart-tooltip.visible { opacity: 1; }
 
+/* —— 墨韵（W463）：fetch loading 骨架态（仅 fetch 主导页接入·EMBEDDED 同步页不接防闪烁） —— */
+.chart-loading {
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--ink-faint);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    background:
+        linear-gradient(100deg, transparent 40%, rgba(107, 100, 85, 0.08) 50%, transparent 60%)
+        var(--paper-warm);
+    background-size: 200% 100%, auto;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    animation: chart-loading-breath 1.2s var(--ease-in-out-soft) infinite;
+}
+.chart-loading::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--line);
+    border-top-color: var(--accent);
+    animation: chart-loading-spin 0.8s linear infinite;
+}
+@keyframes chart-loading-breath {
+    0%, 100% { background-position: 120% 0, 0 0; }
+    50% { background-position: -20% 0, 0 0; }
+}
+@keyframes chart-loading-spin {
+    to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .chart-loading { animation: none; }
+    .chart-loading::before { animation-duration: 2s; }
+}
+
+/* —— 墨韵（W463）：3D/canvas 图表一次性首帧淡入（three 容器/canvas 元素挂载·RM 停帧直接可见） —— */
+.chart-fade-in {
+    animation: chart-fade-in var(--dur-slow) var(--ease-out-quart) both;
+}
+@keyframes chart-fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .chart-fade-in { animation: none; }
+}
+
 /* ===== 按钮 ===== */
 .btn {
     display: inline-flex;
@@ -821,7 +872,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </div>
     <div id="chartbox" class="chartbox" style="display:none">
       <h3 id="chartTitle"></h3>
-      <div id="chartHost"></div>
+      <div id="chartHost"><div class="chart-loading">数据加载中…</div>
+</div>
     </div>
     <div id="tableHost"></div>
   </main>
@@ -1493,5 +1545,32 @@ loadDatasets();
 })();
 </script>
 
+<script>
+// 墨韵（W463）：fetch loading 骨架自移除——目标容器出现内容后移除；15s 超时兜底（防永久骨架·fail-open）
+(function () {
+    var els = Array.prototype.slice.call(document.querySelectorAll('.chart-loading'));
+    if (!els.length) return;
+    function rm(el) { if (el && el.parentNode) el.parentNode.removeChild(el); }
+    els.forEach(function (el) {
+        try {
+            var host = el.parentElement;
+            if (!host) { rm(el); return; }
+            var next = el.nextElementSibling;
+            var watchSvg = next && next.tagName === 'svg' ? next : null;
+            function done() {
+                return watchSvg
+                    ? watchSvg.childElementCount > 0
+                    : Array.prototype.some.call(host.children, function (c) { return c !== el; });
+            }
+            if (done()) { rm(el); return; }  /* 初始已渲染（microtask 先于本脚本）直接移除 */
+            var mo = new MutationObserver(function () {
+                if (done()) { mo.disconnect(); rm(el); }
+            });
+            mo.observe(watchSvg || host, { childList: true });
+        } catch (_) { rm(el); }
+    });
+    setTimeout(function () { els.forEach(rm); }, 8000);
+})();
+</script>
 </body>
 </html>
