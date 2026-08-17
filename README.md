@@ -5,6 +5,8 @@
 > **当前版本 v2.3.80（2026-08-18）**： W477 Phase E1 组件层 v2 + 根页模板化·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 >
 > **版本号说明**：本项目的 `vX.Y.Z` 是**内容发布批次编号，不适用 SemVer 兼容性承诺**——站点无 API、无下游依赖方，每个发布批次（W###）递增 patch 位。MAJOR/MINOR 位对应内容阶段（v2.x = 内容体系成熟期）。判断"这个版本改了什么"请看 [CHANGELOG.md](CHANGELOG.md)，不要从版本号推断兼容性。
+>
+> **维护契约**：版本行由 `bump_version.py` 维护；项目变更一律进 CHANGELOG，本文件**禁止追加里程碑 / 批次速记**；结构性编辑（分区 / 目录树 / 计数声明）须与 STRUCTURE / 项目说明 / `verify_delivery.py` 口径一致。
 
 [![在线访问](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E8%AE%BF%E9%97%AE-%E7%AB%8B%E5%8D%B3%E4%BD%93%E9%AA%8C-brightgreen?style=for-the-badge&logo=githubpages&logoColor=white)](https://1273984347.github.io/xiyouji/)
 [![双协议授权](https://img.shields.io/badge/%E5%8F%8C%E5%8D%8F%E8%AE%AE-MIT%20%2B%20CC%20BY--NC%204.0-blue)](LICENSE)
