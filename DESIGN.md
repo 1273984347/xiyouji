@@ -13,6 +13,7 @@
 - **灵感来源**：明代刻本、宣纸、朱砂批点、水墨层次。
 - **核心隐喻**：把《西游记》的文本解读做成「可翻阅的数字刻本」，数据图表是「批注」，交互组件是「目录签」。
 - **氛围关键词**：温润、厚重、留白、克制。
+- **v3 演进（W476）**：基调不变，叠加「纸感轻立体」层次体系——详见 §4A（四级海拔 / 渐变白名单 / 排版阶梯 / 微交互清单）。
 
 ### 1.2 信息层级
 
@@ -422,6 +423,81 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 ```
 
 - 用于数据洞察/结论，左侧 4px 朱砂边框。
+
+---
+
+## 4A. 纸感轻立体体系（Phase E · W476 宪改）
+
+> 本章为 Phase E 视觉高级感升级（W476–W483）的**宪法层**，2026-08-18 经用户确认三项前提：① 采纳「纸感轻立体」方向 ② 暗色模式纳入 E7 ③ 归档闸门冻结边界 E1。
+> 与 §1-4 旧条文冲突时以本章为准（「0-2px 圆角」「无厚重阴影」为 v2 基线表述，v3 起演进）；**§5 动效契约不受本章影响**，微交互一律落在 §5 预算内。
+> 令牌唯一事实源：`site/tokens.css` v3；组件实现：`site/system.css`；传播：`scripts/inline_css.py --force`。
+
+### 4A.1 演进声明
+
+- 方向：**平面克制 → 纸感轻立体**。气质对标「故宫数字馆藏的雅致 × Linear 的信息密度与工程精致」。
+- 三不变：宣纸底（--bg）、墨骨（--ink 系）、朱砂单点强调（--accent 唯一彩色强调）。
+- 三引入：系统性海拔层次（4A.2）、克制的渐变白名单（4A.3）、模块化排版节奏（4A.4）。
+- 层次靠「三级纸色 + 海拔令牌」共同营造：底 --bg / 卡 --paper / 卡内嵌块 --paper-warm，不靠堆阴影。
+
+### 4A.2 四级海拔体系（阴影令牌）
+
+| 令牌 | 语义 | 使用场景 |
+|:---|:---|:---|
+| `--elev-0` | 无阴影，仅发丝线 | 静态内容块、表格 |
+| `--elev-1` | 静止浮起（= 原 --shadow） | 卡片/section 默认态 |
+| `--elev-2` | 交互浮起（= 原 --shadow-lift） | 卡片 hover、按钮 hover、active tab |
+| `--elev-3` | 中层悬浮 | tooltip、dropdown、sticky 导航 |
+| `--elev-4` | 高层遮罩 | modal、移动端抽屉 |
+
+- 阴影色一律**墨色低 alpha**（rgba(35,32,26,·)），禁纯黑阴影。
+- 交互语法：hover = 海拔升一级 + `translateY(-2px)` + 边框色档位上移，时长 `--dur-base`（250ms）。
+- 页面禁止硬编码阴影值；旧条文中的 hover 阴影（如 kpi-card）逐步迁回令牌。
+
+### 4A.3 渐变白名单（仅三处）
+
+1. hero 背景：玄墨双色微渐变（#221D16 → #2A231A，明度差 ≤ 6%）+ 既有 radial 淡金高光保留。
+2. 主按钮：朱砂微渐变（--accent → --accent-deep，垂直向，明度差 ≤ 5%）。
+3. 骨架屏 shimmer（.chart-loading 呼吸骨架延续）。
+
+其余位置**禁止渐变**；禁止大面积彩色渐变、霓虹光效——与宣纸气质冲突。
+
+### 4A.4 排版阶梯（模块化字号）
+
+- 比率 **1.25（大三度）**，令牌 `--text-step-0…--text-step-5`（1 / 1.25 / 1.5625 / 1.953 / 2.441 / 3.052rem）。
+- 角色映射：step-0 正文 / step-1 小节标题 / step-2 section 标题 / step-3 页标题 / step-4-5 hero 与 KPI 大数字。
+- hero 用 fluid：`--text-hero: clamp(1.75rem, 1.2rem + 2.5vw, 2.75rem)`。
+- 行高令牌：`--leading-tight 1.3 / --leading-heading 1.4 / --leading-body 1.75`。
+- 字体分工不变（标题宋 / 正文黑 / 数字等宽）；KPI 与表格数字统一 `font-variant-numeric: tabular-nums`。
+
+### 4A.5 圆角与边框令牌
+
+- `--radius-sm 2px / --radius-md 6px / --radius-lg 10px / --radius-pill 999px`；卡片默认 md，弹层 lg，pill 仅 tab/搜索/徽章。
+- `--border-hairline: 1px solid var(--line)`；`--border-accent: 1px solid var(--accent)`。
+
+### 4A.6 断点系统
+
+- sm 640 / md 768 / lg 1024 / xl 1280 / 2xl 1536；最小验收视口 **375px**（对齐 Phase 3 W472）。
+- CSS media query 不能读 var，上述数值即规范常量；页面内媒体查询统一取这五档。
+- ≤768px 顶部导航转抽屉（E5 落地）；图表降级策略见 Phase E 方案 E6。
+
+### 4A.7 微交互清单（时长档取自 §5 契约）
+
+| 组件 | 微交互 | 时长 |
+|:---|:---|:---|
+| 按钮 | hover 上浮 / active scale(0.98) / focus-visible 双层 ring | 150ms |
+| 卡片 | elev-1→2 + 边框转朱砂档 | 250ms |
+| 链接 | 下划线 background-size 展开 | 150ms |
+| 导航 | active 指示条 transform 滑动；sticky 后 elev-3 | 250ms |
+| 滚动显现 | IO + .reveal-in（fade + 8px 上移，一次性，RM 直达终态）——仅根页/section 级 | 500ms |
+
+- **禁止清单**（门禁扫描）：bounce 弹跳、360° 旋转、持续循环背景动效、parallax。
+- JS 微交互载体以 Phase 3 W471 motion.js 决策为准；CSS 微交互一律走 system.css 工具类。
+
+### 4A.8 体积预算红线
+
+- tokens.css 与 system.css 内联进约 225 页（data+EN），**每 +1KB = 全站 +225KB**。
+- Phase E 预算：tokens ≤ +2KB（5.7→≤7.7KB）、system ≤ +6KB（18.9→≤24.9KB）；每批以 `wc -c` 复核并写入批次记录。
+- 超预算时砍微交互工具类，不砍色彩/海拔令牌；perf-budget html 分项 50KB 逐批复核。
 
 ---
 

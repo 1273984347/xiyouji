@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.78（2026-08-17）— W463 墨韵 W-g 收尾固化 + W-f 扫尾批（DESIGN.md §5 动效宪法 + loading/fade-in·墨韵系列收官）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.79（2026-08-18）— W476 Phase E0 纸感轻立体宪改 + tokens v3（视觉高级感升级轨启动：DESIGN.md §4A + tokens v3 + 225 页同步）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 顶层结构
 
