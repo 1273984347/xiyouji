@@ -378,6 +378,18 @@ def main():
     except Exception as e:
         warn("CSS 结构平衡门禁执行异常（W457）: %s" % e)
 
+    # ---- 动态链接门禁（W459：lint_links 只扫静态 href，JS 拼接链接曾致 D2 回目跳转全 404 漏网）----
+    dyn_links_py = os.path.join(_HERE, "check_dynamic_links.py")
+    try:
+        r = subprocess.run([sys.executable, dyn_links_py], capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("动态链接门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("动态链接死链（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("动态链接门禁执行异常（W459）: %s" % e)
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:
