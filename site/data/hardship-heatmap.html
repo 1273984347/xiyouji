@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Mgdf2Q1eD2KZa7tkRUug1+9DrP37GOYdNFqCvQ4QSoA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-JWLi7ttEGNBfSQEgHaV6YOrksD1eCGAqozyJyuef+DA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>八十一难难度热力图 · 详解西游记</title>
@@ -895,6 +895,7 @@ td.num, th.num {
     </style>
 <style>
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        /* e-track-exempt: chart-data-colors 3 处 */
         .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
         
         
@@ -907,8 +908,8 @@ td.num, th.num {
         
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         .notice {
-            background: #fff8e7; border-left: 4px solid var(--accent-soft);
-            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+        background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
+        padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 var(--radius-md) var(--radius-md) 0;
         }
         
         
@@ -919,57 +920,53 @@ td.num, th.num {
         .section h2 { color: var(--accent); border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px; margin-bottom: 12px; }
         .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
         .skip-link {
-            position: absolute; top: -40px; left: 0; background: var(--accent-2);
-            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
-            border-radius: 0 0 4px 0; transition: top 0.2s;
+        position: absolute; top: -40px; left: 0; background: var(--accent-2);
+        color: var(--paper); padding: 8px 16px; z-index: 100; text-decoration: none;
+        border-radius: 0 0 var(--radius-md) 0; transition: top var(--dur-base);
         }
         .skip-link:focus { top: 0; }
         
         .stage-switcher { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
         .stage-btn {
-            padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
-            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.9em;
-            font-family: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s;
+        padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
+        color: var(--ink); border-radius: var(--radius-md); cursor: pointer; font-size: 0.9em;
+        font-family: inherit; transition: background var(--dur-base), color var(--dur-base), border-color var(--dur-base);
         }
-        .stage-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .stage-btn.active { background: var(--accent); color: var(--paper); border-color: var(--accent); }
         .stage-btn:hover { background: var(--accent-soft); }
         .stage-btn.active:hover { background: var(--accent); }
         .heatmap-wrap { position: relative; overflow-x: auto; }
         #heatmap-svg { display: block; min-width: 760px; }
-        .heat-cell { transition: opacity 0.2s; cursor: pointer; }
+        .heat-cell { transition: opacity var(--dur-base); cursor: pointer; }
         .heat-cell:hover { opacity: 0.72; }
-        .heat-tip, .bar-tip {
-            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
-            color: #f5e9d4; padding: 8px 12px; border-radius: 6px; font-size: 0.8rem;
-            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 280px;
-        }
-        .heat-tip .tip-title, .bar-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 4px; }
-        .heat-tip .tip-row, .bar-tip .tip-row { color: #d9cdb8; }
-        .heat-tip .tip-meta, .bar-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; margin-top: 4px; }
+        /* tooltip 已收编 .chart-tooltip（DESIGN §5.4 宣纸底语义色），基类由 system.css 提供 */
+        .chart-tooltip .tip-title { font-weight: bold; color: var(--accent); margin-bottom: 4px; }
+        .chart-tooltip .tip-row { color: var(--ink-soft); }
+        .chart-tooltip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: var(--ink-faint); margin-top: 4px; }
         .legend-bar { display: flex; align-items: center; gap: 12px; margin-top: 12px; font-size: 0.82em; color: var(--ink-soft); flex-wrap: wrap; }
         .legend-gradient {
-            width: 200px; height: 14px; border-radius: 3px;
-            background: linear-gradient(to right, #f5e9d4, #e9b885, #c8463a, #8c2a2a);
+        width: 200px; height: 14px; border-radius: var(--radius-sm);
+        background: linear-gradient(to right, #f5e9d4, #e9b885, #c8463a, #8c2a2a);
         }
         .legend-marks { display: flex; justify-content: space-between; width: 200px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: var(--ink-soft); margin-top: 2px; }
         .bar-block { display: grid; grid-template-columns: 1fr; gap: 16px; }
         @media (min-width: 900px) { .bar-block { grid-template-columns: 1fr 1fr; } }
-        .bar-card { border: 1px solid var(--line); border-radius: 6px; padding: 14px; background: #fffdf8; }
+        .bar-card { border: 1px solid var(--line); border-radius: var(--radius-md); padding: 14px; background: var(--paper); }
         .bar-card h3 { font-size: 0.98em; margin-bottom: 8px; color: var(--ink); }
         .bar-card svg { width: 100%; height: 240px; display: block; }
         .stage-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.88em; }
         .stage-table th, .stage-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
-        .stage-table th { background: #fff8e7; color: var(--accent-3); font-weight: 600; }
+        .stage-table th { background: var(--paper-warm); color: var(--accent-3); font-weight: 600; }
         .stage-table td.num { text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--accent); }
         .cause-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; font-size: 0.86em; }
         .cause-legend .legend-item {
-            display: flex; align-items: center; gap: 6px; padding: 4px 10px;
-            border-radius: 4px; background: #fff8e7;
+        display: flex; align-items: center; gap: 6px; padding: 4px 10px;
+        border-radius: var(--radius-md); background: var(--paper-warm);
         }
-        .cause-legend .legend-item .swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+        .cause-legend .legend-item .swatch { width: 12px; height: 12px; border-radius: var(--radius-sm); flex-shrink: 0; }
         .insight-box {
-            background: #fffdf8; border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+        background: var(--paper); border-left: 4px solid var(--accent-soft);
+        padding: 12px 16px; margin-bottom: 12px; border-radius: 0 var(--radius-md) var(--radius-md) 0; font-size: 0.92em;
         }
         .insight-box strong { color: var(--accent); font-weight: 700; }
         .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
@@ -1069,7 +1066,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="heatmap-title">八十一难难度热力图</title>
                     <desc id="heatmap-desc">回目为横轴、难度系数 1-10 为纵轴的热力图，颜色深浅表示难度。</desc>
                 </svg>
-                <div class="heat-tip" id="heat-tip" role="tooltip"></div>
+                <div class="chart-tooltip" id="heat-tip" role="tooltip"></div>
             </div>
             <div class="legend-bar" aria-label="难度色阶">
                 <span>简单</span>
@@ -1091,7 +1088,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <svg id="stage-bar-svg" width="100%" height="240" role="img" aria-labelledby="stage-bar-title">
                         <title id="stage-bar-title">五阶段平均难度系数柱状图</title>
                     </svg>
-                    <div class="bar-tip" id="stage-bar-tip" role="tooltip"></div>
+                    <div class="chart-tooltip" id="stage-bar-tip" role="tooltip"></div>
                 </div>
                 <div class="bar-card">
                     <h3>阶段统计明细</h3>
@@ -1116,7 +1113,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <svg id="cause-bar-svg" width="100%" height="280" role="img" aria-labelledby="cause-bar-title">
                     <title id="cause-bar-title">难度等级 × 起因类型堆叠柱状图</title>
                 </svg>
-                <div class="bar-tip" id="cause-bar-tip" role="tooltip"></div>
+                <div class="chart-tooltip" id="cause-bar-tip" role="tooltip"></div>
                 <div class="cause-legend" id="cause-legend" aria-label="起因类型图例"></div>
             </div>
         </section>
@@ -1377,7 +1374,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     .style("opacity", 0)
                     .on("mouseover", function(event) {
                         d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2);
-                        tip.style("opacity", 1)
+        tip.classed("visible", true)
                             .html(`<div class="tip-title">第 ${d.n} 难 · ${d.name}</div>
                                 <div class="tip-row">回目：${d.chapter}</div>
                                 <div class="tip-row">难度系数：<strong style="color:#e9b885">${d.score}</strong> / 10</div>
@@ -1393,7 +1390,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                     })
                     .on("mouseout", function() {
                         d3.select(this).attr("stroke", "#fff").attr("stroke-width", 1);
-                        tip.style("opacity", 0);
+        tip.classed("visible", false);
                     })
                     .transition()
                     .duration(MOYUN_RM?0:600)
@@ -1461,7 +1458,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr("stroke", "#fff")
             .attr("stroke-width", 1)
             .on("mouseover", function(event, d) {
-                tip.style("opacity", 1)
+        tip.classed("visible", true)
                     .html(`<div class="tip-title">${d.label}段 · ${d.range}</div>
                         <div class="tip-row">难数：${d.count}</div>
                         <div class="tip-row">平均难度：<strong style="color:#e9b885">${d.avg}</strong> / 10</div>
@@ -1472,7 +1469,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 tip.style("left", (event.clientX - rect.left + 12) + "px")
                     .style("top", (event.clientY - rect.top + 12) + "px");
             })
-            .on("mouseout", function() { tip.style("opacity", 0); })
+        .on("mouseout", function() { tip.classed("visible", false); })
             .transition()
             .duration(DUR)
             .delay((d, i) => i * 100)
@@ -1566,7 +1563,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .style("opacity", 0)
             .on("mouseover", function(event, d) {
                 const causeKey = d3.select(this.parentNode).datum().key;
-                tip.style("opacity", 1)
+        tip.classed("visible", true)
                     .html(`<div class="tip-title">难度 ${d.data.score} 分 · ${CAUSE_LABEL[causeKey]}</div>
                         <div class="tip-row">该类难数：<strong style="color:#e9b885">${d[1] - d[0]}</strong></div>
                         <div class="tip-row">该难度总计：${causes.reduce((a, c) => a + d.data[c], 0)} 难</div>`);
@@ -1576,7 +1573,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
                 tip.style("left", (event.clientX - rect.left + 12) + "px")
                     .style("top", (event.clientY - rect.top + 12) + "px");
             })
-            .on("mouseout", function() { tip.style("opacity", 0); })
+        .on("mouseout", function() { tip.classed("visible", false); })
             .transition()
             .duration(DUR)
             .delay((d, i) => i * 60)

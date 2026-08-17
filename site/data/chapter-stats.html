@@ -895,9 +895,10 @@ td.num, th.num {
     </style>
 <style>
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
+        /* e-track-exempt: chart-data-colors 2 处 */
         .kpi-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(60, 40, 20, 0.12), 0 8px 24px rgba(60, 40, 20, 0.1);
+            box-shadow: var(--elev-2);
             border-color: var(--accent-soft);
         }
         
@@ -942,7 +943,7 @@ td.num, th.num {
         .legend-swatch {
             width: 14px;
             height: 14px;
-            border-radius: 2px;
+            border-radius: var(--radius-sm);
             display: inline-block;
         }
         .legend-swatch.line {
@@ -950,10 +951,10 @@ td.num, th.num {
             width: 18px;
         }
         .notice {
-            background: #fff8ec;
+            background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
             border-left: 4px solid var(--accent);
-            border-radius: 6px;
+            border-radius: var(--radius-md);
             padding: 14px 18px;
             font-size: 0.9rem;
             color: var(--accent-3);
@@ -962,19 +963,19 @@ td.num, th.num {
         }
         .notice strong { color: var(--accent); }
         .notice code {
-            background: #f5e9d4;
+            background: var(--paper-warm);
             padding: 2px 6px;
-            border-radius: 3px;
+            border-radius: var(--radius-sm);
             font-family: "JetBrains Mono", monospace;
             font-size: 0.85rem;
             color: var(--accent-3);
         }
         .notice .cmd-block {
             display: block;
-            background: #23201A;
-            color: #f5e9d4;
+            background: var(--ink);
+            color: var(--dark-text);
             padding: 10px 14px;
-            border-radius: 4px;
+            border-radius: var(--radius-md);
             margin-top: 10px;
             font-family: "JetBrains Mono", monospace;
             font-size: 0.82rem;
