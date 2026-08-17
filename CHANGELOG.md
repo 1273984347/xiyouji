@@ -4,9 +4,19 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W458），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W459），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.74（2026-08-17）：W459 V2 审查收尾 — D2 死链修复 + 动态链接门禁 + 方案回写
+
+> **来源**：V2 可视化维度方案（docs/00-导读/V2可视化维度方案.md）落地审查发现四项缺口——① 方案 D2 回目跳转按方案错误约定拼接 `第NNN回-回目摘要.md`（该类文件不存在）致全 100 条跳转死链，且 lint_links 只扫静态 href、冒烟不点击链接，两道门禁均漏检；② tag-cloud dashboard 条目指向不存在的 site/data/dashboard.html；③ EN ming 页 source_doc 指向不存在的英文化 docs 路径；④ 方案文档「cdnjs+SRI 不可变更」条文已被 W456 本地化推翻、首页无 geo-3d 入口。
+> - **执行（D2 修复）**：`site/data/journey-spacetime.html` 内嵌 `A1_DOC_MAP` 100 条回号→真实文件名映射（从 docs/01 目录实际文件名生成），`chapterDocUrl()` 改查表 + 缺失回退目录索引；相对路径修正为 `../../docs/`（页在 site/data/ 须上溯两级，原 W455 代码 `../docs/` 解析到不存在的 site/docs/）。
+> - **执行（新门禁）**：新增 `scripts/check_dynamic_links.py`——提取 site/ 全站内联 `<script>` 字符串字面量链接做存在性校验（相对路径按页面目录解析·不含 ../ 的字面量兼按仓库根解析·裸 .md 查 docs/source 文件名集·裸 .html 查同目录），带 `--self-test` 负样本自测；挂入 `verify_delivery.py`。首跑即抓到上述 ②③ 两处存量死链并同批修复（tag-cloud 条目改 `../dashboard.html`·EN source_doc 改诚实 ASCII 注记过 validate_en）。
+> - **执行（方案回写）**：V2 方案文档补落地状态记录表（A/B/C ✅·D W459 修复·EN 按规则跳过·防重叠约束前提勘误）；方案 A 技术选型与验收 3 改本地化口径（零外域请求）；D2 命名约定改真实回目 + 内嵌映射强制；风险与依赖补「动态链接盲区」条；验证清单加 check_dynamic_links。
+> - **执行（首页入口）**：`site/index.html` 精选必看区新增西游地理 3D 卡片（差异化描述「立体纵深·与平面时空图互补」），note 八→九个入口；geo-3d 此前仅 tag-cloud/sitemap 登记、首页不可达。
+> - **验证**：check_dynamic_links --self-test 负样本 2/2 命中；全站 234 页 295 字面量 0 死链；generate_csp 重哈希 3 页（journey-spacetime/tag-cloud/EN ming）0 漂移；lint_links 4124 链接 0 broken；validate_en EN ming 页过；check_js_syntax 232 文件 + check_structure 232 文件过；_smoke_batch journey-spacetime PASS（circles=68）；tag-cloud 一次性断言 PASS（80 条目渲染·bodyBg #FAF7F0·0 pageerror）。
+> - **状态**：已落地·随本 commit 提交。
 
 ### v2.3.73（2026-08-16）：W458 防回归门禁体系落地 — W457 复盘 P0 改进清单
 
