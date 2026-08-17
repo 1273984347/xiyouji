@@ -26,11 +26,14 @@
         }
         .path-card {
             background: var(--paper); border: 1px solid var(--line);
-            border-radius: 10px; padding: 24px 26px;
+            border-radius: var(--radius-lg); padding: 24px 26px;
             display: flex; flex-direction: column; gap: 12px;
-            transition: border-color .15s, box-shadow .15s;
+            box-shadow: var(--elev-1);
+            transition: border-color var(--dur-base) var(--ease-out-quart),
+                        box-shadow var(--dur-base) var(--ease-out-quart),
+                        transform var(--dur-base) var(--ease-out-quart);
         }
-        .path-card:hover { border-color: var(--accent); box-shadow: 0 6px 22px rgba(35,32,26,0.06); }
+        .path-card:hover { border-color: var(--accent); box-shadow: var(--elev-2); transform: translateY(-2px); }
         .path-card .pc-head { display: flex; align-items: baseline; gap: 10px; }
         .path-card .pc-emoji { font-size: 22px; }
         .path-card h3 { font-size: 19px; margin: 0; }

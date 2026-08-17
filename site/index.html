@@ -71,9 +71,9 @@
             margin: 0 clamp(24px, 6vw, 96px) 4px;
             background: var(--paper);
             border: 1px solid var(--line);
-            border-radius: 10px;
+            border-radius: var(--radius-lg);
             padding: clamp(24px, 4vw, 40px);
-            box-shadow: 0 6px 24px rgba(35,32,26,0.06);
+            box-shadow: var(--elev-1);
             position: relative;
             overflow: hidden;
         }
@@ -87,26 +87,38 @@
         .ask-form { display: flex; gap: 12px; max-width: 680px; }
         .ask-form input {
             flex: 1; font-family: var(--font-serif); font-size: 16px;
-            padding: 12px 16px; border: 1px solid var(--line); border-radius: 6px;
+            padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--radius-md);
             background: var(--bg); color: var(--ink); outline: none;
+            transition: border-color var(--dur-fast) var(--ease-out-quart),
+                        box-shadow var(--dur-fast) var(--ease-out-quart);
         }
-        .ask-form input:focus { border-color: var(--accent); }
+        .ask-form input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
+        }
         .ask-form button {
             font-family: var(--font-serif); font-size: 15px; font-weight: 600;
-            padding: 12px 26px; border: none; border-radius: 6px; cursor: pointer;
-            background: var(--accent); color: #fff; white-space: nowrap;
-            transition: opacity .15s;
+            padding: 12px 26px; border: none; border-radius: var(--radius-md); cursor: pointer;
+            background: linear-gradient(180deg, var(--accent), var(--accent-deep));
+            color: #fff; white-space: nowrap;
+            transition: background var(--dur-fast) var(--ease-out-quart),
+                        box-shadow var(--dur-fast) var(--ease-out-quart),
+                        transform var(--dur-fast) var(--ease-out-quart);
         }
-        .ask-form button:hover { opacity: .9; }
+        .ask-form button:hover { background: var(--accent-deep); box-shadow: var(--elev-2); }
+        .ask-form button:active { transform: scale(0.98); box-shadow: none; }
         .ask-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; max-width: 720px; }
         .ask-chip {
             font-size: 13px; color: var(--accent-2); cursor: pointer;
-            border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px;
-            background: var(--bg); transition: .15s; user-select: none;
+            border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 6px 14px;
+            background: var(--bg); user-select: none;
+            transition: border-color var(--dur-fast) var(--ease-out-quart),
+                        background var(--dur-fast) var(--ease-out-quart);
         }
-        .ask-chip:hover { border-color: var(--accent-2); background: #fff; }
+        .ask-chip:hover { border-color: var(--accent-2); background: var(--paper); }
+        .ask-chip:active { transform: scale(0.97); }
         .ask-note { margin-top: 14px; font-size: 12px; color: var(--ink-faint); }
-        .ask-note code { background: var(--paper-warm); padding: 1px 6px; border-radius: 4px; }
+        .ask-note code { background: var(--paper-warm); padding: 1px 6px; border-radius: var(--radius-sm); }
         .curated-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;
         }

@@ -150,16 +150,17 @@
         }
         .nav-card {
             background: var(--paper);
-            border-radius: 12px;
+            border-radius: var(--radius-lg);
             padding: 14px 12px;
-            box-shadow: 0 1px 3px rgba(60,40,20,0.08);
+            box-shadow: var(--elev-1);
             border: 1px solid var(--line);
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             min-height: 88px;
             position: relative;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            transition: transform var(--dur-fast) var(--ease-out-quart),
+                        box-shadow var(--dur-fast) var(--ease-out-quart);
             cursor: pointer;
         }
         .nav-card:active {
@@ -202,10 +203,10 @@
         }
         .kpi-item {
             background: var(--paper);
-            border-radius: 10px;
+            border-radius: var(--radius-lg);
             padding: 12px 14px;
             border-left: 4px solid var(--accent-2);
-            box-shadow: 0 1px 2px rgba(60,40,20,0.05);
+            box-shadow: var(--elev-1);
             display: flex;
             align-items: center;
             justify-content: space-between;

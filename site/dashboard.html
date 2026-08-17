@@ -295,7 +295,7 @@
             font-weight: 500;
             border-bottom-color: var(--accent);
         }
-        .filter-tab:focus-visible { outline: none; box-shadow: 0 2px 0 0 var(--focus-ring-accent); }
+        .filter-tab:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
         .search-box { margin-left: auto; position: relative; display: flex; align-items: center; }
         .search-box input {
             padding: 7px 34px 7px 36px;
@@ -310,8 +310,8 @@
         }
         .search-box input:focus, .search-box input:focus-visible {
             outline: none;
-            border-color: var(--accent-soft);
-            box-shadow: 0 0 0 3px var(--focus-ring-accent-soft);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
         }
         .search-box .search-icon {
             position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
@@ -1009,13 +1009,13 @@
         </section>
     </main>
 
-    <footer>
-        <span>详解西游记项目 · 2026 · MIT License</span>
+    <footer class="site-footer">
+        <span class="footer-brand">详解西游记项目 · 2026 · MIT License</span>
         <span class="flinks">
             <a href="index.html">返回首页</a>
             <a href="../README.md">项目说明</a>
             <a href="../CHANGELOG.md">更新日志</a>
-            <span class="ver">v2.2.86</span>
+            <span class="ver">v2.3.79</span>
         </span>
     </footer>
 

@@ -8,6 +8,20 @@
 
 ---
 
+## W477 Phase E1 组件层 v2 + 根页模板化（2026-08-18·v2.3.80）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/system.css | W477 | v2.3.80 修改·v2：card/kpi/chart-block elev-1+hover elev-2+radius-md·btn 五态+朱砂微渐变白名单·tab/badge/search pill·tooltip elev-3·颜色令牌化·微交互工具类（+2455B） |
+| site/index.html | W477 | v2.3.80 修改·提问框全令牌化（elev/radius/渐变按钮/focus 光圈/chip pill） |
+| site/dashboard.html | W477 | v2.3.80 修改·footer 统一 site-footer + 版本 v2.2.86→v2.3.79 + focus 派生统一 |
+| site/curated.html / site/guide.html | W477 | v2.3.80 修改·卡片海拔化（elev-1/2 + radius-lg + 时长令牌） |
+| site/mobile-index.html | W477 | v2.3.80 修改·nav-card/kpi-item 令牌化 |
+| site/data/text-search.html | W477 | v2.3.80 修改·--focus-ring 未定义缺陷修复（color-mix 光圈） |
+| site/static/fonts/NotoSansSC-{Regular,Medium}.woff2 | W477 | v2.3.80 覆写·子集化 9340 字（771/783→755/766KB） |
+| site/data+en 225 页 | W477 | v2.3.80 批量·inline_css --force 重内联 system.css v2 |
+| site/dukou-engine.html | W477 | v2.3.80 修改·长链页脚 prepend |
+
 ## W476 Phase E0 纸感轻立体宪改 + tokens v3（2026-08-18·v2.3.79）
 
 | 文件 | W | 说明 |
