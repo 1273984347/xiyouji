@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.70（2026-08-16）— W455 方案 B/C/D 三个可视化深化（character-dynamic-network 回目进度条 + 邻域模式 + 边权重；hardship-difficulty-heatmap 单元格钻取 + 双向联动 + 三排序；journey-spacetime 双轴联动 + 节点跳转 A1 回目 + 段路耗时）·W454 方案 A 西游地理 3D 可视化（journey-geo-3d.html 新建：Three.js r128 + 手动 OrbitControls + 程序化示意地形 + 17 节点 Sphere + CatmullRom 路线 Tube + 河流 Tube + 路线高亮/地形透明）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.73（2026-08-16）— W455 方案 B/C/D 三个可视化深化（character-dynamic-network 回目进度条 + 邻域模式 + 边权重；hardship-difficulty-heatmap 单元格钻取 + 双向联动 + 三排序；journey-spacetime 双轴联动 + 节点跳转 A1 回目 + 段路耗时）·W454 方案 A 西游地理 3D 可视化（journey-geo-3d.html 新建：Three.js r128 + 手动 OrbitControls + 程序化示意地形 + 17 节点 Sphere + CatmullRom 路线 Tube + 河流 Tube + 路线高亮/地形透明）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。 + W457（W457） + W458（W458）
 
 ## 顶层结构
 

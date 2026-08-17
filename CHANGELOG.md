@@ -4,9 +4,39 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W455），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W458），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.73（2026-08-16）：W458 防回归门禁体系落地 — W457 复盘 P0 改进清单
+
+> **来源**：W457 白屏三连根因复盘（docs/10-方法论沉淀/白屏三连根因复盘与防回归清单.md）提出的 P0 改进清单落地——把「结构平衡校验 + 语法校验 + 样式生效断言 + 先取证 SOP」固化为机器门禁与文档。
+> - **执行（门禁·核心）**：新增 `scripts/check_structure.py`（全站内联 CSS 括号/引号/url 结构平衡，232 文件 629 块）与 `scripts/check_js_syntax.js`（node 单进程 vm.Script 批量编译，覆盖 site/ 根+data+en，秒级），双双挂入 `verify_delivery.py`。旧 `check_js_syntax.py` `--all` 委托 node 版（原「每块 spawn node --check」在 233 页规模 120s 内跑不完）、`--file` 单文件模式保留。
+> - **执行（运行时断言）**：`_p1_viz_audit.js` 与 `_smoke_batch.js` 补 `style-broken` 断言（getComputedStyle(body) 背景透明 && 主 style 块 cssRules≤1），杜绝 CSS 裸奔漏检。
+> - **执行（文档）**：新增 `docs/10-方法论沉淀/前端显示问题诊断SOP.md`（先取证三证据 + 三类白屏症状识别 + 门禁对照表）；复盘文档同批落库。
+> - **验证**：check_structure 负向验证（坏 CSS 深度 1 + bad-url 命中 / 好 CSS 深度 0）；`_smoke_batch.js` 冒烟 PASS；`verify_delivery.py` 核心全绿（含新增两门禁：CSP 233 页 0 漂移 · 语法 232 文件通过 · CSS 结构 232 文件 629 块通过）。
+> - **状态**：已落地·待 commit/push。
+
+### v2.3.72（2026-08-16）：W457 全站白屏根因修复 — CSS url 括号笔误 222 页 + EN 引号腐蚀 7 页
+
+> **来源**：用户截图确认真实症状为「整页 CSS 裸奔白屏」——文字正常但背景纯白、导航/卡片/字体样式全失（D3 图表本身渲染正常）。此前两轮诊断均聚焦图表渲染，未检查样式生效，属盲区。
+> - **根因一（主·222 页）**：内联 CSS 中 `noto-serif-sc-shared` 可变字重 @font-face 的 `url(...)` 缺失右括号（`url('...woff2' format(...)`）。系 W408 批量路径改写正则遗留。Chrome 对未闭合 `url(` 的 bad-url 恢复机制吞掉整块 CSS（实测 chapter-structure-graph 首 style 块 17756 字符仅解析出 1 条规则、body 背景变透明）。分布：site/data 85 页 + site/en 137 页（其中 72 页带 `../`、65 页不带）。
+> - **根因二（7 EN 页）**：内联 script 字符串腐蚀——英文直引号/撇号未转义（`"Shi E"`、`Laojun's`、`Chang'e` 等）及键名含空格（`Sample snippet:`）致 SyntaxError、整脚本不执行。属 W424/W446 已修「EN 腐蚀」的残留（validate_en 查 CJK 不查 JS 语法）。
+> - **执行**：222 页补右括号（`woff2' format(` → `woff2') format(`，只补括号不改路径）；7 EN 页状态机迭代修复裸引号→弯引号 / 撇号→右单弯引号 / 键名加引号（共 82 处）；CSP 重哈希 7 页。
+> - **关键教训**：诊断可视化页面必须断言「样式生效」（getComputedStyle(body).backgroundColor 非透明 + 主 style 块 cssRules>1），仅查 SVG 形状/JS 错误会漏掉「整页 CSS 裸奔」类缺陷。全量扫描器已升级（scripts/_diag_style_assert.js）。
+> - **验证**：chapter-structure-graph 修复后 cssRules 1→127、bodyBg 恢复 #FAF7F0；7 EN 页编译 0 错误 + 渲染断言 PASS（perf-canvas 1500 shapes/relationships 1207 shapes/search 功能恢复）；file:// 全量 232 页样式/脚本异常 0（仅 visit-viewer 设计性透明背景）；generate_csp 0 漂移；lint_links 4123 链接 0 broken；verify_delivery 核心全绿。留痕：scripts/output/diag-style-assert.json、css-fix-after.png。
+> - **状态**：已落地·待 commit/push。
+
+### v2.3.71（2026-08-16）：W456 全站 D3/Three 本地化 + 白屏根因修复 — 消除外域 CDN 单点故障
+
+> **来源**：用户报告「仅首页及少数页面正常，其余页面文字正常但图表区白色」。双环境全量诊断（file:// 94 页 + http:// 94 页 Playwright 扫描）定位两层根因。
+> - **根因一（主）**：全站 163 页可视化依赖 `d3js.org`/`cdnjs.cloudflare.com` 外域 CDN——用户侧任一环节阻断（浏览器扩展/企业网关/DNS 抖动）即全部白图、文字正常。与 W426 goatcounter DNS 污染事故同类。
+> - **根因二（潜伏）**：http server 浏览模式下，7 个数据 JSON 陈旧（早期一次性产出·结构与页面代码漂移）导致渲染崩溃——`villain_matrix.json` 缺 `axes.bands`（methodology-matrix 1693 行 forEach 崩溃）、`board_game.json` players 缺 `merit`（narrative-experiment 1915 行 toLocaleString 崩溃）等。
+> - **执行（本地化）**：d3.v7.min.js（279KB·v7.9.0）+ three.r128.min.js（603KB）落 `site/static/js/`；163 处 `<script src>` 按目录深度改写（site/ 根 `static/js/`、data/ 与 en/ `../static/js/`），保留 defer、移除 SRI/crossorigin；`_shell.html` 模板同步修复防回流。CSP script-src 本含 `'self'`，本地脚本零改动合规。
+> - **执行（数据对齐）**：从两页 EMBEDDED 内嵌新结构回写 7 个陈旧 JSON（villain_matrix/rescue_roi/methodology_summary/board_game/narrative_cards/story_generator/narrative_experiment_summary），http/file 双模式渲染一致；两页追加防御容错（`(ax.bands||[])`、merit 空值兜底）。
+> - **关键教训**：改内联脚本后未即时重跑 generate_csp.py 会导致 CSP sha256 哈希失配、整个内联脚本被浏览器拒执行（症状：无 pageerror 但内容区空白，`window.__data` 未设置）——修复中触发现并即重哈希消除。
+> - **验证**：http 模式全量复扫 94 页白屏/异常 0 页（修复前 3 页）；两崩溃页 DOM 级断言恢复（axisCards=2/villainRows=25、playerCards=4，bodyText 897→4830/1249→7157）；全页 extReq 探测除 goatcounter 外零外域请求；generate_csp.py 重哈希 2 页更新、--check 233 页 0 漂移；lint_links.py 4123 链接 0 broken（+163 本地化 src 全部命中）；verify_delivery.py 核心全绿。留痕：scripts/output/diag-white-pages.json、diag-http-mode.json。
+> - **状态**：已落地·待 commit/push。
 
 ### v2.3.70（2026-08-16）：W455 方案 B/C/D 三个可视化页面深化 — 交互能力增强·零新入口
 

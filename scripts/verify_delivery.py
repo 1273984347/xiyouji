@@ -352,6 +352,32 @@ def main():
     except Exception as e:
         warn("腐蚀/插件引用门禁执行异常（W424 复盘沉淀）: %s" % e)
 
+    # ---- 内联脚本语法门禁（W457：EN 引号/撇号/键名腐蚀致 SyntaxError 曾 7 页漏网）----
+    js_syntax_js = os.path.join(_HERE, "check_js_syntax.js")
+    try:
+        r = subprocess.run(["node", js_syntax_js], capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("内联脚本语法门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("内联脚本语法错误（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except FileNotFoundError:
+        warn("node 不可用，跳过内联脚本语法门禁（W457）")
+    except Exception as e:
+        warn("内联脚本语法门禁执行异常（W457）: %s" % e)
+
+    # ---- CSS 结构平衡门禁（W457：url() 缺右括号致整页 CSS 裸奔白屏，222 页先例）----
+    struct_py = os.path.join(_HERE, "check_structure.py")
+    try:
+        r = subprocess.run([sys.executable, struct_py], capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("CSS 结构平衡通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("CSS 结构异常（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("CSS 结构平衡门禁执行异常（W457）: %s" % e)
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:

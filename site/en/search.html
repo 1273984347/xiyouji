@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-UV6Vo9XAJKi00gVk/kyUH4ozK02Fzy4Hl6j9ONHTnqs=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-Zy+U0PF+e+lwn1DCEeuzMc461YKLR0doSw86T6QYvFo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-ZGR7IZJMlYJp7KoDU4EZw41w0LAh+rGsjb7b1dAYfG0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-Zy+U0PF+e+lwn1DCEeuzMc461YKLR0doSw86T6QYvFo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Annotated Journey to the West · Site-wide Search</title>
 
@@ -34,7 +34,7 @@
     font-style: normal;
     font-weight: 200 900;
     font-display: optional;
-    src: url('../static/fonts/noto-serif-sc-shared.woff2' format('woff2-variations');
+    src: url('../static/fonts/noto-serif-sc-shared.woff2') format('woff2-variations');
 }
 @font-face {
     font-family: 'Noto Sans SC';
@@ -781,7 +781,7 @@ function renderOnline(q){
     var rows=[];
     (res.results||[]).forEach(function(m){
       var sample=(m.hits&&m.hits[0]&&m.hits[0].snippet)||"";
-      rows.push({Dataset:m.dataset, Hits:m.hit_count, Sample snippet:sample});
+      rows.push({Dataset:m.dataset, Hits:m.hit_count, "Sample snippet":sample});
     });
     if(!rows.length){document.getElementById("results").innerHTML="<p class='meta'>No matches.</p>";return;}
     VisTools.makeFilterableTable({

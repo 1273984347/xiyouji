@@ -46,16 +46,21 @@ function url(f) { return 'file:///' + path.join(DATA, f).replace(/\\/g, '/'); }
         if (hasCx) cxN++;
         if (hasT && hasCx && parseFloat(cx) !== 0) doublePos++;
       });
-      return { total: circles.length, transformN, cxN, doublePos };
+      // W457 补：样式生效断言（整页 CSS 裸奔时 body 背景透明 + 主 style 块规则骤减）
+      const cs = getComputedStyle(document.body);
+      const ms = document.querySelector('style');
+      let mr = -1; try { mr = ms && ms.sheet ? ms.sheet.cssRules.length : -1; } catch (e) {}
+      const styleBroken = cs.backgroundColor === 'rgba(0, 0, 0, 0)' && mr <= 1;
+      return { total: circles.length, transformN, cxN, doublePos, styleBroken };
     }).catch(e => ({ evalError: e.message }));
     const isEnv = m => /favicon|Failed to load resource|net::ERR|URL scheme "file"|Fetch API|Failed to fetch|ERR_|d3js\.org|status of [45]|d3 is not defined|THREE is not defined/.test(m);
     const realErrors = pageErrors.filter(m => !isEnv(m));
     const positioned = (r.transformN || 0) + (r.cxN || 0);
-    const ok = !realErrors.length && !r.evalError && positioned > 0 && (r.doublePos || 0) === 0;
+    const ok = !realErrors.length && !r.evalError && positioned > 0 && (r.doublePos || 0) === 0 && !r.styleBroken;
     allOk = allOk && ok;
     console.log(`[${ok ? 'PASS' : 'FAIL'}] ${file}`);
     if (ok) console.log(`    circles=${r.total} transform=${r.transformN} cx=${r.cxN} doublePos=${r.doublePos}`);
-    else console.log(`    circles=${r.total} transform=${r.transformN} cx=${r.cxN} doublePos=${r.doublePos} evalErr=${r.evalError || 'none'}`);
+    else console.log(`    circles=${r.total} transform=${r.transformN} cx=${r.cxN} doublePos=${r.doublePos} styleBroken=${r.styleBroken || false} evalErr=${r.evalError || 'none'}`);
     if (realErrors.length) console.log('    pageerror: ' + realErrors.join(' | '));
     await page.close();
   }

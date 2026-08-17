@@ -1,0 +1,232 @@
+# AGENTS.md — 《详解西游记》项目 Agent 指南
+
+> 本文件面向进入本仓库工作的 AI Agent（及新接手的人类维护者），提供项目的用途、技术栈、目录结构、关键模块、依赖关系、构建运行方式与必须遵守的铁律。动手前请通读；更细的规则以文末「权威文档」为准。
+
+---
+
+## 1. 项目用途与定位
+
+**《详解西游记》**（xiyouji）是一个「一源多形 · 数字人文可视化解读《西游记》100 回」的项目。它把《西游记》的文本研究组织为四层产物：
+
+- **文档（Docs）**：Markdown 写就的逐回解读、人物分析、主题专题、文化背景、诗词赏析、个人随笔。
+- **站点（Site）**：可浏览的纯静态 HTML 站点，`file://` 双击即可打开，部署于 GitHub Pages（https://1273984347.github.io/xiyouji/ ）。
+- **数据可视化**：约 86 个 D3.js / Three.js 可视化页（site/data/），覆盖 133 个数据维度（章节统计、人物关系网络、八十一难热力图、取经路线、情感热力图、AI 对话等 34 类主题 A–AH）。
+- **可问询入口**：Web Agent「西游记·渡口问津」（xiyouji-agent-web/）——基于 CodeBuddy Agent SDK，可对话、检索 docs/source、跑脚本。
+
+**核心内容规模**：A1–A6 内容板块共 611 篇（A1 逐回 100 / A2 随笔 44 / A3 人物 211 / A4 主题 209 / A5 文化 34 / A6 诗词 13）；英文站 site/en/ 138 页已全量英文化。
+
+**设计方向**：锁定「新中式·数字雅集」——纸白底（#faf7f2）、墨黑主文、朱砂点缀（#c8463a）、靛蓝链接（#3a6b8c），严格零依赖纯 CSS。详见 DESIGN.md。
+
+**版本号语义**：`vX.Y.Z` 是**内容发布批次编号，不适用 SemVer**。每个发布批次有唯一 W### ID；判断"改了什么"看 CHANGELOG.md，不要从版本号推断兼容性。
+
+---
+
+## 2. 技术栈
+
+| 层 | 技术 |
+|---|---|
+| 可视化前端 | D3.js v7（本地化 `site/static/js/d3.v7.min.js`）、Three.js r128（`three.r128.min.js`，手动 OrbitControls） |
+| 站点 | 原生 HTML/CSS/JS，纯静态，file:// 直开，内联 tokens.css + system.css |
+| 文本分析 | Python（词频/共现/情感/术语 NLP，stdlib + 少量依赖，见 scripts/requirements.txt） |
+| 代码规范 | Ruff（pyproject.toml，line-length 120，py311）|
+| Web Agent | React 18 + Vite 5 + TypeScript + TDesign React + Express 4 + better-sqlite3 + `@tencent-ai/agent-sdk`（CodeBuddy Agent SDK） |
+| 测试 | pytest + Playwright E2E（冒烟/交互/视觉回归） |
+| CI/CD | GitHub Actions（pytest / Playwright / Lighthouse / pip-audit / npm-audit / Pages 部署 / 截图审查） |
+
+**运行时要求**：Node ≥ 20（Web Agent）；Python 3.11+（脚本）。
+
+---
+
+## 3. 目录结构
+
+```
+xiyouji/
+├── docs/                  # Markdown 文档主体（内容真载体）
+│   ├── 00-导读/           # 项目说明、文档规范、术语表、统计口径
+│   ├── 01-全书逐回解读/   # 100 回逐回解读（A1）
+│   ├── 02-人物深度分析/   # A3 人物谱系
+│   ├── 03-主题与情节专题/ # A4 主题专题（209 篇）
+│   ├── 04-文化与历史背景/ # A5 文化背景
+│   ├── 05-诗词歌赋/       # A6 诗词
+│   ├── 06-个人随笔/       # A2 随笔（44 篇）
+│   ├── 07-09/             # 学以致用 / 提升认知 / 精神塑造
+│   ├── 10-方法论沉淀/     # 复盘、诊断 SOP、DRL 真循环等可复利经验
+│   ├── S2/S3/S4/          # 外部分享 / 方法论外部分享 / 学术投稿候选
+│   ├── superpowers/       # 开发过程 spec/plan 档案
+│   ├── _dev/  _templates/ # 开发内部文档 / 内容模板（勿直接套用）
+│   └── INDEX.md           # 文档索引（docs_index.py 生成）
+├── source/                # 原著原文（分回）+ 引用与网络解读（含学术论文索引）
+├── site/                  # 可浏览 HTML 站点
+│   ├── index.html dashboard.html dukou-engine.html curated.html 等
+│   ├── data/              # 可视化页（87 个 HTML，D3/Three）
+│   ├── en/                # 英文站（138 页）
+│   ├── static/js|css|fonts/  # 本地化 D3/Three、tokens.css/system.css、子集化字体
+│   └── sitemap.xml
+├── scripts/               # Python/JS 工具链（门禁、生成器、审计、诊断）
+│   ├── verify_delivery.py # 交付门禁（pre-commit 强制，见 §5）
+│   ├── generate_csp.py / inline_css.py / bump_version.py / lint_links.py
+│   ├── check_*.py|js      # 各专项门禁
+│   ├── run_all.py         # 批量运行 A-AH 34 类分析
+│   ├── _*.py|js           # 一次性/诊断脚本（不入库门禁、不参与 CI）
+│   └── output/            # data/*.json（可视化数据源）+ file-index.md + screenshots/
+├── dataset/               # 结构化 JSON（可视化/API 数据源）
+├── xiyouji-agent-web/     # Web Agent「西游记·渡口问津」（React+Vite+Express）
+├── skills/                # 项目级 playbook skill（10 个，见 §4.5）
+├── mcp-server/            # MCP 工具（xiyouji_mcp.py：drl_spotcheck 等）
+├── tests/                 # pytest + Playwright E2E
+├── assets/                # 字体源、图片
+├── references/  timeline/  tools/  hyperframes/
+├── README.md / STRUCTURE.md / CHANGELOG.md / DESIGN.md / 交接文档.md / 新Agent启动Prompt.md
+└── LICENSE + LICENSE-CONTENT.md  # 双协议
+```
+
+---
+
+## 4. 关键模块与依赖关系
+
+### 4.1 四层架构（数据流）
+
+```
+source/（原著+引用）──生成──► docs/（解读文档）
+                                │
+docs/ ──分析/抽取──► scripts/output/data/*.json ──► site/data/*.html（可视化页，fetch JSON + EMBEDDED 回退）
+                                │
+docs/ ──渲染──► site/（导航/索引页，直接链 docs）
+```
+
+- **单一事实源**：设计令牌 `site/tokens.css` + 组件层 `site/system.css`，经 `scripts/inline_css.py` 内联进各 HTML（页面自包含、file:// 直开）。
+- **数据回退铁律**：所有 site/data 可视化页必须内嵌 `EMBEDDED_DATA`/`EMBEDDED` 回退，fetch 失败时仍可渲染（file:// 双击可用）。
+
+### 4.2 交付门禁体系（verify_delivery.py，pre-commit 强制）
+
+`scripts/verify_delivery.py` 是提交前唯一硬门禁入口（`.git/hooks/pre-commit` → 本脚本，核心 FAIL 返回非 0 阻断）。内含：
+
+1. **六文档同步**（核心 2 硬门禁：CHANGELOG.md + 交接文档.md 必须含当前 v/W；辅助 4 仅 WARN：README / STRUCTURE / 项目说明 / file-index）
+2. **范围漂移检测**（html 最高 W ≤ 文档+归档最高 W）
+3. **A4 计数一致（209 篇）** + **A1-A6 真实计数（611 篇）**
+4. **学术研究轨显式引用**（105 篇）
+5. **A1 导航相邻性**（上一回=N-1·下一回=N+1）
+6. **docs/01 链接校验**（lint_links 0 broken）
+7. **sitemap 覆盖**、**site/data 回退模式**
+8. **CSP 漂移**（generate_csp.py --check，233 页哈希 0 漂移）
+9. **数据漂移**（check_data_drift.js）、**腐蚀/插件**（check_corruption.py）
+10. **内联脚本语法**（check_js_syntax.js，node vm.Script 批量编译，含 EN 站）
+11. **CSS 结构平衡**（check_structure.py，括号/引号/url 闭合）
+
+### 4.3 脚本工具链要点
+
+- **改任何内联脚本后，必须重跑 `python scripts/generate_csp.py`**——否则 CSP sha256 哈希失配，整个内联脚本被浏览器拒执行（症状：无 pageerror 但内容空白、`window.__data` 未设置）。
+- **批量正则改 CSS/JS 后必须验证括号/引号平衡**（`check_structure.py` / `_find_css_breaks.py`）。
+- **bump_version.py** 一键补齐辅助 4 文档版本行；跑完必须 Grep 校验 file-index 历史段未被全局替换污染。
+- `_` 前缀脚本为一次性/诊断脚本，不入库门禁、不参与 CI。
+
+### 4.4 Web Agent（xiyouji-agent-web/）
+
+- 后端 `server/index.ts`（Express + SSE 流式 + SQLite `data/chat.db`），前端 `src/`（React18 + Vite5 + TDesign）。
+- 凭证 `CODEBUDDY_API_KEY`（`.env`，由 `.env.example` 复制，已 gitignore）。
+- 默认 `PROJECT_CWD=D:/1/xiyouji`；专属 Agent「渡口问津」内置项目 sysprompt；默认权限 `bypassPermissions`（可切回 `acceptEdits`/`default`）。
+- 核心入口：`server/index.ts`、`src/hooks/useAgents.ts`（DEFAULT_AGENT）、`src/config.ts`（主题色 #c8463a「西」Logo）、`src/pages/ChatPage.tsx`。
+
+### 4.5 项目级 Skills（skills/）
+
+- 角色 skill（5 个）：sun-wukong / zhu-bajie / sha-seng / tangseng / bai-longma
+- 内容/知识：character-content、characters-knowledge
+- 流程：version-bump、en-translation、s4-submission
+
+### 4.6 MCP 服务（mcp-server/）
+
+`xiyouji_mcp.py` 暴露项目 MCP 工具（如 `drl_spotcheck`），供外部 Agent 调用。
+
+---
+
+## 5. 构建与运行方式
+
+### 5.1 统一编排（Makefile）
+
+```bash
+make help          # 查看全部目标
+make analyze       # 批量运行 A-AH 34 类分析（scripts/run_all.py）
+make test          # pytest tests/ -q
+make audit         # 表格无容器 + JS 语法 + SVG 负宽度检查
+make lint          # ruff + eslint
+make links         # 全仓库链接校验（lint_links.py --dir .）
+make ci            # lint + test + audit + links + data-validate + docs-index（本地预跑 CI）
+make release       # 发布前体检（release.py）
+make screenshots   # Playwright 双视口截图
+```
+
+### 5.2 交付门禁（提交前必跑）
+
+```bash
+python scripts/verify_delivery.py        # 全部门禁，核心全绿才可提交
+python scripts/generate_csp.py --check   # CSP 0 漂移
+node scripts/check_js_syntax.js          # 全站内联脚本语法
+python scripts/check_structure.py        # 全站 CSS 结构平衡
+python scripts/lint_links.py             # 死链 0 broken
+```
+
+### 5.3 站点本地浏览
+
+```bash
+# 纯静态，直接双击 site/index.html（file:// 直开，无需任何软件）
+# 或用本地 http 服务（部分页面的 fetch 实时数据源需 http 模式）：
+python -m http.server 8000   # 然后访问 http://127.0.0.1:8000/site/
+```
+
+### 5.4 Web Agent 运行
+
+```bash
+cd xiyouji-agent-web
+npm install
+npm run dev          # 同时拉后端 :3000 + 前端 :5173
+# 需先复制 .env.example → .env 并填入 CODEBUDDY_API_KEY
+```
+
+### 5.5 测试
+
+```bash
+pytest tests -q                        # pytest 全量（含 MCP 工具测试）
+cd scripts && npm install && npm run test:e2e   # 三层 E2E
+```
+
+---
+
+## 6. 必须遵守的铁律
+
+1. **六文档同步（W393 降级）**：每完成一个 W 批次，核心 2（CHANGELOG + 交接文档）必须写，辅助 4（README/STRUCTURE/项目说明/file-index）里程碑时跑 bump_version.py 补齐。
+2. **E1 铁律（声明 ≠ 落地）**：每个文件修改后 Grep spot-check 验证落地，禁止假收敛。
+3. **改内联脚本 → 重跑 generate_csp.py**（CSP 哈希失配会整脚本被拒）。
+4. **批量改 CSS/JS → 验证括号/引号平衡**（check_structure.py）。
+5. **file:// 铁律**：新页面必须内嵌 EMBEDDED 回退、零外域依赖（D3/Three 本地引用 `site/static/js/`，禁 d3js.org/cdnjs 外域 CDN）。
+6. **新页落地**：可视化页进 site/data/、索引进 site/ 根 + tag-cloud + sitemap；禁往 site/chapters|characters|themes（空遗留目录）。
+7. **先取证再假设**：诊断前端显示问题，先拿截图 + Console + 复现条件，再下根因结论（见 docs/10-方法论沉淀/前端显示问题诊断SOP.md）。
+8. **禁止擅改**：CHANGELOG 历史段、归档 3 份、.env、SECURITY-AUDIT 档、verify_delivery.py、bump_version.py 等门禁脚本（详见文档规范 §11.2）。
+9. **禁重跑 w286_merge_yuanwen_shendu.py**（A1 深度解读 SD 编号会再次错位）。
+10. **批量重写脚本改完**：`git diff --name-only` 对比改动范围，非必要改动 `git restore` 回退。
+11. **双协议**：代码 MIT + 文本 CC BY-NC 4.0（非商用），拆分 LICENSE / LICENSE-CONTENT.md。
+
+---
+
+## 7. 快速上手路径（新 Agent 接手）
+
+1. 读 `交接文档.md`「零、当前阻塞」+「一、当前进度」→ 当前 HEAD（vX.Y.Z W###）、下一 W 编号、遗留待办。
+2. 读 `README.md` → 项目全貌、内容规模、在线站点、双协议。
+3. 读 `docs/00-导读/文档规范.md` §11 → 文件管控清单（必同步/禁擅改/接手速查 6 步/同步核对 10 项）。
+4. 读 `交接文档.md`「三、方法论沉淀」→ 可复利经验。
+5. 深挖结构看 `STRUCTURE.md`、`scripts/output/file-index.md`（反向索引）、`CHANGELOG.md`（正向时间线）。
+6. 动手前跑 `python scripts/verify_delivery.py` 确认基线全绿。
+
+---
+
+## 8. 权威文档（冲突时以此为准）
+
+- 进度中枢 / 规则：`交接文档.md`、`新Agent启动Prompt.md`（速用精简版）
+- 文档规范：`docs/00-导读/文档规范.md`（尤其 §11 文件管控）
+- 设计规范：`DESIGN.md`
+- 目录结构：`STRUCTURE.md`
+- 变更日志：`CHANGELOG.md`（正向）+ `scripts/output/file-index.md`（反向）
+- 诊断 SOP：`docs/10-方法论沉淀/前端显示问题诊断SOP.md`
+
+---
+
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）。如与上述权威文档冲突，以权威文档为准。*
