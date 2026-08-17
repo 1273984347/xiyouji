@@ -4,11 +4,21 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W476），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W477），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
+
+### v2.3.80（2026-08-18）：W477 Phase E1 组件层 v2 + 根页模板化 — system.css v2 全站传播
+
+> **来源**：Phase E 路线图 E1 批次（W477·用户 2026-08-18 授权「继续按着方案做」）。E0 探针 P6 显示公共组件选择器在 224-227 页内联重复——本批把组件层升级为全站唯一事实源 v2，根页做模板化首批。
+> - **执行（system.css v2·+2455B ≤ +6KB 预算）**：card/kpi/chart-block 接 `--elev-1` 默认海拔 + hover `--elev-2` + `--radius-md`（纸感轻立体全站生效）；btn 五态完备（:disabled + :active 阴影复位）+ 朱砂微渐变（§4A.3 白名单 #2·`linear-gradient(var(--accent), var(--accent-deep))`）；filter-tab/badge/search-box 转 `--radius-pill` + 显式时长令牌（消除 `transition: all`）；tooltip 升 `--elev-3`（悬浮层规则）；topnav 背景/table 行 hover/index-row hover 颜色令牌化（color-mix 派生）；新增微交互工具类 `.u-lift/.u-press/.reveal-in（fail-open：需 html.js-reveal 门禁类）/.u-tabular` + 语义色文本 `.text-ok~info`。
+> - **执行（根页模板化首批）**：index 提问框全令牌化（elev/radius/渐变按钮/focus 光圈/chip pill）；dashboard footer 统一 `.site-footer` + 陈旧版本 v2.2.86→v2.3.79 + 两处 focus 派生统一；curated/guide 卡片海拔化；mobile-index nav-card/kpi-item 令牌化；**text-search 主搜索框真缺陷修复**（`--focus-ring` 全站无定义·focus 指示失效→color-mix 光圈）。
+> - **执行（Noto Sans SC 子集化）**：复用 W334 管线（docs+site 实际用字 9340 字）覆写两档 771/783KB→755/766KB；原文件备份于会话工作区。实测收益有限（站点需渲染全文·字符集即刚需）——**unicode-range 切片按需加载登记为后续性能专项**（E5 或独立批）。
+> - **执行（传播）**：inline_css --force 225 页（data 87 + en 138）；根页同目录 link 实时跟随。
+> - **验证**：Playwright 6 页抽查（index/dashboard/curated/guide/chapter-stats/81-hardships）pageerror=0 + 计算样式断言（radius 6/10px + elev-1 阴影生效）+ 截图目视确认纸感层次；check_structure 232 文件 630 块；check_js_syntax 232；CSP 1173 哈希 0 漂移；lint_links 4122·0 broken；verify_delivery 核心全绿。
+> - **状态**：已落地·随本 commit 提交。E1 收口·下一批 E2（CN 可视化页传播 I·W478）。
 
 ### v2.3.79（2026-08-18）：W476 Phase E0 纸感轻立体宪改 + tokens v3 — 视觉高级感升级轨（Phase E）启动批
 
