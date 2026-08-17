@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#faf7f2">
     <title>Zen Koan vs. Inner-Alchemy — Annotated English Edition</title>
-            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                    <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -100,6 +100,17 @@
 
     /* —— 阴影（克制，仅卡片浮起用） —— */
     --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+    --shadow-lift: 0 2px 6px rgba(35, 32, 26, 0.08), 0 8px 24px rgba(35, 32, 26, 0.08);
+
+    /* —— 动效令牌（W460 墨韵动效体系：时长三级 + 缓动三系） —— */
+    /* 时长：fast 即时反馈 / base 状态变化 / slow 入场编排（克制雅致，不上弹跳） */
+    --dur-fast: 150ms;        /* 按压、toggle、色彩切换 */
+    --dur-base: 250ms;        /* hover、行高亮、tooltip */
+    --dur-slow: 500ms;        /* 卡片入场、区块 reveal */
+    /* 缓动：内容抵达用 ease-out 系；弃用裸 ease 关键字 */
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);      /* 均匀精致·默认 */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);       /* 果断自信·大位移入场 */
+    --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);   /* 往返对称·展开收起 */
 
     /* —— 字体三层分工 —— */
     --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
@@ -331,11 +342,14 @@ h4 { font-size: 18px; font-weight: 500; }
     border: 1px solid var(--line);
     border-radius: 3px;
     padding: clamp(20px, 3vw, 28px);
-    transition: border-color 0.2s, transform 0.2s;
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
 }
 .card:hover {
     border-color: var(--accent);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
 }
 .card-grid {
     display: grid;
@@ -369,9 +383,15 @@ h4 { font-size: 18px; font-weight: 500; }
     border: 1px solid var(--line);
     border-radius: 3px;
     padding: 20px;
-    transition: border-color 0.2s;
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
 }
-.kpi:hover { border-color: var(--accent); }
+.kpi:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+}
 .kpi .kpi-value {
     font-family: var(--font-mono);
     font-size: 32px;
@@ -464,12 +484,31 @@ td {
     color: var(--ink);
 }
 tr:last-child td { border-bottom: none; }
-tr:hover td { background: rgba(255, 255, 255, 0.5); }
+/* —— 墨韵动效（W460）：行 hover 暖纸底 + 左缘朱砂指示条 + 数字列加深 —— */
+tbody tr td { transition: background-color var(--dur-fast) var(--ease-out-quart); }
+tbody tr:hover td { background: rgba(241, 235, 221, 0.6); }
+tbody tr:hover td:first-child { box-shadow: inset 2px 0 0 0 var(--accent); }
+tbody tr:hover td.num { color: var(--accent-3); }
 td.num, th.num {
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
     text-align: right;
 }
+
+/* —— 墨韵动效（W460）：opt-in 行入场 stagger（.table-anim，仅静态表格） —— */
+/* --row-i 由页面静态 <tr> 写入；min() 封顶第 12 行起延迟 220ms，总时长 ≤ 470ms */
+/* fail-open：calc/min 不支持时整条 animation 声明被丢弃，行直接可见 */
+.table-anim tbody tr {
+    animation: row-in var(--dur-base) var(--ease-out-quart) both;
+    animation-delay: calc(min(var(--row-i, 0), 11) * 20ms);
+}
+@keyframes row-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+}
+/* opt-in sticky 表头（.table-wrap--sticky，仅行数 > 30 的表格） */
+.table-wrap--sticky { max-height: 65vh; overflow: auto; }
+.table-wrap--sticky thead th { position: sticky; top: 0; background: var(--paper-warm); z-index: 1; }
 
 /* ===== 标签/徽章 ===== */
 .badge {
@@ -486,6 +525,33 @@ td.num, th.num {
 .badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
 .badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
 
+/* —— 墨韵动效（W460）：正文链接下划线生长（opt-in 类 .link-ink，禁止 blanket a） —— */
+.link-ink {
+    background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 100% / 0% 1px;
+    transition: background-size var(--dur-base) var(--ease-out-quart);
+}
+.link-ink:hover { background-size: 100% 1px; }
+
+/* —— 墨韵动效（W460）：图表 tooltip 全站统一样式（P1 批次逐页采用） —— */
+.chart-tooltip {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 8px 12px;
+    max-width: 280px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink);
+    box-shadow: var(--shadow-lift);
+    opacity: 0;
+    transition: opacity var(--dur-base) var(--ease-out-quart);
+}
+.chart-tooltip.visible { opacity: 1; }
+
 /* ===== 按钮 ===== */
 .btn {
     display: inline-flex;
@@ -499,9 +565,13 @@ td.num, th.num {
     background: var(--paper);
     color: var(--ink);
     cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart),
+                color var(--dur-fast) var(--ease-out-quart),
+                transform var(--dur-fast) var(--ease-out-quart);
 }
 .btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn:active { transform: scale(0.97); }
 .btn-primary {
     background: var(--accent);
     border-color: var(--accent);
@@ -643,7 +713,7 @@ td.num, th.num {
     border-radius: 3px;
     background: var(--paper);
     color: var(--ink);
-    transition: border-color 0.15s;
+    transition: border-color var(--dur-fast) var(--ease-out-quart);
 }
 .search-box input:focus {
     outline: none;

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-v5oEIkPe6oML0j6sMYtqm57m0v9b5kbB4CURvvo5NUM=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-pqh5GmUO/aReA5ny5YQ5r1lJk1groMOoRF2gS9+7qVk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>情感热力图 · 详解西游记</title>
@@ -10,7 +10,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     
     
-        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -37,35 +37,35 @@
     font-style: normal;
     font-weight: 200 900;
     font-display: optional;
-    src: url('../static/fonts/noto-serif-sc-shared.woff2') format('woff2-variations');
+    src: url('static/fonts/noto-serif-sc-shared.woff2') format('woff2-variations');
 }
 @font-face {
     font-family: 'Noto Sans SC';
     font-style: normal;
     font-weight: 400;
     font-display: optional;
-    src: url('../static/fonts/NotoSansSC-Regular.woff2') format('woff2');
+    src: url('static/fonts/NotoSansSC-Regular.woff2') format('woff2');
 }
 @font-face {
     font-family: 'Noto Sans SC';
     font-style: normal;
     font-weight: 500;
     font-display: optional;
-    src: url('../static/fonts/NotoSansSC-Medium.woff2') format('woff2');
+    src: url('static/fonts/NotoSansSC-Medium.woff2') format('woff2');
 }
 @font-face {
     font-family: 'JetBrains Mono';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('../static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+    src: url('static/fonts/JetBrainsMono-Regular.woff2') format('woff2');
 }
 @font-face {
     font-family: 'JetBrains Mono';
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url('../static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+    src: url('static/fonts/JetBrainsMono-Medium.woff2') format('woff2');
 }
 
 :root {
@@ -104,6 +104,17 @@
 
     /* —— 阴影（克制，仅卡片浮起用） —— */
     --shadow: 0 1px 3px rgba(35, 32, 26, 0.06), 0 4px 12px rgba(35, 32, 26, 0.05);
+    --shadow-lift: 0 2px 6px rgba(35, 32, 26, 0.08), 0 8px 24px rgba(35, 32, 26, 0.08);
+
+    /* —— 动效令牌（W460 墨韵动效体系：时长三级 + 缓动三系） —— */
+    /* 时长：fast 即时反馈 / base 状态变化 / slow 入场编排（克制雅致，不上弹跳） */
+    --dur-fast: 150ms;        /* 按压、toggle、色彩切换 */
+    --dur-base: 250ms;        /* hover、行高亮、tooltip */
+    --dur-slow: 500ms;        /* 卡片入场、区块 reveal */
+    /* 缓动：内容抵达用 ease-out 系；弃用裸 ease 关键字 */
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);      /* 均匀精致·默认 */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);       /* 果断自信·大位移入场 */
+    --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);   /* 往返对称·展开收起 */
 
     /* —— 字体三层分工 —— */
     --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
@@ -286,7 +297,7 @@ h4 { font-size: 18px; font-weight: 500; }
 /* ===== Hero（数据页通用） ===== */
 .hero {
     background: var(--dark);
-    background-image: url('../static/images/ink-mountains-hero.webp');
+    background-image: url('static/images/ink-mountains-hero.webp');
     background-size: cover;
     background-position: center 70%;
     background-blend-mode: soft-light;
@@ -335,11 +346,14 @@ h4 { font-size: 18px; font-weight: 500; }
     border: 1px solid var(--line);
     border-radius: 3px;
     padding: clamp(20px, 3vw, 28px);
-    transition: border-color 0.2s, transform 0.2s;
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
 }
 .card:hover {
     border-color: var(--accent);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
 }
 .card-grid {
     display: grid;
@@ -373,9 +387,15 @@ h4 { font-size: 18px; font-weight: 500; }
     border: 1px solid var(--line);
     border-radius: 3px;
     padding: 20px;
-    transition: border-color 0.2s;
+    transition: border-color var(--dur-base) var(--ease-out-quart),
+                transform var(--dur-base) var(--ease-out-quart),
+                box-shadow var(--dur-base) var(--ease-out-quart);
 }
-.kpi:hover { border-color: var(--accent); }
+.kpi:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+}
 .kpi .kpi-value {
     font-family: var(--font-mono);
     font-size: 32px;
@@ -468,12 +488,31 @@ td {
     color: var(--ink);
 }
 tr:last-child td { border-bottom: none; }
-tr:hover td { background: rgba(255, 255, 255, 0.5); }
+/* —— 墨韵动效（W460）：行 hover 暖纸底 + 左缘朱砂指示条 + 数字列加深 —— */
+tbody tr td { transition: background-color var(--dur-fast) var(--ease-out-quart); }
+tbody tr:hover td { background: rgba(241, 235, 221, 0.6); }
+tbody tr:hover td:first-child { box-shadow: inset 2px 0 0 0 var(--accent); }
+tbody tr:hover td.num { color: var(--accent-3); }
 td.num, th.num {
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
     text-align: right;
 }
+
+/* —— 墨韵动效（W460）：opt-in 行入场 stagger（.table-anim，仅静态表格） —— */
+/* --row-i 由页面静态 <tr> 写入；min() 封顶第 12 行起延迟 220ms，总时长 ≤ 470ms */
+/* fail-open：calc/min 不支持时整条 animation 声明被丢弃，行直接可见 */
+.table-anim tbody tr {
+    animation: row-in var(--dur-base) var(--ease-out-quart) both;
+    animation-delay: calc(min(var(--row-i, 0), 11) * 20ms);
+}
+@keyframes row-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+}
+/* opt-in sticky 表头（.table-wrap--sticky，仅行数 > 30 的表格） */
+.table-wrap--sticky { max-height: 65vh; overflow: auto; }
+.table-wrap--sticky thead th { position: sticky; top: 0; background: var(--paper-warm); z-index: 1; }
 
 /* ===== 标签/徽章 ===== */
 .badge {
@@ -490,6 +529,33 @@ td.num, th.num {
 .badge-gold { color: var(--accent-3); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
 .badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
 
+/* —— 墨韵动效（W460）：正文链接下划线生长（opt-in 类 .link-ink，禁止 blanket a） —— */
+.link-ink {
+    background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 100% / 0% 1px;
+    transition: background-size var(--dur-base) var(--ease-out-quart);
+}
+.link-ink:hover { background-size: 100% 1px; }
+
+/* —— 墨韵动效（W460）：图表 tooltip 全站统一样式（P1 批次逐页采用） —— */
+.chart-tooltip {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 8px 12px;
+    max-width: 280px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink);
+    box-shadow: var(--shadow-lift);
+    opacity: 0;
+    transition: opacity var(--dur-base) var(--ease-out-quart);
+}
+.chart-tooltip.visible { opacity: 1; }
+
 /* ===== 按钮 ===== */
 .btn {
     display: inline-flex;
@@ -503,9 +569,13 @@ td.num, th.num {
     background: var(--paper);
     color: var(--ink);
     cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                background var(--dur-fast) var(--ease-out-quart),
+                color var(--dur-fast) var(--ease-out-quart),
+                transform var(--dur-fast) var(--ease-out-quart);
 }
 .btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn:active { transform: scale(0.97); }
 .btn-primary {
     background: var(--accent);
     border-color: var(--accent);
@@ -647,7 +717,7 @@ td.num, th.num {
     border-radius: 3px;
     background: var(--paper);
     color: var(--ink);
-    transition: border-color 0.15s;
+    transition: border-color var(--dur-fast) var(--ease-out-quart);
 }
 .search-box input:focus {
     outline: none;
@@ -774,25 +844,10 @@ td.num, th.num {
             opacity: 0.16;
             pointer-events: none;
         }
-        .heat-tooltip {
-            position: absolute;
-            background: #1a1410;
-            color: #f5e9d4;
-            padding: 12px 14px;
-            border-radius: 6px;
-            font-size: 0.84rem;
-            line-height: 1.55;
-            max-width: 340px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.15s;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-            border: 1px solid var(--accent-soft);
-            z-index: 10;
-        }
-        .heat-tooltip .ht-scholar { color: var(--accent-soft); font-weight: 600; font-size: 0.96rem; }
-        .heat-tooltip .ht-meta { color: rgba(245,233,212,0.7); font-size: 0.76rem; margin: 2px 0 6px; font-family: "JetBrains Mono", monospace; }
-        .heat-tooltip .ht-pill {
+        /* 墨韵（W460）：tooltip 盒样式统一采用 system.css .chart-tooltip；以下仅保留内部结构样式（改宣纸底配色） */
+        #heat-tooltip .ht-scholar { color: var(--accent); font-weight: 600; font-size: 0.96rem; }
+        #heat-tooltip .ht-meta { color: var(--ink-soft); font-size: 0.76rem; margin: 2px 0 6px; font-family: "JetBrains Mono", monospace; }
+        #heat-tooltip .ht-pill {
             display: inline-block;
             font-size: 0.72rem;
             padding: 1px 7px;
@@ -803,7 +858,7 @@ td.num, th.num {
         .ht-pill.positive { background: var(--accent-4); }
         .ht-pill.neutral  { background: var(--accent-3); }
         .ht-pill.negative { background: var(--accent); }
-        .heat-tooltip .ht-quote { color: var(--accent-soft); font-style: italic; margin-top: 6px; overflow-wrap: anywhere; }
+        #heat-tooltip .ht-quote { color: var(--accent-3); font-style: italic; margin-top: 6px; overflow-wrap: anywhere; }
 
         /* ===== Chart 2: 情感波动曲线 ===== */
         .curves-wrap {
@@ -842,23 +897,8 @@ td.num, th.num {
             font-weight: 600;
         }
         .curve-end-label.dim { opacity: 0.18; }
-        .curves-tooltip {
-            position: absolute;
-            background: #1a1410;
-            color: #f5e9d4;
-            padding: 10px 12px;
-            border-radius: 6px;
-            font-size: 0.82rem;
-            line-height: 1.5;
-            max-width: 300px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.15s;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-            border: 1px solid var(--accent-soft);
-            z-index: 10;
-        }
-        .curves-tooltip .ct-name { color: var(--accent-soft); font-weight: 600; }
+        /* 墨韵（W460）：盒样式统一 .chart-tooltip，内部样式保留（宣纸底配色） */
+        #curves-tooltip .ct-name { color: var(--accent); font-weight: 600; }
 
         /* ===== Chart 3: 名人卡片 ===== */
         .scholar-grid {
@@ -1102,7 +1142,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="heatmap-wrap">
                 <svg id="heatmap-svg" role="img" aria-labelledby="heatmap-title"><title id="heatmap-title">情感热力图：8 位名人 × 20 难的反应强度矩阵，hover 单元格查看引文</title></svg>
             </div>
-            <div class="heat-tooltip" id="heat-tooltip"></div>
+            <div class="chart-tooltip" id="heat-tooltip"></div>
             <div class="interaction-hint">
                 提示：<kbd>hover</kbd> 单元格查看引文 · <kbd>click</kbd> 名人卡片或单元格锁定高亮该行 · 再次点击取消
             </div>
@@ -1118,7 +1158,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="curves-wrap">
                 <svg id="curves-svg" role="img" aria-labelledby="curves-title"><title id="curves-title">情感波动曲线：每位名人一条折线，横轴 20 难序号，纵轴反应强度 1-10，hover 圆点显示详情</title></svg>
             </div>
-            <div class="curves-tooltip" id="curves-tooltip"></div>
+            <div class="chart-tooltip" id="curves-tooltip"></div>
         </section>
 
         <!-- 核心可视化 3：名人卡片 -->
@@ -1416,7 +1456,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     /* ==========================================================
        图表 1：热力图矩阵
        ========================================================== */
-    function renderHeatmap(scholars, hardships, reactions) {
+    function renderHeatmap(scholars, hardships, reactions, animate) {
         if (!scholars || !hardships || !reactions || scholars.length === 0 || hardships.length === 0 || reactions.length === 0) {
             d3.select("#heatmap-svg").selectAll("*").remove();
             d3.select("#heatmap-svg").append("text").text("暂无数据");
@@ -1448,14 +1488,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("opacity", 0);
         });
 
-        // 单元格
+        // 单元格——墨韵 W460：对角波浪 stagger（(si+hi) 封顶 400ms）
         const tooltip = d3.select("#heat-tooltip");
         scholars.forEach((s, si) => {
             hardships.forEach((h, hi) => {
                 const r = idxMap[s.name + "|" + h.chapter];
                 if (!r) return;
                 const opacity = 0.22 + (r.intensity - 1) / 9 * 0.78;
-                g.append("rect")
+                const cell = g.append("rect")
                     .attr("class", "heat-cell")
                     .attr("data-scholar", s.key)
                     .attr("data-hardship", h.idx)
@@ -1468,7 +1508,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .attr("opacity", opacity)
                     .attr("data-base-opacity", opacity)
                     .on("mouseover", function(event) {
-                        tooltip.style("opacity", 1);
+                        tooltip.classed("visible", true);
                         tooltip.html(
                             `<div class="ht-scholar">${s.name}</div>` +
                             `<div class="ht-meta">第 ${r.chapter} 回 · ${h.title}</div>` +
@@ -1490,7 +1530,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                         tooltip.style("left", left + "px").style("top", top + "px");
                     })
                     .on("mouseout", function() {
-                        tooltip.style("opacity", 0);
+                        tooltip.classed("visible", false);
                         state.hoveredScholar = null;
                         applyHeatmapHighlight();
                     })
@@ -1498,6 +1538,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                         state.highlightedScholar = (state.highlightedScholar === s.key) ? null : s.key;
                         applyAllHighlight();
                     });
+                if (animate) {
+                    cell.attr("opacity", 0)
+                        .transition().duration(500)
+                        .delay(200 + Math.min((si + hi) * 20, 400))
+                        .ease(d3.easeCubicOut)
+                        .attr("opacity", opacity);
+                }
             });
         });
 
@@ -1556,7 +1603,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     /* ==========================================================
        图表 2：情感波动曲线
        ========================================================== */
-    function renderCurves(scholars, hardships, reactions) {
+    function renderCurves(scholars, hardships, reactions, animate) {
         if (!scholars || !hardships || !reactions || scholars.length === 0 || hardships.length === 0 || reactions.length === 0) {
             d3.select("#curves-svg").selectAll("*").remove();
             d3.select("#curves-svg").append("text").text("暂无数据");
@@ -1586,18 +1633,22 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .domain([0, 10])
             .range([innerH, 0]);
 
-        // X 轴
-        g.append("g")
+        // X 轴（墨韵 W460：200ms 淡入）
+        const gx = g.append("g")
             .attr("class", "curves-axis")
             .attr("transform", `translate(0,${innerH})`)
             .call(d3.axisBottom(x).tickFormat(d => "·" + d).ticks(hardships.length))
             .call(g => g.select(".domain").remove());
+        if (animate) gx.attr("opacity", 0)
+            .transition().duration(200).ease(d3.easeCubicOut).attr("opacity", 1);
 
         // Y 轴
-        g.append("g")
+        const gy = g.append("g")
             .attr("class", "curves-axis")
             .call(d3.axisLeft(y).ticks(5))
             .call(g => g.select(".domain").remove());
+        if (animate) gy.attr("opacity", 0)
+            .transition().duration(200).ease(d3.easeCubicOut).attr("opacity", 1);
 
         // 轴标签
         g.append("text")
@@ -1612,9 +1663,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("font-size", "0.8rem").style("fill", "var(--ink-soft)")
             .text("反应强度 intensity（1–10）");
 
-        // 横向网格虚线
+        // 横向网格虚线（墨韵 W460：100ms 后 300ms 淡入）
         const yTicks = [2, 4, 6, 8, 10];
-        g.selectAll(".curves-grid")
+        const gridSel = g.selectAll(".curves-grid")
             .data(yTicks)
             .enter()
             .append("line")
@@ -1623,11 +1674,15 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("stroke", "var(--line)")
             .attr("stroke-dasharray", "2,4")
             .attr("opacity", 0.6);
+        if (animate) gridSel.attr("opacity", 0)
+            .transition().delay(100).duration(300).ease(d3.easeCubicOut)
+            .attr("opacity", 0.6);
 
         const tooltip = d3.select("#curves-tooltip");
 
-        // 8 条曲线，每条按段着色
-        scholars.forEach(s => {
+        // 8 条曲线，每条按段着色——墨韵 W460：按人物级联入场（步长 60ms 封顶 400ms）
+        scholars.forEach((s, si) => {
+            const sDelay = 200 + Math.min(si * 60, 400);
             const pts = hardships.map(h => {
                 const r = idxMap[s.name + "|" + h.chapter];
                 if (!r) return null;
@@ -1636,31 +1691,35 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
             // 段（每两个相邻点一段，颜色 = 起点的 sentiment）
             for (let i = 0; i < pts.length - 1; i++) {
-                g.append("line")
+                const seg = g.append("line")
                     .attr("class", "curve-seg")
                     .attr("data-scholar", s.key)
                     .attr("x1", pts[i].x).attr("y1", pts[i].y)
                     .attr("x2", pts[i + 1].x).attr("y2", pts[i + 1].y)
                     .attr("stroke", sentimentColor(pts[i].r.sentiment));
+                if (animate) seg.attr("opacity", 0)
+                    .transition().duration(500).delay(sDelay)
+                    .ease(d3.easeCubicOut)
+                    .attr("opacity", 1);
             }
 
             // 点
             pts.forEach(p => {
-                g.append("circle")
+                const dot = g.append("circle")
                     .attr("class", "curve-dot")
                     .attr("data-scholar", s.key)
                     .attr("cx", p.x)
                     .attr("cy", p.y)
-                    .attr("r", 3.4)
+                    .attr("r", animate ? 0 : 3.4)
                     .attr("fill", sentimentColor(p.r.sentiment))
                     .on("mouseover", function(event) {
                         d3.select(this).attr("r", 5.5);
-                        tooltip.style("opacity", 1);
+                        tooltip.classed("visible", true);
                         tooltip.html(
-                            `<div class="ct-name">${s.name} <span style="color:rgba(245,233,212,0.6);font-size:0.78rem;">· 第 ${p.r.chapter} 回 ${p.h.title}</span></div>` +
+                            `<div class="ct-name">${s.name} <span style="color:var(--ink-faint);font-size:0.78rem;">· 第 ${p.r.chapter} 回 ${p.h.title}</span></div>` +
                             `<div style="margin-top:4px;"><span class="ht-pill ${p.r.sentiment}">${sentimentLabel(p.r.sentiment)}</span>` +
-                            `<span style="color:rgba(245,233,212,0.7);font-size:0.78rem;font-family:'JetBrains Mono',monospace;"> 强度 ${p.r.intensity}/10</span></div>` +
-                            `<div style="color:var(--accent-soft);font-style:italic;margin-top:4px;overflow-wrap:anywhere;">「${p.r.quote}」</div>`
+                            `<span style="color:var(--ink-soft);font-size:0.78rem;font-family:'JetBrains Mono',monospace;"> 强度 ${p.r.intensity}/10</span></div>` +
+                            `<div style="color:var(--accent-3);font-style:italic;margin-top:4px;overflow-wrap:anywhere;">「${p.r.quote}」</div>`
                         );
                         state.hoveredScholar = s.key;
                         applyCurvesHighlight();
@@ -1677,17 +1736,22 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     })
                     .on("mouseout", function() {
                         d3.select(this).attr("r", 3.4);
-                        tooltip.style("opacity", 0);
+                        tooltip.classed("visible", false);
                         state.hoveredScholar = null;
                         applyCurvesHighlight();
                         applyHeatmapHighlight();
                     });
+                if (animate) {
+                    dot.transition().duration(500).delay(sDelay + 150)
+                        .ease(d3.easeCubicOut)
+                        .attr("r", 3.4);
+                }
             });
 
-            // 线尾标签
+            // 线尾标签——墨韵 W460：随人物曲线淡入
             if (pts.length > 0) {
                 const last = pts[pts.length - 1];
-                g.append("text")
+                const endLabel = g.append("text")
                     .attr("class", "curve-end-label")
                     .attr("data-scholar-label", s.key)
                     .attr("x", last.x + 8)
@@ -1695,6 +1759,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .attr("dy", "0.32em")
                     .attr("fill", s.color)
                     .text(s.name);
+                if (animate) endLabel.attr("opacity", 0)
+                    .transition().duration(500).delay(sDelay + 250)
+                    .ease(d3.easeCubicOut)
+                    .attr("opacity", 1);
             }
         });
 
@@ -1861,26 +1929,30 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     }
 
     /* ==========================================================
-       主流程
+       主流程（墨韵 W460：ANIMATE 仅首帧 true——入场编排只在首次渲染播放）
        ========================================================== */
+    let ANIMATE = true;
+    try { if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) ANIMATE = false; } catch (_) {}
     async function main() {
         const data = await loadData();
         window.__lastData = data;
+        const animate = ANIMATE;
 
-        renderHeatmap(data.scholars, data.hardships, data.reactions);
-        renderCurves(data.scholars, data.hardships, data.reactions);
+        renderHeatmap(data.scholars, data.hardships, data.reactions, animate);
+        renderCurves(data.scholars, data.hardships, data.reactions, animate);
         renderScholarCards(data.scholars, data.hardships, data.reactions);
         renderInsights();
+        ANIMATE = false;
     }
 
-    // 响应式重绘（防抖 250ms）
+    // 响应式重绘（防抖 250ms）——墨韵 W460：重渲染直达终态不重播入场
     let resizeTimer;
     window.addEventListener("resize", () => {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
             if (window.__lastData) {
-                renderHeatmap(window.__lastData.scholars, window.__lastData.hardships, window.__lastData.reactions);
-                renderCurves(window.__lastData.scholars, window.__lastData.hardships, window.__lastData.reactions);
+                renderHeatmap(window.__lastData.scholars, window.__lastData.hardships, window.__lastData.reactions, false);
+                renderCurves(window.__lastData.scholars, window.__lastData.hardships, window.__lastData.reactions, false);
             }
         }, 250);
     });

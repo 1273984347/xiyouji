@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.74（2026-08-17）— W459 V2 审查收尾（D2 回目跳转死链修复：A1_DOC_MAP 100 条映射 + check_dynamic_links.py 动态链接门禁 + V2 方案文档回写 + 首页 geo-3d 入口）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.75（2026-08-17）— W460 墨韵全站动效体系 P0+样板批（motion tokens + 表格/组件动效 225 页同步 + count-up + D3 编排统一 + tooltip 收编）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 顶层结构
 
