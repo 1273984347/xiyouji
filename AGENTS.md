@@ -15,7 +15,7 @@
 
 **核心内容规模**：A1–A6 内容板块共 611 篇（A1 逐回 100 / A2 随笔 44 / A3 人物 211 / A4 主题 209 / A5 文化 34 / A6 诗词 13）；英文站 site/en/ 138 页已全量英文化。
 
-**设计方向**：锁定「新中式·数字雅集」——纸白底（#faf7f2）、墨黑主文、朱砂点缀（#c8463a）、靛蓝链接（#3a6b8c），严格零依赖纯 CSS。详见 DESIGN.md。
+**设计方向**：锁定「新中式·数字雅集」（宣纸底/墨文/朱砂点缀/零外域依赖）；**页面动效是强制契约**——时长三档预算（≤150/250/600ms）、reduced-motion 双守卫、tooltip 统一 `.chart-tooltip`、count-up fail-open 等，详见 DESIGN.md（视觉 §1-4、**动效 §5**）。
 
 **版本号语义**：`vX.Y.Z` 是**内容发布批次编号，不适用 SemVer**。每个发布批次有唯一 W### ID；判断"改了什么"看 CHANGELOG.md，不要从版本号推断兼容性。
 
@@ -117,7 +117,8 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 
 - **改任何内联脚本后，必须重跑 `python scripts/generate_csp.py`**——否则 CSP sha256 哈希失配，整个内联脚本被浏览器拒执行（症状：无 pageerror 但内容空白、`window.__data` 未设置）。
 - **批量正则改 CSS/JS 后必须验证括号/引号平衡**（`check_structure.py` / `_find_css_breaks.py`）。
-- **bump_version.py** 一键补齐辅助 4 文档版本行；跑完必须 Grep 校验 file-index 历史段未被全局替换污染。
+- **bump_version.py** 一键补齐辅助 4 文档版本行；**两个已知坑（均多次复现）**：① 全局替换会污染 file-index 历史段；② `--desc` 会往 STRUCTURE.md 头部 / docs/00-导读/项目说明.md 的上一版本行**追加**「 + W46X(...)」而非替换主描述——跑完必须 Grep 校验这三处并手工净化。
+- **CHANGELOG 多版段插入/重排只用脚本 + 结构断言**（锚点唯一性 + 版段 order 校验），手工 Edit 大段会吞相邻版段标题；**新批版本号先 Grep 现役段取 max+1 再写**（防撞号）。
 - `_` 前缀脚本为一次性/诊断脚本，不入库门禁、不参与 CI。
 
 ### 4.4 Web Agent（xiyouji-agent-web/）
@@ -204,6 +205,7 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 9. **禁重跑 w286_merge_yuanwen_shendu.py**（A1 深度解读 SD 编号会再次错位）。
 10. **批量重写脚本改完**：`git diff --name-only` 对比改动范围，非必要改动 `git restore` 回退。
 11. **双协议**：代码 MIT + 文本 CC BY-NC 4.0（非商用），拆分 LICENSE / LICENSE-CONTENT.md。
+12. **动效契约（W463 固化）**：新增/修改可视化页动效必须遵守 DESIGN.md §5——时长 ≤600ms（白名单仅 hero 600 / count-up 900）、reduced-motion JS 守卫（D3 transition 不受 CSS media 控制，须 `MOYUN_RM` 调用点级或 prototype 级短路）、tooltip 统一 `.chart-tooltip` + `.classed('visible')`；批量改动后重跑 generate_csp.py + duration≤600 扫描。
 
 ---
 
@@ -222,11 +224,11 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 - 进度中枢 / 规则：`交接文档.md`、`新Agent启动Prompt.md`（速用精简版）
 - 文档规范：`docs/00-导读/文档规范.md`（尤其 §11 文件管控）
-- 设计规范：`DESIGN.md`
+- 设计规范：`DESIGN.md`（§1-4 视觉 / **§5 动效契约**）
 - 目录结构：`STRUCTURE.md`
 - 变更日志：`CHANGELOG.md`（正向）+ `scripts/output/file-index.md`（反向）
 - 诊断 SOP：`docs/10-方法论沉淀/前端显示问题诊断SOP.md`
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458），2026-08-17（v2.3.78 W463）墨韵系列复盘增补动效契约（§1/§6-12/§8）与 W 批收尾坑（§4.3）。如与上述权威文档冲突，以权威文档为准。*
