@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-wW7pBthMGsM6yLKN2dwXAATGdC2pl2FVPwBtfHy1z5s=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-0imAO5wiKOJSAI2Jbupz+a5xmAvHUAsnEhb6Tlf35HA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-xchy8YDttICKaGncvQtg+aiL/4KR/02v7geH9VAiC6c='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>哲学与心性 · 详解西游记</title>
@@ -1635,6 +1635,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         数据源：scripts/G_哲学与心性/ 生成的 3 份 JSON。
     -->
     <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
     const EMBEDDED = {
         mind_monkey: {
             "concept_name": "心猿心性曲线",
@@ -2153,7 +2156,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr('stroke-width', 2)
             .style('cursor', 'pointer')
             .on('mouseover', function(e, d) {
-                d3.select(this).transition().duration(120).attr('d', arcHover);
+                d3.select(this).transition().duration(MOYUN_RM?0:120).attr('d', arcHover);
                 const pct = (d.data.count / total * 100).toFixed(1);
                 tooltip.show(
                     `<strong style="color:${colorOf(d.data.mind_obstacle)}">${d.data.category}</strong> · ${d.data.english_name}<br>` +
@@ -2163,7 +2166,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     `代表劫难：${d.data.representative_hardships.join(' · ')}`, e);
             })
             .on('mouseout', function() {
-                d3.select(this).transition().duration(120).attr('d', arcGen);
+                d3.select(this).transition().duration(MOYUN_RM?0:120).attr('d', arcGen);
                 tooltip.hide();
             });
 
@@ -2542,7 +2545,5 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>

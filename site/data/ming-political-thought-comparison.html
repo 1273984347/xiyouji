@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-gOSelf1MChcuRkCWHIMK+Z6RLf5I/r/HW9bOCFYiHCs=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-vMd6HqP9/jg+k8RnalAoHBmJ6HprqpqzTrSvj7wpPI0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>明代政治思想对照图谱 · 详解西游记</title>
@@ -816,14 +816,10 @@ td.num, th.num {
         .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 2px; }
         .legend-row .lg-swatch.line { width: 22px; height: 3px; border-radius: 1px; }
         .legend-row .lg-swatch.dot { border-radius: 50%; }
-        .tooltip {
-            position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
-            color: #f5e9d4; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem;
-            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 320px;
-        }
-        .tooltip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
-        .tooltip .tip-row { color: #d9cdb8; line-height: 1.5; }
-        .tooltip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
+        /* 墨韵（W462）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
+        .chart-tooltip .tip-title { font-weight: bold; color: var(--accent); margin-bottom: 6px; font-size: 0.95rem; }
+        .chart-tooltip .tip-row { color: var(--ink); line-height: 1.5; }
+        .chart-tooltip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: var(--ink-faint); margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
         .insight-box {
             background: #fffdf8; border-left: 4px solid var(--accent-soft);
             padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
@@ -918,7 +914,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="radar-title">三对照雷达图</title>
                     <desc id="radar-desc">三个对照组在心性论、治理术、谏诤传统三维上的雷达对比。</desc>
                 </svg>
-                <div class="tooltip" id="radar-tip" role="tooltip"></div>
+                <div class="chart-tooltip" id="radar-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="radar-legend" aria-label="雷达图图例"></div>
         </section>
@@ -932,7 +928,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="hm-title">九维度矩阵热力图</title>
                     <desc id="hm-desc">3 组 × 3 维度共 9 格矩阵热力图。</desc>
                 </svg>
-                <div class="tooltip" id="heat-tip" role="tooltip"></div>
+                <div class="chart-tooltip" id="heat-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="heat-legend" aria-label="热力图图例"></div>
         </section>
@@ -946,7 +942,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="tl-title">明代思想史时间线</title>
                     <desc id="tl-desc">1472-1592 明代思想史关键事件时间线。</desc>
                 </svg>
-                <div class="tooltip" id="timeline-tip" role="tooltip"></div>
+                <div class="chart-tooltip" id="timeline-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="timeline-legend" aria-label="时间线图例"></div>
         </section>
@@ -960,7 +956,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="sk-title">文献引用桑基图</title>
                     <desc id="sk-desc">三文献源经三对照组流向三对照维度的桑基图。</desc>
                 </svg>
-                <div class="tooltip" id="sankey-tip" role="tooltip"></div>
+                <div class="chart-tooltip" id="sankey-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="sankey-legend" aria-label="桑基图图例"></div>
         </section>
@@ -974,7 +970,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <title id="pol-title">三对照维度极坐标图</title>
                     <desc id="pol-desc">三组各自维度在极坐标下的花瓣图。</desc>
                 </svg>
-                <div class="tooltip" id="polar-tip" role="tooltip"></div>
+                <div class="chart-tooltip" id="polar-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="polar-legend" aria-label="极坐标图图例"></div>
         </section>
@@ -1023,6 +1019,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.duration, ol = tp.delay; tp.duration = function (_) { return od.call(this, 0); }; tp.delay = function (_) { return ol.call(this, 0); }; })(); } catch (_) {} }
+
     // ============= EMBEDDED_DATA：明代政治思想对照数据 =============
     const EMBEDDED_DATA = {
         meta: {title: "明代政治思想对照图谱", version: "v2.2.39", w_id: "W233-1", direction: "V3", source_doc: "docs/02-人物深度分析/明代历史原型对照专题.md"},
@@ -1213,9 +1213,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                         .on("mouseover", function(event) {
                             d3.select(this).attr("r", 6);
                             const val = kind === "明代" ? d.value_ming : d.value_xy;
-                            tip.style("opacity", 1)
+                            tip.classed("visible", true)
                                 .html(`<div class="tip-title">${group} · ${d.axis}</div>
-                                    <div class="tip-row">${kind}人物评分：<strong style="color:#e9b885">${val} / 10</strong></div>
+                                    <div class="tip-row">${kind}人物评分：<strong style="color:var(--accent)">${val} / 10</strong></div>
                                     <div class="tip-meta">雷达图 · 第 ${gi + 1} 组 · 维度 ${i + 1}/${axes.length}</div>`);
                         })
                         .on("mousemove", function(event) {
@@ -1225,7 +1225,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                         })
                         .on("mouseout", function() {
                             d3.select(this).attr("r", 4);
-                            tip.style("opacity", 0);
+                            tip.classed("visible", false);
                         });
                 });
             });
@@ -1313,10 +1313,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("opacity", 0)
                 .on("mouseover", function(event) {
                     d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2.5);
-                    tip.style("opacity", 1)
+                    tip.classed("visible", true)
                         .html(`<div class="tip-title">${d.group} · ${d.dimension}</div>
-                            <div class="tip-row">对照强度：<strong style="color:#e9b885">${d.score} / 10</strong></div>
-                            <div class="tip-row">档位：<strong style="color:#e9b885">${d.score <= 3 ? "浅" : d.score <= 6 ? "中" : d.score <= 8 ? "深" : "极深"}</strong></div>
+                            <div class="tip-row">对照强度：<strong style="color:var(--accent)">${d.score} / 10</strong></div>
+                            <div class="tip-row">档位：<strong style="color:var(--accent)">${d.score <= 3 ? "浅" : d.score <= 6 ? "中" : d.score <= 8 ? "深" : "极深"}</strong></div>
                             <div class="tip-meta">3 组 × 3 维度矩阵 · 第 ${GROUPS.indexOf(d.group) + 1} 组第 ${dims.indexOf(d.dimension) + 1} 维</div>`);
                 })
                 .on("mousemove", function(event) {
@@ -1326,7 +1326,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 })
                 .on("mouseout", function() {
                     d3.select(this).attr("stroke", "#fff").attr("stroke-width", 2);
-                    tip.style("opacity", 0);
+                    tip.classed("visible", false);
                 })
                 .transition().duration(DUR).delay(delay)
                 .style("opacity", 1);
@@ -1420,9 +1420,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("cursor", "pointer")
                 .on("mouseover", function(event) {
                     d3.select(this).attr("stroke", "#23201A").attr("stroke-width", 2.5);
-                    tip.style("opacity", 1)
+                    tip.classed("visible", true)
                         .html(`<div class="tip-title">${d.year} · ${d.event}</div>
-                            <div class="tip-row">人物：<strong style="color:#e9b885">${d.figure}</strong></div>
+                            <div class="tip-row">人物：<strong style="color:var(--accent)">${d.figure}</strong></div>
                             <div class="tip-meta">明代思想史时间线 · 索引 ${i + 1}/${EMBEDDED_DATA.timeline.length}</div>`);
                 })
                 .on("mousemove", function(event) {
@@ -1432,7 +1432,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 })
                 .on("mouseout", function() {
                     d3.select(this).attr("stroke", "#fff").attr("stroke-width", 2);
-                    tip.style("opacity", 0);
+                    tip.classed("visible", false);
                 })
                 .transition().duration(DUR).delay(i * 80)
                 .attr("r", 6);
@@ -1539,9 +1539,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("cursor", "pointer")
                 .on("mouseover", function(event) {
                     d3.select(this).attr("stroke-opacity", 0.65);
-                    tip.style("opacity", 1)
+                    tip.classed("visible", true)
                         .html(`<div class="tip-title">${src.name} → ${tgt.name}</div>
-                            <div class="tip-row">流量值：<strong style="color:#e9b885">${l.value}</strong></div>
+                            <div class="tip-row">流量值：<strong style="color:var(--accent)">${l.value}</strong></div>
                             <div class="tip-meta">桑基流 ${i + 1}/${links.length}</div>`);
                 })
                 .on("mousemove", function(event) {
@@ -1551,7 +1551,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 })
                 .on("mouseout", function() {
                     d3.select(this).attr("stroke-opacity", 0.32);
-                    tip.style("opacity", 0);
+                    tip.classed("visible", false);
                 });
         });
 
@@ -1679,9 +1679,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .style("cursor", "pointer")
                     .on("mouseover", function(event) {
                         d3.select(this).attr("fill-opacity", 0.75);
-                        tip.style("opacity", 1)
+                        tip.classed("visible", true)
                             .html(`<div class="tip-title">${group} · ${d.axis}</div>
-                                <div class="tip-row">强度：<strong style="color:#e9b885">${d.value} / 10</strong></div>
+                                <div class="tip-row">强度：<strong style="color:var(--accent)">${d.value} / 10</strong></div>
                                 <div class="tip-meta">极坐标花瓣 · 第 ${gi + 1} 组第 ${i + 1} 维</div>`);
                     })
                     .on("mousemove", function(event) {
@@ -1691,7 +1691,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     })
                     .on("mouseout", function() {
                         d3.select(this).attr("fill-opacity", 0.45);
-                        tip.style("opacity", 0);
+                        tip.classed("visible", false);
                     })
                     .transition().duration(DUR).delay(i * 100)
                     .attr("fill-opacity", 0.45);
@@ -1991,7 +1991,5 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>

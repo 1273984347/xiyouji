@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-If9+jZNRlvnF2u5ZkfekyGXyUS0qXDRo1CJGA7M3rFA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-wJadNmZPs7wYcI+ymTWX+5HPrT8bQAizDxm1EMT+1yI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>全站标签云 · 可视化导航中心 · 详解西游记</title>
@@ -1192,6 +1192,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <div id="tooltip" role="tooltip" aria-hidden="true"></div>
 
     <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
     // ============================================================
     // EMBEDDED_DATA: site/data/ 目录下全部 79 个 HTML 页面元数据
     // 字段: file(文件名) title(标题) category(分类) tags(标签) size(数据维度数) desc(描述)
@@ -1351,7 +1354,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .data(data, d => d.file);
 
         tags.exit()
-            .transition().duration(200)
+            .transition().duration(MOYUN_RM?0:200)
             .style("opacity", 0)
             .remove();
 
@@ -1368,7 +1371,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         enter.merge(tags)
             .classed("active", d => d.file === state.selectedFile)
-            .transition().duration(300)
+            .transition().duration(MOYUN_RM?0:300)
             .style("opacity", 1)
             .style("font-size", d => fontSizeScale(d.size) + "px");
 
@@ -1864,7 +1867,5 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>

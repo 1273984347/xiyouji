@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-93S8xE9xF8MVPI2z7YcvTYbxGPQXrFuWJ1S0zz21XT4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-oY65Hn2Q35LRcrd++ybPvJpFeKnwQeYHeNw+ygcMgj8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>回目结构图谱 · 详解西游记</title>
@@ -818,20 +818,7 @@ td.num, th.num {
             width: 14px; height: 14px; border-radius: 2px; display: inline-block;
         }
         .legend-swatch.line { height: 3px; width: 18px; }
-        .tooltip {
-            position: absolute;
-            background: rgba(26, 37, 48, 0.95);
-            color: #f5e9d4;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 0.82rem;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.15s;
-            line-height: 1.5;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            z-index: 10;
-        }
+        /* 墨韵（W462）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
         .cluster-node circle { cursor: pointer; }
         .cluster-link {
             fill: none;
@@ -957,7 +944,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <!-- FILE_INDEX: chapter-structure-graph.html | W236-V | 回目结构图谱（聚类树+对偶矩阵+字数柱状） -->
     <!-- CHANGELOG: v2.2.42 W236 V 方向 回目结构图谱 -->
 
-    <div class="tooltip" id="tooltip"></div>
+    <div class="chart-tooltip" id="tooltip"></div>
 
     <script>
     // ============= EMBEDDED_DATA =============
@@ -1053,7 +1040,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // 提示框
     const tooltip = d3.select("#tooltip");
     function showTooltip(html, event) {
-        tooltip.html(html).style("opacity", 1);
+        tooltip.html(html).classed("visible", true);
         moveTooltip(event);
     }
     function moveTooltip(event) {
@@ -1061,7 +1048,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const y = event.pageY - 12;
         tooltip.style("left", x + "px").style("top", y + "px");
     }
-    function hideTooltip() { tooltip.style("opacity", 0); }
+    function hideTooltip() { tooltip.classed("visible", false); }
 
     // ============= 图1：聚类树状图 d3.cluster =============
     function renderCluster(data) {
@@ -1532,7 +1519,5 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>

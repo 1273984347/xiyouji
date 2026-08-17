@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-6eKhBI8aLYr4zhtSxOo1ZVnCD1SHfQXiE7pMXws2t5s=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-vkzec/EfGnxvhJ21vhtz4uFjbBLee6MDiCXIe+1jWHo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>语言学 · 详解西游记</title>
@@ -1576,6 +1576,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
     // ===== EMBEDDED fallback data（与 4 份 JSON 完全一致）=====
     const EMBEDDED = {
         incantation: {
@@ -1888,14 +1891,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr('d', arc)
             .style('cursor', 'pointer')
             .on('mouseover', (e, d) => {
-                d3.select(e.target).transition().duration(150).attr('d', arcHover);
+                d3.select(e.target).transition().duration(MOYUN_RM?0:150).attr('d', arcHover);
                 tooltip.show(
                     `<strong>${d.data.label}</strong><br>` +
                     `平均占比：${d.data.value}%<br>` +
                     `主导咒语：${d.data.key === 'sanskrit' ? '紧箍咒/召唤咒' : (d.data.key === 'taoist' ? '五雷法/避水诀' : (d.data.key === 'ming' ? '定身咒/悟空骂人' : '唐僧训徒/如来说法'))}`, e);
             })
             .on('mouseout', (e) => {
-                d3.select(e.target).transition().duration(150).attr('d', arc);
+                d3.select(e.target).transition().duration(MOYUN_RM?0:150).attr('d', arc);
                 tooltip.hide();
             });
 
@@ -2749,7 +2752,5 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>

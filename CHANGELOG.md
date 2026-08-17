@@ -4,9 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W461），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W462），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
+
+### v2.3.77（2026-08-17）：W462 墨韵 W-d/W-e 统计页批 — 57 页动效规范化 + tooltip 收编 + count-up 18 页 + 全站 body 去重
+
+> **来源**：W460 墨韵方案 W-d/W-e 批。原方案 40/22 页清单因方案文档未存档，本批以**实现证据重定义范围**：66 个剩余页（扣除 W-c 16 网络 + W-b 4 样板）按技术形态分三型——37 页含 d3 `.transition()`（其中 20 页 duration>600 违规·>600 值均为路径 draw-in：3000/1800/1500/1200/900/800/700）/ 20 页 D3 静态渲染（零 transition）/ 9 页非 D3（three×3+canvas+纯 HTML·留 W-f）。
+> - **执行（W-d·37 transition 页·调用点级 RM 守卫）**：`.duration(N>600)` 归一 600 + 全部数字 duration/delay 包裹 `MOYUN_RM?0:N`（141 处 duration + 21 处 delay + 59 处裸 `.transition()` 显式 250ms 包裹）；首个含 transition 的内联块顶部注入 `var MOYUN_RM` 守卫（D3 transition 不受 CSS media 控制·W460 教训）。**7 页表达式形态页**（`.duration(DUR)`/`.delay(i*80)` 变量与表达式调用点·数字正则不可达）改 **prototype 级守卫**：patch `d3.transition.prototype.duration/delay` 归零（先 Playwright 浏览器实测：5000ms duration + 2000ms delay 的 transition 1ms 内达终态·fail-open try/catch）。
+> - **执行（W-e·tooltip 收编 11 页）**：**A 组 four-heavenly-kings**（查询式创建 + 静态/过渡显隐混合·22 处编辑：CSS 块删 + 查询/创建类名改 `chart-tooltip` + 显隐 `.classed('visible')`）；**C 组 10 页静态 div**（aesthetics/chapter-structure-graph/cultural-misreading/journey-geo-semiotics/journey-map-interactive/language-style-radar/material-archaeology/ming-political×5 tip/monster-background/narrative-rhythm-curve）：div 换类（id 保留·JS 查询不变）+ 页私有 `.tooltip{}` 主块删 + 派生选择器（strong/.row/.tip-meta/.tip-title/.tip-row）改 `.chart-tooltip` 作用域并宣纸底配色重映射（金 #e9b885→朱砂 var(--accent)/奶油 #f4d4b2→朱砂/#d9cdb8→墨/#b8a584→淡墨）+ 显隐 `.classed('visible')`（直连/链式/单双引号三形态·14 div）；tooltip HTML 内联色同步重映射（数据色板/图例色不动——逐行取证区分）。
+> - **执行（P2-2 延伸·count-up 18 页）**：Playwright 探针扫 57 页数字 KPI 值元素（`.kpi-card .value` 纯数字/千分位），18 页命中接入 W461 同款 count-up 块（900ms easeOutExpo·IO 一次·轮询等待 async 建元素·浮点值正则自动跳过·fail-open 终值兜底）。
+> - **执行（卫生项·全站 body 去重 154 页）**：count-up 插入断言意外发现**全站历史模板缺陷**——尾部重复 `</body></html>`（CN 77 + EN 77 页·LF/CRLF/注释后三种变体），浏览器容错未暴露；机械去重全站修复（脚本模式精确匹配才改·journey-geo-semiotics 注释变体单独处理）。
+> - **验证（门禁）**：generate_csp 重算 46 页·233 页 1167 哈希 0 漂移；check_js_syntax 232 文件；check_structure 232 文件 630 块；lint_links 4122 链接 0 broken；verify_delivery 核心全绿；**全站 `.duration(N)` >600 页数 = 0**。
+> - **验证（运行时·Playwright）**：57 修改页 pageerror=0；RM 终态断言 6/6（emulateMedia reduce + MOYUN_RM===true + svg 渲染完整；aesthetics rmVar=null 为断言设计误差——C 组静态页零 transition 本无守卫·渲染正常）；C 组 tooltip hover 断言 5/5（dispatchEvent mouseover → `.chart-tooltip.visible` + 宣纸底）；count-up 断言 2/2。
+> - **过程缺陷（已修复）**：① 计数预期表 2 处误差（hexGold 多 1）——复核均为合法 tooltip/正文链接上下文（金→朱砂提升宣纸底对比度），脚本行为正确；② ai-dialogue/century-dialogue svg=0 为对话类页面正常形态（body 853/633 字符·div 59/31·0 pageerror），非渲染失败。
+> - **范围纪律记录**：20 静态 D3 页中 11 页纯豁免（无 tooltip/count-up/transition——仅享 P0 CSS 层 + body 去重）；入场编排分层（轴→网格→标记 stagger）维持 W-b 样板级实现，批量页仅做时长归一 + RM 守卫 + tooltip/count-up 接入，全量编排升级列 W-g 后续候选；EN 站 JS 级动效未做（CSS 级 P0 已 225 页同步）。
+> - **状态**：已落地·随本 commit 提交。墨韵累计：W460（P0+样板 6 页）+ W461（网络 16 页）+ W462（统计 57 页 + 卫生 154 页）→ 待续 W-f（9 页非 D3·覆盖等式=0）→ W-g（P2 三页 + .chart-loading 类 + DESIGN.md §5 重写）。
 
 ### v2.3.76（2026-08-17）：W461 墨韵 W-c 网络页批 — 16 页 tooltip 收编 + KPI count-up 补齐（P2×1）
 

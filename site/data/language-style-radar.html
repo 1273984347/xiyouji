@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-8rwCtmLBaRCDfkgTLddLICTDgQy9eJwEtPW26Kt9rhs=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-CO+wnwTUiIJgrgbG587fjK9/w8zoLU0tGYVXa4m/CT4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>语言风格雷达图 · 详解西游记</title>
@@ -804,20 +804,7 @@ td.num, th.num {
         .legend-swatch {
             width: 14px; height: 14px; border-radius: 50%; display: inline-block;
         }
-        .tooltip {
-            position: absolute;
-            background: rgba(26, 37, 48, 0.95);
-            color: #f5e9d4;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-size: 0.82rem;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.15s;
-            line-height: 1.5;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            z-index: 10;
-        }
+        /* 墨韵（W462）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
         .radar-axis-label {
             font-size: 12px;
             fill: var(--ink);
@@ -925,7 +912,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <!-- FILE_INDEX: language-style-radar.html | W236-V | 语言风格雷达图（7角色5维+PCA聚类） -->
     <!-- CHANGELOG: v2.2.42 W236 V 方向 语言风格雷达图 -->
 
-    <div class="tooltip" id="tooltip"></div>
+    <div class="chart-tooltip" id="tooltip"></div>
 
     <script>
     // ============= EMBEDDED_DATA =============
@@ -965,14 +952,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // 提示框
     const tooltip = d3.select("#tooltip");
     function showTooltip(html, event) {
-        tooltip.html(html).style("opacity", 1);
+        tooltip.html(html).classed("visible", true);
         moveTooltip(event);
     }
     function moveTooltip(event) {
         tooltip.style("left", (event.pageX + 12) + "px")
                .style("top", (event.pageY - 12) + "px");
     }
-    function hideTooltip() { tooltip.style("opacity", 0); }
+    function hideTooltip() { tooltip.classed("visible", false); }
 
     // 渲染 KPI
     function renderKPI(data) {
@@ -1445,7 +1432,5 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>

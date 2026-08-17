@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-1B1uWE+c9pEJnPwgco/uDRmi91TYbAJRnOAyP4Ahej4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-XnTcWHgiwTJMXBEjDxCRaxYQ/y+rrAkshlmwx/QNrpQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>叙事节奏曲线 · 详解西游记</title>
@@ -790,7 +790,7 @@ td.num, th.num {
         .legend-item { display: flex; align-items: center; gap: 6px; }
         .legend-swatch { width: 14px; height: 14px; border-radius: 2px; display: inline-block; }
         .legend-swatch.line { height: 3px; width: 18px; }
-        .tooltip { position: absolute; background: rgba(26, 37, 48, 0.95); color: #f5e9d4; padding: 8px 12px; border-radius: 4px; font-size: 0.82rem; pointer-events: none; opacity: 0; transition: opacity 0.15s; line-height: 1.5; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 10; }
+        /* 墨韵（W462）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
         .controls { display: flex; align-items: center; gap: 14px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
         .btn {
             background: var(--accent);
@@ -933,7 +933,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <!-- FILE_INDEX: narrative-rhythm-curve.html | W236-V | 叙事节奏曲线（面积图+9转折点+热力图+动画） -->
     <!-- CHANGELOG: v2.2.42 W236 V 方向 叙事节奏曲线 -->
 
-    <div class="tooltip" id="tooltip"></div>
+    <div class="chart-tooltip" id="tooltip"></div>
 
     <script>
     // ============= EMBEDDED_DATA =============
@@ -994,13 +994,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // 提示框
     const tooltip = d3.select("#tooltip");
     function showTooltip(html, event) {
-        tooltip.html(html).style("opacity", 1);
+        tooltip.html(html).classed("visible", true);
         moveTooltip(event);
     }
     function moveTooltip(event) {
         tooltip.style("left", (event.pageX + 12) + "px").style("top", (event.pageY - 12) + "px");
     }
-    function hideTooltip() { tooltip.style("opacity", 0); }
+    function hideTooltip() { tooltip.classed("visible", false); }
 
     // 渲染 KPI
     function renderKPI(data) {
@@ -1088,7 +1088,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("stroke-width", 2)
                 .on("mouseover", function(event) {
                     d3.select(this).attr("r", 10);
-                    showTooltip(`<strong>第 ${tp.chapter} 回</strong><br>${tp.name}<br><span style="color:#f4d4b2">${tp.desc}</span>`, event);
+                    showTooltip(`<strong>第 ${tp.chapter} 回</strong><br>${tp.name}<br><span style="color:var(--accent)">${tp.desc}</span>`, event);
                 })
                 .on("mousemove", moveTooltip)
                 .on("mouseout", function() { d3.select(this).attr("r", 7); hideTooltip(); });
@@ -1514,7 +1514,5 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>

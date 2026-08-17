@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-Nvvjbv6onE58zh0ydmog74lC9VTmMP3q/KvlSKgqoVU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-KSvKotuAPtqVLLJFqzV9wv60SwvPvQXTYm6s0cKMGaA=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>打工人职场黑话 · 详解西游记</title>
@@ -1303,6 +1303,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
     // ===== 嵌入式 fallback 数据（fetch 失败时使用）=====
     const EMBEDDED = {
         project_review: {
@@ -1471,7 +1474,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("stroke", "#fff").attr("stroke-width", 2)
                 .style("cursor", "pointer")
                 .on("mouseover", function(e) {
-                    d3.select(this).transition().duration(150).attr("r", 11);
+                    d3.select(this).transition().duration(MOYUN_RM?0:150).attr("r", 11);
                     tip.style("opacity", 1)
                         .html(`<strong style="color:var(--accent-soft);">${m.phase}</strong><br/>` +
                               `<span style="font-size:0.78rem;color:#e9b885;">${m.year}</span><br/>` +
@@ -1484,7 +1487,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                        .style("top", (e.clientY - rect.top - 10) + "px");
                 })
                 .on("mouseout", function() {
-                    d3.select(this).transition().duration(150).attr("r", 8);
+                    d3.select(this).transition().duration(MOYUN_RM?0:150).attr("r", 8);
                     tip.style("opacity", 0);
                 });
 
@@ -1639,7 +1642,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         path.attr("stroke-dasharray", totalLen)
             .attr("stroke-dashoffset", totalLen)
             .transition()
-            .duration(1500)
+            .duration(MOYUN_RM?0:600)
             .ease(d3.easeCubicOut)
             .attr("stroke-dashoffset", 0);
 
@@ -1655,7 +1658,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("fill", "var(--accent-2)")
             .attr("stroke", "#fff").attr("stroke-width", 2)
             .style("opacity", 0)
-            .transition().delay(800).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:800).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // 阶段点标注（效能值）
@@ -1672,7 +1675,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("fill", "var(--accent)")
             .style("opacity", 0)
             .text(d => d.effectiveness)
-            .transition().delay(1000).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:1000).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
 
         // Spike 点
@@ -1689,13 +1692,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("stroke", "var(--accent)").attr("stroke-width", 2.5)
             .style("cursor", "pointer")
             .style("opacity", 0)
-            .transition().delay(1400).duration(500)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:1400).duration(MOYUN_RM?0:500)
             .style("opacity", 1);
 
         // 重新绑定事件（动画后）
         g.selectAll(".spike-dot")
             .on("mouseover", function(e, d) {
-                d3.select(this).transition().duration(150).attr("r", 12);
+                d3.select(this).transition().duration(MOYUN_RM?0:150).attr("r", 12);
                 tip.style("opacity", 1)
                     .html(`<div class="tip-title">第${d.chapter}回 · ${d.event}</div>` +
                           `<div>飙升值：<strong style="color:var(--accent-soft);">+${d.spike}</strong></div>` +
@@ -1707,7 +1710,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                    .style("top", (e.clientY - rect.top - 10) + "px");
             })
             .on("mouseout", function() {
-                d3.select(this).transition().duration(150).attr("r", 9);
+                d3.select(this).transition().duration(MOYUN_RM?0:150).attr("r", 9);
                 tip.style("opacity", 0);
             });
 
@@ -1725,7 +1728,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("fill", "var(--accent-4)")
             .style("opacity", 0)
             .text(d => "+" + d.spike)
-            .transition().delay(1600).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay(MOYUN_RM?0:1600).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
     }
 
@@ -1833,8 +1836,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .attr("width",0).attr("height", barH)
                 .attr("fill", color)
                 .attr("rx", 4)
-                .transition()
-                .delay(i * 120).duration(800)
+                .transition().duration(MOYUN_RM?0:250)
+                .delay(i * 120).duration(MOYUN_RM?0:600)
                 .ease(d3.easeCubicOut)
                 .attr("width",Math.max(0, x(val)));
 

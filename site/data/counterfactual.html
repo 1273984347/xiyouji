@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-GQUrPYHAlT4ZWQKRFMBsmhV5X/CTM5UaEJU2lN/UGr4=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-cjYUVsBEh69UudvIrT2TmBhjFOyWoj880B7tdHdTi8c=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>反事实推断 · 详解西游记</title>
@@ -1138,6 +1138,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
     /* ============================================================
        嵌入式 fallback 数据（fetch 失败时使用，与 JSON 源一致）
        ============================================================ */
@@ -1370,7 +1373,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("d", arc)
             .style("opacity", 0)
             .transition()
-            .duration(800)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 120)
             .style("opacity", 1);
 
@@ -1481,7 +1484,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("rx", 3);
 
         bars.transition()
-            .duration(700)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 80)
             .attr("y", d => y(d.count))
             .attr("height", d => innerH - y(d.count));
@@ -1833,7 +1836,48 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
+<script>
+// 墨韵动效（W462）：KPI 数字 count-up（900ms easeOutExpo·IO 触发一次·白名单例外②；支持千分位格式）
+// fail-open：元素已含终值；浮点/文本型 value 与 reduced-motion / IO 不可用 / 异常时保持终值
+// 注意：KPI 元素多在 loadData() 之后才建，须轮询等待（上限 5s）
+(function () {
+    var reduced = false;
+    try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) {}
+    if (reduced || !('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
+    var t0 = Date.now();
+    (function waitEls() {
+        var els = Array.prototype.filter.call(
+            document.querySelectorAll('.kpi-card .value'),
+            function (el) { return /^[\d,]+$/.test((el.textContent || '').trim()); }
+        );
+        if (!els.length) {
+            if (Date.now() - t0 < 5000) return setTimeout(waitEls, 100);
+            return;
+        }
+        try {
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (!e.isIntersecting) return;
+                    io.unobserve(e.target);
+                    var el = e.target;
+                    var raw = el.textContent.trim();
+                    var target = parseInt(raw.replace(/,/g, ''), 10) || 0;
+                    var s0 = null, DUR = 900;
+                    function frame(ts) {
+                        if (s0 === null) s0 = ts;
+                        var t = Math.min((ts - s0) / DUR, 1);
+                        var v = (t >= 1) ? target : Math.round(target * (1 - Math.pow(2, -10 * t)));
+                        el.textContent = v.toLocaleString("zh-CN");
+                        if (t < 1) requestAnimationFrame(frame);
+                        else el.textContent = raw;
+                    }
+                    requestAnimationFrame(frame);
+                });
+            }, { threshold: 0.5 });
+            els.forEach(function (el) { io.observe(el); });
+        } catch (_) { /* fail-open：保持终值 */ }
+    })();
+})();
+</script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-0TJJaHHhxVFKdkzDvGoRotvu0b97JeMs1y/YvvOew8A=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-MgdqboOcoFISaFPr/JG1/ZtH+LoNR/y9axA12wdzAqE=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>法术阵法体系 · 详解西游记</title>
@@ -1275,6 +1275,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
     // ========== 嵌入式 fallback 数据（fetch 失败时使用） ==========
     const EMBEDDED_DATA = {
         magic_system: [
@@ -1576,7 +1579,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("fill", d => d.color)
             .attr("rx", 3)
             .transition()
-            .duration(700)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 120)
             .attr("width",d => Math.max(0, x(d.value)));
 
@@ -1592,7 +1595,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("opacity", 0)
             .text(d => `${d.value.toLocaleString()} ${d.unit}`)
             .transition()
-            .duration(400)
+            .duration(MOYUN_RM?0:400)
             .delay((d, i) => i * 120 + 600)
             .style("opacity", 1);
 
@@ -1670,7 +1673,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("fill", d => INTENSITY_COLORS(d.consumption_per_act))
             .attr("rx", 2)
             .transition()
-            .duration(600)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 80)
             .attr("width",d => Math.max(0, x(d.consumption_per_act)));
 
@@ -1689,7 +1692,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .style("opacity", 0)
             .text(d => `${d.consumption_per_act} 单位 · ${d.note}`)
             .transition()
-            .duration(300)
+            .duration(MOYUN_RM?0:300)
             .delay((d, i) => i * 80 + 500)
             .style("opacity", 1);
 
@@ -1839,7 +1842,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("d", arc)
             .style("opacity", 0)
             .transition()
-            .duration(800)
+            .duration(MOYUN_RM?0:600)
             .delay((d, i) => i * 100)
             .style("opacity", 1);
 
@@ -2228,7 +2231,5 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 })();
 </script>
 
-</body>
-</html>
 </body>
 </html>

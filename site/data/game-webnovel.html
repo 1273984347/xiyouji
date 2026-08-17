@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-lVZ8wAjNnHg3kDdAaG+EDQAQj2ds8Q8ufJwMQCJzeyo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-KqCgpJYWO8GVhUNqdhLHMlzwuA7qeSj8+xdPGBA5hNY=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>游戏网文 · 角色卡牌战力系统 · 详解西游记</title>
@@ -1498,6 +1498,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     </footer>
 
 <script>
+/* 墨韵（W462）：reduced-motion JS 守卫（D3 transition 不受 CSS media 控制·时长/延迟按此短路） */
+var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (_) {}
+
 
 function renderTreemap(opts){
   var tipId=opts.tipId||'tooltip';
@@ -2008,7 +2011,7 @@ function renderTreemap(opts){
                 track.append("div").attr("class", "cc-stat-fill")
                     .style("background", s.color)
                     .style("width", "0%")
-                    .transition().duration(700).ease(d3.easeCubicOut)
+                    .transition().duration(MOYUN_RM?0:600).ease(d3.easeCubicOut)
                     .style("width", (s.val / maxStat * 100) + "%");
                 row.append("div").attr("class", "cc-stat-val").text(s.val);
             });
@@ -2121,8 +2124,8 @@ function renderTreemap(opts){
                 .style("cursor", "pointer")
                 .attr("class", "power-bar");
 
-            bar.transition()
-                .delay(i * 80).duration(800)
+            bar.transition().duration(MOYUN_RM?0:250)
+                .delay(i * 80).duration(MOYUN_RM?0:600)
                 .ease(d3.easeCubicOut)
                 .attr("width",Math.max(0, x(c.power)));
 
@@ -2136,7 +2139,7 @@ function renderTreemap(opts){
                 .style("fill", "#fff")
                 .style("opacity", 0)
                 .text(c.rarity + " " + c.power.toLocaleString())
-                .transition().delay(i * 80 + 600).duration(400).style("opacity", 1);
+                .transition().duration(MOYUN_RM?0:250).delay(i * 80 + 600).duration(MOYUN_RM?0:400).style("opacity", 1);
 
             // Top 3 皇冠/数字
             if (isTop3) {
@@ -2146,7 +2149,7 @@ function renderTreemap(opts){
                     .style("font-size", "0.95rem")
                     .style("opacity", 0)
                     .text(medal)
-                    .transition().delay(i * 80 + 700).duration(400).style("opacity", 1);
+                    .transition().duration(MOYUN_RM?0:250).delay(i * 80 + 700).duration(MOYUN_RM?0:400).style("opacity", 1);
             }
 
             bar.on("mouseover", function(e) {
@@ -2304,7 +2307,7 @@ function renderTreemap(opts){
             .attr("stroke", d => RARITY_COLORS[d.rarity])
             .attr("stroke-width", 2)
             .style("cursor", "pointer")
-            .transition().delay((d, i) => i * 80).duration(500)
+            .transition().duration(MOYUN_RM?0:250).delay((d, i) => i * 80).duration(MOYUN_RM?0:500)
             .attr("r", d => r(d.total));
 
         g.selectAll(".scatter-dot")
@@ -2341,7 +2344,7 @@ function renderTreemap(opts){
             .style("fill", "var(--ink)")
             .style("opacity", 0)
             .text(d => d.name.length > 5 ? d.name.slice(0, 5) + "…" : d.name)
-            .transition().delay((d, i) => i * 80 + 400).duration(400)
+            .transition().duration(MOYUN_RM?0:250).delay((d, i) => i * 80 + 400).duration(MOYUN_RM?0:400)
             .style("opacity", 1);
     }
 
@@ -2465,8 +2468,8 @@ function renderTreemap(opts){
                 .attr("rx", 4)
                 .style("cursor", "pointer");
 
-            bar.transition()
-                .delay(i * 80).duration(800)
+            bar.transition().duration(MOYUN_RM?0:250)
+                .delay(i * 80).duration(MOYUN_RM?0:600)
                 .ease(d3.easeCubicOut)
                 .attr("width",Math.max(0, x(nv.score)));
 
@@ -2480,7 +2483,7 @@ function renderTreemap(opts){
                 .style("fill", "#fff")
                 .style("opacity", 0)
                 .text(nv.genre + " " + nv.score.toFixed(1))
-                .transition().delay(i * 80 + 600).duration(400).style("opacity", 1);
+                .transition().duration(MOYUN_RM?0:250).delay(i * 80 + 600).duration(MOYUN_RM?0:400).style("opacity", 1);
 
             // 右侧：主角
             g.append("text")
@@ -2490,7 +2493,7 @@ function renderTreemap(opts){
                 .style("font-style", "italic")
                 .style("opacity", 0)
                 .text(nv.protagonist)
-                .transition().delay(i * 80 + 700).duration(400).style("opacity", 1);
+                .transition().duration(MOYUN_RM?0:250).delay(i * 80 + 700).duration(MOYUN_RM?0:400).style("opacity", 1);
 
             bar.on("mouseover", function(e) {
                 d3.select(this).attr("fill", d3.color(color).darker(0.6));
@@ -2811,7 +2814,48 @@ function renderTreemap(opts){
 })();
 </script>
 
-</body>
-</html>
+<script>
+// 墨韵动效（W462）：KPI 数字 count-up（900ms easeOutExpo·IO 触发一次·白名单例外②；支持千分位格式）
+// fail-open：元素已含终值；浮点/文本型 value 与 reduced-motion / IO 不可用 / 异常时保持终值
+// 注意：KPI 元素多在 loadData() 之后才建，须轮询等待（上限 5s）
+(function () {
+    var reduced = false;
+    try { reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) {}
+    if (reduced || !('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
+    var t0 = Date.now();
+    (function waitEls() {
+        var els = Array.prototype.filter.call(
+            document.querySelectorAll('.kpi-card .value'),
+            function (el) { return /^[\d,]+$/.test((el.textContent || '').trim()); }
+        );
+        if (!els.length) {
+            if (Date.now() - t0 < 5000) return setTimeout(waitEls, 100);
+            return;
+        }
+        try {
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (!e.isIntersecting) return;
+                    io.unobserve(e.target);
+                    var el = e.target;
+                    var raw = el.textContent.trim();
+                    var target = parseInt(raw.replace(/,/g, ''), 10) || 0;
+                    var s0 = null, DUR = 900;
+                    function frame(ts) {
+                        if (s0 === null) s0 = ts;
+                        var t = Math.min((ts - s0) / DUR, 1);
+                        var v = (t >= 1) ? target : Math.round(target * (1 - Math.pow(2, -10 * t)));
+                        el.textContent = v.toLocaleString("zh-CN");
+                        if (t < 1) requestAnimationFrame(frame);
+                        else el.textContent = raw;
+                    }
+                    requestAnimationFrame(frame);
+                });
+            }, { threshold: 0.5 });
+            els.forEach(function (el) { io.observe(el); });
+        } catch (_) { /* fail-open：保持终值 */ }
+    })();
+})();
+</script>
 </body>
 </html>
