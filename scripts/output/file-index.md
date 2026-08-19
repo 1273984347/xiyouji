@@ -10,6 +10,24 @@
 
 ---
 
+## W484 Skills 目录治理（2026-08-19·v2.3.83）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| skills/xiyouji-{sun-wukong,zhu-bajie,sha-seng,tangseng,bai-longma}/agents/openai.yaml | W484 | v2.3.83 修改·System.Collections.Hashtable 占位符还原为真实中文描述 |
+| skills/deep-review-loop/SKILL.md | W484 | v2.3.83 修改·新增平台适配段 + memory 路径占位符 + 工具映射 + 溯源标注 |
+| skills/mem-wrap-up/SKILL.md | W484 | v2.3.83 修改·7 步收尾协议路径占位化 + 平台适配段 |
+| skills/self-evolution/SKILL.md | W484 | v2.3.83 修改·平台适配 + 5 件套 sync verify 术语统一 |
+| skills/agent-session-loop/SKILL.md + references/01-03.md | W484 | v2.3.83 修改·编排指向仓库内独立 skill + 三 references 精简版注记 |
+| skills/xiyouji-tangseng/SKILL.md | W484 | v2.3.83 修改·「如二弟子」→「如来二弟子」错字修复 |
+| skills/xiyouji-version-bump/SKILL.md | W484 | v2.3.83 修改·陷阱清单重复条目去重 |
+| skills/xiyouji-en-translation/SKILL.md | W484 | v2.3.83 修改·footer 版本模板 v2.2.86·W334 → vX.Y.Z·W### 占位符 |
+| skills/xiyouji-characters-knowledge/references/data-sources.md | W484 | v2.3.83 修改·EN 人物页计数 10→12 |
+| skills/README.md | W484 | v2.3.83 新增·14 个 skill 索引表 + 平台适配说明 |
+| scripts/_check_skills.py | W484 | v2.3.83 新增·skill 目录自检脚本（不入 gate） |
+| AGENTS.md | W484 | v2.3.83 修改·§4.5 补录 4 会话流程 skill（10→14）+ 版本脚注 |
+| README.md / STRUCTURE.md / 交接文档.md / docs/00-导读/项目说明.md / CHANGELOG.md / scripts/output/file-index.md | W484 | v2.3.83 修改·六文档同步 + 交接文档三 skill 闭环位置仓库化 + HEAD 修正 |
+
 ## W464 Phase 3 观测基线确立（2026-08-18·v2.3.82）
 
 | 文件 | W | 说明 |

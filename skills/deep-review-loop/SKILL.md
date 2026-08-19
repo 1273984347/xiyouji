@@ -14,6 +14,15 @@ metadata:
 
 **Announce at start:** "I'm using the deep-review-loop skill to run the 5-round review loop."
 
+## 平台适配（仓库版 2026-08-19 治理）
+
+本文件源自 TRAE 全局 skill（见文末 Reference），复制入本仓库后按以下约定使用：
+
+- `<memory_root>`：agent 记忆根目录占位符。TRAE 为 `c:\Users\12739\.trae-cn\memory`；其他平台按自身约定（如 Codex/CodeBuddy 项目内 `.agent-memory/`），与本仓库 [agent-session-loop](../agent-session-loop/SKILL.md) 的 memory 路径约定一致。
+- 工具映射：`Task subagent`（TRAE）→ 平台子代理机制（Codex = collaboration spawn_agent；CodeBuddy = Task）；`RunCommand` → 终端命令（PowerShell / `shell_command`）；`Grep/Read` → 文件检索与读取工具（`rg` / `Get-Content`）。
+- 本仓库三 skill 闭环的整合入口是 `skills/agent-session-loop/SKILL.md`；独立调用本 skill 时按原文 5 轮协议执行。
+- 文末 Reference 中的 `C:\Users\12739\...` 仅为来源溯源路径，不是运行路径。
+
 ## 在三 skill 闭环中的位置
 
 **闭环方向**：deep-review-loop（审查）→ mem-wrap-up（收尾）→ self-evolution（沉淀）
@@ -329,9 +338,9 @@ Output: priority decision + audit findings + memory sync status + verdict grep s
 
 | # | 维度 | Sync target | Check method |
 |:-:|:-----|:------------|:-------------|
-| 1 | user 级偏好 | c:\Users\12739\.trae-cn\memory\user_profile.md | Grep 工具搜相关条目 |
-| 2 | 项目级规则 | c:\Users\12739\.trae-cn\memory\projects\<project-slug>\project_memory.md | Grep 工具搜相关条目 |
-| 3 | 近期 topic | c:\Users\12739\.trae-cn\memory\projects\<project-slug>\<date>\topics.md | Read 工具看最新 |
+| 1 | user 级偏好 | `<memory_root>/user_profile.md` | Grep 工具搜相关条目 |
+| 2 | 项目级规则 | `<memory_root>/projects/<project-slug>/project_memory.md` | Grep 工具搜相关条目 |
+| 3 | 近期 topic | `<memory_root>/projects/<project-slug>/<date>/topics.md` | Read 工具看最新 |
 | 4 | 复利经验 | 项目内 retrospective 文档（如存在） | Grep 工具搜编号 |
 
 ### V5: 3-case dry-run（best / worst / null）
@@ -359,10 +368,11 @@ Output: priority decision + audit findings + memory sync status + verdict grep s
 ---
 
 ## Related（TRAE 路径，非 vault wiki-link）
-- **mem-wrap-up skill**：C:\Users\12739\.trae-cn\skills\mem-wrap-up\SKILL.md（DRL 收敛后触发，Step 7 反向验证收尾）
-- **self-evolution skill**：C:\Users\12739\.trae-cn\skills\self-evolution\SKILL.md（DRL residual risk 喂给 dim 5，复利经验喂给 dim 1）
-- **user_profile**：c:\Users\12739\.trae-cn\memory\user_profile.md（§ DRL 真循环铁律 + § 三 skill 闭环，铁律常驻 system prompt）
-- **project_memory**：c:\Users\12739\.trae-cn\memory\projects\<project-slug>\project_memory.md（项目级规则，V4 memory sync 维度 2）
+- **mem-wrap-up skill（仓库版）**：`skills/mem-wrap-up/SKILL.md`（DRL 收敛后触发，Step 7 反向验证收尾）
+- **self-evolution skill（仓库版）**：`skills/self-evolution/SKILL.md`（DRL residual risk 喂给 dim 5，复利经验喂给 dim 1）
+- **agent-session-loop（仓库版）**：`skills/agent-session-loop/SKILL.md`（三阶段整合流水线入口）
+- **user_profile**：`<memory_root>/user_profile.md`（§ DRL 真循环铁律 + § 三 skill 闭环，铁律常驻 system prompt）
+- **project_memory**：`<memory_root>/projects/<project-slug>/project_memory.md`（项目级规则，V4 memory sync 维度 2）
 
 > <project-slug> 为当前 workspace 对应的 memory 项目目录名（e.g. -d-1、-d-1-Vannevar、-d-1-Anthropic）。执行时按当前 cwd 映射。
 
@@ -378,8 +388,8 @@ Output: priority decision + audit findings + memory sync status + verdict grep s
 - **4 层过拟合防护必走**（P2 残留 N + 边际收益 gate + 过拟合警报 + 严重度门槛）
 
 ## 9. Reference
-- **源 skill**：C:\Users\12739\.claude\skills\deep-review-loop\SKILL.md（v2 TDD-bulletproofed, 313 lines）
-- **源 reference**：C:\Users\12739\.claude\skills\deep-review-loop\references\h-rule-3-piece-template.md
-- **user 训诫**：c:\Users\12739\.trae-cn\memory\user_profile.md § DRL 真循环铁律（2026-07-12）+ § 三 skill 闭环（2026-07-16）
+- **源 skill（原机溯源，非运行路径）**：C:\Users\12739\.claude\skills\deep-review-loop\SKILL.md（v2 TDD-bulletproofed, 313 lines）
+- **源 reference（原机溯源）**：C:\Users\12739\.claude\skills\deep-review-loop\references\h-rule-3-piece-template.md
+- **user 训诫（原机溯源）**：c:\Users\12739\.trae-cn\memory\user_profile.md § DRL 真循环铁律（2026-07-12）+ § 三 skill 闭环（2026-07-16）
 - **蒸馏原则**：剥离 H-rules / sister skills / vault 路径 / bash；保留 5 轮 + 5 verify + 防跳轮三件套；嫁接真循环铁律 + 4 层过拟合防护
-- **位置**：C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md（TRAE 官方 skill 目录，自动注册到 available_skills，所有项目可用）
+- **位置**：本仓库 `skills/deep-review-loop/SKILL.md`（仓库版，平台适配见文首）；TRAE 全局另有副本

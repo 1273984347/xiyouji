@@ -11,7 +11,7 @@
 - `dataset/` 结构化 JSON（12 个角色相关）：character-relationship-3d / character-appearance / character-semantic-network / character-sentiment-arc / character-presence-timeline / monster-* / heaven-power / underworld-power / pilgrim-team-* / guanyin-six-roles 等。已由 `scripts/check_data_drift.js` 门禁守护（内嵌与 JSON 数组长度一致）。
 - `scripts/output/data/*.json`：A-AH 脚本生成的运行时数据（fetch 源，线上 404 时页面回退内嵌）。
 - `site/data/character-*.html`（7 页）：人物关系 3D / 动态网络 / 语义网络 / 情感弧 / 出场时间线 / 外貌分布。
-- `site/en/character-*.html`（10 页）：英文人物页（wukong/bajie/shaseng/tangseng/bailongma 等）。
+- `site/en/character-*.html`（12 页）：英文人物页（wukong/bajie/shaseng/tangseng/bailongma 等）。
 - `site/data/text-search.html` + `site/static/js/text-search-app.js`：全书 100 回原文全文检索（语料含回目 fullTitle）。
 
 ## 3. 出处标注规则

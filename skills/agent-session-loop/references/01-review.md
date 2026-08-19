@@ -1,5 +1,7 @@
 # Phase 1：审查（Deep Review）详案
 
+> 精简版注记（2026-08-19 治理）：本文件是 agent-session-loop 的快速路径精简版；完整协议以同仓库 `skills/deep-review-loop/SKILL.md` 为准，冲突时以独立 skill 当前版本为准。
+
 > 本文件在 Phase 1 激活时读取。核心是「审查 → 修复 → **重新审查**」的真循环，直到连续 N 轮无新问题才判定收敛。
 
 ## 真循环铁律（最高优先级）

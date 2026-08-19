@@ -10,9 +10,17 @@ metadata:
 
 # self-evolution Skill（TRAE 蒸馏版）
 
-> 本 skill 由 Claude Code vault 版蒸馏而来：剥离 bash/Node/Python 脚本 + vault 路径 + H-rules 术语 + CLAUDE.md §6.9/§14 引用 + experience-capture skill 依赖 + templates 独立文件（11 维度模板内联），保留双模式骨架 + 11 维度完整内容 + 4 件套 verify + 知识层升级 + 行动项分流 + verdict 禁词合规。
+> 本 skill 由 Claude Code vault 版蒸馏而来：剥离 bash/Node/Python 脚本 + vault 路径 + H-rules 术语 + CLAUDE.md §6.9/§14 引用 + experience-capture skill 依赖 + templates 独立文件（11 维度模板内联），保留双模式骨架 + 11 维度完整内容 + 5 件套 sync verify + 知识层升级 + 行动项分流 + verdict 禁词合规。
 
 **Announce at start:** "I'm using the self-evolution skill to run retro (quick / full mode)."
+
+## 平台适配（仓库版 2026-08-19 治理）
+
+- `<memory_root>`：agent 记忆根目录占位符（TRAE = `c:\Users\12739\.trae-cn\memory`；其他平台按自身约定，与本仓库 [agent-session-loop](../agent-session-loop/SKILL.md) 的 memory 路径约定一致）。
+- `<skills_root>`：当前平台 skill 目录占位符（TRAE = `c:\Users\12739\.trae-cn\skills`；本仓库 = `skills/`）。
+- `TRAE available_skills` → 当前平台的可用 skill 列表（如 Codex/CodeBuddy 的 available_skills）。
+- 工具映射：`Task subagent` → 平台子代理机制；`RunCommand` → 终端命令（PowerShell / `shell_command`）；`Grep/Read` → 文件检索与读取工具（`rg` / `Get-Content`）。
+- 文末 Reference 中的 `C:\Users\12739\...` 仅为来源溯源路径，不是运行路径。
 
 ## 在三 skill 闭环中的位置
 
@@ -74,7 +82,7 @@ metadata:
 
 **写入步骤**（直接执行，不需要调用其他 skill）：
 
-1. 追加到 `c:\Users\12739\.trae-cn\memory\projects\<project-slug>\experience-log.md`（Edit 工具，末尾追加，无则 Write 创建）：
+1. 追加到 `<memory_root>/projects/<project-slug>/experience-log.md`（Edit 工具，末尾追加，无则 Write 创建）：
 ```markdown
 ## [日期] — [任务名称] | **Tags:** [tag1, tag2]
 
@@ -88,12 +96,12 @@ metadata:
 [具体行动方案]
 ```
 
-2. 如有明确规则的经验，追加到 `c:\Users\12739\.trae-cn\memory\projects\<project-slug>\experience-quickref.md`：
+2. 如有明确规则的经验，追加到 `<memory_root>/projects/<project-slug>/experience-quickref.md`：
 ```
 [编号] [关键词] — [一句话规则]
 ```
 
-3. 如有 Skill 缺口，追加到 `c:\Users\12739\.trae-cn\memory\projects\<project-slug>\skill-usage-checklist.md`：
+3. 如有 Skill 缺口，追加到 `<memory_root>/projects/<project-slug>/skill-usage-checklist.md`：
 ```
 | [Skill名] | [场景] | [为什么没用] |
 ```
@@ -193,7 +201,7 @@ metadata:
 
 ### 维度 3：未用技能审视
 
-**输入**：TRAE available_skills 列表 + 本次任务描述 + 维度 5 的问题清单
+**输入**：当前平台 available_skills 列表 + 本次任务描述 + 维度 5 的问题清单
 **分析**：
 - 本次任务中，哪些 Skill 应该用但没用？
 - 每项未用技能能否解决维度 5 中的某个问题？
@@ -395,9 +403,9 @@ Why 5: [根本原因]
 - 5Why 根因（聚焦"工具链协议遗漏"）
 - sub-protocol 沉淀（N 层 + N 条）→ 跟现有协议**配对**扩展
 
-**输出**：工具链 sub-protocol vN.0 沉淀（写到 memory/templates/{tool}-checklist.md）
+**输出**：工具链 sub-protocol vN.0 沉淀（写到 `<memory_root>/templates/{tool}-checklist.md`）
 
-**示例**：Write 工具沙箱不可信 sub-protocol v1.0（路径 / here-string / AppendAllText / 验证 4 层）→ 落到 memory/templates/write-large-file-checklist.md 附录。
+**示例**：Write 工具沙箱不可信 sub-protocol v1.0（路径 / here-string / AppendAllText / 验证 4 层）→ 落到 `<memory_root>/templates/write-large-file-checklist.md` 附录。
 
 ### 维度 11：复盘过程中出现的问题（必走，不可跳过）
 
@@ -421,7 +429,7 @@ Why 5: [根本原因]
 |:---|:---|:---|:---:|
 | 工具链层 | PowerShell 引号嵌套 / Write silent skip | here-string + AppendAllText + Test-Path 验证 | P1 × N |
 | 协议层 | 未走 5 轮 DRL / 未 verify | 强制 deep-review-loop skill | P0 × 单 |
-| 流程层 | experience-log 漂移 / 4 件套未 sync | 4-piece bundle verify | P1 × N |
+| 流程层 | experience-log 漂移 / 5 件套未 sync | 5-piece bundle verify | P1 × N |
 | memory 维护层 | user_profile 指针断链 / 旧路径残留 | Grep 全目录确认无残留 | P1 × N |
 | 任何 future 撞坑 | (留作未来) | (留作未来) | — |
 
@@ -442,7 +450,7 @@ Why 5: [根本原因]
 > **这个维度的价值**：维度 11 是元层兜底 — 之前 10 维度都聚焦"复盘什么"，维度 11 强制"复盘过程本身是否健康"。必走，不可跳过。跟维度 8（元认知反思）配对成元层闭环：维度 8 = 复盘质量评估（事后），维度 11 = 复盘过程撞坑整合（事中）。
 **Step 3：生成报告**
 
-报告写入 `c:\Users\12739\.trae-cn\memory\projects\<project-slug>\<YYYYMMDD>\retrospective.md`，格式：
+报告写入 `<memory_root>/projects/<project-slug>/<YYYYMMDD>/retrospective.md`，格式：
 
 ```markdown
 # YYYY-MM-DD 全面复盘
@@ -487,7 +495,7 @@ Why 5: [根本原因]
 [维度 11 输出：撞坑分类表 + 5Why 元层根因 + 反模式识别 + 升 E/H 候选]
 ```
 
-**Step 3.5：4 件套同步 verify（强制）**
+**Step 3.5：5 件套同步 verify（强制）**
 
 > **触发证据**：复盘类指令必同步多个真理源，漏任一件 = 复盘未闭环。
 
@@ -495,22 +503,22 @@ Why 5: [根本原因]
 
 | # | 件 | 路径 | 检查方法 |
 |:--|:---|:-----|:--------|
-| 1 | **复盘主 file** | `memory\projects\<project-slug>\<YYYYMMDD>\retrospective.md` | RunCommand Test-Path 必存在 |
-| 2 | **project_memory 更新** | `memory\projects\<project-slug>\project_memory.md` | Grep 本次 session 关键词 ≥ 1 |
-| 3 | **user_profile 更新**（如涉及用户级偏好） | `memory\user_profile.md` | Grep 本次新增条目 ≥ 1（如适用） |
-| 4 | **experience-log 备忘段** | `memory\projects\<project-slug>\experience-log.md` | Grep 本次 session 编号 ≥ 1 |
-| 5 | **E-rule 候选** | `memory\projects\<project-slug>\experience-quickref.md` | Grep "E[0-9]+ 候选" ≥ 1 新增 |
+| 1 | **复盘主 file** | `<memory_root>/projects/<project-slug>/<YYYYMMDD>/retrospective.md` | RunCommand Test-Path 必存在 |
+| 2 | **project_memory 更新** | `<memory_root>/projects/<project-slug>/project_memory.md` | Grep 本次 session 关键词 ≥ 1 |
+| 3 | **user_profile 更新**（如涉及用户级偏好） | `<memory_root>/user_profile.md` | Grep 本次新增条目 ≥ 1（如适用） |
+| 4 | **experience-log 备忘段** | `<memory_root>/projects/<project-slug>/experience-log.md` | Grep 本次 session 编号 ≥ 1 |
+| 5 | **E-rule 候选** | `<memory_root>/projects/<project-slug>/experience-quickref.md` | Grep "E[0-9]+ 候选" ≥ 1 新增 |
 
 **verify 失败时**：立即补漏（每件 < 5 min），不要等下次 session。
 
 **输出汇总**：
 
 ```markdown
-### 4 件套同步 verify
+### 5 件套同步 verify
 
 | # | 件 | 状态 |
 |:--|:---|:----:|
-| 1 | 复盘主 file | ✅ memory\projects\...\retrospective.md |
+| 1 | 复盘主 file | ✅ <memory_root>/projects/.../retrospective.md |
 | 2 | project_memory 更新 | ✅ project_memory.md:LLL |
 | 3 | user_profile 更新 | ✅ user_profile.md:LLL（如适用） |
 | 4 | experience-log 备忘段 | ✅ experience-log.md |
@@ -525,9 +533,9 @@ Why 5: [根本原因]
 
 | 条件 | 升级动作 | 执行方式 |
 |:---|:---|:---|
-| 同类经验 ≥3 次 + 跨任务 + 根因一致 | 创建 `memory\knowledge\patterns\[name].md` | **自动创建新文件** |
-| 某 pattern 成功率 >80% + 不引入新问题 | 创建 `memory\knowledge\heuristics\[name].md` | **自动创建新文件** |
-| 某 heuristic 效果显著 | 写入 `memory\knowledge\policies\` | **需人工确认** |
+| 同类经验 ≥3 次 + 跨任务 + 根因一致 | 创建 `<memory_root>/knowledge/patterns/[name].md` | **自动创建新文件** |
+| 某 pattern 成功率 >80% + 不引入新问题 | 创建 `<memory_root>/knowledge/heuristics/[name].md` | **自动创建新文件** |
+| 某 heuristic 效果显著 | 写入 `<memory_root>/knowledge/policies/` | **需人工确认** |
 
 **knowledge/ 文件 frontmatter 标准**：
 ```yaml
@@ -563,13 +571,13 @@ tags: [optional]
 
 | 动作类型 | 执行方式 | 输出格式 |
 |:---|:---|:---|
-| 创建模板文件 | Write `memory\templates\[name].md` | 文件必须有 frontmatter + 使用示例 |
-| 更新 Skill | Edit `C:\Users\12739\.trae-cn\skills\<name>\SKILL.md` | 修改前先 Read，自动备份 |
-| 追加经验条目 | Edit `memory\projects\<project-slug>\experience-log.md`（末尾追加） | 格式见模式 A |
-| 更新速查表 | Edit `memory\projects\<project-slug>\experience-quickref.md` | 格式：`[编号] [关键词] — [规则]` |
-| 写入 knowledge/patterns/ | Write `memory\knowledge\patterns\[name].md` | frontmatter + When/Pattern/Evidence/Related |
-| 写入 knowledge/heuristics/ | Write `memory\knowledge\heuristics\[name].md` | frontmatter + Rule/Success Rate/Evidence |
-| 更新 skill-usage-checklist | Edit `memory\projects\<project-slug>\skill-usage-checklist.md` | 格式：`| [Skill] | [场景] | [触发词] |` |
+| 创建模板文件 | Write `<memory_root>/templates/[name].md` | 文件必须有 frontmatter + 使用示例 |
+| 更新 Skill | Edit `<skills_root>/<name>/SKILL.md` | 修改前先 Read，自动备份 |
+| 追加经验条目 | Edit `<memory_root>/projects/<project-slug>/experience-log.md`（末尾追加） | 格式见模式 A |
+| 更新速查表 | Edit `<memory_root>/projects/<project-slug>/experience-quickref.md` | 格式：`[编号] [关键词] — [规则]` |
+| 写入 knowledge/patterns/ | Write `<memory_root>/knowledge/patterns/[name].md` | frontmatter + When/Pattern/Evidence/Related |
+| 写入 knowledge/heuristics/ | Write `<memory_root>/knowledge/heuristics/[name].md` | frontmatter + Rule/Success Rate/Evidence |
+| 更新 skill-usage-checklist | Edit `<memory_root>/projects/<project-slug>/skill-usage-checklist.md` | 格式：`| [Skill] | [场景] | [触发词] |` |
 
 **每个动作执行前必须**：
 1. 检查目标文件是否存在（RunCommand Test-Path）
@@ -650,15 +658,16 @@ retrospective.md（分析报告）→ 引用 experience-log.md，不重复内容
 ## Self-Disclosure
 - 0 verdict 字眼
 - 11 维度完整内联（dim 1-11），dim 9 + dim 11 必走
-- 4 件套 sync verify 强制（Step 3.5）
+- 5 件套 sync verify 强制（Step 3.5）
 - 知识层升级安全规则（只创建新文件，policies 需人工确认）
 - 行动项 P0/P1 立即执行，P2 等确认，P3 只记录
 
 ## Reference
-- **源 skill**：`C:\Users\12739\.claude\skills\self-evolution\SKILL.md`（v2.1.3, 382 行）
+- **源 skill（原机溯源，非运行路径）**：`C:\Users\12739\.claude\skills\self-evolution\SKILL.md`（v2.1.3, 382 行）
 - **源 templates**：`11-dimensions-deep-retro.md`（367 行，已内联）+ `evolution-report.md`（已内联）+ `write-large-file-checklist.md`（H17 sub-protocol，蒸馏后用工具链 sub-protocol 替代）
-- **deep-review-loop skill（已蒸馏）**：`C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md`
-- **mem-wrap-up skill（已蒸馏）**：`C:\Users\12739\.trae-cn\skills\mem-wrap-up\SKILL.md`
-- **user 训诫**：`c:\Users\12739\.trae-cn\memory\user_profile.md` § DRL 真循环铁律（2026-07-12）
-- **蒸馏原则**：剥离 bash/Node/Python 脚本 + vault 路径 + H-rules 术语 + CLAUDE.md 引用 + experience-capture 依赖 + templates 独立文件（11 维度内联）；保留双模式 + 11 维度完整 + 4 件套 verify + 知识层升级 + 行动项分流 + verdict 禁词；嫁接 TRAE 工具映射 + deep-review-loop/mem-wrap-up 联动
-- **位置**：`C:\Users\12739\.trae-cn\skills\self-evolution\SKILL.md`（TRAE 官方 skill 目录，自动注册到 available_skills，所有项目可用）
+- **deep-review-loop skill（已蒸馏，仓库版）**：`skills/deep-review-loop/SKILL.md`
+- **mem-wrap-up skill（已蒸馏，仓库版）**：`skills/mem-wrap-up/SKILL.md`
+- **agent-session-loop（仓库版）**：`skills/agent-session-loop/SKILL.md`（三阶段整合流水线入口）
+- **user 训诫（原机溯源）**：`c:\Users\12739\.trae-cn\memory\user_profile.md` § DRL 真循环铁律（2026-07-12）
+- **蒸馏原则**：剥离 bash/Node/Python 脚本 + vault 路径 + H-rules 术语 + CLAUDE.md 引用 + experience-capture 依赖 + templates 独立文件（11 维度内联）；保留双模式 + 11 维度完整 + 5 件套 sync verify + 知识层升级 + 行动项分流 + verdict 禁词；嫁接 TRAE 工具映射 + deep-review-loop/mem-wrap-up 联动
+- **位置**：本仓库 `skills/self-evolution/SKILL.md`（仓库版，平台适配见文首）；TRAE 全局另有副本

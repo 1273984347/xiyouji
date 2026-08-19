@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W464），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W484），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.83（2026-08-19）：W484 Skills 目录治理 — 14 个 skill 全量审查修复 + 平台适配 + 六文档同步
+
+> **来源**：用户要求审查 skills/ 目录并全量修复（坏 openai.yaml / 六文档计数失真 / TRAE 路径不可移植 / 重复与过期内容）。
+> - **执行（skill 修复）**：5 角色 skill `agents/openai.yaml` 的 `System.Collections.Hashtable` 占位符还原为真实中文描述；唐僧 SKILL.md 错字修复；version-bump 陷阱清单去重；self-evolution 4/5 件套统一为 5 件套；en-translation footer 版本模板占位符化；characters-knowledge EN 人物页计数 10→12。
+> - **执行（平台适配）**：deep-review-loop / mem-wrap-up / self-evolution 新增「平台适配」段（`<memory_root>` / `<skills_root>` 占位符 + TRAE Task/RunCommand → Codex/CodeBuddy 工具映射），正文运行路径全部占位化，原机路径仅保留溯源标注；agent-session-loop references 标注为精简快速路径（完整协议以独立 skill 为准）。
+> - **执行（文档）**：AGENTS.md §4.5 / README / STRUCTURE 同步为 14 个；交接文档「三 skill 闭环」位置改仓库内副本 + 陈旧 Git HEAD 修正；新增 `skills/README.md` 索引 + `scripts/_check_skills.py` 自检脚本（不入 verify_delivery 门禁）。
+> - **文件**：skills/ 下 22 文件 + AGENTS.md + README.md + STRUCTURE.md + 交接文档.md + 六文档。
+> - **验证**：`scripts/_check_skills.py` 全过（14 skill）；ruff 通过；`verify_delivery.py` 核心全绿（CSP 1173 哈希 0 漂移 / 数据漂移 / sitemap / A1 导航 / 计数 611 / 治理文档契约 6 项全过）。
+> - **状态**：本次提交（W484）已推送 origin/main。
 
 ### v2.3.82（2026-08-18）：W464 Phase 3 观测基线确立 — baseline_snapshot + 性能实测 + GoatCounter 链路核验
 

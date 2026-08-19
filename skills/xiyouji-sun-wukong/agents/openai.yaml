@@ -1,4 +1,4 @@
 interface:
-  display_name: "System.Collections.Hashtable.dn"
-  short_description: "System.Collections.Hashtable.sd"
-  default_prompt: "System.Collections.Hashtable.dp"
+  display_name: "西游记·孙悟空"
+  short_description: "孙悟空专属知识库与内容生产规范（正典速查/关键回目/数据源/生产规则）"
+  default_prompt: "按《详解西游记》规范回答孙悟空相关问题，或创作/扩写其人物内容"
