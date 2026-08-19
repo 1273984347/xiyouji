@@ -1,6 +1,6 @@
 # 项目级 Skills 索引（17 个）
 
-> 2026-08-19 治理：AGENTS.md §4.5 已同步为 17 个（W484 修复 14 个 + W485 收录 visual-batch / plan-authoring / plan-review）；5 个角色 skill 的 `agents/openai.yaml` 已修复；三个 TRAE 蒸馏 skill 已做平台适配（路径占位符 + 工具映射，见各 SKILL.md 文首「平台适配」）。2026-08-19 W486：四个会话流程 skill 已同步上游协议修正（verdict 7 词全序 / R0 4 件套 / 过拟合警报增强版 / P2 ≤ N_max / work-log 路径 / bridge_note 定义 / 整合版协调声明）。
+> 2026-08-19 治理：AGENTS.md §4.5 已同步为 17 个（W484 修复 14 个 + W485 收录 visual-batch / plan-authoring / plan-review）；5 个角色 skill 的 `agents/openai.yaml` 已修复；三个 TRAE 蒸馏 skill 已做平台适配（路径占位符 + 工具映射，见各 SKILL.md 文首「平台适配」）。2026-08-19 W486：四个会话流程 skill 已同步上游协议修正（verdict 7 词全序 / R0 4 件套 / 过拟合警报增强版 / P2 ≤ N_max / work-log 路径 / bridge_note 定义 / 整合版协调声明）。2026-08-19 W487：二轮同步（DRL 未安装降级声明 + experience-capture 格式规范 + self-evolution 触发词扩充）。
 
 | Skill | 类别 | 用途 | 何时用 |
 |---|---|---|---|
@@ -26,6 +26,7 @@
 
 - 四个会话流程 skill 源自 TRAE 全局，仓库版已做平台适配：运行路径一律用 `<memory_root>` / `<skills_root>` 占位符，工具名按各文件文首「平台适配」映射（TRAE Task → 平台子代理、RunCommand → shell/PowerShell 等）。
 - W486（2026-08-19）已把上游 GitHub 四仓库的 Claude Code 协议修正同步入库（协议内容层对齐，工程件如 evals/CI/fragment-lint 不随副本进入）。
+- W487（2026-08-19）二轮同步：mem-wrap-up 补 DRL 未安装降级声明；self-evolution 触发词扩充并新增 `references/experience-capture-format.md`（经验写入格式规范）。
 - agent-session-loop 的 `references/` 为精简快速路径，完整协议以三个独立 skill（deep-review-loop / mem-wrap-up / self-evolution）当前版本为准。
 - visual-batch / plan-authoring / plan-review 三 skill 于 W485 从 `D:\1\skills`（全局目录）收录入库，playbook 内容与 Phase E 方案/批次记录配套。
 - 角色 / 内容 / 知识 skill 为 agent 可安装格式（`agents/openai.yaml`）。

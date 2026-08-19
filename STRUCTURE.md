@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.85（2026-08-19）— W486 四会话 skill 协议同步（verdict 7 词 / R0 4 件套 / 警报增强 / P2 残留 / work-log 路径 / 整合版协调，同步自上游 GitHub 四仓库）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.86（2026-08-19）— W487 四会话 skill 二轮同步（DRL 未安装降级声明 + experience-capture 格式规范 + self-evolution 触发词扩充）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构

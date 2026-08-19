@@ -1,6 +1,6 @@
 ---
 name: self-evolution
-description: Runs retro after task completion. Quick mode = 3-question self-check. Full mode = 11-dimension deep analysis with knowledge upgrade. Invoke when user says "全面复盘/周汇总/retro" or after task completion.
+description: Runs retro after task completion. Quick mode = 3-question self-check. Full mode = 11-dimension deep analysis with knowledge upgrade. Invoke when user says "全面复盘/周汇总/retro/记住这个/capture/经验沉淀" or after task completion.
 metadata:
   author: distilled-from-claude-code-vault
   version: "1.0.0-trae-distilled"
@@ -82,7 +82,7 @@ metadata:
 | 全否 | 跳过，不写文件 |
 | 有发现/踩坑/缺口 | 执行写入（见下方） |
 
-**写入步骤**（直接执行，不需要调用其他 skill）：
+**写入步骤**（直接执行，不需要调用其他 skill；格式与质量标准详见 [references/experience-capture-format.md](references/experience-capture-format.md)，激活本节时读取）：
 
 1. 追加到 `<memory_root>/projects/<project-slug>/experience-log.md`（Edit 工具，末尾追加，无则 Write 创建）：
 ```markdown
