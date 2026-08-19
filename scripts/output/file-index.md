@@ -10,6 +10,16 @@
 
 ---
 
+## W464 Phase 3 观测基线确立（2026-08-18·v2.3.82）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/baseline_snapshot.py | W464 | v2.3.82 新增·观测基线快照生成器（计数+性能+UV 手填栏+闸门阈值） |
+| scripts/output/观测基线快照.md | W464 | v2.3.82 新增·机器生成基线表（611/86/138/228 + 性能三值 + UV 待回填） |
+| scripts/output/perf-baseline.json | W464 | v2.3.82 修改·W464 实测（5 核心页 LCP/CLS/TBT） |
+| scripts/_w464_perf_measure.js | W464 | v2.3.82 新增·一次性性能实测脚本 |
+| site/dukou-engine.html | W464 | v2.3.82 修改·长链页脚 prepend |
+
 ## W478 Phase E2 CN 可视化页传播 I（2026-08-18·v2.3.81）
 
 | 文件 | W | 说明 |
