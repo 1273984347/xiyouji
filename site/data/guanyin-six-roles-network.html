@@ -895,6 +895,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         /* Hero */
 header
@@ -912,12 +913,12 @@ header.hero .meta {
 .section-title.alt-2 { color: var(--accent-3); border-left-color: var(--accent-3); }
 
 .definition {
-  background: #f5efe4;
+  background: var(--paper-warm);
   padding: 14px 16px;
   margin-bottom: 18px;
   border-left: 3px solid var(--accent-3);
   font-size: 0.94em;
-  border-radius: 2px;
+  border-radius: var(--radius-sm)
 }
 
 /* KPI */
@@ -935,15 +936,15 @@ header.hero .meta {
 .role-card {
   background: var(--paper);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: var(--radius-md)
   padding: 18px 16px;
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--dur-base), box-shadow var(--dur-base);
   cursor: pointer;
 }
 .role-card:hover, .role-card:focus {
   transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: var(--elev-2);
   outline: none;
 }
 .role-card .role-name {
@@ -976,7 +977,7 @@ header.hero .meta {
 }
 .swatch-bar {
   height: 4px;
-  border-radius: 2px;
+  border-radius: var(--radius-sm)
   margin: 8px auto;
   width: 60%;
 }
@@ -986,9 +987,9 @@ header.hero .meta {
 .chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
 .chart-caption { color: var(--muted); font-size: 0.84em; margin-bottom: 12px; }
 .chart-svg {
-  background: #fff;
+  background: var(--paper);
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: var(--radius-md)
   display: block;
   margin: 0 auto;
 }
@@ -1001,7 +1002,7 @@ header.hero .meta {
   font-size: 0.84em;
 }
 .legend-item { display: flex; align-items: center; gap: 6px; }
-.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
 
 /* Tooltip */
 /* 墨韵（W461）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
@@ -1009,11 +1010,11 @@ header.hero .meta {
 /* Insight */
 .insight-list { list-style: none; }
 .insight-list li {
-  background: #f5efe4;
+  background: var(--paper-warm);
   margin: 8px 0;
   padding: 12px 15px;
   border-left: 3px solid var(--accent-2);
-  border-radius: 2px;
+  border-radius: var(--radius-sm)
 }
 .insight-list li strong { color: var(--accent); }
 
@@ -1044,7 +1045,8 @@ header.hero .meta {
   header
 }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

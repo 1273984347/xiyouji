@@ -894,6 +894,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 4 处 */
         /* === 仅本页特有样式 === */
         .container { max-width: 1280px; margin: 0 auto; padding: 24px 20px; }
 header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--accent-1); }
@@ -906,7 +907,7 @@ h1 { font-size: 2.2em; margin: 8px 0 4px; color: var(--ink); letter-spacing: 4px
 .breadcrumb .sep { margin: 0 6px; color: var(--line); }
 
 .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 28px; }
-.kpi-card { background: var(--paper-deep); border-left: 4px solid var(--accent-1); padding: 12px 16px; border-radius: 4px; }
+.kpi-card { background: var(--paper-deep); border-left: 4px solid var(--accent-1); padding: 12px 16px; border-radius: var(--radius-md) }
 .kpi-card:nth-child(2) { border-left-color: var(--accent-2); }
 .kpi-card:nth-child(3) { border-left-color: var(--accent-3); }
 .kpi-card:nth-child(4) { border-left-color: var(--accent-4); }
@@ -914,28 +915,29 @@ h1 { font-size: 2.2em; margin: 8px 0 4px; color: var(--ink); letter-spacing: 4px
 .kpi-value { font-size: 1.6em; font-weight: 700; color: var(--ink); font-family: "JetBrains Mono", monospace; }
 .kpi-label { font-size: 0.82em; color: var(--ink-soft); margin-top: 2px; }
 
-section { background: #fff8e7; border: 1px solid var(--line); border-radius: 6px; padding: 20px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+section { background: var(--paper-warm); border: 1px solid var(--line); border-radius: var(--radius-md) padding: 20px; margin-bottom: 24px; box-shadow: var(--elev-1); }
 h2 { font-size: 1.4em; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px dashed var(--line); color: var(--ink); }
 h2 .en { font-size: 0.6em; color: var(--ink-soft); font-family: "JetBrains Mono", monospace; margin-left: 10px; }
 .lead { font-size: 0.95em; color: var(--ink-soft); margin: 0 0 14px; }
-.chart-area { background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 10px; }
+.chart-area { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md) padding: 10px; }
 svg { display: block; }
 
 .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; font-size: 0.82em; color: var(--ink-soft); }
 .legend-item { display: flex; align-items: center; gap: 6px; }
-.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
 
 .theory-matrix { width: 100%; border-collapse: collapse; font-size: 0.88em; }
 .theory-matrix th, .theory-matrix td { padding: 8px 10px; border: 1px solid var(--line); text-align: left; }
 .theory-matrix th { background: var(--paper-deep); font-weight: 600; }
 .theory-matrix tr:nth-child(even) { background: rgba(255,248,231,0.5); }
 
-footer { background: #23201A; color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
+footer { background: var(--ink); color: #e9b885; padding: 24px 20px; text-align: center; font-size: 0.85em; }
 footer a { color: #e9b885; }
 footer .footer-index { margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.78em; color: #b8a584; }
 footer .footer-cross { margin-top: 6px; font-size: 0.82em; }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

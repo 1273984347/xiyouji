@@ -890,30 +890,32 @@ td.num, th.num {
     .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
 }
     </style>
-<style>
-  :root{--bg:#faf7f2;--paper:#fff;--ink:#23201A;--ink-soft:#6B6455;--accent:#c8463a;--accent-2:#3a6b8c;--line:#d9cdb8}
+<style>/* e-track-exempt: chart-data-colors 9 处 */
+
+  :root{--bg:#faf7f2;--paper:var(--paper);--ink:var(--ink);--ink-soft:var(--ink-soft);--accent:#c8463a;--accent-2:#3a6b8c;--line:#d9cdb8}
   *{box-sizing:border-box}
   body{margin:0;font-family:"Noto Serif SC","Songti SC",serif;color:var(--ink);background:var(--bg);line-height:1.6}
-  header.top{padding:22px 20px 14px;background:linear-gradient(135deg,#1a1410,#3a2820);color:#f5e9d4}
+  header.top{padding:22px 20px 14px;background:linear-gradient(135deg,#1a1410,#3a2820);color:var(--paper-warm)}
   header.top h1{margin:0;font-size:22px}
   header.top p{margin:6px 0 0;font-size:13px;opacity:.85}
-  .banner{margin:12px 16px;padding:10px 14px;border-radius:8px;font-size:13px;border:1px solid var(--line);background:#fff7ec}
+  .banner{margin:12px 16px;padding:10px 14px;border-radius: var(--radius-md)font-size:13px;border:1px solid var(--line);background:#fff7ec}
   .banner.offline{border-color:#d9b36b;background:#fdf3df}
   .main{padding:0 16px 40px}
   .meta{color:var(--ink-soft);font-size:13px;margin:10px 0 8px}
   .keytabs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px}
-  .keytab{padding:6px 12px;border:1px solid var(--line);border-radius:999px;cursor:pointer;font-size:13px;background:var(--paper)}
-  .keytab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .chartbox{margin:8px 0 14px;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px;display:none}
+  .keytab{padding:6px 12px;border:1px solid var(--line);border-radius: var(--radius-pill)cursor:pointer;font-size:13px;background:var(--paper)}
+  .keytab.active{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+  .chartbox{margin:8px 0 14px;border:1px solid var(--line);border-radius: var(--radius-lg)background:var(--paper);padding:10px;display:none}
   .chartbox h3{margin:4px 6px 8px;font-size:14px;color:var(--accent-2)}
   .hint{color:var(--ink-soft);font-size:12px;margin-top:8px}
   @media(max-width:720px){header.top h1{font-size:18px}}
 
   .searchbar{display:flex;gap:8px;margin:12px 16px;align-items:center;flex-wrap:wrap}
-  .searchbar input{flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:15px;background:var(--paper)}
+  .searchbar input{flex:1;min-width:200px;padding:10px 12px;border:1px solid var(--line);border-radius: var(--radius-md)font-size:15px;background:var(--paper)}
   .searchbar .vt-btn{padding:9px 16px}
 </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

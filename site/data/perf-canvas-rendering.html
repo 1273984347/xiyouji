@@ -894,6 +894,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 5 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         /* Hero 顶图 */
 header
@@ -933,7 +934,7 @@ header.hero .meta {
   margin-bottom: 18px;
   border-left: 3px solid var(--accent-3);
   font-size: 0.94em;
-  border-radius: 2px;
+  border-radius: var(--radius-sm)
 }
 
 /* 控制条 */
@@ -945,7 +946,7 @@ header.hero .meta {
   justify-content: center;
   background: var(--paper);
   padding: 14px;
-  border-radius: 6px;
+  border-radius: var(--radius-md)
   margin-bottom: 18px;
   border: 1px solid var(--border);
 }
@@ -954,15 +955,15 @@ header.hero .meta {
   padding: 6px 12px;
   font-size: 0.9em;
   font-family: inherit;
-  background: #fff;
+  background: var(--paper);
   color: var(--ink);
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: var(--radius-md)
   cursor: pointer;
 }
 .controls button {
   background: var(--accent);
-  color: #fff;
+  color: var(--paper);
   border-color: var(--accent);
   font-weight: 600;
   letter-spacing: 1px;
@@ -986,9 +987,9 @@ header.hero .meta {
   .compare-grid { grid-template-columns: 1fr; }
 }
 .render-pane {
-  background: #fff;
+  background: var(--paper);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: var(--radius-md)
   padding: 14px;
   display: flex;
   flex-direction: column;
@@ -1009,7 +1010,7 @@ header.hero .meta {
 .pane-badge {
   font-size: 0.76em;
   padding: 2px 8px;
-  border-radius: 10px;
+  border-radius: var(--radius-lg)
   letter-spacing: 0.5px;
   font-family: "JetBrains Mono", "Consolas", monospace;
 }
@@ -1029,9 +1030,9 @@ header.hero .meta {
 .pane-canvas svg, .pane-canvas canvas {
   display: block;
   margin: 0 auto;
-  background: #fff;
+  background: var(--paper);
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: var(--radius-md)
   width: 100%;
   height: auto;
   max-width: 100%;
@@ -1041,7 +1042,7 @@ header.hero .meta {
 .time-bar {
   background: var(--paper);
   padding: 16px;
-  border-radius: 6px;
+  border-radius: var(--radius-md)
   border: 1px solid var(--border);
   margin-top: 16px;
 }
@@ -1054,7 +1055,7 @@ header.hero .meta {
 .bar-track {
   display: flex;
   height: 28px;
-  border-radius: 4px;
+  border-radius: var(--radius-md)
   overflow: hidden;
   border: 1px solid var(--border);
   margin-bottom: 8px;
@@ -1063,7 +1064,7 @@ header.hero .meta {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--paper);
   font-size: 0.82em;
   font-family: "JetBrains Mono", "Consolas", monospace;
   font-weight: 600;
@@ -1080,21 +1081,21 @@ header.hero .meta {
   flex-wrap: wrap;
 }
 .bar-legend-item { display: flex; align-items: center; gap: 6px; }
-.bar-legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
+.bar-legend-swatch { width: 12px; height: 12px; border-radius: var(--radius-sm) }
 
 /* 优化技术说明列表 */
 .tech-list {
   background: var(--paper);
   padding: 18px 20px;
-  border-radius: 6px;
+  border-radius: var(--radius-md)
   border-left: 4px solid var(--accent-3);
   margin-top: 18px;
 }
 .tech-item {
   margin: 12px 0;
   padding: 10px 14px;
-  background: #fff;
-  border-radius: 4px;
+  background: var(--paper);
+  border-radius: var(--radius-md)
   border-left: 3px solid var(--accent);
   font-size: 0.92em;
 }
@@ -1110,7 +1111,7 @@ header.hero .meta {
   background: var(--ink);
   color: #f5f0e6;
   padding: 8px 12px;
-  border-radius: 3px;
+  border-radius: var(--radius-sm)
   font-family: "JetBrains Mono", "Consolas", monospace;
   font-size: 0.84em;
   margin-top: 6px;
@@ -1120,9 +1121,9 @@ header.hero .meta {
 
 /* 洞察列表 */
 .insight-list {
-  background: #fff;
+  background: var(--paper);
   padding: 15px;
-  border-radius: 4px;
+  border-radius: var(--radius-md)
 }
 .insight-item { margin: 8px 0; padding-left: 20px; position: relative; }
 .insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
@@ -1131,18 +1132,19 @@ header.hero .meta {
 #network-tooltip {
   position: absolute;
   background: var(--tooltip-bg);
-  color: #fff;
+  color: var(--paper);
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: var(--radius-md)
   font-size: 0.84em;
   pointer-events: none;
   z-index: 100;
   max-width: 280px;
   display: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: var(--elev-3);
 }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

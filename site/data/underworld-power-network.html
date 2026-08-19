@@ -895,6 +895,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 7 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         /* Hero */
 header
@@ -919,7 +920,7 @@ header.hero .meta {
   margin-bottom: 18px;
   border-left: 3px solid var(--accent-3);
   font-size: 0.92em;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0
   color: var(--ink-soft);
   line-height: 1.75;
 }
@@ -955,15 +956,15 @@ header.hero .meta {
 .role-card {
   background: #fdfaf0;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: var(--radius-md)
   padding: 16px 14px;
   border-top: 4px solid var(--accent);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--dur-base), box-shadow var(--dur-base);
   cursor: pointer;
 }
 .role-card:hover, .role-card:focus {
   transform: translateY(-3px);
-  box-shadow: 0 4px 14px rgba(58, 40, 32, 0.14);
+  box-shadow: var(--elev-2);
   outline: none;
 }
 .role-card.r-king { border-top-color: var(--r-king); }
@@ -1014,7 +1015,7 @@ header.hero .meta {
 .chart-svg {
   background: #fffdf6;
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: var(--radius-md)
   display: block;
   margin: 0 auto;
   max-width: 100%;
@@ -1029,9 +1030,9 @@ header.hero .meta {
 }
 .legend-item { display: flex; align-items: center; gap: 6px; color: var(--ink-soft); }
 .legend-swatch {
-  width: 14px; height: 14px; border-radius: 2px; display: inline-block;
+  width: 14px; height: 14px; border-radius: var(--radius-sm) display: inline-block;
 }
-.legend-swatch.line { width: 18px; height: 3px; border-radius: 1px; }
+.legend-swatch.line { width: 18px; height: 3px; border-radius: var(--radius-sm) }
 
 /* Tooltip */
 /* 墨韵（W461）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
@@ -1045,7 +1046,7 @@ header.hero .meta {
   margin: 10px 0;
   padding: 12px 16px 12px 48px;
   border-left: 3px solid var(--accent-2);
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0
   position: relative;
   font-size: 0.92em;
   color: var(--ink-soft);
@@ -1084,7 +1085,7 @@ header.hero .meta {
 .dash-panel {
   background: #fdfaf0;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: var(--radius-md)
   padding: 18px;
 }
 .dash-panel h4 {
@@ -1114,12 +1115,13 @@ header.hero .meta {
 footer code {
   background: #fdfaf0;
   padding: 1px 6px;
-  border-radius: 3px;
+  border-radius: var(--radius-sm)
   font-family: "JetBrains Mono", "Consolas", monospace;
   color: var(--accent);
 }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

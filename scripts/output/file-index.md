@@ -10,6 +10,17 @@
 
 ---
 
+## W478 Phase E2 CN 可视化页传播 I（2026-08-18·v2.3.81）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data 53 页 | W478 | v2.3.81 批量·_w478_migrate.py 六规则迁移（阴影→elev/圆角→radius/时长→dur/focus 派生/裸色白名单/豁免登记） |
+| site/data/{hardship-heatmap,intertextuality-network,chapter-stats}.html | W478 | v2.3.81 试点·并行 session 3549327 人工迁移定范式 |
+| docs/superpowers/plans/2026-08-18-phase-e-e2-batch-record.md | W478 | v2.3.81 修改·56 行迁移登记表 + 验收实测 |
+| scripts/_w478_migrate.py | W478 | v2.3.81 新增·E2 迁移一次性脚本（不入门禁） |
+| scripts/_w477_shot_check.js / scripts/output/e2_list.txt | W478 | v2.3.81 修改/新增·全批 56 页 pageerror 断言 + 派生清单 |
+| site/dukou-engine.html | W478 | v2.3.81 修改·长链页脚 prepend |
+
 ## W477 Phase E1 组件层 v2 + 根页模板化（2026-08-18·v2.3.80）
 
 | 文件 | W | 说明 |
