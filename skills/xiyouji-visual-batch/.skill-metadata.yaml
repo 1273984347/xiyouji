@@ -1,0 +1,57 @@
+examples:
+  - id: execute-e1-visual-batch
+    title:
+      zh: 执行 E1 组件层与根页批次
+      en: Execute the E1 Component & Root Page Batch
+    description:
+      zh: 按 W476/W477 验证管线执行 Phase E 组件层与根页模板化批次
+      en: Run the E1 batch (component layer + root page templating) through the W476/W477-proven pipeline
+    prompt:
+      zh: |-
+        按 xiyouji-visual-batch 流程执行 Phase E1 批次（W477：system.css v2 + 根页模板化）：
+        - 先重验仓库状态，再按方案 {{方案路径，默认 docs/superpowers/plans/2026-08-18-phase-e-visual-elevation-roadmap.md}} 的 E1 范围执行
+        - 走完整管线：探针取证 → system.css/根页令牌化 → wc -c 预算复核 → inline_css --force 传播 → _shot_check 验证 → 五门禁 → 接 version-bump
+        - 遵守预算上限（tokens ≤+2KB / system ≤+6KB）与 fail-open 门禁类模式
+      en: |-
+        Run the Phase E1 batch (W477: system.css v2 + root page templating) following the xiyouji-visual-batch workflow:
+        - Re-verify the repo state first, then execute the E1 scope per the plan {{plan path, default docs/superpowers/plans/2026-08-18-phase-e-visual-elevation-roadmap.md}}
+        - Follow the full pipeline: probe → tokenization of system.css/root pages → wc -c budget check → inline_css --force propagation → _shot_check verification → five gates → hand off to version-bump
+        - Respect the budgets (tokens ≤+2KB / system ≤+6KB) and fail-open gate-class patterns
+  - id: execute-propagation-batch
+    title:
+      zh: 执行可视化页传播批次
+      en: Execute a Propagation Batch
+    description:
+      zh: 按分型执行 E2/E3 可视化页传播（页面内联只减不增、图表数据色豁免）
+      en: Run an E2/E3 propagation batch by page type (page inline CSS only shrinks, chart data colors exempt)
+    prompt:
+      zh: |-
+        执行 Phase E{{E2 或 E3}} 可视化页传播批次（约 {{页数}} 页，类型：{{页面型，如网络/力导向 + 热力/统计}}）：
+        - 按 xiyouji-visual-batch 流程：先探针取证页面内联样式与公共组件重复面
+        - 公共样式迁回 system.css，页面 `<style>` 只减不增（图表特有规则除外）
+        - UI 选择器走令牌；图表数据色登记豁免
+        - inline_css.py --force 传播 → _shot_check 验证（pageerror=0 + getComputedStyle 断言 + 截图目视）→ 五门禁 → version-bump
+      en: |-
+        Run the Phase E{{E2 or E3}} propagation batch (~{{page count}} pages, type: {{page type, e.g. network/force-directed + heatmap/statistics}}):
+        - Follow the xiyouji-visual-batch workflow: probe inline styles and public component duplication first
+        - Migrate public styles back to system.css; page <style> only shrinks (except chart-specific rules)
+        - UI selectors must use tokens; chart data colors are exempt with registration
+        - inline_css.py --force propagation → _shot_check verification (pageerror=0 + getComputedStyle assertions + screenshot review) → five gates → version-bump
+  - id: verify-visual-batch
+    title:
+      zh: 复查视觉批次落地与门禁
+      en: Verify a Visual Batch Landing & Gates
+    description:
+      zh: 复核已完成视觉批次的传播、断言与门禁状态
+      en: Re-check the propagation, assertions and gate status of a completed visual batch
+    prompt:
+      zh: |-
+        复查 {{W 批次号}} 视觉批次落地情况：
+        - 核对 inline_css 传播范围（~225 页，根页无需传播）与 _shot_check 断言结果
+        - 跑五门禁确认全绿（verify_delivery / CSP --check / check_js_syntax / check_structure / lint_links）
+        - 抽查 tokens/system 体积是否仍在预算内，截图复核无意外差异
+      en: |-
+        Re-check the {{W batch number}} visual batch landing:
+        - Verify the inline_css propagation scope (~225 pages, root pages excluded) and _shot_check assertion results
+        - Run the five gates to confirm all green (verify_delivery / CSP --check / check_js_syntax / check_structure / lint_links)
+        - Spot-check tokens/system sizes remain within budget and screenshots show no unexpected diffs

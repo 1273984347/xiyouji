@@ -10,6 +10,17 @@
 
 ---
 
+## W485 收录三项目 playbook（2026-08-19·v2.3.84）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| skills/xiyouji-visual-batch/{SKILL.md,reference.md,.skill-metadata.yaml} | W485 | v2.3.84 新增·Phase E 视觉批次执行管线 playbook（W476/W477 实测验证） |
+| skills/xiyouji-plan-authoring/{SKILL.md,reference.md,.skill-metadata.yaml} | W485 | v2.3.84 新增·W 批次路线图/方案撰写 playbook（九段结构） |
+| skills/xiyouji-plan-review/{SKILL.md,reference.md,.skill-metadata.yaml} | W485 | v2.3.84 新增·方案/文档评估 playbook（取证硬门槛 + 五维评估）；metadata 为本次补写 |
+| AGENTS.md | W485 | v2.3.84 修改·§4.5 补录 3 视觉/方案专项 skill（14→17）+ 版本脚注 |
+| README.md / STRUCTURE.md / skills/README.md | W485 | v2.3.84 修改·skills 计数 14→17 + 新增行 |
+| 交接文档.md / CHANGELOG.md / docs/00-导读/项目说明.md / scripts/output/file-index.md | W485 | v2.3.84 修改·六文档同步 |
+
 ## W484 Skills 目录治理（2026-08-19·v2.3.83）
 
 | 文件 | W | 说明 |
