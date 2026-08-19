@@ -894,6 +894,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .breadcrumb .sep { color: rgba(245, 233, 212, 0.5); margin: 0 4px; }
         
@@ -906,7 +907,7 @@ td.num, th.num {
         
         .kpi-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(44, 62, 80, 0.12), 0 8px 24px rgba(44, 62, 80, 0.1);
+            box-shadow: var(--elev-2);
         }
         
         
@@ -942,7 +943,7 @@ td.num, th.num {
         }
         .legend-item { display: flex; align-items: center; gap: 6px; }
         .legend-swatch {
-            width: 14px; height: 14px; border-radius: 2px; display: inline-block;
+            width: 14px; height: 14px; border-radius: var(--radius-sm) display: inline-block;
         }
         .legend-swatch.line { height: 3px; width: 18px; }
         /* 墨韵（W462）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
@@ -953,7 +954,7 @@ td.num, th.num {
             stroke-width: 1.5px;
         }
         .heatmap-cell {
-            stroke: #fff;
+            stroke: var(--paper);
             stroke-width: 1px;
         }
         .heatmap-cell:hover {
@@ -972,7 +973,8 @@ td.num, th.num {
         .chart-grid line { stroke: var(--line); stroke-dasharray: 2,3; opacity: 0.5; }
         .chart-grid path { stroke-width: 0; }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W477），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W478），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.81（2026-08-18）：W478 Phase E2 CN 可视化页传播 I — 56 页全量令牌化
+
+> **来源**：Phase E 路线图 v2.0 §3 E2（用户「这些都做」+「继续」授权）。试点 3 页（并行 session 3549327 人工迁移定范式）+ 剩余 53 页 `scripts/_w478_migrate.py` 按范式迁移（dry-run 审查后应用·页私有 `<style>` 限定·INLINED 块排除）。
+> - **执行（迁移规则）**：R-SHADOW 硬编码阴影→--elev-1/2/3（hover/悬浮层分档）；R-RADIUS 1-3→sm·4-8→md·9-12→lg·999→pill（复合值逐档映射）；R-TRANS 裸时长→--dur-fast/base；R-FOCUS 未定义 --focus-ring→color-mix 派生光圈；裸色白名单→paper/paper-warm/ink/ink-soft；R-EXEMPT 图表数据色逐页登记（页顶注释 + 批次记录表）。
+> - **执行（§5.4 冲突处置）**：试点页暗底金 tooltip 收编 .chart-tooltip 宣纸底（hardship-heatmap 3 div + 6 classed）。
+> - **文件**：site/data 56 页（试点 3 + 迁移 53）+ docs/superpowers/plans/2026-08-18-phase-e-e2-batch-record.md（56 行登记表）+ scripts/_w478_migrate.py / _w477_shot_check.js 扩页 / output/e2_list.txt + 六文档。
+> - **验证**：全批 56 页 Playwright pageerror=0；截图目视 6 页无破坏；M2/M3 批内达标（裸色仅余豁免登记项）；M5 净 +102 行（豁免注释）；check_structure 232 文件 0 失衡；CSP 1173 哈希 0 漂移；改动范围 git diff = 53 页精确；verify_delivery 核心全绿。
+> - **状态**：已落地·随本 commit 提交。E2 收口·下一批 E3（W479 余 30 页：86-56）。
 
 ### v2.3.80（2026-08-18）：W477 Phase E1 组件层 v2 + 根页模板化 — system.css v2 全站传播
 

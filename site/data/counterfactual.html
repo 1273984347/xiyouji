@@ -894,6 +894,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .breadcrumb .sep {
             color: var(--ink-soft);
@@ -903,9 +904,9 @@ td.num, th.num {
             color: var(--ink-soft);
         }
         .notice {
-            background: #fff8ec;
+            background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 10px 14px;
             font-size: 0.82rem;
             color: var(--accent-3);
@@ -935,7 +936,7 @@ td.num, th.num {
             background: #fdfaf4;
             border: 1px solid var(--line);
             border-left: 4px solid var(--accent);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 18px 18px 16px;
             display: flex;
             flex-direction: column;
@@ -943,7 +944,7 @@ td.num, th.num {
         }
         .scenario-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 14px rgba(60, 40, 20, 0.12);
+            box-shadow: var(--elev-2);
         }
         .scenario-head {
             display: flex;
@@ -968,10 +969,10 @@ td.num, th.num {
         .badge {
             display: inline-block;
             padding: 2px 8px;
-            border-radius: 10px;
+            border-radius: var(--radius-lg)
             font-size: 0.72rem;
             font-weight: 500;
-            color: #fff;
+            color: var(--paper);
             white-space: nowrap;
             font-family: "JetBrains Mono", monospace;
             letter-spacing: 0.04em;
@@ -1002,9 +1003,9 @@ td.num, th.num {
         .scenario-conclusion {
             margin-top: auto;
             padding: 10px 12px;
-            background: #fff8ec;
+            background: var(--paper-warm);
             border: 1px dashed var(--accent-soft);
-            border-radius: 4px;
+            border-radius: var(--radius-md)
             font-size: 0.85rem;
             color: var(--accent-3);
             line-height: 1.55;
@@ -1050,7 +1051,7 @@ td.num, th.num {
         .legend-swatch {
             width: 12px;
             height: 12px;
-            border-radius: 2px;
+            border-radius: var(--radius-sm)
         }
         #chart-category {
             width: 100%;
@@ -1059,10 +1060,10 @@ td.num, th.num {
         }
         /* 核心结论 */
         .core-conclusion-box {
-            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
             padding: 24px 28px;
-            border-radius: 4px;
+            border-radius: var(--radius-md)
             position: relative;
         }
         .core-conclusion-box .quote-mark {
@@ -1095,10 +1096,10 @@ td.num, th.num {
         }
         /* 关键洞察 */
         .insight-box {
-            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
             padding: 20px 24px;
-            border-radius: 4px;
+            border-radius: var(--radius-md)
             margin-top: 16px;
         }
         .insight-box h4 {
@@ -1144,7 +1145,8 @@ td.num, th.num {
     
 /* W042 a11y: 全局键盘焦点可见性 */
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

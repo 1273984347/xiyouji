@@ -894,6 +894,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
         
@@ -907,8 +908,8 @@ td.num, th.num {
         
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         .notice {
-            background: #fff8e7; border-left: 4px solid var(--accent-soft);
-            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+            background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 var(--radius-md) var(--radius-md) 0
         }
         
         
@@ -920,48 +921,48 @@ td.num, th.num {
         .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
         .skip-link {
             position: absolute; top: -40px; left: 0; background: var(--accent-2);
-            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
-            border-radius: 0 0 4px 0; transition: top 0.2s;
+            color: var(--paper); padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 var(--radius-md) 0 transition: top var(--dur-base);
         }
         .skip-link:focus { top: 0; }
         
-        .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; padding: 12px 16px; background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; }
+        .control-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 18px; padding: 12px 16px; background: var(--paper-warm); border: 1px solid var(--line); border-radius: var(--radius-md) }
         .control-row .ctrl-label { font-size: 0.88em; color: var(--ink-soft); font-weight: 600; }
         .stage-btn {
             padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
-            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.9em;
-            font-family: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s;
+            color: var(--ink); border-radius: var(--radius-md) cursor: pointer; font-size: 0.9em;
+            font-family: inherit; transition: background var(--dur-base), color var(--dur-base), border-color var(--dur-base);
         }
-        .stage-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .stage-btn.active { background: var(--accent); color: var(--paper); border-color: var(--accent); }
         .stage-btn:hover { background: var(--accent-soft); }
         .stage-btn.active:hover { background: var(--accent); }
         .slider-wrap { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 240px; }
         .slider-wrap input[type=range] {
             flex: 1; height: 6px; -webkit-appearance: none; appearance: none;
-            background: var(--line); border-radius: 3px; outline: none;
+            background: var(--line); border-radius: var(--radius-sm) outline: none;
         }
         .slider-wrap input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none; appearance: none;
-            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
-            cursor: pointer; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%
+            cursor: pointer; border: 2px solid var(--paper); box-shadow: var(--elev-1);
         }
         .slider-wrap input[type=range]::-moz-range-thumb {
-            width: 18px; height: 18px; background: var(--accent); border-radius: 50%;
-            cursor: pointer; border: 2px solid #fff;
+            width: 18px; height: 18px; background: var(--accent); border-radius: 50%
+            cursor: pointer; border: 2px solid var(--paper);
         }
         .stage-display { font-family: "JetBrains Mono", monospace; font-size: 0.9em; color: var(--accent); font-weight: 700; min-width: 110px; }
         .neighborhood-mode {
             position: absolute; top: 12px; right: 12px; z-index: 6;
-            background: rgba(44,36,24,0.92); color: #f5e9d4; font-size: 0.82rem;
-            padding: 8px 12px; border-radius: 6px; pointer-events: none;
+            background: rgba(44,36,24,0.92); color: var(--paper-warm); font-size: 0.82rem;
+            padding: 8px 12px; border-radius: var(--radius-md) pointer-events: none;
             border: 1px solid var(--accent-soft); box-shadow: var(--shadow);
         }
         .chapter-ctrl .ctrl-label { min-width: 4.5em; }
         .chapter-ctrl .stage-btn { min-width: 64px; text-align: center; }
         .chart-wrap { position: relative; }
-        #network-svg { display: block; width: 100%; min-height: 580px; background: #fffdf8; border: 1px solid var(--line); border-radius: 6px; }
-        .node-circle { cursor: pointer; transition: stroke 0.2s; }
-        .node-circle:hover { stroke: #23201A; stroke-width: 2.5px; }
+        #network-svg { display: block; width: 100%; min-height: 580px; background: var(--paper-warm); border: 1px solid var(--line); border-radius: var(--radius-md) }
+        .node-circle { cursor: pointer; transition: stroke var(--dur-base); }
+        .node-circle:hover { stroke: var(--ink); stroke-width: 2.5px; }
         .node-label { font-size: 12px; fill: var(--ink); pointer-events: none; font-weight: 600; }
         .node-label.dim { fill: #b8a584; font-weight: 400; }
         /* 墨韵（W461）：tooltip 盒样式统一采用 system.css .chart-tooltip；以下内部结构样式改宣纸底配色 */
@@ -970,16 +971,16 @@ td.num, th.num {
         #network-tip .tip-row strong { color: var(--accent-3); }
         #network-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: var(--ink-soft); margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--line); }
         .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
-        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
-        .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 50%; }
-        .legend-row .lg-swatch.line { width: 22px; height: 3px; border-radius: 1px; }
+        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--radius-md) background: var(--paper-warm); }
+        .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 50% }
+        .legend-row .lg-swatch.line { width: 22px; height: 3px; border-radius: var(--radius-sm) }
         .rel-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.88em; }
         .rel-table th, .rel-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
-        .rel-table th { background: #fff8e7; color: var(--accent-3); font-weight: 600; }
+        .rel-table th { background: var(--paper-warm); color: var(--accent-3); font-weight: 600; }
         .rel-table td.num { text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--accent); }
         .insight-box {
-            background: #fffdf8; border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+            background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 var(--radius-md) var(--radius-md) 0 font-size: 0.92em;
         }
         .insight-box strong { color: var(--accent); font-weight: 700; }
         .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
@@ -993,7 +994,8 @@ td.num, th.num {
             .stage-btn { padding: 6px 12px; font-size: 0.82em; }
         }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

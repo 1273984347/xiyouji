@@ -7,27 +7,27 @@ const ROOT = path.resolve(__dirname, '..');
 const OUT = path.join(__dirname, 'output', 'screenshots', 'w477-e1');
 fs.mkdirSync(OUT, { recursive: true });
 
-const PAGES = [
-  ['index', 'site/index.html'],
-  ['dashboard', 'site/dashboard.html'],
-  ['curated', 'site/curated.html'],
-  ['guide', 'site/guide.html'],
-  ['chapter-stats', 'site/data/chapter-stats.html'],
-  ['81-hardships', 'site/data/81-hardships.html'],
-];
+const LIST = fs.existsSync(require('path').join(__dirname, 'output', 'e2_list.txt'))
+  ? fs.readFileSync(require('path').join(__dirname, 'output', 'e2_list.txt'), 'utf8').trim().split('\n').map(l => l.trim()).filter(Boolean)
+  : [];
+const PAGES = LIST.map(p => [p.split('/').pop().replace('.html', ''), p]);
+const SHOT_LIMIT = 6;
 
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   const results = [];
-  for (const [name, rel] of PAGES) {
+  for (let i = 0; i < PAGES.length; i++) {
+    const [name, rel] = PAGES[i];
     const errors = [];
     page.removeAllListeners('pageerror');
     page.on('pageerror', e => errors.push(String(e).slice(0, 120)));
     const url = 'file:///' + path.join(ROOT, rel).replace(/\\/g, '/');
     await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 }).catch(() => {});
     await page.waitForTimeout(1200);
-    await page.screenshot({ path: path.join(OUT, name + '.png'), fullPage: false });
+    if (i < SHOT_LIMIT) {
+      await page.screenshot({ path: path.join(OUT, name + '.png'), fullPage: false });
+    }
     // 计算样式生效断言：卡片阴影与圆角（system.css v2 落地核验）
     const probe = await page.evaluate(() => {
       const el = document.querySelector('.card, .kpi, .chart-block, .curated-card, .path-card');

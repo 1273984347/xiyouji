@@ -894,6 +894,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 10 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
         
@@ -907,8 +908,8 @@ td.num, th.num {
         
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         .notice {
-            background: #fff8e7; border-left: 4px solid var(--accent-soft);
-            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+            background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 var(--radius-md) var(--radius-md) 0
         }
         
         
@@ -920,60 +921,60 @@ td.num, th.num {
         .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
         .skip-link {
             position: absolute; top: -40px; left: 0; background: var(--accent-2);
-            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
-            border-radius: 0 0 4px 0; transition: top 0.2s;
+            color: var(--paper); padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 var(--radius-md) 0 transition: top var(--dur-base);
         }
         .skip-link:focus { top: 0; }
         
         .dim-switcher { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
         .dim-btn {
             padding: 8px 16px; border: 1px solid var(--line); background: var(--paper);
-            color: var(--ink); border-radius: 4px; cursor: pointer; font-size: 0.9em;
-            font-family: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s;
+            color: var(--ink); border-radius: var(--radius-md) cursor: pointer; font-size: 0.9em;
+            font-family: inherit; transition: background var(--dur-base), color var(--dur-base), border-color var(--dur-base);
         }
-        .dim-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .dim-btn.active { background: var(--accent); color: var(--paper); border-color: var(--accent); }
         .dim-btn:hover { background: var(--accent-soft); }
         .dim-btn.active:hover { background: var(--accent); }
         .heatmap-wrap { position: relative; overflow-x: auto; }
         #heatmap-svg { display: block; min-width: 980px; }
-        .heat-cell { transition: opacity 0.2s; cursor: pointer; }
+        .heat-cell { transition: opacity var(--dur-base); cursor: pointer; }
         .heat-cell:hover { opacity: 0.72; }
         .heat-tip {
             position: absolute; pointer-events: none; background: rgba(44,36,24,0.95);
-            color: #f5e9d4; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem;
-            opacity: 0; transition: opacity 0.2s; z-index: 10; max-width: 320px;
+            color: var(--paper-warm); padding: 10px 14px; border-radius: var(--radius-md) font-size: 0.82rem;
+            opacity: 0; transition: opacity var(--dur-base); z-index: 10; max-width: 320px;
         }
         .heat-tip .tip-title { font-weight: bold; color: #e9b885; margin-bottom: 6px; font-size: 0.95rem; }
         .heat-tip .tip-row { color: #d9cdb8; line-height: 1.5; }
-        .heat-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
+        .heat-tip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: #b8a584; margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--ink-soft); }
         .legend-bar { display: flex; align-items: center; gap: 12px; margin-top: 16px; font-size: 0.82em; color: var(--ink-soft); flex-wrap: wrap; }
         .legend-block { display: flex; align-items: center; gap: 4px; }
-        .legend-swatch { width: 18px; height: 14px; border-radius: 2px; display: inline-block; }
+        .legend-swatch { width: 18px; height: 14px; border-radius: var(--radius-sm) display: inline-block; }
         .matrix-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
-        .matrix-legend .ml-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
-        .matrix-legend .ml-swatch { width: 14px; height: 14px; border-radius: 2px; }
+        .matrix-legend .ml-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--radius-md) background: var(--paper-warm); }
+        .matrix-legend .ml-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
         .insight-box {
-            background: #fffdf8; border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+            background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 var(--radius-md) var(--radius-md) 0 font-size: 0.92em;
         }
         .insight-box strong { color: var(--accent); font-weight: 700; }
         .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
         .dim-stat-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.88em; }
         .dim-stat-table th, .dim-stat-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
-        .dim-stat-table th { background: #fff8e7; color: var(--accent-3); font-weight: 600; }
+        .dim-stat-table th { background: var(--paper-warm); color: var(--accent-3); font-weight: 600; }
         .dim-stat-table td.num { text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--accent); }
         .stat-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
         @media (min-width: 900px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
-        .stat-card { border: 1px solid var(--line); border-radius: 6px; padding: 14px; background: #fffdf8; }
+        .stat-card { border: 1px solid var(--line); border-radius: var(--radius-md) padding: 14px; background: var(--paper-warm); }
         .stat-card h3 { font-size: 0.98em; margin-bottom: 8px; color: var(--ink); }
         .stat-card svg { width: 100%; height: 220px; display: block; }
         /* ===== 方案 C 深化：排序切换 / 详情面板 / 双向联动 ===== */
         .sort-switcher { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-        .sort-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-        .sort-btn.active:hover { color: #fff; }
+        .sort-btn.active { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+        .sort-btn.active:hover { color: var(--paper); }
         .hardship-detail {
             background: #fff5e6; border: 1px solid #f4d4b2; border-left: 4px solid var(--accent-3);
-            border-radius: 6px; padding: 14px 18px; margin-top: 14px; font-size: 0.88rem;
+            border-radius: var(--radius-md) padding: 14px 18px; margin-top: 14px; font-size: 0.88rem;
             line-height: 1.8; display: none;
         }
         .hardship-detail.visible { display: block; }
@@ -981,7 +982,7 @@ td.num, th.num {
         .hd-head h4 { color: var(--accent-3); margin-bottom: 6px; font-size: 1rem; }
         .hd-close {
             border: none; background: transparent; cursor: pointer; font-size: 1.15rem;
-            color: var(--ink-faint); line-height: 1; padding: 2px 8px; border-radius: 3px;
+            color: var(--ink-faint); line-height: 1; padding: 2px 8px; border-radius: var(--radius-sm)
         }
         .hd-close:hover { color: var(--accent); background: rgba(200, 70, 58, 0.08); }
         .hd-row { margin-bottom: 4px; }
@@ -989,7 +990,7 @@ td.num, th.num {
         .hd-row.hd-sub { font-size: 0.84em; color: var(--ink-soft); }
         #heatmap-svg .heat-cell.linked { stroke: var(--accent); stroke-width: 2.5px; }
         #hardships-table { cursor: pointer; }
-        #hardships-table tbody tr { cursor: pointer; transition: background 0.15s; }
+        #hardships-table tbody tr { cursor: pointer; transition: background var(--dur-fast); }
         #hardships-table tbody tr.highlight td { background: rgba(200, 70, 58, 0.10); }
         #hardships-table tbody tr.highlight td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
         #hardships-table tbody tr:hover td { background: rgba(255, 255, 255, 0.5); }
@@ -1002,7 +1003,8 @@ td.num, th.num {
             .dim-btn { padding: 6px 12px; font-size: 0.82em; }
         }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

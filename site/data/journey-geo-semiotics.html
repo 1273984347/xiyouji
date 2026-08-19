@@ -894,11 +894,12 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .notice {
-            background: #fff8ec;
+            background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-md)
             padding: 12px 16px;
             font-size: 0.85rem;
             color: var(--accent-tertiary);
@@ -906,10 +907,10 @@ td.num, th.num {
             line-height: 1.7;
         }
         .notice code {
-            background: #f5e9d4;
+            background: var(--paper-warm);
             color: var(--accent-primary);
             padding: 2px 6px;
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius-sm)
             font-family: "JetBrains Mono", monospace;
             font-size: 0.82rem;
         }
@@ -922,7 +923,7 @@ td.num, th.num {
         .mech-card {
             background: var(--paper);
             border: 1px solid var(--line);
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-md)
             padding: 22px;
             box-shadow: var(--shadow-md);
             border-top: 4px solid var(--accent-primary);
@@ -969,7 +970,7 @@ td.num, th.num {
             position: relative;
             background: var(--bg-secondary);
             border: 1px solid var(--line);
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-md)
             overflow: hidden;
         }
         .graph-wrap svg {
@@ -1002,7 +1003,7 @@ td.num, th.num {
             padding: 8px 14px;
             background: var(--bg-primary);
             border: 1px solid var(--line-soft);
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius-sm)
         }
         .legend-group h5 {
             font-size: 0.74rem;
@@ -1019,8 +1020,8 @@ td.num, th.num {
         .legend-swatch {
             width: 14px;
             height: 14px;
-            border-radius: 50%;
-            border: 1.5px solid #fff;
+            border-radius: 50%
+            border: 1.5px solid var(--paper);
         }
         .legend-line {
             display: inline-block;
@@ -1032,9 +1033,9 @@ td.num, th.num {
         .detail-panel {
             margin-top: var(--space-4);
             padding: var(--space-4);
-            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent-primary);
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius-sm)
             min-height: 60px;
         }
         .detail-panel .placeholder {
@@ -1080,7 +1081,8 @@ td.num, th.num {
             .legend-group { padding: 6px 10px; }
         }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

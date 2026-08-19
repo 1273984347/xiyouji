@@ -894,6 +894,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 6 处 */
         /* === 仅本页特有样式 === */
         .container {
             max-width: 1280px;
@@ -919,9 +920,9 @@ td.num, th.num {
             color: var(--ink-soft);
         }
         .notice {
-            background: #fff8ec;
+            background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 10px 14px;
             font-size: 0.82rem;
             color: var(--accent-3);
@@ -936,7 +937,7 @@ td.num, th.num {
         .kpi-card {
             background: var(--paper);
             border: 1px solid var(--line);
-            border-radius: 8px;
+            border-radius: var(--radius-md)
             padding: 18px;
             box-shadow: var(--shadow);
             border-top: 3px solid var(--accent);
@@ -968,7 +969,7 @@ td.num, th.num {
         .section {
             background: var(--paper);
             border: 1px solid var(--line);
-            border-radius: 8px;
+            border-radius: var(--radius-md)
             padding: 28px;
             box-shadow: var(--shadow);
             margin-bottom: 24px;
@@ -993,7 +994,7 @@ td.num, th.num {
             border-left: 4px solid var(--accent-soft);
             padding: 12px 16px;
             margin-bottom: 20px;
-            border-radius: 0 6px 6px 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0
             font-size: 0.92rem;
             color: var(--ink-soft);
         }
@@ -1001,7 +1002,7 @@ td.num, th.num {
         .chart-block {
             background: #fdfaf4;
             border: 1px solid var(--line);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 20px;
             margin-bottom: 20px;
         }
@@ -1024,7 +1025,7 @@ td.num, th.num {
         .chart-svg:focus-visible {
             outline: 2px solid var(--accent-2);
             outline-offset: 2px;
-            border-radius: 4px;
+            border-radius: var(--radius-md)
         }
         .legend-row {
             display: flex;
@@ -1043,7 +1044,7 @@ td.num, th.num {
         .legend-swatch {
             width: 14px;
             height: 14px;
-            border-radius: 2px;
+            border-radius: var(--radius-sm)
             display: inline-block;
         }
         table.data-table {
@@ -1060,14 +1061,14 @@ td.num, th.num {
             vertical-align: top;
         }
         table.data-table thead th {
-            background: #f5ede0;
+            background: var(--paper-warm);
             color: var(--accent-3);
             font-weight: 600;
             font-size: 0.82rem;
             letter-spacing: 0.05em;
         }
         table.data-table tbody tr:hover {
-            background: #fff8ec;
+            background: var(--paper-warm);
         }
         .icon-correct {
             color: var(--accent-4);
@@ -1110,7 +1111,7 @@ td.num, th.num {
         .case-card {
             background: #fdfaf4;
             border: 1px solid var(--line);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 14px 16px;
             border-left: 4px solid var(--accent-4);
         }
@@ -1127,7 +1128,7 @@ td.num, th.num {
         .case-card .case-badge {
             font-size: 0.72rem;
             padding: 2px 8px;
-            border-radius: 10px;
+            border-radius: var(--radius-lg)
             font-family: "JetBrains Mono", "Consolas", monospace;
             font-weight: 600;
         }
@@ -1194,18 +1195,19 @@ td.num, th.num {
             top: -40px;
             left: 0;
             background: #3a6b8c;
-            color: #fff;
+            color: var(--paper);
             padding: 8px 16px;
             z-index: 100;
             text-decoration: none;
-            border-radius: 0 0 4px 0;
-            transition: top 0.2s;
+            border-radius: 0 0 var(--radius-md) 0
+            transition: top var(--dur-base);
         }
         .skip-link:focus {
             top: 0;
         }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

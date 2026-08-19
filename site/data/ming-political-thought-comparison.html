@@ -894,6 +894,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .mono { font-family: "JetBrains Mono", "Fira Code", Consolas, monospace; }
         
@@ -908,18 +909,18 @@ td.num, th.num {
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         .cross-page-nav {
             font-size: 0.86em; color: var(--ink-soft); margin-bottom: 20px;
-            padding: 10px 14px; background: #fff8e7; border: 1px solid var(--line);
-            border-radius: 6px; line-height: 2;
+            padding: 10px 14px; background: var(--paper-warm); border: 1px solid var(--line);
+            border-radius: var(--radius-md) line-height: 2;
         }
         .cross-page-nav a {
             color: var(--accent-2); text-decoration: none;
-            padding: 3px 8px; border-radius: 3px; transition: background 0.2s;
+            padding: 3px 8px; border-radius: var(--radius-sm) transition: background var(--dur-base);
         }
         .cross-page-nav a:hover { background: var(--accent-soft); }
-        .cross-page-nav a.active { color: #fff; background: var(--accent); font-weight: 600; }
+        .cross-page-nav a.active { color: var(--paper); background: var(--accent); font-weight: 600; }
         .notice {
-            background: #fff8e7; border-left: 4px solid var(--accent-soft);
-            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 4px 4px 0;
+            background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
+            padding: 10px 16px; margin-bottom: 24px; font-size: 0.9em; border-radius: 0 var(--radius-md) var(--radius-md) 0
         }
         
         
@@ -931,25 +932,25 @@ td.num, th.num {
         .section p { margin-bottom: 10px; color: var(--ink-soft); font-size: 0.92em; }
         .skip-link {
             position: absolute; top: -40px; left: 0; background: var(--accent-2);
-            color: #fff; padding: 8px 16px; z-index: 100; text-decoration: none;
-            border-radius: 0 0 4px 0; transition: top 0.2s;
+            color: var(--paper); padding: 8px 16px; z-index: 100; text-decoration: none;
+            border-radius: 0 0 var(--radius-md) 0 transition: top var(--dur-base);
         }
         .skip-link:focus { top: 0; }
         
         .chart-wrap { position: relative; overflow-x: auto; }
         svg.chart-svg { display: block; min-width: 760px; }
         .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 0.85em; color: var(--ink-soft); }
-        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; background: #fff8e7; }
-        .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: 2px; }
-        .legend-row .lg-swatch.line { width: 22px; height: 3px; border-radius: 1px; }
-        .legend-row .lg-swatch.dot { border-radius: 50%; }
+        .legend-row .lg-item { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: var(--radius-md) background: var(--paper-warm); }
+        .legend-row .lg-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
+        .legend-row .lg-swatch.line { width: 22px; height: 3px; border-radius: var(--radius-sm) }
+        .legend-row .lg-swatch.dot { border-radius: 50% }
         /* 墨韵（W462）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
         .chart-tooltip .tip-title { font-weight: bold; color: var(--accent); margin-bottom: 6px; font-size: 0.95rem; }
         .chart-tooltip .tip-row { color: var(--ink); line-height: 1.5; }
-        .chart-tooltip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: var(--ink-faint); margin-top: 6px; padding-top: 6px; border-top: 1px dashed #6B6455; }
+        .chart-tooltip .tip-meta { font-family: "JetBrains Mono", monospace; font-size: 0.76em; color: var(--ink-faint); margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--ink-soft); }
         .insight-box {
-            background: #fffdf8; border-left: 4px solid var(--accent-soft);
-            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 4px 4px 0; font-size: 0.92em;
+            background: var(--paper-warm); border-left: 4px solid var(--accent-soft);
+            padding: 12px 16px; margin-bottom: 12px; border-radius: 0 var(--radius-md) var(--radius-md) 0 font-size: 0.92em;
         }
         .insight-box strong { color: var(--accent); font-weight: 700; }
         .insight-box .ib-tag { font-family: "JetBrains Mono", monospace; font-size: 0.82em; color: var(--accent-3); margin-right: 6px; font-weight: 700; }
@@ -957,7 +958,7 @@ td.num, th.num {
         
         footer .footer-index { display: grid; grid-template-columns: 1fr; gap: 8px; margin: 12px auto; max-width: 900px; }
         @media (min-width: 720px) { footer .footer-index { grid-template-columns: repeat(2, 1fr); } }
-        footer .footer-index div { padding: 8px 12px; background: rgba(245,233,212,0.06); border-radius: 4px; text-align: left; }
+        footer .footer-index div { padding: 8px 12px; background: rgba(245,233,212,0.06); border-radius: var(--radius-md) text-align: left; }
         footer .footer-index .mono { color: #e9b885; }
         @media (prefers-reduced-motion: reduce) {  }
         @media (max-width: 480px) {
@@ -967,7 +968,8 @@ td.num, th.num {
             .cross-page-nav { font-size: 0.78em; }
         }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

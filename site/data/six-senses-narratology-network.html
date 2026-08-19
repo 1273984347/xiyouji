@@ -918,7 +918,7 @@ header.hero .meta {
   margin-bottom: 18px;
   border-left: 3px solid var(--accent-3);
   font-size: 0.94em;
-  border-radius: 2px;
+  border-radius: var(--radius-sm)
 }
 
 /* KPI */
@@ -936,15 +936,15 @@ header.hero .meta {
 .sense-card {
   background: var(--paper);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: var(--radius-md)
   padding: 16px 14px;
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--dur-base), box-shadow var(--dur-base);
   cursor: pointer;
 }
 .sense-card:hover, .sense-card:focus {
   transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: var(--elev-2);
   outline: none;
 }
 .sense-card .sense-name {
@@ -966,7 +966,7 @@ header.hero .meta {
 }
 .swatch-bar {
   height: 4px;
-  border-radius: 2px;
+  border-radius: var(--radius-sm)
   margin: 6px auto;
   width: 60%;
 }
@@ -976,9 +976,9 @@ header.hero .meta {
 .chart-title { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
 .chart-caption { color: var(--muted); font-size: 0.84em; margin-bottom: 12px; }
 .chart-svg {
-  background: #fff;
+  background: var(--paper);
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: var(--radius-md)
   display: block;
   margin: 0 auto;
 }
@@ -991,7 +991,7 @@ header.hero .meta {
   font-size: 0.84em;
 }
 .legend-item { display: flex; align-items: center; gap: 6px; }
-.legend-swatch { width: 14px; height: 14px; border-radius: 2px; }
+.legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
 
 /* Tooltip */
 /* 墨韵（W461）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
@@ -1015,7 +1015,7 @@ header.hero .meta {
   border-collapse: collapse;
   margin-top: 12px;
   font-size: 0.88em;
-  background: #fff;
+  background: var(--paper);
   border: 1px solid var(--border);
 }
 .summary-table th {
@@ -1032,11 +1032,11 @@ header.hero .meta {
   vertical-align: top;
 }
 .summary-table tr:nth-child(even) td { background: var(--table-stripe); }
-.summary-table tr:hover td { background: #f5efe4; }
+.summary-table tr:hover td { background: var(--paper-warm); }
 .summary-table .sense-dot {
   display: inline-block;
   width: 10px; height: 10px;
-  border-radius: 50%;
+  border-radius: 50%
   margin-right: 6px;
   vertical-align: middle;
 }
@@ -1059,7 +1059,7 @@ header.hero .meta {
 .theorist-item {
   background: var(--paper);
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: var(--radius-md)
   border-left: 3px solid var(--border);
   font-size: 0.86em;
 }
@@ -1073,7 +1073,7 @@ header.hero .meta {
   margin: 8px 0;
   padding: 12px 15px;
   border-left: 3px solid var(--accent-2);
-  border-radius: 2px;
+  border-radius: var(--radius-sm)
 }
 .insight-list li strong { color: var(--accent); }
 
@@ -1095,7 +1095,8 @@ header.hero .meta {
   .theorist-list { grid-template-columns: 1fr; }
 }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
