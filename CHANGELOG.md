@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W478），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W464），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.82（2026-08-18）：W464 Phase 3 观测基线确立 — baseline_snapshot + 性能实测 + GoatCounter 链路核验
+
+> **来源**：Phase 3 量化路线图 W464（用户「这些都做」授权双轨同轮）。观测窗起点建立：基线机器生成 + 性能实测 + 采集链路核验；UV 真实值待后台回填（W465 判定输入）。
+> - **执行**：`scripts/baseline_snapshot.py` 入库（内容计数 + 性能三值 + UV 手填栏 + 闸门阈值，生成 scripts/output/观测基线快照.md）；`scripts/output/perf-baseline.json` 更新 W464 实测（_w464_perf_measure.js：5 核心页 LCP 68-136ms / CLS ≤0.002 / TBT ≤163ms，全过 LHCI 阈值）。
+> - **执行（链路核验）**：count.js async（根/CN/EN 抽查）+ visit-log.js defer（仅本地诊断不计 G2）+ 计数端点 https://1273984347.goatcounter.com/count 可达（裸 GET 400 = 存活）。**G1/G2/G3 的 UV 值需维护者登录后台回填快照手填栏**——本批不伪造数据。
+> - **文件**：scripts/baseline_snapshot.py（入库）+ scripts/_w464_perf_measure.js（一次性）+ scripts/output/perf-baseline.json + scripts/output/观测基线快照.md + 六文档。
+> - **验证**：快照计数与 verify_delivery 口径一致（611/86/138/228）；性能三值全过阈值；verify_delivery 核心全绿。
+> - **状态**：已落地·随本 commit 提交。观测窗自本批起算·W465 判定凭据 = 快照手填栏回填值。
 
 ### v2.3.81（2026-08-18）：W478 Phase E2 CN 可视化页传播 I — 56 页全量令牌化
 

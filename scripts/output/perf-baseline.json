@@ -1,50 +1,43 @@
 {
-  "version": "W267",
-  "version_detail": "v2.2.47",
-  "generated_at": "2026-07-30",
-  "description": "性能基线快照·5 核心页面 Core Web Vitals·W267 E6 性能监控深化",
+  "version": "W464",
+  "version_detail": "v2.3.82",
+  "generated_at": "2026-08-18",
+  "description": "性能基线快照·5 核心页面 Core Web Vitals·W464 Phase 3 观测基线（file:// 实测·_w464_perf_measure.js）",
   "unit": {
     "lcp": "milliseconds",
     "cls": "dimensionless",
-    "inp": "milliseconds",
-    "tbt": "milliseconds",
-    "fcp": "milliseconds"
+    "tbt": "milliseconds"
+  },
+  "thresholds": {
+    "lcp": 5000,
+    "cls": 0.3,
+    "tbt": 300
   },
   "pages": {
     "index.html": {
-      "lcp": 1200,
-      "cls": 0.05,
-      "inp": 150,
-      "tbt": 200,
-      "fcp": 800
+      "lcp": 136,
+      "cls": 0.002,
+      "tbt": 154
     },
     "dashboard.html": {
-      "lcp": 1500,
-      "cls": 0.08,
-      "inp": 180,
-      "tbt": 250,
-      "fcp": 900
+      "lcp": 96,
+      "cls": 0.001,
+      "tbt": 163
     },
     "academic-papers.html": {
-      "lcp": 1100,
-      "cls": 0.04,
-      "inp": 140,
-      "tbt": 180,
-      "fcp": 750
+      "lcp": 104,
+      "cls": 0,
+      "tbt": 23
     },
     "essay-ai-era.html": {
-      "lcp": 1000,
-      "cls": 0.03,
-      "inp": 130,
-      "tbt": 150,
-      "fcp": 700
+      "lcp": 68,
+      "cls": 0,
+      "tbt": 0
     },
     "essay-information-cocoon.html": {
-      "lcp": 1050,
-      "cls": 0.04,
-      "inp": 135,
-      "tbt": 160,
-      "fcp": 720
+      "lcp": 72,
+      "cls": 0.001,
+      "tbt": 1
     }
   }
 }
