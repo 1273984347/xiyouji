@@ -76,7 +76,7 @@ cd /d/1/xiyouji && python scripts/extract_strings.py <name>
 <footer class="site-footer">
     <div>
         <div class="footer-brand">Annotated Journey to the West</div>
-        <div class="footer-meta">v2.2.86 · W334 · Data Visualization</div>
+        <div class="footer-meta">vX.Y.Z · W### · Data Visualization</div>
     </div>
     <nav aria-label="Footer">
         <a href="index.html">EN Home</a>
@@ -86,6 +86,8 @@ cd /d/1/xiyouji && python scripts/extract_strings.py <name>
     </nav>
 </footer>
 ```
+
+> 版本行 `vX.Y.Z · W###` 为占位符，按当前实际版本替换（勿照抄历史模板值，如 v2.2.86 · W334）。
 
 > 若原 footer-meta 有随笔链接（`<a href="../../docs/.../中文.md">中文标题</a>`），**href 保留中文路径**，只翻译可见文字并追加 `(essay, Chinese)`。
 

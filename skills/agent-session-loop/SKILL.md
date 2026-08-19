@@ -84,7 +84,7 @@ metadata:
 
 **阶段出口条件**：真收敛（P0=0 AND P1=0 AND 连续 2 轮无新 P0/P1）→ 携带收敛曲线 + residual risk 进入 Phase 2。
 
-> 本阶段可与独立 skill [deep-review-loop](https://github.com/1273984347/deep-review-loop) 互换：装了独立 skill 时直接调用；未装时按本仓库 references/01-review.md 手动执行。
+> 本阶段优先调用本仓库已收录的独立 skill [skills/deep-review-loop/SKILL.md](../deep-review-loop/SKILL.md)；references/01-review.md 为精简快速路径，冲突时以独立 skill 当前版本为准。
 
 ## Phase 2：收尾（Wrap-up）
 
@@ -102,7 +102,7 @@ metadata:
 
 **阶段出口条件**：收尾报告（影响 / 改动 / 待确认 / 遗留）+ sediment 记录 → 进入 Phase 3。
 
-> 本阶段可与独立 skill [mem-wrap-up](https://github.com/1273984347/mem-wrap-up) 互换。
+> 本阶段优先调用本仓库已收录的独立 skill [skills/mem-wrap-up/SKILL.md](../mem-wrap-up/SKILL.md)；references/02-wrap-up.md 为精简快速路径，冲突时以独立 skill 当前版本为准。
 
 ## Phase 3：沉淀（Evolution）
 
@@ -117,7 +117,7 @@ metadata:
 
 **阶段出口条件**：复利经验入库 + 行动项清单（含待确认项）→ 闭环完成。
 
-> 本阶段可与独立 skill [self-evolution](https://github.com/1273984347/self-evolution) 互换。
+> 本阶段优先调用本仓库已收录的独立 skill [skills/self-evolution/SKILL.md](../self-evolution/SKILL.md)；references/03-evolution.md 为精简快速路径，冲突时以独立 skill 当前版本为准。
 
 ---
 
@@ -168,5 +168,5 @@ metadata:
 - 4 层过拟合防护必走（P2 残留 N / 边际收益 gate / 过拟合警报 / 严重度门槛）
 
 ## Reference
-- **组成**：三阶段分别对应独立 skill [deep-review-loop](https://github.com/1273984347/deep-review-loop) / [mem-wrap-up](https://github.com/1273984347/mem-wrap-up) / [self-evolution](https://github.com/1273984347/self-evolution)；本仓库为整合流水线，references/ 为各阶段详案
+- **组成**：三阶段分别对应本仓库独立 skill `skills/deep-review-loop` / `skills/mem-wrap-up` / `skills/self-evolution`（另有上游 GitHub 仓库）；本仓库为整合流水线，references/ 为各阶段精简详案（完整协议以独立 skill 当前版本为准）
 - **设计来源**：从真实编码会话中蒸馏的「三 skill 闭环」（2026-07 建立）——审查 → 收尾 → 沉淀，多次假收敛 / 声明未落地教训固化

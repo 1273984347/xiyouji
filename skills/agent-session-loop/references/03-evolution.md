@@ -1,5 +1,7 @@
 # Phase 3：沉淀（Evolution）详案
 
+> 精简版注记（2026-08-19 治理）：本文件是 agent-session-loop 的快速路径精简版；完整协议以同仓库 `skills/self-evolution/SKILL.md` 为准，冲突时以独立 skill 当前版本为准。
+
 > 本文件在 Phase 3 激活时读取。双模式复盘：快速模式（3 问自检，任务完成自动）+ 全面模式（11 维度深度分析）。核心是知识层升级（experience → pattern → heuristic → policy）+ 行动项分流。
 
 ## 两种模式

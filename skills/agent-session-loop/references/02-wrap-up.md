@@ -1,5 +1,7 @@
 # Phase 2：收尾（Wrap-up）详案
 
+> 精简版注记（2026-08-19 治理）：本文件是 agent-session-loop 的快速路径精简版；完整协议以同仓库 `skills/mem-wrap-up/SKILL.md` 为准，冲突时以独立 skill 当前版本为准。
+
 > 本文件在 Phase 2 激活时读取。7 步流水线（顺序固定），把 session 状态、文档、记忆审计到「可交接」状态并沉淀经验。
 
 ## 7 步总览

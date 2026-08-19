@@ -14,13 +14,21 @@ metadata:
 
 **Announce at start:** "I'm using the mem-wrap-up skill to run the 7-step session wrap-up pipeline."
 
+## 平台适配（仓库版 2026-08-19 治理）
+
+- `<memory_root>`：agent 记忆根目录占位符（TRAE = `c:\Users\12739\.trae-cn\memory`；其他平台按自身约定，与本仓库 [agent-session-loop](../agent-session-loop/SKILL.md) 的 memory 路径约定一致）。
+- `<project-slug>` / `<YYYYMMDD>` / `<date>`：按当前 workspace 映射的项目记忆目录与日期目录。
+- 工具映射：`RunCommand` → 终端命令（PowerShell / `shell_command`）；`Task subagent` → 平台子代理机制；`Grep/Read` → 文件检索与读取工具（`rg` / `Get-Content`）。
+- 步骤 4a 的「6 个项目层文件」为本仓库 xiyouji 六文档清单；其他项目按自身文档清单替换。
+- 文末 Reference 中的 `C:\Users\12739\...` / `d:\1\archive\...` 仅为来源溯源路径，不是运行路径。
+
 执行 session 收尾 7 步流水线。每次 session 收尾或 sediment 工作落地后必走。
 
 ## neat-freak 边界声明（v1.1.0 吸收）
 
 > neat-freak 边界：本 skill v1.1.0 仅吸收 neat-freak v3.0.0 的「6 面状态矩阵 + 记忆毕业判据 + 分阶段汇报模板」3 项机制。
 > **不吸收**：双路径协议（保留 mem-wrap-up 固定 7 步骨架）/ 权限分级（适合 user_profile 声明而非 skill 内嵌）/ 平台路径速查（TRAE 单平台不需要）。
-> neat-freak 完整版留作参考：`d:\1\archive\khazix-skills\neat-freak\SKILL.md`（如需升级到方案 A 完整蒸馏，从此路径取；归档位置 2026-07-21 确定）。
+> neat-freak 完整版留作参考：`d:\1\archive\khazix-skills\neat-freak\SKILL.md`（原机归档路径，仅原机可用；本仓库不依赖。如需升级到方案 A 完整蒸馏，从此路径取；归档位置 2026-07-21 确定）。
 
 ## 在三 skill 闭环中的位置
 
@@ -43,7 +51,7 @@ metadata:
 ### 步骤 1: memory 健康检查
 - **工具**：RunCommand（PowerShell）+ Grep 工具
 - **动作**：
-  1. 列 c:\Users\12739\.trae-cn\memory\ 目录树大小：Get-ChildItem -Recurse | Measure-Object -Line
+  1. 列 `<memory_root>/` 目录树大小：Get-ChildItem -Recurse | Measure-Object -Line
   2. Grep 工具扫 user_profile.md / 各 project_memory.md 的 P0/P1/P2 标记
   3. 统计 session_memory_*.jsonl 文件数 + 总行数
 - **输出**：metrics（P0/P1/P2 数量 + fileCount + line count）
@@ -81,7 +89,7 @@ metadata:
 ### 步骤 3: project_memory.md fileCount sync
 - **工具**：RunCommand + Grep 工具 + Read 工具
 - **动作**：
-  1. RunCommand 统计实际 memory 文件数：Get-ChildItem "c:\Users\12739\.trae-cn\memory" -Recurse -File | Measure-Object
+  1. RunCommand 统计实际 memory 文件数：Get-ChildItem "<memory_root>" -Recurse -File | Measure-Object
   2. Read 工具读 project_memory.md 头部 frontmatter（如有 fileCount 声明）
   3. 对比实际 vs 声明，drift > 5% 触发警告
 - **输出**：实际 total vs 声明 fileCount 漂移报告
@@ -117,7 +125,7 @@ metadata:
 
 #### 4b: work-log 追加 4 段 schema
 - **工具**：Write 工具（追加到 logs/{YYYY-MM}.md，无则新建）
-- **路径**：c:\Users\12739\.trae-cn\memory\projects\<project-slug>\<YYYYMMDD>\work-log.md（按日期分目录）
+- **路径**：`<memory_root>/projects/<project-slug>/<YYYYMMDD>/work-log.md`（按日期分目录）
 - **4 段 schema**（必含）：
   1. **verification cost**：本 session 实证了多少 verification command（Grep/Read/RunCommand 调用计数）
   2. **throughput decoupling**：per-dim decision 跟 user final decision 分离记录（我建议 vs user 选）
@@ -169,8 +177,8 @@ metadata:
 
 - **工具**：Grep 工具
 - **3 个 memory 文件**（验证清单）：
-  1. work-log.md（c:\Users\12739\.trae-cn\memory\projects\<project-slug>\<YYYYMMDD>\work-log.md）
-  2. topics.md（c:\Users\12739\.trae-cn\memory\projects\<project-slug>\<YYYYMMDD>\topics.md）
+  1. work-log.md（`<memory_root>/projects/<project-slug>/<YYYYMMDD>/work-log.md`）
+  2. topics.md（`<memory_root>/projects/<project-slug>/<YYYYMMDD>/topics.md`）
   3. retrospective.md（项目内或 memory 层 retrospective 文档）
 
 - **Grep spot-check 协议**：
@@ -186,7 +194,7 @@ metadata:
 - **降级条件**（按 user_profile E3 规则）：memory 文件审查范围窄可降级为主代理直接 spot-check（不派 subagent），但 spot-check 必执行不可省略
 
 #### 7b: DRL 5 轮闭环
-- **工具**：Skill 工具调用 deep-review-loop，或 Read C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md 手动执行
+- **工具**：Skill 工具调用 deep-review-loop，或 Read `skills/deep-review-loop/SKILL.md`（仓库版）手动执行
 - **5 轮**：
   - **R0**：surface check（file size + verdict 字眼 grep + 路径验证）
   - **R1a**：3 独立 verifier 交叉验证（3 Task subagents parallel，factual / completeness / reusability 3-lens）
@@ -220,13 +228,14 @@ metadata:
   3. 等 user 拍板（明确放弃 R1a 多视角）
 ## Residual Risk 协议（引用 deep-review-loop）
 
-本 skill Step 7 联动 deep-review-loop 时，residual risk 由 DRL R3 产出，不重复定义。三类 residual risk（L5 subagent 盲点 / L1 sample-time-point / L3 跨 session）详见 `C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md` §5 R3。
+本 skill Step 7 联动 deep-review-loop 时，residual risk 由 DRL R3 产出，不重复定义。三类 residual risk（L5 subagent 盲点 / L1 sample-time-point / L3 跨 session）详见 `skills/deep-review-loop/SKILL.md`（仓库版）§5 R3。
 
 ## Related（TRAE 路径，非 vault wiki-link）
-- **deep-review-loop skill**：C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md（步骤 7 联动）
-- **user_profile**：c:\Users\12739\.trae-cn\memory\user_profile.md（步骤 5 sediment 用户级偏好）
-- **project_memory**：c:\Users\12739\.trae-cn\memory\projects\<project-slug>\project_memory.md（步骤 5 sediment 项目级规则）
-- **topics**：c:\Users\12739\.trae-cn\memory\projects\<project-slug>\<YYYYMMDD>\topics.md（步骤 5 sediment 近期 topic）
+- **deep-review-loop skill（仓库版）**：`skills/deep-review-loop/SKILL.md`（步骤 7 联动）
+- **agent-session-loop（仓库版）**：`skills/agent-session-loop/SKILL.md`（三阶段整合流水线入口）
+- **user_profile**：`<memory_root>/user_profile.md`（步骤 5 sediment 用户级偏好）
+- **project_memory**：`<memory_root>/projects/<project-slug>/project_memory.md`（步骤 5 sediment 项目级规则）
+- **topics**：`<memory_root>/projects/<project-slug>/<YYYYMMDD>/topics.md`（步骤 5 sediment 近期 topic）
 - **retrospective**：项目内 retrospective 文档（如存在，步骤 5 复利经验同步）
 
 > <project-slug> 为当前 workspace 对应的 memory 项目目录名（e.g. -d-1、-d-1-Vannevar、-d-1-Anthropic）。执行时按当前 cwd 映射。
@@ -264,8 +273,8 @@ session 收尾完成后按以下 4 段模板输出，只列有行动价值的内
 - **E1 升级版 spot-check 已执行**（4a 项目层 + 7a memory 层，2026-07-26 W083/W084/W085 3/3 证据毕业加入）
 
 ## Reference
-- **源 skill**：C:\Users\12739\.claude\skills\mem-wrap-up\SKILL.md（2026-06-24, 4488 bytes）
-- **deep-review-loop skill（已蒸馏）**：C:\Users\12739\.trae-cn\skills\deep-review-loop\SKILL.md
-- **user 训诫**：c:\Users\12739\.trae-cn\memory\user_profile.md § DRL 真循环铁律（2026-07-12）
+- **源 skill（原机溯源，非运行路径）**：C:\Users\12739\.claude\skills\mem-wrap-up\SKILL.md（2026-06-24, 4488 bytes）
+- **deep-review-loop skill（已蒸馏，仓库版）**：`skills/deep-review-loop/SKILL.md`
+- **user 训诫（原机溯源）**：c:\Users\12739\.trae-cn\memory\user_profile.md § DRL 真循环铁律（2026-07-12）
 - **蒸馏原则**：剥离 bash/Python/Node hooks + vault 路径 + H-rules + CLAUDE.md §6.1 + Obsidian wiki-link；保留 7 步骨架 + 4 段 schema + verdict 禁词 + Failure handling + residual risk 协议；嫁接 TRAE 工具映射 + deep-review-loop 联动
-- **位置**：C:\Users\12739\.trae-cn\skills\mem-wrap-up\SKILL.md（TRAE 官方 skill 目录，自动注册到 available_skills，所有项目可用）
+- **位置**：本仓库 `skills/mem-wrap-up/SKILL.md`（仓库版，平台适配见文首）；TRAE 全局另有副本
