@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W485），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W486），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.85（2026-08-19）：W486 四会话 skill 协议同步 — 上游 Claude Code 修正入库
+
+> **来源**：用户 2026-08-19 在 Claude Code 中更新 4 个开源 skill 仓库（agent-session-loop / deep-review-loop / mem-wrap-up / self-evolution），随后要求核对 xiyouji/skills 副本并同步。
+> - **执行（协议同步）**：xiyouji 副本为项目内私有版（W484 平台适配 + 内部路径），按内容层对齐上游 7 项协议修正——① verdict 禁词 6 词 → 7 词全序（补 looks good：deep-review-loop 5 处 + agent-session-loop references 2 处）；② R0 表面检查 3 件套 → 4 件套（补 expected hits 必现：agent-session-loop SKILL + mem-wrap-up 7b）；③ 过拟合警报层 3 升级增强版（P0 反弹 1 轮 / P1 反弹 2 轮 / 持平 4 轮窗口）；④ mem-wrap-up Step 6 输出三零目标 → P0=0 P1=0、P2 ≤ N_max（对齐 DRL 层 1）；⑤ mem-wrap-up 4b work-log 路径矛盾修正（logs/{YYYY-MM}.md → memory 路径约定）；⑥ bridge_note 定义补入 mem-wrap-up 正文；⑦ self-evolution 快速模式补「与整合版并用时」协调声明。
+> - **执行（边界）**：evals/CI/marketplace/fragment-lint 等开源工程件不入 xiyouji（项目副本非发布镜像）；runtime-audit.py 插件路径说明不同步（本仓库未收录该脚本）。
+> - **文件**：skills/agent-session-loop/{SKILL.md,references/01-review.md,references/02-wrap-up.md} + skills/deep-review-loop/SKILL.md + skills/mem-wrap-up/SKILL.md + skills/self-evolution/SKILL.md + AGENTS.md + README.md + STRUCTURE.md + skills/README.md + 六文档。
+> - **验证**：旧 6 词禁词 / 三零目标 / 旧警报 / 路径矛盾 Grep 残留 0；`verify_delivery.py` 核心全绿。
+> - **状态**：本次提交（W486）将推送 origin/main。
 
 ### v2.3.84（2026-08-19）：W485 收录三项目 playbook — visual-batch / plan-authoring / plan-review 入库 skills/
 

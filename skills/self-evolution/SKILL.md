@@ -58,6 +58,8 @@ metadata:
 
 每个任务完成时，在 git commit 之前执行。
 
+> **与整合版并用时**：若与 [agent-session-loop](../agent-session-loop/SKILL.md)（三阶段整合流水线）同仓/同环境使用，触发与裁剪遵循整合版的场景裁剪规则（如纯调试 session 可标 `not-applicable`）；独立调用时按本节执行。
+
 ### 触发条件
 - 任务标记为 completed 时
 - git commit 前

@@ -62,7 +62,7 @@ metadata:
 |:----------|:-----|:----:|
 | **V1** | file exists + content count + link target + 行数 | 文件缺失治本 |
 | **V2** | 5 步 grep 范式（size + 残留 + 期望 hits + 期望 0 hits + 实证） | 主代理主动防御 |
-| **V3** | verdict 字眼 grep（完成 / PASS / OK / 没问题 / 12/12 / 闭环） | self-claim 反模式治本 |
+| **V3** | verdict 字眼 grep（完成 / PASS / 12/12 / 闭环 / OK / 没问题 / looks good） | self-claim 反模式治本 |
 | **V4** | memory sync（user_profile / project_memory / topics 是否需更新） | 数字 bump 一致性 |
 | **V5** | 3-case dry-run（best / worst / null） | 一次性工具/scaffold 防崩 |
 
@@ -117,7 +117,7 @@ metadata:
 > 每轮完成后 + 整体闭环前必 self-check。任何 1 条 hit → STOP，self-correct，不要 continue。
 
 - [ ] 跳过任意 round 无 justification（R0/R1a/R1b/R2/R3 任何 1 个跳过 → STOP）
-- [ ] 输出含 verdict 字眼（完成 / PASS / OK / 没问题 / 12/12 / 闭环 → 删 + 重写）
+- [ ] 输出含 verdict 字眼（完成 / PASS / 12/12 / 闭环 / OK / 没问题 / looks good → 删 + 重写）
 - [ ] R3 写 0 residual risk（≥3 必写，含 subagent 盲点 + sample/time-point + 跨 session）
 - [ ] R1a subagent prompt 缺 3-lens split（factual / completeness / reusability 必覆盖）
 - [ ] R1a subagent finding 未附工具调用证据（v1.2.0 新增，违反 R1a 硬性要求 → STOP，重新派 R1a）
@@ -131,8 +131,8 @@ metadata:
 
 **3 件套**（用 Grep 工具 + Read 工具，非 bash）：
 
-1. **file size sanity**：Read 工具打开目标文件，观察行数；或 RunCommand (Get-Content FILE).Count（PowerShell）。
-2. **residual verdict words**：Grep 工具，pattern 完成或PASS或OK或没问题或12/12或闭环，output_mode=count，逐词或合并 regex。
+1. **file size sanity**：Read 工具打开目标文件，观察行数（目标 ≤500 行 / 5000 tokens）；或 RunCommand (Get-Content FILE).Count（PowerShell）。
+2. **residual verdict words**：Grep 工具，pattern 完成或PASS或12/12或闭环或OK或没问题或looks good，output_mode=count，逐词或合并 regex。
 3. **expected hits 必现**：Grep 工具，pattern R0或R1a或R1b或R2或R3或residual 等，确认结构词命中。
 4. **项目阶段判定（P2-9 修复，过拟合防护层 1 前置）**：判定当前项目阶段 → N_max 取值。规则：
    - 比赛级（如 TRAE AI 创造力大赛 / 黑客松 / demo 提交）→ N_max=0
@@ -332,7 +332,7 @@ Output: priority decision + audit findings + memory sync status + verdict grep s
 
 ### V3: verdict 字眼 grep
 
-用 Grep 工具，pattern 完成或PASS或OK或没问题或12/12或闭环，output_mode=count。历史 log 文件例外。
+用 Grep 工具，pattern 完成或PASS或12/12或闭环或OK或没问题或looks good，output_mode=count。历史 log 文件例外。
 
 ### V4: memory sync 4 维度
 
@@ -377,7 +377,7 @@ Output: priority decision + audit findings + memory sync status + verdict grep s
 > <project-slug> 为当前 workspace 对应的 memory 项目目录名（e.g. -d-1、-d-1-Vannevar、-d-1-Anthropic）。执行时按当前 cwd 映射。
 
 ## 8. Self-Disclosure
-- 0 verdict 字眼（完成 / PASS / OK / 没问题 / 12/12 / 闭环）
+- 0 verdict 字眼（完成 / PASS / 12/12 / 闭环 / OK / 没问题 / looks good）
 - R3 必写 N residual risk（≥3），含 subagent 盲点 + sample/time-point + 跨 session
 - 5 步 grep 必先 reflect（主代理主动防御 default 行为）
 - memory sync 4 维度必走
