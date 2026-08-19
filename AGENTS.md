@@ -73,7 +73,7 @@ xiyouji/
 │   └── output/            # data/*.json（可视化数据源）+ file-index.md + screenshots/
 ├── dataset/               # 结构化 JSON（可视化/API 数据源）
 ├── xiyouji-agent-web/     # Web Agent「西游记·渡口问津」（React+Vite+Express）
-├── skills/                # 项目级 playbook skill（14 个，见 §4.5）
+├── skills/                # 项目级 playbook skill（17 个，见 §4.5）
 ├── mcp-server/            # MCP 工具（xiyouji_mcp.py：drl_spotcheck 等）
 ├── tests/                 # pytest + Playwright E2E
 ├── assets/                # 字体源、图片
@@ -136,6 +136,7 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 - 角色 skill（5 个）：sun-wukong / zhu-bajie / sha-seng / tangseng / bai-longma
 - 内容/知识：character-content、characters-knowledge
 - 流程：version-bump、en-translation、s4-submission
+- 视觉/方案专项（3 个）：visual-batch（Phase E 视觉批次执行）、plan-authoring（W 批次方案撰写）、plan-review（方案评估）
 
 ### 4.6 MCP 服务（mcp-server/）
 
@@ -234,4 +235,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458），2026-08-17（v2.3.78 W463）墨韵系列复盘增补动效契约（§1/§6-12/§8）与 W 批收尾坑（§4.3），2026-08-18（v2.3.80 W477）增补维护契约与文档治理段，2026-08-19（v2.3.83 W484）skills 治理：§4.5 补录 4 个会话流程 skill（共 14 个）。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458），2026-08-17（v2.3.78 W463）墨韵系列复盘增补动效契约（§1/§6-12/§8）与 W 批收尾坑（§4.3），2026-08-18（v2.3.80 W477）增补维护契约与文档治理段，2026-08-19（v2.3.83 W484）skills 治理：§4.5 补录 4 个会话流程 skill（共 14 个），2026-08-19（v2.3.84 W485）收录视觉/方案专项 3 skill（visual-batch / plan-authoring / plan-review，共 17 个）。如与上述权威文档冲突，以权威文档为准。*

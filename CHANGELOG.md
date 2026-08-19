@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W484），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W485），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.84（2026-08-19）：W485 收录三项目 playbook — visual-batch / plan-authoring / plan-review 入库 skills/
+
+> **来源**：用户提供 `D:\1\skills` 下三个项目 playbook（Phase E 视觉批次执行 / W 批次方案撰写 / 方案评估），此前仅存在于全局目录、仓库无副本无登记（AGENTS.md 只到 14 个）。
+> - **执行（收录）**：三 skill 整目录复制入库 `skills/`（SKILL.md + reference.md + .skill-metadata.yaml）；plan-review 补 .skill-metadata.yaml（两个示例，与另两份格式对齐）；plan-authoring description 九段括号列举修正。
+> - **执行（文档）**：AGENTS.md §4.5 / README / STRUCTURE / skills/README 同步 14→17 个；版本脚注补 W485。
+> - **文件**：skills/xiyouji-visual-batch/、skills/xiyouji-plan-authoring/、skills/xiyouji-plan-review/（新增 9 文件）+ AGENTS.md + README.md + STRUCTURE.md + skills/README.md + 六文档。
+> - **验证**：`scripts/_check_skills.py` 全过（17 skill）；`verify_delivery.py` 核心全绿。
+> - **状态**：本次提交（W485）已推送 origin/main。
 
 ### v2.3.83（2026-08-19）：W484 Skills 目录治理 — 14 个 skill 全量审查修复 + 平台适配 + 六文档同步
 
