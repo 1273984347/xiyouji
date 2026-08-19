@@ -77,7 +77,7 @@
 2. content count：Grep count 验关键内容命中
 3. link target：`Get-Item <LINK> | Select-Object Target` 验软链
 4. 行数：`(Get-Content <FILE>).Count`
-- **输出**：P0=0 P1=0 P2=0 三零目标（列数据 + 实证，不写 OK/完成）
+- **输出**：P0=0 P1=0、P2 ≤ N_max（N_max 按项目阶段：比赛级 0 / 生产 3 / 原型 10，对齐 DRL 层 1 P2 残留规则；列数据 + 实证，不写 OK/完成）
 
 ## 步骤 7：memory 层 spot-check + 反向审查
 

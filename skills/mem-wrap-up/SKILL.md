@@ -48,6 +48,8 @@ metadata:
 
 ## 7 步（顺序固定，bridge_note 桥接 4 段 schema）
 
+> **bridge_note**：本 skill 的 7 步流水线与步骤 4b 的 4 段 work-log schema 之间的桥接声明——收尾汇报时需显式说明 7 步产出如何落进 work-log 的 4 段结构（verification cost / throughput decoupling / ANED 3 指标 / session-end security scan），缺此声明视为收尾未闭环。
+
 ### 步骤 1: memory 健康检查
 - **工具**：RunCommand（PowerShell）+ Grep 工具
 - **动作**：
@@ -124,7 +126,7 @@ metadata:
 - **降级条件**：无版本 bump / 无 W### 推进的 session（如纯调试 session）→ 4a 标 `not-applicable`，直接走 4b
 
 #### 4b: work-log 追加 4 段 schema
-- **工具**：Write 工具（追加到 logs/{YYYY-MM}.md，无则新建）
+- **工具**：Write 工具（追加到 `<memory_root>/projects/<project-slug>/<YYYYMMDD>/work-log.md`，无则新建）
 - **路径**：`<memory_root>/projects/<project-slug>/<YYYYMMDD>/work-log.md`（按日期分目录）
 - **4 段 schema**（必含）：
   1. **verification cost**：本 session 实证了多少 verification command（Grep/Read/RunCommand 调用计数）
@@ -165,7 +167,7 @@ metadata:
   2. **content count**：Grep 工具 output_mode=count 验关键内容命中
   3. **link target**：RunCommand Get-Item <LINK> | Select-Object Target 验软链
   4. **wc -l**：RunCommand (Get-Content <FILE>).Count 验行数
-- **输出**：P0=0 P1=0 P2=0 三零目标（不写 OK / 完成，列数据 + 实证）
+- **输出**：P0=0 P1=0、P2 ≤ N_max（N_max 按项目阶段：比赛级 0 / 生产 3 / 原型 10，对齐 deep-review-loop 层 1 P2 残留规则；不写 OK / 完成，列数据 + 实证）
 
 ### 步骤 7: memory 层同步 Grep spot-check + deep-review-loop（联动已蒸馏 skill）
 
@@ -196,7 +198,7 @@ metadata:
 #### 7b: DRL 5 轮闭环
 - **工具**：Skill 工具调用 deep-review-loop，或 Read `skills/deep-review-loop/SKILL.md`（仓库版）手动执行
 - **5 轮**：
-  - **R0**：surface check（file size + verdict 字眼 grep + 路径验证）
+  - **R0**：surface check（file size + verdict 字眼 grep + expected hits 必现 + 项目阶段判定 → N_max）
   - **R1a**：3 独立 verifier 交叉验证（3 Task subagents parallel，factual / completeness / reusability 3-lens）
   - **R1b**：对抗性 subagent 审查（1 Task subagent，default refuted=true + class-level scope + **严重度门槛**，过拟合防护层 4）
   - **R2**：独立审计 + self-revision（1 Task subagent，NOT inline + **边际收益 gate**，过拟合防护层 2）

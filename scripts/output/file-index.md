@@ -10,6 +10,17 @@
 
 ---
 
+## W486 四会话 skill 协议同步（2026-08-19·v2.3.85）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| skills/agent-session-loop/{SKILL.md,references/01-review.md,references/02-wrap-up.md} | W486 | v2.3.85 修改·R0 4 件套 + 过拟合警报增强版 + verdict 7 词全序 + P2 ≤ N_max（对齐上游 Claude Code 修正） |
+| skills/deep-review-loop/SKILL.md | W486 | v2.3.85 修改·verdict 禁词 5 处 6 词→7 词全序 + file size 目标 ≤500 行 / 5000 tokens |
+| skills/mem-wrap-up/SKILL.md | W486 | v2.3.85 修改·Step 6 P2 ≤ N_max + work-log 路径修正 + R0 4 件套 + bridge_note 定义 |
+| skills/self-evolution/SKILL.md | W486 | v2.3.85 修改·快速模式补「与整合版并用时」协调声明 |
+| AGENTS.md / README.md / STRUCTURE.md / skills/README.md | W486 | v2.3.85 修改·版本脚注 + 版本行 + skills 索引注记 |
+| 交接文档.md / CHANGELOG.md / docs/00-导读/项目说明.md / scripts/output/file-index.md / site/dukou-engine.html | W486 | v2.3.85 修改·六文档同步 |
+
 ## W485 收录三项目 playbook（2026-08-19·v2.3.84）
 
 | 文件 | W | 说明 |
@@ -682,3 +693,4 @@
 
 | 文件 | W | 说明 |
 |---|---|---|
+
