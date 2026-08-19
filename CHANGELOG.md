@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W486），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W487），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.86（2026-08-19）：W487 四会话 skill 二轮同步 — DRL 降级声明 + experience-capture 格式规范
+
+> **来源**：用户 2026-08-19 在 Claude Code 中再次更新 4 个开源 skill 仓库（agent-session-loop / deep-review-loop / mem-wrap-up / self-evolution），要求复查 xiyouji/skills 副本。
+> - **执行（复查筛选）**：4 仓库新 commit 中 agent-session-loop / deep-review-loop 仅 README/CONTRIBUTING 文档更新（不进项目副本）；mem-wrap-up 新增「deep-review-loop 未安装时 Step 7b 降级声明」（精简审查 + `DRL downgraded` 标注 + 降级≠跳过）；self-evolution 触发词扩充（记住这个 / capture / 经验沉淀）+ 快速模式写入步骤引用新增 `references/experience-capture-format.md` 格式规范（97 行：写入格式 / 质量标准 / 边界纪律 / 手动触发 / 通用编号前缀）。
+> - **执行（边界）**：README / CONTRIBUTING / evals / CI 等工程件不入 xiyouji（项目副本非发布镜像）。
+> - **文件**：skills/mem-wrap-up/SKILL.md + skills/self-evolution/{SKILL.md,references/experience-capture-format.md（新增）} + AGENTS.md + README.md + STRUCTURE.md + skills/README.md + 六文档。
+> - **验证**：触发词 / 降级声明 / 格式引用 Grep 落地；`verify_delivery.py` 核心全绿。
+> - **状态**：本次提交（W487）将推送 origin/main。
 
 ### v2.3.85（2026-08-19）：W486 四会话 skill 协议同步 — 上游 Claude Code 修正入库
 
