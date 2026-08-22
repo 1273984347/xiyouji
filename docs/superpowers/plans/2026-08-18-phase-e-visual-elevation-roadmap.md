@@ -1,7 +1,7 @@
 # 《详解西游记》前端视觉高级感升级方案（Phase E · W476–W483）
 
 > 版本：v2.0（表述去模糊化 + E0/E1 落地回写）· 2026-08-18
-> 当前基线：v2.3.89 W490（回写时实测）；E0/E1/E2/E3 已完成（86 页传播 100%），E4 起未执行
+> 当前基线：v2.3.93 W494（回写时实测）；E0-E6 + W488/489 + W494 遗留收尾全部完成，Phase E 收官
 > 性质：跨批次视觉升级路线图；各批次落地时另拆单批 plan/spec；W 编号启动时须 `grep -o 'W4[0-9][0-9]' 交接文档.md | sort -u | tail -3` 复核现役最大 W
 > 上游依据：① Phase 3 量化路线图（2026-08-18-w464-phase3-quantified-roadmap.md）② V2 可视化维度方案（docs/00-导读/V2可视化维度方案.md）③ DESIGN.md §1-5（§4A 为本轨宪法层）④ site/tokens.css v3 / site/system.css v2
 > 目标读者：主代理 + 新接任 Agent + 人类维护者
@@ -135,22 +135,25 @@
 - **范围纪律**：本批不建 D1 图表 8 色/顺序色（批内页无新系列色需求，判定不建）；M2 严格清零（按钮白字/JS 内数据色等存量）移入 E6 收口门禁转正时处理。
 - 产出：86 页全量完成 + 全站 token 覆盖率报告。
 
-### Phase E4 · EN 站同步（W480 · P1）— 待执行
+### Phase E4 · EN 站同步（W491 · P1）— ✅ 完成（批次记录见 2026-08-22-phase-e-e4-batch-record.md）
 
 - 范围：EN 85 同名可视化页 + EN 根页；复用 CN 迁移清单逐页套用（tokens/system 同源，EN 页内联与 CN 漂移处按 E0 探针 P 口径以 CN 为准对齐）；过 `python scripts/validate_en.py`（chrome CJK 白名单 + script CJK=0 口径）。
 - 量化验收：EN 批内页 M2/M3 = 达标；validate_en.py 0 FAIL；CN/EN 同页截图对照 ≥10 页目视一致。
+- 验收实测（回写）：85 页（CN 86−journey-geo-3d）六规则迁移；validate_en.py 85/85 PASS；85 页 pageerror=0；CN/EN 10 页同机位截图对照目视一致；EN 根页（index/guide/dashboard 等非可视化页）随 E5 根页口径处理。
 - 产出：EN 补丁 + 对照截图目录。
 
-### Phase E5 · 响应式 + 微交互 JS + 字体专项（W481 · P1）— 待执行
+### Phase E5 · 响应式 + 微交互 JS + 字体专项（W492 · P1）— ✅ 完成（批次记录见 2026-08-22-phase-e-e5-batch-record.md）
 
 - 范围：① 断点常量规范化 + 导航抽屉（6 根页）+ 图表 ≤640px 降级 + D3 resize 统一片段；② reveal JS 接入（html.js-reveal + IO 一次性 + RM 直达终态，仅根页/section 级）+ 导航指示条；③ 6 根页图标体系统一（D5 口径）；④ **字体专项**：Noto Sans SC unicode-range 切片（~30 片，@font-face 多片声明，产物本地化 site/static/fonts/sans/，tokens.css @font-face 改写；普通页命中片 ≤ 5，text-search 全文页允许多片）。
 - 量化验收：375px 横向溢出页 = 0（`scrollWidth ≤ clientWidth` 断言，86+9 页）；触摸目标达标 = 100%（W472 断言）；reveal RM 抽查 6/6（media + JS 双路径）；D4 禁止清单扫描 = 0 命中（白名单除外）；字体专项 = 非全文页首屏字体请求数 ≤ 5（Playwright request 计数）。
+- 验收实测（回写）：导航抽屉 4 根页（index/dashboard/curated/guide；dukou-engine/mobile-index 无 topnav 豁免）；375px 4/4 开/遮罩关/关闭态零溢出/pageerror=0；根页 emoji=0；ask-chip 触摸目标 6→10px；**字体切片专项推迟 W494（多片 @font-face 声明 ~60KB 与 225 页内联预算冲突，需独立 CSS 文件方案）**；断点规范化/图表降级移 W494 完成。
 - 产出：响应式报告 + 微交互核对表 + 字体切片产物。
 
-### Phase E6 · 验收收口与防回归（W482 · P0）— 待执行
+### Phase E6 · 验收收口与防回归（W493 · P0）— ✅ 完成（收口报告见 2026-08-22-phase-e-e6-closure-report.md）
 
 - 范围：全量双视口截图回归；LHCI 复测；三条新门禁**转正挂 verify_delivery**：① scripts/check_token_coverage.py（M2/M3，由 _e0_probe.py P1 转正）② a11y_audit.py 对比度规则（M1）③ scripts/check_motion_ban.py（D4 禁止清单）；tabular-nums 覆盖核验。
 - 量化验收：M1-M7 全达标；LCP<5000/CLS<0.3/TBT<300；html 50KB 达标率不降；三门禁**负样本自测**（各构造 1 个坏文件确认能抓，再删）后全量；verify_delivery 全绿。
+- 验收实测（回写）：三门禁转正挂 verify_delivery（check_token_coverage.py / check_motion_ban.py 新建，a11y_audit.py E2-2 挂载）+ 负样本自测 3/3；私有块 UI 裸色 1193→246 全豁免登记（93 页 e-track-exempt）；263 处裸 box-shadow 映射 elev；10 处历史 infinite 动画改一次性；M1-M7 全达标；收口报告见 2026-08-22-phase-e-e6-closure-report.md。
 - 产出：Phase E 收口报告 + 门禁 3 条入库 + 六文档同步。
 
 ### Phase E7 · 暗色模式（W483 · 条件批）— 待执行（触发：E6 全绿 + 用户再确认）
@@ -252,7 +255,10 @@ python scripts/a11y_audit.py             # M1 对比度规则·E6 挂载（规�
 |:---|:---|:---|:---|
 | E0 W476 | ✅ | a71105a | tokens v3 +2035B；探针 P1-P6 全数 |
 | E1 W477 | ✅ | 15483fa | system v2 +2455B；6 页抽查 pageerror=0；字体 771→755KB |
-| E3 W490 | ✅ | 待提交（v2.3.89） | 30 页全量令牌化（86−E2 56），pageerror 0；3D 2 页 canvas 断言过；批次记录见 2026-08-22-phase-e-e3-batch-record.md |
+| E4 W491 | ✅ | db0f5a7（v2.3.90） | EN 85 页令牌化；validate_en 85/85；CN/EN 10 页对照目视一致 |
+| E5 W492 | ✅ | 6063218（v2.3.91） | 导航抽屉 4 根页 + 图标收尾；375px 零溢出；字体切片推迟 W494 |
+| E6 W493 | ✅ | 9543f31（v2.3.92） | 三门禁转正 + 负样本 3/3 + M1-M7 全达标 |
+| E3 W490 | ✅ | e421934（v2.3.89） | 30 页全量令牌化（86−E2 56），pageerror 0；3D 2 页 canvas 断言过；批次记录见 2026-08-22-phase-e-e3-batch-record.md |
 | E2 W478 | ✅ | 3549327（试点 3 页）+ 68168a6（全量 56 页） | 56 页全量令牌化（网络 20 + 热力/统计 36），pageerror 0；迁移清单见 2026-08-18-phase-e-e2-batch-record.md；感知验收后补：等值迁移，前后截图肉眼不可辨 |
 
 **执行期修正**：根页口径 8+1（原「9 根页」作废）；E1 图标集移 E5；LCP/CLS 基线改由 W464 建立；unicode-range 切片入 E5；bump 三处版本行每次全核（R8）；E2 实测范围 56 页（比预估 36 多 20，派生口径见批次记录）；E2 感知验收缺陷已回写 §3 并入库 plan-review skill v1.0.1。

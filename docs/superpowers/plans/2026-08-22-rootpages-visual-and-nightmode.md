@@ -148,7 +148,7 @@ NODE_PATH="$(npm root -g)" node 暗色冒烟脚本.js     # pageerror + FOUC 首
 |:---|:---|:---|:---|
 | W488 本批 | ✅ 完成 | 24a193d（v2.3.87） | M-A1 差异率 6/6 ≥1%（2.35/5.05/2.84/5.88/25.98/7.07%）+ 目视清单 6×3 处；dark 冒烟 6 页 pageerror=0 + FOUC=0；禁 JS 回退正常；html 增量 +3.2~6.6KB/页；tokens 7750B 未增、system +644B；五道门禁全绿 |
 
-| W489 第二批 | ✅ 完成 | 待提交（v2.3.88） | dark 令牌全局化进 tokens.css（+1494B）+ inline_css --force 225 页传播 + js/theme-init.js 同步防 FOUC 插 226 页 + 5 根页去重 -1170B/页；12 页 dark 冒烟 pageerror=0/FOUC=0；内联 CSS 28385B ≤33KB；门禁全绿 |
+| W489 第二批 | ✅ 完成 | a11de74（v2.3.88） | dark 令牌全局化进 tokens.css（+1494B）+ inline_css --force 225 页传播 + js/theme-init.js 同步防 FOUC 插 226 页 + 5 根页去重 -1170B/页；12 页 dark 冒烟 pageerror=0/FOUC=0；内联 CSS 28385B ≤33KB；门禁全绿 |
 
 **执行期修正**：① W489 范围聚焦为"全站暗色模式"（E3-E6 余项留后续批 W490+，未纳入本批）；② 本批 bump 日期行为与 W488 不同（bump 已写当天 08-22，无需手动改日期——bump 行为不稳定坑 R8 再记一例）；③ 根页内联 dark 通用令牌块删除后依赖 tokens.css 全局组（5 页 -1170B/页），dukou-engine 双变量体系保留页面内联。
 **执行期修正**：① dashboard 首轮像素率 0.63% 不达标（页面 7280px 高、hover/dark 静态不可见）→ 补"标题+KPI 数字朱砂/表头淡朱砂 14%/route-strip 朱砂线"三处静态强化后 5.05% 达标；② guide/dukou-engine 同因补强（emoji→朱砂 SVG / header 朱砂双线）；③ M-A7 绝对预算（51.2KB）dashboard 为存量超标（84.4KB，非本批引入），本批判定以增量受控 + 全局 tokens 未增为准。
