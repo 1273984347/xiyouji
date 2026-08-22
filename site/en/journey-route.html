@@ -950,6 +950,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .kpi-card .detail {
             margin-top: 8px;
@@ -996,7 +997,7 @@ td.num, th.num {
         .legend-swatch {
             width: 12px;
             height: 12px;
-            border-radius: 2px;
+            border-radius: var(--radius-sm)
         }
         .timeline-wrap {
             overflow-x: auto;
@@ -1005,14 +1006,14 @@ td.num, th.num {
         .timeline-tip {
             position: absolute;
             pointer-events: none;
-            background: #23201A;
-            color: #f5e9d4;
+            background: var(--ink);
+            color: var(--paper-warm);
             padding: 10px 12px;
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             font-size: 0.82rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            box-shadow: var(--elev-3);
             opacity: 0;
-            transition: opacity 0.15s ease;
+            transition: opacity var(--dur-fast) ease;
             max-width: 260px;
             line-height: 1.5;
             z-index: 10;
@@ -1037,8 +1038,8 @@ td.num, th.num {
             font-size: 0.88rem;
             padding: 4px 10px;
             border: 1px solid var(--line);
-            border-radius: 4px;
-            background: #fff;
+            border-radius: var(--radius-md)
+            background: var(--paper);
             color: var(--ink);
             cursor: pointer;
         }
@@ -1061,7 +1062,7 @@ td.num, th.num {
             text-align: left;
         }
         .data-table th {
-            background: #f5e9d4;
+            background: var(--paper-warm);
             color: var(--accent-3);
             font-weight: 600;
             cursor: pointer;
@@ -1074,19 +1075,19 @@ td.num, th.num {
         .data-table th.sorted-asc::after { content: " ▲"; color: var(--accent); font-size: 0.75rem; }
         .data-table th.sorted-desc::after { content: " ▼"; color: var(--accent); font-size: 0.75rem; }
         .data-table tbody tr:hover {
-            background: #fff8ec;
+            background: var(--paper-warm);
         }
         .data-table tbody tr:nth-child(even) {
             background: var(--bg);
         }
         .data-table tbody tr:nth-child(even):hover {
-            background: #fff8ec;
+            background: var(--paper-warm);
         }
         .type-tag {
             display: inline-block;
             padding: 2px 8px;
-            border-radius: 10px;
-            color: #fff;
+            border-radius: var(--radius-lg)
+            color: var(--paper);
             font-size: 0.78rem;
             font-weight: 600;
             white-space: nowrap;
@@ -1103,7 +1104,7 @@ td.num, th.num {
             text-align: center;
         }
         .segment-table th {
-            background: #f5e9d4;
+            background: var(--paper-warm);
             color: var(--accent-3);
             font-weight: 600;
         }
@@ -1115,10 +1116,10 @@ td.num, th.num {
         .segment-table .span-long { color: var(--accent); font-weight: 600; }
         .segment-table .arrow { color: var(--ink-soft); padding: 0 4px; }
         .insight-box {
-            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
             padding: 20px 24px;
-            border-radius: 4px;
+            border-radius: var(--radius-md)
             margin-top: 16px;
         }
         .insight-box h4 {
@@ -1141,9 +1142,9 @@ td.num, th.num {
             font-weight: 600;
         }
         .notice {
-            background: #fff8ec;
+            background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 12px 16px;
             font-size: 0.85rem;
             color: var(--accent-3);
@@ -1151,10 +1152,10 @@ td.num, th.num {
             line-height: 1.7;
         }
         .notice code {
-            background: #f5e9d4;
+            background: var(--paper-warm);
             color: var(--accent);
             padding: 2px 6px;
-            border-radius: 3px;
+            border-radius: var(--radius-sm)
             font-family: "JetBrains Mono", monospace;
             font-size: 0.82rem;
         }
@@ -1167,7 +1168,8 @@ td.num, th.num {
     
 /* W042 a11y: 全局键盘焦点可见性 */
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

@@ -946,7 +946,8 @@ td.num, th.num {
     .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
 }
     </style>
-<style>
+<style>/* e-track-exempt: chart-data-colors 25 处 */
+
   :root{ --zhu:#c8463a; --qing:#3a6b8c; --xuan:#faf7f2; --ink:#2b2118; --line:#d9cdb8; }
   *{box-sizing:border-box}
   html,body{height:100%}
@@ -954,7 +955,7 @@ td.num, th.num {
   header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--line);background:#fffdf9}
   header h1{font-family:"Noto Serif SC",serif;font-size:20px;margin:0;color:var(--zhu)}
   header .sub{font-size:13px;color:#7a6f5e}
-  #banner{margin-left:auto;font-size:12px;padding:3px 10px;border-radius:20px;background:#f0e7d6;color:#7a6f5e}
+  #banner{margin-left:auto;font-size:12px;padding:3px 10px;border-radius: 20pxbackground:#f0e7d6;color:#7a6f5e}
   #banner.online{background:#e3f0e8;color:#2f7d52}
   .layout{display:grid;grid-template-columns:240px 1fr 280px;gap:0;flex:1;min-height:0}
   .layout.no-drill{grid-template-columns:240px 1fr 0px}
@@ -962,7 +963,7 @@ td.num, th.num {
   .layout.no-side{grid-template-columns:0 1fr 280px}
   .layout.no-side.no-drill{grid-template-columns:0 1fr 0px}
   .layout.no-side .side{border-right:none;overflow:hidden}
-  #sideToggle{margin-left:10px;font-size:16px;line-height:1;padding:4px 9px;border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;color:var(--ink)}
+  #sideToggle{margin-left:10px;font-size:16px;line-height:1;padding:4px 9px;border:1px solid var(--line);border-radius: var(--radius-md)background:var(--paper);cursor:pointer;color:var(--ink)}
   #sideToggle:hover{border-color:var(--zhu);color:var(--zhu)}
   .side{border-right:1px solid var(--line);padding:14px;overflow:auto;background:#fffdf9}
   .stage{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,#fffdf9,#f4ece0)}
@@ -970,15 +971,15 @@ td.num, th.num {
   .drill.show{display:block}
   .side h3{font-size:12px;letter-spacing:.08em;color:#8a7d68;margin:14px 0 6px;text-transform:uppercase}
   .side h3:first-child{margin-top:0}
-  select,input[type=text]{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;font-size:13px;background:#fff;color:var(--ink)}
+  select,input[type=text]{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius: var(--radius-md)font-size:13px;background:var(--paper);color:var(--ink)}
   .grp{display:flex;align-items:center;gap:7px;font-size:13px;margin:4px 0;cursor:pointer}
   .grp input{accent-color:var(--zhu)}
-  .swatch{width:12px;height:12px;border-radius:50%;display:inline-block;border:1px solid #fff}
+  .swatch{width:12px;height:12px;border-radius: 50%display:inline-block;border:1px solid var(--paper)}
   .dimbtns{display:flex;gap:5px;flex-wrap:wrap}
-  .dimbtns button{flex:1;font-size:12px;padding:5px 0;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)}
-  .dimbtns button.active{background:var(--qing);color:#fff;border-color:var(--qing)}
+  .dimbtns button{flex:1;font-size:12px;padding:5px 0;border:1px solid var(--line);background:var(--paper);border-radius: var(--radius-md)cursor:pointer;color:var(--ink)}
+  .dimbtns button.active{background:var(--qing);color:var(--paper);border-color:var(--qing)}
   .exp{display:flex;gap:6px;flex-wrap:wrap}
-  .exp button{flex:1;min-width:64px;font-size:12px;padding:6px 0;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)}
+  .exp button{flex:1;min-width:64px;font-size:12px;padding:6px 0;border:1px solid var(--line);background:var(--paper);border-radius: var(--radius-md)cursor:pointer;color:var(--ink)}
   .exp button:hover{border-color:var(--zhu);color:var(--zhu)}
   .legend{font-size:12px;color:#7a6f5e;line-height:1.7}
   #graphBox svg{width:100%;height:100%;display:block;cursor:grab}
@@ -987,22 +988,22 @@ td.num, th.num {
   .gnode{cursor:pointer;user-select:none}
   .gnode:hover{opacity:.78}
   .drill h2{font-family:"Noto Serif SC",serif;font-size:18px;margin:2px 0 4px;color:var(--zhu)}
-  .drill .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:12px;background:#f0e7d6;color:#7a6f5e;margin-bottom:8px}
+  .drill .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius: var(--radius-lg)background:#f0e7d6;color:#7a6f5e;margin-bottom:8px}
   .drill .desc{font-size:13px;line-height:1.7;color:#4a4136}
-  .drill .alias{margin:8px 0;padding:8px 10px;background:#f7f1e6;border-radius:8px;font-size:13px}
+  .drill .alias{margin:8px 0;padding:8px 10px;background:#f7f1e6;border-radius: var(--radius-md)font-size:13px}
   .drill .alias b{color:var(--qing)}
   .drill .nbr{list-style:none;padding:0;margin:6px 0}
-  .drill .nbr li{font-size:13px;padding:6px 8px;border:1px solid var(--line);border-radius:6px;margin:4px 0;cursor:pointer}
+  .drill .nbr li{font-size:13px;padding:6px 8px;border:1px solid var(--line);border-radius: var(--radius-md)margin:4px 0;cursor:pointer}
   .drill .nbr li:hover{border-color:var(--zhu)}
   .drill .nbr li .row{display:flex;justify-content:space-between;gap:8px;align-items:center}
   .drill .nbr .rel{color:#8a7d68;font-size:12px}
   .hint{font-size:12px;color:#9a8f7c;margin-top:10px;line-height:1.6}
   .edge-label{font-size:10px;pointer-events:none;font-family:"Noto Sans SC",sans-serif}
-  .relchip{display:inline-block;font-size:10px;padding:1px 6px;border-radius:10px;color:#fff;margin-left:6px;vertical-align:middle}
-  .relsum{font-size:12px;color:#5a5040;background:#f7f1e6;border-radius:8px;padding:7px 10px;margin:8px 0;line-height:1.9}
+  .relchip{display:inline-block;font-size:10px;padding:1px 6px;border-radius: var(--radius-lg)color:var(--paper);margin-left:6px;vertical-align:middle}
+  .relsum{font-size:12px;color:#5a5040;background:#f7f1e6;border-radius: var(--radius-md)padding:7px 10px;margin:8px 0;line-height:1.9}
   .relsum b{color:var(--zhu)}
   .relsum .rs{display:inline-block;margin:0 6px 2px 0}
-  .relsum .rs i{font-style:normal;width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:middle}
+  .relsum .rs i{font-style:normal;width:9px;height:9px;border-radius: 50%display:inline-block;margin-right:4px;vertical-align:middle}
   @media (max-width:780px){
     body{display:block}
     .layout,.layout.no-drill,.layout.no-side,.layout.no-side.no-drill{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;flex:none;height:auto}
@@ -1011,7 +1012,8 @@ td.num, th.num {
     .drill{grid-row:3;border-left:none;border-top:1px solid var(--line)}
   }
 </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

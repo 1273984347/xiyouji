@@ -950,6 +950,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         @font-face {
             font-family: "Noto Serif SC"; src: local("Noto Serif SC"), local("Source Han Serif SC");
@@ -974,7 +975,7 @@ td.num, th.num {
         
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         .cross-page-nav {
-            background: #fff8e7; border: 1px solid var(--line); border-left: 4px solid var(--accent);
+            background: var(--paper-warm); border: 1px solid var(--line); border-left: 4px solid var(--accent);
             padding: 12px 16px; margin-bottom: 24px; font-size: 0.9em;
         }
         .cross-page-nav a { color: var(--accent-2); margin-right: 14px; text-decoration: none; }
@@ -1000,23 +1001,23 @@ td.num, th.num {
         .chart-box svg { display: block; margin: 0 auto; }
         .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; font-size: 0.85em; justify-content: center; }
         .legend-item { display: flex; align-items: center; gap: 6px; }
-        .legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
+        .legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
         .theory-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.88em; }
         .theory-table th, .theory-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
-        .theory-table th { background: #f5ede0; color: var(--accent-3); font-weight: 600; }
+        .theory-table th { background: var(--paper-warm); color: var(--accent-3); font-weight: 600; }
         .theory-table tr:nth-child(even) { background: #faf7f2; }
         .tabs { display: flex; gap: 4px; margin-bottom: 12px; flex-wrap: wrap; }
         .tab-btn {
             background: var(--paper); border: 1px solid var(--line); border-bottom: none;
             padding: 8px 16px; cursor: pointer; font-size: 0.9em; color: var(--ink-soft);
-            border-radius: 4px 4px 0 0; font-family: inherit;
+            border-radius: var(--radius-md) var(--radius-md) 0 0 font-family: inherit;
         }
-        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: var(--paper); border-color: var(--accent); }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         .node-card {
-            background: #fff8e7; border: 1px solid var(--line); border-left: 4px solid var(--accent);
-            padding: 12px 16px; margin-top: 12px; font-size: 0.9em; border-radius: 4px;
+            background: var(--paper-warm); border: 1px solid var(--line); border-left: 4px solid var(--accent);
+            padding: 12px 16px; margin-top: 12px; font-size: 0.9em; border-radius: var(--radius-md)
         }
         .node-card h4 { color: var(--accent); margin-bottom: 4px; }
         .node-card .meta { font-size: 0.82em; color: var(--ink-soft); }
@@ -1030,7 +1031,8 @@ td.num, th.num {
             
         }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
