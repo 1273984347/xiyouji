@@ -144,6 +144,18 @@ async function testPage(browser, page, pageUrl, pageName, category, timeout) {
     }
   }
 
+  // 检查 6（W496）: 样式生效断言——html/body computed 背景不得同时透明
+  // 防 W493 式「INLINED CSS 被清空而文本门禁全绿、渲染全裸」静默回归（W457/W495 教训固化）
+  const styled = await page.evaluate(() => {
+    const T = ['rgba(0, 0, 0, 0)', 'transparent', ''];
+    const hb = getComputedStyle(document.documentElement).backgroundColor;
+    const bb = getComputedStyle(document.body).backgroundColor;
+    return T.indexOf(hb) === -1 || T.indexOf(bb) === -1;
+  });
+  if (!styled) {
+    errors.push('样式未生效：html/body 背景均透明（疑 INLINED CSS 缺失）');
+  }
+
   // 检查 5: 无 console error（允许预期的 file:// fetch 失败 + favicon 请求失败）
   // 项目使用 EMBEDDED_DATA fallback 模式，fetch 在 file:// 协议下失败是预期行为
   const blockingErrors = consoleErrors.filter(msg =>

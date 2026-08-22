@@ -4,13 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W495），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W496），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.95（2026-08-22）：W496 优化收尾 — 夜读切换钮全站 + 样式断言固化 + 验收现测工具 + fps 遗留关闭
+
+> **来源**：W495 审查后用户指令「不要下次再做，现在做完」——四项优化当批清零。
+> - **执行（夜读切换钮）**：theme-init.js 扩展——无 .theme-toggle 的页面（data/EN 225 页）DOMReady 注入浮动切换钮（40px 圆·z-40·月/日 SVG·aria-label 双语·运行时 <style> 走 style-src unsafe-inline）；点击切 data-theme + 写 xy-theme；根页 6 自有切换器跳过注入。零 HTML 改动、零 CSP 改动（外部脚本 'self'）。
+> - **执行（样式断言固化）**：tests/e2e/test_smoke.js 新增检查 6（html/body computed 背景不得同时透明）——W457/W495 教训固化为 CI 冒烟，与第 15 门禁双保险；全量 89/89 过。
+> - **执行（验收现测工具）**：新建 scripts/acceptance_snapshot.py（M5 内联字节/M2M3/M4/M1/断点 五组当批现测）；AGENTS.md §4.3 立铁律：CHANGELOG 验收数字从本工具抄、禁跨批复制。
+> - **执行（fps 遗留关闭）**：_perf_measure.js 首跑（geo-3d 6s trace Layout=3/Paint=8 无风暴）+ _w464_perf_measure.js 五核心页 LCP≤188ms/CLS≤0.001/TBT≤140 全过阈值；V2 方案档落地状态表+验收清单回写关闭（拖拽 fps 以代理证据关闭，诚实注记）。
+> - **验收（acceptance_snapshot 当批现测）**：M5 min/max 30653B ≤33792B；M2/M3 裸色 246 全登记·裸 shadow 0；M4 命中 0；M1 P0/P1=0；断点白名单外 0。切换钮探针：data/EN 注入+切换+持久化全过·index 跳过·375px 无溢出·pageerror=0；test_smoke 89/89；CSP 1189 哈希 0 漂移；verify 核心全绿。
+> - **文件**：site/js/theme-init.js + tests/e2e/test_smoke.js + scripts/acceptance_snapshot.py（新建）+ AGENTS.md（§4.3 铁律）+ docs/00-导读/V2可视化维度方案.md（回写）+ 六文档。
+> - **验证**：切换钮探针 4 项 + 89/89 冒烟 + verify 全绿。
+> - **状态**：本次提交（W496）将推送 origin/main。
 
 ### v2.3.94（2026-08-22）：W495 P0 热修复 — W493 回归处置：全站 INLINED CSS 恢复 + 完整性门禁转正
 
