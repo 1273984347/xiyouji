@@ -2,8 +2,19 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-T2TkfpRzSV72cvH/xxLzhJPGdTmPpOS0th6Fzzowp6E=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-L8D2VJCFVkKYJPwStZTGBF0BKd+f8fb3LkeFRvKb8VM=' 'sha256-AG8dkSbIJIdoyhXBax9MotpSYlOl76kdVYHwmcZbEzI=' 'sha256-T2TkfpRzSV72cvH/xxLzhJPGdTmPpOS0th6Fzzowp6E=' 'sha256-84JVJQY3yctVmkS8rXOF6mFKtKgqxmKAQ1QLjnvwwrg=' 'sha256-G7JWRSZeN4qV3CsTmZNfFh1mJ5CqtyE1lQNIWsFMJD0='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      // 夜读模式（W488）：首屏防 FOUC——先读 localStorage，无则跟随系统；dark 时在 body 渲染前挂 data-theme
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem('xy-theme'); } catch (_) {}
+        if (t !== 'light' && t !== 'dark') {
+          try { t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; } catch (_) { t = 'light'; }
+        }
+        if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      })();
+    </script>
     <meta name="theme-color" content="#FAF7F0">
     <title>详解西游记 · 项目导航</title>
     <link rel="stylesheet" href="tokens.css">
@@ -127,6 +138,59 @@
             .ask-form { flex-direction: column; }
             .ask-form button { width: 100%; }
         }
+
+        /* === W488：mega 数字朱砂强调（hero 视觉节奏） === */
+        .mega-num { color: var(--accent-deep); font-variant-numeric: tabular-nums; }
+
+        /* === W488：夜读模式（页面内联 dark 覆盖，不落全局 tokens/system；全站 dark 第二批） === */
+        html[data-theme="dark"] {
+            --bg: #221D16;
+            --ink: #F2EBDC;
+            --ink-soft: #CBBFA9;
+            --ink-faint: #8F8674;
+            --paper: #2B2419;
+            --paper-warm: #33291B;
+            --line: rgba(242, 235, 220, 0.14);
+            --accent: #E0604F;
+            --accent-deep: #C94F3F;
+            --accent-soft: #E8A99F;
+            --accent-tint: rgba(224, 96, 79, 0.14);
+            --accent-wash: rgba(224, 96, 79, 0.08);
+            --accent-2: #7FA8C9;
+            --accent-3: #C9A96B;
+            --accent-4: #9DB98A;
+            --ok: #8FBF7F;
+            --warn: #D0A35C;
+            --danger: #D96C5C;
+            --info: #7FA8C9;
+            --elev-0: none;
+            --elev-1: 0 1px 3px rgba(0, 0, 0, 0.40), 0 4px 12px rgba(0, 0, 0, 0.30);
+            --elev-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
+            --elev-3: 0 4px 10px rgba(0, 0, 0, 0.50), 0 12px 32px rgba(0, 0, 0, 0.45);
+            --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
+            color-scheme: dark;
+        }
+        html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
+        html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
+        html[data-theme="dark"] .ask-form button { color: #1A1510; }
+        html[data-theme="dark"] .mega-num { color: var(--accent); }
+
+        /* === W488：夜读切换器 === */
+        .theme-toggle {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 34px; height: 34px; margin-left: 12px;
+            border: 1px solid var(--line); border-radius: var(--radius-pill);
+            background: var(--paper); color: var(--ink-soft); cursor: pointer;
+            transition: border-color var(--dur-fast) var(--ease-out-quart),
+                        color var(--dur-fast) var(--ease-out-quart),
+                        transform var(--dur-fast) var(--ease-out-quart);
+        }
+        .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        .theme-toggle:active { transform: scale(0.94); }
+        .theme-toggle .icon-moon { display: block; }
+        .theme-toggle .icon-sun { display: none; }
+        html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+        html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
     </style>
     <script type="application/ld+json" src="structured-data.jsonld"></script>
     <meta name="description" content="详解西游记·明代吴承恩百回神魔小说的多维学术研究与可视化分析项目，覆盖人物深度分析、八十一难结构、取经地理路线、叙事学十三维网络等十大研究维度。">
@@ -158,6 +222,10 @@
             <a href="dashboard.html">数据看板</a>
             <a href="en/" hreflang="en" class="text-mono text-xs text-faint">EN</a>
         </nav>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="切换夜读模式" title="夜读模式">
+            <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
     </header>
 
     <main id="main">
@@ -201,7 +269,7 @@
             <p class="ask-note">离线也能答（模板写作引擎）· 接入本地 RAG 后更聪明 · 你的提问会记入本地以便回访</p>
         </section>
 
-        <section class="stats" aria-label="项目数据概览">
+        <section class="stats reveal-in" aria-label="项目数据概览">
             <div class="stat"><div class="num">100</div><div class="lbl">回 · 逐回解读</div></div>
             <div class="stat"><div class="num">611</div><div class="lbl">篇 · 研究文档</div></div>
             <div class="stat"><div class="num">86</div><div class="lbl">个 · 可视化页面</div></div>
@@ -209,7 +277,7 @@
         </section>
 
         <div class="page-wrap">
-            <div class="section">
+            <div class="section reveal-in">
                 <div class="section-head">
                     <p class="kicker">CURATED</p>
                     <h2>精选必看</h2>
@@ -275,7 +343,7 @@
         </div>
 
         <div class="page-wrap">
-            <div class="section">
+            <div class="section reveal-in">
                 <div class="section-head">
                     <p class="kicker">INDEX</p>
                     <h2>九卷索引</h2>
@@ -346,7 +414,7 @@
         </section>
 
         <div class="page-wrap">
-            <div class="section">
+            <div class="section reveal-in">
                 <div class="section-head">
                     <p class="kicker">TOOLS</p>
                     <h2>站点工具</h2>
@@ -454,6 +522,36 @@
           }, { threshold: 0.5 });
           els.forEach(function (el) { io.observe(el); });
         } catch (_) { /* fail-open：保持终值 */ }
+      })();
+    </script>
+    <script>
+      // W488：滚动显现 reveal-in（html.js-reveal + IO 一次性；reduced-motion 直达终态，fail-open）+ 夜读切换
+      (function () {
+        var rm = false;
+        try { rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (_) {}
+        if (!rm && 'IntersectionObserver' in window) {
+          document.documentElement.classList.add('js-reveal');
+          var els = document.querySelectorAll('.reveal-in');
+          if (els.length) {
+            var io = new IntersectionObserver(function (entries) {
+              entries.forEach(function (e) {
+                if (!e.isIntersecting) return;
+                io.unobserve(e.target);
+                e.target.classList.add('in-view');
+              });
+            }, { threshold: 0.12 });
+            Array.prototype.forEach.call(els, function (el) { io.observe(el); });
+          }
+        }
+        var btn = document.getElementById('themeToggle');
+        if (btn) {
+          btn.addEventListener('click', function () {
+            var cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', cur);
+            try { localStorage.setItem('xy-theme', cur); } catch (_) {}
+            btn.setAttribute('aria-pressed', cur === 'dark');
+          });
+        }
       })();
     </script>
 </body>

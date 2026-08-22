@@ -63,6 +63,23 @@ cd D:/1/xiyouji && wc -c site/tokens.css site/system.css
 cd D:/1/xiyouji && ls -la site/data/text-search.html 2>/dev/null  # 大内嵌数据页单查
 ```
 
+### 1.6 感知型目标前后渲染差异实测（worktree 截图法）
+
+方案目标为观感/高级感/体验时，用 git worktree 取前后版本截图对比，判断"验收全绿是否等于观感达成"：
+
+```bash
+# 1) 建两个 detached worktree（在仓库外路径，避免污染工作区；Windows 下用 C:/ 绝对路径）
+cd D:/1/xiyouji && git worktree add --detach "C:/<tmp>/<name>-before" <方案前基线提交>
+cd D:/1/xiyouji && git worktree add --detach "C:/<tmp>/<name>-after"  <方案后提交>
+# 2) Playwright 全页截图（NODE_PATH 指向全局 npm 包；file:// 直开页面）
+NODE_PATH="$(npm root -g)" node 截图脚本.js   # 脚本模式：1440×900 全页 + 关键 hover 局部，脚本放 scratch 目录勿入库
+# 3) 目检或 PIL 拼左右对比图；hover 态差异需 hover 元素后截 clip
+# 4) 收尾必须清理 worktree
+cd D:/1/xiyouji && git worktree remove "C:/<tmp>/<name>-before" && git worktree remove "C:/<tmp>/<name>-after"
+```
+
+判读口径：前后截图"肉眼不可辨"即证明该批次的"观感升级"目标未达成（哪怕 M 指标全绿）；仅 index 等个别页面有差异时要如实拆分汇报，不写"整体有提升"。
+
 ## 2. 声称值 vs 实测对照表模板
 
 | # | 方案声称（原文摘录） | 声称出处（节/行） | 实测值 | 判定 | 说明 |
@@ -122,5 +139,6 @@ cd D:/1/xiyouji && ls -la site/data/text-search.html 2>/dev/null  # 大内嵌数
 4. **预算冲突**：perf-budget total 900KB 与内嵌 2MB JSON 的数据页直接冲突，不改口径验收必 FAIL。
 5. **N 口径偏差**：EN 站同名可视化页实际 85（缺 journey-geo-3d），方案写 86。
 6. **"新建 vs 更新"措辞失真**：perf-baseline.json 已存在（W267 版），方案写"新建"，应写"更新"。
+7. **视觉目标用工程卫生验收（中高，2026-08-22）**：Phase E「视觉高级感升级」（W476–W478）验收 M1-M7 全为对比度/裸色=0/阴影来源/动效时长/体积/报错，明文"不认看起来更好"；worktree 前后截图实测 E1 仅 index 一页有可见变化、E2 56 页严格等值迁移零感知。教训：观感类方案验收必须含前后对比截图/目视清单/A-B，评估时先用 §1.6 实测渲染差异再下"目标达成"结论。
 
-这些案例说明：偏差多藏在"覆盖率声称、工时估算、新建/已有措辞、预算交叉"四类位置——取证时优先扫这四类。
+这些案例说明：偏差多藏在"覆盖率声称、工时估算、新建/已有措辞、预算交叉、**感知型验收**"五类位置——取证时优先扫这五类。

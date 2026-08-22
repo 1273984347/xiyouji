@@ -136,7 +136,25 @@ h4 { font-size: 18px; font-weight: 500; }
     color: var(--ink-soft);
     transition: color 0.15s;
     white-space: nowrap;
+    position: relative;
 }
+.topnav nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-out-quart);
+}
+.topnav nav a:hover::after,
+.topnav nav a.active::after,
+.topnav nav a.nav-strong::after,
+.topnav nav a[aria-current="page"]::after { transform: scaleX(1); }
 .topnav nav a:hover { color: var(--accent); }
 .topnav nav a.active { color: var(--ink); font-weight: 500; }
 @media (max-width: 768px) {
@@ -205,8 +223,9 @@ h4 { font-size: 18px; font-weight: 500; }
 }
 .card:hover {
     border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: var(--elev-2);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
 }
 .card-grid {
     display: grid;
@@ -247,8 +266,9 @@ h4 { font-size: 18px; font-weight: 500; }
 }
 .kpi:hover {
     border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: var(--elev-2);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
 }
 .kpi .kpi-value {
     font-family: var(--font-mono);

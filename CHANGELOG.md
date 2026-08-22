@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W487），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W488），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.87（2026-08-22）：W488 根页视觉重设计 + 夜读模式 — Phase E 方向 A 第一批（可感知升级 + 暗色提前）
+
+> **来源**：W487 复盘发现 Phase E（W476-478）验收 M1-M7 全为工程卫生指标、worktree 前后截图实测 E1 仅 index 有可见变化、E2 56 页等值迁移零感知；用户 2026-08-22 拍板方向 A（根页视觉重设计）+ 暗色模式排进第一批，方案落 docs/superpowers/plans/2026-08-22-rootpages-visual-and-nightmode.md，M-A1 前后对比截图强制入验收。
+> - **执行（感知升级，6 用户可见根页）**：index hero "100" 数字朱砂强调（accent-deep+tabular-nums）；dashboard "数据看板"标题 + 4 个 KPI 大数字朱砂、八十一难交叉表表头淡朱砂底（accent 14% mix）+ 深朱砂字、route-strip 顶部 3px 朱砂线、KPI 卡圆角 2→6px；curated 28 卡 / guide 7 路径卡 / system.css .card/.kpi hover 升级（elev-2 + translateY(-3px) + 1.5px 朱砂外描边 40%）；guide 7 个 + mobile-index 6 个 emoji → 朱砂线条内联 SVG（stroke 1.5/currentColor/24×24）；dukou-engine header 标题 26→30px + 底部朱砂双线；导航 active 指示条（.topnav nav a::after scaleX 滑动，含 nav-strong/aria-current）；reveal-in JS 接入（html.js-reveal + IO 一次性 + reduced-motion 直达终态，fail-open）。
+> - **执行（暗色夜读，6 根页）**：dark 令牌组走**页面内联**覆盖（不落全局 tokens/system，data/en 225 页零波及）；玄墨 #221D16 底 / 宣纸 #F2EBDC 文字反相 / 朱砂提亮 #E0604F / 深色 elev 阴影；topnav/hero 右侧夜读切换器（月亮/太阳 SVG）；localStorage `xy-theme` + prefers-color-scheme 跟随 + head 首屏内联 script 防 FOUC；dashboard 环图序列色 brightness(1.14) 提亮；dukou-engine 双变量体系（自有 :root + tokens）全量覆盖。
+> - **执行（验收，M-A1 前后对比强制项）**：before=65890b2 worktree 同机位全页截图 vs after；PIL 差异像素率 6/6 ≥1%（index 2.35 / dashboard 5.05 / curated 2.84 / guide 5.88 / dukou-engine 25.98 / mobile-index 7.07）+ 目视清单 6 页 × ≥3 处（w488-verify/M-A1-visual-checklist.md）；dark 冒烟 6 页 pageerror=0 + FOUC=0；禁 JS 回退 6 页浅色正常；html 增量每页 +3.2~6.6KB；tokens.css 7750B 未增、system.css +644B（hover/指示条）。
+> - **执行（治理）**：教训入库 plan-review skill v1.0.1（陷阱 9「视觉目标 ≠ 工程卫生验收」+ 阶段 1 动作 6 感知验收取证 + reference §1.6 worktree 截图法，双副本同步）；Phase E 路线图 §3/§10 回写 E2 完成态（68168a6·56 页）+ 感知验收后补。
+> - **文件**：site/{system.css,index,dashboard,curated,guide,dukou-engine,mobile-index}.html + skills/xiyouji-plan-review/{SKILL.md,reference.md}（双副本）+ docs/superpowers/plans/2026-08-18-phase-e-visual-elevation-roadmap.md（回写）+ 2026-08-22-rootpages-visual-and-nightmode.md（新方案）+ 六文档。
+> - **验证**：check_structure 0 失衡 / check_js_syntax 0 错 / CSP 1185 哈希 0 漂移 / lint_links 0 broken / verify_delivery 核心全绿。
+> - **状态**：本次提交（W488）将推送 origin/main。
 
 ### v2.3.86（2026-08-19）：W487 四会话 skill 二轮同步 — DRL 降级声明 + experience-capture 格式规范
 
