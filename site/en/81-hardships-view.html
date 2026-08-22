@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-UZhdPaagA0LAjEv+HV0syBtjB60t8+2EbRtLB4JvJ3I=' 'sha256-OIJjWt1CQ4ijsJDeofrHX8x0SX77qNGv+DiBKO+0bm0=' 'sha256-AGmBhWiq/7R70DbgKuzYAq20XS1qRibTcJrhsvZ8h4g=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-UZhdPaagA0LAjEv+HV0syBtjB60t8+2EbRtLB4JvJ3I=' 'sha256-1QKEzS+n1EVCmlE/Qv1zpI1g+AsaDMw8PHy4pXhoD2o=' 'sha256-AGmBhWiq/7R70DbgKuzYAq20XS1qRibTcJrhsvZ8h4g=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Annotated Journey to the West · Eighty-One Hardships Interactive View</title>
 
@@ -28,7 +28,7 @@
   .chartbox{margin:8px 0 14px;border: 1px solid var(--line);border-radius: var(--radius-lg)background:var(--paper);padding:10px;display:none}
   .chartbox h3{margin:4px 6px 8px;font-size:14px;color: var(--accent-2)}
   .hint{color: var(--ink-soft);font-size:12px;margin-top:8px}
-  @media(max-width:720px){header.top h1{font-size:18px}}
+  @media(max-width: 768px){header.top h1{font-size:18px}}
 </style>
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
@@ -390,7 +390,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     var entries = Object.keys(obj).map(function (k) { return { label: k, value: obj[k] }; });
     var max = Math.max.apply(null, entries.map(function (e) { return +e.value || 0; })) || 1;
     var colors = ["#c8463a", "#3a6b8c", "#C9A063", "#6B8E5A", "#8c2a2a", "#b07a3a"];
-    var svg = '<svg id="chart" viewBox="0 0 520 ' + (entries.length * 34 + 10) + '" width="100%" style="max-width:560px">';
+    var svg = '<svg id="chart" viewBox="0 0 520 ' + (entries.length * 34 + 10) + '" width="100%" style="max-width: 640px">';
     entries.forEach(function (e, i) {
       var w = Math.round(((+e.value || 0) / max) * 360);
       svg += '<text x="0" y="' + (i * 34 + 18) + '" font-size="12" fill="#23201A">' + e.label + "</text>";
