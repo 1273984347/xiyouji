@@ -117,6 +117,7 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 12. **token 覆盖率**（check_token_coverage.py，W493 转正：页面私有 `<style>` 块 UI 裸色——无豁免注释页必须 0、带 `e-track-exempt` 注释页 ≤ 登记 N；真裸 box-shadow 必须 0；INLINED 副本跳过，私有块识别靠 `tokens.css —` 注释特征）
 13. **动效禁止清单**（check_motion_ban.py，W493 转正：cubic-bezier 负值 / 360° 旋转 / animation infinite / parallax，白名单仅 .chart-loading/.chart-fade-in）
 14. **a11y 对比度**（a11y_audit.py E2-2，W493 挂载：P0+P1=0 阻断，WCAG 2.2 AA 正文 ≥4.5:1）
+15. **INLINED CSS 完整性**（check_inlined_css.py，W495 转正：data/EN 页 INLINED 标记块内容 ≥20KB——防 W493 式「224 页内联块被清空而 14 门禁全绿漏网」回归）
 
 ### 4.3 脚本工具链要点
 
@@ -238,4 +239,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458），2026-08-17（v2.3.78 W463）墨韵系列复盘增补动效契约（§1/§6-12/§8）与 W 批收尾坑（§4.3），2026-08-18（v2.3.80 W477）增补维护契约与文档治理段，2026-08-19（v2.3.83 W484）skills 治理：§4.5 补录 4 个会话流程 skill（共 14 个），2026-08-19（v2.3.84 W485）收录视觉/方案专项 3 skill（visual-batch / plan-authoring / plan-review，共 17 个），2026-08-19（v2.3.85 W486）四会话流程 skill 协议同步（verdict 7 词 / R0 4 件套 / 警报增强 / P2 残留 / work-log 路径 / 整合版协调），2026-08-19（v2.3.86 W487）四会话流程 skill 二轮同步（DRL 未安装降级声明 + experience-capture 格式规范 + 触发词扩充），2026-08-22（v2.3.93 W494）Phase E 收官同步：§4.2 补录 W493 转正三门禁（token 覆盖率 / 动效禁止清单 / a11y 对比度，现 14 条）。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458），2026-08-17（v2.3.78 W463）墨韵系列复盘增补动效契约（§1/§6-12/§8）与 W 批收尾坑（§4.3），2026-08-18（v2.3.80 W477）增补维护契约与文档治理段，2026-08-19（v2.3.83 W484）skills 治理：§4.5 补录 4 个会话流程 skill（共 14 个），2026-08-19（v2.3.84 W485）收录视觉/方案专项 3 skill（visual-batch / plan-authoring / plan-review，共 17 个），2026-08-19（v2.3.85 W486）四会话流程 skill 协议同步（verdict 7 词 / R0 4 件套 / 警报增强 / P2 残留 / work-log 路径 / 整合版协调），2026-08-19（v2.3.86 W487）四会话流程 skill 二轮同步（DRL 未安装降级声明 + experience-capture 格式规范 + 触发词扩充），2026-08-22（v2.3.93 W494）Phase E 收官同步：§4.2 补录 W493 转正三门禁（token 覆盖率 / 动效禁止清单 / a11y 对比度，现 14 条），2026-08-22（v2.3.94 W495）P0 热修复同步：§4.2 补录 INLINED CSS 完整性门禁（现 15 条）。如与上述权威文档冲突，以权威文档为准。*

@@ -41,8 +41,8 @@ def process(path, force, dry):
     has_system_link = LINK_SYSTEM in html
     already = MARKER in html
 
-    if not (has_tokens_link or has_system_link):
-        return "skip-no-link"   # 根级页面用 tokens.css（无 ../），无需处理
+    if not (has_tokens_link or has_system_link) and not already:
+        return "skip-no-link"   # 根级页面用 tokens.css（无 ../ 且无标记），无需处理
     if already and not force:
         return "skip-inlined"
     if already and force:
