@@ -425,6 +425,18 @@ def main():
     except Exception as e:
         warn("a11y 对比度门禁执行异常（W493）: %s" % e)
 
+    # ---- INLINED CSS 完整性门禁（W495 转正：W493 事故曾清空 224 页内联块而 14 门禁全绿漏网）----
+    inl_py = os.path.join(_HERE, "check_inlined_css.py")
+    try:
+        r = subprocess.run([sys.executable, inl_py], capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("INLINED CSS 门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("INLINED CSS 块异常（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("INLINED CSS 门禁执行异常（W495）: %s" % e)
+
     # ---- 动态链接门禁（W459：lint_links 只扫静态 href，JS 拼接链接曾致 D2 回目跳转全 404 漏网）----
     dyn_links_py = os.path.join(_HERE, "check_dynamic_links.py")
     try:

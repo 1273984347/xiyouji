@@ -4,13 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W494），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W495），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.94（2026-08-22）：W495 P0 热修复 — W493 回归处置：全站 INLINED CSS 恢复 + 完整性门禁转正
+
+> **来源**：2026-08-22 审查发现 W493 一次性修复脚本误清空 224 个 data+EN 页的 INLINED CSS 块（tokens+system 约 30KB），全站渲染裸文本（含线上 Pages）；既有 14 门禁无一拦截（空块括号平衡/CSP 只查脚本/pageerror 只抓 JS 错/溢出检查在无样式页 trivially 过）。
+> - **执行（恢复）**：修 inline_css.py --force 短路缺陷（已内联页 link 标签已移除被 skip-no-link 跳过、--force 失效）→ --force 重同步 225 页 INLINED 块恢复（实测 30659B ≤33KB 预算）；W493 私有块修复成果不受影响（--force 仅替换 INLINED 块）。
+> - **执行（门禁转正）**：新建 scripts/check_inlined_css.py 挂 verify_delivery（第 15 门禁）：带 INLINED 标记页块内容必须 ≥20000B；负样本自测能抓清空（exit 1）。
+> - **执行（回归重测）**：W494「5 视口 FAIL=0」测于无样式页作废 → 7 视口（375/390/414/480/640/768/1024）× 7 页（根+data+EN）「样式+溢出+pageerror」三重断言 ALL PASS；light/dark 截图目视恢复。
+> - **执行（卫生回填）**：baseline_snapshot.py + 观测基线快照.md 入库（M6 证据链此前断裂）；E3/E4/E5/E6/W494 五方案档补落地状态段与 commit 回填（含 M5/W494 回归数据作废的诚实注记）；交接文档过期「下一版本 W465/W495」行纠正。
+> - **验收**：CSP 1189 哈希 0 漂移；check_structure 0 失衡；verify_delivery 核心全绿（含新 INLINED 门禁）。
+> - **文件**：site/data+en 225 页（INLINED 恢复）+ scripts/inline_css.py（缺陷修复）+ scripts/check_inlined_css.py（新建）+ verify_delivery.py（门禁挂载）+ scripts/baseline_snapshot.py + scripts/output/观测基线快照.md（入库）+ 5 方案档 + 六文档。
+> - **验证**：负样本 1/1 + 7 视口三重回归 ALL PASS + verify 全绿。
+> - **状态**：本次提交（W495）将推送 origin/main。
 
 ### v2.3.93（2026-08-22）：W494 Phase E 遗留收尾 — 断点规范化 + 图表降级（字体切片关闭）
 

@@ -28,15 +28,42 @@ BAN = [
     (re.compile(r"parallax", re.I), "parallax 视差"),
 ]
 WHITELIST_HINTS = ["chart-loading", "chart-fade-in"]
+# 块级白名单：白名单命名的 @keyframes 整块（含嵌套层）+ 选择器含白名单词的规则块
+WL_KEYFRAMES = re.compile(
+    r"@keyframes\s+[\w-]*(?:chart-loading|chart-fade-in)[\w-]*\s*\{(?:[^{}]*|\{[^{}]*\})*\}")
+WL_RULE = re.compile(r"[^{}@]*?(?:chart-loading|chart-fade-in)[^{}]*\{[^{}]*\}")
+
+
+def strip_whitelist_blocks(css):
+    return WL_RULE.sub("", WL_KEYFRAMES.sub("", css))
+
+
+def scan_css(css, rel, fails):
+    css = strip_whitelist_blocks(css)
+    for pat, desc in BAN:
+        for m in pat.finditer(css):
+            ctx = css[max(0, m.start() - 40):m.end() + 20].replace("\n", " ")
+            fails.append(f"{rel}: {desc} → …{ctx}…")
 
 
 def main():
     fails = []
+    # 共享 CSS 源文件单次扫描（块级白名单）；页面内 INLINED 副本跳过（同源不重扫）
+    for src in ("site/tokens.css", "site/system.css"):
+        p = ROOT / src
+        if p.exists():
+            scan_css(p.read_text(encoding="utf-8", errors="ignore"), src, fails)
     for f in sorted(ROOT.glob("site/**/*.html")):
         rel = str(f.relative_to(ROOT))
         s = f.read_text(encoding="utf-8", errors="ignore")
-        # 剔除白名单上下文行后再扫
-        lines = [ln for ln in s.splitlines() if not any(h in ln for h in WHITELIST_HINTS)]
+        rest = s
+        for st in re.findall(r"<style>(.*?)</style>", s, re.S):
+            rest = rest.replace(st, "", 1)
+            if "tokens.css —" in st:  # INLINED 副本跳过（共享 CSS 已在源文件扫过）
+                continue
+            scan_css(st, rel, fails)
+        # 剔除白名单上下文行后再扫其余文本（内联 JS 等）
+        lines = [ln for ln in rest.splitlines() if not any(h in ln for h in WHITELIST_HINTS)]
         body = "\n".join(lines)
         for pat, desc in BAN:
             for m in pat.finditer(body):

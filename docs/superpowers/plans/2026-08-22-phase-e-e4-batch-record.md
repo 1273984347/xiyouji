@@ -95,3 +95,11 @@
 | underworld-power-network.html | 0 | 9 | 0 | 0 | 0 | 8 |
 | visual-art.html | 0 | 22 | 0 | 0 | 0 | 9 |
 | workplace.html | 0 | 14 | 0 | 0 | 0 | 3 |
+
+---
+
+## 落地状态记录（执行回写）
+
+| 批次 | 状态 | commit |
+|:---|:---|:---|
+| W491 本批 | ✅ 完成 | db0f5a7（v2.3.90） |
