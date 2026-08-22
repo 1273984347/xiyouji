@@ -10,6 +10,17 @@
 
 ---
 
+## W496 优化收尾（2026-08-22·v2.3.95）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/js/theme-init.js | W496 | v2.3.95 修改·无 .theme-toggle 页注入夜读浮动切换钮（225 页生效·根页跳过·零 CSP 改动） |
+| tests/e2e/test_smoke.js | W496 | v2.3.95 修改·检查 6 样式生效断言（html/body 背景不得同时透明） |
+| scripts/acceptance_snapshot.py | W496 | v2.3.95 新增·验收数字当批现测速览（M5/M2M3/M4/M1/断点五组） |
+| AGENTS.md | W496 | v2.3.95 修改·§4.3 验收数字禁跨批复制铁律 |
+| docs/00-导读/V2可视化维度方案.md | W496 | v2.3.95 修改·fps 遗留实测关闭回写（落地状态表+验收清单） |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W496 | v2.3.95 修改·六文档同步 |
+
 ## W495 P0 热修复（2026-08-22·v2.3.94）
 
 | 文件 | W | 说明 |
