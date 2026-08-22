@@ -1,7 +1,7 @@
 # 《详解西游记》前端视觉高级感升级方案（Phase E · W476–W483）
 
 > 版本：v2.0（表述去模糊化 + E0/E1 落地回写）· 2026-08-18
-> 当前基线：v2.3.80 W477（HEAD 15483fa）；E0/E1 已完成，E2 起未执行
+> 当前基线：v2.3.86 W487（HEAD 65890b2）；E0/E1/E2 已完成，E3 起未执行（W465 闸门判定后再启）
 > 性质：跨批次视觉升级路线图；各批次落地时另拆单批 plan/spec；W 编号启动时须 `grep -o 'W4[0-9][0-9]' 交接文档.md | sort -u | tail -3` 复核现役最大 W
 > 上游依据：① Phase 3 量化路线图（2026-08-18-w464-phase3-quantified-roadmap.md）② V2 可视化维度方案（docs/00-导读/V2可视化维度方案.md）③ DESIGN.md §1-5（§4A 为本轨宪法层）④ site/tokens.css v3 / site/system.css v2
 > 目标读者：主代理 + 新接任 Agent + 人类维护者
@@ -110,7 +110,7 @@
 - 验收实测：Playwright 6 页 pageerror=0 + 计算样式断言（.card radius 6px / .curated-card 10px / box-shadow = elev-1 值）+ 截图目视；五道门禁全绿。
 - **偏差记录**：① 图标体系未做 → 移入 E5（范围限定 6 根页）；② 「根页 LCP/CLS 无恶化」未测（无基线）→ 基线测量移入 W464 baseline_snapshot，复测移入 E6；③ 图标集原「sprite 放 system 层」表述作废，按 D5 新口径执行。
 
-### Phase E2 · CN 可视化页传播 I（W478 · P1）— 待执行
+### Phase E2 · CN 可视化页传播 I（W478 · P1）— ✅ 完成 · commit 68168a6（试点 3549327 + 全量 68168a6）
 
 - 范围派生（启动时执行并粘贴清单入批次记录）：
   - 网络批 = `grep -l 'forceSimulation' site/data/*.html`（预期 16 页，与 W461 口径同）；
@@ -122,6 +122,8 @@
   - R-FOCUS：`var(--focus-ring*)` 未定义引用 → `0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent)`。
   - R-EXEMPT（图表数据色豁免登记）：页面 `<style>` 顶部加注释 `/* e-track-exempt: chart-data-colors N 处 */`（N = 该页豁免数），并在批次记录表登记（页 × N）；M2 门禁对带标记页只查非豁免块。
 - 量化验收：批内页 M2/M3/M4 = 达标；`.duration(>600)` = 0；CSP 0 漂移；check_structure 0 失衡；批内每页 Playwright pageerror=0（_w477_shot_check.js 模式扩页）+ 截图目视；M5 页面 `<style>` 行数不增。
+- 验收实测（回写）：实际范围 56 页（网络批 20 + 热力/统计批 36，比预估 16+20 多 20——`cross-time-danmaku/journey-geo-semiotics/perf-canvas-rendering/relationships` 等命中 forceSimulation）；56 页 pageerror 全部 0；批次迁移清单表见 [2026-08-18-phase-e-e2-batch-record.md](2026-08-18-phase-e-e2-batch-record.md)。
+- **感知验收后补（2026-08-22）**：E2 为等值迁移（R-SHADOW/R-RADIUS/R-TRANS 多数映射前后数值相同），worktree 前后截图实测 56 页肉眼不可辨；本批 M2/M3 全绿但零感知变化——「视觉目标 ≠ 工程卫生验收」教训已入库 plan-review skill v1.0.1 陷阱 9。
 - 产出：批内页补丁 + 迁移清单表（页 × 迁出规则 × 豁免 N）。
 
 ### Phase E3 · CN 可视化页传播 II（W479 · P1）— 待执行
@@ -248,10 +250,10 @@ python scripts/a11y_audit.py             # M1 对比度规则·E6 挂载（规�
 |:---|:---|:---|:---|
 | E0 W476 | ✅ | a71105a | tokens v3 +2035B；探针 P1-P6 全数 |
 | E1 W477 | ✅ | 15483fa | system v2 +2455B；6 页抽查 pageerror=0；字体 771→755KB |
-| E2 W478 | 🔶 进行中（试点 3/56 页） | — | 试点 3 页已迁移+验证；批次记录见 2026-08-18-phase-e-e2-batch-record.md |
+| E2 W478 | ✅ | 3549327（试点 3 页）+ 68168a6（全量 56 页） | 56 页全量令牌化（网络 20 + 热力/统计 36），pageerror 0；迁移清单见 2026-08-18-phase-e-e2-batch-record.md；感知验收后补：等值迁移，前后截图肉眼不可辨 |
 
-**执行期修正**：根页口径 8+1（原「9 根页」作废）；E1 图标集移 E5；LCP/CLS 基线改由 W464 建立；unicode-range 切片入 E5；bump 三处版本行每次全核（R8）。
+**执行期修正**：根页口径 8+1（原「9 根页」作废）；E1 图标集移 E5；LCP/CLS 基线改由 W464 建立；unicode-range 切片入 E5；bump 三处版本行每次全核（R8）；E2 实测范围 56 页（比预估 36 多 20，派生口径见批次记录）；E2 感知验收缺陷已回写 §3 并入库 plan-review skill v1.0.1。
 
 ---
 
-*本方案 v2.0 数字基于 2026-08-18 实测（HEAD 15483fa）。任何批次启动前：复核 HEAD 与现役最大 W（多 session 并发，勿信快照）。*
+*本方案 v2.0 数字基于 2026-08-18 实测（HEAD 15483fa）；2026-08-22 回写 E2 完成态与感知验收后补（HEAD 65890b2）。任何批次启动前：复核 HEAD 与现役最大 W（多 session 并发，勿信快照）。*

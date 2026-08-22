@@ -10,6 +10,23 @@
 
 ---
 
+## W488 根页视觉重设计 + 夜读模式（2026-08-22·v2.3.87）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/system.css | W488 | v2.3.87 修改·.card/.kpi hover 升级（-3px + 朱砂外描边 40%）+ 导航指示条（::after scaleX 滑动，含 nav-strong/aria-current）+644B |
+| site/index.html | W488 | v2.3.87 修改·hero "100" 朱砂强调 + 夜读按钮 + dark 内联覆盖 + 防 FOUC + reveal + 交互 JS |
+| site/dashboard.html | W488 | v2.3.87 修改·标题/KPI 数字朱砂 + 表头淡朱砂 + route-strip 朱砂线 + KPI 圆角 2→6 + 夜读 + 环图 dark 提亮 |
+| site/curated.html | W488 | v2.3.87 修改·卡片 hover 描边 + 夜读 + reveal |
+| site/guide.html | W488 | v2.3.87 修改·7 emoji→朱砂 SVG + 卡片 hover 描边 + 夜读 + reveal |
+| site/dukou-engine.html | W488 | v2.3.87 修改·header 标题加大 + 朱砂双线 + 夜读按钮 + dark 双变量覆盖 + footer 版本链 prepend |
+| site/mobile-index.html | W488 | v2.3.87 修改·6 emoji→朱砂 SVG + hero 夜读按钮 + dark 覆盖 |
+| skills/xiyouji-plan-review/SKILL.md | W488 | v2.3.87 修改·v1.0.1：陷阱 9「视觉目标 ≠ 工程卫生验收」+ 阶段 1 动作 6 + 阶段 0 目标性质登记 + 速查表 + 验证清单（双副本同步） |
+| skills/xiyouji-plan-review/reference.md | W488 | v2.3.87 修改·§1.6 worktree 截图法 + 历史案例 7（双副本同步） |
+| docs/superpowers/plans/2026-08-18-phase-e-visual-elevation-roadmap.md | W488 | v2.3.87 修改·E2 完成态回写（68168a6·56 页）+ 感知验收后补 |
+| docs/superpowers/plans/2026-08-22-rootpages-visual-and-nightmode.md | W488 | v2.3.87 新增·方向 A 第一批方案（M-A1 感知验收强制项 + 夜读模式） |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W488 | v2.3.87 修改·六文档同步 |
+
 ## W487 四会话 skill 二轮同步（2026-08-19·v2.3.86）
 
 | 文件 | W | 说明 |
