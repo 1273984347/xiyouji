@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-sILJ15JjtkTpEcv7ggjP7U7nRqEFpSybqmeJopdb7bc=' 'sha256-3n/F5uZoTM4IxXitt62hJihxxn2yg5vTgnSBWal1bYU=' 'sha256-q7LG17eNbkTgHcLtuMzSofYDhc3pVbJFXTUuTkrUnG0=' 'sha256-nsjePmNyGGyziIf7KpNVlHlF9qJt+NoRNjkysCSjQIQ=' 'sha256-aKYxxXWAhk9f+XLz7xp5ZJBqjq9Lg87Yp7hZxOyeYvw='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://d3js.org https://cdnjs.cloudflare.com 'sha256-sILJ15JjtkTpEcv7ggjP7U7nRqEFpSybqmeJopdb7bc=' 'sha256-3n/F5uZoTM4IxXitt62hJihxxn2yg5vTgnSBWal1bYU=' 'sha256-q7LG17eNbkTgHcLtuMzSofYDhc3pVbJFXTUuTkrUnG0=' 'sha256-nsjePmNyGGyziIf7KpNVlHlF9qJt+NoRNjkysCSjQIQ=' 'sha256-aKYxxXWAhk9f+XLz7xp5ZJBqjq9Lg87Yp7hZxOyeYvw=' 'sha256-o+QSXoQ5VFi4ItDsbcfyzUpLgyGVt92M5zj8wsRF4js='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' http://127.0.0.1:8777 https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       // 夜读模式（W488）：首屏防 FOUC
@@ -19,6 +19,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">本页面需 JavaScript 才能渲染图表。</p></noscript>
     <!-- W334 新中式·数字雅集：tokens 集中化 -->
     <link rel="stylesheet" href="tokens.css">
+    <link rel="stylesheet" href="system.css">
     <style>
         :root {
             /* badge tokens（保留原有分类徽章语义，色值取自新令牌） */
@@ -475,6 +476,7 @@
   <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="static/js/goatcounter.js"></script>
 </head>
 <body>
+    <div class="nav-mask" aria-hidden="true"></div>
     <a class="skip-link" href="#main">跳到主要内容</a>
 
     <!-- W334 顶部导航（与首页一致） -->
@@ -483,6 +485,9 @@
             <span class="seal" aria-hidden="true">详<br>解</span>
             <span class="wordmark">详解西游记</span>
         </a>
+                <button class="nav-toggle" type="button" aria-label="打开导航菜单" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
         <nav aria-label="主导航">
             <a href="../docs/00-导读/">导读</a>
             <a href="../docs/01-全书逐回解读/">逐回</a>
@@ -1573,6 +1578,27 @@
           try { localStorage.setItem('xy-theme', cur); } catch (_) {}
           btn.setAttribute('aria-pressed', cur === 'dark');
         });
+      })();
+    </script>
+    <script>
+      // W492：导航抽屉（≤768px 滑出面板 + 遮罩 + ESC + 窗口变大自动关闭；RM 下仍可开关无动效）
+      (function () {
+        var btn = document.querySelector('.nav-toggle');
+        var nav = document.querySelector('.topnav nav');
+        var mask = document.querySelector('.nav-mask');
+        if (!btn || !nav || !mask) return;
+        function close() {
+          nav.classList.remove('open'); mask.classList.remove('open'); btn.setAttribute('aria-expanded', 'false');
+          setTimeout(function () { if (!nav.classList.contains('open')) nav.style.display = 'none'; }, 350);
+        }
+        btn.addEventListener('click', function () {
+          if (nav.classList.contains('open')) { close(); return; }
+          nav.style.display = 'flex';
+          requestAnimationFrame(function () { requestAnimationFrame(function () { nav.classList.add('open'); mask.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }); });
+        });
+        mask.addEventListener('click', close);
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+        window.addEventListener('resize', function () { if (window.innerWidth > 768) close(); });
       })();
     </script>
 </body>
