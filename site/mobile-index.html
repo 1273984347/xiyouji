@@ -372,21 +372,7 @@
         }
 
         /* === W488：夜读模式（dark 覆盖）+ 夜读切换器（hero 右上角） === */
-        html[data-theme="dark"] {
-            --bg: #221D16;
-            --paper: #2B2419;
-            --ink: #F2EBDC;
-            --ink-soft: #CBBFA9;
-            --accent: #E0604F;
-            --accent-soft: #D9A86C;
-            --accent-2: #7FA8C9;
-            --accent-3: #C9A96B;
-            --accent-4: #9DB98A;
-            --rebel: #D96C5C;
-            --line: rgba(242, 235, 220, 0.14);
-            --elev-1: 0 1px 3px rgba(0, 0, 0, 0.40), 0 4px 12px rgba(0, 0, 0, 0.30);
-            color-scheme: dark;
-        }
+        
         html[data-theme="dark"] body { background: var(--bg); }
         html[data-theme="dark"] .hero { background: linear-gradient(135deg, #14100C 0%, #2A2318 50%, #3A2C1E 100%); }
         html[data-theme="dark"] .search-bar { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45); }
@@ -410,6 +396,7 @@
 <link rel="stylesheet" href="tokens.css">
     <link rel="stylesheet" href="system.css">
 <!-- W334-RESKIN -->
+  <script src="js/theme-init.js"></script>
   <script defer src="js/rum.js"></script>
   <script defer src="js/visit-log.js"></script>
   <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="static/js/goatcounter.js"></script>
