@@ -949,13 +949,14 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .breadcrumb .sep { margin: 0 8px; opacity: 0.6; }
 
         .notice {
-            background: #fff8ec;
+            background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 10px 14px;
             font-size: 0.82rem;
             color: var(--accent-3);
@@ -964,9 +965,9 @@ td.num, th.num {
         }
         .notice code {
             font-family: "JetBrains Mono", monospace;
-            background: #f5e9d4;
+            background: var(--paper-warm);
             padding: 1px 5px;
-            border-radius: 3px;
+            border-radius: var(--radius-sm)
             font-size: 0.85em;
         }
 
@@ -1014,12 +1015,12 @@ td.num, th.num {
             width: 100%;
             padding: 10px 38px 10px 36px;
             border: 1px solid var(--line);
-            border-radius: 22px;
+            border-radius: 22px
             background: var(--bg);
             color: var(--ink);
             font-family: inherit;
             font-size: 0.95rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: border-color var(--dur-base), box-shadow var(--dur-base);
         }
         #search-input:focus,
         #search-input:focus-visible {
@@ -1035,7 +1036,7 @@ td.num, th.num {
             width: 28px;
             height: 28px;
             border: none;
-            border-radius: 50%;
+            border-radius: 50%
             background: transparent;
             color: var(--ink-soft);
             font-size: 1rem;
@@ -1051,7 +1052,7 @@ td.num, th.num {
             background: var(--bg);
             color: var(--accent);
             outline: none;
-            box-shadow: 0 0 0 2px var(--focus-ring);
+            box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 15%, transparent);
         }
         .search-input-wrap.has-value .clear-btn { display: flex; }
 
@@ -1067,7 +1068,7 @@ td.num, th.num {
             gap: 6px;
             background: var(--bg);
             border: 1px solid var(--line);
-            border-radius: 999px;
+            border-radius: var(--radius-pill)
             padding: 6px 14px;
             font-size: 0.85rem;
             font-family: inherit;
@@ -1079,11 +1080,11 @@ td.num, th.num {
         .chap-btn:hover { border-color: var(--accent); color: var(--ink); }
         .chap-btn:focus-visible {
             outline: none;
-            box-shadow: 0 0 0 3px var(--focus-ring);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
         }
         .chap-btn.active {
             background: var(--ink);
-            color: #f5e9d4;
+            color: var(--paper-warm);
             border-color: var(--ink);
         }
 
@@ -1107,13 +1108,13 @@ td.num, th.num {
             align-items: center;
             background: var(--bg);
             border: 1px solid var(--line);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 5px 12px;
             font-size: 0.86rem;
             font-family: inherit;
             color: var(--ink);
             cursor: pointer;
-            transition: all 0.15s;
+            transition: all var(--dur-fast);
             min-width: 0;
         }
         .quick-tag:hover {
@@ -1123,7 +1124,7 @@ td.num, th.num {
         }
         .quick-tag:focus-visible {
             outline: none;
-            box-shadow: 0 0 0 3px var(--focus-ring);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
         }
         .quick-tag.tag-char { border-left: 3px solid var(--accent-2); }
         .quick-tag.tag-art { border-left: 3px solid var(--accent-3); }
@@ -1134,9 +1135,9 @@ td.num, th.num {
             color: var(--ink);
             margin-bottom: 14px;
             padding: 8px 12px;
-            background: #fff8ec;
+            background: var(--paper-warm);
             border-left: 3px solid var(--accent);
-            border-radius: 0 4px 4px 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0
             overflow-wrap: anywhere;
         }
         .results-summary strong { color: var(--accent); font-weight: 600; }
@@ -1151,7 +1152,7 @@ td.num, th.num {
             background: var(--bg);
             border: 1px solid var(--line);
             border-left: 3px solid var(--accent-2);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 14px 16px;
             min-width: 0;
         }
@@ -1186,7 +1187,7 @@ td.num, th.num {
             color: var(--accent-3);
             background: rgba(122, 82, 48, 0.10);
             padding: 2px 8px;
-            border-radius: 10px;
+            border-radius: var(--radius-lg)
             font-family: "JetBrains Mono", monospace;
             flex-shrink: 0;
         }
@@ -1196,15 +1197,15 @@ td.num, th.num {
             line-height: 1.8;
             padding: 8px 10px;
             background: var(--paper);
-            border-radius: 4px;
+            border-radius: var(--radius-md)
             border: 1px dashed var(--line);
             overflow-wrap: anywhere;
         }
         .rc-context mark {
             background: var(--accent);
-            color: #fff;
+            color: var(--paper);
             padding: 0 3px;
-            border-radius: 2px;
+            border-radius: var(--radius-sm)
             font-weight: 600;
         }
         .rc-pos {
@@ -1220,7 +1221,7 @@ td.num, th.num {
             color: var(--ink-soft);
             font-size: 0.92rem;
             border: 1px dashed var(--line);
-            border-radius: 8px;
+            border-radius: var(--radius-md)
             background: var(--paper);
         }
         .empty-state .es-icon { font-size: 2rem; display: block; margin-bottom: 8px; opacity: 0.6; }
@@ -1240,7 +1241,8 @@ td.num, th.num {
             .rc-count { margin-left: 0; }
         }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

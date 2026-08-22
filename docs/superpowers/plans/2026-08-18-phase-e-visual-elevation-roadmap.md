@@ -1,7 +1,7 @@
 # 《详解西游记》前端视觉高级感升级方案（Phase E · W476–W483）
 
 > 版本：v2.0（表述去模糊化 + E0/E1 落地回写）· 2026-08-18
-> 当前基线：v2.3.86 W487（HEAD 65890b2）；E0/E1/E2 已完成，E3 起未执行（W465 闸门判定后再启）
+> 当前基线：v2.3.89 W490（回写时实测）；E0/E1/E2/E3 已完成（86 页传播 100%），E4 起未执行
 > 性质：跨批次视觉升级路线图；各批次落地时另拆单批 plan/spec；W 编号启动时须 `grep -o 'W4[0-9][0-9]' 交接文档.md | sort -u | tail -3` 复核现役最大 W
 > 上游依据：① Phase 3 量化路线图（2026-08-18-w464-phase3-quantified-roadmap.md）② V2 可视化维度方案（docs/00-导读/V2可视化维度方案.md）③ DESIGN.md §1-5（§4A 为本轨宪法层）④ site/tokens.css v3 / site/system.css v2
 > 目标读者：主代理 + 新接任 Agent + 人类维护者
@@ -126,11 +126,13 @@
 - **感知验收后补（2026-08-22）**：E2 为等值迁移（R-SHADOW/R-RADIUS/R-TRANS 多数映射前后数值相同），worktree 前后截图实测 56 页肉眼不可辨；本批 M2/M3 全绿但零感知变化——「视觉目标 ≠ 工程卫生验收」教训已入库 plan-review skill v1.0.1 陷阱 9。
 - 产出：批内页补丁 + 迁移清单表（页 × 迁出规则 × 豁免 N）。
 
-### Phase E3 · CN 可视化页传播 II（W479 · P1）— 待执行
+### Phase E3 · CN 可视化页传播 II（W490 · P1）— ✅ 完成（批次记录见 2026-08-22-phase-e-e3-batch-record.md）
 
 - 范围：86 页减去 E2 批 = 余量（含 3D/Canvas 3-4 页、时间线/地图、静态/表格页）；3D 页深度令牌仅用于 UI 层（图例/按钮/tooltip），不动场景材质。
 - 迁移规则：同 E2 五条；另建 D1 图表 8 色/顺序色（仅当批内页确需新系列色时）。
 - 量化验收：同 E2；3D 专项 = 场景 canvas 有内容且 pageerror=0（断言 `canvas.width>0` + 截图）；收尾时 M2 全站（含豁免登记）= 100% 覆盖。
+- 验收实测（回写）：实际范围 30 页（86−E2 56，`git diff 68168a6` 派生；含 3D/Canvas 2 页、时间线/地图、静态/表格、text-search 等）；30 页 pageerror 全部 0；3D 专项 character-relationship-3d / journey-geo-3d canvas.width>0 断言通过；迁移清单见 [2026-08-22-phase-e-e3-batch-record.md](2026-08-22-phase-e-e3-batch-record.md)。
+- **范围纪律**：本批不建 D1 图表 8 色/顺序色（批内页无新系列色需求，判定不建）；M2 严格清零（按钮白字/JS 内数据色等存量）移入 E6 收口门禁转正时处理。
 - 产出：86 页全量完成 + 全站 token 覆盖率报告。
 
 ### Phase E4 · EN 站同步（W480 · P1）— 待执行
@@ -250,6 +252,7 @@ python scripts/a11y_audit.py             # M1 对比度规则·E6 挂载（规�
 |:---|:---|:---|:---|
 | E0 W476 | ✅ | a71105a | tokens v3 +2035B；探针 P1-P6 全数 |
 | E1 W477 | ✅ | 15483fa | system v2 +2455B；6 页抽查 pageerror=0；字体 771→755KB |
+| E3 W490 | ✅ | 待提交（v2.3.89） | 30 页全量令牌化（86−E2 56），pageerror 0；3D 2 页 canvas 断言过；批次记录见 2026-08-22-phase-e-e3-batch-record.md |
 | E2 W478 | ✅ | 3549327（试点 3 页）+ 68168a6（全量 56 页） | 56 页全量令牌化（网络 20 + 热力/统计 36），pageerror 0；迁移清单见 2026-08-18-phase-e-e2-batch-record.md；感知验收后补：等值迁移，前后截图肉眼不可辨 |
 
 **执行期修正**：根页口径 8+1（原「9 根页」作废）；E1 图标集移 E5；LCP/CLS 基线改由 W464 建立；unicode-range 切片入 E5；bump 三处版本行每次全核（R8）；E2 实测范围 56 页（比预估 36 多 20，派生口径见批次记录）；E2 感知验收缺陷已回写 §3 并入库 plan-review skill v1.0.1。

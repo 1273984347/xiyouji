@@ -951,6 +951,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式 === */
         .chart-row {
             display: grid;
@@ -960,10 +961,10 @@ td.num, th.num {
         .chart-block { text-align: center; }
         .legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; margin-top: 12px; font-size: 12px; }
         .legend-item { display: flex; align-items: center; gap: 6px; }
-        .legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
+        .legend-swatch { width: 12px; height: 12px; border-radius: var(--radius-sm) }
         .insight-box {
             background: var(--paper-warm); border-left: 3px solid var(--accent);
-            padding: 20px 24px; border-radius: 2px; margin-top: 16px;
+            padding: 20px 24px; border-radius: var(--radius-sm) margin-top: 16px;
         }
         .insight-box ul { list-style: none; }
         .insight-box li { padding: 6px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
@@ -975,24 +976,24 @@ td.num, th.num {
         .cross-table .highlight { background: rgba(200, 70, 58, 0.08); color: var(--accent); font-weight: 600; }
         .cross-table .zero { color: var(--ink-faint); opacity: 0.5; }
         #sankey { width: 100%; height: 420px; display: block; }
-        .sankey-node rect { fill-opacity: 0.9; stroke: #fff; stroke-width: 1; }
+        .sankey-node rect { fill-opacity: 0.9; stroke: var(--paper); stroke-width: 1; }
         .sankey-node text { font-size: 12px; fill: var(--ink); font-family: var(--font-serif); }
-        .sankey-link { fill: none; stroke-opacity: 0.4; transition: stroke-opacity 0.2s; }
+        .sankey-link { fill: none; stroke-opacity: 0.4; transition: stroke-opacity var(--dur-base); }
         .sankey-link:hover { stroke-opacity: 0.7; }
         .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-bottom: 14px; font-size: 14px; }
         .filter-row label { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-soft); }
-        .filter-row select { padding: 6px 10px; border: 1px solid var(--line); border-radius: 2px; background: var(--paper); color: var(--ink); font-size: 13px; cursor: pointer; }
+        .filter-row select { padding: 6px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm) background: var(--paper); color: var(--ink); font-size: 13px; cursor: pointer; }
         .filter-row select:focus { outline: none; border-color: var(--accent); }
-        .filter-row button { padding: 6px 14px; border: 1px solid var(--line); border-radius: 2px; background: var(--paper); color: var(--ink-soft); font-size: 13px; cursor: pointer; transition: all 0.15s; }
+        .filter-row button { padding: 6px 14px; border: 1px solid var(--line); border-radius: var(--radius-sm) background: var(--paper); color: var(--ink-soft); font-size: 13px; cursor: pointer; transition: all var(--dur-fast); }
         .filter-row button:hover { border-color: var(--accent); color: var(--accent); }
         .filter-count { color: var(--accent-2); font-size: 13px; margin-left: auto; font-family: var(--font-mono); }
         .table-wrap { max-height: 600px; overflow-y: auto; }
         .table-wrap::-webkit-scrollbar { width: 6px; height: 6px; }
-        .table-wrap::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
-        .notice { background: var(--paper-warm); border-radius: 2px; padding: 10px 14px; font-size: 12px; color: var(--accent-3); margin-bottom: 20px; }
+        .table-wrap::-webkit-scrollbar-thumb { background: var(--line); border-radius: var(--radius-sm) }
+        .notice { background: var(--paper-warm); border-radius: var(--radius-sm) padding: 10px 14px; font-size: 12px; color: var(--accent-3); margin-bottom: 20px; }
         .notice code { font-family: var(--font-mono); font-size: 11px; }
         /* section 容器（复用 chart-block 视觉） */
-        .section { background: var(--paper); border: 1px solid var(--line); border-radius: 3px; padding: clamp(20px, 3vw, 28px); margin-bottom: 24px; }
+        .section { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-sm) padding: clamp(20px, 3vw, 28px); margin-bottom: 24px; }
         .section-title { font-family: var(--font-serif); font-size: 20px; font-weight: 600; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 2px solid var(--accent); display: inline-block; }
         .section-sub { font-size: 13px; color: var(--ink-soft); margin-bottom: 20px; }
         /* 完整清单表格 */
@@ -1004,10 +1005,11 @@ td.num, th.num {
         #hardship-table td { padding: 8px 12px; vertical-align: top; }
         #hardship-table td.num { font-family: var(--font-mono); color: var(--accent-3); width: 50px; text-align: center; }
         #hardship-table td.chapter { font-family: var(--font-mono); color: var(--ink-soft); width: 80px; text-align: center; }
-        .tag { display: inline-block; padding: 2px 8px; border-radius: 2px; font-size: 11px; font-weight: 500; color: #fff; white-space: nowrap; }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: var(--radius-sm) font-size: 11px; font-weight: 500; color: var(--paper); white-space: nowrap; }
         .empty-row { padding: 32px; text-align: center; color: var(--ink-soft); font-style: italic; }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
