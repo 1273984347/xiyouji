@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W491），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W492），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.91（2026-08-22）：W492 Phase E5 响应式+微交互 — 导航抽屉 + 图标收尾（字体切片/断点/图表降级推迟）
+
+> **来源**：W491 E4 完成后用户 2026-08-22 指令 W492 按推荐执行 = E5（响应式 + 微交互 + 字体专项）。
+> - **执行（导航抽屉）**：system.css 新增 .nav-toggle/.nav-mask + ≤768 `.topnav:has(.nav-toggle) nav` 滑出面板（display:none 关闭态避免 fixed 溢出 + JS 双 rAF 过渡 + elev-4 + 遮罩 + ESC + 窗口放大自动关 + RM 走全局）；4 根页（index/dashboard/curated/guide）加汉堡按钮 + 遮罩 + JS；**dashboard 缺 `<link system.css>` 补上**（抽屉规则不生效根因，此前仅靠页面私有样式）。
+> - **执行（图标/触摸）**：根页 emoji 扫描 = 0（W488 已换完）；index ask-chip 触摸目标 padding 6px→10px。
+> - **验收**：375px 4/4 抽屉开/遮罩关/关闭态零溢出（scrollWidth ≤ clientWidth+1）/pageerror=0；数据页 + EN 抽查 375px 无溢出（:has 保护 data 页 480 下 display:none 无回归）；check_structure 0 失衡 / check_js_syntax 0 错 / CSP 1189 哈希 0 漂移 / lint_links 4354 链接 0 broken / verify_delivery 核心全绿。
+> - **范围纪律（显式推迟 W493，非遗漏）**：① 字体 unicode-range 切片——多片 @font-face 声明 ~60KB 进 tokens.css 会撑爆 225 页内联预算，需独立 CSS 文件专项；② 断点常量规范化——存量非白名单 520/720/960/600/900/860/820 等 100+ 处，改断点风险高无感知收益；③ 图表 ≤640px 降级 + D3 resize——86 页批量风险高且移动端现状可读；④ dukou-engine/mobile-index 无 topnav 结构豁免抽屉。
+> - **文件**：site/system.css + 4 根页（index/dashboard/curated/guide）+ docs/superpowers/plans/2026-08-22-phase-e-e5-batch-record.md（新）+ Phase E 路线图回写 + 六文档。
+> - **验证**：五门禁全绿（见上）。
+> - **状态**：本次提交（W492）将推送 origin/main。
 
 ### v2.3.90（2026-08-22）：W491 Phase E4 EN 站同步 — 85 同名可视化页令牌化对齐
 

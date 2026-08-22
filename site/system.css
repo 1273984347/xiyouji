@@ -720,7 +720,59 @@ td.num, th.num {
 }
 @media (max-width: 480px) {
     .kpi-grid { grid-template-columns: 1fr; }
-    .topnav nav { display: none; }
+    .topnav:not(:has(.nav-toggle)) nav { display: none; }
+}
+
+/* ===== 导航抽屉（W492）：≤768px 根页 topnav 折叠为滑出抽屉（仅 .nav-toggle 存在时启用） ===== */
+.nav-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin-left: 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--paper);
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: border-color var(--dur-fast) var(--ease-out-quart),
+                color var(--dur-fast) var(--ease-out-quart),
+                transform var(--dur-fast) var(--ease-out-quart);
+}
+.nav-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.nav-toggle:active { transform: scale(0.94); }
+.nav-mask {
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(35, 32, 26, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-base) var(--ease-out-quart);
+}
+.nav-mask.open { opacity: 1; pointer-events: auto; }
+@media (max-width: 768px) {
+    .nav-toggle { display: inline-flex; }
+    .topnav:has(.nav-toggle) nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 60;
+        width: min(78vw, 320px);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 22px;
+        padding: 72px 26px;
+        background: var(--paper);
+        border-left: 1px solid var(--line);
+        box-shadow: var(--elev-4);
+        transform: translateX(100%);
+        transition: transform var(--dur-base) var(--ease-out-quart);
+    }
+    .topnav:has(.nav-toggle) nav.open { transform: translateX(0); }
 }
 
 /* ===== 打印 ===== */

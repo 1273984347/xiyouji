@@ -10,6 +10,15 @@
 
 ---
 
+## W492 Phase E5 响应式+微交互（2026-08-22·v2.3.91）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/system.css | W492 | v2.3.91 修改·导航抽屉组件（.nav-toggle/.nav-mask/≤768 滑出面板 display:none 关闭态） |
+| site/index.html / dashboard.html / curated.html / guide.html | W492 | v2.3.91 修改·汉堡按钮 + 遮罩 + 抽屉 JS（双 rAF）；dashboard 补 system.css link |
+| docs/superpowers/plans/2026-08-22-phase-e-e5-batch-record.md | W492 | v2.3.91 新增·E5 批次记录（推迟项显式化） |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W492 | v2.3.91 修改·六文档同步 |
+
 ## W491 Phase E4 EN 站同步（2026-08-22·v2.3.90）
 
 | 文件 | W | 说明 |
