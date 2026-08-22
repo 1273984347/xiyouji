@@ -11,7 +11,7 @@
     <noscript><p style="color:#C8463A;padding:12px;">This page requires JavaScript to render its charts.</p></noscript>
     
     
-                                        <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
+                                            <!-- INLINED CSS (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->
     <style>
 /*
  * tokens.css — 西游记可视化站点公共设计令牌
@@ -182,6 +182,42 @@ h1, h2, h3, h4, h5,
     background: rgba(200, 70, 58, 0.16);
 }
 
+/* ===== 夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载 ===== */
+html[data-theme="dark"] {
+    --bg: #221D16;
+    --ink: #F2EBDC;
+    --ink-soft: #CBBFA9;
+    --ink-faint: #8F8674;
+    --paper: #2B2419;
+    --paper-warm: #33291B;
+    --line: rgba(242, 235, 220, 0.14);
+    --accent: #E0604F;
+    --accent-deep: #C94F3F;
+    --accent-soft: #E8A99F;
+    --accent-tint: rgba(224, 96, 79, 0.14);
+    --accent-wash: rgba(224, 96, 79, 0.08);
+    --accent-2: #7FA8C9;
+    --accent-3: #C9A96B;
+    --accent-4: #9DB98A;
+    --ok: #8FBF7F;
+    --warn: #D0A35C;
+    --danger: #D96C5C;
+    --info: #7FA8C9;
+    --elev-0: none;
+    --elev-1: 0 1px 3px rgba(0, 0, 0, 0.40), 0 4px 12px rgba(0, 0, 0, 0.30);
+    --elev-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
+    --elev-3: 0 4px 10px rgba(0, 0, 0, 0.50), 0 12px 32px rgba(0, 0, 0, 0.45);
+    --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
+    color-scheme: dark;
+}
+html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
+html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
+/* 图表深色适配（通用）：SVG 数据色温和提亮，tooltip 边框跟随令牌 */
+html[data-theme="dark"] svg path[fill^="#"],
+html[data-theme="dark"] svg circle[fill^="#"],
+html[data-theme="dark"] svg rect[fill^="#"] { filter: brightness(1.12) saturate(1.05); }
+html[data-theme="dark"] .chart-tooltip { border-color: var(--line); }
+
 /*
  * system.css — 详解西游记 · 全站组件设计系统
  * ----------------------------------------------
@@ -320,7 +356,25 @@ h4 { font-size: 18px; font-weight: 500; }
     color: var(--ink-soft);
     transition: color 0.15s;
     white-space: nowrap;
+    position: relative;
 }
+.topnav nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-out-quart);
+}
+.topnav nav a:hover::after,
+.topnav nav a.active::after,
+.topnav nav a.nav-strong::after,
+.topnav nav a[aria-current="page"]::after { transform: scaleX(1); }
 .topnav nav a:hover { color: var(--accent); }
 .topnav nav a.active { color: var(--ink); font-weight: 500; }
 @media (max-width: 768px) {
@@ -389,8 +443,9 @@ h4 { font-size: 18px; font-weight: 500; }
 }
 .card:hover {
     border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: var(--elev-2);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
 }
 .card-grid {
     display: grid;
@@ -431,8 +486,9 @@ h4 { font-size: 18px; font-weight: 500; }
 }
 .kpi:hover {
     border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: var(--elev-2);
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 40%, transparent),
+                var(--elev-2);
 }
 .kpi .kpi-value {
     font-family: var(--font-mono);
@@ -1133,6 +1189,7 @@ footer code {
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 </style>
+  <script src="../js/theme-init.js"></script>
   <script defer src="../js/rum.js"></script>
   <script defer src="../js/visit-log.js"></script>
   <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="../static/js/goatcounter.js"></script>

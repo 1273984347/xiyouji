@@ -166,3 +166,39 @@ h1, h2, h3, h4, h5,
 ::selection {
     background: rgba(200, 70, 58, 0.16);
 }
+
+/* ===== 夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载 ===== */
+html[data-theme="dark"] {
+    --bg: #221D16;
+    --ink: #F2EBDC;
+    --ink-soft: #CBBFA9;
+    --ink-faint: #8F8674;
+    --paper: #2B2419;
+    --paper-warm: #33291B;
+    --line: rgba(242, 235, 220, 0.14);
+    --accent: #E0604F;
+    --accent-deep: #C94F3F;
+    --accent-soft: #E8A99F;
+    --accent-tint: rgba(224, 96, 79, 0.14);
+    --accent-wash: rgba(224, 96, 79, 0.08);
+    --accent-2: #7FA8C9;
+    --accent-3: #C9A96B;
+    --accent-4: #9DB98A;
+    --ok: #8FBF7F;
+    --warn: #D0A35C;
+    --danger: #D96C5C;
+    --info: #7FA8C9;
+    --elev-0: none;
+    --elev-1: 0 1px 3px rgba(0, 0, 0, 0.40), 0 4px 12px rgba(0, 0, 0, 0.30);
+    --elev-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
+    --elev-3: 0 4px 10px rgba(0, 0, 0, 0.50), 0 12px 32px rgba(0, 0, 0, 0.45);
+    --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
+    color-scheme: dark;
+}
+html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
+html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
+/* 图表深色适配（通用）：SVG 数据色温和提亮，tooltip 边框跟随令牌 */
+html[data-theme="dark"] svg path[fill^="#"],
+html[data-theme="dark"] svg circle[fill^="#"],
+html[data-theme="dark"] svg rect[fill^="#"] { filter: brightness(1.12) saturate(1.05); }
+html[data-theme="dark"] .chart-tooltip { border-color: var(--line); }

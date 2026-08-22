@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W488），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W489），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.88（2026-08-22）：W489 全站暗色模式 — dark 令牌全局化 + 225 页传播 + 共享 theme-init
+
+> **来源**：W488 第一批暗色仅覆盖 6 根页（dark 令牌走页面内联），用户 2026-08-22 指令 W489 按推荐执行——把暗色扩展到全站（86 数据页 + EN 138 + 根页），E3-E6 余项留后续批。
+> - **执行（令牌全局化）**：dark 令牌组迁入 tokens.css（html[data-theme="dark"] 覆盖 15 组变量 + 深色 elev + color-scheme，+1494B）；新增全局图表适配（SVG path/circle/rect 数据色 brightness(1.12)+saturate(1.05) 提亮、.chart-tooltip 边框跟随）；inline_css.py --force 重新同步 225 页（data+EN 全获 dark UI 层适配，同时 W488 的 system.css hover/指示条升级同步传播）。
+> - **执行（防 FOUC 共享脚本）**：新增 site/js/theme-init.js（同步加载，读 xy-theme → 挂 html[data-theme]，prefers-color-scheme 跟随，fail-open）；批量插入 226 页 head（CN 根 9 + data 86 + EN 138 - 2 诊断页 rum-viewer/visit-viewer 无锚点豁免；6 根页 W488 已有内联防 FOUC 故跳过）；外部脚本免 CSP hash（script-src 'self'），CSP 1185 哈希 0 漂移。
+> - **执行（去重）**：5 根页（index/curated/guide/dashboard/mobile-index）删除内联 dark 通用令牌块（与 tokens.css 重复，每页 -1170B），保留页面特有适配（dark-band 边框/mega-num 朱砂/hero 渐变/ask-form 按钮/dashboard 环图 filter/dukou-engine 双变量体系全保留）。
+> - **执行（验收）**：全站 dark 冒烟 12 页（CN 根 2 + data 6 + EN 4）theme=dark + body bg #221D16 + pageerror=0 + FOUC=0；dark 抽样截图目视（emotional-heatmap/chapter-stats/EN）渲染正常；单页内联 CSS 28385B ≤ 33KB 预算线；五道门禁全绿。
+> - **文件**：site/tokens.css（+dark 组）+ site/js/theme-init.js（新增）+ 226 页 head 插引用 + 5 根页去重 + 六文档。
+> - **验证**：check_structure 0 失衡 / check_js_syntax 0 错 / CSP 1185 哈希 0 漂移 / lint_links 0 broken / verify_delivery 核心全绿。
+> - **状态**：本次提交（W489）将推送 origin/main。
 
 ### v2.3.87（2026-08-22）：W488 根页视觉重设计 + 夜读模式 — Phase E 方向 A 第一批（可感知升级 + 暗色提前）
 

@@ -10,6 +10,17 @@
 
 ---
 
+## W489 全站暗色模式（2026-08-22·v2.3.88）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/tokens.css | W489 | v2.3.88 修改·dark 令牌组全局化（html[data-theme] 覆盖 15 组变量 + 深色 elev + SVG 数据色提亮 filter）+1494B |
+| site/js/theme-init.js | W489 | v2.3.88 新增·全站 theme 初始化（xy-theme→data-theme·同步防 FOUC·fail-open） |
+| site/*.html（根 9）| W489 | v2.3.88 修改·head 插 theme-init 引用（诊断 2 页豁免）；5 根页删内联 dark 通用令牌块 -1170B/页 |
+| site/data/*.html（86）| W489 | v2.3.88 修改·head 插 theme-init + inline_css --force 重新内联（dark 令牌 + hover 升级传播） |
+| site/en/*.html（138）| W489 | v2.3.88 修改·head 插 theme-init + inline_css --force 重新内联（EN 全获 dark UI 适配） |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W489 | v2.3.88 修改·六文档同步 |
+
 ## W488 根页视觉重设计 + 夜读模式（2026-08-22·v2.3.87）
 
 | 文件 | W | 说明 |

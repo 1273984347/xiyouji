@@ -143,35 +143,8 @@
         .mega-num { color: var(--accent-deep); font-variant-numeric: tabular-nums; }
 
         /* === W488：夜读模式（页面内联 dark 覆盖，不落全局 tokens/system；全站 dark 第二批） === */
-        html[data-theme="dark"] {
-            --bg: #221D16;
-            --ink: #F2EBDC;
-            --ink-soft: #CBBFA9;
-            --ink-faint: #8F8674;
-            --paper: #2B2419;
-            --paper-warm: #33291B;
-            --line: rgba(242, 235, 220, 0.14);
-            --accent: #E0604F;
-            --accent-deep: #C94F3F;
-            --accent-soft: #E8A99F;
-            --accent-tint: rgba(224, 96, 79, 0.14);
-            --accent-wash: rgba(224, 96, 79, 0.08);
-            --accent-2: #7FA8C9;
-            --accent-3: #C9A96B;
-            --accent-4: #9DB98A;
-            --ok: #8FBF7F;
-            --warn: #D0A35C;
-            --danger: #D96C5C;
-            --info: #7FA8C9;
-            --elev-0: none;
-            --elev-1: 0 1px 3px rgba(0, 0, 0, 0.40), 0 4px 12px rgba(0, 0, 0, 0.30);
-            --elev-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
-            --elev-3: 0 4px 10px rgba(0, 0, 0, 0.50), 0 12px 32px rgba(0, 0, 0, 0.45);
-            --elev-4: 0 8px 18px rgba(0, 0, 0, 0.55), 0 24px 56px rgba(0, 0, 0, 0.50);
-            color-scheme: dark;
-        }
-        html[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
-        html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
+        
+                html[data-theme="dark"] .dark-band { border: 1px solid var(--line); }
         html[data-theme="dark"] .ask-form button { color: #1A1510; }
         html[data-theme="dark"] .mega-num { color: var(--accent); }
 
@@ -202,6 +175,7 @@
     <meta property="og:locale" content="zh_CN">
     <meta property="og:site_name" content="详解西游记">
     <meta name="twitter:card" content="summary_large_image">
+  <script src="js/theme-init.js"></script>
   <script defer src="js/rum.js"></script>
   <script defer src="js/visit-log.js"></script>
   <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="static/js/goatcounter.js"></script>
