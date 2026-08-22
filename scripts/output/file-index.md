@@ -10,6 +10,15 @@
 
 ---
 
+## W494 Phase E 遗留收尾（2026-08-22·v2.3.93）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/*.html + data/*.html + en/*.html（全站） | W494 | v2.3.93 修改·断点映射 380 处 + tag-cloud/81-hardships 溢出修复 + CSP 重跑 |
+| site/system.css | W494 | v2.3.93 修改·图表 ≤640px 降级段（图例纵排/轴文字/tooltip 收窄） |
+| docs/superpowers/plans/2026-08-22-phase-e-w494-legacy-closure.md | W494 | v2.3.93 新增·遗留收尾批次记录（字体切片关闭根因） |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W494 | v2.3.93 修改·六文档同步 |
+
 ## W493 Phase E6 验收收口（2026-08-22·v2.3.92）
 
 | 文件 | W | 说明 |

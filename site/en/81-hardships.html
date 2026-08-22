@@ -75,7 +75,8 @@
 <style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
 
 /* injected label-halo for overlap readability */
-svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
+svg { max-width: 100%; height: auto; }
+        svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 </style>
   <script src="../js/theme-init.js"></script>
@@ -862,7 +863,7 @@ function renderTreemap(opts){
 
 <style>/* e-track-exempt: chart-data-colors 2 处 */
 
-.tm-tooltip{position:fixed;background: rgba(26,20,16,.94);color: var(--paper-warm);padding:8px 12px;border-radius: var(--radius-md)font-size:.82rem;pointer-events:none;opacity:0;z-index:999;max-width:260px;line-height:1.45;}
+.tm-tooltip{position:fixed;background: rgba(26,20,16,.94);color: var(--paper-warm);padding:8px 12px;border-radius: var(--radius-md)font-size:.82rem;pointer-events:none;opacity:0;z-index:999;max-width: 375px;line-height:1.45;}
 .tm-tooltip strong{color: var(--accent-soft);display:block;margin-bottom:2px;}
 </style>
 <div class="tm-tooltip" id="tm-tooltip"></div>

@@ -4,13 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W493），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W494），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.93（2026-08-22）：W494 Phase E 遗留收尾 — 断点规范化 + 图表降级（字体切片关闭）
+
+> **来源**：用户 2026-08-22 指令把收口报告遗留项排进 W494；字体专项与断点/图表降级同批执行。
+> - **执行（断点常量规范化）**：全站 380 处非白名单断点映射到白名单 {375,480,640,768,1024,1280,1536}（两轮：5xx-9xx 按最近白名单 238 处 + 小断点 220-420→375/480 与大断点 1000-1440→1024/1280/1536 142 处）；残留 0。
+> - **执行（图表 ≤640px 降级）**：system.css 新增 W494 段（图例纵排/轴文字 10px/容器 padding 收窄/tooltip max-width 220px），CSS 显示层降级、D3 渲染不变；inline_css --force 传播 225 页。
+> - **执行（存量响应式缺陷）**：tag-cloud（CN+EN）搜索 input 缺 box-sizing:border-box 致 375px 溢出；81-hardships（CN+EN）图表 svg 固定 360px 在 1024px 溢出 → 均修复。
+> - **执行（字体专项：判定关闭）**：① unicode-range 切片不可行——data/en 225 页内联架构（无外部 link 锚点），切片声明只能进 tokens.css，16 片 134KB×225 远超预算线；② Serif VF 子集化收益 ≈0（3636→3555KB，VF 轴全保留），已回滚。字体现状（Sans 9340 字子集化 773KB + Serif VF 标题字）判定可接受，关闭该项。
+> - **验收**：5 视口（375/480/640/768/1024）× 11 页（根页+data+EN）溢出 FAIL=0；inline_css 传播后 CSP 6 页漂移 → 重跑归零（1189 哈希 0 漂移）；check_structure 0 失衡；verify_delivery 核心全绿（含 W493 三门禁）。
+> - **文件**：site/*.html + site/data/*.html + site/en/*.html（断点映射/溢出修复/CSP 重跑）+ site/system.css（图表降级）+ docs/superpowers/plans/2026-08-22-phase-e-w494-legacy-closure.md（新）+ 六文档。
+> - **验证**：5 视口回归 + 五门禁全绿。
+> - **状态**：本次提交（W494）将推送 origin/main。
 
 ### v2.3.92（2026-08-22）：W493 Phase E6 验收收口 — 三门禁转正 + M1-M7 全达标（Phase E 主线收官）
 

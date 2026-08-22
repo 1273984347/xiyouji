@@ -781,3 +781,34 @@ td.num, th.num {
     body { background: #fff; }
     .card, .chart-block { border: 1px solid #ccc; break-inside: avoid; }
 }
+
+/* ===== 图表移动端降级（W494）：≤640px 图例纵排/文字缩小/tooltip 收窄——CSS 显示层降级，D3 渲染不变 ===== */
+@media (max-width: 640px) {
+    .legend,
+    .chart-legend,
+    .legend-inline,
+    .legend-row {
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-start;
+    }
+    .legend-item,
+    .legend-cell,
+    .legend-label {
+        font-size: 11px;
+    }
+    .chart-block svg text,
+    .chart-wrap svg text,
+    .chart-container svg text,
+    svg.vis text {
+        font-size: 10px;
+    }
+    .chart-block,
+    .chart-wrap,
+    .chart-container {
+        padding: 12px;
+    }
+    .chart-tooltip {
+        max-width: 220px;
+    }
+}

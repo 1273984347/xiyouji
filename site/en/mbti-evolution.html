@@ -55,13 +55,13 @@
         .stage-btn:hover { background: var(--accent-soft); }
         .stage-btn.active:hover { background: var(--accent); }
         .radar-wrap { display: grid; grid-template-columns: 1fr 280px; gap: 24px; align-items: start; }
-        @media (max-width: 860px) { .radar-wrap { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .radar-wrap { grid-template-columns: 1fr; } }
         #radar-svg { width: 100%; height: auto; display: block; }
         .radar-container { position: relative; }
         .radar-tip, .heat-tip {
             position: absolute; pointer-events: none; background: var(--dark);
             color: var(--paper-warm); padding: 8px 12px; border-radius: var(--radius-md) font-size: 0.8rem;
-            opacity: 0; transition: opacity var(--dur-base); z-index: 10; max-width: 260px;
+            opacity: 0; transition: opacity var(--dur-base); z-index: 10; max-width: 375px;
         }
         .radar-tip .tip-title, .heat-tip .tip-title { font-weight: bold; color: var(--accent-soft); margin-bottom: 4px; }
         .legend h4 { color: var(--accent-3); margin-bottom: 10px; font-size: 1em; }
