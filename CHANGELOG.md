@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W492），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W493），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.92（2026-08-22）：W493 Phase E6 验收收口 — 三门禁转正 + M1-M7 全达标（Phase E 主线收官）
+
+> **来源**：W492 E5 后用户 2026-08-22 指令 W493 按推荐执行 = E6（验收收口 + 三门禁转正）。
+> - **执行（三门禁转正挂 verify_delivery）**：① scripts/check_token_coverage.py 新建（M2/M3：私有 <style> 块 UI 裸色——无豁免注释页必须 0、带 e-track-exempt 注释页 ≤ 登记 N；真裸 box-shadow 必须 0；INLINED 副本跳过）；② scripts/check_motion_ban.py 新建（D4：cubic-bezier 负值/360° 旋转/infinite/parallax，白名单 chart-loading/chart-fade-in）；③ a11y_audit.py 挂载（M1：E2-2 P0+P1=0 阻断）。三门禁**负样本自测**各构造 1 坏文件确认能抓（token 抓到 ui=2+sh=1 / motion 抓到 2 处 / a11y 标 P1）后删除。
+> - **执行（门禁前置修复）**：私有块 UI 裸色三轮回补映射 1193→246 处（paper-warm/dark-text/accent-soft/dark/accent-2/3/ink-soft/line/elev 等 20+ 色值变体 + color-mix 保留 alpha）；93 页 e-track-exempt 豁免登记（N 精确对应）；263 处裸 box-shadow 按 blur 映射 elev-1~4（var(--shadow*) 令牌引用保留）；10 处历史 infinite 动画改一次性（criticism-history wordFloat/bladeCut/crackOpen + concept-device danmakuFly，CN+EN）；mobile-index 1 处真裸阴影特例修复。
+> - **验收（M1-M7 全达标）**：M1 a11y E2-2 全站 P0/P1=0；M2 私有块裸色 246 全豁免登记、无注释页 0；M3 真裸 box-shadow 0；M4 motion_ban 0 命中；M5 内联 28385B ≤33KB；M6 沿用 W464 baseline（无布局改动）；M7 各批 pageerror=0。verify_delivery 核心全绿（含新三门禁）。
+> - **范围纪律**：字体 unicode-range 切片/断点规范化/图表 ≤640px 降级 三项遗留显式记录（收口报告 §四），非遗漏。
+> - **文件**：scripts/check_token_coverage.py + check_motion_ban.py（新建入库）+ verify_delivery.py（+3 门禁）+ 93 页豁免登记/色值修复 + 4 页 infinite 修复 + docs/superpowers/plans/2026-08-22-phase-e-e6-closure-report.md（新）+ Phase E 路线图回写 + 六文档。
+> - **验证**：负样本 3/3 + verify_delivery 核心全绿（含新门禁）。
+> - **状态**：本次提交（W493）将推送 origin/main。
 
 ### v2.3.91（2026-08-22）：W492 Phase E5 响应式+微交互 — 导航抽屉 + 图标收尾（字体切片/断点/图表降级推迟）
 

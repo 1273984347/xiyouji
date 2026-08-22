@@ -22,7 +22,8 @@
     <title>详解西游记 · 移动版</title>
     <noscript><p style="color:#c8463a;padding:12px;">本页面需 JavaScript 才能完整交互。</p></noscript>
     <style>
-        :root {
+        /* e-track-exempt: chart-data-colors 4 处 */
+:root {
             --bg: #faf7f2;
             --paper: #ffffff;
             --ink: #23201A;
@@ -54,8 +55,8 @@
 
         /* ===== Hero ===== */
         .hero {
-            background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
-            color: #f5e9d4;
+            background: linear-gradient(135deg, var(--dark) 0%, #3a2820 50%, #5a3828 100%);
+            color: var(--dark-text);
             padding: calc(28px + var(--safe-top)) 18px 22px;
             text-align: center;
             position: relative;
@@ -78,14 +79,14 @@
         }
         .hero .subtitle {
             font-size: 13px;
-            color: #d9cdb8;
+            color: var(--line);
             opacity: 0.92;
             margin-bottom: 10px;
         }
         .hero .version-badge {
             display: inline-block;
             background: rgba(200,70,58,0.85);
-            color: #fff;
+            color: var(--paper);
             font-size: 11px;
             font-weight: 600;
             padding: 4px 10px;
@@ -98,7 +99,7 @@
             margin: -14px 14px 14px;
             background: var(--paper);
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(60,40,20,0.10);
+            box-shadow: var(--elev-2);
             padding: 10px 14px;
             display: flex;
             align-items: center;
@@ -120,7 +121,7 @@
         .search-bar input:focus { outline: none; }
         .search-bar .search-btn {
             background: var(--accent);
-            color: #fff;
+            color: var(--paper);
             border: none;
             border-radius: 8px;
             padding: 8px 14px;
@@ -251,7 +252,7 @@
             min-height: 56px;
         }
         .direction-card:active {
-            background: #f5e9d4;
+            background: var(--dark-text);
         }
         .direction-card .dir-info {
             flex: 1;
@@ -279,7 +280,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(26,20,16,0.96);
+            background: var(--dark);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             padding: 8px 12px calc(8px + var(--safe-bottom));
@@ -287,10 +288,10 @@
             justify-content: space-around;
             align-items: center;
             z-index: 100;
-            box-shadow: 0 -2px 12px rgba(0,0,0,0.15);
+            box-shadow: var(--elev-3);
         }
         .bottom-bar a {
-            color: #d9cdb8;
+            color: var(--line);
             font-size: 11px;
             display: flex;
             flex-direction: column;
@@ -304,7 +305,7 @@
         }
         .bottom-bar a:active {
             background: rgba(200,70,58,0.25);
-            color: #f5e9d4;
+            color: var(--dark-text);
         }
         .bottom-bar a .b-icon {
             font-size: 16px;
@@ -313,8 +314,8 @@
 
         /* ===== Footer ===== */
         footer {
-            background: #1a1410;
-            color: #d9cdb8;
+            background: var(--dark);
+            color: var(--line);
             padding: 18px 14px 14px;
             font-size: 11px;
             line-height: 1.6;
@@ -339,14 +340,14 @@
             width: 44px;
             height: 44px;
             background: var(--accent);
-            color: #fff;
+            color: var(--paper);
             border-radius: 50%;
             display: none;
             align-items: center;
             justify-content: center;
             font-size: 20px;
             font-weight: 700;
-            box-shadow: 0 4px 12px rgba(200,70,58,0.35);
+            box-shadow: var(--elev-3);
             z-index: 99;
             cursor: pointer;
             border: none;
@@ -375,18 +376,18 @@
         
         html[data-theme="dark"] body { background: var(--bg); }
         html[data-theme="dark"] .hero { background: linear-gradient(135deg, #14100C 0%, #2A2318 50%, #3A2C1E 100%); }
-        html[data-theme="dark"] .search-bar { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45); }
+        html[data-theme="dark"] .search-bar { box-shadow: var(--elev-2); }
         .theme-toggle {
             position: absolute; top: calc(16px + var(--safe-top)); right: 14px;
             display: inline-flex; align-items: center; justify-content: center;
             width: 36px; height: 36px;
-            border: 1px solid rgba(245, 233, 212, 0.30); border-radius: 999px;
-            background: rgba(0, 0, 0, 0.18); color: #f5e9d4; cursor: pointer; z-index: 5;
+            border: 1px solid color-mix(in srgb, var(--dark-text) 30%, transparent); border-radius: 999px;
+            background: rgba(0, 0, 0, 0.18); color: var(--dark-text); cursor: pointer; z-index: 5;
             transition: border-color var(--dur-fast) var(--ease-out-quart),
                         color var(--dur-fast) var(--ease-out-quart),
                         transform var(--dur-fast) var(--ease-out-quart);
         }
-        .theme-toggle:hover { border-color: #f5e9d4; }
+        .theme-toggle:hover { border-color: var(--dark-text); }
         .theme-toggle:active { transform: scale(0.94); }
         .theme-toggle .icon-moon { display: block; }
         .theme-toggle .icon-sun { display: none; }
