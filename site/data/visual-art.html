@@ -950,6 +950,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 9 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .breadcrumb .sep { margin: 0 6px; color: var(--line); }
         
@@ -979,9 +980,9 @@ td.num, th.num {
         
         
         .notice {
-            background: #fff8ec;
+            background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 10px 14px;
             font-size: 0.82rem;
             color: var(--accent-3);
@@ -989,9 +990,9 @@ td.num, th.num {
         }
         /* 项目介绍卡 */
         .project-intro {
-            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border: 1px solid var(--accent-soft);
-            border-radius: 8px;
+            border-radius: var(--radius-md)
             padding: 22px 26px;
             margin-bottom: 20px;
         }
@@ -1033,8 +1034,8 @@ td.num, th.num {
         /* 艺术宣言引用块 */
         .artistic-statement {
             background: linear-gradient(135deg, #1a1410 0%, #3a2820 100%);
-            color: #f5e9d4;
-            border-radius: 8px;
+            color: var(--paper-warm);
+            border-radius: var(--radius-md)
             padding: 24px 28px;
             margin: 18px 0;
             border-left: 4px solid var(--gold);
@@ -1065,7 +1066,7 @@ td.num, th.num {
             line-height: 1.8;
             font-style: italic;
             padding-left: 36px;
-            color: #f5e9d4;
+            color: var(--paper-warm);
         }
         /* 设计规格表 */
         .spec-grid {
@@ -1078,7 +1079,7 @@ td.num, th.num {
             background: var(--bg);
             border: 1px solid var(--line);
             border-left: 3px solid var(--gold);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 10px 14px;
         }
         .spec-item .k {
@@ -1099,7 +1100,7 @@ td.num, th.num {
             height: 480px;
             display: block;
             background: linear-gradient(180deg, #1a1410 0%, #2a1f18 100%);
-            border-radius: 8px;
+            border-radius: var(--radius-md)
             margin: 14px 0;
         }
         .wave-tip {
@@ -1108,13 +1109,13 @@ td.num, th.num {
             background: rgba(255, 248, 236, 0.97);
             color: var(--ink);
             border: 1px solid var(--gold);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 10px 14px;
             font-size: 0.82rem;
             max-width: 260px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: var(--elev-3);
             opacity: 0;
-            transition: opacity 0.15s;
+            transition: opacity var(--dur-fast);
             z-index: 10;
         }
         .wave-tip .tip-title {
@@ -1154,9 +1155,9 @@ td.num, th.num {
         .chant-card {
             background: var(--paper);
             border: 1px solid var(--line);
-            border-radius: 8px;
+            border-radius: var(--radius-md)
             padding: 14px;
-            transition: transform 0.15s, box-shadow 0.15s;
+            transition: transform var(--dur-fast), box-shadow var(--dur-fast);
             border-top: 3px solid var(--accent-2);
             position: relative;
             overflow: hidden;
@@ -1208,7 +1209,7 @@ td.num, th.num {
         .chant-card .ch-amp-bar {
             display: inline-block;
             height: 6px;
-            border-radius: 3px;
+            border-radius: var(--radius-sm)
             vertical-align: middle;
         }
         .chant-card .ch-emotion {
@@ -1233,9 +1234,9 @@ td.num, th.num {
         .scent-card {
             background: var(--paper);
             border: 1px solid var(--line);
-            border-radius: 8px;
+            border-radius: var(--radius-md)
             padding: 14px;
-            transition: transform 0.15s, box-shadow 0.15s;
+            transition: transform var(--dur-fast), box-shadow var(--dur-fast);
             border-left: 4px solid var(--accent);
             position: relative;
         }
@@ -1261,8 +1262,8 @@ td.num, th.num {
         .scent-card .sc-cat {
             font-size: 0.66rem;
             padding: 2px 7px;
-            border-radius: 8px;
-            color: #fff;
+            border-radius: var(--radius-md)
+            color: var(--paper);
             white-space: nowrap;
             font-weight: 500;
             letter-spacing: 0.05em;
@@ -1288,8 +1289,8 @@ td.num, th.num {
             font-weight: 500;
             margin-bottom: 8px;
             line-height: 1.5;
-            background: #fff8ec;
-            border-radius: 4px;
+            background: var(--paper-warm);
+            border-radius: var(--radius-md)
             padding: 6px 8px;
         }
         .scent-card .sc-notes {
@@ -1303,7 +1304,7 @@ td.num, th.num {
             padding: 2px 7px;
             background: var(--bg);
             border: 1px solid var(--line);
-            border-radius: 8px;
+            border-radius: var(--radius-md)
             color: var(--ink-soft);
         }
         .scent-card .sc-intensity {
@@ -1337,7 +1338,7 @@ td.num, th.num {
             gap: 3px;
             font-size: 0.72rem;
             background: var(--bg);
-            border-radius: 4px;
+            border-radius: var(--radius-md)
             padding: 6px 8px;
             border: 1px dashed var(--line);
         }
@@ -1368,13 +1369,13 @@ td.num, th.num {
             align-items: center;
             gap: 6px;
             padding: 4px 12px;
-            border-radius: 14px;
+            border-radius: 14px
             background: var(--bg);
             border: 1px solid var(--line);
             color: var(--ink-soft);
         }
         .category-row .cat-pill .dot {
-            width: 10px; height: 10px; border-radius: 50%;
+            width: 10px; height: 10px; border-radius: 50%
             display: inline-block;
         }
         .category-row .cat-pill.immortal .dot { background: var(--accent-4); }
@@ -1385,22 +1386,22 @@ td.num, th.num {
             width: 100%;
             height: 280px;
             display: block;
-            background: linear-gradient(180deg, #faf7f2 0%, #fff8ec 100%);
-            border-radius: 8px;
+            background: linear-gradient(180deg, #faf7f2 0%, var(--paper-warm) 100%);
+            border-radius: var(--radius-md)
             margin-top: 14px;
         }
         .scent-tip {
             position: absolute;
             pointer-events: none;
             background: rgba(26, 20, 16, 0.95);
-            color: #f5e9d4;
-            border-radius: 6px;
+            color: var(--paper-warm);
+            border-radius: var(--radius-md)
             padding: 10px 14px;
             font-size: 0.82rem;
             max-width: 280px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: var(--elev-3);
             opacity: 0;
-            transition: opacity 0.15s;
+            transition: opacity var(--dur-fast);
             z-index: 10;
         }
         .scent-tip .tip-title { color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
@@ -1409,9 +1410,9 @@ td.num, th.num {
         .idea-card {
             background: var(--paper);
             border: 1px solid var(--line);
-            border-radius: 8px;
+            border-radius: var(--radius-md)
             padding: 14px;
-            transition: transform 0.15s, box-shadow 0.15s;
+            transition: transform var(--dur-fast), box-shadow var(--dur-fast);
             border-top: 3px solid var(--accent-3);
             position: relative;
         }
@@ -1440,7 +1441,7 @@ td.num, th.num {
             display: inline-block;
             font-size: 0.7rem;
             padding: 2px 8px;
-            border-radius: 8px;
+            border-radius: var(--radius-md)
             background: var(--accent-soft);
             color: var(--accent-3);
             margin-bottom: 8px;
@@ -1456,10 +1457,10 @@ td.num, th.num {
         .idea-card .id-innovation {
             font-size: 0.8rem;
             color: var(--accent);
-            background: #fff8ec;
+            background: var(--paper-warm);
             border-left: 2px solid var(--accent);
             padding: 6px 8px;
-            border-radius: 0 4px 4px 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0
             line-height: 1.55;
             font-style: italic;
         }
@@ -1472,10 +1473,10 @@ td.num, th.num {
         }
         /* 洞察栏 */
         .insight-box {
-            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
             padding: 20px 24px;
-            border-radius: 4px;
+            border-radius: var(--radius-md)
             margin-top: 8px;
         }
         .insight-box h4 {
@@ -1533,16 +1534,17 @@ td.num, th.num {
             gap: 6px;
         }
         .legend .lg-dot {
-            width: 12px; height: 12px; border-radius: 50%;
+            width: 12px; height: 12px; border-radius: 50%
             display: inline-block;
         }
         .legend .lg-line {
-            width: 22px; height: 3px; display: inline-block; border-radius: 2px;
+            width: 22px; height: 3px; display: inline-block; border-radius: var(--radius-sm)
         }
     
 /* W042 a11y: 全局键盘焦点可见性 */
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

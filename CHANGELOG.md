@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W489），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W490），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.89（2026-08-22）：W490 Phase E3 CN 可视化页传播 II — 30 页令牌化收尾（86 页传播 100%）
+
+> **来源**：W489 全站暗色完成后，用户 2026-08-22 指令 W490 按推荐执行 = E3（CN 传播 II 余 30 页），Phase E 传播批收官。
+> - **执行**：E3 派生 = 86 减 E2 批 56（`git diff 68168a6 --name-only` 精确，3D/Canvas 2 页 character-relationship-3d + journey-geo-3d、时间线/地图、静态/表格、text-search 等）；新建 _w490_migrate.py 复用六规则（R-SHADOW/R-RADIUS/R-TRANS/R-FOCUS/裸色白名单/R-EXEMPT）；3D 页深度令牌仅用于 UI 层（图例/按钮/tooltip），场景材质不动。
+> - **验收**：30 页 Playwright pageerror 全部 0；3D 专项 canvas.width>0 断言通过；check_structure 0 失衡 / check_js_syntax 0 错 / CSP 1185 哈希 0 漂移 / lint_links 4353 链接 0 broken / verify_delivery 核心全绿。
+> - **范围纪律**：D1 图表 8 色/顺序色不建（批内页无新系列色需求）；M2 严格清零（按钮白字/JS 内数据色等存量）移 E6 收口门禁转正时处理。
+> - **文件**：site/data/ 30 页 + scripts/_w490_migrate.py（一次性不入库）+ docs/superpowers/plans/2026-08-22-phase-e-e3-batch-record.md（新）+ Phase E 路线图回写 + 六文档。
+> - **验证**：五门禁全绿（见上）。
+> - **状态**：本次提交（W490）将推送 origin/main。
 
 ### v2.3.88（2026-08-22）：W489 全站暗色模式 — dark 令牌全局化 + 225 页传播 + 共享 theme-init
 

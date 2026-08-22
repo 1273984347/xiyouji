@@ -952,12 +952,13 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 3 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         #three-container {
             width: 100%;
             height: 620px;
             background: radial-gradient(circle at center, #2c3e50 0%, #1a2530 100%);
-            border-radius: 3px;
+            border-radius: var(--radius-sm)
             position: relative;
             overflow: hidden;
             cursor: grab;
@@ -997,12 +998,12 @@ td.num, th.num {
             justify-content: center;
         }
         .legend-item { display: flex; align-items: center; gap: 6px; }
-        .legend-swatch { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+        .legend-swatch { width: 14px; height: 14px; border-radius: 50% display: inline-block; }
         .node-info {
             background: var(--paper-warm);
             border: 1px solid var(--line);
             border-left: 4px solid var(--accent);
-            border-radius: 3px;
+            border-radius: var(--radius-sm)
             padding: 18px 22px;
             margin-top: 16px;
             line-height: 1.9;
@@ -1021,7 +1022,7 @@ td.num, th.num {
             font-weight: 500;
             letter-spacing: 0.04em;
             padding: 2px 8px;
-            border-radius: 2px;
+            border-radius: var(--radius-sm)
             border: 1px solid;
             margin-right: 8px;
         }

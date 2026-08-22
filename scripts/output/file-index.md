@@ -10,6 +10,15 @@
 
 ---
 
+## W490 Phase E3 CN 可视化页传播 II（2026-08-22·v2.3.89）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/*.html（30 页）| W490 | v2.3.89 修改·E3 令牌化（86−E2 56 余量）：R-SHADOW/R-RADIUS/R-TRANS/裸色白名单/R-EXEMPT 六规则；3D 2 页仅 UI 层 |
+| docs/superpowers/plans/2026-08-22-phase-e-e3-batch-record.md | W490 | v2.3.89 新增·E3 批次记录（30 页迁移清单表） |
+| docs/superpowers/plans/2026-08-18-phase-e-visual-elevation-roadmap.md | W490 | v2.3.89 修改·E3 段 ✅ 回写 + §10 表格 + 基线行 |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W490 | v2.3.89 修改·六文档同步 |
+
 ## W489 全站暗色模式（2026-08-22·v2.3.88）
 
 | 文件 | W | 说明 |
