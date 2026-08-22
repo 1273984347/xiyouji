@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="tokens.css">
     <link rel="stylesheet" href="system.css">
     <style>
-        :root {
+        /* e-track-exempt: chart-data-colors 7 处 */
+:root {
             /* badge tokens（保留原有分类徽章语义，色值取自新令牌） */
             --badge-a-l-bg: rgba(107, 142, 90, 0.12);
             --badge-a-l-border: rgba(107, 142, 90, 0.25);
@@ -70,7 +71,7 @@
         .seal {
             width: 44px; height: 44px; background: var(--accent); border-radius: 3px;
             display: flex; align-items: center; justify-content: center;
-            color: #fff; font-family: var(--font-serif); font-weight: 700;
+            color: var(--paper); font-family: var(--font-serif); font-weight: 700;
             font-size: 14px; line-height: 1.15; text-align: center; flex-shrink: 0;
         }
         .wordmark { font-family: var(--font-serif); font-weight: 600; font-size: 20px; color: var(--ink); }
@@ -350,7 +351,7 @@
         .search-results {
             position: absolute; top: calc(100% + 6px); left: 0; right: 0;
             background: var(--paper); border: 1px solid var(--line); border-radius: 2px;
-            box-shadow: 0 8px 24px rgba(35, 32, 26, 0.12);
+            box-shadow: var(--elev-4);
             max-height: 380px; overflow-y: auto; z-index: 100; display: none;
         }
         .search-results.visible { display: block; }

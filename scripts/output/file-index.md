@@ -10,6 +10,18 @@
 
 ---
 
+## W493 Phase E6 验收收口（2026-08-22·v2.3.92）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_token_coverage.py | W493 | v2.3.92 新增·M2/M3 门禁（私有块 UI 裸色=0/豁免≤N + 真裸 box-shadow=0） |
+| scripts/check_motion_ban.py | W493 | v2.3.92 新增·D4 动效禁止清单门禁 |
+| scripts/verify_delivery.py | W493 | v2.3.92 修改·挂载 token/动效/a11y 三门禁 |
+| site/*.html 93 页（data/en/根） | W493 | v2.3.92 修改·e-track-exempt 豁免登记（新增 6+更新 84）+ 色值/阴影映射修复 |
+| site/data/criticism-history.html + en 同名 + concept-device ×2 | W493 | v2.3.92 修改·10 处 infinite 动画改一次性 |
+| docs/superpowers/plans/2026-08-22-phase-e-e6-closure-report.md | W493 | v2.3.92 新增·Phase E 收口报告（M1-M7 + 遗留项） |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W493 | v2.3.92 修改·六文档同步 |
+
 ## W492 Phase E5 响应式+微交互（2026-08-22·v2.3.91）
 
 | 文件 | W | 说明 |

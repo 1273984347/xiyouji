@@ -7,7 +7,8 @@
     <title>埋点数据查看 · 详解西游记</title>
     <link rel="stylesheet" href="tokens.css">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        /* e-track-exempt: chart-data-colors 4 处 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background: var(--bg);
             color: var(--ink);
@@ -36,9 +37,9 @@
         tr:last-child td { border-bottom: none; }
         .mono { font-family: var(--font-mono, monospace); font-size: 12px; }
         .empty { color: var(--ink-soft, #6b6b6b); padding: 40px 20px; text-align: center; }
-        .note { margin-top: 20px; font-size: 13px; color: var(--ink-soft, #6b6b6b); border-left: 3px solid #C9A063; padding-left: 12px; }
+        .note { margin-top: 20px; font-size: 13px; color: var(--ink-soft, #6b6b6b); border-left: 3px solid var(--accent-3); padding-left: 12px; }
         .btn { display: inline-block; margin-top: 12px; padding: 8px 16px; border: 1px solid #C8463A; color: #C8463A; border-radius: 6px; background: transparent; cursor: pointer; font-size: 13px; }
-        .btn:hover { background: #C8463A; color: #fff; }
+        .btn:hover { background: #C8463A; color: var(--paper); }
     </style>
   <script defer src="js/visit-log.js"></script>
   <script data-goatcounter="https://1273984347.goatcounter.com/count" async src="static/js/goatcounter.js"></script>

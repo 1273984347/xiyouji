@@ -31,7 +31,8 @@
     <!-- 公共设计令牌：配色 / 字体 / 图表色板（W334 集中化） -->
     <link rel="stylesheet" href="tokens.css">
     <style>
-        /* ===== 页面专属样式：仅写本页特有部分，公共变量见 tokens.css ===== */
+        /* e-track-exempt: chart-data-colors 1 处 */
+/* ===== 页面专属样式：仅写本页特有部分，公共变量见 tokens.css ===== */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background: var(--bg);
@@ -68,7 +69,7 @@
         }
         .hero .subtitle {
             font-size: 0.85rem;
-            color: #C9A063;
+            color: var(--accent-3);
             letter-spacing: 0.18em;
             position: relative;
             z-index: 1;

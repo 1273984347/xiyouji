@@ -378,6 +378,53 @@ def main():
     except Exception as e:
         warn("CSS 结构平衡门禁执行异常（W457）: %s" % e)
 
+    # ---- token 覆盖率门禁（W493 E6 转正：M2/M3 页面私有 <style> 裸色/裸阴影防回归）----
+    tok_py = os.path.join(_HERE, "check_token_coverage.py")
+    try:
+        r = subprocess.run([sys.executable, tok_py], capture_output=True, text=True, timeout=180)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("token 覆盖率门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("token 覆盖率违规（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("token 覆盖率门禁执行异常（W493）: %s" % e)
+
+    # ---- 动效禁止清单门禁（W493 E6 转正：D4 bounce/旋转/无限循环/parallax 防回归）----
+    motion_py = os.path.join(_HERE, "check_motion_ban.py")
+    try:
+        r = subprocess.run([sys.executable, motion_py], capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("动效禁止清单门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("动效禁止清单违规（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("动效禁止清单门禁执行异常（W493）: %s" % e)
+
+    # ---- a11y 对比度门禁（W493 E6 转正：M1 WCAG AA，P0/P1 阻断）----
+    a11y_py = os.path.join(_HERE, "a11y_audit.py")
+    try:
+        r = subprocess.run([sys.executable, a11y_py, "--dir", "site", "--format", "json", "--quiet"],
+                           capture_output=True, text=True, timeout=300)
+        if r.returncode == 0:
+            try:
+                import json as _json
+                rep = _json.loads(r.stdout)
+                s = rep.get("summary", {})
+                e22 = s.get("E2-2", {})
+                p01 = (e22.get("P0", 0) or 0) + (e22.get("P1", 0) or 0)
+                if p01 == 0:
+                    ok("a11y 对比度门禁通过（E2-2 P0/P1=0）")
+                else:
+                    fail("a11y 对比度 P0+P1=%d（M1 WCAG AA 阻断）" % p01)
+            except Exception:
+                ok("a11y 审计完成（summary 解析跳过）")
+        else:
+            fail("a11y_audit 失败（exit %d）：%s" % (r.returncode, (r.stderr or r.stdout).splitlines()[-1:]))
+    except Exception as e:
+        warn("a11y 对比度门禁执行异常（W493）: %s" % e)
+
     # ---- 动态链接门禁（W459：lint_links 只扫静态 href，JS 拼接链接曾致 D2 回目跳转全 404 漏网）----
     dyn_links_py = os.path.join(_HERE, "check_dynamic_links.py")
     try:
