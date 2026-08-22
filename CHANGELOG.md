@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W490），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W491），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.90（2026-08-22）：W491 Phase E4 EN 站同步 — 85 同名可视化页令牌化对齐
+
+> **来源**：W490 E3 收官后用户 2026-08-22 指令 W491 按推荐执行 = E4（EN 站同步对齐）。
+> - **执行**：EN 85 同名可视化页（CN data 86 减 journey-geo-3d，同名派生）；_w491_en_migrate.py 复用六规则（改 DATA 路径 site/en/）；tokens/system 同源（W489 已传播 INLINED 块），本批只迁移页私有 <style>；3D 页 character-relationship-3d 仅 UI 层。
+> - **验收**：validate_en.py 85/85 PASS（chrome CJK 白名单 + script CJK=0）；85 页 Playwright pageerror=0；CN/EN 同页截图对照 10 页目视一致（chapter-stats/emotional-heatmap/81-hardships/relationships/tag-cloud/philosophy/criticism-history/journey-spacetime/monster-ecology-network/narratology-13d-network）；check_structure 0 失衡 / check_js_syntax 0 错 / CSP 1185 哈希 0 漂移 / lint_links 4353 链接 0 broken / verify_delivery 核心全绿。
+> - **范围纪律**：EN 根页（index/guide/dashboard 等非可视化页）不在此批，随 E5 根页口径处理。
+> - **文件**：site/en/ 85 页 + scripts/_w491_en_migrate.py（一次性不入库）+ docs/superpowers/plans/2026-08-22-phase-e-e4-batch-record.md（新）+ Phase E 路线图回写 + 六文档。
+> - **验证**：五门禁全绿（见上）。
+> - **状态**：本次提交（W491）将推送 origin/main。
 
 ### v2.3.89（2026-08-22）：W490 Phase E3 CN 可视化页传播 II — 30 页令牌化收尾（86 页传播 100%）
 

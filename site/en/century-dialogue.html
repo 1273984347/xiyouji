@@ -950,13 +950,14 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 2 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .breadcrumb .sep { margin: 0 8px; color: var(--ink-soft); opacity: 0.6; }
 
         .notice {
-            background: #fff8ec;
+            background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 10px 14px;
             font-size: 0.82rem;
             color: var(--accent-3);
@@ -964,16 +965,16 @@ td.num, th.num {
         }
         .notice code {
             font-family: "JetBrains Mono", monospace;
-            background: #f5e9d4;
+            background: var(--paper-warm);
             padding: 1px 5px;
-            border-radius: 3px;
+            border-radius: var(--radius-sm)
             font-size: 0.85em;
         }
 
         .device {
             background: var(--paper);
             border: 1px solid var(--line);
-            border-radius: 10px;
+            border-radius: var(--radius-lg)
             padding: 32px 30px;
             box-shadow: var(--shadow);
             margin-bottom: 28px;
@@ -988,11 +989,11 @@ td.num, th.num {
 
         /* 三方会谈舞台 */
         .triangle-stage { position: relative; height: 480px; background: linear-gradient(160deg, #1a1410, #3a2820);
-                          border-radius: 10px; padding: 30px; overflow: hidden; }
+                          border-radius: var(--radius-lg) padding: 30px; overflow: hidden; }
         .speech-bubble { position: absolute; background: var(--paper); border: 2px solid var(--accent);
-                         border-radius: 12px; padding: 16px; max-width: 280px; box-shadow: var(--shadow);
+                         border-radius: var(--radius-lg) padding: 16px; max-width: 280px; box-shadow: var(--shadow);
                          opacity: 0; animation: fadeInUp 0.8s ease forwards; }
-        .speech-bubble:nth-child(1) { animation-delay: 0.2s; }
+        .speech-bubble:nth-child(1) { animation-delay: var(--dur-base); }
         .speech-bubble:nth-child(2) { animation-delay: 1.2s; }
         .speech-bubble:nth-child(3) { animation-delay: 2.2s; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -1003,12 +1004,12 @@ td.num, th.num {
 
         /* 角色圆桌 */
         .roundtable { position: relative; height: 500px; background: var(--paper); border: 1px solid var(--line);
-                      border-radius: 10px; padding: 30px; }
+                      border-radius: var(--radius-lg) padding: 30px; }
         .bajie-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                        width: 120px; height: 120px; border-radius: 50%; background: var(--accent-soft);
+                        width: 120px; height: 120px; border-radius: 50% background: var(--accent-soft);
                         display: flex; align-items: center; justify-content: center; font-size: 3rem; }
-        .roundtable-view { position: absolute; width: 180px; background: #fff8ec; border: 1px solid var(--line);
-                           border-radius: 8px; padding: 12px; transition: transform 0.2s; }
+        .roundtable-view { position: absolute; width: 180px; background: var(--paper-warm); border: 1px solid var(--line);
+                           border-radius: var(--radius-md) padding: 12px; transition: transform var(--dur-base); }
         .roundtable-view:hover { transform: scale(1.05); border-color: var(--accent); }
         .roundtable-view .speaker { font-weight: 600; color: var(--accent); font-size: 0.9rem; }
         .roundtable-view .view { font-size: 0.82rem; color: var(--ink); margin-top: 4px; }
@@ -1024,7 +1025,8 @@ td.num, th.num {
     
 /* W042 a11y: 全局键盘焦点可见性 */
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

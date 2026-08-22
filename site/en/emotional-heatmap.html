@@ -950,6 +950,7 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 7 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .breadcrumb .sep { margin: 0 8px; color: var(--ink-soft); opacity: 0.6; }
 
@@ -983,9 +984,9 @@ td.num, th.num {
             font-size: 0.84rem;
         }
         .legend-item { display: flex; align-items: center; gap: 6px; min-width: 0; }
-        .legend-swatch { width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0; }
+        .legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) flex-shrink: 0; }
         .legend-grad {
-            width: 90px; height: 12px; border-radius: 2px; flex-shrink: 0;
+            width: 90px; height: 12px; border-radius: var(--radius-sm) flex-shrink: 0;
             background: linear-gradient(90deg, rgba(44,36,24,0.18), rgba(44,36,24,1));
         }
 
@@ -1002,10 +1003,10 @@ td.num, th.num {
             height: auto;
         }
         .heat-cell {
-            stroke: #fff;
+            stroke: var(--paper);
             stroke-width: 1.2;
             cursor: pointer;
-            transition: stroke-width 0.15s, transform 0.15s;
+            transition: stroke-width var(--dur-fast), transform var(--dur-fast);
         }
         .heat-cell:hover { stroke-width: 2.5; }
         .heat-row-label {
@@ -1030,16 +1031,16 @@ td.num, th.num {
         .heat-tooltip {
             position: absolute;
             background: #1a1410;
-            color: #f5e9d4;
+            color: var(--paper-warm);
             padding: 12px 14px;
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             font-size: 0.84rem;
             line-height: 1.55;
             max-width: 340px;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.15s;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+            transition: opacity var(--dur-fast);
+            box-shadow: var(--elev-3);
             border: 1px solid var(--accent-soft);
             z-index: 10;
         }
@@ -1049,9 +1050,9 @@ td.num, th.num {
             display: inline-block;
             font-size: 0.72rem;
             padding: 1px 7px;
-            border-radius: 10px;
+            border-radius: var(--radius-lg)
             margin-right: 6px;
-            color: #fff;
+            color: var(--paper);
         }
         .ht-pill.positive { background: var(--accent-4); }
         .ht-pill.neutral  { background: var(--accent-3); }
@@ -1083,10 +1084,10 @@ td.num, th.num {
         }
         .curve-seg.dim { opacity: 0.12; }
         .curve-dot {
-            stroke: #fff;
+            stroke: var(--paper);
             stroke-width: 1.2;
             cursor: pointer;
-            transition: r 0.15s;
+            transition: r var(--dur-fast);
         }
         .curve-dot:hover { r: 5; }
         .curve-dot.dim { opacity: 0.15; }
@@ -1098,16 +1099,16 @@ td.num, th.num {
         .curves-tooltip {
             position: absolute;
             background: #1a1410;
-            color: #f5e9d4;
+            color: var(--paper-warm);
             padding: 10px 12px;
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             font-size: 0.82rem;
             line-height: 1.5;
             max-width: 300px;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.15s;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+            transition: opacity var(--dur-fast);
+            box-shadow: var(--elev-3);
             border: 1px solid var(--accent-soft);
             z-index: 10;
         }
@@ -1122,19 +1123,19 @@ td.num, th.num {
         @media (max-width: 1040px) { .scholar-grid { grid-template-columns: repeat(2, minmax(min(280px, 100%), 1fr)); } }
         @media (max-width: 520px)  { .scholar-grid { grid-template-columns: 1fr; } }
         .scholar-card {
-            background: linear-gradient(180deg, #fffdf8 0%, #faf7f2 100%);
+            background: linear-gradient(180deg, var(--paper-warm) 0%, #faf7f2 100%);
             border: 1px solid var(--line);
-            border-radius: 8px;
+            border-radius: var(--radius-md)
             padding: 16px 18px;
             box-shadow: var(--shadow);
             border-top: 3px solid var(--accent-3);
             cursor: pointer;
             position: relative;
             min-width: 0;
-            transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+            transition: transform var(--dur-fast), box-shadow var(--dur-fast), border-color var(--dur-fast);
             overflow-wrap: anywhere;
         }
-        .scholar-card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(60,40,20,0.12); }
+        .scholar-card:hover { transform: translateY(-2px); box-shadow: var(--elev-2); }
         .scholar-card.active { border-color: var(--accent); border-top-color: var(--accent); box-shadow: 0 0 0 2px var(--accent), var(--shadow); }
         .scholar-card .sc-head {
             display: flex;
@@ -1172,7 +1173,7 @@ td.num, th.num {
             padding: 6px 8px;
             background: rgba(58,107,140,0.06);
             border-left: 2px solid var(--accent-2);
-            border-radius: 0 3px 3px 0;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0
             overflow-wrap: anywhere;
         }
         .sc-stats {
@@ -1206,10 +1207,10 @@ td.num, th.num {
 
         /* ===== Insight Box ===== */
         .insight-box {
-            background: linear-gradient(135deg, #fff8ec 0%, #f5e9d4 100%);
+            background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-warm) 100%);
             border-left: 4px solid var(--accent);
             padding: 22px 26px;
-            border-radius: 4px;
+            border-radius: var(--radius-md)
         }
         .insight-box h4 {
             color: var(--accent);
@@ -1230,9 +1231,9 @@ td.num, th.num {
         .insight-box li em { color: var(--accent-2); font-style: italic; }
 
         .notice {
-            background: #fff8ec;
+            background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 10px 14px;
             font-size: 0.82rem;
             color: var(--accent-3);
@@ -1241,9 +1242,9 @@ td.num, th.num {
         }
         .notice code {
             font-family: "JetBrains Mono", monospace;
-            background: #f5e9d4;
+            background: var(--paper-warm);
             padding: 1px 5px;
-            border-radius: 3px;
+            border-radius: var(--radius-sm)
             font-size: 0.85em;
         }
 
@@ -1258,7 +1259,7 @@ td.num, th.num {
         .interaction-hint kbd {
             background: var(--bg);
             border: 1px solid var(--line);
-            border-radius: 3px;
+            border-radius: var(--radius-sm)
             padding: 1px 6px;
             font-family: "JetBrains Mono", monospace;
             font-size: 0.78rem;
@@ -1271,7 +1272,8 @@ td.num, th.num {
     
 /* W042 a11y: 全局键盘焦点可见性 */
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

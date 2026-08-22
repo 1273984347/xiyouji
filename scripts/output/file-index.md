@@ -10,6 +10,15 @@
 
 ---
 
+## W491 Phase E4 EN 站同步（2026-08-22·v2.3.90）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/en/*.html（85 页）| W491 | v2.3.90 修改·EN 同名可视化页六规则令牌化（CN 86 减 journey-geo-3d） |
+| docs/superpowers/plans/2026-08-22-phase-e-e4-batch-record.md | W491 | v2.3.90 新增·E4 批次记录（85 页迁移清单表） |
+| docs/superpowers/plans/2026-08-18-phase-e-visual-elevation-roadmap.md | W491 | v2.3.90 修改·E4 段 ✅ 回写 |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W491 | v2.3.90 修改·六文档同步 |
+
 ## W490 Phase E3 CN 可视化页传播 II（2026-08-22·v2.3.89）
 
 | 文件 | W | 说明 |

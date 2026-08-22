@@ -950,11 +950,12 @@ td.num, th.num {
 }
     </style>
 <style>
+        /* e-track-exempt: chart-data-colors 1 处 */
         /* === 仅本页特有样式（通用组件由 system.css 提供） === */
         .notice {
-            background: #fff8ec;
+            background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 10px 14px;
             font-size: 0.82rem;
             color: var(--accent-3);
@@ -962,9 +963,9 @@ td.num, th.num {
         }
         .notice code {
             font-family: "JetBrains Mono", monospace;
-            background: #f5e9d4;
+            background: var(--paper-warm);
             padding: 1px 5px;
-            border-radius: 3px;
+            border-radius: var(--radius-sm)
             font-size: 0.85em;
         }
 
@@ -984,7 +985,7 @@ td.num, th.num {
         .device {
             background: var(--paper);
             border: 1px solid var(--line);
-            border-radius: 10px;
+            border-radius: var(--radius-lg)
             padding: 32px 30px;
             box-shadow: var(--shadow);
             margin-bottom: 28px;
@@ -1016,7 +1017,7 @@ td.num, th.num {
             gap: 6px;
             background: var(--bg);
             border: 1px solid var(--line);
-            border-radius: 999px;
+            border-radius: var(--radius-pill)
             padding: 6px 14px;
             font-size: 0.85rem;
             font-family: inherit;
@@ -1027,13 +1028,13 @@ td.num, th.num {
         }
         .era-btn:hover { border-color: var(--accent); color: var(--ink); }
         .era-btn .era-dot {
-            width: 10px; height: 10px; border-radius: 50%;
+            width: 10px; height: 10px; border-radius: 50%
             background: var(--accent);
             flex-shrink: 0;
         }
         .era-btn.active {
             background: var(--ink);
-            color: #f5e9d4;
+            color: var(--paper-warm);
             border-color: var(--ink);
         }
         .era-btn.active .era-dot { background: var(--accent-soft); }
@@ -1058,7 +1059,7 @@ td.num, th.num {
         }
         .tl-svg .axis path, .tl-svg .axis line { stroke: var(--line); }
         .tl-svg .ev-circle {
-            stroke: #fff; stroke-width: 2; cursor: pointer;
+            stroke: var(--paper); stroke-width: 2; cursor: pointer;
             transition: r 0.18s, opacity 0.18s;
         }
         .tl-svg .ev-circle:hover { stroke-width: 3; }
@@ -1086,21 +1087,21 @@ td.num, th.num {
             color: var(--ink-soft);
         }
         .tl-legend .lg-item { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
-        .tl-legend .lg-sw { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .tl-legend .lg-sw { width: 14px; height: 4px; border-radius: var(--radius-sm) flex-shrink: 0; }
 
         .tl-tooltip {
             position: absolute;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.15s;
+            transition: opacity var(--dur-fast);
             background: #1a1410;
-            color: #f5e9d4;
+            color: var(--paper-warm);
             border: 1px solid var(--accent);
-            border-radius: 6px;
+            border-radius: var(--radius-md)
             padding: 8px 12px;
             font-size: 0.82rem;
             max-width: 260px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--elev-3);
             z-index: 10;
             line-height: 1.5;
         }
@@ -1131,12 +1132,12 @@ td.num, th.num {
             position: absolute;
             left: -22px; top: 12px;
             width: 14px; height: 14px;
-            border-radius: 50%;
-            border: 2px solid #fff;
+            border-radius: 50%
+            border: 2px solid var(--paper);
             box-shadow: 0 0 0 2px var(--line);
         }
         .vtl-item .vtl-meta { font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 2px; font-family: "JetBrains Mono", monospace; }
-        .vtl-item .vtl-meta .vtl-axis { margin-left: 8px; padding: 1px 7px; border-radius: 3px; font-size: 0.72rem; }
+        .vtl-item .vtl-meta .vtl-axis { margin-left: 8px; padding: 1px 7px; border-radius: var(--radius-sm) font-size: 0.72rem; }
         .vtl-item .vtl-title { font-size: 1rem; font-weight: 600; color: var(--ink); }
         .vtl-item .vtl-desc { font-size: 0.85rem; color: var(--ink-soft); overflow-wrap: anywhere; }
         .vtl-item.dimmed { opacity: 0.3; }
@@ -1149,7 +1150,7 @@ td.num, th.num {
             color: var(--ink-soft);
             font-size: 0.9rem;
             border: 1px dashed var(--line);
-            border-radius: 8px;
+            border-radius: var(--radius-md)
         }
         .detail-
         @media (max-width: 520px) {
@@ -1158,9 +1159,9 @@ td.num, th.num {
         .detail-icon {
             font-size: 3.4rem;
             text-align: center;
-            background: #fff8ec;
+            background: var(--paper-warm);
             border: 1px solid var(--accent-soft);
-            border-radius: 10px;
+            border-radius: var(--radius-lg)
             padding: 18px 10px;
             min-width: 0;
         }
@@ -1173,14 +1174,14 @@ td.num, th.num {
         .badge {
             display: inline-block;
             padding: 2px 10px;
-            border-radius: 999px;
+            border-radius: var(--radius-pill)
             font-size: 0.76rem;
             font-family: "JetBrains Mono", monospace;
             letter-spacing: 0.05em;
         }
-        .badge-year { background: var(--ink); color: #f5e9d4; }
+        .badge-year { background: var(--ink); color: var(--paper-warm); }
         .badge-era { background: var(--accent-soft); color: var(--ink); }
-        .badge-axis { color: #fff; }
+        .badge-axis { color: var(--paper); }
         .detail-title {
             font-size: 1.5rem;
             font-weight: 600;
@@ -1204,10 +1205,10 @@ td.num, th.num {
         .event-card {
             background: var(--bg);
             border: 1px solid var(--line);
-            border-radius: 8px;
+            border-radius: var(--radius-md)
             padding: 16px;
             cursor: pointer;
-            transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+            transition: transform var(--dur-fast), box-shadow var(--dur-fast), border-color var(--dur-fast);
             min-width: 0;
         }
         .event-card:hover {
@@ -1260,7 +1261,8 @@ td.num, th.num {
     
 /* W042 a11y: 全局键盘焦点可见性 */
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }

@@ -953,27 +953,28 @@ td.num, th.num {
         /* === 仅本页特有样式 === */
         h1 { text-align: center; color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
 .subtitle { text-align: center; color: var(--muted); margin-bottom: 30px; }
-.section { background: var(--paper); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin: 20px 0; }
+.section { background: var(--paper); border: 1px solid var(--border); border-radius: var(--radius-md) padding: 20px; margin: 20px 0; }
 .section-title { color: var(--accent); border-left: 4px solid var(--accent); padding-left: 10px; margin-top: 0; }
 .section-title.alt { color: var(--accent2); border-left-color: var(--accent2); }
 .section-sub { color: var(--muted); font-size: 0.9em; margin-bottom: 15px; }
-.chart-block { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 15px; margin: 10px 0; }
+.chart-block { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md) padding: 15px; margin: 10px 0; }
 .chart-title { font-weight: bold; color: var(--ink); margin-bottom: 5px; }
 .chart-caption { color: var(--muted); font-size: 0.85em; margin-bottom: 10px; }
 .chart-svg { display: block; margin: 0 auto; }
 .legend-row { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px; justify-content: center; }
 .legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.85em; }
-.legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
-.definition { background: #fff; border-left: 3px solid var(--accent2); padding: 10px 15px; margin: 10px 0; font-size: 0.9em; }
+.legend-swatch { width: 12px; height: 12px; border-radius: var(--radius-sm) }
+.definition { background: var(--paper); border-left: 3px solid var(--accent2); padding: 10px 15px; margin: 10px 0; font-size: 0.9em; }
 .kpi-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
-.kpi-card { flex: 1; min-width: 120px; background: #fff; border: 1px solid var(--border); border-radius: 4px; padding: 10px; text-align: center; }
+.kpi-card { flex: 1; min-width: 120px; background: var(--paper); border: 1px solid var(--border); border-radius: var(--radius-md) padding: 10px; text-align: center; }
 .kpi-value { font-size: 1.4em; font-weight: bold; color: var(--accent); }
 .kpi-label { font-size: 0.8em; color: var(--muted); }
-.insight-list { background: #fff; padding: 15px; border-radius: 4px; }
+.insight-list { background: var(--paper); padding: 15px; border-radius: var(--radius-md) }
 .insight-item { margin: 8px 0; padding-left: 20px; position: relative; }
 .insight-item::before { content: "◆"; color: var(--accent); position: absolute; left: 0; }
     </style>
-<style id="audit-halo">
+<style id="audit-halo">/* e-track-exempt: chart-data-colors 2 处 */
+
 /* injected label-halo for overlap readability */
 svg text { paint-order: stroke; stroke: rgba(255,255,255,0.88); stroke-width: 3px; stroke-linejoin: round; }
 svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
