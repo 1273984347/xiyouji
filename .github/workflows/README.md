@@ -19,7 +19,7 @@
 > **W421**：Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 恒全量 + batch_screenshots.js --only-pages + Playwright 浏览器缓存 + checkout fetch-depth 0）。
 > **W420**：A1 内容质量深化（深度解读 100/100 补全 + 56 回元数据补齐 + 99 回导航错链修复·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W419**：修复 A1 深度解读 SD 错位（22 篇 SD 编号≠真实回号归位·40-72 回全覆盖·源文件 24 篇元数据/H1/关联行修正·第 56 回补写 SD101·无 workflow 文件改动，CI 全量验证涵盖）。
-> **W450-W501**：verify 门禁体系扩展（W458 防回归 check_structure/check_js_syntax·W459 check_dynamic_links·W493 token 覆盖率/动效禁止/a11y 三门禁·W495 INLINED CSS·W498 skills 索引一致性·W500 索引健康 check_index_health·W501 元信息块 v2 check_frontmatter——均由 ci.yml verify-delivery job 跑 verify_delivery.py 自动涵盖，无 workflow 结构改动）+ W464 perf 基线确立（perf.yml 预算沿用 W424 校准值 LCP≤5000/CLS≤0.3/TBT≤300）。
+> **W450-W502**：verify 门禁体系扩展（W458 防回归 check_structure/check_js_syntax·W459 check_dynamic_links·W493 token 覆盖率/动效禁止/a11y 三门禁·W495 INLINED CSS·W498 skills 索引一致性·W500 索引健康 check_index_health·W501 元信息块 v2 check_frontmatter·W502 术语一致性 check_glossary——均由 ci.yml verify-delivery job 跑 verify_delivery.py 自动涵盖，无 workflow 结构改动）+ W464 perf 基线确立（perf.yml 预算沿用 W424 校准值 LCP≤5000/CLS≤0.3/TBT≤300）。
 
 ## 1. 工作流列表
 

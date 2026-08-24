@@ -497,6 +497,18 @@ def main():
     except Exception as e:
         warn("元信息块 v2 门禁执行异常（W501）: %s" % e)
 
+    # ---- 术语一致性门禁（W502：术语表↔glossary.json 双向同步 + 人物称谓规范词锚定·基线豁免 383 条）----
+    gl_py = os.path.join(_HERE, "check_glossary.py")
+    try:
+        r = subprocess.run([sys.executable, gl_py], capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("术语一致性门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("术语一致性异常（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("术语一致性门禁执行异常（W502）: %s" % e)
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:

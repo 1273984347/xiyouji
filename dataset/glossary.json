@@ -1,0 +1,250 @@
+{
+  "source": "docs/00-导读/术语表.md",
+  "note": "由 check_glossary.py --generate 解析，勿手改",
+  "groups": [
+    {
+      "name": "一、人物称谓",
+      "type": "variant",
+      "entries": [
+        {
+          "variants": [
+            "心猿"
+          ],
+          "canonical": "孙悟空"
+        },
+        {
+          "variants": [
+            "行者"
+          ],
+          "canonical": "孙悟空"
+        },
+        {
+          "variants": [
+            "金公"
+          ],
+          "canonical": "孙悟空"
+        },
+        {
+          "variants": [
+            "木母"
+          ],
+          "canonical": "猪八戒"
+        },
+        {
+          "variants": [
+            "黄婆"
+          ],
+          "canonical": "沙僧"
+        },
+        {
+          "variants": [
+            "意马"
+          ],
+          "canonical": "白龙马"
+        },
+        {
+          "variants": [
+            "唐僧",
+            "唐三藏"
+          ],
+          "canonical": "玄奘"
+        },
+        {
+          "variants": [
+            "圣僧"
+          ],
+          "canonical": "唐僧"
+        },
+        {
+          "variants": [
+            "弼马温"
+          ],
+          "canonical": "孙悟空"
+        },
+        {
+          "variants": [
+            "齐天大圣"
+          ],
+          "canonical": "孙悟空"
+        }
+      ]
+    },
+    {
+      "name": "二、佛教术语",
+      "type": "term",
+      "entries": [
+        {
+          "term": "八十一难"
+        },
+        {
+          "term": "五蕴"
+        },
+        {
+          "term": "心猿意马"
+        },
+        {
+          "term": "禅定"
+        },
+        {
+          "term": "涅槃"
+        },
+        {
+          "term": "因果"
+        },
+        {
+          "term": "轮回"
+        },
+        {
+          "term": "袈裟"
+        },
+        {
+          "term": "钵盂"
+        },
+        {
+          "term": "真经"
+        }
+      ]
+    },
+    {
+      "name": "三、道教术语",
+      "type": "term",
+      "entries": [
+        {
+          "term": "内丹"
+        },
+        {
+          "term": "金丹"
+        },
+        {
+          "term": "金公木母黄婆"
+        },
+        {
+          "term": "八卦炉"
+        },
+        {
+          "term": "炼丹"
+        },
+        {
+          "term": "天罡三十六变"
+        },
+        {
+          "term": "地煞七十二变"
+        },
+        {
+          "term": "火候"
+        },
+        {
+          "term": "金箍"
+        },
+        {
+          "term": "灵山"
+        }
+      ]
+    },
+    {
+      "name": "四、回目结构",
+      "type": "term",
+      "entries": [
+        {
+          "term": "回"
+        },
+        {
+          "term": "回目"
+        },
+        {
+          "term": "章回体"
+        },
+        {
+          "term": "上联 / 下联"
+        },
+        {
+          "term": "且听下回分解"
+        },
+        {
+          "term": "诗曰"
+        },
+        {
+          "term": "有诗为证"
+        },
+        {
+          "term": "话说"
+        },
+        {
+          "term": "欲知后事如何"
+        }
+      ]
+    },
+    {
+      "name": "五、地理名词",
+      "type": "term",
+      "entries": [
+        {
+          "term": "东土大唐"
+        },
+        {
+          "term": "西天灵山"
+        },
+        {
+          "term": "花果山"
+        },
+        {
+          "term": "水帘洞"
+        },
+        {
+          "term": "天庭"
+        },
+        {
+          "term": "地府"
+        },
+        {
+          "term": "龙宫"
+        },
+        {
+          "term": "火焰山"
+        },
+        {
+          "term": "流沙河"
+        },
+        {
+          "term": "通天河"
+        }
+      ]
+    },
+    {
+      "name": "六、法宝兵器",
+      "type": "term",
+      "entries": [
+        {
+          "term": "如意金箍棒"
+        },
+        {
+          "term": "九齿钉耙"
+        },
+        {
+          "term": "降妖宝杖"
+        },
+        {
+          "term": "紧箍咒"
+        },
+        {
+          "term": "紫金红葫芦"
+        },
+        {
+          "term": "羊脂玉净瓶"
+        },
+        {
+          "term": "芭蕉扇"
+        },
+        {
+          "term": "金刚琢"
+        },
+        {
+          "term": "紫金铃"
+        },
+        {
+          "term": "人种袋"
+        }
+      ]
+    }
+  ]
+}
