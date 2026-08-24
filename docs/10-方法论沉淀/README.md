@@ -97,8 +97,8 @@ skill 文件是**协议层**（约束 + 流程定义），本目录是**案例�
 
 ## 关联文档
 
-- [../../README.md](../../README.md)：项目说明（当前版本 v2.3.97 W498）
+- [../../README.md](../../README.md)：项目说明（当前版本 v2.3.98 W499）
 - [../../STRUCTURE.md](../../STRUCTURE.md)：目录结构
-- [../../CHANGELOG.md](../../CHANGELOG.md)：变更日志（W001-W498）
+- [../../CHANGELOG.md](../../CHANGELOG.md)：变更日志（W001-W499）
 - [../../交接文档.md](../../交接文档.md)：跨 session 交接
 - [../../scripts/output/file-index.md](../../scripts/output/file-index.md)：反向文件索引

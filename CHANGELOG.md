@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W499），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W500），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.99（2026-08-24）：W500 索引健康门禁 — 第 17 门禁转正 + bump 次级版本行增强
+
+> **来源**：W499 全面审查教训——file-index 空壳/重复/残留、方法论 README 漏登记、CHANGELOG 编号上限手工漏改，三类漂移此前均无自动防线；用户确认「先做 1+2（门禁 + bump 增强）」。
+> - **执行（第 17 门禁转正）**：新建 scripts/check_index_health.py 挂 verify_delivery——①file-index 段完整性（豁免区外空壳段必 FAIL：W449-W463 历史损坏区维持现状不重排·仅防新增）；②file-index 段唯一性（豁免区外 W 号重复必 FAIL）；③最新段残留"当前版本"快照行必 FAIL（历史段 bump 残留豁免）；④方法论 README 双向覆盖（目录 md ↔ 索引表链接差集 + "待创建"占位 0）；⑤CHANGELOG 编号规则段上限 == 最新 W 段（W499 曾手工漏改仅 WARN）；⑥治理文档引用一致性（文档规范.md scripts 引用存在性·verify 挂载脚本存在性——W499 审查盲区复盘补强）。负样本 4/4 自测（空壳段/待创建占位/编号不符/死链引用全被抓）。
+> - **执行（审查防线补强）**：day-review skill 步骤 4 补"治理文档内容引用核验"（文档规范.md §8/§11 门禁数·脚本清单·行号 + AGENTS §4.2 清单）+ 陷阱第 8 条（治理文档引用会漂移），已 sync 全局版；AGENTS.md §4.2 补录第 17 门禁正文；文档规范.md §7/§8/§11 与 17 门禁同步（P1 修复：file-index 行门禁列滞后·17 门禁表缺失·禁改清单缺两脚本·bump 描述过时·行号 45→47）。
+> - **执行（bump 增强）**：bump_version.py bump_version_line 扩展支持 `- **当前版本**：` 格式（项目说明次级版本行）——次级行历史格式仅版本号无 W 后缀，只替换版本号不追加 W token（防格式漂移）。W001-W### 编号上限同步 W417 增强已有，本次验证覆盖。
+> - **验收**：verify_delivery 17 门禁全绿；负样本 4/4；bump 单元测试双格式 PASS。
+> - **文件**：scripts/check_index_health.py（新建）+ scripts/verify_delivery.py（第 17 门禁挂载）+ scripts/bump_version.py（次级行增强）+ docs/00-导读/文档规范.md（§7/§8/§11 门禁清单同步）+ skills/xiyouji-day-review/SKILL.md（审查核验补强）+ .github/workflows/README.md（旁文档同步）+ 六文档 + AGENTS。
+> - **验证**：负样本 4/4 + 正样本全绿 + bump 单元测试双格式 PASS。
+> - **状态**：待提交（W499 批次在暂存区先行提交，本批随后）。
 
 ### v2.3.98（2026-08-24）：W499 GitHub 协作模板 + 创意方法论沉淀 + 索引漂移修复
 

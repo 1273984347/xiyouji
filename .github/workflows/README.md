@@ -1,6 +1,6 @@
 # CI/CD 工作流说明
 
-> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426** — 西游记解读项目（`d:\1\xiyouji`，v2.3.64 W449）的 GitHub Actions 工作流层。
+> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W500** — 西游记解读项目（`d:\1\xiyouji`，v2.3.99 W500）的 GitHub Actions 工作流层。
 > **W399**：ci.yml 补 push main 触发（此前仅 pull_request，项目直接 push main 无 PR → CI 从未运行）；sitemap/robots 域名补全；新增 rum-viewer。
 > **W400**：CI/Security 三 workflow 转绿（ruff 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复·black 门禁移除）。
 > **W401**：ci.yml 5→7 job（pytest-unit 全量 tests/ + agent-web-build）·agent-web 源码入库·移除 3 处无 pip 安装 job 的 cache: pip 残留·build-test-deploy.yml 弃用删除。
@@ -19,6 +19,7 @@
 > **W421**：Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 恒全量 + batch_screenshots.js --only-pages + Playwright 浏览器缓存 + checkout fetch-depth 0）。
 > **W420**：A1 内容质量深化（深度解读 100/100 补全 + 56 回元数据补齐 + 99 回导航错链修复·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W419**：修复 A1 深度解读 SD 错位（22 篇 SD 编号≠真实回号归位·40-72 回全覆盖·源文件 24 篇元数据/H1/关联行修正·第 56 回补写 SD101·无 workflow 文件改动，CI 全量验证涵盖）。
+> **W450-W500**：verify 门禁体系扩展（W458 防回归 check_structure/check_js_syntax·W459 check_dynamic_links·W493 token 覆盖率/动效禁止/a11y 三门禁·W495 INLINED CSS·W498 skills 索引一致性·W500 索引健康 check_index_health——均由 ci.yml verify-delivery job 跑 verify_delivery.py 自动涵盖，无 workflow 结构改动）+ W464 perf 基线确立（perf.yml 预算沿用 W424 校准值 LCP≤5000/CLS≤0.3/TBT≤300）。
 
 ## 1. 工作流列表
 
@@ -86,7 +87,7 @@
 ### Job 8 · `verify-delivery`（交付校验门禁，W424 新增）
 
 - **运行环境**：`ubuntu-latest` + Python 3.12 + Node 20
-- **流程**：`pip install -r scripts/requirements.txt` → `python scripts/run_all.py`（重新生成 scripts/output/data/*.json，生成物未入库）→ `python scripts/verify_delivery.py`——六文档版本 / A4 209 计数 / 范围漂移 / A1 导航相邻性 / docs/01 链接 / sitemap 覆盖 / site/data 回退模式 / 数据漂移（check_data_drift.js，CI 中真实生效）
+- **流程**：`pip install -r scripts/requirements.txt` → `python scripts/run_all.py`（重新生成 scripts/output/data/*.json，生成物未入库）→ `python scripts/verify_delivery.py`——17 项门禁：六文档版本 / A4 209 计数 / 范围漂移 / A1-A6 真实计数 / A1 导航相邻性 / docs/01 链接 / sitemap 覆盖 / 数据漂移 / CSP / 腐蚀 / JS 语法 / CSS 结构 / token 覆盖率 / 动效禁止 / a11y / INLINED CSS / 动态链接 / 治理契约 / skills 索引 / 索引健康（W500 起随 verify_delivery.py 自动获得，无 workflow 结构改动）
 - **与 pre-commit 的关系**：本地 pre-commit 钩子（手动 .git/hooks/pre-commit + .pre-commit-config.yaml 双轨）已含等价检查；CI 兜底防 `--no-verify` 提交。run_all 的 2 个历史 FAIL（hardships_81/journey_route 缺 --output）已修默认值，34/34 全过。
 
 ## 3. 触发条件矩阵
@@ -171,5 +172,5 @@ npx lighthouse http://localhost:8000/dashboard.html `
 
 ## 8. 双索引
 
-- [CHANGELOG.md](../../CHANGELOG.md) — v2.3.39 W424
-- [scripts/output/file-index.md](../../scripts/output/file-index.md) — W234-E1 / W399 / W400 / W401
+- [CHANGELOG.md](../../CHANGELOG.md) — v2.3.99 W500
+- [scripts/output/file-index.md](../../scripts/output/file-index.md) — W234-E1 / W399 / W400 / W401 / W500

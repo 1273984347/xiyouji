@@ -473,6 +473,18 @@ def main():
     except Exception as e:
         warn("Skills 索引一致性门禁执行异常（W498）: %s" % e)
 
+    # ---- 索引健康门禁（W500 转正：W499 全面审查——file-index 空壳/重复/残留 + 方法论 README 漏登记 + CHANGELOG 编号上限手工漏改）----
+    idx_health_py = os.path.join(_HERE, "check_index_health.py")
+    try:
+        r = subprocess.run([sys.executable, idx_health_py], capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("索引健康门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("索引健康异常（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("索引健康门禁执行异常（W500）: %s" % e)
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:

@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.98（2026-08-24）— W499 GitHub 协作模板 + 创意方法论沉淀（.github issue/PR 模板 5 个 + 创意三明治/人机创意方法论 2 篇 + character-content 创意方法引用 + 方法论 README 索引修复 + file-index 结构注记）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.99（2026-08-24）— W500 索引健康门禁（第 17 门禁 check_index_health.py 转正：file-index 段完整性/方法论 README 覆盖/编号上限 + bump 次级版本行增强）·A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
