@@ -3,7 +3,7 @@
 > 轨标：教学讲解
 >
 > 本文件归档 交接文档.md 中 v2.0.39-v2.2.49（W066-W280）段 + W343-W358（v2.2.9x-v2.3.9）历史提交记录的详细进度。
-> 创建于 2026-07-27（v2.0.72 文件重度优化时迁移），2026-07-30 扩容（W088-W280 追加），2026-08-07 扩容（W343-W358 历史提交记录追加）
+> 创建于 2026-07-27（v2.0.72 文件重度优化时迁移），2026-07-30 扩容（W088-W280 追加），2026-08-07 扩容（W343-W358 历史提交记录追加），2026-08-25 扩容（W511 里程碑概要 W505 及更早追加）
 > 最新变更见 [交接文档.md](交接文档.md)（仅保留 W281+ 现役记录）
 
 ---
@@ -1182,5 +1182,416 @@
 | v2.0.61 | W088 | 2026-07-26 | A4 Batch 10 时间哲学专题（四种时间形态 + 六位理论家对照）+ E1 预防成功·A4 方向连续第三次零撞坑 |
 
 完整版本变更历史见 [CHANGELOG.md](CHANGELOG.md)（v2.2.50+ 现役段）+ [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)（v0.1-v2.0.60 历史归档段）。
+
+---
+
+
+---
+
+## W511 归档段（2026-08-25）：里程碑概要 W505 及更早
+
+- **v2.3.104 W505 创意流程闭环落地（2026-08-25）**：
+  - character-content SKILL.md 新增「创意三明治管线」章节：四步固定流程（AI 发散 ≥20 极端切入点 → 人类收敛 ≤3 种子 → AI 补全 2 版 → 人类裁决闲笔/留白）+ 显式触发条件 + 生成来源记 创意三明治管线@commit
+  - 4 篇试点方向二深化走完整管线（菩提祖师/黑熊精/金角银角/高翠兰·用户选「都做」扩 4 篇）·各含 3 条 `> 原文引文（第N回）` 精确命中行（12/12·命中率 100%）+ v2 血缘 4 字段（核验状态：引文已核验）
+  - 方法论 README 索引核验跳过（2 篇 W499 已含）·sync_skills 仓库→全局 漂移 0
+- **v2.3.103 W504 存量核验状态 + 学术轨引文核验 A+（2026-08-25）**：
+  - 611 篇核验状态字段全覆盖；学术轨 105 篇逐篇补 ≥3 条可验证原著引文并标绿（A+ 路径，G=105 达成）
+  - 引文 411 条 100% 命中；防空真 0 违规；术语 D8 交互风险坐实并修复（3 篇引文引入 variant 被拦，已替换/删除）
+  - content-trust-report.json/.md 产出；三值 未核验 506 + 引文已核验 105 + 专家已核验 0 = 611
+- **v2.3.102 W503 原著引文硬验证（2026-08-24）**：
+  - 文档规范 §4.8 新立引文语法：`> 原文引文（第N回）：“……”`，对 dataset/text-search.json 去空白归一后精确子串命中（禁省略号节引）
+  - check_citations.py 挂 verify_delivery 第 20 门禁（--dir docs 全量·存量引文行 = 0 无豁免）；正/负样本全过·全量扫描 0.3s
+  - character-content 深化专题硬规则 ≥3 条引文行 + Step 4 核验步；s4-submission 补脚本调用说明
+- **v2.3.101 W502 术语一致性门禁（2026-08-24）**：
+  - dataset/glossary.json 机器可读术语库（6 组 59 条目·--generate 逐行解析术语表.md·禁手抄）；按组类型化（仅称谓组有变体映射）
+  - check_glossary.py 挂 verify_delivery 第 19 门禁：C1 双向同步 + C2 称谓组规范词锚定（传递归一 圣僧→唐僧→玄奘·复合词掩码 心猿意马/金公木母黄婆）
+  - 存量违规实测 303 篇 383 条冻结基线豁免；负样本 2/2；文档规范 §4.7 新立
+- **v2.3.100 W501 元信息块 v2（2026-08-24）**：
+  - 文档规范 §4.6 新立：新文件必填血缘+核验状态 4 字段（生成来源/生成模型·含「未记录」合法枚举/生成日期/核验状态三值·0 条引文禁标「引文已核验」空真防护）
+  - check_frontmatter.py 挂 verify_delivery 第 18 门禁（基线豁免存量 611 篇）+ character-content SKILL v2 模板；正/负样本 2/2
+  - 口径澄清：学术轨 = 105（verify 首匹配口径），锚定 grep 109 为假阳性（4 篇跨界趣谈正文含「学术研究」引用行）
+- **v2.3.99 W500 索引健康门禁（2026-08-24）**：
+  - check_index_health.py 第 17 门禁转正（file-index 段完整性/唯一性/最新段残留 + 方法论 README 双向覆盖 + CHANGELOG 编号上限 + 治理文档引用一致性·豁免 W449-463 损坏区）
+  - bump_version_line 次级版本行增强；文档规范 6 处修复；day-review skill 步骤 4 补治理引用核验；负样本 4/4
+- **v2.3.98 W499 GitHub 协作模板 + 创意方法论沉淀（2026-08-24）**：
+  - .github issue/PR 模板 5 个；创意方法论 2 篇（人机创意工作流/创意三明治）入 10-方法论沉淀 + character-content 引用
+  - 方法论 README 索引修复 + file-index W449-463 结构注记
+- **v2.3.95 W496 优化收尾（2026-08-22）**：
+  - data/EN 225 页夜读浮动切换钮（theme-init.js 注入·根页跳过·切换+持久化+375px 无溢出全验证）
+  - test_smoke.js 检查 6 样式生效断言固化（89/89）；acceptance_snapshot.py 验收现测工具 + §4.3 禁跨批复制铁律
+  - V2 fps 遗留实测关闭（_perf_measure CDP trace 无风暴 + 五核心页 LCP/CLS/TBT 全过阈值）
+- **v2.3.94 W495 P0 热修复（2026-08-22）**：
+  - 审查发现 W493 一次性脚本误清空 224 个 data+EN 页 INLINED CSS 块（全站含线上 Pages 渲染裸文本，14 门禁全绿漏网）
+  - 修 inline_css.py --force 短路缺陷 + 重同步 225 页恢复（30659B ≤33KB）；新建 check_inlined_css.py 第 15 门禁（块≥20KB+负样本自测）
+  - W494 回归数据作废重测：7 视口×7 页样式/溢出/pageerror 三重 ALL PASS；baseline_snapshot.py 补入库；5 方案档落地状态回填
+- **v2.3.93 W494 Phase E 遗留收尾（2026-08-22）**：
+  - 断点常量规范化：380 处非白名单 → {375,480,640,768,1024,1280,1536}，残留 0；5 视口 11 页溢出 0
+  - 图表 ≤640px CSS 降级（图例纵排/轴文字 10px）传播 225 页；tag-cloud/81-hardships 存量溢出修复
+  - 字体切片判定关闭（内联架构 + VF 特性双根因，批次记录有详述）
+- **v2.3.92 W493 Phase E6 验收收口（2026-08-22）**：
+  - 三门禁转正挂 verify_delivery（token 覆盖率/动效禁止清单/a11y 对比度）+ 负样本自测 3/3
+  - 前置修复：私有块 UI 裸色 1193→246 全豁免登记、263 裸阴影映射 elev、10 处 infinite 改一次性
+  - M1-M7 全达标；Phase E 主线收官（E0-E6 + W488/489 全部完成）；遗留三项显式记录
+- **v2.3.91 W492 Phase E5 响应式+微交互（2026-08-22）**：
+  - 导航抽屉 4 根页（display:none 关闭态+双帧过渡+遮罩+ESC+RM）；dashboard 补 system.css link
+  - 375px 关闭态零溢出 + 数据页/EN 无回归；图标收尾 emoji=0；ask-chip 触摸目标修复
+  - 字体切片/断点规范化/图表降级显式推迟 W493（批次记录有理由）
+- **v2.3.90 W491 Phase E4 EN 站同步（2026-08-22）**：
+  - EN 85 同名可视化页六规则令牌化（CN 86 减 journey-geo-3d）；validate_en 85/85 PASS；85 页 pageerror=0
+  - CN/EN 10 页同机位截图对照目视一致；EN 根页随 E5 处理
+- **v2.3.89 W490 Phase E3 CN 可视化页传播 II（2026-08-22）**：
+  - 30 页全量令牌化（86−E2 56，git diff 68168a6 派生）：3D/Canvas 2 页 + 时间线/地图 + 静态/表格 + text-search
+  - 复用六规则迁移管线（_w490_migrate.py）；3D 页仅 UI 层令牌化不动场景材质；D1 图表 8 色判定不建
+  - 验收：30 页 pageerror=0 + 3D canvas 断言 + 五门禁全绿；M2 严格清零移 E6 收口
+- **v2.3.88 W489 全站暗色模式（2026-08-22）**：
+  - dark 令牌组迁入 tokens.css（+1494B）+ 全局 SVG 数据色提亮 filter + inline_css --force 225 页传播（data+EN 全获 dark UI 适配）
+  - 新增 js/theme-init.js（同步防 FOUC·xy-theme→data-theme）批量插入 226 页 head（外部脚本免 CSP hash）
+  - 5 根页内联 dark 令牌去重（-1170B/页·保留特有适配）；dukou-engine 双变量体系保留
+  - 验收：12 页 dark 冒烟 pageerror=0/FOUC=0 + 截图目视正常 + 内联 CSS 28385B ≤33KB + 门禁全绿
+- **v2.3.87 W488 根页视觉重设计 + 夜读模式（2026-08-22）**：
+  - 背景：W487 复盘实测 Phase E（W476-478）验收全工程卫生指标、E1 仅 index 可见变化、E2 56 页等值迁移零感知 → 方向 A 修正（感知验收强制项 M-A1）
+  - 6 根页可感知升级：index hero "100" 朱砂 / dashboard 标题+KPI 数字朱砂+表头淡朱砂+route-strip 朱砂线 / curated/guide 卡片 hover 朱砂描边上浮 / guide 7 + mobile 6 emoji→朱砂 SVG / dukou-engine header 朱砂双线 / 导航指示条 / reveal-in JS 接入
+  - 暗色夜读：xy-theme localStorage + 防 FOUC + dark 覆盖走页面内联（225 数据页零波及）+ dashboard 环图提亮
+  - 验收：M-A1 前后对比像素率 6/6 ≥1%（2.35~25.98%）+ 目视清单 6×3 处 + dark 冒烟 pageerror=0/FOUC=0 + 禁 JS 回退正常 + 门禁全绿
+  - 治理：教训入库 plan-review skill v1.0.1（陷阱 9 + 阶段 1 动作 6 + reference §1.6）；Phase E 路线图回写 E2 完成态
+- **v2.3.86 W487 四会话 skill 二轮同步（2026-08-19）**：
+  - 复查 4 开源仓库新 commit：agent-session-loop / deep-review-loop 仅文档更新不涉及副本；同步 mem-wrap-up「DRL 未安装降级声明」（Step 7b 精简审查 + `DRL downgraded` 标注 + 降级≠跳过）与 self-evolution 触发词扩充（记住这个/capture/经验沉淀）+ 新增 references/experience-capture-format.md 格式规范（97 行）
+- **v2.3.85 W486 四会话 skill 协议同步（2026-08-19）**：
+  - 同步上游 GitHub 四仓库 Claude Code 修正（commit 5e19ef4 / 4542749 / 221e406 / 52c36f0）：verdict 7 词全序 / R0 4 件套 / 过拟合警报增强版 / P2 ≤ N_max / work-log 路径 / bridge_note 定义 / 整合版协调声明；工程件（evals/CI/fragment-lint）不入库，runtime-audit 插件路径不同步（本仓库未收录脚本）
+- **v2.3.84 W485 收录三项目 playbook（2026-08-19）**：
+  - **来源**：用户提供 D:\1\skills 下三项目 playbook（visual-batch / plan-authoring / plan-review），仓库此前无副本无登记
+  - **执行**：三 skill 整目录入库 skills/；plan-review 补 .skill-metadata.yaml；plan-authoring description 修正；AGENTS.md/README/STRUCTURE/skills-README 同步 17 个
+  - **验证**：_check_skills.py 全过（17 skill）；verify_delivery 核心全绿
+- **v2.3.82 W464 Phase 3 观测基线确立（2026-08-18）**：
+  - **来源**：Phase 3 路线图 W464·用户「这些都做」授权双轨同轮
+  - **执行**：baseline_snapshot.py 入库 + 观测基线快照.md（计数 611/86/138/228 + 性能三值 + UV 手填栏 + 闸门阈值）；perf-baseline.json 更新 W464 实测；GoatCounter 链路核验
+  - **验证**：快照计数与 verify 口径一致；性能全过阈值；verify 全绿。**UV 真实值待维护者后台回填**（W465 判定输入）
+- **v2.3.81 W478 Phase E2 CN 可视化页传播 I（2026-08-18）**：
+  - **来源**：Phase E 路线图 v2.0 §3 E2·用户「这些都做」+「继续」授权；试点 3 页由并行 session（3549327）人工定范式
+  - **执行**：剩余 53 页 _w478_migrate.py 按范式迁移（R-SHADOW/R-RADIUS/R-TRANS/R-FOCUS/裸色白名单/R-EXEMPT）；批次记录 56 行登记
+  - **验证**：全批 56 页 pageerror=0；截图目视 6 页；M5 净 +102 行；check_structure/CSP/范围精确；verify 全绿
+- **v2.3.80 W477 Phase E1 组件层 v2 + 根页模板化（2026-08-18）**：
+  - **来源**：Phase E 路线图 E1 批次·用户授权「继续按着方案做」
+  - **执行（system.css v2）**：card/kpi/chart-block elev-1 默认海拔 + hover elev-2 + radius-md；btn 五态 + 朱砂微渐变白名单；tab/badge/search pill 化；tooltip elev-3；颜色令牌化（color-mix）；微交互工具类 u-lift/u-press/reveal-in（fail-open）/u-tabular + 语义色文本；+2455B ≤ +6KB
+  - **执行（根页首批）**：index 提问框全令牌化；dashboard footer 统一 site-footer + v2.2.86→v2.3.79 + focus 派生统一；curated/guide 卡片海拔化；mobile-index 令牌化；text-search --focus-ring 未定义真缺陷修复
+  - **执行（字体）**：Noto Sans SC 子集化 9340 字（771→755KB·收益有限·unicode-range 切片登记后续专项）
+  - **验证**：Playwright 6 页 pageerror=0 + 样式断言 + 截图目视；门禁全绿（CSP 1173 哈希 0 漂移/4122 链接/结构/语法/verify 核心）
+- **v2.3.79 W476 Phase E0 纸感轻立体宪改 + tokens v3（2026-08-18）【视觉高级感升级轨启动】**：
+  - **来源**：用户指令「在 Phase 3 路线图基础上写全面美化升级方案」→ Phase E 路线图（W476-W483 预排·六维度）→ 用户「确认三问」：① 纸感轻立体方向 ② 暗色模式纳入 E7 ③ W465 归档判定冻结本轨于 E1 完成态。Phase E 为并行轨，编号预排不与 Phase 3（W464-W475）顺位冲突
+  - **执行（E0 探针 P1-P6）**：_e0_probe.py 扫 233 页——裸色 16322 处（图表数据色为豁免主体）；transition var(--dur-*)1568 vs 裸 1452（全 ≤600ms）；根页实为 8 页 + _template（6 用户可见页结构异质·E1 模板化对象）；Noto Sans 未子集化 771KB/页（E1/E5 优化候选）；组件选择器重复面 224-227 页（E2/E3 主攻面）
+  - **执行（DESIGN.md §4A 宪改）**：纸感轻立体体系 8 节——演进声明/四级海拔 --elev-0~4/渐变白名单三处/排版阶梯 1.25/圆角边框/断点五档/微交互清单（禁 bounce·旋转·循环·parallax）/体积预算红线；§5 动效契约不动
+  - **执行（tokens.css v3 + 传播）**：--elev-0~4 + --radius-sm~pill + --border-hairline/accent + 色阶派生（--accent-deep #AF3F34 静态兜底 + color-mix 浅档）+ 语义色 --ok~info + --text-step-0~5/--text-hero clamp/--leading×3·增量 +2035B·inline_css --force 225 页
+  - **验证**：check_structure 232/JS 232/CSP 1173 哈希 0 漂移/lint_links 4122·0 broken/verify 核心全绿
+- **v2.3.78 W463 墨韵 W-g 收尾固化 + W-f 扫尾批（2026-08-17）【墨韵系列收官】**：
+  - **来源**：用户指令「先开工 W-g 收尾固化批，把规范写进 DESIGN.md，开始 W-f 扫尾批开发」。两批合流执行——共享 system.css 新类与验证管道；覆盖等式归零：16+57+9=82 推广页 + 4 样板 + index/dashboard = 86 全量
+  - **执行（W-g·DESIGN.md §5 重写 5.1-5.3 → 5.1-5.9）**：时长三档预算（反馈 ≤150/状态 ≤250/入场 ≤600）+ 白名单例外仅两处（hero 600/count-up 900）；缓动令牌单一事实源；RM 双守卫（调用点级 + prototype 级）；tooltip 契约（.chart-tooltip/.classed('visible')/宣纸底语义色）；count-up 契约（fail-open 铁律）；表格 opt-in；fetch loading 态（EMBEDDED 同步页禁接入防闪烁）；性能红线
+  - **执行（system.css 两新类）**：`.chart-loading`（呼吸底块+朱砂 spinner·RM 停帧可见）+ `.chart-fade-in`（500ms 一次性淡入·RM 直达）·inline_css --force 225 页同步
+  - **执行（P2-1 loading 6 页）**：容器形态 4 页（81-hardships-view/character-relationship-3d-view/data-explorer→#chartHost·graph-explorer→#graphBox）+ svg 兄弟形态 2 页（chapter-stats/character-appearance 各 3 svg·共 11 div）；MutationObserver 自移除 + 8s 超时兜底；**search 回退**（#results 初始待输入空态非加载态·语义不符）
+  - **执行（W-f fade-in 3 页 + 豁免）**：character-relationship-3d/journey-geo-3d（#three-container）+ perf-canvas-rendering（canvas）挂 .chart-fade-in；text-search 纯静态零动效点豁免
+  - **过程缺陷（两 bug·断言驱动）**：① svg 兄弟方向写反（应查 nextElementSibling）② microtask 时序（脚本块间队列清空·mock 渲染可先于 body 尾 observer·修复为注册前初始检查）——均由 Playwright 断言 fin≠0 捕获逐层定位
+  - **验证**：CSP 重算三轮 233 页 1173 哈希 0 漂移；JS 232/CSS 630/链接 4122；verify 核心全绿；file:// 运行时 6 loading 页骨架全自移除 + 3 fade 页中间态→终态 + RM 停帧直达 + pageerror=0；http 模式抽测 mock 回退正常
+  - **状态**：已落地·随本 commit 提交。**墨韵系列收官**：W460→W461→W462→W463——86 可视化页动效全覆盖，规范沉淀 DESIGN.md §5
+- **v2.3.77 W462 墨韵 W-d/W-e 统计页批（2026-08-17）**：
+  - **来源**：W460 墨韵方案 W-d/W-e 批。原方案 40/22 页清单因方案文档未存档，以实现证据重定义：66 剩余页分三型——37 transition 页 / 20 D3 静态页 / 9 非 D3 页（three×3+canvas+纯 HTML·留 W-f）
+  - **执行（W-d 动效规范化）**：`.duration(N>600)` 全归一 600（全站 duration>600 页数=0）+ 141 duration/21 delay/59 裸 transition 包裹 `MOYUN_RM?0:N` + 37 页注入 `var MOYUN_RM` 守卫；7 页表达式形态（`.duration(DUR)`/`.delay(i*80)`）prototype 级守卫（patch `d3.transition.prototype`·Playwright 实测 5000+2000ms 组合 1ms 达终态）
+  - **执行（W-e tooltip 收编 11 页）**：A 组 four-heavenly-kings（查询式创建·22 edits）；C 组 10 静态页（div 换类 id 保留 + 页私有 CSS 主块删 + 派生选择器宣纸底重映射金→朱砂/奶油→朱砂/暗色→墨系 + 显隐 `.classed('visible')` 三形态）
+  - **执行（count-up + 卫生项）**：探针扫 57 页数字 KPI 命中 18 页接入 count-up（浮点自动跳过）；全站尾部重复 `</body></html>` 去重 154 页（CN 77+EN 77·count-up 断言意外发现的历史模板缺陷·LF/CRLF/注释三变体）
+  - **验证**：57 页 pageerror=0；RM 终态 6/6（emulateMedia reduce）；tooltip hover 5/5（dispatchEvent·宣纸底）；count-up 2/2；CSP 重算 46 页 1167 哈希 0 漂移；JS 232/CSS 630/链接 4122 全绿；verify_delivery 核心全绿
+  - **范围纪律**：11 静态页纯豁免（仅享 P0 CSS + body 去重）；入场编排分层维持 W-b 样板级（全量编排列 W-g 候选）；EN 站 JS 级未做（CSS 级已同步）
+  - **待续**：W-f（9 页非 D3·覆盖等式=0）→ W-g（P2 三页 + .chart-loading 类 + DESIGN.md §5 重写）
+  - **状态**：已落地·随本 commit 提交
+- **v2.3.76 W461 墨韵 W-c 网络页批（2026-08-17）**：
+  - **来源**：W460 墨韵方案 W-c 批（16 个 forceSimulation 网络页·T2 模式：允许 tooltip 统一 + hover 高亮，禁止入场 stagger 防 force tick 冲突）+ critique 留置 P2 处置（P2-2 落地；P2-1 fetch loading 态经边际收益评估延期至 W-g——网络页以 EMBEDDED 同步渲染为主无实际空白等待期）
+  - **执行（tooltip 分四型）**：A 组 10 页（d3 动态 `attr('class','tooltip')` + transition opacity 显隐）CSS 盒样式块删除 + 类名改 `chart-tooltip` + 显隐改 `.classed('visible')`（52 显/57 隐）；B 组 1 页（character-semantic·同构简写变体）同规则；C 组 2 页（character-dynamic/pilgrim-team-dynamic·静态 div）类换 `chart-tooltip` + 宣纸底配色重映射（金 #e9b885→朱砂/淡墨系）；D 组 3 页原生无 tooltip 无 hover——T2 范围纪律豁免记录
+  - **执行（P2-2 count-up）**：chapter-stats（千分位 toLocaleString·终值精确还原原文）+ character-appearance（纯数字过滤·文本型 value 跳过）；修复 async 时序 bug——renderKPI 在 await loadData() 后才建元素，改轮询等待（100ms×50 上限 5s·fail-open 保持终值）
+  - **验证**：Playwright 断言 48/48（16 页 pageerror=0 + 节点渲染>0 + 旧 tooltip 类清零 + 13 页 hover 后 `.chart-tooltip.visible` 宣纸底——hover 用 dispatchEvent 规避物理遮挡）；性能基线 3 页改前/改后 settle/FPS/longTask 三判据全过零回归（w461-perf-{before,after}.json）；CSP 233 页 1149 哈希 0 漂移 + JS 232 文件 + CSS 结构 630 块 + 链接 4122 全绿；verify_delivery 核心全绿；16 页 duration 全部 ≤600
+  - **待续**：W-d/W-e（40 统计页）→ W-f（22 页·覆盖等式=0）→ W-g（P2 三页 + .chart-loading 类 + DESIGN.md §5 重写）
+  - **状态**：已落地·随本 commit 提交
+- **v2.3.75 W460 墨韵全站动效体系 P0+样板批（2026-08-17）**：
+  - **来源**：用户诉求「前端不够好看，图表表格增加 UX 动效」→ uicraft skill 四参考 + 取证（50/85 页时长混用·0 处 IO·动效零令牌）→ v2.1 精确方案（P0→P1 样板→W-c~f 推广 78 页→W-g P2+DESIGN.md）·风格「克制雅致」
+  - **执行（P0）**：tokens.css 动效令牌（--dur×3 + 缓动三系 + --shadow-lift）；system.css 表格 hover 朱砂指示条/opt-in 行入场 .table-anim/sticky/.btn 按压/.kpi/.card 浮起/.link-ink/.chart-tooltip 统一类；inline_css --force 同步 225 页（EN 138 页含）
+  - **执行（W-b 样板 6 页）**：index+dashboard count-up（IO 触发一次·fail-open）；4 图表页 D3 编排统一（轴 200→网格 100+300→标记 500 stagger 封顶 400·easeCubicOut·折线 draw-in）+ tooltip 收编 + 81 难表 sticky + ANIMATE 首帧门控（resize 不重播）+ reduced-motion matchMedia 守卫
+  - **验证**：CSP 重算 1149 哈希 0 漂移；JS/CSS 结构/链接 4122 全绿；verify_delivery×3；Playwright 断言 20/20；critique 33/40≥28 无 P0/P1（docs/superpowers/w-b-critique.md）；冒烟 89/89；视觉回归 4 失败经 stash 差分判定非本批因果
+  - **待续**：W-c（16 网络页·前置 3 页性能基线·P2×2：fetch loading 态/图表页 KPI count-up）→ W-d/e（40 页）→ W-f（22 页·覆盖等式=0）→ W-g（P2 三页 + DESIGN.md §5 重写）
+  - **状态**：已落地·随本 commit 提交
+- **v2.3.74 W459 V2 审查收尾（2026-08-17）**：
+  - **来源**：V2 可视化维度方案落地审查（用户指令「审查方案完成度 + 优化点」）发现四项缺口：D2 回目跳转全 404（方案约定文件名不存在·lint_links 静态扫描盲区）·tag-cloud dashboard 死链·EN ming 页 source_doc 虚构路径·方案文档与 W456 本地化现实脱节 + 首页无 geo-3d 入口
+  - **执行（修复）**：journey-spacetime.html 内嵌 A1_DOC_MAP 100 条回号→真实文件名映射（查表 + 目录回退·路径深度 ../→../../ 修正）；tag-cloud dashboard 条目改 ../dashboard.html；EN ming source_doc 改诚实 ASCII 注记（过 validate_en）
+  - **执行（门禁）**：新增 scripts/check_dynamic_links.py（内联 script 字符串字面量链接存在性校验·--self-test 负样本自测）挂入 verify_delivery.py
+  - **执行（文档）**：V2 方案补落地状态记录表 + Three 本地化条文回写 + D2 约定勘误 + 动态链接盲区风险条 + 验证清单更新；site/index.html 精选必看补 geo-3d 卡片（八→九个入口）
+  - **执行（基线）**：W456-W458 积压改动基线提交 de8047a（242 文件·一次性诊断脚本/产物/截图按「工具不入库」排除）
+  - **验证**：check_dynamic_links 自测 2/2 命中·全站 234 页 295 字面量 0 死链；CSP 重哈希 3 页 0 漂移；lint_links 4124 链接 0 broken；validate_en/check_js_syntax/check_structure 全过；_smoke_batch journey-spacetime PASS（circles=68）+ tag-cloud 断言 PASS（80 条目·bodyBg 正常）
+  - **状态**：已落地·随本 commit 提交
+- **v2.3.73 W458 防回归门禁体系落地（2026-08-16）**：
+  - **来源**：W457 复盘 P0 改进清单落地（docs/10-方法论沉淀/白屏三连根因复盘与防回归清单.md）
+  - **执行（门禁）**：新增 scripts/check_structure.py（全站内联 CSS 括号/引号/url 结构平衡）+ scripts/check_js_syntax.js（node vm.Script 批量编译·含 en 站），挂入 verify_delivery.py；旧 check_js_syntax.py --all 委托 node 版·--file 保留
+  - **执行（运行时断言）**：_p1_viz_audit.js + _smoke_batch.js 补 style-broken 样式生效断言（bg 透明 && 主 style cssRules≤1）
+  - **执行（文档）**：新增 docs/10-方法论沉淀/前端显示问题诊断SOP.md（先取证三证据+三类白屏症状+门禁对照）
+  - **验证**：check_structure 负向验证命中；_smoke_batch PASS；verify 核心全绿（含新两门禁）
+  - **状态**：已落地·待 commit/push
+- **v2.3.72 W457 全站白屏根因修复（2026-08-16）**：
+  - **来源**：用户截图确认真实症状为「整页 CSS 裸奔白屏」（文字正常·背景纯白·样式全失·D3 图表本身正常）；前两轮诊断只查图表渲染未查样式生效
+  - **根因一（222 页）**：内联 CSS 的 noto-serif-sc-shared 可变字重 @font-face url() 缺右括号（W408 路径改写正则遗留）→ Chrome bad-url 恢复吞整块 CSS（chapter-structure-graph 首 style 块 17756 字符仅 1 条规则·body 背景透明）。分布 site/data 85 + site/en 137
+  - **根因二（7 EN 页）**：内联 script 字符串腐蚀（"Shi E"/Laojun's/Chang'e 裸引号撇号 + Sample snippet 键名空格）致 SyntaxError；W424/W446 EN 腐蚀残留·validate_en 查 CJK 不查 JS 语法
+  - **执行**：222 页补右括号（只补括号不改路径）；7 EN 页状态机迭代修复弯引号/弯撇号/键名加引号共 82 处；CSP 重哈希 7 页
+  - **教训**：诊断可视化页须断言样式生效（getComputedStyle(body).backgroundColor 非透明 + 主 style 块 cssRules>1）；扫描器升级 _diag_style_assert.js
+  - **验证**：chapter-structure-graph cssRules 1→127·bodyBg 恢复 #FAF7F0；7 EN 页编译 0 错 + 渲染 PASS；file:// 全量 232 页异常 0（visit-viewer 设计性排除）；CSP/lint/verify 全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.71 W456 全站 D3/Three 本地化 + 白屏根因修复（2026-08-16）**：
+  - **来源**：用户报告「仅首页及少数页面正常，其余页面文字正常但图表区白色」；双环境全量诊断（file:// 94 页 + http:// 94 页 Playwright 扫描，留痕 scripts/output/diag-white-pages.json、diag-http-mode.json）
+  - **根因一（主）**：全站 163 页可视化依赖 d3js.org / cdnjs.cloudflare.com 外域 CDN——用户侧任一环节阻断（浏览器扩展/企业网关/DNS 抖动）即全部白图、文字正常，与 W426 goatcounter DNS 污染事故同类
+  - **根因二（潜伏）**：http server 浏览模式下 7 个数据 JSON 陈旧（早期一次性产出·结构与页面代码漂移）——villain_matrix.json 缺 axes.bands（methodology-matrix forEach 崩溃）、board_game.json players 缺 merit（narrative-experiment toLocaleString 崩溃）等
+  - **执行（本地化）**：d3.v7.min.js（279KB·v7.9.0）+ three.r128.min.js（603KB）落 site/static/js/；163 处 script src 按目录深度改写（site/ 根 static/js/·data/ 与 en/ ../static/js/）·保留 defer·移除 SRI/crossorigin·_shell.html 模板同步修复防回流；CSP script-src 本含 'self' 零改动合规
+  - **执行（数据对齐）**：两页 EMBEDDED 内嵌新结构回写 7 个陈旧 JSON + 两页防御容错（(ax.bands||[])·merit 空值兜底）
+  - **关键教训**：改内联脚本后未即时重跑 generate_csp.py → CSP sha256 哈希失配 → 整个内联脚本被浏览器拒执行（症状：无 pageerror 但内容区空白·window.__data 未设置）——本批修复中触发现并即重哈希消除
+  - **验证**：http 模式全量复扫 94 页白屏/异常 0 页（修复前 3 页）·两崩溃页 DOM 断言恢复（axisCards=2/villainRows=25·playerCards=4·bodyText 897→4830/1249→7157）·全页 extReq 探测除 goatcounter 外零外域·generate_csp --check 233 页 0 漂移·lint_links 4123 链接 0 broken（+163 本地化 src 全命中）·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.70 W455 方案 B/C/D 三个可视化深化（2026-08-16）**：
+  - **来源**：V2 维度方案阶段 2（按 docs/00-导读/V2可视化维度方案.md）
+  - **执行（B · character-dynamic-network.html）**：1-100 回目进度条 + 播放/暂停/重置（cooccurrence 时间线 800ms/步）+ 邻域模式（点击节点进入一度邻接子图·ESC/再点退出·`.neighborhood-mode` 标签）+ 边权重线宽 1-5px + 透明度 0.3-1.0 双编码 + d3-force alphaDecay(0.05).velocityDecay(0.5)
+  - **执行（C · hardship-difficulty-heatmap.html）**：点击单元格钻取 `#hardship-detail`（结局类型/是否搬救兵/求助次数）+ `#hardships-table` 81 行清单 ↔ 热力图双向联动（cell `.linked` + 行 `.highlight`）+ 三排序按钮（难度/章节/结局·激活态 `.active`）
+  - **执行（D · journey-spacetime.html）**：双轴联动（时间轴拖动 ↔ 地图节点同步高亮 `.highlighted` 描边 + 加粗）+ 节点点击 `<a target="_blank">` 跳转 `../docs/01-全书逐回解读/第NNN回-*.md`（按 data-chapter 首数字提取回号）+ 段路叠加里程/耗时刻度（中点 `<text>` 标注 X 月 + paint-order: stroke 白底半透明）
+  - **验证**：3 个并行 subagent 同步深化 + 三页 smoke 自检 PASS + generate_csp.py 重哈希 0 漂移 + lint_links.py 3960 链接 0 broken + verify_delivery.py 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.69 W454 方案 A 西游地理 3D 可视化（2026-08-16）**：
+  - **来源**：V2 维度方案阶段 1（全站无 3D 地理页·为唯一全新维度）
+  - **执行**：site/data/journey-geo-3d.html 新建 — Three.js r128（cdnjs+SRI sha384）+ 手动 setupOrbitControls（复用 character-relationship-3d 模式·禁外部模块）+ 程序化示意地形（value-noise/fbm·零依赖·**顶点色 [0,1] 区间修正首版 byte(0-255) 被钳全白**）+ CatmullRom 路线 TubeGeometry + 河流 Tube + 17 节点 SphereGeometry + CanvasTexture Sprite 标签（奇偶交替避重叠）+ Raycaster 选中 + 路线高亮/地形透明切换 + file:// 可用 + fetch + EMBEDDED fallback；**首版内联 tokens+system CSS 拼接受字面 `<style>` 注释字符串干扰导致整块 CSS 不生效，最终改用 `<link>` 外链 tokens.css/system.css 更可靠**
+  - **数据**：scripts/output/data/journey_geo_3d.json 新建（17 节点·lon/lat/category/chapter/duration/desc；分类按主导势力归属：人间 4·妖界 9·天庭 3·灵山 1）
+  - **索引**：site/data/tag-cloud.html 新增西游地理 3D 条目 + site/sitemap.xml 新增 URL
+  - **脚本**：scripts/_smoke_geo3d.js 新建（专用 3D 页冒烟：nodes>0 / canvas / 无 pageerror）
+  - **验证**：_smoke_geo3d PASS（17 节点/canvas 1264x620/threeOk=true/errs=0）+ 截屏目检地形正常棕褐（顶点色修正后）+ generate_csp --check 0 漂移
+  - **EN 版策略**：默认仅中文版·EN 暂缓（待读者量验证后视情况推进）
+  - **状态**：已落地·待 commit/push
+- **v2.3.64 W449 冗余文档清理（2026-08-16）**：
+  - **来源**：用户判定 项目概览.md / 项目认知总览.md / 项目交接参考手册.md 与现役 交接文档.md 内容高度冗余（概览≈认知总览近孪生·交接手册 5 段叙述冗余仅部署/联系段独特），指示删除并正式登记为 W449
+  - **执行**：git rm 删除 3 份冗余文档·README 链接改指 交接文档.md·文档规范 §11.1/§11.4 旁文档 4→1（已先行提交）·file-index 移除 10 条反向索引·MEMORY 修订陈旧 W423（误称未 push/无远端）记忆 + 英文站 138 页 + 空 legacy 目录记载
+  - **验证**：verify_delivery 全绿（A4 209 篇 / A1-A6 611 计数）·lint_links.py --internal 3930 链接 0 broken·site HTML 仅 mobile-index.html:425 标题文本 / dukou-engine.html:102 里程碑文本含"项目概览"（非链接）删除无副作用
+  - **状态**：已落地·待 commit/push
+- **v2.3.63 W448 外部锐评回应治理（2026-08-16）**：
+  - **来源**：外部评论（评论.txt）批评核查——"文档膨胀 / 版本号通胀 / AI 授权灰色地带"三条部分成立，据此落地改进
+  - **执行**：STRUCTURE「版本变更」段 94 行过期里程碑迁至新建 STRUCTURE-archive.md（110KB→43KB 达标）·README 头部新增版本号语义说明（发布批次编号·非 SemVer）·LICENSE-CONTENT 新增 AI 生成方式披露（人机协作 + 司法边界 + NC 范围澄清）
+  - **验证**：verify_delivery 全绿（A4 209 篇 / A1-A6 611 计数）·三文档版本行同步 v2.3.63
+  - **状态**：已落地·待 commit/push
+- **v2.3.62 W447 工具目录治理（2026-08-14）**：
+  - **来源**：完整校验后的工具盘点（scripts/ 135 个 .py 混杂常驻与一次性）
+  - **执行**：extract_strings.py/validate_en.py 去下划线转正 + 45 个一次性脚本归档 scripts/archive/ + README 补登记
+  - **验证**：verify_delivery 核心全绿·CSP 0 漂移·lint_links 3930 链接 0 broken·改名后 smoke test 通过
+  - **状态**：已落地·待 commit/push
+- **v2.3.61 W446 英文站旧页 CJK 残留清理（2026-08-14）**：
+  - **来源**：完整校验发现 batch1-5 时期 52 个旧 EN 页 408 条 CJK 违规
+  - **执行**：并行 subagent 4 路清理 52 页（console 消息/中文文件名/学术括号注/未译正文）
+  - **验证**：validate_en.py 全站 138 EN 页全过（OK 138 / FAIL 0）·lint_links 3930 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push·英文站英文化真正闭环
+- **v2.3.60 W445 英文站续译 relationships（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」最后 1 页（relationships 关系网络）
+  - **执行**：新增 site/en/relationships + generate_csp.py 232 页 + sitemap 226→227
+  - **验证**：validate_en.py 通过·lint_links 3930 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push·英文站 86 页全量完成
+- **v2.3.59 W444 英文站续译 tag-cloud（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」，tag-cloud 全站导航页单独处理
+  - **执行**：新增 site/en/tag-cloud（全站标签云导航中心）+ generate_csp.py 231 页 + sitemap 225→226
+  - **验证**：validate_en.py 通过·lint_links 3913 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.58 W443 英文站续译 batch21（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch21（并行 subagent 拆页）
+  - **执行**：新增 site/en/ 3 页（narratology-13d-network/emotional-heatmap/material-archaeology）+ generate_csp.py 230 页 + sitemap 222→225
+  - **验证**：validate_en.py 3 页全过·lint_links 3899 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.57 W442 英文站续译 batch20（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch20（并行 subagent 拆页）
+  - **执行**：新增 site/en/ 5 页（poetry-rhythm-analysis/customs-pass-route/pilgrim-team-psychology-arc/jurisprudence/linguistics）+ generate_csp.py 227 页 + sitemap 217→222
+  - **验证**：validate_en.py 5 页全过·lint_links 3854 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.56 W441 英文站续译 batch19（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch19（并行 subagent 拆页）
+  - **执行**：新增 site/en/ 5 页（ethics-consumption/monster-hierarchy-network/music-structure/heaven-power-network/ai-dialogue）+ generate_csp.py 222 页 + sitemap 212→217
+  - **验证**：validate_en.py 5 页全过·lint_links 3754 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.55 W440 英文站续译 batch18（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch18（并行 subagent 拆页）
+  - **执行**：新增 site/en/ 5 页（karma-reincarnation/underworld-power-network/graph-explorer/narratology-12d-network/chart-design）+ generate_csp.py 217 页 + sitemap 207→212
+  - **验证**：validate_en.py 5 页全过·lint_links 3679 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.54 W439 英文站续译 batch17（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch17（并行 subagent 拆页）
+  - **执行**：新增 site/en/ 5 页（dialogue-sentiment/monster-female-network/ecology/game-webnovel/monster-sociology）+ generate_csp.py 212 页 + sitemap 202→207
+  - **验证**：validate_en.py 5 页全过·lint_links 3615 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.53 W438 英文站续译 batch16（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch16（并行 subagent 拆页）
+  - **执行**：新增 site/en/ 5 页（hardship-difficulty-heatmap/aesthetics/magic-system/visual-art/guanyin-six-roles-network）+ generate_csp.py 207 页 + sitemap 197→202
+  - **验证**：validate_en.py 5 页全过·lint_links 3536 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.52 W437 英文站续译 batch15（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch15（并行 subagent 拆页）
+  - **执行**：新增 site/en/ 5 页（business-model/intertextuality-network/risk-project/power-resources/cave-estate）+ generate_csp.py 202 页 + sitemap 192→197
+  - **验证**：validate_en.py 5 页全过·lint_links 3459 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.51 W436 英文站续译 batch14（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch14（并行 subagent 拆页）
+  - **执行**：新增 site/en/ 5 页（narrative-experiment/journey-spacetime/methodology-matrix/workplace/text-evolution）+ generate_csp.py 197 页 + sitemap 187→192
+  - **验证**：validate_en.py 5 页全过·lint_links 3379 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.50 W435 英文站续译 batch13（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch13（并行 subagent 拆页）
+  - **执行**：新增 site/en/ 5 页（deconstruction/six-senses-narratology-network/monster-victims-network/social-media/cognitive-psychology）+ generate_csp.py 192 页 + sitemap 182→187
+  - **验证**：validate_en.py 5 页全过·lint_links 3303 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.49 W434 英文站续译 batch12（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch12（并行 subagent 拆页·含易碎页）
+  - **执行**：新增 site/en/ 5 页（theological-intervention-network/criticism-history/global-pattern/cross-time-danmaku/character-dynamic-network）+ generate_csp.py 187 页 + sitemap 177→182
+  - **验证**：validate_en.py 5 页全过·lint_links 3226 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.48 W433 英文站续译 batch11（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch11（并行 subagent 拆页）
+  - **执行**：新增 site/en/ 5 页（four-dimensional-research-network/four-heavenly-kings-artifacts/monster-ecology-network/philosophy/concept-device）+ generate_csp.py 182 页 + sitemap 172→177
+  - **验证**：validate_en.py 5 页全过·lint_links 3145 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.47 W432 英文站续译 batch10（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch10（并行 subagent 拆页）
+  - **执行**：新增 site/en/ 5 页（pilgrim-team-dynamic-network/counterfactual/ming-political-thought-comparison/monster-background/cultural-misreading）+ generate_csp.py 177 页 + sitemap 167→172
+  - **验证**：validate_en.py 5 页全过·lint_links 3057 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.46 W431 英文站续译 batch9（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」，改用并行 subagent 拆页翻译
+  - **执行**：新增 site/en/ 4 页（timeline/monster-capability-radar/journey-map-interactive/character-relationship-3d-view）+ generate_csp.py 172 页 + sitemap 163→167
+  - **验证**：validate_en.py 4 页全过·lint_links 2963 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.45 W430 英文站续译 batch8（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch8（页中文串升至 120+，单页独立成批）
+  - **执行**：新增 site/en/perf-canvas-rendering 英文化 + generate_csp.py 168 页 + sitemap 162→163
+  - **验证**：validate_en.py 通过·lint_links 2901 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.44 W429 英文站续译 batch7（2026-08-14）**：
+  - **来源**：延续待办「英文站续译」batch7（次低脆度页）
+  - **执行**：新增 site/en/ 3 页（text-search/81-hardships-view/mbti-evolution）英文化 + generate_csp.py 167 页 + sitemap 159→162
+  - **验证**：validate_en.py 3 页全过·lint_links 2886 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.43 W428 英文站续译 batch6（2026-08-14）**：
+  - **来源**：按待办「英文站续译」推进 batch6（优先低脆度页 script CJK ≤ 40），复用 extract_strings.py + validate_en.py 工具链
+  - **执行**：新增 site/en/ 5 页（century-dialogue/data-explorer/language-style-radar/famous-time-travel/search）英文化 + generate_csp.py 重生成 164 页 + sitemap 补 5 页（154→159）
+  - **验证**：validate_en.py 5 页全过·lint_links 2851 链接 0 broken·verify_delivery 核心全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.42 W427 内容质量残留清理（2026-08-14）**：
+  - **来源**：按待办「内容质量深化」项系统核查（lint_links 2792 链接 0 broken·术语审计 0 残留·占位符已清·A1 元数据 100/100），确认大部分已在 W344/W418-W424 完成；剩余真实残留为 A4/A5 轨标缺失 + A4 21 文件 BOM + 上 session 6 个陈旧产物
+  - **执行**：A4 53 篇 + A5 25 篇共 78 篇补 `> 轨标：学术研究`（A4 30 篇轨别存疑列待人工判定）+ A4 21 文件 UTF-8 BOM 移除 + 陈旧产物处置（保留 quality_review.py·其余 5 个临时产物回收站）
+  - **验证**：BOM 残留 0·轨标位置抽查正确·lint_links 2792 链接 0 broken·verify_delivery 全绿
+  - **状态**：已落地·待 commit/push
+- **v2.3.41 W426 GoatCounter 自托管修复（2026-08-14）**：
+  - **来源**：验证发现 gc.zgo.at（GoatCounter 脚本 CDN）在大陆被 DNS 污染（解析 IP 随机漂移·HTTPS 全失败），脚本无法加载、PV 无法采集
+  - **执行**：从 arp242/goatcounter 抓 count.js（ISC·9213 字节）→ `site/static/js/goatcounter.js` 本地自托管 + 全站 160 页脚本 src 改本地相对路径 + generate_csp.py 移除 gc.zgo.at 白名单 + inject_goatcounter.py 本地路径幂等重跑 + _headers 同步
+  - **验证**：线上 GitHub Pages 部署成功（run 31797180544）·`static/js/goatcounter.js` HTTP 200·CSP 无 gc.zgo.at 且放行计数端点·verify_delivery 核心全绿
+  - **状态**：已落地·已 push（9e009dc）
+- **v2.3.40 W425 GoatCounter 真实跨访客统计接入（2026-08-14）**：
+  - **来源**：用户完成 GoatCounter 注册（site code 1273984347），按 [访问统计方案](docs/00-导读/访问统计方案.md) 把 W403 就绪的注入脚本落地
+  - **执行**：`inject_goatcounter.py --site 1273984347` 全站 160 页注入计数脚本 + `generate_csp.py` 白名单追加 gc.zgo.at（script-src）/1273984347.goatcounter.com（connect-src）+ 重生成 159 页 CSP（680 内联哈希 0 漂移）+ `site/_headers` 平台层白名单同步
+  - **验证**：verify_delivery 核心全绿（CSP 159 页 0 漂移·腐蚀 0 硬错误·数据漂移 47 可比页·sitemap 154 页一致·A1 导航 100/100·A1-A6 计数 611==611）
+  - **状态**：已落地·待 commit/push（页脚 v2.3.40 W425）
+- **v2.3.39 W424 对抗性审查修正与全仓整理（2026-08-12）**：
+  - **来源**：对 2026-08-11 整合对抗性审查逐条实测核验——P0-1 A4 假绿、P1-1/1-2/1-3 版本漂移、P0-3 security 门禁、P0-4 3D 页、P1-6 EN 页腐蚀等成立；P0-2 记忆路径、P0-4 页数、P1-7 翻译缺口三处证据有误（核验更正，未按错误结论处置）
+  - **P0-1 A4 计数门禁修复**：verify_delivery.py `EXPECT_A4` "201 篇"→"209 篇"（真实计数）·README/STRUCTURE/项目说明/交接文档/文档规范/项目概览 6 处 "199→201" parenthetical 与门禁描述统一为 209——假绿门禁变为真校验
+  - **P1-1/1-2/1-3 版本一致性**：v2.3.38 日期统一 08-11·项目说明 :45 v2.3.37→v2.3.38·交接文档 W422/W423 三处矛盾（:16/:353/:564）与页脚最后更新同步·旁文档 3 份 bump
+  - **P0-4 3D 页修复**：site/data/character-relationship-3d.html main() 改 window load 事件触发（内联 defer 属性无效·初版加 defer 本地实测 canvas=0 后更正）——核验确认仅此 1 页真坏（view 页为数据集查看页·EN 版无 defer 正常）
+  - **P1-6 EN 页腐蚀修复**：site/en/journey-geo-semiotics.html 移除 466 处 `Ch.` 注入（UTF-Ch.8→UTF-8·dCh.3js→d3js·hex/rgba 还原）·lang zh-CN→en·残留 6 处合法章节引用
+  - **P0-3 security 门禁修复**：security_scan.py `_find_requirements_files` 非递归 glob→os.walk 递归剪枝（命中 scripts/requirements.txt，不再回退扫环境 103 个 (environment) high）·discover_files 排除 .pw-browsers·实测 high 103→0·E8-2 仍为依赖严格门禁
+  - **P2-3/CI 文档同步**：新Agent启动Prompt.md 更新至 W424（四新门禁/性能预算实测校准/A4 209/security 修复/3D·时间线 load 修复）·workflows/README.md 预算统一 5000/0.3/300 + 触发矩阵补 Screenshot 列 + v2.3.39 W424·perf.yml 断言与注释按实测校准·DESIGN.md "38 页"→"86 可视化页"
+  - **全仓整理**：清理临时审计日志 14 + 缓存（44 __pycache__/.pytest_cache/.ruff_cache）+ 空目录 3 + 截图大件 slices/mobile/desktop ~416MB（保留 viz 证据）·删除过期可再生报告 14（security-report/a11y/html-size/perf/ui-review/audit-baseline/截图管线产物）+ 一次性审计原始 JSON 4（_audit_*.json·.md 报告保留）·RAG 索引重建（35.3→35.8MB·含 08-11 全部文档改动）
+  - **验证**：verify_delivery 全绿（A4 "209 篇"真校验）·lint_links site 2633/docs 4860 链接 0 broken·check_js_syntax 全过·security_scan high=0·py_compile 通过·CSP 校验 159 页 0 漂移·腐蚀/插件引用门禁 0 错误·RAG 查询实测
+  - **CI 实测（push 760be14/f8f1a18 两轮）**：CI/Security/Deploy 全绿·Lighthouse 首跑 LCP 4.73-4.87s 超 4500 → 校准 5000（CLS/TBT 当时 0 达标）·Screenshot 首跑暴露 timeline d3 未定义（W423 defer 化遗留·main() 先于 d3）·同轮确认内联 defer 属性无效（3D 页初版 defer 本地实测 canvas=0）→ 两页 main() 改 load 事件触发（本地实测通过）·load 修复后 timeline CLS 0.235 超 0.2 → CLS 预算回归 W422 基线 0.3 + timeline-viz 预留 min-height
+  - **状态**：已落地·已 push（760be14/fc948b2/f8f1a18/4c28fce/1805bae/ffc8966/440db81/6c2f9c7 + 复盘沉淀批次）·CI/Security/Deploy Pages/Screenshot Review/Lighthouse 全绿（校准后通过）·性能债登记（LCP 2.2s+·timeline CLS 0.14·text-search LCP 6.5→1.9s 纳入 LHCI 门禁·**SRI/CSP 均已落地**）
+
+  - **W424 复盘沉淀批次（2026-08-13）**：SRI 加固（95 外部脚本标签 SHA-384）+ CSP 落地（159 页 meta·680 内联脚本哈希·script-src-attr 'none'·connect-src 放行本地 RAG）·EN 腐蚀第二波（"X" 32 处 + 模板反引号 4 处）·6 页 d3-sankey 漏引修复（桑基图 0→出图）·check_js_syntax 覆盖带属性脚本·新增 check_corruption.py（"X" 腐蚀 + d3 插件引用门禁·挂 verify_delivery）·ci.yml server 启动重试（runner 抖动误报防复发）·方法论新增 7 条（门禁自检/浏览器口径实测/全站实测/机械腐蚀按模式扫描/静默降级可见/报告引用完整/CI 失败分类）·协作偏好显式化（一次做完·工具不入库·skill 仅 GitHub 安装源）
+- **v2.3.37 W422 全量治理（2026-08-10）**：
+  - **来源**：用户要求系统性找茬并按 P1/P2/P3 顺序全部处理；审计发现 3 类门禁缺失 + 文档漂移 + 治理回潮
+  - **P1**：perf.yml 补 push main + 每周定时（LHCI LCP/CLS/TBT 硬预算此前仅 PR/manual 触发、项目无 PR 从未运行）·verify_delivery 新增 4 项硬门禁（A1 导航相邻性 100/100·docs/01 lint_links 0 broken·sitemap 覆盖一致 154 页·site/data 86 页回退模式）
+  - **P2**：文档健康归档（CHANGELOG 302→83 行·file-index 504→127 行·交接文档 628→556 行·W400-W416/W393-W416/W413-W418 段迁 archive）·双索引规则校准（存量板块以 file-index 追溯）·README check_all_js_syntax 失效命令修正为 check_js_syntax.py --all + ci.yml 新增 JS 语法检查·认知总览计数校准（756/611/A3=211/A4=209）
+  - **P3**：Dependabot（github-actions/npm×2/pip 每周）·mypy report-only 进 CI·a11y 口径统一（19 checks/20 SC）·截图 artifact 失败才上传 + retention 14 天·_DEBRIS 空目录清理·Actions SHA 固定决策记录（tag+Dependabot）
+  - **验证**：verify_delivery 全绿（含 4 新门禁）·py_compile 通过·sitemap 与排除集实测一致
+  - **状态**：已落地·已 push（a415d4f）·CI/Security/Deploy Pages/Screenshot Review/Lighthouse 全绿（LHCI 校准后通过·性能债登记待办）
+
+- **v2.3.38 W423 性能债专项（2026-08-11）**：
+  - **来源**：W422 补 push 触发后 LHCI 首跑即失败——真实站点存量性能债暴露：index.html LCP 4662ms > 2500ms（✘）·timeline.html CLS 0.241 > 0.1（✘）·dashboard FCP 1889ms 超 warn 线；本地 Playwright 不可用（沙箱网络/锁限制），转保守预算收紧
+  - **CLS 根因·CJK 字体 swap→optional**：3 套 CJK `@font-face`（Noto Serif SC 200/900、Noto Sans SC 400/500）`font-display: swap`→`optional`（swap 换入引发回流 CLS·optional 未就绪则跳过下载无回流）；JetBrains Mono 保持 swap；tokens.css + 86 个 site/data/*.html 同源精确正则替换，`../static/fonts/` 路径零破坏（未跑 inline_css.py 防回归）
+  - **LCP 根因·D3/Three 移出 head**：dashboard.html `<head>` 同步 d3 脚本（~4.7s LCP 真凶·非 index）移至 body 末尾 vis-tools.js 前；timeline.html / character-relationship-3d.html 的 d3 + Three.js 改 `defer`（图表 run() 在 load 后）
+  - **预算校准 perf.yml**：LCP 5000→4500·CLS 0.3→0.2·FCP warn 4800→4200·interactive warn 5000→4500·TBT 300 不变；头注释根因更正
+  - **验证**：Grep 字体路径 0 破坏·mono 仍 swap·脚本位置/defer 已核对·py_compile 通过
+  - **状态**：已落地（待 commit/push）·LHCI 收紧后待测（本地无浏览器，以 CI 为准）
+
+- **v2.3.36 W421 Screenshot Review 提速优化（2026-08-10）**：
+  - **来源**：用户反馈“为什么每次都要 Screenshot Review？很浪费时间怎么优化一下”（版本 bump 必改 site 页脚 → 每次都触发 13 分钟全量截图）
+  - **改动范围判定**：screenshot-review.yml 新增 Determine screenshot scope 步骤——页脚 4 文件/文档-only 变更 → 跳过（~20s）；site/data/*.html 变更 → 定向截图（变更页 + index/dashboard·~2-4 分钟）；site/static/assets/非页脚顶层页/审查脚本/workflow 变更 → 全量 88 页；schedule/dispatch 恒全量（每周定时兜底）
+  - **batch_screenshots.js --only-pages**：新增定向截图参数（替换全量列表）·本地实测 2 页 × 2 视口 ~14-20s·--help/汇总同步
+  - **其他**：checkout fetch-depth 0（before/base.sha 本地可用）·Playwright 浏览器缓存（key 跟 package-lock·省 ~2 分钟下载）
+  - **已知取舍**：页脚 4 文件真实布局改动也会跳过（文件级判定），由每周全量 + PR 兜底（工作流头注释记录）
+  - **验证**：本地定向截图实测 + 判定逻辑 10 样例推演 + workflow 自身变更触发全量运行自验证
+  - **状态**：已落地·已 push（e846954）·CI/Security/Deploy Pages/Screenshot Review 全绿（CI 15 job + Security 4 job + Screenshot 13m12s 无 Node 20 告警）
+
+- **v2.3.35 W420 A1 内容质量深化（2026-08-10）**：
+  - **来源**：新接任 Agent 按启动流程调研（交接文档「二」候选清单·优先级零）后用户选定"内容质量深化"方向；审计发现 3 类真实缺口（深度解读缺失/元数据缺失/导航错链）
+  - **深度解读 100/100 补全**：第038/039回（乌鸡国）此前无深度解读段——新增 SD102 婴儿问母（枕边测谎/程序正义悖论/井龙王保证据/八戒撺唆紧箍咒）+ SD103 一粒金丹（嚎啕哭丧/金丹清气三教合流/紧箍咒辨真假反转/文殊一饮一啄阉狮悖论）·source 切片 101→103 篇·与第56回 SD101 同格式（### SD### + ## 一、分节 + 延伸思考）
+  - **结构化元数据补齐**：56 回补 `> 对应原著：第X回` + `> 数据指标：` 行（逐篇按真实梗概/数据撰写·100/100 回号交叉校验一致）+ 第083回补缺 H1 标题行
+  - **导航错链修复**：约 60 回上一回/下一回指向非相邻回（W418 只保证每回有导航行）——99 回批量修复相邻回对齐 + 6 回补缺上一回 + 标签统一·100/100 相邻性校验通过
+  - **sd-crossref 死链修复**：10 回深度解读关联块 `../../../docs/` 多级 ../ 死链（66 处）→ `../`·docs/01 1715 链接 0 broken（修复前 66 broken）+ docs/4859 + site/2629 + source/281 全 0 broken
+  - **验证**：3 项全量审计（元数据/导航相邻性/深度解读覆盖）100/100·lint_links 四目录 0 broken·Grep spot-check 落地
+  - **状态**：已落地·已 push（8f2800f）·CI/Security/Deploy Pages/Screenshot Review 全绿（CI 15 job + Security 4 job + Screenshot 13m25s）
+
+- **v2.3.34 W419 修复 A1 深度解读 SD 错位（2026-08-10）**：
+  - **来源**：新接任 Agent 按流程调研（交接文档「二」候选清单·优先级零）后用户选定"修复 SD 错位"方向
+  - **错位定位**：审计发现 **22 篇 SD（SD038-052、SD056-062）编号≠真实回号**（如 SD038 内容号山红孩儿=40-42 回却放第038回·SD058 内容荆棘岭=64回放58回）——根因：W286 合并脚本 `parse_shendu_metadata()` 只读源第一行（元数据注释在第三行·第一行被标题行占据）→ fallback 按编号放置；且 SD038-062 源元数据"推测对应原著回号"=编号硬套，部分与正文矛盾（SD039 标39回正文黑水河=43·SD049 标49回正文蝎子精=55）
+  - **回文件归位**：按正文逐篇判断真实回号·22 篇移动/复制到正确回（范围式复制到范围内每回·与 73-100 回模式一致）——SD038→40-42·SD039/040→43·SD041→44-46·SD042→45·SD043→46·SD044→47·SD045→48·SD046→49·SD047→50-52·SD048→53-55·SD049→55·SD050/057→59-61·SD051→62·SD052→62-63·SD056→57-58·SD058→64·SD059→65-66·SD060→67·SD061→68-71·SD062→72——**40-72 回全覆盖**（63-72 十连回空白消除）·38/39/56 回删除空段·63-72 回新建深度解读段
+  - **源文件修正**：24 篇元数据回号修正（22 篇 + SD075/077 归程篇 47-49→99/99-100）·17 篇正文 H1 编号→真实回号·3 篇正文内嵌"当前回"引用 4 处·9 篇 `> 关联：` 链接改指真实回
+  - **第 56 回补写**：新增 **SD101 · 草寇之死**（神狂诛草寇 道昧放心猿深读·插入第056回）——SD 切片 100→101 篇
+  - **验证**：40-72 全覆盖核对 + `lint_links` 2629 链接 0 broken + Grep spot-check + 1-37/73-100 回保持原样
+  - **状态**：已落地·已 push（3e17477）·CI/Security/Deploy Pages/Screenshot Review 全绿
+
+> **历史里程碑归档**：v2.2.49 及更早的详细里程碑记录（W066-W280）已迁移至 [交接文档-archive.md](交接文档-archive.md)；W413-W418 详细里程碑（v2.3.28-v2.3.33）与版本历史摘要于 W422 迁移归档。本段保留最近 8 个版本（v2.3.34-v2.3.41·W419-W426）概要（更早详见 CHANGELOG.md 与 archive）。
+
+### 当前版本号
+
+- **v2.3.17**（2026-08-07）
+- **v2.3.18**（2026-08-08）
+- **v2.3.19**（2026-08-09）
+- **v2.3.20**（2026-08-09）
+- **v2.3.21**（2026-08-09）
+- **v2.3.23**（2026-08-09）
+- **v2.3.24**（2026-08-09）
+- **v2.3.25**（2026-08-09）
+- **v2.3.26**（2026-08-09）
+- **v2.3.27**（2026-08-09）
+- **v2.3.28**（2026-08-09）
+- **v2.3.29**（2026-08-09）
+- **v2.3.30**（2026-08-09）
+- **v2.3.31**（2026-08-10）
+- **v2.3.32**（2026-08-10）
+- **v2.3.33**（2026-08-10）
+- **v2.3.34**（2026-08-10）
+- **v2.3.35**（2026-08-10）
+- **v2.3.36**（2026-08-10）
+- **v2.3.37**（2026-08-10）
+- **v2.3.41**（2026-08-14）
+- **v2.3.40**（2026-08-14）
+- **v2.3.39**（2026-08-12）
+- **v2.3.38**（2026-08-11）
+- **v2.3.42 - v2.3.68**（2026-08-12 至 2026-08-16·W427-W453·详见 CHANGELOG）
+- **v2.3.69 - v2.3.78**（2026-08-16 至 2026-08-17·W454-W463·详见 CHANGELOG）
+- **v2.3.79**（2026-08-18·W476 Phase E0·详见 CHANGELOG）
+- **v2.3.80**（2026-08-18·W477 Phase E1·详见 CHANGELOG）
+- **v2.3.81**（2026-08-18·W478 Phase E2·详见 CHANGELOG）
+- **v2.3.82**（2026-08-18·W464 Phase 3 观测基线·详见 CHANGELOG）
+- **v2.3.83**（2026-08-19·W484 Skills 治理·详见 CHANGELOG）
+- **v2.3.93**（2026-08-22·W494 遗留收尾·详见 CHANGELOG）
+- **v2.3.92**（2026-08-22·W493 Phase E6·详见 CHANGELOG）
+- **v2.3.91**（2026-08-22·W492 Phase E5·详见 CHANGELOG）
+- **v2.3.90**（2026-08-22·W491 Phase E4·详见 CHANGELOG）
+- **v2.3.89**（2026-08-22·W490 Phase E3·详见 CHANGELOG）
+- **v2.3.88**（2026-08-22·W489 全站暗色模式·详见 CHANGELOG）
+- **v2.3.87**（2026-08-22·W488 根页视觉重设计+夜读·详见 CHANGELOG）
+- **v2.3.86**（2026-08-19·W487 Skills 二轮同步·详见 CHANGELOG）
+- **v2.3.85**（2026-08-19·W486 Skills 协议同步·详见 CHANGELOG）
+- **v2.3.84**（2026-08-19·W485 Skills 收录·详见 CHANGELOG）
+- **v2.3.98 - v2.3.102**（2026-08-24·W499-W503·GitHub 协作模板+创意方法论沉淀 / 索引健康门禁 / 元信息块 v2 / 术语一致性门禁 / 原著引文硬验证·详见 CHANGELOG）
+- **Git HEAD**：v2.3.103 W504 存量核验状态基线 + 学术轨 105 篇引文核验 A+ 路径（611 篇核验状态·105 绿标·411 引文 100%·D8 修复·结论已沉淀于 CHANGELOG）
+- W### 编号已用到 **W503**（Phase E 轨：W476-E0/E1、W478-E2、W488-W494、W495 P0 热修复、W496 优化收尾）/ **W464**（Phase 3 轨起步）/ **W484-W498**（Skills 治理轨：治理 + 收录 + 同步 + 防漂移门禁）/ **W499-W503**（内容可信度轨：GitHub 模板+创意方法论 / 索引健康门禁 / 元信息块 v2 / 术语一致性 / 引文硬验证）；Phase E 全线完成；遗留项清零；Phase 3 预排 W465-W475
+- 下一版本段编号：**W504**（内容可信度轨续：存量 611 篇核验状态打标 + 学术轨 105 篇补引文 A+；随后 W505 创意流程闭环）；Phase 3 首轮复盘+决策闸门仍预排 W465（观测窗 2 周后）
 
 ---
