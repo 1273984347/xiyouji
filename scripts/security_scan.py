@@ -489,7 +489,7 @@ def _run_audit_on_requirements(audit_cmd, req_file):
         proc = subprocess.run(
             audit_cmd + ["--requirement", str(req_file),
                          "--format", "json", "--no-deps"],
-            capture_output=True, text=True, timeout=120, check=False,
+            capture_output=True, text=True, timeout=300, check=False,
         )
     except subprocess.SubprocessError as exc:
         return [{

@@ -4,13 +4,21 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W511），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W512），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.111（2026-08-25）：W512 CI 安全批次 — security_scan pip-audit 超时误报修复（DEP-001 归零）
+
+> **来源**：W511 审查时 security_scan --all 实测发现 pip-audit「1 漏洞」，排查确认为 `security_scan.py` 内 pip-audit 子进程 **120s 超时**误报（非真实依赖漏洞）——单独 `pip_audit --timeout 300` 实测「No known vulnerabilities found」，用户确认处理。
+> - **执行**：`scripts/security_scan.py` `_run_audit_on_requirements` 的 pip-audit `timeout=120 → 300`（pip-audit 首次需下载 advisory 数据库，120s 不足）。
+> - **验证**：重跑 `security_scan.py --all`——DEP-001 **0**（此前 1）；耗时 124s → **40.8s**（数据库已缓存）；high=0 medium=261（259 XSS-001 存量 innerHTML 噪音 + 2 API-004 均为 security_scan.py 自身工具代码 verify=False，非生产代码；真实依赖漏洞 = 0）。
+> - **文件**：scripts/security_scan.py、六文档。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.110（2026-08-25）：W511 治理文档健康指标归档 — 三文档超阈值瘦身（CHANGELOG/file-index/交接文档概要）
 
