@@ -13,7 +13,7 @@
 
 【第 1 步 · 定位现状（必读 3 份）】
 1. 交接文档.md →「零、当前阻塞」+「一、当前进度」：当前 HEAD（vX.Y.Z W###）、下一 W 编号、遗留阻塞/待办
-2. README.md → 项目全貌：A1–A6 内容板块（611 篇）、86 可视化页、在线站点、双协议授权
+2. README.md → 项目全貌：A1–A6 内容板块（615 篇）、可视化页 86（site/data 共 87 个 HTML，「86」不含模板壳 _shell.html）、在线站点、双协议授权
 3. docs/00-导读/项目说明.md → 项目状态、轨标、关键产出
 
 【第 2 步 · 文件管控（动手前必读）】
@@ -36,6 +36,7 @@
 - 禁改：CHANGELOG 历史段、归档 3 份、.env、SECURITY-AUDIT 档、verify_delivery.py、bump_version.py 等（见 §11.2）
 - 版本行：跑 bump_version.py 后必须 Grep 校验 file-index 历史段未被污染（W418/W419 复现 2 次）
 - 批量改写：改完先 `git diff --name-only` 对比改动范围，对"本应无变化"的文件 `git restore` 回退（W419 经验）
+- Windows 本机执行 Python 一律用 `py`（裸 `python` 可能命中 Microsoft Store 占位 stub，exit code 9009），如 `py scripts/verify_delivery.py`（W514 经验登记）
 - A1 深度解读（SD001–SD101）：SD 编号 ≠ 原著回号；源文件元数据注释在第三行；**禁止重跑 `w286_merge_yuanwen_shendu.py`**（会再次错位），改动前先读交接文档 W419 段
 - 改内联脚本后：必须重跑 `python scripts/generate_csp.py`（否则 CSP 哈希失配，整脚本被浏览器拒执行）
 - 3D/时间线页：`main()` 用 `window load` 事件触发——**内联 `defer` 属性对无 src 脚本无效**，勿依赖
@@ -43,8 +44,8 @@
 - 提交流程：每完成一个 W 按 §11.4 勾选清单同步文档 → `python scripts/verify_delivery.py` 全绿 → 提交 → push → 确认 CI / Security / Deploy Pages / Screenshot Review 全绿 → 状态行收尾
 
 【第 5 步 · 现役口径（唯一版本，勿信旧速记）】
-- A4 计数：**209 篇**；A1–A6 真实计数：**611 篇**
+- A4 计数：**209 篇**（EXPECT_A4 断言按字面量核查 README/STRUCTURE/项目说明/交接文档 四文件，该字样禁删）；A1–A6 真实计数：**615 篇**（门禁算法＝六板块目录顶层 .md 磁盘计数 == README「共 N 篇」声明值；W505 起 611→615）
 - LHCI 硬门禁：**LCP < 5000ms · CLS < 0.3 · TBT < 300ms**（W424 实测校准）
 - 性能预算：`scripts/output/perf-budget.json`（total 921600 bytes）
-- CSP：233 页 · 1173 哈希 · `script-src-attr 'none'`
+- CSP：233 页 · `script-src-attr 'none'` · 哈希总数当批现测（勿引用历史速记值作验收阈值；W513 时点实测 1189）
 - 更早批次细节与历史坑：一律查 CHANGELOG 与交接文档「三、方法论沉淀」，本文件不内嵌历史速记

@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W513），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W514），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.113（2026-08-25）：W514 治理文档口径修复 — 五元文档数字校正与门禁清单补录
+
+> 方案档：docs/superpowers/plans/2026-08-25-w514-governance-doc-consistency-fix.md
+
+- **来源**：W505（commit cd6d7b8）向 docs/02 追加 4 篇方向二深化文档，磁盘计数 611→615、A3 211→215、CSP 覆盖页 1173→1189；README 已同步而其余元文档漏更，且统计口径说明 §2 与 CHANGELOG W459 口径块自相矛盾（87 vs「86 含 _shell」）。
+- **执行**：五元文档共 18 处单点替换（新Agent启动Prompt ×4、AGENTS ×6、统计口径说明 ×6、文档规范 ×1、项目说明 ×1）+ 六文档同步组 S1-S6；AGENTS §4.2 补录第 21 门禁 check_dynamic_links.py（动态链接）与第 22 门禁 check_governance_docs.py（治理文档维护契约）登记。
+- **验证**：verify_delivery.py 全绿；陈旧模式全仓扫描 0 残留（方案档 §4 表 A2）；保护位反向抽查通过（方案档 §0.3）；generate_csp.py --check 0 漂移。
+- **状态**：已完成（2026-08-25）。
 
 ### v2.3.112（2026-08-25）：W513 归档二级归档（方案 A）— CHANGELOG-ARCHIVE W001-W399 下移 tier2
 
