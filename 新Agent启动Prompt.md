@@ -36,9 +36,9 @@
 - 禁改：CHANGELOG 历史段、归档 3 份、.env、SECURITY-AUDIT 档、verify_delivery.py、bump_version.py 等（见 §11.2）
 - 版本行：跑 bump_version.py 后必须 Grep 校验 file-index 历史段未被污染（W418/W419 复现 2 次）
 - 批量改写：改完先 `git diff --name-only` 对比改动范围，对"本应无变化"的文件 `git restore` 回退（W419 经验）
-- Windows 本机执行 Python 一律用 `py`（裸 `python` 可能命中 Microsoft Store 占位 stub，exit code 9009），如 `py scripts/verify_delivery.py`（W514 经验登记）
+- Windows 本机执行 Python 一律用 `py -3`（裸 `python` 可能命中假解释器：Microsoft Store 占位 stub 会 exit 9009；PATH 前置的无扩展名 PE shim 更会静默 no-op——零输出零副作用 exit 0，W515 实证），如 `py -3 scripts/verify_delivery.py`
 - A1 深度解读（SD001–SD101）：SD 编号 ≠ 原著回号；源文件元数据注释在第三行；**禁止重跑 `w286_merge_yuanwen_shendu.py`**（会再次错位），改动前先读交接文档 W419 段
-- 改内联脚本后：必须重跑 `python scripts/generate_csp.py`（否则 CSP 哈希失配，整脚本被浏览器拒执行）
+- 改内联脚本后：必须重跑 `py -3 scripts/generate_csp.py`（否则 CSP 哈希失配，整脚本被浏览器拒执行）
 - 3D/时间线页：`main()` 用 `window load` 事件触发——**内联 `defer` 属性对无 src 脚本无效**，勿依赖
 - 新门禁/新生成器：先跑**负样本自测**（构造坏文件确认能抓到）再全量
 - 提交流程：每完成一个 W 按 §11.4 勾选清单同步文档 → `python scripts/verify_delivery.py` 全绿 → 提交 → push → 确认 CI / Security / Deploy Pages / Screenshot Review 全绿 → 状态行收尾
