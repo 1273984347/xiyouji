@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W516），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W517），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.116（2026-08-25）：W517 共享机制载体铁律 — 仓库内文件为真源（W516 载体错误教训固化）
+
+> **来源**：2026-08-25 会话——W516 将上移机制写入全局版 mem-wrap-up（`c:\Users\...\.trae-cn\skills\`），用户指出「其他 Agent 读不到你的 mem-wrap-up SKILL.md」，实证项目 session 读的是仓库版且 `sync_skills.py` 为仓库→全局单向（全局修改会被覆盖）。
+> - **执行（规则固化）**：AGENTS §4.3 新增「共享机制必须写入仓库内文件（git tracked）」规则——禁止只写全局路径；改 skills/ 下任何 skill 必须改仓库版后 `sync_skills.py --sync` 同步全局。
+> - **执行（登记）**：交接文档「三」新增 W517 段（经验名 + 处置 + 复现计数器）。
+> - **执行（修正补记）**：W516 载体错误本身已于 commit 72a9276 修正（上移映射表重写入仓库版 mem-wrap-up + sync 覆盖全局版），本批为教训固化。
+> - **文件**：AGENTS.md、交接文档.md、CHANGELOG.md、scripts/output/file-index.md、README/STRUCTURE/项目说明/site/dukou-engine.html。
+> - **验证**：AGENTS §4.3「共享机制必须写入仓库内文件」落地；交接文档「三」W517 段落地；verify_delivery 核心全绿；pytest 291 passed。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.115（2026-08-25）：W516 经验上移机制固化 + 剩余经验补上移（E44/E34/E41/E36-42）
 

@@ -8,7 +8,7 @@ metadata:
   bridge_note: "7 步 (skill 流水线) vs 4 段 schema (work-log append 格式) 桥接 — 步骤 4 work-log 追加按 4 段 schema 形式"
 ---
 
-# mem-wrap-up Skill（TRAE 蒸馏版）
+# mem-wrap-up Skill
 
 > 本 skill 由 Claude Code vault 版蒸馏而来：剥离 bash 脚本 / Python hooks / Node hooks / vault 路径 / H-rules 术语 / CLAUDE.md §6.1 / Obsidian wiki-link，保留 7 步流水线骨架 + 4 段 work-log schema + verdict 禁词合规 + Failure handling + residual risk 协议。Step 7 联动 deep-review-loop skill（已蒸馏）。
 
