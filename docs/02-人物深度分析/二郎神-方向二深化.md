@@ -5,6 +5,7 @@
 > 双索引链接：
 > - 正向：[CHANGELOG.md](../../CHANGELOG.md) W285 段（待补）
 > - 反向：[file-index.md](../../scripts/output/file-index.md) 本文件条目（待补）
+> 核验状态：未核验
 
 ---
 
