@@ -10,6 +10,16 @@
 
 ---
 
+## W513 归档二级归档（2026-08-25·v2.3.112）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| CHANGELOG-ARCHIVE.md | W513 | v2.3.112 修改·W001-W399 下移 tier2（917→150.4KB）·头部改「W400+」+ 指针 |
+| docs/archive/CHANGELOG-ARCHIVE-tier2.md | W513 | v2.3.112 新增·二级归档层（W001-W399·745.7KB·自含头部+指针） |
+| scripts/verify_delivery.py | W513 | v2.3.112 修改·ARCHIVE_DOCS 新增 tier2（范围漂移可追溯） |
+| docs/00-导读/文档规范.md | W513 | v2.3.112 修改·§5 二级归档规则 + §8 健康指标（归档三件套 >1MB 触发） |
+| scripts/_w513_archive_tier2.py | W513 | v2.3.112 新增·二级归档脚本（入库） |
+
 ## W512 CI 安全批次（2026-08-25·v2.3.111）
 
 | 文件 | W | 说明 |
