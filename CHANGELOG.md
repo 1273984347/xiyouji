@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W508），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W509），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.108（2026-08-25）：W509 经验上移共享 — memory 规则进项目公共载体（防多 Agent 重复犯错）
+
+> **来源**：用户问「memory 经验有哪些可进项目目录、如何让多 Agent 避免重复犯错」——按 W070 上移模式，把 agent 私有层（experience-log/quickref/project_memory）的高价值规则同步进项目公共载体。
+> - **执行（AGENTS.md）**：§4.3 工具链要点新增 3 条强制规则——批量改 md 禁 PowerShell Set-Content（BOM）/同文件多 Edit 必须串行/写引文前先跑 `_cite_probe.py` + 变体称谓须带 canonical；§6 铁律新增第 13 条「内容可信度轨」（引文/术语/归档查测试/管线校验汇总）。
+> - **执行（交接文档）**：「三、方法论沉淀」登记 W505-W508 内容可信度轨四类规则 + W507-W508 复盘行动项闭环方法论（memory→项目 上移机制）。
+> - **文件**：AGENTS.md（§4.3/§6 规则）、交接文档.md（三、方法论沉淀）、六文档。
+> - **验证**：AGENTS 维护契约 Grep 通过（骨架/去重/脚注/HEAD 一致）；verify_delivery exit 0。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.107（2026-08-25）：W508 复盘剩余项收口 — 管线协议去重 + 管线一致性轻量校验
 
