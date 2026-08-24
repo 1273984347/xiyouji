@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W502），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W503），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.102（2026-08-24）：W503 原著引文硬验证 — 第 20 门禁 check_citations.py 挂载（防 AI 幻觉引文）
+
+> **来源**：《内容可信度与溯源体系》方案 W503——存量锚定引文行实测 = 0（172 个文件含"原文"一词但全是散文叙述），引文无法机器验证；绿标「引文已核验」需要可信的命中工具。
+> - **执行（语法）**：文档规范 §4.8 新立——`> 原文引文（第N回）：“……”`，N ∈ 1–100，引文必须是 dataset/text-search.json chapters[N-1].text 的**精确子串**（去空白归一后逐字匹配，禁省略号节引）。
+> - **执行（脚本）**：新建 scripts/check_citations.py（--file/--dir 两模式），挂 verify_delivery 第 20 门禁（--dir docs 全量）；任何引文行未命中 = FAIL，存量引文行 = 0 无历史豁免。
+> - **执行（skill）**：character-content 深化专题硬规则（≥3 条引文行 + 命中率 100%）+ Step 4 引文核验步；s4-submission 阶段 2 补 check_citations 调用说明（已同步全局版）。
+> - **文件**：scripts/check_citations.py（新）、scripts/verify_delivery.py、docs/00-导读/文档规范.md（§4.8 新立 + §4.6 引用补实路径）、两 skill、方案档、六文档。
+> - **验证**：正样本 1/1（第 1 回真实诗曰句命中）+ 负样本 2/2（改字未命中 + 第 999 回越界均被抓）；全量 791 文件扫描 0.3s（≤30s 阈值）；基线引文行 = 0 实测（B0=0）。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.101（2026-08-24）：W502 术语一致性门禁 — 第 19 门禁 check_glossary.py 挂载（术语库类型化 + 规范词锚定）
 

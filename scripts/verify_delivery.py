@@ -509,6 +509,19 @@ def main():
     except Exception as e:
         warn("术语一致性门禁执行异常（W502）: %s" % e)
 
+    # ---- 原著引文硬验证门禁（W503：`> 原文引文（第N回）` 行必须对 text-search.json 精确命中，防 AI 幻觉引文）----
+    cite_py = os.path.join(_HERE, "check_citations.py")
+    try:
+        r = subprocess.run([sys.executable, cite_py, "--dir", "docs"],
+                           capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("原著引文核验通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("原著引文未命中/格式错误（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("原著引文核验门禁执行异常（W503）: %s" % e)
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:
