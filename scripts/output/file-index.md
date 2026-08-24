@@ -10,6 +10,19 @@
 
 ---
 
+## W501 元信息块 v2（2026-08-24·v2.3.100）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_frontmatter.py | W501 | v2.3.100 新增·第 18 门禁（新文件血缘+核验状态 4 字段：生成来源/生成模型/生成日期/核验状态三值·基线豁免） |
+| scripts/output/frontmatter-baseline.txt | W501 | v2.3.100 新增·存量 611 篇豁免清单（docs/01-06 冻结基线） |
+| scripts/verify_delivery.py | W501 | v2.3.100 修改·挂载第 18 门禁元信息块 v2 |
+| docs/00-导读/文档规范.md | W501 | v2.3.100 修改·§4.6 元信息块 v2 新立（4 字段枚举口径 + 空真防护 + 门禁挂载说明） |
+| skills/xiyouji-character-content/SKILL.md | W501 | v2.3.100 修改·Step 2 追加 v2 血缘 4 字段必填模板 |
+| docs/superpowers/plans/2026-08-24-content-trust-provenance-w501-w505.md | W501 | v2.3.100 新增·《内容可信度与溯源体系》方案（W501-W505 路线图·含口径修正 109→105） |
+| site/dukou-engine.html | W501 | v2.3.100 修改·长链页脚 prepend W501 条目 |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W501 | v2.3.100 修改·六文档同步（编号上限 W001-W501） |
+
 ## W500 索引健康门禁（2026-08-24·v2.3.99）
 
 | 文件 | W | 说明 |

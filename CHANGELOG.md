@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W500），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W501），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.100（2026-08-24）：W501 元信息块 v2 — 第 18 门禁 check_frontmatter.py 挂载（血缘 + 核验状态 4 字段）
+
+> **来源**：《内容可信度与溯源体系》方案（docs/superpowers/plans/2026-08-24-content-trust-provenance-w501-w505.md）W501——大厂分析评估移植项 1：内容不可溯源、无可信度分级；存量锚定引文行实测 = 0，绿标须防空真。
+> - **执行（规范）**：文档规范 §4.6 新立元信息块 v2——新文件必填 4 字段（生成来源 skill@commit 或 人工撰写 / 生成模型 含「未记录」合法枚举·禁编造 / 生成日期 YYYY-MM-DD / 核验状态 三值枚举·0 条引文禁标「引文已核验」空真防护）。
+> - **执行（门禁）**：新建 scripts/check_frontmatter.py 挂 verify_delivery 第 18 门禁——仅扫描不在基线清单内的 docs/01-06 新文件；基线 frontmatter-baseline.txt 冻结存量 611 篇豁免（wc -l = 611 实测）。
+> - **执行（skill）**：character-content SKILL.md Step 2 追加 v2 血缘 4 字段必填模板。
+> - **口径澄清**：学术轨实测 105 篇（verify 首匹配口径）；锚定 grep 109 为假阳性（4 篇跨界趣谈正文含「学术研究」引用行），AGENTS「105 篇」无滞后。
+> - **文件**：scripts/check_frontmatter.py（新）、scripts/output/frontmatter-baseline.txt（新）、scripts/verify_delivery.py、docs/00-导读/文档规范.md、skills/xiyouji-character-content/SKILL.md、方案档、六文档。
+> - **验证**：正样本 1/1 + 负样本 1/1（缺「核验状态」exit=1 被抓）；new 模式 0 新文件 exit=0；check_index_health exit=0（治理引用 5 脚本全存在）；verify_delivery 全绿。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.99（2026-08-24）：W500 索引健康门禁 — 第 17 门禁转正 + bump 次级版本行增强
 
