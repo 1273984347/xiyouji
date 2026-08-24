@@ -4,13 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W498），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W499），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.98（2026-08-24）：W499 GitHub 协作模板 + 创意方法论沉淀 + 索引漂移修复
+
+> **来源**：用户准备（社区协作入口 + 创意方法论沉淀） + 2026-08-24 全面审查发现（方法论 README 索引漂移·file-index W449-W463 结构问题）。
+> - **执行（社区协作入口）**：新增 .github/ISSUE_TEMPLATE 4 个（bug_report/feature_request/question/config.yml）+ PULL_REQUEST_TEMPLATE.md——社区提交 issue/PR 的规范入口。
+> - **执行（创意方法论）**：docs/10-方法论沉淀/ 新增 创意三明治工作流.md（AI 发散→人类收敛→AI 补全→人类裁决四层交替·"荒谬起点"激发原创视角）与 人机创意工作流方法论.md（反向约束/跨时空嫁接/幻觉驱动四层创意飞轮 + 工程侧 backlog 备忘）；方法论 README 索引修复——补登 8 个存量文件（Subagent 盲信铁律/markdown 写作规范/前端显示问题诊断 SOP/十七维叙事学图谱测试计划/改动后影响面扫描/白屏三连复盘/记忆研究理论框架/dispatching 四 subagent）+ 修正 2 条"待创建"占位（E2 文档同步/并行 Edit 竞态·文件实际已存在）+ 关联文档版本刷新（v2.0.60→v2.3.97·W087→W498）。
+> - **执行（skill 扩充）**：xiyouji-character-content 新增 references/creative-methods.md（四层创意方法速查·含提示词模板与红线）+ SKILL.md 补创意方法引用（外传/方向二/随笔可选·链接 references/creative-methods.md）。
+> - **执行（索引修复）**：file-index W498 段补维护注记——W449-W463 区间历史遗留结构问题（W457/458/461/462/463 空表·W451/452/453/460 重复·W454/455 乱序·残留 v2.3.65-78 快照行）维持现状不重排（历史段禁改），查历史以 CHANGELOG 为准。
+> - **验收**：verify_delivery 16 门禁全绿；方法论目录 17 文件 100% 登记；README 索引链接 0 broken；skills 双轨 0 漂移。
+> - **文件**：.github/ISSUE_TEMPLATE/*（新建 4）+ .github/PULL_REQUEST_TEMPLATE.md（新建）+ docs/10-方法论沉淀/创意三明治工作流.md（新建）+ docs/10-方法论沉淀/人机创意工作流方法论.md（新建）+ docs/10-方法论沉淀/README.md（索引修复）+ skills/xiyouji-character-content/SKILL.md（修改）+ skills/xiyouji-character-content/references/creative-methods.md（新建）+ scripts/output/file-index.md（注记）+ 六文档。
+> - **验证**：verify 全绿 + 目录登记 100% + 链接 0 broken。
+> - **状态**：批次暂存中，未 commit/push。
 
 ### v2.3.97（2026-08-24）：W498 防漂移门禁 — skills 索引一致性门禁转正 + 仓库↔全局同步工具 + 18 skill 全量部署
 

@@ -10,6 +10,23 @@
 
 ---
 
+## W499 GitHub 协作模板 + 创意方法论沉淀（2026-08-24·v2.3.98）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/ISSUE_TEMPLATE/bug_report.md | W499 | v2.3.98 新建·bug 报告模板 |
+| .github/ISSUE_TEMPLATE/config.yml | W499 | v2.3.98 新建·issue 模板配置 |
+| .github/ISSUE_TEMPLATE/feature_request.md | W499 | v2.3.98 新建·功能请求模板 |
+| .github/ISSUE_TEMPLATE/question.md | W499 | v2.3.98 新建·提问模板 |
+| .github/PULL_REQUEST_TEMPLATE.md | W499 | v2.3.98 新建·PR 模板 |
+| docs/10-方法论沉淀/创意三明治工作流.md | W499 | v2.3.98 新建·AI 发散→人类收敛→AI 补全→人类裁决四层交替 |
+| docs/10-方法论沉淀/人机创意工作流方法论.md | W499 | v2.3.98 新建·反向约束/跨时空嫁接/幻觉驱动四层创意飞轮 + backlog 备忘 |
+| docs/10-方法论沉淀/README.md | W499 | v2.3.98 修改·索引补登 8 个存量 + 修正 2 条待创建 + 关联文档版本刷新 |
+| skills/xiyouji-character-content/SKILL.md | W499 | v2.3.98 修改·补创意方法引用（外传/方向二/随笔可选） |
+| skills/xiyouji-character-content/references/creative-methods.md | W499 | v2.3.98 新建·四层创意方法速查（提示词模板 + 红线） |
+| scripts/output/file-index.md | W499 | v2.3.98 修改·W498 段内补维护注记（W449-W463 结构问题·查历史以 CHANGELOG 为准） |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W499 | v2.3.98 修改·六文档同步 |
+
 ## W498 防漂移门禁（2026-08-24·v2.3.97）
 
 | 文件 | W | 说明 |
@@ -22,6 +39,8 @@
 | AGENTS.md | W498 | v2.3.97 修改·§4.2 补录第 16 门禁 + 脚注 |
 | site/dukou-engine.html | W498 | v2.3.97 修改·footer 版本链 prepend v2.3.97 W498 |
 | CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W498 | v2.3.97 修改·六文档同步 |
+
+> **维护注记（2026-08-24 全面审查）**：本文件 W449-W463 区间存在历史遗留结构问题——W457/W458/W461/W462/W463 段登记内容缺失（空表格）、W451/W452/W453/W460 空壳重复段、W454/W455 乱序、尾部残留 v2.3.65-v2.3.78 旧版本快照行。经审查确认**维持现状不重排**（历史段禁改），该区间查历史变更一律以 [CHANGELOG.md](../../CHANGELOG.md) 为准。
 
 ## W497 skills 治理同步（2026-08-24·v2.3.96）
 
