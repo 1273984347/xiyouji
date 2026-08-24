@@ -102,6 +102,7 @@ description: 创建、扩写与维护《详解西游记》项目的人物深度�
 4. **同步**：新文件写入 `scripts/output/file-index.md`；若涉及新 W，同步 CHANGELOG/交接文档/README/STRUCTURE/项目说明（六文档）。
 5. **跑门禁**：`python scripts/verify_delivery.py` 全绿（含数据漂移检查）。
 6. **引文核验**（含 `> 原文引文` 行的文件必跑）：`python scripts/check_citations.py --file <本文件>`，命中率须 100%（W503 第 20 门禁全站校验）。
+7. **管线一致性**（含「创意三明治管线」标记的文件必跑）：`python scripts/_check_pipeline_consistency.py --file <本文件>`——生成来源须为 `创意三明治管线@<commit>`（不得写 character-content@），引文 ≥3 条（P3-7 轻量校验，不入库门禁）。
 
 ## 反模式（勿做）
 

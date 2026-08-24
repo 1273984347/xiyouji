@@ -10,6 +10,15 @@
 
 ---
 
+## W508 复盘剩余项收口（2026-08-25·v2.3.107）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_check_pipeline_consistency.py | W508 | v2.3.107 新增·管线一致性轻量校验（P3-7：C1 管线标记/C2 生成来源须 创意三明治管线@/C3 引文 ≥3·不入库门禁） |
+| skills/xiyouji-character-content/SKILL.md | W508 | v2.3.107 修改·Step 4 新增第 7 步管线一致性检查（--file 模式） |
+| skills/xiyouji-character-content/references/creative-methods.md | W508 | v2.3.107 修改·方法四去重为速查摘要+指向 SKILL 管线章节为协议单一事实源（修数字漂移 50→≥20） |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W508 | v2.3.107 修改·六文档同步（编号上限 W001-W508） |
+
 ## W507 复盘沉淀落地（2026-08-25·v2.3.106）
 
 | 文件 | W | 说明 |

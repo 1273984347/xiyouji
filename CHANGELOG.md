@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W507），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W508），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.107（2026-08-25）：W508 复盘剩余项收口 — 管线协议去重 + 管线一致性轻量校验
+
+> **来源**：W501-W506 全面复盘（2026-08-25 retrospective）剩余 P2/P3 项落地——P2-6（SKILL 管线章节 ↔ creative-methods.md 方法四去重互指）+ P3-7（管线执行轻量校验）。
+> - **执行（P2-6 去重）**：creative-methods.md 方法四改为「速查摘要 + 指向 SKILL.md 创意三明治管线章节为协议单一事实源」；修正数字漂移（方法四原「50 个切入点」vs SKILL「≥20」已统一为指向 SKILL）。
+> - **执行（P3-7 校验）**：新建 scripts/_check_pipeline_consistency.py（_ 前缀不入库门禁）：C1 管线标记存在性 / C2 生成来源须以 `创意三明治管线@` 开头（禁 character-content@）/ C3 引文 ≥3 条；character-content SKILL Step 4 新增第 7 步管线一致性检查。
+> - **文件**：scripts/_check_pipeline_consistency.py（新）、skills/xiyouji-character-content/SKILL.md + references/creative-methods.md（sync_skills 已同步全局版）、六文档。
+> - **验证**：_check_pipeline_consistency.py 全量扫描 615 文件 exit 0（4 篇管线文档 PASS：生成来源 创意三明治管线@cd6d7b8 · 引文 3 条各）；sync_skills --check 漂移 0；verify_delivery exit 0；pytest 282 passed。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.106（2026-08-25）：W507 复盘沉淀落地 — 引文探针永久化 + 归档查测试规则入 skill
 
