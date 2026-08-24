@@ -50,8 +50,10 @@ A4_DOCS = ["README.md", "STRUCTURE.md",
 EXPECT_A4 = "209 篇"  # 真实计数（W342 199→201 起步，W400 后实际 209）
 
 # 归档文件（W417 新增）：归档后旧 W### 仍纳入范围漂移可追溯扫描，避免误报
+# W513：CHANGELOG-ARCHIVE 二级归档层（W001-W399）同纳入扫描
 ARCHIVE_DOCS = [
     "CHANGELOG-ARCHIVE.md",
+    os.path.join("docs", "archive", "CHANGELOG-ARCHIVE-tier2.md"),
     os.path.join("scripts", "output", "file-index-archive.md"),
     "交接文档-archive.md",
 ]
