@@ -18,7 +18,7 @@ description: 基于原著与《详解西游记》项目资料回答《西游记�
 1. 正典事实 → `docs/02-人物深度分析/<角色>.md` + `source/原文/分回/` 对应回 + `docs/01-全书逐回解读/`。
 2. 结构化数据（出场回数、关系、情感弧）→ `dataset/*.json`（与页面内嵌一致）。
 3. 可视化/英文页 → `site/data/character-*.html`、`site/en/character-*.html`。
-4. 全文检索 → `site/data/text-search.html`（全书 708441 字内嵌语料）。
+4. 全文检索 → `dataset/text-search.json`（全书 708441 字全文，2MB）——`site/data/text-search.html` 的内嵌语料已迁出页面（2026 迁出），页面仅剩检索壳，全文检索必须读 JSON（用脚本检索，勿引页面）。
 
 ### 3. 区分正典与创作
 

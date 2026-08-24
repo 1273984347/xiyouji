@@ -22,9 +22,17 @@ metadata:
 - 工具映射：`Task subagent` → 平台子代理机制；`RunCommand` → 终端命令（PowerShell / `shell_command`）；`Grep/Read` → 文件检索与读取工具（`rg` / `Get-Content`）。
 - 文末 Reference 中的 `C:\Users\12739\...` 仅为来源溯源路径，不是运行路径。
 
+## 子代理不可用声明（2026-08-24 新增）
+
+本 skill 的快速/全面两种模式的执行（3 问自检、11 维度分析、5 件套 verify、知识层升级）**均由主代理完成，不派 subagent**，因此子代理能力缺失不影响本 skill 主体流程。
+
+仅当本 skill 与 deep-review-loop 联动（dim 5/9 消费 DRL 产出、dim 11 反向升级 DRL）时，DRL 侧的子代理不可用降级见 `deep-review-loop/SKILL.md`「子代理不可用降级」段，本 skill 不重复定义。
+
 ## 在三 skill 闭环中的位置
 
 **闭环方向**：deep-review-loop（审查）→ mem-wrap-up（收尾）→ self-evolution（沉淀）
+
+> 单一事实源声明（2026-08-24 护栏）：闭环方向/阶段位置/交接契约的**权威定义以 `agent-session-loop/SKILL.md` 为准**，本段与 deep-review-loop / mem-wrap-up 各自只列本 skill 特有的触发与喂回条目；三处若与整合版冲突，以整合版为准。
 
 **本 skill 位置**：沉淀端（闭环末端，反向喂回 DRL）
 

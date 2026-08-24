@@ -22,6 +22,19 @@ metadata:
 - 步骤 4a 的「6 个项目层文件」为本仓库 xiyouji 六文档清单；其他项目按自身文档清单替换。
 - 文末 Reference 中的 `C:\Users\12739\...` / `d:\1\archive\...` 仅为来源溯源路径，不是运行路径。
 
+## 子代理不可用降级（2026-08-24 新增）
+
+**触发**：平台派发 subagent 返回不可用/FORBIDDEN（如定价限制 code 112），或环境中无子代理机制。
+
+**降级规则**（降级不是跳过，收尾报告必须显式标注 `subagent-unavailable` + 影响面）：
+
+- 步骤 7b DRL 的 R1a（3 verifier）→ 降为主代理自走 3-lens 串行（factual → completeness → reusability 逐一自查，各用不同工具模式，每视角附工具证据）或 1 个可用 subagent 全视角。
+- 步骤 7b R1b/R2 → 主代理以 refuted=true 心态自审 + 换工具/换目录视角重审，声明"独立审计降级为自审"。
+- 步骤 4/6/7a 的 Grep spot-check / 4-step verify 不依赖 subagent，照常执行。
+- 与 7b 既有「DRL 未安装降级」并列：二者独立触发，可同时存在（标注 `DRL downgraded (not installed)` + `subagent-unavailable`）。
+
+> 与「Token 超额降级」区别：Token 降级是主动裁剪（等 user 拍板），本降级是平台能力缺失的强制降级，无需征求许可但必须显式声明。
+
 执行 session 收尾 7 步流水线。每次 session 收尾或 sediment 工作落地后必走。
 
 ## neat-freak 边界声明（v1.1.0 吸收）
@@ -33,6 +46,8 @@ metadata:
 ## 在三 skill 闭环中的位置
 
 **闭环方向**：deep-review-loop（审查）→ mem-wrap-up（收尾）→ self-evolution（沉淀）
+
+> 单一事实源声明（2026-08-24 护栏）：闭环方向/阶段位置/交接契约的**权威定义以 `agent-session-loop/SKILL.md` 为准**，本段与 deep-review-loop / self-evolution 各自只列本 skill 特有的触发与喂回条目；三处若与整合版冲突，以整合版为准。
 
 **本 skill 位置**：收尾端（闭环中段）
 

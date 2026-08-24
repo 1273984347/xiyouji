@@ -1,7 +1,7 @@
 ---
 name: xiyouji-version-bump
-description: 西游记项目（D:\1\xiyouji）版本 bump 与六文档同步标准流程 playbook。步骤：预检记录规模描述 → 改 dukou-engine 长链页脚 → 写 CHANGELOG/交接文档/file-index → 跑 bump_version.py → 手动补回规模描述（bump_version.py --desc 会吞掉版本行的"共 611 篇"/"A4 209 篇"，导致 verify_delivery 报 FAIL）→ verify_delivery 全绿 → git add -u → commit/push。当用户要求"版本 bump"、"升版本"、"W 批次同步"、"六文档同步"、"发新版本"、"version bump"、"W### 提交"时触发。
-version: 1.0.1
+description: 西游记项目（D:\1\xiyouji）版本 bump 与六文档同步标准流程 playbook。步骤：预检记录规模描述 → 改 dukou-engine 长链页脚 → 写 CHANGELOG/交接文档/file-index → 跑 bump_version.py → 手动补回规模描述（bump_version.py --desc 会吞掉版本行的"共 611 篇"/"A4 209 篇"，导致 verify_delivery 报 FAIL）→ verify_delivery 全绿 → 收尾三同步（AGENTS 脚注/路线图状态段/方案档 §10 回填，W494 固化）→ git add -u → commit/push。当用户要求"版本 bump"、"升版本"、"W 批次同步"、"六文档同步"、"发新版本"、"version bump"、"W### 提交"时触发。
+version: 1.1.0
 ---
 
 # 西游记项目版本 Bump 与六文档同步
@@ -37,7 +37,7 @@ version: 1.0.1
 
 - 关键脚本：`scripts/bump_version.py`（同步）、`scripts/verify_delivery.py`（门禁）。
 
-## 标准流程（预检 + 八步）
+## 标准流程（预检 + 九步）
 
 严格按顺序执行，不要跳步。
 
@@ -101,7 +101,17 @@ cd /d/1/xiyouji && python scripts/verify_delivery.py
 
 确认全绿：CSP / 腐蚀 / 数据漂移 / sitemap / A1 导航 / 计数（A4 `209 篇` 必须在 PASS）。CHANGELOG + 交接文档 是 hard gate，README/STRUCTURE/项目说明/file-index 是 WARN，仍要保证无 FAIL。
 
-### 第 8 步：git add -u → commit → push
+### 第 8 步：收尾三同步（W494 教训固化，缺任一项 = P1）
+
+六文档之外，每批必须同步三处，commit 前逐项 Grep 验证（E1 铁律：不信任自己刚写的声明）：
+
+1. **AGENTS.md 结构变更 + 版本脚注**：若本批改了门禁/新增或改名 skill/改了流程，同步 AGENTS.md 对应章节（§4.2 门禁清单 / §4.5 skills 清单），并把文末版本脚注更新为 `vX.Y.Z W###` 与本次 bump 一致（用 `git rev-parse --short HEAD` 核对口径）。改技能清单时同步 `skills/README.md` 索引计数。
+2. **路线图状态段回写**：`docs/superpowers/plans/` 下本批对应的方案档，若含状态段/§10 落地状态表，补上本次执行批次的状态（✅ + commit）。
+3. **方案档落地状态回填**：本批方案档 §8/§10 里声称"已落地"的每一项，实测存在后回填 commit；漏回填 = 下批 day-review 会抓 P1。
+
+> 教训出处：W494（2026-08-22）用户"文档同步你做了吗"指出 AGENTS 脚注 / 路线图状态段 / 方案档 §10 三处遗漏后固化。day-review skill 的步骤 4 是这三处的检查者，本步是执行者，二者配对。
+
+### 第 9 步：git add -u → commit → push
 
 ```bash
 cd /d/1/xiyouji && git status --short        # 先看清改动 + untracked
@@ -120,6 +130,7 @@ cd /d/1/xiyouji && git status --short | grep '^??'   # 确认 untracked 未入�
 - **项目说明 :45 第二处版本行漏改**：`docs/00-导读/项目说明.md` 第 45 行附近的 `- **当前版本**：...` 行（头部版本行之外的第二处）bump **完全不更新**，需手动核改版本号 + 日期。
 - **日期不更新**：bump_version 不刷新版本行日期，需手动改成当天。
 - **顺序不能乱**：footer 必须先改，脚本才读得到新 v/W；CHANGELOG/交接文档/file-index 的完整条目脚本不会代写。
+- **漏收尾三同步（W494 教训）**：只做六文档不查 AGENTS 脚注 / 路线图状态段 / 方案档 §10，会被下批 day-review 抓 P1。第 8 步三同步是强制步骤，不是可选。
 - **git add -u 而非 git add .**：避免把「工具不入库」的 untracked 文件误提交。
 - **Edit 前先 Read**：文件被脚本改动过后，Edit 会报 "File has been modified since read"，需重新 Read 再改。
 
@@ -131,6 +142,7 @@ cd /d/1/xiyouji && git status --short | grep '^??'   # 确认 untracked 未入�
 - [ ] 三处版本行规模描述已补回、日期正确
 - [ ] STRUCTURE 版本行无「+ W4xx」畸形尾巴、项目说明第二处「当前版本」行已核改
 - [ ] `verify_delivery.py` 全绿，无 FAIL
+- [ ] 收尾三同步完成：AGENTS.md 结构/脚注（含 skills/README 计数）、路线图状态段、方案档 §10 均 Grep 验证落地
 - [ ] `git add -u` 后 untracked 文件仍未被暂存
 - [ ] commit 已建、push 到 origin main 成功
 

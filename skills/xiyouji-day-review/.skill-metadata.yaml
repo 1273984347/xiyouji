@@ -1,0 +1,57 @@
+examples:
+  - id: day-review
+    title:
+      zh: 审查今天的工作
+      en: Review Today's Work
+    description:
+      zh: 对当日全部 W 批次提交做完整收尾审查（取证→门禁→渲染抽查→文档同步→P0-P3 分级）
+      en: Run the full end-of-day review over today's W-batch commits (evidence → gates → render spot-checks → doc sync → P0-P3 triage)
+    prompt:
+      zh: |-
+        请审查我今天在《详解西游记》项目里做的工作：
+        取证当日提交与工作区状态，核对门禁基线、逐提交体量、
+        做渲染抽查（styled 断言 + dark 截图 + 断点实测），
+        核对文档同步清单，最后按 P0-P3 分级输出问题报告，
+        并用提问让我确认修复范围。
+      en: |-
+        Please review my work in the Xiyouji project today:
+        gather evidence on today's commits and workspace state, check the delivery gates,
+        review per-commit size, run render spot-checks (styled assertions + dark screenshots + breakpoint tests),
+        verify the documentation sync checklist, then output a P0-P3 triaged issue report
+        and ask me to confirm the fix scope.
+  - id: render-spotcheck
+    title:
+      zh: 渲染抽查（样式回归检查）
+      en: Render Spot-check (Style Regression)
+    description:
+      zh: 只做渲染抽查：Playwright styled 断言 + dark 截图 + 常见宽度断点实测，抓文本门禁漏网的样式回归
+      en: "Render-only spot-check: Playwright styled assertions + dark screenshots + common-width breakpoint tests to catch style regressions text gates miss"
+    prompt:
+      zh: |-
+        请对西游记项目今天改过的页面做渲染抽查：
+        Playwright getComputedStyle 断言（确认样式真的生效，而非白底裸文本）、
+        dark 模式截图目视、390/414px 断点实测。
+        重点排查 INLINED CSS 块是否被清空（全站失样式回归）。
+      en: |-
+        Run a render spot-check on the pages I changed today in the Xiyouji project:
+        Playwright getComputedStyle assertions (confirm styles actually render, not bare text on white),
+        dark mode screenshots reviewed visually, and 390/414px breakpoint tests.
+        Focus on detecting emptied INLINED CSS blocks (full-site style-loss regression).
+  - id: doc-sync-check
+    title:
+      zh: 文档同步核对
+      en: Documentation Sync Check
+    description:
+      zh: 只核对文档同步清单：六文档 / AGENTS 脚注 / 方案档回填 / 交接文档过期行 / 宣称入库脚本
+      en: "Documentation-sync-only check: six docs / AGENTS footnote / plan backfill / stale handover lines / scripts claimed to be committed"
+    prompt:
+      zh: |-
+        请只核对西游记项目今天的文档同步情况：
+        六文档（CHANGELOG/交接文档/README/STRUCTURE/项目说明/file-index）、
+        AGENTS.md 脚注版本行、docs/superpowers/plans/ 方案档遗留项回填、
+        交接文档过期行（声称值 vs 实测）、宣称新建的脚本是否真的在 git 里。
+      en: |-
+        Check only the documentation sync status for the Xiyouji project today:
+        the six docs (CHANGELOG/handover/README/STRUCTURE/project-notes/file-index),
+        the AGENTS.md footnote version line, plan backfill under docs/superpowers/plans/,
+        stale handover lines (claimed vs measured), and whether scripts claimed as new are actually tracked in git.

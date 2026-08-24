@@ -140,7 +140,7 @@ docs/ ──渲染──► site/（导航/索引页，直接链 docs）
 - 会话流程（4 个）：agent-session-loop（审查→收尾→沉淀 整合流水线）、deep-review-loop（DRL 5 轮审查）、mem-wrap-up（7 步收尾）、self-evolution（复盘沉淀）
 - 角色 skill（5 个）：sun-wukong / zhu-bajie / sha-seng / tangseng / bai-longma
 - 内容/知识：character-content、characters-knowledge
-- 流程：version-bump、en-translation、s4-submission
+- 流程（4 个）：version-bump、en-translation、s4-submission、day-review（当日 W 批次收尾审查）
 - 视觉/方案专项（3 个）：visual-batch（Phase E 视觉批次执行）、plan-authoring（W 批次方案撰写）、plan-review（方案评估）
 
 ### 4.6 MCP 服务（mcp-server/）
@@ -240,4 +240,4 @@ cd scripts && npm install && npm run test:e2e   # 三层 E2E
 
 ---
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458），2026-08-17（v2.3.78 W463）墨韵系列复盘增补动效契约（§1/§6-12/§8）与 W 批收尾坑（§4.3），2026-08-18（v2.3.80 W477）增补维护契约与文档治理段，2026-08-19（v2.3.83 W484）skills 治理：§4.5 补录 4 个会话流程 skill（共 14 个），2026-08-19（v2.3.84 W485）收录视觉/方案专项 3 skill（visual-batch / plan-authoring / plan-review，共 17 个），2026-08-19（v2.3.85 W486）四会话流程 skill 协议同步（verdict 7 词 / R0 4 件套 / 警报增强 / P2 残留 / work-log 路径 / 整合版协调），2026-08-19（v2.3.86 W487）四会话流程 skill 二轮同步（DRL 未安装降级声明 + experience-capture 格式规范 + 触发词扩充），2026-08-22（v2.3.93 W494）Phase E 收官同步：§4.2 补录 W493 转正三门禁（token 覆盖率 / 动效禁止清单 / a11y 对比度，现 14 条），2026-08-22（v2.3.94 W495）P0 热修复同步：§4.2 补录 INLINED CSS 完整性门禁（现 15 条），2026-08-22（v2.3.95 W496）优化收尾同步：§4.3 补录验收数字当批现测铁律（acceptance_snapshot.py）。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458），2026-08-17（v2.3.78 W463）墨韵系列复盘增补动效契约（§1/§6-12/§8）与 W 批收尾坑（§4.3），2026-08-18（v2.3.80 W477）增补维护契约与文档治理段，2026-08-19（v2.3.83 W484）skills 治理：§4.5 补录 4 个会话流程 skill（共 14 个），2026-08-19（v2.3.84 W485）收录视觉/方案专项 3 skill（visual-batch / plan-authoring / plan-review，共 17 个），2026-08-19（v2.3.85 W486）四会话流程 skill 协议同步（verdict 7 词 / R0 4 件套 / 警报增强 / P2 残留 / work-log 路径 / 整合版协调），2026-08-19（v2.3.86 W487）四会话流程 skill 二轮同步（DRL 未安装降级声明 + experience-capture 格式规范 + 触发词扩充），2026-08-22（v2.3.93 W494）Phase E 收官同步：§4.2 补录 W493 转正三门禁（token 覆盖率 / 动效禁止清单 / a11y 对比度，现 14 条），2026-08-22（v2.3.94 W495）P0 热修复同步：§4.2 补录 INLINED CSS 完整性门禁（现 15 条），2026-08-22（v2.3.95 W496）优化收尾同步：§4.3 补录验收数字当批现测铁律（acceptance_snapshot.py），2026-08-24（v2.3.96 W497）skills 治理同步：§4.5 补录 day-review（流程类 4 个·共 18 个）+ 版本脚注。如与上述权威文档冲突，以权威文档为准。*
