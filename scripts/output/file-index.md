@@ -10,6 +10,13 @@
 
 ---
 
+## W506 处置遗留（2026-08-25·v2.3.105）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| tests/test_fix_svg_negative_widths.py | W506 | v2.3.105 删除·W447 归档 fix_svg_negative_widths.py 时漏删的配套测试（引用已归档模块致 pytest 收集失败）；脚本仍在 scripts/archive/ 可追溯 |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W506 | v2.3.105 修改·六文档同步（编号上限 W001-W506） |
+
 ## W505 创意流程闭环落地（2026-08-25·v2.3.104）
 
 | 文件 | W | 说明 |
