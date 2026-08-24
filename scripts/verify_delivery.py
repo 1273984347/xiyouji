@@ -485,6 +485,18 @@ def main():
     except Exception as e:
         warn("索引健康门禁执行异常（W500）: %s" % e)
 
+    # ---- 元信息块 v2 门禁（W501：内容可信度轨——新文件必须含血缘 + 核验状态 4 字段，基线豁免存量 611 篇）----
+    fm_py = os.path.join(_HERE, "check_frontmatter.py")
+    try:
+        r = subprocess.run([sys.executable, fm_py], capture_output=True, text=True, timeout=120)
+        tail = (r.stdout.splitlines()[-2:] + r.stderr.splitlines()[-2:])
+        if r.returncode == 0:
+            ok("元信息块 v2 门禁通过（%s）" % (tail[0] if tail else "无输出"))
+        else:
+            fail("元信息块 v2 缺字段/枚举非法（exit %d）：%s" % (r.returncode, " / ".join(tail[:6])))
+    except Exception as e:
+        warn("元信息块 v2 门禁执行异常（W501）: %s" % e)
+
     # ---- 可选：RAG /health 探活（仅告警，不阻断）----
     if "--health" in sys.argv:
         try:
