@@ -105,7 +105,7 @@ cd /d/1/xiyouji && python scripts/verify_delivery.py
 
 六文档之外，每批必须同步三处，commit 前逐项 Grep 验证（E1 铁律：不信任自己刚写的声明）：
 
-1. **AGENTS.md 结构变更 + 版本脚注**：若本批改了门禁/新增或改名 skill/改了流程，同步 AGENTS.md 对应章节（§4.2 门禁清单 / §4.5 skills 清单），并把文末版本脚注更新为 `vX.Y.Z W###` 与本次 bump 一致（用 `git rev-parse --short HEAD` 核对口径）。改技能清单时同步 `skills/README.md` 索引计数。
+1. **AGENTS.md 结构变更 + 版本脚注**：若本批改了门禁/新增或改名 skill/改了流程，同步 AGENTS.md 对应章节（§4.2 门禁清单 / §4.5 skills 清单），并把文末版本脚注更新为 `vX.Y.Z W###` 与本次 bump 一致（用 `git rev-parse --short HEAD` 核对口径）。改技能清单时同步 `skills/README.md` 索引计数。**改/新增任何 skill 后必须：`python scripts/sync_skills.py --sync` 同步全局安装版（仓库为真源）+ `python scripts/check_skills_index.py` 过索引门禁（已挂 verify_delivery，漏同步会直接 FAIL）。**
 2. **路线图状态段回写**：`docs/superpowers/plans/` 下本批对应的方案档，若含状态段/§10 落地状态表，补上本次执行批次的状态（✅ + commit）。
 3. **方案档落地状态回填**：本批方案档 §8/§10 里声称"已落地"的每一项，实测存在后回填 commit；漏回填 = 下批 day-review 会抓 P1。
 
