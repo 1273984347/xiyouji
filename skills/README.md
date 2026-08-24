@@ -1,4 +1,4 @@
-# 项目级 Skills 索引（18 个）
+# 项目级 Skills 索引（19 个）
 
 > 2026-08-19 治理：AGENTS.md §4.5 已同步为 17 个（W484 修复 14 个 + W485 收录 visual-batch / plan-authoring / plan-review）；5 个角色 skill 的 `agents/openai.yaml` 已修复；三个 TRAE 蒸馏 skill 已做平台适配（路径占位符 + 工具映射，见各 SKILL.md 文首「平台适配」）。2026-08-19 W486：四个会话流程 skill 已同步上游协议修正（verdict 7 词全序 / R0 4 件套 / 过拟合警报增强版 / P2 ≤ N_max / work-log 路径 / bridge_note 定义 / 整合版协调声明）。2026-08-19 W487：二轮同步（DRL 未安装降级声明 + experience-capture 格式规范 + self-evolution 触发词扩充）。2026-08-24 W497：skills 治理同步——收录 day-review（18 个）；visual-batch 同步全局版 v1.2.0（W478 脚本迁移管线 + W488 可感知验收/暗色夜读）；plan-authoring 同步全局版 v1.1.0（验收三段式/§10 落地回写）；characters-knowledge 修 text-search 失效引用；version-bump 补收尾三同步（AGENTS 脚注/路线图回写/方案档回填）；四会话流程 skill 补子代理不可用降级声明。**治理教训：新增/更新 skill 后必须同步全局安装目录与仓库版，二处都要入库。**
 
@@ -19,6 +19,7 @@
 | xiyouji-en-translation | 流程 | 英文站可视化页英文化 | 续译 / 拆页翻译 |
 | xiyouji-s4-submission | 流程 | S4 学术投稿前准备 | 投稿检查 / line 号校核 / 匿名稿 |
 | xiyouji-day-review | 流程 | 当日 W 批次收尾审查（取证→门禁→渲染抽查→文档同步→P0-P3 分级） | 审查今天的工作 / 当日复盘 / 收尾审查 |
+| xiyouji-drift-audit | 流程 | 任意时刻全仓漂移体检（六文档版本行→file-index→方法论 README→skills 双轨→治理文档引用→孤儿提交→P0-P3 分级） | 全面审查 / 漂移体检 / 六文档一致性 / 索引核验 |
 | xiyouji-visual-batch | 流程 | Phase E 视觉批次执行管线（探针→令牌化→传播→验证→门禁→version-bump） | 执行视觉批次 / E1-E7 / 令牌化 / 传播批次 |
 | xiyouji-plan-authoring | 流程 | W 批次路线图/方案撰写（九段结构 + 实测取证 + 三问收尾） | 写方案 / 路线图 / roadmap / 阶段规划 |
 | xiyouji-plan-review | 流程 | 方案/文档评估（取证硬门槛 + 五维评估 + 证据基线表） | 评估方案 / plan review / 方案审查 |

@@ -16,9 +16,19 @@
 | 3 | E1 铁律 | [E1铁律.md](E1铁律.md) | prior session 报告 ≠ 实际状态，主代理必须 spot-check 验证 |
 | 4 | Preflight 与 Subagent 模板 | [Preflight与Subagent模板.md](Preflight与Subagent模板.md) | 派 subagent 前先验证事实，subagent 失败时主代理直接 fallback |
 | 5 | 双索引可追溯改造 | [双索引可追溯改造.md](双索引可追溯改造.md) | CHANGELOG 正向时间线 + file-index 反向文件索引 |
-| 6 | E2 文档同步区分历史 vs 现役 | （待创建·详见 user_profile） | 文档同步时区分历史变更日志条目（保留旧值）和现役描述（必须更新为新值） |
+| 6 | E2 文档同步区分历史 vs 现役 | [E2文档同步区分历史vs现役.md](E2文档同步区分历史vs现役.md) | 文档同步区分历史变更日志条目（保留旧值）与现役描述（更新为新值） |
 | 7 | E1 升级版铁律（毕业判据满足） | [E1铁律.md](E1铁律.md) §三 | prior session 报告"修复已落地"时主代理必须 Grep spot-check 验证文件内容·3/3 毕业判据满足·已驱动 mem-wrap-up Step 4a/7a 协议升级落地 |
-| 8 | 并行 Edit 竞态问题 | （待创建·详见 user_profile） | 同一文件的多个 Edit 并行执行时后者覆盖前者·应串行执行或 replace_all |
+| 8 | 并行 Edit 竞态问题 | [并行Edit竞态问题.md](并行Edit竞态问题.md) | 同一文件多 Edit 并行时后者基于旧内容覆盖前者·应串行执行或 replace_all |
+| 9 | 创意三明治工作流 | [创意三明治工作流.md](创意三明治工作流.md) | AI 发散→人类收敛→AI 补全→人类裁决四层交替，用"荒谬起点"激发原创视角 |
+| 10 | 人机创意工作流方法论 | [人机创意工作流方法论.md](人机创意工作流方法论.md) | 反向约束/跨时空嫁接/幻觉驱动四层创意飞轮 + 工程侧 backlog 备忘 |
+| 11 | Subagent 盲信铁律 | [Subagent盲信铁律.md](Subagent盲信铁律.md) | subagent 工具证据不可盲信·关键路径主代理必须直接验证 |
+| 12 | Markdown 写作规范 | [markdown写作规范.md](markdown写作规范.md) | 项目所有 md 文档的统一写作标准（段落反模式·语言规范） |
+| 13 | 前端显示问题诊断 SOP | [前端显示问题诊断SOP.md](前端显示问题诊断SOP.md) | 显示异常/白屏「先取证再假设」诊断流程（W457 复盘沉淀） |
+| 14 | 可视化测试计划·十七维叙事学图谱 | [可视化测试计划-十七维叙事学图谱.md](可视化测试计划-十七维叙事学图谱.md) | narratology-13d-network 数据契约测试计划（W195） |
+| 15 | 改动后影响面扫描 | [改动后影响面扫描.md](改动后影响面扫描.md) | 修改后必须扫描依赖该文件的所有下游·防副作用 |
+| 16 | 白屏三连根因复盘与防回归清单 | [白屏三连根因复盘与防回归清单.md](白屏三连根因复盘与防回归清单.md) | W454-W457 白屏根因复盘 + 可视化页防回归清单 |
+| 17 | 记忆研究理论框架应用方法论 | [记忆研究理论框架应用方法论.md](记忆研究理论框架应用方法论.md) | 记忆研究四框架应用方法论·与 W253-256「应用-方法论」双轨 |
+| 18 | 四 subagent 并行模式 | [dispatching-parallel-agents四subagent并行模式.md](dispatching-parallel-agents四subagent并行模式.md) | 四 subagent 并行派发模式（W257·与记忆研究四篇双轨） |
 
 ---
 
@@ -87,8 +97,8 @@ skill 文件是**协议层**（约束 + 流程定义），本目录是**案例�
 
 ## 关联文档
 
-- [../../README.md](../../README.md)：项目说明（当前版本 v2.0.60）
+- [../../README.md](../../README.md)：项目说明（当前版本 v2.3.97 W498）
 - [../../STRUCTURE.md](../../STRUCTURE.md)：目录结构
-- [../../CHANGELOG.md](../../CHANGELOG.md)：变更日志（W001-W087）
+- [../../CHANGELOG.md](../../CHANGELOG.md)：变更日志（W001-W498）
 - [../../交接文档.md](../../交接文档.md)：跨 session 交接
 - [../../scripts/output/file-index.md](../../scripts/output/file-index.md)：反向文件索引

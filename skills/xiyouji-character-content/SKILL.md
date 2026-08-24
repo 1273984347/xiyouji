@@ -63,6 +63,7 @@ description: 创建、扩写与维护《详解西游记》项目的人物深度�
 - **外传/方向二**：文学散文，允许想象，但**核心设定不得与原著矛盾**（如白骨精的出身不得与"三变"冲突）。
 - **深化专题**：必须有原著引文（标注回目）+ 理论框架 + 与既有深化专题的互链（`与 W152 天庭体系深化...形成体系`）。
 - **数据准确性**：引用数字（出场回数、提及次数）可标注"待全量数据验证"，不得编造精确统计。
+- **创意方法（可选）**：外传/方向二/随笔需要新角度时，参考 [references/creative-methods.md](references/creative-methods.md) 的四层创意方法（反向约束/跨时空嫁接/幻觉驱动/创意三明治），红线见该文件底部；完整方法论文档在 `docs/10-方法论沉淀/`。
 
 ## Step 4 · 质量门禁（写完必查）
 
@@ -84,4 +85,5 @@ description: 创建、扩写与维护《详解西游记》项目的人物深度�
 ## 资源
 
 - [references/templates.md](references/templates.md) — 四家族模板骨架 + 真实示例（写前读）。
+- [references/creative-methods.md](references/creative-methods.md) — 创意方法速查（外传/方向二/随笔用，含提示词模板与红线）。
 - [references/quality-gates.md](references/quality-gates.md) — 门禁细则、双索引、禁改清单、术语（收尾核对时读）。

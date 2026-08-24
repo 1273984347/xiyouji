@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 项目站点
+    url: https://1273984347.github.io/xiyouji/
+    about: 在线浏览站点（含可视化与英文站）
+  - name: 项目说明
+    url: https://github.com/1273984347/xiyouji
+    about: 仓库首页与 README
