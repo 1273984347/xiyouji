@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W504），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W505），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.104（2026-08-25）：W505 创意流程闭环落地 — 可信度轨收官（试点 4 篇方向二深化）
+
+> **来源**：《内容可信度与溯源体系》方案 W505——W499 已暂存创意方法论 2 篇做管线化 + 试点。§9 试点人物经用户选择为「都做」→ 4 篇（方案原 M2 口径 1 篇，用户授权扩大，已回写方案档登记偏差）。
+> - **执行（管线章节）**：skills/xiyouji-character-content/SKILL.md 新增「创意三明治管线」章节——四步固定流程（AI 发散 ≥20 极端切入点 → 人类收敛 ≤3 种子手写骨架 → AI 补全 2 版 → 人类裁决加闲笔/留白）；触发条件 = 用户显式说「用创意流程」；元信息块 `生成来源` 记录 `创意三明治管线@<commit>`。
+> - **执行（试点）**：4 篇方向二深化走完整四步管线落 docs/02-人物深度分析/（菩提祖师/黑熊精/金角银角/高翠兰），各含 3 条 `> 原文引文（第N回）` 精确命中行 + v2 血缘 4 字段（核验状态：引文已核验）+ 创意三明治管线标记。
+> - **执行（索引核验）**：docs/10-方法论沉淀/README.md 已含 2 篇方法论文档索引（W499 暂存版，核验跳过）；sync_skills.py --sync 仓库→全局后 --check 漂移 0。
+> - **文件**：skills/xiyouji-character-content/SKILL.md、docs/02-人物深度分析/4 篇新文档、方案档（回写 W505 完成态）、六文档（README/STRUCTURE/项目说明计数 611→615）。
+> - **验证**：4 篇 × 三门禁全过（check_frontmatter 元信息块 v2 · check_citations 引文 12/12 命中率 100% · check_glossary C2 新违规 0——初写 3 篇违规经 canonical 补齐修复）；全站引文 423 条 100%；sync_skills 漂移 0；check_index_health 通过；verify_delivery exit 0（A1-A6 计数 615 同步 README）。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.103（2026-08-25）：W504 存量核验状态基线 + 学术轨 105 篇引文核验（A+ 路径）— 可信度轨收尾
 
