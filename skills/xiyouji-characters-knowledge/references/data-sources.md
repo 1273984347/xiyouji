@@ -12,7 +12,7 @@
 - `scripts/output/data/*.json`：A-AH 脚本生成的运行时数据（fetch 源，线上 404 时页面回退内嵌）。
 - `site/data/character-*.html`（7 页）：人物关系 3D / 动态网络 / 语义网络 / 情感弧 / 出场时间线 / 外貌分布。
 - `site/en/character-*.html`（12 页）：英文人物页（wukong/bajie/shaseng/tangseng/bailongma 等）。
-- `site/data/text-search.html` + `site/static/js/text-search-app.js`：全书 100 回原文全文检索（语料含回目 fullTitle）。
+- `dataset/text-search.json`（全书 100 回原文，708441 字，约 2MB，`chapters[]` 含 `num`/`title`/`fullTitle`/`text`）：全文检索唯一权威数据源——`site/data/text-search.html` 的内嵌语料已迁出页面（2026 迁出，页面仅剩 62KB 检索壳），检索必须读 JSON（脚本检索，勿引页面）。
 
 ## 3. 出处标注规则
 

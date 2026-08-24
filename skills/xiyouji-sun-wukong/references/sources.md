@@ -5,7 +5,7 @@
 - dataset JSON：`dataset/character-relationship-3d.json`（22 节点/32 边）、`dataset/pilgrim-team-dynamic-network.json`、`dataset/pilgrim-team-psychology-arc.json`。
 - 可视化页：`site/data/character-relationship-3d.html`、`character-presence-timeline.html`、`character-sentiment-arc.html`、`character-dynamic-network.html`。
 - 英文页：`site/en/character-wukong.html`。
-- 全文检索：`site/data/text-search.html`（全书 100 回原文内嵌）。
+- 全文检索：`dataset/text-search.json`（全书 100 回原文，708441 字，约 2MB——`site/data/text-search.html` 内嵌语料已迁出页面（2026 迁出），仅剩检索壳，必须读 JSON）。
 - 逐回解读：`docs/01-全书逐回解读/`（第 1、2、7、14、27、56-58、61、100 回为高频入口）。
 
 ## 生产规则（写悟空内容必读）

@@ -5,7 +5,7 @@
 - dataset JSON：`dataset/character-relationship-3d.json`、`dataset/pilgrim-team-dynamic-network.json`、`dataset/pilgrim-team-psychology-arc.json`。
 - 可视化页：`site/data/character-relationship-3d.html`、`character-presence-timeline.html`。
 - 英文页：`site/en/character-bailongma.html`。
-- 全文检索：`site/data/text-search.html`。
+- 全文检索：`dataset/text-search.json`（全书 100 回原文，708441 字，约 2MB——`site/data/text-search.html` 内嵌语料已迁出页面（2026 迁出），仅剩检索壳，必须读 JSON）。
 
 ## 生产规则（写白龙马内容必读）
 
