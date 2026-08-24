@@ -1,6 +1,6 @@
 # xiyouji-visual-batch 参考模板与速查
 
-供执行 Phase E 视觉批次时按需取用：§1 探针报告结构、§2 预算核对表、§3 shot_check 脚本骨架、§4 页面分型与根页清单、§5 落地数字基准（W476/W477 实测）。
+供执行 Phase E 视觉批次时按需取用：§1 探针报告结构、§2 预算核对表、§3 shot_check 脚本骨架、§4 M-A1 前后对比验收脚本（W488 范式）、§5 页面分型与根页清单、§6 落地数字基准（W476–W488 实测）。
 
 ## 1. 探针报告结构（E0 范式）
 
@@ -96,7 +96,65 @@ const PAGES = [
 
 验证三件套缺一不可：pageerror=0 → getComputedStyle 断言 → **截图用 Read 工具逐张目视**（阴影过重/圆角崩坏/布局错位只能靠看）。
 
-## 4. 页面分型与根页清单
+## 4. M-A1 前后对比验收脚本骨架（W488 范式）
+
+可感知升级批（视觉重设计/暗色）验收用，强制每页差异像素率 ≥1% + 目视清单 ≥3 处。范式：`git worktree add` 建 before + Playwright 三套截图 + PIL 差异率。
+
+```bash
+# before 工作区（旧基线 commit，不污染当前工作区）
+cd /d/1/xiyouji && git worktree add C:/tmp/w4xx-before <旧基线commit>
+# 验收后清理
+cd /d/1/xiyouji && git worktree remove C:/tmp/w4xx-before
+```
+
+```js
+/* M-A1：before/after/dark 三套 fullPage 截图（一次性脚本） */
+const { chromium } = require('playwright');
+const path = require('path');
+const BEFORE = 'C:/tmp/w4xx-before/site';                 // before 工作区
+const AFTER  = path.resolve(__dirname, '..', 'site');     // 当前工作区
+const PAGES = ['index', 'dashboard', 'curated', 'guide', 'dukou-engine', 'mobile-index'];
+
+async function shot(root, name, outDir, theme) {
+  const browser = await chromium.launch();
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  if (theme) await ctx.addInitScript(() => { try { localStorage.setItem('xy-theme', theme); } catch (_) {} });
+  const page = await ctx.newPage();
+  const errors = [];
+  page.on('pageerror', e => errors.push(String(e).slice(0, 120)));
+  await page.goto('file:///' + path.join(root, name + '.html').replace(/\\/g, '/'),
+    { waitUntil: 'networkidle', timeout: 30000 });
+  await page.waitForTimeout(2200);                        // 等 reveal-in 动画；fullPage 滚动触发全部 IO
+  await page.screenshot({ path: path.join(outDir, name + '.png'), fullPage: true });
+  await browser.close();
+  return errors;                                          // dark 套同时检查 FOUC / pageerror
+}
+
+(async () => {
+  for (const n of PAGES) {
+    await shot(BEFORE, n, 'before', null);
+    await shot(AFTER,  n, 'after',  null);
+    await shot(AFTER,  n, 'dark',   'dark');
+  }
+})();
+```
+
+PIL 差异像素率（同尺寸逐像素；任一通道差 > 12 算差异像素，W488 实测口径）：
+
+```python
+from PIL import Image, ImageChops
+import sys
+a = Image.open(sys.argv[1]).convert('RGB')
+b = Image.open(sys.argv[2]).convert('RGB')
+assert a.size == b.size, f'size mismatch: {a.size} vs {b.size}'  # 高度不同先对齐画布
+diff = ImageChops.difference(a, b).convert('L')
+rate = sum(1 for p in diff.getdata() if p > 12) / (a.size[0] * a.size[1])
+print(f'diff rate = {rate*100:.2f}%', 'PASS' if rate >= 0.01 else 'FAIL: <1% 需补静态强化')
+```
+
+对比图（左右拼接 + diff 率标注）与目视清单落 `plans/`（每页 ≥3 处可辨差异，如 hero 大数字朱砂/表头淡朱砂/KPI 数字朱砂/导航指示条/夜读按钮/route-strip 朱砂线）。hover/dark 在浅色静态截图不可见是首轮不达标主因，先确认静态差异面积够再截。
+
+## 5. 页面分型与根页清单
 
 ### 根页（E1 实测修正口径）
 
@@ -120,13 +178,14 @@ const PAGES = [
 
 - `inline_css.py --force` 只处理含 `../tokens.css` 链接的页面（data 87 + en 138 ≈ 225 页）；**根页无需传播**（同目录 `<link href="tokens.css">` 自动跟随）。
 
-## 5. 落地数字基准（W476/W477 实测，供后续批次参照）
+## 6. 落地数字基准（W476–W488 实测，供后续批次参照）
 
 - W476（E0）：tokens.css v2 5715B → v3 7463B（+1748B，预算内）；DESIGN.md 新增 §4A 纸感轻立体体系；225 页重新同步；五门禁全绿。commit：`feat(w476): Phase E0 纸感轻立体宪改 + tokens v3 — 视觉高级感升级轨启动`。
 - W477（E1）：system.css v2（21.4KB，预算内）；Noto Sans SC 两档子集化（`_w477_sans_subset.py` 复用 w334 管线，省 ~1.4MB）；根页模板化；全站传播。commit：`feat(w477): Phase E1 组件层 v2 + 根页模板化 — system.css v2 全站传播`。
+- W488（根页可感知批）：6 用户可见根页视觉重设计 + 夜读模式第一批（暗色页内实现，见 SKILL.md 第 2c 步）。M-A1 前后对比差异像素率 index 2.35% / dashboard 5.05% / curated 2.84% / guide 5.88% / dukou-engine 25.98% / mobile-index 7.07%（6/6 ≥1%）；修正过程：首轮 3 页不达标（dashboard 0.63%/guide 0.28%/dukou-engine 0.13%，hover/dark 静态不可见）→ 补标题+KPI 朱砂/表头淡朱砂/route-strip 朱砂线等静态强化 → 达标；system.css +644B、tokens 未增；html 每页 +3.2~6.6KB；暗色冒烟 6 页 pageerror=0 + FOUC=0 + 禁 JS 回退浅色。commit：`feat(w488): 根页视觉重设计+夜读模式 — Phase E 方向 A 第一批（可感知升级 + M-A1 前后对比验收）`。
 - 子集化管线：`scripts/archive/w334_font_subset.py`（扫 docs+site 实际用字 → pyftsubset → 覆写 site/static/fonts/ 同名文件，@font-face 不动）。
 
-## 6. 与相邻技能的分工
+## 7. 与相邻技能的分工
 
 - `xiyouji-plan-authoring`：写路线图/单批方案（本技能的输入）。
 - `xiyouji-plan-review`：评估方案（执行前可选）。

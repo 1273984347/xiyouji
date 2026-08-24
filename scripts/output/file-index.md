@@ -10,6 +10,26 @@
 
 ---
 
+## W497 skills 治理同步（2026-08-24·v2.3.96）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| skills/xiyouji-visual-batch/SKILL.md | W497 | v2.3.96 同步全局版 v1.2.0（W478 脚本迁移六规则 + W488 可感知验收/暗色夜读 + M-A1 ≥1%） |
+| skills/xiyouji-visual-batch/reference.md | W497 | v2.3.96 同步全局版 v1.2.0 |
+| skills/xiyouji-plan-authoring/SKILL.md | W497 | v2.3.96 同步全局版 v1.1.0（验收三段式/派生命令/裁掉项/§10 落地回写） |
+| skills/xiyouji-plan-authoring/reference.md | W497 | v2.3.96 同步全局版 v1.1.0 |
+| skills/xiyouji-day-review/（3 文件） | W497 | v2.3.96 新增入库（SKILL.md + reference.md + .skill-metadata.yaml·此前从未 git add） |
+| skills/xiyouji-characters-knowledge/SKILL.md | W497 | v2.3.96 修改·全文检索入口 text-search.html（语料已迁出）→ dataset/text-search.json |
+| skills/xiyouji-version-bump/SKILL.md | W497 | v2.3.96 修改·新增第 8 步收尾三同步（AGENTS 脚注/路线图/方案档§10）·流程改九步·v1.1.0 |
+| skills/agent-session-loop/SKILL.md | W497 | v2.3.96 修改·补子代理不可用降级声明 |
+| skills/deep-review-loop/SKILL.md | W497 | v2.3.96 修改·补子代理不可用降级声明 + 闭环单一事实源护栏 |
+| skills/mem-wrap-up/SKILL.md | W497 | v2.3.96 修改·补子代理不可用降级声明 + 闭环单一事实源护栏 |
+| skills/self-evolution/SKILL.md | W497 | v2.3.96 修改·补子代理不可用声明 + 闭环单一事实源护栏 |
+| AGENTS.md | W497 | v2.3.96 修改·§4.5 流程类补录 day-review（总数 18）+ 版本脚注 |
+| skills/README.md | W497 | v2.3.96 修改·索引补 day-review 行·标题 17→18·治理注释补 W497 |
+| site/dukou-engine.html | W497 | v2.3.96 修改·footer 版本链 prepend v2.3.96 W497 |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W497 | v2.3.96 修改·六文档同步 |
+
 ## W496 优化收尾（2026-08-22·v2.3.95）
 
 | 文件 | W | 说明 |

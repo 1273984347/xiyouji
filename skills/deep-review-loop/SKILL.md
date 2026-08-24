@@ -23,9 +23,24 @@ metadata:
 - 本仓库三 skill 闭环的整合入口是 `skills/agent-session-loop/SKILL.md`；独立调用本 skill 时按原文 5 轮协议执行。
 - 文末 Reference 中的 `C:\Users\12739\...` 仅为来源溯源路径，不是运行路径。
 
+## 子代理不可用降级（2026-08-24 新增）
+
+**触发**：平台派发 subagent 返回不可用/FORBIDDEN（如定价限制 code 112），或环境中无子代理机制。
+
+**降级规则**（降级不是跳过——3-lens/对抗/独立审计的检查面必须保留，只是执行者换成主代理；收尾报告必须显式标注 `subagent-unavailable` + 影响面）：
+
+- R1a（3 verifier parallel）→ 降为**主代理自走 3-lens 串行**：factual → completeness → reusability 三视角逐一自查，每个视角用**不同的工具模式**（如 Grep 数字溯源 / Read 结构覆盖 / 陌生人 cold-start 推演），每视角结论附工具证据；或降为 1 个可用 subagent 全视角。
+- R1b（对抗）→ 主代理以 **default refuted=true** 心态自审：把第 7 节 6 条反模式清单逐条对照检查，class-level 枚举仍必须 Grep 全目录。
+- R2（独立审计 NOT inline）→ 主代理**换工具/换目录视角**重审 R1 findings（如 R1 用 Grep 则改用 Read 逐行 trace），并声明"独立审计降级为自审，盲点风险上升"。
+- 收敛曲线与 R3 residual risk 照常记录，residual 增补一条"subagent 视角缺失"盲点项。
+
+> 与「Token 超额降级」区别：Token 降级是主动裁剪（等 user 拍板），本降级是平台能力缺失的强制降级，无需征求许可但必须显式声明。
+
 ## 在三 skill 闭环中的位置
 
 **闭环方向**：deep-review-loop（审查）→ mem-wrap-up（收尾）→ self-evolution（沉淀）
+
+> 单一事实源声明（2026-08-24 护栏）：闭环方向/阶段位置/交接契约的**权威定义以 `agent-session-loop/SKILL.md` 为准**，本段与 mem-wrap-up / self-evolution 各自只列本 skill 特有的触发与喂回条目；三处若与整合版冲突，以整合版为准。
 
 **本 skill 位置**：审查端（闭环起点）
 

@@ -121,6 +121,18 @@ metadata:
 
 ---
 
+## 子代理不可用降级（2026-08-24 新增）
+
+**触发**：平台派发 subagent 返回不可用/FORBIDDEN（如定价限制 code 112），或环境中无子代理机制。
+
+**降级规则**（降级不是跳过——三阶段各自的检查面必须保留，执行者换成主代理；收尾报告显式标注 `subagent-unavailable`）：
+
+- Phase 1 审查：R1a 降为主代理自走 3-lens 串行（factual → completeness → reusability，各用不同工具模式，每视角附工具证据）或 1 个可用 subagent 全视角；R1b 以 refuted=true 心态自审；R2 换工具/换目录视角重审并声明"独立审计降级为自审"。细节见 `deep-review-loop/SKILL.md`「子代理不可用降级」。
+- Phase 2 收尾：步骤 7b DRL 同降级规则；步骤 4/6/7a 的 Grep spot-check 不依赖 subagent 照常执行。
+- Phase 3 沉淀：self-evolution 两模式均主代理执行，不派 subagent，不受影响（见其「子代理不可用声明」）。
+
+> 与「Token 超额降级」区别：Token 降级是主动裁剪（等 user 拍板），本降级是平台能力缺失的强制降级，无需征求许可但必须显式声明。
+
 ## memory 路径约定
 
 本 skill 涉及 memory 操作时，使用占位符路径，按你的环境替换：

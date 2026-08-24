@@ -4,13 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W496），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W497），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.96（2026-08-24）：W497 skills 治理同步 — 仓库版 skill 与全局版对齐 + day-review 入库 + 收尾三同步固化
+
+> **来源**：skills 目录审查（2026-08-24）发现 3 处 P1——仓库版 visual-batch/plan-authoring 落后全局安装版（W478 脚本迁移/W488 可感知验收未回写）、day-review 从未 git 入库、characters-knowledge 引用已迁出的 text-search 内嵌语料；用户确认全部修复。
+> - **执行（skill 漂移同步）**：visual-batch 同步全局版 v1.2.0（SKILL.md+reference.md：W478 _w478_migrate.py 六规则脚本迁移管线 + W488 可感知升级批/暗色夜读/M-A1 前后对比验收 ≥1%）；plan-authoring 同步 v1.1.0（验收三段式「指标=阈值（测量方法）」/派生命令/裁掉项显式化/§10 落地状态回写）。
+> - **执行（day-review 入库）**：git add skills/xiyouji-day-review/（SKILL.md+reference.md+.skill-metadata.yaml）；AGENTS.md §4.5 流程类补录（4 个，项目 skill 总数 18）；skills/README.md 索引补行 + 标题 17→18。
+> - **执行（失效引用修复）**：characters-knowledge 全文检索入口 text-search.html（内嵌语料已迁出页面）→ dataset/text-search.json。
+> - **执行（收尾流程补全）**：version-bump 新增第 8 步「收尾三同步」（AGENTS 脚注/路线图状态段/方案档 §10 回填，W494 教训固化）+ 陷阱/完成清单同步，流程改九步；四会话流程 skill（agent-session-loop/deep-review-loop/mem-wrap-up/self-evolution）补「子代理不可用降级」声明（平台派发 FORBIDDEN 时 3-lens/对抗/独立审计降为主代理执行、不静默跳过）+ 三独立 skill 补闭环单一事实源护栏。
+> - **验收**：_check_skills.py 自检 18 个 SKILL.md 全过（frontmatter/openai 残留/references 链接）；仓库版 vs 全局版 4 个漂移文件 diff IDENTICAL；verify_delivery 核心全绿。
+> - **文件**：skills/ 下 8 个 skill 文件（visual-batch×2 + plan-authoring×2 + day-review×3 + characters-knowledge + version-bump）+ AGENTS.md（§4.5 + 脚注）+ skills/README.md + CHANGELOG/交接文档/file-index/dukou-engine footer。
+> - **验证**：diff 4 文件 IDENTICAL + _check_skills 18/18 + verify 全绿。
+> - **状态**：本次提交（W497）将推送 origin/main。
 
 ### v2.3.95（2026-08-22）：W496 优化收尾 — 夜读切换钮全站 + 样式断言固化 + 验收现测工具 + fps 遗留关闭
 
