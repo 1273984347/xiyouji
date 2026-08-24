@@ -4,13 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W497），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W498），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)；W422 再归档 v2.3.18-v2.3.31（W400-W416）段。本文件仅保留 v2.3.32+（W417）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.97（2026-08-24）：W498 防漂移门禁 — skills 索引一致性门禁转正 + 仓库↔全局同步工具 + 18 skill 全量部署
+
+> **来源**：W497 教训（day-review 建了未入库 + 索引/AGENTS §4.5 漏收录 + 仓库版与全局版漂移）——单靠流程提醒防不住，用户确认「全做（门禁+脚本）」：把防线升级为自动检测。
+> - **执行（第 16 门禁转正）**：新建 scripts/check_skills_index.py 挂 verify_delivery——①skills/ 目录数 == README 表格行数（双向差集）；②目录短名 ⊆ AGENTS.md §4.5；③skills/ 全部文件 git tracked（git ls-files 差集，抓 day-review 式建了未 add）；④SKILL.md frontmatter name == 目录名。负样本 2/2 自测（未跟踪文件/无索引目录均被抓住）。
+> - **执行（同步工具）**：新建 scripts/sync_skills.py（本地工具不入 CI）：--check 列仓库版 vs 全局版 ~/.qwenworkcn/skills/ 漂移（孤儿只报 xiyouji-*，忽略 QwenWork 内置 skill）；--sync 以仓库为真源单向复制 + 自检。plan-authoring/.skill-metadata.yaml 全局版较新（含 §10 三段式表述），先反向回拷仓库再统一真源。
+> - **执行（全量部署）**：--sync 把仓库 18 个 skill（含 4 会话流程 + 12 个此前从未安装的 xiyouji-*）全量部署到全局版，44 文件更新，自检 0 漂移。
+> - **执行（流程固化）**：version-bump 第 8 步补「改/新增 skill 后必须 sync_skills.py --sync + check_skills_index.py 过门禁」；AGENTS.md §4.2 补录第 16 门禁。
+> - **验收**：verify_delivery 核心全绿（含新门禁）；sync_skills.py --check 0 漂移；负样本 2/2。
+> - **文件**：scripts/check_skills_index.py（新建）+ scripts/sync_skills.py（新建）+ scripts/verify_delivery.py（第 16 门禁挂载）+ skills/xiyouji-plan-authoring/.skill-metadata.yaml（全局→仓库回拷）+ skills/xiyouji-version-bump/SKILL.md（第 8 步补 sync）+ AGENTS.md（§4.2/§4.5/脚注）+ 六文档。
+> - **验证**：门禁负样本 2/2 + 全量部署自检 0 漂移 + verify 全绿。
+> - **状态**：本次提交（W498）将推送 origin/main。
 
 ### v2.3.96（2026-08-24）：W497 skills 治理同步 — 仓库版 skill 与全局版对齐 + day-review 入库 + 收尾三同步固化
 

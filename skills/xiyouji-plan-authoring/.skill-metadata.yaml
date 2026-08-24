@@ -11,12 +11,12 @@ examples:
         请为 xiyouji 项目（D:\1\xiyouji）撰写下一阶段路线图方案。
         方向：{{一句话描述，如"SEO 与可发现性优化"}}
         批次范围：{{如 W###–W###}}
-        请按 xiyouji-plan-authoring 流程执行：先读上游方案与 DESIGN.md 取证，再按固定九段结构成文落 docs/superpowers/plans/。
+        请按 xiyouji-plan-authoring 流程执行：先读上游方案与 DESIGN.md 取证，再按固定结构（§0-§9 + §10 落地状态，验收一律「指标 = 阈值（测量方法）」三段式）成文落 docs/superpowers/plans/。
       en: |-
         Please draft the next-phase roadmap for the xiyouji project (D:\1\xiyouji).
         Direction: {{one-line description, e.g. "SEO and discoverability optimization"}}
         Batch range: {{e.g. W###–W###}}
-        Follow the xiyouji-plan-authoring workflow: read upstream plans and DESIGN.md first, then write the plan in the fixed nine-section structure under docs/superpowers/plans/.
+        Follow the xiyouji-plan-authoring workflow: read upstream plans and DESIGN.md first, then write the plan in the fixed structure (§0-§9 plus §10 landing status; acceptance criteria in "metric = threshold (measurement)" form) under docs/superpowers/plans/.
   - id: derive-visual-upgrade-track
     title:
       zh: 在既有方案之上写视觉升级方案
@@ -28,8 +28,8 @@ examples:
       zh: |-
         请在 xiyouji 项目（D:\1\xiyouji）既有方案（{{上游方案路径}}）基础上，再写一份前端视觉升级方案。
         要求：{{美化方向描述，如"提升整体视觉高级感"}}
-        注意遵守项目约束（file://、CSP、perf-budget、动效契约），并按 xiyouji-plan-authoring 九段结构成文落 docs/superpowers/plans/。
+        注意遵守项目约束（file://、CSP、perf-budget、动效契约），并按 xiyouji-plan-authoring 固定结构（§0-§9 + §10 落地状态）成文落 docs/superpowers/plans/。
       en: |-
         Based on the existing plan ({{upstream plan path}}) in the xiyouji project (D:\1\xiyouji), draft a frontend visual upgrade plan.
         Requirements: {{direction, e.g. "elevate overall visual premium feel"}}
-        Respect project constraints (file://, CSP, perf-budget, motion contract) and follow the xiyouji-plan-authoring nine-section structure under docs/superpowers/plans/.
+        Respect project constraints (file://, CSP, perf-budget, motion contract) and follow the xiyouji-plan-authoring fixed structure (§0-§9 plus §10 landing status) under docs/superpowers/plans/.
