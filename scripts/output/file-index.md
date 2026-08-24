@@ -10,6 +10,15 @@
 
 ---
 
+## W507 复盘沉淀落地（2026-08-25·v2.3.106）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/_cite_probe.py | W507 | v2.3.106 新增·引文候选提取探针（E-A 沉淀永久化：--kw/--chap/--min-len/--max-len/--frag·写引文前从 text-search.json 提取候选·禁凭记忆编造） |
+| skills/xiyouji-day-review/SKILL.md | W507 | v2.3.106 修改·步骤 4 新增第 6 项「归档/删除脚本查 tests/ 引用」（W506 教训固化） |
+| skills/xiyouji-character-content/SKILL.md | W507 | v2.3.106 修改·深化专题步补引文探针工具引用（写引文前先跑 _cite_probe.py） |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W507 | v2.3.106 修改·六文档同步（编号上限 W001-W507） |
+
 ## W506 处置遗留（2026-08-25·v2.3.105）
 
 | 文件 | W | 说明 |
