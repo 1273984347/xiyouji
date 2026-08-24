@@ -68,13 +68,18 @@ def parse_footer():
 
 
 def bump_version_line(c, old_ver, new_ver, w, note, desc=None):
-    """替换「当前版本」行：版本号 + 主描述（--desc）+ 确保含 W token。"""
+    """替换「当前版本」行：版本号 + 主描述（--desc）+ 确保含 W token。
+
+    W500 增强：同时覆盖 "- **当前版本**："（项目说明次级版本行）——该行历史格式
+    仅含版本号、无 W 后缀，故次级行只替换版本号，不追加 W token（防格式漂移）。
+    """
     def repl(mt):
         line = mt.group(0)
+        is_secondary = line.lstrip().startswith("- **")
         line = line.replace("v" + old_ver, "v" + new_ver)
         # 主描述替换（W417 增强）：把行首 "：W### 旧描述（…）" 换成新 W + desc（剥离 desc 的 W 前缀防重复）。
         # 仅匹配首个括号（[^）\n] 禁跨括号嵌套），且不带 \s*· 后缀——避免吞掉 "）— A1-A6 共 611 篇（…201 篇）·" 等后续内容（W417 实测修复）
-        if desc and w not in line:
+        if desc and w not in line and not is_secondary:
             desc_clean = re.sub(r"^W\d{3}\s*", "", desc).strip()
             line = re.sub(
                 r"([：:])\s*W\d{3}[^\n]*?（[^）\n]*?）",
@@ -82,16 +87,12 @@ def bump_version_line(c, old_ver, new_ver, w, note, desc=None):
                 line,
                 count=1,
             )
-        if w not in line:
+        if w not in line and not is_secondary:
             line = line.rstrip() + " + " + w + ("（" + note + "）" if note else "") + "\n"
         return line
 
-    return re.sub(
-        r"^> \**当前版本[^\n]*v" + re.escape(old_ver) + r"[^\n]*\n",
-        repl,
-        c,
-        flags=re.M,
-    )
+    pat = r"^(?:> \**当前版本|-\s*\*\*当前版本\*\*)[^\n]*v" + re.escape(old_ver) + r"[^\n]*\n"
+    return re.sub(pat, repl, c, flags=re.M)
 
 
 def main():

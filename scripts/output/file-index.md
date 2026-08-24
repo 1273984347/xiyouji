@@ -10,6 +10,19 @@
 
 ---
 
+## W500 索引健康门禁（2026-08-24·v2.3.99）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_index_health.py | W500 | v2.3.99 新增·第 17 门禁（file-index 段完整性/唯一性/最新段残留 + 方法论 README 双向覆盖 + CHANGELOG 编号上限）·豁免 W449-W463 损坏区 |
+| scripts/verify_delivery.py | W500 | v2.3.99 修改·挂载第 17 门禁索引健康 |
+| scripts/bump_version.py | W500 | v2.3.99 修改·bump_version_line 扩展支持 `- **当前版本**：` 次级行（仅换版本号不追加 W） |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W500 | v2.3.99 修改·六文档同步（编号上限 W001-W500） |
+| AGENTS.md | W500 | v2.3.99 修改·§4.2 补录第 17 门禁正文 + 版本脚注同步 |
+| docs/00-导读/文档规范.md | W500 | v2.3.99 修改·§7/§8/§11 与 17 门禁同步（file-index 行门禁列·17 门禁表·禁改清单补两脚本·bump W500 增强·行号 45→47） |
+| skills/xiyouji-day-review/SKILL.md | W500 | v2.3.99 修改·步骤 4 补治理文档内容引用核验 + 陷阱第 8 条 + 验证清单五项（已同步全局版） |
+| .github/workflows/README.md | W500 | v2.3.99 修改·旁文档同步（头部版本 W449→W500·W450-W500 里程碑行·Job 8 17 门禁说明·§8 双索引更新） |
+
 ## W499 GitHub 协作模板 + 创意方法论沉淀（2026-08-24·v2.3.98）
 
 | 文件 | W | 说明 |
@@ -210,16 +223,6 @@
 | AGENTS.md | W484 | v2.3.83 修改·§4.5 补录 4 会话流程 skill（10→14）+ 版本脚注 |
 | README.md / STRUCTURE.md / 交接文档.md / docs/00-导读/项目说明.md / CHANGELOG.md / scripts/output/file-index.md | W484 | v2.3.83 修改·六文档同步 + 交接文档三 skill 闭环位置仓库化 + HEAD 修正 |
 
-## W464 Phase 3 观测基线确立（2026-08-18·v2.3.82）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/baseline_snapshot.py | W464 | v2.3.82 新增·观测基线快照生成器（计数+性能+UV 手填栏+闸门阈值） |
-| scripts/output/观测基线快照.md | W464 | v2.3.82 新增·机器生成基线表（611/86/138/228 + 性能三值 + UV 待回填） |
-| scripts/output/perf-baseline.json | W464 | v2.3.82 修改·W464 实测（5 核心页 LCP/CLS/TBT） |
-| scripts/_w464_perf_measure.js | W464 | v2.3.82 新增·一次性性能实测脚本 |
-| site/dukou-engine.html | W464 | v2.3.82 修改·长链页脚 prepend |
-
 ## W478 Phase E2 CN 可视化页传播 I（2026-08-18·v2.3.81）
 
 | 文件 | W | 说明 |
@@ -255,6 +258,16 @@
 | site/tokens.css | W476 | v2.3.79 修改·v2→v3：--elev-0~4 海拔 + --radius-sm~pill + --border-hairline/accent + 色阶派生（--accent-deep/tint/wash + --ink-tint）+ 语义色 --ok~info + --text-step-0~5/--text-hero/--leading×3（+2035B） |
 | site/data+en 225 页 | W476 | v2.3.79 批量·inline_css --force 重内联 tokens v3 + system.css |
 | site/dukou-engine.html | W476 | v2.3.79 修改·长链页脚 prepend v2.3.79 W476 |
+
+## W464 Phase 3 观测基线确立（2026-08-18·v2.3.82）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/baseline_snapshot.py | W464 | v2.3.82 新增·观测基线快照生成器（计数+性能+UV 手填栏+闸门阈值） |
+| scripts/output/观测基线快照.md | W464 | v2.3.82 新增·机器生成基线表（611/86/138/228 + 性能三值 + UV 待回填） |
+| scripts/output/perf-baseline.json | W464 | v2.3.82 修改·W464 实测（5 核心页 LCP/CLS/TBT） |
+| scripts/_w464_perf_measure.js | W464 | v2.3.82 新增·一次性性能实测脚本 |
+| site/dukou-engine.html | W464 | v2.3.82 修改·长链页脚 prepend |
 
 ## W460 墨韵全站动效体系 P0+样板批（2026-08-17·v2.3.75）
 
