@@ -39,7 +39,7 @@ python scripts/generate_csp.py --check  # CSP 0 漂移
 
 ### 1.3 渲染抽查（Playwright）
 
-用项目现有 `scripts/_shot_check.js` 或等价 Playwright 脚本，关键断言：
+用项目现有 `scripts/render_check.js`（W515 常驻化；或等价 Playwright 脚本），关键断言：
 
 ```js
 // styled 断言：样式必须真实生效，防"白底+蓝链接+裸文本"的失样式回归

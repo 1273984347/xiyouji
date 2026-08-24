@@ -10,6 +10,24 @@
 
 ---
 
+## W515 渲染抽查常驻化 + 门禁正文引用存在性检查（2026-08-25·v2.3.114）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/render_check.js | W515 | v2.3.114 新增·Playwright 常驻渲染抽查（--page 可重复/内容断言/styled 背景/390·414 溢出/pageerror/console 白名单/--dark 截图·dukou-engine 冒烟 exit 0） |
+| tests/test_skills_reference_integrity.py | W515 | v2.3.114 新增·TDD 9 测试（SCRIPT_REF_RE 提取 4 + 缺失判定 4 + 真实仓库冒烟 1） |
+| scripts/check_skills_index.py | W515 | v2.3.114 修改·检查 5「skill 正文引用资产存在性」挂载（修复前 CLI exit 1 抓失效 2 处） |
+| skills/xiyouji-day-review/SKILL.md | W515 | v2.3.114 修改·L59 `_shot_check.js` 失效指针改指 `node scripts/render_check.js --page <页面> --dark` |
+| skills/xiyouji-day-review/reference.md | W515 | v2.3.114 修改·L42 `_shot_check.js` 失效指针改指 `scripts/render_check.js` |
+| CHANGELOG.md | W515 | v2.3.114 修改·脚本插入 v2.3.114/W515 段（锚点唯一+防重入断言） |
+| 交接文档.md | W515 | v2.3.114 修改·HEAD 句/进度链头/里程碑 bullet/尾页脚最后更新条目（补 W505-W514 九批漏更中的当前批） |
+| README.md | W515 | v2.3.114 修改·当前版本行 + 目录 W 帖与正向索引描述（W001-W515）手工同步 |
+| STRUCTURE.md | W515 | v2.3.114 修改·版本行手工同步并净化 bump 坑②追加残留 `+ W514（…）` |
+| docs/00-导读/项目说明.md | W515 | v2.3.114 修改·头部版本行 + 项目状态版本行同步 |
+| 新Agent启动Prompt.md | W515 | v2.3.114 修改·Python 执行规则升级 py -3（裸 python shim 静默 no-op 实证）+ 示例命令同步 |
+| AGENTS.md | W515 | v2.3.114 修改·§4.2 第 16 门禁补录正文引用资产存在性子检查 + 版本脚注 |
+| scripts/output/file-index.md | W515 | v2.3.114 修改·W515 段登记（本段） |
+
 ## W514 治理文档口径修复（2026-08-25·v2.3.113）
 
 | 文件 | W | 说明 |
