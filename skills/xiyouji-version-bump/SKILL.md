@@ -1,6 +1,6 @@
 ---
 name: xiyouji-version-bump
-description: 西游记项目（D:\1\xiyouji）版本 bump 与六文档同步标准流程 playbook。步骤：预检记录规模描述 → 改 dukou-engine 长链页脚 → 写 CHANGELOG/交接文档/file-index → 跑 bump_version.py → 手动补回规模描述（bump_version.py --desc 会吞掉版本行的"共 615 篇"/"A4 209 篇"，导致 verify_delivery 报 FAIL）→ verify_delivery 全绿 → 收尾三同步（AGENTS 脚注/路线图状态段/方案档 §10 回填，W494 固化）→ git add -u → commit/push。当用户要求"版本 bump"、"升版本"、"W 批次同步"、"六文档同步"、"发新版本"、"version bump"、"W### 提交"时触发。
+description: 西游记项目（D:\1\xiyouji）版本 bump 与六文档同步标准流程 playbook。步骤：预检记录规模描述 → 改 dukou-engine 长链页脚 → 写 CHANGELOG/交接文档/file-index → 跑 bump_version.py → 手动补回规模描述（bump_version.py --desc 会吞掉版本行的"共 N 篇"/"A4 209 篇"——值随批次校正、以 README 版本行与 verify 输出为准，当前 N=615，不补回则 verify_delivery 报 FAIL）→ verify_delivery 全绿 → 收尾三同步（AGENTS 脚注/路线图状态段/方案档 §10 回填，W494 固化）→ git add -u → commit/push。当用户要求"版本 bump"、"升版本"、"W 批次同步"、"六文档同步"、"发新版本"、"version bump"、"W### 提交"时触发。
 version: 1.1.0
 ---
 

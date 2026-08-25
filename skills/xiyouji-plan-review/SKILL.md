@@ -100,7 +100,7 @@ version: 1.0.1
 ## 陷阱清单
 
 1. **Glob 漏匹配**：Glob 工具对 `D:/1/xiyouji/scripts/*.py` 曾返回空（实际存在大量脚本）。存在性核实一律用 Bash `ls`，Glob 只作辅助。
-2. **计数口径陷阱**：`site/data` 87 个 HTML 含 `_shell.html` 模板 → 实际可视化页 86；EN 站**没有** `data/` 子目录，可视化页平铺在 `site/en/` 下；EN 与 CN 同名可视化页只有 85 个（缺 `journey-geo-3d`）。报数前先想清楚口径。
+2. **计数口径陷阱**：`site/data` 87 个 HTML 含 `_shell.html` 模板 → 实际可视化页 86；EN 站**没有** `data/` 子目录，可视化页平铺在 `site/en/` 下；EN 与 CN 同名可视化页只有 85 个（缺 `journey-geo-3d`）。报数前先想清楚口径（页数以 site/data 与 site/en 实际为准，随批次校正）。
 3. **"全覆盖"≠特征字符串全命中**：例如"86 页动效全覆盖"实测只有 40 页含 `.duration(`（静态页豁免、动效合规 ≠ 每页 D3 transition）。评估"覆盖率"声称时先弄清方案对该特征的真实定义。
 4. **文件存在 ≠ 内容有效**：`perf-baseline.json`/`perf-budget.json` 存在但版本停留在 W267。声称"已有"的文件要打开看内部版本/日期字段。
 5. **预算冲突要交叉验证**：如 perf-budget total 900KB 与内嵌 2MB JSON 的 text-search 页直接冲突——拿方案里的预算数字去乘/除实际文件体量，冲突会自己浮出来。

@@ -47,7 +47,7 @@ cd /d/1/xiyouji && git status --short && git log --oneline -3
 ### 第 1 步：探针取证（_probe 脚本）
 
 - 写一次性诊断脚本 `scripts/_<batch>_probe.py`（`_` 前缀 = 不入库、不入门禁、不进 CI，沿用 `_e0_probe.py` 范式）。
-- 扫描面（E0 实测口径）：site 根 9（含 _template）+ data 87（含 _shell）+ en 138 = 233 页；_shell 不计入统计页。
+- 扫描面（E0 实测口径，页数以 site/ 实际为准随批次校正）：site 根 9（含 _template）+ data 87（含 _shell）+ en 138 = 233 页；_shell 不计入统计页。
 - 探针维度（按批次需要裁剪，E0 六项全跑）：P1 页面 `<style>` 裸 hex/rgba 计数、P2 transition 形态统计（var 令牌/all/裸秒值）、P3 根页 hero/nav/footer 结构 diff、P4 字体加载盘点、P5 tokens/system 体积与增量模拟、P6 公共组件选择器页面内联重复面。
 - 产出探针报告落 `docs/superpowers/plans/YYYY-MM-DD-phase-e-e<n>-probe-report.md`，数字为准入后续步骤的基线。
 - 探针口径铁律：**多数裸色是图表数据色（D3 fill/stroke/渐变止点）**，属豁免类；不要对 1.6 万处裸色搞一刀切清零。

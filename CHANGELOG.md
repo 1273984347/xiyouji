@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W520），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W521），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.120（2026-08-25）：W521 存量裸字面量清剿 + W463 三坑补登记（P2 两项用户批复执行）
+
+> **来源**：W520 收尾汇报两项 P2 待确认（DRL F2 全树存量清剿 + E45 编号空间完整化），用户批复「执行」。
+> - **执行（提案 1·存量裸字面量清剿）**：DRL F2 class-level enumeration 15 文件逐项按 E2/门禁依赖/检查指引三分类裁决——真现状声明改引用式（en-translation L149 / character-content desc / characters-knowledge L45 / roster L1 / skills/README L17 / version-bump SKILL desc）+ 现役口径/检查指引加注「随批次校正、以实际为准」（drift-audit SKILL L100 + reference L79 / plan-review L102 / visual-batch L50 / quality-gates L22）+ 门禁回写模板/历史批次记录豁免（version-bump reference 固定串、visual-batch 批次验收）。
+> - **执行（提案 2·W463 补登记）**：交接文档「三」新增 W463 段（E45 W 批收尾三坑——bump --desc 追加污染 / CHANGELOG 大段手工编辑 / 版本号撞号，三 bullet 模板 + 补登记标识），使编号空间完整（W520 段 E46 顺延的占用方现已在「三」区可见）。
+> - **文件**：skills 10 文件（character-content SKILL+quality-gates / characters-knowledge SKILL+roster / drift-audit SKILL+reference / en-translation / plan-review / version-bump / visual-batch SKILL，sync_skills --sync 双轨一致）+ 交接文档.md。
+> - **验证**：W520 规则落点 Grep 复核 13 处 0 遗漏；sync_skills --sync 输出「10 个文件更新」+「仓库版与全局版完全一致，无漂移」；pytest 全量 302 passed（基线不变·本批未触碰 Python/测试代码）；verify_delivery.py 当批现测核心全绿。
+> - **状态**：已落地（2026-08-25）。
 
 ### v2.3.119（2026-08-25）：W520 递增数字禁字面量 + skills 内文数字比对维度（P2 三提案用户批复落地）
 
