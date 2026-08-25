@@ -88,7 +88,7 @@ version: 1.1.0
 1. 双轨 0 漂移（单侧修改 = 漂移；仓库是主源，改仓库后 --sync 同步全局）。
 2. 新技能未入库仓库（check_skills_index 门禁覆盖，但人工复核 README 索引数 == 目录数）。
 3. frontmatter name == 目录名。
-4. **skill 内部数字引用 vs 权威值比对**（举一反三维度的固化扩展，W499 第三轮 + W520 固化）：skill 内文（SKILL.md + reference*.md）的门禁数、篇数/页数/skill 数、计数口径、版本引用，逐项对照权威源核实——门禁数以 verify 输出为准、内容规模以 README/统计口径说明为准、skill 数以 skills/README.md 对照目录实测为准；随批次演化的计数应为引用式表述或绑定实测时点，无时点锚的裸字面量 = P2（W519 复盘确认：skills 内文数字游离于六文档同步契约与计数门禁两道防线之外——check_skills_index 只管结构不管内文数字，须靠本维度人工兜底；排查命令见 reference.md 步骤 5）。
+4. **skill 内部数字引用 vs 权威值比对**（举一反三维度的固化扩展，W499 第三轮 + W520 固化）：skill 内文（SKILL.md + reference*.md）的门禁数、篇数/页数/skill 数、计数口径、版本引用，逐项对照权威源核实——门禁数以 verify 输出为准、内容规模以 README/统计口径说明为准、skill 数以 skills/README.md 对照目录实测为准；随批次演化的计数应为引用式表述或绑定实测时点，无时点锚的裸字面量 = P2（**门禁依赖豁免**：verify_delivery 强制 README/STRUCTURE/项目说明/交接文档字面含「A4 209 篇」「共 N 篇」——此类受门禁保护的快照行禁改引用式；W519 复盘确认：skills 内文数字游离于六文档同步契约与计数门禁两道防线之外——check_skills_index 只管结构不管内文数字，须靠本维度人工兜底；排查命令见 reference.md 步骤 5）。
 
 ### 步骤 6：治理文档内容引用核验（W499 盲区类型的核心防线，本技能价值所在）
 

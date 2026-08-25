@@ -20,7 +20,8 @@
 > - **执行（提案 3·经验沉淀）**：交接文档「三」新增 W520 段（E45 递增数字禁字面量·三 bullet 模板·复现计数器 3/3）。
 > - **执行（自体病例治愈）**：day-review 验证清单「六项核对完成」→「逐项以步骤 4 现行清单为准」（清单实为 7 条仍写「六项」的自体漂移）；drift-audit reference「修复后验证」区「17 门禁全绿」→「全部门禁全绿（随批次递增，以输出为准）」。两处均为「递增数字字面量」规则的活体病例，同批治愈以证规则落地。
 > - **文件**：skills/xiyouji-plan-authoring/SKILL.md、xiyouji-day-review/SKILL.md、xiyouji-drift-audit/SKILL.md + reference.md（4 文件 sync_skills --sync 双轨一致）+ 交接文档.md。
-> - **验证**：三 skill 修改后 Grep 复核全部落点 0 遗漏；sync_skills --sync 输出「4 个文件更新」+「仓库版与全局版完全一致，无漂移」；pytest 全量 302 passed（基线不变·本批未触碰 Python/测试代码）；verify_delivery.py 当批现测核心全绿。
+> - **验证**：三 skill 修改处 Grep 复核 0 遗漏（限定新增文本范围）；sync_skills --sync 输出「4 个文件更新」+「仓库版与全局版完全一致，无漂移」；pytest 全量 302 passed（基线不变·本批未触碰 Python/测试代码）；verify_delivery.py 当批现测核心全绿。
+> - **验证（DRL 复验补充）**：deep-review-loop 全流程（R1a 3 verifier + R1b 对抗 + R2 独立审计）发现并修复 8 项——F1 规则补「门禁依赖豁免」边界（verify_delivery EXPECT_A4「209 篇」/README「共 N 篇」为门禁解析目标禁改引用式，三 skill 规则同补）+ P2-1/P2-2 reference 排查命令实测修正（`ls -d skills/*/` 全量 19 含 4 会话流程 skill + grep 改可命中模式）+ P2-3 防线口径统一「两道」（交接文档「三道」→「两道」）+ P2-4 扫描范围补 AGENTS.md + P3-5 补 E2 判据指针 + P3-6 案例批次归属修正 + F3 验证措辞限定 + version-bump reference:26 错锚快照（「W425 时」锚点/当前值错位）修正；F2 全树 ~30 处存量裸字面量治理按边际收益 gate 接受残留单列 W521。
 > - **状态**：已落地（2026-08-25）。
 
 ### v2.3.118（2026-08-25）：W519 Skills 全目录审查与 SKILL.md 内容优化（A+B+C+D 用户批复全量）

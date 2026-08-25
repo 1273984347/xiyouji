@@ -25,7 +25,10 @@
 | docs/00-导读/项目说明.md | W520 | v2.3.119 修改·L5 主行 + L47 次级版本行 bump 至 v2.3.119 |
 | AGENTS.md | W520 | v2.3.119 修改·版本脚注追加 W520 条目（无 § 结构性变更） |
 | site/dukou-engine.html | W520 | v2.3.119 修改·页脚长链人工前置 W520 段 |
-| scripts/output/file-index.md | W520 | v2.3.119 修改·W520 段登记（本段） |
+| scripts/output/file-index.md | W520 | v2.3.119 修改·W520 段登记（本段）+ DRL 复验补充登记 |
+| skills/xiyouji-version-bump/reference.md | W520 | v2.3.119 修改·DRL 复验修复「当前基准（W425 时）」错锚快照 →「示例值·随批次校正·W514 定稿口径」（锚点/数值错位修正） |
+
+> W520 段 DRL 复验说明：deep-review-loop（R1a 3 verifier + R1b 对抗 + R2 独立审计）后同批补充修复 8 项（详见 CHANGELOG v2.3.119「DRL 复验补充」行）——规则补门禁依赖豁免 / reference 排查命令实测修正 / 防线口径统一「两道」/ 扫描范围补 AGENTS.md / 补 E2 判据 / 案例归属修正 / 验证措辞限定 / version-bump 错锚快照；三 skill + 两 reference 经 sync_skills --sync 二次同步双轨一致。
 
 ## W519 Skills 全目录审查与 SKILL.md 内容优化（2026-08-25·v2.3.118）
 
