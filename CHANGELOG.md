@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W523），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W524），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.123（2026-08-25）：W524 bump 追加污染坑位补记 — --desc/--note 双触发固化（用户指令驱动）
+
+> **来源**：W523 批收尾实测发现 bump_version.py `--note` 参数同样向 STRUCTURE.md 头部 / docs/00-导读/项目说明.md 的上一版本行**追加**「 + W523（…）」残留——AGENTS §4.3 此前仅登记 `--desc` 单触发面；用户指令「现在补记到 AGENTS.md 并再发一版」驱动本批。
+> - **根因**：bump_version.py 对 `--desc` 与 `--note` 共用同一追加路径，坑位登记只覆盖 `--desc` 形成盲区；另全局替换会在 file-index 历史段生成空壳段（重复标题无内容待手工补全）——两现象均多次复现。
+> - **修复**：AGENTS §4.3 bump_version 条目修订（已知坑②扩为 --desc/--note 双触发 + 坑①补充空壳段现象）；六文档 + AGENTS 版本脚注 + dukou-engine.html 页脚全量同步至 v2.3.123 W524。
+> - **验证**：verify_delivery.py 当批现测核心全绿 0 WARN（验收数字当批现抄）；本次推送含 site/dukou-engine.html ∈ site/** → pages/perf/screenshot-review 三 workflow 必触发，Screenshot Review 预期命中 W421 内部 skip 分支（页脚/doc-only ~1min）——该机制首次运行时实证。
+> - **影响**：后续任何批次跑 bump_version.py 后，无论 --desc 还是 --note 都必须 Grep 校验 STRUCTURE 头部 / 项目说明 / file-index 三处并手工净化；W421 提速机制获得运行时背书。
+> - **文件**：AGENTS.md、CHANGELOG.md、交接文档.md、README.md、STRUCTURE.md、docs/00-导读/项目说明.md、scripts/output/file-index.md、site/dukou-engine.html。
+> - **状态**：已落地（2026-08-25）；CI 五跑观察结果随批记录。
 ### v2.3.122（2026-08-25）：W523 截图审查恒全量根因修复 — scope diff 加 core.quotePath=false（用户提问驱动）
 
 > **来源**：用户问「为什么每次 Screenshot Review 都这么慢」→ 取证链：job steps API 各步 conclusion 均 success（非 skipped）+ 运行日志「Found 87 visualization pages + 2 top-level pages」证实执行了全量；而 site 相关 diff 仅含页脚豁免的 dukou-engine.html，理应 skip。
