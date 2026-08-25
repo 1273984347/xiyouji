@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W519），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W520），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.119（2026-08-25）：W520 递增数字禁字面量 + skills 内文数字比对维度（P2 三提案用户批复落地）
+
+> **来源**：W519 交付后用户指令「你先复盘一下这次都出现了哪些问题，以后怎么避免重复出现类似错误」→ self-evolution 全面复盘产出 P2 三提案，用户批复「执行」授权按新批次落地。
+> - **执行（提案 1·写作侧根治）**：plan-authoring SKILL 去模糊化成文标准新增第 5 条「递增数字引用式」（随批次演化的计数在现役状态描述中禁写无时点锚裸字面量，一律引用式表述或绑定实测时点与来源）+ 陷阱清单同步 + 完成验证清单新增自查项（version 1.1.0→1.2.0）；day-review SKILL 步骤 4 新增第 8 条「递增数字字面量扫描」+ 陷阱 9（version 1.1.0→1.2.0）。
+> - **执行（提案 2·体检侧兜底）**：drift-audit SKILL 步骤 5 第 4 条由「skill 内部数字引用」扩展固化为「skill 内部数字引用 vs 权威值比对」固定维度（对照 verify 输出/README/统计口径说明三权威源 + 无时点锚裸字面量 = P2）；reference.md 步骤 5 命令区新增 3 条排查命令 + 案例库「举一反三型」新增 W520 扩展段（结构性盲区收编）（version 1.0.0→1.1.0）。
+> - **执行（提案 3·经验沉淀）**：交接文档「三」新增 W520 段（E45 递增数字禁字面量·三 bullet 模板·复现计数器 3/3）。
+> - **执行（自体病例治愈）**：day-review 验证清单「六项核对完成」→「逐项以步骤 4 现行清单为准」（清单实为 7 条仍写「六项」的自体漂移）；drift-audit reference「修复后验证」区「17 门禁全绿」→「全部门禁全绿（随批次递增，以输出为准）」。两处均为「递增数字字面量」规则的活体病例，同批治愈以证规则落地。
+> - **文件**：skills/xiyouji-plan-authoring/SKILL.md、xiyouji-day-review/SKILL.md、xiyouji-drift-audit/SKILL.md + reference.md（4 文件 sync_skills --sync 双轨一致）+ 交接文档.md。
+> - **验证**：三 skill 修改后 Grep 复核全部落点 0 遗漏；sync_skills --sync 输出「4 个文件更新」+「仓库版与全局版完全一致，无漂移」；pytest 全量 302 passed（基线不变·本批未触碰 Python/测试代码）；verify_delivery.py 当批现测核心全绿。
+> - **状态**：已落地（2026-08-25）。
 
 ### v2.3.118（2026-08-25）：W519 Skills 全目录审查与 SKILL.md 内容优化（A+B+C+D 用户批复全量）
 
