@@ -1,6 +1,6 @@
 ---
 name: xiyouji-version-bump
-description: 西游记项目（D:\1\xiyouji）版本 bump 与六文档同步标准流程 playbook。步骤：预检记录规模描述 → 改 dukou-engine 长链页脚 → 写 CHANGELOG/交接文档/file-index → 跑 bump_version.py → 手动补回规模描述（bump_version.py --desc 会吞掉版本行的"共 611 篇"/"A4 209 篇"，导致 verify_delivery 报 FAIL）→ verify_delivery 全绿 → 收尾三同步（AGENTS 脚注/路线图状态段/方案档 §10 回填，W494 固化）→ git add -u → commit/push。当用户要求"版本 bump"、"升版本"、"W 批次同步"、"六文档同步"、"发新版本"、"version bump"、"W### 提交"时触发。
+description: 西游记项目（D:\1\xiyouji）版本 bump 与六文档同步标准流程 playbook。步骤：预检记录规模描述 → 改 dukou-engine 长链页脚 → 写 CHANGELOG/交接文档/file-index → 跑 bump_version.py → 手动补回规模描述（bump_version.py --desc 会吞掉版本行的"共 615 篇"/"A4 209 篇"，导致 verify_delivery 报 FAIL）→ verify_delivery 全绿 → 收尾三同步（AGENTS 脚注/路线图状态段/方案档 §10 回填，W494 固化）→ git add -u → commit/push。当用户要求"版本 bump"、"升版本"、"W 批次同步"、"六文档同步"、"发新版本"、"version bump"、"W### 提交"时触发。
 version: 1.1.0
 ---
 
@@ -85,12 +85,12 @@ cd /d/1/xiyouji && python scripts/bump_version.py --desc "W新 <描述>" --note 
 
 ### 第 6 步：手动修复版本行（陷阱，必做）
 
-`bump_version.py --desc` 会**吞掉版本行里的规模描述**（如 `A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）`），同时**日期保持旧值**。若不补回，`verify_delivery` 会报 FAIL（`A4 计数不一致（缺 '209 篇'）`）。
+`bump_version.py --desc` 会**吞掉版本行里的规模描述**（如 `A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）`），同时**日期保持旧值**。若不补回，`verify_delivery` 会报 FAIL（`A4 计数不一致（缺 '209 篇'）`）。
 
 跑完脚本后逐处核改三份文档的版本行，共三个子项：
 
 1. **补回规模描述 + 日期**：`README.md`、`STRUCTURE.md`、`docs/00-导读/项目说明.md` 三处版本行的规模描述被吞、日期停留旧值，需手动补回并改成当天。规模描述以第 0 步预检记下的原文为准，不要凭空编。
-2. **重写 STRUCTURE.md 版本行（修复畸形尾巴）**：bump 对 STRUCTURE.md 版本行的处理是**追加** ` + W4xx（W4xx 描述）` 到行尾，而非替换旧 W 描述（旧描述滞留、新描述残缺）。整行重写为干净格式：`> 当前版本：v2.3.XX（date）— W4xx <描述> — A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。`
+2. **重写 STRUCTURE.md 版本行（修复畸形尾巴）**：bump 对 STRUCTURE.md 版本行的处理是**追加** ` + W4xx（W4xx 描述）` 到行尾，而非替换旧 W 描述（旧描述滞留、新描述残缺）。整行重写为干净格式：`> 当前版本：v2.3.XX（date）— W4xx <描述> — A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。`
 3. **核改项目说明 :45 第二处版本行**：`docs/00-导读/项目说明.md` 第 45 行附近有第二处 `- **当前版本**：vX.Y.Z（date）— ...` 行（头部版本行之外），bump **完全不更新**它，需手动核改版本号与日期。
 
 ### 第 7 步：verify_delivery 全绿

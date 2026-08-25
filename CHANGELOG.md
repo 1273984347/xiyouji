@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W518），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W519），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.118（2026-08-25）：W519 Skills 全目录审查与 SKILL.md 内容优化（A+B+C+D 用户批复全量）
+
+> **来源**：用户指令「d:\1\xiyouji/skills 把这个文件夹里面的内容审查一遍，其中要把 skill.md 的内容进行优化」——通读 19 个 SKILL.md + 配套文件后识别四类问题，经 AskUserQuestion 两问批复：Q1 选「A+B+C 全部修复」，Q2 选「D 类一并纳入」。
+> - **执行（A 类·计数漂移 14 处）**：211→215 ×4（characters-knowledge roster.md 标题 / 同 SKILL.md 角色名录行、character-content desc、skills/README.md 索引表 roster 计数）；共 611→共 615 ×10（version-bump SKILL.md ×3 + reference.md ×4、en-translation 收尾提示 ×1、drift-audit SKILL.md 启动 Prompt 计数转述示例 ×1 + reference.md 排查命令示例 ×1·经核实启动 Prompt 已是 615 口径）。
+> - **执行（B 类·门禁数去硬编码 8 处）**：drift-audit SKILL.md ×4 + reference.md ×3 + day-review SKILL.md ×1——按 drift-audit 自身药方，将「现 17 条」类硬编码改为「全部门禁（随批次递增、以 verify 输出为准）」表述；其 reference.md:138 历史案例引文按 E2 判据（历史事件描述保留旧值）保留不动。
+> - **执行（C 类）**：AGENTS.md §3 目录树注释「playbook skill（17 个）」→「（19 个）」（README 索引与 §4.5 分类清单本就正确，仅树注释漏更）。
+> - **执行（D 类·frontmatter 补齐 7 文件）**：角色 5（sun-wukong/zhu-bajie/sha-seng/tangseng/bai-longma）+ 内容/知识 2（character-content/characters-knowledge）各新增顶层 `version: 1.0.0`——现 15 skill 具顶层 version；4 会话流程组维持 metadata 嵌套风格不动。zhu-bajie/tangseng description 不补「外传」词（E1 实测两组配套文件与 docs/02 均无外传内容，硬补即虚假声明）。
+> - **文件**：skills/ 下 15 文件（xiyouji-version-bump SKILL+reference、en-translation、characters-knowledge SKILL+roster.md、character-content、drift-audit SKILL+reference、day-review、角色 5 SKILL、skills/README.md 索引表）+ AGENTS.md；技能目录内 14 文件经 sync_skills.py --sync 同步全局双轨一致零漂移，skills/README.md 为仓库权威索引（同步脚本范围外）。
+> - **验证**：陈旧计数全 skills 复扫二轮（611/211 双模式）0 残留；门禁数历史案例引文 reference.md:138 按 E2 判据保留不动；`^version:` 计 15 处无重复；pytest 全量 302 passed（基线不变·本批未触碰 Python/测试代码）；verify_delivery.py 当批现测核心全绿。
+> - **状态**：已落地（2026-08-25）。
 
 ### v2.3.117（2026-08-25）：W518 期望版本动态化 + 尾页脚新鲜度门禁（用户批复两项遗留候选）
 

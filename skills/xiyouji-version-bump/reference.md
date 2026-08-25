@@ -26,10 +26,10 @@
 当前基准（W425 时）：
 
 ```
-A1-A6 共 611 篇 + 86 可视化页（A4 209 篇 已含）
+A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）
 ```
 
-其中分项：A1 逐回 100 / A2 44 / A3 211 / A4 209 / A5 34 / A6 13，合计 611；可视化 86 页；dataset 41。
+其中分项：A1 逐回 100 / A2 44 / A3 215 / A4 209 / A5 34 / A6 13，合计 615；可视化 86 页；dataset 41。
 
 **执行要点（对应 SKILL.md 第 0 步预检）**：跑任何改动作前，先抓取三段版本行原文并记下规模描述确切字符串，跑完 bump 后原样补回，不要凭记忆写数字。
 
@@ -46,7 +46,7 @@ cd /d/1/xiyouji && grep -h "当前版本" README.md STRUCTURE.md docs/00-导读/
 > - **执行（注入）**：`scripts/inject_goatcounter.py --site 1273984347` 全站 160 页注入。
 > - **执行（CSP）**：`generate_csp.py` 白名单追加 gc.zgo.at（script-src）+ 1273984347.goatcounter.com（connect-src），重生成 159 页 CSP，680 内联哈希 0 漂移。
 > - **文件**：scripts/generate_csp.py、site/_headers、site/**/*.html（160 页）、六文档。
-> - **验证**：verify_delivery 核心全绿（CSP/腐蚀/数据漂移/sitemap/A1 导航/计数 611）。
+> - **验证**：verify_delivery 核心全绿（CSP/腐蚀/数据漂移/sitemap/A1 导航/计数 615）。
 > - **状态**：已 commit 933a688、已 push origin/main。
 ```
 
@@ -86,7 +86,7 @@ cd /d/1/xiyouji && grep -h "当前版本" README.md STRUCTURE.md docs/00-导读/
 
 - hard gate（FAIL 即挡）：CHANGELOG + 交接文档（版本号/条目存在）。
 - WARN（仍需修到无 FAIL）：README/STRUCTURE/项目说明/file-index 版本行、A4 计数「209 篇」、A1 导航邻接、sitemap 覆盖、site/data fallback、数据漂移、CSP 漂移、腐蚀门禁。
-- 计数口径：A1-A6 合计 611（A4 209），可视化 86 页，dataset 41。
+- 计数口径：A1-A6 合计 615（A4 209），可视化 86 页，dataset 41。
 
 ## commit message 模板
 
@@ -97,7 +97,7 @@ feat(w425): GoatCounter 真实跨访客统计接入 — 全站 160 页注入 + C
 - generate_csp.py 外部脚本白名单追加 gc.zgo.at + connect-src 追加计数端点，重生成 159 页 CSP（680 哈希 0 漂移）
 - site/_headers Netlify/CF CSP 白名单同步
 - 版本 v2.3.39 W424 → v2.3.40 W425 + 六文档同步
-- verify_delivery 核心全绿（CSP/腐蚀/数据漂移/sitemap/A1 导航/计数 611）
+- verify_delivery 核心全绿（CSP/腐蚀/数据漂移/sitemap/A1 导航/计数 615）
 ```
 
 ## 项目协作约定

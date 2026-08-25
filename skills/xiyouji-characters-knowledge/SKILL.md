@@ -1,6 +1,7 @@
 ---
 name: xiyouji-characters-knowledge
 description: 基于原著与《详解西游记》项目资料回答《西游记》人物问题——身份、封号、法宝、经历、关系网络、结局、出场回目，并给出可溯源的索引（docs/02 人物档案、原著回目、dataset JSON、英文页与可视化页）。当用户问"孙悟空/猪八戒/白骨精/观音…是谁、有什么经历、和谁什么关系、结局如何"等人物问题时使用；也用于创作/校对人物相关内容前的事实核查。Use when answering questions about Journey to the West characters using the xiyouji repository.
+version: 1.0.0
 ---
 
 # 西游记角色知识库（xiyouji-characters-knowledge）
@@ -42,5 +43,5 @@ description: 基于原著与《详解西游记》项目资料回答《西游记�
 
 ## 资源
 
-- [references/roster.md](references/roster.md) — 211 个角色名录（名称/家族/文件）。
+- [references/roster.md](references/roster.md) — 215 个角色名录（名称/家族/文件）。
 - [references/data-sources.md](references/data-sources.md) — 数据源优先级与出处标注规则。
