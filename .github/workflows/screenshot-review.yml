@@ -75,15 +75,16 @@ jobs:
           set -euo pipefail
 
           EVENT="${{ github.event_name }}"
+          # W523：core.quotePath=false —— 中文文件名不转八进制引号转义，防 case 免审匹配失效而误入保守全量
           if [ "$EVENT" = "push" ]; then
             BEFORE="${{ github.event.before }}"
             if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
-              CHANGED=$(git diff --name-only HEAD~1 HEAD || true)
+              CHANGED=$(git -c core.quotePath=false diff --name-only HEAD~1 HEAD || true)
             else
-              CHANGED=$(git diff --name-only "$BEFORE" "${{ github.sha }}")
+              CHANGED=$(git -c core.quotePath=false diff --name-only "$BEFORE" "${{ github.sha }}")
             fi
           elif [ "$EVENT" = "pull_request" ]; then
-            CHANGED=$(git diff --name-only "${{ github.event.pull_request.base.sha }}...${{ github.sha }}")
+            CHANGED=$(git -c core.quotePath=false diff --name-only "${{ github.event.pull_request.base.sha }}...${{ github.sha }}")
           else
             # schedule / workflow_dispatch：恒为全量
             echo "needed=true" >> "$GITHUB_OUTPUT"
