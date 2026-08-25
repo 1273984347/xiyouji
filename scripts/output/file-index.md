@@ -593,3 +593,19 @@
 | scripts/output/file-index.md | W522 | v2.3.121 修改·新增 W522 段登记本批 16 文件 |
 | site/dukou-engine.html | W522 | v2.3.121 修改·页脚链头 prepend v2.3.121 W522 |
 | AGENTS.md | W522 | v2.3.121 修改·版本脚注追加 W522 条目 |
+
+> 当前版本 v2.3.122（2026-08-25）
+
+## W523 截图审查恒全量根因修复（scope diff 加 core.quotePath=false）（2026-08-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/screenshot-review.yml | W523 | v2.3.122 修改·scope 步骤三处 git diff 统一加 -c core.quotePath=false（中文路径八进制转义致 case 免审失配恒落保守全量 ~11min）+ 注释 |
+| AGENTS.md | W523 | v2.3.122 修改·§4.3 工具链新增 quotePath 强制规则 + 版本脚注 |
+| CHANGELOG.md | W523 | v2.3.122 修改·W523 段四件套 + 编号范围 W001-W523 |
+| site/dukou-engine.html | W523 | v2.3.122 修改·页脚链头 prepend v2.3.122 W523 |
+| 交接文档.md | W523 | v2.3.122 修改·头部链/HEAD/一段头/里程碑概要/E47 登记/尾页脚历史链 + 权威文档 W 范围行 |
+| README.md | W523 | v2.3.122 修改·版本行 W523 + W 范围 W001-W523 ×2（bump_version 辅助同步） |
+| STRUCTURE.md | W523 | v2.3.122 修改·当前版本行 W523 描述（净化 --desc 追加残留） |
+| docs/00-导读/项目说明.md | W523 | v2.3.122 修改·头部引用行 + 当前版本行 W523 |
+| scripts/output/file-index.md | W523 | v2.3.122 修改·新增 W523 段登记本批 9 文件 |
