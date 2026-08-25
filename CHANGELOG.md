@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W522），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W523），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,15 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.122（2026-08-25）：W523 截图审查恒全量根因修复 — scope diff 加 core.quotePath=false（用户提问驱动）
+
+> **来源**：用户问「为什么每次 Screenshot Review 都这么慢」→ 取证链：job steps API 各步 conclusion 均 success（非 skipped）+ 运行日志「Found 87 visualization pages + 2 top-level pages」证实执行了全量；而 site 相关 diff 仅含页脚豁免的 dukou-engine.html，理应 skip。
+> - **根因**：git 默认 core.quotePath=true 把中文路径输出为带双引号的八进制转义串（如 "\344\272\244\346\216\245\346\226\207\346\243\243.md"＝交接文档.md），在 scope 步骤 bash case 中不匹配任何免审模式（连 *.md / docs/* 都失配——首尾引号破坏 glob）→ 落入 *) 保守全量；铁律 #1 要求每批同步交接文档.md（中文文件名）→ 每次推送必然触发 ~11min 全量截图（run 32849348659 实测 11m07s；历史近 40 次成功 run 仅纯 ASCII 的 W478 批 2.4m 命中过定向档）。
+> - **修复**：screenshot-review.yml scope 步骤三处 git diff 调用点（push 零 SHA 兜底 HEAD~1 / push BEFORE..SHA / PR base...sha）统一加 -c core.quotePath=false，中文路径按原始 UTF-8 输出正常命中免审模式。
+> - **验证**：本地 Git Bash 复刻 yml case 块逐字逻辑，对 W522 实际范围（16a1911..6a47804）双向模拟——旧命令两条中文路径均落 *) 判 needed=true scope=full（精确复现）、新命令 docs/* 与 *.md 双命中判 needed=false scope=skip；全 workflows 排查确认 git-diff 路径分类仅此一处，无同类隐患。
+> - **影响**：此后纯 docs/页脚-only 批次 CI 截图审查由 ~11min 降为秒级 skip；本批因含 workflow 自身变更仍按设计走一次全量，属预期。
+> - **文件**：.github/workflows/screenshot-review.yml（三处调用点 + 注释一行）。
+> - **状态**：已落地（2026-08-25）；修复后 CI 首跑待观察。
 ### v2.3.121（2026-08-25）：W522 CI 红灯修复 — scripts/ ruff 16 错误清零（E41 远端核对发现）
 
 > **来源**：新 session 启动按 E41 铁律核对远端状态，发现本地 main 领先 origin/main 25 个提交（W504-W521 全部未推送）、远端最后一次 CI（W503 run 32746567085）Code Quality FAILURE 且在当前 HEAD 仍复现；Unit Tests 收集失败项（test_fix_svg_negative_widths.py ImportError）已由 W506 删除该测试根治。用户批复「修完再推」。
