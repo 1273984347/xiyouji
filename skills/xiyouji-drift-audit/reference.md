@@ -57,9 +57,9 @@ diff -r skills/ ~/.qwenworkcn/skills/ --exclude=*.pyc 2>/dev/null | head -20   #
 # skill 内部数字引用（举一反三）
 grep -rn "1[3-6] 门禁\|1[3-6]条门禁" skills/ ~/.qwenworkcn/skills/ --include="*.md" 2>/dev/null | grep -v "案例\|W49[0-9] 事发\|历史" | head
 # skills 内文递增数字 vs 权威值比对（W520 固化维度）
-ls -d skills/xiyouji-*/ | wc -l                                  # skill 数目录实测（权威值）
-grep -nE "[0-9]+ ?个(技能|skill)|skills/" skills/README.md | head -5   # README 声明 vs 上行实测逐字核对
-grep -rnE "[0-9]+ ?(条 ?)?门禁|[0-9]+ ?篇|[0-9]+ ?页" skills/xiyouji-*/SKILL.md skills/xiyouji-*/reference.md 2>/dev/null | grep -vE "事发|历史|案例库|类型 [A-I]|W[0-9]{3} (时|曾|事发)" | head -20   # 现役描述裸字面量候选 → 逐条按 E2 判据裁决
+ls -d skills/*/ | wc -l                                  # skill 数目录实测（全量 19，含 4 个非 xiyouji- 前缀会话流程 skill）
+grep -nE "[0-9]+ ?个|Skills 索引" skills/README.md | head -5   # README 声明（如「（19 个）」）vs 上行实测逐字核对
+grep -rnE "[0-9]+ ?(条 ?)?门禁|[0-9]+ ?篇|[0-9]+ ?页" skills/*/SKILL.md skills/*/reference.md 2>/dev/null | grep -vE "事发|历史|案例库|类型 [A-I]|W[0-9]{3} (时|曾|事发)" | head -20   # 现役描述裸字面量候选 → 逐条按 E2 判据裁决
 ```
 
 ### 步骤 6 治理文档内容引用核验
