@@ -570,3 +570,26 @@
 | MEMORY.md | W449 | v2.3.64 修改·修订陈旧 W423（未 push/无远端）记忆 + 英文站 138 页 + 空 legacy 目录 |
 | site/dukou-engine.html | W449 | v2.3.64 修改·页脚 prepend v2.3.64 W449 |
 | CHANGELOG.md / 交接文档.md | W449 | v2.3.64 修改·W449 四件套条目 + 交接同步 |
+
+> 当前版本 v2.3.121（2026-08-25）
+
+## W522 CI 红灯修复（2026-08-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/inject_goatcounter.py | W522 | v2.3.121 修改·根因修复 :68 字符串未闭合（转义闭引号还原·行为零变更） |
+| scripts/check_dynamic_links.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| scripts/check_glossary.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| scripts/check_governance_docs.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| scripts/check_motion_ban.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| scripts/check_token_coverage.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| scripts/extract_strings.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| scripts/validate_en.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| CHANGELOG.md | W522 | v2.3.121 修改·W522 段四件套 + 编号规则上限 W522 |
+| 交接文档.md | W522 | v2.3.121 修改·进度标题/概要区/最后更新链头插入 W522 + 零段 HEAD 同步 |
+| README.md | W522 | v2.3.121 修改·版本行 W522 + W 范围 W001-W522 ×2 |
+| STRUCTURE.md | W522 | v2.3.121 修改·当前版本行 W522 描述（净化 --desc 追加残留） |
+| docs/00-导读/项目说明.md | W522 | v2.3.121 修改·头部引用行 + 当前版本行 W522（净化 --desc 残留） |
+| scripts/output/file-index.md | W522 | v2.3.121 修改·新增 W522 段登记本批 16 文件 |
+| site/dukou-engine.html | W522 | v2.3.121 修改·页脚链头 prepend v2.3.121 W522 |
+| AGENTS.md | W522 | v2.3.121 修改·版本脚注追加 W522 条目 |

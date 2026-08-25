@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """check_motion_ban.py — Phase E E6 转正门禁（D4 动效禁止清单）
 
 扫描 site/ 全部 HTML（含 data/、en/）内联 CSS 与内联 JS 中的禁止动效模式：

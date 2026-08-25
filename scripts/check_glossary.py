@@ -17,7 +17,6 @@
 import argparse
 import json
 import os
-import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -70,7 +69,7 @@ def diff_c1(md, js):
     if [g["name"] for g in mg] != [g.get("name") for g in jg]:
         return ["分组序列不一致：md=%s json=%s"
                 % ([g["name"] for g in mg], [g.get("name") for g in jg])]
-    for a, b in zip(mg, jg):
+    for a, b in zip(mg, jg, strict=True):
         ea = sorted(json.dumps(e, ensure_ascii=False, sort_keys=True) for e in a["entries"])
         eb = sorted(json.dumps(e, ensure_ascii=False, sort_keys=True) for e in b.get("entries", []))
         for x in ea:

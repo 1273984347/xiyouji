@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """Validate an EN viz page: chrome CJK must be whitelist-only; script CJK must be 0.
 Usage: python scripts/validate_en.py <path-to-en-html>
 Exit non-zero on violation. Prints details.
 """
-import re, sys, os
+import os
+import re
+import sys
 
 WHITELIST_TOKENS = ["西游", "详解", "详解西游记"]  # brand stamps only
 WHITELIST_CHARS = set("西游详解")  # individual chars allowed in chrome
