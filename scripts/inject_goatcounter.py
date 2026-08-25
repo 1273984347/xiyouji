@@ -65,7 +65,7 @@ def inject(html_path, tag, check_only=False):
     # 本地自托管 count.js：按页面深度计算相对路径（file:// 与 GitHub Pages 均可用）
     if tag and '__GCJS__' in tag:
         rel = os.path.relpath(os.path.join(SITE_DIR, 'static', 'js', 'goatcounter.js'),
-                              os.path.dirname(html_path)).replace('\', '/')
+                              os.path.dirname(html_path)).replace('\\', '/')
         tag = tag.replace('__GCJS__', rel)
     if MARKER in content:
         return "skip"  # 已注入，幂等跳过

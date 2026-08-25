@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """Dump every chrome text node and every CJK-bearing script literal from a data viz HTML.
 Usage: python scripts/extract_strings.py <name> ...
 Reads site/data/<name>.html, prints:
@@ -7,7 +6,9 @@ Reads site/data/<name>.html, prints:
   ## SCRIPT  <literal>
 so a translator can enumerate exhaustively.
 """
-import re, sys, os
+import os
+import re
+import sys
 
 DATA = os.path.join(os.path.dirname(__file__), "..", "site", "data")
 

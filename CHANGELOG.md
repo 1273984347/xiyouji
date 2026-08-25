@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W521），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W522），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.121（2026-08-25）：W522 CI 红灯修复 — scripts/ ruff 16 错误清零（E41 远端核对发现）
+
+> **来源**：新 session 启动按 E41 铁律核对远端状态，发现本地 main 领先 origin/main 25 个提交（W504-W521 全部未推送）、远端最后一次 CI（W503 run 32746567085）Code Quality FAILURE 且在当前 HEAD 仍复现；Unit Tests 收集失败项（test_fix_svg_negative_widths.py ImportError）已由 W506 删除该测试根治。用户批复「修完再推」。
+> - **根因**：inject_goatcounter.py:68 `.replace('\', '/')` 反斜杠转义闭引号致字符串未闭合（W425 GoatCounter 注入脚本·级联 4 个 invalid-syntax）+ 12 个普通 lint 分布 7 文件（F841×1 / F401×2 / B905×1 / UP009×4 / E401+I001×2）。
+> - **修复（行为零变更）**：inject_goatcounter.py `'\\'` 还原本意（Windows 分隔符→正斜杠）；check_dynamic_links.py self_test 删未用变量 good_rel；check_glossary.py diff_c1 zip 补 strict=True（前置分组序列守卫已保证等长）；其余 10 处 ruff --fix 自动修复（F401 删未用 import re/subprocess、UP009 删冗余 UTF-8 声明 ×4、extract_strings 与 validate_en import 拆行排序）。
+> - **文件**：scripts/ 8 个（inject_goatcounter / check_dynamic_links / check_glossary / check_governance_docs / check_motion_ban / check_token_coverage / extract_strings / validate_en）+ 六文档 + AGENTS.md 脚注。
+> - **验证**：ruff check scripts/ 16→0 All checks passed；git diff --stat 范围核对恰好 8 目标文件（+8/-11）零越界；pytest 收集 302 正常；verify_delivery.py 当批现测核心全绿。
+> - **状态**：已落地（2026-08-25）。
 
 ### v2.3.120（2026-08-25）：W521 存量裸字面量清剿 + W463 三坑补登记（P2 两项用户批复执行）
 

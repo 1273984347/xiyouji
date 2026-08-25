@@ -87,7 +87,6 @@ def scan_file(page_path, doc_names, html_text=None):
 
 def self_test():
     """负样本自测：合成内容含 1 好 2 坏，断言恰好抓到 2 个坏字面量。"""
-    good_rel = "../index.html" if os.path.isfile(os.path.join(SITE_DIR, "index.html")) else None
     synthetic_page = os.path.join(SITE_DIR, "data", "__synthetic__.html")
     synthetic_html = (
         "<script>\n"
