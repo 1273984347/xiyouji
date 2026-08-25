@@ -8,6 +8,8 @@
   4. 交接文档「当前 HEAD」与 CHANGELOG 最新版本段一致（版本 vX.Y.Z + W###；短 SHA 会逐 commit 变动，不作为校验项）
   5. CHANGELOG 编号规则 W001-W### 与最新版本段 W 一致
   6. 文档规范 §11.5 登记的 10 份治理文档均含「维护契约」
+  7. 交接文档全部「最后更新」行（头部滚动链 + 尾页脚历史链）链首条目均与
+     CHANGELOG 现役版段一致（W518 新增·防连续漏更）
 退出码：0 全过；1 任一检查失败。
 """
 
@@ -23,6 +25,28 @@ ROOT = os.path.dirname(_HERE)
 def read_rel(rel):
     with open(os.path.join(ROOT, rel), encoding="utf-8", errors="replace") as fh:
         return fh.read()
+
+
+def footer_freshness_issues(handoff_text, newest_ver, newest_wnum):
+    """检查 7：交接文档每处「最后更新」行链首条目须为 CHANGELOG 现役段同批（W518 新增）。
+
+    newest_ver 形如 "v2.3.117"（含 v 前缀，即 CHANGELOG 版段正则的 group(1)）。
+    条目形如 `最后更新：YYYY-MM-DD（vX.Y.Z W### 标题…）`；交接文档头部滚动链与
+    尾页脚历史链各一处，全部扫描（各链历史条目允许滞后，只校验链首）。
+    """
+    matches = list(re.finditer(r"最后更新：\d{4}-\d{2}-\d{2}（v([\d.]+)\s+W(\d+)", handoff_text))
+    if not matches:
+        return ["交接文档未解析出任何「最后更新」最新条目（期望 …（vX.Y.Z W###…）格式）"]
+    exp = (newest_ver, "W" + newest_wnum)
+    issues = []
+    for i, m in enumerate(matches, 1):
+        got = ("v" + m.group(1), "W" + m.group(2))
+        if got != exp:
+            issues.append(
+                "第 %d 处「最后更新」链首条目 %s %s 与 CHANGELOG 现役段 %s %s 不一致（每批须前置最新条目）"
+                % (i, got[0], got[1], exp[0], exp[1])
+            )
+    return issues
 
 
 def main():
@@ -80,12 +104,16 @@ def main():
     if missing:
         issues.append("以下治理文档缺少「维护契约」：%s" % "、".join(missing))
 
+    # 7. 交接文档全部「最后更新」行与 CHANGELOG 现役段一致（W518 新增·防连续漏更）
+    if cm:
+        issues.extend(footer_freshness_issues(handoff, cm.group(1), cm.group(2)))
+
     if issues:
         for it in issues:
             print("FAIL  " + it)
         print("治理文档维护契约检查失败：%d 项" % len(issues))
         return 1
-    print("治理文档维护契约通过（骨架/黑名单/重复/HEAD/编号/契约覆盖 6 项全过）")
+    print("治理文档维护契约通过（骨架/黑名单/重复/HEAD/编号/契约覆盖/最后更新新鲜度 7 项全过）")
     return 0
 
 

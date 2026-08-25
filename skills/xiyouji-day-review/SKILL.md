@@ -1,7 +1,7 @@
 ---
 name: xiyouji-day-review
 description: 西游记项目（D:\1\xiyouji）当日 W 批次工作收尾审查 playbook。步骤：取证（git log --since 当日/status 未跟踪归属/verify 门禁基线，门禁全绿≠无问题）→ 逐提交体量+CHANGELOG 四件套核对（大删除量红旗）→ 渲染抽查（Playwright styled 断言+dark 截图+390/414 断点实测，文本门禁抓不到渲染回归）→ 文档同步清单（六文档/AGENTS 脚注/方案档回填/交接文档过期行/未入库脚本）→ P0-P3 问题分级+AskUserQuestion 确认修复范围。当用户要求"审查今天的工作"、"当日审查"、"今日复盘"、"收尾审查"、"day review"、"审查今日提交"、"看看今天做得怎么样"、"当日工作有没有问题"时触发。
-version: 1.0.0
+version: 1.1.0
 ---
 
 # 西游记项目当日 W 批次工作审查
@@ -67,6 +67,7 @@ version: 1.0.0
 4. **宣称入库脚本真在 git**：方案档/交接文档里宣称"新建了 xx 脚本"，用 `git ls-files scripts/xx.py` 核实真入库（防 baseline_snapshot 式"做了但从未提交"）。
 5. **治理文档内容引用核验**：`docs/00-导读/文档规范.md` §8 门禁表 / §11.1 门禁列 / §11.2 禁改清单引用的脚本名、门禁数、行号（如"第 45 行"），以及 AGENTS.md §4.2 门禁清单，与仓库实际对照——新增门禁/脚本后治理文档描述滞后 = P1/P2（W499 教训：文档规范.md 6 处漂移 + AGENTS §4.2 缺第 17 门禁，纯文本门禁与首轮人工审查均漏网）。
 6. **归档/删除脚本查 tests/ 引用（W506 教训固化）**：当日若有提交归档/删除 `scripts/*.py`（如移入 `scripts/archive/` 或 git rm），必须 `Select-String -Path tests/*.py -Pattern '<脚本名>'` 检查 tests/ 是否有配套测试引用——脚本归档而测试未删 = 失锚测试致 `pytest tests -q` 收集失败（W506 处置：W447 归档 fix_svg_negative_widths.py 漏删配套测试，pytest 全量红）。发现失锚测试 = P1，当批处置（删除测试或恢复脚本）。
+7. **交接文档「最后更新」随批前置（W518 固化）**：头部滚动链与尾页脚历史链**两处**的链首条目都必须是本批 v/W——实证 W505-W517 曾连续多批漏更。已由 check_governance_docs 检查 7 机器拦截（verify_delivery 内 WARN 起步·全量扫描每处「最后更新：」）；写作时在各处「最后更新：」后插入 `YYYY-MM-DD（vX.Y.Z W### 标题…）；` 条目（只前置不回填）。
 
 ### 步骤 5：问题分级 + AskUserQuestion + 报告
 
