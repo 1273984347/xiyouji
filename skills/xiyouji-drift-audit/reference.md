@@ -76,7 +76,7 @@ ls scripts/check_*.py scripts/check_*.js | sort
 head -3 .github/workflows/README.md
 grep -n "W4[5-9][0-9]\|W500" .github/workflows/README.md | head -6
 # 其他：新Agent启动Prompt 计数、DESIGN 门禁引用、skills/README、统计口径
-grep -n "615\|209\|86\|门禁" 新Agent启动Prompt.md | head -10
+grep -nE "615|209|86|门禁" 新Agent启动Prompt.md | head -10   # 计数关键词随批次校正，以新Agent启动Prompt 与 README 实际为准
 grep -n "门禁" DESIGN.md | head -3
 ```
 

@@ -19,7 +19,7 @@
 
 - 每个新 W### 完成后：CHANGELOG.md / 交接文档.md（HEAD、版本列表、接续编号、页脚最后更新）/ README.md / STRUCTURE.md / docs/00-导读/项目说明.md（两处版本行）/ scripts/output/file-index.md 同步。
 - 页脚版本锚点 `site/dukou-engine.html` 需人工插入（bump_version.py 不自动改它）。
-- 跑 `python scripts/verify_delivery.py` 必须全绿（六文档版本 / A4 209 / 范围漂移 / 导航 / 链接 / sitemap / 回退 / 数据漂移）。
+- 跑 `python scripts/verify_delivery.py` 必须全绿（六文档版本 / A4 209 / 范围漂移 / 导航 / 链接 / sitemap / 回退 / 数据漂移——A4 计数随批次校正，以 verify_delivery 输出为准）。
 
 ## 4. 禁改清单（文档规范 §11.2）
 

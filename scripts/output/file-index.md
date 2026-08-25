@@ -10,6 +10,30 @@
 
 ---
 
+## W521 存量裸字面量清剿 + W463 三坑补登记（2026-08-25·v2.3.120）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| skills/xiyouji-en-translation/SKILL.md | W521 | v2.3.120 修改·陷阱清单「共 615 篇」→「共 N 篇（值以 README 版本行/verify 输出为准，当前 N=615）」 |
+| skills/xiyouji-character-content/SKILL.md | W521 | v2.3.120 修改·desc「A3 板块 215 篇」→「篇数以统计口径说明为准」 |
+| skills/xiyouji-character-content/references/quality-gates.md | W521 | v2.3.120 修改·verify 描述「A4 209」加注「随批次校正、以 verify_delivery 输出为准」 |
+| skills/xiyouji-characters-knowledge/SKILL.md | W521 | v2.3.120 修改·「215 个角色名录」→「角色名录（篇数以 roster 实际为准）」 |
+| skills/xiyouji-characters-knowledge/references/roster.md | W521 | v2.3.120 修改·标题「215 篇」→「篇数以目录实际为准」 |
+| skills/README.md | W521 | v2.3.120 修改·索引表「roster 215」→「roster 人物名录」 |
+| skills/xiyouji-version-bump/SKILL.md | W521 | v2.3.120 修改·desc「共 615 篇」→「共 N 篇（值随批次校正，当前 N=615）」 |
+| skills/xiyouji-drift-audit/SKILL.md | W521 | v2.3.120 修改·检查项「计数引用（615/209/86）」加注「随批次校正、以实际为准」 |
+| skills/xiyouji-drift-audit/reference.md | W521 | v2.3.120 修改·排查命令「615\|209\|86」改 -nE + 加注「随批次校正」 |
+| skills/xiyouji-plan-review/SKILL.md | W521 | v2.3.120 修改·口径陷阱「87/86/85」加注「页数以实际为准，随批次校正」 |
+| skills/xiyouji-visual-batch/SKILL.md | W521 | v2.3.120 修改·探针扫描面「233 页」加注「页数以 site/ 实际为准随批次校正」 |
+| 交接文档.md | W521 | v2.3.120 修改·头部滚动链/当前 HEAD/进度标题链/里程碑 bullet/尾页脚链首五处同步 + 「三」新增 W463 段（E45 W 批收尾三坑补登记·编号空间完整化） |
+| CHANGELOG.md | W521 | v2.3.120 修改·编号规则段 W001-W521 + 新增 v2.3.120/W521 段（四件套） |
+| README.md | W521 | v2.3.120 修改·L5 当前版本行 bump 至 v2.3.120 |
+| STRUCTURE.md | W521 | v2.3.120 修改·L4 当前版本行 bump 至 v2.3.120 |
+| docs/00-导读/项目说明.md | W521 | v2.3.120 修改·L5 主行 + L47 次级版本行 bump 至 v2.3.120 |
+| AGENTS.md | W521 | v2.3.120 修改·版本脚注追加 W521 条目（无 § 结构性变更） |
+| site/dukou-engine.html | W521 | v2.3.120 修改·页脚长链人工前置 W521 段 |
+| scripts/output/file-index.md | W521 | v2.3.120 修改·W521 段登记（本段） |
+
 ## W520 递增数字禁字面量 + skills 内文数字比对维度（2026-08-25·v2.3.119）
 
 | 文件 | W | 说明 |

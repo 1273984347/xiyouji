@@ -43,5 +43,5 @@ version: 1.0.0
 
 ## 资源
 
-- [references/roster.md](references/roster.md) — 215 个角色名录（名称/家族/文件）。
+- [references/roster.md](references/roster.md) — 角色名录（名称/家族/文件；篇数以 roster 实际为准）。
 - [references/data-sources.md](references/data-sources.md) — 数据源优先级与出处标注规则。
