@@ -56,6 +56,10 @@ python scripts/sync_skills.py --sync    # 仓库→全局同步（改仓库后�
 diff -r skills/ ~/.qwenworkcn/skills/ --exclude=*.pyc 2>/dev/null | head -20   # 全量 diff
 # skill 内部数字引用（举一反三）
 grep -rn "1[3-6] 门禁\|1[3-6]条门禁" skills/ ~/.qwenworkcn/skills/ --include="*.md" 2>/dev/null | grep -v "案例\|W49[0-9] 事发\|历史" | head
+# skills 内文递增数字 vs 权威值比对（W520 固化维度）
+ls -d skills/xiyouji-*/ | wc -l                                  # skill 数目录实测（权威值）
+grep -nE "[0-9]+ ?个(技能|skill)|skills/" skills/README.md | head -5   # README 声明 vs 上行实测逐字核对
+grep -rnE "[0-9]+ ?(条 ?)?门禁|[0-9]+ ?篇|[0-9]+ ?页" skills/xiyouji-*/SKILL.md skills/xiyouji-*/reference.md 2>/dev/null | grep -vE "事发|历史|案例库|类型 [A-I]|W[0-9]{3} (时|曾|事发)" | head -20   # 现役描述裸字面量候选 → 逐条按 E2 判据裁决
 ```
 
 ### 步骤 6 治理文档内容引用核验
@@ -87,7 +91,7 @@ git log --format="%h %s" --grep="W[0-9]\{3\}" | head   # 带 W 的提交
 ### 修复后验证
 
 ```bash
-python scripts/verify_delivery.py     # 17 门禁全绿
+python scripts/verify_delivery.py     # 全部门禁全绿（随批次递增，以输出为准）
 python scripts/sync_skills.py --check # 双轨 0 漂移
 git diff --name-only                  # 确认改动范围，非必要改动 git restore
 ```
@@ -138,6 +142,7 @@ git diff --name-only                  # 确认改动范围，非必要改动 git
 - **现象**：skill 内部数字引用滞后——day-review SKILL.md"退出码 0 只代表 15 条门禁通过"（实际 17 条）。
 - **修复要点**：去掉硬编码数字改为"全部门禁（随批次递增、以 verify 输出为准）"，从根上防未来再漂。
 - **扫描覆盖**：全仓库"14/15/16 门禁"其余引用均为历史事件描述（W493/W495/W498 事发时点），按 E2 判据保留。
+- **W520 扩展（结构性盲区收编）**：W519 skills 全目录审查复盘确认——skills 内文的递增数字既不在六文档同步契约内，也不被任何计数门禁断言（check_skills_index 只管结构不管内文数字），属双防线外的系统性盲区。病例实证：存量持久文档门禁数多处滞后、day-review 验证清单写死"六项"而步骤 4 实为 7 条、本手册旧版"修复后验证"区写死"17 门禁全绿"。处置双轨：①写作侧根治——plan-authoring 去模糊化标准⑤ + day-review 步骤 4 第 8 条；②体检侧兜底——SKILL 步骤 5 第 4 条固化为「skill 内部数字引用 vs 权威值比对」固定维度（排查命令见上文步骤 5 命令区）。
 
 ## 三、E2 历史保留判据（防误改）
 

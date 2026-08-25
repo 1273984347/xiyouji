@@ -1,7 +1,7 @@
 ---
 name: xiyouji-drift-audit
 description: 西游记项目（D:\1\xiyouji）任意时刻全仓文件漂移体检 playbook。步骤：取证（git HEAD/工作区/六文档版本行全量 grep）→ 门禁基线（verify 全绿≠无漂移）→ file-index 段完整性 → 方法论 README 双向覆盖 → skills 双轨 --check → 治理文档内容引用核验（文档规范.md §8/§11 + AGENTS §4.2 + workflows/README 旁文档 + skill 内部数字引用）→ 未跟踪杂项归属 + 孤儿提交核对 → P0-P3 分级报告 + AskUserQuestion 确认修复范围。与 day-review（当日批次收尾）互补，覆盖任意时刻的全仓漂移体检。当用户要求"全面审查"、"漂移体检"、"文件漂移审查"、"仓库健康检查"、"六文档一致性"、"索引核验"、"全仓体检"、"全仓库审查一遍"、质疑"为什么没查出来"时触发。
-version: 1.0.0
+version: 1.1.0
 ---
 
 # 西游记项目全仓文件漂移体检
@@ -88,7 +88,7 @@ version: 1.0.0
 1. 双轨 0 漂移（单侧修改 = 漂移；仓库是主源，改仓库后 --sync 同步全局）。
 2. 新技能未入库仓库（check_skills_index 门禁覆盖，但人工复核 README 索引数 == 目录数）。
 3. frontmatter name == 目录名。
-4. **skill 内部数字引用**（举一反三维度，W499 第三轮教训：day-review 内部"15 条门禁"曾滞后）：门禁数、计数口径、版本引用。
+4. **skill 内部数字引用 vs 权威值比对**（举一反三维度的固化扩展，W499 第三轮 + W520 固化）：skill 内文（SKILL.md + reference*.md）的门禁数、篇数/页数/skill 数、计数口径、版本引用，逐项对照权威源核实——门禁数以 verify 输出为准、内容规模以 README/统计口径说明为准、skill 数以 skills/README.md 对照目录实测为准；随批次演化的计数应为引用式表述或绑定实测时点，无时点锚的裸字面量 = P2（W519 复盘确认：skills 内文数字游离于六文档同步契约与计数门禁两道防线之外——check_skills_index 只管结构不管内文数字，须靠本维度人工兜底；排查命令见 reference.md 步骤 5）。
 
 ### 步骤 6：治理文档内容引用核验（W499 盲区类型的核心防线，本技能价值所在）
 
