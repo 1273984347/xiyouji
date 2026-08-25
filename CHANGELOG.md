@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W517），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W518），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.117（2026-08-25）：W518 期望版本动态化 + 尾页脚新鲜度门禁（用户批复两项遗留候选）
+
+> **来源**：W515 收尾报告两项遗留候选经用户逐条批复授权（「1.纳入 day-review 步骤清单或轻量校验。2.改为动态取最新版」）。根因一：verify_delivery 六文档期望版本锚定 dukou-engine.html 页脚（滞后型手工工件，辅助文档升版反报「不含旧版」噪音 WARN）；根因二：交接文档「最后更新」链（头部滚动链 + 尾页脚历史链两处）W505-W517 多批连续漏更（本批检查部署即拦下活体：头部链首 v2.3.115 W516、尾页脚链首 v2.3.114 W515，双双落后现役段 W517）。
+> - **执行（项②·TDD）**：verify_delivery.py 新增纯函数 latest_version_from_changelog（`^###\s+v…（…）：\s*W…` 取倒序首段＝现役段）与 parse_footer_version；main() 期望 ver/wnum 改由 CHANGELOG 动态推导（解析失败 FAIL），dukou-engine 页脚降级为新鲜度被检对象（落后现役段仅 WARN 不阻断）；六文档核心 2 FAIL／辅助 4 WARN 与范围漂移语义不变。
+> - **执行（项①）**：check_governance_docs.py 新增检查 7 footer_freshness_issues——交接文档全部「最后更新」行（头部滚动链 + 尾页脚历史链）链首条目须均 == CHANGELOG 现役段（finditer 全量扫描·部署即拦下活体：头部 W516 / 尾页脚 W515 双双漏更），不一致报 issue（caller 维持 WARN 起步策略）；day-review SKILL.md 步骤 4 新增第 7 条清单项（随批前置·只前置不回填）+ version 1.1.0，sync_skills --sync 已同步全局。
+> - **文件**：scripts/verify_delivery.py、scripts/check_governance_docs.py、skills/xiyouji-day-review/SKILL.md（+全局同步）、tests/test_verify_delivery_version.py（新建）、六文档、AGENTS.md（§4.2 第 1/22 条+脚注）、docs/00-导读/文档规范.md（§8 门禁数 20→22+动态版本源口径）、site/dukou-engine.html 页脚。
+> - **验证**：TDD 红→绿（新增测试 11 个）；pytest 全量 302 passed（基线 291＋11）；py_compile 双脚本通过；verify_delivery 当批现测——治理检查 7 部署即命中活体漂移（WARN 拦截），文档同步后全绿。
+> - **状态**：已落地（2026-08-25）。
 
 ### v2.3.116（2026-08-25）：W517 共享机制载体铁律 — 仓库内文件为真源（W516 载体错误教训固化）
 

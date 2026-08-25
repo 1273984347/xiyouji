@@ -12,6 +12,10 @@ verify_delivery.py — 零依赖交付校验门禁（Senior Developer 设立）
   - 辅助 4 份（README.md / STRUCTURE.md / 项目说明.md / file-index.md）= 每次 W### 的纯手工税，
     缺失仅【WARN 不阻断】，里程碑时跑 scripts/bump_version.py 一键补齐。
 
+动态期望版本（W518）：六文档同步的期望 v/W 不再锚定 dukou-engine.html 页脚（滞后型
+  手工工件，辅助文档升版后必现"不含旧版"噪音 WARN），改为动态取 CHANGELOG 倒序首个
+  版段（现役段）；页脚自身降级为新鲜度被检对象，落后现役段仅【WARN 不阻断】。
+
 零依赖：仅标准库。可直接运行：
   python scripts/verify_delivery.py            # 静态校验（提交前门禁）
   python scripts/verify_delivery.py --health   # 额外探测 RAG /health（环境项，仅告警不阻断）
@@ -86,6 +90,22 @@ def _read(p):
         return ""
 
 
+def latest_version_from_changelog(text):
+    """从 CHANGELOG 文本解析现役（最新）版段 → (X.Y.Z, W##)；无版段返回 (None, None)。
+
+    版段倒序排列（最新在最前），首个 `### vX.Y.Z（日期）：W###` 匹配即现役段。
+    ver 不含 "v" 前缀，与既有 ("v" + ver) 用法一致。
+    """
+    m = re.search(r"^###\s+v(\d+\.\d+\.\d+)（[^）]*）：\s*W(\d+)", text, re.M)
+    return (m.group(1), m.group(2)) if m else (None, None)
+
+
+def parse_footer_version(text):
+    """解析文本中首个 vX.Y.Z W### 版本标记 → (X.Y.Z, W##)；无匹配返回 (None, None)。"""
+    m = re.search(r"v(\d+\.\d+\.\d+)\s+W(\d+)", text)
+    return (m.group(1), m.group(2)) if m else (None, None)
+
+
 def main():
     fails = 0
     warns = 0
@@ -103,18 +123,27 @@ def main():
     def ok(msg):
         print("OK    " + msg)
 
-    # ---- 读取 html，提取 footer 版本 + 扫描所有 W### ----
+    # ---- 期望版本动态取自 CHANGELOG 现役版段（W518；页脚为滞后型手工工件，降级为新鲜度检查）----
+    ver, wnum = latest_version_from_changelog(_read(os.path.join(ROOT, "CHANGELOG.md")))
+    if not (ver and wnum):
+        fail("CHANGELOG.md 未解析出现役版段（期望标题格式 ### vX.Y.Z（日期）：W###）")
+    else:
+        ok("期望版本动态取自 CHANGELOG 现役段 v%s W%s" % (ver, wnum))
+
+    # ---- 读取 dukou-engine.html：页脚新鲜度 + 扫描所有 W### ----
     html = _read(HTML)
     if not html:
         fail("找不到 %s（未生成或被忽略）" % HTML)
-    m = re.search(r"v(\d+\.\d+\.\d+)\s+W(\d+)", html)
-    ver = m.group(1) if m else None
-    wnum = m.group(2) if m else None
     html_w = [int(x) for x in re.findall(r"W(\d{3})", html)]
     max_w_html = max(html_w) if html_w else 0
 
-    if ver and wnum:
-        ok("dukou-engine.html footer 版本 v%s W%s" % (ver, wnum))
+    fver, fwnum = parse_footer_version(html)
+    if fver and fwnum:
+        if ver and wnum and int(fwnum) < int(wnum):
+            warn("dukou-engine.html 页脚版本 v%s W%s 落后于现役段 W%s"
+                 "（页脚为手工工件，建议随批升版，不阻断）" % (fver, fwnum, wnum))
+        else:
+            ok("dukou-engine.html footer 版本 v%s W%s" % (fver, fwnum))
     else:
         fail("dukou-engine.html footer 未解析出 vX.Y.Z W###")
 

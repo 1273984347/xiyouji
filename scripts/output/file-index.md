@@ -10,6 +10,24 @@
 
 ---
 
+## W518 期望版本动态化 + 尾页脚新鲜度门禁（2026-08-25·v2.3.117）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/verify_delivery.py | W518 | v2.3.117 修改·期望版本动态取自 CHANGELOG 现役版段（latest_version_from_changelog/parse_footer_version 纯函数）·dukou-engine 页脚降级新鲜度 WARN |
+| scripts/check_governance_docs.py | W518 | v2.3.117 修改·检查 7「最后更新」新鲜度挂载：交接文档头尾两处链首均须==CHANGELOG 现役段（finditer 全量·WARN 起步） |
+| tests/test_verify_delivery_version.py | W518 | v2.3.117 新增·TDD 11 测试（动态版本源 6 + 治理检查 7 finditer 全量 5·含双活体拦截用例） |
+| skills/xiyouji-day-review/SKILL.md | W518 | v2.3.117 修改·步骤 4 新增第 7 条清单项（「最后更新」随批前置）+ version 1.1.0 |
+| scripts/output/file-index.md | W518 | v2.3.117 修改·W518 段登记（本段·bump 底部空壳块清除） |
+| CHANGELOG.md | W518 | v2.3.117 修改·脚本插入 v2.3.117/W518 段 + 验证行/文件行当批实测更正（11 测试/302 passed/仅 dukou 页脚） |
+| 交接文档.md | W518 | v2.3.117 修改·头部滚动链/HEAD 句/进度链/里程碑 bullet/尾页脚前置共 5 处 |
+| README.md | W518 | v2.3.117 修改·bump 版本行 + 目录 W 范围 W001-W518 |
+| STRUCTURE.md | W518 | v2.3.117 修改·版本行手工净化 bump 坑②追加残留 |
+| docs/00-导读/项目说明.md | W518 | v2.3.117 修改·主行 bump + L47 次级版本行手工修复坑②变体 |
+| site/dukou-engine.html | W518 | v2.3.117 修改·页脚长链人工前置 W518 段（降级为新鲜度被检对象后仍为 bump 缺省读取源） |
+| AGENTS.md | W518 | v2.3.117 修改·§4.2 第 1 条补动态版本源 + 第 22 门禁扩七项检查 + 版本脚注 |
+| docs/00-导读/文档规范.md | W518 | v2.3.117 修改·§8 verify_delivery 行门禁数 20→22 + 动态版本源口径 |
+
 ## W517 共享机制载体铁律（2026-08-25·v2.3.116）
 
 | 文件 | W | 说明 |
