@@ -26,7 +26,7 @@ tail -5 AGENTS.md | grep -E "v[0-9]+\.[0-9]+"            # 版本脚注
 ### 步骤 2 门禁基线
 
 ```bash
-python scripts/verify_delivery.py    # 17 条门禁（随批次递增），全绿≠无漂移
+python scripts/verify_delivery.py    # 门禁（随批次递增），全绿≠无漂移
 ```
 
 ### 步骤 3 file-index 段完整性
@@ -72,7 +72,7 @@ ls scripts/check_*.py scripts/check_*.js | sort
 head -3 .github/workflows/README.md
 grep -n "W4[5-9][0-9]\|W500" .github/workflows/README.md | head -6
 # 其他：新Agent启动Prompt 计数、DESIGN 门禁引用、skills/README、统计口径
-grep -n "611\|209\|86\|门禁" 新Agent启动Prompt.md | head -10
+grep -n "615\|209\|86\|门禁" 新Agent启动Prompt.md | head -10
 grep -n "门禁" DESIGN.md | head -3
 ```
 
@@ -136,7 +136,7 @@ git diff --name-only                  # 确认改动范围，非必要改动 git
 
 ### 举一反三型（类型 D 的扩展，W499 第三轮）
 - **现象**：skill 内部数字引用滞后——day-review SKILL.md"退出码 0 只代表 15 条门禁通过"（实际 17 条）。
-- **修复要点**：去掉硬编码数字改为"全部门禁（现 17 条，随批次递增、以 verify 输出为准）"，从根上防未来再漂。
+- **修复要点**：去掉硬编码数字改为"全部门禁（随批次递增、以 verify 输出为准）"，从根上防未来再漂。
 - **扫描覆盖**：全仓库"14/15/16 门禁"其余引用均为历史事件描述（W493/W495/W498 事发时点），按 E2 判据保留。
 
 ## 三、E2 历史保留判据（防误改）
@@ -153,5 +153,5 @@ git diff --name-only                  # 确认改动范围，非必要改动 git
 
 1. 改治理文档 → 双索引登记：file-index 最新 W 段补行 + CHANGELOG 对应版段文件行补名。
 2. 改 skill → 仓库版改完跑 `sync_skills.py --sync` 同步全局，再 `--check` 验证双轨 0 漂移。
-3. 修数字引用 → 优先去硬编码（"现 17 条，随批次递增、以 verify 输出为准"），从根防漂。
+3. 修数字引用 → 优先去硬编码（"随批次递增、以 verify 输出为准"），从根防漂。
 4. 全部修复后：verify 全绿 + 双轨 --check 0 漂移 + `git diff --name-only` 范围核对。

@@ -1,6 +1,7 @@
 ---
 name: xiyouji-character-content
-description: 创建、扩写与维护《详解西游记》项目的人物深度分析内容（docs/02-人物深度分析，A3 板块，211 篇）。覆盖四种模板家族——基础七段、人物外传、深化专题、方向二深化——并强制遵循项目元信息块（轨标/W###/创建日期/双索引链接）、CHANGELOG 与 file-index 双索引同步、verify_delivery 门禁与 E1 铁律。当用户要求撰写/修改西游记人物分析、人物外传、人物深化专题、方向二深化、人物谱系、人物索引或回目反链时使用；也用于创建英文人物页（site/en/character-*.html）前的内容核对。Use when creating or editing character-analysis content in the xiyouji repository.
+description: 创建、扩写与维护《详解西游记》项目的人物深度分析内容（docs/02-人物深度分析，A3 板块，215 篇）。覆盖四种模板家族——基础七段、人物外传、深化专题、方向二深化——并强制遵循项目元信息块（轨标/W###/创建日期/双索引链接）、CHANGELOG 与 file-index 双索引同步、verify_delivery 门禁与 E1 铁律。当用户要求撰写/修改西游记人物分析、人物外传、人物深化专题、方向二深化、人物谱系、人物索引或回目反链时使用；也用于创建英文人物页（site/en/character-*.html）前的内容核对。Use when creating or editing character-analysis content in the xiyouji repository.
+version: 1.0.0
 ---
 
 # 西游记人物内容（xiyouji-character-content）

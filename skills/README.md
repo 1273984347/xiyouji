@@ -14,7 +14,7 @@
 | xiyouji-tangseng | 角色 | 唐僧知识库与内容生产规范 | 唐僧相关问答 / 创作 / 扩写 |
 | xiyouji-bai-longma | 角色 | 白龙马知识库与内容生产规范 | 白龙马相关问答 / 创作 / 扩写 |
 | xiyouji-character-content | 内容 | A3 人物深度分析四家族模板 + 质量门禁 | 撰写 / 修改人物分析 |
-| xiyouji-characters-knowledge | 知识 | 人物问答取证（roster 211 + 数据源优先级） | 人物问答 / 事实核查 |
+| xiyouji-characters-knowledge | 知识 | 人物问答取证（roster 215 + 数据源优先级） | 人物问答 / 事实核查 |
 | xiyouji-version-bump | 流程 | 版本 bump + 六文档同步 | W 批次提交 |
 | xiyouji-en-translation | 流程 | 英文站可视化页英文化 | 续译 / 拆页翻译 |
 | xiyouji-s4-submission | 流程 | S4 学术投稿前准备 | 投稿检查 / line 号校核 / 匿名稿 |

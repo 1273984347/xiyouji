@@ -10,6 +10,34 @@
 
 ---
 
+## W519 Skills 全目录审查与 SKILL.md 内容优化（2026-08-25·v2.3.118）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| skills/xiyouji-character-content/SKILL.md | W519 | v2.3.118 修改·desc 人物计数 211→215（A 类）+ 补顶层 version: 1.0.0（D 类） |
+| skills/xiyouji-characters-knowledge/SKILL.md | W519 | v2.3.118 修改·角色名录行 211→215（A 类）+ 补顶层 version: 1.0.0（D 类） |
+| skills/xiyouji-characters-knowledge/references/roster.md | W519 | v2.3.118 修改·标题人物谱系计数 211→215（A 类） |
+| skills/xiyouji-version-bump/SKILL.md | W519 | v2.3.118 修改·内容规模「共 611」→「共 615」×3 处修正（A 类） |
+| skills/xiyouji-version-bump/reference.md | W519 | v2.3.118 修改·「共 611」→「共 615」×4 处修正·含 :32 A3 计数口径行（A 类） |
+| skills/xiyouji-en-translation/SKILL.md | W519 | v2.3.118 修改·收尾提示内容规模 611→615（A 类） |
+| skills/xiyouji-drift-audit/SKILL.md | W519 | v2.3.118 修改·B 类门禁数去硬编码 ×4（改「随批次递增、以 verify 输出为准」）+ A 类转述示例同步 |
+| skills/xiyouji-drift-audit/reference.md | W519 | v2.3.118 修改·B 类去硬编码 ×3 + A 类排查命令示例修正（:138 E2 历史案例引文按口径保留旧值） |
+| skills/xiyouji-day-review/SKILL.md | W519 | v2.3.118 修改·B 类门禁数去硬编码 ×1（同上表述） |
+| skills/xiyouji-sun-wukong/SKILL.md | W519 | v2.3.118 修改·D 类补顶层 version: 1.0.0 |
+| skills/xiyouji-zhu-bajie/SKILL.md | W519 | v2.3.118 修改·D 类补顶层 version: 1.0.0 |
+| skills/xiyouji-sha-seng/SKILL.md | W519 | v2.3.118 修改·D 类补顶层 version: 1.0.0 |
+| skills/xiyouji-tangseng/SKILL.md | W519 | v2.3.118 修改·D 类补顶层 version: 1.0.0 |
+| skills/xiyouji-bai-longma/SKILL.md | W519 | v2.3.118 修改·D 类补顶层 version: 1.0.0 |
+| skills/README.md | W519 | v2.3.118 修改·索引表 roster 计数 211→215（A 类·仓库权威索引·sync 范围外） |
+| AGENTS.md | W519 | v2.3.118 修改·§3 目录树注释 skill 数 17→19（C 类树注释漏更修正）+ 版本脚注追加 W519 条目 |
+| CHANGELOG.md | W519 | v2.3.118 修改·编号规则段 W001-W519 + 新增 v2.3.118/W519 段（四类修复摘要 + 文件清单 + 验证行） |
+| 交接文档.md | W519 | v2.3.118 修改·头部滚动链/进度标题链/里程碑 bullet（数字终稿 A 类 14 处）/尾页脚链首等五处同步 |
+| README.md | W519 | v2.3.118 修改·L5 当前版本行 bump 至 v2.3.118 |
+| STRUCTURE.md | W519 | v2.3.118 修改·L4 当前版本行 bump 至 v2.3.118 |
+| docs/00-导读/项目说明.md | W519 | v2.3.118 修改·L5 主行 + L47 次级版本行 bump 至 v2.3.118 |
+| scripts/output/file-index.md | W519 | v2.3.118 修改·W519 段登记（本段） |
+| site/dukou-engine.html | W519 | v2.3.118 修改·页脚长链人工前置 W519 段 |
+
 ## W518 期望版本动态化 + 尾页脚新鲜度门禁（2026-08-25·v2.3.117）
 
 | 文件 | W | 说明 |

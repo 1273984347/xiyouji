@@ -146,7 +146,7 @@ sitemap：`site/sitemap.xml` 按字母序补 `<url>` 条目，并把头部注释
 - **agent 静默失败**：subagent 返回「Agent execution completed」却没产出文件的情况偶发。必须逐页复验文件存在 + `validate_en.py` 通过，缺了就重派。
 - **临时脚本不入库**：agent 生成的 `_translate_*.py` 写到 workspace 临时目录、用完即删，不要留在 `scripts/`（W447 已归档治理，别再制造新的一次性脚本）。
 - **版本行 em-dash**：六文档同步时版本行锚点里 `W### 描述 — 收官` 的 `—` 是 em-dash，grep/replace 时别用 `（` 或 `-` 匹配，否则锚点失配（W446 踩过）。
-- **`bump_version.py --desc` 吞规模描述**：见 `xiyouji-version-bump` skill 陷阱清单，收尾时别忘补回 `共 611 篇` 那段。
+- **`bump_version.py --desc` 吞规模描述**：见 `xiyouji-version-bump` skill 陷阱清单，收尾时别忘补回 `共 615 篇` 那段。
 
 ## 完成验证清单
 

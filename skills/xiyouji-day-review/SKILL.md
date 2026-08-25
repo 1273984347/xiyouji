@@ -42,7 +42,7 @@ version: 1.1.0
 
 1. **当日提交清单**：`git log --since "当日 00:00" --oneline`（或 `--since 今日`），识别当日 W 批次（W###）+ 收尾文档提交；`git log -1 --oneline` 记当日末提交。
 2. **工作区状态**：`git status --porcelain`。**未跟踪文件逐一核对归属**——项目约定非 `_` 前缀的脚本/文档必须入库（`_` 前缀=一次性不入库）；`scripts/baseline_snapshot.py` 之类非 `_` 前缀却未跟踪 = **从未入库红旗**，直接记问题。
-3. **门禁基线**：`python scripts/verify_delivery.py` 跑一遍，记录退出码与失败项。**注意**：退出码 0 只代表 verify_delivery 全部门禁（现 17 条，随批次递增、以 verify 输出为准）通过，不代表当日工作无问题（见步骤 3）。
+3. **门禁基线**：`python scripts/verify_delivery.py` 跑一遍，记录退出码与失败项。**注意**：退出码 0 只代表 verify_delivery 全部门禁（随批次递增、以 verify 输出为准）通过，不代表当日工作无问题（见步骤 3）。
 4. **遗留物检查**：`git worktree list` 看是否有该清理未清理的 worktree。
 
 ### 步骤 2：逐提交体量与文档同步核对
