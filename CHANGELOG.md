@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W526），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W527），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.126（2026-08-26）：W527 drift-audit 技能补漏维度 — 步骤 3 段缺失双向核对 + 豁免区外新增乱序 P1 判级（W525 实证对齐）
+
+> **来源**：技能进化建议——W525 审查实测第 17 门禁不查缺失段/不查顺序，两项漂移均漏网全靠人工兜底；drift-audit SKILL.md 步骤 3 现有清单只覆盖空壳段/重复/乱序，缺「段缺失」维度，且把豁免区外新增错位降级为 P3 记录，与 W525 实际判级（P1 并修复）不符。
+> - **执行（SKILL.md v1.1.0→v1.2.0）**：步骤 3 新增「段缺失（双向交叉核对）」维度——CHANGELOG 现役版段 ↔ file-index 登记段双向核对，任一方向缺失 = 双索引铁律违反（W504 实证）= P1；顺序错位判级修正——豁免区外新增倒序错位（W522-W524 式尾部追加）= P1（W525 实证判级），既有错位（W464 式历史遗留）= P3；门禁覆盖表述同步（W526 起第 17 门禁已含段倒序断言 + 段缺失检测）；步骤 8 P1 分级明确列举段缺失/空壳段/重复 W/倒序错位；验证清单补两维度。
+> - **执行（reference.md 配套）**：步骤 3 命令区补段缺失双向差集命令（comm -23/-13）；案例库类型 A 补段缺失实证、类型 I 判级改为 P1/P3 分级 + W522-W524 实证 + W526 门禁覆盖注记；新增类型 J（W525 实证双漏网 → W526 转自动化）。
+> - **文件**：skills/xiyouji-drift-audit/SKILL.md、skills/xiyouji-drift-audit/reference.md（仓库版改后 sync_skills --sync 同步全局·双轨 0 漂移）、六文档 + AGENTS 脚注 + dukou footer + workflows README。
+> - **验证**：sync_skills --check 双轨 0 漂移；Git diff 仅限两目标文件（+26/-16）；Grep spot-check 新维度/判级/验证清单全落地、旧表述「门禁不查顺序」已清除；verify_delivery 全绿。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.125（2026-08-26）：W526 索引健康门禁盲区封堵 — 段倒序断言 + 段缺失检测 + 旁文档同步第 23 门禁
 
