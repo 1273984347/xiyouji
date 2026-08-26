@@ -21,7 +21,8 @@
 > - **执行（site/data 46→86 ×1）**：STRUCTURE data/ 节「已建 46 个 + 旧枚举」——现 86 可视化页，改为引用式口径（以统计口径说明与 site/data/ 实际为准），防继续漂移。
 > - **执行（D3 引入方式 ×1）**：STRUCTURE site 表 CDN 行 d3js.org → static/js/d3.v7.min.js 本地化（W456 全站 CDN→本地后未同步）。
 > - **执行（README 索引去版本号 ×1）**：交接文档「五」索引 README 行「当前版本 v2.3.39」→「版本行由 bump 维护·以文件头部为准」（静态索引不随批次演进；历史时间线条目按 E2 判据保留不动）。
-> - **文件**：README.md、STRUCTURE.md、交接文档.md、CHANGELOG.md、scripts/output/file-index.md、docs/00-导读/项目说明.md（六文档同步）、site/dukou-engine.html（页脚）、.github/workflows/README.md（旁文档）。
+> - **执行（CI hotfix·W526 存量）**：check_index_health.py:92 B905（W526 段倒序断言 `zip(seq, seq[1:])` 相邻对比较缺 strict——两序列不等长 strict=True 不可行）改 `from itertools import pairwise` + `pairwise(seq)`；端到端负样本（W528 段尾移构造倒序）exit=1 拦截·正样本 exit=0·ruff 0 错误·verify 全绿。
+> - **文件**：README.md、STRUCTURE.md、交接文档.md、CHANGELOG.md、scripts/output/file-index.md、docs/00-导读/项目说明.md（六文档同步）、site/dukou-engine.html（页脚）、.github/workflows/README.md（旁文档）、scripts/check_index_health.py（hotfix）。
 > - **验证**：E1 双轨——旧值（17 个/211 篇/v2.3.39/50 条/46 个/CDN）残留扫描 0 命中·新值全部落地；verify_delivery 全绿（A1-A6 615==615·引文 423 条 100%·CSP 1189 哈希 0 漂移·23 门禁全过）。
 > - **状态**：已落地（待提交）。
 
