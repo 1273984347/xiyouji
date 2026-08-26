@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W524），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W525），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.124（2026-08-26）：W525 漂移审查修复 — drift-audit 全仓体检 P1/P2 处置（file-index 结构修复 + 旁文档同步 + 门禁表对齐）
+
+> **来源**：用户要求审查可信度轨落地（W501-W505）有无错误/优化点 → drift-audit 全仓体检发现 3 项 P1 + 1 项 P2（门禁全绿 ≠ 无漂移实证：第 17 门禁不查段缺失/不查顺序、旁文档不在 verify 覆盖内）。
+> - **执行（P1-1/P1-2 file-index 修复）**：W504 段缺失补建（登记 611 篇打标 + 学术轨 105 篇补引文 + 3 一次性脚本 + 报告产物）；W522/W523/W524 三段从文件尾部剪切、倒序归位至 W521 之前（原为 bump 后手工插入定位错误追加到 W449 段后），三段尾部 bump 残留「当前版本」快照行删除（符合 W500 门禁"最新段残留必 FAIL"意图）。
+> - **执行（P1-3 旁文档同步）**：workflows/README.md 头部版本行 v2.3.113 W514 → v2.3.123 W524，里程碑行 W450-W503 → W450-W524（补 W504-W524 摘要）——W499 修同型问题后再度复发的滞后。
+> - **执行（P2-1 门禁表对齐）**：文档规范 §8 门禁表补漏列两项（学术研究轨显式引用 105 篇 + site/data 回退模式），与 AGENTS §4.2 22 条编号对齐（原自称 22 项却枚举 23 项且漏两门禁）。
+> - **文件**：scripts/output/file-index.md（段重排 + W504 补段 + W525 段）、.github/workflows/README.md、docs/00-导读/文档规范.md、site/dukou-engine.html、六文档。
+> - **验证**：check_index_health 通过（48 段 · 最高 W524 · 无重复）；verify_delivery 全绿。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.123（2026-08-25）：W524 bump 追加污染坑位补记 — --desc/--note 双触发固化（用户指令驱动）
 
