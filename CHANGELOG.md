@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W529），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W530），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.129（2026-08-26）：W530 决策闸门工程落地（W465' 重排）— judge_gate.py + 复盘模板
+
+> **来源**：W464 方案 v7 §0.5 续行——用户选「决策闸门 W465'」优先于归档 SOP；本批落地三步流程的工程部分（Step 1/2 数据回填待用户登录后台后执行）。
+> - **执行（judge_gate.py 新建）**：`scripts/judge_gate.py` 按 §1.2 阈值输出 分发/归档/中间态 三选一分支——判定优先级定案（uv30<30 归档优先，消除两条件冲突歧义）；`--report` 追加判定记录到复盘文档；输出含输入值 + 阈值 + 分支 + 时间，可复算。
+> - **执行（复盘模板新建）**：`docs/10-方法论沉淀/读者数据复盘.md`（5 项数字表 + 污染确认栏 + 判定记录区 + 决策区）；方法论 README 目录索引登记第 19 行（第 17 门禁双向覆盖）+ 关联文档陈旧版本引用改引用式（v2.3.98 W499→不维护版本号）。
+> - **执行（观测基线快照）**：UV 三栏补填表说明（日期/填表人，指向复盘文档）。
+> - **文件**：scripts/judge_gate.py（新建）、docs/10-方法论沉淀/读者数据复盘.md（新建）、docs/10-方法论沉淀/README.md、scripts/output/观测基线快照.md + 六文档 + site/dukou-engine.html + .github/workflows/README.md。
+> - **验证**：judge_gate.py py_compile + ruff 0 错误；判定逻辑正负样本 7/7（含冲突场景 uv7=150/uv30=25→归档、边界 uv7=100/uv30=30→分发）；verify_delivery 全绿。
+> - **状态**：已落地（待提交）；UV 数据回填 + 正式判定 = 后续动作（Step 2 用户登录后台后执行）。
 
 ### v2.3.128（2026-08-26）：W529 R6 拦截落地 + W464 方案 v7 回填 — 决策闸门前置 + 实测修正
 
