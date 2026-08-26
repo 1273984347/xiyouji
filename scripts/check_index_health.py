@@ -12,6 +12,10 @@ v2.3.65-78 快照行）；方法论 README 目录索引长期滞后（17 文件 
 3. file-index 残留快照（豁免区外）：段内含"当前版本"残留行必 FAIL
 4. 方法论 README 双向覆盖：目录 md ↔ 索引表链接双向差集为 0 + "待创建"占位 0
 5. CHANGELOG 编号规则段上限 == 最新 W 段（W499 曾手工漏改被 WARN 抓出）
+6. file-index 段倒序断言（W526 新增）：豁免区外段必须 W 号严格递减（最新在前）——
+   W525 实证 W522/W523/W524 曾被追加到文件尾部（W449 段后）而门禁全绿漏网
+7. file-index 段缺失检测（W526 新增）：CHANGELOG 每个现役版段都必须有对应 file-index 段——
+   W525 实证 W504 段缺失（CHANGELOG 有 v2.3.103 段而反向索引无登记）漏网
 
 豁免设计（W499 方案②精神）：
 W449-W463 区间已确认损坏且"维持现状不重排（历史段禁改）"——门禁只查豁免区外的
@@ -82,6 +86,24 @@ def check_file_index(errors: list[str]) -> None:
     max_w, max_s, max_e = max(sections, key=lambda x: x[0])
     if any(re.search(r"^>\s*当前版本", ln) for ln in text.splitlines()[max_s + 1:max_e]):
         errors.append(f"file-index 最新段 W{max_w:03d} 含残留 '当前版本' 行（历史段残留已豁免，新段不得夹带）")
+
+    # 4) 段倒序断言（W526 新增：W525 实证 W522-W524 曾尾部追加漏网——豁免区外段必须严格递减）
+    seq = [w for w, _, _ in sections if w not in EXEMPT_W]
+    for a, b in zip(seq, seq[1:]):
+        if a <= b:
+            errors.append(
+                f"file-index 段倒序违反：W{a:03d} 位于 W{b:03d} 之前（最新在前应严格递减"
+                f"，W525 曾实证 W522-W524 被追加到文件尾部）"
+            )
+            break
+
+    # 5) 段缺失检测（W526 新增：W525 实证 W504 段缺失漏网——CHANGELOG 现役版段须均有登记段）
+    cl_text = CHANGELOG.read_text(encoding="utf-8-sig")
+    cl_w = {int(m) for m in re.findall(r"^### v\d+\.\d+\.\d+（[^）]*?）：W(\d{3})", cl_text, flags=re.M)}
+    fi_w = {w for w, _, _ in sections}
+    missing = sorted(w for w in cl_w if w not in fi_w and w not in EXEMPT_W)
+    if missing:
+        errors.append(f"file-index 缺 {len(missing)} 个 CHANGELOG 版段登记：{[f'W{w:03d}' for w in missing]}")
 
 
 def check_methodology_readme(errors: list[str]) -> None:
