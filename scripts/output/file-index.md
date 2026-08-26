@@ -10,6 +10,65 @@
 
 ---
 
+
+## W525 漂移审查修复（2026-08-26·v2.3.124）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/output/file-index.md | W525 | v2.3.124 修复·W504 段缺失补建 + W522/W523/W524 段尾部追加重排归位至 W521 前（删除三段 bump 残留快照行）+ 本段登记 |
+| .github/workflows/README.md | W525 | v2.3.124 修复·头部版本行 W514→W524 + 里程碑行 W450-W503→W450-W524（补 W504-W524 摘要） |
+| docs/00-导读/文档规范.md | W525 | v2.3.124 修复·§8 门禁表补漏列两项（学术轨显式引用 + site/data 回退模式）对齐 AGENTS §4.2 22 条 |
+| site/dukou-engine.html | W525 | v2.3.124 修改·页脚链头 prepend v2.3.124 W525 |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W525 | v2.3.124 修改·六文档同步（编号上限 W001-W525） |
+
+## W524 bump 追加污染坑位补记——--desc/--note 双触发固化（2026-08-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W524 | v2.3.123 修改·§4.3 bump_version 坑②扩为 --desc/--note 双触发 + 坑①补记 file-index 空壳段现象 + 版本脚注 |
+| CHANGELOG.md | W524 | v2.3.123 修改·W524 段四件套 + 编号范围 W001-W524 |
+| site/dukou-engine.html | W524 | v2.3.123 修改·页脚链头 prepend v2.3.123 W524 |
+| 交接文档.md | W524 | v2.3.123 修改·头部链/HEAD/一段头/里程碑概要/尾页脚历史链（W521 条目摘除保持 ≤3 批） |
+| README.md | W524 | v2.3.123 修改·版本行 W524 + W 范围 W001-W524 ×2（bump_version 辅助同步） |
+| STRUCTURE.md | W524 | v2.3.123 修改·当前版本行 W524 描述（净化 --note 追加残留） |
+| docs/00-导读/项目说明.md | W524 | v2.3.123 修改·头部引用行（--note 直替）+ 当前版本行 W524 描述手工对齐 |
+| scripts/output/file-index.md | W524 | v2.3.123 修改·新增 W524 段登记本批 8 文件（bump 生成空壳表头·手工补全） |
+
+## W523 截图审查恒全量根因修复（scope diff 加 core.quotePath=false）（2026-08-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/screenshot-review.yml | W523 | v2.3.122 修改·scope 步骤三处 git diff 统一加 -c core.quotePath=false（中文路径八进制转义致 case 免审失配恒落保守全量 ~11min）+ 注释 |
+| AGENTS.md | W523 | v2.3.122 修改·§4.3 工具链新增 quotePath 强制规则 + 版本脚注 |
+| CHANGELOG.md | W523 | v2.3.122 修改·W523 段四件套 + 编号范围 W001-W523 |
+| site/dukou-engine.html | W523 | v2.3.122 修改·页脚链头 prepend v2.3.122 W523 |
+| 交接文档.md | W523 | v2.3.122 修改·头部链/HEAD/一段头/里程碑概要/E47 登记/尾页脚历史链 + 权威文档 W 范围行 |
+| README.md | W523 | v2.3.122 修改·版本行 W523 + W 范围 W001-W523 ×2（bump_version 辅助同步） |
+| STRUCTURE.md | W523 | v2.3.122 修改·当前版本行 W523 描述（净化 --desc 追加残留） |
+| docs/00-导读/项目说明.md | W523 | v2.3.122 修改·头部引用行 + 当前版本行 W523 |
+| scripts/output/file-index.md | W523 | v2.3.122 修改·新增 W523 段登记本批 9 文件 |
+
+## W522 CI 红灯修复（2026-08-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/inject_goatcounter.py | W522 | v2.3.121 修改·根因修复 :68 字符串未闭合（转义闭引号还原·行为零变更） |
+| scripts/check_dynamic_links.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| scripts/check_glossary.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| scripts/check_governance_docs.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| scripts/check_motion_ban.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| scripts/check_token_coverage.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| scripts/extract_strings.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| scripts/validate_en.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
+| CHANGELOG.md | W522 | v2.3.121 修改·W522 段四件套 + 编号规则上限 W522 |
+| 交接文档.md | W522 | v2.3.121 修改·进度标题/概要区/最后更新链头插入 W522 + 零段 HEAD 同步 |
+| README.md | W522 | v2.3.121 修改·版本行 W522 + W 范围 W001-W522 ×2 |
+| STRUCTURE.md | W522 | v2.3.121 修改·当前版本行 W522 描述（净化 --desc 追加残留） |
+| docs/00-导读/项目说明.md | W522 | v2.3.121 修改·头部引用行 + 当前版本行 W522（净化 --desc 残留） |
+| scripts/output/file-index.md | W522 | v2.3.121 修改·新增 W522 段登记本批 16 文件 |
+| site/dukou-engine.html | W522 | v2.3.121 修改·页脚链头 prepend v2.3.121 W522 |
+| AGENTS.md | W522 | v2.3.121 修改·版本脚注追加 W522 条目 |
+
 ## W521 存量裸字面量清剿 + W463 三坑补登记（2026-08-25·v2.3.120）
 
 | 文件 | W | 说明 |
@@ -231,6 +290,18 @@
 | docs/10-方法论沉淀/README.md | W505 | v2.3.104 核验·2 篇方法论文档索引已含（W499 暂存版，双向覆盖核验跳过） |
 | CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W505 | v2.3.104 修改·六文档同步（编号上限 W001-W505·A1-A6 计数 611→615） |
 
+## W504 存量核验状态基线 + 学术轨 105 篇引文核验（2026-08-25·v2.3.103）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/01-06 全部 .md（611 篇） | W504 | v2.3.103 修改·核验状态字段全覆盖（批量打标「未核验」·幂等脚本·基线豁免不变） |
+| 学术轨 105 篇（docs/02×4 + docs/03×66 + docs/04×33 + docs/05×2） | W504 | v2.3.103 修改·补 ≥3 条原文引文行 + 核验状态升「引文已核验」（A+ 路径·绿标 105/105·引文 411 条 100% 命中） |
+| scripts/_w504_trust_baseline.py | W504 | v2.3.103 新增·611 篇核验状态批量打标（幂等·插入位置三型） |
+| scripts/_w504_cite_find.py | W504 | v2.3.103 新增·原著句子检索辅助（subagent 补引文用） |
+| scripts/output/_w504_acad_list.txt | W504 | v2.3.103 新增·学术轨 105 篇清单（verify 首匹配口径） |
+| scripts/output/content-trust-report.json + .md | W504 | v2.3.103 新增·三值分布报告（未核验 506·引文已核验 105·专家 0） |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W504 | v2.3.103 修改·六文档同步（编号上限 W001-W504） |
+
 ## W503 原著引文硬验证（2026-08-24·v2.3.102）
 
 | 文件 | W | 说明 |
@@ -441,6 +512,7 @@
 | skills/self-evolution/references/experience-capture-format.md | W487 | v2.3.86 新增·经验捕获格式规范（97 行：写入格式 / 质量标准 / 边界纪律 / 手动触发 / 通用编号前缀） |
 | AGENTS.md / README.md / STRUCTURE.md / skills/README.md | W487 | v2.3.86 修改·版本脚注 + 版本行 + skills 索引注记 |
 | 交接文档.md / CHANGELOG.md / docs/00-导读/项目说明.md / scripts/output/file-index.md / site/dukou-engine.html | W487 | v2.3.86 修改·六文档同步 |
+
 ## W486 四会话 skill 协议同步（2026-08-19·v2.3.85）
 
 | 文件 | W | 说明 |
@@ -572,55 +644,3 @@
 | CHANGELOG.md / 交接文档.md | W449 | v2.3.64 修改·W449 四件套条目 + 交接同步 |
 
 > 当前版本 v2.3.121（2026-08-25）
-
-## W522 CI 红灯修复（2026-08-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| scripts/inject_goatcounter.py | W522 | v2.3.121 修改·根因修复 :68 字符串未闭合（转义闭引号还原·行为零变更） |
-| scripts/check_dynamic_links.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| scripts/check_glossary.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| scripts/check_governance_docs.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| scripts/check_motion_ban.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| scripts/check_token_coverage.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| scripts/extract_strings.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| scripts/validate_en.py | W522 | v2.3.121 修改·ruff lint 清理（行为零变更） |
-| CHANGELOG.md | W522 | v2.3.121 修改·W522 段四件套 + 编号规则上限 W522 |
-| 交接文档.md | W522 | v2.3.121 修改·进度标题/概要区/最后更新链头插入 W522 + 零段 HEAD 同步 |
-| README.md | W522 | v2.3.121 修改·版本行 W522 + W 范围 W001-W522 ×2 |
-| STRUCTURE.md | W522 | v2.3.121 修改·当前版本行 W522 描述（净化 --desc 追加残留） |
-| docs/00-导读/项目说明.md | W522 | v2.3.121 修改·头部引用行 + 当前版本行 W522（净化 --desc 残留） |
-| scripts/output/file-index.md | W522 | v2.3.121 修改·新增 W522 段登记本批 16 文件 |
-| site/dukou-engine.html | W522 | v2.3.121 修改·页脚链头 prepend v2.3.121 W522 |
-| AGENTS.md | W522 | v2.3.121 修改·版本脚注追加 W522 条目 |
-
-> 当前版本 v2.3.122（2026-08-25）
-
-## W523 截图审查恒全量根因修复（scope diff 加 core.quotePath=false）（2026-08-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/screenshot-review.yml | W523 | v2.3.122 修改·scope 步骤三处 git diff 统一加 -c core.quotePath=false（中文路径八进制转义致 case 免审失配恒落保守全量 ~11min）+ 注释 |
-| AGENTS.md | W523 | v2.3.122 修改·§4.3 工具链新增 quotePath 强制规则 + 版本脚注 |
-| CHANGELOG.md | W523 | v2.3.122 修改·W523 段四件套 + 编号范围 W001-W523 |
-| site/dukou-engine.html | W523 | v2.3.122 修改·页脚链头 prepend v2.3.122 W523 |
-| 交接文档.md | W523 | v2.3.122 修改·头部链/HEAD/一段头/里程碑概要/E47 登记/尾页脚历史链 + 权威文档 W 范围行 |
-| README.md | W523 | v2.3.122 修改·版本行 W523 + W 范围 W001-W523 ×2（bump_version 辅助同步） |
-| STRUCTURE.md | W523 | v2.3.122 修改·当前版本行 W523 描述（净化 --desc 追加残留） |
-| docs/00-导读/项目说明.md | W523 | v2.3.122 修改·头部引用行 + 当前版本行 W523 |
-| scripts/output/file-index.md | W523 | v2.3.122 修改·新增 W523 段登记本批 9 文件 |
-
-> 当前版本 v2.3.123（2026-08-25）
-
-## W524 bump 追加污染坑位补记——--desc/--note 双触发固化（2026-08-25）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| AGENTS.md | W524 | v2.3.123 修改·§4.3 bump_version 坑②扩为 --desc/--note 双触发 + 坑①补记 file-index 空壳段现象 + 版本脚注 |
-| CHANGELOG.md | W524 | v2.3.123 修改·W524 段四件套 + 编号范围 W001-W524 |
-| site/dukou-engine.html | W524 | v2.3.123 修改·页脚链头 prepend v2.3.123 W524 |
-| 交接文档.md | W524 | v2.3.123 修改·头部链/HEAD/一段头/里程碑概要/尾页脚历史链（W521 条目摘除保持 ≤3 批） |
-| README.md | W524 | v2.3.123 修改·版本行 W524 + W 范围 W001-W524 ×2（bump_version 辅助同步） |
-| STRUCTURE.md | W524 | v2.3.123 修改·当前版本行 W524 描述（净化 --note 追加残留） |
-| docs/00-导读/项目说明.md | W524 | v2.3.123 修改·头部引用行（--note 直替）+ 当前版本行 W524 描述手工对齐 |
-| scripts/output/file-index.md | W524 | v2.3.123 修改·新增 W524 段登记本批 8 文件（bump 生成空壳表头·手工补全） |
