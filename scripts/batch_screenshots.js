@@ -224,6 +224,10 @@ async function capture(browser, pageInfo, viewportName, viewports, outDirs) {
     deviceScaleFactor: viewportName === 'mobile' ? 2 : 1,
   });
   const page = await context.newPage();
+  // R6（W464 Phase 3 方案·2026-08-26 落地）：截图加载页面会触发 GoatCounter count
+  // beacon（file:// 下 async 脚本照常执行），每次 push 注入假访客污染真实 UV——
+  // 统一拦截 count 端点，杜绝 CI/本地截图计入统计。
+  await page.route('**1273984347.goatcounter.com**', (route) => route.abort());
   const filePath = path.join(pageInfo.dir, pageInfo.file);
   const url = 'file:///' + filePath.replace(/\\/g, '/');
 
