@@ -24,6 +24,10 @@
 | site/dukou-engine.html | W528 | v2.3.127 修改·页脚链头 prepend v2.3.127 W528 |
 | .github/workflows/README.md | W528 | v2.3.127 修改·头部版本行 + 里程碑行（旁文档同步） |
 | scripts/check_index_health.py | W528 | v2.3.127 修改·B905 修复：zip(seq, seq[1:]) → itertools.pairwise（CI Code Quality 转绿·W526 存量） |
+| AGENTS.md | W528 | v2.3.127 修改·§4.3 bump_version 条目扩坑③（三页脚替换式盲区）+ 版本脚注 W528 条目 |
+| site/index.html | W528 | v2.3.127 修改·页脚链头 prepend v2.3.127 W528（原滞留在 v2.3.68 W453） |
+| site/data/cross-time-danmaku.html | W528 | v2.3.127 修改·页脚链头 prepend v2.3.127 W528（原滞留在 v2.3.68 W453） |
+| site/data/tag-cloud.html | W528 | v2.3.127 修改·页脚链头 prepend v2.3.127 W528（原滞留在 v2.3.68 W453） |
 
 ## W527 drift-audit 技能补漏维度（2026-08-26·v2.3.126）
 
