@@ -23,6 +23,7 @@
 | scripts/output/file-index.md | W528 | v2.3.127 修改·新增 W528 段登记（本段） |
 | site/dukou-engine.html | W528 | v2.3.127 修改·页脚链头 prepend v2.3.127 W528 |
 | .github/workflows/README.md | W528 | v2.3.127 修改·头部版本行 + 里程碑行（旁文档同步） |
+| scripts/check_index_health.py | W528 | v2.3.127 修改·B905 修复：zip(seq, seq[1:]) → itertools.pairwise（CI Code Quality 转绿·W526 存量） |
 
 ## W527 drift-audit 技能补漏维度（2026-08-26·v2.3.126）
 

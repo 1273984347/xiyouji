@@ -28,6 +28,7 @@ from __future__ import annotations
 import re
 import sys
 from collections import Counter
+from itertools import pairwise
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -89,7 +90,7 @@ def check_file_index(errors: list[str]) -> None:
 
     # 4) 段倒序断言（W526 新增：W525 实证 W522-W524 曾尾部追加漏网——豁免区外段必须严格递减）
     seq = [w for w, _, _ in sections if w not in EXEMPT_W]
-    for a, b in zip(seq, seq[1:]):
+    for a, b in pairwise(seq):
         if a <= b:
             errors.append(
                 f"file-index 段倒序违反：W{a:03d} 位于 W{b:03d} 之前（最新在前应严格递减"
