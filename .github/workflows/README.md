@@ -1,6 +1,6 @@
 # CI/CD 工作流说明
 
-> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W527** — 西游记解读项目（`d:\1\xiyouji`，v2.3.126 W527）的 GitHub Actions 工作流层。
+> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W528** — 西游记解读项目（`d:\1\xiyouji`，v2.3.127 W528）的 GitHub Actions 工作流层。
 > **W399**：ci.yml 补 push main 触发（此前仅 pull_request，项目直接 push main 无 PR → CI 从未运行）；sitemap/robots 域名补全；新增 rum-viewer。
 > **W400**：CI/Security 三 workflow 转绿（ruff 424 违规清零·XSS high 归零·Lighthouse 门禁校准·a11y pip cache 修复·black 门禁移除）。
 > **W401**：ci.yml 5→7 job（pytest-unit 全量 tests/ + agent-web-build）·agent-web 源码入库·移除 3 处无 pip 安装 job 的 cache: pip 残留·build-test-deploy.yml 弃用删除。
@@ -19,7 +19,7 @@
 > **W421**：Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 恒全量 + batch_screenshots.js --only-pages + Playwright 浏览器缓存 + checkout fetch-depth 0）。
 > **W420**：A1 内容质量深化（深度解读 100/100 补全 + 56 回元数据补齐 + 99 回导航错链修复·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W419**：修复 A1 深度解读 SD 错位（22 篇 SD 编号≠真实回号归位·40-72 回全覆盖·源文件 24 篇元数据/H1/关联行修正·第 56 回补写 SD101·无 workflow 文件改动，CI 全量验证涵盖）。
-> **W450-W527**：verify 门禁体系扩展（W458 防回归 check_structure/check_js_syntax·W459 check_dynamic_links·W493 token 覆盖率/动效禁止/a11y 三门禁·W495 INLINED CSS·W498 skills 索引一致性·W500 索引健康 check_index_health·W501 元信息块 v2 check_frontmatter·W502 术语一致性 check_glossary·W503 原著引文硬验证 check_citations·W526 旁文档同步门禁——均由 ci.yml verify-delivery job 跑 verify_delivery.py 自动涵盖，无 workflow 结构改动）+ W464 perf 基线确立（perf.yml 预算沿用 W424 校准值 LCP≤5000/CLS≤0.3/TBT≤300）+ W505 创意流程闭环（无 workflow 改动）+ W513 归档二级归档（无 workflow 改动）+ W515 渲染抽查常驻（无 workflow 改动）+ W522 CI 红灯修复（scripts/ ruff 16 错误清零）+ W523 screenshot-review scope diff 加 core.quotePath=false（中文路径八进制转义致免审失配恒全量·三处 git diff 修复）+ W527 drift-audit 技能补漏（skills 内容更新·无 workflow 改动）。
+> **W450-W528**：verify 门禁体系扩展（W458 防回归 check_structure/check_js_syntax·W459 check_dynamic_links·W493 token 覆盖率/动效禁止/a11y 三门禁·W495 INLINED CSS·W498 skills 索引一致性·W500 索引健康 check_index_health·W501 元信息块 v2 check_frontmatter·W502 术语一致性 check_glossary·W503 原著引文硬验证 check_citations·W526 旁文档同步门禁——均由 ci.yml verify-delivery job 跑 verify_delivery.py 自动涵盖，无 workflow 结构改动）+ W464 perf 基线确立（perf.yml 预算沿用 W424 校准值 LCP≤5000/CLS≤0.3/TBT≤300）+ W505 创意流程闭环（无 workflow 改动）+ W513 归档二级归档（无 workflow 改动）+ W515 渲染抽查常驻（无 workflow 改动）+ W522 CI 红灯修复（scripts/ ruff 16 错误清零）+ W523 screenshot-review scope diff 加 core.quotePath=false（中文路径八进制转义致免审失配恒全量·三处 git diff 修复）+ W527 drift-audit 技能补漏（skills 内容更新·无 workflow 改动）+ W528 存量漂移点统一修复（六文档静态描述对齐现役口径·无 workflow 改动）。
 
 ## 1. 工作流列表
 

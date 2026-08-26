@@ -2,7 +2,7 @@
 
 > 一源多形 · 数字人文可视化解读《西游记》100 回 —— 既写给愿意深读原著的读者，也写给只想取一瓢饮的过路人。
 >
-> **当前版本 v2.3.126（2026-08-26）**： W527 drift-audit 技能补漏维度（步骤 3 段缺失双向核对 + 豁免区外新增乱序 P1 判级）·A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> **当前版本 v2.3.127（2026-08-26）**： W528 存量漂移点统一修复·A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 >
 > **版本号说明**：本项目的 `vX.Y.Z` 是**内容发布批次编号，不适用 SemVer 兼容性承诺**——站点无 API、无下游依赖方，每个发布批次（W###）递增 patch 位。MAJOR/MINOR 位对应内容阶段（v2.x = 内容体系成熟期）。判断"这个版本改了什么"请看 [CHANGELOG.md](CHANGELOG.md)，不要从版本号推断兼容性。
 >
@@ -126,11 +126,11 @@ xiyouji/
 ├── mcp-server/            # MCP 服务（xiyouji_drl_spotcheck 等工具）
 ├── tests/                 # pytest 测试 + Playwright E2E
 ├── xiyouji-agent-web/     # Web Agent「西游记·渡口问津」（CodeBuddy Agent SDK）
-├── skills/                # 项目级 playbook skill（17 个：5 单人角色 / character-content / characters-knowledge / version-bump / en-translation / s4-submission / agent-session-loop / deep-review-loop / mem-wrap-up / self-evolution / visual-batch / plan-authoring / plan-review，详见 skills/README.md）
+├── skills/                # 项目级 playbook skill（19 个：5 单人角色 / character-content / characters-knowledge / version-bump / en-translation / s4-submission / day-review / drift-audit / agent-session-loop / deep-review-loop / mem-wrap-up / self-evolution / visual-batch / plan-authoring / plan-review，详见 skills/README.md）
 ├── .github/workflows/     # CI/Security/Deploy Pages/Lighthouse/截图审查
 ├── README.md              # 本文件（用户手册 + 开发者分区）
 ├── STRUCTURE.md           # 目录结构详细说明
-├── CHANGELOG.md           # 更新日志（W001-W527）
+├── CHANGELOG.md           # 更新日志（W001-W528）
 └── LICENSE                # 双协议授权声明
 ```
 
@@ -169,7 +169,7 @@ python detect_unwrapped_tables.py   # 静态表格扫描（双轨之二）
 
 ## 文档索引（双索引可追溯）
 
-- **正向索引（时间线）**：[CHANGELOG.md](CHANGELOG.md) — 按版本记录变更，每版本段标注唯一 W### ID（W001-W527）+ 四件套（来源/文件/验证/状态）。v0.1-v2.0.60 历史归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)
+- **正向索引（时间线）**：[CHANGELOG.md](CHANGELOG.md) — 按版本记录变更，每版本段标注唯一 W### ID（W001-W528）+ 四件套（来源/文件/验证/状态）。v0.1-v2.0.60 历史归档至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)
 - **反向索引（文件）**：[scripts/output/file-index.md](scripts/output/file-index.md) — 给定文件查改过几次、对应哪个 W 条目
 
 **W### 编号规则**：W001-W099 对应 v0.1-v2.0.72；W100+ 对应 v2.1.0+；新增 W 条目时同步更新两个索引。详细映射见 [CHANGELOG.md](CHANGELOG.md)。
