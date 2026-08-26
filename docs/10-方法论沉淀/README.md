@@ -29,6 +29,7 @@
 | 16 | 白屏三连根因复盘与防回归清单 | [白屏三连根因复盘与防回归清单.md](白屏三连根因复盘与防回归清单.md) | W454-W457 白屏根因复盘 + 可视化页防回归清单 |
 | 17 | 记忆研究理论框架应用方法论 | [记忆研究理论框架应用方法论.md](记忆研究理论框架应用方法论.md) | 记忆研究四框架应用方法论·与 W253-256「应用-方法论」双轨 |
 | 18 | 四 subagent 并行模式 | [dispatching-parallel-agents四subagent并行模式.md](dispatching-parallel-agents四subagent并行模式.md) | 四 subagent 并行派发模式（W257·与记忆研究四篇双轨） |
+| 19 | 读者数据复盘 | [读者数据复盘.md](读者数据复盘.md) | W465 决策闸门（W530 重排）判定记录与数据存档·GoatCounter 唯一真实读者源 |
 
 ---
 
@@ -97,8 +98,8 @@ skill 文件是**协议层**（约束 + 流程定义），本目录是**案例�
 
 ## 关联文档
 
-- [../../README.md](../../README.md)：项目说明（当前版本 v2.3.98 W499）
+- [../../README.md](../../README.md)：项目说明（版本行由 bump 维护·以文件头部为准）
 - [../../STRUCTURE.md](../../STRUCTURE.md)：目录结构
-- [../../CHANGELOG.md](../../CHANGELOG.md)：变更日志（W001-W499）
+- [../../CHANGELOG.md](../../CHANGELOG.md)：变更日志（W001-W529）
 - [../../交接文档.md](../../交接文档.md)：跨 session 交接
 - [../../scripts/output/file-index.md](../../scripts/output/file-index.md)：反向文件索引
