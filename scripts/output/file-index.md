@@ -11,6 +11,18 @@
 ---
 
 
+## W526 索引健康门禁盲区封堵（2026-08-26·v2.3.125）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/check_index_health.py | W526 | v2.3.125 修改·第 17 门禁扩展：新增检查 6 段倒序断言（豁免区外严格递减）+ 检查 7 段缺失检测（CHANGELOG 现役版段须均有 file-index 登记段）·修复新增正则全角问号误用 |
+| scripts/verify_delivery.py | W526 | v2.3.125 修改·新增第 23 门禁旁文档同步（workflows/README.md 头部版本行 == 现役 v/W + 里程碑行上限 == 现役 W） |
+| .github/workflows/README.md | W526 | v2.3.125 修改·头部版本行 + 里程碑行升版（受第 23 门禁校验） |
+| docs/00-导读/文档规范.md | W526 | v2.3.125 修改·§8 门禁表第 17 条描述扩展 + 新增第 23 门禁行 |
+| AGENTS.md | W526 | v2.3.125 修改·§4.2 第 17 条描述扩展 + 新增第 23 门禁 + 版本脚注 |
+| site/dukou-engine.html | W526 | v2.3.125 修改·页脚链头 prepend v2.3.125 W526 |
+| CHANGELOG.md / 交接文档.md / README.md / STRUCTURE.md / 项目说明.md / file-index.md | W526 | v2.3.125 修改·六文档同步（编号上限 W001-W525） |
+
 ## W525 漂移审查修复（2026-08-26·v2.3.124）
 
 | 文件 | W | 说明 |

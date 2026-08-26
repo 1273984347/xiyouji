@@ -176,6 +176,29 @@ def main():
             continue
         ok("%s 含 v%s / W%s" % (d, ver, wnum))
 
+    # ---- 旁文档同步门禁（W526：workflows/README.md 头部版本行 + 里程碑行上限 == 现役 v/W，补 W525 实证盲区）----
+    wf = _read(os.path.join(ROOT, ".github", "workflows", "README.md"))
+    if not wf:
+        fail(".github/workflows/README.md 缺失（旁文档，需人工补回）")
+    else:
+        wf_v, wf_w = parse_footer_version(wf)
+        if wf_v and wf_w:
+            if ver and wnum and (wf_v, wf_w) != (ver, wnum):
+                fail(".github/workflows/README.md 头部版本 v%s W%s != 现役 v%s W%s"
+                     "（旁文档滞后，W499/W525 两次实证复发）" % (wf_v, wf_w, ver, wnum))
+            else:
+                ok(".github/workflows/README.md 头部版本同步（v%s W%s）" % (wf_v, wf_w))
+        else:
+            fail(".github/workflows/README.md 未解析出头部版本标记（vX.Y.Z W###）")
+        mw = re.search(r"W450-W(\d{3})", wf)
+        if mw:
+            if wnum and mw.group(1) != wnum:
+                fail(".github/workflows/README.md 里程碑行上限 W%s != 现役 W%s（里程碑滞后）" % (mw.group(1), wnum))
+            else:
+                ok(".github/workflows/README.md 里程碑行上限 W%s == 现役 W%s" % (mw.group(1), wnum))
+        else:
+            fail(".github/workflows/README.md 未找到 W450-W### 里程碑行")
+
     # ---- 范围漂移检测 ----
     doc_w = [int(x) for x in re.findall(r"W(\d{3})", doc_all)]
     # W417：归档文件纳入扫描——归档后旧 W### 仍可追溯，不因归档误报范围漂移

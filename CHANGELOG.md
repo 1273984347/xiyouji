@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W525），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W526），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.125（2026-08-26）：W526 索引健康门禁盲区封堵 — 段倒序断言 + 段缺失检测 + 旁文档同步第 23 门禁
+
+> **来源**：W525 漂移审查实证三项漏网（file-index 段缺失/段乱序、workflows README 滞后）均未被既有门禁拦截——第 17 门禁只防空壳/重复/残留，不查缺失与顺序；旁文档在 verify 覆盖外。用户指令「把三项都补进门禁」驱动本批。
+> - **执行（check_index_health 第 6 项）**：段倒序断言——豁免区外段必须 W 号严格递减（最新在前），W525 曾实证 W522-W524 尾部追加；负样本实测拦截（W519 置于 W524 前被抓）。
+> - **执行（check_index_health 第 7 项）**：段缺失检测——CHANGELOG 每个现役版段必须都有 file-index 登记段，豁免区外缺失即 FAIL；负样本实测拦截（删 W504 段被抓）。修复过程中发现并修正：新增正则误用全角问号「？」导致解析失败（E1 铁律实证——写完必须负样本验证）。
+> - **执行（verify_delivery 第 23 门禁）**：旁文档同步门禁——.github/workflows/README.md 头部版本行（vX.Y.Z W###）== 现役段 + 里程碑行 W450-W### 上限 == 现役 W，任一不符 FAIL；负样本实测拦截（头部改 v2.3.120 被抓）。
+> - **文件**：scripts/check_index_health.py（检查 6/7 新增）、scripts/verify_delivery.py（第 23 门禁新增）、.github/workflows/README.md、docs/00-导读/文档规范.md、AGENTS.md、六文档。
+> - **验证**：负样本 3/3（倒序/缺失/旁文档全拦截）；正样本 check_index_health exit=0（49 段）·verify_delivery 全绿。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.124（2026-08-26）：W525 漂移审查修复 — drift-audit 全仓体检 P1/P2 处置（file-index 结构修复 + 旁文档同步 + 门禁表对齐）
 
