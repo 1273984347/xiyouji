@@ -4,13 +4,26 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W527），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W528），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.127（2026-08-26）：W528 存量漂移点统一修复 — 六文档静态描述对齐现役口径（9 处）
+
+> **来源**：新 session 启动第 1-3 步通读六文档时，发现 README / STRUCTURE / 交接文档 3 份治理文档的静态描述区存在与现役口径不符的陈旧值（verify 门禁不覆盖区）；用户指令「统一修一版，跑 verify」→ 修复完成 →「按 W528 正式登记入库」。
+> - **执行（skills 计数 17→19 ×2）**：README 目录树 L129 + STRUCTURE 顶层表 L20「17 个」列表缺 day-review / drift-audit（W497/W525 已入库但两处静态描述漏更）——补 19 个 + 补齐两目录名。
+> - **执行（A3 211→215 ×3）**：交接文档「二」策略段「A3 211 篇已冻结」/ A3 深化段「已有 211 篇」/「五」索引「211 篇人物分析」——W505 试点 4 篇方向二深化后现役 215（docs/02 顶层 md 216−README.md=215 实测）。
+> - **执行（学术索引 50→55 条 ×1）**：STRUCTURE 引用与网络解读节「已收录 50 条」——文件头部数据指标现役 55 条（v1.2 扩容后未同步）。
+> - **执行（site/data 46→86 ×1）**：STRUCTURE data/ 节「已建 46 个 + 旧枚举」——现 86 可视化页，改为引用式口径（以统计口径说明与 site/data/ 实际为准），防继续漂移。
+> - **执行（D3 引入方式 ×1）**：STRUCTURE site 表 CDN 行 d3js.org → static/js/d3.v7.min.js 本地化（W456 全站 CDN→本地后未同步）。
+> - **执行（README 索引去版本号 ×1）**：交接文档「五」索引 README 行「当前版本 v2.3.39」→「版本行由 bump 维护·以文件头部为准」（静态索引不随批次演进；历史时间线条目按 E2 判据保留不动）。
+> - **文件**：README.md、STRUCTURE.md、交接文档.md、CHANGELOG.md、scripts/output/file-index.md、docs/00-导读/项目说明.md（六文档同步）、site/dukou-engine.html（页脚）、.github/workflows/README.md（旁文档）。
+> - **验证**：E1 双轨——旧值（17 个/211 篇/v2.3.39/50 条/46 个/CDN）残留扫描 0 命中·新值全部落地；verify_delivery 全绿（A1-A6 615==615·引文 423 条 100%·CSP 1189 哈希 0 漂移·23 门禁全过）。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.126（2026-08-26）：W527 drift-audit 技能补漏维度 — 步骤 3 段缺失双向核对 + 豁免区外新增乱序 P1 判级（W525 实证对齐）
 

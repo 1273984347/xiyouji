@@ -1,7 +1,7 @@
 # 目录结构说明
 
 > 本文件用于解释 `xiyouji/` 项目各目录的用途、命名规范与协作约定。
-> 当前版本：v2.3.126（2026-08-26）— W527 drift-audit 技能补漏维度（步骤 3 段缺失双向核对 + 豁免区外新增乱序 P1 判级——W525 实证对齐）·A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
+> 当前版本：v2.3.127（2026-08-26）— W528 存量漂移点统一修复（9 处静态描述对齐现役口径）·A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 > **维护契约**：本文件是目录/命名/协作约定的静态快照——只在目录或约定变更时修改；禁止追加速度记/批次摘要（批次信息归 CHANGELOG）；版本行由 `bump_version.py` 维护，勿手改成与 HEAD 不一致的值。
 
 ## 顶层结构
@@ -17,7 +17,7 @@
 | `references/` | 参考文献索引 |
 | `tools/` | 辅助工具脚本（章节切分等） |
 | `xiyouji-agent-web/` | Web Agent「西游记·渡口问津」·CodeBuddy Agent SDK·`PROJECT_CWD=D:/1/xiyouji` 直接对话/检索 docs/ + 跑 scripts/ + 写 dataset/·凭证 `CODEBUDDY_API_KEY`（与 scripts/rag 档B 检索式生成并行·详见其 README） |
-| `skills/` | 项目级 playbook skill（17 个：5 单人角色 / character-content / characters-knowledge / version-bump / s4-submission / en-translation / agent-session-loop / deep-review-loop / mem-wrap-up / self-evolution / visual-batch / plan-authoring / plan-review），详见 [skills/](skills/) |
+| `skills/` | 项目级 playbook skill（19 个：5 单人角色 / character-content / characters-knowledge / version-bump / s4-submission / en-translation / day-review / drift-audit / agent-session-loop / deep-review-loop / mem-wrap-up / self-evolution / visual-batch / plan-authoring / plan-review），详见 [skills/](skills/) |
 | `README.md` | 项目说明 |
 | `STRUCTURE.md` | 本文件 |
 | `CHANGELOG.md` | 更新日志 |
@@ -154,7 +154,7 @@
 - `shendu/`：100 篇深读切片 `SD001-SD100.md`（W286 从 5 个原著逐回深读*.txt 拆分·每篇含 `<!-- 元数据注释 -->` 标注推测原著回号映射·W286b 从 temp_shendu/ 重命名为 shendu/ 并从 .txt 转为 .md 添加 `# SDnnn · 标题` 标题头）
 
 ### 引用与网络解读/
-- `学术论文索引.md`：学术论文与专著引用（已收录 50 条，覆盖原著版本/古代评点/现代学术/当代整理/海外译本/思想渊源/现代名家解读/近 5 年新研究 8 大类，GB/T 7714 格式）
+- `学术论文索引.md`：学术论文与专著引用（已收录 55 条，覆盖原著版本/古代评点/现代学术/当代整理/海外译本/思想渊源/现代名家解读/近 5 年新研究 8 大类，GB/T 7714 格式）
 - `网络解读精选.md`：优秀网络解读文章汇编（已收录 15 条，含原文链接与存档位置，4 大分类：学术普及/影视解读/游戏改编/网络随笔）
 
 ## site/ 静态站点（D3.js 驱动）
@@ -166,9 +166,9 @@
 | `chapters/` | 章节页面（HTML 版本，对应 docs/01-） |
 | `characters/` | 人物页面（HTML 版本，对应 docs/02-） |
 | `themes/` | 专题页面（HTML 版本，对应 docs/03- 与 04-） |
-| `data/` | 数据可视化页面（按 A-AH 34 类对应 + Q+ 批评史双联 + Q++ 弹幕博物馆 + v2.0 Q+++ 新功能三页面 + v2.0.4 原著全文检索 + v2.0.5 全书 100 回扩容 + v2.0.7 妖怪后台论 + v2.0.23 D1 MBTI 演变图 + v2.0.24 D2A 难度热力图 + v2.0.72 地理符号学力导向图，已建 46 个：4 概要页 + 29 专题页 + 2 Q+ 批评史页 + 3 Q++ 弹幕博物馆页 + 3 v2.0 Q+++ 新功能页 + 1 原著全文检索页含 100 回 708441 字 + 1 妖怪后台论 + 1 D1 MBTI 演变图 + 1 D2A 难度热力图 + 1 地理符号学力导向图） |
+| `data/` | 数据可视化页面（按 A-AH 34 类对应 + Q+ 批评史双联 + Q++ 弹幕博物馆 + v2.0 Q+++ 新功能三页面 + v2.0.4 原著全文检索 + v2.0.5 全书 100 回扩容 + v2.0.7 妖怪后台论 + v2.0.23 D1 MBTI 演变图 + v2.0.24 D2A 难度热力图 + v2.0.72 地理符号学力导向图，现 86 个可视化页——口径与明细随批次演进、以 [统计口径说明](../../docs/00-导读/统计口径说明.md) 与 site/data/ 实际为准） |
 | `static/css/` | 样式表 |
-| CDN（`https://d3js.org/d3.v7.min.js`） | D3.js CDN 引入 |
+| `static/js/d3.v7.min.js` | D3.js 本地化引入（W456 全站 CDN→本地·禁外域 CDN；Three.js 同存 static/js/） |
 | `static/js/charts/` | 各图表渲染逻辑 |
 | `static/images/` | 站点用图片 |
 

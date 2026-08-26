@@ -11,6 +11,19 @@
 ---
 
 
+## W528 存量漂移点统一修复（2026-08-26·v2.3.127）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| README.md | W528 | v2.3.127 修改·目录树 skills 计数 17→19（列表补 day-review/drift-audit） |
+| STRUCTURE.md | W528 | v2.3.127 修改·skills 17→19 + 学术论文索引 50→55 条 + site/data 46→86（改引用式口径）+ D3 CDN 行改本地化 static/js/d3.v7.min.js |
+| 交接文档.md | W528 | v2.3.127 修改·9 处漂移点修复（A3 211→215 ×3·「五」README 行去陈旧版本号）+ 头部最后更新/阻塞段 HEAD/进度标题/里程碑概要/尾页脚五处同步 |
+| CHANGELOG.md | W528 | v2.3.127 修改·W528 段四件套 + 编号规则 W001-W528 |
+| docs/00-导读/项目说明.md | W528 | v2.3.127 修改·版本行两处（bump 同步 + 人工核） |
+| scripts/output/file-index.md | W528 | v2.3.127 修改·新增 W528 段登记（本段） |
+| site/dukou-engine.html | W528 | v2.3.127 修改·页脚链头 prepend v2.3.127 W528 |
+| .github/workflows/README.md | W528 | v2.3.127 修改·头部版本行 + 里程碑行（旁文档同步） |
+
 ## W527 drift-audit 技能补漏维度（2026-08-26·v2.3.126）
 
 | 文件 | W | 说明 |
