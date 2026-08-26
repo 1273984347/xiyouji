@@ -11,6 +11,23 @@
 ---
 
 
+## W529 R6 拦截落地 + W464 方案 v7 回填（2026-08-26·v2.3.128）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/ci.yml | W529 | v2.3.128 修改·lighthouse 命令加 --blocked-url-patterns（R6 纵深防御·goatcounter beacon 拦截） |
+| .github/workflows/perf.yml | W529 | v2.3.128 修改·lighthouserc collect.settings 加 blockedUrlPatterns |
+| scripts/batch_screenshots.js | W529 | v2.3.128 修改·页面创建后加 page.route 拦截 1273984347.goatcounter.com |
+| scripts/render_check.js | W529 | v2.3.128 修改·同上 |
+| tests/e2e/test_smoke.js | W529 | v2.3.128 修改·同上 |
+| docs/superpowers/plans/2026-08-18-w464-phase3-quantified-roadmap.md | W529 | v2.3.128 修改·v7 回填 12 处（§0.5 实施状态表/批次重排/W465 三步/R6 实测修正/W468 投稿准备/W467 脚本名/W469 平台前置/W471 探针注记/py -3/goatcounter.js 命名/v7 修订记录） |
+| CHANGELOG.md | W529 | v2.3.128 修改·W529 段四件套 + 编号规则 W001-W529 |
+| 交接文档.md | W529 | v2.3.128 修改·头部最后更新/阻塞段 HEAD/进度标题/里程碑概要/尾页脚五处同步 |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W529 | v2.3.128 修改·版本行（bump 同步 + 人工核） |
+| scripts/output/file-index.md | W529 | v2.3.128 修改·新增 W529 段登记（本段） |
+| site/dukou-engine.html | W529 | v2.3.128 修改·页脚链头 prepend v2.3.128 W529 |
+| .github/workflows/README.md | W529 | v2.3.128 修改·头部版本行 + 里程碑行（旁文档同步） |
+
 ## W528 存量漂移点统一修复（2026-08-26·v2.3.127）
 
 | 文件 | W | 说明 |

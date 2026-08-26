@@ -165,6 +165,7 @@ jobs:
               --output-path=lighthouse-report \
               --only-categories=performance,accessibility,best-practices,seo \
               --throttling-method=simulate \
+              --blocked-url-patterns="*1273984347.goatcounter.com*" \
               --chrome-flags="--headless --no-sandbox"
 
       - name: Stop static server

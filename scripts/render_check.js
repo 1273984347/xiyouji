@@ -127,6 +127,9 @@ function nameOf(rel) {
 
   for (const rel of opts.page) {
     const page = await browser.newPage();
+    // R6（W464 Phase 3 方案·2026-08-26 落地）：拦截 GoatCounter count beacon，
+    // 防止渲染抽查/截图加载页面污染真实 UV 统计。
+    await page.route('**1273984347.goatcounter.com**', (route) => route.abort());
     const errors = { pageerror: [], console: [] };
     page.on('pageerror', (e) => errors.pageerror.push(String(e).slice(0, 120)));
     page.on('console', (m) => {
