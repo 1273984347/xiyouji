@@ -15,6 +15,9 @@ metadata:
 
 # agent-session-loop
 
+> **真源声明（W533）**：本技能的唯一 master 是全局安装版 `~/.qwenworkcn/skills/agent-session-loop/`（千问办公实际加载与演进处）；任何仓库内副本（如 `D:\1\xiyouji\skills\agent-session-loop\`）均为**受控只读镜像**，仅可由 `python scripts/sync_skills.py --take-global agent-session-loop` 回写，禁止反向 `--sync` 覆盖 master。
+
+
 > 一条流水线管理 Agent 会话的完整生命周期：**审查 → 收尾 → 沉淀**。
 > 每个 session 结束时按此顺序闭环，把「验证过的结论」沉淀为「可复用的经验」。
 

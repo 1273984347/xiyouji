@@ -30,6 +30,7 @@
 - W486（2026-08-19）已把上游 GitHub 四仓库的 Claude Code 协议修正同步入库（协议内容层对齐，工程件如 evals/CI/fragment-lint 不随副本进入）。
 - W487（2026-08-19）二轮同步：mem-wrap-up 补 DRL 未安装降级声明；self-evolution 触发词扩充并新增 `references/experience-capture-format.md`（经验写入格式规范）。
 - agent-session-loop 的 `references/` 为精简快速路径，完整协议以三个独立 skill（deep-review-loop / mem-wrap-up / self-evolution）当前版本为准。
+- **归属（W533）**：agent-session-loop / deep-review-loop / mem-wrap-up / self-evolution 四个会话流程 skill 的 master 在全局安装版 `~/.qwenworkcn/skills/`（实际加载处），本仓库副本为受控只读镜像——改它们改全局后跑 `python scripts/sync_skills.py --take-global <名>` 回写；其余 15 个 `xiyouji-*` 仍以本仓库为真源，改完 `--sync`。方向由 `sync_skills.py` 的 `MIRROR_SKILLS` 强制，`--self-test` 场景 5 守护。
 - visual-batch / plan-authoring / plan-review 三 skill 于 W485 从 `D:\1\skills`（全局目录）收录入库，playbook 内容与 Phase E 方案/批次记录配套。
 - 角色 / 内容 / 知识 skill 为 agent 可安装格式（`agents/openai.yaml`）。
 - 维护自检：`python scripts/_check_skills.py`（frontmatter / openai.yaml 残留 / references 链接）。

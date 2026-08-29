@@ -10,6 +10,9 @@ metadata:
 
 # mem-wrap-up Skill
 
+> **真源声明（W533）**：本技能的唯一 master 是全局安装版 `~/.qwenworkcn/skills/mem-wrap-up/`（千问办公实际加载与演进处）；任何仓库内副本（如 `D:\1\xiyouji\skills\mem-wrap-up\`）均为**受控只读镜像**，仅可由 `python scripts/sync_skills.py --take-global mem-wrap-up` 回写，禁止反向 `--sync` 覆盖 master。
+
+
 > 本 skill 由外部记忆库/skill 库（vault）版蒸馏而来：剥离原脚本 hook（bash 脚本 / Python hooks / Node hooks）/ 原目录结构与路径 / 原规则术语引用 / 原笔记链接格式，保留 7 步流水线骨架 + 4 段 daily 日志 schema + verdict 禁词合规 + Failure handling + residual risk 协议。Step 7 联动 deep-review-loop skill（已蒸馏）。
 
 **Announce at start:** "I'm using the mem-wrap-up skill to run the 7-step session wrap-up pipeline."

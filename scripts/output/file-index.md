@@ -11,6 +11,21 @@
 ---
 
 
+## W533 skills 归属策略显式化 + 坑④入 playbook（2026-08-29·v2.3.132）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/sync_skills.py | W533 | v2.3.132 新增·MIRROR_SKILLS 显式归属 + sync_blocked()（镜像技能禁 --sync/--force）+ --self-test 第 5 负样本 |
+| skills/agent-session-loop/SKILL.md | W533 | v2.3.132 回写·master 注入真源声明（全局为唯一 master，仓库为受控镜像） |
+| skills/deep-review-loop/SKILL.md | W533 | v2.3.132 回写·同上 |
+| skills/mem-wrap-up/SKILL.md | W533 | v2.3.132 回写·同上 |
+| skills/self-evolution/SKILL.md | W533 | v2.3.132 回写·同上 |
+| skills/xiyouji-version-bump/SKILL.md | W533 | v2.3.132 v1.1.0→v1.2.0·第 6 步扩四子项收录坑④（三简单页脚描述滞留+历史条目被顶掉）+ 陷阱清单/完成清单/第 8 步第 0 项 |
+| skills/README.md | W533 | v2.3.132 修改·归属注记（4 镜像 vs 15 真源），表格行数不变（门禁 16 检查 1 仍 19） |
+| AGENTS.md | W533 | v2.3.132 修改·§4.5 四技能归属段 + §4.2 第 16 门禁补 MIRROR_SKILLS + 版本脚注 |
+| CHANGELOG.md / 交接文档.md | W533 | v2.3.132 修改·W533 四件套条目 + 交接同步 |
+| .github/workflows/README.md | W533 | v2.3.132 修改·旁文档同步（第 23 门禁） |
+
 ## W532 交接文档最后更新滚动链裁剪回契约上限（2026-08-29·v2.3.131）
 
 | 文件 | W | 说明 |

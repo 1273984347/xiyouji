@@ -12,12 +12,15 @@
 1. **降级保护**：漂移时按 frontmatter 版本号（顶层 version / metadata.version）判定方向；
    判定为「全局更新」的技能，--sync 默认跳过并报错，需 --force 才强行覆盖。
 2. **反向回写**：--take-global 显式把全局版拉回仓库（全局 → 仓库），用于真源确在他处演进的场合。
-3. **行尾归一化比对**：本仓库 core.autocrlf=true，工作区存在 CRLF 副本（skills/ 内 3 个文件），
+3. **显式归属策略（W533）**：MIRROR_SKILLS 内的技能（四个通用会话流程 skill）以**全局安装版为唯一 master**，
+   仓库副本是 git tracked 受控镜像（满足 W517「共享机制必须写入仓库内文件」），**永久禁止** --sync 覆盖 master，
+   唯一合法同步路径是 --take-global；其余 xiyouji-* 技能仍以仓库为真源。
+4. **行尾归一化比对**：本仓库 core.autocrlf=true，工作区存在 CRLF 副本（skills/ 内 3 个文件），
    旧的逐字节比对会把「仅行尾差异」误报成内容漂移。现比对时统一 CRLF→LF，落盘统一写 LF。
 
 用法：
   python scripts/sync_skills.py --check              # 只比对 + 方向判定（exit 0=无漂移，1=有漂移/有降级）
-  python scripts/sync_skills.py --sync               # 仓库 → 全局（自动跳过「全局更新」技能）
+  python scripts/sync_skills.py --sync               # 仓库 → 全局（跳过「全局更新」与全部镜像技能）
   python scripts/sync_skills.py --sync --force       # 无视方向判定强行仓库 → 全局
   python scripts/sync_skills.py --take-global NAME... # 全局 → 仓库 回写指定技能
   python scripts/sync_skills.py --self-test          # 内置负样本自检（临时目录，不碰真实技能）
@@ -41,11 +44,17 @@ GLOBAL_SKILLS = Path.home() / ".qwenworkcn" / "skills"
 
 VER_RE = re.compile(r"(\d+)\.(\d+)\.(\d+)")
 
+# W533 归属策略：这四个通用会话流程 skill 以全局安装版为唯一 master，仓库副本为受控镜像。
+# 依据：① 实际加载与触发只认全局目录；② 其 QwenWork 原生化演进发生在 QwenWork 语境；
+# ③ 仓库副本必须存在是 W517 铁律（共享机制须 git tracked），但方向单向：只允许 全局 → 仓库。
+MIRROR_SKILLS = {"agent-session-loop", "deep-review-loop", "mem-wrap-up", "self-evolution"}
+
 VERDICT_MARK = {
     "global_newer": "[全局更新·禁 --sync]",
     "repo_newer": "[仓库更新→可 --sync]",
     "same_version": "[同版冲突·交人工]",
     "unknown": "[方向不可判·交人工]",
+    "mirror": "[镜像技能·仅 --take-global]",
 }
 
 
@@ -153,6 +162,11 @@ def judge_direction(repo_dir: Path, global_dir: Path) -> tuple[str, str]:
     return "unknown", "两侧无版本号且 mtime 相同，方向不可判"
 
 
+def sync_blocked(name: str, verdict: str) -> bool:
+    """该技能是否禁止 仓库→全局 覆盖。镜像技能无条件禁止（W533 归属策略），其余按方向判定。"""
+    return name in MIRROR_SKILLS or verdict in ("global_newer", "same_version", "unknown")
+
+
 def analyze(skills_dir: Path | None = None, global_skills: Path | None = None) -> list[dict]:
     """产出每个 skill 的漂移与方向结论。"""
     rows: list[dict] = []
@@ -176,7 +190,10 @@ def analyze(skills_dir: Path | None = None, global_skills: Path | None = None) -
         if not drift:
             rows.append({"name": name, "kind": "clean", "detail": ""})
             continue
-        verdict, why = judge_direction(repo_dir, global_dir)
+        if name in MIRROR_SKILLS:
+            verdict, why = "mirror", "全局为唯一 master（W533 归属策略），仓库副本是受控镜像"
+        else:
+            verdict, why = judge_direction(repo_dir, global_dir)
         rows.append({"name": name, "kind": "drift", "detail": "; ".join(drift), "verdict": verdict, "why": why, "pairs": pairs})
     return rows
 
@@ -187,7 +204,7 @@ def analyze(skills_dir: Path | None = None, global_skills: Path | None = None) -
 def do_check(skills_dir: Path | None = None, global_skills: Path | None = None) -> int:
     rows = analyze(skills_dir, global_skills)
     bad = [r for r in rows if r["kind"] != "clean"]
-    regress = [r for r in bad if r.get("verdict") == "global_newer"]
+    regress = [r for r in bad if r.get("verdict") in ("global_newer", "mirror")]
     if not bad:
         print("仓库版与全局版完全一致，无漂移。")
         return 0
@@ -203,7 +220,7 @@ def do_check(skills_dir: Path | None = None, global_skills: Path | None = None) 
     if regress:
         print(
             f"\n⚠ 其中 {len(regress)} 个技能全局版比仓库版更新——照旧跑 --sync 会静默降级（W531 教训）。"
-            f"\n  确认全局为真源请回写：python scripts/sync_skills.py --take-global "
+            f"\n  以全局为真源回写仓库：python scripts/sync_skills.py --take-global "
             + " ".join(r["name"] for r in regress)
             + "\n  确要强行以仓库覆盖全局，再加 --force。"
         )
@@ -214,13 +231,14 @@ def do_check(skills_dir: Path | None = None, global_skills: Path | None = None) 
 
 def do_sync(force: bool) -> int:
     rows = analyze()
-    blocked = {r["name"]: r for r in rows if r["kind"] == "drift" and r.get("verdict") in ("global_newer", "same_version", "unknown")}
+    blocked = {r["name"]: r for r in rows if r["kind"] == "drift" and sync_blocked(r["name"], r.get("verdict", ""))}
     synced = 0
     for name, repo_files, global_dir, _repo_dir in collect():
         if not repo_files:
             continue
-        if name in blocked and not force:
-            print(f"跳过 {name}/（{blocked[name]['why']}）——--sync 会降级，请改用 --take-global 或加 --force")
+        if name in blocked and (name in MIRROR_SKILLS or not force):
+            tag = "镜像技能·永久禁 --sync" if name in MIRROR_SKILLS else "--sync 会降级"
+            print(f"跳过 {name}/（{blocked[name]['why']}）——{tag}，请改用 --take-global" + ("" if name in MIRROR_SKILLS else " 或加 --force"))
             continue
         target = global_dir if global_dir is not None else GLOBAL_SKILLS / name
         for rel, repo_path in sorted(repo_files.items()):
@@ -307,7 +325,22 @@ def do_self_test() -> int:
         assert len(drift) == 1 and drift[0]["verdict"] == "same_version", f"场景4 失败：{drift}"
         cases.append("✓ 场景4 同版不同内容 → 判 same_version 交人工")
 
-    print("sync_skills.py --self-test 4/4 通过：")
+    # 场景 5：MIRROR_SKILLS 内的技能，即便仓库版本号更高，也禁止 --sync 覆盖 master
+    with tempfile.TemporaryDirectory() as td2:
+        root2 = Path(td2)
+        repo2, glob2 = root2 / "repo", root2 / "global"
+        mname = sorted(MIRROR_SKILLS)[0]
+        (repo2 / mname).mkdir(parents=True)
+        (glob2 / mname).mkdir(parents=True)
+        (repo2 / mname / "SKILL.md").write_text(
+            f'---\nname: {mname}\nversion: "99.0.0"\n---\n\n# repo ahead\n', encoding="utf-8", newline="\n")
+        (glob2 / mname / "SKILL.md").write_text(
+            f'---\nname: {mname}\nversion: "1.0.0"\n---\n\n# master\n', encoding="utf-8", newline="\n")
+        assert sync_blocked(mname, "repo_newer"), "场景5 失败：镜像技能被判定为可 --sync（会覆盖 master）"
+        assert not sync_blocked("xiyouji-demo", "repo_newer"), "场景5 失败：普通技能的可同步性被误伤"
+        cases.append("✓ 场景5 镜像技能即使仓库版本更高也禁 --sync（普通技能不受影响）")
+
+    print(f"sync_skills.py --self-test {len(cases)}/{len(cases)} 通过：")
     for c in cases:
         print("  " + c)
     return 0

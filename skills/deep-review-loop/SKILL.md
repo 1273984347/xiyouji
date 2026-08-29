@@ -10,6 +10,9 @@ metadata:
 
 # Deep Review Loop（外部 vault 蒸馏版 · QwenWork）
 
+> **真源声明（W533）**：本技能的唯一 master 是全局安装版 `~/.qwenworkcn/skills/deep-review-loop/`（千问办公实际加载与演进处）；任何仓库内副本（如 `D:\1\xiyouji\skills\deep-review-loop\`）均为**受控只读镜像**，仅可由 `python scripts/sync_skills.py --take-global deep-review-loop` 回写，禁止反向 `--sync` 覆盖 master。
+
+
 > 本 skill 由外部记忆库/skill 库（vault）版蒸馏而来：剥离原脚本 hook / sister skills 依赖 / 原目录结构 / 原规则术语引用，保留 5 轮闭环 + 5 步独立 verify + 防跳轮三件套（pressure scenarios / rationalization table / red flags），并嫁接 `USER.md` 中 2026-07-12 训诫的「DRL 真循环铁律」+ 2026-07-16「4 层过拟合防护」。本文件为**全局版**，所有项目通用。
 
 **Announce at start:** "I'm using the deep-review-loop skill to run the 5-round review loop."

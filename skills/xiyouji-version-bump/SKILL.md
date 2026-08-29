@@ -1,7 +1,7 @@
 ---
 name: xiyouji-version-bump
 description: 西游记项目（D:\1\xiyouji）版本 bump 与六文档同步标准流程 playbook。步骤：预检记录规模描述 → 改 dukou-engine 长链页脚 → 写 CHANGELOG/交接文档/file-index → 跑 bump_version.py → 手动补回规模描述（bump_version.py --desc 会吞掉版本行的"共 N 篇"/"A4 209 篇"——值随批次校正、以 README 版本行与 verify 输出为准，当前 N=615，不补回则 verify_delivery 报 FAIL）→ verify_delivery 全绿 → 收尾三同步（AGENTS 脚注/路线图状态段/方案档 §10 回填，W494 固化）→ git add -u → commit/push。当用户要求"版本 bump"、"升版本"、"W 批次同步"、"六文档同步"、"发新版本"、"version bump"、"W### 提交"时触发。
-version: 1.1.0
+version: 1.2.0
 ---
 
 # 西游记项目版本 Bump 与六文档同步
@@ -87,11 +87,12 @@ cd /d/1/xiyouji && python scripts/bump_version.py --desc "W新 <描述>" --note 
 
 `bump_version.py --desc` 会**吞掉版本行里的规模描述**（如 `A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）`），同时**日期保持旧值**。若不补回，`verify_delivery` 会报 FAIL（`A4 计数不一致（缺 '209 篇'）`）。
 
-跑完脚本后逐处核改三份文档的版本行，共三个子项：
+跑完脚本后逐处核改三份文档的版本行，共四个子项：
 
 1. **补回规模描述 + 日期**：`README.md`、`STRUCTURE.md`、`docs/00-导读/项目说明.md` 三处版本行的规模描述被吞、日期停留旧值，需手动补回并改成当天。规模描述以第 0 步预检记下的原文为准，不要凭空编。
 2. **重写 STRUCTURE.md 版本行（修复畸形尾巴）**：bump 对 STRUCTURE.md 版本行的处理是**追加** ` + W4xx（W4xx 描述）` 到行尾，而非替换旧 W 描述（旧描述滞留、新描述残缺）。整行重写为干净格式：`> 当前版本：v2.3.XX（date）— W4xx <描述> — A1-A6 共 615 篇 + 86 可视化页（A4 209 篇 已含）·详细变更见 [CHANGELOG.md](CHANGELOG.md)。`
 3. **核改项目说明 :45 第二处版本行**：`docs/00-导读/项目说明.md` 第 45 行附近有第二处 `- **当前版本**：vX.Y.Z（date）— ...` 行（头部版本行之外），bump **完全不更新**它，需手动核改版本号与日期。
+4. **核对三简单页脚链首描述与历史条目（坑④，W531 立·W532 复现）**：`bump_version.py` 对 `site/index.html`、`site/data/cross-time-danmaku.html`、`site/data/tag-cloud.html` 的简单页脚是**原地替换链首的 `vX.Y.Z · W###` 数字**，描述文本会**滞留上一批文案**（W531 实测链首变成 `v2.3.131 · W532 skills 部署全查…` 这类错配，W532 再次复现），且上一批条目被原地顶掉、历史链静默断裂。`verify_delivery` 不校验这三处（WARN 级盲区）。正解：把链首描述改写为本批一句话，并手动 prepend 上一批条目回历史链，然后 Grep 复核。
 
 ### 第 7 步：verify_delivery 全绿
 
@@ -105,6 +106,7 @@ cd /d/1/xiyouji && python scripts/verify_delivery.py
 
 六文档之外，每批必须同步三处，commit 前逐项 Grep 验证（E1 铁律：不信任自己刚写的声明）：
 
+0. **同步范围受归属策略约束（W533）**：`sync_skills.py --sync` 只覆盖 xiyouji-* 等「仓库为真源」的技能；四个通用会话流程 skill（agent-session-loop / deep-review-loop / mem-wrap-up / self-evolution）的 master 在全局安装版、仓库副本为镜像，改它们须改全局后用 `--take-global` 回写仓库，**不得** --sync（工具已按 MIRROR_SKILLS 强制拦截）。
 1. **AGENTS.md 结构变更 + 版本脚注**：若本批改了门禁/新增或改名 skill/改了流程，同步 AGENTS.md 对应章节（§4.2 门禁清单 / §4.5 skills 清单），并把文末版本脚注更新为 `vX.Y.Z W###` 与本次 bump 一致（用 `git rev-parse --short HEAD` 核对口径）。改技能清单时同步 `skills/README.md` 索引计数。**改/新增任何 skill 后必须：`python scripts/sync_skills.py --sync` 同步全局安装版（仓库为真源）+ `python scripts/check_skills_index.py` 过索引门禁（已挂 verify_delivery，漏同步会直接 FAIL）。**
 2. **路线图状态段回写**：`docs/superpowers/plans/` 下本批对应的方案档，若含状态段/§10 落地状态表，补上本次执行批次的状态（✅ + commit）。
 3. **方案档落地状态回填**：本批方案档 §8/§10 里声称"已落地"的每一项，实测存在后回填 commit；漏回填 = 下批 day-review 会抓 P1。
@@ -129,6 +131,7 @@ cd /d/1/xiyouji && git status --short | grep '^??'   # 确认 untracked 未入�
 - **STRUCTURE 版本行追加畸形尾巴**：bump 对 STRUCTURE.md 版本行是**追加** ` + W4xx（W4xx 描述）` 而非替换旧描述（旧 W 描述滞留、新描述残缺），需重写整行，否则版本行格式畸形且描述错误。
 - **项目说明 :45 第二处版本行漏改**：`docs/00-导读/项目说明.md` 第 45 行附近的 `- **当前版本**：...` 行（头部版本行之外的第二处）bump **完全不更新**，需手动核改版本号 + 日期。
 - **日期不更新**：bump_version 不刷新版本行日期，需手动改成当天。
+- **bump 简单页脚描述滞留（坑④，W531/W532 双复现）**：三简单页脚链首只换 v/W 数字、描述留在上一批，且历史条目被原地顶掉；verify 不校验，必须跑完 bump 手动 Grep `v新 · W新` 核描述并补回上一批条目。
 - **顺序不能乱**：footer 必须先改，脚本才读得到新 v/W；CHANGELOG/交接文档/file-index 的完整条目脚本不会代写。
 - **漏收尾三同步（W494 教训）**：只做六文档不查 AGENTS 脚注 / 路线图状态段 / 方案档 §10，会被下批 day-review 抓 P1。第 8 步三同步是强制步骤，不是可选。
 - **git add -u 而非 git add .**：避免把「工具不入库」的 untracked 文件误提交。
@@ -141,6 +144,7 @@ cd /d/1/xiyouji && git status --short | grep '^??'   # 确认 untracked 未入�
 - [ ] 六文档均已更新且版本一致
 - [ ] 三处版本行规模描述已补回、日期正确
 - [ ] STRUCTURE 版本行无「+ W4xx」畸形尾巴、项目说明第二处「当前版本」行已核改
+- [ ] 三简单页脚（index/cross-time-danmaku/tag-cloud）链首描述==本批、上一批条目已补回历史链（坑④）
 - [ ] `verify_delivery.py` 全绿，无 FAIL
 - [ ] 收尾三同步完成：AGENTS.md 结构/脚注（含 skills/README 计数）、路线图状态段、方案档 §10 均 Grep 验证落地
 - [ ] `git add -u` 后 untracked 文件仍未被暂存
