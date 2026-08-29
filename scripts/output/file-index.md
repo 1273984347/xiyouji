@@ -11,6 +11,19 @@
 ---
 
 
+## W532 交接文档最后更新滚动链裁剪回契约上限（2026-08-29·v2.3.131）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| 交接文档.md | W532 | v2.3.131 修改·「最后更新」滚动链 9 批→3 批回契约②上限（删 6 批前逐批断言 CHANGELOG 有段）+ 当前进度标题/里程碑概要/尾链/HEAD 行同步 |
+| CHANGELOG.md | W532 | v2.3.131 修改·W532 四件套条目 + 编号规则 W001-W532 |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W532 | v2.3.131 修改·版本行推进（bump 后人工补规模描述与日期、重写 W 描述、去追加畸形尾巴） |
+| scripts/output/file-index.md | W532 | v2.3.131 修改·W532 登记段 |
+| AGENTS.md | W532 | v2.3.131 修改·版本脚注（无 § 结构性变更） |
+| site/dukou-engine.html | W532 | v2.3.131 修改·页脚 prepend v2.3.131 W532 |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html | W532 | v2.3.131 修改·bump 简单页脚链首 + 人工核描述滞留（W531 坑④复核） |
+| .github/workflows/README.md | W532 | v2.3.131 修改·旁文档同步（头部版本行 + 里程碑段补 W532·第 23 门禁） |
+
 ## W531 skills 部署全查 + 三真源降级保护（2026-08-29·v2.3.130）
 
 | 文件 | W | 说明 |
