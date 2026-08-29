@@ -4,13 +4,22 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W531），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W532），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.131（2026-08-29）：W532 交接文档最后更新滚动链裁剪回契约上限 — 9 批堆叠裁回契约上限 3 批
+
+> **来源**：W531 做技能部署状态全查时暴露——交接文档第 7 行「最后更新」自 W518 立约（维护契约②：只写最新 1–3 批摘要）后仍逐批只 prepend 不收尾，累积到 9 批堆叠（单行 1,400+ 字符），第 22 门禁只校验链首 == CHANGELOG 现役段，管不住长度。
+> - **执行（裁剪）**：保留链首 3 批（W531/W530/W529），删 6 批（W528/W527/W526/W525/W523/W522）；**删除前逐批 assert CHANGELOG 存在对应版本段**，历史以 CHANGELOG 为准（契约③），并在行内补「历史见 CHANGELOG.md」指针，信息零丢失。
+> - **执行（不扩大范围）**：文末历史尾链与「一、当前进度」长链不动——它们是归档链载体、契约②未约束；本批只裁第 7 行滚动链。
+> - **文件**：交接文档.md（最后更新行/当前进度标题/里程碑概要/文末尾链/阻塞段 HEAD 共 5 处）+ CHANGELOG.md + scripts/output/file-index.md + README.md + STRUCTURE.md + docs/00-导读/项目说明.md + AGENTS.md（版本脚注）+ site/dukou-engine.html + site/index.html + site/data/cross-time-danmaku.html + site/data/tag-cloud.html + .github/workflows/README.md。
+> - **验证**：裁剪脚本断言链上条目数==9、保留 3、删除 6 且 6/6 在 CHANGELOG 有段；`check_governance_docs.py` 7 项全过（含头尾两处链首新鲜度==v2.3.131 W532）；三简单页脚链首描述经人工核对无 W528 式滞留（W531 坑④）；verify_delivery 核心全绿。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.130（2026-08-29）：W531 skills 部署全查 + 三真源降级保护 — sync_skills 方向判定 + 四通用技能回写
 
