@@ -1,11 +1,11 @@
 # 经验捕获格式规范（Experience Capture Format）
 
 > 本文件在快速模式（模式 A Step 2）写入时激活。定义经验写入的格式、质量标准与边界纪律。
-> 从 Claude Code vault 版 experience-capture skill 蒸馏而来（剥离项目特定编号 FT/ST、hooks/脚本引用、session 代号）。
+> 从外部 vault 版 experience-capture skill 蒸馏而来（剥离项目特定编号、原脚本 hook 引用、session 代号）。
 
-## 1. 写入格式（3 个文件，Edit 工具末尾追加）
+## 1. 写入格式（3 处落点，`memory` 工具追加）
 
-### experience-log.md（完整条目，权威源）
+### 落点 1：当日 daily 日志经验段（完整条目，当日按次权威源）
 
 ```markdown
 ## [日期] — [任务名称] | **Tags:** [tag1, tag2, tag3]
@@ -22,15 +22,15 @@
 
 规则：每条经验独立一个块，用 `---` 分隔；任务简述 ≤20 字；内容必须具体（❌「要小心一点」✅「asyncpg 禁止 ::type cast」）；「下次怎么做」必须是可执行的动作。
 
-### experience-quickref.md（速查规则，只写有明确规则的）
+### 落点 2：`MEMORY.md` `[项目名]` 速查条目（速查规则，只写有明确规则的）
 
 ```markdown
-[编号] [关键词] — [一句话规则]
+[项目名] [编号] [关键词] — [一句话规则]
 ```
 
 规则：只更新有明确规则的条目，纯描述不写入。
 
-### skill-usage-checklist.md（Skill 缺口）
+### 落点 3：当日 daily 日志「Skill 缺口」段（Skill 缺口）
 
 ```markdown
 | [Skill名] | [场景] | [为什么没用] |
@@ -68,9 +68,9 @@ logrotate 对无效配置静默跳过（不报错），人工验证只看了配�
 
 ## 3. 边界纪律（防越权）
 
-- **只写 3 个文件**（experience-log / experience-quickref / skill-usage-checklist），不碰 heuristic / policy / H-rule
+- **只写 3 处落点**（daily 日志经验段 / `MEMORY.md` 速查条目 / daily 日志缺口段），不碰 heuristic / policy 升级决策
 - **不做模式分析或升级决策**——那是 self-evolution 全面模式的职责；捕获只记录原始事件
-- **用 Edit 工具追加**（不用 bash echo/printf——特殊字符破坏格式），追加到文件末尾，保留顺序
+- **经 `memory` 工具追加**（target=`daily` / `memory`，不用 bash echo/printf——特殊字符破坏格式），追加到目标末尾，保留顺序
 - 捕获是 write-only；升级判定（≥3 次 → pattern/heuristic）由全面模式 Step 4 负责
 
 ## 4. 手动触发模式
@@ -88,7 +88,7 @@ logrotate 对无效配置静默跳过（不报错），人工验证只看了配�
 
 ```
 self-evolution（脑 + 手）
-    ├─ 快速模式: 3 问自检 → 按本文件格式直接写入 3 个文件 → 模式升级检查
+    ├─ 快速模式: 3 问自检 → 按本文件格式直接写入 3 处落点 → 模式升级检查
     └─ 全面模式: 11 维度分析 → 知识层升级 → 行动项执行
 
 本文件（格式参考）:

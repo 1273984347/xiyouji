@@ -2,25 +2,38 @@
 name: self-evolution
 description: Runs retro after task completion. Quick mode = 3-question self-check. Full mode = 11-dimension deep analysis with knowledge upgrade. Invoke when user says "全面复盘/周汇总/retro/记住这个/capture/经验沉淀" or after task completion.
 metadata:
-  author: distilled-from-claude-code-vault
-  version: "1.0.0-trae-distilled"
-  source: C:\Users\12739\.claude\skills\self-evolution\SKILL.md (v2.1.3, 11-dimensions template inlined)
+  author: distilled-from-external-vault
+  version: "1.2.0-qwenwork-native"
+  source: 外部 vault 版原文件（来源路径已脱敏；v2.1.3，11-dimensions 模板已内联）
   templates_inlined: 11-dimensions-deep-retro.md, evolution-report.md, write-large-file-checklist.md
 ---
 
-# self-evolution Skill（TRAE 蒸馏版）
+# self-evolution Skill（外部 vault 蒸馏版 · QwenWork）
 
-> 本 skill 由 Claude Code vault 版蒸馏而来：剥离 bash/Node/Python 脚本 + vault 路径 + H-rules 术语 + CLAUDE.md §6.9/§14 引用 + experience-capture skill 依赖 + templates 独立文件（11 维度模板内联），保留双模式骨架 + 11 维度完整内容 + 5 件套 sync verify + 知识层升级 + 行动项分流 + verdict 禁词合规。
+> 本 skill 由外部记忆库/skill 库（vault）版蒸馏而来：剥离原脚本 hook（bash/Node/Python 脚本）/ 原目录结构 / 原规则术语引用 / 原经验捕获依赖 / 模板独立文件（11 维度模板已内联），保留双模式骨架 + 11 维度完整内容 + 5 件套 sync verify + 知识层升级 + 行动项分流 + verdict 禁词合规。
 
 **Announce at start:** "I'm using the self-evolution skill to run retro (quick / full mode)."
 
-## 平台适配（仓库版 2026-08-19 治理）
+## 运行平台：千问办公 QwenWork
 
-- `<memory_root>`：agent 记忆根目录占位符（TRAE = `c:\Users\12739\.trae-cn\memory`；其他平台按自身约定，与本仓库 [agent-session-loop](../agent-session-loop/SKILL.md) 的 memory 路径约定一致）。
-- `<skills_root>`：当前平台 skill 目录占位符（TRAE = `c:\Users\12739\.trae-cn\skills`；本仓库 = `skills/`）。
-- `TRAE available_skills` → 当前平台的可用 skill 列表（如 Codex/CodeBuddy 的 available_skills）。
-- 工具映射：`Task subagent` → 平台子代理机制；`RunCommand` → 终端命令（PowerShell / `shell_command`）；`Grep/Read` → 文件检索与读取工具（`rg` / `Get-Content`）。
-- 文末 Reference 中的 `C:\Users\12739\...` 仅为来源溯源路径，不是运行路径。
+1. 本 skill 运行于**千问办公（QwenWork）**；正文所有路径、工具、检索都按 QwenWork 原生写，不使用外部平台占位符。
+2. 记忆根：`~/.qwenworkcn/awareness/main`（`MEMORY.md` 跨会话长期记忆 / `USER.md` 用户级偏好与铁律 / `memory/YYYY-MM-DD.md` 每日日志）。写入经 `memory` MCP 工具（target=`memory` / `user` / `daily`），检索经 `memory_search` / `memory_get`；`MEMORY.md` 与 `USER.md` **禁止直接 Edit/Write**。
+3. 技能根：`~/.qwenworkcn/skills`；技能增改删用 `qwenwork_skill_manage`（action `create` / `patch` / `edit` / `delete`）。
+4. 可用技能列表由会话 system-reminder 注入；调用某技能用 `Skill` 工具。
+5. 工具映射：终端用 `Bash 工具`（PowerShell 语义可 `powershell.exe -Command "…"`；存在性/软链/行数/体量校验用 `test -e` / `readlink` / `wc -l < <FILE>` / `find -size +50k` / `ls -R`）；子代理用 `Agent 工具`（`subagent_type`：`general-purpose` / `Explore` / `Plan`，可并发 / 可后台）；文件读写 `Read` / `Write` / `Edit`，检索 `Grep` / `Glob`；记忆读写 `memory` / `memory_search` / `memory_get`。
+6. 文件保护：删除一律进系统回收站（禁 `rm` / `del`）；改用户文件前先备份（Git 版本库内项目除外）。
+7. QwenWork 项目不保证为 git 库；一致性校验一律走「治理层清单现场枚举 + Grep spot-check 现测」，不依赖版本库文件清单类校验。
+8. 本 skill 主体不派子代理（详见「子代理不可用声明」）；与 deep-review-loop 联动时子代理经 `Agent 工具` 派发。
+
+**记忆落点速查（正文各步骤引用）**
+
+| 沉淀内容 | QwenWork 落点 | 写入方式 |
+|:---|:---|:---|
+| 用户级偏好与铁律 | `USER.md` | `memory` target=`user` |
+| 项目级规则 / 长期经验 / 稳定速查 | `MEMORY.md`（条目带 `[项目名]` 前缀） | `memory` target=`memory` |
+| 收尾 4 段日志 / 近期 topic / 当日经验记录 / 复盘报告 / Skill 缺口清单 | 当日 daily 日志 `memory/<YYYYMMDD>.md`（条目带 `[项目名]` 前缀） | `memory` target=`daily` |
+| 稳定套路（pattern / heuristic 层） | `~/.qwenworkcn/skills/<name>/SKILL.md` | `qwenwork_skill_manage` 建/补 |
+| policy 层规则 | `MEMORY.md` | **须人工确认后**并入 |
 
 ## 子代理不可用声明（2026-08-24 新增）
 
@@ -38,14 +51,14 @@ metadata:
 
 **正向触发**（本 skill → 反向喂回）:
 - dim 11 发现复盘流程撞坑 → 升级 **deep-review-loop** 协议（5 轮细节）
-- dim 1/5/9 从 **deep-review-loop** residual risk + **mem-wrap-up** sediment/audit/work-log 提取经验
+- dim 1/5/9 从 **deep-review-loop** residual risk + **mem-wrap-up** sediment/audit/daily 日志 提取经验
 
 **反向触发**（上游 → 本 skill）:
 - **deep-review-loop** R3 residual risk → 喂给 dim 5 问题预防（含 P2 残留经验：按 5Why 处理但标记"接受残留"，不强制升级）
 - **deep-review-loop** R1b class-level findings → 喂给 dim 9 一次性工具沉淀（P3 由 DRL backlog 兜底，dim 9 不重复；P3 若属 class-level pattern 1 instance 则 DRL 升级为 P2 报告，dim 9 正常接收）
 - **mem-wrap-up** Step 5 sediment → 喂给 dim 1 经验复用
 - **mem-wrap-up** Step 2 audit findings → 喂给 dim 5 问题预防
-- **mem-wrap-up** Step 4 work-log → 喂给 dim 9 一次性工具沉淀
+- **mem-wrap-up** Step 4 daily 日志（4 段 schema）→ 喂给 dim 9 一次性工具沉淀
 
 **P2/P3 跨 skill 语义统一（P2-8 修复）**:
 - DRL P2 = 体验问题（记录但不强制修复，允许残留 N 条）= self-evolution P2 = 等用户确认（沿用 DRL 语义）
@@ -57,20 +70,20 @@ metadata:
 
 | 模式 | 触发 | 深度 | 输出 |
 |:---|:---|:---|:---|
-| **快速** | 任务完成时自动 | 3 问自检 | experience-log.md |
-| **全面** | 手动触发 | 11 维度分析 | retrospective.md + experience-log |
+| **快速** | 任务完成时自动 | 3 问自检 | 当日 daily 日志经验段（+ Skill 缺口段） |
+| **全面** | 手动触发 | 11 维度分析 | 当日 daily 日志复盘段 + 经验段（稳定项并入 MEMORY.md） |
 
 ---
 
 ## 模式 A：快速复盘（任务完成后自动执行）
 
-每个任务完成时，在 git commit 之前执行。
+每个任务完成时执行；若项目为 git 仓库，则在 commit 之前。
 
 > **与整合版并用时**：若与 [agent-session-loop](../agent-session-loop/SKILL.md)（三阶段整合流水线）同仓/同环境使用，触发与裁剪遵循整合版的场景裁剪规则（如纯调试 session 可标 `not-applicable`）；独立调用时按本节执行。
 
 ### 触发条件
 - 任务标记为 completed 时
-- git commit 前
+- 提交前（如项目有版本库，则 commit 前）
 - 不需要用户显式触发
 
 ### 执行步骤
@@ -92,7 +105,7 @@ metadata:
 
 **写入步骤**（直接执行，不需要调用其他 skill；格式与质量标准详见 [references/experience-capture-format.md](references/experience-capture-format.md)，激活本节时读取）：
 
-1. 追加到 `<memory_root>/projects/<project-slug>/experience-log.md`（Edit 工具，末尾追加，无则 Write 创建）：
+1. 经 `memory` 工具 target=`daily` 追加到当日 daily 日志 `~/.qwenworkcn/awareness/main/memory/<date>.md`（条目带 `[项目名]` 前缀）：
 ```markdown
 ## [日期] — [任务名称] | **Tags:** [tag1, tag2]
 
@@ -106,19 +119,19 @@ metadata:
 [具体行动方案]
 ```
 
-2. 如有明确规则的经验，追加到 `<memory_root>/projects/<project-slug>/experience-quickref.md`：
+2. 如有明确规则的经验（稳定速查），经 `memory` 工具 target=`memory` 并入 `MEMORY.md` 的 `[项目名]` 速查条目：
 ```
-[编号] [关键词] — [一句话规则]
+[项目名] [编号] [关键词] — [一句话规则]
 ```
 
-3. 如有 Skill 缺口，追加到 `<memory_root>/projects/<project-slug>/skill-usage-checklist.md`：
+3. 如有 Skill 缺口，追加到当日 daily 日志的「Skill 缺口」清单段；同类缺口确认后经 `qwenwork_skill_manage` 建/补相应 skill：
 ```
 | [Skill名] | [场景] | [为什么没用] |
 ```
 
 **Step 3：模式升级检查**
 
-如果同类问题在 experience-log.md 中出现 ≥3 次，触发升级：提案写入 `knowledge/patterns/` 或 `knowledge/heuristics/`（本 step 负责）。
+如果同类问题在 daily 日志 / `MEMORY.md` 经验条目中出现 ≥3 次，触发升级：稳定套路经 `qwenwork_skill_manage` 并入相应 skill 的 SKILL.md（pattern / heuristic 层套路段）（本 step 负责）。
 
 ---
 ## 模式 B：全面复盘（手动触发）
@@ -131,16 +144,15 @@ metadata:
 
 ```
 第一层：摘要（必须，~2k tokens）
-□ git log --oneline（本次会话的 commit 列表）
-□ git diff --stat（文件变更统计）
-□ experience-log.md 最后 50 行（最新条目）
+□ 版本推进摘要：git log --oneline + git diff --stat（仅当项目为 git 仓库；否则改用当日 daily 日志里程碑段 + 本 session 改动清单）
+□ 当日 daily 日志经验段尾部（最新条目）
 
 第二层：按需读取（只在对应维度需要时读取）
-□ 维度 1 需要 → Grep experience-quickref.md 匹配本次关键词
+□ 维度 1 需要 → Grep `MEMORY.md` 的 `[项目名]` 速查条目匹配本次关键词
 □ 维度 2 需要 → 读取本次使用的 Skill 的 SKILL.md（只读 description）
-□ 维度 3 需要 → Grep skill-usage-checklist.md 匹配本次任务类型
-□ 维度 5 需要 → Grep experience-log.md 匹配同类问题
-□ 维度 7 需要 → 读取 knowledge/patterns/ 相关文件
+□ 维度 3 需要 → Grep 历史 daily 日志「Skill 缺口」段匹配本次任务类型
+□ 维度 5 需要 → `memory_search` 检索同类问题条目（daily 日志 + MEMORY.md）
+□ 维度 7 需要 → 读取相应 skill 的 SKILL.md 套路段 / `MEMORY.md` pattern 条目
 
 第三层：深度读取（只在发现异常时读取）
 □ 某个经验条目需要详细分析 → 读取该条目完整内容
@@ -164,7 +176,7 @@ metadata:
 
 ### 维度 1：经验复用梳理
 
-**输入**：experience-log.md + experience-quickref.md
+**输入**：当日 daily 日志经验段 + `MEMORY.md` `[项目名]` 速查条目
 **分析**：
 - 本次复用了哪些历史经验？（列出具体条目）
 - 本次新增了哪些可复用经验？
@@ -211,7 +223,7 @@ metadata:
 
 ### 维度 3：未用技能审视
 
-**输入**：当前平台 available_skills 列表 + 本次任务描述 + 维度 5 的问题清单
+**输入**：会话 system-reminder 注入的可用技能列表 + 本次任务描述 + 维度 5 的问题清单
 **分析**：
 - 本次任务中，哪些 Skill 应该用但没用？
 - 每项未用技能能否解决维度 5 中的某个问题？
@@ -348,7 +360,7 @@ Why 5: [根本原因]
 
 | 经验 | 违反次数 | 可自动化 | 升级条件 | 升级去向 |
 |:---|:---:|:---:|:---|:---|
-| [经验1] | N 次 | 是/否 | ≥3次 + 可自动化 + 有行动方案 | patterns/ / heuristics/ / policies/ |
+| [经验1] | N 次 | 是/否 | ≥3次 + 可自动化 + 有行动方案 | SKILL.md 套路段 / MEMORY.md 条目（policy 须人工确认） |
 
 升级判定标准：
 - experience → pattern：同类事件 ≥3 次 + 跨任务 + 根因一致
@@ -369,7 +381,7 @@ Why 5: [根本原因]
 > 这个维度的价值：without-skill 的 agent 会自发做这个分析，但 skill 如果不规定，它反而不会做。加入 skill 确保每次复盘都有质量闭环。
 ### 维度 9：一次性工具沉淀清单（必走，不可跳过）
 
-> **触发**：任务过程中临时写的脚本 / Python one-liner / PowerShell 命令 — **用完即弃**还是**沉淀模板**? 撞 1 次也走,不依赖撞次累门槛。
+> **触发**：任务过程中临时写的脚本 / Python one-liner / shell 命令 — **用完即弃**还是**沉淀模板**? 撞 1 次也走,不依赖撞次累门槛。
 > **跟维度 4 区别**：维度 4 = 通用场景沉淀识别（撞 ≥3 才升级 pattern）；维度 9 = 一次性工具专项沉淀决策（4 类决策，撞 1 也走）。
 > **跟维度 6 区别**：维度 6 = 工作流优化方案（流程层）；维度 9 = 工具层产物沉淀（代码/脚本层）。
 
@@ -380,7 +392,7 @@ Why 5: [根本原因]
   - 高 = 撞 P0 critical / 再用频率高 / 协议必走
   - 中 = 单 session 内部多次复用
   - 低 = 一次性专用
-- 沉淀形式：templates/ 文件 / SKILL.md 段 / experience-quickref 速查
+- 沉淀形式：并入相应 skill 的 SKILL.md 段 / `MEMORY.md` `[项目名]` 速查条目 / 新 skill
 
 **4 类决策表**：
 
@@ -388,14 +400,14 @@ Why 5: [根本原因]
 |:---|:---|:---|
 | skill 候选 | 跨 session 复用 + 协议化 | 新 skill 文件夹 + SKILL.md |
 | 永久化 | 单项目内高频 | 项目内 scripts/ 或 tools/ |
-| 模板 | 结构化重复 | memory/templates/X.md |
+| 模板 | 结构化重复 | 并入相应 skill 的 SKILL.md 段（不再建独立模板目录） |
 | 弃用 | 一次性专用 | 不沉淀，记录即可 |
 
 **输出物**：《一次性工具沉淀清单表》
 
 | 一次性工具 | 用在哪 | 沉淀价值 | 沉淀形式 |
 |:---|:---|:---:|:---|
-| [工具/脚本] | [场景] | 高/中/低 | templates/X.md / SKILL.md 段 |
+| [工具/脚本] | [场景] | 高/中/低 | SKILL.md 段 / MEMORY.md 速查条目 |
 
 **Skip conditions**：
 - Mode A（快速复盘）：dim 9 optional
@@ -403,7 +415,7 @@ Why 5: [根本原因]
 
 ### 维度 10：工具链 sub-protocol 反思（可选）
 
-> **触发**：复盘期间撞**工具链层**反复出（PowerShell / Write / Edit / Read / Grep）→ 局限版分析（单工具链）。
+> **触发**：复盘期间撞**工具链层**反复出（Bash / Write / Edit / Read / Grep）→ 局限版分析（单工具链）。
 > **跟维度 11 区别**：维度 10 = 单工具链层撞坑反思（局限）；维度 11 = 复盘流程任何撞坑（泛化）。
 > **何时跳过**：本次复盘期间**没**撞工具链层反复问题（≥3 次同类）→ 跳过本维度，直接进维度 11。
 
@@ -413,9 +425,9 @@ Why 5: [根本原因]
 - 5Why 根因（聚焦"工具链协议遗漏"）
 - sub-protocol 沉淀（N 层 + N 条）→ 跟现有协议**配对**扩展
 
-**输出**：工具链 sub-protocol vN.0 沉淀（写到 `<memory_root>/templates/{tool}-checklist.md`）
+**输出**：工具链 sub-protocol vN.0 沉淀（并入相应 skill 的 SKILL.md 或 `MEMORY.md`，不再建独立 checklist 模板文件）
 
-**示例**：Write 工具沙箱不可信 sub-protocol v1.0（路径 / here-string / AppendAllText / 验证 4 层）→ 落到 `<memory_root>/templates/write-large-file-checklist.md` 附录。
+**示例**：Write 工具沙箱不可信 sub-protocol v1.0（路径 / heredoc / `>>` 追加 / 验证 4 层）→ 落到对应 skill 或 `MEMORY.md` 附录。
 
 ### 维度 11：复盘过程中出现的问题（必走，不可跳过）
 
@@ -437,10 +449,10 @@ Why 5: [根本原因]
 
 | 类别 | 例 | 修法 | 评分 (P0/P1 × 频率) |
 |:---|:---|:---|:---:|
-| 工具链层 | PowerShell 引号嵌套 / Write silent skip | here-string + AppendAllText + Test-Path 验证 | P1 × N |
+| 工具链层 | shell 引号嵌套 / Write silent skip | heredoc + `>>` 追加 + `test -e` 验证 | P1 × N |
 | 协议层 | 未走 5 轮 DRL / 未 verify | 强制 deep-review-loop skill | P0 × 单 |
-| 流程层 | experience-log 漂移 / 5 件套未 sync | 5-piece bundle verify | P1 × N |
-| memory 维护层 | user_profile 指针断链 / 旧路径残留 | Grep 全目录确认无残留 | P1 × N |
+| 流程层 | daily 日志经验段漂移 / 5 件套未 sync | 5-piece bundle verify | P1 × N |
+| memory 维护层 | `USER.md` 指针断链 / 旧路径残留 | Grep 记忆根确认无残留 | P1 × N |
 | 任何 future 撞坑 | (留作未来) | (留作未来) | — |
 
 **反模式速查表**：
@@ -460,14 +472,14 @@ Why 5: [根本原因]
 > **这个维度的价值**：维度 11 是元层兜底 — 之前 10 维度都聚焦"复盘什么"，维度 11 强制"复盘过程本身是否健康"。必走，不可跳过。跟维度 8（元认知反思）配对成元层闭环：维度 8 = 复盘质量评估（事后），维度 11 = 复盘过程撞坑整合（事中）。
 **Step 3：生成报告**
 
-报告写入 `<memory_root>/projects/<project-slug>/<YYYYMMDD>/retrospective.md`，格式：
+报告经 `memory` 工具 target=`daily` 写入当日 daily 日志 `~/.qwenworkcn/awareness/main/memory/<YYYYMMDD>.md` 的复盘段，格式：
 
 ```markdown
 # YYYY-MM-DD 全面复盘
 
 **项目**: [项目名]
 **工作内容**: [概述]
-**产出**: N 个 commit，N 文件变更，N 行代码
+**产出**: N 项版本推进/交付（如适用记 commit 数），N 文件变更，N 行代码
 
 ---
 
@@ -513,11 +525,11 @@ Why 5: [根本原因]
 
 | # | 件 | 路径 | 检查方法 |
 |:--|:---|:-----|:--------|
-| 1 | **复盘主 file** | `<memory_root>/projects/<project-slug>/<YYYYMMDD>/retrospective.md` | RunCommand Test-Path 必存在 |
-| 2 | **project_memory 更新** | `<memory_root>/projects/<project-slug>/project_memory.md` | Grep 本次 session 关键词 ≥ 1 |
-| 3 | **user_profile 更新**（如涉及用户级偏好） | `<memory_root>/user_profile.md` | Grep 本次新增条目 ≥ 1（如适用） |
-| 4 | **experience-log 备忘段** | `<memory_root>/projects/<project-slug>/experience-log.md` | Grep 本次 session 编号 ≥ 1 |
-| 5 | **E-rule 候选** | `<memory_root>/projects/<project-slug>/experience-quickref.md` | Grep "E[0-9]+ 候选" ≥ 1 新增 |
+| 1 | **复盘主段** | 当日 daily 日志复盘段（`~/.qwenworkcn/awareness/main/memory/<YYYYMMDD>.md`） | `memory_get` / Read 确认复盘段存在、11 节齐 |
+| 2 | **MEMORY.md 项目条目更新** | `MEMORY.md` `[项目名]` 条目 | `memory_search` / Grep 记忆根文件，本次 session 关键词 ≥ 1 |
+| 3 | **USER.md 更新**（如涉及用户级偏好） | `USER.md` | `memory_search` 本次新增条目 ≥ 1（如适用） |
+| 4 | **daily 日志经验备忘段** | 当日 daily 日志经验段 | `memory_get` / Grep 本次 session 编号 ≥ 1 |
+| 5 | **E-rule 候选** | `MEMORY.md` `[项目名]` 速查条目 | Grep 记忆根文件 "E[0-9]+ 候选" ≥ 1 新增 |
 
 **verify 失败时**：立即补漏（每件 < 5 min），不要等下次 session。
 
@@ -528,10 +540,10 @@ Why 5: [根本原因]
 
 | # | 件 | 状态 |
 |:--|:---|:----:|
-| 1 | 复盘主 file | ✅ <memory_root>/projects/.../retrospective.md |
-| 2 | project_memory 更新 | ✅ project_memory.md:LLL |
-| 3 | user_profile 更新 | ✅ user_profile.md:LLL（如适用） |
-| 4 | experience-log 备忘段 | ✅ experience-log.md |
+| 1 | 复盘主段 | ✅ 当日 daily 日志复盘段 |
+| 2 | MEMORY.md 项目条目更新 | ✅ MEMORY.md:[项目名] 条目 LLL |
+| 3 | USER.md 更新 | ✅ USER.md:LLL（如适用） |
+| 4 | daily 日志经验备忘段 | ✅ memory/<YYYYMMDD>.md 经验段 |
 | 5 | E-rule 候选 | ✅ E78 升 N/3 + E79 新 1/3 |
 ```
 
@@ -543,11 +555,11 @@ Why 5: [根本原因]
 
 | 条件 | 升级动作 | 执行方式 |
 |:---|:---|:---|
-| 同类经验 ≥3 次 + 跨任务 + 根因一致 | 创建 `<memory_root>/knowledge/patterns/[name].md` | **自动创建新文件** |
-| 某 pattern 成功率 >80% + 不引入新问题 | 创建 `<memory_root>/knowledge/heuristics/[name].md` | **自动创建新文件** |
-| 某 heuristic 效果显著 | 写入 `<memory_root>/knowledge/policies/` | **需人工确认** |
+| 同类经验 ≥3 次 + 跨任务 + 根因一致 | 经 `qwenwork_skill_manage` 并入相应 skill 的 SKILL.md（pattern 层套路段） | **自动建/补 skill** |
+| 某 pattern 成功率 >80% + 不引入新问题 | 经 `qwenwork_skill_manage` 并入相应 skill 的 SKILL.md（heuristic 层规则段） | **自动建/补 skill** |
+| 某 heuristic 效果显著 | 经 `memory` 工具并入 `MEMORY.md` `[项目名]` 条目（policy 层） | **需人工确认** |
 
-**knowledge/ 文件 frontmatter 标准**：
+**沉淀条目 / skill 段 frontmatter 标准**：
 ```yaml
 ---
 name: [short-kebab-case]
@@ -560,9 +572,9 @@ tags: [optional]
 ```
 
 **安全规则**：
-- 只创建新文件，不覆盖已有文件
-- 目标文件已存在 → 追加内容，不覆盖
-- `knowledge/policies/` 一律需人工确认
+- 对 skill 只建/补不删除（删除需 `qwenwork_skill_manage` action=`delete` 且人工确认）
+- 目标段落已存在 → 追加内容，不覆盖
+- policy 层升级一律需人工确认后并入 `MEMORY.md`
 
 每个升级动作执行后：`✅ 已写入 [路径]` 或 `⚠️ 需确认 [原因]`。
 
@@ -581,18 +593,18 @@ tags: [optional]
 
 | 动作类型 | 执行方式 | 输出格式 |
 |:---|:---|:---|
-| 创建模板文件 | Write `<memory_root>/templates/[name].md` | 文件必须有 frontmatter + 使用示例 |
-| 更新 Skill | Edit `<skills_root>/<name>/SKILL.md` | 修改前先 Read，自动备份 |
-| 追加经验条目 | Edit `<memory_root>/projects/<project-slug>/experience-log.md`（末尾追加） | 格式见模式 A |
-| 更新速查表 | Edit `<memory_root>/projects/<project-slug>/experience-quickref.md` | 格式：`[编号] [关键词] — [规则]` |
-| 写入 knowledge/patterns/ | Write `<memory_root>/knowledge/patterns/[name].md` | frontmatter + When/Pattern/Evidence/Related |
-| 写入 knowledge/heuristics/ | Write `<memory_root>/knowledge/heuristics/[name].md` | frontmatter + Rule/Success Rate/Evidence |
-| 更新 skill-usage-checklist | Edit `<memory_root>/projects/<project-slug>/skill-usage-checklist.md` | 格式：`| [Skill] | [场景] | [触发词] |` |
+| 沉淀可复用模板 | 并入相应 skill 的 SKILL.md 段（`qwenwork_skill_manage`） | 段落须含使用示例 |
+| 更新 Skill | `qwenwork_skill_manage`（action=`patch`/`edit`）改 `~/.qwenworkcn/skills/<name>/SKILL.md` | 修改前先 Read，自动备份 |
+| 追加经验条目 | `memory` 工具 target=`daily` 追加到当日 daily 日志（带 `[项目名]` 前缀） | 格式见模式 A |
+| 更新速查表 | `memory` 工具 target=`memory` 并入 `MEMORY.md` `[项目名]` 速查条目 | 格式：`[项目名] [编号] [关键词] — [规则]` |
+| 沉淀 pattern 套路 | `qwenwork_skill_manage` 补相应 skill 的 SKILL.md | 含 When/Pattern/Evidence/Related 段 |
+| 沉淀 heuristic 规则 | `qwenwork_skill_manage` 补相应 skill 的 SKILL.md（或 `MEMORY.md` 条目） | 含 Rule/Success Rate/Evidence 段 |
+| 更新 Skill 缺口清单 | `memory` 工具 target=`daily` 追加当日 daily 日志缺口段 | 格式：`| [Skill] | [场景] | [触发词] |` |
 
 **每个动作执行前必须**：
-1. 检查目标文件是否存在（RunCommand Test-Path）
-2. 存在 → 追加（Edit），不覆盖
-3. 不存在 → 创建（Write），带完整 frontmatter
+1. 检查目标位置现状（`memory_get` / Read / Bash `test -e`）
+2. 已存在 → 追加，不覆盖（memory 类经 `memory` 工具，skill 类经 `qwenwork_skill_manage`）
+3. 不存在 → 创建，带完整 frontmatter（memory 类经 `memory` 工具，skill 类经 `qwenwork_skill_manage` action=`create`）
 
 **执行后输出汇总**：
 
@@ -627,28 +639,28 @@ tags: [optional]
 |:---|:---|:---|
 | dim 1 经验复用 | DRL residual + mem-wrap-up Step 5 sediment | deep-review-loop R3 + mem-wrap-up Step 5 |
 | dim 5 问题预防 | DRL residual（含 P2 残留经验）+ mem-wrap-up audit | deep-review-loop R3 + mem-wrap-up Step 2 |
-| dim 9 一次性工具沉淀 | DRL class-level（P3 由 DRL backlog 兜底）+ mem-wrap-up work-log | deep-review-loop R1b + mem-wrap-up Step 4 |
+| dim 9 一次性工具沉淀 | DRL class-level（P3 由 DRL backlog 兜底）+ mem-wrap-up daily 日志 | deep-review-loop R1b + mem-wrap-up Step 4 |
 | dim 11 复盘撞坑 | 反向喂回 → 升级 DRL 协议 | → deep-review-loop 5 轮细节 |
 
 ### 系统分工表
 
 | 系统 | 角色 | 分工边界 |
 |:---|:---|:---|
-| self-evolution（本 skill） | **分析 + 升级 + 执行** | 快速模式直接写入 3 个文件；全面模式做 11 维度分析 + 知识层升级 + 行动项执行 |
-| experience-log.md | 唯一的经验记录源（权威源） | self-evolution 快速模式写入 |
-| experience-quickref.md | 速查表（从 experience-log.md 提取） | self-evolution 快速模式更新 |
-| skill-usage-checklist.md | Skill 使用检查清单 | self-evolution 快速模式记录缺口 |
+| self-evolution（本 skill） | **分析 + 升级 + 执行** | 快速模式直接写入 3 处落点（daily 日志经验段 / MEMORY.md 速查条目 / daily 日志缺口段）；全面模式做 11 维度分析 + 知识层升级 + 行动项执行 |
+| 当日 daily 日志经验段 | 按次经验记录入口（当日流水权威） | self-evolution 快速模式写入 |
+| `MEMORY.md` `[项目名]` 速查条目 | 稳定速查表（从 daily 日志经验段蒸馏） | self-evolution 快速/全面模式更新 |
+| 当日 daily 日志「Skill 缺口」段 | Skill 使用检查清单 | self-evolution 快速模式记录缺口 |
 | deep-review-loop skill | 5 轮深度审查 | dim 5/9 输入源；dim 11 反向升级目标 |
 | mem-wrap-up skill | session 收尾 7 步流水线 | dim 1/5/9 输入源；与 self-evolution 互补 |
 
 ### 单一事实源原则
 
 ```
-experience-log.md（权威源）→ 每次任务的发现和教训
+当日 daily 日志经验段（按次记录）→ 每次任务的发现和教训
+  ↓（同类 ≥3 次 / 稳定后蒸馏）
+MEMORY.md `[项目名]` 速查条目（稳定经验权威源 + 索引）→ 再沉淀进相应 skill 的 SKILL.md
   ↓
-experience-quickref.md（索引）→ 速查表
-  ↓
-retrospective.md（分析报告）→ 引用 experience-log.md，不重复内容
+当日 daily 日志复盘段（分析报告）→ 引用上述两层，不重复内容
 ```
 
 ---
@@ -673,11 +685,10 @@ retrospective.md（分析报告）→ 引用 experience-log.md，不重复内容
 - 行动项 P0/P1 立即执行，P2 等确认，P3 只记录
 
 ## Reference
-- **源 skill（原机溯源，非运行路径）**：`C:\Users\12739\.claude\skills\self-evolution\SKILL.md`（v2.1.3, 382 行）
-- **源 templates**：`11-dimensions-deep-retro.md`（367 行，已内联）+ `evolution-report.md`（已内联）+ `write-large-file-checklist.md`（H17 sub-protocol，蒸馏后用工具链 sub-protocol 替代）
+- **外部 vault 蒸馏来源（路径已脱敏）**：由外部记忆库/skill 库蒸馏而来，蒸馏原则见下条；原 user 训诫（DRL 真循环铁律 2026-07-12）现已常驻 `USER.md`。
+- **内联模板清单**：`11-dimensions-deep-retro.md`（367 行，已内联）+ `evolution-report.md`（已内联）+ `write-large-file-checklist.md`（已用「工具链 sub-protocol 反思」维度替代）
 - **deep-review-loop skill（已蒸馏，仓库版）**：`skills/deep-review-loop/SKILL.md`
 - **mem-wrap-up skill（已蒸馏，仓库版）**：`skills/mem-wrap-up/SKILL.md`
 - **agent-session-loop（仓库版）**：`skills/agent-session-loop/SKILL.md`（三阶段整合流水线入口）
-- **user 训诫（原机溯源）**：`c:\Users\12739\.trae-cn\memory\user_profile.md` § DRL 真循环铁律（2026-07-12）
-- **蒸馏原则**：剥离 bash/Node/Python 脚本 + vault 路径 + H-rules 术语 + CLAUDE.md 引用 + experience-capture 依赖 + templates 独立文件（11 维度内联）；保留双模式 + 11 维度完整 + 5 件套 sync verify + 知识层升级 + 行动项分流 + verdict 禁词；嫁接 TRAE 工具映射 + deep-review-loop/mem-wrap-up 联动
-- **位置**：本仓库 `skills/self-evolution/SKILL.md`（仓库版，平台适配见文首）；TRAE 全局另有副本
+- **蒸馏原则**：剥离原脚本 hook（bash/Node/Python）+ 原目录结构 + 原规则术语引用 + 原经验捕获依赖 + 模板独立文件（11 维度内联）；保留双模式 + 11 维度完整 + 5 件套 sync verify + 知识层升级 + 行动项分流 + verdict 禁词；嫁接 QwenWork 工具映射 + deep-review-loop/mem-wrap-up 联动
+- **位置**：本 skill 的 master 副本位于 `~/.qwenworkcn/skills/self-evolution/SKILL.md`；仓库归档副本位于 `D:\1\QwenWork\skills\self-evolution\`

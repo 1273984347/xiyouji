@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W530），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W531），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.130（2026-08-29）：W531 skills 部署全查 + 三真源降级保护 — sync_skills 方向判定 + 四通用技能回写
+
+> **来源**：用户「验证更新后的技能能正常触发」→ 扩展为「仓库所有技能部署状态全查」。查出 21 个仓库技能全部已部署可触发，但 4 个通用技能（agent-session-loop / deep-review-loop / mem-wrap-up / self-evolution）本仓库副本停留 8/24-8/25，QwenWork 作品仓库与全局安装版已演进为 QwenWork 原生化版本；`sync_skills.py --check` 仍按「仓库为真源」提示跑 `--sync`——**照做即静默降级**。
+> - **执行（降级保护）**：`scripts/sync_skills.py` 重写比对层——新增 `judge_direction()` 按 SKILL.md frontmatter 版本号（顶层 `version` / `metadata.version`）判方向，无版本号退回最新 mtime 弱证据；`--check` 输出四态标记（全局更新·禁 --sync / 仓库更新→可 --sync / 同版冲突 / 方向不可判）并给出正确指令；`--sync` 默认跳过判为全局更新或冲突的技能，需 `--force` 越权；新增 `--take-global NAME...` 反向回写（保留仓库侧 `.skill-metadata.yaml` 真源）。
+> - **执行（行尾假漂移根除）**：仓库 `core.autocrlf=true`，`skills/` 内 3 文件工作区 CRLF、index LF，旧版 `read_bytes()` 逐字节比对把行尾差异误报为内容漂移（本次 63 行报告含此噪声）；比对改 `read_norm()` CRLF→LF，落盘统一 LF。
+> - **执行（四技能回写 · 7 文件）**：采纳 QwenWork 原生化表述——TRAE/Claude 占位符与蒸馏溯源段 → `memory` 工具 / `qwenwork_skill_manage` / 当日 daily 日志四段 schema；硬编码「6 个项目层文件」清单 → 「读项目登记的治理文档清单」（对本仓库仍解析为六文档，信息不丢失）。回写后版本 1.2.0 / 1.4.0 / 1.3.0 / 1.2.0-qwenwork-native。
+> - **执行（附带发现·本批未处置）**：① `ai-contest-work-descriptor` 曾只存在于作品仓库、未部署全局安装版（本会话补装并验证触发，作品仓库未纳 git 管——用户选「暂不处理」）；② 4 通用技能双仓库并存属双真源结构问题，本批回写收敛内容，归属约定待后续批次。
+> - **文件**：scripts/sync_skills.py、skills/agent-session-loop/SKILL.md + references/02-wrap-up.md + references/03-evolution.md、skills/deep-review-loop/SKILL.md、skills/mem-wrap-up/SKILL.md、skills/self-evolution/SKILL.md + references/experience-capture-format.md、AGENTS.md（§4.2 第 16 门禁配套工具描述 + 版本脚注）+ 六文档 + site/dukou-engine.html + .github/workflows/README.md。
+> - **验证**：`--self-test` 负样本 4/4（全局版更高→拦降级 / 仓库版更高→放行 / 仅行尾差异→不报漂移 / 同版不同内容→交人工，注入前 assert 前提成立）；真实数据 `--check` 判 4 技能 global_newer，`--sync` 实跑 **0 文件更新、4 技能被拦**（陷阱关闭）；回写后 `--check` 无漂移、`check_skills_index.py` 五检查通过（19 skill / 63 文件全入库 / 引用 51 条 0 缺失）、`git ls-files --eol skills/` CRLF 归零；ruff 0 错误。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.129（2026-08-26）：W530 决策闸门工程落地（W465' 重排）— judge_gate.py + 复盘模板
 

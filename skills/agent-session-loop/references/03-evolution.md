@@ -8,12 +8,12 @@
 
 | 模式 | 触发 | 深度 | 输出 |
 |:---|:---|:---|:---|
-| **快速** | 任务完成时自动 | 3 问自检 | experience-log.md |
-| **全面** | 手动触发（「全面复盘/周汇总/retro」） | 11 维度分析 | retrospective.md + experience-log |
+| **快速** | 任务完成时自动 | 3 问自检 | 当日 daily 日志经验段 |
+| **全面** | 手动触发（「全面复盘/周汇总/retro」） | 11 维度分析 | 当日 daily 日志复盘段 + 经验段（稳定项并入 MEMORY.md） |
 
 ## 模式 A：快速复盘（任务完成后自动执行）
 
-每个任务完成时，在 git commit 之前执行。
+每个任务完成时执行；若项目为 git 仓库，则在 commit 之前。
 
 **Step 1：3 问自检**（必须回答，全否也要写出「全否」）：
 ```
@@ -23,17 +23,17 @@
 ```
 
 **Step 2：根据答案决定动作**：全否 → 跳过不写文件；有 → 执行写入：
-1. 追加 `<memory_root>/projects/<project-slug>/experience-log.md`（格式：日期/任务/Tags + 发现或踩坑或缺口 + 根因 + 下次怎么做）
-2. 有明确规则 → 追加 `experience-quickref.md`（`[编号] [关键词] — [一句话规则]`）
-3. 有 Skill 缺口 → 追加 `skill-usage-checklist.md`（`| [Skill名] | [场景] | [为什么没用] |`）
+1. 经 `memory` 工具 target=`daily` 追加到当日 daily 日志（条目带 `[项目名]` 前缀；格式：日期/任务/Tags + 发现或踩坑或缺口 + 根因 + 下次怎么做）
+2. 有明确规则 → 经 `memory` 工具并入 `MEMORY.md` `[项目名]` 速查条目（`[项目名] [编号] [关键词] — [一句话规则]`）
+3. 有 Skill 缺口 → 追加当日 daily 日志「Skill 缺口」段（`| [Skill名] | [场景] | [为什么没用] |`）
 
-**Step 3：模式升级检查**：同类问题 ≥3 次 → 提案升级到 `knowledge/patterns/` 或 `knowledge/heuristics/`
+**Step 3：模式升级检查**：同类问题 ≥3 次 → 稳定套路经 `qwenwork_skill_manage` 并入相应 skill 的 SKILL.md（pattern / heuristic 层）
 
 ## 模式 B：全面复盘（手动触发）
 
 **Step 1：数据收集（分层读取，避免 token 爆炸）**
-- 第一层摘要（必须）：git log --oneline / git diff --stat / experience-log 最后 50 行
-- 第二层按需：各维度对应文件（quickref / SKILL.md description / checklist / experience-log / patterns）
+- 第一层摘要（必须）：版本推进摘要（git 仓库用 git log --oneline / git diff --stat，否则用当日 daily 日志里程碑段）/ 当日 daily 日志经验段尾部
+- 第二层按需：各维度对应落点（MEMORY.md 速查条目 / SKILL.md description / daily 日志缺口段 / daily 日志经验段 / skill 套路段）
 - 第三层深度：发现异常时才读全文
 - 原则：先读摘要，需要深入再读全文
 
@@ -53,26 +53,26 @@
 | 10 | 工具链 sub-protocol 反思 | 可选 | 单工具链层撞坑（≥3 次同类才走） |
 | 11 | 复盘过程中出现的问题 | ✅ 必走 | 元层兜底：撞坑分类表 + 5Why 元层根因 + 反模式识别 |
 
-**Step 3：生成报告** → `<memory_root>/projects/<project-slug>/<date>/retrospective.md`（11 段结构，每段对应一个维度输出）
+**Step 3：生成报告** → 经 `memory` 工具 target=`daily` 写入当日 daily 日志复盘段 `~/.qwenworkcn/awareness/main/memory/<date>.md`（11 段结构，每段对应一个维度输出）
 
-**Step 3.5：多件套同步 verify（强制）**——漏任一件 = 复盘未闭环：
-1. 复盘主 file（Test-Path 必存在）
-2. project_memory 更新（Grep 关键词 ≥1）
-3. user_profile 更新（如适用）
-4. experience-log 备忘段（Grep session 编号 ≥1）
-5. E-rule 候选（Grep 新增编号 ≥1）
+**Step 3.5：5 件套同步 verify（强制）**——漏任一件 = 复盘未闭环：
+1. 复盘主段（`memory_get` / Read 必存在，11 节齐）
+2. `MEMORY.md` `[项目名]` 条目更新（`memory_search` 关键词 ≥1）
+3. `USER.md` 更新（如适用）
+4. 当日 daily 日志经验备忘段（Grep session 编号 ≥1）
+5. E-rule 候选（`MEMORY.md` 速查条目新增编号 ≥1）
 - verify 失败 → 立即补漏，不要等下次 session
 
 **Step 4：知识层升级（experience → pattern → heuristic → policy）**
 
 | 条件 | 升级动作 |
 |:---|:---|
-| 同类经验 ≥3 次 + 跨任务 + 根因一致 | 创建 `knowledge/patterns/[name].md`（自动） |
-| pattern 成功率 >80% + 不引入新问题 | 创建 `knowledge/heuristics/[name].md`（自动） |
-| heuristic 效果显著 | 写入 `knowledge/policies/`（**需人工确认**） |
+| 同类经验 ≥3 次 + 跨任务 + 根因一致 | `qwenwork_skill_manage` 并入相应 skill 的 SKILL.md pattern 段（自动） |
+| pattern 成功率 >80% + 不引入新问题 | `qwenwork_skill_manage` 并入相应 skill 的 SKILL.md heuristic 段（自动） |
+| heuristic 效果显著 | 并入 `MEMORY.md` `[项目名]` 条目（policy 层，**需人工确认**） |
 
-- knowledge/ 文件 frontmatter 标准：name / description / type / id / level / tags
-- 安全规则：只创建新文件不覆盖；已存在 → 追加；policies 一律人工确认
+- 沉淀条目 / skill 段 frontmatter 标准：name / description / type（pattern / heuristic / policy）/ id / level / tags
+- 安全规则：skill 只建/补不删；已存在 → 追加不覆盖；policy 层一律人工确认后并入 `MEMORY.md`
 
 **Step 5：执行行动计划（按优先级分流）**
 
@@ -83,14 +83,14 @@
 | P2（体验优化/非核心） | 等用户确认 |
 | P3（nice-to-have） | 只记录，不主动执行 |
 
-- 每个动作前：Test-Path 检查 → 存在则 Edit 追加（不覆盖），不存在则 Write 创建
-- 动作类型：创建模板 / 更新 Skill（先 Read 再改）/ 追加经验条目 / 更新速查表 / 写入 patterns / heuristics / 更新 checklist
+- 每个动作前：`memory_get` / Read / `test -e` 检查 → 存在则追加（不覆盖），不存在则创建（memory 类经 `memory` 工具，skill 类经 `qwenwork_skill_manage`）
+- 动作类型：并入 SKILL.md 模板段 / 更新 Skill（先 Read 再改）/ 追加经验条目（daily 日志）/ 更新速查表（MEMORY.md）/ 沉淀 pattern / 沉淀 heuristic / 更新 Skill 缺口清单
 
 ## 维度 9 详案（一次性工具沉淀，必走）
 
 - 与维度 4 区别：维度 4 = 通用场景沉淀（撞 ≥3 才升 pattern）；维度 9 = 工具层产物沉淀（4 类决策，撞 1 也走）
 - 沉淀价值评分：高 = P0 critical / 再用频率高 / 协议必走；中 = 单 session 多次复用；低 = 一次性
-- 4 类决策：skill 候选（跨 session + 协议化）→ 新 skill；永久化（单项目高频）→ scripts/tools；模板（结构化重复）→ templates/X.md；弃用（一次性）→ 只记录
+- 4 类决策：skill 候选（跨 session + 协议化）→ 新 skill；永久化（单项目高频）→ 项目内 scripts/tools；模板（结构化重复）→ 并入相应 skill 的 SKILL.md 段；弃用（一次性）→ 只记录
 - Skip：Mode A 时 optional；Mode B 无一次性工具 → 显式标记 NONE 不静默跳过
 
 ## 维度 11 详案（复盘过程撞坑，必走）
@@ -103,11 +103,11 @@
 ## 单一事实源原则
 
 ```
-experience-log.md（权威源）→ 每次任务的发现和教训
+当日 daily 日志经验段（按次记录）→ 每次任务的发现和教训
+  ↓（同类 ≥3 次 / 稳定后蒸馏）
+MEMORY.md `[项目名]` 速查条目（稳定经验权威源 + 索引）→ 再沉淀进相应 skill 的 SKILL.md
   ↓
-experience-quickref.md（索引）→ 速查表
-  ↓
-retrospective.md（分析报告）→ 引用 experience-log.md，不重复内容
+当日 daily 日志复盘段（分析报告）→ 引用上述两层，不重复内容
 ```
 
 ## 边界限制
@@ -116,5 +116,5 @@ retrospective.md（分析报告）→ 引用 experience-log.md，不重复内容
 - dim 9 + dim 11 必走，不可跳过
 
 ## 触发条件
-- 任务完成（git commit 前自动）→ 快速模式
+- 任务完成（有版本库的项目 commit 前自动）→ 快速模式
 - 「全面复盘 / 跑一下验收 / 周汇总 / 复盘 / retro」→ 全面模式
