@@ -8,9 +8,9 @@ description: >
   将 Agent 会话完整生命周期整合为一条流水线：深度复检（审查）→ 7 步收尾 → 复盘沉淀。
   会话收尾、批量修复/长文档完成后、用户说「收尾/复检/复盘/retro」、或文档与代码不一致需完整闭环时使用。
 license: Apache-2.0
-compatibility: Agent-agnostic. Requires subagent/task spawning, file search (Grep/Read), and a memory directory convention.
+compatibility: 千问办公 (QwenWork) 为主目标平台，方法论 Agent-agnostic。需子代理派发（Agent 工具）、文件检索（Grep/Read/Glob）与 memory 工具链；平台路径与工具细节见「运行平台：千问办公 QwenWork」段。
 metadata:
-  version: "1.0.0"
+  version: "1.2.0-qwenwork-native"
 ---
 
 # agent-session-loop
@@ -38,7 +38,7 @@ metadata:
 | 交接点 | 上游产出 | 下游消费 |
 |:---|:---|:---|
 | 审查 → 收尾 | 收敛曲线 + ≥3 residual risk | 收尾 Step 4/7 的验证清单 + 待沉淀项 |
-| 收尾 → 沉淀 | sediment（编号+5Why 链）+ work-log | 复盘维度 1/5/9 的输入 |
+| 收尾 → 沉淀 | sediment（编号+5Why 链）+ 当日 daily 日志（4 段 schema 收尾段） | 复盘维度 1/5/9 的输入 |
 | 沉淀 → 下一 session | 知识层升级 + 行动项 | 下次会话的规则与 checklist |
 
 ## 触发条件
@@ -92,10 +92,10 @@ metadata:
 
 **核心协议**（详情见 [references/02-wrap-up.md](references/02-wrap-up.md)）：
 
-1. **memory 健康检查**：目录规模 + P0/P1/P2 标记 + session 文件统计
+1. **memory 健康检查**：记忆根体量 + P0/P1/P2 标记 + `memory/*.md` 日志文件统计
 2. **memory audit（5 phase）**：frontmatter / dup / empty / big-file / broken-link + 6 面状态矩阵
 3. **fileCount sync**：实际文件数 vs 声明，drift >5% 告警
-4. **文档同步 spot-check**：Grep 验证版本号 + 任务 ID 落地（**不信任 prior session 声明**）+ work-log 追加 4 段 schema
+4. **文档同步 spot-check**：Grep 验证版本号 + 任务 ID 落地（**不信任 prior session 声明**）+ 当日 daily 日志追加 4 段收尾 schema
 5. **经验沉淀（sediment）**：Read-before-Edit → Grep-verify-after-Edit → 毕业判据分流
 6. **4-step verify**：file exists / content count / link target / 行数
 7. **反向验证**：Grep spot-check memory 层 + 调用 Phase 1 审查收尾本身
@@ -110,9 +110,9 @@ metadata:
 
 **核心协议**（详情见 [references/03-evolution.md](references/03-evolution.md)）：
 
-1. **快速模式**（默认，任务完成自动）：3 问自检 → 写入 experience-log / quickref / skill-usage-checklist
-2. **全面模式**（周汇总 / 用户要求）：11 维度分析 → retrospective.md → 多件套 sync verify
-3. **知识层升级**：experience → pattern → heuristic → policy（policies 需人工确认）
+1. **快速模式**（默认，任务完成自动）：3 问自检 → 写入当日 daily 日志（经验段 + Skill 缺口清单段）；稳定速查经 `memory` 工具并入 `MEMORY.md` `[项目名]` 条目
+2. **全面模式**（周汇总 / 用户要求）：11 维度分析 → 复盘报告写入当日 daily 日志复盘段 → 5 件套 sync verify
+3. **知识层升级**：experience → pattern → heuristic → policy（pattern/heuristic 层经 `qwenwork_skill_manage` 并入相应 skill；policy 层须人工确认后并入 `MEMORY.md`）
 4. **行动项分流**：P0/P1 立即执行，P2 等确认，P3 只记录
 
 **阶段出口条件**：复利经验入库 + 行动项清单（含待确认项）→ 闭环完成。
@@ -133,33 +133,26 @@ metadata:
 
 > 与「Token 超额降级」区别：Token 降级是主动裁剪（等 user 拍板），本降级是平台能力缺失的强制降级，无需征求许可但必须显式声明。
 
-## memory 路径约定
+## 运行平台：千问办公 QwenWork
 
-本 skill 涉及 memory 操作时，使用占位符路径，按你的环境替换：
+1. 本 skill 运行于**千问办公（QwenWork）**；正文所有路径、工具、检索都按 QwenWork 原生写，不使用外部平台占位符。
+2. 记忆根：`~/.qwenworkcn/awareness/main`（`MEMORY.md` 跨会话长期记忆 / `USER.md` 用户级偏好与铁律 / `memory/YYYY-MM-DD.md` 每日日志）。写入经 `memory` MCP 工具（target=`memory` / `user` / `daily`），检索经 `memory_search` / `memory_get`；`MEMORY.md` 与 `USER.md` **禁止直接 Edit/Write**。
+3. 技能根：`~/.qwenworkcn/skills`；技能增改删用 `qwenwork_skill_manage`（action `create` / `patch` / `edit` / `delete`）。
+4. 可用技能列表由会话 system-reminder 注入；调用某技能用 `Skill` 工具。
+5. 工具映射：终端用 `Bash 工具`（PowerShell 语义可 `powershell.exe -Command "…"`；存在性/软链/行数/体量校验用 `test -e` / `readlink` / `wc -l < <FILE>` / `find -size +50k` / `ls -R`）；子代理用 `Agent 工具`（`subagent_type`：`general-purpose` / `Explore` / `Plan`，可并发 / 可后台）；文件读写 `Read` / `Write` / `Edit`，检索 `Grep` / `Glob`；记忆读写 `memory` / `memory_search` / `memory_get`。
+6. 文件保护：删除一律进系统回收站（禁 `rm` / `del`）；改用户文件前先备份（Git 版本库内项目除外）。
+7. QwenWork 项目不保证为 git 库；一致性校验一律走「治理层清单现场枚举 + Grep spot-check 现测」，不依赖版本库文件清单类校验。
+8. 日期占位符 `<date>` / `<YYYYMMDD>` 表示当日（daily 日志文件名 `memory/<date>.md`）；跨项目区分用条目内 `[项目名]` 前缀，不派生项目目录名。
 
-- `<memory_root>` = agent 的 memory 根目录（如 TRAE `.trae-cn/memory`、Claude Code 的 projects 目录，或项目内 `.agent-memory`）
-- `<project-slug>` = 当前 workspace 对应的 memory 项目目录名（执行时按当前 cwd 映射）
-- `<date>` = 当日日期目录（`YYYYMMDD`）
+**记忆落点速查（正文各步骤引用）**
 
-**文件结构约定**：
-
-```
-<memory_root>/
-├── user_profile.md                          # 用户级偏好与铁律（跨项目）
-├── knowledge/
-│   ├── patterns/                            # 经验升级：pattern 层
-│   ├── heuristics/                          # 经验升级：heuristic 层
-│   └── policies/                            # 经验升级：policy 层（需人工确认）
-└── projects/<project-slug>/
-    ├── project_memory.md                    # 项目级规则
-    ├── experience-log.md                    # 经验记录权威源
-    ├── experience-quickref.md               # 速查表
-    ├── skill-usage-checklist.md             # Skill 使用检查清单
-    └── <date>/
-        ├── work-log.md                      # 收尾 work-log（4 段 schema）
-        ├── topics.md                        # 近期 topic
-        └── retrospective.md                 # 全面复盘报告
-```
+| 沉淀内容 | QwenWork 落点 | 写入方式 |
+|:---|:---|:---|
+| 用户级偏好与铁律 | `USER.md` | `memory` target=`user` |
+| 项目级规则 / 长期经验 / 稳定速查 | `MEMORY.md`（条目带 `[项目名]` 前缀） | `memory` target=`memory` |
+| 收尾 4 段日志 / 近期 topic / 当日经验记录 / 复盘报告 / Skill 缺口清单 | 当日 daily 日志 `memory/<YYYYMMDD>.md`（条目带 `[项目名]` 前缀） | `memory` target=`daily` |
+| 稳定套路（pattern / heuristic 层） | `~/.qwenworkcn/skills/<name>/SKILL.md` | `qwenwork_skill_manage` 建/补 |
+| policy 层规则 | `MEMORY.md` | **须人工确认后**并入 |
 
 ## Verdict 字眼合规自检
 - 全文 Grep 禁词：`完成|PASS|12/12|闭环|OK|没问题|looks good`
@@ -176,7 +169,7 @@ metadata:
 - 三阶段按序执行，被裁剪阶段显式标注 `not-applicable`
 - Phase 1 必出收敛曲线 + ≥3 residual risk
 - Phase 2 必出收尾报告 + 验证铁律 spot-check（项目层 + memory 层）
-- Phase 3 必出 sediment / 复盘报告 + 多件套 sync verify
+- Phase 3 必出 sediment / 复盘报告 + 5 件套 sync verify
 - 4 层过拟合防护必走（P2 残留 N / 边际收益 gate / 过拟合警报 / 严重度门槛）
 
 ## Reference

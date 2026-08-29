@@ -11,6 +11,22 @@
 ---
 
 
+## W531 skills 部署全查 + 三真源降级保护（2026-08-29·v2.3.130）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/sync_skills.py | W531 | v2.3.130 重写·judge_direction 版本/ mtime 方向判定 + --sync 降级拦截 + --take-global 反向回写 + read_norm LF 归一化比对 + --self-test 4 负样本 |
+| skills/agent-session-loop/SKILL.md | W531 | v2.3.130 回写·全局真源 v1.2.0-qwenwork-native（QwenWork 原生工具/路径口径） |
+| skills/agent-session-loop/references/02-wrap-up.md | W531 | v2.3.130 回写·收尾步骤表改 QwenWork 工具口径 |
+| skills/agent-session-loop/references/03-evolution.md | W531 | v2.3.130 回写·双模式产出改当日 daily 日志段 |
+| skills/deep-review-loop/SKILL.md | W531 | v2.3.130 回写·全局真源 v1.4.0-qwenwork-native（去 TRAE/Claude 蒸馏溯源段） |
+| skills/mem-wrap-up/SKILL.md | W531 | v2.3.130 回写·全局真源 v1.3.0-qwenwork-native（6 项目层文件 → 读登记治理文档清单） |
+| skills/self-evolution/SKILL.md | W531 | v2.3.130 回写·全局真源 v1.2.0-qwenwork-native（知识层升级并入 skill/MEMORY.md 口径） |
+| skills/self-evolution/references/experience-capture-format.md | W531 | v2.3.130 回写·去 FT/ST 与 hooks 项目私有表述 |
+| AGENTS.md | W531 | v2.3.130 修改·§4.2 第 16 门禁配套 sync_skills 描述补降级保护 + 版本脚注 |
+| .github/workflows/README.md | W531 | v2.3.130 修改·旁文档同步（头部版本行 + 里程碑段补 W531·第 23 门禁） |
+| CHANGELOG.md / 交接文档.md | W531 | v2.3.130 修改·W531 四件套条目 + 交接同步（含「接续 W 编号」过期行 W463→W531 校正） |
+
 ## W530 决策闸门工程落地（W465' 重排）（2026-08-26·v2.3.129）
 
 | 文件 | W | 说明 |

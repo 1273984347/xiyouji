@@ -2,26 +2,38 @@
 name: deep-review-loop
 description: Enforces 5-round deep review loop with anti-overfit protection. Invoke when writing plans/specs/skills, after batch fixes (>10), when user says "DRL/复检/收敛", or when suspecting false convergence.
 metadata:
-  author: distilled-from-claude-code-vault
-  version: "1.3.0-trae-distilled-with-evidence-based-residual"
-  source: C:\Users\12739\.claude\skills\deep-review-loop\SKILL.md (v2 TDD-bulletproofed, 313 lines)
-  bridge_note: "5 轮 (skill 流水线) vs 4 段 schema (work-log append 格式) 桥接 — 步骤 4 work-log 追加按 4 段 schema 形式"
+  author: distilled-from-external-vault
+  version: "1.4.0-qwenwork-native"
+  source: 外部 vault 版原文件（来源路径已脱敏；v2 TDD-bulletproofed）
+  bridge_note: "5 轮 (skill 流水线) vs 4 段 schema (daily 日志追加格式) 桥接 — 收尾步骤的 daily 日志追加按 4 段 schema 形式"
 ---
 
-# Deep Review Loop（TRAE 蒸馏版）
+# Deep Review Loop（外部 vault 蒸馏版 · QwenWork）
 
-> 本 skill 由 Claude Code vault 版蒸馏而来：剥离 H-rules / sister skills / vault 路径 / bash 脚本，保留 5 轮闭环 + 5 步独立 verify + 防跳轮三件套（pressure scenarios / rationalization table / red flags），并嫁接 user_profile 中 2026-07-12 训诫的「DRL 真循环铁律」+ 2026-07-16「4 层过拟合防护」。本文件为**全局版**，所有项目通用。
+> 本 skill 由外部记忆库/skill 库（vault）版蒸馏而来：剥离原脚本 hook / sister skills 依赖 / 原目录结构 / 原规则术语引用，保留 5 轮闭环 + 5 步独立 verify + 防跳轮三件套（pressure scenarios / rationalization table / red flags），并嫁接 `USER.md` 中 2026-07-12 训诫的「DRL 真循环铁律」+ 2026-07-16「4 层过拟合防护」。本文件为**全局版**，所有项目通用。
 
 **Announce at start:** "I'm using the deep-review-loop skill to run the 5-round review loop."
 
-## 平台适配（仓库版 2026-08-19 治理）
+## 运行平台：千问办公 QwenWork
 
-本文件源自 TRAE 全局 skill（见文末 Reference），复制入本仓库后按以下约定使用：
+1. 本 skill 运行于**千问办公（QwenWork）**；正文所有路径、工具、检索都按 QwenWork 原生写，不使用外部平台占位符。
+2. 记忆根：`~/.qwenworkcn/awareness/main`（`MEMORY.md` 跨会话长期记忆 / `USER.md` 用户级偏好与铁律 / `memory/YYYY-MM-DD.md` 每日日志）。写入经 `memory` MCP 工具（target=`memory` / `user` / `daily`），检索经 `memory_search` / `memory_get`；`MEMORY.md` 与 `USER.md` **禁止直接 Edit/Write**。
+3. 技能根：`~/.qwenworkcn/skills`；技能增改删用 `qwenwork_skill_manage`（action `create` / `patch` / `edit` / `delete`）。
+4. 可用技能列表由会话 system-reminder 注入；调用某技能用 `Skill` 工具。
+5. 工具映射：终端用 `Bash 工具`（PowerShell 语义可 `powershell.exe -Command "…"`；存在性/软链/行数/体量校验用 `test -e` / `readlink` / `wc -l < <FILE>` / `find -size +50k` / `ls -R`）；子代理用 `Agent 工具`（`subagent_type`：`general-purpose` / `Explore` / `Plan`，可并发 / 可后台）；文件读写 `Read` / `Write` / `Edit`，检索 `Grep` / `Glob`；记忆读写 `memory` / `memory_search` / `memory_get`。
+6. 文件保护：删除一律进系统回收站（禁 `rm` / `del`）；改用户文件前先备份（Git 版本库内项目除外）。
+7. QwenWork 项目不保证为 git 库；一致性校验一律走「治理层清单现场枚举 + Grep spot-check 现测」，不依赖版本库文件清单类校验。
+8. 三 skill 闭环的整合入口是 [agent-session-loop](../agent-session-loop/SKILL.md)；独立调用本 skill 时按原文 5 轮协议执行。
 
-- `<memory_root>`：agent 记忆根目录占位符。TRAE 为 `c:\Users\12739\.trae-cn\memory`；其他平台按自身约定（如 Codex/CodeBuddy 项目内 `.agent-memory/`），与本仓库 [agent-session-loop](../agent-session-loop/SKILL.md) 的 memory 路径约定一致。
-- 工具映射：`Task subagent`（TRAE）→ 平台子代理机制（Codex = collaboration spawn_agent；CodeBuddy = Task）；`RunCommand` → 终端命令（PowerShell / `shell_command`）；`Grep/Read` → 文件检索与读取工具（`rg` / `Get-Content`）。
-- 本仓库三 skill 闭环的整合入口是 `skills/agent-session-loop/SKILL.md`；独立调用本 skill 时按原文 5 轮协议执行。
-- 文末 Reference 中的 `C:\Users\12739\...` 仅为来源溯源路径，不是运行路径。
+**记忆落点速查（正文各步骤引用）**
+
+| 沉淀内容 | QwenWork 落点 | 写入方式 |
+|:---|:---|:---|
+| 用户级偏好与铁律 | `USER.md` | `memory` target=`user` |
+| 项目级规则 / 长期经验 / 稳定速查 | `MEMORY.md`（条目带 `[项目名]` 前缀） | `memory` target=`memory` |
+| 收尾 4 段日志 / 近期 topic / 当日经验记录 / 复盘报告 / Skill 缺口清单 | 当日 daily 日志 `memory/<YYYYMMDD>.md`（条目带 `[项目名]` 前缀） | `memory` target=`daily` |
+| 稳定套路（pattern / heuristic 层） | `~/.qwenworkcn/skills/<name>/SKILL.md` | `qwenwork_skill_manage` 建/补 |
+| policy 层规则 | `MEMORY.md` | **须人工确认后**并入 |
 
 ## 子代理不可用降级（2026-08-24 新增）
 
@@ -68,9 +80,9 @@ metadata:
 | Round | 动作 | 执行者 | 状态 |
 |:------|:-----|:-------|:----:|
 | **R0** | 表面检查：file size + verdict 字眼 grep + 路径验证 | inline me | 必先跑 |
-| **R1a** | 3 独立 verifier 交叉验证（factual / completeness / reusability） | 3 Task subagents parallel | 必派 |
-| **R1b** | 对抗性 subagent 审查（default refuted=true + class-level scope + 不同工具/视角 + 严重度门槛） | 1 Task subagent | 必派 |
-| **R2** | 独立审计 + self-revision：修 R1 findings inline（audit 由 subagent，**NOT inline**）+ 边际收益 gate | 1 Task subagent | 必派 |
+| **R1a** | 3 独立 verifier 交叉验证（factual / completeness / reusability） | 3 个 Agent 工具子代理并发 | 必派 |
+| **R1b** | 对抗性 subagent 审查（default refuted=true + class-level scope + 不同工具/视角 + 严重度门槛） | 1 个 Agent 工具子代理 | 必派 |
+| **R2** | 独立审计 + self-revision：修 R1 findings inline（audit 由 subagent，**NOT inline**）+ 边际收益 gate | 1 个 Agent 工具子代理 | 必派 |
 | **R3** | 残余风险确认 + N residual risk（≥3）列表 + 收敛曲线 + 过拟合警报 | inline me | 必走 |
 
 | Verify 步 | 名称 | 兜底 |
@@ -78,7 +90,7 @@ metadata:
 | **V1** | file exists + content count + link target + 行数 | 文件缺失治本 |
 | **V2** | 5 步 grep 范式（size + 残留 + 期望 hits + 期望 0 hits + 实证） | 主代理主动防御 |
 | **V3** | verdict 字眼 grep（完成 / PASS / 12/12 / 闭环 / OK / 没问题 / looks good） | self-claim 反模式治本 |
-| **V4** | memory sync（user_profile / project_memory / topics 是否需更新） | 数字 bump 一致性 |
+| **V4** | memory sync（USER.md / MEMORY.md / 当日 daily 日志是否需更新） | 数字 bump 一致性 |
 | **V5** | 3-case dry-run（best / worst / null） | 一次性工具/scaffold 防崩 |
 
 ---
@@ -140,33 +152,33 @@ metadata:
 - [ ] R2 inline（违反 R2 强制「1 subagent NOT inline」。Self-audit ≠ 独立审计）
 ---
 
-## 5. 5 轮详细（R0 → R3，TRAE 工具映射）
+## 5. 5 轮详细（R0 → R3，工具映射见文首「运行平台：千问办公 QwenWork」）
 
 ### R0 surface check（inline me，必先跑）
 
 **3 件套**（用 Grep 工具 + Read 工具，非 bash）：
 
-1. **file size sanity**：Read 工具打开目标文件，观察行数（目标 ≤500 行 / 5000 tokens）；或 RunCommand (Get-Content FILE).Count（PowerShell）。
+1. **file size sanity**：Read 工具打开目标文件，观察行数（目标 ≤500 行 / 5000 tokens）；或 Bash 工具 `wc -l < <FILE>`。
 2. **residual verdict words**：Grep 工具，pattern 完成或PASS或12/12或闭环或OK或没问题或looks good，output_mode=count，逐词或合并 regex。
 3. **expected hits 必现**：Grep 工具，pattern R0或R1a或R1b或R2或R3或residual 等，确认结构词命中。
 4. **项目阶段判定（P2-9 修复，过拟合防护层 1 前置）**：判定当前项目阶段 → N_max 取值。规则：
-   - 比赛级（如 TRAE AI 创造力大赛 / 黑客松 / demo 提交）→ N_max=0
+   - 比赛级（黑客松 / demo 提交 / 竞赛交付）→ N_max=0
    - 生产（已上线 / 有真实用户）→ N_max=3
    - 原型（早期探索 / MVP / 内部测试）→ N_max=10
-   - 判定依据优先级：user 显式声明 > project_memory 项目类型字段 > cwd 路径推断（e.g. Vannevar/demo/ → 比赛级）> 默认 N_max=3
+   - 判定依据优先级：user 显式声明 > `MEMORY.md` `[项目名]` 条目的项目类型字段 > cwd 路径推断（如 <项目>/demo/ → 比赛级）> 默认 N_max=3
    - 判定结果写入收敛曲线 Round 1 行
 
-### R1a 3 independent verifiers（3 Task subagents parallel，必派）
+### R1a 3 independent verifiers（3 个 Agent 工具子代理并发，必派）
 
-**3-lens split**（缺一不算 R1a）。用 Task 工具，subagent_type: general_purpose_task，单消息内发 3 个 parallel 调用。每个 subagent prompt 必含 3 段：Timeout 心态 + Fail-fast + 明确 scope。
+**3-lens split**（缺一不算 R1a）。用 Agent 工具（`subagent_type=general-purpose`），单消息内发 3 个并发调用。每个 subagent prompt 必含 3 段：Timeout 心态 + Fail-fast + 明确 scope。
 
 **R1a 硬性要求（v1.2.0 新增，防 verifier 失误）**：
 
-> **背景**：2026-07-18 DRL 重新审查发现 R1a-B verifier 误判 cache/ 目录缺失（实际存在 3 文件），根因是 verifier 未实际执行 LS 工具调用，基于二手转述判断。本硬性要求治本。
+> **背景**：2026-07-18 DRL 重新审查发现 R1a-B verifier 误判 cache/ 目录缺失（实际存在 3 文件），根因是 verifier 未实际执行目录列举调用，基于二手转述判断。本硬性要求治本。
 
-- **verifier 必须附工具调用证据**：每个 finding 必须附至少 1 个工具调用输出（LS / Read / Grep / Glob 之一）作为 Trace evidence。**禁止**基于二手转述（如 R0 报告、其他 verifier 输出）下结论。
-- **目录存在性声明**：verifier 声明"目录存在"或"目录缺失"时，**必须**附 LS 工具调用输出（不允许仅基于 Glob 或推断）。
-- **文件存在性声明**：verifier 声明"文件存在"或"文件缺失"时，**必须**附 Read 或 LS 工具调用输出。
+- **verifier 必须附工具调用证据**：每个 finding 必须附至少 1 个工具调用输出（Bash `ls` / Read / Grep / Glob 之一）作为 Trace evidence。**禁止**基于二手转述（如 R0 报告、其他 verifier 输出）下结论。
+- **目录存在性声明**：verifier 声明"目录存在"或"目录缺失"时，**必须**附目录列举输出（Bash `ls -R`；不允许仅基于 Glob 或推断）。
+- **文件存在性声明**：verifier 声明"文件存在"或"文件缺失"时，**必须**附 Read 或目录列举输出。
 - **路径声明**：verifier 声明"file:line"时，**必须**附 Read 工具调用输出确认该行内容。
 - **0 finding 也要附证据**：即使 verifier 0 finding，也必须附至少 1 个工具调用输出证明"已实际执行验证"（非走过场）。
 - **Subagent prompt 必含此硬性要求**：派 R1a subagent 时，prompt 中必须包含上述 5 条硬性要求的明确声明（不可仅引用本 skill 文档，subagent 无访问权限）。
@@ -178,7 +190,7 @@ metadata:
 | **B — Completeness** | 覆盖度 | 「Verify 文段是否覆盖声明的 scope（e.g. plan body 段是否 5 步/9 sub-steps 齐）。0 missing = 0 finding。只做研究。」 |
 | **C — Reusability** | 陌生人 cold-start 能力 | 「Verify 陌生人能否凭此文 cold-start 执行。路径全名 vs 缩写、命令完整 vs 缺参数、错误处理 vs happy-path-only。0 ambiguous = 0 finding。只做研究。」 |
 
-### R1b adversarial subagent（1 Task subagent，必派，default refuted=true + 严重度门槛）
+### R1b adversarial subagent（1 个 Agent 工具子代理，必派，default refuted=true + 严重度门槛）
 
 **Subagent Prompt 必须包含 5 段**（含过拟合防护层 4 严重度门槛）：
 
@@ -216,15 +228,15 @@ Output: refuted=true/false + findings list (含严重度分级) + class-level en
 | 7 | **工具证据缺失**（R1a 有 7 条硬性要求，R1b 没有） | R1b finding 无 trace evidence | R1b finding 必须附工具调用证据（同 R1a 7 条硬性要求） |
 
 **R1b 硬性要求（v1.3.1 新增·与 R1a 硬性要求对齐）**：
-- R1b finding 必须附至少 1 个工具调用输出（LS / Read / Grep / Glob 之一）作为 Trace evidence
+- R1b finding 必须附至少 1 个工具调用输出（Bash `ls` / Read / Grep / Glob 之一）作为 Trace evidence
 - R1b 0 finding 也必须附至少 1 个工具调用输出证明"已实际执行验证"
 - R1b class-level enumeration 必须列出 ALL affected files 清单（不允许"已查 N 文件"无清单）
 - R1b 严重度降级必须附依据（不允许仅声明"P2"无理由）
 - 违反处置：R2 审计时发现 R1b 违反硬性要求 → 该 finding 视为"未验证"，不计入收敛判定，要求重新派 R1b
 
-### R2 independent audit（1 Task subagent，**NOT inline**，强制 + 边际收益 gate）
+### R2 independent audit（1 个 Agent 工具子代理，**NOT inline**，强制 + 边际收益 gate）
 
-> ⚠️ **R2 强制**：必须派独立 Task subagent，**不允许 inline self-audit**。Self-audit ≠ 独立审计。
+> ⚠️ **R2 强制**：必须派独立 Agent 工具子代理，**不允许 inline self-audit**。Self-audit ≠ 独立审计。
 
 **Subagent Prompt 模板**（含过拟合防护层 2 边际收益 gate）：
 
@@ -235,7 +247,7 @@ Tasks:
 1. Cross-check R1a 3 verifier reports vs actual findings (claim vs evidence file:line)。
 2. Cross-check R1b adversarial report vs actual fix/skill content。
 3. If R1a vs R1b contradictions exist, decide priority (which finding wins, why)。
-4. Audit memory sync: 本轮改动是否需更新 user_profile.md / project_memory.md / topics.md (如适用)。
+4. Audit memory sync: 本轮改动是否需更新 USER.md / MEMORY.md / 当日 daily 日志 (如适用)。
 5. Audit verdict 字眼 grep 结果 (must be 0)。
 6. 边际收益 gate（过拟合防护层 2）: 对每个 finding 评估:
    修复成本 = token 消耗 + 回归风险 + 时间
@@ -325,14 +337,14 @@ Output: priority decision + audit findings + memory sync status + verdict grep s
 | **警报 A 与边际收益 gate 关系** | 边际收益 gate 采纳的残留导致的 P1/P2 持平不触发警报 A（例外条款）；未采纳的修复无效导致的持平仍触发警报 A |
 ---
 
-## 6. 5 步独立 verify（V1 → V5，TRAE 工具映射）
+## 6. 5 步独立 verify（V1 → V5，工具映射见文首「运行平台：千问办公 QwenWork」）
 
 ### V1: file exists + content count + link target + 行数
 
 ```
 # 用 Grep 工具 output_mode=count 验 content hit 数
 # 用 Read 工具验文件存在 + 行数
-# 软链用 RunCommand PowerShell: Get-Item <LINK> | Select-Object Target
+# 软链用 Bash 工具: readlink <LINK>
 ```
 
 ### V2: 5 步 grep 范式（主代理主动防御）
@@ -351,12 +363,12 @@ Output: priority decision + audit findings + memory sync status + verdict grep s
 
 ### V4: memory sync 4 维度
 
-| # | 维度 | Sync target | Check method |
+| # | 维度 | QwenWork 落点 | Check method |
 |:-:|:-----|:------------|:-------------|
-| 1 | user 级偏好 | `<memory_root>/user_profile.md` | Grep 工具搜相关条目 |
-| 2 | 项目级规则 | `<memory_root>/projects/<project-slug>/project_memory.md` | Grep 工具搜相关条目 |
-| 3 | 近期 topic | `<memory_root>/projects/<project-slug>/<date>/topics.md` | Read 工具看最新 |
-| 4 | 复利经验 | 项目内 retrospective 文档（如存在） | Grep 工具搜编号 |
+| 1 | user 级偏好 | `USER.md`（`memory` target=user） | `memory_search` 搜相关条目 |
+| 2 | 项目级规则 | `MEMORY.md`（`memory` target=memory，`[项目名]` 前缀） | `memory_search` 搜相关条目 |
+| 3 | 近期 topic | 当日 `memory/YYYY-MM-DD.md`（`memory` target=daily） | `memory_get` 看最新 |
+| 4 | 复利经验 | `MEMORY.md` / 对应 skill | `memory_search` 搜编号 |
 
 ### V5: 3-case dry-run（best / worst / null）
 
@@ -367,7 +379,7 @@ Output: priority decision + audit findings + memory sync status + verdict grep s
 # null-case: 空输入/不存在的 file
 ```
 
-用 RunCommand（PowerShell）或 Task subagent 执行，视工具类型而定。
+用 Bash 工具或 Agent 工具执行，视操作类型而定。
 
 ---
 
@@ -382,14 +394,14 @@ Output: priority decision + audit findings + memory sync status + verdict grep s
 
 ---
 
-## Related（TRAE 路径，非 vault wiki-link）
+## Related（QwenWork 原生路径）
 - **mem-wrap-up skill（仓库版）**：`skills/mem-wrap-up/SKILL.md`（DRL 收敛后触发，Step 7 反向验证收尾）
 - **self-evolution skill（仓库版）**：`skills/self-evolution/SKILL.md`（DRL residual risk 喂给 dim 5，复利经验喂给 dim 1）
 - **agent-session-loop（仓库版）**：`skills/agent-session-loop/SKILL.md`（三阶段整合流水线入口）
-- **user_profile**：`<memory_root>/user_profile.md`（§ DRL 真循环铁律 + § 三 skill 闭环，铁律常驻 system prompt）
-- **project_memory**：`<memory_root>/projects/<project-slug>/project_memory.md`（项目级规则，V4 memory sync 维度 2）
+- **USER.md**（`~/.qwenworkcn/awareness/main/USER.md`，`memory` target=`user`）：DRL 真循环铁律 + 三 skill 闭环条目常驻，检索用 `memory_search`
+- **MEMORY.md**（`memory` target=`memory`，条目带 `[项目名]` 前缀）：项目级规则，V4 memory sync 维度 2
 
-> <project-slug> 为当前 workspace 对应的 memory 项目目录名（e.g. -d-1、-d-1-Vannevar、-d-1-Anthropic）。执行时按当前 cwd 映射。
+> QwenWork 记忆不分项目子目录：跨项目区分一律用条目内 `[项目名]` 前缀（如 `[GateKeeper]` / `[xiyouji]`），不派生项目子目录名。
 
 ## 8. Self-Disclosure
 - 0 verdict 字眼（完成 / PASS / 12/12 / 闭环 / OK / 没问题 / looks good）
@@ -403,8 +415,6 @@ Output: priority decision + audit findings + memory sync status + verdict grep s
 - **4 层过拟合防护必走**（P2 残留 N + 边际收益 gate + 过拟合警报 + 严重度门槛）
 
 ## 9. Reference
-- **源 skill（原机溯源，非运行路径）**：C:\Users\12739\.claude\skills\deep-review-loop\SKILL.md（v2 TDD-bulletproofed, 313 lines）
-- **源 reference（原机溯源）**：C:\Users\12739\.claude\skills\deep-review-loop\references\h-rule-3-piece-template.md
-- **user 训诫（原机溯源）**：c:\Users\12739\.trae-cn\memory\user_profile.md § DRL 真循环铁律（2026-07-12）+ § 三 skill 闭环（2026-07-16）
-- **蒸馏原则**：剥离 H-rules / sister skills / vault 路径 / bash；保留 5 轮 + 5 verify + 防跳轮三件套；嫁接真循环铁律 + 4 层过拟合防护
-- **位置**：本仓库 `skills/deep-review-loop/SKILL.md`（仓库版，平台适配见文首）；TRAE 全局另有副本
+- **外部 vault 蒸馏来源（路径已脱敏）**：由外部记忆库/skill 库蒸馏而来，蒸馏原则见下条；原 user 训诫（DRL 真循环铁律 2026-07-12、三 skill 闭环 2026-07-16）现已常驻 `USER.md`。
+- **蒸馏原则**：剥离原脚本 hook / sister skills 依赖 / 原目录结构 / 原规则术语引用；保留 5 轮 + 5 verify + 防跳轮三件套；嫁接真循环铁律 + 4 层过拟合防护
+- **位置**：本 skill 的 master 副本位于 `~/.qwenworkcn/skills/deep-review-loop/SKILL.md`；仓库归档副本位于 `D:\1\QwenWork\skills\deep-review-loop\`
