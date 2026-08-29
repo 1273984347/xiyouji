@@ -4,13 +4,24 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W532），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W533），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.132（2026-08-29）：W533 skills 归属策略显式化 + 坑④入 playbook — MIRROR_SKILLS 归属落地 + version-bump v1.2.0
+
+> **来源**：W531 技能部署全查暴露「四个通用会话流程 skill 双仓库并存、真源不明」；W531/W532 连续两批复现同一 bump 缺陷。本批把归属从"靠版本号/mtime 偶然判对"升级为**显式策略**，并把坑写进可被其他 Agent 读到的仓库内 playbook（W517 铁律）。
+> - **归属判定（先定这个）**：`agent-session-loop / deep-review-loop / mem-wrap-up / self-evolution` 的唯一 master = 全局安装版 `~/.qwenworkcn/skills/`（千问办公实际加载与演进处）。仓库副本必须保留——作品仓库 `D:\1\QwenWork\skills` 无版本控制，若把真源判给它、xiyouji 侧删除这四个，则全仓无任何 git tracked 载体，违反「共享机制须入库」铁律。故 xiyouji/`skills/` 定位为**受控只读镜像**，方向单向：全局 → 仓库。
+> - **执行（工具强制）**：`scripts/sync_skills.py` 新增 `MIRROR_SKILLS` 常量 + `sync_blocked()`——镜像技能无条件禁 `--sync`，且 `--force` 亦不可越权（普通技能仍可 --force）；`--check` 对镜像技能输出 `[镜像技能·仅 --take-global]`；`--self-test` 增至 5 个负样本（镜像技能即便仓库版本号更高也判禁同步，且不误伤 xiyouji-*）。
+> - **执行（真源声明）**：四份 master `SKILL.md` 正文首段注入「真源声明（W533）」，`--take-global` 回写镜像，三处副本（全局/本仓库/作品仓库）逐字节一致。
+> - **执行（坑④入 playbook）**：`skills/xiyouji-version-bump` v1.1.0 → **v1.2.0**——第 6 步由三子项扩为四子项、陷阱清单与完成验证清单各加一条：bump 对 index/cross-time-danmaku/tag-cloud 三简单页脚是原地替换链首 v/W 数字，**里程碑描述滞留上一批文案**且**历史条目被静默顶掉**（W531 立坑、W532 复现，verify_delivery 不校验此三处），正解 = 手改链首描述 + prepend 上一批条目 + Grep 复核。第 8 步补第 0 项说明同步范围受归属约束。
+> - **文件**：scripts/sync_skills.py、skills/{agent-session-loop, deep-review-loop, mem-wrap-up, self-evolution}/SKILL.md（镜像回写）、skills/xiyouji-version-bump/SKILL.md、skills/README.md、AGENTS.md（§4.2 第 16 门禁 + §4.5 + 版本脚注）+ 六文档 + site/dukou-engine.html + .github/workflows/README.md；全局安装版四份 SKILL.md + xiyouji-version-bump（部署产物，不入库）。
+> - **验证**：ruff 0 错误；`--self-test` **5/5**；真实数据 `--check` 判四技能 `[镜像技能·仅 --take-global]`；`--sync` 仅推 version-bump 1 文件、四镜像被拦；**真数据反证**：脏写仓库镜像后 `--sync --force` 仍 0 文件更新、master md5 前后不变（e4ac7006…）；回写后 `--check` 无漂移、`check_skills_index.py` 五检查通过；verify_delivery 核心全绿。
+> - **状态**：已落地（待提交）。
 
 ### v2.3.131（2026-08-29）：W532 交接文档最后更新滚动链裁剪回契约上限 — 9 批堆叠裁回契约上限 3 批
 

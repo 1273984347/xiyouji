@@ -10,6 +10,9 @@ metadata:
 
 # self-evolution Skill（外部 vault 蒸馏版 · QwenWork）
 
+> **真源声明（W533）**：本技能的唯一 master 是全局安装版 `~/.qwenworkcn/skills/self-evolution/`（千问办公实际加载与演进处）；任何仓库内副本（如 `D:\1\xiyouji\skills\self-evolution\`）均为**受控只读镜像**，仅可由 `python scripts/sync_skills.py --take-global self-evolution` 回写，禁止反向 `--sync` 覆盖 master。
+
+
 > 本 skill 由外部记忆库/skill 库（vault）版蒸馏而来：剥离原脚本 hook（bash/Node/Python 脚本）/ 原目录结构 / 原规则术语引用 / 原经验捕获依赖 / 模板独立文件（11 维度模板已内联），保留双模式骨架 + 11 维度完整内容 + 5 件套 sync verify + 知识层升级 + 行动项分流 + verdict 禁词合规。
 
 **Announce at start:** "I'm using the self-evolution skill to run retro (quick / full mode)."
