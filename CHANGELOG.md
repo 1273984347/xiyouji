@@ -18,7 +18,8 @@
 > - **执行（修复）**：`交接文档.md`「接续 W 编号」条改引用式表述——接续编号以本文件「一、当前进度」段现役值为准、新批编号按 CHANGELOG 顶部「W### 编号规则」取现役段 max+1，不再内嵌具体 W 号。
 > - **执行（误报更正）**：本批接手时曾报「dukou-engine 页脚链首滞后 W529」，复核为**误判**——取链首应用 `head` 而非 `tail`（链尾为最旧条目）；实测链首 `v2.3.132 W533` 与现役一致，页脚除本批新增条目外零改动。教训已并入本段防复现。
 > - **执行（复查范围）**：六份治理文档（交接文档/README/STRUCTURE/项目说明/文档规范/AGENTS）全量扫 `当前 W###` / `下一 W###` 字面量，除本处外 0 命中，无第二处存量漂移。
-> - **文件**：交接文档.md（1 行）、site/dukou-engine.html（页脚链首新增 1 条）、六文档 + 旁文档版本行。
+> - **执行（经验上移·W516 机制）**：本批新踩 3 个坑写回 `skills/xiyouji-version-bump`（v1.2.0→v1.3.0，已 `sync_skills.py --sync` 双轨一致）——⑤ `git commit -F` 在 Git Bash 下须传 Windows 路径（传 `/c/...` 报 could not read log file）；⑥ 取页脚链首误用 `tail` 会造出假漂移（本段「误报更正」条）；⑦ 改交接文档超长行时 old_string 只截前缀会静默吞掉上一批描述，Edit 后须整行复读核对。
+> - **文件**：交接文档.md（1 行）、site/dukou-engine.html（页脚链首新增 1 条）、六文档 + 旁文档版本行、skills/xiyouji-version-bump/SKILL.md。
 > - **验证**：`grep -n "当前 W[0-9]{3}\|下一 W[0-9]{3}"` 六份治理文档 0 命中；页脚链首 Grep 复核 `v2.3.133 W534`；verify_delivery 全绿（34 项断言）。
 > - **状态**：已落地（本批随 W534 提交并 push origin/main）。
 

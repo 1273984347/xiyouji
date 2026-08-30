@@ -1,7 +1,7 @@
 ---
 name: xiyouji-version-bump
 description: 西游记项目（D:\1\xiyouji）版本 bump 与六文档同步标准流程 playbook。步骤：预检记录规模描述 → 改 dukou-engine 长链页脚 → 写 CHANGELOG/交接文档/file-index → 跑 bump_version.py → 手动补回规模描述（bump_version.py --desc 会吞掉版本行的"共 N 篇"/"A4 209 篇"——值随批次校正、以 README 版本行与 verify 输出为准，当前 N=615，不补回则 verify_delivery 报 FAIL）→ verify_delivery 全绿 → 收尾三同步（AGENTS 脚注/路线图状态段/方案档 §10 回填，W494 固化）→ git add -u → commit/push。当用户要求"版本 bump"、"升版本"、"W 批次同步"、"六文档同步"、"发新版本"、"version bump"、"W### 提交"时触发。
-version: 1.2.0
+version: 1.3.0
 ---
 
 # 西游记项目版本 Bump 与六文档同步
@@ -50,6 +50,14 @@ cd /d/1/xiyouji && grep -h "当前版本" README.md STRUCTURE.md docs/00-导读/
 ```
 
 把三段完整版本行抄下来（至少记下规模描述这段）。这串数字会在第 5 步被 `bump_version.py --desc` 吞掉，必须靠这里记下的原文在第 6 步原样补回。**没做预检就不准跑 bump。**
+
+**预检附加项（W534 立）**：用 grep 取页脚链首判断「页脚是否滞后」时，必须用 `head` 取**首个**匹配，不能用 `tail`——
+
+```bash
+cd /d/1/xiyouji && grep -o 'v2\.3\.[0-9]* W[0-9]\{3\}' site/dukou-engine.html | head -2   # 链首 = 现役
+```
+
+长链页脚是「新在前·旧在后」，`tail` 取到的是**最旧**条目。W534 实证：误用 `tail -3` 把链尾的 `v2.3.128 W529` 读成当前版本，凭此报出「页脚滞后 4 批」的**假漂移**（实际链首 `v2.3.132 W533` 与现役一致，页脚零滞后）。**报页脚类漂移前先确认取的是链首。**
 
 ### 第 1 步：改 dukou-engine 长链页脚
 
@@ -136,10 +144,14 @@ cd /d/1/xiyouji && git status --short | grep '^??'   # 确认 untracked 未入�
 - **漏收尾三同步（W494 教训）**：只做六文档不查 AGENTS 脚注 / 路线图状态段 / 方案档 §10，会被下批 day-review 抓 P1。第 8 步三同步是强制步骤，不是可选。
 - **git add -u 而非 git add .**：避免把「工具不入库」的 untracked 文件误提交。
 - **Edit 前先 Read**：文件被脚本改动过后，Edit 会报 "File has been modified since read"，需重新 Read 再改。
+- **多行中文 commit message 在 Git Bash 下必须传 Windows 路径（坑⑤，W534 立）**：`git commit -F /c/Users/.../msg.txt` 会报 `fatal: could not read log file`——Git Bash 的 POSIX 路径（`/c/...`）不会自动转换给 Windows 版 git.exe。正解：`git commit -F "C:/Users/12739/AppData/Local/Temp/msg.txt"`（先 Write 临时文件 → 提交 → 删除）。多行中文提交信息一律走临时文件 + `-F`，不走 shell heredoc（E34）。
+- **取页脚链首误用 `tail` 会造出假漂移（W534 实证）**：见第 0 步预检附加项。报「页脚滞后」类结论前必须 `head` 复核链首。
+- **改完交接文档长行后必须整行复读（W534 实证）**：第 3 步改「一、当前进度」标题时，若 old_string 只截取标题前缀而 new_string 未把被截掉的旧版本描述拼回，会**静默吞掉上一批描述**（本次误删「v2.3.132 W533 skills 归属策略显式化」片段，靠事后 python 打印整行复核才捕获）。长行编辑一律：Edit 后立刻打印整行前 260 字符核对。
 
 ## 完成验证清单
 
 - [ ] 第 0 步预检已记录当前规模描述原文
+- [ ] 第 0 步附加项：页脚链首用 `head` 复核（未用 `tail` 误判）
 - [ ] dukou-engine footer 已插入新 v/W
 - [ ] 六文档均已更新且版本一致
 - [ ] 三处版本行规模描述已补回、日期正确

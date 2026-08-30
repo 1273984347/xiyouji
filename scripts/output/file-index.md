@@ -22,6 +22,8 @@
 | README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W534 | v2.3.133 版本行同步（bump）+ 规模描述补回 + STRUCTURE 畸形尾巴重写 + 项目说明第二处版本行核改 |
 | .github/workflows/README.md | W534 | v2.3.133 修改·旁文档同步（第 23 门禁：头部版本行 + 里程碑行上限） |
 | AGENTS.md | W534 | v2.3.133 修改·版本脚注同步 |
+| skills/xiyouji-version-bump/SKILL.md | W534 | v2.3.133 v1.2.0→v1.3.0·第 0 步增「页脚链首用 head 不用 tail」预检附加项 + 陷阱清单收录坑⑤（git commit -F 须 Windows 路径）/坑⑥（tail 误判假漂移）/坑⑦（长行 Edit 吞描述·须整行复读）+ 验证清单同步·sync_skills 双轨一致 |
+| CHANGELOG.md | W534 | v2.3.133 修改·W534 段补「执行（经验上移）」条（三坑写回 playbook）·文件行补 skill 路径 |
 
 ## W533 skills 归属策略显式化 + 坑④入 playbook（2026-08-29·v2.3.132）
 
