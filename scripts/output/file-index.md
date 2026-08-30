@@ -24,6 +24,8 @@
 | AGENTS.md | W534 | v2.3.133 修改·版本脚注同步 |
 | skills/xiyouji-version-bump/SKILL.md | W534 | v2.3.133 v1.2.0→v1.3.0·第 0 步增「页脚链首用 head 不用 tail」预检附加项 + 陷阱清单收录坑⑤（git commit -F 须 Windows 路径）/坑⑥（tail 误判假漂移）/坑⑦（长行 Edit 吞描述·须整行复读）+ 验证清单同步·sync_skills 双轨一致 |
 | CHANGELOG.md | W534 | v2.3.133 修改·W534 段补「执行（经验上移）」条（三坑写回 playbook）·文件行补 skill 路径 |
+| 交接文档.md | W534 | v2.3.133 裁剪·里程碑概要 29 版→5 版（删 W529-W506 共 52 行）+ 「一、当前进度」标题 8509→337 字符（保留 3 批 + CHANGELOG 指针）·_w534_trim.py 逐批断言 132 个 W 号均有 CHANGELOG 段后 --apply |
+| CHANGELOG.md | W534 | v2.3.133 修改·W534 段补「执行（治理膨胀裁剪）」条 |
 
 ## W533 skills 归属策略显式化 + 坑④入 playbook（2026-08-29·v2.3.132）
 

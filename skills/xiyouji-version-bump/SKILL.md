@@ -1,7 +1,7 @@
 ---
 name: xiyouji-version-bump
 description: 西游记项目（D:\1\xiyouji）版本 bump 与六文档同步标准流程 playbook。步骤：预检记录规模描述 → 改 dukou-engine 长链页脚 → 写 CHANGELOG/交接文档/file-index → 跑 bump_version.py → 手动补回规模描述（bump_version.py --desc 会吞掉版本行的"共 N 篇"/"A4 209 篇"——值随批次校正、以 README 版本行与 verify 输出为准，当前 N=615，不补回则 verify_delivery 报 FAIL）→ verify_delivery 全绿 → 收尾三同步（AGENTS 脚注/路线图状态段/方案档 §10 回填，W494 固化）→ git add -u → commit/push。当用户要求"版本 bump"、"升版本"、"W 批次同步"、"六文档同步"、"发新版本"、"version bump"、"W### 提交"时触发。
-version: 1.3.0
+version: 1.4.0
 ---
 
 # 西游记项目版本 Bump 与六文档同步
@@ -146,6 +146,7 @@ cd /d/1/xiyouji && git status --short | grep '^??'   # 确认 untracked 未入�
 - **Edit 前先 Read**：文件被脚本改动过后，Edit 会报 "File has been modified since read"，需重新 Read 再改。
 - **多行中文 commit message 在 Git Bash 下必须传 Windows 路径（坑⑤，W534 立）**：`git commit -F /c/Users/.../msg.txt` 会报 `fatal: could not read log file`——Git Bash 的 POSIX 路径（`/c/...`）不会自动转换给 Windows 版 git.exe。正解：`git commit -F "C:/Users/12739/AppData/Local/Temp/msg.txt"`（先 Write 临时文件 → 提交 → 删除）。多行中文提交信息一律走临时文件 + `-F`，不走 shell heredoc（E34）。
 - **取页脚链首误用 `tail` 会造出假漂移（W534 实证）**：见第 0 步预检附加项。报「页脚滞后」类结论前必须 `head` 复核链首。
+- **裁剪交接文档膨胀前必须逐批断言 + 归一化比对（坑⑧，W534 立）**：里程碑概要与「一、当前进度」标题会随批次无限堆叠（W534 时标题已达 8509 字符 / 概要 29 版）。裁剪属删除历史，**必须先脚本化断言每个将删 W### 在 CHANGELOG 三件套（现役 / CHANGELOG-ARCHIVE.md / docs/archive/CHANGELOG-ARCHIVE-tier2.md）有对应版本段**，断言全过再 `--apply`（dry-run 先行）。两个实证陷阱：① 标题条目锚点必须用 `v2\.3\.\d+ W(\d{3})` 按条目切分——用裸 `W\d{3}` 会被描述正文内嵌的 W 号污染（111 个真实条目误判为 132 个）；② W 号比对前必须归一化（里程碑侧捕获带 `W` 前缀、标题侧只有数字），否则会造出「断言全过 / 全不过」的假结果。末块行范围会延伸到段尾空行，回退掉尾部空行以保留「列表 → 空行 → 注记」的 Markdown 衔接。
 - **改完交接文档长行后必须整行复读（W534 实证）**：第 3 步改「一、当前进度」标题时，若 old_string 只截取标题前缀而 new_string 未把被截掉的旧版本描述拼回，会**静默吞掉上一批描述**（本次误删「v2.3.132 W533 skills 归属策略显式化」片段，靠事后 python 打印整行复核才捕获）。长行编辑一律：Edit 后立刻打印整行前 260 字符核对。
 
 ## 完成验证清单
