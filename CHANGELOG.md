@@ -4,13 +4,23 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W533），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W534），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.133（2026-08-30）：W534 治理文档递增数字字面量修复 — 交接文档「接续 W 编号」改引用式（W520 规则外存量 1 处）
+
+> **来源**：W520 立「递增数字禁字面量」规则时，只治愈了 skills 与 README/STRUCTURE/项目说明三类载体，交接文档「九、使用说明」第 2 条例行说明未纳入扫描范围，写死「当前 W531·下一 W532」——滞后 2 批且随每批发版持续漂移，属该规则的存量盲区。
+> - **执行（修复）**：`交接文档.md`「接续 W 编号」条改引用式表述——接续编号以本文件「一、当前进度」段现役值为准、新批编号按 CHANGELOG 顶部「W### 编号规则」取现役段 max+1，不再内嵌具体 W 号。
+> - **执行（误报更正）**：本批接手时曾报「dukou-engine 页脚链首滞后 W529」，复核为**误判**——取链首应用 `head` 而非 `tail`（链尾为最旧条目）；实测链首 `v2.3.132 W533` 与现役一致，页脚除本批新增条目外零改动。教训已并入本段防复现。
+> - **执行（复查范围）**：六份治理文档（交接文档/README/STRUCTURE/项目说明/文档规范/AGENTS）全量扫 `当前 W###` / `下一 W###` 字面量，除本处外 0 命中，无第二处存量漂移。
+> - **文件**：交接文档.md（1 行）、site/dukou-engine.html（页脚链首新增 1 条）、六文档 + 旁文档版本行。
+> - **验证**：`grep -n "当前 W[0-9]{3}\|下一 W[0-9]{3}"` 六份治理文档 0 命中；页脚链首 Grep 复核 `v2.3.133 W534`；verify_delivery 全绿（34 项断言）。
+> - **状态**：已落地（本批随 W534 提交并 push origin/main）。
 
 ### v2.3.132（2026-08-29）：W533 skills 归属策略显式化 + 坑④入 playbook — MIRROR_SKILLS 归属落地 + version-bump v1.2.0
 
