@@ -4,5 +4,5 @@ jieba==0.42.1
 Pillow==12.3.0
 
 # dev dependencies
-ruff==0.15.15
+ruff==0.16.5
 pytest==9.0.3
