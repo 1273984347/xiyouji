@@ -4,13 +4,26 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W534），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W535），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.134（2026-08-31）：W535 决策闸门取数自动化 — fetch_gate_stats.py 新建（GoatCounter API v0·自测 14/14）
+
+> **来源**：决策闸门（W465 定阈值·W530 落 judge_gate.py）唯一未闭环环节是「UV 数据需人工登后台抄表」——交接文档「四、待办事项」唯一未勾选项。取数不自动化，判定就无法随时复算，战略决策卡在手工步骤上。
+> - **执行（脚本新建）**：`scripts/fetch_gate_stats.py`（stdlib 零依赖）——调 `GET /api/v0/stats/total?start&end` 拉近 7 / 30 日独立访客，输出 `judge_gate.py` 可直接消费的 `--uv7/--uv30`；支持 `--json`（机器可读）、`--fixture`（离线演练）、`--self-test`（离线负样本）。
+> - **执行（口径核准·E1 不凭记忆）**：接口形态取自官方 OpenAPI `https://www.goatcounter.com/api.json`（当批实拉核对），非记忆推演——**页面访客 UV = `total` − `total_events`**（`total` 含事件访客），时间窗为含今天的闭区间（近 7 日 `[today-6, today]`·近 30 日 `[today-29, today]`），鉴权 `Authorization: Bearer`。
+> - **执行（验证）**：`--self-test` **14/14 通过**（时间窗 ×2 + 正样本 ×2 + 负样本 ×10：缺 total / 缺 total_events / 非整数 / 事件数倒挂 / API error / 响应非对象 / 缺令牌 / 401 / 403 / 500 不误报鉴权）；`--fixture` 离线端到端演练 UV 计算正确（148−12=136·412−31=381）；真实路径无令牌时 exit 2 并给出可操作提示（去后台生成密钥 → 写入 .env）。
+> - **执行（文档）**：`docs/10-方法论沉淀/读者数据复盘.md` 新增「第零、UV 取数方式」段（一次性令牌准备 + 取数/判定两条命令 + 口径要点 + 自测说明），首轮数据表前两项来源改指向脚本。
+> - **执行（经验上移）**：version-bump playbook v1.4.0→v1.5.0——坑⑤ 适用面从 `git commit -F` 扩到「Git Bash 给 Windows 原生程序（含 Python 脚本路径实参）传路径一律用 `C:/` 形态」（本批 `--fixture /c/...` 报 FileNotFoundError 实证）。
+> - **遗留（需用户操作）**：API 令牌只能在 GoatCounter 后台生成（右上角用户名 → API），生成后写入 `.env` 的 `GOATCOUNTER_API_TOKEN`（.env 已 gitignore）。有令牌即可一键取数 + 判定；无令牌脚本拒绝运行并提示路径。
+> - **文件**：scripts/fetch_gate_stats.py（新建）、docs/10-方法论沉淀/读者数据复盘.md、skills/xiyouji-version-bump/SKILL.md、六文档 + 旁文档版本行。
+> - **验证**：`py -3 scripts/fetch_gate_stats.py --self-test`（14/14）；verify_delivery 全绿。
+> - **状态**：已落地（本批随 W535 提交并 push origin/main）。
 
 ### v2.3.133（2026-08-30）：W534 治理文档递增数字字面量修复 — 交接文档「接续 W 编号」改引用式（W520 规则外存量 1 处）
 

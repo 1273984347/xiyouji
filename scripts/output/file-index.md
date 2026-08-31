@@ -11,6 +11,22 @@
 ---
 
 
+## W535 决策闸门取数自动化（2026-08-31·v2.3.134）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/fetch_gate_stats.py | W535 | 新建·W535 核心——零第三方依赖拉取 GoatCounter API v0 近 7/30 日页面 UV（页面 UV=total−total_events）·`--json` 结构化输出·`--fixture F7 F30` 离线端到端·`--self-test` 负样本 14/14（缺字段/类型错/events>total/HTTP 401·403·404·超时/空窗）·token 从 .env 读不落盘 |
+| docs/10-方法论沉淀/读者数据复盘.md | W535 | 修改·新增「第零、UV 取数方式」段（令牌获取路径 + 两条取数命令 + 口径注记：闭区间含当日/事件去重/自测 14 项/末 3 项仍需后台截图）·表内前两行取数来源由「后台统计页」改为 fetch_gate_stats.py |
+| site/dukou-engine.html | W535 | 修改·页脚长链链首 prepend W535 条目（该页脚为 bump_version 读取当前 v/W 的真值源·第 0 步预检须用 head 读链首·坑⑥） |
+| CHANGELOG.md | W535 | 新增·W535 版段（脚本化插入 _w535_insert.py：锚点唯一/版段 order/换行一致性/编号规则行 5 项断言全绿·51 版段）+ 编号规则行上限改 v2.3.134 W535 |
+| 交接文档.md | W535 | 修改·顶部/文末「最后更新」行 prepend W535（顶部链裁至契约上限 3 批）·阻塞段当前 HEAD 句 + 「一、当前进度」标题 + 里程碑概要新增块 + W530 遗留待办句改写为「已部分解除（W535）」 |
+| 交接文档.md | W535 | 修改·里程碑概要滚动淘汰 W530 块（维持契约上限 5 版）·注记范围标签同步（W531 及更早） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W535 | 修改·版本行同步（bump v2.3.134 W535）+ 坑②/坑③ 收尾（规模描述补回·STRUCTURE 畸形尾巴重写·项目说明第二处版本行核改） |
+| .github/workflows/README.md | W535 | 修改·旁文档同步（第 23 门禁：头部版本行 + 里程碑行 W450-W### 上限） |
+| AGENTS.md | W535 | 修改·版本脚注同步至 v2.3.134 W535 |
+| skills/xiyouji-version-bump/SKILL.md | W535 | 修改·v1.3.0→v1.5.0·坑⑤适用范围由「git commit -F」扩为「Windows 原生程序的一切路径实参」（含 Python --fixture·实证 FileNotFoundError 反斜杠吞路径）+ 坑⑧（裁剪须逐批断言 + 条目锚点正则 v2.3.N W(NNN) 防描述内 W 号误匹配 + W 号集合归一化 + 末块尾随空行回滚）·sync_skills 双轨一致 |
+| scripts/output/file-index.md | W535 | 新增·W535 段（本段） |
+
 ## W534 治理文档递增数字字面量修复（2026-08-30·v2.3.133）
 
 | 文件 | W | 说明 |
