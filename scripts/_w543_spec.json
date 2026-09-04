@@ -1,0 +1,24 @@
+{
+ "batch": "W543",
+ "version": "v2.3.142",
+ "date": "2026-09-05",
+ "title": "W543 agent-web 迁移阶段 1 — Express 5 / uuid 14 / dotenv 17 / better-sqlite3 13 落地",
+ "desc": "迁移阶段 1（Express 5 + uuid 14 + dotenv 17 + bs3 13）",
+ "head_entry": "2026-09-05（v2.3.142 W543 迁移阶段 1：Express 5 / uuid 14 / dotenv 17 / better-sqlite3 13 落地·运行冒烟通过）",
+ "head_sentence": "迁移阶段 1——低风险四包落地 + 运行冒烟通过",
+ "changelog_body": "\n\n> **来源**：用户指令按优先级执行五项——第 4 项 agent-web 迁移阶段 1（评估单 §三：dotenv/uuid/Express 5/@types/node 四个低风险包）。\n> - **执行**：express 4.22→5.2、uuid 11→14.0.2（ESM-only·服务端 tsx 与前端 Vite 均兼容）、dotenv 16→17、@types/node 20→26、better-sqlite3 12→13（本地 Node 24 ABI 预编译——评估「未验证项」转已验证）。\n> - **运行冒烟**：tsx server/index.ts 限期启动——API 服务器 127.0.0.1:3000 启动成功（Express 5 运行实录）。\n> - **验证**：npm audit 0 vulnerabilities；npm run build 29.41s；tsc -b 通过；verify_delivery 全绿。\n> - **文件**：xiyouji-agent-web/package.json、package-lock.json、docs/10-方法论沉淀/agent-web技术栈迁移评估.md、六文档 + 旁文档版本行、site 四页脚。\n> - **状态**：已落地（本批随 W543 提交并 push origin/main）。剩余阶段：TS 7 / React 19 / Tailwind v4 / Vite 8（评估单 §三 阶段 2-5）。",
+ "milestone_block": "- **v2.3.142 W543 agent-web 迁移阶段 1（2026-09-05）**：\n  - 低风险四包落地：Express 5.2（破坏面先验为零·运行冒烟通过）/ uuid 14.0.2 / dotenv 17 / @types/node 26\n  - better-sqlite3 12→13：本地 Node 24 ABI 预编译可用——评估「未验证项」出清\n  - 级联由 batch_cascade.py 执行（第二次 dogfood·含尾链能力）",
+ "agents_note": "2026-09-05（v2.3.142 W543）agent-web 迁移阶段 1：Express 5 / uuid 14 / dotenv 17 / @types/node 26 / better-sqlite3 13 落地（运行冒烟通过·评估未验证项出清），仅版本脚注同步",
+ "file_index_rows": [
+  "| xiyouji-agent-web/package.json | W543 | 修改·迁移阶段 1：express ^5 / uuid ^14 / dotenv ^17 / @types/node 26 / better-sqlite3 13（评估未验证项转已验证） |",
+  "| xiyouji-agent-web/package-lock.json | W543 | 修改·阶段 1 锁文件更新 |",
+  "| docs/10-方法论沉淀/agent-web技术栈迁移评估.md | W543 | 修改·better-sqlite3 13 未验证项标注已验证（Node 24 预编译·运行冒烟通过） |",
+  "| CHANGELOG.md | W543 | 新增·W543 版段 + 编号规则上限 W001-W543 |",
+  "| 交接文档.md | W543 | 修改·头尾「最后更新」prepend W543 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + HEAD 句/标题更新（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W543 | 修改·版本行同步 v2.3.142（2026-09-05·batch_cascade.py 执行） |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W543 | 修改·四页脚链首 prepend W543（batch_cascade.py 执行） |",
+  "| .github/workflows/README.md | W543 | 修改·旁文档同步（batch_cascade.py 执行） |",
+  "| AGENTS.md | W543 | 修改·版本脚注追加 W543 条目 |",
+  "| scripts/output/file-index.md | W543 | 新增·W543 段（本段·batch_cascade.py 执行） |"
+ ]
+}
