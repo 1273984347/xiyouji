@@ -1,0 +1,25 @@
+{
+ "batch": "W544",
+ "version": "v2.3.143",
+ "date": "2026-09-05",
+ "title": "W544 agent-web 迁移阶段 2 — TypeScript 7 + @types/react 19 类型基线归零",
+ "desc": "迁移阶段 2（TS 7 + types 19）",
+ "head_entry": "2026-09-05（v2.3.143 W544 迁移阶段 2：TypeScript 7 + @types/react 19·类型基线归零）",
+ "head_sentence": "迁移阶段 2——TS 7 类型基线归零（TS2882/TS2322 修复）",
+ "changelog_body": "\n\n> **来源**：评估单 §三 阶段 2（类型层）——TypeScript 7 + @types/react 19 先行建立 0 error 类型基线（React 19 本体在阶段 5）。\n> - **执行**：typescript ^5.3.2→^7.0.2、@types/react ^18.2.43→^19.2.18、@types/react-dom→^19；TS2882（CSS side-effect import）以新建 src/vite-env.d.ts（vite/client 引用）修复；TS2322 以 ChatMessages messagesEndRef prop 放宽为 RefObject<HTMLDivElement | null> 修复（React 19 useRef 语义）。\n> - **验证**：tsc -b 0 error（类型基线归零）；npm run build 26.67s；npm audit --omit=dev 0；verify_delivery 全绿。\n> - **文件**：xiyouji-agent-web/package.json、package-lock.json、src/vite-env.d.ts（新建）、src/components/ChatMessages.tsx、六文档 + 旁文档版本行、site 四页脚。\n> - **状态**：已落地（本批随 W544 提交并 push origin/main）。",
+ "milestone_block": "- **v2.3.143 W544 agent-web 迁移阶段 2（2026-09-05）**：\n  - TypeScript 5.3→7.0.2（Go 原生编译器）+ @types/react(-dom) 19——评估「未验证项 TS7 选项兼容性」实证通过（allowImportingTsExtensions/verbatimModuleSyntax/bundler 均兼容）\n  - 类型基线归零：TS2882 以 vite-env.d.ts 修复、TS2322 以 ref prop 放宽修复；build 26.67s",
+ "agents_note": "2026-09-05（v2.3.143 W544）agent-web 迁移阶段 2：TypeScript 7 + @types/react 19 类型基线归零（TS2882/TS2322 修复），仅版本脚注同步",
+ "file_index_rows": [
+  "| xiyouji-agent-web/package.json | W544 | 修改·迁移阶段 2：typescript ^7.0.2 / @types/react ^19.2.18 / @types/react-dom ^19 |",
+  "| xiyouji-agent-web/package-lock.json | W544 | 修改·阶段 2 锁文件更新 |",
+  "| xiyouji-agent-web/src/vite-env.d.ts | W544 | 新建·vite/client 类型引用（TS2882 CSS side-effect import 修复） |",
+  "| xiyouji-agent-web/src/components/ChatMessages.tsx | W544 | 修改·messagesEndRef prop 放宽为 RefObject<HTMLDivElement | null>（TS2322·React 19 useRef 语义） |",
+  "| CHANGELOG.md | W544 | 新增·W544 版段 + 编号规则上限 W001-W544 |",
+  "| 交接文档.md | W544 | 修改·头尾「最后更新」prepend W544 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + HEAD 句/标题更新（batch_cascade.py 执行） |",
+  "| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W544 | 修改·版本行同步 v2.3.143（2026-09-05·batch_cascade.py 执行） |",
+  "| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W544 | 修改·四页脚链首 prepend W544（batch_cascade.py 执行） |",
+  "| .github/workflows/README.md | W544 | 修改·旁文档同步（batch_cascade.py 执行） |",
+  "| AGENTS.md | W544 | 修改·版本脚注追加 W544 条目 |",
+  "| scripts/output/file-index.md | W544 | 新增·W544 段（本段·batch_cascade.py 执行） |"
+ ]
+}

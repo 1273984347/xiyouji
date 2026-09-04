@@ -19,8 +19,13 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+
 def load(path):
-    s = open(os.path.join(ROOT, path), encoding="utf-8", newline="").read()
+    _root = os.path.realpath(ROOT)
+    _real = os.path.realpath(os.path.join(ROOT, path))
+    if not (_real == _root or _real.startswith(_root + os.sep)):
+        raise SystemExit("path escapes project root: %s" % path)
+    s = open(_real, encoding="utf-8", newline="").read()
     return s, ("\r\n" if "\r\n" in s else "\n")
 
 
@@ -176,10 +181,13 @@ def main():
         print(f"[DRY-RUN] 9 个面断言与改写全部通过：{batch}（规则 {new_rule}）。加 --apply 落盘。")
         return 0
     for path, content, nl in pend:
+        _real = os.path.realpath(os.path.join(ROOT, path))
+        if not (_real == _root or _real.startswith(_root + os.sep)):
+            raise SystemExit("path escapes project root: %s" % path)
         if nl is None:
-            open(os.path.join(ROOT, path), "w", encoding="utf-8", newline="").write(content)
+            open(_real, "w", encoding="utf-8", newline="").write(content)
         else:
-            open(os.path.join(ROOT, path), "w", encoding="utf-8", newline="").write(content)
+            open(_real, "w", encoding="utf-8", newline=nl).write(content)
     print(f"[APPLY] 级联完成：{batch} / {new_rule}，共 {len(pend)} 个文件")
     return 0
 

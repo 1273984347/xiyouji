@@ -11,6 +11,22 @@
 ---
 
 
+## W544 W544 agent-web 迁移阶段 2（2026-09-05·v2.3.143）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| xiyouji-agent-web/package.json | W544 | 修改·迁移阶段 2：typescript ^7.0.2 / @types/react ^19.2.18 / @types/react-dom ^19 |
+| xiyouji-agent-web/package-lock.json | W544 | 修改·阶段 2 锁文件更新 |
+| xiyouji-agent-web/src/vite-env.d.ts | W544 | 新建·vite/client 类型引用（TS2882 CSS side-effect import 修复） |
+| xiyouji-agent-web/src/components/ChatMessages.tsx | W544 | 修改·messagesEndRef prop 放宽为 RefObject<HTMLDivElement | null>（TS2322·React 19 useRef 语义） |
+| CHANGELOG.md | W544 | 新增·W544 版段 + 编号规则上限 W001-W544 |
+| 交接文档.md | W544 | 修改·头尾「最后更新」prepend W544 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + HEAD 句/标题更新（batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W544 | 修改·版本行同步 v2.3.143（2026-09-05·batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W544 | 修改·四页脚链首 prepend W544（batch_cascade.py 执行） |
+| .github/workflows/README.md | W544 | 修改·旁文档同步（batch_cascade.py 执行） |
+| AGENTS.md | W544 | 修改·版本脚注追加 W544 条目 |
+| scripts/output/file-index.md | W544 | 新增·W544 段（本段·batch_cascade.py 执行） |
+
 ## W543 W543 agent-web 迁移阶段 1（2026-09-05·v2.3.142）
 
 | 文件 | W | 说明 |

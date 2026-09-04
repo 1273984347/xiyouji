@@ -9,7 +9,7 @@ import { InlinePermissionCard } from './InlinePermissionCard';
 interface ChatMessagesProps {
   messages: Message[];
   models: Model[];
-  messagesEndRef: React.RefObject<HTMLDivElement>;
+  messagesEndRef: React.RefObject<HTMLDivElement | null>;
   // 内联权限确认相关
   permissionRequest?: PermissionRequest | null;
   onPermissionAllow?: () => void;
