@@ -17,6 +17,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_root = os.path.realpath(ROOT)
 
 
 
