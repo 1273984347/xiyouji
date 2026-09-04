@@ -4,13 +4,25 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W536），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W537），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.136（2026-09-05）：W537 全仓对抗性审查修复 — W536 收尾欠账清零 + Mimosa 提交闸门 77 高危清零 + 存量缺陷处置
+
+> **来源**：用户指令「全部问题进行处理」——针对 2026-09-04 DRL 5 轮全仓对抗性审查（R1a×3 独立核验 + R1b 对抗 + R2 独立审计，16 finding 全部 verified）的修复批次。
+> - **执行（W536 收尾欠账，随 a460b88 落地）**：旁文档 workflows/README 同步、README 计数声明恢复、file-index 空壳段修复 + 全文件登记、三页脚描述串号修正、.gitignore 补 .mimosa/、AGENTS 脚注、8 个 _w5* 临时脚本清理。
+> - **执行（Mimosa 提交闸门 77 高危清零·两轮）**：首轮 71 + 二轮跨文件覆盖补暴露 6——Python 写路径统一「realpath + 项目根守卫」（54 文件，check_glossary 用同款 _guarded_write_open）、JS 内嵌数据解析去动态执行（check_data_drift 移植宽容字面量规范化解析器：字符串归一/去注释/Unicode 无引号键/尾逗号，可比 44 页 71 项 vs 原 47/74，2 个 IIFE 内嵌页转跳过）、batch_screenshots 切片子进程 argv 字面量化 + 输出目录钳制、render_check 同款钳制、lint_links 换 http.client + 协议白名单 + 私网 IP 阻断、fetch_gate_stats https + 域白名单 + ipaddress 私网阻断（自测 14/14 复跑）、archive 两 w286 脚本 URL 域白名单、test_graph 端口字面量化 + 路径白名单、agent-web server 工作目录 realpath 内联钳制 + pendingPermissions 无原型对象化（防原型污染）+ query 改名 sdkQuery。仅余 security_scan.py:12 低危 1 个（文档字符串行，不拦提交）。
+> - **执行（存量缺陷 7 项）**：Makefile audit 引用已归档脚本改指 archive 路径（W447 起潜伏 89 批）；Makefile test 目标 fail-open 改 fail-closed（pytest 失败不再被吞）；AGENTS §4.4 权限默认值与代码校正（bypassPermissions → default + env 开关）；AGENTS §4.3 sync 指引补 MIRROR_SKILLS 例外交叉引用；AGENTS §5.2 两命令对齐 CI 同轨（check_js_syntax py 版 --all、lint_links --dir .）；启动 Prompt py -3 规则条件化（消除自相矛盾）；mcp-server xiyouji_docs_index 诚实化（docstring 假校验纠正 + content_checked 字段 + message 指向权威链路 docs_index.py --check）。
+> - **执行（P3 与规则沉淀）**：server sysprompt 去硬编码版本号（v2.3.26 滞后 109 批）；check-login 脱敏收敛（apiKey/authToken 不再回显前 8 位）；.eslintrc.json 死配置删除；AGENTS §4.3 新增 W537 三新规（验证栏以实跑为准 / 版本行整行替换含描述 / 文件清单新建文件须 add）；drift-audit v1.3.0 增「AGENTS 关键事实断言抽查」维度（sync 双轨一致）。
+> - **执行（W536 段更正）**：W536 段「71 个高危」「58 个工具脚本」系首轮数字，提交闸门第二轮补暴露 6 处后实际处置 77 处 / 60 余文件——该段已入库禁改，以本更正为准。
+> - **文件**：Makefile、mcp-server/xiyouji_mcp.py、新Agent启动Prompt.md、AGENTS.md、skills/xiyouji-drift-audit/SKILL.md、.eslintrc.json（删除）、xiyouji-agent-web/server/index.ts、六文档 + 旁文档版本行、site 四页脚。
+> - **验证**：verify_delivery 全绿；pytest 302 passed；ruff check scripts/ 0 error；eslint 0 error / 4 warning；fetch_gate_stats --self-test 14/14；tsc -b 通过；Mimosa 全量复扫 0 高危（1 low）。
+> - **状态**：已落地（本批随 W537 提交并 push origin/main）。
 
 ### v2.3.135（2026-09-02）：W536 依赖积压治理 — 6 个 dependabot PR 清零 + ESLint flat config 迁移 + agent-web 主版本分层
 

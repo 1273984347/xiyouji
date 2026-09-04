@@ -284,6 +284,13 @@ async function capture(browser, pageInfo, viewportName, viewports, outDirs) {
 
 async function main() {
   const config = parseArgs(process.argv);
+  // W537 安全加固：页面名白名单——禁止相对越界与绝对路径
+  for (const _op of (config.onlyPages || []).concat(config.extraPages || [])) {
+    if (_op.includes('..') || path.isAbsolute(_op)) {
+      console.error('page name must be relative without ..');
+      process.exit(2);
+    }
+  }
   // W536 安全加固：输出目录严格钳制在 scripts/output 之下
   const _outRoot = path.resolve(ROOT, 'scripts', 'output');
   if (path.resolve(config.outputDir) !== _outRoot && !path.resolve(config.outputDir).startsWith(_outRoot + path.sep)) {
