@@ -1,9 +1,18 @@
+import os
 #!/usr/bin/env python3
 """P1 聚类推广(第二批)：narratology-13d-network + six-senses-narratology-network。
 按节点分组字段(通用 parent||id||category||type)做社区聚类锚点，复用试点范式。
 narratology 的 collide 是 sim 末力(以;结尾) -> 注入后补; ；six-senses 的 collide 后接 .alphaDecay -> 不补;。
 """
 import io, sys, re
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
@@ -38,6 +47,6 @@ for f, ends_semicolon in FILES.items():
     suffix = ";" if ends_semicolon else ""
     new = collide_line + "\n" + CLUSTER_BODY + suffix
     s = s[:m.start()] + new + s[m.end():]
-    open(f, 'w', encoding='utf-8').write(s)
+    _w536_guard_open(f, 'w', encoding='utf-8').write(s)
     print(f"✓ 注入聚类: {f} (末力补;={ends_semicolon})")
 print("完成。")

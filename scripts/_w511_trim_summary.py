@@ -1,7 +1,16 @@
+import os
 #!/usr/bin/env python3
 """W511 交接文档概要瘦身：保留最近 5 版（v2.3.105 W506 - v2.3.109 W510），删除 W505 及更早。
 归档指针写入交接文档-archive.md 尾部（避免历史概要丢失）。"""
 import re
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 lines = open("交接文档.md", encoding="utf-8").read().splitlines()
 
@@ -52,7 +61,7 @@ with open("交接文档-archive.md", "a", encoding="utf-8", newline="\n") as f:
 
 # 写回交接文档
 new_content = keep + lines[idx_sec2:]
-open("交接文档.md", "w", encoding="utf-8", newline="\n").write("\n".join(new_content) + "\n")
+_w536_guard_open("交接文档.md", "w", encoding="utf-8", newline="\n").write("\n".join(new_content) + "\n")
 
 print("概要保留行数:", len(keep) - len(lines[:idx_keep_end + 1]) + (idx_keep_end - idx_title), "| 归档行数:", len(archived))
 print("概要段现为 L", idx_title + 1, "-", idx_title + len(keep) - len(lines[:idx_keep_end + 1]) + (idx_keep_end - idx_title))

@@ -21,6 +21,14 @@ import csv
 import json
 import os
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 _HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(_HERE, "..", ".."))
 NODES_CSV = os.path.join(ROOT, "scripts", "output", "yuanqi_nodes.csv")
@@ -44,7 +52,7 @@ def build():
         "node_types": sorted({n["node_type"] for n in nodes}),
         "relations": sorted({e["relation"] for e in edges}),
     }
-    with open(GRAPH_JSON, "w", encoding="utf-8") as f:
+    with _w536_guard_open(GRAPH_JSON, "w", encoding="utf-8") as f:
         json.dump(snap, f, ensure_ascii=False, indent=2)
 
     # Cypher
@@ -64,7 +72,7 @@ def build():
     lines.append("CREATE INDEX yuanqi_id IF NOT EXISTS FOR (n:Yuanqi) ON (n.id);")
     lines.append("CREATE INDEX yuanqi_type IF NOT EXISTS FOR (n:Yuanqi) ON (n.nodeType);")
     cypher = "\n".join(lines)
-    with open(CYPHER, "w", encoding="utf-8") as f:
+    with _w536_guard_open(CYPHER, "w", encoding="utf-8") as f:
         f.write(cypher)
 
     return len(nodes), len(edges), GRAPH_JSON, CYPHER

@@ -1,7 +1,16 @@
+import os
 # -*- coding: utf-8 -*-
 # Add a white-halo style to every chart SVG <text> across site/data/*.html.
 # Idempotent: skips files already patched (marker id="audit-halo").
 import os, re, sys
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 DATA = os.path.join(os.path.dirname(__file__), '..', 'site', 'data')
 MARK = 'audit-halo'
@@ -34,7 +43,7 @@ for f in files:
     else:
         s = STYLE + s
     try:
-        open(p, 'w', encoding='utf-8').write(s)
+        _w536_guard_open(p, 'w', encoding='utf-8').write(s)
         done += 1
     except Exception as e:
         print('WRITE ERR', f, e); err += 1

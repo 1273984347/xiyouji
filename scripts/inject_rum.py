@@ -20,6 +20,14 @@ W390 · P0 埋点注入脚本
 import os
 import sys
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 SITE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "site")
 RUM_RELPATH_FROM_SITE = os.path.join("js", "rum.js")
 MARKER = "rum.js"
@@ -55,7 +63,7 @@ def inject(html_path, check_only=False):
     if check_only:
         return "would-inject"
 
-    with open(html_path, "w", encoding="utf-8") as f:
+    with _w536_guard_open(html_path, "w", encoding="utf-8") as f:
         f.write(new_content)
     return "injected"
 

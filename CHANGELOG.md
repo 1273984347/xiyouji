@@ -4,13 +4,28 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W535），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W536），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.135（2026-09-02）：W536 依赖积压治理 — 6 个 dependabot PR 清零 + ESLint flat config 迁移 + agent-web 主版本分层
+
+> **来源**：dependabot 积压 6 个 PR（最老 3 周），其中 #9 / #11 为 CI 红灯。此前一直无人处置，红灯 PR 每周重跑 CI 持续产生噪声，也堵住了供应链更新通道。
+> - **执行（绿灯合并 · 3 个）**：#12 ruff 0.15.15→0.16.5、#3 playwright 1.61.1→1.62.1、#4 eslint 9.39.5→10.9.1 合并入 main，三者 CI 检查项 19-20 项全绿。
+> - **执行（冲突 PR 手工落地 · 1 个）**：#1 pytest 9.0.3→9.1.1 与 #12 改动 `scripts/requirements.txt` 同一 hunk，GitHub 报 `Cannot update PR branch due to conflicts`（dependabot 分支不可更新）。改为在 main 上直接落地 `pytest==9.1.1`，本地 302 passed 与 9.0.3 基线完全一致，随后关闭 PR 并注明已手工并入。
+> - **执行（ESLint 实证修复）**：本地实测确认 `.eslintrc.json` **自 ESLint 9 起已完全失效**（9.39.5 报 `couldn't find an eslint.config.(js|mjs|cjs) file` 并 exit 2），此前未暴露是因为 `scripts/node_modules` 长期未装 eslint，`make lint` 走 `shutil.which('eslint')` 分支判定「未安装」而 skip。新建 `eslint.config.mjs`（flat config·零新增依赖·手写全局白名单替代 `globals` 包）：首轮扫出 225 问题（164 error）→ 按「第三方自托管库 / 一次性诊断脚本 `scripts/_*.js` / Playwright 浏览器二进制 `scripts/.pw-browsers/`」三层忽略 + Service Worker 独立全局组 + 补 4 处标准 API 全局（`PerformanceObserver`/`AbortSignal`/`XMLSerializer` 等）→ **0 error / 31 warning**；ESLint 9.39.5 与 10.9.1 双版本结果完全一致（同一配置跨大版本兼容已验证）。
+> - **执行（红灯 PR 转专项 · 2 个）**：#9 跨 TypeScript 5→7 / Vite 5→8 / Tailwind 3→4 / @types/node 20→26，#11 跨 React 18→19 / Express 4→5 / uuid 11→14 / better-sqlite3 12→13，属框架级范式变更——CI 暴露的 TS2882（CSS side-effect import）与 TS2322（`useRef` 返回 `RefObject<T | null>`）只是最先撞上的门槛。两 PR 关闭并转专项批次。
+> - **执行（dependabot 分层策略）**：`.github/dependabot.yml` 的 agent-web 段新增 `ignore: semver-major`（`dependency-name: "*"`），注释写明原因、解除条件与安全告警的人工判断要求。minor/patch 更新不受影响，主版本不再进入每周自动更新队列。
+> - **执行（迁移评估）**：新建 `docs/10-方法论沉淀/agent-web技术栈迁移评估.md`——9 条实证取证 + 分栈破坏点分级表 + 五阶段迁移顺序 + **未验证项显式清单**（TS 7 选项兼容性 / Vite 8 Node 下限 / React 19 × TDesign 运行时 / Tailwind v4 theme 转写 / better-sqlite3 13 ABI）。实证修正了两处先验：Express 5 三大经典破坏点（`'*'` 通配路由、`req.query` getter、`res.send(status)`）在本仓暴露面全为零；uuid 14 的 ESM-only 对本仓无影响（仅前端 3 处、经 Vite 打包）。README 索引登记第 20 条。
+> - **执行（旁文档）**：`screenshot-review.yml` 免审路径白名单补 `eslint.config.mjs`——lint 配置不参与页面渲染，否则新文件落入 `*` 保守分支触发约 11 分钟全量截图。
+> - **执行（收尾补 · 2026-09-05）**：全仓对抗性审查（DRL 5 轮）实测本批首轮收尾未落地——verify_delivery 4 项核心 FAIL（旁文档 workflows/README 停 W535×2 · README 计数声明被删 · file-index W536 空壳段+倒序）+ 2 WARN。本条清零：旁文档同步至 W536；README 版本行恢复「A1-A6 共 615 篇 + A4 209 篇」锚点与正确日期；file-index 空壳段修复 + 本批全文件登记 + v2.3.121 孤儿行清除；三简单页脚「W536 决策闸门取数自动化」描述串号改「依赖积压治理」；.gitignore 补 .mimosa/；交接文档尾链链首前置 W536；AGENTS 版本脚注补 W536；8 个 _w5* 一次性脚本与 ESLint 转储清理；Mimosa 提交闸门实测 71 个高危（历史脚本 eval/动态执行、写路径无钳制、urlopen 无边界）逐类清零——Python 写路径统一 realpath+项目根守卫（54 文件）、JS 内嵌数据解析去动态执行（check_data_drift 移植宽容字面量规范化解析器，可比 44 页/71 项 vs 原 47/74，2 个 IIFE 内嵌页转跳过）、batch_screenshots 切片子进程 argv 字面量化 + 输出目录钳制、lint_links 外链探测换 http.client + 私网 IP 阻断、fetch_gate_stats 端点 https+域白名单（自测 14/14 复跑过）、archive 两脚本 URL 域白名单；仅余 security_scan.py:12 低危 1 个（文档字符串行，不拦提交）。根因：CHANGELOG「验证/状态」栏先于实跑写就（声明先于验证）+ 自制批量文档脚本绕过 bump_version 内建防护——防复现规则入 AGENTS §4.3（W537 批落地）。
+> - **文件**：`eslint.config.mjs`（新建）、`.github/dependabot.yml`、`scripts/requirements.txt`、`docs/10-方法论沉淀/agent-web技术栈迁移评估.md`（新建）、`docs/10-方法论沉淀/README.md`、`.github/workflows/screenshot-review.yml`、六文档 + 旁文档版本行；收尾补另触 `.github/workflows/README.md`、`.gitignore`、AGENTS.md 脚注、三简单页脚描述。
+> - **验证**：`node scripts/node_modules/eslint/bin/eslint.js .` 在 9.39.5 与 10.9.1 下均 0 error / 31 warning；`py -3 -m ruff check scripts/` All checks passed；`py -3 -m pytest -q` 302 passed（pytest 9.1.1，收尾补后复跑同值）；ruff check scripts/ 0 error；eslint 0 error / 4 warning；fetch_gate_stats --self-test 14/14；verify_delivery 全绿；Mimosa 全量复扫 0 高危。
+> - **状态**：已落地（本批随 W536 提交并 push origin/main）。
 
 ### v2.3.134（2026-08-31）：W535 决策闸门取数自动化 — fetch_gate_stats.py 新建（GoatCounter API v0·自测 14/14）
 

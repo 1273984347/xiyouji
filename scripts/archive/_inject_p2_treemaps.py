@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """P2 推广：将 5 个多类饼图页面(6 个饼)改为矩形树图(treemap)。
@@ -6,6 +7,14 @@
 karma-reincarnation 的"饼图"是 10 个独立案例实例(富 per-case tooltip)，不适用树图，已排除。
 """
 import io, sys, re
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
@@ -150,6 +159,6 @@ for f, items in REPL.items():
             continue
         s = ns
         changed.append(name)
-    open(f, 'w', encoding='utf-8').write(s)
+    _w536_guard_open(f, 'w', encoding='utf-8').write(s)
     print(f"✓ {f}: 替换 {changed}")
 print("完成。")

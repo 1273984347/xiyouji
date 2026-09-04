@@ -3,7 +3,7 @@
 // 用法：node _rewrite_stale_json.js
 const fs = require('fs');
 const path = require('path');
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.dirname(__dirname);
 
 function extractEmbedded(html) {
   const start = html.indexOf('const EMBEDDED');
@@ -23,8 +23,7 @@ function extractEmbedded(html) {
     else if (c === '}') { depth--; if (depth === 0) break; }
   }
   const literal = html.slice(braceStart, i + 1);
-  // eslint-disable-next-line no-eval
-  return eval('(' + literal + ')');
+  return JSON.parse(literal.replace(/,\s*([}\]])/g, '$1'));
 }
 
 const JOBS = [
@@ -53,7 +52,9 @@ for (const job of JOBS) {
   const embedded = extractEmbedded(html);
   for (const [key, rel] of Object.entries(job.map)) {
     if (!embedded[key]) { console.log('[SKIP]', job.page, 'EMBEDDED 缺键', key); continue; }
+    if (!rel.startsWith('scripts/output/data/')) { console.log('[SKIP] 路径越界', rel); continue; }
     const out = path.join(ROOT, rel);
+    if (!path.resolve(out).startsWith(ROOT + path.sep)) { console.log('[SKIP] 路径越界', rel); continue; }
     const before = fs.existsSync(out) ? fs.statSync(out).size : -1;
     fs.writeFileSync(out, JSON.stringify(embedded[key], null, 2) + '\n', 'utf-8');
     const after = fs.statSync(out).size;

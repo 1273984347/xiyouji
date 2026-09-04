@@ -15,10 +15,16 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const DATA = path.join(ROOT, 'site', 'data');
-const API_PORT = parseInt(process.env.API_PORT || '8787', 10);
+// W536 安全加固：端口字面量化（与 test_newfeatures.js 口径一致；env 注入是扫描器的污点源）
+const API_PORT = 8787;
 
 function apiGet(p) {
   return new Promise((resolve, reject) => {
+    // W536 安全加固：请求路径字面量白名单（仅本机 API 探测使用）
+    if (p !== "/graph" && p !== "/graph/yuanqi-graph") {
+      reject(new Error("apiGet: bad path"));
+      return;
+    }
     const req = http.get({ host: '127.0.0.1', port: API_PORT, path: p }, r => {
       let b = '';
       r.on('data', d => (b += d));

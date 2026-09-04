@@ -12,6 +12,14 @@ Idempotent: skips if 'drawLinks'/'link-canvas' already present.
 """
 import os
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 DATA = r'D:/1/xiyouji/site/data'
 
 CANVAS_BLOCK = """\
@@ -122,5 +130,5 @@ for name, fn in JOBS:
     if out is None:
         print('SKIP %-34s %s' % (name, status))
         continue
-    open(path, 'w', encoding='utf-8').write(out)
+    _w536_guard_open(path, 'w', encoding='utf-8').write(out)
     print('OK   %-34s %s' % (name, status))

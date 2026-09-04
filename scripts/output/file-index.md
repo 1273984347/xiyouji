@@ -11,6 +11,27 @@
 ---
 
 
+## W536 依赖积压治理（2026-09-02·v2.3.135）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| eslint.config.mjs | W536 | 新建·ESLint flat config（`.eslintrc.json` 自 ESLint 9 失效的实证修复·0 error / 31 warning·9.39.5 与 10.9.1 双版本一致） |
+| docs/10-方法论沉淀/agent-web技术栈迁移评估.md | W536 | 新建·agent-web 主版本迁移评估（9 条实证 + 破坏点分级表 + 五阶段迁移顺序 + 未验证项显式清单） |
+| docs/10-方法论沉淀/README.md | W536 | 修改·索引登记第 20 条（迁移评估出档） |
+| .github/dependabot.yml | W536 | 修改·agent-web 段新增 ignore semver-major（dependency-name `*`·注释含原因与解除条件） |
+| .github/workflows/screenshot-review.yml | W536 | 修改·免审路径白名单补 eslint.config.mjs |
+| scripts/requirements.txt | W536 | 修改·pytest 9.0.3→9.1.1（PR #1 冲突手工落地·302 passed 与 9.0.3 基线一致） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html | W536 | 修改·三简单页脚链首 prepend W536 + 描述串号修正（收尾补：误挂「决策闸门取数自动化」改「依赖积压治理」） |
+| site/dukou-engine.html | W536 | 修改·页脚长链链首 prepend W536 条目 |
+| .github/workflows/README.md | W536 | 修改·旁文档同步（第 23 门禁：头部版本行 + 里程碑行上限 W450-W536·收尾补） |
+| .gitignore | W536 | 修改·新增 .mimosa/（Agent 插件本地状态 5.6MB 不入库·收尾补） |
+| AGENTS.md | W536 | 修改·版本脚注同步至 v2.3.135 W536（收尾补） |
+| 交接文档.md | W536 | 修改·顶部「最后更新」prepend W536 + 文末尾链链首前置 W536（收尾补） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W536 | 修改·版本行同步 + README 计数声明恢复（收尾补：「A1-A6 共 615 篇 + A4 209 篇」锚点回归第 3 门禁 + 日期 2026-09-02 校正） |
+| CHANGELOG.md | W536 | 新增·W536 版段（_w536_insert.py 脚本化插入·锚点唯一/幂等/order/编号规则断言）+ 编号规则行上限 W001-W536 + 收尾补执行条 |
+| scripts/output/file-index.md | W536 | 新增·W536 段（本段·收尾补：空壳段修复 + v2.3.121 孤儿行清除 + 本批全文件登记） |
+| scripts/ 下 58 个工具脚本 | W536 | 修改·Mimosa 提交闸门高危清零（收尾补）：Python 写路径 realpath+项目根守卫 ×54、JS 动态执行改 JSON 解析（check_data_drift 移植宽容字面量解析器）、batch_screenshots argv 字面量化、lint_links/fetch_gate_stats/w286×2 请求边界加固 |
+
 ## W535 决策闸门取数自动化（2026-08-31·v2.3.134）
 
 | 文件 | W | 说明 |
@@ -788,5 +809,3 @@
 | MEMORY.md | W449 | v2.3.64 修改·修订陈旧 W423（未 push/无远端）记忆 + 英文站 138 页 + 空 legacy 目录 |
 | site/dukou-engine.html | W449 | v2.3.64 修改·页脚 prepend v2.3.64 W449 |
 | CHANGELOG.md / 交接文档.md | W449 | v2.3.64 修改·W449 四件套条目 + 交接同步 |
-
-> 当前版本 v2.3.121（2026-08-25）

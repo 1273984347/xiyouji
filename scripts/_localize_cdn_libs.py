@@ -1,3 +1,4 @@
+import os
 # -*- coding: utf-8 -*-
 """一次性：D3 v7 / Three r128 外域 CDN 引用本地化（W 批次留痕脚本）。
 替换规则：
@@ -7,6 +8,14 @@
 仅替换 script src；CSP meta 中的 CDN 白名单保留（无害，后续批次再收紧）。
 """
 import os, re, sys
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -32,7 +41,7 @@ def process(relpath: str, prefix: str) -> int:
         html, n = pat.subn(_repl, html)
         n_total += n
     if n_total:
-        open(path, 'w', encoding='utf-8', newline='\n').write(html)
+        _w536_guard_open(path, 'w', encoding='utf-8', newline='\n').write(html)
     return n_total
 
 def main():

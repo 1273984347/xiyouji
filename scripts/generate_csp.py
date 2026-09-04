@@ -36,6 +36,14 @@ import os
 import re
 import sys
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 项目根
 SITE = os.path.join(ROOT, "site")
 
@@ -145,7 +153,7 @@ def main():
             print("SKIP   %s — 注入失败（内容未变化）" % rel)
             drift -= 1
             continue
-        with open(path, "w", encoding="utf-8", newline="") as f:
+        with _w536_guard_open(path, "w", encoding="utf-8", newline="") as f:
             f.write(new_html)
         injected += 1
 

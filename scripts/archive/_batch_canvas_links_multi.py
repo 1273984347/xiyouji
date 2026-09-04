@@ -1,3 +1,4 @@
+import os
 # -*- coding: utf-8 -*-
 """Multi-svg variant: inject a Canvas edge-layer PER force graph in a file
 that contains several independent force-directed graphs (each its own svg /
@@ -23,6 +24,14 @@ Robustness:
 Idempotent: skips if LINK_LAYERS / link-canvas-0 already present.
 """
 import re, os
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 
 def find_stmt_end(txt, p):
@@ -186,7 +195,7 @@ def main():
         txt = txt[:tm2.start()] + ('drawLinks_%d();' % i) + txt[tm2.end():]
         n += 1
         print('  graph %d: svg=%s link=%s' % (i, g['sv'], g['lv']))
-    open(path, 'w', encoding='utf-8').write(txt)
+    _w536_guard_open(path, 'w', encoding='utf-8').write(txt)
     print('OK   %-20s graphs=%d' % (TARGET, n))
 
 

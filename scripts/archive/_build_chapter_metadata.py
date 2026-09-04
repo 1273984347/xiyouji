@@ -21,6 +21,14 @@ import re
 import json
 import glob
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 _HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(_HERE, ".."))
 DATASET = os.path.join(ROOT, "dataset")
@@ -130,7 +138,7 @@ def main():
                 inserted = True
         if not inserted:
             out = [comment] + lines  # 兜底：首行非标题则前置
-        with open(fp, "w", encoding="utf-8") as f:
+        with _w536_guard_open(fp, "w", encoding="utf-8") as f:
             f.writelines(out)
         inj_count += 1
 
@@ -145,7 +153,7 @@ def main():
         },
         "chapters": meta_list,
     }
-    with open(OUT_JSON, "w", encoding="utf-8") as f:
+    with _w536_guard_open(OUT_JSON, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
     print("生成 %s（%d 章）" % (OUT_JSON, len(meta_list)))

@@ -2,7 +2,7 @@
 W286-FIX: 修复第069回、第099回原文缺失
 从古诗文网备用URL或其他可用源抓取，补充分回原文并重新合并
 """
-
+import os
 import re
 import time
 import urllib.parse
@@ -11,10 +11,25 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE_YW_SPLIT = ROOT / "source" / "原文" / "分回"
 DOCS_01 = ROOT / "docs" / "01-全书逐回解读"
 TEMP_SHENDU = ROOT / "temp_shendu"
+
+def _w536_guard_req(req):
+    _u = urllib.parse.urlparse(req.full_url)
+    if _u.scheme != "https" or _u.hostname not in ("m.gsw6.com", "www.xituhui.com"):
+        raise SystemExit("W536 guard: URL not in allowlist: %s" % req.full_url)
+    return req
+
 
 # ------------- 备用抓取：尝试不同的 page/section selector ------------
 def try_fetch_alternative(chapter: int):
@@ -36,7 +51,7 @@ def try_fetch_alternative(chapter: int):
             "Accept-Language": "zh-CN,zh;q=0.9",
         }
         req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=15) as resp:
+        with urllib.request.urlopen(_w536_guard_req(req), timeout=15) as resp:
             raw = resp.read().decode("utf-8", errors="ignore")
     except Exception as e:
         print(f"  [{n:03d}] 策略1 fetch error: {e}")
@@ -74,7 +89,7 @@ def try_fetch_alternative(chapter: int):
         try:
             headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
             req = urllib.request.Request(au, headers=headers)
-            with urllib.request.urlopen(req, timeout=15) as resp:
+            with urllib.request.urlopen(_w536_guard_req(req), timeout=15) as resp:
                 raw2 = resp.read().decode("utf-8", errors="ignore")
             soup2 = BeautifulSoup(raw2, "html.parser")
             # 常见小说正文div

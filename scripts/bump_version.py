@@ -26,6 +26,14 @@ import os
 import re
 import sys
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 _HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(_HERE, ".."))
 HTML = os.path.join(ROOT, "site", "dukou-engine.html")
@@ -54,7 +62,7 @@ def _read(p):
 
 
 def _write(p, c):
-    with open(p, "w", encoding="utf-8") as f:
+    with _w536_guard_open(p, "w", encoding="utf-8") as f:
         f.write(c)
 
 

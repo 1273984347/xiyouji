@@ -5,6 +5,14 @@ import json
 import os
 import re
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DIRS = ["01-全书逐回解读", "02-人物深度分析", "03-主题与情节专题",
         "04-文化与历史背景", "05-诗词歌赋", "06-个人随笔"]
@@ -43,7 +51,7 @@ report = {
 }
 
 op = os.path.join(ROOT, "scripts", "output")
-json.dump(report, open(os.path.join(op, "content-trust-report.json"), "w",
+json.dump(report, _w536_guard_open(os.path.join(op, "content-trust-report.json"), "w",
                        encoding="utf-8"), ensure_ascii=False, indent=2)
 
 md = []
@@ -68,6 +76,6 @@ if unverified_acad:
 else:
     md.append("（无——学术轨 105 篇已全部标绿）")
 md.append("")
-open(os.path.join(op, "content-trust-report.md"), "w", encoding="utf-8", newline="\n").write("\n".join(md))
+_w536_guard_open(os.path.join(op, "content-trust-report.md"), "w", encoding="utf-8", newline="\n").write("\n".join(md))
 print("报告生成：分布=%s · 学术轨绿标=%d/%d · 合计校验=%s"
       % (stats, acad_green, len(ACAD), "通过" if report["sum_check"] == report["total_documents"] else "失败"))

@@ -17,6 +17,14 @@ import os
 import re
 import sys
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 SITE = "site"
 DEFAULT_FROM = "v2.3.8 W357"
 DEFAULT_TO = "v2.3.9 W358"
@@ -77,7 +85,7 @@ for r, _, fs in os.walk(SITE):
             continue
         html = html.replace(OLD_CL, NEW_CL).replace(OLD_FI, NEW_FI)
         html, n_fb = re.subn(r'<footer>.*?</footer>', _fb, html, flags=re.S)
-        open(p, 'w', encoding='utf-8').write(html)
+        _w536_guard_open(p, 'w', encoding='utf-8').write(html)
         changed += 1
         extra = f" FB={n_fb}" if n_fb else ""
         print(f"[ok]  {p}: CL={n_cl} FI={n_fi}{extra}")

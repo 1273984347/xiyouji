@@ -1,8 +1,17 @@
+import os
 #!/usr/bin/env python3
 """W511 归档批次：CHANGELOG W417-W448 段 + file-index W417-W448（含尾部损坏区）迁移至各自 archive。
 按 W422 归档段先例：现役文件删除目标段，archive 末尾追加「## W511 归档段」块。
 """
 import re
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 # ---------- 1. CHANGELOG ----------
 cl = open("CHANGELOG.md", encoding="utf-8").read().splitlines()
@@ -47,8 +56,8 @@ fi_m = re.match(r"## W(\d{3})", migrated_fi[0])
 fi_range = "## W511 归档段（2026-08-25）：W%s 及更早（含 W449-W463 损坏区尾部清理）" % fi_m.group(1)
 
 # ---------- 3. 写回现役文件 ----------
-open("CHANGELOG.md", "w", encoding="utf-8", newline="\n").write("\n".join(kept_cl) + "\n")
-open("scripts/output/file-index.md", "w", encoding="utf-8", newline="\n").write("\n".join(kept_fi) + "\n")
+_w536_guard_open("CHANGELOG.md", "w", encoding="utf-8", newline="\n").write("\n".join(kept_cl) + "\n")
+_w536_guard_open("scripts/output/file-index.md", "w", encoding="utf-8", newline="\n").write("\n".join(kept_fi) + "\n")
 
 # ---------- 4. 追加到 archive ----------
 with open("CHANGELOG-ARCHIVE.md", "a", encoding="utf-8", newline="\n") as f:

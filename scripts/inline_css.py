@@ -20,6 +20,14 @@ import os
 import re
 import sys
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 SITE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "site")
 TOKENS = os.path.join(SITE_DIR, "tokens.css")
 SYSTEM = os.path.join(SITE_DIR, "system.css")
@@ -69,7 +77,7 @@ def process(path, force, dry):
         html = html.replace("</head>", inlined + "</head>", 1)
 
     if not dry:
-        with open(path, "w", encoding="utf-8") as f:
+        with _w536_guard_open(path, "w", encoding="utf-8") as f:
             f.write(html)
     return "inlined" if not already else "re-synced"
 

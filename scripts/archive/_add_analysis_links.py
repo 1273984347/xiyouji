@@ -9,6 +9,14 @@
 import os
 import re
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 _ROOT = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(_ROOT, ".."))
 SRC_DIR = os.path.join(ROOT, "docs", "01-全书逐回解读")
@@ -85,7 +93,7 @@ def process():
         # 找到 导航 行末尾
         line_end = text.find("\n", ni)
         new_text = text[:line_end] + footer + text[line_end:]
-        with open(path, "w", encoding="utf-8") as f:
+        with _w536_guard_open(path, "w", encoding="utf-8") as f:
             f.write(new_text)
         changed += 1
     print("changed=%d  skipped_no_nav=%d  skipped_empty=%d  valid_chars=%d"

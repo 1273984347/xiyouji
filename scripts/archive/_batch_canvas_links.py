@@ -1,3 +1,4 @@
+import os
 # -*- coding: utf-8 -*-
 """Batch: move force-graph LINK edges from SVG <line> to a Canvas overlay.
 
@@ -21,6 +22,14 @@ Design notes:
 relationships.html (multi-svg) is NOT in TARGETS -- handled separately.
 """
 import re, os
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 
 def find_stmt_end(txt, p):
@@ -153,5 +162,5 @@ for name in TARGETS:
     if n == 0:
         print('WARN (tick sub failed)   %s' % name)
         continue
-    open(path, 'w', encoding='utf-8').write(txt)
+    _w536_guard_open(path, 'w', encoding='utf-8').write(txt)
     print('OK   %-40s svg=%-12s links=%d tickSubs=%d' % (name, svgvar, len(linkvars), n))

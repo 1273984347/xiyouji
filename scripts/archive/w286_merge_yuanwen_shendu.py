@@ -6,7 +6,7 @@ W286 任务脚本：
    - ## 深度解读（所有覆盖该原著回的深读按SD编号顺序拼接）
    - ## 原文全文（从网上抓取的完整原著文本）
 """
-
+import os
 import re
 import sys
 import time
@@ -16,11 +16,26 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 WORKSPACE = Path(r"d:\1\xiyouji")
 YUANWEN_DIR = WORKSPACE / "source" / "原文"
 FENHUI_DIR = YUANWEN_DIR / "分回"
 TEMP_SHENDU_DIR = YUANWEN_DIR / "temp_shendu"
 ZHUIHUI_DIR = WORKSPACE / "docs" / "01-全书逐回解读"
+
+def _w536_guard_req(req):
+    _u = urllib.parse.urlparse(req.full_url)
+    if _u.scheme != "https" or _u.hostname != "m.gsw6.com":
+        raise SystemExit("W536 guard: URL not in allowlist: %s" % req.full_url)
+    return req
+
 
 # URL pattern from browser mapping: chapter N (1-based) -> page 705+N
 BASE_URL = "https://m.gsw6.com/book/xyj/{page}.html"
@@ -43,7 +58,7 @@ def fetch_chapter(n: int) -> str:
     req = urllib.request.Request(url, headers=HEADERS)
     for attempt in range(3):
         try:
-            with urllib.request.urlopen(req, timeout=20) as resp:
+            with urllib.request.urlopen(_w536_guard_req(req), timeout=20) as resp:
                 raw = resp.read().decode("utf-8", errors="replace")
             break
         except Exception:

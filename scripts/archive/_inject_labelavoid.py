@@ -1,3 +1,4 @@
+import os
 # -*- coding: utf-8 -*-
 # Inject a post-render label-collision pass on force-directed graphs:
 # after the force layout settles, hide (display:none) the smaller of any two
@@ -6,6 +7,14 @@
 # layout so automated overlap audits reflect the reduction.
 # Idempotent: marker id="audit-labelavoid".
 import os, re
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 ROOT = os.path.dirname(__file__)
 DATA = os.path.join(ROOT, '..', 'site', 'data')
@@ -63,7 +72,7 @@ for f in TARGET:
     else:
         s = s + SCRIPT
     try:
-        open(p, 'w', encoding='utf-8').write(s); changed += 1
+        _w536_guard_open(p, 'w', encoding='utf-8').write(s); changed += 1
     except Exception as e:
         print('WRITE ERR', f, e); err += 1
 

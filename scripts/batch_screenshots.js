@@ -284,6 +284,13 @@ async function capture(browser, pageInfo, viewportName, viewports, outDirs) {
 
 async function main() {
   const config = parseArgs(process.argv);
+  // W536 安全加固：输出目录严格钳制在 scripts/output 之下
+  const _outRoot = path.resolve(ROOT, 'scripts', 'output');
+  if (path.resolve(config.outputDir) !== _outRoot && !path.resolve(config.outputDir).startsWith(_outRoot + path.sep)) {
+    console.error("outputDir must stay under scripts/output");
+    process.exit(2);
+  }
+  config.outputDir = path.resolve(config.outputDir);
   const desktopDir = path.join(config.outputDir, 'desktop');
   const mobileDir = path.join(config.outputDir, 'mobile');
   ensureDir(desktopDir);
@@ -333,16 +340,21 @@ async function main() {
   await browser.close();
 
   // Slice full-page screenshots into fixed-height chunks for pixel-level review.
-  const { execSync } = require('child_process');
+  // W536 安全加固：切片子进程仅在默认输出目录下运行（argv 全字面量，无外部值进入解释器）
+  const SLICE_OUT = path.resolve(ROOT, 'scripts', 'output', 'screenshots');
+  if (path.resolve(ROOT, config.outputDir) !== SLICE_OUT) {
+    console.error('[slice] skipped: outputDir is not the default screenshooter output dir');
+  } else {
+  const { execFileSync } = require('child_process');
   try {
-    const outArg = JSON.stringify(config.outputDir);
-    execSync(`python scripts/slice_screenshots.py --output-dir ${outArg}`, { cwd: ROOT, stdio: 'inherit' });
+    execFileSync('python', ['scripts/slice_screenshots.py', '--output-dir', 'scripts/output/screenshots'], { cwd: ROOT, stdio: 'inherit' });
   } catch (e) {
     console.error('Screenshot slicing failed:', e.message);
   }
+  }
 
   // Generate markdown summary
-  const summaryPath = path.join(config.outputDir, 'screenshot-summary.md');
+  const summaryPath = path.join(SLICE_OUT, 'screenshot-summary.md');
   const lines = [
     '# Playwright 批量截图报告',
     '',
@@ -407,11 +419,12 @@ async function main() {
     }
   }
 
+  if (!path.resolve(summaryPath).startsWith(path.resolve(ROOT, 'scripts', 'output') + path.sep)) throw new Error('path escape');
   fs.writeFileSync(summaryPath, lines.join('\n'), 'utf-8');
   console.log(`\nSummary written to ${summaryPath}`);
 
   // Generate focused layout audit report for pixel-level review.
-  const auditPath = path.join(config.outputDir, 'layout-audit-report.md');
+  const auditPath = path.join(SLICE_OUT, 'layout-audit-report.md');
   const auditLines = [
     '# Layout Audit Report',
     '',
@@ -455,6 +468,7 @@ async function main() {
     auditLines.push('');
   }
 
+  if (!path.resolve(auditPath).startsWith(path.resolve(ROOT, 'scripts', 'output') + path.sep)) throw new Error('path escape');
   fs.writeFileSync(auditPath, auditLines.join('\n'), 'utf-8');
   console.log(`Layout audit report written to ${auditPath}`);
 

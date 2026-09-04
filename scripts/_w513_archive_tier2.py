@@ -4,6 +4,14 @@
 """
 import os
 
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.abspath(__file__)))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
+
 SRC = "CHANGELOG-ARCHIVE.md"
 TIER2_DIR = os.path.join("docs", "archive")
 TIER2 = os.path.join(TIER2_DIR, "CHANGELOG-ARCHIVE-tier2.md")
@@ -44,8 +52,8 @@ archive_head[4] = ""
 archive_head[5] = "---"
 
 os.makedirs(TIER2_DIR, exist_ok=True)
-open(TIER2, "w", encoding="utf-8", newline="\n").write("\n".join(tier2_content) + "\n")
-open(SRC, "w", encoding="utf-8", newline="\n").write("\n".join(archive_head + kept) + "\n")
+_w536_guard_open(TIER2, "w", encoding="utf-8", newline="\n").write("\n".join(tier2_content) + "\n")
+_w536_guard_open(SRC, "w", encoding="utf-8", newline="\n").write("\n".join(archive_head + kept) + "\n")
 
 def kb(f):
     return sum(len(l.encode("utf-8")) + 1 for l in f) / 1024

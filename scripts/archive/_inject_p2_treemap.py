@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """P2 试点：poetry-rhythm-analysis.html 的 7 类饼图 → 矩形树图(treemap)。
@@ -6,6 +7,14 @@
 幂等：已含 'tm-cell' 则跳过。
 """
 import io
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 PATH = "site/data/poetry-rhythm-analysis.html"
 START = "    // ============= 板块 2：词牌分布饼图 ============="
@@ -97,7 +106,7 @@ def main():
     si = s.index(START)
     ei = s.index(END)
     new_s = s[:si] + NEW + "\n" + s[ei:]
-    open(PATH, "w", encoding="utf-8").write(new_s)
+    _w536_guard_open(PATH, "w", encoding="utf-8").write(new_s)
     print(f"✓ 替换完成：板块2 改为矩形树图（区间 {si}→{ei}）")
 
 if __name__ == "__main__":

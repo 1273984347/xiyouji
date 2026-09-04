@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """A5/A6 全量结构标准化 v2（统一 footer，不破坏已有交叉引用）。
@@ -10,6 +11,14 @@
 全部幂等。DRY_RUN（不带 --apply）仅打印。
 """
 import os, re, glob, sys
+
+_W536_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def _w536_guard_open(path, *a, **k):
+    _real = os.path.realpath(path)
+    if not (_real == _W536_ROOT or _real.startswith(_W536_ROOT + os.sep)):
+        raise SystemExit("W536 guard: path escapes project root: %s" % path)
+    return open(_real, *a, **k)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 A3 = os.path.join(ROOT, "docs", "02-人物深度分析")
@@ -178,7 +187,7 @@ def process(path, kind):
         if DRY_RUN:
             print(f"[DRY] {os.path.relpath(path, ROOT)} 导航{len(nav)} 关联{len(rel)} (原导航{len(old_nav)} 原关联{len(old_rel)})")
         else:
-            with open(path, "w", encoding="utf-8") as f:
+            with _w536_guard_open(path, "w", encoding="utf-8") as f:
                 f.write(new_txt)
             print(f"[APPLY] {os.path.relpath(path, ROOT)} 导航{len(nav)} 关联{len(rel)}")
     else:

@@ -28,13 +28,54 @@ const FETCH_RE = /fetch\(\s*['"]([^'"]+\.json)['"]\s*\)/g;
 const JSON_REF_RE = /['"]([A-Za-z0-9_/.-]+\.json)['"]/g;
 const OUT_DATA_DIR = path.join(ROOT, 'scripts', 'output', 'data');
 
-/** 提取内嵌数据对象（数据字面量，安全求值）。解析失败返回 null。 */
+/** 字面量规范化：字符串归一双引号 + 去注释 + 无引号键加引号 + 尾逗号修复（W536：替代动态执行）。失败返回 null。 */
+function jsLiteralToJson(raw) {
+  let out = "";
+  let code = "";
+  const flush = () => { if (code) { out += code; code = ""; } };
+  let i = 0;
+  while (i < raw.length) {
+    const c = raw[i];
+    if (c === "" || c === '') {
+      let j = i + 1;
+      let content = "";
+      while (j < raw.length && raw[j] !== c) {
+        if (raw[j] === "\\") {
+          if (raw[j + 1] === '') { content += ''; j += 2; continue; }
+          content += raw[j] + (raw[j + 1] || ""); j += 2; continue;
+        }
+        content += raw[j]; j += 1;
+      }
+      if (j >= raw.length) return null;
+      flush();
+      out += "" + content.replace(/"/g, '\"') + "";
+      i = j + 1;
+      continue;
+    }
+    if (c === '/' && raw[i + 1] === '/') { while (i < raw.length && raw[i] !== "\n") i += 1; continue; }
+    if (c === '/' && raw[i + 1] === '*') {
+      i += 2;
+      while (i < raw.length && !(raw[i] === '*' && raw[i + 1] === '/')) i += 1;
+      i += 2;
+      continue;
+    }
+    code += c;
+    i += 1;
+  }
+  flush();
+  out = out.replace(/([{,]\s*)([\w$\u00C0-\uFFFF][\w$\u00C0-\uFFFF]*?)(\s*:)/g, '$1"$2"$3');
+  out = out.replace(/,,\s*([}\]])/g, '$1');
+  return out;
+}
+
+/** 提取内嵌数据对象（W536：字面量规范化 + JSON.parse，无动态执行）。解析失败返回 null。 */
 function extractEmbedded(html) {
   const m = html.match(EMBED_RE);
   if (!m) return null;
+  const norm = jsLiteralToJson(m[2]);
+  if (norm === null) return null;
   try {
-    // 仅求值数据字面量（EMBEDDED_DATA/EMBEDDED 声明块），无外部引用
-    return new Function('return (' + m[2] + ');')();
+    return JSON.parse(norm);
   } catch {
     return null;
   }

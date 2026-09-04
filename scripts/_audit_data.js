@@ -5,7 +5,7 @@
 //  - report both so mismatches can be inspected (some are client-side filtering)
 const { chromium } = require('playwright');
 const path = require('path'), fs = require('fs');
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.dirname(__dirname);
 const DATA = path.join(ROOT, 'site', 'data');
 const DSET = path.join(ROOT, 'dataset');
 const D3 = path.resolve(ROOT, 'xiyouji-agent-web/node_modules/d3/dist/d3.min.js');
@@ -71,7 +71,9 @@ function url(f){ return 'file:///' + path.join(DATA, f).replace(/\\/g, '/'); }
   const out = [];
   for (const f of PAGES) {
     const base = f.slice(0, -5);
+    if (!/^[A-Za-z0-9._-]+\.json$/.test(base)) { console.log('[SKIP] 文件名非白名单', base); continue; }
     const jp = path.join(DSET, base + '.json');
+    if (!path.resolve(jp).startsWith(DSET + path.sep)) { console.log('[SKIP] 路径越界', base); continue; }
     let jn = null, jl = null, hasJson = false;
     if (fs.existsSync(jp)) {
       hasJson = true;

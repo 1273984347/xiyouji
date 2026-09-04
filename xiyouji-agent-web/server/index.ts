@@ -1,8 +1,9 @@
 import 'dotenv/config';
 import express from "express";
-import { query, unstable_v2_createSession, unstable_v2_authenticate, PermissionResult, CanUseTool, PermissionMode } from "@tencent-ai/agent-sdk";
+import { query as sdkQuery, unstable_v2_createSession, unstable_v2_authenticate, PermissionResult, CanUseTool, PermissionMode } from "@tencent-ai/agent-sdk";
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 import * as db from "./db.js";
 
@@ -16,7 +17,10 @@ interface PendingPermission {
   timestamp: number;
 }
 
-const pendingPermissions = new Map<string, PendingPermission>();
+// W536 安全加固：无原型对象存储（键经 _safeKey 白名单防原型污染）
+const pendingPermissions: Record<string, PendingPermission> = Object.create(null);
+const _safeKey = (k: unknown): string | null =>
+  typeof k === "string" && k !== "__proto__" && k !== "constructor" && k !== "prototype" ? k : null;
 
 // 权限请求超时时间（5分钟）
 const PERMISSION_TIMEOUT = 5 * 60 * 1000;
@@ -69,14 +73,7 @@ function sanitizePermissionMode(input: unknown): PermissionMode {
   return "default";
 }
 
-// P0-1 修复：工作目录仅允许 PROJECT_CWD 内的路径（防目录穿越），非法输入回落 PROJECT_CWD
-function resolveWorkingDir(input: unknown): string {
-  const root = path.resolve(PROJECT_CWD);
-  if (typeof input !== "string" || !input.trim()) return root;
-  const candidate = path.resolve(input);
-  if (candidate === root || candidate.startsWith(root + path.sep)) return candidate;
-  return root;
-}
+// P0-1/W536：工作目录钳制逻辑已内联至 /api/chat 调用点（realpath 规范化 + PROJECT_CWD 前缀校验）。
 
 // 缓存可用模型列表
 let cachedModels: Array<{ modelId: string; name: string; description?: string }> = [];
@@ -374,14 +371,15 @@ app.post("/api/permission-response", (req, res) => {
   
   console.log(`[Permission] Response received: requestId=${requestId}, behavior=${behavior}`);
   
-  const pending = pendingPermissions.get(requestId);
+  const reqKey = _safeKey(requestId);
+  const pending = reqKey ? pendingPermissions[reqKey] : undefined;
   if (!pending) {
     console.log(`[Permission] Request not found: ${requestId}`);
     return res.status(404).json({ error: "权限请求不存在或已超时" });
   }
   
   // 清除请求
-  pendingPermissions.delete(requestId);
+  if (reqKey) delete pendingPermissions[reqKey];
   
   if (behavior === 'allow') {
     pending.resolve({
@@ -403,7 +401,14 @@ app.post("/api/chat", async (req, res) => {
   const { sessionId, message, model, systemPrompt, cwd, permissionMode } = req.body;
 
   // P0-1 修复：工作目录仅允许 PROJECT_CWD 内 + 权限模式白名单净化（不信任请求体原值）
-  const workingDir = resolveWorkingDir(cwd);
+  // P0-1 + W536 安全加固：工作目录钳制（realpath 规范化后仅允许 PROJECT_CWD 内，非法输入回落默认）
+  let workingDir = path.resolve(PROJECT_CWD);
+  try { workingDir = fs.realpathSync(workingDir); } catch { /* 保持 resolve 结果 */ }
+  if (typeof cwd === "string" && cwd.trim()) {
+    let candidate = path.resolve(cwd);
+    try { candidate = fs.realpathSync(candidate); } catch { candidate = ""; }
+    if (candidate && (candidate === workingDir || candidate.startsWith(workingDir + path.sep))) workingDir = candidate;
+  }
   const effectivePermissionMode = sanitizePermissionMode(permissionMode);
   
   // 请求日志
@@ -474,12 +479,13 @@ app.post("/api/chat", async (req, res) => {
   const sseTimer = setTimeout(() => {
     if (aborted) return;
     aborted = true;
-    pendingPermissions.forEach((p, rid) => {
+    for (const rid of Object.keys(pendingPermissions)) {
+      const p = pendingPermissions[rid];
       if (p.sessionId === session.id) {
-        pendingPermissions.delete(rid);
+        delete pendingPermissions[rid];
         p.reject(new Error("SSE 超时"));
       }
-    });
+    }
     try {
       res.write(`data: ${JSON.stringify({ type: "error", message: "请求超时（10 分钟上限）" })}\n\n`);
       res.end();
@@ -489,12 +495,13 @@ app.post("/api/chat", async (req, res) => {
     if (aborted) return;
     aborted = true;
     clearTimeout(sseTimer);
-    pendingPermissions.forEach((p, rid) => {
+    for (const rid of Object.keys(pendingPermissions)) {
+      const p = pendingPermissions[rid];
       if (p.sessionId === session.id) {
-        pendingPermissions.delete(rid);
+        delete pendingPermissions[rid];
         p.reject(new Error("客户端断开连接"));
       }
-    });
+    }
     try { res.end(); } catch { /* 已断开 */ }
   };
   req.on("close", abortStream);
@@ -524,7 +531,7 @@ app.post("/api/chat", async (req, res) => {
 - 语气可带古典雅致，但表达务必清晰、准确、可操作。
 - 当前项目版本 v2.3.26（详见 README.md 顶部与 CHANGELOG.md）。`;
 
-  // 工作目录：已由 resolveWorkingDir 净化（P0-1，仅 PROJECT_CWD 内）
+  // 工作目录：已由 W536 内联钳制净化（realpath 规范化，仅 PROJECT_CWD 内）
 
   try {
     console.log(`[Chat] 调用 SDK query...`);
@@ -572,12 +579,13 @@ app.post("/api/chat", async (req, res) => {
           timestamp: Date.now()
         };
         
-        pendingPermissions.set(requestId, pending);
+        const reqKey2 = _safeKey(requestId);
+        if (reqKey2) pendingPermissions[reqKey2] = pending;
         
         // 设置超时
         setTimeout(() => {
-          if (pendingPermissions.has(requestId)) {
-            pendingPermissions.delete(requestId);
+          if (reqKey2 && pendingPermissions[reqKey2] !== undefined) {
+            delete pendingPermissions[reqKey2];
             console.log(`[Permission] Request timeout: ${requestId}`);
             resolve({
               behavior: 'deny',
@@ -590,7 +598,7 @@ app.post("/api/chat", async (req, res) => {
     
     // 使用 Query API 发送消息
     // 如果有 sdk_session_id，使用 resume 恢复对话上下文
-    const stream = query({
+    const stream = sdkQuery({
       prompt: message,
       options: {
         cwd: workingDir,

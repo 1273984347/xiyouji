@@ -19,10 +19,18 @@ import json
 import os
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.realpath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 GLOSSARY_MD = os.path.join(ROOT, "docs", "00-导读", "术语表.md")
 GLOSSARY_JSON = os.path.join(ROOT, "dataset", "glossary.json")
 BASELINE = os.path.join(ROOT, "scripts", "output", "glossary-baseline.txt")
+
+def _guarded_write_open(path, *args, **kwargs):
+    """W536 安全加固：写路径规范化并钳制在项目根内（防路径越界）。"""
+    _root = os.path.realpath(ROOT)
+    _real = os.path.realpath(path)
+    if not _real.startswith(_root + os.sep):
+        raise SystemExit("path escapes project root: %s" % path)
+    return open(_real, *args, **kwargs)
 VARIANT_GROUP = "一、人物称谓"
 CONTENT_DIRS = [
     "01-全书逐回解读", "02-人物深度分析", "03-主题与情节专题",
@@ -176,7 +184,7 @@ def main():
     if args.generate:
         data = {"source": "docs/00-导读/术语表.md", "note": "由 check_glossary.py --generate 解析，勿手改",
                 "groups": md["groups"]}
-        with open(GLOSSARY_JSON, "w", encoding="utf-8", newline="\n") as f:
+        with _guarded_write_open(GLOSSARY_JSON, "w", encoding="utf-8", newline="\n") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
             f.write("\n")
         n = sum(len(g["entries"]) for g in md["groups"])
@@ -186,7 +194,7 @@ def main():
     if args.build_baseline:
         viol = all_violations(md)
         pairs = sorted("%s\t%s" % (f, c) for f, cs in viol.items() for c in cs)
-        with open(BASELINE, "w", encoding="utf-8", newline="\n") as f:
+        with _guarded_write_open(BASELINE, "w", encoding="utf-8", newline="\n") as f:
             f.write("\n".join(pairs) + ("\n" if pairs else ""))
         print("基线已冻结：%d 篇文档 %d 条违规对" % (len(viol), len(pairs)))
         return 0
