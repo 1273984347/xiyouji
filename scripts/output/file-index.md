@@ -11,6 +11,21 @@
 ---
 
 
+## W538 CI 红灯热修复（2026-09-05·v2.3.137）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_screenshots.js | W538 | 修改·W537 白名单形状回归修复——onlyPages/extraPages 实为 {file,dir} 对象数组（parseExtraPages），重写为形状感知 _cleanPages（file 禁 ../绝对路径·dir 钳制项目根）并核对下游 p.file/p.dir 契约 |
+| xiyouji-agent-web/package.json | W538 | 修改·overrides 追加 qs ^6.16.0 与 fast-uri ^3.1.6（W410 先例·fast-uri 留 3.x 兼容 ajv）——生产依赖审计归零 |
+| xiyouji-agent-web/package-lock.json | W538 | 修改·overrides 生成的锁文件更新 |
+| CHANGELOG.md | W538 | 新增·W538 版段 + 编号规则上限 W001-W538 |
+| 交接文档.md | W538 | 修改·头尾「最后更新」prepend W538 + 里程碑概要滚动淘汰 W533 块（保 5 版）+ 当前 HEAD 句更新 + 当前进度标题更新 |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W538 | 修改·版本行同步 v2.3.137（2026-09-05） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W538 | 修改·四页脚链首 prepend W538 |
+| .github/workflows/README.md | W538 | 修改·旁文档同步（头部版本行 + 里程碑行上限 W450-W538） |
+| AGENTS.md | W538 | 修改·版本脚注追加 W538 条目 |
+| scripts/output/file-index.md | W538 | 新增·W538 段（本段） |
+
 ## W537 全仓对抗性审查修复（2026-09-05·v2.3.136）
 
 | 文件 | W | 说明 |
