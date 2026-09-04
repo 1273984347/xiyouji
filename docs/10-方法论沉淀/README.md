@@ -31,6 +31,7 @@
 | 18 | 四 subagent 并行模式 | [dispatching-parallel-agents四subagent并行模式.md](dispatching-parallel-agents四subagent并行模式.md) | 四 subagent 并行派发模式（W257·与记忆研究四篇双轨） |
 | 19 | 读者数据复盘 | [读者数据复盘.md](读者数据复盘.md) | W465 决策闸门（W530 重排）判定记录与数据存档·GoatCounter 唯一真实读者源 |
 | 20 | agent-web 技术栈迁移评估 | [agent-web技术栈迁移评估.md](agent-web技术栈迁移评估.md) | W536：React 19 / Express 5 / Tailwind v4 / Vite 8 / TS 7 破坏点分级与五阶段迁移顺序·实证修正 Express 5 与 uuid 14 的低风险判级 |
+| 21 | 工作复盘与优化分析报告 | [工作复盘与优化分析报告-2026-09-05.md](工作复盘与优化分析报告-2026-09-05.md) | W541：W536-W540 会话复盘（DRL 审查 16 finding 全处置）——经验复用 7 项/技能优化 3 方案/问题 14 例闭环/工作流优化 3 建议/WBS 计划与可行性自评 |
 
 ---
 
