@@ -11,6 +11,20 @@
 ---
 
 
+## W541 复盘报告归档（2026-09-05·v2.3.140）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/工作复盘与优化分析报告-2026-09-05.md | W541 | 新建·W536-W540 会话复盘报告（8 章：经验复用 7 项/技能矩阵/未用技能 6 项决策/场景沉淀 4 模板/问题 14 例与闭环机制/工作流优化 3 建议/WBS 计划/可行性自评） |
+| docs/10-方法论沉淀/README.md | W541 | 修改·索引登记第 21 条（双向覆盖） |
+| CHANGELOG.md | W541 | 新增·W541 版段 + 编号规则上限 W001-W541 |
+| 交接文档.md | W541 | 修改·头尾「最后更新」prepend W541 + 里程碑概要滚动淘汰 W536 块（保 5 版）+ 当前 HEAD 句更新 + 当前进度标题更新 + W540 尾链双括号修正 |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W541 | 修改·版本行同步 v2.3.140（2026-09-05） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W541 | 修改·四页脚链首 prepend W541 |
+| .github/workflows/README.md | W541 | 修改·旁文档同步（头部版本行 + 里程碑行上限 W450-W541） |
+| AGENTS.md | W541 | 修改·版本脚注追加 W541 条目 |
+| scripts/output/file-index.md | W541 | 新增·W541 段（本段） |
+
 ## W540 迁移评估基线更新（2026-09-05·v2.3.139）
 
 | 文件 | W | 说明 |

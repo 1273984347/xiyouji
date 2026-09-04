@@ -4,13 +4,21 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W540），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W541），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
 > **全站页数口径**（W459 起，各门禁分母不同）：HTML 共 234 页（site/data 87 + site/en 138 + site 根 9）；CSP 覆盖 233 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 232 文件（再排除 `_shell.html`）；inline_css 同步 225 页（site/data + site/en，site 根以 `<link>` 引外部 css）；「可视化页 86」= site/data 87 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
+
+### v2.3.140（2026-09-05）：W541 复盘报告归档 — 工作复盘与优化分析报告入册 docs/10
+
+> **来源**：用户指令「写入仓库」——将《工作复盘与优化分析报告》（W536-W540 会话复盘）归档入册 docs/10-方法论沉淀。
+> - **执行**：新建报告文档（8 章：经验复用 7 项·技能矩阵与 3 项优化方案·未用技能 6 项决策·场景沉淀 4 模板·问题 14 例与闭环机制·工作流优化 3 建议·WBS 计划与监控·可行性自评）；方法论 README 索引登记第 21 条（双向覆盖）。
+> - **验证**：verify_delivery 全绿（含方法论 README 双向覆盖）。
+> - **文件**：docs/10-方法论沉淀/工作复盘与优化分析报告-2026-09-05.md（新建）、docs/10-方法论沉淀/README.md、六文档 + 旁文档版本行、site 四页脚。
+> - **状态**：已落地（本批随 W541 提交并 push origin/main）。
 
 ### v2.3.139（2026-09-05）：W540 迁移评估基线更新 — 评估文档 vite 基线注记（W539 遗留补记）
 
