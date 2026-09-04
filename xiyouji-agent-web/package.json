@@ -39,10 +39,10 @@
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.20",
     "concurrently": "^8.2.2",
-    "less": "^4.3.0",
-    "postcss": "^8.5.0",
+    "less": "^4.9.0",
+    "postcss": "^8.5.26",
     "tailwindcss": "^3.4.17",
-    "tsx": "^4.6.2",
+    "tsx": "^4.23.13",
     "typescript": "^5.3.2",
     "vite": "^6.4.3"
   },
