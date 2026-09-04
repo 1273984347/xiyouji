@@ -3,6 +3,7 @@
 > 用途：`xiyouji-agent-web`（Web Agent「渡口问津」）主版本依赖升级的可行性评估与批次规划。
 > 创建：2026-09-02（W536）·触发源：dependabot PR #9 / #11 CI 红灯
 > 配套：`.github/dependabot.yml`（W536 起 agent-web 主版本升级单独排队）
+> 基线更新：2026-09-05（W539）— vite 5.4.21 → 6.4.3（devDep 漏洞清零·esbuild 随升·build/tsc 实测通过）；下文 Vite 跨度修订为「6.4.3 → 8.2」（剩余 2 个大版本）。另：dompurify override 已移除（Dependabot recreate 冲突根治，见 CHANGELOG W539）。
 
 ## 零、结论摘要
 
@@ -46,7 +47,7 @@
 |:---|:---|:--:|:---|:---|
 | **Tailwind CSS** | 3.4 → 4.3 | **高** | `src/index.css` 3 行 `@tailwind` 指令 + `tailwind.config.js` JS 配置（含自定义 colors/borderRadius 等）+ `postcss.config.js` | v4 改 CSS-first 范式：`@import "tailwindcss"` 取代三条指令，`@theme` 块取代 `theme.extend`，PostCSS 插件改名 `@tailwindcss/postcss`（需新增依赖）。自定义项逐条转写 |
 | **TypeScript** | 5.3 → 7.0 | **高** | 全量 `tsc -b`；已撞 TS2882（CSS side-effect import） | TS 7 是 Go 原生编译器重写版，选项兼容性未验证。CSS 导入问题可先由 `src/vite-env.d.ts`（`/// <reference types="vite/client" />`）或 `allowArbitraryExtensions` 解决 |
-| **Vite** | 5.0 → 8.2 | **中高** | `vite.config.ts` + 构建脚本；`engines.node >= 20` | 跨 3 个大版本，Node 下限可能抬高至 22+；配置 API 需逐项核对。`@vitejs/plugin-react` 4→6 同步升 |
+| **Vite** | 6.4.3 → 8.2（W539 前基线 5.4.21） | **中高** | `vite.config.ts` + 构建脚本；`engines.node >= 20` | 5.4.21→6.4.3 已于 W539 先行落地（devDep 漏洞清零·build/tsc 实测通过）；剩余跨 2 个大版本，Node 下限可能抬高至 22+；配置 API 需逐项核对。`@vitejs/plugin-react` 4→6 同步升 |
 | **React / React DOM** | 18.2 → 19.2 | **中** | 已撞 TS2322（ref 类型）；`createRoot` 写法无需改 | `useRef<T>(null)` 返回类型变为 `RefObject<T \| null>`，下游 prop 类型需放宽。TDesign 组件库运行时兼容性未验证（见上） |
 | **better-sqlite3** | 12.6 → 13.0 | **中** | 服务端原生模块 | 需匹配 Node ABI 的预编译产物，`npm ci` 后必须实跑一次服务端验证 |
 | **dotenv** | 16.4 → 17.4 | **低** | 服务端读 `.env` | 主版本升级，API 基本稳定，需冒烟 |
@@ -63,7 +64,7 @@
 
 1. **阶段 1（低风险前置）**：`dotenv` → `uuid` → `Express 5` → `@types/node`。四项均有明确验证手段，且 Express 5 破坏面已实证为零。完成后服务端即可跑在 Express 5 上。
 2. **阶段 2（类型层）**：`TypeScript 7` + `@types/react 19` + `@types/react-dom 19`。先解决 TS2882（加 `vite-env.d.ts`）与 TS2322（放宽 ref prop 类型），拿到 0 error 的类型基线。
-3. **阶段 3（构建层）**：`Vite 8` + `@vitejs/plugin-react 6`。需确认 Node 版本下限，必要时同步调整 `engines` 与 CI 的 Node 版本矩阵。
+3. **阶段 3（构建层）**：`Vite 8` + `@vitejs/plugin-react 6`。需确认 Node 版本下限，必要时同步调整 `engines` 与 CI 的 Node 版本矩阵。（W539 注：基线已先行至 6.4.3，本阶段实际跨度为 6.4.3 → 8。）
 4. **阶段 4（样式层，成本最高）**：`Tailwind v4` 配置范式迁移 + `postcss` 插件替换 + 自定义 theme 转写。建议单独一批，配合视觉回归截图验证。
 5. **阶段 5（UI 层）**：`React 19` + `tdesign-react` 1.18。放在最后，因为组件库兼容性依赖前面各层的稳定性，且验证需人工走查。
 

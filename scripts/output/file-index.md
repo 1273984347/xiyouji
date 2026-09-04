@@ -11,6 +11,19 @@
 ---
 
 
+## W540 迁移评估基线更新（2026-09-05·v2.3.139）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/10-方法论沉淀/agent-web技术栈迁移评估.md | W540 | 修改·头部补基线更新注记（vite 5.4.21→6.4.3 已于 W539 落地）+ §二 Vite 行跨度修订 6.4.3 → 8.2 + §三 阶段 3 补注——基线快照与现实脱节补记 |
+| CHANGELOG.md | W540 | 新增·W540 版段 + 编号规则上限 W001-W540 |
+| 交接文档.md | W540 | 修改·头尾「最后更新」prepend W540 + 里程碑概要滚动淘汰 W535 块（保 5 版）+ 当前 HEAD 句更新 + 当前进度标题更新 |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W540 | 修改·版本行同步 v2.3.139（2026-09-05） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W540 | 修改·四页脚链首 prepend W540 |
+| .github/workflows/README.md | W540 | 修改·旁文档同步（头部版本行 + 里程碑行上限 W450-W540） |
+| AGENTS.md | W540 | 修改·版本脚注追加 W540 条目 |
+| scripts/output/file-index.md | W540 | 新增·W540 段（本段） |
+
 ## W539 遗留收尾（2026-09-05·v2.3.138）
 
 | 文件 | W | 说明 |
