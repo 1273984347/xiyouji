@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W541），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W542），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W399）已迁移至 [docs/archive/CHANGELOG-ARCHIVE-tier2.md](docs/archive/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](CHANGELOG-ARCHIVE.md)。本文件仅保留 v2.3.84+（W485+）。
 >
@@ -12,6 +12,14 @@
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）。
 
+### v2.3.141（2026-09-05）：W542 交付效率工具化 — batch_cascade.py 级联脚本 + 冒烟清单固化
+
+> **来源**：W536-W540 五批次实测——文档级联为每批 6-8 次手工工具调用的瓶颈面（W536 手工轮次 4 次失败重试），且 W537 白名单形状回归证明 node --check 不覆盖运行时。
+> - **执行（级联脚本）**：新建 scripts/batch_cascade.py（常驻工具）——输入 spec JSON 自动完成 9 个面的断言与改写（CHANGELOG 现役段+规则上限/三版本行/交接文档头尾链+3 批自动淘汰+里程碑滚动+HEAD 句/workflows/四页脚/AGENTS 脚注/file-index），两阶段设计（先全内存断言后统一落盘·零落盘中止），内置双括号自检；本批自身级联即由本脚本 dry-run+apply 完成（dogfood）。
+> - **执行（冒烟固化）**：AGENTS §4.3 三新规增补④——JS/工具脚本改动推送前必须以真实参数冒烟一次（node --check 不覆盖运行时；W537/W538 白名单形状回归实证）。
+> - **验证**：batch_cascade dry-run+apply 双跑通过；node --check + ruff + 真实 spec 冒烟；verify_delivery 全绿；pytest 302 passed。
+> - **文件**：scripts/batch_cascade.py（新建）、AGENTS.md、六文档 + 旁文档版本行、site 四页脚。
+> - **状态**：已落地（本批随 W542 提交并 push origin/main）。
 ### v2.3.140（2026-09-05）：W541 复盘报告归档 — 工作复盘与优化分析报告入册 docs/10
 
 > **来源**：用户指令「写入仓库」——将《工作复盘与优化分析报告》（W536-W540 会话复盘）归档入册 docs/10-方法论沉淀。

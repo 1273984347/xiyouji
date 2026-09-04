@@ -11,6 +11,19 @@
 ---
 
 
+## W542 W542 交付效率工具化（2026-09-05·v2.3.141）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W542 | 新建·spec 驱动的批次级联常驻脚本（9 面：CHANGELOG/三版本行/交接文档头尾链+3 批自动淘汰+里程碑滚动+HEAD 句/workflows/四页脚/AGENTS 脚注/file-index；两阶段先断言后落盘·双括号自检·本批自身级联 dogfood 实测） |
+| AGENTS.md | W542 | 修改·§4.3 三新规增补④（真实参数冒烟）+ 版本脚注追加 W542 条目 |
+| CHANGELOG.md | W542 | 新增·W542 版段 + 编号规则上限 W001-W542 |
+| 交接文档.md | W542 | 修改·头尾「最后更新」prepend W542 + 头链 3 批自动淘汰 + 里程碑概要滚动淘汰最老块 + 当前 HEAD 句更新 + 当前进度标题更新（全部由 batch_cascade.py 执行） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W542 | 修改·版本行同步 v2.3.141（2026-09-05·batch_cascade.py 执行） |
+| site/index.html / site/data/cross-time-danmaku.html / site/data/tag-cloud.html / site/dukou-engine.html | W542 | 修改·四页脚链首 prepend W542（batch_cascade.py 执行） |
+| .github/workflows/README.md | W542 | 修改·旁文档同步（batch_cascade.py 执行） |
+| scripts/output/file-index.md | W542 | 新增·W542 段（本段·batch_cascade.py 执行） |
+
 ## W541 复盘报告归档（2026-09-05·v2.3.140）
 
 | 文件 | W | 说明 |
